@@ -50,8 +50,8 @@
 (define (state-prefix state stds)
   (map
     (lambda (std)
-      `(,(string-append state "." (first std))
-        ,(second std)))
+      (cons (string-append state "." (first std))
+            (rest std)))
     stds))
 
 ; given a state, produce both math and ela standards,

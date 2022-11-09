@@ -12,11 +12,8 @@
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "standards/the-standards-dictionaries.rkt")
-(require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
-(require "standards/standards-and-lessons.rkt")
-(require "textbooks/textbooks-and-lessons.rkt")
-(require "practices/practices-and-lessons.rkt")
+(require "practices/the-practices-dictionaries.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -1547,22 +1544,20 @@
       ;
       (when *lesson-plan*
 
-        (for ([ss-ll *standards-and-lessons*])
-          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
-            (unless (list? ss) (set! ss (list ss)))
-            (when (member *lesson-plan-base* ll)
-              (for ([s ss])
-                (add-standard s #f *lesson-plan* #f)))))
+        (for ([i *standards-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-standard (first j) #f *lesson-plan* #f))))
 
-        (for ([t-ll *textbooks-and-lessons*])
-          (let ([t (first t-ll)] [ll (rest t-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-textbook-chapter t #f *lesson-plan* #f))))
+        (for ([i *textbooks-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-textbook-chapter (first j) #f *lesson-plan* #f))))
 
-        (for ([p-ll *practices-and-lessons*])
-          (let ([p (first p-ll)] [ll (rest p-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-practice p #f *lesson-plan* #f))))
+        (for ([i *practices-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-practice (first j) #f *lesson-plan* #f))))
 
         )
       ;

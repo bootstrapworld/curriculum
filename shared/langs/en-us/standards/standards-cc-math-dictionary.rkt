@@ -1,16 +1,20 @@
 #lang racket
 
 (provide *cc-math-standards-list*)
+    ;;;;;;;;;;;;;;;;;;;  Common Core Math Standards ;;;;;;;;;;;;;;;;;;
 
 (define *cc-math-standards-list*
   '(
     ; Common Core State Standards for Mathematics 5-12
 
+    ; Grade 5
     ("5.OA.A"
      "Write and interpret numerical expressions."
+     "order-of-operations"
      )
     ("5.OA.A.1"
      "Use parentheses, brackets, or braces in numerical expressions, and evaluate expressions with these symbols."
+     "order-of-operations"
      )
     ("5.OA.A.2"
      "Write simple expressions that record calculations with numbers, and interpret numerical expressions without evaluating them."
@@ -50,45 +54,57 @@
      )
     ("5.MD.B"
      "Represent and interpret data."
+     ;Flannery?
      )
     ("5.MD.C"
      "Geometric measurement: understand concepts of volume."
+     ;Rachel?
      )
     ("5.MD.C.3"
      "Recognize volume as an attribute of solid figures and understand concepts of volume measurement."
+     ;Rachel?
      )
     ("5.MD.C.3.A"
-     "A cube with side length 1 unit, called a "unit cube," is said to have "one cubic unit" of volume, and can be used to measure volume."
+     "A cube with side length 1 unit, called a \"unit cube,\" is said to have \"one cubic unit\" of volume, and can be used to measure volume."
+     ;Rachel?
      )
     ("5.MD.C.3.B"
      "A solid figure which can be packed without gaps or overlaps using n unit cubes is said to have a volume of n cubic units."
+     ;Rachel?
      )
     ("5.MD.C.4"
      "Measure volumes by counting unit cubes, using cubic cm, cubic in, cubic ft, and improvised units."
      )
     ("5.MD.C.5"
      "Relate volume to the operations of multiplication and addition and solve real world and mathematical problems involving volume."
+     ;Rachel?
      )
     ("5.MD.C.5.A"
      "Find the volume of a right rectangular prism with whole-number side lengths by packing it with unit cubes, and show that the volume is the same as would be found by multiplying the edge lengths, equivalently by multiplying the height by the area of the base. Represent threefold whole-number products as volumes, e.g., to represent the associative property of multiplication."
+     ;Rachel?
      )
     ("5.MD.C.5.B"
      "Apply the formulas V = l × w × h and V = b × h for rectangular prisms to find volumes of right rectangular prisms with whole-number edge lengths in the context of solving real world and mathematical problems."
+     ;Rachel?
      )
     ("5.MD.C.5.C"
      "Recognize volume as additive. Find volumes of solid figures composed of two non-overlapping right rectangular prisms by adding the volumes of the non-overlapping parts, applying this technique to solve real world problems."
      )
     ("5.G.A"
      "Graph points on the coordinate plane to solve real-world and mathematical problems."
+     "hoc-winter-parley"
      )
     ("5.G.A.1"
      "Use a pair of perpendicular number lines, called axes, to define a coordinate system, with the intersection of the lines (the origin) arranged to coincide with the 0 on each line and a given point in the plane located by using an ordered pair of numbers, called its coordinates. Understand that the first number indicates how far to travel from the origin in the direction of one axis, and the second number indicates how far to travel in the direction of the second axis, with the convention that the names of the two axes and the coordinates correspond (e.g., x-axis and x-coordinate, y-axis and y-coordinate)."
+     "coordinates"
      )
     ("5.G.A.2"
      "Represent real world and mathematical problems by graphing points in the first quadrant of the coordinate plane, and interpret coordinate values of points in the context of the situation."
+     "hoc-winter-parley"
      )
     ("5.G.B"
      "Classify two-dimensional figures into categories based on their properties."
+     "hoc-winter-parley"
      )
     ("5.G.B.3"
      "Understand that attributes belonging to a category of two-dimensional figures also belong to all subcategories of that category."
@@ -99,15 +115,19 @@
     ; Grade 5
     ("6.RP.A"
      "Understand ratio concepts and use ratio reasoning to solve problems."
+     "bar-and-pie-charts"
+     "flags"
      )
     ("6.RP.A.1"
      "Understand the concept of a ratio and use ratio language to describe a ratio relationship between two quantities."
+     "flags"
      )
     ("6.RP.A.2"
      "Understand the concept of a unit rate a/b associated with a ratio a:b with b ≠ 0, and use rate language in the context of a ratio relationship."
      )
     ("6.RP.A.3"
      "Use ratio and rate reasoning to solve real-world and mathematical problems, e.g., by reasoning about tables of equivalent ratios, tape diagrams, double number line diagrams, or equations."
+     "hoc-data"
      )
     ("6.RP.A.3.A"
      "Make tables of equivalent ratios relating quantities with whole-number measurements, find missing values in the tables, and plot the pairs of values on the coordinate plane. Use tables to compare ratios."
@@ -120,6 +140,7 @@
      )
     ("6.RP.A.3.D"
      "Use ratio reasoning to convert measurement units; manipulate and transform units appropriately when multiplying or dividing quantities."
+     "flags"
      )
     ("6.NS.A"
      "Apply and extend previous understandings of multiplication and division to divide fractions by fractions."
@@ -150,12 +171,14 @@
      )
     ("6.NS.C.6.A"
      "Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
+     ;Rachel?
      )
     ("6.NS.C.6.B"
      "Understand signs of numbers in ordered pairs as indicating locations in quadrants of the coordinate plane; recognize that when two ordered pairs differ only by signs, the locations of the points are related by reflections across one or both axes."
      )
     ("6.NS.C.6.C"
      "Find and position integers and other rational numbers on a horizontal or vertical number line diagram; find and position pairs of integers and other rational numbers on a coordinate plane."
+     "hoc-winter-parley"
      )
     ("6.NS.C.7"
      "Understand ordering and absolute value of rational numbers."
@@ -180,39 +203,68 @@
      )
     ("6.EE.A.1"
      "Write and evaluate numerical expressions involving whole-number exponents."
+     ;Rachel?
      )
     ("6.EE.A.2"
      "Write, read, and evaluate expressions in which letters stand for numbers."
+     ;Rachel?
      )
     ("6.EE.A.2.A"
      "Write expressions that record operations with numbers and with letters standing for numbers."
+     ;Rachel?
      )
     ("6.EE.A.2.B"
      "Identify parts of an expression using mathematical terms (sum, term, product, factor, quotient, coefficient); view one or more parts of an expression as a single entity."
      )
     ("6.EE.A.2.C"
      "Evaluate expressions at specific values of their variables. Include expressions that arise from formulas used in real-world problems. Perform arithmetic operations, including those involving whole-number exponents, in the conventional order when there are no parentheses to specify a particular order (Order of Operations)."
+     ;Rachel?
      )
     ("6.EE.A.3"
      "Apply the properties of operations to generate equivalent expressions."
+     ;Rachel?
      )
     ("6.EE.A.4"
      "Identify when two expressions are equivalent (i.e., when the two expressions name the same number regardless of which value is substituted into them)."
+     ;Rachel?
      )
     ("6.EE.B"
      "Reason about and solve one-variable equations and inequalities."
+     "inequalities1-simple"
+     "inequalities2-compound"
      )
     ("6.EE.B.5"
      "Understand solving an equation or inequality as a process of answering a question: which values from a specified set, if any, make the equation or inequality true? Use substitution to determine whether a given number in a specified set makes an equation or inequality true."
+     ;Flannery?
      )
+    ; Grade 6
     ("6.EE.B.6"
      "Use variables to represent numbers and write expressions when solving a real-world or mathematical problem; understand that a variable can represent an unknown number, or, depending on the purpose at hand, any number in a specified set."
+     "linear-regression"
+     "grouped-samples"
+     "defining-table-functions"
+     "surface-area-rect-prism"
+     "problem-decomposition"
+     "player-animation"
+     "inequalities3-sam"
+     "inequalities-collision"
+     "functions-for-character-animation"
+     "function-definition-linear"
+     "function-composition"
+     "distance-formula"
+     "piecewise-functions-conditionals"
+     "defining-values"
+     "functions-dr"
+     "functions-examples-definitions"
+     "functions-make-life-easier"
      )
     ("6.EE.B.7"
      "Solve real-world and mathematical problems by writing and solving equations of the form x + p = q and px = q for cases in which p, q and x are all nonnegative rational numbers."
      )
     ("6.EE.B.8"
      "Write an inequality of the form x > c or x < c to represent a constraint or condition in a real-world or mathematical problem. Recognize that inequalities of the form x > c or x < c have infinitely many solutions; represent solutions of such inequalities on number line diagrams."
+     "inequalities3-sam"
+     "inequalities1-simple"
      )
     ("6.EE.C"
      "Represent and analyze quantitative relationships between dependent and independent variables."
@@ -222,6 +274,7 @@
      )
     ("6.G.A"
      "Solve real-world and mathematical problems involving area, surface area, and volume."
+     "surface-area-rect-prism"
      )
     ("6.G.A.1"
      "Find the area of right triangles, other triangles, special quadrilaterals, and polygons by composing into rectangles or decomposing into triangles and other shapes; apply these techniques in the context of solving real-world and mathematical problems."
@@ -234,27 +287,58 @@
      )
     ("6.G.A.4"
      "Represent three-dimensional figures using nets made up of rectangles and triangles, and use the nets to find the surface area of these figures. Apply these techniques in the context of solving real-world and mathematical problems."
+     "surface-area-rect-prism"
      )
     ("6.SP.A"
      "Develop understanding of statistical variability."
+     "measures-of-center"
+     "histograms"
+     "histograms2"
+     "box-plots"
      )
     ("6.SP.A.1"
      "Recognize a statistical question as one that anticipates variability in the data related to the question and accounts for it in the answers."
+     "ds-intro"
+     "choosing-your-dataset"
+     "data-cycle"
      )
     ("6.SP.A.2"
      "Understand that a set of data collected to answer a statistical question has a distribution which can be described by its center, spread, and overall shape."
+     "measures-of-center"
+     "histograms"
+     "histograms2"
+     "box-plots"
+     "standard-deviation"
      )
     ("6.SP.A.3"
      "Recognize that a measure of center for a numerical data set summarizes all of its values with a single number, while a measure of variation describes how its values vary with a single number."
+     "standard-deviation"
+     "box-plots"
      )
     ("6.SP.B"
      "Summarize and describe distributions."
+     "measures-of-center"
+     "histograms2"
+     "box-plots"
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("6.SP.B.4"
      "Display numerical data in plots on a number line, including dot plots, histograms, and box plots."
+     "standard-deviation"
+     "box-plots"
+     "histograms2"
+     "histograms"
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("6.SP.B.5"
      "Summarize numerical data sets in relation to their context."
+     "standard-deviation"
+     "box-plots"
+     "measures-of-center"
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("6.SP.B.5.A"
      "Summarize numerical data sets in relation to their context by reporting the number of observations."
@@ -264,26 +348,41 @@
      )
     ("6.SP.B.5.C"
      "Summarize numerical data sets in relation to their context by giving quantitative measures of center (median and/or mean) and variability (interquartile range and/or mean absolute deviation), as well as describing any overall pattern and any striking deviations from the overall pattern with reference to the context in which the data were gathered."
+     "standard-deviation"
+     "box-plots"
+     "measures-of-center"
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("6.SP.B.5.D"
      "Summarize numerical data sets in relation to their context by relating the choice of measures of center and variability to the shape of the data distribution and the context in which the data were gathered."
+     "measures-of-center"
+     "project-exploration-paper"
+     "project-research-paper"
      )
 
     ; Grade 7
     ("7.RP.A"
      "Analyze proportional relationships and use them to solve real-world and mathematical problems."
+     "flags"
+     "making-game-images"
      )
     ("7.RP.A.1"
      "Compute unit rates associated with ratios of fractions, including ratios of lengths, areas and other quantities measured in like or different units."
+     "flags"
      )
     ("7.RP.A.2"
      "Recognize and represent proportional relationships between quantities."
      )
     ("7.RP.A.2.A"
      "Decide whether two quantities are in a proportional relationship, e.g., by testing for equivalent ratios in a table or graphing on a coordinate plane and observing whether the graph is a straight line through the origin."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("7.RP.A.2.B"
      "Identify the constant of proportionality (unit rate) in tables, graphs, equations, diagrams, and verbal descriptions of proportional relationships."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("7.RP.A.2.C"
      "Represent proportional relationships by equations."
@@ -293,6 +392,7 @@
      )
     ("7.RP.A.3"
      "Use proportional relationships to solve multistep ratio and percent problems."
+     "hoc-data"
      )
     ("7.NS.A"
      "Apply and extend previous understandings of operations with fractions."
@@ -332,21 +432,34 @@
      )
     ("7.EE.A"
      "Use properties of operations to generate equivalent expressions."
+     ;Rachel?
      )
     ("7.EE.A.1"
      "Apply properties of operations as strategies to add, subtract, factor, and expand linear expressions with rational coefficients."
      )
     ("7.EE.A.2"
      "Understand that rewriting an expression in different forms in a problem context can shed light on the problem and how the quantities in it are related."
+     "problem-decomposition"
      )
     ("7.EE.B"
      "Solve real-life and mathematical problems using numerical and algebraic expressions and equations."
+     "problem-decomposition"
+     "player-animation"
+     "inequalities3-sam"
+     "distance-formula"
+     "piecewise-functions-conditionals"
+     "functions-dr"
      )
     ("7.EE.B.3"
      "Solve multi-step real-life and mathematical problems posed with positive and negative rational numbers in any form (whole numbers, fractions, and decimals), using tools strategically. Apply properties of operations to calculate with numbers in any form; convert between forms as appropriate; and assess the reasonableness of answers using mental computation and estimation strategies."
      )
     ("7.EE.B.4"
      "Use variables to represent quantities in a real-world or mathematical problem, and construct simple equations and inequalities to solve problems by reasoning about the quantities."
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "defining-values"
+     "functions-dr"
+     "functions-make-life-easier"
      )
     ("7.EE.B.4.A"
      "Solve word problems leading to equations of the form px + q = r and p(x + q) = r, where p, q, and r are specific rational numbers. Solve equations of these forms fluently. Compare an algebraic solution to an arithmetic solution, identifying the sequence of the operations used in each approach."
@@ -356,6 +469,7 @@
      )
     ("7.G.A"
      "Draw, construct, and describe geometical figures and describe the relationships between them."
+     "hoc-winter-parley"
      )
     ("7.G.A.1"
      "Solve problems involving scale drawings of geometric figures, including computing actual lengths and areas from a scale drawing and reproducing a scale drawing at a different scale."
@@ -371,30 +485,48 @@
      )
     ("7.G.B.4"
      "Know the formulas for the area and circumference of a circle and use them to solve problems; give an informal derivation of the relationship between the circumference and area of a circle."
+     "functions-dr"
      )
     ("7.G.B.5"
      "Use facts about supplementary, complementary, vertical, and adjacent angles in a multi-step problem to write and solve simple equations for an unknown angle in a figure."
      )
     ("7.G.B.6"
      "Solve real-world and mathematical problems involving area, volume and surface area of two- and three-dimensional objects composed of triangles, quadrilaterals, polygons, cubes, and right prisms."
+     "surface-area-rect-prism"
+     "functions-dr"
      )
     ("7.SP.A"
      "Use random sampling to draw inferences about a population."
+     "random-samples"
      )
     ("7.SP.A.1"
      "Understand that statistics can be used to gain information about a population by examining a sample of the population; generalizations about a population from a sample are valid only if the sample is representative of that population. Understand that random sampling tends to produce representative samples and support valid inferences."
+     "random-samples"
+     "hoc-data"
      )
     ("7.SP.A.2"
      "Use data from a random sample to draw inferences about a population with an unknown characteristic of interest. Generate multiple samples (or simulated samples) of the same size to gauge the variation in estimates or predictions."
+     "random-samples"
      )
     ("7.SP.B"
      "Draw informal comparative inferences about two populations."
+     ; We should do this explicitly in more lessons, post-filtering
+     "bar-and-pie-charts"
+     "project-exploration-paper"
+     "project-research-paper"
+     "hoc-data"
      )
     ("7.SP.B.3"
      "Informally assess the degree of visual overlap of two numerical data distributions with similar variabilities, measuring the difference between the centers by expressing it as a multiple of a measure of variability."
+     ; We should do this explicitly in more lessons, post-filtering
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("7.SP.B.4"
      "Use measures of center and measures of variability for numerical data from random samples to draw informal comparative inferences about two populations."
+     ; We should do this explicitly in more lessons, post-filtering
+     "project-exploration-paper"
+     "project-research-paper"
      )
     ("7.SP.C"
      "Investigate chance processes and develop, use, and evaluate probability models."
@@ -452,11 +584,17 @@
     ("8.EE.A.4"
      "Perform operations with numbers expressed in scientific notation, including problems where both decimal and scientific notation are used. Use scientific notation and choose units of appropriate size for measurements of very large or very small quantities. Interpret scientific notation that has been generated by technology."
      )
+
+    ; Grade 8
     ("8.EE.B"
      "Understand the connections between proportional relationships, lines, and linear equations."
+     "function-definition-linear"
+     "functions-can-be-linear"
      )
     ("8.EE.B.5"
      "Graph proportional relationships, interpreting the unit rate as the slope of the graph. Compare two different proportional relationships represented in different ways."
+     "function-definition-linear"
+     "functions-can-be-linear"
      )
     ("8.EE.B.6"
      "Use similar triangles to explain why the slope m is the same between any two distinct points on a non-vertical line in the coordinate plane; derive the equation y = mx for a line through the origin and the equation y = mx + b for a line intercepting the vertical axis at b."
@@ -487,27 +625,43 @@
      )
     ("8.F.A.1"
      "Understand that a function is a rule that assigns to each input exactly one output. The graph of a function is the set of ordered pairs consisting of an input and the corresponding output."
+     "contracts"
+     "functions-vertical-line-test"
      )
     ("8.F.A.2"
      "Compare properties of two functions each represented in a different way (algebraically, graphically, numerically in tables, or by verbal descriptions)."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("8.F.A.3"
      "Interpret the equation y = mx + b as defining a linear function, whose graph is a straight line; give examples of functions that are not linear. "
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("8.F.B"
      "Use functions to model relationships between quantities."
+     "functions-for-character-animation"
+     "functions-dr"
+     "functions-make-life-easier"
+     "function-definition-linear"
+     "problem-decomposition"
      )
     ("8.F.B.4"
      "Construct a function to model a linear relationship between two quantities. Determine the rate of change  and initial value of the function from a description of a relationship or from two (x, y) values, including reading these from a table or from a graph. Interpret the rate of change and initial value of a linear function in terms of the situation it models, and in terms of its graph or a table of values."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("8.F.B.5"
      "Describe qualitatively the functional relationship between two quantities by analyzing a graph (e.g., where the function is increasing or decreasing, linear or nonlinear). Sketch a graph that exhibits the qualitative features of a function that has been described verbally."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("8.G.A"
      "Understand congruence and similarity using physical models, transparencies, or geometry software."
      )
     ("8.G.A.1"
      "Verify experimentally the properties of rotations, reflections, and translations."
+     "making-game-images"
      )
     ("8.G.A.1.A"
      "Lines are taken to lines, and line segments to line segments of the same length."
@@ -532,15 +686,18 @@
      )
     ("8.G.B"
      "Understand and apply the Pythagorean Theorem."
+     "distance-formula"
      )
     ("8.G.B.6"
      "Explain a proof of the Pythagorean Theorem and its converse."
      )
     ("8.G.B.7"
      "Apply the Pythagorean Theorem to determine unknown side lengths in right triangles in real-world and mathematical problems in two and three dimensions."
+     "distance-formula"
      )
     ("8.G.B.8"
      "Apply the Pythagorean Theorem to find the distance between two points in a coordinate system."
+     "distance-formula"
      )
     ("8.G.C"
      "Solve real-world and mathematical problems involving volume of cylinders, cones, and spheres."
@@ -550,12 +707,20 @@
      )
     ("8.SP.A.1"
      "Construct and interpret scatter plots for bivariate measurement data to investigate patterns of association between two quantities. Describe patterns such as clustering, outliers, positive or negative association, linear association, and nonlinear association."
+     "scatter-plots"
+     "linear-regression"
+     "grouped-samples"
+     "correlations"
      )
     ("8.SP.A.2"
      "Know that straight lines are widely used to model relationships between two quantitative variables. For scatter plots that suggest a linear association, informally fit a straight line, and informally assess the model fit by judging the closeness of the data points to the line."
+     "scatter-plots"
+     "linear-regression"
+     "correlations"
      )
     ("8.SP.A.3"
      "Use the equation of a linear model to solve problems in the context of bivariate measurement data, interpreting the slope and intercept. "
+     "linear-regression"
      )
     ("8.SP.A.4"
      "Understand that patterns of association can also be seen in bivariate categorical data by displaying frequencies and relative frequencies in a two-way table. Construct and interpret a two-way table summarizing data on two categorical variables collected from the same subjects. Use relative frequencies calculated for rows or columns to describe possible association between the two variables. "
@@ -577,12 +742,16 @@
      )
     ("HSN.Q.A"
      "Reason quantitatively and use units to solve problems."
+     ;Modeling?
+     "flags"
      )
     ("HSN.Q.A.1"
      "Use units as a way to understand problems and to guide the solution of multi-step problems; choose and interpret units consistently in formulas; choose and interpret the scale and the origin in graphs and data displays."
+     ;Modeling?
      )
     ("HSN.Q.A.2"
      "Define appropriate quantities for the purpose of descriptive modeling."
+     ;Modeling?
      )
     ("HSN.Q.A.3"
      "Choose a level of accuracy appropriate to limitations on measurement when reporting quantities."
@@ -685,18 +854,30 @@
      )
     ("HSA.SSE.A.1"
      "Interpret expressions that represent a quantity in terms of its context."
+     "defining-values"
+     "functions-make-life-easier"
+     "functions-dr"
      )
     ("HSA.SSE.A.1.A"
      "Interpret parts of an expression, such as terms, factors, and coefficients."
+     "player-animation"
+     "piecewise-functions-conditionals"
      )
     ("HSA.SSE.A.1.B"
      "Interpret complicated expressions by viewing one or more of their parts as a single entity."
+     "custom-scatter-plots"
+     "player-animation"
+     "piecewise-functions-conditionals"
      )
     ("HSA.SSE.A.2"
      "Use the structure of an expression to identify ways to rewrite it."
+     ;Rachel?
+     "order-of-operations"
      )
     ("HSA.SSE.B"
      "Write expressions in equivalent forms to solve problems."
+     ;Rachel?
+     "order-of-operations"
      )
     ("HSA.SSE.B.3"
      "Choose and produce an equivalent form of an expression to reveal and explain properties of the quantity represented by the expression."
@@ -748,15 +929,22 @@
      )
     ("HSA.CED.A"
      "Create equations that describe numbers or relationships."
+     "problem-decomposition"
+     "inequalities3-sam"
+     "functions-dr"
+     "surface-area-rect-prism"
      )
     ("HSA.CED.A.1"
      "Create equations and inequalities in one variable and use them to solve problems."
+     "inequalities3-sam"
      )
     ("HSA.CED.A.2"
      "Create equations in two or more variables to represent relationships between quantities; graph equations on coordinate axes with labels and scales."
+     "inequalities3-sam"
      )
     ("HSA.CED.A.3"
      "Represent constraints by equations or inequalities, and by systems of equations and/or inequalities, and interpret solutions as viable or nonviable options in a modeling context."
+     "inequalities3-sam"
      )
     ("HSA.CED.A.4"
      "Rearrange formulas to highlight a quantity of interest, using the same reasoning as in solving equations."
@@ -766,6 +954,7 @@
      )
     ("HSA.REI.A.1"
      "Explain each step in solving a simple equation as following from the equality of numbers asserted at the previous step, starting from the assumption that the original equation has a solution. Construct a viable argument to justify a solution method."
+     ; Rachel?
      )
     ("HSA.REI.A.2"
      "Solve simple rational and radical equations in one variable, and give examples showing how extraneous solutions may arise."
@@ -817,36 +1006,66 @@
      )
     ("HSF.IF.A"
      "Understand the concept of a function and use function notation."
+     "functions-make-life-easier"
+     "function-notation"
      )
     ("HSF.IF.A.1"
      "Understand that a function from one set (called the domain) to another set (called the range) assigns to each element of the domain exactly one element of the range. If f is a function and x is an element of its domain, then f(x) denotes the output of f corresponding to the input x. The graph of f is the graph of the equation y = f(x)."
+     "functions-vertical-line-test"
+     "contracts"
      )
     ("HSF.IF.A.2"
      "Use function notation, evaluate functions for inputs in their domains, and interpret statements that use function notation in terms of a context."
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "function-definition-linear"
+     "functions-dr"
+     "problem-decomposition"
+     "function-notation"
+     "functions-for-character-animation"
+     "defining-table-functions"
+     "flags"
+     "contracts"
      )
     ("HSF.IF.A.3"
      "Recognize that sequences are functions, sometimes defined recursively, whose domain is a subset of the integers."
      )
     ("HSF.IF.B"
      "Interpret functions that arise in applications in terms of the context."
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "function-definition-linear"
+     "functions-dr"
+     "problem-decomposition"
+     "function-notation"
+     "functions-for-character-animation"
+     "defining-table-functions"
      )
     ("HSF.IF.B.4"
      "For a function that models a relationship between two quantities, interpret key features of graphs and tables in terms of the quantities, and sketch graphs showing key features given a verbal description of the relationship."
      )
     ("HSF.IF.B.5"
      "Relate the domain of a function to its graph and, where applicable, to the quantitative relationship it describes."
+     "functions-can-be-linear"
+     "function-definition-linear"
      )
     ("HSF.IF.B.6"
      "Calculate and interpret the average rate of change of a function (presented symbolically or as a table) over a specified interval. Estimate the rate of change from a graph."
      )
     ("HSF.IF.C"
      "Analyze functions using different representations."
+     "function-definition-linear"
+     "functions-vertical-line-test"
+     "functions-can-be-linear"
+     "functions-dr"
+     "functions-examples-definitions"
      )
     ("HSF.IF.C.7"
      "Graph functions expressed symbolically and show key features of the graph, by hand in simple cases and using technology for more complicated cases."
      )
     ("HSF.IF.C.7.A"
      "Graph linear and quadratic functions and show intercepts, maxima, and minima."
+     ;Emmanuel?
      )
     ("HSF.IF.C.7.B"
      "Graph square root, cube root, and piecewise-defined functions, including step functions and absolute value functions."
@@ -859,6 +1078,7 @@
      )
     ("HSF.IF.C.7.E"
      "Graph exponential and logarithmic functions, showing intercepts and end behavior, and trigonometric functions, showing period, midline, and amplitude."
+     ;Emmanuel?
      )
     ("HSF.IF.C.8"
      "Write a function defined by an expression in different but equivalent forms to reveal and explain different properties of the function."
@@ -871,78 +1091,121 @@
      )
     ("HSF.IF.C.9"
      "Compare properties of two functions each represented in a different way (algebraically, graphically, numerically in tables, or by verbal descriptions)."
+     "function-definition-linear"
+     "functions-can-be-linear"
+     "problem-decomposition"
      )
     ("HSF.BF.A"
      "Build a function that models a relationship between two quantities."
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "function-definition-linear"
+     "functions-dr"
+     "problem-decomposition"
+     "function-notation"
+     "functions-for-character-animation"
+     "defining-table-functions"
      )
     ("HSF.BF.A.1"
      "Write a function that describes a relationship between two quantities."
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "function-definition-linear"
+     "functions-dr"
+     "problem-decomposition"
+     "function-notation"
+     "functions-for-character-animation"
+     "defining-table-functions"
      )
     ("HSF.BF.A.1.A"
      "Determine an explicit expression, a recursive process, or steps for calculation from a context."
      )
     ("HSF.BF.A.1.B"
      "Combine standard function types using arithmetic operations."
+     "function-composition"
      )
     ("HSF.BF.A.1.C"
      "Compose functions."
+     "problem-decomposition"
+     "inequalities3-sam"
+     "function-composition"
+     "inequalities-collision"
      )
     ("HSF.BF.A.2"
      "Write arithmetic and geometric sequences both recursively and with an explicit formula, use them to model situations, and translate between the two forms."
      )
     ("HSF.BF.B"
      "Build new functions from existing functions."
+     "problem-decomposition"
+     "inequalities3-sam"
+     "inequalities-collision"
      )
     ("HSF.BF.B.3"
      "Identify the effect on the graph of replacing f(x) by f(x) + k, k f(x), f(kx), and f(x + k) for specific values of k (both positive and negative); find the value of k given the graphs. Experiment with cases and illustrate an explanation of the effects on the graph using technology. Include recognizing even and odd functions from their graphs and algebraic expressions for them."
      )
     ("HSF.BF.B.4"
      "Find inverse functions."
+     ;Emmanuel?
      )
     ("HSF.BF.B.4.A"
      "Solve an equation of the form f(x) = c for a simple function f that has an inverse and write an expression for the inverse."
+     ;Emmanuel?
      )
     ("HSF.BF.B.4.B"
      "Verify by composition that one function is the inverse of another."
+     ;Emmanuel?
      )
     ("HSF.BF.B.4.C"
      "Read values of an inverse function from a graph or a table, given that the function has an inverse."
+     ;Emmanuel?
      )
     ("HSF.BF.B.4.D"
      "Produce an invertible function from a non-invertible function by restricting the domain."
+     ;Emmanuel?
      )
     ("HSF.BF.B.5"
      "Understand the inverse relationship between exponents and logarithms and use this relationship to solve problems involving logarithms and exponents."
+     ;Emmanuel?
      )
     ("HSF.LE.A"
      "Construct and compare linear, quadratic, and exponential models and solve problems."
+     ;Emmanuel?
      )
     ("HSF.LE.A.1"
      "Distinguish between situations that can be modeled with linear functions and with exponential functions."
+     ;Emmanuel?
      )
     ("HSF.LE.A.1.A"
      "Prove that linear functions grow by equal differences over equal intervals, and that exponential functions grow by equal factors over equal intervals."
+     ;Emmanuel?
      )
     ("HSF.LE.A.1.B"
      "Recognize situations in which one quantity changes at a constant rate per unit interval relative to another."
+     ;Emmanuel?
      )
     ("HSF.LE.A.1.C"
      "Recognize situations in which a quantity grows or decays by a constant percent rate per unit interval relative to another."
+     ;Emmanuel?
      )
     ("HSF.LE.A.2"
      "Construct linear and exponential functions, including arithmetic and geometric sequences, given a graph, a description of a relationship, or two input-output pairs (include reading these from a table)."
+     ;Emmanuel?
      )
     ("HSF.LE.A.3"
      "Observe using graphs and tables that a quantity increasing exponentially eventually exceeds a quantity increasing linearly, quadratically, or (more generally) as a polynomial function."
+     ;Emmanuel?
      )
     ("HSF.LE.A.4"
      "For exponential models, express as a logarithm the solution to abct = d where a, c, and d are numbers and the base b is 2, 10, or e; evaluate the logarithm using technology."
+     ;Emmanuel?
      )
     ("HSF.LE.B"
      "Interpret expressions for functions in terms of the situation they model."
+     ;Emmanuel?
      )
     ("HSF.LE.B.5"
      "Interpret the parameters in a linear or exponential function in terms of a context."
+     ;Emmanuel?
      )
     ("HSF.TF.A"
      "Extend the domain of trigonometric functions using the unit circle."
@@ -1159,78 +1422,121 @@
      )
     ("HSS.ID.A"
      "Summarize, represent, and interpret data on a single count or measurement variable."
+     "bar-and-pie-charts"
+     "measures-of-center"
+     "histograms"
+     "histograms2"
+     "box-plots"
      )
     ("HSS.ID.A.1"
      "Represent data with plots on the real number line (dot plots, histograms, and box plots)."
+     "standard-deviation"
+     "box-plots"
+     "histograms2"
+     "histograms"
      )
     ("HSS.ID.A.2"
      "Use statistics appropriate to the shape of the data distribution to compare center (median, mean) and spread (interquartile range, standard deviation) of two or more different data sets."
+     "standard-deviation"
+     "box-plots"
+     "measures-of-center"
+     "histograms"
      )
     ("HSS.ID.A.3"
      "Interpret differences in shape, center, and spread in the context of the data sets, accounting for possible effects of extreme data points (outliers)."
+     "standard-deviation"
+     "box-plots"
+     "measures-of-center"
+     "histograms2"
+     "histograms"
      )
     ("HSS.ID.A.4"
      "Use the mean and standard deviation of a data set to fit it to a normal distribution and to estimate population percentages. Recognize that there are data sets for which such a procedure is not appropriate. Use calculators, spreadsheets, and tables to estimate areas under the normal curve."
      )
     ("HSS.ID.B"
      "Summarize, represent, and interpret data on two categorical and quantitative variables."
+     "scatter-plots"
+     "correlations"
      )
     ("HSS.ID.B.5" 
      "Summarize categorical data for two categories in two-way frequency tables. Interpret relative frequencies in the context of the data (including joint, marginal, and conditional relative frequencies). Recognize possible associations and trends in the data."
      )
     ("HSS.ID.B.6"
      "Represent data on two quantitative variables on a scatter plot, and describe how the variables are related."
+     "scatter-plots"
+     "correlations"
+     "hoc-data"
      )
     ("HSS.ID.B.6.A"
      "Fit a function to the data; use functions fitted to data to solve problems in the context of the data. Use given functions or choose a function suggested by the context. Emphasize linear, quadratic, and exponential models."
+     "linear-regression"
      )
     ("HSS.ID.B.6.B"
      "Informally assess the fit of a function by plotting and analyzing residuals."
      )
     ("HSS.ID.B.6.C"
      "Fit a linear function for a scatter plot that suggests a linear association."
+     "linear-regression"
      )
     ("HSS.ID.C"
      "Interpret linear models."
+     "linear-regression"
      )
     ("HSS.ID.C.7"
      "Interpret the slope (rate of change) and the intercept (constant term) of a linear model in the context of the data."
+     "linear-regression"
      )
     ("HSS.ID.C.8"
      "Compute (using technology) and interpret the correlation coefficient of a linear fit."
+     "scatter-plots"
+     "linear-regression"
+     "correlations"
      )
     ("HSS.ID.C.9"
      "Distinguish between correlation and causation."
+     "linear-regression"
+     "correlations"
      )
     ("HSS.IC.A"
      "Understand and evaluate random processes underlying statistical experiments."
+     "random-samples"
      )
     ("HSS.IC.A.1"
      "Understand statistics as a process for making inferences about population parameters based on a random sample from that population."
+     "random-samples"
      )
     ("HSS.IC.A.2"
      "Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation."
+     ;Modeling?
      )
     ("HSS.IC.B"
      "Make inferences and justify conclusions from sample surveys, experiments, and observational studies."
+     "data-collection"
+     "hoc-data"
      )
+    ; High School
     ("HSS.IC.B.3"
      "Recognize the purposes of and differences among sample surveys, experiments, and observational studies; explain how randomization relates to each."
+     "random-samples"
+     "data-collection"
      )
     ("HSS.IC.B.4"
      "Use data from a sample survey to estimate a population mean or proportion; develop a margin of error through the use of simulation models for random sampling."
+     "data-collection"
      )
     ("HSS.IC.B.5"
      "Use data from a randomized experiment to compare two treatments; use simulations to decide if differences between parameters are significant."
      )
     ("HSS.IC.B.6"
      "Evaluate reports based on data."
+     "threats-to-validity"
      )
     ("HSS.CP.A"
      "Understand independence and conditional probability and use them to interpret data."
      )
     ("HSS.CP.A.1"
      "Describe events as subsets of a sample space (the set of outcomes) using characteristics (or categories) of the outcomes, or as unions, intersections, or complements of other events ('or', 'and', 'not')."
+     "inequalities2-compound"
      )
     ("HSS.CP.A.2"
      "Understand that two events A and B are independent if the probability of A and B occurring together is the product of their probabilities, and use this characterization to determine if they are independent."
@@ -1258,6 +1564,8 @@
      )
     ("HSS.CP.B.9"
      "Use permutations and combinations to compute probabilities of compound events and solve problems."
+     "combinatorics-combination"
+     "combinatorics-permutation"
      )
     ("HSS.MD.A"
      "Calculate expected values and use them to solve problems."
