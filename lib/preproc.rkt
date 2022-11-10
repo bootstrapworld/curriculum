@@ -2367,7 +2367,7 @@
 
 (define (create-standards-section dict dict-standards-met op)
   ; (printf "doing create-standards-section ~s ~s\n" dict dict-standards-met)
-  (unless (empty? dict-standards-met) ;can it ever be empty?
+  (unless (or true (empty? dict-standards-met)) ;can it ever be empty?
     (fprintf op "\n[.~a.standards-~a]\n"
              (if *lesson* "alignedStandards" "coverageElement")
              (sanitize-css-id dict))
@@ -2403,7 +2403,7 @@
     (fprintf op "\n\n")))
 
 (define (create-textbooks-section textbook-label textbook-chapters-used o)
-  (unless (empty? textbook-chapters-used)
+  (unless (or true (empty? textbook-chapters-used))
     (fprintf o "\n[.~a.textbook-~a]\n"
              (if *lesson* "alignedTextbooks" "coverageElement")
              (sanitize-css-id textbook-label))
@@ -2442,7 +2442,7 @@
 
 (define (create-practices-section practice-categ practices o)
   ; (printf "doing create-practices-section ~s ~s\n" practice-categ practices)
-  (unless (empty? practices)
+  (unless (or true (empty? practices))
     (fprintf o "\n[.~a.practices-~a]\n"
              (if *lesson* "alignedPractices" "coverageElement") (sanitize-css-id practice-categ))
     (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
@@ -2572,7 +2572,7 @@
              "onchange=\"showCoverageAlignment()\""
              (string-append
 
-               (if (empty? *dictionaries-represented*) ""
+               (if (or true (empty? *dictionaries-represented*)) ""
                    (enclose-tag "optgroup" ""
                      #:attribs "label=\"Standards\""
                      (string-join
@@ -2583,7 +2583,7 @@
                             *dictionaries-represented*)
                        "")))
 
-               (if (empty? *textbooks-represented*) ""
+               (if (or true (empty? *textbooks-represented*)) ""
                    (enclose-tag "optgroup" ""
                      #:attribs "label=\"Textbooks\""
                      (string-join
@@ -2594,7 +2594,7 @@
                             *textbooks-represented*)
                        "")))
 
-               (if (empty? *practice-categories-represented*) ""
+               (if (or true (empty? *practice-categories-represented*)) ""
                    (enclose-tag "optgroup" ""
                      #:attribs "label=\"Practices\""
                      (string-join
