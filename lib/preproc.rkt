@@ -2567,7 +2567,7 @@
                "Select from the following menu to see\n"
                "which lessons meet those alignments.\n")) o)
   (display (create-begin-tag "div" "") o)
-  (display (enclose-tag "select" ".coverageAlignmentSelect"
+  (display (enclose-tag "select" ".standardsAlignmentSelect"
              #:attribs
              "onchange=\"showCoverageAlignment()\""
              (string-append
