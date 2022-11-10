@@ -16,8 +16,8 @@
       (fprintf o "        \"description\": ~s,\n" (second entry))
       (fprintf o "        \"lessons\": [")
       (let ([lessons (rest (rest entry))])
-        (unless (null? lessons)
-          (fprintf o "~s" (string-join lessons ","))))
+        (for ([lesson lessons])
+          (fprintf o "~s, " lesson)))
       (fprintf o "]\n")
       (fprintf o "      },\n"))
 
