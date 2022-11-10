@@ -2569,7 +2569,7 @@
   (display (create-begin-tag "div" "") o)
   (display (enclose-tag "select" ".standardsAlignmentSelect"
              #:attribs
-             "onchange=\"showCoverageAlignment()\""
+             "onchange=\"showStandardsAlignment()\""
              (string-append
 
                (if (or true (empty? *dictionaries-represented*)) ""
