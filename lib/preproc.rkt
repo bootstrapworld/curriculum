@@ -2369,7 +2369,7 @@
   ; (printf "doing create-standards-section ~s ~s\n" dict dict-standards-met)
   (unless (or true (empty? dict-standards-met)) ;can it ever be empty?
     (fprintf op "\n[.~a.standards-~a]\n"
-             (if *lesson* "alignedStandards" "coverageElement")
+             (if *lesson* "alignedEntries" "coverageElement")
              (sanitize-css-id dict))
     (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
              (expand-dict-abbrev dict))
