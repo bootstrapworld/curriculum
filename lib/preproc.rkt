@@ -2109,14 +2109,14 @@
               (when *lesson-plan*
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
-                    (print-standards-js o #:sidebar #t)
-                    (print-textbooks-js o)
-                    (print-practices-js o)
+                    ; (print-standards-js o #:sidebar #t)
+                    ; (print-textbooks-js o)
+                    ; (print-practices-js o)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    (display-textbooks-bar o)
-                    (display-practices-bar o)
+                    ; (display-textbooks-bar o)
+                    ; (display-practices-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
@@ -2493,7 +2493,7 @@
           [else #f ;(display ".Relevant Standards\n" o)
                 ])
     (when narrative? (display (create-begin-tag "div" "") o))
-    (display (enclose-tag "select" ".standardsAlignmentSelect"
+    (display (enclose-tag "select" ".alignmentSelect.standardsAlignmentSelect"
                #:attribs
                ;(format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
                " onchange=\"showStandardsAlignment()\""
@@ -2567,7 +2567,7 @@
                "Select from the following menu to see\n"
                "which lessons meet those alignments.\n")) o)
   (display (create-begin-tag "div" "") o)
-  (display (enclose-tag "select" ".standardsAlignmentSelect"
+  (display (enclose-tag "select" ".alignmentSelect.standardsAlignmentSelect"
              #:attribs
              "onchange=\"showStandardsAlignment()\""
              (string-append
