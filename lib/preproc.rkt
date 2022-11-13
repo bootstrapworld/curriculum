@@ -546,38 +546,6 @@
           (display "|===\n" o)
           ]))
 
-(define (display-practices-bar o)
-  (cond [(null? *practices-merited*)
-         (display (create-begin-tag "div" ".sidebarpractices") o)
-         (display "*Practices in this Lesson*: _None_" o)
-         (display (create-end-tag "div") o)
-         (display "\n" o)]
-        [else
-          (display "\n[.sidebarpractices,cols=\"a\"]" o)
-          (display "\n|===\n" o)
-          (display "| " o)
-          (display "*Practices in this Lesson*\n" o)
-          (display-practices-selection o *practice-categories-represented*)
-          (display " | \n" o)
-          (display "\ninclude::.index-practices.asc[]\n" o)
-          (display "|===\n" o)
-          ]))
-
-(define (display-textbooks-bar o)
-  ;(printf "doing display-textbooks-bar\n")
-  (unless (null? *textbooks-represented*)
-    (display "\n[.sidebartextbooks,cols=\"a\"]" o)
-    (display "\n|===\n" o)
-    (display "| " o)
-    (display "*Textbook Alignment*\n" o)
-    (display-textbooks-selection o *textbooks-represented*)
-    (display " | \n" o)
-    ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
-    ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
-    (fprintf o "\ninclude::.index-textbooks.asc[]\n")
-    (display "|===\n" o)
-    ))
-
 (define (include-glossary o)
   ;(printf "include-glossary\n")
   (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
@@ -2108,8 +2076,6 @@
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    ; (display-textbooks-bar o)
-                    ; (display-practices-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
@@ -2451,42 +2417,7 @@
   (display (enclose-tag "select" ".alignmentSelect"
              #:attribs
              "onchange=\"showAlignment(this.value)\""
-             (string-append
-
-               (if (or true (empty? *dictionaries-represented*)) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Standards\""
-                     (string-join
-                       (map (lambda (dict)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
-                                dict))
-                            *dictionaries-represented*)
-                       "")))
-
-               (if (or true (empty? *textbooks-represented*)) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Textbooks\""
-                     (string-join
-                       (map (lambda (tbk)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"textbook-~a\"" (sanitize-css-id tbk))
-                                tbk))
-                            *textbooks-represented*)
-                       "")))
-
-               (if (or true (empty? *practice-categories-represented*)) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Practices\""
-                     (string-join
-                       (map (lambda (pce)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"practices-~a\"" (sanitize-css-id pce))
-                                pce))
-                            *practice-categories-represented*)
-                       "")))
-
-               )) o)
+             "") o)
   (newline o)
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
