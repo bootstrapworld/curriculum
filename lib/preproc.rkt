@@ -532,14 +532,14 @@
   ;(printf "doing display-standards-bar\n")
   (cond [(null? *standards-met*)
          (display (create-begin-tag "div" ".sidebarstandards") o)
-         (display "*Standards in this Lesson*: _None_" o)
+         (display "*This Lesson Aligns to:*: _None_" o)
          (display (create-end-tag "div") o)
          (display "\n" o)]
         [else
           (display "\n[.sidebarstandards,cols=\"a\"]" o)
           (display "\n|===\n" o)
           (display "| " o)
-          (display "*Standards in this Lesson*\n" o)
+          (display "*Aligns to:*\n" o)
           (display-standards-selection o *narrative* *dictionaries-represented*)
           (display " | \n" o)
           (display "\ninclude::.index-standards.asc[]\n" o)
@@ -2486,17 +2486,16 @@
             (display
               (enclose-div ""
                 (string-append
-                  "\nBootstrap lessons align with several important teaching standards.\n"
-                  "Select particular standards from the following menu to see\n"
-                  "which lessons meet those standards.\n"))
+                  "\nBootstrap lessons align with several important teaching standards,\n"
+                  "practices, and popular textbooks in multiple states. Make a \n"
+                  "selection from the menu below to see the alignment of your choice.\n"))
               o)]
           [else #f ;(display ".Relevant Standards\n" o)
                 ])
     (when narrative? (display (create-begin-tag "div" "") o))
-    (display (enclose-tag "select" ".alignmentSelect.standardsAlignmentSelect"
+    (display (enclose-tag "select" ".alignmentSelect"
                #:attribs
-               ;(format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
-               " onchange=\"showStandardsAlignment()\""
+               " onchange=\"showAlignment(this.value)\""
                "")
              o)
     (newline o)
@@ -2567,9 +2566,9 @@
                "Select from the following menu to see\n"
                "which lessons meet those alignments.\n")) o)
   (display (create-begin-tag "div" "") o)
-  (display (enclose-tag "select" ".alignmentSelect.standardsAlignmentSelect"
+  (display (enclose-tag "select" ".alignmentSelect"
              #:attribs
-             "onchange=\"showStandardsAlignment()\""
+             "onchange=\"showAlignment(this.value)\""
              (string-append
 
                (if (or true (empty? *dictionaries-represented*)) ""
