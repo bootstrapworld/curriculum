@@ -3,8 +3,6 @@
 (provide
   print-coverage-js
   print-standards-js
-  print-textbooks-js
-  print-practices-js
   print-menubar
   )
 
@@ -70,72 +68,6 @@
       "}\n"
       "window.onload = function() {\n"
       "  preselect('alignedStandards');\n"
-      "  preselect('alignedTextbooks');\n"
-      "  preselect('alignedPractices');\n"
-      "}\n"
-      "</script>\n"
-      "++++\n\n") o))
-
-(define (print-textbooks-js o)
-  (display
-    (string-append
-      "\n++++\n"
-      "<script>\n"
-      "function showTextbooksAlignment() {\n"
-      "  const selectTag = document.getElementsByClassName('textbooksAlignmentSelect')[0];\n"
-      "  const options = selectTag && selectTag.options;\n"
-      "  if(!options) return;\n"
-      "  const textbookTables = document.getElementsByClassName('alignedTextbooks');\n"
-      "  //const intro = document.getElementsByClassName('alignedTextbooksIntro')[0];\n"
-      "  //let introNeeded = true;\n"
-      "  for (let i = 0; i < textbookTables.length; i++) {\n"
-      "    const textbookTable = textbookTables[i];\n"
-      "    textbookTable.style.display = 'none';\n"
-      "  }\n"
-      "  for (let i = 0; i < options.length; i++) {\n"
-      "    const opt = options[i];\n"
-      "    if (opt.selected) {\n"
-      "      const optTextbook = opt.value;\n"
-      "      for (let j = 0; j < textbookTables.length; j++) {\n"
-      "        const textbookTable = textbookTables[j];\n"
-      "        if (textbookTable.classList.contains(optTextbook)) {\n"
-      "          textbookTable.style.display = 'block';\n"
-      "          //introNeeded = false;\n"
-      "        }\n"
-      "      }\n"
-      "    }\n"
-      "  }\n"
-      "  //intro.style.display = introNeeded ? 'block' : 'none';\n"
-      "}\n"
-      "</script>\n"
-      "++++\n\n") o))
-
-(define (print-practices-js o)
-  (display
-    (string-append
-      "\n++++\n"
-      "<script>\n"
-      "function showPracticesAlignment() {\n"
-      "  const selectTag = document.getElementsByClassName('practicesAlignmentSelect')[0];\n"
-      "  const options = selectTag && selectTag.options;\n"
-      "  if(!options) return;\n"
-      "  const practiceTables = document.getElementsByClassName('alignedPractices');\n"
-      "  for (let i = 0; i < practiceTables.length; i++) {\n"
-      "    const practiceTable = practiceTables[i];\n"
-      "    practiceTable.style.display = 'none';\n"
-      "  }\n"
-      "  for (let i = 0; i < options.length; i++) {\n"
-      "    const opt = options[i];\n"
-      "    if (opt.selected) {\n"
-      "      const optPractice = opt.value;\n"
-      "      for (let j = 0; j < practiceTables.length; j++) {\n"
-      "        const practiceTable = practiceTables[j];\n"
-      "        if (practiceTable.classList.contains(optPractice)) {\n"
-      "          practiceTable.style.display = 'block';\n"
-      "        }\n"
-      "      }\n"
-      "    }\n"
-      "  }\n"
       "}\n"
       "</script>\n"
       "++++\n\n") o))
