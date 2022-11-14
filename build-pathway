@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-06 # last modified
+LASTMOD=2022-11-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -296,7 +296,9 @@ if test -d $TOPDIR/node_modules; then
   if test -d lessons/hoc-winter-parley/langs/$NATLANG/repartee; then
     rm -r lessons/hoc-winter-parley/langs/$NATLANG/repartee
   fi
-  $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+  if test -d lessons/hoc-winter-parley/langs/$NATLANG; then
+    $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+  fi
 fi
 
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
