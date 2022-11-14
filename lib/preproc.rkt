@@ -19,11 +19,11 @@
 
 (provide
   assoc-standards
-  add-standard
-  add-textbook-chapter
-  add-practice
-  box-add-new!
-  create-alignments-subfile
+  add-standard ; NOTE(Dorai) - do we still need this?
+  add-textbook-chapter ; NOTE(Dorai) - do we still need this?
+  add-practice ; NOTE(Dorai) - do we still need this?
+  box-add-new! ; NOTE(Dorai) - do we still need this?
+  create-alignments-subfile ; NOTE(Dorai) - do we still need this?
   preproc-adoc-file
   rearrange-args
   )
@@ -163,18 +163,18 @@
 (define *glossary-items* '())
 
 (define *missing-glossary-items* '())
-
+; NOTE(Dorai) - do we still need this?
 (define *standards-met* '())
 ;FIXME
 
 ; (define *textbooks-used* '())
-
+; NOTE(Dorai) - do we still need this?
 (define *textbooks-represented* '())
-
+; NOTE(Dorai) - do we still need this?
 (define *chapters-used* '())
-
+; NOTE(Dorai) - do we still need this?
 (define *practices-merited* '())
-
+; NOTE(Dorai) - do we still need this?
 (define *practice-categories-represented* '())
 
 (define *lesson-prereqs* '())
@@ -302,6 +302,7 @@
                       [else #f])
                 (loop (cdr L))))))))
 
+; NOTE(Dorai) - do we still need this?
 (define (assoc-standards std)
   ; (printf "doing assoc-standards ~s\n" std)
   (let ([c #f]
@@ -323,7 +324,7 @@
                   (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
                 ; (printf "assoc-standards returned ~s ~s\n" (and c (second c)) dict)
                 (values (and c (second c)) dict)])))
-
+; NOTE(Dorai) - do we still need this?
 (define (assoc-textbooks chapter-label)
   ; (printf "doing assoc-textbooks ~s\n" chapter-label)
   (let ([chapter-desc #f]
@@ -342,7 +343,7 @@
           (values (second chapter-desc) textbook-name)
           )
         (values #f #f))))
-
+; NOTE(Dorai) - do we still need this?
 (define (assoc-practice practice-label)
   (let ([practice-cell #f]
         [practice-category-name #f])
@@ -353,7 +354,7 @@
     (if practice-cell
         (values (second practice-cell) practice-category-name)
         (values #f #f))))
-
+; NOTE(Dorai) - do we still need this?
 (define (add-standard std lesson-title lesson pwy)
   ; (printf "doing add-standard std= ~s ttl= ~s lsn= ~s pwy= ~s\n" std lesson-title lesson pwy)
   (let-values ([(std-desc dict) (assoc-standards std)])
@@ -369,7 +370,7 @@
                 (cons (list std std-desc dict
                             (box (list (list lesson-title lesson pwy))))
                       *standards-met*))]))))
-
+; NOTE(Dorai) - do we still need this?
 (define (add-textbook-chapter chapter-label lesson-title lesson pwy)
   ; (printf "doing add-textbook-chapter ~s ~s ~s ~s\n" chapter-label lesson-title lesson pwy)
   (let-values ([(chapter-title textbook-label) (assoc-textbooks chapter-label)])
@@ -386,7 +387,7 @@
                 (cons (list chapter-label chapter-title textbook-label
                             (box (list (list lesson-title lesson pwy))))
                       *chapters-used*))]))))
-
+; NOTE(Dorai) - do we still need this?
 (define (add-practice practice-label lesson-title lesson pwy)
   (let-values ([(practice-desc practice-category-name) (assoc-practice practice-label)])
     (when practice-category-name
@@ -403,7 +404,7 @@
                 (cons (list practice-label practice-desc practice-category-name
                             (box (list (list lesson-title lesson pwy))))
                       *practices-merited*))]))))
-
+; NOTE(Dorai) - do we still need this?
 (define (box-add-new! v bx)
   ;(printf "doing box-add-new! ~s ~s\n" v bx)
   (let ([vv (unbox bx)])
@@ -526,21 +527,14 @@
 
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
-  (cond [(null? *standards-met*)
-         (display (create-begin-tag "div" ".sidebarstandards") o)
-         (display "*This Lesson Aligns to:*: _None_" o)
-         (display (create-end-tag "div") o)
-         (display "\n" o)]
-        [else
-          (display "\n[.sidebarstandards,cols=\"a\"]" o)
-          (display "\n|===\n" o)
-          (display "| " o)
-          (display "*Aligns to:*\n" o)
-          (display-standards-selection o *narrative*)
-          (display " | \n" o)
-          (display "\ninclude::.index-standards.asc[]\n" o)
-          (display "|===\n" o)
-          ]))
+  (display "\n[.sidebarstandards,cols=\"a\"]" o)
+  (display "\n|===\n" o)
+  (display "| " o)
+  (display "*Aligns to:*\n" o)
+  (display-standards-selection o *narrative*)
+  (display " | \n" o)
+  (display "\ninclude::.index-standards.asc[]\n" o)
+  (display "|===\n" o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -1031,6 +1025,7 @@
 
 (define *lesson-summary-file* #f)
 
+; NOTE(Dorai) - do we still need this?
 (define *standards-dictionaries*
   (map first *standards-list*))
 
@@ -1315,11 +1310,11 @@
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
-  (set! *standards-met* '())
-  (set! *chapters-used* '())
-  (set! *textbooks-represented* '())
-  (set! *practices-merited* '())
-  (set! *practice-categories-represented* '())
+  (set! *standards-met* '()); NOTE(Dorai) - do we still need this?
+  (set! *chapters-used* '()); NOTE(Dorai) - do we still need this?
+  (set! *textbooks-represented* '()); NOTE(Dorai) - do we still need this?
+  (set! *practices-merited* '()); NOTE(Dorai) - do we still need this?
+  (set! *practice-categories-represented* '()); NOTE(Dorai) - do we still need this?
   (set! *lesson-prereqs* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
@@ -1444,26 +1439,6 @@
           ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
           (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
           (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
-      ;
-      ;
-      (when *lesson-plan*
-
-        (for ([i *standards-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-standard (first j) #f *lesson-plan* #f))))
-
-        (for ([i *textbooks-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-textbook-chapter (first j) #f *lesson-plan* #f))))
-
-        (for ([i *practices-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-practice (first j) #f *lesson-plan* #f))))
-
-        )
       ;
       (when (or *lesson-plan*
                 *narrative*
@@ -1971,8 +1946,6 @@
 
               (expand-directives i o)
 
-              (set! *practices-merited* (reverse *practices-merited*))
-
               (when (and *narrative* (not title-reached?))
                 (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
@@ -2318,42 +2291,9 @@
     (lambda (op)
       (for ([s *glossary-items*])
         (fprintf op "~s~n" (first s))))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-standards.txt.kp")
-    (lambda (op)
-      (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-standards-w-prose.txt.kp")
-        (lambda (op2)
-          (let ([first? #t])
-            (display "    standards: [" op2)
-            (for ([s *standards-met*])
-              (let ([std-name (first s)])
-              (fprintf op "~s~n" std-name)
-              (let ([x (second s)])
-                (cond [first? (set! first? #f)]
-                      [else (display ",\n                " op2)])
-                (write std-name op2))
-              ))
-            (display "]" op2) (newline op2)
-            ))
-        #:exists 'replace))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-chapters.txt.kp")
-    (lambda (op)
-      (for ([s *chapters-used*])
-        (fprintf op "~s~n" (first s))))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-practices.txt.kp")
-    (lambda (op)
-      (for ([p *practices-merited*])
-        (fprintf op "~s\n" (first p))))
-    #:exists 'replace)
-  )
+    #:exists 'replace))
 
 ;coe
-
 (define (hspace n)
   (enclose-span ".hspace"
                 (string-join (build-list n (lambda (i) "{nbsp}")) "")))
