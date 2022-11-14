@@ -181,8 +181,6 @@
 
 (define *lesson-keywords* '())
 
-(define *dictionaries-represented* '())
-
 (define *exercises-done* '())
 
 (define *prereqs-used* '())
@@ -367,8 +365,6 @@
                     (box-add-new! (list lesson-title lesson pwy)
                                   (list-ref c0 3))))]
             [else
-              (unless (member dict *dictionaries-represented*)
-                (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
               (set! *standards-met*
                 (cons (list std std-desc dict
                             (box (list (list lesson-title lesson pwy))))
@@ -540,7 +536,7 @@
           (display "\n|===\n" o)
           (display "| " o)
           (display "*Aligns to:*\n" o)
-          (display-standards-selection o *narrative* *dictionaries-represented*)
+          (display-standards-selection o *narrative*)
           (display " | \n" o)
           (display "\ninclude::.index-standards.asc[]\n" o)
           (display "|===\n" o)
@@ -1231,94 +1227,35 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (let ([st-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
-                  #:exists 'replace)]
-          [tb-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".textbooks-in-pathway.txt.kp")
-                  #:exists 'replace)]
-          [pr-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
-                  #:exists 'replace)])
-        (for ([lesson lessons])
-          ;(printf "tackling lesson i ~s\n" lesson)
-          (let ([lesson-asc-file
-                  (format "lessons/~a/.cached/.index.asc" lesson)]
-                [lesson-glossary-file
-                  (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
-                [lesson-standards-file
-                  (format "lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
-                [lesson-chapters-file
-                  (format "lessons/~a/.cached/.lesson-chapters.txt.kp" lesson)]
-                [lesson-practices-file
-                  (format "lessons/~a/.cached/.lesson-practices.txt.kp" lesson)]
-                [lesson-title-file
-                  (format "lessons/~a/.cached/.index.titletxt" lesson)]
-                [lesson-title lesson]
-                )
+      (for ([lesson lessons])
+        ;(printf "tackling lesson i ~s\n" lesson)
+        (let ([lesson-asc-file
+                (format "lessons/~a/.cached/.index.asc" lesson)]
+              [lesson-glossary-file
+                (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
+              [lesson-title-file
+                (format "lessons/~a/.cached/.index.titletxt" lesson)]
+              [lesson-title lesson]
+              )
 
-            (when (file-exists? lesson-title-file)
-              ;(printf "~a exists i\n" lesson-title-file)
-              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+          (when (file-exists? lesson-title-file)
+            ;(printf "~a exists i\n" lesson-title-file)
+            (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
-            (when (file-exists? lesson-glossary-file)
-              ;(printf "~a exists i\n" lesson-glossary-file)
-              (call-with-input-file lesson-glossary-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (let ([s (assoc-glossary x)])
-                          (cond [s (unless (member s *glossary-items*)
-                                     (set! *glossary-items*
-                                       (cons s *glossary-items*)))]))
-                        (loop)))))))
-            ;(printf "took care of pw glossary~n")
-
-            ; (printf "*** ~s's ~s exists? ~s\n" lesson lesson-standards-file (file-exists? lesson-standards-file))
-
-            (when (file-exists? lesson-standards-file)
-              ;(printf "~a exists i\n" lesson-standards-file)
-              (call-with-input-file lesson-standards-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-standard x lesson-title lesson #f)
-                        (fprintf st-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            ;(printf "took care of pw stds~n")
-
-            (when (file-exists? lesson-chapters-file)
-              (call-with-input-file lesson-chapters-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-textbook-chapter x lesson-title lesson #f)
-                        (fprintf tb-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            (when (file-exists? lesson-practices-file)
-              (call-with-input-file lesson-practices-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-practice x lesson-title lesson #f)
-                        (fprintf pr-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            ;(unless (file-exists? lesson-asc-file)
-            ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
-
-            ))
-
-    (close-output-port st-o)
-    (close-output-port tb-o)
-    (close-output-port pr-o)
-
+          (when (file-exists? lesson-glossary-file)
+            ;(printf "~a exists i\n" lesson-glossary-file)
+            (call-with-input-file lesson-glossary-file
+              (lambda (i)
+                (let loop ()
+                  (let ([x (read i)])
+                    (unless (eof-object? x)
+                      (let ([s (assoc-glossary x)])
+                        (cond [s (unless (member s *glossary-items*)
+                                   (set! *glossary-items*
+                                     (cons s *glossary-items*)))]))
+                      (loop)))))))
+          ;(printf "took care of pw glossary~n")
+          )
     )
     (newline o)))
 
@@ -1379,7 +1316,6 @@
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
   (set! *standards-met* '())
-  (set! *dictionaries-represented* '())
   (set! *chapters-used* '())
   (set! *textbooks-represented* '())
   (set! *practices-merited* '())
@@ -2037,11 +1973,6 @@
 
               (set! *practices-merited* (reverse *practices-merited*))
 
-              (let ([dict-rep *dictionaries-represented*])
-                (set! *dictionaries-represented*
-                  (filter (lambda (x) (member x dict-rep))
-                          (map first *standards-list*))))
-
               (when (and *narrative* (not title-reached?))
                 (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
@@ -2324,7 +2255,7 @@
 
   )
 
-(define (display-standards-selection o *narrative* *dictionaries-represented*)
+(define (display-standards-selection o *narrative*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
@@ -2344,61 +2275,13 @@
     (display (enclose-tag "select" ".alignmentSelect"
                #:attribs
                " onchange=\"showAlignment(this.value)\""
-               "")
-             o)
+               "") o)
     (newline o)
     (when narrative?
       (display (create-end-tag "div") o)
       (display (create-end-tag "div") o))
     ;(display "\n\n" o)
     ))
-
-(define (display-textbooks-selection o *textbooks-represented*)
-  (display (enclose-tag "select" ".textbooksAlignmentSelect"
-             #:attribs
-             ;(format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
-             " onchange=\"showTextbooksAlignment()\""
-             (string-append
-               (if (null? *textbooks-represented*) ""
-                   (let ([first-textbook (first *textbooks-represented*)])
-                     (enclose-tag "option" ""
-                       #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
-                                         (regexp-replace* "\\." first-textbook "_"))
-                       (expand-textbook-abbrev first-textbook))))
-               (string-join
-                 (map (lambda (textbook-label)
-                        (enclose-tag "option" ""
-                          #:attribs (format "value=\"textbook-~a\""
-                                            (regexp-replace* "\\." textbook-label "_"))
-                          (expand-textbook-abbrev textbook-label)))
-                      (if (null? *textbooks-represented*) '()
-                          (rest *textbooks-represented*)))
-                 "")))
-           o)
-  (newline o))
-
-(define (display-practices-selection o *practice-categories-represented*)
-  (display (enclose-tag "select" ".practicesAlignmentSelect"
-             #:attribs
-             " onchange=\"showPracticesAlignment()\""
-             (string-append
-               (if (null? *practice-categories-represented*) ""
-                   (let ([first-practice-categ (first *practice-categories-represented*)])
-                     (enclose-tag "option" ""
-                       #:attribs (format "selected=\"selected\" value=\"practices-~a\""
-                                         (regexp-replace* "\\." first-practice-categ "_"))
-                       (expand-practice-abbrev first-practice-categ))))
-               (string-join
-                 (map (lambda (practice-categ)
-                        (enclose-tag "option" ""
-                          #:attribs (format "value=\"practices-~a\""
-                                            (regexp-replace* "\\." practice-categ "_"))
-                          (expand-practice-abbrev practice-categ)))
-                      (if (null? *practice-categories-represented*) '()
-                          (rest *practice-categories-represented*)))
-                 "")))
-           o)
-  (newline o))
 
 (define (sanitize-css-id id)
   (regexp-replace* "[. ]" id "_"))
@@ -2426,17 +2309,7 @@
 (define (create-alignments-subfile file)
   (print-menubar (string-append file "-comment.txt"))
   (call-with-output-file (string-append file ".asc")
-    (lambda (o)
-      (unless (and (empty? *standards-met*)
-                   (empty? *chapters-used*)
-                   (empty? *practices-merited*))
-        (set! *dictionaries-represented*
-          (sort *dictionaries-represented*
-                (lambda (a b)
-                  (< (index-of *dict-canonical-order* a)
-                     (index-of *dict-canonical-order* b)))))
-        (display-alignments-selection o)
-        ))
+    (lambda (o) (display-alignments-selection o))
     #:exists 'replace))
 
 (define (accumulate-glossary-and-alignments)
