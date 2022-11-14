@@ -1642,7 +1642,7 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
-                            (print-other-resources o)]
+                            (print-other-resources *target-pathway* o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
@@ -1956,7 +1956,7 @@
                 (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
-                (print-other-resources o))
+                (print-other-resources *target-pathway* o))
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
