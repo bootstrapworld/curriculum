@@ -553,7 +553,7 @@
      "Understand that, just as with simple events, the probability of a compound event is the fraction of outcomes in the sample space for which the compound event occurs."
      )
     ("7.SP.C.8.B"
-     "Represent sample spaces for compound events using methods such as organized lists, tables and tree diagrams. For an event described in everyday language (e.g., "rolling double sixes"), identify the outcomes in the sample space which compose the event."
+     "Represent sample spaces for compound events using methods such as organized lists, tables and tree diagrams. For an event described in everyday language (e.g., \"rolling double sixes\"), identify the outcomes in the sample space which compose the event."
      )
     ("7.SP.C.8.C"
      "Design and use a simulation to generate frequencies for compound events."
