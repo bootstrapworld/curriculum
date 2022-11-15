@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"}
-# Table Methods
+# Table Functions
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Functions that Work on Rows
 
-Load the @starter-file{table-methods}, go to the File menu, and click "Save a Copy".
+Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
 
 This activity is about *reading carefully*, getting more comfortable with functions that work on rows.
 
@@ -158,17 +158,17 @@ AFTER they are done, ask: "Based on who sat and who stayed, what was on the card
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-Pyret Tables have their own methods for sorting, filtering, and more!
+Pyret Tables have their own functions for sorting, filtering, and more!
 
-Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
+Complete questions 1-6 on @printable-exercise{exploring-functions.adoc}
 
-1. Who can explain how the `.order-by` method works?
+1. Who can explain how the `sort` function works?
 2. Does sorting the `animals-table` produce a _new_ table, or change the existing one? 
 3. How could we test this?
 
 <!--
 *ANSWERS:*
-1. `.order-by` consumes a String (the name of the column by which to sort) and a Boolean (`true` for ascending, `false` for descending), and sorts the rows according to that column.
+1. `sort` consumes a Table, a String (the name of the column by which to sort) and a Boolean (`true` for ascending, `false` for descending), and sorts the rows according to that column.
 2. It creates a new one
 3. Sort the table, then evaluate `animals-table` and see if it stayed sorted
 -->
@@ -176,16 +176,16 @@ Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-* Complete questions 7-13 on @printable-exercise{exploring-methods.adoc}
-* Find the contract for `.filter` in your Contracts page. 
+* Complete questions 7-13 on @printable-exercise{exploring-functions.adoc}
+* Find the contract for `filter` in your Contracts page. 
 
 1. What is its Domain?
-2. How does the `.filter` method work?
+2. How does the `filter` function work?
 3. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
 
 <!--
 **ANSWERS**
-1. `.filter` takes a _Boolean-producing function_
+1. `filter` takes a Table, and a _Boolean-producing function_
 2. It produces a new table containing only rows for which the function returns `true`.
 3. It creates a new one
 -->
@@ -193,28 +193,28 @@ Complete questions 1-6 on @printable-exercise{exploring-methods.adoc}
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-`<Table>.filter :: (test :: (Row ->Boolean)) -> Table`{style="font-size:16pt;font-weight:bold"}
+`filter :: (t :: Table, test :: (Row ->Boolean)) -> Table`{style="font-size:16pt;font-weight:bold"}
 
-`.filter` consumes a _Boolean-producing function_, and walks through the table applying it to each Row. 
+`filter` consumes a Table and a _Boolean-producing function_, and walks through the table applying it to each Row. 
 
 If the function produces `true`, the Row is copied to a new Table. 
 
-When the last Row is visited, the method produces the new Table.
+When the last Row is visited, the function produces the new Table.
 
 ---
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-* Complete questions 14-16 on @printable-exercise{exploring-methods.adoc}
-* Find the contract for `.build-column` in your Contracts page. 
+* Complete questions 14-16 on @printable-exercise{exploring-functions.adoc}
+* Find the contract for `build-col` in your Contracts page. 
 
 1. What is its Domain?
-2. How the `.build-column` method work?
+2. How the `build-col` function work?
 3. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
 
 <!--
 **ANSWERS**
-1. `.build-column` takes in a String and a _function_
+1. `build-col` takes in a Table, a String and a _function_
 2. It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
 3. It creates a new one
 -->
@@ -222,13 +222,13 @@ When the last Row is visited, the method produces the new Table.
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-`<Table>.build-column :: (col::Str, f::(Row->Any)) -> Table`{style="font-size:16pt;font-weight:bold"}
+`build-col :: (t::Table, col::Str, f::(Row->Any)) -> Table`{style="font-size:16pt;font-weight:bold"}
 
-`.build-column` consumes a String and a _function_, and walks through the table applying it to each Row. 
+`build-col` consumes a Table, a String and a _function_, and walks through the table applying it to each Row. 
 
 It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
 
-When the last Row is visited, the method produces the new Table.
+When the last Row is visited, the function produces the new Table.
 
 ---
 {layout="Investigate"}
@@ -241,20 +241,20 @@ Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we
 {layout="Synthesize"}
 # Ordering, Filtering, and Building
 
-Being able to define functions and use them with Table Methods is a _huge_ upgrade in our ability to analyze data!
+Being able to define functions and use them with Table Functions is a _huge_ upgrade in our ability to analyze data!
 
-- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `.filter` method help?
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `filter` function help?
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 
 <!--
 **Common Misconceptions**
-*Students often think that these methods _change_ the table!* In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.
+*Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
 -->
 ---
 {layout="Synthesize"}
 # Ordering, Filtering, and Building
 
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `.build-column` to compute that for every row in the table.
+- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `build-col` to compute that for every row in the table.
 - **What are some ways you might want to filter _your_ dataset?**
 - **What are some columns you might want to build for _your_ dataset?**

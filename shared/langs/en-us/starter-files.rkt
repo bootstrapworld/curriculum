@@ -132,7 +132,7 @@
    ("pyret" "https://code.pyret.org/editor#share=17266_Kczy0pJxp8TzkMsawaMavG4PDpk")
    )
 
-  ("table-methods" "Table Methods Starter File"
+  ("table-functions" "Table Functions Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1lk56IOB08ir43MZ3Vbi5R5d69uqcbaL3")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    ) 

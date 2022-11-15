@@ -29,8 +29,8 @@ Open the @starter-file{height} and click "Run" to interact with data from anothe
 @n Make three linear regression plots comparing `age` and `height`, and record the results for each in the table below:
 
 - The whole population: `lr-plot(h-table, "gender-id", "age", "height")`
-- Females only: `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`
-- Males only: `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`
+- Females only: `lr-plot(filter(h-table, is-f), "gender-id", "age", "height")`
+- Males only: `lr-plot(filter(h-table, is-m), "gender-id", "age", "height")`
 
 
 [cols="^.^1,^.^1,^.^1,^.^1", options="header"]
@@ -50,14 +50,14 @@ Open the @starter-file{height} and click "Run" to interact with data from anothe
 
 @vspace{1ex}
 
-Rebuild `lr-plot(h-table.filter(is-f), "gender-id", "age", "height")`, adjust the window of the interactive plot so that:
+Rebuild `lr-plot(filter(h-table, is-f), "gender-id", "age", "height")`, adjust the window of the interactive plot so that:
 
 [cols="^1,^1,^1,^1" options="header"]
 |===
 | x-min: 	| x-max:	| y-min:	| y-max:
 | 6.5		| 12.5 		| 	45		| 70
 |===
-and click `Redraw`.  Then, do the same for `lr-plot(h-table.filter(is-m), "gender-id", "age", "height")`.
+and click `Redraw`.  Then, do the same for `lr-plot(filter(h-table, is-m), "gender-id", "age", "height")`.
 
 @vspace{1ex}
 

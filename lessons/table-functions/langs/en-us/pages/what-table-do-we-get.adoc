@@ -48,40 +48,40 @@ The table `t` below represents four animals from the shelter:
 
 |===
 
-Below is a list of expressions that use table methods. _Match_ each expression to the description of the table we should get after evaluating each one.
+Below is a list of expressions that use table functions. _Match_ each expression to the description of the table we should get after evaluating each one.
 
 [.FillVerticalSpace, cols=">.^13a, ^.^4a, 3, ^.^1a, .^15a",stripes="none",grid="none",frame="none"]
 |===
 
-| `t.order-by("age", true)`
+| `sort(t, "age", true)`
 |*1*@ifsoln{-B} ||*A*
 | Produces a table with Toggle, Fritz, and Nori - but not Sunflower.
 
-| `t.order-by("pounds", false)`
+| `sort(t, "pounds", false)`
 |*2*@ifsoln{-F} ||*B*
 | Produces a table of all four animals, sorted youngest-to-oldest
 
-| `t.build-column("sticker", label)`
+| `build-col(t, "sticker", label)`
 |*3*@ifsoln{-H} ||*C*
 | Produces a table, with only Toggle.
 
-| `t.filter(is-old)`
+| `filter(t, is-old)`
 |*4*@ifsoln{-C}||*D*
 | Produces an identical table with an extra column called "dog", whose values are true, true, true, false
 
-| `t.filter(lookup-fixed)`
+| `filter(t, lookup-fixed)`
 |*5*@ifsoln{-E} ||*E*
 | Produces a table containing only Nori and Toggle.
 
-| `t.filter(is-dog)`
+| `filter(t, is-dog)`
 |*6*@ifsoln{-A} ||*F*
 | Produces a table with all four animals, sorted from heaviest to lightest.
 
-| `t.build-column("dog", is-dog)`
+| `build-col(t, "dog", is-dog)`
 |*7*@ifsoln{-D} ||*G*
 | Won’t run: will produce an error
 
-| `t.filter(label)`
+| `filter(t, label)`
 |*8*@ifsoln{-G} ||*H*
 | Produces an identical table with an extra column called "sticker", whose values are images
 

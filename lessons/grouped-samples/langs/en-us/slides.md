@@ -105,7 +105,7 @@ Earlier, you learned how to define values in Pyret. We can define Numbers, Strin
   name = "Flannery"
   age  = 16
   logo = star(50, "solid", "red")
-  sasha= animals-table.row-n(0)
+  sasha= row-n(animals-table, 0)
 ```
 Let's use this skill to define _Tables..._
 ---
@@ -114,11 +114,11 @@ Let's use this skill to define _Tables..._
 
 We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{style="font-size:16pt"}
 ```
-dogs  = animals-table.filter(is-dog)
+dogs  = filter(animals-table, is-dog)
 ```
-The `.filter` method walks across each row in the table, and passes it to the `is-dog` function.{style="font-size:16pt"}
-**If `is-dog` produces `true`, `.filter` adds it to a new table.** Otherwise, it just silently moves on to the next row.{style="font-size:16pt"}}
-Finally, we define the name `dogs` to be the table produced by `.filter`.{style="font-size:16pt"}
+The `filter` function walks across each row in the table, and passes it to the `is-dog` function.{style="font-size:16pt"}
+**If `is-dog` produces `true`, `filter` adds it to a new table.** Otherwise, it just silently moves on to the next row.{style="font-size:16pt"}}
+Finally, we define the name `dogs` to be the table produced by `filter`.{style="font-size:16pt"}
 
 }
 ---
@@ -141,7 +141,7 @@ A “kitten” is an animal who _is a cat_ and who _is young_. **How would you d
 * Which one best represents the distribution of species for the whole population? Why?
 
 <!--
-Debrief with students. Thoughtful question: how could we filter _and_ sort a table? How can we combine methods?
+Debrief with students. Thoughtful question: how could we filter _and_ sort a table? How can we combine functions?
 -->
 
 ---
@@ -255,7 +255,7 @@ Are there grouped samples that you'd like to explore in your own dataset? Here a
 
 - **What grouped samples make sense for your dataset?**
 - Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
-- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `.filter` method to define your new sample tables.
+- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `filter` function to define your new sample tables.
 
 ---
 {layout="Synthesize"}
