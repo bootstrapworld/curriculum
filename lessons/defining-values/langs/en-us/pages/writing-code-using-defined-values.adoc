@@ -3,11 +3,7 @@
 ++++
 <style>
 #content div.circleevalsexp {width: auto !important; }
-#content tr:nth-child(odd) {height: 2.25in;}
-#content tr:nth-child(even) {height: 0.75in;}
-#content tr:nth-child(3) {height: 2.5in;}
-#content tr:nth-child(4) {height: 1in;}
-
+div.code { position: absolute; bottom: 0; }
 td .autonum:after {content: ") "; }
 </style>
 ++++
@@ -22,7 +18,7 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 @vspace{1ex}
 
 
-[cols="<1a,<1a", stripes="none"]
+[.FillVerticalSpace, cols="<1a,<1a", stripes="none"]
 |===
 |
 --
@@ -32,6 +28,10 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 
 [.center]
 @show{(coe '(scale 3 PRIZE-STAR))}
+
+[.code]
+*Code:* @showsoln{(code '(scale 3 PRIZE-STAR))}
+
 |
 --
 @n The outline of a pink star that is half the size of the original (using `scale`)
@@ -41,8 +41,8 @@ Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and 
 [.center]
 @showsoln{(coe '(scale 0.5 PRIZE-STAR))}
 
-| *Code:* @showsoln{(code '(scale 3 PRIZE-STAR))}
-| *Code:* @showsoln{(code '(scale 0.5 PRIZE-STAR))}
+[.code]
+*Code:* @showsoln{(code '(scale 0.5 PRIZE-STAR))}
 
 
 |
@@ -53,6 +53,10 @@ _(It should be the same size as the original.)_
 --
 *Circle of Evaluation:*
 @showsoln{(coe '(rotate 45 PRIZE-STAR))}
+
+[.code]
+*Code:*
+@showsoln{(code '(rotate 45 PRIZE-STAR))}
 |
 --
 @n The outline of a pink star that is three times as big as the original *and* has been rotated 45 degrees
@@ -63,10 +67,13 @@ _(It should be the same size as the original.)_
 @ifsoln{or}
 @showsoln{(coe '(rotate 45 (scale 3 PRIZE-STAR)))}
 
-| *Code:* @showsoln{(code '(rotate 45 PRIZE-STAR))}
-| *Code:* @showsoln{(code '(scale 3(rotate 45 PRIZE-STAR)))}
+[.code]
+--
+*Code:*
+@showsoln{(code '(scale 3 (rotate 45 PRIZE-STAR)))}
 @ifsoln{or}
 @showsoln{(code '(rotate 45 (scale 3 PRIZE-STAR)))}
+--
 |===
 
 @vspace{1ex}

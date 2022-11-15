@@ -426,19 +426,35 @@ latter has been built locally first. So if you've built `algebra-wescheme` but
 == Standards compliance
 
 The standards compliance for the various lessons is documented in the
-directory `shared/langs/en-us/standards/'. In it, the file
-`standards-and-lessons.rkt` contains an association of educational
-standards with the lessons that comply with them. Dictionaries for the
-various standards are available
-in the same directory. For now, these are:
+directory `shared/langs/en-us/standards/'. In it are
+dictionaries for the
+various standards. For now, these are:
 
   standards-cc-ela-dictionary.rkt
   standards-cc-math-dictionary.rkt
+  standards-cc-states-dictionary.rkt
   standards-csta-dictionary.rkt
   standards-ia-dictionary.rkt
   standards-k12cs-dictionary.rkt
+  standards-ma-dictionary.rkt
   standards-ngss-dictionary.rkt
   standards-ok-dictionary.rkt
+
+Each dictionary entry associates an educational standard label with its description
+and all the lessons that comply with it. E.g., the following is an entry in the
+dictionary file `standards-cc-math-dictionary.rkt`
+
+    ("6.EE.B"
+     "Reason about and solve one-variable equations and inequalities."
+     "inequalities1-simple"
+     "inequalities2-compound"
+     )
+
+It associates the label `6.EE.B` with the description `Reason about and
+solve one-variable equations and inequalities`, and says that the two
+lessons `inequalities1-simple` and `inequalities2-compound` comply with
+it. As you create or modify lessons, add to their names to the
+appropriate standard entries as appropriate.
 
 The build process creates a menu for finding out the standards
 complied with by the lessons and the pathway. The lesson’s menu
@@ -520,7 +536,6 @@ The following is needed to construct documents from this repo:
   brew install gnu-sed
   brew install curl
 
-
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
 * Racket, to do preprocessing and other bookkeeping. Any version should
@@ -542,8 +557,10 @@ and make sure the `racket` binary is in your `$PATH`.
 == Authoring guidelines
 
 The `.adoc` files peppering this curriculum repo are written in
-AsciiDoc overlaid with some preprocessing macros written in
-Racket. AsciiDoc is a plain-text-based markup that is converted
+general-purpose AsciiDoc overlaid with some preprocessing directives written in
+Racket that are available only in our documentation base.
+
+AsciiDoc is a plain-text-based markup that is converted
 by the Asciidoctor program into HTML.
 
 === A brief introduction to AsciiDoc
@@ -583,12 +600,19 @@ In-text code fragments are set within backticks: ``++`code fragment`++``.
 Code displays are on contiguous lines that are indented (amount
 of indentation doesn’t matter as long it’s non-0).
 
-Please see the
-https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc Language Documentation] for
-the whole story. Learn just the bare minimum to get started writing,
+Once you're ready to learn a bit more, see the
+https://asciidoctor.org/docs/asciidoc-writers-guide/[Writer's Guide].
+
+For a full description of all the bells and whistles, see the
+https://docs.asciidoctor.org/asciidoc/latest[AsciiDoc Language
+Documentation].
+
+It's quite possible, and encouraged, to write decent AsciiDoc documents
+without knowing all of its syntax.
+Learn just the bare minimum to get started writing,
 and then learn more as needed, either from the online manual, or by bugging
 me. (If something seems too tedious to learn or input, I could
-perhaps add it as a Racket directive.)
+perhaps implement a simpler Racket directive.)
 
 If your Asciidoctor version is at least 2.0.0, you can type
 

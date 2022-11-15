@@ -2,6 +2,7 @@
 
 (provide *ngss-standards-list*)
 
+    ;;;;;;;;;;;;;;;;;;;   NGSS standards  ;;;;;;;;;;;;;;;;
 (define *ngss-standards-list*
   '(
     ; NOTE(Emmanuel): 9/9/21 - Commenting out ES standards, to focus on
@@ -15,7 +16,8 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP1 = Asking Questions and Defining Problems
-#|
+
+    #|
     ("ES-SEP1-1"
      "Ask questions about what would happen if a variable is changed."
      )
@@ -31,12 +33,14 @@
     ("ES-SEP1-5"
      "Define a simple design problem that can be solved through the development of an object, tool, process, or system and includes several criteria for success and constraints on materials, time, or cost."
      )
-|#
+    |#
+
     ("MS-SEP1-1"
      "Ask questions that require sufficient and appropriate empirical evidence to answer."
      )
     ("MS-SEP1-2"
      "Ask questions that arise from careful observation of phenomena, models, or unexpected results, to clarify and/or seek additional information."
+     "hoc-data"
      )
     ("MS-SEP1-3"
      "Ask questions to identify and/or clarify evidence and/or the premise(s) of an argument."
@@ -55,6 +59,7 @@
      )
     ("MS-SEP1-8"
      "Ask questions that challenge the premise(s) of an argument or the interpretation of a data set."
+     "hoc-data"
      )
     ("HS-SEP1-1"
      "Ask questions that arise from careful observation of phenomena, or unexpected results, to clarify and/or seek additional information."
@@ -86,7 +91,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP2 = Developing and Using Models
-#|
+    #|
     ("ES-SEP2-1"
      "Identify limitations of models."
      )
@@ -105,7 +110,7 @@
     ("ES-SEP2-6"
      "Use a model to test cause and effect relationships or interactions concerning the functioning of a natural or designed system."
      )
-|#
+    |#
     ("MS-SEP2-1"
      "Evaluate limitations of a model for a proposed object or tool."
      )
@@ -151,7 +156,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP3 = Planning and Carrying Out Investigations
-#|
+    #|
     ("ES-SEP3-1"
      "Plan and conduct an investigation collaboratively to produce data to serve as the basis for evidence, using fair tests in which variables are controlled and the number of trials considered."
      )
@@ -167,7 +172,7 @@
     ("ES-SEP3-5"
      "Test two different models of the same proposed object, tool, or process to determine which better meets criteria for success."
      )
-|#
+    |#
     ("MS-SEP3-1"
      "Plan an investigation individually and collaboratively, and in the design: identify independent and dependent variables and controls, what tools are needed to do the gathering, how measurements will be recorded, and how many data are needed to support a claim."
      )
@@ -204,7 +209,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP4 = Analyzing and Interpreting Data
-#|
+    #|
     ("ES-SEP4-1"
      "Represent data in tables and/or various graphical displays (bar graphs, pictographs, and/or pie charts) to reveal patterns that indicate relationships."
      )
@@ -220,7 +225,7 @@
     ("ES-SEP4-5"
      "Use data to evaluate and refine design solutions."
      )
-|#
+    |#
     ("MS-SEP4-1"
      "Construct, analyze, and/or interpret graphical displays of data and/or large data sets to identify linear and nonlinear relationships."
      )
@@ -232,6 +237,7 @@
      )
     ("MS-SEP4-4"
      "Analyze and interpret data to provide evidence for phenomena."
+     "hoc-data"
      )
     ("MS-SEP4-5"
      "Apply concepts of statistics and probability (including mean, median, mode, and variability) to analyze and characterize data, using digital tools when feasible."
@@ -241,6 +247,7 @@
      )
     ("MS-SEP4-7"
      "Analyze and interpret data to determine similarities and differences in findings."
+     "hoc-data"
      )
     ("MS-SEP4-8"
      "Analyze data to define an optimal operational range for a proposed object, tool, process or system that best meets criteria for success."
@@ -266,7 +273,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP5 = Using Mathematics and Computational Thinking
-#|
+    #|
     ("ES-SEP5-1"
      "Decide if qualitative or quantitative data are best to determine whether a proposed object or tool meets criteria for success."
      )
@@ -279,7 +286,7 @@
     ("ES-SEP5-4"
      "Create and/or use graphs and/or charts generated from simple algorithms to compare alternative solutions to an engineering problem."
      )
-|#
+    |#
     ("MS-SEP5-1"
      "Use digital tools (e.g., computers) to analyze very large data sets for patterns and trends."
      )
@@ -291,6 +298,7 @@
      )
     ("MS-SEP5-4"
      "Apply mathematical concepts and/or processes (such as ratio, rate, percent, basic operations, and simple algebra) to scientific and engineering questions and problems."
+     "hoc-data"
      )
     ("MS-SEP5-5"
      "Use digital tools and/or mathematical concepts and arguments to test and compare proposed solutions to an engineering design problem."
@@ -300,6 +308,7 @@
      )
     ("HS-SEP5-2"
      "Use mathematical, computational, and/or algorithmic representations of phenomena or design solutions to describe and/or support claims and/or explanations."
+     "hoc-data"
      )
     ("HS-SEP5-3"
      "Apply techniques of algebra and functions to represent and solve scientific and engineering problems."
@@ -313,7 +322,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP6 = Constructing Explanations and Designing Solutions
-#|
+    #|
     ("ES-SEP6-1"
      "Construct an explanation of observed relationships (e.g., the distribution of plants in the back yard)."
      )
@@ -329,7 +338,7 @@
     ("ES-SEP6-5"
      "Generate and compare multiple solutions to a problem based on how well they meet the criteria and constraints of the design solution."
      )
-|#
+    |#
     ("MS-SEP6-1"
      "Construct an explanation that includes qualitative or quantitative relationships between variables that predict(s) and/or describe(s) phenomena."
      )
@@ -372,7 +381,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP7 = Engaging in Argument from Evidence
-#|
+    #|
     ("ES-SEP7-1"
      "Compare and refine arguments based on an evaluation of the evidence presented."
      )
@@ -391,7 +400,7 @@
     ("ES-SEP7-6"
      "Make a claim about the merit of a solution to a problem by citing relevant evidence about how it meets the criteria and constraints of the problem."
      )
-|#
+    |#
     ("MS-SEP7-1"
      "Compare and critique two arguments on the same topic and analyze whether they emphasize similar or different evidence and/or interpretations of facts."
      )
@@ -428,7 +437,7 @@
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ; SEP8 = Obtaining, Evaluating, and Communicating Information
-#|
+    #|
     ("ES-SEP8-1"
      "Obtain and combine information from books and other reliable media to explain phenomena."
      )
@@ -447,7 +456,7 @@
     ("ES-SEP8-6"
      "Communicate scientific and/or technical information orally and/or in written formats, including various forms of media and may include tables, diagrams, and charts."
      )
-|#
+    |#
     ("MS-SEP8-1"
      "Critically read scientific texts adapted for classroom use to determine the central ideas and/or obtain scientific and/or technical information to describe patterns in and/or evidence about the natural and designed world(s)."
      )

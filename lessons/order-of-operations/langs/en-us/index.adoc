@@ -185,7 +185,15 @@ Students learn how to use the Circles of Evaluation to translate arithmetic expr
 
 === Launch
 
-When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation @ifproglang{wescheme}{- also called the _function_ -} at the top. After that, she crawls from left to right, visiting each of the inputs @ifproglang{wescheme}{to the function}. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right.
+
+@ifproglang{wescheme}{
+The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation - also called the _function_ - at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
+
+@ifproglang{pyret}{
+The first thing the spider does is cross over a curved line (an open parenthesis!). For _operators_ (addition, subtraction, etc.) - The spider visits the first number on the left, then she visits the top of the circle for the operation, then the number on the right. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
@@ -285,11 +293,9 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 --
 Here are two Circles of Evaluation.
 
-[cols="1,1", grid="none", frame="none"]
+[cols="^1,^2", grid="none", frame="none"]
 |===
-
-| @right{@show{(coe `(* 10 -4))}}
-| @show{(coe `(text "Good work!" 50 "red"))}
+| @show{(coe `(* 10 -4))}	| @show{(coe `(text "Good work!" 50 "red"))}
 |===
 
 One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right?
@@ -299,11 +305,28 @@ One of them is familiar, but the other is very different from what you've been w
 --
 _Possible responses:_
 
-- _We've never seen the function `text` before_
-- _We've never seen words used in a Circle of Evaluation before_
-- _We've never seen a function take in three inputs_
-- _We've never seen a function take in a mix of Numbers and words_
+- _We've never seen `text` before_
+- _We've never seen words like "red" used in a Circle of Evaluation before_
+- _We've never seen *three* inputs_
+- _We've never seen a mix of Numbers and words_
 --
+
+@ifproglang{pyret}{
+There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
+
+When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
+
+Here's those same two Circles - one for an operator and another for a function - along with the code for each one:
+
+[cols="^1,^2", grid="none", frame="none"]
+|===
+
+| @show{(coe  `(* 10 -4))}	| @show{(coe  `(text "Good work!" 50 "red"))}
+| @show{(code `(* 10 -4))}	| @show{(code `(text "Good work!" 50 "red"))}
+|===
+
+}
+
 
 [.lesson-instruction]
 --

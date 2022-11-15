@@ -141,8 +141,8 @@
    ("pyret" "https://code.pyret.org/editor#share=1DBYGJDOlIARaWI3pBVzjPp6eewkQJGHW")
    )
 
-  ("bad-survey"  "Height vs. Wingspan Survey"
-   ("pyret" "https://docs.google.com/forms/d/e/1FAIpQLSfxv9sN_2P1Dxs500Cu5PxBniKHHUXX_2Ef5a_7RcE9GOKmwQ/viewform")
+  ("bad-survey"  "Height vs. Wingspan Survey (make a copy)"
+   ("pyret" "https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy")
    )
 
   ("dirty-data"  "New Animals! Starter File"
@@ -168,7 +168,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re")
    )
   ("boolean" "Boolean Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1CRRVBQ-D16b00MgOH6RA7I_OWousDUql")
+   ("pyret" "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV")
    )
   ("permutations-and-combinations"  "Permutations and Combinations Starter File"
@@ -256,7 +256,7 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ")
    )
   ("inequalities-compound" "Compound Inequalities Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=11M7tp22-lOwYK9jJD67mM_RP836ikARd")
+   ("pyret" "https://code.pyret.org/editor#share=1fKAwPsQ-WaVYVWyVQtgrkEd1jgfAUizN&v=22f3b65")
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=yFnDbsSnR7")
    )
   ("inequalities-sam" "Sam the Butterfly Starter File"

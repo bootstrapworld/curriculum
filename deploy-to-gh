@@ -1,0 +1,136 @@
+# last modified 2022-10-18
+
+# Set environment variables SEMESTER and YEAR to reflect where you want the
+# curriculum pages to be deployed on the server.
+
+SEMESTER=fall
+YEAR=2022
+
+############################################################################
+
+if test ! -d distribution; then
+  echo distribution/ not found; exit
+fi
+
+cd distribution
+
+export DISTDIR=$(pwd)
+
+test -d deployables && rm -fr deployables
+
+mkdir deployables
+
+ALL_THE_LANGS="en-us es-mx"
+
+for lang in $ALL_THE_LANGS; do
+  mkdir -p deployables/$lang/courses
+  mkdir -p deployables/$lang/lessons
+done
+
+SEMESTER_YEAR=$SEMESTER$YEAR
+
+export SED=sed
+
+(which gsed | grep -q .) && SED=gsed
+
+function correctgdriveurl_1() {
+  local f=$1
+  $SED -i -e '/href=/s/\(spring\|fall\)[0-9][0-9][0-9][0-9]/'$SEMESTER_YEAR'/g' $f
+}
+
+function correctgdriveurls() {
+  local d=$1
+  for f in $(find $d -name \*gdrive-import.shtml); do
+    correctgdriveurl_1 $f
+  done
+}
+
+function copyCourse() {
+  local dir=$1
+  for lang in $ALL_THE_LANGS; do
+    test -d $lang/courses/$dir || continue
+    cp -pr $lang/courses/$dir deployables/$lang/courses/$dir
+    correctgdriveurls deployables/$lang/courses/$dir
+  done
+}
+
+echo Creating distribution/deployables
+
+for lang in $ALL_THE_LANGS; do
+  if test -d $lang/extlib; then
+    cp -pr $lang/extlib deployables/$lang
+  fi
+  for f in $lang/*; do
+    if test -f $f; then
+      cp -p $f deployables/$lang
+    fi
+  done
+  if test -d $lang/lib; then
+    cp -pr $lang/lib deployables/$lang
+  fi
+  if test -d $lang/lessons; then
+    cp -pr $lang/lessons deployables/$lang
+    correctgdriveurls deployables/$lang/lessons
+  fi
+  if test -d $lang/courses; then
+    cp -pr $lang/courses deployables/$lang
+    correctgdriveurls deployables/$lang/courses
+  fi
+done
+
+echo Removing fluff from distribution/deployables
+
+for f in adoc asc asciidoc aux log rkt rkt.kp tex titletxt txt txt.kp DS_Store; do
+  find deployables -name \*.$f -delete
+done
+
+find deployables -name workbook-[A-Z]\*.pdf -delete
+find deployables -name workbook-sols-\*.pdf -delete
+find deployables -name pd-workbook-\*.pdf -delete
+find deployables -name wkh2p-tmp\* -delete
+
+find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
+
+find deployables -name __sample* -type d -exec rm -fr {} \; > /dev/null 2>&1
+
+find deployables -name zample* -type d -exec rm -fr {} \; > /dev/null 2>&1
+
+echo Password-protecting solution files
+
+export SHAW=c6554157433a94d84db9792fc3cf779b14956e59
+
+export PROGDIR=$DISTDIR/.prog-en-us
+
+find deployables -name solution-pages -type d | xargs $PROGDIR/password-protect-dirs.sh
+find deployables -name protected -type d | xargs $PROGDIR/password-protect-dirs.sh
+
+###########################
+
+# Set BOOTSTRAPWORLD_GITHUB_IO_DIR to the pathname of your clone of bootstrapworld.github.io.
+# If unset, script assumes ~/src/bootstrapworld.github.io
+
+if test -z "$BOOTSTRAPWORLD_GITHUB_IO_DIR"; then
+  BOOTSTRAPWORLD_GITHUB_IO_DIR=~/src/bootstrapworld.github.io
+fi
+
+DEPLOY_DIR=$BOOTSTRAPWORLD_GITHUB_IO_DIR/materials/$SEMESTER_YEAR
+
+echo Copying new pages to $DEPLOY_DIR
+
+mkdir -p $DEPLOY_DIR
+
+cp -pr deployables/* $DEPLOY_DIR
+
+# exit
+
+echo Pushing $DEPLOY_DIR to GitHub
+
+cd $DEPLOY_DIR
+
+for f in $(find . -name \* -type f); do
+  git add -- $f
+done
+
+git commit -a -m "..."
+
+git push origin $(git branch --show-current)

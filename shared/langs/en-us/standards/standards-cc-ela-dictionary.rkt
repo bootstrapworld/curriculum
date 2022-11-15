@@ -2,6 +2,7 @@
 
 (provide *cc-ela-standards-list*)
 
+    ;;;;;;;;;;;;;;;;;;;  Common Core ELA Standards ;;;;;;;;;;;;;;;;;;
 (define *cc-ela-standards-list*
   '(
     ; ELA Standards for grades 6-12
@@ -361,6 +362,7 @@
      )
     ("SL.9-10.1"
      "Initiate and participate effectively in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grades 9-10 topics, texts, and issues, building on others' ideas and expressing their own clearly and persuasively."
+     "ds-intro"
      )
     ("SL.9-10.1.A"
      "Come to discussions prepared, having read and researched material under study; explicitly draw on that preparation by referring to evidence from texts and other research on the topic or issue to stimulate a thoughtful, well-reasoned exchange of ideas."
