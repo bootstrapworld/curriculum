@@ -215,11 +215,11 @@
        )
       ("OK.G.3D.1.1"
        "Solve real-world and mathematical problems
-       "surface-area-rect-prism"
        using the surface area and volume of prisms, cylinders,
        pyramids, cones, spheres, and composites of these
        figures. Use nets, measuring devices, or formulas as
        appropriate."
+       "surface-area-rect-prism"
        )
        ("OK.G.RT.1.1"
         "Apply the distance formula and the Pythagorean Theorem and its
