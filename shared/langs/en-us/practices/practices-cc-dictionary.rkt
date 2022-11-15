@@ -3,32 +3,144 @@
 (provide *cc-practices-list*)
 
 (define *cc-practices-list*
-'(
- ; Common Core Standards for Mathematical Practice
- ("MP.1"
-  "Make sense of problems and persevere in solving them"
-  )
- ("MP.2"
-  "Reason abstractly and quantitatively"
-  )
- ("MP.3"
-  "Construct viable arguments and critique the reasoning of others"
-  )
- ("MP.4"
-  "Model with mathematics"
-  )
- ("MP.5"
-  "Use appropriate tools strategically"
-  )
- ("MP.6"
-  "Attend to precision"
-  )
- ("MP.7"
-  "Look for and make use of structure"
-  )
- ("MP.8"
-  "Look for and express regularity in repeated reasoning"
- )
+  '(
+    ; Common Core Standards for Mathematical Practice
+    ("MP.1"
+     "Make sense of problems and persevere in solving them"
+     "problem-decomposition"
+     "order-of-operations"
+     "inequalities2-compound"
+     "inequalities1-simple"
+     "function-composition"
+     "functions-dr"
+     "function-definition-linear"
+     "functions-can-be-linear"
+     "flags"
+     "functions-dr"
+     )
 
-))
- 
+    ("MP.2"
+     "Reason abstractly and quantitatively"
+     "scatter-plots"
+     "random-samples"
+     "grouped-samples"
+     "choosing-your-dataset"
+     "order-of-operations"
+     "numbers-inside-video-games"
+     "functions-for-character-animation"
+     "function-definition-linear"
+     "functions-can-be-linear"
+     "functions-vertical-line-test"
+     "flags"
+     "error-analysis"
+     "distance-formula"
+     "defining-values"
+     "coordinates"
+     )
+
+    ("MP.3"
+     "Construct viable arguments and critique the reasoning of others"
+     "threats-to-validity"
+     "standard-deviation"
+     "box-plots"
+     "measures-of-center"
+     "grouped-samples"
+     "ethics-privacy-and-bias"
+     "ds-intro"
+     "data-collection"
+     "correlations"
+     "checking-your-work"
+     "problem-decomposition"
+     "player-animation"
+     "order-of-operations"
+     "inequalities-collision"
+     "function-definition-linear"
+     "distance-formula"
+     "functions-dr"
+     )
+
+    ("MP.4"
+     "Model with mathematics"
+     "table-methods"
+     "standard-deviation"
+     "box-plots"
+     "linear-regression"
+     "histograms2"
+     "histograms"
+     "correlations"
+     "surface-area-rect-prism"
+     "problem-decomposition"
+     "player-animation"
+     "order-of-operations"
+     "numbers-inside-video-games"
+     "inequalities3-sam"
+     "inequalities1-simple"
+     "functions-for-character-animation"
+     "function-notation"
+     "functions-vertical-line-test"
+     "flags"
+     "combinatorics-combination"
+     "combinatorics-permutation"
+     "functions-dr"
+     "codap-transformers"
+     )
+
+    ("MP.5"
+     "Use appropriate tools strategically"
+     "bar-and-pie-charts"
+     "data-cycle"
+     "data-collection"
+     "choosing-your-dataset"
+     "function-composition"
+     "function-definition-linear"
+     "functions-can-be-linear"
+     )
+
+    ("MP.6"
+     "Attend to precision"
+     "method-chaining"
+     "bar-and-pie-charts"
+     "defining-table-functions"
+     "data-cycle"
+     "problem-decomposition"
+     "player-animation"
+     "making-game-images"
+     "inequalities1-simple"
+     "function-notation"
+     "flags"
+     "simple-data-types"
+     "functions-examples-definitions"
+     "functions-make-life-easier"
+     "debugging"
+     )
+
+    ("MP.7"
+     "Look for and make use of structure"
+     "lookups"
+     "custom-scatter-plots"
+     "functions-dr"
+     "function-definition-linear"
+     "functions-can-be-linear"
+     "function-notation"
+     "flags"
+     "defining-values"
+     "combinatorics-combination"
+     "combinatorics-permutation"
+     "functions-dr"
+     "functions-examples-definitions"
+     "functions-make-life-easier"
+     )
+
+    ("MP.8"
+     "Look for and express regularity in repeated reasoning"
+     "piecewise-functions-conditionals"
+     "defining-table-functions"
+     "functions-vertical-line-test"
+     "flags"
+     "defining-values"
+     "functions-examples-definitions"
+     "functions-make-life-easier"
+     )
+
+    ))
+

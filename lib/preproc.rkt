@@ -7,16 +7,13 @@
 (require "common-defines.rkt")
 (require "create-copyright.rkt")
 (require "create-acknowledgment.rkt")
-;(require "create-workbook-links.rkt")
+(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "glossary-terms.rkt")
 (require "standards/the-standards-dictionaries.rkt")
-(require "practices/the-practices-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
-(require "standards/standards-and-lessons.rkt")
-(require "textbooks/textbooks-and-lessons.rkt")
-(require "practices/practices-and-lessons.rkt")
+(require "practices/the-practices-dictionaries.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -1547,22 +1544,20 @@
       ;
       (when *lesson-plan*
 
-        (for ([ss-ll *standards-and-lessons*])
-          (let ([ss (first ss-ll)] [ll (rest ss-ll)])
-            (unless (list? ss) (set! ss (list ss)))
-            (when (member *lesson-plan-base* ll)
-              (for ([s ss])
-                (add-standard s #f *lesson-plan* #f)))))
+        (for ([i *standards-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-standard (first j) #f *lesson-plan* #f))))
 
-        (for ([t-ll *textbooks-and-lessons*])
-          (let ([t (first t-ll)] [ll (rest t-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-textbook-chapter t #f *lesson-plan* #f))))
+        (for ([i *textbooks-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-textbook-chapter (first j) #f *lesson-plan* #f))))
 
-        (for ([p-ll *practices-and-lessons*])
-          (let ([p (first p-ll)] [ll (rest p-ll)])
-            (when (member *lesson-plan-base* ll)
-              (add-practice p #f *lesson-plan* #f))))
+        (for ([i *practices-list*])
+          (for ([j (third i)])
+            (when (member *lesson-plan-base* (rest (rest j)))
+              (add-practice (first j) #f *lesson-plan* #f))))
 
         )
       ;
@@ -1760,7 +1755,7 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
-                            (print-ordering-workbooks *target-pathway* o)]
+                            (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
                             (create-alignments-subfile
                               (string-append *containing-directory* "/.cached/.pathway-alignments"))
@@ -2091,7 +2086,7 @@
                 (link-to-lessons-in-pathway o)
                 (create-alignments-subfile
                   (string-append *containing-directory* "/.cached/.pathway-alignments"))
-                (print-ordering-workbooks *target-pathway* o)
+                (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-other-resources o))
@@ -2287,10 +2282,9 @@
     ; (link-to-opt-projects o)
 
     (unless (null? exx)
-      ; FIXME: should make this natlang-dependent
-      (display "\n\nMost exercises are part of the **link:../workbook/workbook.pdf[Student Workbook]**,\n" o)
-      (display "and we provide password-protected **link:./protected/workbook-sols.pdf.html[Workbook Solutions]** as well.\n\n" o)
-      (display "You can find the 'exercise' and 'solution' versions of all supplemental materials as well, in the lists below.\n\n" o)
+      (display "\n\n" o)
+      (display (create-workbook-links) o)
+      (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
         ; (printf "lsn-exx is ~s\n" lsn-exx)

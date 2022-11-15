@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-01 # last modified
+LASTMOD=2022-11-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -237,11 +237,11 @@ function checkmd5nochange() {
   test -d $distDir/.cached || mkdir -p $distDir/.cached
   local savef=$distDir/.cached/.checksum.md5txt
   local currdir=$(pwd)
-  cd $repoDir
-  newchecksum=$(find . -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
-  cd $currdir
+  cd "$repoDir"
+  local newchecksum=$(find . -type f -exec $MDV {} \; | $MDV | cut -d " " -f 1)
+  cd "$currdir"
   if test -f $savef; then
-    savedchecksum=$(cat $savef)
+    local savedchecksum=$(cat $savef)
     if test "$newchecksum" = "$savedchecksum"; then
       return 0
     else
@@ -290,6 +290,16 @@ function overwrite() {
     echo $'\e[1A\e[K\033[?7l'$@
   fi
 }
+
+# check for repartee, and copy to the lesson folder if it is in node_modules
+if test -d $TOPDIR/node_modules; then
+  if test -d lessons/hoc-winter-parley/langs/$NATLANG/repartee; then
+    rm -r lessons/hoc-winter-parley/langs/$NATLANG/repartee
+  fi
+  if test -d lessons/hoc-winter-parley/langs/$NATLANG; then
+    $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+  fi
+fi
 
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
   if test -d $TOPDIR/node_modules; then
@@ -474,7 +484,7 @@ function adjustgdrivecolgroup() {
       -e "$flnum s/^<th /<th%GDRIVE $cline /" \
       $f
 
-    i=$(expr $i + 1)
+    i=$((i + 1))
 
   done
 
@@ -582,7 +592,7 @@ function insertsectionselfie() {
 function lintlesson() {
   local f=$1
 
-  containingFile=${f%.shtml}.adoc
+  local containingFile=${f%.shtml}.adoc
 
   test $LINT || return
 
@@ -807,12 +817,14 @@ function adjustproglangsubdirs() {
     $CP -p "$d"/"$pl"/* "$d"
   fi
 
+  local lang
   for lang in codap pyret wescheme; do
     if test -d "$d"/$lang; then
       rm -fr "$d"/$lang
     fi
   done
 
+  local subdir
   for subdir in "$d"/*; do
     if test -d "$subdir"; then
       adjustproglangsubdirs "$subdir" "$pl"
@@ -828,10 +840,10 @@ function shadowcopydir() {
   #echo doing shadowcopydir from $srcdir to $targetdir
   mkdir -p "$targetdir"
 
+  local f g
   for f in "$srcdir"/*; do
     if test -f "$f"; then
       g=$(basename "$f")
-      targetfile="$targetdir/$g"
       $CP -p "$f" "$targetdir"
     elif test -d "$f"; then
       g=$(basename "$f")
@@ -918,14 +930,15 @@ function doadocs() {
 
   overwrite building  /$LESSONSUBDIR
 
-  otherdirarg="#f"
-  solutionsmodearg="#f"
-  boilerplate="#f"
+  local otherdirarg="#f"
+  local solutionsmodearg="#f"
+  local boilerplate="#f"
 
   test $OTHERDIR && otherdirarg="#t"
   test $SOLUTION && solutionsmodearg="#t"
   test $BOILERPLATE && boilerplate="#t"
 
+  local f
   for f in $ff; do
     # echo f is $f
     if test $PATHWAYINDEPENDENT; then
@@ -957,6 +970,7 @@ function processadocs() {
 
   local ff=
 
+  local f
   for f in *.adoc; do
     if test ! -f $f; then
       #echo Not a valid adoc file $f in $(pwd)
@@ -967,10 +981,10 @@ function processadocs() {
       rm "$f"
       continue
     fi
-    DOIT=
-    fbase=${f%.adoc}
-    fhtml=$fbase.html
-    fasc=.cached/.$fbase.asc
+    local DOIT=
+    local fbase=${f%.adoc}
+    local fhtml=$fbase.html
+    local fasc=.cached/.$fbase.asc
     if test $FORCE; then
       DOIT=1
     else
@@ -981,7 +995,7 @@ function processadocs() {
       fi
     fi
     if test $DOIT; then
-      fpdf=$fbase.pdf
+      local fpdf=$fbase.pdf
       # unfortunately following doesn't work if repo supplies both f.adoc and f.pdf
       # test -f "$fpdf" && rm -f "$fpdf"
       ff="$ff $f"
@@ -993,22 +1007,25 @@ function processadocs() {
 
   if test ! $NOPDF; then
     local tryhtml=
+    local ext
     for ext in adoc html; do
       if test "$ext" = html; then
         test ! $tryhtml && break
       fi
+      local f
       for f in *.$ext; do
         if test ! -f "$f"; then
           test "$ext" = adoc && tryhtml=1
           break
         fi
+        local fbase
         if test "$ext" = adoc; then
           fbase=${f%.adoc}
         else
           fbase=${f%.html}
         fi
-        fhtml=$fbase.html
-        fpdf=$fbase.pdf
+        local fhtml=$fbase.html
+        local fpdf=$fbase.pdf
         #echo doadocs LESSONSUBDIR is $LESSONSUBDIR, $fhtml
         if test ! -f "$fpdf"; then
           if test "$PATHWAYINDEPENDENT"; then
@@ -1055,6 +1072,7 @@ function recursiveadoc() {
 
   #echo LESSONSUBDIR is $LESSONSUBDIR
 
+  local d
   for d in *; do
     if test -d "$d"; then
       #echo recursively calling recursivadoc
@@ -1075,9 +1093,10 @@ function recursiveadoc() {
   if test $LINT; then
     if test ! $OTHERDIR; then
       if test -f .cached/.workbook-pages-ls.txt.kp; then
+        local wbp
         for wbp in $(cat .cached/.workbook-pages-ls.txt.kp); do
           if test ! -f $wbp; then
-            wbpadoc=${wbp%.*}.adoc
+            local wbpadoc=${wbp%.*}.adoc
             if test ! -f $wbpadoc; then
               BROKEN_WORKBOOK_PAGES=1
               echo
@@ -1130,6 +1149,7 @@ function mkdirsolutionversion() {
 function checksinglelessonplan() {
   local L=$1
   local copacetic=1
+  local f
   for f in *.adoc; do
     if test ! -f $f; then
       copacetic=
@@ -1208,7 +1228,7 @@ function addToPuppeteer() {
   #   exerflist=/dev/null
   # fi
 
-    local tryhtml=
+    local tryhtml= ext f g fpdf fhtml aspect
     for ext in adoc html; do
       if test "$ext" = html; then
         test ! $tryhtml && break
@@ -1261,10 +1281,14 @@ function buildworkbookpages() {
   local L=$1
   local oldPROGLANG="$PROGLANG"
 
+  # echo doing buildworkbookpages $L
+
+  local f pl d
+
   if test "$PROGLANG" != all; then
     for f in $L/.cached/.proglang-*; do
       if test -f "$f"; then
-        local pl=${f##*.proglang-}
+        pl=${f##*.proglang-}
         test "$PROGLANG" = "$pl" || return
       fi
     done
@@ -1272,7 +1296,7 @@ function buildworkbookpages() {
     export PROGLANG=pyret
     for f in $L/.cached/.proglang-*; do
       if test -f "$f"; then
-        local pl=${f##*.proglang-}
+        pl=${f##*.proglang-}
         export PROGLANG=$pl
       fi
     done
@@ -1304,23 +1328,25 @@ function buildworkbookpages() {
 
   # echo calling mkdirsolutionversion in buildworkbookpages
   mkdirsolutionversion
+  fi
 
   addToPuppeteer
 
-  #
-  export PATHWAYROOTDIR="../../"
-  export DISTROOTDIR="$DISTROOTDIR../"
-  export SOLUTION=
-  export WORKBOOKPAGE=1
+  if test $DORECURSIVEADOC; then
+    #
+    export PATHWAYROOTDIR="../../"
+    export DISTROOTDIR="$DISTROOTDIR../"
+    export SOLUTION=
+    export WORKBOOKPAGE=1
 
-  for d in *; do
-    if test -d "$d"; then
-      #echo calling recursiveadoc from buildworkbookpages
-      recursiveadoc "$d" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
-    fi
-  done
+    for d in *; do
+      if test -d "$d"; then
+        #echo calling recursiveadoc from buildworkbookpages
+        recursiveadoc "$d" "$PATHWAYROOTDIR" "$DISTROOTDIR" "$LESSONSUBDIR"
+      fi
+    done
 
-  export WORKBOOKPAGE=
+    export WORKBOOKPAGE=
 
   fi
 
@@ -1347,11 +1373,12 @@ function collapseadjtables() {
 function buildlessonplan() {
   local L=$1
   local oldPROGLANG="$PROGLANG"
+  local f pl
 
   if test "$PROGLANG" != all; then
     for f in $L/.cached/.proglang-*; do
       if test -f "$f"; then
-        local pl=${f##*.proglang-}
+        pl=${f##*.proglang-}
         test "$PROGLANG" = "$pl" || return
       fi
     done
@@ -1359,7 +1386,7 @@ function buildlessonplan() {
     export PROGLANG=pyret
     for f in $L/.cached/.proglang-*; do
       if test -f "$f"; then
-        local pl=${f##*.proglang-}
+        pl=${f##*.proglang-}
         export PROGLANG=$pl
       fi
     done
@@ -1414,7 +1441,7 @@ function buildcommonlessons() {
   cd $DESTLANGDIR
   cd lessons
   export DISTROOTDIR=../
-  local L
+  local L d
   # process lesson directories in parallel
   if test -f $RELEVANT_LESSONS_INPUT; then
     for L in $(cat $RELEVANT_LESSONS_INPUT); do
@@ -1475,9 +1502,10 @@ function builddependencyjson() {
   # echo doing builddependencyjson "$@"
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
-  GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
+  local GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
   echo "var graph = {" > $GRAPHFILE
-  first=1
+  local first=1
+  local L Lbasename titletxt desctxt pagestxt exerpagestxt primstxt pfirst
   for L in *; do
     # echo try proglangversion $L
     if ! proglangversion $L; then
@@ -1559,7 +1587,7 @@ function builddependencyjson() {
 
 function buildlessonplans() {
   # echo %%% doing buildlessonplans
-  start=`date +%s`
+  local start=`date +%s` end runtime
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
   local L
@@ -1584,9 +1612,7 @@ function collectprimitives() {
 
   cd $TOPDIR/distribution/$NATLANG/lessons
 
-  local L
-  local copacetic
-  local f
+  local L copacetic f
 
   if test -f $RELEVANT_LESSONS_INPUT; then
     for L in $(cat $RELEVANT_LESSONS_INPUT); do
@@ -1614,6 +1640,7 @@ function collectprimitives() {
 function buildpathwaynarrative() {
   # echo doing buildpathwaynarrative $PWD
   export AUTOGEN_NARRATIVE=1
+  local f
   if test ! -f index.adoc; then
     for f in *.adoc; do
       if test -f $f; then
@@ -1655,8 +1682,6 @@ function makeworkbookjson() {
 
   local WORKBOOKINPUT=$TOPDIR/distribution/$NATLANG/courses/$tgtpathway/.cached/.filelist
 
-  local filesvar=
-
   local wbpnf=
   local includesolutions=
   local includeoptexercises=
@@ -1670,28 +1695,6 @@ function makeworkbookjson() {
     wbpnf=.cached/.opt-exercises-index.rkt
   else
     wbpnf=.cached/.workbook-long-page-index.rkt
-  fi
-
-  if test "$tgt" = workbook; then
-    filesvar=workbookFiles
-  #elif test "$tgt" = pd-workbook; then
-  #  filesvar=pdWorkbookFiles
-  #elif test "$tgt" = pd-workbook-long; then
-  #  filesvar=pdWorkbookLongFiles
-  elif test "$tgt" = bm-contracts; then
-    filesvar=bmContractsFiles
-  elif test "$tgt" = bm-contracts-sols; then
-    filesvar=bmContractsSolsFiles
-  elif test "$tgt" = workbook-sols; then
-    filesvar=workbookSolsFiles
-  elif test "$tgt" = workbook-long; then
-    filesvar=workbookLongFiles
-  elif test "$tgt" = workbook-long-sols; then
-    filesvar=workbookLongSolsFiles
-  elif test "$tgt" = opt-exercises; then
-    filesvar=optExercisesFiles
-  elif test "$tgt" = opt-exercises-sols; then
-    filesvar=optExercisesSolsFiles
   fi
 
   if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
@@ -1708,6 +1711,8 @@ function makeworkbookjson() {
   echo "{ \"fileList\": [ \"ignoreElement\" " > $WORKBOOKINPUT-$tgt.json
 
   local currlesson=
+  local pdfpagespec lessondir workbookpage aspect pageno freshlesson
+  local docfile docfileext htmlfile localpdffile
 
   cat $wbpnf |
     while read -r pdfpagespec; do
@@ -1799,6 +1804,7 @@ function buildteacherresource() {
   #$CP -p $PROGDIR/*.css $PROGDIR/.hta* .
   # $CP -p $PROGDIR/.hta* .
   local copacetic=1
+  local f
   if test ! -f index.adoc; then
     for f in *.adoc; do
       if test ! -f $f; then copacetic=
@@ -1827,7 +1833,6 @@ function buildteacherresource() {
       rm -f .cached/.index-comment.txt
       test $EXPANDEDWARNINGS || echo -n $'\033[?7h'
       doadoc index.adoc
-      #$PROGDIR/adoc-preproc.rkt index.adoc
       export TEACHER_RESOURCES=
     fi
     #checklinks index.shtml
@@ -1849,7 +1854,7 @@ function batchhtmltopdf() {
 
   # use --trace-warnings to debug
 
-  start=`date +%s`
+  local start=`date +%s` end runtime
   echo 🖨️ CONVERTING HTML PAGES TO PDF FILES
   echo $'-----------------------------------------------------------\n'
   if grep -q input $PUPPETEER_INPUT; then
@@ -1862,6 +1867,7 @@ function batchhtmltopdf() {
 }
 
 function rmtmpfilesaux() {
+  local f
 
   for f in aux log rkt tex title; do
     find . -name \*.$f -delete
@@ -1881,6 +1887,8 @@ function rmtmpfiles() {
   #echo doing rmtmpfiles
 
   cd $TOPDIR/distribution/$NATLANG
+
+  local d
 
   if test -d lessons; then
     cd lessons
@@ -1905,34 +1913,39 @@ function rmtmpfiles() {
 }
 
 function copylessondir() {
-  lessonDir=$1
+  local repoDir=$1
+  test -z "$repoDir" && return
+  test -d "$repoDir" || return
+  local lessonDir=${repoDir#*lessons/}
+  lessonDir=${lessonDir#*/}
   # echo doing copylessondir $lessonDir in $(pwd)
-  local repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/$NATLANG
-  if test ! -d $repoLessonDir -a $NATLANG != en-us; then
-    repoLessonDir=$TOPDIR/lessons/$lessonDir/langs/en-us
+  local repoLessonDir="$repoDir"/langs/$NATLANG
+  if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
+    repoLessonDir="$repoDir"/langs/en-us
   fi
 
   # echo repoLessonDir is $repoLessonDir
   test -d "$repoLessonDir" || return
 
-  test $FORCE && rm -fr $lessonDir
+  test $FORCE && rm -fr "$lessonDir"
 
-  mkdir -p $lessonDir
+  mkdir -p "$lessonDir"
   #echo $repoLessonDir is a diry
-  DOCOPYDIR=1
+  local DOCOPYDIR=1
   #echo calling checkmd5nochange $lessonDir $repoLessonDir
-  if checkmd5nochange $lessonDir $repoLessonDir; then
+  if checkmd5nochange "$lessonDir" "$repoLessonDir"; then
     #echo $lessonDir doesnt need copying
     DOCOPYDIR=
   fi
   #echo checkmd5nochange done
 
+  local subdir
   if test $DOCOPYDIR; then
     #echo do copydir into $(pwd)
     overwrite preparing $lessonDir
-    find $lessonDir/solution-pages -name \*.adoc -delete 2>/dev/null
-    $CP -pr $repoLessonDir/* $lessonDir
-    cd $lessonDir
+    find "$lessonDir"/solution-pages -name \*.adoc -delete 2>/dev/null
+    $CP -pr "$repoLessonDir"/* "$lessonDir"
+    cd "$lessonDir"
     #echo I currently in $(pwd)
     # we'll set it again when we do the adoc'ing
     mkdir -p .cached
@@ -1944,7 +1957,7 @@ function copylessondir() {
     test -d pages || mkdir pages
     for subdir in *; do
       if test "$subdir" = pages -o "$subdir" = solution-pages; then
-        test -d $subdir/.cached || mkdir $subdir/.cached
+        test -d "$subdir"/.cached || mkdir "$subdir"/.cached
       fi
     done
     cd ..
@@ -1952,24 +1965,25 @@ function copylessondir() {
 
   local proglangs=pyret
   local firstproglang=pyret
-  if test -f $lessonDir/proglang.txt; then
-    proglangs=$(cat $lessonDir/proglang.txt)
+  if test -f "$lessonDir"/proglang.txt; then
+    proglangs=$(cat "$lessonDir"/proglang.txt)
     firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   fi
   if test "$firstproglang" = pyret; then
-    touch $lessonDir/.cached/.primarylesson
+    touch "$lessonDir"/.cached/.primarylesson
   fi
 
   local lessonDirPl=
+  local pl
   for pl in $proglangs; do
-    lessonDirPl=$lessonDir
+    lessonDirPl="$lessonDir"
     if test "$pl" != pyret; then
-      lessonDirPl=$lessonDir-$pl
-      if test -n "$DOCOPYDIR" -o ! -d $lessonDirPl; then
-        mkdir -p $lessonDirPl
-        find $lessonDirPl/solution-pages -name \*.adoc -delete 2>/dev/null
-        $CP -pr $repoLessonDir/* $lessonDirPl
-        cd $lessonDirPl
+      lessonDirPl="$lessonDir"-$pl
+      if test -n "$DOCOPYDIR" -o ! -d "$lessonDirPl"; then
+        mkdir -p "$lessonDirPl"
+        find "$lessonDirPl"/solution-pages -name \*.adoc -delete 2>/dev/null
+        $CP -pr "$repoLessonDir"/* "$lessonDirPl"
+        cd "$lessonDirPl"
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
@@ -1980,13 +1994,13 @@ function copylessondir() {
         test -d pages || mkdir pages
         for subdir in *; do
           if test "$subdir" = pages -o "$subdir" = solution-pages; then
-            test -d $subdir/.cached || mkdir $subdir/.cached
+            test -d "$subdir"/.cached || mkdir "$subdir"/.cached
           fi
         done
         cd ..
       fi
     fi
-    cd $lessonDirPl
+    cd "$lessonDirPl"
     for subdir in *; do
       if test -d "$subdir"; then
         adjustproglangsubdirs "$subdir" "$pl"
@@ -1997,15 +2011,15 @@ function copylessondir() {
 
   for pl in $proglangs; do
     if test "$pl" = pyret; then
-      lessonDirPl=$lessonDir
+      lessonDirPl="$lessonDir"
     else
-      lessonDirPl=$lessonDir-$pl
+      lessonDirPl="$lessonDir"-$pl
     fi
-    if test -d $lessonDirPl; then
+    if test -d "$lessonDirPl"; then
       if test "$PROGLANG" = "$pl" -o "$PROGLANG" = all; then
         echo $lessonDirPl >> $RELEVANT_LESSONS_INPUT
-        cd $lessonDirPl
-        checklessonplan $lessonDirPl
+        cd "$lessonDirPl"
+        checklessonplan "$lessonDirPl"
         cd ..
       fi
     fi
@@ -2013,8 +2027,22 @@ function copylessondir() {
   #echo done copylessondir
 }
 
+function copylessonrecdir() {
+  local d=$1
+  if test -d "$d"/langs; then
+    copylessondir "$d"
+  else
+    local sd
+    for sd in "$d"/*; do
+      if test -d "$sd"; then
+        copylessonrecdir "$sd"
+      fi
+    done
+  fi
+}
+
 function collectworkbookpages() {
-  d="$1"
+  local d="$1"
   test ! -d "$d" && return
   # echo doing collectworkbookpages $d in $(pwd)
   cd "$d"
@@ -2027,6 +2055,7 @@ function collectworkbookpages() {
 
     touch .cached/.workbook-pages-ls.txt.kp
 
+    local f aspect g
     if test -f workbook-pages.txt; then
       #ensure workbook-pages.txt ends in newline, or while isn't happy
       $SED -i -e '$a\' workbook-pages.txt
@@ -2092,6 +2121,7 @@ function checkworkbookpagesalsoexercises() {
 
   # echo doing checkworkbookpagesalsoexercises in $(pwd)
 
+  local f
   for f in $(cat .cached/.workbook-pages-ls.txt.kp); do
     if echo "$f"|grep -q '^notes-'; then continue; fi
     if test "$f" = whats-on-your-mind.adoc; then continue; fi
@@ -2119,6 +2149,7 @@ function buildpathwayworkbooks() {
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
 
   cd resources/protected
+  local f
   for f in workbook-sols workbook-long-sols opt-exercises-sols; do
     $CP -p $PROGDIR/redirect.html $f.pdf.html
     $SED -i \
@@ -2130,7 +2161,7 @@ function buildpathwayworkbooks() {
 
 function copycommonlessons() {
   # echo doing copycommonlessons
-  start=`date +%s`
+  local start=`date +%s` end runtime
   echo 📁 PREPARING LESSONS
   echo $'-----------------------------------------------------------\n'
 
@@ -2145,20 +2176,22 @@ function copycommonlessons() {
   #echo currently in $(pwd)
 
   # TODO(Dorai): check if these calls can be parallelized
+  local lessonDir
   if test $NOARGSGIVEN; then
     for lessonDir in $TOPDIR/lessons/*; do
-      lessonDir=${lessonDir#*lessons/}
-      copylessondir $lessonDir
+      copylessonrecdir "$lessonDir"
     done
   else
+    local pwy lessonOrderFile repoDir
     for pwy in $ARGS; do
-      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
+      lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
       if test -f $lessonOrderFile; then
         for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/\(;\|\/\/\).*//'|grep -v '^ *$'); do
-          copylessondir $lessonDir
+          repoDir=$(find $TOPDIR/lessons -type d -name $lessonDir)
+          copylessondir $repoDir
         done
       fi
     done
@@ -2177,7 +2210,7 @@ function buildpathwayindependent() {
 
   test $NOARGSGIVEN || return
 
-  start=`date +%s`
+  local start=`date +%s` end runtime
   echo 📁 PREPARED PATHWAY-INDEPENDENT
   echo $'-----------------------------------------------------------\n'
 
@@ -2196,6 +2229,7 @@ function buildpathwayindependent() {
   export DISTROOTDIR=../
   export LESSONSUBDIR=.
 
+  local f
   for f in *; do
     if test -d "$f"; then
       if test $(echo $f|grep "^\(lessons\|courses\|lib\|extlib\)$"); then
@@ -2221,6 +2255,7 @@ function buildworkbookjsons() {
   if test $BOOK; then
     #for wbf in workbook pd-workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
     #  pd-workbook-long workbook-long-sols opt-exercises opt-exercises-sols ; do
+    local wbf
     for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
       workbook-long-sols opt-exercises opt-exercises-sols ; do
           if test $NOPARALLEL; then
@@ -2241,7 +2276,7 @@ function updatepathwaylist() {
   test -f lesson-order.txt || return
   rm -f lesson-order.txt.nu
   touch lesson-order.txt.nu
-  local lessonDir=
+  local lessonDir
   for lessonDir in $(cat lesson-order.txt|grep -v '^ *;'|$SED -e 's/;.*//'|grep -v '^ *$'); do
     if test -d ../../lessons/$lessonDir-$proglang; then
       echo $lessonDir-$proglang >> lesson-order.txt.nu
@@ -2253,17 +2288,17 @@ function updatepathwaylist() {
 }
 
 function buildpathway() {
-  start=`date +%s`
+  local start=`date +%s` end runtime
   # echo doing buildpathway $TGTPATHWAY using $PROGLANG
   cd $TOPDIR
 
-  PATHWAY=$TGTPATHWAY
+  local PATHWAY=$TGTPATHWAY
 
   export LESSONSUBDIR=.
   export SOLUTION=
   export BROKEN_WORKBOOK_PAGES=
 
-  langicon=💀
+  local langicon=💀
 
   if test "$PROGLANG" = wescheme; then
     langicon=🥾
@@ -2293,8 +2328,8 @@ function buildpathway() {
 
     mkdir -p $DESTPATHWAYDIR
 
-    repoDir="$TOPDIR/$pwydir"
-    distDir="$TOPDIR/$DESTPATHWAYDIR"
+    local repoDir="$TOPDIR/$pwydir"
+    local distDir="$TOPDIR/$DESTPATHWAYDIR"
 
     if ! checkmd5nochange $DESTPATHWAYDIR $repoDir; then
       # echo copying pathway I $repoDir
@@ -2311,9 +2346,9 @@ function buildpathway() {
 
     # echo copy pathway $SRCPATHWAY done
 
-    REFRESHFRONTMATTER=1
-    REFRESHBACKMATTER=1
-    REFRESHRESOURCES=1
+    local REFRESHFRONTMATTER=1
+    local REFRESHBACKMATTER=1
+    local REFRESHRESOURCES=1
 
     test -d $repoDir/front-matter || REFRESHFRONTMATTER=
     test -d $repoDir/back-matter || REFRESHBACKMATTER=
@@ -2388,18 +2423,11 @@ function buildpathway() {
       cd resources
       test -d pages || mkdir -p pages
       mkdirsolutionversion
-      for d in *; do
-        if test -d $d; then
-          cd $d
-          mkdirsolutionversion
-          cd ..
-          #adjustproglangsubdirs $d
-        fi
-      done
       cd ..
       adjustproglangsubdirs resources $PROGLANG
     fi
 
+    local d
     for d in front-matter back-matter; do
       collectworkbookpages "$d"
     done
@@ -2519,9 +2547,10 @@ function buildpathway() {
 function buildpathwaytocs() {
   cd $TOPDIR/distribution/$NATLANG/courses
   export DISTROOTDIR=../
-  TOCSFILE=$TOPDIR/distribution/$NATLANG/pathway-tocs.js
+  local TOCSFILE=$TOPDIR/distribution/$NATLANG/pathway-tocs.js
   echo "var pathwayTocs = {" > $TOCSFILE
-  first=1
+  local first=1
+  local C
   for C in *; do
     if test $first; then
       first=
@@ -2542,10 +2571,10 @@ function buildpathwaytocs() {
 function allthealignments() {
   cd $TOPDIR
   cd distribution/$NATLANG
-  export LANGROOTDIR=./
 #   echo doing allthealignments in $(pwd)
   test -d .cached || mkdir -p .cached
   rm -f .cached/.all-standards.txt
+  local d db f
   for d in courses/*; do
     test -d $d || continue
     db=${d%/}
@@ -2757,6 +2786,7 @@ function run_postproc() {
   # echo '-----------------------------------------------------------'
   rm -f $bigfile-split*
   split -l $MAXBASHTHREADS $bigfile $bigfile-split
+  local smallfile fhtml
   for smallfile in $bigfile-split*; do
     if test -s "$smallfile"; then
       for fhtml in $(cat $smallfile); do
@@ -2781,7 +2811,7 @@ function doadocpostproc() {
   #echo doing doadocpostproc
   cd $TOPDIR/distribution/$NATLANG
 
-  start=`date +%s`
+  local start=`date +%s` end runtime
   echo 👨‍💻CALLING ASCIIDOCTOR IN BATCH MODE
   echo '-----------------------------------------------------------'
   if test -s $ADOC_INPUT; then
@@ -2829,6 +2859,7 @@ function rmadocfiles() {
 
   test -s $ADOC_INPUT || return
 
+  local f g
   for f in $(cat $ADOC_INPUT); do
     g=$(echo $f|$SED -e 's/\.cached\/\.//' -e 's/\.asc$/.adoc/')
     test -f $g && rm $g
@@ -2850,7 +2881,7 @@ function createabyss() {
 
 function doconversions() {
   #echo doing doconversions
-  start=`date +%s`
+  local start=`date +%s` end runtime
   cd $TOPDIR/distribution/$NATLANG
 
   echo 👨‍💻CALLING RACKET IN BATCH MODE
@@ -2930,6 +2961,7 @@ function callonARGS() {
 
   export SUBROUTINE=$1
 
+  local f
   for f in $ARGS; do
     # echo doing callonARGS $f
     export SRCPATHWAY=$f
