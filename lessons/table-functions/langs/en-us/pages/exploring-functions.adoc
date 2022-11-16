@@ -2,27 +2,6 @@
 
 Make sure you've opened the @starter-file{table-functions} on your computer, and clicked "Run".
 
-== Sorting Rows
-@n What does `sort(animals-table, "name", true)` evaluate to?
-
-@fitb{}{@ifsoln{Rows of the table, sorted alphabetically by name from A-Z}}
-
-@n What does `sort(animals-table, "age", false)` evaluate to?
-
-@fitb{}{@ifsoln{Rows of the table, sorted alphabetically by name from Z-A}}
-
-@n Sort the animals table from heaviest to lightest.
-
-@n Sort the animals table alphabetically by _species_.
-
-@n Sort the animals table by how long it took for each animal to be adopted, from longest to shortest adoption time.
-
-@n What do `sort` and `row-n` have in common? How are they different?
-
-@fitb{}{@ifsoln{Both are functions that work on tables. `sort` takes a Table, a column name and a Boolean, and `row-n` takes a Table and an index}}
-
-@fitb{}{}
-
 == Filtering Rows
 @n What does `filter(animals-table, lookup-fixed)` evaluate to?
 
@@ -38,11 +17,18 @@ Make sure you've opened the @starter-file{table-functions} on your computer, and
 
 @fitb{}{@ifsoln{They all produce Booleans}}
 
-@n What happens if you evaluate `filter(animals-table, lookup-name)`? @fitb{}{@ifsoln{Error}}
+@n Find the contract for `filter` in your Contracts page. Explain how `filter` uses the two inputs specified in the Domain.
 
-@n Find the Contract for `filter`. What is its Domain? @fitb{}{@ifsoln{A function}}
+@fitb{}{@ifsoln{`filter` needs a Table, and the name of a function. It makes a new}}
 
-@n Where else have we seen functions that consume functions? @fitb{}{@ifsoln{image-scatter-plot}}
+@fitb{}{@ifsoln{copy of the table, leaving out rows for which the function produces false}}
+
+@fitb{}{}
+
+@n What happens if you evaluate `filter(animals-table, lookup-name)`? Why?
+
+@fitb{}{@ifsoln{Error, because the function must produce a Boolean}}
+
 
 == Building Columns
 @n What does `build-col(animals-table, "old", is-old)` evaluate to?
@@ -53,8 +39,14 @@ Make sure you've opened the @starter-file{table-functions} on your computer, and
 
 @fitb{}{@ifsoln{A table with a new column called "sticker", filled with values from `label`}}
 
-@n In your own words, how does the `build-col` function work?
+@n Find the contract for `build-col` in your Contracts page. Explain how `build-col` uses the three inputs specified in the Domain.
+
+@fitb{}{@ifsoln{`build-col` needs a Table, the name of a column to add, and the name of a function.}}
+
+@fitb{}{@ifsoln{It makes a new copy of the table, adding the column, and filling it by}}
+
+@fitb{}{@ifsoln{applying the function to each row}}
 
 @fitb{}{}
 
-@fitb{}{}
+@n Where else have we seen functions that consume functions? @fitb{}{@ifsoln{image-scatter-plot}}

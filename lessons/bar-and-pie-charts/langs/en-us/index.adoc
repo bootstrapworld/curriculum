@@ -1,12 +1,12 @@
 = Bar and Pie Charts
 
-@description{Students learn to generate and compare pie charts & bar charts, explore other plotting & display functions, and (optionally) design an infographic.}
+@description{Students learn to sort tables, and to generate and compare pie charts & bar charts. They briefly explore other data displays, and (optionally) design an infographic.}
 
 @lesson-prereqs{contracts, ds-intro}
 
-@keywords{bar chart, pie chart, categorical, visualization, display}
+@keywords{sort, sorting, bar chart, pie chart, categorical, visualization, display}
 
-@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
+@add-to-lang{sort, bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
 
 [@lesson-intro-table]
 |===
@@ -41,8 +41,19 @@
 
 |===
 
+== Review @duration{10 minutes}
 
-== Pie and Bar Charts @duration{30 minutes}
+You've learned how to read @vocab{contracts}, which make it easy to learn new functions in our language. Today we'll learn about functions that work with Tables!
+
+[.lesson-instruction]
+- Find the contract for `sort` in your Contracts page. What do you think the inputs in its Domain mean?
+- In the @starter-file{animals}, click "Run" and evaluate `sort(animals-table, "name", true)`. What do you get back?
+- What does `sort(animals-table, "age", false)` evaluate to?
+- Sort the animals table by how long it took for each animal to be adopted, from longest to shortest adoption time.
+
+The `sort` function consumes a Table, the name of a column, and a @vocab{Boolean} (`true` for ascending, `false` for descending), and produces a new table with the rows sorted according to that column.
+
+== Pie and Bar Charts @duration{25 minutes}
 
 === Overview
 Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
@@ -128,16 +139,15 @@ Bar Charts and Pie Charts are mostly used to _display categorical columns_.
 
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
+[.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
+| @span{.title}{Optional Project: Making Infographics}
 
-a|
-@span{.title}{Mini Project: Making Infographics}
 Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/rubric-infographic.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 |===
 
 
-== Exploring other Displays @duration{25 minutes}
+== Exploring other Displays @duration{20 minutes}
 
 === Overview
 
@@ -171,13 +181,11 @@ Today you’ve added more functions to your toolbox. Functions like `pie-chart` 
 
 You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
+[.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
+| @span{.title}{Extension Activity}
 
-a|
-@span{.title}{Extension Activity}
-
-Sometimes we want to summarize a categorical column in a Table, rather than a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
+Sometimes we want to summarize a categorical column using a Table, rather than using a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
 
 What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
 

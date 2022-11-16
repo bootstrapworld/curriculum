@@ -1,6 +1,6 @@
 = Table Functions
 
-@description{Students learn about functions that work with tables, allowing them to sort, filter, and build columns}
+@description{Students learn about functions that work with tables, allowing them to filter and build columns}
 
 @lesson-prereqs{functions-examples-definitions, bar-and-pie-charts}
 
@@ -30,42 +30,15 @@
 
 |===
 
-== Functions that Work on Rows @duration{20 minutes}
-
-=== Overview
-Students review row definitions, and get more practice reading the definitions of functions that work on rows.
-
-=== Launch
+== Review @duration{10 minutes}
 
 [.lesson-instruction]
-Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
+--
+- This activity is about reading carefully and getting more comfortable with row-consuming functions.
+- Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
+- Take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+--
 
-Explain to students that this activity is about reading carefully and getting more comfortable with functions that work on rows.
-
-=== Investigate
-
-[.lesson-instruction]
-With your partner, complete items 1 through 8 on @printable-exercise{pages/row-and-function-definitions.adoc}.
-
-Direct students to take a look at the three examples for `is-dog`. Each one shows us a different way of thinking about examples, in this case using a row that should return `false`:
-
-```
-examples:
-  is-dog(cat-row) is false
-  is-dog(cat-row) is "cat" == "dog"
-  is-dog(cat-row) is cat-row["species"] == "dog"
-end
-```
-
-. The first example just tells us the answer we think we'll get back. `cat-row` is NOT a dog, so we expect `false`!
-. The second example shows us some of the work involved: we know the species of the row is `"cat"`, and comparing that to the String `"dog"` will return `false`.
-. The third example shows __all the work__: given the `cat-row`, we lookup the value in the `"species"` column and compare it to the String `"dog"`.
-
-[.lesson-instruction]
-- Add three _true_ examples for `is-dog`, this time using the `dog-row` you defined above.
-- Complete the worksheet.
-
-=== Synthesize
 * Who can explain what `is-old` does?
 ** _It looks up the age of the row, and asks if its greater than 10._
 * Who can explain what `lookup-name` does?

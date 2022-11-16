@@ -1,4 +1,4 @@
-= Chaining Methods
+= Composing Table Functions
 
 You have the following functions defined below (read them _carefully!_):
 
@@ -25,59 +25,64 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 
 |
 ----
- t.order-by("age", true)
+sort(t, "age", true)
 ----
 |*@n*@ifsoln{+(C)+} ||*A*
 | Produces a table containing only Toggle and Maple
 
 |
 ----
- t.filter(is-fixed)
+filter(t, is-fixed)
 ----
 |*@n*@ifsoln{(F)} ||*B*
 | Produces a table of only young, fixed animals
 
 |
 ----
- t.build-column("sticker", nametag)
+build-col(t, "sticker", nametag)
 ----
 |*@n*@ifsoln{(D)} ||*C*
 | Produces a table, sorted youngest-to-oldest
 
 |
 ----
- t.filter(is-young)
+filter(t, is-young)
 ----
 |*@n*@ifsoln{(A)} ||*D*
 | Produces a table with an extra column, named "sticker"
 
 |
 ----
-t.filter(is-young)
-  .filter(is-fixed)
+filter(
+  filter(t, is-young),
+  is-fixed)
 ----
 |*@n*@ifsoln{(B)} ||*E*
 | Produces a table containing Maple and Toggle, in that order
 
 |
 ----
-t.filter(is-young)
-  .order-by("pounds", false)
+sort(
+  filter(t, is-young),
+  "pounds",
+  false)
 ----
 |*@n*@ifsoln{(E)} ||*F*
 | Produces a table containing the same four animals
 
 |
 ----
-t.build-column("label", nametag)
-  .order-by("age", true)
+sort(
+  build-col(t, "label", nametag),
+  "age",
+  true)
 ----
 |*@n*@ifsoln{(H)} ||*G*
 | Won’t run: will produce an error
 
 |
 ----
-t.order-by("sx", false)
+sort(t, "sx", false)
 ----
 |*@n*@ifsoln{(G)} ||*H*
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
