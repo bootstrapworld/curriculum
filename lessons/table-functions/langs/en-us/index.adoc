@@ -77,38 +77,22 @@ end
 ** _It divides the pounds by 2.2._
 
 Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
-
-
-== Ordering, Filtering, and Building @duration{30 minutes}
+== Filtering Rows, Building Columns @duration{25 minutes}
 
 === Overview
-Students learn to sort rows of a table in ascending or descending order, filter the rows using a Boolean-producing function, and build a new column.
+Students learn to filter the rows and add new columns to a table, using functions they can define themselves.
 
 === Launch
-
 Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
 
-Explain to students that:
-* Each of you represents a Row in a table of students
-* Standing together, you represent a _sample_ of the class, stored in a table.
-* Like you, each student has columns like "First Name", "Last Name", "Birthday", "Favorite Food", etc.
-
-A Table is a collection of Rows. And we can _do things_ to collections! One thing we can do is *order the rows* by some criteria. What are some ways to sort a table of students?
+Sometimes we want to *filter the rows* of a table by some criteria. In our animals dataset, for example, we might want to filter the table to show only the rows for dogs, or only the rows for cats older than 5. What are some ways to filter our table of students?
 
 [.lesson-roleplay]
 --
-Tell the class that you are going to select a volunteer who will play the role of… *order-by*! Announce to your volunteer "Sort the Rows by height, from smallest to largest!", and have them do it. Then announce to your volunteer "Sort the Rows by height, from largest to smallest!", and have them do it.
-
-Solicit other ideas, like sorting by birthday. Try sorting in ascending **and** descending order, using language appropriate cues: "order-by 'birthday', ascending equals true", or "order-by height, ascending equals false!" After a few iterations, give the volunteer a round of applause!
---
-
-Another thing we can do is *filter the rows* by some criteria. In our animals dataset, for example, we might want to filter the table to show only the rows for dogs, or only the rows for cats older than 5. What are some ways to filter our table of students?
-
-[.lesson-roleplay]
---
-Tell the class that you are going to select a volunteer who will play the role of… *filter*! Hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (You may need to choose your students strategically. The demonstration that follows, for instance, requires at least one student who wears glasses.) Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students.
-
-Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
+- Select a volunteer who will play the role of… *filter*!
+- Hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)
+- Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table", but to __keep it a secret__.
+- Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
 
 Here’s how that might look if Filter chose a function card `has-glasses`.
 
@@ -117,53 +101,34 @@ Here’s how that might look if Filter chose a function card `has-glasses`.
 - _Filter stands in front of Student 2 and checks if they are wearing glasses._
 - *Filter to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
 --
-
-Have your Filter volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
-
+- Have your Filter volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
+- Give the volunteer a round of applause!
 
 === Investigate
-Pyret Tables have their own methods for sorting, filtering, and more. The exploration that students will complete is divided into three sections, accordingly.
+Pyret Tables have their own functions for sorting, filtering, and more. The exploration that students will complete is divided into three sections, each of which is to be done one at a time.
 
 [.lesson-instruction]
-Complete the "Ordering Rows" section on @printable-exercise{exploring-methods.adoc} to discover how the `.order-by` method works.
-
-After students have completed the section, lead a discussion to confirm that students understand the following key ideas:
-
-* `.order-by` consumes a String (the name of the column by which to sort) and a @vocab{Boolean} (`true` for ascending, `false` for descending), and sorts the rows according to that column.
-* The `.order-by` method produces a _new_ table rather than changing the existing one.
-* How could we test that a new table was produced? We could sort the table, then evaluate `animals-table` and see if it stayed sorted.
-
-[.lesson-instruction]
-- Complete the "Filtering Rows" section on @printable-exercise{exploring-methods.adoc}
-- Find the contract for `.filter` in your Contracts page.
+Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 Confirm that students understand the following key ideas:
 
-* The Domain of `.filter` is a _Boolean-producing function_
-* The `.filter` method works by producing a new table containing only rows for which the function returns `true`.
-* The `.filter` method creates a new table.
-
-[.lesson-instruction]
-Complete "Building Columns", the last section of @printable-exercise{exploring-methods.adoc}
-
-Confirm that students understand the following:
-
-* `.build-column` takes in a String and a _function_
-* The `.build-column` method produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
-* Building a column in the `animals-table` produces a _new_ table.
+[.lesson-point]
+--
+* `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
+* `build-col` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
+--
 
 [.lesson-instruction]
 Complete @printable-exercise{pages/what-table-do-we-get.adoc}.
 
 === Common Misconceptions
-*Students often think that these methods _change_ the table!* In Pyret, all table methods produce a _brand new table_. If we want to save that table, we need to define it. For example: `cats = animals-table.filter(is-cat)`.
+*Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
 
 === Synthesize
-Being able to define functions and use them with Table Methods is a _huge_ upgrade in our ability to analyze data!
+Using with Table Functions is a _huge_ upgrade in our ability to analyze data!
 
-- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `.filter` method help?
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what @vocab{percentage} of students identify as multi-racial. We could use `.build-column` to compute that for every row in the table.
+- A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see _what percentage of games_ those teams won.
 - **What are some ways you might want to filter _your_ dataset?**
 - **What are some columns you might want to build for _your_ dataset?**
