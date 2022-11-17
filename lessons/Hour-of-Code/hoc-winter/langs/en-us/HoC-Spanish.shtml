@@ -1,0 +1,450 @@
+<html moznomarginboxes="">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>Bootstrap :: Hora del Código</title>
+      <link   type="text/css"        rel="stylesheet" href="css/hoc.css" title="default"/>
+      <link   type="text/css"        rel="stylesheet" href="css/pretty-printing.css" title="default"/>
+      <script type="text/javascript" src="js/hoc.js"></script>
+      <script type="text/javascript" src="js/codemirror.js"></script>
+      <script type="text/javascript" src="js/runmode.js"></script>
+      <script type="text/javascript" src="js/scheme2.js"></script>
+      <script type="text/javascript" src="js/wescheme-embedded.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": { scale: 80, linebreaks: { automatic: true } },
+         });
+        </script>
+      </head>
+  <body onload="initializeCards(); attachCodeMirror();">
+    <div id="banner">
+      <img src="images/icon.png" height="50"><span>Una Hora del C&oacute;digo con Bootstrap</span>
+    </div>
+    <div id="progressbar"></div>
+    <a id="prev" href="#" onclick="javascript:previousCard()">&#171;</a>
+    <a id="next" href="#" onclick="javascript:nextCard()">&#187;</a>
+    <div id="lesson">
+      <ul id="cards">
+      	<li imageConfig="images/complete-snowman.png">
+      	  <h1>Bienvenidos al Hora del C&oacute;digo de Bootstrap!</h1>  
+          <p/>
+          ¡En esta exploración, aprenderá cómo crear imágenes usando un código basado en texto, usar funciones para combinar imágenes y aprender diferentes formas de combinar imágenes para crear lo que sea que imagine!
+          <b>¡Empecemos!</b>
+        </li>
+
+        <li weschemeConfig='"Hola Mundo"'>
+          <h1>1. ¿Dónde vamos a codificar?</h1>
+          <p/>
+          <div class="video">
+            <i><b><a href="#" onclick="lightbox_open('rdL6S9SmcKo');">Haz clic aquí</a></b> para ver el vídeo (en inglés)</i> 
+          </div>
+
+          <p/>
+          En Bootstrap, usamos uno herramienta llamada WeScheme para escribir programas. Puedes ver el <b>editor de WeScheme</b> a la derecha, o puedes <a href="http://www.WeScheme.org" target="_blank">abrir WeScheme en una nueva ventana.</a>
+          <p/>
+          El editor se divide en dos panatelas:
+          <ol>
+            <li>El <b>área de "Definiciones"</b> a la izquierda, y</li>
+            <li>el <b>área de "Interacción"</b> está a la derecha.</li>
+          </ol>
+          <p/>
+          Puede cambiar el tamaño de las ventanas a su gusto haciendo clic y arrastrando la línea vertical gris en el centro.
+          <p/>
+          <div class="activity">Cambie el tamaño del área de Definiciones por arrastrando el divisor vertical gris.</div>
+          <p/>
+          <b>El botón 'Run'</b> en la esquina superior izquierda borra el área de Interacciones y ejecuta cualquier código en el área de definición.
+          <p/>
+          <div class="activity">Localiza el botón <b>Run</b> y presionalo.</div>
+          <p/>
+          Ejecutar el código provisto le dice a la computadora que diga <tt class="racket">"Hola Mundo"</tt> en el área de Interacciones.
+          <p/>
+          También puede escribir directamente en el área de Interacciones y presionar <b>Enter</b>.
+          <p/>
+          <div class="activity">
+            <ol>
+              <li>Intente escribir una palabra o frase en el área de Interacciones y presione <b>Enter</b>.</li>
+              <li>Intente escribir el número 5 en el área de Interacciones y presione <b>Enter</b>.</li>
+            </ol>
+           </div>
+          <p/>
+          Tenga en cuenta que al escribir una palabra o frase, usamos comillas (<tt class="racket">" "</tt>), ¡pero no al escribir números! 
+        </li>
+
+        <li weschemeConfig='(+ 4 2)'>
+          <h1>2. Usando Funciones</h1> 
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('k8PcaGGnl_E');">Ver vídeo</a></b>
+          </div>
+
+          Aprender a codificar significa que estamos <b>aprendiendo un idioma</b> que la computadora entiende. Podemos usar este lenguaje de computadora para pedirle a la computadora que completar ciertas tareas.
+          <p/>
+          <div class="activity">Mira el código provisto y haz uno predicción. ¡Presiona el botón <b>Run</b> para ver lo que hace este código!</div>
+          <p/>
+	         Escribimos un programa simple que le pidió a la computadora que <I>agregara 4 y 2</I>, y así fue. WeScheme puede manajar la adición de cualquier número que se pueda imaginar. También sabe resta(<tt class="racket">-</tt>), multiplicación (<tt class="racket">*</tt>), y división (<tt class="racket">/</tt>).
+          <p/>
+	         Observe que el signo más (<tt class="racket">+</tt>) <b>se adelantó</b> a los números.  En este lenguaje, ¡la función siempre va en el frente! Verás esto de nuevo más tarde con algunas funciones de imagen. 
+    	   <p/>
+    	   <div class="activity">Tómese unos minutos para familiarizarse con el uso de las funciones en WeScheme. <b>Use el área de Interacciones</b> (a la derecha) y presione <b>Enter</b> después de cada línea de código para ver el resultado.
+    	    <ol>
+        		<li>Escriba el código para $10 - 3$ y presione <b>Enter</b>.</li>
+        		<li>Escriba el código para $5 * 103$ y presione <b>Enter</b>.</li>
+        		<li>Escriba el código para $3 \div 4$ y presione <b>Enter</b>. <br/>Observe que puede hacer clic en los resultados.</li>
+           </ol>
+         </div>
+        </li>
+
+        <li weschemeConfig='(star 50 "solid" "blue")'>
+          <h1>3. Creando Imágenes de Código</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('GBraS6eGwVE');">Ver Vídeo</a></b>
+          </div>
+
+           En el editor, puede ver un programa simple en el área de Definiciones:
+          <br/><tt class="racket">(star 50 "solid" "blue")</tt>
+          <br/>En español, (estrella 50 "sólido" "azul").
+          <br/>¿Qué crees que hará?
+          <div class="activity">
+            Haga una predicción de lo que hará el código y luego haga clic en el botón <b>Run</b>.
+            <ol>
+              <li>¿Dónde apareció el resultado?</li>
+              <li>Trate de cambiar el número y haga clic en el botón <b>Run</b>. ¿Qué pasa?</li>
+              <li>Intente cambiar <tt class="racket">"solid"</tt> ("sólido") a <tt class="racket">"outline"</tt> ("contorno"). ¿Que pasa?</li>
+              <li>Copie y pegue este programa en el área de Interacciones, a la derecha, luego presione <b>Enter</b>. ¿Que pasa?</li>
+              <li>Intente hacer otras estrellas en el área de Interacciones y luego presione <b>Enter</b>.</li>
+            </ol>
+            <p/>
+            <b>¿Puedes adivinar qué representan estas partes de los programas?</b>
+          </div>
+        </li>
+
+        <li weschemeConfig='(star 50 "solid" "blue")'>
+          <h1>4. Leyendo Códigos</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('x--6N-7JaSk');">Ver Vídeo</a></b>
+          </div>
+          
+          El programa <tt class="racket">(star 50 "solid" "blue")</tt> es un ejemplo de una <b>aplicación de función</b>. Cada función tiene un <b>contrato</b>: que nos dice el nombre de la función, cuántos y qué tipo de entradas requiere y qué la función producirá.
+
+      	  <p/>
+      	  El contrato para esta función es<br/>
+          <tt class="racket">star : Number String String -> Image</tt>!
+      	  <p/>
+          La función "star" requiere un número y dos cadenas (palabras en comillas) para producir una imagen.
+      	  Las entradas pueden ser muchas cosas diferentes, pero nos centraremos en tres en este momento:
+      	  <ol>
+      	    <li><b>Números</b>, como 3, 10.82, -105, 0, etc.</li>
+      	    <li><b>Cadenas</b> son palabras en comillas como <tt class="racket">"solid", "red", "Hola"</tt>, and so on</li>
+            <li><b>Imágenes</b>, como <img src="images/solidbluestar.png"></li>
+      	  </ol>
+      	  <p/>
+          <ol>
+            <li>La <b>función</b> <tt class="racket">star</tt> requiere tres entradas.</li>
+            <li>El <b>Número</b> <tt class="racket">50</tt> representa el <b>radio</b> de la estrella.</li>
+            <li>La <b>Cadena</b> <tt class="racket">"solid"</tt> representa el <i>estilo</i> de la estrella.</li>
+            <li>La <b>Cadena</b> <tt class="racket">"blue"</tt> representa el <i>color</i> de la estrella.</li>
+          </ol>
+          Los paréntesis le dicen a la computadora que queremos aplicar la función a estas entradas.<br/>
+      	  <p/>
+      	  <div class="activity">Intente omitir una de estas entradas y presione <b>Run</b>. ¿Que pasa?
+</div>
+        </li>
+
+      	<li weschemeConfig='(star 50 "solid" 24)'>
+          <h1>5. Depuración</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('8R-aQYqVXFk');">Ver Vídeo</a></b>
+          </div>
+          
+          Has visto que la <tt class="racket">star</tt> es una función que toma tres entradas: un número para el radio de la estrella, una cadena para el estilo y una cadena para el color. <b>¿Qué sucede si un programador olvida uno de estos o utiliza el tipo de datos incorrecto?</b>
+         <p/>
+          Cuando algo como esto sucede, las computadoras usan <b>Mensajes de Error</b> para dar consejos útiles sobre lo que está mal.
+
+          <p/>
+          <div class="activity">
+            ¿Puedes ver el problema en el área de Definiciones, la ventana a la izquierda?
+            <ol>
+              <li>Haz clic en <b>Run</b> para ver qué tipo de mensaje le da la computadora.</li>
+              <li>Lea el mensaje de error cuidadosamente.</li>
+              <li>Haz clic en las partes coloreadas del error y vea parpadear el código correspondiente.</li>
+              <li>¿Puedes arreglar el problema?</li>
+              </ol>
+          </div>
+        </li>
+
+	<li weschemeConfig='(star 50 "solid" "blue")'>
+          <h1>6. Explorando Imágenes</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('Ub3qL1T6G0A');">Ver Vídeo</a></b>
+          </div>
+          Hay muchas otras funciones que producirán una imagen ... ¿pero cómo las usas?
+          <p/>
+	  Hay otras funciones de forma que tienen el mismo <b>contrato</b> que una <tt class="racket">star</tt>, tomar un Número y dos Cadenas y producir una Imagen.
+          <p/>
+          <div class="activity">
+            <tt class="racket">circle</tt> es una de estas funciones. Intenta hacer un círculo azul sólido!
+	  </div>
+          <p/>
+	  Todas las formas siguientes toman un número y dos cadenas y producen una imagen. ¡Toma el tiempo para probarlos! 
+	  <p/>
+	  <div class="activity">
+            ¡Intenalo!
+            <ol>
+	      <li><tt class="racket">circle</tt> - ¿Puedes hacer un círculo sólido, verde, y con un radio de 35?</li>
+              <li><tt class="racket">triangle</tt> - ¿Puedes hacer un triangolo delineado, rojo de cualquier tamaño?</li>
+              <li><tt class="racket">square</tt> - ¿Puedes hacer un cuadrado morado con cada lado midiendo 104?</li>
+            </ol>
+          </div>
+        </li>
+
+    	<li weschemeConfig='(rectangle 100 200 "solid" "green")'>
+    	  <h1>7. ¡Mas Imágenes!</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('lsHgtkKitDk');">Ver Vídeo</a></b>
+          </div>   
+    	  Como ya habrá descubierto, hay algunas funciones que producen formas que requieren diferentes entradas para funcionar. Hemos incluido una de esas funciones aquí: <tt class="racket">rectangle</tt>.
+    	  <p/>
+          <div class="activity">¿Qué notas es diferente en el código de un rectángulo?
+          </div>
+    	  <p/>
+          La función de <tt class="racket">rectangle</tt> tiene un <b>contrato</b> diferente al de <tt class="racket">star</tt>.  
+          <p/>
+          Con la función de <tt class="racket">star</tt> solo teníamos que darle un número, para el radio. Pero los rectángulos tienen dos dimensiones: largo y ancho.          
+          <p/>
+          Nuestro <b>contrato</b> para el <tt class="racket">rectangle</tt> es:<br/>
+          <tt class="racket">rectangle: Number Number String String -> Image</tt><br/>
+          (Número Número Cadena Cadena -> Imagen)
+      	  <p/>
+          <b>Aquí hay algunas otras funciones que puedes experimentar con:</b>
+          <ul>
+            <li><tt class="racket">right-triangle</tt> requiere un <b>Número</b> para la base, un <b>Número</b> para la altura y dos <b>Cadenas</b> para el estilo y el color</li>
+            <li><tt class="racket">isosceles-triangle</tt> requiere un <b>Número</b> para la altura, un <b>Número</b> para la base y dos <b>Cadenas</b> para el estilo y el color
+</li>
+            <li><tt class="racket">text</tt> requiere una <b>Cadena</b> para el mensaje, un <b>Número</b> para el tamaño y una <b>Cadena</b> para el color</li>
+            <li><tt class="racket">radial-star</tt> requiere <b>cinco</b> entradas:
+        	<ol>
+        	  <li>Un <b>Número</b> para el número de puntos</li>
+        	  <li>Un <b>Número</b> para el radio exterior</li>
+                  <li>Un <b>Número</b> para el radio interior</li>
+                  <li>Una <b>Cadena</b> para el estilo</li>
+                  <li>Una <b>Cadena</b> para el color</li>
+        	</ol>
+            </li>
+      	  </ul>
+      	  <p/>
+      	  <div class="activity">
+            ¡Toma unos minutos para intentar estos!
+            <ol>
+              <li><tt class="racket">right-triangle</tt> - ¿Lo puedes hacer un triángulo rectángulo rosado?</li>
+              <li><tt class="racket">isosceles-triangle</tt> - ¿Lo puedes hacer un triángulo isósceles negro?</li>
+              <li><tt class="racket">text</tt> - ¿Puedes escribir tu nombre en grandes letras rojas?</li>
+              <li><tt class="racket">radial-star</tt> - ¿Puedes hacer una estrella radial?</li>
+            </ol>
+          </div>
+        </li>
+
+        <li weschemeConfig='(define CodigoEs (text "Divertido" 50 "red"))'>
+       	  <h1>8. Definiendo valores</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('voRTXnddw2I');">Ver Vídeo</a></b>
+          </div>
+          Ya has aprendido muchas formas de crear imágenes en WeScheme. ¡Ahora aprenderemos una manera de definirlos como un valor para que podamos hacer que aparezcan sin volver a escribir todo el código! Es como dar nombres a partes de nuestro código para que sean más fáciles de usar.<br/>
+	  En el código previsto, hemos <b>definido</b> <tt class="racket">CodigoEs</tt> para hacer <tt class="racket">(text "Divertido" 50 "red")</tt>.
+      	  <p/> 
+      	  <div class="activity">Haz clic al botón <b>Run</b> y escribe <tt class="racket">CodigoEs</tt> en la ventana de Interacciones a la derecha.</div>
+      	  <p/>
+          Vistes la imagen que apareció? Si no, asegurarse que escribistes exactamente como está escrito incluyendo mayúsculas.<br/>
+      	  <p/>
+          <div class="activity">
+          Use la nueva palabra clave <tt class="racket">define</tt> para nombrar algunas imágenes, números o cadenas.<br/>
+          ¡Ten cuidado con su paréntesis!
+      	    <ol>
+              <li>Escribe el código <tt class="racket">(define CirculoRojo (circle 40 "solid" "red"))</tt> en la área de Definiciones y presione <b>Run</b>.<li>
+              <l¡>Escribe CirculoRojo en the ventana de Interacciones par que aparezca!</li>
+      	      <li>Definir Lucy para ser una imagen de una estrella amarilla. </li>
+      	      <li>Crea una imagen de tu nombre y llámala MiNombre.</li>
+      	      <li>Definir el número 42 para ser LaRespuesta.</li>
+      	    </ol>
+      	  </div> 
+        </li>
+
+      	<li weSchemeConfig='(define letra1 (text "H" 40 "red"))
+(define letra2 (text "I" 40 "blue"))
+(beside letra1 letra2)'>
+      	  <h1>9. Combinando Imágenes</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('C5zCFdSAHqA');">Ver Vídeo</a></b>
+          </div>
+          ¡Crear imágenes es divertido, pero las cosas realmente comienzan a ponerse interesantes cuando aprendemos cómo combinarlas!
+      	  <p/>
+      	  <div class="activity">Mira el código provisto. ¿Que notaste?<br/>
+          ¡Haz clic al botón <b>Run</b> y nota lo que pasa!
+          </div>
+          <p/>
+          ¡La función <tt class="racket">beside</tt> nos permite tomar dos imágenes y crear una <b>nueva imagen</b> con las dos imágenes una al lado de la otra!
+          <p/>
+          Observe que aún puede escribir <tt class="racket">letra1</tt> o <tt class="racket">letra2</tt> en el área de Interacciones y presionar <b>Enter</b> para ver las imágenes individuales. No cambiamos las imágenes originales, creamos una nueva!
+          <p/>
+          <div class="activity">Define dos rectángulos y combinalos para hacer una nueva imagen.
+             <ol>
+               <li><tt class="racket">RectRojo</tt> debe ser un <tt class="racket">rectangle</tt> rojo, sólido con un largo de 20 y una altura de 40.</li>
+               <li><tt class="racket">RectAzul</tt> debe ser un <tt class="racket">rectangle</tt> azul, sólido con un largo de 20 y una altura de 40.</li>
+               <li>Usa <tt class="racket">beside</tt> para poner <tt class="racket">RectRojo</tt> <i>al lado del</i> <tt class="racket">RectAzul</tt>.</li>
+               <li>Usa <tt class="racket">define</tt> para nombrar la nueva forma <tt class="racket">CuadradoDividido</tt>.</li>
+               <li>Sólo por diversión, ¡giremos esa cuadrado! Usa el código <tt class="racket">(rotate 45 CuadradoDividido)</tt> para girar el cuadrado 45 grados.</li>
+             </ol>
+          </div>
+         <p/>
+         Además de <tt class="racket">beside</tt>, existe una función similar llamada <tt class="racket">above</tt>. 
+         <p/> 
+         <div class="activity">¿Que esperar que haga esta función? Usa <tt class="racket">above</tt> para combinar dos formas para crear esta imagen: 
+<br/><img src="images/house.png"></div>
+       </li>
+
+      	<li weschemeConfig='(define EstrellaNaranja (star 150 "solid" "orange"))
+(define CuadradoAzul (square 250 "solid" "blue"))
+(overlay EstrellaNaranja CuadradoAzul)'>
+      	  <h1>10. Capas de Imágenes</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('KJbLTe7osM8');">Ver Vídeo</a></b>
+          </div>
+
+          Además de colocar imágenes una al lado de la otra o una encima de la otra, podemos colocar imágenes en capas.  
+      	  <div class="activity">Mira el código provisto y haz una predicción. Presiona el botón <b>Run</b> para ver lo que hace este código!</div>
+          <p/>
+          Esta nueva función de superposición <tt class="racket">overlay</tt> toma dos imágenes como entrada y las coloca una encima de otra, alineadas en los centros.
+          <p/>
+          <div class="activity">Cree dos imágenes propias y utilic <tt class="racket">overlay</tt> to combine them into one image. para combinarlas en una sola imagen. Recuerde, la imagen superior debe ser más pequeña que la imagen inferior.</div>
+          <p/>
+        </li>
+
+        <li weschemeConfig='(define EstrellaNaranja (star 150 "solid" "orange"))
+(define CuadradoAzul (square 250 "solid" "blue"))
+(define EstrellaCuadrado (overlay EstrellaNaranja CuadradoAzul))'>
+          <h1>11. Acodar múltiples imágenes</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('_VDzeYzp56o');">Ver Vídeo</a></b>
+          </div>
+            
+          ¿Y si queremos estratificar más de dos imágenes? Tal vez nos gustaría agregar otra estrella a nuestra imagen de estrellas y cuadrados de antes.
+          <p/>
+          <div class="activity">¿Qué pasa si tratamos de combinar tres imágenes utilizando <tt class="racket">overlay</tt>?</div>
+          <p/>
+          El contrato para <tt class="racket">overlay</tt> es:<br/>
+          <tt class="racket">overlay : Image Image -> Image</tt>
+          <p/>... así que si le damos tres imágenes, recibimos un <i>Mensaje de Error</i>.
+<br/>  
+          En el código provisto, le hemos dado un nuevo nombre a la imagen de estrella y cuadrado combinada <tt class="racket">EstrellaCuadrado</tt>.<br/>
+          Combinamos dos imágenes en una, ¡ahora combinaremos esa imagen con otra imagen!
+          <p/>
+          <div class="activity">
+            Crea una nueva imagen de una estrella blanca sólida de radio 75 llamada <tt class="racket">EstrellaBlanca</tt>.
+            <p/>
+            Usa <tt class="racket">overlay</tt> ara superponer la estrella blanca que creó sobre <tt class="racket">EstrellaCuadrado</tt>.
+          </div> 
+          <p/>
+          ¡Combinamos dos imágenes en una, luego combinamos esa imagen con otra! 
+          <div class="activity">
+            Crear: ¿Puedes crear imágenes de estas banderas utilizando lo que has aprendido?<br/>
+            <ol>
+              <li>La bandera de Japon<br/><img src="images/japanflag.png"></li>
+              <li>La bandera de Suiza<br/><img src="images/swissflag.png"></li>
+              <li>La bandera de Holanda<br/><img src="images/hollandflag.png"></li>
+            </ol>
+          </div> 
+          <div class="activity">Desafío: hay otra forma de 'superponer una superposición' con solo una línea de código. ¿Puedes averiguarlo?
+          </div>
+        </li>
+
+        <li weSchemeConfig='(define PurpleRect (rectangle 300 250 "solid" "purple"))
+			    (define WhiteStar (star 50 "solid" "white"))
+	                    (put-image WhiteStar 200 50 PurpleRect)'>
+          <h1>12. Colocando Imágenes Usando Coordenadas</h1>
+          <div class="video">
+            <b><a href="#" onclick="lightbox_open('zbFNnahgae4');">Ver Vídeo</a></b>
+          </div>
+            
+          Quizás desee colocar una imagen en una posición específica sobre otra imagen.  <tt class="racket">put-image</tt> te permite hacer eso!
+          <p/>
+          Las cuatro entradas que necesita <tt class="racket">put-image</tt> son: <b>Image Number Number Image</b>.
+          <p/>
+          Intenta ejecutar el código provisto. ¿Que notaste?
+          <div class="activity">
+            <ol>
+              <li>Los dos números en el contrato representan los coordenados x e y de la primera imagen. ¿Cuáles son las coordenadas de la estrella blanca en este momento?</li>
+              <li>Cambia las coordenadas de la estrella blanca 50 pixeles ase arriba.</li>
+              <li>Cambia las coordenadas de la estrella para que aparezca en la mano izquierda superior del rectángulo morado.</li>
+              <li>Cambia una de las coordenadas de la estrella a un número negativo. ¿Que pasa? ¿Por qué?</li>
+            <ol>
+          </div>
+        </li>
+
+        <li weSchemeConfig='(rectangle 400 300 "solid" "gray")'>
+            <h1>13. Crear!</h1>
+            <b>Vamos a crear una bandera!</b>
+	    <p/>
+            Sí te quieres, <a href="http://www.wescheme.org" target="_blank">haz clic aquí para abrir WeScheme en una ventana nueva.</a><br/>
+            <p/>
+            Vea si puede hacer una bandera para un país que siempre ha querido visitar, o dónde tiene familia. O diseña tu propia bandera personal! Puedes encontrar más información leyendo la <a href="http://www.bootstrapworld.org/materials/fall2015/courses/bs1/units/Supplemental/index.html#lesson_Making-Flags">Lección de banderas (Inglés)</a>.
+            <p/>
+            <div class="activity">
+              Formas
+              <ol> 
+                <li><tt class="racket">circle: Number String String -> Image</tt></li>
+                <li><tt class="racket">rectangle: Number Number String String -> Image></tt></li>
+		<li><tt class="racket">triangle: Number String String -> Image</tt></li>
+		<li><tt class="racket">star: Number String String -> Image</tt></li>
+		<li><tt class="racket">text: String Number String -> Image</tt></li>
+	      </ol>
+              <p/>
+              Cambiar o Combinar Imágenes
+              <ol>
+		<li><tt class="racket">rotate: Number Image -> Image</tt></li>
+		<li><tt class="racket">beside: Image Image -> Image</tt></li>
+		<li><tt class="racket">above: Image Image -> Image</tt></li>
+		<li><tt class="racket">overlay: Image Image -> Image</tt></li>
+		<li><tt class="racket">put-image: Image Number Number Image -> Image</tt></li>
+              </ol>
+              <p/>
+            </div>
+        </li>
+
+        <li imageConfig="images/snowmanpuzzle.png">
+            <h1>14. Un Rompecabezas Invernal</h1>
+            <div class="video">
+              <b><a href="#" onclick="lightbox_open('aRbf0b76RPw');">Ver Vídeo</a></b>
+            </div>
+            
+            ¡Aquí le proporcionamos un rompecabezas de <tt class="racket">put-image</tt> para que pueda construir una escena nevada!<br/>
+            <a href="https://www.wescheme.org/openEditor?publicId=099k9KpRWS" target="_blank">Haz clic aquí para abrir en una ventana nueva.</a><br/>
+            Cambia las coordenadas y presione <b>Run</b> para mover los diferentes elementos.
+Usa lo que aprendiste sobre creando imágenes para añadir su propio elementos a la escena.
+            <p/> 
+            ¡Una Hora del Código es una manera grandiosa para empezar el aprendizaje de la programación, y esperamos que lo disfruto! ¡ Hay muchas cosas más que explorar cuando viene a la programacion de computadora! Si le gustaría hacer más cosas de esta tipo de programación - especialmente en classe de matemática - échale un vistazo a <a href="http://www.BootstrapWorld.org">Bootstrap</a> para aprender cómo hacer videojuegos usando programación en su clase de matemática. 
+            <p/>
+        </li>
+      </ul>
+    </div>
+    
+    <div id="righthand" class="embedded-wescheme"></div>
+    <div id="footer">
+      <a href="http://www.BootstrapWorld.org" style="color: white">Bootstrap</a> is brought to you by Jennifer Poole, Emmanuel Schanzer, Kathi Fisler, Shriram Krishnamurthi, Emma Youndtsmith, and Ed Campos. Special thanks to <a href="http://www.ProgramByDesign.org">Program by Design</a>.
+    </div>
+    <div id="light">
+      <a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
+      <iframe width="560" height="315" id="embedded_video"
+              src="https://www.youtube.com/embed/rdL6S9SmcKo" 
+              frameborder="0" 
+              autoplay="true"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+              <!----------
+      <video id="embedded_video" width="600" controls>
+          <source id="embedded_video_src" src="video/HoC-Video1.mp4" type="video/mp4">
+        </video>
+        --->
+    </div>
+    <div id="fade" onClick="lightbox_close();"></div>
+
+  </body>
+</html>
