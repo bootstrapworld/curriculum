@@ -358,7 +358,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("positive correlation") "relationship in which one variable increases as the other increases, and vice versa")
      (es-mx ("correlación positiva") "una relación en la que los valores de ambas variables tienden a aumentar juntos"))
     
-    ((en-us ("predictor function" "predictor") "a function which, given a value from one dataset, makes an educated guess at a related value in a different dataset")
+    ((en-us ("predictor function" "predictor") "a linear function used to predict the value of a response variable given the value of the explanatory variable.")
      (es-mx ("función predictora") "una función que, dado un valor de un conjunto de datos, hace una suposición fundamentada sobre un valor relacionado en un conjunto de datos diferente"))
     
     ((en-us ("produce") "to compute a value from an expression")
@@ -442,7 +442,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("skewed right" "skew right" "right skew") "A distribution is skewed right if there are a few values that are fairly high compared to the bulk of data values. A histogram of data that is skewed right will have a clump of taller bars on the left, with smaller ones trailing off to the right, like the shape of the toes on a right foot.")
      (es-mx ("sesgo a la derecha") "Una distribución está sesgada a la derecha si hay algunos valores que son bastante altos en comparación con la mayor parte de los valores de los datos. Un histograma de datos que está sesgado a la derecha tendrá un grupo de barras más altas a la izquierda, y una cola de barras más reducida hacia la derecha, como la forma de los dedos del pie derecho."))
 
-    ((en-us ("slope") "the steepness of a straight line on a graph")
+    ((en-us ("slope" "rate of change") "the steepness of a straight line on a graph")
      (es-mx ("pendiente") "la inclinación de una línea recta en un gráfico"))
 
     ((en-us ("solution set") "the set of all values or coordinate pairs that will make an equation, inequality, set of equations or set of inequalities true")
