@@ -1,4 +1,4 @@
-= Chaining Methods 2: Order Matters
+= Composing Table Functions: Order Matters!
 
 You have the following functions defined below (read them _carefully!_):
 
@@ -25,49 +25,60 @@ _Match_ each Pyret expression (left) to the description of what it does (right).
 
 |
 ----
- t.order-by("kilos", true)
+sort(t, "kilos", true)
 ----
 |*@n*@ifsoln{(D)} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
 |
 ----
-t.filter(is-female)
-  .build-column("kilos", kilograms)
+build-col(
+  filter(t, is-female),
+  "kilos",
+  kilograms)
 ----
 |*@n*@ifsoln{(A)} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
 |
 ----
-t.build-column("kilos", kilograms)
-  .filter(is-heavy)
+filter(
+  build-col("kilos", kilograms),
+  is-heavy)
 ----
 |*@n*@ifsoln{(C)} ||*C*
 | Produces a table containing only Fritz.
 
 |
 ----
-t.filter(is-heavy)
-  .build-column("kilos", kilograms)
+build-col(
+  filter(is-heavy),
+  "kilos",
+  kilograms)
 ----
 |*@n*@ifsoln{(D)} ||*D*
 | Won’t run: will produce an error (if so, why?)
 
 |
 ----
-t.build-column("kilos", kilograms)
-  .filter(is-heavy)
-  .order-by("sex", true)
+sort(
+  filter(
+    build-column(t, "kilos", kilograms),
+    is-heavy),
+  "sex",
+  true)
 ----
 |*@n*@ifsoln{+(C)+} ||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
 |
 ----
-t.build-column("female", is-female)
-  .build-column("kilos", kilograms)
-  .filter(is-heavy)
+filter(
+  build-col(
+    build-col(t, "female", is-female)
+    "kilos",
+    kilograms)
+  is-heavy)
 ----
 |*@n*@ifsoln{(E)} ||*F*
 | Produces a table containing Maple and Fritz

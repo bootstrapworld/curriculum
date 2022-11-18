@@ -1,11 +1,11 @@
 [.landscape]
 = Grouped Samples from the Animals Dataset
 
-Use method chaining to define the *grouped samples* below. __Assume that the following helper functions are defined exactly the way they are in the @starter-file{grouped-samples}__: `is-old`, `is-young`, `is-cat`, `is-dog`, `is-female`, `is-fixed`, and `name-has-s`. We’ve given you the solution for the first sample, to get you started.
+Use function composition to define the *grouped samples* below. __Assume that the following helper functions are defined exactly the way they are in the @starter-file{grouped-samples}__: `is-old`, `is-young`, `is-cat`, `is-dog`, `is-female`, `is-fixed`, and `name-has-s`. We’ve given you the solution for the first sample, to get you started.
 
 @vspace{1ex}
 
-@ifsoln{_Students answers will vary the order of the methods chained_}
+@ifsoln{_Students answers will vary the order of the functions composed_}
 [.FillVerticalSpace, cols="^.^1a, .^5a, .^20a",options="header"]
 |===
 |
@@ -14,42 +14,42 @@ Use method chaining to define the *grouped samples* below. __Assume that the fol
 
 | *@n*
 | Kittens
-| `kittens = animals-table.filter(is-cat).filter(is-young)`
+| `kittens = filter(filter(animals-table, is-cat), is-young)`
 
 | *@n*
 | Puppies
-| @ifsoln{`young-dogs = animals-table.filter(is-young).filter(is-dog)`}
+| @ifsoln{`young-dogs = filter(filter(animals-table, is-young), is-dog)`}
 
 | *@n*
 | Fixed Cats
-| @ifsoln{`fixed-cats = animals-table.filter(is-fixed).filter(is-cat)`}
+| @ifsoln{`fixed-cats = filter(filter(animals-table, is-fixed), is-cat)`}
 
 | *@n*
 | Cats with “s” in their name
-| @ifsoln{`s-cats = animals-table.filter(is-cat).filter(has-s-name)`}
+| @ifsoln{`s-cats = filter(filter(animals-table, is-cat), has-s-name)`}
 
 | *@n*
 | Old Dogs
-| @ifsoln{`old = animals-table.filter(is-dog).filter(is-old)`}
+| @ifsoln{`old = filter(filter(animals-table, is-dog), is-old)`}
 
 | *@n*
 | Fixed Animals
-| @ifsoln{`fixed = animals-table.filter(is-fixed)`}
+| @ifsoln{`fixed = filter(animals-table, is-fixed)`}
 
 | *@n*
 | Old Female Cats
-| @ifsoln{`old-f-cats = animals-table.filter(is-old).filter(is-female).filter(is-cat)`}
+| @ifsoln{`old-f-cats = filter(filter(filter(animals-table, is-old), is-female), is-cat)`}
 
 | *@n*
 | Fixed Kittens
-| @ifsoln{`young-fixed-cats = fixed-cats.filter(is-young)`}
+| @ifsoln{`young-fixed-cats = filter(fixed-cats, is-young)`}
 
 | *@n*
 | Fixed Female Dogs
-| @ifsoln{`fixed-female-dogs = fixed.filter(is-female).filter(is-dog)`}
+| @ifsoln{`fixed-female-dogs = filter(filter(fixed, is-female), is-dog)`}
 
 | *@n*
 | Old Fixed Female Cats
-| @ifsoln{`old-fixed-f-cats = old-f-cats.filter(is-fixed)`}
+| @ifsoln{`old-fixed-f-cats = filter(old-f-cats, is-fixed)`}
 
 |===

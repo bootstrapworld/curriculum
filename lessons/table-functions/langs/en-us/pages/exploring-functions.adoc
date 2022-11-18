@@ -1,0 +1,52 @@
+= Exploring Table Functions
+
+Make sure you've opened the @starter-file{table-functions} on your computer, and clicked "Run".
+
+== Filtering Rows
+@n What does `filter(animals-table, lookup-fixed)` evaluate to?
+
+@fitb{}{@ifsoln{A table with only the fixed animals}}
+
+@n What does `filter(animals-table, is-dog)` evaluate to?
+
+@fitb{}{@ifsoln{A table with only the dogs}}
+
+@n Write the code to generate a table showing only the old animals. @fitb{}{@ifsoln{`filter(animals-table, is-old)`}}
+
+@n What do the contracts for `lookup-fixed`, `is-dog`, and `is-old` have in common?
+
+@fitb{}{@ifsoln{They all produce Booleans}}
+
+@n Find the contract for `filter` in your Contracts page. Explain how `filter` uses the two inputs specified in the Domain.
+
+@fitb{}{@ifsoln{`filter` needs a Table, and the name of a function. It makes a new}}
+
+@fitb{}{@ifsoln{copy of the table, leaving out rows for which the function produces false}}
+
+@fitb{}{}
+
+@n What happens if you evaluate `filter(animals-table, lookup-name)`? Why?
+
+@fitb{}{@ifsoln{Error, because the function must produce a Boolean}}
+
+
+== Building Columns
+@n What does `build-col(animals-table, "old", is-old)` evaluate to?
+
+@fitb{}{@ifsoln{A table with a new column called "old", filled with values from `is-old`}}
+
+@n What does `build-col(animals-table, "sticker", label)` evaluate to?
+
+@fitb{}{@ifsoln{A table with a new column called "sticker", filled with values from `label`}}
+
+@n Find the contract for `build-col` in your Contracts page. Explain how `build-col` uses the three inputs specified in the Domain.
+
+@fitb{}{@ifsoln{`build-col` needs a Table, the name of a column to add, and the name of a function.}}
+
+@fitb{}{@ifsoln{It makes a new copy of the table, adding the column, and filling it by}}
+
+@fitb{}{@ifsoln{applying the function to each row}}
+
+@fitb{}{}
+
+@n Where else have we seen functions that consume functions? @fitb{}{@ifsoln{image-scatter-plot}}

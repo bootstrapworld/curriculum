@@ -28,33 +28,33 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 | `Table`
 5+|`_random-rows(animals-table, 5)_`
 
-| `<Table>.row-n`
+| `row-n`
 | `{two-colons}`
-| `Number`
+| `(t {two-colons Table}, index {two-colons} Number)`
 | `->`
 | `Row`
 5+|`_animals-table.row-n(5)_`
 
-| `<Table>.order-by`
+| `sort`
 | `{two-colons}`
-| `(col {two-colons} String, increasing {two-colons} Boolean)`
+| `(t {two-colons Table}, col {two-colons} String, increasing {two-colons} Boolean)`
 | `->`
 | `Table`
-5+|`_animals-table.order-by("species", true)_`
+5+|`_sort(animals-table, "species", true)_`
 
-| `<Table>.filter`
+| `filter`
 | `{two-colons}`
-| `(test {two-colons} (Row -> Boolean))`
+| `(t {two-colons Table}, test {two-colons} (Row -> Boolean))`
 | `->`
 | `Table`
-5+|`_animals-table.filter(is-cat)_`
+5+|`_filter(animals-table, is-cat)_`
 
-| `<Table>.build-column`
+| `build-col`
 | `{two-colons}`
-| `(col {two-colons} String, builder {two-colons} (Row -> Any))`
+| `(t {two-colons Table}, col {two-colons} String, builder {two-colons} (Row -> Any))`
 | `->`
 | `Table`
-5+|`_animals-table.build-column("sticker", label)_`
+5+|`_build-col(animals-table, "sticker", label)_`
 
 | `bar-chart-summarized`
 | `{two-colons}`

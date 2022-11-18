@@ -90,7 +90,7 @@
    )
 
   ("expanded-animals" "Expanded Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Iu5I9lJt1oCho-l4xk7FucgtLq6cAUVr&v=6788e10")
+   ("pyret" "https://code.pyret.org/editor#share=1zkT8gS3gHMyLdI7VdrruJZvn4SPQmPDc")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json")
    )
 
@@ -99,7 +99,7 @@
    )
 
   ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1OUuVCsm320LzZtwsrS4TLTt_Gp7tQD2A")
+   ("pyret" "https://code.pyret.org/editor#share=1fjtcMYGQHtUmHPP0xKYYulL7xu1Nl0eQ")
    )
 
   ("fair-coins" "Fair Coins Starter File"
@@ -112,7 +112,7 @@
     )
 
   ("grouped-samples" "Grouped Samples Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1z0ogp7ZA6eoZCm9g6wDu4Z6Onskz47hg&v=a8e2e65")
+    ("pyret" "https://code.pyret.org/editor#share=16nzX2t8M_Z83owrq9u-XXF0xrodayW9A")
     ("codap" "TBD")
    )
 
@@ -121,24 +121,24 @@
    )
 
   ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1SOLAau653CYFY05x45NustZ0-ejKGQF0")
+   ("pyret" "https://code.pyret.org/editor#share=1XK78l3FOYzmKPWrYmYBMUumvEWtwN03b")
    )
 
   ("putting-it-all-together" "Putting it all Together Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Qru5u76sBGvm4bB0KS8YSDKk4ED4qt5U")
+   ("pyret" "https://code.pyret.org/editor#share=1i-EWykcjBGPeyFkGK0C1vYl5BVPkQ8ef")
    )
 
   ("row-functions" "Row Functions Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1-YuAea2oTVZcEyUNvEb-cg5qIB6n5V7n")
+   ("pyret" "https://code.pyret.org/editor#share=17266_Kczy0pJxp8TzkMsawaMavG4PDpk")
    )
 
-  ("table-methods" "Table Methods Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1NVVlQpCKWmLJqz87iRb6IXssIB_68jVM")
+  ("table-functions" "Table Functions Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1lk56IOB08ir43MZ3Vbi5R5d69uqcbaL3")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json")
    ) 
 
   ("trust-but-verify"  "Trust but Verify Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1DBYGJDOlIARaWI3pBVzjPp6eewkQJGHW")
+   ("pyret" "https://code.pyret.org/editor#share=1QeOuoKMORAbJ1xAnqhcLKTZikdFkPCKs")
    )
 
   ("bad-survey"  "Height vs. Wingspan Survey (make a copy)"

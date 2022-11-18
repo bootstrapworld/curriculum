@@ -1,0 +1,74 @@
+= Circles of Evaluation (2)
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+</style>
+++++
+
+@do{
+
+(define exp1 '(build-col t "little" is-small))
+(define exp2 '(filter t is-cat))
+(define exp3 '(build-col t "sticker" nametag))
+(define exp4 '(filter (filter t is-dog) is-fixed))
+(define exp5 '(sort (filter t is-dog) "pounds"))
+
+}
+
+You have the following functions defined below (read them _carefully!_):
+
+  fun is-fixed(r): r["fixed"]                 end
+  fun is-small(r): r["pounds"] < 50           end
+  fun is-cat(r):   r["species"] == "cat"      end
+
+The table `t` below represents four animals from the shelter:
+
+[cols='6',options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `false` | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+|`"Sunflower"`| `"female"`| `2`   | `false` | `51.6`
+|===
+
+@vspace{1ex}
+
+Fill in the boxes below so that each set has a Circle of Evaluation, the equivalent Pyret code, and a description of the resulting table. The first Row has been completed for you, but you'll need to fill in the rest!
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols=".^1a,^.^12a,^.^12a,^.^6a",stripes="none",frame="none", options="header"]
+|===
+|
+| Circle of Evaluation
+| Code
+| Description
+
+| @n
+| @show{(coe exp1)}
+| @show{(code exp1)}
+| All the animals, with a new column called "little"
+
+| @n
+| @showsoln{(coe exp2)}
+| @showsoln{(code exp2)}
+| Just Sunflower
+
+| @n
+| @show{(coe exp3)}
+| @showsoln{(code exp3)}
+| @ifsoln{All the animals, with new columns called "sticker" and "little"}
+
+| @n
+| @show{(coe exp4)}
+| @showsoln{(code exp4)}
+| @ifsoln{Just Toggle and Nori}
+
+| @n
+| @showsoln{(coe exp5)}
+| @show{(code exp5)}
+| @ifsoln{Just Nori, Toggle, and Fritz - in that order}
+
+|===
