@@ -5,22 +5,67 @@
 table:first-of-type td {padding: .25em .5em !important; }
 </style>
 ++++
-
 @do{
 
-(define exp1 '(sort t "age" true))
-(define exp2 '(filter t is-young))
-(define exp3 '(build-col t "sticker" nametag))
-(define exp4 '(filter (filter t is-young) is-fixed))
-(define exp5 '(sort (filter t is-young) "pounds"))
+(define exp1 '(sort t "pounds" false))
+(define exp2 '(sort (filter t is-dog) "pounds" true))
+(define exp3 '(build-col (filter t is-cat) "large" is-big))
+(define exp4 '(filter (sort t name "true") is-dog))
+(define exp5 '(filter (build-col t "cat" is-cat) is-dog))
 
 }
 
-You have the following functions defined below (read them _carefully!_):
+You have created and saved the following Transformers. (Read them _carefully!_)
 
-  fun is-fixed(r): r["fixed"]                 end
-  fun is-young(r): r["age"] <= 4              end
-  fun nametag(r):  text(r["name"], 20, "red") end
+[cols="5,5,5,5"]
+|===
+|@span{.center}{*`filter-is-fixed`*}
+
+Transformer: Filter
+
+Expression: Fixed = true
+
+| @span{.center}{*`filter-is-young`*}
+
+Transformer: Filter
+
+Expression: Age < 4
+
+| @span{.center}{*`filter-is-female`*}
+
+Transformer: Filter
+
+Expression: Sex = “female”
+
+| @span{.center}{*`build-kilos`*}
+
+Transformer: Build Attribute
+
+Name of new attribute: Kilos
+
+Expression: Weight (lbs) / 2.2
+
+| @span{.center}{*`filter-is-heavy`*}
+
+Transformer: Filter
+
+Expression: Kilos > 25
+
+| @span{.center}{*`filter-is-dog`*}
+
+Transformer: Filter
+
+Expression: Species =  “dog”
+
+| @span{.center}{*`filter-is-cat`*}
+
+Transformer: Filter
+
+Expression: Species = "cat"
+
+|
+|
+|===
 
 The table `t` below represents four animals from the shelter:
 
@@ -43,7 +88,7 @@ Fill in the boxes below so that each set has a Circle of Evaluation, the equival
 |===
 |
 | Circle of Evaluation
-| Code
+| Order of Transformers
 | Description
 
 | @n

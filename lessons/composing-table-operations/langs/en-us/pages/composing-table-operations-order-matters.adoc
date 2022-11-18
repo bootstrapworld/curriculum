@@ -1,4 +1,21 @@
-= Composing Table Functions: Order Matters!
+= Composing Table Operations: Order Matters!
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+</style>
+++++
+
+@do{
+
+(define exp1 '(sort t "kilos" true))
+(define exp2 '(build-col (filter t is-female) "kilos" kilograms))
+(define exp3 '(filter (build-col t "kilos" kilograms) is-heavy))
+(define exp4 '(build-col (filter t is-heavy) "kilos" kilograms))
+(define exp5 '(sort (filter (build-col t "kilos" kilograms) is-heavy) "sex" true))
+(define exp6 '(filter (build-col (build-col t "female" is-female) "kilos" kilograms) is-heavy))
+}
 
 You have the following functions defined below (read them _carefully!_):
 
@@ -15,73 +32,36 @@ The table `t` below represents four animals from the shelter:
 | `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
 | `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
 | `"Maple"`   | `"female"`| `3`   | `true`  | `51.6`
-
 |===
 
 _Match_ each Pyret expression (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
 
-[.FillVerticalSpace, cols=".^10a,^.^2a,3,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+[.FillVerticalSpace, cols=".^14a,^.^2a,1,^.^1a,.^6a",stripes="none",grid="none",frame="none"]
 |===
 
-|
-----
-sort(t, "kilos", true)
-----
+| @show{(coe exp1)}
 |*@n*@ifsoln{(D)} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
-|
-----
-build-col(
-  filter(t, is-female),
-  "kilos",
-  kilograms)
-----
+| @show{(coe exp2)}
 |*@n*@ifsoln{(A)} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
-|
-----
-filter(
-  build-col("kilos", kilograms),
-  is-heavy)
-----
-|*@n*@ifsoln{(C)} ||*C*
+| @show{(coe exp3)}
+|*@n*@ifsoln{+(C)+} ||*C*
 | Produces a table containing only Fritz.
 
-|
-----
-build-col(
-  filter(is-heavy),
-  "kilos",
-  kilograms)
-----
+| @show{(coe exp4)}
 |*@n*@ifsoln{(D)} ||*D*
 | Won’t run: will produce an error (if so, why?)
 
-|
-----
-sort(
-  filter(
-    build-column(t, "kilos", kilograms),
-    is-heavy),
-  "sex",
-  true)
-----
+| @show{(coe exp5)}
 |*@n*@ifsoln{+(C)+} ||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
-|
-----
-filter(
-  build-col(
-    build-col(t, "female", is-female)
-    "kilos",
-    kilograms)
-  is-heavy)
-----
-|*@n*@ifsoln{(E)} ||*F*
-| Produces a table containing Maple and Fritz
+| @show{(coe exp6)}
+|*@n*@ifsoln{+(E)+} ||*G*
+| Produces a table containing Maple and Fritz.
 
 |===
 
