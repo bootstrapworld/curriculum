@@ -18,7 +18,6 @@
 (require "starter-files.rkt")
 
 (provide
-  create-alignments-subfile ; NOTE(Dorai) - do we still need this?
   preproc-adoc-file
   rearrange-args
   )
@@ -2134,13 +2133,6 @@
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
   )
-
-(define (create-alignments-subfile file)
-  ; (printf "doing create-alignments-subfile ~s\n\n" file)
-  (print-menubar (string-append file "-comment.txt"))
-  (call-with-output-file (string-append file ".asc")
-    (lambda (o) (display-alignments-selection o))
-    #:exists 'replace))
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")

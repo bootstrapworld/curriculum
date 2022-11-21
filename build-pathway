@@ -2573,22 +2573,6 @@ function buildpathwaytocs() {
   echo "}" >> $TOCSFILE
 }
 
-function allthealignments() {
-  cd $TOPDIR
-  cd distribution/$NATLANG
-#   echo doing allthealignments in $(pwd)
-  test -d .cached || mkdir -p .cached
-
-  $PROGDIR/make-alignments.rkt
-
-  echo .cached/.Alignments.asc >> $ADOC_INPUT
-  echo .cached/.Alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-
-  if test ! $DEBUG; then rm -f *.asc *.txt; fi
-
-  cd $TOPDIR
-}
-
 function calculatedistrootdir() {
   local f=$1
   f=$(echo $f|$SED -e 's/^\.\///')
@@ -2876,7 +2860,6 @@ function doconversions() {
   echo " "
 
   createabyss
-  allthealignments
 
   doadocpostproc $ADOC_INPUT
 
