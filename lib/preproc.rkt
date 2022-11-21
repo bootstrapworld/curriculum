@@ -18,11 +18,6 @@
 (require "starter-files.rkt")
 
 (provide
-  assoc-standards
-  add-standard ; NOTE(Dorai) - do we still need this?
-  add-textbook-chapter ; NOTE(Dorai) - do we still need this?
-  add-practice ; NOTE(Dorai) - do we still need this?
-  box-add-new! ; NOTE(Dorai) - do we still need this?
   create-alignments-subfile ; NOTE(Dorai) - do we still need this?
   preproc-adoc-file
   rearrange-args
@@ -163,19 +158,6 @@
 (define *glossary-items* '())
 
 (define *missing-glossary-items* '())
-; NOTE(Dorai) - do we still need this?
-(define *standards-met* '())
-;FIXME
-
-; (define *textbooks-used* '())
-; NOTE(Dorai) - do we still need this?
-(define *textbooks-represented* '())
-; NOTE(Dorai) - do we still need this?
-(define *chapters-used* '())
-; NOTE(Dorai) - do we still need this?
-(define *practices-merited* '())
-; NOTE(Dorai) - do we still need this?
-(define *practice-categories-represented* '())
 
 (define *lesson-prereqs* '())
 
@@ -301,118 +283,6 @@
                                 lhs))]
                       [else #f])
                 (loop (cdr L))))))))
-
-; NOTE(Dorai) - do we still need this?
-(define (assoc-standards std)
-  ; (printf "doing assoc-standards ~s\n" std)
-  (let ([c #f]
-        [dict #f])
-    (for ([x *disallowed-standards-list*])
-      (unless c
-        (let ([stds-list (third x)])
-          (set! c (assoc std stds-list)))))
-    ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
-    (cond [c (values #f #f)]
-          [else (for ([x *standards-list*])
-                  (unless c
-                    (let ([stds-list (third x)])
-                      (set! c (assoc std stds-list))
-                      (when c
-                        (set! dict (first x))))))
-                ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
-                (unless c
-                  (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
-                ; (printf "assoc-standards returned ~s ~s\n" (and c (second c)) dict)
-                (values (and c (second c)) dict)])))
-; NOTE(Dorai) - do we still need this?
-(define (assoc-textbooks chapter-label)
-  ; (printf "doing assoc-textbooks ~s\n" chapter-label)
-  (let ([chapter-desc #f]
-        [textbook-name #f])
-    (for ([x *textbooks-list*])
-      (unless chapter-desc
-        (let ([this-textbook-name (first x)]
-              [this-textbook-chapters (third x)])
-          ;(printf "\n t-n = ~s\n t-cc = ~s\nn" this-textbook-name this-textbook-chapters)
-          (set! chapter-desc (assoc chapter-label this-textbook-chapters))
-          (when chapter-desc (set! textbook-name this-textbook-name)))))
-    ;(printf "chapter-desc = ~s; textbook-name = ~s\n" chapter-desc textbook-name)
-    (if chapter-desc
-        (begin
-          ; (printf "assoc-textbooks returned ~s ~s\n" (second chapter-desc) textbook-name)
-          (values (second chapter-desc) textbook-name)
-          )
-        (values #f #f))))
-; NOTE(Dorai) - do we still need this?
-(define (assoc-practice practice-label)
-  (let ([practice-cell #f]
-        [practice-category-name #f])
-    (for ([x *practices-list*])
-      (unless practice-cell
-        (set! practice-cell (assoc practice-label (list-ref x 2)))
-        (when practice-cell (set! practice-category-name (list-ref x 0)))))
-    (if practice-cell
-        (values (second practice-cell) practice-category-name)
-        (values #f #f))))
-; NOTE(Dorai) - do we still need this?
-(define (add-standard std lesson-title lesson pwy)
-  ; (printf "doing add-standard std= ~s ttl= ~s lsn= ~s pwy= ~s\n" std lesson-title lesson pwy)
-  (let-values ([(std-desc dict) (assoc-standards std)])
-    ;(printf "-> std-desc= ~s dict= ~s\n" std-desc dict)
-    (when std-desc
-      (cond [(assoc std *standards-met*)
-             => (lambda (c0)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy)
-                                  (list-ref c0 3))))]
-            [else
-              (set! *standards-met*
-                (cons (list std std-desc dict
-                            (box (list (list lesson-title lesson pwy))))
-                      *standards-met*))]))))
-; NOTE(Dorai) - do we still need this?
-(define (add-textbook-chapter chapter-label lesson-title lesson pwy)
-  ; (printf "doing add-textbook-chapter ~s ~s ~s ~s\n" chapter-label lesson-title lesson pwy)
-  (let-values ([(chapter-title textbook-label) (assoc-textbooks chapter-label)])
-    (when chapter-title
-      (cond [(assoc chapter-label *chapters-used*)
-             => (lambda (c)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy)
-                                  (list-ref c 3))))]
-            [else
-              (unless (member textbook-label *textbooks-represented*)
-                (set! *textbooks-represented* (cons textbook-label *textbooks-represented*)))
-              (set! *chapters-used*
-                (cons (list chapter-label chapter-title textbook-label
-                            (box (list (list lesson-title lesson pwy))))
-                      *chapters-used*))]))))
-; NOTE(Dorai) - do we still need this?
-(define (add-practice practice-label lesson-title lesson pwy)
-  (let-values ([(practice-desc practice-category-name) (assoc-practice practice-label)])
-    (when practice-category-name
-      (cond [(assoc practice-label *practices-merited*)
-             => (lambda (c)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy) (list-ref c 3))))]
-            [else
-              (unless (member practice-category-name *practice-categories-represented*)
-                (set! *practice-categories-represented*
-                  (cons practice-category-name *practice-categories-represented*)))
-              ; (printf "practice-categ-repd bumped to ~s\n" *practice-categories-represented*)
-              (set! *practices-merited*
-                (cons (list practice-label practice-desc practice-category-name
-                            (box (list (list lesson-title lesson pwy))))
-                      *practices-merited*))]))))
-; NOTE(Dorai) - do we still need this?
-(define (box-add-new! v bx)
-  ;(printf "doing box-add-new! ~s ~s\n" v bx)
-  (let ([vv (unbox bx)])
-    (unless (member v vv)
-      (let ([vv (append vv (list v))])
-        (when (number? v)
-          (set! vv (sort vv <)))
-        (set-box! bx vv)))))
 
 (define (check-first-subsection i o)
   (let ([c (peek-char i)])
@@ -963,7 +833,6 @@
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml");remove ;FIXME
-                                   (string=? g "pathway-alignments.shtml")
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
@@ -1024,10 +893,6 @@
     (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
 
 (define *lesson-summary-file* #f)
-
-; NOTE(Dorai) - do we still need this?
-(define *standards-dictionaries*
-  (map first *standards-list*))
 
 (define *page-title* #f)
 
@@ -1310,11 +1175,6 @@
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
-  (set! *standards-met* '()); NOTE(Dorai) - do we still need this?
-  (set! *chapters-used* '()); NOTE(Dorai) - do we still need this?
-  (set! *textbooks-represented* '()); NOTE(Dorai) - do we still need this?
-  (set! *practices-merited* '()); NOTE(Dorai) - do we still need this?
-  (set! *practice-categories-represented* '()); NOTE(Dorai) - do we still need this?
   (set! *lesson-prereqs* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
@@ -1636,8 +1496,6 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
-                            (create-alignments-subfile
-                              (string-append *containing-directory* "/.cached/.pathway-alignments"))
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
@@ -1951,8 +1809,6 @@
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
-                (create-alignments-subfile
-                  (string-append *containing-directory* "/.cached/.pathway-alignments"))
                 (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
@@ -2280,6 +2136,7 @@
   )
 
 (define (create-alignments-subfile file)
+  ; (printf "doing create-alignments-subfile ~s\n\n" file)
   (print-menubar (string-append file "-comment.txt"))
   (call-with-output-file (string-append file ".asc")
     (lambda (o) (display-alignments-selection o))
