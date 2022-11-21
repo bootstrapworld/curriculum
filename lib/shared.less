@@ -507,9 +507,16 @@ body.workbookpage {
   .solution { font-style: italic; }
   .blank    { color: rgba(0,0,0,0); }
 
-  /* Auto-numbering - Add a right-paren, unless it's inside a table. */
-  .autonum::after { content: ')'; }
-  table .autonum::after { content: none; }
+  /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
+  .autonum { 
+    display: inline-block; 
+    padding-top: 1.2rem; 
+    &::after { content: ')'; }
+  }
+  td .autonum {
+    padding-top: 0;
+    &::after { content: none;}
+  }
 
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
