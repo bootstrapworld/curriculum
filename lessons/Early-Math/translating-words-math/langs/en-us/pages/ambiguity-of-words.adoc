@@ -1,1 +1,80 @@
+= The Ambiguity of Words
+
+Draw a Circle for each possible interpretation of the expression in words, and then translate each Circle into a unique mathematical expression. We've started the first one for you.
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr;}
+  div.circleevalsexp .value,
+  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+</style>
+++++
+
+@do{
+  (define coe1a '(+ (* 7 4) 12))
+  (define coe1b '(* 7 (+ 4 12)))
+
+  (define coe2a '(/ 10 (- 2 1)))
+  (define coe2b '(- (/ 10 2) 1))
+
+  (define coe4a '(+ 3 (* 9 4)))
+  (define coe4b '(* (+ 9 3) 4))
+
+  (define coe5a '(* (* 1/2 10) 3))
+  (define coe5b '(* 1/2 (* 10 3)))
+
+  (define coe6a '(+ (+ 6 3) 5))
+  (define coe6b '(+ 6 (+ 3 5)))
+}
+
+@vspace{1ex}
+
+@n the product of seven and four increased by twelve
+
+[.FillVerticalSpace, cols="^.^4a,^.^4a",options=stripes="none"]
+|===
+| @show{(coe coe1a)}		| @show{(coe coe1b)}
+| @ifsoln{@math{(7 \times 4) + 12}}	| @ifsoln{@math{7 \times (4 + 12)}}
+|===
+
+@vspace{1ex}
+
+@n the quotient of ten and two decreased by one
+
+[.FillVerticalSpace, cols="^.^4a,^.^4a",options=stripes="none"]
+|===
+| @showsoln{(coe coe2a)}	| @showsoln{(coe coe2b)}
+| @ifsoln{@math{10 \div (2 - 1)}}	| @ifsoln{@math{(10 \div 2) - 1}}
+|===
+
+@vspace{1ex}
+
+@n three more than nine multipled by four
+
+[.FillVerticalSpace, cols="^.^4a,^.^4a",options=stripes="none"]
+|===
+| @showsoln{(coe coe4a)}		| @showsoln{(coe coe4b)}
+| @ifsoln{@math{(3 + (9 \times 4)}}	| @ifsoln{@math{(9 + 3) \times 4}}
+|===
+
+@vspace{1ex}
+
+@n half of ten tripled
+
+[.FillVerticalSpace, cols="^.^4a,^.^4a",options=stripes="none"]
+|===
+| @showsoln{(coe coe5a)}		| @showsoln{(coe coe5b)}
+| @ifsoln{@math{(\frac {1}{2} \times 10) \times 3}}	| @ifsoln{@math{\frac {1}{2} \times (10 \times 3)}}
+|===
+
+@vspace{1ex}
+
+
+@n the sum of six and three increased by five
+
+[.FillVerticalSpace, cols="^.^4a,^.^4a",options=stripes="none"]
+|===
+| @showsoln{(coe coe6a)}		| @showsoln{(coe coe6b)}
+| @ifsoln{@math{(6 + 3) + 5}}	| @ifsoln{@math{6 + (3 + 5)}}
+|===
 
