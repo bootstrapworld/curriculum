@@ -291,10 +291,14 @@ function overwrite() {
   fi
 }
 
-# check for repartee
+# check for repartee, and copy to the lesson folder if it is in node_modules
 if test -d $TOPDIR/node_modules; then
-  rm -r lessons/hoc-winter-parley/langs/$NATLANG/repartee
-  $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+  if test -d lessons/hoc-winter-parley/langs/$NATLANG/repartee; then
+    rm -r lessons/hoc-winter-parley/langs/$NATLANG/repartee
+  fi
+  if test -d lessons/hoc-winter-parley/langs/$NATLANG; then
+    $CP -pr $TOPDIR/node_modules/embed-repartee-example/repartee lessons/hoc-winter-parley/langs/$NATLANG/
+  fi
 fi
 
 if test ! -d distribution/$NATLANG/extlib/mathjax; then
@@ -1906,12 +1910,14 @@ function rmtmpfiles() {
 }
 
 function copylessondir() {
-  local repoDir=$1
+  # echo doing copylessondir "$@"
+  local repoDir="$1"
+  # echo repoDir is "$repoDir"
   test -z "$repoDir" && return
   test -d "$repoDir" || return
   local lessonDir=${repoDir#*lessons/}
   lessonDir=${lessonDir#*/}
-  # echo doing copylessondir $lessonDir in $(pwd)
+  # echo doing copylessondir II $lessonDir in $(pwd)
   local repoLessonDir="$repoDir"/langs/$NATLANG
   if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
     repoLessonDir="$repoDir"/langs/en-us
@@ -1946,7 +1952,9 @@ function copylessondir() {
     #rm -f .cached/.checksum.md5txt
     touch .cached/.proglang-pyret
     touch .cached/.redo
-    rm -f index.shtml index.pdf
+    if test -f index.adoc; then
+      rm -f index.shtml index.pdf
+    fi
     test -d pages || mkdir pages
     for subdir in *; do
       if test "$subdir" = pages -o "$subdir" = solution-pages; then
@@ -1980,7 +1988,9 @@ function copylessondir() {
         mkdir -p .cached
         touch .cached/.proglang-$pl
         touch .cached/.redo
-        rm -f index.shtml index.pdf
+        if test -f index.adoc; then
+          rm -f index.shtml index.pdf
+        fi
         if test "$firstproglang" = $pl; then
           touch .cached/.primarylesson
         fi
@@ -2022,6 +2032,7 @@ function copylessondir() {
 
 function copylessonrecdir() {
   local d=$1
+  # echo doing copylessonrecdir $d
   if test -d "$d"/langs; then
     copylessondir "$d"
   else
@@ -2183,8 +2194,9 @@ function copycommonlessons() {
       fi
       if test -f $lessonOrderFile; then
         for lessonDir in $(cat $lessonOrderFile|grep -v '^ *;'|$SED -e 's/\(;\|\/\/\).*//'|grep -v '^ *$'); do
+          # echo doing for $lessonDir
           repoDir=$(find $TOPDIR/lessons -type d -name $lessonDir)
-          copylessondir $repoDir
+          copylessondir "$repoDir"
         done
       fi
     done
