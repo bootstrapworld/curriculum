@@ -1916,7 +1916,7 @@ function copylessondir() {
   test -z "$repoDir" && return
   test -d "$repoDir" || return
   local lessonDir=${repoDir#*lessons/}
-  lessonDir=${lessonDir#*/}
+  lessonDir=${lessonDir##*/}
   # echo doing copylessondir II $lessonDir in $(pwd)
   local repoLessonDir="$repoDir"/langs/$NATLANG
   if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
@@ -1971,6 +1971,7 @@ function copylessondir() {
     firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   fi
   if test "$firstproglang" = pyret; then
+    mkdir -p "$lessonDir"/.cached
     touch "$lessonDir"/.cached/.primarylesson
   fi
 
