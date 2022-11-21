@@ -22,42 +22,6 @@
 <h1>Alignments</h1>
 </div>
 <div id="content">
-<script>
-function preselect(klass) {
-  const items = document.getElementsByClassName(klass);
-  for (let i = 0; i < items.length; i++) {
-    items[i].style.display = 'none';
-  }
-  if (items.length > 0) {
-    items[0].style.display = 'block';
-  }
-}
-window.onload = function() {
-  preselect('coverageElement');
-}
-function showCoverageAlignment() {
-  const selectTag = document.getElementsByClassName('coverageAlignmentSelect')[0];
-  const options = selectTag && selectTag.options;
-  if(!options) return;
-  const stdTables = document.getElementsByClassName('coverageElement');
-  for (let i = 0; i < stdTables.length; i++) {
-    const stdTable = stdTables[i];
-    stdTable.style.display = 'none';
-  }
-  for (let i = 0; i < options.length; i++) {
-    const opt = options[i];
-    if (opt.selected) {
-      const optStd = opt.value;
-      for (let j = 0; j < stdTables.length; j++) {
-        const stdTable = stdTables[j];
-        if (stdTable.classList.contains(optStd)) {
-          stdTable.style.display = 'block';
-        }
-      }
-    }
-  }
-}
-</script>
 <div class="paragraph">
 <p><div class="standard-menu-container"><div>
 Bootstrap lessons align with several important teaching standards, textbooks, and practices.
