@@ -62,8 +62,6 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 
 The pyramid on the right is a model for summarizing the order of operations. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (operations in parentheses and other grouping symbols). Only after we have completed all of those operations can we move down to the lower level. If both operations from the same level are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear. This set of rules is brittle, and doesn't always make it clear what we need to do. Mnemonic devices for the order of operations like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
 
-@clear
-
 [.lesson-instruction]
 * Check out the expression below. What do you think the answer is?
 ** _Students will likely offer 9 (correct) and 1 (incorrect)._
@@ -107,7 +105,6 @@ If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division fu
 
 [.centered-image]
 @show{(coe '(/ 6 3))}
-@clear
 
 What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
 
@@ -118,21 +115,18 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 
 [.centered-image]
 @show{(coe '(/ 6 (+ 1 2)))}
-@clear
 
 [.lesson-instruction]
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 [.centered-image]
 @show{(coe '(* 5 6))}
-@clear
 
 [.lesson-instruction]
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 [.centered-image]
 @show{(coe '(* (- 10 5) 6))}
-@clear
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
