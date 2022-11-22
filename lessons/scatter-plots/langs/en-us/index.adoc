@@ -38,7 +38,12 @@
 * Make sure students understand what a scatter plot with _no_ relationship looks like.
 * Point out that randomly sampling a few points from a population with a pattern may not expose that pattern! _Sample size matters!_
 * Emphasize the importance of students using their eyes - it's not just about the numbers.
+This PR moves all standard, practice, and textbook alignments from the build script (static, pre-computed) to JS (dynamic, computed on the fly).
 
+Copycat states no longer need to processed at build time, meaning the dictionary of standards needs only a single copy. This alone saves about 90k LOC, and cuts the size of dictionaries.js by 90%
+~700 lines of racket build script have been replaced with ~300 lines of JS
+Build times should be marginally faster, since we're no longer hitting the filesystem to compute temp files for each and every standard, textbook chapter, or practice across every lesson
+pathway-alignments files go away, replaced by a single, global Alignments.shtml file that can be parameterized by pathway via URL arguments
 |===
 
 == Making Scatter Plots @duration{20 minutes}
@@ -152,8 +157,6 @@ Students are asked to identify patterns in their scatter plots. This activity bu
 Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
 
 @center{@image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}}
-
-@clear
 
 [.lesson-instruction]
 * Does the number of weeks to adoption seem to go up or down as the weight increases?
