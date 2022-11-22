@@ -18,12 +18,6 @@
 (require "starter-files.rkt")
 
 (provide
-  assoc-standards
-  add-standard
-  add-textbook-chapter
-  add-practice
-  box-add-new!
-  create-alignments-subfile
   preproc-adoc-file
   rearrange-args
   )
@@ -164,24 +158,9 @@
 
 (define *missing-glossary-items* '())
 
-(define *standards-met* '())
-;FIXME
-
-; (define *textbooks-used* '())
-
-(define *textbooks-represented* '())
-
-(define *chapters-used* '())
-
-(define *practices-merited* '())
-
-(define *practice-categories-represented* '())
-
 (define *lesson-prereqs* '())
 
 (define *lesson-keywords* '())
-
-(define *dictionaries-represented* '())
 
 (define *exercises-done* '())
 
@@ -304,119 +283,6 @@
                       [else #f])
                 (loop (cdr L))))))))
 
-(define (assoc-standards std)
-  ; (printf "doing assoc-standards ~s\n" std)
-  (let ([c #f]
-        [dict #f])
-    (for ([x *disallowed-standards-list*])
-      (unless c
-        (let ([stds-list (third x)])
-          (set! c (assoc std stds-list)))))
-    ;(printf "found ~s in disallowed? ~s\n" std (not (not c)))
-    (cond [c (values #f #f)]
-          [else (for ([x *standards-list*])
-                  (unless c
-                    (let ([stds-list (third x)])
-                      (set! c (assoc std stds-list))
-                      (when c
-                        (set! dict (first x))))))
-                ;(printf "found ~s in allowed? ~s\n" std (not (not c)))
-                (unless c
-                  (printf "WARNING: ~a: Standard ~a not found\n\n" (errmessage-context) std))
-                ; (printf "assoc-standards returned ~s ~s\n" (and c (second c)) dict)
-                (values (and c (second c)) dict)])))
-
-(define (assoc-textbooks chapter-label)
-  ; (printf "doing assoc-textbooks ~s\n" chapter-label)
-  (let ([chapter-desc #f]
-        [textbook-name #f])
-    (for ([x *textbooks-list*])
-      (unless chapter-desc
-        (let ([this-textbook-name (first x)]
-              [this-textbook-chapters (third x)])
-          ;(printf "\n t-n = ~s\n t-cc = ~s\nn" this-textbook-name this-textbook-chapters)
-          (set! chapter-desc (assoc chapter-label this-textbook-chapters))
-          (when chapter-desc (set! textbook-name this-textbook-name)))))
-    ;(printf "chapter-desc = ~s; textbook-name = ~s\n" chapter-desc textbook-name)
-    (if chapter-desc
-        (begin
-          ; (printf "assoc-textbooks returned ~s ~s\n" (second chapter-desc) textbook-name)
-          (values (second chapter-desc) textbook-name)
-          )
-        (values #f #f))))
-
-(define (assoc-practice practice-label)
-  (let ([practice-cell #f]
-        [practice-category-name #f])
-    (for ([x *practices-list*])
-      (unless practice-cell
-        (set! practice-cell (assoc practice-label (list-ref x 2)))
-        (when practice-cell (set! practice-category-name (list-ref x 0)))))
-    (if practice-cell
-        (values (second practice-cell) practice-category-name)
-        (values #f #f))))
-
-(define (add-standard std lesson-title lesson pwy)
-  ; (printf "doing add-standard std= ~s ttl= ~s lsn= ~s pwy= ~s\n" std lesson-title lesson pwy)
-  (let-values ([(std-desc dict) (assoc-standards std)])
-    ;(printf "-> std-desc= ~s dict= ~s\n" std-desc dict)
-    (when std-desc
-      (cond [(assoc std *standards-met*)
-             => (lambda (c0)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy)
-                                  (list-ref c0 3))))]
-            [else
-              (unless (member dict *dictionaries-represented*)
-                (set! *dictionaries-represented* (cons dict *dictionaries-represented*)))
-              (set! *standards-met*
-                (cons (list std std-desc dict
-                            (box (list (list lesson-title lesson pwy))))
-                      *standards-met*))]))))
-
-(define (add-textbook-chapter chapter-label lesson-title lesson pwy)
-  ; (printf "doing add-textbook-chapter ~s ~s ~s ~s\n" chapter-label lesson-title lesson pwy)
-  (let-values ([(chapter-title textbook-label) (assoc-textbooks chapter-label)])
-    (when chapter-title
-      (cond [(assoc chapter-label *chapters-used*)
-             => (lambda (c)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy)
-                                  (list-ref c 3))))]
-            [else
-              (unless (member textbook-label *textbooks-represented*)
-                (set! *textbooks-represented* (cons textbook-label *textbooks-represented*)))
-              (set! *chapters-used*
-                (cons (list chapter-label chapter-title textbook-label
-                            (box (list (list lesson-title lesson pwy))))
-                      *chapters-used*))]))))
-
-(define (add-practice practice-label lesson-title lesson pwy)
-  (let-values ([(practice-desc practice-category-name) (assoc-practice practice-label)])
-    (when practice-category-name
-      (cond [(assoc practice-label *practices-merited*)
-             => (lambda (c)
-                  (unless *lesson*
-                    (box-add-new! (list lesson-title lesson pwy) (list-ref c 3))))]
-            [else
-              (unless (member practice-category-name *practice-categories-represented*)
-                (set! *practice-categories-represented*
-                  (cons practice-category-name *practice-categories-represented*)))
-              ; (printf "practice-categ-repd bumped to ~s\n" *practice-categories-represented*)
-              (set! *practices-merited*
-                (cons (list practice-label practice-desc practice-category-name
-                            (box (list (list lesson-title lesson pwy))))
-                      *practices-merited*))]))))
-
-(define (box-add-new! v bx)
-  ;(printf "doing box-add-new! ~s ~s\n" v bx)
-  (let ([vv (unbox bx)])
-    (unless (member v vv)
-      (let ([vv (append vv (list v))])
-        (when (number? v)
-          (set! vv (sort vv <)))
-        (set-box! bx vv)))))
-
 (define (check-first-subsection i o)
   (let ([c (peek-char i)])
     (if (eof-object? c) #f
@@ -530,53 +396,14 @@
 
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
-  (cond [(null? *standards-met*)
-         (display (create-begin-tag "div" ".sidebarstandards") o)
-         (display "*Standards in this Lesson*: _None_" o)
-         (display (create-end-tag "div") o)
-         (display "\n" o)]
-        [else
-          (display "\n[.sidebarstandards,cols=\"a\"]" o)
-          (display "\n|===\n" o)
-          (display "| " o)
-          (display "*Standards in this Lesson*\n" o)
-          (display-standards-selection o *narrative* *dictionaries-represented*)
-          (display " | \n" o)
-          (display "\ninclude::.index-standards.asc[]\n" o)
-          (display "|===\n" o)
-          ]))
-
-(define (display-practices-bar o)
-  (cond [(null? *practices-merited*)
-         (display (create-begin-tag "div" ".sidebarpractices") o)
-         (display "*Practices in this Lesson*: _None_" o)
-         (display (create-end-tag "div") o)
-         (display "\n" o)]
-        [else
-          (display "\n[.sidebarpractices,cols=\"a\"]" o)
-          (display "\n|===\n" o)
-          (display "| " o)
-          (display "*Practices in this Lesson*\n" o)
-          (display-practices-selection o *practice-categories-represented*)
-          (display " | \n" o)
-          (display "\ninclude::.index-practices.asc[]\n" o)
-          (display "|===\n" o)
-          ]))
-
-(define (display-textbooks-bar o)
-  ;(printf "doing display-textbooks-bar\n")
-  (unless (null? *textbooks-represented*)
-    (display "\n[.sidebartextbooks,cols=\"a\"]" o)
-    (display "\n|===\n" o)
-    (display "| " o)
-    (display "*Textbook Alignment*\n" o)
-    (display-textbooks-selection o *textbooks-represented*)
-    (display " | \n" o)
-    ;(printf "\n\noutputting ~s\n\n" *chapters-used*)
-    ;(printf "\n\ntextbooks-represented= ~s\n\n" *textbooks-represented*)
-    (fprintf o "\ninclude::.index-textbooks.asc[]\n")
-    (display "|===\n" o)
-    ))
+  (display "\n[.sidebarstandards,cols=\"a\"]" o)
+  (display "\n|===\n" o)
+  (display "| " o)
+  (display "*Aligns to:*\n" o)
+  (display-standards-selection o *narrative*)
+  (display " | \n" o)
+  (display "\ninclude::.index-standards.asc[]\n" o)
+  (display "|===\n" o))
 
 (define (include-glossary o)
   ;(printf "include-glossary\n")
@@ -1005,7 +832,6 @@
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml");remove ;FIXME
-                                   (string=? g "pathway-alignments.shtml")
                                    (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
@@ -1066,9 +892,6 @@
     (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
 
 (define *lesson-summary-file* #f)
-
-(define *standards-dictionaries*
-  (map first *standards-list*))
 
 (define *page-title* #f)
 
@@ -1263,94 +1086,35 @@
         ;(display lesson-description o)
         ;(newline o))
         (newline o)))
-    (let ([st-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".standards-in-pathway.txt.kp")
-                  #:exists 'replace)]
-          [tb-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".textbooks-in-pathway.txt.kp")
-                  #:exists 'replace)]
-          [pr-o (open-output-file
-                  (build-path *containing-directory* ".cached" ".practices-in-pathway.txt.kp")
-                  #:exists 'replace)])
-        (for ([lesson lessons])
-          ;(printf "tackling lesson i ~s\n" lesson)
-          (let ([lesson-asc-file
-                  (format "lessons/~a/.cached/.index.asc" lesson)]
-                [lesson-glossary-file
-                  (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
-                [lesson-standards-file
-                  (format "lessons/~a/.cached/.lesson-standards.txt.kp" lesson)]
-                [lesson-chapters-file
-                  (format "lessons/~a/.cached/.lesson-chapters.txt.kp" lesson)]
-                [lesson-practices-file
-                  (format "lessons/~a/.cached/.lesson-practices.txt.kp" lesson)]
-                [lesson-title-file
-                  (format "lessons/~a/.cached/.index.titletxt" lesson)]
-                [lesson-title lesson]
-                )
+      (for ([lesson lessons])
+        ;(printf "tackling lesson i ~s\n" lesson)
+        (let ([lesson-asc-file
+                (format "lessons/~a/.cached/.index.asc" lesson)]
+              [lesson-glossary-file
+                (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
+              [lesson-title-file
+                (format "lessons/~a/.cached/.index.titletxt" lesson)]
+              [lesson-title lesson]
+              )
 
-            (when (file-exists? lesson-title-file)
-              ;(printf "~a exists i\n" lesson-title-file)
-              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+          (when (file-exists? lesson-title-file)
+            ;(printf "~a exists i\n" lesson-title-file)
+            (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
-            (when (file-exists? lesson-glossary-file)
-              ;(printf "~a exists i\n" lesson-glossary-file)
-              (call-with-input-file lesson-glossary-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (let ([s (assoc-glossary x)])
-                          (cond [s (unless (member s *glossary-items*)
-                                     (set! *glossary-items*
-                                       (cons s *glossary-items*)))]))
-                        (loop)))))))
-            ;(printf "took care of pw glossary~n")
-
-            ; (printf "*** ~s's ~s exists? ~s\n" lesson lesson-standards-file (file-exists? lesson-standards-file))
-
-            (when (file-exists? lesson-standards-file)
-              ;(printf "~a exists i\n" lesson-standards-file)
-              (call-with-input-file lesson-standards-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-standard x lesson-title lesson #f)
-                        (fprintf st-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            ;(printf "took care of pw stds~n")
-
-            (when (file-exists? lesson-chapters-file)
-              (call-with-input-file lesson-chapters-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-textbook-chapter x lesson-title lesson #f)
-                        (fprintf tb-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            (when (file-exists? lesson-practices-file)
-              (call-with-input-file lesson-practices-file
-                (lambda (i)
-                  (let loop ()
-                    (let ([x (read i)])
-                      (unless (eof-object? x)
-                        (add-practice x lesson-title lesson #f)
-                        (fprintf pr-o "(~s ~s ~s)\n" x lesson-title lesson)
-                        (loop)))))))
-
-            ;(unless (file-exists? lesson-asc-file)
-            ;  (printf "~s doesn't exist (yet?)\n" lesson-asc-file))
-
-            ))
-
-    (close-output-port st-o)
-    (close-output-port tb-o)
-    (close-output-port pr-o)
-
+          (when (file-exists? lesson-glossary-file)
+            ;(printf "~a exists i\n" lesson-glossary-file)
+            (call-with-input-file lesson-glossary-file
+              (lambda (i)
+                (let loop ()
+                  (let ([x (read i)])
+                    (unless (eof-object? x)
+                      (let ([s (assoc-glossary x)])
+                        (cond [s (unless (member s *glossary-items*)
+                                   (set! *glossary-items*
+                                     (cons s *glossary-items*)))]))
+                      (loop)))))))
+          ;(printf "took care of pw glossary~n")
+          )
     )
     (newline o)))
 
@@ -1410,12 +1174,6 @@
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
-  (set! *standards-met* '())
-  (set! *dictionaries-represented* '())
-  (set! *chapters-used* '())
-  (set! *textbooks-represented* '())
-  (set! *practices-merited* '())
-  (set! *practice-categories-represented* '())
   (set! *lesson-prereqs* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
@@ -1540,26 +1298,6 @@
           ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
           (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
           (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
-      ;
-      ;
-      (when *lesson-plan*
-
-        (for ([i *standards-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-standard (first j) #f *lesson-plan* #f))))
-
-        (for ([i *textbooks-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-textbook-chapter (first j) #f *lesson-plan* #f))))
-
-        (for ([i *practices-list*])
-          (for ([j (third i)])
-            (when (member *lesson-plan-base* (rest (rest j)))
-              (add-practice (first j) #f *lesson-plan* #f))))
-
-        )
       ;
       (when (or *lesson-plan*
                 *narrative*
@@ -1757,13 +1495,11 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
-                            (create-alignments-subfile
-                              (string-append *containing-directory* "/.cached/.pathway-alignments"))
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
-                            (print-other-resources o)]
+                            (print-other-resources *target-pathway* o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
@@ -2067,29 +1803,15 @@
 
               (expand-directives i o)
 
-              (set! *practices-merited* (reverse *practices-merited*))
-
-              (let ([dict-rep *dictionaries-represented*])
-                (set! *dictionaries-represented*
-                  (filter (lambda (x) (member x dict-rep))
-                          (map first *standards-list*))))
-
-              (when *lesson-plan*
-                (create-standards-subfile)
-                (create-textbooks-subfile)
-                (create-practices-subfile))
-
               (when (and *narrative* (not title-reached?))
                 (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
-                (create-alignments-subfile
-                  (string-append *containing-directory* "/.cached/.pathway-alignments"))
                 (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
-                (print-other-resources o))
+                (print-other-resources *target-pathway* o))
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
@@ -2109,14 +1831,10 @@
               (when *lesson-plan*
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
-                    (print-standards-js o #:sidebar #t)
-                    (print-textbooks-js o)
-                    (print-practices-js o)
+                    ; (print-standards-js o #:sidebar #t)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
-                    (display-textbooks-bar o)
-                    (display-practices-bar o)
                     (display-comment "%ENDSIDEBARSECTION%" o)
                     )
                   #:exists 'replace)
@@ -2365,118 +2083,7 @@
 
   )
 
-(define (create-standards-section dict dict-standards-met op)
-  ; (printf "doing create-standards-section ~s ~s\n" dict dict-standards-met)
-  (unless (empty? dict-standards-met) ;can it ever be empty?
-    (fprintf op "\n[.~a.standards-~a]\n"
-             (if *lesson* "alignedStandards" "coverageElement")
-             (sanitize-css-id dict))
-    (fprintf op (if *lesson* ".~a\n" "== ~a\n\n")
-             (expand-dict-abbrev dict))
-    ; (fprintf op "[.standards-hierarchical-table]~%") ;needed? FIXME
-    (for ([s dict-standards-met])
-      (let ([std-name (list-ref s 0)]
-            [std-desc (list-ref s 1)]
-            ;[dict (list-ref s 3)]
-            [lessons (unbox (list-ref s 3))])
-        (fprintf op "~a:: " std-name)
-        (fprintf op "~a\n" std-desc)
-        (unless *lesson*
-          (when (> (length lessons) 0)
-            (fprintf op "{startsb}See: ~a.{endsb}\n"
-                     (string-join
-                       (filter identity
-                               (map
-                                 (lambda (x)
-                                   (let ([ltitle (list-ref x 0)]
-                                         [lesson (list-ref x 1)]
-                                         [pwy (list-ref x 2)])
-                                     (cond [pwy (and (file-exists?
-                                                       (format "lessons/~a/.cached/.primarylesson" lesson))
-                                                     (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                             lesson ltitle))]
-                                           [else
-                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                     lesson *target-pathway* ltitle)])))
-                                 lessons)) ";"))))
-        ))
-    (fprintf op "\n\n")))
-
-(define (create-textbooks-section textbook-label textbook-chapters-used o)
-  (unless (empty? textbook-chapters-used)
-    (fprintf o "\n[.~a.textbook-~a]\n"
-             (if *lesson* "alignedTextbooks" "coverageElement")
-             (sanitize-css-id textbook-label))
-    (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
-             (expand-textbook-abbrev textbook-label))
-    ;FIXME: class name should be more general, not refer to "standards"
-    ; (fprintf o "[.standards-hierarchical-table]\n")
-    (for ([s textbook-chapters-used])
-      (let ([chapter-name (list-ref s 0)]
-            [chapter-desc (list-ref s 1)]
-            [chapter-lessons (unbox (list-ref s 3))])
-      (fprintf o "~a:: " chapter-name)
-      (fprintf o "~a" chapter-desc)
-      (cond [*lesson* (fprintf o "\n")]
-            [else
-              (when (> (length chapter-lessons) 0)
-                (fprintf o ". ")
-                (fprintf o "{startsb}See: ~a.{endsb}\n"
-                         (string-join
-                           (filter identity
-                             (map
-                               (lambda (x)
-                                 (let ([ltitle (list-ref x 0)]
-                                       [lesson (list-ref x 1)]
-                                       [pwy (list-ref x 2)])
-                                   (cond [pwy
-                                           (and (file-exists?
-                                                  (format "lessons/~a/.cached/.primarylesson" lesson))
-                                                (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                        lesson ltitle))]
-                                         [else
-                                           (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                   lesson *target-pathway* ltitle)])))
-                               chapter-lessons)) ";")))])))
-    (fprintf o "\n\n")))
-
-(define (create-practices-section practice-categ practices o)
-  ; (printf "doing create-practices-section ~s ~s\n" practice-categ practices)
-  (unless (empty? practices)
-    (fprintf o "\n[.~a.practices-~a]\n"
-             (if *lesson* "alignedPractices" "coverageElement") (sanitize-css-id practice-categ))
-    (fprintf o (if *lesson* ".~a\n" "== ~a\n\n")
-             (expand-practice-abbrev practice-categ))
-    (for ([p practices])
-      (let ([p-name (list-ref p 0)]
-            [p-desc (list-ref p 1)]
-            [p-lessons (unbox (list-ref p 3))])
-        (fprintf o "~a:: " p-name)
-        (fprintf o "~a" p-desc)
-        (cond [*lesson* (fprintf o "\n")]
-              [else
-                (when (> (length p-lessons) 0)
-                  (fprintf o ". ")
-                  (fprintf o "{startsb}See: ~a.{endsb}\n"
-                           (string-join
-                             (filter identity
-                               (map
-                                 (lambda (x)
-                                   (let ([ltitle (list-ref x 0)]
-                                         [lesson (list-ref x 1)]
-                                         [pwy (list-ref x 2)])
-                                     (cond [pwy
-                                             (and (file-exists?
-                                                    (format "lessons/~a/.cached/.primarylesson" lesson))
-                                                  (format " link:lessons/pass:[~a]/index.shtml[~a]"
-                                                          lesson ltitle))]
-                                           [else
-                                             (format " link:./../../lessons/pass:[~a/index.shtml?pathway=~a][~a]"
-                                                     lesson *target-pathway* ltitle)])))
-                                 p-lessons)) ";")))])))
-    (fprintf o "\n\n")))
-
-(define (display-standards-selection o *narrative* *dictionaries-represented*)
+(define (display-standards-selection o *narrative*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
     (when narrative? (fprintf o "= Standards\n\n"))
@@ -2486,85 +2093,23 @@
             (display
               (enclose-div ""
                 (string-append
-                  "\nBootstrap lessons align with several important teaching standards.\n"
-                  "Select particular standards from the following menu to see\n"
-                  "which lessons meet those standards.\n"))
+                  "\nBootstrap lessons align with several important teaching standards,\n"
+                  "practices, and popular textbooks in multiple states. Make a \n"
+                  "selection from the menu below to see the alignment of your choice.\n"))
               o)]
           [else #f ;(display ".Relevant Standards\n" o)
                 ])
     (when narrative? (display (create-begin-tag "div" "") o))
-    (display (enclose-tag "select" ".standardsAlignmentSelect"
+    (display (enclose-tag "select" ".alignmentSelect"
                #:attribs
-               ;(format " multiple onchange=\"showStandardsAlignment()\" style=\"height: ~apx\"" 75)
-               " onchange=\"showStandardsAlignment()\""
-               (string-append
-                 (if (null? *dictionaries-represented*) ""
-                     (let ([first-dict (first *dictionaries-represented*)])
-                       (enclose-tag "option" ""
-                         #:attribs (format "selected=\"selected\" value=\"standards-~a\"" (sanitize-css-id first-dict))
-                         first-dict)))
-                 (string-join
-                   (map (lambda (dict)
-                          (enclose-tag "option" ""
-                            #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
-                            dict))
-                        (if (null? *dictionaries-represented*) '()
-                            (rest *dictionaries-represented*)))
-                   "")))
-             o)
+               " onchange=\"showAlignment(this.value)\""
+               "") o)
     (newline o)
     (when narrative?
       (display (create-end-tag "div") o)
       (display (create-end-tag "div") o))
     ;(display "\n\n" o)
     ))
-
-(define (display-textbooks-selection o *textbooks-represented*)
-  (display (enclose-tag "select" ".textbooksAlignmentSelect"
-             #:attribs
-             ;(format " multiple onchange=\"showTextbooksAlignment()\" style=\"height: ~apx\"" 75)
-             " onchange=\"showTextbooksAlignment()\""
-             (string-append
-               (if (null? *textbooks-represented*) ""
-                   (let ([first-textbook (first *textbooks-represented*)])
-                     (enclose-tag "option" ""
-                       #:attribs (format "selected=\"selected\" value=\"textbook-~a\""
-                                         (regexp-replace* "\\." first-textbook "_"))
-                       (expand-textbook-abbrev first-textbook))))
-               (string-join
-                 (map (lambda (textbook-label)
-                        (enclose-tag "option" ""
-                          #:attribs (format "value=\"textbook-~a\""
-                                            (regexp-replace* "\\." textbook-label "_"))
-                          (expand-textbook-abbrev textbook-label)))
-                      (if (null? *textbooks-represented*) '()
-                          (rest *textbooks-represented*)))
-                 "")))
-           o)
-  (newline o))
-
-(define (display-practices-selection o *practice-categories-represented*)
-  (display (enclose-tag "select" ".practicesAlignmentSelect"
-             #:attribs
-             " onchange=\"showPracticesAlignment()\""
-             (string-append
-               (if (null? *practice-categories-represented*) ""
-                   (let ([first-practice-categ (first *practice-categories-represented*)])
-                     (enclose-tag "option" ""
-                       #:attribs (format "selected=\"selected\" value=\"practices-~a\""
-                                         (regexp-replace* "\\." first-practice-categ "_"))
-                       (expand-practice-abbrev first-practice-categ))))
-               (string-join
-                 (map (lambda (practice-categ)
-                        (enclose-tag "option" ""
-                          #:attribs (format "value=\"practices-~a\""
-                                            (regexp-replace* "\\." practice-categ "_"))
-                          (expand-practice-abbrev practice-categ)))
-                      (if (null? *practice-categories-represented*) '()
-                          (rest *practice-categories-represented*)))
-                 "")))
-           o)
-  (newline o))
 
 (define (sanitize-css-id id)
   (regexp-replace* "[. ]" id "_"))
@@ -2580,117 +2125,14 @@
                "Select from the following menu to see\n"
                "which lessons meet those alignments.\n")) o)
   (display (create-begin-tag "div" "") o)
-  (display (enclose-tag "select" ".coverageAlignmentSelect"
+  (display (enclose-tag "select" ".alignmentSelect"
              #:attribs
-             "onchange=\"showCoverageAlignment()\""
-             (string-append
-
-               (if (empty? *dictionaries-represented*) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Standards\""
-                     (string-join
-                       (map (lambda (dict)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"standards-~a\"" (sanitize-css-id dict))
-                                dict))
-                            *dictionaries-represented*)
-                       "")))
-
-               (if (empty? *textbooks-represented*) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Textbooks\""
-                     (string-join
-                       (map (lambda (tbk)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"textbook-~a\"" (sanitize-css-id tbk))
-                                tbk))
-                            *textbooks-represented*)
-                       "")))
-
-               (if (empty? *practice-categories-represented*) ""
-                   (enclose-tag "optgroup" ""
-                     #:attribs "label=\"Practices\""
-                     (string-join
-                       (map (lambda (pce)
-                              (enclose-tag "option" ""
-                                #:attribs (format "value=\"practices-~a\"" (sanitize-css-id pce))
-                                pce))
-                            *practice-categories-represented*)
-                       "")))
-
-               )) o)
+             "onchange=\"showAlignment(this.value)\""
+             "") o)
   (newline o)
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
   )
-
-(define (create-alignments-subfile file)
-  (print-menubar (string-append file "-comment.txt"))
-  (call-with-output-file (string-append file ".asc")
-    (lambda (o)
-      (unless (and (empty? *standards-met*)
-                   (empty? *chapters-used*)
-                   (empty? *practices-merited*))
-        (set! *dictionaries-represented*
-          (sort *dictionaries-represented*
-                (lambda (a b)
-                  (< (index-of *dict-canonical-order* a)
-                     (index-of *dict-canonical-order* b)))))
-        (display-alignments-selection o)
-        (create-standards-subfile-port o)
-        (create-textbooks-subfile-port o)
-        (create-practices-subfile-port o)
-        ))
-    #:exists 'replace))
-
-(define (create-standards-subfile-port o)
-  (unless (empty? *standards-met*)
-
-    (for ([dict *dictionaries-represented*])
-      (let ([dict-standards-met
-              (filter (lambda (s) (string=? (list-ref s 2) dict))
-                      *standards-met*)])
-        (create-standards-section
-          dict
-          (sort dict-standards-met #:key first string-ci<=?) o)))))
-
-(define (create-textbooks-subfile-port o)
-  (unless (empty? *chapters-used*)
-    (for ([textbook-label *textbooks-represented*])
-      ;(printf "doing textbook-label= ~s\n" textbook-label)
-      (let ([textbook-chapters-used
-              (filter (lambda (s) (string=? (list-ref s 2) textbook-label))
-                      *chapters-used*)])
-        (create-textbooks-section
-          textbook-label
-          textbook-chapters-used o)))))
-
-(define (create-practices-subfile-port o)
-  ; (printf "doing create-practices-subfile-port with practices-merited= ~s\n" *practices-merited*)
-  ; (printf "practice-categories-repd= ~s\n" *practice-categories-represented*)
-  (unless (empty? *practices-merited*)
-    (for ([practice-categ *practice-categories-represented*])
-      (let ([practices-in-this-categ
-              (filter (lambda (s) (string=? (list-ref s 2) practice-categ))
-                      *practices-merited*)])
-        (create-practices-section
-          practice-categ
-          practices-in-this-categ o)))))
-
-(define (create-standards-subfile)
-  (let ([file (build-path *containing-directory* ".cached" ".index-standards.asc")])
-    ; (printf "create-standards-file ~s ~s ~s \n" file *narrative* *lesson*)
-    ; (printf "standards-met= ~s\n\n\n" *standards-met*)
-    ; (printf "dictionaries-represented= ~s\n" *dictionaries-represented*)
-    (call-with-output-file file create-standards-subfile-port #:exists 'replace)))
-
-(define (create-textbooks-subfile)
-  (let ([subf (build-path *containing-directory* ".cached" ".index-textbooks.asc")])
-    (call-with-output-file subf create-textbooks-subfile-port #:exists 'replace)))
-
-(define (create-practices-subfile)
-  (let ([subf (build-path *containing-directory* ".cached" ".index-practices.asc")])
-    (call-with-output-file subf create-practices-subfile-port #:exists 'replace)))
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")
@@ -2698,43 +2140,9 @@
     (lambda (op)
       (for ([s *glossary-items*])
         (fprintf op "~s~n" (first s))))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-standards.txt.kp")
-    (lambda (op)
-      (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-standards-w-prose.txt.kp")
-        (lambda (op2)
-          (let ([first? #t])
-            (display "    standards: [" op2)
-            (for ([s *standards-met*])
-              (let ([std-name (first s)]
-                    [std-desc (second s)])
-              (fprintf op "~s~n" std-name)
-              (let ([x (second s)])
-                (cond [first? (set! first? #f)]
-                      [else (display ",\n                " op2)])
-                (write (string-append std-name " : " std-desc) op2))
-              ))
-            (display "]" op2) (newline op2)
-            ))
-        #:exists 'replace))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-chapters.txt.kp")
-    (lambda (op)
-      (for ([s *chapters-used*])
-        (fprintf op "~s~n" (first s))))
-    #:exists 'replace)
-  ;
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-practices.txt.kp")
-    (lambda (op)
-      (for ([p *practices-merited*])
-        (fprintf op "~s\n" (first p))))
-    #:exists 'replace)
-  )
+    #:exists 'replace))
 
 ;coe
-
 (define (hspace n)
   (enclose-span ".hspace"
                 (string-join (build-list n (lambda (i) "{nbsp}")) "")))
