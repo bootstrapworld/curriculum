@@ -1741,7 +1741,7 @@
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
                              #f]))]
-                  [(and possible-beginning-of-line? (member c '(#\| #\!)))
+                  [(and possible-beginning-of-line? (member c '(#\| #\! #\-)))
                    (set! beginning-of-line? #f) ;FIXME check if needed
                    (set! possible-beginning-of-line? #f)
                    (newline o)

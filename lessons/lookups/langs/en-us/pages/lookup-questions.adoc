@@ -20,35 +20,35 @@ The table below represents four pets at an animal shelter:
 |===
 |“How much does Maple weigh?”
 |*1* @ifsoln{(E)} ||*A*
-| `pets-table.row-n(3)`
+| `row-n(pets-table, 3)`
 
 |“Which is the last row in the table?
 |*2* @ifsoln{(A)} ||*B*
-| `pets-table.row-n(2)["name"]`
+| `row-n(pets-table, 2)["name"]`
 
 |“What is Fritz’s sex?”
 |*3* @ifsoln{+(C)+} ||*C*
-| `pets-table.row-n(1)["sex"]`
+| `row-n(pets-table, 1)["sex"]`
 
 |“What’s the third animal’s name?”
 |*4* @ifsoln{(B)} ||*D*
-| `pets-table.row-n(3)["age"]`
+| `row-n(pets-table, 3)["age"]`
 
 |“How much does Nori weigh?”
 |*5* @ifsoln{(G)} ||*E*
-| `pets-table.row-n(3)["pounds"]`
+| `row-n(pets-table, 3)["pounds"]`
 
 |“How old is Maple?”
 |*6* @ifsoln{(D)}||*F*
-| `pets-table.row-n(0)`
+| `row-n(pets-table, 0)`
 
 |“What is Toggle’s sex?”
 |*7* @ifsoln{(H)} ||*G*
-| `pets-table.row-n(2)["pounds"]`
+| `row-n(pets-table, 2)["pounds"]`
 
 |“What is the first row in the table?”
 |*8* @ifsoln{(F)} ||*H*
-| `pets-table.row-n(0)["sex"]`
+| `row-n(pets-table, 0)["sex"]`
 
 |===
 
@@ -56,9 +56,9 @@ The table below represents four pets at an animal shelter:
 
 [cols="1a,70a,29a"]
 |===
-| a. | @fitb{}{_pets-table.row-n(3)["name"]_}				| `"Maple"`
-| b. | @fitb{}{@ifsoln{pets-table.row-n(1)["sex"]}}		| `"male"`
-| c. | @fitb{}{@ifsoln{pets-table.row-n(1)["age"]}}		| `4`
-| d. | @fitb{}{@ifsoln{pets-table.row-n(0)["pounds"]}}	| `48`
-| e. | @fitb{}{@ifsoln{pets-table.row-n(2)["name"]}}		| `"Nori"`
+| a. | @fitb{}{row-n(_pets-table, 3)["name"]_}				| `"Maple"`
+| b. | @fitb{}{@ifsoln{row-n(pets-table, 1)["sex"]}}		| `"male"`
+| c. | @fitb{}{@ifsoln{row-n(pets-table, 1)["age"]}}		| `4`
+| d. | @fitb{}{@ifsoln{row-n(pets-table, 0)["pounds"]}}	| `48`
+| e. | @fitb{}{@ifsoln{row-n(pets-table, 2)["name"]}}		| `"Nori"`
 |===
