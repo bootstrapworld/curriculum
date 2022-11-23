@@ -1,40 +1,56 @@
 = From Circles to Code (2)
 ++++
 <style>
-.literalblock pre { 0.5em 0 !important; }
-table:first-of-type td {padding: .25em .5em !important; }
+.literalblock pre { 0.10em 0 !important; }
+td { padding: 0 !important; }
+table:first-of-type tr { height: 0.6in; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 </style>
 ++++
 
-@do{
-
-(define exp1 '(filter (sort t "name" false) is-fixed))
-(define exp2 '(build-col (filter t is-cat) "kilos" kilograms))
-(define exp3 '(build-col (filter (filter t is-fixed) is-cat) "meows" is-cat))
-(define exp4 '(build-col (filter (sort t name "true") is-fixed) "meows" is-cat))
-
-}
-
-You have the following functions defined below (read them _carefully!_):
-
-  fun is-cat(r): r["species"] == "cat"       end
-  fun kilograms(r): r["pounds"] / 2.2        end
-  fun is-fixed(r): r["pounds"]               end
-
-The table `t` below represents four animals from the shelter:
+**The table `t` below represents four animals from the shelter:**
 
 [cols='6',options="header"]
 |===
 | name        | sex       | age   | fixed   | species | pounds
 | `"Toggle"`  | `"female"`| `12`  | `true`  | `"dog"` | `48`
-| `"Fritz"`   | `"male"`  |  `4`  | `true`  | `"dog"` | `92`
+| `"Fritz"`   | `"male"`  |  `4`  | `false` | `"dog"` | `92`
 | `"Nori"`    | `"female"`|  `6`  | `true`  | `"dog"` | `35.3`
-|`"Sunflower"`| `"female"`|  `2`  | `false` | `"cat"` | `51.6`
+|`"Sunflower"`|`"female"` |  `2`  | `false` | `"cat"` | `51.6`
 |===
 
 @vspace{1ex}
 
-For each of the Circles of Evaluation on the left, convert them into Pyret code on the right _and_ write what you think the resulting table will be.
+**Define the functions specified below by filling in the blanks.**
+
+[cols="^.^1a,<.^10a,^.^20a"]
+|===
+| @n
+| A function `is-fixed`, which returns true if the animals is fixed.
+| `fun is-fixed(r):` @ifsoln{`r["fixed"]`} @ifnotsoln{@fitb{20em}{}} `end`
+
+| @n
+| A function `kilograms`, which returns the weight of the animal in kilograms (1kg is about 2.2lbs).
+| `fun kilograms(r):` @ifsoln{`r["pounds"] / 2.2`} @ifnotsoln{@fitb{20em}{}} `end`
+
+| @n
+| A function `is-female`, which returns true if an animals weighs more than 50 pounds.
+| `fun is-female(r):` @ifsoln{`r["sex"] == "female"`} @ifnotsoln{@fitb{20em}{}} `end`
+|===
+
+@vspace{1ex}
+
+@do{
+
+(define exp1 '(sort (build-col t "kg" kilograms) "name" true))
+(define exp2 '(sort (filter t is-fixed) "name" true))
+(define exp3 '(build-col (filter t is-female) "kg" kilograms))
+(define exp4 '(filter (sort t "name" true) is-female))
+(define exp5 '(filter (filter t is-female) is-fixed))
+
+}
+
+**For each of the Circles of Evaluation below, convert them into Pyret code. What do you think the resulting table will be?**
 
 @vspace{1ex}
 
@@ -59,5 +75,9 @@ For each of the Circles of Evaluation on the left, convert them into Pyret code 
 | @n
 | @show{(coe exp4)}
 | @showsoln{(code exp4)}
+
+| @n
+| @show{(coe exp5)}
+| @showsoln{(code exp5)}
 
 |===

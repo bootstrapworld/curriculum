@@ -1,42 +1,56 @@
 = From Circles to Code
 ++++
 <style>
-.literalblock pre { 0.5em 0 !important; }
-table:first-of-type td {padding: .25em .5em !important; }
-div.circleevalsexp .value { font-size: 0.7rem; }
+.literalblock pre { 0.10em 0 !important; }
+td { padding: 0 !important; }
+table:first-of-type tr { height: 0.6in; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 </style>
 ++++
 
-@do{
-
-(define exp1 '(sort t "pounds" false))
-(define exp2 '(sort (filter t is-dog) "pounds" true))
-(define exp3 '(build-col (filter t is-cat) "large" is-big))
-(define exp4 '(filter (sort t name "true") is-dog))
-(define exp5 '(filter (build-col t "cat" is-cat) is-dog))
-
-}
-
-You have the following functions defined below (read them _carefully!_):
-
-  fun is-cat(r): r["species"] == "cat"       end
-  fun is-dog(r): r["species"] == "dog"       end
-  fun is-big(r): r["pounds"]  >  50          end
-
-The table `t` below represents four animals from the shelter:
+**The table `t` below represents four animals from the shelter:**
 
 [cols='6',options="header"]
 |===
 | name        | sex       | age   | fixed   | species | pounds
 | `"Toggle"`  | `"female"`| `12`  | `true`  | `"dog"` | `48`
-| `"Fritz"`   | `"male"`  |  `4`  | `true`  | `"dog"` | `92`
+| `"Fritz"`   | `"male"`  |  `4`  | `false` | `"dog"` | `92`
 | `"Nori"`    | `"female"`|  `6`  | `true`  | `"dog"` | `35.3`
-|`"Sunflower"`| `"female"`|  `2`  | `false` | `"cat"` | `51.6`
+|`"Sunflower"`|`"female"` |  `2`  | `false` | `"cat"` | `51.6`
 |===
 
 @vspace{1ex}
 
-For each of the Circles of Evaluation below, convert them into Pyret code. What do you think the resulting table will be?
+**Define the functions specified below by filling in the blanks.**
+
+[cols="^.^1a,<.^10a,^.^20a"]
+|===
+| @n
+| A function `is-cat`, which returns true if the animals is a cat.
+| `fun is-cat(r):` @ifsoln{`r["species"] == "cat"`} @ifnotsoln{@fitb{20em}{}} `end`
+
+| @n
+| A function `is-dog`, which returns true if the animal is a dog.
+| `fun is-dog(r):` @ifsoln{`r["species"] == "dog"`} @ifnotsoln{@fitb{20em}{}} `end`
+
+| @n
+| A function `is-big`, which returns true if an animals weighs more than 50 pounds.
+| `fun is-big(r):` @ifsoln{`r["pounds"] > 50`} @ifnotsoln{@fitb{20em}{}} `end`
+|===
+
+@vspace{1ex}
+
+@do{
+
+(define exp1 '(sort t "name" false))
+(define exp2 '(sort (filter t is-dog) "name" false))
+(define exp3 '(build-col (filter t is-cat) "large" is-big))
+(define exp4 '(filter (sort t "pounds" true) is-dog))
+(define exp5 '(filter (build-col t "large" is-big) is-cat))
+
+}
+
+**For each of the Circles of Evaluation below, convert them into Pyret code. What do you think the resulting table will be?**
 
 @vspace{1ex}
 

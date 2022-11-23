@@ -1,73 +1,14 @@
-= Circles of Evaluation
+= From Circles to Transformers
 ++++
 <style>
-.literalblock pre { 0.5em 0 !important; }
-table:first-of-type td {padding: .25em .5em !important; }
+.literalblock pre { 0.10em 0 !important; }
+table td {padding: 0.1em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+div.circleevalsexp { margin: 0; white-space: nowrap; }
 </style>
 ++++
-@do{
 
-(define exp1 '(sort t "pounds" false))
-(define exp2 '(sort (filter t is-dog) "pounds" true))
-(define exp3 '(build-col (filter t is-cat) "large" is-big))
-(define exp4 '(filter (sort t name "true") is-dog))
-(define exp5 '(filter (build-col t "cat" is-cat) is-dog))
-
-}
-
-You have created and saved the following Transformers. (Read them _carefully!_)
-
-[cols="5,5,5,5"]
-|===
-|@span{.center}{*`filter-is-fixed`*}
-
-Transformer: Filter
-
-Expression: Fixed = true
-
-| @span{.center}{*`filter-is-young`*}
-
-Transformer: Filter
-
-Expression: Age < 4
-
-| @span{.center}{*`filter-is-female`*}
-
-Transformer: Filter
-
-Expression: Sex = “female”
-
-| @span{.center}{*`build-kilos`*}
-
-Transformer: Build Attribute
-
-Name of new attribute: Kilos
-
-Expression: Weight (lbs) / 2.2
-
-| @span{.center}{*`filter-is-heavy`*}
-
-Transformer: Filter
-
-Expression: Kilos > 25
-
-| @span{.center}{*`filter-is-dog`*}
-
-Transformer: Filter
-
-Expression: Species =  “dog”
-
-| @span{.center}{*`filter-is-cat`*}
-
-Transformer: Filter
-
-Expression: Species = "cat"
-
-|
-|
-|===
-
-The table `t` below represents four animals from the shelter:
+**The table `t` below represents four animals from the shelter:**
 
 [cols='6',options="header"]
 |===
@@ -80,40 +21,91 @@ The table `t` below represents four animals from the shelter:
 
 @vspace{1ex}
 
-Fill in the boxes below so that each set has a Circle of Evaluation, the equivalent Pyret code, and a description of the resulting table. The first Row has been completed for you, but you'll need to fill in the rest!
+**For each Circle of Evaluation on the left, write the corresponding Transformer on the right.**
+
+[cols="^.^1,^.^10,<.^15,^.^1,^.^10,<.^15", frame="none"]
+|===
+| @n
+| @show{ (coe '(filter t species="dog")) }
+|
+*Name:* @fitb{}{ @ifsoln{`filter-is-dog`} }
+
+*Type:* @fitbruby{10em}{@ifsoln{Filter}}{[sort/filter/build]}
+
+*Expression:* @fitb{}{ @ifsoln{`species="Dog"`} }
+
+
+| @n
+| @show{ (coe '(build-col t "large" pounds>50)) }
+|
+*Name:* @fitb{}{ @ifsoln{`build-is-big`} }
+
+*Type:* @fitbruby{10em}{ @ifsoln{Build} }{[sort/filter/build]}
+
+*Expression:* @fitb{}{ @ifsoln{`"large" pounds>50`} }
+
+
+| @n
+| @show{ (coe '(sort t pounds true)) }
+|
+*Name:* @fitb{}{ @ifsoln{`sort-by-pounds`} }
+
+*Type:* @fitbruby{10em}{ @ifsoln{Sort} }{[sort/filter/build]}
+
+*Expression:* @fitb{}{ @ifsoln{`pounds`} }
+
+
+| @n
+| @show{ (coe '(sort t name true)) }
+|
+*Name:* @fitb{}{ @ifsoln{`filter-is-cat`} }
+
+*Type:* @fitbruby{10em}{ @ifsoln{Build} }{[sort/filter/build]}
+
+*Expression:* @fitb{}{ @ifsoln{`species="cat"`} }
+
+|===
 
 @vspace{1ex}
 
-[.FillVerticalSpace, cols=".^1a,^.^12a,^.^12a,^.^6a",stripes="none",frame="none", options="header"]
+**For each of the Circles of Evaluation below, write the order in which you would use these transformers. What do you think the resulting table will be?**
+
+@vspace{1ex}
+@do{
+
+(define exp1 '(sort t pounds true))
+(define exp2 '(sort (filter t species="dog") Pounds true))
+(define exp3 '(build-col (filter t species="cat") "large" pounds>50))
+(define exp4 '(filter (sort t pounds true) species="dog"))
+(define exp5 '(filter (build-col t "large" pounds>50) species="cat"))
+
+}
+
+
+[.FillVerticalSpace, cols=".^1a,^.^20a,^.^20a",stripes="none",frame="none", options="header"]
 |===
 |
 | Circle of Evaluation
-| Order of Transformers
-| Description
+| Transformers
 
 | @n
 | @show{(coe exp1)}
-| @show{(code exp1)}
-| All the animals, from youngest to oldest
+| @ifsoln{sort-by-pounds}
 
 | @n
-| @showsoln{(coe exp2)}
-| @show{(code exp2)}
-| Just Fritz and Sunflower
+| @show{(coe exp2)}
+| @ifsoln{(filter-is-dog, and then sort-by-pounds)}
 
 | @n
 | @show{(coe exp3)}
-| @showsoln{(code exp3)}
-| All the animals, with an extra column called "sticker"
+| @ifsoln{(filter-is-cat, and then build-is-big)}
 
 | @n
 | @show{(coe exp4)}
-| @showsoln{(code exp4)}
-| @ifsoln{Just Toggle}
+| @ifsoln{(sort-by-pounds, and then filter-is-dog)}
 
 | @n
 | @show{(coe exp5)}
-| @showsoln{(code exp5)}
-| @ifsoln{Toggle and Sunflower, in that order}
+| @ifsoln{build-is-big, and then filter-is-cat}
 
 |===
