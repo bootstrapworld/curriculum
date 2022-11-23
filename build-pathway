@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-16 # last modified
+LASTMOD=2022-11-21 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -717,6 +717,7 @@ function resolveabbrevs() {
   cat > $fdir/.cached/.bootstraplesson.txt <<EOF
     <script src="${localDISTROOTDIR}lib/langtable.js"></script>
     <script src="${localDISTROOTDIR}lib/bootstraplesson.js"></script>
+    <script src="${localDISTROOTDIR}lib/dictionaries.js"></script>
     <script src="${localDISTROOTDIR}dependency-graph.js"></script>
     <script src="${localDISTROOTDIR}pathway-tocs.js"></script>
     <script>var pathway;</script>
@@ -899,10 +900,6 @@ function doadoc() {
     echo courses/$TGTPATHWAY/.cached/.${f%.adoc}.html >> $ADOC_POSTPROC_NARRATIVE_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.asc >> $ADOC_INPUT
     echo courses/$TGTPATHWAY/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-    local alignf=.cached/.pathway-alignments.asc
-    test -f "$alignf" || touch "$alignf"
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.asc >> $ADOC_INPUT
-    echo courses/$TGTPATHWAY/.cached/.pathway-alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
   elif test $TEACHER_RESOURCES; then
     echo "(\"$f\" #:containing-directory \"courses/$TGTPATHWAY/resources\" #:dist-root-dir \"$DISTROOTDIR\" #:resources #t #:target-pathway \"$TGTPATHWAY\" #:proglang \"$PROGLANG\")" >> $ADOCABLES_INPUT
     echo courses/$TGTPATHWAY/resources/.cached/.${f%.adoc}.asc >> $ADOC_INPUT
@@ -1919,7 +1916,7 @@ function copylessondir() {
   test -z "$repoDir" && return
   test -d "$repoDir" || return
   local lessonDir=${repoDir#*lessons/}
-  lessonDir=${lessonDir#*/}
+  lessonDir=${lessonDir##*/}
   # echo doing copylessondir II $lessonDir in $(pwd)
   local repoLessonDir="$repoDir"/langs/$NATLANG
   if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
@@ -1974,6 +1971,7 @@ function copylessondir() {
     firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   fi
   if test "$firstproglang" = pyret; then
+    mkdir -p "$lessonDir"/.cached
     touch "$lessonDir"/.cached/.primarylesson
   fi
 
@@ -2576,44 +2574,6 @@ function buildpathwaytocs() {
   echo "}" >> $TOCSFILE
 }
 
-function allthealignments() {
-  cd $TOPDIR
-  cd distribution/$NATLANG
-#   echo doing allthealignments in $(pwd)
-  test -d .cached || mkdir -p .cached
-  rm -f .cached/.all-standards.txt
-  local d db f
-  for d in courses/*; do
-    test -d $d || continue
-    db=${d%/}
-    db=${db##*/}
-
-    f=$d/.cached/.standards-in-pathway.txt.kp
-    if test -f $f; then
-      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-standards.txt
-    fi
-
-    f=$d/.cached/.textbooks-in-pathway.txt.kp
-    if test -f $f; then
-      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-textbooks.txt
-    fi
-
-    f=$d/.cached/.practices-in-pathway.txt.kp
-    if test -f $f; then
-      $SED -e "s/)\$/ #t)/" $f >> .cached/.all-practices.txt
-    fi
-  done
-
-  $PROGDIR/make-alignments.rkt
-
-  echo .cached/.Alignments.asc >> $ADOC_INPUT
-  echo .cached/.Alignments.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-
-  if test ! $DEBUG; then rm -f *.asc *.txt; fi
-
-  cd $TOPDIR
-}
-
 function calculatedistrootdir() {
   local f=$1
   f=$(echo $f|$SED -e 's/^\.\///')
@@ -2901,7 +2861,6 @@ function doconversions() {
   echo " "
 
   createabyss
-  allthealignments
 
   doadocpostproc $ADOC_INPUT
 

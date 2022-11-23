@@ -1,0 +1,37 @@
+@ifproglang{pyret}{
+= Defining Row Functions &amp; Using Table Functions
+
+Pyret has special functions that we can use to manipulate Tables.
+
+- In this course, the functions we’ll be using are
+
+** `row-n` - consumes an index (starting with zero!) and produces a row from a table
+** `sort` - consumes the name of a column and a Boolean value to determine if that table should be sorted by that column in ascending order
+** `filter` - consumes a __Boolean-producing function__, and produces a table containing only rows for which the function returns `true`
+** `build-col` - consumes the name of a new column, and a function that produces the values in that column for each Row
+
+- Unlike functions, functions can’t be used alone. They have a “secret” argument, which is the data they are attached to. They are written as part of that data, separated by a dot. For example:
++
+`row-n(shapes, 2)`
+
+- Contracts for functions are different from other functions. They include the type of the data as part of their names. For example:
++ 
+@show{(contract "row-n" '("Table" "Number") "Boolean" )}}
+
+
+@ifproglang{codap}{
+= Three Transformers: Sort, Filter, and Build Attribute
+
+*Transformers* allow you to transform datasets to produce new, distinct output datasets, instead of modifying the original input dataset itself. We use them to manipulate tables.
+
+- Contracts for Transformers have three imporant parts: the Transformer’s name; the domain of the Transformer (the type(s) of data we give it); and the range of the Transformer (the type of data the transformer produces).
+
+- In this course, the three primary Transformers we'll be using are:
+
+** `Sort` - *consumes* a dataset, a column/attribute name, and a sort direction (ascending or descending); `Sort` *produces* a copy of the input dataset, with cases sorted by the selected column/attribute.
+** `Filter` - *consumes* a dataset to filter and a formula expression that evaluates to either true or false. `Filter` *produces* a copy of the input dataset that only has the cases for which the formula was true.
+** `Build Attribute` - *consumes* a dataset, a name for the new column/attribute, a collection to add the attribute to, a formula expression for the attribute's values, and the data type formula will expression will evaluate to. `Built attribute` *produces*
+a copy of the input dataset, with the new attribute added.
+
+- Each of the above Transformers is attached to a formula expression. It's important to get the formula expressoin just right, or the Transformer will produce an error. The formula expression might just be a column/attribute (this is always the case for `Sort`!) or it might require a Boolean (this is often true for `Build Attribute` and `Filter`).
+}

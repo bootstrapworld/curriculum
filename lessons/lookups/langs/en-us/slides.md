@@ -60,11 +60,11 @@ Every definition includes a _name_ and a _value_. In the code below, we have def
 
 **What code can we write, to let us define a single row?**
 
-Tables have special functions associated with them, called @vocab{Methods}, which allow us to do all sorts of things with those tables. 
+Tables have special functions associated with them, which allow us to do all sorts of things.
 
-For example, we can get the first data row in a table by using the `.row-n` method:
+For example, we can get the first data row in a table by using the `row-n` function:
 
-`animals-table.row-n(0)`
+`row-n(animals-table, 0)`
 
 *Don't forget: data rows start at index _zero_!*
 
@@ -75,11 +75,7 @@ Drive the "data rows start at index zero" point home a LOT, as it's a source com
 {layout="Investigate"}
 # Row Lookups
 
-Find `.row-n` in your Contracts page. What is the Domain of `.row-n`? What is the Range? 
-
-A table @vocab{method} is a special kind of function which always operates on a specific table. 
-
-`A.row-n(0)` and `B.row-n(0)` will return different rows, if A and B are different tables.
+Find `row-n` in your Contracts page. What is the Domain of `row-n`? What is the Range? 
 
 - How would you get the _second_ row out of the animals table? The third?
 <!--
@@ -93,18 +89,18 @@ A table @vocab{method} is a special kind of function which always operates on a 
 
 **What code can we write, to let us define a single row?**
 
-`animals-table.row-n(0)`
+`row-n(animals-table, 0)`
 
 It's often better to name our Row definitions according to the _property we care about_. In this case, the fact that this row is a cat is _much_ more interesting than the fact that her name is Sasha:
 
-`cat-row = animals-table.row-n(0)`
+`cat-row = row-n(animals-table, 0)`
 <!--
 -->
 ---
 {layout="Investigate"}
 # Row Lookups
 
-`cat-row = animals-table.row-n(0)`
+`cat-row = row-n(animals-table, 0)`
 
 - In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young ones, etc.
 - Complete @printable-exercise{pages/defining-rows.adoc}.
@@ -132,9 +128,9 @@ We can also access *columns* of a Row, by using a **Row Accessor**.
 Row accessors start with a Row value, followed by square brackets, and the name of the column where the value can be found. Here are three examples that use row accessors to get at different columns from the first row in the animals-table:{style="font-size:16pt"}
 
 ```{style="font-size:16pt"}
-  animals-table.row-n(0)["name"]
-  animals-table.row-n(0)["age"]
-  animals-table.row-n(0)["fixed"]
+  row-n(animals-table, 0)["name"]
+  row-n(animals-table, 0)["age"]
+  row-n(animals-table, 0)["fixed"]
 ```
 
 <!--
@@ -147,7 +143,7 @@ Row accessors start with a Row value, followed by square brackets, and the name 
 
 And of course, we can use our defined name, substituting it in place of all the redundant code:
 ```
-cat-row = animals-table.row-n(0)
+cat-row = row-n(animals-table, 0)
 cat-row["name"]
 cat-row["age"]
 cat-row["fixed"]
