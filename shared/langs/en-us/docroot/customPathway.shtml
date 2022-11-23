@@ -29,7 +29,7 @@
         function populateLessons() {
             var search = location.search.substring(1);
             var {pathway, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-            lessons = lessons.split(",");
+            window.lessons = lessons = lessons.split(",");
             console.log(pathway, lessons);
 
             document.getElementById('pathwayTitle').innerHTML = pathway;
@@ -66,20 +66,23 @@
         }
 
         async function printWorkook(lessons, graph) {
+            console.log('printing', lessons);
             const pdfDoc = await PDFDocument.create();
             // print out wb page paths
             var pageUrls = lessons
                 .map(l => graph[l].pages
                     .filter(p => p !== "")
                     .map(p => 
-                        "courses/algebra-pyret/" + "lessons/"+l+"/pages/"+p))
+                        "lessons/"+l+"/pages/"+p))
                 .flat()
                 .map(p => p.replace(".adoc", ".pdf"))
                 .map(p => p.replace(" landscape", ""));
 
             document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
+            console.log(pageUrls)
 
         for (const [idx, url] of pageUrls.entries()) {
+            console.log(idx, url);
             const page = pdfDoc.addPage();
             const bytes = await fetch(url).then((res) => res.arrayBuffer());
             const [embedded] = await pdfDoc.embedPdf(bytes);
@@ -116,7 +119,7 @@
 
           // Serialize the PDFDocument to bytes (a Uint8Array)
           const pdfBytes = await pdfDoc.save()
-          download(pdfBytes, title + "- Student Workbook.pdf", "application/pdf");
+          download(pdfBytes, pathway + "- Student Workbook.pdf", "application/pdf");
         }
     </script>
 </head>
