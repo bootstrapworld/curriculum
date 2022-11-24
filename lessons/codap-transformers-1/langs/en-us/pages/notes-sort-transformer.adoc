@@ -10,4 +10,5 @@
 ** `Build Attribute` - We provide an expression that is used to calculate an attribute's new values. `Build Attribute` produces a copy of the input dataset with the new attribute added.
 
 - With the exception of `Sort`, each of the above Transformers is attached to a unique expression. It's important to get the expression just right, or the Transformer will produce an error. Strings belong inside quotation marks, but Booleans do not! Attribute names that include units (for instance, `Age (years)`) belong inside tick marks (`).
-}
+
+*Order Matters!* Transformers must be applied in the appropriate order given the dataset. For example, trying to order a table by a column that hasn’t been built will result in an error.
