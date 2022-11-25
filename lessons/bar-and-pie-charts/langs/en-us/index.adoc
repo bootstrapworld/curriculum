@@ -6,7 +6,7 @@
 
 @keywords{bar chart, pie chart, stacked bar chart, grouped bar chart, categorical, visualization, display}
 
-@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, multi-bar-chart, stacked-bar-chart}
+@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, grouped-bar-chart, stacked-bar-chart}
 
 [@lesson-intro-table]
 |===
@@ -16,7 +16,7 @@
 
 * Read and create pie and bar charts
 * Explain the difference between pie and bar charts
-* Read and create stacked and multi bar charts
+* Read and create stacked and grouped bar charts
 * Explain the difference between pie and bar charts
 
 | Student-facing Lesson Goals
@@ -80,7 +80,7 @@ Grouping by value works well for @vocab{categorical data}, when there lots of di
 
 === Investigate
 
-Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
+Here is the @vocab{Contract} for another function, which makes @vocab{pie charts}:
 
 @show{(contract "pie-chart" '("Table" "String") "Image" )}
 
@@ -135,14 +135,14 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 Sometimes we want to visualize data that is _already summarized:_
 
 [.pyret-table,cols="1,1",options="header"]
-|===
-| Hair Color		| Number of Students
-| "Black"			| 5
-| "Brown"			| 13
-| "Blond"			| 4
-| "Red"				| 2
-| "Pink"			| 1
-|===
+!===
+! Hair Color		! Number of Students
+! "Black"			! 5
+! "Brown"			! 13
+! "Blond"			! 4
+! "Red"				! 2
+! "Pink"			! 1
+!===
 
 We'd like to use the values in the first column for the labels of our pie slices or bars, and the values in the second column for the size. We have contracts for those, too!
 
@@ -155,7 +155,7 @@ We'd like to use the values in the first column for the labels of our pie slices
 == Groups and Subgroups @duration{20 minutes}
 
 === Overview
-Students learn how to create __groups within groups__, showing the relative frequency of one grouping across different groups using stacked and multi bar charts.
+Students learn how to create __groups within groups__, showing the relative frequency of one variable across values of another variable using stacked and grouped bar charts.
 
 === Launch
 
@@ -169,7 +169,7 @@ Having groups is great, but sometimes we want to compare __sub-groups across gro
 Fortunately, Pyret has two functions that let us specify a group, and a subgroup:
 
 @show{(contract "stacked-bar-chart" '("Table" "String" "String") "Image" )}
-@show{(contract "multi-bar-chart" '("Table" "String" "String") "Image" )}
+@show{(contract "grouped-bar-chart" '("Table" "String" "String") "Image" )}
 
 [.lesson-instruction]
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
@@ -178,26 +178,18 @@ Fortunately, Pyret has two functions that let us specify a group, and a subgroup
 [.lesson-point]
 Stacked bar charts make it easy to compare groups that contain subgroups
 
-Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
+@right{@image{images/stacked-species-sex.png, "A stacked bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
 
 [.lesson-point]
-Multi bar charts make it easy to compare subgroups
+Grouped bar charts make it easy to compare subgroups
 
-Multi bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
+@right{@image{images/grouped-species-sex.png, "A grouped bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Grouped bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
 
 === Investigate
 
 [.lesson-instruction]
-- Complete @printable-exercise{stacked-and-multi-notice.adoc}
-- Complete @printable-exercise{matching-stacked-to-multi.adoc}
-
-
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-| @span{.title}{Optional Project: Making Infographics}
-
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also a @link{pages/rubric-infographic.html, Rubric} to highlight for you and your students what an excellent infographic includes.
-|===
+- Complete @printable-exercise{stacked-and-grouped-notice.adoc}
+- Complete @printable-exercise{matching-stacked-to-grouped.adoc}
 
 
 === Common Misconceptions
@@ -206,10 +198,17 @@ Infographics are a powerful tool for communicating information, especially when 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
-- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts?
+- What kinds of questions need stacked or grouped bar charts, rather than pie or bar charts?
 - What kinds of questions are better answered by stacked bar charts?
-- What kinds of questions are better answered by multi bar charts?
+- What kinds of questions are better answered by grouped bar charts?
 
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+| @span{.title}{Optional Project: Making Infographics}
+
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also a @link{pages/rubric-infographic.html, Rubric} to highlight for you and your students what an excellent infographic includes.
+|===
 
 == Additional Exercises
 - @opt-printable-exercise{bar-chart-notice.adoc}
