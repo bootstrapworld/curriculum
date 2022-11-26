@@ -4,9 +4,9 @@
 
 @lesson-prereqs{contracts, ds-intro}
 
-@keywords{bar chart, pie chart, stacked bar chart, grouped bar chart, categorical, visualization, display}
+@keywords{bar chart, pie chart, stacked bar chart, multi bar chart, categorical, visualization, display}
 
-@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, grouped-bar-chart, stacked-bar-chart}
+@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, multi-bar-chart, stacked-bar-chart}
 
 [@lesson-intro-table]
 |===
@@ -16,7 +16,7 @@
 
 * Read and create pie and bar charts
 * Explain the difference between pie and bar charts
-* Read and create stacked and grouped bar charts
+* Read and create stacked and multi bar charts
 * Explain the difference between pie and bar charts
 
 | Student-facing Lesson Goals
@@ -64,19 +64,15 @@ Students learn one way of grouping data, showing the _frequency_ of values in a 
 - What does each bar represent?
 ** The number of animals having each specific weight
 
-@right{@image{images/bar-species.png, "A bar chart showing how many animals belong to each species", 300}} Hovering over a bar reveals the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
-
 [.lesson-point]
 Bar charts group data _by value_ to show frequency
+
+@right{@image{images/bar-species.png, "A bar chart showing how many animals belong to each species", 300}} Hovering over a bar reveals the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
 Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket. Both functions show us the same information as the `count` function, but using a picture instead of a table.
 
 [.lesson-instruction]
 - Which do you like better: the chart or a table? Why?
-- Why weren't either function useful when grouping the `pounds` column?
-** Almost every animal had a unique weight, so we have lots of buckets - most with exactly one value
-
-Grouping by value works well for @vocab{categorical data}, when there lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.
 
 === Investigate
 
@@ -84,22 +80,27 @@ Here is the @vocab{Contract} for another function, which makes @vocab{pie charts
 
 @show{(contract "pie-chart" '("Table" "String") "Image" )}
 
-Now type `pie-chart(animals-table, "sex")` and hit "Enter". What happens?
+Now type `pie-chart(animals-table, "species")` and hit "Enter". What happens?
 
 @right{@image{images/pie-species.png, "A bar chart showing how many animals belong to each species", 300}} Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole. In this example we see that there is 1 animal that is a hermaphrodite, representing 3.1% of the population.
 
+////
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 |
 @span{.title}{People aren't Hermaphrodite?}
 When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
 |===
+////
 
 [.lesson-instruction]
-- Use `pie-chart` to make a display showing how many animals there from each species. How is this similar to `bar-chart`? How is it different?
-- Use `pie-chart` to make a display showing how many animals have each name. How is this similar to `bar-chart`? How is it different?
-- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
+- Use `pie-chart` to make a display showing how many animals there from each sex.
+- Use `pie-chart` to make a display for the `pounds` column. How is this similar to `bar-chart`? How is it different?
+- Why weren't these functions useful when grouping the `pounds` column?
+- How is this similar to `bar-chart`? How is it different?
 - When would you want to use one chart instead of another?
+
+Grouping by value works well for @vocab{categorical data}, when there lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.
 
 [.lesson-instruction]
 Complete @printable-exercise{bar-and-pie-notice.adoc}, and @printable-exercise{matching-bar-to-pie.adoc}.
@@ -155,52 +156,51 @@ We'd like to use the values in the first column for the labels of our pie slices
 == Groups and Subgroups @duration{20 minutes}
 
 === Overview
-Students learn how to create __groups within groups__, showing the relative frequency of one variable across values of another variable using stacked and grouped bar charts.
+Students learn how to create __groups within groups__, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
 
 === Launch
 
 [.lesson-instruction]
 - Take a moment to answer the following questions: How many cats are male? How many cats are female?
 ** 5 are male, 6 are female
-- Is this distribution the same for other species? In other words, do you think there are about as many male dogs as female dogs?
+- Do you think there are about as many male dogs as female dogs?
+- Do you think this distribution is similar for every species at the shelter?
 
-Having groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across species.
+Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across species.
 
-Fortunately, Pyret has two functions that let us specify a group, and a subgroup:
+Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
 
 @show{(contract "stacked-bar-chart" '("Table" "String" "String") "Image" )}
-@show{(contract "grouped-bar-chart" '("Table" "String" "String") "Image" )}
+@show{(contract "multi-bar-chart" '("Table" "String" "String") "Image" )}
 
 [.lesson-instruction]
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
 - Which display do you think is easier to read?
 
+=== Investigate
+
+[.lesson-instruction]
+- Complete @printable-exercise{stacked-and-multi-notice.adoc}
+
 [.lesson-point]
-Stacked bar charts make it easy to compare groups that contain subgroups
+Stacked bar charts make it easier to compare _groups_ than subgroups
 
 @right{@image{images/stacked-species-sex.png, "A stacked bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
 
 [.lesson-point]
-Grouped bar charts make it easy to compare subgroups
+Multi bar charts make it easy to compare _subgroups_ than groups
 
-@right{@image{images/grouped-species-sex.png, "A grouped bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Grouped bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
-
-=== Investigate
+@right{@image{images/multi-species-sex.png, "A multi bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Multi bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
 
 [.lesson-instruction]
-- Complete @printable-exercise{stacked-and-grouped-notice.adoc}
-- Complete @printable-exercise{matching-stacked-to-grouped.adoc}
-
-
-=== Common Misconceptions
-
+- Complete @printable-exercise{matching-stacked-to-multi.adoc}
 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
-- What kinds of questions need stacked or grouped bar charts, rather than pie or bar charts?
+- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts?
 - What kinds of questions are better answered by stacked bar charts?
-- What kinds of questions are better answered by grouped bar charts?
+- What kinds of questions are better answered by multi bar charts?
 
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
