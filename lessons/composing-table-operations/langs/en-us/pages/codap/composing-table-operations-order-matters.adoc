@@ -9,19 +9,13 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 @do{
 
-(define exp1 '(sort t "kilos" true))
-(define exp2 '(build-col (filter t is-female) "kilos" kilograms))
-(define exp3 '(filter (build-col t "kilos" kilograms) is-heavy))
-(define exp4 '(build-col (filter t is-heavy) "kilos" kilograms))
-(define exp5 '(sort (filter (build-col t "kilos" kilograms) is-heavy) "sex" true))
-(define exp6 '(filter (build-col (build-col t "female" is-female) "kilos" kilograms) is-heavy))
+(define exp1 '(sort t kilos true))
+(define exp2 '(build-col (filter t sex="female") "kilos" pounds/2.2))
+(define exp3 '(filter (build-col t "kilos" pounds/2.2) kilos>25))
+(define exp4 '(build-col (filter t kilos>25) "kilos" pounds/2.2))
+(define exp5 '(sort (filter (build-col t "kilos" pounds/2.2) kilos>25) "sex" true))
+(define exp6 '(filter (build-col (build-col t "female" sex="female") "kilos" pounds/2.2) kilos>25))
 }
-
-You have the following functions defined below (read them _carefully!_):
-
-  fun is-female(r): r["sex"] == "female"  end
-  fun kilograms(r): r["pounds"] / 2.2     end
-  fun is-heavy(r):  r["kilos"] > 25       end
 
 The table `t` below represents four animals from the shelter:
 
@@ -34,7 +28,7 @@ The table `t` below represents four animals from the shelter:
 | `"Maple"`   | `"female"`| `3`   | `true`  | `51.6`
 |===
 
-_Match_ each Pyret expression (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
+_Match_ each Circle of Evaluation (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
 
 [.FillVerticalSpace, cols=".^14a,^.^2a,1,^.^1a,.^6a",stripes="none",grid="none",frame="none"]
 |===
