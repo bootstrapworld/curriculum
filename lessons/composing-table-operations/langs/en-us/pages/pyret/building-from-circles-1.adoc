@@ -20,36 +20,17 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 @vspace{1ex}
 
-**Define the functions specified below by filling in the blanks.**
-
-[cols="^.^1a,<.^10a,^.^20a"]
-|===
-| @n
-| A function `is-cat`, which returns true if the animals is a cat.
-| `fun is-cat(r):` @ifsoln{`r["species"] == "cat"`} @ifnotsoln{@fitb{20em}{}} `end`
-
-| @n
-| A function `is-dog`, which returns true if the animal is a dog.
-| `fun is-dog(r):` @ifsoln{`r["species"] == "dog"`} @ifnotsoln{@fitb{20em}{}} `end`
-
-| @n
-| A function `is-big`, which returns true if an animals weighs more than 50 pounds.
-| `fun is-big(r):` @ifsoln{`r["pounds"] > 50`} @ifnotsoln{@fitb{20em}{}} `end`
-|===
-
-@vspace{1ex}
-
 @do{
 
-(define exp1 '(sort t "name" false))
-(define exp2 '(sort (filter t is-dog) "name" false))
+(define exp1 '(sort (filter t is-dog) "name" false))
+(define exp2 '(sort t "name" false))
 (define exp3 '(build-col (filter t is-cat) "large" is-big))
 (define exp4 '(filter (sort t "pounds" true) is-dog))
 (define exp5 '(filter (build-col t "large" is-big) is-cat))
 
 }
 
-**For each of the Circles of Evaluation below, convert them into Pyret code. What do you think the resulting table will be?**
+**For each of the Circles of Evaluation below, convert them into Pyret code. What do you think the resulting table will be?** The first one has been done for you.
 
 @vspace{1ex}
 
@@ -61,7 +42,7 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 | @n
 | @show{(coe exp1)}
-| @showsoln{(code exp1)}
+| @show{(code exp1)}
 
 | @n
 | @show{(coe exp2)}
@@ -79,4 +60,23 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 | @show{(coe exp5)}
 | @showsoln{(code exp5)}
 
+|===
+
+@vspace{1ex}
+
+**Define the functions specified below by filling in the blanks.** The first one has been done for you.
+
+[cols="^.^1a,<.^10a,^.^20a"]
+|===
+| @n
+| A function `is-cat`, which returns true if the animals is a cat.
+| `fun is-cat(r): r["species"] == "cat" end`
+
+| @n
+| A function `is-dog`, which returns true if the animal is a dog.
+| `fun is-dog(r):` @ifsoln{`r["species"] == "dog"`} @ifnotsoln{@fitb{20em}{}} `end`
+
+| @n
+| A function `is-big`, which returns true if an animals weighs more than 50 pounds.
+| `fun is-big(r):` @ifsoln{`r["pounds"] > 50`} @ifnotsoln{@fitb{20em}{}} `end`
 |===

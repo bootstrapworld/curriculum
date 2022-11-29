@@ -9,11 +9,11 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 @do{
 
-(define exp1 '(sort t kilos true))
+(define exp1 '(sort t kilos ascending))
 (define exp2 '(build-col (filter t sex="female") "kilos" pounds/2.2))
 (define exp3 '(filter (build-col t "kilos" pounds/2.2) kilos>25))
 (define exp4 '(build-col (filter t kilos>25) "kilos" pounds/2.2))
-(define exp5 '(sort (filter (build-col t "kilos" pounds/2.2) kilos>25) "sex" true))
+(define exp5 '(sort (filter (build-col t "kilos" pounds/2.2) kilos>25) "sex" ascending))
 (define exp6 '(filter (build-col (build-col t "female" sex="female") "kilos" pounds/2.2) kilos>25))
 }
 
@@ -43,7 +43,7 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp3)}
 |*@n*@ifsoln{+(C)+} ||*C*
-| Produces a table containing only Fritz.
+| Produces a table with an extra column for kilos, but only rows with more than 25 kilos
 
 | @show{(coe exp4)}
 |*@n*@ifsoln{(D)} ||*D*
