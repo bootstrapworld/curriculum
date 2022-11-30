@@ -142,7 +142,7 @@
    )
 
   ("bad-survey"  "Height vs. Wingspan Survey (make a copy)"
-   ("pyret" "https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy")
+   ("pyret" "https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/template/preview")
    )
 
   ("dirty-data"  "New Animals! Starter File"
