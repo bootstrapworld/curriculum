@@ -1023,6 +1023,8 @@
 
   ;any error check here?
 
+  (set! *funname* transformer-name)
+
   (string-append
 
     (if headless?
