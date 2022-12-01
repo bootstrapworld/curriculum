@@ -36,11 +36,13 @@ div.circleevalsexp { margin: 0; white-space: nowrap; }
 
 
 | @n
-| @show{ (coe '(build-col t "kg" pounds/2.2)) }
+| @show{ (coe '(build-attribute t "kg" pounds/2.2)) }
 |
 *Name:* @fitb{}{ @ifsoln{`build-kg`} }
 
 *Type:* @fitbruby{10em}{ @ifsoln{Build} }{[sort/filter/build]}
+
+*New Attribute:* @fitb{8em}{ @ifsoln{"kg"} }
 
 *Expression:* @fitb{}{ @ifsoln{`"kg" pounds/2.2`} }
 
@@ -73,9 +75,9 @@ div.circleevalsexp { margin: 0; white-space: nowrap; }
 @vspace{1ex}
 @do{
 
-(define exp1 '(sort (build-col t "kg" pounds/2.2) "name" true))
+(define exp1 '(sort (build-attribute t "kg" pounds/2.2) "name" true))
 (define exp2 '(sort (filter t fixed) name true))
-(define exp3 '(build-col (filter t sex="female") "kg" pounds/2.2))
+(define exp3 '(build-attribute (filter t sex="female") "kg" pounds/2.2))
 (define exp4 '(filter (sort t name true) sex="female"))
 (define exp5 '(filter (filter t sex="female") fixed))
 

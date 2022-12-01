@@ -36,11 +36,13 @@ div.circleevalsexp { margin: 0; white-space: nowrap; }
 
 
 | @n
-| @show{ (coe '(build-col t "large" pounds>50)) }
+| @show{ (coe '(build-attribute t "large" pounds>50)) }
 |
 *Name:* @fitb{}{ @ifsoln{`build-is-big`} }
 
 *Type:* @fitbruby{10em}{ @ifsoln{Build} }{[sort/filter/build]}
+
+*New Attribute:* @fitb{8em}{ @ifsoln{is-big} }
 
 *Expression:* @fitb{}{ @ifsoln{`"large" pounds>50`} }
 
@@ -75,9 +77,9 @@ div.circleevalsexp { margin: 0; white-space: nowrap; }
 
 (define exp1 '(sort t pounds true))
 (define exp2 '(sort (filter t species="dog") Pounds true))
-(define exp3 '(build-col (filter t species="cat") "large" pounds>50))
+(define exp3 '(build-attribute (filter t species="cat") "large" pounds>50))
 (define exp4 '(filter (sort t pounds true) species="dog"))
-(define exp5 '(filter (build-col t "large" pounds>50) species="cat"))
+(define exp5 '(filter (build-attribute t "large" pounds>50) species="cat"))
 
 }
 
