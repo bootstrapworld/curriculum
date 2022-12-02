@@ -523,7 +523,7 @@ body.workbookpage {
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
 
-  .fitb, .fitbruby, .fitb.stretch::after {
+  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top:        @top-padding-for-writing;
     position:           relative;
     display:            inline-block;
@@ -531,6 +531,7 @@ body.workbookpage {
     text-align:         center;
     line-height:        1rem;
     border-bottom:      solid 1px black;
+    vertical-align:     baseline;
   }
   .fitbruby { 
     margin-bottom: 0.75rem;
@@ -546,9 +547,9 @@ body.workbookpage {
     font-style:         normal;
     font-family:        @text-font;
   }
-  .fitb.stretch { 
+  .fitb.stretch, .fitbruby.stretch { 
     margin-left:        5px; 
-    vertical-align:     bottom; 
+    vertical-align:     baseline; 
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     /* add an underline that goes past the end of the page */
