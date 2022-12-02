@@ -960,9 +960,9 @@
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-                 (unless (member styled-link-output *online-exercise-links*)
+                 (unless (assoc g *online-exercise-links*)
                    (set! *online-exercise-links*
-                     (cons styled-link-output *online-exercise-links*)))))
+                     (cons (list g styled-link-output) *online-exercise-links*)))))
 
              (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
                (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
@@ -2013,7 +2013,7 @@
                 (fprintf o "\n* ~a\n\n" (second x))))
 
             (for ([x (reverse *online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
+              (fprintf o "\n* ~a\n\n" (second x)))
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
             (let ([opt-proj-links (reverse *opt-project-links*)])
