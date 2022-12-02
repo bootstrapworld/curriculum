@@ -1833,13 +1833,15 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
-                              (when (string=? width "")
-                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
-                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span" ".fitbruby" #:attribs
-                                                    (format "style=\"width: ~a\"" width))
+                                  (create-begin-tag "span"
+                                                    (format ".fitbruby~a"
+                                                            (if (string=? width "")
+                                                                ".stretch" ""))
+                                                    #:attribs
+                                                    (if (string=? width "") #f
+                                                        (format "style=\"width: ~a\"" width)))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
