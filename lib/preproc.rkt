@@ -1,5 +1,6 @@
 #lang racket
 
+(require json)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
@@ -174,6 +175,10 @@
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
 (define *opt-project-links* '())
+
+(define *images-hash-list* '())
+
+(define *missing-image-json-files* '())
 
 (define (errmessage-context)
   (let ([s ""])
@@ -583,34 +588,41 @@
     #:exists 'append))
 
 (define (clean-up-image-text text)
-  (when (char=? (string-ref text 0) #\")
-    (set! text (substring text 1)))
+  ; (printf "doing clean-up-image-text ~s\n" text)
   (let ([n (string-length text)])
-    (when (char=? (string-ref text (- n 1)) #\")
-      (set! text (substring text 0 (- n 1)))))
+    (when (>= n 1)
+      (when (char=? (string-ref text 0) #\")
+        (set! text (substring text 1)))
+      (when (char=? (string-ref text (- n 1)) #\")
+        (set! text (substring text 0 (- n 1))))))
   (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
 (define (clean-up-url-in-image-text text)
+  ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
+  ; (printf "doing make-image ~a\n" img)
   (let* ([img-qn (string-append *containing-directory* "/" img)]
          [images-hash-cell (assoc *containing-directory* *images-hash-list*)]
-         [images-hash (and images-hash-cell (cdr images-hash-cell))])
+         [images-hash (and images-hash-cell (cdr images-hash-cell))]
+         [json-file #f])
     (let-values ([(dir image-file ign) (split-path img-qn)])
       (set! image-file (string->symbol (path->string image-file)))
 
       (unless images-hash
-        (let ([json-file (build-path dir "lesson-images.json")])
-          (cond [(file-exists? json-file)
-                 (set! images-hash (call-with-input-file json-file read-json))
-                 (set! *images-hash-list*
-                   (cons (cons *containing-directory* images-hash) *images-hash-list*))]
-                [else
-                  (when (or *lesson-plan* *lesson*)
-                    (printf "WARNING: Image json file ~a not found\n" json-file))
-                  (set! images-hash #t)])))
+        (set! json-file (build-path dir "lesson-images.json"))
+        (cond [(file-exists? json-file)
+               (set! images-hash (call-with-input-file json-file read-json))
+               (set! *images-hash-list*
+                 (cons (cons *containing-directory* images-hash) *images-hash-list*))]
+              [else
+                (when (or *lesson-plan* *lesson*)
+                  (unless (member json-file *missing-image-json-files*)
+                    (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
+                    (printf "WARNING: Image json file ~a not found\n" json-file)))
+                (set! images-hash #t)]))
 
       ; (printf "images-has is ~s\n" images-hash)
 
@@ -630,20 +642,28 @@
                   (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
               [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
 
-
     (let ([image-attribs (and (hash? images-hash) (hash-ref images-hash image-file #f))]
           [image-caption ""]
           [image-description ""]
           [image-license ""]
           [image-source ""])
 
-      ; (printf "h is ~s\n" image-attribs)
+      ; (printf "image-attribs is ~s\n" (not (not image-attribs)))
 
       (when image-attribs
-        (set! image-caption (hash-ref image-attribs 'caption))
-        (set! image-description (hash-ref image-attribs 'description))
-        (set! image-license (hash-ref image-attribs 'license))
-        (set! image-source (hash-ref image-attribs 'source)))
+        (set! image-caption (hash-ref image-attribs 'caption ""))
+        (set! image-description (hash-ref image-attribs 'description ""))
+        (set! image-license (hash-ref image-attribs 'license ""))
+        (set! image-source (hash-ref image-attribs 'source "")))
+
+      (when (hash? images-hash)
+        (cond [(not image-attribs)
+               (printf "WARNING: Image ~a not described in ~a/lesson-images.json\n" img-qn dir)]
+              [(or (string=? image-description "")
+                   (string=? image-license "")
+                   (string=? image-source ""))
+               (printf "WARNING: Image ~a doesn't have valid metadata in ~a/lesson-images.json\n"
+                       img-qn dir)]))
 
       (when author-supplied-text (set! image-description author-supplied-text))
 
@@ -686,65 +706,6 @@
         (if centered?
             (enclose-span ".centered-image" adoc-img)
             adoc-img))))))
-
-;FIXME: obsolescent
-(define (make-image-old img text rest-opts #:centered? [centered? #f])
-  ; (printf "doing make-image-old ~s ~s ~s\n" img text rest-opts)
-  (let ([img-qn (string-append *containing-directory* "/" img)])
-    (unless (or *narrative* *target-pathway* *teacher-resources*)
-      ;(printf "anonymizing ~s\n" img)
-      (let ([img-anonymized (system-echo (format "~a/anonymize-filename" *progdir*) img)])
-        (cond [img-anonymized
-                ;(printf "anon img is ~s\n" img-anonymized)
-                (set! img img-anonymized)
-                (let ([img-anonymized-qn (string-append *containing-directory* "/"
-                                           img-anonymized)])
-                (when (file-exists? img-qn)
-                  (rename-file-or-directory img-qn
-                    (string-append *containing-directory* "/" img-anonymized)
-                    #t))
-                (unless (file-exists? img-anonymized-qn)
-                  (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
-              [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
-    (let* ([text (clean-up-image-text text)]
-           [rest-opts-len (length rest-opts)]
-           [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
-           [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
-           [image-caption (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
-           [text-wo-url (clean-up-url-in-image-text text)]
-           [commaed-opts (string-append
-                           ", "
-                           width-arg
-                           ", "
-                           height-arg
-                           (if (string=? text "") ""
-                               (format ", title=~s" text-wo-url)))]
-           [img-link-txt (string-append
-                           (enclose-span ".big" "&#x1f5bc;") "Show image")]
-           [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
-           [adoc-img
-             (string-append
-               (cond [*lesson-subdir*
-                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
-                     [else
-                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-               img-link)]
-           [img-id (format "img_id_~a" (gen-new-id))]
-           [adoc-img (enclose-tag "span" ".image-figure"
-                       (string-append
-                         ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
-                         adoc-img
-                         (if image-caption
-                             (enclose-tag "span" ".image-caption" image-caption
-                               #:attribs (format "id=~s" img-id))
-                             ""))
-                       #:attribs
-                       (and image-caption
-                           (format "aria-describedby=~s" img-id)))])
-      ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-      (if centered?
-          (enclose-span ".centered-image" adoc-img)
-          adoc-img))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
@@ -955,9 +916,9 @@
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-                 (unless (assoc g *online-exercise-links*)
+                 (unless (member styled-link-output *online-exercise-links*)
                    (set! *online-exercise-links*
-                     (cons (list g styled-link-output) *online-exercise-links*)))))
+                     (cons styled-link-output *online-exercise-links*)))))
 
              (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
                (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
@@ -1476,8 +1437,6 @@
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
-                           [(string=? directive "star")
-                            (fprintf o "[.autonum]##★##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
@@ -1486,20 +1445,16 @@
                               (set! *autonumber-index* n))]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(< (length args) 2)
-                                     (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
-                                    [else
-                                      (display (make-image (first args) (second args)
-                                                           (rest (rest args)))
-                                               o)]))]
+                              (display (make-image (first args)
+                                                       (if (= (length args) 2) (second args) ""))
+                                       o))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(< (length args) 2)
-                                     (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
-                                    [else
-                                      (display (make-image (first args) (second args)
-                                                           (rest (rest args)) #:centered? #t)
-                                               o)]))]
+                              (display (make-image (first args)
+                                                       (if (= (length args) 2)
+                                                           (second args) "")
+                                                        #:centered? #t)
+                                       o))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
                            [(string=? directive "dist-link")
@@ -1665,15 +1620,13 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
+                              (when (string=? width "")
+                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
+                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span"
-                                                    (format ".fitbruby~a"
-                                                            (if (string=? width "")
-                                                                ".stretch" ""))
-                                                    #:attribs
-                                                    (if (string=? width "") #f
-                                                        (format "style=\"width: ~a\"" width)))
+                                  (create-begin-tag "span" ".fitbruby" #:attribs
+                                                    (format "style=\"width: ~a\"" width))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
@@ -2016,7 +1969,7 @@
                 (fprintf o "\n* ~a\n\n" (second x))))
 
             (for ([x (reverse *online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" (second x)))
+              (fprintf o "\n* ~a\n\n" x))
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
             (let ([opt-proj-links (reverse *opt-project-links*)])
