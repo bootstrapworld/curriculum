@@ -66,7 +66,7 @@
       (string-append
         "= "
         course-name "\n") o)
-    (print-pathway-logo course make-image o "" #:course-name course-name)))
+    (print-pathway-logo course make-image o #:course-name course-name)))
 
 (define (print-pathway-logo course make-image o #:course-name [course-name #f])
   ; (printf "doing print-pathway-logo\n")
@@ -77,7 +77,7 @@
     (string-append
       "\n"
       "[.logo]\n"
-      (make-image "images/Logo.png" "" #:text course-name)
+      (make-image "images/Logo.png" course-name '())
       "\n\n") o))
 
 (define (print-course-banner course o)
