@@ -960,9 +960,9 @@
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-                 (unless (assoc g *online-exercise-links*)
+                 (unless (member styled-link-output *online-exercise-links*)
                    (set! *online-exercise-links*
-                     (cons (list g styled-link-output) *online-exercise-links*)))))
+                     (cons styled-link-output *online-exercise-links*)))))
 
              (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
                (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
@@ -1664,15 +1664,13 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
+                              (when (string=? width "")
+                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
+                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span"
-                                                    (format ".fitbruby~a"
-                                                            (if (string=? width "")
-                                                                ".stretch" ""))
-                                                    #:attribs
-                                                    (if (string=? width "") #f
-                                                        (format "style=\"width: ~a\"" width)))
+                                  (create-begin-tag "span" ".fitbruby" #:attribs
+                                                    (format "style=\"width: ~a\"" width))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
@@ -2015,7 +2013,7 @@
                 (fprintf o "\n* ~a\n\n" (second x))))
 
             (for ([x (reverse *online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" (second x)))
+              (fprintf o "\n* ~a\n\n" x))
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
             (let ([opt-proj-links (reverse *opt-project-links*)])
