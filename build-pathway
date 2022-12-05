@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-21 # last modified
+LASTMOD=2022-12-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1582,6 +1582,38 @@ function builddependencyjson() {
   #rm tmp.txt
 }
 
+function buildimagejfile() {
+  # echo doing buildimagejfile
+  cd $TOPDIR/distribution/$NATLANG/lessons
+  export DISTROOTDIR=../
+  local IMAGEJFILE=$TOPDIR/distribution/$NATLANG/images.js
+  local first=1
+  local L Lbasename
+  echo "var images = {" > $IMAGEJFILE
+  for L in *;do
+    if ! proglangversion $L; then
+      continue
+    fi
+    Lbasename=$L
+    if test $(echo $L|grep "\-wescheme"); then
+      Lbasename=${L%-wescheme}
+    fi
+
+    if ! grep -q "^ *\"$Lbasename\"" $IMAGEJFILE; then
+      if test -f $L/images/lesson-images.json; then
+        if test $first; then
+          first=
+        else
+          echo "," >> $IMAGEJFILE
+        fi
+        echo -n "\"$Lbasename\": " >> $IMAGEJFILE
+        cat $L/images/lesson-images.json >> $IMAGEJFILE
+      fi
+    fi
+  done
+  echo "}" >> $IMAGEJFILE
+}
+
 function buildlessonplans() {
   # echo %%% doing buildlessonplans
   local start=`date +%s` end runtime
@@ -3030,6 +3062,8 @@ echo " "
 callonARGS buildworkbookjsons
 
 builddependencyjson
+
+buildimagejfile
 
 buildpathwaytocs
 
