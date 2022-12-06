@@ -108,7 +108,7 @@
    )
 
   ("food" "Global Food Supply & Production"
-    ("pyret" "https://code.pyret.org/editor#share=1XkTWBTssYznSgB8PZ6ky7Cvc6ea-BdBU&v=164e917")
+    ("pyret" "https://code.pyret.org/editor#share=1fjS_Ak67B1pxXk7S0704kUlO0tQClrdi")
     )
 
   ("grouped-samples" "Grouped Samples Starter File"
