@@ -81,12 +81,12 @@
   )
 
   ("animals" "Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1lGjndLCWSEoIrV3ErZMXSn_-xakqGvrK")
+   ("pyret" "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FI6zAvad2EELkQxtS0SZG%2Ffile.json")
    )
 
   ("custom-animals" "Custom Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1zjYggoFxpreTalJdDvlFPnQtcQNMyJiH")
+   ("pyret" "https://code.pyret.org/editor#share=1hmVFpA2zWBWaKulm6LwHHzKrDhH15jvP")
    )
 
   ("expanded-animals" "Expanded Animals Starter File"
@@ -95,7 +95,7 @@
    )
 
   ("custom-scatter-plot" "Custom Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1zYnONDaJ5jn3i1uY9velUGScaP4uFl7T")
+   ("pyret" "https://code.pyret.org/editor#share=1DKazhJNmH1LB2J46qYMt4h2YgWPBvZEY")
    )
 
   ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
@@ -117,7 +117,7 @@
    )
 
   ("height" "Age vs. Height Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1PUGloc440ZjdGf3jT9grWHQ__VgYrfWI")
+   ("pyret" "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_")
    )
 
   ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
@@ -142,15 +142,15 @@
    )
 
   ("bad-survey"  "Height vs. Wingspan Survey (make a copy)"
-   ("pyret" "https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/template/preview")
+   ("pyret" "https://docs.google.com/forms/d/126JbqtnRLnkpzhePXHZWFQW7EUs5oAM5hhvVMeebwh4/template/preview")
    )
 
   ("dirty-data"  "New Animals! Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1-6Wc9OI6HZLl38BExnAtBdZZI5D-VgWM")
+   ("pyret" "https://code.pyret.org/editor#share=12MKYPQ8apNrBsstlJo-EWzYWz95vhL8L")
    )
 
   ("fav-desserts" "Survey of Eighth Graders and their Favorite Desserts Starter File"
-    ("pyret" "https://code.pyret.org/editor#share=1qpq3isP-1NcOWmGXzq7Iw02GQcUszoI2&v=6788e10")
+    ("pyret" "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl")
     )
 
   ("text-stats"  "Text Stats Starter File"
