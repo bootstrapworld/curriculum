@@ -19,7 +19,7 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
-@image{images/pemdas.png, "pmedas pyramid", 300, ""}
+@image{images/pemdas.png, "pemdas pyramid", 300, ""}
 
 ---
 {layout="Launch"}

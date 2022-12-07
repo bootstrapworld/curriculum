@@ -662,7 +662,7 @@
               [(or (string=? image-description "")
                    (string=? image-license "")
                    (string=? image-source ""))
-               (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
+               (printf "ignorefornow: Image ~a missing metadata in ~a/lesson-images.json\n"
                        img-qn dir)]))
 
       (when author-supplied-text (set! image-description author-supplied-text))
