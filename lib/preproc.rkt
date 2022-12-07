@@ -603,7 +603,7 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
-  ; (printf "doing make-image ~a\n" img)
+  ; (printf "doing make-image ~s ~s\n" img width)
   (let* ([img-qn (string-append *containing-directory* "/" img)]
          [images-hash-cell (assoc *containing-directory* *images-hash-list*)]
          [images-hash (and images-hash-cell (cdr images-hash-cell))]
@@ -658,11 +658,11 @@
 
       (when (hash? images-hash)
         (cond [(not image-attribs)
-               (printf "WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn dir)]
+               (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn dir)]
               [(or (string=? image-description "")
                    (string=? image-license "")
                    (string=? image-source ""))
-               (printf "ignorefornow: Image ~a missing metadata in ~a/lesson-images.json\n"
+               (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
                        img-qn dir)]))
 
       (when author-supplied-text (set! image-description author-supplied-text))
@@ -1446,12 +1446,12 @@
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (make-image (first args)
-                                                       (if (= (length args) 2) (second args) ""))
+                                                       (if (>= (length args) 2) (second args) ""))
                                        o))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (make-image (first args)
-                                                       (if (= (length args) 2)
+                                                       (if (>= (length args) 2)
                                                            (second args) "")
                                                         #:centered? #t)
                                        o))]
