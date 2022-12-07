@@ -21,7 +21,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Introducing Histograms
 
-@image{pages/pet-numbers.png, "bar chart with 3 columns: cat (3), dog (3), rabbit (1). There is a space between each of the bars.", 250}
+@image{images/pet-numbers.png, 250}
 
 The display on the left side of the page is a @vocab{Bar chart}.
 
@@ -35,7 +35,7 @@ The display on the left side of the page is a @vocab{Bar chart}.
 {layout="LaunchR"}
 # Introducing Histograms
 
-@image{pages/pet-weights.png, "histogram showing that there are 4 animals that weight between 0 and 10 pounds, one that weighs between 10 and 20, one that weighs between 30 and 40, and one that weighs between 50 and 60.", 250}
+@image{images/pet-weights.png, 250}
 
 The display on the right side is called a @vocab{histogram}.
 

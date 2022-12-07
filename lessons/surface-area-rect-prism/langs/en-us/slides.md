@@ -22,7 +22,7 @@ Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run".
 # Surface Area
 
 Type `prism` into the Interactions Area to see an image of a rectangular prism. What do you notice about the prism? 
-@image{images/prism.png, "rectangular prism with dimensions and faces labeled"}
+@image{images/prism.png}
 
 ---
 {layout="Launch"}

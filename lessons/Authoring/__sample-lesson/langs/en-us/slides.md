@@ -22,7 +22,7 @@ Using curly braces immediately after a parsed expression (like a paragraph, a he
 
 And the next paragraph goes back to normal!
 
-@image{images/pemdas.png, "The pyramid model of Order of Operations", 300, ""}
+@image{images/pemdas.png, 300}
 
 ---
 

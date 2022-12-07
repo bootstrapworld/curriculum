@@ -11,7 +11,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 Convert these Circles of Evaluation into code. Then, log into @starter-file{editor} and see what the code evaluates to.}{style="font-size:24pt"}
 
-@image{images/set-of-coes1.png, a}{width="550"}
+@image{images/set-of-coes1.png}{width="550"}
 
 
 ---
@@ -20,7 +20,7 @@ Convert these Circles of Evaluation into code. Then, log into @starter-file{edit
 
 Hypothesize: What do these Circles of Evaluation mean? What do they evaluate to?{style="font-size:24pt"}
 
-@image{images/set-of-coes2.png, a}{width="750"}
+@image{images/set-of-coes2.png}{width="750"}
 
 ---
 {layout="Launch"}
@@ -79,7 +79,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 - Analyze the graph that appears (image below), as well as the provided code (lines 10, 18, and 26).
 - What do you Notice? What do you Wonder?
 
-@image{images/inequality-works.png,"A picture of an inequality displayed on a number line, with four red dots and four green dots"}
+@image{images/inequality-works.png}
 
 <!--
 	Students might observe the following:
@@ -104,7 +104,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 - How is this graph different from the one you first produced?
 
 
-@image{images/not-quite2.png,"A picture of an inequality displayed on a number line, with three red dots and five green dots"}
+@image{images/not-quite2.png}
 
 ---
 {layout="Launch"}

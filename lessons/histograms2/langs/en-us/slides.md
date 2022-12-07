@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Describing Shape
 
-@image{images/skew-right.png, skew right, 300, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right"}
+@image{images/skew-right.png,  300}
 
 Shape is one way to _summarize_ information in a dataset, to quickly describe what values are more or less common. 
 
@@ -35,7 +35,7 @@ We can think of the data being "squeezed" into these fixed bins, like globs of p
 {layout="LaunchR"}
 # Describing Shape
 
-@image{images/skew-right.png, skew right, 300, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right"}
+@image{images/skew-right.png,  300}
 
 Consider the image on the right: most of the data points are clustered on the left side, and it contains a few unusually high values way off to the right. But how do we describe this shape, and what does it mean?
 
@@ -48,7 +48,7 @@ Let's look at some real-world examples of the most common shapes...
 {layout="LaunchR"}
 # Describing Shape
 
-@image{images/symmetric.png, "A hill-shaped histogram, with both sides sloping away from the peak equally", 300}
+@image{images/symmetric.png, 300}
 
 In a @vocab{symmetric} distribution, it’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle. Examples:
 
@@ -60,7 +60,7 @@ In a @vocab{symmetric} distribution, it’s just as likely for the variable to t
 {layout="LaunchR"}
 # Describing Shape
 
-@image{images/left-w-foot.png, "A hill-shaped histogram, with a clump of taller bars on the right side, and smaller bars trailing off to the left=", 300}
+@image{images/left-w-foot.png, 300}
 
 In a distribution that is @vocab{skewed left}, values are clumped around what’s typical, but they trail off to the left with a few unusually low values. Examples:
 
@@ -72,7 +72,7 @@ Think about the toes on your left foot!
 {layout="LaunchR"}
 # Describing Shape
 
-@image{images/right-w-foot.png, "A hill-shaped histogram, with a clump of taller bars on the left side, and smaller bars trailing off to the right side", 300}
+@image{images/right-w-foot.png, 300}
 
 - A dataset of earnings almost always shows right skewness or high outliers, because there are usually a few values that are so far above average, they can’t be balanced out by any values that are so far below average. (Earnings can’t be negative.)
 <!--
@@ -108,7 +108,7 @@ Debrief and discuss student answers
 {layout="InvestigateR"}
 # Outliers: Do they stay or do they go?
 
-@image{images/height-outlier.png, "Histogram with a low outlier", 300}
+@image{images/height-outlier.png, 300}
 
 Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in. __Is there really a 6in tall 12 year old?__ 
 
@@ -118,7 +118,7 @@ Probably not! This could very well be a typo (maybe someone meant to type "60" i
 {layout="InvestigateR"}
 # Outliers: Do they stay or do they go?
 
-@image{images/stadium-outlier.png, "Histogram with a high outlier", 300}
+@image{images/stadium-outlier.png, 300}
 
 Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes. __Did it really take someone 35m to find their seat?__
 

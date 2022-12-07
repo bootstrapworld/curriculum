@@ -95,7 +95,7 @@ The bottom two graphs are produced by the special functions `and-intersection` a
 - Why is the circle on 5 red and the circle on 15 green?
 - Do you think every graph made with `and-intersection` will have different color dots at the ends? Why or why not?
 
-@image{images/intersection1.png, "A compound inequality displayed on a number line, showing that the inequalities intersect between 5 and 15. The dot on 5 is red. The dot on 15 is green."}
+@image{images/intersection1.png}
 
 
 ---
@@ -106,7 +106,7 @@ The bottom two graphs are produced by the special functions `and-intersection` a
 - Why did the graph of this `or-union` result in the whole number line being shaded blue?
 - Not all graphs of `or-union` will look like this. Can you think of a pair of inequalities whose union won't shade the whole graph?
 
-@image{images/union-infinite1.png,"A compound inequality displayed on a number line, showing an infinite union"}
+@image{images/union-infinite1.png}
 
 ---
 {layout="Investigate"}

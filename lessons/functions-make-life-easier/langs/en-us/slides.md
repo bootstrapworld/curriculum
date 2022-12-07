@@ -13,7 +13,7 @@ I LOVE Green Triangles!{style="font-size:22pt"}
 
 Write the code to make a solid green triangle of size 50!{style="font-size:22pt"}
 
-@image{images/green-triangles-more.png, a}
+@image{images/green-triangles-more.png}
 
 
 
@@ -24,7 +24,7 @@ Write the code to make a solid green triangle of size 50!{style="font-size:22pt"
 Make as many unique, solid, green triangles as you can in 2 minutes.{style="font-size:22pt"}
 
 
-@image{images/green-triangles-still-more.png, a}
+@image{images/green-triangles-still-more.png}
 
 <!--
 Screenshot responses and/or share the class total at this point...

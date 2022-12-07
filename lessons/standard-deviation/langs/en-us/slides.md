@@ -62,7 +62,7 @@ Instead of focusing on the handful of data points used in our Five Number Summar
 {layout="InvestigateC"}
 # Measuring "Deviance"
 
-@image{images/histogram-w-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. A star labeling the mean is drawn on the x-axis at 3."} 
+@image{images/histogram-w-mean.png} 
 
 In this image, we've drawn a star to show the mean at 3. 
 
@@ -74,7 +74,7 @@ But there are _all sorts of datasets_ that have a mean of 3!
 {layout="InvestigateC"}
 # Measuring "Deviance"
 
-@image{images/histogram-w-mean.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. A star labeling the mean is drawn on the x-axis at 3."} 
+@image{images/histogram-w-mean.png} 
 
 We could imagine a shelter where every cat is between 2 and 4, so **each cat only deviates from the mean by 1 year**! But we could also imagine a shelter with only kittens and very old cats, where **cats deviate by as much as 10 years from the mean!**
 
@@ -86,7 +86,7 @@ How far away is each data point from 3?
 {layout="LaunchC"}
 # Measuring "Deviance"
 
-@image{images/histogram-w-arrows.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. A star labeling the mean is drawn on the x-axis at 3, and  arrows show the distance between the mean and each point in the first interval."}
+@image{images/histogram-w-arrows.png}
 
 In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
@@ -158,7 +158,7 @@ What is the standard deviation for the weights of _all_ the animals at our datas
 
 Invite students to take a look at the histogram below. It is the same histogram we saw in the previous section, but now with an 11th cat that is 16 years old. That's quite an outlier!
 
-@image{images/histogram-with-outlier.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An 11th cat has been added at 16 years."} 
+@image{images/histogram-with-outlier.png} 
 
 ---
 {layout="Launch"}

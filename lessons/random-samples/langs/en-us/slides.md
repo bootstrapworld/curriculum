@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # How to Spot a Scam
 
-@image{images/heads.png, 110, "A coin, showing the heads side"} 
+@image{images/heads.png, 110} 
 
 A stranger on the street invites you to a game of chance. They'll flip a coin, and you'll win money if you can predict whether it lands heads-or-tails. If you guess wrong, however, you pay THEM. 
 
@@ -21,7 +21,7 @@ A stranger on the street invites you to a game of chance. They'll flip a coin, a
 {layout="LaunchR"}
 # How to Spot a Scam
 
-@image{images/heads.png, 110, "A coin, showing the heads side"} 
+@image{images/heads.png, 110} 
 
 - What do you think? Can you trust them to play fair?
 - For a fair coin, what are the chances of it landing heads? Tails?
@@ -50,7 +50,7 @@ _How do we test the null hypothesis?_
 {layout="InvestigateR"}
 # How to Spot a Scam
 
-@image{images/heads.png, 110, "A coin, showing the heads side"} 
+@image{images/heads.png, 110} 
 
 Open @starter-file{fair-coins}, and complete @printable-exercise{fair-coins.adoc}
 
@@ -79,7 +79,7 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 {layout="InvestigateR"}
 # How to Spot a Scam
 
-@image{images/heads.png, 110, "A coin, showing the heads side"} 
+@image{images/heads.png, 110} 
 
 But what are the chances of flipping "heads" 10 times in a row? 100 times? We might say "There's a one in a million chance of a fair coin coming up heads 100 times. No _way_ is this coin fair!"
 
@@ -118,7 +118,7 @@ But a trick coin that comes up heads 60% of the time would need a much larger sa
 {layout="LaunchR"}
 # Probability v. Inference
 
-@image{images/heads.png, 110, "A coin, showing the heads side"} 
+@image{images/heads.png, 110} 
 
 In the coin-flip activity, we took samples of each coin and used our knowledge of _probability_ to make _inferences_ about whether the coins were fair or weighted.
 
@@ -238,7 +238,7 @@ We're going to analyze which is better at guessing the truth about an entire pop
 {layout="InvestigateR"}
 # Probability v. Inference
 
-@image{images/sampler-plugin-default.PNG, Sample plugin default,250}
+@image{images/sampler-plugin-default.PNG,250}
 
 Select `Sampler` from the Plugins dropdown menu.
 

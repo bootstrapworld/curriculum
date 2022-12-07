@@ -25,7 +25,7 @@ The `put-image` function works like `overlay`, but the numbers in `put-image` sp
 
 The width of the rectangle is 300 and the height is 200. What coordinates for the `dot` would create each of the following images? Fill in your answers on @printable-exercise{japan-estimating-coordinates.adoc}.{style="font-size:17pt"}
 
-@image{images/moving-red-dot.png, "Four images of a modified Japanese flag with the red dot's location moving"}{width="550"}
+@image{images/moving-red-dot.png}{width="550"}
 
 ---
 {layout="Investigate-DN"}

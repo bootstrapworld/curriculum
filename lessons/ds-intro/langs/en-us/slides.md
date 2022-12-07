@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Questions that Matter
 
-@image{images/questions.png, "Thought bubbles with question marks", 250}
+@image{images/questions.png, 250}
 
 - Look at the provided list of @opt-printable-exercise{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. 
 
@@ -25,7 +25,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Questions that Matter
 
-@image{images/questions.png, "Thought bubbles with question marks", 250}
+@image{images/questions.png, 250}
 
 - Have each person in the group quickly share their _gut reaction_: What do you think the answer is?
 - _*After*_ everyone has shared, have each person share their reasoning.
@@ -39,7 +39,7 @@ Students are VERY likely to try and explain their reasoning when they give their
 {layout="InvestigateR"}
 # Questions that Matter
 
-@image{images/questions.png, "Thought bubbles with question marks", 250}
+@image{images/questions.png, 250}
 
 What information would you collect to answer the question you selected? 
 
@@ -54,7 +54,7 @@ Common Misconception: Students may lean towards questions about _individuals_, i
 {layout="SynthesizeR"}
 # Questions that Matter
 
-@image{images/questions.png, "Thought bubbles with question marks", 250}
+@image{images/questions.png, 250}
 
 Share back! 
 
@@ -98,7 +98,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 {layout="LaunchR"}
 # Meet the Animals!
 
-@image{images/notice-and-wonder.png, 200, "Eyeglasses and Question Mark"}
+@image{images/notice-and-wonder.png, 200}
 
 * Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc}.
 * What do you __Notice__ about this dataset? 
@@ -112,7 +112,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 {layout="InvestigateR"}
 # Meet the Animals!
 
-@image{images/notice-and-wonder.png, 200, "Eyeglasses and Question Mark"}
+@image{images/notice-and-wonder.png, 200}
 
 Sometimes, looking at data sparks questions. 
 
@@ -184,7 +184,7 @@ Still, if we took the average age of the animals from this particular shelter, i
 {layout="LaunchR"}
 # Meet Pyret!
 
-@image{images/pyret.png, 200, "Pyret Logo"}
+@image{images/pyret.png, 200}
 
 - Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
 - Next, click the "File" menu and select "Save a Copy". **This will save a copy of the file into your own account, so that you can make changes and retrieve them later.**
@@ -196,7 +196,7 @@ Students will need to use a valid Google credential to log in. They can use scho
 {layout="InvestigateR"}
 # Meet Pyret!
 
-@image{images/pyret.png, 200, "Pyret Logo"}
+@image{images/pyret.png, 200}
 
 - Click "Run" to tell Pyret to read the code on the left-hand side.
 - On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.

@@ -65,7 +65,7 @@ The Transformer consumes a student and produces `true` if they are wearing glass
 - Complete the worksheet @printable-exercise{pages/codap-filter.adoc} to explore the functionality of the `Filter` Transformer.
 - Pay close attention while entering information into the `Transformer` plugin (pictured to the right). 
 
-@image{images/filter-transformer.png,"An image of the Filter Transformer"}
+@image{images/filter-transformer.png}
 
 ---
 {layout="Investigate"}
