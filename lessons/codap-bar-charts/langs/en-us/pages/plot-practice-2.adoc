@@ -4,24 +4,24 @@
 <style>
 td, th, .center { padding: 0 !important; vertical-align: middle; }
 p { margin: 0 !important; }
-.checklist li { margin: 3ex; padding: 0; }
+.checklist li { margin: 0; padding: 0; }
 </style>
 ++++
 
 Fill in the tables, predict what the graph will look like (a rough sketch is fine!), and then use CODAP to make the following displays.
 
-@vspace{5ex}
+@vspace{1ex}
 
 @n A histogram of the number of `pounds` that animals weigh.
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a", options="header"]
+[cols="^1a,^1a,^1a", options="header"]
 |===
 |*Column / Attribute*
 |*Type of Data*
 |*Configuration*
 
 |
-@fitbruby{}{@ifsoln{pounds}}{[column used as x-axis]}
-@fitbruby{}{@ifsoln{n/a}}{[column used as y-axis]}
+@fitbruby{100%}{@ifsoln{pounds}}{[column used as x-axis]}
+@fitbruby{100%}{@ifsoln{n/a}}{[column used as y-axis]}
 
 |
 @ifnotsoln{
@@ -51,37 +51,51 @@ Fill in the tables, predict what the graph will look like (a rough sketch is fin
 
 |===
 
-@vspace{5ex}
 
-[.FillVerticalSpace, cols="^.^1a, ^.^1a", options="header"]
+[.FillVerticalSpace, cols="^1a,^1a", options="header"]
 |===
 |*Sketch the chart below:*
 |*What do you think the data display tells us?*
-| @ifsoln{@image{../images/weight-histo.png, histogram showing animals' weights, 150}}
-| @ifsoln{The display shows us the distribution of animals' weights into varying increments. }
+
+|
+@ifsoln{@image{../images/weight-histo.png, 150}}
+
+@ifnotsoln{ @vspace{20ex} }
+
+|
+@ifnotsoln{ @vspace{10ex} }
+
+@ifsoln{
+The display shows us the distribution of animals' weights into varying increments.
+@vspace{5ex}
+}
+
+|
+
 |===
 
-@vspace{5ex}
+@vspace{1ex}
 
 @n A scatter-plot, using the animals `name` as the labels, `age` as the x-axis, and `pounds` as the y-axis, for all the animals from the shelter.
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a", options="header"]
+[cols="1a,1a,1a", options="header"]
 |===
-|*Column / Attribute*
-|*Type of Data*
-|*Measure*
+|@span{.center}{*Column / Attribute*}
+|@span{.center}{*Type of Data*}
+|@span{.center}{*Measure*}
+
 
 |
 @ifnotsoln{
-@fitbruby{}{}{[column used as x-axis]}
-@fitbruby{}{}{[column used as y-axis]}
-@fitbruby{}{}{[(optional) column used for labels]}
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+@fitbruby{100%}{}{[(optional) column used for labels]}
 }
 
 @ifsoln{
-@fitbruby{}{_age_}{[column used as x-axis]}
-@fitbruby{}{_pounds_}{[column used as y-axis]}
-@fitbruby{}{_name_}{[(optional) column used for labels]}
+@fitbruby{100%}{_age_}{[column used as x-axis]}
+@fitbruby{100%}{_pounds_}{[column used as y-axis]}
+@fitbruby{100%}{_name_}{[(optional) column used for labels]}
 }
 
 |
@@ -110,13 +124,33 @@ Fill in the tables, predict what the graph will look like (a rough sketch is fin
 
 |===
 
-@vspace{5ex}
 
 [.FillVerticalSpace, cols="^1a, ^1a", options="header"]
 |===
 |*Sketch the chart below:*
 |*What do you think the data display tells us?*
 
-| @ifsoln{@image{../images/age-pounds-scatter-plot.png, scatter plot showing animals' weights compared to their age, 150}}\
-| @ifsoln{ The display shows us the relationship between animals' age and weight.}
+|
+@ifsoln{
+@image{../images/age-pounds-scatter-plot.png, 150}
+}
+
+@ifnotsoln{
+@vspace{20ex}
+}
+|
+
+
+@ifnotsoln{
+@vspace{10ex}
+}
+
+@ifsoln{
+
+The display shows us the relationship between animals' age and weight.
+
+}
+
+|
+
 |===
