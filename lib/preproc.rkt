@@ -621,7 +621,7 @@
                 (when (or *lesson-plan* *lesson*)
                   (unless (member json-file *missing-image-json-files*)
                     (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                    (printf "WARNING: Image json file ~a not found\n" json-file)))
+                    (printf "!! WARNING: Image json file ~a not found\n" json-file)))
                 (set! images-hash #t)]))
 
       ; (printf "images-has is ~s\n" images-hash)
