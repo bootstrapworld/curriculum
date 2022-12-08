@@ -4,40 +4,65 @@ Cross out the Circle that doesn't belong with the others, and then explain your 
 
 ++++
 <style>
-table {grid-auto-rows: 1fr;}
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 </style>
 ++++
 
-[cols="<.^1a,^.^6a,^.^6a,^.^6a,^.^6a", grid="rows", stripes="none", frame="none"]
+[.FillVerticalSpace, cols="<.^1a,^.^12a,^.^4a",stripes="none", options="header"]
 |===
-| 	 | | | |
+| 	 |  |Explain.
 
-| @n | @show{(coe '(+ 6.8 + 1.5))}	| @show{(coe '(+ 8.1 0.2))} | @show{(coe '(+ 5.9 2.4))} | @ifsoln{this one}@show{(coe '(+ 7.7 1.6))}
+| @n
+| @show{(coe '(+ 6.8 1.5))}
+@show{(coe '(+ 8.1 0.2))}
+@show{(coe '(+ 5.9 2.4))}
+@ifsoln{this one}@show{(coe '(+ 7.7 1.6))}
+| @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
+| @n
+| @show{(coe '(+ (+ 10 7) 17))}
+@show{(coe '(+ (+ 16 8) 10))}
+@ifsoln{this one}@show{(coe '(* (+ 9 9) 2))}
+@show{(coe '(* 17 2))}
+|  @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
+| @n
+| @show{(coe '(+ (+ 13 9) 7))}
+@show{(coe '(+ 9 (+ 17 3)))}
+@show{(coe '(+ 20 9))}
+@ifsoln{this one}@show{(coe '(+ 8 (+ 8 14)))}
+| @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
-| @n | @show{(coe '(+ (+ 10 7) 17))}	| @show{(coe '(+ (+ 16 8) 10))} | @ifsoln{this one}@show{(coe '(* (+ 9 9) 2))} | @show{(coe '(* 17 2))}
+| @n
+| @ifsoln{this one}@show{(coe '(* 12 6))}
+@show{(coe '(* 42 2))}
+@show{(coe '(* 21 4))}
+@show{(coe '(* 7 (* 3 4)))}
+| @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
+| @n
+| @show{(coe '(* 9 10))}
+@show{(coe '(* 10 9))}
+@ifsoln{this one}@show{(coe '(* (* 5 5) 9))}
+@show{(coe '(* 5 (* 2 9)))}
+| @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
-| @n | @show{(coe '(+ (+ 13 9) 7))}	| @show{(coe '(+ 9 (+ 17 3)))} | @show{(coe '(+ 20 9))} | @ifsoln{this one}@show{(coe '(+ 8 (+ 8 14)))}
+| @n
+| @show{(coe '(* 2 2))}
+@show{(coe '(+ 2 2))}
+@ifsoln{this one}@show{(coe '(- 2 2))}
+@show{(coe '(* 4 (/ 3 3)))}
+| @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
 
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
-
-| @n | @ifsoln{this one}@show{(coe '(* 12 6))}	| @show{(coe '(* 42 2))} | @show{(coe '(* 21 4))} | @show{(coe '(* 7 (* 3 4)))}
-
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
-
-| @n | @show{(coe '(* 9 10))}	| @show{(coe '(* 10 9))} | @ifsoln{this one}@show{(coe '(* (* 5 5) 9))} | @show{(coe '(* 5 (* 2 9)))}
-
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
-
-| @n | @show{(coe '(* 2 2))}	| @show{(coe '(+ 2 2))} | @ifsoln{this one}@show{(coe '(- 2 2))} | @show{(coe '(* 4 (/ 3 3)))}
-
-5+| Why? @ifsoln{Three Circles evaluate to 8.3, whereas the last one is 9.3}
-
-| ||||
 |===
 
 
