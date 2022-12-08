@@ -206,15 +206,15 @@ When the last Row is visited, the function produces the new Table.
 # Ordering, Filtering, and Building
 
 * Complete questions 14-16 on @printable-exercise{exploring-functions.adoc}
-* Find the contract for `build-col` in your Contracts page. 
+* Find the contract for `build-column` in your Contracts page. 
 
 1. What is its Domain?
-2. How the `build-col` function work?
+2. How the `build-column` function work?
 3. Does sorting the `animals-table` produce a _new_ table, or change the existing one?
 
 <!--
 **ANSWERS**
-1. `build-col` takes in a Table, a String and a _function_
+1. `build-column` takes in a Table, a String and a _function_
 2. It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
 3. It creates a new one
 -->
@@ -222,9 +222,9 @@ When the last Row is visited, the function produces the new Table.
 {layout="Investigate-DN"}
 # Ordering, Filtering, and Building
 
-`build-col :: (t::Table, col::Str, f::(Row->Any)) -> Table`{style="font-size:16pt;font-weight:bold"}
+`build-column :: (t::Table, col::Str, f::(Row->Any)) -> Table`{style="font-size:16pt;font-weight:bold"}
 
-`build-col` consumes a Table, a String and a _function_, and walks through the table applying it to each Row. 
+`build-column` consumes a Table, a String and a _function_, and walks through the table applying it to each Row. 
 
 It produces a new table with an extra column, using the String for the column title, and fills in the values by applying the function to every Row.
 
@@ -255,6 +255,6 @@ Being able to define functions and use them with Table Functions is a _huge_ upg
 # Ordering, Filtering, and Building
 
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `build-col` to compute that for every row in the table.
+- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `build-column` to compute that for every row in the table.
 - **What are some ways you might want to filter _your_ dataset?**
 - **What are some columns you might want to build for _your_ dataset?**

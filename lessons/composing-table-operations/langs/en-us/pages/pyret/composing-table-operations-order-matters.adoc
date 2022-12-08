@@ -4,28 +4,32 @@
 .literalblock pre { 0.5em 0 !important; }
 table:first-of-type td {padding: .25em .5em !important; }
 div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+.data th:last-of-type, .data td:last-of-type { display:none; }
+@ifsoln{
+.data th:last-of-type , .data td:last-of-type { display:initial; }
+}
 </style>
 ++++
 
 @do{
 
-(define exp1 '(sort t "kilos" true))
-(define exp2 '(build-col (filter t is-female) "kilos" kilograms))
-(define exp3 '(filter (build-col t "kilos" kilograms) is-heavy))
-(define exp4 '(build-col (filter t is-heavy) "kilos" kilograms))
-(define exp5 '(sort (filter (build-col t "kilos" kilograms) is-heavy) "sex" true))
-(define exp6 '(filter (build-col (build-col t "female" is-female) "kilos" kilograms) is-heavy))
+(define exp1 '(filter (sort t "pounds" false) is-female))
+(define exp2 '(build-column (filter t is-female) "kilos" kilograms))
+(define exp3 '(filter (build-column t "kilos" kilograms) is-heavy))
+(define exp4 '(build-column (filter t is-heavy) "kilos" kilograms))
+(define exp5 '(filter (build-column (build-column t "female" is-female) "kilos" kilograms) is-heavy))
+(define exp6 '(build-column (sort (filter t is-female) "age" true) "kilos" kilograms)
 }
 
 The table `t` below represents four animals from the shelter:
 
-[cols='5',options="header"]
+[.data, cols='6',options="header"]
 |===
-| name        | sex       | age   | fixed   | pounds
-| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
-| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
-| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
-| `"Maple"`   | `"female"`| `3`   | `true`  | `51.6`
+| name        | sex       | age   | fixed   | pounds  | kilos
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`    | `12.72`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`    | `41.81`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`  | `16.04`
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`  |  `2.95`
 |===
 
 You have the following functions defined below (read them _carefully!_):
@@ -34,34 +38,36 @@ You have the following functions defined below (read them _carefully!_):
   fun kilograms(r): r["pounds"] / 2.2     end
   fun is-heavy(r):  r["kilos"] > 25       end
 
-_Match_ each Circle of Evaluation (left) to the description of what it does (right). *Note: one description might match multiple expressions!*
+**TIP: To help you complete this page, jot down the "kilos" values in the table above by dividing each animal's `pounds` column by 2.2.**
 
-[.FillVerticalSpace, cols=".^14a,^.^2a,1,^.^1a,.^6a",stripes="none",grid="none",frame="none"]
+For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
+
+[.FillVerticalSpace, cols=">.^6a,^.^2a,1,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
 |===
 
+| Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
+|*@n*@ifsoln{(B)} ||*A*
 | @show{(coe exp1)}
-|*@n*@ifsoln{(D)} ||*A*
-| Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
-| @show{(coe exp2)}
+| Produces a table containing Sasha, Nori and Toggle (in that order)
 |*@n*@ifsoln{(A)} ||*B*
-| Produces a table containing Maple, Nori and Toggle (in that order)
+| @show{(coe exp2)}
 
-| @show{(coe exp3)}
+| Produces a table with an extra column for kilos, but only animals with more than 25 kilos
 |*@n*@ifsoln{+(C)+} ||*C*
-| Produces a table with an extra column for kilos, but only rows with more than 25 kilos
+| @show{(coe exp3)}
 
-| @show{(coe exp4)}
-|*@n*@ifsoln{(D)} ||*D*
 | Won’t run: will produce an error (if so, why?)
+|*@n*@ifsoln{(D)} ||*D*
+| @show{(coe exp4)}
 
+| Produces a table containing Sasha, Toggle, and Nori (in that order)
+|*@n*@ifsoln{+(G)+} ||*E*
 | @show{(coe exp5)}
-|*@n*@ifsoln{+(C)+} ||*E*
-| Produces a table containing only Fritz, with two extra columns.
 
-| @show{(coe exp6)}
+| Produces an empty table - with no animals at all!
 |*@n*@ifsoln{+(E)+} ||*G*
-| Produces a table containing Maple and Fritz.
+| @show{(coe exp6)}
 
 |===
 
