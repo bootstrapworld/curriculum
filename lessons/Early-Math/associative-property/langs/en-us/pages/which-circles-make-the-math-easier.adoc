@@ -1,1 +1,51 @@
+= Which Circle Makes the Computation Easier?
 
+++++
+<style>
+div.circleevalsexp { width: auto; }
+</style>
+++++
+
+Put a check mark by the Circle which applies the Associative Property to make computation simpler. Then, evaluate the Circle and solve.
+
+[.FillVerticalSpace,cols=".^1a,^.^6a,^.^6a,^.^6a,^.^4a", stripes="none", options="header"]
+|===
+|	 | Numeric Expression | Option 1 | Option 2 | Apply computation.
+
+| @n
+| @math{19 + 46 + 4}
+| @show{(coe '(+ 19 (+ 46 4)))}
+| @show{(coe '(+ (+ 19 46) 4))}
+| @show{(coe '(+ 19 50))}
+
+| @n
+| @math{7.28 + 2.72 + 79.49}
+| @show{(coe '(+ 7.28 (+ 2.72 79.49)))}
+| @show{(coe '(+ (+ 7.28 2.72) 79.49))}
+| @showsoln{(coe '(+ 10 79.49))}
+
+| @n
+| @math{32.173 \times 2 \times 5}
+| @show{(coe '(* 32.173 (* 2 5)))}
+| @show{(coe '(* (* 32.173 2) 5))}
+| @showsoln{(coe '(* 32.173 10))}
+
+| @n
+| @math{38 \times \frac{1}{7} \times 7}
+| @show{(coe '(* (* 38 1/7) 7))}
+| @show{(coe '(* 38 (* 7 1/7)))}
+| @showsoln{(coe '(* 38 1))}
+
+| @n
+| @math{149 + 57 + 43}
+| @show{(coe '(+ (+ 149 + 57) 43))}
+| @show{(coe '(+ 149 (+ 57 43)))}
+| @showsoln{(coe '(+ 149 100))}
+
+| @n
+| @math{4 \times 38 \times 25}
+| @show{(coe '(* (* 4 38) 25))}
+| @show{(coe '(* 4 (* 38 25)))}
+| @ifsoln{To make this made easier, we need to apply the Commutative Property and then group the numbers accordingly! Check out the next worksheet.}
+
+|===
