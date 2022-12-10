@@ -1,1 +1,65 @@
+[.landscape]
+= Which One Doesn't Belong? (Variables)
+
+Cross out the Circle that doesn't belong with the others, and then explain your choice.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain.
+
+| @n
+| @show{(coe '(/ (+ 2 m) (+ 5 p)))}
+@show{(coe '(/ (+ m 2) (+ 5 p)))}
+@show{(coe '(/ (+ 5 p) (+ 2 m)))}
+@show{(coe '(/ (+ m 2) (+ p 5)))}
+|
+
+| @n
+| @show{(coe '(+ (* t u) v))}
+@show{(coe '(+ (* u t) v))}
+@show{(coe '(+ v (* t u)))}
+@show{(coe '(+ t (* u v)))}
+|
+
+
+| @n
+| @show{(coe '(* (+ b c) (- f g)))}
+@show{(coe '(* (+ f g) (- b c)))}
+@show{(coe '(* (+ c b) (- f g)))}
+@show{(coe '(* (+ b c) (- g f)))}|
+
+
+| @n
+| @show{(coe '(* 3 (+ (+ h w) 4)))}
+@show{(coe '(* (+ (+ h w) f) 3))}
+@show{(coe '(* (+ h w) (+ 4 3)))}
+@show{(coe '(* 3 (+ 4 (+ h w))))}
+|
+
+
+| @n
+| @show{(coe '(/ (+ m a) (+ t h)))}
+@show{(coe '(/ (+ a m) (+ t h)))}
+@show{(coe '(/ (+ t h) (+ m a)))}
+@show{(coe '(/ (+ a m) (+ h t)))}
+|
+
+
+|===
+
 
