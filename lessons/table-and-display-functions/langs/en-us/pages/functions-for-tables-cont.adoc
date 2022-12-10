@@ -1,0 +1,67 @@
+= Functions for Tables (continued)
+
+== count
+
+@show{(contract "count" '("Table" "String") "Table")}
+
+@n What is the Domain of `count`? @fitb{}{@ifsoln{Table, String}}
+
+@n What is the Range of `count`? @fitb{}{@ifsoln{Table}}
+
+@n What do you suspect the String in the Domain will describe? @fitb{}{@ifsoln{a column}}
+
+@vspace{1ex}
+
+*Suppose we wanted to know how many animals had 4 legs...*
+
+Type `count(animals-table, "legs")` into the Interactions Area and click "Enter"
+
+@n What did the expression produce? @fitb{}{a new table showing the counts for the number of animals with 0 legs, 3 legs, 4 legs and 8 legs}
+
+@n How many animals had 4 legs? @fitb{}{@ifsoln{29}}
+
+@n Think of another question you might be able to answer with the `count` function. Fill in the blanks with the code you'd write.
+
+@fitbruby{10em}{@ifsoln{count}}{function-name} (@fitbruby{20em}{@ifsoln{animals-table}}{Table}, @fitbruby{15em}{Answers will vary!}{column-name {two-colons} String})
+
+@n Tables that summarize data with a count are commonly used in the real world. Give two examples of where you've seen them before:
+
+- Example 1: @fitb{}{@ifsoln{Answers will vary! Election Results, Survey Results, Fundraiser Results, etc. }}
+
+- Example 2: @fitb{}{Articles, Advertisements, Bills, etc. }
+
+@n Newscasters and journalists often incorporate data into their reporting. How else might they display this information besides in a table?
+
+@fitb{}{@ifsoln{bar charts, pictographs, infographics}}
+
+== first-n-rows
+
+@show{(contract "first-n-rows" '("Table" "Number") "Table")}
+
+@n What is the Domain of `first-n-rows`? @fitb{}{@ifsoln{Table, Number}}
+
+@n What is the Range of `first-n-rows`? @fitb{}{@ifsoln{Table}}
+
+@n What happens when you type `first-n-rows(animals-table, 5)`?
+
+@fitb{}{@ifsoln{It returns a new table with the first 5 rows from the `animals-table`}}
+
+@n Why does `first-n-rows` take in a Number? @fitb{}{@ifsoln{The Number determines how many Rows will be in the new Table.}}
+
+@vspace{1ex}
+
+★ What happens when you type `first-n-rows(sort(animals-table, "pounds", true), 6)`?
+
+@fitb{}{@ifsoln{It returns a new table with 6 rows of data for the lightest 6 animals in the `animals-table`.}}
+
+@vspace{1ex}
+
+_Note: The Domain for `first-n-rows` is Table, Number. In this case `sort(animals-table, "pounds", true)` is the Table!_
+
+@vspace{1ex}
+
+★ See if you can figure out how to compose the code that would generate a table of the 10 oldest animals!
+
+@fitbruby{15em}{@ifsoln{first-n-rows}}{function-name} (@fitbruby{35em}{@ifsoln{sort(animals-table, "age", false)}}{Table}, @fitbruby{5em}{@ifsoln{10}}{Number})
+
+

@@ -1,0 +1,69 @@
+= Functions for Tables
+
+Open the @starter-file{animals} and click "Run".
+
+In the Interactions Window on the right type `animals-table` and hit "Enter" to see the default view of the table.
+
+== Sort
+
+*Suppose we wanted to see the names of the animals in alphabetical order...*
+
+The `sort` function takes in three pieces of information:
+
+* A table
+* A column we want to sort the table by (declared using a String)
+* The order in which we want the column sorted (declared using a Boolean)
+
+@vspace{1ex}
+
+Test out these two expressions in the Interactions Area and record what you learn about ordering below:
+
+* `sort(animals-table, "Name", true)`
+* `sort(animals-table, "Name", false)`
+
+
+@n `true` sorts the table... @fitb{}{@ifsoln{from A-Z ... (after question 4 add) or from least to greatest}}
+
+@n `false` sorts the table... @fitb{}{@ifsoln{from Z-A ... (after question 4 add) or from biggest to smallest}}
+
+@vspace{1ex}
+
+*Suppose we wanted to sort the `animals-table` by the `weeks` column to determine which animals were
+adopted quickest...*
+
+@n Do you think it would be more efficient to use `true` or `false`? @fitb{}{}
+
+@n Test it out and add your thinking about @vocab{quantitative} columns to your explanations of `true` and `false` above.
+
+@n Which animal(s) were adopted the quickest? @fitb{}{@ifsoln{Snuggles, Nori, Toggle, Wade and Mittens}}
+
+@n Some functions produce Numbers, some produce Strings, some produce Booleans. What did the `sort` function produce? @fitb{}{@ifsoln{a new table!}}
+
+@vspace{1ex}
+
+There are many many functions available to us in Pyret. We can describe them using contracts. The contract for `sort` is:
+
+@show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+
+- Each contract begins with the function name: @fitb{10em}{sort}
+- Lists the data types required to satisfy its Domain: @fitb{20em}{Table, String, Boolean}
+- And then declares the data type of the Range it will return. @fitb{10em}{Table}
+
+@vspace{1ex}
+
+*Suppose we wanted to sort the `animals-table` by the `legs` column to determine which animals had the most legs...*
+
+@n Fill in the blanks below with the code you'd use:
+
+@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{Table},  @fitbruby{15em}{@ifsoln{"weeks"}}{column-name {two-colons} String}, @fitbruby{10em}{@ifsoln{true}}{order {two-colons} Boolean})
+
+@n Which animal(s) had the most legs? @fitb{}{@ifsoln{Snuggles the tarantula}}
+
+@n Think of another question you might answer quickly by sorting the table.
+
+@fitb{}{}
+
+@n What code would you write to answer your question?
+
+@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{Table},  @fitbruby{15em}{}{column-name {two-colons} String}, @fitbruby{10em}{}{order {two-colons} Boolean})
+
