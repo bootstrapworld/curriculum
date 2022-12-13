@@ -695,7 +695,8 @@
                            ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                            adoc-img
                            (if image-caption
-                               (enclose-tag "span" ".image-caption" image-caption
+                               (enclose-tag "span" ".image-caption"
+                                 (expand-directives-string image-caption)
                                  #:attribs (format "id=~s" img-id))
                                ""))
                          #:attribs
@@ -1004,12 +1005,12 @@
         (newline o)))
     (newline o)))
 
-(define (display-title i o out-file)
+(define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
     (set! *page-title* title-txt)
     (unless *other-dir*
-      (let ([title-file (path-replace-extension out-file ".titletxt")]
+      (let ([title-file (path-replace-extension *out-file* ".titletxt")]
             [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
         (call-with-output-file title-file
           (lambda (o)
@@ -1296,70 +1297,11 @@
   (erase-span-stack!)
   )
 
-(define (preproc-adoc-file in-file
-                           #:all-pathway-lessons [all-pathway-lessons #f]
-                           #:containing-directory [containing-directory ""]
-                           #:dist-root-dir [dist-root-dir ""]
-                           #:lesson [lesson #f]
-                           #:lesson-plan [lesson-plan #f]
-                           #:narrative [narrative #f]
-                           #:other-dir [other-dir #f]
-                           #:resources [resources #f]
-                           #:target-pathway [target-pathway #f]
-                           #:proglang [proglang "pyret"]
-                           #:other-proglangs [other-proglangs #f]
-                           #:solutions-mode? [solutions-mode? #f]
-                           )
-  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
+(define *title-reached?* #f)
+(define *first-subsection-reached?* #f)
+(define *out-file* #f)
 
-  (set! *containing-directory* containing-directory)
-  (set! *dist-root-dir* dist-root-dir)
-  (set! *lesson* lesson)
-  (set! *lesson-plan* lesson-plan)
-  (set! *narrative* narrative)
-  (set! *other-dir* other-dir)
-  (set! *proglang* proglang)
-  (set! *other-proglangs* other-proglangs)
-  (set! *solutions-mode?* solutions-mode?)
-  (set! *target-pathway* target-pathway)
-  (set! *teacher-resources* resources)
-
-  (init-flags)
-
-  (set! *lesson-plan-base* *lesson-plan*)
-  (when *lesson-plan*
-    (unless *pyret?*
-      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
-        (unless (string=? *lesson-plan* x)
-          (set! *lesson-plan-base* x)))))
-
-  ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
-
-  (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
-                                       (exn-message e) (errmessage-file-context)))])
-    (set! *in-file* (build-path containing-directory in-file))
-    ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
-    (let* ([dot-in-file (string-append "." in-file)]
-           [out-file (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc"))]
-           [first-subsection-reached? #f]
-           [title-reached? #f]
-           )
-      ; (printf "preproc ~a to ~a\n" *in-file* out-file)
-      ;
-      (when (or *link-lint?* #t)
-        (let ([internal-links-file (path-replace-extension out-file ".internal-links.txt.kp")]
-              [external-links-file (path-replace-extension out-file ".external-links.txt.kp")])
-          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
-          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
-          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
-      ;
-      (when (or *lesson-plan*
-                *narrative*
-                *teacher-resources*)
-        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
-      ;
-      (define (expand-directives i o)
+(define (expand-directives i o)
         ;(printf "doing expand-directives\n")
         (let ([beginning-of-line? #t]
               [possible-beginning-of-line? #f])
@@ -1387,7 +1329,7 @@
                             (display (enclose-tag "span" "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
-                              (if title-reached?
+                              (if *title-reached?*
                                   (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
@@ -1528,7 +1470,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (display-lesson-description (read-group i directive)
-                                                        (path-replace-extension out-file "-desc.txt.kp")
+                                                        (path-replace-extension *out-file* "-desc.txt.kp")
                                                         o)]
                            [(string=? directive "pathway-logo")
                             (unless *narrative*
@@ -1800,10 +1742,10 @@
                   [(and beginning-of-line? (char=? c '#\=))
                    (set! beginning-of-line? #f)
                    (set! possible-beginning-of-line? #f)
-                   (cond [title-reached?
-                           (cond [first-subsection-reached? #f]
+                   (cond [*title-reached?*
+                           (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! first-subsection-reached? #t)
+                                  (set! *first-subsection-reached?* #t)
                                   (when *lesson-plan*
                                     (include-glossary o))]
                                  [else #f])
@@ -1811,8 +1753,8 @@
                                    (display-section-markup i o)]
                                  [else (display c o)])]
                          [else
-                           (set! title-reached? #t)
-                           (display-title i o out-file)
+                           (set! *title-reached?* #t)
+                           (display-title i o)
                            (display-alternative-proglang o)
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
@@ -1841,10 +1783,81 @@
                                  [else (error 'ERROR "preproc-adoc-file: deadc0de")])]
                           [else (display c o)])])
                 (loop))))))
+
+(define (expand-directives-string s)
+  (call-with-input-string s
+    (lambda (i)
+      (call-with-output-string
+        (lambda (o)
+          (expand-directives i o))))))
+
+(define (preproc-adoc-file in-file
+                           #:all-pathway-lessons [all-pathway-lessons #f]
+                           #:containing-directory [containing-directory ""]
+                           #:dist-root-dir [dist-root-dir ""]
+                           #:lesson [lesson #f]
+                           #:lesson-plan [lesson-plan #f]
+                           #:narrative [narrative #f]
+                           #:other-dir [other-dir #f]
+                           #:resources [resources #f]
+                           #:target-pathway [target-pathway #f]
+                           #:proglang [proglang "pyret"]
+                           #:other-proglangs [other-proglangs #f]
+                           #:solutions-mode? [solutions-mode? #f]
+                           )
+  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
+
+  (set! *containing-directory* containing-directory)
+  (set! *dist-root-dir* dist-root-dir)
+  (set! *lesson* lesson)
+  (set! *lesson-plan* lesson-plan)
+  (set! *narrative* narrative)
+  (set! *other-dir* other-dir)
+  (set! *proglang* proglang)
+  (set! *other-proglangs* other-proglangs)
+  (set! *solutions-mode?* solutions-mode?)
+  (set! *target-pathway* target-pathway)
+  (set! *teacher-resources* resources)
+
+  (init-flags)
+
+  (set! *lesson-plan-base* *lesson-plan*)
+  (when *lesson-plan*
+    (unless *pyret?*
+      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
+        (unless (string=? *lesson-plan* x)
+          (set! *lesson-plan-base* x)))))
+
+  ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
+
+  (with-handlers ([exn:fail? (lambda (e)
+                               (printf "ERROR: ~a in ~s\n\n"
+                                       (exn-message e) (errmessage-file-context)))])
+    (set! *in-file* (build-path containing-directory in-file))
+    ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
+    (let ([dot-in-file (string-append "." in-file)])
+      (set! *out-file* (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc")))
+      (set! *first-subsection-reached?* #f)
+      (set! *title-reached?* #f)
+      ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
+      ;
+      (when (or *link-lint?* #t)
+        (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
+              [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
+          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
+          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
+          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
+      ;
+      (when (or *lesson-plan*
+                *narrative*
+                *teacher-resources*)
+        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
+      ;
+
       ;
       (call-with-input-file *in-file*
         (lambda (i)
-          (call-with-output-file out-file
+          (call-with-output-file *out-file*
             (lambda (o)
 
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
@@ -1854,7 +1867,7 @@
 
               (expand-directives i o)
 
-              (when (and *narrative* (not title-reached?))
+              (when (and *narrative* (not *title-reached?*))
                 (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
@@ -1942,9 +1955,9 @@
               (when (pair? prims)
                 (for ([prim prims])
                   (add-prereq prim))))))
-        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr out-file)
+        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr *out-file*)
 
-        (call-with-output-file (path-replace-extension out-file "-extra-mat.asc")
+        (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
 
             (display-lesson-slides o)
@@ -1973,7 +1986,7 @@
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
             (let ([opt-proj-links (reverse *opt-project-links*)])
-              (call-with-output-file (path-replace-extension out-file "-opt-proj.rkt.kp")
+              (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
                 (lambda (o)
                   (for ([link-pair opt-proj-links])
                     (write link-pair o)
