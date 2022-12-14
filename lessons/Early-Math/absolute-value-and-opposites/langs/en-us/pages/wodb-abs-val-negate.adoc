@@ -1,0 +1,64 @@
+[.landscape]
+= Which One Doesn't Belong?
+
+Cross out the Circle that doesn't belong with the others, and then explain your choice.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain.
+
+| @n
+| @show{(coe '(+ (* 2 8) (/ 8 4)))}
+@show{(coe '(+ (* 8 2) (/ 8 4)))}
+@show{(coe '(+ (* 2 8) (/ 4 8)))}
+@show{(coe '(+ (/ 8 4) (* 8 2)))}
+|
+
+| @n
+| @show{(coe '(+ 10 (* 3 2)))}
+@show{(coe '(+ (* 3 2) 10))}
+@show{(coe '(+ (* 10 3) 2))}
+@show{(coe '(+ (* 2 3) 10))}
+|
+
+
+| @n
+| @show{(coe '(+ ( + (* 3 7) 5) 6))}
+@show{(coe '(+ (+ (* 3 5) 7) 6))}
+@show{(coe '(+ (+ 5 (* 7 3)) 6))}
+@show{(coe '(+ 5 (+ (* 3 7) 6)))}
+|
+
+
+| @n
+| @show{(coe '(/ (+ 6 4) (+ 3 2)))}
+@show{(coe '(/ (+ 4 6) (+ 3 2)))}
+@show{(coe '(/ (+ 3 2) (+ 4 6)))}
+@show{(coe '(/ (+ 6 4) (+ 2 3)))}
+|
+
+
+| @n
+| @show{(coe '(- ( + (* 8 10) 6) 5))}
+@show{(coe '(- (+ 6 (* 8 10)) 5))}
+@show{(coe '(- (+ (* 10 8) 6) 5))}
+@show{(coe '(- 5 (+ (* 8 10) 6)))}
+|
+
+|===
+
