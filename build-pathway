@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-12-05 # last modified
+LASTMOD=2022-12-14 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1586,10 +1586,11 @@ function buildimagejfile() {
   # echo doing buildimagejfile
   cd $TOPDIR/distribution/$NATLANG/lessons
   export DISTROOTDIR=../
+  local IMAGEFILES=$TOPDIR/distribution/$NATLANG/.cached/.image-files.rkt
+  echo "(" > $IMAGEFILES
   local IMAGEJFILE=$TOPDIR/distribution/$NATLANG/images.js
   local first=1
   local L Lbasename
-  echo "var images = {" > $IMAGEJFILE
   for L in *;do
     if ! proglangversion $L; then
       continue
@@ -1599,19 +1600,14 @@ function buildimagejfile() {
       Lbasename=${L%-wescheme}
     fi
 
-    if ! grep -q "^ *\"$Lbasename\"" $IMAGEJFILE; then
+    if ! grep -q "^ *\"$Lbasename/images/" $IMAGEFILES; then
       if test -f $L/images/lesson-images.json; then
-        if test $first; then
-          first=
-        else
-          echo "," >> $IMAGEJFILE
-        fi
-        echo -n "\"$Lbasename\": " >> $IMAGEJFILE
-        cat $L/images/lesson-images.json >> $IMAGEJFILE
+        echo \(\"$Lbasename\" \"$L/images/lesson-images.json\"\) >> $IMAGEFILES
       fi
     fi
   done
-  echo "}" >> $IMAGEJFILE
+  echo ")" >> $IMAGEFILES
+  $PROGDIR/make-images-js.rkt
 }
 
 function buildlessonplans() {
