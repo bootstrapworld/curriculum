@@ -67,6 +67,8 @@ files, with a sample lesson and sample pathway:
             index.adoc
             slides.md
             images/
+              *.{png,gif,jpg}
+              lesson-images.json
             pyret/
             wescheme/
             pages/
@@ -90,6 +92,9 @@ files, with a sample lesson and sample pathway:
             index.adoc
             lesson-order.txt
             external-index.rkt
+            images/
+              *.{png,gif,jpg}
+              lesson-images.json
             front-matter/
               pages/
                 *.{adoc,pdf}
@@ -145,8 +150,7 @@ doesn’t
 have to be `index`, ensure that there is only one `.adoc` file at
 this level.
 
-Images are in
-subdir `images`.
+Images are in subdirectory `images`.
 
 Single workbook pages are in subdirs `pages`
 and `solution-pages` (some of these can be static PDFs
@@ -175,6 +179,35 @@ the default.)
 
 (Any of the components in an entry line in `workbook-pages.txt`
 may be enclosed in double-quotes.)
+
+==== The images/ subdirectory
+
+As mentioned above, the images for a lesson are collected in a
+subdirectory called `images`.  References to these images in the adoc
+files are of the form `@image{path-to-image-file, width}`, where the
+`path-to-image-file` is the relative pathname of the chosen image file
+in `images`, and the optional `width` is the desired width of the image.
+
+The `images` also contains a `lesson-images.json` file that lists all
+the image files in the same directory with their associated metadata,
+i.e., _caption_, _description_, _source_, and _license_. The topmost
+JSON object in this file maps each image name to an object containing
+its metadata. Here is an example:
+
+  "louis.png": {
+    "caption": "Louis",
+    "description": "A very good standard apricot poodle named Louis",
+    "source": "Image from Louis's hooman",
+    "license": "Creative Commons 4.0 - NC - SA"
+  }
+
+Ensure that all four fields have values, otherwise the build will issue
+warnings when using any such underdefined image. (You will get warnings
+even if the value is an empty string. However, for the moment,
+empty-string captions are ignored.)
+
+The build process collects all the image descriptions into a single file
+`images.js` in `distribution/en-us`.
 
 === Structure of a pathway directory
 
