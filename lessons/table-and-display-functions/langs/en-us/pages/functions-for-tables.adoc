@@ -49,9 +49,13 @@ There are many many functions available to us in Pyret. We can describe them usi
 
 @show{(contract "sort" '("Table" "String" "Boolean") "Table")}
 
-- Each contract begins with the function name: @fitb{10em}{sort}
-- Lists the data types required to satisfy its Domain: @fitb{20em}{Table, String, Boolean}
-- And then declares the data type of the Range it will return. @fitb{10em}{Table}
+Contracts can also be written with more detail, by describing data types in the Domain:
+
+@show{(contract "sort" '("Table" "column {two-colons} String" "order {two-colons} Boolean") "Table")}
+
+- Each contract begins with the function name: @fitb{10em}{_in this case_ `sort`}
+- Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Table, String, Boolean}
+- And then declares the data type of the Range it will return. @fitb{10em}{_in this case_ Table}
 
 @vspace{1ex}
 
