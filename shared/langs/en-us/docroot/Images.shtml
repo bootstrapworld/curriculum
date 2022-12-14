@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 2.0.17">
+  <title>Images and Attributions</title>
+  <link rel="stylesheet" href="lib/curriculum.css" />
+  <script src="lib/bootstraplesson.js"></script>
+  <script src="images.js"></script>
+  <script src="dependency-graph.js"></script>
+  <script src="pathway-tocs.js"></script>
+  <script>var pathway;</script>
+  <style>
+    table { width: 100%; table-layout:fixed; }
+    td { word-break: break-word; font-size: 10pt !important; }
+  </style>
+</head>
+<body class="narrativepage article">
+<!--#include virtual="/menubar.ssi"-->
+<div id="body">
+  <div id="header">
+    <h1>Images and Attributions</h1>
+  </div>
+  <div id="content">
+    <div class="paragraph">
+      Bootstrap uses images from many sources, and believes in responsible attribution. The table below lists all images used in your selected lessons or pathway.
+    </div>
+    <table>
+      <colgroup>
+        <col style="width: 10%;">
+        <col style="width: 10%;">
+        <col style="width: 20%;">
+        <col style="width: 10%;">
+      </colgroup>
+      <thead>
+        <th>Image</th>
+        <th>Lesson</th>
+        <th>Source/Attribution</th>
+        <th>License</th>
+      </thead>
+      <tbody id="imageTable">
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="footer">
+  <div id="footer-text">
+    Last updated 2022-11-21 11:51:46 -0500
+  </div>
+</div>
+<script>
+  const table = document.getElementById("imageTable");
+  Object.keys(images).forEach(lesson => {
+    Object.keys(images[lesson]).forEach(image => {
+      const {caption, description, license, source} = images[lesson][image];
+      if (source == "Created by the Bootstrap Team") return;
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${image}</td>
+        <td><a href="lessons/${lesson}/">${graph[lesson].title}</a></td>
+        <td>${source}</td>
+        <td>${license}</td>`;
+      table.appendChild(row);
+    });
+  });
+</script>
+</body>
+</html>
