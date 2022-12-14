@@ -1,4 +1,4 @@
-= True or False? (Identity Property with Variables)
+= True or False? (Absolute Value _and_ Negate)
 
 ++++
 <style>
@@ -6,56 +6,71 @@ div.circleevalsexp { width: auto; }
 </style>
 ++++
 
+@vspace{1ex}
+
 Is the equation represented by the two Circles true or false? Explain why, and then describe what you would change to make the _false_ equations _true_.
 
-[.FillVerticalSpace,cols="^.^1a,^.^8a,^.^5a", stripes="none", options="header"]
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^5a", stripes="none", options="header"]
 |===
 |	 | Circles																	   |
 True or False? Explain
 
 
 | @n
-| @show{(coe '(* m 1))}
+| @show{(coe '(negate 4))}
 @math{=}
-@show{(coe '(* m (- 4 3)))}
+@show{(coe '(negate -4))}
 |
 
 
 | @n
-| @show{(coe '(* (+ g h) (/ 30 30)))}
+| @show{(coe '(negate 3))}
 @math{=}
-@show{(coe '(* (+ h g) (/ 523 523)))}
+@show{(coe '(abs-val 3))}
 |
 
 
 | @n
-| @show{(coe '(+ (* h (* t q)) 0))}
+| @show{(coe '(negate -2))}
 @math{=}
-@show{(coe '(+ 0 (* q (* t h))))}
-|
-
-
-
-| @n
-| @show{(coe '(+ (- f h) (- t t)))}
-@math{=}
-@show{(coe '(+ (- h f) (- k k)))}
+@show{(coe '(negate 2))}
 |
 
 
 | @n
-| @show{(coe '(* (/ 35 b) (/ k k)))}
+| @show{(coe '(abs-val -3))}
 @math{=}
-@show{(coe '(/ 35 b))}
+@show{(coe '(abs-val 3))}
 |
 
+|===
+
+On the table below, state whether the equation represented by the Circles is _always true_, _sometimes true_, or _never true_. Explain your response.
+
+
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles																	   |
+Always, sometimes, or never true?
+
+| @n
+| @show{(coe '(negate m))}
+@math{=}
+@show{(coe '(abs-val m))}
+|
 
 
 | @n
-| @show{(coe '(- 76.42 (- (* 5 k) (* 5 k))))}
+| @show{(coe '(abs-val m))}
 @math{=}
-@show{(coe '(- 76.42 (- (/ w 3) (/ w 3))))}
+@show{(coe '(abs-val -m))}
 |
 
+
+| @n
+| @show{(coe '(abs-val -m))}
+@math{=}
+@show{(coe '(negate -m))}
+|
 
 |===

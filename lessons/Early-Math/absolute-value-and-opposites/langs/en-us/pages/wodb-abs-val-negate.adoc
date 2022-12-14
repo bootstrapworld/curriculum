@@ -1,7 +1,6 @@
-[.landscape]
-= Which One Doesn't Belong?
+= Which Ones Belong? (Absolute Value & Negate)
 
-Cross out the Circle that doesn't belong with the others, and then explain your choice.
+For each row, place a check mark by each Circle that meets the condition stated on the left.
 
 ++++
 <style>
@@ -18,47 +17,54 @@ td > .content > .paragraph {
 </style>
 ++++
 
-[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+[.FillVerticalSpace, cols="<.^1a,^.^3a,^.^10a",stripes="none", options="header"]
 |===
-| 	 | Which one doesn't belong?  |Explain.
+| 	 | Value | Check the equivalent Circles.
 
 | @n
-| @show{(coe '(+ (* 2 8) (/ 8 4)))}
-@show{(coe '(+ (* 8 2) (/ 8 4)))}
-@show{(coe '(+ (* 2 8) (/ 4 8)))}
-@show{(coe '(+ (/ 8 4) (* 8 2)))}
-|
-
-| @n
-| @show{(coe '(+ 10 (* 3 2)))}
-@show{(coe '(+ (* 3 2) 10))}
-@show{(coe '(+ (* 10 3) 2))}
-@show{(coe '(+ (* 2 3) 10))}
-|
+| Which Circles evaluate to @math{6}?
+| @show{(coe '(negate 6))}
+@show{(coe '(negate -6))}
+@show{(coe '(abs-val 6))}
+@show{(coe '(abs-val -6))}
 
 
 | @n
-| @show{(coe '(+ ( + (* 3 7) 5) 6))}
-@show{(coe '(+ (+ (* 3 5) 7) 6))}
-@show{(coe '(+ (+ 5 (* 7 3)) 6))}
-@show{(coe '(+ 5 (+ (* 3 7) 6)))}
-|
-
-
-| @n
-| @show{(coe '(/ (+ 6 4) (+ 3 2)))}
-@show{(coe '(/ (+ 4 6) (+ 3 2)))}
-@show{(coe '(/ (+ 3 2) (+ 4 6)))}
-@show{(coe '(/ (+ 6 4) (+ 2 3)))}
-|
-
+| Which Circles evaluate to @math{-4}?
+| @show{(coe '(negate (+ 2 2)))}
+@show{(coe '(negate 4))}
+@show{(coe '(abs-val 4))}
+@show{(coe '(abs-val -4))}
 
 | @n
-| @show{(coe '(- ( + (* 8 10) 6) 5))}
-@show{(coe '(- (+ 6 (* 8 10)) 5))}
-@show{(coe '(- (+ (* 10 8) 6) 5))}
-@show{(coe '(- 5 (+ (* 8 10) 6)))}
-|
+| Which Circles evaluate to @math{3}?
+| @show{(coe '(abs-val 3))}
+@show{(coe '(abs-val -3))}
+@show{(coe '(negate (negate 3)))}
+@show{(coe '(negate -3))}
+
+| @n
+| If @math{m = -3}, which Circles evaluate to @math{3}?
+| @show{(coe '(negate m))}
+@show{(coe '(negate -m))}
+@show{(coe '(abs-val m))}
+@show{(coe '(abs-val -m))}
+
+| @n
+| If @math{h = 20}, which Circles evaluate to @math{20}?
+| @show{(coe '(negate h))}
+@show{(coe '(negate -h))}
+@show{(coe '(abs-val h))}
+@show{(coe '(abs-val -h))}
+
+| @n
+| If @math{x = 7}, which Circles evaluate to @math{0}?
+| @show{(coe '(+ x (negate x)))}
+@show{(coe '(+ x (abs-val x)))}
+@show{(coe '(- x x))}
+@show{(coe '(+ (negate x) (abs-val x)))}
+
+
 
 |===
 
