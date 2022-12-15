@@ -3,15 +3,19 @@
 Make sure you've opened the @starter-file{table-functions} on your computer, and clicked "Run".
 
 == Filtering Rows
-@n What does `filter(animals-table, lookup-fixed)` evaluate to?
+@n What does @show{(code '(filter animals-table lookup-fixed))} evaluate to? Describe the value you get back below.
 
 @fitb{}{@ifsoln{A table with only the fixed animals}}
 
-@n What does `filter(animals-table, is-dog)` evaluate to?
+@n What does @show{(code '(filter animals-table is-dog))} evaluate to? Describe the value you get back below.
 
 @fitb{}{@ifsoln{A table with only the dogs}}
 
-@n Write the code to generate a table showing only the old animals. @fitb{}{@ifsoln{`filter(animals-table, is-old)`}}
+@n Write the code to generate a table of only old animals. @fitb{}{@showsoln{(code '(filter animals-table is-old))}}
+
+@n In the Definitions Area, define `dogs` by writing @show{(code '(define dogs (filter animals-table is-dog)))}. Click "Run" and evaluate `dogs` in the Interactions Area.
+
+@n In the Definitions Area, define `old` to be a table of only old animals. @fitb{}{@showsoln{(code '(define old (filter animals-table is-old)))}}
 
 @n What do the contracts for `lookup-fixed`, `is-dog`, and `is-old` have in common?
 
@@ -31,17 +35,17 @@ Make sure you've opened the @starter-file{table-functions} on your computer, and
 
 
 == Building Columns
-@n What does `build-col(animals-table, "old", is-old)` evaluate to?
+@n What does @show{(code '(build-column animals-table "old" is-old))} evaluate to?
 
 @fitb{}{@ifsoln{A table with a new column called "old", filled with values from `is-old`}}
 
-@n What does `build-col(animals-table, "sticker", label)` evaluate to?
+@n What does @show{(code '(build-column animals-table "sticker" label))} evaluate to?
 
 @fitb{}{@ifsoln{A table with a new column called "sticker", filled with values from `label`}}
 
-@n Find the contract for `build-col` in your Contracts page. Explain how `build-col` uses the three inputs specified in the Domain.
+@n Find the contract for `build-column` in your Contracts page. Explain how `build-column` uses the three inputs specified in the Domain.
 
-@fitb{}{@ifsoln{`build-col` needs a Table, the name of a column to add, and the name of a function.}}
+@fitb{}{@ifsoln{`build-column` needs a Table, the name of a column to add, and the name of a function.}}
 
 @fitb{}{@ifsoln{It makes a new copy of the table, adding the column, and filling it by}}
 
@@ -49,4 +53,6 @@ Make sure you've opened the @starter-file{table-functions} on your computer, and
 
 @fitb{}{}
 
-@n Where else have we seen functions that consume functions? @fitb{}{@ifsoln{image-scatter-plot}}
+== Challenge!
+
+★ In the Definitions Area, define a table of your own using `filter`, `build-column`, or `sort`. Add a comment to describe what's in it!

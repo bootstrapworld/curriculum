@@ -444,7 +444,7 @@ body:not(.LessonPlan, .narrativepage) p {
   }
 
   /* class for styling duration info in headers */
-  .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
+  .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 }
@@ -522,7 +522,7 @@ body.workbookpage {
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
 
-  .fitb, .fitbruby, .fitb.stretch::after {
+  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top:        @top-padding-for-writing;
     position:           relative;
     display:            inline-block;
@@ -530,6 +530,7 @@ body.workbookpage {
     text-align:         center;
     line-height:        1rem;
     border-bottom:      solid 1px black;
+    vertical-align:     baseline;
   }
   .fitbruby { 
     margin-bottom: 0.75rem;
@@ -545,9 +546,9 @@ body.workbookpage {
     font-style:         normal;
     font-family:        @text-font;
   }
-  .fitb.stretch { 
+  .fitb.stretch, .fitbruby.stretch { 
     margin-left:        5px; 
-    vertical-align:     bottom; 
+    vertical-align:     baseline; 
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     /* add an underline that goes past the end of the page */
@@ -757,6 +758,7 @@ table.recipe_title    {
 }
 
 .codap {
+  .cm-keyword { font-weight: normal !important; }
   .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
   .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
   .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
@@ -876,6 +878,15 @@ span.cm-scheme-rparen                     { color: black;}
 .cm-unterminated-string                   { color: red; font-weight: bold; }
 .pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
 * + .pyretkeyword { margin-left: 1ex;}
+
+/* compact tables */
+table.data-table {
+  td, th { 
+    margin:       0; 
+    padding:      0 5px; 
+    width:        1px;
+  }
+}
 
 /* class for tables containing Pyret data */
 table.pyret-table {

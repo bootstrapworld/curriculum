@@ -1,0 +1,76 @@
+= Composing Table Operations
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; }
+</style>
+++++
+
+@do{
+
+(define exp1 '(sort t "age" true))
+(define exp2 '(filter t is-fixed))
+(define exp3 '(build-column t "sticker" nametag))
+(define exp4 '(filter t is-young))
+(define exp5 '(filter (filter t is-young) is-fixed))
+(define exp6 '(sort (filter t is-young) "pounds" false))
+(define exp7 '(sort (build-column t "label" nametag) "age" true))
+(define exp8 '(sort t "cuteness" false))
+}
+
+The table `t` below represents four animals from the shelter:
+
+[cols='5',options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
+|===
+
+You have the following functions defined below (read them _carefully!_):
+
+  fun is-fixed(r): r["fixed"]                 end
+  fun is-young(r): r["age"] < 4               end
+  fun nametag(r):  text(r["name"], 20, "red") end
+
+For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
+
+[.FillVerticalSpace, cols=">.^6a,^.^2a,2,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+|===
+
+| A table containing only Toggle and Sasha
+|*@n*@ifsoln{+(D)+} ||*A*
+| @show{(coe exp1)}
+
+| Produces a table of only young, fixed animals
+|*@n*@ifsoln{(E)} ||*B*
+| @show{(coe exp2)}
+
+| Produces a table, sorted youngest-to-oldest
+|*@n*@ifsoln{(A)} ||*C*
+| @show{(coe exp3)}
+
+| Produces a table with an extra column, named "sticker"
+|*@n*@ifsoln{+(C)+} ||*D*
+| @show{(coe exp4)}
+
+| Produces a table containing Toggle and Sasha, in that order
+|*@n*@ifsoln{(F)} ||*E*
+| @show{(coe exp5)}
+
+| Produces a table containing Toggle, Fritz, and Nori
+|*@n*@ifsoln{(B)} ||*F*
+| @show{(coe exp6)}
+
+| Won’t run: will produce an error (why?)
+|*@n*@ifsoln{(H)} ||*G*
+| @show{(coe exp7)}
+
+| Produces a table with an extra "label" column, sorted youngest-to-oldest
+|*@n*@ifsoln{(G)} ||*H*
+| @show{(coe exp8)}
+
+|===

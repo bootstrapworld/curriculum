@@ -148,16 +148,16 @@ One way to organize our thoughts is to diagram what we want to do, using the @vo
 
 Values like Numbers, String, and Booleans are still written by themselves. It's only when we want to _use a @ifproglang{pyret}{function} @ifproglang{codap}{Transformer}_ that we need to draw a Circle, and write the values inside from left-to-right.
 
-Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. @ifproglang{pyret}{According to the @vocab{contract}, we know the name of the function is `build-col`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.} @ifproglang{codap}{We know that our transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.}
+Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. @ifproglang{pyret}{According to the @vocab{contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.} @ifproglang{codap}{We know that our transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.}
 
 @ifproglang{pyret}{
-@show{(coe '(build-col animals-table "kilos" kilograms))}
+@show{(coe '(build-column animals-table "kilos" kilograms))}
 }
 @ifproglang{codap}{
 @show{(coe '(build-attribute animals-table "kilos" pounds/2.205))}
 }
 
-But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know @ifproglang{pyret}{`build-col`} @ifproglang{codap}{`build-attribute`} goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
+But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know @ifproglang{pyret}{`build-column`} @ifproglang{codap}{`build-attribute`} goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
 
 [.lesson-point]
 3) Circles can contain other Circles!
@@ -165,7 +165,7 @@ But we also need to filter by that new column, so that we only have animals weig
 Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
 
 @ifproglang{pyret}{
-@show{(coe '(filter (build-col animals-table "kilos" kilograms) is-heavy))}
+@show{(coe '(filter (build-column animals-table "kilos" kilograms) is-heavy))}
 }
 @ifproglang{codap}{
 @show{(coe '(filter (build-attribute animals-table "kilos" pounds/2.2) kilos>10))}
