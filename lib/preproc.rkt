@@ -656,14 +656,15 @@
         (set! image-license (hash-ref image-attribs 'license ""))
         (set! image-source (hash-ref image-attribs 'source "")))
 
-      (when (hash? images-hash)
-        (cond [(not image-attribs)
-               (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn dir)]
-              [(or (string=? image-description "")
-                   (string=? image-license "")
-                   (string=? image-source ""))
-               (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
-                       img-qn dir)]))
+      (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (when (hash? images-hash)
+          (cond [(not image-attribs)
+                 (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn dir)]
+                [(or (string=? image-description "")
+                     (string=? image-license "")
+                     (string=? image-source ""))
+                 (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
+                         img-qn dir)])))
 
       (when author-supplied-text (set! image-description author-supplied-text))
 
