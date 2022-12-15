@@ -1,6 +1,7 @@
 #lang racket
 
 (require json)
+(require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
@@ -602,112 +603,127 @@
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
+(define (anonymize-filename img)
+  (let-values ([(dir fname _) (split-path img)])
+    (let ([basename (path->string (path-replace-extension fname ""))]
+          [ext (path-get-extension fname)])
+      (build-path dir
+                  (path-replace-extension
+                    (substring
+                      (bytes->hex-string (call-with-input-string basename sha1-bytes))
+                      0 16)
+                    ext)))))
+
+(define (read-image-json-file-in image-dir)
+  (let ([json-file (build-path image-dir "lesson-images.json")])
+    (cond [(file-exists? json-file)
+           (let ([images-hash (call-with-input-file json-file read-json)])
+             (set! *images-hash-list*
+               (cons (cons *containing-directory* images-hash) *images-hash-list*))
+             images-hash)]
+          [else
+            (when (or *lesson-plan* *lesson*)
+              (unless (member json-file *missing-image-json-files*)
+                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
+                (printf "!! WARNING: Image json file ~a not found\n" json-file)))
+            'not-found])))
+
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
   ; (printf "doing make-image ~s ~s\n" img width)
-  (let* ([img-qn (string-append *containing-directory* "/" img)]
+  (let* ([img-qn (build-path *containing-directory* img)]
          [images-hash-cell (assoc *containing-directory* *images-hash-list*)]
-         [images-hash (and images-hash-cell (cdr images-hash-cell))]
-         [json-file #f])
-    (let-values ([(dir image-file ign) (split-path img-qn)])
-      (set! image-file (string->symbol (path->string image-file)))
+         [images-hash (and images-hash-cell (cdr images-hash-cell))])
+    (let-values ([(image-dir image-file ign) (split-path img-qn)])
 
       (unless images-hash
-        (set! json-file (build-path dir "lesson-images.json"))
-        (cond [(file-exists? json-file)
-               (set! images-hash (call-with-input-file json-file read-json))
-               (set! *images-hash-list*
-                 (cons (cons *containing-directory* images-hash) *images-hash-list*))]
-              [else
-                (when (or *lesson-plan* *lesson*)
-                  (unless (member json-file *missing-image-json-files*)
-                    (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                    (printf "!! WARNING: Image json file ~a not found\n" json-file)))
-                (set! images-hash #t)]))
+        (set! images-hash (read-image-json-file-in image-dir)))
 
       ; (printf "images-has is ~s\n" images-hash)
 
-    (unless (or *narrative* *target-pathway* *teacher-resources*)
-      ;(printf "anonymizing ~s\n" img)
-      (let ([img-anonymized (system-echo (format "~a/anonymize-filename" *progdir*) img)])
-        (cond [img-anonymized
-                ;(printf "anon img is ~s\n" img-anonymized)
-                (set! img img-anonymized)
-                (let ([img-anonymized-qn (string-append *containing-directory* "/"
-                                           img-anonymized)])
-                (when (file-exists? img-qn)
-                  (rename-file-or-directory img-qn
-                    (string-append *containing-directory* "/" img-anonymized)
-                    #t))
-                (unless (file-exists? img-anonymized-qn)
-                  (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
-              [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
-
-    (let ([image-attribs (and (hash? images-hash) (hash-ref images-hash image-file #f))]
-          [image-caption ""]
-          [image-description ""]
-          [image-license ""]
-          [image-source ""])
-
-      ; (printf "image-attribs is ~s\n" (not (not image-attribs)))
-
-      (when image-attribs
-        (set! image-caption (hash-ref image-attribs 'caption ""))
-        (set! image-description (hash-ref image-attribs 'description ""))
-        (set! image-license (hash-ref image-attribs 'license ""))
-        (set! image-source (hash-ref image-attribs 'source "")))
-
       (unless (or *narrative* *target-pathway* *teacher-resources*)
-        (when (hash? images-hash)
-          (cond [(not image-attribs)
-                 (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn dir)]
-                [(or (string=? image-description "")
-                     (string=? image-license "")
-                     (string=? image-source ""))
-                 (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
-                         img-qn dir)])))
+        ; (printf "anonymizing ~s\n" img)
+        (let ([img-anonymized (anonymize-filename img)])
+          ; (printf "anon img is ~s\n" img-anonymized)
+          (cond [img-anonymized
+                  (set! img img-anonymized)
+                  (let ([img-anonymized-qn (build-path *containing-directory* img-anonymized)])
+                    ; (printf "img-anon-qn is ~s\n" img-anonymized-qn)
+                    (when (file-exists? img-qn)
+                      (rename-file-or-directory img-qn img-anonymized-qn #t))
+                    (unless (file-exists? img-anonymized-qn)
+                      (printf "WARNING: ~a: Image file ~a not found\n\n"
+                              (errmessage-context) img-qn)))]
+                [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
 
-      (when author-supplied-text (set! image-description author-supplied-text))
+      (let ([image-attribs (and (hash? images-hash)
+                                (hash-ref images-hash
+                                          (string->symbol (path->string image-file))
+                                          #f))]
+            [image-caption ""]
+            [image-description ""]
+            [image-license ""]
+            [image-source ""])
 
-      (let* ([text (clean-up-image-text image-description)]
-             [width-arg (unquote-string width)]
-             [height-arg ""]
-             [text-wo-url (clean-up-url-in-image-text text)]
-             [commaed-opts (string-append
-                             ", "
-                             width-arg
-                             ", "
-                             height-arg
-                             (if (string=? text "") ""
-                                 (format ", title=~s" text-wo-url)))]
+        ; (printf "image-attribs is ~s\n" (not (not image-attribs)))
 
-             [img-link-txt (string-append
-                             (enclose-span ".big" "&#x1f5bc;") "Show image")]
-             [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
-             [adoc-img
-               (string-append
-                 (cond [*lesson-subdir*
-                         (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
-                       [else
-                         (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-                 img-link)]
-             [img-id (format "img_id_~a" (gen-new-id))]
-             [adoc-img (enclose-tag "span" ".image-figure"
-                         (string-append
-                           ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
-                           adoc-img
-                           (if image-caption
-                               (enclose-tag "span" ".image-caption"
-                                 (expand-directives-string image-caption)
-                                 #:attribs (format "id=~s" img-id))
-                               ""))
-                         #:attribs
-                         (and image-caption
-                              (format "aria-describedby=~s" img-id)))])
+        (when image-attribs
+          (set! image-caption (hash-ref image-attribs 'caption ""))
+          (set! image-description (hash-ref image-attribs 'description ""))
+          (set! image-license (hash-ref image-attribs 'license ""))
+          (set! image-source (hash-ref image-attribs 'source "")))
 
-        ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-        (if centered?
-            (enclose-span ".centered-image" adoc-img)
-            adoc-img))))))
+        (unless (or *narrative* *target-pathway* *teacher-resources*)
+          (when (hash? images-hash)
+            (cond [(not image-attribs)
+                   (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn image-dir)]
+                  [(or (string=? image-description "")
+                       (string=? image-license "")
+                       (string=? image-source ""))
+                   (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
+                           img-qn image-dir)])))
+
+        (when author-supplied-text (set! image-description author-supplied-text))
+
+        (let* ([text (clean-up-image-text image-description)]
+               [width-arg (unquote-string width)]
+               [height-arg ""]
+               [text-wo-url (clean-up-url-in-image-text text)]
+               [commaed-opts (string-append
+                               ", "
+                               width-arg
+                               ", "
+                               height-arg
+                               (if (string=? text "") ""
+                                   (format ", title=~s" text-wo-url)))]
+
+               [img-link-txt (string-append
+                               (enclose-span ".big" "&#x1f5bc;") "Show image")]
+               [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
+               [adoc-img
+                 (string-append
+                   (cond [*lesson-subdir*
+                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
+                         [else
+                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
+                   img-link)]
+               [img-id (format "img_id_~a" (gen-new-id))]
+               [adoc-img (enclose-tag "span" ".image-figure"
+                           (string-append
+                             ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
+                             adoc-img
+                             (if image-caption
+                                 (enclose-tag "span" ".image-caption"
+                                   (expand-directives-string image-caption)
+                                   #:attribs (format "id=~s" img-id))
+                                 ""))
+                           #:attribs
+                           (and image-caption
+                                (format "aria-describedby=~s" img-id)))])
+
+          ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
+          (if centered?
+              (enclose-span ".centered-image" adoc-img)
+              adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
