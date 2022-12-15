@@ -979,7 +979,7 @@
                              #:show-transformer-type? [show-transformer-type? #f]
                              #:transformer-type [transformer-type #f]
                              #:domain-list [domain-list '()]
-                             #:show-domains? [show-domains? #f]
+                             #:show-domains? [show-domains? #t]
                              #:range [range ""]
                              #:show-range? [show-range? #f]
                              #:purpose [purpose ""]
@@ -1022,6 +1022,8 @@
     (set! *show-formula-expression?* #t))
 
   ;any error check here?
+
+  (set! *funname* transformer-name)
 
   (string-append
 

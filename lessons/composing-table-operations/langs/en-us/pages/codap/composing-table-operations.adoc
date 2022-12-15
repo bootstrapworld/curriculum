@@ -9,21 +9,15 @@ div.circleevalsexp .value { font-size: 0.7rem; }
 
 @do{
 
-(define exp1 '(sort t "age" true))
-(define exp2 '(filter t is-fixed))
-(define exp3 '(build-col t "sticker" nametag))
-(define exp4 '(filter t is-young))
-(define exp5 '(filter (filter t is-young) is-fixed))
-(define exp6 '(sort (filter t is-young) "pounds" false))
-(define exp7 '(sort (build-col t "label" nametag) "age" true))
-(define exp8 '(sort t "sex" false))
+(define exp1 '(sort t "age" ascending))
+(define exp2 '(filter t "fixed"=true))
+(define exp3 '(build-column t "elderly" age>10))
+(define exp4 '(filter t "age"<4))
+(define exp5 '(filter (filter t "age"<4) "fixed"=true))
+(define exp6 '(sort (filter t "age"<4) "pounds" descending))
+(define exp7 '(sort (build-column t "old" age>10) "age" ascending))
+(define exp8 '(sort t "sex" descending))
 }
-
-You have the following functions defined below (read them _carefully!_):
-
-  fun is-fixed(r): r["fixed"]                 end
-  fun is-young(r): r["age"] < 4               end
-  fun nametag(r):  text(r["name"], 20, "red") end
 
 The table `t` below represents four animals from the shelter:
 
@@ -55,7 +49,7 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp4)}
 |*@n*@ifsoln{(A)} ||*D*
-| Produces a table with an extra column, named "sticker"
+| Produces a table with an extra column, named "elderly"
 
 | @show{(coe exp5)}
 |*@n*@ifsoln{(B)} ||*E*
@@ -67,10 +61,10 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp7)}
 |*@n*@ifsoln{(H)} ||*G*
-| Won’t run: will produce an error
+| Won’t run: will produce an error (if so, why?)
 
 | @show{(coe exp8)}
 |*@n*@ifsoln{(G)} ||*H*
-| Produces a table with an extra "label" column, sorted youngest-to-oldest
+| Produces a table with an extra "old" column, sorted youngest-to-oldest
 
 |===

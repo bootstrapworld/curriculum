@@ -1,12 +1,12 @@
 = Bar and Pie Charts
 
-@description{Students learn to sort tables, and to generate and compare pie charts & bar charts. They briefly explore other data displays, and (optionally) design an infographic.}
+@description{Students use data displays like bar and pie charts to create 1- and 2-level groupings to visualize the distribution of categorical data.}
 
 @lesson-prereqs{contracts, ds-intro}
 
-@keywords{sort, sorting, bar chart, pie chart, categorical, visualization, display}
+@keywords{bar chart, pie chart, stacked bar chart, multi bar chart, categorical, visualization, display}
 
-@add-to-lang{sort, bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, histogram, box-plot, scatter-plot}
+@add-to-lang{bar-chart, pie-chart, pie-chart-summarized, bar-chart-summarized, multi-bar-chart, stacked-bar-chart}
 
 [@lesson-intro-table]
 |===
@@ -14,14 +14,16 @@
 | Lesson Goals
 | Students will be able to:
 
-* Read pie and bar charts
+* Read and create pie and bar charts
 * Explain the difference between pie and bar charts
-* Generate pie and bar charts (among others) from the Animals Dataset
+* Read and create stacked and multi bar charts
+* Explain the difference between stacked bar charts and multi bar charts
 
 | Student-facing Lesson Goals
 |
 
-* Let's use functions to create pie charts, bar graphs and other data displays from Tables.
+* Let's use functions to create pie and bar charts to visualize categorical data
+* Let's visualize categorical data grouped in different ways
 
 | Materials
 |[.materials-links]
@@ -35,172 +37,167 @@
 
 | Supplemental Resources
 |
-* @link{https://informationisbeautiful.net/, Information is Beautiful}
-* @link{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, Opinion: The Census Won't Collect LGBT Data. That's a Problem.}
-
+* TBD
 
 |===
 
-== Review @duration{10 minutes}
-
-You've learned how to read @vocab{contracts}, which make it easy to learn new functions in our language. Today we'll learn about functions that work with Tables!
-
-[.lesson-instruction]
-- Find the contract for `sort` in your Contracts page. What do you think the inputs in its Domain mean?
-- In the @starter-file{animals}, click "Run" and evaluate `sort(animals-table, "name", true)`. What do you get back?
-- What does `sort(animals-table, "age", false)` evaluate to?
-- Sort the animals table by how long it took for each animal to be adopted, from longest to shortest adoption time.
-
-The `sort` function consumes a Table, the name of a column, and a @vocab{Boolean} (`true` for ascending, `false` for descending), and produces a new table with the rows sorted according to that column.
-
-== Pie and Bar Charts @duration{25 minutes}
+== Counting the Distribution of Values @duration{25 minutes}
 
 === Overview
-Students extend their understanding of Contracts and function application, learning new functions that consume Tables and produce displays and plots.
+Students discuss one-way of groupings of categorical data, which show the _frequency_ of values in a dataset using bar and pie charts.
 
 === Launch
-[.lesson-instruction]
-- Where have you seen infographics and graphs used to display data in the real world?
-
-Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
-
-@show{(contract "pie-chart" '("Table" "String") "Image" )}
-
-And here is an example of _using_ the function:
-
-`pie-chart(animals-table, "legs")`
+Asking about the distribution of values in a dataset gives us a sense for what's in our sample. How are different species _distributed_ at the shelter? Are there an equal number of animals from each species, or are there more of some and less of others?
 
 [.lesson-instruction]
-- What is the Name of this function?
-** _pie-chart_
-- How many inputs are in its @vocab{Domain}?
-** _two_
-- In the Interactions Area, type `pie-chart(animals-table, "legs")` and hit "Enter". What happens?
-** _An interactive pie chart appears._
+- In the Interactions Area, type `count(animals-table, "species")` and hit "Enter". Then type `bar-chart(animals-table, "species")` and hit "Enter". As you look at the table and the bar chart, what do you Notice? What do you Wonder?
+** (sample responses) __The numbers in the table are also the heights of the bars. They are two ways of showing the same information.__
+- Now change the bar chart to a pie chart. do you Notice? What do you Wonder?
+** (sample responses) __The pie slices represent the bars, but in different ways. The bar and pie chart show the same data as the table.__
 
-@right{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}}
+[.lesson-point]
+Bar and Pie charts group data _by value_ to show frequency
 
-Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
+@right{@image{images/bar-species.png, "A bar chart showing how many animals belong to each species", 300}} Hovering over a bar reveals the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
-We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+@right{@image{images/pie-species.png, "A bar chart showing how many animals belong to each species", 300}} Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole.
 
-The function `pie-chart` consumes a Table of data, along with the _name of a @vocab{categorical} column you want to display_. The computer goes through the column, counting the number of times that each value appears. Then it draws a pie slice for each value, with the size of the slice being the percentage of times it appears.  In this example, we used our `animals-table` table as our dataset, and made a pie chart showing the distribution of the number of `legs` across the shelter.
+[.lesson-instruction]
+- Which do you like better: the bar chart, the pie chart, or the table? Why?
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
+The `count`, bar-chart`, and `pie-chart` functions *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket. All three functions show us the same information as the `count` function, but in different ways:
 
-a|
-@span{.title}{People aren't Hermaphrodite?}
-When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
-|===
+The table produced by `count` is very precise, but takes time to read. It might be tough to compare the count of one species to another if our table had 15 rows representing 15 species!
+
+Pie charts make the _proportion_ of each category clear: the whole pie represents 100% of the data, and each slice is a percentage. It's easy to see the size of one slice relative to another, but hard to tell exactly what how many rows are in each slice.
+
+Bar charts make the _amount_ of each category clear: it's easy to see how tall each bar is, but it would be harder to compare the count of one species to another if we had 15 different bars!
 
 === Investigate
 
-Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
-
-@show{(contract "bar-chart" '("Table" "String") "Image" )}
-
-
 [.lesson-instruction]
-- Which column of the animals table tells us which species the animal is?
-** _The second column, "species"_
-- Use `bar-chart` to make a display showing how many animals there are of each species.
-- Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
-- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
-- When would you want to use one chart instead of another?
+- Complete @printable-exercise{bar-and-pie-notice.adoc}, and @printable-exercise{matching-bar-to-pie.adoc}.
+- Optional: To dig deeper into each individual chart, @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
+- Now use the `count` `bar-chart`, `pie-chart` chart functions with the `"pounds"` column. What happens?
+- Why weren't these functions useful when grouping the `pounds` column?
 
-To dig deeper into pie charts and bar charts, have students complete @printable-exercise{bar-and-pie-notice.adoc}. They can also focus on one display at a time using @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
+Grouping by value works well for @vocab{categorical data}, when there lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.
 
-[.lesson-instruction]
-Complete @printable-exercise{matching-bar-to-pie.adoc}.
-
-=== Common Misconceptions
-
-* Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
-* A pie chart can only display one categorical variable, but a bar chart might be used to display two or more. Pie charts have a wedge for each represented category. Unlike in bar charts, empty categories will not be included in a pie chart. When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
-* Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on pie- and bar charts.
-
-=== Synthesize
-Confirm that students have correctly matched the displays on @printable-exercise{matching-bar-to-pie.adoc}.
-[.lesson-instruction]
---
-* What strategies did you use to match the bar charts to the pie charts?
-* Which displays do you find it easier to interpret? Why?
-* What information is provided in bar charts that is hidden in pie charts?
-** _In a bar chart, categories with no values are shown as empty categories, but there are no wedges for categories with 0% on a pie chart._
-* Why might this sometimes be problematic?
-** _Sample Answer: If a service isn't reaching a sector of the population, it's easier to ignore the issue if that population doesn't get represented in the display._
---
-
-Bar Charts and Pie Charts display how much of the sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
-
-[.lesson-point]
-Bar Charts and Pie Charts are mostly used to _display categorical columns_.
+If our data is based on sample data from a larger population, we can use these charts to _infer_ the proportion of a whole population that might belong to each category. For example, the distribution of species in our shelter might help us make guesses about the distribution of species in other shelters.
 
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
-| @span{.title}{Optional Project: Making Infographics}
+| @span{.title}{Optional Extension}
 
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/rubric-infographic.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
+Sometimes we want to visualize data that is _already summarized:_
+
+[.pyret-table,cols="1,1",options="header"]
+!===
+! Hair Color		! Number of Students
+! "Black"			! 5
+! "Brown"			! 13
+! "Blond"			! 4
+! "Red"				! 2
+! "Pink"			! 1
+!===
+
+We'd like to use the values in the first column for the labels of our pie slices or bars, and the values in the second column for the size. We have contracts for those, too!
+
+@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
+@show{(contract "bar-chart-summarized" '("Table" "String" "String") "Image" )}
+
 |===
 
-
-== Exploring other Displays @duration{20 minutes}
-
-=== Overview
-
-Students freely explore the Data Science display library. In doing so, they experiment with new charts, practice reading @vocab{Contracts} and error messages, and develop better intuition for the programming constructs they've seen before.
-
-=== Launch
-There are _lots_ of other functions, for all different kinds of charts and plots. Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them.
-
-=== Investigate
-[.lesson-instruction]
-- Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
-- Now, turn to @printable-exercise{pages/kind-v-display.adoc} and see if you can identify what kind of data each display needs!
-
-Have students share their answers and discuss.
+////
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{People aren't Hermaphrodite?}
+When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
+|===
+////
 
 === Common Misconceptions
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
+
+* Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
+* When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
+* Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on pie- and bar charts.
 
 === Synthesize
+Confirm that students have correctly matched the displays on @printable-exercise{matching-bar-to-pie.adoc}.
 
-* What displays did you find that work with just one column of data?
-** _pie and bar charts, histograms and box plots_
-* What displays did you find that work with more than one column of data?
-** _scatter plots and lr-plots_
-* What displays did you find that work with _categorical_ data?
-** _pie and bar charts_
-* What displays did you find that work with _quantitative_ data?
-** _histograms, box plots, scatterplots, and lr-plots_
+[.lesson-point]
+Bar charts can show empty categories, but pie charts can't!
 
-Today you’ve added more functions to your toolbox. Functions like `pie-chart` and `bar-chart` can be used to visually display data, and even transform entire tables!
+Sometimes people choose the wrong data display in order to hide data or manipulate others! Suppose someone was taking a survey of kids at a school and their favorite food, and made sure that kids who liked pizza were never asked. This survey is obviously biased, and people would get suspicious if they saw a bar chart with an empty bar for "pizza" -- not everyone likes it, but surely at least _one_ student would have voted for it! But by using a pie chart, nobody will even notice that the category was empty!
 
-You will have many opportunities to use these concepts in this course, by writing programs to answer data science questions.
+[.lesson-instruction]
+* What strategies did you use to match the bar charts to the pie charts?
+* Which displays do you find it easier to interpret? Why?
+* What information is provided in bar charts that is hidden in pie charts?
+
+By comparing distributions, we can find evidence of different kinds of bias. For example, suppose a state where people are split 50/50 between political parties winds up with 90% of votes going to one party. How can the distribution of voters by 50/50, but the distribution of _votes_ by 10/90? We don't expect the distributions to be identical all the time, of course, but when distributions are wildly different it can often be a sign that something interesting has happened, and needs to be explored further.
+
+Students can practice comparing distributions for bias by completing @opt-printable-exercise{do-nyc-schools-reflect-diversity.adoc}.
+
+== Distributions within Distributions! @duration{20 minutes}
+
+=== Overview
+Students learn how to create __groups within groups__, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
+
+=== Launch
+Sometimes, we want to know how values are distributed __within groups__.
+
+[.lesson-instruction]
+- Take a moment to answer the following questions: How many cats are male? How many cats are female?
+** 5 are male, 6 are female
+- Do you think there are about as many male dogs as female dogs?
+- Do you think this distribution is similar for every species at the shelter?
+
+Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across species.
+
+Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
+
+@show{(contract "stacked-bar-chart" '("Table" "String" "String") "Image" )}
+@show{(contract "multi-bar-chart" '("Table" "String" "String") "Image" )}
+
+[.lesson-instruction]
+- Try using both of these functions to show the distribution of sexes across species in our shelter.
+- Which display do you think is easier to read?
+
+=== Investigate
+
+[.lesson-instruction]
+- Complete @printable-exercise{stacked-and-multi-notice.adoc}
+
+[.lesson-point]
+Stacked bar charts make it easier to compare _groups_ than subgroups
+
+@right{@image{images/stacked-species-sex.png, "A stacked bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
+
+[.lesson-point]
+Multi bar charts make it easy to compare _subgroups_ than groups
+
+@right{@image{images/multi-species-sex.png, "A multi bar chart, showing the distribution of sexes across dogs, cats, rabbits, lizards, snails, and tarantulas", 300}} Multi bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
+
+[.lesson-instruction]
+- Complete @printable-exercise{matching-stacked-to-multi.adoc}
+
+=== Synthesize
+All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
+
+- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts?
+- What kinds of questions are better answered by stacked bar charts?
+- What kinds of questions are better answered by multi bar charts?
+
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
-| @span{.title}{Extension Activity}
+| @span{.title}{Optional Project: Making Infographics}
 
-Sometimes we want to summarize a categorical column using a Table, rather than using a pie chart. For example, it might be handy to have a table that has a row for dogs, cats, lizards, and rabbits, and then the count of how many of each type there are. Pyret has a function that does exactly this! Try typing this code into the Interactions Area: `count(animals-table, "species")`
-
-What did we get back? `count` is a function that consumes a table and the name of a categorical column, and produces a _new table_ with exactly the columns we want: the name of the category and the number of times that category occurs in the dataset. What are the names of the columns in this new table?
-
-- Use the `count` function to make a table showing the number of animals that are `fixed` (or not) from the shelter.
-
-- Use the `count` function to make a table showing the number of animals of each `sex` from the shelter.
-
-Sometimes the dataset we have is _already_ summarized in a table like this, and we want to make a chart from _that_. In this situation, we want to base our display on the summary table: the size of the pie slice or bar is taken directly from the count column, and the label is taken directly from the value column. When we want to use summarized data to produce a pie chart, we have the contract for another function:
-
-@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
-
-And an example of using that function (applying `count` to the `animals-table` to force it into the shape `pie-chart-summarized` needs):
-
-`pie-chart-summarized(count(animals-table, "species"), "value", "count")`
-
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographic.adoc, rubric-infographic.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also a @link{pages/rubric-infographic.html, Rubric} to highlight for you and your students what an excellent infographic includes.
 |===
 
 == Additional Exercises
