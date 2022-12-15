@@ -192,7 +192,9 @@ The `images` also contains a `lesson-images.json` file that lists all
 the image files in the same directory with their associated metadata,
 i.e., _caption_, _description_, _source_, and _license_. The topmost
 JSON object in this file maps each image name to an object containing
-its metadata. Here is an example:
+its metadata.
+
+Here is an example:
 
   "louis.png": {
     "caption": "Louis",
@@ -201,10 +203,35 @@ its metadata. Here is an example:
     "license": "Creative Commons 4.0 - NC - SA"
   }
 
-Ensure that all four fields have values, otherwise the build will issue
-warnings when using any such underdefined image. (You will get warnings
-even if the value is an empty string. However, for the moment,
-empty-string captions are ignored.)
+Captions are optional and will print under the image on the webpage and workbook page. They can be left as "" if no caption is desired.
+
+Descriptions are for visually impaired folks using screenreaders so need to be detailed enough to allow students to engage with our materials. For example:
+
+    "description" : "pie chart: 44.6% white, 22.8% Black, 19.8% Hispanic/Latinx, 9.9% Asian, Small wedges for some other race alone and 2 or more races",
+
+If an image is created by us, not derived from other work, and is not a data display, use
+
+    "source" : "Created by the Bootstrap Team.",
+    "license" : "Creative Commons 4.0 - NC - SA"
+
+If an image is created by us and derived from other work, indicate that. Here's an example of how we credit the data cycle images:
+
+    "source" : "Created by the Bootstrap Team based on work from @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}",
+    "license" : "Creative Commons 4.0 - NC - SA"
+  },
+
+If an image is a data display created by us using real data, please specify the source. For example:
+
+    "source" : "Created by the Bootstrap Team using data from https://nces.ed.gov/Programs/Edge/ACSDashboard",
+    "license" : "Creative Commons 4.0 - NC - SA"
+  },
+
+If an image is a data display created using fictitious data, please indicate that.
+
+    "source" : "Created by the Bootstrap Team using contrived data",
+    "license" : "Creative Commons 4.0 - NC - SA"
+
+The build will issue warnings for underdefined images when `description`, `source`, or `license` are missing. (You will get warnings even if the value is an empty string. However, for the moment, empty-string captions are ignored.)
 
 The build process collects all the image descriptions into a single file
 `images.js` in `distribution/en-us`.
