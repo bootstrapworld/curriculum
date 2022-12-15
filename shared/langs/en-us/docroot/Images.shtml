@@ -14,7 +14,9 @@
   <script>var pathway;</script>
   <style>
     table { width: 100%; table-layout:fixed; }
+    td:first-of-type, th:first-of-type { text-align: center !important; }
     td { word-break: break-word; font-size: 10pt !important; }
+    table img { width: 100%; display: block; }
   </style>
 </head>
 <body class="narrativepage article">
@@ -51,19 +53,49 @@
   </div>
 </div>
 <script>
+
+  // filename.type -> sha1(filename).type
+  async function sha1(source) {
+    const type = source.substring(source.lastIndexOf('.'), source.length);
+    const name = source.substring(0, source.lastIndexOf('.'));
+
+    const sourceBytes = new TextEncoder().encode(name);
+    const digest = await crypto.subtle.digest("SHA-1", sourceBytes);
+    const resultBytes = [...new Uint8Array(digest)];
+    const result = resultBytes.map(x => x.toString(16).padStart(2, '0')).join("");
+    return result.slice(0, 16) + type;
+  }
+
+  // given metadata for an image, add a hash field represending the sha1 of the filename
+  async function addHashes(metadata) {
+    return sha1(metadata.filename).then(hash => ({
+      hash: hash, ...metadata
+    }))
+  }
+
+  // grab the image table, and build an array of all the image metadata
   const table = document.getElementById("imageTable");
-  Object.keys(images).forEach(lesson => {
-    Object.keys(images[lesson]).forEach(image => {
-      const {caption, description, license, source} = images[lesson][image];
-      if (source == "Created by the Bootstrap Team") return;
+  const metadata = Array.prototype.concat(
+    ...Object.keys(images)
+      .map(lesson => Object.keys(images[lesson])
+        .map(image => ({
+            lesson: lesson,
+            filename: image,
+            ...images[lesson][image]
+          }))));
+
+  // Once the whole array has hashed filenames, build the table from the metadata
+  Promise.all(metadata.map(addHashes)).then(result => {
+    result.forEach(r => {
+      if (r.source == "Created by the Bootstrap Team") return;
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${image}</td>
-        <td><a href="lessons/${lesson}/">${graph[lesson].title}</a></td>
-        <td>${source}</td>
-        <td>${license}</td>`;
+        <td><img src="lessons/${r.lesson}/images/${r.hash}"/></td>
+        <td><a href="lessons/${r.lesson}/">${graph[r.lesson].title}</a></td>
+        <td>${r.source}</td>
+        <td>${r.license}</td>`;
       table.appendChild(row);
-    });
+    })
   });
 </script>
 </body>
