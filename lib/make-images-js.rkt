@@ -19,8 +19,8 @@
                         (let* ([args (read-commaed-group i directive read-group)]
                                [link (first args)]
                                [text (string-join (rest args) ", ")])
-                          (display link o) (display "[" o)
-                          (display text o) (display "]" o))]
+                          (fprintf o "<a href=~s>~a</a>"
+                                   link text))]
                        [else (display #\@ o) (display directive)]))]
               [else (display c o)])
         (loop)))))
