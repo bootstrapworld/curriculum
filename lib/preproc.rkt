@@ -604,6 +604,7 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (anonymize-filename img)
+  ; (printf "doing anonymize-filename ~s\n" img)
   (let-values ([(dir fname _) (split-path img)])
     (when (eqv? dir 'relative) (set! dir 'same))
     (let ([basename (path->string (path-replace-extension fname ""))]
@@ -654,10 +655,10 @@
       (unless (or *narrative* *target-pathway* *teacher-resources*)
         (let* ([img-anonymized (anonymize-filename img)]
                [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
+          (set! img img-anonymized)
           (unless (file-exists? img-anonymized-qn)
             (cond [(file-exists? img-qn)
-                   (rename-file-or-directory img-qn img-anonymized-qn #t)
-                   (set! img img-anonymized)]
+                   (rename-file-or-directory img-qn img-anonymized-qn #t)]
                   [else (printf "WARNING: ~a: Image file ~a not found\n\n"
                                 (errmessage-context) img-qn)]))))
 
@@ -725,7 +726,8 @@
                            (and image-caption
                                 (format "aria-describedby=~s" img-id)))])
 
-          ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
+          ; (printf "adoc-img = ~s\n" adoc-img)
+
           (if centered?
               (enclose-span ".centered-image" adoc-img)
               adoc-img))))))
@@ -1401,6 +1403,8 @@
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "star")
+                            (fprintf o "[.autonum]##★##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
