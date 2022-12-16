@@ -87,8 +87,9 @@
   // Once the whole array has hashed filenames, build the table from the metadata
   Promise.all(metadata.map(addHashes)).then(result => {
     result.forEach(r => {
-      if (r.source == "Created by the Bootstrap Team") return;
+      //if (r.source == "Created by the Bootstrap Team") return;
       const row = document.createElement("tr");
+      if(!r.lesson || !r.source || !r.license) row.style.background = "red";
       row.innerHTML = `
         <td>
           <img src="lessons/${r.lesson}/images/${r.hash}" alt="${r.filename}"/>
