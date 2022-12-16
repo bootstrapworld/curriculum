@@ -605,6 +605,7 @@
 
 (define (anonymize-filename img)
   (let-values ([(dir fname _) (split-path img)])
+    (when (eqv? dir 'relative) (set! dir 'same))
     (let ([basename (path->string (path-replace-extension fname ""))]
           [ext (path-get-extension fname)])
       (build-path dir
