@@ -77,7 +77,7 @@
     (string-append
       "\n"
       "[.logo]\n"
-      (make-image "images/Logo.png" course-name '())
+      (make-image "images/Logo.png" "" #:text course-name)
       "\n\n") o))
 
 (define (print-course-banner course o)
