@@ -1,0 +1,54 @@
+= Translating Exponent Expressions
+
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+</style>
+++++
+
+
+Each row represents a single arithmetic expression, written in three different forms. Fill in the empty spaces so that all three forms represent the same expression.
+
+[.FillVerticalSpace, cols="^.^1a,^.^4a,^.^4a,^.^4a", stripes="none", options="header"]
+|===
+| 	 | Words	| Circle | Math
+
+
+| @n
+| I took 10, then multiplied it by the square of 7.
+| @showsoln{(coe '(* 10 (num-expt 7 2)))}
+| @ifsoln{@math{10 \times 7^2}}
+
+
+| @n
+| @ifsoln{I multiplied 7 and 10, then squared the product.}
+| @show{(coe '(num-expt (* 7 10) 2))}
+| @ifsoln{@math{ (7 \times 10)^2 }}
+
+
+| @n
+| @ifsoln{I cubed 20, then multiplied it by 6.}
+| @showsoln{(coe '(* (num-expt 20 3) 6))}
+| @math{20^3 \times 6}
+
+
+| @n
+| @ifsoln{I multiplied 6 by 20, then cubed the result.}
+| @show{(coe '(num-expt (* 6 20) 3))}
+| @ifsoln{@math{(6 \times 20)^3}}
+
+
+| @n
+| I added 7 to 25 raised to the fifth power.
+| @showsoln{(coe '(+ (num-expt 25 5) 7))}
+| @ifsoln{@math{25^5 + 7}}
+
+
+| @n
+| @ifsoln{I added 7 and 25, then raised the sum to the fifth power.}
+| @showsoln{(coe '(num-expt (+ 7 25) 5))}
+| @math{(7 + 25)^5}
+
+|===
+
+

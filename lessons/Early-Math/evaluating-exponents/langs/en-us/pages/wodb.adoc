@@ -1,0 +1,71 @@
+= Which Ones Belong? (Exponent Expressions)
+
+For each row, place a check mark by each Circle that meets the condition stated on the left.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^2a,^.^11a",stripes="none", options="header"]
+|===
+| 	 | Value | Circles
+
+| @n
+| Which Circles evaluate to @math{16}?
+| @show{(coe '(num-expt 2 4))}
+@show{(coe '(* 2 (num-expt 2 3)))}
+@show{(coe '(* 2 (* 2 (num-expt 2 2))))}
+@show{(coe '(* 2 (* 2 (* 2 2))))}
+
+
+| @n
+| Which Circles evaluate to @math{18}?
+| @show{(coe '(* (num-expt 2 3) 2))}
+@show{(coe '(* 2 (num-expt 3 2)))}
+@show{(coe '(* (num-expt 3 2) 2))}
+@show{(coe '(+ (num-expt  3 2) (num-expt 3 2)))}
+
+| @n
+| Which Circles evaluate to @math{11}?
+| @show{(coe '(+ 2 (num-expt 3 2)))}
+@show{(coe '(+ (num-expt 3 3) 2))}
+@show{(coe '(num-expt  3 (+ 2 3)))}
+@show{(coe '(+ 2 (num-expt  2 3)))}
+
+| @n
+| Which Circles evaluate to @math{25}?
+| @show{(coe '(num-expt 5 2))}
+@show{(coe '(* (+ 3 2) 5))}
+@show{(coe '(num-expt (+ 3 2) 5))}
+@show{(coe '(num-expt (+ 3 2) 2))}
+
+| @n
+| Which Circles evaluate to @math{9}?
+| @show{(coe '(/ (num-expt 6 2) 4))}
+@show{(coe '(- (num-expt 6 2) 3))}
+@show{(coe '(num-expt 3 3))}
+@show{(coe '(num-expt 3 2))}
+
+
+
+| @n
+| Which Circles evaluate to @math{27}?
+| @show{(coe '(* 3 (num-expt 3 2)))}
+@show{(coe '(* 3 3))}
+@show{(coe '(* 3 (* 3 2)))}
+@show{(coe '(* 3 (num-expt 3 3)))}
+
+
+|===
+

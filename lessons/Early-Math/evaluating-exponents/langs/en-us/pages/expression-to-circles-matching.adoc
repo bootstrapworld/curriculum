@@ -1,0 +1,64 @@
+= Matching Circles and Expressions
+
+
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+</style>
+++++
+
+
+Draw a line from the expression on the left to the equivalent Circle on the right.
+
+[cols="^.^10a,^.^3a,5a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| Words
+|||
+| Circle of Evaluation
+
+| @math{3 \times 3 \times 3 \times 3}
+|*@n*@showsoln{"-B" }||*A*
+| @show{(coe '(num-expt 4 4))}
+
+| @math{3 \times 3^4}
+|*@n*@showsoln{"-D" }||*B*
+| @show{(coe '(num-expt 3 4))}
+
+
+| @math{(3 \times 3)^4}
+|*@n*@showsoln{"-E" }||*C*
+| @show{(coe '(num-expt 4 3))}
+
+
+| @math{3 \times 4^3}
+|*@n*@showsoln{"-I" }||*D*
+| @show{(coe '(* 3 (num-expt 3 4)))}
+
+
+| @math{(3 \times 4)^3}
+|*@n*@showsoln{"G" }||*E*
+| @show{(coe '(num-expt (* 3 3) 4))}
+
+
+| @math{4^3}
+|*@n*@showsoln{"-C" }||*F*
+| @show{(coe '(num-expt (+ 4 4) 3))}
+
+
+| @math{4 \times 4 \times 4 \times 4}
+|*@n*@showsoln{"-A" }||*G*
+| @show{(coe '(num-expt (* 3 4) 3))}
+
+
+| @math{4^3 + 4}
+|*@n*@showsoln{"-H" }||*H*
+| @show{(coe '(+ (num-expt 4 3) 4))}
+
+| @math{(4 + 4)^3}
+|*@n*@showsoln{"-F" }||*I*
+| @show{(coe '(* 3 (num-expt 4 3)))}
+
+
+
+|===
+

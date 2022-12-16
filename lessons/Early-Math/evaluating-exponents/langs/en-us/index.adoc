@@ -64,14 +64,12 @@ Explain to students that we can represent expressions with exponents as Circles 
 Exponents are valuable because they act as a shorthand. The Circle of Evaluation for @math{2 \times 2 \times 2 \times 2 \times 2} looks like this:
 
 [.centered-image]
-@show{(coe '(* (* (* (* (2 ) 2) 2) 2) 2))}
-@clear
+@show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
 
 But the Circle of Evaluation for @math{2^5} is much easier to interpret.
 
 [.centered-image]
 @show{(coe '(num-expt 2 5))}
-@clear
 
 Now, have students analyze the two Circles below.
 
@@ -82,7 +80,7 @@ Now, have students analyze the two Circles below.
 |===
 
 [.lesson-instruction]
-- Is it TRUE or FALSE that these expressions are equivalent?
+- Is it true or false that these expressions are equivalent?
 ** _It is false; the first Circle evaluates to 25, while the second Circle evaluates to 32. We cannot switch the order of the exponent and the base, as we could when adding or multiplying values._
 
 With these basics mastered, students are ready to discover how Circles can help them in analyzing more complicated exponential expressions - including expressions with negations and additional operations.
@@ -103,14 +101,19 @@ Invite students to examine the two Circles below:
 - How would you translate each of these Circles into mathematical expressions?
 ** The Circle on the left is @math{9 \times 3^2} while the Circle on the right is @math{(9 \times 3)^2}.
 
-Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle on the right. This response is of course, correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. Still, every time they create a Circle representation of an expression including a base and exponent, it will be drawn inside of its own Circle.
+Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle on the right. This response is correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. That said, students will always draw the base and the exponent inside of their own Circle.
 
-After students understand that, in an expression with no grouping symbols, we evaluate the exponent before the other operations, they are ready to continue their exploration of expressions with exponents.
+[.lesson-point]
+In an expression with no grouping symbols, we evaluate the exponent before the other operations.
+
+In the subsequent activities, students solidify their understanding of this key concept.
 
 [.lesson-instruction]
-- Translate between Circles, mathematical expressions, and words on Translating Expressions with Exponents.
-- Next, try the Matching Exponents activity, connecting Circles with their appropriate mathematical expressions.
-- Finally, practice Evaluating Expressions with Exponents using computation. There are no Circles on this worksheet - but drawing them might help if you get stuck.
+- Try the @printable-exercise{expression-to-circles-matching.adoc} to practice matching Circles with their corresponding mathematical expressions.
+- Translate between Circles, mathematical expressions, and words on @printable-exercise{translating-exponent-expressions.adoc}
+- In @printable-exercise{wodb.adoc}, analyze the Circles to determine which expressions in the set are equivalent.
+
+The first two worksheets below do not involve _any_ computation; rather, students think about the structure of expressions with exponents and one additional operation. The third worksheet in the set can involve some computation; students who consider structure will complete the activity more efficiently.
 
 
 === Synthesize
@@ -122,3 +125,41 @@ After students understand that, in an expression with no grouping symbols, we ev
 
 
 
+== Expressions with Exponents and Variables @duration{25 minutes}
+
+=== Overview
+
+Students use Circles of Evaluation to parse and evaluate exponential expressions with variables.
+
+=== Launch
+
+[.lesson-instruction]
+--
+- Ms. Brenneman asked her class to evaluate @math{4m^2} for @math{m = 5}. Four students each produced a different Circle! Analyze them on Four Different Circles.
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+|===
+| Jayla: @show{(coe  '(* 4 (num-expt m 2)))} | Keke: @show{(coe  '(* 4 (num-expt 2 m)))}
+| Joe: @show{(coe  '(+ 4 (num-expt m 2)))} 	| Aaron: @show{(coe  '(num-expt (* 4 m) 2))}
+|===
+- Which Circle do you think matches the expression? If you're not sure, are there any that you can rule out right away?
+** _Sample response: Jayla's Circle is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's doesn't work because he added rather than finding a prodcut. Aaron squared @math{4m}, rather than just squaring @math{m}._
+- Evaluate each Circle. Do any of them produce the same outcome? Why or why not?
+** _Each Circle has a different result because they all have different structures; one even has a different operation. Jayla's Circle is 100; Keke's is 132; Joe's is 29; and Aaron's is 400._
+--
+
+Lead a discussion where students explain which Circle they chose and why. Ensure that students understand that - even with the inclusion of variables - we still apply the exponent _before_ applying other operations, as established in the previous lesson.
+
+=== Common Misconceptions
+
+Students who are new to expressions like @math{4m^2} may misinterpret them. Explain that this notation represents multiplication - not that the two digits are simply next to one another.
+
+=== Investigate
+
+[.lesson-instruction]
+- Look at the three-column table on Variable Expressions with Exponents.
+- Either draw a Circle to match the expression, or write an expression to match the Circle.
+- Once you have completely filled in the first and second column, move to the third column, where you will evaluate each expressions by substituting in the given value.
+
+=== Synthesize
+
+What was your strategy for evaluating expressions with variables and exponents?
