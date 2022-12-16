@@ -14,16 +14,16 @@ In the Interactions Window on the right type `animals-table` and hit "Enter" to 
 
 The `sort` function takes in three pieces of information:
 
-* A table
-* A column we want to sort the table by (declared using a String)
-* The order in which we want the column sorted (declared using a Boolean)
+. A table
+. A column we want to sort the table by (declared using a String)
+. The order in which we want the column sorted (declared using a Boolean)
 
 @vspace{1ex}
 
 Test out these two expressions in the Interactions Area and record what you learn about ordering below:
 
-* `sort(animals-table, "Name", true)`
-* `sort(animals-table, "Name", false)`
+* `sort(animals-table, "species", true)`
+* `sort(animals-table, "species", false)`
 
 
 @n `true` sorts the table... @fitb{}{@ifsoln{from A-Z ... (after question 4 add) or from least to greatest}}
@@ -35,9 +35,9 @@ Test out these two expressions in the Interactions Area and record what you lear
 *Suppose we wanted to sort the `animals-table` by the `weeks` column to determine which animals were
 adopted quickest...*
 
-@n Do you think it would be more efficient to use `true` or `false`? @fitb{}{}
+@n Would you use `true` or `false`? Explain. @fitb{}{}
 
-@n Test it out and add your thinking about @vocab{quantitative} columns to your explanations of `true` and `false` above.
+@n Test it out, and write your thinking about @vocab{quantitative} columns to your explanations of `true` and `false` above.
 
 @n Which animal(s) were adopted the quickest? @fitb{}{@ifsoln{Snuggles, Nori, Toggle, Wade and Mittens}}
 
@@ -45,7 +45,7 @@ adopted quickest...*
 
 @vspace{1ex}
 
-There are many many functions available to us in Pyret. We can describe them using contracts. The contract for `sort` is:
+There are many other functions available to us in Pyret. We can describe them using contracts. The contract for `sort` is:
 
 @show{(contract "sort" '("Table" "String" "Boolean") "Table")}
 
