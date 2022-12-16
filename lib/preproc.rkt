@@ -618,8 +618,20 @@
   (let ([json-file (build-path image-dir "lesson-images.json")])
     (cond [(file-exists? json-file)
            (let ([images-hash (call-with-input-file json-file read-json)])
+             ; (printf "images-hash is ~s\n" images-hash)
              (set! *images-hash-list*
                (cons (cons *containing-directory* images-hash) *images-hash-list*))
+             (unless (or *narrative* *target-pathway* *teacher-resources*)
+               (hash-for-each images-hash
+                 (lambda (key val)
+                   (let* ([image-file (build-path image-dir (symbol->string key))]
+                          [anon-image-file (anonymize-filename image-file)])
+                     (unless (file-exists? anon-image-file)
+                       (cond [(file-exists? image-file)
+                              (rename-file-or-directory image-file anon-image-file #t)]
+                             [else
+                               (printf "WARNING: ~a: Image file ~a not found\n"
+                                       (errmessage-context) image-file)]))))))
              images-hash)]
           [else
             (when (or *lesson-plan* *lesson*)
@@ -638,22 +650,15 @@
       (unless images-hash
         (set! images-hash (read-image-json-file-in image-dir)))
 
-      ; (printf "images-has is ~s\n" images-hash)
-
       (unless (or *narrative* *target-pathway* *teacher-resources*)
-        ; (printf "anonymizing ~s\n" img)
-        (let ([img-anonymized (anonymize-filename img)])
-          ; (printf "anon img is ~s\n" img-anonymized)
-          (cond [img-anonymized
-                  (set! img img-anonymized)
-                  (let ([img-anonymized-qn (build-path *containing-directory* img-anonymized)])
-                    ; (printf "img-anon-qn is ~s\n" img-anonymized-qn)
-                    (when (file-exists? img-qn)
-                      (rename-file-or-directory img-qn img-anonymized-qn #t))
-                    (unless (file-exists? img-anonymized-qn)
-                      (printf "WARNING: ~a: Image file ~a not found\n\n"
-                              (errmessage-context) img-qn)))]
-                [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
+        (let* ([img-anonymized (anonymize-filename img)]
+               [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
+          (unless (file-exists? img-anonymized-qn)
+            (cond [(file-exists? img-qn)
+                   (rename-file-or-directory img-qn img-anonymized-qn #t)
+                   (set! img img-anonymized)]
+                  [else (printf "WARNING: ~a: Image file ~a not found\n\n"
+                                (errmessage-context) img-qn)]))))
 
       (let ([image-attribs (and (hash? images-hash)
                                 (hash-ref images-hash
@@ -664,8 +669,6 @@
             [image-license ""]
             [image-source ""])
 
-        ; (printf "image-attribs is ~s\n" (not (not image-attribs)))
-
         (when image-attribs
           (set! image-caption (hash-ref image-attribs 'caption ""))
           (set! image-description (hash-ref image-attribs 'description ""))
@@ -675,7 +678,8 @@
         (unless (or *narrative* *target-pathway* *teacher-resources*)
           (when (hash? images-hash)
             (cond [(not image-attribs)
-                   (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n" img-qn image-dir)]
+                   (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n"
+                           img-qn image-dir)]
                   [(or (string=? image-description "")
                        (string=? image-license "")
                        (string=? image-source ""))
