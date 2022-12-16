@@ -679,7 +679,7 @@
         (unless (or *narrative* *target-pathway* *teacher-resources*)
           (when (hash? images-hash)
             (cond [(not image-attribs)
-                   (printf "** WARNING: Image ~a missing from dictionary ~a/lesson-images.json\n"
+                   (printf "WARNING**: Image ~a missing from dictionary ~a/lesson-images.json\n"
                            img-qn image-dir)]
                   [(or (string=? image-description "")
                        (string=? image-license "")
