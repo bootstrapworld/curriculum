@@ -6,64 +6,54 @@ div.circleevalsexp { width: auto; }
 </style>
 ++++
 
-Draw two Circles to represent the equation. Then, use your Circles to determine if the equation is true or false.
+Draw two Circles to represent the equation. Then, use your Circles to determine if the equation is true or false. The first one is done for you.
 
-[cols="^.^1a,^.^10a,^.^4a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="^.^1a,^.10a,^.4a", stripes="none", options="header"]
 |===
-|	 | Circles.   | True or False?
+|	 | Equation & Circles   | True or False?
 
 | @n
 | @math{-2^2 = (-2)^2}
 
-@vspace{1ex}
-
-@showsoln{(coe '(negate (num-expt 2 2)))}
-@ifsoln{@math{=}}
-@showsoln{(coe '(num-expt (negate 2) 2))}
-|
+@show{(coe '(negate (num-expt 2 2)))}
+@math{=}
+@show{(coe '(num-expt (negate 2) 2))}
+| False: @math{-4 +≠+ 4}
 
 
 | @n
 | @math{-2^3 = (-2)^3}
 
-@vspace{1ex}
-
 @showsoln{(coe '(negate (num-expt 2 3)))}
 @ifsoln{@math{=}}
 @showsoln{(coe '(num-expt (negate 2) 3))}
-|
+| @ifsoln{True: @math{-8 = -8}}
 
 
 
 | @n
 | @math{-2^4 = (-2)^4}
 
-@vspace{1ex}
-
 @showsoln{(coe '(negate (num-expt 2 4)))}
 @ifsoln{@math{=}}
 @showsoln{(coe '(num-expt (negate 2) 4))}
-|
+| @ifsoln{False: @math{-16 +≠+ 16}}
 
 | @n
 | @math{-2^5 = (-2)^5}
 
-@vspace{1ex}
-
 @showsoln{(coe '(negate (num-expt 2 5)))}
 @ifsoln{@math{=}}
 @showsoln{(coe '(num-expt (negate 2) 5))}
-|
+| @ifsoln{True: @math{-32 = -32}}
 
 | @n
 | @math{-2^6 = (-2)^6}
 
-@vspace{1ex}
-
 @showsoln{(coe '(negate (num-expt 2 6)))}
 @ifsoln{@math{=}}
 @showsoln{(coe '(num-expt (negate 2) 6))}
-|
+| @ifsoln{False: @math{-64 +≠+ 64}}
 
 
 |===
