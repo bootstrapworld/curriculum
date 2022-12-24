@@ -1,0 +1,67 @@
+= Which One Doesn't Belong?
+
+Cross out the Circle that doesn't belong with the others, and then explain your choice.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain
+
+| @n
+| @show{(coe '(* 5 (+ 2 4)))}
+@show{(coe '(+ (* 5 2) 4))}
+@show{(coe '(+ (* 5 2) (* 5 4)))}
+@show{(coe '(* 5 6))}
+|
+
+| @n
+| @show{(coe '(* (+ 3 99) (+ 3 1)))}
+@show{(coe '(* 3 (+ 99 1)))}
+@show{(coe '(+ 297 3))}
+@show{(coe '(+ (* 3 99) (* 3 1)))}
+|
+
+| @n
+| @show{(coe '(* 7 (+ m 3)))}
+@show{(coe '(+ (* 7 m) (* 7 3)))}
+@show{(coe '(* (* 7 m) 3))}
+@show{(coe '(+ (* 7 3) (* 7 m)))}
+|
+
+| @n
+| @show{(coe '(* g (+ 5 600)))}
+@show{(coe '(* 605 g))}
+@show{(coe '(+ (* 5 g) (* 600 g)))}
+@show{(coe '(+ (* 5 g) 600))}
+|
+
+| @n
+| @show{(coe '(* a (+ b c)))}
+@show{(coe '(* (+ b c) a))}
+@show{(coe '(* (+ c b) a))}
+@show{(coe '(* (* a b) (* a c)))}
+|
+
+| @n
+| @show{(coe '(* 3 (- h 45)))}
+@show{(coe '(- (* 3 h) (* 3 45)))}
+@show{(coe '(- (* 3 45) (* 3 h)))}
+@show{(coe '(* 3 (- h 45)))}
+|
+
+|===
+
