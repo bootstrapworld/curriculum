@@ -1,6 +1,6 @@
 = Which Ones Belong? (Exponent Expressions)
 
-For each row, place a check mark by each Circle that meets the condition stated on the left.
+For each row, place a check mark by the Circle(s) that evaluate to the provided quantity.
 
 ++++
 <style>
@@ -19,10 +19,12 @@ td > .content > .paragraph {
 
 [.FillVerticalSpace, cols="<.^1a,^.^2a,^.^11a",stripes="none", options="header"]
 |===
-| 	 | Value | Circles
+| 	 | Which Circle(s) evaluate to... | Circles
 
 | @n
-| Which Circles evaluate to @math{16}?
+| @math{16}?
+
+@ifsoln{All Circles}
 | @show{(coe '(num-expt 2 4))}
 @show{(coe '(* 2 (num-expt 2 3)))}
 @show{(coe '(* 2 (* 2 (num-expt 2 2))))}
@@ -30,40 +32,55 @@ td > .content > .paragraph {
 
 
 | @n
-| Which Circles evaluate to @math{18}?
+| @math{18}?
+
+@ifsoln{Circles 2, 3, 4}
 | @show{(coe '(* (num-expt 2 3) 2))}
 @show{(coe '(* 2 (num-expt 3 2)))}
 @show{(coe '(* (num-expt 3 2) 2))}
 @show{(coe '(+ (num-expt  3 2) (num-expt 3 2)))}
 
+
+
 | @n
-| Which Circles evaluate to @math{11}?
+| @math{11}?
+
+@ifsoln{Circle 1}
 | @show{(coe '(+ 2 (num-expt 3 2)))}
 @show{(coe '(+ (num-expt 3 3) 2))}
 @show{(coe '(num-expt  3 (+ 2 3)))}
 @show{(coe '(+ 2 (num-expt  2 3)))}
 
+
+
 | @n
-| Which Circles evaluate to @math{25}?
+| @math{25}?
+
+@ifsoln{Circles 1, 2, 4}
 | @show{(coe '(num-expt 5 2))}
 @show{(coe '(* (+ 3 2) 5))}
 @show{(coe '(num-expt (+ 3 2) 5))}
 @show{(coe '(num-expt (+ 3 2) 2))}
 
+
+
 | @n
-| Which Circles evaluate to @math{9}?
+| @math{9}?
+
+@ifsoln{Circles 1, 4}
 | @show{(coe '(/ (num-expt 6 2) 4))}
 @show{(coe '(- (num-expt 6 2) 3))}
 @show{(coe '(num-expt 3 3))}
 @show{(coe '(num-expt 3 2))}
 
 
-
 | @n
-| Which Circles evaluate to @math{27}?
-| @show{(coe '(* 3 (num-expt 3 2)))}
+| @math{27}?
+
+@ifsoln{Circle 3}
+| @show{(coe '(* 3 (* 3 2)))}
 @show{(coe '(* 3 3))}
-@show{(coe '(* 3 (* 3 2)))}
+@show{(coe '(* 3 (num-expt 3 2)))}
 @show{(coe '(* 3 (num-expt 3 3)))}
 
 

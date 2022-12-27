@@ -42,7 +42,7 @@ Sudents use Circles, words, and mathematical notation to analyze the structure o
 
 [.lesson-instruction]
 - Show students the following expression: @math{2^3}
-- One way of reading this expression is "two raised to the power of three." Do you know any other ways of reading this expression with an exponent?
+- One way of reading this expression is "two raised to the power of three." Do you know any other ways of translating this expression into words?
 ** _Two to the third power; two to the third; two cubed._
 - What does it mean to _cube_ a number?
 ** We multiply it by itself three times.
@@ -57,7 +57,7 @@ Clarify and reinforce some key concepts about exponents via class discussion:
 
 - "Cubing" is the same as "raising to the third power", and "squaring" is the same as raising to the second power.
 
-- There is no special terminology for any other exponents. (The subsequent lesson will address why two and three are referred to as "squaring" and "cubing.")
+- There is no special terminology for any other exponents.
 
 Explain to students that we can represent expressions with exponents as Circles of Evaluation. The function we use to do so is called `num-expt`; when we use `num-expt`, the value on the left is the _base_, and the value on the right is the exponent.
 
@@ -69,11 +69,12 @@ The Circle of Evaluation for @math{2 \times 2 \times 2 \times 2 \times 2} looks 
 [.centered-image]
 @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
 
-But the Circle of Evaluation for @math{2^5} is much easier to interpret.
+Here is the Circle of Evaluation for @math{2^5}:
 
 [.centered-image]
 @show{(coe '(num-expt 2 5))}
 
+The Circle of evaluation with `num-expt` is more streamlined and easier to interpret.
 
 [.lesson-instruction]
 --
@@ -87,13 +88,24 @@ But the Circle of Evaluation for @math{2^5} is much easier to interpret.
 
 - Angela says the Circles are equivalent because of the Commutative Property. Do you agree with Angela?
 ** _Angela is incorrect. The first Circle evaluates to 25, while the second Circle evaluates to 32. We cannot switch the order of the exponent and the base, as we could when adding or multiplying values._
+- Look at the two Circles, below.
+
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+|===
+|@math{5^2}							| @math{5 \times 2}
+|@show{(coe  '(num-expt 5 2))}		| @show{(coe  '(* 5 5))}
+|===
+- Are these two Circles equivalent?
+** _No; multiplying the base by the exponent is a common student error which produces a different result than multiplying the base by the base however many times the exponent indicates._**
+
 --
 
 With a basic understanding of how exponents work, students are ready to discover how Circles can help them in analyzing more complicated expressions with exponents.
 
 === Investigate
 
-Invite students to examine the two Circles below:
+[.lesson-instruction]
+- Look at the two Circles below:
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -101,13 +113,12 @@ Invite students to examine the two Circles below:
 |@show{(coe  '(* 9 (num-expt 3 2)))}		| @show{(coe  '(num-expt (* 9 3) 2))}
 |===
 
-[.lesson-instruction]
 - How would you translate each of these Circles into words? Why are their translations different?
 ** _The Circle on the left is "nine multiplied by three squared," while the Circle on the right is "find the product of nine and three, then square it." Their translations differ because the Circles are organized differently._
 - How would you translate each of these Circles into mathematical expressions?
 ** The Circle on the left is @math{9 \times 3^2} while the Circle on the right is @math{(9 \times 3)^2}.
 
-Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle on the right. This response is correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. That said, students will always draw the base and the exponent inside of their own Circle.
+Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle on the right. This response is correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. That said, the base and the exponent should always be placed within a Circle.
 
 [.lesson-point]
 In an expression with no grouping symbols, we evaluate the exponent before the other operations.
@@ -141,16 +152,16 @@ Students use Circles of Evaluation to parse and evaluate exponential expressions
 
 [.lesson-instruction]
 --
-- Ms. Brenneman asked her class to evaluate @math{4m^2} for @math{m = 5}. Four students each producd a different Circle! Take a look at their work:
+- Ms. Brenneman asked her class to evaluate @math{4m^2} for @math{m = 5}. Four students each produced a different Circle! Take a look at their work:
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 | Keke: @show{(coe  '(* 4 (num-expt 2 m)))} | Jayla: @show{(coe  '(* 4 (num-expt m 2)))}
 | Joe: @show{(coe  '(+ 4 (num-expt m 2)))}  | Aaron: @show{(coe  '(num-expt (* 4 m) 2))}
 |===
 - Which Circle do you think matches the expression? If you're not sure, are there any that you can rule out right away?
-** _Sample response: Jayla's Circle is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's doesn't work because he added rather than finding a prodcut. Aaron squared @math{4m}, rather than just squaring @math{m}._
+** _Sample response: Jayla's Circle is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's Circle oesn't work because he added rather than finding a product. Aaron squared @math{4m}, rather than just squaring @math{m}._
 - Evaluate each Circle. Do any of them produce the same outcome? Why or why not?
-** _Each Circle has a different result because they all have different structures; one even has a different operation. Jayla's Circle is 100; Keke's is 132; Joe's is 29; and Aaron's is 400._
+** _Each Circle has a different result because they all have different structures; one Circle even uses addition rather than multiplication. Jayla's Circle is 100; Keke's is 132; Joe's is 29; and Aaron's is 400._
 --
 
 Lead a discussion where students explain which Circle they chose and why. Ensure that students understand that - even with the inclusion of variables - we still apply the exponent _before_ applying other operations.
@@ -158,7 +169,7 @@ Lead a discussion where students explain which Circle they chose and why. Ensure
 === Investigate
 
 [.lesson-instruction]
-- Turn  to @printable-exercise{exponents-variables-table.adoc}. Draw a Circle to match the expression.
+- Turn  to @printable-exercise{exponents-variables-table.adoc}. Draw a Circle to match each expression. The first one is done for you.
 - Once you have completely filled in the second column, move to the third column, where you will evaluate each expressions by substituting in the given value.
 
 === Common Misconceptions
