@@ -252,12 +252,12 @@
    ("wescheme" "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg")
   )
   ("inequalities-simple" "Simple Inequalities Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1Nfd30NVNwPzDu0C02dsCbmKecbMVfcQV")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=pEypYaQXjZ")
+   ("pyret" "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc")
+   ("wescheme" "https://www.wescheme.org/view?openEditor=ytUfr7fCwY")
    )
   ("inequalities-compound" "Compound Inequalities Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1fKAwPsQ-WaVYVWyVQtgrkEd1jgfAUizN&v=22f3b65")
-   ("wescheme" "https://www.wescheme.org/openEditor?publicId=yFnDbsSnR7")
+   ("pyret" "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre")
+   ("wescheme" "https://www.wescheme.org/view?publicId=bgmJ1lYyd7")
    )
   ("inequalities-sam" "Sam the Butterfly Starter File"
    ("pyret" "https://code.pyret.org/editor#share=13d5j4CAfaHu1Y1DzPBvqapzO-Gpr9BrH")
