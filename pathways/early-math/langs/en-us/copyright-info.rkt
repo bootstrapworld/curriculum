@@ -1,3 +1,3 @@
 (
- ("name" "Bootstrap:Algebra")
+ ("name" "Bootstrap:Structural Math")
  )
