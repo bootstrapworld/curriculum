@@ -1,50 +1,47 @@
 = Reading Row and Function Definitions
 
-++++
-<style>
-#content p { margin: 0; }
-.paragraph { min-height: 0.33in; }
-th { text-align: center !important; }
-td .editbox { font-size: 0.75rem; }
-td { padding: 0.5rem 0 !important; }
-</style>
-++++
-
-Make sure you've opened the @starter-file{table-functions} on your computer, saved a copy, and clicked "Run".
+Open the @starter-file{table-functions} on your computer, save a copy, and click "Run".
 
 
-@n What name is being defined on line 8?  @fitb{}{@ifsoln{animals-table}}
+@n What is the name of the Table defined on line 5?  @fitb{}{@ifsoln{shapes-table}}
 
-@n How many columns are listed?           @fitb{}{@ifsoln{8}}
+@n How many columns does ut have?           @fitb{}{@ifsoln{4}}
 
-@n What name is being defined on line 15? @fitb{}{@ifsoln{cat-row}}
+@n What is the name of the Row defined on line 16? @fitb{}{@ifsoln{blue-triangle}}
 
-@n Is `cat-row` a Number, String, Image or Row?   @fitb{}{@ifsoln{Row}}
+@n Is `red-circle` a Number, String, Image, Boolean, Table, or Row?   @fitb{}{@ifsoln{Row}}
 
-@n Type `cat-row` into the Interactions Area. What do you get? @fitb{}{@ifsoln{the row for "Sasha"}}
+@n Type `red-circle` into the Interactions Area. What do you get? @fitb{}{@ifsoln{the second row in the table}}
 
-@n On line 26, add the definition for a new Row of your choosing.
+@n On lines 18 and 19, add two new definitions for additional Rows in the shapes Table.
 
-@n A Contract for a function is written on line 32. What is its name? @fitb{}{@ifsoln{is-dog}}
+@n A Contract for a function is written on line 21. What is its name? @fitb{}{@ifsoln{is-red}}
 
 @n What is its Domain?  @fitb{}{@ifsoln{Row}}
 
 @n What is its Range? @fitb{}{@ifsoln{Boolean}}
 
-@n What other functions are defined here? @fitb{}{@ifsoln{_`is-old`, `lookup-name`, `lookup-fixed`, etc_}}
+@n What other functions are defined here?
 
-@n Use the function `is-dog`, passing in a Row. For example, type `is-dog(dog-row)`. What do you get? @fitb{}{@ifsoln{`true`}}
+@fitb{}{@ifsoln{`is-red`, `is-polygon`, `is-triangle`, and `lookup-name`}}
 
-@n Evaluate `is-dog(cat-row)`. What do you get? @fitb{}{@ifsoln{`false`}}
+@n Use the function `is-red`, passing in a Row. For example, type `is-red(blue-triangle)`. What do you get? @fitb{}{@ifsoln{`false`}}
 
-**For the remaining functions, read the code and try to guess what it does _before_ testing it out by passing in a Row.
+@n Evaluate `is-red(red-circle)`. What do you get? @fitb{}{@ifsoln{`true`}}
 
-@n What does `is-old` do? @fitb{}{@ifsoln{Looks up the age of the row, and asks if it is greater than 10}}
+**For the remaining functions, read the code and try to guess what it does _before_ testing it out by passing in a Row.**
 
-@n What does `lookup-name` do? @fitb{}{@ifsoln{looks up the value in the `name` column}}
+@n What does `is-polygon` do? @fitb{}{@ifsoln{Looks up the value in the "polygon" column}}
 
-@n What does `lookup-fixed` do? @fitb{}{@ifsoln{looks up the value in the `fixed` column}}
+@n What does `is-triangle` do? @fitb{}{@ifsoln{checks to see if the value in the "name" column contains "triangle"}}
 
-@n What does `label` do? @fitb{}{@ifsoln{prints the animal's name in red}}
+@n Define two new functions: `is-green` and `is-blue`.
 
-@n What does `kilos` do? @fitb{}{@ifsoln{divides the pounds by 2.2}}
+
+@star There is a hidden function called `draw-shape`. Try using it in the Interactions Area. What does it do?
+
+@fitb{}{@ifsoln{Takes in a row and draws the shape using the appropriate color}}
+
+@fitb{}{}
+
+@star Is there another way to define `is-polygon`, so that it doesn't use the `"polygon"` column at all?
