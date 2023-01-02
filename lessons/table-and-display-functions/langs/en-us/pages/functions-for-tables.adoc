@@ -37,7 +37,7 @@ adopted quickest...*
 
 @n Would you use `true` or `false`? Explain. @fitb{}{}
 
-@n Test it out, and write your thinking about @vocab{quantitative} columns to your explanations of `true` and `false` above.
+@n Test it out, and write your thinking about @vocab{quantitative} columns at the end of your explanations of `true` and `false` above.
 
 @n Which animal(s) were adopted the quickest? @fitb{}{@ifsoln{Snuggles, Nori, Toggle, Wade and Mittens}}
 
@@ -51,7 +51,7 @@ There are many other functions available to us in Pyret. We can describe them us
 
 Contracts can also be written with more detail, by describing data types in the Domain:
 
-@show{(contract "sort" '("Table" "column {two-colons} String" "order {two-colons} Boolean") "Table")}
+@show{(contract 'sort '((table-name Table) (column-name String) (order Boolean)) "Table")}
 
 - Each contract begins with the function name: @fitb{10em}{_in this case_ `sort`}
 - Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Table, String, Boolean}
@@ -61,9 +61,9 @@ Contracts can also be written with more detail, by describing data types in the 
 
 *Suppose we wanted to sort the `animals-table` by the `legs` column to determine which animals had the most legs...*
 
-@n Fill in the blanks below with the code you'd use:
+@n Fill in the blanks below with the code you'd use (We've put pieces of the contract below each line to help you!):
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{Table},  @fitbruby{15em}{@ifsoln{"weeks"}}{column-name {two-colons} String}, @fitbruby{10em}{@ifsoln{true}}{order {two-colons} Boolean})
+@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{@ifsoln{"weeks"}}{column-name {two-colons} String}, @fitbruby{10em}{@ifsoln{true}}{order {two-colons} Boolean})
 
 @n Which animal(s) had the most legs? @fitb{}{@ifsoln{Snuggles the tarantula}}
 
@@ -73,5 +73,5 @@ Contracts can also be written with more detail, by describing data types in the 
 
 @n What code would you write to answer your question?
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{Table},  @fitbruby{15em}{}{column-name {two-colons} String}, @fitbruby{10em}{}{order {two-colons} Boolean})
+@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{}{column-name {two-colons} String}, @fitbruby{10em}{}{order {two-colons} Boolean})
 
