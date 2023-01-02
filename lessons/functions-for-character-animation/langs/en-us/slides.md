@@ -30,7 +30,7 @@ If we change image coordinates a little bit at a time, they will appear to move.
 At any given moment, we know the x-coordinate of our TARGET and our DANGER. 
 We need to compute where they go next.
 
-@image{images/ninjacat-numline.png,a}{width="900"}
+@image{images/ninjacat-numline.png}{width="900"}
 
 <!--
 Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with just TARGET.

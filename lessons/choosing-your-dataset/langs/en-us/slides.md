@@ -116,7 +116,7 @@ What are the categorical columns in _your_ dataset? How are the values distribut
 {layout="SynthesizeR"}
 # Exploring Your Dataset 
 
-@image{images/InterpretData.png, "Interpret Data icon", 100}
+@image{images/InterpretData.png, 100}
 
 - What dataset did you choose? 
 - Why is it interesting or important to you?

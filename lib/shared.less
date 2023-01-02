@@ -157,7 +157,7 @@ body {
     font-style: italic; 
     line-height: 1.5ex;
     word-break: break-word;
-    &::before { content: 'Source: '; }
+    &:empty { display: none; }
   }
   .editbox {
     width:              auto;
@@ -444,7 +444,7 @@ body:not(.LessonPlan, .narrativepage) p {
   }
 
   /* class for styling duration info in headers */
-  .duration { float: right; font-style: italic; font-weight: 200; min-width: 150px; text-align: right;}
+  .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 }
@@ -545,6 +545,7 @@ body.workbookpage {
     text-align:         center;
     font-style:         normal;
     font-family:        @text-font;
+    white-space:        nowrap;
   }
   .fitb.stretch, .fitbruby.stretch { 
     margin-left:        5px; 

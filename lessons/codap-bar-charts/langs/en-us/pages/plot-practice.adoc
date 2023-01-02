@@ -4,24 +4,24 @@
 <style>
 td, th, .center { padding: 0 !important; vertical-align: middle; }
 p { margin: 0 !important; }
-.checklist li { margin: 3ex; padding: 0; }
+.checklist li { margin: 0; padding: 0; }
 </style>
 ++++
 
 Fill in the tables, predict what the graph will look like (a rough sketch is fine!), and then use CODAP to make the following displays.
 
-@vspace{5ex}
+@vspace{1ex}
 
 @n A bar chart showing the `sex` of animals from the shelter.
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a", options="header"]
+[.FillVerticalSpace, cols="^1a,^1a,^1a", options="header"]
 |===
 |*Column / Attribute*
 |*Type of Data*
 |*Configuration*
 
 |
-@fitbruby{}{@ifsoln{sex}}{[column used as x-axis]}
-@fitbruby{}{@ifsoln{n/a}}{[column used as y-axis]}
+@fitbruby{100%}{@ifsoln{sex}}{[column used as x-axis]}
+@fitbruby{100%}{@ifsoln{n/a}}{[column used as y-axis]}
 
 |
 @ifnotsoln{
@@ -51,20 +51,33 @@ Fill in the tables, predict what the graph will look like (a rough sketch is fin
 
 |===
 
-@vspace{5ex}
 
-[.FillVerticalSpace, cols="^.^1a, ^.^1a", options="header"]
+[.FillVerticalSpace, cols="^1a,1a", options="header"]
 |===
 |*Sketch the chart below:*
 |*What do you think the display tells us?*
-| @ifsoln{@image{../images/sex-bar-chart.png, bar chart showing sex, 200}}
-| @ifsoln{The display tells us how many animals are male, hermaphrodite, and female.}
+
+|
+@ifsoln{@image{../images/sex-bar-chart.png, 200}}
+
+@ifnotsoln{ @vspace{20ex} }
+
+|
+@ifnotsoln{ @vspace{10ex} }
+
+@ifsoln{
+The display tells us how many animals are male, hermaphrodite, and female.
+@vspace{5ex}
+}
+
+|
+
 |===
 
-@vspace{5ex}
+@vspace{1ex}
 
 @n A bar chart showing the `species` of animals from the shelter.
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a", options="header"]
+[cols="^1a,^1a,^1a", options="header"]
 |===
 |*Column / Attribute*
 |*Type of Data*
@@ -72,13 +85,13 @@ Fill in the tables, predict what the graph will look like (a rough sketch is fin
 
 |
 @ifnotsoln{
-@fitbruby{}{}{[column used as x-axis]}
-@fitbruby{}{}{[column used as y-axis]}
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
 }
 
 @ifsoln{
-@fitbruby{}{_species_}{[column used as x-axis]}
-@fitbruby{}{_n/a_}{[column used as y-axis]}
+@fitbruby{100%}{_species_}{[column used as x-axis]}
+@fitbruby{100%}{_n/a_}{[column used as y-axis]}
 }
 
 |
@@ -109,14 +122,30 @@ Fill in the tables, predict what the graph will look like (a rough sketch is fin
 
 |===
 
-@vspace{5ex}
 
-[.FillVerticalSpace, cols="^.^1a, ^.^1a", options="header"]
+[cols="^1a, 1a", options="header"]
 |===
 |*Sketch the chart below:*
 |*What do you think the display tells us?*
 
-|@ifsoln{@image{../images/species-bar-chart.png, bar chart showing species, 200}}
-|@ifsoln{The display tells us how many animals are cats, dogs, lizards, rabbits, snails, and tarantulas.}
+|
+@ifsoln{
+@image{../images/species-bar-chart.png, 200}
+}
+
+@ifnotsoln{ @vspace{20ex} }
+|
+
+
+@ifnotsoln{ @vspace{10ex} }
+
+@ifsoln{
+The display tells us how many animals are cats, dogs, lizards, rabbits, snails, and tarantulas.
+@vspace{5ex}
+
+}
+
+|
+
 |===
 

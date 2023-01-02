@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Case Studies
 
-@right{@image{images/AtomicBomb.png, "Mushroom cloud from an atomic bomb", 250}}
+@right{@image{images/AtomicBomb.png, 250}}
 
 **Should scientists be bound by any ethical rules? If so, what rules?**{style="font-size:24pt"}
 
@@ -19,7 +19,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Case Studies
 
-@right{@image{images/AtomicBomb.png, "Mushroom cloud from an atomic bomb", 250}}
+@right{@image{images/AtomicBomb.png, 250}}
 
 During World War II, scientists were engaged in a race to develop new weapons, more powerful than anything the world had ever seen. 
 

@@ -41,7 +41,7 @@ Every definition includes a _name_ and a _value_. In the code below, we have def
 {layout="InvestigateR"}
 # Row Lookups
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100}
+@image{images/AskQuestions.png, 100}
 
 * How many rows do we need to answer a Lookup question?
 
@@ -56,7 +56,7 @@ Every definition includes a _name_ and a _value_. In the code below, we have def
 {layout="InvestigateR"}
 # Row Lookups
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100}
+@image{images/AskQuestions.png, 100}
 
 **What code can we write, to let us define a single row?**
 
@@ -85,7 +85,7 @@ Find `row-n` in your Contracts page. What is the Domain of `row-n`? What is the 
 {layout="InvestigateR"}
 # Row Lookups
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100}
+@image{images/AskQuestions.png, 100}
 
 **What code can we write, to let us define a single row?**
 

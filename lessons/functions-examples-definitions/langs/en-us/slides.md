@@ -29,7 +29,7 @@ Every function has a contract: {style="font-size:22pt"}
 We can write examples illustrating how a function should work to help us identify the pattern.
 
 
-@image{images/examples.png, "gt Examples", 500}
+@image{images/examples.png, 500}
 
 ---
 {layout="Launch"}
@@ -37,7 +37,7 @@ We can write examples illustrating how a function should work to help us identif
 
 Function definitions replace whatever changes in the examples with a variable describing what changes.
 
-@image{images/gt-fun.png, "gt Function Definition", 600}
+@image{images/gt-fun.png, 600}
 
 ---
 {layout="Launch"}

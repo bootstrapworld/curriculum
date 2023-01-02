@@ -33,7 +33,7 @@ Data Scientists ask a ton of questions, and each question adds a chapter to thei
 {layout="LaunchR"}
 # Telling Your Data Story
 
-@image{images/data-cycle.png, "A circular progression: (1) Ask Questions, (2) Consider Data, (3) Analyze Data, (4) Interpret Data, and starting over", 400}
+@image{images/data-cycle.png, 400}
 
 The Data Cycle is a _roadmap_, which helps guide us in the process of data analysis.
 
@@ -65,7 +65,7 @@ _What other questions might come from counting the ratio of fixed to unfixed ani
 {layout="LaunchR"}
 # Ask Questions
 
-@image{images/AskQuestions.png, "Ask Questions icon", 200}
+@image{images/AskQuestions.png, 200}
 
 **How do we know what questions to ask?**
 
@@ -98,7 +98,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 {layout="LaunchR"}
 # Ask Questions
 
-@image{images/AskQuestions.png, "Ask Questions icon", 200}
+@image{images/AskQuestions.png, 200}
 
 **Lookup, Arithmetic, Statistical, or Can't Answer?**
 
@@ -115,7 +115,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 {layout="InvestigateR"}
 # Ask Questions
 
-@image{images/AskQuestions.png, "Ask Questions icon", 200}
+@image{images/AskQuestions.png, 200}
 
 - Turn to @printable-exercise{which-question-type.adoc}, and fill out the "Type" column in the table at the bottom. *For now, ignore the other columns.*
 - Look at the Wonders you wrote on @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are these Lookup, Arithmetic, or Statistical questions?
@@ -142,7 +142,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 {layout="LaunchR"}
 # Consider Data
 
-@image{images/ConsiderData.png, "Consider Data icon", 200}
+@image{images/ConsiderData.png, 200}
 
 When considering data, we ask:
 
@@ -163,7 +163,7 @@ Columns, on the other hand, represent information _about each row_. Every animal
 {layout="LaunchR"}
 # Consider Data
 
-@image{images/ConsiderData.png, "Consider Data icon", 200}
+@image{images/ConsiderData.png, 200}
 
 If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. 
 
@@ -173,7 +173,7 @@ If we want to know how many fixed animals are rabbits, _we only care about rows 
 {layout="LaunchR"}
 # Consider Data
 
-@image{images/ConsiderData.png, "Consider Data icon", 200}
+@image{images/ConsiderData.png, 200}
 
 * If our question is "How old is Mittens?", what rows and column(s) do we need? 
 * If our question is "Which animal is the heaviest?", what rows and column(s) do we need? 
@@ -189,7 +189,7 @@ If we want to know how many fixed animals are rabbits, _we only care about rows 
 {layout="InvestigateR"}
 # Consider Data
 
-@image{images/ConsiderData.png, "Consider Data icon", 200}
+@image{images/ConsiderData.png, 200}
 
 - Return to @printable-exercise{which-question-type.adoc}. For each question, which rows would you need to answer them? Which columns would you look at? Write your answers in the last two columns of the table at the bottom.
 - Complete @printable-exercise{which-rows-which-columns.adoc}.
@@ -203,7 +203,7 @@ Common Misconceptions
 {layout="SynthesizeR"}
 # Consider Data
 
-@image{images/ConsiderData.png, "Consider Data icon", 200}
+@image{images/ConsiderData.png, 200}
 
 Debrief your answers!
 
@@ -213,7 +213,7 @@ How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyre
 {layout="LaunchR"}
 # Analyzing Data
 
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+@image{images/AnalyzeData.png, 100}
 
 Once we know what data we need, we can turn our attention to what we want to build with it!
 
@@ -226,7 +226,7 @@ What kinds of displays can help us analyze whether there are more fixed or unfix
 {layout="LaunchR"}
 # Analyzing Data
 
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+@image{images/AnalyzeData.png, 100}
 
 **Are more animals fixed or unfixed?**
 @ifproglang{pyret}{
@@ -240,7 +240,7 @@ Once we've decided to make a bar chart and we know which rows and columns we're 
 {layout="LaunchR"}
 # Analyzing Data
 
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+@image{images/AnalyzeData.png, 100}
 
 Once we've decided what to make and we know which rows and columns we're plotting, the next step is to _write the code!_
 
@@ -253,7 +253,7 @@ Once we know that we want a pie-chart, and that we're using it to look at the `f
 {layout="InvestigateR"}
 # Analyzing Data
 
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+@image{images/AnalyzeData.png, 100}
 
 Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
 
@@ -265,7 +265,7 @@ Have students share their results. What did their charts tell them?
 {layout="SynthesizeR"}
 # Analyzing Data
 
-@image{images/InterpretData.png, "Interpret Data icon", 100}
+@image{images/InterpretData.png, 100}
 
 In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 

@@ -90,7 +90,7 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 {layout="Investigate"}
 # Introducing Sam
 
-@image{images/safe-left-dr.png, a}{width="700"}
+@image{images/safe-left-dr.png}{width="700"}
 
 ---
 {layout="Synthesize"}
@@ -112,7 +112,7 @@ Don’t trust the behavior of a complex system! Examples are where you look firs
 {layout="Launch"}
 # Protecting Sam on Both Sides
 
-@image{images/sam-slide.png, "a"}{width="700"}
+@image{images/sam-slide.png}{width="700"}
 
 <!--
 @ifproglang{wescheme}{
@@ -195,7 +195,7 @@ What is the problem with `is-onscreen`? How can we fix it?
 }
 -->
 
-@image{images/onscreen.png,a}{width="500"}
+@image{images/onscreen.png}{width="500"}
 
 
 

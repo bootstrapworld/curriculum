@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 Computers use numbers to represent a character’s position on screen, using number lines as rulers to measure the distance from the bottom-left corner of the screen. For this example, we will draw the number line so that the screen runs from 0 (on the left) to 1000 (on the right).
 
-@image{images/1dPosition.png, "A number line with two circles on it, illustrating the distance between two characters in one dimension"}
+@image{images/1dPosition.png}
 
 <!--
 What is the coordinate of the Dog, if it’s on the left-hand edge of the screen?
@@ -28,8 +28,8 @@ What coordinate would place the Dog beyond the right-hand edge of the screen?
 
 But one number line isn't enough!
 
-@image{images/coordinate-bkgrd.png, "quadrant 1 of a coordinate plane"}{width="700"}
-@image{images/dog.png, dog character}{width="150"}
+@image{images/coordinate-bkgrd.png}{width="700"}
+@image{images/dog.png}{width="150"}
 
 <!--
 What are the coordinates of the Dog, if it’s on the upper left-hand edge of the screen?
@@ -85,7 +85,7 @@ As a group, come up with at least one idea for a game!
 
 Find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is a great place to find transparent images. 
 
-@image{images/image-search.png, "using DuckDuckGo to find a transparent image"}
+@image{images/image-search.png}
 
 
 ---

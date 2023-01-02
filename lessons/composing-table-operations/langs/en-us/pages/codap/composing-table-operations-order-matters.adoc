@@ -10,11 +10,11 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 @do{
 
 (define exp1 '(sort t kilos ascending))
-(define exp2 '(build-col (filter t sex="female") "kilos" pounds/2.2))
-(define exp3 '(filter (build-col t "kilos" pounds/2.2) kilos>25))
-(define exp4 '(build-col (filter t kilos>25) "kilos" pounds/2.2))
-(define exp5 '(sort (filter (build-col t "kilos" pounds/2.2) kilos>25) "sex" ascending))
-(define exp6 '(filter (build-col (build-col t "female" sex="female") "kilos" pounds/2.2) kilos>25))
+(define exp2 '(build-column (filter t sex="female") "kilos" pounds/2.2))
+(define exp3 '(filter (build-column t "kilos" pounds/2.2) kilos>25))
+(define exp4 '(build-column (filter t kilos>25) "kilos" pounds/2.2))
+(define exp5 '(sort (filter (build-column t "kilos" pounds/2.2) kilos>25) "sex" ascending))
+(define exp6 '(filter (build-column (build-column t "female" sex="female") "kilos" pounds/2.2) kilos>25))
 }
 
 The table `t` below represents four animals from the shelter:

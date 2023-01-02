@@ -19,7 +19,7 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to develop rules to help them work together.
 
-@image{images/pemdas.png, "pmedas pyramid", 300, ""}
+@image{images/pemdas.png, 300}
 
 ---
 {layout="Launch"}
@@ -41,7 +41,7 @@ __Rule #2:__ The inputs to the function are written left-to-right, in the middle
 
 __Rule #3:__ Circles can contain other circles. 
 
-@image{images/coe1.png, "circle of evaluation for 6 / 3"}
+@image{images/coe1.png}
 
 <!--
 In this example, the function is division and the inputs are 6 and 3 (in that order!.
@@ -62,7 +62,7 @@ What is the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
 
 Circles can contain other Circles. We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!{style="font-size:15pt"}
 
-@image{images/coe2.png, a}{width="200"}	
+@image{images/coe2.png}{width="200"}	
 
 ---
 {layout="Launch"}
@@ -76,7 +76,7 @@ What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
-@image{images/coe3.png, a}
+@image{images/coe3.png}
 
 ---
 {layout="Launch"}
@@ -90,7 +90,7 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
-@image{images/coe4.png, a}{width="250"}	
+@image{images/coe4.png}{width="250"}	
 
 ---
 {layout="InvestigateC"}
@@ -123,7 +123,7 @@ After that, she crawls from left to right, visiting each of the inputs. Finally,
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set1.png, a}{width="700"}
+@image{images/coe-set1.png}{width="700"}
 
 
 ---
@@ -139,7 +139,7 @@ Arithmetic expressions involving more than one operation will end up with more t
 
 What would the code look like for this circle?
 
- @image{images/coe8.png, a}{width="200"}	
+ @image{images/coe8.png}{width="200"}	
 
 <!-- 
 advance to next slide to reveal the answer
@@ -150,7 +150,7 @@ advance to next slide to reveal the answer
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set2.png, a}{width="700"}
+@image{images/coe-set2.png}{width="700"}
 
 ---
 {layout="Investigate"}
@@ -158,7 +158,7 @@ advance to next slide to reveal the answer
 
 What would the code look like for this circle?
 
-@image{images/coe9.png, a}{width="200"}			
+@image{images/coe9.png}{width="200"}			
 
 <!-- 
 @show{(code '(/ 6 (+ 1 2)))}
@@ -171,7 +171,7 @@ What would the code look like for this circle?
 
 What would the code look like for this circle?
 
-@image{images/coe10.png, a}{width="200"}		
+@image{images/coe10.png}{width="200"}		
 
 <!-- 
 @show{(code '(* (- 10 5) 6))}
@@ -233,7 +233,7 @@ Look at the two Circles of Evaluation below. One of them is familiar, but the ot
 - What do you think this expression will evaluate to?{style="font-size:15pt"}
 - Convert this Circle to code and try it out!{style="font-size:15pt"}
 
-@image{images/coe-pair.png, a}
+@image{images/coe-pair.png}
 
 <!--
 Possible responses: 
@@ -248,7 +248,7 @@ Possible responses:
 {layout="InvestigateC-DN"}
 # Testing out your Code
 
-@image{images/coe-pair.png, a}
+@image{images/coe-pair.png}
 
 There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
 

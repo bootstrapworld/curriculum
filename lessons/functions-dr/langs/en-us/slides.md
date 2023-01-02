@@ -112,14 +112,14 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 {layout="Investigate"}
 # Rocket Height
 
-@image{images/rocket-height-contract.png, a}{width="700"}
+@image{images/rocket-height-contract.png}{width="700"}
 
 
 ---
 {layout="Investigate"}
 # Rocket Height
 
-@image{images/rocket-height-dr.png, a}{width="700"}
+@image{images/rocket-height-dr.png}{width="700"}
 
 
 

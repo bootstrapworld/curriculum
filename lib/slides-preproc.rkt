@@ -2,6 +2,7 @@
 
 #lang racket
 
+(require json)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "starter-files.rkt")
@@ -29,26 +30,57 @@
 
 (define *lesson* (or (getenv "LESSON") "__sample-lesson"))
 
+(define *images-hash* #f)
+
+(define *missing-image-json-files* '())
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
 (define (errmessage-file-context)
   *in-file*)
 
-(define (make-image img text [width #f])
-  ; (printf "make-image ~s\n" img)
+(define (make-image img width)
+  ; (printf "make-image ~s in ~s\n" img (current-directory))
   (set! *num-images-processed* (+ *num-images-processed* 1))
-  (unless (file-exists? img)
-    ; (printf "image ~s doesnt exist\n" img)
-    (let ([img-anonymized
-            (system-echo (format "~a/anonymize-filename" *progdir*) img)])
-      ; (printf "anon image file is ~s\n" img-anonymized)
-      (when img-anonymized
-        (set! img img-anonymized))))
-  (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
-      (format "**-- INSERT IMAGE ~a HERE --**" img)
-      (format "![~a](~a)~a" text img
-              (if width (format "{width=~a}" width) ""))))
+
+  (unless *images-hash*
+    (let ([json-file "images/lesson-images.json"])
+      (cond [(file-exists? json-file)
+             (set! *images-hash* (call-with-input-file json-file read-json))]
+            [else
+              (unless (member json-file *missing-image-json-files*)
+                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
+                (printf "!! WARNING: Image json file ~a not found\n" json-file))
+              (set! *images-hash* #t)])))
+
+  ; (printf "*images-hash* = ~s\n" *images-hash*)
+
+  (let* ([image-file (call-with-values (lambda () (split-path img)) (lambda (x base y) base))]
+         [image-file (string->symbol (path->string image-file))]
+         [image-attribs (and (hash? *images-hash*) (hash-ref *images-hash* image-file #f))]
+         [text (if (hash? image-attribs) (hash-ref image-attribs 'description "") "")])
+
+    ; (printf "image-attribs = ~s\n" image-attribs)
+
+    (unless (file-exists? img)
+      ; (printf "image ~s doesnt exist\n" img)
+      (let ([img-anonymized
+              (system-echo (format "~a/anonymize-filename" *progdir*) img)])
+        ; (printf "anon image file is ~s\n" img-anonymized)
+        (when img-anonymized
+          (set! img img-anonymized))))
+
+    (when (hash? *images-hash*)
+      (cond [(not image-attribs)
+             (printf "** WARNING: Image ~a missing from dictionary\n" image-file)]
+            [(string=? text "")
+             (printf "WARNING: Image ~a missing metadata\n" image-file)]))
+
+    (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
+        (format "**-- INSERT IMAGE ~a HERE --**" img)
+        (format "![~a](~a)~a" text img
+                (if (string=? width "") "" (format "{width=~a}" width))))))
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
@@ -394,9 +426,10 @@
                    (cond [(string=? directive "") (display c o)]
                          [(string=? directive "@") (display c o)]
                          [(string=? directive "image")
-                          (let* ([args (read-commaed-group i directive read-group)]
-                                 [n (length args)])
-                            (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
+                          (let ([args (read-commaed-group i directive read-group)])
+                            (display (make-image (first args)
+                                                 (if (>= (length args) 2) (second args) ""))
+                                     o))]
                          [(member directive '("printable-exercise" "opt-printable-exercise"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (fully-qualify-link args directive) o))]
@@ -421,7 +454,7 @@
                               (display " [" o)
                               (display (fully-qualify-link (list rubric-file "rubric") directive) o)
                               (display "]" o)))]
-                         [(member directive '("link" "online-exercise" "opt-online-exercise")
+                         [(member directive '("link" "online-exercise" "opt-online-exercise"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (external-link args directive) o)) ]
                          [(member directive '("starter-file" "opt-starter-file"))

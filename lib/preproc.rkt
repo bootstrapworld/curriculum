@@ -1,5 +1,7 @@
 #lang racket
 
+(require json)
+(require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
@@ -174,6 +176,10 @@
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
 (define *opt-project-links* '())
+
+(define *images-hash-list* '())
+
+(define *missing-image-json-files* '())
 
 (define (errmessage-context)
   (let ([s ""])
@@ -583,74 +589,148 @@
     #:exists 'append))
 
 (define (clean-up-image-text text)
-  (when (char=? (string-ref text 0) #\")
-    (set! text (substring text 1)))
+  ; (printf "doing clean-up-image-text ~s\n" text)
   (let ([n (string-length text)])
-    (when (char=? (string-ref text (- n 1)) #\")
-      (set! text (substring text 0 (- n 1)))))
+    (when (>= n 1)
+      (when (char=? (string-ref text 0) #\")
+        (set! text (substring text 1)))
+      (when (char=? (string-ref text (- n 1)) #\")
+        (set! text (substring text 0 (- n 1))))))
   (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
 (define (clean-up-url-in-image-text text)
+  ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (make-image img text rest-opts #:centered? [centered? #f])
-  ; (printf "doing make-image ~s ~s ~s\n" img text rest-opts)
-  (let ([img-qn (string-append *containing-directory* "/" img)])
-    (unless (or *narrative* *target-pathway* *teacher-resources*)
-      ;(printf "anonymizing ~s\n" img)
-      (let ([img-anonymized (system-echo (format "~a/anonymize-filename" *progdir*) img)])
-        (cond [img-anonymized
-                ;(printf "anon img is ~s\n" img-anonymized)
-                (set! img img-anonymized)
-                (let ([img-anonymized-qn (string-append *containing-directory* "/"
-                                           img-anonymized)])
-                (when (file-exists? img-qn)
-                  (rename-file-or-directory img-qn
-                    (string-append *containing-directory* "/" img-anonymized)
-                    #t))
-                (unless (file-exists? img-anonymized-qn)
-                  (printf "WARNING: ~a: Image file ~a not found\n\n" (errmessage-context) img-qn)))]
-              [else (printf "WARNING: Image file ~a anonymization failed\n\n" img)])))
-    (let* ([text (clean-up-image-text text)]
-           [rest-opts-len (length rest-opts)]
-           [width-arg (or (and (>= rest-opts-len 1) (unquote-string (first rest-opts))) "")]
-           [height-arg (or (and (>= rest-opts-len 2) (unquote-string (second rest-opts))) "")]
-           [image-caption (and (>= rest-opts-len 3) (unquote-string (third rest-opts)))]
-           [text-wo-url (clean-up-url-in-image-text text)]
-           [commaed-opts (string-append
-                           ", "
-                           width-arg
-                           ", "
-                           height-arg
-                           (if (string=? text "") ""
-                               (format ", title=~s" text-wo-url)))]
-           [img-link-txt (string-append
-                           (enclose-span ".big" "&#x1f5bc;") "Show image")]
-           [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
-           [adoc-img
-             (string-append
-               (cond [*lesson-subdir*
-                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
-                     [else
-                       (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-               img-link)]
-           [img-id (format "img_id_~a" (gen-new-id))]
-           [adoc-img (enclose-tag "span" ".image-figure"
-                       (string-append
-                         ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
-                         adoc-img
-                         (if image-caption
-                             (enclose-tag "span" ".image-caption" image-caption
-                               #:attribs (format "id=~s" img-id))
-                             ""))
-                       #:attribs
-                       (and image-caption
-                           (format "aria-describedby=~s" img-id)))])
-      ;(printf "text= ~s; commaed-opts= ~s\n" text commaed-opts)
-      (if centered?
-          (enclose-span ".centered-image" adoc-img)
-          adoc-img))))
+(define (anonymize-filename img)
+  ; (printf "doing anonymize-filename ~s\n" img)
+  (let-values ([(dir fname _) (split-path img)])
+    (when (eqv? dir 'relative) (set! dir 'same))
+    (let ([basename (path->string (path-replace-extension fname ""))]
+          [ext (path-get-extension fname)])
+      (build-path dir
+                  (path-replace-extension
+                    (substring
+                      (bytes->hex-string (call-with-input-string basename sha1-bytes))
+                      0 16)
+                    ext)))))
+
+(define (read-image-json-file-in image-dir)
+  (let ([json-file (build-path image-dir "lesson-images.json")])
+    (cond [(file-exists? json-file)
+           (let ([images-hash (call-with-input-file json-file read-json)])
+             ; (printf "images-hash is ~s\n" images-hash)
+             (set! *images-hash-list*
+               (cons (cons *containing-directory* images-hash) *images-hash-list*))
+             (unless (or *narrative* *target-pathway* *teacher-resources*)
+               (hash-for-each images-hash
+                 (lambda (key val)
+                   (let* ([image-file (build-path image-dir (symbol->string key))]
+                          [anon-image-file (anonymize-filename image-file)])
+                     (unless (file-exists? anon-image-file)
+                       (cond [(file-exists? image-file)
+                              (rename-file-or-directory image-file anon-image-file #t)]
+                             [else
+                               (printf "WARNING: ~a: Image file ~a not found\n"
+                                       (errmessage-context) image-file)]))))))
+             images-hash)]
+          [else
+            (when (or *lesson-plan* *lesson*)
+              (unless (member json-file *missing-image-json-files*)
+                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
+                (printf "!! WARNING: Image json file ~a not found\n" json-file)))
+            'not-found])))
+
+(define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
+  ; (printf "doing make-image ~s ~s\n" img width)
+  (let* ([img-qn (build-path *containing-directory* img)]
+         [images-hash-cell (assoc *containing-directory* *images-hash-list*)]
+         [images-hash (and images-hash-cell (cdr images-hash-cell))])
+    (let-values ([(image-dir image-file ign) (split-path img-qn)])
+
+      (unless images-hash
+        (set! images-hash (read-image-json-file-in image-dir)))
+
+      (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (let* ([img-anonymized (anonymize-filename img)]
+               [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
+          (set! img img-anonymized)
+          (unless (file-exists? img-anonymized-qn)
+            (cond [(file-exists? img-qn)
+                   (rename-file-or-directory img-qn img-anonymized-qn #t)]
+                  [else (printf "WARNING: ~a: Image file ~a not found\n\n"
+                                (errmessage-context) img-qn)]))))
+
+      (let ([image-attribs (and (hash? images-hash)
+                                (hash-ref images-hash
+                                          (string->symbol (path->string image-file))
+                                          #f))]
+            [image-caption ""]
+            [image-description ""]
+            [image-license ""]
+            [image-source ""])
+
+        (when image-attribs
+          (set! image-caption (hash-ref image-attribs 'caption ""))
+          (set! image-description (hash-ref image-attribs 'description ""))
+          (set! image-license (hash-ref image-attribs 'license ""))
+          (set! image-source (hash-ref image-attribs 'source "")))
+
+        (unless (or *narrative* *target-pathway* *teacher-resources*)
+          (when (hash? images-hash)
+            (cond [(not image-attribs)
+                   (printf "WARNING**: Image ~a missing from dictionary ~a/lesson-images.json\n"
+                           img-qn image-dir)]
+                  [(or (string=? image-description "")
+                       (string=? image-license "")
+                       (string=? image-source ""))
+                   (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
+                           img-qn image-dir)])))
+
+        (when author-supplied-text (set! image-description author-supplied-text))
+
+        (let* ([text (clean-up-image-text image-description)]
+               [width-arg (unquote-string width)]
+               [height-arg ""]
+               [text-wo-url (clean-up-url-in-image-text text)]
+               [commaed-opts (string-append
+                               ", "
+                               width-arg
+                               ", "
+                               height-arg
+                               (if (string=? text "") ""
+                                   (format ", title=~s" text-wo-url)))]
+
+               [img-link-txt (string-append
+                               (enclose-span ".big" "&#x1f5bc;") "Show image")]
+               [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
+               [adoc-img
+                 (string-append
+                   (cond [*lesson-subdir*
+                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
+                         [else
+                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
+                   img-link)]
+               [img-id (format "img_id_~a" (gen-new-id))]
+               [adoc-img (enclose-tag "span" ".image-figure"
+                           (string-append
+                             ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
+                             adoc-img
+                             (if image-caption
+                                 (enclose-tag "span" ".image-caption"
+                                   (expand-directives-string image-caption)
+                                   #:attribs (format "id=~s" img-id))
+                                 ""))
+                           #:attribs
+                           (and image-caption
+                                (format "aria-describedby=~s" img-id)))])
+
+          ; (printf "adoc-img = ~s\n" adoc-img)
+
+          (if centered?
+              (enclose-span ".centered-image" adoc-img)
+              adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
   ; (printf "doing check-link ~s ~s\n" f external?)
@@ -861,9 +941,9 @@
 
              (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
                (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-                 (unless (assoc g *online-exercise-links*)
+                 (unless (member styled-link-output *online-exercise-links*)
                    (set! *online-exercise-links*
-                     (cons (list g styled-link-output) *online-exercise-links*)))))
+                     (cons styled-link-output *online-exercise-links*)))))
 
              (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
                (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
@@ -949,12 +1029,12 @@
         (newline o)))
     (newline o)))
 
-(define (display-title i o out-file)
+(define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
     (set! *page-title* title-txt)
     (unless *other-dir*
-      (let ([title-file (path-replace-extension out-file ".titletxt")]
+      (let ([title-file (path-replace-extension *out-file* ".titletxt")]
             [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
         (call-with-output-file title-file
           (lambda (o)
@@ -1241,70 +1321,11 @@
   (erase-span-stack!)
   )
 
-(define (preproc-adoc-file in-file
-                           #:all-pathway-lessons [all-pathway-lessons #f]
-                           #:containing-directory [containing-directory ""]
-                           #:dist-root-dir [dist-root-dir ""]
-                           #:lesson [lesson #f]
-                           #:lesson-plan [lesson-plan #f]
-                           #:narrative [narrative #f]
-                           #:other-dir [other-dir #f]
-                           #:resources [resources #f]
-                           #:target-pathway [target-pathway #f]
-                           #:proglang [proglang "pyret"]
-                           #:other-proglangs [other-proglangs #f]
-                           #:solutions-mode? [solutions-mode? #f]
-                           )
-  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
+(define *title-reached?* #f)
+(define *first-subsection-reached?* #f)
+(define *out-file* #f)
 
-  (set! *containing-directory* containing-directory)
-  (set! *dist-root-dir* dist-root-dir)
-  (set! *lesson* lesson)
-  (set! *lesson-plan* lesson-plan)
-  (set! *narrative* narrative)
-  (set! *other-dir* other-dir)
-  (set! *proglang* proglang)
-  (set! *other-proglangs* other-proglangs)
-  (set! *solutions-mode?* solutions-mode?)
-  (set! *target-pathway* target-pathway)
-  (set! *teacher-resources* resources)
-
-  (init-flags)
-
-  (set! *lesson-plan-base* *lesson-plan*)
-  (when *lesson-plan*
-    (unless *pyret?*
-      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
-        (unless (string=? *lesson-plan* x)
-          (set! *lesson-plan-base* x)))))
-
-  ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
-
-  (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
-                                       (exn-message e) (errmessage-file-context)))])
-    (set! *in-file* (build-path containing-directory in-file))
-    ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
-    (let* ([dot-in-file (string-append "." in-file)]
-           [out-file (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc"))]
-           [first-subsection-reached? #f]
-           [title-reached? #f]
-           )
-      ; (printf "preproc ~a to ~a\n" *in-file* out-file)
-      ;
-      (when (or *link-lint?* #t)
-        (let ([internal-links-file (path-replace-extension out-file ".internal-links.txt.kp")]
-              [external-links-file (path-replace-extension out-file ".external-links.txt.kp")])
-          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
-          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
-          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
-      ;
-      (when (or *lesson-plan*
-                *narrative*
-                *teacher-resources*)
-        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
-      ;
-      (define (expand-directives i o)
+(define (expand-directives i o)
         ;(printf "doing expand-directives\n")
         (let ([beginning-of-line? #t]
               [possible-beginning-of-line? #f])
@@ -1332,7 +1353,7 @@
                             (display (enclose-tag "span" "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
-                              (if title-reached?
+                              (if *title-reached?*
                                   (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
@@ -1382,6 +1403,8 @@
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "star")
+                            (fprintf o "[.autonum]##★##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
@@ -1390,20 +1413,16 @@
                               (set! *autonumber-index* n))]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(< (length args) 2)
-                                     (printf "WARNING: Insufficient args for @image: ~a\n\n" args)]
-                                    [else
-                                      (display (make-image (first args) (second args)
-                                                           (rest (rest args)))
-                                               o)]))]
+                              (display (make-image (first args)
+                                                       (if (>= (length args) 2) (second args) ""))
+                                       o))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(< (length args) 2)
-                                     (printf "WARNING: Insufficient args for @centered-image: ~a\n\n" args)]
-                                    [else
-                                      (display (make-image (first args) (second args)
-                                                           (rest (rest args)) #:centered? #t)
-                                               o)]))]
+                              (display (make-image (first args)
+                                                       (if (>= (length args) 2)
+                                                           (second args) "")
+                                                        #:centered? #t)
+                                       o))]
                            [(string=? directive "math")
                             (display (enclose-math (read-group i directive)) o)]
                            [(string=? directive "dist-link")
@@ -1477,7 +1496,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (display-lesson-description (read-group i directive)
-                                                        (path-replace-extension out-file "-desc.txt.kp")
+                                                        (path-replace-extension *out-file* "-desc.txt.kp")
                                                         o)]
                            [(string=? directive "pathway-logo")
                             (unless *narrative*
@@ -1569,15 +1588,13 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
+                              (when (string=? width "")
+                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
+                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span"
-                                                    (format ".fitbruby~a"
-                                                            (if (string=? width "")
-                                                                ".stretch" ""))
-                                                    #:attribs
-                                                    (if (string=? width "") #f
-                                                        (format "style=\"width: ~a\"" width)))
+                                  (create-begin-tag "span" ".fitbruby" #:attribs
+                                                    (format "style=\"width: ~a\"" width))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
@@ -1751,10 +1768,10 @@
                   [(and beginning-of-line? (char=? c '#\=))
                    (set! beginning-of-line? #f)
                    (set! possible-beginning-of-line? #f)
-                   (cond [title-reached?
-                           (cond [first-subsection-reached? #f]
+                   (cond [*title-reached?*
+                           (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! first-subsection-reached? #t)
+                                  (set! *first-subsection-reached?* #t)
                                   (when *lesson-plan*
                                     (include-glossary o))]
                                  [else #f])
@@ -1762,8 +1779,8 @@
                                    (display-section-markup i o)]
                                  [else (display c o)])]
                          [else
-                           (set! title-reached? #t)
-                           (display-title i o out-file)
+                           (set! *title-reached?* #t)
+                           (display-title i o)
                            (display-alternative-proglang o)
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
@@ -1792,10 +1809,81 @@
                                  [else (error 'ERROR "preproc-adoc-file: deadc0de")])]
                           [else (display c o)])])
                 (loop))))))
+
+(define (expand-directives-string s)
+  (call-with-input-string s
+    (lambda (i)
+      (call-with-output-string
+        (lambda (o)
+          (expand-directives i o))))))
+
+(define (preproc-adoc-file in-file
+                           #:all-pathway-lessons [all-pathway-lessons #f]
+                           #:containing-directory [containing-directory ""]
+                           #:dist-root-dir [dist-root-dir ""]
+                           #:lesson [lesson #f]
+                           #:lesson-plan [lesson-plan #f]
+                           #:narrative [narrative #f]
+                           #:other-dir [other-dir #f]
+                           #:resources [resources #f]
+                           #:target-pathway [target-pathway #f]
+                           #:proglang [proglang "pyret"]
+                           #:other-proglangs [other-proglangs #f]
+                           #:solutions-mode? [solutions-mode? #f]
+                           )
+  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
+
+  (set! *containing-directory* containing-directory)
+  (set! *dist-root-dir* dist-root-dir)
+  (set! *lesson* lesson)
+  (set! *lesson-plan* lesson-plan)
+  (set! *narrative* narrative)
+  (set! *other-dir* other-dir)
+  (set! *proglang* proglang)
+  (set! *other-proglangs* other-proglangs)
+  (set! *solutions-mode?* solutions-mode?)
+  (set! *target-pathway* target-pathway)
+  (set! *teacher-resources* resources)
+
+  (init-flags)
+
+  (set! *lesson-plan-base* *lesson-plan*)
+  (when *lesson-plan*
+    (unless *pyret?*
+      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
+        (unless (string=? *lesson-plan* x)
+          (set! *lesson-plan-base* x)))))
+
+  ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
+
+  (with-handlers ([exn:fail? (lambda (e)
+                               (printf "ERROR: ~a in ~s\n\n"
+                                       (exn-message e) (errmessage-file-context)))])
+    (set! *in-file* (build-path containing-directory in-file))
+    ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
+    (let ([dot-in-file (string-append "." in-file)])
+      (set! *out-file* (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc")))
+      (set! *first-subsection-reached?* #f)
+      (set! *title-reached?* #f)
+      ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
+      ;
+      (when (or *link-lint?* #t)
+        (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
+              [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
+          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
+          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
+          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
+      ;
+      (when (or *lesson-plan*
+                *narrative*
+                *teacher-resources*)
+        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
+      ;
+
       ;
       (call-with-input-file *in-file*
         (lambda (i)
-          (call-with-output-file out-file
+          (call-with-output-file *out-file*
             (lambda (o)
 
               (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
@@ -1805,7 +1893,7 @@
 
               (expand-directives i o)
 
-              (when (and *narrative* (not title-reached?))
+              (when (and *narrative* (not *title-reached?*))
                 (print-course-title-and-logo *target-pathway* make-image o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
@@ -1893,9 +1981,9 @@
               (when (pair? prims)
                 (for ([prim prims])
                   (add-prereq prim))))))
-        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr out-file)
+        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr *out-file*)
 
-        (call-with-output-file (path-replace-extension out-file "-extra-mat.asc")
+        (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
 
             (display-lesson-slides o)
@@ -1920,11 +2008,11 @@
                 (fprintf o "\n* ~a\n\n" (second x))))
 
             (for ([x (reverse *online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" (second x)))
+              (fprintf o "\n* ~a\n\n" x))
 
             ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
             (let ([opt-proj-links (reverse *opt-project-links*)])
-              (call-with-output-file (path-replace-extension out-file "-opt-proj.rkt.kp")
+              (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
                 (lambda (o)
                   (for ([link-pair opt-proj-links])
                     (write link-pair o)

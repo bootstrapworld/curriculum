@@ -232,7 +232,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("helper function") "a small function that handles a specific part of another computation, and gets called from other functions")
      (es-mx ("función auxiliar") "Una función invocada desde otras funciones con el propósito de realizar una tarea concreta requerida por éstas" "operador"))
     
-    ((en-us ("histogram") "a display of quantitative data that uses vertical bars positioned over bins (sub-intervals); each bar’s height reflects the count or percentage of data values in that bin.")
+    ((en-us ("histogram") "a display of quantitative data that uses vertical bars positioned over bins (or 'intervals'); each bar’s height reflects the count data values in that bin.")
      (es-mx ("histograma") "Un gráfico de barras de frecuencia especial en el que cada barra cuenta la frecuencia de los valores que aparecen en un cierto intervalo."))
     
     ((en-us (("horizontal axis") ("x-axis")) "axis on a coordinate plane that runs from left to right")

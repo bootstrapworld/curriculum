@@ -14,7 +14,7 @@ __Sally runs a lemonade stand, which charges $1.75/glass. It costs her $0.30/gla
 * What do you Notice? 
 * What do you Wonder?
 
-@image{images/LemonadeStand.png, "Lemonade Stand Ideas including: charge $1.75, ask mom about cups, new bike = $198, how much lemonade? sugar? lemons? powdered drink mix?"}
+@image{images/LemonadeStand.png}
 
 <!--
 - Every glass sold brings in $1.75 in *revenue*

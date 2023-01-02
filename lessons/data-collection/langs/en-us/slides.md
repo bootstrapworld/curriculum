@@ -146,7 +146,7 @@ Complete @printable-exercise{bad-survey.adoc} in pairs or small groups.
 {layout="LaunchR"}
 # Data Hygiene
 
-@image{images/required.png, required} 
+@image{images/required.png} 
 
 Most survey tools include advanced options to help Data Scientists get data that is as clean possible. Here's an overview of those tools:
 
@@ -155,7 +155,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 {layout="LaunchR"}
 # Data Hygiene
 
-@image{images/format.png, format}
+@image{images/format.png}
 
 - **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
 
@@ -163,7 +163,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 {layout="LaunchC"}
 # Data Hygiene
 
-@image{images/description.png, description}
+@image{images/description.png}
 
 - **Descriptive Instructions** - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
 
@@ -171,11 +171,11 @@ Most survey tools include advanced options to help Data Scientists get data that
 {layout="LaunchR"}
 # Data Hygiene
 
-@image{images/validate.png, validation} 
+@image{images/validate.png} 
 
 - **Adding Validation** - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. You can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. 
 
-@image{images/validation.png, validation, 600}
+@image{images/validation.png, 600}
 
 ---
 {layout="Investigate"}

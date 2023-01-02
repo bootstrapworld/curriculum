@@ -73,8 +73,7 @@ _Answers vary: It consumes a @vocab{String}, which is a URL (an image location o
 {layout="Launch"}
 # Finding Your Game Images
 
-@image{images/fair-use-diagram.png, "Fair Use Diagram, Source:
-https://www.resourcesforlife.com/docs/item6247",300,align="center"}
+@image{images/fair-use-diagram.png,300}
 
 
 ---

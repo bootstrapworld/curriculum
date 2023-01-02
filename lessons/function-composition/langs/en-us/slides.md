@@ -60,7 +60,7 @@ We can compose those functions in any order. If we composed them as `f(g(h(x)))`
 
 The circles of evaluation for @math{f(g(h(4)))} would look like this:
 
-@image{images/fghx.png, a}
+@image{images/fghx.png}
  
 ---
 {layout="Investigate"}

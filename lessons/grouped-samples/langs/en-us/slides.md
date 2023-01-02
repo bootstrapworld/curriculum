@@ -8,7 +8,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 ---
 {layout="LaunchC"}
 # Problems with a Single Population
-@image{images/scatter-plot.png,"A scatter plot with dots loosely clustered around a line with a positive slope",550}
+@image{images/scatter-plot.png,550}
 
 When looking at a scatter plot of animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
 
@@ -19,7 +19,7 @@ When looking at a scatter plot of animals, it looks like the amount an animal we
 {layout="LaunchC"}
 # Problems with a Single Population
 
-@image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}
+@image{images/image-scatter-plot.png,550}
 
 But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.{style="font-size: 16pt"}
 
@@ -30,7 +30,7 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 {layout="InvestigateR"}
 # Problems with a Single Population
 
-@image{images/image-scatter-plot.png,"A scatter plot with images of each species of animal in place of the dots, loosely clustered around a line with a positive slope",550}
+@image{images/image-scatter-plot.png,550}
 
 - Looking at this scatter plot, does it make sense to analyze all the animals together? Why or why not?{style="font-size: 16pt"}
 - Are there some questions where it would be important to break up the animals into species-specific samples? What are they?{style="font-size: 16pt"}
@@ -156,7 +156,7 @@ Making grouped and random samples is a powerful skill, which allows us to dig de
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100} 
+@image{images/AskQuestions.png, 100} 
 
 __What's the ratio of fixed to unfixed *cats* at the shelter?__ 
 
@@ -171,7 +171,7 @@ Have students discuss their answers
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/AskQuestions.png, "Ask Questions icon", 100} 
+@image{images/AskQuestions.png, 100} 
 
 **1 - Is this a lookup, arithmetic, or statistical question?**
 
@@ -186,7 +186,7 @@ Have students discuss their answers
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/ConsiderData.png, "Consider Data icon", 100}
+@image{images/ConsiderData.png, 100}
 
 **2 - What rows do we need? What columns?**
 
@@ -201,7 +201,7 @@ Have students discuss their answers
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/AnalyzeData.png, "Analyze Data icon", 100}
+@image{images/AnalyzeData.png, 100}
 
 **3 - What kind of table or display are we building?**
 
@@ -216,7 +216,7 @@ Have students discuss their answers
 {layout="LaunchR"}
 # Displaying Samples
 
-@image{images/InterpretData.png, "Interpret Data icon", 100}
+@image{images/InterpretData.png, 100}
 
 **4 - What did our displays tell us?**
 
