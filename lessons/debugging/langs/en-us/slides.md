@@ -17,7 +17,7 @@ People often think that computers can't make mistakes, because they are "just ma
 In the 1940s, computers were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.{style="font-size:15pt"}
 
 
-@image{images/hopper.jpg, "Grace Hopper"} 
+@image{images/hopper.jpg} 
 
 ---
 {layout="LaunchC"}
@@ -26,7 +26,7 @@ In the 1940s, computers were made from large wires, vacuum tubes, gears and dial
 She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. This moth is the origin of the term "bug" in programming. {style="font-size:13pt"}
 
 
-@image{images/bug.jpg, "First Computer Bug"} 
+@image{images/bug.jpg} 
 
 ---
 {layout="Launch"}

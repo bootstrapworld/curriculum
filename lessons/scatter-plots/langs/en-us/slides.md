@@ -79,7 +79,7 @@ Have students report back on their findings from the starter file and on @printa
 {layout="SynthesizeR"}
 # Making Scatter Plots
 
-@image{images/no-relationship.png, "A scatter plot with no relationship", 250} 
+@image{images/no-relationship.png, 250} 
 
 Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
 
@@ -164,13 +164,13 @@ What new questions did the Data Cycle lead you to ask? What did you find?
 
 Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted. **Do you see a trend?**
 
-@image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}
+@image{images/pounds-v-weeks.png}
 
 ---
 {layout="LaunchR"}
 # Looking for Trends
 
-@image{images/pounds-v-weeks.png, "A scatter plot of Pounds v. Weeks"}
+@image{images/pounds-v-weeks.png}
 
 A straight-line pattern in the cloud of points suggests a linear relationship between two columns. 
 
@@ -218,7 +218,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 These numbers and scatter plot come from different datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
 
-@image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
+@image{images/CloudToCircle.gif}
 <!--
 This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.autodesk.com/research/publications/same-stats-different-graphs, Autodesk website}!
 -->

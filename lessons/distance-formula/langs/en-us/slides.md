@@ -19,7 +19,7 @@ At this point:
 
 It's almost fully-playable!
 
-@image{images/screenshot.jpg, "game image: astronaut and space craft on a landscape, with a right triangle showing the horizontal, vertical and diagonal distance between them"}
+@image{images/screenshot.jpg}
 
 ---
 {layout="Launch"}
@@ -57,7 +57,7 @@ Role-Play: Two Characters Collide!
 _overlapping_ in some way - NOT when they are _at the same point._
 -->
 
-@image{images/role-play1.png, "dog and ninja cat on a number line"}{width="750"}
+@image{images/role-play1.png}{width="750"}
 
 
 ---
@@ -72,7 +72,7 @@ After a few iterations, try switching places and repeating. Point out that stude
 Do this until students can clearly see it’s when the two characters are 'touching' or 'overlapping' in some way - NOT when they are 'at the same point.'
 -->
 
-@image{images/role-play2.png, "dog and ninja cat on a number line"}{width="750"}
+@image{images/role-play2.png}{width="750"}
 
 ---
 {layout="Investigate-DN"}

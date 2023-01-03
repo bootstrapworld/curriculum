@@ -19,7 +19,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 - Open the @starter-file{animals} in CODAP.
 - Click the `graph` icon from the horizontal toolbar in the upper left. What appears?
 
-@image{images/codap-upper-left-toolbar.png, "CODAP upper left toolbar"}
+@image{images/codap-upper-left-toolbar.png}
 
 ---
 {layout="LaunchR}
@@ -29,7 +29,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 - What happens when you select a table row? How about multiple table rows?
 - What happens when you click the "eye" icon (to the right of the graph or the table, depending on which is selected)?
 
-@image{images/codap-initial-display.png,"An image of the CODAP environment"}
+@image{images/codap-initial-display.png}
 
 <!--
     If students report that a blank graph appears (rather than a scatter plot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).

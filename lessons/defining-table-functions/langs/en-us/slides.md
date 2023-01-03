@@ -118,7 +118,7 @@ These steps also help us _check our work_. If any two representations don't matc
 {layout="LaunchR"}
 # Design Recipe Telephone
 
-@image{images/DR-Telephone.png, "Design Recipe Telephone", 250}
+@image{images/DR-Telephone.png, 250}
 
 Let's get some practice defining functions and working with tables!
 
@@ -134,7 +134,7 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 {layout="InvestigateR"}
 # Design Recipe Telephone
 
-@image{images/DR-Telephone.png, "Design Recipe Telephone", 250}
+@image{images/DR-Telephone.png, 250}
 
 **Set 1**
 
@@ -160,7 +160,7 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 {layout="InvestigateR"}
 # Design Recipe Telephone
 
-@image{images/DR-Telephone.png, "Design Recipe Telephone", 250}
+@image{images/DR-Telephone.png, 250}
 
 **Set 1 - Putting it all together**
 

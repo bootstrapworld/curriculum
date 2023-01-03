@@ -154,7 +154,7 @@ Contracts are general. Expressions are specific.
 
 Let’s take a look at some functions we've seen before:
 
-@image{images/sample-contracts-table.png, "a"}
+@image{images/sample-contracts-table.png}
 
 ---
 {layout="Launch"}
