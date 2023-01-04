@@ -24,7 +24,7 @@ td > .content > .paragraph {
 | @n
 | Which Circles evaluate to @math{20}?
 
-@ifsoln{Options 1 and 3.}
+@ifsoln{Circles 1 and 3.}
 | @show{(coe '(negate (negate 20)))}
 @show{(coe '(negate (negate -20)))}
 @show{(coe '(num-abs (negate 20)))}
@@ -32,6 +32,9 @@ td > .content > .paragraph {
 
 | @n
 | Which Circles evaluate to @math{-3}?
+
+@ifsoln{Circles 1 and 2.}
+
 | @show{(coe '(negate (num-abs 3)))}
 @show{(coe '(negate (num-abs -3)))}
 @show{(coe '(num-abs (negate 3)))}
@@ -39,6 +42,8 @@ td > .content > .paragraph {
 
 | @n
 | Let @math{h=9}. Which Circles evaluate to @math{9}?
+
+@ifsoln{Circles 1 and 3.}
 | @show{(coe '(negate -h))}
 @show{(coe '(negate (num-abs h)))}
 @show{(coe '(num-abs -h))}
@@ -46,18 +51,23 @@ td > .content > .paragraph {
 
 | @n
 | Let @math{h=6}. Which Circles evaluate to @math{6}?
+
+@ifsoln{Circles 1 and 3.}
 | @show{(coe '(+ (num-abs h) (- h h)))}
 @show{(coe '(+ (negate h) (- h h)))}
 @show{(coe '(* (/ h h) (num-abs h)))}
 
 | @n
 | Let @math{k=99}. Which Circles evaluate to @math{0}?
+
+@ifsoln{All Circles!}
 | @show{(coe '(+ k (negate k)))}
 @show{(coe '(+ (negate k) k))}
 @show{(coe '(+ (num-abs (+ 45 44)) (negate k)))}
 
 | @n
 | Let @math{a=11} and @math{b=20}. Which Circles evaluate to @math{31}?
+@ifsoln{Circles 1, 2, and 3.}
 | @show{(coe '(num-abs (+ a b)))}
 @show{(coe '(num-abs (+ b a)))}
 @show{(coe '(num-abs (negate (+ b a))))}
