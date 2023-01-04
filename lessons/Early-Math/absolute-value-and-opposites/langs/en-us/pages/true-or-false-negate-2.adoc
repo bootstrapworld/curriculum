@@ -7,72 +7,92 @@ td > .content > .paragraph > * { vertical-align: middle; }
 </style>
 ++++
 
-Is the equation represented by the two Circles true or false? Explain why, and then describe what you would change to make the _false_ equations _true_.
+Is the equation represented by the two Circles true or false? Evaluate each side of the equation to confirm your response. When applicable, provide the property that confirms the equivalence. The first one is done for you.
 
 [.FillVerticalSpace,cols="^.^1a,^.^8a,^.^5a", stripes="none", options="header"]
 |===
 |	 | Circles																	   |
-True or False? Explain
+True or False? Justify
 
-
-| @n
-| @show{(coe '(negate h))}
-@math{=}
-@math{-h}
-|
-
-
-| @n
-| @show{(coe '(negate -m))}
-@math{=}
-@math{m}
-|
 
 
 | @n
 | @show{(coe '(negate (* 5 k)))}
 @math{=}
 @show{(coe '(negate (* k 5)))}
-|
+| @ifsoln{True. The Commutative Property is being applied.
 
-| @n
-| @show{(coe '(negate w))}
-@math{=}
-the opposite of w
-|
+@math{-5k = -5k}}
 
-
-| @n
-| @show{(coe '(+ (negate -g) 0))}
-@math{=}
-@show{(coe '(* 1 (negate -g)))}
-|
 
 | @n
 | @show{(coe '(negate (negate q)))}
 @math{=}
 @math{ -q}
-|
+| @ifsoln{False.
+
+@math{q +≠+ -q}}
 
 
 | @n
-| @show{(coe '(negate f))}
+| @show{(coe '(+ (negate h) 6))}
 @math{=}
-@show{(coe '(* (negate f) 1))}
-|
+@show{(coe '(+ 6 -h))}
+| @ifsoln{True. The Commutative Property is being applied.
+
+@math{-h + 6 = 6 + -h}}
+
 
 | @n
-| @show{(coe '(negate (+ c h)))}
+| @show{(coe '(* (negate -m) (+ 20 3)))}
 @math{=}
-@show{(coe '(* (negate (+ c h)) 1))}
-|
+@show{(coe '(+ (* m 20) (* m 3)))}
+| @ifsoln{True. The Distributive Property is being applied.
+
+@math{m = m}}
+
 
 
 | @n
 | @show{(coe '(negate(negate -y)))}
 @math{=}
 @math{-y}
-|
+| @ifsoln{True.
+
+@math{-y = -y}}
+
+
+
+
+
+| @n
+| @show{(coe '(+ (negate -g) 0))}
+@math{=}
+@show{(coe '(- 0 (negate -g)))}
+| @ifsoln{False.
+
+@math{g + 0 +≠+ 0 - g}}
+
+
+
+
+| @n
+| @show{(coe '(negate f))}
+@math{=}
+@show{(coe '(* (negate f) 1))}
+| @ifsoln{True.
+
+@math{-f = -f}}
+
+| @n
+| @show{(coe '(negate (+ c h)))}
+@math{=}
+@show{(coe '(* (negate (+ c h)) 1))}
+| @ifsoln{True. The Identity Property is being applied.
+
+@math{-(c+h)= -(c+h)}}
+
+
 
 
 |===
