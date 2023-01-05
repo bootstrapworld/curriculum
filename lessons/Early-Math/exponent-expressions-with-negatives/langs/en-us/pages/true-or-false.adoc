@@ -2,8 +2,18 @@
 
 ++++
 <style>
+  /*
+    the grid-auto-rows rule here has a separate value for
+    each row. The first row is as small as is needed for
+    the content, and all the subsequent rows are an equal
+    fraction of the remaining space.
+
+    NOTE: if the number of rows is changed, this rule will
+    have to change, too!!
+  */
   body.workbookpage table.FillVerticalSpace {
-    grid-template-rows: unset !important; grid-auto-rows: 1fr;
+    grid-template-rows: unset !important;
+    grid-auto-rows: min-content 1fr 1fr 1fr 1fr 1fr;
   }
 div.circleevalsexp { width: auto; }
 td > .content > .paragraph > * { vertical-align: middle; }
