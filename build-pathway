@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-16 # last modified
+LASTMOD=2023-01-05 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -1920,7 +1920,7 @@ function copylessondir() {
   test -z "$repoDir" && return
   test -d "$repoDir" || return
   local lessonDir=${repoDir#*lessons/}
-  lessonDir=${lessonDir#*/}
+  lessonDir=${lessonDir##*/}
   # echo doing copylessondir II $lessonDir in $(pwd)
   local repoLessonDir="$repoDir"/langs/$NATLANG
   if test ! -d "$repoLessonDir" -a $NATLANG != en-us; then
