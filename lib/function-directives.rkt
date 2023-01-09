@@ -38,8 +38,6 @@
 
 (define *table-marker* "|")
 
-
-
 (define *max-pyret-example-clause-length* 60)
 
 (define *funname* #f)
@@ -708,7 +706,6 @@
        (string-append
           (encoded-ans ".questions" question *show-body?*)
           (encoded-ans ".answers"   answer   *show-body?*))))))
-               
 
 (define (design-recipe-exercise funname directions
                                 #:proglang [proglang "pyret"]
@@ -1062,7 +1059,27 @@
 
 ;;;; Data cycle
 
+(define (write-data-cycle-question-type question-type)
+  (when question-type
+    (set! question-type (string-downcase question-type)))
+  (let ([style-question-type
+          (lambda (type)
+            (if (and *show-question-type?* question-type
+                     (string=? question-type type))
+                ".question_type_checked"
+                ".question_type"))])
+    (string-append
+      "What type of question is this? (circle one)"
+      ; (hspace "1.5em")
+      (format " [~a]##Lookup##" (style-question-type "lookup"))
+      ; (hspace "1.5em")
+      (format " [~a]##Arithmetic##" (style-question-type "arithmetic"))
+      ; (hspace "1.5em")
+      (format " [~a]##Statistical##" (style-question-type "statistical"))
+      "\n\n")))
+
 (define *show-question?* #f)
+(define *show-question-type?* #f)
 (define *show-rows?* #f)
 (define *show-cols?* #f)
 (define *show-filter?* #f)
@@ -1077,6 +1094,8 @@
                     #:solutions-mode? [solutions-mode? #f]
                     #:question [question ""]
                     #:show-question? [show-question? #f]
+                    #:question-type [question-type #f]
+                    #:show-question-type? [show-question-type? #f]
                     #:rows [rows ""]
                     #:show-rows? [show-rows? #f]
                     #:cols [cols ""]
@@ -1096,6 +1115,7 @@
   (set! *solutions-mode?* solutions-mode?)
 
   (set! *show-question?* show-question?)
+  (set! *show-question-type?* show-question-type?)
   (set! *show-rows?* show-rows?)
   (set! *show-cols?* show-cols?)
   (set! *show-filter?* show-filter?)
@@ -1106,6 +1126,7 @@
 
   (when *solutions-mode?*
     (set! *show-question?* #t)
+    (set! *show-question-type?* #t)
     (set! *show-rows?* #t)
     (set! *show-cols?* #t)
     (set! *show-filter?* #t)
@@ -1125,14 +1146,7 @@
     "\n\n"
     (fitb "100%" "")
     "\n\n"
-    (enclose-span ".data-cycle-type-of-question" "")
-    (hspace "1.5em")
-    (enclose-span ".data-cycle-lookup" "")
-    (hspace "1.5em")
-    (enclose-span ".data-cycle-arithmetic" "")
-    (hspace "1.5em")
-    (enclose-span ".data-cycle-statistical" "")
-    "\n\n"
+    (write-data-cycle-question-type question-type)
     "| "
     "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
