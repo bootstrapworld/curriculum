@@ -2930,6 +2930,10 @@ function callonpathway() {
 
   if test -f $PATHWAYPROGLANGSFILE; then
     NUMPATHWAYPROGLANGS=$(wc -l $PATHWAYPROGLANGSFILE|$SED -e 's/^ *\([^ ]*\).*/\1/')
+    if test $NUMPATHWAYPROGLANGS -eq 0; then
+      # needed because file may lack final newline
+      NUMPATHWAYPROGLANGS=1
+    fi
   fi
 
   if test -f $PATHWAYPROGLANGSFILE; then
