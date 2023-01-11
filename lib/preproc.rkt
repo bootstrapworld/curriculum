@@ -2023,7 +2023,7 @@
                 #:exists 'replace)
 
               (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (first x) (second x))))
+                (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
 
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
