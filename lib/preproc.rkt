@@ -2004,7 +2004,10 @@
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
-                              (display project-link-output o))]
+                              (display project-link-output o)
+                              (display " __{startsb}" o)
+                              (display rubric-link-output o)
+                              (display "{endsb}__" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
