@@ -200,9 +200,6 @@ fi
 
 #echo ARGS is $ARGS
 
-if test ! $PROGLANG; then
-  PROGLANG=pyret
-fi
 
 # echo PROGLANG is $PROGLANG
 
@@ -1278,26 +1275,15 @@ function buildworkbookpages() {
   local L=$1
   local oldPROGLANG="$PROGLANG"
 
-  # echo doing buildworkbookpages $L
+  # echo doing buildworkbookpages $L with PROGLANG $PROGLANG
 
   local f pl d
 
-  if test "$PROGLANG" != all; then
-    for f in $L/.cached/.proglang-*; do
-      if test -f "$f"; then
-        pl=${f##*.proglang-}
-        test "$PROGLANG" = "$pl" || return
-      fi
-    done
-  else
-    export PROGLANG=pyret
-    for f in $L/.cached/.proglang-*; do
-      if test -f "$f"; then
-        pl=${f##*.proglang-}
-        export PROGLANG=$pl
-      fi
-    done
-  fi
+  for f in $L/.cached/.proglang-*; do
+    if test -f "$f"; then
+      export PROGLANG=${f##*.proglang-}
+    fi
+  done
 
   # echo doing buildworkbookpages $L in $(pwd)
 
@@ -1368,26 +1354,16 @@ function collapseadjtables() {
 }
 
 function buildlessonplan() {
+  # echo doing buildlessonplan $@
   local L=$1
   local oldPROGLANG="$PROGLANG"
   local f pl
 
-  if test "$PROGLANG" != all; then
-    for f in $L/.cached/.proglang-*; do
-      if test -f "$f"; then
-        pl=${f##*.proglang-}
-        test "$PROGLANG" = "$pl" || return
-      fi
-    done
-  else
-    export PROGLANG=pyret
-    for f in $L/.cached/.proglang-*; do
-      if test -f "$f"; then
-        pl=${f##*.proglang-}
-        export PROGLANG=$pl
-      fi
-    done
-  fi
+  for f in $L/.cached/.proglang-*; do
+    if test -f "$f"; then
+      export PROGLANG=${f##*.proglang-}
+    fi
+  done
 
   # echo doing buildlessonplan $L in $(pwd)
 
@@ -1433,13 +1409,14 @@ function buildlessonplan() {
 }
 
 function buildcommonlessons() {
-  # echo doing buildcommonlessons
+  # echo doing buildcommonlessons with PROGLANG $PROGLANG
   cd $TOPDIR
   cd $DESTLANGDIR
   cd lessons
   export DISTROOTDIR=../
   local L d
   # process lesson directories in parallel
+  # echo RELEVANT_LESSONS_INPUT is $RELEVANT_LESSONS_INPUT
   if test -f $RELEVANT_LESSONS_INPUT; then
     for L in $(cat $RELEVANT_LESSONS_INPUT); do
       # echo doing relevant lesson $L
@@ -2187,9 +2164,19 @@ function copycommonlessons() {
       copylessonrecdir "$lessonDir"
     done
   else
-    local pwy lessonOrderFile repoDir
+    local pwy repoDir
+    local oldPROGLANG="$PROGLANG"
     for pwy in $ARGS; do
-      lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
+      if test -z "$PROGLANG"; then
+        local firstproglang=pyret
+        local proglangFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/proglang.txt
+        if test -f $proglangFile; then
+          local proglangs=$(cat $proglangFile)
+          firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
+        fi
+        export PROGLANG="$firstproglang"
+      fi
+      local lessonOrderFile=$TOPDIR/pathways/$pwy/langs/$NATLANG/lesson-order.txt
       if test ! -f $lessonOrderFile -a $NATLANG != en-us; then
         lessonOrderFile=$TOPDIR/pathways/$pwy/langs/en-us/lesson-order.txt
       fi
@@ -2201,6 +2188,7 @@ function copycommonlessons() {
         done
       fi
     done
+    export PROGLANG="$oldPROGLANG"
   fi
 
   cd $TOPDIR
@@ -2934,12 +2922,21 @@ function callonARGS() {
 
   local f
   for f in $ARGS; do
-    # echo doing callonARGS $f
+    # echo doing callonARGS II $f with PROGLANG $PROGLANG
     export SRCPATHWAY=$f
     export SRCPATHWAY=${SRCPATHWAY#pathways/}
     export SRCPATHWAY=${SRCPATHWAY%/}
 
-    if test "$PROGLANG" = all; then
+    if test -z "$PROGLANG"; then
+      local firstproglang=pyret
+      local proglangFile=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG/proglang.txt
+      if test -f $lessonOrderFile; then
+        local proglangs=$(cat $proglangFile)
+        firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
+      fi
+      export PROGLANG="$firstproglang"
+      callonpathway
+    elif test "$PROGLANG" = all; then
       export PROGLANG=pyret
       callonpathway
       export PROGLANG=wescheme
@@ -3000,6 +2997,8 @@ touch $ADOC_POSTPROC_WORKBOOKPAGE_INPUT \
   $ADOC_POSTPROC_RESOURCES_INPUT $ADOC_POSTPROC_ALLPWYLESSONS_INPUT $ADOC_POSTPROC_PWYINDEP_INPUT \
   $RELEVANT_LESSONS_INPUT
 
+# exit
+
 copycommonlessons
 
 # exit
@@ -3007,8 +3006,6 @@ copycommonlessons
 buildpathwayindependent
 
 # exit
-
-mkdir -p distribution/$NATLANG/.cached
 
 buildcommonlessons
 
