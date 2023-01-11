@@ -157,7 +157,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 @image{images/format.png}
 
-- **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
+- **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions B and C might be good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
 
 ---
 {layout="LaunchC"}
