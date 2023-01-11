@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2022-11-21 # last modified
+LASTMOD=2023-01-11 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2901,6 +2901,10 @@ function callonpathway() {
 
   if test -f $PATHWAYPROGLANGSFILE; then
     NUMPATHWAYPROGLANGS=$(wc -l $PATHWAYPROGLANGSFILE|$SED -e 's/^ *\([^ ]*\).*/\1/')
+    if test $NUMPATHWAYPROGLANGS -eq 0; then
+      # needed because file may lack final newline
+      NUMPATHWAYPROGLANGS=1
+    fi
   fi
 
   if test -f $PATHWAYPROGLANGSFILE; then
