@@ -18,7 +18,7 @@ td > .content > .paragraph {
 </style>
 ++++
 
-[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+[.FillVerticalSpace, cols="<.^1a,^.^15a,^.^4a",stripes="none", options="header"]
 |===
 | 	 | Which one doesn't belong?  |Explain
 
@@ -27,43 +27,37 @@ td > .content > .paragraph {
 @show{(coe '(+ 0 (+ 8 7)))}
 @show{(coe '(- (+ 8 7) 1))}
 @show{(coe '(/ (+ 7 8) 1))}
-|
+| @ifsoln{The 3rd Circle of Evaluation subtracts one, which results in a value of 14, rather than 15.}
 
 | @n
 | @show{(coe '(/ (* 12 7) 1))}
 @show{(coe '(/ 1 (* 12 7)))}
 @show{(coe '(* 1 (* 7 12)))}
 @show{(coe '(* 1 (* 12 7)))}
-|
+| @ifsoln{The 2nd Circle of Evaluation starts with 1 and divides it by 84, resulting in @math{/frac{1}{84}}, rather than 84.}
 
 | @n
 | @show{(coe '(+ (* (+ 3 2) 4) 0))}
 @show{(coe '(+ 0 (* 4 (+ 2 3))))}
 @show{(coe '(- 0 (* (+ 3 2) 4)))}
 @show{(coe '(- (* ( + 3 2) 4) 0))}
-|
+| @ifsoln{The 3rd Circle of Evaluation subtracts 20 from zero, resulting in -20, rather than 20.}
+
 
 | @n
 | @show{(coe '(* 45 (+ 1/2 1/2)))}
 @show{(coe '(* 45 0))}
 @show{(coe '(* (+ 1/2 1/2) 45))}
 @show{(coe '(+ 45 0))}
-|
+| @ifsoln{The 2nd Circle of Evaluation results in 0, rather than 45.}
 
-| @n
-| @show{(coe '(+ (- 5 (+ 2 3)) (/ 20 (+ 3 2))))}
-@show{(coe '(- (* 2 2) (- (+ 10 3) 13)))}
-@show{(coe '(+ (/ 2000 500) (- 30 (+ 20 10))))}
-@show{(coe '(+ (+ 3 1) (- 8 7.99)))}
-|
 
 | @n
 | @show{(coe '(* 1 (/ 50 10)))}
-@show{(coe '(/ (+ 0.75 (* 4 0.25)) (- 6.25 1.25)))}
-@show{(coe '(* 5 (- 23 (+ 19 4))))}
+@show{(coe '(* 5 (/ 23 23)))}
 @show{(coe '(* (* 1.25 4) (- 23 (+ 19 3))))}
-|
+@show{(coe '(* 5 (- 23 (+ 19 4))))}
+| @ifsoln{The 4th Circle of Evaluation results in 0, rather than 5.}
 
 
 |===
-
