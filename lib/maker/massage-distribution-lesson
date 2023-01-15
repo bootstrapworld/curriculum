@@ -1,0 +1,94 @@
+#!/bin/bash
+
+# created 2023-01-14
+# last modified 2023-01-15
+
+function adjustproglangsubdirs() {
+  local d=$1
+  local pl=$2
+
+  if test -d "$d"/"$pl"; then
+    cp -p "$d"/"$pl"/* "$d"
+  fi
+
+  local lang
+  for lang in codap pyret wescheme; do
+    if test -d "$d"/$lang; then
+      rm -fr "$d"/$lang
+    fi
+  done
+
+  local subdir
+  for subdir in "$d"/*; do
+    if test -d "$subdir"; then
+      adjustproglangsubdirs "$subdir" "$pl"
+    fi
+  done
+}
+
+d=$1
+
+d=${d%/.}
+
+lessonName=$(basename $d)
+
+cd $d
+
+mkdir -p .cached
+touch .cached/.proglang-pyret
+touch .cached/.redo
+
+test -d pages || mkdir pages
+
+for subdir in *; do
+  if test "$subdir" = pages -o "$subdir" = solution-pages; then
+    test -d "$subdir"/.cached || mkdir "$subdir"/.cached
+  fi
+done
+
+proglangs=pyret
+firstproglang=pyret
+
+if test -f proglang.txt; then
+  proglangs=$(cat proglang.txt)
+  firstproglang=$(echo $proglangs|sed -e 's/^\([^ ]\+\).*/\1/')
+fi
+
+if test "$firstproglang" = pyret; then
+  mkdir -p .cached
+  touch .cached/.primarylesson
+fi
+
+cd ..
+
+lessonNamePl=
+for pl in $proglangs; do
+  lessonNamePl="$lessonName"
+  if test "$pl" != pyret; then
+    lessonNamePl="$lessonName"-$pl
+    mkdir -p "$lessonNamePl"
+    cp -upr "$lessonName"/* "$lessonNamePl"
+    cd "$lessonNamePl"
+    mkdir -p .cached
+    touch .cached/.proglang-$pl
+    touch .cached/.redo
+    if test "$firstproglang" = $pl; then
+      touch .cached/.primarylesson
+    fi
+    test -d pages || mkdir pages
+    for subdir in *; do
+      if test "$subdir" = pages -o "$subdir" = solution-pages; then
+        test -d "$subdir"/.cached || mkdir "$subdir"/.cached
+      fi
+    done
+    cd ..
+  fi
+  cd "$lessonNamePl"
+  for subdir in *; do
+    if test -d "$subdir"; then
+      adjustproglangsubdirs "$subdir" "$pl"
+    fi
+  done
+  cd ..
+done
+
