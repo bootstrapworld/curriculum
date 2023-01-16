@@ -3,6 +3,8 @@
 
 asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
-all: build-workbook-pages
+all: build-workbook-pages build-lesson-plans
 
 include build-workbook-pages.mk
+
+include build-lesson-plans.mk

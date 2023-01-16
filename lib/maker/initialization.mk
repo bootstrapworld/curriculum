@@ -35,11 +35,13 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT)
 	@echo '(' > $(ADOCABLES_INPUT)
 
+#fixme: once logic is set, split above into actual rules to reduce re-doing
+
 node_modules/mathjax:
 	npm install
 
 distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
-	mkdir -p $@
-	cp -upr node_modules/mathjax/* $@
-	cp -p lib/mathjaxlocal.js $@/config/local
-	rm -fr $@/[CLRptu]*
+	@mkdir -p $@
+	@cp -upr node_modules/mathjax/* $@
+	@cp -p lib/mathjaxlocal.js $@/config/local
+	@rm -fr $@/[CLRptu]*

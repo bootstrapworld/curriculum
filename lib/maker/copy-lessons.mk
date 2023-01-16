@@ -14,10 +14,10 @@ copy-lessons: $(pyret-distribution-lessons)
 
 define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1
-	mkdir -p $$@
-	touch $$@
-	cp -upr $$</* $$@
-	$(MAKE_DIR)/massage-distribution-lesson $$@
+	@mkdir -p $$@
+	@touch $$@
+	@cp -upr $$</* $$@
+	@$(MAKE_DIR)/massage-distribution-lesson $$@
 
 endef
 
