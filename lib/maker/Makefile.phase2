@@ -1,10 +1,12 @@
 # created 2023-01-14
-# last modified 2023-01-15
+# last modified 2023-01-16
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
-all: copylessons pathwayindep
+asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
-include copylessons.mk
+all: copy-lessons build-pathway-independent
 
-include pathwayindep.mk
+include copy-lessons.mk
+
+include build-pathway-independent.mk

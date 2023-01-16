@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-01-15
+# last modified 2023-01-16
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -26,6 +26,22 @@ function adjustproglangsubdirs() {
   done
 }
 
+function shadowcopydir() {
+  local srcdir=$1
+  local tgtdir=$2
+  mkdir -p "$tgtdir"
+
+  local f
+  for f in "$srcdir"/*; do
+    local g=$(basename "$f")
+    if test -f "$f"; then
+      cp -p "$f" "$tgtdir"
+    elif test -d "$f"; then
+      shadowcopydir "$f" "$tgtdir"/"$g"
+    fi
+  done
+}
+
 d=$1
 
 d=${d%/.}
@@ -33,18 +49,6 @@ d=${d%/.}
 lessonName=$(basename $d)
 
 cd $d
-
-mkdir -p .cached
-touch .cached/.proglang-pyret
-touch .cached/.redo
-
-test -d pages || mkdir pages
-
-for subdir in *; do
-  if test "$subdir" = pages -o "$subdir" = solution-pages; then
-    test -d "$subdir"/.cached || mkdir "$subdir"/.cached
-  fi
-done
 
 proglangs=pyret
 firstproglang=pyret
@@ -54,10 +58,6 @@ if test -f proglang.txt; then
   firstproglang=$(echo $proglangs|sed -e 's/^\([^ ]\+\).*/\1/')
 fi
 
-if test "$firstproglang" = pyret; then
-  mkdir -p .cached
-  touch .cached/.primarylesson
-fi
 
 cd ..
 
@@ -68,27 +68,40 @@ for pl in $proglangs; do
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
     cp -upr "$lessonName"/* "$lessonNamePl"
-    cd "$lessonNamePl"
-    mkdir -p .cached
-    touch .cached/.proglang-$pl
-    touch .cached/.redo
-    if test "$firstproglang" = $pl; then
-      touch .cached/.primarylesson
-    fi
-    test -d pages || mkdir pages
-    for subdir in *; do
-      if test "$subdir" = pages -o "$subdir" = solution-pages; then
-        test -d "$subdir"/.cached || mkdir "$subdir"/.cached
-      fi
-    done
-    cd ..
   fi
+  #
   cd "$lessonNamePl"
+  mkdir -p .cached
+  touch .cached/.proglang-$pl
+  touch .cached/.redo
+  if test "$firstproglang" = $pl; then
+    touch .cached/.primarylesson
+  fi
+  if test ! -d pages; then
+    mkdir pages
+    touch pages/workbook-pages.txt
+  fi
+  test -d pages/.cached || mkdir -p pages/.cached
   for subdir in *; do
     if test -d "$subdir"; then
       adjustproglangsubdirs "$subdir" "$pl"
     fi
   done
+  #
+  if test -d solution-pages-2; then
+    # this shd be deadc0de
+    rm -fr solution-pages-2
+  fi
+  cp -pr pages solution-pages-2
+  cp -p $PROGDIR/.hta* solution-pages-2
+  if test -d solution-pages; then
+    shadowcopydir solution-pages solution-pages-2
+    rm -fr solution-pages
+  fi
+  mv solution-pages-2 solution-pages
+  test -d solution-pages/.cached || mkdir -p solution-pages/.cached
+  #
   cd ..
+  echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
 

@@ -1,0 +1,63 @@
+#!/bin/bash
+# created 2023-01-14
+# last modified 2023-01-16
+
+# echo doing do-adoc $@
+
+adocfile=$1
+
+containingdirectory=$(dirname $adocfile)
+
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution)/
+
+containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
+
+adocbasename=$(basename $adocfile)
+
+ascfile=$containingdirectory/.cached/${adocbasename%.adoc}.asc
+
+htmlfile=${ascfile%.asc}.html
+
+if test $CALLEDFROM = "build-pathway-independent"; then
+
+  echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\")" >>  $ADOCABLES_INPUT
+
+  echo $ascfile >> $ADOC_INPUT
+
+  echo $htmlfile >> $ADOC_POSTPROC_PWYINDEP_INPUT
+
+elif test $CALLEDFROM = "build-workbook-pages"; then
+
+  lesson=$(echo $containingdirectory|sed -e 's#lessons/\([^/]*\).*#\1#')
+
+  otherdirarg="#f"
+
+  if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+    otherdirarg="#t"
+  fi
+
+  solutionsmodearg="#f"
+
+  if $(echo $adocfile|grep -q '/solution-pages/'); then
+    solutionsmodearg="#t"
+  fi
+
+  proglangarg="pyret"
+
+  if $(echo $lesson|grep -q '\-wescheme$'); then
+    proglangarg=wescheme
+  elif $(echo $lesson|grep -q '\-codap$'); then
+    proglangarg=codap
+  elif $(echo $lesson|grep -q '\-none$'); then
+    proglangarg=none
+  elif $(echo $lesson|grep -q '\-spreadsheets$'); then
+    proglang=spreadsheets
+  fi
+
+  echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson \"$lesson\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
+
+  echo $ascfile >> $ADOC_INPUT
+
+  echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+
+fi
