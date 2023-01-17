@@ -13,8 +13,15 @@ when it prints out the glossary for a particular unit
 (define *glossary-list*
   '(
 
+
+    ((en-us ("absolute value") "the (positive) distance of a number from zero, annotated +|+ x +|+")
+     (es-mx (" ") " "))
+
     ((en-us ("accessor functions") "functions to extract values from a data structure")
      (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
+
+    ((en-us ("algebraic expression") "a mathematical sentence that consists of numbers, operators, and variables. The variables’ values are sometimes unknown. If we define variables, algebraic expressions can be simplified to a single numeric value.")
+     (es-mx (" ") " "))
 
     ((en-us ("apply") "use a given function on some inputs")
      (es-mx ("aplicar" "applicado" "applicada") "dar argumentos a una función"))
@@ -22,14 +29,23 @@ when it prints out the glossary for a particular unit
     ((en-us ("argument") "the inputs to a function; the expressions for each argument follow the function name")
      (es-mx ("argumento") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
 
+    ((en-us ("arithmetic expression") "a mathematical sentence that consists of numbers and operators, which does not have an equal sign. When we apply the laws of arithmetic, arithmetic expressions can be simplified to a single numeric value.")
+     (es-mx (" ") " "))
+
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
+
+    ((en-us ("Associative Property") "for expressions involving only multiplication or only addition, all possible groupings produce the same result.")
+     (es-mx (" ") " "))
 
     ((en-us ("axis" "axes") "A reference line, used to determine the position of a coordinate")
      (es-mx ("eje") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
 
     ((en-us ("bar chart") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
+
+    ((en-us ("base") "In expressions like 9^3^ and 7^2^, the 9 and 7 are called bases. They are the factors being multiplied the number of times indicated by the exponent.")
+     (es-mx (" ") " "))
 
     ((en-us ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair.")
      (es-mx ("sesgo") "un peso desproporcionado a favor o en contra de una cosa, persona o grupo en comparación con otra, generalmente de una manera que se considera injusta."))
@@ -54,12 +70,12 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("circle of evaluation" "circles of evaluation") "a 'sentence diagram' of the structure of a mathematical expression")
      (es-mx ("círculo de evaluación") "un diagrama de la estructura de una expresión matemática"))
-
-    ((en-us ("clause") "a question and its corresponding answer in a conditional expression")
-     (es-mx ("cláusula") "una pregunta y su correspondiente respuesta en una expresión condicional"))
     
     ((en-us ("chart") "visual reprsentations of how values in a dataset are distributed")
      (es-mx ("gráfico") "Representacion visual de la distribución de valores en un conjunto de datos."))
+
+    ((en-us ("clause") "a question and its corresponding answer in a conditional expression")
+     (es-mx ("cláusula") "una pregunta y su correspondiente respuesta en una expresión condicional"))
 
     ((en-us ("column") "set of values in a table of a particular type.  Every row has exactly 1 element in every column")
      (es-mx ("columna") "conjunto particular de valores en una tabla. Cada fila tiene exactamente 1 elemento en cada columna."))
@@ -69,6 +85,9 @@ when it prints out the glossary for a particular unit
 
     ((en-us ("comments" "comment") "messages in the code, generally ignored by the computer, to help people interacting with the code understand what it is doing")
      (es-mx ("comentarios de código") "anotaciones en el código que facilitan nuestra comprensión de lo que el código intenta hacer; la computadora no los lee"))
+
+    ((en-us ("Commutative Property") "For any expression involving only addition or only multiplication, changing the order of the numbers will not change the result.")
+     (es-mx (" ") " "))
 
     ((en-us ("compound inequality" "compound inequalities") "an inequality that combines two simple inequalities using _and_ or _or_")
      (es-mx ("desigualdad compuesta") "una desigualdad que combina dos desigualdades simples con _o_ o _y_"))
@@ -142,6 +161,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("distribution") "a description of the number of times or relative probabilities that different quantities occur in a sample")
      (es-mx ("distribución") "una descripción del número de veces o probabilidades relativas de que diferentes cantidades ocurran en una muestra"))
 
+    ((en-us ("Distributive Property") "Multiplying the sum of two addends by a number produces the same result as multiplying each addend by that number and then adding the products.")
+     (es-mx ("") ""))
+
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
 
@@ -160,8 +182,11 @@ when it prints out the glossary for a particular unit
     ((en-us ("entry") "a single value in a table, belonging to a particular row and column")
      (es-mx ("dato") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
-    ((en-us ("equation") "a mathematical description of the relationship between two variables or quantities, in which they are equal")
-     (es-mx ("ecuación") "una descripción matemática de la relación entre dos variables o cantidades"))
+    ((en-us ("equation") "a statement that two expressions are equal")
+     (es-mx ("ecuación") ""))
+
+    ((en-us ("equivalent") "expressions are equivalent when they simplify to the same value, no matter what value is assigned to any variables")
+     (es-mx ("") ""))
 
     ((en-us ("error message") "information from the computer about errors in code")
      (es-mx ("mensaje de error" "mensajes de error") "información que provee la computadora sobre errores en el Código"))
@@ -183,6 +208,9 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("explanatory variable" "explanatory") "any variable that could impact the \"response variable\", generally plotted on the x-axis of a scatter plot")
      (es-mx ("variable explicativa") "cualquier factor que pueda influir en la variable de respuesta, generalmente representada en el eje x de un diagrama de dispersión."))
+
+    ((en-us ("exponent") "In expressions like 9^3^ and 7^2^, the 3 and the 2 are called exponents. They tell you how many times to multiply the base times itself. For example, 9^3^ = 9 * 9 * 9 and 7^2^ = 7 * 7.")
+     (es-mx ("") ""))
 
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
      (es-mx ("expresión") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
@@ -244,6 +272,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("identifier column") "a column of unique values which identify all the individual rows (e.g. - student IDs, SSNs, etc)")
      (es-mx ("columna de identificador") "una columna de valores únicos, que identifican todas las filas (por ejemplo - número de passaporte, número de estudiante, etc.)"))
     
+    ((en-us ("Identity Property") "Multiplying or dividing an expression by 1 produces an equivalent result; adding or subtracting 0 produces an equivalent result,")
+     (es-mx ("") ""))
+    
     ((en-us ("image") "a type of data for pictures")
      (es-mx ("imagen") "un tipo de datos para representaciones visuales"))
     
@@ -285,10 +316,7 @@ when it prints out the glossary for a particular unit
     
     ((en-us ("logic error") "errors in the way a programmer is thinking about a problem")
      (es-mx ("errores de logica") "errores en la forma en que un programador está pensando en un problema"))
-
-    ((en-us ("mathematical expression") "a computation using the rules of arithmetic")
-     (es-mx ("expresión matemática") "un cálculo realizado usando las reglas de la aritmética"))
-    
+  
     ((en-us ("maximum") "the largest value in a dataset")
      (es-mx ("máximo") "el mayor valor dentro de un grupo de números"))
 
@@ -331,6 +359,9 @@ when it prints out the glossary for a particular unit
     ((en-us ("operator") "a symbol that manipulates two Numbers and produces a result")
      (es-mx ("operador") "un símbolo que manipula dos números y produce un resultado"))
     
+    ((en-us ("opposite") "Two numbers are opposites when they are the same distance from zero on the number line.")
+     (es-mx ("") ""))
+
     ((en-us ("order") "an arrangement of data according to some pattern")
      (es-mx ("orden") "una disposición de datos de acuerdo con algún patrón"))
 
