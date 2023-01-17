@@ -119,7 +119,7 @@ Boolean-producing expressions are yes-or-no questions and will always evaluate t
 
 For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
 
-@image{images/roller-coaster.png}
+@image{images/at-least-this-tall-to-ride.jpeg}
 
 --- 
 {layout="LaunchR"}
