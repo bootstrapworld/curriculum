@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2023-01-14 # last modified
+LASTMOD=2023-01-17 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2959,7 +2959,7 @@ function callonARGS() {
     if test -z "$PROGLANG"; then
       local firstproglang=pyret
       local proglangFile=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG/proglang.txt
-      if test -f $lessonOrderFile; then
+      if test -f $proglangFile; then
         local proglangs=$(cat $proglangFile)
         firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
       fi
