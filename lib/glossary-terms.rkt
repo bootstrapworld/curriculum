@@ -15,13 +15,13 @@ when it prints out the glossary for a particular unit
 
 
     ((en-us ("absolute value") "the (positive) distance of a number from zero, annotated +|+ x +|+")
-     (es-mx (" ") " "))
+     (es-mx ("valor absoluto" "modulo de un numero") "la distancia (positiva) de un número al cero, anotada +|+ x +|+"))
 
     ((en-us ("accessor functions") "functions to extract values from a data structure")
      (es-mx ("funciones de acceso") "funciones para extraer valores de una estructura de datos"))
 
-    ((en-us ("algebraic expression") "a mathematical sentence that consists of numbers, operators, and variables. The variables’ values are sometimes unknown. If we define variables, algebraic expressions can be simplified to a single numeric value.")
-     (es-mx (" ") " "))
+    ((en-us ("algebraic expression") "a mathematical expression that consists of numbers, operators, and variables. The variables’ values are sometimes unknown. If we define variables, algebraic expressions can be simplified to a single numeric value.")
+     (es-mx ("expresión algebraica") "una expresión matemática que consta de números, operadores y variables. Los valores de las variables a veces son desconocidos. Si definimos variables, las expresiones algebraicas se pueden simplificar a un solo valor numérico."))
 
     ((en-us ("apply") "use a given function on some inputs")
      (es-mx ("aplicar" "applicado" "applicada") "dar argumentos a una función"))
@@ -29,14 +29,14 @@ when it prints out the glossary for a particular unit
     ((en-us ("argument") "the inputs to a function; the expressions for each argument follow the function name")
      (es-mx ("argumento") "los valores que se le dan a una función; las expresiones para los valores de cada argumento siguen el nombre de la función"))
 
-    ((en-us ("arithmetic expression") "a mathematical sentence that consists of numbers and operators, which does not have an equal sign. When we apply the laws of arithmetic, arithmetic expressions can be simplified to a single numeric value.")
-     (es-mx (" ") " "))
+    ((en-us ("arithmetic expression") "a mathematical expression that consists of numbers and operators, which does not have an equal sign. When we apply the laws of arithmetic, arithmetic expressions can be simplified to a single numeric value.")
+     (es-mx ("expresión aritmética") "una expresión matemática que consta de números y operadores, que no tiene un signo de igual. Cuando aplicamos las leyes de la aritmética, las expresiones aritméticas se pueden simplificar a un solo valor numérico."))
 
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
 
     ((en-us ("Associative Property") "for expressions involving only multiplication or only addition, all possible groupings produce the same result.")
-     (es-mx (" ") " "))
+     (es-mx ("Asociatividad" "La propiedad asociativa") "Para expresiones que usan solo suma o solo multiplicación, el resultado no depende de la manera en la que se agrupan los términos.))
 
     ((en-us ("axis" "axes") "A reference line, used to determine the position of a coordinate")
      (es-mx ("eje") "Una línea de referencia, que se utiliza para determinar la posición de una coordenada."))
@@ -44,8 +44,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("bar chart") "a display of categorical data that uses bars positioned over category values; each bar’s height reflects the count or percentage of data values in that category")
      (es-mx ("gráfico de barras") "una visualización de datos categóricos que utiliza barras colocadas sobre los valores de una categoría; la altura de cada barra refleja el número o el porcentaje de los valores en esa categoría"))
 
-    ((en-us ("base") "In expressions like 9^3^ and 7^2^, the 9 and 7 are called bases. They are the factors being multiplied the number of times indicated by the exponent.")
-     (es-mx (" ") " "))
+    ((en-us ("base") "In expressions like 9^3^ and 7^2^, the 9 and 7 are called bases. They are the factors that will be multiplied by themselves the number of times indicated by the exponent.")
+     (es-mx ("base") "En expresiones como 9^3^ y 7^2^, el 9 y el 7 se llaman bases. Son los factores que se multiplicarán por sí mismos el número de veces indicado por el exponente"))
 
     ((en-us ("bias") "prejudice in favor of or against one outcome, person, or group compared with another, usually in a way considered to be unfair.")
      (es-mx ("sesgo") "un peso desproporcionado a favor o en contra de una cosa, persona o grupo en comparación con otra, generalmente de una manera que se considera injusta."))
@@ -87,7 +87,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("comentarios de código") "anotaciones en el código que facilitan nuestra comprensión de lo que el código intenta hacer; la computadora no los lee"))
 
     ((en-us ("Commutative Property") "For any expression involving only addition or only multiplication, changing the order of the numbers will not change the result.")
-     (es-mx (" ") " "))
+     (es-mx ("Conmutatividad" "propiedad conmutativa") "Para cualquier expresión que involucre solo suma o solo multiplicación, cambiar el orden de los números no cambiará el resultado"))
 
     ((en-us ("compound inequality" "compound inequalities") "an inequality that combines two simple inequalities using _and_ or _or_")
      (es-mx ("desigualdad compuesta") "una desigualdad que combina dos desigualdades simples con _o_ o _y_"))
@@ -186,7 +186,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("ecuación") ""))
 
     ((en-us ("equivalent") "expressions are equivalent when they simplify to the same value, no matter what value is assigned to any variables")
-     (es-mx ("") ""))
+     (es-mx ("equivalente") "las expresiones son equivalentes cuando se simplifican al mismo valor, sin importar qué valor se asigne a las variables"))
 
     ((en-us ("error message") "information from the computer about errors in code")
      (es-mx ("mensaje de error" "mensajes de error") "información que provee la computadora sobre errores en el Código"))
@@ -210,7 +210,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("variable explicativa") "cualquier factor que pueda influir en la variable de respuesta, generalmente representada en el eje x de un diagrama de dispersión."))
 
     ((en-us ("exponent") "In expressions like 9^3^ and 7^2^, the 3 and the 2 are called exponents. They tell you how many times to multiply the base times itself. For example, 9^3^ = 9 × 9 × 9 and 7^2^ = 7 × 7.")
-     (es-mx ("") ""))
+     (es-mx ("exponente" "potencia") "En expresiones como 9^3^ y 7^2^, el 3 y el 2 se llaman exponentes. Ellos indican cuántas veces debemos multiplicar la base por sí misma. Por ejemplo, 9^3^ = 9 × 9 × 9 y 7^2^ = 7 × 7")."))
 
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
      (es-mx ("expresión") "un cálculo escrito en las reglas de algún lenguaje (como aritmética, código o un Círculo de Evaluación)"))
