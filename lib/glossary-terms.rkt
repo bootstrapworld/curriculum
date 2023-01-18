@@ -162,7 +162,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("distribución") "una descripción del número de veces o probabilidades relativas de que diferentes cantidades ocurran en una muestra"))
 
     ((en-us ("Distributive Property") "Multiplying the sum of two addends by a number produces the same result as multiplying each addend by that number and then adding the products.")
-     (es-mx ("") ""))
+     (es-mx ("distributividad" "Propiedad distributiva") ""))
 
     ((en-us ("domain") "the type or set of inputs that a function expects")
      (es-mx ("dominio") "el tipo de input que requiere una función"))
@@ -183,7 +183,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("dato") "un solo valor en una tabla, que pertenece a una fila y columna en particular"))
 
     ((en-us ("equation") "a statement that two expressions are equal")
-     (es-mx ("ecuación") ""))
+     (es-mx ("ecuación") "una afirmación de que dos expresiones son iguales"))
 
     ((en-us ("equivalent") "expressions are equivalent when they simplify to the same value, no matter what value is assigned to their variables (if there are any)")
      (es-mx ("equivalente") "las expresiones son equivalentes cuando se simplifican al mismo valor, sin importar el valor que se asigne a sus variables (si las hay)"))
