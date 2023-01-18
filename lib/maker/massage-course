@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# created 2023-01-16
+# last modified 2023-01-17
+
+# echo
+# echo doing massage-course $1
+
+# exit
+
+d=$1
+
+d=${d%/.}
+
+pathwayName=$(basename $d)
+
+cd $d/..
+
+proglangs=pyret
+firstproglang=pyret
+numpathwayproglangs=1
+
+if test -f $pathwayName/proglang.txt; then
+  numpathwayproglangs=$(wc -l $pathwayName/proglang.txt|sed -e 's/^ *\([^ ]*\).*/\1/')
+  proglangs=$(cat $pathwayName/proglang.txt)
+  firstproglang=$(echo $proglangs|sed -e 's/^\([^ ]\+\).*/\1/')
+  if test $numpathwayproglangs -eq 0; then
+    numpathwayproglangs=1
+  fi
+fi
+
+# echo numpathwayproglangs is $numpathwayproglangs
+
+if test $numpathwayproglangs -eq 1; then
+  # echo single-pl pathway $d
+  mkdir -p $pathwayName/.cached
+  touch $pathwayName/.cached/.proglang-$firstproglang
+else
+  for pl in $proglangs; do
+    # echo doing pathway $d for $pl
+    if test "$pl" = pyret; then
+      targetpathway=$pathwayName
+    else
+      targetpathway=$pathwayName-$pl
+      mkdir -p $targetpathway
+      cp -upr $pathwayName/* $targetpathway
+    fi
+    mkdir -p $targetpathway/.cached
+    touch $targetpathway/.cached/.proglang-$pl
+  done
+fi
