@@ -185,8 +185,8 @@ when it prints out the glossary for a particular unit
     ((en-us ("equation") "a statement that two expressions are equal")
      (es-mx ("ecuación") ""))
 
-    ((en-us ("equivalent") "expressions are equivalent when they simplify to the same value, no matter what value is assigned to any variables")
-     (es-mx ("equivalente") "las expresiones son equivalentes cuando se simplifican al mismo valor, sin importar qué valor se asigne a las variables"))
+    ((en-us ("equivalent") "expressions are equivalent when they simplify to the same value, no matter what value is assigned to their variables (if there are any)")
+     (es-mx ("equivalente") "las expresiones son equivalentes cuando se simplifican al mismo valor, sin importar el valor que se asigne a sus variables (si las hay)"))
 
     ((en-us ("error message") "information from the computer about errors in code")
      (es-mx ("mensaje de error" "mensajes de error") "información que provee la computadora sobre errores en el Código"))
