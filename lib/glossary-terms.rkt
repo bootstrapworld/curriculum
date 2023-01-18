@@ -209,7 +209,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("explanatory variable" "explanatory") "any variable that could impact the \"response variable\", generally plotted on the x-axis of a scatter plot")
      (es-mx ("variable explicativa") "cualquier factor que pueda influir en la variable de respuesta, generalmente representada en el eje x de un diagrama de dispersión."))
 
-    ((en-us ("exponent") "In expressions like 9^3^ and 7^2^, the 3 and the 2 are called exponents. They tell you how many times to multiply the base times itself. For example, 9^3^ = 9 * 9 * 9 and 7^2^ = 7 * 7.")
+    ((en-us ("exponent") "In expressions like 9^3^ and 7^2^, the 3 and the 2 are called exponents. They tell you how many times to multiply the base times itself. For example, 9^3^ = 9 × 9 × 9 and 7^2^ = 7 × 7.")
      (es-mx ("") ""))
 
     ((en-us ("expression") "a computation written in the rules of some language (such as arithmetic, code, or a Circle of Evaluation)")
