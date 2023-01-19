@@ -272,7 +272,7 @@ when it prints out the glossary for a particular unit
      (es-mx ("columna de identificador") "una columna de valores únicos, que identifican todas las filas (por ejemplo - número de passaporte, número de estudiante, etc.)"))
     
     ((en-us ("Identity Property") "Multiplying or dividing an expression by 1 does not change its value; similarly, adding or subtracting 0 results in the original value.")
-     (es-mx ("identidad" "Propiedad de identidad") ""Multiplicar o dividir una expresión por 1 no cambia su valor; de manera similar, sumar o restar 0 da como resultado el mismo valor."))
+     (es-mx ("identidad" "Propiedad de identidad") "Multiplicar o dividir una expresión por 1 no cambia su valor; de manera similar, sumar o restar 0 da como resultado el mismo valor."))
     
     ((en-us ("image") "a type of data for pictures")
      (es-mx ("imagen") "un tipo de datos para representaciones visuales"))
