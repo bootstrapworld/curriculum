@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-18
+# last modified 2023-01-19
 
 # echo doing do-workbook-page-adoc $@
 
@@ -11,9 +11,9 @@ adocfile=$1
 # containingdirectory is the directory housing the adocfile, rel to topdir
 containingdirectory=$(dirname $adocfile)
 
-distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
+test -d $containingdirectory/.cached || mkdir -p $containingdirectory/.cached
 
-# fixme: seems to be obiwan for pathway files
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
 # update containingdirectory to be rel to distribution/en-us
 containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)

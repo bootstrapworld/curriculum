@@ -96,7 +96,7 @@
                 (eval x *adoc-namespace*)
                 (loop)))))))))
 
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;FIXME
+(define *pathway-root-dir* (or (getenv "PATHWAYROOTDIR") "")) ;FIXME
 
 ;(define *dist-root-dir* (getenv "DISTROOTDIR"))
 

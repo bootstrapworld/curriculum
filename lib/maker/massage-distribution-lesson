@@ -1,18 +1,21 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-01-17
+# last modified 2023-01-19
+
+CP=cp
+SED=sed
 
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
 
   if test -d "$d"/"$pl"; then
-    cp -p "$d"/"$pl"/* "$d"
+    $CP -p "$d"/"$pl"/* "$d"
   fi
 
   local lang
-  for lang in codap pyret wescheme; do
+  for lang in codap pyret wescheme spreadsheets none; do
     if test -d "$d"/$lang; then
       rm -fr "$d"/$lang
     fi
@@ -35,7 +38,7 @@ function shadowcopydir() {
   for f in "$srcdir"/*; do
     local g=$(basename "$f")
     if test -f "$f"; then
-      cp -p "$f" "$tgtdir"
+      $CP -p "$f" "$tgtdir"
     elif test -d "$f"; then
       shadowcopydir "$f" "$tgtdir"/"$g"
     fi
@@ -81,9 +84,56 @@ for pl in $proglangs; do
   fi
   if test ! -d pages; then
     mkdir pages
+  fi
+  if test ! -f pages/workbook-pages.txt; then
     touch pages/workbook-pages.txt
   fi
   test -d pages/.cached || mkdir -p pages/.cached
+
+  #ensure workbook-pages.txt ends in newline, or while isn't happy
+  $SED -i -e '$a\' pages/workbook-pages.txt
+
+  rm -f pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
+
+  # it should exist, even if empty
+  touch pages/.cached/.workbook-pages-ls.txt.kp
+
+  while read -r f; do
+    # echo finding aspect of "$f"
+    aspect=portrait
+    g=$f
+    if echo "$f"|grep -q '^ *;'; then
+      :
+    elif echo "$f"|grep -q '^ *//'; then
+      :
+    elif echo "$f"|grep -q landscape; then
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
+      g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
+      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
+      aspect=landscape
+    elif echo "$f"|grep -q portrait; then
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
+      g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
+      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
+    elif test "${f%.adoc}" = "$f"; then
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
+      echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
+    else
+      if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
+        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
+        aspect=landscape
+      elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
+        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
+        aspect=landscape
+      else
+        echo $f >> pages/.cached/.workbook-pages.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
+      fi
+    fi
+  done < pages/workbook-pages.txt
+
   for subdir in *; do
     if test -d "$subdir"; then
       adjustproglangsubdirs "$subdir" "$pl"

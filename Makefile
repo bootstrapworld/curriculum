@@ -1,7 +1,11 @@
 # created 2023-01-15
-# last modified 2023-01-17
+# last modified 2023-01-19
 
 export NATLANG ?= en-us
+
+# these shd be in a separate file, and possibly deduced
+export SEMESTER = fall
+export YEAR = 2022
 
 export TOPDIR := $(realpath .)
 
@@ -28,3 +32,4 @@ all:
 	$(MAKE) --no-print-directory -I $(MAKE_DIR) -f lib/maker/Makefile.phase2
 	$(MAKE) --no-print-directory -I $(MAKE_DIR) -f lib/maker/Makefile.phase3
 	$(MAKE) --no-print-directory -I $(MAKE_DIR) -f lib/maker/Makefile.phase4
+	$(MAKE) --no-print-directory -I $(MAKE_DIR) -f lib/maker/Makefile.phase5

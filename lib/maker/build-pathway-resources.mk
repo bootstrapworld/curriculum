@@ -15,7 +15,7 @@ build-pathway-resources: $(resource-asc-files)
 define make-build-resource-rule
 $(call asc-file,$1): $1
 	@# @echo build-resources: creating $$@ from $$<
-	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG)  \
+	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) \
 	       ADOCABLES_INPUT=$(ADOCABLES_INPUT) \
 	       ADOC_INPUT=$(ADOC_INPUT) \
 	       ADOC_POSTPROC_RESOURCES_INPUT=$(ADOC_POSTPROC_RESOURCES_INPUT) \
