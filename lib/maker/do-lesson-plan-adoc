@@ -1,0 +1,68 @@
+#!/bin/bash
+# created 2023-01-14
+# last modified 2023-01-18
+
+# echo doing do-adoc $@
+
+# adocfile is the relative pathname from the git repo top dir.
+# Thus, it always starts with distribution/...
+adocfile=$1
+
+# containingdirectory is the directory housing the adocfile, rel to topdir
+containingdirectory=$(dirname $adocfile)
+
+# distrootdir is the rel pathname of distribution rel to containingdirectory.
+# It is a sequence of ../
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
+
+# fixme: seems to be obiwan for pathway files
+
+# update containingdirectory to be rel to distribution/en-us
+containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
+
+adocbasename=$(basename $adocfile)
+
+ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
+
+htmlfile=${ascfile%.asc}.html
+
+otherdirarg="#f"
+
+if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+  otherdirarg="#t"
+fi
+
+solutionsmodearg="#f"
+
+if $(echo $adocfile|grep -q '/solution-pages/'); then
+  solutionsmodearg="#t"
+fi
+
+lesson=$(echo $containingdirectory|sed -e 's#lessons/\([^/]*\).*#\1#')
+
+proglangarg="pyret"
+
+if $(echo $lesson|grep -q '\-codap$'); then proglangarg=codap
+elif $(echo $lesson|grep -q '\-none$'); then proglangarg=none
+elif $(echo $lesson|grep -q '\-spreadsheets$'); then proglangarg=spreadsheets
+elif $(echo $lesson|grep -q '\-spreadsheets$'); then proglangarg=spreadsheets
+elif $(echo $lesson|grep -q '\-wescheme$'); then proglangarg=wescheme
+fi
+
+otherproglangs="#f"
+
+proglangfile=${adocfile%/*}/proglang.txt
+
+if test -f "$proglangfile"; then
+  if grep -q codap $proglangfile; then otherproglangs="$otherproglangs \"codap\""; fi
+  if grep -q none $proglangfile; then otherproglangs="$otherproglangs \"none\""; fi
+  if grep -q pyret $proglangfile; then otherproglangs="$otherproglangs \"pyret\""; fi
+  if grep -q spreadsheets $proglangfile; then otherproglangs="$otherproglangs \"spreadsheets\""; fi
+  if grep -q wescheme $proglangfile; then otherproglangs="$otherproglangs \"wescheme\""; fi
+fi
+
+echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
+
+echo $ascfile >> $ADOC_INPUT
+
+echo $htmlfile >> $ADOC_POSTPROC_LESSONPLAN_INPUT

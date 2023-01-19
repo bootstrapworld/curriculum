@@ -1,5 +1,5 @@
 # created 2023-01-16
-# last modified 2023-01-16
+# last modified 2023-01-18
 
 # asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
@@ -23,11 +23,11 @@ build-workbook-pages: $(relevant-asc-files)
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
 	@# @echo build-workbook-pages: creating $$@ from $$<
-	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) CALLEDFROM=build-workbook-pages \
+	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG)  \
 	       ADOCABLES_INPUT=$(ADOCABLES_INPUT) \
 	       ADOC_INPUT=$(ADOC_INPUT) \
 	       ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$(ADOC_POSTPROC_WORKBOOKPAGE_INPUT) \
-	       $(MAKE_DIR)/do-adoc $$<
+	       $(MAKE_DIR)/do-workbook-page-adoc $$<
 
 endef
 

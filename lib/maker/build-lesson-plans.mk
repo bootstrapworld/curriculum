@@ -1,5 +1,5 @@
 # created 2023-01-16
-# last modified 2023-01-16
+# last modified 2023-01-18
 
 lesson-plan-adoc-files := $(foreach \
 	lesson,$(relevant-lessons),$(lesson)/index.adoc)
@@ -15,11 +15,11 @@ build-lesson-plans: $(lesson-plan-asc-files)
 
 define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
-	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) CALLEDFROM=build-lesson-plans \
+	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) \
 	       ADOCABLES_INPUT=$(ADOCABLES_INPUT) \
 	       ADOC_INPUT=$(ADOC_INPUT) \
 	       ADOC_POSTPROC_LESSONPLAN_INPUT=$(ADOC_POSTPROC_LESSONPLAN_INPUT) \
-	       $(MAKE_DIR)/do-adoc $$<
+	       $(MAKE_DIR)/do-lesson-plan-adoc $$<
 
 endef
 

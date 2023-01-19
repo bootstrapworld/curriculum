@@ -1,5 +1,5 @@
 # created 2023-01-17
-# last modified 2023-01-17
+# last modified 2023-01-18
 
 narrative-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/index.adoc)
 
@@ -11,11 +11,11 @@ build-pathway-narratives: $(narrative-asc-files)
 define make-build-narrative-rule
 $(call asc-file,$1): $1
 	@# @echo build-narratives: creating $$@ from $$<
-	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) CALLEDFROM=build-pathway-narratives \
+	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) \
 	       ADOCABLES_INPUT=$(ADOCABLES_INPUT) \
 	       ADOC_INPUT=$(ADOC_INPUT) \
 	       ADOC_POSTPROC_NARRATIVE_INPUT=$(ADOC_POSTPROC_NARRATIVE_INPUT) \
-	       $(MAKE_DIR)/do-adoc $$<
+	       $(MAKE_DIR)/do-pathway-narrative-adoc $$<
 
 endef
 

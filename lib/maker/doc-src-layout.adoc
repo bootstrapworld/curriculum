@@ -1,18 +1,3 @@
-= The build spec
-
-This document will describe 
-
-- the document source setup 
-  - pathways
-  - lessons
-  - multiple natlangs
-  - multiple proglangs
-- the build process (TBD)
-  - conversion to HTML
-  - postprocessing necessities
-  - conversion to PDF 
-  - assembling the workbooks
-
 == The document source setup
 
 Our documentation sources are divided into pathways and lessons,
@@ -71,6 +56,19 @@ course's root directory.
 In the following, we will assume the prevailiing natural language is
 `en-us`. For other natlangs, the setup is exactly the same but in
 the appropriate natlang-based subtree.
+
+=== Pathway narratives
+
+The pathway root directory has a file `index.adoc`, which
+specifies the
+_pathway narrative_.  This gets converted to `index.shtml` in the
+course root directory. The pathway root also has a `resources/`
+subdirectory that houses additional documentation that is
+specific to teachers. The pathway root may also contain subdirs
+for `front-matter`, `back-matter`, and `images`: the former two
+add flanking matter to the final workbook for the pathway's
+course, while `images` is a convenient location for image
+subfiles.
 
 === Proglang associated with a pathway
 
@@ -170,20 +168,8 @@ the built `distribution`, the course `core` (Pyret) includes the lesson
 `simple-data-types` (Pyret), and the course `core-wescheme`
 includes the lesson `simple-data-types-wescheme`.
 
-=== Pathway narratives
 
-The pathway root directory has a file `index.adoc`, which
-specifies the
-_pathway narrative_.  This gets converted to `index.shtml` in the
-course root directory. The pathway root also has a `resources/`
-subdirectory that houses additional documentation that is
-specific to teachers. The pathway root may also contain subdirs
-for `front-matter`, `back-matter`, and `images`: the former two
-add flanking matter to the final workbook for the pathway's
-course, while `images` is a convenient location for image
-subfiles.
-
-=== Lesson plans
+==== Lesson plans
 
 The lesson counterpart to the pathway narrative is the `lesson
 plan`, given as an `index.adoc` file in the lesson root
@@ -191,7 +177,7 @@ directory. This gets converted to `index.shtml` in the
 distribution lesson root. Here too, an `images/` subdir is used
 for image subfiles.
 
-=== Lesson workbook pages
+==== Lesson workbook pages
 
 A lesson typically contains a `pages/` subdir, which consist of
 AsciiDoc sources for the pages in that lesson. The `pages/`
@@ -203,7 +189,7 @@ A lesson may also contain other subdirs, even within its
 `pages/`. These may contain files meant for inclusion in the main
 pages files. 
 
-== Adding proglang-specific source
+==== Adding proglang-specific source
 
 We've seen that both pathways and lessons may have `proglang.txt`
 identifying multiple proglangs as vehicles for that
@@ -221,7 +207,7 @@ main files. Thus for a file `pages/abc.adoc`, the file
 provide shadowing files for all relevant proglangs, the main file
 doesn't need to exist.
 
-=== Solution-mode pages
+==== Solution-mode pages
 
 The `pages/` subdir in a lesson contributes to the student
 version of the final workbook. However, we also have solutions

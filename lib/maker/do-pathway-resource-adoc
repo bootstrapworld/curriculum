@@ -1,0 +1,57 @@
+#!/bin/bash
+# created 2023-01-14
+# last modified 2023-01-18
+
+# echo doing do-pathway-resource-adoc $@
+
+# adocfile is the relative pathname from the git repo top dir.
+# Thus, it always starts with distribution/...
+adocfile=$1
+
+# containingdirectory is the directory housing the adocfile, rel to topdir
+containingdirectory=$(dirname $adocfile)
+
+# distrootdir is the rel pathname of distribution rel to containingdirectory.
+# It is a sequence of ../
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
+
+# fixme: seems to be obiwan for pathway files
+
+# update containingdirectory to be rel to distribution/en-us
+containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
+
+adocbasename=$(basename $adocfile)
+
+ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
+
+htmlfile=${ascfile%.asc}.html
+
+otherdirarg="#f"
+
+if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+  otherdirarg="#t"
+fi
+
+solutionsmodearg="#f"
+
+if $(echo $adocfile|grep -q '/solution-pages/'); then
+  solutionsmodearg="#t"
+fi
+
+targetpathway=$(echo $containingdirectory|sed -e 's#courses/\([^/]*\).*#\1#')
+
+# proglangarg=pyret
+if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap
+elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-none; then proglangarg=none
+elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-spreadsheets; then proglangarg=spreadsheets
+elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-wescheme; then proglangarg=wescheme
+elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-pyret; then proglangarg=pyret
+fi
+
+# echo proglangarg is $proglangarg
+
+echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:other-dir $otherdirarg #:target-pathway \"$targetpathway\" #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
+
+echo $ascfile >> $ADOC_INPUT
+
+echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
