@@ -1,49 +1,12 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-01-19
+# last modified 2023-01-20
 
 CP=cp
 SED=sed
 
-function adjustproglangsubdirs() {
-  local d=$1
-  local pl=$2
-
-  if test -d "$d"/"$pl"; then
-    $CP -p "$d"/"$pl"/* "$d"
-  fi
-
-  local lang
-  for lang in codap pyret wescheme spreadsheets none; do
-    if test -d "$d"/$lang; then
-      rm -fr "$d"/$lang
-    fi
-  done
-
-  local subdir
-  for subdir in "$d"/*; do
-    if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir" "$pl"
-    fi
-  done
-}
-
-function shadowcopydir() {
-  local srcdir=$1
-  local tgtdir=$2
-  mkdir -p "$tgtdir"
-
-  local f
-  for f in "$srcdir"/*; do
-    local g=$(basename "$f")
-    if test -f "$f"; then
-      $CP -p "$f" "$tgtdir"
-    elif test -d "$f"; then
-      shadowcopydir "$f" "$tgtdir"/"$g"
-    fi
-  done
-}
+source ${MAKE_DIR}src-subdir-mgt.sh
 
 # echo
 # echo doing massage-distribution-lesson $1
@@ -140,19 +103,7 @@ for pl in $proglangs; do
     fi
   done
   #
-  if test -d solution-pages-2; then
-    # this shd be deadc0de
-    rm -fr solution-pages-2
-  fi
-  cp -pr pages solution-pages-2
-  cp -p $PROGDIR/.hta* solution-pages-2
-  if test -d solution-pages; then
-    shadowcopydir solution-pages solution-pages-2
-    rm -fr solution-pages
-  fi
-  mv solution-pages-2 solution-pages
-  test -d solution-pages/.cached || mkdir -p solution-pages/.cached
-  #
+  make_solution_pages .
   cd ..
   echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done

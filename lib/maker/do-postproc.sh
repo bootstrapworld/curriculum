@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-01-19
+# last modified 2023-01-20
 
 cd $TOPDIR/distribution/$NATLANG
 
@@ -8,8 +8,6 @@ SED=sed
 CP=cp
 MAXBASHTHREADS=20
 NOPARALLEL=1
-
-# echo doing do-postproc
 
 function calculatedistrootdir() {
   local f=$1

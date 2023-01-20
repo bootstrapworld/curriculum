@@ -1,5 +1,5 @@
 # created 2023-01-18
-# last modified 2023-01-19
+# last modified 2023-01-20
 
 all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc copy-primitives
 
@@ -7,8 +7,8 @@ all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc copy-primiti
 
 do-conversions: 
 	@echo ")" >> $(ADOCABLES_INPUT)
-	@$(MAKE_DIR)do-asciidoc
-	@$(MAKE_DIR)do-postproc
+	@$(MAKE_DIR)run-asciidoctor.sh
+	@$(MAKE_DIR)do-postproc.sh
 
 ###############################################################################
 
@@ -23,4 +23,4 @@ relevant-lessons := $(foreach \
 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
 
 copy-primitives: do-conversions
-	@$(MAKE_DIR)collect-primitives
+	@$(MAKE_DIR)collect-primitives.sh

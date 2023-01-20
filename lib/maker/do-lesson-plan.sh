@@ -1,8 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-19
-
-# echo doing do-lesson-plan-adoc $@
+# last modified 2023-01-20
 
 adocfile=$1
 

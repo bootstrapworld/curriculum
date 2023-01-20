@@ -1,16 +1,10 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-19
+# last modified 2023-01-20
 
-# echo doing do-workbook-page-adoc $1 in $(pwd)
-
-# adocfile is the relative pathname from the git repo top dir.
-# Thus, it always starts with distribution/...
 adocfile=$1
 
 fcontainingdirectory=$(dirname $adocfile)
-
-# echo fcontainingdirectory is $fcontainingdirectory
 
 test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
 

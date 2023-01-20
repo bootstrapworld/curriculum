@@ -1,5 +1,5 @@
 # created 2023-01-17
-# last modified 2023-01-19
+# last modified 2023-01-20
 
 include $(MAKE_DIR)utils.mk
 
@@ -25,7 +25,7 @@ build-pathway-resources: $(resource-asc-files)
 define make-build-resource-rule
 $(call asc-file,$1): $1
 	@# @echo build-resources: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-resource-adoc $$<
+	@$(MAKE_DIR)do-pathway-resource.sh $$<
 
 endef
 
@@ -43,7 +43,7 @@ build-pathway-narratives: $(narrative-asc-files)
 define make-build-narrative-rule
 $(call asc-file,$1): $1
 	@# @echo build-narratives: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-narrative-adoc $$<
+	@$(MAKE_DIR)do-pathway-narrative.sh $$<
 
 endef
 

@@ -1,23 +1,13 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-18
+# last modified 2023-01-20
 
-# echo doing do-pathway-independent-adoc $@
-
-# adocfile is the relative pathname from the git repo top dir.
-# Thus, it always starts with distribution/...
 adocfile=$1
 
-# containingdirectory is the directory housing the adocfile, rel to topdir
 containingdirectory=$(dirname $adocfile)
 
-# distrootdir is the rel pathname of distribution rel to containingdirectory.
-# It is a sequence of ../
 distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
-# fixme: seems to be obiwan for pathway files
-
-# update containingdirectory to be rel to distribution/en-us
 containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
 
 adocbasename=$(basename $adocfile)

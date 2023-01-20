@@ -1,7 +1,5 @@
 # created 2023-01-19
-# last modified 2023-01-19
-
-# echo doing collect-primitives with $RELEVANT_LESSONS_INPUT
+# last modified 2023-01-20
 
 test -f $RELEVANT_LESSONS_INPUT || exit
 

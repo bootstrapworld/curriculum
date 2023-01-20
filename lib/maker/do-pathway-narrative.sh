@@ -1,14 +1,10 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-19
-
-# echo doing do-pathway-resource-adoc $@ in $(pwd)
+# last modified 2023-01-20
 
 adocfile=$1
 
 fcontainingdirectory=$(dirname $adocfile)
-
-test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
 
 distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
 
@@ -32,12 +28,6 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-resourcesarg="#f"
-
-if $(echo $adocfile|grep -q '/resources/'); then
-  resourcesarg="#t"
-fi
-
 targetpathway=$(echo $containingdirectory|sed -e 's#courses/\([^/]*\).*#\1#')
 
 # proglangarg=pyret
@@ -48,10 +38,22 @@ elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-wesc
 elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-pyret; then proglangarg=pyret
 fi
 
-# echo proglangarg is $proglangarg
+otherproglangs="#f"
 
-echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:other-dir $otherdirarg #:resources $resourcesarg #:target-pathway \"$targetpathway\" #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
+if test "$targetpathway" = "algebra-wescheme"; then
+  otherproglangs="$otherproglangs \"pyret\""
+elif test "$targetpathway" = "algebra-pyret"; then
+  otherproglangs="$otherproglangs \"wescheme\""
+elif test "$targetpathway" = "data-science" -o "$targetpathway" = "data-science-codap"; then
+  otherproglangs="$otherproglangs \"codap\""
+fi
+
+echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:narrative #t #:target-pathway \"$targetpathway\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
 echo $ascfile >> $ADOC_INPUT
 
-echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
+echo $htmlfile >> $ADOC_POSTPROC_NARRATIVE_INPUT
+
+echo courses/$targetpathway/.cached/.pathway-glossary.asc >> $ADOC_INPUT
+
+echo courses/$targetpathway/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT

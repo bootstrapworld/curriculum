@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-01-19
+# last modified 2023-01-20
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -22,7 +22,7 @@ build-pathway-independent: $(pathway-independent-asc-files)
 define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
 	@# @echo build-pathway-independent: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-independent-adoc $$<
+	@$(MAKE_DIR)do-pathway-independent.sh $$<
 
 endef
 
