@@ -46,15 +46,7 @@ for pl in $proglangs; do
   if test ! -d pages; then
     mkdir pages
   fi
-  if test ! -f pages/workbook-pages.txt; then
-    touch pages/workbook-pages.txt
-  fi
   test -d pages/.cached || mkdir -p pages/.cached
-
-  #ensure workbook-pages.txt ends in newline, or while isn't happy
-  $SED -i -e '$a\' pages/workbook-pages.txt
-
-  rm -f pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
 
   collect_workbook_pages .
 

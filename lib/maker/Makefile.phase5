@@ -1,14 +1,16 @@
 # created 2023-01-18
 # last modified 2023-01-20
 
-all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc collect-primitives
+all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc
 
 ###############################################################################
 
-do-conversions: 
+do-conversions:
 	@echo ")" >> $(ADOCABLES_INPUT)
 	@$(MAKE_DIR)run-asciidoctor.sh
 	@$(MAKE_DIR)do-postproc.sh
+	@$(MAKE_DIR)collect-primitives.sh
+	@$(MAKE_DIR)make-dependency-graph.sh
 
 ###############################################################################
 
@@ -21,6 +23,3 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 relevant-lessons := $(foreach \
 	lesson-name,$(shell \
 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
-
-collect-primitives: do-conversions
-	@$(MAKE_DIR)collect-primitives.sh

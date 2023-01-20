@@ -7,6 +7,14 @@ function collect_workbook_pages() {
 
   test -d $d/pages || return
 
+  test -f $d/pages/workbook-pages.txt ||
+    touch $d/pages/workbook-pages.txt
+
+  #ensure workbook-pages.txt ends in newline, or while isn't happy
+  $SED -i -e '$a\' $d/pages/workbook-pages.txt
+
+  rm -f $d/pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
+
   test -f $d/pages/.cached/.workbook-pages-ls.txt.kp ||
     touch $d/pages/.cached/.workbook-pages-ls.txt.kp
 
