@@ -13,7 +13,6 @@ export PROGDIR := $(TOPDIR)/distribution/.prog-$(NATLANG)
 
 export ADOCABLES_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adocables.rkt
 export ADOC_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-asciidoctor.js
-export ADOC_POSTPROC_ALLPWYLESSONS_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-allpathways.txt.kp
 export ADOC_POSTPROC_LESSONPLAN_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-lessonplan.txt.kp
 export ADOC_POSTPROC_NARRATIVEAUX_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-narrativeaux.txt.kp
 export ADOC_POSTPROC_NARRATIVE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-narrative.txt.kp

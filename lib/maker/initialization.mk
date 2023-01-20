@@ -1,5 +1,5 @@
 # created 2023-01-15
-# last modified 2023-01-16
+# last modified 2023-01-19
 
 initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p $(PROGDIR)
@@ -32,6 +32,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
 		$(RELEVANT_LESSONS_INPUT)
+	@touch $(RELEVANT_LESSONS_INPUT)
 	@echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT)
 	@echo '(' > $(ADOCABLES_INPUT)
 

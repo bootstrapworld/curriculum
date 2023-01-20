@@ -1,24 +1,16 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-18
+# last modified 2023-01-19
 
-# echo doing do-adoc $@
+# echo doing do-lesson-plan-adoc $@
 
-# adocfile is the relative pathname from the git repo top dir.
-# Thus, it always starts with distribution/...
 adocfile=$1
 
-# containingdirectory is the directory housing the adocfile, rel to topdir
-containingdirectory=$(dirname $adocfile)
+fcontainingdirectory=$(dirname $adocfile)
 
-# distrootdir is the rel pathname of distribution rel to containingdirectory.
-# It is a sequence of ../
-distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
+distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
 
-# fixme: seems to be obiwan for pathway files
-
-# update containingdirectory to be rel to distribution/en-us
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
+containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
 
 adocbasename=$(basename $adocfile)
 
@@ -60,6 +52,9 @@ if test -f "$proglangfile"; then
   if grep -q spreadsheets $proglangfile; then otherproglangs="$otherproglangs \"spreadsheets\""; fi
   if grep -q wescheme $proglangfile; then otherproglangs="$otherproglangs \"wescheme\""; fi
 fi
+
+# touch $fcontainingdirectory/.cached/.index-sidebar.asc
+touch $fcontainingdirectory/.cached/.index-standards.asc
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 

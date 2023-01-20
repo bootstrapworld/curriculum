@@ -1,7 +1,11 @@
 # created 2023-01-17
-# last modified 2023-01-18
+# last modified 2023-01-19
 
-resource-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/*/**/*.adoc)
+resource-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/courses/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*/*.adoc \
+	)
 
 resource-asc-files := $(foreach \
 	adocf,$(resource-adoc-files),$(call asc-file,$(adocf)))

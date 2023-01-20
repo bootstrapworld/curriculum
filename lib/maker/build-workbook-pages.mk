@@ -1,5 +1,5 @@
 # created 2023-01-16
-# last modified 2023-01-18
+# last modified 2023-01-19
 
 # asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
@@ -7,8 +7,14 @@ relevant-lessons := $(foreach \
 	lesson-name,$(shell \
 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
 
+# shd use recursive wildcard after debug
+
 relevant-adoc-files := $(foreach \
-	lesson,$(relevant-lessons),$(wildcard $(lesson)/**/*.adoc))
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*/*/*.adoc \
+	))
 
 relevant-asc-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
