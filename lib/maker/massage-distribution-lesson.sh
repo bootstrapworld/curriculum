@@ -3,10 +3,8 @@
 # created 2023-01-14
 # last modified 2023-01-20
 
-CP=cp
-SED=sed
-
 source ${MAKE_DIR}src-subdir-mgt.sh
+source ${MAKE_DIR}collect-workbook-pages.sh
 
 # echo
 # echo doing massage-distribution-lesson $1
@@ -58,44 +56,7 @@ for pl in $proglangs; do
 
   rm -f pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
 
-  # it should exist, even if empty
-  touch pages/.cached/.workbook-pages-ls.txt.kp
-
-  while read -r f; do
-    # echo finding aspect of "$f"
-    aspect=portrait
-    g=$f
-    if echo "$f"|grep -q '^ *;'; then
-      :
-    elif echo "$f"|grep -q '^ *//'; then
-      :
-    elif echo "$f"|grep -q landscape; then
-      echo $f >> pages/.cached/.workbook-pages.txt.kp
-      g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
-      aspect=landscape
-    elif echo "$f"|grep -q portrait; then
-      echo $f >> pages/.cached/.workbook-pages.txt.kp
-      g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
-    elif test "${f%.adoc}" = "$f"; then
-      echo $f >> pages/.cached/.workbook-pages.txt.kp
-      echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-    else
-      if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
-        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-        aspect=landscape
-      elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
-        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-        aspect=landscape
-      else
-        echo $f >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-      fi
-    fi
-  done < pages/workbook-pages.txt
+  collect_workbook_pages .
 
   for subdir in *; do
     if test -d "$subdir"; then

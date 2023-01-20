@@ -51,5 +51,6 @@ function make_solution_pages() {
     rm -fr $d/solution-pages
   fi
   mv $d/solution-pages-2 $d/solution-pages
+  test -d $d/pages/.cached || mkdir -p $d/pages/.cached
   test -d $d/solution-pages/.cached || mkdir -p $d/solution-pages/.cached
 }

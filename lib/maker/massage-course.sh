@@ -1,9 +1,10 @@
 #!/bin/bash
 
-source ${MAKE_DIR}src-subdir-mgt.sh
-
 # created 2023-01-16
 # last modified 2023-01-20
+
+source ${MAKE_DIR}src-subdir-mgt.sh
+source ${MAKE_DIR}collect-workbook-pages.sh
 
 # echo
 # echo doing massage-course $1
@@ -52,6 +53,7 @@ for d in $pathwayName*; do
     for dd in $d/front-matter $d/back-matter $d/resources; do
       if test -d $dd; then
         make_solution_pages $dd
+        collect_workbook_pages $dd
       fi
     done
   fi

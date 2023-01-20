@@ -3,11 +3,16 @@
 
 include $(MAKE_DIR)utils.mk
 
+###############################################################################
+
 all: build-workbook-pages build-lesson-plans
 
 ###############################################################################
 
-# asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
+# debug-build-workbook-pages:
+# 	@echo rl is $(relevant-lessons)
+# 	@echo radocf is $(relevant-adoc-files)
+# 	@echo rascf is $(relevant-asc-files)
 
 relevant-lessons := $(foreach \
 	lesson-name,$(shell \
@@ -24,11 +29,6 @@ relevant-adoc-files := $(foreach \
 
 relevant-asc-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
-
-# debug-build-workbook-pages:
-# 	@echo rl is $(relevant-lessons)
-# 	@echo radocf is $(relevant-adoc-files)
-# 	@echo rascf is $(relevant-asc-files)
 
 build-workbook-pages: $(relevant-asc-files)
 
