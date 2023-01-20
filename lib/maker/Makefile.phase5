@@ -1,23 +1,26 @@
 # created 2023-01-18
 # last modified 2023-01-19
 
-all: do-conversions distribution/$(NATLANG)/lib/page-not-found.pdf
+all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc copy-primitives
+
+###############################################################################
 
 do-conversions: 
 	@echo ")" >> $(ADOCABLES_INPUT)
-	@TOPDIR=$(TOPDIR) NATLANG=$(NATLANG) PROGDIR=$(PROGDIR) \
-		ADOCABLES_INPUT=$(ADOCABLES_INPUT) \
-		$(MAKE_DIR)/do-asciidoc
-	@TOPDIR=$(TOPDIR) \
-		ADOC_POSTPROC_PWYINDEP_INPUT=$(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		ADOC_POSTPROC_WORKBOOKPAGE_INPUT=$(ADOC_POSTPROC_WORKBOOKPAGE_INPUT) \
-		ADOC_POSTPROC_LESSONPLAN_INPUT=$(ADOC_POSTPROC_LESSONPLAN_INPUT) \
-		ADOC_POSTPROC_NARRATIVE_INPUT=$(ADOC_POSTPROC_NARRATIVE_INPUT) \
-		ADOC_POSTPROC_NARRATIVEAUX_INPUT=$(ADOC_POSTPROC_NARRATIVEAUX_INPUT) \
-		ADOC_POSTPROC_RESOURCES_INPUT=$(ADOC_POSTPROC_RESOURCES_INPUT) \
-		$(MAKE_DIR)/do-postproc
+	@$(MAKE_DIR)do-asciidoc
+	@$(MAKE_DIR)do-postproc
 
-distribution/$(NATLANG)/lib/page-not-found.pdf:
+###############################################################################
+
+distribution/$(NATLANG)/lib/page-not-found.adoc:
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
-	@echo lib/page-not-found.pdf >> $(ADOC_INPUT)
 	@echo ", { \"input\": \"lib/page-not-fond.html\" }" >> $(PUPPETEER_INPUT)
+
+###############################################################################
+
+relevant-lessons := $(foreach \
+	lesson-name,$(shell \
+	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
+
+copy-primitives: do-conversions
+	@$(MAKE_DIR)collect-primitives

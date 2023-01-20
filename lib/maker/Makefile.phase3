@@ -1,11 +1,64 @@
 # created 2023-01-16
+# last modified 2023-01-19
 
-include utils.mk
+include $(MAKE_DIR)utils.mk
 
-all: build-workbook-pages build-lesson-plans copy-pathways
+all: build-workbook-pages build-lesson-plans
 
-include build-workbook-pages.mk
+###############################################################################
 
-include build-lesson-plans.mk
+# asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
-include copy-pathways.mk
+relevant-lessons := $(foreach \
+	lesson-name,$(shell \
+	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
+
+# shd use recursive wildcard after debug
+
+relevant-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*/*/*.adoc \
+	))
+
+relevant-asc-files := $(foreach \
+	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
+
+# debug-build-workbook-pages:
+# 	@echo rl is $(relevant-lessons)
+# 	@echo radocf is $(relevant-adoc-files)
+# 	@echo rascf is $(relevant-asc-files)
+
+build-workbook-pages: $(relevant-asc-files)
+
+define make-build-workbook-page-rule
+$(call asc-file,$1): $1
+	@# @echo build-workbook-pages: creating $$@ from $$<
+	@$(MAKE_DIR)do-workbook-page-adoc $$<
+
+endef
+
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
+
+#########################################################################
+
+lesson-plan-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(lesson)/index.adoc)
+
+lesson-plan-asc-files := $(foreach \
+	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
+
+# build-lesson-plans:
+# 	@echo lpadocf is $(lesson-plan-adoc-files)
+# 	@echo lpascf is $(lesson-plan-asc-files)
+
+build-lesson-plans: $(lesson-plan-asc-files)
+
+define make-build-lesson-plan-rule
+$(call asc-file,$1): $1
+	@$(MAKE_DIR)do-lesson-plan-adoc $$<
+
+endef
+
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
