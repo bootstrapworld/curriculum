@@ -2,7 +2,7 @@
 # last modified 2023-01-20
 
 function collect_workbook_pages() {
-  echo doing collect_workbook_pages $1 in $(pwd)
+  # echo doing collect_workbook_pages $1 in $(pwd)
   d=$1
 
   test -d $d/pages || return

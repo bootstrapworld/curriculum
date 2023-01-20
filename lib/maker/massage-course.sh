@@ -5,6 +5,7 @@
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
+source ${MAKE_DIR}make-workbook-jsons.sh
 
 # echo
 # echo doing massage-course $1
@@ -50,14 +51,18 @@ fi
 
 for d in $pathwayName*; do
   if test -d $d; then
-    for dd in $d/front-matter $d/back-matter $d/resources; do
+    cd $d
+    for dd in front-matter back-matter resources; do
       if test -d $dd; then
         make_solution_pages $dd
         collect_workbook_pages $dd
       fi
     done
+    $PROGDIR/collect-workbook-pages.rkt
+    make_workbook_jsons
+    cd ..
   fi
 done
 
-# ? make fails otherwise
+# weird, make fails without following!
 echo -n
