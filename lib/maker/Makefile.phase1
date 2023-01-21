@@ -56,7 +56,11 @@ distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
 
 ###############################################################################
 
-the-lessons := $(wildcard lessons/**/langs/$(NATLANG))
+the-lessons := $(wildcard \
+	lessons/*/langs/$(NATLANG) \
+	lessons/*/*/langs/$(NATLANG) \
+	lessons/*/*/*/langs/$(NATLANG) \
+	)
 
 the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%/., \
                                 $(notdir \
@@ -71,7 +75,11 @@ define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1
 	@mkdir -p $$@
 	@touch $$@
+	@touch $$</ignore_file
 	@$(CP) -upr $$</* $$@
+	@if test ! -f $$</index.adoc; then \
+		touch $$@/index.adoc; fi
+	@rm -f $$</ignore_file $$@/ignore_file
 	@$(MAKE_DIR)massage-distribution-lesson.sh $$@
 
 endef
@@ -99,10 +107,11 @@ distribution/$(NATLANG)/courses/$(notdir $1)/.: $1
 	@# echo making $$@ from $$<
 	@mkdir -p $$@
 	@touch $$@
-	@if test $(ls -A $$</langs/$(NATLANG)); then \
-		$(CP) -upr $$</langs/$(NATLANG)/* $$@ 2>/dev/null; fi
+	@touch $$</langs/$(NATLANG)/ignore_file
+	@$(CP) -upr $$</langs/$(NATLANG)/* $$@
 	@if test ! -f $$</langs/$(NATLANG)/index.adoc; then \
 		touch $$@/index.adoc; fi
+	@rm -f $$</langs/$(NATLANG)/ignore_file $$@/ignore_file
 	@$(MAKE_DIR)massage-course.sh $$@
 
 endef

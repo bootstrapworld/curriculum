@@ -14,6 +14,11 @@ adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
+if test ! -s $adocfile; then
+  touch $fcontainingdirectory/.cached/.${adocbasename%.adoc}.asc
+  exit
+fi
+
 htmlfile=${ascfile%.asc}.html
 
 otherdirarg="#f"

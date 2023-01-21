@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -9,7 +9,10 @@ all: build-pathway-independent
 
 ##########################################################################
 
-pathway-independent-adoc-files := $(wildcard $(TOPDIR)/distribution/$(NATLANG)/textbooks/**.adoc)
+pathway-independent-adoc-files := $(wildcard \
+	$(TOPDIR)/distribution/$(NATLANG)/textbooks/*.adoc \
+	$(TOPDIR)/distribution/$(NATLANG)/textbooks/*/*.adoc \
+	)
 
 pathway-independent-asc-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call asc-file,$(adocf)))
 
