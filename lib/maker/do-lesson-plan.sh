@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 adocfile=$1
 
@@ -28,7 +28,7 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-lesson=$(echo $containingdirectory|sed -e 's#lessons/\([^/]*\).*#\1#')
+lesson=$(echo $containingdirectory|$SED -e 's#lessons/\([^/]*\).*#\1#')
 
 proglangarg="pyret"
 

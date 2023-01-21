@@ -1,11 +1,11 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 cd $TOPDIR/distribution/$NATLANG
 
-SED=sed
-CP=cp
+# echo doing do-postproc $1
+
 MAXBASHTHREADS=20
 NOPARALLEL=1
 
@@ -30,6 +30,9 @@ function postproc_func() {
     local localDISTROOTDIR=$(calculatedistrootdir $fhtmlcached)
     local fdir=${fhtmlcached%/.cached/.*html}
     local fbase=${fhtmlcached##*/.}
+    if test -n "$SHTML"; then
+      fbase=${fbase%.html}.shtml
+    fi
     local fhtml=$fdir/$fbase
     cp -p $fhtmlcached $fhtml
     bumpcsspathdir
@@ -39,7 +42,7 @@ function postproc_func() {
 
 function run_postproc() {
 
-  local postproc_func=$1
+  # local postproc_func=$1
   local bigfile=$2
 
   rm -f $bigfile-split*
@@ -224,6 +227,8 @@ $SED -i \
 
 run_postproc postproc_pwyindep $ADOC_POSTPROC_PWYINDEP_INPUT
 run_postproc postproc_workbookpage $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+
+export SHTML=1
 run_postproc postproc_lessonplan $ADOC_POSTPROC_LESSONPLAN_INPUT
 run_postproc postproc_narrative $ADOC_POSTPROC_NARRATIVE_INPUT
 run_postproc postproc_narrativeaux $ADOC_POSTPROC_NARRATIVEAUX_INPUT

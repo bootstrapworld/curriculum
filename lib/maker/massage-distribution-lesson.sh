@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -22,7 +22,7 @@ firstproglang=pyret
 
 if test -f proglang.txt; then
   proglangs=$(cat proglang.txt)
-  firstproglang=$(echo $proglangs|sed -e 's/^\([^ ]\+\).*/\1/')
+  firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
 
 cd ..

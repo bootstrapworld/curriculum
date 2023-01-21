@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 adocfile=$1
 
@@ -36,7 +36,7 @@ if $(echo $adocfile|grep -q '/resources/'); then
   resourcesarg="#t"
 fi
 
-targetpathway=$(echo $containingdirectory|sed -e 's#courses/\([^/]*\).*#\1#')
+targetpathway=$(echo $containingdirectory|$SED -e 's#courses/\([^/]*\).*#\1#')
 
 # proglangarg=pyret
 if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap

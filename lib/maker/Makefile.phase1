@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-01-20
+# last modified 2023-01-21
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -11,31 +11,31 @@ all: copy-lessons copy-pathways
 initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p $(PROGDIR)
 	@mkdir -p distribution/$(NATLANG)/lib
-	@cp -upr shared/langs/en-us/* $(PROGDIR)
-	@cp -upr shared/langs/en-us/*.css distribution/$(NATLANG)/lib
+	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
+	@$(CP) -upr shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
-		cp -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
+		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
 	@mkdir -p distribution/$(NATLANG)/lib/images
-	@cp -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
-	@cp -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
-	@cp -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
+	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
+	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
+	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
-		cp -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
-	@cp -p lib/*.html $(PROGDIR)
-	@cp -p lib/*.rkt $(PROGDIR)
-	@cp -p lib/*.sh $(PROGDIR)
-	@cp -p lib/ano* $(PROGDIR)
-	@cp -p lib/check* $(PROGDIR)
-	@cp -p lib/.hta* $(PROGDIR)
-	@cp -p lib/*.css distribution/$(NATLANG)/lib
-	@cp -p lib/*.js* distribution/$(NATLANG)/lib
-	@cp -p lib/*.less distribution/$(NATLANG)/lib
-	@cp -p lib/*.png distribution/$(NATLANG)/lib
+		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
+	@$(CP) -p lib/*.html $(PROGDIR)
+	@$(CP) -p lib/*.rkt $(PROGDIR)
+	@$(CP) -p lib/*.sh $(PROGDIR)
+	@$(CP) -p lib/ano* $(PROGDIR)
+	@$(CP) -p lib/check* $(PROGDIR)
+	@$(CP) -p lib/.hta* $(PROGDIR)
+	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
+	@$(CP) -p lib/*.js* distribution/$(NATLANG)/lib
+	@$(CP) -p lib/*.less distribution/$(NATLANG)/lib
+	@$(CP) -p lib/*.png distribution/$(NATLANG)/lib
 	@for f in distribution/$(NATLANG)/lib/*.less; do \
 		if test -f "$$f"; then \
 		node_modules/less/bin/lessc "$$f" "$${f%.less}.css"; fi; done
-	@cp -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
+	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
 		$(RELEVANT_LESSONS_INPUT)
@@ -50,8 +50,8 @@ node_modules/mathjax:
 
 distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
 	@mkdir -p $@
-	@cp -upr node_modules/mathjax/* $@
-	@cp -p lib/mathjaxlocal.js $@/config/local
+	@$(CP) -upr node_modules/mathjax/* $@
+	@$(CP) -p lib/mathjaxlocal.js $@/config/local
 	@rm -fr $@/[CLRptu]*
 
 ###############################################################################
@@ -71,7 +71,7 @@ define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1
 	@mkdir -p $$@
 	@touch $$@
-	@cp -upr $$</* $$@
+	@$(CP) -upr $$</* $$@
 	@$(MAKE_DIR)massage-distribution-lesson.sh $$@
 
 endef
@@ -99,9 +99,10 @@ distribution/$(NATLANG)/courses/$(notdir $1)/.: $1
 	@# echo making $$@ from $$<
 	@mkdir -p $$@
 	@touch $$@
+	@if test $(ls -A $$</langs/$(NATLANG)); then \
+		$(CP) -upr $$</langs/$(NATLANG)/* $$@ 2>/dev/null; fi
 	@if test ! -f $$</langs/$(NATLANG)/index.adoc; then \
-		touch $$</langs/$(NATLANG)/index.adoc; fi
-	@cp -upr $$</langs/$(NATLANG)/* $$@ 2>/dev/null;
+		touch $$@/index.adoc; fi
 	@$(MAKE_DIR)massage-course.sh $$@
 
 endef
