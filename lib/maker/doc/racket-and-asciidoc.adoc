@@ -1,0 +1,41 @@
+== Converting .adoc to .html
+
+=== Racket preprocessor
+
+After all the `$ADOC...` batch files have been populated, the
+build runs a Racket preprocessor on the entries in
+`$ADOCABLES_INPUT` to create the `.cached/*.asc` files.
+
+This is because the .adoc files created by the curriculum authors
+contains some directives in addition to the commands provided by
+raw AsciiDoc. A Racket program preprocesses these away to create
+a raw AsciiDoc file. This has the extension `.asc` and is
+situation in a `.cached` subdir alongside the `.adoc` file penned
+by the author.
+
+The additional keyword values provided in the `$ADOCABLES_INPUT`
+enables the Racket preprocessor to correctly address the
+different types of .adoc files we have (workbook pages, lesson
+plans, narratives, etc.).
+
+A single Racket call is sufficient to process all the entries in
+`$ADOCABLES_INPUT`.
+
+=== Calling Asciidoctor
+
+Once the Racket preprocessor done, we have a bunch of
+`.cached/*.asc` files in the distribution, and the list of these
+we have already captured in the file `$ADOC_INPUT`.
+
+These files are now ready to be processed by Asciidoctor to
+produce the corresponding .html.
+
+The `asciidoctor` command can take a bunch of input files 
+as command-line input, however, given the number of files we're
+processing, we will be exceeding the maximum-arg limit. We
+therefore split the `$ADOC_INPUT` file into smaller files, each
+of at most 100 entries, and we run `asciidoctor` separately on
+these groups of 100.
+
+
+
