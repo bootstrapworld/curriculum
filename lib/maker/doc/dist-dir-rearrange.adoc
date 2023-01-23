@@ -1,16 +1,17 @@
-== The build process
+== Rearranging subdirs within the distribution directories
 
 The bulid process starts by copying (the English versions of) the
 pathway directories to `distribution/en-us/courses` and the
 lesson directories to `distribution/en-us/lessons`, sometimes
-creating multiple versions to accommodate multiple proglangs as
-needed. (The other natlang versions go the corresponding subdir
-in `distribution`, e.g., `es-mx`, and their treatment follows a
-similar route, with `en-us` replaced.)
+creating multiple versions, as described in the previous section,
+to accommodate multiple proglangs as needed. (The other natlang
+versions go the corresponding subdir in `distribution`, e.g.,
+`es-mx`, and their treatment follows a similar route, with
+`en-us` replaced.)
 
-===  Modifying the course directory
+===  Modifying the distribution lesson directory
 
-After copying a pathway into its course directory with fixed
+After copying a pathway into its distribution lesson directory with fixed
 proglang, the build process drills down its directories to see if
 there are any proglang-specific shadowing subdirectories. These
 are named for the proglang, e.g., `pyret`, `wescheme`, etc.  The
@@ -27,8 +28,18 @@ its contents are the same as the `pages` subdir, except for such
 files that are pre-existent in it (from the repo).
 
 Next the build looks for `workbook-pages.txt` inside these
-`pages` subdirs (at any depth). A sanitized version -- removing
+`pages` subdir. A sanitized version -- removing
 comments -- of this is placed in
 `.cached/.workbook-pages.txt.kp`, and an even sparer version --
 removing landscape/portrait information -- is placed in
 `.cached/.workbook-pages-ls.txt.kp`.
+
+=== Modifying the course directory
+
+Course dirs undergo the same modifications above for
+proglang and solution-pages. Note here that the subdirs
+`front-matter`, `back-matter`, and `resources` may contain
+`pages/` subdirs with the appropriate `workbook-pages.txt`, and
+these are mined to get `.cached/.workbook-pages.txt.kp` and
+`.cached/.workbook-pages-ls.txt.kp` as well, just as for lessons.
+collected form `workbook-pages.txt` 

@@ -4,7 +4,7 @@ Our documentation sources are divided into _pathways_ and _lessons_,
 which are in the subdirectories `pathways` and `lessons`
 respectively. A pathway is broadly a concatenation of a chosen
 ordered set of lessons (with some other pathway-specific resources
-thrown in). 
+thrown in).
 
 In the following, we'll use `core` as an example
 pathway, and `simple-data-types` as an example lesson
@@ -18,8 +18,11 @@ a `langs` subdir, with further subdirs for each natlang that we want:
 i.e., `en-us` and `es-mx`.  The source tree thus looks like:
 
   pathway/
+  |
   `—— core/
+      |
       `—— langs/
+          |
           |—— en-us/
           `—— es-mx/
 
@@ -41,30 +44,24 @@ in it the various proglangs supported. Thus the contents of
   pyret
   wescheme
 
-
 Sometimes we have a pathway that has associated with it only a
 single proglang, but that proglang is not Pyret. As an example,
-consider the
-pathway `shipwrecks` which is defined for the proglang
-`spreadsheets`. In this case, we still need a
-`proglang.txt` file containing
-the single line
+consider the pathway `shipwrecks` which is defined for the
+proglang `spreadsheets`. In this case, we still need a
+`proglang.txt` file containing the single line
 
   spreadsheets
 
 === Pathway narratives
 
 The pathway root directory has a file `index.adoc`, which
-specifies the
-_pathway narrative_.  This gets converted to `index.shtml` in the
-course root directory. The pathway root also has a `resources/`
-subdirectory that houses additional documentation that is
-specific to teachers. The pathway root may also contain subdirs
-for `front-matter`, `back-matter`, and `images`: the former two
-add flanking matter to the final workbook for the pathway's
-course, while `images` is a convenient location for image
-subfiles.
-
+specifies the _pathway narrative_.  The pathway root also
+has a `resources/` subdirectory that houses additional
+documentation that is specific to teachers. The pathway root may
+also contain subdirs for `front-matter`, `back-matter`, and
+`images`: the former two add flanking matter to the final
+workbook for the pathway's course, while `images` is a convenient
+location for image subfiles.
 
 === Lessons associated with a pathway
 
@@ -80,18 +77,16 @@ different natlangs. (This is similar to how we specify multiple
 natlangs for pathways.)
 
    lessons/
+   |
    `—— simple-data-types/
+       |
        `—— langs/
+           |
            |—— en-us/
            `—— es-mx/
 
 We'll call `lessons/simple-data-types/langs/en-us` the lesson root
 directory.
-
-// On building, the `en-us` version of `simple-data-types` is placed
-// in
-// `distribution/en-us/lessons/simple-data-types`, the distribution
-// lesson root directory.
 
 As for pathways, a lesson root directory can contain a
 `proglang.txt` listing the proglang(s) associatable with it. If
@@ -99,14 +94,14 @@ no `proglang.txt` is present, the (single) proglang is assumed to
 be `pyret`.
 
 If more than one proglang is needed, or if the single proglang is
-something other than `pyret`, list it in `proglang.txt`.  
+something other than `pyret`, list it in `proglang.txt`.
 
 ==== Lesson plans
 
-The lesson counterpart to the pathway narrative is the `lesson
-plan`, given as an `index.adoc` file in the lesson root
-directory. This gets converted to `index.shtml` in the
-distribution lesson root. Here too, an `images/` subdir is used
+The lesson counterpart to the pathway narrative is the _lesson
+plan_, given as an `index.adoc` file in the lesson root
+directory.
+Here too, an `images/` subdir is used
 for image subfiles.
 
 ==== Lesson workbook pages
@@ -114,12 +109,11 @@ for image subfiles.
 A lesson typically contains a `pages/` subdir, which consist of
 AsciiDoc sources for the pages in that lesson. The `pages/`
 subdir has a file `workbook-pages.txt`, listing all these pages
-in order. These pages get converted to corresponding `.html`
-files in the `pages/` subdir for the lesson in the distribution.
+in order.
 
 A lesson may also contain other subdirs, even within its
 `pages/`. These may contain files meant for inclusion in the main
-pages files. 
+pages files.
 
 ==== Adding proglang-specific source
 
@@ -129,11 +123,11 @@ course/lesson. Proglang-specific material is specified in the
 source in two ways:
 
 1: We use the directive `@ifproglang{pyret}{...}` to specify source fragments
-meant for the proglang `pyret`. 
+meant for the proglang `pyret`.
 
-2: Especially in the `pages/` subdirs, we use further
-subdirs named for the proglang to add files that would shadow the
-main files. Thus for a file `pages/abc.adoc`, the file
+2: Especially in the `pages/` subdirs, we use further subdirs
+named for the proglang to add files that would shadow the main
+files. Thus for a file `pages/abc.adoc`, the file
 `pages/pyret/abc.adoc` would shadow it for `pyret`, and file
 `pages/wescheme/abc.adoc` would shadow it for `wescheme`. If we
 provide shadowing files for all relevant proglangs, the main file
@@ -146,3 +140,10 @@ version of the final workbook. However, we also have solutions
 workbook that is intended for teachers. We have a
 `solution-pages/` subdir alongside `pages/`, which contains files
 that will shadow the similarly named student pages.
+
+=== Pathway-independent files
+
+There are also some source files that are not affiliated with any
+particular pathway or lesson. These are kept in
+`shared/langs/en-us/docroot` (and the like, for other natlangs). Chief among these are textbook
+descriptions which are .adoc files in the `textbooks/` subdir. 
