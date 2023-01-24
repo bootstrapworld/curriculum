@@ -1,0 +1,62 @@
+= True or False? (Challenge)
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+Is the equation represented by the two Circles of Evaluation true or false? Explain why, and then describe what you would change to make the _false_ equations _true_. Do you notice any other mathematical properties at play? If so, explain.
+
+[.FillVerticalSpace,cols="^.^1a,^.^8a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles																	   |
+True or False? Explain
+
+
+| @n
+| @show{(coe '(/ (+ 0 (* m 1)) 1 ))}
+@math{=}
+@show{(coe '(* m (- 4 3)))}
+| @ifsoln{True. In each Circle of Evaluation, the Identity Property is correctly applied to m.}
+
+
+| @n
+| @show{(coe '(* (+ g h) (/ 30 30)))}
+@math{=}
+@show{(coe '(* (+ h g) (/ 523 523)))}
+| @ifsoln{True. The Commutative Property allows us to change the order in which we add g and h. In both Circles of Evaluation, the sum of g and h is multiplied by 1.}
+
+
+| @n
+| @show{(coe '(+ (* h (* t q)) 0))}
+@math{=}
+@show{(coe '(+ 0 (* q (* t h))))}
+| @ifsoln{True. In both Circles of Evaluation, zero is being added to the product of h, t, and q. The Associative Property allows us adjust the grouping of h, t, and q.}
+
+
+
+| @n
+| @show{(coe '(+ (- f h) (- t t)))}
+@math{=}
+@show{(coe '(+ (- h f) (- k k)))}
+| @ifsoln{False. Although zero is being added in both Circles of Evaluation, the Commutative Property does not hold for subtraction. If we changed subtraction to addition (so f + h = h + f), this would be true.}
+
+
+| @n
+| @show{(coe '(+ (+ g g) (- m m)))}
+@math{=}
+@show{(coe '(+ (* 2 g) (- 4.6 4.6)))}
+| @ifsoln{True. The Identity Property is being applied. Both Circles of Evaluation are equal to g + g.}
+
+
+
+| @n
+| @show{(coe '(- 76.42 (- (* 5 k) (* 5 k))))}
+@math{=}
+@show{(coe '(- 76.42 (- (/ w 3) (/ 3 w))))}
+| @ifsoln{False. Although the first Circle of Evaluation shows zero being subtracted from 76.42, we do not know what value is being subtracted from 76.42 in the second Circle of Evaluation.}
+
+
+|===
