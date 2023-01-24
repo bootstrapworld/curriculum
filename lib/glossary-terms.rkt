@@ -67,7 +67,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("categorical data" "categorical") "data whose values are qualities that are not subject to the laws of arithmetic")
      (es-mx ("datos categóricos") "datos cuyos valores son cualidades que no están sujetas a las leyes de la aritmética"))
 
-    ((en-us ("circle of evaluation" "circles of evaluation") "a 'sentence diagram' of the structure of a mathematical expression")
+    ((en-us ("circle of evaluation" "circles of evaluation") "a diagram of the structure of a mathematical expression")
      (es-mx ("círculo de evaluación") "un diagrama de la estructura de una expresión matemática"))
     
     ((en-us ("chart") "visual reprsentations of how values in a dataset are distributed")
