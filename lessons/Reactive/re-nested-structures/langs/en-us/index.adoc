@@ -14,12 +14,6 @@
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-- The https://code.pyret.org/editor#share=0B9rKDmABYlJVMjF3OU83dGtaVTQ&v=a49eb01[Pinwheels Starter #1] file
-- The https://code.pyret.org/editor#share=0B9rKDmABYlJVcFFCeDlnTm4zSGM&v=a49eb01[Pinwheels Starter #2] file preloaded on students’ machines
-
-
 |===
 
 == Nested Structures: Managing Complexity  @duration{45 minutes}
@@ -32,7 +26,7 @@ Now that you know all about data structures, you’re able to use them to make v
 
 Making changes to your structure, or writing functions to alter it, can get extremely complex. One way to manage this complexity is to use _nested_ structures: Just like we can write functions to handle repetitive processes, we can make structures to handle repetitive data. For example, if each of our 4 game characters have their own x and y coordinates, we could make one `Position` structure to use for each character. Then, instead of our game structure containing 8 numbers, it only contains 4 ``Position``s.
 
-Let’s start out with a small animation to explore the benefits of nested structures. Open the https://code.pyret.org/editor#share=0B9rKDmABYlJVMjF3OU83dGtaVTQ&v=a49eb01[Pinwheels Starter #1] file in Pyret, and click "Run". We see four colorful pinwheels spinning in the breeze. Now, take a look at the code:
+Let’s start out with a small animation to explore the benefits of nested structures. Open the @starter-file{pinwheels1} in Pyret, and click "Run". We see four colorful pinwheels spinning in the breeze. Now, take a look at the code:
 
 ----
 # A PinwheelState is the angle of rotation for 4 pinwheels
@@ -53,12 +47,12 @@ Suppose we wanted each of the pinwheels to spin at a different speed. We already
 
 === Investigate
 [.lesson-instruction]
-Print out the following link: @link{images/NonNested-Pinwheels1.png, code screenshot} from the pinwheels file and underline or highlight each spot in the code you would need to change in order to add a speed to each pinwheel. Once you’ve identified which sections of the code will need to change, edit the program on the computer so that each pinwheel spins at a different speed.
+Print out the following @handout{non-nested-pinwheels.adoc, code screenshot} from the pinwheels file and underline or highlight each spot in the code you would need to change in order to add a speed to each pinwheel. Once you’ve identified which sections of the code will need to change, edit the program on the computer so that each pinwheel spins at a different speed.
 
 Now we have a nice animation of pinwheels spinning at different speeds, but what if we had started off by making each individual pinwheel _its own structure_? As we’ll see shortly, this can help save us some time and headaches down the road, if we want to add to our animation later.
 
 [.lesson-instruction]
-Open the https://code.pyret.org/editor#share=0B9rKDmABYlJVcFFCeDlnTm4zSGM&v=a49eb01[Pinwheels Starter #2] file on your computer and take a look at the code. What differences do you see between this starter file and the first?
+Open the @starter-file{pinwheels2} on your computer and take a look at the code. What differences do you see between this starter file and the first?
 
 This animation looks exactly the same, but the data structure and the code is slightly different. This time, the `PinwheelState` data structure contains four ``Pinwheel``s, each their own structure, instead of four numbers. The angle of rotation is now contained inside the `Pinwheel` structure:
 
@@ -86,14 +80,14 @@ STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 - How would you get the angle out of `pw2` in the `STARTING-PINWHEELS` instance?
 --
 
-With nested structures, accessing fields in the "child" structure (in this case, Pinwheel requires two dots. So, STARTING-PINWHEELS.pw1 produces pw(60), the first Pinwheel. Whereas STARTING-PINWHEELS.pw2.angle produces 3, the angle of pw2.
+With nested structures, accessing fields in the "child" structure (in this case, Pinwheel) requires two dots. `STARTING-PINWHEELS.pw1` produces `pw(60)`, __the first Pinwheel structure__. Whereas `STARTING-PINWHEELS.pw2.angle` produces 3, the angle of pw2.
 
-Another change between the non-nested and nested versions of the code is that in the nested version, our @vocab{helper functions} `update-pinwheel` and `draw-pinwheel` now take in a `Pinwheel` data structure, as opposed to just a number. The animation still works and looks the same on the outside, and the code hasn’t changed too drastically.
+Another change between the non-nested and nested versions of the code is that in the nested version, our @vocab{helper functions} `update-pinwheel` and `draw-pinwheel` now take in a `Pinwheel` data structure, as opposed to just a Number. The animation still works and looks the same on the outside, and the code hasn’t changed too drastically.
 
 Let’s do the same activity for the nested version of the code, where we make each pinwheel spin at a different speed.
 
 [.lesson-instruction]
-Print out the following code screenshot for the nested link:images/Nested-Pinwheels1.png[pinwheels file], and underline or highlight each spot in the code you would need to change in order to change each pinwheel’s speed independently. Once you’ve identified which sections will need to change, edit the nested version of the program on the computer.
+Print out the following @handout{nested-pinwheels1.adoc, code screenshot} nested pinwheels file, and underline or highlight each spot in the code you would need to change in order to change each pinwheel’s speed independently. Once you’ve identified which sections will need to change, edit the nested version of the program on the computer.
 
 Point out the differences in underlining between the two code screenshots. Note that when students finish this activity, both of the animations will look the same- but one program will have been much more straightforward to modify! We wrote a bit more code at the beginning to set up the nested structures, but that paid off later by giving us more flexibility to change the behavior of the pinwheels.
 
@@ -107,10 +101,8 @@ What if we wanted to add a breeze to our animation, and make the pinwheels move 
 --
 Go through the same process as before: Starting with the non-nested version of the code, print out these code screenshots:
 
-//non-nested png missing
-
-- Non-nested pinwheels
-- link:images/Nested-Pinwheels2.png[Nested pinwheels]
+- @handout{non-nested-pinwheels.adoc, Non-Nested Pinwheels}
+- @handout{nested-pinwheels2.adoc, Nested Pinwheels 2}
 
 and underline or highlight the places in the code you would need to edit in order to change the x-coordinates of each pinwheel. Do this for both the nested and non-nested versions of the animation.
 --

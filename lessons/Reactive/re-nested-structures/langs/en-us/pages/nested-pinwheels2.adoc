@@ -1,0 +1,54 @@
+= Nested Pinwheels Code (2)
+----
+# A Pinwheel is an angle of rotation and a speed
+data Pinwheel:
+  | pw(angle :: Number, speed :: Number)
+end
+
+# A PinwheelState is 4 Pinwheels
+data PinwheelState:
+  | pinwheels(
+      p1 :: Pinwheel,
+      p2 :: Pinwheel,
+      p3 :: Pinwheel,
+      p4 :: Pinwheel)
+end
+
+STARTING-PINWHEELS = pinwheels(
+  pw(60, 6),
+  pw(3, 12),
+  pw(25, 24),
+  pw(70, -48))
+
+# update-pinwheel :: Pinwheel -> Pinwheel
+fun update-pinwheel(p):
+  pw(p.angle + p.speed, p.speed)
+end
+
+# next-state-tick :: PinwheelState -> PinwheelState
+fun next-state-tick(ps):
+  pinwheels(
+    update-pinwheel(ps.p1),
+    update-pinwheel(ps.p2),
+    update-pinwheel(ps.p3),
+    update-pinwheel(ps.p4))
+end
+
+# draw-pinwheel :: Pinwheel -> Image
+fun draw-pinwheel(p):
+  rotate(p.angle, PINWHEEL-IMG)
+end
+
+# draw-state :: PinwheelState -> Image
+fun draw-state(ps):
+  put-image(draw-pinwheel(ps.p1),
+    400, 100,
+    put-image(draw-pinwheel(ps.p2),
+      320, 240,
+      put-image(draw-pinwheel(ps.p3),
+        100, 400,
+        put-image(draw-pinwheel(ps.p4),
+          500, 350,
+          empty-scene(640, 480)))))
+end
+----
