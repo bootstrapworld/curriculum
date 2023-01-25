@@ -15,7 +15,7 @@
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 |@show{(coe '(+ 20 5))}	| @show{(coe  '(+ 5 20))}
-| @math{20 + 5 = ?} | @math{5 + 20 = ?}
+| @ifsoln{@math{20 + 5 = 25}} @ifnotsoln{@math{20 + 5 = ?}} | @ifnotsoln{@math{5 + 20 = ?}} @ifsoln{@math{5 + 20 = 25}}
 |===
 
 What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 25. In the first Circle, we add 20 and 5 first, while in the second Circle,}}
@@ -30,8 +30,12 @@ What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 25. In the first Ci
 
 [.FillVerticalSpace, cols="^.^3,^.^3,^.^3"]
 |===
-|@show{(coe '(+ (+ 9 2) 8))}  | @show{(coe  '(+ 8 (+ 9 2)))} | @show{(coe  '(+ (+ (?ANS 2) (?ANS 9)) 8))}
-| @math{(9 + 2) + 8 = ?} | @math{8 + (2 + 9) = ?} | @ifsoln{@math{(2 + 9) + 8}}
+| @show{(coe '(+ (+ 9 2) 8))}
+| @show{(coe  '(+ 8 (+ 9 2)))}
+| @show{(coe  '(+ (+ (?ANS 2) (?ANS 9)) 8))}
+| @ifnotsoln{@math{(9 + 2) + 8 = ?}} @ifsoln{@math{(9 + 2) + 8 = 19}}
+| @ifnotsoln{@math{8 + (2 + 9) = ?}} @ifsoln{@math{8 + (2 + 9) = 19}}
+| @ifsoln{@math{(2 + 9) + 8 = 19}}
 |===
 
 What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 19. In the first Circle, we add 9 and 2 first, while in the second Circle,}}
@@ -51,7 +55,7 @@ These Circles of Evaluation _all_ represent the Commutative Property of Addition
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 |@show{(coe '(- 50 4))}	| @show{(coe  '(- 4 50))}
-| @math{50 - 4 = ?}  | @math{4 - 50 = ?}
+| @ifnotsoln{@math{50 - 4 = ?}} @ifsoln{@math{50 - 4 = 46}}  | @ifnotsoln{@math{4 - 50 = ?}} @ifsoln{@math{4 - 50 = -46}}
 |===
 
 Explain your response. @fitb{}{@ifsoln{No, the Commutative Property does not hold for subtraction. I know because the first Circle evaluates to 46, }}
