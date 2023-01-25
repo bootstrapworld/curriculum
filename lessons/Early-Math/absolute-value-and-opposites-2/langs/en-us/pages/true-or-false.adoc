@@ -11,13 +11,13 @@ Is the equation represented by the two Circles of Evaluation true or false? Eval
 
 [.FillVerticalSpace,cols="^.^1a,^.^10a,^.^5a", stripes="none", options="header"]
 |===
-|	 | Circles.	   |True or False? Explain.
+|	 | Circles of Evaluation	   |True or False? Explain
 
 
 | @n
-|@show{(coe '(num-abs (negate 3)))}
+|@show{(coe '(abs (negate 3)))}
 @math{=}
-@show{(coe '(negate (num-abs 3)))}
+@show{(coe '(negate (abs 3)))}
 | False.
 
 @math{3 +≠+ -3}
@@ -27,7 +27,7 @@ Is the equation represented by the two Circles of Evaluation true or false? Eval
 | @n
 |@show{(coe '(negate (negate -3)))}
 @math{=}
-@show{(coe '(negate (num-abs -3)))}
+@show{(coe '(negate (abs -3)))}
 | @ifsoln{True.
 
 @math{-3 = -3}}
@@ -35,16 +35,16 @@ Is the equation represented by the two Circles of Evaluation true or false? Eval
 | @n
 |@show{(coe '(negate (negate 24)))}
 @math{=}
-@show{(coe '(num-abs (negate 24)))}
+@show{(coe '(abs (negate 24)))}
 | @ifsoln{True.
 
 @math{24 = 24}}
 
 
 | @n
-|@show{(coe '(num-abs (negate -354)))}
+|@show{(coe '(abs (negate -354)))}
 @math{=}
-@show{(coe '(num-abs 354))}
+@show{(coe '(abs 354))}
 | @ifsoln{True.
 
 @math{354 = 354}}
@@ -54,7 +54,7 @@ Is the equation represented by the two Circles of Evaluation true or false? Eval
 | @n
 |@show{(coe '(negate 34))}
 @math{=}
-@show{(coe '(negate (num-abs 34)))}
+@show{(coe '(negate (abs 34)))}
 |@ifsoln{True.
 
 @math{-34 = -34}}

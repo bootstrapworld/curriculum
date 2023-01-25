@@ -13,7 +13,7 @@ Is the equation represented by the two Circles of Evaluation true or false? Eval
 
 [.FillVerticalSpace,cols="^.^1a,^.^5a,^.^5a", stripes="none", options="header"]
 |===
-|	 | Circles																	   |
+|	 | Circles of Evaluation																	   |
 True or False? Explain
 
 
@@ -29,7 +29,7 @@ True or False? Explain
 | @n
 | @show{(coe '(negate 3))}
 @math{=}
-@show{(coe '(num-abs 3))}
+@show{(coe '(abs 3))}
 | @ifsoln{False.
 
 @math{-3 +≠+ 3}}
@@ -45,9 +45,9 @@ True or False? Explain
 
 
 | @n
-| @show{(coe '(num-abs -3))}
+| @show{(coe '(abs -3))}
 @math{=}
-@show{(coe '(num-abs 3))}
+@show{(coe '(abs 3))}
 | @ifsoln{True.
 
 @math{3 = 3}}
@@ -65,23 +65,23 @@ Always, sometimes, or never true?
 | @n
 | @show{(coe '(negate m))}
 @math{=}
-@show{(coe '(num-abs m))}
+@show{(coe '(abs m))}
 | @ifsoln{Sometimes true.
 
 Negating @math{m} can result in a positive value, a negative value, or zero. The absolute value of @math{m} is always positive. If @math{m} is zero or a negative value, then the equation is true.}
 
 
 | @n
-| @show{(coe '(num-abs m))}
+| @show{(coe '(abs m))}
 @math{=}
-@show{(coe '(num-abs -m))}
+@show{(coe '(abs -m))}
 | @ifsoln{Always true.
 
 These both always result in a positive outcome, unless @math{m} is zero - in which case the equation is still true.}
 
 
 | @n
-| @show{(coe '(num-abs -m))}
+| @show{(coe '(abs -m))}
 @math{=}
 @show{(coe '(negate -m))}
 | @ifsoln{Sometimes true.
