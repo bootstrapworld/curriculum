@@ -2004,7 +2004,10 @@
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
-                              (display project-link-output o))]
+                              (display project-link-output o)
+                              (display " __{startsb}" o)
+                              (display rubric-link-output o)
+                              (display "{endsb}__" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -2216,7 +2219,7 @@
                 #:exists 'replace)
 
               (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##{startsb}~a{endsb} {startsb}~a{endsb}##\n\n" (first x) (second x))))
+                (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
 
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
