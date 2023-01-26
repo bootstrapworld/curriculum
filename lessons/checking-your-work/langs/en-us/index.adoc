@@ -58,20 +58,29 @@ Programmers need to think in terms of __Testing Tables__ that best serve the pur
 Testing Tables can also be used to _verify_ that a certain analysis is correct.
 
 [.lesson-instruction]
-An AI writes code that claims to filter out any shelter data to show only the cats. Why would it be a bad idea to test it using a table that _already_ contains only cats?
+--
+An AI writes code that claims to filter out any shelter data to show only the cats.
 
-Code that shows only the kittens... sorted in ascending order by weight must be verified by a Table containing cats, non-cats, old and young cats... __and rows that aren’t already sorted!__
+* Could we test it using a Table that _already_ contains only cats?
+** No! The AI's code might do nothing at all and just return the Table it was given. It would give __the right answer for the wrong reason__! We need to find out if it actually removes non-cat Rows.
+* Could we test it using a Table that has no cats at all?
+** No! The AI's code might always return a table with no rows (regardless of species!), so giving it a Table without cats will give __the right answer for the wrong reason__! We need to find out if it actually keeps rows for cats.
+* Could we test it using a Table that has only cats and dogs?
+** No! Maybe the AI's code just removes dogs. We need to see if it removes other species as well.
+--
+
+Verifying that code does what it does is an important part of checking our work! That's why writing examples is so valuable: it's a chance to think about how the program _should_ work, without worrying as much about _how_ it works.
 
 [.lesson-instruction]
 --
-Another programmer writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only fixed cats.
+The AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only fixed cats.
 
 * Do you trust it? How could you test it?
 * Which animals would you use in a Testing Table?
 * Complete @printable-exercise{pages/trust-but-verify.adoc}.
 * Open the @starter-file{trust-but-verify}. There are 3 versions of `fixed-cats`. Are they all correct? If not, which ones are broken?
 
-An AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only fixed cats.
+An AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only dogs five years or older.
 
 * Do you trust it? How could you test it?
 * Which animals would you use in a Testing Table?
