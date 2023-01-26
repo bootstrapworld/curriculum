@@ -5,3 +5,22 @@ we have a bunch of `+.cached/*.html+` files in our `distribution`
 tree. It would be nice if these were all there is to it, but
 there is still a bunch of post-processing left. We use the other
 `$ADOC_POSTPROC_*` files to guide this post-processing.
+
+For starters, the `+.cached/*.html+` files need to go up one
+directory, so they sit alongside their source `.adoc` files in
+the `distribution` tree. (We may later choose to delete the `.adoc`
+files before deployment to the website, but that's a different
+matter.) In particular, we need to ensure that the final HTML
+file has extension `.shtml` when it's a lesson plan or pathway
+doc, either narrative or resources. It is `.html` in all other
+cases, i.e., workbook pages and pathway-independent files.
+
+The following are the components of the postprocessing:
+
+===  CSS path correction
+
+When Asciidoctor is run on the `.asc` file, it assumes a
+`curriculum.css` file alongside the cached `.html` file. We
+already have our specific `curriculum.css` file in
+`distribution/en-us/lib`.
+

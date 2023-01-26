@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-01-21
+# last modified 2023-01-26
 
 cd $TOPDIR/distribution/$NATLANG
 
@@ -69,21 +69,12 @@ function bumpcsspathdir() {
   cat > $TMPFILE-3.txt <<EOF
   <link rel="stylesheet" href="${localDISTROOTDIR}lib/curriculum.css" />
 EOF
-  if test $ASCIIDOCNODE; then
-  $SED -i \
-    -e '/^<link.*asciidoctor\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
-    -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
-    -e 's/%INSERTLIBCURRICULUMCSS//' \
-    -e 's/<link DISCARD .*asciidoctor\.css.*>//' \
-    $f
-    else
   $SED -i \
     -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
     -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
     -e 's/%INSERTLIBCURRICULUMCSS//' \
     -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
-  fi
 
   rm -f $TMPFILE-3.txt
 }
