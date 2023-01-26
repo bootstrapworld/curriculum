@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2023-01-17 # last modified
+LASTMOD=2023-01-26 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2802,7 +2802,7 @@ function doadocpostproc() {
   if test -s $ADOC_INPUT; then
     if test ! $ASCIIDOCNODE; then
       # echo calling asciidoctor on $ADOC_INPUT
-      asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
     else
       echo Trying node asciidoctor!
       $SED -i -e 's/.*/"\0", /' $ADOC_INPUT
