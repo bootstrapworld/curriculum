@@ -19,8 +19,23 @@ The following are the components of the postprocessing:
 
 ===  CSS path correction
 
-When Asciidoctor is run on the `.asc` file, it assumes a
-`curriculum.css` file alongside the cached `.html` file. We
-already have our specific `curriculum.css` file in
-`distribution/en-us/lib`.
+When Asciidoctor is run on the `.asc` file, it enshrines a
+pathname for `curriculum.css`. Make it a relative to the HTML
+location.
 
+=== Boilerplate insertion
+
+Include links to various `*.css` and `*.js` files. Sometimes
+conditionally: Codemirror-related links are included only if the
+file has tags classed `pyret`, `racket`, or `circleevalsexp`.
+
+
+
+=== Asciidoctor quirk correction
+
+Asciidoctor lacks the ability to nest more than one level of div or span with specific
+classes. The Racket preprocessor embeds markers for these so they
+go through Asciidoctor verbatim. We can now scan for them and
+replace them with divs/spans as appropriate.
+
+====
