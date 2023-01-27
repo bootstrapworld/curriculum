@@ -7,46 +7,43 @@ div.circleevalsexp { width: auto; }
 ++++
 
 
-For each Circle, apply the Associative Property as many times as you can. Some Circles have several equivalent expressions, while some have none.
+For each Circle of Evaluation, apply the Associative Property to create two equivalent Circles. Make sure you use different _groupings_ in each Circle. Note: There are multiple possible responses here! @ifsoln{Some possible responses are shown below. Your students will likely come up with others.}
 
-[.FillVerticalSpace,cols=".^1a,^.^6a,^.^6a,^.^6a,^.^6a", stripes="none", options="header"]
+[.FillVerticalSpace,cols=".^1a,^.^6a,^.^6a,^.^6a", stripes="none", options="header"]
 |===
-|	 | Analyze this Circle. | Apply the Associative Property. | Apply it again. | Apply it again?
+|	 | Original Circle of Evaluation | Equivalent Circle of Evaluation 1 | Equivalent Circle of Evaluation 2
 
 | @n
 | @show{(coe '(+ (+ 5 6) 11))}
 | @showsoln{(coe '(+ 5 (+ 6 11)))}
-| @ifsoln{No other applications of the Associative Property are possible unless we change the order of the numbers as well.}
-|
+| @showsoln{(coe '(+ 6 (+ 5 11)))}
+
 
 | @n
-| @show{(coe '(* 36 (* 2 8)))}
-| @showsoln{(coe '(* (* 36 2) 8))}
-| @ifsoln{No other applications of the Associative Property are possible unless we change the order of the numbers as well.}
-|
+| @show{(coe '(* (* 36 5) (* 2 8)))}
+| @showsoln{(coe '(* (* 36 2) (* 8 5)))}
+| @showsoln{(coe '(* (* (* 2 5) 36) 8))}
+
 
 | @n
-| @show{(coe '(- (- 10 3) 2))}
-| @ifsoln{No applications of the Associative Property are possible because the expression uses subtraction.}
-|
-|
+| @show{(coe '(- (+ (+ 10 3) 2) 5))}
+| @showsoln{(coe '(- (+ (+ 2 3) 10) 5))}
+| @showsoln{(coe '(- (+ 3 (+ 2 10)) 5))}
+
 
 | @n
 | @show{(coe '(+ (+ (+ 3 4) 5) 6))}
 | @showsoln{(coe '(+ (+ 3 (+ 4 5)) 6))}
 | @showsoln{(coe '(+ (+ 3 4) (+ 5 6)))}
-| @showsoln{(coe '(+ 3 (+ 4 (+ 5 6))))}
 
 | @n
 | @show{(coe '(* (* 10 6) (* 9 4)))}
 | @showsoln{(coe '(* (* 10 (* 6 9)) 4))}
 | @showsoln{(coe '(* (* (* 10 6) 9) 4))}
-| @showsoln{(coe '(* 10 (* 6 (* 9 4))))}
 
 | @n
-| @show{(coe '(- (+ (+ 3 4) 5) 6))}
-| @showsoln{(coe '(- (+ 3 (+ 4 5)) 6 ))}
-| @ifsoln{No additional applications of the Associative Property are possible because the expression uses subtraction.}
-|
+| @show{(coe '(- (+ (+ 3 4) 5) (* 6 4)))}
+| @showsoln{(coe '(- (+ 4 (+ 3 5)) (* 6 4)))}
+| @showsoln{(coe '(- (+ 3 (+ 4 5)) (* 6 4)))}
 
 |===
