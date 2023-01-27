@@ -41,13 +41,23 @@ Sudents use Circles of Evaluation, words, and arithmetic to analyze the structur
 === Launch
 
 [.lesson-instruction]
+--
+
 - Show students the following expression: @math{2^3}
+
 - One way of reading this expression is "two raised to the power of three." Do you know any other ways of translating this expression into words?
+
 ** _Two to the third power; two to the third; two cubed_
+
+@right{@image{images/cube.png, "a cube with the dimensions 2 x 2 x 2, composed of 8 individual cubes", 150, ""}}
+
 - What does it mean to _cube_ a number?
-** We multiply it by itself three times (literally, computing the volume of a cube with a side-length of that number)
+
+** _We multiply it by itself three times. (Literally, we compute the volume of a cube with a side-length of that number; see image on right.)_
+
 - What does this expression evaluate to?
 ** @math{2^3 = 2 \times 2 \times 2 = 8}
+--
 
 Clarify and reinforce some key concepts about exponents via class discussion:
 
@@ -61,20 +71,29 @@ Clarify and reinforce some key concepts about exponents via class discussion:
 
 Explain to students that we can represent expressions with exponents as Circles of Evaluation. The function we use to do so is called `num-expt`; when we use `num-expt`, the first value is the _base_, and the second value is the exponent.
 
+Take a look at the two @vocab{equivalent} Circles of Evaluation, below. One is written in exponent notation, and the other is written in expanded notation.
+
+[.embedded, cols="^.^5,^.^1,^.^5", grid="none", stripes="none" frame="none"]
+
+|===
+| @math{2^5}
+|
+| @math{2 \times 2 \times 2 \times 2 \times 2}
+
+| @show{(coe '(num-expt 2 5))}
+| @math{=}
+| @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
+|===
+
 [.lesson-point]
 Exponents are valuable because they act as a shorthand.
 
-The Circle of Evaluation for @math{2 \times 2 \times 2 \times 2 \times 2} looks like this:
-
-[.centered-image]
-@show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
-
-Here is the Circle of Evaluation for @math{2^5}, an @vocab{equivalent} expression:
-
-[.centered-image]
-@show{(coe '(num-expt 2 5))}
-
 The Circle of Evaluation with `num-expt` is a lot shorter, and easier to read!
+
+[.lesson-instruction]
+Now, turn to @printable-exercise{exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
+
+Ensure that students are comfortable shifting between representations before discussing some common difficulties with interpreting exponents.
 
 [.lesson-instruction]
 --
