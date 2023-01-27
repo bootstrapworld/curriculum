@@ -5,6 +5,8 @@ all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc
 
 ###############################################################################
 
+# split into separate rules later
+
 do-conversions:
 	@echo ")" >> $(ADOCABLES_INPUT)
 	@$(MAKE_DIR)run-asciidoctor.sh
@@ -13,6 +15,7 @@ do-conversions:
 	@$(MAKE_DIR)make-dependency-graph.sh
 	@$(MAKE_DIR)make-image-list.sh
 	@$(MAKE_DIR)make-pathway-tocs.sh
+	@$(MAKE_DIR)make-bilingual-glossary.sh
 
 ###############################################################################
 
