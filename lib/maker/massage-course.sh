@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-01-20
+# last modified 2023-01-27
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -50,18 +50,32 @@ else
 fi
 
 for d in $pathwayName*; do
-  if test -d $d; then
-    cd $d
-    for dd in front-matter back-matter resources; do
-      if test -d $dd; then
-        make_solution_pages $dd
-        collect_workbook_pages $dd
-      fi
-    done
-    $PROGDIR/collect-workbook-pages.rkt
-    make_workbook_jsons
-    cd ..
+  test -d $d || continue
+
+  cd $d
+
+  for dd in front-matter back-matter resources; do
+    if test -d $dd; then
+      make_solution_pages $dd
+      collect_workbook_pages $dd
+    fi
+  done
+  $PROGDIR/collect-workbook-pages.rkt
+  make_workbook_jsons
+
+  if test ! -f lesson-order.txt; then
+    echo 
+    echo WARNING: No lesson-order.txt in pathway $PATHWAY/$NATLANG
+  else
+    grep -v '^ *;' lesson-order.txt |
+      $SED -e 's/\t/ /g' |
+      $SED -e 's/;.*//' |
+      $SED -e 's/ *$//' |
+      grep -v '^ *$' |
+      $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
   fi
+
+  cd ..
 done
 
 # weird, make fails without following!
