@@ -1,7 +1,7 @@
 # created 2023-01-18
 # last modified 2023-01-27
 
-all: do-conversions distribution/$(NATLANG)/lib/page-not-found.adoc
+all: distribution/$(NATLANG)/lib/page-not-found.pdf do-conversions
 
 ###############################################################################
 
@@ -16,12 +16,15 @@ do-conversions:
 	@$(MAKE_DIR)make-image-list.sh
 	@$(MAKE_DIR)make-pathway-tocs.sh
 	@$(MAKE_DIR)make-bilingual-glossary.sh
+	@$(MAKE_DIR)make-pdf.sh
 
 ###############################################################################
 
-distribution/$(NATLANG)/lib/page-not-found.adoc:
+distribution/$(NATLANG)/lib/page-not-found.pdf:
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
-	@echo ", { \"input\": \"lib/page-not-fond.html\" }" >> $(PUPPETEER_INPUT)
+	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
+	@echo lib/page-not-found.adoc >> $(ADOC_INPUT)
+	@echo ", { \"input\": \"lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT)
 
 ###############################################################################
 

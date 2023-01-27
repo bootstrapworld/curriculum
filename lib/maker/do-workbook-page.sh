@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-21
+# last modified 2023-01-27
 
 adocfile=$1
 
@@ -16,6 +16,8 @@ adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
+whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
+
 htmlfile=${ascfile%.asc}.html
 
 otherdirarg="#f"
@@ -28,6 +30,12 @@ solutionsmodearg="#f"
 
 if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
+fi
+
+aspect=portrait
+
+if head -5 $adocfile|grep -q '^ *\[\.landscape] *$'; then
+  aspect=landscape
 fi
 
 lesson=$(echo $containingdirectory|$SED -e 's#lessons/\([^/]*\).*#\1#')
@@ -49,3 +57,7 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 echo $ascfile >> $ADOC_INPUT
 
 echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+
+if test $otherdirarg != "#t" ; then
+  echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
+fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-21
+# last modified 2023-01-27
 
 adocfile=$1
 
@@ -20,6 +20,8 @@ if test ! -s $adocfile; then
 fi
 
 htmlfile=${ascfile%.asc}.html
+
+whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
 
 otherdirarg="#f"
 
@@ -64,3 +66,5 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 echo $ascfile >> $ADOC_INPUT
 
 echo $htmlfile >> $ADOC_POSTPROC_LESSONPLAN_INPUT
+
+echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT

@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-21
+# last modified 2023-01-27
 
 adocfile=$1
 
@@ -17,6 +17,8 @@ adocbasename=$(basename $adocfile)
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 htmlfile=${ascfile%.asc}.html
+
+whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
 
 otherdirarg="#f"
 
@@ -53,3 +55,7 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 echo $ascfile >> $ADOC_INPUT
 
 echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
+
+if test $otherdirarg != "#t" ; then
+  echo ", { \"input\": \"$whtmlfile\" }" >> $PUPPETEER_INPUT
+fi
