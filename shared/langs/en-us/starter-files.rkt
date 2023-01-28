@@ -120,7 +120,7 @@
    ("pyret" "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_")
    )
 
-  ("piecewise-custom-scatter-plot" "Custom Scatter Plot with Piecewise Functions Starter File"
+  ("piecewise-displays" "Piecewise Displays Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1XK78l3FOYzmKPWrYmYBMUumvEWtwN03b")
    )
 
