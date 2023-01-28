@@ -1,0 +1,69 @@
+= age-dot
+++++
+<style>
+/* Hide DR elements we want hidden */
+#content .recipe_purpose_statement, table.recipe_title {
+ 	display: none !important;
+}
+/* Make the instructions more prominent, to take the place of headers */
+#content .recipe_instructions * {
+	font-style: italic;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
+.pyret .recipe_name {
+    text-align: center;
+}
+
+</style>
+++++
+
+@n On the three lines below, write the code to lookup the `age` column from `dog-row`, `old-row`, and `young-row`.
+
+@fitb{}{@ifsoln{`dog-row["species"]`}}
+
+@fitb{}{@ifsoln{`old-row["species"]`}}
+
+@fitb{}{@ifsoln{`young-row["species"]`}}
+
+
+@n On the three lines below, write the code that to use the `circle` function to draw a solid, blue circle whose radius is the _age of the animal_.
+
+@fitb{}{@ifsoln{`circle(dog-row["age"], "solid", "blue")`}}
+
+@fitb{}{@ifsoln{`circle(old-row["age"], "solid", "blue")`}}
+
+@fitb{}{@ifsoln{`circle(young-row["age"], "solid", "blue")`}}
+
+@n When you are confident with the code you have written, check with your partner or another student. Do you have the same code? Why or why not?
+
+@vspace{2ex}
+
+
+_Instead of writing this out over and over for each animal, let's define a function to do it for us!_
+
+== Defining the Function
+
+@design-recipe-exercise{ "age-dot"
+"Define a function called `age-dot`, which takes in a row from the Animals Table and draws a solid, blue circle whose radius is the age of the animal. __HINT: Use of the rows from above in your examples!__"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #t
+#:range "Image"
+#:show-range? #t
+#:purpose "Consumes an animal Row, and draws a solid blue circle using the age as the radius."
+#:show-purpose? #f
+#:num-examples 2
+#:example-list '((dog-row "circle(dog-row[\"age\"], \"solid\", \"blue\")")
+                 (old-row "circle(old-row[\"age\"], \"solid\", \"blue\")"))
+#:show-examples '(#f #f)
+#:param-list '(r)
+#:show-funname-defn? #t
+#:show-params? #f
+#:body "circle(r[\"age\"], \"solid\", \"blue\")"
+#:show-body? #f
+#:grid-lines? #f
+}

@@ -1,0 +1,47 @@
+= Exploring Conditional / Piecewise Functions
+
+Here's an example of a piecewise function with 5 "pieces" (or "conditions"!):
+```
+# species-color :: (Row) -> Image
+fun species-color(r):
+  if      (r["species"] == "dog"):       square(5, "solid", "black")
+  else if (r["species"] == "cat"):       square(5, "solid", "orange")
+  else if (r["species"] == "rabbit"):    square(5, "solid", "pink")
+  else if (r["species"] == "tarantula"): square(5, "solid", "red")
+  else if (r["species"] == "lizard"):    square(5, "solid", "green")
+  end
+end
+```
+
+[.FillVerticalSpace, cols="^1,^1", options="header"]
+|===
+| *What do you Notice?* | What do you Wonder?
+|                       |
+|===
+
+
+@n What will this function produce for a dog? @fitb{}{@ifsoln{a solid, 5px, black circle}}
+
+@n What will this function produce for a cat? @fitb{}{@ifsoln{a solid, 5px, orange circle}}
+
+@n Open the @starter-file{piecewise-displays}, and click "Run". What do these two displays show, that we didn't see before without piecewise functions?
+
+@fitb{}{@ifsoln{Weight is VERY skewed based on species. The dogs are overwhelmingly the heaviest!}}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n On line 46, add a comment (#) to "turn off" the condition for snails. What do you think will happen when you click Run? Try it out!
+
+@n In your own words, describe how piecewise / conditional functions work.
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@star OPTIONAL: Make a **new function** (don't delete `species-dot`!), which uses piecewise functions to draw something different! For example, have it draw different shapes depending on whether an animal is younger than 3 years old or not.
