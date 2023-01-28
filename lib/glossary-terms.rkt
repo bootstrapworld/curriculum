@@ -34,7 +34,7 @@ when it prints out the glossary for a particular unit
     ((en-us ("ascending") "an order in which lower values appear first, and higher values appear after")
      (es-mx ("ascendente") "un orden de valores en la cual los más bajos aparecen primero y los más altos aparecen después"))
 
-    ((en-us ("Associative Property") "For expressions involving only multiplication or only addition, all possible groupings produce the same result.")
+    ((en-us ("Associative Property") "For any expression involving only multiplication or only addition, changing the groupings of the numbers will not change the result.")
      (es-mx ("Asociatividad" "La propiedad asociativa") "Para expresiones que usan solo suma o solo multiplicación, el resultado no depende de la manera en la que se agrupan los términos."))
 
     ((en-us ("axis" "axes") "A reference line, used to determine the position of a coordinate")
