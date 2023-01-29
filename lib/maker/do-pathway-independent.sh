@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-27
+# last modified 2023-01-28
 
 adocfile=$1
 
@@ -19,12 +19,6 @@ whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
 htmlfile=${ascfile%.asc}.html
 
 pdffile=${ascfile%.asc}.pdf
-
-otherdirarg="#f"
-
-if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
-  otherdirarg="#t"
-fi
 
 solutionsmodearg="#f"
 

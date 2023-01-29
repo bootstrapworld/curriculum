@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-27
+# last modified 2023-01-28
 
 adocfile=$1
 
@@ -54,10 +54,10 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson \"$lesson\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
 
-echo $ascfile >> $ADOC_INPUT
-
-echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-
 if test $otherdirarg != "#t" ; then
+  echo $ascfile >> $ADOC_INPUT
+
+  echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+
   echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
 fi

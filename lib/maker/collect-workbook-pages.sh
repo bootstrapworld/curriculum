@@ -1,22 +1,21 @@
 # created 2023-01-20
-# last modified 2023-01-20
+# last modified 2023-01-28
 
 function collect_workbook_pages() {
-  # echo doing collect_workbook_pages $1 in $(pwd)
-  d=$1
+  # echo doing collect_workbook_pages in $(pwd)
 
-  test -d $d/pages || return
+  test -d pages || return
 
-  test -f $d/pages/workbook-pages.txt ||
-    touch $d/pages/workbook-pages.txt
+  test -f pages/workbook-pages.txt ||
+    touch pages/workbook-pages.txt
 
   #ensure workbook-pages.txt ends in newline, or while isn't happy
-  $SED -i -e '$a\' $d/pages/workbook-pages.txt
+  $SED -i -e '$a\' pages/workbook-pages.txt
 
-  rm -f $d/pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
+  rm -f pages/.cached/.workbook-{pages,pages-ls,notes-pages-ls}.txt.kp
 
-  test -f $d/pages/.cached/.workbook-pages-ls.txt.kp ||
-    touch $d/pages/.cached/.workbook-pages-ls.txt.kp
+  test -f pages/.cached/.workbook-pages-ls.txt.kp ||
+    touch pages/.cached/.workbook-pages-ls.txt.kp
 
   while read -r f; do
     # echo finding aspect of "$f"
@@ -27,31 +26,31 @@ function collect_workbook_pages() {
     elif echo "$f"|grep -q '^ *//'; then
       :
     elif echo "$f"|grep -q landscape; then
-      echo $f >> $d/pages/.cached/.workbook-pages.txt.kp
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
       g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
       aspect=landscape
     elif echo "$f"|grep -q portrait; then
-      echo $f >> $d/pages/.cached/.workbook-pages.txt.kp
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
       g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
     elif test "${f%.adoc}" = "$f"; then
-      echo $f >> $d/pages/.cached/.workbook-pages.txt.kp
-      echo $f >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
+      echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
     else
       if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
         echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
         aspect=landscape
       elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
         echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
         aspect=landscape
       else
-        echo $f >> $d/pages/.cached/.workbook-pages.txt.kp
-        echo $f >> $d/pages/.cached/.workbook-pages-ls.txt.kp
+        echo $f >> pages/.cached/.workbook-pages.txt.kp
+        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
       fi
     fi
-  done < $d/pages/workbook-pages.txt
+  done < pages/workbook-pages.txt
 
 }

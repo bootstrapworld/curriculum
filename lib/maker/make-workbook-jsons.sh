@@ -1,7 +1,9 @@
 # created 2023-01-20
-# last modified 2023-01-20
+# last modified 2023-01-28
 
 function make_workbook_json_1() {
+
+  # echo doing make_workbook_json_1 $1 in $(pwd)
 
   local tgt=$1
 
@@ -41,6 +43,7 @@ function make_workbook_json_1() {
 
   cat $wbpnf |
     while read -r pdfpagespec; do
+      # echo processing $pdfpagespec
       if echo $pdfpagespec|grep -qv '\(lessons\|front-matter\|back-matter\)'; then
         continue
       fi
@@ -116,11 +119,12 @@ function make_workbook_json_1() {
 
     echo "] }" >> $WORKBOOKINPUT-$tgt.json
 
-    #echo Finished with $WORKBOOKINPUT-$tgt.json
+    # echo Finished with $WORKBOOKINPUT-$tgt.json
 
 }
 
 function make_workbook_jsons() {
+  echo doing make_workbook_json in $(pwd)
   for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
     workbook-long-sols opt-exercises opt-exercises-sols ; do
       make_workbook_json_1 $wbf

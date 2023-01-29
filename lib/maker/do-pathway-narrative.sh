@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-21
+# last modified 2023-01-28
 
 adocfile=$1
 
@@ -15,12 +15,6 @@ adocbasename=$(basename $adocfile)
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 htmlfile=${ascfile%.asc}.html
-
-otherdirarg="#f"
-
-if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
-  otherdirarg="#t"
-fi
 
 solutionsmodearg="#f"
 

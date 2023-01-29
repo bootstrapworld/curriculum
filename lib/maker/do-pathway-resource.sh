@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-27
+# last modified 2023-01-28
 
 adocfile=$1
 
@@ -17,8 +17,6 @@ adocbasename=$(basename $adocfile)
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 htmlfile=${ascfile%.asc}.html
-
-whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
 
 otherdirarg="#f"
 
@@ -52,10 +50,17 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:other-dir $otherdirarg #:resources $resourcesarg #:target-pathway \"$targetpathway\" #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
 
-echo $ascfile >> $ADOC_INPUT
-
-echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
 
 if test $otherdirarg != "#t" ; then
+  echo $ascfile >> $ADOC_INPUT
+
+  if test $resourcesarg = "#t" -a $adocbasename = "index.adoc" -a $distrootdir = "../../../"; then
+    echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
+    whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
+  else
+    echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+    whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
+  fi
+
   echo ", { \"input\": \"$whtmlfile\" }" >> $PUPPETEER_INPUT
 fi

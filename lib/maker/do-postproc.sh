@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-01-26
+# last modified 2023-01-28
 
 cd $TOPDIR/distribution/$NATLANG
 

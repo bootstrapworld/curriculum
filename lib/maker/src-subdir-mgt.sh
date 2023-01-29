@@ -1,5 +1,5 @@
 # created 2023-01-20
-# last modified 2023-01-21
+# last modified 2023-01-28
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -41,16 +41,15 @@ function shadowcopydir() {
 }
 
 function make_solution_pages() {
-  d=$1
-  test -d $d/pages || return
-  test -d $d/solution-pages-2 && rm -fr $d/solution-pages-2
-  $CP -pr $d/pages $d/solution-pages-2
-  $CP -p $PROGDIR/.hta* $d/solution-pages-2
-  if test -d $d/solution-pages; then
-    shadowcopydir $d/solution-pages $d/solution-pages-2
-    rm -fr $d/solution-pages
+  test -d pages || return
+  test -d solution-pages-2 && rm -fr solution-pages-2
+  $CP -pr pages solution-pages-2
+  $CP -p $PROGDIR/.hta* solution-pages-2
+  if test -d solution-pages; then
+    shadowcopydir solution-pages solution-pages-2
+    rm -fr solution-pages
   fi
-  mv $d/solution-pages-2 $d/solution-pages
-  test -d $d/pages/.cached || mkdir -p $d/pages/.cached
-  test -d $d/solution-pages/.cached || mkdir -p $d/solution-pages/.cached
+  mv solution-pages-2 solution-pages
+  test -d pages/.cached || mkdir -p pages/.cached
+  test -d solution-pages/.cached || mkdir -p solution-pages/.cached
 }
