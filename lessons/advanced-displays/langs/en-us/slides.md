@@ -203,7 +203,7 @@ Debrief, and ask students to explain what the code does. Pay special attention t
 {layout="Investigate"}
 # Using Conditionals
 
-- Turn to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{custom-animals} Starter File.
+- Turn to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{piecewise-animal-images} Starter File.
 - How does using clipart help us to better understand the data?
 - What _risks_ might there be to using clipart in displays?
 - We have seen a lot of different image scatter plots today! What ideas do you have for how `image-scatter-plot` could be used to deepen the analysis of your dataset?

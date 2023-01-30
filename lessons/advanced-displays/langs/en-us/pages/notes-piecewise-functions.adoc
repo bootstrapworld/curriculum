@@ -11,7 +11,7 @@ But sometimes, **machines even consume other machines:**
 
 This is true of function machines in math and programming, as well! Functions can be their own kind of data type!
 
-Imagine a function `species-color`, that consumes a Row from the Animals Dataset, and produces a different-colored square depending on the species. What if, instead of drawing the same blue dot for each animal in a scatter plot, we used `species-color` to customize the color for each row? In this example, we're using the `species-color` function __as an input to our scatter plot function!__
+Imagine a function `species-dot`, that consumes a Row from the Animals Dataset, and produces a different-colored square depending on the species. What if, instead of drawing the same blue dot for each animal in a scatter plot, we used `species-dot` to customize the color for each row? In this example, we're using the `species-dot` function __as an input to our scatter plot function!__
 
 Printed below is the contract for a special scatter plot function, which __consumes functions__. In fact, there are special functions for other kinds of displays as well:
 
@@ -27,9 +27,9 @@ Look carefully at the last argument in each Domain. In each case, it's a functio
 == Piecewise Functions
 
 - Functions always appy a particular rule to their input. In an earlier lesson, you saw how `gt` always draws a solid, green triangle using the input as the size.
-- But in `species-color` example above, there's no single rule that will generate a different color for each species. We need a way for functions to change rules, depending on their input.
+- But in `species-dot` example above, there's no single rule that will generate a different color for each species. We need a way for functions to change rules, depending on their input.
 
-- In math, *Piecewise Functions* are functions that can behave one way for part of their Domain, and another way for a different part. In our `species-color` example, our function might draw black squares when the input is a dog, but orange squares when the input is a cat.
+- In math, *Piecewise Functions* are functions that can behave one way for part of their Domain, and another way for a different part. In our `species-dot` example, our function might draw black squares when the input is a dog, but orange squares when the input is a cat.
 
 - Piecewise functions are divided into "pieces". Each piece is divided into two parts:
 
@@ -39,8 +39,8 @@ Look carefully at the last argument in each Domain. In each case, it's a functio
 - Each "piece" of our piecewise function has two parts: the "if" and the "then". This tells the computer _when_ to apply each rule, and _what_ the rule is.
 
 ```
-# species-color :: (Row) -> Image
-fun species-color(r):
+# species-dot :: (Row) -> Image
+fun species-dot(r):
   if      (r["species"] == "dog"):       square(5, "solid", "black")
   else if (r["species"] == "cat"):       square(5, "solid", "orange")
   else if (r["species"] == "rabbit"):    square(5, "solid", "pink")
