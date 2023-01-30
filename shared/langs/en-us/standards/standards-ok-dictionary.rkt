@@ -325,7 +325,7 @@
           )
          ("OK.A1.F.1.4"
           "Given a graph modeling a real-world situation, read and interpret the linear piecewise function (excluding step functions)."
-          "custom-scatter-plots"
+          "advanced-displays"
           "contracts"
           )
          ("OK.A1.F.2"
@@ -397,7 +397,7 @@
          ("OK.A2.F.1.8"
           "Graph piecewise functions with no more than three branches (including linear, quadratic, or exponential branches) and analyze the function by
           identifying the domain, range, intercepts, and intervals for which it is increasing, decreasing, and constant."
-          "custom-scatter-plots"
+          "advanced-displays"
           )
           ("OK.A2.D.2.1"
            "Evaluate reports based on data published in the media by identifying the source of the data, the design of the study, and the way the data are analyzed and displayed. Given spreadsheets, tables, or graphs, recognize and analyze distortions in data displays. Show how graphs and data can be distorted to support different points of view."
@@ -1072,7 +1072,7 @@
           ("OK.L1.AP.M.01"
            "Break down a solution into procedures using systematic analysis and design."
            "method-chaining"
-           "custom-scatter-plots"
+           "advanced-displays"
            "defining-table-functions"
            "problem-decomposition"
            "piecewise-functions-conditionals"
@@ -1084,7 +1084,7 @@
            "Create computational artifacts by systematically organizing, manipulating and/or processing data."
            "table-methods"
            "method-chaining"
-           "custom-scatter-plots"
+           "advanced-displays"
            "defining-table-functions"
            "piecewise-functions-conditionals"
            )

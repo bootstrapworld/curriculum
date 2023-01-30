@@ -85,21 +85,9 @@
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FI6zAvad2EELkQxtS0SZG%2Ffile.json")
    )
 
-  ("custom-animals" "Custom Animals Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1hmVFpA2zWBWaKulm6LwHHzKrDhH15jvP")
-   )
-
   ("expanded-animals" "Expanded Animals Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1zkT8gS3gHMyLdI7VdrruJZvn4SPQmPDc")
    ("codap" "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json")
-   )
-
-  ("custom-scatter-plot" "Custom Scatter Plot Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1DKazhJNmH1LB2J46qYMt4h2YgWPBvZEY")
-   )
-
-  ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1fjtcMYGQHtUmHPP0xKYYulL7xu1Nl0eQ")
    )
 
   ("fair-coins" "Fair Coins Starter File"
@@ -120,12 +108,21 @@
    ("pyret" "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_")
    )
 
+  ;;;; These starter files are all used in Advanced-Displays
+  ("custom-scatter-plot" "Custom Scatter Plot Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1DKazhJNmH1LB2J46qYMt4h2YgWPBvZEY")
+   )
+
   ("piecewise-displays" "Piecewise Displays Starter File"
    ("pyret" "https://code.pyret.org/editor#share=1XK78l3FOYzmKPWrYmYBMUumvEWtwN03b")
    )
 
-  ("putting-it-all-together" "Putting it all Together Starter File"
-   ("pyret" "https://code.pyret.org/editor#share=1i-EWykcjBGPeyFkGK0C1vYl5BVPkQ8ef")
+  ("piecewise-animal-images" "Animal Images Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1hmVFpA2zWBWaKulm6LwHHzKrDhH15jvP")
+   )
+
+  ("custom-scatter-plot-w-range" "Dots for Value Ranges Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1fjtcMYGQHtUmHPP0xKYYulL7xu1Nl0eQ")
    )
 
   ("row-functions" "Row Functions Starter File"
