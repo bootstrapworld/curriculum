@@ -11,8 +11,8 @@ these base names to the `$RELEVANT_LESSONS_INPUT`.
 The names of the pathway-independent .adoc files under
 `distribution/en-us/textbooks` are collected.
 
-The .adoc file, together with its `#:containing-directory` and
-`#:dist-root-dir` value is added to `$ADOCABLES_INPUT`.
+The .adoc file, together with its `+#:containing-directory+` and
+`+#:dist-root-dir+` value is added to `$ADOCABLES_INPUT`.
 
 
 
@@ -30,20 +30,20 @@ can be proceed.
 
 Using the entries in `$RELEVANT_LESSONS_INPUT`, we collect all
 the workbook-page .adoc files and add them to
-`$ADOCABLES_INPUT`. The `#:containing-directory`,
-`#:dist-root-dir`, `#:lesson`, `#:other-dir`, `#:solutions-mode?`
-and `#:proglang` values are included.
+`$ADOCABLES_INPUT`. The `+#:containing-directory+`,
+`+#:dist-root-dir+`, `+#:lesson+`, `+#:other-dir+`, `+#:solutions-mode?+`
+and `+#:proglang+` values are included.
 
-`#:lesson` is simply the
+`+#:lesson+` is simply the
 basename of the distribution lesson. 
 
-`#:other-dir` is a boolean
+`+#:other-dir+` is a boolean
 identifying if the file is simply meant for inclusion in other
 adoc files and not for
 full-scale conversion themselves. Such files are located in
 subdirs named `fragments`, `xtra`, or `xtras`.
 
-`#:solution-mode?` is a boolean set to true only for adoc files
+`+#:solution-mode?+` is a boolean set to true only for adoc files
 in `solution-pages`. Such files contain information meant for
 teachers but not students.
 
@@ -61,15 +61,15 @@ can be proceed.
 
 Using the entries in `$RELEVANT_LESSONS_INPUT`, we collect all
 the lesson-plan .adoc files and add them to
-`$ADOCABLES_INPUT`. The `#:containing-directory`,
-`#:dist-root-dir`, `#:lesson-plan`, `#:proglang`,
-and `#:other-proglangs` 
+`$ADOCABLES_INPUT`. The `+#:containing-directory+`,
+`+#:dist-root-dir+`, `+#:lesson-plan+`, `+#:proglang+`,
+and `+#:other-proglangs+` 
  values are included. 
 
-`#:lesson-plan` is simply the
+`+#:lesson-plan+` is simply the
 basename of the distribution lesson. 
 
-`#:other-proglangs` is a list of the other proglangs for which
+`+#:other-proglangs+` is a list of the other proglangs for which
 this lesson is available. This is used to have the lesson plan
 include links to the plans for the same lesson in the other
 proglangs.
@@ -84,13 +84,13 @@ cached .html version of the file is added ot
 
 Collect all the .adoc files _except_ the narrative file and add
 them to `$ADOCABLES_INPUT`.  Other values included:
-`#:containing-directory`, `#dist-root-dir`, `#:other-dir`,
-`#:resources`, `#:target-pathway`, `#:solutions-mode?`,
-`#:proglang`.
+`+#:containing-directory+`, `#dist-root-dir`, `+#:other-dir+`,
+`+#:resources+`, `+#:target-pathway+`, `+#:solutions-mode?+`,
+`+#:proglang+`.
 
-`#:resources` is set to true.
+`+#:resources+` is set to true.
 
-`#:target-pathway` is the (base) name of the course directory
+`+#:target-pathway+` is the (base) name of the course directory
 (with the proglang suffix, if any).
 
 
@@ -104,12 +104,12 @@ The cached .html file is added to
 
 Collect all the narrative .adoc files in the distribution and add
 then to `$ADOCABLES_INPUT`. Other values included:
-`#:containing-directory`, `#:dist-root-dir`, `#:narrative`,
-`#:target-pathway`, `#:proglang`, `#:other-proglangs`.
+`+#:containing-directory+`, `+#:dist-root-dir+`, `+#:narrative+`,
+`+#:target-pathway+`, `+#:proglang+`, `+#:other-proglangs+`.
 
-`#:narrative` is set to true.
+`+#:narrative+` is set to true.
 
-`#:other-proglangs` is the list of other proglangs for which this
+`+#:other-proglangs+` is the list of other proglangs for which this
 course is available, so they can link to each other.
 
 The .asc file is added to `$ADOC_INPUT`.
