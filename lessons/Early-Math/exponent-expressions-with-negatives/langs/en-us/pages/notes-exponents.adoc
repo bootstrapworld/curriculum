@@ -23,7 +23,7 @@ Below, one Circle of Evaluation is written in exponent notation, while the other
 |
 | @math{2 \times 2 \times 2 \times 2 \times 2}
 
-| @show{(coe '(num-expt 2 5))}
+| @show{(coe '(expt 2 5))}
 | @math{=}
 | @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
 |===
@@ -35,7 +35,7 @@ Exponents are valuable because they act as a shorthand.
 
 @vspace{1ex}
 
-The Circle of Evaluation with `num-expt` is a lot shorter, and easier to read!
+The Circle of Evaluation with `expt` is a lot shorter, and easier to read!
 
 == Multi-Step Exponent Expressions
 
@@ -47,7 +47,7 @@ In multi-step exponent expressions with no grouping symbols, we evaluate the exp
 | @math{(7 \times 5)^2}
 
 | @show{(coe '(* 7 (expt 5 2)))}
-| @show{(coe '(num-expt (* 7 5)))}
+| @show{(coe '(expt (* 7 5)))}
 |===
 
 @vspace{1ex}
@@ -58,6 +58,6 @@ Circles of Evaluation can help us to visualize expressions with exponents and ne
 |===
 | @math{-(3^2)}
 | @math{(-3)^2}
-| @show{(coe  '(negate (num-expt 3 2)))}
-| @show{(coe  '(num-expt (negate 3) 2))}
+| @show{(coe  '(negate (expt 3 2)))}
+| @show{(coe  '(expt (negate 3) 2))}
 |===

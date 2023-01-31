@@ -69,7 +69,7 @@ Clarify and reinforce some key concepts about exponents via class discussion:
 
 - There is no special terminology for any other exponents.
 
-Explain to students that we can represent expressions with exponents as Circles of Evaluation. The function we use to do so is called `num-expt`; when we use `num-expt`, the first value is the _base_, and the second value is the exponent.
+Explain to students that we can represent expressions with exponents as Circles of Evaluation. The function we use to do so is called `expt`; when we use `expt`, the first value is the _base_, and the second value is the exponent.
 
 Take a look at the two @vocab{equivalent} Circles of Evaluation, below. One is written in exponent notation, and the other is written in expanded notation.
 
@@ -80,7 +80,7 @@ Take a look at the two @vocab{equivalent} Circles of Evaluation, below. One is w
 |
 | @math{2 \times 2 \times 2 \times 2 \times 2}
 
-| @show{(coe '(num-expt 2 5))}
+| @show{(coe '(expt 2 5))}
 | @math{=}
 | @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
 |===
@@ -88,7 +88,7 @@ Take a look at the two @vocab{equivalent} Circles of Evaluation, below. One is w
 [.lesson-point]
 Exponents are valuable because they act as a shorthand.
 
-The Circle of Evaluation with `num-expt` is a lot shorter, and easier to read!
+The Circle of Evaluation with `expt` is a lot shorter, and easier to read!
 
 [.lesson-instruction]
 Now, turn to @printable-exercise{exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
@@ -102,7 +102,7 @@ Ensure that students are comfortable shifting between representations before dis
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 |@math{5^2}							| @math{2^5}
-|@show{(coe  '(num-expt 5 2))}		| @show{(coe  '(num-expt 2 5))}
+|@show{(coe  '(expt 5 2))}		| @show{(coe  '(expt 2 5))}
 |===
 
 - Angela says the Circles of Evaluation are equivalent because of the @vocab{Commutative Property}. Do you agree with Angela?
@@ -112,7 +112,7 @@ Ensure that students are comfortable shifting between representations before dis
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 |@math{5^2}							| @math{5 \times 2}
-|@show{(coe  '(num-expt 5 2))}		| @show{(coe  '(* 5 2))}
+|@show{(coe  '(expt 5 2))}		| @show{(coe  '(* 5 2))}
 |===
 - Are these two Circles of Evaluation equivalent?
 ** _No; multiplying the base by the exponent is a common student error which produces a different result than multiplying the base by the base._
@@ -129,7 +129,7 @@ With a basic understanding of how exponents work, students are ready to discover
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 
-|@show{(coe  '(* 9 (num-expt 3 2)))}		| @show{(coe  '(num-expt (* 9 3) 2))}
+|@show{(coe  '(* 9 (expt 3 2)))}		| @show{(coe  '(expt (* 9 3) 2))}
 |===
 
 - How would you translate each of these Circles of Evaluation into words? Why are their translations different?
@@ -175,8 +175,8 @@ Students use Circles of Evaluation to parse and evaluate exponential expressions
 - Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4m^2}. Four students produced four different Circles of Evaluation! Take a look at their work:
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
-| Keke: @show{(coe  '(* 4 (num-expt 2 m)))} | Jayla: @show{(coe  '(* 4 (num-expt m 2)))}
-| Joe: @show{(coe  '(+ 4 (num-expt m 2)))}  | Aaron: @show{(coe  '(num-expt (* 4 m) 2))}
+| Keke: @show{(coe  '(* 4 (expt 2 m)))} | Jayla: @show{(coe  '(* 4 (expt m 2)))}
+| Joe: @show{(coe  '(+ 4 (expt m 2)))}  | Aaron: @show{(coe  '(expt (* 4 m) 2))}
 |===
 - Which Circle of Evaluation do you think matches the expression? If you're not sure, are there any that you can rule out right away?
 ** _Sample response: Jayla's Circle of Evaluation is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's Circle of Evaluation doesn't work because he added rather than finding a product. Aaron squared @math{4m}, rather than just squaring @math{m}._
