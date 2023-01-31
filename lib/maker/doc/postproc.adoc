@@ -17,26 +17,30 @@ cases, i.e., workbook pages and pathway-independent files.
 
 The following are the components of the postprocessing:
 
-===  CSS path correction
-
+-  CSS path correction:
 When Asciidoctor is run on the `.asc` file, it enshrines a
-pathname for `curriculum.css`. Make it a relative to the HTML
-location.
+pathname for `curriculum.css`. Make it relative to the HTML
+location. (Unfortunately, Asciidoctor can't take a relative
+pathname correctly from commandline when called on files that
+aren't in the calling directory.)
 
-=== Boilerplate insertion
-
+- Boilerplate insertion.
 Include links to various `*.css` and `*.js` files. Sometimes
 conditionally: Codemirror-related links are included only if the
 file has tags classed `pyret`, `racket`, or `circleevalsexp`.
 
-
-
-=== Asciidoctor quirk correction
-
+-  Nested span and div insertion.
 Asciidoctor lacks the ability to nest more than one level of div or span with specific
 classes. The Racket preprocessor embeds markers for these so they
 go through Asciidoctor verbatim. We can now scan for them and
 replace them with divs/spans as appropriate.
 
-//====
+- Remove intrusive spans in headers, add self-link to h2's
 
+- Create Google-Drive versions
+
+In general, it would be nice to reduce the amount of
+postprocessing needed. However there are some limitations to how
+much we can autoinsert during the preprocessing and
+Asciidoctor-ing phases. View this purely as the unavoidable finishing
+touch. Hopefully we can reduce this with time.

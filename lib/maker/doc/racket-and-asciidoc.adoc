@@ -10,7 +10,7 @@ This is because the .adoc files created by the curriculum authors
 contains some directives in addition to the commands provided by
 raw AsciiDoc. A Racket program preprocesses these away to create
 a raw AsciiDoc file. This has the extension `.asc` and is
-situation in a `.cached` subdir alongside the `.adoc` file penned
+situated in a `.cached` subdir alongside the `.adoc` file penned
 by the author.
 
 The additional keyword values provided in the `$ADOCABLES_INPUT`
@@ -21,6 +21,23 @@ plans, narratives, etc.).
 A single Racket call is sufficient to process all the entries in
 `$ADOCABLES_INPUT`.
 
+==== Primitives used
+
+When processing lesson files (whether lesson plan, work page, or
+a file included by them), the primitives found in it are stored
+in temp files in `.cached`. These become useful when creating
+a collective description
+of all the courses and lessons.
+
+==== Exercise files
+
+Special directives -- `@printable-exercise`,
+`@opt-printable-exercise`, `@handout` -- are used to include
+files within the lesson directory that are meant to be
+_exercises_. Their names are stored in
+`.cached/.lesson-exericses.txt.kp`.  Again these are useful for
+the collective description.
+
 === Calling Asciidoctor
 
 Once the Racket preprocessor done, we have a bunch of
@@ -30,12 +47,10 @@ we have already captured in the file `$ADOC_INPUT`.
 These files are now ready to be processed by Asciidoctor to
 produce the corresponding .html.
 
-The `asciidoctor` command can take a bunch of input files 
+The `asciidoctor` command can take a bunch of input files
 as command-line input, however, given the number of files we're
 processing, we will be exceeding the maximum-arg limit. We
 therefore split the `$ADOC_INPUT` file into smaller files, each
 of at most 100 entries, and we run `asciidoctor` separately on
 these groups of 100.
-
-
 
