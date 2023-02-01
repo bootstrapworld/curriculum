@@ -308,6 +308,7 @@ fi
 
 # ! checkmd5nochange distribution/$NATLANG/lib $TOPDIR/lib
 if true; then
+  echo \n # add an empty line so as to not swallow the entered terminal command
   overwrite copying distribution/$NATLANG/lib
   $CP -p $TOPDIR/lib/*.rkt $TOPDIR/lib/*.html $TOPDIR/lib/*.sh $TOPDIR/lib/ano* $TOPDIR/lib/check* \
     $TOPDIR/lib/.hta* $PROGDIR
@@ -605,7 +606,7 @@ function lintlesson() {
 function addanalytics() {
   local f=$1
   $SED -i \
-    -e '/^<body/r $TOPDIR/lib/analytics.txt' \
+    -e '/^<body/r '$TOPDIR'/lib/analytics.txt' \
     $f
 }
 
@@ -1557,6 +1558,34 @@ function builddependencyjson() {
   iconv -f UTF-8 -t UTF-16 $GRAPHFILE > tmp.txt
   mv -f tmp.txt $GRAPHFILE
   #rm tmp.txt
+}
+
+function buildimagejfile() {
+  # echo doing buildimagejfile
+  cd $TOPDIR/distribution/$NATLANG/lessons
+  export DISTROOTDIR=../
+  local IMAGEFILES=$TOPDIR/distribution/$NATLANG/.cached/.image-files.rkt
+  echo "(" > $IMAGEFILES
+  local IMAGEJFILE=$TOPDIR/distribution/$NATLANG/images.js
+  local first=1
+  local L Lbasename
+  for L in *;do
+    if ! proglangversion $L; then
+      continue
+    fi
+    Lbasename=$L
+    if test $(echo $L|grep "\-wescheme"); then
+      Lbasename=${L%-wescheme}
+    fi
+
+    if ! grep -q "^ *\"$Lbasename/images/" $IMAGEFILES; then
+      if test -f $L/images/lesson-images.json; then
+        echo \(\"$Lbasename\" \"$L/images/lesson-images.json\"\) >> $IMAGEFILES
+      fi
+    fi
+  done
+  echo ")" >> $IMAGEFILES
+  $PROGDIR/make-images-js.rkt
 }
 
 function buildlessonplans() {
@@ -2773,7 +2802,7 @@ function doadocpostproc() {
   if test -s $ADOC_INPUT; then
     if test ! $ASCIIDOCNODE; then
       # echo calling asciidoctor on $ADOC_INPUT
-      asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
     else
       echo Trying node asciidoctor!
       $SED -i -e 's/.*/"\0", /' $ADOC_INPUT
@@ -2930,7 +2959,7 @@ function callonARGS() {
     if test -z "$PROGLANG"; then
       local firstproglang=pyret
       local proglangFile=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG/proglang.txt
-      if test -f $lessonOrderFile; then
+      if test -f $proglangFile; then
         local proglangs=$(cat $proglangFile)
         firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
       fi
@@ -3031,6 +3060,8 @@ echo " "
 callonARGS buildworkbookjsons
 
 builddependencyjson
+
+buildimagejfile
 
 buildpathwaytocs
 

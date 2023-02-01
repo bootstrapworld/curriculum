@@ -210,7 +210,7 @@ Adding the questions to our pattern gives us:
 
 This practically gives away the body of our function definition!
 
-@image{images/cost-code.png, "a"}{width="700"}
+@image{images/cost-code.png}{width="700"}
 
 ---
 {layout="Synthesize"}

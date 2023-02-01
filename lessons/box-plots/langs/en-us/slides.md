@@ -50,7 +50,7 @@ How do we measure the @vocab{spread} of a population?
 {layout="LaunchC"}
 # Making Box Plots
 
-@right{@image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}}Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}.{style="font-size:16pt"}
+@right{@image{images/box-n-whisker-plot.png, 250}}Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}.{style="font-size:16pt"}
 
 We can learn something about the @vocab{spread} of the dataset by taking the _median of each half_, splitting the population into four equal-sized @vocab{quartiles}.{style="font-size:16pt"}
 
@@ -62,7 +62,7 @@ We can learn something about the @vocab{spread} of the dataset by taking the _me
 {layout="LaunchC"}
 # Making Box Plots
 
-@image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}
+@image{images/box-n-whisker-plot.png, 250}
 Since each quartile has exactly 1/4th of the animals in it, we know that the "middle half" of the animals’ weights are spread between Q1 and Q3.{style="font-size:16pt"}
 
 The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less. _What animals does the *third* quartile represent_?{style="font-size:16pt"}
@@ -71,7 +71,7 @@ The first quartile (Q1) is the value for which 25% of the animals weighed that a
 {layout="LaunchC"}
 # Making Box Plots
 
-@image{images/box-n-whisker-plot.png, "A sample box-and-whisker plot", 250}
+@image{images/box-n-whisker-plot.png, 250}
 Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire dataset—that is, the distance between minimum and maximum. This is called the @vocab{range of a dataset}. 
 
 <!--
@@ -139,7 +139,7 @@ This plot shows us the center and spread in our dataset according to those five 
 {layout="InvestigateC"}
 # Making Box Plots
 
-@image{images/5-plot.png, "5-number-summary", 400}
+@image{images/5-plot.png, 400}
 
 * Turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
 * Fill in the five-number summary for the `pounds` column, and sketch the box plot.

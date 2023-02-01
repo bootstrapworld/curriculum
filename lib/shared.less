@@ -89,7 +89,6 @@ body {
 
   #footer {
     background: rgba(0,0,0,0.5);
-    margin-left: -3em;
     padding-left: 10px !important;
     position:   fixed;
     top:        100%;
@@ -157,7 +156,7 @@ body {
     font-style: italic; 
     line-height: 1.5ex;
     word-break: break-word;
-    &::before { content: 'Source: '; }
+    &:empty { display: none; }
   }
   .editbox {
     width:              auto;
@@ -512,6 +511,7 @@ body.workbookpage {
     display: inline-block; 
     padding-top: 1.2rem; 
     &::after { content: ')'; }
+    &.star::after { content: unset; }
   }
   td .autonum {
     padding-top: 0;
@@ -545,6 +545,7 @@ body.workbookpage {
     text-align:         center;
     font-style:         normal;
     font-family:        @text-font;
+    white-space:        nowrap;
   }
   .fitb.stretch, .fitbruby.stretch { 
     margin-left:        5px; 
@@ -604,14 +605,18 @@ body.LessonNotes {
   width: 100%;
   td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
   td { padding: 0.2rem 0.625rem; }
+  td p.tableblock { font-size: 0.65rem; }
 
   .fitbruby { text-align: left !important; }
+  .fitbruby.stretch { margin-left: 0 !important; }
 
   /* Ruby text in the Data Cycle needs to be slightly larger than normal */
   .fitbruby .ruby { 
     font-size:  0.75rem !important; 
     &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
+  .question_type, .question_type_checked { display: inline-block; margin: 0 2em;}
+  .question_type_checked { font-style: italic; font-weight: bold; }
 }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
@@ -939,7 +944,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 * SCREEN MEDIA
 */
 @media screen {
-  html { height: 100%; display:  flex; }
+  /* add some left-padding to improve readability on screens */
+  html { height: 100%; display:  flex; padding-left: 3em; }
 
   .web-page-only {
     font-weight:      bold;
@@ -954,9 +960,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     min-height: calc(11in * 1.25) !important;
     #savetodrive-div { transform: scale(0.8); }
   }
-
-  /* add some left-padding to improve readability on screens */
-  body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
   /********************************************************************
    *  Collapsing Headers 

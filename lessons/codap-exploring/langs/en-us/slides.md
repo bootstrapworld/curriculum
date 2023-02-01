@@ -16,7 +16,7 @@ Each group can only have one "Driver" - their hands are on the keyboard, and the
 
 If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
 
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
+@image{images/driver-navigator.png, 150}
 
 
 ---
@@ -33,7 +33,7 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 
 Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
 
-@image{images/grey-plus-sign.png, "screenshot from CODAP indicating how to add a new column"}
+@image{images/grey-plus-sign.png}
 
 ---
 {layout="LaunchC"}
@@ -41,7 +41,7 @@ Did you create a blank column titled `test`? To do so, select the grey plus sign
 
 In the next activity, you will click on the `test` cell in the header of your table, and then choose `Edit formula` from the resulting drop-down menu.
 
-@image{images/edit-formula.png, "screenshot from CODAP indicating how to edit a formula"}
+@image{images/edit-formula.png}
 
 ---
 {layout="LaunchC"}
@@ -49,7 +49,7 @@ In the next activity, you will click on the `test` cell in the header of your ta
 
 As you complete each directive, you will re-open `Edit Formula` (below), delete your previous entry and then input the next entry.
 
-@image{images/edit-formula-box.png, "screenshot from CODAP showing where to input new formulas"}
+@image{images/edit-formula-box.png}
 
 ---
 {layout="Investigate"}
@@ -104,7 +104,7 @@ Boolean-producing expressions are yes-or-no questions and will always evaluate t
 
 For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
 
-@image{images/roller-coaster.png, a}
+@image{images/at-least-this-tall-to-ride.jpeg}
 
 --- 
 {layout="LaunchR"}
@@ -114,7 +114,7 @@ Similarly, when you log into your email, the computer asks for your password and
 
 Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
-@image{images/login.png, a}
+@image{images/login.png}
 
 ---
 {layout="Investigate-DN"}

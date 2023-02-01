@@ -22,7 +22,7 @@ Here we see a function definition written using pyret notation and using functio
 
 The *slope-intercept form of the line* includes the slope as the coefficient of x and the y-intercept as the numerical term.  You will hear people describe this form as @math{y = mx + b}, where @math{m} stands for slope and @math{b} stands for the y-intercept.{style="font-size:15pt"}
 
-@image{images/slope-and-y.png, "f(x) = 2x + 10. Slope = 2. Y-intercept = 10."}{style="font-size:15pt"}
+@image{images/slope-and-y.png}{style="font-size:15pt"}
 
 ---
 {layout="Launch"}

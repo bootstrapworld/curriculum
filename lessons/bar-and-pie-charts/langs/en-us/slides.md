@@ -19,7 +19,7 @@ Solicit student ideas for infographics, and/or provide some of your own
 {layout="LaunchR"}
 # Pie and Bar Charts
 
-@left{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs", 300}}
+@left{@image{images/legsp.png, 300}}
 
 Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
 
@@ -49,7 +49,7 @@ And here is an example of _using_ the function:
 {layout="LaunchR"}
 # Pie and Bar Charts
 
-@left{@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}}
+@left{@image{images/legsp.png,300}}
 
 Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
 
@@ -156,7 +156,7 @@ There are _many_ possible misconceptions about displays that students may encoun
 {layout="InvestigateR"}
 # Exploring other Displays
 
-@image{images/legsp.png,"A pie chart showing how many animals have each number of legs" ,300}
+@image{images/legsp.png,300}
 
 Turn to @printable-exercise{pages/kind-v-display.adoc}, and see if you can identify what kind of data each display needs!
 

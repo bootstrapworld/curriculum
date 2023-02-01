@@ -18,7 +18,7 @@ Open the @starter-file{animals} in CODAP. How many animals' names start with the
 
 Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
 
-@image{images/sort-ascending-by-name.png, "how to sort the animals alphabetically by name in CODAP"}{width="650"}
+@image{images/sort-ascending-by-name.png}{width="650"}
 
 
 ---
@@ -82,7 +82,7 @@ The Transformers plugin enables easy, low-stakes "what if?" exploration that enc
 - Login to the @starter-file{animals} in CODAP.
 - Access the Transformers plugin.
 
-@image{images/plugins-location.png,"A screenshot of CODAP, showing where the Transformers plugin can be found"}{width="350"}
+@image{images/plugins-location.png}{width="350"}
 
 
 ---
@@ -103,7 +103,7 @@ Another way to sort is with the Sort _Transformer_ (pictured below), which will 
 
 Complete the @printable-exercise{pages/codap-sort-transformer.adoc} worksheet, which will walk you through creating, applying, and saving a `Sort` Transformer.
 
-@image{images/sort-transformer.png,"An image of the Sort Transformer"}{width="550"}
+@image{images/sort-transformer.png}{width="550"}
 
 
 <!--

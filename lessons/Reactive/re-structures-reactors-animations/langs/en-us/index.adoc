@@ -31,11 +31,11 @@ In Bootstrap:Algebra, many decisions about your animation were made for you. We 
 
 Let’s create an animation of a sunset. The sun will start at the top-left corner of the screen and fall diagonally down and right across the sky. Here’s a running version of the animation we are trying to create. Notice that the sun dips below the horizon in the bottom-right corner.
 
-@centered-image{images/sunset1.gif, Sunset 1, 800}
+@center{@image{images/sunset1.gif, 800}}
 
 An animation is made of a sequence of images that we flip through quickly. We continue to think of an animation as a sequence of images in Bootstrap:Reactive. For example, here are the first three frames of the sunset animation:
 
-@centered-image{images/sunset2.png, Sunset 2, 800}
+@center{@image{images/sunset2.png, 800}}
 
 Where will we get this sequence of images? We don’t want to create them all by hand. Instead, we want to write programs that will create them for us. This is the power of computer programming. It can automate tasks (like creating new images) that might otherwise be tedious for people to do. There are four steps to creating animations programs. You’ve actually already done the first three in the first two units, but now we need to show you how to put them together.
 
@@ -201,7 +201,7 @@ Type `interact(sunset-react)` in the interactions window to run your sunset anim
 
 What happens when we call `interact`? The following diagram summarizes what Pyret does to run the animation. It draws the initial instance, then repeatedly calls `next-state-tick` and `draw-state` to create and display successive frames of your animation.
 
-@centered-image{images/sunset3.png, Sunset 3, 800}
+@center{@image{images/sunset3.png, 800}}
 
 These are the same computations you did by hand in the interactions window a little while ago, but Pyret now automates the cycle of generating and drawing instances. By having functions that can generate instances and draw images, we can let the computer do the work of creating the full animation.
 
@@ -236,7 +236,7 @@ Figuring out the data structure is actually one of the most creative tasks in pr
 
 
 === Investigate
-@right{@centered-image{images/cowjump.gif, Cow jump, 200}}
+@right{@image{images/cowjump.gif, 200}}
 
 *Exercise: Jumping Cow* -- Look at this animation of a cow jumping over the moon.
 
@@ -256,7 +256,7 @@ Fill in the table of what fields you need for each piece of changing information
 If students want to include the image in the state, that is fine too. Examples like this are good for raising discussion about what parts of an animation depend on one another. The image doesn’t need to be in the state, but it isn’t wrong to include it
 there either.
 
-@right{@centered-image{images/cycling.gif, Cycling, 400}}
+@right{@image{images/cycling.gif, 400}}
 *Exercise: Bicycle Ride* -- Look at this animation of a person riding a bicycle along a street.
 
 [.lesson-instruction]
@@ -268,7 +268,7 @@ In this case, there are two pieces of information: the x-coordinate of the cycli
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `BikeState` to capture the data in this animation.
 
 
-@right{@centered-image{images/pulsingstar.gif, Pulsing star, 200}}
+@right{@image{images/pulsingstar.gif, 200}}
 *Exercise: Pulsing Star* -- Look at this animation of a star that pulses as it moves across the sky.
 
 [.lesson-instruction]
@@ -290,7 +290,7 @@ What type did you choose for the field that tracks the direction of growth? You 
 The type for tracking direction of growth gives potential for a good discussion. None of these answers are wrong. If they were to use the Boolean or the string, however, their next-state-tick function would need a conditional to decide whether to add or subtract from the current size. In this exercise, they aren’t writing the animations, so this is less of an issue. Our real goal is to get them to imagine animations and to identify the state information that underlies each one.
 ////
 
-@right{@centered-image{images/dimmer.gif, Dimmer, 200}}
+@right{@image{images/dimmer.gif, 200}}
 *Exercise: Light Dimmer* -- Look at this animation of a slider to control the brightness of a light.
 
 [.lesson-instruction]

@@ -21,7 +21,7 @@ Let's look at this @printable-exercise{pages/design-recipe-1.adoc} worksheet tog
 
 First, we need to decide which Transformer to use: Filter, Transform, or Build. 
 
-@image{images/transformer-name.png, "top section of a Design Recipe"}
+@image{images/transformer-name.png}
 
 <!---
   Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
@@ -48,7 +48,7 @@ Then we think about what our transformed table will look like:
 
 - Will Toggle be on the new table? _Yes, Toggle is a dog._
 
-@image{images/example-tables.png, "filled in example tables from Design Recipe worksheet"}
+@image{images/example-tables.png}
 
 ---
 {layout="LaunchC"}
@@ -62,7 +62,7 @@ Now, we are ready to drill down on the contents of our Transformer.
 
 - And finally, we enter our *expression*, in this case: `species = "dog"`.
 
-@image{images/contents.png, "contract, purpose statement, expression"}
+@image{images/contents.png}
 
 <!--
 Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.

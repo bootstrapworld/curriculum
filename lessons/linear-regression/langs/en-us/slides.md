@@ -34,7 +34,7 @@ We are asking if we can use an animal’s **size** or **age** to predict how lon
 {layout="LaunchR"}
 # Intro to Linear Regression 
 
-@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
+@image{images/pounds-v-weeks.gif, 400}
 
 The mean, median, and mode are three different ways to measure the “center” of a dataset in one dimension. 
 
@@ -63,7 +63,7 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 {layout="LaunchR"}
 # Intro to Linear Regression 
 
-@right{@image{images/lr-pounds-v-weeks.png,"weeks-v-pounds linear-regression plot with a cluster of points on the lower left and some points in the upper right, showing the predictor function", 300}}
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
 
 Given a value on the x-axis, this line allows us to predict what the corresponding value on the y-axis might be. **This allows us to make predictions based on our data!**
 
@@ -109,8 +109,8 @@ Open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
 
 Let's explore scatter plots for weeks-v-pounds and weeks-v-age.
 
-@image{images/age-v-weeks.gif,"weeks-v-age scatter plot with some points in the lower left and some in the upper right", 400}
-@image{images/pounds-v-weeks.gif,"weeks-v-pounds scatter plot with a tight cluster in the lower left and some points toward the right and top right corner", 400}
+@image{images/age-v-weeks.gif, 400}
+@image{images/pounds-v-weeks.gif, 400}
 
 <!--
 - Do the relationships appear to be linear for one? Both?
@@ -170,7 +170,7 @@ lr-plot(animals-table, "name", "age", "weeks")
 lr-plot(animals-table, "name", "age", "weeks")
 ```
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png,  400}
 `lr-plot` is a function that takes a Table and the names of *3 columns*:{style="font-size:14pt"}
 
 - `ls` -- the name of the column to use for _labels_ (e.g. “names of pets”){style="font-size:14pt"}
@@ -190,7 +190,7 @@ Our goal is to use values of the variable on our x-axis to _predict_ values of t
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png, 400}
 
 The resulting scatter plot looks like those we’ve seen before, but it has a few important additions.{style="font-size:15pt"}
 
@@ -202,7 +202,7 @@ In this plot, we can see that **the slope of the line is 0.792**, which means th
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png, 400}
 
 By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted.{style="font-size:16pt"}
 
@@ -212,7 +212,7 @@ For example, **we predict a 5-year-old animal to be adopted in @math{0.792(5) + 
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png, 400}
 
 **The intercept is `2.285`**. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this _too_ literally, and say that a newborn animal would be adopted in 2.285 weeks, because none of the animals in our dataset was that young.{style="font-size:16pt"} 
 
@@ -222,7 +222,7 @@ Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png, 400}
 
 We also see **the @math{r}-value is +0.442**. The sign is positive, consistent with the fact that the scatter plot point cloud and line of best fit, slope upward.{style="font-size:16pt"}
 
@@ -234,7 +234,7 @@ This makes sense: the points on the scatter plot are somewhere between being rea
 {layout="InvestigateR"}
 # Linear Regression in Pyret
 
-@image{images/lr-explained.png, LR explained, 400}
+@image{images/lr-explained.png, 400}
 
 - If an animal is 5 years old, how long would our line of best fit predict they would wait to be adopted? What if they were a newborn, just 0 years old?
 - Make another lr-plot, but this time **use the animals' weight as our explanatory variable instead of their age.**
@@ -328,7 +328,7 @@ Now that you've gotten some practice performing linear regression on the Animals
 {layout="Synthesize"}
 # Your Analysis
 
-@image{images/lin-reg-2.png, lin reg 2, 400}
+@image{images/lin-reg-2.png, 400}
 
 You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line! 
 

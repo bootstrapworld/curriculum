@@ -16,7 +16,7 @@ Each group can only have one "Driver" - their hands are on the keyboard, and the
 
 If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.{style="font-size:16pt"} 
 
-@image{images/driver-navigator.png, "Driver/Navigator icon", 150, ""}
+@image{images/driver-navigator.png, 150}
 
 
 ---
@@ -35,7 +35,7 @@ The @vocab{Definitions Area} is where programmers define values and functions th
 
 For now, we will only be writing programs in the *Interactions Area*.{style="font-size:16pt"} 
 
-@image{images/editor.png, a}
+@image{images/editor.png}
 
 ---
 {layout="Investigate"}
@@ -119,7 +119,7 @@ Boolean-producing expressions are yes-or-no questions and will always evaluate t
 
 For example, some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe. {style="font-size:15pt"}  
 
-@image{images/roller-coaster.png, a}
+@image{images/at-least-this-tall-to-ride.jpeg}
 
 --- 
 {layout="LaunchR"}
@@ -129,7 +129,7 @@ Similarly, when you log into your email, the computer asks for your password and
 
 Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
 
-@image{images/login.png, a}
+@image{images/login.png}
 
 ---
 {layout="Investigate-DN"}

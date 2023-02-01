@@ -21,7 +21,7 @@ But how does this function work?
 When applying a function to its inputs, we substitute for the variables in its definition. {style="font-size:13pt"}
 
 
-@image{images/fn-table.png, "table showing function application, substituted input, and final product for gt(size)"}{width="700"}
+@image{images/fn-table.png}{width="700"}
 
 ---
 {layout="Investigate"}
@@ -29,7 +29,7 @@ When applying a function to its inputs, we substitute for the variables in its d
 
 Math books use Function Notation to define functions, too, though most of the time their functions only work with numbers - and certainly not images! {style="font-size:15pt"}
 
-@image{images/fn-table-2.png, "table showing function application, substituted input, and final product for f(x)=x+8"}{width="700"}
+@image{images/fn-table-2.png}{width="700"}
 
 
 ---
@@ -69,7 +69,7 @@ If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
 
 Let's take a look at the graph of @math{f(x) = x - 5}...
 
-@image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
+@image{images/gr1.png, 350}
 
 ---
 {layout="LaunchC"}
@@ -78,7 +78,7 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 * How could we determine that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?{style="font-size:15pt"}
 * What is the value of @math{f(3)}?{style="font-size:15pt"}
 
-@image{images/gr1.png, "graph of the line f(x) = x - 5", 350}
+@image{images/gr1.png, 350}
 
 
 <!--
@@ -95,7 +95,7 @@ Let's take a look at the graph of @math{f(x) = x - 5}...
 
 We don’t need to know a function definition in order to use function notation to describe a value with an expression! Let’s take a look at the scatter plot below.{style="font-size:15pt"}
 
-@image{images/sp.png, "scatter plot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
+@image{images/sp.png}
 
 ---
 {layout="LaunchR"}
@@ -106,7 +106,7 @@ We don’t need to know a function definition in order to use function notation 
 * What is the value of @math{f(3)}?
 * What other values on this graph could we describe using function notation?
 
-@image{images/sp.png, "scatter plot: (-4,1), (-2,-4), (-1,4), (-3,-3), (1,2), (2,4), (4,-1)"}
+@image{images/sp.png}
 
 
 <!--
@@ -128,7 +128,7 @@ This works for even more complex functions, which we haven't seen yet!
 
 When evaluating an expression for a piecewise function, points on the graph marked with hollow circles are boundary points, but not part of the solution set, so we ignore them and focus on the solid points. For example, on the graph below, when evaluating @math{f(2)}, we ignore the hollow point at @math{(2, 4)} and focus on the solid point at @math{(2,3)}, so @math{f(2) = 3}.
 
-@image{images/pw.png, "graph of a piecewise function with 4 separate curvy and linear sections. Hollow endpoints at (0,2.5) and (2,4). solid endpoints at (0,3) and (2,3)"}
+@image{images/pw.png}
 
 
 ---

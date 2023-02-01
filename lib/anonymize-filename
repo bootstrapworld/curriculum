@@ -24,7 +24,9 @@ fi
 #echo fb is $fb >> ~/j.txt
 #echo fe is $fe >> ~/j.txt
 
-fbb=$(echo $fb|git hash-object --stdin|sed -e 's/^\(.\{16\}\).*/\1/')
+# fbb=$(echo $fb|git hash-object --stdin|sed -e 's/^\(.\{16\}\).*/\1/')
+
+fbb=$(echo -n $fb| shasum |sed -e 's/^\(.\{16\}\).*/\1/')
 
 anonf="$fd$fbb$fe"
 

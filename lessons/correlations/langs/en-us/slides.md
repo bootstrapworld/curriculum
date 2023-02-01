@@ -38,7 +38,7 @@ This goes hand-in-hand with expanding our display **from a 1-dimensional histogr
 {layout="LaunchR"}
 # Correlations have _Form_
 
-@image{images/1b1.gif, "A scatter plot showing a linear (straight-line) relationship"}
+@image{images/1b1.gif}
 
 _Form:_ whether a relationship is **linear**, non-linear or undefined
 
@@ -48,7 +48,7 @@ _Form:_ whether a relationship is **linear**, non-linear or undefined
 {layout="InvestigateR"}
 # Correlations have _Form_
 
-@image{images/2NL.gif, "A scatter plot showing a non-linear (curved) relationships"}
+@image{images/2NL.gif}
 
 _Form:_ whether a relationship is linear, **non-linear** or undefined
 
@@ -58,7 +58,7 @@ Some patterns are **non-linear**, and may look like a curve or an arc. That mean
 {layout="InvestigateR"}
 # Correlations have _Form_
 
-@image{images/B.gif,"A scatter plot showing no relationship"}
+@image{images/B.gif}
 
 _Form:_ whether a relationship is linear, non-linear or **undefined**
 
@@ -84,7 +84,7 @@ Data Scientists use their eyes all the time! It doesn't make sense to search for
 {layout="LaunchR"}
 # Correlations have _Direction_
 
-@right{@image{images/C.gif, "A scatter plot, having a tight point cloud with a positive slope", 200}}
+@right{@image{images/C.gif, 200}}
 
 _Direction:_ whether a linear relationship is **positive** or negative.
 
@@ -94,7 +94,7 @@ _Direction:_ whether a linear relationship is **positive** or negative.
 {layout="LaunchR"}
 # Correlations have _Direction_
 
-@right{@image{images/A.gif, "A scatter plot, having a tight point cloud with a negative slope", 200}}
+@right{@image{images/A.gif, 200}}
 
 _Direction:_ whether a linear relationship is positive or **negative**.
 
@@ -115,7 +115,7 @@ Have the class discuss their answers
 {layout="SynthesizeR"}
 # Correlations have _Direction_
 
-@image{images/2NL.gif, "A scatter plot showing a non-linear (curved) relationships"}
+@image{images/2NL.gif}
 
 It only makes sense to look for direction in *linear* relationships!
 
@@ -131,7 +131,7 @@ Why do you think that is?
 
 **_Strength:_ how closely the two variables are correlated.**
 
-@right{@image{images/A.gif, "a scatter plot, with a tightly-clumped point cloud with a negative slope"}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+@right{@image{images/A.gif}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 <!--
 Example of a strong relationship: knowing a student's age gives us a very good idea of what grade they're in
@@ -143,7 +143,7 @@ Example of a strong relationship: knowing a student's age gives us a very good i
 
 **_Strength:_ how closely the two variables are correlated.**
 
-@right{@image{images/1a.gif, "a scatter plot, with a loosely-clumped point cloud with a negative slope"}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+@right{@image{images/1a.gif}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 <!--
 Example of a weak relationship: a student's age doesn't tell us much about their number of siblings

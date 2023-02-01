@@ -53,7 +53,7 @@ _When the user presses the "up" key, the y-coordinate should increase, the progr
 
 Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your *Game Project file* and test it out.
 
-@image{images/player-move.png, "a coordinate grid with the player, target and danger's locations and directions of movement labeled. The player's movement is circled with an arrow indicating upward movement from (200,220) to (200, 240)" }{width="250"}
+@image{images/player-move.png}{width="250"}
 
 
 <!--

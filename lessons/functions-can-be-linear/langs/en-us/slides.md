@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and notice and wonder about this table and graph.
 
-@image{images/notice-wonder.png, "table and line graph"}{width="700"}
+@image{images/notice-wonder.png}{width="700"}
 
 <!--
 Students can record their responses on  @printable-exercise{notice-wonder-linearity.adoc}.
@@ -28,7 +28,7 @@ Can you figure out what the next (x,y) pair should be for each of them?{style="f
 
 Can you guess what the y-value for each table would be when x is 0?{style="font-size:16pt"} 
 
-@image{images/two-tables.png, "a"}{width="500"}
+@image{images/two-tables.png}{width="500"}
 
 <!--
 _Be sure that students have noticed that:_
@@ -103,7 +103,7 @@ While a table represents a _sample_ of some larger trend, the graph is a way of 
 
 What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
 
-@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
+@image{images/set-of-6-graphs.png}{width="700"}
 
 <!--
 Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
@@ -118,7 +118,7 @@ Linear relationships in a graph always appear as straight lines.
 
 Three of the graphs represent @vocab{linear} relationships, and three show other, non-linear relationships.
 
-@image{images/set-of-6-graphs.png, "series of six graphs showing different relationships"}{width="700"}
+@image{images/set-of-6-graphs.png}{width="700"}
 
 
 ---
@@ -129,7 +129,7 @@ Three of the graphs represent @vocab{linear} relationships, and three show other
 
 Complete @printable-exercise{tables-all-linear.adoc}.
 
-@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}{width="600"}
+@image{images/set-of-6-tables.png}{width="600"}
 
 <!--
 Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
@@ -139,7 +139,7 @@ Students can record their reflections on  @printable-exercise{tables-all-linear.
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
+@image{images/set-of-6-tables.png}
 
 Linear relationships in a table show up as sequences that change at a constant rate. 
 
@@ -149,7 +149,7 @@ Three of the tables show linear relationships, and three show non-linear relatio
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-@image{images/set-of-6-tables.png, "series of six tables showing different relationships"}
+@image{images/set-of-6-tables.png}
 
 The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease). 
 
@@ -161,7 +161,7 @@ The other tables may show patterns, but they aren’t linear!
 
 Sometimes there is _no function_ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
 
-@image{images/table-and-dot-plot.png, "table and corresponding dot plot"}
+@image{images/table-and-dot-plot.png}
 
 ---
 {layout="Investigate"}
@@ -290,7 +290,7 @@ For example: If we know a car is moving at a consistent speed, all we need to kn
 
 On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
-@image{images/y-intercept-graphs.png, "two linear graphs"}
+@image{images/y-intercept-graphs.png}
 
 ---
 {layout="LaunchC"}
@@ -298,7 +298,7 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
 
-@image{images/slope-graphs.png, "graphs demonstrating slopes"}
+@image{images/slope-graphs.png}
 
 
 ---
@@ -307,7 +307,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 
 We can compute the slope from a graph the same way we would with a table, by picking two points and using those as our two sample rows.
 
-@image{images/slope-2-points.png, "lines from two points"}
+@image{images/slope-2-points.png}
 
 ---
 {layout="Investigate"}

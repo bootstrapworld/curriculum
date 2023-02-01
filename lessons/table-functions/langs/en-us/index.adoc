@@ -14,9 +14,8 @@
 | Lesson Goals
 | Students will be able to...
 
-* order the Animals Dataset by a number of criteria
-* filter the Animals Dataset by species, fixed status, and age
-* add a column to the Animals Dataset
+* filter tables according to different criteria, using helper functions
+* add a column to a table using helper functions
 
 | Student-facing Lesson Goals
 |
@@ -32,6 +31,10 @@
 
 == Review @duration{15 minutes}
 
+Have students open the @starter-file{table-functions}.
+
+Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table, one row at a time.
+
 [.lesson-instruction]
 --
 - This activity is about reading carefully and getting more comfortable with row-consuming functions.
@@ -39,16 +42,12 @@
 - Take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
 --
 
-* Who can explain what `is-old` does?
-** _It looks up the age of the row, and asks if its greater than 10._
-* Who can explain what `lookup-name` does?
-** _It looks up the value in the `name` column._
-* Who can explain what `lookup-fixed` does?
-** _It looks up the value in the fixed column._
-* Who can explain what `label` does?
-** _It prints the animal's name in red._
-* Who can explain what `kilos` does?
-** _It divides the pounds by 2.2._
+* Who can explain what `is-red` does?
+** _It looks up the color of the row, and checks if it is equal to the string `"red"`._
+* Who can explain what `is-polygon` does?
+** _It looks up the value in the `polygon` column._
+* Who can explain what `is-triangle` does?
+** _It checks if the value in the `name` column contains `"triangle"`._
 
 Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
 
@@ -64,19 +63,19 @@ Sometimes we want to *filter the rows* of a table by some criteria. In our anima
 
 [.lesson-roleplay]
 --
-- Select a volunteer who will play the role of… *filter*!
+- Select a volunteer who will play the role of… `filter`!
 - Hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)
-- Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table", but to __keep it a secret__.
+- Instruct `filter` to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table", but to __keep it a secret__.
 - Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
 
-Here’s how that might look if Filter chose a function card `has-glasses`.
+Here’s how that might look if `filter` chose a function card `has-glasses`.
 
-- _Filter stands in front of Student 1 and checks if they are wearing glasses._
-- *Filter to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
-- _Filter stands in front of Student 2 and checks if they are wearing glasses._
-- *Filter to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
+- `filter` _stands in front of Student 1 and checks if they are wearing glasses._
+- *`filter` to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
+- `filter` _stands in front of Student 2 and checks if they are wearing glasses._
+- *`filter` to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
 --
-- Have your Filter volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
+- Have your `filter` volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
 - Give the volunteer a round of applause!
 
 === Investigate
@@ -94,13 +93,13 @@ Confirm that students understand the following key ideas:
 --
 
 [.lesson-instruction]
-Complete @printable-exercise{pages/what-table-do-we-get.adoc}.
+How would you filter and build using the Animals Dataset? For practice, complete @printable-exercise{pages/what-table-do-we-get.adoc}.
 
 === Common Misconceptions
 *Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
 
 === Synthesize
-Using with Table Functions is a _huge_ upgrade in our ability to analyze data!
+Using Table Functions is a _huge_ upgrade in our ability to analyze data!
 
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
