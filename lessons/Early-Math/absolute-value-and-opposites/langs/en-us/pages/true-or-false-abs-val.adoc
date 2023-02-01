@@ -1,0 +1,91 @@
+= True or False? Absolute Value & Negate
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+@vspace{1ex}
+
+Is the equation represented by the two Circles of Evaluation true or false? Evaluate each side of the equation to confirm your response. The first one is done for you.
+
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles of Evaluation																	   |
+True or False? Explain
+
+
+| @n
+| @show{(coe '(negate 4))}
+@math{=}
+@show{(coe '(negate -4))}
+| False.
+
+@math{-4 +≠+ 4}
+
+
+| @n
+| @show{(coe '(negate 3))}
+@math{=}
+@show{(coe '(abs 3))}
+| @ifsoln{False.
+
+@math{-3 +≠+ 3}}
+
+
+| @n
+| @show{(coe '(negate -2))}
+@math{=}
+@show{(coe '(negate 2))}
+|@ifsoln{False.
+
+@math{2 +≠+ -2}}
+
+
+| @n
+| @show{(coe '(abs -3))}
+@math{=}
+@show{(coe '(abs 3))}
+| @ifsoln{True.
+
+@math{3 = 3}}
+
+|===
+
+On the table below, state whether the equation represented by the Circles is _always true_, _sometimes true_, or _never true_. Explain your response.
+
+
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles																	   |
+Always, sometimes, or never true?
+
+| @n
+| @show{(coe '(negate m))}
+@math{=}
+@show{(coe '(abs m))}
+| @ifsoln{Sometimes true.
+
+Negating @math{m} can result in a positive value, a negative value, or zero. The absolute value of @math{m} is always positive. If @math{m} is zero or a negative value, then the equation is true.}
+
+
+| @n
+| @show{(coe '(abs m))}
+@math{=}
+@show{(coe '(abs -m))}
+| @ifsoln{Always true.
+
+These both always result in a positive outcome, unless @math{m} is zero - in which case the equation is still true.}
+
+
+| @n
+| @show{(coe '(abs -m))}
+@math{=}
+@show{(coe '(negate -m))}
+| @ifsoln{Sometimes true.
+
+The absolute value of @math{-m} always results in a positive outcome. Negating @math{-m}, however, can result in a positive outcome, a negative outcome, or zero. If @math{m} is zero or a positive value, then the equation is true.}
+
+|===
