@@ -1,0 +1,88 @@
+= Which Ones Belong? Exponent Expressions
+
+For each row, place a check mark by the Circle(s) of Evaluation that evaluate to the provided quantity.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^2a,^.^11a",stripes="none", options="header"]
+|===
+| 	 | Which Circle(s) evaluate to... | Circles of Evaluation
+
+| @n
+| @math{16}?
+
+@ifsoln{All Circles}
+| @show{(coe '(expt 2 4))}
+@show{(coe '(* 2 (expt 2 3)))}
+@show{(coe '(* 2 (* 2 (expt 2 2))))}
+@show{(coe '(* 2 (* 2 (* 2 2))))}
+
+
+| @n
+| @math{18}?
+
+@ifsoln{Circles 2, 3, 4}
+| @show{(coe '(* (expt 2 3) 2))}
+@show{(coe '(* 2 (expt 3 2)))}
+@show{(coe '(* (expt 3 2) 2))}
+@show{(coe '(+ (expt  3 2) (expt 3 2)))}
+
+
+
+| @n
+| @math{11}?
+
+@ifsoln{Circle 1}
+| @show{(coe '(+ 2 (expt 3 2)))}
+@show{(coe '(+ (expt 3 3) 2))}
+@show{(coe '(expt  3 (+ 2 3)))}
+@show{(coe '(+ 2 (expt  2 3)))}
+
+
+
+| @n
+| @math{25}?
+
+@ifsoln{Circles 1, 2, 4}
+| @show{(coe '(expt 5 2))}
+@show{(coe '(* (+ 3 2) 5))}
+@show{(coe '(expt (+ 3 2) 5))}
+@show{(coe '(expt (+ 3 2) 2))}
+
+
+
+| @n
+| @math{9}?
+
+@ifsoln{Circles 1, 4}
+| @show{(coe '(/ (expt 6 2) 4))}
+@show{(coe '(- (-expt 6 2) 3))}
+@show{(coe '(expt 3 3))}
+@show{(coe '(expt 3 2))}
+
+
+| @n
+| @math{27}?
+
+@ifsoln{Circle 3}
+| @show{(coe '(* 3 (* 3 2)))}
+@show{(coe '(* 3 3))}
+@show{(coe '(* 3 (expt 3 2)))}
+@show{(coe '(* 3 (expt 3 3)))}
+
+
+|===
+
