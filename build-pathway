@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2023-01-26 # last modified
+LASTMOD=2023-01-30 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -606,7 +606,7 @@ function lintlesson() {
 function addanalytics() {
   local f=$1
   $SED -i \
-    -e '/^<body/r $TOPDIR/lib/analytics.txt' \
+    -e '/^<body/r '$TOPDIR'/lib/analytics.txt' \
     $f
 }
 
