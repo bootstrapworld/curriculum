@@ -61,7 +61,7 @@
 
     ("MLR.8"
      "Discussion Supports"
-     "method-chaining"
+     "composing-table-operations"
      "linear-regression"
      "making-game-images"
      "distance-formula"

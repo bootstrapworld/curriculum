@@ -98,7 +98,7 @@
 
     ("MP.6"
      "Attend to precision"
-     "method-chaining"
+     "composing-table-operations"
      "bar-and-pie-charts"
      "defining-table-functions"
      "data-cycle"

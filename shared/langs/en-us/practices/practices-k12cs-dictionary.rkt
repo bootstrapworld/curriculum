@@ -34,7 +34,7 @@
      "re-adding-collisions"
      "re-build-your-own-animation"
      "re-refactoring"
-     "method-chaining"
+     "composing-table-operations"
      "grouped-samples"
      "data-cycle"
      )
