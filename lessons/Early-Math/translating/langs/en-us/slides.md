@@ -116,7 +116,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 
 ---
-{layout="Launch"}
+{layout="Investigate"}
 # Circles of Evaluation
 
 - First, practice @printable-exercise{pages/translate-words-to-circles.adoc}.
