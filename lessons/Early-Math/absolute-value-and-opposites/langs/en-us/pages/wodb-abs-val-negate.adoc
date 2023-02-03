@@ -1,0 +1,83 @@
+= Which Ones Belong? Absolute Value & Negate
+
+For each row, place a check mark by each Circle of Evaluation that meets the condition stated on the left.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^3a,^.^10a",stripes="none", options="header"]
+|===
+| 	 | Value | Check the equivalent Circles.
+
+| @n
+| Which Circles evaluate to @math{6}?
+
+@ifsoln{Circles 2, 3, and 4.}
+
+| @show{(coe '(negate 6))}
+@show{(coe '(negate -6))}
+@show{(coe '(abs 6))}
+@show{(coe '(abs -6))}
+
+
+| @n
+| Which Circles evaluate to @math{-4}?
+
+@ifsoln{Circles 1 and 2.}
+| @show{(coe '(negate (+ 2 2)))}
+@show{(coe '(negate 4))}
+@show{(coe '(abs 4))}
+@show{(coe '(abs -4))}
+
+| @n
+| Which Circles evaluate to @math{3}?
+
+@ifsoln{All Circles!}
+| @show{(coe '(abs 3))}
+@show{(coe '(abs -3))}
+@show{(coe '(negate (negate 3)))}
+@show{(coe '(negate -3))}
+
+| @n
+| If @math{m = -3}, which Circles evaluate to @math{3}?
+
+@ifsoln{Circles 1, 3, and 4.}
+| @show{(coe '(negate m))}
+@show{(coe '(negate -m))}
+@show{(coe '(abs m))}
+@show{(coe '(abs -m))}
+
+| @n
+| If @math{h = 20}, which Circles evaluate to @math{20}?
+
+@ifsoln{Circles 2, 3, and 4.}
+| @show{(coe '(negate h))}
+@show{(coe '(negate -h))}
+@show{(coe '(abs h))}
+@show{(coe '(abs -h))}
+
+| @n
+| If @math{x = 7}, which Circles evaluate to @math{0}?
+
+@ifsoln{Circles 1, 3, and 4.}
+| @show{(coe '(+ x (negate x)))}
+@show{(coe '(+ x (abs x)))}
+@show{(coe '(- x x))}
+@show{(coe '(+ (negate x) (abs x)))}
+
+
+
+|===
+

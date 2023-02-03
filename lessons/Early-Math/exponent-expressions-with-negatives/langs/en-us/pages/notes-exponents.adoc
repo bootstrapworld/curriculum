@@ -1,0 +1,63 @@
+= Exponent Expressions
+
+== Introduction to Exponents
+
+@math{2^5} is an exponent expression.
+
+- The number on the left is called the @vocab{base}. That number is multiplied by itself when we apply the exponent.
+
+- The smaller, raised number after the base is called the @vocab{exponent}; it indicates how many times to multiply the base.
+
+- "Cubing" is the same as "raising to the third power", and "squaring" is the same as raising to the second power.
+
+- There is no special terminology for any other exponents.
+
+@vspace{1ex}
+
+Below, one Circle of Evaluation is written in exponent notation, while the other is written in expanded notation.
+
+[.embedded, cols="^.^5,^.^1,^.^5", grid="none", stripes="none" frame="none"]
+
+|===
+| @math{2^5}
+|
+| @math{2 \times 2 \times 2 \times 2 \times 2}
+
+| @show{(coe '(expt 2 5))}
+| @math{=}
+| @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
+|===
+
+
+@vspace{1ex}
+
+Exponents are valuable because they act as a shorthand.
+
+@vspace{1ex}
+
+The Circle of Evaluation with `expt` is a lot shorter, and easier to read!
+
+== Multi-Step Exponent Expressions
+
+In multi-step exponent expressions with no grouping symbols, we evaluate the exponent before the other operations. The two expressions below are *not* equivalent beccause the parentheses influence the order in which we evaluate.
+
+[.embedded, cols="^.^5,^.^5", grid="none", stripes="none" frame="none"]
+|===
+| @math{7 \times 5^2}
+| @math{(7 \times 5)^2}
+
+| @show{(coe '(* 7 (expt 5 2)))}
+| @show{(coe '(expt (* 7 5)))}
+|===
+
+@vspace{1ex}
+
+Circles of Evaluation can help us to visualize expressions with exponents and negatives and then determine if their value is positive or negative. Below, the Circles of Evaluation can help us visualize why @math{-(3^2)} has a negative value, while @math{(-3)^2} has a positive value.
+
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none", frame="none"]
+|===
+| @math{-(3^2)}
+| @math{(-3)^2}
+| @show{(coe  '(negate (expt 3 2)))}
+| @show{(coe  '(expt (negate 3) 2))}
+|===

@@ -174,7 +174,6 @@ The other formatting defines where in the cell the words end up being placed (se
 !===
 |===
 
-
 === Programming Language specific content
 
 When possible, use Dorai the Wizard's Special Code that automatically converts code you write into the correct programming language for the pathway.
@@ -215,3 +214,20 @@ _see comment_
 The easy way is to make a copy of the page, add the solutions as you want them to appear, and put in the solution-pages folder for the same lesson.
 
 The elegant way (which occasionally is impossible and you have to accept the easy way) is to use the command `@showsoln{}` in the original document for whatever you only want to only appear in the solutions mode version of the document. Whatever goes inside the brackets has to read as racket, so strings go in quotes.
+
+
+== Images
+
+The @image and @centered-image directives take in the name/location of the file and an optional width specification.
+
+Copies of images should be saved in the images folder inside the lesson plan, preferably as png files.
+
+All images used in materials (unless only used in slides.md files) must also be listed in the lesson-images.json files found inside the images file for the lesson.
+
+There are three required fields that will throw warnings if you don't provide info.
+"description" : "This is a detailed description of the information provided in the image that will be read aloud by screen readers so that visually impaired students have the info they need to engage with our materials"
+"source" : "Be specific about whether we made the image (based on other work, based on data from a source, based on contrived data) or someone else made it"
+"license" : ""
+
+If you want a caption to appear beneath the image on the webpage and printed page for sighted users you can use the optional "caption" : "" argument. 
+
