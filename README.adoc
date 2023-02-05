@@ -270,6 +270,7 @@ following command-line options:
 - `--book` (aka `--pdf` or `-b`)
 - `--debug` (aka `-d`)
 - `--expanded-warnings` (aka `-w`)
+- `--everything`
 - `--force` (aka `-f`)
 - `--help` (aka `-h`)
 - `--lint` (aka `--verify-links` or `-l`)
@@ -336,11 +337,20 @@ The teacher workbooks in `resources/protected` are
 These filenames are standards and do not vary with pathway. Their location
 identifies which pathway they describe.
 
-If no `--proglang` option is supplied, the progamming language is
-assumed to be `pyret`. Other possible values for the option are
-`wecheme`, `codap`, and `spreadsheets`.
+If no `--proglang` option is supplied, a proglang is assumed after
+reading the `proglang.txt` associated with the course:
+If a course is defined only for
+a single proglang, that proglang is assumed. If a course is defined for
+multiple proglangs, the first of them is assumed. If no proglangs are
+explicitly defined for a course, the proglang is assumed to be `pyret`.
+The possible values for this option are
+`pyret`, `wecheme`, `codap`, and `spreadsheets`.
 The distribution directory for a pathway built with
-a non-``pyret`` proglang typically tacks on the proglang as suffix.
+a non-``pyret`` proglang typically tacks on the proglang as suffix. No
+suffix is tacked on if the course only admits of one proglang.
+
+If the option `--everything` is supplied, every pathway is built for all
+possible proglangs.
 
 Note that many workbook PDFs can be created: the students' versions
 are created
