@@ -596,7 +596,7 @@
         (set! text (substring text 1)))
       (when (char=? (string-ref text (- n 1)) #\")
         (set! text (substring text 0 (- n 1))))))
-  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
+  ; (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
 (define (clean-up-url-in-image-text text)

@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-01-30
+# last modified 2023-02-06
 
 cd $TOPDIR/distribution/$NATLANG
 
@@ -111,10 +111,6 @@ function resolveabbrevs() {
     codemirrorneeded=1
   fi
   $SED -i \
-    -e 's/%PYRETKEYWORD%\([^%]*\)%END%/<span class="pyretkeyword">\1<\/span>/g' \
-    \
-    -e 's/%CURRICULUMCOMMA%/,/g' \
-    \
     -e 's/<p>\(%CURRICULUMCOMMENT%\)/\1/' \
     -e 's/\(%ENDCURRICULUMCOMMENT%\)<.p>/\1/' \
     -e 's/%CURRICULUMCOMMENT%/<!-- /' \
@@ -123,9 +119,6 @@ function resolveabbrevs() {
     -e 's/%CURRICULUMSCRIPT%/<script type="math\/tex"/g' \
     -e 's/%BEGINCURRICULUMSCRIPT%/>/g' \
     -e 's/%ENDCURRICULUMSCRIPT%/<\/script>/g' \
-    \
-    -e 's/%CURRICULUMPMMATH%/<!--CURRICULUMPMMATH<tt>/g' \
-    -e 's/%ENDCURRICULUMPMMATH%/<\/tt>CURRICULUMPMMATH-->/g' \
     \
     -e 's/%CURRICULUM\([^%]*\)%/<\1/g' \
     -e 's/%BEGINCURRICULUM\([^%]*\)%/>/g' \
