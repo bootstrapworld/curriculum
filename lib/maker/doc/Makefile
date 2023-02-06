@@ -1,6 +1,6 @@
 adoc_files := *.adoc
 
-png_files := *.png
+svg_files := *.svg
 
-index.html: $(adoc_files) $(png_files)
+index.html: $(adoc_files) $(svg_files)
 	asciidoctor -a linkcss index.adoc
