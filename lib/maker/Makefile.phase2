@@ -5,7 +5,7 @@
 
 include $(MAKE_DIR)utils.mk
 
-all: dependency images tocs books
+all: dependency linkcheck images tocs books
 
 # all: books
 
@@ -158,6 +158,9 @@ postproc: preproc
 
 dependency: primitives
 	@$(MAKE_DIR)make-dependency-graph.sh
+
+linkcheck: preproc
+	@$(MAKE_DIR)do-link-check.sh
 
 images: preproc
 	@$(MAKE_DIR)make-image-list.sh
