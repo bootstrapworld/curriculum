@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-01-28
+# last modified 2023-02-05
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -81,5 +81,5 @@ for d in $pathwayName*; do
   cd ..
 done
 
-# weird, make fails without following!
+# fixme: weirdly, make fails without the following!
 echo -n

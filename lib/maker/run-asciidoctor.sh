@@ -1,5 +1,5 @@
 # created 2023-01-19
-# last modified 2023-01-26
+# last modified 2023-02-05
 
 cd $TOPDIR/distribution/$NATLANG
 
@@ -9,7 +9,7 @@ rm -f .cached/.do-asciidoctor.js-split*
 
 tmpf=.cached/.do-asciidoctor.js
 
-if test ! -f "$tmpf"; then exit; fi
+test -f "$tmpf" || exit
 
 split -l 100 $tmpf $tmpf-split
 

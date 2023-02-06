@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-01-28
+# last modified 2023-02-05
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -40,20 +40,14 @@ for pl in $proglangs; do
   mkdir -p .cached
   touch .cached/.proglang-$pl
   touch .cached/.redo
-  if test "$firstproglang" = $pl; then
-    touch .cached/.primarylesson
-  fi
-  if test ! -d pages; then
-    mkdir pages
-  fi
+  test "$firstproglang" = $pl && touch .cached/.primarylesson
+  test  -d pages || mkdir pages
   test -d pages/.cached || mkdir -p pages/.cached
 
   collect_workbook_pages .
 
   for subdir in *; do
-    if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir" "$pl"
-    fi
+    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
   #
   make_solution_pages 

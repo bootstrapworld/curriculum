@@ -1,10 +1,12 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-28
+# last modified 2023-02-05
 
 adocfile=$1
 
 fcontainingdirectory=$(dirname $adocfile)
+
+test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
 
 distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
 

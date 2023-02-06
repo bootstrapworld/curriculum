@@ -1,11 +1,13 @@
 # created 2023-01-14
-# last modified 2023-01-21
+# last modified 2023-02-05
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
 include $(MAKE_DIR)utils.mk
 
-all: build-pathway-independent
+all: books
+
+# all: dependency images tocs
 
 ##########################################################################
 
@@ -30,3 +32,150 @@ $(call asc-file,$1): $1
 endef
 
 $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-rule,$(adocf))))
+
+###############################################################################
+
+# debug-build-workbook-pages:
+# 	@echo rl is $(relevant-lessons)
+# 	@echo radocf is $(relevant-adoc-files)
+# 	@echo rascf is $(relevant-asc-files)
+
+relevant-lessons := $(foreach \
+	lesson-name,$(shell \
+	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
+
+# shd use recursive wildcard after debug
+
+relevant-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*/*/*.adoc \
+	))
+
+relevant-asc-files := $(foreach \
+	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
+
+build-workbook-pages: $(relevant-asc-files)
+
+define make-build-workbook-page-rule
+$(call asc-file,$1): $1
+	@# @echo build-workbook-pages: creating $$@ from $$<
+	@$(MAKE_DIR)do-workbook-page.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
+
+#########################################################################
+
+lesson-plan-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(lesson)/index.adoc)
+
+lesson-plan-asc-files := $(foreach \
+	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
+
+# build-lesson-plans:
+# 	@echo lpadocf is $(lesson-plan-adoc-files)
+# 	@echo lpascf is $(lesson-plan-asc-files)
+
+build-lesson-plans: $(lesson-plan-asc-files)
+
+define make-build-lesson-plan-rule
+$(call asc-file,$1): $1
+	@$(MAKE_DIR)do-lesson-plan.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
+
+###############################################################################
+
+resource-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/courses/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*/*.adoc \
+	)
+
+resource-asc-files := $(foreach \
+	adocf,$(resource-adoc-files),$(call asc-file,$(adocf)))
+
+# build-pathway-resources:
+# 	@echo radocf is $(resource-adoc-files)
+# 	@echo rascf is $(resource-asc-files)
+
+build-pathway-resources: $(resource-asc-files)
+
+define make-build-resource-rule
+$(call asc-file,$1): $1
+	@# @echo build-resources: creating $$@ from $$<
+	@$(MAKE_DIR)do-pathway-resource.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(adocf))))
+
+########################################################################
+
+narrative-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/index.adoc)
+
+narrative-asc-files := $(foreach \
+	adocf,$(narrative-adoc-files),$(call asc-file,$(adocf)))
+
+build-pathway-narratives: $(narrative-asc-files)
+
+define make-build-narrative-rule
+$(call asc-file,$1): $1
+	@# @echo build-narratives: creating $$@ from $$<
+	@$(MAKE_DIR)do-pathway-narrative.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
+
+##########################################################################
+
+# do-conversions: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+# 	@echo ")" >> $(ADOCABLES_INPUT)
+# 	@$(MAKE_DIR)run-asciidoctor.sh
+# 	@$(MAKE_DIR)do-postproc.sh
+# 	@$(MAKE_DIR)collect-primitives.sh
+# 	@$(MAKE_DIR)make-dependency-graph.sh
+# 	@$(MAKE_DIR)make-image-list.sh
+# 	@$(MAKE_DIR)make-pathway-tocs.sh
+# 	@$(MAKE_DIR)make-bilingual-glossary.sh
+# 	@$(MAKE_DIR)make-pdf.sh
+# 	@$(MAKE_DIR)make-books.sh
+
+preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+	@echo doing preproc
+	@echo ")" >> $(ADOCABLES_INPUT)
+	@$(MAKE_DIR)run-asciidoctor.sh
+
+primitives: preproc
+	@echo doing primitives
+	@$(MAKE_DIR)collect-primitives.sh
+
+postproc: preproc
+	@echo doing postproc
+	@$(MAKE_DIR)do-postproc.sh
+
+dependency: primitives
+	@echo doing dependency
+	@$(MAKE_DIR)make-dependency-graph.sh
+
+images: preproc
+	@echo doing images
+	@$(MAKE_DIR)make-image-list.sh
+
+tocs: preproc
+	@echo doing tocs
+	@$(MAKE_DIR)make-pathway-tocs.sh
+
+pdfs: postproc 
+	@echo doing pdfs
+	@$(MAKE_DIR)make-pdf.sh
+
+books: pdfs
+	@echo doing books
+	@(MAKE_DIR)make-books.sh

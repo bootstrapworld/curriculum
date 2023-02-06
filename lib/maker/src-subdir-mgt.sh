@@ -1,26 +1,20 @@
 # created 2023-01-20
-# last modified 2023-01-28
+# last modified 2023-02-05
 
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
 
-  if test -d "$d"/"$pl"; then
-    $CP -p "$d"/"$pl"/* "$d"
-  fi
+  test -d "$d"/"$pl" && $CP -p "$d"/"$pl"/* "$d"
 
   local lang
   for lang in codap pyret wescheme spreadsheets none; do
-    if test -d "$d"/$lang; then
-      rm -fr "$d"/$lang
-    fi
+    test -d "$d"/$lang && rm -fr "$d"/$lang
   done
 
   local subdir
   for subdir in "$d"/*; do
-    if test -d "$subdir"; then
-      adjustproglangsubdirs "$subdir" "$pl"
-    fi
+    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
 }
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-14
-# last modified 2023-01-28
+# last modified 2023-02-05
 
 adocfile=$1
 
@@ -38,7 +38,6 @@ fi
 
 targetpathway=$(echo $containingdirectory|$SED -e 's#courses/\([^/]*\).*#\1#')
 
-# proglangarg=pyret
 if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap
 elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-none; then proglangarg=none
 elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-spreadsheets; then proglangarg=spreadsheets
