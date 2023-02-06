@@ -1354,7 +1354,8 @@
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if *title-reached?*
-                                  (display-comment prose o)
+                                  #f
+                                  ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
                            [(member directive '("scrub" "slideLayout"))

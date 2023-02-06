@@ -57,10 +57,9 @@ function bumpcsspathdir() {
   <link rel="stylesheet" href="${localDISTROOTDIR}lib/curriculum.css" />
 EOF
   $SED -i \
-    -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS<link DISCARD \1>/' \
+    -e '/^<link.*curriculum\.css/s/<link\(.*\)>/%INSERTLIBCURRICULUMCSS/' \
     -e '/%INSERTLIBCURRICULUMCSS/r '$TMPFILE-3.txt \
     -e 's/%INSERTLIBCURRICULUMCSS//' \
-    -e 's/<link DISCARD .*curriculum\.css.*>//' \
     $f
 
   rm -f $TMPFILE-3.txt
