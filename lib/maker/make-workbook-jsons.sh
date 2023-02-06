@@ -1,5 +1,5 @@
 # created 2023-01-20
-# last modified 2023-01-28
+# last modified 2023-02-06
 
 function make_workbook_json_1() {
 
@@ -124,7 +124,7 @@ function make_workbook_json_1() {
 }
 
 function make_workbook_jsons() {
-  echo doing make_workbook_json in $(pwd)
+  # echo doing make_workbook_json in $(pwd)
   for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
     workbook-long-sols opt-exercises opt-exercises-sols ; do
       make_workbook_json_1 $wbf

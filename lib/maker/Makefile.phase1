@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-05
+# last modified 2023-02-06
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -9,7 +9,6 @@ all: copy-lessons copy-pathways page-not-found glossary
 ###############################################################################
 
 initialization: distribution/$(NATLANG)/extlib/mathjax/.
-	@echo doing initialization
 	@mkdir -p $(PROGDIR)
 	@mkdir -p distribution/$(NATLANG)/lib
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -48,11 +47,9 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 # but I don't think it buys us much
 
 node_modules/mathjax:
-	@echo doing mathjax
 	npm install
 
 distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
-	@echo doing mathjax II
 	@mkdir -p $@
 	@$(CP) -upr node_modules/mathjax/* $@
 	@$(CP) -p lib/mathjaxlocal.js $@/config/local
@@ -74,7 +71,6 @@ the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%/., \
 lesson-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
 copy-lessons: initialization $(the-distribution-lessons)
-	@echo doing copy-lessons
 
 define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1
@@ -106,11 +102,9 @@ the-courses := $(patsubst \
 # 	@echo tc is $(the-courses)
 
 copy-pathways: initialization $(the-courses)
-	@echo doing copy-pathways
 
 define make-copy-pathway-rule
 distribution/$(NATLANG)/courses/$(notdir $1)/.: $1
-	@# echo making $$@ from $$<
 	@mkdir -p $$@
 	@touch $$@
 	@touch $$</langs/$(NATLANG)/ignore_file
@@ -127,7 +121,6 @@ $(eval $(foreach pathway,$(the-pathways),$(call make-copy-pathway-rule,$(pathway
 ###############################################################################
 
 page-not-found: distribution/$(NATLANG)/lib/page-not-found.pdf
-	@echo doing page-not-found
 
 distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
