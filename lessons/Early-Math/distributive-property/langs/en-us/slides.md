@@ -74,20 +74,11 @@ On @printable-exercise{product-to-sum.adoc}, the Circle of Evaluation representi
 {layout="InvestigateC"}
 # The Distributive Property
 
-Elise and Dani are discussing a pair of Circles of Evaluation.
+Elise and Dani are discussing a pair of Circles of Evaluation (below). Who is correct?
 
 Dani thinks the Circles of Evaluation are equivalent. She says, "You can think of 43 as the sum of 40 and 3. Then, you multiply 5 by 40 to get 200, and you add 5 and 3 to get 8."
 
 Elise says, "The second Circle should say 200 + 15, not 200 + 8."
-
-@image{images/elise-dani.png}
-
-
----
-{layout="Investigate"}
-# The Distributive Property
-
-Who is correct - Elise or Dani?
 
 @image{images/elise-dani.png}
 
@@ -129,7 +120,7 @@ Dani tells Elise that we must _always_ evaluate what's inside the parentheses fi
 
 ---
 {layout="Launch"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 Look at this expression: 
 
@@ -141,7 +132,7 @@ Can you represent your solving process with a chain of Circles of Evaluation?
 
 ---
 {layout="Launch"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 @math{45 \times 81 - 45 \times 79}
 
@@ -152,7 +143,7 @@ Can you represent your solving process with a chain of Circles of Evaluation?
 
 ---
 {layout="Launch"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 We can use distribution and mental math to make computation simpler!{style="font-size:24pt"}
 
@@ -164,7 +155,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 
 ---
 {layout="Investigate"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 - Turn to @printable-exercise{mental-math.adoc} and look at the first problem.
 - Make the math easier by creating an equivalent expression that we can solve in our heads. 
@@ -179,7 +170,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 
 ---
 {layout="Investigate"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 - Do you find this process more efficient than the standard algorithm for multiplication? Explain.
 - Complete the rest of the workbook page by creating equivalent expressions that we can solve in our heads.
@@ -188,7 +179,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 
 ---
 {layout="Synthesize"}
-# The Distributive Property and Mental Math
+# The Distributive Property & Mental Math
 
 - How can you multiply two 2-digit numbers using mental math?
 - Can you think of a multiplication problem that would be _easier_ to solve using the Distributive Property?
