@@ -1,5 +1,7 @@
 # created 2023-01-20
-# last modified 2023-02-06
+# last modified 2023-02-08
+
+NOPARALLEL=1
 
 function make_workbook_json_1() {
 
@@ -125,8 +127,12 @@ function make_workbook_json_1() {
 
 function make_workbook_jsons() {
   # echo doing make_workbook_json in $(pwd)
-  for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \
-    workbook-long-sols opt-exercises opt-exercises-sols ; do
+  for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \ workbook-long-sols opt-exercises opt-exercises-sols ; do
+    if test -z "$NOPARALLEL"; then
+      make_workbook_json_1 $wbf &
+    else
       make_workbook_json_1 $wbf
-    done
-  }
+    fi
+  done
+  test -z "$NOPARALLEL" && wait
+}
