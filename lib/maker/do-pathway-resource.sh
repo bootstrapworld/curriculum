@@ -1,6 +1,7 @@
 #!/bin/bash
+
 # created 2023-01-14
-# last modified 2023-02-05
+# last modified 2023-02-09
 
 adocfile=$1
 
