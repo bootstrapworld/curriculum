@@ -1,6 +1,6 @@
 #!/bin/bash
 # created 2023-01-19
-# last modified 2023-02-06
+# last modified 2023-02-08
 
 cd $TOPDIR/distribution/$NATLANG
 
@@ -90,8 +90,8 @@ function cleanupduration() {
 
 function resolveabbrevs() {
   local f=$fhtml
-  local fdir=$(dirname $f)
-  local fbase=${f##*/}
+  # local fdir=$(dirname $f)
+  # local fbase=${f##*/}
   local mathjaxneeded=
   local codemirrorneeded=
   if grep -q %CURRICULUMSCRIPT $f; then
