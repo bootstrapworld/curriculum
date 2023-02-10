@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # The Identity Property
 
-Turn to @printable-exercise{discover-identity.adoc}. Look at the first problem (also below). Translate the verbal expressions into Circles of Evaluation. 
+Turn to @printable-exercise{pages/discover-identity.adoc}. Look at the first problem (also below). Translate the verbal expressions into Circles of Evaluation. 
 
 What do you Notice? What do you Wonder?
 
@@ -34,6 +34,12 @@ Possible responses: I can multiply or divide by 1 	 and get an equivalent result
 and get an equivalent result. I need to remember that Commutativity does not apply for division and subtraction!
 -->
 
+---
+{layout="LaunchC"}
+# The Identity Property
+
+Multiplying or dividing an expression by 1 does not change its value; similarly, adding or subtracting 0 results in the original value.
+
 
 ---
 {layout="Investigate"}
@@ -41,7 +47,7 @@ and get an equivalent result. I need to remember that Commutativity does not app
 
 How does the Circle of Evaluation below illustrate the Identity Property?
 
-@image{images/coe.png}
+@image{images/coe.png,250}
 
 ---
 {layout="Investigate"}
@@ -58,20 +64,20 @@ When we find equivalent fractions, we _multiply by one_!In the example above, @m
 -->
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # The Identity Property
 
-Complete @printable-exercise{identity-prop-table.adoc}, filling in the blanks so that all of the Circles of Evaluation are equivalent. The first problem is below.
+Complete @printable-exercise{pages/identity-prop-table.adoc}, filling in the blanks so that all of the Circles of Evaluation are equivalent. The first problem is below.
 
-@image{images/identity-prop-table.png}
+@image{images/identity-prop-table.png,800}
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # The Identity Property
 
-Then, examine these Circles of Evaluation to decide @printable-exercise{which-one-doesnt-belong.adoc}? Be sure to explain why each Circle of Evaluation you select does not belong with the others.
+Then, examine these Circles of Evaluation to decide @printable-exercise{pages/which-one-doesnt-belong.adoc}? Be sure to explain why each Circle of Evaluation you select does not belong with the others. The first problem is below.
 
-@image{images/wodb.png}
+@image{images/wodb.png,750}
 
 
 <!--
@@ -121,7 +127,7 @@ The Identity Property lets us prove that these expressions are equivalent even w
 {layout="Investigate"}
 # The Identity Property and Variables
 
-Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge of the Identity Property to determine if the equation represented by the Circles of Evaluation is true or false.
+Complete @printable-exercise{pages/true-or-false-variables.adoc} using your knowledge of the Identity Property to determine if the equation represented by the Circles of Evaluation is true or false.
 
 @image{images/true-or-false-variables.png}
 
@@ -133,16 +139,16 @@ If students would like, they may choose values to represent the variables. Early
 {layout="Investigate"}
 # The Identity Property and Variables
 
-Examine the Circles of Evaluation to decide @printable-exercise{which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking.
+Examine the Circles of Evaluation to decide @printable-exercise{pages/which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking.
 
 @image{images/wodb-variables.png}
 
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # The Identity Property and Variables
 
-Now try @printable-exercise{true-or-false-variables-challenge.adoc}.
+Now try @printable-exercise{pages/true-or-false-variables-challenge.adoc}.
 
 @image{images/true-or-false-challenge.png}
 
