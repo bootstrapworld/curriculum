@@ -70,7 +70,7 @@ We did lots of different translations between Circles of Evaluation, verbal expr
 
 ---
 {layout="Launch"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 
 - Consider this @vocab{equation}: @math{-|4| = |-4|}
@@ -83,44 +83,44 @@ We did lots of different translations between Circles of Evaluation, verbal expr
 
 ---
 {layout="Launch"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highlights the structure of these expressions and it becomes clearer that they are not @vocab{equivalent}.
 
-@image{images/not-equiv.png}
+@image{images/not-equiv.png,500}
 
 ---
 {layout="Launch"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 - Turn to @printable-exercise{true-or-false.adoc} to examine additional pairs of Circles of Evaluation that use both `negate` and `abs`.
 - Are the expressions on either side of the equal sign?
 - Evaluate each side of the equation to confirm your response.
 - The first one (below) is done for you.
 
-@image{images/true-or-false.png}
+@image{images/true-or-false.png,700}
 
 
 ---
 {layout="Investigate"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates @vocab{variables}. 
 
 Place a check mark by each Circle of Evaluation that meets the condition stated on the left.
 
-@image{images/wodb.png}
+@image{images/wodb.png,700}
 
 ---
 {layout="Investigate"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 - Next, try @printable-exercise{matching-expression-to-circle.adoc}, where you will match expressions with their corresponding Circles of Evaluation. Note: some expressions can be matched to more than one correct Circle of Evaluation!
 - At the bottom of the matching workbook page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
 
 ---
 {layout="Synthesize"}
-# Evaluating with Absolute Value & Opposite 
+# Evaluating Absolute Value & Opposite
 
 - How do you decide the order in which to apply absolute value and opposite when a mathematical expression includes both?
 
