@@ -14,10 +14,15 @@ Your teacher is going to give you an envelope that contains three sets of cards.
 
 With your partner, look through the first card set (of three) that your teacher gave you. What do you notice?
 
+---
+{layout="Launch"}
+# Circles of Evaluation
 
-<!-- 
-Students should notice that the first set of cards includes arithmetic expressions. The expressions on these cards each include the number 15, the number 3, and an operator. Note that because these are expressions - not equations - they do not include an equal sign.
--->
+The first set of cards includes arithmetic expressions. 
+
+The expressions on these cards each include the number 15, the number 3, and an operator. 
+
+
 
 ---
 {layout="Launch"}
@@ -123,9 +128,9 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 - Then, translate in the __other__ direction on @printable-exercise{pages/translate-circles-to-words.adoc}.
 
-- When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, the expression in words).
+- When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, verbal the expression).
 
-- Optional: Try Matching Math to Words, where you will match mathematical expressions with their corresponding expressions in words. (If you get stuck, feel free to draw Circles to help you.)
+- Optional: Try Matching Math to Words @printable-exercise{pages/matching-math-to-words.adoc},
 
 <!-- Note: On Translating from Circles to Words, there are multiple correct translations. Be sure to spend a moment going over students' solutions. Some translations into words are clearer than others; the subsequent section of this lesson will explore that notion in greater depth.
 -->
@@ -135,7 +140,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 # Circles of Evaluation
 
 
-- We did lots of different translations between Circles of Evaluation, words, and arithmetic expressions.
+- We did lots of different translations between Circles of Evaluation, verbal expressions, and arithmetic expressions.
 
 - Was there any type of translation that was more challenging for you?
 
@@ -180,7 +185,7 @@ Are we multiplying first and then adding (as represented by the Circle on the le
 {layout="Investigate"}
 # The Ambiguity of Words
 
-- Complete @printable-exercise{pages/ambiguity-of-words.adoc}, drawing two possible Circles for each expression in words.
+- Complete @printable-exercise{pages/ambiguity-of-words.adoc}, drawing two possible Circles for each verbal expression.
 
 - What happens when you translate each Circle into a mathematical expression? Do the expressions produce the same result?
 
