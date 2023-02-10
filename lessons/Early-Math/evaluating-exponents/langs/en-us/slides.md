@@ -68,7 +68,7 @@ Exponents are valuable because they act as a shorthand.
 {layout="LaunchC"}
 # Expressions with Exponents 
 
-Now, turn to @printable-exercise{exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
+Now, turn to @printable-exercise{pages/exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
 
 @image{images/basics.png}
 
@@ -129,6 +129,14 @@ How would you translate each of these Circles of Evaluation into words? Why are 
 {layout="Investigate"}
 # Expressions with Exponents 
 
+"nine multiplied by three squared" versus "find the product of nine and three, then square it."
+
+@image{images/coes4.png}
+
+---
+{layout="Investigate"}
+# Expressions with Exponents 
+
 How would you translate each of these Circles of Evaluation into mathematical expressions?
 
 @image{images/coes4.png}
@@ -143,6 +151,14 @@ Students will likely suggest @math{9 \times (3^2)} as a translation for the Circ
 {layout="Investigate"}
 # Expressions with Exponents 
 
+@math{9 \times 3^2} versus @math{(9 \times 3)^2} 
+
+@image{images/coes4.png}
+
+---
+{layout="Investigate"}
+# Expressions with Exponents 
+
 In an expression with no grouping symbols, we evaluate the exponent before the other operations.
 
 
@@ -150,14 +166,14 @@ In an expression with no grouping symbols, we evaluate the exponent before the o
 {layout="Investigate"}
 # Expressions with Exponents 
 
-- Try the @printable-exercise{matching-expressions-to-circles.adoc} to practice matching Circles of Evaluation with their corresponding mathematical expressions.
-- Translate between Circles of Evaluation, mathematical expressions, and words on @printable-exercise{translating-exponent-expressions.adoc}
+- Try the @printable-exercise{pages/matching-expressions-to-circles.adoc} to practice matching Circles of Evaluation with their corresponding mathematical expressions.
+- Translate between Circles of Evaluation, mathematical expressions, and words on @printable-exercise{pages/translating-exponent-expressions.adoc}
 
 ---
 {layout="Investigate"}
 # Expressions with Exponents 
 
-In @printable-exercise{wodb.adoc}, examine each Circle of Evaluation to determine which expressions in the set are equivalent. The first problem is below.
+In @printable-exercise{pages/wodb.adoc}, examine each Circle of Evaluation to determine which expressions in the set are equivalent. The first problem is below.
 
 @image{images/wodb.png}
 
@@ -214,7 +230,7 @@ Do any of the expressions produce the same outcome? Why or why not?
 {layout="Investigate"}
 # Algebraic Expressions with Exponents
 
-- Turn to @printable-exercise{exponents-variables-table.adoc}. Draw a Circle of Evaluation to represent each expression that is provided in the left-hand column. The first one is done for you.
+- Turn to @printable-exercise{pages/exponents-variables-table.adoc}. Draw a Circle of Evaluation to represent each expression that is provided in the left-hand column. The first one is done for you.
 - Once you have completely filled in the Circle of Evaluation column, move to the Evaluate column, where you will evaluate each expression by substituting in the given value.
 
 ---
