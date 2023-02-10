@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-08
+# last modified 2023-02-10
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -9,7 +9,7 @@ all: dependency linkcheck images tocs books
 
 # all: books
 
-# all: preproc
+# all: postproc
 
 ##########################################################################
 
@@ -154,7 +154,7 @@ primitives: preproc
 	$(MAKE_DIR)collect-primitives.sh
 
 postproc: preproc
-	$(MAKE_DIR)do-postproc.sh
+	$(MAKE_DIR)do-postproc.lua
 
 dependency: primitives
 	$(MAKE_DIR)make-dependency-graph.sh
