@@ -23,7 +23,7 @@ To create a Circle of Evaluation of the same value, we could write what you see 
 @image{images/coe2.png}
 
 ---
-{layout="LaunchC"}
+{layout="LaunchR"}
 # Computation and Equivalence
 
 Because we know that @math{8 + 2} produces 10, we can use it _in place of 10_. 
@@ -172,9 +172,9 @@ Pedagogy note: To recap: *yes*, we are advocating for a flexible order of operat
 # Simplifying Arithmetic Expressions
 
 
-- Each row on @printable-exercise{circles-and-computation-whole-nums.adoc} represents a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators!
+- Each row on @printable-exercise{pages/circles-and-computation-whole-nums.adoc} represents a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators!
 - Fill in those numbers and operators so that each sequence of circles will end with the answer shown on the right.
-- When you're done, complete  @printable-exercise{circles-and-computation.adoc}, a version of the activity with more challenging numbers.
+- When you're done, complete  @printable-exercise{pages/circles-and-computation.adoc}, a version of the activity with more challenging numbers.
 - Did you fill in blanks in the Circles of Evaluation from left to right or right to left? Why?
 
 ---
@@ -210,7 +210,7 @@ Conversely, students who have a relational view of the equal sign recognize that
 
 - Look at the two Circles, below.
 - Use computation (or any other strategy) to determine if the statement of equivalence is true or false.
-- Once we're in agreement on the example, you may complete the rest of @printable-exercise{true-or-false.adoc}
+- Once we're in agreement on the example, you may complete the rest of @printable-exercise{pages/true-or-false.adoc}
 
 @image{images/true-or-false1.png}
 
@@ -225,7 +225,7 @@ The Circles of Evaluation in this activity were designed to support students in 
 
 The second game involves analyzing four different Circles of Evaluation to determine which one is not equivalent.
 
-- Turn to @printable-exercise{wodb.adoc}. Let's try the first problem (below) together. Which one doesn't belong and why?
+- Turn to @printable-exercise{pages/wodb.adoc}. Let's try the first problem (below) together. Which one doesn't belong and why?
 - Now complete the worksheet on your own.
 
 @image{images/wodb.png}
