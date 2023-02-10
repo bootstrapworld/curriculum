@@ -101,7 +101,7 @@ What do each of these Circles evaluate to?
 {layout="Investigate"}
 # Finding Opposites
 
-Practice applying `negate` on @printable-exercise{true-or-false-negate.adoc}. Evaluate each side of the @vocab{equation} to confirm if it is true or false.
+Practice applying `negate` on @printable-exercise{pages/true-or-false-negate.adoc}. Evaluate each side of the @vocab{equation} to confirm if it is true or false.
 
 @image{images/true-or-false.png}
 
@@ -110,7 +110,7 @@ Practice applying `negate` on @printable-exercise{true-or-false-negate.adoc}. Ev
 {layout="Investigate"}
 # Finding Opposites
 
-On @printable-exercise{true-or-false-negate-2.adoc}, explore Circles of Evaluation with @vocab{Variables}, and review previously explored properties (Identity, Commutative, Associative, and Distributive).
+On @printable-exercise{pages/true-or-false-negate-2.adoc}, explore Circles of Evaluation with @vocab{Variables}, and review previously explored properties (Identity, Commutative, Associative, and Distributive).
 
 @image{images/true-or-false-2.png}
 
@@ -209,7 +209,7 @@ What does each of the Circles below evaluate to?
 {layout="Investigate"}
 # Absolute Value
 
-- On @printable-exercise{true-or-false-abs-val.adoc}, you will compare expressions with `abs` to expressions with `negate`
+- On @printable-exercise{pages/true-or-false-abs-val.adoc}, you will compare expressions with `abs` to expressions with `negate`
 - On the bottom half of the workbook page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
 
 
@@ -217,7 +217,7 @@ What does each of the Circles below evaluate to?
 {layout="Investigate"}
 # Absolute Value
 
-Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates variables. Place a check mark by each Circle that meets the condition stated on the left.
+Examine the Circles of Evaluation to determine @printable-exercise{pages/wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates variables. Place a check mark by each Circle that meets the condition stated on the left.
 
 @image{images/wodb.png}
 
