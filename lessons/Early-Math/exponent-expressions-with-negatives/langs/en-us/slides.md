@@ -35,7 +35,7 @@ Did you know that @math{-3^2} has the *same* Circle of Evaluation as one of the 
 {layout="Investigate"}
 # Exponents and Negation
 
-On @printable-exercise{true-or-false.adoc}, draw two Circles of Evaluation to represent each equation. Then, use your Circles of Evaluation to determine if the equation is true or false. The first one (below) is done for you.
+On @printable-exercise{pages/true-or-false.adoc}, draw two Circles of Evaluation to represent each equation. Then, use your Circles of Evaluation to determine if the equation is true or false. The first one (below) is done for you.
 
 @image{images/true-or-false.png}
 
@@ -98,7 +98,7 @@ The first Circle is @math{x^2}; the second Circle is @math{-x^2}; the third Circ
 {layout="Investigate"}
 # Variables, Exponents & Negation
 
-On @printable-exercise{evaluate-twice.adoc}, create a Circle of Evaluation for each expression provided. Once you have drawn a Circle of Evaluation, use it to help you evaluate the expression __twice__ - once for @math{x=5} and once for @math{x=−5}.
+On @printable-exercise{pages/evaluate-twice.adoc}, create a Circle of Evaluation for each expression provided. Once you have drawn a Circle of Evaluation, use it to help you evaluate the expression __twice__ - once for @math{x=5} and once for @math{x=−5}.
 
 @image{images/eval-and-compare.png}
 
@@ -116,7 +116,7 @@ _The expressions produced the same outcome for 1 and 2, the expressions that inv
 {layout="Investigate"}
 # Variables, Exponents & Negation
 
-When you're done, turn to @printable-exercise{exponents-variables-table.adoc}. Draw a Circle of Evaluation to represent the expression, then evaluate using the assigned value.
+When you're done, turn to @printable-exercise{pages/exponents-variables-table.adoc}. Draw a Circle of Evaluation to represent the expression, then evaluate using the assigned value.
 
 @image{images/variables-table.png}
 
