@@ -11,8 +11,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
  
 
 - The @vocab{Associative Property} of Addition tells us that no matter how we group numbers being added, the end result will always be the same.
-- Turn to @printable-exercise{assoc-prop-launch.adoc}, where you will explore the Associative Property of Addition.
-- How many different ways can you re-group and re-order this expression: @math{88 + 637 + 71 + 129 + 12} 
+- Turn to @printable-exercise{pages/assoc-prop-launch.adoc}, where you will explore the Associative Property of Addition. In particular, you will explore different ways to re-group and re-order this expression: @math{88 + 637 + 71 + 129 + 12} 
 
 <!--
 Allow students to work, encouraging them to try not only different groupings but different _structures_ as well - all of which will produce the same outcome! If possible, invite students to draw their Circles of Evaluation on the board so that the class can see all possible configurations. After students have drawn their Circles of Evaluation and had some time to consider the reflection questions, follow up with a class discussion.
@@ -35,7 +34,7 @@ Students who applied the Commutative Property - merely changing the order of two
 {layout="InvestigateC"}
 # The Associative Property
 
-- Turn to @printable-exercise{discover-assoc.adoc}. Look at the first problem.
+- Turn to @printable-exercise{pages/discover-assoc.adoc}. Look at the first problem.
 - What do you Notice about the three Circles of Evaluation? How about the two expressions that accompany them? What do you Wonder?
 
 @image{images/coes.png}
@@ -56,8 +55,8 @@ The Associative Property holds for addition and multiplication, but not division
 {layout="Investigate"}
 # The Associative Property
 
-- On @printable-exercise{assoc-prop-table.adoc}, apply the Associative Property to create @vocab{equivalent} Circles of Evaluation. Pay attention to the operators!
-- Now try @printable-exercise{true-or-false.adoc}. Determine if each equation is true, and be sure to explain your response.
+- On @printable-exercise{pages/assoc-prop-table.adoc}, apply the Associative Property to create @vocab{equivalent} Circles of Evaluation. Pay attention to the operators!
+- Now try @printable-exercise{pages/true-or-false.adoc}. Determine if each equation is true, and be sure to explain your response.
 
 <!--
 Follow up to confirm understanding of the activities, paying specific attention to expressions with multiple operations. In these instances, students _can_ apply the Associative Property - but only on the parts of the expression that feature only addition or only multiplication.
@@ -71,7 +70,7 @@ Follow up to confirm understanding of the activities, paying specific attention 
 - For which operations does the Associative Property hold?
 - Can you ever apply the Associative Property on an expression that includes division or subtraction?
 - When applying the Associative Property, did you ever change the order of the numbers?
-- When applying the Associative Property, did you ever change the architecture of the circles? (For instance, did you ever change “three nested circles” to “two-circles-in-a-circle”?) When was that necessary? Why?
+- When applying the Associative Property, did you ever change the architecture of the circles? When was that necessary? Why?
 
 <!--
 - For which operations does the Associative Property hold?
@@ -103,7 +102,7 @@ We encourage you to review students' submissions, and write a few on the board t
 {layout="InvestigateC"}
 # The Associative Property & Mental Math
 
-Complete @printable-exercise{which-circles-make-the-math-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression.
+Complete @printable-exercise{pages/which-circles-make-the-math-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression. The first problem is below.
 
 @image{images/assoc-mental-math.png}
 
@@ -112,8 +111,8 @@ Complete @printable-exercise{which-circles-make-the-math-easier.adoc}. Examine e
 {layout="Investigate"}
 # The Associative Property & Mental Math
 
-- Now, try @printable-exercise{props-make-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
-- Try @printable-exercise{props-make-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
+- Now, try @printable-exercise{pages/props-make-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
+- Try @printable-exercise{pages/props-make-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
 
 
 ---
