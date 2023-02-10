@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # The Commutative Property
 
-- Turn to @printable-exercise{discover-comm.adoc}. Look at the first problem. What do you Notice about the two Circles of Evaluation? What do you Wonder?
+- Turn to @printable-exercise{pages/discover-comm.adoc}. Look at the first problem. What do you Notice about the two Circles of Evaluation? What do you Wonder?
 
 @image{images/coes.png}
 
@@ -25,7 +25,7 @@ Students might notice that both Circles evaluate to 360, and that the order of t
 # The Commutative Property
 
 
-- Work through the remaining problems with your partner. When you finish the page, move on to @printable-exercise{discover-comm-cont.adoc}.
+- Work through the remaining problems with your partner. When you finish the page, move on to @printable-exercise{pages/discover-comm-cont.adoc}.
 - What did you observe about the Commutative Property?
 
 <!--
@@ -42,7 +42,7 @@ The *_Commutative Property_* tells us that for any expression involving only add
 {layout="InvestigateC"}
 # The Commutative Property
 
-- Turn to @printable-exercise{comm-prop-table.adoc}.
+- Turn to @printable-exercise{pages/comm-prop-table.adoc}.
 - How many different ways can you apply the Commutative Property? Draw as many different Circles of Evaluation as you can. The first one (below) is done for you.
 
 @image{images/comm-prop-table.png}
@@ -117,7 +117,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="Investigate"}
 # Tying it All Together
 
-- Look at @printable-exercise{claire-and-walker.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
+- Look at @printable-exercise{pages/claire-and-walker.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
 - In the column on the right, record if Claire, Walker, or both students correctly translated the words into a Circle.
 
 
@@ -125,7 +125,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="InvestigateC"}
 # Tying it All Together
 
-- Optional: Complete @printable-exercise{words-to-circles-challenge.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
+- Optional: Complete @printable-exercise{pages/words-to-circles-challenge.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
 
 @image{images/claire-walker.png}
 
