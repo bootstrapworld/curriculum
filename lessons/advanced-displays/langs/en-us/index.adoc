@@ -43,7 +43,7 @@
 
 === Overview
 
-Students review the concepts of column lookups and function definition, by writing functions that consume rows and do some computation on their columns.
+Students review the concepts of column lookups and function definition by writing functions that consume rows and do some computation on their columns.
 
 === Launch
 
@@ -54,27 +54,27 @@ You've learned how to take a complex value like a Row, and lookup a column. And 
 
 [.lesson-instruction]
 - Turn to @printable-exercise{age-dot.adoc}, and complete the top half of the page (questions 1 and 2).
-- Compare your answers to some other students. If you each wrote down different answers, talk about what's different and what's the same.
+- Compare your answers to some other students'. If you each wrote down different answers, talk about what's different and what's the same.
 
 Review student answers. Every student should have the same code for this part!
 
 [.lesson-instruction]
 - You could imagine doing this for every animal in the shelter, but that would be a lot of very repetitive work. This is exactly what functions are made for!
-- Open your saved Animals Starter File (or @starter-file{animals, "start a new one"}), and type in the Contract, Examples, and Definition for `pounds-dot` into the Definitions Area.
-- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `young-row`.
+- Open your saved Animals Starter File (or @starter-file{animals, "start a new one"}), and type the Contract, Examples, and Definition for `age-dot` into the Definitions Area.
+- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `cat-row`.
 
 Review the Contract, Examples and Definition with students, making sure to point out the connections between each representation!
 
 [.lesson-instruction]
 - Turn to @printable-exercise{species-tag.adoc}, and complete the top half of the page (questions 1 and 2).
 - When you are confident with the code you have written - check with your teacher or a partner - complete the rest of the page to define a function `species-tag`.
-- In your Animals Starter File, type in the Contract, Examples, and Definition for `species-tag` into the Definitions Area.
-- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `young-row`.
+- In your Animals Starter File, type the Contract, Examples, and Definition for `species-tag` into the Definitions Area.
+- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `cat-row`.
 
 === Synthesize
 
-* One of the functions we wrote used the `pounds` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_
-** __What a function consumes__ is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `pounds` column - a Number - and the other looked up the `species` column - a String.
+* One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_
+** __What a function consumes__ is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.
 * How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?
 
 
@@ -82,17 +82,18 @@ Review the Contract, Examples and Definition with students, making sure to point
 
 === Overview
 
-Students are introduced to @show{(code 'image-scatter-plot)}, which consumes a function and uses it to draw custom images in place of dots. **Programming note:** `image-scatter-plot` is an example of _higher order functions_, which are functions consume other functions as inputs.
+Students are introduced to @show{(code 'image-scatter-plot)}, which consumes a function and uses it to draw custom images in place of dots. **Programming note:** `image-scatter-plot` is an example of a _higher order function_, or a function that consumes another function as its input.
 
 === Launch
 
-Do you think an animal's weight effects how long it stays at the shelter? Why or why not?
+[.lesson-instruction]
+Do you think an animal's weight affects how long it stays at the shelter? Why or why not?
 
 Many apartment buildings have limits on how heavy a pet can be, which could make bigger animals harder to adopt. If we're looking for a relationship between two variables, we know that we need a scatter plot! Let's start out by making a scatter plot to look for a relationship between Pounds and Weeks.
 
 @center{@image{images/pounds-v-weeks.png, 450}}
 
-There seems to be a positive relationship , but it's not very strong. Perhaps pounds isn't the only thing that determines how quickly an animal is adopted! Maybe people want to adopt _younger_ animals because they think older animals might have more health problems.
+There seems to be a positive relationship, but it's not very strong. Perhaps weight isn't the only thing that determines how quickly an animal is adopted! Maybe people want to adopt _younger_ animals because they think older animals might have more health problems.
 
 How could we represent an animal's age on this scatter plot, while still showing the relationship between `pounds` and `weeks`?
 
@@ -153,14 +154,14 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 
 [.lesson-instruction]
 * __Starting on paper__, complete @printable-exercise{pages/piecewise-explore.adoc}.
-* When you've finishing thinking and writing, open the @starter-file{piecewise-displays} and experiment!.
+* When you've finishing thinking and writing, open the @starter-file{piecewise-displays} and experiment!
 * Can you come up with another piecewise function?
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
 |
 @span{.title}{ Optional: When your conditional is _already_ a Boolean }
-If you have time or students who are ready for a challenge, you can also have them make a scatter plot for dots distinguishing whether the animal is fixed or not using the directions at the end of the starter file or @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column!
+If you have time or students who are ready for a challenge, you can also have them make a scatter plot with dots distinguishing whether the animal is fixed or not using the directions at the end of the starter file or @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column!
 
 The following two functions __do the same thing__. Notice how much cleaner the second example is!
 
