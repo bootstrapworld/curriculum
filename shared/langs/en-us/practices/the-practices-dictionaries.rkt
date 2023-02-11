@@ -6,7 +6,7 @@
   expand-practice-abbrev
   )
 
-(require "practices-mlr-dictionary.rkt")
+;(require "practices-mlr-dictionary.rkt")
 (require "practices-sj-dictionary.rkt")
 (require "practices-sep-dictionary.rkt")
 (require "practices-cc-dictionary.rkt")
@@ -15,8 +15,8 @@
 (define *practices-list*
   (list
     ; nickname expanded-name list URI
-    (list "MLR" "Math Lang. Routines" *mlr-practices-list*
-          "https://achievethecore.org/peersandpedagogy/developing-math-language-routines/")
+    ;(list "MLR" "Math Lang. Routines" *mlr-practices-list*
+    ;      "https://achievethecore.org/peersandpedagogy/developing-math-language-routines/")
     (list "SJ" "Social Justice" *sj-practices-list*
           "https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf")
     (list "NGSS" "Science and Engineering" *sep-practices-list* "https://ngss.nsta.org/practicesfull.aspx")

@@ -119,7 +119,7 @@
      )
     ("9-12.Algorithms and Programming.Control"
      "Programmers consider tradeoffs related to implementation, readability, and program performance when selecting and combining control structures."
-     "method-chaining"
+     "composing-table-operations"
      "custom-scatter-plots"
      "piecewise-functions-conditionals"
      )
@@ -136,13 +136,13 @@
      "re-key-events"
      "re-timers"
      "re-timers"
-     "method-chaining"
+     "composing-table-operations"
      "codap-transformers-1"
      "codap-transformers-2"
      )
     ("9-12.Algorithms and Programming.Modularity"
      "Complex programs are designed as systems of interacting modules, each with a specific role, coordinating for a common overall purpose. These modules can be procedures within a program; combinations of data and procedures; or independent, but interrelated, programs. Modules allow for better management of complex tasks."
-     "method-chaining"
+     "composing-table-operations"
      "defining-table-functions"
      "functions-make-life-easier"
      )

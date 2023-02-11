@@ -326,6 +326,13 @@
    ("pyret" "https://code.pyret.org/editor#share=1-gNiFJeQenO3e_9LVbPw6ucl4lZrTA6R")
   )
 
+  ("pinwheels1" "Pinwheels 1 Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=1zGu7HlIizCZZ923UDKVj-ahUEHU9d_2_")
+  )
+  ("pinwheels2" "Pinwheels 1 Starter File"
+   ("pyret" "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW")
+  )
+
   ))
 
 (define *do-not-autoinclude-in-material-links*

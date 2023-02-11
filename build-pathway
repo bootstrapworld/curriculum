@@ -26,8 +26,10 @@ export SEMESTER YEAR
 SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
+BADPATHWAYARG=
 HELP=
-LASTMOD=2023-01-14 # last modified
+LASTMOD=2023-02-04 # last modified
+NOARGSGIVEN=
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -44,8 +46,6 @@ if test -f ./.build-pathway.env; then
   . ./.build-pathway.env
 fi
 
-BADPATHWAYARG=
-
 while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --add-exercises -o "$arg" = -e; then
@@ -58,6 +58,8 @@ while test $# -ne 0; do
     DEBUG=1
   elif test "$arg" = --expanded-warnings -o "$arg" = -w; then
     EXPANDEDWARNINGS=1
+  elif test "$arg" = --everything; then
+    PROGLANG=all; NOARGSGIVEN=1; shift
   elif test "$arg" = --force -o "$arg" = -f; then
     FORCE=1
   elif test "$arg" = --help -o "$arg" = -h; then
@@ -124,8 +126,6 @@ TMPAFX=$(basename $TMPTMP)
 
 export ABYSS=page-not-found
 
-WKH2P_PFX=.wkh2p-tmp
-
 export NUMCORES=$(getconf _NPROCESSORS_ONLN)
 
 export WORKBOOKPAGE=
@@ -184,22 +184,23 @@ if which md5 | grep -q .; then
   MDV=md5
 fi
 
+
 if ! which curl | grep -q .; then
   echo
-  echo WARNING: Missing \'curl\' tool; can\'t do --lint
+  echo WARNING: Missing \'curl\' tool\; can\'t do --lint
   LINT=
 fi
 
-NOARGSGIVEN=
-
-if test "$ARGS" = ""; then
+if test -z "$NOARGSGIVEN" -a "$ARGS" = ""; then
   test -n "$BADPATHWAYARG" && exit
   NOARGSGIVEN=1
+fi
+
+if test -n "$NOARGSGIVEN"; then
   ARGS=$(ls -d pathways/*)
 fi
 
 #echo ARGS is $ARGS
-
 
 # echo PROGLANG is $PROGLANG
 
@@ -594,7 +595,7 @@ function lintlesson() {
 
   test $LINT || return
 
-  for g in 'Lesson Goals' Materials Preparation; do
+  for g in 'Lesson Goals' Materials ; do
     if ! grep -q "^<p>$g\>" $f; then
       echo
       echo WARNING: Lesson $containingFile missing summary-table row for \"$g\"
@@ -606,7 +607,7 @@ function lintlesson() {
 function addanalytics() {
   local f=$1
   $SED -i \
-    -e '/^<body/r $TOPDIR/lib/analytics.txt' \
+    -e '/^<body/r '$TOPDIR'/lib/analytics.txt' \
     $f
 }
 
@@ -1880,8 +1881,6 @@ function rmtmpfilesaux() {
     find . -name \*.$f | grep -v '\(lesson-order\|proglang\|shadow-glossary\|workbook-pages\)\.txt' | xargs rm -f
   done
 
-  find . -name $WKH2P_PFX-\* -delete
-
 }
 
 function rmtmpfiles() {
@@ -2802,7 +2801,7 @@ function doadocpostproc() {
   if test -s $ADOC_INPUT; then
     if test ! $ASCIIDOCNODE; then
       # echo calling asciidoctor on $ADOC_INPUT
-      asciidoctor -a linkcss -a stylesheet=lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
     else
       echo Trying node asciidoctor!
       $SED -i -e 's/.*/"\0", /' $ADOC_INPUT
@@ -2959,7 +2958,7 @@ function callonARGS() {
     if test -z "$PROGLANG"; then
       local firstproglang=pyret
       local proglangFile=$TOPDIR/pathways/$SRCPATHWAY/langs/$NATLANG/proglang.txt
-      if test -f $lessonOrderFile; then
+      if test -f $proglangFile; then
         local proglangs=$(cat $proglangFile)
         firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
       fi

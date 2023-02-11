@@ -1,0 +1,45 @@
+= Non-Nested Pinwheels Code
+----
+# A PinwheelState is the angle of rotation for 4 pinwheels
+data PinwheelState:
+  | pinwheels(
+      p1a :: Number,
+      p2a :: Number,
+      p3a :: Number,
+      p4a :: Number)
+end
+
+STARTING-PINWHEELS = pinwheels(60, 3, 25, 70)
+
+# update-pinwheel :: Number -> Number
+fun update-pinwheel(angle):
+  angle + 6
+end
+
+# next-state-tick :: PinwheelState -> PinwheelState
+fun next-state-tick(ps):
+  pinwheels(
+    update-pinwheel(ps.p1a),
+    update-pinwheel(ps.p2a),
+    update-pinwheel(ps.p3a),
+    update-pinwheel(ps.p4a))
+end
+
+# draw-pinwheel :: Number -> Image
+fun draw-pinwheel(angle):
+  rotate(angle, PINWHEEL-IMG)
+end
+
+# draw-state :: PinwheelState -> Image
+fun draw-state(ps):
+  put-image(draw-pinwheel(ps.p1a),
+    400, 100,
+    put-image(draw-pinwheel(ps.p2a),
+      320, 240,
+      put-image(draw-pinwheel(ps.p3a),
+        100, 400,
+        put-image(draw-pinwheel(ps.p4a),
+          500, 350,
+          empty-scene(640, 480)))))
+end
+----
