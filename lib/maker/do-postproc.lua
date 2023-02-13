@@ -14,9 +14,16 @@ analytics_file = os.getenv('TOPDIR') .. '/lib/analytics.txt'
 function file_exists_p(f)
   -- print('doing file_exists_p', f)
   local h = io.open(f)
-  if h then io.close(h); return true
+  if h then h:close(); return true
   else return false
   end
+end
+
+function memberp(elt, tbl)
+  for _,val in pairs(tbl) do
+    if elt == val then return true end
+  end
+  return false
 end
 
 function with_open_input_file(f, fn)
@@ -51,7 +58,7 @@ function postproc(fhtml_cached, tijpe)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if tijpe == 'lessonplan' or tijpe == 'narrative' or tijpe == 'narrativeaux' or tijpe == 'resources' then
+  if memberp(tijpe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -85,13 +92,13 @@ function postproc(fhtml_cached, tijpe)
         add_comment_p = true
       end
       --
-      if tijpe == 'lessonplan' or tijpe == 'narrative' or tijpe == 'narrativeaux' or tipje == 'resources' then
+      if memberp(tijpe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
       --
       --
-      if tijpe == 'lessonplan' or tijpe == 'narrative' then
+      if memberp(tijpe, {'lessonplan', 'narrative'}) then
         add_analytics_p = true
       end
       --
@@ -105,7 +112,7 @@ function postproc(fhtml_cached, tijpe)
 
       --
       --fixme datasheetpage?
-      if tijpe ~= 'workbookpage' and tijpe ~= 'lessonplan' and tijpe ~= 'datasheetpage' then
+      if memberp(tijpe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
         x = x:gsub('^<body class="', '%0narrativepage')
       end
     end
@@ -202,8 +209,8 @@ function postproc(fhtml_cached, tijpe)
         <script>function renderSaveToDrive() {
           var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
           gapi.savetodrive.render('savetodrive-div', {
-            src:]] .. 
-            "(window.location.href.match(/\\/$/)?(window.location.href+'index-gdrive-import.html'):(window.location.href.replace(/([^\\/]+)\\.([^.\\/]+)$/, '$1-gdrive-import.html')))," .. 
+            src:]] ..
+            "(window.location.href.match(/\\/$/)?(window.location.href+'index-gdrive-import.html'):(window.location.href.replace(/([^\\/]+)\\.([^.\\/]+)$/, '$1-gdrive-import.html')))," ..
             [[
             filename:
             ]] .. '"' .. page_title .. '",' ..
@@ -231,7 +238,7 @@ function postproc(fhtml_cached, tijpe)
       end
     end
     --
-    if tijpe == 'lessonplan' or tijpe == 'resources' then
+    if memberp(tijpe, {'lessonplan', 'resources'}) then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
@@ -321,6 +328,10 @@ end
 function run_postproc(batchf, tijpe)
   -- print('doing run_postproc', batchf, tijpe)
   local i = io.open(batchf, 'r')
+  if not i then
+    -- print('run_postproc skipping nonexistent ', batchf)
+    return
+  end
   for f in i:lines() do
     postproc(f, tijpe)
   end
@@ -333,4 +344,3 @@ run_postproc(lessonplan_batchf, 'lessonplan')
 run_postproc(narrative_batchf, 'narrative')
 run_postproc(narrativeaux_batchf, 'narrativeaux')
 run_postproc(resources_batchf, 'resources')
-
