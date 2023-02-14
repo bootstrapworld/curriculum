@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-10
+# last modified 2023-02-13
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -7,44 +7,49 @@ include $(MAKE_DIR)utils.mk
 
 all: dependency linkcheck images tocs books
 
-# all: books
+##########################################################################
 
-# all: postproc
+lesson-list:
+	$(MAKE_DIR)create-relevant-lessons.sh
 
 ##########################################################################
 
 pathway-independent-adoc-files := $(wildcard \
-	$(TOPDIR)/distribution/$(NATLANG)/textbooks/*.adoc \
-	$(TOPDIR)/distribution/$(NATLANG)/textbooks/*/*.adoc \
+	distribution/$(NATLANG)/textbooks/*.adoc \
+	distribution/$(NATLANG)/textbooks/*/*.adoc \
 	)
 
 pathway-independent-asc-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call asc-file,$(adocf)))
 
-# debug-build-pathway-independent:
-# 	@echo pwadocf is $(pathway-independent-adoc-files)
-# 	@echo pwascf is $(pathway-independent-asc-files)
+pathway-independent-pdf-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call pdf-file,$(adocf)))
 
-build-pathway-independent: $(pathway-independent-asc-files)
+build-pathway-independent: $(pathway-independent-pdf-files)
 
 define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
-	@# @echo build-pathway-independent: creating $$@ from $$<
+	@#echo build-pathway-independent: creating $$@ from $$<
 	@$(MAKE_DIR)do-pathway-independent.sh $$<
 
 endef
 
 $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-rule,$(adocf))))
 
+define make-build-pathway-independent-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-pathway-independent-pdf: creating $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-pathway-independent-pdf.sh $$<; fi
+
+endef
+
+$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-pdf-rule,$(adocf))))
+
 ###############################################################################
 
-# debug-build-workbook-pages:
-# 	@echo rl is $(relevant-lessons)
-# 	@echo radocf is $(relevant-adoc-files)
-# 	@echo rascf is $(relevant-asc-files)
+# relevant-lessons := $(foreach \
+# 	lesson-name,$(shell \
+# 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
 
-relevant-lessons := $(foreach \
-	lesson-name,$(shell \
-	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
+relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
 
 # shd use recursive wildcard if we can find one
 
@@ -58,37 +63,59 @@ relevant-adoc-files := $(foreach \
 relevant-asc-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
 
-build-workbook-pages: $(relevant-asc-files)
+relevant-pdf-files := $(foreach \
+	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
+
+build-workbook-pages: $(relevant-pdf-files)
 
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
+	@#echo building workbook-page $$@ from $$<
 	@$(MAKE_DIR)do-workbook-page.sh $$<
 
 endef
 
 $(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
 
+define make-build-workbook-page-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo building workbook-page: $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-workbook-page-pdf.sh $$<; fi
+
+endef
+
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pdf-rule,$(adocf))))
+
 #########################################################################
 
-lesson-plan-adoc-files := $(foreach \
-	lesson,$(relevant-lessons),$(lesson)/index.adoc)
+lesson-plan-adoc-files := $(notdir $(wildcard \
+	distribution/$(NATLANG)/lessons/index.adoc))
 
 lesson-plan-asc-files := $(foreach \
 	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
 
-# build-lesson-plans:
-# 	@echo lpadocf is $(lesson-plan-adoc-files)
-# 	@echo lpascf is $(lesson-plan-asc-files)
+lesson-plan-pdf-files := $(foreach \
+	adocf,$(lesson-plan-adoc-files),$(call pdf-file,$(adocf)))
 
-build-lesson-plans: $(lesson-plan-asc-files)
+build-lesson-plans: $(lesson-plan-pdf-files)
 
 define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
+	@#echo build-lesson-plan: creating $$@ from $$<
 	@$(MAKE_DIR)do-lesson-plan.sh $$<
 
 endef
 
 $(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
+
+define make-build-lesson-plan-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-lesson-plan-pdf: creating $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-lesson-plan-pdf.sh $$<; fi
+
+endef
+
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf))))
 
 ###############################################################################
 
@@ -101,19 +128,28 @@ resource-adoc-files := $(wildcard \
 resource-asc-files := $(foreach \
 	adocf,$(resource-adoc-files),$(call asc-file,$(adocf)))
 
-# build-pathway-resources:
-# 	@echo radocf is $(resource-adoc-files)
-# 	@echo rascf is $(resource-asc-files)
+resource-pdf-files := $(foreach \
+	adocf,$(resource-adoc-files),$(call pdf-file,$(adocf)))
 
-build-pathway-resources: $(resource-asc-files)
+build-pathway-resources: $(resource-pdf-files)
 
 define make-build-resource-rule
 $(call asc-file,$1): $1
+	@#echo build-resource: creating $$@ from $$<
 	@$(MAKE_DIR)do-pathway-resource.sh $$<
 
 endef
 
 $(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(adocf))))
+
+define make-build-resource-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-resource-pdf: creating $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-pathway-resource-pdf.sh $$<; fi
+
+endef
+
+$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-pdf-rule,$(adocf))))
 
 ########################################################################
 
@@ -134,19 +170,7 @@ $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,
 
 ##########################################################################
 
-# do-conversions: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
-# 	@echo ")" >> $(ADOCABLES_INPUT)
-# 	@$(MAKE_DIR)run-asciidoctor.sh
-# 	@$(MAKE_DIR)do-postproc.sh
-# 	@$(MAKE_DIR)collect-primitives.sh
-# 	@$(MAKE_DIR)make-dependency-graph.sh
-# 	@$(MAKE_DIR)make-image-list.sh
-# 	@$(MAKE_DIR)make-pathway-tocs.sh
-# 	@$(MAKE_DIR)make-bilingual-glossary.sh
-# 	@$(MAKE_DIR)make-pdf.sh
-# 	@$(MAKE_DIR)make-books.sh
-
-preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+preproc: lesson-list build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
 	@echo ")" >> $(ADOCABLES_INPUT)
 	$(MAKE_DIR)run-asciidoctor.sh
 
@@ -168,8 +192,8 @@ images: preproc
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.sh
 
-pdfs: postproc 
-	$(MAKE_DIR)make-pdf.sh
+pdfs: postproc
+	if test -n "$(BOOK)"; then $(MAKE_DIR)make-pdf.sh; fi
 
 books: pdfs
-	$(MAKE_DIR)make-books.sh
+	if test -n "$(BOOK)"; then $(MAKE_DIR)make-books.sh; fi

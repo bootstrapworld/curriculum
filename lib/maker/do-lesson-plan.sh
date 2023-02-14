@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-09
+# last modified 2023-02-13
+
+# echo doing do-lesson-plan.sh $1
 
 adocfile=$1
 
@@ -22,7 +24,7 @@ fi
 
 htmlfile=${ascfile%.asc}.html
 
-whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
+# whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
 
 solutionsmodearg="#f"
 
@@ -62,4 +64,4 @@ echo $ascfile >> $ADOC_INPUT
 
 echo $htmlfile >> $ADOC_POSTPROC_LESSONPLAN_INPUT
 
-echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT
+# echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT

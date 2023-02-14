@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-09
+# last modified 2023-02-13
+
+# echo do-pathway-narrative $1
 
 adocfile=$1
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-09
+# last modified 2023-02-13
+
+# echo doing do-workbook-page.sh $1
 
 adocfile=$1
 
@@ -33,12 +35,6 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-aspect=portrait
-
-if head -5 $adocfile|grep -q '^ *\[\.landscape] *$'; then
-  aspect=landscape
-fi
-
 lesson=$(echo $containingdirectory|$SED -e 's#lessons/\([^/]*\).*#\1#')
 
 proglangarg="pyret"
@@ -60,5 +56,4 @@ if test $otherdirarg != "#t" ; then
 
   echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
-  echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"$aspect\" }" >> $PUPPETEER_INPUT
 fi

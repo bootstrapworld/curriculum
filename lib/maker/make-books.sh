@@ -1,9 +1,10 @@
 #!/bin/bash 
 
 # created 2023-01-27
-# lastmod 2023-02-06
+# lastmod 2023-02-13
 
 # echo doing make-books.sh
+
 
 source ${MAKE_DIR}make-workbook-jsons.sh
 

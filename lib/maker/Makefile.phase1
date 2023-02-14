@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-06
+# last modified 2023-02-13
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -39,8 +39,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
 		$(RELEVANT_LESSONS_INPUT)
-	@touch $(RELEVANT_LESSONS_INPUT)
-	@echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT)
+	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
 	@echo '(' > $(ADOCABLES_INPUT)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
@@ -126,7 +125,7 @@ distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo lib/page-not-found.adoc >> $(ADOC_INPUT)
-	@echo ", { \"input\": \"lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT)
+	@if test -n "$(BOOK)"; then echo ", { \"input\": \"distribution/$(NATLANG)/lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT); fi
 
 ###############################################################################
 

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-09
+# last modified 2023-02-13
+
+# echo doing do-pathway-resource.sh $1
 
 adocfile=$1
 
@@ -56,11 +58,9 @@ if test $otherdirarg != "#t" ; then
 
   if test $resourcesarg = "#t" -a $adocbasename = "index.adoc" -a $distrootdir = "../../../"; then
     echo $htmlfile >> $ADOC_POSTPROC_RESOURCES_INPUT
-    whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
   else
     echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-    whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
   fi
 
-  echo ", { \"input\": \"$whtmlfile\" }" >> $PUPPETEER_INPUT
+  # echo ", { \"input\": \"$whtmlfile\" }" >> $PUPPETEER_INPUT
 fi
