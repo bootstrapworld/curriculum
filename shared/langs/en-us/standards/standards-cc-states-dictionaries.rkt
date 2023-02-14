@@ -28,7 +28,6 @@
   *nd-standards-list*
   *ny-standards-list*
   *oh-standards-list*
-  *or-standards-list*
   *pa-standards-list*
   *ri-standards-list*
   *sd-standards-list*
@@ -87,7 +86,6 @@
 (define *nd-standards-list* (math-and-ela "ND"))
 (define *ny-standards-list* (math-and-ela "NY"))
 (define *oh-standards-list* (math-and-ela "OH"))
-(define *or-standards-list* (math-and-ela "OR"))
 (define *pa-standards-list* (math-and-ela "PA"))
 (define *ri-standards-list* (math-and-ela "RI"))
 (define *sd-standards-list* (math-and-ela "SD"))
