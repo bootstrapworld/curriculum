@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-09
+# last modified 2023-02-13
 
-cd $TOPDIR/distribution/$NATLANG
+
+# cd $TOPDIR/distribution/$NATLANG
+cd $TOPDIR
 
 echo "] }" >> $PUPPETEER_INPUT
 

@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # created 2023-01-19
-# last modified 2023-02-09
+# last modified 2023-02-13
 
-test -f $RELEVANT_LESSONS_INPUT || exit
+cd distribution/$NATLANG/lessons
 
-for lsn in $(cat $RELEVANT_LESSONS_INPUT); do
-  L=distribution/$NATLANG/lessons/$lsn
+for lsn in *; do
+  test -d "$lsn" || continue
   copacetic=1
-  for f in $L/.cached/.*primtxt; do
+  for f in $lsn/.cached/.*primtxt; do
     test -f $f || copacetic=
   done
-  if test $copacetic; then
-    cat $L/.cached/.*primtxt | sort -u > $L/.cached/.index-primitives.txt.kp
+  if test -n "$copacetic"; then
+    cat $lsn/.cached/.*primtxt | sort -u > $lsn/.cached/.index-primitives.txt.kp
   fi
 done

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-09
+# last modified 2023-02-13
+
+# echo doing do-pathway-independent $1
 
 adocfile=$1
 
@@ -16,8 +18,6 @@ containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcon
 adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
-
-whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
 
 htmlfile=${ascfile%.asc}.html
 
@@ -34,5 +34,3 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 echo $ascfile >> $ADOC_INPUT
 
 echo $htmlfile >> $ADOC_POSTPROC_PWYINDEP_INPUT
-
-echo ", { \"input\": \"$whtmlfile\" }" >> $PUPPETEER_INPUT

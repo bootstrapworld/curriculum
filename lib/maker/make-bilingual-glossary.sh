@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-09
+# last modified 2023-02-13
 
 cd $TOPDIR
 $PROGDIR/make-bilingual-glossary.rkt
@@ -14,4 +14,6 @@ asciidoctor -a linkcss -a stylesheet=asciidoctor.css $GLOSSFILE
 
 rm $GLOSSFILE
 
-echo ", { \"input\": \"lib/bilingual-glossary.html\" }" >> $PUPPETEER_INPUT
+if test -n "$BOOK"; then
+  echo ", { \"input\": \"distribution/$NATLANG/lib/bilingual-glossary.html\" }" >> $PUPPETEER_INPUT
+fi

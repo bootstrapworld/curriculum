@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-05
+# last modified 2023-02-13
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -52,5 +52,4 @@ for pl in $proglangs; do
   #
   make_solution_pages 
   cd ..
-  echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
