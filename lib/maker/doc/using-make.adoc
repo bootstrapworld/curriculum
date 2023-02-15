@@ -23,9 +23,26 @@ By default, the checking of the various internal and external
 links in the documents are not checked -- because it can be a
 time-consuming process when its results are actively being
 sought. To enable link checking, set the `LINKCHECK` variable to
-a nonempty string, e.g.,
+nonempty, e.g.,
 
     make LINKCHECK=yes
 
- 
+=== Dependency graph generation
 
+By default, no dependency graph is generated. To generate one at
+`distribution/en-us/dependency-graph.js`, set the `GRAPH`
+variable to nonempty, e.g.,
+
+    make GRAPH=yes
+
+The dependency graph shows how the various lessons depend on one
+another.
+
+=== Making from scratch
+
+To remove a previously made distribution entirely, do
+
+    make clean
+
+The next `make` -- with whatever options you desire -- will be on
+a fresh slate.

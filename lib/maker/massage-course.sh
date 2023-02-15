@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-02-06
+# last modified 2023-02-15
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -23,11 +23,9 @@ numpathwayproglangs=1
 
 if test -f $pathwayName/proglang.txt; then
   numpathwayproglangs=$(wc -l $pathwayName/proglang.txt|$SED -e 's/^ *\([^ ]*\).*/\1/')
-  if test $numpathwayproglangs -eq 0; then
-    numpathwayproglangs=1
-  else
-    proglangs=$(cat $pathwayName/proglang.txt)
-  fi
+  # sometimes numlines = 0 bc of lack of ending newline
+  test $numpathwayproglangs -eq 0 && numpathwayproglangs=1
+  proglangs=$(cat $pathwayName/proglang.txt)
 fi
 
 for pl in $proglangs; do

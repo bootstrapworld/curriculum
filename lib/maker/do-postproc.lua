@@ -28,9 +28,9 @@ end
 
 function with_open_input_file(f, fn)
   local i = io.open(f, 'r')
-  local res = fn(i)
+  local result = fn(i)
   i:close()
-  return res
+  return result
 end
 
 function copy_file_to_stream(fi, o)
@@ -50,15 +50,15 @@ function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
-function postproc(fhtml_cached, tijpe)
-  -- print('doing postproc', fhtml_cached, tijpe)
+function postproc(fhtml_cached, tipe)
+  -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(dir_prefix .. '/' .. fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
   -- print('local_dist_root_dir is', local_dist_root_dir)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if memberp(tijpe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+  if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -92,27 +92,26 @@ function postproc(fhtml_cached, tijpe)
         add_comment_p = true
       end
       --
-      if memberp(tijpe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+      if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
       --
-      --
-      if memberp(tijpe, {'lessonplan', 'narrative'}) then
+      if memberp(tipe, {'lessonplan', 'narrative'}) then
         add_analytics_p = true
       end
       --
-      if tijpe == 'resources' then -- TEACHERRESOURCEPAGE
+      if tipe == 'resources' then -- TEACHERRESOURCEPAGE
         x = x:gsub('^<body class="', '%0TeacherResources ')
       end
       --
-      if tijpe ~= 'narrativeaux' then
+      if tipe ~= 'narrativeaux' then
         x = x:gsub('^<body ', '%1 onload="renderSaveToDrive()" ')
       end
 
       --
       --fixme datasheetpage?
-      if memberp(tijpe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
+      if memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
         x = x:gsub('^<body class="', '%0narrativepage')
       end
     end
@@ -125,7 +124,7 @@ function postproc(fhtml_cached, tijpe)
     if x:find('^<link.*curriculum%.css') then
       x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css" />')
       add_bootstrap_lesson_p = true
-      if file_exists_p(f_codemirror_file) or tijpe == 'narrative' then
+      if file_exists_p(f_codemirror_file) or tipe == 'narrative' then
         add_codemirror_p = true
       end
       if file_exists_p(f_mathjax_file) then
@@ -176,7 +175,7 @@ function postproc(fhtml_cached, tijpe)
       delete_line_p = true
     end
     --
-    if tijpe ~= 'narrativeaux' then
+    if tipe ~= 'narrativeaux' then
       if x:find('</head>') then
         local page_title = ''
         local adoc_file = dir_prefix .. fhtml:gsub('%.s?html', '.adoc')
@@ -238,13 +237,13 @@ function postproc(fhtml_cached, tijpe)
       end
     end
     --
-    if memberp(tijpe, {'lessonplan', 'resources'}) then
+    if memberp(tipe, {'lessonplan', 'resources'}) then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
     end
     --
-    if tijpe == 'lessonplan' then
+    if tipe == 'lessonplan' then
       if x:find('^<h2 id') then
         x = x:gsub('begincurriculumspan', '')
         x = x:gsub('endcurriculumspan', '')
@@ -306,7 +305,7 @@ function postproc(fhtml_cached, tijpe)
   i:close()
   o:close()
 
-  if tijpe ~= 'narrativeaux' then
+  if tipe ~= 'narrativeaux' then
     local gdrive_fhtml = fhtml:gsub('%.s?html', '-gdrive-import.html')
     i = io.open(dir_prefix .. fhtml, 'r')
     o = io.open(dir_prefix .. gdrive_fhtml, 'w')
@@ -325,15 +324,15 @@ function postproc(fhtml_cached, tijpe)
 
 end
 
-function run_postproc(batchf, tijpe)
-  -- print('doing run_postproc', batchf, tijpe)
+function run_postproc(batchf, tipe)
+  -- print('doing run_postproc', batchf, tipe)
   local i = io.open(batchf, 'r')
   if not i then
     -- print('run_postproc skipping nonexistent ', batchf)
     return
   end
   for f in i:lines() do
-    postproc(f, tijpe)
+    postproc(f, tipe)
   end
   i:close()
 end

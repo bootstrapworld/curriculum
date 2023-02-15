@@ -181,7 +181,7 @@ postproc: preproc
 	$(MAKE_DIR)do-postproc.lua
 
 dependency: primitives
-	$(MAKE_DIR)make-dependency-graph.sh
+	if test -n "$(GRAPH)"; then $(MAKE_DIR)make-dependency-graph.sh; fi
 
 linkcheck: preproc
 	if test -n "$(LINKCHECK)"; then $(MAKE_DIR)do-link-check.sh; fi
