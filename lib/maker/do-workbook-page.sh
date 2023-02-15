@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-15
 
 # echo doing do-workbook-page.sh $1
 
@@ -9,11 +9,15 @@ adocfile=$1
 
 fcontainingdirectory=$(dirname $adocfile)
 
+containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+
+lessondirectory=$(echo $containingdirectory|$SED -e 's#\(lessons/[^/]*\).*#\1#')
+
+test -f distribution/$NATLANG/$lessondirectory/.proglang-ignore && exit
+
 test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
 
 distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
-
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
 
 adocbasename=$(basename $adocfile)
 

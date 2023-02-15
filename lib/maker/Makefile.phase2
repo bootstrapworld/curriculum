@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-15
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -66,7 +66,7 @@ relevant-asc-files := $(foreach \
 relevant-pdf-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
 
-build-workbook-pages: $(relevant-pdf-files)
+build-workbook-pages: lesson-list $(relevant-pdf-files)
 
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
@@ -88,8 +88,8 @@ $(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pd
 
 #########################################################################
 
-lesson-plan-adoc-files := $(notdir $(wildcard \
-	distribution/$(NATLANG)/lessons/index.adoc))
+lesson-plan-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/lessons/*/index.adoc)
 
 lesson-plan-asc-files := $(foreach \
 	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))

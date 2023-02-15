@@ -1,13 +1,15 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-15
 
 # echo doing do-lesson-plan.sh $1
 
 adocfile=$1
 
 fcontainingdirectory=$(dirname $adocfile)
+
+test -f $fcontainingdirectory/.proglang-ignore && exit
 
 distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
 

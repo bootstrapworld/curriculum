@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-15
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -53,3 +53,8 @@ for pl in $proglangs; do
   make_solution_pages 
   cd ..
 done
+
+if test ! -f $lessonName/.cached/.proglang-pyret; then
+  mkdir -p $lessonName/.cached
+  touch $lessonName/.proglang-ignore
+fi
