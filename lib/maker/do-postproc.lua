@@ -122,7 +122,7 @@ function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('^<link.*curriculum%.css') then
-      x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css"')
+      x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css')
       add_bootstrap_lesson_p = true
       if file_exists_p(f_codemirror_file) or tipe == 'narrative' then
         add_codemirror_p = true
@@ -276,10 +276,10 @@ function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js" />\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js" />\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js" />\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js" />\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
 
     end
     --
