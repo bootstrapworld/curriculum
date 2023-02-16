@@ -82,7 +82,7 @@ Now, turn to @printable-exercise{pages/exponents-intro.adoc}, where you will pra
 @image{images/two-to-the-fourth.png}
 
 <!--
-** _Yes, students may group the bases in a variety of ways, as per the @vocab{Associative Property of Multiplication}!_
+** _Yes, students may group the bases in a variety of ways, as per the @vocab{Associative Property} of Multiplication!_
 -->
 
 
