@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-16
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -72,7 +72,7 @@ lesson-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 copy-lessons: initialization $(the-distribution-lessons)
 
 define make-copy-lesson-rule
-distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1
+distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1 initialization
 	@mkdir -p $$@
 	@touch $$@
 	@touch $$</ignore_file
@@ -103,7 +103,7 @@ the-courses := $(patsubst \
 copy-pathways: initialization $(the-courses)
 
 define make-copy-pathway-rule
-distribution/$(NATLANG)/courses/$(notdir $1)/.: $1
+distribution/$(NATLANG)/courses/$(notdir $1)/.: $1 initialization
 	@mkdir -p $$@
 	@touch $$@
 	@touch $$</langs/$(NATLANG)/ignore_file
