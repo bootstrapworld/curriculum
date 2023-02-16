@@ -116,7 +116,7 @@ We can use @vocab{box plots} to visualize the 5 number summary, the Range, and t
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.{style="font-weight:16pt"}
 - Type in this into the Interactions Area, and see the resulting plot:{style="font-weight:16pt"}
-`box-plot(animals-table, "pounds")`{style="font-weight:bold"}
+@show{(code '(box-plot animals-table "pounds"))}{style="font-weight:bold"}
 
 
 <!--

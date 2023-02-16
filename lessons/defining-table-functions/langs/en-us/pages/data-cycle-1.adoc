@@ -12,7 +12,7 @@
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "pie-chart(filter(filter(animals-table, is-dog), is-young), \"fixed\")"
+  #:expression '(pie-chart (filter (filter animals-table is-dog) is-young) "fixed")
   #:show-expression? #f
   #:finding ""
   #:show-finding? #f
@@ -35,7 +35,7 @@
   #:show-filter? #f
   #:build-fn "fun days-to-adopt(r): r[\"weeks\"] * 7 end"
   #:show-build? #f
-  #:expression "scatter-plot(build-column(filter(animals-table, is-dog), days-to-adopt, \"days\"), \"name\", \"pounds\", \"days\")"
+  #:expression '(scatter-plot (build-column (filter animals-table is-dog) days-to-adopt "days") "name" "pounds" "days")
   #:show-expression? #f
   #:finding ""
   #:show-finding? #f

@@ -27,7 +27,7 @@ Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
 
 And here is an example of _using_ the function:
 
-`pie-chart(animals-table, "legs")`
+@show{(code '(pie-chart animals-table "legs"))}
 
 <!--
 
@@ -36,11 +36,11 @@ And here is an example of _using_ the function:
 {layout="Launch"}
 # Pie and Bar Charts
 
-`pie-chart(animals-table, "legs")`
+@show{(code '(pie-chart animals-table "legs"))}
 
 - What is the Name of this function?
 - How many inputs are in its @vocab{Domain}?
-- In the Interactions Area, type `pie-chart(animals-table, "legs")` and hit "Enter". What happens?
+- In the Interactions Area, type @show{(code '(pie-chart animals-table "legs"))} and hit "Enter". What happens?
 
 <!--
 
