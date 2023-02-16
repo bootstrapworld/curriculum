@@ -9,11 +9,6 @@ all: dependency linkcheck images tocs books
 
 ##########################################################################
 
-lesson-list:
-	$(MAKE_DIR)create-relevant-lessons.sh
-
-##########################################################################
-
 pathway-independent-adoc-files := $(wildcard \
 	distribution/$(NATLANG)/textbooks/*.adoc \
 	distribution/$(NATLANG)/textbooks/*/*.adoc \
@@ -66,7 +61,7 @@ relevant-asc-files := $(foreach \
 relevant-pdf-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
 
-build-workbook-pages: lesson-list $(relevant-pdf-files)
+build-workbook-pages: $(relevant-pdf-files)
 
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
@@ -170,7 +165,7 @@ $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,
 
 ##########################################################################
 
-preproc: lesson-list build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
 	@echo ")" >> $(ADOCABLES_INPUT)
 	$(MAKE_DIR)run-asciidoctor.sh
 

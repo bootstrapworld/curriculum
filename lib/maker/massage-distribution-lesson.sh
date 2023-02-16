@@ -52,6 +52,7 @@ for pl in $proglangs; do
   #
   make_solution_pages 
   cd ..
+  echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
 
 if test ! -f $lessonName/.cached/.proglang-pyret; then
