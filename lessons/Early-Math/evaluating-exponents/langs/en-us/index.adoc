@@ -40,11 +40,10 @@ Sudents use Circles of Evaluation, words, and arithmetic to visualize the struct
 
 === Launch
 
+Show students the following expression: @math{2^3}
+
 [.lesson-instruction]
 --
-
-- Show students the following expression: @math{2^3}
-
 - One way of reading this expression is "two raised to the power of three." Do you know any other ways of translating this expression into words?
 
 ** _Two to the third power; two to the third; two cubed_
@@ -53,7 +52,7 @@ Sudents use Circles of Evaluation, words, and arithmetic to visualize the struct
 
 - What does it mean to _cube_ a number?
 
-** _We multiply it by itself three times. (Literally, we compute the volume of a cube with a side-length of that number; see image on right.)_
+** _We multiply it by itself three times. (Literally, we compute the volume of a cube with a side length of that number; see image on right.)_
 
 - What does this expression evaluate to?
 ** @math{2^3 = 2 \times 2 \times 2 = 8}
@@ -91,13 +90,21 @@ Exponents are valuable because they act as a shorthand.
 The Circle of Evaluation with `expt` is a lot shorter, and easier to read!
 
 [.lesson-instruction]
-Now, turn to @printable-exercise{exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
+--
+- Now, turn to @printable-exercise{exponents-intro.adoc}, where you will practice translating verbal exponent expressions into exponent notation, expanded notation, and Circles of Evaluation.
+- When you're done, consider the Circle of Evaluation (below) that Jayla drew to represent the expanded form of @math{2^4}.
+
+@show{(coe  '(* (* 2 2) (* 2 2)))}
+
+- Jayla's Circle is different from the solution provided for the first problem on the worksheet. Is her response correct? Why or why not?
+** _Yes, students may group the bases in a variety of ways, as per the @vocab{Associative Property of Multiplication}!_
+--
 
 Ensure that students are comfortable shifting between representations before discussing some common difficulties with interpreting exponents.
 
 [.lesson-instruction]
 --
-- Take a look at the expressions and Circles of Evaluation below.
+- Take a look at the expressions and Circles of Evaluation, below:
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -107,7 +114,7 @@ Ensure that students are comfortable shifting between representations before dis
 
 - Angela says the Circles of Evaluation are equivalent because of the @vocab{Commutative Property}. Do you agree with Angela?
 ** _Angela is incorrect. The first expression evaluates to 25, while the second expression evaluates to 32. We cannot switch the order of the exponent and the base, as we could when adding or multiplying values._
-- Look at the two expressions and Circles of Evaluation, below.
+- Look at the two expressions and Circles of Evaluation, below:
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -132,7 +139,7 @@ With a basic understanding of how exponents work, students are ready to discover
 |@show{(coe  '(* 9 (expt 3 2)))}		| @show{(coe  '(expt (* 9 3) 2))}
 |===
 
-- How would you translate each of these Circles of Evaluation into words? Why are their translations different?
+- How would you translate each of these Circles of Evaluation into verbal expressions? Why are their translations different?
 ** _The Circle of Evaluation on the left is "nine multiplied by three squared," while the Circle of Evaluation on the right is "find the product of nine and three, then square it." Their translations differ because the Circles of Evaluation are organized differently._
 - How would you translate each of these Circles of Evaluation into mathematical expressions?
 ** The Circle of Evaluation on the left is @math{9 \times 3^2} while the Circle of Evaluation on the right is @math{(9 \times 3)^2}.
@@ -148,7 +155,7 @@ In the subsequent activities, students solidify their understanding of this key 
 [.lesson-instruction]
 - Try the @printable-exercise{matching-expressions-to-circles.adoc} to practice matching Circles of Evaluation with their corresponding mathematical expressions.
 - Translate between Circles of Evaluation, mathematical expressions, and words on @printable-exercise{translating-exponent-expressions.adoc}
-- In @printable-exercise{wodb.adoc}, examin each Circle of Evaluation to determine which expressions in the set are equivalent.
+- In @printable-exercise{wodb.adoc}, examine each Circle of Evaluation to determine which expressions in the set are equivalent.
 
 The first two workbook pages above do not involve _any_ computation; rather, students think about the structure of expressions with exponents and one operation. The third workbook page in the set involves some computation; students who consider structure in addition to computation will complete the activity more efficiently.
 
@@ -173,7 +180,7 @@ Students use Circles of Evaluation to parse and evaluate exponential expressions
 [.lesson-instruction]
 --
 - Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4m^2}. Four students produced four different Circles of Evaluation! Take a look at their work:
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^1,^.^1", grid="none", stripes="none", frame="none"]
 |===
 | Keke: @show{(coe  '(* 4 (expt 2 m)))} | Jayla: @show{(coe  '(* 4 (expt m 2)))}
 | Joe: @show{(coe  '(+ 4 (expt m 2)))}  | Aaron: @show{(coe  '(expt (* 4 m) 2))}
@@ -202,7 +209,7 @@ Ensure that students understand that - even with the inclusion of variables - we
 
 === Common Misconceptions
 
-Students who are new to expressions like @math{4m^2} may misinterpret them. Explain that this notation represents multiplication - not that the two digits are simply next to one another.
+Students who are new to expressions like @math{4m^2} may misinterpret them. Explain that this notation represents multiplication - not that the 4 and m are contiguous digits.
 
 === Synthesize
 
