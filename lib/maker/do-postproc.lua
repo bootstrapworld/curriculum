@@ -105,15 +105,23 @@ function postproc(fhtml_cached, tipe)
         x = x:gsub('^<body class="', '%0TeacherResources ')
       end
       --
+      --fixme datasheetpage?
+      if tipe == 'workbookpage' then
+        x = x:gsub('<body class="', '%0workbookpage ')
+        if fhtml_cached:find('^courses/.*/back%-matter/') then
+          x = x:gsub('<body class="', '%0back-matter ')
+        end
+        if fbase:find('^notes%-') then
+          x = x:gsub('<body class="', '%0LessonNotes ')
+        end
+      end
+      if not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
+        x = x:gsub('^<body class="', '%0narrativepage ')
+      end
       if tipe ~= 'narrativeaux' then
         x = x:gsub('^<body ', '%1 onload="renderSaveToDrive()" ')
       end
-
       --
-      --fixme datasheetpage?
-      if not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage')
-      end
     end
     --
     if add_end_body_id_p and x:find('</body>') then
