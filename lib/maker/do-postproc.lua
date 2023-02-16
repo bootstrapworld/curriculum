@@ -111,7 +111,7 @@ function postproc(fhtml_cached, tipe)
 
       --
       --fixme datasheetpage?
-      if memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
+      if not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
         x = x:gsub('^<body class="', '%0narrativepage')
       end
     end
@@ -122,7 +122,7 @@ function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('^<link.*curriculum%.css') then
-      x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css" />')
+      x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css"')
       add_bootstrap_lesson_p = true
       if file_exists_p(f_codemirror_file) or tipe == 'narrative' then
         add_codemirror_p = true
