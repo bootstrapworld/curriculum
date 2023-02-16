@@ -60,7 +60,7 @@
      )
     ("OK.PA.A.2.2"
      "Identify, describe, and analyze linear relationships between two variables."
-     "random-samples"
+     "probability-inference"
      "histograms2"
      "histograms"
      "grouped-samples"
@@ -170,7 +170,7 @@
        )
       ("OK.PA.D.2.2"
        "Determine how samples are chosen (random, limited, biased) to draw and support conclusions about generalizing a sample to a population."
-       "random-samples"
+       "probability-inference"
        )
       ("OK.PA.D.2.3"
        "Compare and contrast dependent and independent events."
@@ -911,11 +911,11 @@
            )
           ("OK.6.AP.PD.04"
            "Break down tasks and follow an individual timeline when developing a computational artifact."
-           "random-samples"
+           "probability-inference"
            )
           ("OK.7.AP.PD.04"
            "Distribute tasks and maintain a project timeline when collaboratively developing computational artifacts."
-           "random-samples"
+           "probability-inference"
            )
           ("OK.8.AP.PD.04"
            "Explain how effective communication between participants is required for successful collaboration when developing computational artifacts."
@@ -1148,7 +1148,7 @@
           ("OK.L1.IC.C.02"
            "Test and refine computational artifacts to reduce bias and equity deficits."
            "threats-to-validity"
-           "random-samples"
+           "probability-inference"
            "grouped-samples"
            "choosing-your-dataset"
            "checking-your-work"

@@ -423,12 +423,12 @@
      )
     ("7.DR.A.1"
      "Formulate summary, comparative investigative questions to gain information about a population and that a sample is valid only if the sample is representative of that population."
-     "random-samples"
+     "probability-inference"
      "hoc-data"
      )
     ("7.DR.B"
      "Collect and Consider Data"
-     "random-samples"
+     "probability-inference"
      "project-exploration-paper"
      "project-research-paper"
      "hoc-data"
@@ -834,12 +834,12 @@
     ("HS.DR.A.1"	
      "Formulate multivariable statistical investigative questions and determine how data from samples can be collected and analyzed to provide an answer."
      "intro-ds"
-     "random-samples"
+     "probability-inference"
      "choosing-your-dataset"
      )
     ("HS.DR.A.2"	
      "Formulate summative, comparative, and associative statistical investigative questions for surveys, observational studies, and experiments using primary or secondary data."
-     "random-samples"
+     "probability-inference"
      "data-collection"
      )
     ("HS.DR.A.3"	

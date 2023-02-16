@@ -130,7 +130,7 @@
      "project-research-paper"
      "project-exploration-paper"
      "table-methods"
-     "random-samples"
+     "probability-inference"
      "custom-scatter-plots"
      "grouped-samples"
      "bar-and-pie-charts"
@@ -140,7 +140,7 @@
      "project-research-paper"
      "project-exploration-paper"
      "scatter-plots"
-     "random-samples"
+     "probability-inference"
      "grouped-samples"
      "correlations"
      )

@@ -22,7 +22,7 @@
     ("MP.2"
      "Reason abstractly and quantitatively"
      "scatter-plots"
-     "random-samples"
+     "probability-inference"
      "grouped-samples"
      "choosing-your-dataset"
      "order-of-operations"

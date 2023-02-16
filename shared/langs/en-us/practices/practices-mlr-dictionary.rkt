@@ -10,7 +10,7 @@
 
     ("MLR.1"
      "Stronger and Clearer Each Time"
-     "random-samples"
+     "probability-inference"
      "function-composition"
      "functions-dr"
      )

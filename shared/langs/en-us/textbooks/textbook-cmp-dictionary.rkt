@@ -69,7 +69,7 @@
 
     ("CMP.7.8"
      "Samples and Populations: Making Comparisons and Predictions"
-     "random-samples")
+     "probability-inference")
 
     ("CMP.8.1"
      "Thinking with Mathematical Models: Linear and Inverse Variations"

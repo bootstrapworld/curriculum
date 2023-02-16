@@ -15,7 +15,7 @@
     ("SEP.3" "Planning and Carrying Out Investigations"
      "threats-to-validity"
      "scatter-plots"
-     "random-samples"
+     "probability-inference"
      "box-plots"
      "measures-of-center"
      "linear-regression"
