@@ -86,7 +86,7 @@
      "standard-deviation"
      "box-plots"
      "measures-of-center"
-     "custom-scatter-plots"
+     "advanced-displays"
      "choosing-your-dataset"
      )
 
@@ -120,7 +120,7 @@
     ("9-12.Algorithms and Programming.Control"
      "Programmers consider tradeoffs related to implementation, readability, and program performance when selecting and combining control structures."
      "composing-table-operations"
-     "custom-scatter-plots"
+     "advanced-displays"
      "piecewise-functions-conditionals"
      )
     ("6-8.Algorithms and Programming.Control"

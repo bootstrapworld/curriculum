@@ -865,7 +865,7 @@
      )
     ("HSA.SSE.A.1.B"
      "Interpret complicated expressions by viewing one or more of their parts as a single entity."
-     "custom-scatter-plots"
+     "advanced-displays"
      "player-animation"
      "piecewise-functions-conditionals"
      )
