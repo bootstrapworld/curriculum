@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-15
+# last modified 2023-02-17
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
 
-# echo
 # echo doing massage-distribution-lesson $1
 
 d=$1
@@ -44,7 +43,27 @@ for pl in $proglangs; do
   test  -d pages || mkdir pages
   test -d pages/.cached || mkdir -p pages/.cached
 
+  # echo calling collect workbook pgs
   collect_workbook_pages .
+  # echo calling collect exercises
+  $PROGDIR/collect-exercises.rkt index.adoc $pl
+  exer_list_file=pages/.cached/.exercise-pages-ls.txt.kp
+  if test -f $exer_list_file; then
+    exer_aspect_list_file=pages/.cached/.exercise-pages.txt.kp
+    rm -f $exer_aspect_list_file
+    for f in $(cat $exer_list_file); do
+      if test ${f%.adoc} = $f; then
+        echo $f >> $exer_aspect_list_file
+      elif test ! -f pages/$f; then
+        echo
+        echo WARNING: Exercise file pages/$f not found
+      elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
+        echo $f landscape >> $exer_aspect_list_file
+      else
+        echo $f >> $exer_aspect_list_file
+      fi
+    done
+  fi
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
