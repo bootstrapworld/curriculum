@@ -60,7 +60,7 @@
      )
     ("OK.PA.A.2.2"
      "Identify, describe, and analyze linear relationships between two variables."
-     "random-samples"
+     "probability-inference"
      "histograms2"
      "histograms"
      "grouped-samples"
@@ -170,7 +170,7 @@
        )
       ("OK.PA.D.2.2"
        "Determine how samples are chosen (random, limited, biased) to draw and support conclusions about generalizing a sample to a population."
-       "random-samples"
+       "probability-inference"
        )
       ("OK.PA.D.2.3"
        "Compare and contrast dependent and independent events."
@@ -381,7 +381,7 @@
          ("OK.A1.D.2.1"
           "Select and apply counting procedures, such as the multiplication and addition principles and tree diagrams, to determine the size of a sample space (the number of possible outcomes) and to calculate probabilities."
           "table-methods"
-          "method-chaining"
+          "composing-table-operations"
           "defining-table-functions"
           )
          ("OK.A1.D.2.2"
@@ -481,7 +481,7 @@
            )
           ("OK.4.AP.A.01" 
            "Compare and refine multiple algorithms for the same task."
-           "method-chaining"
+           "composing-table-operations"
            "flags"
            )
           ("OK.5.AP.A.01" 
@@ -503,7 +503,7 @@
            )
           ("OK.3.AP.C.01" 
            "Create programs using a programming language that utilize sequencing, repetition, conditionals, and variables to solve a problem or express ideas both independently and collaboratively."
-           "method-chaining"
+           "composing-table-operations"
            "grouped-samples"
            )
           ("OK.4.AP.C.01" 
@@ -519,12 +519,12 @@
            )
           ("OK.4.AP.M.01"
            "Decompose large problems into smaller, manageable subproblems to facilitate the program development process."
-           "method-chaining"
+           "composing-table-operations"
            "problem-decomposition"
            )
           ("OK.5.AP.M.01" 
            "Decompose large problems into smaller, manageable subproblems and then into a precise sequence of instructions."
-           "method-chaining"
+           "composing-table-operations"
            "problem-decomposition"
            )
           ("OK.3.AP.M.02" 
@@ -575,12 +575,12 @@
            )
           ("OK.4.AP.PD.03" 
            "Analyze, create, and debug a program that includes sequencing, repetition, conditionals and variables in a programming language."
-           "method-chaining"
+           "composing-table-operations"
            "debugging"
            )
           ("OK.5.AP.PD.03" 
            "Analyze, create, and debug a program that includes sequencing, repetition, conditionals and variables in a programming language."
-           "method-chaining"
+           "composing-table-operations"
            "debugging"
            )
           ("OK.3.AP.PD.04" 
@@ -858,14 +858,14 @@
            )
           ("OK.7.AP.M.01"
            "Decompose problems into parts to facilitate the design, implementation, and review of increasingly complex programs."
-           "method-chaining"
+           "composing-table-operations"
            "problem-decomposition"
            "inequalities3-sam"
            "inequalities-collision"
            )
           ("OK.8.AP.M.01"
            "Decompose problems and subproblems into parts to facilitate the design, implementation, and review of complex programs."
-           "method-chaining"
+           "composing-table-operations"
            "problem-decomposition"
            "inequalities3-sam"
            "inequalities-collision"
@@ -911,11 +911,11 @@
            )
           ("OK.6.AP.PD.04"
            "Break down tasks and follow an individual timeline when developing a computational artifact."
-           "random-samples"
+           "probability-inference"
            )
           ("OK.7.AP.PD.04"
            "Distribute tasks and maintain a project timeline when collaboratively developing computational artifacts."
-           "random-samples"
+           "probability-inference"
            )
           ("OK.8.AP.PD.04"
            "Explain how effective communication between participants is required for successful collaboration when developing computational artifacts."
@@ -1071,7 +1071,7 @@
            )
           ("OK.L1.AP.M.01"
            "Break down a solution into procedures using systematic analysis and design."
-           "method-chaining"
+           "composing-table-operations"
            "advanced-displays"
            "defining-table-functions"
            "problem-decomposition"
@@ -1083,7 +1083,7 @@
           ("OK.L1.AP.M.02"
            "Create computational artifacts by systematically organizing, manipulating and/or processing data."
            "table-methods"
-           "method-chaining"
+           "composing-table-operations"
            "advanced-displays"
            "defining-table-functions"
            "piecewise-functions-conditionals"
@@ -1148,7 +1148,7 @@
           ("OK.L1.IC.C.02"
            "Test and refine computational artifacts to reduce bias and equity deficits."
            "threats-to-validity"
-           "random-samples"
+           "probability-inference"
            "grouped-samples"
            "choosing-your-dataset"
            "checking-your-work"

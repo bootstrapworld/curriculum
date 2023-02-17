@@ -67,7 +67,7 @@
      "Students will analyze the harmful impact of bias and injustice on the world, historically and today"
      "project-research-paper"
      "project-exploration-paper"
-     "random-samples"
+     "probability-inference"
      "ethics-privacy-and-bias"
      "checking-your-work"
      )

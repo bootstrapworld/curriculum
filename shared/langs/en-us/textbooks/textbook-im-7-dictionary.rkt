@@ -98,7 +98,7 @@
 
     ("IM.7.8.12"
      "Larger Populations"
-     "random-samples")
+     "probability-inference")
 
     ("IM.7.8.13"
      "What Makes a Good Sample?"
@@ -107,7 +107,7 @@
     ("IM.7.8.14"
      "Sampling in a Fair Way"
      "threats-to-validity"
-     "random-samples")
+     "probability-inference")
 
     ("IM.7.8.15"
      "Estimating Populations Measures of Center"
@@ -116,7 +116,7 @@
     ("IM.7.8.17"
      "More about Sampling Variability"
      "threats-to-validity"
-     "random-samples")
+     "probability-inference")
 
     ("IM.7.8.18"
      "Comparing Populations Using Samples"

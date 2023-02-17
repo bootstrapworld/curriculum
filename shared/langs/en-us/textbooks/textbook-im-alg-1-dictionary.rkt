@@ -224,7 +224,7 @@
 
     ("IM.Alg1.4.3"
      "Interpreting & Using Function Notation"
-     "method-chaining"
+     "composing-table-operations"
      "flags"
      "defining-functions"
      "contracts")

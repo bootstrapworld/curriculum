@@ -14,6 +14,7 @@
 (require "standards-k12cs-dictionary.rkt")
 (require "standards-ngss-dictionary.rkt")
 (require "standards-ok-dictionary.rkt")
+(require "standards-or-dictionary.rkt")
 (require "standards-ia-dictionary.rkt")
 (require "standards-ma-dictionary.rkt")
 
@@ -28,6 +29,7 @@
     (list "IA"          "Iowa"              *iowa-standards-list* "https://iowacore.gov/standards/iowa-core-standards")
     (list "MA"          "Massachusetts"     *ma-standards-list* "https://www.doe.mass.edu/frameworks/")
     (list "OK"          "Oklahoma"          *ok-standards-list* "https://sde.ok.gov/oklahoma-academic-standards")
+    (list "OR"          "Oregon"            *or-standards-list* "https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx")
     ))
 
 (define *dict-canonical-order* (map first *standards-list*))

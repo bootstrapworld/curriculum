@@ -497,16 +497,16 @@
      )
     ("7.SP.A"
      "Use random sampling to draw inferences about a population."
-     "random-samples"
+     "probability-inference"
      )
     ("7.SP.A.1"
      "Understand that statistics can be used to gain information about a population by examining a sample of the population; generalizations about a population from a sample are valid only if the sample is representative of that population. Understand that random sampling tends to produce representative samples and support valid inferences."
-     "random-samples"
+     "probability-inference"
      "hoc-data"
      )
     ("7.SP.A.2"
      "Use data from a random sample to draw inferences about a population with an unknown characteristic of interest. Generate multiple samples (or simulated samples) of the same size to gauge the variation in estimates or predictions."
-     "random-samples"
+     "probability-inference"
      )
     ("7.SP.B"
      "Draw informal comparative inferences about two populations."
@@ -1499,11 +1499,11 @@
      )
     ("HSS.IC.A"
      "Understand and evaluate random processes underlying statistical experiments."
-     "random-samples"
+     "probability-inference"
      )
     ("HSS.IC.A.1"
      "Understand statistics as a process for making inferences about population parameters based on a random sample from that population."
-     "random-samples"
+     "probability-inference"
      )
     ("HSS.IC.A.2"
      "Decide if a specified model is consistent with results from a given data-generating process, e.g., using simulation."
@@ -1517,7 +1517,7 @@
     ; High School
     ("HSS.IC.B.3"
      "Recognize the purposes of and differences among sample surveys, experiments, and observational studies; explain how randomization relates to each."
-     "random-samples"
+     "probability-inference"
      "data-collection"
      )
     ("HSS.IC.B.4"

@@ -10,7 +10,7 @@
 
     ("MLR.1"
      "Stronger and Clearer Each Time"
-     "random-samples"
+     "probability-inference"
      "function-composition"
      "functions-dr"
      )
@@ -61,7 +61,7 @@
 
     ("MLR.8"
      "Discussion Supports"
-     "method-chaining"
+     "composing-table-operations"
      "linear-regression"
      "making-game-images"
      "distance-formula"

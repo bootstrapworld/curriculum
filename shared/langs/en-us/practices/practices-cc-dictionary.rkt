@@ -22,7 +22,7 @@
     ("MP.2"
      "Reason abstractly and quantitatively"
      "scatter-plots"
-     "random-samples"
+     "probability-inference"
      "grouped-samples"
      "choosing-your-dataset"
      "order-of-operations"
@@ -98,7 +98,7 @@
 
     ("MP.6"
      "Attend to precision"
-     "method-chaining"
+     "composing-table-operations"
      "bar-and-pie-charts"
      "defining-table-functions"
      "data-cycle"
