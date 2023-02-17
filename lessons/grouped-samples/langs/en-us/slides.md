@@ -131,7 +131,7 @@ A “kitten” is an animal who _is a cat_ and who _is young_. **How would you d
 * Can you fill in the @ifproglang{pyret}{code} @ifproglang{codap}{function notation} for the other grouped samples?
 @ifproglang{pyret}{
 * When you're done, type these definitions into the Definitions Area.}
-* Make a bar chart showing the distribution of `sex` in the `kittens` subset @ifproglang{pyret}{, by typing `bar-chart(kittens, "sex")`}.
+* Make a bar chart showing the distribution of `sex` in the `kittens` subset @ifproglang{pyret}{, by typing @show{(code '(bar-chart kittens "sex"))}}.
 
 ---
 {layout="Synthesize"}

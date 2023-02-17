@@ -17,7 +17,7 @@ Open the @starter-file{height} and click "Run" to interact with data from anothe
 
 @fitb{}{}
 
-@n Build `image-scatter-plot(h-table, "age", "height", dot)`.  Try to visualize the line of best fit for just the blue dots. Then try to visualize the line of best fit for just the red stars. How do you think they would compare? Which line do you think would be steeper?
+@n Build @show{(code '(image-scatter-plot h-table "age" "height" dot))}.  Try to visualize the line of best fit for just the blue dots. Then try to visualize the line of best fit for just the red stars. How do you think they would compare? Which line do you think would be steeper?
 
 @fitb{}{@ifsoln{Answers will vary}}
 
@@ -25,9 +25,9 @@ Open the @starter-file{height} and click "Run" to interact with data from anothe
 
 @n Make three linear regression plots comparing `age` and `height`, and record the results for each in the table below:
 
-- The whole population: `lr-plot(h-table, "gender-id", "age", "height")`
-- Females only: `lr-plot(filter(h-table, is-f), "gender-id", "age", "height")`
-- Males only: `lr-plot(filter(h-table, is-m), "gender-id", "age", "height")`
+- The whole population: @show{(code '(lr-plot h-table "gender-id" "age" "height"))}
+- Females only: @show{(code '(lr-plot (filter h-table is-f) "gender-id" "age" "height"))}
+- Males only: @show{(code '(lr-plot (filter h-table is-m) "gender-id" "age" "height"))}
 
 @vspace{1ex}
 
@@ -47,13 +47,13 @@ Open the @starter-file{height} and click "Run" to interact with data from anothe
 
 @vspace{1ex}
 
-Rebuild `lr-plot(filter(h-table, is-f), "gender-id", "age", "height")`, adjust the window of the interactive plot using the numbers in the table below, and click `Redraw`.
+Rebuild @show{(code '(lr-plot (filter h-table is-f) "gender-id" "age" "height"))}, adjust the window of the interactive plot using the numbers in the table below, and click `Redraw`.
 [cols="^1,^1,^1,^1" options="header"]
 |===
 | x-min: 	| x-max:	| y-min:	| y-max:
 | 6.5		| 12.5 		| 	45		| 70
 |===
-Then, do the same for `lr-plot(filter(h-table, is-m), "gender-id", "age", "height")`.
+Then, do the same for @show{(code '(lr-plot (filter h-table s-m) "gender-id" "age" "height"))}.
 
 @n How do the plots compare now that their windows match?
 
@@ -61,7 +61,7 @@ Then, do the same for `lr-plot(filter(h-table, is-m), "gender-id", "age", "heigh
 
 @fitb{}{@ifsoln{The dots stray farther from the predictor line on the plot that includes all students.}}
 
-@n What happens if you compare the students' height in inches to their height in centimeters by plotting `lr-plot(h-table, "gender-id", "height-cm", "height")`?
+@n What happens if you compare the students' height in inches to their height in centimeters by plotting @show{(code '(lr-plot h-table "gender-id" "height-cm" "height"))}?
 
 @fitb{}{@ifsoln{All of the dots fall on the predictor line and the r-value is 1!}}
 
