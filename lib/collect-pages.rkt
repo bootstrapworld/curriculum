@@ -233,6 +233,9 @@
                             *natlang* course)]
                   [opt-exercises-index-file
                     (format "distribution/~a/courses/~a/.cached/.opt-exercises-index.rkt"
+                            *natlang* course)]
+                  [back-matter-contracts-index-file
+                    (format "distribution/~a/courses/~a/.cached/.back-matter-contracts-index.rkt"
                             *natlang* course)])
               ; (printf "lesson-order is ~s~%" lesson-order)
               (call-with-output-file workbook-page-index-file
@@ -248,7 +251,7 @@
                           (write-pages-info "front-matter" o ol oe #:pageno "false")
                           (for ([lsn lesson-order])
                             (write-pages-info lsn o ol oe))
-                          (call-with-output-file ".cached/.back-matter-contracts-index.rkt"
+                          (call-with-output-file back-matter-contracts-index-file
                             (lambda (ob)
                               (fprintf ob "(\n")
                               ;TODO skip if dir nonexistent
