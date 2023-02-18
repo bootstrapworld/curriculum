@@ -106,21 +106,6 @@
 
 (define *target-pathway* "notDoingPathway")
 
-(define *lang-root-dir*
-  (let ([x (truthy-getenv "LANGROOTDIR")])
-    (or x (string-append *pathway-root-dir* "../../"))))
-
-(define *pathway-lesson-order*
-  (string-append *pathway-root-dir* ".cached/.workbook-lessons.txt.kp"))
-
-(define *pathway-exercises-file*
-  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-exercises.rkt.kp"))
-
-;(printf "pwyexf= ~s\n" *pathway-exercises-file*)
-
-(define *pathway-lessons-containing-exercises-file*
-  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-lessons-containing-exercises.rkt.kp"))
-
 (define *in-file* #f)
 
 (define *workbook-pagenums*

@@ -46,30 +46,13 @@ for pl in $proglangs; do
   # echo calling collect workbook pgs
   collect_workbook_pages .
   # echo calling collect exercises
-  $PROGDIR/collect-exercises.rkt index.adoc $pl
-  exer_list_file=pages/.cached/.exercise-pages-ls.txt.kp
-  if test -f $exer_list_file; then
-    exer_aspect_list_file=pages/.cached/.exercise-pages.txt.kp
-    rm -f $exer_aspect_list_file
-    for f in $(cat $exer_list_file); do
-      if test ${f%.adoc} = $f; then
-        echo $f >> $exer_aspect_list_file
-      elif test ! -f pages/$f; then
-        echo
-        echo WARNING: Exercise file pages/$f not found
-      elif head -5 pages/$f|grep -q '^ *\[\.landscape\] *$'; then
-        echo $f landscape >> $exer_aspect_list_file
-      else
-        echo $f >> $exer_aspect_list_file
-      fi
-    done
-  fi
+  echo \(\"$lessonNamePl\" \"$pl\"\) >> $EXERCISE_COLLECTOR_INPUT
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
   #
-  make_solution_pages 
+  make_solution_pages
   cd ..
   echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done

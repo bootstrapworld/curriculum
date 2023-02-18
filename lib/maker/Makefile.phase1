@@ -1,10 +1,10 @@
 # created 2023-01-14
-# last modified 2023-02-16
+# last modified 2023-02-18
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
 
-all: copy-lessons copy-pathways page-not-found glossary
+all: courses-and-lessons page-not-found glossary
 
 ###############################################################################
 
@@ -38,7 +38,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		$(RELEVANT_LESSONS_INPUT)
+		$(RELEVANT_LESSONS_INPUT) $(EXERCISE_COLLECTOR_INPUT) $(COURSE_INPUT)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
 	@echo '(' > $(ADOCABLES_INPUT)
 
@@ -134,3 +134,7 @@ glossary: distribution/$(NATLANG)/lib/bilingual-glossary.pdf
 distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
 	@$(MAKE_DIR)make-bilingual-glossary.sh
 
+###############################################################################
+
+courses-and-lessons: copy-lessons copy-pathways
+	@$(PROGDIR)/collect-pages.rkt

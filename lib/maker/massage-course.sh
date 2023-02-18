@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-02-15
+# last modified 2023-02-17
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -71,10 +71,10 @@ for d in $pathwayName*; do
       $SED -e 's/;.*//' |
       $SED -e 's/ *$//' |
       grep -v '^ *$' |
-      $SED -e 's/^ *\(.*\)/..\/..\/lessons\/\1/' > .cached/.workbook-lessons.txt.kp
+      $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
   fi
 
-  $PROGDIR/collect-workbook-pages.rkt
+  echo $d >> $COURSE_INPUT
 
   cd ..
 done
