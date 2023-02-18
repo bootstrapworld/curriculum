@@ -1,5 +1,5 @@
 # created 2023-01-14
-# last modified 2023-02-15
+# last modified 2023-02-18
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -18,7 +18,13 @@ pathway-independent-asc-files := $(foreach adocf,$(pathway-independent-adoc-file
 
 pathway-independent-pdf-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call pdf-file,$(adocf)))
 
-build-pathway-independent: $(pathway-independent-pdf-files)
+ifeq "$(BOOK)" ""
+	pathway-independent-files := $(pathway-independent-asc-files)
+else
+	pathway-independent-files := $(pathway-independent-pdf-files)
+endif
+
+build-pathway-independent: $(pathway-independent-files)
 
 define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
@@ -36,7 +42,8 @@ $(call pdf-file,$1): $1 $(call asc-file,$1)
 
 endef
 
-$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-pdf-rule,$(adocf))))
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-pdf-rule,$(adocf)))),)
 
 ###############################################################################
 
@@ -61,11 +68,17 @@ relevant-asc-files := $(foreach \
 relevant-pdf-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
 
-build-workbook-pages: $(relevant-pdf-files)
+ifeq "$(BOOK)" ""
+	workbook-pages := $(relevant-asc-files)
+else
+	workbook-pages := $(relevant-pdf-files)
+endif
+
+build-workbook-pages: $(workbook-pages)
 
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
-	@#echo building workbook-page $$@ from $$<
+	@#echo building workbook-page-asc: $$@ from $$<
 	@$(MAKE_DIR)do-workbook-page.sh $$<
 
 endef
@@ -74,12 +87,13 @@ $(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-ru
 
 define make-build-workbook-page-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
-	@#echo building workbook-page: $$@ from $$<
-	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-workbook-page-pdf.sh $$<; fi
+	@#echo building workbook-page-pdf: $$@ from $$<
+	@$(MAKE_DIR)do-workbook-page-pdf.sh $$<
 
 endef
 
-$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pdf-rule,$(adocf))))
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pdf-rule,$(adocf)))),)
 
 #########################################################################
 
@@ -92,11 +106,17 @@ lesson-plan-asc-files := $(foreach \
 lesson-plan-pdf-files := $(foreach \
 	adocf,$(lesson-plan-adoc-files),$(call pdf-file,$(adocf)))
 
-build-lesson-plans: $(lesson-plan-pdf-files)
+ifeq "$(BOOK)" ""
+	lesson-plan-files := $(lesson-plan-asc-files)
+else
+	lesson-plan-files := $(lesson-plan-pdf-files)
+endif
+
+build-lesson-plans: $(lesson-plan-files)
 
 define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
-	@#echo build-lesson-plan: creating $$@ from $$<
+	@#echo build-lesson-plan-asc: creating $$@ from $$<
 	@$(MAKE_DIR)do-lesson-plan.sh $$<
 
 endef
@@ -110,7 +130,8 @@ $(call pdf-file,$1): $1 $(call asc-file,$1)
 
 endef
 
-$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf))))
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf)))),)
 
 ###############################################################################
 
@@ -126,11 +147,17 @@ resource-asc-files := $(foreach \
 resource-pdf-files := $(foreach \
 	adocf,$(resource-adoc-files),$(call pdf-file,$(adocf)))
 
-build-pathway-resources: $(resource-pdf-files)
+ifeq "$(BOOK)" ""
+	resource-files := $(resource-asc-files)
+else
+	resource-files := $(resource-pdf-files)
+endif
+
+build-pathway-resources: $(resource-files)
 
 define make-build-resource-rule
 $(call asc-file,$1): $1
-	@#echo build-resource: creating $$@ from $$<
+	@#echo build-resource-asc: creating $$@ from $$<
 	@$(MAKE_DIR)do-pathway-resource.sh $$<
 
 endef
@@ -140,11 +167,12 @@ $(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(
 define make-build-resource-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
 	@#echo build-resource-pdf: creating $$@ from $$<
-	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-pathway-resource-pdf.sh $$<; fi
+	@$(MAKE_DIR)do-pathway-resource-pdf.sh $$<
 
 endef
 
-$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-pdf-rule,$(adocf))))
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-pdf-rule,$(adocf)))),)
 
 ########################################################################
 
