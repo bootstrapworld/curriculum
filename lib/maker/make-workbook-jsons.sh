@@ -97,7 +97,7 @@ function make_workbook_json_1() {
         fi
       fi
 
-      echo docfile= $docfile
+      # echo docfile= $docfile
       #echo docfileext= $docfileext
 
       local abysspdf=distribution/$NATLANG/lib/$ABYSS.pdf
