@@ -4,14 +4,9 @@
 
 # echo doing make-books.sh
 
-source ${MAKE_DIR}make-workbook-jsons.sh
-
 for p in distribution/$NATLANG/courses/*; do
   test -d $p || continue
   export COURSE_DIR=$p
-  # export TGTPATHWAY=$p
-  # cd $p
-  make_workbook_jsons
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
   cd $p/resources/protected
   for f in workbook-sols workbook-long-sols opt-exercises-sols; do
