@@ -1,12 +1,13 @@
 = Defining Values - Chinese Flag
-
 ++++
 <style>
-  img { max-width: 400px; }
+  body:not(.LessonPlan, .narrativepage) p { line-height: 1.2; }
+  .centered-image{ padding: 0 !important; }
+  .listingblock { margin-bottom: 0 !important; }
 </style>
 ++++
 
-@centered-image{../images/china-flag.png}
+@centered-image{../images/china-flag.png, 350}
 
 @n What image do you see repeated in the flag? @fitb{}{@ifsoln{small yellow stars}}
 
@@ -55,15 +56,13 @@ china =
             rectangle(300, 200, "solid", "red"))))))
 ----
 }
-
-
 @n Write the code to define a value for the repeated expression.
 
 @fitb{}{@showsoln{(code '(define yellow-star (star 15 "solid" "yellow"))) }}
 
 @n Open the @starter-file{flags-china} and click "Run". +
 
-** Type `china` into the Interactions Area and click *Enter*.
+** Type `china` into the Interactions Area and hit *Enter*.
 ** *Save a copy* of the file, and simplify the flag code using the value you defined.
 ** Click "Run", and confirm that you still get the same image as the original.
 ** Now change the color of all of the stars to black, in both files.
@@ -71,17 +70,10 @@ china =
 
 @n Why is it helpful to define values for repeated images?
 
-
 @fitb{}{@ifsoln{More efficient. Avoids mistakes. Easier to make changes. Easier to read the code.}}
 
 @fitb{}{}
 
-@vspace{1ex}
-
-*Challenge:*
-
-- This file uses a function we haven’t seen before! What is it? @fitb{}{@ifsoln{`put-image`}}
-
-- Can you figure out its contract? _Hint: Focus on the last instance of the function._
+@star This file uses a function we haven’t seen before! What is it? @fitb{20em}{@ifsoln{`put-image`}} Can you figure out its contract? _Hint: Focus on the last instance of the function._
 
 @fitb{}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}
