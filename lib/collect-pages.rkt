@@ -89,19 +89,19 @@
                    [proglang (cadr x)]
                    [opt-exercises-list-file
                      (format
-                       "distribution/~a/lessons/~a/pages/.cached/.exercises-pages-ls.txt.kp"
+                       "distribution/~a/lessons/~a/pages/.cached/.exercise-pages-ls.txt.kp"
                        *natlang* lsn)]
                    [opt-exercises-asp-list-file
                      (format
-                       "distribution/~a/lessons/~a/pages/.cached/.exercises-pages.txt.kp"
+                       "distribution/~a/lessons/~a/pages/.cached/.exercise-pages.txt.kp"
                        *natlang* lsn)]
                    [workbook-exercises-list-file
                      (format
-                       "distribution/~a/lessons/~a/pages/.cached/.workbook-exercises-pages-ls.txt.kp"
+                       "distribution/~a/lessons/~a/pages/.cached/.workbook-exercise-pages-ls.txt.kp"
                        *natlang* lsn)]
                    [handout-exercises-list-file
                      (format
-                       "distribution/~a/lessons/~a/pages/.cached/.handout-exercises-pages-ls.txt.kp"
+                       "distribution/~a/lessons/~a/pages/.cached/.handout-exercise-pages-ls.txt.kp"
                        *natlang* lsn)]
                    [lsn-plan-file (format "distribution/~a/lessons/~a/index.adoc" *natlang* lsn)])
               ; (printf "collecting exx for ~s ~s~%" lsn proglang)
@@ -150,7 +150,7 @@
                           #:back-matter-port [back-matter-port #f])
   ; (printf "doing write-pages-info lesson-dir= ~s pageno= ~s bmp= ~s\n" lesson-dir pageno back-matter-port)
   (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
-         [exercise-pages-file (format "~a/pages/.cached/.exercises-pages.txt.kp" lesson-dir)]
+         [exercise-pages-file (format "~a/pages/.cached/.exercise-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
