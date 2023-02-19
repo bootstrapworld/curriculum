@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-15
+# last modified 2023-02-18
 
 # echo doing do-lesson-plan.sh $1
 
@@ -21,7 +21,7 @@ ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 if test ! -s $adocfile; then
   touch $fcontainingdirectory/.cached/.${adocbasename%.adoc}.asc
-  exit
+  # exit
 fi
 
 htmlfile=${ascfile%.asc}.html

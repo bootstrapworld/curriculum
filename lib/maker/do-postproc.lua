@@ -1,5 +1,9 @@
 #! /usr/bin/env lua
 
+-- last modified 2023-02-18
+
+dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+
 dir_prefix = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
 
 pwyindep_batchf =  os.getenv('ADOC_POSTPROC_PWYINDEP_INPUT')
@@ -11,20 +15,6 @@ resources_batchf =  os.getenv('ADOC_POSTPROC_RESOURCES_INPUT')
 
 analytics_file = os.getenv('TOPDIR') .. '/lib/analytics.txt'
 
-function file_exists_p(f)
-  -- print('doing file_exists_p', f)
-  local h = io.open(f)
-  if h then h:close(); return true
-  else return false
-  end
-end
-
-function memberp(elt, tbl)
-  for _,val in pairs(tbl) do
-    if elt == val then return true end
-  end
-  return false
-end
 
 function with_open_input_file(f, fn)
   local i = io.open(f, 'r')

@@ -2,6 +2,8 @@
 
 #lang racket
 
+;last modified 2023-02-18
+
 (require "readers.rkt")
 (require "utils.rkt")
 
@@ -146,13 +148,9 @@
 
 (define (write-pages-info lesson-dir o ol oe #:pageno [pageno "true"]
                           #:back-matter-port [back-matter-port #f])
-  ; (printf "doing write-pages-info lesson-dir= ~s pageno= ~s\n" lesson-dir pageno)
-  (let* ([workbook-pages-file
-           (format "distribution/~a/lessons/~a/pages/.cached/.workbook-pages.txt.kp"
-                   *natlang* lesson-dir)]
-         [exercise-pages-file
-           (format "distribution/~a/lessons/~a/pages/.cached/.exercises-pages.txt.kp"
-                   *natlang* lesson-dir)]
+  ; (printf "doing write-pages-info lesson-dir= ~s pageno= ~s bmp= ~s\n" lesson-dir pageno back-matter-port)
+  (let* ([workbook-pages-file (format "~a/pages/.cached/.workbook-pages.txt.kp" lesson-dir)]
+         [exercise-pages-file (format "~a/pages/.cached/.exercises-pages.txt.kp" lesson-dir)]
          [workbook-pages
            (cond [(file-exists? workbook-pages-file)
                   (read-data-file workbook-pages-file #:mode 'lines)]
@@ -202,6 +200,7 @@
           )))))
 
 (define (contracts-page? dir file)
+  ; (printf "doing contracts-page? ~s ~s~%" dir file)
   (let ([f (build-path dir "solution-pages" file)])
     (and (file-exists? f)
          (call-with-input-file f
@@ -221,51 +220,48 @@
         (let ([course (read i)])
           ; (printf "collecting workbooks for ~s~%" course)
           (unless (eof-object? course)
-            (let ([lesson-order
-                    (read-data-file
-                      (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                              *natlang* course))]
-                  [workbook-page-index-file
-                    (format "distribution/~a/courses/~a/.cached/.workbook-page-index.rkt"
-                            *natlang* course)]
-                  [workbook-long-page-index-file
-                    (format "distribution/~a/courses/~a/.cached/.workbook-long-page-index.rkt"
-                            *natlang* course)]
-                  [opt-exercises-index-file
-                    (format "distribution/~a/courses/~a/.cached/.opt-exercises-index.rkt"
-                            *natlang* course)]
-                  [back-matter-contracts-index-file
-                    (format "distribution/~a/courses/~a/.cached/.back-matter-contracts-index.rkt"
-                            *natlang* course)])
+            (let* ([lesson-order
+                     (read-data-file
+                       (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
+                               *natlang* course))]
+                   [workbook-page-index-file
+                     (format "distribution/~a/courses/~a/.cached/.workbook-page-index.rkt"
+                             *natlang* course)]
+                   [workbook-long-page-index-file
+                     (format "distribution/~a/courses/~a/.cached/.workbook-long-page-index.rkt"
+                             *natlang* course)]
+                   [opt-exercises-index-file
+                     (format "distribution/~a/courses/~a/.cached/.opt-exercises-index.rkt"
+                             *natlang* course)]
+                   [back-matter-contracts-index-file
+                     (format "distribution/~a/courses/~a/.cached/.back-matter-contracts-index.rkt"
+                             *natlang* course)]
+                   [o (open-output-file workbook-page-index-file #:exists 'replace)]
+                   [ol (open-output-file workbook-long-page-index-file #:exists 'replace)]
+                   [oe (open-output-file opt-exercises-index-file #:exists 'replace)]
+                   [ob (open-output-file back-matter-contracts-index-file #:exists 'replace)])
               ; (printf "lesson-order is ~s~%" lesson-order)
-              (call-with-output-file workbook-page-index-file
-                (lambda (o)
-                  (call-with-output-file workbook-long-page-index-file
-                    (lambda (ol)
-                      (call-with-output-file opt-exercises-index-file
-                        (lambda (oe)
-                          (fprintf o "(\n")
-                          (fprintf ol "(\n")
-                          (fprintf oe "(\n")
-                          ;TODO skip if dir nonexistent
-                          (write-pages-info "front-matter" o ol oe #:pageno "false")
-                          (for ([lsn lesson-order])
-                            (write-pages-info lsn o ol oe))
-                          (call-with-output-file back-matter-contracts-index-file
-                            (lambda (ob)
-                              (fprintf ob "(\n")
-                              ;TODO skip if dir nonexistent
-                              (write-pages-info "back-matter" o ol oe #:pageno "false" #:back-matter-port ob)
-                              (fprintf ob ")\n")
-                              )
-                            #:exists 'replace)
-                          (fprintf o ")\n")
-                          (fprintf ol ")\n")
-                          (fprintf oe ")\n")
-                          )
-                        #:exists 'replace))
-                    #:exists 'replace))
-                #:exists 'replace))
+              (fprintf o "(\n")
+              (fprintf ol "(\n")
+              (fprintf oe "(\n")
+              (fprintf ob "(\n")
+              ;TODO skip if dir nonexistent
+              (write-pages-info (format "distribution/~a/courses/~a/front-matter" *natlang* course)
+                o ol oe #:pageno "false")
+              (for ([lsn lesson-order])
+                (write-pages-info (format "distribution/~a/lessons/~a" *natlang* lsn)
+                                  o ol oe))
+              ;TODO skip if dir nonexistent
+              (write-pages-info (format "distribution/~a/courses/~a/back-matter" *natlang* course)
+                o ol oe #:pageno "false" #:back-matter-port ob)
+              (fprintf ob ")\n")
+              (fprintf oe ")\n")
+              (fprintf ol ")\n")
+              (fprintf o ")\n")
+              (close-output-port ob)
+              (close-output-port oe)
+              (close-output-port ol)
+              (close-output-port o))
             (loop)))))))
 
 (collect-workbooks (getenv "COURSE_INPUT"))

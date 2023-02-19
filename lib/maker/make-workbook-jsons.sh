@@ -1,31 +1,30 @@
 #!/bin/bash
 
-# created 2023-01-20
-# last modified 2023-02-08
+# last modified 2023-02-18
 
 NOPARALLEL=1
 
 function make_workbook_json_1() {
 
-  # echo doing make_workbook_json_1 $1 in $(pwd)
+  echo doing make_workbook_json_1 $1 in $(pwd)
 
   local tgt=$1
 
-  local WORKBOOKINPUT=.cached/.filelist
+  local WORKBOOKINPUT=$COURSE_DIR/.cached/.filelist
 
   local wbpnf=
   local includesolutions=
   local includeoptexercises=
 
   if test "$tgt" = bm-contracts -o "$tgt" = bm-contracts-sols; then
-    wbpnf=.cached/.back-matter-contracts-index.rkt
+    wbpnf=$COURSE_DIR/.cached/.back-matter-contracts-index.rkt
   #elif test "$tgt" = workbook -o "$tgt" = pd-workbook -o "$tgt" = workbook-sols; then
   elif test "$tgt" = workbook -o "$tgt" = workbook-sols; then
-    wbpnf=.cached/.workbook-page-index.rkt
+    wbpnf=$COURSE_DIR/.cached/.workbook-page-index.rkt
   elif test "$tgt" = opt-exercises -o "$tgt" = opt-exercises-sols; then
-    wbpnf=.cached/.opt-exercises-index.rkt
+    wbpnf=$COURSE_DIR/.cached/.opt-exercises-index.rkt
   else
-    wbpnf=.cached/.workbook-long-page-index.rkt
+    wbpnf=$COURSE_DIR/.cached/.workbook-long-page-index.rkt
   fi
 
   if test "$tgt" = workbook-sols -o "$tgt" = bm-contracts-sols -o "$tgt" = workbook-long-sols -o "$tgt" = opt-exercises-sols; then
@@ -98,8 +97,10 @@ function make_workbook_json_1() {
         fi
       fi
 
-      #echo docfile= $docfile
+      echo docfile= $docfile
       #echo docfileext= $docfileext
+
+      local abysspdf=distribution/$NATLANG/lib/$ABYSS.pdf
 
       if test "$docfileext" = html; then
         if test -f "$docfile"; then
@@ -108,11 +109,11 @@ function make_workbook_json_1() {
           echo ", { \"file\": \"$localpdffile\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
 
         else
-          echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
+          echo ", { \"file\": \"$abysspdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
         fi
 
       elif test ! -f $docfile; then
-        echo ", { \"file\": \"../../lib/$ABYSS.pdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
+        echo ", { \"file\": \"$abysspdf\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
 
       else
         echo ", { \"file\": \"$docfile\", \"paginate\": $pageno }" >> $WORKBOOKINPUT-$tgt.json
@@ -128,7 +129,7 @@ function make_workbook_json_1() {
 }
 
 function make_workbook_jsons() {
-  # echo doing make_workbook_json in $(pwd)
+  echo doing make_workbook_json in $(pwd)
   for wbf in workbook bm-contracts bm-contracts-sols workbook-sols workbook-long \ workbook-long-sols opt-exercises opt-exercises-sols ; do
     if test -z "$NOPARALLEL"; then
       make_workbook_json_1 $wbf &

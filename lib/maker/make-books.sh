@@ -1,27 +1,24 @@
-#!/bin/bash 
+#!/bin/bash
 
-# created 2023-01-27
-# lastmod 2023-02-13
+# lastmod 2023-02-18
 
 # echo doing make-books.sh
 
-
 source ${MAKE_DIR}make-workbook-jsons.sh
 
-cd $TOPDIR/distribution/$NATLANG/courses
-
-for p in *; do
+for p in distribution/$NATLANG/courses/*; do
   test -d $p || continue
-  export TGTPATHWAY=$p
-  cd $p
+  export COURSE_DIR=$p
+  # export TGTPATHWAY=$p
+  # cd $p
   make_workbook_jsons
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
-  cd resources/protected
+  cd $p/resources/protected
   for f in workbook-sols workbook-long-sols opt-exercises-sols; do
     $CP -p $PROGDIR/redirect.html $f.pdf.html
     $SED -i \
       -e 's/REDIRECT_TARGET_FILE/'$f.pdf'/g' \
       $f.pdf.html
     done
-  cd ..
+  cd $TOPDIR
 done
