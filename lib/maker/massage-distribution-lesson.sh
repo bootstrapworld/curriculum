@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-17
+# last modified 2023-02-19
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -44,7 +44,7 @@ for pl in $proglangs; do
   test -d pages/.cached || mkdir -p pages/.cached
 
   # echo calling collect workbook pgs
-  collect_workbook_pages .
+  collect_workbook_pages
   # echo calling collect exercises
   echo \(\"$lessonNamePl\" \"$pl\"\) >> $EXERCISE_COLLECTOR_INPUT
 

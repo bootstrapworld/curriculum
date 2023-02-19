@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-09
+# last modified 2023-02-19
 
 function collect_workbook_pages() {
   # echo doing collect_workbook_pages in $(pwd)
@@ -21,7 +21,6 @@ function collect_workbook_pages() {
 
   while read -r f; do
     # echo finding aspect of "$f"
-    aspect=portrait
     g=$f
     if echo "$f"|grep -q '^ *;'; then
       :
@@ -30,29 +29,25 @@ function collect_workbook_pages() {
     elif echo "$f"|grep -q landscape; then
       echo $f >> pages/.cached/.workbook-pages.txt.kp
       g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
-      aspect=landscape
     elif echo "$f"|grep -q portrait; then
       echo $f >> pages/.cached/.workbook-pages.txt.kp
       g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
-      echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
     elif test "${f%.adoc}" = "$f"; then
+      # f is not an adoc file
       echo $f >> pages/.cached/.workbook-pages.txt.kp
-      echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
+    elif test ! -f "$f"; then
+      # f doesn't (yet?) exist
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
+    elif head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
+      echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
+    elif head -n 60 "$f"|grep -q 'body.*landscape'; then
+      echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
+    elif echo "$f"|grep -q '^ *$'; then
+      :
     else
-      if test -f "$f" && head -n 5 "$f"|grep -q '^ *\[\.landscape\] *$'; then
-        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-        aspect=landscape
-      elif test -f "$g" && head -n 60 "$g"|grep -q 'body.*landscape'; then
-        echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-        aspect=landscape
-      else
-        echo $f >> pages/.cached/.workbook-pages.txt.kp
-        echo $f >> pages/.cached/.workbook-pages-ls.txt.kp
-      fi
+      echo $f >> pages/.cached/.workbook-pages.txt.kp
     fi
+    echo $g >> pages/.cached/.workbook-pages-ls.txt.kp
   done < pages/workbook-pages.txt
 
 }

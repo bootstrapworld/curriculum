@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-02-17
+# last modified 2023-02-19
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 source ${MAKE_DIR}collect-workbook-pages.sh
@@ -65,6 +65,8 @@ for d in $pathwayName*; do
   if test ! -f lesson-order.txt; then
     echo 
     echo WARNING: No lesson-order.txt in pathway $d
+    touch lesson-order.txt
+    touch .cached/.workbook-lessons.txt.kp
   else
     grep -v '^ *;' lesson-order.txt |
       $SED -e 's/\t/ /g' |

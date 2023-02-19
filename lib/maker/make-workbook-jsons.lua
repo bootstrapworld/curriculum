@@ -6,9 +6,99 @@ natlang = os.getenv('NATLANG')
 
 distr_courses = 'distribution/' .. natlang .. '/courses/'
 
-abysspdf = 'distribution/' .. natlang .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
+---------------------------------------------------------------------------
 
-workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
+function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
+  -- by default, don't skip pageno
+  --
+  local workbook_pages_file = lesson_dir .. '/pages/.cached/.workbook-pages.txt.kp'
+  if file_exists_p(workbook_pages_file) then
+    -- print('workbook_pages_file is ', workbook_pages_file, file_exists_p(workbook_pages_file))
+    local i = io.open(workbook_pages_file)
+    for line in i:lines() do
+      local file = line:gsub('^ *([^ ]*).*', '%1')
+      local aspect = line:find('^ *[^ ]* *[^ ]*') and line:gsub('^ *[^ ]* *([^ ]*).*', '%1') or 'portrait'
+      local this_skip_pageno = line:find('^ *[^ ]* *[^ ]* *[^ ]*') and line:gsub('^ *[^ ]* *[^ ]* *([^ ]*).*', '%1') or skip_pageno
+      --
+      local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = ' .. tostring(not this_skip_pageno) .. '},\n'
+      o:write(x)
+      ol:write(x)
+      if back_matter_port and contracts_page_p(lesson_dir, file) then
+        back_matter_port:write(x)
+      end
+    end
+    i:close()
+  end
+  --
+  local exercise_pages_file = lesson_dir .. '/pages/.cached/.exercise-pages.lua'
+  -- print('exercise_pages_file is ', exercise_pages_file, file_exists_p(exercise_pages_file))
+  if file_exists_p(exercise_pages_file) then
+    local exercise_pages = dofile(exercise_pages_file)
+    for _,page in ipairs(exercise_pages) do
+      local file = page[1]
+      local aspect = page[2] or 'portrait'
+      local this_pageno = false
+      local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = false },\n'
+      o:write(x)
+      ol:write(x)
+    end
+  end
+end
+
+function contracts_page_p(dir, file)
+  local f = dir .. '/solution-pages/' .. file
+  if not file_exists_p(f) then return false end
+  local i = io.open(f)
+  local n = 1
+  for line in i:lines() do
+    if n > 10 then return false end
+    if line:find('^=.*[Cc][Oo][Nn][Tt][Rr][Aa][Cc][Tt]') then return true end
+    n = n + 1
+  end
+  i:close()
+  return false
+end
+
+do
+  local i = io.open(os.getenv('COURSE_INPUT'))
+  local distr_lessons = 'distribution/' .. natlang .. '/lessons/'
+  for course in i:lines() do
+    local course_dir = distr_courses .. course
+    local course_cache = course_dir .. '/.cached/'
+
+    local o = io.open(course_cache .. '.workbook-page-index.lua', 'w+')
+    local ol = io.open(course_cache .. '.workbook-long-page-index.lua', 'w+')
+    local oe = io.open(course_cache .. '.opt-exercises-index.lua', 'w+')
+    local ob = io.open(course_cache .. '.back-matter-contracts-index.lua', 'w+')
+
+    o:write('return {\n')
+    ol:write('return {\n')
+    oe:write('return {\n')
+    ob:write('return {\n')
+
+    write_pages_info(course_dir .. '/front-matter', o, ol, oe)
+    local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
+    -- print('workbook_lessons_file is ', workbook_lessons_file, ' ', file_exists_p(workbook_lessons_file))
+    w = io.open(workbook_lessons_file)
+    for lsn in w:lines() do
+      write_pages_info(distr_lessons .. lsn, o, ol, oe)
+    end
+    w:close()
+
+    write_pages_info(course_dir .. '/back-matter', o, ol, oe, 'skip_pageno', ob)
+
+    o:write('}\n'); o:close()
+    ol:write('}\n'); ol:close()
+    oe:write('}\n'); oe:close()
+    ob:write('}\n'); ob:close()
+
+  end
+  i:close()
+end
+
+---------------------------------------------------------------------------
+
+abysspdf = 'distribution/' .. natlang .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
 
 function make_workbook_json_1(course_dir, tgt)
   local workbook_input = course_dir .. '/.cached/.filelist'
@@ -36,7 +126,6 @@ function make_workbook_json_1(course_dir, tgt)
     includeoptexercises = true
   end
 
-  local i = io.open(workbook_index_file, 'r')
   local o = io.open(workbook_input .. '-' .. tgt .. '.json', 'w+')
 
   o:write('{ "fileList": [ "ignoreElement" ')
@@ -90,7 +179,7 @@ function make_workbook_json_1(course_dir, tgt)
       if file_exists_p(docfile) then
         local localpdffile = docfile:gsub('(.*)%.html$', '%1') .. '.pdf'
 
-        o:write(localpdffile)  --, '", "paginate": ', pageno, '}\n')
+        o:write(localpdffile)
       else
         o:write(abysspdf)
       end
@@ -107,11 +196,14 @@ function make_workbook_json_1(course_dir, tgt)
   end
 
   o:write('] }\n')
+  o:close()
 
 end
 
 do
+  local workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
   local i = io.open(os.getenv('COURSE_INPUT'))
+  --
   for course in i:lines() do
     local course_dir = distr_courses .. course
     for _,wbf in ipairs(workbook_inputs) do
