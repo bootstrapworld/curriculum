@@ -33,6 +33,7 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
   local exercise_pages_file = lesson_dir .. '/pages/.cached/.exercise-pages.lua'
   -- print('exercise_pages_file is ', exercise_pages_file, file_exists_p(exercise_pages_file))
   if file_exists_p(exercise_pages_file) then
+    -- print('ex pg file', exercise_pages_file, 'exists!')
     local exercise_pages = dofile(exercise_pages_file)
     for _,page in ipairs(exercise_pages) do
       local file = page[1]
@@ -76,7 +77,7 @@ do
     oe:write('return {\n')
     ob:write('return {\n')
 
-    write_pages_info(course_dir .. '/front-matter', o, ol, oe)
+    write_pages_info(course_dir .. '/front-matter', o, ol, oe, 'skip_pageno')
     local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
     -- print('workbook_lessons_file is ', workbook_lessons_file, ' ', file_exists_p(workbook_lessons_file))
     w = io.open(workbook_lessons_file)

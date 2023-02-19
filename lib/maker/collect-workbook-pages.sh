@@ -26,6 +26,8 @@ function collect_workbook_pages() {
       :
     elif echo "$f"|grep -q '^ *//'; then
       :
+    elif echo "$f"|grep -q '^ *$'; then
+      :
     elif echo "$f"|grep -q landscape; then
       echo $f >> pages/.cached/.workbook-pages.txt.kp
       g=$(echo $f|$SED -e 's/^ *\([^ ]\+\).*/\1/')
@@ -42,8 +44,6 @@ function collect_workbook_pages() {
       echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
     elif head -n 60 "$f"|grep -q 'body.*landscape'; then
       echo $f landscape >> pages/.cached/.workbook-pages.txt.kp
-    elif echo "$f"|grep -q '^ *$'; then
-      :
     else
       echo $f >> pages/.cached/.workbook-pages.txt.kp
     fi
