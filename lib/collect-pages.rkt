@@ -2,7 +2,7 @@
 
 #lang racket
 
-;last modified 2023-02-18
+;last modified 2023-02-19
 
 (require "readers.rkt")
 (require "utils.rkt")
@@ -171,33 +171,35 @@
                         ; (printf "EXN: ~s\n"  e)
                         ;((error-display-handler) (exn-message e) e)
                         )])
-          (for ([page workbook-pages])
-            (let ([file (list-ref page 0)]
-                  [aspect "portrait"]
-                  [this-pageno pageno]
-                  [n (length page)])
-              (when (>= n 2)
-                (set! aspect (list-ref page 1)))
-              (when (>= n 3)
-                (set! this-pageno (list-ref page 2)))
-              ;(printf "this-pageno = ~s\n" this-pageno)
-              ;(fprintf o2 "~a\n" file)
-              (fprintf o "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
-              (fprintf ol "(~s ~s ~s ~s)\n" lesson-dir file aspect this-pageno)
-              (when (and back-matter-port (contracts-page? lesson-dir file))
-                (fprintf back-matter-port "(~s ~s ~s ~s)\n"
-                         lesson-dir file aspect this-pageno))
-              ))
-          ;
+      (for ([page workbook-pages])
+        (let ([file (list-ref page 0)]
+              [aspect "portrait"]
+              [this-pageno pageno]
+              [n (length page)])
+          (when (>= n 2)
+            (set! aspect (list-ref page 1)))
+          (when (>= n 3)
+            (set! this-pageno (list-ref page 2)))
+          ;(printf "this-pageno = ~s\n" this-pageno)
+          ;(fprintf o2 "~a\n" file)
+          (let ([x (format "{ lessondir = ~s, page = ~s, aspect = ~s, pageno = ~a },\n"
+                           lesson-dir file aspect this-pageno)])
+            (display x o)
+            (display x ol)
+
+            (when (and back-matter-port (contracts-page? lesson-dir file))
+              (display x back-matter-port)))))
+      ;
       (for ([page exercise-pages])
         (let ([file (list-ref page 0)]
               [aspect "portrait"]
               [n (length page)])
           (when (>= n 2)
             (set! aspect (list-ref page 1)))
-          (fprintf ol "(~s ~s ~s ~s)\n" lesson-dir file aspect "false")
-          (fprintf oe "(~s ~s ~s ~s)\n" lesson-dir file aspect "false")
-          )))))
+          (let ([x (format "{ lessondir = ~s, page = ~s, aspect = ~s, pageno = ~a },\n"
+                           lesson-dir file aspect "false")])
+            (display x ol)
+            (display x oe)))))))
 
 (define (contracts-page? dir file)
   ; (printf "doing contracts-page? ~s ~s~%" dir file)
@@ -225,26 +227,26 @@
                        (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
                                *natlang* course))]
                    [workbook-page-index-file
-                     (format "distribution/~a/courses/~a/.cached/.workbook-page-index.rkt"
+                     (format "distribution/~a/courses/~a/.cached/.workbook-page-index.lua"
                              *natlang* course)]
                    [workbook-long-page-index-file
-                     (format "distribution/~a/courses/~a/.cached/.workbook-long-page-index.rkt"
+                     (format "distribution/~a/courses/~a/.cached/.workbook-long-page-index.lua"
                              *natlang* course)]
                    [opt-exercises-index-file
-                     (format "distribution/~a/courses/~a/.cached/.opt-exercises-index.rkt"
+                     (format "distribution/~a/courses/~a/.cached/.opt-exercises-index.lua"
                              *natlang* course)]
                    [back-matter-contracts-index-file
-                     (format "distribution/~a/courses/~a/.cached/.back-matter-contracts-index.rkt"
+                     (format "distribution/~a/courses/~a/.cached/.back-matter-contracts-index.lua"
                              *natlang* course)]
                    [o (open-output-file workbook-page-index-file #:exists 'replace)]
                    [ol (open-output-file workbook-long-page-index-file #:exists 'replace)]
                    [oe (open-output-file opt-exercises-index-file #:exists 'replace)]
                    [ob (open-output-file back-matter-contracts-index-file #:exists 'replace)])
               ; (printf "lesson-order is ~s~%" lesson-order)
-              (fprintf o "(\n")
-              (fprintf ol "(\n")
-              (fprintf oe "(\n")
-              (fprintf ob "(\n")
+              (fprintf o "return {\n")
+              (fprintf ol "return {\n")
+              (fprintf oe "return {\n")
+              (fprintf ob "return {\n")
               ;TODO skip if dir nonexistent
               (write-pages-info (format "distribution/~a/courses/~a/front-matter" *natlang* course)
                 o ol oe #:pageno "false")
@@ -254,10 +256,10 @@
               ;TODO skip if dir nonexistent
               (write-pages-info (format "distribution/~a/courses/~a/back-matter" *natlang* course)
                 o ol oe #:pageno "false" #:back-matter-port ob)
-              (fprintf ob ")\n")
-              (fprintf oe ")\n")
-              (fprintf ol ")\n")
-              (fprintf o ")\n")
+              (fprintf ob "}\n")
+              (fprintf oe "}\n")
+              (fprintf ol "}\n")
+              (fprintf o "}\n")
               (close-output-port ob)
               (close-output-port oe)
               (close-output-port ol)

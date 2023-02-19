@@ -2,29 +2,26 @@
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-abysspdf = 'distribution/' .. os.getenv('NATLANG') .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
+natlang = os.getenv('NATLANG')
+
+distr_courses = 'distribution/' .. natlang .. '/courses/'
+
+abysspdf = 'distribution/' .. natlang .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
 
 workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
-
-function file_is_directory_p(d)
-  local i = io.open(d, 'r')
-  local a,b,c = i:read(1)
-  i:close()
-  return c == 21
-end
 
 function make_workbook_json_1(course_dir, tgt)
   local workbook_input = course_dir .. '/.cached/.filelist'
   local workbook_index_file
 
   if memberp(tgt, { 'bm-contracts', 'bm-contracts-sols' }) then
-    workbook_index_file = course_dir .. '/.cached/.back-matter-contracts-index.rkt'
+    workbook_index_file = course_dir .. '/.cached/.back-matter-contracts-index.lua'
   elseif memberp(tgt, { 'workbook', 'workbook-sols' }) then
-    workbook_index_file = course_dir .. '/.cached/.workbook-page-index.rkt'
+    workbook_index_file = course_dir .. '/.cached/.workbook-page-index.lua'
   elseif memberp(tgt, { 'opt-exercises', 'opt-exercises-sols' }) then
-    workbook_index_file = course_dir .. '/.cached/.opt-exercises-index.rkt'
+    workbook_index_file = course_dir .. '/.cached/.opt-exercises-index.lua'
   else
-    workbook_index_file = course_dir .. '/.cached/.workbook-long-page-index.rkt'
+    workbook_index_file = course_dir .. '/.cached/.workbook-long-page-index.lua'
   end
 
   local includesolutions = false
@@ -46,22 +43,18 @@ function make_workbook_json_1(course_dir, tgt)
 
   local currlesson
 
-  for line in i:lines() do
-    if not (line:find('lessons') or line:find('front-matter') or line:find('back-matter')) then
+  local lynes = dofile(workbook_index_file)
+
+  for _,line in ipairs(lynes) do
+    local lessondir = line.lessondir
+
+    if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
       goto continue
     end
-    local lessondir = line:gsub('^%("(.[^"]*)".*', '%1')
-    local workbookpage = line:gsub('^%(".[^"]*" *"(.[^"]*)".*', '%1')
-    local aspect = line:gsub('^%(".[^"]*" *".[^"]*" *"(.[^"]*)".*', '%1')
-    local pageno = line:gsub('^%(".[^"]*" *".[^"]*" *".[^"]*" *"?([^"]*).*', '%1')
 
-    if memberp(pageno, { 'no', 'No', 'NO' }) then
-      pageno = 'false'
-    end
-
-    if pageno ~= 'false' then
-      pageno = 'true'
-    end
+    local workbookpage = line.page
+    local aspect = line.aspect
+    local pageno = line.pageno
 
     local freshlesson = false
 
@@ -108,7 +101,7 @@ function make_workbook_json_1(course_dir, tgt)
     else
       o:write(docfile)
     end
-    o:write('", "paginate": ', pageno, ' }\n')
+    o:write('", "paginate": ', tostring(pageno), ' }\n')
 
     ::continue::
   end
@@ -117,28 +110,13 @@ function make_workbook_json_1(course_dir, tgt)
 
 end
 
-function make_workbook_jsons(course_dir)
-  for _,wbf in ipairs(workbook_inputs) do
-    make_workbook_json_1(course_dir, wbf)
-  end
-end
-
-all_courses = {}
-
 do
-  distr_courses = 'distribution/' .. os.getenv('NATLANG') .. '/courses'
-  local i = io.popen('ls ' .. distr_courses)
-  while true do
-    local x = i:read()
-    if not x then break end
-    x = distr_courses .. '/' .. x
-    if file_is_directory_p(x) then
-      table.insert(all_courses, x)
+  local i = io.open(os.getenv('COURSE_INPUT'))
+  for course in i:lines() do
+    local course_dir = distr_courses .. course
+    for _,wbf in ipairs(workbook_inputs) do
+      make_workbook_json_1(course_dir, wbf)
     end
   end
   i:close()
-end
-
-for _,course_dir in ipairs(all_courses) do
-  make_workbook_jsons(course_dir)
 end
