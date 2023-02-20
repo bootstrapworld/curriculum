@@ -1,13 +1,10 @@
 #!/bin/bash
 
 # created 2023-01-16
-# last modified 2023-02-19
+# last modified 2023-02-20
 
 source ${MAKE_DIR}src-subdir-mgt.sh
-source ${MAKE_DIR}collect-workbook-pages.sh
-# source ${MAKE_DIR}make-workbook-jsons.sh
 
-# echo
 # echo doing massage-course $1
 
 d=$1
@@ -53,17 +50,16 @@ for d in $pathwayName*; do
   for dd in front-matter back-matter resources; do
     if test -d $dd; then
       cd $dd
-      make_solution_pages 
-      collect_workbook_pages
+      if test -d pages; then
+        make_solution_pages
+        $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
+      fi
       cd ..
     fi
   done
 
-  # collect_workbook_pages
-  # make_workbook_jsons
-
   if test ! -f lesson-order.txt; then
-    echo 
+    echo
     echo WARNING: No lesson-order.txt in pathway $d
     touch lesson-order.txt
     touch .cached/.workbook-lessons.txt.kp

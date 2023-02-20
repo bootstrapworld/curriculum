@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-19
+# last modified 2023-02-20
 
 source ${MAKE_DIR}src-subdir-mgt.sh
-source ${MAKE_DIR}collect-workbook-pages.sh
 
 # echo doing massage-distribution-lesson $1
 
@@ -40,11 +39,11 @@ for pl in $proglangs; do
   touch .cached/.proglang-$pl
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
-  test  -d pages || mkdir pages
+  test -d pages || mkdir pages
   test -d pages/.cached || mkdir -p pages/.cached
 
   # echo calling collect workbook pgs
-  collect_workbook_pages
+  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
   # echo calling collect exercises
   echo \(\"$lessonNamePl\" \"$pl\"\) >> $EXERCISE_COLLECTOR_INPUT
 
