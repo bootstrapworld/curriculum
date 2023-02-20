@@ -40,8 +40,8 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
       local aspect = page[2] or 'portrait'
       local this_pageno = false
       local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = false },\n'
-      o:write(x)
       ol:write(x)
+      oe:write(x)
     end
   end
 end
