@@ -1,4 +1,4 @@
-= Composing Table Operations: Order Matters!
+= Planning Table Operations
 ++++
 <style>
 .literalblock pre { 0.5em 0 !important; }
@@ -36,37 +36,35 @@ You have the following functions defined below (read them _carefully!_):
   fun is-female(r): r["sex"] == "female"  end
   fun kilograms(r): r["pounds"] / 2.2     end
   fun is-heavy(r):  r["kilos"] > 25       end
+  fun is-young(r):  r["age"] < 4         end
+  fun is-fixed(r):  r["fixed"]           end
 
-**TIP: To help you complete this page, fill in the "kilos" values in the table above by dividing each animal's `pounds` column by 2.2.**
+For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
 
-For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
-
-[.FillVerticalSpace, cols=">.^6a,^.^2a,1,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+[.FillVerticalSpace, cols=".^1a,^.^20a,^.^20a",stripes="none",frame="none", options="header"]
 |===
+|
+| Prompt
+| Circle of Evaluation
 
-| Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
-|*@n*@ifsoln{(B)} ||*A*
-| @show{(coe exp1)}
+| @n
+| Produce a Table containing all young, fixed animals
+| @show{(code exp1)}
 
-| Produces a table containing Sasha, Nori and Toggle (in that order)
-|*@n*@ifsoln{(A)} ||*B*
-| @show{(coe exp2)}
+| @n
+| Produce a Table showing all fixed female animals, sorted by age
+| @showsoln{(code exp2)}
 
-| Produces a table with an extra column for kilos, but only animals with more than 25 kilos
-|*@n*@ifsoln{+(C)+} ||*C*
-| @show{(coe exp3)}
+| @n
+| Produce a bar-chart for all fixed female animals, showing the distribution of `fixed`
+| @showsoln{(code exp3)}
 
-| Won’t run: will produce an error (if so, why?)
-|*@n*@ifsoln{(D)} ||*D*
-| @show{(coe exp4)}
+| @n
+| Produce a pie-chart for all heavy, fixed animals, showing the distribution of `sex`
+| @showsoln{(code exp4)}
 
-| Produces a table containing Sasha, Toggle, and Nori (in that order)
-|*@n*@ifsoln{+(G)+} ||*E*
-| @show{(coe exp5)}
-
-| Produces an empty table - with no animals at all!
-|*@n*@ifsoln{+(E)+} ||*G*
-| @show{(coe exp6)}
+| @n
+| Produce a box-plot for all fixed, female animals, showing the distribution of `kilos`
+| @showsoln{(code exp5)}
 
 |===
-
