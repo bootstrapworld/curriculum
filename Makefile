@@ -5,7 +5,7 @@ export NATLANG ?= en-us
 
 # these shd be in a separate file, and possibly deduced
 export SEMESTER = fall
-export YEAR = 2022
+export YEAR = 2023
 
 export MAKE_DIR := lib/maker/
 
