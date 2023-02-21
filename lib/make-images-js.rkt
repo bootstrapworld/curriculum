@@ -25,8 +25,8 @@
               [else (display c o)])
         (loop)))))
 
-(let ([image-files "../.cached/.image-files.rkt"]
-      [json-file "../images.js"])
+(let ([image-files (getenv "IMAGE_LIST_FILE")]
+      [json-file (getenv "IMAGE_JS_FILE")])
   (call-with-input-file image-files
     (lambda (i)
       (call-with-output-file json-file
