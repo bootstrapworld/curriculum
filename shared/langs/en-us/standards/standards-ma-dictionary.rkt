@@ -817,7 +817,7 @@
      "histograms"
      "histograms2"
      "box-plots"
-     "custom-scatter-plots"
+     "advanced-displays"
      "scatter-plots"
      "correlations"
      "linear-regression"

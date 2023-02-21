@@ -117,7 +117,7 @@
     ("MP.7"
      "Look for and make use of structure"
      "lookups"
-     "custom-scatter-plots"
+     "advanced-displays"
      "functions-dr"
      "function-definition-linear"
      "functions-can-be-linear"

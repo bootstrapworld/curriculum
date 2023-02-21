@@ -95,7 +95,7 @@ _Table, String, String and... what is that last part?... **a Function that consu
 # Image Scatter Plots
 
 - Comment-out the `scatter-plot` expression in the program by putting a `#` at the start of line 53. This will "turn off" the expression, by telling Pyret to ignore that line.
-- Complete @printable-exercise{pages/custom-scatter-plot-explore.adoc}.
+- Complete @printable-exercise{pages/image-scatter-explore.adoc}.
 
 <!--
 
@@ -164,7 +164,7 @@ Math teachers alike may want their students to confront piecewise functions more
 
 @image{images/age-v-weeks-species-dot.png, 450}
 
-* Open the @opt-starter-file{piecewise-custom-scatter-plot} and complete @opt-printable-exercise{pages/species-dot-explore.adoc}.
+* Open the @opt-starter-file{piecewise-displays} and complete @opt-printable-exercise{pages/species-dot-explore.adoc}.
 * What does this new visualization tell us about the relationship between age and weeks?
 * What other analysis would be helpful here?
 
@@ -203,7 +203,7 @@ Debrief, and ask students to explain what the code does. Pay special attention t
 {layout="Investigate"}
 # Using Conditionals
 
-- Turn to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{custom-animals} Starter File.
+- Turn to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{piecewise-animal-images} Starter File.
 - How does using clipart help us to better understand the data?
 - What _risks_ might there be to using clipart in displays?
 - We have seen a lot of different image scatter plots today! What ideas do you have for how `image-scatter-plot` could be used to deepen the analysis of your dataset?
