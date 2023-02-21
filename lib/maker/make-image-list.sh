@@ -4,10 +4,8 @@
 # last modified 2023-02-21
 
 cd $TOPDIR/distribution/$NATLANG/lessons
-export DISTROOTDIR=../
 
-echo "(" > $IMAGE_LIST_FILE
-first=1
+echo return { > $IMAGE_LIST_FILE
 for L in *; do
   Lbasename=$L
 
@@ -17,9 +15,9 @@ for L in *; do
 
   if ! grep -q "^ *\"$Lbasename/images/" $IMAGE_LIST_FILE; then
     if test -f $L/images/lesson-images.json; then
-      echo \(\"$Lbasename\" \"$L/images/lesson-images.json\"\) >> $IMAGE_LIST_FILE
+      echo { \"$Lbasename\",  \"$L/images/lesson-images.json\" }, >> $IMAGE_LIST_FILE
     fi
   fi
 done
-echo ")" >> $IMAGE_LIST_FILE
-$PROGDIR/make-images-js.rkt
+echo } >> $IMAGE_LIST_FILE
+$TOPDIR/${MAKE_DIR}make-images-js.lua
