@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-21
+# last modified 2023-02-22
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
@@ -28,7 +28,7 @@ cd ..
 lessonNamePl=
 for pl in $proglangs; do
   lessonNamePl="$lessonName"
-  if test "$pl" != pyret; then
+  if test "$pl" != pyret -a "$pl" != none; then
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
     cp -upr "$lessonName"/* "$lessonNamePl"
@@ -56,7 +56,7 @@ for pl in $proglangs; do
   echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
 
-if test ! -f $lessonName/.cached/.proglang-pyret; then
+if test ! -f $lessonName/.cached/.proglang-pyret -a ! -f $lessonName/.cached/.proglang-none; then
   mkdir -p $lessonName/.cached
   touch $lessonName/.proglang-ignore
 fi

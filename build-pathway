@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# last modified 2023-02-20
+# last modified 2023-02-22
 
 ARGS=
 BOOK=
 FORCE=
+GRAPH=
 HELP=
 LINKCHECK=
 NATLANG=en-us
@@ -31,6 +32,8 @@ while test $# -ne 0; do
     export BOOK=yes
   elif test "$arg" = --force -o "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -f; then
     FORCE=yes
+  elif test "$arg" = --graph -o "$arg" = -g; then
+    export GRAPH=yes
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=yes
   elif test "$arg" =  --lint -o "$arg" = --verify-links -o "$arg" = -l; then
