@@ -1,5 +1,4 @@
-# created 2023-01-14
-# last modified 2023-02-21
+# last modified 2023-02-22
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -38,9 +37,16 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		$(RELEVANT_LESSONS_INPUT) $(EXERCISE_COLLECTOR_INPUT) $(COURSE_INPUT)
+		$(EXERCISE_COLLECTOR_INPUT) $(COURSE_INPUT)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
+	@echo 'return {' > $(COURSE_INPUT)
 	@echo 'return {' > $(EXERCISE_COLLECTOR_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_RESOURCES_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_PWYINDEP_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
 	@echo '(' > $(ADOCABLES_INPUT)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
@@ -139,4 +145,5 @@ distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
 
 courses-and-lessons: copy-lessons copy-pathways
 	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
+	@echo '}' >> $(COURSE_INPUT)
 	@$(MAKE_DIR)collect-exercises.lua

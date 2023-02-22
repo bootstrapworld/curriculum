@@ -1,5 +1,4 @@
-# created 2023-01-14
-# last modified 2023-02-18
+# last modified 2023-02-22
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -195,6 +194,12 @@ $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,
 
 preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
 	@echo ")" >> $(ADOCABLES_INPUT)
+	@echo } >> $(ADOC_POSTPROC_LESSONPLAN_INPUT)
+	@echo } >> $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
+	@echo } >> $(ADOC_POSTPROC_NARRATIVE_INPUT)
+	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
+	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
 	$(MAKE_DIR)run-asciidoctor.sh
 
 primitives: preproc

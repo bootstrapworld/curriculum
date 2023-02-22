@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-18
+-- last modified 2023-02-22
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -324,15 +324,10 @@ end
 
 function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
-  local i = io.open(batchf, 'r')
-  if not i then
-    -- print('run_postproc skipping nonexistent ', batchf)
-    return
-  end
-  for f in i:lines() do
+  local files = dofile(batchf)
+  for _,f in ipairs(files) do
     postproc(f, tipe)
   end
-  i:close()
 end
 
 run_postproc(pwyindep_batchf, 'pwyindep')

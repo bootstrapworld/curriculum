@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# created 2023-01-16
-# last modified 2023-02-20
+# last modified 2023-02-22
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
@@ -72,7 +71,8 @@ for d in $pathwayName*; do
       $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
   fi
 
-  echo $d >> $COURSE_INPUT
+  echo "  " \"$d\", >> $COURSE_INPUT
+  # echo $d >> $COURSE_INPUT
 
   cd ..
 done

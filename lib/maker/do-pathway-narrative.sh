@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-22
 
 # echo do-pathway-narrative $1
 
@@ -49,8 +48,8 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 
 echo $ascfile >> $ADOC_INPUT
 
-echo $htmlfile >> $ADOC_POSTPROC_NARRATIVE_INPUT
+echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_NARRATIVE_INPUT
 
 echo courses/$targetpathway/.cached/.pathway-glossary.asc >> $ADOC_INPUT
 
-echo courses/$targetpathway/.cached/.pathway-glossary.html >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+echo "  " \"courses/$targetpathway/.cached/.pathway-glossary.html\", >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT

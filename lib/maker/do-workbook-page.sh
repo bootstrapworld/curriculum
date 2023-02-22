@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# created 2023-01-14
-# last modified 2023-02-15
+# last modified 2023-02-22
 
 # echo doing do-workbook-page.sh $1
 
@@ -58,6 +57,6 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 if test $otherdirarg != "#t" ; then
   echo $ascfile >> $ADOC_INPUT
 
-  echo $htmlfile >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
 fi

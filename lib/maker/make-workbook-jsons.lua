@@ -1,5 +1,7 @@
 #! /usr/bin/env lua
 
+-- last modified 2023-02-22
+
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 natlang = os.getenv('NATLANG')
@@ -60,10 +62,11 @@ function contracts_page_p(dir, file)
   return false
 end
 
+all_courses = dofile(os.getenv 'COURSE_INPUT')
+
 do
-  local i = io.open(os.getenv('COURSE_INPUT'))
   local distr_lessons = 'distribution/' .. natlang .. '/lessons/'
-  for course in i:lines() do
+  for _,course in ipairs(all_courses) do
     local course_dir = distr_courses .. course
     local course_cache = course_dir .. '/.cached/'
 
@@ -94,7 +97,6 @@ do
     ob:write('}\n'); ob:close()
 
   end
-  i:close()
 end
 
 ---------------------------------------------------------------------------
@@ -102,6 +104,7 @@ end
 abysspdf = 'distribution/' .. natlang .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
 
 function make_workbook_json_1(course_dir, tgt)
+  -- print('doing make_workbook_json_1 ' .. course_dir .. ', ' .. tgt)
   local workbook_input = course_dir .. '/.cached/.filelist'
   local workbook_index_file
 
@@ -203,13 +206,11 @@ end
 
 do
   local workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
-  local i = io.open(os.getenv('COURSE_INPUT'))
   --
-  for course in i:lines() do
+  for _,course in ipairs(all_courses) do
     local course_dir = distr_courses .. course
     for _,wbf in ipairs(workbook_inputs) do
       make_workbook_json_1(course_dir, wbf)
     end
   end
-  i:close()
 end

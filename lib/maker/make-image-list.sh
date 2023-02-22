@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# created 2023-01-20
-# last modified 2023-02-21
+# last modified 2023-02-22
 
 cd $TOPDIR/distribution/$NATLANG/lessons
 
@@ -15,7 +14,7 @@ for L in *; do
 
   if ! grep -q "^ *\"$Lbasename/images/" $IMAGE_LIST_FILE; then
     if test -f $L/images/lesson-images.json; then
-      echo { \"$Lbasename\",  \"$L/images/lesson-images.json\" }, >> $IMAGE_LIST_FILE
+      echo "  " { \"$Lbasename\",  \"$L/images/lesson-images.json\" }, >> $IMAGE_LIST_FILE
     fi
   fi
 done

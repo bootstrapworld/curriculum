@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# created 2023-01-14
-# last modified 2023-02-13
+# last modified 2023-02-22
 
 # echo doing do-pathway-independent $1
 
@@ -33,4 +32,4 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 
 echo $ascfile >> $ADOC_INPUT
 
-echo $htmlfile >> $ADOC_POSTPROC_PWYINDEP_INPUT
+echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_PWYINDEP_INPUT
