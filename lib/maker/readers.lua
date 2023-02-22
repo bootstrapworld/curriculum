@@ -32,7 +32,7 @@ function string_trim(s)
   return res
 end
 
-function string_table_insert(tbl, s)
+function table_insert_string(tbl, s)
   for i = 1,#s do
     table.insert(tbl, s[i])
   end
@@ -63,7 +63,7 @@ function read_word(i)
 end
 
 function make_read_group(code, errmsg_file_context)
-  return function (i, directive, scheme_p, multiline_p)
+  local function read_group (i, directive, scheme_p, multiline_p)
     local c = buf_peek_char(i)
     if c ~= '{' then
       print('WARNING: Ill-formed metadata directive in ' .. errmsg_file_context() .. ': @' .. directive .. '\n\n')
@@ -81,10 +81,11 @@ function make_read_group(code, errmsg_file_context)
       if not c then
         -- io.write('Read so far: ', table.concat(r))
         io.write('Read so far: ' )
-        -- error('read_group: Runaway directive ' .. directive)
-        error('read_group: Runaway directive')
+        error('read_group: Runaway directive ' .. directive)
         break
-      elseif in_escape_p then
+      end
+      -- print('c=' .. c .. ' e=' .. tostring(in_escape_p) .. ' s=' .. tostring(in_string_p) .. ' n=' .. nesting)
+      if in_escape_p then
         table.insert(r, c)
         in_space_p = false
         in_escape_p = false
@@ -95,26 +96,24 @@ function make_read_group(code, errmsg_file_context)
       elseif in_string_p then
         table.insert(r, c)
         in_space_p = false
-        in_escape_p = false
-        in_string_p = (c == '"') and false or true
+        if c == '"' then
+          -- print('ending string')
+          in_string_p = false
+        end
       elseif scheme_p and c == '@' then
         local directive = read_word(i)
         local gp = read_group(i, directive, scheme_p, true)
         if directive == 'code' then
           gp = code(gp)
         end
-        string_table_insert(r, gp)
+        table_insert_string(r, gp)
         in_space_p = false
-        in_string_p = false
-        in_escape_p = false
       elseif c == '"' then
+        -- print('starting string')
         table.insert(r, c)
         in_space_p = false
         in_string_p = true
-        in_escape_p = false
       elseif c == ' ' or c == '\t' or c == '\n' or c == '\r' then
-        in_string_p = false
-        in_escape_p = false
         if scheme_p or multiline_p then
           table.insert(r, c)
           in_space_p = false
@@ -128,26 +127,22 @@ function make_read_group(code, errmsg_file_context)
         table.insert(r, c)
         in_space_p = false
         nesting = nesting + 1
-        in_string_p = false
-        in_escape_p = false
       elseif c == '}' then
+        -- print('deduct nesting')
         if nesting == 0 then break end
         table.insert(r, c)
         in_space_p = false
         nesting = nesting - 1
-        in_string_p = false
-        in_escape_p = false
       else
         table.insert(r, c)
         in_space_p = false
-        in_string_p = false
-        in_escape_p = false
       end
     end
     local s = table.concat(r)
     if not multiline_p then s = string_trim(s) end
     return s
   end
+  return read_group
 end
 
 function read_commaed_group(ip, directive, read_group)

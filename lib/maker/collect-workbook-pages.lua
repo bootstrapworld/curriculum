@@ -9,17 +9,6 @@ function touch(f)
   end
 end
 
-function head(f, num, pat)
-  local i = io.open(f)
-  local k = 1
-  local res = false
-  while k <= num do
-    local x = i:read()
-    if x:find(pat) then res = true; break end
-    k = k + 1
-  end
-  return res
-end
 
 workbook_pages_repo_file = 'pages/workbook-pages.txt'
 

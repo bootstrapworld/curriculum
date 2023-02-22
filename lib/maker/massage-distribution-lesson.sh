@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-14
-# last modified 2023-02-20
+# last modified 2023-02-21
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
@@ -45,7 +45,7 @@ for pl in $proglangs; do
   # echo calling collect workbook pgs
   $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
   # echo calling collect exercises
-  echo \(\"$lessonNamePl\" \"$pl\"\) >> $EXERCISE_COLLECTOR_INPUT
+  echo { \"$lessonNamePl\", \"$pl\" }, >> $EXERCISE_COLLECTOR_INPUT
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
