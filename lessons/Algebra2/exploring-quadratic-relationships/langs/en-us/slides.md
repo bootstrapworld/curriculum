@@ -1,13 +1,13 @@
 ---
 {layout="DS Title Slide"}
-# Exploring Linear Relationships
+# Exploring Quadratic Relationships
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
-# State Demographics
+# TBD
 
 
 
@@ -16,7 +16,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Launch"}
-# State Demographics
+# TBD
 
 
 <!--
@@ -25,7 +25,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Investigate"}
-# State Demographics
+# TBD
 
 
 
@@ -34,7 +34,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Investigate"}
-# State Demographics
+# TBD
 
 
 <!--
@@ -42,7 +42,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="SynthesizeR"}
-# State Demographics
+# TBD
 
 
 
@@ -52,7 +52,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Launch"}
-# State Demographics
+# TBD
 
 
 
@@ -61,7 +61,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Launch"}
-# Correlations
+# Quadratic Models
 
 
 <!--
@@ -70,7 +70,38 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Investigate"}
-# Correlations
+# Quadratic Models
+
+
+<!--
+
+-->
+---
+{layout="Investigate"}
+# Quadratic Models
+
+<!--
+
+-->
+---
+{layout="SynthesizeR"}
+# Quadratic Models
+
+
+<!--
+
+-->
+---
+{layout="Launch"}
+# Fitting Nonlinear Models
+
+<!--
+
+-->
+
+---
+{layout="Investigate"}
+# Fitting Nonlinear Models
 
 
 
@@ -79,7 +110,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Investigate"}
-# Correlations
+# Fitting Nonlinear Models
 
 
 <!--
@@ -87,42 +118,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="SynthesizeR"}
-# Correlations
-
-
-
-<!--
-
--->
----
-{layout="Launch"}
-# Making Predictions with Linear Models
-
-
-<!--
-
--->
-
----
-{layout="Investigate"}
-# Making Predictions with Linear Models
-
-
-
-<!--
-
--->
----
-{layout="Investigate"}
-# Making Predictions with Linear Models
-
-
-<!--
-
--->
----
-{layout="SynthesizeR"}
-# Making Predictions with Linear Models
+# Fitting Nonlinear Models
 
 
 
