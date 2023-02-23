@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and notice and wonder about this table and graph.
+Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and Notice and Wonder about this table and graph.
 
 @image{images/notice-wonder.png}{width="700"}
 
