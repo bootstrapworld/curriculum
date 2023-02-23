@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-23
 
 ARGS=
 BOOK=
@@ -42,11 +42,11 @@ while test $# -ne 0; do
     GRAPH=yes
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=yes
-  elif test "$arg" =  --lint -o "$arg" = --verify-links -o "$arg" = -l; then
+  elif test "$arg" = --lint -o "$arg" = --verify-links -o "$arg" = -l; then
     LINKCHECK=yes
   elif test "$arg" = --natlang; then
     NATLANG=$1; shift
-  elif test "$arg" = -bf or "$arg" = -fb; then
+  elif test "$arg" = -bf -o "$arg" = -fb; then
     FORCE=yes; BOOK=yes
   else
     echo build-pathway passed bad arg: $arg "$@"
