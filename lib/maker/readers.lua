@@ -13,11 +13,11 @@ function io.open_buffered(f)
   return o
 end
 
-buffered_input_port_metatable.__index.close = function(self)
+function buffered_input_port_metatable.__index.close (self)
   self.port:close()
 end
 
-buffered_input_port_metatable.__index.read = function(self, arg)
+function buffered_input_port_metatable.__index.read (self, arg)
   -- arg must be 1
   local buf = self.buffer
   if #buf > 0 then return table.remove(buf, 1) end
@@ -35,6 +35,11 @@ end
 function string_trim(s)
   local res = string.gsub(s, '^%s*(.-)%s*$', '%1')
   -- to avoid multiple values
+  return res
+end
+
+function string_trim_quotes(s)
+  local res = string.gsub(s, '^"(.-)"$', '%1')
   return res
 end
 
@@ -72,23 +77,22 @@ function make_read_group(code, errmsg_file_context)
   local function read_group (i, directive, scheme_p, multiline_p)
     local c = buf_peek_char(i)
     if c ~= '{' then
-      print('WARNING: Ill-formed metadata directive in ' .. errmsg_file_context() .. ': @' .. directive .. '\n\n')
+      print('WARNING: Ill-formed metadata directive in ' .. errmsg_file_context() .. ': @' .. directive .. '\n')
       return ''
     end
     --
     c = i:read(1)
     local r = {}
-    local in_space_p = true
+    local in_space_p = true -- if scheme_p or multiline_p, in_space_p is irrelevant
     local nesting = 0
     local in_string_p = false
     local in_escape_p = false
     while true do
       c = i:read(1)
       if not c then
-        -- io.write('Read so far: ', table.concat(r))
-        io.write('Read so far: ' )
-        error('read_group: Runaway directive ' .. directive)
-        break
+        print('read_group: Runaway directive @' .. directive)
+        print('Read so far: ' .. table.concat(r))
+        error 'crash and burn'; break
       end
       -- print('c=' .. c .. ' e=' .. tostring(in_escape_p) .. ' s=' .. tostring(in_string_p) .. ' n=' .. nesting)
       if in_escape_p then
@@ -108,7 +112,7 @@ function make_read_group(code, errmsg_file_context)
         end
       elseif scheme_p and c == '@' then
         local directive = read_word(i)
-        local gp = read_group(i, directive, scheme_p, true)
+        local gp = read_group(i, directive, scheme_p)
         if directive == 'code' then
           gp = code(gp)
         end
@@ -122,13 +126,10 @@ function make_read_group(code, errmsg_file_context)
       elseif c == ' ' or c == '\t' or c == '\n' or c == '\r' then
         if scheme_p or multiline_p then
           table.insert(r, c)
-          in_space_p = false
-        else
-          if not in_space_p then
-            table.insert(r, ' ')
-          end
-          in_space_p = true
+        elseif not in_space_p then
+          table.insert(r, ' ')
         end
+        in_space_p = true
       elseif c == '{' then
         table.insert(r, c)
         in_space_p = false
@@ -163,16 +164,13 @@ function read_commaed_group(ip, directive, read_group)
     local in_escape_p = false
     while true do
       if j > n then
-        table.insert(r, string_trim(g:sub(i,n)))
+        table.insert(r, g:sub(i,n))
         i = j
         break
       end
       local c = g:sub(j,j)
-      if not c then
-        -- deadcode?
-        error('read_commaed_group: Runaway directive ' .. directive)
-        break
-      elseif in_escape_p then
+      -- assert(c, 'read_commaed_group: shouldn\'t happen')
+      if in_escape_p then
         in_escape_p = false
         j = j + 1
       elseif c == '\\' then
@@ -185,13 +183,16 @@ function read_commaed_group(ip, directive, read_group)
         in_string_p = true
         j = j + 1
       elseif c == ',' then
-        table.insert(r, string_trim(g:sub(i, j-1)))
+        table.insert(r, g:sub(i, j-1))
         i = j + 1
         break
       else
         j = j + 1
       end
     end
+  end
+  for i,s in ipairs(r) do
+    r[i] = string_trim_quotes(string_trim(s))
   end
   return r
 end
