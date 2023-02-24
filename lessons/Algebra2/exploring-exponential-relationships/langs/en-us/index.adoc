@@ -1,10 +1,10 @@
 = Exploring Exponential Relationships
 
-@description{Students investigate exponential relationships in demographic data about TBD, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
+@description{Students investigate exponential relationships in demographic data about world countries, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
 
-@lesson-prereqs{exploring-linear-relationships, advanced-displays}
+@lesson-prereqs{exploring-linear-relationships, lookups}
 
-@keywords{}
+@keywords{exponents, logarithm, inverse}
 
 [@lesson-intro-table]
 |===
@@ -12,9 +12,8 @@
 | Lesson Goals
 | Students will be able to...
 
-* Read and interpret real-world data, presented in a scatter plot
-* Describe correlations as Strong, Moderate, or Weak
-* Model linear relationships using quadratic functions
+* Model logarithmic and exponential relationships using functions
+* Use inverse functions to transform logarithmic and exponential functions
 
 | Student-facing Lesson Goals
 |
@@ -28,60 +27,85 @@
 
 | Preparation
 |
-* All students should log into @starter-file{program-list} and, open the @online-exercise{TBD, TBD Starter File}.
+* All students should log into @starter-file{program-list} and, open the @online-exercise{https://code.pyret.org/editor#share=1StX6mmWMYPQOpH8ab1WiAlvPYeMlMEAD, Countries of the World Starter File}.
 
 | Key Points For The Facilitator
 |
 * TBD
 |===
 
-== TBD @duration{15 minutes}
+== Exploring Countries  @duration{20 minutes}
 
 === Overview
-Students explore the @online-exercise{TBD, TBD Starter File}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
+Students explore the @online-exercise{https://code.pyret.org/editor#share=1StX6mmWMYPQOpH8ab1WiAlvPYeMlMEAD, Countries of the World Starter File}, and find a relationship between per-capita income and median life expectancy. They also learn how to build a new column for a table in Pyret.
 
 === Launch
 
 --
 @right{@image{images/questions.png, 250}}
 
-- TBD
-- TBD
-- TBD
+- Do people live longer in countries with Universal Healthcare?
+- In which countries do people live the longest?
+- Do people in wealthier countries live longer?
 --
 
 === Investigate
 
 [.lesson-instruction]
-- @online-exercise{TBD, TBD Starter File}
+- Open the @online-exercise{https://code.pyret.org/editor#share=1StX6mmWMYPQOpH8ab1WiAlvPYeMlMEAD, Countries of the World Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete @printable-exercise{exploring-TBD.adoc}.
+- Working in pairs or small groups, complete @printable-exercise{exploring-countries.adoc}.
 
+This file has code that you've never seen before!
+
+- It defines a new function called `pc-income`, which divides a country's GDP by its population to derive the per-capita income. It also rounds the resulting decimal to just 2 places.
+- It uses a new function called `build-column` to **define a new Table** called `countries2`. This function walks over each Row in the Countries Table, applying our `pc-income` function and writing the result in a new column called `income`.
 
 === Synthesize
 
 - Have students discuss their findings. What did they Notice? What did they Wonder?
-- Invite students to share their scatter-plots with one another (copying and pasting scatter plot displays into a shared document, for example, and then labeling those displays).
-- Did they find any correlations in the dataset?
-- What was their @vocab{form}? Were any of them linear? Were any of them non-linear?
-- Were any correlations strong? Weak?
+- Invite students to share their displays with one another.
+- Does it _look_ like there are any correlations in the dataset?
+- Are they linear or Non-linear? Are they Strong, Moderate or Weak?
+- What is the best model they could come up with?
 
+There are two strategies we can use to come up with a better model, and we'll explore both in this lesson.
 
-== Exponential Models
+== Fitting Logarithmic Models @duration{20 minutes}
 
 === Overview
-Students discover the limitations of linear models, and explore the behavior of quadratic functions.
+Students try to fit a logarithmic relationship with linear and quadratic models, discovering their limitations with this shape. They fit logarithmic models to the data, then try transforming that data using log functions.
 
 === Launch
 
+@center{@image{images/wealth-v-life-linear.png}}
+
+There definitely appears to be a relationship here, but it's not linear. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `income` increases to the right. What functions behave like this?
 
 === Investigate
 
+The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
+
+@center{   @math{f(x) = b \times log(x) + c}    }
+
+We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
+
+Pyret has a few functions that may come in handy here:
+
+- @show{(contract "num-log" '("Number") "Number" "Consumes a number, and produces its natural log")}
+- @show{(contract "num-log-base" '("Number" "Number") "Number" "Consumes a number and a base, and produces the log of that number with the base")}
+- @show{(contract "num-expt" '("Number" "Number") "Number" "Consumes a number and a power, and produces that number raised to the power")}
+
+[.lesson-instruction]
+Complete @printable-exercise{fitting-log-models.adoc}
 
 === Synthesize
 
+- What was the best @math{R^2} value you found?
+- What points did you use?
+- What, if any, other strategies did you use to come up with your model?
 
-== Fitting Exponential Models @duration{25 minutes}
+== Using Log Transformations @duration{25 minutes}
 
 === Overview
 
@@ -89,10 +113,57 @@ Students learn to transform the data into a linear shape, building a new column 
 
 === Launch
 
+Deriving a logarithmic model from only two points is problematic. How do we know that those two points are representative of the trend? If we picked a wealthy country that is at war, we'd find an artificially low life expectancy. A model based on that point probably not fit the rest of the points very well!
+
+This is the same problem we ran into with linear models in our state demographics data, where a model built from any two points would only be as good as those points were representative.
+
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model!
+
+We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model. Unfortunately, `lr-plot` only finds linear models, and we need to find a logarithmic one!
 
 === Investigate
 
+Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squished in any way we want. Since the values on the y-axis (`median-lifespan`) appear grow logarithmically, we could transform the x-axis (`income`) to grow logarithmically as well. With both x- and y-valus growing logarithmically, they would appear grow at a constant rate __relative to one another__.
 
+[.lesson-instruction]
+How can we transform this plot so that the `income` column is placed on a logarithmic scale?
+
+You've already seen one kind of transformation in this file, where the `gdp` column was transformed to be the per-capita income. That transformation was done in two steps:
+
+. Define a helper function, which consumes a Row and produces our new value
+. Use the `build-column` function to add a new column to our Table, applying the helper to each Row in the Table
+
+[.lesson-instruction]
+Complete @printable-exercise{transforming-income.adoc}
+
+@right{@image{images/wealth-v-life-transformed-linear.png, 550}} After transforming the `income` column to `log-income`, a scatter plot shows a more linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `5.169` and a y-intercept of `24.264`.
+
+@clear
+
+Our linear model (in both function and Pyret notation) is:
+
+- @math{f(x) = 5.169x + 24.264}
+- @show{(code '(define (f x) (+ (* 5.169 x) 24.264)))}
+
+At each point in our linear model, @math{f} is the _predicted median lifespan_, and @math{x} is the _log of per-capita income_. But we want is for @math{x} to represent the un-transformed value, simply using _per-capita income_ as-is.
+
+We can use this linear model with our original dataset, by making sure to transform each x-value before passing it to the linear function:
+
+- @math{g(x) = f(log(x))}
+- @show{(code '(define (g x) (f (log x))))}
+
+Of course, we could also just compose these functions in one, replacing @math{x} in our linear model with @math{log(x)}:
+
+- @math{f(x) = 5.169 \times log(x) + 24.264}
+- @show{(code '(define (f x) (+ (* 5.169 (log x)) 24.264)))}
+
+The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
+
+@center{@image{images/wealth-v-life-log.png}}
 
 === Synthesize
 
+- Why is the @math{R^2} value for our logarithmic model the same as the value for our linear model after transforming?
+- How do you interpret this model?
+- Why do you think the relationship between wealth is logarithmic?
+- Are there other relationships you can think of, which might be logarithmic?

@@ -1,0 +1,61 @@
+= Transforming Data
+++++
+<style>
+/* Hide DR elements we want hidden */
+#content .recipe_purpose_statement, table.recipe_title {
+ 	display: none !important;
+}
+/* Make the instructions more prominent, to take the place of headers */
+#content .recipe_instructions * {
+	font-style: italic;
+    font-size: 1rem;
+    font-weight: bold;
+    background: lightgray;
+}
+.pyret .recipe_name {
+    text-align: center;
+}
+
+.fitbruby { padding-top: 1.25rem; }
+
+/* hide empty preamble section*/
+</style>
+++++
+
+For this page, you'll need to the @online-exercise{https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1, State Demographics Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+@design-recipe-exercise{ "log-pc-income"
+  "Define a function called `log-pc-income`, which consumes a Row from the Countries Dataset and produces the natural log of the per-capita income for that country. (HINT: use `afghanistan` and `albania` for your examples!)"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #t
+#:range "Number"
+#:show-range? #t
+#:purpose "Consimes a Row, take the log of the income column"
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '((afghanistan   7.596146166291104)
+				 (albania 9.372934448650337))
+#:show-examples #f
+#:param-list '(r)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body "num-log(r[\"income\"])"
+#:show-body? #f
+#:grid-lines? #t
+}
+
+
+@n We want to define a new table called `countries3`, which adds a new column to `countries2` called "log-income". Write the code to do this by filling in the blanks below:
+
+@show{(code '(define countries3 (build-column (?ANS countries2) "log-income" (?ANS log-pc-income))))}
+
+**Once you've typed this into Pyret, click "Run" and evaluate `countries3` in the Interactions Area. Scroll all the way to the right to see your new column!**
+
+@n Make a scatter plot for `countries3`, showing the relationship between `log-income` and `median-lifespan`. Is the shape of this relationship linear? Non-linear? @fitb{}{}
+
+@n Use Pyret's `lr-plot` function to derive the best-possible linear model. Write the resulting formula below:
+
+@fitb{}{@math{f(x) =} @ifsoln{@math{5.169x + 24.264}}}
