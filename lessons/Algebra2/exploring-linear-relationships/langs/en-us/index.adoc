@@ -174,7 +174,7 @@ If you could draw linear model through the cloud of points in your scatter plot,
 [.lesson-instruction]
 Complete @printable-exercise{model-college-v-income.adoc}
 
-Just like `image-scatter-plot`, it consumes columns for our xs and yes, __as well as a function__. But instead of using that function to draw pictures for each point, it uses the function as a model and calculates how well it fits the data.
+The `fit model` function consumes columns for our xs and yes, __as well as a function__. It draws a scatter plot and then displays the function on top of it. The `fit-model` also calculates __how well the function models the data__.
 
 Have students discuss their answers:
 
@@ -198,6 +198,9 @@ But what if we drew a line that wasn't even in the cloud at all? Try changing yo
 
 Modeling a correlation that's __just wrong__ is worse than modeling no correlation at all! For particularly wrong models, @math{R^2} can actually be *negative*. In other words, the model's explanation for variation is _wrong_.
 
+[.lesson-instruction]
+Pyret also has a function that will calculate the optimal linear model, called `lr-plot`. Try using this in place of `scatter-plot`, and see how close your model came to the optimal one!
+
 When we interpret a model, we try to make sense of the slope, the axes, the @math{R^2} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a $5613 increase in median household income. Based on the @math{R^2} value of -15.63, this model isn't very good.__
 
 Have students fix or fill in their answers to the last question, so they can use this as a reference later!
@@ -210,15 +213,9 @@ Have students fix or fill in their answers to the last question, so they can use
 |===
 
 |
-@span{.title}{Why not just use LR-plot?}
+@span{.title}{More `lr-plot` material}
 
-Linear Regression is the algorithm which calculates the best possible linear model for a dataset. Your students will likely find the `lr-plot` function, and try using it as soon as the lesson begins!
-
-For those students, challenge them to find _the two states that best approximate the model_ produced by lr-plot.
-
-Because Linear Regression is not part of In Algebra 2, we've intentionally left it out of this lesson in order to highlight the role of _model building_ in linear relationships. This puts the focus squarely on core concepts like Slope and y-Intercept, and sets students up to explore more exotic coefficients later, in datasets with quadratic and exponential relationships!
-
-If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use. Deeper discussion of @math{R^2} and leats-squares regression may be appropriate for older students, or in a dedicated statistics class.
+If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. Deeper discussion of @math{R^2} and least-squares regression may be appropriate for older students, or in a dedicated statistics class.
 |===
 
 === Synthesize
