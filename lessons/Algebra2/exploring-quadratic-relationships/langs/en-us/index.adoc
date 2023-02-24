@@ -1,6 +1,6 @@
 = Exploring Quadratic Relationships
 
-@description{Students investigate linear relationships in demographic data about TBD, using an inquiry-based model of sense-making, hypothesizing, modeling and testing. They are introduced to table transformations and inverse functions, which are used to fit linear models onto nonlinear data.}
+@description{Students investigate linear relationships in demographic data about Fuel Efficiency, using an inquiry-based model of sense-making, hypothesizing, modeling and testing. They are introduced to table transformations and inverse functions, which are used to fit linear models onto nonlinear data.}
 
 @lesson-prereqs{exploring-linear-relationships, advanced-displays}
 
@@ -28,58 +28,86 @@
 
 | Preparation
 |
-* All students should log into @starter-file{program-list} and, open the @online-exercise{TBD, TBD Starter File}.
+* All students should log into @online-exercise{program-list} and, open the @online-exercise{https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy, Fuel Efficiency Starter File}.
 
 | Key Points For The Facilitator
 |
 * TBD
 |===
 
-== TBD @duration{15 minutes}
+== Fuel Efficiency @duration{10 minutes}
 
 === Overview
-Students explore the @online-exercise{TBD, TBD Starter File}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
+Students explore the @online-exercise{https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy, Fuel Efficiency Starter File}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
 
 === Launch
 
 --
 @right{@image{images/questions.png, 250}}
 
-- TBD
-- TBD
-- TBD
+- Are some cars more fuel efficient than others?
+- If car A is more fuel efficient than car B, does that mean that it _always_ gets better mileage than be?
+- Gas is expensive! Are there speeds that are more efficient than others?
 --
 
 === Investigate
 
 [.lesson-instruction]
-- @online-exercise{TBD, TBD Starter File}
+- Open the @online-exercise{https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy, Fuel Efficiency Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete @printable-exercise{exploring-TBD.adoc}.
+- Working in pairs or small groups, complete @printable-exercise{exploring-fuel-efficiency.adoc}.
 
+Review student answers:
+
+- Did you see a pattern or relationship in this dataset?
+- If so, what is its @vocab{form}? Is it linear? Non-linear?
+- Is the correlation strong? Weak?
+- What linear models did you try to fit? What kind of @math{R^2} did you get?
+
+By now you've tried to fit quite a few linear models to this data, and we're not getting anywhere!
+
+@right{@image{images/fuel-efficiency-linear1.png}} We can build linear models that fit the "increasing" half of the data...
+
+@right{@image{images/fuel-efficiency-linear2.png}} We can build linear models that fit the "decreasing" half of the data...
+
+@right{@image{images/fuel-efficiency-linear3.png}} We can build linear models that try to split the difference...
+
+...but all of them are so far away from so many points, and our @math{R^2} is pretty dismal.
 
 === Synthesize
 
-- Have students discuss their findings. What did they Notice? What did they Wonder?
-- Invite students to share their scatter-plots with one another (copying and pasting scatter plot displays into a shared document, for example, and then labeling those displays).
-- Did they find any correlations in the dataset?
-- What was their @vocab{form}? Were any of them linear? Were any of them non-linear?
-- Were any correlations strong? Weak?
+- Why aren't linear models working for us?
+- What else could we try?
 
-
-== Quadratic Models
+== Quadratic Models @duration{20 minutes}
 
 === Overview
-Students discover the limitations of linear models, and explore the behavior of quadratic functions.
+
+Students are introduced to quadratic models, and extend the sampling techniques from the linear models lesson into quadratic relationships.
 
 === Launch
 
+Linear models are great for fitting simple relationships. But the real world isn't so simple, and more often than not linear models are just too primitive to handle that complexity.
+
+Relationships that look like _arches_ (they rise and fall, or fall and rise) are called @vocab{quadratic relationships}. In a quadratic model, we have up to _three_ terms that can be played with:
+
+- *Constant term* - just as in linear models, this is the value when @math{x} is zero (e.g. - the y-intercept of the graph).
+- *Linear term* - this describes the amount of variation in @math{y} that is directly proportional to @math{x} (e.g. - the slope, or the amount computed by multiplying a coefficient by @math{x}).
+- *Quadratic term* - this describes the amount of variation in @math{y} that is directly proportional to @math{x^2} (e.g. - the amount computed by multiplying a coefficient by @math{x^2}).
+
+Having three terms to play with means we can build in a lot more complexity into our model!
 
 === Investigate
 
+[.lesson-instruction]
+Complete @printable-exercise{model-speed-v-mpg.adoc}
 
 === Synthesize
 
+* What was the highest @math{R^2} you were able to get?
+* What model was that?
+* Could a quadratic model be used to fit a linear relationship?
+** YES! If the coefficient of the quadratic term is zero, it's equivalent to a linear model.
 
 == Fitting Nonlinear Models @duration{25 minutes}
 
