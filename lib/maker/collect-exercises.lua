@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-21
+-- last modified 2023-02-24
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -19,10 +19,10 @@ end)
 function read_first_arg(i, directive)
   local c = buf_peek_char(i)
   if c == '{' then
-    buf_read_char(i)
+    i:read(1)
     local r = {}
     while true do
-      c = buf_read_char(i)
+      c = i:read(1)
       if not c then break end
       if c == ',' or c == '}' then break end
       table.insert(r, c)
@@ -38,7 +38,7 @@ function scan_exercise_directives(i, proglang)
   local workbook_exercise_files = {}
   local handout_exercise_files = {}
   while true do
-    local c = buf_read_char(i)
+    local c = i:read(1)
     if not c then break end
     if c == '@' then
       local directive = read_word(i)
@@ -97,9 +97,9 @@ do
     local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
     local lesson_plan_file = lesson_dir .. 'index.adoc'
     --
-    local i = open_buffered_input_port(lesson_plan_file)
+    local i = io.open_buffered(lesson_plan_file)
     local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang)
-    close_buffered_input_port(i)
+    i:close()
     --
     local o = io.open(opt_exercise_list_file, 'w+')
     for _,f in ipairs(opt_exercise_files) do

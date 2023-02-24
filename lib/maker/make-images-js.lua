@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-21
+-- last modified 2023-02-24
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'readers.lua')
 
@@ -10,7 +10,7 @@ end)
 
 function expand_some_directives(i, o)
   while true do
-    local c = buf_read_char(i)
+    local c = i:read(1)
     if not c then break end
     if c == '@' then
       local directive = read_word(i)
@@ -39,9 +39,9 @@ do
     local lesson_basename = lsn_img[1]
     o:write('"' .. lesson_basename .. '": ')
     local lesson_image_file = lsn_img[2]
-    local bi = open_buffered_input_port(lesson_image_file)
+    local bi = io.open_buffered(lesson_image_file)
     expand_some_directives(bi, o)
-    close_buffered_input_port(bi)
+    bi:close()
   end
   o:write('}\n')
 end

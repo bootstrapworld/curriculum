@@ -1,21 +1,27 @@
--- last modified 2023-02-21
+-- last modified 2023-02-24
 
-function open_buffered_input_port(f)
-  local bp = io.open(f)
-  return {
-    port = bp,
+buffered_input_port_metatable = {
+  __index = {}
+}
+
+function io.open_buffered(f)
+  local o = {
+    port = io.open(f),
     buffer = {}
   }
+  setmetatable(o, buffered_input_port_metatable)
+  return o
 end
 
-function close_buffered_input_port(bp)
-  bp.port:close()
+buffered_input_port_metatable.__index.close = function(self)
+  self.port:close()
 end
 
-function buf_read_char(bp)
-  local buf = bp.buffer
+buffered_input_port_metatable.__index.read = function(self, arg)
+  -- arg must be 1
+  local buf = self.buffer
   if #buf > 0 then return table.remove(buf, 1) end
-  return bp.port:read(1)
+  return self.port:read(1)
 end
 
 function buf_peek_char(bp)
@@ -47,12 +53,12 @@ function read_word(i)
   while true do
     local c = buf_peek_char(i)
     if c:match('^%a') or c == '-' then
-      c = buf_read_char(i)
+      c = i:read(1)
       table.insert(w, c)
     else
       if #w == 0 then
         if c == '@' then
-          buf_read_char(i)
+          i:read(1)
           table.insert(w, c)
         end
       end
@@ -70,14 +76,14 @@ function make_read_group(code, errmsg_file_context)
       return ''
     end
     --
-    c = buf_read_char(i)
+    c = i:read(1)
     local r = {}
     local in_space_p = true
     local nesting = 0
     local in_string_p = false
     local in_escape_p = false
     while true do
-      c = buf_read_char(i)
+      c = i:read(1)
       if not c then
         -- io.write('Read so far: ', table.concat(r))
         io.write('Read so far: ' )
