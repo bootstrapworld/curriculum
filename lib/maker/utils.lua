@@ -1,6 +1,8 @@
 -- last modified 2023-02-25
 
 function memberp(elt, tbl)
+  -- true iff tbl contains elt
+  -- tbl is not required to be pure array
   for _,val in pairs(tbl) do
     if elt == val then return true end
   end
@@ -8,14 +10,16 @@ function memberp(elt, tbl)
 end
 
 function file_exists_p(f)
-  -- print('doing file_exists_p', f)
   local h = io.open(f)
+  -- open'ing a nonexistent file returns nil
   if h then h:close(); return true
   else return false
   end
 end
 
 function copy_file_to_port(f, o)
+  -- dump contents of file f into output port o
+  -- not an error if f doesn't exist
   if not file_exists_p(f) then return end
   local i = io.open(f)
   for line in i:lines() do
@@ -25,6 +29,7 @@ function copy_file_to_port(f, o)
 end
 
 function head(f, num, pat)
+  -- true if file f contains the pattern pat within its first num lines
   local i = io.open(f)
   if not i then return false end
   local k = 1
@@ -40,6 +45,8 @@ function head(f, num, pat)
 end
 
 function string_split(s, c)
+  -- return table of substrings of string s separated by string c
+  -- note: c is not treated verbatim, not as pattern
   local r = {}
   if s then
     local start = 1
