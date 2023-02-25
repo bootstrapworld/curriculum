@@ -46,7 +46,7 @@ end
 
 function string_split(s, c)
   -- return table of substrings of string s separated by string c
-  -- note: c is not treated verbatim, not as pattern
+  -- note: c is treated verbatim, not as pattern
   local r = {}
   if s then
     local start = 1

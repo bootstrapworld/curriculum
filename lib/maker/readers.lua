@@ -1,10 +1,12 @@
--- last modified 2023-02-24
+-- last modified 2023-02-25
 
+-- metatable for buffered input ports
 buffered_input_port_metatable = {
   __index = {}
 }
 
 function io.open_buffered(f)
+  -- creates a buffered input port
   local o = {
     port = io.open(f),
     buffer = {}
@@ -14,17 +16,20 @@ function io.open_buffered(f)
 end
 
 function buffered_input_port_metatable.__index.close (self)
+  -- :close() works on buffered input ports
   self.port:close()
 end
 
 function buffered_input_port_metatable.__index.read (self, arg)
-  -- arg must be 1
+  -- :read(1) works on buffered input ports
+  -- arg is assumed to be 1. We don't need anything else
   local buf = self.buffer
   if #buf > 0 then return table.remove(buf, 1) end
   return self.port:read(1)
 end
 
 function buf_peek_char(bp)
+  -- find next character in port without actually reading it
   local buf = bp.buffer
   if #buf > 0 then return buf[1] end
   local c = bp.port:read(1)
@@ -33,27 +38,30 @@ function buf_peek_char(bp)
 end
 
 function string_trim(s)
-  local res = string.gsub(s, '^%s*(.-)%s*$', '%1')
-  -- to avoid multiple values
-  return res
+  -- remove flanking blanks of string s
+  return (string.gsub(s, '^%s*(.-)%s*$', '%1'))
 end
 
 function string_trim_quotes(s)
-  local res = string.gsub(s, '^"(.-)"$', '%1')
-  return res
+  -- if string s is in double quotes, remove them
+  return (string.gsub(s, '^"(.-)"$', '%1'))
 end
 
 function table_insert_string(tbl, s)
+  -- add string s to end of table tbl
   for i = 1,#s do
     table.insert(tbl, s[i])
   end
 end
 
 function identity(x)
+  -- d'oh
   return x
 end
 
 function read_word(i)
+  -- where word is made up of alphas and hyphens only
+  -- this is enough to match our preproc directives
   local w = {}
   while true do
     local c = buf_peek_char(i)
@@ -75,6 +83,7 @@ end
 
 function make_read_group(code, errmsg_file_context)
   local function read_group (i, directive, scheme_p, multiline_p)
+    -- reads braced input, without the braces
     local c = buf_peek_char(i)
     if c ~= '{' then
       print('WARNING: Ill-formed metadata directive in ' .. errmsg_file_context() .. ': @' .. directive .. '\n')
@@ -153,6 +162,7 @@ function make_read_group(code, errmsg_file_context)
 end
 
 function read_commaed_group(ip, directive, read_group)
+  -- reads a braced group, returning its comma-separated constituents as a table
   local g = read_group(ip, directive)
   local r = {}
   local i = 1
