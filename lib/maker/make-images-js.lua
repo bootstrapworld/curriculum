@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-24
+-- last modified 2023-02-25
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'readers.lua')
 
@@ -42,6 +42,7 @@ do
     local bi = io.open_buffered(lesson_image_file)
     expand_some_directives(bi, o)
     bi:close()
+    o:write(',\n')
   end
   o:write('}\n')
 end

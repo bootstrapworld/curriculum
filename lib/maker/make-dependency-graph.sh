@@ -1,14 +1,11 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-09
+# last modified 2023-02-25
 
 # echo doing builddependencyjson "$@"
 cd $TOPDIR/distribution/$NATLANG/lessons
-export DISTROOTDIR=../
-GRAPHFILE=$TOPDIR/distribution/$NATLANG/dependency-graph.js
-echo "var graph = {" > $GRAPHFILE
-first=1
+echo "var graph = {" > $GRAPH_FILE
 for L in *; do
   # echo try proglangversion $L
   # if ! proglangversion $L; then
@@ -27,12 +24,7 @@ for L in *; do
   # the following sanity checks shdnt be needed
   #test -d "$L" || continue
   #if test "$L" = lib; then continue; fi
-  if ! grep -q "^ *\"$Lbasename\"" $GRAPHFILE; then
-    if test $first; then
-      first=
-    else
-      echo "," >> $GRAPHFILE
-    fi
+  if ! grep -q "^ *\"$Lbasename\"" $GRAPH_FILE; then
     titletxt=
     if test -f $L/.cached/.index.titletxt; then
       titletxt=$(cat $L/.cached/.index.titletxt|$SED -e 's/"/\\"/g')
@@ -53,36 +45,30 @@ for L in *; do
     if test -f $L/.cached/.index-primitives.txt.kp; then
       primstxt=$(cat $L/.cached/.index-primitives.txt.kp|$SED -e ':a' -e 'N' -e '$!ba' -e 's/\n/\", \"/g'|$SED -e 's/.*/\"\0\"/')
     fi
-    echo "  \"$Lbasename\" : {" >> $GRAPHFILE
-    echo "    title: \"$titletxt\"," >> $GRAPHFILE
-    echo "    description: \"$desctxt\"," >> $GRAPHFILE
-    echo "    pages: [$pagestxt]," >> $GRAPHFILE
-    echo "    exercisePages: [$exerpagestxt]," >> $GRAPHFILE
-    echo "    primitives: [$primstxt]," >> $GRAPHFILE
+    echo "  \"$Lbasename\" : {" >> $GRAPH_FILE
+    echo "    title: \"$titletxt\"," >> $GRAPH_FILE
+    echo "    description: \"$desctxt\"," >> $GRAPH_FILE
+    echo "    pages: [$pagestxt]," >> $GRAPH_FILE
+    echo "    exercisePages: [$exerpagestxt]," >> $GRAPH_FILE
+    echo "    primitives: [$primstxt]," >> $GRAPH_FILE
     if test -f $L/.cached/.lesson-keywords.txt.kp; then
-      cat $L/.cached/.lesson-keywords.txt.kp >> $GRAPHFILE
+      cat $L/.cached/.lesson-keywords.txt.kp >> $GRAPH_FILE
     fi
-    echo -n "    prerequisites: [" >> $GRAPHFILE
-    pfirst=1
+    echo -n "    prerequisites: [" >> $GRAPH_FILE
     if test -f $L/.cached/.lesson-prereq.txt.kp; then
       for p in $(cat $L/.cached/.lesson-prereq.txt.kp); do
-        if test $pfirst; then
-          pfirst=
-        else
-          echo -n ", " >> $GRAPHFILE
-        fi
-        echo -n "\"$p\"" >> $GRAPHFILE
+        echo -n "\"$p\", " >> $GRAPH_FILE
       done
     fi
-    echo "]," >> $GRAPHFILE
+    echo "]," >> $GRAPH_FILE
     if test -f $L/.cached/.lesson-standards-w-prose.txt.kp; then
-      cat $L/.cached/.lesson-standards-w-prose.txt.kp >> $GRAPHFILE
+      cat $L/.cached/.lesson-standards-w-prose.txt.kp >> $GRAPH_FILE
     fi
-    echo "  }" >> $GRAPHFILE
+    echo "  }," >> $GRAPH_FILE
   fi
 done
-echo "}" >> $GRAPHFILE
+echo "}" >> $GRAPH_FILE
 # convert to UTF-16 to handle curlyquotes
-iconv -f UTF-8 -t UTF-16 $GRAPHFILE > tmp.txt
-mv -f tmp.txt $GRAPHFILE
+iconv -f UTF-8 -t UTF-16 $GRAPH_FILE > tmp.txt
+mv -f tmp.txt $GRAPH_FILE
 #rm tmp.txt
