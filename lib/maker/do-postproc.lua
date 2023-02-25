@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-22
+-- last modified 2023-02-25
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -14,22 +14,6 @@ narrativeaux_batchf =  os.getenv('ADOC_POSTPROC_NARRATIVEAUX_INPUT')
 resources_batchf =  os.getenv('ADOC_POSTPROC_RESOURCES_INPUT')
 
 analytics_file = os.getenv('TOPDIR') .. '/lib/analytics.txt'
-
-
-function with_open_input_file(f, fn)
-  local i = io.open(f, 'r')
-  local result = fn(i)
-  i:close()
-  return result
-end
-
-function copy_file_to_stream(fi, o)
-  with_open_input_file(fi, function(i)
-    for line in i:lines() do
-      o:write(line, '\n')
-    end
-  end)
-end
 
 function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
@@ -258,12 +242,12 @@ function postproc(fhtml_cached, tipe)
     --
     if add_comment_p then
       add_comment_p = false
-      copy_file_to_stream(f_comment_file, o)
+      copy_file_to_port(f_comment_file, o)
     end
     --
     if add_analytics_p then
       add_analytics_p = false
-      copy_file_to_stream(analytics_file, o)
+      copy_file_to_port(analytics_file, o)
     end
     --
     if add_body_id_p then

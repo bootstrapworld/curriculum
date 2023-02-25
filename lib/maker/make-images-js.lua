@@ -35,11 +35,11 @@ end
 
 do
   local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
-  local i = io.open(os.getenv 'LESSONS_LIST_FILE')
+  local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
   local image_js_file = os.getenv('IMAGE_JS_FILE')
   local o = io.open(image_js_file, 'w+')
   o:write('var images = {\n')
-  for lesson in i:lines() do
+  for _,lesson in ipairs(lessons) do
     local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
     if not file_exists_p(lesson_image_file) then goto continue end
     -- print('lesson_image_file is ' .. lesson_image_file)

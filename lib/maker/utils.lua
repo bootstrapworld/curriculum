@@ -1,4 +1,4 @@
--- last modified 2023-02-21
+-- last modified 2023-02-25
 
 function memberp(elt, tbl)
   for _,val in pairs(tbl) do
@@ -13,6 +13,15 @@ function file_exists_p(f)
   if h then h:close(); return true
   else return false
   end
+end
+
+function copy_file_to_port(f, o)
+  if not file_exists_p(f) then return end
+  local i = io.open(f)
+  for line in i:lines() do
+    o:write(line, '\n')
+  end
+  i:close()
 end
 
 function head(f, num, pat)
