@@ -62,7 +62,7 @@ function contracts_page_p(dir, file)
   return false
 end
 
-all_courses = dofile(os.getenv 'COURSE_INPUT')
+all_courses = dofile(os.getenv 'COURSES_LIST_FILE')
 
 do
   local distr_lessons = 'distribution/' .. natlang .. '/lessons/'

@@ -1,4 +1,4 @@
-# last modified 2023-02-22
+# last modified 2023-02-25
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
@@ -37,9 +37,9 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		$(EXERCISE_COLLECTOR_INPUT) $(COURSE_INPUT)
+		$(EXERCISE_COLLECTOR_INPUT) $(COURSES_LIST_FILE)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@echo 'return {' > $(COURSE_INPUT)
+	@echo 'return {' > $(COURSES_LIST_FILE)
 	@echo 'return {' > $(EXERCISE_COLLECTOR_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
@@ -145,5 +145,6 @@ distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
 
 courses-and-lessons: copy-lessons copy-pathways
 	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
-	@echo '}' >> $(COURSE_INPUT)
+	@echo '}' >> $(COURSES_LIST_FILE)
+	@$(MAKE_DIR)collect-lessons.sh
 	@$(MAKE_DIR)collect-exercises.lua

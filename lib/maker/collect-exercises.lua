@@ -1,10 +1,10 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-24
+-- last modified 2023-02-25
 
-dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
+dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'readers.lua')
+dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
 
 local natlang = os.getenv 'NATLANG'
 

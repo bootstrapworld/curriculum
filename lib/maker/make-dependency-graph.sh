@@ -6,7 +6,7 @@
 # echo doing builddependencyjson "$@"
 cd $TOPDIR/distribution/$NATLANG/lessons
 echo "var graph = {" > $GRAPH_FILE
-for L in *; do
+for L in $(cat $LESSONS_LIST_FILE); do
   # echo try proglangversion $L
   # if ! proglangversion $L; then
   #   # echo discarding $L
@@ -15,9 +15,9 @@ for L in *; do
   # echo L is $L
   Lbasename=$L
 
-  if test $(echo $L|grep "\-wescheme"); then
-    Lbasename=${L%-wescheme}
-  fi
+  # if test $(echo $L|grep "\-wescheme"); then
+  #   Lbasename=${L%-wescheme}
+  # fi
 
   # echo Lbasename is $Lbasename
 
