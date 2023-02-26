@@ -47,7 +47,7 @@ create `solution-pages/` alongside any `pages/` subdirs, and to
 move any shadowing files specifically meant for the prevailing
 proglang to overwrite files that are generic or meant for other
 proglangs. The massaging is done by two external scripts:
-`massage-distribution-lesson` and `massage-course`. Both these
+`massage-distribution-lesson.sh` and `massage-course.sh`. Both these
 scripts make use of a program `collect-workbook-pages.lua` to
 identify within each lesson (or lesson-like entity like
 front-matter and back-matter in a course) all the pages that are
@@ -116,16 +116,16 @@ order):
    internal and external links used in the documents really do
    exist.
 
-4. An external script `make-image-list.sh` collects all the image
+4. An external script `make-images-js.lua` collects all the image
    information from the lessons into a global image glossary at
    `en-us/images.js`.
 
-5. An external script `make-pathways-tocs.sh` collects the ToC
+5. An external script `make-pathways-tocs.lua` collects the ToC
    info for all the courses into `en-us/pathway-tocs.js`.
 
 After the primitive generation rule (1 above) is done, if the
 make variable `GRAPH` is set, a rule calls an external script
-`make-dependency-graph.sh` that gathers the generated info about
+`make-dependency-graph.lua` that gathers the generated info about
 the lesson primitives and prereqs to create a global lesson
 dependency graph in `en-us/dependency-graph.js`.
 
@@ -141,4 +141,4 @@ course-specific list of pages for the six different types of
 workbooks. The same rule then calls the Node program
 `makeWorkbook.js` to create each course's set of workbook PDFs.
 
-// last modified 2023-02-23
+// last modified 2023-02-25

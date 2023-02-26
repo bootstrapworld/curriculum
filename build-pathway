@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-23
+# last modified 2023-02-25
 
 ARGS=
 BOOK=
@@ -17,7 +17,7 @@ function displayhelp() {
   echo
   echo "  " --book, --pdf, -b:
   echo "        " Generate PDFs, including individual pages and workbooks
-  echo "  " --force, --superforce, --super-force, -f:
+  echo "  " --force, --superforce, --super-force, -f, -F:
   echo "        " Regenerate doc tree from scratch
   echo "  " --graph, -g:
   echo "        " Generate dependency graph
@@ -36,7 +36,7 @@ while test $# -ne 0; do
   arg=$1; shift
   if test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=yes
-  elif test "$arg" = --force -o "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -f; then
+  elif test "$arg" = --force -o "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -f -o "$arg" = -F; then
     FORCE=yes
   elif test "$arg" = --graph -o "$arg" = -g; then
     GRAPH=yes
