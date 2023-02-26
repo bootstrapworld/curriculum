@@ -1,7 +1,12 @@
-= Draft of merge commit message for resolution of curriculum issue #467
+== Implementing the build process using Makefile(s)
 
-This merge addresses issue #467, replacing the original
-`build-pathway` Bash shell script with a `Makefile`.
+The build was originally implementated as a long Bash script
+`build-pathway`, but
+following 
+link:https://github.com/bootstrapworld/curriculum/issues/467[Issue
+467], 
+has since been rewritten as a more maintainable collection of
+Makefiles that calls much smaller subroutine-like scripts.
 
 The `Makefile` resides at the top dir, and a build is initiated
 by calling `make`, possibly with the following options:
@@ -26,6 +31,8 @@ determined beforehand. Furthermore, we use two makefiles to run
 two phases of the build, because the sources for the (generated)
 rules of the second phase cannot be determined until the first
 phase is done. We need only two sequential makefiles.
+
+=== make, phase 1
 
 `Makefile.phase1` initializes the `distribution/` directory, with
 subdir `en-us/`, which has subdirs `lib/`, `extlib/`, `lessons/`,
@@ -65,6 +72,8 @@ of the bilingual glossary file, and adds it to the batch file
 `$PUPPETEER_INPUT`. `$PUPPETEER_INPUT` will eventually contain
 all the HTML files that will need to be converted into PDF pages.
 
+=== make, phase 2
+
 After phase 1 is done, `Makefile.phase2` picks up the next phase.
 It identifies the different kinds of `.adoc` files (already
 copied under `{lessons, courses}` in the `distribution`, and
@@ -102,7 +111,7 @@ following bunch of other rules come into play (in no temporal
 order):
 
 1. The primitives are then consolidated per lesson, using the
-   external script `collect-primitives.sh`.
+   external script `collect-primitives.lua`.
 
 2. The `$ADOC_POSTPROC_*_INPUT` batch files are now used by a
    postprocessing program, `do-postproc.lua`, that creates the
@@ -141,4 +150,4 @@ course-specific list of pages for the six different types of
 workbooks. The same rule then calls the Node program
 `makeWorkbook.js` to create each course's set of workbook PDFs.
 
-// last modified 2023-02-25
+// last modified 2023-02-26
