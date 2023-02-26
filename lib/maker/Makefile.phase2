@@ -1,4 +1,4 @@
-# last modified 2023-02-25
+# last modified 2023-02-26
 
 # all: initialization copylessons buildlessons buildpathways doconversions
 
@@ -203,7 +203,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	$(MAKE_DIR)run-asciidoctor.sh
 
 primitives: preproc
-	$(MAKE_DIR)collect-primitives.sh
+	$(MAKE_DIR)collect-primitives.lua
 
 postproc: preproc
 	$(MAKE_DIR)do-postproc.lua
