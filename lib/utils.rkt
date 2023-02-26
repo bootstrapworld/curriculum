@@ -9,6 +9,7 @@
   read-data-file
   gen-new-id
   qualify-proglang
+  create-zero-file
   )
 
 (define (truthy-getenv ev)
@@ -80,3 +81,9 @@
       (when (directory-exists? (build-path rel-root q))
         (set! dirname q))))
   dirname)
+
+(define (create-zero-file f)
+  (unless (file-exists? f)
+    (call-with-output-file f
+      (lambda (o)
+        (display 0 o) (newline o)))))
