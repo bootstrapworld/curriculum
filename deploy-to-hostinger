@@ -94,12 +94,13 @@ for lang in $ALL_THE_LANGS; do
   fi
 done
 
-for f in adoc asc aux rkt rkt.kp titletxt txt txt.kp; do
+for f in adoc asc aux md id rkt rkt.kp titletxt txt txt.kp; do
   find deployables -name \*.$f -delete
 done
 
 find deployables -name workbook\*.pdf -delete
 find deployables -name opt-exercises\*.pdf -delete
+find deployables -name lesson-images.json -delete
 
 find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
