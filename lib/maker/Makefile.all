@@ -1,12 +1,19 @@
-# last modified 2023-02-25
+# last modified 2023-02-27
 
 export TOPDIR := $(realpath .)
 
 export PROGDIR := $(TOPDIR)/distribution/.prog-$(NATLANG)
 
+
+# batch input for (Racket) preprocessor (.adoc -> .asc)
+
 export ADOCABLES_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adocables.rkt
 
+# batch input for Asciidoctor (.asc -> .s?html)
+
 export ADOC_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-asciidoctor.js
+
+# input for the (Lua) postprocessor
 
 export ADOC_POSTPROC_LESSONPLAN_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-lessonplan.lua
 
@@ -20,17 +27,15 @@ export ADOC_POSTPROC_PWYINDEP_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached
 
 export ADOC_POSTPROC_WORKBOOKPAGE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-workbookpage.lua
 
-# export RELEVANT_LESSONS_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-relevant-lessons.txt.kp
-
-export EXERCISE_COLLECTOR_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-exercises.lua
-
-export COURSES_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.courses-list.lua
-
-export LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.lessons-list.lua
+# input for html2pdf.js
 
 export PUPPETEER_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-puppeteer.json
 
-export IMAGE_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.image-files.lua
+export EXERCISE_COLLECTOR_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.exercises.lua
+
+export COURSES_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.courses.lua
+
+export LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.lessons.lua
 
 export IMAGE_JS_FILE := $(TOPDIR)/distribution/$(NATLANG)/images.js
 

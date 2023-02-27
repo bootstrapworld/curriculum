@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-02-27
 
 -- print('doing make-pathway-tocs.lua')
 
@@ -30,4 +30,5 @@ do
     ::continue::
 
   end
+  o:write('}\n')
 end
