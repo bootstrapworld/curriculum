@@ -261,46 +261,32 @@ subdirectory, where an `.adoc` file describes the “Teacher
 Resources” page. There should be only one such `.adoc` file, but
 it can be named anything (not necessarily `index.adoc`).
 
-== The `build-pathway` script
+== Building using the Makefile
 
-The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments (including none), and any combination of the
-following command-line options:
+The top dir contains `Makefile`. Type `make` to build the distribution,
+to populate the `distribution/` directory with the built documentation.
 
-- `--book` (aka `--pdf` or `-b`)
-- `--debug` (aka `-d`)
-- `--expanded-warnings` (aka `-w`)
-- `--everything`
-- `--force` (aka `-f`)
-- `--help` (aka `-h`)
-- `--lint` (aka `--verify-links` or `-l`)
-- `--natlang` (aka `--language`)
-- `--noparallel` (aka `--no-parallel`)
-- `--nopdf` (aka `--no-pdf` or `-n`)
-- `--proglang`
-- `--slides` (aka `-s`)
-- `--superforce` (aka `--super-force` or `-F`)
-- `--version` (aka `-v`)
+`make` can take the variable settings on the command line:
 
-If called with `--help` or `--version`, the script
-displays a help message and version information, respectively, and quits.
+- `BOOK=yes` -- creates the PDF versions of the HTML files, as also the
+  workbook PDFs. By default, these are not created as it is a relatively
+  time-consuming process and is required only after the author is sure
+  that the HTML conversions have been thoroughly debugged
 
-Otherwise, the script creates a document tree under the `distribution`
-directory for every pathway argument. A pathway arg can be either the pathway
-name, or its relative pathname from the `build-pathway` script, with or without
-a trailing slash, e.g., all of the following refer to the same pathway:
+- `LINKCHECK=yes` -- checks the various internal and external links in
+  the documents to ensure they are valid. By default, this check isn't
+  done to save time
 
-  sample-pathway
-  pathways/sample-pathway
-  pathways/sample-pathway/
+- `GRAPH=yes` -- creates the lesson dependency graph in
+  `distribution/en-us/dependency-graph.js`
 
-If no pathway arg is supplied,
-`build-pathway` generates doctrees for every pathway in
-`pathways`.
+-  `NATLANG=LL` -- builds for the natural language `LL`. The default is
+   `en-us` (AmEng)
 
-If no `--natlang` option is supplied, the prose language used is
-`en-us`. To specify another language, say `es-mx`, use
-`--natlang es-mx`.
+- `SEMESTER=season` -- can be set to anything, typically: `fall`, `spring`
+
+- `YEAR=yyyy` -- can be set to anything, typically the four-digit year
+  of the Common Era
 
 The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
 resides in
@@ -334,23 +320,8 @@ The teacher workbooks in `resources/protected` are
 - `workbook-long-sols.pdf`, above plus the optional exercises
 - `opt-exercises-sols.pdf`, just the optional exercises
 
-These filenames are standards and do not vary with pathway. Their location
-identifies which pathway they describe.
-
-If no `--proglang` option is supplied, a proglang is assumed after
-reading the `proglang.txt` associated with the course:
-If a course is defined only for
-a single proglang, that proglang is assumed. If a course is defined for
-multiple proglangs, the first of them is assumed. If no proglangs are
-explicitly defined for a course, the proglang is assumed to be `pyret`.
-The possible values for this option are
-`pyret`, `wecheme`, `codap`, and `spreadsheets`.
-The distribution directory for a pathway built with
-a non-``pyret`` proglang typically tacks on the proglang as suffix. No
-suffix is tacked on if the course only admits of one proglang.
-
-If the option `--everything` is supplied, every pathway is built for all
-possible proglangs.
+These filenames are standard and do not vary with course. Their location
+identifies which course they describe.
 
 Note that many workbook PDFs can be created: the students' versions
 are created
@@ -372,126 +343,44 @@ The lessons referred to by the various pathways reside in
              pages/
              solution-pages/
 
-The pathway-agnostic lessons in
-`shared/langs/en-us/pathway-independent` are converted and placed in
-`distribution/en-us/lessons/.pathway-independent`.
-
-The `build-pathway` option `--slides lessonA` additionally generates the slide deck
-for lesson `lessonA`, by calling `build-slide lessonA`. For more details, see
+For slide generation, please see
 link:./README-slides.adoc[].
 
-The pathway narrative web page `index.shtml` includes a link to
-`pathway-lessons.shtml`, which contains all the lesson plans
-associated with the pathway; the student
-PDF; a page listing the standards met; and a glossary
-page for the terms used in the lessons.
+`make clean` scrubs any existing `distribution`.
 
-=== `build-pathway` debugging
-
-The other options of `build-pathway` are predominantly used for
-debugging:
-
-- `--debug` runs in debug mode, i.e., it retains various temp files in the
-  generated doctree, so they can be inspected to help debugging. Note that like
-  all acts of measurement, running in debug mode results in a system subtly
-  different from non-debug mode, and may actually hide some bugs. Use with
-  circumspection.
-
-- `--expanded-warnings` shows the diagnostics as
-  long scroll instead of overwriting them.
-
-- `--force` forces creating anew the document tree. By default,
-  in order to save time,
-  conversions are skipped if the `distribution` already contains
-  the required target files and they are sufficiently new.
-
-- `--lint` reports missing rows in the summary tables of lesson
-  plans, and invalid links in the doctree.
-
-- `--noparallel` runs the build script
-  strictly sequentially, without exploiting parallelism. This may
-  be used to uncover bugs introduced by parallelism.
-
-- `--book` is needed to generate PDFs for every page and solution-page, and merges them
-  into the workbook PDFs.
-
-These options set some internal environment variables in the `build-pathway`
-script. `build-pathway` also looks into an init file `.build-pathway.env`, if
-it exists, where these internal variables may be set directly in lieu of giving
-them as command-line options. The variables governed by the options `--book`,
-`--debug`, `--noparallel` and `expandedwarnings` are `BOOK`, `DEBUG`,
-`NOPARALLEL` and `EXPANDEDWARNINGS` respectively.  Thus, a `.build-pathway.env`
-with contents
-
-    BOOK=1
-    DEBUG=1
-    NOPARALLEL=1
-    EXPANDEDWARNINGS=1
-
-is equivalent to supplying the options `--book --debug --noparallel
---expandedwarnings` when calling `build-pathway`. In the course of
-experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment
-them out
-using the usual shell comment character, `#`.
-
-For instance, `BOOK=1` may be commented out during the initial phases of
-adding new content, as
-PDF generation is relatively time-consuming, and one often doesn't need
-the PDFs until after one has thoroughly debugged the HTML output.
+For more on the build process in general, see
+link:lib/maker/doc/index.adoc[].
 
 == Deployment
 
 We currently deploy to:
+https://www.bootstrapworld.site
 
-https://www.bootstrapworld.org/materials/fall2020/courses
+A typical build goes to something like:
+https://www.bootstrapworld.org/materials/fall2023
 
-(The `fall2020` is in general `<semester><year>` where
-`<semester>` is one of `spring` or `fall`, and `<year>` is the
-4-digit year.)
+After building on your local machine, you can
+deploy all relevant docs from the `distribution/` directory to the host by typing
 
-After building one or pathways on your local machine, you can
-deploy all relevant docs from the `distribution/` directory by typing
+  deploy-to-hostinger
 
-  deploy-to-brown jrandomuser
+This requires that the environment variables `HOSTINGER_IPADDR`,
+`HOSTINGER_USER`, and `HOSTINGER_PORT` be set to the appropriate values.
 
-Here `jrandomuser` is your user ID on Brown. You will be prodded for
-your Brown password, once to copy the files over and another time
-to set it up on the Brown machine. (This may be compressed in the
-future.)
+It's also useful to set `SEMESTER` (e.g., `fall`) and `YEAR` (e.g.,
+`2023`) so the docs go to the
+appropriate web directory (e.g., `fall2023`),  the concatenation of these two
+values.
 
-If you wish to deploy only a single pathway, e.g.,
-`data-science`, add the pathway by name as a second argument:
+You will be prodded for your webhost password,
+once to copy the files over and another time
+to unpack them on the webhsot machine.
 
-  deploy-to-brown jrandomuser data-science
-
-(This assumes you've first run some variant of `./build-pathway data-science`, of
-course.)
-
-The script `deploy-to-brown` uses SSH to interact with your Brown
-account. The connection has been often been flaky, so often the
-second SSH fails. If this happens, in order to let you finish, without redoing the
-work accomplished with the first SSH, you may type
-
-  deploy-to-brown-perms jrandomuser
-
-(If you used the optional second arg for `deploy-to-brown`, you
-don't need to repeat it here.)
-
-*Note:* The `algebra` pathway is an anomaly, since it exists in
-both `-wescheme` and `-pyret` variants.
-To type just one or the other variant, type one of
-
-  deploy-to-brown jrandomuser algebra-wescheme
-  deploy-to-brown jrandomuser algebra-pyret
-
-To deploy both variants (if available), type
-
-  deploy-to-brown jrandomuser algebra
-
-In any case, `deploy-to-brown` only deploys a pathway if the
-latter has been built locally first. So if you've built `algebra-wescheme` but
-`algebra-pyret`, requesting `algebra` be deployed is equivalent to requesting
-`algebra-wescheme`.
+The script `deploy-to-hostinger` uses SSH to interact with your webost.
+account. This can be slow. If you're updating an already deployed
+doctree, you may use the `-lib` option to save yourself the time taken
+to recopy the large mathjax library, since it's unlikely to have
+changed.
 
 == Standards compliance
 
