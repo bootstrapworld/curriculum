@@ -1,5 +1,33 @@
 == PDFs and Workbooks
 
+A course has six types of workbooks. The student-facing workbooks
+are in the `workbook/` subdir of the course, while the
+teacher-facing ones are in `resources/protected` (and are, as the
+dir name suggests, password-protected).
+
+The workbooks are a concatenation of pages.
+
+Most of the workbook pages are from a course's constituent
+lessons, and these are listed in the lesson's
+`pages/workbook-pages.txt`.
+In addition, a course's workbook may include front and back
+matter, which are specified within the pathway dir itself. Some
+workbooks may contain exercise pages, which are referred to be
+the lesson plan, are present in the lesson's `pages/` dir, but
+not listed in its `workbook-pages.txt`.
+
 === Creating page PDFs
 
+The script `make-pdf.sh` passes the list of HTML files generated in
+`$PUPPETEER_INPUT` to the Node program `html2pdf.js`, creating
+the corresponding PDFs.
+
 === Workbooks
+
+The program `make-workbook-jsons.lua` scans the course and lesson
+dirs for various temp files create the previous portions of the
+build to create JSON files that list the constituent PDFs for
+each type of workbook.
+
+The script `make-books.sh` uses these JSON files to create the
+final workbook PDFs.

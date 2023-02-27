@@ -8,7 +8,7 @@ significant startup time. Instead, we create the batch
 files in `distribution/en-us/.cached` so the conversions can be
 done in one go. The names of these batch files are given by the
 following environment variables (which are set in the build
-make):
+makefile):
 
   $ADOCABLES_INPUT
   $ADOC_INPUT
@@ -18,14 +18,18 @@ make):
   $ADOC_POSTPROC_RESOURCES_INPUT
   $ADOC_POSTPROC_PWYINDEP_INPUT
   $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-  $RELEVANT_LESSONS_INPUT
   $PUPPETEER_INPUT
+  $EXERCISE_COLLECTOR_INPUT
+  $COURSES_LIST_FILE
+  $LESSONS_LIST_FILE
 
 (The actual names used are not germane to this discussion.)
 
 === $ADOCABLES_INPUT
 
-The `$ADOCABLES_INPUT` file contains expressions of the form
+The `$ADOCABLES_INPUT` file has entries for each adoc file that
+are given to the Racket preprocessor.
+Each entry is of the form:
 
   ("<adoc-filename>" #:containing-directory <string>
                      #:dist-root-dir <string>
@@ -50,7 +54,7 @@ three values are not optional.
 === $ADOC_INPUT
 
 This contains a list of `.asc` files, which are intermediate
-files created by a Racket preprocessor from the `.adoc` files
+files created by the Racket preprocessor from the `.adoc` files
 listed in `$ADOCABLES_INPUT` before eventual conversion by
 AsciiDoctor into HTML.
 
@@ -62,49 +66,49 @@ The HTML files created by AsciiDoctor also
 reside in the `.cached` subdir and go through a postprocessing
 phase before moving to the directory above.
 
-=== $ADOC_POSTPROC_LESSONPLAN_INPUT
+=== $ADOC_POSTPROC_*_INPUT
 
-This contains the list of the lesson plan HTML files, awaiting
-postprocessing.
-Their names are relative to `distribution/en-us`.
+These are the files
 
-=== $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+- $ADOC_POSTPROC_LESSONPLAN_INPUT
+- $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+- $ADOC_POSTPROC_NARRATIVE_INPUT
+- $ADOC_POSTPROC_RESOURCES_INPUT
+- $ADOC_POSTPROC_PWYINDEP_INPUT
+- $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
-This contains the list of auxiliary HTML files (for
-glossaries) created inside
-courses, and awaiting postprocessing. Again relative to `distribution/en-us`.
+These list the names of the HTML files awaiting postprocessing.
+They are given in six lots, because the type of postprocessing
+varies for:
 
-=== $ADOC_POSTPROC_NARRATIVE_INPUT
+- lesson plan HTML files
+- glossary HTML files in courses
+- pathway narrative HTML files
+- pathway resource HTML files (i.e., pathway files other than the
+  narrative)
+- pathway-independent HTML files (neither lessons nor pathways)
+- workbook HTML files (in the lessons)
 
-This contains the list of pathway narrative HTML files awaiting
-postprocessing. Pathnames relative to `distribution/en-us`.
-
-=== $ADOC_POSTPROC_RESOURCES_INPUT
-
-This contains the list of pathway resource HTML files --
-everything except the narrative files -- awaiting
-postprocessing.  Pathnames relative to `distribution/en-us`.
-
-=== $ADOC_POSTPROC_PWYINDEP_INPUT
-
-This contains the list of pathway-independent HTML files
-awaiting
-postprocessing.  Pathnames relative to `distribution/en-us`.
-
-=== $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
-
-This contains the list of workbook HTML pages (inside `pages`,
-`solution-pages`)
-awaiting
-postprocessing.  Pathnames relative to `distribution/en-us`.
-
-=== $RELEVANT_LESSONS_INPUT
-
-This contains a list of distribution lesson names that are being
-addressed by the current build. These are the basenames of the
-distribution lessons, i.e., with proglang suffix if any.
+The filenames in these files are relative to `distribution/en-us`.
 
 === $PUPPETEER_INPUT
 
 This is a JSON file containing the list of postprocessed HTML
 files that are ready to be converted to PDF.
+
+=== $EXERCISE_COLLECTOR_INPUT
+
+This contains all the lessons containing exercises, so that the
+latter can be quickly collected when making the workbooks.
+
+=== *_LIST_FILE
+
+These are:
+
+- $COURSES_LIST_FILE
+- $LESSONS_LIST_FILE
+
+These contain the list of all the courses and lessons
+respectively. While they can be obtained by listing the
+concerned subdirs in `distribution/`, they are used often enough
+that it is useful to cache these values.
