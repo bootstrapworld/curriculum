@@ -96,7 +96,7 @@
                 (eval x *adoc-namespace*)
                 (loop)))))))))
 
-(define *pathway-root-dir* (getenv "PATHWAYROOTDIR")) ;FIXME
+(define *pathway-root-dir* (or (getenv "PATHWAYROOTDIR") "")) ;FIXME
 
 ;(define *dist-root-dir* (getenv "DISTROOTDIR"))
 
@@ -105,21 +105,6 @@
 ;(printf "distrootdir= ~s\n" *dist-root-dir*)
 
 (define *target-pathway* "notDoingPathway")
-
-(define *lang-root-dir*
-  (let ([x (truthy-getenv "LANGROOTDIR")])
-    (or x (string-append *pathway-root-dir* "../../"))))
-
-(define *pathway-lesson-order*
-  (string-append *pathway-root-dir* ".cached/.workbook-lessons.txt.kp"))
-
-(define *pathway-exercises-file*
-  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-exercises.rkt.kp"))
-
-;(printf "pwyexf= ~s\n" *pathway-exercises-file*)
-
-(define *pathway-lessons-containing-exercises-file*
-  (string-append *dist-root-dir* "courses/" *target-pathway* "/resources/.workbook-lessons-containing-exercises.rkt.kp"))
 
 (define *in-file* #f)
 
@@ -596,7 +581,7 @@
         (set! text (substring text 1)))
       (when (char=? (string-ref text (- n 1)) #\")
         (set! text (substring text 0 (- n 1))))))
-  (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
+  ; (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
 (define (clean-up-url-in-image-text text)
@@ -1354,7 +1339,8 @@
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if *title-reached?*
-                                  (display-comment prose o)
+                                  #f
+                                  ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
                            [(member directive '("scrub" "slideLayout"))
@@ -1424,6 +1410,7 @@
                                                         #:centered? #t)
                                        o))]
                            [(string=? directive "math")
+                            (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (display (enclose-math (read-group i directive)) o)]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]
@@ -1556,6 +1543,7 @@
                                 (for ([s (string-to-form exprs)])
                                   (display (massage-arg s) o))))]
                            [(string=? directive "smath")
+                            (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
                                                  (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
@@ -2256,6 +2244,7 @@
 
 (define (coe e)
   ;(printf "coe ~s\n" e)
+  (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (string-append
     ;enclosing following in span .gdrive-only doesn't seem to work
     (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
@@ -2471,6 +2460,7 @@
 
 (define (sexp->wescheme e #:multi-line [multi-line #f])
   ; (printf "doing sexp->wescheme ~s\n" e)
+  (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ; (printf "h2u retn'd ~s\n" h)
 
@@ -2489,6 +2479,7 @@
 
 (define (math e #:parens [parens #f])
   ; (printf "doing math ~s p:~s\n" e parens)
+  (create-zero-file (format "~a.uses-mathjax" *out-file*))
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
@@ -2657,6 +2648,7 @@
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
+    (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea #:multi-line multi-line
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
@@ -2724,7 +2716,9 @@
           ;(if single? "\n```\n" "")
           )])
       (if single?
-          (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t)
+          (begin
+            (create-zero-file (format "~a.uses-codemirror" *out-file*))
+            (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t))
           s))))
 
 (define (contracts . args)
@@ -2735,4 +2729,5 @@
                     (keyword-apply contract '(#:single?) '(#f)
                                    (first args))))
         (loop (rest args))))
+    (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))

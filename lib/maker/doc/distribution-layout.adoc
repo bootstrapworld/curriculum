@@ -1,0 +1,138 @@
+== The distribution layout
+
+The _built_ version of a pathway -- called a _course_ -- is
+created in a subdirectory called `courses` under the
+`distribution` subdir. The built version of a lesson -- we'll
+call it the _distribution lesson_ -- is similarly created in a
+subdir called `lessons`, also under the `distribution` suddir.
+
+=== The distribution subdir
+
+The `courses` and `lessons` are not direct subdirs of
+`distribution`, in order to accommodate different versions of
+pathways and lessons based on the natlang used. To effect this,
+the `distribution` has subdirs for each natlang (called `en-us`,
+`es-mx`, etc.), and it is in the `courses` and `lessons` subdirs of
+these that we find the natlang-specific courses and lessons.
+Thus, the two natlang versions of the pathway `core` are laid out
+as follows:
+
+  distribution/
+  |—— en-us/
+  |   `—— courses/
+  |       `—— core/
+  `—— es-mx/
+      `—— courses/
+          `—— core/
+
+Note that we use the same name `core` for the two natlang
+versions in the distribution. We can do this because they reside
+inside two different subtrees `distribution/en-us`
+`distribution/es-mx` and thus don't risk a name clash.
+
+As with pathways, so with lessons: To accommodate multiple
+natlangs, the lessons go into the `lessons` subdir of their
+natlang. E.g., for the lesson `simple-data-types`, we have:
+
+  distribution/
+  |—— en-us/
+  |   `—— lessons/
+  |       `—— simple-data-types/
+  `—— es-mx/
+      `—— lessons/
+          `—— simple-data-types/
+
+In the following, we will assume the prevailiing natural language is
+`en-us`, so we will restrict our attention to the
+`distribution/en-us` subtree. For other natlangs, the setup is exactly the same but in
+the appropriate natlang-based subtree.
+
+Also, we will call `distribution/en-us/courses/core` the course
+root directory (of the English version of the `core` pathway).
+The dir `distribution/en-us/lessons/simple-date-types` is the
+distribution lesson root directory (of the English version of the
+`simple-data-types` lesson).
+
+=== Proglang associated with a course
+
+Typically -- as seen in the above example -- the built names of the
+pathway and the lesson are the same as their names in the source,
+but not always.
+
+By default, the programming language associated with a course is
+`pyret`. This is marked in the course root directory as the 0-length
+file `.cached/.proglang-pyret`.  (I.e.,
+`distribution/en-us/courses/core/.cached/.proglang-pyret`.)
+
+But we as have seen, a pathway may have a `proglang.txt` listing
+a different or multiple proglangs.
+
+Thus, for the pathway `core`,  two different courses are created in
+`distribution/en-us/courses`. We continue to use the unadorned
+pathway name, `core`, for the Pyret version. For other proglangs,
+the course dir's name uses the proglang as a hyphenated suffix.
+Thus for the WeScheme version, the course is entitled
+`core-wescheme`. I.e., the two course root directories for `core` are
+
+  distribution/en-us/courses/core
+  distribution/en-us/courses/core-wescheme
+
+These two directories have their own proglang marker files, i.e.,
+`.cached/.proglang-pyret` (as before) and
+`.cached/.proglang-wescheme`.
+
+We often have pathways whose `proglang.txt` contains only a single
+proglang, but that proglang isn't Pyret.  E.g., the pathway
+`shipwrecks` whose `proglang.txt` contains only `spreadsheets`.
+In such a case, the built course is simply called `shipwrecks`
+rather than `shipwrecks-spreadsheets`, since there is no Pyret
+version to distinguish it from.
+
+=== Proglang associated with a distribution lesson
+
+As with pathways, lessons can be in different proglangs, also
+specified with `proglang.txt`. If no `proglang.txt` is present,
+the (single) proglang is assumed to be `pyret`.  The distribution
+version of the non-Pyret lessons have the proglang as hyphenated
+suffix, e.g.,
+
+  simple-data-types-wescheme
+
+Again, as with pathways, a proglang-marker file
+`.cached/.proglang-wesceme` is placed in the distribution lesson
+root to identify it as a lesson using `wescheme`.
+
+Note that the pathway mentions in its `lesson-order.txt` the
+lesson names in unadorned form (no proglang suffix). On building, a pathway becomes a
+course, and the distribution lessons associated with it are the
+right versions corrected for proglang. Thus the pathway `core`
+has `simple-data-types` as a constituent lesson. Moving over to
+the built `distribution`, the course `core` (Pyret) includes the lesson
+`simple-data-types` (Pyret), and the course `core-wescheme`
+includes the lesson `simple-data-types-wescheme`.
+
+=== The course narrative and other resources
+
+The pathway narrative `index.adoc` in the pathway root eventually
+will get
+converted to `index.shtml` in the course root. The various .adoc
+files in the `front-matter`, `back-matter` and `resources`
+subdirs also will get converted to HTML files, with suffix `.shtml` at
+the top level and `.html` at lower depths, i.e., in any `pages`
+and `solution-pages` subdirs. However, these HTML conversions
+aren't performed at this time. 
+
+=== The lesson plan and workbook pages
+
+The lesson plan `index.adoc` in the lesson root eventually will
+get converted to
+`index.shtml` in the distribution lesson root.
+
+The .adoc files in the `pages/` and `solution-pages/` subdirs
+along with any .adoc files they include will get converted to `.html`
+files alongside.
+
+=== Pathway-independent files
+
+The pathway-independent files in `shared/langs/en-us/docroot` are
+copied over to `distribution/en-us`.

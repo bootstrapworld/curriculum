@@ -599,12 +599,18 @@ The following is needed to construct documents from this repo:
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on macOS, your environment is close but missing some
+  - If you're on MacOS, your environment is close but missing some
     tools. You'll want to install
     https://brew.sh/[Homebrew] first, then run the following commands to add them:
 +
   brew install gnu-sed
   brew install curl
+  brew install make
+
+  - Mac users will also need to add these unix tools to their path. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
++
+  # use modern unix versions of commands, installed via brew
+  PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/make/libexec/gnubin:$PATH"
 
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
@@ -616,6 +622,10 @@ and make sure the `racket` binary is in your `$PATH`.
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
   - on macOS: `brew install asciidoctor`
+
+* Lua, used for postprocessing.
+  - on Linux/WSL: `sudo apt-get install lua5.4`
+  - on macOS: `brew install lua`
 
 * Several node packages *all of which are installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents

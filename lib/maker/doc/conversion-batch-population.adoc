@@ -1,0 +1,122 @@
+== Populating the conversion batch files
+
+=== Relevant adoc files
+
+When the build   was creating the distribution lessons, it adds
+these base names to the `$RELEVANT_LESSONS_INPUT`. 
+
+
+=== Pathway-independent files
+
+The names of the pathway-independent .adoc files under
+`distribution/en-us/textbooks` are collected.
+
+The .adoc file, together with its `+#:containing-directory+` and
+`+#:dist-root-dir+` value is added to `$ADOCABLES_INPUT`.
+
+
+
+The .asc file (which sits in the `.cached` subdir), pathname
+relative to `distribution/en-us` is added to `$ADOC_INPUT`.
+
+The .html file (not yet postprocessed, sits in `.cached`),
+pathname relative to `distribution/en-us`) is added to
+`$ADOC_POSTPOC_PWYINDEP_INPUT`.
+
+=== Workbook pages
+
+`$RELEVANT_LESSONS_INPUT` must be fully be populated before this
+can be proceed.
+
+Using the entries in `$RELEVANT_LESSONS_INPUT`, we collect all
+the workbook-page .adoc files and add them to
+`$ADOCABLES_INPUT`. The `+#:containing-directory+`,
+`+#:dist-root-dir+`, `+#:lesson+`, `+#:other-dir+`, `+#:solutions-mode?+`
+and `+#:proglang+` values are included.
+
+`+#:lesson+` is simply the
+basename of the distribution lesson. 
+
+`+#:other-dir+` is a boolean
+identifying if the file is simply meant for inclusion in other
+adoc files and not for
+full-scale conversion themselves. Such files are located in
+subdirs named `fragments`, `xtra`, or `xtras`.
+
+`+#:solution-mode?+` is a boolean set to true only for adoc files
+in `solution-pages`. Such files contain information meant for
+teachers but not students.
+
+The .asc version of the file is added to `$ADOC_INPUT`.
+
+The
+cached .html version of the file is added ot
+`$ADOC_POSTPROC_WORKBOOKPAGE_INPUT`.
+
+=== Lesson-plan files
+
+`$RELEVANT_LESSONS_INPUT` must be fully be populated before this
+can be proceed.
+
+
+Using the entries in `$RELEVANT_LESSONS_INPUT`, we collect all
+the lesson-plan .adoc files and add them to
+`$ADOCABLES_INPUT`. The `+#:containing-directory+`,
+`+#:dist-root-dir+`, `+#:lesson-plan+`, `+#:proglang+`,
+and `+#:other-proglangs+` 
+ values are included. 
+
+`+#:lesson-plan+` is simply the
+basename of the distribution lesson. 
+
+`+#:other-proglangs+` is a list of the other proglangs for which
+this lesson is available. This is used to have the lesson plan
+include links to the plans for the same lesson in the other
+proglangs.
+
+The .asc version of the file is added to `$ADOC_INPUT`.
+
+The
+cached .html version of the file is added ot
+`$ADOC_POSTPROC_LESSONPLAN_INPUT`.
+
+=== Pathway resource files
+
+Collect all the .adoc files _except_ the narrative file and add
+them to `$ADOCABLES_INPUT`.  Other values included:
+`+#:containing-directory+`, `#dist-root-dir`, `+#:other-dir+`,
+`+#:resources+`, `+#:target-pathway+`, `+#:solutions-mode?+`,
+`+#:proglang+`.
+
+`+#:resources+` is set to true.
+
+`+#:target-pathway+` is the (base) name of the course directory
+(with the proglang suffix, if any).
+
+
+The .asc file is added to `$ADOC_INPUT`.
+
+The cached .html file is added to
+`$ADOC_POSTPROC_RESOURCES_INPUT`.
+
+
+=== Pathway narrative files
+
+Collect all the narrative .adoc files in the distribution and add
+then to `$ADOCABLES_INPUT`. Other values included:
+`+#:containing-directory+`, `+#:dist-root-dir+`, `+#:narrative+`,
+`+#:target-pathway+`, `+#:proglang+`, `+#:other-proglangs+`.
+
+`+#:narrative+` is set to true.
+
+`+#:other-proglangs+` is the list of other proglangs for which this
+course is available, so they can link to each other.
+
+The .asc file is added to `$ADOC_INPUT`.
+
+The cached .html file is added to
+`$ADOC_POSTPROC_NARRATIVE_INPUT`.
+
+We also the .asc file for the pathway glossary (this is generated
+by the Racket preprocessor) to `$ADOC_INPUT`. _Its_ cached .html
+file is added to `$ADOC_POSTPROC_NARRATIVEAUX_INPUT`.
