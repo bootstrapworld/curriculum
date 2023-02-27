@@ -1,20 +1,37 @@
 == PDFs and Workbooks
 
-A course has six types of workbooks. The student-facing workbooks
-are in the `workbook/` subdir of the course, while the
-teacher-facing ones are in `resources/protected` (and are, as the
-dir name suggests, password-protected).
+A course has six types of workbooks.
 
-The workbooks are a concatenation of pages.
+Each workbook is a concatenation of pages.
 
-Most of the workbook pages are from a course's constituent
+Most of the workbook pages are from the course's constituent
 lessons, and these are listed in the lesson's
 `pages/workbook-pages.txt`.
 In addition, a course's workbook may include front and back
 matter, which are specified within the pathway dir itself. Some
-workbooks may contain exercise pages, which are referred to be
+workbooks may contain exercise pages, which are referred to in
 the lesson plan, are present in the lesson's `pages/` dir, but
 not listed in its `workbook-pages.txt`.
+
+The three student-facing workbooks
+are in the `workbook/` subdir of the course:
+
+  workbook.pdf
+  workbook-long.pdf
+  opt-exercises.pdf
+
+The `workbook.pdf` contains the basic lesson pages. The `-long`
+version includes the optional exercises referred to in the lesson
+plans. The `opt-` version contains just the exercises.
+
+The three teacher-facing workbooks are named similarly but for
+the `-sols` suffix, and
+reside in the `resources/protected` subdir, which is
+password-protected:
+
+  workbook-sols.pdf
+  workbook-long-sols.pdf
+  opt-exercises-sols.pdf
 
 === Creating page PDFs
 
