@@ -1,10 +1,12 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-02-28
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-dir_prefix = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
+-- dir_prefix = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
+
+dir_prefix = ''
 
 pwyindep_batchf =  os.getenv('ADOC_POSTPROC_PWYINDEP_INPUT')
 workbookpage_batchf =  os.getenv('ADOC_POSTPROC_WORKBOOKPAGE_INPUT')
@@ -21,12 +23,14 @@ function calculate_dist_root_dir(fhtml_cached)
   f = f:gsub('[^/]', '')
   f = f:gsub('^/', '')
   f = f:gsub('/', '../')
+  f = f:gsub('^%.%./%.%./', '')
   return f
 end
 
 function postproc(fhtml_cached, tipe)
   -- print('doing postproc', fhtml_cached, tipe)
-  if not file_exists_p(dir_prefix .. '/' .. fhtml_cached) then return end
+  -- if not file_exists_p(dir_prefix .. '/' .. fhtml_cached) then return end
+  if not file_exists_p(fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
   -- print('local_dist_root_dir is', local_dist_root_dir)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
@@ -82,7 +86,7 @@ function postproc(fhtml_cached, tipe)
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
         x = x:gsub('<body class="', '%0workbookpage ')
-        if fhtml_cached:find('^courses/.*/back%-matter/') then
+        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
           x = x:gsub('<body class="', '%0back-matter ')
         end
         if fbase:find('^notes%-') then

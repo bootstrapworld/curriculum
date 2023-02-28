@@ -1,25 +1,23 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-28
 
 # echo doing do-lesson-plan.sh $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-test -f $fcontainingdirectory/.proglang-ignore && exit
+test -f $containingdirectory/.proglang-ignore && exit
 
-distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
-
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
 adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 if test ! -s $adocfile; then
-  touch $fcontainingdirectory/.cached/.${adocbasename%.adoc}.asc
+  touch $containingdirectory/.cached/.${adocbasename%.adoc}.asc
   # exit
 fi
 
@@ -33,7 +31,7 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-lesson=$(echo $containingdirectory|$SED -e 's#lessons/\([^/]*\).*#\1#')
+lesson=$(echo $containingdirectory|$SED -e 's#.*/lessons/\([^/]*\).*#\1#')
 
 proglangarg="pyret"
 
@@ -56,12 +54,16 @@ if test -f "$proglangfile"; then
   if grep -q wescheme $proglangfile; then otherproglangs="$otherproglangs \"wescheme\""; fi
 fi
 
-# touch $fcontainingdirectory/.cached/.index-sidebar.asc
-touch $fcontainingdirectory/.cached/.index-standards.asc
+# touch $containingdirectory/.cached/.index-sidebar.asc
+touch $containingdirectory/.cached/.index-standards.asc
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
-echo $ascfile >> $ADOC_INPUT
+if test -z "$ASCIIDOCTOR_NODE"; then
+  echo $ascfile >> $ADOC_INPUT
+else
+  echo \"$ascfile\", >> $ADOC_INPUT
+fi
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_LESSONPLAN_INPUT
 

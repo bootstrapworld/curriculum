@@ -1,5 +1,7 @@
 #lang racket
 
+; last modified 2023-02-28
+
 (require json)
 (require file/sha1)
 (require "readers.rkt")
@@ -472,10 +474,11 @@
                        [else *lesson*])]
          [g (string-append lesson "/" pages-dir "/" snippet)]
          [g-in-pages (string-append lesson "/pages/" snippet)]
-         [f (string-append "lessons/" g)]
+         [f (format "distribution/~a/lessons/~a" *natlang* g)]
          [f.src f]
          [f.titletxt (path-replace-extension
-                       (string-append "lessons/" lesson "/" pages-dir "/.cached/." snippet)
+                       (format "distribution/~a/lessons/~a/~a/.cached/.~a"
+                               *natlang* lesson pages-dir snippet)
                        ".titletxt")]
          [page-title (and (file-exists? f.titletxt)
                        (call-with-input-file f.titletxt read-line))]
@@ -1065,11 +1068,14 @@
 
 (define (link-to-opt-projects o)
   ; (printf "doing link-to-opt-projects\n")
-  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))]
+  (let ([lessons (read-data-file
+                   (format "distribution/~a/courses/~a/lesson-order.txt"
+                           *natlang* *target-pathway*))]
         [projects-title-done? #f])
     (for ([lesson lessons])
       (let ([lesson-opt-links (read-data-file
-                                (format "lessons/~a/.cached/.index-opt-proj.rkt.kp" lesson)
+                                (format "distribution/~a/lessons/~a/.cached/.index-opt-proj.rkt.kp"
+                                        *natlang* lesson)
                                 #:mode 'forms)])
         ; (printf "lesson-opt-links for ~s is ~s\n" lesson lesson-opt-links)
         (for ([x lesson-opt-links])
@@ -1092,11 +1098,15 @@
                          ""))))))))
 
 (define (link-to-notes-pages o)
-  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))]
+  (let ([lessons (read-data-file
+                   (format "distribution/~a/courses/~a/lesson-order.txt"
+                           *natlang* *target-pathway*))]
         [notes-title-done? #f])
     (for ([lesson lessons])
-      (let ([lesson-notes-pages (read-data-file
-                                  (format "lessons/~a/pages/.cached/.workbook-notes-pages-ls.txt.kp" lesson))])
+      (let ([lesson-notes-pages
+              (read-data-file
+                (format "distribution/~a/lessons/~a/pages/.cached/.workbook-notes-pages-ls.txt.kp"
+                        *natlang* lesson))])
         (for ([page lesson-notes-pages])
           ; (unless notes-title-done?
           ;   (set! notes-title-done? #t)
@@ -1111,7 +1121,9 @@
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
   ;
-  (let ([lessons (read-data-file (build-path "courses" *target-pathway* "lesson-order.txt"))])
+  (let ([lessons (read-data-file
+                   (format "distribution/~a/courses/~a/lesson-order.txt"
+                           *natlang* *target-pathway*))])
     ;(printf "lessons = ~s\n" lessons)
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
@@ -1120,8 +1132,10 @@
     (for ([lesson lessons])
       ;(printf "tackling lesson ~s\n" lesson)
       (let ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
-            [lesson-title-file (format "lessons/~a/.cached/.index.titletxt" lesson)]
-            [lesson-desc-file (format "lessons/~a/.cached/.index-desc.txt.kp" lesson)]
+            [lesson-title-file (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
+                                       *natlang* lesson)]
+            [lesson-desc-file (format "distribution/~a/lessons/~a/.cached/.index-desc.txt.kp"
+                                      *natlang* lesson)]
             [lesson-title lesson]
             [lesson-description #f])
         (when (file-exists? lesson-title-file)
@@ -1154,11 +1168,12 @@
       (for ([lesson lessons])
         ;(printf "tackling lesson i ~s\n" lesson)
         (let ([lesson-asc-file
-                (format "lessons/~a/.cached/.index.asc" lesson)]
+                (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "lessons/~a/.cached/.lesson-glossary.txt.kp" lesson)]
+                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.txt.kp"
+                        *natlang* lesson)]
               [lesson-title-file
-                (format "lessons/~a/.cached/.index.titletxt" lesson)]
+                (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
               [lesson-title lesson]
               )
 
@@ -1267,7 +1282,8 @@
 
   (when *lesson-plan*
     (let ([workbook-pages-ls-file
-            (format "lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp" *lesson*)])
+            (format "distribution/~a/lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp"
+                    *natlang* *lesson*)])
       (unless (file-exists? workbook-pages-ls-file)
         (error 'ERROR "File ~a not found" workbook-pages-ls-file))
       (set! *workbook-pages*
@@ -1278,7 +1294,7 @@
   (let ([gl *glossary-list*])
 
     (when (or *lesson* *lesson-plan*)
-      (let ([f (build-path "lessons"  *lesson* "shadow-glossary.txt")])
+      (let ([f (format "distribution/~a/lessons/~a/shadow-glossary.txt" *natlang* *lesson*)])
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
@@ -1822,7 +1838,7 @@
                            #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
-  ; (printf "doing preproc-adoc-file ~s drd=~s\n" in-file dist-root-dir)
+  ; (printf "doing preproc-adoc-file ~s drd=~s lsn=~s\n" in-file dist-root-dir lesson)
 
   (set! *containing-directory* containing-directory)
   (set! *dist-root-dir* dist-root-dir)
@@ -1954,7 +1970,8 @@
                              (build-path *containing-directory* ".cached" ".index.primtxt")
                              (if *lesson*
                                  (make-temporary-file ".pageprim-~a.primtxt" #f
-                                                      (format "lessons/~a/.cached"
+                                                      (format "distribution/~a/lessons/~a/.cached"
+                                                              *natlang*
                                                               *lesson*)
                                                       )
                                  #f))])
@@ -2061,17 +2078,23 @@
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
   (let* ([pathway-lesson-order
-           (build-path "courses" *target-pathway* ".cached/.workbook-lessons.txt.kp")]
+           (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
+                   *natlang* *target-pathway*)]
          [all-lessons (read-data-file pathway-lesson-order #:mode 'files)]
-         [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
+         ;fixme -- why following?
+         ; [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
          [lessons-with-exx
            (filter (lambda (f)
-                      (file-exists? (build-path f ".cached/.lesson-exercises.rkt.kp")))
+                      (file-exists?
+                        (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
+                                *natlang* f)))
                    all-lessons)]
          [exx (map (lambda (lsn)
                      (list lsn
-                           (read-data-file (build-path lsn ".cached/.lesson-exercises.rkt.kp")
-                                           #:mode 'forms)))
+                           (read-data-file
+                             (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
+                                     *natlang* lsn)
+                             #:mode 'forms)))
                    lessons-with-exx)])
     ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
     ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
@@ -2089,22 +2112,26 @@
         ; (printf "lsn-exx is ~s\n" lsn-exx)
         (let ([lsn (first lsn-exx)]
               [exx (second lsn-exx)])
-          (fprintf o "\n\n**link:~a~a/index.shtml[~a]**\n"
+          (fprintf o "\n\n**link:~alessons/~a/index.shtml[~a]**\n"
                    *dist-root-dir*
                    lsn
-                   (call-with-input-file (build-path lsn ".cached/.index.titletxt")
+                   (call-with-input-file
+                     (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
+                             *natlang* lsn)
                      port->string))
           (for ([ex exx])
             (let* ([ti (list-ref ex 1)]
                    [exer (list-ref ex 0)]
+                   ; [exer (regexp-replace "\\.adoc" exer ".html")]
                    [soln (regexp-replace "/pages/" exer "/solution-pages/")])
 
               (when (string=? ti "")
                 (let ([exer.titletxt
-                        (build-path "lessons"
-                                    (path-replace-extension
-                                      (regexp-replace "/pages/" exer "\\0.cached/.")
-                                      ".titletxt"))])
+                        (build-path
+                          (format "distribution/~a/lessons" *natlang*)
+                          (path-replace-extension
+                            (regexp-replace "/pages/" exer "\\0.cached/.")
+                            ".titletxt"))])
                   (when (file-exists? exer.titletxt)
                     (set! ti (call-with-input-file exer.titletxt read-line)))))
 
@@ -2128,7 +2155,7 @@
       )))
 
 (define (create-glossary-subfile file)
-  ; (printf "doing create-glossary-subfile ~s\n" *narrative*)
+  ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
   (print-menubar (string-append file "-comment.txt"))
   (call-with-output-file (string-append file ".asc")
     (lambda (op)

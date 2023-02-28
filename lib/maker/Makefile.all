@@ -1,9 +1,10 @@
-# last modified 2023-02-27
+# last modified 2023-02-28
+
+export MAKE_DIR := lib/maker/
 
 export TOPDIR := $(realpath .)
 
 export PROGDIR := $(TOPDIR)/distribution/.prog-$(NATLANG)
-
 
 # batch input for (Racket) preprocessor (.adoc -> .asc)
 
@@ -30,6 +31,8 @@ export ADOC_POSTPROC_WORKBOOKPAGE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.ca
 # input for html2pdf.js
 
 export PUPPETEER_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-puppeteer.json
+
+#
 
 export EXERCISE_COLLECTOR_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.exercises.lua
 

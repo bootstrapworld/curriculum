@@ -1,18 +1,18 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-28
 
 # echo doing do-pathway-independent $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
+test -d $containingdirectory/.cached || mkdir -p $containingdirectory/.cached
 
-distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+# containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $containingdirectory)
 
 adocbasename=$(basename $adocfile)
 
@@ -30,6 +30,10 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\")" >>  $ADOCABLES_INPUT
 
-echo $ascfile >> $ADOC_INPUT
+if test -z "$ASCIIDOCTOR_NODE"; then
+  echo $ascfile >> $ADOC_INPUT
+else
+  echo \"$ascfile\", >> $ADOC_INPUT
+fi
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_PWYINDEP_INPUT

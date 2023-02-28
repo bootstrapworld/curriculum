@@ -1,7 +1,8 @@
-# last modified 2023-02-25
+# last modified 2023-02-28
 
-# all: initialization copylessons buildlessons buildpathways doconversions
 include $(MAKE_DIR)utils.mk
+
+# all: initialization
 
 all: courses-and-lessons page-not-found glossary
 
@@ -38,6 +39,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
 		$(EXERCISE_COLLECTOR_INPUT) $(COURSES_LIST_FILE)
+	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
 	@echo 'return {' > $(COURSES_LIST_FILE)
 	@echo 'return {' > $(EXERCISE_COLLECTOR_INPUT)
@@ -103,10 +105,6 @@ the-courses := $(patsubst \
 # the-courses := $(foreach \
 # 	pathway,$(the-pathways),distribution/$(NATLANG)/courses/$(notdir $(pathway))/.)
 
-# copy-pathways:
-# 	@echo tp is $(the-pathways)
-# 	@echo tc is $(the-courses)
-
 copy-pathways: initialization $(the-courses)
 
 define make-copy-pathway-rule
@@ -131,7 +129,7 @@ page-not-found: distribution/$(NATLANG)/lib/page-not-found.pdf
 distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
-	@echo lib/page-not-found.adoc >> $(ADOC_INPUT)
+	@if test -z "$(ASCIIDOCTOR_NODE)"; then echo distribution/$(NATLANG)/lib/page-not-found.adoc >> $(ADOC_INPUT); else echo \"distribution/$(NATLANG)/lib/page-not-found.adoc\", >> $(ADOC_INPUT); fi
 	@if test -n "$(BOOK)"; then echo ", { \"input\": \"distribution/$(NATLANG)/lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT); fi
 
 ###############################################################################
