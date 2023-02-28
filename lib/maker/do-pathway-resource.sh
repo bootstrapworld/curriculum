@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-28
 
 # echo doing do-pathway-resource.sh $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
+test -d $containingdirectory/.cached || mkdir -p $containingdirectory/.cached
 
-distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
-
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
 adocbasename=$(basename $adocfile)
 
@@ -38,7 +36,7 @@ if $(echo $adocfile|grep -q '/resources/'); then
   resourcesarg="#t"
 fi
 
-targetpathway=$(echo $containingdirectory|$SED -e 's#courses/\([^/]*\).*#\1#')
+targetpathway=$(echo $containingdirectory|$SED -e 's#.*/courses/\([^/]*\).*#\1#')
 
 if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap
 elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-none; then proglangarg=none
@@ -51,9 +49,12 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:other-dir $otherdirarg #:resources $resourcesarg #:target-pathway \"$targetpathway\" #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
 
-
 if test $otherdirarg != "#t" ; then
-  echo $ascfile >> $ADOC_INPUT
+  if test -z "$ASCIIDOCTOR_NODE"; then
+    echo $ascfile >> $ADOC_INPUT
+  else
+    echo \"$ascfile\", >> $ADOC_INPUT
+  fi
 
   if test $resourcesarg = "#t" -a $adocbasename = "index.adoc" -a $distrootdir = "../../../"; then
     echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_RESOURCES_INPUT

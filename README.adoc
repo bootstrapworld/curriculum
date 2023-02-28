@@ -129,10 +129,7 @@ filled in by what's in `en-us`.
 - Some of the directories have `pyret` and `wescheme`
 subdirectories or both. These contain content that should shadow
 the default content (one directory level up) if that
-programming language is used. Specify this choice via the
-`--proglang` option during build. The default is usually `pyret`,
-but in some cases content is built for both `pyret` and
-`wescheme`.
+programming language is used.
 
 - The directory `solution-pages` is used to house source
 that will shadow `pages`, when the pages meant only for
@@ -356,6 +353,30 @@ anew.
 
 For more on the build process in general, see
 link:lib/maker/doc/index.adoc[].
+
+=== The build wrapper
+
+A Bash script `build` is provided as a convenient wrapper for `make`:
+
+`build` takes the following options:
+
+- `--book` (aka `--pdf`, `-b`): generates PDFs, both for
+  individuals and the workbooks
+- `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
+  builds from scratch, scrubbing any previous `distribution/`
+- `--graph` (aka `-g`): generates the lesson dependency graph
+- `--help` (aka `-h`): displays help and exists
+- `--link` (aka `--verify-links`, `-l`): verify all the links in
+  the documentation
+- `--natlang L`: builds doc for the natural language `L`
+  (default: `en-us`)
+- `-bf` or `-fb`: combination of `-f` and `-b`
+
+Options can be combined in any order.
+
+(There was an older script called `build-pathway` that our authors have
+gotten used to. It is provided as a trivial identify wrapper for
+`build`.)
 
 == Deployment
 
@@ -815,9 +836,7 @@ obviously needed to keep the extent of
 ==== Programming language specific text
 
 Use the `@ifproglang` directive to conditonally include a
-fragment text for a specific programming language, which as
-explained earlier, is usually `pyret` by default, but can be set
-supplying a `--proglang` option to the build script. E.g.,
+fragment text for a specific programming language. E.g.,
 
   @ifproglang{pyret}{
   This text occurs in the Pyret version of this document.
@@ -868,5 +887,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-02-27
+// last modified 2023-02-28
 // vi:tw=72

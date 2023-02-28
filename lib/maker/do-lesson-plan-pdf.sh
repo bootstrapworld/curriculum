@@ -1,15 +1,14 @@
 #!/bin/bash
 
-# created 2023-02-13
-# last modified 2023-02-15
+# last modified 2023-02-28
 
 # echo doing do-lesson-plan-pdf $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-test -f $fcontainingdirectory/.proglang-ignore && exit
+test -f $containingdirectory/.proglang-ignore && exit
 
 whtmlfile=${adocfile%.adoc}.shtml
 

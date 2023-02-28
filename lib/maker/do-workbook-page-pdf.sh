@@ -1,19 +1,16 @@
 #!/bin/bash
 
-# created 2023-02-13
-# last modified 2023-02-15
+# last modified 2023-02-28
 
 # echo doing do-workbook-page-pdf $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+lessondirectory=$(echo $containingdirectory|$SED -e 's#.*/lessons/\([^/]*\).*#\1#')
 
-lessondirectory=$(echo $containingdirectory|$SED -e 's#\(lessons/[^/]*\).*#\1#')
-
-test -f distribution/$NATLANG/$lessondirectory/.proglang-ignore && exit
+test -f distribution/$NATLANG/lessons/$lessondirectory/.proglang-ignore && exit
 
 whtmlfile=${adocfile%.adoc}.html
 

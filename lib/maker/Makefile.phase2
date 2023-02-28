@@ -1,6 +1,4 @@
-# last modified 2023-02-26
-
-# all: initialization copylessons buildlessons buildpathways doconversions
+# last modified 2023-02-28
 
 include $(MAKE_DIR)utils.mk
 
@@ -200,6 +198,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
 	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
 	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
+	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "]" >> $(ADOC_INPUT); echo "module.exports = adocFiles;"; fi
 	$(MAKE_DIR)run-asciidoctor.sh
 
 primitives: preproc

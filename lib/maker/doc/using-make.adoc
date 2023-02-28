@@ -3,7 +3,7 @@
 The `Makefile` in the top directory allows to you build the
 documentation system. Simply type `make`: This creates or updates the
 `distribution` subdirectory with the various files
-needed for the user. 
+needed for the user.
 
 You may also set a small number of environment variables on the
 `make` command-line to further guide the build. These variable
@@ -59,7 +59,13 @@ Bash script called `build-pathway`.  With the Makefiles in place,
 `make`, and may be used by those familiar with its usage and
 unable to let go.
 
-`build-pathway` takes the following options:
+Since all pathways (i.e., courses) are created or updated during
+the make-based build, `build-pathway` (singular) is a bit of a
+misnomer. So the current script is actually called `build`, with
+a `build-pathway` being a trivial identify wrapper for those who
+really can't help using the old name.
+
+`build` takes the following options:
 
 - `--book` (aka `--pdf`, `-b`): generates PDFs, both for
   individuals and the workbooks
@@ -77,4 +83,7 @@ Options may be combined in any order. (Note that the `--help`
 option is overwhelming: help is displayed but no building takes
 place, whatever other options there may be.)
 
-// last modified 2023-02-27
+An experimental option `--adocjs` is provided to use the Node
+version of Asciidoctor rather than the Ruby one.
+
+// last modified 2023-02-28

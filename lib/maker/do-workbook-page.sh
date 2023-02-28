@@ -1,22 +1,20 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-28
 
 # echo doing do-workbook-page.sh $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+lessondirectory=$(echo $containingdirectory|$SED -e 's#\(.*/lessons/[^/]*\).*#\1#')
 
-lessondirectory=$(echo $containingdirectory|$SED -e 's#\(lessons/[^/]*\).*#\1#')
+test -f $lessondirectory/.proglang-ignore && exit
 
-test -f distribution/$NATLANG/$lessondirectory/.proglang-ignore && exit
+test -d $containingdirectory/.cached || mkdir -p $containingdirectory/.cached
 
-test -d $fcontainingdirectory/.cached || mkdir -p $fcontainingdirectory/.cached
-
-distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
 adocbasename=$(basename $adocfile)
 
@@ -38,7 +36,7 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-lesson=$(echo $containingdirectory|$SED -e 's#lessons/\([^/]*\).*#\1#')
+lesson=$(echo $containingdirectory|$SED -e 's#.*/lessons/\([^/]*\).*#\1#')
 
 proglangarg="pyret"
 
@@ -55,7 +53,11 @@ fi
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson \"$lesson\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
 
 if test $otherdirarg != "#t" ; then
-  echo $ascfile >> $ADOC_INPUT
+  if test -z "$ASCIIDOCTOR_NODE"; then
+    echo $ascfile >> $ADOC_INPUT
+  else
+    echo \"$ascfile\", >> $ADOC_INPUT
+  fi
 
   echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
