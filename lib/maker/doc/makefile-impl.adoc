@@ -90,10 +90,9 @@ After these batch files are updated, an external script
 `run-asciidoctor.sh` converts the files in `$ADOCABLES_INPUT` to
 their corresponding `.asc` (also an asciidoc file), using
 adocables-preproc.rkt, an adoc preprocessor written in Racket. It
-then uses the $ADOC_INPUT batch file containing the list of
-.asc's and, after splitting it into manageable chunks, feeds them
-to asciidoctor. (The splitting is because asciidoctor has an
-argument number limit.) A set of .html files results alongside
+then uses the $ADOC_INPUT batch file containing the list of .asc's 
+as input to Asciidoctor.
+A set of .html files results alongside
 the .asc's.
 
 The preprocessing also collects the primitive functions used (if
@@ -150,4 +149,4 @@ course-specific list of pages for the six different types of
 workbooks. The same rule then calls the Node program
 `makeWorkbook.js` to create each course's set of workbook PDFs.
 
-// last modified 2023-02-26
+// last modified 2023-02-27

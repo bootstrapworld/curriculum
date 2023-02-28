@@ -56,8 +56,6 @@ files, with a sample lesson and sample pathway:
         practices/*.rkt
         standards/*.rkt
         textbooks/*.rkt
-        <pathway-agnostic, non-lesson docs>
-        pathway-independent/*
     lessons/
       sample-lesson/
         langs/
@@ -107,6 +105,12 @@ files, with a sample lesson and sample pathway:
               solution-pages/
             resources/
               index.adoc
+              images/
+                *.{png,gif,jpg}
+                lesson-images.json
+              pages/
+                *.{adoc,pdf}
+                workbook-pages.txt
 
 Some standard subdirectory names are used to separate and shadow
 content based on (natural) language of instruction, the
@@ -116,10 +120,11 @@ student or teacher. Thus:
 - The `langs` subdirectory uses further subdirectories, e.g.,
 `en-us` for US English, `es-mx` for Mexican Spanish, and `fr` for French. Source
 documents from the relevant natural language are chosen based on
-the `--natlang` option chosen during build. The default is
+the value of the environment variable `$NATLANG` during build.
+The default is
 `en-us`. In order to ease transition, if a language other than
 `en-us` is chosen, any content unavailable in the new language is
-filled in by what’s in `en-us`.
+filled in by what's in `en-us`.
 
 - Some of the directories have `pyret` and `wescheme`
 subdirectories or both. These contain content that should shadow
@@ -266,7 +271,7 @@ it can be named anything (not necessarily `index.adoc`).
 The top dir contains `Makefile`. Type `make` to build the distribution,
 to populate the `distribution/` directory with the built documentation.
 
-`make` can take the variable settings on the command line:
+`make` can take environment-variable settings on the command line:
 
 - `BOOK=yes` -- creates the PDF versions of the HTML files, as also the
   workbook PDFs. By default, these are not created as it is a relatively
@@ -280,8 +285,8 @@ to populate the `distribution/` directory with the built documentation.
 - `GRAPH=yes` -- creates the lesson dependency graph in
   `distribution/en-us/dependency-graph.js`
 
--  `NATLANG=LL` -- builds for the natural language `LL`. The default is
-   `en-us` (AmEng)
+- `NATLANG=LL` -- builds for the natural language `LL`. The default is
+  `en-us` (AmEng)
 
 - `SEMESTER=season` -- can be set to anything, typically: `fall`, `spring`
 
@@ -295,7 +300,7 @@ resides in
     distribution/
       en-us/
         courses/
-          sample-pathway/
+          data-science/
             index.shtml
             workbook/
               workbook.pdf
@@ -346,7 +351,8 @@ The lessons referred to by the various pathways reside in
 For slide generation, please see
 link:./README-slides.adoc[].
 
-`make clean` scrubs any existing `distribution`.
+`make clean` scrubs any existing `distribution`. The next `make` builds
+anew.
 
 For more on the build process in general, see
 link:lib/maker/doc/index.adoc[].
@@ -364,7 +370,8 @@ deploy all relevant docs from the `distribution/` directory to the host by typin
 
   deploy-to-hostinger
 
-This requires that the environment variables `HOSTINGER_IPADDR`,
+This requires that you have enabled SSH access to the web site machine,
+and that the environment variables `HOSTINGER_IPADDR`,
 `HOSTINGER_USER`, and `HOSTINGER_PORT` be set to the appropriate values.
 
 It's also useful to set `SEMESTER` (e.g., `fall`) and `YEAR` (e.g.,
@@ -752,7 +759,7 @@ be dropped. (The only other possible second component is
 have extension `.pdf`, `.html`, or `.adoc`. If `.adoc`, it is resolved
 to `.html`.
 
-THe directives `@opt-printable-exercise` and `@handout` are called the
+The directives `@opt-printable-exercise` and `@handout` are called the
 same way, and are
 applied to exercise pages not mentioned in the lesson's page list. (The
 two are categorized differently in the collections appearing in the
@@ -861,4 +868,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
+// last modified 2023-02-27
 // vi:tw=72
