@@ -19,7 +19,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let's use Pyret to model linear relationships in data
+* Let's use Pyret to make predictions with linear models
 
 
 | Materials
@@ -35,12 +35,14 @@
 * TBD
 |===
 
-== State Demographics @duration{15 minutes}
+== Looking for Patterns @duration{15 minutes}
 
 === Overview
-Students explore the @online-exercise{https://docs.google.com/spreadsheets/d/14fRmjAiCqGNI5Zr5kGSDjMavln7ILqhSX3N3zGd8CAU, State Demographics dataset}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
+Students explore the State Demographics dataset, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
 
 === Launch
+
+Post sample questions around the room, all of which deal with (possibly) related factors affecting citizens, states, etc. You can use the sample questions below, or come up with your own.
 
 --
 @right{@image{images/questions.png, 250}}
@@ -50,20 +52,25 @@ Students explore the @online-exercise{https://docs.google.com/spreadsheets/d/14f
 - Do states with more seniors also have veterans?
 --
 
+Have students break into groups, with each group selecting one of these questions. Group discussions should be brief (3-5m). What do they think the answer is? What data would they need to collect in order to find out? Have student share their answers with the group.
+
+
 === Investigate
 
 [.lesson-instruction]
+- Today we'll be looking at data from each state in the US, and searching for possible relationships within the data!
 - Open the @online-exercise{https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1, State Demographics Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
 
+Note: during this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.
 
 === Synthesize
 
 - Have students discuss their findings. What did they Notice? What did they Wonder?
 - Invite students to share their scatter-plots with one another (copying and pasting scatter plot displays into a shared document, for example, and then labeling those displays).
 
-== Correlations @duration{15 minutes}
+== Measuring the Strength of a Pattern @duration{15 minutes}
 
 === Overview
 Students identify and make use of correlations in scatter plots, learning to characterize their form as being linear, curved, or showing no clear pattern. They learn how to describe the @vocab{strength} of correlations, and that linear patterns have direction.
@@ -118,13 +125,17 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 @clear
 === Investigate
 
+Now that you've dug into the role the form, direction and strength play in quantifying a correlation, it's time to put those concepts to work!
+
+[.lesson-instruction]
+In pairs or small groups, complete @printable-exercise{pages/identifying-form-matching.adoc}.
+
+Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.
+
 [.lesson-instruction]
 In pairs or small groups, complete @printable-exercise{pages/identifying-form.adoc}
 
-Review student answers. Some of the answers are not so clear-cut!
-
-[.lesson-instruction]
-@printable-exercise{pages/identifying-form-matching.adoc}.
+Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into on category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective.
 
 === Common Misconceptions
 - Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
@@ -134,7 +145,7 @@ Review student answers. Some of the answers are not so clear-cut!
 
 === Synthesize
 
-Have students discuss their answers to the @printable-exercise{pages/identifying-form-matching.adoc}, then turn to their Notice and Wonder.
+Have students discuss their answers to the @printable-exercise{pages/identifying-form-matching.adoc}, then turn to their Notice and Wonder from @printable-exercise{exploring-states.adoc}.
 
 - Did anyone find any linear relationships in the States dataset? Non-linear? Were there any columns that had no relationship whatsoever?
 - Did anyone find any positive linear relationships in the States dataset? Negative?
@@ -172,9 +183,15 @@ When we make a model, we want it to be the closest possible approximation of all
 If you could draw linear model through the cloud of points in your scatter plot, where would you draw it? What would the slope and y-intercept of that model be?
 
 [.lesson-instruction]
-Complete @printable-exercise{model-college-v-income.adoc}
+Complete questions 1-5 in @printable-exercise{model-college-v-income.adoc}.
+
+Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept; define and test f(x) in Pyret; and evaluate the predictive value of f(x).
 
 The `fit model` function consumes columns for our xs and yes, __as well as a function__. It draws a scatter plot and then displays the function on top of it. The `fit-model` also calculates __how well the function models the data__.
+
+[.lesson-instruction]
+Complete the rest of @printable-exercise{model-college-v-income.adoc}.
+
 
 Have students discuss their answers:
 
