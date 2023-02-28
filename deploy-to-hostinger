@@ -126,14 +126,14 @@ cp -pr deployables/* \$DEPLOY_DIR
 EOF
 
 echo Copying deployables.tar.bz2 to hostinger...
-scp -p -P $HOSTINGER_PORT deployables.tar.bz2 deploy-to-public_html.sh $HOSTINGER_IPADDR:tmp/.
+scp -p -P $HOSTINGER_PORT deployables.tar.bz2 deploy-to-public_html.sh $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
 
 exitstatus=$?
 
 test $exitstatus -ne 0 && echo scp failed! 🙁 && exit
 
 echo Unpacking files under public_html/materials/$SEMESTER$YEAR...
-ssh -p $HOSTINGER_PORT $HOSTINGER_IPADDR 'bash ~/tmp/deploy-to-public_html.sh'
+ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deploy-to-public_html.sh'
 
 exitstatus=$?
 
