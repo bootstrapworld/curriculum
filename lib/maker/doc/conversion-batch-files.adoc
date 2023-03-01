@@ -25,6 +25,7 @@ makefile):
 
 (The actual names used are not germane to this discussion.)
 
+[discrete]
 === $ADOCABLES_INPUT
 
 The `$ADOCABLES_INPUT` file has entries for each adoc file that
@@ -51,6 +52,7 @@ The `<adoc-filename>` is the basename of the adoc file. The
 pathname of `distribution/en-us` relative to the adoc file. These
 three values are not optional.
 
+[discrete]
 === $ADOC_INPUT
 
 This contains a list of `.asc` files, which are intermediate
@@ -66,16 +68,17 @@ The HTML files created by AsciiDoctor also
 reside in the `.cached` subdir and go through a postprocessing
 phase before moving to the directory above.
 
+[discrete]
 === $ADOC_POSTPROC_*_INPUT
 
 These are the files
 
-- $ADOC_POSTPROC_LESSONPLAN_INPUT
-- $ADOC_POSTPROC_NARRATIVEAUX_INPUT
-- $ADOC_POSTPROC_NARRATIVE_INPUT
-- $ADOC_POSTPROC_RESOURCES_INPUT
-- $ADOC_POSTPROC_PWYINDEP_INPUT
-- $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  $ADOC_POSTPROC_LESSONPLAN_INPUT
+  $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+  $ADOC_POSTPROC_NARRATIVE_INPUT
+  $ADOC_POSTPROC_RESOURCES_INPUT
+  $ADOC_POSTPROC_PWYINDEP_INPUT
+  $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
 These list the names of the HTML files awaiting postprocessing.
 They are given in six lots, because the type of postprocessing
@@ -91,22 +94,25 @@ varies for:
 
 The filenames in these files are relative to `distribution/en-us`.
 
+[discrete]
 === $PUPPETEER_INPUT
 
 This is a JSON file containing the list of postprocessed HTML
 files that are ready to be converted to PDF.
 
+[discrete]
 === $EXERCISE_COLLECTOR_INPUT
 
 This contains all the lessons containing exercises, so that the
 latter can be quickly collected when making the workbooks.
 
+[discrete]
 === *_LIST_FILE
 
 These are:
 
-- $COURSES_LIST_FILE
-- $LESSONS_LIST_FILE
+  $COURSES_LIST_FILE
+  $LESSONS_LIST_FILE
 
 These contain the list of all the courses and lessons
 respectively. While they can be obtained by listing the

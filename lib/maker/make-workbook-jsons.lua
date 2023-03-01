@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-02-27
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -101,7 +101,7 @@ end
 
 ---------------------------------------------------------------------------
 
-abysspdf = 'distribution/' .. natlang .. '/lib/' .. os.getenv('ABYSS') .. '.pdf'
+notfoundpdf = 'distribution/' .. natlang .. '/lib/page-not-found.pdf'
 
 function make_workbook_json_1(course_dir, tgt)
   -- print('doing make_workbook_json_1 ' .. course_dir .. ', ' .. tgt)
@@ -185,11 +185,11 @@ function make_workbook_json_1(course_dir, tgt)
 
         o:write(localpdffile)
       else
-        o:write(abysspdf)
+        o:write(notfoundpdf)
       end
 
     elseif not file_exists_p(docfile) then
-      o:write(abysspdf)
+      o:write(notfoundpdf)
 
     else
       o:write(docfile)

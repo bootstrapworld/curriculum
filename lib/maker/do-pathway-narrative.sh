@@ -1,16 +1,14 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-02-28
 
 # echo do-pathway-narrative $1
 
 adocfile=$1
 
-fcontainingdirectory=$(dirname $adocfile)
+containingdirectory=$(dirname $adocfile)
 
-distrootdir=$(realpath --relative-to=$fcontainingdirectory $TOPDIR/distribution/$NATLANG)/
-
-containingdirectory=$(realpath --relative-to=$TOPDIR/distribution/$NATLANG $fcontainingdirectory)
+distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
 
 adocbasename=$(basename $adocfile)
 
@@ -24,7 +22,7 @@ if $(echo $adocfile|grep -q '/solution-pages/'); then
   solutionsmodearg="#t"
 fi
 
-targetpathway=$(echo $containingdirectory|$SED -e 's#courses/\([^/]*\).*#\1#')
+targetpathway=$(echo $containingdirectory|$SED -e 's#.*/courses/\([^/]*\).*#\1#')
 
 # proglangarg=pyret
 if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap
@@ -46,10 +44,20 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:narrative #t #:target-pathway \"$targetpathway\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
-echo $ascfile >> $ADOC_INPUT
+if test -z "$ASCIIDOCTOR_NODE"; then
+  echo $ascfile >> $ADOC_INPUT
+else
+  echo \"$ascfile\", >> $ADOC_INPUT
+fi
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_NARRATIVE_INPUT
 
-echo courses/$targetpathway/.cached/.pathway-glossary.asc >> $ADOC_INPUT
+glossaryfile=distribution/$NATLANG/courses/$targetpathway/.cached/.pathway-glossary
 
-echo "  " \"courses/$targetpathway/.cached/.pathway-glossary.html\", >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+if test -z "$ASCIIDOCTOR_NODE"; then
+  echo $glossaryfile.asc >> $ADOC_INPUT
+else
+  echo \"$glossaryfile.asc\", >> $ADOC_INPUT
+fi
+
+echo "  " \"$glossaryfile.html\", >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT

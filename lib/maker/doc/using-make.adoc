@@ -5,6 +5,10 @@ documentation system. Simply type `make`: This creates or updates the
 `distribution` subdirectory with the various files
 needed for the user.
 
+You may also set a small number of environment variables on the
+`make` command-line to further guide the build. These variable
+settings may be combined.
+
 === PDF and workbook generation
 
 By default, `make` won't create the PDF versions of the HTML files, nor the
@@ -46,3 +50,54 @@ To remove a previously made distribution entirely, do
 
 The next `make` -- with whatever options you desire -- will be on
 a fresh slate.
+
+=== Deploying to websit
+
+To deploy a built distribution to the website, do
+
+    make deploy
+
+Deployment is described in more detail in the repo's README.
+
+=== For users of legacy build-pathway
+
+Before the Makefile-based system was implemented, builds were done using a Bash
+script called `build-pathway`.  For those familiar with its usage and unable to
+let go, a new script `build` is provided whose API is similar to
+`build-pathway`, and which is actually a wrapper that calls the new `make`
+under the hood.
+
+NOTE: The new name `build` is used  because `build-pathway` (singular) would a
+bit of a misnomer: the underlying `make` always creates or updates _all_
+pathways (i.e., courses). Nevertheless, for those who really can't help using
+the old name, `build-pathway` is provided a trivial identity wrapper for
+`build`. Just remember that you cannot chose one pathway to build: Such
+arguments are ignored with a helpful diagnostic.
+
+`build` takes the following options:
+
+- `--book` (aka `--pdf`, `-b`): generates PDFs, both for
+  individuals and the workbooks
+- `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
+  builds from scratch, scrubbing any previous `distribution/`
+- `--graph` (aka `-g`): generates the lesson dependency graph
+- `--help` (aka `-h`): displays help and exists
+- `--link` (aka `--verify-links`, `-l`): verify all the links in
+  the documentation
+- `--natlang L`: builds doc for the natural language `L`
+  (default: `en-us`)
+
+Options may be combined in any order.
+
+NOTE: The `--help`
+option overwhelms all other options: help is displayed but no building takes
+place.
+
+TIP: Use `-fb` or `-bf` for the often useful combination of
+`--force` and `--book`.
+
+TIP: An experimental option `--adocjs` is provided that tells the
+build to use the Node
+version of Asciidoctor rather than the Ruby one.
+
+// last modified 2023-03-01

@@ -21,11 +21,11 @@ do
     local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.txt.kp'
     if not file_exists_p(this_course_lessons_file) then goto continue end
     local i = io.open(this_course_lessons_file)
-    o:write('  \"' .. course .. '\": [')
+    o:write('  \"' .. course .. '\": [\n')
     for lsn in i:lines() do
-      o:write('\"' .. lsn .. '\", ')
+      o:write('     \"' .. lsn .. '\",\n')
     end
-    o:write('],\n\n')
+    o:write('  ],\n')
 
     ::continue::
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-26
+-- last modified 2023-02-27
 
 -- print('doing collect-primitives.lua')
 
@@ -12,25 +12,20 @@ do
     local prims = {}
     --
     local ls_output = io.popen('ls ' .. lesson_cache .. '.*.primtxt 2>/dev/null')
+    local seen = {}
     for prim_file in ls_output:lines() do
       local i = io.open(prim_file)
       for prim in i:lines() do
-        table.insert(prims, prim)
+        if not seen[prim] then
+          seen[prim] = true
+          table.insert(prims, prim)
+        end
       end
       i:close()
     end
     ls_output:close()
     --
     table.sort(prims)
-    --
-    local seen = {}
-    for idx,prim in ipairs(prims) do
-      if seen[prim] then
-        table.remove(prims, idx)
-      else
-        seen[prim] = true
-      end
-    end
     --
     local o = io.open(lesson_cache .. '.index-primitives.txt.kp', 'w+')
     for _,prim in ipairs(prims) do

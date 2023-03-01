@@ -35,7 +35,7 @@ Special directives -- `@printable-exercise`,
 `@opt-printable-exercise`, `@handout` -- are used to include
 files within the lesson directory that are meant to be
 _exercises_. Their names are stored in
-`.cached/.lesson-exericses.txt.kp`.  Again these are useful for
+`.cached/.lesson-exercises.txt.kp`.  Again these are useful for
 the collective description.
 
 === Calling Asciidoctor
@@ -48,9 +48,7 @@ These files are now ready to be processed by Asciidoctor to
 produce the corresponding .html.
 
 The `asciidoctor` command can take a bunch of input files
-as command-line input, however, given the number of files we're
-processing, we will be exceeding the maximum-arg limit. We
-therefore split the `$ADOC_INPUT` file into smaller files, each
-of at most 100 entries, and we run `asciidoctor` separately on
-these groups of 100.
+as command-line input, so we passit the contents of
+`$ADOC_INPUT`.
 
+// last modified 2023-02-27
