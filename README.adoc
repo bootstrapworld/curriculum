@@ -387,17 +387,17 @@ A typical `make deploy` goes to something like
 https://www.bootstrapworld.site/materials/fall2023, assuming that
 the environment variables `SEASON` and `YEAR` are `fall` and `2023`
 respectively. These environment variables may be set at your OS
-command line or your shell profile, or on the `make` command line, e.g.,
+command line or in your shell profile, or on the `make` command line, e.g.,
 
     make SEASON=fall YEAR=2023 deploy
 
-IMPORTANT: If `SEASON` and `YEAR` are not set externally and are not
+IMPORTANT: If `SEASON` and `YEAR` are not set externally _and_ are not
 supplied on the `make`
 command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
 is the current year) are used. This is to prevent inadvertently
 overwriting
-a currently active deployment. Always explicitly set `SEASON` and
-`YEAR` when deploying in earnest.
+a currently active deployment. _Always explicitly set `SEASON` and
+`YEAR` when deploying in earnest._
 
 Deployment requires that you have enabled SSH access to the web site machine,
 and that the environment variables `HOSTINGER_IPADDR`,
@@ -409,12 +409,12 @@ to unpack them on the webhost machine.
 
 [TIP]
 --
-Deployment uses SSH
+Deployment uses
 SSH to interact with your webost.
 account. This can be slow. If you're updating an already deployed
 doctree, you may set the variable `SKIPLIB` to save yourself the time taken
 to recopy the large mathjax library, since it's unlikely to have
-changed.
+changed:
 
     make SKIPLIB=true deploy
 --
@@ -436,6 +436,8 @@ A Bash script `build` is provided as a convenient wrapper for `make`:
 
 - `--book` (aka `--pdf`, `-b`): generates PDFs, both for
   individuals and the workbooks
+- `--deploy`: deploys to website. If dir `distribution/` not found,
+  makes it first; otherwise uses already-built distribution
 - `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
   builds from scratch, scrubbing any previous `distribution/`
 - `--graph` (aka `-g`): generates the lesson dependency graph

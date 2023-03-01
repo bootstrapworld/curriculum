@@ -51,7 +51,7 @@ To remove a previously made distribution entirely, do
 The next `make` -- with whatever options you desire -- will be on
 a fresh slate.
 
-=== Deploying to websit
+=== Deploying to website
 
 To deploy a built distribution to the website, do
 
@@ -78,6 +78,9 @@ arguments are ignored with a helpful diagnostic.
 
 - `--book` (aka `--pdf`, `-b`): generates PDFs, both for
   individuals and the workbooks
+- `--deploy`: deploys to website. Uses existing `distribution/`,
+  if not, makes it first. May be preceded with settings for
+  `SKIPLIB`, `SEASON`, `YEAR`
 - `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
   builds from scratch, scrubbing any previous `distribution/`
 - `--graph` (aka `-g`): generates the lesson dependency graph
@@ -89,12 +92,14 @@ arguments are ignored with a helpful diagnostic.
 
 Options may be combined in any order.
 
-NOTE: The `--help`
-option overwhelms all other options: help is displayed but no building takes
-place.
+NOTE: The `--help` and `--version`
+options overwhelm all other options: they display info but
+do not build
 
 TIP: Use `-fb` or `-bf` for the often useful combination of
-`--force` and `--book`.
+`--force` and `--book`, used to make a final-cut distribution
+including the workbook PDFs after the source has been debugged to
+satisfaction.
 
 TIP: An experimental option `--adocjs` is provided that tells the
 build to use the Node
