@@ -1,0 +1,52 @@
+= Exploring the Countries Dataset
+
+For this page, you'll need to the  @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+@n Click "Run", and evaluate `countries-table` in the Interactions Area. Take a close look at each column, and make sure you understand what they mean:
+
+- *country* - name of the country
+- *gdp* - total gross domestic product of the country
+- *population* - number of people in the country
+- *pc-gdp* - "per-capita gdp": the average GDP _per-person_
+- *has-univ-healthcare* - does this country have universal healthcare?
+- *median-lifespan* - the median life expectancy of people in the country
+
+@n Type `afghanistan` and `albania` into the Interactions Area. What do they evaluate to? @fitb{}{@ifsoln{Rows for those countries}}
+
+@n Do people who make more money generally live longer? Make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`. Sketch this plot in the space below.
+
+[.FillVerticalSpace, options="frame",stripes="none"]
+!===
+|
+!===
+
+@n Do you see a correlation? Describe it, in terms of linear/nonlinear and strong/weak.
+
+@fitb{}{@ifsoln{There seems to be a somewhat strong, nonlinear correlation}}
+
+@fitb{}{}
+
+@center{**Stop here! We'll continue after some discussion.**}
+
+@n The contract for a function representing a linear model is on line 18. What is its name? @fitb{2em}{@ifsoln{f}} Domain? @fitb{5em}{@ifsoln{Number}} Range? @fitb{}{@ifsoln{Number}}
+
+@n Fit the linear model `f` using the `model-fit` function. What is the @math{R^2} value? @fitb{}{@ifsoln{-1186.55}}.
+
+
+@n Change `f` to be the best linear model you can build. In the table below, record your attempts and the @math{R^2} values you got for them.
+
+[.FillVerticalSpace, cols="^1a, ^1a", options="header"]
+|===
+| Model (Function or Pyret Notation - whatever you prefer!)   | @math{R^2}
+|                                                             |
+|===
+
+
+@ Evaluate @show{(code '(lr-plot countries-table "country" "pc-gdp" "median-lifespan"))} to find the best-possible linear model. What is the @math{R^2}? @fitb{5em}{@ifsoln{0.413}} and write the model below.
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{0.00021}}}{slope}x + @fitbruby{8em}{@ifsoln{68.0125}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 0.00021) x) (?ANS 68.0125))))}
+}
+
+@ Could we get a better fit if we used a non-linear model? In your sketch above, draw a line or curve that you think would fit better.
+
