@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-28
+# last modified 2023-03-01
 
 # env vars HOSTINGER_PORT, HOSTINGER_USER, HOSTINGER_IPADDR *must* be set!
 # but don't set them here, for security reasons
@@ -20,15 +20,6 @@ test -z "$SEMESTER" && SEMESTER=fall
 test -z "$YEAR" && YEAR=2023-debug
 
 ############################################################################
-
-lib=
-
-while test $# -ne 0; do
-  arg=$1; shift
-  if test "$arg" = -lib; then
-    lib=lib
-  fi
-done
 
 if test ! -d distribution; then
   echo distribution/ not found; exit
@@ -75,7 +66,7 @@ function copyCourse() {
 }
 
 for lang in $ALL_THE_LANGS; do
-  if test $lib; then
+  if test -z "$SKIPLIB"; then
     if test -d $lang/extlib; then
       cp -pr $lang/extlib deployables/$lang
     fi
