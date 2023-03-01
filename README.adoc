@@ -283,13 +283,14 @@ to populate the `distribution/` directory with the built documentation.
 - `GRAPH=yes` -- creates the lesson dependency graph in
   `distribution/en-us/dependency-graph.js`
 
-- `NATLANG=LL` -- builds for the natural language `LL`. The default is
-  `en-us` (AmEng)
+- `NATLANG=lang` -- builds for the natural language `lang`. The default is
+  `en-us` (US English). Currently, the only other language that has
+  significant support is `es-mx` (español mexicano)
 
-- `SEMESTER=season` -- can be set to anything, typically: `fall`,
+- `SEMESTER=season` -- typically either `fall` or
   `spring`. The default is `fall`
 
-- `YEAR=yyyy` -- can be set to anything, typically the four-digit year
+- `YEAR=yyyy` -- typically the four-digit year
   of the Common Era. The default is the current year followed by
   `-BETA`
 
@@ -375,6 +376,8 @@ The next
 
 === Deployment
 
+(This section is relevant only to administrators.)
+
 After making the distribution, it may be deployed to the web host
 using the `make` target `deploy`:
 
@@ -400,7 +403,7 @@ overwriting
 a currently active deployment. _Always explicitly set `SEASON` and
 `YEAR` when deploying in earnest._
 
-Deployment requires that you have enabled SSH access to the web site machine,
+Deployment requires that you have enabled SSH access to the website machine,
 and that the environment variables `HOSTINGER_IPADDR`,
 `HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
 
@@ -703,12 +706,12 @@ shadowing glossary file.
 
 The `glossary-terms.rkt` file (and any shadowing files) defines and
 exports the
-Scheme variable `*glossary-list*`, whose value is a list of glosses. Each
+Scheme variable `+*glossary-list*+`, whose value is a list of glosses. Each
 gloss is itself a list of sublists, where the sublist contains three
 elements:
 
-- a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
-- the glossed item. This can be:
+1.  a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
+2. the glossed item. This can be:
 ** a string, e.g., `"variable"`
 ** a list of strings, meant to be grammatically related items, e.g., `("axis"
 "axes")`. Either string can be used in the source (whatever fits the
@@ -720,8 +723,10 @@ grammatically related, but the different sublists are quite different
 terms, e.g., `(("mean") ("average" "ave" "avg"))`. The word in the source is used
 to find the relevant sublist, and _its_ first item is used in the
 generated glossary
-- a string specifying the definition for the glossed item
+3. a string specifying the definition for the glossed item
 
+[TIP]
+--
 As a convenience, it is not necessary to specify simple grammatical
 declensions in the glossary file. Thus, in the glossary entry for
 `"coordinate"` you don't need to tack on `"coordinates"`, although you
@@ -740,7 +745,10 @@ For English (`en-us`), this convenience covers:
 Latin (the aforementioned `"axis"`/`"axes"`) and Old English plurals
 (`"child"`/`"children"`) need explicit entries however; sorry!
 
-Spanish (`es-mx`) has its own set of declension detection mechanisms.
+Spanish (`es-mx`) has its own set of declension detection mechanisms
+(`"-iones"` to `"-ión"`, `"-ques"` to `"-c"`, `"-gues"` to `"-g"`,
+`"-ces"` to `"-z"`, `"-es"` to `""`).
+--
 
 ==== Lesson descriptions and dependencies
 
@@ -811,7 +819,10 @@ only
 in solution pages.
 
 The directive `@do` passes its argument to Racket, and renders
-the standard output thereof.
+the standard output thereof. It is a general-purpose trapdoor into
+Racket for things that are too difficult to do using regular
+AsciiDoc and the standard directives. (That said, we haven't had
+occasion to need it so far.)
 
 ==== Cross-references and pagination
 
