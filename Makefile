@@ -1,4 +1,4 @@
-# last modified 2023-02-28
+# last modified 2023-03-01
 
 # to override any of these, set them at the make call, e.g.,
 #
@@ -8,17 +8,16 @@
 
 export NATLANG ?= en-us
 
-# but perhaps putting the following defaults here isn't great.
-# Maybe they should be in a separate customization file?
-# Or possibly determined astronomically?
-
 export SEMESTER ?= fall
-export YEAR ?= 2023
 
-# set to nonempty if you want to use the Node (rather than Ruby) version of Asciidoctor.
-# It isn't bugfree though
+export YEAR ?= $(shell date +%Y)-BETA
 
-export ASCIIDOCTOR_NODE
+# set ASCIIDOCTOR_NODE to nonempty if you want to use the Node (rather than
+# Ruby) version of Asciidoctor. It isn't bugfree yet
+
+# export ASCIIDOCTOR_NODE
+
+############################################################################
 
 # don't change below this
 

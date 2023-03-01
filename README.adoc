@@ -263,7 +263,7 @@ subdirectory, where an `.adoc` file describes the “Teacher
 Resources” page. There should be only one such `.adoc` file, but
 it can be named anything (not necessarily `index.adoc`).
 
-== Building using the Makefile
+== Building and deploying using the Makefile
 
 The top dir contains `Makefile`. Type `make` to build the distribution,
 to populate the `distribution/` directory with the built documentation.
@@ -285,10 +285,22 @@ to populate the `distribution/` directory with the built documentation.
 - `NATLANG=LL` -- builds for the natural language `LL`. The default is
   `en-us` (AmEng)
 
-- `SEMESTER=season` -- can be set to anything, typically: `fall`, `spring`
+- `SEMESTER=season` -- can be set to anything, typically: `fall`,
+  `spring`. The default is `fall`
 
 - `YEAR=yyyy` -- can be set to anything, typically the four-digit year
-  of the Common Era
+  of the Common Era. The default is the current year followed by
+  `-BETA`
+
+[IMPORTANT]
+--
+These environment variables may also be set separately (i.e., not as a
+`make` argument) on your machine, either on the command line or in your
+shell profile. In such cases, they should be `export`ed so that the make
+can see them, e.g.,
+
+    export GRAPH=yes
+--
 
 The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
 resides in
@@ -348,11 +360,73 @@ The lessons referred to by the various pathways reside in
 For slide generation, please see
 link:./README-slides.adoc[].
 
-`make clean` scrubs any existing `distribution`. The next `make` builds
-anew.
-
 For more on the build process in general, see
 link:lib/maker/doc/index.adoc[].
+
+=== Cleaning
+
+The `make` target `clean` scrubs any existing `distribution`.
+
+    make clean
+
+The next
+`make` builds anew.
+
+=== Deployment
+
+After making the distribution, it may be deployed to the web host
+using the `make` target `deploy`:
+
+    make deploy
+
+We
+currently deploy to:
+https://www.bootstrapworld.site
+
+A typical `make deploy` goes to something like
+https://www.bootstrapworld.site/materials/fall2023, assuming that
+the environment variables `SEASON` and `YEAR` are `fall` and `2023`
+respectively. These environment variables may be set at your OS
+command line or your shell profile, or on the `make` command line, e.g.,
+
+    make SEASON=fall YEAR=2023 deploy
+
+IMPORTANT: If `SEASON` and `YEAR` are not set externally and are not
+supplied on the `make`
+command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
+is the current year) are used. This is to prevent inadvertently
+overwriting
+a currently active deployment. Always explicitly set `SEASON` and
+`YEAR` when deploying in earnest.
+
+Deployment requires that you have enabled SSH access to the web site machine,
+and that the environment variables `HOSTINGER_IPADDR`,
+`HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
+
+You will be prodded for your webhost password,
+once to copy the files over and another time
+to unpack them on the webhost machine.
+
+[TIP]
+--
+Deployment uses SSH
+SSH to interact with your webost.
+account. This can be slow. If you're updating an already deployed
+doctree, you may set the variable `SKIPLIB` to save yourself the time taken
+to recopy the large mathjax library, since it's unlikely to have
+changed.
+
+    make SKIPLIB=true deploy
+--
+
+[NOTE]
+--
+`make deploy` actually calls the script `deploy-to-hostinger`, which may also be
+called on its own, e.g.,
+
+    deploy-to-hostinger
+    SKIPLIB=true deploy-to-hostinger
+--
 
 === The build wrapper
 
@@ -377,38 +451,6 @@ Options can be combined in any order.
 (There was an older script called `build-pathway` that our authors have
 gotten used to. It is provided as a trivial identify wrapper for
 `build`.)
-
-== Deployment
-
-We currently deploy to:
-https://www.bootstrapworld.site
-
-A typical build goes to something like:
-https://www.bootstrapworld.org/materials/fall2023
-
-After building on your local machine, you can
-deploy all relevant docs from the `distribution/` directory to the host by typing
-
-  deploy-to-hostinger
-
-This requires that you have enabled SSH access to the web site machine,
-and that the environment variables `HOSTINGER_IPADDR`,
-`HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
-
-It's also useful to set `SEMESTER` (e.g., `fall`) and `YEAR` (e.g.,
-`2023`) so the docs go to the
-appropriate web directory (e.g., `fall2023`),  the concatenation of these two
-values.
-
-You will be prodded for your webhost password,
-once to copy the files over and another time
-to unpack them on the webhsot machine.
-
-The script `deploy-to-hostinger` uses SSH to interact with your webost.
-account. This can be slow. If you're updating an already deployed
-doctree, you may use the `-lib` option to save yourself the time taken
-to recopy the large mathjax library, since it's unlikely to have
-changed.
 
 == Standards compliance
 
@@ -887,5 +929,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-02-28
+// last modified 2023-03-01
 // vi:tw=72
