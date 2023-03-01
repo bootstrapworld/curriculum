@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# last modified 2023-03-01
+
 BROKEN_EXTERNAL_LINKS=
 
 for g in "$@"; do
@@ -7,6 +9,7 @@ for g in "$@"; do
   containingFile=$(echo $containingFile|sed -e 's/\.cached\/\.//').adoc
 
   for f in $(cat $g); do
+
     invalid=
     # possible alternative? wget -q --spider $f
     curl -Is $f > .temp.txt
@@ -29,11 +32,6 @@ for g in "$@"; do
       echo WARNING: Invalid external link $f in $containingFile
     fi
   done
-
 done
 
-if test $BROKEN_EXTERNAL_LINKS; then
-  echo 👎 Broken external links found
-else
-  echo 👍 No broken external links found
-fi
+test -n "$BROKEN_EXTERNAL_LINKS" && touch distribution/$NATLANG/.cached/.check-external-links

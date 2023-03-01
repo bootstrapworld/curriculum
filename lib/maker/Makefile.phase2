@@ -1,4 +1,4 @@
-# last modified 2023-02-28
+# last modified 2023-03-01
 
 include $(MAKE_DIR)utils.mk
 
@@ -210,9 +210,6 @@ postproc: preproc
 dependency: primitives
 	if test -n "$(GRAPH)"; then $(MAKE_DIR)make-dependency-graph.lua; fi
 
-linkcheck: preproc
-	if test -n "$(LINKCHECK)"; then $(MAKE_DIR)do-link-check.sh; fi
-
 images: preproc
 	$(MAKE_DIR)make-images-js.lua
 
@@ -221,6 +218,9 @@ tocs: preproc
 
 pdfs: postproc
 	if test -n "$(BOOK)"; then $(MAKE_DIR)make-pdf.sh; fi
+
+linkcheck: pdfs
+	if test -n "$(LINKCHECK)"; then $(MAKE_DIR)do-link-check.sh; fi
 
 books: pdfs
 	if test -n "$(BOOK)"; then $(MAKE_DIR)make-workbook-jsons.lua; $(MAKE_DIR)make-books.sh; fi

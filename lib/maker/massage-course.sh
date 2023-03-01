@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-25
+# last modified 2023-03-01
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
@@ -38,7 +38,7 @@ for pl in $proglangs; do
   mkdir -p $targetpathway/resources/protected
   mkdir -p $targetpathway/resources/pages
   mkdir -p $targetpathway/workbook
-  $CP -p $PROGDIR/.hta* $targetpathway/resources/protected
+  $CP -p $TOPDIR/lib/.hta* $targetpathway/resources/protected
 done
 
 for d in $pathwayName*; do

@@ -721,7 +721,7 @@
               adoc-img))))))
 
 (define (check-link f #:external? [external? #f])
-  ; (printf "doing check-link ~s ~s\n" f external?)
+  ; (unless external? (printf "doing check-link ~s \n" f))
   (when (or *link-lint?* #t)
     (cond [external? (display f *external-links-port*)
                      (newline *external-links-port*)]
@@ -783,7 +783,7 @@
       link-output)))
 
 (define (make-lesson-link f link-text)
-  ;(printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
          (set! f "./index.adoc")]
@@ -807,8 +807,8 @@
             (cons q (rest dir-compts)) "/"))
         (set! f (string-append dir "/" snippet))))
 
-    (set! f (string-append "lessons/" f))
-    (set! dir (string-append "lessons/" dir))
+    (set! f (format "distribution/~a/lessons/~a" *natlang* f))
+    (set! dir (format "distribution/~a/lessons/~a" *natlang* dir))
 
     (let* ([f.titletxt (path-replace-extension
                          (string-append dir "/.cached/." snippet)
@@ -848,7 +848,7 @@
         (set! link-text page-title))
       (let ([link-output
 
-              (format "link:~apass:[~a][~a~a]"
+              (format "link:~a../../pass:[~a][~a~a]"
                       "{fromlangroot}"
                       f link-text
                       (if *lesson-plan* ", window=\"_blank\"" ""))
@@ -895,7 +895,7 @@
                             (set! g (path-replace-extension g ".pdf"))])
                      (when existent-file?
                        (set! f (build-path *containing-directory* g)))
-                    ; (printf "link ~a refers to ~a\n\n" g f)
+                     ; (printf "link ~a refers to ~a\n\n" g f)
                      (let ([short-ref? (abbreviated-index-page? f)])
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?

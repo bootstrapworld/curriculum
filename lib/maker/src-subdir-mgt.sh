@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-20
+# last modified 2023-03-01
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -39,7 +39,7 @@ function shadowcopydir() {
 function make_solution_pages() {
   test -d solution-pages-2 && rm -fr solution-pages-2
   $CP -pr pages solution-pages-2
-  $CP -p $PROGDIR/.hta* solution-pages-2
+  $CP -p $TOPDIR/lib/.hta* solution-pages-2
   if test -d solution-pages; then
     shadowcopydir solution-pages solution-pages-2
     rm -fr solution-pages

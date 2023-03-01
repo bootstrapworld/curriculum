@@ -25,11 +25,18 @@ line to a nonempty string, e.g.,
 
 By default, the checking of the various internal and external
 links in the documents are not checked -- because it can be a
-time-consuming process when its results are actively being
-sought. To enable link checking, set the `LINKCHECK` variable to
+time-consuming process. (External-link checking is particularly
+heinous because it takes a long while for each URL probe to return.)
+
+To enable link checking, set the `LINKCHECK` variable to
 nonempty, e.g.,
 
     make LINKCHECK=yes
+
+It is often advisable to do the link check just for its own sake,
+and only once in a while,
+after the distribution dir is already in place from a previous
+`make`.
 
 === Dependency graph generation
 

@@ -1,9 +1,23 @@
 #!/bin/bash
 
-# created 2023-01-20
-# last modified 2023-02-09
+# last modified 2023-03-01
 
-cd $TOPDIR/distribution/$NATLANG
+for yyternal in internal external; do
 
-find . -type f -name \.\*external-links.txt.kp | xargs $PROGDIR/checkexternallinks
-find . -type f -name \.\*internal-links.txt.kp | xargs $PROGDIR/checkinternallinks
+  rm -fr distribution/$NATLANG/.cached/.check-$yyternal-links
+
+  find distribution/$NATLANG/{lessons,courses} -type f \
+    -name \.\*$yyternal-links.txt.kp |
+    xargs $TOPDIR/lib/check-$yyternal-links.sh
+
+done
+
+for yyternal in internal external; do
+
+  if test -f distribution/$NATLANG/.cached/.check-$yyternal-links; then
+    echo 👎 Broken $yyternal links found
+  else
+    echo 👍 No broken $yyternal links found
+  fi
+
+done
