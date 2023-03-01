@@ -297,7 +297,7 @@ to populate the `distribution/` directory with the built documentation.
 --
 These environment variables may also be set separately (i.e., not as a
 `make` argument) on your machine, either on the command line or in your
-shell profile. In such cases, they should be `export`ed so that the make
+shell profile. In such cases, they should be ``export``ed so that the make
 can see them, e.g.,
 
     export GRAPH=yes
@@ -776,7 +776,7 @@ such recipes, please see the `.adoc` files in the various
 
 Some exercise files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
-use some extra directives like `@do`, `@show`, `@code` that then
+use some extra directives like `@do`, `@show`, `@showsoln`, and `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
 
@@ -805,6 +805,13 @@ To show multiple contracts,
 Note that `contracts` takes a list of arguments. Also note that
 quoting each such argument obviates the need for quoting the
 domain-list argument.
+
+The directive `@showsoln` is similar to `@show` but renders
+only
+in solution pages.
+
+The directive `@do` passes its argument to Racket, and renders
+the standard output thereof.
 
 ==== Cross-references and pagination
 
@@ -848,14 +855,9 @@ the link text is optional.
 
 Use `@image{images/pic.png}` to insert the image `images/pic.png`.
 
-Use commas to add image options, e.g.,
-
-  @image{images/player-move.png, PlayerMovement, 400, , credit}
-
-The second argument is the alt text, which also pops up on mouse hover.
-The third and fourth arguments (which can be left empty) specify width
-and height respectively. The fifth argument is used to specify credit
-for the image, and is rendered to the bottom right of the image.
+An optional second argument gives the preferred width of the image.
+Additional information about the image is retrieved from the
+`images/lesson-images.json` file.
 
 ==== Comments
 
@@ -878,7 +880,7 @@ requirement is that any braces within it should be paired. (This is
 obviously needed to keep the extent of
 ``@scrub``'s argument recognizable.)
 
-==== Programming language specific text
+==== Programming-language specific text
 
 Use the `@ifproglang` directive to conditonally include a
 fragment text for a specific programming language. E.g.,

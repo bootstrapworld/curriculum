@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-02-28
+; last modified 2023-03-01
 
 (require json)
 (require file/sha1)
@@ -1416,7 +1416,7 @@
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (make-image (first args)
-                                                       (if (>= (length args) 2) (second args) ""))
+                                                   (if (>= (length args) 2) (second args) ""))
                                        o))]
                            [(string=? directive "centered-image")
                             (let ([args (read-commaed-group i directive read-group)])
