@@ -21,7 +21,7 @@
 
 (define *in-file* "doesnt-exist")
 
-(define *progdir* (getenv "PROGDIR"))
+(define *topdir* (getenv "topdir"))
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
 
@@ -66,7 +66,7 @@
     (unless (file-exists? img)
       ; (printf "image ~s doesnt exist\n" img)
       (let ([img-anonymized
-              (system-echo (format "~a/anonymize-filename" *progdir*) img)])
+              (system-echo (format "~a/lib/anonymize-filename.sh" *topdir*) img)])
         ; (printf "anon image file is ~s\n" img-anonymized)
         (when img-anonymized
           (set! img img-anonymized))))

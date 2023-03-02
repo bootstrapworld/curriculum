@@ -1,10 +1,10 @@
-# last modified 2022-10-18
+# last modified 2023-03-01
 
 # Set environment variables SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
 
-SEMESTER=fall
-YEAR=2022
+test -z "$SEMESTER" && SEMESTER=fall
+test -z "$YEAR" && YEAR=$(date +%Y)-BETA
 
 ############################################################################
 
@@ -99,10 +99,8 @@ echo Password-protecting solution files
 
 export SHAW=c6554157433a94d84db9792fc3cf779b14956e59
 
-export PROGDIR=$DISTDIR/.prog-en-us
-
-find deployables -name solution-pages -type d | xargs $PROGDIR/password-protect-dirs.sh
-find deployables -name protected -type d | xargs $PROGDIR/password-protect-dirs.sh
+find deployables -name solution-pages -type d | xargs $DISTDIR/../lib/password-protect-dirs.sh
+find deployables -name protected -type d | xargs $DISTDIR/../lib/password-protect-dirs.sh
 
 ###########################
 

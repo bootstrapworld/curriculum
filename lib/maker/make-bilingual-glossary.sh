@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-13
+# last modified 2023-03-01
 
 cd $TOPDIR
-$PROGDIR/make-bilingual-glossary.rkt
+lib/make-bilingual-glossary.rkt
 
 GLOSSFILE=$TOPDIR/distribution/$NATLANG/lib/bilingual-glossary.adoc
 

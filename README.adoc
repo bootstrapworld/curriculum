@@ -1,5 +1,6 @@
 :toc:
 :toclevels: 4
+:icons: font
 
 = READ ME
 
@@ -282,13 +283,14 @@ to populate the `distribution/` directory with the built documentation.
 - `GRAPH=yes` -- creates the lesson dependency graph in
   `distribution/en-us/dependency-graph.js`
 
-- `NATLANG=LL` -- builds for the natural language `LL`. The default is
-  `en-us` (AmEng)
+- `NATLANG=lang` -- builds for the natural language `lang`. The default is
+  `en-us` (US English). Currently, the only other language that has
+  significant support is `es-mx` (español mexicano)
 
-- `SEMESTER=season` -- can be set to anything, typically: `fall`,
+- `SEMESTER=season` -- typically either `fall` or
   `spring`. The default is `fall`
 
-- `YEAR=yyyy` -- can be set to anything, typically the four-digit year
+- `YEAR=yyyy` -- typically the four-digit year
   of the Common Era. The default is the current year followed by
   `-BETA`
 
@@ -296,7 +298,7 @@ to populate the `distribution/` directory with the built documentation.
 --
 These environment variables may also be set separately (i.e., not as a
 `make` argument) on your machine, either on the command line or in your
-shell profile. In such cases, they should be `export`ed so that the make
+shell profile. In such cases, they should be ``export``ed so that the make
 can see them, e.g.,
 
     export GRAPH=yes
@@ -374,6 +376,8 @@ The next
 
 === Deployment
 
+(This section is relevant only to administrators.)
+
 After making the distribution, it may be deployed to the web host
 using the `make` target `deploy`:
 
@@ -387,19 +391,19 @@ A typical `make deploy` goes to something like
 https://www.bootstrapworld.site/materials/fall2023, assuming that
 the environment variables `SEASON` and `YEAR` are `fall` and `2023`
 respectively. These environment variables may be set at your OS
-command line or your shell profile, or on the `make` command line, e.g.,
+command line or in your shell profile, or on the `make` command line, e.g.,
 
     make SEASON=fall YEAR=2023 deploy
 
-IMPORTANT: If `SEASON` and `YEAR` are not set externally and are not
+IMPORTANT: If `SEASON` and `YEAR` are not set externally _and_ are not
 supplied on the `make`
 command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
 is the current year) are used. This is to prevent inadvertently
 overwriting
-a currently active deployment. Always explicitly set `SEASON` and
-`YEAR` when deploying in earnest.
+a currently active deployment. _Always explicitly set `SEASON` and
+`YEAR` when deploying in earnest._
 
-Deployment requires that you have enabled SSH access to the web site machine,
+Deployment requires that you have enabled SSH access to the website machine,
 and that the environment variables `HOSTINGER_IPADDR`,
 `HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
 
@@ -409,12 +413,12 @@ to unpack them on the webhost machine.
 
 [TIP]
 --
-Deployment uses SSH
+Deployment uses
 SSH to interact with your webost.
 account. This can be slow. If you're updating an already deployed
 doctree, you may set the variable `SKIPLIB` to save yourself the time taken
 to recopy the large mathjax library, since it's unlikely to have
-changed.
+changed:
 
     make SKIPLIB=true deploy
 --
@@ -436,6 +440,8 @@ A Bash script `build` is provided as a convenient wrapper for `make`:
 
 - `--book` (aka `--pdf`, `-b`): generates PDFs, both for
   individuals and the workbooks
+- `--deploy`: deploys to website. If dir `distribution/` not found,
+  makes it first; otherwise uses already-built distribution
 - `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
   builds from scratch, scrubbing any previous `distribution/`
 - `--graph` (aka `-g`): generates the lesson dependency graph
@@ -448,9 +454,9 @@ A Bash script `build` is provided as a convenient wrapper for `make`:
 
 Options can be combined in any order.
 
-(There was an older script called `build-pathway` that our authors have
-gotten used to. It is provided as a trivial identify wrapper for
-`build`.)
+NOTE: There was an older script called `build-pathway` that our authors have
+gotten used to. It is provided as a trivial identity wrapper for
+`build`.
 
 == Standards compliance
 
@@ -700,12 +706,12 @@ shadowing glossary file.
 
 The `glossary-terms.rkt` file (and any shadowing files) defines and
 exports the
-Scheme variable `*glossary-list*`, whose value is a list of glosses. Each
+Scheme variable `+*glossary-list*+`, whose value is a list of glosses. Each
 gloss is itself a list of sublists, where the sublist contains three
 elements:
 
-- a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
-- the glossed item. This can be:
+1.  a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
+2. the glossed item. This can be:
 ** a string, e.g., `"variable"`
 ** a list of strings, meant to be grammatically related items, e.g., `("axis"
 "axes")`. Either string can be used in the source (whatever fits the
@@ -717,8 +723,10 @@ grammatically related, but the different sublists are quite different
 terms, e.g., `(("mean") ("average" "ave" "avg"))`. The word in the source is used
 to find the relevant sublist, and _its_ first item is used in the
 generated glossary
-- a string specifying the definition for the glossed item
+3. a string specifying the definition for the glossed item
 
+[TIP]
+--
 As a convenience, it is not necessary to specify simple grammatical
 declensions in the glossary file. Thus, in the glossary entry for
 `"coordinate"` you don't need to tack on `"coordinates"`, although you
@@ -737,7 +745,10 @@ For English (`en-us`), this convenience covers:
 Latin (the aforementioned `"axis"`/`"axes"`) and Old English plurals
 (`"child"`/`"children"`) need explicit entries however; sorry!
 
-Spanish (`es-mx`) has its own set of declension detection mechanisms.
+Spanish (`es-mx`) has its own set of declension detection mechanisms
+(`"-iones"` to `"-ión"`, `"-ques"` to `"-c"`, `"-gues"` to `"-g"`,
+`"-ces"` to `"-z"`, `"-es"` to `""`).
+--
 
 ==== Lesson descriptions and dependencies
 
@@ -773,7 +784,7 @@ such recipes, please see the `.adoc` files in the various
 
 Some exercise files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
-use some extra directives like `@do`, `@show`, `@code` that then
+use some extra directives like `@do`, `@show`, `@showsoln`, and `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
 
@@ -802,6 +813,16 @@ To show multiple contracts,
 Note that `contracts` takes a list of arguments. Also note that
 quoting each such argument obviates the need for quoting the
 domain-list argument.
+
+The directive `@showsoln` is similar to `@show` but renders
+only
+in solution pages.
+
+The directive `@do` passes its argument to Racket, and renders
+the standard output thereof. It is a general-purpose trapdoor into
+Racket for things that are too difficult to do using regular
+AsciiDoc and the standard directives. (That said, we haven't had
+occasion to need it so far.)
 
 ==== Cross-references and pagination
 
@@ -845,14 +866,9 @@ the link text is optional.
 
 Use `@image{images/pic.png}` to insert the image `images/pic.png`.
 
-Use commas to add image options, e.g.,
-
-  @image{images/player-move.png, PlayerMovement, 400, , credit}
-
-The second argument is the alt text, which also pops up on mouse hover.
-The third and fourth arguments (which can be left empty) specify width
-and height respectively. The fifth argument is used to specify credit
-for the image, and is rendered to the bottom right of the image.
+An optional second argument gives the preferred width of the image.
+Additional information about the image is retrieved from the
+`images/lesson-images.json` file.
 
 ==== Comments
 
@@ -875,7 +891,7 @@ requirement is that any braces within it should be paired. (This is
 obviously needed to keep the extent of
 ``@scrub``'s argument recognizable.)
 
-==== Programming language specific text
+==== Programming-language specific text
 
 Use the `@ifproglang` directive to conditonally include a
 fragment text for a specific programming language. E.g.,
