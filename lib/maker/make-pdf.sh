@@ -1,10 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-28
-
-cd $TOPDIR
-
-echo "] }" >> $PUPPETEER_INPUT
+# last modified 2023-03-02
 
 if grep -q input $PUPPETEER_INPUT; then
   if test -n "$DEBUGNOBOOK"; then
