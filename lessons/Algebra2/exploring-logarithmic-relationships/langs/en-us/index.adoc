@@ -48,7 +48,7 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1SGzPW
 - Do people who make more money generally live longer?
 - Open the @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete questions 1-3 on @printable-exercise{exploring-countries.adoc}.
+- Working in pairs or small groups, complete questions 1-4 on @printable-exercise{exploring-countries.adoc}.
 --
 
 === Investigate
@@ -106,11 +106,11 @@ Students learn to transform the data into a linear shape, building a new column 
 
 === Launch
 
-Deriving a logarithmic model from only two points is problematic. How do we know that those two points are representative of the trend? If we picked a wealthy country that is at war, we'd find an artificially low life expectancy. A model based on that point probably not fit the rest of the points very well!
+Deriving a logarithmic model from only two points is problematic. How do we know that those two points are representative of the trend? If we picked a wealthy country that is at war, we'd find an artificially low life expectancy. A model based on that point would probably not fit the rest of the points very well!
 
 This is the same problem we ran into with linear models in our state demographics data, where a model built from any two points would only be as good as those points were representative.
 
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model. Unfortunately, `lr-plot` only finds linear models, so we'd need to find a transformation that will make this data appear linear in order to use it.
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model. Unfortunately, `lr-plot` only finds linear models. We need to find a transformation that will make this data appear linear in order to use `lr-plot`.
 
 Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squished in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
