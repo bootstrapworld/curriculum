@@ -1,14 +1,27 @@
 = Fitting a Model: Wealth v. Lifespan
+++++
+<style>
+.studentAnswerMedium { min-width: 8em !important; }
+td { padding: 0 !important; }
+body.workbookpage .fitbruby { padding-top: 1.1rem; }
+body:not(.LessonPlan, .narrativepage) p { line-height: 1.2; }
+.center { padding: 0; }
+.indent { padding-left: 5em; width: 100%; background: #f7f7f8;}
+</style>
+++++
 
 For this page, you'll need to the  @online-exercise{https://code.pyret.org/editor#share=1StX6mmWMYPQOpH8ab1WiAlvPYeMlMEAD, Countries of the World Starter File} open on your computer. __If you haven't already__, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
 
 **In this exercise you'll have a chance to build and fit more models to the data, now armed with new tools that let you experiment with logs and exponents.** These tools are listed here (as well as in your contracts pages):
 
-- @show{(contract "num-log" '("Number") "Number" "Consumes a number, and produces its natural log")}
-- @show{(contract "num-log-base" '("Number" "Number") "Number" "Consumes a number and a base, and produces the log of that number with the base")}
-- @show{(contract "num-expt" '("Number" "Number") "Number" "Consumes a number and a power, and produces that number raised to the power")}
+[.indent]
+--
+@show{(contract "num-log" '("Number") "Number" "Consumes a number, and produces its natural log")}
+@show{(contract "num-log-base" '("Number" "Number") "Number" "Consumes a number and a base, and produces the log of that number with the base")}
+@show{(contract "num-expt" '("Number" "Number") "Number" "Consumes a number and a power, and produces that number raised to the power")}
+--
 
-@n Test out `afghanistan["pc-gdp"]`, `afghanistan["median-lifespan"]`, `albania["pc-gdp"]`, `albania["median-lifespan"]`, and `. What are these square brackets doing?
+@n Test out `afghanistan["pc-gdp"]`, `afghanistan["median-lifespan"]`, `albania["pc-gdp"]`, and `albania["median-lifespan"]`. What are these square brackets doing?
 
 @fitb{}{@ifsoln{they look up the value of the specified column}}
 
@@ -20,9 +33,18 @@ For this page, you'll need to the  @online-exercise{https://code.pyret.org/edito
 
 @n Using the two points above, define a logarithmic model. Show your work below, then define the function in Function Notation and Pyret.
 
-@vspace{3in}
+@ifsoln{Note: Answers will vary!}@vspace{12ex}
 
-@fitb{}{@math{f(x) = }@ifsoln{@math{14.9146 \times log(0.0165x)} - _Answers may vary_}}
+@center{
+ @math{f(x) = }
+ @fitbruby{5em}{@ifsoln{@math{14.9146}}}{log coefficient}
+ @math{log( }
+ @fitbruby{5em}{@ifsoln{0.0165}}{linear coefficient}
+ @math{x) + }
+ @fitbruby{5em}{@ifsoln{0}}{constant}
+ @hspace{2em}
+ @show{(code '(define (f x) (+ (* (?ANS 14.9146) (log (* (?ANS 0.0165) x))) (?ANS 0))))}
+}
 
 @n Change the function `f` to match this model, and click "Run". Make sure you fix any errors or warnings. In the Interactions Area, make sure `f(1990.51)` and `f(11765.59)` predict the correct median lifespan for Afghanistan and Albania!
 
