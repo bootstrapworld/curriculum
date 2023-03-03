@@ -115,17 +115,17 @@ Trial-and-error only gets us so far, and it's not clear that we would ever stumb
 Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squished in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
 [.lesson-instruction]
-- Complete questions 1-6 in @printable-exercise{transforming-wealth.adoc}
+- Complete questions 1-6 in @printable-exercise{transforming-wealth.adoc}.
 - Discuss as a class: what does `build-column` do?
 
 === Investigate
 
-Since the values on the y-axis (`median-lifespan`) appear grow logarithmically, we could _transform_ the x-axis (`pc-gdp`) to grow logarithmically as well. With both x- and y-valus growing logarithmically, they would appear grow at a constant rate relative to one another. A constant rate will appear linear, which allows us to use `lr-plot` to find the optimal model!
+Since the values on the y-axis (`median-lifespan`) appear to grow logarithmically, we could _transform_ the x-axis (`pc-gdp`) to grow logarithmically as well. With both x- and y-values growing logarithmically, they would appear grow at a constant rate relative to one another. A constant rate will appear linear, which allows us to use `lr-plot` to find the optimal model!
 
 How can we transform this plot so that the `pc-gdp` column is placed on a logarithmic scale?
 
 [.lesson-instruction]
-Complete questions 7-8 on @printable-exercise{transforming-wealth.adoc}
+Complete questions 7-8 on @printable-exercise{transforming-wealth.adoc}.
 
 @right{@image{images/wealth-v-life-transformed-linear.png, 550}} Success! After transforming the `pc-gdp` column to `log-pc-gdp`, a scatter plot shows a more linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `5.169` and a y-intercept of `24.264`. Our @math{R^2} has jumped to 0.663, showing a vastly better correlation than before.
 
@@ -149,7 +149,7 @@ Of course, we could also just define this composition as a new function altogeth
 - @show{(code '(define (h x) (+ (* 5.169 (log x)) 24.264)))}
 
 [.lesson-instruction]
-Complete the remainder of in @pages{transforming-wealth.adoc}
+Complete the remainder of in @printable-exercise{transforming-wealth.adoc}.
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
