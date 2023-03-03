@@ -9,13 +9,4 @@ Pyret has special functions that we can use to manipulate Tables.
 ** `filter` - consumes a __Boolean-producing function__, and produces a table containing only rows for which the function returns `true`
 ** `build-column` - consumes the name of a new column, and a function that produces the values in that column for each Row
 
-- Unlike functions, functions can’t be used alone. They have a “secret” argument, which is the data they are attached to. They are written as part of that data, separated by a dot. For example:
-+
-`row-n(shapes, 2)`
-
-- Contracts for functions are different from other functions. They include the type of the data as part of their names. For example:
-+ 
-@show{(contract "row-n" '("Table" "Number") "Boolean" )}}
-
-
 *Order Matters!* Table operations must be applied in the __appropriate order__. For example, trying to order a table by a column that hasn’t been built yet will result in an error.
