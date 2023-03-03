@@ -1,4 +1,4 @@
-# last modified 2023-03-02
+# last modified 2023-03-03
 
 include $(MAKE_DIR)utils.mk
 
@@ -215,14 +215,8 @@ images: preproc
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.lua
 
-ifeq "$(GRAPH)" ""
-dependency: primitives
-
-else
 dependency: primitives
 	$(MAKE_DIR)make-dependency-graph.lua
-
-endif
 
 ifeq "$(BOOK)" ""
 pdfs: postproc
