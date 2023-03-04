@@ -2,7 +2,6 @@
 
 include $(MAKE_DIR)utils.mk
 
-
 all: courses-and-lessons page-not-found glossary
 
 ###############################################################################
@@ -10,7 +9,6 @@ all: courses-and-lessons page-not-found glossary
 initialization: distribution/$(NATLANG)/extlib/mathjax/.
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
-	@mkdir -p distribution/$(NATLANG)/lib
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
@@ -32,13 +30,8 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 		if test -f "$$f"; then \
 		node_modules/less/bin/lessc "$$f" "$${f%.less}.css"; fi; done
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
-	@mkdir -p distribution/$(NATLANG)/.cached
-	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		$(EXERCISE_COLLECTOR_INPUT) $(COURSES_LIST_FILE)
+	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT)
 	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
-	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@echo 'return {' > $(COURSES_LIST_FILE)
-	@echo 'return {' > $(EXERCISE_COLLECTOR_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
@@ -59,7 +52,6 @@ distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
 	@$(CP) -p lib/mathjaxlocal.js $@/config/local
 	@rm -fr $@/[CLRptu]*
 
-
 ###############################################################################
 
 the-lessons := $(wildcard \
@@ -75,7 +67,7 @@ the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
 
 curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
-copy-lessons: initialization $(the-distribution-lessons)
+copy-lessons: $(the-distribution-lessons)
 	@echo distribution/$(NATLANG)/lessons updated
 
 define make-copy-lesson-rule
@@ -95,7 +87,7 @@ the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                      $(patsubst %/langs/$(NATLANG),%, \
                         $(the-pathways))))
 
-copy-pathways: initialization $(the-courses)
+copy-pathways: $(the-courses)
 	@echo distribution/$(NATLANG)/courses updated
 
 define make-copy-pathway-rule
@@ -125,7 +117,7 @@ distribution/$(NATLANG)/lib/bilingual-glossary.html: lib/glossary-terms.rkt
 
 ###############################################################################
 
-courses-and-lessons: copy-lessons copy-pathways
+courses-and-lessons: initialization copy-lessons copy-pathways
 	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
 	@echo '}' >> $(COURSES_LIST_FILE)
 	$(MAKE_DIR)collect-lessons.lua
