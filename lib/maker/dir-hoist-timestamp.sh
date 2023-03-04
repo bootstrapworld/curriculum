@@ -16,5 +16,6 @@ function hoist() {
   done
 }
 
-hoist "$1" 
-hoist "$2"
+for dir in "$@"; do
+  test -d "$dir" && hoist "$dir"
+done

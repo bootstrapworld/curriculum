@@ -2,7 +2,7 @@
 
 # last modified 2023-03-04
 
-echo doing make-bilingual-glossary.sh
+# echo doing make-bilingual-glossary.sh
 
 export GLOSSFILE=distribution/$NATLANG/lib/bilingual-glossary
 
