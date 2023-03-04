@@ -67,7 +67,7 @@ the-lessons := $(wildcard \
 	lessons/*/*/*/langs/$(NATLANG) \
 	)
 
-the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%/., \
+the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
                                 $(notdir \
                                   $(patsubst %/langs/$(NATLANG),%, \
                                     $(the-lessons))))
@@ -77,7 +77,7 @@ curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 copy-lessons: initialization $(the-distribution-lessons)
 
 define make-copy-lesson-rule
-distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1)/.: $1 initialization
+distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1): $1 initialization
 	@$(MAKE_DIR)massage-distribution-lesson.sh $$< $$@
 
 endef
@@ -88,7 +88,7 @@ $(eval $(foreach lesson,$(the-lessons),$(call make-copy-lesson-rule,$(lesson))))
 
 the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
 
-the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%/., \
+the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                   $(notdir \
                      $(patsubst %/langs/$(NATLANG),%, \
                         $(the-pathways))))
@@ -96,7 +96,7 @@ the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%/., \
 copy-pathways: initialization $(the-courses)
 
 define make-copy-pathway-rule
-distribution/$(NATLANG)/courses/$(call curr-bare-name,$1)/.: $1 initialization
+distribution/$(NATLANG)/courses/$(call curr-bare-name,$1): $1 initialization
 	@$(MAKE_DIR)massage-course.sh $$< $$@
 
 endef
@@ -115,9 +115,9 @@ distribution/$(NATLANG)/lib/page-not-found.adoc: initialization
 
 ###############################################################################
 
-glossary: distribution/$(NATLANG)/lib/bilingual-glossary.pdf
+glossary: distribution/$(NATLANG)/lib/bilingual-glossary.html
 
-distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
+distribution/$(NATLANG)/lib/bilingual-glossary.html: lib/glossary-terms.rkt
 	@$(MAKE_DIR)make-bilingual-glossary.sh
 
 ###############################################################################
