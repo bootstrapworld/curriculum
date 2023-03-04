@@ -1,4 +1,4 @@
-# last modified 2023-03-01
+# last modified 2023-03-04
 
 include $(MAKE_DIR)utils.mk
 
@@ -67,25 +67,18 @@ the-lessons := $(wildcard \
 	lessons/*/*/*/langs/$(NATLANG) \
 	)
 
-the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%/., \
+the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
                                 $(notdir \
                                   $(patsubst %/langs/$(NATLANG),%, \
                                     $(the-lessons))))
 
-lesson-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
+curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
 copy-lessons: initialization $(the-distribution-lessons)
 
 define make-copy-lesson-rule
-distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1 initialization
-	@mkdir -p $$@
-	@touch $$@
-	@touch $$</ignore_file
-	@$(CP) -upr $$</* $$@
-	@if test ! -f $$</index.adoc; then \
-		touch $$@/index.adoc; fi
-	@rm -f $$</ignore_file $$@/ignore_file
-	@$(MAKE_DIR)massage-distribution-lesson.sh $$@
+distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1): $1 initialization
+	@$(MAKE_DIR)massage-distribution-lesson.sh $$< $$@
 
 endef
 
@@ -93,26 +86,18 @@ $(eval $(foreach lesson,$(the-lessons),$(call make-copy-lesson-rule,$(lesson))))
 
 #########################################################################
 
-the-pathways := $(wildcard pathways/*)
+the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
 
-the-courses := $(patsubst \
-	%,distribution/$(NATLANG)/courses/%/.,$(notdir $(the-pathways)))
-
-# the-courses := $(foreach \
-# 	pathway,$(the-pathways),distribution/$(NATLANG)/courses/$(notdir $(pathway))/.)
+the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
+                  $(notdir \
+                     $(patsubst %/langs/$(NATLANG),%, \
+                        $(the-pathways))))
 
 copy-pathways: initialization $(the-courses)
 
 define make-copy-pathway-rule
-distribution/$(NATLANG)/courses/$(notdir $1)/.: $1 initialization
-	@mkdir -p $$@
-	@touch $$@
-	@touch $$</langs/$(NATLANG)/ignore_file
-	@$(CP) -upr $$</langs/$(NATLANG)/* $$@
-	@if test ! -f $$</langs/$(NATLANG)/index.adoc; then \
-		touch $$@/index.adoc; fi
-	@rm -f $$</langs/$(NATLANG)/ignore_file $$@/ignore_file
-	@$(MAKE_DIR)massage-course.sh $$@
+distribution/$(NATLANG)/courses/$(call curr-bare-name,$1): $1 initialization
+	@$(MAKE_DIR)massage-course.sh $$< $$@
 
 endef
 
@@ -120,9 +105,9 @@ $(eval $(foreach pathway,$(the-pathways),$(call make-copy-pathway-rule,$(pathway
 
 ###############################################################################
 
-page-not-found: distribution/$(NATLANG)/lib/page-not-found.pdf
+page-not-found: distribution/$(NATLANG)/lib/page-not-found.adoc
 
-distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
+distribution/$(NATLANG)/lib/page-not-found.adoc: initialization
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
 	@if test -z "$(ASCIIDOCTOR_NODE)"; then echo distribution/$(NATLANG)/lib/page-not-found.adoc >> $(ADOC_INPUT); else echo \"distribution/$(NATLANG)/lib/page-not-found.adoc\", >> $(ADOC_INPUT); fi
@@ -130,14 +115,14 @@ distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
 
 ###############################################################################
 
-glossary: distribution/$(NATLANG)/lib/bilingual-glossary.pdf
+glossary: distribution/$(NATLANG)/lib/bilingual-glossary.html
 
-distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
+distribution/$(NATLANG)/lib/bilingual-glossary.html: lib/glossary-terms.rkt
 	@$(MAKE_DIR)make-bilingual-glossary.sh
 
 ###############################################################################
 
-courses-and-lessons: copy-lessons copy-pathways
+courses-and-lessons: initialization copy-lessons copy-pathways
 	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
 	@echo '}' >> $(COURSES_LIST_FILE)
 	@$(MAKE_DIR)collect-lessons.lua

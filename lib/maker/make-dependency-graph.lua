@@ -1,17 +1,20 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-03-03
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 do
+  local graph_file = os.getenv 'GRAPH_FILE'
+  local graph_envvar = os.getenv 'GRAPH' or ''
+  if graph_envvar == '' and file_exists_p(graph_file) then return end
+  --
   local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
   local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
-  local graph_file = os.getenv 'GRAPH_FILE'
   local o = io.open(graph_file, 'w+')
   o:write('var graph = {\n')
   for _,lesson in ipairs(lessons) do
-    local i 
+    local i
     local titletxt = ''
     local desctxt = ''
     local pagestxt = ''
@@ -28,7 +31,7 @@ do
     local primstxt_file = lessoncache .. '.index-primitives.txt.kp'
     local keywords_file = lessoncache .. '.lesson-keywords.txt.kp'
     local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
-    local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp' 
+    local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp'
     --
     if file_exists_p(titletxt_file) then
       i = io.open(titletxt_file)
