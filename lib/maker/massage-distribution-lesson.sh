@@ -2,19 +2,13 @@
 
 # last modified 2023-03-04
 
+# echo massage-distribution-lesson "$@"
+
 src=$1
 
 d=$2
 
-d=${d%/.}
-
-mkdir -p $d/.cached
-
-source ${MAKE_DIR}dir-checksum.sh
-
-dir_hasnt_changed $src $d/.cached/.checksum.md5txt && exit 0
-
-# echo doing massage-distribution-lesson "$@"
+mkdir -p $d
 
 (find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
@@ -24,17 +18,15 @@ source ${MAKE_DIR}src-subdir-mgt.sh
 
 lessonName=$(basename $d)
 
-cd $d
+cd $d/..
 
 proglangs=pyret
 firstproglang=pyret
 
-if test -f proglang.txt; then
-  proglangs=$(cat proglang.txt)
+if test -f $d/proglang.txt; then
+  proglangs=$(cat $d/proglang.txt)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
-
-cd ..
 
 lessonNamePl=
 for pl in $proglangs; do
