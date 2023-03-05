@@ -1,4 +1,4 @@
-# last modified 2023-02-28
+# last modified 2023-03-04
 
 include $(MAKE_DIR)utils.mk
 
@@ -198,6 +198,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
 	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
 	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
+	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
 	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "]" >> $(ADOC_INPUT); echo "module.exports = adocFiles;"; fi
 	$(MAKE_DIR)run-asciidoctor.sh
 
@@ -207,11 +208,6 @@ primitives: preproc
 postproc: preproc
 	$(MAKE_DIR)do-postproc.lua
 
-dependency: primitives
-	if test -n "$(GRAPH)"; then $(MAKE_DIR)make-dependency-graph.lua; fi
-
-linkcheck: preproc
-	if test -n "$(LINKCHECK)"; then $(MAKE_DIR)do-link-check.sh; fi
 
 images: preproc
 	$(MAKE_DIR)make-images-js.lua
@@ -219,8 +215,33 @@ images: preproc
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.lua
 
-pdfs: postproc
-	if test -n "$(BOOK)"; then $(MAKE_DIR)make-pdf.sh; fi
+dependency: primitives
+	$(MAKE_DIR)make-dependency-graph.lua
 
+ifeq "$(BOOK)" ""
+pdfs: postproc
+
+else
+pdfs: postproc
+	$(MAKE_DIR)make-pdf.sh
+
+endif
+
+ifeq "$(LINKCHECK)" ""
+linkcheck: pdfs
+
+else
+linkcheck: pdfs
+	$(MAKE_DIR)do-link-check.sh
+
+endif
+
+ifeq "$(BOOK)" ""
 books: pdfs
-	if test -n "$(BOOK)"; then $(MAKE_DIR)make-workbook-jsons.lua; $(MAKE_DIR)make-books.sh; fi
+
+else
+books: pdfs
+	$(MAKE_DIR)make-workbook-jsons.lua
+	$(MAKE_DIR)make-books.sh
+
+endif

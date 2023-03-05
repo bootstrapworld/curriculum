@@ -5,14 +5,14 @@ The build was originally implementated as a long Bash script
 following 
 link:https://github.com/bootstrapworld/curriculum/issues/467[Issue
 467], 
-has since been rewritten as a more maintainable collection of
+has been rewritten as a more maintainable collection of
 Makefiles that calls much smaller subroutine-like scripts.
 
 The `Makefile` resides at the top dir, and a build is initiated
 by calling `make`, possibly with the following options:
 
 - `BOOK=yes` to generate the individual and workbook PDFs
-- `GRAPH=yes` to generate the lesson dependency graph
+- `GRAPH=yes` to update the lesson dependency graph
 - `LINKCHECK=yes` to verify all the internal and external links
   used
 - `NATLANG=<natlang>` to generate the docs in a language
@@ -131,6 +131,26 @@ order):
 5. An external script `make-pathways-tocs.lua` collects the ToC
    info for all the courses into `en-us/pathway-tocs.js`.
 
+After the primitive generation rule (1 above) is done,
+the process checks if
+the global lesson dependency graph `en-us/dependency-graph.js` is
+already present (from a previous build). If not, it is created.
+Even if it is already present, it is re-made if the make variable
+`GRAPH` is set. The script that assembles the graph from the
+generated info about the lesson prereqs, primitives, etc. is
+`make-dependency-graph.lua`.
+
+The dependecy graph gathers the generated info
+about the lesson primitives and prereqs.
+
+
+external script
+`make-dependency-graph.lua` gather
+
+gathers the generated info about
+the lesson primitives and prereqs to create a global lesson
+dependency graph in `en-us/dependency-graph.js`.
+
 After the primitive generation rule (1 above) is done, if the
 make variable `GRAPH` is set, a rule calls an external script
 `make-dependency-graph.lua` that gathers the generated info about
@@ -149,4 +169,4 @@ course-specific list of pages for the six different types of
 workbooks. The same rule then calls the Node program
 `makeWorkbook.js` to create each course's set of workbook PDFs.
 
-// last modified 2023-02-27
+// last modified 2023-03-03

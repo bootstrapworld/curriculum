@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LASTMOD=2023-02-28 # last modified
+LASTMOD=2023-03-01 # last modified
 
 # the following env vars are passed along to the Makefile
 
@@ -20,9 +20,12 @@ VERSION=
 
 function displayhelp() {
   echo "Usage: build-pathway <options>"
-  echo
+  echo "  " --adocjs:
+  echo "        " Use Node version of Asciidoctor \(experimental\)
   echo "  " --book, --pdf, -b:
   echo "        " Generate PDFs, including individual pages and workbooks
+  echo "  " --deploy:
+  echo "        " Deploy to web host
   echo "  " --force, --superforce, --super-force, -f, -F:
   echo "        " Regenerate doc tree from scratch
   echo "  " --graph, -g:
@@ -33,9 +36,10 @@ function displayhelp() {
   echo "        " Verify all the links in the doc tree
   echo "  " --natlang L:
   echo "        " Build doc tree for natural language L. Default: en-us
+  echo "  " --version, -v:
+  echo "        " Display version and exit
   echo "  " -bf, -fb:
   echo "        " Combine -f and -b
-  exit
 }
 
 while test $# -ne 0; do
@@ -44,6 +48,8 @@ while test $# -ne 0; do
     ASCIIDOCTOR_NODE=yes
   elif test "$arg" = --book -o "$arg" = --pdf -o "$arg" = -b; then
     BOOK=yes
+  elif test "$arg" = --deploy; then
+    DEPLOY=yes
   elif test "$arg" = --force -o "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -f -o "$arg" = -F; then
     FORCE=yes
   elif test "$arg" = --graph -o "$arg" = -g; then
@@ -70,10 +76,15 @@ done
 
 test -n "$FORCE" && make clean
 
-test -n "$HELP" && displayhelp
+test -n "$HELP" && displayhelp && exit
 
 test -n "$VERSION" && echo build version $LASTMOD && exit
 
 test -n "$MINIHELP" && echo All courses built for all proglangs by default && echo
 
-make
+if test -n "$DEPLOY"; then
+  test ! -d distribution && make
+  make deploy
+else
+  make
+fi

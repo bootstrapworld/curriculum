@@ -1,19 +1,17 @@
 #!/bin/bash
 
-# created 2023-01-20
-# last modified 2023-02-13
+# last modified 2023-03-04
 
-cd $TOPDIR
-$PROGDIR/make-bilingual-glossary.rkt
+echo doing make-bilingual-glossary.sh
 
-GLOSSFILE=$TOPDIR/distribution/$NATLANG/lib/bilingual-glossary.adoc
+export GLOSSFILE=distribution/$NATLANG/lib/bilingual-glossary
 
-mv bilingual-glossary.adoc $GLOSSFILE
+lib/make-bilingual-glossary.rkt
 
-asciidoctor -a linkcss -a stylesheet=asciidoctor.css $GLOSSFILE
+asciidoctor -a linkcss -a stylesheet=asciidoctor.css $GLOSSFILE.adoc
 
-rm $GLOSSFILE
+rm $GLOSSFILE.adoc
 
 if test -n "$BOOK"; then
-  echo ", { \"input\": \"distribution/$NATLANG/lib/bilingual-glossary.html\" }" >> $PUPPETEER_INPUT
+  echo ", { \"input\": \"$GLOSSFILE.html\" }" >> $PUPPETEER_INPUT
 fi

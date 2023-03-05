@@ -1,14 +1,29 @@
 #!/bin/bash
 
-# last modified 2023-02-25
+# last modified 2023-03-04
 
-source ${MAKE_DIR}src-subdir-mgt.sh
 
-# echo doing massage-course $1
+src=$1
 
-d=$1
+d=$2
+
+# echo doing massage-course.sh $src $d
 
 d=${d%/.}
+
+mkdir -p $d/.cached
+
+source ${MAKE_DIR}dir-checksum.sh
+
+dir_hasnt_changed $src $d/.cached/.checksum.md5txt && exit 0
+
+# echo doing massage-course "$@"
+
+(find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
+
+test ! -f $d/index.adoc && touch $d/index.adoc
+
+source ${MAKE_DIR}src-subdir-mgt.sh
 
 pathwayName=$(basename $d)
 
@@ -38,7 +53,7 @@ for pl in $proglangs; do
   mkdir -p $targetpathway/resources/protected
   mkdir -p $targetpathway/resources/pages
   mkdir -p $targetpathway/workbook
-  $CP -p $PROGDIR/.hta* $targetpathway/resources/protected
+  $CP -p $TOPDIR/lib/.hta* $targetpathway/resources/protected
 done
 
 for d in $pathwayName*; do

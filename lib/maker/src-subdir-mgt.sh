@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-02-20
+# last modified 2023-03-03
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -29,7 +29,7 @@ function shadowcopydir() {
   for f in "$srcdir"/*; do
     local g=$(basename "$f")
     if test -f "$f"; then
-      $CP -p "$f" "$tgtdir"
+      $CP -pu "$f" "$tgtdir"
     elif test -d "$f"; then
       shadowcopydir "$f" "$tgtdir"/"$g"
     fi
@@ -39,7 +39,7 @@ function shadowcopydir() {
 function make_solution_pages() {
   test -d solution-pages-2 && rm -fr solution-pages-2
   $CP -pr pages solution-pages-2
-  $CP -p $PROGDIR/.hta* solution-pages-2
+  $CP -p $TOPDIR/lib/.hta* solution-pages-2
   if test -d solution-pages; then
     shadowcopydir solution-pages solution-pages-2
     rm -fr solution-pages

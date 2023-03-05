@@ -2,9 +2,11 @@
 
 #lang racket
 
+; last modified 2023-03-04
+
 (require "glossary-terms.rkt")
 
-; FIXME: not dealing with any shadowing glossaries -- ok?
+; not dealing with any shadowing glossaries, intentionally i think
 
 ; assumes glossary is given in alpha order for English at least
 
@@ -17,8 +19,12 @@
           (map (lambda (kwd)
                  (if (list? kwd) (car kwd) '())) (rest kwds)))) ", ")))
 
+(define *glossary-adoc-file*
+  (string-append
+    (or (getenv "GLOSSFILE")
+        "bilingual-glossary") ".adoc"))
 
-(call-with-output-file "bilingual-glossary.adoc"
+(call-with-output-file *glossary-adoc-file*
   (lambda (o)
     (fprintf o "= Bilingual Glossary\n\n")
     (fprintf o "++++\n")

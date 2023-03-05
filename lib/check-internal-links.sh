@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# last modified 2023-03-01
+
 BROKEN_INTERNAL_LINKS=
 
 for g in "$@"; do
@@ -17,8 +19,4 @@ for g in "$@"; do
   done
 done
 
-if test $BROKEN_INTERNAL_LINKS; then
-  echo 👎 Broken internal links found
-else
-  echo 👍 No broken internal links found
-fi
+test -n "$BROKEN_INTERNAL_LINKS" && touch distribution/$NATLANG/.cached/.check-internal-links

@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-03-03
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -33,7 +33,7 @@ function read_first_arg(i, directive)
   end
 end
 
-function scan_exercise_directives(i, proglang)
+function scan_exercise_directives(i, proglang, workbook_pages, lesson)
   local opt_exercise_files = {}
   local workbook_exercise_files = {}
   local handout_exercise_files = {}
@@ -50,7 +50,11 @@ function scan_exercise_directives(i, proglang)
           local f = compts[num_compts]
           if directive == 'opt-printable-exercise' then
             if not memberp(f, opt_exercise_files) then
-              table.insert(opt_exercise_files, f)
+              if memberp(f, workbook_pages) then
+                print('WARNING: Using workbook page ' .. f .. ' in ' .. lesson .. ' as optional exercise')
+              else
+                table.insert(opt_exercise_files, f)
+              end
             end
           elseif directive == 'printable-exercise' then
             if not memberp(f, workbook_exercise_files) then
@@ -91,14 +95,24 @@ do
     local proglang = lwp[2]
     local lesson_dir = 'distribution/' .. natlang .. '/lessons/' .. lesson .. '/'
     local lesson_cache = lesson_dir .. 'pages/.cached/'
+    local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
     local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'
     local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
-    local workbook_exercise_list_file = lesson_cache .. '.workbook-exercises-pages-ls.txt.kp'
+    local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
     local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
     local lesson_plan_file = lesson_dir .. 'index.adoc'
     --
+    local workbook_pages = {}
+    if file_exists_p(workbook_page_list_file) then
+      local i = io.open(workbook_page_list_file)
+      for line in i:lines() do
+        table.insert(workbook_pages, line)
+      end
+      i:close()
+    end
+    --
     local i = io.open_buffered(lesson_plan_file)
-    local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang)
+    local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang, workbook_pages, lesson)
     i:close()
     --
     local o = io.open(opt_exercise_list_file, 'w+')

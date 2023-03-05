@@ -42,7 +42,7 @@ Type `prism` into the Interactions Area to see an image of a rectangular prism. 
 {layout="Launch"}
 # Surface Area
 
-- Go to PART 2 in the code. @ifproglang{pyret}{Type `print-imgs(faces)` into the Interactions Area.}@ifproglang{wescheme}{Type `(print-imgs faces)` into the Interactions Area.}  How many rectangles do you see? _One_
+- Go to PART 2 in the code. @ifproglang{pyret}{Type `print-imgs(faces)` into the Interactions Area.}@ifproglang{wescheme}{Type `(print-imgs faces)` into the Interactions Area.}  How many rectangles do you see? _Two_
 - The code in PART 2 says @ifproglang{pyret}{`faces = [list: front, ]`}@ifproglang{wescheme}{`(define faces (list front back))`} , which defines `faces` to be a list of values. This list will include all of the faces of the prism, but right now it only includes `front` and `back`. Add the names of each of the remaining faces to the list. 
 
 @ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}

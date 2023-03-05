@@ -2,28 +2,26 @@
 
 # last modified 2023-03-01
 
+test ! -d distribution && echo distribution/ not found\; make it first && exit
+
 # env vars HOSTINGER_PORT, HOSTINGER_USER, HOSTINGER_IPADDR *must* be set!
 # but don't set them here, for security reasons
 
-exitp=false
+exitp=
 
-test -z "$HOSTINGER_PORT" && echo Please set HOSTINGER_PORT && exitp=true
-test -z "$HOSTINGER_USER" && echo Please set HOSTINGER_USER && exitp=true
-test -z "$HOSTINGER_IPADDR" && echo Please set HOSTINGER_IPADDR && exitp=true
+test -z "$HOSTINGER_PORT" && echo Please set HOSTINGER_PORT && exitp=yes
+test -z "$HOSTINGER_USER" && echo Please set HOSTINGER_USER && exitp=yes
+test -z "$HOSTINGER_IPADDR" && echo Please set HOSTINGER_IPADDR && exitp=yes
 
-$exitp && exit
+test -n "$exitp" && exit
 
 # set env vars SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
 
 test -z "$SEMESTER" && SEMESTER=fall
-test -z "$YEAR" && YEAR=2023-debug
+test -z "$YEAR" && YEAR=$(date +%Y)-BETA
 
 ############################################################################
-
-if test ! -d distribution; then
-  echo distribution/ not found; exit
-fi
 
 cd distribution
 
@@ -69,6 +67,8 @@ for lang in $ALL_THE_LANGS; do
   if test -z "$SKIPLIB"; then
     if test -d $lang/extlib; then
       cp -pr $lang/extlib deployables/$lang
+    else
+      echo Skipping copying extlib...
     fi
   fi
   for f in $lang/*; do
@@ -89,15 +89,13 @@ for lang in $ALL_THE_LANGS; do
   fi
 done
 
+find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
+
 for f in adoc asc aux md id rkt rkt.kp titletxt txt txt.kp; do
   find deployables -name \*.$f -delete
 done
 
-find deployables -name workbook\*.pdf -delete
-find deployables -name opt-exercises\*.pdf -delete
 find deployables -name lesson-images.json -delete
-
-find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 test -f deployables.tar.bz2 && rm deployables.tar.bz2
 
@@ -105,9 +103,7 @@ echo Tarring up deployables...
 tar jcf deployables.tar.bz2 deployables
 
 cat > deploy-to-public_html.sh <<EOF
-SEMESTER=$SEMESTER
-YEAR=$YEAR
-DEPLOY_DIR=\$HOME/public_html/materials/\$SEMESTER\$YEAR
+DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
 mkdir -p \$DEPLOY_DIR
 cd
 cd tmp
