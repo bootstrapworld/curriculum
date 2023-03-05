@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-04
+-- last modified 2023-03-05
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -23,46 +23,7 @@ end
 
 ----------------------------------------------------------------------------
 
--- collecting lessons
-
-local lessons_dir = 'distribution/' .. natlang .. '/lessons'
-
-local exercise_collector_file = os.getenv 'EXERCISE_COLLECTOR_INPUT'
-
-do
-  local ls_output = io.popen('ls ' .. lessons_dir)
-  local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
-  o:write('return {\n')
-  local oe = io.open(exercise_collector_file, 'w+')
-  oe:write('return {\n')
-  for lesson in ls_output:lines() do
-    if file_exists_p(lessons_dir .. '/' .. lesson .. '/.proglang-ignore') then
-      goto continue
-    end
-    local pl = 'pyret'
-    if not file_exists_p(lessons_dir .. '/' .. lesson .. '/.cached/.proglang-pyret') then
-      local pl2, found = lesson:gsub('.*%-(%a-)$', '%1')
-      if found > 0 then
-        if file_exists_p(lessons_dir .. '/' .. lesson .. '/.cached/.proglang-' .. pl2) then
-          pl = pl2
-        end
-      end
-    end
-    oe:write('  { \"' .. lesson .. '\", \"' .. pl .. '\" },\n')
-    if pl == 'wescheme' then goto continue end
-    o:write('  \"' .. lesson .. '\",\n')
-    ::continue::
-  end
-  ls_output:close()
-  o:write('}\n')
-  o:close()
-  oe:write('}\n')
-  oe:close()
-end
-
-----------------------------------------------------------------------------
-
--- collecting exercises
+-- subroutine for collecting exercises
 
 dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
 
@@ -91,7 +52,7 @@ function read_first_arg(i, directive)
   end
 end
 
-function scan_exercise_directives(i, proglang, workbook_pages, lesson)
+function scan_exercise_directives(i, proglang, workbook_pages, lesson_dir)
   local opt_exercise_files = {}
   local workbook_exercise_files = {}
   local handout_exercise_files = {}
@@ -109,7 +70,7 @@ function scan_exercise_directives(i, proglang, workbook_pages, lesson)
           if directive == 'opt-printable-exercise' then
             if not memberp(f, opt_exercise_files) then
               if memberp(f, workbook_pages) then
-                print('WARNING: Using workbook page ' .. f .. ' in ' .. lesson .. ' as optional exercise')
+                print('WARNING: Using workbook page ' .. f .. ' in ' .. lesson_dir .. ' as optional exercise')
               else
                 table.insert(opt_exercise_files, f)
               end
@@ -140,64 +101,93 @@ end
 
 function add_aspect(f, o)
   if not file_exists_p(f) then return end
-  local i = io.open(f)
-  return head(f, 5, '^ *%[%.landscape%] *$')
-end
-
-do
-  local lessons_w_proglang = dofile(exercise_collector_file)
-  for _,lwp in ipairs(lessons_w_proglang) do
-    local lesson = lwp[1]
-    -- print('scanning ' .. lesson)
-    local proglang = lwp[2]
-    local lesson_dir = lessons_dir .. '/' .. lesson .. '/'
-    local lesson_cache = lesson_dir .. 'pages/.cached/'
-    local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
-    local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'
-    local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
-    local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
-    local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
-    local lesson_plan_file = lesson_dir .. 'index.adoc'
-    --
-    local workbook_pages = {}
-    if file_exists_p(workbook_page_list_file) then
-      local i = io.open(workbook_page_list_file)
-      for line in i:lines() do
-        table.insert(workbook_pages, line)
-      end
-      i:close()
-    end
-    --
-    local i = io.open_buffered(lesson_plan_file)
-    local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang, workbook_pages, lesson)
-    i:close()
-    --
-    local o = io.open(opt_exercise_list_file, 'w+')
-    for _,f in ipairs(opt_exercise_files) do
-      o:write(f, '\n')
-    end
-    o:close()
-    --
-    o = io.open(workbook_exercise_list_file, 'w+')
-    for _,f in ipairs(workbook_exercise_files) do
-      o:write(f, '\n')
-    end
-    o:close()
-    --
-    o = io.open(handout_exercise_list_file, 'w+')
-    for _,f in ipairs(handout_exercise_files) do
-      o:write(f, '\n')
-    end
-    o:close()
-    --
-    i = io.open(opt_exercise_list_file)
-    o = io.open(opt_exercise_asp_list_file, 'w+')
-    o:write('return {\n')
-    for x in i:lines() do
-      o:write('  { "', x, '"')
-      add_aspect(lesson_dir .. 'pages/' .. x, lesson, o)
-      o:write(' },\n')
-    end
-    o:write('}\n')
+  if head(f, 5, '^ *%[%.landscape%] *$') then
+    o:write(', "landscape"')
   end
 end
+
+function collect_exercise_info(lesson_dir, proglang)
+  local lesson_cache = lesson_dir .. '/pages/.cached/'
+  local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
+  local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'
+  local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
+  local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
+  local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
+  local lesson_plan_file = lesson_dir .. '/index.adoc'
+  --
+  local workbook_pages = {}
+  if file_exists_p(workbook_page_list_file) then
+    local i = io.open(workbook_page_list_file)
+    for line in i:lines() do
+      table.insert(workbook_pages, line)
+    end
+    i:close()
+  end
+  --
+  local i = io.open_buffered(lesson_plan_file)
+  local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang, workbook_pages, lesson_dir)
+  i:close()
+  --
+  local o = io.open(opt_exercise_list_file, 'w+')
+  for _,f in ipairs(opt_exercise_files) do
+    o:write(f, '\n')
+  end
+  o:close()
+  --
+  o = io.open(workbook_exercise_list_file, 'w+')
+  for _,f in ipairs(workbook_exercise_files) do
+    o:write(f, '\n')
+  end
+  o:close()
+  --
+  o = io.open(handout_exercise_list_file, 'w+')
+  for _,f in ipairs(handout_exercise_files) do
+    o:write(f, '\n')
+  end
+  o:close()
+  --
+  i = io.open(opt_exercise_list_file)
+  o = io.open(opt_exercise_asp_list_file, 'w+')
+  o:write('return {\n')
+  for x in i:lines() do
+    o:write('  { "', x, '"')
+    add_aspect(lesson_dir .. '/pages/' .. x, o)
+    o:write(' },\n')
+  end
+  o:write('}\n')
+end
+
+----------------------------------------------------------------------------
+
+-- collecting lessons
+
+
+do
+  local lessons_dir = 'distribution/' .. natlang .. '/lessons'
+  local ls_output = io.popen('ls ' .. lessons_dir)
+  local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
+  o:write('return {\n')
+  for lesson in ls_output:lines() do
+    local lesson_dir = lessons_dir .. '/' .. lesson
+    if file_exists_p(lesson_dir .. '/.proglang-ignore') then
+      goto continue
+    end
+    local pl = 'pyret'
+    if not file_exists_p(lesson_dir .. '/.cached/.proglang-pyret') then
+      local pl2, found = lesson:gsub('.*%-(%a-)$', '%1')
+      if found > 0 then
+        if file_exists_p(lesson_dir .. '/.cached/.proglang-' .. pl2) then
+          pl = pl2
+        end
+      end
+    end
+    collect_exercise_info(lesson_dir, pl)
+    if pl == 'wescheme' then goto continue end
+    o:write('  \"' .. lesson .. '\",\n')
+    ::continue::
+  end
+  ls_output:close()
+  o:write('}\n')
+  o:close()
+end
+

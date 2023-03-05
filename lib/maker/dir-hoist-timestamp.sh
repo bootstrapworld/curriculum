@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-04
+# last modified 2023-03-05
 
 function hoist() {
   local d=$1
@@ -9,9 +9,7 @@ function hoist() {
   for dd in "$d"/*; do
     if test -d "$dd"; then
       hoist "$dd"
-      if test "$dd" -nt "$d"; then
-        touch -r "$dd" "$d"
-      fi
+      test "$dd" -nt "$d" && touch -r "$dd" "$d"
     fi
   done
 }
