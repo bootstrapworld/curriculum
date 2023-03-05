@@ -1,7 +1,8 @@
--- last modified 2023-02-25
+-- last modified 2023-03-05
 
 -- metatable for buffered input ports
-buffered_input_port_metatable = {
+-- NOTE: any field not found in an object is searched for in its metatable's .__index
+local buffered_input_port_metatable = {
   __index = {}
 }
 
@@ -15,12 +16,12 @@ function io.open_buffered(f)
   return o
 end
 
-function buffered_input_port_metatable.__index.close (self)
+function buffered_input_port_metatable.__index:close()
   -- :close() works on buffered input ports
   self.port:close()
 end
 
-function buffered_input_port_metatable.__index.read (self, arg)
+function buffered_input_port_metatable.__index:read(arg)
   -- :read(1) works on buffered input ports
   -- arg is assumed to be 1. We don't need anything else
   local buf = self.buffer
@@ -37,17 +38,17 @@ function buf_peek_char(bp)
   return c
 end
 
-function string_trim(s)
+local function string_trim(s)
   -- remove flanking blanks of string s
   return (string.gsub(s, '^%s*(.-)%s*$', '%1'))
 end
 
-function string_trim_quotes(s)
+local function string_trim_quotes(s)
   -- if string s is in double quotes, remove them
   return (string.gsub(s, '^"(.-)"$', '%1'))
 end
 
-function table_insert_string(tbl, s)
+local function table_insert_string(tbl, s)
   -- add string s to end of table tbl
   for i = 1,#s do
     table.insert(tbl, s[i])

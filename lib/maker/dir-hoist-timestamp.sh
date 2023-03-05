@@ -17,3 +17,5 @@ function hoist() {
 for dir in "$@"; do
   test -d "$dir" && hoist "$dir"
 done
+
+exit 0
