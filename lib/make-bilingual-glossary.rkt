@@ -2,7 +2,7 @@
 
 #lang racket
 
-; last modified 2023-03-04
+; last modified 2023-03-05
 
 (require "glossary-terms.rkt")
 
@@ -19,10 +19,7 @@
           (map (lambda (kwd)
                  (if (list? kwd) (car kwd) '())) (rest kwds)))) ", ")))
 
-(define *glossary-adoc-file*
-  (string-append
-    (or (getenv "GLOSSFILE")
-        "bilingual-glossary") ".adoc"))
+(define *glossary-adoc-file* (vector-ref (current-command-line-arguments) 0))
 
 (call-with-output-file *glossary-adoc-file*
   (lambda (o)

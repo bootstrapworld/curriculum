@@ -1,12 +1,70 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-03
+-- last modified 2023-03-04
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
-
 local natlang = os.getenv 'NATLANG'
+
+-- collecting courses
+
+do
+  local courses_dir = 'distribution/' .. natlang .. '/courses'
+  local ls_output = io.popen('ls ' .. courses_dir)
+  local o = io.open(os.getenv 'COURSES_LIST_FILE', 'w+')
+  o:write('return {\n')
+  for course in ls_output:lines() do
+    o:write(' \"' .. course .. '\",\n')
+  end
+  o:write('}\n')
+  ls_output:close()
+  o:close()
+end
+
+----------------------------------------------------------------------------
+
+-- collecting lessons
+
+local lessons_dir = 'distribution/' .. natlang .. '/lessons'
+
+local exercise_collector_file = os.getenv 'EXERCISE_COLLECTOR_INPUT'
+
+do
+  local ls_output = io.popen('ls ' .. lessons_dir)
+  local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
+  o:write('return {\n')
+  local oe = io.open(exercise_collector_file, 'w+')
+  oe:write('return {\n')
+  for lesson in ls_output:lines() do
+    if file_exists_p(lessons_dir .. '/' .. lesson .. '/.proglang-ignore') then
+      goto continue
+    end
+    local pl = 'pyret'
+    if not file_exists_p(lessons_dir .. '/' .. lesson .. '/.cached/.proglang-pyret') then
+      local pl2, found = lesson:gsub('.*%-(%a-)$', '%1')
+      if found > 0 then
+        if file_exists_p(lessons_dir .. '/' .. lesson .. '/.cached/.proglang-' .. pl2) then
+          pl = pl2
+        end
+      end
+    end
+    oe:write('  { \"' .. lesson .. '\", \"' .. pl .. '\" },\n')
+    if pl == 'wescheme' then goto continue end
+    o:write('  \"' .. lesson .. '\",\n')
+    ::continue::
+  end
+  ls_output:close()
+  o:write('}\n')
+  o:close()
+  oe:write('}\n')
+  oe:close()
+end
+
+----------------------------------------------------------------------------
+
+-- collecting exercises
+
+dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
 
 function emit_empty_string()
   return ''
@@ -87,13 +145,12 @@ function add_aspect(f, o)
 end
 
 do
-  local f = os.getenv 'EXERCISE_COLLECTOR_INPUT'
-  local lessons_w_proglang = dofile(f)
+  local lessons_w_proglang = dofile(exercise_collector_file)
   for _,lwp in ipairs(lessons_w_proglang) do
     local lesson = lwp[1]
     -- print('scanning ' .. lesson)
     local proglang = lwp[2]
-    local lesson_dir = 'distribution/' .. natlang .. '/lessons/' .. lesson .. '/'
+    local lesson_dir = lessons_dir .. '/' .. lesson .. '/'
     local lesson_cache = lesson_dir .. 'pages/.cached/'
     local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
     local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'

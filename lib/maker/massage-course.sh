@@ -77,8 +77,6 @@ for d in $pathwayName*; do
       $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
   fi
 
-  echo " " \"$d\", >> $COURSES_LIST_FILE
-
   cd ..
 done
 

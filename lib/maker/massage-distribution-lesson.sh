@@ -23,8 +23,8 @@ cd $d/..
 proglangs=pyret
 firstproglang=pyret
 
-if test -f $d/proglang.txt; then
-  proglangs=$(cat $d/proglang.txt)
+if test -f $lessonName/proglang.txt; then
+  proglangs=$(cat $lessonName/proglang.txt)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
 
@@ -47,8 +47,6 @@ for pl in $proglangs; do
 
   # echo calling collect workbook pgs
   $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-  # echo calling collect exercises
-  echo "  " { \"$lessonNamePl\", \"$pl\" }, >> $EXERCISE_COLLECTOR_INPUT
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"

@@ -1,12 +1,12 @@
-# last modified 2023-03-04
+# last modified 2023-03-05
 
 include $(MAKE_DIR)utils.mk
 
-all: courses-and-lessons page-not-found glossary
+phase1: initialization courses-and-lessons page-not-found glossary
 
 ###############################################################################
 
-initialization: distribution/$(NATLANG)/extlib/mathjax/.
+initialization: distribution/$(NATLANG)/extlib/mathjax
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -30,7 +30,8 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 		if test -f "$$f"; then \
 		node_modules/less/bin/lessc "$$f" "$${f%.less}.css"; fi; done
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
-	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT)
+	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
+	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
 	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
@@ -46,11 +47,12 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 node_modules/mathjax:
 	npm install
 
-distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
+distribution/$(NATLANG)/extlib/mathjax: node_modules/mathjax
 	@mkdir -p $@
 	@$(CP) -upr node_modules/mathjax/* $@
 	@$(CP) -p lib/mathjaxlocal.js $@/config/local
 	@rm -fr $@/[CLRptu]*
+
 
 ###############################################################################
 
@@ -105,21 +107,16 @@ page-not-found: distribution/$(NATLANG)/lib/page-not-found.adoc
 distribution/$(NATLANG)/lib/page-not-found.adoc:
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
-	@if test -z "$(ASCIIDOCTOR_NODE)"; then echo distribution/$(NATLANG)/lib/page-not-found.adoc >> $(ADOC_INPUT); else echo \"distribution/$(NATLANG)/lib/page-not-found.adoc\", >> $(ADOC_INPUT); fi
-	@if test -n "$(BOOK)"; then echo ", { \"input\": \"distribution/$(NATLANG)/lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT); fi
 
 ###############################################################################
 
-glossary: distribution/$(NATLANG)/lib/bilingual-glossary.html
+glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
-distribution/$(NATLANG)/lib/bilingual-glossary.html: lib/glossary-terms.rkt
-	$(MAKE_DIR)make-bilingual-glossary.sh
+distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.rkt
+	lib/make-bilingual-glossary.rkt $@
 
 ###############################################################################
 
-courses-and-lessons: initialization copy-lessons copy-pathways
-	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
-	@echo '}' >> $(COURSES_LIST_FILE)
-	$(MAKE_DIR)collect-lessons.lua
-	$(MAKE_DIR)collect-exercises.lua
+courses-and-lessons: copy-lessons copy-pathways
+	$(MAKE_DIR)collect-distribution-info.lua
 
