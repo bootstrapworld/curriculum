@@ -1,12 +1,11 @@
+;last modified 2023-03-06
+
 #|
-Shadowing glossary file for Social Studies pathway(s). Note that the definitions for "variable" and "range" are quite different 
+Shadowing glossary file for Social Studies pathway(s). Note that the definitions for "variable" and "range" are quite different
 from the ones in the main glossary file.
 |#
 
-
-(define *glossary-list*
-
-  '(
+  (
     ((en-us ("archaeology") "the study of physical remains, and things that people made and used in the past"))
 
     ((en-us ("altitude") "a way of measuring how far north or south a point is on the globe, with the equator around the middle as the starting point; the equator is at 0 degrees, while the north pole is 90 degrees north and the south pole is 90 degrees south"))
@@ -21,7 +20,7 @@ from the ones in the main glossary file.
 
     ((en-us ("categorical variable") "one that classifies and for which arithmetic does not make sense"))
 
-    ((en-us ("ceramics") "things made from clay hardened by heat")) 
+    ((en-us ("ceramics") "things made from clay hardened by heat"))
 
     ((en-us ("chemistry") "the science of identifying and understanding what physical substances are made of"))
 
@@ -97,4 +96,4 @@ from the ones in the main glossary file.
 
     ((en-us ("zirconium") "a hard silver-gray metal"))
 
-))
+)

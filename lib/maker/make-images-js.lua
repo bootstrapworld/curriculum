@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-25
+-- last modified 2023-03-05
 
 -- print('doing make-images-js.lua')
 
@@ -33,22 +33,24 @@ function expand_some_directives(i, o)
   end
 end
 
-do
-  local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
-  local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
-  local image_js_file = os.getenv('IMAGE_JS_FILE')
-  local o = io.open(image_js_file, 'w+')
-  o:write('var images = {\n')
-  for _,lesson in ipairs(lessons) do
-    local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
-    if not file_exists_p(lesson_image_file) then goto continue end
-    -- print('lesson_image_file is ' .. lesson_image_file)
-    o:write('"' .. lesson .. '": ')
-    local bi = io.open_buffered(lesson_image_file)
-    expand_some_directives(bi, o)
-    bi:close()
-    o:write(',\n')
-    ::continue::
-  end
-  o:write('}\n')
+local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
+local image_js_file = dist_dir .. 'images.js'
+local lessons_dir = dist_dir .. 'lessons/'
+local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
+local o = io.open(image_js_file, 'w+')
+
+o:write('var images = {\n')
+
+for _,lesson in ipairs(lessons) do
+  local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
+  if not file_exists_p(lesson_image_file) then goto continue end
+  -- print('lesson_image_file is ' .. lesson_image_file)
+  o:write('"' .. lesson .. '": ')
+  local bi = io.open_buffered(lesson_image_file)
+  expand_some_directives(bi, o)
+  bi:close()
+  o:write(',\n')
+  ::continue::
 end
+
+o:write('}\n')
