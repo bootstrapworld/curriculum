@@ -1,6 +1,4 @@
-#lang racket
-
-(provide *glossary-list*)
+;last modified 2023-03-06
 
 #|
 Glossary for terminology used in the notes.  The first entry of each entry can be either
@@ -10,8 +8,7 @@ If a list of keys is provided, the generated glossary will use the first in the 
 when it prints out the glossary for a particular unit
 |#
 
-(define *glossary-list*
-  '(
+  (
 
     ((en-us ("absolute value") "the (positive) distance of a number from zero, annotated +|+ x +|+")
      (es-mx ("valor absoluto" "modulo de un numero") "la distancia (positiva) de un número al cero, anotada +|+ x +|+"))
@@ -544,4 +541,4 @@ when it prints out the glossary for a particular unit
     ((en-us ("y-intercept") "the point where a line or curve crosses the y-axis of a graph")
      (es-mx ("intercepto" "intercepto vertical" "intersección en el eje Y") "El punto donde la recta o curva cruza el eje vertical (y)."))
 
-    ))
+    )

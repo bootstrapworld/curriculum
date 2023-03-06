@@ -2,9 +2,13 @@
 
 #lang racket
 
-; last modified 2023-03-05
+; last modified 2023-03-06
 
-(require "glossary-terms.rkt")
+(define *glossary-list*
+  (let ([glossary-terms-file "lib/glossary-terms.rkt"])
+    (if (file-exists? glossary-terms-file)
+        (call-with-input-file glossary-terms-file read)
+        '())))
 
 ; not dealing with any shadowing glossaries, intentionally i think
 
