@@ -1,4 +1,4 @@
--- last modified 2023-03-05
+-- last modified 2023-03-06
 
 -- metatable for buffered input ports
 -- NOTE: any field not found in an object is searched for in its metatable's .__index
@@ -36,6 +36,10 @@ function buf_peek_char(bp)
   local c = bp.port:read(1)
   if c then table.insert(buf, c) end
   return c
+end
+
+function buf_toss_back_char(c, bp)
+  table.insert(bp.buffer, 1, c)
 end
 
 local function string_trim(s)

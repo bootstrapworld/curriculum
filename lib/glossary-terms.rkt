@@ -1,10 +1,12 @@
 ;last modified 2023-03-06
 
-; Glossary for terminology used in the notes.  The first entry of each entry can be either
-; a single string or a list of keys that map to the same definition.
-;
-; If a list of keys is provided, the generated glossary will use the first in the list
-; when it prints out the glossary for a particular unit
+#|
+Glossary for terminology used in the notes.  The first entry of each entry can be either
+a single string or a list of keys that map to the same definition.
+
+If a list of keys is provided, the generated glossary will use the first in the list
+when it prints out the glossary for a particular unit
+|#
 
   (
 

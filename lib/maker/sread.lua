@@ -9,8 +9,22 @@
 local function sread_line(i)
   while true do
     local c = i:read(1)
-    if c == '\n' then
+    if c == '\r' or c == '\n' then
       break
+    end
+  end
+end
+
+local function sread_block_comment(i)
+  while true do
+    local c = i:read(1)
+    if c == '|' then
+      c = i:read(1)
+      if c == '#' then
+        break
+      elseif c == '|' then
+        buf_toss_back_char(c)
+      end
     end
   end
 end
@@ -23,6 +37,16 @@ local function sread_ignorespaces(i)
     elseif c == ';' then
       i:read(1)
       sread_line(i)
+    elseif c == '#' then
+      i:read(1)
+      c = buf_peek_char(i)
+      if c == '|' then
+        i:read(1)
+        sread_block_comment(i)
+      else
+        buf_toss_back_char('#')
+        break
+      end
     else break
     end
   end
