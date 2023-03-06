@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# last modified 2023-03-05
+# last modified 2023-03-06
+
+running_macOS=
+
+test "$OSTYPE" == darwin && running_macOS=yes
 
 function hoist() {
   local d=$1
@@ -10,6 +14,8 @@ function hoist() {
     if test -d "$dd"; then
       hoist "$dd"
       test "$dd" -nt "$d" && touch -r "$dd" "$d"
+    elif test -n "$running_macOS" -a -f "$dd" -a "$dd" -nt "$d"; then
+      touch -r "$dd" "$d"
     fi
   done
 }
