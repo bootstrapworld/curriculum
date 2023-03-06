@@ -1,4 +1,4 @@
-# last modified 2023-03-05
+# last modified 2023-03-06
 
 include $(MAKE_DIR)utils.mk
 
@@ -113,7 +113,7 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
 distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.rkt
-	lib/make-bilingual-glossary.rkt $@
+	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
 
