@@ -1,12 +1,13 @@
-# last modified 2023-03-04
+# last modified 2023-03-06
 
 include $(MAKE_DIR)utils.mk
 
-all: dependency linkcheck images tocs books
+phase2: primitives linkcheck images tocs books
 
 ##########################################################################
 
 pathway-independent-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/lib/*.adoc \
 	distribution/$(NATLANG)/textbooks/*.adoc \
 	distribution/$(NATLANG)/textbooks/*/*.adoc \
 	)
@@ -188,6 +189,22 @@ endef
 
 $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
 
+###############################################################################
+
+lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/lesson-images.json)
+
+images: distribution/$(NATLANG)/images.js
+
+distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
+	$(MAKE_DIR)make-images-js.lua
+
+##########################################################################
+
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js
+
+distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
+	$(MAKE_DIR)make-dependency-graph.lua
+
 ##########################################################################
 
 preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
@@ -208,15 +225,9 @@ primitives: preproc
 postproc: preproc
 	$(MAKE_DIR)do-postproc.lua
 
-
-images: preproc
-	$(MAKE_DIR)make-images-js.lua
-
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.lua
 
-dependency: primitives
-	$(MAKE_DIR)make-dependency-graph.lua
 
 ifeq "$(BOOK)" ""
 pdfs: postproc

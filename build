@@ -1,12 +1,11 @@
 #!/bin/bash
 
-LASTMOD=2023-03-01 # last modified
+LASTMOD=2023-03-06 # last modified
 
 # the following env vars are passed along to the Makefile
 
 export ASCIIDOCTOR_NODE=
 export BOOK=
-export GRAPH=
 export LINKCHECK=
 export NATLANG=en-us
 
@@ -28,8 +27,6 @@ function displayhelp() {
   echo "        " Deploy to web host
   echo "  " --force, --superforce, --super-force, -f, -F:
   echo "        " Regenerate doc tree from scratch
-  echo "  " --graph, -g:
-  echo "        " Generate dependency graph
   echo "  " --help, -h:
   echo "        " Display this help and exit
   echo "  " --lint, --verify-links, -l:
@@ -52,8 +49,6 @@ while test $# -ne 0; do
     DEPLOY=yes
   elif test "$arg" = --force -o "$arg" = --superforce -o "$arg" = --super-force -o "$arg" = -f -o "$arg" = -F; then
     FORCE=yes
-  elif test "$arg" = --graph -o "$arg" = -g; then
-    GRAPH=yes
   elif test "$arg" = --help -o "$arg" = -h; then
     HELP=yes
   elif test "$arg" = --lint -o "$arg" = --verify-links -o "$arg" = -l; then
