@@ -196,14 +196,14 @@ lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/
 images: distribution/$(NATLANG)/images.js
 
 distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
-	$(MAKE_DIR)make-images-js.lua
+	$(MAKE_DIR)make-images-js.lua $@
 
 ##########################################################################
 
 dependency-graph: distribution/$(NATLANG)/dependency-graph.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
-	$(MAKE_DIR)make-dependency-graph.lua
+	$(MAKE_DIR)make-dependency-graph.lua $@
 
 ##########################################################################
 
@@ -252,7 +252,7 @@ books: pdfs
 
 else
 books: pdfs
-	$(MAKE_DIR)make-workbook-jsons.lua
+	$(MAKE_DIR)make-workbook-jsons.lua $(COURSES_LIST_FILE)
 	$(MAKE_DIR)make-books.sh
 
 endif

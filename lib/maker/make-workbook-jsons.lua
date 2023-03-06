@@ -1,12 +1,14 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-27
+-- last modified 2023-03-06
+
+local courses_list_file = ...
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-natlang = os.getenv('NATLANG')
+local natlang = os.getenv('NATLANG')
 
-distr_courses = 'distribution/' .. natlang .. '/courses/'
+local distr_courses = 'distribution/' .. natlang .. '/courses/'
 
 ---------------------------------------------------------------------------
 
@@ -62,7 +64,7 @@ function contracts_page_p(dir, file)
   return false
 end
 
-all_courses = dofile(os.getenv 'COURSES_LIST_FILE')
+local all_courses = dofile(courses_list_file)
 
 do
   local distr_lessons = 'distribution/' .. natlang .. '/lessons/'
