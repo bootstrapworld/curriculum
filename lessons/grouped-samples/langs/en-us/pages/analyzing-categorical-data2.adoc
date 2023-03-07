@@ -4,19 +4,19 @@
   #:question "How many of each species are fixed at the shelter?"
   #:show-question? #t
   #:question-type "arithmetic"
-  #:rows ""
+  #:rows "only fixed animals"
   #:show-rows? #f
-  #:cols ""
+  #:cols "species"
   #:show-cols? #f
-  #:filter-fn ""
+  #:filter-fn "is-fixed(r): r[\"fixed\"]"
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression ""
+  #:expression "count(fixed, \"species\")"
   #:show-expression? #f
-  #:finding ""
+  #:finding "There are more fixed dogs than any other species"
   #:show-finding? #f
-  #:new-question ""
+  #:new-question "possible response: Is there a higher percentage of dogs who are fixed, compared with other species?"
   #:show-new-question? #f
 }
 
@@ -27,18 +27,18 @@
   #:question "Are there more female cats than male cats at the shelter?"
   #:show-question? #t
   #:question-type "arithmetic"
-  #:rows ""
+  #:rows "cats only"
   #:show-rows? #f
-  #:cols ""
+  #:cols "sex"
   #:show-cols? #f
-  #:filter-fn ""
+  #:filter-fn "is-cat(r): r[\"species\"] == \"cat\""
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression ""
+  #:expression "pie-chart(filter(animals-table, is-cat), \"sex\")"
   #:show-expression? #f
-  #:finding ""
+  #:finding "There are 6 female cats and 5 male cats"
   #:show-finding? #f
-  #:new-question ""
+  #:new-question "possible response: Does this trend exist among other species?"
   #:show-new-question? #f
 }
