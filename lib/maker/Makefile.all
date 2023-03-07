@@ -55,3 +55,8 @@ clean:
 
 deploy:
 	$(TOPDIR)/deploy-to-hostinger
+
+dictionaries: lib/dictionaries.js
+
+lib/dictionaries.js: shared/langs/en-us/standards/*.rkt shared/langs/en-us/textbooks/*.rkt shared/langs/en-us/practices/*.rkt
+	$(MAKE_DIR)/make-json-dict.lua $@

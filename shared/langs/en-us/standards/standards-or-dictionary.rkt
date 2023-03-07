@@ -697,7 +697,7 @@
      "contracts"
      )
     ("HS.AFN.A.3"
-     "Calculate and interpret the average rate of change of a function over a specified interval." 
+     "Calculate and interpret the average rate of change of a function over a specified interval."
      )
     ("HS.AFN.B"
      "Compare and relate functions using common attributes."
