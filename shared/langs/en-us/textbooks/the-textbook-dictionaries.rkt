@@ -6,7 +6,8 @@
   )
 
 (define (read-file f)
-  (let ([f (format "~a/~a" (getenv "PROGDIR") f)])
+  (let* ([progdir (or (getenv "PROGDIR") "shared/langs/en-us")]
+         [f (format "~a/~a" progdir f)])
     (call-with-input-file f read)))
 
 (define *cmp-textbook-list* (read-file "textbooks/textbook-cmp-dictionary.rkt"))
