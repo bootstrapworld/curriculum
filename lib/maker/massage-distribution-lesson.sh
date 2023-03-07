@@ -1,28 +1,32 @@
 #!/bin/bash
 
-# last modified 2023-02-22
+# last modified 2023-03-04
+
+# echo massage-distribution-lesson "$@"
+
+src=$1
+
+d=$2
+
+mkdir -p $d
+
+(find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
+
+test ! -f $d/index.adoc && touch $d/index.adoc
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
-# echo doing massage-distribution-lesson $1
-
-d=$1
-
-d=${d%/.}
-
 lessonName=$(basename $d)
 
-cd $d
+cd $d/..
 
 proglangs=pyret
 firstproglang=pyret
 
-if test -f proglang.txt; then
-  proglangs=$(cat proglang.txt)
+if test -f $lessonName/proglang.txt; then
+  proglangs=$(cat $lessonName/proglang.txt)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
-
-cd ..
 
 lessonNamePl=
 for pl in $proglangs; do
@@ -43,8 +47,6 @@ for pl in $proglangs; do
 
   # echo calling collect workbook pgs
   $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-  # echo calling collect exercises
-  echo "  " { \"$lessonNamePl\", \"$pl\" }, >> $EXERCISE_COLLECTOR_INPUT
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"

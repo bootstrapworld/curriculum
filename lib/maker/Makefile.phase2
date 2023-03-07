@@ -1,12 +1,13 @@
-# last modified 2023-03-01
+# last modified 2023-03-06
 
 include $(MAKE_DIR)utils.mk
 
-all: dependency linkcheck images tocs books
+phase2: primitives linkcheck images tocs books
 
 ##########################################################################
 
 pathway-independent-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/lib/*.adoc \
 	distribution/$(NATLANG)/textbooks/*.adoc \
 	distribution/$(NATLANG)/textbooks/*/*.adoc \
 	)
@@ -188,6 +189,22 @@ endef
 
 $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
 
+###############################################################################
+
+lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/lesson-images.json)
+
+images: distribution/$(NATLANG)/images.js
+
+distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
+	$(MAKE_DIR)make-images-js.lua $@
+
+##########################################################################
+
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js
+
+distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
+	$(MAKE_DIR)make-dependency-graph.lua $@
+
 ##########################################################################
 
 preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
@@ -198,6 +215,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
 	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
 	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
+	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
 	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "]" >> $(ADOC_INPUT); echo "module.exports = adocFiles;"; fi
 	$(MAKE_DIR)run-asciidoctor.sh
 
@@ -207,20 +225,34 @@ primitives: preproc
 postproc: preproc
 	$(MAKE_DIR)do-postproc.lua
 
-dependency: primitives
-	if test -n "$(GRAPH)"; then $(MAKE_DIR)make-dependency-graph.lua; fi
-
-images: preproc
-	$(MAKE_DIR)make-images-js.lua
-
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.lua
 
+
+ifeq "$(BOOK)" ""
 pdfs: postproc
-	if test -n "$(BOOK)"; then $(MAKE_DIR)make-pdf.sh; fi
 
+else
+pdfs: postproc
+	$(MAKE_DIR)make-pdf.sh
+
+endif
+
+ifeq "$(LINKCHECK)" ""
 linkcheck: pdfs
-	if test -n "$(LINKCHECK)"; then $(MAKE_DIR)do-link-check.sh; fi
 
+else
+linkcheck: pdfs
+	$(MAKE_DIR)do-link-check.sh
+
+endif
+
+ifeq "$(BOOK)" ""
 books: pdfs
-	if test -n "$(BOOK)"; then $(MAKE_DIR)make-workbook-jsons.lua; $(MAKE_DIR)make-books.sh; fi
+
+else
+books: pdfs
+	$(MAKE_DIR)make-workbook-jsons.lua $(COURSES_LIST_FILE)
+	$(MAKE_DIR)make-books.sh
+
+endif

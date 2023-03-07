@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-01
+; last modified 2023-03-06
 
 (require json)
 (require file/sha1)
@@ -14,7 +14,6 @@
 (require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
-(require "glossary-terms.rkt")
 (require "standards/the-standards-dictionaries.rkt")
 (require "textbooks/the-textbook-dictionaries.rkt")
 (require "practices/the-practices-dictionaries.rkt")
@@ -142,6 +141,12 @@
 
 (cond [(assoc "name" *copyright-info*)
        => (lambda (c) (set! *copyright-name* (second c)))])
+
+(define *glossary-list*
+  (let ([glossary-terms-file "lib/glossary-terms.rkt"])
+    (if (file-exists? glossary-terms-file)
+        (call-with-input-file glossary-terms-file read)
+        '())))
 
 (define *glossary-items* '())
 
@@ -1299,12 +1304,9 @@
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
               (let ([shadow-glossary-file (build-path *progdir* (first ff))])
-                (set! gl
-                  (append gl
-                          (second
-                            (third
-                              (first (read-data-file shadow-glossary-file #:mode 'forms))
-                              ))))))))))
+                (when (file-exists? shadow-glossary-file)
+                  (set! gl
+                    (append gl (call-with-input-file shadow-glossary-file read))))))))))
 
     (set! *natlang-glossary-list*
       (let loop ([gl gl] [ngl '()])

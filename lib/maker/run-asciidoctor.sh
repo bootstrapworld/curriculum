@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# last modified 2023-02-28
+# last modified 2023-03-04
 
 $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
-test -f "$ADOC_INPUT" || exit
+test -f "$ADOC_INPUT" || exit 0
 
 # echo calling asciidoctor in dir $(pwd)
 

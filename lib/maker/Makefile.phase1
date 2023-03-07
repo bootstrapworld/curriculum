@@ -1,16 +1,14 @@
-# last modified 2023-03-01
+# last modified 2023-03-06
 
 include $(MAKE_DIR)utils.mk
 
-# all: initialization
-
-all: courses-and-lessons page-not-found glossary
+phase1: initialization courses-and-lessons page-not-found glossary
 
 ###############################################################################
 
-initialization: distribution/$(NATLANG)/extlib/mathjax/.
+initialization: distribution/$(NATLANG)/extlib/mathjax
 	@mkdir -p $(PROGDIR)
-	@mkdir -p distribution/$(NATLANG)/lib
+	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
@@ -32,13 +30,9 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 		if test -f "$$f"; then \
 		node_modules/less/bin/lessc "$$f" "$${f%.less}.css"; fi; done
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
-	@mkdir -p distribution/$(NATLANG)/.cached
-	@rm -f $(ADOC_INPUT) $(ADOC_POSTPROC_PWYINDEP_INPUT) \
-		$(EXERCISE_COLLECTOR_INPUT) $(COURSES_LIST_FILE)
-	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
+	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@echo 'return {' > $(COURSES_LIST_FILE)
-	@echo 'return {' > $(EXERCISE_COLLECTOR_INPUT)
+	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
@@ -53,11 +47,12 @@ initialization: distribution/$(NATLANG)/extlib/mathjax/.
 node_modules/mathjax:
 	npm install
 
-distribution/$(NATLANG)/extlib/mathjax/.: node_modules/mathjax
+distribution/$(NATLANG)/extlib/mathjax: node_modules/mathjax
 	@mkdir -p $@
 	@$(CP) -upr node_modules/mathjax/* $@
 	@$(CP) -p lib/mathjaxlocal.js $@/config/local
 	@rm -fr $@/[CLRptu]*
+
 
 ###############################################################################
 
@@ -67,25 +62,19 @@ the-lessons := $(wildcard \
 	lessons/*/*/*/langs/$(NATLANG) \
 	)
 
-the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%/., \
+the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
                                 $(notdir \
                                   $(patsubst %/langs/$(NATLANG),%, \
                                     $(the-lessons))))
 
-lesson-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
+curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
-copy-lessons: initialization $(the-distribution-lessons)
+copy-lessons: $(the-distribution-lessons)
+	@echo distribution/$(NATLANG)/lessons updated
 
 define make-copy-lesson-rule
-distribution/$(NATLANG)/lessons/$(call lesson-bare-name,$1)/.: $1 initialization
-	@mkdir -p $$@
-	@touch $$@
-	@touch $$</ignore_file
-	@$(CP) -upr $$</* $$@
-	@if test ! -f $$</index.adoc; then \
-		touch $$@/index.adoc; fi
-	@rm -f $$</ignore_file $$@/ignore_file
-	@$(MAKE_DIR)massage-distribution-lesson.sh $$@
+distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1): $1
+	@$(MAKE_DIR)massage-distribution-lesson.sh $$< $$@
 
 endef
 
@@ -93,26 +82,19 @@ $(eval $(foreach lesson,$(the-lessons),$(call make-copy-lesson-rule,$(lesson))))
 
 #########################################################################
 
-the-pathways := $(wildcard pathways/*)
+the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
 
-the-courses := $(patsubst \
-	%,distribution/$(NATLANG)/courses/%/.,$(notdir $(the-pathways)))
+the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
+                  $(notdir \
+                     $(patsubst %/langs/$(NATLANG),%, \
+                        $(the-pathways))))
 
-# the-courses := $(foreach \
-# 	pathway,$(the-pathways),distribution/$(NATLANG)/courses/$(notdir $(pathway))/.)
-
-copy-pathways: initialization $(the-courses)
+copy-pathways: $(the-courses)
+	@echo distribution/$(NATLANG)/courses updated
 
 define make-copy-pathway-rule
-distribution/$(NATLANG)/courses/$(notdir $1)/.: $1 initialization
-	@mkdir -p $$@
-	@touch $$@
-	@touch $$</langs/$(NATLANG)/ignore_file
-	@$(CP) -upr $$</langs/$(NATLANG)/* $$@
-	@if test ! -f $$</langs/$(NATLANG)/index.adoc; then \
-		touch $$@/index.adoc; fi
-	@rm -f $$</langs/$(NATLANG)/ignore_file $$@/ignore_file
-	@$(MAKE_DIR)massage-course.sh $$@
+distribution/$(NATLANG)/courses/$(call curr-bare-name,$1): $1
+	@$(MAKE_DIR)massage-course.sh $$< $$@
 
 endef
 
@@ -120,25 +102,21 @@ $(eval $(foreach pathway,$(the-pathways),$(call make-copy-pathway-rule,$(pathway
 
 ###############################################################################
 
-page-not-found: distribution/$(NATLANG)/lib/page-not-found.pdf
+page-not-found: distribution/$(NATLANG)/lib/page-not-found.adoc
 
-distribution/$(NATLANG)/lib/page-not-found.pdf: initialization
+distribution/$(NATLANG)/lib/page-not-found.adoc:
 	@echo = PAGE NOT FOUND! > distribution/$(NATLANG)/lib/page-not-found.adoc
 	@echo >> distribution/$(NATLANG)/lib/page-not-found.adoc
-	@if test -z "$(ASCIIDOCTOR_NODE)"; then echo distribution/$(NATLANG)/lib/page-not-found.adoc >> $(ADOC_INPUT); else echo \"distribution/$(NATLANG)/lib/page-not-found.adoc\", >> $(ADOC_INPUT); fi
-	@if test -n "$(BOOK)"; then echo ", { \"input\": \"distribution/$(NATLANG)/lib/page-not-found.html\" }" >> $(PUPPETEER_INPUT); fi
 
 ###############################################################################
 
-glossary: distribution/$(NATLANG)/lib/bilingual-glossary.pdf
+glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
-distribution/$(NATLANG)/lib/bilingual-glossary.pdf: initialization
-	@$(MAKE_DIR)make-bilingual-glossary.sh
+distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.rkt
+	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
 
 courses-and-lessons: copy-lessons copy-pathways
-	@echo '}' >> $(EXERCISE_COLLECTOR_INPUT)
-	@echo '}' >> $(COURSES_LIST_FILE)
-	@$(MAKE_DIR)collect-lessons.lua
-	@$(MAKE_DIR)collect-exercises.lua
+	$(MAKE_DIR)collect-distribution-info.lua
+

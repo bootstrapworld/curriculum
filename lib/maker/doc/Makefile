@@ -1,4 +1,4 @@
-# last modified 2023-02-26
+# last modified 2023-03-03
 
 adoc_files := *.adoc
 
@@ -7,4 +7,4 @@ svg_files := *.svg
 all: index.html
 
 index.html: $(adoc_files) $(svg_files)
-	asciidoctor -a linkcss index.adoc
+	asciidoctor -a linkcss -a icons=font index.adoc

@@ -1,6 +1,5 @@
 :toc:
 :toclevels: 4
-:icons: font
 
 = READ ME
 
@@ -280,8 +279,9 @@ to populate the `distribution/` directory with the built documentation.
   the documents to ensure they are valid. By default, this check isn't
   done to save time
 
-- `GRAPH=yes` -- creates the lesson dependency graph in
-  `distribution/en-us/dependency-graph.js`
+- `GRAPH=yes` -- updates the lesson dependency graph in
+  `distribution/en-us/dependency-graph.js`. (By default, this file is
+  created only if doesn't exist already)
 
 - `NATLANG=lang` -- builds for the natural language `lang`. The default is
   `en-us` (US English). Currently, the only other language that has
@@ -444,7 +444,7 @@ A Bash script `build` is provided as a convenient wrapper for `make`:
   makes it first; otherwise uses already-built distribution
 - `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
   builds from scratch, scrubbing any previous `distribution/`
-- `--graph` (aka `-g`): generates the lesson dependency graph
+- `--graph` (aka `-g`): updates the lesson dependency graph
 - `--help` (aka `-h`): displays help and exists
 - `--link` (aka `--verify-links`, `-l`): verify all the links in
   the documentation
@@ -945,5 +945,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-03-01
+// last modified 2023-03-03
 // vi:tw=72

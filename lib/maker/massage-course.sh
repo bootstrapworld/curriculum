@@ -1,14 +1,20 @@
 #!/bin/bash
 
-# last modified 2023-03-01
+# last modified 2023-03-04
+
+# echo massage-course.sh "$@"
+
+src=$1
+
+d=$2
+
+mkdir -p $d/.cached
+
+(find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
+
+test ! -f $d/index.adoc && touch $d/index.adoc
 
 source ${MAKE_DIR}src-subdir-mgt.sh
-
-# echo doing massage-course $1
-
-d=$1
-
-d=${d%/.}
 
 pathwayName=$(basename $d)
 
@@ -70,8 +76,6 @@ for d in $pathwayName*; do
       grep -v '^ *$' |
       $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
   fi
-
-  echo " " \"$d\", >> $COURSES_LIST_FILE
 
   cd ..
 done
