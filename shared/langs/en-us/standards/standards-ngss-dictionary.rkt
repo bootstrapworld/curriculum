@@ -1,10 +1,5 @@
-#lang racket
-
-(provide *ngss-standards-list*)
-
     ;;;;;;;;;;;;;;;;;;;   NGSS standards  ;;;;;;;;;;;;;;;;
-(define *ngss-standards-list*
-  '(
+  (
     ; NOTE(Emmanuel): 9/9/21 - Commenting out ES standards, to focus on
     ; MS and HS
 
@@ -488,5 +483,5 @@
      "Communicate scientific and/or technical information or ideas (e.g. about phenomena and/or the process of development and the design and performance of a proposed process or system) in multiple formats (including orally, graphically, textually, and mathematically)."
      )
 
-    ))
+    )
 

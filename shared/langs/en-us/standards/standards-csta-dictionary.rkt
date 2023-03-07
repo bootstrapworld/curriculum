@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *csta-standards-list*)
     ;;;;;;;;;;;;;;;;;;;  CSTA Standards ;;;;;;;;;;;;;;;;;;
 
-(define *csta-standards-list*
-  '(
+  (
 
     ; CSTA CS Standards
     ; these standards are organized by concept (CS, AP, DA, NI, etc),
@@ -695,5 +691,5 @@
      "Debate laws and regulations that impact the development and use of software."
      "ethics-privacy-and-bias"
      )
-    ))
+    )
 

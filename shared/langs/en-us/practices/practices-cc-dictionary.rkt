@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *cc-practices-list*)
-
-(define *cc-practices-list*
-  '(
+  (
     ; Common Core Standards for Mathematical Practice
     ("MP.1"
      "Make sense of problems and persevere in solving them"
@@ -142,5 +137,5 @@
      "functions-make-life-easier"
      )
 
-    ))
+    )
 

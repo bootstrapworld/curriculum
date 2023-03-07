@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *ma-standards-list*)
-
-(define *ma-standards-list*
-  `(
+  (
     ; Massachusetts-specific Digital Literacy Standards
     ("K-2.CAS.a.1"
      "Demonstrate proper ergonomics (e.g., body position, stretching) when using devices."
@@ -895,5 +890,5 @@
      "Form a model from a hypothesis generated from research and run a simulation to collect and analyze data to test that hypothesis."
      ; MODELING!
      )
-    ))
+    )
 

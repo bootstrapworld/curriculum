@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *cmp-textbook-list*)
-
-(define *cmp-textbook-list*
-  '(
+  (
 
     ; We are borrowing the infrastructure used for standards alignment,
     ; but in this case we're really talking about *chapters*
@@ -105,5 +100,5 @@
      ; If we build something for inverse functions it should get linked to this
      "Function Junction: Families of Functions"
      "piecewise-functions")
-    ))
+    )
 

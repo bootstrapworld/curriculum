@@ -8,15 +8,19 @@
   disallow-standards
   )
 
-(require "standards-cc-ela-dictionary.rkt")
-(require "standards-cc-math-dictionary.rkt")
-(require "standards-csta-dictionary.rkt")
-(require "standards-k12cs-dictionary.rkt")
-(require "standards-ngss-dictionary.rkt")
-(require "standards-ok-dictionary.rkt")
-(require "standards-or-dictionary.rkt")
-(require "standards-ia-dictionary.rkt")
-(require "standards-ma-dictionary.rkt")
+(define (read-file f)
+  (let ([f (format "~a/~a" (getenv "PROGDIR") f)])
+    (call-with-input-file f read)))
+
+(define *cc-ela-standards-list* (read-file "standards/standards-cc-ela-dictionary.rkt"))
+(define *cc-math-standards-list* (read-file "standards/standards-cc-math-dictionary.rkt"))
+(define *csta-standards-list* (read-file "standards/standards-csta-dictionary.rkt"))
+(define *k12cs-standards-list* (read-file "standards/standards-k12cs-dictionary.rkt"))
+(define *ngss-standards-list* (read-file "standards/standards-ngss-dictionary.rkt"))
+(define *ok-standards-list* (read-file "standards/standards-ok-dictionary.rkt"))
+(define *or-standards-list* (read-file "standards/standards-or-dictionary.rkt"))
+(define *iowa-standards-list* (read-file "standards/standards-ia-dictionary.rkt"))
+(define *ma-standards-list* (read-file "standards/standards-ma-dictionary.rkt"))
 
 (define *standards-list*
   (list

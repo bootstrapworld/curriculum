@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *cc-math-standards-list*)
     ;;;;;;;;;;;;;;;;;;;  Common Core Math Standards ;;;;;;;;;;;;;;;;;;
 
-(define *cc-math-standards-list*
-  '(
+  (
     ; Common Core State Standards for Mathematics 5-12
 
     ; Grade 5
@@ -1285,7 +1281,7 @@
     ("HSG.CO.C.11"
      "Prove theorems about parallelograms."
      )
-    ("HSG.CO.D" 
+    ("HSG.CO.D"
      "Make geometric constructions."
      )
     ("HSG.CO.D.12"
@@ -1458,7 +1454,7 @@
      "scatter-plots"
      "correlations"
      )
-    ("HSS.ID.B.5" 
+    ("HSS.ID.B.5"
      "Summarize categorical data for two categories in two-way frequency tables. Interpret relative frequencies in the context of the data (including joint, marginal, and conditional relative frequencies). Recognize possible associations and trends in the data."
      )
     ("HSS.ID.B.6"
@@ -1603,5 +1599,5 @@
     ("WHST.6-8.1"
      "Write arguments focused on discipline-specific content."
      )
-    ))
+    )
 

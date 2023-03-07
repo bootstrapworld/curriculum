@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *or-standards-list*)
     ;;;;;;;;;;;;;;;;;;;  Oregon Math Standards ;;;;;;;;;;;;;;;;;;
 
-(define *or-standards-list*
-  '(
+  (
     ; Oregon State Standards for Mathematics 5-12
 
     ; Grade 5
@@ -921,5 +917,5 @@
      "Recognize and explain the concepts of conditional probability and independence in everyday language and everyday situations."
      )
 
-    ))
+    )
 

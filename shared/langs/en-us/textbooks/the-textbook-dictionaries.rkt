@@ -5,11 +5,15 @@
   expand-textbook-abbrev
   )
 
-(require "textbook-cmp-dictionary.rkt")
-(require "textbook-im-6-dictionary.rkt")
-(require "textbook-im-7-dictionary.rkt")
-(require "textbook-im-8-dictionary.rkt")
-(require "textbook-im-alg-1-dictionary.rkt")
+(define (read-file f)
+  (let ([f (format "~a/~a" (getenv "PROGDIR") f)])
+    (call-with-input-file f read)))
+
+(define *cmp-textbook-list* (read-file "textbooks/textbook-cmp-dictionary.rkt"))
+(define *im-6-textbook-list* (read-file "textbooks/textbook-im-6-dictionary.rkt"))
+(define *im-7-textbook-list* (read-file "textbooks/textbook-im-7-dictionary.rkt"))
+(define *im-8-textbook-list* (read-file "textbooks/textbook-im-8-dictionary.rkt"))
+(define *im-alg-1-textbook-list* (read-file "textbooks/textbook-im-alg-1-dictionary.rkt"))
 
 (define *textbooks-list*
   (list

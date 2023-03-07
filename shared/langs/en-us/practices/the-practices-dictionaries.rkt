@@ -6,11 +6,15 @@
   expand-practice-abbrev
   )
 
-;(require "practices-mlr-dictionary.rkt")
-(require "practices-sj-dictionary.rkt")
-(require "practices-sep-dictionary.rkt")
-(require "practices-cc-dictionary.rkt")
-(require "practices-k12cs-dictionary.rkt")
+(define (read-file f)
+  (let ([f (format "~a/~a" (getenv "PROGDIR") f)])
+    (call-with-input-file f read)))
+
+;(define *mlr-practices-list* (read-file "practices/practices-mlr-dictionary.rkt"))
+(define *sj-practices-list* (read-file "practices/practices-sj-dictionary.rkt"))
+(define *sep-practices-list* (read-file "practices/practices-sep-dictionary.rkt"))
+(define *cc-practices-list* (read-file "practices/practices-cc-dictionary.rkt"))
+(define *k12cs-practices-list* (read-file "practices/practices-k12cs-dictionary.rkt"))
 
 (define *practices-list*
   (list
