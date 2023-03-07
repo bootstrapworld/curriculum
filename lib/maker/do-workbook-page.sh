@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-28
+# last modified 2023-03-07
 
 # echo doing do-workbook-page.sh $1
 
@@ -53,11 +53,7 @@ fi
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson \"$lesson\" #:other-dir $otherdirarg #:solutions-mode? $solutionsmodearg #:proglang \"$proglangarg\")" >>  $ADOCABLES_INPUT
 
 if test $otherdirarg != "#t" ; then
-  if test -z "$ASCIIDOCTOR_NODE"; then
-    echo $ascfile >> $ADOC_INPUT
-  else
-    echo \"$ascfile\", >> $ADOC_INPUT
-  fi
+  echo $ascfile >> $ADOC_INPUT
 
   echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
 
