@@ -1,4 +1,4 @@
-# last modified 2023-03-06
+# last modified 2023-03-07
 
 include $(MAKE_DIR)utils.mk
 
@@ -24,15 +24,10 @@ initialization: distribution/$(NATLANG)/extlib/mathjax
 	@$(CP) -p lib/*.rkt $(PROGDIR)
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.js* distribution/$(NATLANG)/lib
-	@$(CP) -p lib/*.less distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.png distribution/$(NATLANG)/lib
-	@for f in distribution/$(NATLANG)/lib/*.less; do \
-		if test -f "$$f"; then \
-		node_modules/less/bin/lessc "$$f" "$${f%.less}.css"; fi; done
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "let adocFiles = [" > $(ADOC_INPUT); fi
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
@@ -52,7 +47,6 @@ distribution/$(NATLANG)/extlib/mathjax: node_modules/mathjax
 	@$(CP) -upr node_modules/mathjax/* $@
 	@$(CP) -p lib/mathjaxlocal.js $@/config/local
 	@rm -fr $@/[CLRptu]*
-
 
 ###############################################################################
 

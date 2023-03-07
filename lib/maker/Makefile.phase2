@@ -1,8 +1,24 @@
-# last modified 2023-03-06
+# last modified 2023-03-07
 
 include $(MAKE_DIR)utils.mk
 
-phase2: primitives linkcheck images tocs books
+phase2: css-from-less primitives linkcheck images tocs books
+
+###############################################################################
+
+less-files := $(wildcard lib/*.less)
+
+css-from-less-files := $(foreach lessf,$(less-files), $(patsubst %.less,distribution/$(NATLANG)/%.css,$(lessf)))
+
+css-from-less: $(css-from-less-files)
+
+define make-css-from-less-rule
+$(patsubst %.less,distribution/$(NATLANG)/%.css, $1): $1
+	node_modules/less/bin/lessc $$< $$@
+
+endef
+
+$(eval $(foreach lessf,$(less-files),$(call make-css-from-less-rule, $(lessf))))
 
 ##########################################################################
 
@@ -216,7 +232,6 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
 	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
 	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
-	@if test -n "$(ASCIIDOCTOR_NODE)"; then echo "]" >> $(ADOC_INPUT); echo "module.exports = adocFiles;"; fi
 	$(MAKE_DIR)run-asciidoctor.sh
 
 primitives: preproc
