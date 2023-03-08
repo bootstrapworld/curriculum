@@ -1,8 +1,8 @@
-# last modified 2023-03-07
+# last modified 2023-03-08
 
 include $(MAKE_DIR)utils.mk
 
-phase2: css-from-less primitives linkcheck images tocs books
+phase2: css-from-less primitives verifylinks images tocs books
 
 ###############################################################################
 
@@ -254,10 +254,10 @@ pdfs: postproc
 endif
 
 ifeq "$(LINKCHECK)" ""
-linkcheck: pdfs
+verifylinks: pdfs
 
 else
-linkcheck: pdfs
+verifylinks: pdfs
 	$(MAKE_DIR)do-link-check.sh
 
 endif

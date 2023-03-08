@@ -50,8 +50,22 @@ all:
 	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
 	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2 dependency-graph
 
+###############################################################################
+
+book:
+	@BOOK=yes $(MAKE)
+
+###############################################################################
+
+linkcheck:
+	@LINKCHECK=yes $(MAKE)
+
+###############################################################################
+
 clean:
 	rm -fr $(TOPDIR)/distribution
+
+###############################################################################
 
 deploy:
 	$(TOPDIR)/deploy-to-hostinger
@@ -66,8 +80,7 @@ alignment-dictionaries := $(wildcard \
 	shared/langs/en-us/practices/*.rkt)
 
 lib/dictionaries.js: $(alignment-dictionaries)
-	$(MAKE_DIR)/make-json-dict.lua $@
-
+	$(MAKE_DIR)make-json-dict.lua $@
 
 ###############################################################################
 
@@ -77,4 +90,21 @@ coverage-report.html: $(alignment-dictionaries)
 	$(MAKE_DIR)make-coverage-report.lua coverage-report.adoc
 	asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css coverage-report.adoc
 	@$(SED) -i -e 's/<p><span class="unused">/<p class="unused"><span>/g' $@
+
+###############################################################################
+
+help:
+	@echo The following make calls build
+	@echo
+	@echo "  make              -- updates distribution/, HTML only"
+	@echo "  make book         -- updates PDFs and workbooks too"
+	@echo "  make linkcheck    -- additionally verifies all links"
+	@echo
+	@echo The following do not build
+	@echo
+	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
+	@echo "  make deploy       -- deploys existing distribution/ to webhost"
+	@echo "  make dictionaries -- makes lib/dictionaries.js from alignment info"
+	@echo "  make coverage     -- generates coverage-report.html from alignment info"
+	@echo "  make help         -- displays (this) help"
 
