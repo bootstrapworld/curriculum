@@ -35,15 +35,15 @@ end
 o:write('let dictionaries = {\n')
 
 o:write('  "standards": {\n')
-display_sublist(standards_list, o)
+display_sublist(standards_list)
 o:write('  },\n')
 
 o:write('  "textbooks": {\n')
-display_sublist(textbooks_list, o)
+display_sublist(textbooks_list)
 o:write('  },\n')
 
 o:write('  "practices": {\n')
-display_sublist(practices_list, o)
+display_sublist(practices_list)
 o:write('  }\n')
 
 o:write('};\n')
