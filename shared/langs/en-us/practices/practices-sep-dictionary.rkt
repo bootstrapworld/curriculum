@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *sep-practices-list*)
-
-(define *sep-practices-list*
-  '(
+  (
     ; Next-Generation Science Standards (NGSS)
     ; Science and Engineering Practices
 
@@ -48,5 +43,5 @@
      "data-collection"
      "contracts")
 
-    ))
+    )
  

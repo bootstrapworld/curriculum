@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *im-7-textbook-list*)
-
-(define *im-7-textbook-list*
-  '(
+  (
     ; Modeled after https://github.com/bootstrapworld/curriculum/blob/
     ; ada269498c15600c27452688218e202f333d5ae0/shared/langs/en-us/textbook-cmp-
     ; dictionary.rkt
@@ -127,4 +122,4 @@
      "threats-to-validity")
 
     ; End of chapter/section list
-    ))
+    )

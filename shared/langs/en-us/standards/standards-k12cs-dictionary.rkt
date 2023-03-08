@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *k12cs-standards-list*)
     ;;;;;;;;;;;;;;;;;;;  K-12 CS Frameworks ;;;;;;;;;;;;;;;;;;
 
-(define *k12cs-standards-list*
-  '(
+  (
     ; https://K12CS Frameworks
 
     ;;;;;;;;;;;;;; Computing Systems ;;;;;;;;;;;;;;;;;;;;;;
@@ -182,5 +178,5 @@
     ("6-8.Impacts of Computing.Safety, Law, and Ethics"
      "There are tradeoffs between allowing information to be public and keeping information private and secure. People can be tricked into revealing personal information when more public information is available about them online."
      )
-    ))
+    )
 

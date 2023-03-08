@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *sj-practices-list*)
-
-(define *sj-practices-list*
-  '(
+  (
 
     ; Social Justice Standards and Domains
     ; from https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf
@@ -99,5 +94,5 @@
     ("SJ.20"
      "Students will plan and carry out collective action against bias and injustice in the world and will evaluate what strategies are most effective."
      )
-    ))
+    )
  

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-04
+# last modified 2023-03-07
 
 $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
@@ -11,5 +11,11 @@ test -f "$ADOC_INPUT" || exit 0
 if test -z "$ASCIIDOCTOR_NODE"; then
   asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
 else
-  node lib/callAdoc.js $ADOC_INPUT
+  NODE_ADOC_INPUT=$ADOC_INPUT-node.js
+  echo "let adocFiles = [" > $NODE_ADOC_INPUT
+  cat $ADOC_INPUT | sed -e 's/.*/"\0",/' >> $NODE_ADOC_INPUT
+  echo "];" >> $NODE_ADOC_INPUT
+  echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
+  #
+  node lib/callAdoc.js $NODE_ADOC_INPUT
 fi

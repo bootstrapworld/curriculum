@@ -1,18 +1,20 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-05
+-- last modified 2023-03-06
 
 -- print('doing make-images-js.lua')
+
+local image_js_file = ...
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
 
-read_group = make_read_group(identity, function()
+local read_group = make_read_group(identity, function()
   return 'Collecting images'
 end)
 
-function expand_some_directives(i, o)
+local function expand_some_directives(i, o)
   while true do
     local c = i:read(1)
     if not c then break end
@@ -34,7 +36,6 @@ function expand_some_directives(i, o)
 end
 
 local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
-local image_js_file = dist_dir .. 'images.js'
 local lessons_dir = dist_dir .. 'lessons/'
 local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
 local o = io.open(image_js_file, 'w+')

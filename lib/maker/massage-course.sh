@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-04
+# last modified 2023-03-07
 
 # echo massage-course.sh "$@"
 
@@ -8,10 +8,15 @@ src=$1
 
 d=$2
 
-mkdir -p $d/.cached
+if test -d "$d"; then
+  echo Updating existing course $d
+else
+  mkdir -p $d
+fi
 
 (find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
+# ensure pathway narrative adoc always present, even if present
 test ! -f $d/index.adoc && touch $d/index.adoc
 
 source ${MAKE_DIR}src-subdir-mgt.sh
