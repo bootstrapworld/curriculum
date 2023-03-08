@@ -1,0 +1,70 @@
+= Modeling Fuel Efficiency v. Speed
+++++
+<style>
+.studentAnswerMedium { min-width: 10em !important; }
+td { padding: 0 !important; }
+</style>
+++++
+
+For this page, you'll need to the  @online-exercise{https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy&v=4d870d2, Fuel Efficiency Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+**In this exercise you'll have a chance to build and fit more models to the data, now armed with new tools that let you experiment with squares and square roots.** These tools are listed here (as well as in your contracts pages):
+
+@vspace{1ex}
+
+[cols="^1a,^1a", stripes="none", frame="none"]
+|===
+| @math{x^2}
+| @math{\sqrt x}
+
+| @show{(contract "num-sqr" '("Num") "Num" "Consumes a number and a base, and produces the log of that number with the base")}
+| @show{(contract "num-sqrt" '("Num") "Num" "Consumes a number and a power, and produces that number raised to the power")}
+|===
+
+== Build a Model from Samples
+
+@n Record three (x,y) pairs below, representing the speed and mpg of Model A at three different speeds:
+
+@center{
+ (@fitbruby{5em}{15}{speed}, @fitbruby{5em}{@ifsoln{25.822}}{mpg}) @hspace{5em} (@fitbruby{5em}{55}{speed}, @fitbruby{5em}{@ifsoln{32.168}}{mpg}) @hspace{5em}
+ (@fitbruby{5em}{75}{speed}, @fitbruby{5em}{@ifsoln{32.168}}{mpg})
+}
+
+@n The sign of the quadratic coefficient @math{A} determines whether a parabola opens up (positive) or opens down (negative). What is the sign of @math{A}? @fitb{5em}{negative}
+
+@n
+
+@n Using the two points above, define a logarithmic model. Show your work below, then define the function in Function Notation and Pyret.
+
+@ifsoln{Note: Answers will vary!}@vspace{1.5in}
+
+@center{
+ @math{f(x) = }
+ @fitbruby{5em}{@ifsoln{@math{14.9146}}}{log coefficient}
+ @math{log( }
+ @fitbruby{5em}{@ifsoln{0.0165}}{linear coefficient}
+ @math{x) + }
+ @fitbruby{5em}{@ifsoln{0}}{constant}
+ @hspace{2em}
+ @show{(code '(define (f x) (+ (* (?ANS 14.9146) (log (* (?ANS 0.0165) x))) (?ANS 0))))}
+}
+
+@n Change the function `f` to match this model, and click "Run". Make sure you fix any errors or warnings. In the Interactions Area, make sure `f(1990.51)` and `f(11765.59)` predict the correct median lifespan for Afghanistan and Albania!
+
+@vspace{1ex}
+
+@n Try plugging in different `pc-gdp` values from _other_ countries, to see how well a model based only on Afghanistan and Albania fits for the rest of the world. For which country does it work well? @fitb{5em}{} For what country does it work poorly? @fitb{5em}{}
+
+== Fit the Model
+
+@n Use `fit-model` to see how well this logarithmic function fits the dataset. What @math{R^2} value did you get? @fitb{}{}
+
+== Build a Model through Trial {amp} Error
+
+@n What is the @math{R^2} for **the best model you can come up with**? @fitb{5em}{} Write the model below.
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))}
+}
+
+
