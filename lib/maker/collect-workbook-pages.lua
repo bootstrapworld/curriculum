@@ -1,14 +1,8 @@
 #! /usr/bin/env lua
 
+-- last modified 2023-03-08
+
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
-
-function touch(f)
-  if not file_exists_p(f) then
-    local o = io.open(f, 'w')
-    o:close()
-  end
-end
-
 
 workbook_pages_repo_file = 'pages/workbook-pages.txt'
 
