@@ -34,7 +34,7 @@
     ; https://curriculum.illustrativemathematics.org/MS/teachers/1/2/index.html
 
     ("IM.6.2.5"
-     "FIXME: Add title"
+     "Defining Equivalent Ratios"
      "flags")
 
     ("IM.6.2.14"
@@ -57,27 +57,33 @@
     ; https://curriculum.illustrativemathematics.org/MS/teachers/1/6/index.html
     ("IM.6.6.2"
      "Truth and Equations"
-     "defining-values")
+     "defining-values"
+     "equivalence")
 
     ("IM.6.6.6"
      "Write Expressions Where Letters Stand for Numbers"
-     "functions-for-character-animation")
+     "functions-for-character-animation"
+     "equivalence")
 
     ("IM.6.6.8"
      "Equal and Equivalent"
-     "problem-decomposition")
+     "problem-decomposition"
+     "equivalence")
 
     ("IM.6.6.13"
      "Expressions with Exponents"
-     "order-of-operations")
+     "order-of-operations"
+     "evaluating-exponents")
 
     ("IM.6.6.14"
      "Evaluating Expressions with Exponents"
-     "order-of-operations")
+     "order-of-operations"
+     "evaluating-exponents")
 
     ("IM.6.6.15"
      "Equivalent Exponential Expressions"
-     "order-of-operations")
+     "order-of-operations"
+     "evaluating-exponents")
 
     ("IM.6.6.16"
      "Two Related Quantities, Part 1"
@@ -93,6 +99,16 @@
 
     ; Illustrative Mathematics Grade 6 Unit 7: Rational Numbers
     ; https://curriculum.illustrativemathematics.org/MS/teachers/1/7/index.html
+    ("IM 6.7.2"
+      "Points on the Number Line"
+      "absolute-value-and-opposites"
+      "absolute-value-and-opposites-2")
+
+    ("IM 6.7.7"
+      "Comparing Numbers and Distance from Zero"
+      "absolute-value-and-opposites"
+      "absolute-value-and-opposites-2")
+
     ("IM 6.7.8"
      "Writing and Graphing Inequalities"
      "inequalities1-simple"
