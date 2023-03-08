@@ -1,4 +1,4 @@
-# last modified 2023-03-06
+# last modified 2023-03-08
 
 export MAKE_DIR := lib/maker/
 
@@ -12,7 +12,7 @@ export ADOCABLES_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adocable
 
 # batch input for Asciidoctor (.asc -> .s?html)
 
-export ADOC_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-asciidoctor.js
+export ADOC_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-asciidoctor
 
 # input for the (Lua) postprocessor
 
@@ -50,8 +50,61 @@ all:
 	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
 	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2 dependency-graph
 
+###############################################################################
+
+book:
+	@BOOK=yes $(MAKE)
+
+###############################################################################
+
+linkcheck:
+	@LINKCHECK=yes $(MAKE)
+
+###############################################################################
+
 clean:
 	rm -fr $(TOPDIR)/distribution
 
+###############################################################################
+
 deploy:
 	$(TOPDIR)/deploy-to-hostinger
+
+###############################################################################
+
+dictionaries: lib/dictionaries.js
+
+alignment-dictionaries := $(wildcard \
+	shared/langs/en-us/standards/*.rkt \
+	shared/langs/en-us/textbooks/*.rkt \
+	shared/langs/en-us/practices/*.rkt)
+
+lib/dictionaries.js: $(alignment-dictionaries)
+	$(MAKE_DIR)make-json-dict.lua $@
+
+###############################################################################
+
+coverage: coverage-report.html
+
+coverage-report.html: $(alignment-dictionaries)
+	$(MAKE_DIR)make-coverage-report.lua coverage-report.adoc
+	asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css coverage-report.adoc
+	@$(SED) -i -e 's/<p><span class="unused">/<p class="unused"><span>/g' $@
+
+###############################################################################
+
+help:
+	@echo The following make calls build
+	@echo
+	@echo "  make              -- updates distribution/, HTML only"
+	@echo "  make book         -- updates PDFs and workbooks too"
+	@echo "  make linkcheck    -- additionally verifies all links"
+	@echo
+	@echo The following do not build
+	@echo
+	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
+	@echo "  make deploy       -- deploys existing distribution/ to webhost"
+	@echo "  make dictionaries -- makes lib/dictionaries.js from alignment info"
+	@echo "  make coverage     -- generates coverage-report.html from alignment info"
+	@echo "  make help         -- displays (this) help"
+

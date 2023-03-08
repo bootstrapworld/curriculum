@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *or-standards-list*)
     ;;;;;;;;;;;;;;;;;;;  Oregon Math Standards ;;;;;;;;;;;;;;;;;;
 
-(define *or-standards-list*
-  '(
+  (
     ; Oregon State Standards for Mathematics 5-12
 
     ; Grade 5
@@ -701,7 +697,7 @@
      "contracts"
      )
     ("HS.AFN.A.3"
-     "Calculate and interpret the average rate of change of a function over a specified interval." 
+     "Calculate and interpret the average rate of change of a function over a specified interval."
      )
     ("HS.AFN.B"
      "Compare and relate functions using common attributes."
@@ -921,5 +917,5 @@
      "Recognize and explain the concepts of conditional probability and independence in everyday language and everyday situations."
      )
 
-    ))
+    )
 

@@ -1,19 +1,15 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-05
+-- last modified 2023-03-06
+
+local graph_file = ...
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
-local graph_envvar = os.getenv 'GRAPH' or ''
+local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
 
-local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
-
-local graph_file = dist_dir .. 'dependency-graph.js'
-
-if graph_envvar == '' and file_exists_p(graph_file) then return end
-
-local lessons_dir = dist_dir .. 'lessons/'
 local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
+
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')

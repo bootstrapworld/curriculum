@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *mlr-practices-list*)
-
-(define *mlr-practices-list*
-  '(
+  (
 
     ; Mathematical Language Routines
     ; from https://achievethecore.org/peersandpedagogy/developing-math-language-routines/
@@ -68,5 +63,5 @@
      "defining-values"
      "contracts"
      )
-    ))
+    )
 

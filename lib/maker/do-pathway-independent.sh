@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-28
+# last modified 2023-03-07
 
 # echo doing do-pathway-independent $1
 
@@ -30,10 +30,6 @@ fi
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\")" >>  $ADOCABLES_INPUT
 
-if test -z "$ASCIIDOCTOR_NODE"; then
-  echo $ascfile >> $ADOC_INPUT
-else
-  echo \"$ascfile\", >> $ADOC_INPUT
-fi
+echo $ascfile >> $ADOC_INPUT
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_PWYINDEP_INPUT

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-02-28
+# last modified 2023-03-07
 
 # echo doing do-lesson-plan.sh $1
 
@@ -59,11 +59,7 @@ touch $containingdirectory/.cached/.index-standards.asc
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
-if test -z "$ASCIIDOCTOR_NODE"; then
-  echo $ascfile >> $ADOC_INPUT
-else
-  echo \"$ascfile\", >> $ADOC_INPUT
-fi
+echo $ascfile >> $ADOC_INPUT
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_LESSONPLAN_INPUT
 

@@ -1,14 +1,7 @@
 #!/bin/bash
 
-shared/langs/en-us/coverage-report.rkt
-asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css coverage-report.adoc
+# last modified 2023-03-08
 
-SED=sed
+# wrapper for `make coverage` but makes it afresh
 
-if which gsed|grep -q .; then
-  SED=gsed
-fi
-
-$SED -i \
-  -e 's/<p><span class="unused">/<p class="unused"><span>/g' \
-  coverage-report.html
+make -B coverage

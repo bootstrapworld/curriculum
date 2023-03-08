@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-06
+; last modified 2023-03-07
 
 (require json)
 (require file/sha1)
@@ -14,9 +14,6 @@
 (require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
-(require "standards/the-standards-dictionaries.rkt")
-(require "textbooks/the-textbook-dictionaries.rkt")
-(require "practices/the-practices-dictionaries.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
