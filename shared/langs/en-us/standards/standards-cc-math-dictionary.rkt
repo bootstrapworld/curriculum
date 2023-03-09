@@ -11,9 +11,14 @@
     ("5.OA.A.1"
      "Use parentheses, brackets, or braces in numerical expressions, and evaluate expressions with these symbols."
      "order-of-operations"
+     "translating"
+     "computation"
      )
     ("5.OA.A.2"
      "Write simple expressions that record calculations with numbers, and interpret numerical expressions without evaluating them."
+     "translating"
+     "commutative-property"
+     "associative-property"
      )
     ("5.OA.B"
      "Analyze patterns and relationships."
@@ -155,19 +160,23 @@
      )
     ("6.NS.B.4"
      "Find the greatest common factor of two whole numbers less than or equal to 100 and the least common multiple of two whole numbers less than or equal to 12. Use the distributive property to express a sum of two whole numbers 1-100 with a common factor as a multiple of a sum of two whole numbers with no common factor."
+     "distributive-property"
      )
     ("6.NS.C"
      "Apply and extend previous understandings of numbers to the system of rational numbers."
      )
     ("6.NS.C.5"
      "Understand that positive and negative numbers are used together to describe quantities having opposite directions or values (e.g., temperature above/below zero, elevation above/below sea level, credits/debits, positive/negative electric charge); use positive and negative numbers to represent quantities in real-world contexts, explaining the meaning of 0 in each situation."
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
      )
     ("6.NS.C.6"
      "Understand a rational number as a point on the number line. Extend number line diagrams and coordinate axes familiar from previous grades to represent points on the line and in the plane with negative number coordinates."
      )
     ("6.NS.C.6.A"
      "Recognize opposite signs of numbers as indicating locations on opposite sides of 0 on the number line; recognize that the opposite of the opposite of a number is the number itself, e.g., -(-3) = 3, and that 0 is its own opposite."
-     ;Rachel?
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
      )
     ("6.NS.C.6.B"
      "Understand signs of numbers in ordered pairs as indicating locations in quadrants of the coordinate plane; recognize that when two ordered pairs differ only by signs, the locations of the points are related by reflections across one or both axes."
@@ -187,6 +196,8 @@
      )
     ("6.NS.C.7.C"
      "Understand the absolute value of a rational number as its distance from 0 on the number line; interpret absolute value as magnitude for a positive or negative quantity in a real-world situation."
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
      )
     ("6.NS.C.7.D"
      "Distinguish comparisons of absolute value from statements about order."
@@ -199,18 +210,19 @@
      )
     ("6.EE.A.1"
      "Write and evaluate numerical expressions involving whole-number exponents."
-     ;Rachel?
+     "evaluating-exponents"
      )
     ("6.EE.A.2"
      "Write, read, and evaluate expressions in which letters stand for numbers."
-     ;Rachel?
+     "evaluating-exponents"
      )
     ("6.EE.A.2.A"
      "Write expressions that record operations with numbers and with letters standing for numbers."
-     ;Rachel?
+     "translating"
      )
     ("6.EE.A.2.B"
      "Identify parts of an expression using mathematical terms (sum, term, product, factor, quotient, coefficient); view one or more parts of an expression as a single entity."
+     "translating"
      )
     ("6.EE.A.2.C"
      "Evaluate expressions at specific values of their variables. Include expressions that arise from formulas used in real-world problems. Perform arithmetic operations, including those involving whole-number exponents, in the conventional order when there are no parentheses to specify a particular order (Order of Operations)."
@@ -218,11 +230,16 @@
      )
     ("6.EE.A.3"
      "Apply the properties of operations to generate equivalent expressions."
-     ;Rachel?
+     "commutative-property"
+     "associative-property"
+     "identity-property"
+     "distributive-property"
      )
     ("6.EE.A.4"
      "Identify when two expressions are equivalent (i.e., when the two expressions name the same number regardless of which value is substituted into them)."
-     ;Rachel?
+     "equivalence"
+     "identity-property"
+     "distributive-property"
      )
     ("6.EE.B"
      "Reason about and solve one-variable equations and inequalities."
@@ -231,7 +248,7 @@
      )
     ("6.EE.B.5"
      "Understand solving an equation or inequality as a process of answering a question: which values from a specified set, if any, make the equation or inequality true? Use substitution to determine whether a given number in a specified set makes an equation or inequality true."
-     ;Flannery?
+     "equivalence"
      )
     ; Grade 6
     ("6.EE.B.6"
@@ -253,6 +270,7 @@
      "functions-dr"
      "functions-examples-definitions"
      "functions-make-life-easier"
+     "equivalence"
      )
     ("6.EE.B.7"
      "Solve real-world and mathematical problems by writing and solving equations of the form x + p = q and px = q for cases in which p, q and x are all nonnegative rational numbers."
@@ -404,6 +422,8 @@
      )
     ("7.NS.A.1.C"
      "Understand subtraction of rational numbers as adding the additive inverse, p - q = p + (-q). Show that the distance between two rational numbers on the number line is the absolute value of their difference, and apply this principle in real-world contexts."
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
      )
     ("7.NS.A.1.D"
      "Apply properties of operations as strategies to add and subtract rational numbers."
@@ -413,12 +433,19 @@
      )
     ("7.NS.A.2.A"
      "Understand that multiplication is extended from fractions to rational numbers by requiring that operations continue to satisfy the properties of operations, particularly the distributive property, leading to products such as (-1)(-1) = 1 and the rules for multiplying signed numbers. Interpret products of rational numbers by describing real-world contexts."
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
+     "distributive-property"
      )
     ("7.NS.A.2.B"
      "Understand that integers can be divided, provided that the divisor is not zero, and every quotient of integers (with non-zero divisor) is a rational number. If p and q are integers, then -(p/q) = (-p)/q = p/(-q). Interpret quotients of rational numbers by describing real-world contexts."
      )
     ("7.NS.A.2.C"
      "Apply properties of operations as strategies to multiply and divide rational numbers."
+     "commutative-property"
+     "associative-property"
+     "distributive-property"
+     "associative-property"
      )
     ("7.NS.A.2.D"
      "Convert a rational number to a decimal using long division; know that the decimal form of a rational number terminates in 0s or eventually repeats."
@@ -428,7 +455,12 @@
      )
     ("7.EE.A"
      "Use properties of operations to generate equivalent expressions."
-     ;Rachel?
+     "computation"
+     "commutative-property"
+     "associative-property"
+     "distributive-property"
+     "identity-property"
+     "equivalence"
      )
     ("7.EE.A.1"
      "Apply properties of operations as strategies to add, subtract, factor, and expand linear expressions with rational coefficients."
@@ -1281,7 +1313,7 @@
     ("HSG.CO.C.11"
      "Prove theorems about parallelograms."
      )
-    ("HSG.CO.D"
+    ("HSG.CO.D" 
      "Make geometric constructions."
      )
     ("HSG.CO.D.12"
@@ -1454,7 +1486,7 @@
      "scatter-plots"
      "correlations"
      )
-    ("HSS.ID.B.5"
+    ("HSS.ID.B.5" 
      "Summarize categorical data for two categories in two-way frequency tables. Interpret relative frequencies in the context of the data (including joint, marginal, and conditional relative frequencies). Recognize possible associations and trends in the data."
      )
     ("HSS.ID.B.6"

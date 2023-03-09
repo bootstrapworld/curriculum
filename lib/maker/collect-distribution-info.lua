@@ -1,8 +1,10 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-05
+-- last modified 2023-03-08
 
-dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+local make_dir = os.getenv'MAKE_DIR'
+
+dofile(make_dir .. 'utils.lua')
 
 local natlang = os.getenv 'NATLANG'
 
@@ -25,7 +27,7 @@ end
 
 -- subroutine for collecting exercises
 
-dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
+dofile(make_dir .. 'readers.lua')
 
 function emit_empty_string()
   return ''

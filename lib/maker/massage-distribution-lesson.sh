@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-07
+# last modified 2023-03-08
 
 # echo massage-distribution-lesson "$@"
 
@@ -51,14 +51,14 @@ for pl in $proglangs; do
   test -d pages || mkdir pages
   test -d pages/.cached || mkdir -p pages/.cached
 
-  # echo calling collect workbook pgs
-  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
   #
   make_solution_pages
+
+  # echo calling collect-work-pages.lua in $(pwd)
+  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
   cd ..
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done

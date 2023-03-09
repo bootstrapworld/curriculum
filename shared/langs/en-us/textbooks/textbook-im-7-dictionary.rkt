@@ -49,7 +49,9 @@
     ; https://curriculum.illustrativemathematics.org/MS/teachers/2/5/index.html
     ("IM.7.5.13"
      "Expressions with Rational Numbers"
-     "order-of-operations")
+     "order-of-operations"
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2")
 
     ("IM.7.5.14"
      "Solving Problems with Rational Numbers"

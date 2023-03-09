@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-07
+; last modified 2023-03-08
 
 (require json)
 (require file/sha1)
@@ -848,11 +848,13 @@
         (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
+      (when (path? f) (set! f (path->string f)))
       (let ([link-output
 
-              (format "link:~a../../pass:[~a][~a~a]"
+              (format "link:~apass:[~a][~a~a]"
                       "{fromlangroot}"
-                      f link-text
+                      (regexp-replace "distribution/[^/]+/" f "")
+                      link-text
                       (if *lesson-plan* ", window=\"_blank\"" ""))
 
               ])

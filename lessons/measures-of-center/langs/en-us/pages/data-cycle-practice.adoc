@@ -14,7 +14,7 @@ Complete both of the Data Cycles shown here, which have questions defined to get
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "mean(filter(animals-table, is-cat)), \"age\")"
+  #:expression '(mean(filter(animals-table is-cat) "age"))
   #:show-expression? #f
   #:finding "The mean age of cats is 4.18"
   #:show-finding? #f
@@ -26,7 +26,7 @@ Complete both of the Data Cycles shown here, which have questions defined to get
 
 @data-cycle{ ""
   #:question "How long does a typical animal take to be adopted?"
-  #:show-question? #f
+  #:show-question? #t
   #:question-type "arithmetic"
   #:rows "all the rows"
   #:show-rows? #f
@@ -36,7 +36,7 @@ Complete both of the Data Cycles shown here, which have questions defined to get
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "median(animals-table, \"weeks\")"
+  #:expression '(median animals-table "weeks")
   #:show-expression? #f
   #:finding "The median time to adoption is 4 weeks"
   #:show-finding? #f
