@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-06
+-- last modified 2023-03-08
 
 local glossary_terms_file, glossary_adoc_file = ...
 
@@ -19,29 +19,31 @@ end
 local o = io.open(glossary_adoc_file, 'w+')
 
 local function extract_keywords(tbl)
-  local kwd1 = tbl[1]
-  local other_kwds = table.remove(tbl, 1)
   local o_tbl = {}
-  if type(kwd1) == 'table' then
-    table.insert(o_tbl, kwd1[1])
-  else
-    table.insert(o_tbl, kwd1)
-  end
-  for _,kwd in ipairs(other_kwds) do
-    if type(kwd) then 
-      table.insert(o_tbl, kwd[1])
+  for i,kwd in ipairs(tbl) do
+    local word = kwd
+    if i == 1 then
+      if type(word) == 'table' then
+        word = word[1]
+      end
+      table.insert(o_tbl, word)
+    else
+      if type(word) == 'table' then
+        table.insert(o_tbl, word[1])
+      end
     end
   end
   return table.concat(o_tbl, ', ')
 end
 
 local function display_lang_entry(lang_entry)
+  local keyword_list
   if lang_entry then
-    keyword = lang_entry.keywords
-    if type(keyword) == 'table' then
-      keyword = extract_keywords(keyword)
+    keyword_list = lang_entry.keywords
+    if type(keyword_list) == 'table' then
+      keyword_list = extract_keywords(keyword_list)
     end
-    o:write(keyword .. ' :: ' .. lang_entry.desc .. '\n\n')
+    o:write(keyword_list .. ' :: ' .. lang_entry.desc .. '\n\n')
   else
     o:write '[.missing]#missing entry# :: ...\n\n'
   end

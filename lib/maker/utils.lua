@@ -1,4 +1,4 @@
--- last modified 2023-02-25
+-- last modified 2023-03-08
 
 function memberp(elt, tbl)
   -- true iff tbl contains elt
@@ -14,6 +14,13 @@ function file_exists_p(f)
   -- open'ing a nonexistent file returns nil
   if h then h:close(); return true
   else return false
+  end
+end
+
+function touch(f)
+  if not file_exists_p(f) then
+    local o = io.open(f, 'w')
+    o:close()
   end
 end
 
