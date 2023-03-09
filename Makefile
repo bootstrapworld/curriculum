@@ -10,7 +10,7 @@ export NATLANG ?= en-us
 
 export SEMESTER ?= fall
 
-export YEAR ?= $(shell date +%Y)-BETA
+export YEAR ?= $(shell date +%Y)
 
 # set ASCIIDOCTOR_NODE to nonempty if you want to use the Node (rather than
 # Ruby) version of Asciidoctor. It isn't bugfree yet
