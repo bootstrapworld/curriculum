@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# last modified 2023-03-01
+# last modified 2023-03-09
 
-test ! -d distribution && echo distribution/ not found\; make it first && exit
+test ! -d distribution && echo distribution/ not found\; make it first && exit 0
 
 # env vars HOSTINGER_PORT, HOSTINGER_USER, HOSTINGER_IPADDR *must* be set!
 # but don't set them here, for security reasons
@@ -13,7 +13,7 @@ test -z "$HOSTINGER_PORT" && echo Please set HOSTINGER_PORT && exitp=yes
 test -z "$HOSTINGER_USER" && echo Please set HOSTINGER_USER && exitp=yes
 test -z "$HOSTINGER_IPADDR" && echo Please set HOSTINGER_IPADDR && exitp=yes
 
-test -n "$exitp" && exit
+test -n "$exitp" && exit 0
 
 # set env vars SEMESTER and YEAR to reflect where you want the
 # curriculum pages to be deployed on the server.
@@ -117,13 +117,13 @@ scp -p -P $HOSTINGER_PORT deployables.tar.bz2 deploy-to-public_html.sh $HOSTINGE
 
 exitstatus=$?
 
-test $exitstatus -ne 0 && echo scp failed! 🙁 && exit
+test $exitstatus -ne 0 && echo scp failed! 🙁 && exit 0
 
 echo Unpacking files under public_html/materials/$SEMESTER$YEAR...
 ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deploy-to-public_html.sh'
 
 exitstatus=$?
 
-test $exitstatus -ne 0 && echo ssh failed! 🙁 && exit
+test $exitstatus -ne 0 && echo ssh failed! 🙁 && exit 0
 
 echo Deployment done! 🙂
