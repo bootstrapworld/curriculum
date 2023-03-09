@@ -4,9 +4,11 @@
 
 local glossary_terms_file, glossary_adoc_file = ...
 
-dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
-dofile(os.getenv'MAKE_DIR' .. 'readers.lua')
-dofile(os.getenv'MAKE_DIR' .. 'sread.lua')
+local make_dir = os.getenv'MAKE_DIR'
+
+dofile(make_dir .. 'utils.lua')
+dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'sread.lua')
 
 local glossary_list
 

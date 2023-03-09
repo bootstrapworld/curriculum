@@ -1,14 +1,16 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-06
+-- last modified 2023-03-08
 
 -- print('doing make-images-js.lua')
 
 local image_js_file = ...
 
-dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+local make_dir = os.getenv'MAKE_DIR'
 
-dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
+dofile(make_dir .. 'utils.lua')
+
+dofile(make_dir .. 'readers.lua')
 
 local read_group = make_read_group(identity, function()
   return 'Collecting images'

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-07
+# last modified 2023-03-08
 
 # echo massage-course.sh "$@"
 
@@ -61,6 +61,7 @@ for d in $pathwayName*; do
     if test -d $dd; then
       cd $dd
       if test -d pages; then
+        mkdir -p .cached
         make_solution_pages
         $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
       fi
