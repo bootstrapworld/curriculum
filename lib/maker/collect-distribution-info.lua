@@ -119,11 +119,7 @@ function collect_exercise_info(lesson_dir, proglang)
   --
   local workbook_pages = {}
   if file_exists_p(workbook_page_list_file) then
-    local i = io.open(workbook_page_list_file)
-    for line in i:lines() do
-      table.insert(workbook_pages, line)
-    end
-    i:close()
+    workbook_pages = read_file_lines(workbook_page_list_file)
   end
   --
   local i = io.open_buffered(lesson_plan_file)
@@ -162,7 +158,6 @@ end
 ----------------------------------------------------------------------------
 
 -- collecting lessons
-
 
 do
   local lessons_dir = 'distribution/' .. natlang .. '/lessons'
