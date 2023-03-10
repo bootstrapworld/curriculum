@@ -1326,8 +1326,7 @@
                         (loop2 (rest xx))))))))))
 
   (when *lesson-plan*
-    (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE")
-                                        #:mode 'lua-return)))
+    (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
 
   (erase-span-stack!)
   )

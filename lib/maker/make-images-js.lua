@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-08
+-- last modified 2023-03-09
 
 -- print('doing make-images-js.lua')
 
@@ -39,7 +39,7 @@ end
 
 local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
 local lessons_dir = dist_dir .. 'lessons/'
-local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
+local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
 local o = io.open(image_js_file, 'w+')
 
 o:write('var images = {\n')
