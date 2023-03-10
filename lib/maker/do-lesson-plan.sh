@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-07
+# last modified 2023-03-09
 
 # echo doing do-lesson-plan.sh $1
 
@@ -35,12 +35,11 @@ lesson=$(echo $containingdirectory|$SED -e 's#.*/lessons/\([^/]*\).*#\1#')
 
 proglangarg="pyret"
 
-if $(echo $lesson|grep -q '\-codap$'); then proglangarg=codap
-elif $(echo $lesson|grep -q '\-none$'); then proglangarg=none
-elif $(echo $lesson|grep -q '\-spreadsheets$'); then proglangarg=spreadsheets
-elif $(echo $lesson|grep -q '\-spreadsheets$'); then proglangarg=spreadsheets
-elif $(echo $lesson|grep -q '\-wescheme$'); then proglangarg=wescheme
-fi
+for f in $containingdirectory/.cached/.proglang-*; do
+  if test -f $f; then
+    proglangarg=$(echo $f|sed -e 's/.*\.cached\/\.proglang-\(.*\)/\1/')
+  fi
+done
 
 otherproglangs="#f"
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-06
+-- last modified 2023-03-09
 
 local graph_file = ...
 
@@ -8,7 +8,7 @@ dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
 
-local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
+local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
 
 local o = io.open(graph_file, 'w+')
 

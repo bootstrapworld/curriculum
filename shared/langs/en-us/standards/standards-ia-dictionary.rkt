@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *iowa-standards-list*)
-
-(define *iowa-standards-list*
-  `(
+  (
     ; Iowa-Specific 21st Century Skills
     ("21.6-8.ES.1"
      "Communicate and work productively with others, considering different perspectives, and cultural views to increase the quality of work."
@@ -73,5 +68,5 @@
      )
 
 
-    ))
+    )
 

@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-06
+; last modified 2023-03-09
 
 (require json)
 (require file/sha1)
@@ -14,9 +14,6 @@
 (require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
-(require "standards/the-standards-dictionaries.rkt")
-(require "textbooks/the-textbook-dictionaries.rkt")
-(require "practices/the-practices-dictionaries.rkt")
 (require "collect-lang-prereq.rkt")
 (require "starter-files.rkt")
 
@@ -324,13 +321,21 @@
 
 (define (qualify-lesson-dir this-lesson)
   ; (printf "doing qualify-lesson-dir ~s ~s\n" this-lesson *proglang*)
+  ; (printf "all-lessons = ~s\n" *all-lessons*)
   (let ([result #f]
         [this-lesson-wo-proglang (regexp-replace "-(codap|wescheme)$" this-lesson "")])
     (cond [(string=? *proglang* "pyret")
+           ; (printf "this-lesson-wo-proglang= ~s\n" this-lesson-wo-proglang)
            (when (member this-lesson-wo-proglang *all-lessons*)
              (set! result this-lesson-wo-proglang))]
+          [(string=? *proglang* "wescheme")
+           (when (member this-lesson-wo-proglang *all-lessons*)
+             (let ([this-lesson-in-wescheme (string-append this-lesson-wo-proglang "-wescheme")])
+               ; (printf "this-lesson-in-wescheme = ~s\n" this-lesson-in-wescheme)
+               (set! result this-lesson-in-wescheme)))]
           [else
             (let ([this-lesson-with-our-proglang (string-append this-lesson-wo-proglang "-" *proglang*)])
+              ; (printf "this-lesson-w-our-proglang= ~s\n" this-lesson-with-our-proglang)
               (when (member this-lesson-with-our-proglang *all-lessons*)
                 (set! result this-lesson-with-our-proglang)))])
     (unless result
@@ -851,11 +856,13 @@
         (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
+      (when (path? f) (set! f (path->string f)))
       (let ([link-output
 
-              (format "link:~a../../pass:[~a][~a~a]"
+              (format "link:~apass:[~a][~a~a]"
                       "{fromlangroot}"
-                      f link-text
+                      (regexp-replace "distribution/[^/]+/" f "")
+                      link-text
                       (if *lesson-plan* ", window=\"_blank\"" ""))
 
               ])
@@ -1319,7 +1326,7 @@
                         (loop2 (rest xx))))))))))
 
   (when *lesson-plan*
-    (set! *all-lessons* (read-data-file (format ".cached/.do-relevant-lessons.txt.kp"))))
+    (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
 
   (erase-span-stack!)
   )
@@ -1840,7 +1847,7 @@
                            #:other-proglangs [other-proglangs #f]
                            #:solutions-mode? [solutions-mode? #f]
                            )
-  ; (printf "doing preproc-adoc-file ~s drd=~s lsn=~s\n" in-file dist-root-dir lesson)
+  ; (printf "doing preproc-adoc-file ~s cd=~s\n" in-file containing-directory)
 
   (set! *containing-directory* containing-directory)
   (set! *dist-root-dir* dist-root-dir)

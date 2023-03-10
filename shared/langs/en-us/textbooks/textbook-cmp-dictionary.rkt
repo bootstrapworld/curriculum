@@ -1,22 +1,25 @@
-#lang racket
-
-(provide *cmp-textbook-list*)
-
-(define *cmp-textbook-list*
-  '(
+  (
 
     ; We are borrowing the infrastructure used for standards alignment,
     ; but in this case we're really talking about *chapters*
 
     ("CMP.6.1"
      "Prime Time: Factors & Multiples"
-     "order-of-operations")
+     "order-of-operations"
+     "evaluating-exponents"
+     "exponent-expressions-with-negatives"
+     "distributive-property"
+     "equivalence"
+     "computation")
 
     ("CMP.6.2"
-     "Comparing Bits and Pieces: Ratios, Rational Numbers and Equivalence")
+     "Comparing Bits and Pieces: Ratios, Rational Numbers and Equivalence"
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2")
 
     ("CMP.6.3"
-     "Let’s be Rational: Understanding Fraction Operations")
+     "Let’s be Rational: Understanding Fraction Operations"
+     "equivalence")
 
     ("CMP.6.4"
      ; The DR recipes we made for OK in restating the problem could connect nicely here, but it feels like a bit of a stretch to suggest that they would just pop into DR here.
@@ -29,7 +32,12 @@
     ("CMP.6.6"
      ; coordinates lesson could be an extension for this lesson if we figured out how to communicate that to teachers
      "Variables and Patterns: Focus on Algebra"
-     "defining-values")
+     "defining-values"
+     "equivalence"
+     "distributive-property"
+     "associative-property"
+     "identity-property"
+     "commutative-property")
 
     ("CMP.6.7"
      "Data About Us: Statistics and Data Analysis"
@@ -41,7 +49,13 @@
      "Shapes and Designs: Two Dimensional Geometry")
 
     ("CMP.7.2" "Accentuate the Negative: Integers and Rational Numbers"
-     "order-of-operations")
+     "order-of-operations"
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2"
+     "commutative-property"
+     "distributive-property"
+     "evaluating-exponents"
+     "exponent-expressions-with-negatives")
 
     ("CMP.7.3"
      ; Flags lesson could be a really nice extension activity for this unit.
@@ -88,7 +102,12 @@
      "Growing, Growing, Growing: Exponential Functions")
 
     ("CMP.8.4"
-     "Say it with Symbols: Making Sense of Symbols")
+     "Say it with Symbols: Making Sense of Symbols"
+     "distributive-property"
+     "associative-property"
+     "identity-property"
+     "commutative-property"
+     "equivalence")
 
     ("CMP.8.5"
      ; This is another lesson to look at if we write a lesson on proportionality
@@ -105,5 +124,5 @@
      ; If we build something for inverse functions it should get linked to this
      "Function Junction: Families of Functions"
      "piecewise-functions")
-    ))
+    )
 

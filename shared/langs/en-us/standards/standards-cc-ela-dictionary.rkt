@@ -1,10 +1,5 @@
-#lang racket
-
-(provide *cc-ela-standards-list*)
-
     ;;;;;;;;;;;;;;;;;;;  Common Core ELA Standards ;;;;;;;;;;;;;;;;;;
-(define *cc-ela-standards-list*
-  '(
+  (
     ; ELA Standards for grades 6-12
     ("WHST.6-8.1.A"
      "Introduce claim(s) about a topic or issue, acknowledge and distinguish the claim(s) from alternate or opposing claims, and organize the reasons and evidence logically."
@@ -421,5 +416,5 @@
     ("SL.11-12.6"
      "Adapt speech to a variety of contexts and tasks, demonstrating command of formal English when indicated or appropriate. (See grades 9-10 Language standards 1 and 3 here for specific expectations.)"
      )
-    ))
- 
+    )
+

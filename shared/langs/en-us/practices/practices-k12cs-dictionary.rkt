@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *k12cs-practices-list*)
-
-(define *k12cs-practices-list*
-  '(
+  (
     ; https://K12CS Frameworkss
 
     ;;;;;;;;;;;;;; Practices ;;;;;;;;;;;;;;;;;;;;;;
@@ -77,5 +72,5 @@
      "ds-intro"
      "choosing-your-dataset"
      )
-    ))
+    )
 

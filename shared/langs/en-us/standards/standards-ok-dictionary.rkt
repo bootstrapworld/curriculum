@@ -1,10 +1,6 @@
-#lang racket
-
-(provide *ok-standards-list*)
 
           ;;;;;;;;;;;;;;;;;;;  Oklahoma Standards ;;;;;;;;;;;;;;;;;;
-(define *ok-standards-list*
-  '(
+  (
 
     ; Oklahoma State Math Standards
 
@@ -1186,5 +1182,5 @@
            "combinatorics-permutation"
            )
 
-          ))
+          )
 

@@ -1,4 +1,4 @@
--- last modified 2023-02-25
+-- last modified 2023-03-09
 
 function memberp(elt, tbl)
   -- true iff tbl contains elt
@@ -14,6 +14,13 @@ function file_exists_p(f)
   -- open'ing a nonexistent file returns nil
   if h then h:close(); return true
   else return false
+  end
+end
+
+function touch(f)
+  if not file_exists_p(f) then
+    local o = io.open(f, 'w')
+    o:close()
   end
 end
 
@@ -62,4 +69,15 @@ function string_split(s, c)
     end
   end
   return r
+end
+
+function read_file_lines(f)
+  -- return a table whose elements are the lines in the file
+  local i = io.open(f)
+  local result = {}
+  for x in i:lines() do
+    table.insert(result, x)
+  end
+  i:close()
+  return result
 end

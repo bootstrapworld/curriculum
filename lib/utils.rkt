@@ -61,6 +61,13 @@
                                                  (if (eof-object? y) (reverse yy)
                                                      (loop2 (cons (format "~a" y) yy)))))))])
                                  (if (null? yy) xx (cons yy xx)))))))]
+            [(lua-return)
+             (read-line i)
+             (let loop ([xx '()])
+               (let ([c (peek-char i)])
+                 (cond [(or (eof-object? c) (char=? c #\})) (reverse xx)]
+                       [(or (char=? c #\,) (char-whitespace? c)) (read-char i) (loop xx)]
+                       [else (loop (cons (read i) xx))])))]
             [(forms) (let loop ([xx '()])
                        (let ([x (read i)])
                          (if (eof-object? x) (reverse xx)

@@ -1,9 +1,4 @@
-#lang racket
-
-(provide *im-7-textbook-list*)
-
-(define *im-7-textbook-list*
-  '(
+  (
     ; Modeled after https://github.com/bootstrapworld/curriculum/blob/
     ; ada269498c15600c27452688218e202f333d5ae0/shared/langs/en-us/textbook-cmp-
     ; dictionary.rkt
@@ -54,7 +49,9 @@
     ; https://curriculum.illustrativemathematics.org/MS/teachers/2/5/index.html
     ("IM.7.5.13"
      "Expressions with Rational Numbers"
-     "order-of-operations")
+     "order-of-operations"
+     "absolute-value-and-opposites"
+     "absolute-value-and-opposites-2")
 
     ("IM.7.5.14"
      "Solving Problems with Rational Numbers"
@@ -127,4 +124,4 @@
      "threats-to-validity")
 
     ; End of chapter/section list
-    ))
+    )

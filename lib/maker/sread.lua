@@ -1,4 +1,4 @@
--- last modified 2023-03-06
+-- last modified 2023-03-09
 
 -- sread(i) reads an s-expression from buffered input port i
 --
@@ -54,62 +54,62 @@ end
 
 local function sread_atom(i)
   local c
-  local r = {}
+  local result = {}
   local in_escape_p = false
   while true do
     c = buf_peek_char(i)
     if in_escape_p then
       in_escape_p = false
       i:read(1)
-      table.insert(r, c)
+      table.insert(result, c)
     elseif c == '\\' then
       in_escape_p = true
       i:read(1)
-      table.insert(r, c)
+      table.insert(result, c)
     elseif c == ' ' or c == '\t' or c == '\n' or c == '\r' or c == '(' or c == '[' or c == ')' or c == ']' or c == ';' then
       break
     else
       i:read(1)
-      table.insert(r, c)
+      table.insert(result, c)
     end
   end
-  r = table.concat(r)
-  local n = tonumber(r)
-  return (n or r)
+  result = table.concat(result)
+  local n = tonumber(result)
+  return (n or result)
 end
 
 local function sread_list(i)
   local c
-  local r = {}
+  local result = {}
   while true do
     local x = sread(i)
     if x then
-      table.insert(r, x)
+      table.insert(result, x)
     else
       break
     end
   end
-  return r
+  return result
 end
 
 local function sread_string(i)
-  local r = {}
+  local result = {}
   local in_escape_p = false
   while true do
     local c = i:read(1)
     if in_escape_p then
       in_escape_p = false
-      table.insert(r, c)
+      table.insert(result, c)
     elseif c == '\\' then
       in_escape_p = true
-      -- table.insert(r, c)
+      -- table.insert(result, c)
     elseif c == '"' then
       break
     else
-      table.insert(r, c)
+      table.insert(result, c)
     end
   end
-  return table.concat(r)
+  return table.concat(result)
 end
 
 function sread(i)

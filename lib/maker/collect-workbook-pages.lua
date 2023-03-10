@@ -1,35 +1,46 @@
 #! /usr/bin/env lua
 
+-- last modified 2023-03-08
+
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
-function touch(f)
-  if not file_exists_p(f) then
-    local o = io.open(f, 'w')
-    o:close()
-  end
-end
+index_file = 'index.adoc'
+index_title_file = '.cached/.index.titletxt'
 
-
-workbook_pages_repo_file = 'pages/workbook-pages.txt'
+workbook_pages_og_file = 'pages/workbook-pages.txt'
 
 workbook_pages_file = 'pages/.cached/.workbook-pages.txt.kp'
 workbook_pages_ls_file = 'pages/.cached/.workbook-pages-ls.txt.kp'
 notes_pages_ls_file = 'pages/.cached/.notes-pages-ls.txt.kp'
 
-if not file_exists_p(workbook_pages_repo_file) then
-  touch(workbook_pages_repo_file)
+if not file_exists_p(workbook_pages_og_file) then
+  touch(workbook_pages_og_file)
+end
+
+os.remove(index_title_file)
+
+do
+  if not file_exists_p(index_file) then return end
+  --
+  local i = io.open(index_file)
+  for f in i:lines() do
+    if f:find('^=%s') then
+      local o = io.open(index_title_file, 'w+')
+      o:write(f:gsub('^=%s+', ''))
+      o:write('\n')
+      o:close()
+      break
+    end
+  end
+  i:close()
 end
 
 os.remove(workbook_pages_file)
 os.remove(workbook_pages_ls_file)
 os.remove(notes_pages_ls_file)
 
-if not file_exists_p(workbook_pages_ls_file) then
-  touch(workbook_pages_ls_file)
-end
-
 do
-  local i = io.open(workbook_pages_repo_file)
+  local i = io.open(workbook_pages_og_file)
   local o = io.open(workbook_pages_file, 'w+')
   local ol = io.open(workbook_pages_ls_file, 'w+')
   --
