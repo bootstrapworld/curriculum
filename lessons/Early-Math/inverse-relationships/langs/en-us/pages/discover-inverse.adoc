@@ -1,16 +1,23 @@
 = Discover Inverse Operations
-
 ++++
 <style>
   table {grid-template-rows: 3fr 1fr !important;}
   div.circleevalsexp .value,
   div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+
+  /* TODO(Emmanuel): after workbooks go to print, investigate
+     whether this can be pushed to shared.less  */
+  body.workbookpage #preamble_disabled { display: none; }
+  body.workbookpage .sect1.lesson-section-1 .sectionbody {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+  }
 </style>
 ++++
-
 == From Multiplying by Fractions to Dividing by Whole Numbers
-
-@vspace{1ex}
 
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
@@ -26,15 +33,10 @@
 
 @fitb{}{}
 
-@vspace{1ex}
-
 @center{**Did you know that multiplying by @math{\frac{1}{4}} is the same as dividing by @math{4}?**}
-
-@vspace{1ex}
 
 @n In the table below, draw another pair of Circles to demonstrate how _multiplying a fraction_ produces the same result as _dividing by its reciprocal._ Then write the equivalent arithmetic expression for each of your Circles.
 
-@vspace{1ex}
 
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
@@ -42,11 +44,9 @@
 | @ifsoln{@math{30 \times \frac{1}{5} = 6}} | @ifsoln{@math{30 \div 5 = 6}}
 |===
 
-
+@vspace{1ex}
 
 == From Dividing by Fractions to Multiplying by Whole Numbers
-
-@vspace{1ex}
 
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
@@ -60,17 +60,13 @@
 
 @fitb{}{@ifsoln{rather than dividing by the whole number. As a result, we get a larger outcome.}}
 
-@vspace{1ex}
-
 @center{**Did you know that dividing by @math{\frac{1}{4}} is the same as multiplying by @math{4}?**}
 
 @n In the table below, draw another example like the one above to show how dividing by a fraction is the same as multiplying by its reciprocal.
 
-@vspace{1ex}
-
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
-|@showsoln{(coe '(/ 10 1/2))} | @showsoln{(coe  '(* 20 2))}
+| @showsoln{(coe '(/ 10 1/2))} | @showsoln{(coe  '(* 20 2))}
 | @ifsoln{@math{10 \div \frac{1}{2} = 20}}| @ifsoln{@math{20 \times 2 = 20}}
 |===
 
