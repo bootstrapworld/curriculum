@@ -1,4 +1,4 @@
--- last modified 2023-03-08
+-- last modified 2023-03-09
 
 function memberp(elt, tbl)
   -- true iff tbl contains elt
@@ -69,4 +69,15 @@ function string_split(s, c)
     end
   end
   return r
+end
+
+function read_file_lines(f)
+  -- return a table whose elements are the lines in the file
+  local i = io.open(f)
+  local result = {}
+  for x in i:lines() do
+    table.insert(result, x)
+  end
+  i:close()
+  return result
 end

@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-08
+-- last modified 2023-03-09
 
 local make_dir = os.getenv'MAKE_DIR'
 
@@ -119,11 +119,7 @@ function collect_exercise_info(lesson_dir, proglang)
   --
   local workbook_pages = {}
   if file_exists_p(workbook_page_list_file) then
-    local i = io.open(workbook_page_list_file)
-    for line in i:lines() do
-      table.insert(workbook_pages, line)
-    end
-    i:close()
+    workbook_pages = read_file_lines(workbook_page_list_file)
   end
   --
   local i = io.open_buffered(lesson_plan_file)
@@ -163,12 +159,10 @@ end
 
 -- collecting lessons
 
-
 do
   local lessons_dir = 'distribution/' .. natlang .. '/lessons'
   local ls_output = io.popen('ls ' .. lessons_dir)
   local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
-  o:write('return {\n')
   for lesson in ls_output:lines() do
     local lesson_dir = lessons_dir .. '/' .. lesson
     if file_exists_p(lesson_dir .. '/.proglang-ignore') then
@@ -185,11 +179,10 @@ do
     end
     collect_exercise_info(lesson_dir, pl)
     if pl == 'wescheme' then goto continue end
-    o:write('  \"' .. lesson .. '\",\n')
+    o:write(lesson, '\n')
     ::continue::
   end
   ls_output:close()
-  o:write('}\n')
   o:close()
 end
 

@@ -1,12 +1,14 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-27
+-- last modified 2023-03-09
 
 -- print('doing collect-primitives.lua')
 
+dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
+
 do
   local lessons_dir = 'distribution/' .. os.getenv('NATLANG') .. '/lessons/'
-  local lessons = dofile(os.getenv 'LESSONS_LIST_FILE')
+  local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
   for _,lesson in ipairs(lessons) do
     local lesson_cache = lessons_dir .. lesson .. '/.cached/'
     local prims = {}
