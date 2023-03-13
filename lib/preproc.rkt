@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-09
+; last modified 2023-03-12
 
 (require json)
 (require file/sha1)
@@ -22,8 +22,6 @@
   rearrange-args
   )
 
-; (printf "\nglossary-list= ~s\n\n" *glossary-list*)
-
 (define *progdir* (getenv "PROGDIR"))
 
 (define *force* (truthy-getenv "FORCE"))
@@ -34,7 +32,7 @@
 
 (define *proglang* "pyret")
 
-(define *natlang* "en-us")
+(define *natlang* 'en-us)
 
 (define *other-proglangs* #f)
 
@@ -140,9 +138,9 @@
        => (lambda (c) (set! *copyright-name* (second c)))])
 
 (define *glossary-list*
-  (let ([glossary-terms-file "lib/glossary-terms.rkt"])
+  (let ([glossary-terms-file "lib/glossary-terms.json"])
     (if (file-exists? glossary-terms-file)
-        (call-with-input-file glossary-terms-file read)
+        (call-with-input-file glossary-terms-file read-json)
         '())))
 
 (define *glossary-items* '())
@@ -1303,8 +1301,9 @@
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
-  (let ([gl *glossary-list*])
-
+  (let ([gl *glossary-list*]
+        [ngl '()])
+    ;
     (when (or *lesson* *lesson-plan*)
       (let ([f (format "distribution/~a/lessons/~a/shadow-glossary.txt" *natlang* *lesson*)])
         (when (file-exists? f)
@@ -1313,17 +1312,15 @@
               (let ([shadow-glossary-file (build-path *progdir* (first ff))])
                 (when (file-exists? shadow-glossary-file)
                   (set! gl
-                    (append gl (call-with-input-file shadow-glossary-file read))))))))))
-
-    (set! *natlang-glossary-list*
-      (let loop ([gl gl] [ngl '()])
-        (if (null? gl) ngl
-            (let loop2 ([xx (first gl)])
-              (if (null? xx) (loop (rest gl) ngl)
-                  (let ([x (first xx)])
-                    (if (eq? (first x) *natlang*)
-                        (loop (rest gl) (cons (rest x) ngl))
-                        (loop2 (rest xx))))))))))
+                    (append gl (call-with-input-file shadow-glossary-file read-json))))))))))
+    ;
+    (for ([entry gl])
+      (let ([h (hash-ref entry *natlang* #f)])
+        (when h
+          (set! *natlang-glossary-list*
+            (cons (list (hash-ref h 'keywords '())
+                        (hash-ref h 'description ""))
+                  *natlang-glossary-list*))))))
 
   (when *lesson-plan*
     (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))

@@ -1,4 +1,4 @@
-# last modified 2023-03-07
+# last modified 2023-03-12
 
 include $(MAKE_DIR)utils.mk
 
@@ -22,8 +22,9 @@ initialization: distribution/$(NATLANG)/extlib/mathjax
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
 	@$(CP) -p lib/*.html $(PROGDIR)
 	@$(CP) -p lib/*.rkt $(PROGDIR)
+	@$(CP) -p lib/*.json $(PROGDIR)
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
-	@$(CP) -p lib/*.js* distribution/$(NATLANG)/lib
+	@$(CP) -p lib/*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.png distribution/$(NATLANG)/lib
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
@@ -106,7 +107,7 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
-distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.rkt
+distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
 	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
