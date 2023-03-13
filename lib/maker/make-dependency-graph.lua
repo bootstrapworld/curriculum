@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-09
+-- last modified 2023-03-13
 
 local graph_file = ...
 
@@ -36,15 +36,13 @@ for _,lesson in ipairs(lessons) do
   --
   if file_exists_p(titletxt_file) then
     i = io.open(titletxt_file)
-    titletxt = i:read()
-    titletxt = titletxt:gsub('"', '\\"')
+    titletxt = i:read():gsub('"', '\\"')
     i:close()
   end
   --
   if file_exists_p(desctxt_file) then
     i = io.open(desctxt_file)
-    desctxt = i:read()
-    desctxt = desctxt:gsub('"', '\\"')
+    desctxt = i:read():gsub('"', '\\"')
     i:close()
   end
   --
