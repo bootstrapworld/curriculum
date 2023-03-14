@@ -1,8 +1,8 @@
-# last modified 2023-03-12
+# last modified 2023-03-14
 
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization courses-and-lessons page-not-found glossary
+phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs
 
 ###############################################################################
 
@@ -24,7 +24,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax
 	@$(CP) -p lib/*.rkt $(PROGDIR)
 	@$(CP) -p lib/*.json $(PROGDIR)
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
-	@$(CP) -p lib/*.js distribution/$(NATLANG)/lib
+	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.png distribution/$(NATLANG)/lib
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
@@ -109,6 +109,13 @@ glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
 distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
 	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
+
+###############################################################################
+
+bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
+
+distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
+	cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
 
 ###############################################################################
 
