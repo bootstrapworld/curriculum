@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-13
+; last modified 2023-03-14
 
 (require json)
 (require file/sha1)
@@ -1132,7 +1132,7 @@
   ; (printf "link-to-lessons-in-pathway\n")
   ;
   (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/lesson-order.txt"
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
                            *natlang* *target-pathway*))])
     ;(printf "lessons = ~s\n" lessons)
     ;
