@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-12
+; last modified 2023-03-13
 
 (require json)
 (require file/sha1)
@@ -1236,7 +1236,7 @@
 (define (add-lesson-prereqs immediate-prereqs)
   ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
   ; (printf "lesson-prereq dir = ~s\n" (current-directory))
-  (cond [(not (member *proglang* '("pyret" "wescheme")))
+  (cond [(not (string=? *proglang* "pyret"))
          (set! *lesson-prereqs* (map (lambda (x) (string-append x "-" *proglang*)) immediate-prereqs))]
         [else
           (set! *lesson-prereqs* immediate-prereqs)])

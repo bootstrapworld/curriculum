@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-09
+-- last modified 2023-03-13
 
 local make_dir = os.getenv'MAKE_DIR'
 
@@ -178,7 +178,6 @@ do
       end
     end
     collect_exercise_info(lesson_dir, pl)
-    if pl == 'wescheme' then goto continue end
     o:write(lesson, '\n')
     ::continue::
   end
