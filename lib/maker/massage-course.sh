@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-08
+# last modified 2023-03-14
 
 # echo massage-course.sh "$@"
 
@@ -50,12 +50,8 @@ for pl in $proglangs; do
   mkdir -p $targetpathway/resources/pages
   mkdir -p $targetpathway/workbook
   $CP -p $TOPDIR/lib/.hta* $targetpathway/resources/protected
-done
 
-for d in $pathwayName*; do
-  test -d $d || continue
-
-  cd $d
+  cd $targetpathway
 
   for dd in front-matter back-matter resources; do
     if test -d $dd; then
@@ -71,7 +67,7 @@ for d in $pathwayName*; do
 
   if test ! -f lesson-order.txt; then
     echo
-    echo WARNING: No lesson-order.txt in pathway $d
+    echo WARNING: No lesson-order.txt in pathway $targetpathway
     touch lesson-order.txt
     touch .cached/.workbook-lessons.txt.kp
   else
@@ -81,9 +77,13 @@ for d in $pathwayName*; do
       $SED -e 's/ *$//' |
       grep -v '^ *$' |
       $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
+    if test "$pl" != pyret -a "$pl" != none; then
+      $SED -i -e 's/.*/\0-'$pl'/' .cached/.workbook-lessons.txt.kp
+    fi
   fi
 
   cd ..
+
 done
 
 # fixme: weirdly, make fails without the following!
