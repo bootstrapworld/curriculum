@@ -155,6 +155,8 @@
 
 (define *prereqs-used* '())
 
+(define *starter-files-used* '())
+
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
@@ -1261,6 +1263,7 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
+  (set! *starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
@@ -1695,6 +1698,7 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
+                                      (add-starter-file lbl)
                                       (let ([title (or link-text (second c))]
                                             [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
@@ -2046,6 +2050,18 @@
             (display "]," o) (newline o)))
           #:exists 'replace)
         )
+
+      (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
+        (let ([sf-file (if *lesson-plan*
+                           (build-path *containing-directory* ".cached" ".index.starterfiles")
+                           (make-temporary-file ".page-~a.starterfiles" #f
+                                                (format "distribution/~a/lessons/~a/.cached"
+                                                        *natlang* *lesson*)))])
+          (call-with-output-file sf-file
+            (lambda (o)
+              (for ([sf *starter-files-used*])
+                (display sf o) (newline o)))
+            #:exists 'replace)))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
@@ -2458,6 +2474,10 @@
     ; (printf "it's happening\n")
     (unless (member sym *prereqs-used*)
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
+
+(define (add-starter-file sf)
+  (unless (member sf *starter-files-used*)
+    (set! *starter-files-used* (cons sf *starter-files-used*))))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
