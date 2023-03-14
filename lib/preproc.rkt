@@ -180,6 +180,11 @@
   (format "~a" *in-file*)
   )
 
+(define (nicer-case x)
+  (cond [(string=? x "codap") "CODAP"]
+        [(string=? x "wescheme") "WeScheme"]
+        [else (string-titlecase x)]))
+
 (define read-group (*make-read-group (lambda z (apply code z))
                                      errmessage-file-context))
 
@@ -982,39 +987,20 @@
     (let ([other-proglang-links
             (filter (lambda (x) x)
                     (map (lambda (x)
-                           (cond [(not x) #f]
-                                 [(and (string=? *proglang* "pyret") (string=? x "wescheme"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("algebra-pyret"))
-                                                 (format "link:~acourses/algebra-wescheme/index.shtml[WeScheme]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a-wescheme/index.shtml[WeScheme]" *dist-root-dir*
-                                                  *lesson-plan*)]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "wescheme") (string=? x "pyret"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("algebra-wescheme"))
-                                                 (format "link:~acourses/algebra-pyret/index.shtml[Pyret]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                  (regexp-replace "-wescheme$" *lesson-plan* ""))]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "pyret") (string=? x "codap"))
-                                  (cond [*lesson-plan*
-                                          (format "link:~alessons/~a-codap/index.shtml[CODAP]" *dist-root-dir*
-                                                  *lesson-plan*)]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "codap") (string=? x "pyret"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("data-science-codap"))
-                                                 (format "link:~acourses/data-science/index.shtml[Pyret]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                  (regexp-replace "-codap$" *lesson-plan* ""))]
-                                        [else #f])]
+                           (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
+                                 [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
+                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                 [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
+                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                 [(and (string=? x "pyret") *lesson-plan*)
+                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                          (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
+                                 [*lesson-plan*
+                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                           (if (string=? *proglang* "pyret")
+                                               (string-append *lesson-plan* "-" x)
+                                               (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
+                                           (nicer-case x))]
                                  [else #f]))
                          *other-proglangs*))])
       (unless (null? other-proglang-links)
@@ -1401,7 +1387,7 @@
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
-                            (fprintf o "~a" (string-titlecase *proglang*))]
+                            (fprintf o "~a" (nicer-case *proglang*))]
                            [(string=? directive "year")
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
