@@ -1222,7 +1222,7 @@
 (define (add-lesson-prereqs immediate-prereqs)
   ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
   ; (printf "lesson-prereq dir = ~s\n" (current-directory))
-  (cond [(not (string=? *proglang* "pyret"))
+  (cond [(and (not (string=? *proglang* "pyret")) (not (string=? *proglang* "none")))
          (set! *lesson-prereqs* (map (lambda (x) (string-append x "-" *proglang*)) immediate-prereqs))]
         [else
           (set! *lesson-prereqs* immediate-prereqs)])

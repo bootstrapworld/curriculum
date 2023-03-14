@@ -115,7 +115,7 @@ distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
 bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
 
 distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
-	cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
+	@cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
 
 ###############################################################################
 
