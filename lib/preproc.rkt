@@ -1215,7 +1215,7 @@
       (string-append reg-space gd-space))))
 
 (define (add-lesson-keywords kwds)
-  (for ([k kwds])
+  (for ([k (reverse kwds)])
     (unless (member k *lesson-keywords*)
       (set! *lesson-keywords* (cons k *lesson-keywords*)))))
 
@@ -1251,6 +1251,7 @@
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
   (set! *lesson-prereqs* '())
+  (set! *lesson-keywords* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
