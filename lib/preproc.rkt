@@ -165,7 +165,8 @@
 (define *do-not-autoinclude-in-material-links*
   (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
     (if (file-exists? starter-files-dont-mention-file)
-        (call-with-input-file starter-files-dont-mention-file read-json)
+        (map string->symbol
+             (call-with-input-file starter-files-dont-mention-file read-json))
         '())))
 
 (define *starter-files-used* '())
@@ -1703,32 +1704,30 @@
                            [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                   [lbl (first lbl+text)]
-                                   [lbl-sym (string->symbol lbl)]
+                                   [lbl (string->symbol (first lbl+text))]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (hash-ref *starter-files* lbl-sym #f)]
+                                   [c (hash-ref *starter-files* lbl #f)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
                                       (add-starter-file lbl)
-                                      (let ([title (or link-text (hash-ref c 'title))]
-                                            [p (hash-ref c *proglang-sym* #f)])
+                                      (let ([p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (let ([pl-title (hash-ref p 'title #f)])
-                                                  (when pl-title
-                                                    (set! title pl-title)))
-                                                (let ([link-output
-                                                        (format
-                                                          "link:pass:[~a][~a~a]" 
-                                                          (hash-ref p 'url)
-                                                          title
-                                                          ", window=\"_blank\""
-                                                          )])
+                                                (let* ([title (or link-text
+                                                                  (hash-ref p 'title #f)
+                                                                  (hash-ref c 'title))]
+                                                       [link-output
+                                                         (format
+                                                           "link:pass:[~a][~a~a]"
+                                                           (hash-ref p 'url)
+                                                           title
+                                                           ", window=\"_blank\""
+                                                           )])
                                                   (unless (member
                                                             lbl
                                                             *do-not-autoinclude-in-material-links*)
