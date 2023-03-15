@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-14
+; last modified 2023-03-15
 
 (require json)
 (require file/sha1)
@@ -15,7 +15,6 @@
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "collect-lang-prereq.rkt")
-(require "starter-files.rkt")
 
 (provide
   preproc-adoc-file
@@ -31,6 +30,8 @@
 (define *book* (truthy-getenv "BOOK"))
 
 (define *proglang* "pyret")
+
+(define *proglang-sym* 'pyret)
 
 (define *natlang* 'en-us)
 
@@ -154,6 +155,18 @@
 (define *exercises-done* '())
 
 (define *prereqs-used* '())
+
+(define *starter-files*
+  (let ([starter-files-file (build-path *progdir* "starter-files.json")])
+    (if (file-exists? starter-files-file)
+        (call-with-input-file starter-files-file read-json)
+        '())))
+
+(define *do-not-autoinclude-in-material-links*
+  (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
+    (if (file-exists? starter-files-dont-mention-file)
+        (call-with-input-file starter-files-dont-mention-file read-json)
+        '())))
 
 (define *starter-files-used* '())
 
@@ -1691,24 +1704,29 @@
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (first lbl+text)]
+                                   [lbl-sym (string->symbol lbl)]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (assoc lbl *starter-files*)]
+                                   [c (hash-ref *starter-files* lbl-sym #f)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
                                       (add-starter-file lbl)
-                                      (let ([title (or link-text (second c))]
-                                            [p (assoc *proglang* (rest (rest c)))])
+                                      (let ([title (or link-text (hash-ref c 'title))]
+                                            [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (unless (<= (length p) 2) (set! title (third p)))
+                                                (let ([pl-title (hash-ref p 'title #f)])
+                                                  (when pl-title
+                                                    (set! title pl-title)))
                                                 (let ([link-output
                                                         (format
-                                                          "link:pass:[~a][~a~a]" (second p) title
+                                                          "link:pass:[~a][~a~a]" 
+                                                          (hash-ref p 'url)
+                                                          title
                                                           ", window=\"_blank\""
                                                           )])
                                                   (unless (member
@@ -1717,7 +1735,8 @@
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
-                                                               (second p) (second c)
+                                                               (hash-ref p 'url)
+                                                               title
                                                                    ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
@@ -1844,6 +1863,7 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
+  (set! *proglang-sym* (string->symbol proglang))
   (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
