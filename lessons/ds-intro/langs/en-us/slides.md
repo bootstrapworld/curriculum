@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 @image{images/questions.png, 250}
 
-- Look at the provided list of @opt-printable-exercise{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. 
+- Look at the provided list of @handout{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. 
 
 - Arrange yourselves into groups based on the question you like, making sure that each group has between 2-5 people.
 

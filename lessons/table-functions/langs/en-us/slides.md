@@ -136,7 +136,7 @@ _What are some ways we could filter this table?_
 <!--
 select another volunteer who will play the role of… *Filter*!
 
-Hand the volunteer a Function card from the @opt-printable-exercise{pages/function-cards.adoc, Function Cards} set. Instruct them to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students.
+Hand the volunteer a Function card from the @handout{pages/function-cards.adoc, Function Cards} set. Instruct them to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students.
 
 Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should stand or sit.
 
@@ -234,7 +234,7 @@ When the last Row is visited, the function produces the new Table.
 {layout="Investigate"}
 # Ordering, Filtering, and Building
 
-Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
+Optional: Want some more practice? Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}.
 
 
 ---

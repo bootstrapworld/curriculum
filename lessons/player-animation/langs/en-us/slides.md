@@ -107,7 +107,7 @@ It's likely that once they hear other students' ideas, they will want more time 
 
 ---
 {layout="Supplemental"}
-# Extension
+# Optional Extensions...
 
 If your game is working and you have time... you might want to dig into 2-d movement in the game, using the Posn data type.
 

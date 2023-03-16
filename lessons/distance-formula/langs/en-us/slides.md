@@ -181,10 +181,9 @@ Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've pr
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
-For more practice writing code to generate the distance between two fixed points, complete:
+For more practice writing code to generate the distance between two fixed points, complete @printable-exercise{pages/distance-from-game-coordinates.adoc}
 
-* @printable-exercise{pages/distance-from-game-coordinates.adoc}
-* @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
+Optional: for more practice, complete @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
 
 <!--
 Debrief these workbook pages - or have students pair-and-share - before moving on to writing the full distance function.

@@ -138,15 +138,15 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 
 **Set 1**
 
-- @opt-printable-exercise{is-dog.adoc}{style="font-size:16pt"}
-- @opt-printable-exercise{days.adoc}{style="font-size:16pt"}
-- @opt-printable-exercise{is-young.adoc}{style="font-size:16pt"}
+- @handout{is-dog.adoc}{style="font-size:16pt"}
+- @handout{days.adoc}{style="font-size:16pt"}
+- @handout{is-young.adoc}{style="font-size:16pt"}
 
 **Set 2**
 
-- @opt-printable-exercise{is-old.adoc}{style="font-size:16pt"}
-- @opt-printable-exercise{kilos.adoc}{style="font-size:16pt"}
-- @opt-printable-exercise{is-cat.adoc}{style="font-size:16pt"}
+- @handout{is-old.adoc}{style="font-size:16pt"}
+- @handout{kilos.adoc}{style="font-size:16pt"}
+- @handout{is-cat.adoc}{style="font-size:16pt"}
 
 <!--
 2. Choose which set of word problems you are going to start with and give each student within each group a different word problem.

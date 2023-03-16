@@ -65,7 +65,7 @@ Practice manipulating the data by completing @printable-exercise{pages/codap-dis
 <!--
     Remind students that categorical data is used to classify, rather than to measure. Only when data is being treated categorically will students be invited to fuse data points to create a bar chart. Quantitative (or numeric) data must measure or compare; it is subject to the laws of arithmetic.
 
-To dig deeper into bar charts, have students turn to @opt-printable-exercise{bar-chart-notice.adoc}.
+Optional: To dig deeper into bar charts, have students turn to @opt-printable-exercise{bar-chart-notice.adoc}.
 
 When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
 
