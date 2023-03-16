@@ -9,9 +9,6 @@
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "common-defines.rkt")
-(require "create-copyright.rkt")
-(require "create-acknowledgment.rkt")
-(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "collect-lang-prereq.rkt")
@@ -155,6 +152,11 @@
 (define *exercises-done* '())
 
 (define *prereqs-used* '())
+
+(define *common-text*
+  (call-with-input-file
+    (build-path *progdir* "common-text.json")
+    read-json))
 
 (define *starter-files*
   (let ([starter-files-file (build-path *progdir* "starter-files.json")])
@@ -1935,9 +1937,10 @@
                 (fprintf o "== BOGUSACKNOWLEDGMENTSECTIONHEADER\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
-                (fprintf o (create-acknowledgment))
+                (fprintf o (hash-ref *common-text* 'acknowledgment))
                 (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
-                (fprintf o (create-copyright *copyright-name*))
+                (fprintf o "~a " *copyright-name*)
+                (fprintf o (hash-ref *common-text* 'copyright))
                 (fprintf o "\n--\n")
                 )
 
@@ -2133,7 +2136,7 @@
 
     (unless (null? exx)
       (display "\n\n" o)
-      (display (create-workbook-links) o)
+      (display (hash-ref *common-text* 'workbook-links) o)
       (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
