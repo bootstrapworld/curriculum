@@ -87,6 +87,7 @@ body {
     }
   }
 
+  /* Show the standard footer at the bottom of each page...*/
   #footer {
     background: rgba(0,0,0,0.5);
     margin-left: -3em;
@@ -96,8 +97,8 @@ body {
     padding:    0;
     z-index:    999;
   }
-
-  .canBeLongerThanAPage #footer { display: none; }
+  /* But not if it's an extra-long page */
+  &.canBeLongerThanAPage #footer { display: none; }
 
   /* Hide anything that we only want seen on Google drive */
   .gdrive-only { display: none; visibility: hidden; }
