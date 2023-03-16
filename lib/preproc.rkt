@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-15
+; last modified 2023-03-16
 
 (require json)
 (require file/sha1)
@@ -1313,7 +1313,7 @@
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
-              (let ([shadow-glossary-file (build-path *progdir* (first ff))])
+              (let ([shadow-glossary-file (build-path "lib" (first ff))])
                 (when (file-exists? shadow-glossary-file)
                   (set! gl
                     (append gl (call-with-input-file shadow-glossary-file read-json))))))))))
