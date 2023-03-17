@@ -117,10 +117,10 @@
       " textbooks.\n")
     o))
 
-(define (print-link-to-teacher-resources o)
+(define (print-link-to-teacher-resources course o)
   (display
     (string-append
-      "\n- link:./resources/index.shtml[Teacher-Only Resources]\n"
+      "\n- link:./resources/index.shtml?pathway=" course "[Teacher-Only Resources]\n"
       "-- We also offer several teachers-only materials, including an\n"
       "answer key to the student workbook, keys to all the exercises,\n"
       "and pre- and post-tests for teachers who are participating in our\n"
@@ -139,7 +139,7 @@
 (define (print-other-resources course o)
   (print-link-to-glossary o)
   (print-link-to-standards course o)
-  (print-link-to-teacher-resources o)
+  (print-link-to-teacher-resources course o)
   (print-link-to-forum o))
 
 (define (natlang:also-available-in s)
