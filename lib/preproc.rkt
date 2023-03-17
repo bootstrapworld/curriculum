@@ -1537,6 +1537,10 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
                             (print-other-resources *target-pathway* o)]
+                           [(string=? directive "starter-file-list")
+                            (display
+                              (enclose-div ".starterFileList" "") o)
+                            (newline o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
