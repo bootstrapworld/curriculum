@@ -23,20 +23,7 @@
 
 (define *topdir* (getenv "topdir"))
 
-(define *progdir* (getenv "PROGDIR"))
-
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
-
-(define *proglang-sym* (string->symbol *proglang*))
-
-(define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
-    (if (file-exists? starter-files-file)
-        (call-with-input-file starter-files-file
-          (lambda (i)
-            (read i) (read i) (read i)
-            (read-json i)))
-        '())))
 
 (define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")
                                "https://bootstrapworld.org/materials/latest/en-us"))
@@ -395,18 +382,18 @@
     (format "[~a](~a)" link-text link)))
 
 (define (starter-file-link lbl link-text)
-  (let ([c (hash-ref *starter-files* lbl #f)])
+  (let ([c (assoc lbl *starter-files*)])
     (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
           [else
-            (let ([p (hash-ref c *proglang-sym* #f)])
+            (let ([title (or link-text (second c))]
+                  [p (assoc *proglang* (rest (rest c)))])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
-                      (let ([title (or link-text (hash-ref p 'title #f)
-                                       (hash-ref c 'title))])
-                        (format "[~a](~a)" title (hash-ref p 'url)))]))])))
+                      (unless (<= (length p) 2) (set! title (third p)))
+                      (format "[~a](~a)" title (second p))]))])))
 
 (define read-group
   (*make-read-group (lambda z (first z)) errmessage-file-context))
@@ -472,7 +459,7 @@
                             (display (external-link args directive) o)) ]
                          [(member directive '("starter-file" "opt-starter-file"))
                           (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                 [lbl (string->symbol (first lbl+text))]
+                                 [lbl (first lbl+text)]
                                  [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
                             (display (starter-file-link lbl link-text) o))]
                          [(string=? directive "ifproglang")

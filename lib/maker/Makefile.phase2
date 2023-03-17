@@ -1,8 +1,8 @@
-# last modified 2023-03-17
+# last modified 2023-03-08
 
 include $(MAKE_DIR)utils.mk
 
-phase2: css-from-less specials verifylinks images tocs books
+phase2: css-from-less primitives verifylinks images tocs books
 
 ###############################################################################
 
@@ -216,13 +216,10 @@ distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
 
 ##########################################################################
 
-dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	$(MAKE_DIR)make-dependency-graph.lua $@
-
-distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
-	$(CP) -p $< $@
 
 ##########################################################################
 
@@ -237,10 +234,8 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
 	$(MAKE_DIR)run-asciidoctor.sh
 
-# specials = primitives + starter-files
-
-specials: preproc
-	$(MAKE_DIR)collect-specials.lua
+primitives: preproc
+	$(MAKE_DIR)collect-primitives.lua
 
 postproc: preproc
 	$(MAKE_DIR)do-postproc.lua

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-17
+# last modified 2023-03-08
 
 # echo massage-distribution-lesson "$@"
 
@@ -46,7 +46,6 @@ for pl in $proglangs; do
   cd "$lessonNamePl"
   mkdir -p .cached
   touch .cached/.proglang-$pl
-  echo $pl > .cached/.record-proglang
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
   test -d pages || mkdir pages

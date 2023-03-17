@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-17
+; last modified 2023-03-14
 
 (require json)
 (require file/sha1)
@@ -9,9 +9,13 @@
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "common-defines.rkt")
+(require "create-copyright.rkt")
+(require "create-acknowledgment.rkt")
+(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "collect-lang-prereq.rkt")
+(require "starter-files.rkt")
 
 (provide
   preproc-adoc-file
@@ -27,8 +31,6 @@
 (define *book* (truthy-getenv "BOOK"))
 
 (define *proglang* "pyret")
-
-(define *proglang-sym* 'pyret)
 
 (define *natlang* 'en-us)
 
@@ -152,29 +154,6 @@
 (define *exercises-done* '())
 
 (define *prereqs-used* '())
-
-(define *common-text*
-  (call-with-input-file
-    (build-path *progdir* "common-text.json")
-    read-json))
-
-(define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
-    (if (file-exists? starter-files-file)
-        (call-with-input-file starter-files-file
-          (lambda (i)
-            (read i) (read i) (read i)
-            (read-json i)))
-        '())))
-
-(define *do-not-autoinclude-in-material-links*
-  (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
-    (if (file-exists? starter-files-dont-mention-file)
-        (map string->symbol
-             (call-with-input-file starter-files-dont-mention-file read-json))
-        '())))
-
-(define *starter-files-used* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -1282,7 +1261,6 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
-  (set! *starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
@@ -1318,7 +1296,7 @@
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
-              (let ([shadow-glossary-file (build-path "lib" (first ff))])
+              (let ([shadow-glossary-file (build-path *progdir* (first ff))])
                 (when (file-exists? shadow-glossary-file)
                   (set! gl
                     (append gl (call-with-input-file shadow-glossary-file read-json))))))))))
@@ -1537,10 +1515,6 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
                             (print-other-resources *target-pathway* o)]
-                           [(string=? directive "starter-file-list")
-                            (display
-                              (enclose-div ".starterFileList" "") o)
-                            (newline o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
@@ -1713,38 +1687,33 @@
                            [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                   [lbl (string->symbol (first lbl+text))]
+                                   [lbl (first lbl+text)]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)]
+                                   [c (assoc lbl *starter-files*)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (add-starter-file lbl)
-                                      (let ([p (hash-ref c *proglang-sym* #f)])
+                                      (let ([title (or link-text (second c))]
+                                            [p (assoc *proglang* (rest (rest c)))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (let* ([title (or link-text
-                                                                  (hash-ref p 'title #f)
-                                                                  (hash-ref c 'title))]
-                                                       [link-output
-                                                         (format
-                                                           "link:pass:[~a][~a~a]"
-                                                           (hash-ref p 'url)
-                                                           title
-                                                           ", window=\"_blank\""
-                                                           )])
+                                                (unless (<= (length p) 2) (set! title (third p)))
+                                                (let ([link-output
+                                                        (format
+                                                          "link:pass:[~a][~a~a]" (second p) title
+                                                          ", window=\"_blank\""
+                                                          )])
                                                   (unless (member
                                                             lbl
                                                             *do-not-autoinclude-in-material-links*)
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
-                                                               (hash-ref p 'url)
-                                                               title
+                                                               (second p) (second c)
                                                                    ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
@@ -1871,7 +1840,6 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
-  (set! *proglang-sym* (string->symbol proglang))
   (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
@@ -1944,10 +1912,9 @@
                 (fprintf o "== BOGUSACKNOWLEDGMENTSECTIONHEADER\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
-                (fprintf o (hash-ref *common-text* 'acknowledgment))
+                (fprintf o (create-acknowledgment))
                 (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
-                (fprintf o "~a " *copyright-name*)
-                (fprintf o (hash-ref *common-text* 'copyright))
+                (fprintf o (create-copyright *copyright-name*))
                 (fprintf o "\n--\n")
                 )
 
@@ -2080,18 +2047,6 @@
           #:exists 'replace)
         )
 
-      (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
-        (let ([sf-file (if *lesson-plan*
-                           (build-path *containing-directory* ".cached" ".index.starterfiles")
-                           (make-temporary-file ".page-~a.starterfiles" #f
-                                                (format "distribution/~a/lessons/~a/.cached"
-                                                        *natlang* *lesson*)))])
-          (call-with-output-file sf-file
-            (lambda (o)
-              (for ([sf *starter-files-used*])
-                (display sf o) (newline o)))
-            #:exists 'replace)))
-
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
@@ -2143,7 +2098,7 @@
 
     (unless (null? exx)
       (display "\n\n" o)
-      (display (hash-ref *common-text* 'workbook-links) o)
+      (display (create-workbook-links) o)
       (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
@@ -2503,10 +2458,6 @@
     ; (printf "it's happening\n")
     (unless (member sym *prereqs-used*)
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
-
-(define (add-starter-file sf)
-  (unless (member sf *starter-files-used*)
-    (set! *starter-files-used* (cons sf *starter-files-used*))))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
