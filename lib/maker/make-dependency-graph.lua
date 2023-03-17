@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-14
+-- last modified 2023-03-17
 
 local graph_file = ...
 
@@ -18,6 +18,7 @@ for _,lesson in ipairs(lessons) do
   local i
   local title_txt = ''
   local description_txt = ''
+  local proglang_txt = 'pyret'
   local pages_txt = ''
   local exercisePages_txt = ''
   local primitives_txt = ''
@@ -28,6 +29,7 @@ for _,lesson in ipairs(lessons) do
   local lessonpagecache = lessondir .. 'pages/.cached/'
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
+  local proglang_file = lessoncache .. '.record-proglang'
   local pages_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
   local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
@@ -45,6 +47,12 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(description_file) then
     i = io.open(description_file)
     description_txt = i:read():gsub('"', '\\"')
+    i:close()
+  end
+  --
+  if file_exists_p(proglang_file) then
+    i = io.open(proglang_file)
+    proglang_txt = i:read()
     i:close()
   end
   --
@@ -91,6 +99,7 @@ for _,lesson in ipairs(lessons) do
   o:write('  \"' .. lesson .. '\" : {\n')
   o:write('    title: \"' .. title_txt .. '\",\n')
   o:write('    description: \"' .. description_txt .. '\",\n')
+  o:write('    proglang: \"' .. proglang_txt .. '\",\n')
   o:write('    pages: [' .. pages_txt .. '],\n')
   o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')

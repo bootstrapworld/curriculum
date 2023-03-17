@@ -30,9 +30,12 @@
 (define *proglang-sym* (string->symbol *proglang*))
 
 (define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.json")])
+  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
     (if (file-exists? starter-files-file)
-        (call-with-input-file starter-files-file read-json)
+        (call-with-input-file starter-files-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
         '())))
 
 (define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")

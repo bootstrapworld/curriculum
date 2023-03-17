@@ -1,4 +1,4 @@
-# last modified 2023-03-15
+# last modified 2023-03-17
 
 include $(MAKE_DIR)utils.mk
 
@@ -216,12 +216,12 @@ distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
 
 ##########################################################################
 
-dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.json
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	$(MAKE_DIR)make-dependency-graph.lua $@
 
-distribution/$(NATLANG)/starter-files.json: $(PROGDIR)/starter-files.json
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
 	$(CP) -p $< $@
 
 ##########################################################################

@@ -1,4 +1,4 @@
-{
+var starterFiles = {
   "editor": {
     "title": "the editor",
     "pyret": {

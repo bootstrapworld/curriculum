@@ -14,10 +14,6 @@
   print-other-resources-intro
   print-teach-remotely
   print-workbook-info
-  print-link-to-glossary
-  print-link-to-standards
-  print-link-to-teacher-resources
-  print-link-to-forum
   print-other-resources
   natlang:also-available-in
   ; print-standards-js

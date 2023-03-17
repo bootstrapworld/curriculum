@@ -3,11 +3,7 @@
 (provide
   print-lessons-intro
   print-other-resources-intro
-  print-link-to-glossary
-  print-link-to-standards
   print-workbook-info
-  print-link-to-teacher-resources
-  print-link-to-forum
   print-other-resources
   )
 
