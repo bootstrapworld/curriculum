@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-14
+# last modified 2023-03-17
 
 # echo massage-course.sh "$@"
 
@@ -45,6 +45,7 @@ for pl in $proglangs; do
   fi
   mkdir -p $targetpathway/.cached
   touch $targetpathway/.cached/.proglang-$pl
+  echo $pl > $targetpathway/.cached/.record-proglang
   adjustproglangsubdirs $targetpathway $pl
   mkdir -p $targetpathway/resources/protected
   mkdir -p $targetpathway/resources/pages
