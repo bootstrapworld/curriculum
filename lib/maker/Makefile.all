@@ -1,10 +1,12 @@
-# last modified 2023-03-09
+# last modified 2023-03-23
 
 export MAKE_DIR := lib/maker/
 
 export TOPDIR := $(realpath .)
 
 export PROGDIR := $(TOPDIR)/distribution/.prog-$(NATLANG)
+
+export ALL_PROGLANGS := wescheme pyret codap spreadsheets none
 
 # batch input for (Racket) preprocessor (.adoc -> .asc)
 
@@ -70,6 +72,8 @@ clean:
 ###############################################################################
 
 deploy:
+	rm -fr $(TOPDIR)/distribution
+	$(MAKE) book
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 ###############################################################################

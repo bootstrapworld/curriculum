@@ -16,10 +16,11 @@ collections of them that form the various workbooks. PDF and
 workbook construction can be time-consuming and so is best
 relegated to the final run, when the author is sure that the HTML
 conversions have been thoroughly debugged. Once they are, and the
-PDFs are desired, set the variable `BOOK` at the `make` command
-line to a nonempty string, e.g.,
+PDFs are desired, request the target `book` on the `make`
+command-line, i.e.,
 
-    make BOOK=yes
+
+    make book
 
 === Link checking
 
@@ -28,10 +29,9 @@ links in the documents are not checked -- because it can be a
 time-consuming process. (External-link checking is particularly
 heinous because it takes a long while for each URL probe to return.)
 
-To enable link checking, set the `LINKCHECK` variable to
-nonempty, e.g.,
+To enable link checking, use the target `linkcheck`:
 
-    make LINKCHECK=yes
+    make linkcheck
 
 It is often advisable to do the link check just for its own sake,
 and only once in a while,
@@ -55,4 +55,4 @@ To deploy a built distribution to the website, do
 
 Deployment is described in more detail in the repo's README.
 
-// last modified 2023-03-06
+// last modified 2023-03-09

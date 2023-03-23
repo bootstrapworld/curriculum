@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-06
+-- last modified 2023-03-13
 
 local courses_list_file = ...
 
@@ -21,8 +21,8 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
     local i = io.open(workbook_pages_file)
     for line in i:lines() do
       local file = line:gsub('^ *([^ ]*).*', '%1')
-      local aspect = line:find('^ *[^ ]+ +[^ ]+') and line:gsub('^ *[^ ]+ +([^ ]+).*', '%1') or 'portrait'
-      local this_skip_pageno = line:find('^ *[^ ]+ +[^ ]+ +[^ ]+') and line:gsub('^ *[^ ]+ +[^ ]+ +([^ ]+).*', '%1') or skip_pageno
+      local aspect = line:match('^ *[^ ]+ +([^ ]+).*') or 'portrait'
+      local this_skip_pageno = line:match('^ *[^ ]+ +[^ ]+ +([^ ]+).*') or skip_pageno
       --
       local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = ' .. tostring(not this_skip_pageno) .. '},\n'
       o:write(x)

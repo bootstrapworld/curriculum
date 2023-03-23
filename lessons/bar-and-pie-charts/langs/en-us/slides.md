@@ -101,7 +101,7 @@ Here is the @vocab{Contract} for another function, which makes @vocab{bar charts
 
 
 <!--
-To dig deeper into pie charts and bar charts, have students complete @opt-printable-exercise{bar-and-pie-notice.adoc}. They can also focus on one display at a time using @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
+Optional: To dig deeper into pie charts and bar charts, have students complete @opt-printable-exercise{bar-and-pie-notice.adoc}. They can also focus on one display at a time using @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
 -->
 ---
 {layout="Synthesize"}

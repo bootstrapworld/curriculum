@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-09
+; last modified 2023-03-17
 
 (require json)
 (require file/sha1)
@@ -9,20 +9,14 @@
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "common-defines.rkt")
-(require "create-copyright.rkt")
-(require "create-acknowledgment.rkt")
-(require "create-workbook-links.rkt")
 (require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "collect-lang-prereq.rkt")
-(require "starter-files.rkt")
 
 (provide
   preproc-adoc-file
   rearrange-args
   )
-
-; (printf "\nglossary-list= ~s\n\n" *glossary-list*)
 
 (define *progdir* (getenv "PROGDIR"))
 
@@ -34,7 +28,9 @@
 
 (define *proglang* "pyret")
 
-(define *natlang* "en-us")
+(define *proglang-sym* 'pyret)
+
+(define *natlang* 'en-us)
 
 (define *other-proglangs* #f)
 
@@ -140,9 +136,9 @@
        => (lambda (c) (set! *copyright-name* (second c)))])
 
 (define *glossary-list*
-  (let ([glossary-terms-file "lib/glossary-terms.rkt"])
+  (let ([glossary-terms-file "lib/glossary-terms.json"])
     (if (file-exists? glossary-terms-file)
-        (call-with-input-file glossary-terms-file read)
+        (call-with-input-file glossary-terms-file read-json)
         '())))
 
 (define *glossary-items* '())
@@ -156,6 +152,29 @@
 (define *exercises-done* '())
 
 (define *prereqs-used* '())
+
+(define *common-text*
+  (call-with-input-file
+    (build-path *progdir* "common-text.json")
+    read-json))
+
+(define *starter-files*
+  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+    (if (file-exists? starter-files-file)
+        (call-with-input-file starter-files-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
+(define *do-not-autoinclude-in-material-links*
+  (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
+    (if (file-exists? starter-files-dont-mention-file)
+        (map string->symbol
+             (call-with-input-file starter-files-dont-mention-file read-json))
+        '())))
+
+(define *starter-files-used* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -181,6 +200,11 @@
   ;(format "~a/~a" (current-directory) *in-file*)
   (format "~a" *in-file*)
   )
+
+(define (nicer-case x)
+  (cond [(string=? x "codap") "CODAP"]
+        [(string=? x "wescheme") "WeScheme"]
+        [else (string-titlecase x)]))
 
 (define read-group (*make-read-group (lambda z (apply code z))
                                      errmessage-file-context))
@@ -984,39 +1008,20 @@
     (let ([other-proglang-links
             (filter (lambda (x) x)
                     (map (lambda (x)
-                           (cond [(not x) #f]
-                                 [(and (string=? *proglang* "pyret") (string=? x "wescheme"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("algebra-pyret"))
-                                                 (format "link:~acourses/algebra-wescheme/index.shtml[WeScheme]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a-wescheme/index.shtml[WeScheme]" *dist-root-dir*
-                                                  *lesson-plan*)]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "wescheme") (string=? x "pyret"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("algebra-wescheme"))
-                                                 (format "link:~acourses/algebra-pyret/index.shtml[Pyret]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                  (regexp-replace "-wescheme$" *lesson-plan* ""))]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "pyret") (string=? x "codap"))
-                                  (cond [*lesson-plan*
-                                          (format "link:~alessons/~a-codap/index.shtml[CODAP]" *dist-root-dir*
-                                                  *lesson-plan*)]
-                                        [else #f])]
-                                 [(and (string=? *proglang* "codap") (string=? x "pyret"))
-                                  (cond [*narrative*
-                                          (cond [(member *target-pathway* '("data-science-codap"))
-                                                 (format "link:~acourses/data-science/index.shtml[Pyret]" *dist-root-dir*)]
-                                                [else #f])]
-                                        [*lesson-plan*
-                                          (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
-                                                  (regexp-replace "-codap$" *lesson-plan* ""))]
-                                        [else #f])]
+                           (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
+                                 [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
+                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                 [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
+                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                 [(and (string=? x "pyret") *lesson-plan*)
+                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                          (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
+                                 [*lesson-plan*
+                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                           (if (string=? *proglang* "pyret")
+                                               (string-append *lesson-plan* "-" x)
+                                               (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
+                                           (nicer-case x))]
                                  [else #f]))
                          *other-proglangs*))])
       (unless (null? other-proglang-links)
@@ -1134,7 +1139,7 @@
   ; (printf "link-to-lessons-in-pathway\n")
   ;
   (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/lesson-order.txt"
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
                            *natlang* *target-pathway*))])
     ;(printf "lessons = ~s\n" lessons)
     ;
@@ -1231,14 +1236,14 @@
       (string-append reg-space gd-space))))
 
 (define (add-lesson-keywords kwds)
-  (for ([k kwds])
+  (for ([k (reverse kwds)])
     (unless (member k *lesson-keywords*)
       (set! *lesson-keywords* (cons k *lesson-keywords*)))))
 
 (define (add-lesson-prereqs immediate-prereqs)
   ; (printf "doing add-lesson-prereqs ~s ~s ~s\n" *lesson-plan* immediate-prereqs *proglang*)
   ; (printf "lesson-prereq dir = ~s\n" (current-directory))
-  (cond [(not (member *proglang* '("pyret" "wescheme")))
+  (cond [(and (not (string=? *proglang* "pyret")) (not (string=? *proglang* "none")))
          (set! *lesson-prereqs* (map (lambda (x) (string-append x "-" *proglang*)) immediate-prereqs))]
         [else
           (set! *lesson-prereqs* immediate-prereqs)])
@@ -1267,6 +1272,7 @@
   (set! *glossary-items* '())
   (set! *missing-glossary-items* '())
   (set! *lesson-prereqs* '())
+  (set! *lesson-keywords* '())
   (set! *online-exercise-links* '())
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
@@ -1276,6 +1282,7 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
+  (set! *starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
@@ -1303,27 +1310,26 @@
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
-  (let ([gl *glossary-list*])
-
+  (let ([gl *glossary-list*]
+        [ngl '()])
+    ;
     (when (or *lesson* *lesson-plan*)
       (let ([f (format "distribution/~a/lessons/~a/shadow-glossary.txt" *natlang* *lesson*)])
         (when (file-exists? f)
           (let ([ff (read-data-file f #:mode 'files)])
             (when (pair? ff)
-              (let ([shadow-glossary-file (build-path *progdir* (first ff))])
+              (let ([shadow-glossary-file (build-path "lib" (first ff))])
                 (when (file-exists? shadow-glossary-file)
                   (set! gl
-                    (append gl (call-with-input-file shadow-glossary-file read))))))))))
-
-    (set! *natlang-glossary-list*
-      (let loop ([gl gl] [ngl '()])
-        (if (null? gl) ngl
-            (let loop2 ([xx (first gl)])
-              (if (null? xx) (loop (rest gl) ngl)
-                  (let ([x (first xx)])
-                    (if (eq? (first x) *natlang*)
-                        (loop (rest gl) (cons (rest x) ngl))
-                        (loop2 (rest xx))))))))))
+                    (append gl (call-with-input-file shadow-glossary-file read-json))))))))))
+    ;
+    (for ([entry gl])
+      (let ([h (hash-ref entry *natlang* #f)])
+        (when h
+          (set! *natlang-glossary-list*
+            (cons (list (hash-ref h 'keywords '())
+                        (hash-ref h 'description ""))
+                  *natlang-glossary-list*))))))
 
   (when *lesson-plan*
     (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
@@ -1404,7 +1410,7 @@
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
-                            (fprintf o "~a" (string-titlecase *proglang*))]
+                            (fprintf o "~a" (nicer-case *proglang*))]
                            [(string=? directive "year")
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
@@ -1531,6 +1537,10 @@
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
                             (print-other-resources *target-pathway* o)]
+                           [(string=? directive "starter-file-list")
+                            (display
+                              (enclose-div ".starterFileList" "") o)
+                            (newline o)]
                            [(string=? directive "all-exercises")
                             ; (printf "doing all-exercises ~a\n" (errmessage-context))
                             (unless *teacher-resources*
@@ -1703,33 +1713,38 @@
                            [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                   [lbl (first lbl+text)]
+                                   [lbl (string->symbol (first lbl+text))]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (assoc lbl *starter-files*)]
+                                   [c (hash-ref *starter-files* lbl #f)]
                                    [opt? (string=? directive "opt-starter-file")])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([title (or link-text (second c))]
-                                            [p (assoc *proglang* (rest (rest c)))])
+                                      (add-starter-file lbl)
+                                      (let ([p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (unless (<= (length p) 2) (set! title (third p)))
-                                                (let ([link-output
-                                                        (format
-                                                          "link:pass:[~a][~a~a]" (second p) title
-                                                          ", window=\"_blank\""
-                                                          )])
+                                                (let* ([title (or link-text
+                                                                  (hash-ref p 'title #f)
+                                                                  (hash-ref c 'title))]
+                                                       [link-output
+                                                         (format
+                                                           "link:pass:[~a][~a~a]"
+                                                           (hash-ref p 'url)
+                                                           title
+                                                           ", window=\"_blank\""
+                                                           )])
                                                   (unless (member
                                                             lbl
                                                             *do-not-autoinclude-in-material-links*)
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
-                                                               (second p) (second c)
+                                                               (hash-ref p 'url)
+                                                               title
                                                                    ", window=\"_blank\"")]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
@@ -1856,6 +1871,7 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
+  (set! *proglang-sym* (string->symbol proglang))
   (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
@@ -1928,9 +1944,10 @@
                 (fprintf o "== BOGUSACKNOWLEDGMENTSECTIONHEADER\n")
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
-                (fprintf o (create-acknowledgment))
+                (fprintf o (hash-ref *common-text* 'acknowledgment))
                 (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
-                (fprintf o (create-copyright *copyright-name*))
+                (fprintf o "~a " *copyright-name*)
+                (fprintf o (hash-ref *common-text* 'copyright))
                 (fprintf o "\n--\n")
                 )
 
@@ -2063,6 +2080,18 @@
           #:exists 'replace)
         )
 
+      (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
+        (let ([sf-file (if *lesson-plan*
+                           (build-path *containing-directory* ".cached" ".index.starterfiles")
+                           (make-temporary-file ".page-~a.starterfiles" #f
+                                                (format "distribution/~a/lessons/~a/.cached"
+                                                        *natlang* *lesson*)))])
+          (call-with-output-file sf-file
+            (lambda (o)
+              (for ([sf *starter-files-used*])
+                (display sf o) (newline o)))
+            #:exists 'replace)))
+
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
@@ -2114,7 +2143,7 @@
 
     (unless (null? exx)
       (display "\n\n" o)
-      (display (create-workbook-links) o)
+      (display (hash-ref *common-text* 'workbook-links) o)
       (display "\n\n" o)
       (display (create-vspace "1ex") o)
       (for ([lsn-exx exx])
@@ -2474,6 +2503,10 @@
     ; (printf "it's happening\n")
     (unless (member sym *prereqs-used*)
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
+
+(define (add-starter-file sf)
+  (unless (member sf *starter-files-used*)
+    (set! *starter-files-used* (cons sf *starter-files-used*))))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
