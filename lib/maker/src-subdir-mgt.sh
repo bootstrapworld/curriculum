@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-03-03
+# last modified 2023-03-14
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -10,7 +10,7 @@ function adjustproglangsubdirs() {
   test -d "$d"/"$pl" && $CP -p "$d"/"$pl"/* "$d"
 
   local lang
-  for lang in codap pyret wescheme spreadsheets none; do
+  for lang in $ALL_PROGLANGS; do
     test -d "$d"/$lang && rm -fr "$d"/$lang
   done
 

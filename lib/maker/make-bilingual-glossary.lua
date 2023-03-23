@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-08
+-- last modified 2023-03-12
 
 local glossary_terms_file, glossary_adoc_file = ...
 
@@ -8,32 +8,16 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
-dofile(make_dir .. 'sread.lua')
+dofile(make_dir .. 'jread.lua')
 
-local glossary_list
-
-if file_exists_p(glossary_terms_file) then
-  glossary_list = sread_file(glossary_terms_file)
-else
-  glossary_list = {}
-end
+local glossary_list = file_exists_p(glossary_terms_file) and read_json_file(glossary_terms_file) or {}
 
 local o = io.open(glossary_adoc_file, 'w+')
 
 local function extract_keywords(tbl)
   local o_tbl = {}
-  for i,kwd in ipairs(tbl) do
-    local word = kwd
-    if i == 1 then
-      if type(word) == 'table' then
-        word = word[1]
-      end
-      table.insert(o_tbl, word)
-    else
-      if type(word) == 'table' then
-        table.insert(o_tbl, word[1])
-      end
-    end
+  for _,kwds in ipairs(tbl) do
+    table.insert(o_tbl, kwds[1])
   end
   return table.concat(o_tbl, ', ')
 end
@@ -41,11 +25,8 @@ end
 local function display_lang_entry(lang_entry)
   local keyword_list
   if lang_entry then
-    keyword_list = lang_entry.keywords
-    if type(keyword_list) == 'table' then
-      keyword_list = extract_keywords(keyword_list)
-    end
-    o:write(keyword_list .. ' :: ' .. lang_entry.desc .. '\n\n')
+    keyword_list = extract_keywords(lang_entry.keywords)
+    o:write(keyword_list .. ' :: ' .. lang_entry.description .. '\n\n')
   else
     o:write '[.missing]#missing entry# :: ...\n\n'
   end
@@ -59,24 +40,8 @@ o:write '</style>\n'
 o:write '++++\n\n'
 
 for _,entry in ipairs(glossary_list) do
-  local en_us_entry
-  local es_mx_entry
-  for _,lang_entry in ipairs(entry) do
-    local lang = lang_entry[1]
-    if lang == 'en-us' then
-      en_us_entry = {}
-      en_us_entry.keywords = lang_entry[2]
-      en_us_entry.desc = lang_entry[3]
-    elseif lang == 'es-mx' then
-      es_mx_entry = {}
-      es_mx_entry.keywords = lang_entry[2]
-      es_mx_entry.desc = lang_entry[3]
-    else
-      print('WARNING: unknown lang ' .. lang)
-    end
-  end
-  display_lang_entry(en_us_entry)
-  display_lang_entry(es_mx_entry)
+  display_lang_entry(entry['en-us'])
+  display_lang_entry(entry['es-mx'])
   o:write("'''\n\n")
 end
 

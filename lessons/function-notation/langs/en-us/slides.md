@@ -137,7 +137,7 @@ When evaluating an expression for a piecewise function, points on the graph mark
 
 Complete @printable-exercise{function-notation-graphs.adoc}.
 
-If you're ready to engage them with piecewise functions, try @opt-printable-exercise{function-notation-graphs-pw.adoc}.
+Optional: If you're ready to engage them with piecewise functions, try @opt-printable-exercise{function-notation-graphs-pw.adoc}.
 
 ---
 {layout="Synthesize"}

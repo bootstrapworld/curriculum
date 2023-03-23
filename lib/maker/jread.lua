@@ -16,6 +16,8 @@ end
 
 local current_json_file = 'none'
 
+local json_read -- function defined below
+
 local function json_read_hashtable(i)
   local result = { __json_keys = {} }
   while true do
@@ -91,7 +93,8 @@ local function json_read_atom(i)
   return (n or result)
 end
 
-local function json_read(i)
+-- local
+function json_read(i)
   json_ignorespaces(i)
   local c = buf_peek_char(i)
   -- print('c =', c)

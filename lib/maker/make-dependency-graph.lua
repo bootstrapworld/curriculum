@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-09
+-- last modified 2023-03-17
 
 local graph_file = ...
 
@@ -16,58 +16,74 @@ o:write('var graph = {\n')
 
 for _,lesson in ipairs(lessons) do
   local i
-  local titletxt = ''
-  local desctxt = ''
-  local pagestxt = ''
-  local exerpagestxt = ''
-  local primstxt = ''
-  local prereqstxt = ''
+  local title_txt = ''
+  local description_txt = ''
+  local proglang_txt = 'pyret'
+  local pages_txt = ''
+  local exercisePages_txt = ''
+  local primitives_txt = ''
+  local starterFiles_txt = ''
+  local prerequisites_txt = ''
   local lessondir = lessons_dir .. lesson .. '/'
   local lessoncache = lessondir .. '.cached/'
   local lessonpagecache = lessondir .. 'pages/.cached/'
-  local titletxt_file = lessoncache .. '.index.titletxt'
-  local desctxt_file = lessoncache .. '.index-desc.txt.kp'
-  local pagestxt_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
-  local exerpagestxt_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
-  local primstxt_file = lessoncache .. '.index-primitives.txt.kp'
+  local title_file = lessoncache .. '.index.titletxt'
+  local description_file = lessoncache .. '.index-desc.txt.kp'
+  local proglang_file = lessoncache .. '.record-proglang'
+  local pages_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
+  local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
+  local primitives_file = lessoncache .. '.index-primitives.txt.kp'
+  local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
   local keywords_file = lessoncache .. '.lesson-keywords.txt.kp'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
   local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp'
   --
-  if file_exists_p(titletxt_file) then
-    i = io.open(titletxt_file)
-    titletxt = i:read()
-    titletxt = titletxt:gsub('"', '\\"')
+  if file_exists_p(title_file) then
+    i = io.open(title_file)
+    title_txt = i:read():gsub('"', '\\"')
     i:close()
   end
   --
-  if file_exists_p(desctxt_file) then
-    i = io.open(desctxt_file)
-    desctxt = i:read()
-    desctxt = desctxt:gsub('"', '\\"')
+  if file_exists_p(description_file) then
+    i = io.open(description_file)
+    description_txt = i:read():gsub('"', '\\"')
     i:close()
   end
   --
-  if file_exists_p(pagestxt_file) then
-    i = io.open(pagestxt_file)
+  if file_exists_p(proglang_file) then
+    i = io.open(proglang_file)
+    proglang_txt = i:read()
+    i:close()
+  end
+  --
+  if file_exists_p(pages_file) then
+    i = io.open(pages_file)
     for line in i:lines() do
-      pagestxt = pagestxt .. '\"' .. line .. '\", '
+      pages_txt = pages_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
   --
-  if file_exists_p(exerpagestxt_file) then
-    i = io.open(exerpagestxt_file)
+  if file_exists_p(exercisePages_file) then
+    i = io.open(exercisePages_file)
     for line in i:lines() do
-      exerpagestxt = exerpagestxt .. '\"' .. line .. '\", '
+      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
   --
-  if file_exists_p(primstxt_file) then
-    i = io.open(primstxt_file)
+  if file_exists_p(primitives_file) then
+    i = io.open(primitives_file)
     for line in i:lines() do
-      primstxt = primstxt .. '\"' .. line .. '\", '
+      primitives_txt = primitives_txt .. '\"' .. line .. '\", '
+    end
+    i:close()
+  end
+  --
+  if file_exists_p(starterFiles_file) then
+    i = io.open(starterFiles_file)
+    for line in i:lines() do
+      starterFiles_txt = starterFiles_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
@@ -75,19 +91,21 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(prereqs_file) then
     i = io.open(prereqs_file)
     for line in i:lines() do
-      prereqstxt = prereqstxt .. '\"' .. line .. '\", '
+      prerequisites_txt = prerequisites_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
   --
   o:write('  \"' .. lesson .. '\" : {\n')
-  o:write('    title: \"' .. titletxt .. '\",\n')
-  o:write('    description: \"' .. desctxt .. '\",\n')
-  o:write('    pages: [' .. pagestxt .. '],\n')
-  o:write('    exercisePages: [' .. exerpagestxt .. '],\n')
-  o:write('    primitives: [' .. primstxt .. '],\n')
+  o:write('    title: \"' .. title_txt .. '\",\n')
+  o:write('    description: \"' .. description_txt .. '\",\n')
+  o:write('    proglang: \"' .. proglang_txt .. '\",\n')
+  o:write('    pages: [' .. pages_txt .. '],\n')
+  o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
+  o:write('    primitives: [' .. primitives_txt .. '],\n')
   copy_file_to_port(keywords_file, o)
-  o:write('    prerequisites: [' .. prereqstxt .. '],\n')
+  o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
+  o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
   copy_file_to_port(standards_file, o)
   o:write(' },\n')
 end
