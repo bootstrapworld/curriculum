@@ -59,7 +59,7 @@ Discuss students' findings. Pay special attention to the @vocab{form} that stude
 [.lesson-instruction]
 Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.
 
-Note: this worksheet involves lots of trial and error, as students try to come up with a good linear model. The goal is to __discover that a non-linear model is necessary__.
+Note: This worksheet involves lots of trial and error, as students try to come up with a good linear model. The goal is to __discover that a non-linear model is necessary__.
 
 === Synthesize
 
@@ -128,16 +128,16 @@ Imagine that the scatter plot is printed on a sheet of rubber, and can be stretc
 
 [.lesson-instruction]
 - Complete questions 1-6 in @printable-exercise{transforming-wealth.adoc}.
-- Discuss as a class: what does the `build-column` function do?
+- What does the `build-column` function do?
 - How is `albania["pc-gdp"] / 2` similar to `transform-pc-gdp(albania)`? How are they different?
-** __Similar: Both produce result in dividing the `pc-gdp` of Albania by two.__
+** __Similar: Both result in dividing the `pc-gdp` of Albania by two.__
 ** __Different: The first looks up the `pc-gdp` column of `albania` and divides it by two, while the second _applies a function_ to `albania` which does that same work.__
 
 Given a table, a string and a function, `build-column` creates a new table with an extra column. The given string determines the header of the column, and the given function computes the values in that column based on each row of the old table. In this worksheet, `build-column` is used to add a column called `pc-gdp / 2` to the `countries-table`, by applying `transform-pc-gdp` to each Row.
 
 Now we can look for a relationship between `pc-gdp / 2` and `median-lifespan`.
 
-Our goal in transforming this dataset is to find a transformation that lets us use the power fo linear regression to compute the best-possible model. Once we've done that, we'll __transform the model itself__ and use the transformed model with our original dataset.
+Our goal in transforming this dataset is to find a transformation that lets us use the power of linear regression to compute the best-possible model. Once we've done that, we'll __transform the model itself__ and use the transformed model with our original dataset.
 
 === Investigate
 
@@ -148,7 +148,9 @@ How can we transform this plot so that the `pc-gdp` column is placed on a logari
 [.lesson-instruction]
 Complete questions 7-9 on @printable-exercise{transforming-wealth.adoc}.
 
-@right{@image{images/wealth-v-life-transformed-linear.png, 550}} Success! After transforming the `pc-gdp` column to `log-pc-gdp`, a scatter plot shows a more linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `5.169` and a y-intercept of `24.264`. Our @math{R^2} has jumped to 0.663, showing a vastly better correlation than before.
+@right{@image{images/wealth-v-life-transformed-linear.png, 550}}
+
+Success! After transforming the `pc-gdp` column to `log-pc-gdp`, a scatter plot shows a more linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `5.169` and a y-intercept of `24.264`. Our @math{R^2} has jumped to 0.663, showing a vastly better correlation than before.
 
 @clear
 
@@ -170,7 +172,7 @@ Of course, we could also just define a new function which composes the log trans
 - @show{(code '(define (h x) (+ (* 5.169 (log x)) 24.264)))}
 
 [.lesson-instruction]
-Complete the remainder of in @printable-exercise{transforming-wealth.adoc}.
+Complete the remainder of @printable-exercise{transforming-wealth.adoc}.
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
@@ -185,4 +187,4 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 
 == Additional Exercises
 
-Is the relationship between wealth and lifespan different in countries that have universal healthcare? Students can explore this in @opt-printable-exercise{transforming-wealth-practice.adoc}
+Is the relationship between wealth and lifespan different in countries that have universal healthcare? Students can explore this in @opt-printable-exercise{transforming-wealth-practice.adoc}.
