@@ -22,47 +22,60 @@
         // load required symbols, trim the dependency graph
         const { PDFDocument, rgb, degrees } = PDFLib
         var graph = graph, lessons = [], pathway = "Custom Pathway";
-        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-winter', 'hoc-wescheme-intro'];
+        const lessonsToIgnore = ['__sample-lesson','__sample-lesson-wescheme', 'zample-lesson', 'hoc-wescheme-intro', 'hoc-winter', 'hoc-winter-parley', '__sample-lesson-codap', 'codap-bar-charts-codap', 'codap-exploring-codap', 'codap-transformers-1-codap', 'codap-transformers-2-codap', 'composing-table-operations-codap', 'computing-needs-all-voices-codap', 'data-cycle-codap', 'ds-intro-codap', 'ethics-privacy-and-bias-codap', 'grouped-samples-codap', 'composing-table-operations-codap', 'probability-inference-codap', 'project-exploration-paper-codap', 'sw-what-ships-carried-spreadsheets', 'sw-where-in-asia-spreadsheets','exploring-linear-relationships','exploring-quadratic-relationships','exploring-logarithmic-relationships','maya-skulls-spreadsheets', 'maya-1-spreadsheets'];
         lessonsToIgnore.forEach(l => delete graph[l]);
 
-        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
-        function populateLessons() {
-            var search = location.search.substring(1);
-            var {pathway, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-            window.lessons = lessons = lessons.split(",");
-            console.log(pathway, lessons);
+       // used with [].filter to produce an array of unique elts
+        const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+        const getPrereqs = (l) => {
+            if(!graph[l]) {
+                throw "an unknown lesson was passed to getPrereqs:" + l;
+            }
+            return graph[l].prerequisites.concat(...graph[l].prerequisites.map(getPrereqs));
+        }
 
-            document.getElementById('pathwayTitle').innerHTML = pathway;
-            var lessonList = document.getElementById('lesson-list').children[0];
+        // recursively compute all prerequisites for each lesson and project
+        Object.keys(graph).forEach(k =>
+            graph[k].prerequisites = getPrereqs(k).filter(onlyUnique));
+
+        function populateLessonList(ul, lessonNames, showDescription) {
+            var search = location.search.substring(1);
             lessons.forEach(l => {
                 var lesson = graph[l];
                 var dt = document.createElement('dt');
                 dt.className = "hdlist1";
-                dt.innerHTML = `
-                    <dt class="hdlist1"><a href="./lessons/${l}/index.shtml?${search}">${lesson.title}</a></dt>
-                        <dd>
-                            <p>${lesson.description}</p>
-                        </dd>
-                `;
-                lessonList.appendChild(dt);
+                dt.innerHTML = `<dt class="hdlist1"><a href="./lessons/${l}/index.shtml?${search}">${lesson.title}</a></dt>`;
+                if(showDescription) {
+                    dt.innerHTML += `<dd><p>${lesson.description}</p></dd>`
+                };
+                ul.appendChild(dt);
             });
+        }
+
+        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
+        function populateLessons() {
+            var search = location.search.substring(1);
+            var {pathway, lessons, proglang} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+            window.lessons = lessons = lessons.split(",");
+
+            document.getElementById('pathwayTitle').innerHTML = pathway;
+            var lessonList = document.getElementById('lesson-list').children[0];
+            populateLessonList(lessonList, lessons, true);
 
             // update the list of accessible lessons
             var accessibleList = document.getElementById('accessible-lesson-list');
             var accessible =  Object.getOwnPropertyNames(graph)
                 .filter(name => graph[name].prerequisites
                     .every(p => lessons.includes(p)))
+                .filter(name => graph[name].proglang == proglang)
                 .filter(name => !lessons.includes(name))
+                .filter(onlyUnique)
                 .sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
             console.log('lessons are', lessons);
             console.log('accessible', accessible);
 
-            accessible.forEach(l => {
-                var li = document.createElement('li');
-                li.innerHTML = graph[l].title;
-                accessibleList.appendChild(li);
-            });
+            populateLessonList(accessibleList, accessible, true)
         }
 
         async function printWorkook(lessons, graph) {
@@ -157,7 +170,7 @@
         <div class="clearfix item bottom-border">
             <h2>What's Next?</h2>
             <p/>
-            <strong>What's next?</strong> Once your students have finished this pathway, they've already completed all the prerequisites for the following lessons:
+            Once your students have finished this pathway, they can jump right into <i>any</i> of the following lessons:
             <ul id="accessible-lesson-list">
             </ul>
         </div>
