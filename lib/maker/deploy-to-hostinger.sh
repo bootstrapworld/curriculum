@@ -25,15 +25,17 @@ test -z "$YEAR" && YEAR=$(date +%Y)-BETA
 
 cd distribution
 
-test -d deployables && rm -fr deployables
+DEPLOYABLES_DIR=deployables-$USER
 
-mkdir deployables
+test -d $DEPLOYABLES_DIR && rm -fr $DEPLOYABLES_DIR
+
+mkdir $DEPLOYABLES_DIR
 
 ALL_THE_LANGS="en-us es-mx"
 
 for lang in $ALL_THE_LANGS; do
-  mkdir -p deployables/$lang/courses
-  mkdir -p deployables/$lang/lessons
+  mkdir -p $DEPLOYABLES_DIR/$lang/courses
+  mkdir -p $DEPLOYABLES_DIR/$lang/lessons
 done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
@@ -58,62 +60,61 @@ function copyCourse() {
   local dir=$1
   for lang in $ALL_THE_LANGS; do
     test -d $lang/courses/$dir || continue
-    cp -pr $lang/courses/$dir deployables/$lang/courses/$dir
-    correctgdriveurls deployables/$lang/courses/$dir
+    cp -pr $lang/courses/$dir $DEPLOYABLES_DIR/$lang/courses/$dir
+    correctgdriveurls $DEPLOYABLES_DIR/$lang/courses/$dir
   done
 }
 
 for lang in $ALL_THE_LANGS; do
   if test -z "$SKIPLIB"; then
     if test -d $lang/extlib; then
-      cp -pr $lang/extlib deployables/$lang
+      cp -pr $lang/extlib $DEPLOYABLES_DIR/$lang
     else
       echo Skipping copying extlib...
     fi
   fi
   for f in $lang/*; do
     if test -f $f; then
-      cp -p $f deployables/$lang
+      cp -p $f $DEPLOYABLES_DIR/$lang
     fi
   done
   if test -d $lang/lib; then
-    cp -pr $lang/lib deployables/$lang
+    cp -pr $lang/lib $DEPLOYABLES_DIR/$lang
   fi
   if test -d $lang/lessons; then
-    cp -pr $lang/lessons deployables/$lang
-    correctgdriveurls deployables/$lang/lessons
+    cp -pr $lang/lessons $DEPLOYABLES_DIR/$lang
+    correctgdriveurls $DEPLOYABLES_DIR/$lang/lessons
   fi
   if test -d $lang/courses; then
-    cp -pr $lang/courses deployables/$lang
-    correctgdriveurls deployables/$lang/courses
+    cp -pr $lang/courses $DEPLOYABLES_DIR/$lang
+    correctgdriveurls $DEPLOYABLES_DIR/$lang/courses
   fi
 done
 
-find deployables -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
+find $DEPLOYABLES_DIR -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
 for f in adoc asc aux md id rkt rkt.kp titletxt txt txt.kp; do
-  find deployables -name \*.$f -delete
+  find $DEPLOYABLES_DIR -name \*.$f -delete
 done
 
-find deployables -name lesson-images.json -delete
+find $DEPLOYABLES_DIR -name lesson-images.json -delete
 
-cat > deployables/deploy-to-public_html.sh <<EOF
+cat > $DEPLOYABLES_DIR/deploy-to-public_html.sh <<EOF
 DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
-mkdir -p \$DEPLOY_DIR
-cd
-cd tmp
-cp -pr deployables/* \$DEPLOY_DIR
+rm -fr \$DEPLOY_DIR
+mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
+rm \$DEPLOY_DIR/deploy-to-public_html.sh
 EOF
 
-echo Copying deployables to Hostinger...
-rsync -e "ssh -p $HOSTINGER_PORT" -avz deployables $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
+echo Copying $DEPLOYABLES_DIR to Hostinger...
+rsync -e "ssh -p $HOSTINGER_PORT" -rlptvz $DEPLOYABLES_DIR $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
 
 exitstatus=$?
 
 test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
 
 echo Copying files to public_html/materials/$SEMESTER$YEAR...
-ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deployables/deploy-to-public_html.sh'
+ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"
 
 exitstatus=$?
 
