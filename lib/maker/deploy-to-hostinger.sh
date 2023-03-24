@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-09
+# last modified 2023-03-24
 
 test ! -d distribution && echo distribution/ not found\; make it first && exit 0
 
@@ -97,33 +97,26 @@ done
 
 find deployables -name lesson-images.json -delete
 
-test -f deployables.tar.bz2 && rm deployables.tar.bz2
+echo Copyng deployables to Hostinger...
+rsync -e "ssh -p $HOSTINGER_PORT" -avz deployables $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
 
-echo Tarring up deployables...
-tar jcf deployables.tar.bz2 deployables
+exitstatus=$?
+
+test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
 
 cat > deploy-to-public_html.sh <<EOF
 DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
 mkdir -p \$DEPLOY_DIR
 cd
 cd tmp
-rm -fr deployables
-tar jxf deployables.tar.bz2
 cp -pr deployables/* \$DEPLOY_DIR
 EOF
-
-echo Copying deployables.tar.bz2 to hostinger...
-scp -p -P $HOSTINGER_PORT deployables.tar.bz2 deploy-to-public_html.sh $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
-
-exitstatus=$?
-
-test $exitstatus -ne 0 && echo scp failed! 🙁 && exit 0
 
 echo Unpacking files under public_html/materials/$SEMESTER$YEAR...
 ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deploy-to-public_html.sh'
 
 exitstatus=$?
 
-test $exitstatus -ne 0 && echo ssh failed! 🙁 && exit 0
+test $exitstatus -ne 0 && echo ssh failed! 😢  && exit 0
 
-echo Deployment done! 🙂
+echo Deployment done! 🙂 💐 🎉 🎊
