@@ -97,14 +97,7 @@ done
 
 find deployables -name lesson-images.json -delete
 
-echo Copyng deployables to Hostinger...
-rsync -e "ssh -p $HOSTINGER_PORT" -avz deployables $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
-
-exitstatus=$?
-
-test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
-
-cat > deploy-to-public_html.sh <<EOF
+cat > deployables/deploy-to-public_html.sh <<EOF
 DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
 mkdir -p \$DEPLOY_DIR
 cd
@@ -112,8 +105,15 @@ cd tmp
 cp -pr deployables/* \$DEPLOY_DIR
 EOF
 
-echo Unpacking files under public_html/materials/$SEMESTER$YEAR...
-ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deploy-to-public_html.sh'
+echo Copying deployables to Hostinger...
+rsync -e "ssh -p $HOSTINGER_PORT" -avz deployables $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
+
+exitstatus=$?
+
+test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
+
+echo Copying files to public_html/materials/$SEMESTER$YEAR...
+ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR 'bash ~/tmp/deployables/deploy-to-public_html.sh'
 
 exitstatus=$?
 
