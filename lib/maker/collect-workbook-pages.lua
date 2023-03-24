@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-08
+-- last modified 2023-03-23
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -20,7 +20,9 @@ end
 os.remove(index_title_file)
 
 do
-  if not file_exists_p(index_file) then return end
+  if not file_exists_p(index_file) then
+    goto doexit
+  end
   --
   local i = io.open(index_file)
   for f in i:lines() do
@@ -33,6 +35,8 @@ do
     end
   end
   i:close()
+  --
+  ::doexit::
 end
 
 os.remove(workbook_pages_file)
