@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-24
+# last modified 2023-03-25
 
 test ! -d distribution && echo distribution/ not found\; make it first && exit 0
 
@@ -106,17 +106,38 @@ mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
 rm \$DEPLOY_DIR/deploy-to-public_html.sh
 EOF
 
+CONVENIENT_PASSWORD=
+
+(which sshpass|grep -q .) && CONVENIENT_PASSWORD=yes
+
+if test -n "$CONVENIENT_PASSWORD"; then
+  read -p "Password: " -s RSYNC_PASSWORD
+  export SSHPASS="$RSYNC_PASSWORD"
+fi
+
 echo Copying $DEPLOYABLES_DIR to Hostinger...
-rsync -e "ssh -p $HOSTINGER_PORT" -rlptvz $DEPLOYABLES_DIR $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
+
+if test -n "$CONVENIENT_PASSWORD"; then
+  rsync -e "sshpass -e ssh -p $HOSTINGER_PORT" -rlptvz $DEPLOYABLES_DIR $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
+else
+  rsync -e "ssh -p $HOSTINGER_PORT" -rlptvz $DEPLOYABLES_DIR $HOSTINGER_USER@$HOSTINGER_IPADDR:tmp/.
+fi
 
 exitstatus=$?
 
 test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
 
 echo Copying files to public_html/materials/$SEMESTER$YEAR...
-ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"
+
+if test -n "$CONVENIENT_PASSWORD"; then
+  sshpass -e ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"
+else
+  ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"
+fi
 
 exitstatus=$?
+
+test -n "$CONVENIENT_PASSWORD" && unset RSYNC_PASSWORD SSHPASS
 
 test $exitstatus -ne 0 && echo ssh failed! 😢  && exit 0
 
