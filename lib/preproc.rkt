@@ -2396,8 +2396,9 @@
                                             (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* frac expt))))
-                                       (and (eq? encloser '/))))
+                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))
+                                       (and (eq? encloser '/))
+                                       ))
                          (format "( ~a )" x)
                          x)])
             ; (printf "infix ret'd ~s\n" ans)
