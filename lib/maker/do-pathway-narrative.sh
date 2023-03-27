@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-07
+# last modified 2023-03-14
 
 # echo do-pathway-narrative $1
 
@@ -24,13 +24,13 @@ fi
 
 targetpathway=$(echo $containingdirectory|$SED -e 's#.*/courses/\([^/]*\).*#\1#')
 
-# proglangarg=pyret
-if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-codap; then proglangarg=codap
-elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-none; then proglangarg=none
-elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-spreadsheets; then proglangarg=spreadsheets
-elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-wescheme; then proglangarg=wescheme
-elif test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-pyret; then proglangarg=pyret
-fi
+proglangarg=
+
+for proglang in $ALL_PROGLANGS; do
+  if test -f distribution/$NATLANG/courses/$targetpathway/.cached/.proglang-$proglang; then
+    proglangarg=$proglang
+  fi
+done
 
 otherproglangs="#f"
 

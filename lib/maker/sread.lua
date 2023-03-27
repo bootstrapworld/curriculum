@@ -1,4 +1,4 @@
--- last modified 2023-03-09
+-- last modified 2023-03-12
 
 -- sread(i) reads an s-expression from buffered input port i
 --
@@ -23,7 +23,7 @@ local function sread_block_comment(i)
       if c == '#' then
         break
       elseif c == '|' then
-        buf_toss_back_char(c)
+        buf_toss_back_char(c, i)
       end
     end
   end
@@ -44,7 +44,7 @@ local function sread_ignorespaces(i)
         i:read(1)
         sread_block_comment(i)
       else
-        buf_toss_back_char('#')
+        buf_toss_back_char('#', i)
         break
       end
     else break

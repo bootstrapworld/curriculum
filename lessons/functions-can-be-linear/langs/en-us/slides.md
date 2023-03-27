@@ -60,7 +60,7 @@ The line representing the @vocab{linear} relationship would not only include the
 
 Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, Matching Tables to Graphs}.
 
-If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+Optional: If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 
 ---
@@ -83,7 +83,7 @@ On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis mu
 We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
 
 <!--
-If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+Optional: If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 -->
 

@@ -29,7 +29,7 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 
 * Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
-* For more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+* Optional: for more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
 
 ---
 {layout="Launch"}
