@@ -18,11 +18,12 @@ local function read_list_from_file(f)
   return ('[ "' .. table.concat(read_json_file(f), '", "') .. '" ]')
 end
 
-local function read_list_of_2tuples_from_file(f)
+local function read_list_of_glosses_from_file(f)
   local lol = read_json_file(f)
   local tbl = {}
   for _,tuple in ipairs(lol) do
-    table.insert(tbl, '      [ "' .. tuple[1] .. '", "' .. tuple[2] .. '" ]')
+    table.insert(tbl, '      { "keyword": "' .. tuple[1] .. '", "description": "' .. tuple[2] .. '" }')
+    -- table.insert(tbl, '      [ "' .. tuple[1] .. '", "' .. tuple[2] .. '" ]')
   end
   return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
 end
@@ -128,7 +129,7 @@ for _,lesson in ipairs(lessons) do
     o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')
   end
   if file_exists_p(glossary_file) then
-    o:write('    glossary: ' .. read_list_of_2tuples_from_file(glossary_file) .. ',\n')
+    o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_file) .. ',\n')
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
