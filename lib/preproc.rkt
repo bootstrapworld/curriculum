@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-17
+; last modified 2023-03-27
 
 (require json)
 (require file/sha1)
@@ -1187,7 +1187,7 @@
         (let ([lesson-asc-file
                 (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.txt.kp"
+                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.json"
                         *natlang* lesson)]
               [lesson-title-file
                 (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
@@ -1200,16 +1200,11 @@
 
           (when (file-exists? lesson-glossary-file)
             ;(printf "~a exists i\n" lesson-glossary-file)
-            (call-with-input-file lesson-glossary-file
-              (lambda (i)
-                (let loop ()
-                  (let ([x (read i)])
-                    (unless (eof-object? x)
-                      (let ([s (assoc-glossary x)])
-                        (cond [s (unless (member s *glossary-items*)
-                                   (set! *glossary-items*
-                                     (cons s *glossary-items*)))]))
-                      (loop)))))))
+            (for ([x (call-with-input-file lesson-glossary-file read-json)])
+              (let ([s (assoc-glossary x)])
+                (when (and s (not (member s *glossary-items*)))
+                  (set! *glossary-items*
+                    (cons s *glossary-items*))))))
           ;(printf "took care of pw glossary~n")
           )
     )
@@ -2068,15 +2063,15 @@
             )
           #:exists 'replace)
 
-        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-keywords.txt.kp")
+        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-keywords.json")
           (lambda (o)
             (let ([first? #t])
-            (display "    keywords: [" o)
-            (for ([k *lesson-keywords*])
-              (cond [first? (set! first? #f)]
-                    [else (display ", " o)])
-              (write k o))
-            (display "]," o) (newline o)))
+              (display "[" o)
+              (for ([k *lesson-keywords*])
+                (cond [first? (set! first? #f)]
+                      [else (display ",\n" o)])
+                (fprintf o "  ~s" k))
+              (display " ]\n" o)))
           #:exists 'replace)
         )
 
@@ -2282,10 +2277,15 @@
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt.kp")
+  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
     (lambda (op)
-      (for ([s *glossary-items*])
-        (fprintf op "~s~n" (first s))))
+      (let ([first? #t])
+        (display "[" op)
+        (for ([s *glossary-items*])
+          (cond [first? (set! first? #f)]
+                [else (display ",\n" op)])
+          (fprintf op "  ~s" (first s)))
+        (display " ]\n" op)))
     #:exists 'replace))
 
 ;coe

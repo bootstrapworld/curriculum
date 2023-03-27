@@ -1,4 +1,4 @@
-# last modified 2023-03-23
+# last modified 2023-03-24
 
 export MAKE_DIR := lib/maker/
 
@@ -74,6 +74,9 @@ clean:
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
+	$(MAKE_DIR)deploy-to-hostinger.sh
+
+quick-deploy:
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 ###############################################################################
