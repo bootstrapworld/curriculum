@@ -1,16 +1,8 @@
 #!/bin/bash
 
-# last modified 2023-03-26
+# last modified 2023-03-17
 
 # echo massage-distribution-lesson "$@"
-
-running_macOS=
-
-(echo $OSTYPE | grep -q darwin) && running_macOS=yes
-
-CPr="cp -upr"
-
-test -n "$running_macOS" && CPr="cp -pr"
 
 src=$1
 
@@ -23,7 +15,7 @@ else
 fi
 
 # this is just to avoid problems copying an empty dir
-(find $src -maxdepth 0 -empty|grep -q .) || $CPr $src/* $d
+(find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
 # ensure lesson plan adoc always present, even if empty
 test ! -f $d/index.adoc && touch $d/index.adoc
@@ -48,7 +40,7 @@ for pl in $proglangs; do
   if test "$pl" != pyret -a "$pl" != none; then
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
-    $CPr "$lessonName"/* "$lessonNamePl"
+    cp -upr "$lessonName"/* "$lessonNamePl"
   fi
   #
   cd "$lessonNamePl"
