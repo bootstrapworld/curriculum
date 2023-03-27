@@ -1200,11 +1200,10 @@
 
           (when (file-exists? lesson-glossary-file)
             ;(printf "~a exists i\n" lesson-glossary-file)
-            (for ([x (call-with-input-file lesson-glossary-file read-json)])
-              (let ([s (assoc-glossary x)])
-                (when (and s (not (member s *glossary-items*)))
-                  (set! *glossary-items*
-                    (cons s *glossary-items*))))))
+            (for ([s (call-with-input-file lesson-glossary-file read-json)])
+              (unless (member s *glossary-items*)
+                (set! *glossary-items*
+                  (cons s *glossary-items*)))))
           ;(printf "took care of pw glossary~n")
           )
     )
@@ -2280,12 +2279,13 @@
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
     (lambda (op)
       (let ([first? #t])
-        (display "[" op)
+        (display "[\n" op)
         (for ([s *glossary-items*])
           (cond [first? (set! first? #f)]
                 [else (display ",\n" op)])
-          (fprintf op "  ~s" (first s)))
-        (display " ]\n" op)))
+          (fprintf op "  [~s, ~s]" (first s) (second s))
+          )
+        (display "\n]\n" op)))
     #:exists 'replace))
 
 ;coe
