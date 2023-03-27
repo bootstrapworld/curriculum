@@ -116,7 +116,7 @@ for _,lesson in ipairs(lessons) do
   o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
   if file_exists_p(keywords_file) then
-    o:write('    keywords: [' .. read_list_from_file(keywords_file) .. ']\n')
+    o:write('    keywords: [' .. read_list_from_file(keywords_file) .. '],\n')
   end
   if file_exists_p(glossary_file) then
     o:write('    glossary: [' .. read_list_from_file(glossary_file) .. '],\n')
