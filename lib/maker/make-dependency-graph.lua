@@ -22,7 +22,7 @@ local function read_list_of_glosses_from_file(f)
   local lol = read_json_file(f)
   local tbl = {}
   for _,tuple in ipairs(lol) do
-    table.insert(tbl, '      { "keyword": "' .. tuple[1] .. '", "description": "' .. tuple[2] .. '" }')
+    table.insert(tbl, '      { "vocab": "' .. tuple[1] .. '", "description": "' .. tuple[2] .. '" }')
     -- table.insert(tbl, '      [ "' .. tuple[1] .. '", "' .. tuple[2] .. '" ]')
   end
   return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
