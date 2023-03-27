@@ -15,15 +15,17 @@ local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLAN
 local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
 
 local function read_list_from_file(f)
+  local l = read_json_file(f)
+  if #l <= 0 then return '[]' end
   return ('[ "' .. table.concat(read_json_file(f), '", "') .. '" ]')
 end
 
 local function read_list_of_glosses_from_file(f)
   local lol = read_json_file(f)
   local tbl = {}
+  if #lol <= 0 then return '[]' end
   for _,tuple in ipairs(lol) do
     table.insert(tbl, '      { "vocab": "' .. tuple[1] .. '", "description": "' .. tuple[2] .. '" }')
-    -- table.insert(tbl, '      [ "' .. tuple[1] .. '", "' .. tuple[2] .. '" ]')
   end
   return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
 end
