@@ -87,6 +87,7 @@ body {
     }
   }
 
+  /* Show the standard footer at the bottom of each page...*/
   #footer {
     background: rgba(0,0,0,0.5);
     padding-left: 10px !important;
@@ -95,8 +96,8 @@ body {
     padding:    0;
     z-index:    999;
   }
-
-  .canBeLongerThanAPage #footer { display: none; }
+  /* But not if it's an extra-long page */
+  &.canBeLongerThanAPage #footer { display: none; }
 
   /* Hide anything that we only want seen on Google drive */
   .gdrive-only { display: none; visibility: hidden; }
@@ -595,6 +596,7 @@ body:not(.LessonPlan) {
 /* Don't use flex to space out content on notes pages */
 body.LessonNotes {
   #content { display: block !important; }
+  p { line-height: 1.6; }
 }
 /************************************************************************************
 * DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING

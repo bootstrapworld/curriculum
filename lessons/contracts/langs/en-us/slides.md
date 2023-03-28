@@ -218,7 +218,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 # Exploring Image Functions
 
-- Take the next 10 minutes to experiment with the image functions listed in the @opt-printable-exercise{image-contracts.adoc, contracts pages} at the back of your workbook.
+- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (Optional: these pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout})
 
 - When you've got working expressions, record the contracts and the code!
 
@@ -245,7 +245,7 @@ You will be adding to these contract pages and referring back to them for the re
 {layout="Launch-DN"}
 # Contracts Help Us Write Code
 
-Turn to @printable-exercise{pages/using-contracts.adoc} and @opt-printable-exercise{pages/using-contracts-cont.adoc} and experiment with the functions in the editor.
+Turn to @printable-exercise{pages/using-contracts.adoc} and experiment with the functions in the editor. Optional: @opt-printable-exercise{pages/using-contracts-cont.adoc}.
 
 Once you've discovered how to build a version of each image function that satisfies you, record the example code in your contracts table. 
 

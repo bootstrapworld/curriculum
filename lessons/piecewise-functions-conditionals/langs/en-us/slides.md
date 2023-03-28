@@ -164,7 +164,7 @@ Think back to our examples of piecewise functions (ticket sales, postage, cell-p
 <!--
 Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function was _always_ equal to the number of labels in the example step, which was _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions. When it doesn't hold, that's how we _know_ we need a piecewise function!
 
-You may also have students work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:16pt"}
+Optional: You may also have students work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:16pt"}
 
 -->
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-08
+-- last modified 2023-03-13
 
 local coverage_report_file = ...
 
@@ -87,23 +87,27 @@ end
 
 local function display_subreport(dictionaries)
   for _,dictionary in ipairs(dictionaries) do
-    -- each dictionary has: nickname, expanded_name, ({std, desc, lesson, ...} ...), url)
-    local opt = dictionary[1]:gsub('[%.%s]', '_')
-    o:write('[.coverageElement.' .. opt .. ']\n')
+    -- each dictionary is an array of: nickname, expanded_name, dict_obj, url)
+    -- each dict_obj is a hash mapping label to { description = string, lessons = array }
+    --
+    -- replace all dots and spaces in label by underscore so it's a valid css class name
+    local nickname = dictionary[1]:gsub('[%.%s]', '_')
+    o:write('[.coverageElement.' .. nickname .. ']\n')
     o:write('[cols="2a,1a,7a"]\n')
     o:write('|===\n')
-    local entries = dictionary[3]
-    for _,entry in ipairs(entries) do
-      local std = entry[1]
-      local desc = entry[2]:gsub('|', '&#x7c;')
-      local count = #entry - 2
+    local dict_obj = dictionary[3]
+    for _,lbl in ipairs(dict_obj.__json_keys) do
+      local entry = dict_obj[lbl]
+      local desc = entry.description:gsub('|', '&#x7c;')
+      local lessons = entry.lessons
+      local count = #lessons
       if count == 0 then
-        o:write('| [.unused]#' .. std .. '# ')
+        o:write('| [.unused]#' .. lbl .. '# ')
         o:write('| [.unused]#none# ')
         o:write('| [.unused]#' .. desc .. '#\n')
       else
-        o:write('| ' .. std .. ' ')
-        o:write('| ' .. table.concat(entry, ', ', 3) .. ' (' .. count .. ') ')
+        o:write('| ' .. lbl .. ' ')
+        o:write('| ' .. table.concat(lessons, ', ') .. ' (' .. count .. ') ')
         o:write('| ' .. desc .. '\n')
       end
     end

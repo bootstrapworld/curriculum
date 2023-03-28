@@ -164,7 +164,7 @@ Math teachers alike may want their students to confront piecewise functions more
 
 @image{images/age-v-weeks-species-dot.png, 450}
 
-* Open the @opt-starter-file{piecewise-displays} and complete @opt-printable-exercise{pages/species-dot-explore.adoc}.
+* Optional: open the @opt-starter-file{piecewise-displays} and complete @opt-printable-exercise{pages/species-dot-explore.adoc}.
 * What does this new visualization tell us about the relationship between age and weeks?
 * What other analysis would be helpful here?
 
@@ -176,7 +176,7 @@ Math teachers alike may want their students to confront piecewise functions more
 {layout="Investigate"}
 # Using Conditionals
 
-* Open @opt-printable-exercise{species-dot-dr.adoc}
+* Optional: open @opt-printable-exercise{species-dot-dr.adoc}
 * What is the contract for `species-dot`?
 * What is the purpose of `species-dot`?
 * How many examples do we need to write?
@@ -203,7 +203,7 @@ Debrief, and ask students to explain what the code does. Pay special attention t
 {layout="Investigate"}
 # Using Conditionals
 
-- Turn to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{piecewise-animal-images} Starter File.
+- Optional: to @opt-printable-exercise{pages/species-image-explore.adoc} and open the @opt-starter-file{piecewise-animal-images} Starter File.
 - How does using clipart help us to better understand the data?
 - What _risks_ might there be to using clipart in displays?
 - We have seen a lot of different image scatter plots today! What ideas do you have for how `image-scatter-plot` could be used to deepen the analysis of your dataset?

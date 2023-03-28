@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-09
+# last modified 2023-03-14
 
 # echo doing do-lesson-plan.sh $1
 
@@ -46,11 +46,11 @@ otherproglangs="#f"
 proglangfile=${adocfile%/*}/proglang.txt
 
 if test -f "$proglangfile"; then
-  if grep -q codap $proglangfile; then otherproglangs="$otherproglangs \"codap\""; fi
-  if grep -q none $proglangfile; then otherproglangs="$otherproglangs \"none\""; fi
-  if grep -q pyret $proglangfile; then otherproglangs="$otherproglangs \"pyret\""; fi
-  if grep -q spreadsheets $proglangfile; then otherproglangs="$otherproglangs \"spreadsheets\""; fi
-  if grep -q wescheme $proglangfile; then otherproglangs="$otherproglangs \"wescheme\""; fi
+  for proglang in $ALL_PROGLANGS; do
+    if grep -q $proglang $proglangfile; then
+      otherproglangs="$otherproglangs \"$proglang\""
+    fi
+  done
 fi
 
 # touch $containingdirectory/.cached/.index-sidebar.asc

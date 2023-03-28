@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-09
+-- last modified 2023-03-23
 
 -- print('doing make-images-js.lua')
 
@@ -27,7 +27,7 @@ local function expand_some_directives(i, o)
         local link = args[1]
         table.remove(args, 1)
         local text = table.concat(args, ', ')
-        o:write('< href="' .. link .. '">' .. text .. '</a>')
+        o:write('<a href=\'' .. link .. '\'>' .. text .. '</a>')
       else
         o:write('@' .. directive)
       end
