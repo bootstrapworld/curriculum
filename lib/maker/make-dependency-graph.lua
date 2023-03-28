@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-27
+-- last modified 2023-03-28
 
 local graph_file = ...
 
@@ -25,7 +25,9 @@ local function read_list_of_glosses_from_file(f)
   local tbl = {}
   if #lol <= 0 then return '[]' end
   for _,tuple in ipairs(lol) do
-    table.insert(tbl, '      { "vocab": "' .. tuple[1] .. '", "description": "' .. tuple[2] .. '" }')
+    local vocab = tuple[1]
+    local description = tuple[2]:gsub('"', '\\"')
+    table.insert(tbl, '      { vocab: "' .. vocab .. '", description: "' .. description .. '" }')
   end
   return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
 end
