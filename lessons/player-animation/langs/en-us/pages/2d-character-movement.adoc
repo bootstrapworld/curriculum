@@ -5,21 +5,21 @@ _If your game is working and..._
 * _both the `Danger` and `Target` return to the screen_
 * _your `Player` moves up and down with the arrow keys_
 
-_you have all the tools you need to begin this challenge!_
+_... then you have all the tools you need to begin this challenge!_
 
 @vspace{1ex}
 
-[.center]
+[.indentedpara]
 @ifproglang{wescheme}{
 @show{
   (contract "update-danger" '("Number") "Number"
-	"takes in danger's x-coordinate and produces the next one")
+	"consumes danger's x-coordinate and produces the next one")
 }
 }
 @ifproglang{pyret}{
 @show{
   (contract "update-danger" '("Number" "Number") "Number"
-	"takes in danger's x and y-coordinates and produces the next x-coordinate")
+	"consumes danger's x and y-coordinates and produces the next x-coordinate")
 }
 }
 
@@ -44,15 +44,14 @@ Suppose we wanted to write a new function, `update-danger-2` that moves the `DAN
 
 Since an (x, y) coordinate has two Numbers, one idea might be to write the contract this way:
 
-[.center]
+[.indentedpara]
 @show{
   (contract "update-danger-2" '("Number Number") "Number Number"
-	"take in danger's x- and y-coordinate, and produces the next x- and next y-coordinate")
+	"consumes danger's x- and y-coordinate, and produces the next x- and next y-coordinate")
 }
 
 ...But that contract breaks an important rule about functions:
 
-[.lesson-point]
 Given an input, all functions must produce one output!
 
 We need some way to package two Numbers together into a single value.
