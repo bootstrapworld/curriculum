@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-27
+; last modified 2023-03-28
 
 (require json)
 (require file/sha1)
@@ -2397,7 +2397,7 @@
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
                                        (and (eq? encloser '*) (not (memq a '(* / frac expt))))
-                                       (and (eq? encloser '/))
+                                       (and (eq? encloser '/) (not (memq a '(*))))
                                        ))
                          (format "( ~a )" x)
                          x)])
