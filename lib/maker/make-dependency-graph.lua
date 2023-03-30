@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-27
+-- last modified 2023-03-28
 
 local graph_file = ...
 
@@ -15,7 +15,21 @@ local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLAN
 local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
 
 local function read_list_from_file(f)
-  return ('"' .. table.concat(read_json_file(f), '", "') .. '"')
+  local l = read_json_file(f)
+  if #l <= 0 then return '[]' end
+  return ('[ "' .. table.concat(read_json_file(f), '", "') .. '" ]')
+end
+
+local function read_list_of_glosses_from_file(f)
+  local lol = read_json_file(f)
+  local tbl = {}
+  if #lol <= 0 then return '[]' end
+  for _,tuple in ipairs(lol) do
+    local vocab = tuple[1]
+    local description = tuple[2]:gsub('"', '\\"')
+    table.insert(tbl, '      { vocab: "' .. vocab .. '", description: "' .. description .. '" }')
+  end
+  return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
 end
 
 local o = io.open(graph_file, 'w+')
@@ -116,10 +130,10 @@ for _,lesson in ipairs(lessons) do
   o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
   if file_exists_p(keywords_file) then
-    o:write('    keywords: [' .. read_list_from_file(keywords_file) .. '],\n')
+    o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')
   end
   if file_exists_p(glossary_file) then
-    o:write('    glossary: [' .. read_list_from_file(glossary_file) .. '],\n')
+    o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_file) .. ',\n')
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')

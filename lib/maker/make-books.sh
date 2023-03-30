@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-02
+# last modified 2023-03-29
 
 # echo doing make-books.sh
 
@@ -12,14 +12,6 @@ else
     test -d $p || continue
     export COURSE_DIR=$p
     node lib/makeWorkbook.js
-    cd $p/resources/protected
-    for f in workbook-sols workbook-long-sols opt-exercises-sols; do
-      $CP -p $TOPDIR/lib/redirect.html $f.pdf.html
-      $SED -i \
-        -e 's/REDIRECT_TARGET_FILE/'$f.pdf'/g' \
-        $f.pdf.html
-      done
-      cd $TOPDIR
-    done
-    #
+  done
+  #
 fi
