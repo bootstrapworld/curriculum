@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-14
+# last modified 2023-03-30
 
 # echo do-pathway-narrative $1
 
@@ -47,13 +47,3 @@ echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-
 echo $ascfile >> $ADOC_INPUT
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_NARRATIVE_INPUT
-
-glossaryfile=distribution/$NATLANG/courses/$targetpathway/.cached/.pathway-glossary
-
-if test -z "$ASCIIDOCTOR_NODE"; then
-  echo $glossaryfile.asc >> $ADOC_INPUT
-else
-  echo \"$glossaryfile.asc\", >> $ADOC_INPUT
-fi
-
-echo "  " \"$glossaryfile.html\", >> $ADOC_POSTPROC_NARRATIVEAUX_INPUT
