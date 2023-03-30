@@ -27,7 +27,7 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 
 ARGS=
 HELP=
-LASTMOD=2023-01-11 # last modified
+LASTMOD=2023-03-29 # last modified
 PDFMARGIN=0mm
 SED=sed
 CP=cp
@@ -2132,15 +2132,6 @@ function buildpathwayworkbooks() {
   #mkdir -p $TOPDIR/distribution/$NATLANG/courses/$TGTPATHWAY/resources/solution-pages
 
   node $TOPDIR/distribution/$NATLANG/lib/makeWorkbook.js
-
-  cd resources/protected
-  local f
-  for f in workbook-sols workbook-long-sols opt-exercises-sols; do
-    $CP -p $PROGDIR/redirect.html $f.pdf.html
-    $SED -i \
-      -e 's/REDIRECT_TARGET_FILE/'$f.pdf'/g' \
-      $f.pdf.html
-   done
 
 }
 
