@@ -19,9 +19,13 @@
         // get the pathway and lesson list from the URL
         var {pathway, lessons, lesson} = getParams();
 
+        // If the pathway is invalid or missing, set it to false
         if(!pathway || !pathwayTocs[pathway]) {
           pathway = false;
-          lessons = Object.keys(graph);
+          // If lessons is missing, use the entire graph
+          if(!lessons) {
+            lessons = Object.keys(graph);
+          }
         }
         console.log(lessons);
         // get prior data for every lesson in the pathway (or prereqs, if pathway is false)
