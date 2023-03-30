@@ -77,7 +77,7 @@ var starterFiles = {
   "mood-generator": {
     "title": "Mood Generator Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1nTf5h4SJ3KCz2KxqH-0wsYU9cCbu5RkZ"
+      "url": "https://code.pyret.org/editor#share=1LMJSRMSdupZHPDYqxE-KM0HGx6qAkAHw"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=BheDrtcEvA"
@@ -86,7 +86,7 @@ var starterFiles = {
   "mood-generator-ask": {
     "title": "Alternate Version of the Mood Generator Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1YkCJ8k1zYqdhwk8R1BGUk0hWS0HXxc_e"
+      "url": "https://code.pyret.org/editor#share=1LnIVlATup0Dl6KD0o4ab6gnXB8WMppCz"
     }
   },
   "red-shape": {
