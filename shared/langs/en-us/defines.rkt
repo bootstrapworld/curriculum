@@ -37,6 +37,17 @@
       "\n"
       "[.pathway_external_links]\n") o))
 
+<<<<<<< HEAD
+(define (print-link-to-glossary course o)
+  (display
+    (string-append
+      "\n- link:../../Glossary.shtml?pathway=" course "[Glossary]\n"
+      "-- A list of vocabulary words used in this pathway.\n"
+      "We also provide a link:../../lib/bilingual-glossary.html[bilingual glossary],\n"
+      "which defines all vocabulary words across our lessons in English and Spanish.") o))
+
+=======
+>>>>>>> fall2023
 (define (print-teach-remotely o)
   (display
     (string-append
