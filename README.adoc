@@ -22,13 +22,13 @@ pathways.)
 
 The subdirectories `lib` and `shared` contain the components of
 the program used to generate web pages and PDFs from the
-`lessons` and `pathways`. `shared` contains directories named for
+`lessons` and `pathways`.  For instance, `lib` contains a general glossary of terms
+used in the lessons: `glossary-terms.json`. `shared` contains directories named for
 the various natural languages used for instruction, e.g., `en-us`
 for US English, and `es-mx` for Mexican Spanish. Inside these
 dwell centralized educational-standards dictionaries, e.g.,
-`standards-csta-dictionary.rkt` for a list of standards defined
-by the CSTA. Also present is a general glossary of terms used in
-the lessons: `glossary-terms.rkt`.
+`standards/standards-csta-dictionary.json` is a list of standards defined
+by the CSTA. 
 
 The file `Makefile` is used (via `make`) to
 constructs the web pages and PDFs a directory called
@@ -43,8 +43,8 @@ files, with a sample lesson and sample pathway:
       <language-independent implementation files>
       *.rkt
       *.css
-      glossary-terms.rkt
-      glossary-terms-ss.rkt
+      glossary-terms.json
+      glossary-terms-ss.json
     shared/langs/
       en-us/
         <language-dependent implementation files, such as>
@@ -53,9 +53,9 @@ files, with a sample lesson and sample pathway:
         Badges/*.{jpg,png}
         docroot/*.{html,png}
         images/*.png
-        practices/*.rkt
-        standards/*.rkt
-        textbooks/*.rkt
+        practices/*.json
+        standards/*.json
+        textbooks/*.json
     lessons/
       sample-lesson/
         langs/
@@ -676,7 +676,7 @@ Glossary items are annotated with the directive `@vocab`. E.g.,
   @vocab{function}
 
 In a lesson plan, such items are searched in the main glossary
-file, `lib/glossary-terms.rkt`, and are inserted as lists at the
+file, `lib/glossary-terms.json`, and are inserted as lists at the
 head of the document.
 
 For a pathway narrative, the glossary items from all its
@@ -686,36 +686,34 @@ page.
 
 There can be auxiliary glossary files in `lib/` that can be used
 to _shadow_ the main glossary for particular lessons. For now,
-the only such shadowing glossary file is `glossary-terms-ss.rkt`,
+the only such shadowing glossary file is `glossary-terms-ss.json`,
 used for Social-Studies lessons.
 
 In order for a lesson `lessonA` to use a shadowing glossary, its
-directory, i.e., `lessons/lessonA/langs/en-us`, should containing a
+directory, i.e., `lessons/lessonA/langs/en-us`, should contain a
 file `shadow-glossary.txt` that contains the name of the
 shadowing glossary file.
 
-===== Syntax of the glossary-terms.rkt file
+===== Syntax of the glossary-terms.json file
 
-The `glossary-terms.rkt` file (and any shadowing files) defines and
-exports the
-Scheme variable `+*glossary-list*+`, whose value is a list of glosses. Each
-gloss is itself a list of sublists, where the sublist contains three
-elements:
+The `glossary-terms.json` file (and any shadowing files) defines a JSON
+object that is a list of glosses.
+Each
+gloss is an object with keys for the various natural languages in use
+(for now, `"en-us"` and `"es-mx"`). The value for each such natlang is an
+object with the following mappings:
 
-1.  a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
-2. the glossed item. This can be:
-** a string, e.g., `"variable"`
-** a list of strings, meant to be grammatically related items, e.g., `("axis"
-"axes")`. Either string can be used in the source (whatever fits the
-prose flow), but the item in the generated glossary will be the first
-item
-** a list of sublist of strings, where each of sublist of strings is
-internally
-grammatically related, but the different sublists are quite different
-terms, e.g., `(("mean") ("average" "ave" "avg"))`. The word in the source is used
-to find the relevant sublist, and _its_ first item is used in the
-generated glossary
-3. a string specifying the definition for the glossed item
+- `"keywords"`, which specifies a list of sublists, each sublist listing
+grammatically-related strings. Any of these can be used in the source
+(whatever fits the prose flow), but the item in the generated glossary
+will be the first string in the sublist.
++
+An example value could be `[ ["mean"], ["average" "ave" "avg"] ]`. The
+word in the source is used to find the relevant sublist, and _its_ first
+item is used in the generated glossary.
+
+- \"description\", the definition for the glossed item.
+
 
 [TIP]
 --
@@ -937,5 +935,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-03-25
+// last modified 2023-03-30
 // vi:tw=72
