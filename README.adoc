@@ -45,6 +45,8 @@ files, with a sample lesson and sample pathway:
       *.css
       glossary-terms.json
       glossary-terms-ss.json
+      maker/
+        <build-related makefiles and helper scripts>
     shared/langs/
       en-us/
         <language-dependent implementation files, such as>
@@ -454,25 +456,27 @@ directory `shared/langs/en-us/standards/'. In it are
 dictionaries for the
 various standards. For now, these are:
 
-  standards-cc-ela-dictionary.rkt
-  standards-cc-math-dictionary.rkt
-  standards-cc-states-dictionary.rkt
-  standards-csta-dictionary.rkt
-  standards-ia-dictionary.rkt
-  standards-k12cs-dictionary.rkt
-  standards-ma-dictionary.rkt
-  standards-ngss-dictionary.rkt
-  standards-ok-dictionary.rkt
+  standards-cc-ela-dictionary.json
+  standards-cc-math-dictionary.json
+  standards-cc-states-dictionary.json
+  standards-csta-dictionary.json
+  standards-ia-dictionary.json
+  standards-k12cs-dictionary.json
+  standards-ma-dictionary.json
+  standards-ngss-dictionary.json
+  standards-ok-dictionary.json
 
 Each dictionary entry associates an educational standard label with its description
 and all the lessons that comply with it. E.g., the following is an entry in the
-dictionary file `standards-cc-math-dictionary.rkt`
+dictionary file `standards-cc-math-dictionary.json`
 
-    ("6.EE.B"
-     "Reason about and solve one-variable equations and inequalities."
-     "inequalities1-simple"
-     "inequalities2-compound"
-     )
+    "6.EE.B": {
+       "description": "Reason about and solve one-variable equations and inequalities.",
+       "lessons": [
+          "inequalities1-simple",
+          "inequalities2-compound"
+        ]
+     }
 
 It associates the label `6.EE.B` with the description `Reason about and
 solve one-variable equations and inequalities`, and says that the two
