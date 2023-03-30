@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>Glossary</title>
+
+  <link rel="stylesheet" href="lib/curriculum.css" />
+    <script src="lib/bootstraplesson.js"></script>
+    <script src="lib/dictionaries.js"></script>
+    <script src="dependency-graph.js"></script>
+    <script src="pathway-tocs.js"></script>
+    <script>var pathway;</script>
+    <script type="text/javascript">
+      function populateGlossary() {
+
+        // get the pathway and lesson list from the URL
+        var {pathway, lessons, lesson} = getParams();
+
+        if(!pathway || !pathwayTocs[pathway]) {
+          pathway = false;
+          lessons = Object.keys(graph);
+        }
+        console.log(lessons);
+        // get prior data for every lesson in the pathway (or prereqs, if pathway is false)
+        const priorData = computeTransitiveData(false, pathway, lessons);
+        const parentDOM = document.getElementById('glossary');
+        
+        console.log(
+          "pathway is", pathway, 
+          "lesson is", lesson,
+          "pathwayLessons are", pathwayTocs[pathway], 
+          "prior lessons are", priorData.titles,
+          "prior data is", priorData);
+
+        // collapse the glossary into a single dictionary
+        // use an object to remove duplicates
+        const dictionary = Object.values(priorData.glossary).reduce((dict, v) => {
+          dict[v.vocab] = v.description;
+          return dict;
+        }, {})
+
+        // sort alphabetically, then for each one add the appropriate DOM
+        Object.keys(dictionary).sort((a,b) => a.localeCompare(b))
+          .forEach( key => {
+          const dt = document.createElement('dt');
+          dt.classList.add('hdlist1');
+          dt.innerHTML = key;
+          parentDOM.appendChild(dt);
+          const dd = document.createElement('dd');
+          dd.innerHTML = "<p>" + dictionary[key] + "</p>";
+          parentDOM.appendChild(dd);
+        });
+
+      }
+
+    </script>
+
+</head>
+<body class="narrativepage article" onload="populateGlossary()">
+  <!--#include virtual="/menubar.ssi"-->
+  <div id="body">
+    <div id="header">
+      <h1>Glossary</h1>
+    </div>
+    <div id="content">
+      <div class="paragraph">
+        <p><strong>Note:</strong> We also provide a <a href="lib/bilingual-glossary.html">bilingual glossary</a>, which defines all vocabulary words across our lessons in English and Spanish.</p>
+        <div class="dlist glossary">
+          <dl id="glossary">
+            <!-- dictionary entries go here -->
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
