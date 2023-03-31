@@ -9,28 +9,28 @@ td, #content .forceShading { font-size: 1rem !important; }
 </style>
 ++++
 
-Type each expression (left) below into the editor and match it to the image it creates (right).
+Type each expression (left) below into the @starter-file{editor} and match it to the image it creates (right).
 
-[.FillVerticalSpace, cols="^.^20a,^.^1,3,^.^1,^.^8a",stripes="none",grid="none",frame="none", options="header"]
+[.FillVerticalSpace, cols="^.^18a,^.^2,3,^.^2,^.^8a",stripes="none",grid="none",frame="none", options="header"]
 |===
 | Expression
 |||
 | Image
 
 | @show{(code '(triangle-sas 120 45 70 "solid" "black"))}
-| *@n* || *A*
+| *@n* @ifsoln{-D} || *A*
 | @centered-image{../images/sas-120-90-70.png}
 
 | @show{(code '(triangle-sas 120 90 70 "solid" "black"))}
-| *@n* || *B*
+| *@n* @ifsoln{-A} || *B*
 | @centered-image{../images/sas-120-135-70.png}
 
 | @show{(code '(triangle-sas 120 135 70 "solid" "black"))}
-| *@n* || *C*
+| *@n*@ifsoln{-B} || *C*
 | @centered-image{../images/sas-70-135-120.png}
 
 | @show{(code '(triangle-sas 70 135 120 "solid" "black"))}
-| *@n* || *D*
+| *@n*@ifsoln{-C} || *D*
 | @centered-image{../images/sas-120-45-70.png}
 |===
 
