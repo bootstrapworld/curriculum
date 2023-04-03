@@ -21,6 +21,11 @@
 
 [.pathway_external_links]\n"))
 
+(define (print-link-to-glossary course o)
+  (fprintf o "\n- link:../../Glossary.shtml?pathway=~a[Glossary]\n" course)
+  (fprintf o "-- Check here for the technical terms and concepts used
+  in this material.\n"))
+
 (define (print-link-to-standards course o)
   (fprintf o "\n- link:./pathway-standards.html?pathway=" course "[Standards Alignment]\n")
 
@@ -72,6 +77,7 @@ para otros maestros de Bootstrap? Estos foros son el lugar para hacerlo.\n")
   )
 
 (define (print-other-resources course o)
+  (print-link-to-glossary course o)
   (print-link-to-standards course o)
   (print-link-to-student-workbook o)
   (print-link-to-teacher-resources course o)
