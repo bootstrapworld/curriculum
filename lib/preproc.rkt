@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-27
+; last modified 2023-03-29
 
 (require json)
 (require file/sha1)
@@ -1200,11 +1200,10 @@
 
           (when (file-exists? lesson-glossary-file)
             ;(printf "~a exists i\n" lesson-glossary-file)
-            (for ([x (call-with-input-file lesson-glossary-file read-json)])
-              (let ([s (assoc-glossary x)])
-                (when (and s (not (member s *glossary-items*)))
-                  (set! *glossary-items*
-                    (cons s *glossary-items*))))))
+            (for ([s (call-with-input-file lesson-glossary-file read-json)])
+              (unless (member s *glossary-items*)
+                (set! *glossary-items*
+                  (cons s *glossary-items*)))))
           ;(printf "took care of pw glossary~n")
           )
     )
@@ -1558,7 +1557,7 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/workbook-sols.pdf.html[Workbook (w/Solutions)]")
+                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
@@ -2280,12 +2279,13 @@
   (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
     (lambda (op)
       (let ([first? #t])
-        (display "[" op)
+        (display "[\n" op)
         (for ([s *glossary-items*])
           (cond [first? (set! first? #f)]
                 [else (display ",\n" op)])
-          (fprintf op "  ~s" (first s)))
-        (display " ]\n" op)))
+          (fprintf op "  [~s, ~s]" (first s) (second s))
+          )
+        (display "\n]\n" op)))
     #:exists 'replace))
 
 ;coe
@@ -2396,8 +2396,9 @@
                                             (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* frac expt))))
-                                       (and (eq? encloser '/))))
+                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))
+                                       (and (eq? encloser '/) (not (memq a '(*))))
+                                       ))
                          (format "( ~a )" x)
                          x)])
             ; (printf "infix ret'd ~s\n" ans)

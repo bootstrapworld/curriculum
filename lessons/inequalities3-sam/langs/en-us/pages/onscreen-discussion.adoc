@@ -8,7 +8,7 @@
 
 @show{(code '(define (safe-top? y) (<= y 510)))}
 
-@show{(code '(define (onscreen? y) (and (safe-bottom y) (safe-top? y))))}
+@show{(code '(define (onscreen? y) (and (safe-bottom? y) (safe-top? y))))}
 --
 
 @vspace{2ex}
@@ -26,19 +26,31 @@
 
 @vspace{2ex}
 
-@n Nokosee and Sabra have different strategies for keeping Sam on the screen. Do they both work?
+@n Nokosee and Sabra have different strategies for keeping Sam on the screen. How does Nokosee's strategy work?
 
-@vspace{15ex}
+@ifsoln{Nokosee's @show{(code '(onscreen? y))} function reuses his definitions of @show{(code '(safe-bottom? y))} and @show{(code '(safe-top? y))}.}
+
+@vspace{10ex}
+
+
+@n How does Sabra's strategy work?
+
+@ifsoln{Sabra doesn't reuse her defined functions; instead, she provides @show{(code '(onscreen? y))} with specific booleans.}
+
+@vspace{10ex}
+
 
 @n What's an advantage of Nokosee's strategy?
 
-@vspace{15ex}
+@ifsoln{Nokosee's strategy is more flexible. We won't need to change it if we decide to alter @show{(code '(safe-bottom? y))} and @show{(code '(safe-top? y))}.}
+
+@vspace{10ex}
 
 @n What's an advantage of Sabra's strategy?
 
-@vspace{15ex}
+@ifsoln{Sabra's strategy shows exactly what y-coordinates we have chosen for @show{(code '(safe-bottom? y))} and @show{(code '(safe-top? y))}.}
+
+@vspace{10ex}
 
 @n Which strategy do you prefer? Why?
-
-@vspace{15ex}
 

@@ -9,7 +9,7 @@ td { padding: 0 0.5rem !important; }
 </style>
 ++++
 
-The distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(code '(line-length x1 x2))}. The distance between @math{y_{1}} and @math{y_{2}} is computed by @show{(code '(line-length y1 y2))}. Below is the equation to compute the hypotenuse of a right triangle with those amount for legs:
+The distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(code '(line-length x2 x1))}. The distance between @math{y_{2}} and @math{y_{1}} is computed by @show{(code '(line-length y2 y1))}. Below is the equation to compute the hypotenuse of a right triangle with legs the lengths of those distances:
 
 [.center.big]
 @math{\sqrt{line\mbox{-}length(x_{2}, x_{1})^2 + line\mbox{-}length(y_{2}, y_{1})^2}}
@@ -27,12 +27,14 @@ Suppose your player is at *(0, 2)* and a character is at *(4, 5)*. What is the d
 | _(x-value of 2nd point)_
 | _(y-value of 2nd point)_
 
-| @vspace{2ex}
+| @vspace{4ex}
 |
 |
 |
 
 |===
+
+@vspace{1ex}
 
 The equation to compute the distance between these points is:
 
@@ -46,7 +48,7 @@ _Hint: In our programming language @show{(code 'sqr)} is used for @math{x^2} and
 @vspace{1ex}
 
 [.center]
-@image{../images/coe-distance.png}
+@image{../images/coe-distance2.png, 550}
 
 @vspace{1ex}
 
@@ -58,4 +60,4 @@ _Hint: In our programming language @show{(code 'sqr)} is used for @math{x^2} and
 @fitb{}{}
 }
 
-@showsoln{(code '(sqrt (+ (sqr (line-length x1 x2)) (line-length x1 x2))))}
+@showsoln{(code '(sqrt (+ (sqr (line-length 4 0)) (line-length 5 2))))}
