@@ -1071,7 +1071,7 @@
                 ".question_type_checked"
                 ".question_type"))])
     (string-append
-      "What type of question is this? (circle one)"
+      "Question type (circle one):"
       ; (hspace "1.5em")
       (format " [~a]##Lookup##" (style-question-type "lookup"))
       ; (hspace "1.5em")
