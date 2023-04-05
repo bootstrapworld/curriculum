@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-29
+; last modified 2023-04-05
 
 (require json)
 (require file/sha1)
@@ -1715,8 +1715,8 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (add-starter-file lbl)
-                                      (let ([p (hash-ref c *proglang-sym* #f)])
+                                      (let ([newly-added? (add-starter-file lbl)]
+                                            [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
@@ -1731,9 +1731,8 @@
                                                            title
                                                            ", window=\"_blank\""
                                                            )])
-                                                  (unless (member
-                                                            lbl
-                                                            *do-not-autoinclude-in-material-links*)
+                                                  (when (and newly-added?
+                                                             (not (member lbl *do-not-autoinclude-in-material-links*)))
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
@@ -2506,8 +2505,9 @@
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
 
 (define (add-starter-file sf)
-  (unless (member sf *starter-files-used*)
-    (set! *starter-files-used* (cons sf *starter-files-used*))))
+  (cond [(member sf *starter-files-used*) #f]
+        [else (set! *starter-files-used* (cons sf *starter-files-used*))
+              #t]))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]
