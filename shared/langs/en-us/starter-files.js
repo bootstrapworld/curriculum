@@ -137,7 +137,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz"
     },
     "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FVaAX6CAxsz6Eq4wDnw5A%2Ffile.json"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmTGZlaiPPm70GMJUmj6E%2Ffile.json"
     }
   },
   "expanded-animals": {
@@ -587,7 +587,7 @@ var starterFiles = {
   "strings-n-numbers": {
     "title": "Strings and Numbers Starter File",
     "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FB7FL10A34V4jWPdKEmxI%2Ffile.json"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
     }
   }
 }
