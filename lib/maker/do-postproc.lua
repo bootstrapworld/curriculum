@@ -293,7 +293,7 @@ function postproc(fhtml_cached, tipe)
   };
   </script>
 ]=]);
-      o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/es5/tex-chtml-full.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --

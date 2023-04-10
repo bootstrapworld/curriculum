@@ -44,8 +44,9 @@ node_modules/mathjax:
 
 distribution/$(NATLANG)/extlib/mathjax: node_modules/mathjax
 	@mkdir -p $@
-	@$(CP) -upr node_modules/mathjax/* $@
-	@rm -fr $@/[CLRptu]*
+	@mkdir -p $@/output
+	@$(CP) -upr node_modules/mathjax/es5/output/chtml $@/output/
+	@$(CP) -upr node_modules/mathjax/es5/tex-chtml-full-speech.js $@/
 
 ###############################################################################
 
