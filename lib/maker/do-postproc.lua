@@ -275,7 +275,6 @@ function postproc(fhtml_cached, tipe)
       o:write(
 [=[<script>
   MathJax = {
-    loader:  { load: ['[tex]/enclose'] },
     options: { enableMenu: false, },
     tex:     { 
       inlineMath: [['$$', '$$'], ['\\(', '\\)']], 
