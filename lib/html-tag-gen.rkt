@@ -94,10 +94,10 @@
     (string-append
       (enclose-span ".gdrive-only" pme)
       (enclose-span ".begin-ignore-for-gdrive" "")
-      "%CURRICULUMSCRIPT%"
-      "%BEGINCURRICULUMSCRIPT%\\displaystyle "
+      "%CURRICULUMMATHJAXMARKER%"
+      "\\displaystyle "
       e
-      "%ENDCURRICULUMSCRIPT%"
+      "%CURRICULUMMATHJAXMARKER%"
       (enclose-span ".end-ignore-for-gdrive" "")
       )))
 
