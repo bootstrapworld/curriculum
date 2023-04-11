@@ -1071,12 +1071,9 @@
                 ".question_type_checked"
                 ".question_type"))])
     (string-append
-      "Question type (circle one):"
-      ; (hspace "1.5em")
+      "*Question Type*\n\n(circle one):"
       (format " [~a]##Lookup##" (style-question-type "lookup"))
-      ; (hspace "1.5em")
       (format " [~a]##Arithmetic##" (style-question-type "arithmetic"))
-      ; (hspace "1.5em")
       (format " [~a]##Statistical##" (style-question-type "statistical"))
       "\n\n")))
 
