@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # created 2023-01-20
-# last modified 2023-03-14
+# last modified 2023-04-11
 
 function adjustproglangsubdirs() {
   local d=$1
@@ -29,7 +29,7 @@ function shadowcopydir() {
   for f in "$srcdir"/*; do
     local g=$(basename "$f")
     if test -f "$f"; then
-      $CP -pu "$f" "$tgtdir"
+      $CP -p "$f" "$tgtdir"
     elif test -d "$f"; then
       shadowcopydir "$f" "$tgtdir"/"$g"
     fi
