@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# created 2023-01-20
 # last modified 2023-04-11
 
 function adjustproglangsubdirs() {
@@ -9,6 +8,22 @@ function adjustproglangsubdirs() {
 
   test -d "$d"/"$pl" && $CP -p "$d"/"$pl"/* "$d"
 
+  if test "$pl" != pyret -a "$pl" != none; then
+    local lang
+    for lang in $ALL_PROGLANGS; do
+      test -d "$d"/$lang && rm -fr "$d"/$lang
+    done
+  fi
+
+  local subdir
+  for subdir in "$d"/*; do
+    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
+  done
+}
+
+function scrubproglangsubdirs() {
+  local d=$1
+
   local lang
   for lang in $ALL_PROGLANGS; do
     test -d "$d"/$lang && rm -fr "$d"/$lang
@@ -16,7 +31,7 @@ function adjustproglangsubdirs() {
 
   local subdir
   for subdir in "$d"/*; do
-    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
+    test -d "$subdir" && scrubproglangsubdirs "$subdir"
   done
 }
 
