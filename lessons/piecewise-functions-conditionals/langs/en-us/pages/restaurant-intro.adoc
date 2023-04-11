@@ -39,19 +39,25 @@ observations in the tables below.*
 --
 *I notice...*
 
-@ifsoln{__(sample responses)
-a function called `cost`, brackets, a function called `string=?`, numbers that look like prices, a contract and purpose statement, pizza toppings__}
+@ifsoln{(sample responses)
+a function called `cost`, brackets, a function called @show{(code 'string=?)}, numbers that look like prices, a contract and purpose statement, pizza toppings}
 --
 |*I wonder...*
 
-@ifsoln{_(sample responses) What is `cond`? Is this all that’s on the menu? Can I add different toppings? How does the ‘cost’ function work? What are the brackets for? What does `string=?` do?_}
+@ifsoln{(sample responses) What is @ifproglang{wescheme}{`cond`} @ifproglang{pyret}{`if`}? Is this all that’s on the menu? Can I add different toppings? How does the ‘cost’ function work? What are the brackets for? @ifproglang{wescheme}{What does `string=?` do?}}
 
 |*Familiar things I see in the code*
 
-@ifsoln{_define, contract and purpose statement, Numbers and Strings, functions_}
+@ifsoln{define, contract and purpose statement, Numbers and Strings, functions}
 
 |*Unfamiliar things I see in the code*
 
-@ifsoln{_cond, string=?, [], else_}
+@ifproglang{wescheme}{
+  @ifsoln{cond, string=?, [], else}
+}
+
+@ifproglang{pyret}{
+  @ifsoln{if, then, string-equals, [], else}
+}
 
 |===
