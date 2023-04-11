@@ -21,19 +21,31 @@
 @material-links
 
 |===
+
 == Sorting by Changing a Table @duration{10 minutes}
 
 === Overview
-Students _change a table,_ sorting it by a particular column.
+Students _change a table,_ sorting it by a particular column. Then, students learn a new and more dynamic way of sorting... with the Sort Transformer!
 
 === Launch
 
-Open the @starter-file{animals} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
+[.lesson-instruction]
+- Open the @starter-file{animals} in CODAP.
+- How many animals' names start with the letter S?
+** _Once you notice students deep in concentration, looking for and tallying animals with S-names, move on to the next question..._
+- What would make it easier to figure out how many animals' names start with the letter S?
 
+Explain to students that, in this lesson, they will learn two ways of sorting. The first way is to actually alter the original table. The second way is to create a transformed copy of the original table, which automatically has the animals sorted.
+
+[.lesson-instruction]
+- When manipulating data, what do you think might be some advantages and disadvantages to changing the actual table?
+** _Advantage: It's quick, easy and intuitive. Disadvantage: If I want to refer to the previous arrangement of animals for any reason... it might no longer exist._
+- What are some advantages and disadvantages to creating a new modified table?
+** _Advantage: I will be able to refer back to my old table, and maybe even compare the new table with the old table._
 
 === Investigate
 
-Student work in groups or pairs. You will direct them to sort various columns on the table by clicking the attribute name and then selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.
+ Student work in groups or pairs. You will direct them to sort various columns on the table by clicking the attribute name and then selecting from the drop-down menu either `Sort Ascending` or `Sort Descending`.
 
 [.lesson-instruction]
 - Let's sort the animals alphabetically by name and see if we get the same answer as we did before! _(The image below shows where to click to sort the animals alphabetically by name.)_
@@ -97,3 +109,80 @@ Students might observe that new and modified tables created by Transformers are 
 ** _Transformers can be named and saved for future use. Transformers create a modified copy of a table rather than altering the original dataset._
 - When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?
 ** _If we are experimenting with a dataset and want to preserve the original table, it would make more sense to use a Transformer._
+
+
+
+== Filtering Tables @duration{20 minutes}
+
+=== Overview
+Students learn how to _filter_ tables by removing Rows.
+
+=== Launch
+
+[.lesson-roleplay]
+--
+Announce to the class that you are going to select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room. (You may need to choose your students strategically. The demonstration, for instance, requires at least one student who wears glasses.)
+
+Tell the class that you are going to select a volunteer who will play the role of… The Filter Transformer!
+
+Hand the Filter Transformer a card from the @opt-printable-exercise{pages/expression-cards.adoc, Expression Cards} set.  Publicly tell that student that this is __their expression__.  Instruct Filter to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table" (line of students), but to keep that information a secret from the other students. Instruct them to review their expression's *Contract* and *Purpose Statement*, but to keep that information a secret.
+--
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+| @span{.title}{Contracts and Purpose Statements}
+
+A *contract* is a statement of the _domain_ (input) and _range_ (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+
+A *Purpose Statement* is a way of describing what an expression does. A sample purpose statement looks like this: "consumes an animal, and produces true if the animal is fixed."
+
+|===
+
+
+[.lesson-roleplay]
+--
+Explain to the class that the Filter Transformer will walk from one student to the next, referring to the expression (on the card) in order to determine if each student should step forward or step backwards.
+
+Here’s how that might look if the Filter Transformer chose an expression card with, "Do they wear glasses?"
+
+- _Filter Transformer stands in front of Student 1 and checks if they are wearing glasses._
+- *Filter Transformer to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
+- _Filter Transformer stands in front of Student 2 and checks if they are wearing glasses._
+- *Filter Transformer to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
+--
+
+Have your Filter Transformer volunteer go through all their peers, applying their card to each one. Help students notice that the `Filter` Transformer takes an _expression_, and produces a new table containing only rows for which the expression returns `true`.
+
+[.lesson-instruction]
+- Based on who sat and who stayed, what was on the card?
+** _The Transformer consumes a student and produces `true` if they are wearing glasses._
+
+=== Investigate
+
+[.lesson-instruction]
+- Open the @starter-file{animals} in CODAP.
+- Complete the worksheet @printable-exercise{pages/codap-filter.adoc} to explore the functionality of the `Filter` Transformer.
+
+@right{@image{images/filter-transformer.png,300}}
+
+As they complete the worksheet, encourage students to pay close attention while entering information into the `Transformer` plugin (pictured to the right). For instance:
+
+- What happens if they forget to select a dataset from the drop-down menu?
+- When does the text color change?
+- Does CODAP mind if spelling is off?
+- What happens when students save?
+- Why might a clear, specific purpose statement be useful?
+- When do we see additional datasets added to the drop-down menu of datasets to filter?
+
+Note that `Age (years)` - or any attribute that is two or more words - needs to be typed within backticks ` ` in order for CODAP to recognize it as an attribute. Ensure that students are aware that the backtick key is in the upper left corner of the keyboard.
+
+=== Synthesize
+Debrief with students. Some guiding questions on filtering:
+
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Trasnformer's _expression_?
+** _The `Filter` Transformer walks through the table's rows, applying the expression to each row - then producing a new table containing only rows for which the expression returns `true`._
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+** _We could use the `Filter` Transformer to produce two new tables - one with only cats, and one with only dogs. We could then analyze and compare the weeks to adoption for each species._
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+** _We would filter out cats where `Age (years) > 5`._
