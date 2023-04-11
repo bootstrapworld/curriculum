@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-04-10
+-- last modified 2023-02-28
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -125,6 +125,10 @@ function postproc(fhtml_cached, tipe)
     x = x:gsub('(%%ENDCURRICULUMCOMMENT%%)<.p>', '%1')
     x = x:gsub('%%CURRICULUMCOMMENT%%', '<!-- ')
     x = x:gsub('%%ENDCURRICULUMCOMMENT%%', '\n-->')
+    --
+    x = x:gsub('%%CURRICULUMSCRIPT%%', '$$')
+    x = x:gsub('%%BEGINCURRICULUMSCRIPT%%', '')
+    x = x:gsub('%%ENDCURRICULUMSCRIPT%%', '$$')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
