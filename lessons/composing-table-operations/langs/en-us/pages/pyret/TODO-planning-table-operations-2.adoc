@@ -1,4 +1,4 @@
-= Planning Table Operations
+= Planning Table Operations (2)
 ++++
 <style>
 .literalblock pre { 0.5em 0 !important; }
@@ -15,7 +15,8 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 (define exp1 '(filter (filter t is-young) is-fixed))
 (define exp2 '(sort (filter (filter t is-female) is-fixed) "age" true))
 (define exp3 '(bar-chart (filter (filter t is-female) is-fixed) "age"))
-(define exp4 '(pie-chart (filter (filter t is-young) is-fixed) "sex"))
+(define exp4 '(pie-chart (filter (filter (build-column t "kilos" kilograms) is-heavy) is-fixed) "sex"))
+(define exp5 '(box-plot (build-column (filter (filter t is-female) is-fixed) "kilos" kilograms) "kilos"))
 }
 
 The table `t` below represents four animals from the shelter:
@@ -33,7 +34,7 @@ You have the following functions defined below (read them _carefully!_):
 
   fun is-female(r): r["sex"] == "female"  end
   fun kilograms(r): r["pounds"] / 2.2     end
-  fun is-young(r):  r["age"] < 4         end
+  fun is-heavy(r):  r["kilos"] > 25       end
   fun is-fixed(r):  r["fixed"]           end
 
 For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
@@ -57,7 +58,11 @@ For each prompt on the left, draw the Circle of Evaluation that will produce the
 | @showsoln{(coe exp3)}
 
 | @n
-| Produce a pie-chart for all young, fixed animals, showing the distribution of `sex`
+| Produce a pie-chart for all heavy, fixed animals, showing the distribution of `sex`
 | @showsoln{(coe exp4)}
+
+| @n
+| Produce a box-plot for all fixed, female animals, showing the distribution of `kilos`
+| @showsoln{(coe exp5)}
 
 |===
