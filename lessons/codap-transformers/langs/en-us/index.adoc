@@ -1,0 +1,128 @@
+= Introduction to Transformers: Filter
+@description{Students learn two different ways to filter - by manually deleting table rows, and by using a _Transformer_ to build and modify a copy of the table.}
+
+[@lesson-intro-table]
+|===
+@lesson-prereqs{codap-bar-charts}
+| Lesson Goals
+| Students will be able to...
+
+* write a contract, purpose statement, and expression
+* use the `Filter` Transformer order the Animals Dataset by a number of criteria
+
+| Student-facing Lesson Goals
+|
+
+* Let’s learn how transform one table into another.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+|===
+
+
+
+== Filtering Tables @duration{20 minutes}
+
+=== Overview
+Students learn how to _filter_ tables by removing Rows.
+
+=== Launch
+
+Sometimes we want to filter the rows of a table by some criteria. In our animals dataset, for example, we might want to filter the table to show only the rows for dogs.
+
+[.lesson-instruction]
+- Open @starter-file{animals}.
+- Using what you've learned about deleting rows, go ahead and create a table that includes _only dogs_.
+** _In case students need a reminder, they can select the green index number for a row (left-most column) and then select "Delete Case" from the drop-down menu that appears._
+- Raise your hand when you are finished. How many dogs are in our dataset?
+
+Debrief with students about what they just experienced. Invite a few students to summarize the work they just completed. You might even want to paraphrase for students the process that they just completed; this will prime them to better understand exactly what is going on in CODAP when that process is automated. A paraphrase would sound something like what follows.
+
+[.lesson-instruction]
+--
+To create a table with only dogs, here's what we did:
+
+- We looked at the first row.
+- We determined if `species = "dog"` was TRUE (in which case, we kept the row!) or FALSE (in which case, we got rid of it!).
+- We moved on to the second row.
+- Again, we determined if `Species = "dog"` was TRUE or FALSE.
+- We repeated this process over and over, until we had inspected the entire table.
+--
+
+Check in with students. Did this feel efficient or like a good use of our time? Some might already be wishing for a simpler way.
+
+=== Investigate
+
+[.lesson-instruction]
+- Now I want everyone to create _two_ filtered tables: one table with just dogs, and one table with all pets that weigh more than 50 pounds.
+- I'd like these tables to exist side-by-side within the same CODAP file, so we can discuss them together.
+** _Allow students to give this task a try, but cut them off after a few minutes._
+
+Students will likely run into major difficulties. Some may attempt to "undo" previous actions; some may hit "refresh" to reload the original file (effective, if they haven't saved); some may attempt to create a new table within the same file that they repopulate manually.
+
+The goal here is to manufacture a situation that will propel students to recognize the need for some as-yet unfamiliar tools. These tools will require a bit of practice to master, but will enable much more powerful data manipulation!
+
+
+=== Synthesize
+
+- What problems did you encounter when trying to manually filter the Animals dataset?
+- What strategies did you try in order to create two side-by-side filtered tables, one with just dogs and one with all pets that weigh more than 50 pounds?
+
+
+== Filtering Tables with Transformers @duration{20 minutes}
+
+Enter: _Transformers_!
+
+When students apply a Transformer, that Transformer creates a _copy_ of the original dataset with whatever modifications the student has specified - for instance, `species = "dog"`. The students simply needs to provide the Transformer with some key information, and select `Apply.`
+
+The original dataset is always preserved - meaning there is no need for students to undo their actions, or to re-open a saved dataset to consider a different configuration. The Transformers plugin enables easy, low-stakes "what if?" exploration to encourage open-ended investigation.
+
+[.lesson-instruction]
+--
+- Login to @starter-file{animals}.
+- Access "Plugins," then select "Transformers."
+@centered-image{images/plugins-location.png,  450}
+- What different Transformers are available?
+- What do you Notice? What do you Wonder?
+** _Student responses will vary. The actual Transformer interface - once a Transformer is selected - may be at first overwhelming for some. Urge students instead to explore the menu of options._
+- Now, find _three_ Transformers where you think you can guess what they do. What are they?
+--
+
+Invite students to share their observations. Build enthusiasm for the new possibilities that are now available to students!
+
+=== Investigate
+
+[.lesson-instruction]
+- Open the @starter-file{animals} in CODAP.
+- Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer. We will pause to work on questions 3 and 4 together.
+
+Questions 3 and 4 which are all about the @vocab{contract} and @vocab{purpose statement} for this expression. You will want to devote a few minutes to discussing these important concepts.
+
+- A @vocab{contract} is a statement of the @vocab{domain} (input) and @vocab{range} (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+
+- A @vocab{Purpose Statement} is a way of describing what an expression does. A sample purpose statement looks like this: "consumes an animal, and produces true if the animal is fixed."
+
+@right{@image{images/filter-transformer.png,300}}
+
+As students complete the worksheet, encourage them to pay close attention while entering information into the `Transformer` plugin (pictured to the right). For instance:
+
+- What happens if they forget to select a dataset from the drop-down menu?
+- When does the text color change?
+- Does CODAP mind if spelling is off?
+- What happens when students save?
+- Can you predict any value in saving a Transformer?
+- Why might a clear, specific purpose statement be useful?
+- When do we see additional datasets added to the drop-down menu of datasets to filter?
+
+=== Synthesize
+Debrief with students. Some guiding questions on filtering:
+
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Transformer's _expression_?
+** _The `Filter` Transformer walks through the table's rows, applying the expression to each row - then producing a new table containing only rows for which the expression returns `true`._
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+** _We could use the `Filter` Transformer to produce two new tables - one with only cats, and one with only dogs. We could then analyze and compare the weeks to adoption for each species._
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+** _We would filter out cats where `Age (years) > 5`._
