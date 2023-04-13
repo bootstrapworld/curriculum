@@ -20,19 +20,18 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 The table `t` below represents four animals from the shelter:
 
-[.data, cols='6', options="header"]
+[.data, cols='5', options="header"]
 |===
-| name        | sex       | age   | fixed   | pounds  | kilos
-| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`    | @ifsoln{`12.72`}
-| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`    | @ifsoln{`41.81`}
-| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`  | @ifsoln{`16.04`}
-| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`  | @ifsoln{ `2.95`}
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
 |===
 
 You have the following functions defined below (read them _carefully!_):
 
   fun is-female(r): r["sex"] == "female"  end
-  fun kilograms(r): r["pounds"] / 2.2     end
   fun is-young(r):  r["age"] < 4         end
   fun is-fixed(r):  r["fixed"]           end
 
