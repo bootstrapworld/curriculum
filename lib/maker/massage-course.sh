@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-17
+# last modified 2023-04-11
 
 # echo massage-course.sh "$@"
 
@@ -86,6 +86,8 @@ for pl in $proglangs; do
   cd ..
 
 done
+
+scrubproglangsubdirs $pathwayName
 
 # fixme: weirdly, make fails without the following!
 echo -n

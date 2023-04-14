@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-02-28
+-- last modified 2023-04-11
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -126,9 +126,7 @@ function postproc(fhtml_cached, tipe)
     x = x:gsub('%%CURRICULUMCOMMENT%%', '<!-- ')
     x = x:gsub('%%ENDCURRICULUMCOMMENT%%', '\n-->')
     --
-    x = x:gsub('%%CURRICULUMSCRIPT%%', '<script type="math/tex"')
-    x = x:gsub('%%BEGINCURRICULUMSCRIPT%%', '>')
-    x = x:gsub('%%ENDCURRICULUMSCRIPT%%', '</script>')
+    x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
@@ -272,7 +270,27 @@ function postproc(fhtml_cached, tipe)
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML%2Clocal%2Fmathjaxlocal.js"></script>\n')
+      o:write(
+[=[<script>
+  MathJax = {
+    options: { enableMenu: false, },
+    tex:     { 
+      inlineMath: [['$$', '$$'], ['\\(', '\\)']], 
+      displayMath: [], 
+    },
+    svg:     { fontCache: 'global' },
+    startup: {
+      ready: () => {
+            MathJax.startup.defaultReady();
+            MathJax.startup.promise.then(() => {
+              window.status="MathJax Complete!"
+            });
+          }
+    }
+  };
+  </script>
+]=]);
+      o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
