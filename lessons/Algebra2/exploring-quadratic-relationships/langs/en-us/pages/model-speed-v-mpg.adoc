@@ -3,6 +3,7 @@
 <style>
 .studentAnswerMedium { min-width: 10em !important; }
 td { padding: 0 !important; }
+body.workbookpage .fitb { padding-top: 0.2rem !important; }
 </style>
 ++++
 
@@ -24,52 +25,33 @@ For this page, you'll need the  @online-exercise{https://code.pyret.org/editor#s
 | @show{(contract "num-sqrt" '("Num") "Num" "Consumes a number, and produces the square root of that number")}
 |===
 
+@n In the Interactions Area, enter the following expressions, one after the other. Can you predict what the output will be? @show{(code '(sqr 16))}, @show{(code '(sqrt 4))}, @show{(code '(sqr (+ 10 6)))}, @show{(code '(sqrt (* 2 2)))}
+
 == Build a Model from Samples
 
-@n Record three (x,y) pairs below, representing the mpg of Model A at 15, 55, and 75mph:
+@n The *vertex form* of a quadratic model is shown below. Fill in the vertex using the most-efficient speed from @printable-exercise{exploring-mpg, Exploring the Fuel Efficiency Dataset}:
 
-@center{
- (@fitbruby{5em}{15}{speed}, @fitbruby{5em}{@ifsoln{25.822}}{mpg}) @hspace{5em} (@fitbruby{5em}{55}{speed}, @fitbruby{5em}{@ifsoln{32.168}}{mpg}) @hspace{5em}
- (@fitbruby{5em}{75}{speed}, @fitbruby{5em}{@ifsoln{32.168}}{mpg})
-}
-
-**The standard form of a quadratic equation is @math{f(x) = Ax^2 + Bx + C}. We need to find values for A, B, and C that best fit this data.**
-
-@n The *quadratic coefficient* @math{A} determines whether a parabola opens "up" (positive) or down (negative). What is the sign of @math{A}? @fitb{5em}{negative}
-
-@n
-
-@n Using the two points above, define a logarithmic model. Show your work below, then define the function in Function Notation and Pyret.
-
-@ifsoln{Note: Answers will vary!}@vspace{1.5in}
-
-@center{
- @math{f(x) = }
- @fitbruby{5em}{@ifsoln{@math{14.9146}}}{log coefficient}
- @math{log( }
- @fitbruby{5em}{@ifsoln{0.0165}}{linear coefficient}
- @math{x) + }
- @fitbruby{5em}{@ifsoln{0}}{constant}
- @hspace{2em}
- @show{(code '(define (f x) (+ (* (?ANS 14.9146) (log (* (?ANS 0.0165) x))) (?ANS 0))))}
-}
-
-@n Change the function `f` to match this model, and click "Run". Make sure you fix any errors or warnings. In the Interactions Area, make sure `f(1990.51)` and `f(11765.59)` predict the correct median lifespan for Afghanistan and Albania!
+@center{@math{f(x) = a(x−}@fitbruby{6em}{}{peak efficiency}@math{)^2+k}}
 
 @vspace{1ex}
 
-@n Try plugging in different `pc-gdp` values from _other_ countries, to see how well a model based only on Afghanistan and Albania fits for the rest of the world. For which country does it work well? @fitb{5em}{} For what country does it work poorly? @fitb{5em}{}
+@center{__But what values of @math{a} and @math{k} will build the best possible model?__}
 
-== Fit the Model
+@n The *quadratic coefficient* @math{a} determines whether a parabola opens "up" (positive) or down (negative). What is the sign of @math{A}? @fitb{5em}{@ifsoln{negative}}
 
-@n Use `fit-model` to see how well this logarithmic function fits the dataset. What @math{R^2} value did you get? @fitb{}{}
+@n In the Definitions Area, change the definition of function `f` to be a quadratic function with 0 for @math{k}. Based on your answer to the previous question, use a positive or negative `1` for @math{a}. Fit this model to your dataset, using `fit-model`. What @math{R^2} value did you get? @fitb{10em}{}
 
-== Build a Model through Trial {amp} Error
+@vspace{1ex}
 
-@n What is the @math{R^2} for **the best model you can come up with**? @fitb{5em}{} Write the model below.
+**Keeping the sign of @math{a} the same**, try other values for @math{a} besides `1`: `10`, `100`, `1/10`, `1/100`, etc. The scale of the graph will change along with the shape of the parabola, causing the datapoints at the top to shift.
 
-@center{
- @math{f(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))}
-}
+@n After experimenting with different values of @math{a}, which one draws a parabola that __most closely matches__ the shape of the dots above it? @fitb{10em}{@ifsoln{~-1/100}}. What @math{R^2} value did you get? @fitb{10em}{@ifsoln{~-127.455}}
+
+The constant term @math{k} will move the parabola up and down. **Keeping the rest of your function the same**, experiment with different values of @math{k} to _most closely match_ the data.
+
+@n Which value of @math{k} results in a parabola that _most closely fits the shape of the data? @fitb{4em}{@ifsoln{~33}}. What @math{R^2} value did you get? @fitb{}{@ifsoln{~0.733}}
 
 
+@n Describe this model:
+
+Model @fitbruby{20em}{f}{sensible name} is a quadratic model, which shows that speed explains @fitbruby{10em}{@ifsoln{~73.3%}}{R-squared * 100} of the variability in gas mileage for cars in this dataset. The vertex of the parabola drawn by this model is @fitbruby{20em}{@ifsoln{~45}}{x-value of vertex}, which means that @fitbruby{20em}{@ifsoln{45mph is the most efficient speed to drive}}{interpretation of the vertex}.
