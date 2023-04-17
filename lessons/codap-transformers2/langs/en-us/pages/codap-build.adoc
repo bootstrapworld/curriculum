@@ -1,36 +1,74 @@
 = Build Attribute
 ++++
 <style>
+body.workbookpage td .autonum::after { content: ')' !important; }
 /* Cram everything to the top instead of distributing space equally */
 #content { display: block !important; }
 </style>
 ++++
 
-Make sure you’re logged into CODAP with the Animals Dataset open.
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
 
 @vspace{2ex}
 
 == Creating a Build Attribute Transformer
 
-@n Now select `Build Attribute` in the Transformer plugin.
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
+
+|
+@image{../images/transform-ui-annotated.png, 350}
+
+|
+@vspace{1ex}
+
+@n Choose Build Attribute from the drop-down menu.
+
+@vspace{1ex}
 
 @n Enter `build-is-heavy` as the name. What does this name tell you about the Transformer we are creating?
+
 @fitb{}{@ifsoln{We are going to build a column that states `true` for heavy animals and `false` for lightweight animals.}}
 
-@n Select `animals-dataset`.
+@vspace{1ex}
 
-@n What would be an appropriate name for our _new_ attribute?
-@fitb{}{@ifsoln{`Heavy`}}
+@n Select the dataset you'd like to transform.
 
-@n Examine the contract. A domain is provided (row), but not a range. What is the desired output for `build-is-heavy`?
+@vspace{1ex}
+
+@n Let's name our new attribute `Heavy`.
+
+@vspace{1ex}
+
+@star What happens to the starred text when you name the attribute?
+
+@fitb{}{}
+
+@vspace{1ex}
+
+@n Ensure that the collection you are adding to is "cases."
+
+@vspace{1ex}
+
+@n A domain is provided (row), but not a range. What is the desired output for `build-is-heavy`?
+
 @fitb{}{@ifsoln{Boolean.}}
 
-@n Let's write a purpose statement. What do you think we want a Transformer called `build-is-heavy` to do?
+@vspace{1ex}
+
+@n Let's write a purpose statement. What do we want a Transformer called `build-is-heavy` to do?
+
 @fitb{}{@ifsoln{`build-is-heavy` consumes a weight and returns `true` if the weight is greater than a specified amount.}}
+
+@vspace{1ex}
 
 @n Enter `Weight > 40` as the expression.
 
+@vspace{1ex}
+
 @n Apply the Transformer. To define the Transformer for future use, select `Save`.
+
+|===
 
 == More Building
 
