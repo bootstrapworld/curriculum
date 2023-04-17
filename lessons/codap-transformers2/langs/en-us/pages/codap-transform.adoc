@@ -1,40 +1,79 @@
-= Transform
+= Transform Attribute
 ++++
 <style>
+body.workbookpage td .autonum::after { content: ')' !important; }
 /* Cram everything to the top instead of distributing space equally */
 #content { display: block !important; }
 </style>
 ++++
-Make sure you’re logged into CODAP with the Animals Dataset open.
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
 
 @vspace{1ex}
 
-== Creating a "Transform" Transformer
+== Create, Apply, and Save a Transform Attribute Transformer (Step by Step)
 
-- Select `Transform Attribute` in the Transformer plugin.
-- Enter `transform-is-young` as the name. This Transformer will replace all ages less than 5 with the Boolean `true`. In other words, it will _transform_ our "age" column into a column that tells us if an animal is young or not.
-- Select the Animals Dataset.
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
+
+|
+@image{../images/transform-ui-annotated.png, 350}
+
+|
+@vspace{1ex}
+
+@n Choose Transform Attribute from the drop-down menu.
+
+@vspace{1ex}
+
+@n We want to create a Transformer that will replace all ages less than 5 with the Boolean `true`. In other words, it will _transform_ our "age" column into a column that tells us if an animal is young or not. What is a good name for this Transformer?
+
+@fitb{}{@ifsoln{transform-is-young}}
+
+@vspace{1ex}
+
+@n Select the dataset you'd like to transform.
+
+
+@n What attribute will we be transforming? @fitb{}{@ifsoln{Age}}
 
 @n What would be an appropriate name for our transformed attribute? @fitb{}{@ifsoln{`Young`}}
 
-@n Examine the contract for the expresson. A Domain (row) is provided... but not a Range. What type of data do we expect for this expression? @fitb{}{@ifsoln{`Boolean`}
+@n The contract includes a Domain (row) only. What is the Range? @fitb{}{@ifsoln{`Boolean`}
 
 @vspace{1ex}
 
-@n Let's write a purpose statement. What do you think we want a Transformer called `transform-is-young` to do?
+@n Let's write a purpose statement: _The expression consumes @fitb{10em}{@ifsoln{a row}}, and produces @fitb{10em}{@ifsoln{true}} if the age is less than 5._
 
-@fitb{}{@ifsoln{Creates a new table where ages below 5 are replaced with an indication of whether the animal is young or not.}}
+@n What is the expression? @fitb{}{@ifsoln{`Age < 5`}}
 
 @vspace{1ex}
 
-- Enter `Age (years) < 5` as the expression. (Include tick marks around `Age (years)`.)
+@n Apply the Transformer.
 
-- Apply the Transformer. To define the Transformer for future use, select `Save`.
+|===
 
 @vspace{2ex}
 
-== More Transforming
+== More Transforming (On Your Own)
 
-@n Now, try creating a Transformer called `weight-in-kg`. (Note: To convert pounds to kilograms, divide pounds by 2.205.) How many kilograms is the heaviest animal in the shelter?
+@n Now, try creating a Transformer called `weight-in-kg`. (Note: To convert pounds to kilograms, divide pounds by 2.205.) How many kilograms is the heaviest animal in the shelter? _Hint: If you want to see the animals listed in order by weight, select the attribute name and select "Sort Ascending."_
 
 @fitb{}{@ifsoln{Kujo, the heaviest animal, is 78 kilograms.}}
+
+@n Create a Transformer called `round-pounds` that uses this expression: `round(Pounds)`. Look at the new table. Explain what the `round` function does.
+
+@fitb{}{@ifsoln{Pounds were rounded to the nearest whole number.}}
+
+@fitb{}{}
+
+@n Create a Transformer called `concatenate` that transforms Name using this expression: `concat(Name, Species).` What happened?
+
+@fitb{}{@ifsoln{Concatenation is linking or chaining things together in a series. Name and Species were concatenated, here.}}
+
+@fitb{}{}
+
+@n Describe how you could use a Transformer to change the number of weeks to adoption to instead show the number of days to adoption.
+
+@fitb{}{@ifsoln{I would create a Transform Transformer that transforms Weeks to Days. I would use the expression `Weeks * 7`}}
+
+@fitb{}{}
