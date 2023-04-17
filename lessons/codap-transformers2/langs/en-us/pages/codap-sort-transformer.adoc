@@ -1,30 +1,52 @@
 = Sort Transformer
 ++++
 <style>
+body.workbookpage td .autonum::after { content: ')' !important; }
 /* Cram everything to the top instead of distributing space equally */
 #content { display: block !important; }
 </style>
 ++++
 
-Make sure you’re logged @starter-file{animals}. Select the "Plugins" icon, and choose "Transformers."
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
 
 @vspace{1ex}
 
-== Creating a Sort Transformer
+== Create, Apply and Save a Sort Transformer (Step by Step)
 
-@n We're going to create a Transformer to sort the animals alphabetically by name. Select Sort from the drop-down menu.
 
-@n What would be a good name for a Transformer that organizes the table alphabetically by animals' names? @fitb{}{@ifsoln{order-by-name.}}
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
 
-_Type in that name._
+|
+@image{../images/sort-ui-annotated.png, 350}
 
-@n Which dataset do you want CODAP to apply this Transformer to? @fitb{}{@ifsoln{Animals Dataset}}
+|
 
-_Select it from the drop-down menu._
+@vspace{1ex}
 
-@n Recall what we're trying to do here - organiize the table alphabetically by name. Which attribute should we sort by? @fitb{}{@ifsoln{name}}
+@n We're going to create a Transformer that will sort the animals alphabetically by name. Select Sort from the drop-down menu.
+
+@vspace{1ex}
+
+@n Give your Transformer a descriptive name. Type it in.
+
+@vspace{1ex}
+
+@n Which dataset do you want CODAP to apply this Transformer to? Select it from the drop-down menu.
+
+@vspace{1ex}
+
+@n We're going to sort "By Attribute," which should already be selected from the "Sort Method" drop-down menu.
+
+@vspace{1ex}
+
+@n Which attribute should we sort by? @fitb{}{@ifsoln{name}}
 
 @n Which direction will you select? Why? @fitb{}{@ifsoln{"Ascending" sorts from A to Z, so I will select that.}}
+
+@n Apply the Transformer. What happens? @fitb{}{@ifsoln{A copy of the original dataset is created.}}
+
+|===
 
 @n You may have noticed that this Transformer does not require a contract or purpose statement! Why do you think that is?
 
@@ -34,52 +56,5 @@ _Select it from the drop-down menu._
 
 @vspace{2ex}
 
-== Applying and Saving the Sort Transformer
 
-@n Apply the Transformer. What happens?
-
-@ifsoln{A copy of the original dataset is created.}
-
-@ifnotsoln{
-@fitb{}{}
-}
-@vspace{1ex}
-
-@n What do you notice about the name of the new dataset?
-
-@ifsoln{It has the Transformer's customized name at the front, with the name of the original dataset in parentheses.}
-
-@ifnotsoln{
-@fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
-}
-@vspace{1ex}
-
-@n What happens when you save a Transformer?
-
-@ifsoln{When I save a Transformer, a small box appears that has my Transformer's name at the top. I will now be able to use the Transformer again, without inputting all of the different specifications.}
-
-@ifnotsoln{
-@fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
-}
-@vspace{1ex}
-
-@n How is saving a Transformer different from saving a dataset?
-
-@ifsoln{Saving a dataset saves the table, but not the operations performed on it. Saved tables appear on the drop-down menu of datasets to transform. Saving a transformer lets us re-use an operation.}
-
-@ifnotsoln{
-@fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
-}
 

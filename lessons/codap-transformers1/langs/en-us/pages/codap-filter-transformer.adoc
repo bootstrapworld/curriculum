@@ -1,44 +1,62 @@
 = Filter
+
 ++++
 <style>
+body.workbookpage td .autonum::after { content: ')' !important; }
 /* Cram everything to the top instead of distributing space equally */
 #content { display: block !important; }
 </style>
 ++++
-Make sure you’re logged into the @starter-file{animals} in CODAP.
+
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
+
 
 @vspace{1ex}
 
-== Creating a "Filter" Transformer (Step by Step)
+== Create, Apply, and Save a Filter Transformer (Step by Step)
 
-Open the Transformers plugin, and select `Filter`.
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
 
-@n Enter `filter-is-dog` as the name. What does this name tell you about the Transformer you are creating? @fitb{}{}
+|
+@image{../images/filter-ui-annotated.png, 350}
 
-@fitb{}{@ifsoln{The Transformer will keep only animals that are dogs, and filter out the rest.}}
+|
+@vspace{1ex}
 
-@n Which dataset should we select, to apply this Transformer? @fitb{}{@ifsoln{Animals Dataset}}
+@n Choose Filter from the drop-down menu that appears.
 
-@n Examine the contract. Its input - or domain - is a Row. Explain why that makes sense.@fitb{}{}
+@vspace{1ex}
 
-@fitb{}{@ifsoln{When we filter, we walk look at each row, one by one.}}
+@n Name the Transformer `filter-is-dog`.
 
+@vspace{1ex}
 
-@n Now, take a look at the output - or range - of the contract. It is a Boolean. Why does that make sense? @fitb{}{}
+@n Click on "Dataset to Filter" to confirm that the Animals Dataset is selected.
+
+@vspace{1ex}
+
+@n The contract's input - or domain - is a Row. Why does that makes sense?
+
+@fitb{}{@ifsoln{When we filter, we look at each row, one by one.}}
+
+@vspace{1ex}
+
+@n The output - or range - is a Boolean. Why does that make sense?
 
 @fitb{}{@ifsoln{We are going to determine if the formula is true or false for each row.}}
 
-@n A purpose statement explains the purpose of the expression. A good rule for purpose statements is to structure them like this: "The expression *_consumes_* one thing and *_produces_* another thing." With your class, write a purpose statement for this expression.
+@vspace{1ex}
+
+@n A purpose statement explains the purpose of the expression. A good rule for purpose statements is to structure them like this: "The expression *_consumes_* one thing and *_produces_* another thing." With your class, write a purpose statement for this expression. Type it into the Purpose Statement box.
+
+
+|===
+
 
 @n Enter `Species = "dog"` as the expression. Select `Apply Transformer`. What happens? @fitb{}{}
 
 @fitb{}{@ifsoln{A copy of the original dataset is created, with only dogs!}}
-
-@n Think of a scenario where you might need a table like this. How might it be useful? @fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
 
 @n Try typing `species = "dog"` as the expression (instead of `Species = "dog"`). What happens? @fitb{}{}
 
@@ -48,7 +66,10 @@ Open the Transformers plugin, and select `Filter`.
 
 @fitb{}{@ifsoln{_Incorrect spelling, wrong capitalization, forgetting quotation marks._}}
 
-@vspace{2ex}
+@n Select "Save Transformer." Describe what happens. Why might it be useful to save a Transformer? @fitb{}{}
+
+@fitb{}{}
+
 
 == More Filtering (On Your Own)
 
@@ -62,6 +83,7 @@ Open the Transformers plugin, and select `Filter`.
 
 @fitb{}{}
 
-@n Create, save, and apply a Transformer called `filter-is-fixed` that creates a new dataset with only fixed animals. How fixed animals are there at the shelter?
+@n Create, save, and apply a Transformer called `filter-is-fixed` that creates a new dataset with only fixed animals. How many fixed animals are there at the shelter?
 
 @fitb{}{@ifsoln{_There are 18._}}
+
