@@ -161,7 +161,7 @@ Return to @printable-exercise{exploring-states.adoc}, and complete the rest of t
 - Were any of these relationships a surprise? Why or why not?
 
 
-== Making Predictions with Linear Models @duration{25 minutes}
+== Fitting Linear Models @duration{25 minutes}
 
 === Overview
 
@@ -186,6 +186,16 @@ When we see patterns in data, we can use those patterns to __make predictions__ 
 These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, these are _linear functions_ or "linear models". The straight-line graph of these models is sometimes called the "regression line" or the "predictor function", but you may have heard it called the @vocab{line of best fit}.
 
 When we make a model, we want it to be the closest possible approximation of all the points. A "good fit" has most of the points very close to the line, and a "bad fit" has the points very far away.
+
+You may already be familiar with the different forms of linear models:
+
+[cols="^1,^1,^1", options="header"]
+|===
+| Standard 			| Point-Slope				| Slope-Intercept
+| @math{Ax+By = C}	| @math{y_1-y = m(x_1-x)}	| @math{y = mx+b}
+|===
+
+Depending on what part of the model we care about most, we might choose to use one display over another. Since we're looking for both the slope and the y-intercept for this model, it makes sense to use Slope-Intercept form.
 
 
 === Investigate
@@ -212,6 +222,7 @@ But sometimes models make predictions that are _even worse than useless_ - they 
 [.lesson-instruction]
 - Complete the third section ("Build a Model through Trial and Error") in @printable-exercise{model-college-v-income.adoc}.
 - What was the best model you could come up with?
+- Optional: For each of your trials, graph the resulting linear model on @opt-printable-exercise{graphing-models.adoc}.
 
 But how do we find the __best__ model? In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
 
