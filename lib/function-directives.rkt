@@ -891,7 +891,7 @@
           (lambda (type)
             (if (and *show-transformer-type?* transformer-type
                      (string=? transformer-type type))
-                ".transformer_type_checked"
+                ".transformer_type_checked.chosen"
                 ".transformer_type"))])
 
   (string-append
@@ -1068,7 +1068,7 @@
           (lambda (type)
             (if (and *show-question-type?* question-type
                      (string=? question-type type))
-                ".question_type_checked"
+                ".question_type_checked.chosen"
                 ".question_type"))])
     (string-append
       "*Question Type*\n\n(circle one):"
