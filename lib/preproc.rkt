@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-04-05
+; last modified 2023-04-19
 
 (require json)
 (require file/sha1)
@@ -1505,11 +1505,19 @@
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
+
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
-                            (display-lesson-description (read-group i directive)
-                                                        (path-replace-extension *out-file* "-desc.txt.kp")
-                                                        o)]
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [converted-text (call-with-input-string text
+                                                     (lambda (i)
+                                                       (call-with-output-string
+                                                         (lambda (o)
+                                                           (expand-directives i o)))))])
+                              (display-lesson-description converted-text
+                                                          (path-replace-extension *out-file* "-desc.txt.kp")
+                                                          o))]
+
                            [(string=? directive "pathway-logo")
                             (unless *narrative*
                               (error 'ERROR
@@ -1650,6 +1658,29 @@
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
 
+                           [(string=? directive "ifsoln-choice")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (let* ([contains-nl? (regexp-match "^ *\n" text)]
+                                     [converted-text (call-with-input-string text
+                                                       (lambda (i)
+                                                         (call-with-output-string
+                                                           (lambda (o)
+                                                             (expand-directives i o)))))])
+                                (display
+                                  (cond [contains-nl?
+                                          (string-append
+                                            "\n\n[.choice"
+                                            (if *solutions-mode?* ".chosen" "")
+                                            "]\n"
+                                            "--"
+                                            converted-text
+                                            "\n--\n\n")]
+                                        [else (enclose-span
+                                                (string-append ".choice"
+                                                  (if *solutions-mode?* ".chosen" ""))
+                                                converted-text)])
+                                  o)))]
+
                            [(string=? directive "ifnotsoln")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
@@ -1718,27 +1749,28 @@
                                       (let ([newly-added? (add-starter-file lbl)]
                                             [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
-                                               (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
+                                               (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
                                                                   (hash-ref p 'title #f)
                                                                   (hash-ref c 'title))]
+                                                       [url (let ([url (hash-ref p 'url "")])
+                                                              (cond [(string=? url "")
+                                                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                                                             (errmessage-context) directive lbl)
+                                                                     "starter-file-missing-URL.html"]
+                                                                    [else url]))]
                                                        [link-output
                                                          (format
                                                            "link:pass:[~a][~a~a]"
-                                                           (hash-ref p 'url)
+                                                           url
                                                            title
                                                            ", window=\"_blank\""
                                                            )])
                                                   (when (and newly-added?
                                                              (not (member lbl *do-not-autoinclude-in-material-links*)))
-                                                    (let* ([materials-link-output
-                                                             (format
-                                                               "link:pass:[~a][~a~a]"
-                                                               (hash-ref p 'url)
-                                                               title
-                                                                   ", window=\"_blank\"")]
+                                                    (let* ([materials-link-output link-output]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")

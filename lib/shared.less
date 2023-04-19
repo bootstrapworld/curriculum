@@ -618,8 +618,11 @@ body.LessonNotes {
     font-size:  0.75rem !important; 
     &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
-  .question_type, .question_type_checked { display: list-item; list-style: circle inside; }
-  .question_type_checked { font-style: italic; font-weight: bold; }
+  .question_type { display: list-item; list-style: circle inside; }
+  .question_type.chosen { 
+    font-style: italic; font-weight: bold; border: solid 1px black; 
+    border-radius: 50%;
+  }
 }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
@@ -768,10 +771,9 @@ table.recipe_title    {
 .codap {
   .cm-keyword { font-weight: normal !important; }
   .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
-  .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
   .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
   .recipe_name { display: flex !important; }
-  .transformer_type p::before, .transformer_type_checked p::before {
+  .transformer_type p::before {
     width: 1.1rem;
     height: 1.1rem;
     background: white;
@@ -779,11 +781,11 @@ table.recipe_title    {
     margin:  0 2px 2px 0;
     vertical-align: middle;
   }
-  div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
+  div.transformer_type { margin-left: 2em; }
   div.transformer_type p::before { content: ""; }
   table.transformer_type td:first-of-type .content { display: flex; flex: row; }
   table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
-  div.transformer_type_checked p::before {
+  div.transformer_type.chosen p::before {
     content: "x";
     text-align: center;
     line-height: 1rem;
