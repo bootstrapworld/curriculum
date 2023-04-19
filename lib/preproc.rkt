@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-04-05
+; last modified 2023-04-19
 
 (require json)
 (require file/sha1)
@@ -1649,6 +1649,29 @@
                                                 [else (enclose-span ".solution" converted-text)])
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
+
+                           [(string=? directive "ifsoln-choice")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (let* ([contains-nl? (regexp-match "^ *\n" text)]
+                                     [converted-text (call-with-input-string text
+                                                       (lambda (i)
+                                                         (call-with-output-string
+                                                           (lambda (o)
+                                                             (expand-directives i o)))))])
+                                (display
+                                  (cond [contains-nl?
+                                          (string-append
+                                            "\n\n[.choice"
+                                            (if *solutions-mode?* ".chosen" "")
+                                            "]\n"
+                                            "--"
+                                            converted-text
+                                            "\n--\n\n")]
+                                        [else (enclose-span
+                                                (string-append ".choice"
+                                                  (if *solutions-mode?* ".chosen" ""))
+                                                converted-text)])
+                                  o)))]
 
                            [(string=? directive "ifnotsoln")
                             (let ([text (read-group i directive #:multiline? #t)])
