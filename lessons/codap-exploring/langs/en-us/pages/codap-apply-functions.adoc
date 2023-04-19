@@ -39,15 +39,17 @@ Let's say we want to predict what each animal will weigh if its weight doubles. 
 
 @vspace{1ex}
 
-It would be quite time-consuming to do this for the entire table! Instead, we can input expressions and functions that use attributes as variables. To tell CODAP to double the weight, we could instead create a column where we would input `Pounds * 2` into our `Edit Formula` box. Go to @starter-file{expressions-functions} to try it out.
+It would be quite time-consuming to do this for the entire table! Instead, we can let CODAP do the work! All we would have to do is click on the column header for `Pounds doubled`, select `Edit Formula` from the drop down menu, and input `Pounds * 2`. Go to @starter-file{expressions-functions} to try it out.
 
-@n Why do you think the word `Pounds` has different a different color than the rest of the formula? Does `pounds` (lower-case `p`) appear in a special color? @fitb{}{}
+@n Why do you think the word `Pounds` has a different color than the rest of the formula? Does `pounds` (lower-case `p`) appear in a special color? @fitb{}{}
 
 @fitb{}{@ifsoln{'Pounds' appeared in pink, because CODAP recognizes that is an attribute in the dataset. Case matters!}}
 
-@n On the second table in @starter-file{expressions-functions, the file}, enter a formula that will increase the number of weeks by 2. Write your formula here: @fitb{}{@ifsoln{`Weeks + 2`}}
+@n The second table has a column titled `Weeks increased by 2`. What formula will populate the column according to its description? 
 
-@n Now, let's revisit the @starter-file{animals}. Can you think of other scenarios where it would be useful to enter an expression or function as the formula for a new attribute? Write down one possible scenario. @fitb{}{}
+@fitb{}{@ifsoln{`Weeks + 2`}}
+
+@n Now, let's revisit the @starter-file{animals} and think of other scenarios where it would be useful to enter an expression or function as the formula for a new attribute? Write down one possible scenario. @fitb{}{}
 
 @fitb{}{}
 
@@ -59,27 +61,26 @@ In order to answer each of the questions below, you must first create a new colu
 
 @n Enter `sqrt(16)` into the `Edit Formula` box. How many arguments does `sqrt` expect? @fitb{}{@ifsoln{_1_}}
 
-@n What type of argument does the function expect? (Number? String? Boolean?) @fitb{}{@ifsoln{_Number._}}
+@n What type of argument does the function `sqrt` expect? @fitbruby{30em}{@ifsoln{Number}}{Number? String? Boolean?}
 
-@n What type of output does `sqrt` produce? @fitb{}{@ifsoln{_Number._}}
+@n What type of output does `sqrt` produce? @fitbruby{30em}{@ifsoln{Number}}{Number? String? Boolean?}
 
-@n What did the function evaluate to? @fitb{}{@ifsoln{_4_}}
+@n Which of these expressions will successfully populate a column? 
 
-@n Now, enter `sqrt(Weight)`. What do you observe? @fitb{}{@ifsoln{_CODAP finds the square root of each animal's weight_}}
+[cols="1,1,1"]
+|===
+| @ifsoln-choice{`sqrt(Weight)`}
+| @ifsoln-choice{`sqrt(Legs)`}  
+| `sqrt(Name)`
+|===
 
-@n What happens when you enter `sqrt(Legs)`? @fitb{}{@ifsoln{_CODAP finds the square root of each animal's legs for `sqrt(Legs)`._}}
+@n Why will some of these expressions work and some generate errors? @fitb{}{@ifsoln{_CODAP finds the square root when the attribute provided is numerical, but CODAP produces an error message when given a string, because it can only calculate the square root of a number._}}
 
-@n What about `sqrt(Name)`? @fitb{}{@ifsoln{_CODAP produces an error message because it cannot find the square root of a string, only a number._}}
+@n Enter `stringLength(Name)` into the `test` column. What do you observe? @fitb{}{@ifsoln{__7 appears, CODAP finds the amount of letters in each animal's name__}}
 
-@n Enter `stringLength(Name)` into the `test` column. @n What do you observe? @fitb{}{@ifsoln{__7 appears, CODAP finds the amount of letters in each animal's name__}}
+@n What type of argument does the function `stringLength` expect? @fitbruby{30em}{@ifsoln{String}}{Number? String? Boolean?}
 
-@n How many arguments does `stringLength` expect? @fitb{}{@ifsoln{_1_}}
-
-@n What type of argument does `stringLength` expect? @fitb{}{@ifsoln{_String_}}
-
-@n Does `stringLength` produce a Number? String? Boolean? @fitb{}{@ifsoln{_Number_}}
-
-@vspace{1ex}
+@n What type of output does `stringLength` produce? @fitbruby{30em}{@ifsoln{Number}}{Number? String? Boolean?}
 
 == Putting it all together
 
