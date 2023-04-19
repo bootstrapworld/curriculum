@@ -1749,27 +1749,28 @@
                                       (let ([newly-added? (add-starter-file lbl)]
                                             [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
-                                               (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
+                                               (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
                                                                   (hash-ref p 'title #f)
                                                                   (hash-ref c 'title))]
+                                                       [url (let ([url (hash-ref p 'url "")])
+                                                              (cond [(string=? url "")
+                                                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                                                             (errmessage-context) directive lbl)
+                                                                     "starter-file-missing-URL.html"]
+                                                                    [else url]))]
                                                        [link-output
                                                          (format
                                                            "link:pass:[~a][~a~a]"
-                                                           (hash-ref p 'url)
+                                                           url
                                                            title
                                                            ", window=\"_blank\""
                                                            )])
                                                   (when (and newly-added?
                                                              (not (member lbl *do-not-autoinclude-in-material-links*)))
-                                                    (let* ([materials-link-output
-                                                             (format
-                                                               "link:pass:[~a][~a~a]"
-                                                               (hash-ref p 'url)
-                                                               title
-                                                                   ", window=\"_blank\"")]
+                                                    (let* ([materials-link-output link-output]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
