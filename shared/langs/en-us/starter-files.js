@@ -128,7 +128,7 @@ var starterFiles = {
       "url": "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/"
     },
     "codap": {
-      "url": ""
+      "url": "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/"
     }
   },
   "animals": {
