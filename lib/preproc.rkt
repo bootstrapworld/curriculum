@@ -1505,11 +1505,19 @@
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
+
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
-                            (display-lesson-description (read-group i directive)
-                                                        (path-replace-extension *out-file* "-desc.txt.kp")
-                                                        o)]
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [converted-text (call-with-input-string text
+                                                     (lambda (i)
+                                                       (call-with-output-string
+                                                         (lambda (o)
+                                                           (expand-directives i o)))))])
+                              (display-lesson-description converted-text
+                                                          (path-replace-extension *out-file* "-desc.txt.kp")
+                                                          o))]
+
                            [(string=? directive "pathway-logo")
                             (unless *narrative*
                               (error 'ERROR
