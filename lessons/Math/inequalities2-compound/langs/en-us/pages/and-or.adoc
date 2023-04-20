@@ -1,0 +1,57 @@
+= Compound Inequalities -- Practice
+
+@do{
+
+(define e1 '(and (< 2 5) (= 0 6)))
+(define e2 '(or (> 6 8) (< -4 1)))
+(define e3 '(and (string-equal "purple" "blue") (= (+ 3 5) 8)))
+
+}
+
+Create the Circles of Evaluation, then convert the expressions into Code in the space provided.
+
+@vspace{3ex}
+
+
+@n 2 is less than 5, and 0 is equal to 6
+
+@showsoln{(coe e1)}
+@showsoln{(code e1)}
+@ifnotsoln{@vspace{25ex}}
+
+What will this evaluate to?
+@fitb{}{@ifsoln{False. Only the first expression evaluates to true; "and" expressions check whether both expressions are true.}}
+
+@vspace{3ex}
+
+
+@n 6 is greater than 8, or -4 is less than 1
+
+@showsoln{(coe e2)}
+@showsoln{(code e2)}
+@ifnotsoln{@vspace{25ex}}
+
+What will this evaluate to?
+@fitb{}{@ifsoln{True. The second expression evaluates to true; "or" expressions check whether at least one expression is true.}}
+
+@vspace{3ex}
+
+
+@n The String “purple” is the same as the String “blue”, and 3 plus 5 equals 8
+
+@showsoln{(coe e3)}
+@showsoln{(code e3)}
+@ifnotsoln{@vspace{25ex}}
+
+What will this evaluate to?
+@fitb{}{@ifsoln{False. The first expression evaluates to false.}}
+
+@vspace{3ex}
+
+
+@n Write the contracts for `and` {amp} `or` in your Contracts page.
+
+@showsoln{(contracts
+'("and" ("Boolean" "Boolean") "Boolean")
+'("or" ("Boolean" "Boolean") "Boolean")
+)}

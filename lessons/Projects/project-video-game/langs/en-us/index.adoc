@@ -1,0 +1,102 @@
+= Project: Build a video game
+
+++++
+<style>
+h3 { margin-top: 3ex; }
+.autonum:after { content: '.'; }
+th { text-align: center !important; }
+table * { line-height: 1.2rem; }
+.ulist p { margin: 0; }
+</style>
+++++
+
+@lesson-prereqs{making-game-images, functions-for-character-animation, player-animation, inequalities3-sam, distance-formula, inequalities-collision}
+
+@description{Students build a video game of their own design! Every game must have a player (their avatar), a danger (something to avoid), and a target (something to chase). Students build their world using function composition, animate their characters through linear functions, detect boundaries with compound inequalities, and detect collisions with the distance formula. This project can be extended into more complex movement (quadratic, exponential, trigonometric) and "cheat codes" (piecewise/conditional) functions.}
+
+== Overview
+
+This project can be used as the capstone for Bootstrap:Algebra, and is designed to provide real-world and engaging connections to the following mathematical concepts:
+
+@span{.right}{@image{images/screenshot.png, screenshot}}
+
+- Coordinates
+- Simple and Compound Inequalities
+- Domain and Range
+- Composing Functions
+- Connecting Representations and Defining Functions
+- Rotation, Dilation, and Translation
+- The Distance Formula and Pythagorean Theorem
+- Piecewise Functions
+
+The project culminates in a completed game that @link{http://cs.brown.edu/~sk/Publications/Papers/Published/skf-creativity-bootstrap/,students feel proud of}, and can show off to their friends and family. Many Bootstrap teachers arrange "video game launch parties" and some create a science-fair-style event for the math department, complete with tri-fold posters explaining elements of the game and the math at work behind the scenes.
+
+=== Students will be able to...
+
+* Recognize meaningful applications of multiple algebraic concepts, answering the all-important question: __"When will I ever use this?!"__
+* Express their creativity through the design of a game context
+* Take pride in having coded their first video game!
+* Share their completed video game with friends and family to play!
+
+== Structure of the Game
+
+The code in the @starter-file{game} is divided into sections. Each section corresponds to a lesson with scaffolded activities and one or more workbook pages, which support them in writing a section of the game code. Students work in groups or pairs to customize and complete the code to make the game their own!
+
+
+[cols=".^1a, .^1a, .^1a" options="header", stripes="none"]
+|===
+| *Game Section*	| *Lessons* | *Workbook Pages*
+| *0{empty}.  Game title*
+| @lesson-link{coordinates}
+
+| @printable-exercise{coordinates/pages/BrainstormGame.adoc}
+
+| *1{empty}. Making the Danger and the Target Move*
+| @lesson-link{functions-for-character-animation}
+
+| @ifproglang{pyret}{@printable-exercise{functions-for-character-animation/pages/character-animation-dr.adoc}} @ifproglang{wescheme}{@printable-exercise{functions-for-character-animation-wescheme/pages/character-animation-dr.adoc}}
+
+| *2{empty}. Making the Danger and the Target Come Back Again*
+| @lesson-link{inequalities3-sam}
+| @ifproglang{pyret}{@printable-exercise{inequalities3-sam/pages/left-and-right.adoc}} @ifproglang{wescheme}{@printable-exercise{inequalities3-sam-wescheme/pages/left-and-right.adoc}} and @ifproglang{pyret}{@printable-exercise{inequalities3-sam/pages/onscreen.adoc, is-onscreen}} @ifproglang{wescheme}{@printable-exercise{inequalities3-sam-wescheme/pages/onscreen.adoc, onscreen?}}
+
+| *3{empty}. Get our Player moving!*
+| @lesson-link{player-animation}
+| @ifproglang{pyret}{@printable-exercise{player-animation/pages/update-player.adoc, update-player}} @ifproglang{wescheme}{@printable-exercise{player-animation-wescheme/pages/update-player.adoc, update-player}}
+
+| *4{empty}. Collisions*
+| @lesson-link{inequalities-collision}
+
+| @ifproglang{pyret}{@printable-exercise{inequalities-collision/pages/collision.adoc}} @ifproglang{wescheme}{@printable-exercise{inequalities-collision-wescheme/pages/collision.adoc}}
+|===
+
+== Assessment and Grading
+We provide a @opt-printable-exercise{video-game-rubric.html, rubric for the game}, but teachers should always feel free to edit and adapt it for their classroom.
+
+== Where Does it Fit?
+
+The project is constructed over a series of game-focused lessons, which reinforce concepts learned in earlier lessons. Taken together, the game-focused lessons form the scope and sequence for the project. There are two options for implementation:
+
+[.implementation-options, cols="1a,1a", options="header"]
+|===
+| Integrated
+| All at Once
+
+| The default lesson order for Bootstrap:Algebra has game-focused lessons sprinkled throughout the curriculum, with students building their games over a long period of time.
+
+@vspace{1ex}
+
+*Pros:* Students see each math concept as immediately relevant to their game, the game motivates the learning of additional math, and students have a "hook" for the whole course.
+
+*Cons:* This approach requires access to computers at multiple points throughout the year, and teachers must work harder to keep the game development visible for impatient students.
+
+| If students are already comfortable with algebra (including the Pythagorean Theorem), Circles of Evaluation, Simple Datatypes, Contracts, and Functions, they'll be able to complete their video games in 1-2 weeks. _All game-focused lessons can be saved to the end of the year._
+
+@vspace{1ex}
+
+*Pros:* Satisfying "capstone" for students, simpler scheduling for computer access, high-engagement activity during a typically low-engagement time of year.
+
+*Cons:* Without a narrative project to tie everything together, students are less likely to see the "big picture" throughout the year.
+|===
+
+

@@ -889,9 +889,10 @@
     (set! transformer-type (string-downcase transformer-type)))
   (let ([style-transformer-type
           (lambda (type)
-            (if (and *show-transformer-type?* transformer-type
+            (if (and (or *show-transformer-type?* *solutions-mode?*)
+                     transformer-type
                      (string=? transformer-type type))
-                ".transformer_type_checked"
+                ".transformer_type.chosen"
                 ".transformer_type"))])
 
   (string-append
@@ -1066,17 +1067,15 @@
     (set! question-type (string-downcase question-type)))
   (let ([style-question-type
           (lambda (type)
-            (if (and *show-question-type?* question-type
-                     (string=? question-type type))
-                ".question_type_checked"
+            (if (and  (or *show-question-type?* *solutions-mode?*)
+                      question-type
+                      (string=? question-type type))
+                ".question_type.chosen"
                 ".question_type"))])
     (string-append
-      "What type of question is this? (circle one)"
-      ; (hspace "1.5em")
+      "*Question Type*\n\n(circle one):"
       (format " [~a]##Lookup##" (style-question-type "lookup"))
-      ; (hspace "1.5em")
       (format " [~a]##Arithmetic##" (style-question-type "arithmetic"))
-      ; (hspace "1.5em")
       (format " [~a]##Statistical##" (style-question-type "statistical"))
       "\n\n")))
 
@@ -1138,7 +1137,7 @@
     (set! *show-new-question?* #t))
 
   (string-append
-    "[.data-cycle, cols=\"^.^3, .^20\", stripes=\"none\"]\n"
+    "[.data-cycle, cols=\"^.^3, .^17, .^3\", stripes=\"none\"]\n"
     "|===\n"
     "| "
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
@@ -1147,12 +1146,12 @@
     (encoded-ans ".data-cycle-question.stretch" question *show-question?*)
     "\n\n"
     (fitb "100%" "")
-    "\n\n"
+    "\n\n| "
     (write-data-cycle-question-type question-type)
     "| "
     "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-rows.stretch" rows *show-rows?*)
     "\n\n"
     (encoded-ans ".data-cycle-cols.stretch" cols *show-cols?*)
@@ -1160,7 +1159,7 @@
     "| "
     "image:" dist-root-dir "lib/images/AnalyzeData.png[Analyze icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-filter.stretch" filter-fn *show-filter?*)
     "\n\n"
     (encoded-ans ".data-cycle-build.stretch" build-fn *show-build?*)
@@ -1170,7 +1169,7 @@
     "| "
     "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-finding.stretch" finding *show-finding?*)
     "\n\n"
     (fitb "100%" "")

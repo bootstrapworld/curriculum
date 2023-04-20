@@ -1,21 +1,46 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-17
+-- last modified 2023-03-28
 
 local graph_file = ...
 
-dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+local make_dir = os.getenv'MAKE_DIR'
+
+dofile(make_dir .. 'utils.lua')
+dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'jread.lua')
 
 local lessons_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/lessons/'
 
 local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
+
+local function read_list_from_file(f)
+  local l = read_json_file(f)
+  if #l <= 0 then return '[]' end
+  return ('[ "' .. table.concat(read_json_file(f), '", "') .. '" ]')
+end
+
+local function read_list_of_glosses_from_file(f)
+  local lol = read_json_file(f)
+  local tbl = {}
+  if #lol <= 0 then return '[]' end
+  for _,tuple in ipairs(lol) do
+    local vocab = tuple[1]
+    local description = tuple[2]:gsub('"', '\\"')
+    table.insert(tbl, '      { vocab: "' .. vocab .. '", description: "' .. description .. '" }')
+  end
+  return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
+end
 
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')
 
 for _,lesson in ipairs(lessons) do
-  local i
+  local lessondir = lessons_dir .. lesson .. '/'
+  local lessoncache = lessondir .. '.cached/'
+  local lessonpagecache = lessondir .. 'pages/.cached/'
+  --
   local title_txt = ''
   local description_txt = ''
   local proglang_txt = 'pyret'
@@ -24,9 +49,7 @@ for _,lesson in ipairs(lessons) do
   local primitives_txt = ''
   local starterFiles_txt = ''
   local prerequisites_txt = ''
-  local lessondir = lessons_dir .. lesson .. '/'
-  local lessoncache = lessondir .. '.cached/'
-  local lessonpagecache = lessondir .. 'pages/.cached/'
+  --
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
   local proglang_file = lessoncache .. '.record-proglang'
@@ -34,9 +57,12 @@ for _,lesson in ipairs(lessons) do
   local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
   local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
-  local keywords_file = lessoncache .. '.lesson-keywords.txt.kp'
+  local keywords_file = lessoncache .. '.lesson-keywords.json'
+  local glossary_file = lessoncache .. '.lesson-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
   local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp'
+  --
+  local i
   --
   if file_exists_p(title_file) then
     i = io.open(title_file)
@@ -103,7 +129,12 @@ for _,lesson in ipairs(lessons) do
   o:write('    pages: [' .. pages_txt .. '],\n')
   o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
-  copy_file_to_port(keywords_file, o)
+  if file_exists_p(keywords_file) then
+    o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')
+  end
+  if file_exists_p(glossary_file) then
+    o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_file) .. ',\n')
+  end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
   copy_file_to_port(standards_file, o)

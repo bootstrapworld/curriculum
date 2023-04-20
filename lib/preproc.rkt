@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-03-17
+; last modified 2023-04-19
 
 (require json)
 (require file/sha1)
@@ -1187,7 +1187,7 @@
         (let ([lesson-asc-file
                 (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.txt.kp"
+                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.json"
                         *natlang* lesson)]
               [lesson-title-file
                 (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
@@ -1200,16 +1200,10 @@
 
           (when (file-exists? lesson-glossary-file)
             ;(printf "~a exists i\n" lesson-glossary-file)
-            (call-with-input-file lesson-glossary-file
-              (lambda (i)
-                (let loop ()
-                  (let ([x (read i)])
-                    (unless (eof-object? x)
-                      (let ([s (assoc-glossary x)])
-                        (cond [s (unless (member s *glossary-items*)
-                                   (set! *glossary-items*
-                                     (cons s *glossary-items*)))]))
-                      (loop)))))))
+            (for ([s (call-with-input-file lesson-glossary-file read-json)])
+              (unless (member s *glossary-items*)
+                (set! *glossary-items*
+                  (cons s *glossary-items*)))))
           ;(printf "took care of pw glossary~n")
           )
     )
@@ -1511,11 +1505,19 @@
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
+
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
-                            (display-lesson-description (read-group i directive)
-                                                        (path-replace-extension *out-file* "-desc.txt.kp")
-                                                        o)]
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [converted-text (call-with-input-string text
+                                                     (lambda (i)
+                                                       (call-with-output-string
+                                                         (lambda (o)
+                                                           (expand-directives i o)))))])
+                              (display-lesson-description converted-text
+                                                          (path-replace-extension *out-file* "-desc.txt.kp")
+                                                          o))]
+
                            [(string=? directive "pathway-logo")
                             (unless *narrative*
                               (error 'ERROR
@@ -1563,7 +1565,7 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/workbook-sols.pdf.html[Workbook (w/Solutions)]")
+                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
@@ -1656,6 +1658,29 @@
                                           o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
 
+                           [(string=? directive "ifsoln-choice")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (let* ([contains-nl? (regexp-match "^ *\n" text)]
+                                     [converted-text (call-with-input-string text
+                                                       (lambda (i)
+                                                         (call-with-output-string
+                                                           (lambda (o)
+                                                             (expand-directives i o)))))])
+                                (display
+                                  (cond [contains-nl?
+                                          (string-append
+                                            "\n\n[.choice"
+                                            (if *solutions-mode?* ".chosen" "")
+                                            "]\n"
+                                            "--"
+                                            converted-text
+                                            "\n--\n\n")]
+                                        [else (enclose-span
+                                                (string-append ".choice"
+                                                  (if *solutions-mode?* ".chosen" ""))
+                                                converted-text)])
+                                  o)))]
+
                            [(string=? directive "ifnotsoln")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
@@ -1721,31 +1746,31 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (add-starter-file lbl)
-                                      (let ([p (hash-ref c *proglang-sym* #f)])
+                                      (let ([newly-added? (add-starter-file lbl)]
+                                            [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
-                                               (printf "WARNING: ~a: @~a  ~a missing for ~a\n\n"
+                                               (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
                                                                   (hash-ref p 'title #f)
                                                                   (hash-ref c 'title))]
+                                                       [url (let ([url (hash-ref p 'url "")])
+                                                              (cond [(string=? url "")
+                                                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                                                             (errmessage-context) directive lbl)
+                                                                     "starter-file-missing-URL.html"]
+                                                                    [else url]))]
                                                        [link-output
                                                          (format
                                                            "link:pass:[~a][~a~a]"
-                                                           (hash-ref p 'url)
+                                                           url
                                                            title
                                                            ", window=\"_blank\""
                                                            )])
-                                                  (unless (member
-                                                            lbl
-                                                            *do-not-autoinclude-in-material-links*)
-                                                    (let* ([materials-link-output
-                                                             (format
-                                                               "link:pass:[~a][~a~a]"
-                                                               (hash-ref p 'url)
-                                                               title
-                                                                   ", window=\"_blank\"")]
+                                                  (when (and newly-added?
+                                                             (not (member lbl *do-not-autoinclude-in-material-links*)))
+                                                    (let* ([materials-link-output link-output]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
@@ -2068,15 +2093,15 @@
             )
           #:exists 'replace)
 
-        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-keywords.txt.kp")
+        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-keywords.json")
           (lambda (o)
             (let ([first? #t])
-            (display "    keywords: [" o)
-            (for ([k *lesson-keywords*])
-              (cond [first? (set! first? #f)]
-                    [else (display ", " o)])
-              (write k o))
-            (display "]," o) (newline o)))
+              (display "[" o)
+              (for ([k *lesson-keywords*])
+                (cond [first? (set! first? #f)]
+                      [else (display ",\n" o)])
+                (fprintf o "  ~s" k))
+              (display " ]\n" o)))
           #:exists 'replace)
         )
 
@@ -2282,10 +2307,16 @@
 
 (define (accumulate-glossary-and-alignments)
   ; (printf "doing accumulate-glossary-and-alignments\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.txt.kp")
+  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
     (lambda (op)
-      (for ([s *glossary-items*])
-        (fprintf op "~s~n" (first s))))
+      (let ([first? #t])
+        (display "[\n" op)
+        (for ([s *glossary-items*])
+          (cond [first? (set! first? #f)]
+                [else (display ",\n" op)])
+          (fprintf op "  [~s, ~s]" (first s) (second s))
+          )
+        (display "\n]\n" op)))
     #:exists 'replace))
 
 ;coe
@@ -2396,8 +2427,9 @@
                                             (if firstarg
                                                 (not (memq a '(+ - * / frac expt)))
                                                 (not (memq a '(* / frac expt)))))
-                                       (and (eq? encloser '*) (not (memq a '(* frac expt))))
-                                       (and (eq? encloser '/))))
+                                       (and (eq? encloser '*) (not (memq a '(* / frac expt))))
+                                       (and (eq? encloser '/) (not (memq a '(*))))
+                                       ))
                          (format "( ~a )" x)
                          x)])
             ; (printf "infix ret'd ~s\n" ans)
@@ -2505,8 +2537,9 @@
       (set! *prereqs-used* (cons sym *prereqs-used*)))))
 
 (define (add-starter-file sf)
-  (unless (member sf *starter-files-used*)
-    (set! *starter-files-used* (cons sf *starter-files-used*))))
+  (cond [(member sf *starter-files-used*) #f]
+        [else (set! *starter-files-used* (cons sf *starter-files-used*))
+              #t]))
 
 (define holes-to-underscores
   (let* ([hole *hole-symbol*]

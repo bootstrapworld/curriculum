@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-17
+# last modified 2023-04-11
 
 # echo massage-distribution-lesson "$@"
 
@@ -63,6 +63,8 @@ for pl in $proglangs; do
   cd ..
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
+
+scrubproglangsubdirs $lessonName
 
 if test ! -f $lessonName/.cached/.proglang-pyret -a ! -f $lessonName/.cached/.proglang-none; then
   mkdir -p $lessonName/.cached

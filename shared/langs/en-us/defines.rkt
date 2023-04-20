@@ -37,10 +37,10 @@
       "\n"
       "[.pathway_external_links]\n") o))
 
-(define (print-link-to-glossary o)
+(define (print-link-to-glossary course o)
   (display
     (string-append
-      "\n- link:./pathway-glossary.shtml[Glossary]\n"
+      "\n- link:../../Glossary.shtml?pathway=" course "[Glossary]\n"
       "-- A list of vocabulary words used in this pathway.\n"
       "We also provide a link:../../lib/bilingual-glossary.html[bilingual glossary],\n"
       "which defines all vocabulary words across our lessons in English and Spanish.") o))
@@ -137,7 +137,7 @@
       "teachers? These forums are the place to do it.\n") o))
 
 (define (print-other-resources course o)
-  (print-link-to-glossary o)
+  (print-link-to-glossary course o)
   (print-link-to-standards course o)
   (print-link-to-teacher-resources course o)
   (print-link-to-forum o))

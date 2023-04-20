@@ -1,0 +1,75 @@
+= Booleans
+
+*Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).* What will each of the expressions below evaluate to? _Write down your prediction in the blanks provided and then type the code into the Interactions Area to see what it returns._
+
+++++
+<style>
+#content td {padding: 0.6rem 0px !important}
+#content table .autonum::after { content: ')'; }
+#content th { text-align: center !important; }
+</style>
+++++
+
+
+[.table1, cols="2, .>2, .>2, 0, 3, .>2, .>2", frame="none", grid="none", stripes="none" options="header"]
+|===
+|								    	| *Prediction*	| *Result*
+||                                		| *Prediction*	| *Result*
+
+| @n @show{(code '(<= 3 4))}   			| @fitb{}{}  	| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string>? "a" "b"))} 	| @fitb{}{}  	| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(= 3 2))}				| @fitb{}{}		| @fitb{}{@ifsoln{false}
+||@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+| @n @show{(code '(< 2 4))}				| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(>= 5 5))}			| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(>= 4 6))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+
+| @n @show{(code '(<> 3 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+| @n @show{(code '(<> 4 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string>=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|===
+
+@n In your own words, describe what `<` does.
+
+@fitb{}{@ifsoln{checks whether the first number is smaller than the second number; returns true if it is and false if it isn't}}
+
+@vspace{1ex}
+
+@n In your own words, describe what `>=` does.
+
+@fitb{}{@ifsoln{checks whether the first number is greater than or equal to the second number; returns true if it is and false if it isn't}}
+
+@vspace{1ex}
+
+@n In your own words, describe what `<>` does.
+
+@fitb{}{@ifsoln{checks whether the two numbers are unequal; returns true if they're unequal and false if they're equal}}
+
+@vspace{1ex}
+
+[cols="5, .>2, .>2", frame="none", grid="none", stripes="none"]
+|===
+|													 | *Prediction:*	| *Result:*
+@ifproglang{wescheme}{
+|@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|@n @show{(code '(string=? "tree"   "tree"))}		 | @fitb{}{}		| @fitb{}{@ifsoln{true}}
+}
+|@n @show{(code '(string-contains?  "catnap" "cat"))}| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+|@n @show{(code '(string-contains?  "cat" "catnap"))}| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|===
+
+@n In your own words, describe what `string-contains` does. Can you generate another expression using `string-contains` that returns true?
+
+@fitb{}{@ifsoln{checks if the second string is contained in the first string; returns true if it is and false if it isn't}}
+
+@n There are infinite numbers values out there (...-2,-1,0,-1,2... ) and infinite string values ("a", "aa", "aaa"...) But how many different _Boolean_ values are there?
