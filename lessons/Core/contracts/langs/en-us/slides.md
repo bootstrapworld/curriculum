@@ -213,6 +213,10 @@ The error messages in this environment are _designed_ to be as student-friendly 
 - What is the contract for `star`? 
 - The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
 
+<!--
+No! The Domain and Range are the same, but the function name is different... and that's important because the `star` and `square` functions do something very different with those inputs!_
+-->
+
 ---
 {layout="Investigate-DN"}
 
@@ -228,7 +232,6 @@ You will be adding to these contract pages and referring back to them for the re
 {layout="Synthesize"}
 # Exploring Image Functions
 
-- `square` and `star` have the same Domain _(Number, String, String)_ and Range _(Image)_. Did you find any other shape functions with the same Domain and Range?
 - Does having the same Domain and Range mean that the functions do the same things? 
 - A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
 
@@ -260,6 +263,17 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 - What other numbers did the computer need to already know in order to build the `triangle` function? 
 - If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
 
+<!--
+- What kind of triangle did `triangle` build?
+** _The `triangle` function draws equilateral triangles_
+- Only one of the inputs was a number. What did that number tell the computer?
+** _The size of the triangle_
+- What other numbers did the computer need to already know in order to build the `triangle` function?
+** _All equilateral triangles have three 60 degree angles and 3 equal sides_
+- If we wanted to build an isosceles triangle or a right triangle, what additional information would the computer need to be given?
+** _A right triangle requires the base (Number) and the height (Number). An isosceles triangle requires a leg (Number) and an angle (Number)._
+-->
+
 ---
 {layout="Investigate-DN"}
 # Contracts Help Us Write Code
@@ -268,7 +282,7 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 
 - Optional: @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
 - Optional: @printable-exercise{pages/radial-star.adoc} 
-- Optional:  @opt-printable-exercise{pages/star-polygon.adoc} 
+- Optional: @opt-printable-exercise{pages/star-polygon.adoc} 
 
 ---
 {layout="Synthesize"}
@@ -282,7 +296,9 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
-How to diagnose and fix errors is a skill we will continue working on developing. Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 
+Diagnosing and fixing errors is a skill we will continue working on developing. 
+
+Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 
 
 All the other errors are @vocab{contract errors}. 
 
