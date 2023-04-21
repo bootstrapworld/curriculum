@@ -1,4 +1,4 @@
-# last modified 2023-03-24
+# last modified 2023-04-21
 
 export MAKE_DIR := lib/maker/
 
@@ -71,6 +71,12 @@ clean:
 
 ###############################################################################
 
+force:
+	rm -fr $(TOPDIR)/distribution
+	$(MAKE)
+
+###############################################################################
+
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
@@ -108,6 +114,7 @@ help:
 	@echo "  make              -- updates distribution/, HTML only"
 	@echo "  make book         -- updates PDFs and workbooks too"
 	@echo "  make linkcheck    -- additionally verifies all links"
+	@echo "  make force [book] -- build from scratch
 	@echo
 	@echo The following do not build
 	@echo
