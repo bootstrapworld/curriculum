@@ -1,9 +1,9 @@
 #lang racket
 
-; last modified 2023-04-19
+; last modified 2023-04-21
 
 (require json)
-(require file/sha1)
+; (require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "html-tag-gen.rkt")
@@ -625,18 +625,7 @@
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (anonymize-filename img)
-  ; (printf "doing anonymize-filename ~s\n" img)
-  (let-values ([(dir fname _) (split-path img)])
-    (when (eqv? dir 'relative) (set! dir 'same))
-    (let ([basename (path->string (path-replace-extension fname ""))]
-          [ext (path-get-extension fname)])
-      (build-path dir
-                  (path-replace-extension
-                    (substring
-                      (bytes->hex-string (call-with-input-string basename sha1-bytes))
-                      0 16)
-                    ext)))))
+
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")])

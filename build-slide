@@ -1,13 +1,10 @@
 #!/bin/bash
 
-eval $(grep '^SEMESTER=' ./deploy-to-brown)
-eval $(grep '^YEAR=' ./deploy-to-brown)
-if test -n "$SEMESTER" -a -n "$YEAR"; then
-  semesterYear=$SEMESTER$YEAR
-else
-  semesterYear=latest
-fi
-bootstraproot=https://bootstrapworld.org/materials/$semesterYear
+export SEASON=latest
+
+# export SEASON=fall2023
+
+bootstraproot=https://bootstrapworld.org/materials/$SEASON
 
 SED=sed
 
