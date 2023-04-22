@@ -10,7 +10,10 @@
   gen-new-id
   qualify-proglang
   create-zero-file
+  anonymize-filename
   )
+
+(require file/sha1)
 
 (define (truthy-getenv ev)
   (let ([x (getenv ev)])
@@ -94,3 +97,16 @@
     (call-with-output-file f
       (lambda (o)
         (display 0 o) (newline o)))))
+
+(define (anonymize-filename img)
+  ; (printf "doing anonymize-filename ~s\n" img)
+  (let-values ([(dir fname _) (split-path img)])
+    (when (eqv? dir 'relative) (set! dir 'same))
+    (let ([basename (path->string (path-replace-extension fname ""))]
+          [ext (path-get-extension fname)])
+      (build-path dir
+                  (path-replace-extension
+                    (substring
+                      (bytes->hex-string (call-with-input-string basename sha1-bytes))
+                      0 16)
+                    ext)))))

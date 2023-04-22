@@ -35,6 +35,15 @@ But one number line isn't enough!
 What are the coordinates of the Dog, if it’s on the upper left-hand edge of the screen?
 -->
 
+---
+{layout="Launch"}
+# Navigating a Grid
+
+By adding a second number line, we can locate a character _anywhere_ on the screen in either direction. The first line we drews is called the @vocab{x-axis}, which runs from left to right. The second line, which runs up and down, is called the @vocab{y-axis}. A 2-dimensional @vocab{coordinate} consists of both the x- and y-locations on the axes.
+
+@image{images/2dPosition.png}
+
+A coordinate pair is always written in the form of (x, y). When we write down these coordinates, we always put the x before the y (just like in the alphabet!). Most of the time, you’ll see coordinates written like this: (200, 50) meaning that the x-coordinate is 200 and the y-coordinate is 50.
 
 ---
 {layout="Investigate"}
@@ -53,6 +62,15 @@ What are the coordinates of the Dog, if it’s on the upper left-hand edge of th
 - Should any of the characters have x-coordinates that are very similar? How come?
 - Should any of the characters have y-coordinates that are very similar? How come?
 - How do you think this concept relates to a video game? 
+
+<!--
+* Should any of the characters have x-coordinates that are very similar? How come?
+** _Ninja Cat and the cloud have similar x-coordinates. They have the same horizontal position._
+* Should any of the characters have y-coordinates that are very similar? How come?
+** _The Ruby and the Dog have similar y-coordinates. They have the same vertical position._
+* How do you think this concept relates to a video game?
+** _Answers vary: we need to know where characters are on the screen, we need a way for players to interact with certain parts of the screen, etc_
+-->
 
 ---
 {layout="Launch"}
@@ -76,14 +94,14 @@ Turn to @printable-exercise{pages/BrainstormGame.adoc}.
 As a group, come up with at least one idea for a game!
 - Every game has a BACKGROUND (where the game is set)
 - Every game has a PLAYER (moves up and down)
-- Every game has a DANGER (moves left/right - lose points if you hit!)
-- Every game has a TARGET (moves left/right - gain points if you hit!)
+- Every game has a DANGER (moves left/right - lose points if you hit it!)
+- Every game has a TARGET (moves left/right - gain points if you hit it!)
 
 ---
 {layout="InvestigateC"}
 # Bridging to video games
 
-Find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is a great place to find transparent images. 
+In a minute, you're going to find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is a great place to find transparent images. 
 
 @image{images/image-search.png}
 
@@ -95,6 +113,7 @@ Find images for your game! Tip: @link{http://www.DuckDuckGo.com, DuckDuckGo} is 
 Use this @link{https://docs.google.com/drawings/d/1xXNWcbJ7KOgTClFQeHq-tIy0xmeZds9N3OktvEBaO4c/copy, Google Draw template} to create a Screenshot.
 
 Screenshot must include:
+- BACKGROUND, PLAYER, DANGER, TARGET
 - Estimates of coordinates for each character.
 - 2 characters that have similar x-coordinates.
 - 2 characters that have similar y-coordinates.
@@ -105,7 +124,7 @@ Screenshot must include:
 
 What games did you come up with?
 
-What are the coordinates of the dog before it gets onscreen?
+What are the coordinates of the DANGER before it gets onscreen?
 
 Why do we make estimates? 
 
