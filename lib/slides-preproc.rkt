@@ -5,7 +5,6 @@
 (require json)
 (require "readers.rkt")
 (require "utils.rkt")
-(require "starter-files.rkt")
 (require "function-directives.rkt")
 
 (define-namespace-anchor *slides-namespace-anchor*)
@@ -78,8 +77,7 @@
 
     (unless (file-exists? img)
       ; (printf "image ~s doesnt exist\n" img)
-      (let ([img-anonymized
-              (system-echo (format "~a/lib/anonymize-filename.sh" *topdir*) img)])
+      (let ([img-anonymized (anonymize-filename img)])
         ; (printf "anon image file is ~s\n" img-anonymized)
         (when img-anonymized
           (set! img img-anonymized))))
