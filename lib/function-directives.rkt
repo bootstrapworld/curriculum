@@ -889,9 +889,10 @@
     (set! transformer-type (string-downcase transformer-type)))
   (let ([style-transformer-type
           (lambda (type)
-            (if (and *show-transformer-type?* transformer-type
+            (if (and (or *show-transformer-type?* *solutions-mode?*)
+                     transformer-type
                      (string=? transformer-type type))
-                ".transformer_type_checked"
+                ".transformer_type.chosen"
                 ".transformer_type"))])
 
   (string-append
@@ -1066,9 +1067,10 @@
     (set! question-type (string-downcase question-type)))
   (let ([style-question-type
           (lambda (type)
-            (if (and *show-question-type?* question-type
-                     (string=? question-type type))
-                ".question_type_checked"
+            (if (and  (or *show-question-type?* *solutions-mode?*)
+                      question-type
+                      (string=? question-type type))
+                ".question_type.chosen"
                 ".question_type"))])
     (string-append
       "*Question Type*\n\n(circle one):"

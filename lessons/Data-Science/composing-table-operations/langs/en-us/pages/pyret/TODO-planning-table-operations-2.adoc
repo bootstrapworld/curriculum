@@ -1,0 +1,68 @@
+= Planning Table Operations (2)
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+.data th:last-of-type, .data td:last-of-type * {
+  font-style: italic !important; text-align: center;
+}
+</style>
+++++
+
+@do{
+
+(define exp1 '(filter (filter t is-young) is-fixed))
+(define exp2 '(sort (filter (filter t is-female) is-fixed) "age" true))
+(define exp3 '(bar-chart (filter (filter t is-female) is-fixed) "age"))
+(define exp4 '(pie-chart (filter (filter (build-column t "kilos" kilograms) is-heavy) is-fixed) "sex"))
+(define exp5 '(box-plot (build-column (filter (filter t is-female) is-fixed) "kilos" kilograms) "kilos"))
+}
+
+The table `t` below represents four animals from the shelter:
+
+[.data, cols='6', options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds  | kilos
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`    | @ifsoln{`12.72`}
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`    | @ifsoln{`41.81`}
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`  | @ifsoln{`16.04`}
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`  | @ifsoln{ `2.95`}
+|===
+
+You have the following functions defined below (read them _carefully!_):
+
+  fun is-female(r): r["sex"] == "female"  end
+  fun kilograms(r): r["pounds"] / 2.2     end
+  fun is-heavy(r):  r["kilos"] > 25       end
+  fun is-fixed(r):  r["fixed"]           end
+
+For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
+
+[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+|===
+|
+| Prompt
+| Circle of Evaluation
+
+| @n
+| Produce a Table containing all young, fixed animals
+| @show{(coe exp1)}
+
+| @n
+| Produce a Table showing all fixed female animals, sorted by age
+| @showsoln{(coe exp2)}
+
+| @n
+| Produce a bar-chart for all fixed female animals, showing the distribution of `fixed`
+| @showsoln{(coe exp3)}
+
+| @n
+| Produce a pie-chart for all heavy, fixed animals, showing the distribution of `sex`
+| @showsoln{(coe exp4)}
+
+| @n
+| Produce a box-plot for all fixed, female animals, showing the distribution of `kilos`
+| @showsoln{(coe exp5)}
+
+|===
