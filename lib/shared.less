@@ -507,6 +507,7 @@ body.workbookpage {
   /* Some elements show either solution mode or a blank */
   .solution { font-style: italic; }
   .blank    { color: rgba(0,0,0,0); }
+  .chosen::after { content: '✅'; }
 
   /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
   .autonum { 
@@ -607,7 +608,7 @@ body.LessonNotes {
   border-collapse: collapse;
   width: 100%;
   td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
-  td { padding: 0.2rem 0.625rem; }
+  td { padding: 0.2rem 0.325rem; }
   td p.tableblock { font-size: 0.65rem; }
 
   .fitbruby { text-align: left !important; }
@@ -622,6 +623,7 @@ body.LessonNotes {
   .question_type.chosen { 
     font-style: italic; font-weight: bold; border: solid 1px black; 
     border-radius: 50%;
+    &::after { position: absolute; };
   }
 }
 
@@ -785,11 +787,10 @@ table.recipe_title    {
   div.transformer_type p::before { content: ""; }
   table.transformer_type td:first-of-type .content { display: flex; flex: row; }
   table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
-  div.transformer_type.chosen p::before {
-    content: "x";
-    text-align: center;
-    line-height: 1rem;
-    color: black;
+  div.transformer_type.chosen p::after {
+    position: relative;
+    top: -19px;
+    left: 9px;
   }
   .recipe_formula, .codap_transformer { display:  flex !important; }
   .codap_transformer p { width:  100%; }
