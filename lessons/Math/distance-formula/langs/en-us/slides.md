@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchR"}
 # Distance in 1 Dimension
 
-Open your saved Game Starter File.
+Sign in to @starter-file{program-list} and open your saved Game Starter File.
 
 At this point:
 
@@ -87,7 +87,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 - Click Run, and practice using `line-length` in the @vocab{Interactions Area} with different values for `a` and `b`.
 
 <!--
-- What do you notice? Both of the examples do the same thing, even though the numbers are given in a different order. It's a piecewise function! It uses inequalities.
+- What do you notice? _Both of the examples do the same thing, even though the numbers are given in a different order. It's a piecewise function! It uses inequalities._
 -->
 
 ---
@@ -147,11 +147,6 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 
 - If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?{style="font-size:16pt"}
 
-
-<!--
-Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some @online-exercise{https://cdn.kutasoftware.com/Worksheets/PreAlg/Pythagorean%20Theorem.pdf, refresher Pythagorean Theorem Practice.} 
--->
-
 ---
 {layout="LaunchC"}
 # Distance in 2 Dimensions
@@ -166,6 +161,8 @@ Watch this video of a geometric proof of the Pythagorean theorem, and its applic
 - What questions do you have?
 
 <!--
+Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some  @opt-printable-exercise{pages/pythag-practice.pdf, Pythagorean Theorem Practice}
+	
 Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theoream. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.
 -->
 
@@ -196,6 +193,8 @@ Debrief these workbook pages - or have students pair-and-share - before moving o
 All of the practice we've done so far today focused on a screenshot of a moment in time. With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them.
 
 But, as we play our games, the characters are constantly changing locations!
+
+In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!
 
 ---
 {layout="Investigate-DN"}
