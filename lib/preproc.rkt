@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-04-25
+; last modified 2023-04-21
 
 (require json)
 ; (require file/sha1)
@@ -624,6 +624,8 @@
 (define (clean-up-url-in-image-text text)
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
+
+
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")])
@@ -1662,13 +1664,10 @@
                                             "--"
                                             converted-text
                                             "\n--\n\n")]
-                                        [else
-                                          (string-append
-                                            "%CURRICULUMEMPTYTABLE%"
-                                            (enclose-span
-                                              (string-append ".choice"
-                                                (if *solutions-mode?* ".chosen" ""))
-                                              converted-text))])
+                                        [else (enclose-span
+                                                (string-append ".choice"
+                                                  (if *solutions-mode?* ".chosen" ""))
+                                                converted-text)])
                                   o)))]
 
                            [(string=? directive "ifnotsoln")
