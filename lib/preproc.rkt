@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-04-21
+; last modified 2023-04-25
 
 (require json)
 ; (require file/sha1)
@@ -1664,7 +1664,7 @@
                                             "--"
                                             converted-text
                                             "\n--\n\n")]
-                                        [else (enclose-span
+                                        [else (enclose-div
                                                 (string-append ".choice"
                                                   (if *solutions-mode?* ".chosen" ""))
                                                 converted-text)])
