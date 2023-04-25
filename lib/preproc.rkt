@@ -1655,20 +1655,11 @@
                                                          (call-with-output-string
                                                            (lambda (o)
                                                              (expand-directives i o)))))])
-                                (display
-                                  (cond [contains-nl?
-                                          (string-append
-                                            "\n\n[.choice"
-                                            (if *solutions-mode?* ".chosen" "")
-                                            "]\n"
-                                            "--"
-                                            converted-text
-                                            "\n--\n\n")]
-                                        [else (enclose-div
-                                                (string-append ".choice"
-                                                  (if *solutions-mode?* ".chosen" ""))
-                                                converted-text)])
-                                  o)))]
+                                (display (enclose-div
+                                           (string-append ".choice"
+                                             (if *solutions-mode?* ".chosen" ""))
+                                           converted-text)
+                                         o)))]
 
                            [(string=? directive "ifnotsoln")
                             (let ([text (read-group i directive #:multiline? #t)])
