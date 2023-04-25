@@ -1,9 +1,10 @@
 = Which Ones Belong? (Absolute Value & Negate)
 
-For each row, place a check mark by each Circle of Evaluation that meets the condition stated on the left.
+For each row, cross out any Circles of Evaluation that do NOT meet the condition stated on the left. *NOTE:* Some rows might not need anything crossed out!
 
 ++++
 <style>
+.chosen::after { content: '❌' !important; }
 div.circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
@@ -23,55 +24,50 @@ td > .content > .paragraph {
 
 | @n
 | Which Circles evaluate to @math{20}?
-
-@ifsoln{Circles 1 and 3.}
-| @show{(coe '(negate (negate 20)))}
-@show{(coe '(negate (negate -20)))}
+|
+@show{(coe '(negate (negate 20)))}
+@ifsoln-choice{@show{(coe '(negate (negate -20)))}}
 @show{(coe '(abs (negate 20)))}
-@show{(coe '(negate (abs 20)))}
+@ifsoln-choice{@show{(coe '(negate (abs 20)))}}
 
 | @n
 | Which Circles evaluate to @math{-3}?
-
-@ifsoln{Circles 1 and 2.}
-
-| @show{(coe '(negate (abs 3)))}
+|
+@show{(coe '(negate (abs 3)))}
 @show{(coe '(negate (abs -3)))}
-@show{(coe '(abs (negate 3)))}
-@show{(coe '(abs (negate -3)))}
+@ifsoln-choice{@show{(coe '(abs (negate 3)))}}
+@ifsoln-choice{@show{(coe '(abs (negate -3)))}}
 
 | @n
 | Let @math{h=9}. Which Circles evaluate to @math{9}?
-
-@ifsoln{Circles 1 and 3.}
-| @show{(coe '(negate -h))}
-@show{(coe '(negate (abs h)))}
+|
+@show{(coe '(negate -h))}
+@ifsoln-choice{@show{(coe '(negate (abs h)))}}
 @show{(coe '(abs -h))}
-@show{(coe '(negate (negate -h)))}
+@ifsoln-choice{@show{(coe '(negate (negate -h)))}}
 
 | @n
 | Let @math{h=6}. Which Circles evaluate to @math{6}?
-
-@ifsoln{Circles 1 and 3.}
-| @show{(coe '(+ (abs h) (- h h)))}
-@show{(coe '(+ (negate h) (- h h)))}
+|
+@show{(coe '(+ (abs h) (- h h)))}
+@ifsoln-choice{@show{(coe '(+ (negate h) (- h h)))}}
 @show{(coe '(* (/ h h) (abs h)))}
 
 | @n
 | Let @math{k=99}. Which Circles evaluate to @math{0}?
 
-@ifsoln{All Circles!}
-| @show{(coe '(+ k (negate k)))}
+|
+@show{(coe '(+ k (negate k)))}
 @show{(coe '(+ (negate k) k))}
 @show{(coe '(+ (abs (+ 45 44)) (negate k)))}
 
 | @n
 | Let @math{a=11} and @math{b=20}. Which Circles evaluate to @math{31}?
-@ifsoln{Circles 1, 2, and 3.}
-| @show{(coe '(abs (+ a b)))}
+|
+@show{(coe '(abs (+ a b)))}
 @show{(coe '(abs (+ b a)))}
 @show{(coe '(abs (negate (+ b a))))}
-@show{(coe '(negate (abs (+ a b))))}
+@ifsoln-choice{@show{(coe '(negate (abs (+ a b))))}}
 
 |===
 
