@@ -19,7 +19,7 @@ A function has exactly one output for each input.
 {layout="Launch"}
 # Intro to Piecewise Functions
 
-Today we are going to act out a special kind of function.
+We are going to act out a special kind of function.
 
 * If your birthday is in the summer, make an O with your arms
 * If your birthday is in the fall, make an X with your arms or body.
@@ -64,7 +64,7 @@ _Why does this set of directions **not** represent a function?_
 _Some students should have nothing to do. Others should look confused as to what to do. They may be wearing sneakers and pants and not be able to put their hands on their head and on their hips at the same time. They may be wearing a tshirt and not be able to make a T and an O with their arms simultaneously._
 
 _A function has exactly one output for each input._
-Rhis set of directions doesn't represent a function: people wearing a tshirt were told to do two conflicting things! And people wearing sneakers and pants were told to do two conflicting things!_
+This set of directions doesn't represent a function: people wearing a tshirt were told to do two conflicting things! And people wearing sneakers and pants were told to do two conflicting things!_
 
 -->
 
@@ -104,7 +104,7 @@ __What if we want to write functions that apply different rules, based on certai
 - Complete @printable-exercise{pages/red-shape-explore.adoc}
 
 <!--
-You may also have students work with the @opt-starter-file{mood-generator} using @printable-exercise{pages/mood-generator-explore.adoc}_
+If you have more time to devote to piecewise functions and conditionals, we have additional starter files and scaffolds in the Additional Practice materials.
 -->
 
 ---
@@ -144,6 +144,7 @@ Let's see how the Design Recipe could help us to write a piecewise function.
 * Turn to @printable-exercise{red-shape-dr.adoc}
 * How do the Contract and Purpose Statement compare to other Contracts we've seen?
 * How do the examples compare to other examples we've seen?
+
 <!--
 _The Contract and Purpose Statements don't change: we still write down the name, Domain and Range of our function, and we still write down all the information we need in our Purpose Statement (of course, now we have more important information to write - like our condition(s)!)._
 
@@ -164,8 +165,7 @@ Think back to our examples of piecewise functions (ticket sales, postage, cell-p
 <!--
 Up until now, there's been a pattern that students may not have noticed: the number of things in the Domain of a function was _always_ equal to the number of labels in the example step, which was _always_ equal to the number of variables in the definition. Make sure you explicitly draw students' attention to this here, and point out that this pattern *no longer holds* when it comes to piecewise functions. When it doesn't hold, that's how we _know_ we need a piecewise function!
 
-Optional: You may also have students work with @opt-printable-exercise{mood-generator-dr.adoc}. Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:16pt"}
-
+{style="font-size:16pt"}
 -->
 
 ---
@@ -229,10 +229,20 @@ This practically gives away the body of our function definition!
 {layout="Supplemental"}
 # Additional Practice
 
+Mood Generator: 
+_Note: this file uses emojis. Although they look like images, they are actually characters in a string._
+* @opt-starter-file{mood-generator} 
+* @printable-exercise{pages/mood-generator-explore.adoc}
+* @opt-printable-exercise{mood-generator-dr.adoc}
+
+Alice's Restaurant:
 * @opt-starter-file{alices-restaurant}
 * @opt-printable-exercise{pages/restaurant-intro.adoc}
 * @opt-printable-exercise{pages/restaurant-explore.adoc}
 * @opt-printable-exercise{pages/restaurant-dr.adoc}
+
+Onto Functions:
+* Not all piecewise functions are one-to-one! If you're ready to think about _Onto Functions_, try @opt-printable-exercise{decide-defend-onto.adoc}.
 
 <!--
 If you have more time for working with Piecewise Functions, you may want to have students create a _visual representation_ of how the computer moves through a conditional function.

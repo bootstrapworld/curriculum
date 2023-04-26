@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-04-11
+# last modified 2023-04-25
 
 # echo massage-distribution-lesson "$@"
 
@@ -19,6 +19,8 @@ fi
 
 # ensure lesson plan adoc always present, even if empty
 test ! -f $d/index.adoc && touch $d/index.adoc
+
+echo $src > $d/.repodir.txt.kp
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
