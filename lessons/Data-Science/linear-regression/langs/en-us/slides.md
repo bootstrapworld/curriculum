@@ -23,9 +23,9 @@ In both plots, use `weeks` as your @vocab{response variable} and `name` for the 
 
 *“Can we _predict_ an animal's adoption time based on its size? Its age?”*
 
-We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{font-size:16pt}
+We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{style="font-size:16pt"}
 
-**Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted?** And which one would give us a better prediction?{font-size:16pt}
+**Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted?** And which one would give us a better prediction?{style="font-size:16pt"}
 
 <!--
 
