@@ -1,11 +1,37 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-23
+-- last modified 2023-04-25
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
+function make_titletxt_file(f)
+  -- print('doing make_titletxt_file', f)
+  if not file_exists_p(f) then return end
+  local dir = ''
+  local base = f
+  if f:find('/') then
+    dir = f:gsub('(.*/).*', '%1')
+    base = f:gsub('.*/(.*)', '%1')
+  end
+  base = base:gsub('%..*', '')
+  local titletxt_file = dir .. '.cached/.' .. base .. '.titletxt'
+  os.remove(titletxt_file)
+  local i = io.open(f)
+  for L in i:lines() do
+    if L:find('^=%s') then
+      local o = io.open(titletxt_file, 'w+')
+      o:write((L:gsub('^=%s+', '')))
+      o:write('\n')
+      o:close()
+      break
+    end
+  end
+  i:close()
+end
+
 index_file = 'index.adoc'
-index_title_file = '.cached/.index.titletxt'
+
+make_titletxt_file(index_file)
 
 workbook_pages_og_file = 'pages/workbook-pages.txt'
 
@@ -15,28 +41,6 @@ notes_pages_ls_file = 'pages/.cached/.notes-pages-ls.txt.kp'
 
 if not file_exists_p(workbook_pages_og_file) then
   touch(workbook_pages_og_file)
-end
-
-os.remove(index_title_file)
-
-do
-  if not file_exists_p(index_file) then
-    goto doexit
-  end
-  --
-  local i = io.open(index_file)
-  for f in i:lines() do
-    if f:find('^=%s') then
-      local o = io.open(index_title_file, 'w+')
-      o:write(f:gsub('^=%s+', ''))
-      o:write('\n')
-      o:close()
-      break
-    end
-  end
-  i:close()
-  --
-  ::doexit::
 end
 
 os.remove(workbook_pages_file)
@@ -71,3 +75,16 @@ do
   o:close()
   ol:close()
 end
+
+function make_workbook_page_titletxt_files(dir)
+  local ls_output = io.popen('ls ' .. dir)
+  for f in ls_output:lines() do
+    if f:find('%.adoc$') then
+      make_titletxt_file(dir .. '/' .. f)
+    end
+  end
+  ls_output:close()
+end
+
+make_workbook_page_titletxt_files('pages')
+make_workbook_page_titletxt_files('solution-pages')
