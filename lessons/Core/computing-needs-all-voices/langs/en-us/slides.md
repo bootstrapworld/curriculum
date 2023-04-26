@@ -6,7 +6,7 @@
 {layout="Launch"}
 # Who writes the Code?
 
-We're going to watch this five-minute clip and take a few minutes to write down our Notices and Wonders @printable-exercise{NoticeAndWonder.adoc, here}.
+We're going to watch this five-minute clip and take a few minutes to write down our Notices and Wonders @printable-exercise{NoticeAndWonder.adoc, here}.{style="font-size:14pt"}
 
 @[youtube](nKIu9yen5nc)
 
