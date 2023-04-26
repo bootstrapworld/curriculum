@@ -77,13 +77,7 @@ for natlang in *; do
   export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
   export LESSON="$lsn"
   # echo Doing $LESSON
-  repoLESSON=$LESSON
-  if test -f .cached/.proglang-wescheme; then
-    # FIXME: allow arbitrary proglangs
-    repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
-  elif test -f .cached/.proglang-codap; then
-    repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
-  fi
+  repoLESSON=$(cat .repodir.txt.kp)
 
   # echo repoLESSON is $repoLESSON
 
@@ -130,8 +124,8 @@ for natlang in *; do
           cat .tmp.txt
         else
           grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
-          cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
-          echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+          cp "$idfile" $topdir/$repoLESSON/
+          echo Remember to push $repoLESSON/$idfile to Git repo
         fi
       fi
       if test -f "$idfile"; then
