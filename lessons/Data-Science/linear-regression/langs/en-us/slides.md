@@ -104,7 +104,7 @@ Open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
 - Could the @vocab{regression line} ever be above or below _all_ the points? Why or why not?{style="font-size:16pt"}
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate2"}
 # Intro to Linear Regression 
 
 Let's explore scatter plots for weeks-v-pounds and weeks-v-age.
