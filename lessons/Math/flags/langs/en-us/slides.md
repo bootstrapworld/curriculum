@@ -33,13 +33,14 @@ The width of the rectangle is 300 and the height is 200. What coordinates for th
 
 Open the @starter-file{flags} in a new tab, save a copy, and click “Run”.
 
-There are some special lines in this file called *comments*. The programmer who wrote this code included a series of messages - called comments - that will never be read by the computer. {style="font-size:16pt"}
+The programmer who wrote this code included a series of messages - called *comments* - that will never be read by the computer. {style="font-size:16pt"}
 
 Professional programmers use comments __all the time__. They are a way for programmers to leave notes for one another so that teammates can follow each other’s thinking in order to collaborate efficiently, and even for a single programmer to keep track of their thinking when they come back to their code another day.
 {style="font-size:16pt"}
 
-@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
 @ifproglang{wescheme}{In WeScheme, we use a semicolon (`;`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
+@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
+
 
 ---
 {layout="Investigate-DN"}
@@ -60,6 +61,9 @@ Professional programmers use comments __all the time__. They are a way for progr
 1. The center of the blue stripe is placed at (@show{(code `150)}, @show{(code '(/ 200 6))}). How did the programmer know to use 150 as the x-coordinate? What was the programmer thinking when she coded the y-coordinate as @show{(code '(/ 200 6))}?
 1. Explain the thinking behind coding the red stripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
 
+<!--
+200/3 evaluates to a Number that is exactly 1/3 the height of a flag that is 200 pixels tall. To locate these stripes vertically using their center points, we'll have to visualize the center lines of the rectangles... which effectively divides the flag into sixths with the centers of the rectangles located at 1/6, 3/6, and 5/6 of the height of the flag.
+-->
 ---
 {layout="Synthesize"}
 # Putting Images Together
@@ -110,8 +114,11 @@ Matching activities to support student thinking:
 - Once you're done, return to the @starter-file{flags} and define those parts.
 - Then, compose those parts using `put-image`, and make your flag!
 
+OPTIONAL CHALLENGE: Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
+
+
 <!-- 
-Paper Flag Models to Code: In this next exercise, students will be decomposing the image of a flag. For a more tactile experience, you could have students construct images of the flags they choose using construction paper. This should happen between the step where they describe the shapes needed to compose the flags image and write the code to build the image.  The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank".
+Paper Flag Models to Code: In this exercise, students will be decomposing the image of a flag. For a more tactile experience, you could have students construct images of the flags they choose using construction paper. This should happen between the step where they describe the shapes needed to compose the flags image and write the code to build the image.  The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank".
 -->
 
 ---
@@ -137,3 +144,5 @@ Why is it useful to define each part of the flag first, before stitching the ima
 - @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.{style="font-size:15pt"}
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.{style="font-size:15pt"}
+
+- Explore more flags at @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard}

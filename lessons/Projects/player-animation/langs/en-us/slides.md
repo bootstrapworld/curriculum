@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch-DN"}
 # Defining Piecewise Functions 
 
-- Open your saved copy of the Game Starter File, or @starter-file{game, make a new copy}.
+- Sign in to @starter-file{program-list} and open your saved game starter files
 - You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to refresh your memory on how they work.
 
 
@@ -32,7 +32,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 {layout="Investigate-DN"}
 # Defining Piecewise Functions
 
-* Open your saved copy of the @starter-file{game} in a new tab, and look for `update-player`.
+* Look for `update-player` in your game file.
 * What is the contract for `update-player`?
 * What does each part of the domain and range represent?
 * How does the y-coordinate of `PLAYER` change when the user presses the "up" key?

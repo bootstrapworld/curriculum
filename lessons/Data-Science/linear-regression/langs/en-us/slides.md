@@ -23,9 +23,9 @@ In both plots, use `weeks` as your @vocab{response variable} and `name` for the 
 
 *“Can we _predict_ an animal's adoption time based on its size? Its age?”*
 
-We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{font-size:16pt}
+We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{style="font-size:16pt"}
 
-**Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted?** And which one would give us a better prediction?{font-size:16pt}
+**Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted?** And which one would give us a better prediction?{style="font-size:16pt"}
 
 <!--
 
@@ -60,10 +60,10 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 
 -->
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Intro to Linear Regression 
 
-@right{@image{images/lr-pounds-v-weeks.png, 300}}
+@image{images/lr-pounds-v-weeks.png, 300}
 
 Given a value on the x-axis, this line allows us to predict what the corresponding value on the y-axis might be. **This allows us to make predictions based on our data!**
 
@@ -104,7 +104,7 @@ Open this @link{https://www.geogebra.org/m/ZcVIxKtF, Interactive LR Plot}.
 - Could the @vocab{regression line} ever be above or below _all_ the points? Why or why not?{style="font-size:16pt"}
 
 ---
-{layout="InvestigateR"}
+{layout="Investigate2"}
 # Intro to Linear Regression 
 
 Let's explore scatter plots for weeks-v-pounds and weeks-v-age.

@@ -161,7 +161,7 @@ var starterFiles = {
   "food": {
     "title": "Global Food Supply & Production",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1fjS_Ak67B1pxXk7S0704kUlO0tQClrdi"
+      "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS&v=4d870d2"
     }
   },
   "grouped-samples": {

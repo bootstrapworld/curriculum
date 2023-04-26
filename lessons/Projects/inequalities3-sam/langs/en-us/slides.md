@@ -26,6 +26,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 # Introducing Sam
 
 - What is something you noticed about this program?
+- What do you wonder?
 - What do you see when Sam is at (0,0)?  Why is that? 
 - How far can Sam go to the left and stay on the screen? 
 - How could we write this as an @vocab{expression}? 
@@ -55,7 +56,6 @@ There are three functions defined in @starter-file{inequalities-sam}. What are t
 
 - What _should_ @ifproglang{pyret}{`is-onscreen`} @ifproglang{wescheme}{`onscreen?`} do?
 
-
 <!--
 - What _should_ our left-checking function do? _Check to see if x is greater than -50_
 - What _should_ our right-checking function do? _Check to see if x is less than 690_
@@ -67,34 +67,44 @@ There are three functions defined in @starter-file{inequalities-sam}. What are t
 # Introducing Sam 
 With your partner, complete @printable-exercise{pages/left-and-right.adoc}.  
 
-When you're finished, fix the corresponding functions in your @starter-file{inequalities-sam} and test it out.
+---
+{layout="Investigate"}
+# Introducing Sam
 
-Note: When you type in `is-safe-right`, it may not do what you expect...
+Make sure you have a `TRUE` example and a `FALSE` example!
 
+@image{images/safe-left-dr.png}{width="700"}
 
 <!--
-**False isn't wrong!**	
+	**False isn't wrong!**	
 Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_, such as when Sam is offscreen.
 - Push students to think carefully about corner-cases, such as when Sam is _exactly_ at -50 or 690.
-
-@ifproglang{wescheme}{
-Students will notice that fixing `safe-left?` keeps Sam from disappearing off the left, but fixing `safe-right?` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
-}
-
-@ifproglang{pyret}{
-Students will notice that fixing `is-safe-left` keeps Sam from disappearing off the left, but fixing `is-safe-right` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson.
-}
 -->
 
 ---
 {layout="Investigate"}
 # Introducing Sam
 
-@image{images/safe-left-dr.png}{width="700"}
+When you're finished, fix the corresponding functions in your @starter-file{inequalities-sam} and test it out.
+
+What do you notice?
+What do you wonder?
+
+<!--
+@ifproglang{wescheme}{
+Students will notice that fixing `safe-left?` keeps Sam from disappearing off the left, but fixing `safe-right?` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson section.
+}
+
+@ifproglang{pyret}{
+Students will notice that fixing `is-safe-left` keeps Sam from disappearing off the left, but fixing `is-safe-right` doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why. The answer will be revealed in the next lesson section.
+}
+-->
 
 ---
 {layout="Synthesize"}
 # Introducing Sam
+
+Don’t trust the behavior of a complex system! Examples are where you look first. If they all pass, that’s a strong hint that the bug is elsewhere...
 
 @ifproglang{pyret}{
 - Does `is-safe-left` work correctly? How do you know?
@@ -105,8 +115,6 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 - Does `safe-left?` work correctly? How do you know?
 - Does `safe-right?` work correctly? How do you know?
 }
-Don’t trust the behavior of a complex system! Examples are where you look first. If they all pass, that’s a strong hint that the bug is elsewhere...
-
 
 ---
 {layout="Launch"}
@@ -115,11 +123,11 @@ Don’t trust the behavior of a complex system! Examples are where you look firs
 @image{images/sam-slide.png}{width="700"}
 
 <!--
+Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
+
 @ifproglang{wescheme}{
 *Note:* In this programming language, question marks are pronounced "huh?". So `safe-left?` would be pronounced "safe left huh?" This can be a source of some amusement for students!
 }
-
-Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
 
 Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @ifproglang{wescheme}{`safe-left?` and `safe-right?`} @ifproglang{pyret}{`is-safe-left` and `is-safe-right`} will respond with either "true" or "false".
 
@@ -209,7 +217,7 @@ When you're done, select a driver to share to their screen, and modify the @star
 
 <!--
 Extension Option
-What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?  What functions would need to change? _We recommend that students tackling this challenge define a new function `is-onscreen-2` 
+What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?  What functions would need to change? We recommend that students tackling this challenge define a new function @ifproglang{pyret}{`is-onscreen-2`} @ifproglang{wescheme}{onscreen2?} because they will need their original @show{(code 'onscreen?)} code in the next section of this lesson.` 
 -->
 
 ---
@@ -238,8 +246,10 @@ Apply what you learned from Sam the Butterly to fix the `is-safe-left`, `is-safe
 }
 
 <!--
+Students should NOT add @show{(code 'safe-top?)} and @show{(code 'safe-bottom?)} to their game code!
+
 Common Misconceptions:
-- Students will need to test their code with their images to see if the boundaries are correct for them.  Students with large images may need to use slightly wider boundaries, or vice versa for small images.  In some cases, students may have to go back and rescale their images if they are too large or too small for the game.
+- Students will need to test their code with their images to see if the boundaries are correct for them. In some cases, students may have to go back and rescale their images if they are too large or too small for the game.
 - Students may be surprised that the same code that "traps Sam" also "resets the `DANGER` and `TARGET` ". It's critical to explain that these functions do _neither_ of those things! All they do is test if a coordinate is within a certain range on the x-axis. There is other code (hidden in the teachpack) that determines _what to do if the coordinate is offscreen_. The ability to re-use function is one of the most powerful features of mathematics - and programming!
 -->
 
