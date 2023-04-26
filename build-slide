@@ -52,6 +52,7 @@ fi
 export topdir=$(pwd)
 
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
+parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 
 export PROGLANG=$proglang
 
@@ -77,13 +78,7 @@ for natlang in *; do
   export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
   export LESSON="$lsn"
   # echo Doing $LESSON
-  repoLESSON=$LESSON
-  if test -f .cached/.proglang-wescheme; then
-    # FIXME: allow arbitrary proglangs
-    repoLESSON=$(echo $LESSON|$SED -e 's/-wescheme$//')
-  elif test -f .cached/.proglang-codap; then
-    repoLESSON=$(echo $LESSON|$SED -e 's/-codap$//')
-  fi
+  repoLESSON=$(cat .repodir.txt.kp)
 
   # echo repoLESSON is $repoLESSON
 
@@ -109,7 +104,7 @@ for natlang in *; do
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt
+        node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
         # node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/slides.mkd
@@ -121,7 +116,7 @@ for natlang in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId --use-fileio > .tmp.txt
+        $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/slides.mkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
@@ -130,8 +125,8 @@ for natlang in *; do
           cat .tmp.txt
         else
           grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
-          cp "$idfile" $topdir/lessons/$repoLESSON/langs/$natlang/
-          echo Remember to push lessons/$repoLESSON/langs/$natlang/$idfile to Git repo
+          cp "$idfile" $topdir/$repoLESSON/
+          echo Remember to push $repoLESSON/$idfile to Git repo
         fi
       fi
       if test -f "$idfile"; then
