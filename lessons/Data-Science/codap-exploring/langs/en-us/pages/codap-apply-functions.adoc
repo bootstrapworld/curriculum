@@ -10,6 +10,7 @@
 
 Let's say we want to predict what each animal will weigh if its weight doubles. We could take out a calculator or do some computation with paper and pencil! Fill in the portion of the Animals table below, computing each animal's weight, doubled.
 
+@vspace{1ex}
 
 [.FillVerticalSpace,cols="^.^5,^.^5,^.^5", stripes="none", options="header"]
 |===
@@ -45,7 +46,7 @@ It would be quite time-consuming to do this for the entire table! Instead, we ca
 
 @fitb{}{@ifsoln{'Pounds' appeared in pink, because CODAP recognizes that is an attribute in the dataset. Case matters!}}
 
-@n The second table has a column titled `Weeks increased by 2`. What formula will populate the column according to its description? 
+@n The second table has a column titled `Weeks increased by 2`. What formula will populate the column according to its description?
 
 @fitb{}{@ifsoln{`Weeks + 2`}}
 
@@ -57,6 +58,8 @@ It would be quite time-consuming to do this for the entire table! Instead, we ca
 
 == Applying Functions
 
+@vspace{1ex}
+
 In order to answer each of the questions below, you must first create a new column in @starter-file{animals}. Click on the attribute name for that new column and choose `Edit Formula` from the drop-down menu that appears. You will be typing into the `Edit Formula` box.
 
 @n Enter `sqrt(16)` into the `Edit Formula` box. How many arguments does `sqrt` expect? @fitb{}{@ifsoln{_1_}}
@@ -65,26 +68,28 @@ In order to answer each of the questions below, you must first create a new colu
 
 @n What type of output does `sqrt` produce? @fitbruby{30em}{@ifsoln{Number}}{Number? String? Boolean?}
 
-@n Which of these expressions will successfully populate a column? 
+@n Which of these expressions will successfully populate a column?
 
 [cols="1,1,1"]
 |===
 | @ifsoln-choice{`sqrt(Weight)`}
-| @ifsoln-choice{`sqrt(Legs)`}  
+| @ifsoln-choice{`sqrt(Legs)`}
 | `sqrt(Name)`
 |===
 
 @n Why will some of these expressions work and some generate errors? @fitb{}{@ifsoln{_CODAP finds the square root when the attribute provided is numerical, but CODAP produces an error message when given a string, because it can only calculate the square root of a number._}}
 
-@n Let's experiment with another expression: `stringLength(Name)`. What do you observe? 
-
-@fitb{}{@ifsoln{__7 appears, CODAP finds the amount of letters in each animal's name__}}
-
 
 == Putting it all together
 
+@vspace{1ex}
+
 - Create a column called `age-next-year` that uses an expression to add one year to each animal’s age.
 
+@vspace{1ex}
+
 - Create a column called `rounded-weight` that uses a function to give the weight of each animal rounded to the nearest whole number.
+
+@vspace{1ex}
 
 - Create a column called `old` that uses a Boolean to indicate which animals are over 5 years old.
