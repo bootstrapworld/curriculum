@@ -148,18 +148,21 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 - If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?{style="font-size:16pt"}
 
 ---
+{layout="Launch"}
+# Distance in 2 Dimensions
+
+Connecting Pythagorean Theorem to video games:
+
+On the next slide you'll watch a  video created by Tovah Brown of a geometric proof of the Pythagorean theorem, and its application to finding distance between game characters.
+
+- Try your best to explain the proof from the video to a partner.
+- What questions do you have?
+
+---
 {layout="LaunchC"}
 # Distance in 2 Dimensions
 
 @[youtube](Ln7myXQx8TM)
-
-Connecting Pythagorean Theorem to video games
-
-Watch this video of a geometric proof of the Pythagorean theorem, and its application to finding distance between game characters (created by Tovah Brown!).
-
-- Try your best to explain the proof from the video to a partner
-- What questions do you have?
-
 <!--
 Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some  @opt-printable-exercise{pages/pythag-practice.pdf, Pythagorean Theorem Practice}
 	
