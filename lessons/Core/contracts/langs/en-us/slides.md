@@ -296,17 +296,17 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
-Diagnosing and fixing errors is a skill we will continue working on developing. 
+Diagnosing and fixing errors is a skill we will continue working on developing.{style="font-size:15pt"}
 
-Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 
+Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc.{style="font-size:15pt"} 
 
-All the other errors are @vocab{contract errors}. 
+All the other errors are @vocab{contract errors}.{style="font-size:15pt"} 
 
-If you see an error and you know the syntax is right, ask yourself these three questions:
+If you see an error and you know the syntax is right, ask yourself these three questions:{style="font-size:15pt"}
 
-- What is the function that is generating that error?
-- What is the contract for that function?
-- Is the function getting what it needs, according to its Domain?
+- What is the function that is generating that error?{style="font-size:15pt"}
+- What is the contract for that function?{style="font-size:15pt"}
+- Is the function getting what it needs, according to its Domain?{style="font-size:15pt"}
 
 <!-- Common Misconceptions: Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
 
