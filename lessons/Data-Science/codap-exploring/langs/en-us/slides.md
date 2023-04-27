@@ -8,7 +8,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="LaunchR"}
-# Numbers & Strings 
+# Strings & Numbers 
 
 When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
 
@@ -21,41 +21,56 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 
 ---
 {layout="Launch-DN"}
-# Numbers & Strings
+# Strings & Numbers
 
 - Open the @starter-file{animals} in CODAP.
-- Play around in our new platform! Record your observations on @printable-exercise{codap-exploration.adoc}.
+- Explore this data - and CODAP! - by following the instructions and recording your observations on @printable-exercise{codap-exploration.adoc}.
 - What did you Notice? What do you Wonder?
+- Did you encounter any difficulties?
+
+<!--
+Possible challenges: the grey plus sign does not appear unless a table or table row is selected; the button that minimizes doesn't appear unless the table's title is selected; and, the same button that minimizes also expands.
+-->
 
 ---
-{layout="LaunchC}
-# Numbers & Strings
+{layout="Launch"}
+# Strings & Numbers
 
-Did you create a blank column titled `test`? To do so, select the grey plus sign (`+`) in the upper right-hand corner of the Animals Table. 
+We are going to explore two basic data types: 
 
-@image{images/grey-plus-sign.png}
+- @vocab{Numbers} - a data type representing real numbers
 
----
-{layout="LaunchC"}
-# Numbers & Strings
+- @vocab{Strings} - a data type for any sequence of characters between quotation marks.
 
-In the next activity, you will click on the `test` cell in the header of your table, and then choose `Edit formula` from the resulting drop-down menu.
-
-@image{images/edit-formula.png}
 
 ---
-{layout="LaunchC"}
-# Numbers & Strings
+{layout="Investigate-DN"}
+# Strings & Numbers
 
-As you complete each directive, you will re-open `Edit Formula` (below), delete your previous entry and then input the next entry.
+- Turn to @printable-exercise{strings-n-numbers.adoc}.
+- Open the @starter-file{strings-n-numbers}.
 
-@image{images/edit-formula-box.png}
+---
+{layout="Investigate2"}
+# Strings & Numbers
+
+
+Start with Table A. One by one, working from left to right, follow the directives at the top of each column. *In order to follow the directives, you must first click the column name, and then choose "Edit Formula" from the drop-down menu that appears. You will be typing into the "Edit Formula" box.*{style="font-size:14pt"}
+
+
+@image{images/drop-down.png}
+@image{images/type-your-name.png}
+
+
+<!--
+** _The Synthesize section (to follow) outlines several of CODAP's features that students likely observed._
+** _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: missing commas, unclosed strings, etc._
+-->
 
 ---
 {layout="Investigate"}
-# Numbers & Strings
+# Strings & Numbers
 
-- Complete @printable-exercise{numbers-n-strings.adoc}.
 - What did you Notice? What do you Wonder?
 - Did you get any error messages? What did you learn from them? 
 
@@ -66,14 +81,13 @@ As you complete each directive, you will re-open `Edit Formula` (below), delete 
 
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Strings & Numbers
 
-CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
+CODAP knows about many kinds of Numbers (like Integers, Reals, etc), and they behave pretty much the way they do in math. Discuss what students have learned:
 
 - Numbers and Strings evaluate to themselves.
 - CODAP converts fractions into decimals automatically.
-- Anything in quotes is a String, with one exception: CODAP will convert strings containing only numbers (e.g. “42” but not “42 hello”) into number values.
-- Strings _must_ have quotation marks on both sides.
+- Anything in quotes is a String, with one exception: CODAP will convert strings containing only Numbers (e.g. “42” but not “42 hello”) into Number values.
 
 
 <!--Error messages are a way for CODAP to explain what went wrong, and are a helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help.
@@ -81,14 +95,14 @@ CODAP knows about many kinds of Numbers, and they behave pretty much the way the
 
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Strings & Numbers
 
 CODAP knows about many kinds of Numbers, and they behave pretty much the way they do in math. 
 
 - Strings _must_ have quotation marks on both sides.
-- Operators work just like they do in math - with a few exceptions. 
-- CODAP knows the order of operations.
-- Types matter! We can subtract one number from another, but we can't subtract the Number `4` from the String `"hello"`.
+- Operators work just like they do in math - with a few exceptions. The `+`, for instance, will join together two strings, or a Number and a String.
+- CODAP follows the standard order of operations.
+
 
 ---
 {layout="Launch"}
@@ -120,7 +134,11 @@ Brainstorm other scenarios where Booleans are useful in and out of the programmi
 {layout="Investigate-DN"}
 # Booleans
 
-Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
+
+- Turn to @printable-exercise{pages/booleans.adoc}.
+- Write down your predictions before testing them in CODAP. When you're ready, test the Boolean expression in @starter-file{boolean}. 
+- You will work from left to right, clicking on the column name, and then choosing "Edit Formula" from the drop-down menu that appears. You will type each Boolean into the "Edit Formula" box.
+
 
 ---
 {layout="Synthesize"}
@@ -133,27 +151,43 @@ What sets Booleans apart from other data types?
 {layout="Launch"}
 # Expressions and Functions
 
+You know about Numbers, Strings, Booleans and Operators, all of which behave like they do in math. 
+
+But what about expressions? 
+
+You may remember expressions from algebra: @math{x + 1}.
+
 - Turn to @printable-exercise{pages/codap-apply-functions.adoc}.
-- Let's complete the first table together, with pencil and paper.
-- You complete the second table on your own.
+- Complete the table, calculating pounds doubled.
 
 ---
-{layout="Launch-DN"}
+{layout="Investigate"}
 # Expressions and Functions
 
- By using CODAP, we can evaluate expressions much more quickly and efficiently. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
+By using CODAP, we can evaluate expressions much more quickly and efficiently than we might with paper and pencil. Rather than evaluating in our heads, we will provide CODAP with a formula so that CODAP can do the math!
 
-- With your partner, open the @starter-file{animals} and use it to finish questions 1 and 2 on @printable-exercise{pages/codap-apply-functions.adoc}.
-- Note that attribute names that are more than one word need to be entered inside of tick marks.
+
 
 ---
-{layout="Launch-DN"}
+{layout="Investigate-DN"}
+# Expressions and Functions
+
+- With your partner, open the @starter-file{animals} and use it to finish questions 1 and 2 on @printable-exercise{pages/codap-apply-functions.adoc}.
+- For question 3, consider other scenarios where it would be useful to enter an expression or function as the formula for an attribute.
+
+---
+{layout="Investigate"}
 # Expressions and Functions
 
 CODAP also allows us to insert _functions_ into the formula box! *Arguments* (or "inputs") are the values passed into the function. CODAP has lots of @link{https://codap.concord.org/help/functions, built-in functions} that we can use to play with our dataset.
 
+
+---
+{layout="Investigate-DN"}
+# Expressions and Functions
+
 - With your partner, complete @printable-exercise{pages/codap-apply-functions.adoc}.
-- What did you learn about the two functions `sqrt` and `stringLength`?
+- What did you learn about the function `sqrt`?
 
 ---
 {layout="Synthesize"}

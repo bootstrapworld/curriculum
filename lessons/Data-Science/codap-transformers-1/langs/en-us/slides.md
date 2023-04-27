@@ -8,133 +8,192 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Launch"}
-# Sorting by Changing a Table
+# Filtering Tables
 
-Open the @starter-file{animals} in CODAP. How many animals' names start with the letter M? What would make it easier to figure out how many animals' names start with the letter M?
+What if the shelter needs to look at some information about only the dogs, or only the animals that have been fixed? There are many situations where, given a table, we want to _filter out_ some of the rows and only look at a specific group from that table.
 
 ---
-{layout="InvestigateC"}
-# Sorting by Changing a Table
+{layout="Launch"}
+# Filtering Tables
 
-Let's sort the animals alphabetically by name and see if we get the same answer as we did before!
+- Open @starter-file{animals}.
+- Using what you've learned about deleting rows, create a table that includes _only dogs_.
+- Raise your hand when you are finished. How many dogs are in our dataset?
 
-@image{images/sort-ascending-by-name.png}{width="650"}
 
+<!--
+** _In case students need a reminder, they can select the green index number for a row (left-most column) and then select "Delete Case" from the drop-down menu that appears._
+-->
+
+
+---
+{layout="Launch"}
+# Filtering Tables
+
+Can you summarize the work that you just completed?
+
+<!--
+Invite a few students to share. When possible, urge students to break down their process into a series of concrete steps (_see below_). This will prime them to better understand exactly what is going on in CODAP when the filtering happens nearly instantaneously (as will be the case in the subsequent portion of this lesson!).
+-->
+
+
+---
+{layout="Launch"}
+# Filtering Tables
+
+To create a table with only dogs, here's what we did:
+
+- We looked at the first row.
+- If `Species = "dog"` was TRUE we kept the row. If it was FALSE we got rid of it.
+- We moved on to the second row.
+- Again, we determined if `Species = "dog"` was TRUE or FALSE.
+- We repeated this process over and over, until we had inspected the entire table.
 
 ---
 {layout="Investigate"}
-# Sorting by Changing a Table
+# Filtering Tables
 
-- Can you sort the animals by age, from youngest to oldest?
-- How about from heaviest to lightest?
-- Now sort the animals table by how long it took for each animal to be adopted, in ascending order.
+- Did this feel efficient or like a good use of our time?
+- Did anyone wish for a simpler way? 
+- Did anyone see room for mistakes to get made? 
+
+<!-- 
+Some students may have deleted a dog row by accident! Or initially missed a cat row.
+-->
+
 
 ---
 {layout="Investigate}
-# Sorting by Changing a Table
+# Filtering Tables
 
-Now, go to the hamburger menu in the upper left corner and select "Save" from the drop-down menu. 
-
-You will be prompted to login to Google and enter your login credentials, linking CODAP with their Google Drive. 
-
-After saving the sorted table, close CODAP.
+- Now I want everyone to create _two_ filtered tables: one table with just dogs, and one table with all pets that weigh less than 5 pounds.
+- I'd like these tables to exist side-by-side within the same CODAP file, so we can discuss them together.
 
 <!--
-You might even pretend that the online portion of class is over; you're about to do a bit of performing for students in order to illustrate a point.
+    ** _Allow students to give this task a try, but cut them off after a few minutes._
 
-Now: dramatically tell students that you forgot something! You REALLY need to know which animal was the third animal on the original table. Direct students to reopen the saved  file (they can access it by selecting the hamburger icon again). Tell them they must _undo_ any sorting and then consult the original list.
+Students will likely run into major difficulties. Some may attempt to "undo" previous actions; some may hit "refresh" to reload the original file (effective, if they haven't saved yet!); some may attempt to create a new blank table within the same file that they repopulate manually.
 
-Students will discover that they in fact _cannot_ undo their actions, thereby uncovering one of the primary limitations of this type of table transformation.
+The goal here is to manufacture a situation that will propel students to see the need for an as-yet unfamiliar tool. This tool will require a bit of practice to master, but will enable much more efficient data manipulation!
 -->
-
-
----
-{layout="Investigate"}
-# Sorting by Changing a Table
-
-We _cannot_ undo actions when we have actually modified a table! This is a primary limitation of the type of table transformation we have just practiced.
-
 
 ---
 {layout="Synthesize"}
-# Sorting by Changing a Table
+# Filtering Tables
 
-- Does sorting the Animals Dataset produce a _new_ table, or change the existing one? How do you know?
-
-- Can you think of another scenario (like the one manufactured, above) when the inability to revert to the original table might cause problems?
-
-
-<!-- Sorting the dataset alters the existing table. No new tables appear. Whenever we experiment with data, there is a chance we will want to make comparisons to the original dataset.
--->
+- What problems did you encounter when trying to manually filter the Animals dataset?
+- What strategies did you try in order to create two side-by-side filtered tables, one with just dogs and one with all pets that weigh more than 50 pounds?
 
 ---
 {layout="Launch"}
-# Sorting with Transformers!
+# Filtering Tables with Transformers
 
-When we apply Transformers, we create _copies_ of the original dataset. The original dataset is always preserved - meaning there is no need to undo their actions, or to re-open a saved dataset to consider a different configuration. 
+Enter: _Transformers_!
 
-The Transformers plugin enables easy, low-stakes "what if?" exploration that encourages open-ended investigation.
+When we apply a Transformer, that Transformer creates a _copy_ of the original dataset with whatever modifications the we have specified. We just need to provide the Transformer with some key information, and select `Apply.`
 
----
-{layout="LaunchC"}
-# Sorting with Transformers!
-
-- Login to the @starter-file{animals} in CODAP.
-- Access the Transformers plugin.
-
-@image{images/plugins-location.png}{width="350"}
+The original dataset is always preserved - meaning there is no need to undo actions, or to re-open a saved dataset to consider a different configuration.
 
 
 ---
 {layout="Launch"}
-# Sorting with Transformers!
+# Filtering Tables with Transformers
 
-- Explore the different Transformers available, especially those categorized under “Construction.”
-- What do you Notice? What do you Wonder?
+- Open @starter-file{animals}.
+- Access "Plugins," then select "Transformers."
+- Find _three_ Transformers where you think you can guess what they do. What are they?
+
+@image{images/plugins-location.png}
 
 <!--
-_Students might notice the following: there are Transformers for constructing, measuring the center, aggregating, summarizing, restructuring, tidying, and copying; I often need to provide a dataset; sometimes I see contracts; sometimes I am asked to provide formulas._
+    Invite students to share their observations. Build enthusiasm for the new possibilities that are now available!
 -->
+
+
 ---
-{layout="InvestigateR"}
-# Sorting with Transformers!
+{layout="InvestigateR-DN"}
+# Filtering Tables with Transformers
 
-Another way to sort is with the Sort _Transformer_ (pictured below), which will create a _copy_ of the Animals dataset in which the animals are organized alphabetically by name.
+- Open the @starter-file{animals}.
+- Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer. We will pause to work on questions 4 and 5 together.
 
-Complete the @printable-exercise{pages/codap-sort-transformer.adoc} worksheet, which will walk you through creating, applying, and saving a `Sort` Transformer.
-
-@image{images/sort-transformer.png}{width="550"}
-
+@image{images/filter-ui-annotated.png}}
 
 <!--
-    Initially, students might question the value of using a Transformer to sort. At first, using the Transformer will quite likely feel more laborious than using the sort functionality embedded in CODAP. Encourage students to experiment with all of the functionality that the Transformers offer; invite them to be curious and playful as they work, to consider the possibilities afforded by Transformers. For instance, why might it be useful to name and save a Transformer?
+    Questions 4 and 5 are all about the @vocab{contract} and @vocab{purpose statement} for this expression. You will want to devote a few minutes to discussing these important concepts.
 -->
+
+
 
 ---
 {layout="Investigate"}
-# Sorting with Transformers!
+# Filtering Tables with Transformers
 
-New and modified tables created by Transformers are automatically saved.  
+Questions 4 and 5 are all about the @vocab{contract} and @vocab{purpose statement} for this expression.
 
-Each new table is titled first with the Transformer name, then the name of the dataset (in parentheses), followed by a number in curly braces at the end to indicate how many times a Transformer has been applied. You may rename saved tables, if you’d like. 
+- A @vocab{contract} is a statement of the @vocab{domain} (input) and @vocab{range} (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
 
-Each time you apply a saved Transformer, the _new_ datasets that are created will appear in the Transformer's "Dataset to sort" drop-down menu.
 
 ---
-{layout="Synthesize"}
-# Sorting with Transformers!
+{layout="Investigate"}
+# Filtering Tables with Transformers
+
+- A @vocab{Purpose Statement} is a way of describing what an expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is a dog", or "Computes the sum of `Age` and 2."
 
 
-- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
-- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
-- When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?
+
+---
+{layout="Investigate"}
+# Filtering Tables with Transformers
+
+As students complete page, consider: 
+
+- What happens if you forget to select a dataset from the drop-down menu?
+- When does the text color change?
+- Does CODAP mind if spelling is off?
+- What happens when students save a Transformer?
+- Can you predict any value in saving a Transformer?
+- Why might a clear, specific purpose statement be useful?
 
 
 <!--
-- Does the Transformer `Sort` produce a _new_ table, or change the existing one?
-** _The `Sort` Transformer produceds a new, modified copy of the original table._
-- You've now learned two different strategies for sorting a column of a table. What do the two strategies have in common? How are they different?
-** _Transformers can be named and saved for future use. Transformers create a modified copy of a table rather than altering the original dataset._
-- When would it be better to use the `Sort` Transformer to make a new Table, instead of changing the table? When might it be worse?
-** _If we are experimenting with a dataset and want to preserve the original table, it would make more sense to use a Transformer._
+- What happens if they forget to select a dataset from the drop-down menu?
+** _An error message appears: "Please choose a dataset to transform."_
+- When does the text color change?
+** _Strings are brown. When we enter an attribute, that text turns pink._
+- Does CODAP mind if spelling is off?
+** _CODAP will not recognize a misspelled attribute; an error message will appear saying the attribute is unrecognized._
+- What happens when students save a Transformer?
+** A new box appears with the Transformer's name at the top.
+- Can you predict any value in saving a Transformer?
+** _If I save a Transformer, I can use it whenever I'd like!_
+- Why might a clear, specific purpose statement be useful?
+** _If I save my Transformer, I will want to easily recognize what it does to the dataset._
+
+Students should observe that new and modified tables created by Transformers are automatically saved. Each new table is titled first with the Transformer name, then the name of the dataset (in parentheses). Students may rename saved tables, if they’d like. Highlight for students that, each time they apply a saved Transformer, the _new_ datasets that are created will appear in the Transformer's "Dataset to sort" drop-down menu.
+-->
+
+
+---
+{layout="Synthesize"}
+# Filtering Tables with Transformers
+
+
+
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Transformer's _expression_?
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+- How is saving a Transformer different from saving a dataset?
+
+
+
+<!--
+- What is the role of the `Filter` Transformer? How is its role unique from that of the Transformer's _expression_?
+** _The `Filter` Transformer walks through the table's rows, applying the expression to each row - then producing a new table containing only rows for which the expression returns `true`._
+- Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
+** _We could use the `Filter` Transformer to produce two new tables - one with only cats, and one with only dogs. We could then analyze and compare the weeks to adoption for each species._
+- If the shelter is purchasing food for older cats, what `Filter` Transformer would we create to determine how many cats to buy for?
+** _We would filter out cats where `Age (years) > 5`._
+- When applying Transformers, what did you notice about how transformed datasets were named?
+- How is saving a Transformer different from saving a dataset?
 -->
