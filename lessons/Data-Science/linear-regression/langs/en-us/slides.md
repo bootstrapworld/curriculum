@@ -192,21 +192,11 @@ Our goal is to use values of the variable on our x-axis to _predict_ values of t
 
 @image{images/lr-explained.png, 400}
 
-The resulting scatter plot looks like those we’ve seen before, but it has a few important additions.{style="font-size:15pt"}
+The resulting scatter plot looks like those we’ve seen before, but it has a few important additions.{style="font-size:12pt"}
 
-First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red).{style="font-size:15pt"}
+First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red).{style="font-size:12pt"}
 
-In this plot, we can see that **the slope of the line is 0.792**, which means that on average, **each extra year of age results in an extra 0.792 weeks of waiting to be adopted** (about 5 or 6 extra days).{style="font-size:15pt"}
-
----
-{layout="LaunchR"}
-# Linear Regression in Pyret
-
-@image{images/lr-explained.png, 400}
-
-By plugging in an animal’s age for _x_, we can make a _prediction_ about how many weeks it will take to be adopted.{style="font-size:16pt"}
-
-For example, **we predict a 5-year-old animal to be adopted in @math{0.792(5) + 2.285 = 6.245} weeks.** That’s the y-value exactly on the line at x=5.{style="font-size:16pt"}
+In this plot, we can see that **the slope of the line is 0.789**, which means that on average, **each extra year of age results in an extra 0.789 weeks of waiting to be adopted** (about 5 or 6 extra days).{style="font-size:12pt"}
 
 ---
 {layout="LaunchR"}
@@ -214,7 +204,17 @@ For example, **we predict a 5-year-old animal to be adopted in @math{0.792(5) + 
 
 @image{images/lr-explained.png, 400}
 
-**The intercept is `2.285`**. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this _too_ literally, and say that a newborn animal would be adopted in 2.285 weeks, because none of the animals in our dataset was that young.{style="font-size:16pt"} 
+By plugging in an animal’s age for _x_ in the predictor function @math{y = 0.789x + 2.309}, we can make a _prediction_ about how many weeks it will take to be adopted.{style="font-size:16pt"}
+
+For example, **we predict a 5-year-old animal to be adopted in @math{0.789(5) + 2.309 = 6.254} weeks.** That’s the y-value exactly on the line at x=5.{style="font-size:16pt"}
+
+---
+{layout="LaunchR"}
+# Linear Regression in Pyret
+
+@image{images/lr-explained.png, 400}
+
+**The intercept is `2.309`**. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this _too_ literally, and say that a newborn animal would be adopted in 2.309 weeks, because none of the animals in our dataset was that young.{style="font-size:16pt"} 
 
 Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a baby animal, whose age is close to 0, would take only about 3 weeks to be adopted.{style="font-size:16pt"}
 
@@ -224,7 +224,7 @@ Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a
 
 @image{images/lr-explained.png, 400}
 
-We also see **the @math{r}-value is +0.442**. The sign is positive, consistent with the fact that the scatter plot point cloud and line of best fit, slope upward.{style="font-size:16pt"}
+We also see **the @math{r}-value is +0.448**. The sign is positive, consistent with the fact that the scatter plot point cloud and line of best fit, slope upward.{style="font-size:16pt"}
 
 The fact that **the @math{r}-value is close to 0.5** tells us that the strength is **moderate**.{style="font-size:16pt"}
 

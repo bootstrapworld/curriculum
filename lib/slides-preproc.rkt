@@ -441,7 +441,7 @@
                             (display (make-image (first args)
                                                  (if (>= (length args) 2) (second args) ""))
                                      o))]
-                         [(member directive '("printable-exercise" "opt-printable-exercise"))
+                         [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (fully-qualify-link args directive) o))]
                          [(string=? directive "dist-link")
