@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"} 
-# Bar Charts  
+# Dot Plots and Bar Charts  
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -23,7 +23,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 - Open  @starter-file{animals} in CODAP.
 - Click the `graph` icon from the horizontal toolbar in the upper left. What appears?
 
-@image{images/codap-upper-left-toolbar.png}
+@image{images/codap-upper-left-toolbar.png, 500}
 
 ---
 {layout="LaunchR}
@@ -69,7 +69,7 @@ When you select a table row (or multiple table rows), the corresponding dots cha
 You can also resize the window by dragging its borders.
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Displaying Categorical Variables
 
 Once we have a graph of randomly distributed data points, we can organize the data by selecting attributes from our _table_ that we want to appear on the axes of our graph.
@@ -88,13 +88,17 @@ When students make a display of the `sex` of the animals, they will see that som
 {layout="Investigate"}
 # Displaying Categorical Variables
 
-Bar charts look a lot like another kind of display - called a "histogram" - which displays _numeric_ data, not categorical. Histograms and Bar Charts are very different! In CODAP, however, making a histogram and making a bar chart start the same way: by creating a dot plot that will be modified. This may cause students to think the resulting displays are the same, simply because making them _starts_ the same way, by creating a dot plot that will be modified.
+Bar charts look a lot like another kind of display called a "histogram", which displays _numeric_ data, not categorical. 
+
+Creating each of these displays begins the same way: we create a dot plot, and then modify it using CODAP's menus. Depending on what type of data the dot plot displays, we can transform it into either a bar chart (for categorical data) or a histogram (for numeric data).
 
 ---
 {layout="Synthesize"}
 # Displaying Categorical Variables
 
 Bar charts display how much of the sample belongs to each category. If they are based on sample data from a larger population, we use them to _infer_ the proportion of a whole population that might belong to each category.
+
+Pie charts display categorical data, too, but CODAP doesn't offer them largely because many find them @link{https://www.data-to-viz.com/caveat/pie.html, "challenging to read."}
 
 ---
 {layout="Synthesize"}
@@ -139,7 +143,7 @@ Let's share!
 {layout="Investigate"}
 # Exploring Other Displays
 
-CODAP is designed to be student-friendly and that the interface encourages guesswork... but we can save some time by being a bit more strategic.
+CODAP is designed to be student-friendly, and its interface encourages guesswork... but we can save some time by being a bit more strategic.
 
 ---
 {layout="Investigate"}
@@ -168,7 +172,7 @@ It might sound like this:
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Exploring Other Displays
 
 - With your partner, complete @printable-exercise{pages/plot-practice-2.adoc} and @printable-exercise{pages/plot-practice-3.adoc}.
@@ -185,13 +189,10 @@ There are _many_ possible misconceptions about displays that students may encoun
 Today you’ve added more data displays to your toolbox. You can create dot plots and bar charts to visually display categorical data, and you've developed a general approach to guide you as you create other displays.
 
 - What displays did you find that work with just one column of data?
-** _dot plots, bar charts, histograms and box plots_
 - What displays did you find that work with more than one column of data?
-** _scatter plots and lr-plots_
 - What displays did you find that work with categorical data?
-** _dot plots and bar charts_
 - What displays did you find that work with quantitative data?
-** _histograms, box plots, scatterplots, and lr-plots_
+
 
 
 <!--

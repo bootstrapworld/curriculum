@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"} 
-# Introduction to Transformers: Sort
+# Introduction to Transformers: Filter
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -92,11 +92,11 @@ Enter: _Transformers_!
 
 When we apply a Transformer, that Transformer creates a _copy_ of the original dataset with whatever modifications the we have specified. We just need to provide the Transformer with some key information, and select `Apply.`
 
-The original dataset is always preserved - meaning there is no need to undo actions, or to re-open a saved dataset to consider a different configuration.
+The original dataset is always preserved!
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC-DN"}
 # Filtering Tables with Transformers
 
 - Open @starter-file{animals}.
@@ -111,13 +111,13 @@ The original dataset is always preserved - meaning there is no need to undo acti
 
 
 ---
-{layout="InvestigateR-DN"}
+{layout="Investigate-DN"}
 # Filtering Tables with Transformers
 
-- Open the @starter-file{animals}.
+- Open the @starter-file{animals}.s
 - Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer. We will pause to work on questions 4 and 5 together.
 
-@image{images/filter-ui-annotated.png}}
+@image{images/filter-ui-annotated.png}
 
 <!--
     Questions 4 and 5 are all about the @vocab{contract} and @vocab{purpose statement} for this expression. You will want to devote a few minutes to discussing these important concepts.
@@ -129,24 +129,32 @@ The original dataset is always preserved - meaning there is no need to undo acti
 {layout="Investigate"}
 # Filtering Tables with Transformers
 
-Questions 4 and 5 are all about the @vocab{contract} and @vocab{purpose statement} for this expression.
+Questions 4 and 5 are all about the @vocab{contract} for the expression.
 
-- A @vocab{contract} is a statement of the @vocab{domain} (input) and @vocab{range} (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+A @vocab{contract} is a statement of the @vocab{domain} (input) and @vocab{range} (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs.
+
+Why does this contract make sense?
+
+<!--
+ For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+-->
+
+---
+{layout="Investigate"}
+# Filtering Tables with Transformers
+
+Question 6 is all about the @vocab{Purpose Statement} for the expression.
+
+A @vocab{Purpose Statement} is a way of describing what an expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is dog", or "Computes the sum of `Age` and 2."
+
+Look at Q6. What would be a good purpose statement for the expression `filter-is-dog`?
 
 
 ---
 {layout="Investigate"}
 # Filtering Tables with Transformers
 
-- A @vocab{Purpose Statement} is a way of describing what an expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is a dog", or "Computes the sum of `Age` and 2."
-
-
-
----
-{layout="Investigate"}
-# Filtering Tables with Transformers
-
-As students complete page, consider: 
+As you complete page, consider: 
 
 - What happens if you forget to select a dataset from the drop-down menu?
 - When does the text color change?
