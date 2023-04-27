@@ -45,7 +45,7 @@ We could also simply write @math{16}!
 {layout="Launch"}
 # Computation and Equivalence
 
-Numeric expressions are *equivalent* when they simplify to the same value.{style:"font-size:24pt"}
+Numeric expressions are *equivalent* when they simplify to the same value.{style="font-size:24pt"}
 
 
 
