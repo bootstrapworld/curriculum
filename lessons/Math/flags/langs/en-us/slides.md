@@ -145,4 +145,4 @@ Why is it useful to define each part of the flag first, before stitching the ima
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.{style="font-size:15pt"}
 
-- Explore more flags at @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard}
+- Explore more flags at @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard}{style="font-size:15pt"}
