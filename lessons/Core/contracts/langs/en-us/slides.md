@@ -1,6 +1,6 @@
 ---
 {layout="Core Title Slide"}
-# Contracts 
+# Contracts
 <!-- 
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
@@ -170,7 +170,7 @@ Here is an example of another function:
 
 @show{(code '(string-append "sun" "shine"))}
 
-Type it into the editor. What is its contract? 
+Type it into @starter-file{editor, the editor}. What is its contract? 
 
 <!--
 contract: `string-append :: String, String -> String`
@@ -222,7 +222,7 @@ No! The Domain and Range are the same, but the function name is different... and
 
 # Exploring Image Functions
 
-- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (Optional: these pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout})
+- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (_These pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout}._)
 
 - When you've got working expressions, record the contracts and the code!
 

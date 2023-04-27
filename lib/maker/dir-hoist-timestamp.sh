@@ -1,39 +1,23 @@
 #!/bin/bash
+# last modified 2023-04-27
 
-# last modified 2023-04-04
-
-TOUCH=touch
-
-running_problematic_OS=
-
-running_macOS=
-
-(echo $OSTYPE | grep -q darwin) && running_macOS=yes
-
-test -n "$running_macOS" && running_problematic_OS=yes
-
-test "$WSL_DISTRO_NAME" = Ubuntu && running_problematic_OS=yes
-
-test -n "$running_macOS" && TOUCH=gtouch
-
-function hoist() {
+function updateLangTimestamp() {
   local d=$1
-
   local dd
   for dd in "$d"/*; do
-    if test -d "$dd"; then
-      hoist "$dd"
-      test "$dd" -nt "$d" && $TOUCH -r "$dd" "$d"
-    elif test -f "$dd" -a -n "$running_problematic_OS"; then
-      local d_t=$(date +%s -r "$d")
-      local dd_t=$(date +%s -r "$dd")
-      test $dd_t -gt $d_t && $TOUCH -r "$dd" "$d"
+    # if the parent is a langs directory, it's the language folder for a lesson
+    # set the modification date to be that of the most-recently modified file
+    if [[ $d = *langs ]]; then
+      touch -mr $(find $dd -type f -exec stat -c "%Y %n" {} \; | sort -nr | head -1 | cut -d' ' -f2-) $dd
+    # if it's a directory that is NOT a lesson, walk through it looking for lessons
+    elif test -d "$dd"; then
+      updateLangTimestamp "$dd"
     fi
   done
 }
 
 for dir in "$@"; do
-  test -d "$dir" && hoist "$dir"
+  test -d "$dir" && updateLangTimestamp "$dir"
 done
 
 exit 0
