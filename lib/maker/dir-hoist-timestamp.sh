@@ -17,7 +17,7 @@ function updateLangTimestamp() {
 }
 
 for dir in "$@"; do
-  test -d "$dir" && $(time updateLangTimestamp "$dir")
+  test -d "$dir" && $(updateLangTimestamp "$dir")
 done
 
 exit 0
