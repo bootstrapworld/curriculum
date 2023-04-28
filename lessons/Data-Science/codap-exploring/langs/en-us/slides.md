@@ -172,7 +172,7 @@ By using CODAP, we can evaluate expressions much more quickly and efficiently th
 {layout="Investigate-DN"}
 # Expressions and Functions
 
-- With your partner, open the @starter-file{animals} and use it to finish questions 1 and 2 on @printable-exercise{pages/codap-apply-functions.adoc}.
+- With your partner, open the @starter-file{expressions-functions} and use it to finish questions 1 and 2 on @printable-exercise{pages/codap-apply-functions.adoc}.
 - For question 3, consider other scenarios where it would be useful to enter an expression or function as the formula for an attribute.
 
 ---
