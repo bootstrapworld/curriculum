@@ -31,7 +31,7 @@ In this lesson, we will transform and build columns to create _new attributes_. 
 
 
 ---
-{layout="InvestigateR-DN"}
+{layout="Investigate-DN"}
 # Transforming Columns
 
 Complete @printable-exercise{pages/codap-transform.adoc} in the @starter-file{animals} to explore how to create and apply a `Transform Attribute` Transformer.
@@ -55,11 +55,12 @@ So far, we've used Transformers to _filter_ and to _transform an attribute_. The
 
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Building Columns
 
+@image{images/build-ui-annotated.png}
+
 - Complete @printable-exercise{pages/codap-build.adoc} in the @starter-file{animals}.
-@iamge{images/build-ui-annotated.png}
 - Optional: Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}
 
 
