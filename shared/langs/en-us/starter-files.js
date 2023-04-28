@@ -137,7 +137,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz"
     },
     "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmTGZlaiPPm70GMJUmj6E%2Ffile.json"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
     }
   },
   "expanded-animals": {

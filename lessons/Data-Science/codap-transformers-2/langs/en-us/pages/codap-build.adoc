@@ -9,7 +9,7 @@ body.workbookpage td .autonum::after { content: ')' !important; }
 
 Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
 
-@vspace{2ex}
+@vspace{1ex}
 
 == Create, Apply, and Save a Build Attribute Transformer (Step by Step)
 
@@ -54,7 +54,7 @@ Make sure you’re logged into the @starter-file{animals} in CODAP. Select the P
 
 @vspace{1ex}
 
-@n Enter `Weight > 40` as the expression (Box 8).
+@n Enter `Pounds > 40` as the expression (Box 8).
 
 @vspace{1ex}
 
@@ -62,7 +62,6 @@ Make sure you’re logged into the @starter-file{animals} in CODAP. Select the P
 
 |===
 
-@vspace{1ex}
 
 == More Building (On Your Own)
 
@@ -70,15 +69,21 @@ Make sure you’re logged into the @starter-file{animals} in CODAP. Select the P
 
 @fitb{}{@ifsoln{Three animals.}}
 
-@n Use a Transformer to build a column that indicates the number of letters in each animal's name. How many animals have exactly eight letters in their name?
+@n Create and apply a Transformer that builds a column with the number of letters in each animal's name. What will you name your Transformer and the new attribute?
+
+@fitb{}{@ifsoln{Possible answer: build-nameLength and nameLength}}
+
+@n How many animals have exactly eight letters in their names? (If you're feeling adventurous, try using the `Count` Transformer here!)
 
 @fitb{}{@ifsoln{There are five animals with eight letters in their name.}}
 
-@n Now, use a Transformer and build a column that returns `true` if the number of letter's in an animal's name is less than or equal to five.  Which dataset will you need to add the attribute to? Why?
+@n Now, use a Transformer and build a column that returns `true` if the number of letters in an animal's name (the column you created in Q11!) is less than or equal to five. *_Important note!_ If your attribute name (from Q11) has a space or a hyphen, CODAP will produce an error when you apply your Transformer. The fix is to put your entire attribute name inside tick marks when you type in your expression. (The tick mark key is in the upper left-hand corner of your keyboard.)* What expression will you use?
 
-@fitb{}{@ifsoln{I'll need to use the dataset that I created in the previous step - otherwise my column with number of letters won't be included!}}
+@fitb{}{@ifsoln{Possible response: `nameLength <= 5`}}
 
-@fitb{}{}
+@n Which dataset will you need to apply this Transformer to? Why?
+
+@fitb{}{@ifsoln{I'll need to use the dataset that I created in Q11 - otherwise my column with number of letters won't be included!}}
 
 
 
