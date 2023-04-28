@@ -149,7 +149,7 @@ CODAP is designed to be student-friendly, and its interface encourages guesswork
 {layout="Investigate"}
 # Exploring Other Displays
 
-We're going to complete @printable-exercise{pages/plot-practice.adoc} together. To make a bar chart showing the sex of animals from the shelter, I will ask myself a series of important questions.
+We're going to complete @printable-exercise{pages/plot-practice.adoc} together. To make a dot plot showing the sex of animals from the shelter, I will ask myself a series of important questions.
 
 * Which attributes on which axes?
 * What type of data?
