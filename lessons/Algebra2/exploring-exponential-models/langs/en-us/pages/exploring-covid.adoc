@@ -1,0 +1,61 @@
+= Exploring the Covid Dataset
+++++
+<style>
+body.workbookpage td .autonum::after { content: ')' !important; }
+</style>
+++++
+For this page, you'll need to the  @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+@n Click "Run", and evaluate `covid-table` in the Interactions Area. Do you know what each column means?
+
+[cols="1a,1a,1a", frame="none", stripes="none"]
+|===
+| *day* - the number of days after February 20th, 2020
+| *state* - the state reporting the data
+| *positive* - the number of new, positive cases reported
+|===
+
+@n Evaluate `MA3`, `NH4` and `CT7` in the Interactions Area. Which states are represented by these rows? @fitb{}{@ifsoln{MA, CT, and NH}}
+
+@n In the Definitions Area on the left, define new Rows for Maine (ME) and Vermont (VT). Click "Run" and test these Rows out in the Interactions Area.
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols="1a,1a", options="frame",stripes="none"]
+!===
+| @n In Pyret, make a scatter plot showing the relationship between `day` and `positive`, using `state` as your labels, then sketch the resulting scatter plot below.
+|
+--
+Based on the scatter plot...
+
+@n What do you *Notice?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n What do you *Wonder?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n In which state did covid spread the fastest? @fitb{}{@ifsoln{MA}}
+
+@n In which state did covid spread the slowest? @fitb{}{@ifsoln{VT}}
+
+@n Are these _strong_ relationship(s), or weak ones? @fitb{}{@ifsoln{strong}}
+--
+!===
+
+@n On line 21 you'll find a Contract for a new function. Read it carefully, along with the description of the function's purpose on line 22. What is the name of this function? @fitb{5em}{@ifsoln{is-MA}} Domain? @fitb{5em}{@ifsoln{Row}} Range? @fitb{5em}{@ifsoln{Boolean}}
+
+@n What do you think @show{(code '(is-MA MA3))} will evalute to? @fitb{5em}{@ifsoln{true}}. @show{(code '(is-MA NH4))}? @fitb{5em}{@ifsoln{false}}. @show{(code '(is-MA CT7))}? @fitb{5em}{@ifsoln{false}}
+
+@center{**Try typing each of this into the Interactions Area on the right. Were you correct?**}
+
+@n In the Interactions Area, type @show{(code '(filter covid-table is-MA))}. What did this evaluate to? @fitb{}{} +
+@fitb{}{@ifsoln{A Table just for data from Massachusetts}}
+
+@n Type `MA-table` in the Interactions Area, then read the code on line 29 carefully. What is that code doing? @fitb{}{} +
+@fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
+
+@center{**Stop here! We'll continue after some discussion.**}
+
+
