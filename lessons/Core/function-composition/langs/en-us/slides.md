@@ -52,16 +52,32 @@ Three of the function cards we just used were for the functions `f`, `g` and `h`
 
 * `h` subtracts one from its input
 
-We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
+We can compose those functions in any order. 
+
+What if we composed them as `f(g(h(x)))` and evaluated them for `x = 4` ...
+
+<!--
+Answer on next slide!
+-->
 
 ---
 {layout="LaunchC"}
 # Diagramming Function Composition
 
-The circles of evaluation for @math{f(g(h(4)))} would look like this:
+The circles of evaluation for @math{f(g(h(x)))} are shown below:
+
+* Can you explain the diagram? 
+
+* What would the expression @math{f(g(h(4)))} evaluate to?
 
 @image{images/fghx.png}
- 
+
+<!--
+4 - 1 = 3
+3 + 6 = 9
+9 * 3 = 27	
+-->
+
 ---
 {layout="Investigate"}
 # Diagramming Function Composition
