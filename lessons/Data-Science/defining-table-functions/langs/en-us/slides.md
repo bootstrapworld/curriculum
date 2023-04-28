@@ -17,9 +17,6 @@ By now you've had a chance to explore functions on their own, thinking of them i
 
 Now it's time to use those representations to help us work with Tables!
 
-<!--
-
--->
 ---
 {layout="Launch"}
 # Reviewing Function Definition 
@@ -31,9 +28,6 @@ Now it's time to use those representations to help us work with Tables!
 - How old is it?
 - Complete questions 1-3 on @printable-exercise{making-connections.adoc}.
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Reviewing Function Definition 
@@ -64,9 +58,6 @@ examples:
 end
 ```
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Reviewing Function Definition 
@@ -83,9 +74,6 @@ end
 
 These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Miaulis" and "Nori", based on their `weeks` to adoption. But these examples only tell us part of the story!
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Reviewing Function Definition 
@@ -102,6 +90,12 @@ end
 
 In those first examples, where are the number `4` and `1` coming from?
 
+<!--
+  The first two examples are _correct_, but they don't show all of their work. The last two examples show how those values are looked up from the example rows. If you're stuck on the examples step, here's a useful trick to get you started: "Complete the following sentence: __For this Row, I...__" Whatever you answer is the precise description of what to do for your example!
+
+*You can use both kinds of examples in your code!* Sometimes we want to use real, concrete numbers to make sure our work is correct. And sometimes we need to show all of our work, to make sure we are defining the function correctly! Programmers often use a mix of the two.
+-->
+
 ---
 {layout="Synthesize"}
 # Synthesize
@@ -113,6 +107,14 @@ Each step in the Design Recipe helps us write the next one.
 - If we're having trouble writing the Definition, **we can check our Examples  to see the pattern.**
 
 These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
+
+---
+{layout="Launch"}
+# Design Recipe Telephone
+
+Most computer programs are written by huge teams! It is critical that each team member records their thinking with enough detail for other team members to be able to pick up where they left off.  
+
+We're going to practice collaborative programming and try writing some other Table Functions using the Design Recipe, through an activity called Design Recipe Telephone.
 
 ---
 {layout="LaunchR"}
@@ -130,6 +132,20 @@ Once you've finished, those solutions can be composed to analyze the Animals Dat
 1. Divide the class into groups of three.
 -->
 
+---
+{layout="Investigate"}
+# Design Recipe Telephone
+
+In this activity, each person in your group will start with a different word problem.{style="font-size:12pt"}
+
+* You will each be doing one step of each Design Recipe problem.{style="font-size:12pt"}
+* The student who continues working the problem that you start will be dependent on your work, so pay careful attention to making your part as precisely as possible. If they don't have the information they need, they will give it back to you for revision.{style="font-size:12pt"}
+* When you complete your step, you will fold your paper to hide the part that you were looking at so that only your work and the rest of the recipe is visible.{style="font-size:12pt"}
+* Then you will pass your work to the person to your right.{style="font-size:12pt"}
+* The person who has received your paper will review your work, and complete the next step based solely on what you wrote down for them.{style="font-size:12pt"}
+* You will receive a different problem from the person to your left.{style="font-size:12pt"}
+* If at any point your realize that the person before you didn't provide enough information, you may hand the paper back to them for revision.{style="font-size:12pt"}
+* When you've finished all three Design Recipes, turn to the Data Cycle for your set and work as a team to complete it!{style="font-size:12pt"}
 ---
 {layout="InvestigateR"}
 # Design Recipe Telephone
