@@ -95,7 +95,7 @@ for natlang in *; do
     rm -f $idfile
   fi
   if test -f slides.md; then
-    $PROGDIR/slides-preproc.rkt slides.md
+    $topdir/lib/slides-preproc.rkt slides.md
     if test -f slides.mkd; then
       title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
