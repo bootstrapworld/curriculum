@@ -61,15 +61,14 @@
       (cond [(file-exists? json-file)
              (set! *images-hash* (call-with-input-file json-file read-json))]
             [else
-              (unless (member json-file *missing-image-json-files*)
-                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file))
               (set! *images-hash* #t)])))
 
   ; (printf "*images-hash* = ~s\n" *images-hash*)
 
-  (let* ([image-file (call-with-values (lambda () (split-path img)) (lambda (x base y) base))]
-         [image-file (string->symbol (path->string image-file))]
+  (let* ([image-file (call-with-values
+                       (lambda () (split-path img))
+                       (lambda (x base y)
+                         (string->symbol (path->string base))))]
          [image-attribs (and (hash? *images-hash*) (hash-ref *images-hash* image-file #f))]
          [text (if (hash? image-attribs) (hash-ref image-attribs 'description "") "")])
 
@@ -82,11 +81,8 @@
         (when img-anonymized
           (set! img img-anonymized))))
 
-    (when (hash? *images-hash*)
-      (cond [(not image-attribs)
-             (printf "** WARNING: Image ~a missing from dictionary\n" image-file)]
-            [(string=? text "")
-             (printf "WARNING: Image ~a missing metadata\n" image-file)]))
+    (when (and (hash? *images-hash*) image-attribs (string=? text ""))
+      (printf "WARNING: Image ~a missing metadata\n" image-file))
 
     (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
         (format "**-- INSERT IMAGE ~a HERE --**" img)

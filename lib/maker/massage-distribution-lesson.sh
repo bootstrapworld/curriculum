@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-04-25
+# last modified 2023-04-28
 
 # echo massage-distribution-lesson "$@"
 
@@ -43,6 +43,7 @@ for pl in $proglangs; do
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
     cp -upr "$lessonName"/* "$lessonNamePl"
+    cp -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
   #
   cd "$lessonNamePl"
