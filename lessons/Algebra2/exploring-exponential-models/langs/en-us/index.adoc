@@ -47,27 +47,27 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1ueyf5
 - Working in pairs or small groups, complete questions 1-8 of @printable-exercise{exploring-covid.adoc}
 
 Review student answers to confirm that students have made a number of observations:
+
 * There is _more than one_ relationship in this dataset!
 * Every relationship seems extremely strong
 * Every relationship appears non-linear
 
 === Investigate
 
-This dataset has two interesting challenges for us. While it's clear that there are patterns in the data, it's almost like there are multiple, totally-distinct patterns for us to explore! Each relationship appears very strong, almost as if there are five separate models happening at the same time.
-
-It's going to be hard to fit a single model onto all these different relationships!
+While it's clear that there are patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all! Each relationship appears very strong, almost as if there are _five separate models_ happening at the same time.
 
 [.lesson-instruction]
 - We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
 - Working in pairs or small groups, complete the rest of of @printable-exercise{exploring-covid.adoc}.
 
-By now you've all had a chance to experiment with a new tool in Pyret called `filter`. How does this function work?
-** __The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
+By now you've all had a chance to experiment with `filter`. How does this function work?
+
+__The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
 
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's no correlation! Instead, we have several sub-groups each with their own _very strong correlation!_
 
 [.lesson-point]
-Simpson's Paradox: trends that are clearly present in sub-groups _disappear_ or _reverse_ when the groups are combined.
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
 
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
 
@@ -81,9 +81,11 @@ Create helper functions to filter at least three other states, then use them to 
 It's extremely common for students to think that filtering a table *changes the original table*. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`
 
 === Synthesize
-
-- Why aren't linear models working for us?
-- What else could we try?
+- Do you think this data shows a linear relationship? Why or why not?
+- Do you think this data shows a quadratic relationship? Why or why not?
+- Do you think this data shows some other kind of relationship? Why or why not?
+- In what other situations would it be useful to filter a dataset?
+- Can you think of other examples where Simpson's Paradox might arise?
 
 == Fitting Exponential Models @duration{35 minutes}
 
@@ -93,12 +95,67 @@ Students are introduced to exponential models, and extend their sampling techniq
 
 === Launch
 
+[.lesson-instruction]
+- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/09kyr4xlct, MA Covid Spread - Linear}.
+- Complete the *first* section on @printable-exercise{graphing-models.adoc}.
+- Using `lr-plot` in Pyret, come up with the best possible linear model, and write your answer at the bottom of @printable-exercise{exploring-covid.adoc}.
+- Class discussion: Are linear models a good fit for this data? Why or why not?
 
+Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanitory variable.
+
+If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+
+[.lesson-instruction]
+- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/73y2med4yj, MA Covid Spread - Quadratic}.
+- Complete the *second* section on @printable-exercise{graphing-models.adoc}.
+- Write the best quadratic model you can find at the bottom of @printable-exercise{exploring-covid.adoc}.
+- Class discussion: Are quadratic models a good fit for this data? Why or why not?
+
+Have students share their resulting models. Which one fits best?
+
+Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanitory variable.
+
+Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones! But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
+
+There is, however, a class of functions that grow even faster than quadratics: *exponential functions*.
+
+Exponential relationships show up all the time!
+
+- Cells that constantly divide, doubling the total number of cells each time
+- A tree that's on fire will likely catch neighboring trees on fire, so that the fire spreads to 2 or more trees each time
+- Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow
+
+[.lesson-point]
+Linear functions grow by equal *amounts* over equal intervals (adding _n_ each time). Exponential functions grow by equal *factors* over equal intervals (multiplying by _n_ each time).
+
+[.lesson-instruction]
+Can you think of other real-world examples where a relationship is likely exponential?
+
+Exponential models have the form @math{y = ab^x + k}
 
 === Investigate
 
+Now we need to figure out the values of @math{a}, @math{b} and @math{k}!
 
+[.lesson-instruction]
+- Open @online-exercise{https://www.desmos.com/calculator/3fgilzitvl, MA Covid Spread - Exponential}.
+- Complete the *last* section on @printable-exercise{graphing-models.adoc}.
+- Class discussion: Are exponential models a good fit for this data? Why or why not?
 
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Going Deeper: Polynomial Models}
+
+For students who are farther along, we recommending showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
+
+We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
+
+Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
+|===
 
 === Synthesize
 
+- What makes exponential models different?
+- How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
