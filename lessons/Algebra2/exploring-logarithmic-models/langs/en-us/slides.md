@@ -212,7 +212,7 @@ Our @math{R^2} has jumped to 0.663, showing a vastly better correlation than bef
 
 -->
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Using Log Transformations
 
 With the transformation applied, our linear model (in both function and Pyret notation) is:
@@ -226,7 +226,7 @@ At each point in our linear model, @math{f} is the _predicted median lifespan_, 
 
 -->
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Using Log Transformations
 
 Instead of transforming our dataset and then fitting a linear model, we want to transform _the model itself_ and then fit it to the original dataset. We already know the translation requires taking the log of `per-capita-gdp`, so we can simply compose our linear function with a log function:
@@ -238,7 +238,7 @@ Instead of transforming our dataset and then fitting a linear model, we want to 
 
 -->
 ---
-{layout="InvestigateR"}
+{layout="Investigate"}
 # Using Log Transformations
 
 Of course, we could also just define a new function which composes the log transformation with our linear function, by replacing @math{x} in our linear model with @math{log(x)}:
