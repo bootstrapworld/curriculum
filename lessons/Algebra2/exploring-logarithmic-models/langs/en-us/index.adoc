@@ -52,19 +52,19 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1SGzPW
 - Working in pairs or small groups, complete questions 1-4 on @printable-exercise{exploring-countries.adoc}.
 --
 
-=== Investigate
-
 Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
+
+=== Investigate
 
 [.lesson-instruction]
 Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.
 
-Note: This worksheet involves lots of trial and error, as students try to come up with a good linear model. The goal is to __discover that a non-linear model is necessary__.
+Note: This worksheet involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to __discover that a new kind of  model is necessary__.
 
 === Synthesize
 
-- Have students discuss their findings. What's the best model they came up with?
-- Have students share the sketches they drew. What kinds of lines or curves did they use?
+- What's the best model they came up with?
+- What sketches did you draw. What kinds of lines or curves did you use?
 
 
 == Fitting Logarithmic Models @duration{20 minutes}
@@ -76,7 +76,10 @@ Students try to fit different models to a logarithmic relationship, discovering 
 
 @center{@image{images/wealth-v-life-linear.png}}
 
-There definitely appears to be a relationship here, but it's not linear. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right. What functions behave like this?
+There definitely appears to be a relationship here, but it's not linear. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.
+
+[.lesson-instruction]
+What functions behave like this? Could we approximate this with a quadratic model? An exponential one?
 
 === Investigate
 
@@ -114,17 +117,17 @@ Note: This process involves a lot of trial and error, as students build up an in
 
 === Overview
 
-Students learn to transform the data into a linear shape, building a new column by applying a function to each row. This new data can be fit with a linear model. By applying the _inverse_ of this transformation to their linear model, they retrieve the quadratic model.
+Students learn to transform the data into a linear shape, building a new column by applying a function to each row. This new data can be fit with a linear model. By applying the _inverse_ of this transformation to their linear model, they retrieve the logarithmic model.
 
 === Launch
 
-Deriving a logarithmic model from only two points is problematic. How do we know that those two points are representative of the trend? If we picked a wealthy country that is at war, we'd find an artificially low life expectancy. A model based on that point would probably not fit the rest of the points very well!
+Deriving a logarithmic model from only two points is problematic. How do we know that those two points really represent the shape of the curve? If we picked a wealthy country that is at war, we'd find an artificially low life expectancy. A model based on that point unlikely to fit the rest of the points very well!
 
 This is the same problem we ran into with linear models in our state demographics data, where a model built from any two points would only be as good as those points were representative.
 
 Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model. Unfortunately, `lr-plot` only finds linear models. We need to find a transformation that will make this data appear linear in order to use `lr-plot`.
 
-Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squished in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
+Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
 [.lesson-instruction]
 - Complete questions 1-6 in @printable-exercise{transforming-wealth.adoc}.
