@@ -172,7 +172,7 @@ Up until now, there's been a pattern that students may not have noticed: the num
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-In this example, we have four _totally diffrent_ patterns:
+In this example, we have four _totally different_ patterns:
 
 - sometimes we produce `(circle 20 "solid" "red")`
 - sometimes we produce `(triangle 20 "solid" "red")`
@@ -208,9 +208,18 @@ Adding the questions to our pattern gives us:
 {layout="Investigate"}
 # Extending the Design Recipe 
 
-This practically gives away the body of our function definition!
+This practically gives away the body of our function definition!{style="font-size:17pt"}
 
-@image{images/cost-code.png}{width="700"}
+@show{
+(code '(define (red-shape shape)
+  (cond
+    [(string=? shape "circle")     (circle 20 "solid" "red")]
+    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
+    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
+    [(string=? shape "star")       (star 20 "solid" "red")]
+	[else (text "Unknown shape name!" 20 "red")])))
+}{style="font-size:17pt"}
+
 
 ---
 {layout="Synthesize"}
@@ -229,20 +238,21 @@ This practically gives away the body of our function definition!
 {layout="Supplemental"}
 # Additional Practice
 
-Mood Generator: 
-_Note: this file uses emojis. Although they look like images, they are actually characters in a string._
-* @opt-starter-file{mood-generator} 
-* @printable-exercise{pages/mood-generator-explore.adoc}
-* @opt-printable-exercise{mood-generator-dr.adoc}
+Mood Generator:{style="font-size:14pt"}
+ 
+_Note: this file uses emojis. Although they look like images, they are actually characters in a string._{style="font-size:12pt"}
+* @opt-starter-file{mood-generator}{style="font-size:12pt"}
+* @printable-exercise{pages/mood-generator-explore.adoc}{style="font-size:12pt"}
+* @opt-printable-exercise{mood-generator-dr.adoc}{style="font-size:12pt"} 
 
-Alice's Restaurant:
-* @opt-starter-file{alices-restaurant}
-* @opt-printable-exercise{pages/restaurant-intro.adoc}
-* @opt-printable-exercise{pages/restaurant-explore.adoc}
-* @opt-printable-exercise{pages/restaurant-dr.adoc}
+Alice's Restaurant:{style="font-size:14pt"}
+* @opt-starter-file{alices-restaurant}{style="font-size:12pt"}
+* @opt-printable-exercise{pages/restaurant-intro.adoc}{style="font-size:12pt"}
+* @opt-printable-exercise{pages/restaurant-explore.adoc}{style="font-size:12pt"}
+* @opt-printable-exercise{pages/restaurant-dr.adoc}{style="font-size:12pt"}
 
-Onto Functions:
-* Not all piecewise functions are one-to-one! If you're ready to think about _Onto Functions_, try @opt-printable-exercise{decide-defend-onto.adoc}.
+Onto Functions:{style="font-size:14pt"}
+* Not all piecewise functions are one-to-one! If you're ready to think about _Onto Functions_, try @opt-printable-exercise{decide-defend-onto.adoc}.{style="font-size:12pt"}
 
 <!--
 If you have more time for working with Piecewise Functions, you may want to have students create a _visual representation_ of how the computer moves through a conditional function.
