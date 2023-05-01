@@ -144,7 +144,7 @@ Have students share their resulting models. Which one fits best?
 {layout="Launch"}
 # Fitting Exponential Models
 
-Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanitory variable.
+Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
 
 <!--
 
@@ -154,7 +154,9 @@ Quadratic models capture _parabolic relationships_, where one quantity varies ba
 {layout="LaunchR"}
 # Fitting Exponential Models
 
-@image{images/MA-covid.png} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones! But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
+@image{images/MA-covid.png} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones. 
+
+But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
 
 There is, however, a class of functions that grow even faster than quadratics: *exponential functions*.
 
