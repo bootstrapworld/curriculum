@@ -1,50 +1,106 @@
 ---
 {layout="DS Title Slide"}
-# Exploring Quadratic Relationships
+# Exploring Exponential Models
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
-# TBD
+# Looking for Patterns
 
+- Open the @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File}
+- From the File menu, select "Save a Copy", and click "Run"
+- Working in pairs or small groups, complete questions 1-8 of @printable-exercise{exploring-covid.adoc}
 
+<!--
+Review student answers to confirm that students have made a number of observations:
+
+* There is _more than one_ relationship in this dataset!
+* Every relationship seems extremely strong
+* Every relationship appears non-linear
+-->
+---
+{layout="InvestigateC"}
+# Looking for Patterns
+
+@image{images/multiple-models.png}
+While it's clear that there are patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all! Each relationship appears very strong, almost as if there is *more than one model* here.
+
+<!--
+-->
+
+---
+{layout="InvestigateR"}
+# Looking for Patterns
+
+@image{images/multiple-models.png}
+- We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
+- Working in pairs or small groups, complete the rest of of @printable-exercise{exploring-covid.adoc}.
+
+<!--
+The term "Grouped Samples" is used instead of "Random Samples". Grouped samples are non-random by design!
+-->
+---
+{layout="Investigate"}
+# Looking for Patterns
+
+By now you've all had a chance to experiment with `filter`. How does this function work?
+
+Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's no correlation! Instead, we have several sub-groups each with their own _very strong correlation!_
+
+<!--
+__The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
+
+-->
+---
+{layout="InvestigateR"}
+# Looking for Patterns
+
+@image{images/multiple-models.png}
+
+**Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.**
+
+Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! 
+
+<!--
+This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
+-->
+---
+{layout="InvestigateR"}
+# Looking for Patterns
+
+@image{images/multiple-models.png}
+Fortunately, we can use `filter` to split our dataset into multiple sub-groups, and then fit models to each sample.
+
+Create helper functions to filter at least three other states, then use them to define the covid tables for each state.
+
+<!--
+It's extremely common for students to think that filtering a table *changes the original table*. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`
+-->
+
+---
+{layout="Synthesize"}
+# Looking for Patterns
+
+- Do you think the data for MA shows a linear relationship? Why or why not?
+- Do you think this data shows a quadratic relationship? Why or why not?
+- Do you think this data shows some other kind of relationship? Why or why not?
+- In what other situations would it be useful to filter a dataset?
+- Can you think of other examples where Simpson's Paradox might arise?
 
 <!--
 
 -->
 ---
 {layout="Launch"}
-# TBD
+# Fitting Exponential Models
 
+- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/09kyr4xlct, MA Covid Spread - Linear}.
+- Complete the *first* section on @printable-exercise{graphing-models.adoc}.
+- Using `lr-plot` in Pyret, come up with the best possible linear model, and write your answer at the bottom of @printable-exercise{exploring-covid.adoc}.
 
-<!--
-
--->
-
----
-{layout="Investigate"}
-# TBD
-
-
-
-<!--
-
--->
----
-{layout="Investigate"}
-# TBD
-
-
-<!--
-
--->
----
-{layout="SynthesizeR"}
-# TBD
-
-
+Are linear models a good fit for this data? Why or why not?
 
 <!--
 
@@ -52,77 +108,107 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Launch"}
-# TBD
+# Fitting Exponential Models
+
+Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
 
 
+<!--
+
+-->
+---
+{layout="LaunchR"}
+# Fitting Exponential Models
+
+@image{images/MA-covid.png} If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. 
+If we make the line fit the bulge, all the points fall above it! 
+We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 <!--
 
 -->
 ---
 {layout="Launch"}
-# Quadratic Models
+# Fitting Exponential Models
 
+- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/73y2med4yj, MA Covid Spread - Quadratic}.
+- Complete the *second* section on @printable-exercise{graphing-models.adoc}.
+- Write the best quadratic model you can find at the bottom of @printable-exercise{exploring-covid.adoc}.
+
+Are quadratic models a good fit for this data? Why or why not?
+
+<!--
+Have students share their resulting models. Which one fits best?
+-->
+---
+{layout="Launch"}
+# Fitting Exponential Models
+
+Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanitory variable.
 
 <!--
 
 -->
 
 ---
-{layout="Investigate"}
-# Quadratic Models
+{layout="LaunchR"}
+# Fitting Exponential Models
 
+@image{images/MA-covid.png} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones! But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
 
-<!--
-
--->
----
-{layout="Investigate"}
-# Quadratic Models
-
-<!--
-
--->
----
-{layout="SynthesizeR"}
-# Quadratic Models
-
+There is, however, a class of functions that grow even faster than quadratics: *exponential functions*.
 
 <!--
 
 -->
 ---
 {layout="Launch"}
-# Fitting Nonlinear Models
+# Fitting Exponential Models
+
+Exponential relationships show up all the time!
+
+- Cells that constantly divide, doubling the total number of cells each time
+- A tree that's on fire will likely catch neighboring trees on fire, so that the fire spreads to 2 or more trees each time
+- Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow
 
 <!--
 
 -->
+---
+{layout="Launch"}
+# Fitting Exponential Models
 
+Linear functions grow by equal *amounts* over equal intervals (adding _n_ each time). Exponential functions grow by equal *factors* over equal intervals (multiplying by _n_ each time).
+
+Can you think of other real-world examples where a relationship is likely exponential?
+
+Exponential models have the form @math{y = ab^x + k}
+
+<!--
+
+-->
 ---
 {layout="Investigate"}
-# Fitting Nonlinear Models
+# Fitting Exponential Models
 
+Now we need to figure out the values of @math{a}, @math{b} and @math{k}!
 
+- Open @online-exercise{https://www.desmos.com/calculator/3fgilzitvl, MA Covid Spread - Exponential}.
+- Complete the *last* section on @printable-exercise{graphing-models.adoc}.
 
-<!--
-
--->
----
-{layout="Investigate"}
-# Fitting Nonlinear Models
-
-
-<!--
-
--->
----
-{layout="SynthesizeR"}
-# Fitting Nonlinear Models
-
+Class discussion: Are exponential models a good fit for this data? Why or why not?
 
 
 <!--
 
 -->
 ---
+{layout="Synthesize"}
+# Fitting Exponential Models
+
+- What makes exponential models different?
+- How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
+
+<!--
+
+-->
