@@ -13,6 +13,13 @@ A word problem is a description of a situation, but seeing the math behind the w
 
 In this lesson, you're going to learn a strategy for breaking down word problems, called the **Design Recipe**. You've actually seen most of the steps of the Design Recipe, but you _haven't_ seen how to put them together. There's also one part you haven't seen yet: _writing a purpose statement_.
 
+<!--
+* Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores - they are for human eyes only!
+* The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code - something the computer doesn't read.
+* Remind students that the @vocab{Domain} and @vocab{Range} of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like Integers, Rationals, etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
+* If students struggle with creating the examples, use the Circle of Evaluation mapping activity or use role-playing to help students build up their understanding around the concept.
+-->
+
 ---
 {layout="Launch"}
 # The Design Recipe 
@@ -47,11 +54,13 @@ A good purpose statement must have three things:
 {layout="Investigate"}
 # The Design Recipe 
 
-Turn to @printable-exercise{fixing-purpose.adoc} and identify: 
+Turn to @printable-exercise{fixing-purpose.adoc}.
 
-1. What important information got left out of each of the purpose statements?
+ChatGPT has produced a purpose statement for each word problem... but ran into some difficulties. Fix ChatGPT's purpose statements, and then identify: 
 
-1. What unnecessary information got included?
+1. What important information was missing from each purpose statement that you would need to solve the problem? 
+
+1. What extra information was included, that wasn't needed to solve the problem?
 
 ---
 {layout="Synthesize"}
@@ -59,6 +68,28 @@ Turn to @printable-exercise{fixing-purpose.adoc} and identify:
 
 * What are the important elements of purpose statements?
 * Why are purpose statements useful?
+
+<!--
+The three steps of the Design Recipe are designed to mirror best practices that you may _already be using in your classroom_. It's merely a collection of those practices, assembled in a structured way with great care taken to connecting each practice with the others.
+
+**Writing the Contract and Purpose Statement is where students _understand_ the word problem.** If you have your students restate the problem in their own words, draw pictures, or underline the inputs and outputs in the word problem, __you're already using this practice!__
+
+**Writing examples and circling-and-labeling what changes is where students _apply_ their understanding** to concrete inputs. If you have your students work through some concrete examples before jumping straight to variables and formulas, and ask them "what's the rule?" or "what's the pattern?", __you're already using this practice!__.
+
+**Writing the definition is where students _formalize and abstract_ this understanding** to work with _any input_. This is where they identify the structure of the rule or pattern, independently of any specific inputs.
+
+The order of the recipe is a recommendation based on 20+ years of research about what works for most students, but that doesn't mean this order works best for _every_ student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
+-->
+
+---
+{layout="Launch"}
+# Rocket Height! 
+
+A few students found some Artificial Intelligence (A.I.) tools that claim to be able to write Pyret programs for them. 
+
+They asked the A.I. to generate code that makes a rocket blast off, starting on the ground (height=0) when the rocket first blasts off (time=0). The A.I. wrote the program for them.
+
+How do they know if it really solved the problem correctly?
 
 ---
 {layout="Launch-DN"}
@@ -80,6 +111,16 @@ Click Run to see the simulation start running on your computer.
 * Is `rocket-height` working? 
 * Close the window with the rocket, so you can see the code.
 
+<!--
+* What happens when you press the space bar?
+** _The seconds change, but the rocket doesn't move!_
+* What were you expecting to happen?
+** _The rocket would move!_
+* What happens when you press `b`?
+** _The seconds go back down, but the rocket height stays at 0_
+* Is `rocket-height` working?
+** _No._
+-->
 ---
 {layout="Launch-DN"}
 # Rocket Height! 
@@ -87,12 +128,23 @@ Click Run to see the simulation start running on your computer.
 Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
 * Type @show{(code '(rocket-height 0))} into the Interactions Area.{style="font-size:17pt"}
-* Wat happens when we give the `rocket-height` function an input of 0? Is that what we want it to do? {style="font-size:17pt"}
+* What happens when we give the `rocket-height` function an input of 0? Is that what we want it to do? {style="font-size:17pt"}
 * What happens when we give the `rocket-height` function an input of 10? Is that what we want it to do?{style="font-size:17pt"}
 * Why did the examples pass? {style="font-size:17pt"}
 
 <!--
 We should always test a function definition against at least 2 examples!
+
+What happens when we give the `rocket-height` function an input of 0?
+** _It returns 0._
+* Is that what we want it to do?
+** _Yes!_
+* As the program is currently written, what happens when we give the `rocket-height` function an input of 10?
+** _It returns 0._
+* Is that what we want it to do?
+** _No!_
+* Why did the examples pass?
+** _The programmer only gave one example! We should always provide at least two examples. More complex functions will require us to think about what range of examples will be necessary to test that our function does what we want it to!_
 -->
 
 ---
@@ -150,6 +202,15 @@ You already know what @show{(code '(start rocket-height))} does.
 
 - What problems did you fix in the starter file?
 - What did the other functions do?
+
+---
+{layout="Supplemental"}
+# Additional Exercises
+
+
+* Can you make the rocket fly faster? 
+* Can you make the rocket fly slower?
+* Can you make the rocket sink down instead of fly up?
 
 <!--
 For teachers who cover quadratic and exponential functions or have students who need more of a challenge, here are some fun prompts:
