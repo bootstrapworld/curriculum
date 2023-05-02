@@ -36,14 +36,14 @@ What are the coordinates of the Dog, if it’s on the upper left-hand edge of th
 -->
 
 ---
-{layout="Launch"}
+{layout="LaunchR"}
 # Navigating a Grid
 
-By adding a second number line, we can locate a character _anywhere_ on the screen in either direction. The first line we drews is called the @vocab{x-axis}, which runs from left to right. The second line, which runs up and down, is called the @vocab{y-axis}. A 2-dimensional @vocab{coordinate} consists of both the x- and y-locations on the axes.
+By adding a second number line, we can locate a character _anywhere_ on the screen in either direction. The first line we drews is called the @vocab{x-axis}, which runs from left to right. The second line, which runs up and down, is called the @vocab{y-axis}. A 2-dimensional @vocab{coordinate} consists of both the x- and y-locations on the axes.{style=font-size:14pt}
+
+A coordinate pair is always written in the form of (x, y). When we write down these coordinates, we always put the x before the y (just like in the alphabet!). Most of the time, you’ll see coordinates written like this: (200, 50) meaning that the x-coordinate is 200 and the y-coordinate is 50.{style=font-size:14pt}
 
 @image{images/2dPosition.png}
-
-A coordinate pair is always written in the form of (x, y). When we write down these coordinates, we always put the x before the y (just like in the alphabet!). Most of the time, you’ll see coordinates written like this: (200, 50) meaning that the x-coordinate is 200 and the y-coordinate is 50.
 
 ---
 {layout="Investigate"}
@@ -124,7 +124,7 @@ Screenshot must include:
 
 What games did you come up with?
 
-What are the coordinates of the DANGER before it gets onscreen?
+What are the coordinates of the DANGER before it is on the screen?
 
 Why do we make estimates? 
 

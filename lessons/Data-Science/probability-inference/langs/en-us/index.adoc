@@ -58,20 +58,24 @@ Students consider a classic randomness scenario: the probability that a coin wil
 [.lesson-point]
 A fair coin should land on "heads" about as often as it lands on "tails".
 
-When we approach a strange coin, we start out assuming that it's not biased towards heads or tails - that it will land on both "heads" and "tails" about 50% of the time. This is called the @vocab{null hypothesis}. A weighted coin, on the other hand, might be heavier on one side, creating a @vocab{bias} toward heads or tails more often! But how do we test whether a coin is fair or biased? _How do we test the @vocab{null hypothesis}?_
+A fair coin is just as likely to land on one side as it is on the other. A weighted coin, on the other hand, might be heavier on one side, creating a @vocab{bias} toward one side!
+
+In statistics, the @vocab{null hypothesis} represents an assumption that there is no significant difference between two sampled populations. In other words, any difference is due to naturally-occuring variations. In the case of our coin, the null hypothesis would be that there is no significant difference between the likelyhood of coming up heads or tails.
+
+_How do we test the @vocab{null hypothesis}?_
 
 [.lesson-instruction]
 Open @starter-file{fair-coins}, and complete @printable-exercise{fair-coins.adoc}
 
 Have students share back their sample results, and their predictions after 5 samples and then 20 samples.
 
-Which samples seem to support the null hypothesis? Which ones undermine it?
+Do any samples seem to undermine the null hypothesis?
 
-In Statistics and Data Science, samples like these don't *prove* any claim about the coins! Instead, they either _produce evidence for or against_ a claim. The larger the sample, the more evidence we have to _support or reject the @vocab{null hypothesis}_.
+In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _succeed or fail to produce evidence that rejects the null hypothesis_. The larger the sample, the more evidence we have.
 
 The chances of getting tails from a fair coin three times in a row are pretty good: one-in-8! Maybe it was just the luck of the draw, and the coin is still fair.
 
-But what are the chances of flipping "head" 10 times in a row? 100 times? We might say "There's a one in a million chance of a fair coin coming up heads 100 times. No _way_ is this coin fair!"
+But what are the chances of flipping "head" 10 times in a row? 20 times? We might say "There's a one in a million chance of a fair coin coming up heads 20 times. No _way_ is this coin fair!"
 
 But of course, there *is* a way. It's just..._incredibly unlikely_.
 
@@ -104,7 +108,7 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 - Could a coin come up "heads" twice in a row, and still be a fair coin? Why or why not? What about 10 times in a row? 20?
 ** _The coin could be fair in all of these intsances! Heads 20 times in a row, however, is extremely unlikely._
 - What is the relationship between how weighted a coin is, and how many samples you need to figure it out?
-** _A fair coin should land on heads about 50% of the time. If a coin landed on heads _100%_ of the time, it wouldn't take long to figure out that something was up! A trick coin that comes up heads 60% of the time, however, would need a much larger sample to be detected. The smaller the bias, the larger the sample we need to see it. A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!_
+** _A fair coin should land on heads about 50% of the time. If a coin landed on heads _100%_ of the time, it wouldn't take long to figure out that something was up! A trick coin designed to come up heads 60% of the time, however, would need a much larger sample to be detected. The smaller the bias, the larger the sample we need to see it. A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!_
 
 == Probability v. Inference @duration{30 minutes}
 

@@ -1,6 +1,6 @@
 ---
 {layout="Core Title Slide"}
-# Contracts 
+# Contracts
 <!-- 
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
@@ -170,7 +170,7 @@ Here is an example of another function:
 
 @show{(code '(string-append "sun" "shine"))}
 
-Type it into the editor. What is its contract? 
+Type it into @starter-file{editor, the editor}. What is its contract? 
 
 <!--
 contract: `string-append :: String, String -> String`
@@ -222,7 +222,7 @@ No! The Domain and Range are the same, but the function name is different... and
 
 # Exploring Image Functions
 
-- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (Optional: these pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout})
+- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (_These pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout}._)
 
 - When you've got working expressions, record the contracts and the code!
 
@@ -296,17 +296,17 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
-Diagnosing and fixing errors is a skill we will continue working on developing. 
+Diagnosing and fixing errors is a skill we will continue working on developing.{style="font-size:15pt"}
 
-Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc. 
+Some of the errors are @vocab{syntax errors}: a missing comma, an unclosed string, etc.{style="font-size:15pt"} 
 
-All the other errors are @vocab{contract errors}. 
+All the other errors are @vocab{contract errors}.{style="font-size:15pt"} 
 
-If you see an error and you know the syntax is right, ask yourself these three questions:
+If you see an error and you know the syntax is right, ask yourself these three questions:{style="font-size:15pt"}
 
-- What is the function that is generating that error?
-- What is the contract for that function?
-- Is the function getting what it needs, according to its Domain?
+- What is the function that is generating that error?{style="font-size:15pt"}
+- What is the contract for that function?{style="font-size:15pt"}
+- Is the function getting what it needs, according to its Domain?{style="font-size:15pt"}
 
 <!-- Common Misconceptions: Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:
 

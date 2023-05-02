@@ -78,6 +78,10 @@ Then complete @printable-exercise{which-value-to-define.adoc}.
 
 - What values did you decide to define? When might they be useful?
 
+<!--
+What data types can we define values for?
+_All of them - Number, String, Image_
+-->
 ---
 {layout="Launch"}
 # Using Defined Values

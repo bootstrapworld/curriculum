@@ -11,18 +11,16 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 I LOVE Green Triangles!{style="font-size:22pt"}
 
-Write the code to make a solid green triangle of size 50!{style="font-size:22pt"}
+Open your @starter-file{editor, editor} and...
+write the code to make a solid green triangle of size 50!{style="font-size:18pt"}
 
 @image{images/green-triangles-more.png}
-
-
 
 ---
 {layout="Launch"}
 # There's Got to Be a Better Way!  
 
-Make as many unique, solid, green triangles as you can in 2 minutes.{style="font-size:22pt"}
-
+Make as many unique, solid, green triangles as you can in the next 2 minutes.{style="font-size:22pt"}
 
 @image{images/green-triangles-still-more.png}
 
@@ -60,7 +58,7 @@ This shortcut makes the same green triangle _every_ time!
 {layout="Investigate"}
 # There's Got to Be a Better Way!  
 
-To make a shortcut that _changes_, we need to define a _function_.
+To make a shortcut that _changes_, such as creating solid, green triangles of different sizes, we need to define a _function_.
 
 Suppose we want to define a function called `gt`. When we give it a number, it makes a solid green triangle of whatever size we give it.
 

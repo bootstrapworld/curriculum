@@ -198,7 +198,7 @@ Q2: _No, these expressions are not equivalent. For the first expression, we appl
 {layout="LaunchC"}
 # Algebraic Expressions with Exponents
 
-Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4m^2}. Four students produced four different Circles of Evaluation! Which one matches the expression? If you’re not sure, are there any that you can rule out right away?{style:"font-size:24pt"}
+Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4m^2}. Four students produced four different Circles of Evaluation! Which one matches the expression? If you’re not sure, are there any that you can rule out right away?{style="font-size:24pt"}
 
 @image{images/four-students.png}
 

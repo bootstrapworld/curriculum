@@ -90,23 +90,36 @@ By now you've already learned what to do when you approach a new dataset.
 - You described the columns in the Animals Dataset, identifying which were categorical and which were quantitative, and whether they were Numbers, Strings, Booleans, etc.
 - You took random samples of the dataset, to explore inference and probability
 
-Now, you're doing to do the same thing **with your own dataset.**
-<!--
+Now, you're going to do the same thing **with your own dataset.**
 
--->
+---
+{layout="Investigate"}
+# Exploring Your Dataset 
+- Look at the spreadsheet or table for your dataset with your partner and complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
+
+---
+{layout="Investigate"}
+# Exploring Your Dataset 
+- 
 ---
 {layout="Investigate"}
 # Exploring Your Dataset 
 
-- Make a copy of @starter-file{exploration-paper}, and open the starter file for your chosen dataset.
-- Why does this dataset matter? Where did it come from? Complete the first set of questions in the exploration paper.
+- Open the starter file for your chosen dataset and save a copy. 
 - In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
+- Make a copy of @starter-file{exploration-paper} and share it with your partner(s) and your teacher.
 
 ---
 {layout="Investigate"}
 # Exploring Your Dataset 
 
-What are the categorical columns in _your_ dataset? How are the values distributed?
+Collaborate with your partner(s), to fill in the first two pages of your @starter-file{exploration-paper}, drawing on the thinking you did on @printable-exercise{pages/my-dataset.adoc}.
+
+Remember: More than one person can work on a googledoc at the same time! If you have access to two computers, someone can work on page 1 while someone else works on page 2!
+
+---
+{layout="Investigate"}
+# Exploring Your Dataset
 
 - What is the distribution of data in your categorical columns? Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
 - What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of your @starter-file{exploration-paper}.
