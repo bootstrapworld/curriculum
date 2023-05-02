@@ -13,7 +13,7 @@ When you're driving, what speed will save you the most money on gas?
 
 - Open the @online-exercise{https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy, Fuel Efficiency Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete questions 1-8 of @printable-exercise{exploring-mpg.adoc}.
+- Working in pairs or small groups, complete questions 1-8 of @printable-exercise{pages/exploring-mpg.adoc}.
 
 <!--
 Review student answers to confirm that students see a _non-linear_ relationship in the dataset with a relatively strong correlation.
@@ -27,7 +27,7 @@ Review student answers to confirm that students see a _non-linear_ relationship 
 Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to roughly 55mph. But after 55mph, fuel efficiency _decreases._{style="font-size: 15pt"}
 
 - Let's try to build a linear model for this data!{style="font-size: 15pt"}
-- Working in pairs or small groups, complete the rest of of @printable-exercise{exploring-mpg.adoc}.{style="font-size: 15pt"}
+- Working in pairs or small groups, complete the rest of of @printable-exercise{pages/exploring-mpg.adoc}.{style="font-size: 15pt"}
 
 <!--
 
