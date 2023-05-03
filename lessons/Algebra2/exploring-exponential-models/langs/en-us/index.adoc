@@ -34,10 +34,10 @@
 * TBD
 |===
 
-== Looking for Patterns @duration{20 minutes}
+== Filtering {amp} Simpson's Paradox @duration{20 minutes}
 
 === Overview
-Students explore the @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
+Students explore the @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
 
 === Launch
 
@@ -48,21 +48,30 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1ueyf5
 
 @center{@image{images/multiple-models.png}}
 
-The scatterplot we just produced doesn't look much like a scatterplot all! It looks like someone took a blue marker and scribbled in lots different curvy lines! While it's clear that there are patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all! Each relationship appears very strong, almost as if there is _more than one model_ here.
+The scatterplot we just produced doesn't look much like a scatterplot all! It looks like someone took a blue marker and drew in five different curvy lines! While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all! Each relationship appears very strong, almost as if there is _more than one model_ here.
 
 Review student answers to confirm that students have made a number of observations:
 
 * There is _more than one_ relationship in this dataset!
 * Every relationship seems extremely strong
-* Every relationship appears non-linear
+* Most/all relationships appear non-linear
 
 === Investigate
+
+With all these clear, tight lines, we might think this would be a dataset with a very strong correlation! Unfortunately, that's not true at all.
+
+Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's no correlation! Instead, we have several sub-groups each with their own _very strong correlation!_
+
+[.lesson-point]
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+
+Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
 
 [.lesson-instruction]
 - We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
 - Working in pairs or small groups, complete the rest of of @printable-exercise{exploring-covid.adoc}.
 
-By now you've all had a chance to experiment with `filter`. How does this function work?
+How does the `filter` function work?
 
 __The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
 
@@ -75,14 +84,7 @@ __The `filter` function consumes a Table and **a helper function!** The helper f
 While filtering is introduced in this lesson, the primary goal is about exponential functions. If your students need more practice with filtering - or wish to filter their own datasets! - we recommend checking out the @lesson-link{table-functions} lesson.
 |===
 
-Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's no correlation! Instead, we have several sub-groups each with their own _very strong correlation!_
-
-[.lesson-point]
-Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
-
-Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
-
-Fortunately, we can use `filter` to split our dataset into multiple sub-groups, and then fit models to each sample.
+We can use `filter` to split our dataset into multiple sub-groups, and then fit models to each sample.
 
 [.lesson-instruction]
 Create helper functions to filter at least three other states, then use them to define the Covid tables for each state.
@@ -92,41 +94,61 @@ Create helper functions to filter at least three other states, then use them to 
 It's extremely common for students to think that filtering a table *changes the original table*. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`
 
 === Synthesize
-- Do you think the data for MA shows a linear relationship? Why or why not?
-- Do you think this data shows a quadratic relationship? Why or why not?
-- Do you think this data shows some other kind of relationship? Why or why not?
 - In what other situations would it be useful to filter a dataset?
 - Can you think of other examples where Simpson's Paradox might arise?
 
-== Fitting Exponential Models @duration{35 minutes}
+
+== Looking for Patterns @duration{15 minutes}
 
 === Overview
 
-Students are introduced to exponential models, and extend their sampling techniques to exponential relationships.
+Students explore their newly-filtered `MA-covid` dataset, trying to different kinds of models to it.
 
 === Launch
+
+Make a scatter-plot showing the Covid infection rate for Massachusetts. What kind of model do you think would fit this best?
+
+=== Investigate
 
 [.lesson-instruction]
 - Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/09kyr4xlct, MA Covid Spread - Linear}.
 - Complete the *first* section on @printable-exercise{graphing-models.adoc}.
-- Using `lr-plot` in Pyret, come up with the best possible linear model, and write your answer at the bottom of @printable-exercise{exploring-covid.adoc}.
-- Class discussion: Are linear models a good fit for this data? Why or why not?
 
 Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
+
+[.lesson-instruction]
+- Using `lr-plot` in Pyret, come up with the best possible linear model, and write your answer at the bottom of @printable-exercise{exploring-covid.adoc}.
+- Class discussion: Are linear models a good fit for this data? Why or why not?
 
 @right{@image{images/MA-covid.png, 300}} If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 [.lesson-instruction]
 - Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/73y2med4yj, MA Covid Spread - Quadratic}.
 - Complete the *second* section on @printable-exercise{graphing-models.adoc}.
+
+Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
+
+[.lesson-instruction]
 - Write the best quadratic model you can find at the bottom of @printable-exercise{exploring-covid.adoc}.
 - Class discussion: Are quadratic models a good fit for this data? Why or why not?
 
 Have students share their resulting models. Which one fits best?
 
-Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
-
 @right{@image{images/MA-covid.png, 300}} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones. But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
+
+=== Synthesize
+
+- Do you think the data for MA shows a linear relationship? Why or why not?
+- Do you think this data shows a quadratic relationship? Why or why not?
+- Do you think this data shows some other kind of relationship? Why or why not?
+
+== Fitting Exponential Models @duration{20 minutes}
+
+=== Overview
+
+Students are introduced to exponential models, and extend their sampling techniques to exponential relationships.
+
+=== Launch
 
 There is, however, a class of functions that grow even faster than quadratics: *exponential functions*.
 
