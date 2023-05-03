@@ -4,7 +4,7 @@
 body.workbookpage td .autonum::after { content: ')' !important; }
 </style>
 ++++
-For this page, you'll need to the  @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+For this page, you'll need to have the  @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
 
 @n Click "Run", and evaluate `covid-table` in the Interactions Area. Do you know what each column means?
 
@@ -15,9 +15,13 @@ For this page, you'll need to the  @online-exercise{https://code.pyret.org/edito
 | *positive* - the number of new, positive cases reported
 |===
 
-@n Evaluate `ME1`, `NH1` and `RI2` in the Interactions Area. Which states are represented by these rows? @fitb{}{@ifsoln{ME, NH, and RI}}
+@n Evaluate `CT1`, `MA1` and `ME1` in the Interactions Area. Which states are represented by these rows? @fitb{}{@ifsoln{CT, MA, and ME - day 1}}
 
-@n In the Definitions Area on the left, define two new Rows for Vermont (VT) and Massachusetts (MA). Click "Run" and test these Rows out in the Interactions Area.
+@n Which day or days are represented by these rows? @fitb{}{@ifsoln{Day 1}}
+
+@n How many positive cases were reported in Massachusetts on this day? @fitb{}{@ifsoln{104156}}
+
+@n In the Definitions Area on the left, define two new Rows for Vermont (VT) and Rhode Island (RI) on lines 17 and 18. Click "Run" and test these Rows out in the Interactions Area.
 
 @vspace{1ex}
 
@@ -36,24 +40,24 @@ Based on the scatter plot...
 @fitb{}{} +
 @fitb{}{}
 
-@n In which state did covid spread the fastest? @fitb{}{@ifsoln{MA}}
+@n In which state did Covid spread the fastest? @fitb{}{@ifsoln{MA}}
 
-@n In which state did covid spread the slowest? @fitb{}{@ifsoln{VT}}
+@n In which state did Covid spread the slowest? @fitb{}{@ifsoln{VT}}
 
 @n Are these _strong_ relationship(s), or weak ones? @fitb{}{@ifsoln{strong}}
 --
 !===
 
-@n On line 21 you'll find a Contract for a new function. Read it carefully, along with the description of the function's purpose on line 22. What is the *Name* of this function? @fitb{10em}{@ifsoln{is-MA}} Its *Domain*? @fitb{10em}{@ifsoln{Row}} Its *Range*? @fitb{10em}{@ifsoln{Boolean}}
+@n On or after line 23 you'll find a Contract for a new function. Read it carefully, along with the description of the function's purpose on line 24. What is the *Name* of this function? @fitb{10em}{@ifsoln{is-MA}} Its *Domain*? @fitb{10em}{@ifsoln{Row}} Its *Range*? @fitb{10em}{@ifsoln{Boolean}}
 
-@n What do you _think_ @show{(code '(is-MA MA3))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA NH4))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA CT7))}? @fitb{7em}{@ifsoln{false}}
+@n What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{7em}{@ifsoln{false}}
 
-@center{**Try typing each of this into the Interactions Area on the right. Were you correct?**}
+@center{**Try typing each of these into the Interactions Area on the right. Were you correct?**}
 
 @n In the Interactions Area, type @show{(code '(filter covid-table is-MA))}. What did this evaluate to? @fitb{}{} +
 @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
 
-@n Type `MA-table` in the Interactions Area, then read the code on line 29 carefully. What is that code doing? @fitb{}{} +
+@n Type `MA-table` in the Interactions Area, then read the code on or after line 30 carefully. What is that code doing? @fitb{}{} +
 @fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
 
 @center{**Stop here! We'll continue after some discussion.**}
