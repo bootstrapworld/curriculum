@@ -4,7 +4,7 @@
 
 @lesson-prereqs{exploring-quadratic-models}
 
-@keywords{quadratic, square, coefficient}
+@keywords{exponential, quadratic, square, coefficient}
 
 [@lesson-intro-table]
 |===
@@ -44,7 +44,7 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1ueyf5
 [.lesson-instruction]
 - Open the @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File}
 - From the File menu, select "Save a Copy", and click "Run"
-- Working in pairs or small groups, complete questions 1-9 of @printable-exercise{exploring-covid.adoc}
+- Working in pairs or small groups, complete questions 1-10 of @printable-exercise{exploring-covid.adoc}
 
 @center{@image{images/multiple-models.png}}
 
@@ -102,7 +102,7 @@ It's extremely common for students to think that filtering a table *changes the 
 
 === Overview
 
-Students explore their newly-filtered `MA-covid` dataset, trying to different kinds of models to it.
+Students explore their newly-filtered `MA-covid` dataset, trying to fit different kinds of models to it. This section makes heavy use of @link{https://www.Desmos.com, Desmos}, which is an excellent tool for open-ended experimentation.
 
 === Launch
 
@@ -120,7 +120,7 @@ Linear models capture _straight-line relationships_, where one quantity varies p
 - Using `lr-plot` in Pyret, come up with the best possible linear model, and write your answer at the bottom of @printable-exercise{exploring-covid.adoc}.
 - Class discussion: Are linear models a good fit for this data? Why or why not?
 
-@right{@image{images/MA-covid.png, 300}} If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 [.lesson-instruction]
 - Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/73y2med4yj, MA Covid Spread - Quadratic}.
@@ -134,7 +134,7 @@ Quadratic models capture _parabolic relationships_, where one quantity varies ba
 
 Have students share their resulting models. Which one fits best?
 
-@right{@image{images/MA-covid.png, 300}} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones. But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
+@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely made them a better fit than linear ones. But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket!
 
 === Synthesize
 
@@ -146,7 +146,7 @@ Have students share their resulting models. Which one fits best?
 
 === Overview
 
-Students are introduced to exponential models, and extend their sampling techniques to exponential relationships.
+Students are introduced to exponential models, and extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
 
 === Launch
 
@@ -193,6 +193,8 @@ We have _artificially constrained this dataset_, showing only the data from June
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
 |===
+
+@star Optional: have students build models for other states. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
 
 === Synthesize
 
