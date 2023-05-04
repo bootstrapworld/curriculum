@@ -196,10 +196,18 @@ Have students compose their solutions to the three word problems together to com
 {layout="Synthesize"}
 # Design Recipe Telephone
 
+- If we already know how to get the answer, why would it ever be important to know how to do each step the slow way?
 - Why is it helpful to use each of these steps in the Design Recipe?
 - What step do you find the most challenging right now? The easiest?
 - What are some functions you might want to define for your _own_ analysis?
 
 <!--
-
+* If we already know how to get the answer, why would it ever be important to know how to do each step the slow way? _Someday we won't be able to get the answer, and knowing the steps will help / So we can help someone else who is stuck / So we can work with someone else and share our thinking / So we can check our work
 -->
+
+---
+{layout="Supplemental"}
+# Additional Exercises
+
+* @opt-printable-exercise{pages/2-blank-recipes.adoc, blank Design Recipes}
+* @opt-printable-exercise{pages/data-cycle-1.adoc, blank data cycles}.

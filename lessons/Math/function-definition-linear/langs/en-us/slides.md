@@ -59,7 +59,7 @@ When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)
 {layout="Launch"}
 # Defining Linear Functions
 
-To check our work, we can apply the function to the x-value in each Row in the table, it produces the y-value! Instead of writing endless rows repeating the rule or drawing an entire graph, we can just declare the rule itself by defining the function.
+To check our work, we can apply the function to the x-value from any @vocab{coordinate pair} on our table or graph, and it should produce the y-value!
 
 As with tables and graphs, a function definition can also reveal whether or not the function is linear. Functions that are not linear will follow other forms, for example they may include exponents or absolute values.
 
@@ -74,6 +74,12 @@ Let's start by identifying the slope and y-intercept from function definitions.
 For more practice: 
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc263844666f00d51454b58, Identifying y-intercepts in Tables, Graphs & Definitions of Linear Functions}
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc264d34666f00d51454b87, Identifying slope in Tables, Graphs & Definitions of Linear Functions}
+
+<!--
+@ifproglang{pyret}{
+_Students can identify slope and y-intercept from functions in Pyret as well, using @opt-starter-file{exploring-linearity-in-definitions}._
+}
+-->
 
 ---
 {layout="Investigate"}
@@ -102,6 +108,12 @@ Let's write our own definitions from tables and graphs!
 
 What strategies did you use?
 
+<!--
+@ifproglang{pyret}{
+_Students can also practice defining linear functions when given tables and graphs using the @opt-starter-file{exploring-linearity-in-tables} and @opt-starter-file{exploring-linearity-in-graphs}._
+}
+-->
+
 ---
 {layout="Investigate"}
 # Defining Linear Functions
@@ -121,11 +133,139 @@ Common misconception: It is common to think of the graph as the "output" of the 
 {layout="Synthesize"}
 # Defining Linear Functions
 
-Function definitions are a way of talking about relationships between quantities: milk costs $0.59/gallon, a stone falls at @math{9.8m/s^2}, or there are 30 students for every teacher at a school. 
+Function definitions are a way of talking about relationships between quantities: 
+
+* milk costs $0.59/gallon
+* a stone falls at @math{9.8m/s^2}
+* there are 30 students for every teacher at a certain school
+
+---
+{layout="Synthesize"}
+# Defining Linear Functions
 
 If we can figure out the relationship between a small sample of data, we can __make predictions__ about what happens next. We can see these relationships as tables, graphs, or symbols in a definition. We can even think about them as a mapping between Domain and Range!
 
 When we talk about functions, it's helpful to be able to switch between representations, and see the connections between them.
+
+---
+{layout="Launch"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+Consider the function @math{f(x) = 3x}.
+
+@table{5}
+| x |  0 | 1 | 2  | 3
+| y |  0 | 3 | 6  | 9
+
+* What is the slope?
+* What is the y-intercept?
+* What is the y-value when x = 2?
+
+<!-- 
+* What is the slope? _3_
+* What is the y-intercept? _0_
+* What is the y-value when x = 2? _6_
+-->
+
+---
+{layout="Launch"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+Anytime the y-intercept is 0, we can multiply any x-value by the slope to get its corresponding y-value.
+
+@table{5}
+| x |  0 | 1 | 2  | 3
+| y |  0 | 3 | 6  | 9
+
+But if the y-intercept isn't zero... there is another step to finding the y-value.
+
+---
+{layout="Launch"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+Consider the function @math{f(x) = 3x - 2}.
+
+@table{5}
+| x |  0  | 1 | 2  | 3
+| y |  -2 | 1 | 4  | 7
+
+* What is the slope?
+* What is the y-intercept?
+* What is the y-value when x = 2?
+
+<!--
+* What is the slope? _3. Same as for the previous function._
+* What is the y-intercept? _-2_
+* What is the y-value when x = 2? _4. Two less than the y-value for @math{x=3} in the previous function, where the y-intercept was 0._
+-->
+
+---
+{layout="Launch"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+@table{5}
+| x |  0  | 1 | 2  | 3
+| y |  -2 | 1 | 4  | 7
+
+The y-intercept always gets added to / subtracted from the product of the slope and the x-value to find the corresponding y-value.
+
+---
+{layout="Investigate"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+The relationship between the x-values and the y-values can be described using 
+
+@math{y = mx + b}, 
+
+where @math{m} stands for @vocab{slope} and @math{b} stands for the @vocab{y-intercept}.
+
+If we solve that for the y-intercept...
+
+@math{b = y - mx}
+
+In other words, _the y-intercept can be calculated by subtracting the product of the slope and any x-value from the corresponding y-value._
+
+---
+{layout="Investigate"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
+
+
+Let's say the slope is @math{3}. And we know that the line passes through the point (7,9).{style="font-size:14pt"}
+
+* @math{b = y - mx}{style="font-size:14pt"}
+* @math{m = 3}{style="font-size:14pt"}
+* @math{x = 7}{style="font-size:14pt"} 
+* @math{y = 9}{style="font-size:14pt"}
+
+To find the y-intercept, subtract @math{9} (the y-value of the point) minus @math{3 \times 7} (the product of the slope and the x-value of the point).{style="font-size:14pt"}
+
+* @math{b = 9 - 3(7)}{style="font-size:14pt"}
+* @math{b = 9 - 21}{style="font-size:14pt"}
+* _@math{b = -12} ...We found our y-intercept!_{style="font-size:14pt"}
+
+We can now use the slope and y-intercept to write our function definition:{style="font-size:14pt"}
+
+* @math{f(x) = 3x - 12}{style="font-size:14pt"}
+
+---
+{layout="Investigate"}
+# Finding the y-intercept from the Slope and a Point{style="font-size:20pt"} 
+
+Consider the table below.
+
+@table{5}
+| x |  80  | 81  | 82  | 83
+| y |  150 | 155 | 160 | 165
+
+* What is the slope?
+* Calculate the y-intercept using the first coordinate pair.
+* Do you get the same y-intercept if you use another pair?
+
+<!--
+* What is the slope? _5_
+* Calculate the y-intercept using the first coordinate pair. _@math{b = 150 - 5(80) = -250}
+* Do you get the same y-intercept if you use another pair? _Yes._
+-->
 
 ---
 {layout="Supplemental"}
