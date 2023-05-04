@@ -7,11 +7,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Launch"}
-# Looking for Patterns
+# Filtering & Simpson's Paradox
 
 - Open the @online-exercise{https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o, Covid Spread Starter File}
 - From the File menu, select "Save a Copy", and click "Run"
-- Working in pairs or small groups, complete questions 1-8 of @printable-exercise{exploring-covid.adoc}
+- Working in pairs or small groups, complete questions 1-10 of @printable-exercise{exploring-covid.adoc}
 
 <!--
 Review student answers to confirm that students have made a number of observations:
@@ -22,17 +22,27 @@ Review student answers to confirm that students have made a number of observatio
 -->
 ---
 {layout="InvestigateC"}
-# Looking for Patterns
+# Filtering & Simpson's Paradox
 
 @image{images/multiple-models.png}
-While it's clear that there are patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all! Each relationship appears very strong, almost as if there is *more than one model* here.
+With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not true at all.
+
 
 <!--
+Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations!_
 -->
 
 ---
 {layout="InvestigateR"}
-# Looking for Patterns
+# Filtering & Simpson's Paradox
+
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+
+Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
+
+---
+{layout="InvestigateR"}
+# Filtering & Simpson's Paradox
 
 @image{images/multiple-models.png}
 - We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.

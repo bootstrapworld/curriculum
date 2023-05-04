@@ -184,7 +184,12 @@ You've had a chance to experiment with quadratic models in vertex form:
 * How do you make a parabola "narrower" or "wider"?
 
 <!--
-
+* How do you translate a parabola left and right?
+** Change the value of @math{h}
+* How do you translate a parabola up and down?
+** Change the value of @math{k}
+* How do you make a parabola "narrower" or "wider"?
+** Change the value of @math{a}
 -->
 ---
 {layout="SynthesizeR"}
