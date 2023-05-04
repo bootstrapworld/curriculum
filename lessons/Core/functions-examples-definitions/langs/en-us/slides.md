@@ -45,7 +45,7 @@ Function definitions replace whatever changes in the examples with a variable de
 
 If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret}@ifproglang{wescheme}{WeScheme} files. Let's take a look!
 
-* Click *Run*.
+* Go back to @starter-file{bc} and click *Run*.
 @ifproglang{pyret}{
 * What message do you get back?{style="font-size:16pt"}
 * What do you think that message means?{style="font-size:16pt"}
@@ -107,7 +107,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * On the top half of the page you will see the contract, examples, and function definition for `gt`. 
 * Circle what is changing and label it with the word `size`. 
 * Using `gt` as a model, complete the contract, examples and function definition for `bc`.  
-* Then type the Contract, Examples and Definition into the Definitions Area. 
+* Then type the Contract, Examples and Definition into the Definitions Area of @starter-file{bc}. 
 * Click *Run*, and make sure all of the examples pass!
 
 ---
