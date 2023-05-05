@@ -30,7 +30,7 @@ Although answers will vary, important observations include:
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
+Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.{style="font-size:16pt"} 
 
 Can you figure out what the next (x,y) pair should be for each of them?{style="font-size:16pt"}  
 
