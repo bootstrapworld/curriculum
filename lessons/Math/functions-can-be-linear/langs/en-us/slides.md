@@ -160,10 +160,10 @@ Complete @printable-exercise{tables-all-linear.adoc}.
 {layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-Three of the tables show linear relationships, and three show non-linear relationships. 
-- Which are linear?
-- Were you able to figure out what the next (x,y) pair should be for each of them?
-- Were you able to guess what the y-value for each table would be when x is 0?
+Three of the tables show linear relationships, and three show non-linear relationships.{style="font-size:14pt"} 
+- Which are linear?{style="font-size:14pt"}
+- Were you able to figure out what the next (x,y) pair should be for each of them?{style="font-size:14pt"}
+- Were you able to guess what the y-value for each table would be when x is 0?{style="font-size:14pt"}
 
 @image{images/set-of-6-tables.png}
 
@@ -281,12 +281,12 @@ This is often described as  @math{\frac{ChangeInY}{ChangeInX}} or @math{\frac{ri
 | x | __3__ | __20__ | 5  |  9 | 1
 | y | __5__ | __56__ | 11 | 23 | -1
 
-Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}. 
+Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.{style="font-size:14pt"} 
 
-__Order matters!__ Whatever order we subtracted the y-values in must be the same order we subtract the x-values in.
+__Order matters!__ Whatever order we subtracted the y-values in must be the same order we subtract the x-values in.{style="font-size:14pt"}
 
-* Pick two other pairs of values from the table (#3 on @printable-exercise{slope-int-tables-intro.adoc}) and compute the @vocab{slope}. Did you get the same answer?
-* Are there other strategies we could have used to find the slope?
+* Pick two other pairs of values from the table (#3 on @printable-exercise{slope-int-tables-intro.adoc}) and compute the @vocab{slope}. Did you get the same answer?{style="font-size:14pt"}
+* Are there other strategies we could have used to find the slope?{style="font-size:14pt"}
 
 
 ---
