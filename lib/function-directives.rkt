@@ -38,6 +38,8 @@
 
 (define *table-marker* "|")
 
+(define *store-title* #f)
+
 (define *max-pyret-example-clause-length* 60)
 
 (define *funname* #f)
@@ -287,11 +289,14 @@
   (enclose-span (format ".headless-design-recipe.FOR~a" *proglang*) ""))
 
 (define (write-section-header page-header funname)
-  (format (string-append
-            "\n\n[.designRecipeLayout]\n"
-            "= [.dr-title]##~a~a##\n")
-          page-header
-          (if funname (format ": ~a" funname) "")))
+  (let ([title-txt (string-append page-header
+                     (if funname (format ": ~a" funname) ""))])
+    (when *store-title*
+      (*store-title* title-txt))
+    (format (string-append
+              "\n\n[.designRecipeLayout]\n"
+              "= [.dr-title]##~a##\n")
+            title-txt)))
 
 (define (write-directions directions headless?)
   (format (string-append
@@ -300,11 +305,11 @@
           (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) "")
           directions))
 
-(define (write-title title-text)
+(define (write-title title-txt)
   (string-append
     "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
     *table-marker* "===\n"
-    *table-marker* " " title-text *table-marker* "\n"
+    *table-marker* " " title-txt *table-marker* "\n"
     *table-marker* "===\n\n"))
 
 (define (write-purpose funname domain-list range purpose)
@@ -738,6 +743,7 @@
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 #:headless? (headless? #f)
                                 #:nested-in-table? [nested-in-table? #f]
+                                #:store-title [store-title #f]
                                 )
 
   ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
@@ -757,6 +763,8 @@
   (set! *show-body?* show-body?)
 
   (set! *table-marker* (if nested-in-table? "!" "|"))
+
+  (set! *store-title* store-title)
 
   #|
   (unless *solutions-mode?*
@@ -838,6 +846,7 @@
           #:grid-lines? (grid-lines? #f)
           #:headless? (headless? #f)
           #:nested-in-table? [nested-in-table? #f]
+          #:store-title [store-title #f]
           )
   (set-proglang! proglang)
   (set! *solutions-mode?* solutions-mode?)
@@ -994,6 +1003,7 @@
                              #:show-formula-expression? [show-formula-expression? #f]
                              #:formula-expression [formula-expression ""]
                              #:headless? [headless? #f]
+                             #:store-title [store-title #f]
                              )
 
   (set! *solutions-mode?* solutions-mode?)
@@ -1111,6 +1121,7 @@
                     #:show-finding? [show-finding? #f]
                     #:new-question [new-question ""]
                     #:show-new-question? [show-new-question? #f]
+                    #:store-title [store-title #f]
                     )
 
   (set! *solutions-mode?* solutions-mode?)

@@ -1023,17 +1023,20 @@
         (newline o)))
     (newline o)))
 
+(define (store-title title-txt)
+  (unless *other-dir*
+    (let ([title-file (path-replace-extension *out-file* ".titletxt")]
+          [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
+      (call-with-output-file title-file
+        (lambda (o)
+          (display title-txt o) (newline o))
+        #:exists 'replace))))
+
 (define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
     (set! *page-title* title-txt)
-    (unless *other-dir*
-      (let ([title-file (path-replace-extension *out-file* ".titletxt")]
-            [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
-        (call-with-output-file title-file
-          (lambda (o)
-            (display title-txt o) (newline o))
-          #:exists 'replace)))
+    (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
     (display title o)
@@ -1706,7 +1709,8 @@
                                   (set! args (append args
                                                      (list '#:proglang *proglang*
                                                            '#:dist-root-dir *dist-root-dir*
-                                                           '#:solutions-mode? *solutions-mode?*)))
+                                                           '#:solutions-mode? *solutions-mode?*
+                                                           '#:store-title store-title)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
