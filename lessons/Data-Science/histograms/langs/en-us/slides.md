@@ -23,7 +23,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 @image{images/pet-numbers.png, 250}
 
-The display on the left side of the page is a @vocab{Bar chart}.
+There are 2 displays on the bottom of @printable-exercise{pages/summarizing-columns.adoc}. The display on the left is a @vocab{Bar chart}.
 
 - The x-axis lists the values of a categorical variable (`species`).
 - The y-axis shows the @vocab{frequency} of categorical values in the dataset.
@@ -37,7 +37,7 @@ The display on the left side of the page is a @vocab{Bar chart}.
 
 @image{images/pet-weights.png, 250}
 
-The display on the right side is called a @vocab{histogram}.
+The display on the right is called a @vocab{histogram}.
 
 - Histograms show the distribution of _quantitative_ data.
 - Since quantitative data must follow a natural order, these bars _cannot_ be re-ordered.
@@ -73,9 +73,11 @@ In the histogram we just made, we see that the data is clustered at the right-ha
 {layout="Synthesize"}
 # Introducing Histograms
 
-In your own words, can you explain how are histograms and bar charts different?
+In your own words, can you explain how histograms and bar charts are different?
 
 <!--
+Bar charts are used for categorical data, showing the count for data in each category. Histograms are used for quantitative data, showing the distribution of the datapoints across the range.
+
 *Common Misconceptions*
 Note that intervals on this display include the left endpoint but not the right. If we included the right endpoint and someone had 0 teeth, we’d have to add on a bar from -5 to 0, which would be awfully strange!
 -->
@@ -94,22 +96,23 @@ But how do you choose a good bin-size?
 -->
 ---
 {layout="Investigate"}
-# Introducing Histograms
+# Choosing the Right Bin Size
 
 Suppose we want to know how long it takes for animals from the shelter to be adopted.
 
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 * Find the contract for the `histogram` function.
 * Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10.
-* How many took between 0 and 10 weeks? Between 10 and 20?
+* How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?
 ---
 {layout="Investigate"}
-# Introducing Histograms
+# Choosing the Right Bin Size
 
 * Try some other bin sizes (be sure to experiment with bigger and smaller bins!)
 * What shapes emerge? What bin size gives you the best picture of the distribution?
 * Are there any outliers? Are they high or low?
 * Count how many animals took between 0 and 5 weeks to be adopted. How many took between 5 and 10 weeks?
+* What else do you Notice? What do you Wonder?
 
 <!--
 Some observations you can share with the class, to get them started:
@@ -120,7 +123,7 @@ Some observations you can share with the class, to get them started:
 -->
 ---
 {layout="Investigate"}
-# Introducing Histograms
+# Choosing the Right Bin Size
 
 **How do you describe a histogram?**
 
@@ -135,7 +138,7 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 -->
 ---
 {layout="Synthesize"}
-# Introducing Histograms
+# Choosing the Right Bin Size
 
 - What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?
 - What would the histogram look like if every animal was adopted in roughly the same length of time?
@@ -146,14 +149,14 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 -->
 ---
 {layout="Synthesize"}
-# Introducing Histograms
+# Choosing the Right Bin Size
 
 **Rule of thumb: a histogram should have between 5–10 bins.**
 
 Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column. 
 
-But how do we talk about that shape, and what does the shape actually tell us? The next lesson addresses all of these...
+
 
 <!--
-
+But how do we talk about that shape, and what does the shape actually tell us? @lesson-link{histograms2} addresses all of these questions...
 -->

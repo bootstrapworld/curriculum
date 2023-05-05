@@ -6,33 +6,20 @@
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+
 ---
 {layout="Launch"}
 # Making Box Plots
 
-**_FACT: The Animal Shelter Bureau says a typical pet weighs almost 41 pounds_**
+**_FACT: The Animal Shelter Bureau says the average pet weighs almost 41 pounds_**
 
-How useful is this fact, really? 
+Once we have a summary number like "mean", it's important to ask another question:
+
+_If the average pet is 41 pounds, just **how typical** is that?_
 
 - Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
 - But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
 
-<!--
-
--->
----
-{layout="Launch"}
-# Making Box Plots
-
-**_FACT: The Animal Shelter Bureau says a typical pet weighs almost 41 pounds_**
-
-So once we have a summary number like "mean", it's likely we'll ask another question:
-
-_If the average pet is 41 pounds, just **how typical** is that?_
-
-<!--
-
--->
 ---
 {layout="Launch"}
 # Making Box Plots
@@ -67,12 +54,17 @@ Since each quartile has exactly 1/4th of the animals in it, we know that the "mi
 
 The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less. _What animals does the *third* quartile represent_?{style="font-size:16pt"}
 
+<!--
+_The third quartile is the value for which 75% of the animals weighed that amount or less._
+_Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more._
+-->
+
 ---
 {layout="LaunchC"}
 # Making Box Plots
 
 @image{images/box-n-whisker-plot.png, 250}
-Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire dataset—that is, the distance between minimum and maximum. This is called the @vocab{range of a dataset}. 
+Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire dataset — that is, the distance between minimum and maximum. This is called the @vocab{range of a dataset}. 
 
 <!--
 *Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
@@ -123,57 +115,47 @@ We can use @vocab{box plots} to visualize the 5 number summary, the Range, and t
 
 -->
 ---
+{layout="InvestigateR"}
+# Making Box Plots
+
+This plot shows us the center and spread in our dataset according to those five numbers:{style="font-size:15pt"}
+
+- **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.{style="font-size:12pt"}
+- **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.{style="font-size:12pt"}
+- **Q2** / Median value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.{style="font-size:12pt"}
+- **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.{style="font-size:12pt"}
+- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.{style="font-size:12pt"}
+
+
+@image{images/5-plot.png, 400}
+---
 {layout="Investigate"}
 # Making Box Plots
 
-This plot shows us the center and spread in our dataset according to those five numbers:{style="font-size:16pt"}
-
-- **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.{style="font-size:15pt"}
-- **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.{style="font-size:15pt"}
-- **Q2** / Median value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.{style="font-size:15pt"}
-- **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.{style="font-size:15pt"}
-- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.
-{style="font-size:15pt"}
-
----
-{layout="InvestigateC"}
-# Making Box Plots
-
-@image{images/5-plot.png, 400}
 
 * Turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
 * Fill in the five-number summary for the `pounds` column, and sketch the box plot.
-* What conclusions can you draw about the distribution `pounds`?
+* What conclusions can you draw about the distribution of values in the `pounds` column?
 
 
 <!--
-It is extremely common for students to forget that every quartile _always_ includes 25% of the dataset. This will need to be heavily reinforced.
+_While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
 -->
 ---
 {layout="Synthesize"}
 # Making Box Plots
 
-- What percentage of points make up **Q1**?
-- What percentage of points make up **Q2**?
-- What percentage of points make up **Q3**?
-- What percentage of points make up **Q4**?
-- What percentage of points make up the **Interquartile Range** (IQR)?
-- What percentage of points make up the Range?
+- What percentage of points fall in the first quartile?
+- What percentage of points fall in the second quartile?
+- What percentage of points fall in the third quartile?
+- What percentage of points fall in the fourth quartile?
+- What percentage of points fall in the **Interquartile Range** (IQR)?
+- What percentage of points fall within the Range?
 
 <!--
-- What percentage of points make up the first quartile (Q1)?
-** _25%_
-- What percentage of points make up the second quartile (Q2)?
-** _25%_
-- What percentage of points make up the third quartile (Q3)?
-** _25%_
-- What percentage of points make up the fourth quartile (Q4)?
-** _25%_
-- What percentage of points make up the Interquartile Range (IQR)?
-** _50%_
-- What percentage of points make up the Range?
-** _100%_
-
+- It is extremely common for students to forget that every quartile _always_ includes 25% of the dataset. This will need to be heavily reinforced.
+- What percentage of points fall in the **Interquartile Range** (IQR)? _50%_
+- What percentage of points fall within the Range? _100%_
 -->
 
 ---
@@ -184,7 +166,7 @@ Just as pie and bar charts are ways of visualizing categorical data, **box plots
 
 Box plots make it easy to see the 5-number summary, and compare the Range and Interquartile Range. 
 
-Histograms make it easier to see skewness and more details of the shape, and offer more granularity when using smaller bins.
+Histograms make it easier to see skewness and more details of the shape, offering more granularity when using smaller bins.
 
 <!--
 
@@ -193,7 +175,7 @@ Histograms make it easier to see skewness and more details of the shape, and off
 {layout="Investigate"}
 # Interpreting Box Plots
 
-Left-skewness is seen as a long, left-facing tail in a histogram. 
+In a histogram, left-skewness is seen as a long, left-facing tail.  
 
 In a box plot, **left skewness** is seen as a longer left "whisker", or more spread in the left part of the box. 
 
@@ -214,6 +196,23 @@ Box plots and Histograms can both tell us a lot about the shape of a dataset, bu
 *Histograms:* fixed intervals (“bins”) with variable numbers of data points in each one. Points “pile up in bins”, so we can see how many are in each. _Larger bars show where the clusters are._
 
 *Box plots:* variable intervals (“quartiles”) with a fixed number of data points in each one. Treats data more like “pizza dough”, dividing it into four equal quarters showing where the data is tightly clumped or spread thin. _Smaller intervals show where the clusters are._
+-->
+
+---
+{layout="Investigate"}
+# Interpreting Box Plots
+
+Optional Activity
+
+<!--
+Kinesthetic Activity Directions
+
+Divide the class into groups of three, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}.
+
+Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students roll their cylinders so that they fill each of these intervals, retaining a uniform thickness.
+
+They should notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the datapoints, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
+
 -->
 
 ---
@@ -260,8 +259,8 @@ Are they clumped on the right, with a few outliers skewing to the left? Or are t
 # Your Own Analysis 
 
 - Were any of them surprising?
-- What, if any, outliers did they discover when making box plots?
-- What measures of center makes the most sense for one column or another?
+- What, if any, outliers did you discover when making box plots?
+- What measures of center make the most sense for one column or another?
 
 ---
 {layout="Supplemental"}
