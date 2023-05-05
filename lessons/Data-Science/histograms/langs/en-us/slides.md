@@ -23,7 +23,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 @image{images/pet-numbers.png, 250}
 
-There are 2 displays on the bottom of @printable-exercise{pages/summarizing-columns.adoc}. The display on the left is a @vocab{Bar chart}.
+There are 2 displays on @printable-exercise{pages/summarizing-columns.adoc}. The first display is a @vocab{Bar chart}.
 
 - The x-axis lists the values of a categorical variable (`species`).
 - The y-axis shows the @vocab{frequency} of categorical values in the dataset.
@@ -37,7 +37,7 @@ There are 2 displays on the bottom of @printable-exercise{pages/summarizing-colu
 
 @image{images/pet-weights.png, 250}
 
-The display on the right is called a @vocab{histogram}.
+The second display is called a @vocab{histogram}.
 
 - Histograms show the distribution of _quantitative_ data.
 - Since quantitative data must follow a natural order, these bars _cannot_ be re-ordered.
