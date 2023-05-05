@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"}
-# Exploring Exponential Relationships
+# Exploring Logarithmic Relationships
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -15,6 +15,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - Open the @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete questions 1-4 on @printable-exercise{exploring-countries.adoc}.
+- Be ready to discuss!
 
 <!--
 Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
@@ -24,8 +25,11 @@ Discuss students' findings. Pay special attention to the @vocab{form} that stude
 {layout="Launch"}
 # Looking for Patterns
 
-Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.
+**Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.**
 
+- Use @opt-online-exercise{https://www.desmos.com/calculator/4skkuqubiy, Wealth-v-Health - Linear} to try fitting linear models for this dataset
+- Use @opt-online-exercise{https://www.desmos.com/calculator/fmoxzepfvx, Wealth-v-Health - Quadratic} to try fitting quadratic models for this dataset
+- Use @opt-online-exercise{https://www.desmos.com/calculator/rhtx8vassd, Wealth-v-Health - Exponential} to try fitting exponential models for this dataset
 
 <!--
 Note: This worksheet involves lots of trial and error, as students try to come up with a good linear model. The goal is to __discover that a non-linear model is necessary__.
@@ -35,8 +39,8 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 {layout="Synthesize"}
 # Looking for Patterns
 
-- Have students discuss their findings. What's the best model they came up with?
-- Have students share the sketches they drew. What kinds of lines or curves did they use?
+- What's the best model you came up with?
+- What sketches did you draw. What kinds of lines or curves did you use?
 
 <!--
 
@@ -67,7 +71,7 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 
 The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
 
-@center{   @math{f(x) = b \times log(x) + c}    }
+@center{@math{f(x) = b \times log(x) + c}  }
 
 We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
 
@@ -84,12 +88,24 @@ Pyret has a few functions that may come in handy here:
 @show{(contract "num-log-base" '("Number" "Number") "Number" "Consumes a number and a base, and produces the log of that number with the base")}
 @show{(contract "num-expt" '("Number" "Number") "Number" "Consumes a number and a power, and produces that number raised to the power")}
 
-Complete @printable-exercise{model-wealth-v-lifespan.adoc}
+---
+{layout="Investigate"}
+# Fitting Logarithmic Models
+
+- Experiment with logarithmic models using @online-exercise{https://www.desmos.com/calculator/exqjih0k6t, Wealth-v-Health - Logarithmic}
+- Complete @printable-exercise{model-wealth-v-lifespan.adoc}
 
 <!--
-Note: This process involves a lot of trial and error, as students build up an intuition for how the terms in a logarithmic graph affect the graph of the function. This mirrors the process students went through in @lesson-link{exploring-linear-models}.
+Note: This process involves a lot of trial and error, as students build up an intuition for how the terms in a logarithmic graph affect the graph of the function. This mirrors the process students went through in earlier exploring-models lessons.
 
 -->
+---
+{layout="Investigate"}
+# Fitting Logarithmic Models
+
+- @math{c} represents the vertical shift in our model, which slides the curve up or down the y-axis
+- @math{b} represents the growth factor, which determines how quicky the curve "flattens out" as @math{x} increases
+
 ---
 {layout="Synthesize"}
 # Fitting Logarithmic Models
@@ -178,6 +194,7 @@ Our goal in transforming this dataset is to find a transformation that lets us u
 # Using Log Transformations
 
 Since the values on the y-axis (`median-lifespan`) appear to grow logarithmically, we could _transform_ the x-axis (`pc-gdp`) to grow logarithmically as well. 
+
 With both x- and y-values growing logarithmically, they would appear grow at a constant rate relative to one another. A constant rate will appear linear, which allows us to use `lr-plot` to find the optimal model!
 
 <!--
@@ -263,7 +280,7 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 -->
 ---
 {layout="SynthesizeR"}
-# Fitting Exponential Models
+# Using Log Transformations
 
 - Why is the @math{R^2} value for our logarithmic model the same as the value for our linear model after transforming?
 - How do you interpret this model?

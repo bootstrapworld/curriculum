@@ -24,7 +24,7 @@ Review student answers to confirm that students see a _non-linear_ relationship 
 
 @image{images/fuel-efficiency-quadratic.png}
 
-Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to roughly 55mph. But after 55mph, fuel efficiency _decreases._{style="font-size: 15pt"}
+Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to roughly 55mph. But after 55mph, fuel efficiency _decreases._
 
 - Let's try to build a linear model for this data!{style="font-size: 15pt"}
 - Working in pairs or small groups, complete the rest of of @printable-exercise{pages/exploring-mpg.adoc}.{style="font-size: 15pt"}
@@ -74,7 +74,7 @@ Linear models are great for fitting simple relationships. But the real world isn
 
 @image{images/fuel-efficiency-quadratic.png}
 
-Relationships that rise and fall like this are called @vocab{quadratic relationships}. They form shapes that look like arches, called parabolas. Sometimes the data only includes the _rising_ part of the parabola, sometimes it only includes the _falling_ part, and and sometimes it includes both!{style="font-size: 16pt"}
+Relationships that rise and fall like this are called _quadratic relationships_. They form shapes that look like arches, called parabolas. Sometimes the data only includes the _rising_ part of the parabola, sometimes it only includes the _falling_ part, and and sometimes it includes both!{style="font-size: 16pt"}
 
 <!--
 We often think about variables of a model being _independent_ from one another, each contributing a little to the outcome we are measuring. But sometimes one input will amplify the result of another input, meaning their combined contribution is greater than the sum of their separate contributions.

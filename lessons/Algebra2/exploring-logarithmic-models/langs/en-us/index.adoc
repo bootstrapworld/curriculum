@@ -50,6 +50,7 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1SGzPW
 - Open the @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete questions 1-4 on @printable-exercise{exploring-countries.adoc}.
+- Be ready to discuss!
 --
 
 Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
@@ -67,8 +68,8 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 
 === Synthesize
 
-- What's the best model they came up with?
-- What sketches did you draw. What kinds of lines or curves did you use?
+- What's the best model you came up with?
+- What kinds of lines or curves did you draw?
 
 
 == Fitting Logarithmic Models @duration{20 minutes}
@@ -89,7 +90,7 @@ What functions behave like this? Could we approximate this with a quadratic mode
 
 The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
 
-@center{   @math{f(x) = b \times log(x) + c}    }
+@center{@math{f(x) = b \times log(x) + c} }
 
 We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
 
@@ -110,7 +111,7 @@ Pyret has a few functions that may come in handy here:
 - Experiment with logarithmic models using @online-exercise{https://www.desmos.com/calculator/exqjih0k6t, Wealth-v-Health - Logarithmic}
 - Complete @printable-exercise{model-wealth-v-lifespan.adoc}
 
-Note: This process involves a lot of trial and error, as students build up an intuition for how the terms in a logarithmic graph affect the graph of the function. This mirrors the process students went through in @lesson-link{exploring-linear-models}.
+Note: This process involves a lot of trial and error, as students build up an intuition for how the terms in a logarithmic graph affect the graph of the function. This mirrors the process students went through in earlier exploring-models lessons.
 
 - @math{c} represents the vertical shift in our model, which slides the curve up or down the y-axis
 - @math{b} represents the growth factor, which determines how quicky the curve "flattens out" as @math{x} increases
@@ -133,7 +134,7 @@ Deriving a logarithmic model from only two points is problematic. How do we know
 
 This is the same problem we ran into with linear models in our state demographics data, where a model built from any two points would only be as good as those points were representative.
 
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model. Unfortunately, `lr-plot` only finds linear models. We need to find a transformation that will make this data appear linear in order to use `lr-plot`.
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. We need to find a transformation that will make this data appear linear in order to use `lr-plot`.
 
 Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
@@ -152,7 +153,9 @@ Our goal in transforming this dataset is to find a transformation that lets us u
 
 === Investigate
 
-Since the values on the y-axis (`median-lifespan`) appear to grow logarithmically, we could _transform_ the x-axis (`pc-gdp`) to grow logarithmically as well. With both x- and y-values growing logarithmically, they would appear grow at a constant rate relative to one another. A constant rate will appear linear, which allows us to use `lr-plot` to find the optimal model!
+Since the values on the y-axis (`median-lifespan`) appear to grow logarithmically, we could _transform_ the x-axis (`pc-gdp`) to grow logarithmically as well.
+
+With both x- and y-values growing logarithmically, they would appear grow at a constant rate relative to one another. A constant rate will appear linear, which allows us to use `lr-plot` to find the optimal model!
 
 How can we transform this plot so that the `pc-gdp` column is placed on a logarithmic scale?
 

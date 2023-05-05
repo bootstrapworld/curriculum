@@ -238,13 +238,17 @@ These models are just functions being graphed on top of the scatter plot, with t
 
 When we make a model, we want it to be the closest possible approximation of all the points. A "good fit" has most of the points very close to the line, and a "bad fit" has the points very far away.
 
+---
+{layout="Launch"}
+# Fitting Linear Models
+
+Depending on what part of the model we care about most, we might choose to use one display over another.
+
 @table{3}
 | Standard Form | Point-Slope Form | Slope-Intercept Form
 | @math{Ax+By = C}|@math{y-y_1 = m(x-x_1)}|@math{y = mx+b}
 
 <!--
-Depending on what part of the model we care about most, we might choose to use one display over another.
-
 - Standard Form makes it easy to find the x- and y-intercepts of the line
 - Point-Slope Form makes it easy to find the equation of the line given a single point and slope
 - Slope-Intercept Form makes it really easy to read off the slope and y-intercept
