@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-04-25
+; last modified 2023-05-05
 
 (require json)
 ; (require file/sha1)
@@ -467,7 +467,7 @@
        (let ([second-compt (second page-compts)])
          (cond [(and (or (string=? first-compt "pages")
                          (string=? first-compt "solution-pages"))
-                     *lesson-plan*)
+                     (or *lesson* *lesson-plan*))
                 (make-workbook-link #f
                   first-compt
                   (second page-compts)
@@ -1282,7 +1282,7 @@
         (unless (string=? *lesson-plan* x)
           (set! *lesson-plan-base* x)))))
 
-  (when *lesson-plan*
+  (when (or *lesson* *lesson-plan*)
     (let ([workbook-pages-ls-file
             (format "distribution/~a/lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp"
                     *natlang* *lesson*)])
@@ -1602,13 +1602,12 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
-                              (when (string=? width "")
-                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
-                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span" ".fitbruby" #:attribs
-                                                    (format "style=\"width: ~a\"" width))
+                                  (if (string=? width "")
+                                      (create-begin-tag "span" ".fitbruby.stretch")
+                                      (create-begin-tag "span" ".fitbruby" #:attribs
+                                                        (format "style=\"width: ~a\"" width)))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
