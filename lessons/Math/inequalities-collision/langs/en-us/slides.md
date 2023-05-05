@@ -31,7 +31,7 @@ A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6
 
 **Then complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy.**
 
-@image{iamges/retracting-flag.jpg}
+@image{images/retracting-flag.jpg}
 
 <!--
 * Does one function depend on (or "sit on top of") the other? If so, which one?
