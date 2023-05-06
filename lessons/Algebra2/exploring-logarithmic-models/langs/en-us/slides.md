@@ -27,9 +27,9 @@ Discuss students' findings. Pay special attention to the @vocab{form} that stude
 
 **Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.**
 
-- Use @opt-online-exercise{https://www.desmos.com/calculator/4skkuqubiy, Wealth-v-Health - Linear} to try fitting linear models for this dataset
-- Use @opt-online-exercise{https://www.desmos.com/calculator/fmoxzepfvx, Wealth-v-Health - Quadratic} to try fitting quadratic models for this dataset
-- Use @opt-online-exercise{https://www.desmos.com/calculator/rhtx8vassd, Wealth-v-Health - Exponential} to try fitting exponential models for this dataset
+- Use @opt-online-exercise{https://www.desmos.com/calculator/9izutrnkas, Wealth-v-Health - Linear} to try fitting linear models for this dataset
+- Use @opt-online-exercise{https://www.desmos.com/calculator/tpngoafcv8, Wealth-v-Health - Quadratic} to try fitting quadratic models for this dataset
+- Use @opt-online-exercise{https://www.desmos.com/calculator/ktxtecldt9, Wealth-v-Health - Exponential} to try fitting exponential models for this dataset
 
 <!--
 Note: This worksheet involves lots of trial and error, as students try to come up with a good linear model. The goal is to __discover that a non-linear model is necessary__.
@@ -92,7 +92,7 @@ Pyret has a few functions that may come in handy here:
 {layout="Investigate"}
 # Fitting Logarithmic Models
 
-- Experiment with logarithmic models using @online-exercise{https://www.desmos.com/calculator/exqjih0k6t, Wealth-v-Health - Logarithmic}
+- Experiment with logarithmic models using @online-exercise{https://www.desmos.com/calculator/zfb5aaczt6, Wealth-v-Health - Logarithmic}
 - Complete @printable-exercise{model-wealth-v-lifespan.adoc}
 
 <!--

@@ -41,6 +41,13 @@ Datasets like these are impossible to model all at once, because there will alwa
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset! - the correlations in our sub-groups cancel each other out when we put the groups together! This is called Simpson's Paradox, and you can learn more at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.
 
 ---
+{layout="Investigate"}
+# Filtering & Simpson's Paradox
+
+**For Example:** School A and B both have basketball teams. The 6 foot kids on School A's team are better than the 6 foot kids on School B's team. The 5' 10" kids from School A are also better than 5' 10" kids from School B. In fact, at every height, the kids from School A are better than the kids from School B. __But School B's team is better than School A.__ How is this possible? School B has __more tall kids__ than School A!
+
+
+---
 {layout="InvestigateR"}
 # Filtering & Simpson's Paradox
 
@@ -89,7 +96,7 @@ Make a scatter-plot showing the Covid infection rate for Massachusetts. What kin
 {layout="Investigate"}
 # Looking for Patterns
 
-- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/vqqtxhdb9t, MA Covid Spread - Linear}.
+- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/vqdynw0j2s, MA Covid Spread - Linear, MA Covid Spread - Linear}.
 - Complete the *first* section on @printable-exercise{graphing-models.adoc}.
 
 ---
@@ -110,7 +117,7 @@ Linear models capture _straight-line relationships_, where one quantity varies p
 @image{images/MA-covid-linear.png, 300}
 If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**{style="font-size:17pt"}
 
-- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/o2jpdgrue1, MA Covid Spread - Quadratic}.
+- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/pqmmoa6ose, MA Covid Spread - Quadratic}.
 - Complete the *second* section on @printable-exercise{graphing-models.adoc}.
 
 <!--
@@ -187,7 +194,7 @@ Exponential models have the form @math{y = ab^x + k}
 
 Now we need to figure out the values of @math{a}, @math{b} and @math{k}!
 
-- Open @online-exercise{https://www.desmos.com/calculator/sb76sadtkf, MA Covid Spread - Exponential}.
+- Open @online-exercise{https://www.desmos.com/calculator/sqrgiujcsq, MA Covid Spread - Exponential}.
 - Complete the *last* section on @printable-exercise{graphing-models.adoc}.
 - Class discussion: Are exponential models a good fit for this data? Why or why not?
 
