@@ -382,10 +382,24 @@
     (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
       (format "[~a](~a)" link-text fq-uri))))
 
+(define (extract-domain-name f)
+  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
+    (and x
+         (let ([y (first x)])
+           (and (not (string-ci=? y "google"))
+                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
+
 (define (external-link args directive)
   (let* ([num-args (length args)]
          [link (first args)]
-         [link-text (if (> num-args 1) (second args) "")])
+         [link-text (if (> num-args 1) (second args) "")]
+         [external-link? #f]
+         [domain-name #f])
+    (when (regexp-match #rx"://" link) (set! external-link? #t))
+    (when external-link?
+      (set! domain-name (extract-domain-name link)))
+    (when domain-name
+      (set! link-text (string-append link-text " (" domain-name ")")))
     (format "[~a](~a)" link-text link)))
 
 (define (starter-file-link lbl link-text)
