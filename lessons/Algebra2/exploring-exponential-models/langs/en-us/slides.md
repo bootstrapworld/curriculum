@@ -89,7 +89,7 @@ Make a scatter-plot showing the Covid infection rate for Massachusetts. What kin
 {layout="Investigate"}
 # Looking for Patterns
 
-- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/09kyr4xlct, MA Covid Spread - Linear}.
+- Open @printable-exercise{graphing-models.adoc} and @online-exercise{https://www.desmos.com/calculator/vqqtxhdb9t, MA Covid Spread - Linear}.
 - Complete the *first* section on @printable-exercise{graphing-models.adoc}.
 
 ---
@@ -110,7 +110,7 @@ Linear models capture _straight-line relationships_, where one quantity varies p
 @image{images/MA-covid-linear.png, 300}
 If we make the line go from the start to the peak, almost all of the points bulge out below out line of best fit. If we make the line fit the bulge, all the points fall above it! We always have either too many points _below_ the line in the middle or _above_ the line at the end. **It's growing too fast to be fit with a linear model that grows at a constant rate!**{style="font-size:17pt"}
 
-- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/73y2med4yj, MA Covid Spread - Quadratic}.
+- Take a few minutes to explore @online-exercise{https://www.desmos.com/calculator/o2jpdgrue1, MA Covid Spread - Quadratic}.
 - Complete the *second* section on @printable-exercise{graphing-models.adoc}.
 
 <!--
@@ -187,7 +187,7 @@ Exponential models have the form @math{y = ab^x + k}
 
 Now we need to figure out the values of @math{a}, @math{b} and @math{k}!
 
-- Open @online-exercise{https://www.desmos.com/calculator/3fgilzitvl, MA Covid Spread - Exponential}.
+- Open @online-exercise{https://www.desmos.com/calculator/sb76sadtkf, MA Covid Spread - Exponential}.
 - Complete the *last* section on @printable-exercise{graphing-models.adoc}.
 - Class discussion: Are exponential models a good fit for this data? Why or why not?
 
