@@ -7,34 +7,19 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 |===
 |Name||Domain||Range
 
-| `lr-plot`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
-| `->`
-| `Image`
-5+|`_lr-plot(animals-table, "species", "pounds", "weeks")_`
-
-| `fit-model`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String, model {two-colons} (Number -> Number))`
-| `->`
-| `Image`
-5+|`_fit-model(animals-table, "species", "pounds", "weeks", num-sqrt)_`
-
-
-| `random-rows`
-| `{two-colons}`
-| `(t {two-colons} Table, num-rows {two-colons} Number)`
-| `->`
-| `Table`
-5+|`_random-rows(animals-table, 5)_`
-
 | `row-n`
 | `{two-colons}`
 | `(t {two-colons Table}, index {two-colons} Number)`
 | `->`
 | `Row`
-5+|`_animals-table.row-n(5)_`
+5+|`_row-n(animals-table, 5)_`
+
+| `scale`
+| `{two-colons}`
+| `Number, Image`
+| `->`
+| `Image`
+5+|`_scale( 0.8, triangle(30, "solid", "red"))_`
 
 | `sort`
 | `{two-colons}`
@@ -43,33 +28,46 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 | `Table`
 5+|`_sort(animals-table, "species", true)_`
 
-| `filter`
+| `stacked-bar-chart`
 | `{two-colons}`
-| `(t {two-colons Table}, test {two-colons} (Row -> Boolean))`
-| `->`
-| `Table`
-5+|`_filter(animals-table, is-cat)_`
-
-| `build-column`
-| `{two-colons}`
-| `(t {two-colons Table}, col {two-colons} String, builder {two-colons} (Row -> Any))`
-| `->`
-| `Table`
-5+|`_build-column(animals-table, "sticker", label)_`
-
-| `bar-chart-summarized`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `(t {two-colons} Table, group {two-colons} String, subgroup {two-colons} String)`
 | `->`
 | `Image`
-5+|`_bar-chart-summarized(animals-table, "species", "pounds")_`
+5+|`_grouped-bar-chart(animals-table, "sex", "species")_`
 
-| `pie-chart-summarized`
+| `star`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `Number, String, String`
 | `->`
 | `Image`
-5+|`_pie-chart-summarized(animals-table, "age", "pounds")_`
+5+| `_star(50, "solid", "teal")_`
 
+| `string-contains`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+|`_string-contains("rockstar", "star")_`
+
+| `string-repeat`
+| `{two-colons}`
+| `String, Number`
+| `->`
+| `String`
+5+|`_string-repeat("cheetah ", 5)_`
+
+| `text`
+| `{two-colons}`
+| `String, Number, String`
+| `->`
+|  `Image`
+5+| `_text("I'm thankful for...", 50, "green")_`
+
+| `triangle`
+| `{two-colons}`
+| `Number, String, String`
+| `->`
+| `Image`
+5+|`_triangle(80, "solid", "darkgreen")_`
 
 |===
