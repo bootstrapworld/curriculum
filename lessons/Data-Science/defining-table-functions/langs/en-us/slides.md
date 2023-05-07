@@ -116,20 +116,23 @@ Most computer programs are written by huge teams! It is critical that each team 
 
 We're going to practice collaborative programming and try writing some other Table Functions using the Design Recipe, through an activity called Design Recipe Telephone.
 
+<!--
+Divide the class into groups of three.
+-->
 ---
 {layout="LaunchR"}
 # Design Recipe Telephone
 
 @image{images/DR-Telephone.png, 250}
 
-Let's get some practice defining functions and working with tables!
+@table{2,header}
+| Word Problem Set 1: | Word Problem Set 2:
+| @handout{is-dog.adoc, is-dog}, @handout{days.adoc, days}, @handout{is-young.adoc, is-young} | @opt-printable-exercise{is-old.adoc, is-old}, @opt-printable-exercise{kilos.adoc, kilos}, @opt-printable-exercise{is-cat.adoc, is-cat}
 
-You'll be divided into groups of three, and each group will get 3 word problems to solve as a team.
-
-Once you've finished, those solutions can be composed to analyze the Animals Dataset in a surprising way!
+_★ When a team has completed these three Design Recipes, they can use @lesson-link{composing-table-operations/}._
 
 <!--
-1. Divide the class into groups of three.
+Decide which groups will use Set 1, and which will use Set 2
 -->
 
 ---
