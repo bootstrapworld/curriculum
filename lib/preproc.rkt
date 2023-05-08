@@ -1,6 +1,6 @@
 #lang racket
 
-; last modified 2023-05-05
+; last modified 2023-05-08
 
 (require json)
 ; (require file/sha1)
@@ -1620,6 +1620,17 @@
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "teacher")
+                            (let ([text (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".teacherNote")
+                                  (call-with-input-string text
+                                    (lambda (i)
+                                      (call-with-output-string
+                                        (lambda (o)
+                                          (expand-directives i o)))))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
