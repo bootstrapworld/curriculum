@@ -493,11 +493,11 @@
                                   (expand-directives i o)))))]
                          [(string=? directive "teacher")
                           (let ([text (read-group i directive)])
-                            (display "<!---" o)
+                            (display "<!--\n" o)
                             (call-with-input-string text
                               (lambda (i)
                                 (expand-directives i o)))
-                            (display "-->" o))]
+                            (display "\n-->" o))]
                          [(member directive '("left" "right" "center"))
                           (let ([fragment (read-group i directive #:multiline? #t)])
                             (call-with-input-string fragment

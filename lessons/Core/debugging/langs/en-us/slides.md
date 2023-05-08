@@ -1,4 +1,3 @@
-
 ---
 {layout="Core Title Slide"}
 # Debugging
@@ -55,7 +54,7 @@ In this lesson, we'll be talking about different kinds of mistakes, which can ha
 Here are a few simple examples of syntax errors - can you find the problem?
 
 - `"hello`
-- @ifproglang{pyret}{``1+2``} @ifproglang{wescheme}{``(+ 1 2``}
+- @ifproglang{pyret}{`1+2`} @ifproglang{wescheme}{`(+ 1 2`}
 
 
 
@@ -78,6 +77,8 @@ Syntax Errors prevent the computer from _reading_ code.
 - Which syntax errors do _you_ make the most often?
 - What strategies could we use to avoid making them in the first place?
 - What strategies could we use to fix them faster?
+
+@teacher{Have students share back their findings. Leave time for discussion! The key here is to have students reflect on how useful it is to _read the error messages_ first, even the few errors that may not be as helpful as the others.}
 
 ---
 {layout="Launch"}
