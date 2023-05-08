@@ -101,7 +101,13 @@ var starterFiles = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1hsALf5oOrWqrolayPIgIlYXrqk3i-vD5"
+      "url": "https://code.pyret.org/editor#share=1QHraJArnEZJCwyfGKakcn8N6NvJ0f9ua"
+    }
+  },
+  "blank-ds-tutorial": {
+    "title": "Tutorial Video",
+    "pyret": {
+      "url": "https://drive.google.com/file/d/1DX_oEJgUr9uSUxYdN4YdybQjwEvEP7fC/"
     }
   },
   "exploration-paper": {
