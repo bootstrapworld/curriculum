@@ -84,7 +84,7 @@ Most adults will have close to a full set of 32 teeth, but a few hockey players 
 
 In a @vocab{symmetric} distribution, it’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle. Examples:
 
-It’s just as likely for a newborn baby old to be a certain number of inches below @vocab{average} weight as it is to be that number of inches above average weight.{style="font-size:14pt"}
+It’s just as likely for a newborn baby to be a certain number of inches below @vocab{average} weight as it is to be that number of inches above average weight.{style="font-size:14pt"}
 <!--
 
 -->
