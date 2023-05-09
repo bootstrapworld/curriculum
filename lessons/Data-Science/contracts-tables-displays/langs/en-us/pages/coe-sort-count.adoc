@@ -1,0 +1,67 @@
+= Circles of Evaluation: Count, Sort, First-n-rows
+
+++++
+<style>
+#content .autonum::after { content: ')'; }
+</style>
+++++
+
+For each scenario below, draw the Circle of Evaluation and then use it to write the code. 
+
+When you're done, test your code out in the @starter-file{animals} and make sure it does what you'd expect it to.
+
+@show{(contract "count" '("Table" "String") "Table")}
+
+@show{(contract "first-n-rows" '("Table" "Number") "Table")}
+
+@show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+
+@do{
+
+(define exp1 '(first-n-rows (sort animals-table "weeks" true) 10))
+(define exp2 '(first-n-rows (sort animals-table "pounds" false) 1))
+(define exp3 '(sort(first-n-rows(animals-table 8) "name" true)))
+(define exp4 '(count(first-n-rows(sort animals-table "pounds" true) 16) "species"))
+
+}
+
+[.FillVerticalSpace, cols="1a,10a,10a", options="header"]
+|===
+|
+| Circle of Evaluation
+| Scenario & Code
+
+| @n
+| @showsoln{(coe exp1)}
+| 
+Suppose we want to see the 10 animals who were adopted the quickest
+
+@vspace{2ex}
+
+*code:* @fitb{}{@showsoln{(code exp1)}}
+
+| @n
+| @showsoln{(coe exp2)}
+| 
+Suppose we want to see the heaviest animal
+
+@vspace{2ex}
+
+*code:* @fitb{}{@showsoln{(code exp2)}}
+
+| @n
+| @showsoln{(coe exp3)}
+| Suppose we want an alphabetical list of the first 8 animals in the table
+
+@vspace{2ex}
+
+*code:* @fitb{}{@showsoln{(code exp3)}}
+
+| @n
+| @showsoln{(coe exp4)}
+| Suppose you notice that the lightest 16 animals weigh under 10 pounds and you want to know the count by species of those animals
+
+@vspace{2ex}
+
+*code:* @fitb{}{@showsoln{(code exp4)}}
+|===

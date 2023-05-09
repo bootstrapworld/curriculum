@@ -86,6 +86,55 @@ Have students complete @printable-exercise{functions-for-tables-cont.adoc}, work
 - How else do journalists and newscasters display summaries of data besides in tables?
 ** _Ideally someone will say bar charts!_
 
+== A Visual Scaffold for Putting Functions Together
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+
+How could these two functions work together? What if we wanted to see the ten youngest animals?
+
+=== Investigate
+
+You could draw a map of how `sort` and `first-n-rows` would fit together and it would look like this.
+
+@do{
+(define exp1 '(first-n-rows (sort animals-table "age" true) 10))
+}
+
+@show{(coe exp1)}
+
+We call this map a circle of evaluation. It helps us to write the following code:
+
+@show{(code exp1)}
+
+If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our circles of evaluation.
+
+@do{
+(define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
+}
+
+@show{(coe exp2)}
+
+That would translate to the following code:
+
+@show{(code exp2)}
+
+[.lesson-instruction]
+--
+- Turn to @printable-exercise{coe-sort-count.adoc}. 
+- Draw circles of evaluation and write code for each of the given scenarios. 
+- Then test your code out in @starter-file{animals}.
+--
+
+=== Synthesize
+
+
+
+
+
 == Functions for Making Displays @duration{20 minutes}
 
 === Overview
@@ -135,3 +184,19 @@ The `count` function summarized the data for a single variable in a new table. B
 - How are bar charts and histograms different?
 ** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
 ** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
+
+== Making More Specific Displays 
+
+=== Overview
+
+Just as we could use Circles of Evaluation with `sort`, `count`, and `first-n-rows`, we can put them to work to help us write code to build more specific displays.
+
+=== Launch
+
+Sometimes we want to drill down into the data and make a display that focuses on a subset of the values.
+
+=== Investigate
+
+Turn to @printable-exercise{coe-displays.adoc} and apply Circles of Evaluation to figure out the code for building more specific displays. 
+
+Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. Consider what you might compare each of these displays against.

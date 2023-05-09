@@ -1,0 +1,81 @@
+= Circles of Evaluation: Displays
+
+++++
+<style>
+#content .autonum::after { content: ')'; }
+</style>
+++++
+
+@show{(contract "count" '("Table" "String") "Table")}
+
+@show{(contract "first-n-rows" '("Table" "Number") "Table")}
+
+@show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+
+@show{(contract "bar-chart" '("Table" "String") "Image")}
+
+@show{(contract "box-plot" '("Table" "Number") "Table")}
+
+@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
+
+@show{(contract "pie-chart" '("Table" "String") "Image")}
+
+@do{
+
+
+(define exp1 '(bar-chart (first-n-rows (sort animals-table "pounds" true) 16) "sex"))
+(define exp2 '(histogram (first-n-rows (sort animals-table "pounds" false) 20) "name" "weeks" 5))
+(define exp3 '(box-plot(first-n-rows(sort animals-table "weeks" false) 11) "age"))
+(define exp4 '(pie-chart(first-n-rows(sort animals-table "pounds" true) 18) "species"))
+
+}
+
+[.FillVerticalSpace, cols="5a,10a,10a", options="header"]
+|===
+| Task
+| Circle of Evaluation
+| Code
+
+| 
+
+@n Make a bar-chart of the lightest 16 animals by `sex`.
+
+@vspace{2ex}
+
+@star What might you want to compare this to?
+| @showsoln{(coe exp1)}
+| @showsoln{(code exp1)}
+
+| 
+
+@n Make a histogram of `weeks` to adoption for the heaviest 20 animals.
+
+@vspace{2ex}
+
+@star What might you want to compare this to?
+
+| @showsoln{(coe exp2)}
+| @showsoln{(code exp2)}
+
+| 
+@n Make a box-plot of `age` for the 11 animals it took more than 5 weeks to adopt.
+
+@vspace{2ex}
+
+@star What might you want to compare this to?
+
+| @showsoln{(coe exp3)}
+| @showsoln{(code exp3)}
+
+| 
+
+@n Make a pie-chart of `species` for the 18 animals it up to 4 weeks to adopt.
+
+@vspace{2ex}
+
+@star What might you want to compare this to?
+
+| @showsoln{(coe exp4)}
+| @showsoln{(code exp4)}
+
+|===
