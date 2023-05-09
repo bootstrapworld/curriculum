@@ -56,7 +56,7 @@ Which one is the most interesting to you?
 When you've selected a dataset to work on, open the Starter File and save a copy.
 
 <!--
-_Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @link{https://youtu.be/uqm9F_tmIho, tutorial video} for help importing your own data into Pyret.
+_Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @starter-file{blank-ds-tutorial} for help importing your own data into Pyret.
 -->
 ---
 {layout="Investigate"}
