@@ -94,11 +94,22 @@ Students learn to work with more than one function at once, by way of Circles of
 
 === Launch
 
-How could these two functions work together? What if we wanted to see the ten youngest animals?
+What if we wanted to see the ten youngest animals? How could the `first-n-rows` and `sort` functions work together? What order should we use the functions in?
 
 === Investigate
 
-You could draw a map of how `sort` and `first-n-rows` would fit together and it would look like this.
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+
+1) Every Circle must have one - and only one! - function, written at the top.
+
+2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+
+3) Circles can contain other Circles!
+
+
+If we want to see the ten youngest animals, our diagram would look like this.
 
 @do{
 (define exp1 '(first-n-rows (sort animals-table "age" true) 10))
@@ -106,11 +117,11 @@ You could draw a map of how `sort` and `first-n-rows` would fit together and it 
 
 @show{(coe exp1)}
 
-We call this map a circle of evaluation. It helps us to write the following code:
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
 
 @show{(code exp1)}
 
-If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our circles of evaluation.
+If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
 
 @do{
 (define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
@@ -131,9 +142,8 @@ That would translate to the following code:
 
 === Synthesize
 
-
-
-
+- What did you Notice?
+- What did you wonder?
 
 == Functions for Making Displays @duration{20 minutes}
 
