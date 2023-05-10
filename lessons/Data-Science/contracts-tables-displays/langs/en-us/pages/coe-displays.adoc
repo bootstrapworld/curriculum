@@ -3,26 +3,28 @@
 ++++
 <style>
 #content .autonum::after { content: ')'; }
+#content .contracts td { padding: 0 !important; }
+#content .contracts .editbox { background: none !important; }
 </style>
 ++++
 
-[cols="1a,1a", frame="none", grid="none"]
+[.contracts, cols="1a,1a", frame="none", grid="none", stripes="none"]
 |===
 |
+@show{(contract "pie-chart" '("Table" "String") "Image")}
+
 @show{(contract "bar-chart" '("Table" "String") "Image")}
 
 @show{(contract "box-plot" '("Table" "String") "Image")}
 
-@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
-
 |
-@show{(contract "pie-chart" '("Table" "String") "Image")}
-
 @show{(contract "count" '("Table" "String") "Table")}
 
 @show{(contract "first-n-rows" '("Table" "Number") "Table")}
 
 @show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+2+|
+@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
 |===
 
 @do{
@@ -31,12 +33,12 @@
 (define exp1 '(bar-chart (first-n-rows (sort animals-table "pounds" true) 16) "sex"))
 (define exp2 '(histogram (first-n-rows (sort animals-table "pounds" false) 20) "name" "weeks" 5))
 (define exp3 '(box-plot(first-n-rows(sort animals-table "weeks" false) 11) "age"))
-(define exp4 '(pie-chart(first-n-rows(sort animals-table "pounds" true) 18) "species"))
+(define exp4 '(pie-chart(first-n-rows(sort animals-table "weeks" true) 18) "species"))
 (define exp5 '(box-plot(first-n-rows(sort animals-table "age" true) 12) "pounds"))
-(define exp6 '(pie-chart(first-n-rows(sort animals-table "pounds" false) 10) "legs"))
+(define exp6 '(pie-chart(first-n-rows(sort animals-table "age" false) 10) "legs"))
 }
 
-[.FillVerticalSpace, cols="10a,10a", options="header"]
+[.FillVerticalSpace, cols="8a,12a", options="header"]
 |===
 | Task
 | Circle of Evaluation
