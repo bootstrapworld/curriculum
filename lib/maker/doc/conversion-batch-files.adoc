@@ -1,0 +1,116 @@
+== Batch files for HTML conversion
+
+The next stage of the build creates batch files that enshrine
+enough information to the converters. We do not simply drill down
+the distribution tree and convert the .adoc files immediately, as
+that would be too inefficient, given the converters have
+significant startup time. Instead, we create the batch
+files in `distribution/en-us/.cached` so the conversions can be
+done in one go. The names of these batch files are given by the
+following environment variables (which are set in the build
+makefile):
+
+  $ADOCABLES_INPUT
+  $ADOC_INPUT
+  $ADOC_POSTPROC_LESSONPLAN_INPUT
+  $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+  $ADOC_POSTPROC_NARRATIVE_INPUT
+  $ADOC_POSTPROC_RESOURCES_INPUT
+  $ADOC_POSTPROC_PWYINDEP_INPUT
+  $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+  $PUPPETEER_INPUT
+  $EXERCISE_COLLECTOR_INPUT
+  $COURSES_LIST_FILE
+  $LESSONS_LIST_FILE
+
+(The actual names used are not germane to this discussion.)
+
+[discrete]
+=== $ADOCABLES_INPUT
+
+The `$ADOCABLES_INPUT` file has entries for each adoc file that
+are given to the Racket preprocessor.
+Each entry is of the form:
+
+  ("<adoc-filename>" #:containing-directory <string>
+                     #:dist-root-dir <string>
+                     #:lesson-plan <string>
+                     #:lesson <string>
+                     #:otherdir <boolean>
+                     #:resources <boolean>
+                     #:solutions-mode? <boolean>
+                     #:proglang <string>
+                     #:other-proglangs <list>
+                     #:narrative <boolean>
+                     #:target-pathway <string>)
+
+Not all the keywords are necessary for all the adoc files.
+
+The `<adoc-filename>` is the basename of the adoc file. The
+`+#:containing-directory+` value is given relative to
+`distribution/en-us`. The `+#:dist-root-dir+` value is the
+pathname of `distribution/en-us` relative to the adoc file. These
+three values are not optional.
+
+[discrete]
+=== $ADOC_INPUT
+
+This contains a list of `.asc` files, which are intermediate
+files created by the Racket preprocessor from the `.adoc` files
+listed in `$ADOCABLES_INPUT` before eventual conversion by
+AsciiDoctor into HTML.
+
+These `.asc` files are always inside a
+`.cached` subdir co-level with the original `.adoc`. The pathnames of
+these `.asc` files are given relative to `distribution/en-us`.
+
+The HTML files created by AsciiDoctor also
+reside in the `.cached` subdir and go through a postprocessing
+phase before moving to the directory above.
+
+[discrete]
+=== $ADOC_POSTPROC_*_INPUT
+
+These are the files
+
+  $ADOC_POSTPROC_LESSONPLAN_INPUT
+  $ADOC_POSTPROC_NARRATIVEAUX_INPUT
+  $ADOC_POSTPROC_NARRATIVE_INPUT
+  $ADOC_POSTPROC_RESOURCES_INPUT
+  $ADOC_POSTPROC_PWYINDEP_INPUT
+  $ADOC_POSTPROC_WORKBOOKPAGE_INPUT
+
+These list the names of the HTML files awaiting postprocessing.
+They are given in six lots, because the type of postprocessing
+varies for:
+
+- lesson plan HTML files
+- glossary HTML files in courses
+- pathway narrative HTML files
+- pathway resource HTML files (i.e., pathway files other than the
+  narrative)
+- pathway-independent HTML files (neither lessons nor pathways)
+- workbook HTML files (in the lessons)
+
+The filenames in these files are relative to `distribution/en-us`.
+
+[discrete]
+=== $PUPPETEER_INPUT
+
+This is a JSON file containing the list of postprocessed HTML
+files that are ready to be converted to PDF.
+
+[discrete]
+=== *_LIST_FILE
+
+These are:
+
+  $COURSES_LIST_FILE
+  $LESSONS_LIST_FILE
+
+These contain the list of all the courses and lessons
+respectively. While they can be obtained by listing the
+concerned subdirs in `distribution/`, they are used often enough
+that it is useful to cache these values.
+
+// last modified 2023-03-05

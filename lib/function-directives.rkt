@@ -38,6 +38,8 @@
 
 (define *table-marker* "|")
 
+(define *store-title* #f)
+
 (define *max-pyret-example-clause-length* 60)
 
 (define *funname* #f)
@@ -275,7 +277,9 @@
                                        (if (pyret-keyword? w)
                                            (begin
                                              ;(printf "found keyword ~a\n" w)
-                                             (format "%PYRETKEYWORD%~a%END%" w))
+                                             (format "[.pyretkeyword]##~a##" w)
+                                             ; (format "%PYRETKEYWORD%~a%END%" w)
+                                             )
                                            w))
                                      words) " ")))
                           lines) "\n"))])
@@ -285,11 +289,14 @@
   (enclose-span (format ".headless-design-recipe.FOR~a" *proglang*) ""))
 
 (define (write-section-header page-header funname)
-  (format (string-append
-            "\n\n[.designRecipeLayout]\n"
-            "= [.dr-title]##~a~a##\n")
-          page-header
-          (if funname (format ": ~a" funname) "")))
+  (let ([title-txt (string-append page-header
+                     (if funname (format ": ~a" funname) ""))])
+    (when *store-title*
+      (*store-title* title-txt))
+    (format (string-append
+              "\n\n[.designRecipeLayout]\n"
+              "= [.dr-title]##~a##\n")
+            title-txt)))
 
 (define (write-directions directions headless?)
   (format (string-append
@@ -298,11 +305,11 @@
           (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) "")
           directions))
 
-(define (write-title title-text)
+(define (write-title title-txt)
   (string-append
     "\n\n[.recipe_title, cols=\"100a,1a\"]\n"
     *table-marker* "===\n"
-    *table-marker* " " title-text *table-marker* "\n"
+    *table-marker* " " title-txt *table-marker* "\n"
     *table-marker* "===\n\n"))
 
 (define (write-purpose funname domain-list range purpose)
@@ -736,6 +743,7 @@
                                 #:assess-design-recipe (assess-design-recipe #f)
                                 #:headless? (headless? #f)
                                 #:nested-in-table? [nested-in-table? #f]
+                                #:store-title [store-title #f]
                                 )
 
   ;TODO: check what the mandatory defaults should be in non-solutions mode, and what
@@ -755,6 +763,8 @@
   (set! *show-body?* show-body?)
 
   (set! *table-marker* (if nested-in-table? "!" "|"))
+
+  (set! *store-title* store-title)
 
   #|
   (unless *solutions-mode?*
@@ -836,6 +846,7 @@
           #:grid-lines? (grid-lines? #f)
           #:headless? (headless? #f)
           #:nested-in-table? [nested-in-table? #f]
+          #:store-title [store-title #f]
           )
   (set-proglang! proglang)
   (set! *solutions-mode?* solutions-mode?)
@@ -887,9 +898,10 @@
     (set! transformer-type (string-downcase transformer-type)))
   (let ([style-transformer-type
           (lambda (type)
-            (if (and *show-transformer-type?* transformer-type
+            (if (and (or *show-transformer-type?* *solutions-mode?*)
+                     transformer-type
                      (string=? transformer-type type))
-                ".transformer_type_checked"
+                ".transformer_type.chosen"
                 ".transformer_type"))])
 
   (string-append
@@ -991,6 +1003,7 @@
                              #:show-formula-expression? [show-formula-expression? #f]
                              #:formula-expression [formula-expression ""]
                              #:headless? [headless? #f]
+                             #:store-title [store-title #f]
                              )
 
   (set! *solutions-mode?* solutions-mode?)
@@ -1064,17 +1077,15 @@
     (set! question-type (string-downcase question-type)))
   (let ([style-question-type
           (lambda (type)
-            (if (and *show-question-type?* question-type
-                     (string=? question-type type))
-                ".question_type_checked"
+            (if (and  (or *show-question-type?* *solutions-mode?*)
+                      question-type
+                      (string=? question-type type))
+                ".question_type.chosen"
                 ".question_type"))])
     (string-append
-      "What type of question is this? (circle one)"
-      ; (hspace "1.5em")
+      "*Question Type*\n\n(circle one):"
       (format " [~a]##Lookup##" (style-question-type "lookup"))
-      ; (hspace "1.5em")
       (format " [~a]##Arithmetic##" (style-question-type "arithmetic"))
-      ; (hspace "1.5em")
       (format " [~a]##Statistical##" (style-question-type "statistical"))
       "\n\n")))
 
@@ -1110,6 +1121,7 @@
                     #:show-finding? [show-finding? #f]
                     #:new-question [new-question ""]
                     #:show-new-question? [show-new-question? #f]
+                    #:store-title [store-title #f]
                     )
 
   (set! *solutions-mode?* solutions-mode?)
@@ -1136,7 +1148,7 @@
     (set! *show-new-question?* #t))
 
   (string-append
-    "[.data-cycle, cols=\"^.^3, .^20\", stripes=\"none\"]\n"
+    "[.data-cycle, cols=\"^.^3, .^17, .^3\", stripes=\"none\"]\n"
     "|===\n"
     "| "
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
@@ -1145,12 +1157,12 @@
     (encoded-ans ".data-cycle-question.stretch" question *show-question?*)
     "\n\n"
     (fitb "100%" "")
-    "\n\n"
+    "\n\n| "
     (write-data-cycle-question-type question-type)
     "| "
     "image:" dist-root-dir "lib/images/ConsiderData.png[Consider Data icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-rows.stretch" rows *show-rows?*)
     "\n\n"
     (encoded-ans ".data-cycle-cols.stretch" cols *show-cols?*)
@@ -1158,7 +1170,7 @@
     "| "
     "image:" dist-root-dir "lib/images/AnalyzeData.png[Analyze icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-filter.stretch" filter-fn *show-filter?*)
     "\n\n"
     (encoded-ans ".data-cycle-build.stretch" build-fn *show-build?*)
@@ -1168,7 +1180,7 @@
     "| "
     "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
     "\n"
-    "|\n"
+    "2+|\n"
     (encoded-ans ".data-cycle-finding.stretch" finding *show-finding?*)
     "\n\n"
     (fitb "100%" "")

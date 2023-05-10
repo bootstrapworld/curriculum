@@ -90,7 +90,6 @@ body {
   /* Show the standard footer at the bottom of each page...*/
   #footer {
     background: rgba(0,0,0,0.5);
-    margin-left: -3em;
     padding-left: 10px !important;
     position:   fixed;
     top:        100%;
@@ -189,7 +188,7 @@ body:not(.LessonPlan, .narrativepage) p {
   dd::after { content: '\A'; white-space: pre; }
 }
 
-.alignedStandards { display: none; }
+.alignedEntries { display: none; }
 .coverageElement { display: none; }
 .standard-menu-container {
   padding:          10px;
@@ -508,16 +507,25 @@ body.workbookpage {
   /* Some elements show either solution mode or a blank */
   .solution { font-style: italic; }
   .blank    { color: rgba(0,0,0,0); }
+  .chosen::after { content: '✅'; }
 
-  /* Auto-numbering - Add a right-paren, unless it's inside a table. */
-  .autonum::after { content: ')'; }
-  table .autonum::after { content: none; }
+  /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
+  .autonum { 
+    display: inline-block; 
+    padding-top: 1.2rem; 
+    &::after { content: ')'; }
+    &.star::after { content: unset; }
+  }
+  td .autonum {
+    padding-top: 0;
+    &::after { content: none;}
+  }
 
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
 
-  .fitb, .fitbruby, .fitb.stretch::after {
+  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top:        @top-padding-for-writing;
     position:           relative;
     display:            inline-block;
@@ -525,6 +533,7 @@ body.workbookpage {
     text-align:         center;
     line-height:        1rem;
     border-bottom:      solid 1px black;
+    vertical-align:     baseline;
   }
   .fitbruby { 
     margin-bottom: 0.75rem;
@@ -539,10 +548,11 @@ body.workbookpage {
     text-align:         center;
     font-style:         normal;
     font-family:        @text-font;
+    white-space:        nowrap;
   }
-  .fitb.stretch { 
+  .fitb.stretch, .fitbruby.stretch { 
     margin-left:        5px; 
-    vertical-align:     bottom; 
+    vertical-align:     baseline; 
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     /* add an underline that goes past the end of the page */
@@ -587,6 +597,7 @@ body:not(.LessonPlan) {
 /* Don't use flex to space out content on notes pages */
 body.LessonNotes {
   #content { display: block !important; }
+  li { margin-bottom: 10px; }
 }
 /************************************************************************************
 * DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
@@ -597,17 +608,23 @@ body.LessonNotes {
   border-collapse: collapse;
   width: 100%;
   td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
-  td { padding: 0.2rem 0.625rem; }
+  td { padding: 0.2rem 0.325rem; }
+  td p.tableblock { font-size: 0.65rem; }
 
   .fitbruby { text-align: left !important; }
+  .fitbruby.stretch { margin-left: 0 !important; }
 
   /* Ruby text in the Data Cycle needs to be slightly larger than normal */
   .fitbruby .ruby { 
     font-size:  0.75rem !important; 
     &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
-  .question_type, .question_type_checked { display: inline-block; margin: 0 2em;}
-  .question_type_checked { font-style: italic; font-weight: bold; }
+  .question_type { display: list-item; list-style: circle inside; }
+  .question_type.chosen { 
+    font-style: italic; font-weight: bold; border: solid 1px black; 
+    border-radius: 50%;
+    &::after { position: absolute; };
+  }
 }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
@@ -756,10 +773,9 @@ table.recipe_title    {
 .codap {
   .cm-keyword { font-weight: normal !important; }
   .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
-  .transformer_type_checked td:last-child .content { width: 0; height: 0px; background: none; }
   .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
   .recipe_name { display: flex !important; }
-  .transformer_type p::before, .transformer_type_checked p::before {
+  .transformer_type p::before {
     width: 1.1rem;
     height: 1.1rem;
     background: white;
@@ -767,15 +783,14 @@ table.recipe_title    {
     margin:  0 2px 2px 0;
     vertical-align: middle;
   }
-  div.transformer_type, div.transformer_type_checked { margin-left: 2em; }
+  div.transformer_type { margin-left: 2em; }
   div.transformer_type p::before { content: ""; }
   table.transformer_type td:first-of-type .content { display: flex; flex: row; }
   table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
-  div.transformer_type_checked p::before {
-    content: "x";
-    text-align: center;
-    line-height: 1rem;
-    color: black;
+  div.transformer_type.chosen p::after {
+    position: relative;
+    top: -19px;
+    left: 9px;
   }
   .recipe_formula, .codap_transformer { display:  flex !important; }
   .codap_transformer p { width:  100%; }
@@ -875,6 +890,15 @@ span.cm-scheme-rparen                     { color: black;}
 .pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
 * + .pyretkeyword { margin-left: 1ex;}
 
+/* compact tables */
+table.data-table {
+  td, th { 
+    margin:       0; 
+    padding:      0 5px; 
+    width:        1px;
+  }
+}
+
 /* class for tables containing Pyret data */
 table.pyret-table {
   border-collapse:    collapse;
@@ -926,7 +950,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 * SCREEN MEDIA
 */
 @media screen {
-  html { height: 100%; display:  flex; }
+  /* add some left-padding to improve readability on screens */
+  html { height: 100%; display:  flex; padding-left: 3em; }
 
   .web-page-only {
     font-weight:      bold;
@@ -941,9 +966,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
     min-height: calc(11in * 1.25) !important;
     #savetodrive-div { transform: scale(0.8); }
   }
-
-  /* add some left-padding to improve readability on screens */
-  body.workbookpage, body.LessonPlan #body { padding-left: 3em; }
 
   /********************************************************************
    *  Collapsing Headers 

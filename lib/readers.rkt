@@ -90,28 +90,36 @@
 
 (define (read-commaed-group i directive read-group)
   (let* ([g (read-group i directive)]
-         [n (string-length g)])
-    (let loop ([i 0] [r '()])
-      (if (>= i n)
-          (map string-trim (reverse r))
-          (let loop2 ([j i] [in-string? #f] [in-escape? #f])
-            (if (>= j n) (loop j (cons (substring g i j) r))
-                (let ([c (string-ref g j)])
-                  (cond [(eof-object? c)
-                         ; (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
-                         ;        directive *lesson-subdir* *in-file*)
-                         (error 'ERROR "read-commaed-group: Runaway directive ~a" directive)
-                         ]
-                        [in-escape?
-                          (loop2 (+ j 1) in-string? #f)]
-                        [(char=? c #\\)
-                         (loop2 (+ j 1) in-string? #t)]
-                        [in-string?
-                          (if (char=? c #\")
-                              (loop2 (+ j 1) #f #f)
-                              (loop2 (+ j 1) #t #f))]
-                        [(char=? c #\")
-                         (loop2 (+ j 1) #t #f)]
-                        [(char=? c #\,)
-                         (loop (+ j 1) (cons (substring g i j) r))]
-                        [else (loop2 (+ j 1) #f #f)]))))))))
+         [n (string-length g)]
+         [r (let loop ([i 0] [r '()])
+              (if (>= i n)
+                  (reverse r)
+                  (let loop2 ([j i] [in-string? #f] [in-escape? #f])
+                    (if (>= j n) (loop j (cons (substring g i j) r))
+                        (let ([c (string-ref g j)])
+                          (cond [(eof-object? c)
+                                 ; (error 'ERROR "read-commaed-group: Runaway directive ~a in (~a,~a)"
+                                 ;        directive *lesson-subdir* *in-file*)
+                                 (error 'ERROR "read-commaed-group: Runaway directive ~a" directive)
+                                 ]
+                                [in-escape?
+                                  (loop2 (+ j 1) in-string? #f)]
+                                [(char=? c #\\)
+                                 (loop2 (+ j 1) in-string? #t)]
+                                [in-string?
+                                  (if (char=? c #\")
+                                      (loop2 (+ j 1) #f #f)
+                                      (loop2 (+ j 1) #t #f))]
+                                [(char=? c #\")
+                                 (loop2 (+ j 1) #t #f)]
+                                [(char=? c #\,)
+                                 (loop (+ j 1) (cons (substring g i j) r))]
+                                [else (loop2 (+ j 1) #f #f)]))))))])
+    (map (lambda (x)
+           (set! x (string-trim x))
+           (let ([last-i (- (string-length x) 1)])
+             (when (and (>= last-i 1) (char=? (string-ref x 0) #\")
+                        (char=? (string-ref x last-i) #\"))
+               (set! x (substring x 1 last-i))))
+           x) 
+         r)))

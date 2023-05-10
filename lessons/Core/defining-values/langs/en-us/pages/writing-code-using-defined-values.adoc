@@ -1,0 +1,88 @@
+= Writing Code using Defined Values
+
+++++
+<style>
+#content div.circleevalsexp {width: auto !important; }
+div.code { position: absolute; bottom: 0; }
+td .autonum:after {content: ") "; }
+</style>
+++++
+@n On the line below, *write the Code* to define `PRIZE-STAR` as a pink, outline star of size 65.
+
+@fitb{}{@showsoln{(code '(define PRIZE-STAR (star 65 "outline" "pink"))) }}
+
+@vspace{1ex}
+
+Using the `PRIZE-STAR` definition from above, draw the Circle of Evaluation and write the Code for each of the exercises. Test out your code before moving onto the next item. One Circle of Evaluation has been done for you.
+
+@vspace{1ex}
+
+
+[.FillVerticalSpace, cols="<1a,<1a", stripes="none"]
+|===
+|
+--
+@n The outline of a pink star that is three times the size of the original (using `scale`)
+--
+*Circle of Evaluation:*
+
+[.center]
+@show{(coe '(scale 3 PRIZE-STAR))}
+
+[.code]
+*Code:* @showsoln{(code '(scale 3 PRIZE-STAR))}
+
+|
+--
+@n The outline of a pink star that is half the size of the original (using `scale`)
+--
+*Circle of Evaluation:*
+
+[.center]
+@showsoln{(coe '(scale 0.5 PRIZE-STAR))}
+
+[.code]
+*Code:* @showsoln{(code '(scale 0.5 PRIZE-STAR))}
+
+
+|
+--
+@n  The outline of a pink star that is rotated 45 degrees
+
+_(It should be the same size as the original.)_
+--
+*Circle of Evaluation:*
+@showsoln{(coe '(rotate 45 PRIZE-STAR))}
+
+[.code]
+*Code:*
+@showsoln{(code '(rotate 45 PRIZE-STAR))}
+|
+--
+@n The outline of a pink star that is three times as big as the original *and* has been rotated 45 degrees
+--
+*Circle of Evaluation:*
+
+@showsoln{(coe '(scale 3(rotate 45 PRIZE-STAR)))}
+@ifsoln{or}
+@showsoln{(coe '(rotate 45 (scale 3 PRIZE-STAR)))}
+
+[.code]
+--
+*Code:*
+@showsoln{(code '(scale 3 (rotate 45 PRIZE-STAR)))}
+@ifsoln{or}
+@showsoln{(code '(rotate 45 (scale 3 PRIZE-STAR)))}
+--
+|===
+
+@vspace{1ex}
+
+@n How does defining values help you as a programmer?
+
+@fitb{}{@ifsoln{More efficient. Avoids mistakes. Easier to make changes. Easier to read the code.}}
+
+@fitb{}{}
+
+@fitb{}{}
+

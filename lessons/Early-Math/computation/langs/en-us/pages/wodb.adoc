@@ -1,0 +1,75 @@
+= Which One Doesn't Belong? Computation
+
+Cross out the Circle that does NOT belong with the others, and then explain your choice.
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^12a,^.^4a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong? |Explain
+
+| @n
+|
+@show{(coe '(+ (+ 10 7) 17))}
+@show{(coe '(+ (+ 16 8) 10))}
+@ifsoln-choice{@show{(coe '(* (+ 9 9) 2))}}
+@show{(coe '(* 17 2))}
+|  @ifsoln{All Circles evaluate to 34, except the third one, which is 36}
+
+| @n
+|
+@show{(coe '(+ (+ 13 9) 7))}
+@show{(coe '(+ 9 (+ 17 3)))}
+@show{(coe '(+ 20 9))}
+@ifsoln-choice{@show{(coe '(+ 8 (+ 8 14)))}}
+| @ifsoln{All Circles evaluate to 29, except the last one, which is 30}
+
+| @n
+|
+@ifsoln-choice{@show{(coe '(* 12 6))}}
+@show{(coe '(* 42 2))}
+@show{(coe '(* 21 4))}
+@show{(coe '(* 7 (* 3 4)))}
+| @ifsoln{All Circles evaluate to 84, except the first one, which is 72}
+
+| @n
+|
+@show{(coe '(* 9 10))}
+@show{(coe '(* 10 9))}
+@ifsoln-choice{@show{(coe '(* (* 5 5) 9))}}
+@show{(coe '(* 5 (* 2 9)))}
+| @ifsoln{All Circles evaluate to 90, except the third one, which is 225}
+
+| @n
+|
+@show{(coe '(* 2 2))}
+@show{(coe '(+ 2 2))}
+@ifsoln-choice{@show{(coe '(- 2 2))}}
+@show{(coe '(* 4 (/ 3 3)))}
+| @ifsoln{All Circles evaluate to 4, except the third one, which is 0}
+
+| @n
+|
+@show{(coe '(+ 68 15))}
+@show{(coe '(+ 81 2))}
+@show{(coe '(+ 59 24))}
+@ifsoln-choice{@show{(coe '(+ 77 16))}}
+| @ifsoln{All Circles evaluate to 83, except last one, which is 93}
+
+|===
+
+

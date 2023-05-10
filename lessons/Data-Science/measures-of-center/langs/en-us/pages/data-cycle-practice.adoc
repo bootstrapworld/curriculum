@@ -1,0 +1,45 @@
+= Data Cycle: Measures of Center
+
+Complete both of the Data Cycles shown here, which have questions defined to get you started.
+
+@data-cycle{ ""
+  #:question "What is the mean age for cats at the shelter?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "just the cats"
+  #:show-rows? #f
+  #:cols "age"
+  #:show-cols? #f
+  #:filter-fn "fun is-cat(r): r[\"species\"] == \"cat\" end"
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression '(mean(filter(animals-table is-cat) "age"))
+  #:show-expression? #f
+  #:finding "The mean age of cats is 4.18"
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #t
+}
+
+@span{.sectionbreak}{}
+
+@data-cycle{ ""
+  #:question "How long does a typical animal take to be adopted?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "all the rows"
+  #:show-rows? #f
+  #:cols "weeks"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression '(median animals-table "weeks")
+  #:show-expression? #f
+  #:finding "The median time to adoption is 4 weeks"
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #t
+}

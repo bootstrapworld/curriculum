@@ -1,0 +1,234 @@
+= Function Notation
+
+@description{Students learn to read function notation and evaluate expressions using function definitions, tables, and graphs.}
+
+@lesson-prereqs{functions-make-life-easier, defining-values}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+
+* Identify the value that applying a function (e.g. - f(3)) produces from symbolic definitions, tables, or graphs.
+
+| Student-Facing Lesson Goals
+|
+
+* Let's learn how to find the value of an expression such as f(3), from a table, a graph or a symbolic definiton.
+
+| Materials
+|[.materials-links]
+
+_**This lesson is unplugged** and does not require a computer._
+
+@material-links
+
+
+|===
+
+== Function Notation (Definitions) @duration{15 minutes}
+
+=== Overview
+
+Students connect their understanding of function definitions in @proglang to function definitions in math.
+
+=== Launch
+
+We've seen how functions like `gt` can be defined, and then @vocab{applied} to a number to create a green triangle. And once `gt` is defined, we can use it with many different numbers to create many different triangles - all without having to write out `"solid"`, `"green"`, etc.
+
+But how does this function _work?_
+
+When we apply a function to some inputs, we @vocab{substitute} those inputs for the @vocab{variables} in the definition. In the example below, the inputs are @vocab{substituted} for the variable `size` in the body of the `gt` function.
+
+@center{**@show{(code '(define (gt size)(triangle size "solid" "green")))}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
+|===
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
+| @show{(code '(gt 10))}	| @show{(code '(triangle 10 "solid" "green"))} 		| @image{images/gt10.png}
+| @show{(code '(gt 20))}	| @show{(code '(triangle 20 "solid" "green"))} 		| @image{images/gt20.png}
+| @show{(code '(gt 30))}	| @show{(code '(triangle 30 "solid" "green"))} 		| @image{images/gt30.png}
+| @show{(code '(gt 40))}	| @show{(code '(triangle 40 "solid" "green"))} 		| @image{images/gt40.png}
+| @show{(code '(gt 50))}	| @show{(code '(triangle 50 "solid" "green"))} 		| @image{images/gt50.png}
+|===
+
+@vspace{1ex}
+
+Let's take a look at a @vocab{function} that works with Numbers:
+
+
+@center{**@show{(code '(define (f x) (+ x 8)))}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
+|===
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
+| @math{f(10)} 			| @show{(code '(+ 10 8))} 	| 18
+| @math{f(20)} 			| @show{(code '(+ 20 8))} 	| 28
+| @math{f(30)} 			| @show{(code '(+ 30 8))} 	| 38
+| @math{f(40)} 			| @show{(code '(+ 40 8))} 	| 48
+| @math{f(50)} 			| @show{(code '(+ 50 8))} 	| 58
+|===
+
+@vspace{1ex}
+
+Once again, the input is @vocab{substituted} for the variable.
+
+You've already seen that @proglang looks a little different from traditional math, even if it behaves the same way.
+
+Math books use something called @vocab{Function Notation} to define functions. Here's a side-by-side comparison of the same function, in our programming language and in function notation:
+
+[cols="^1,^1", options="header"]
+|===
+| Defining Functions in @proglang
+| Defining Functions in Function Notation
+| @show{(code '(define (f x) (+ x 8)))}
+| @math{f(x) = x + 8}
+|===
+
+[.lesson-instruction]
+* What do these forms have in common?
+** _Both forms show the *name of the function*, as well as the *names of the variables*. They also show *what the function does with those variables*._
+* How are these forms different from one another?
+** _In Pyret, we use a colon instead of an equals sign. In Pyret, we see `fun` at the beginning and `end` at the end._
+
+In math - just as in programming - *we compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition*, just as we did with `gt`.
+
+@center{**@math{f(x) = x + 8}**}
+[cols="^.^2,^.^3,^.^2", options="header"]
+|===
+| Apply the Function 	| Substitute the Input(s) 	| Compute the Answer
+| @math{f(10)} 			| @math{10 + 8} 			| 18
+| @math{f(20)} 			| @math{20 + 8} 			| 28
+| @math{f(30)} 			| @math{30 + 8} 			| 38
+| @math{f(40)} 			| @math{40 + 8} 			| 48
+| @math{f(50)} 			| @math{50 + 8} 			| 58
+|===
+
+=== Investigate
+
+[.lesson-instruction]
+- Turn to @printable-exercise{pages/match-examples-definitions-math.adoc} and @printable-exercise{pages/function-notation-substitution.adoc}.
+- Start by looking at each table and highlighting what is changing from the first row to the following rows.
+- Then, match each table to the function that defines it.
+
+You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
+
+=== Synthesize
+
+[.lesson-instruction]
+--
+You can think of @math{f(3)} as a question.
+
+* What question is it asking you to @vocab{evaluate}?
+** _What is the value of @math{x + 8} when @math{x} is 3?_
+* What is another way you can ask it?
+** _What is @math{3 + 8}?_
+--
+== Function Notation (Graphs) @duration{15 minutes}
+
+=== Overview
+
+Students will learn to connect function definitions to Graphs.
+
+=== Launch
+
+[.lesson-instruction]
+--
+* If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
+** _@math{2}. Because if we substitute 7 for x we get @math{7 - 5 = 2}_
+* What is the value of @math{f(8)}?
+** _@math{3}. Because if we substitute 8 for x we get @math{8 - 5 = 2}_
+* What is the value of @math{f(9)}?
+** _@math{4}_
+--
+
+For each of these inputs, we have an output. If we graph each input-output pair on the @vocab{coordinate plane}, we can "see" the function as a @vocab{line} on a graph.
+
+Let's take a look at the graph of @math{f(x) = x - 5}.
+
+@centered-image{images/gr1.png, 350}
+
+[.lesson-instruction]
+* How could we have determined that @math{f(7) = 2} from looking at the graph, if we hadn't started with the function definition?
+** _We could have looked for a point whose y-coordinate was 2. This would lead us to the point (7, 2), which tells us that the output of the function when x is 7 is 2._
+* From looking at the graph, what is the value of @math{f(3)}?
+** _-2_
+* What other values on this graph could we describe using function notation?
+** _Answers will vary. For example: @math{f(0) = -5} or @math{f(0.5) = -4.5}_
+
+Even if we can't see the _definition_ of a function, we can reason about it just by looking at the graph!
+
+Let's look at the graph below, which shows only a few points on the line drawn by a function:
+
+@centered-image{images/sp.png, 350}
+
+[.lesson-instruction]
+* From looking at the graph, what is the value of @math{f(-2)}?
+** _-4_
+* What is the value of @math{f(1)}?
+** _2_
+* What is the value of @math{f(3)}?
+** _There isn't one! It's undefined._
+* What other values on this graph could we describe using function notation?
+** _Answers will vary. For example, @math{f(-1) = 4} or @math{f(2) = 4}_
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Optional: Piecewise Functions}
+
+When evaluating an expression for a piecewise function, points on the graph marked with hollow circles are boundary points, but not part of the solution set, so we ignore them and focus on the solid points. For example, on the graph below, when evaluating @math{f(2)}, we ignore the hollow point at @math{(2, 4)} and focus on the solid point at @math{(2,3)}, so @math{f(2) = 3}.
+
+@centered-image{images/pw.png}
+
+* What is the value of @math{f(0)} in the graph above?
+** _3_
+
+|===
+
+=== Investigate
+[.lesson-instruction]
+- Complete @printable-exercise{function-notation-graphs.adoc}.
+- Optional: If you're ready for a challenge (piecewise functions!), try out @opt-printable-exercise{function-notation-graphs-pw.adoc}.
+
+=== Synthesize
+
+* Can you think of any values that it would be difficult to determine from one of these graphs?
+** _It would be hard to be precise for many of the points on the graphs that curve. For example, @math{f(4)} on the second graph would have to be a decimal value and it's hard to know exactly what the decimal should be without a function definition to evaluate..._
+
+== Function Notation (Tables) @duration{15 minutes}
+
+=== Overview
+
+Students will learn to connect function definitions to input-output Tables.
+
+=== Launch
+
+[.lesson-instruction]
+* Let's take a look at a table of input-output pairs that satisfy the function @math{f(x) = x - 5}, and think about how could we have determined the value of @math{f(7)} from looking at the table.
+** _We would just look for 7 in the x-column and see that the value beside it is 2._
+* Looking at the table, what is the value of @math{f(-10)}?
+** -15
+
+@vspace{1ex}
+
+[.sideways-pyret-table]
+|===
+| x | -10 | -5  | 5 | 7 | 13
+| y | -15 | -10 | 0 | 2 | 8
+|===
+
+=== Investigate
+[.lesson-instruction]
+Complete @printable-exercise{function-notation-tables.adoc}.
+
+=== Synthesize
+
+* What did you Notice?
+* What did you Wonder?
+* A few of the tables did not represent functions. Which ones?
+** _The last one in the top row, the last one in the middle row and the 3rd one in the bottom row._
+* How did the fact that those tables weren't functions impact our ability to describe a value using function notation?
+** _When x appeared more than once in the table and was associated with different outputs, it wasn't clear what number the expression should evaluate to._
+

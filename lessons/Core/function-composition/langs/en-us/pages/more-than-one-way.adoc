@@ -1,0 +1,91 @@
+[.landscape]
+= More than one way to Compose an Image!
+
+++++
+<style>
+td { padding: 0 !important; }
+</style>
+++++
+
+What image will each of the four expressions below evaluate to? If you're not sure, go to @starter-file{editor} and type them into the Interactions Area and see if you can figure out how the code constructs its image.
+
+@do{
+  (define wide-rect '(beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black")))
+  (define tall-rect '(scale/xy 1 2 (square 100 "solid" "black")))
+  (define big-sq    '(scale 2 (rectangle 100 100 "solid" "black")))
+  (define plus      '(above (rectangle 100 50 "solid" "black")
+							(above
+								(rectangle 200 100 "solid" "black")
+								(rectangle 100 50 "solid" "black"))))
+}
+
+@ifproglang{pyret}{
+```
+beside(rectangle(200, 100, "solid", "black"), square(100, "solid", "black"))
+
+scale-xy(1, 2, square(100, "solid", "black"))
+
+scale(2, rectangle(100, 100, "solid", "black"))
+
+above(
+	rectangle(100, 50, "solid", "black"),
+	above(
+		rectangle(200, 100,  "solid", "black"),
+		rectangle(100, 50, "solid", "black")))
+```
+}
+@ifproglang{wescheme}{
+```
+(beside (rectangle 200 100 "solid" "black")(square 100 "solid" "black"))
+
+(scale/xy 1 2(square 100 "solid" "black"))
+
+(scale 2 (rectangle 100 100 "solid" "black"))
+
+(above
+	(rectangle 100 50 "solid" "black")
+	(above
+		(rectangle 200 100 "solid" "black")
+		(rectangle 100 50 "solid" "black")))
+```
+}
+For each image below, identify 2 expressions that could be used to compose it. _The bank of expressions at the top of the page includes one possible option for each image._
+
+[.FillVerticalSpace, cols="^.^1,^.^6,.^24", stripes="none", frame="none"]
+|===
+a| @n
+a| @image{../images/vert-rect.png}
+a|
+@fitb{}{@showsoln{(code tall-rect)}}
+
+@fitb{}{@showsoln{(code '(rotate 90 (rectangle 200 100 "solid" "black")))}}
+
+@fitb{}{}
+
+a| @n
+a| @image{../images/square.png}
+a|
+@fitb{}{@showsoln{(code big-sq)}}
+
+@fitb{}{@showsoln{(code '(above (rectangle 200 100 "solid" "black")(rectangle 200 100 "solid" "black")))}}
+
+@fitb{}{}
+
+a| @n
+a| @image{../images/hor-rect.png}
+a|
+@fitb{}{@showsoln{(code wide-rect)}}
+
+@fitb{}{@showsoln{(code '(scale 0.5 (rectangle 600 200 "solid" "black")))}}
+
+a| ★
+a|  @image{../images/black-cross.png}
+a|
+@fitb{}{@showsoln{(code plus)}}
+
+@fitb{}{@showsoln{(code '(overlay (rectangle 100 200 "solid" "black")(rectangle 200 100 "solid" "black")))}}
+
+@fitb{}{}
+
+|===
+

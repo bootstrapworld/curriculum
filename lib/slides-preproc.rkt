@@ -2,9 +2,9 @@
 
 #lang racket
 
+(require json)
 (require "readers.rkt")
 (require "utils.rkt")
-(require "starter-files.rkt")
 (require "function-directives.rkt")
 
 (define-namespace-anchor *slides-namespace-anchor*)
@@ -20,14 +20,31 @@
 
 (define *in-file* "doesnt-exist")
 
+(define *topdir* (getenv "topdir"))
+
 (define *progdir* (getenv "PROGDIR"))
 
 (define *proglang* (or (getenv "PROGLANG") "pyret"))
+
+(define *proglang-sym* (string->symbol *proglang*))
+
+(define *starter-files*
+  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+    (if (file-exists? starter-files-file)
+        (call-with-input-file starter-files-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
 
 (define *bootstrap-prefix* (or (getenv "BOOTSTRAPPREFIX")
                                "https://bootstrapworld.org/materials/latest/en-us"))
 
 (define *lesson* (or (getenv "LESSON") "__sample-lesson"))
+
+(define *images-hash* #f)
+
+(define *missing-image-json-files* '())
 
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
@@ -35,20 +52,42 @@
 (define (errmessage-file-context)
   *in-file*)
 
-(define (make-image img text [width #f])
-  ; (printf "make-image ~s\n" img)
+(define (make-image img width)
+  ; (printf "make-image ~s in ~s\n" img (current-directory))
   (set! *num-images-processed* (+ *num-images-processed* 1))
-  (unless (file-exists? img)
-    ; (printf "image ~s doesnt exist\n" img)
-    (let ([img-anonymized
-            (system-echo (format "~a/anonymize-filename" *progdir*) img)])
-      ; (printf "anon image file is ~s\n" img-anonymized)
-      (when img-anonymized
-        (set! img img-anonymized))))
-  (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
-      (format "**-- INSERT IMAGE ~a HERE --**" img)
-      (format "![~a](~a)~a" text img
-              (if width (format "{width=~a}" width) ""))))
+
+  (unless *images-hash*
+    (let ([json-file "images/lesson-images.json"])
+      (cond [(file-exists? json-file)
+             (set! *images-hash* (call-with-input-file json-file read-json))]
+            [else
+              (set! *images-hash* #t)])))
+
+  ; (printf "*images-hash* = ~s\n" *images-hash*)
+
+  (let* ([image-file (call-with-values
+                       (lambda () (split-path img))
+                       (lambda (x base y)
+                         (string->symbol (path->string base))))]
+         [image-attribs (and (hash? *images-hash*) (hash-ref *images-hash* image-file #f))]
+         [text (if (hash? image-attribs) (hash-ref image-attribs 'description "") "")])
+
+    ; (printf "image-attribs = ~s\n" image-attribs)
+
+    (unless (file-exists? img)
+      ; (printf "image ~s doesnt exist\n" img)
+      (let ([img-anonymized (anonymize-filename img)])
+        ; (printf "anon image file is ~s\n" img-anonymized)
+        (when img-anonymized
+          (set! img img-anonymized))))
+
+    (when (and (hash? *images-hash*) image-attribs (string=? text ""))
+      (printf "WARNING: Image ~a missing metadata\n" image-file))
+
+    (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
+        (format "**-- INSERT IMAGE ~a HERE --**" img)
+        (format "![~a](~a)~a" text img
+                (if (string=? width "") "" (format "{width=~a}" width))))))
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
@@ -343,25 +382,39 @@
     (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
       (format "[~a](~a)" link-text fq-uri))))
 
+(define (extract-domain-name f)
+  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
+    (and x
+         (let ([y (first x)])
+           (and (not (string-ci=? y "google"))
+                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
+
 (define (external-link args directive)
   (let* ([num-args (length args)]
          [link (first args)]
-         [link-text (if (> num-args 1) (second args) "")])
+         [link-text (if (> num-args 1) (second args) "")]
+         [external-link? #f]
+         [domain-name #f])
+    (when (regexp-match #rx"://" link) (set! external-link? #t))
+    (when external-link?
+      (set! domain-name (extract-domain-name link)))
+    (when domain-name
+      (set! link-text (string-append link-text " (" domain-name ")")))
     (format "[~a](~a)" link-text link)))
 
 (define (starter-file-link lbl link-text)
-  (let ([c (assoc lbl *starter-files*)])
+  (let ([c (hash-ref *starter-files* lbl #f)])
     (cond [(not c) (printf "WARNING: Ill-named starter file ~a\n\n" lbl)
                    ""]
           [else
-            (let ([title (or link-text (second c))]
-                  [p (assoc *proglang* (rest (rest c)))])
+            (let ([p (hash-ref c *proglang-sym* #f)])
               (cond [(not p)
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
-                      (unless (<= (length p) 2) (set! title (third p)))
-                      (format "[~a](~a)" title (second p))]))])))
+                      (let ([title (or link-text (hash-ref p 'title #f)
+                                       (hash-ref c 'title))])
+                        (format "[~a](~a)" title (hash-ref p 'url)))]))])))
 
 (define read-group
   (*make-read-group (lambda z (first z)) errmessage-file-context))
@@ -394,10 +447,11 @@
                    (cond [(string=? directive "") (display c o)]
                          [(string=? directive "@") (display c o)]
                          [(string=? directive "image")
-                          (let* ([args (read-commaed-group i directive read-group)]
-                                 [n (length args)])
-                            (display (make-image (first args) (second args) (and (>= n 3) (third args))) o))]
-                         [(member directive '("printable-exercise" "opt-printable-exercise"))
+                          (let ([args (read-commaed-group i directive read-group)])
+                            (display (make-image (first args)
+                                                 (if (>= (length args) 2) (second args) ""))
+                                     o))]
+                         [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (fully-qualify-link args directive) o))]
                          [(string=? directive "dist-link")
@@ -421,12 +475,12 @@
                               (display " [" o)
                               (display (fully-qualify-link (list rubric-file "rubric") directive) o)
                               (display "]" o)))]
-                         [(member directive '("link" "online-exercise" "opt-online-exercise")
+                         [(member directive '("link" "online-exercise" "opt-online-exercise"))
                           (let ([args (read-commaed-group i directive read-group)])
                             (display (external-link args directive) o)) ]
                          [(member directive '("starter-file" "opt-starter-file"))
                           (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                 [lbl (first lbl+text)]
+                                 [lbl (string->symbol (first lbl+text))]
                                  [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
                             (display (starter-file-link lbl link-text) o))]
                          [(string=? directive "ifproglang")
@@ -437,6 +491,13 @@
                               (call-with-input-string fragment
                                 (lambda (i)
                                   (expand-directives i o)))))]
+                         [(string=? directive "teacher")
+                          (let ([text (read-group i directive)])
+                            (display "<!--\n" o)
+                            (call-with-input-string text
+                              (lambda (i)
+                                (expand-directives i o)))
+                            (display "\n-->" o))]
                          [(member directive '("left" "right" "center"))
                           (let ([fragment (read-group i directive #:multiline? #t)])
                             (call-with-input-string fragment

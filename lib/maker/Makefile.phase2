@@ -1,0 +1,278 @@
+# last modified 2023-03-17
+
+include $(MAKE_DIR)utils.mk
+
+phase2: css-from-less specials verifylinks images tocs books
+
+###############################################################################
+
+less-files := $(wildcard lib/*.less)
+
+css-from-less-files := $(foreach lessf,$(less-files), $(patsubst %.less,distribution/$(NATLANG)/%.css,$(lessf)))
+
+css-from-less: $(css-from-less-files)
+
+define make-css-from-less-rule
+$(patsubst %.less,distribution/$(NATLANG)/%.css, $1): $1
+	node_modules/less/bin/lessc $$< $$@
+
+endef
+
+$(eval $(foreach lessf,$(less-files),$(call make-css-from-less-rule, $(lessf))))
+
+##########################################################################
+
+pathway-independent-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/lib/*.adoc \
+	distribution/$(NATLANG)/textbooks/*.adoc \
+	distribution/$(NATLANG)/textbooks/*/*.adoc \
+	)
+
+pathway-independent-asc-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call asc-file,$(adocf)))
+
+pathway-independent-pdf-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call pdf-file,$(adocf)))
+
+ifeq "$(BOOK)" ""
+	pathway-independent-files := $(pathway-independent-asc-files)
+else
+	pathway-independent-files := $(pathway-independent-pdf-files)
+endif
+
+build-pathway-independent: $(pathway-independent-files)
+
+define make-build-pathway-independent-rule
+$(call asc-file,$1): $1
+	@#echo build-pathway-independent: creating $$@ from $$<
+	@$(MAKE_DIR)do-pathway-independent.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-rule,$(adocf))))
+
+define make-build-pathway-independent-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-pathway-independent-pdf: creating $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-pathway-independent-pdf.sh $$<; fi
+
+endef
+
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-pdf-rule,$(adocf)))),)
+
+###############################################################################
+
+# relevant-lessons := $(foreach \
+# 	lesson-name,$(shell \
+# 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
+
+relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
+
+# shd use recursive wildcard if we can find one
+
+relevant-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*/*/*.adoc \
+	))
+
+relevant-asc-files := $(foreach \
+	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
+
+relevant-pdf-files := $(foreach \
+	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
+
+ifeq "$(BOOK)" ""
+	workbook-pages := $(relevant-asc-files)
+else
+	workbook-pages := $(relevant-pdf-files)
+endif
+
+build-workbook-pages: $(workbook-pages)
+
+define make-build-workbook-page-rule
+$(call asc-file,$1): $1
+	@#echo building workbook-page-asc: $$@ from $$<
+	@$(MAKE_DIR)do-workbook-page.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
+
+define make-build-workbook-page-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo building workbook-page-pdf: $$@ from $$<
+	@$(MAKE_DIR)do-workbook-page-pdf.sh $$<
+
+endef
+
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pdf-rule,$(adocf)))),)
+
+#########################################################################
+
+lesson-plan-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/lessons/*/index.adoc)
+
+lesson-plan-asc-files := $(foreach \
+	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
+
+lesson-plan-pdf-files := $(foreach \
+	adocf,$(lesson-plan-adoc-files),$(call pdf-file,$(adocf)))
+
+ifeq "$(BOOK)" ""
+	lesson-plan-files := $(lesson-plan-asc-files)
+else
+	lesson-plan-files := $(lesson-plan-pdf-files)
+endif
+
+build-lesson-plans: $(lesson-plan-files)
+
+define make-build-lesson-plan-rule
+$(call asc-file,$1): $1
+	@#echo build-lesson-plan-asc: creating $$@ from $$<
+	@$(MAKE_DIR)do-lesson-plan.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
+
+define make-build-lesson-plan-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-lesson-plan-pdf: creating $$@ from $$<
+	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-lesson-plan-pdf.sh $$<; fi
+
+endef
+
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf)))),)
+
+###############################################################################
+
+resource-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/courses/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*.adoc \
+	distribution/$(NATLANG)/courses/*/*/*/*/*.adoc \
+	)
+
+resource-asc-files := $(foreach \
+	adocf,$(resource-adoc-files),$(call asc-file,$(adocf)))
+
+resource-pdf-files := $(foreach \
+	adocf,$(resource-adoc-files),$(call pdf-file,$(adocf)))
+
+ifeq "$(BOOK)" ""
+	resource-files := $(resource-asc-files)
+else
+	resource-files := $(resource-pdf-files)
+endif
+
+build-pathway-resources: $(resource-files)
+
+define make-build-resource-rule
+$(call asc-file,$1): $1
+	@#echo build-resource-asc: creating $$@ from $$<
+	@$(MAKE_DIR)do-pathway-resource.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(adocf))))
+
+define make-build-resource-pdf-rule
+$(call pdf-file,$1): $1 $(call asc-file,$1)
+	@#echo build-resource-pdf: creating $$@ from $$<
+	@$(MAKE_DIR)do-pathway-resource-pdf.sh $$<
+
+endef
+
+$(if $(BOOK),\
+$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-pdf-rule,$(adocf)))),)
+
+########################################################################
+
+narrative-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/index.adoc)
+
+narrative-asc-files := $(foreach \
+	adocf,$(narrative-adoc-files),$(call asc-file,$(adocf)))
+
+build-pathway-narratives: $(narrative-asc-files)
+
+define make-build-narrative-rule
+$(call asc-file,$1): $1
+	@$(MAKE_DIR)do-pathway-narrative.sh $$<
+
+endef
+
+$(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
+
+###############################################################################
+
+lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/lesson-images.json)
+
+images: distribution/$(NATLANG)/images.js
+
+distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
+	$(MAKE_DIR)make-images-js.lua $@
+
+##########################################################################
+
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
+
+distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
+	$(MAKE_DIR)make-dependency-graph.lua $@
+
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
+	$(CP) -p $< $@
+
+##########################################################################
+
+preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+	@echo ")" >> $(ADOCABLES_INPUT)
+	@echo } >> $(ADOC_POSTPROC_LESSONPLAN_INPUT)
+	@echo } >> $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
+	@echo } >> $(ADOC_POSTPROC_NARRATIVE_INPUT)
+	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
+	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
+	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
+	$(MAKE_DIR)run-asciidoctor.sh
+
+# specials = primitives + starter-files
+
+specials: preproc
+	$(MAKE_DIR)collect-specials.lua
+
+postproc: preproc
+	$(MAKE_DIR)do-postproc.lua
+
+tocs: preproc
+	$(MAKE_DIR)make-pathway-tocs.lua
+
+
+ifeq "$(BOOK)" ""
+pdfs: postproc
+
+else
+pdfs: postproc
+	$(MAKE_DIR)make-pdf.sh
+
+endif
+
+ifeq "$(LINKCHECK)" ""
+verifylinks: pdfs
+
+else
+verifylinks: pdfs
+	$(MAKE_DIR)do-link-check.sh
+
+endif
+
+ifeq "$(BOOK)" ""
+books: pdfs
+
+else
+books: pdfs
+	$(MAKE_DIR)make-workbook-jsons.lua $(COURSES_LIST_FILE)
+	$(MAKE_DIR)make-books.sh
+
+endif

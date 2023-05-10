@@ -1,0 +1,58 @@
+== Using the Makefile
+
+The `Makefile` in the top directory allows to you build the
+documentation system. Simply type `make`: This creates or updates the
+`distribution` subdirectory with the various files
+needed for the user.
+
+You may also set a small number of environment variables on the
+`make` command-line to further guide the build. These variable
+settings may be combined.
+
+=== PDF and workbook generation
+
+By default, `make` won't create the PDF versions of the HTML files, nor the
+collections of them that form the various workbooks. PDF and
+workbook construction can be time-consuming and so is best
+relegated to the final run, when the author is sure that the HTML
+conversions have been thoroughly debugged. Once they are, and the
+PDFs are desired, request the target `book` on the `make`
+command-line, i.e.,
+
+
+    make book
+
+=== Link checking
+
+By default, the checking of the various internal and external
+links in the documents are not checked -- because it can be a
+time-consuming process. (External-link checking is particularly
+heinous because it takes a long while for each URL probe to return.)
+
+To enable link checking, use the target `linkcheck`:
+
+    make linkcheck
+
+It is often advisable to do the link check just for its own sake,
+and only once in a while,
+after the distribution dir is already in place from a previous
+`make`.
+
+=== Making from scratch
+
+To remove a previously made distribution entirely, do
+
+    make clean
+
+The next `make` -- with whatever options you desire -- will be on
+a fresh slate.
+
+=== Deploying to website
+
+To deploy a built distribution to the website, do
+
+    make deploy
+
+Deployment is described in more detail in the repo's README.
+
+// last modified 2023-03-09

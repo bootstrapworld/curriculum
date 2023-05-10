@@ -1,0 +1,62 @@
+= lr-plot Explore
+
+++++
+<style>
+    #content .forceShading { background: #f7f7f8; font-size:0.8rem;}
+</style>
+++++
+
+*Part 1: You should already have plotted @show{(code '(lr-plot animals-table "name" "age" "weeks"))} in the @starter-file{animals}.*
+
+@n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.78924}} @math{x +} @fitb{5em}{@ifsoln{2.30936}}
+
+@n What is the slope? @fitb{}{@ifsoln{0.78924}}
+
+@n What is the y-intercept? @fitb{}{@ifsoln{2.30936}}
+
+@n How long would our line of best fit predict it would take for a 5 year-old animal to be adopted? @fitb{}{@ifsoln{about 6 weeks}}
+
+@n What if they were a newborn, or just 0 years old? @fitb{}{@ifsoln{about 2 weeks}}
+
+@n Does it make sense to find the adoption time for a newborn using this predictor function? Why or why not?
+
+@fitb{}{@ifsoln{It's not very reliable, given that none of the animals in the dataset are newborns.}}
+
+@vspace{3ex}
+
+*Part 2: Make another lr-plot, but this time use the animals' weight as our explanatory variable instead of their age.*
+
+@n How long would our line of best fit predict it would take for an animal weighing 21 pounds to be adopted? @fitb{}{@ifsoln{about 4 weeks}}
+
+@n What if they weighed 0.1 pounds? @fitb{}{@ifsoln{about 2.5 weeks}}
+
+@vspace{3ex}
+
+*Part 3: `lr-plot` with filtered tables*
+
+@n Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the cats_ using the following code:
+
+[.indentedpara .forceShading]
+--
+``fun is-cat(r): r["species"] == "cat" end
+lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
+``
+--
+
+@n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.23161}} @math{x +} @fitb{5em}{@ifsoln{2.48598}}
+
+@n What is the slope? @fitb{}{@ifsoln{0.23161}}
+
+@n What is the y-intercept? @fitb{}{@ifsoln{2.48598}}
+
+@n How does this line of best fit for _cats_ compare to the line of best fit for _all animals_? @fitb{}{@ifsoln{The line of best fit for cats has a stronger correlation.}}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n How long would our line of best fit predict it would take for a 5 year-old cat to be adopted? @fitb{}{@ifsoln{about 3.5 weeks}}
+
+@vspace{3ex}
+
+*★ *Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.*

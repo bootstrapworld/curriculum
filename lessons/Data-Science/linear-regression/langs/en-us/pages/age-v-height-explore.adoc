@@ -1,0 +1,68 @@
+= Age vs. Height Explore
+
+++++
+<style>
+td { padding: 2ex !important; }
+td p { margin: 0; }
+</style>
+++++
+
+Open the @starter-file{height} and click "Run" to interact with data from another sample of students.
+
+@n Take a look at the code in the Definitions Area. What do you notice? What do you wonder?
+
+@fitb{}{@ifsoln{Answers will vary}}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Build @show{(code '(image-scatter-plot h-table "age" "height" dot))}.  Try to visualize the line of best fit for just the blue dots. Then try to visualize the line of best fit for just the red stars. How do you think they would compare? Which line do you think would be steeper?
+
+@fitb{}{@ifsoln{Answers will vary}}
+
+@fitb{}{}
+
+@n Make three linear regression plots comparing `age` and `height`, and record the results for each in the table below:
+
+- The whole population: @show{(code '(lr-plot h-table "gender-id" "age" "height"))}
+- Females only: @show{(code '(lr-plot (filter h-table is-f) "gender-id" "age" "height"))}
+- Males only: @show{(code '(lr-plot (filter h-table is-m) "gender-id" "age" "height"))}
+
+@vspace{1ex}
+
+[cols="^.^1,^.^1,^.^1,^.^1", options="header"]
+|===
+| Sample 	| rate of change 		| y-intercept			| R value
+| All		| @ifsoln{3.097}		| @ifsoln{26.189} 		| @ifsoln{+0.916}
+| Females	| @ifsoln{3.642}		| @ifsoln{22.250} 		| @ifsoln{+0.948}
+| Males		| @ifsoln{2.687}		| @ifsoln{29.230} 		| @ifsoln{+0.919}
+|=== 
+
+@n What makes it difficult to compare these plots visually?
+
+@fitb{}{ @ifsoln{The axes are labelled differently} }
+
+@fitb{}{}
+
+@vspace{1ex}
+
+Rebuild @show{(code '(lr-plot (filter h-table is-f) "gender-id" "age" "height"))}, adjust the window of the interactive plot using the numbers in the table below, and click `Redraw`.
+[cols="^1,^1,^1,^1" options="header"]
+|===
+| x-min: 	| x-max:	| y-min:	| y-max:
+| 6.5		| 12.5 		| 	45		| 70
+|===
+Then, do the same for @show{(code '(lr-plot (filter h-table s-m) "gender-id" "age" "height"))}.
+
+@n How do the plots compare now that their windows match?
+
+@fitb{}{@ifsoln{Answers will vary. The girls seem to be growing faster.}}
+
+@fitb{}{@ifsoln{The dots stray farther from the predictor line on the plot that includes all students.}}
+
+@n What happens if you compare the students' height in inches to their height in centimeters by plotting @show{(code '(lr-plot h-table "gender-id" "height-cm" "height"))}?
+
+@fitb{}{@ifsoln{All of the dots fall on the predictor line and the r-value is 1!}}
+
+@fitb{}{@ifsoln{(This is because someone's height in inches correspods exactly to their height in centimeters.)}}

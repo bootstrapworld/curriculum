@@ -19,54 +19,77 @@
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
     <script>
+
+        var search = location.search.substring(1);
+        let {pathway, lessons, proglang} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+        proglang = proglang || "pyret";
+        pathway  = pathway || "Custom Pathway";
+        lessons  = (lessons && lessons.split(",")) || [];
+
+
         // load required symbols, trim the dependency graph
         const { PDFDocument, rgb, degrees } = PDFLib
-        var graph = graph, lessons = [], pathway = "Custom Pathway";
-        const lessonsToIgnore = ['__sample-lesson', 'zample-lesson', 'error-analysis', 'hoc-winter', 'hoc-wescheme-intro'];
+
+        const lessonsToIgnore = ['__sample-lesson','__sample-lesson-wescheme', 'zample-lesson', 'hoc-wescheme-intro', 'hoc-winter', 'hoc-winter-parley', '__sample-lesson-codap', 'codap-bar-charts-codap', 'codap-exploring-codap', 'codap-transformers-1-codap', 'codap-transformers-2-codap', 'composing-table-operations-codap', 'computing-needs-all-voices-codap', 'data-cycle-codap', 'ds-intro-codap', 'ethics-privacy-and-bias-codap', 'grouped-samples-codap', 'composing-table-operations-codap', 'probability-inference-codap', 'project-exploration-paper-codap', 'sw-what-ships-carried-spreadsheets', 'sw-where-in-asia-spreadsheets','exploring-linear-relationships','exploring-quadratic-relationships','exploring-logarithmic-relationships','maya-skulls-spreadsheets', 'maya-1-spreadsheets'];
         lessonsToIgnore.forEach(l => delete graph[l]);
 
-        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
-        function populateLessons() {
-            var search = location.search.substring(1);
-            var {pathway, lessons} = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-            window.lessons = lessons = lessons.split(",");
-            console.log(pathway, lessons);
+        // used with [].filter to produce an array of unique elts
+        const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+        const getPrereqs = (l) => {
+            if(!graph[l]) {
+                throw "an unknown lesson was passed to getPrereqs:" + l;
+            }
+            return graph[l].prerequisites.concat(...graph[l].prerequisites.map(getPrereqs));
+        }
 
-            document.getElementById('pathwayTitle').innerHTML = pathway;
-            var lessonList = document.getElementById('lesson-list').children[0];
-            lessons.forEach(l => {
+        // recursively compute all prerequisites for each lesson and project
+        Object.keys(graph).forEach(k =>
+            graph[k].prerequisites = getPrereqs(k).filter(onlyUnique));
+
+        function populateLessonList(ul, lessonNames, showDescription) {
+            var search = location.search.substring(1);
+            lessonNames.forEach(l => {
                 var lesson = graph[l];
                 var dt = document.createElement('dt');
                 dt.className = "hdlist1";
-                dt.innerHTML = `
-                    <dt class="hdlist1"><a href="./lessons/${l}/index.shtml?${search}">${lesson.title}</a></dt>
-                        <dd>
-                            <p>${lesson.description}</p>
-                        </dd>
-                `;
-                lessonList.appendChild(dt);
+                dt.innerHTML = `<dt class="hdlist1"><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>`;
+                if(showDescription) {
+                    dt.innerHTML += `<dd><p>${lesson.description}</p></dd>`
+                };
+                ul.appendChild(dt);
             });
+        }
+
+        // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
+        function populateLessons() {
+            document.getElementById('pathwayTitle').innerHTML = pathway;
+            var lessonList = document.getElementById('lesson-list').children[0];
+            populateLessonList(lessonList, lessons, true);
 
             // update the list of accessible lessons
             var accessibleList = document.getElementById('accessible-lesson-list');
             var accessible =  Object.getOwnPropertyNames(graph)
                 .filter(name => graph[name].prerequisites
                     .every(p => lessons.includes(p)))
+                .filter(name => graph[name].proglang == proglang)
                 .filter(name => !lessons.includes(name))
+                .filter(onlyUnique)
                 .sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
             console.log('lessons are', lessons);
             console.log('accessible', accessible);
 
-            accessible.forEach(l => {
-                var li = document.createElement('li');
-                li.innerHTML = graph[l].title;
-                accessibleList.appendChild(li);
-            });
+            populateLessonList(accessibleList, accessible, true)
+        }
+
+        function addParamsToLinks() {
+            const links = document.querySelectorAll('#content a');
+            links.forEach(link => link.href += `?${search}`);
         }
 
         async function printWorkook(lessons, graph) {
             console.log('printing', lessons);
+            const status = document.getElementById('status');
             const pdfDoc = await PDFDocument.create();
             // print out wb page paths
             var pageUrls = lessons
@@ -78,7 +101,6 @@
                 .map(p => p.replace(".adoc", ".pdf"))
                 .map(p => p.replace(" landscape", ""));
 
-            document.getElementById('status').innerHTML = "0 / " + pageUrls.length;
             console.log(pageUrls)
 
         for (const [idx, url] of pageUrls.entries()) {
@@ -105,7 +127,7 @@
 
             page.drawPage(embedded, {...dimensions, ...pageSettings});
 
-            document.getElementById('status').innerHTML = (idx+1) +"/"+ pageUrls.length;
+            status.innerHTML = "Collecting Workbook Pages: " + (idx+1) +"/"+ pageUrls.length;
 
             if(idx <= 1 ) continue;
             page.drawText(String(idx - 1), {
@@ -117,14 +139,17 @@
             })
           }
 
+          status.innerHTML = "Assembling Book..."
           // Serialize the PDFDocument to bytes (a Uint8Array)
           const pdfBytes = await pdfDoc.save()
+          status.innerHTML = "Downloading..."
           download(pdfBytes, pathway + "- Student Workbook.pdf", "application/pdf");
+          status.innerHTML = "";
         }
     </script>
 </head>
 
-<body class="narrativepage article narrative pyret" onload="populateLessons()">
+<body class="narrativepage article narrative pyret" onload="populateLessons(); addParamsToLinks();">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div id="header">
@@ -150,14 +175,64 @@
         </div>
 
         <div class="clearfix item bottom-border">
-            <button onclick="printWorkook(lessons, graph)">Print Workbook</button>
-            <span id="status"></span>
+            <h2>Student Workbooks</h2>
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="printWorkook(lessons, graph)">Student Workbook</a>. 
+            <p/>
+            <span id="status"></span></p>
         </div>
 
         <div class="clearfix item bottom-border">
-            <h2>What's Next?</h2>
+            <h2>Teaching Remotely?</h2>
+            <p>If you're teaching remotely, we've assembed an <a href="../../ImplementationNotes.shtml">Implementation Notes</a> page that makes
+specific recommendations for in-person v. remote instruction.</p>
+        </div>
+
+        <div class="clearfix item bottom-border">
+            <h2>Other Resources</h2>
+            <p>Of course, there's more to a curriculum than software
+            and lesson plans! We also provide a number of resources to educators,
+            including standards alignment, a complete student workbook, an answer
+            key for the programming exercises and a forum where they can ask
+            questions and share ideas.</p>
+            <div class="ulist pathway_external_links">
+            <ul>
+                <li>
+            <!--
+                <p><a href="./Glossary.shtml">Glossary</a>&nbsp; - &nbsp;A list of vocabulary words used in this pathway.
+                We also provide a <a href="../lib/bilingual-glossary.html">bilingual glossary</a>,
+                which defines all vocabulary words across our lessons in English and Spanish.</p>
+                </li>
+
+            -->
+                <li>
+                <p><a href="./Alignments.shtml">Standards Alignment</a>&nbsp; - &nbsp;Find out how our materials align with National and State
+                Standards, as well as some of the most commonly used math
+                 textbooks.</p>
+                </li>
+            <!--
+                <li>
+                <p><a href="./resources/index.shtml">Teacher-Only Resources</a>&nbsp; - &nbsp;We also offer several teachers-only materials, including an
+                answer key to the student workbook, keys to all the exercises,
+                and pre- and post-tests for teachers who are participating in our
+                research study. For access to these materials, please fill out the
+                <a href="https://docs.google.com/a/bootstrapworld.org/spreadsheet/viewform?formkey=dHpQc0VHV2dBU2tSN1ptMktBUmtoZWc6MQ#gid=0">password request form</a>.
+                We'll get back to you soon with the necessary login information.</p>
+                </li>
+            -->
+                <li>
+                <p><a href="https://discourse.bootstrapworld.org">Online Community (Discourse)</a>&nbsp; - &nbsp;Want to be kept up-to-date about Bootstrap events, workshops, and curricular
+                changes? Want to ask a question or pose a lesson idea for other Bootstrap
+                teachers? These forums are the place to do it.</p>
+                </li>
+            </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="clearfix item bottom-border">
+            <h2>Where can we go next?</h2>
             <p/>
-            <strong>What's next?</strong> Once your students have finished this pathway, they've already completed all the prerequisites for the following lessons:
+            Once your students have finished this pathway, they can jump right into <i>any</i> of the following lessons:
             <ul id="accessible-lesson-list">
             </ul>
         </div>

@@ -1,0 +1,63 @@
+= Welcome to Alice’s Restaurant!
+
+++++
+<style>
+.topcode { text-align: center; }
+/* required to get contract+code to be same width */
+.topcode .editbox { width: 5in; text-align: left;}
+</style>
+++++
+
+Alice has hired you to improve some code used at the restaurant. The code we'll be improving on is shown below.
+
+*Read through the code line-by-line with your partner before writing down your
+observations in the tables below.*
+
+[.topcode]
+--
+@show{
+(contract
+  "cost" '("String") "Number"
+  "given a item, produce the cost of that item")
+}
+
+@show{
+(code '(define (cost item)
+  (cond
+    [(string=? item "hamburger")     6.00]
+    [(string=? item "onion rings")   3.50]
+    [(string=? item "fried tofu")    5.25]
+    [(string=? item "pie")           2.25]
+    [else "Sorry, that's not on the menu!"])))
+}
+--
+@vspace{2ex}
+
+[.FillVerticalSpace, cols="1a,1a",stripes="none"]
+|===
+|
+--
+*I notice...*
+
+@ifsoln{(sample responses)
+a function called `cost`, brackets, a function called @show{(code 'string=?)}, numbers that look like prices, a contract and purpose statement, pizza toppings}
+--
+|*I wonder...*
+
+@ifsoln{(sample responses) What is @ifproglang{wescheme}{`cond`} @ifproglang{pyret}{`if`}? Is this all that’s on the menu? Can I add different toppings? How does the ‘cost’ function work? What are the brackets for? @ifproglang{wescheme}{What does `string=?` do?}}
+
+|*Familiar things I see in the code*
+
+@ifsoln{define, contract and purpose statement, Numbers and Strings, functions}
+
+|*Unfamiliar things I see in the code*
+
+@ifproglang{wescheme}{
+  @ifsoln{cond, string=?, [], else}
+}
+
+@ifproglang{pyret}{
+  @ifsoln{if, then, string-equals, [], else}
+}
+
+|===

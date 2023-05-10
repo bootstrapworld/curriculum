@@ -1,0 +1,106 @@
+= Functions for Character Animation
+
+@description{Students define functions that control the movement of the target and danger in their games.}
+
+@lesson-prereqs{functions-examples-definitions}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+
+* Apply the @vocab{Design Recipe} to create a @vocab{function} given the constraints of a word problem.
+* Explain the basics of animation.
+
+|Student-Facing Lesson Goals
+|
+
+* Let's learn about animation.
+* Let's use the Design Recipe to help us breakdown word problems that will get our game characters moving!
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+
+| Key Points for the Facilitator
+|
+* Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
+* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`. `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we click the "Run" button!
+
+|===
+
+== Animation @duration{45 minutes}
+
+=== Overview
+Students connect the behavior of functions with changing coordinate values, ultimately leading to animation.
+
+=== Launch
+
+[.lesson-instruction]
+* How does a flip-book animation work?
+** _Each page of the book is slightly different, and the pages go so fast that the motion looks smooth._
+* Why do we see movement from still images? +
+** _Our eyes fill in the gaps between rapidly changing images._
+* How might this apply to our game?
+** _If we change image @vocab{coordinates} a little bit at a time, they will appear to move._
+
+[.lesson-roleplay]
+--
+Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`. Have the class select a starting x- and y-coordinate for the `TARGET`.
+
+The `TARGET` starts at a particular position, and then moves by 50 (pixels) to the left on each frame of the game.
+
+When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
+
+@ifproglang{wescheme}{
+- Make `TARGET` move by calling out `(update-target 300)`, `(update-target 250)`, etc.
+}
+@ifproglang{pyret}{
+- Make `TARGET` move by calling out `update-target(300, 200)`, `update-target(250, 100)`, etc.
+}
+
+Ask students: what if we wanted the `update-target` function to move the `TARGET` across the classroom __more quickly?__ How would the function have to change?
+
+Repeat with `DANGER`, this time moving _right_ across the x-axis. Then ask: what if we wanted `update-danger` to move the `DANGER` in the __opposite direction?__
+--
+
+[.lesson-instruction]
+* What did you notice about the movement of TARGET and DANGER?  What was changing about them?
+** _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
+* What jobs could we hand over to the computer to make it possible for us to play the game?
+** _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
+
+=== Investigate
+[.lesson-instruction]
+- Sign in to @starter-file{program-list} and open your saved Game Starter Files, or @starter-file{game, make a new copy}.
+- Examine the `update-danger` function. Identify the contract, and interpret what the function is currently doing.
+- Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}.
+- Transfer the code to your Game Starter File.
+
+When students click the "Run" button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
+
+[.lesson-instruction]
+- Complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}.
+- With your partner, transfer the code to your Game Starter File.
+- Click "Run" to see `DANGER` and `TARGET` move across the screen independently!
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Extension Activities}
+
+Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want!  They should be sure to modify their purpose statements and examples if they change their functions.
+|===
+
+
+=== Synthesize
+Connecting the code to the underlying math is important - especially if you want to customize your game!
+
+- What part of the function controls the character's _speed?_
+- What part of the function controls the character's _direction?_
+- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the @vocab{Domain}? What about the @vocab{Range}?

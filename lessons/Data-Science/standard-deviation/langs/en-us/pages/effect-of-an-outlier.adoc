@@ -1,0 +1,60 @@
+= The Effect of an Outlier
+
+The histogram below shows the ages of eleven cats at the shelter:
+
+@image{../images/histogram-with-outlier.png, "A histogram showing the distribution of ages for 10 cats, between the ages of 1 and 8. An 11th cat has been added at 16 years.", 100%}
+
+@n Describe the shape of this histogram. @fitb{}{@ifsoln{slight right skew}}
+
+@n How many cats are 1 year old? 2 years old? Fill in the table below by reading the histogram. The first column has been done for you.
+
+[.sideways-pyret-table, cols=">1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| age   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
+
+| count |4|@ifsoln{2}|@ifsoln{1}|@ifsoln{0}|@ifsoln{1}|@ifsoln{0}|@ifsoln{2}|@ifsoln{0}
+|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{1}
+|===
+
+@vspace{1ex}
+
+@n What is the mean age of the cats in this histogram? @fitb{}{@ifsoln{8.5}}
+
+@n *Draw a star to identify the mean on the histogram above*.
+
+@n For each cat in the histogram above, *draw a horizontal arrow* from the mean to the cat's interval, and *label the arrow with its distance from the mean*. (For example, if the mean is 2 and a cat is 5 years old, your arrow would stretch from 2 to 5, and be labeled with the distance "3")
+
+[.lesson-point]
+To compute the standard deviation we square each distance and take the average, then take the square root of the average.
+
+@n Recorded the 11 ages shown in the histogram in the first row of the table below. For each age, compute the distance from the mean and the squared distance.
+
+@ifnotsoln{
+[.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| age of cat  		 |||||||||||
+| distance from mean |||||||||||
+| squared distance 	 |||||||||||
+|===
+}
+
+@ifsoln{
+[.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| age of cat  		 | 1   | 1   | 1   | 1   | 2   | 2   | 3   | 5   | 7   | 7   | 16
+| distance from mean | 3.2 | 3.2 | 3.2 | 3.2 | 2.2 | 2.2 | 1.2 | 0.8 | 2.8 | 2.8 | 11.8
+| squared distance 	 |10.1 |10.1 |10.1 |10.1 | 4.8 | 4.8 | 1.4 | 0.7 | 7.9 | 7.9 |139.7
+|===
+}
+
+@vspace{1ex}
+
+@n Add all the squared distances. What is their sum? @fitb{3em}{@ifsoln{340}}
+
+@n Divide the sum by _N-1_. What do you get? @fitb{}{@ifsoln{34}}
+
+@n Take the square root to find the *standard deviation*! @fitb{}{@ifsoln{~5.83}}
+
+@n How did the outlier impact the standard deviation? @fitb{}{@ifsoln{The outlier caused the standard deviation to increase.}}
+
+@fitb{}{}

@@ -3,11 +3,7 @@
 (provide
   print-lessons-intro
   print-other-resources-intro
-  print-link-to-glossary
-  print-link-to-standards
   print-workbook-info
-  print-link-to-teacher-resources
-  print-link-to-forum
   print-other-resources
   )
 
@@ -25,13 +21,13 @@
 
 [.pathway_external_links]\n"))
 
-(define (print-link-to-glossary o)
-  (fprintf o "\n- link:./pathway-glossary.html[Glossary]\n")
+(define (print-link-to-glossary course o)
+  (fprintf o "\n- link:../../Glossary.shtml?pathway=~a[Glossary]\n" course)
   (fprintf o "-- Check here for the technical terms and concepts used
   in this material.\n"))
 
-(define (print-link-to-standards o)
-  (fprintf o "\n- link:./pathway-standards.html[Standards Alignment]\n")
+(define (print-link-to-standards course o)
+  (fprintf o "\n- link:./pathway-standards.html?pathway=" course "[Standards Alignment]\n")
 
 (define (print-link-to-forum o)
   (fprintf o "\n- link:https://discourse.bootstrapworld.org[Online Community (Discourse)]\n")
@@ -62,8 +58,8 @@ teachers? These forums are the place to do it.n")
         "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
         "\n") o)))
 
-(define (print-link-to-teacher-resources o)
-  (fprintf o "\n- link:./resources/index.html[Recursos para maestros]\n")
+(define (print-link-to-teacher-resources course o)
+  (fprintf o "\n- link:./resources/index.html?pathway=" course "[Recursos para maestros]\n")
   (fprintf o "-- También ofrecemos varios materiales para los maestros, incluyendo una clave de
 respuestas para el libro del estudiante, una guía de inicio rápido para hacer
 el proyecto final, exámenes previos y posteriores para los maestros que están
@@ -80,9 +76,9 @@ plan de estudios? ¿Quieres hacer una pregunta o plantear una idea de lección
 para otros maestros de Bootstrap? Estos foros son el lugar para hacerlo.\n")
   )
 
-(define (print-other-resources o)
-  (print-link-to-glossary o)
-  (print-link-to-standards o)
+(define (print-other-resources course o)
+  (print-link-to-glossary course o)
+  (print-link-to-standards course o)
   (print-link-to-student-workbook o)
-  (print-link-to-teacher-resources o)
+  (print-link-to-teacher-resources course o)
   (print-link-to-forum o))

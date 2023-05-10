@@ -14,10 +14,6 @@
   print-other-resources-intro
   print-teach-remotely
   print-workbook-info
-  print-link-to-glossary
-  print-link-to-standards
-  print-link-to-teacher-resources
-  print-link-to-forum
   print-other-resources
   natlang:also-available-in
   ; print-standards-js
@@ -43,10 +39,10 @@
       "\n"
       "[.pathway_external_links]\n") o))
 
-(define (print-link-to-glossary o)
+(define (print-link-to-glossary course o)
   (display
     (string-append
-      "\n- link:./pathway-glossary.shtml[Glossary]\n"
+      "\n- link:../../Glossary.shtml?pathway=" course "[Glossary]\n"
       "-- A list of vocabulary words used in this pathway.\n"
       "We also provide a link:../../lib/bilingual-glossary.html[bilingual glossary],\n"
       "which defines all vocabulary words across our lessons in English and Spanish.") o))
@@ -114,19 +110,19 @@
         "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
         "\n") o)))
 
-(define (print-link-to-standards o)
+(define (print-link-to-standards course o)
   (display
     (string-append
-      "\n- link:./pathway-alignments.shtml[Standards Alignment]\n"
+      "\n- link:./pathway-alignments.shtml?pathway=" course "[Standards Alignment]\n"
       "-- Find out how our materials align with National and State\n"
       "Standards, as well as some of the most commonly used math\n"
       " textbooks.\n")
     o))
 
-(define (print-link-to-teacher-resources o)
+(define (print-link-to-teacher-resources course o)
   (display
     (string-append
-      "\n- link:./resources/index.shtml[Teacher-Only Resources]\n"
+      "\n- link:./resources/index.shtml?pathway=" course "[Teacher-Only Resources]\n"
       "-- We also offer several teachers-only materials, including an\n"
       "answer key to the student workbook, keys to all the exercises,\n"
       "and pre- and post-tests for teachers who are participating in our\n"
@@ -142,10 +138,10 @@
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
-(define (print-other-resources o)
-  (print-link-to-glossary o)
-  (print-link-to-standards o)
-  (print-link-to-teacher-resources o)
+(define (print-other-resources course o)
+  (print-link-to-glossary course o)
+  (print-link-to-standards course o)
+  (print-link-to-teacher-resources course o)
   (print-link-to-forum o))
 
 (define (natlang:also-available-in s)

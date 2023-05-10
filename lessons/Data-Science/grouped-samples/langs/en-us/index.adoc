@@ -1,0 +1,189 @@
+= Grouped Samples
+
+@description{Students practice creating grouped samples (non-random subsets) and think about why it might sometimes be useful to answer questions about a dataset through the lens of one group or another.}
+
+@ifproglang{pyret}{
+@lesson-prereqs{defining-table-functions}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-transformers-2}
+}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+* Make grouped samples from a population
+
+| Student-facing Lesson Goals
+|
+
+* Let's combine what we know about sampling and filtering with creating displays.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Preparation
+|
+* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
+
+|===
+
+
+== Problems with a Single Population @duration{10 minutes}
+
+=== Overview
+This activity is all about @vocab{grouped samples}: Students make a bunch of non-random samples from the Animals Dataset, and see how each samples might answer the same question differently.
+
+=== Launch
+When looking at a scatter plot of animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
+@center{@image{images/scatter-plot.png,550}}
+
+But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
+
+@center{@image{images/image-scatter-plot.png,550}}
+
+=== Investigate
+Divide the class into groups of 3-4, with one student identified as the "reporter".
+
+[.lesson-instruction]
+- Looking at this scatter plot (above), does it make sense to analyze all the animals together? Why or why not?
+** _No. Every data point after 25 pounds belongs to a dog from the shelter. The cats are clumped in the lower weight range._
+- Are there some questions where it would be important to break up the population into species-specific populations? What are they?
+** _Sample response: Yes. If we want to know whether dogs or cats are more likely to be fixed, we would need to look at each species separately._
+- Are there some questions where it would be important to keep the whole population together? What are they?
+** _Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population._
+
+Have the reporters share their findings with the class.
+
+=== Synthesize
+
+You've been handed a dataset from a country where half the people have access to amazing medical care, and the other half have no healthcare.
+
+[.lesson-instruction]
+* Why might it be important to look at a particular sample of a population?
+** _Sample response: Maybe we want to determine if emissions from a nearby factory impact the health of residents of one particular neighborhood._
+* Why is it sometimes bad to blindly take random samples?
+** _If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!_
+
+
+== Grouped Samples @duration{20 minutes}
+
+=== Launch
+Depending on the question we're asking, sometimes it makes more sense to ask about "just the cats" or "just the dogs". Averaging every animal together will give us an answer, but it may not be a _useful_ answer.
+
+[.lesson-point]
+Sometimes important facts about samples get _lost_ if we mix them with the rest of the population!
+
+Data Scientists define @vocab{grouped samples} of datasets, breaking them up into sub-groups that may be helpful in their analysis.
+
+@ifproglang{pyret}{
+
+Earlier, you learned how to define values in Pyret. We can define Numbers, Strings, Images, and even rows:
+
+  name = "Flannery"
+  age  = 16
+  logo = star(50, "solid", "red")
+  sasha= row-n(animals-table, 0)
+
+Let's use this skill to define __Tables...__
+
+We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:
+----
+dogs  = filter(animals-table, is-dog)
+----
+
+The `filter` function walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `filter`.
+}
+
+=== Investigate
+
+A “kitten” is an animal who _is a cat_ and who _is young_. How would you define a table of just kittens?
+
+[.lesson-instruction]
+--
+* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{sequence of Transformers} will compute whether or not an animal is a kitten.
+
+* Can you fill in the @ifproglang{pyret}{code} @ifproglang{codap}{function notation} for the other grouped samples?
+@ifproglang{pyret}{
+* When you're done, try out your solutions in the @starter-file{grouped-samples}.}
+
+* Make a bar chart showing the distribution of `sex` in the `kittens` sample @ifproglang{pyret}{, by typing @show{(code '(bar-chart kittens "sex"))}}.
+
+* Make bar charts showing the `sex` column for every grouped sample. Which one best represents the distribution of species for the whole population? Why?
+--
+
+=== Synthesize
+
+- How could we filter _and_ sort a table?
+- How can we combine functions?
+
+== Displaying Samples @duration{20 minutes}
+
+=== Overview
+Students revisit the data display activity, now using the samples they created.
+
+=== Launch
+Making grouped and random samples is a powerful skill, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make grouped samples, we can make much more sophisticated displays!
+
+Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
+
+@left{@image{images/AskQuestions.png, 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
+
+@vspace{1ex}
+
+@left{@image{images/ConsiderData.png, 100}} We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
+
+@vspace{1ex}
+
+@left{@image{images/AnalyzeData.png, 100}} @ifproglang{pyret}{We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the @vocab{ratio} ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice.}@ifproglang{codap}{Given our options, a bar chart seems most appropriate for this scenario.} We've decided what to make and we know which rows and columns we're plotting, so the next step is to @ifproglang{pyret}{_write the code!_}@ifproglang{codap}{determine the configuration!}
+
+
+@vspace{1ex}
+
+@left{@image{images/InterpretData.png, 100}} What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
+
+=== Investigate
+[.lesson-instruction]
+- Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
+
+=== Synthesize
+- What connections do you see between the "Consider Data" and "Analyze Data" steps?
+- How do we know when we need to filter? How do we know when we _don't?_
+
+@ifproglang{pyret}{
+== Your Analysis @duration{flexible}
+
+=== Overview
+Students apply their knowledge of table functions, defining table functions, and the Design Recipe to create grouped samples for their dataset.
+
+=== Launch
+Are there grouped samples that you'd like to explore in your own dataset? Here are a few examples, taken from some of the sample datasets:
+
+- In the RI Schools dataset, it might be good to create grouped samples for public v. charter schools
+- In the Movies dataset, it might be valuable to create grouped samples for modern movies, and analyze them separately from older movies.
+- In the US Presidents dataset, it could be useful to make a grouped sample for each political party.
+
+=== Investigate
+What grouped samples make sense for your dataset?
+
+[.lesson-instruction]
+- Sometimes a pair of fresh eyes is the best way to think about your work. Pair up so that everyone is working with someone from another group.
+- Talk with one another about your datasets and analysis thus far, then work together to come up with grouped samples you would like to explore.
+- Return to your research groups, and open to @printable-exercise{pages/samples-from-my-dataset.adoc}.
+- Name these samples, and write the Pyret code to test an individual row from your dataset on
+- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `filter` function to define your new sample tables.
+
+=== Synthesize
+Have students share the grouped samples they created for their datasets. After each share-back, ask the class if they have suggestions for other possible grouped samples.
+
+== Additional Exercises
+- Extra, @opt-printable-exercise{design-recipe-helper-funs-2.adoc, blank design recipes} are provided in the workbook
+}

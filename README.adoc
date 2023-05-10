@@ -7,7 +7,7 @@ We describe here the directories and files in the `curriculum`
 directory, and how to use the programs provided.
 
 For a generated document tree, please see
-https://bootstrapworld.org/materials/fall2021
+https://bootstrapworld.site/materials/spring2023/en-us
 
 == Structure of the `curriculum` directory
 
@@ -22,29 +22,31 @@ pathways.)
 
 The subdirectories `lib` and `shared` contain the components of
 the program used to generate web pages and PDFs from the
-`lessons` and `pathways`. `shared` contains directories named for
+`lessons` and `pathways`.  For instance, `lib` contains a general glossary of terms
+used in the lessons: `glossary-terms.json`. `shared` contains directories named for
 the various natural languages used for instruction, e.g., `en-us`
 for US English, and `es-mx` for Mexican Spanish. Inside these
 dwell centralized educational-standards dictionaries, e.g.,
-`csta-standards-dictionary.rkt` for a list of standards defined
-by the CSTA. Also present is a general glossary of terms used in
-the lessons: `glossary-terms.rkt`.
+`standards/standards-csta-dictionary.json` is a list of standards defined
+by the CSTA. 
 
-The main script is `build-pathway` which takes a pathway name and
-constructs the web pages and PDFs for it in a directory called
+The file `Makefile` is used (via `make`) to
+constructs the web pages and PDFs a directory called
 `distribution`.
 
 Here is a skeleton of the `curriculum` tree, showing the salient
 files, with a sample lesson and sample pathway:
 
   curriculum/
-    build-pathway
+    Makefile
     lib/
       <language-independent implementation files>
       *.rkt
       *.css
-      glossary-terms.rkt
-      glossary-terms-ss.rkt
+      glossary-terms.json
+      glossary-terms-ss.json
+      maker/
+        <build-related makefiles and helper scripts>
     shared/langs/
       en-us/
         <language-dependent implementation files, such as>
@@ -53,11 +55,9 @@ files, with a sample lesson and sample pathway:
         Badges/*.{jpg,png}
         docroot/*.{html,png}
         images/*.png
-        practices/*.rkt
-        standards/*.rkt
-        textbooks/*.rkt
-        <pathway-agnostic, non-lesson docs>
-        pathway-independent/*
+        practices/*.json
+        standards/*.json
+        textbooks/*.json
     lessons/
       sample-lesson/
         langs/
@@ -67,6 +67,8 @@ files, with a sample lesson and sample pathway:
             index.adoc
             slides.md
             images/
+              *.{png,gif,jpg}
+              lesson-images.json
             pyret/
             wescheme/
             pages/
@@ -90,6 +92,9 @@ files, with a sample lesson and sample pathway:
             index.adoc
             lesson-order.txt
             external-index.rkt
+            images/
+              *.{png,gif,jpg}
+              lesson-images.json
             front-matter/
               pages/
                 *.{adoc,pdf}
@@ -102,6 +107,12 @@ files, with a sample lesson and sample pathway:
               solution-pages/
             resources/
               index.adoc
+              images/
+                *.{png,gif,jpg}
+                lesson-images.json
+              pages/
+                *.{adoc,pdf}
+                workbook-pages.txt
 
 Some standard subdirectory names are used to separate and shadow
 content based on (natural) language of instruction, the
@@ -111,18 +122,16 @@ student or teacher. Thus:
 - The `langs` subdirectory uses further subdirectories, e.g.,
 `en-us` for US English, `es-mx` for Mexican Spanish, and `fr` for French. Source
 documents from the relevant natural language are chosen based on
-the `--natlang` option chosen during build. The default is
+the value of the environment variable `$NATLANG` during build.
+The default is
 `en-us`. In order to ease transition, if a language other than
 `en-us` is chosen, any content unavailable in the new language is
-filled in by what’s in `en-us`.
+filled in by what's in `en-us`.
 
 - Some of the directories have `pyret` and `wescheme`
 subdirectories or both. These contain content that should shadow
 the default content (one directory level up) if that
-programming language is used. Specify this choice via the
-`--proglang` option during build. The default is usually `pyret`,
-but in some cases content is built for both `pyret` and
-`wescheme`.
+programming language is used.
 
 - The directory `solution-pages` is used to house source
 that will shadow `pages`, when the pages meant only for
@@ -145,8 +154,7 @@ doesn’t
 have to be `index`, ensure that there is only one `.adoc` file at
 this level.
 
-Images are in
-subdir `images`.
+Images are in subdirectory `images`.
 
 Single workbook pages are in subdirs `pages`
 and `solution-pages` (some of these can be static PDFs
@@ -176,6 +184,62 @@ the default.)
 (Any of the components in an entry line in `workbook-pages.txt`
 may be enclosed in double-quotes.)
 
+==== The images/ subdirectory
+
+As mentioned above, the images for a lesson are collected in a
+subdirectory called `images`.  References to these images in the adoc
+files are of the form `@image{path-to-image-file, width}`, where the
+`path-to-image-file` is the relative pathname of the chosen image file
+in `images`, and the optional `width` is the desired width of the image.
+
+The `images` also contains a `lesson-images.json` file that lists all
+the image files in the same directory with their associated metadata,
+i.e., _caption_, _description_, _source_, and _license_. The topmost
+JSON object in this file maps each image name to an object containing
+its metadata.
+
+Here is an example:
+
+  "louis.png": {
+    "caption": "Louis",
+    "description": "A very good standard apricot poodle named Louis",
+    "source": "Image from Louis's hooman",
+    "license": "Creative Commons 4.0 - NC - SA"
+  }
+
+Captions are optional and will print under the image on the webpage and workbook page. They can be left out if no caption is desired.
+
+Descriptions are for visually impaired folks using screenreaders so need to be detailed enough to allow students to engage with our materials. For example:
+
+    "description" : "pie chart: 44.6% white, 22.8% Black, 19.8% Hispanic/Latinx, 9.9% Asian, Small wedges for some other race alone and 2 or more races",
+
+If an image is created by us, not derived from other work, and is not a data display, use
+
+    "source" : "Created by the Bootstrap Team.",
+    "license" : "Creative Commons 4.0 - NC - SA"
+
+If an image is created by us and derived from other work, indicate that. Here's an example of how we credit the data cycle images:
+
+    "source" : "Created by the Bootstrap Team based on work from @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}",
+    "license" : "Creative Commons 4.0 - NC - SA"
+  },
+
+If an image is a data display created by us using real data, please specify the source. For example:
+
+    "source" : "Created by the Bootstrap Team using data from https://nces.ed.gov/Programs/Edge/ACSDashboard",
+    "license" : "Creative Commons 4.0 - NC - SA"
+  },
+
+If an image is a data display created using fictitious data, please indicate that.
+
+    "source" : "Created by the Bootstrap Team using contrived data",
+    "license" : "Creative Commons 4.0 - NC - SA"
+
+The build will issue warnings for underdefined images when `description`, `source`, or `license` are missing. (You will get warnings even if the value is an empty string. However, for the moment, empty-string captions are ignored.)
+
+The build process collects all the image descriptions into a single file
+`images.js` in `distribution/en-us`.
+
 === Structure of a pathway directory
 
 Each pathway has a subdirectory, e.g., `sample-pathway`, under the
@@ -201,45 +265,45 @@ subdirectory, where an `.adoc` file describes the “Teacher
 Resources” page. There should be only one such `.adoc` file, but
 it can be named anything (not necessarily `index.adoc`).
 
-== The `build-pathway` script
+== Building and deploying using the Makefile
 
-The top dir contains the script `build-pathway`. It takes any
-number of pathway arguments (including none), and any combination of the
-following command-line options:
+The top dir contains `Makefile`. Type `make` to build the distribution,
+to populate the `distribution/` directory with the built documentation.
 
-- `--book` (aka `--pdf` or `-b`)
-- `--debug` (aka `-d`)
-- `--expanded-warnings` (aka `-w`)
-- `--force` (aka `-f`)
-- `--help` (aka `-h`)
-- `--lint` (aka `--verify-links` or `-l`)
-- `--natlang` (aka `--language`)
-- `--noparallel` (aka `--no-parallel`)
-- `--nopdf` (aka `--no-pdf` or `-n`)
-- `--proglang`
-- `--slides` (aka `-s`)
-- `--superforce` (aka `--super-force` or `-F`)
-- `--version` (aka `-v`)
+`make` can take optional targets on the command line:
 
-If called with `--help` or `--version`, the script
-displays a help message and version information, respectively, and quits.
+- `book` -- creates the PDF versions of the HTML files, as also the
+  workbook PDFs. By default, these are not created as it is a relatively
+  time-consuming process and is required only after the author is sure
+  that the HTML conversions have been thoroughly debugged
 
-Otherwise, the script creates a document tree under the `distribution`
-directory for every pathway argument. A pathway arg can be either the pathway
-name, or its relative pathname from the `build-pathway` script, with or without
-a trailing slash, e.g., all of the following refer to the same pathway:
+- `linkcheck` -- checks the various internal and external links in
+  the documents to ensure they are valid. By default, this check isn't
+  done to save time
 
-  sample-pathway
-  pathways/sample-pathway
-  pathways/sample-pathway/
+`make` can take the following environment-variable settings to guide the
+build:
 
-If no pathway arg is supplied,
-`build-pathway` generates doctrees for every pathway in
-`pathways`.
+- `NATLANG=lang` -- builds for the natural language `lang`. The default is
+  `en-us` (US English). Currently, the only other language that has
+  significant support is `es-mx` (español mexicano)
 
-If no `--natlang` option is supplied, the prose language used is
-`en-us`. To specify another language, say `es-mx`, use
-`--natlang es-mx`.
+- `SEMESTER=season` -- typically either `fall` or
+  `spring`. The default is `fall`
+
+- `YEAR=yyyy` -- typically the four-digit year
+  of the Common Era. The default is the current year followed by
+  `-BETA`
+
+[IMPORTANT]
+--
+These environment variables may also be set separately (i.e., not as a
+`make` argument) on your machine, either on the command line or in your
+shell profile. In such cases, they should be ``export``ed so that the make
+can see them, e.g.,
+
+    export SEMESTER=spring YEAR=2023
+--
 
 The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
 resides in
@@ -248,7 +312,7 @@ resides in
     distribution/
       en-us/
         courses/
-          sample-pathway/
+          data-science/
             index.shtml
             workbook/
               workbook.pdf
@@ -273,18 +337,12 @@ The teacher workbooks in `resources/protected` are
 - `workbook-long-sols.pdf`, above plus the optional exercises
 - `opt-exercises-sols.pdf`, just the optional exercises
 
-These filenames are standards and do not vary with pathway. Their location
-identifies which pathway they describe.
+These filenames are standard and do not vary with course. Their location
+identifies which course they describe.
 
-If no `--proglang` option is supplied, the progamming language is
-assumed to be `pyret`. Other possible values for the option are
-`wecheme`, `codap`, and `spreadsheets`.
-The distribution directory for a pathway built with
-a non-``pyret`` proglang typically tacks on the proglang as suffix.
-
-Note that many workbook PDFs can be created: the students' versions
+Note that many workbook PDFs can be created: the students’ versions
 are created
-in the `workbook` directory; the teachers' versions in
+in the `workbook` directory; the teachers’ versions in
 the “protected” directory
 `resources/protected`.
 
@@ -302,126 +360,94 @@ The lessons referred to by the various pathways reside in
              pages/
              solution-pages/
 
-The pathway-agnostic lessons in
-`shared/langs/en-us/pathway-independent` are converted and placed in
-`distribution/en-us/lessons/.pathway-independent`.
-
-The `build-pathway` option `--slides lessonA` additionally generates the slide deck
-for lesson `lessonA`, by calling `build-slide lessonA`. For more details, see
+For slide generation, please see
 link:./README-slides.adoc[].
 
-The pathway narrative web page `index.shtml` includes a link to
-`pathway-lessons.shtml`, which contains all the lesson plans
-associated with the pathway; the student
-PDF; a page listing the standards met; and a glossary
-page for the terms used in the lessons.
+For more on the build process in general, see
+link:lib/maker/doc/index.adoc[].
 
-=== `build-pathway` debugging
+=== Cleaning
 
-The other options of `build-pathway` are predominantly used for
-debugging:
+The `make` target `clean` scrubs any existing `distribution`.
 
-- `--debug` runs in debug mode, i.e., it retains various temp files in the
-  generated doctree, so they can be inspected to help debugging. Note that like
-  all acts of measurement, running in debug mode results in a system subtly
-  different from non-debug mode, and may actually hide some bugs. Use with
-  circumspection.
+    make clean
 
-- `--expanded-warnings` shows the diagnostics as
-  long scroll instead of overwriting them.
+The next
+`make` builds anew.
 
-- `--force` forces creating anew the document tree. By default,
-  in order to save time,
-  conversions are skipped if the `distribution` already contains
-  the required target files and they are sufficiently new.
+=== Deployment
 
-- `--lint` reports missing rows in the summary tables of lesson
-  plans, and invalid links in the doctree.
+(This section is relevant only to administrators.)
 
-- `--noparallel` runs the build script
-  strictly sequentially, without exploiting parallelism. This may
-  be used to uncover bugs introduced by parallelism.
+After making the distribution, it may be deployed to the web host
+using the `make` target `deploy`:
 
-- `--book` is needed to generate PDFs for every page and solution-page, and merges them
-  into the workbook PDFs.
+    make deploy
 
-These options set some internal environment variables in the `build-pathway`
-script. `build-pathway` also looks into an init file `.build-pathway.env`, if
-it exists, where these internal variables may be set directly in lieu of giving
-them as command-line options. The variables governed by the options `--book`,
-`--debug`, `--noparallel` and `expandedwarnings` are `BOOK`, `DEBUG`,
-`NOPARALLEL` and `EXPANDEDWARNINGS` respectively.  Thus, a `.build-pathway.env`
-with contents
+We
+currently deploy to:
+https://www.bootstrapworld.site
 
-    BOOK=1
-    DEBUG=1
-    NOPARALLEL=1
-    EXPANDEDWARNINGS=1
+A typical `make deploy` goes to something like
+https://www.bootstrapworld.site/materials/fall2023, assuming that
+the environment variables `SEASON` and `YEAR` are `fall` and `2023`
+respectively. These environment variables may be set at your OS
+command line or in your shell profile, or on the `make` command line, e.g.,
 
-is equivalent to supplying the options `--book --debug --noparallel
---expandedwarnings` when calling `build-pathway`. In the course of
-experimenting, you may delete lines in `.build-pathway.env` or, more conveniently, comment
-them out
-using the usual shell comment character, `#`.
+    make SEASON=fall YEAR=2023 deploy
 
-For instance, `BOOK=1` may be commented out during the initial phases of
-adding new content, as
-PDF generation is relatively time-consuming, and one often doesn't need
-the PDFs until after one has thoroughly debugged the HTML output.
+IMPORTANT: If `SEASON` and `YEAR` are not set externally _and_ are not
+supplied on the `make`
+command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
+is the current year) are used. This is to prevent inadvertently
+overwriting
+a currently active deployment. _Always explicitly set `SEASON` and
+`YEAR` when deploying in earnest._
 
-== Deployment
+Deployment requires that you have enabled SSH access to the website machine,
+and that the environment variables `HOSTINGER_IPADDR`,
+`HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
 
-We currently deploy to:
+You will be prodded for your webhost password,
+once to copy the files over and another time
+to unpack them on the webhost machine.
 
-https://www.bootstrapworld.org/materials/fall2020/courses
+[TIP]
+--
+Deployment uses
+SSH to interact with your webost.
+account. This can be slow. If you're updating an already deployed
+doctree, you may set the variable `SKIPLIB` to save yourself the time taken
+to recopy the large mathjax library, since it's unlikely to have
+changed:
 
-(The `fall2020` is in general `<semester><year>` where
-`<semester>` is one of `spring` or `fall`, and `<year>` is the
-4-digit year.)
+    make SKIPLIB=true deploy
+--
 
-After building one or pathways on your local machine, you can
-deploy all relevant docs from the `distribution/` directory by typing
+=== The build wrapper
 
-  deploy-to-brown jrandomuser
+A Bash script `build` is provided as a convenient wrapper for `make`:
 
-Here `jrandomuser` is your user ID on Brown. You will be prodded for
-your Brown password, once to copy the files over and another time
-to set it up on the Brown machine. (This may be compressed in the
-future.)
+`build` takes the following options:
 
-If you wish to deploy only a single pathway, e.g.,
-`data-science`, add the pathway by name as a second argument:
+- `--book` (aka `--pdf`, `-b`): generates PDFs, both for
+  individuals and the workbooks
+- `--deploy`: deploys to website. If dir `distribution/` not found,
+  makes it first; otherwise uses already-built distribution
+- `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
+  builds from scratch, scrubbing any previous `distribution/`
+- `--help` (aka `-h`): displays help and exists
+- `--link` (aka `--verify-links`, `-l`): verify all the links in
+  the documentation
+- `--natlang L`: builds doc for the natural language `L`
+  (default: `en-us`)
+- `-bf` or `-fb`: combination of `-f` and `-b`
 
-  deploy-to-brown jrandomuser data-science
+Options can be combined in any order.
 
-(This assumes you've first run some variant of `./build-pathway data-science`, of
-course.)
-
-The script `deploy-to-brown` uses SSH to interact with your Brown
-account. The connection has been often been flaky, so often the
-second SSH fails. If this happens, in order to let you finish, without redoing the
-work accomplished with the first SSH, you may type
-
-  deploy-to-brown-perms jrandomuser
-
-(If you used the optional second arg for `deploy-to-brown`, you
-don't need to repeat it here.)
-
-*Note:* The `algebra` pathway is an anomaly, since it exists in
-both `-wescheme` and `-pyret` variants.
-To type just one or the other variant, type one of
-
-  deploy-to-brown jrandomuser algebra-wescheme
-  deploy-to-brown jrandomuser algebra-pyret
-
-To deploy both variants (if available), type
-
-  deploy-to-brown jrandomuser algebra
-
-In any case, `deploy-to-brown` only deploys a pathway if the
-latter has been built locally first. So if you've built `algebra-wescheme` but
-`algebra-pyret`, requesting `algebra` be deployed is equivalent to requesting
-`algebra-wescheme`.
+NOTE: There was an older script called `build-pathway` that our authors have
+gotten used to. It is provided as a trivial identity wrapper for
+`build`.
 
 == Standards compliance
 
@@ -430,25 +456,27 @@ directory `shared/langs/en-us/standards/'. In it are
 dictionaries for the
 various standards. For now, these are:
 
-  standards-cc-ela-dictionary.rkt
-  standards-cc-math-dictionary.rkt
-  standards-cc-states-dictionary.rkt
-  standards-csta-dictionary.rkt
-  standards-ia-dictionary.rkt
-  standards-k12cs-dictionary.rkt
-  standards-ma-dictionary.rkt
-  standards-ngss-dictionary.rkt
-  standards-ok-dictionary.rkt
+  standards-cc-ela-dictionary.json
+  standards-cc-math-dictionary.json
+  standards-cc-states-dictionary.json
+  standards-csta-dictionary.json
+  standards-ia-dictionary.json
+  standards-k12cs-dictionary.json
+  standards-ma-dictionary.json
+  standards-ngss-dictionary.json
+  standards-ok-dictionary.json
 
 Each dictionary entry associates an educational standard label with its description
 and all the lessons that comply with it. E.g., the following is an entry in the
-dictionary file `standards-cc-math-dictionary.rkt`
+dictionary file `standards-cc-math-dictionary.json`
 
-    ("6.EE.B"
-     "Reason about and solve one-variable equations and inequalities."
-     "inequalities1-simple"
-     "inequalities2-compound"
-     )
+    "6.EE.B": {
+       "description": "Reason about and solve one-variable equations and inequalities.",
+       "lessons": [
+          "inequalities1-simple",
+          "inequalities2-compound"
+        ]
+     }
 
 It associates the label `6.EE.B` with the description `Reason about and
 solve one-variable equations and inequalities`, and says that the two
@@ -529,12 +557,17 @@ The following is needed to construct documents from this repo:
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on macOS, your environment is close but missing some
-    tools. You'll want to install
-    https://brew.sh/[Homebrew] first, then run the following commands to add them:
+  - If you're on MacOS, your environment is close but missing some unix tools. You'll want to install https://brew.sh/[Homebrew] first, then run the following command to add them:
 +
-  brew install gnu-sed
-  brew install curl
+  brew install gnu-sed curl make coreutils gnu-tar
+
+  - Mac users will also need to add these unix tools to their path. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
++
+  # add every gnu tool we have as a prefix to the path
+  if type brew &>/dev/null; then
+    HOMEBREW_PREFIX=$(brew --prefix)
+    for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
+  fi
 
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
@@ -547,12 +580,20 @@ and make sure the `racket` binary is in your `$PATH`.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
   - on macOS: `brew install asciidoctor`
 
-* Several node packages *all of which are installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
+* Lua, used for postprocessing.
+  - on Linux/WSL: `sudo apt-get install lua5.4`
+  - on macOS: `brew install lua`
+
+* Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
   - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
   - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
   - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
   - `mathjax`, which generates beautifully formatted math output
+
+* sshpass (for deployment only)
+  - on Linux/WSL: `sudo apt-get install sshpass`
+  - on macOS: <insert>
 
 == Authoring guidelines
 
@@ -586,7 +627,7 @@ Similarly for “subsections” at level 2, 3, 4, 5.
 
   ====== Header at level 5
 
-(That's it. Headers of level 6+ are not provided for.)
+(That's it. Headers of level 6+ are not provided.)
 
 Itemized lists have each item paragraph preceded by a ``*`` or
 ``-`` and space.
@@ -639,7 +680,7 @@ Glossary items are annotated with the directive `@vocab`. E.g.,
   @vocab{function}
 
 In a lesson plan, such items are searched in the main glossary
-file, `lib/glossary-terms.rkt`, and are inserted as lists at the
+file, `lib/glossary-terms.json`, and are inserted as lists at the
 head of the document.
 
 For a pathway narrative, the glossary items from all its
@@ -649,37 +690,37 @@ page.
 
 There can be auxiliary glossary files in `lib/` that can be used
 to _shadow_ the main glossary for particular lessons. For now,
-the only such shadowing glossary file is `glossary-terms-ss.rkt`,
+the only such shadowing glossary file is `glossary-terms-ss.json`,
 used for Social-Studies lessons.
 
 In order for a lesson `lessonA` to use a shadowing glossary, its
-directory, i.e., `lessons/lessonA/langs/en-us`, should containing a
+directory, i.e., `lessons/lessonA/langs/en-us`, should contain a
 file `shadow-glossary.txt` that contains the name of the
 shadowing glossary file.
 
-===== Syntax of the glossary-terms.rkt file
+===== Syntax of the glossary-terms.json file
 
-The `glossary-terms.rkt` file (and any shadowing files) defines and
-exports the
-Scheme variable `*glossary-list*`, whose value is a list of glosses. Each
-gloss is itself a list of sublists, where the sublist contains three
-elements:
+The `glossary-terms.json` file (and any shadowing files) defines a JSON
+object that is a list of glosses.
+Each
+gloss is an object with keys for the various natural languages in use
+(for now, `"en-us"` and `"es-mx"`). The value for each such natlang is an
+object with the following mappings:
 
-- a symbol specifying the natural language (e.g., `en-us`, `es-mx`)
-- the glossed item. This can be:
-** a string, e.g., `"variable"`
-** a list of strings, meant to be grammatically related items, e.g., `("axis"
-"axes")`. Either string can be used in the source (whatever fits the
-prose flow), but the item in the generated glossary will be the first
-item
-** a list of sublist of strings, where each of sublist of strings is
-internally
-grammatically related, but the different sublists are quite different
-terms, e.g., `(("mean") ("average" "ave" "avg"))`. The word in the source is used
-to find the relevant sublist, and _its_ first item is used in the
-generated glossary
-- a string specifying the definition for the glossed item
+- `"keywords"`, which specifies a list of sublists, each sublist listing
+grammatically-related strings. Any of these can be used in the source
+(whatever fits the prose flow), but the item in the generated glossary
+will be the first string in the sublist.
++
+An example value could be `[ ["mean"], ["average" "ave" "avg"] ]`. The
+word in the source is used to find the relevant sublist, and _its_ first
+item is used in the generated glossary.
 
+- \"description\", the definition for the glossed item.
+
+
+[TIP]
+--
 As a convenience, it is not necessary to specify simple grammatical
 declensions in the glossary file. Thus, in the glossary entry for
 `"coordinate"` you don't need to tack on `"coordinates"`, although you
@@ -698,7 +739,10 @@ For English (`en-us`), this convenience covers:
 Latin (the aforementioned `"axis"`/`"axes"`) and Old English plurals
 (`"child"`/`"children"`) need explicit entries however; sorry!
 
-Spanish (`es-mx`) has its own set of declension detection mechanisms.
+Spanish (`es-mx`) has its own set of declension detection mechanisms
+(`"-iones"` to `"-ión"`, `"-ques"` to `"-c"`, `"-gues"` to `"-g"`,
+`"-ces"` to `"-z"`, `"-es"` to `""`).
+--
 
 ==== Lesson descriptions and dependencies
 
@@ -734,7 +778,7 @@ such recipes, please see the `.adoc` files in the various
 
 Some exercise files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
-use some extra directives like `@do`, `@show`, `@code` that then
+use some extra directives like `@do`, `@show`, `@showsoln`, and `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
 
@@ -764,6 +808,16 @@ Note that `contracts` takes a list of arguments. Also note that
 quoting each such argument obviates the need for quoting the
 domain-list argument.
 
+The directive `@showsoln` is similar to `@show` but renders
+only
+in solution pages.
+
+The directive `@do` passes its argument to Racket, and renders
+the standard output thereof. It is a general-purpose trapdoor into
+Racket for things that are too difficult to do using regular
+AsciiDoc and the standard directives. (That said, we haven't had
+occasion to need it so far.)
+
 ==== Cross-references and pagination
 
 There are a clutch of directives to allow easy cross-referencing between
@@ -783,7 +837,7 @@ be dropped. (The only other possible second component is
 have extension `.pdf`, `.html`, or `.adoc`. If `.adoc`, it is resolved
 to `.html`.
 
-THe directives `@opt-printable-exercise` and `@handout` are called the
+The directives `@opt-printable-exercise` and `@handout` are called the
 same way, and are
 applied to exercise pages not mentioned in the lesson's page list. (The
 two are categorized differently in the collections appearing in the
@@ -806,14 +860,9 @@ the link text is optional.
 
 Use `@image{images/pic.png}` to insert the image `images/pic.png`.
 
-Use commas to add image options, e.g.,
-
-  @image{images/player-move.png, PlayerMovement, 400, , credit}
-
-The second argument is the alt text, which also pops up on mouse hover.
-The third and fourth arguments (which can be left empty) specify width
-and height respectively. The fifth argument is used to specify credit
-for the image, and is rendered to the bottom right of the image.
+An optional second argument gives the preferred width of the image.
+Additional information about the image is retrieved from the
+`images/lesson-images.json` file.
 
 ==== Comments
 
@@ -836,12 +885,10 @@ requirement is that any braces within it should be paired. (This is
 obviously needed to keep the extent of
 ``@scrub``'s argument recognizable.)
 
-==== Programming language specific text
+==== Programming-language specific text
 
 Use the `@ifproglang` directive to conditonally include a
-fragment text for a specific programming language, which as
-explained earlier, is usually `pyret` by default, but can be set
-supplying a `--proglang` option to the build script. E.g.,
+fragment text for a specific programming language. E.g.,
 
   @ifproglang{pyret}{
   This text occurs in the Pyret version of this document.
@@ -892,4 +939,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
+// last modified 2023-03-30
 // vi:tw=72
