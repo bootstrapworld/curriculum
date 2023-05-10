@@ -3,6 +3,8 @@
 # Histograms
 
 <!--
+This slide deck includes an optional Kinesthetic Activity. Be sure to delete slide 5 if you do not plan to engage your students with the activity. 
+
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
@@ -52,6 +54,36 @@ The second display is called a @vocab{histogram}.
 To build a histogram, we start by **sorting all of the numbers in our column from smallest to largest**, marking our x-axis from the smallest value to the largest value and **dividing the x-axis into equally-sized intervals,** or “bins”. 
 
 Once we have our bins, we put each value in our dataset into the bin where it belongs, and then count how many values fall in each bin. This count determines the height of the bars on our y-axis.
+
+---
+{layout="Investigate-K"}
+# Introducing Histograms
+
+1. With your group, roll the dough into a thick cylinder. {style="font-size:12pt"}
+
+1. Divide that cylinder in half.{style="font-size:12pt"} 
+
+1. Take one of the halves and cut it in half _again_.{style="font-size:12pt"}
+
+1. Cut one of the resulting pieces in half once more.{style="font-size:12pt"} 
+
+The result should be *four* chunks of playdough, with a ratio of *1:1:2:4*.{style="font-size:12pt"}
+
+The playdough represents a @vocab{sample}, with values falling into four intervals. The largest cylinder represents double the number of "datapoints" (amounts of dough) as the next largest, which in turn has double the datapoints of the two small ones.{style="font-size:12pt"}
+
+Histograms pile the datapoints into equally-sized intervals, just as the cylinders of dough are all of the same width. __More dough means longer cylinders__, since the "interval width" (cylinder thickness) stays fixed.{style="font-size:12pt"}
+
+1. Line up the cylinders from smallest-to-largest, laying them on a sheet of graph paper.{style="font-size:12pt"} 
+
+1. Come up with labels for what the x- and y-axis might represent!{style="font-size:12pt"}
+
+<!--
+Perhaps they represent the number of teeth grownups have with most grownups having a full set of teeth, some missing one or two, and some outliers who've lost a significant number.
+-->
+
+---
+{layout="Investigate"}
+# Introducing Histograms
 
 Turn to @printable-exercise{pages/making-histograms.adoc}, and try drawing a histogram from a dataset.
 
