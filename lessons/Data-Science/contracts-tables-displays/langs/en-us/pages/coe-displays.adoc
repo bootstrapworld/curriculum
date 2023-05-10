@@ -5,16 +5,12 @@
 #content .autonum::after { content: ')'; }
 #content .contracts .editbox { background: none !important; }
 #content td { position: relative; }
-#content td { padding: 0 !important; }
-
-/* override the default evenly-spaced row distribution to instead
-   repeat between max-content and a fixed height */
-body.workbookpage table.FillVerticalSpace {
-  grid-template-rows: unset !important;
-  grid-auto-rows: 4fr 1fr !important;
+#content .contracts td { padding: 0 !important; }
+#content .exercises td .content div:last-child {
+	position: absolute;
+	bottom: 0;
+	width: 95%;
 }
-
-#content .exercises tr:nth-of-type(even) > td { grid-column: 1 / 3; }
 </style>
 ++++
 
@@ -49,41 +45,60 @@ body.workbookpage table.FillVerticalSpace {
 (define exp6 '(pie-chart(first-n-rows(sort animals-table "age" false) 10) "legs"))
 }
 
-[.exercises.FillVerticalSpace, cols="1a, 2a"]
+[.exercises.FillVerticalSpace, cols="1a"]
 |===
-| @n Draw the Circle of Evaluation to make a bar-chart of the lightest 16 animals by `sex`. +
-  @star What other bar chart might you want to compare this to?
-| @showsoln{(coe exp1)}
-2+| @showsoln{(code exp1)}
+|
+@n Make a bar-chart of the lightest 16 animals by `sex`.
 
-| @n Draw the Circle of Evaluation to take the heaviest 20 animals and make a histogram of `weeks` to adoption. +
-  @star What other histogram might you want to compare this to?
+@showsoln{(coe exp1)}
 
-| @showsoln{(coe exp2)}
-2+| @showsoln{(code exp2)}
+@showsoln{(code exp1)}
 
-| @n Draw the Circle of Evaluation to make a box-plot of `age` for the 11 animals who spent the most `weeks` in the shelter. +
-  @star What other box plot might you want to compare this to?
+@star What other bar chart might you want to compare this to? @fitb{}{}
 
-| @showsoln{(coe exp3)}
-2+| @showsoln{(code exp3)}
+| 
+@n Take the heaviest 20 animals and make a histogram of `weeks` to adoption.
 
-| @n Draw the Circle of Evaluation to make a pie-chart of `species` for the 18 animals who spent the fewest `weeks` in the shelter. +
-  @star What other pie chart might you want to compare this to?
+@showsoln{(coe exp2)}
 
-| @showsoln{(coe exp4)}
-2+| @showsoln{(code exp4)}
+@showsoln{(code exp2)}
 
-| @n Draw the Circle of Evaluation to take the youngest 12 animals and make a box-plot of `pounds`. +
-  @star What other box plot might you want to compare this to?
+@star What other histogram might you want to compare this to? @fitb{}{}
 
-| @showsoln{(coe exp5)}
-2+| @showsoln{(code exp5)}
+| 
+@n Make a box-plot of `age` for the 11 animals who spent the most `weeks` in the shelter.
 
-| @n Draw the Circle of Evaluation to make a pie-chart of `legs` for the 10 oldest animals. +
-  @star What other pie chart might you want to compare this to?
+@showsoln{(coe exp3)}
 
-| @showsoln{(coe exp6)}
-2+| @showsoln{(code exp6)}
+@showsoln{(code exp3)}
+
+@star What other box plot might you want to compare this to? @fitb{}{}
+
+| 
+@n Make a pie-chart of `species` for the 18 animals who spent the fewest `weeks` in the shelter.
+
+@showsoln{(coe exp4)}
+
+@showsoln{(code exp4)}
+
+@star What other pie chart might you want to compare this to? @fitb{}{}
+
+| 
+@n Take the youngest 12 animals and make a box-plot of `pounds`.
+
+@showsoln{(coe exp5)}
+
+@showsoln{(code exp5)}
+
+@star What other box plot might you want to compare this to? @fitb{}{}
+
+| 
+@n Make a pie-chart of `legs` for the 10 oldest animals.
+
+@showsoln{(coe exp6)}
+
+@showsoln{(code exp6)}
+
+@star What other pie chart might you want to compare this to? @fitb{}{}
 
 |===
