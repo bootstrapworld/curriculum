@@ -1,51 +1,73 @@
 [.landscape]
 = Contracts
 
-++++
-<style>
-#content > .paragraph {padding: 0px 5px;}
-</style>
-++++
-
 Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
-
-++++
-<style>
-td {padding: .1em .625em !important; height: 20pt;}
-</style>
-++++
 
 [.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
 |Name||Domain||Range
 
-
-| `filter`
+| `star`
 | `{two-colons}`
-| `(t {two-colons Table}, test {two-colons} (Row -> Boolean))`
+| @ifsoln{`Number, String, String`}
 | `->`
-| `Table`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star(50, "solid", "teal")_`}
 
-| `build-col`
+| `star-polygon`
 | `{two-colons}`
-| `(t {two-colons Table}, col {two-colons} String, builder {two-colons} (Row -> Any))`
+| @ifsoln{`Number, Number, Number, String, String`}
 | `->`
-| `Table`
-5+|
+| @ifsoln{`Image`}
+5+| @ifsoln{`_star-polygon(100, 10, 3, "outline", "yellow")_`}
 
-| `bar-chart-summarized`
+| `text`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| @ifsoln{`String, Number, String`}
+| `->`
+| @ifsoln{ `Image`}
+5+| @ifsoln{`_text("I'm thankful for...", 50, "green")_`}
+
+| `triangle`
+| `{two-colons}`
+| `Number, String, String`
 | `->`
 | `Image`
+5+|`_triangle(80, "solid", "darkgreen")_`
+
+|
+| `{two-colons}`
+|
+|`->`
+|
 5+|
 
-| `pie-chart-summarized`
+|
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
-| `->`
-| `Image`
+|
+|`->`
+|
+5+|
+
+|
+| `{two-colons}`
+|
+|`->`
+|
+5+|
+
+|
+| `{two-colons}`
+|
+|`->`
+|
+5+|
+
+|
+| `{two-colons}`
+|
+|`->`
+|
 5+|
 
 |===
