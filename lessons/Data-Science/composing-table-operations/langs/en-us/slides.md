@@ -226,11 +226,8 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 {layout="Investigate"}
 # Composing
 
-To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be 
+To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}.
 
-@show{(code '(pie-chart (filter animals-table is-dog) "fixed")).
-
-}
 
 ---
 {layout="Investigate"}
@@ -301,10 +298,11 @@ Review student answers to @printable-exercise{pages/planning-table-operations.ad
 {layout="Synthesize"}
 # Composing
 
-Was it helpful to think about the Circles, without worrying about @proglang{Pyret}@proglang{CODAP}? Why or why not?
+Was it helpful to think about the Circles, without worrying about @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}? Why or why not?
 
 ---
 {layout="Supplemental"}
+# Additional Materials
 
 @opt-printable-exercise{pages/building-from-circles-2.adoc}
 
