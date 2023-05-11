@@ -1,10 +1,18 @@
 ---
 {layout="Math Title Slide"}
-# Collision Detection - Distance and Inequality{style="font-size:36pt"}
+# Collision Detection - Distance and Inequality{style="font-size:30pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
+---
+{layout="Launch"}
+# Problem Decomposition Returns! 
+
+Knowing how far apart our characters are is the first step. But in order to keep track of the score, we need to know when they are close enough to collide!
+
+"Problem Decomposition" is a powerful tool, which lets us break apart complex problems into simpler ones that we can solve, test, and then glue together into a complex solution.
+
 ---
 {layout="Launch"}
 # Problem Decomposition Returns! 
@@ -15,30 +23,48 @@ You may remember that there are two strategies for decomposing problems:
 
 - __Bottom-Up__: Focus on the smaller parts that you're sure of, then build them together to get the big picture.
 
+Before we focus on our game code, let's practice breaking apart a different complex word problem.
+
+
 ---
 {layout="Investigate-R"}
 # Problem Decomposition Returns! 
 
-**Decide which strategy you want to use for this word problem.**
+A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec.{style="font-size:13pt"} 
 
-A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Define functions that compute the height of the pole and the area of the triangle after a given number of seconds.
+An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle.{style="font-size:13pt"} 
 
-* This is easier to think about as two functions:
-** one that computes the height of the pole, based on the seconds
-** another that computes the area of the triangle, based on the height
-* Does one function depend on (or "sit on top of") the other? If so, which one?
-* Which strategy will YOU use: bottom-up (independent first) or top-down (dependent first)?
+__*Write a function that computes the area of the triangle as a function of time.*__{style="font-size:13pt"}
 
-**Then complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy.**
+
+This problem is easier to think about as two functions:{style="font-size:12pt"}
+* one that computes the height of the pole, based on the seconds{style="font-size:12pt"}
+* another that computes the area of the triangle, based on the height{style="font-size:12pt"}
+
+Does one function depend on (or "sit on top of") the other? If so, which one?{style="font-size:12pt"}
 
 @image{images/retracting-flag.jpg}
 
 <!--
-* Does one function depend on (or "sit on top of") the other? If so, which one?
-** _Yes - `area` depends on `height`._
-* Which strategy will YOU use: bottom-up (independent first) or top-down (dependent first)?
-** _Students answers will vary! They can define either function first._
+1. Scaffolded discussion of this word problem continues on next slide
+1. Does one function depend on (or "sit on top of") the other? If so, which one?
+* _Yes - `area` depends on `height`._
 -->
+
+---
+{layout="Investigate-R"}
+# Problem Decomposition Returns! 
+
+A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec.{style="font-size:14pt"} 
+
+An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle.{style="font-size:14pt"} 
+
+__*Write a function that computes the area of the triangle as a function of time.*__{style="font-size:14pt"}
+
+1. Decide which strategy YOU will use: bottom-up (independent first) or top-down (dependent first){style="font-size:14pt"}
+2. Then complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy.{style="font-size:14pt"}
+
+@image{images/retracting-flag.jpg}
 
 ---
 {layout="Synthesize"}
