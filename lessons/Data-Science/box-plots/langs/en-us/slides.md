@@ -209,8 +209,8 @@ Box plots and Histograms can both tell us a lot about the shape of a dataset, bu
 
 _The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}. Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile._{style="font-size:14pt"}  
 
-5.\ On your number line, you have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. {style="font-size:14pt"} 
-6.\ Roll your cylinders so that they fill each of these intervals, retaining a uniform thickness.{style="font-size:14pt"} 
+5. On your number line, you have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. {style="font-size:14pt"} 
+6. Roll your cylinders so that they fill each of these intervals, retaining a uniform thickness.{style="font-size:14pt"} 
 
 <!--
 Notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the data points, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
