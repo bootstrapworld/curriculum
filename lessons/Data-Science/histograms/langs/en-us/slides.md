@@ -25,11 +25,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 @image{images/pet-numbers.png, 250}
 
-There are 2 displays on @printable-exercise{pages/summarizing-columns.adoc}. The first display is a @vocab{Bar chart}.
+There are 2 displays on @printable-exercise{pages/summarizing-columns.adoc}. The first display is a @vocab{Bar chart}.{style="font-size:16pt"}
 
-- The x-axis lists the values of a categorical variable (`species`).
-- The y-axis shows the @vocab{frequency} of categorical values in the dataset.
-- It would be fine to re-order the columns any way we wish! The bar for “dogs” could have been drawn before the one for “cats”, without changing the meaning of the display. 
+- The x-axis lists the values of a categorical variable (`species`).{style="font-size:16pt"}
+- The y-axis shows the @vocab{frequency} of categorical values in the dataset.{style="font-size:16pt"}
+- It would be fine to re-order the columns any way we wish! The bar for “dogs” could have been drawn before the one for “cats”, without changing the meaning of the display.{style="font-size:16pt"} 
 <!--
 
 -->
@@ -69,9 +69,9 @@ Once we have our bins, we put each value in our dataset into the bin where it be
 
 The result should be *four* chunks of playdough, with a ratio of *1:1:2:4*.{style="font-size:12pt"}
 
-The playdough represents a @vocab{sample}, with values falling into four intervals. The largest cylinder represents double the number of "datapoints" (amounts of dough) as the next largest, which in turn has double the datapoints of the two small ones.{style="font-size:12pt"}
+The playdough represents a @vocab{sample}, with values falling into four intervals. The largest cylinder represents double the number of "data points" (amounts of dough) as the next largest, which in turn has double the data points of the two small ones.{style="font-size:12pt"}
 
-Histograms pile the datapoints into equally-sized intervals, just as the cylinders of dough are all of the same width. __More dough means longer cylinders__, since the "interval width" (cylinder thickness) stays fixed.{style="font-size:12pt"}
+Histograms pile the data points into equally-sized intervals, just as the cylinders of dough are all of the same width. __More dough means longer cylinders__, since the "interval width" (cylinder thickness) stays fixed.{style="font-size:12pt"}
 
 1. Line up the cylinders from smallest-to-largest, laying them on a sheet of graph paper.{style="font-size:12pt"} 
 
@@ -108,7 +108,7 @@ In the histogram we just made, we see that the data is clustered at the right-ha
 In your own words, can you explain how histograms and bar charts are different?
 
 <!--
-Bar charts are used for categorical data, showing the count for data in each category. Histograms are used for quantitative data, showing the distribution of the datapoints across the range.
+Bar charts are used for categorical data, showing the count for data in each category. Histograms are used for quantitative data, showing the distribution of the data points across the range.
 
 *Common Misconceptions*
 Note that intervals on this display include the left endpoint but not the right. If we included the right endpoint and someone had 0 teeth, we’d have to add on a bar from -5 to 0, which would be awfully strange!
@@ -186,7 +186,7 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 **Rule of thumb: a histogram should have between 5–10 bins.**
 
 Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column. 
-
+ 
 
 
 <!--
