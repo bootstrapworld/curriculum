@@ -82,7 +82,7 @@ Knowing how far apart our characters are is a good first step... but we still ne
 
 Turn to @printable-exercise{pages/collision.adoc} and write a function that takes in two coordinate pairs (four numbers) of the `PLAYER` and a character (`(px, py)` and `(cx, cy)`), and uses the returns `true` if they are within 50 @vocab{pixels} of each other. Remember: you've already written a function called `distance`!
 
-Fix the @show{(code 'collision?)} function in your game file, and click Run!
+Fix the @show{(code 'collision?)} function in @starter-file{program-list, your game file}, and click Run!
 
 ---
 {layout="Synthesize"}
