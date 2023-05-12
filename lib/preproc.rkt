@@ -1,7 +1,5 @@
 #lang racket
 
-; last modified 2023-05-08
-
 (require json)
 ; (require file/sha1)
 (require "readers.rkt")
@@ -1450,7 +1448,7 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (second args) "")]
+                                   [link-text (if (> n 1) (string-join (rest args) "&#x2c; ") "")]
                                    [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
