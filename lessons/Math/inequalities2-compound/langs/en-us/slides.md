@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Compound Inequalities: Solutions & Non-Solutions{style="font-size:36pt"}
+# Compound Inequalities: Solutions & Non-Solutions{style="font-size:27pt"} 
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -24,8 +24,8 @@ What other examples can you come up with?
 
 Many times we need to _combine_ inequalities:
 
-- Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"})
-- Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $15})
+- Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"}){style="font-size:16pt"}
+- Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $15}){style="font-size:16pt"}
 
 What other examples can you come up with?
 
@@ -81,7 +81,8 @@ The questions above could be printed from @opt-printable-exercise{compound-warmu
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 * Open the @starter-file{inequalities-compound}.
-* Click "Run" to see the graphs you've just considered. Four graphs will appear: The top two are the simple inequalities we've just discussed. 
+* Click "Run" to see the graphs you've just considered. 
+* sFour graphs will appear: The top two are the simple inequalities we've just discussed. 
 * Were your solutions and non-solutions correct?
 
 
@@ -112,7 +113,9 @@ The bottom two graphs are produced by the special functions `and-intersection` a
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Change the function definition on _line 8_ to @math{x \lt 5} and the definition on _line 9_ to @math{x \ge 15} and, before you click "Run", take a moment to think about what the new graphs of `and-intersection` and `or-union` will look like. 
+Change the function definition on _line 8_ to @math{x \lt 5} and the definition on _line 9_ to @math{x \ge 15}.
+
+Before you click "Run", take a moment to think about what the new graphs of `and-intersection` and `or-union` will look like. 
 
 Then click "Run" and take a look.
 
@@ -131,11 +134,9 @@ Then click "Run" and take a look.
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-Once you are familiar with the starter file, you are ready to use it as you practice identifying solutions and non-solutions for compound inequalities.
+Once you are familiar with the @starter-file{inequalities-compound}, you are ready to use it as you practice identifying solutions and non-solutions for compound inequalities.
 
 - Turn to @printable-exercise{compound-inequality-solutions.adoc}.
-- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
-
 
 ---
 {layout="Investigate"}
