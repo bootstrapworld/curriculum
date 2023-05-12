@@ -11,8 +11,6 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-(define *use-mathjax-for-math?* #f)
-
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed* #f)
 
@@ -91,7 +89,12 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  ((if *use-mathjax-for-math?* make-mathjax-math make-ascii-math) text))
+  ((if (or (and (regexp-match "\\frac" text)
+                (regexp-match "\\div" text))
+           (and (regexp-match "\\sqrt" text)
+                (regexp-match "\\^" text)))
+       make-mathjax-math
+       make-ascii-math) text))
 
 (define (make-mathjax-math text)
   (string-append
