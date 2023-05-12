@@ -506,6 +506,9 @@
                          [(string=? directive "math")
                           (let ([text (read-group i directive)])
                             (display (make-math text) o))]
+                         [(string=? directive "blockmath")
+                          (let ([text (read-group i directive)])
+                            (display (make-mathjax-math text) o))]
                          [(string=? directive "smath")
                           (let* ([text (read-group i directive #:scheme? #t)]
                                  [exprs (string-to-form (format "(math '~a)" text))])
