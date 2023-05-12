@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # Introducing Booleans 
 
-Convert these Circles of Evaluation into code. Then, log into @starter-file{editor} and see what the code evaluates to.}{style="font-size:24pt"}
+Convert these Circles of Evaluation into code. Then, log into @starter-file{editor} and see what the code evaluates to.{style="font-size:24pt"}
 
 @image{images/set-of-coes1.png}{width="550"}
 
@@ -76,13 +76,23 @@ Inequality expressions divide all of the numbers in the universe into two catego
 
 - We are going to practice identifying whether or not a given number is part of the @vocab{solution set}.
 - Open the @starter-file{inequalities-simple} and click "Run".
-- Analyze the graph that appears (image below), as well as the provided code (lines 10, 18, and 26).
-- What do you Notice? What do you Wonder?
+- Look at the graph that appears, as well as the provided code (lines 10, 18, and 26).
+
+<!--
+Sample Graph for discussion on next slide
+-->
+
+---
+{layout="LaunchC"}
+# Introducing Inequalities
+
+- What do you Notice? 
+- What do you Wonder?
 
 @image{images/inequality-works.png}
 
 <!--
-	Students might observe the following:
+Students might observe the following:
 
 * This starter file includes a special `inequality` function that takes in a function __(which tests numbers in an inequality)__ and a list of 8 numbers __(to test in the function)__.
 
@@ -99,27 +109,34 @@ Inequality expressions divide all of the numbers in the universe into two catego
 {layout="Launch"}
 # Introducing Inequalities
 
-- Look at line 18. Edit the list of values by deleting _one_ of the `-` symbols.
-- Hit "Run". Examine the graph that appears (sample image below).
-- How is this graph different from the one you first produced?
+- Look at line 18 in the @starter-file{inequalities-simple}. 
+- Edit the list of values by deleting _one_ of the `negative signs`.
+- Hit "Run" and examine the graph that appears.
 
+<!--
+Sample Graph for discussion on next slide
+-->
+	
+---
+{layout="LaunchC"}
+# Introducing Inequalities
+
+How is this graph different from the one you first produced?
 
 @image{images/not-quite2.png}
 
----
-{layout="Launch"}
-# Introducing Inequalities
-
+<!--
 A successful input in this starter file will include 4 solutions and 4 non-solutions; in other words, the image returned will show 4 green dots and 4 red dots.
 
 When you modify the list of numbers, you will see that there are now 5 red dots and 4 green dots - along with a message that says, _"Challenge yourself: Find 4 true examples and 4 false"_.
+-->	
 
 ---
 {layout="Investigate-DN"}
 # Introducing Inequalities
 
 - Complete @printable-exercise{simple-inequalities.adoc} with a partner, identifying solutions and non-solutions to each inequality and testing them in the @starter-file{inequalities-simple}.
-- For each inequality, you must find four solutions and four non-solutions.
+- For each inequality, find 4 solutions and 4 non-solutions.
 - Try using negatives, positives, fractions and decimals as you generate your lists.
 
 ---
