@@ -339,7 +339,7 @@
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
          [page (first args)]
-         [link-text (if (> num-args 1) (second args) #f)]
+         [link-text (if (> num-args 1) (string-join (rest args) ", ") #f)]
          [page-components (regexp-split #rx"/" page)]
          [local-dir ""]
          [local-file ""]
