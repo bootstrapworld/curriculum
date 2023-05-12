@@ -473,7 +473,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=bgmJ1lYyd7"
+      "url": "https://www.wescheme.org/view?publicId=8RStWgMhm4"
     }
   },
   "inequalities-sam": {
