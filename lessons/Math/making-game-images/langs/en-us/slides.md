@@ -97,13 +97,13 @@ Upload to GDrive, and make sure sharing settings allow anyone with the link to v
 {layout="Investigate"}
 # Finding Your Game Images
 
-@ifproglang{pyret}{Open your game file, click “Insert” > “Images”, and select an image}
-@ifproglang{wescheme}{Open your game file, click “Images”, and select an image}
+@ifproglang{pyret}{Open your game file, click “Insert” > “Images”, and select an image}{style="font-size:16pt"}
+@ifproglang{wescheme}{Open your game file, click “Images”, and select an image}{style="font-size:16pt"}
 
-It will insert the code to display the image using image-url.
+It will insert the code to display the image using `image-url`.{style="font-size:16pt"}
 
 @ifproglang{pyret}{@[youtube](bWxNXTrGQOE)}
-@ifproglang{pyret}{@[youtube](lTl6bjbfCRo)}
+@ifproglang{wescheme}{@[youtube](lTl6bjbfCRo)}
 
 ---
 {layout="Synthesize"}
