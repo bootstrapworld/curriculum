@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Compound Inequalities: Solutions & Non-Solutions{style="font-size:27pt"} 
+# Compound Inequalities: Solutions & Non-Solutions {style="font-size:27pt"} 
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -81,8 +81,10 @@ The questions above could be printed from @opt-printable-exercise{compound-warmu
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 * Open the @starter-file{inequalities-compound}.
-* Click "Run" to see the graphs you've just considered. 
-* sFour graphs will appear: The top two are the simple inequalities we've just discussed. 
+@ifproglang{wescheme}{
+* Select Edit to view the code.}
+* Click "Run" to see graphs of the inequalities you've just considered. 
+* Four graphs will appear: The top two are the simple inequalities we've just discussed. 
 * Were your solutions and non-solutions correct?
 
 
