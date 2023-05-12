@@ -31,63 +31,64 @@ How is this situation similar to the permutation questions?
 How is it different?
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
 When order _doesn't_ matter, all the possible options are called @vocab{combinations} (think of Luigi's "combination platter!").
 
 Since there's no replacement, let's start by using our formula for permutation-without-replacement to compute all the possible permutations. We have six items to choose from and are selecting four of them:
 
-@math{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@blockmath{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
-@math{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@blockmath{permute\mbox{-}no\mbox{-}replace(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
-In this situation, the order __doesn't matter__, so some of these platters are going to be the same combination: Lasagna, Soup, Ziti and Chicken is a different @vocab{permutation} from Lasagna, Soup, Chicken, Ziti, but it's the same @vocab{combination}! 
+Many platters are going to be the same _combination_: Lasagna, Soup, Ziti and Chicken might have lots of @vocab{permutations}, but all of them are just a @vocab{combination} of the same four items! 
 
-If we knew that every combination would have a duplicate, we'd divide the number of platters by two. If we knew each one would have a triplicate, we'd divide by three.
+If we knew that every combination would have a duplicate, we'd divide the number of platters by 2. If we knew each one would have a triplicate, we'd divide by 3.
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
 How do we compute the number of duplicates in a four-course platter?
 
 We already know how to do this! This is the same question as "How many permutations are there for the same four courses?"
 
-Using our formula for permutation without replacement we get:
-@math{permute\mbox{-}no\mbox{-}replace(4, 4) = \frac{4!}{(4-4)!} = 4! = 24} duplicates!
+Using our formula for "permutation without replacement", we get 24 duplicates:
+
+@blockmath{permute\mbox{-}no\mbox{-}replace(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
 Now, we need to divide 'the number of permutations (without replacement) for choosing 4 courses out of six items" by "the number of duplicate permutations in any four-course platter".
 
-@math{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
+@blockmath{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
 We can rewrite this using our functions from earlier:
 
-@math{combinations(items, choose) = \frac{permute\mbox{-}no\mbox{-}replace(items, choose)}{permute\mbox{-}no\mbox{-}replace(choose, choose)}}
+@blockmath{combinations(items, choose) = \frac{permute\mbox{-}no\mbox{-}replace(items, choose)}{permute\mbox{-}no\mbox{-}replace(choose, choose)}}
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Combinations
 
 
 In this situation, we have 6 possible choices and we get to choose 4 times:
 
-@math{combinations(6, 4) = \frac{permute\mbox{-}no\mbox{-}replace(6, 4)}{permute\mbox{-}no\mbox{-}replace(4, 4)}}
+@blockmath{combinations(6, 4) = \frac{permute\mbox{-}no\mbox{-}replace(6, 4)}{permute\mbox{-}no\mbox{-}replace(4, 4)}}
 
 ---
 {layout="Investigate"}
