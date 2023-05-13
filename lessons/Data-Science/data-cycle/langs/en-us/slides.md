@@ -218,8 +218,8 @@ How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyre
 Once we know what data we need, we can turn our attention to what we want to build with it!
 
 - Do we need to filter out certain rows and make a new table?
-@ifproglang{pyret}{- Do we need a pie chart?}
-- Should we make a histogram?
+@ifproglang{pyret}{- Do we need a pie chart?} A scatter plot?
+
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
 ---
