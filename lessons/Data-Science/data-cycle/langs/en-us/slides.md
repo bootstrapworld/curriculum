@@ -77,13 +77,13 @@ There’s an art to asking the right questions, and good Data Scientists think h
 
 Most questions can be broken down into one of four categories:
 
-- **Lookup questions** can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
+- **Lookup questions** - Answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
 
-- **Arithmetic questions** can be answered by computing an answer across a single column.{style="font-size:16pt"}
+- **Arithmetic questions** - Answered by computing an answer across a single column.{style="font-size:16pt"}
 
-- **Statistical questions** are where things get interesting! If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
+- **Statistical questions** If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
 
-- **Questions we can't answer** would need data that we don't have. {style="font-size:16pt"}
+- **Questions we can't answer** - Need data that we don't have. {style="font-size:16pt"}
 
 <!--
 Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"

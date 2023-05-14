@@ -37,7 +37,7 @@ Solicit student ideas for infographics, and/or provide some of your own
 # Grouping by Value
 
 - Now type @show{(code '(count animals-table "pounds"))} and hit "Enter". What happens?
-- Now type @show{(code '(bar-chart animals-table "weight"))} and hit "Enter". What happens?
+- Now type @show{(code '(bar-chart animals-table "pounds"))} and hit "Enter". What happens?
 - What does each bar represent?
 
 
@@ -95,7 +95,7 @@ Now type @show{(code '(pie-chart animals-table "species"))} and hit "Enter". Wha
 
 @right{@image{images/pie-species.png, 300}} 
 
-Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole. In this example we see that there is 1 animal that is a hermaphrodite, representing 3.1% of the population.
+Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole. In this example we see that there are 2 animals that are lizards, representing 6.3% of the population.
 
 <!--
 
