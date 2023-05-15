@@ -87,17 +87,34 @@
         (format "![~a](~a)~a" text img
                 (if (string=? width "") "" (format "{width=~a}" width))))))
 
+(define (variable-or-number? s)
+  (let ([result #t])
+    (for ([c s])
+      (when (not (or (char-alphabetic? c) (char-numeric? c)))
+        (set! result #f)))
+    result))
+
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  ((if (or (and (regexp-match "\\frac" text)
-                (or (regexp-match "\\div" text)
-                    (let ([n (string-length text)])
-                      (>= n 40))))
-           (and (regexp-match "\\sqrt" text)
-                (regexp-match "\\^" text)))
-       ;
-       make-mathjax-math
-       make-ascii-math) text))
+  (let ([use-mathjax?
+          (cond [(regexp-match "\\\\frac" text)
+                 (cond [(regexp-match "\\\\div" text) #t]
+                       [(>= (string-length text) 40) #t]
+                       [(regexp-match* "\\\\frac{(.+?)}" text)
+                        => (lambda (mm)
+                             (cond [(null? mm) #f]
+                                   [else (let ([use-mathjax? #f])
+                                           (for ([m mm])
+                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                               (unless (variable-or-number? frac-arg)
+                                                 (set! use-mathjax? #t))))
+                                           use-mathjax?)]))])]
+                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                [else #f])])
+    ;
+    ((if use-mathjax?
+         make-mathjax-math
+         make-ascii-math) text)))
 
 (define (make-mathjax-math text)
   (string-append
