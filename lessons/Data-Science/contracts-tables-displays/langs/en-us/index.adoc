@@ -54,7 +54,7 @@ If you have time and interest in digging deeper into contracts, we have a @lesso
 === Investigate
 
 [.lesson-instruction]
-Have students turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
+Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
 
 - What did these `sort` expressions do?
 ** _They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)_
@@ -64,15 +64,33 @@ Have students turn to @printable-exercise{functions-for-tables.adoc} and complet
 - What does it mean that the Range of `sort` is Table?
 ** _The function produces a new table._
 
+As you can imagine, there are many other functions that work with tables, each with a different set of inputs. For each of these functions, we need to keep track of three things:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
+
+[.lesson-point]
+Contracts are the _instruction manual_ for functions
+
+The Domain in the contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
+
 [.lesson-instruction]
-Have students complete question 7-10.
+Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 - How did `sort` work with quantitative columns?
 ** _true sorted the values from least to greatest. false sorted the values from biggest to smallest._
 - What new questions did you think of that could be answered using `sort`?
 
 [.lesson-instruction]
-Have students complete @printable-exercise{functions-for-tables-cont.adoc}, working with the `count` and `first-n-rows` functions.
+Once you know how to read Contracts, you can easily use all the tools in our programming language. Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+
+
+=== Common Misconceptions
+
+Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @{show(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
 
 === Synthesize
 
@@ -86,7 +104,7 @@ Have students complete @printable-exercise{functions-for-tables-cont.adoc}, work
 - How else do journalists and newscasters display summaries of data besides in tables?
 ** _Ideally someone will say bar charts!_
 
-== A Visual Scaffold for Putting Functions Together
+== Composing with Circles of Evaluation @duration{10 minutes}
 
 === Overview
 
@@ -145,7 +163,7 @@ That would translate to the following code:
 - What did you Notice?
 - What did you wonder?
 
-== Functions for Making Displays @duration{20 minutes}
+== Functions for Making Displays @duration{25 minutes}
 
 === Overview
 
@@ -168,7 +186,7 @@ The `count` function summarized the data for a single variable in a new table. B
 
 [.lesson-instruction]
 --
-- Turn to @printable-exercise{exploring-displays-alt.adoc}.
+- Turn to @printable-exercise{exploring-displays.adoc}.
 - Let's look at the first function together.
 - What is the name of the function?
 ** _bar-chart_
@@ -184,10 +202,22 @@ The `count` function summarized the data for a single variable in a new table. B
 - Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the contract to get them building!
 --
 
+These functions can be visualized as another Circle of Evaluation:
+
+@show{(coe '(pie-chart animals-table "species"))}
+
+Just as we can use Circles of Evaluation with `sort`, `count`, and `first-n-rows`, we can put Circles to work to help us write code to build more specific displays.
+
+[.lesson-instruction]
+- Turn to @printable-exercise{coe-displays.adoc} and apply Circles of Evaluation to figure out the code for building more specific displays.
+- For more practice, try @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
+
+Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. Consider what you might compare each of these displays against.
+
 === Synthesize
 
 - Which displays worked with categorical data?
-** _pie-chart & bar-chart_
+** `pie-chart` _and_ `bar-chart`
 - Why might you choose a bar chart over a pie chart or vice versa?
 ** `pie-chart` _only makes sense when you have the full picture, since it's representing the proportion of the whole_
 ** `bar-chart` _shows the count_
@@ -195,22 +225,6 @@ The `count` function summarized the data for a single variable in a new table. B
 ** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
 ** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
 
-== Making More Specific Displays 
-
-=== Overview
-
-Just as we could use Circles of Evaluation with `sort`, `count`, and `first-n-rows`, we can put them to work to help us write code to build more specific displays.
-
-=== Launch
-
-Sometimes we want to drill down into the data and make a display that focuses on a subset of the values.
-
-=== Investigate
-
-Turn to @printable-exercise{coe-displays.adoc} and apply Circles of Evaluation to figure out the code for building more specific displays. 
-
-Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. Consider what you might compare each of these displays against.
-
 == Additional Exercises
 
-For more practice composing table functions, you can complete @opt-printable-exercise{coe-displays-2.adoc}
+For more practice composing table functions, you can complete @opt-printable-exercise{coe-displays-2.adoc} and/or @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
