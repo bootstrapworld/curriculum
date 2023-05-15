@@ -90,9 +90,12 @@
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
   ((if (or (and (regexp-match "\\frac" text)
-                (regexp-match "\\div" text))
+                (or (regexp-match "\\div" text)
+                    (let ([n (string-length text)])
+                      (>= n 40))))
            (and (regexp-match "\\sqrt" text)
                 (regexp-match "\\^" text)))
+       ;
        make-mathjax-math
        make-ascii-math) text))
 
