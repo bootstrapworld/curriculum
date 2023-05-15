@@ -71,7 +71,7 @@ It's useful to use __tree diagrams__, so we can see what our possible choices ar
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Permutation with Replacement
 
 Let's diagram all permutations for a 1-course meal. With six menu items, a 1-course meal could be Lasagna, Pizza, Chicken, Ravioli, Soup or Ziti. That means the set of all possible 1-course @vocab{permutations} has six different meals. In less than a week, we'd have tried all the possibilities!
@@ -80,7 +80,7 @@ Let's diagram all permutations for a 1-course meal. With six menu items, a 1-cou
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Permutation with Replacement
 
 But what about a 2-course meal? Each of our 1st-course choices has __another tree__ underneath it!
@@ -155,8 +155,6 @@ With four courses, it would take more than __3.5 years__ to try them all -- if w
 
 What are some other examples of permutation? 
 
-@show{(coe '(/ (/ z z) (/ 35 b)))}
-
 
 <!--
 Possible solutions: Password strength, guessing combination locks...
@@ -180,7 +178,7 @@ With no one ordering four of the same thing and far fewer choices to make, it's 
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Permutation without Replacement
 
 Now how long would it take to try every permutation?
@@ -191,7 +189,7 @@ Let's start by drawing the tree diagram for 1st place:
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Permutation without Replacement
 
 There are *four* possible items we could eat for our first course, so we have 4 possible branches. After we eat that course, it's time to order the second course! How many branches are there for the second course, under each first course choice?
@@ -210,7 +208,7 @@ If we start with Chicken, we can't order Chicken again, but we can choose from P
 
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Permutation without Replacement
 
 
@@ -237,6 +235,70 @@ That's six different permutatons that start with Chicken, and we have four diffe
 # Permutation without Replacement
 
 
-We can compute the number of permutations-without-replacement by multiplying the number of choices as they shrink after each course: @math{4 \times 3 \times 2 \times 1 = 24}.
+We can compute the number of permutations-without- replacement by multiplying the number of choices as they shrink after each course: @math{4 \times 3 \times 2 \times 1 = 24}.
+
+<!--
+This lesson assumes that students are familiar with factorial notation (@math{n!}). To teach this lesson _without_ students knowing about factorials, you will need to skip the function notation that follows. This is feasible, but not recommended.
+
+Reminder: @math{0! = 1} @link{https://www.chilimath.com/lessons/intermediate-algebra/zero-factorial/, Click here for an explanation}.
+-->
+
+---
+{layout="Launch"}
+# Permutation without Replacement
 
 
+Now we could try all the permutations in just under a month!
+
+**Luigi decides this makes it too easy, and now that his kitchen is running smoothly he decides to bring back the original six-item menu.**
+
+In this situation, there might be six items on the menu, but we want to __stop multiplying after the first four items are chosen__.
+
+@math{6 \times 5 \times 4 \times 3 = 360}
+
+---
+{layout="Launch"}
+# Permutation without Replacement
+
+
+We can write this by starting with our factorial notation from before (where every number from 6 to 1 is multiplied), and then "undoing" the @math{2 \times 1}. This takes the form of __dividing__:
+
+@math{\frac{6 \times 5 \times 4 \times 3 \times 2 \times 1}{2 \times 1} = \frac{6!}{2!} = 360}
+
+---
+{layout="Launch"}
+# Permutation without Replacement
+
+
+With this number of possible combinations, it would take almost a year to try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
+
+We can write this relationship as a function:
+
+@mathblock{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
+
+
+---
+{layout="Launch"}
+# Permutation without Replacement
+
+For practice, complete the @printable-exercise{permutation.adoc} worksheet.
+
+In Pyret, we can compute the factorial of 6 with the `factorial` function. For example, `factorial(6)` will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}. In the Definitions Area, use the Design Recipe to define `num-permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).
+
+
+
+---
+{layout="Synthesize"}
+# Permutation without Replacement
+
+- What is the difference between permutation with or without replacement?
+
+- What are some real-world examples of each?
+
+
+---
+{layout="Supplemental"}
+# Additional Exercises
+
+* @opt-starter-file{permutations-and-combinations} provides students with a chance to view all the permutations and combinations for Luigi's menu.
+* @opt-printable-exercise{tree-diagrams2.adoc}
