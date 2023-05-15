@@ -274,7 +274,7 @@ With this number of possible combinations, it would take almost a year to try th
 
 We can write this relationship as a function:
 
-@mathblock{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
+@math{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
 
 
 ---
