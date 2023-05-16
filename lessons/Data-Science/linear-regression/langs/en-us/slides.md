@@ -127,7 +127,7 @@ Let's explore scatter plots for weeks-v-pounds and weeks-v-age.
 
 <!--
 *Common Misconceptions*
-* *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three datapoints!
+* *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three data points!
 
 -->
 ---

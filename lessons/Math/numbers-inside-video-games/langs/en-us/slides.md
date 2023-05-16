@@ -48,7 +48,7 @@ Common Misconceptions:
 {layout="Launch"}
 # Connecting to Real Games 
 
-What are your favorite current video games?
+What are your favorite video games?
 
 <!--
 Project their list on the board and select one to discuss as a class.

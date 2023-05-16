@@ -54,6 +54,18 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 <!--
 
 -->
+{layout="Investigate-K"}
+# Mean
+
+The arithmetic mean is the number that "balances" all the other numbers in the sample. So let's do some real balancing!{style="font-size:14pt"}
+
+_Each group of three will need a ruler, 4-8 pennies, and at least one pen or pencil._{style="font-size:14pt"}
+
+1. The ruler represents a number line with values (weight) distributed equally across the line. If there's values at every inch from 0 to 12, where should the pencil be placed in order to balance the ruler on top of it?{style="font-size:14pt"}
+2. Place a penny at 1 and 11. Where must the pencil be placed to balance those two values? What is the mean of the values [1, 11]?{style="font-size:14pt"}
+3. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?{style="font-size:14pt"}
+4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?{style="font-size:14pt"}
+
 ---
 {layout="InvestigateC"}
 # Mean
@@ -104,7 +116,7 @@ You computed the mean of that column to be almost exactly 41 pounds, but if we l
 
 In fact, more than half of the animals weigh less than _15 pounds_. What is throwing off the average so much?
 
-@image{images/num-line-pounds.png}
+@image{images/num-line-pounds2.png}
 <!--
 
 -->

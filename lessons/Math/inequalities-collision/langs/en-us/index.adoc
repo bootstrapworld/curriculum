@@ -30,9 +30,10 @@
 == Problem Decomposition Returns! @duration{20 minutes}
 
 === Overview
-Students revisit problem decomposition - the idea of breaking down a complex problem into simpler pieces, solving those pieces separately, and then composig the solutions to solve the original..
+Students revisit problem decomposition - the idea of breaking down a complex problem into simpler pieces, solving those pieces separately, and then composing the solutions to solve the original.
 
 === Launch
+Knowing how far apart our characters are is the first step. But in order to keep track of the score, we need to know when they are close enough to collide!
 
 "Problem Decomposition" is a powerful tool, which lets us break apart complex problems into simpler ones that we can solve, test, and then glue together into a complex solution.
 
@@ -45,6 +46,7 @@ Students may remember that there are two strategies for doing this:
 For the following complex word problem, have students *first* decide which strategy they want to use, and then apply the Design Recipe to build the functions they need.
 
 [.lesson-instruction]
+* Before we focus on our game code, let's practice breaking apart a different complex word problem.
 * A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Write a function that computes the area of the triangle as a function of time.
 * This is easier to think about as two functions:
 ** one that computes the height of the pole, based on the seconds
@@ -79,11 +81,11 @@ Knowing how far apart our characters are is the first step. We still need the co
 ** another that checks if those same coordinates are less than 50 pixels apart, based on the distance
 * Does one function rely on the other? If so, which one?
 * Complete @printable-exercise{pages/collision.adoc}.
-* When you've finished, open your saved game file and fix the @code function in your game file, and click "Run"!
+* When you've finished, open your saved game file and fix the @show{(code 'collision?)} function in your @starter-file{program-list, game file}, and click "Run"!
 
 === Synthesize
 - In our flag-pole exercise, we had to write two functions and could start with one or the other. In our game, however, we began already having written  the `distance` function! Is this *Top-Down* or *Bottom-Up* decomposition?
-- Explicitly point out that the @show{(code 'collide?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
+- Explicitly point out that the @show{(code 'collision?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
 - Connect this back to `profit` (from @lesson-link{problem-decomposition, Problem Decomposition}), which relied on `revenue` and `cost`. Which function(s) would a top-down strategy address first?
 - Connect this back to @show{(code 'onscreen?)} (from @lesson-link{inequalities3-sam, Sam the Butterfly}), which relied on @show{(code 'safe-left?)} and @show{(code 'safe-right?)}. Which function(s) would a bottom-up strategy address first?
 
