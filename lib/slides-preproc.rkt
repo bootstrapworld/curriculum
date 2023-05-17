@@ -110,6 +110,8 @@
                                                  (set! use-mathjax? #t))))
                                            use-mathjax?)]))])]
                 [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                [(regexp-match "\\\\\\\\" text) #t]
+                [(regexp-match "\\\\mbox" text) #t]
                 [else #f])])
     ;
     ((if use-mathjax?

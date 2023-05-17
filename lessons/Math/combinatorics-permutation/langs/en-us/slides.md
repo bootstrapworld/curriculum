@@ -119,7 +119,7 @@ The number of @vocab{permutations} is computed based on two things:
 
 Let's see this as a function:
 
-@blockmath{permute\mbox{-}w\mbox{-}replace(items, choose) = choose^{items} \\ \\
+@math{permute\mbox{-}w\mbox{-}replace(items, choose) = choose^{items} \\ \\
 
 permute\mbox{-}w\mbox{-}replace(6, 1) = 6^{1} = 6 \\ \\
 
@@ -135,7 +135,7 @@ permute\mbox{-}w\mbox{-}replace(6, 3) = 6^{3} = 216}
 
 How many permutations are there for a 4-course meal chosen from Luigi's 6-item menu?
 
-@blockmath{permute\mbox{-}w\mbox{-}replace(6, 4) = 6^{4} = 1296}
+@math{permute\mbox{-}w\mbox{-}replace(6, 4) = 6^{4} = 1296}
 
 With four courses, it would take more than __3.5 years__ to try them all -- if we ate dinner at Luigi's every night!
 
