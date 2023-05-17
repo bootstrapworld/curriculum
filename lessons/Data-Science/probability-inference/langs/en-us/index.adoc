@@ -43,7 +43,7 @@ Students consider a classic randomness scenario: the probability that a coin wil
 
 === Launch
 
-@right{@image{images/heads.png, 110}} They’ll flip a coin repeatedly. On each flip, the stranger gives you a dollar if it comes up tails. If it comes up heads, you pay them a dollar.
+@right{@image{images/heads.png, 110}} A stranger on the street invites you to play a game of chance. They’ll flip a coin repeatedly. On each flip, the stranger gives you a dollar if it comes up tails. If it comes up heads, you pay them a dollar.
 
 "It's a pure game of chance", they tell you, "we each have equal odds of winning".
 
@@ -51,7 +51,6 @@ Students consider a classic randomness scenario: the probability that a coin wil
 --
 If you decide to play the game, how could you then decide if the stranger’s coin is fair, or if the stranger is scamming you?
 
-- What do you think? Can you trust them to play fair?
 - For a fair coin, what are the chances of it landing heads? Tails?
 ** _A fair coin has a 50% chance of landing heads and a 50% chance of landing tails._
 - How do you know if a coin is fair or not?
@@ -60,11 +59,9 @@ If you decide to play the game, how could you then decide if the stranger’s co
 
 === Investigate
 [.lesson-point]
-A fair coin should land on "heads" about as often as it lands on "tails".
+A fair coin should land on "heads" about as often as it lands on "tails": half the time.
 
-The @vocab{null hypothesis} represents an assumption that there is no significant difference between two sampled populations. In other words, any difference is due to naturally-occuring variations.
-
-In general, we assume that in the long run, an ordinary coin will land on "heads" 50% of the time. Our assumption that there is no bias towards "heads" or "tails" is our "null hypothesis". A weighted coin, on the other hand, might be heavier on one side, creating a @vocab{bias} toward one side!
+In general, we assume that in the long run, an ordinary coin will land on "heads" 50% of the time. Our assumption that there is no bias towards "heads" or "tails" is our "null hypothesis". A weighted coin, on the other hand, might be heavier on one side, creating a @vocab{bias} toward one side! A since we lose money on heads, we’re worried about bias in favor of heads.
 
 _So how do we test the @vocab{null hypothesis}?_
 
@@ -75,18 +72,16 @@ Have students share back their sample results, and their predictions after 5 sam
 
 Do any samples seem to undermine the null hypothesis?
 
-In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _produce evidence that rejects the null hypothesis, or fail to do so_. If there is evidence to reject the null hypothesis, larger samples, will give us more of it.
+In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _produce enough evidence to reject the null hypothesis, or fail to do so_. If the null hypothesis is actually false, larger samples give us a better chance of producing evidence to reject it.
 
 The chances of getting "heads" from a fair coin three times in a row aren't too small: 1-in-8! Maybe it was just the luck of the draw, and the coin is still fair.
 
-Would we be getting scammed if the stranger’s coin flipped heads 10 times in a row? The probability of a fair coin getting no tails in 10 flips is @math{\frac{1}{2}^10}, or roughly 0.001. So here’s what we’d have to say about our hypothesis test:
+Should we suspect a scam if the stranger’s coin flipped heads 10 times in a row? The probability of a fair coin getting no tails in 10 flips is @math{{\frac{1}{2}}^{10}}, or roughly 0.001. So here’s what we’d have to say about our hypothesis test:
 
-"If the coin was fair, the probability of getting so zero tails in 10 flips is just 0.001."
+"If the coin was fair, the probability of getting so few (zero) tails in 10 flips is just 0.001."
 
 Statisticians would say it slightly differently:
 "If the null hypothesis were true, then the probability of getting sample results at least as extreme as the ones observed is 0.001."
-
-But of course, there *is* a way. It's just..._incredibly unlikely_.
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
@@ -107,6 +102,8 @@ Statisticians use formal language to express the probability of obtaining sample
 !===
 |===
 
+But of course, there *is* a way. It's just..._incredibly unlikely_.
+
 === Common Misconceptions
 Students may think that _any_ sample from a fair coin should have an equal number of heads and tails outcomes. That's not true at all! A fair coin _might_ land on "tails" three times in a row! The fact that this is possible doesn't mean it's _likely_. Landing on "tails" five times in a row? Still possible, but much less likely.
 
@@ -115,7 +112,7 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 === Synthesize
 
 - Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?
-** _We could record how many times the die landed on each number. If the die is fair, we should see that it lands on each number approximately equally._
+** _We could record how many times the die landed on each number after rolling many times. If the die is fair, we should see that it lands on each number approximately equally._
 - Could a coin come up "heads" twice in a row, and still be a fair coin? Why or why not? What about 10 times in a row? 20?
 ** _The coin could be fair in all of these intsances! Heads 20 times in a row, however, is extremely unlikely._
 - What is the relationship between how weighted a coin is, and how many samples you need to figure it out?
@@ -126,24 +123,22 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 === Overview
 Statistical inference involves looking at a sample and trying to _infer something you don’t know_ about a larger population. This requires a sort of backwards reasoning, kind of like making a guess about a _cause_, based on the _effect_ that we see.
 
-Because we know that the chance of coming up heads each time for a "population" of flips of a fair coin is 0.5, we can do probability calculations like "the probability of getting all three heads in three coin flips is @math{0.5 \times 0.5 \times 0.5 = 0.125}." Likewise, we can say the probability of getting three of a kind in a randomly dealt set of five cards is about 0.02.
-
 === Launch
 [.lesson-point]
 Probability reasons forwards
 
-"Based on what we know is true in the population, what’s the chance of this or that happening in a sample?""
+Because we know that the chance of coming up heads each time for a "population" of flips of a fair coin is 0.5, we can do probability calculations like "the probability of getting all three heads in three coin flips is @math{0.5 \times 0.5 \times 0.5 = 0.125}." Likewise, we can say the probability of getting three of a kind in a randomly dealt set of five cards is 0.02.
+
+"Based on what we know is true in the population, what’s the chance of this or that happening in a sample?" __This is the kind of reasoning involved in probability.__
+
+[.lesson-point]
+Inference Reasons Backwards
 
 In the coin-flip activity, we took samples of coin flips and used our intuition about _chance_ and _probability_ to make @vocab{inferences} about whether the coin was fair or weighted.
 
 In other words, we looked at sample results and used them to decide what to believe about the population of all flips of that coin: __was the overall chance of heads really 0.5? __
 
-In statistics, we run the process in reverse: we take a sample and then *_infer_ something we didn't know to begin with*.
-
-[.lesson-point]
-Inference Reasons Backwards
-
-"Based on what we saw in our sample, what do we believe is true about the underlying population?"
+"Based on what we saw in our sample, what do we believe is true about the underlying population?" __This is the kind of reasoning involved in inference.__
 
 @vocab{Statistical inference} is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art!
 
@@ -241,7 +236,7 @@ Now that students are comfortable using the `Sampler`, it's time to dig into the
 }
 
 [.lesson-point]
-The most accute samples are random, and large!
+Random samples help avoid bias, and larger samples get closer estimates of what’s true for the whole population.
 
 === Common Misconceptions
 Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
