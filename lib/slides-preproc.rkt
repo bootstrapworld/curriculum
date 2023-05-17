@@ -99,6 +99,7 @@
   (let ([use-mathjax?
           (cond [(regexp-match "\\\\frac" text)
                  (cond [(regexp-match "\\\\div" text) #t]
+                       [(regexp-match "\\^" text) #t]
                        [(>= (string-length text) 40) #t]
                        [(regexp-match* "\\\\frac{(.+?)}" text)
                         => (lambda (mm)
@@ -120,7 +121,7 @@
 
 (define (make-mathjax-math text)
   (string-append
-    "$$$ math\n"
+    "\n$$$ math\n"
     text
     "\n"
     "$$$\n"))
