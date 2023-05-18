@@ -101,7 +101,7 @@ Reading expressions aloud can often help students think about the meaning of the
 {layout="Launch"}
 # Circles of Evaluation
 
-- Turn to @printable-exercise{pages/practice-translating.adoc}. Each row of the table represents a single arithmetic expression, written in three different ways. Fill in the empty spaces so that all three representations match.
+- Turn to @printable-exercise{pages/translating.adoc}. Each row of the table represents a single arithmetic expression, written in three different ways. Fill in the empty spaces so that all three representations match.
 
 - Next, complete @printable-exercise{pages/matching-words-to-circles.adoc}.
 
