@@ -4,25 +4,33 @@
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+
+* __Lines are made of points (try to avoid referring to "lines" as much as "collections of points")__
+* __Linear functions can be represented as straight lines on a graph or as sequences that change at a constant rate in a table.__
 -->
 
 ---
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-Turn to Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and Notice and Wonder about this table and graph.
+Turn to part 1 of @printable-exercise{notice-wonder-linearity.adoc}.
+
+What do you Notice? What do you Wonder? 
 
 @image{images/notice-wonder.png}{width="700"}
 
 <!--
-Students can record their responses on  @printable-exercise{notice-wonder-linearity.adoc}.
+Although answers will vary, important observations include: 
+- each (x,y) pair on the table corresponds to a point on the graph
+- both the x and y values in the table are increasing by consistent intervals
+- the points on the graph are connected by a straight line.
 -->
 
 ---
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
-Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
+Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.{style="font-size:16pt"} 
 
 Can you figure out what the next (x,y) pair should be for each of them?{style="font-size:16pt"}  
 
@@ -58,7 +66,7 @@ The line representing the @vocab{linear} relationship would not only include the
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, Matching Tables to Graphs}.
+Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
 
 Optional: If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
@@ -83,7 +91,7 @@ On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis mu
 We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
 
 <!--
-Optional: If you're ready to challenge your students to match tables and graphs with shuffled rows, have them complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+Optional: If you're ready to challenge your students to match tables and graphs with shuffled rows, and they haven't completed it already, you can direct them to complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 -->
 
@@ -98,17 +106,16 @@ Tables only show us _some points_ on a line, whereas a line itself is made up of
 While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Linear, Non-Linear, or Bust!
 
-What do you Notice? What do you Wonder? If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?{style="font-size:15pt"}
+If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?
 
 @image{images/set-of-6-graphs.png}{width="700"}
 
 <!--
-Students can record their responses on  @printable-exercise{graphs-all-linear.adoc}.
+Continue to the next slide where students will have access to a page to record their thinking.
 -->
-
 
 ---
 {layout="LaunchC"}
@@ -116,7 +123,15 @@ Students can record their responses on  @printable-exercise{graphs-all-linear.ad
 
 Linear relationships in a graph always appear as straight lines.
 
-Three of the graphs represent @vocab{linear} relationships, and three show other, non-linear relationships.
+Turn to @printable-exercise{graphs-all-linear.adoc}.
+
+What do you Notice? What do you Wonder? 
+
+---
+{layout="LaunchC"}
+# Linear, Non-Linear, or Bust!
+
+Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vocab{linear} relationships, and three show other, non-linear relationships.  Which are linear?
 
 @image{images/set-of-6-graphs.png}{width="700"}
 
@@ -127,33 +142,30 @@ Three of the graphs represent @vocab{linear} relationships, and three show other
 
 **If all linear relationships can be shown as tables, does that mean all tables are linear?**
 
-Complete @printable-exercise{tables-all-linear.adoc}.
-
-@image{images/set-of-6-tables.png}{width="600"}
-
-<!--
-Students can record their reflections on  @printable-exercise{tables-all-linear.adoc}.
--->
+@image{images/set-of-6-tables.png}
 
 ---
-{layout="LaunchC"}
+{layout="Launch"}
 # Linear, Non-Linear, or Bust!
-
-@image{images/set-of-6-tables.png}
 
 Linear relationships in a table show up as sequences that change at a constant rate. 
-
-Three of the tables show linear relationships, and three show non-linear relationships. 
-
----
-{layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
-
-@image{images/set-of-6-tables.png}
 
 The linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease). 
 
 The other tables may show patterns, but they aren’t linear!
+
+Complete @printable-exercise{tables-all-linear.adoc}.
+
+---
+{layout="LaunchC"}
+# Linear, Non-Linear, or Bust!
+
+Three of the tables show linear relationships, and three show non-linear relationships.{style="font-size:14pt"} 
+- Which are linear?{style="font-size:14pt"}
+- Were you able to figure out what the next (x,y) pair should be for each of them?{style="font-size:14pt"}
+- Were you able to guess what the y-value for each table would be when x is 0?{style="font-size:14pt"}
+
+@image{images/set-of-6-tables.png}
 
 ---
 {layout="LaunchC"}
@@ -204,12 +216,17 @@ Turn to @printable-exercise{slope-int-tables-intro.adoc}
 - In the table below: How much does y increase as x increases by 1? (This is the *slope*.) 
 - What is the y-intercept? (Figure this out by finding the y-value when @math{x = 0}.)
 
+<!--
+* _We can see that the y-values increase by 2 each time x increases by 1, giving us a @vocab{slope} of 2._
+* _Some students may need an explicit demonstration of subtracting two adjacent y-values in order to recognize that they are changing by 2._
+* _The @vocab{y-intercept} is 1._
+-->
+
 ---
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
 Complete @printable-exercise{slope-int-tables-basic.adoc} for more practice before we move on to more complicated tables.
-
 
 ---
 {layout="Launch"}
@@ -235,7 +252,7 @@ Life isn't always so simple!
 | x |  2 | 5 | 8  | 11
 | y |  3 | 9 | 15 | 21
 
-Try extending the second table (above) and filling in the missing rows to find the slope and y-intercept.
+Try extending the table (#2 on @printable-exercise{slope-int-tables-intro.adoc}) and filling in the missing rows to find the slope and y-intercept.
 
 What strategies did you use to extend the table?
 
@@ -261,13 +278,15 @@ This is often described as  @math{\frac{ChangeInY}{ChangeInX}} or @math{\frac{ri
 # Slope and y-Intercept from Tables
 
 @table{6}
-| x | 3 | 20 | 5  |  9 | 1
-| y | 5 | 56 | 11 | 23 | -1
+| x | __3__ | __20__ | 5  |  9 | 1
+| y | __5__ | __56__ | 11 | 23 | -1
 
-Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.
+Taking the first two pairs of values gives us @math{\frac{(56 - 5)}{(20 - 3)}}, which simplifies to @math{\frac{51}{17}}, for a slope of @math{3}.{style="font-size:14pt"} 
 
-* Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
-* Are there other strategies we could have used to find the slope?
+__Order matters!__ Whatever order we subtracted the y-values in must be the same order we subtract the x-values in.{style="font-size:14pt"}
+
+* Pick two other pairs of values from the table (#3 on @printable-exercise{slope-int-tables-intro.adoc}) and compute the @vocab{slope}. Did you get the same answer?{style="font-size:14pt"}
+* Are there other strategies we could have used to find the slope?{style="font-size:14pt"}
 
 
 ---
@@ -282,7 +301,7 @@ Let's get some practice identifying the slope of a linear function in a table by
 
 @vocab{Slope} and @vocab{y-intercept} form the essence of linear functions. If we can find them in a sample of data, we can make predictions that go outside that sample. 
 
-For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point in time!
+For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point during its trip!
 
 ---
 {layout="LaunchC"}

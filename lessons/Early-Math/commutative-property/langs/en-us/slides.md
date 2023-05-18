@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # The Commutative Property
 
-- Turn to @printable-exercise{pages/discover-comm.adoc}. Look at the first problem. What do you Notice about the two Circles of Evaluation? What do you Wonder?
+- Turn to @printable-exercise{pages/discover-comm.adoc}. What do you Notice about the two Circles of Evaluation in the first problem? What do you Wonder?
 
 @image{images/coes.png}
 

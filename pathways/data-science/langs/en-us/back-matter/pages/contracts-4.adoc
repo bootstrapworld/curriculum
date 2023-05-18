@@ -7,28 +7,6 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 |===
 |Name||Domain||Range
 
-
-| `median`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Number`
-5+|`_median(animals-table, "age")_`
-
-| `modes`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `List<Number>`
-5+|`_modes(animals-table, "age")_`
-
-| `bar-chart`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Image`
-5+|`_bar-chart(animals-table, "legs"_`)
-
 | `pie-chart`
 | `{two-colons}`
 | `Table, String`
@@ -36,39 +14,60 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 | `Image`
 5+|`_pie-chart(animals-table, "species"_`)
 
-| `histogram`
+| `pie-chart-summarized`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, column {two-colons} String, bin-width {two-colons} Number)`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
 | `->`
 | `Image`
-5+|`_histogram(animals-table, "name", age", 2)_`
+5+|`_pie-chart-summarized(animals-table, "age", "pounds")_`
 
-| `box-plot`
+| `put-image`
 | `{two-colons}`
-| `Table, String`
+| `Image, Number, Number, Image`
 | `->`
 | `Image`
-5+|`_box-plot(animals-table, "age")_`
+5+|`_put-image(star(30, "solid", "red"), 50, 150, rectangle(300, 200, "outline", "black"))_`
 
-| `modified-box-plot`
+| `radial-star`
 | `{two-colons}`
-| `Table, String)`
+| `Number, Number, Number, String, String`
 | `->`
 | `Image`
-5+|`_modified-box-plot(animals-table, "age")_`
+5+| `_radial-star(17, 50, 10, "solid", "orange")_`
 
-| `scatter-plot`
+| `random-rows`
 | `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `(t {two-colons} Table, num-rows {two-colons} Number)`
 | `->`
-| `Image`
-5+|`_scatter-plot(animals-table, "species", "pounds", "weeks")_`
+| `Table`
+5+|`_random-rows(animals-table, 5)_`
 
-| `image-scatter-plot`
+| `rectangle`
 | `{two-colons}`
-| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `Number, Number, String, String`
 | `->`
 | `Image`
-5+|`_image-scatter-plot(animals-table, "pounds", "weeks", animal-img)_`
+5+| `_rectangle(20, 80, "solid", "gold")_`
+
+| `regular-polygon`
+| `{two-colons}`
+| `Number, Number, String, String`
+| `->`
+| `Image`
+5+| `_regular-polygon(40, 8, "solid", "red")_`
+
+| `rhombus`
+| `{two-colons}`
+| `Number, Number, String, String`
+| `->`
+| `Image`
+5+| `_rhombus(20, 50, "solid", "turquoise")_`
+
+| `right-triangle`
+| `{two-colons}`
+| `Number, Number, String, String`
+| `->`
+| `Image`
+5+| `_right-triangle(20, 50, "outline", "black")_`
 
 |===

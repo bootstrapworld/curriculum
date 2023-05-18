@@ -37,7 +37,8 @@ Visme URLs for tree diagrams:
 
 |===
 
-== Permutation with Replacement
+== Permutation with Replacement @duration{25 minutes}
+
 
 === Overview
 Students are introduced to the concept of @vocab{permutation} (with replacement). They  compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations with replacement.
@@ -47,7 +48,7 @@ Students are introduced to the concept of @vocab{permutation} (with replacement)
 
 Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. The gimmick is that diners can __choose the order of the courses:__ you might start with Lasagna, but your friend can start with the Chicken Parmesan, and so on. And if your friend happens to really, *really* like Chicken Parmesan, they can choose to eat it for all four courses!
 
-They advertise "an almost-endless number of dining experiences". In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
+They advertise "an almost-endless number of dining experiences." In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
 
 [.lesson-point]
 In Permutations, order matters!
@@ -67,7 +68,7 @@ With six dishes to choose from and four courses to eat, how many @vocab{permutat
 
 [.lesson-instruction]
 --
-Luigi has six possible dishes to choose from. Discuss:
+Luigi has six possible dishes to choose from.
 
 - How many permutations could there be for a 1-course dinner?
 - How many permutations could there be for a 2-course dinner?
@@ -96,8 +97,9 @@ We had 36 possible 2-course meals, so choosing a third course means that each "e
 For a 4-course meal, we have a _four-level_ tree with six branches at every level! That's @math{6 \times 6 \times 6 \times 6 = 6^4 = 1296} possible permutations!
 
 The number of @vocab{permutations} is computed based on two things:
-. The number of possible menu __items__ (lasagna? Chicken? Soup?)
-. How many times we get to __choose__. (1-course meal? 3-course meal?)
+
+- The number of possible menu __items__. (Lasagna? Chicken? Soup?)
+- How many times we get to __choose__. (1-course meal? 3-course meal?)
 
 Let's see this as a function:
 
@@ -120,7 +122,9 @@ How many permutations are there for a 4-course meal chosen from Luigi's 6-item m
 With four courses, it would take more than __3.5 years__ to try them all -- if we ate dinner at Luigi's every night!
 
 [.lesson-instruction]
-In Pyret, we can raise a 6 to the power of four with the `num-expt` function. For example, `num-expt(6, 4)` will compute @math{6^4}. In the Definitions Area, use the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
+- In Pyret, we can raise a 6 to the power of four with the `num-expt` function.
+- For example, `num-expt(6, 4)` will compute @math{6^4}.
+- In the Definitions Area, use the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
 
 === Synthesis
 
@@ -128,7 +132,7 @@ What are some other examples of permutation? (Password strength, guessing combin
 
 
 
-== Permutation without Replacement
+== Permutation without Replacement @duration{25 minutes}
 
 === Overview
 Students build on their understanding of @vocab{permutation}, now extending it to situations _without_ replacement. They compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations without replacement.
@@ -152,7 +156,7 @@ There are *four* possible items we could eat for our first course, so we have 4 
 
 @span{.center}{@image{images/4-2-course-permute-wo-replacement.png}}
 
-We can't order the same thing twice so once we've eaten Pizza for the first course, there are only _three_ possible items left to choose from: Chicken, Ravioli and Soup. If we start with Chicken, we can't order Chicken again, but we can choose from Pizza, Ravioli & Soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
+We can't order the same thing twice so once we've eaten Pizza for the first course, there are only _three_ possible items left to choose from: Chicken, Ravioli and Soup. If we start with Chicken, we can't order Chicken again, but we can choose from Pizza, Ravioli and Soup for our second course. No matter what we choose for our first course, we still have three choices left for our second course. This is called @vocab{permutation} *without replacement*. Now there are only @math{4 \times 3 = 12} permutations, instead of the 16 we'd have with replacement.
 
 We can visualize our four courses as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. In the tree diagram below, you can see a _partial_ drawing of all four courses.
 

@@ -34,7 +34,7 @@ Summarizing a big dataset means that some information gets lost, so it’s impor
 # Mean
 
 - Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.{style="font-size:14pt"}
-- Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.{style="font-size:14pt"}
+- Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets funding.{style="font-size:14pt"}
 - Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.{style="font-size:14pt"}
 - When buying uniforms for a sports team, a coach might look for the most common size that the players wear.{style="font-size:14pt"}
 
@@ -54,14 +54,27 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 <!--
 
 -->
----
-{layout="Investigate"}
+{layout="Investigate-K"}
 # Mean
 
-* Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
+The arithmetic mean is the number that "balances" all the other numbers in the sample. So let's do some real balancing!{style="font-size:14pt"}
 
-If we plotted all the pounds values as points on a number line, what could we say about the **average** of those values? Is there a **midpoint**? Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
+_Each group of three will need a ruler, 4-8 pennies, and at least one pen or pencil._{style="font-size:14pt"}
 
+1. The ruler represents a number line with values (weight) distributed equally across the line. If there's values at every inch from 0 to 12, where should the pencil be placed in order to balance the ruler on top of it?{style="font-size:14pt"}
+2. Place a penny at 1 and 11. Where must the pencil be placed to balance those two values? What is the mean of the values [1, 11]?{style="font-size:14pt"}
+3. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?{style="font-size:14pt"}
+4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?{style="font-size:14pt"}
+
+---
+{layout="InvestigateC"}
+# Mean
+
+- If we plotted all the pounds values as points on a number line, what could we say about the **average** of those values? 
+- Is there a **midpoint**? 
+- Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
+
+@image{images/num-line-pounds.png}
 <!--
 
 -->
@@ -85,7 +98,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 ---
 {layout="Investigate"}
 # Mean
-
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Type `mean(animals-table, "pounds")`. 
 - What does this give us?
 - Does this support the Bureau’s claims?
@@ -103,6 +116,7 @@ You computed the mean of that column to be almost exactly 41 pounds, but if we l
 
 In fact, more than half of the animals weigh less than _15 pounds_. What is throwing off the average so much?
 
+@image{images/num-line-pounds2.png}
 <!--
 
 -->
@@ -156,19 +170,29 @@ The algorithm for finding the median of a quantitative column is:
 {layout="Investigate"}
 # Median
 
-* Pyret has a function to compute the median of a list as well. Find the contract in your contracts page.
+* Pyret has a function to compute the median of a list as well:
+
+@show{ (contract "median" '("Table" "String") "Number" )}
+
 * Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.
 * Is it different than the mean?
 * What can we conclude when the mean is so much greater than the median?
 * For practice, compute the mean and median for the weeks and age columns.
 
+<!--
+* _The median is 11.3._
+* _It is very different from the mean!_
+* _There are some very heavy animals that are causing the mean to be higher._
+* _Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3._
+-->
 ---
 {layout="Synthesize"}
 # Median
 
-By looking at the histogram, we can see that it's probably better to use the mean or median.
+By looking at the histogram, we can see whether it's probably better to use the mean or median.
 
-Strong left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up above the median. 
+* Strong left skewness and/or low outliers can pull the mean down below the median.
+* Right skewness and/or high outliers can pull the mean above the median. 
 
 Mean is generally the best measure of center, because it includes information from every single point. But it's inaccurate for highly-skewed datasets, so statisticians fall back to the median.
 
@@ -208,11 +232,14 @@ In Pyret, the mode(s) are calculated by the modes function, which consumes a Tab
 
 Compute the `modes` of the `pounds` column, and add it to @printable-exercise{pages/summarizing-columns-in-animals.adoc}. What did you get?
 
+<!--
+** _0.1 and 6.5_
+-->  
 ---
 {layout="Synthesize"}
 # Modes
 
-The most common number of pounds an animal weighs is 6.5! That’s well below our mean and even our median, which is further evidence of outliers or skewness.
+The most common animal weights are 0.1 and 6.5! These are well below our mean and even our median, which is further evidence of outliers or skewness.
 
 At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize animal weights isn’t ideal.
 
@@ -222,8 +249,8 @@ At this point, we have a lot of evidence that suggests the Bureau’s use of “
 
 We have three reasons to suspect that @vocab{mean} isn’t the best value to use:
 
-- The median is only 13.4 pounds.
-- The mode of our dataset is only 6.5 pounds, which suggests a cluster of animals that weigh less than one-sixth the mean.
+- The median is only 11.3 pounds.
+- The modes of our dataset are only 0.1 and 6.5 pounds, which suggests clusters of animals that weigh mere fractions of the mean.
 - When viewed as a histogram, we can see the right skewness and high outliers in the dataset. Mean is sensitive to datasets with skewness and/or outliers.
 ---
 {layout="Synthesize"}
@@ -231,7 +258,11 @@ We have three reasons to suspect that @vocab{mean} isn’t the best value to use
 
 **“In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore very few Americans were living in poverty."**
 
-Do you trust this statement? Why or why not? Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
+Do you trust this statement? Why or why not? 
+
+Consider how many policies or laws are informed by statistics like this! 
+
+Knowing about measures of center helps us see through misleading statements.
 
 ---
 {layout="Synthesize"}

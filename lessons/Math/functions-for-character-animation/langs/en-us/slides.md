@@ -14,13 +14,9 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - How might this apply to our game? 
 
 <!--
-How does a flip-book animation work? Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
-
-Why do we see movement from still images?
-Our eyes fill in the gaps between rapidly changing images.
-
-How might this apply to our game?
-If we change image coordinates a little bit at a time, they will appear to move.
+1. Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.
+1. Our eyes fill in the gaps between rapidly changing images.
+1. If we change image coordinates a little bit at a time, they will appear to move.
 -->
 
 ---
@@ -50,7 +46,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 {layout="Launch"}
 # Animation
 
-- Open your saved copy of the Game Starter File, or @starter-file{game, make a new copy}.
+- Sign in to @starter-file{program-list} and open your saved copy of the Game Starter File.
 - What did you notice about the movement of TARGET and DANGER? What was changing about them?
 - What jobs could we hand over to the computer to make it possible for us to play the game? 
 
@@ -66,10 +62,12 @@ What jobs could we hand over to the computer to make it possible for us to play 
 {layout="Investigate-DN"}
 # Animation
 
-- In your saved copy of the @starter-file{game}, examine the `update-danger` function
-- Identify the contract, and interpret what the function is currently doing
-- Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
-- Copy the code for `update-danger` into your starter file and click Run.
+* Examine the `update-danger` function in your game file. 
+* Identify the contract, and interpret what the function is currently doing
+* Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
+* Copy the code for `update-danger` into your starter file and click Run.
+
+_Did you close out of your game by accident? You can always go back to @starter-file{program-list} to find it._{style="font-size:12pt"} 
 
 ---
 {layout="Investigate-DN"}
@@ -90,6 +88,13 @@ Be sure to modify your purpose statements and examples if you change your functi
 # Synthesize
 Connecting the code to the underlying math is important - especially if you want to customize your game!
 
-- What part of the function controls the character's _speed?_
-- What part of the function controls the character's _direction?_
-- If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the Domain? What about the Range?
+1. What part of the function controls the character's _speed?_
+1. What part of the function controls the character's _direction?_
+1. If you wanted the characters to move in 2 dimensions (diagonally, for example), would anything have to change about the Domain? What about the Range?
+
+<!--
+1. The slope or rate
+1. Whether the rate is positive or negative
+1. @ifproglang{pyret}{The Domain already includes the x and y coordinates, so it would stay the same, but the Range is currently only focused on the x-coordinate and would need to also include the character's y-coordinate.}
+@ifproglang{wescheme}{The Domain and Range are only focused on the x-coordinate. We would also need to keep track of the y-coordinate for diagonal movement!}
+-->

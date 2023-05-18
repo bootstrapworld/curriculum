@@ -41,7 +41,7 @@ __Rule #2:__ The inputs to the function are written left-to-right, in the middle
 
 __Rule #3:__ Circles can contain other circles. 
 
-@image{images/coe1.png}
+@show{(coe '(/ 6 3))}
 
 <!--
 In this example, the function is division and the inputs are 6 and 3 (in that order!.
@@ -49,7 +49,7 @@ Math teachers: you may be used to calling division an *operator*, but operators 
 all just functions that we write a little differently! 
 -->
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Order of Operations
 
 What if we want to use multiple functions?  
@@ -57,12 +57,12 @@ What if we want to use multiple functions?
 What is the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Order of Operations
 
 Circles can contain other Circles. We basically replace the `3` from our earlier Circle of Evaluation with _another_ Circle, which adds 1 and 2!{style="font-size:15pt"}
 
-@image{images/coe2.png}{width="200"}	
+@show{(coe '(/ 6 (+ 1 2)))}
 
 ---
 {layout="Launch"}
@@ -71,26 +71,28 @@ Circles can contain other Circles. We basically replace the `3` from our earlier
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Order of Operations
 
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
-@image{images/coe3.png}
+@show{(coe '(* 5 6))}
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
+# Order of Operations
+
+How about the Circle of Evaluation for:
+
+ @math{(10 - 5) \times 6}
+
+---
+{layout="LaunchC"}
 # Order of Operations
 
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
----
-{layout="Launch"}
-# Order of Operations
-
-How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
-
-@image{images/coe4.png}{width="250"}	
+@show{(coe '(* (- 10 5) 6))}
 
 ---
 {layout="InvestigateC"}
@@ -120,10 +122,10 @@ The first thing the spider does is cross over a curved line - an open parenthesi
 After that, she crawls from left to right, visiting each of the inputs. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set1.png}{width="700"}
+@image{images/coe-set1.png}
 
 
 ---
@@ -133,13 +135,13 @@ After that, she crawls from left to right, visiting each of the inputs. Finally,
 Arithmetic expressions involving more than one operation will end up with more than one circle,  @ifproglang{wescheme}{and more than one pair of parentheses.}@ifproglang{pyret}{and the code requires parentheses to clarify the order in which the operations should be completed - whether or not there are parentheses in the original expression.}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 
 What would the code look like for this circle?
 
- @image{images/coe8.png}{width="200"}	
+@show{(coe '(* 2 (+ 3 8)))}
 
 <!-- 
 advance to next slide to reveal the answer
@@ -147,18 +149,18 @@ advance to next slide to reveal the answer
 -->
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
-@image{images/coe-set2.png}{width="700"}
+@image{images/coe-set2.png}
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 What would the code look like for this circle?
 
-@image{images/coe9.png}{width="200"}			
+@show{(coe '(/ 6 (+ 1 2)))}
 
 <!-- 
 @show{(code '(/ 6 (+ 1 2)))}
@@ -166,12 +168,12 @@ What would the code look like for this circle?
 
 
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 What would the code look like for this circle?
 
-@image{images/coe10.png}{width="200"}		
+@show{(coe '(* (- 10 5) 6))}
 
 <!-- 
 @show{(code '(* (- 10 5) 6))}
@@ -250,16 +252,15 @@ Possible responses:
 
 @image{images/coe-pair.png}
 
-There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
+There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no different.
 
-When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
+When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right. The `text` Circle would be: 
 
-The `text` Circle would be translated as @show{(coe  '(text "Good work!" 50 "red"))}
-
+@show{(code  '(text "Good work!" 50 "red"))}
 }
 
 ---
-{layout="Investigate-DN"}
+{layout="InvestigateC-DN"}
 # Testing out your Code
 
 Here is another circle to explore.{style="font-size:16pt"}

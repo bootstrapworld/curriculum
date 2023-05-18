@@ -1,7 +1,5 @@
 #lang racket
 
-; last modified 2023-04-25
-
 (require json)
 ; (require file/sha1)
 (require "readers.rkt")
@@ -467,7 +465,7 @@
        (let ([second-compt (second page-compts)])
          (cond [(and (or (string=? first-compt "pages")
                          (string=? first-compt "solution-pages"))
-                     *lesson-plan*)
+                     (or *lesson* *lesson-plan*))
                 (make-workbook-link #f
                   first-compt
                   (second page-compts)
@@ -1023,17 +1021,20 @@
         (newline o)))
     (newline o)))
 
+(define (store-title title-txt)
+  (unless *other-dir*
+    (let ([title-file (path-replace-extension *out-file* ".titletxt")]
+          [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
+      (call-with-output-file title-file
+        (lambda (o)
+          (display title-txt o) (newline o))
+        #:exists 'replace))))
+
 (define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
     (set! *page-title* title-txt)
-    (unless *other-dir*
-      (let ([title-file (path-replace-extension *out-file* ".titletxt")]
-            [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
-        (call-with-output-file title-file
-          (lambda (o)
-            (display title-txt o) (newline o))
-          #:exists 'replace)))
+    (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
     (display title o)
@@ -1282,7 +1283,7 @@
         (unless (string=? *lesson-plan* x)
           (set! *lesson-plan-base* x)))))
 
-  (when *lesson-plan*
+  (when (or *lesson* *lesson-plan*)
     (let ([workbook-pages-ls-file
             (format "distribution/~a/lessons/~a/pages/.cached/.workbook-pages-ls.txt.kp"
                     *natlang* *lesson*)])
@@ -1447,7 +1448,7 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (second args) "")]
+                                   [link-text (if (> n 1) (string-join (rest args) "&#x2c; ") "")]
                                    [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
@@ -1602,13 +1603,12 @@
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
-                              (when (string=? width "")
-                                (printf "WARNING: ~a: @~a called with no width arg\n\n" (errmessage-context) directive)
-                                (set! width "100%"))
                               (display
                                 (string-append
-                                  (create-begin-tag "span" ".fitbruby" #:attribs
-                                                    (format "style=\"width: ~a\"" width))
+                                  (if (string=? width "")
+                                      (create-begin-tag "span" ".fitbruby.stretch")
+                                      (create-begin-tag "span" ".fitbruby" #:attribs
+                                                        (format "style=\"width: ~a\"" width)))
                                   (string-append
                                     (call-with-input-string text
                                       (lambda (i)
@@ -1618,6 +1618,17 @@
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "teacher")
+                            (let ([text (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".teacherNote")
+                                  (call-with-input-string text
+                                    (lambda (i)
+                                      (call-with-output-string
+                                        (lambda (o)
+                                          (expand-directives i o)))))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
@@ -1707,7 +1718,8 @@
                                   (set! args (append args
                                                      (list '#:proglang *proglang*
                                                            '#:dist-root-dir *dist-root-dir*
-                                                           '#:solutions-mode? *solutions-mode?*)))
+                                                           '#:solutions-mode? *solutions-mode?*
+                                                           '#:store-title store-title)))
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])

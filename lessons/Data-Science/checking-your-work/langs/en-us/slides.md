@@ -26,6 +26,7 @@ In programming, we often extract a smaller Table from a larger one, for the purp
 ---
 {layout="Launch"}
 # Confirming Analysis
+
 * Uber and Google are making self-driving cars, which use artificial intelligence to interpret sensor data and make decisions about whether a car should speed up, slow down, or slam on the brakes. This AI is trained on a lot of sample data, which it learns from. **What might be the problem if the sample data only included roads in California**?
 
 * **Why might it be a bad thing to only test medicines on men** (or only on women), before prescribing them to the general public?
@@ -43,6 +44,7 @@ Programmers need to think in terms of _Testing Tables_ that best serve the purpo
 ---
 {layout="Launch"}
 # Confirming Analysis
+
 **Testing Matters!**
 
 A good Testing Table should be _representative_ of the population, and _relevant_ to what’s being analyzed. A good Testing Table should have...{style="font-size:16pt"}
@@ -54,34 +56,76 @@ A good Testing Table should be _representative_ of the population, and _relevant
 
 -->
 ---
-{layout="Investigate"}
+{layout="Launch"}
 # Confirming Analysis
 
-Testing Tables can also be used to _verify_ that a certain analysis is correct. Code that filters a table to show only cats can’t be verified with a Testing Table that _already_ has only cats. (Why not?)
+Data scientists usually think in terms of samples that best serve the purpose of performing inference: Samples should be representative of the entire population, and large enough to get us fairly close to the truth about that population.
 
-Code that shows only the kittens...sorted in ascending order by weight must be verified by a Table containing cats, non-cats, old and young cats... __and rows that aren’t already sorted!__
+
+---
+{layout="Launch"}
+# Confirming Analysis
+
+How can we trust that our code is correct?
+
+Programmers need to think in terms of Testing Tables that best serve the purpose of verifying that their code does what it’s supposed to: The Tables should be designed to call attention to any imperfections in the code’s instructions.
+
 
 <!--
+Students have already written lots of code to analyze data. Millions of lines of code just like yours are run on datasets every day. The results are used to tell us whether a drug is safe or not, whether someone should be put on the "no-fly" list, how much someone needs to pay for health insurance, and more. 
 
+But programmers are only human, and everyone makes mistakes! And with so-called "A.I. Code Generators" out there writing more and more code for us, we need better and better ways of _verifying_ that code does exactly what it claims to do!
 -->
+
 ---
 {layout="Investigate"}
 # Confirming Analysis
 
-* Someone hands you a function called `fixed-cats` and _claims_ that it: given a table of animals, it produces a table with only fixed cats.
+Testing Tables can also be used to _verify_ that a certain analysis is correct.
+
+An AI writes code that claims to filter out any shelter data to show only the cats.
+
+* Could we test it using a Table that _already_ contains only cats?
+* Could we test it using a Table that has no cats at all?
+* Could we test it using a Table that has only cats and dogs?
+
+<!--
+* Could we test it using a Table that _already_ contains only cats?
+** No! The AI's code might do nothing at all and just return the Table it was given. It would give __the right answer for the wrong reason__! We need to find out if it actually removes non-cat Rows.
+* Could we test it using a Table that has no cats at all?
+** No! The AI's code might always return a table with no rows (regardless of species!), so giving it a Table without cats will give __the right answer for the wrong reason__! We need to find out if it actually keeps rows for cats.
+* Could we test it using a Table that has only cats and dogs?
+** No! Maybe the AI's code just removes dogs. We need to see if it removes other species as well.
+-->
+
+---
+{layout="Investigate"}
+# Confirming Analysis
+
+Verifying that code does what it does is an important part of checking our work! That's why writing examples is so valuable: it's a chance to think about how the program _should_ work, without worrying as much about _how_ it works.
+
+---
+{layout="Investigate"}
+# Confirming Analysis
+
+The AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only fixed cats.
+
 * Do you trust it? How could you test it?
-* Which animals would you would use in a Testing Table?
----
-{layout="Investigate"}
-# Confirming Analysis
-
+* Which animals would you use in a Testing Table?
 * Complete @printable-exercise{pages/trust-but-verify.adoc}.
 * Open the @starter-file{trust-but-verify}. There are 3 versions of `fixed-cats`. Are they all correct? If not, which ones are broken?
+
+---
+{layout="Investigate"}
+# Confirming Analysis
+
+
+An AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only dogs five years or older.
+
+* Do you trust it? How could you test it?
+* Which animals would you use in a Testing Table?
 * Turn to @printable-exercise{pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Testing Table and figure out which (if any) of the functions are correct!
 
-<!--
-
--->
 ---
 {layout="Synthesize"}
 # Confirming Analysis
@@ -108,7 +152,7 @@ Law enforcement in many towns has started using facial-recognition software to a
 {layout="Investigate"}
 # When AI isn't Intelligent... 
 
-- Read @link{https://www.theregister.com/2019/05/22/congress_facial_recognition/, this article, summarizing US Congress Testimony on Artificial Intelligence} or watch this 10-minute video @link{https://youtu.be/eRUEVYndh9c, The Coded Gaze: Bias in Artificial Intelligence}.
+- Read "@printable-exercise{pages/ai-article-register.pdf, Summarizing US Congress Testimony on Artificial Intelligence}" or watch this 10-minute video @link{https://youtu.be/eRUEVYndh9c, The Coded Gaze: Bias in Artificial Intelligence}.
 - Complete @printable-exercise{ai-reflection.adoc}
 
 
@@ -116,7 +160,12 @@ Law enforcement in many towns has started using facial-recognition software to a
 {layout="Synthesize"}
 # Synthesize
 
-Discuss the article and/or video. Be sure to end the discussion with a focus on how to address the concerns!
+
+Discuss the article and/or video, revisiting the following questions:
+
+- What are some concerns that experts and activists have raised about Artificial Intelligence?
+- What are some solutions that would address these concerns?
+- How would you test whether or not a facial recognition system was equally accurate for everyone?
 
 <!--
 

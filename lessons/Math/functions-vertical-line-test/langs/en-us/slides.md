@@ -3,7 +3,11 @@
 # The Vertical Line Test 
 
 <!--
-To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+
+* Decide whether you want to have students interact directly with the @link{https://docs.google.com/presentation/d/1IW5uMg491e33Av_XdGSivsAy28S9QSVivEYonpjTeF8/edit?usp=sharing, Interactive Function Activity} on their computers or whether it would be easier for your situation to project each graph from the peardeck on the white board and have students come up to add points that satisfy the rules or dictate points that satisfy the rules to a scribe who will add them to the graph.
+* Rulers or straight edges might be useful in supporting students during the section of the lesson that focuses on the vertical line test.
+
+* To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 ---
 {layout="Launch"}
@@ -26,7 +30,9 @@ What kind of relationships are functions, exactly?
 * When all of our dots appear, we'll end up with a visual representation of the function!
 
 <!--
-You might just want to do a few of these slides, or you might do lots of them.
+1. You might just want to do a few of these slides, or you might do lots of them.
+
+1. It may be easier for your situation to project each graph from the peardeck on the white board and have students come up to add points that satisfy the rules or dictate points that satisfy the rules to a scribe who will add them to the graph.
 -->
 
 ---
@@ -73,7 +79,8 @@ What did you Wonder?
 Record your responses on @printable-exercise{notice-wonder-functions.adoc}.
 
 <!--
-Noticings might include: functions can be lines, curves, v-shaped, or scatterplots! Wonderings might include: Why might some scatterplots represent functions and others not? Are there other forms functions can take? How do you end up with a circle on a graph?
+1. Noticings might include: functions can be lines, curves, v-shaped, or scatterplots! 
+1. Wonderings might include: Why might some scatterplots represent functions and others not? Are there other forms functions can take? How do you end up with a circle on a graph?
 -->
 ---
 {layout="Launch"}
@@ -107,9 +114,10 @@ What did you Notice?
 
 What did you Wonder? 
 
-Record your responses on @printable-exercise{notice-wonder-functions.adoc}.
-
 <!--
-Students might notice: It can still be a function if y-values repeats. It didn't matter whether or not the x-values followed a pattern. It was easier for me to read the tables when the x-values were in order. Students might wonder: Why weren't the x-values always in order? If the points were on a graph, would they be connected? Can there ever be decimal values for x and y? What would these tables look like on a graph?
+Confirm that students have correctly identified which graphs represent functions, and then lead a discussion on the activities above.
+
+1. Students might notice: It can still be a function if y-values repeats. It didn't matter whether or not the x-values followed a pattern. It was easier for me to read the tables when the x-values were in order. 
+1.Students might wonder: Why weren't the x-values always in order? If the points were on a graph, would they be connected? Can there ever be decimal values for x and y? What would these tables look like on a graph?
 -->
 
