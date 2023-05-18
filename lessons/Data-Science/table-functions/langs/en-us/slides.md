@@ -9,18 +9,46 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Review
 
-Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table, one row at a time.
+- Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
+- Hit "Run," then type `shapes` in the Interactions Area.
+- The way this file defines a table is different from what we've encountered before. How is it different?
 
 <!--
+Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table `shapes` one row at a time.
 -->
+
 ---
 {layout="Investigate"}
 # Review
 
-- This activity is about reading carefully and getting more comfortable with row-consuming functions.
-- Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
-- Take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+With your partner, take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
 
+---
+{layout="Investigate"}
+# Review
+
+* Who can explain what `is-red` does?
+* Who can explain what `is-polygon` does?
+* Who can explain what `is-triangle` does?
+
+
+<!--
+Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
+
+* Who can explain what `is-red` does?
+** _It looks up the color of the row, and checks if it is equal to the string `"red"`._
+* Who can explain what `is-polygon` does?
+** _It looks up the value in the `polygon` column._
+* Who can explain what `is-triangle` does?
+** _It checks if the value in the `name` column contains `"triangle"`._
+-->
+
+---
+{layout="Synthesize"}
+# Review
+
+- Were you able to guess what the functions did before testing them out? What was your strategy for making an educated guess?
+- What is the relationship between a _row definition_ and a _row-consuming function_?
 
 ---
 {layout="Launch"}
@@ -35,7 +63,7 @@ Select 6-8 students, each of whom will represent a unique Row of a dataset calle
 
 
 ---
-{layout="Launch"}
+{layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
 
@@ -51,7 +79,7 @@ Choose your students and cards carefully! Some cards only work if you have at le
 
 
 ---
-{layout="Launch"}
+{layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
 - `filter` _stands in front of Student 1 and checks if they are wearing glasses._
@@ -64,7 +92,7 @@ Have your `filter` volunteer go through all their peers, applying their card to 
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-DN"}
 # Filtering Rows, Building Columns
 
 Pyret Tables have their own functions for filtering tables - and more! Let's explore some of these.
