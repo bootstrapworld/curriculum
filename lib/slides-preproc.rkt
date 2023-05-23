@@ -87,18 +87,41 @@
         (format "![~a](~a)~a" text img
                 (if (string=? width "") "" (format "{width=~a}" width))))))
 
+(define (variable-or-number? s)
+  (let ([result #t])
+    (for ([c s])
+      (when (not (or (char-alphabetic? c) (char-numeric? c)))
+        (set! result #f)))
+    result))
+
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  ((if (or (and (regexp-match "\\frac" text)
-                (regexp-match "\\div" text))
-           (and (regexp-match "\\sqrt" text)
-                (regexp-match "\\^" text)))
-       make-mathjax-math
-       make-ascii-math) text))
+  (let ([use-mathjax?
+          (cond [(regexp-match "\\\\frac" text)
+                 (cond [(regexp-match "\\\\div" text) #t]
+                       [(regexp-match "\\^" text) #t]
+                       [(>= (string-length text) 40) #t]
+                       [(regexp-match* "\\\\frac{(.+?)}" text)
+                        => (lambda (mm)
+                             (cond [(null? mm) #f]
+                                   [else (let ([use-mathjax? #f])
+                                           (for ([m mm])
+                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                               (unless (variable-or-number? frac-arg)
+                                                 (set! use-mathjax? #t))))
+                                           use-mathjax?)]))])]
+                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                [(regexp-match "\\\\\\\\" text) #t]
+                [(regexp-match "\\\\mbox" text) #t]
+                [else #f])])
+    ;
+    ((if use-mathjax?
+         make-mathjax-math
+         make-ascii-math) text)))
 
 (define (make-mathjax-math text)
   (string-append
-    "$$$ math\n"
+    "\n$$$ math\n"
     text
     "\n"
     "$$$\n"))
@@ -153,11 +176,12 @@
   (format "<code>~s</code>" exp))
 
 (define (coe exp)
-  (string-append "$$$ html\n"
+  (string-append "\n$$$ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
     "<style>\n"
+    "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"

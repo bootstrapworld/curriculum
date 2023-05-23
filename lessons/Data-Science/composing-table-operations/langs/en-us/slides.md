@@ -193,7 +193,7 @@ But we also need to filter by that new column, so that we only have animals weig
 {layout="LaunchC"}
 # Composing
 
-3) Circles can contain other Circles!
+3\. Circles can contain other Circles!
 
 Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
 

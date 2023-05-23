@@ -31,17 +31,26 @@
 
 == Review @duration{15 minutes}
 
-Have students open the @starter-file{table-functions}.
+=== Overview
 
-Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table, one row at a time.
+Students practice carefully reading the contents of a starter file to review and gain comfort with row-consuming functions.
+
+=== Launch
 
 [.lesson-instruction]
---
-- This activity is about reading carefully and getting more comfortable with row-consuming functions.
 - Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
-- Take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
---
+- Hit "Run," then type `shapes` in the Interactions Area.
+- The way this file defines a table is different from what we've encountered before. How is it different?
+** Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table `shapes` one row at a time.
 
+=== Investigate
+
+[.lesson-instruction]
+With your partner, take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+
+Once students have completed the activity, follow up to confirm understanding.
+
+[.lesson-instruction]
 * Who can explain what `is-red` does?
 ** _It looks up the color of the row, and checks if it is equal to the string `"red"`._
 * Who can explain what `is-polygon` does?
@@ -50,6 +59,11 @@ Pyret also allows us to define Tables __in code__, rather than using a spreadshe
 ** _It checks if the value in the `name` column contains `"triangle"`._
 
 Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
+
+=== Synthesize
+
+- Were you able to guess what the functions did before testing them out? What was your strategy for making an educated guess?
+- What is the relationship between a _row definition_ and a _row-consuming function_?
 
 == Filtering Rows, Building Columns @duration{35 minutes}
 
@@ -63,10 +77,10 @@ Sometimes we want to *filter the rows* of a table by some criteria. In our anima
 
 [.lesson-roleplay]
 --
-- Select a volunteer who will play the role of… `filter`!
-- Hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)
-- Instruct `filter` to read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table", but to __keep it a secret__.
-- Explain to the class that the volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
+- I am going to select a volunteer who will play the role of… `filter`!
+- I will hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. (Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)
+- Next, `filter` will read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table"... but they will __keep it a secret__.
+- The volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
 
 Here’s how that might look if `filter` chose a function card `has-glasses`.
 
@@ -75,8 +89,8 @@ Here’s how that might look if `filter` chose a function card `has-glasses`.
 - `filter` _stands in front of Student 2 and checks if they are wearing glasses._
 - *`filter` to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
 --
-- Have your `filter` volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards.
-- Give the volunteer a round of applause!
+
+Have your `filter` volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards. Give the volunteer a round of applause!
 
 === Investigate
 Pyret Tables have their own functions for filtering tables - and more! Let's explore some of these.
@@ -86,11 +100,8 @@ Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 Confirm that students understand the following key ideas:
 
-[.lesson-point]
---
 * `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
 * `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
---
 
 [.lesson-instruction]
 How would you filter and build using the Animals Dataset? For practice, complete @printable-exercise{pages/what-table-do-we-get.adoc}.

@@ -6,27 +6,31 @@
 #content .contracts .editbox { background: none !important; }
 #content td { position: relative; }
 #content .contracts td { padding: 0 !important; }
+#content .exercises td .content div:last-child {
+	position: absolute;
+	bottom: 0;
+	width: 95%;
+}
 </style>
 ++++
 
-[.contracts, cols="1a,1a", frame="none", grid="none", stripes="none"]
+Using the Contracts below as a reference, draw the Circle of Evaluation for each prompt.
+
+[.contracts, cols="5a,4a", frame="none", grid="none", stripes="none"]
 |===
 |
 @show{(contract "pie-chart" '("Table" "String") "Image")}
 
 @show{(contract "bar-chart" '("Table" "String") "Image")}
 
-@show{(contract "box-plot" '("Table" "String") "Image")}
+@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
 
 |
-@show{(contract "count" '("Table" "String") "Table")}
+@show{(contract "box-plot" '("Table" "String") "Image")}
 
 @show{(contract "first-n-rows" '("Table" "Number") "Table")}
 
 @show{(contract "sort" '("Table" "String" "Boolean") "Table")}
-
-2+|
-@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
 |===
 
 @do{
@@ -45,7 +49,7 @@
 
 @showsoln{(code exp1)}
 
-@star What other box plot might you want to compare this to? @fitb{}{}
+What other box plot might you want to compare this to? @fitb{}{}
 
 | @n Make a pie-chart of `legs` for the 10 oldest animals.
 
@@ -53,7 +57,7 @@
 
 @showsoln{(code exp2)}
 
-@star What other pie chart might you want to compare this to? @fitb{}{}
+What other pie chart might you want to compare this to? @fitb{}{}
 
 | @star Take the 20 lightest animals, then take the 10 youngest of _those_ animals and make a bar-chart of `species`
 
@@ -61,5 +65,5 @@
 
 @showsoln{(code exp3)}
 
-@star What other pie chart might you want to compare this to? @fitb{}{}
+What other pie chart might you want to compare this to? @fitb{}{}
 |===
