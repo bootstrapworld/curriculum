@@ -269,7 +269,7 @@ Are they clumped on the right, with a few outliers skewing to the left? Or are t
 
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/601c35a8e9fd103e94acee2b, Card Sort: What Information does the Box & Whisker Plot tell us?}
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe89eeaaef67d0cea85ba5e, "Matching Vocabulary to Definitions"}
-
+- @opt-project{stress-project.html, rubric-stress-or-chill.adoc} 
 <!--
 
 -->

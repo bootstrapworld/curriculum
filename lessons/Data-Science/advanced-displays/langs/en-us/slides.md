@@ -220,3 +220,8 @@ How do piecewise functions expand what is possible with the `image-scatter-plot`
 
 <!--
 -->
+
+---
+{layout="Supplemental"}
+
+- @opt-project{beautiful-data-project.adoc, beautiful-data-rubric.adoc} 
