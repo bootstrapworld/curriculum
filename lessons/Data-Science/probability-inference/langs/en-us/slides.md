@@ -305,5 +305,5 @@ Many people mistakenly believe that larger populations need to be represented by
 {layout="Supplemental"}
 # Additional Exercises
 
-- Project: @opt-project{food-habits-project.adoc, rubric-food-habits.adoc}
-- Project: @opt-project{time-use-project.adoc, rubric-time-use.adoc}
+- @opt-project{food-habits-project.adoc, rubric-food-habits.adoc}
+- @opt-project{time-use-project.adoc, rubric-time-use.adoc}

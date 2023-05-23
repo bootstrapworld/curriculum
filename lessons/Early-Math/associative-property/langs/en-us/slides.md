@@ -102,7 +102,7 @@ We encourage you to review students' submissions, and write a few on the board t
 {layout="InvestigateC"}
 # The Associative Property & Mental Math
 
-Complete @printable-exercise{pages/which-circles-make-the-math-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression. The first problem is below.
+Complete @printable-exercise{pages/which-grouping-makes-the-comp-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression. The first problem is below.
 
 @image{images/assoc-mental-math.png}
 

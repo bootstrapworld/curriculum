@@ -31,17 +31,26 @@
 
 == Review @duration{15 minutes}
 
-Have students open the @starter-file{table-functions}.
+=== Overview
 
-Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table, one row at a time.
+Students practice carefully reading the contents of a starter file to review and gain comfort with row-consuming functions.
+
+=== Launch
 
 [.lesson-instruction]
---
-- This activity is about reading carefully and getting more comfortable with row-consuming functions.
 - Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
-- Take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
---
+- Hit "Run," then type `shapes` in the Interactions Area.
+- The way this file defines a table is different from what we've encountered before. How is it different?
+** Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table `shapes` one row at a time.
 
+=== Investigate
+
+[.lesson-instruction]
+With your partner, take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+
+Once students have completed the activity, follow up to confirm understanding.
+
+[.lesson-instruction]
 * Who can explain what `is-red` does?
 ** _It looks up the color of the row, and checks if it is equal to the string `"red"`._
 * Who can explain what `is-polygon` does?
@@ -50,6 +59,11 @@ Pyret also allows us to define Tables __in code__, rather than using a spreadshe
 ** _It checks if the value in the `name` column contains `"triangle"`._
 
 Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
+
+=== Synthesize
+
+- Were you able to guess what the functions did before testing them out? What was your strategy for making an educated guess?
+- What is the relationship between a _row definition_ and a _row-consuming function_?
 
 == Filtering Rows, Building Columns @duration{35 minutes}
 
@@ -85,7 +99,6 @@ Pyret Tables have their own functions for filtering tables - and more! Let's exp
 Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 Confirm that students understand the following key ideas:
-
 
 * `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
 * `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.

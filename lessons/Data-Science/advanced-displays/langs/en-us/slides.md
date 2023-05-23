@@ -256,3 +256,8 @@ Pyret allows us to create advanced displays for several types of charts. You can
 
 <!--
 -->
+
+---
+{layout="Supplemental"}
+
+- @opt-project{beautiful-data-project.adoc, beautiful-data-rubric.adoc} 

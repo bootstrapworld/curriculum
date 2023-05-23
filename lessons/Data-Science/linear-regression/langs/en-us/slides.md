@@ -344,3 +344,4 @@ Have students share their findings with the class. Get excited about the connect
 # Your Analysis
 
 - @opt-printable-exercise{pages/describing-relationships-2.adoc}
+- @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}
