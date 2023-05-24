@@ -35,7 +35,7 @@
 * The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
 |===
 
-== Looking for Patterns  @duration{20 minutes}
+== Looking for Patterns  @duration{30 minutes}
 
 === Overview
 Students explore the @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File}, and find a relationship between wealth and median life expectancy. They also learn how to build a new column for a table in Pyret.
@@ -49,7 +49,7 @@ Students explore the @online-exercise{https://code.pyret.org/editor#share=1SGzPW
 - Do people who make more money generally live longer?
 - Open the @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete questions 1-4 on @printable-exercise{exploring-countries.adoc}.
+- Working in pairs or small groups, complete questions 1-6 on @printable-exercise{exploring-countries.adoc}.
 - Be ready to discuss!
 --
 
@@ -58,11 +58,14 @@ Discuss students' findings. Pay special attention to the @vocab{form} that stude
 === Investigate
 
 [.lesson-instruction]
-- Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}.
-- Optional: Use @opt-online-exercise{https://www.desmos.com/calculator/9izutrnkas, Wealth-v-Health - Linear} to try fitting linear models for this dataset
-- Optional: Use @opt-online-exercise{https://www.desmos.com/calculator/tpngoafcv8, Wealth-v-Health - Quadratic} to try fitting quadratic models for this dataset
-- Optional: Use @opt-online-exercise{https://www.desmos.com/calculator/ktxtecldt9, Wealth-v-Health - Exponential} to try fitting exponential models for this dataset
+--
+Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc}. For this, you will also need:
 
+- Use @online-exercise{https://www.desmos.com/calculator/9izutrnkas, Wealth-v-Health - Linear} to try fitting linear models for this dataset
+- Use @online-exercise{https://www.desmos.com/calculator/tpngoafcv8, Wealth-v-Health - Quadratic} to try fitting quadratic models for this dataset
+- Use @online-exercise{https://www.desmos.com/calculator/ktxtecldt9, Wealth-v-Health - Exponential} to try fitting exponential models for this dataset
+- **Rachel, can these be combined in a single Desmos activity, so kids don't have to click three different links?**
+--
 
 Note: This worksheet involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to __discover that a new kind of  model is necessary__.
 
@@ -72,10 +75,10 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 - What kinds of lines or curves did you draw?
 
 
-== Fitting Logarithmic Models @duration{20 minutes}
+== Transforming the X-Axis @duration{20 minutes}
 
 === Overview
-Students try to fit different models to a logarithmic relationship, discovering their limitations. They then fit a logarithmic model to the data, and then try transforming that data using log functions.
+Students discover that by transforming the x-axis, they can fit a linear model to a logarithmic relationship.
 
 === Launch
 
@@ -84,7 +87,7 @@ Students try to fit different models to a logarithmic relationship, discovering 
 There definitely appears to be a relationship here, but it's not linear. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.
 
 [.lesson-instruction]
-What functions behave like this? Could we approximate this with a quadratic model? An exponential one?
+How well did our linear, quadratic, and exponential models fit this data? Is there another kind of function that starts off rising fast, but then levels off quickly?
 
 === Investigate
 
@@ -94,27 +97,29 @@ The shape of this relationship is _logarithmic_, meaning it can be modeled using
 
 We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
 
-Pyret has a few functions that may come in handy here:
+[.lesson-instruction]
+Complete Questions 1-4 on @printable-exercise{transforming-wealth.adoc}, using @online-exercise{https://www.desmos.com/calculator/irprqnkpqj, Wealth-v-Health - Logarithmic}.
 
-[cols="^1a,^1a,^1a", stripes="none", frame="none"]
-|===
-| @math{\ln x}
-| @math{\log_{base}x}
-| @math{x^y}
+@teacher{What were some of the coefficients students came up with?}
 
-| @show{(contract "num-log" '("Number") "Number" "Consumes a number, and produces its natural log")}
-| @show{(contract "num-log-base" '("Number" "Number") "Number" "Consumes a number and a base, and produces the log of that number with the base")}
-| @show{(contract "num-expt" '("Number" "Number") "Number" "Consumes a number and a power, and produces that number raised to the power")}
-|===
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. If only we could _transform_ this data to make it appear linear! Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
+
+Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
+
+By __changing the scale of the x-axis__ to grow exponentially, we are "squashing" the coordinate plane so that each interval represents 10x the area as the one before it. This makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
 
 [.lesson-instruction]
-- Experiment with logarithmic models using @online-exercise{https://www.desmos.com/calculator/zfb5aaczt6, Wealth-v-Health - Logarithmic}
-- Complete @printable-exercise{model-wealth-v-lifespan.adoc}
+Complete Questions 6 and 7 on @printable-exercise{transforming-wealth.adoc}, using @online-exercise{https://www.desmos.com/calculator/irprqnkpqj, Wealth-v-Health - Logarithmic}.
 
-Note: This process involves a lot of trial and error, as students build up an intuition for how the terms in a logarithmic graph affect the graph of the function. This mirrors the process students went through in earlier exploring-models lessons.
+When plotting points on a log-transformed x-axis, they really do look linear! Even our best-guess logarithmic model looks like a straight line. But transforming the axes only makes things _look_ linear - the actual points haven't changed at all.
 
-- @math{c} represents the vertical shift in our model, which slides the curve up or down the y-axis
-- @math{b} represents the growth factor, which determines how quicky the curve "flattens out" as @math{x} increases
+Another strategy is to _change the x-coordinates themselves_. Instead of plotting `pc-gdp` on the x-axis, we could plot `ln(gdp)`.
+
+[.lesson-instruction]
+Complete @printable-exercise{transforming-wealth.adoc}, using @online-exercise{https://www.desmos.com/calculator/irprqnkpqj, Wealth-v-Health - Logarithmic}.
+
+
+Transforming the points instead of the axis has the same visual effect: the dots appear to fall in a straight line! But now we can plot them on a linear-scale graph, and use linear regression to find the best-possible model!
 
 === Synthesize
 
@@ -122,7 +127,7 @@ Note: This process involves a lot of trial and error, as students build up an in
 - What points did you use?
 - What, if any, other strategies did you use to come up with your model?
 
-== Using Log Transformations @duration{25 minutes}
+== Transformations in Pyret @duration{25 minutes}
 
 === Overview
 
@@ -134,9 +139,7 @@ Deriving a logarithmic model from only two points is problematic. How do we know
 
 This is the same problem we ran into with linear models in our state demographics data, where a model built from any two points would only be as good as those points were representative.
 
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. We need to find a transformation that will make this data appear linear in order to use `lr-plot`.
 
-Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
 [.lesson-instruction]
 - Complete questions 1-6 in @printable-exercise{transforming-wealth.adoc}.

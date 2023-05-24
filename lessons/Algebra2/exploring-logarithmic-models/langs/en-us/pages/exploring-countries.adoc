@@ -2,27 +2,29 @@
 ++++
 <style>
 body.workbookpage td .autonum::after { content: ')' !important; }
+.columnInfo tr td { padding: 0 !important; }
+table .paragraph:first-child .fitb:nth-child(3) {
+	padding-top: 0px !important;
+}
 </style>
 ++++
-For this page, you'll need the  @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+For this page, you'll need the  @online-exercise{https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B, Countries of the World Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you. The columns in this dataset are described below:
 
-@n Click "Run", and evaluate `countries-table` in the Interactions Area. Do you know what each column means?
-
-[cols="1a,1a", grid="none", frame="none", stripes="none"]
+[.columnInfo, cols="2a,3a", grid=none, frame=none, stripes=none]
 |===
 |
 - *country* - name of the country
 - *gdp* - total gross domestic product of the country
 - *population* - number of people in the country
-- *pc-gdp* - "per-capita gdp": the average GDP _per-person_
 |
+- *pc-gdp* - "per-capita gdp": the average GDP _per-person_
 - *has-univ-healthcare* - indicates if the country has universal healthcare
 - *median-lifespan* - the median life expectancy of people in the country
 |===
 
-@n Type `afghanistan` and `albania` into the Interactions Area. What do they evaluate to? @fitb{}{@ifsoln{Rows for those countries}}
+@vspace{1ex}
 
-[.FillVerticalSpace, cols="1a,1a" options="frame",stripes="none"]
+[.FillVerticalSpace, cols="1a,1a", frame=none, stripes=none]
 !===
 | @n Make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`. Sketch the shape of the plot below.
 |
@@ -40,7 +42,7 @@ For this page, you'll need the  @online-exercise{https://code.pyret.org/editor#s
 
 @vspace{1ex}
 
-@n Suppose a wealthy country is at war. Draw a star on the plot, showing where you might expect it to be.
+@n Suppose a wealthy country is suffering heavy causalties in a war. Draw a star on the plot, showing where you might expect it to be.
 --
 !===
 
@@ -52,26 +54,42 @@ For this page, you'll need the  @online-exercise{https://code.pyret.org/editor#s
 
 @center{**Stop here! We'll continue after some discussion.**}
 
-@n The contract for a function representing a linear model is on line 18. What is its name? @fitb{2em}{@ifsoln{f}} Domain? @fitb{5em}{@ifsoln{Number}} Range? @fitb{}{@ifsoln{Number}}
+== Fitting Models
 
-@n Fit the linear model `f` using the `fit-model` function. What is the @math{R^2} value? @fitb{}{@ifsoln{-11.7940}}.
+For each question below, explore in Desmos before defining and fitting your model in Pyret. Then write the model and the @math{R^2}.
 
+@n Find the best *linear model* you can, using the @online-exercise{https://www.desmos.com/calculator/9izutrnkas, Linear Desmos Playground} or `lr-plot` in Pyret.
 
-@n Use `lr-plot` to find the _best-possible_ linear model, and write the model below. What is the @math{R^2}? @fitb{}{@ifsoln{0.413}}
+[cols="^5a,1a", grid="none", frame="none", stripes="none"]
+|===
+|
+@math{f(x) =} @fitbruby{10em}{@ifsoln{@math{0.00021}}}{slope (m)}x + @fitbruby{10em}{@ifsoln{68.0125}}{y-intercept (b)}
+|
+@fitbruby{10em}{@ifsoln{0.413}}{r^2^}
+|===
 
-@center{
- @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{0.00021}}}{slope}x + @fitbruby{8em}{@ifsoln{68.0125}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 0.00021) x) (?ANS 68.0125))))}
-}
+@n Find the best *quadratic model* you can, using the @online-exercise{https://www.desmos.com/calculator/tpngoafcv8, Quadratic Desmos Playground}
 
-@n Change `f` to be the best _non-linear_ model you can build. What is the @math{R^2}? @fitb{5em}{} Write the model below.
+[cols="^5a,1a", grid="none", frame="none", stripes="none"]
+|===
+|
+@math{f(x) = a(x−}@fitbruby{10em}{}{vertex (h)}@math{)^2+}@fitbruby{10em}{}{vertical shift (k)}
+|
+@fitbruby{10em}{}{r^2^}
+|===
 
-@center{
- @math{f(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS varies) x) (?ANS varies))))}
-}
+@n Find the best *exponential model* you can, using the @online-exercise{https://www.desmos.com/calculator/ktxtecldt9, Exponential Desmos Playground}
 
-@n How close did you get? What kind of model do you think will best fit this data, and why?
+[cols="^5a,1a", grid="none", frame="none", stripes="none"]
+|===
+|
+@math{f(x) = }@fitbruby{10em}{}{initial value (a)}@math{\times}@fitbruby{10em}{}{growth factor (b)}@math{^x + } @fitbruby{10em}{}{vertical shift (k)}
+|
+@fitbruby{10em}{}{r^2^}
+|===
+
+@n What kind of model do you think will best fit this data, and why?
 
 @fitb{}{}
 
 @fitb{}{}
-
