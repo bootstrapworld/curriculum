@@ -1800,6 +1800,7 @@
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
+                              (display (enclose-span ".prefix" "Optional Project: ") o)
                               (display project-link-output o)
                               (display " __{startsb}" o)
                               (display rubric-link-output o)
