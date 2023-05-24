@@ -171,14 +171,9 @@ That would translate to the following code:
 
 Students will be introduced to functions for making one-variable displays in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
 
-The goal here is for students to become familiar with __using contracts to write expressions that will produce displays__. Knowing how to _make_ a histogram doesn't mean a student really understands histograms! We have dedicated, in-depth lessons that focus on each display mentioned in this lesson:
+The goal here is for students to become familiar with __using contracts to write expressions that will produce displays__. Knowing how to _make_ a histogram doesn't mean a student really understands histograms! 
 
-* @lesson-link{bar-and-pie-charts}
-* @lesson-link{histograms}
-* @lesson-link{histograms2}
-* @lesson-link{box-plots}
-
-We also have dedicated lessons for other displays not mentioned here, such as @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
+Once students know how to use contracts to write expressions to make these displays, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms}, @lesson-link{histograms2}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
 
 === Launch
 
@@ -204,21 +199,27 @@ The `count` function summarized the data for a single variable in a new table. B
 - Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the contract to get them building!
 --
 
-These functions can be visualized as another Circle of Evaluation:
+__Optional:
+@teacher{
+If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-displays-2.adoc}.
+}__
 
-@show{(coe '(pie-chart animals-table "species"))}
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays.
 
-Just as we can use Circles of Evaluation with `sort`, `count`, and `first-n-rows`, we can put Circles to work to help us write code to build more specific displays.
+@show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+
+- What expression would this Circle of Evaluation generate?
+** @show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+- What would be the resulting display?
+** _a pie chart showing the species of the 10 youngest animals_
+
+If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
 
 [.lesson-instruction]
-- Turn to @printable-exercise{coe-displays.adoc} and apply Circles of Evaluation to figure out the code for building more specific displays.
-- For more practice, try @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
+- Have students complete @printable-exercise{coe-displays.adoc}.
+- Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. *Consider what display it might be interesting to compare each of the displays on this page with.* 
 
-@teacher{
-For older students who already know about these plots (or who just want to explore more of what's available!), there is @opt-printable-exercise{exploring-displays-2.adoc, a similar page} that covers scatter plots, linear regression plots, and line graphs!
-}
-
-Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. Consider what you might compare each of these displays against.
+For more practice composing table functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}.
 
 === Synthesize
 
@@ -231,6 +232,4 @@ Displays are often most interesting when compared with other displays. For examp
 ** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
 ** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
 
-== Additional Exercises
 
-For more practice composing table functions, you can complete @opt-printable-exercise{coe-displays-2.adoc} and/or @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
