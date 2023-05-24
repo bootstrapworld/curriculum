@@ -111,8 +111,8 @@ Complete @printable-exercise{pages/which-grouping-makes-the-comp-easier.adoc}. E
 {layout="Investigate"}
 # The Associative Property & Mental Math
 
-- Now, try @printable-exercise{pages/props-make-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
-- Try @printable-exercise{pages/props-make-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
+- Now, try @printable-exercise{pages/associativity-makes-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
+- Try @printable-exercise{pages/associativity-makes-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
 
 
 ---
