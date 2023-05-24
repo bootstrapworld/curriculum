@@ -497,6 +497,7 @@
                           (let* ([arg1 (read-commaed-group i directive read-group)]
                                  [project-file (first arg1)]
                                  [rubric-file (and (> (length arg1) 1) (second arg1))])
+                            (fprintf o "<span class=\"prefix\">Optional Project: </span>")
                             (display (fully-qualify-link (list project-file) directive) o)
                             (when rubric-file
                               (display " [" o)
