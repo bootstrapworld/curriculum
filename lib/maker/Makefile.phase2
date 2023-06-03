@@ -1,4 +1,4 @@
-# last modified 2023-03-17
+# last modified 2023-06-02
 
 include $(MAKE_DIR)utils.mk
 
@@ -23,6 +23,7 @@ $(eval $(foreach lessf,$(less-files),$(call make-css-from-less-rule, $(lessf))))
 ##########################################################################
 
 pathway-independent-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/*.adoc \
 	distribution/$(NATLANG)/lib/*.adoc \
 	distribution/$(NATLANG)/textbooks/*.adoc \
 	distribution/$(NATLANG)/textbooks/*/*.adoc \
