@@ -601,6 +601,30 @@ var starterFiles = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
     }
+  },
+  "alg2-states": {
+    "title": "States Demographics Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+    }
+  },
+  "alg2-fuel-efficiency": {
+    "title": "Fuel Efficiency Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
+    }
+  },
+  "alg2-covid": {
+    "title": "Covid Spread Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
+    }
+  },
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+    }
   }
 }
 
