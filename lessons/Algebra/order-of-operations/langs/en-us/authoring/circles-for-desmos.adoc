@@ -1,0 +1,31 @@
+
+
+Draw a line from each Circle of Evaluation on the left to the corresponding arithmetic expression on the right.
+
+@do{
+  (define expr1 '(+ (- 2 2) (* 2 2)))
+  (define expr2 '(+ 2 (- 2 2 )))
+  (define expr3 '(+ (- 2 (* 2 2)) 2))
+  (define expr4 '(- (+ 2 2) (* 2 2)))
+  (define expr5 '(* (+ 2 (- 2 2)) (+ 2 2)))
+  (define expr6 '(/ (* 2 2) 2))
+  (define expr7 '(/ 2 (* 2 2)))
+  (define expr8 '(+ (- (* 2 2) 2) 2))
+  (define expr9 '(- (+ 2 2) 2))
+  (define expr10 '(* (- 2 (+ 2 2)) (+ 2 2)))
+}
+
+[cols="^.^10a,^.^2a,5a,^.^1a,^.^10a",options="header",stripes="none",grid="none",frame="none"]
+|===
+| Circle of Evaluation       |   								 ||       | Arithmetic Expression
+| @show{(coe expr1)}   |*1*@showsoln{"-C" }||*A*    | @show{(math expr1)}
+| @show{(coe expr2)}   |*2*@showsoln{"-A" }||*B*    | @show{(math expr2)}
+| @show{(coe expr3)}   |*3*@showsoln{"-E" }||*C*    | @show{(math expr3)}
+| @show{(coe expr4)}   |*4*@showsoln{"-B" }||*D*    | @show{(math expr4)}
+| @show{(coe expr5)}   |*5*@showsoln{"-D" }||*E*    | @show{(math expr5)}
+| @show{(coe expr6)}   |*6*@showsoln{"-C" }||*A*    | @show{(math expr6)}
+| @show{(coe expr7)}   |*7*@showsoln{"-A" }||*B*    | @show{(math expr7)}
+| @show{(coe expr8)}   |*8*@showsoln{"-E" }||*C*    | @show{(math expr8)}
+| @show{(coe expr9)}   |*9*@showsoln{"-B" }||*D*    | @show{(math expr9)}
+| @show{(coe expr10)}  |*10*@showsoln{"-D" }||*E*   | @show{(math expr10)}
+|===

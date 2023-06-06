@@ -1,0 +1,69 @@
+= Top Down or Bottom Up
+
+++++
+<style>
+.MathJax { display: inline-block; }
+td.tableblock .paragraph { margin-bottom: 3ex; }
+td.tableblock .paragraph:last-child { margin-bottom: 0; }
+.strategy-box { border: solid 2px black !important; }
+.strategy-box .MathJax { margin-bottom: 0; }
+</style>
+++++
+
+Jamal’s trip requires him to drive 20mi to the airport, fly 2,300mi, and then take a bus 6mi to his hotel. His average speed driving to the airport is 40mph, the average speed of an airplane is 575mph, and the average speed of his bus is 15mph.
+
+Aside from time waiting for the plane or bus, how long is Jamal in transit?
+
+@vspace{1ex}
+
+[cols="2a, 2a" options="header", stripes="none"]
+|===
+| *Bear's Strategy:*	| *Lion's Strategy:*
+|
+@math{Drive Time = 20 miles \times \frac{1hour}{40 miles} = 0.5 hours}
+
+@math{Fly Time = 2300 miles \times \frac{1hour}{575 miles} = 4 hours}
+
+@math{Bus Time = 6 miles \times \frac{1hour}{15 miles} = 0.4 hours}
+
+@math{In Transit Time = Drive Time + Fly Time + Bus Time}
+
+@math{0.5 + 4 + 0.4 = 4.9 hours}
+
+|
+@math{In Transit Time = Drive Time + Fly Time + Bus Time}
+
+@math{Drive Time = 20 miles \times \frac{1hour}{40 miles} = 0.5 hours}
+
+@math{Fly Time = 2300 miles \times \frac{1hour}{575 miles} = 4 hours}
+
+@math{Bus Time = 6 miles \times \frac{1hour}{15 miles} = 0.4 hours}
+
+@math{0.5 + 4 + 0.4 = 4.9 hours}
+
+|===
+   
+@n Whose Strategy was Top Down? How do you know?
+
+@vspace{5ex}
+
+@n Whose Strategy was Bottom Up? How do you know?
+
+@vspace{5ex}
+
+@n Which way of thinking about the problem makes more sense to you?
+
+@vspace{5ex}
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{What's happening with that Math?!}
+
+When calculating Jamal's drive time, we multiplied distance by speed. More specifically, we multiplied the starting value (@math{20 miles}) by @math{\frac{1 hour}{40 miles}}. Why? Why not reverse it, to use @math{\frac{40 miles}{1 hour}}, as stated in the problem?
+
+@math{Time} is the desired outcome. Looking at the units, we can see that speed must have @math{miles} as its denominator to _cancel out_ the @math{miles} in the starting value.
+
+[.center]
+@math{\frac{20 mi}{1} \times \frac{1hour}{40miles} = \frac{20\require{enclose} \enclose{horizontalstrike}{miles} \times1hour}{40 \require{enclose} \enclose{horizontalstrike}{miles}} = \frac{20}{40} hour = \frac{1}{2} hour}
+|===

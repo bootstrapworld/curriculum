@@ -1,0 +1,46 @@
+= Associer des cercles d'évaluation à des expressions arithmétiques
+
+Tracez une ligne entre chaque cercle d'évaluation à gauche et l'expression arithmétique correspondante à droite.
+
+@do{
+  (define expr1 '(/ (* 1 1) 1))
+  (define expr2 '(/ 1 (* 1 1)))
+  (define expr3 '(* (- 1 1) (+ 1 1)))
+  (define expr4 '(- (+ 1 1) 1))
+  (define expr5 '(* (+ 1 (- 1 1)) (+ 1 1)))
+
+  (define coe1 (coe expr1))
+  (define coe2 (coe expr2))
+  (define coe3 (coe expr3))
+  (define coe4 (coe expr4))
+  (define coe5 (coe expr5))
+
+}
+
+[.FillVerticalSpace, cols="^.^10a,^.^3a,5a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| Cercle d’évaluation
+|||
+| Expression arithmétique
+
+| @show{(coe expr1)}
+|*@n*@showsoln{"-C" }||*A*
+| @show{(math expr2 #:parens true)}
+
+| @show{(coe expr2)}
+|*@n*@showsoln{"-A" }||*B*
+| @show{(math expr4 #:parens true)}
+
+| @show{(coe expr3)}
+|*@n*@showsoln{"-E" }||*C*
+| @show{(math expr1 #:parens true)}
+
+| @show{(coe expr4)}
+|*@n*@showsoln{"-B" }||*D*
+| @show{(math expr5 #:parens true)}
+
+| @show{(coe expr5)}
+|*@n*@showsoln{"-D" }||*E*
+| @show{(math expr3 #:parens true)}
+
+|===

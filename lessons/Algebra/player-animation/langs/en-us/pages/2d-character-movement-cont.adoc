@@ -1,0 +1,64 @@
+= Challenge: Character Movement in Two Dimensions (2)
+
+@design-recipe-exercise{"update-danger-2"
+"On the lines below, write the new contract and purpose for @funname, so that it produces a Posn instead of a Number. Then complete the Design Recipe."
+#:headless? #t
+#:domain-list '(Number Number)
+#:range "posn"
+#:purpose "Consumes an x and y coordinate, adds 50 to each to move the character along a diagonal, and returns a new posn"
+#:show-purpose? #f
+#:num-examples 2
+#:example-list '((0 10 (make-posn (+ 0 50) (+ 10 50)))
+                 (20 25 (make-posn (+ 20 50) (+ 25 50))))
+#:show-examples '((#f #f #f) (#f #f #f #f))
+#:param-list '(x y)
+#:show-params? #f
+#:body '(make-posn (+ x 50) (+ y 50) )
+#:show-body? #f
+#:grid-lines? #t
+}
+
+@vspace{1ex}
+
+== Adding Your New Function to Your Game File
+
+@n Find `update-danger` in your game file.
+
+@n Directly beneath it, add `update-danger-2` (including contract, purpose, examples, and definition) to your game file.
+
+@n Scroll down to the very end of your game file and find the following *PROVIDED CODE*.
+
+@ifproglang{pyret}{
+----
+g = make-game(TITLE, TITLE-COLOR,
+  BACKGROUND,
+  DANGER, update-danger,
+  TARGET, update-target,
+  PLAYER, update-player,
+  mystery, update-mystery,
+  distances-color, line-length, distance,
+  is-collision, is-onscreen)
+play(g)
+----
+
+}
+
+@ifproglang{wescheme}{
+----
+(define g (make-game TITLE TITLE-COLOR
+                     BACKGROUND
+                     DANGER update-danger
+                     TARGET update-target
+                     PLAYER update-player
+                     mystery update-mystery
+                     distances-color line-length distance
+                     collide? onscreen?))
+(play g)
+----
+}
+
+@n Change `update-danger` to `update-danger-2` in the list and click "Run" so that your program will use your new function with two-dimensional movement, instead of the old function with one-dimensional movement.
+
+@vspace{1ex}
+
+Note: If, at any point, you would like to use the old function, all you have to do is change this list so that it says `update-danger` instead of `update-danger-2`!

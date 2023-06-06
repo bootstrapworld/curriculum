@@ -1,0 +1,42 @@
+= Traduire les expressions arithmétiques en cercles d'évaluation et en code (Intro)
+
+Traduisez chacune des expressions arithmétiques ci-dessous en cercles d'évaluation, puis traduisez-les en code.
+@ifsoln{*Enseignants:* les réponses ci-dessous sont présentées avec _toutes_ les parenthèses incluses. Il y a également des solutions correctes dans lesquelles les parenthèses inutiles sont supprimées.}
+
+
+@do{
+  (define expr1 '(- (* 3 7) (+ 1 2)))
+  (define expr2 '(- 3 (+ 1 2)))
+  (define expr3 '(- 3 (+ 1 (* 5 6))))
+  (define expr4 '(- (+ 1 (* 5 6)) 3))
+}
+
+[.FillVerticalSpace, cols="^.^1a,^.^10a,^.^20a,^.^15a",options="header",stripes="none"]
+|===
+|
+| Expression arithmétique
+| Cercle d’évaluation
+| Code
+
+
+|*@n*
+| @show{    (math expr1 #:parens true)}
+| @showsoln{(coe  expr1)}
+| @showsoln{(code expr1 #:parens true)}
+
+|*@n*
+| @show{    (math expr2 #:parens true)}
+| @showsoln{(coe  expr2)}
+| @showsoln{(code expr2 #:parens true)}
+
+|*@n*
+| @show{    (math expr3 #:parens true)}
+| @showsoln{(coe  expr3)}
+| @showsoln{(code expr3 #:parens true)}
+
+|*@n*
+| @show{    (math expr4 #:parens true)}
+| @showsoln{(coe  expr4)}
+| @showsoln{(code expr4 #:parens true)}
+
+|===

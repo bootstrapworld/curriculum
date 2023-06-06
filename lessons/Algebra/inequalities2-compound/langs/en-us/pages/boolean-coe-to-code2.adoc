@@ -1,0 +1,26 @@
+= Converting Circles of Evaluation with Booleans to Code 2
+
+@vspace{1ex}
+
+For each Circle of Evaluation on the left-hand side, write the code for the Circle on the right-hand side. @ifsoln{Note: Solutions with additional (correct) parentheses are acceptable, also.}
+
+@do{
+(define expr1 '(and (string=? place "safe")
+                    (or (>= x 50) (<= y 2))))
+(define expr2 '(and (or (= 6 7) (> 7 5)) (< 8 10)))
+(define expr3 '(string=? "6" "7"))
+(define expr4 '(> (+ 6 7) 15))
+(define expr5 '(or (= (* 6 5) 30) (< 8 9)))
+                 ;(= (string-length "Bananas") 8)
+
+}
+
+[.FillVerticalSpace, cols=".^1a,^.^10a,^.^11a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Code
+|*@n*| @show{(coe expr1)}    | @showsoln{(code expr1) }
+|*@n*| @show{(coe expr2)}    | @showsoln{(code expr2) }
+|*@n*| @show{(coe expr3)}    | @showsoln{(code expr3) }
+|*@n*| @show{(coe expr4)}    | @showsoln{(code expr4) }
+|*@n*| @show{(coe expr5)}    | @showsoln{(code expr5) }
+|===

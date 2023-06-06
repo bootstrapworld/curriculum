@@ -1,0 +1,47 @@
+[.landscape]
+= Associer des cercles d'évaluation à du code
+
+++++
+<style>
+  td, td p { text-align: left; margin: 0; }
+  .content { height: 100%; } /* maximiser le contenu des cellules */
+  .autonum { font-weight: bold; font-size: 1.5rem; }
+  .MathJax { display: block; margin-top: 2ex; }
+</style>
+++++
+
+Découpez les cartes du tableau ci-dessous. Ensuite, mélangez-les et essayez d’associer le cercle d'évaluation à l'expression arithmétique.
+
+@do{
+  (define expr1 '(+ -2 5))
+  (define expr2 '(+ 10 2))
+  (define expr3 '(+ 5 (* 10 -2)))
+  (define expr4 '(+ (/ 10 -2) 5))
+  (define expr5 '(* 2 (- -10 5)))
+  (define expr6 '(* 5 (/ -10 -2)))
+  (define expr7 '(/ (- 10 2) (+ 10 5)))
+  (define expr8 '(- -2 (* 10 (+ 5 2))))
+}
+
+[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a",stripes="none"]
+|===
+|@n @show{(coe expr1)}
+|@span{.autonum}{A} @show{(math expr1 #:parens true)}
+|@n @show{(coe expr2)}
+|@span{.autonum}{B} @show{(math expr2 #:parens true)}
+
+|@n @show{(coe expr3)}
+|@span{.autonum}{C} @show{(math expr3 #:parens true)}
+|@n @show{(coe expr4)}
+|@span{.autonum}{D} @show{(math expr4 #:parens true)}
+
+|@n @show{(coe expr5)}
+|@span{.autonum}{E} @show{(math expr5 #:parens true)}
+|@n @show{(coe expr6)}
+|@span{.autonum}{F} @show{(math expr6 #:parens true)}
+
+|@n @show{(coe expr7)}
+|@span{.autonum}{G} @show{(math expr7 #:parens true)}
+|@n @show{(coe expr8)}
+|@span{.autonum}{H} @show{(math expr8 #:parens true)}
+|===
