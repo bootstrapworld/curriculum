@@ -575,6 +575,13 @@ The following is needed to construct documents from this repo:
 do. We're not using any bleeding-edge features of Racket. You'll want to
 https://download.racket-lang.org/[download and install DrRacket]
 and make sure the `racket` binary is in your `$PATH`.
++
+On systems with `apt` (Ubuntu, WSL), the easiest way to install the
+latest
+Racket is:
++
+  sudo apt-add-repository ppa:/plt/racket
+  sudo apt install racket
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
@@ -583,6 +590,15 @@ and make sure the `racket` binary is in your `$PATH`.
 * Lua, used for postprocessing.
   - on Linux/WSL: `sudo apt-get install lua5.4`
   - on macOS: `brew install lua`
+
+* Node. The standard Node offered view your OS's package manager may not
+  be right: To get finer control on the Node version:
+  - Install `nvm`, the Node Version Manager, by follow the instructions on
+    https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+    to install the Node Version Manager. (Use the `curl` as you've
+    already installed `curl`.)
+  - Do `nvm install 16` followed by `nvm use 16` to use version 16,
+    which is OK for now.
 
 * Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
@@ -939,5 +955,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-03-30
+// last modified 2023-06-08
 // vi:tw=72
