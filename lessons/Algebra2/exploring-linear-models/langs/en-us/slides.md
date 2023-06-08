@@ -196,7 +196,7 @@ Return to @printable-exercise{exploring-states.adoc}, and complete the rest of t
 {layout="Launch"}
 # Fitting Linear Models
 
-In Pyret, make a scatter plot showing the the relationship between `college-or-higher` and `median-household-income`.
+In Pyret, make a scatter plot showing the the relationship between `college-or-higher` and `median-income`.
 
 
 <!--
