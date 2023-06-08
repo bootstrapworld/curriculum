@@ -107,7 +107,7 @@ Form indicates whether a relationship is linear, non-linear or undefined.
 [.lesson-point]
 Linear relationships have direction
 
-For straight-line relationships, we can talk about _direction._
+If the relationship clusters around a straight line, we can talk about _direction._
 
 @right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
 
@@ -218,7 +218,7 @@ Pyret includes a function called `fit-model`. Find this contract in your contrac
 
 [.lesson-instruction]
 - Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.
-- What does @math{R^2} mean?
+- Based on the @math{R^2} values and plots you created on this pag, what do you think @math{R^2} means?
 
 @math{R^2} describes the _percentage of the variation in the y-variable that is explained by the x variable_ in our model. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation!
 
@@ -227,8 +227,7 @@ If the model is perfect, the @math{R^2} value will be 1.00, meaning 100% of the 
 But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether! Did you see any models with a negative @math{R^2} value?
 
 [.lesson-instruction]
-- Complete the third section ("Build a Model through Trial and Error") in @printable-exercise{model-college-v-income.adoc}.
-- Optional: For each of your trials, graph the resulting linear model on @opt-printable-exercise{graphing-models.adoc}.
+- Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-2.adoc}.
 - What was the best model you could come up with?
 
 But how do we find the __best__ model? In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
@@ -236,6 +235,9 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 [.lesson-instruction]
 - Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income.adoc}.
 - How close did you come to the optimal model? Did anything about the model surprise you?
+- Optional: For each of the three models on @printable-exercise{model-college-v-income.adoc} and @printable-exercise{model-college-v-income-2.adoc}, graph the line on @opt-printable-exercise{graphing-models.adoc}.
+
+@teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have seen this (most likely in 8th grade), you should make sure they understand it before proceeding.}
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
