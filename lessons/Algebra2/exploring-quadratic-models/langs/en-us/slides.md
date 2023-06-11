@@ -152,7 +152,7 @@ Now we need to figure out the values of @math{a} and @math{k}!
 
 But what do each of the coefficients in Vertex Form mean?
 
-- Open @online-exercise{https://www.desmos.com/calculator/geyx4aetop, Exploring Quadratics} in Desmos.
+- Open @starter-file{alg2-exploring-quadratics} in Desmos.
 - Use Desmos to complete @printable-exercise{graphing-models.adoc}.
 
 <!--
