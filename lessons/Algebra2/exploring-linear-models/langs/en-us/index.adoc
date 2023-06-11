@@ -62,7 +62,7 @@ alabama = row-n(states-table, 0)
 alaska  = row-n(states-table, 1)
 ```
 
-In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret too! But in Pyret, values can be more than just numbers! On lines 13 and 14 of this file, the variables `alabama` and `alaska` are _rows_ from the table.
+In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! On lines 13 and 14 of this file, the variables `alabama` and `alaska` are _rows_ from the table.
 
 * What columns in this dataset have to do with wealth?
 ** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
@@ -72,7 +72,7 @@ In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use
 [.lesson-instruction]
 - What is the contract for `scatter-plot`?
 - Working in pairs or small groups, complete questions 3 and 4 (making displays and suggesting possible relationships) in @printable-exercise{exploring-states.adoc}.
-- **Do not go on to question 5!** We'll be returning to that later in the lesson.
+- **Do not go on to question 5.** We'll be returning to that later in the lesson.
 
 Note: During this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. You may want to
 
@@ -93,8 +93,6 @@ Scatter plots let us visualize the relationship between two columns. If no relat
 
 These patterns can be described using three qualities: form, direction, and strength.
 
-@vocab{Form} refers to the shape of the pattern. Sometimes a pattern looks like a straight line, or a curve, or a hockey stick. And sometime, there's no clear shape at all!
-
 [.lesson-point]
 Form indicates whether a relationship is linear, non-linear or undefined.
 
@@ -114,7 +112,7 @@ Linear relationships have direction
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
-@right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
+@right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
 
 @clear
 
@@ -185,7 +183,7 @@ This scatter plot appears to show a positive, linear relationship: states with h
 [.lesson-instruction]
 Suppose the United States were to add a new state. **Based on the data for the existing 50 states, what median household income would you predict, if exactly 50% of the new state's citizens had attended college?** What about 20%? 60%
 
-Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x- and y-axes of our display!
+Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x- and y-axes of our display.
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
@@ -219,17 +217,17 @@ Since we're looking for both the slope and the y-intercept for this model, it ma
 
 Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
 
-Pyret includes a function called `fit-model`. Find this contract in your contracts pages! Like `scatter-plot`, it consumes columns for our labels, our @math{x}s and ours @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
+Pyret includes a function called `fit-model`. Find this contract in your contracts pages. Like `scatter-plot`, it consumes columns for our labels, our @math{x}s and ours @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 [.lesson-instruction]
 - Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.
 - Based on the @math{R^2} values and plots you created on this page, what do you think @math{R^2} means?
 
-@math{R^2} describes the _percentage of the variation in the y-variable that is explained by the x variable_ in our model. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation!
+@math{R^2} describes the _percentage of the variation in the y-variable that is explained by the x variable_ in our model. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation.
 
 If the model is perfect, the @math{R^2} value will be 1.00, meaning 100% of the @math{y}-values can be explained by the @math{x}-values. Of course in the real world, no model is perfect! The @math{R^2} value for no correlation at all is *zero*. If we just drew a horizontal predictor line _in the middle of the data_, it would mean that we expect a median income somewhere in that range but with no connection whatsoever to the percentage of people who finish college.
 
-But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether! Did you see any models with a negative @math{R^2} value?
+But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether. Did you see any models with a negative @math{R^2} value?
 
 [.lesson-instruction]
 - Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-2.adoc}.
@@ -252,14 +250,14 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. Deeper discussion of @math{R^2} and least-squares regression may be appropriate for older students, or in a dedicated statistics class.
 |===
 
-When we interpret a model, we try to make sense of the slope, the axes, the @math{R^2} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income. Based on the @math{R^2} value of **-15.63**, this is a pretty terrible model and shouldn't be trusted!__
+When we interpret a model, we try to make sense of the slope, the axes, the @math{R^2} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income. Based on the @math{R^2} value of **-15.63**, this is a pretty terrible model and shouldn't be trusted.__
 
 [.lesson-instruction]
 --
 These models are useless if we can't make sense of them!
 
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- Optional: For more practice, build linear models for **other** relationships in the data! You can use @opt-printable-exercise{building-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
+- Optional: For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
 --
 
 === Synthesize

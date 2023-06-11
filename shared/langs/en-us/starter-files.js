@@ -614,6 +614,18 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
     }
   },
+  "alg2-exploring-quadratics": {
+    "title": "Exploring Quadratics",
+    "pyret": {
+      "url": "https://www.desmos.com/calculator/geyx4aetop"
+    }
+  },
+  "alg2-covid-desmos" : {
+    "title" : "Modeling Covid Spread in Desmos",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6485ee2b0877394eb63a76d0"
+    }
+  },
   "alg2-covid": {
     "title": "Covid Spread Starter File",
     "pyret": {
