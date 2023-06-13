@@ -81,9 +81,7 @@ In this image, we've draw an arrow for each of the 1-year-old cats. That means t
 
 To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
 
-The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.
-
-@teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.}
+@teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of the worksheet to support students in doing so.}
 
 ---
 {layout="Launch"}
