@@ -186,7 +186,7 @@ For more practice writing code to generate the distance between two fixed points
 Optional: for more practice, complete @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
 
 <!--
-Debrief these workbook pages - or have students pair-and-share - before moving on to writing the full distance function.
+Debrief these pages - or have students pair-and-share - before moving on to writing the full distance function.
 -->
 
 ---
