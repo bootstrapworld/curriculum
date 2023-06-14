@@ -265,4 +265,7 @@ Displays are often most interesting when compared with other displays. For examp
 {layout="Supplemental"}
 # Additional Exercises
 
-For more practice composing table functions, you can complete @opt-printable-exercise{coe-displays-2.adoc} and/or @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
+For more practice composing table functions, you can complete 
+
+- @opt-printable-exercise{coe-displays-2.adoc} and/or
+- @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
