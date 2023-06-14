@@ -79,7 +79,7 @@ Most questions can be broken down into one of four categories:
 
 - **Lookup questions** - Answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
 
-- **Arithmetic questions** - Answered by computing an answer across a single column.{style="font-size:16pt"}
+- **Arithmetic questions** - Answered by computing an answer within a single column.{style="font-size:16pt"}
 
 - **Statistical questions** If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
 
