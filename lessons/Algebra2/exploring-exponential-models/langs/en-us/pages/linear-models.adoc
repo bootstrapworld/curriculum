@@ -1,0 +1,72 @@
+= Linear Models
+++++
+<style>
+.autonum { font-weight: bold; }
+.autonum:after { content: ')' !important; }
+
+.FillVerticalSpace { grid-gap: 20px; margin-top: 5px; }
+
+h2 .MathJax { float: right;  padding-right: 1em; }
+
+td {
+    padding: 0 !important;
+    background-image: url(../images/f99f615fabddc961.png);
+    background-size: 2in 1.75in;
+    max-height: 1.75in;
+    min-height: 1.75in;
+    background-position-x: 0.2in;
+    background-repeat: no-repeat;
+}
+
+td .fitb { padding-top: 0 !important; }
+td .MathJax { min-width: 30px !important; display: inline-block; }
+</style>
+++++
+
+== Fitting the Model Visually @math{f(x)= mx + b}
+
+_For this section, you'll need to have @starter-file{alg2-covid-desmos-l} open on your computer._
+
+@n Try changing the value of @math{m} and @math{b} to find three promising linear models, graphing each one and labeling your values in the squares below.
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{m=}@fitb{1em}{} +
+  @math{b=}@fitb{1em}{}
+
+| @math{m=}@fitb{1em}{} +
+  @math{b=}@fitb{1em}{}
+
+| @math{m=}@fitb{1em}{} +
+  @math{b=}@fitb{1em}{}
+
+|===
+
+== Fitting the Model Programmatically @math{f(x)= mx + b}
+
+_For this section, open your copy of the @starter-file{alg2-covid}._
+
+@n In the definitions area of your @starter-file{alg2-covid} define `l1`, `l2` and `l3` to describe the three models you fit in Desmos.
+
+@ifsoln{@vspace{1ex}}
+
+@ifsoln{If @math{m=1200} and @math{b=70000} for your first model, you would type the following in your definitions area}
+
+@ifsoln{ `fun l1(x) : (1200 * x) + 70000 end`}
+
+@n Use `fit-model` to determine the @math{R^2} value of each of your models for the `MA-table`.
+
+@math{R^2} for `l1`: @fitb{14em}{} @math{R^2} for `l2`: @fitb{14em}{} @math{R^2} for `l3`: @fitb{14em}{} 
+
+@n Use `lr-plot` to obtain the best-possible *linear model* for the MA Covid dataset. Write the model and its @math{R^2} value below. +
+@fitb{}{@ifsoln{@math{y=1441.48x - 82800} or @math{y=1441.48x - 8.2e4}, @math{R^2 = 0.79}}}
+
+== Are Linear Models a Good Fit for This Data?
+
+@n Would you feel good about making predictions based on these models? Why or why not? @fitb{}{} +
+
+@fitb{}{@ifsoln{}}
+
+@fitb{}{@ifsoln{}}
+
+@fitb{}{@ifsoln{}}

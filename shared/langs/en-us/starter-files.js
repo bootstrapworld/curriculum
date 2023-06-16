@@ -626,6 +626,24 @@ var starterFiles = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/6485ee2b0877394eb63a76d0"
     }
   },
+  "alg2-covid-desmos-l" : {
+    "title" : "Modeling Covid Spread in Desmos (Linear Models)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+    }
+  },
+  "alg2-covid-desmos-q" : {
+    "title" : "Modeling Covid Spread in Desmos (Quadratic Models)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf5e84656b1a46531fd1"
+    }
+  },
+  "alg2-covid-desmos-e" : {
+    "title" : "Modeling Covid Spread in Desmos (Exponential Models)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf81e9b928155c629da0"
+    }
+  },
   "alg2-covid": {
     "title": "Covid Spread Starter File",
     "pyret": {
