@@ -10,11 +10,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 # Review
 
 - Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
-- Hit "Run," then type `shapes` in the Interactions Area.
+- Hit "Run," then type `shapes-table` in the Interactions Area.
 - The way this file defines a table is different from what we've encountered before. How is it different?
 
 <!--
-Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the table `shapes` one row at a time.
+Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the `shapes-table` one row at a time.
 -->
 
 ---
