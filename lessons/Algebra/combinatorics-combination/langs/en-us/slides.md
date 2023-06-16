@@ -94,7 +94,7 @@ In this situation, we have 6 possible choices and we get to choose 4 times:
 {layout="Investigate"}
 # Combinations
 
-Complete the @printable-exercise{combination.adoc} and @printable-exercise{combination-or-permutation.adoc} worksheets.
+Complete @printable-exercise{combination.adoc} and @printable-exercise{combination-or-permutation.adoc}.
 
 ---
 {layout="Synthesize"}
