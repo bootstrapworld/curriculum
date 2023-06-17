@@ -14,7 +14,7 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 
 (define exp1 '(filter (filter t is-young) is-fixed))
 (define exp2 '(sort (filter (filter t is-female) is-fixed) "age" true))
-(define exp3 '(bar-chart (filter (filter t is-female) is-fixed) "age"))
+(define exp3 '(box-plot (filter (filter t is-female) is-fixed) "age"))
 (define exp4 '(pie-chart (filter (filter t is-young) is-fixed) "sex"))
 }
 
@@ -52,7 +52,7 @@ For each prompt on the left, draw the Circle of Evaluation that will produce the
 | @showsoln{(coe exp2)}
 
 | @n
-| Produce a bar-chart for all fixed female animals, showing the distribution of `fixed`
+| Produce a box-plot for all fixed female animals, showing the distribution of `age`
 | @showsoln{(coe exp3)}
 
 | @n
