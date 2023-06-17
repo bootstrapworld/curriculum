@@ -210,14 +210,14 @@ What does each of the Circles below evaluate to?
 # Absolute Value
 
 - On @printable-exercise{pages/true-or-false-abs-val.adoc}, you will compare expressions with `abs` to expressions with `negate`
-- On the bottom half of the workbook page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
+- On the bottom half of the page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
 
 
 ---
 {layout="Investigate"}
 # Absolute Value
 
-Examine the Circles of Evaluation to determine @printable-exercise{pages/wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates variables. Place a check mark by each Circle that meets the condition stated on the left.
+Examine the Circles of Evaluation to determine @printable-exercise{pages/wodb-abs-val-negate.adoc}. The page starts with numeric values and then integrates variables. Place a check mark by each Circle that meets the condition stated on the left.
 
 @image{images/wodb.png}
 

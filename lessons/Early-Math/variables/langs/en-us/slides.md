@@ -165,7 +165,7 @@ Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge 
 @image{images/true-or-false2.png}
 
 <!--
-This activity (and the subsequent one) invites students to apply their knowledge of the Associative and Commutative Properties in equations and Circles of Evaluation that include variables. For some students, this cognitive leap can be a challenging one. The familiarity of the workbook pages (they all parallel those in the previous section) can make this transition a bit smoother.
+This activity (and the subsequent one) invites students to apply their knowledge of the Associative and Commutative Properties in equations and Circles of Evaluation that include variables. For some students, this cognitive leap can be a challenging one. These pages parallel those in the previous section to make this transition a bit smoother.
 
 Students are also welcome to choose values to represent the variables if they in fact want to evaluate the expressions to confirm if they are equivalent (or not). Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct. The ability to make substitutions to check equivalence is an extremely valuable skill.
 -->

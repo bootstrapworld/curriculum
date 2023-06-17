@@ -15,7 +15,7 @@ The top directory contains a bunch of scripts and subdirectories.
 
 The curriculum content is placed in the subdirectories `lessons`
 and `pathways`. `lessons` contains individual lessons, including
-the lesson plan, exercises, and workbook pages. `pathways`
+the lesson plan, exercises, and printable pages. `pathways`
 contains pathway directories, each of which defines a collection
 of lessons. (It is possible for a lesson to occur in multiple
 pathways.)
@@ -156,7 +156,7 @@ this level.
 
 Images are in subdirectory `images`.
 
-Single workbook pages are in subdirs `pages`
+Single printable pages & opt-printable are in subdirs `pages`
 and `solution-pages` (some of these can be static PDFs
 rather than adoc source files).
 (The `solution-` versions, as already explained, are meant to supply
@@ -207,7 +207,7 @@ Here is an example:
     "license": "Creative Commons 4.0 - NC - SA"
   }
 
-Captions are optional and will print under the image on the webpage and workbook page. They can be left out if no caption is desired.
+Captions are optional and will print under the image on the webpage and printable exercises. They can be left out if no caption is desired.
 
 Descriptions are for visually impaired folks using screenreaders so need to be detailed enough to allow students to engage with our materials. For example:
 
@@ -575,6 +575,13 @@ The following is needed to construct documents from this repo:
 do. We're not using any bleeding-edge features of Racket. You'll want to
 https://download.racket-lang.org/[download and install DrRacket]
 and make sure the `racket` binary is in your `$PATH`.
++
+On systems with `apt` (Ubuntu, WSL), the easiest way to install the
+latest
+Racket is:
++
+  sudo apt-add-repository ppa:/plt/racket
+  sudo apt install racket
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
@@ -583,6 +590,15 @@ and make sure the `racket` binary is in your `$PATH`.
 * Lua, used for postprocessing.
   - on Linux/WSL: `sudo apt-get install lua5.4`
   - on macOS: `brew install lua`
+
+* Node. The standard Node offered view your OS's package manager may not
+  be right: To get finer control on the Node version:
+  - Install `nvm`, the Node Version Manager, by follow the instructions on
+    https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+    to install the Node Version Manager. (Use the `curl` as you've
+    already installed `curl`.)
+  - Do `nvm install 16` followed by `nvm use 16` to use version 16,
+    which is OK for now.
 
 * Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
@@ -939,5 +955,5 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-03-30
+// last modified 2023-06-08
 // vi:tw=72

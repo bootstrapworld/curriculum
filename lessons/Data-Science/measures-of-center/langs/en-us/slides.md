@@ -101,7 +101,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 - Type `mean(animals-table, "pounds")`. 
 - What does this give us?
 - Does this support the Bureau’s claims?
-- Open your workbooks to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
+- Turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
 
 <!--
 
