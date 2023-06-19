@@ -4,22 +4,17 @@
 body.workbookpage td .autonum::after { content: ')' !important; }
 </style>
 ++++
-For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+_For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you._
 
-@n Click "Run", and evaluate `covid-table` in the Interactions Area. Do you know what each column means?
+@n Click "Run", and evaluate `covid-table` in the Interactions Area. 
 
-[cols="1a,1a,1a", frame="none", stripes="none"]
-|===
-| *state* - the state reporting the data
-| *day* - the number of days after June 20th, 2020
-| *positive* - the number of new, positive cases reported
-|===
+@n Take a look at the Definitions area and find the "notes on columns". What is the start date for the data in this table? @fitb{}{@ifsoln{June 20, 2020}}
 
-@n Evaluate `CT1`, `MA1` and `ME1` in the Interactions Area. Which state(s) and day(s) are represented by these rows? @fitb{}{@ifsoln{CT, MA, and ME - day 1}}
+@n In the definitions area we see rows defined for Connecticut: `CT1`, Massachusetts: `MA1` and Maine: `ME1`. What do we learn by evaluating `MA1` in the interactions area? 
 
-@n How many total positive cases were reported in Massachusetts, as of 1 day after June 20th? @fitb{}{@ifsoln{104156}}
+@fitb{}{@ifsoln{On Day 1 after June 20,2020 there were 104156 positive cases in Massachusetts.}}
 
-@n In the Definitions Area on the left, define two new Rows for Vermont (VT) and Rhode Island (RI) on lines 17 and 18. Click "Run" and test these Rows out in the Interactions Area.
+@n Define three new Rows in the Definitions area called `VT1`, `NH1` and `RI1` for Vermont, New Hampshire and Rhode Island . Click "Run" and test these Rows out in the Interactions Area.
 
 @vspace{1ex}
 
@@ -46,16 +41,31 @@ Based on the scatter plot...
 --
 !===
 
-@n On or after line 23 (if you added new lines above) you'll find a Contract and Purpose Statement for a function called `is-MA`. Read them both carefully! What is the *Name* of this function? @fitb{10em}{@ifsoln{is-MA}} Its *Domain*? @fitb{10em}{@ifsoln{Row}} Its *Range*? @fitb{}{@ifsoln{Boolean}}
+@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in this dataset. 
+
+What do you notice about the line? @fitb{}{} 
+
+@fitb{}{}
+
+@n What is the @math{R^2} value? @fitb{10em}{@ifsoln{0.07983}} and what does it tell us about the model? @fitb{}{}
+
+@fitb{}{}
+
+@n Find the Contract and Purpose Statement for a function called `is-MA` (on or after Row 27). Read them both carefully! 
+
+What is the *Domain* of `is-MA`? @fitb{20em}{@ifsoln{Row}} Its *Range*? @fitb{}{@ifsoln{Boolean}}
 
 @n What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{7em}{@ifsoln{false}}
 
 @center{**Try typing each of these into the Interactions Area on the right. Were you correct?**}
 
-@n In the Interactions Area, type @show{(code '(filter covid-table is-MA))}. What did this evaluate to? @fitb{}{} +
-@fitb{}{@ifsoln{A Table just for data from Massachusetts}}
-
-@n Type `MA-table` in the Interactions Area, then read the code on or after line 30 carefully. What is that code doing? @fitb{}{} +
+@n Find `MA-table` in the Definitions Area (on or after line 34). What is that code doing? @fitb{}{} +
 @fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
 
-@fitb{}{}
+@n Type `MA-Table` into the interactions area. What does it evaluate to? @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
+
+@n What code would you need to define a new table called `VT-table` to filter the `covid-table` for all of the rows containing data about Vermont?
+
+@fitb{}{@ifsoln{fun is-VT(r): r["state"] == "VT" end}}
+
+@fitb{}{@ifsoln{VT-table = filter(covid-table, is-VT)}}
