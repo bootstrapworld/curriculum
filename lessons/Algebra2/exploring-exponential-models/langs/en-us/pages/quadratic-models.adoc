@@ -46,17 +46,32 @@ _For this section, you'll need to have @starter-file{alg2-covid-desmos-q} open o
 |===
 
 == Fitting the Model Programmatically @math{f(x) = a(x-h)^2 + k}
-_For the section, open your copy of the @starter-file{alg2-covid}._
+_For this section, open your copy of the @starter-file{alg2-covid}._
 
-@n In the definitions area of your @starter-file{alg2-covid} define `q1`, `q2` and `q3` to describe the three models you fit in Desmos.
+@n In the space below, define `quadratic1` using the first model you fit in Desmos.
 
-@ifsoln{If @math{a=14}, @math{h=70} and @math{k=88000} for your first model, you would type the following in your definitions area}
+@ifsoln{@vspace{1ex}}
 
-@ifsoln{ `fun w(x): (14 * (num-sqr(x - 70))) + 88000 end`}
+@ifsoln{Answers will vary.}
+
+@ifsoln{If @math{a=14}, @math{h=70} and @math{k=88000}, you would get the following:}
+
+`fun quadratic1(x): (` @fitbruby{10em}{@ifsoln{14}}{a} `* (num-sqr( x -` @fitbruby{10em}{@ifsoln{70}}{h} `))) +` @fitbruby{10em}{@ifsoln{88000}}{k} `end`
+
+@n In the Definitions Area, define `quadratic1`, `quadratic2` and `quadratic3` to describe the three models you fit in Desmos.
 
 @n Use `fit-model` to determine the @math{R^2} value of each of your models for the `MA-table`.
 
-@math{R^2} for `q1`: @fitb{14em}{} @math{R^2} for `q2`: @fitb{14em}{} @math{R^2} for `q3`: @fitb{14em}{} 
+@ifsoln{@vspace{1ex}}
+
+@ifsoln{For the first one use: `fit-model(MA-table, "state", "day", "positive", quadratic1)`}
+
+@ifsoln{@vspace{1ex}}
+
+@ifsoln{@math{R^2} values will vary. For the example above, @math{R^2} would be: 0.85500}
+
+
+@math{R^2} for `quadratic1`: @fitb{10em}{} @math{R^2} for `quadratic2`: @fitb{10em}{} @math{R^2} for `quadratic3`: @fitb{10em}{} 
 
 @n Are quadratic models a good fit for this data? Why or why not? @fitb{}{} +
 @fitb{}{@ifsoln{}}
