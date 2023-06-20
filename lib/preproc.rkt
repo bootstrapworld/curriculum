@@ -1741,15 +1741,16 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([newly-added? (add-starter-file lbl)]
-                                            [p (hash-ref c *proglang-sym* #f)])
+                                      (let* ([newly-added? (add-starter-file lbl)]
+                                             [p (hash-ref c *proglang-sym* #f)]
+                                             [starter-file-title (or (hash-ref p 'title #f)
+                                                                     (hash-ref c 'title))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
-                                                                  (hash-ref p 'title #f)
-                                                                  (hash-ref c 'title))]
+                                                                  starter-file-title)]
                                                        [url (let ([url (hash-ref p 'url "")])
                                                               (cond [(string=? url "")
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
@@ -1765,7 +1766,13 @@
                                                            )])
                                                   (when (and newly-added?
                                                              (not (member lbl *do-not-autoinclude-in-material-links*)))
-                                                    (let* ([materials-link-output link-output]
+                                                    (let* ([materials-link-output
+                                                             (format
+                                                               "link:pass:[~a][~a~a]"
+                                                               url
+                                                               starter-file-title
+                                                               ", window=\"_blank\""
+                                                               )]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
