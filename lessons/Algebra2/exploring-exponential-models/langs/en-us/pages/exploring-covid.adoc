@@ -10,11 +10,11 @@ _For this page, you'll need to have the @starter-file{alg2-covid} open on your c
 
 @n Take a look at the Definitions area and find the "notes on columns". What is the start date for the data in this table? @fitb{}{@ifsoln{June 20, 2020}}
 
-@n In the definitions area we see rows defined for Connecticut: `CT1`, Massachusetts: `MA1` and Maine: `ME1`. What do we learn by evaluating `MA1` in the interactions area? 
+@n In the Definitions area we see rows defined for Connecticut: `CT1`, Massachusetts: `MA1` and Maine: `ME1`. What do we learn by evaluating `MA1` in the interactions area?
 
 @fitb{}{@ifsoln{On Day 1 after June 20,2020 there were 104156 positive cases in Massachusetts.}}
 
-@n Define three new Rows in the Definitions area called `VT1`, `NH1` and `RI1` for Vermont, New Hampshire and Rhode Island . Click "Run" and test these Rows out in the Interactions Area.
+@n Define three new Rows called `VT1`, `NH1` and `RI1` for Vermont, New Hampshire and Rhode Island. Click "Run" and test them out.
 
 @vspace{1ex}
 
@@ -23,8 +23,6 @@ _For this page, you'll need to have the @starter-file{alg2-covid} open on your c
 | @n In Pyret, make a scatter plot showing the relationship between `day` and `positive`, using `state` as your labels, then sketch the resulting scatter plot below.
 |
 --
-Based on the scatter plot...
-
 @n What do you *Notice?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
@@ -51,7 +49,7 @@ What do you notice about the line? @fitb{}{}
 
 @fitb{}{}
 
-@n Find the Contract and Purpose Statement for a function called `is-MA` (the first definition under "Define some helper functions" in your Pyret file). Read them both carefully!
+@n Find the function called `is-MA` (under "Define some helper functions" in your Pyret file). Read them both carefully!
 
 What is the *Domain* of `is-MA`? @fitb{20em}{@ifsoln{Row}} Its *Range*? @fitb{}{@ifsoln{Boolean}}
 
@@ -64,8 +62,4 @@ What is the *Domain* of `is-MA`? @fitb{20em}{@ifsoln{Row}} Its *Range*? @fitb{}{
 
 @n Type `MA-Table` into the interactions area. What does it evaluate to? @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
 
-@n What code would you need to define a new table called `VT-table` to filter the `covid-table` for all of the rows containing data about Vermont?
-
-@fitb{}{@ifsoln{fun is-VT(r): r["state"] == "VT" end}}
-
-@fitb{}{@ifsoln{VT-table = filter(covid-table, is-VT)}}
+@star Following the model of `is-MA` and `MA-table`, define a new function `is-VT`, and use it to create a new grouped sample called `VT-table`.
