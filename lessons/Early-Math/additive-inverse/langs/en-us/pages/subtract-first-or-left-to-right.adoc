@@ -10,7 +10,7 @@ div.circleevalsexp { width: auto; }
 For each expression, draw _two_ unique Circles of Evaluation.
 
 - In the column on the left, draw a Circle to illustrate evaluating from left to right.
-- In the column on the right, draw a Circle to illustrate evaluating subtraction first, followed by addition.
+- In the column on the right, draw a Circle to illustrate evaluating subtraction first, followed by addition. In other words, evaluate from right-to-left.
 - Evaluate each Circle and make a note of whether or not they produce the same result.
 We've done the first one for you.
 
@@ -20,24 +20,32 @@ We've done the first one for you.
 
 | @n
 | @math{20 + 8 - 5}
+
+@ifsoln{Both ways of solving produce the same result.}
 | @show{(coe '(+ 20 (- 8 5)))}
 | @show{(coe '(- (+ 20 8) 5))}
 
 
 | @n
 | @math{4 + 3 - 2}
-| @show{(coe '(+ 4 (- 3 2)))}
-| @show{(coe '(- (+ 4 3) 2))}
+
+@ifsoln{Both ways of solving produce the same result.}
+| @showsoln{(coe '(+ 4 (- 3 2)))}
+| @showsoln{(coe '(- (+ 4 3) 2))}
 
 | @n
 | @math{12 + 9 - 8}
-| @show{(coe '(+ 12 (- 9 8)))}
-| @show{(coe '(- (+ 12 9) 8))}
+
+@ifsoln{Both ways of solving produce the same result.}
+| @showsoln{(coe '(+ 12 (- 9 8)))}
+| @showsoln{(coe '(- (+ 12 9) 8))}
 
 | @n
 | @math{64 + 92 - 91}
-| @show{(coe '(+ 64 (- 92 91)))}
-| @show{(coe '(- (+ 64 92) 91))}
+
+@ifsoln{Both ways of solving produce the same result.}
+| @showsoln{(coe '(+ 64 (- 92 91)))}
+| @showsoln{(coe '(- (+ 64 92) 91))}
 
 | @n
 | Come up with an example of your own! See if you can come up with an unusual expression.
@@ -53,7 +61,7 @@ We've done the first one for you.
 
 @fitb{}{}
 
-@n Can you change the groupings or the order in which you evaluate an expression like this one: @math{100 - 20 - 5}? On the back of your paper, sketch out a few possible Circles. Which one is correct? Why do we need to use the left-to-right rule here? @fitb{}{}
+@n Can you change the groupings or the order in which you evaluate an expression like this one: @math{100 - 20 - 5}? Do you get the same answer when you solve left-to-right and right-to-left? Which way is correct? @fitb{}{}
 
 @fitb{}{}
 
