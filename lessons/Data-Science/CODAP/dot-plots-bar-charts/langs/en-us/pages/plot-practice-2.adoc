@@ -8,11 +8,12 @@ p { margin: 0 !important; }
 </style>
 ++++
 
-Use the @starter-file{animals} to create the following displays in CODAP. Then, sketch the displays and answer the questions.
+Use the @starter-file{animals} to create the following displays in CODAP. First, fill in the blanks and check all boxes that apply. Next, create the display in CODAP. Finally, sketch the displays and answer the questions.
 
 @vspace{1ex}
 
-@n A histogram of the number of `pounds` that animals weigh.
+
+@n A bar chart showing the `species` of animals from the shelter.
 [cols="1a,1a,1a", options="header"]
 |===
 |@center{*Column / Attribute*}
@@ -20,8 +21,15 @@ Use the @starter-file{animals} to create the following displays in CODAP. Then, 
 |@center{*Configuration*}
 
 |
-@fitbruby{100%}{@ifsoln{pounds}}{[column used as x-axis]}
-@fitbruby{100%}{@ifsoln{n/a}}{[column used as y-axis]}
+@ifnotsoln{
+@fitbruby{100%}{}{[column used as x-axis]}
+@fitbruby{100%}{}{[column used as y-axis]}
+}
+
+@ifsoln{
+@fitbruby{100%}{_species_}{[column used as x-axis]}
+@fitbruby{100%}{_n/a_}{[column used as y-axis]}
+}
 
 |
 @ifnotsoln{
@@ -30,8 +38,8 @@ Use the @starter-file{animals} to create the following displays in CODAP. Then, 
 }
 
 @ifsoln{
-* [x] Numeric
-* [ ] Categorical
+* [ ] Numeric
+* [x] Categorical
 }
 
 |
@@ -47,29 +55,33 @@ Use the @starter-file{animals} to create the following displays in CODAP. Then, 
 * [ ] Points
 * [x] Fuse dots into bars
 * [ ] Bar for each point
-* [x] Group into bins
+* [ ] Group into bins
 * [ ] No need to make a selection
 }
 
 |===
 
 
-[.FillVerticalSpace, cols="^1a,^1a", options="header"]
+[.FillVerticalSpace, cols="^1a, ^1a", options="header"]
 |===
 |*Sketch the chart below:*
-|*What do you think the data display tells us?*
+|*What do you think the display tells us?*
 
 |
-@ifsoln{@image{../images/weight-histo.png, 150}}
+@ifsoln{
+@image{../images/species-bar-chart.png, 200}
+}
 
 @ifnotsoln{ @vspace{20ex} }
-
 |
+
+
 @ifnotsoln{ @vspace{10ex} }
 
 @ifsoln{
-The display shows us the distribution of animals' weights into varying increments.
+The display tells us how many animals are cats, dogs, lizards, rabbits, snails, and tarantulas.
 @vspace{5ex}
+
 }
 
 |
