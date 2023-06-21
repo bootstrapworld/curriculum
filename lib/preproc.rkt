@@ -904,12 +904,7 @@
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    (let ([existent-file? #f])
-                     (cond [(file-exists? f)
-                            (set! existent-file? #t)]
-                           ; [(file-exists? (path-replace-extension f ".adoc"))
-                           ;  (set! existent-file? #t)
-                           ;  (set! g (path-replace-extension g ".adoc"))]
-                           [(file-exists? (path-replace-extension f ".html"))
+                     (cond [(file-exists? (path-replace-extension f ".html"))
                             (set! existent-file? #t)
                             (set! g (path-replace-extension g ".html"))]
                            [(file-exists? (path-replace-extension f ".shtml"))
@@ -917,7 +912,14 @@
                             (set! g (path-replace-extension g ".shtml"))]
                            [(file-exists? (path-replace-extension f ".pdf"))
                             (set! existent-file? #t)
-                            (set! g (path-replace-extension g ".pdf"))])
+                            (set! g (path-replace-extension g ".pdf"))]
+                           [(and (file-exists? f)
+                                 (equal? (path-get-extension f) #".adoc"))
+                            (set! existent-file? #t)
+                            (set! g (path-replace-extension g ".html"))]
+                           [(file-exists? f)
+                            (set! existent-file? #t)]
+                           )
                      (when existent-file?
                        (set! f (build-path *containing-directory* g)))
                      ; (printf "link ~a refers to ~a\n\n" g f)
