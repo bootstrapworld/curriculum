@@ -232,6 +232,15 @@
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
 
+(define (contracts . args)
+  (let ([res ""])
+    (let loop ([args args])
+      (unless (null? args)
+        (set! res (string-append res "\n\n"
+                    (apply contract (append (first args)))))
+        (loop (rest args))))
+    res))
+
 (define (make-dist-link f link-text)
 
   (cond [(regexp-match "^ *$" f)
