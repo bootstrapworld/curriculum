@@ -232,6 +232,15 @@
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
 
+(define (contracts . args)
+  (let ([res ""])
+    (let loop ([args args])
+      (unless (null? args)
+        (set! res (string-append res "\n\n"
+                    (apply contract (append (first args)))))
+        (loop (rest args))))
+    res))
+
 (define (make-dist-link f link-text)
 
   (cond [(regexp-match "^ *$" f)
@@ -497,6 +506,7 @@
                           (let* ([arg1 (read-commaed-group i directive read-group)]
                                  [project-file (first arg1)]
                                  [rubric-file (and (> (length arg1) 1) (second arg1))])
+                            (fprintf o "<span class=\"prefix\">Optional Project: </span>")
                             (display (fully-qualify-link (list project-file) directive) o)
                             (when rubric-file
                               (display " [" o)

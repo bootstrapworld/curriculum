@@ -250,3 +250,4 @@ All of the charts we've looked at in this lesson work with @vocab{categorical da
 
 - @opt-printable-exercise{bar-chart-notice.adoc}
 - @opt-printable-exercise{pie-chart-notice.adoc}
+- @opt-project{infographic.adoc, rubric-infographic.adoc}

@@ -219,7 +219,9 @@ Finally, this project can also be used to support __original data collection__ f
 {layout="Supplemental"}
 # Additional Practice
 
-If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @opt-online-exercise{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.
+- @opt-project{survey-design.adoc, rubric-survey-design.adoc}
+
+- If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @opt-online-exercise{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.
 
 <!--
 

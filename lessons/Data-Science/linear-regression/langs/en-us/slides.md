@@ -171,13 +171,13 @@ lr-plot(animals-table, "name", "age", "weeks")
 ```
 
 @image{images/lr-explained.png,  400}
-`lr-plot` is a function that takes a Table and the names of *3 columns*:{style="font-size:14pt"}
+`lr-plot` is a function that takes a Table & the names of *3 columns*:{style="font-size:13pt"}
 
-- `ls` -- the name of the column to use for _labels_ (e.g. “names of pets”){style="font-size:14pt"}
-- `xs` -- the name of the column to use for _x-coordinates_ (e.g. “age of each pet”){style="font-size:14pt"}
-- `ys` -- the name of the column to use for _y-coordinates_ (e.g. “weeks for each pet to be adopted”){style="font-size:14pt"}
+- `ls` -- the name of the column to use for _labels_ (e.g. “names of pets”){style="font-size:13pt"}
+- `xs` -- the name of the column to use for _x-coordinates_ (e.g. “age of each pet”){style="font-size:13pt"}
+- `ys` -- the name of the column to use for _y-coordinates_ (e.g. “weeks for each pet to be adopted”){style="font-size:13pt"}
 
-Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.{style="font-size:14pt"}
+Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.{style="font-size:13pt"}
 
 ---
 {layout="Launch-DN"}
@@ -325,14 +325,14 @@ Now that you've gotten some practice performing linear regression on the Animals
 - Fill in the Correlations portion of your @starter-file{research-paper}, using the scatter plots and linear regression plots they've constructed for their dataset and explaining what they show.
 
 ---
-{layout="Synthesize"}
+{layout="SynthesizeR"}
 # Your Analysis
 
 @image{images/lin-reg-2.png, 400}
 
-You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line! 
+You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line!{style="font-size:15pt"} 
 
-There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
+There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.{style="font-size:15pt"}
 
 <!--
 Have students share their findings with the class. Get excited about the connections they are making and the conclusions they are drawing! Encourage students to make suggestions to one another about further analysis.
@@ -344,3 +344,4 @@ Have students share their findings with the class. Get excited about the connect
 # Your Analysis
 
 - @opt-printable-exercise{pages/describing-relationships-2.adoc}
+- @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}

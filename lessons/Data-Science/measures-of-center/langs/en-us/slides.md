@@ -74,7 +74,6 @@ _Each group of three will need a ruler, 4-8 pennies, and at least one pen or pen
 - Is there a **midpoint**? 
 - Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
 
-@image{images/num-line-pounds.png}
 <!--
 
 -->
@@ -102,7 +101,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 - Type `mean(animals-table, "pounds")`. 
 - What does this give us?
 - Does this support the Bureau’s claims?
-- Open your workbooks to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
+- Turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
 
 <!--
 
@@ -116,7 +115,6 @@ You computed the mean of that column to be almost exactly 41 pounds, but if we l
 
 In fact, more than half of the animals weigh less than _15 pounds_. What is throwing off the average so much?
 
-@image{images/num-line-pounds2.png}
 <!--
 
 -->
