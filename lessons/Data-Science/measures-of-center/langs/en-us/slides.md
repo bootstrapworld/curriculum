@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Mean
 
-**According to the Animal Shelter Bureau, the average pet weighs almost 41 pounds.**
+**According to the Animal Shelter Bureau, the average pet weighs almost 40 pounds.**
 
 Some medicines are dosed by weight: heavier animals need a larger dose that could be dangerous for smaller animals. 
 
@@ -22,7 +22,7 @@ If someone from the shelter needs to give a dose of medicine to the animals, **i
 {layout="Launch"}
 # Mean
 
-“The average pet weighs 41 pounds” is a statement about the entire dataset, which summarizes a whole column of values with a single number. 
+“The average pet weighs almost 40 pounds” is a statement about the entire dataset, which summarizes a whole column of values with a single number. 
 
 Summarizing a big dataset means that some information gets lost, so it’s important to pick an appropriate summary. Picking the wrong summary can have serious implications! 
 
@@ -111,7 +111,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 {layout="Launch"}
 # Median
 
-You computed the mean of that column to be almost exactly 41 pounds, but if we look at the dataset we'll quickly see that most of the animals weigh less than 41 pounds! 
+You computed the mean of that column to be almost exactly 40 pounds, but if we look at the dataset we'll quickly see that most of the animals weigh less than 40 pounds! 
 
 In fact, more than half of the animals weigh less than _15 pounds_. What is throwing off the average so much?
 
