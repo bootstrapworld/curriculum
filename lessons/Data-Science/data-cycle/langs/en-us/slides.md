@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 **Are more animals fixed or unfixed?**
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset} in your student workbooks, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
+- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset}, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
 - You and your partner are going to answer a simple question: **are more animals fixed or unfixed?**
 
 <!--

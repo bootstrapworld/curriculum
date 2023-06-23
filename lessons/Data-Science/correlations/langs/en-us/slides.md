@@ -285,7 +285,7 @@ _The correlation with `"pounds"` is higher, meaning that an animal's weight is a
 
 - Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
 - Turn to @printable-exercise{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
-- Investigate these correlations. If you need blank Design Recipes or Data Cycles, you can find them at the back of your workbook, just before the Contracts.
+- Investigate these correlations. If you're using a printed workbook, you'll find blank Design Recipes and Data Cycles at the back, just before the Contracts.
 
 ---
 {layout="Synthesize"}
