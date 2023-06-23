@@ -218,7 +218,7 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 {layout="Investigate"}
 # Piecewise/Conditional Functions
 
-Pyret allows us to create advanced displays for several types of charts! 
+Pyret allows us to create advanced displays for several types of charts. You can find them in the back of your workbook, but here is the complete list:
 
 @show{(contracts
   '("image-scatter-plot" ("Table" "String" "String" "(Row -> Image)") "Image")
