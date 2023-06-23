@@ -12,26 +12,26 @@
 
 @vspace{1ex}
 
-[.FillVerticalSpace, cols="^.^3,^.^3"]
+[.FillVerticalSpace, cols="^.^3,^.^3,^.^3"]
 |===
-| @show{(coe '(* (* 2 5) 10))} | @show{(coe  '(* 2 (* 5 10)))}
-| @ifnotsoln{@math{(2 \times 5) \times 10 = ?}} @ifsoln{@math{(2 \times 5) \times 10 = 100}} | @ifnotsoln{@math{2 \times (5 \times 10) = ?}} @ifsoln{@math{2 \times (5 \times 10) = 100}}
+| @show{(coe '(* (* 2 5) 10))} | @show{(coe  '(* 2 (* 5 10)))} | @show{(coe  '(* 5 (* 2 10)))}
+| @ifnotsoln{@math{(2 \times 5) \times 10 = ?}} @ifsoln{@math{(2 \times 5) \times 10 = 100}} | @ifnotsoln{@math{2 \times (5 \times 10) = ?}} @ifsoln{@math{2 \times (5 \times 10) = 100}} | @ifnotsoln{@math{5 \times (2 \times 10) = ?}} @ifsoln{@math{5 \times (2 \times 10) = 100}}
 |===
 
-What do you notice? @fitb{}{@ifsoln{All Circles of Evaluation lead to 100. The first Circle has the product of 2 and 5 in a group, while the second}}
+What do you notice? @fitb{}{@ifsoln{All three Circles of Evaluation lead to 100. The first Circle has the product of 2 and 5 in a group, while the second}}
 
-@fitb{}{@ifsoln{Circle has the product of 5 and 10 in a group.}
+@fitb{}{@ifsoln{Circle has the product of 5 and 10 in a group. The third Circle groups 2 and 10.}}
 
 @vspace{1ex}
 
-These Circles of Evaluation illustrate the Associative Property of Multiplication, which tells us that *when you multiply three numbers, it does not matter whether you start by multiplying the first pair of numbers or the last pair of numbers*. Draw another example of the Associative Property of Multiplication with any three numbers, below. Make sure that each expression includes a _different_ pair of numbers grouped together. Evaluate your expressions to confirm that they are equivalent.
+These Circles of Evaluation illustrate the Associative Property of Multiplication. Draw another example of the Associative Property of Multiplication with any three numbers, below. Make sure that each expression includes a _different_ pair of numbers grouped together. Evaluate your expressions to confirm that they are equivalent.
 
 @vspace{1ex}
 
-[.FillVerticalSpace, cols="^.^3,^.^3"]
+[.FillVerticalSpace, cols="^.^3,^.^3,^.^3"]
 |===
-|@showsoln{(coe '(* (* 4 3) 8))}  | @showsoln{(coe  '(* 4 (* 3 8)))}
-| @ifsoln{@math{(4 \times 3) \times 8 = ?}} | @ifsoln{@math{4 \times (3 \times 8)= ?}}
+|@showsoln{(coe '(* (* 4 3) 8))}  | @showsoln{(coe  '(* 4 (* 3 8)))} | @showsoln{(coe  '(* 3 (* 4 8)))}
+| @ifsoln{@math{(4 \times 3) \times 8 = ?}} | @ifsoln{@math{4 \times (3 \times 8)= ?}} | @ifsoln{@math{3 \times (4 \times 8)= ?}}
 |===
 
 @n Evaluate the Circles of Evaluation below to help you decide whether or not the Associative Property holds for problems involving *division*.

@@ -127,7 +127,7 @@
       "answer key to the student workbook, keys to all the exercises,\n"
       "and pre- and post-tests for teachers who are participating in our\n"
       "research study. For access to these materials, please fill out the\n"
-      "https://docs.google.com/forms/d/e/1FAIpQLSefQhHo-AA6ruZyICrx51OnJp0sU63b_Y3h05f4KZKHiUbPXw/viewform[password request form].\n"
+      "link:https://docs.google.com/a/bootstrapworld.org/spreadsheet/viewform?formkey=dHpQc0VHV2dBU2tSN1ptMktBUmtoZWc6MQ#gid=0[password request form].\n"
       "We'll get back to you soon with the necessary login information.\n") o))
 
 (define (print-link-to-forum o)

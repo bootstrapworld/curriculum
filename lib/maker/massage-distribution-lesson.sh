@@ -1,16 +1,15 @@
 #!/bin/bash
 
+# last modified 2023-04-28
+
 # echo massage-distribution-lesson "$@"
 
 src=$1
 
 d=$2
 
-source ${MAKE_DIR}src-subdir-mgt.sh
-
 if test  -d "$d"; then
   echo Updating existing lesson $d
-  (cd $d; save_old_solution_pages)
 else
   mkdir -p $d
 fi
@@ -54,6 +53,7 @@ for pl in $proglangs; do
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
   test -d pages || mkdir pages
+  test -d pages/.cached || mkdir -p pages/.cached
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"

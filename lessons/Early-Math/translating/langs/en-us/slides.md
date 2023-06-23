@@ -87,6 +87,12 @@ Again, circulate during the activity. As students match Verbal Expressions to th
 - *One-third of 15*. This card will likely motivate some discussion. Take advantage of opportunities to help students connect multiplication and division as inverse operations. Explain to students that another way to represent this expression is @math{\frac{1}{3} \times 15}. Dividing by 3 produces the same outcome as multiplying by @math{\frac{1}{3}}.
 - *Translating subtraction.* Students often translate "3 less than 15" into @math{3 - 15}, rather than @math{15 - 3}. Discuss the meaning of the word "less" in this context. Sometimes, asking, “What value is 3 less than 15?” can help students to make the connection. (The word "than" tends to force the numbers to appear in the _opposite_ order in which the language arranges them.)
 
+If students have already been introduced to inequality statements (e.g., 3 < 5), there is often another point of confusion:
+
+- "is less than" is a comparison statement (3 < 5)
+- "less than" without the "is" indicates subtraction
+- "is" translates to equals, or accompanies a statement of inequality
+
 Reading expressions aloud can often help students think about the meaning of the words.
 -->
 
@@ -95,7 +101,7 @@ Reading expressions aloud can often help students think about the meaning of the
 {layout="Launch"}
 # Circles of Evaluation
 
-- Turn to @printable-exercise{pages/translating.adoc}. Each row of the table represents a single arithmetic expression, written in three different ways. Fill in the empty spaces so that all three representations match.
+- Turn to @printable-exercise{pages/practice-translating.adoc}. Each row of the table represents a single arithmetic expression, written in three different ways. Fill in the empty spaces so that all three representations match.
 
 - Next, complete @printable-exercise{pages/matching-words-to-circles.adoc}.
 
@@ -122,7 +128,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 - Then, translate in the __other__ direction on @printable-exercise{pages/translate-circles-to-words.adoc}.
 
-- When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, the verbal expression).
+- When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, verbal the expression).
 
 - Optional: Try Matching Math to Words @printable-exercise{pages/matching-math-to-words.adoc},
 
@@ -144,16 +150,14 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 {layout="Launch"}
 # The Ambiguity of Words
 
-Read this sentence: 
+Take a look at this sentence: 
 
-*"Bruno told Gus that Mr. Schneider suspected that he had cheated on the science test."* {style="font-size:24pt"}
+*"My heroes are my grandparents, Batman and Wonder Woman."* {style="font-size:24pt"}
 
-Who do you think is in trouble: Bruno or Gus?
-
-How could you rewrite this sentence to make it clearer?
+How do you interpret the sentence?
 
 <!--
-** _Discuss the two different possible interpretations of the sentence, which illustrate how even grammatically correct sentences in English can create confusion!_
+    If students do not giggle at the suggestion that your grandparents are superheroes, try re-reading the sentence with different inflections - or invite a student to do so. Discuss the two different possible interpretations of the sentence.
 -->
 
 ---
@@ -187,15 +191,12 @@ Are we multiplying first and then adding (as represented by the Circle on the le
 
 - Did you notice anything interesting about the last two expressions, compared to the others on the page?
 
-- Now, try @printable-exercise{rewriting-ambiguous-expressions.adoc}.
-
-- Did the two versions of the expressions produce the same results?
-
 
 <!--
 - Do the expressions produce the same result? _The expressions are structurally different, and generally produce different results (with two noteworthy exceptions!)_
 - Last two expressions? _These expressions use only multiplication or only addition. As a result, the two expressions you wrote evaluated to the same outcome._
 
+We don't want students to think _all_ mathematical expressions in words are ambiguous, as that is simply not the case! Emphasize that only certain verbal structures create this confusion; some phrases are indeed clearer than others. The following activity emphasizes this idea.
 -->
 
 ---

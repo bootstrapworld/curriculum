@@ -9,7 +9,7 @@
 }
 
 @ifproglang{pyret}{
-@lesson-prereqs{functions-dr, filtering-and-building}
+@lesson-prereqs{functions-dr, table-functions}
 }
 
 @ifproglang{codap}{
@@ -155,7 +155,7 @@ Let's try diagraming what we need to do for the journalist, using the Circles of
 @show{(coe '(build-attribute animals-table "kilos" pounds/2.205))}
 }
 
-But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
+But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know @ifproglang{pyret}{`build-column`} @ifproglang{codap}{`build-attribute`} goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
 
 **__3) Circles can contain other Circles!__**
 

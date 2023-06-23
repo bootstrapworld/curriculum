@@ -1,0 +1,58 @@
+= Exploring Table Functions
+
+Make sure you've opened the @starter-file{table-functions}, and defined functions for `is-green` and `is-blue`.
+
+== Filtering Rows
+@n What does @show{(code '(filter shapes-table is-red))} evaluate to? Describe the value you get back below.
+
+@fitb{}{@ifsoln{A table with only the red shapes}}
+
+@n What does @show{(code '(filter shapes-table is-polygon))} evaluate to? Describe the value you get back below.
+
+@fitb{}{@ifsoln{A table without rows for circle or ellipse}}
+
+@n Write the code to generate a table of only triangles. @fitb{}{@showsoln{(code '(filter shapes-table is-triangle))}}
+
+@n In the Definitions Area, define `triangles` by writing @show{(code '(define triangles (filter shapes-table is-triangle)))}. Click "Run" and evaluate `triangles` in the Interactions Area.
+
+@n Define `reds` to be a table of only red shapes. @fitb{}{@showsoln{(code '(define reds (filter shapes-table is-red)))}}
+
+@n What do the contracts for `is-red`, `is-polygon`, and `is-triangle` have in common?
+
+@fitb{}{@ifsoln{They all produce Booleans}}
+
+@n Find the contract for `filter` in your Contracts page. Explain how `filter` uses the two inputs specified in the Domain.
+
+@fitb{}{@ifsoln{`filter` needs a Table, and the name of a function. It makes a new copy of}}
+
+@fitb{}{@ifsoln{the table, leaving out rows for which the helper function produces false}}
+
+@fitb{}{}
+
+@n What happens if you evaluate @show{(code '(filter shapes-table lookup-name))}? Why?
+
+@fitb{}{@ifsoln{Error, because filter needs a function that produces a Boolean}}
+
+
+== Building Columns
+@n What does @show{(code '(build-column shapes-table "red" is-red))} evaluate to?
+
+@fitb{}{@ifsoln{A table with a new column called "red", filled with values from `is-red`}}
+
+@n What does @show{(code '(build-column shapes-table "img" draw-shape))} evaluate to?
+
+@fitb{}{@ifsoln{A table with a new column called "img", filled with values from `draw-shape`}}
+
+@n Find the contract for `build-column` in your Contracts page. Explain how `build-column` uses the three inputs specified in the Domain.
+
+@fitb{}{@ifsoln{`build-column` needs a Table, the name of a column to add, and the name of a helper function}}
+
+@fitb{}{@ifsoln{It makes a new copy of the table, adding the column, and filling it by}}
+
+@fitb{}{@ifsoln{applying the helper function to each row}}
+
+@fitb{}{}
+
+== Challenge!
+
+@star In the Definitions Area, define a table of your own using `filter` or `build-column`. Add a comment to describe what's in it!

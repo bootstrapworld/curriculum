@@ -3,30 +3,22 @@
 ++++
 <style>
 #content .autonum::after { content: ')'; }
-#content .contracts .editbox { background: none !important; }
-#content td { position: relative; }
-#content .contracts td { padding: 0 !important; }
-#content .exercises td .content div:last-child {
-	position: absolute;
-	bottom: 0;
-	width: 95%;
-}
 </style>
 ++++
 
-Using the Contracts below as a reference, draw the Circle of Evaluation for each prompt.
-
-[.contracts, cols="5a,4a", frame="none", grid="none", stripes="none"]
+[cols="1a,1a", frame="none", grid="none"]
 |===
 |
-@show{(contract "pie-chart" '("Table" "String") "Image")}
-
 @show{(contract "bar-chart" '("Table" "String") "Image")}
+
+@show{(contract "box-plot" '("Table" "String") "Image")}
 
 @show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
 
 |
-@show{(contract "box-plot" '("Table" "String") "Image")}
+@show{(contract "pie-chart" '("Table" "String") "Image")}
+
+@show{(contract "count" '("Table" "String") "Table")}
 
 @show{(contract "first-n-rows" '("Table" "Number") "Table")}
 
@@ -37,49 +29,93 @@ Using the Contracts below as a reference, draw the Circle of Evaluation for each
 
 
 (define exp1 '(bar-chart (first-n-rows (sort animals-table "pounds" true) 16) "sex"))
-(define exp2 '(histogram (first-n-rows (sort animals-table "pounds" false) 20) "species" "weeks" 5))
+(define exp2 '(histogram (first-n-rows (sort animals-table "pounds" false) 20) "name" "weeks" 5))
 (define exp3 '(box-plot(first-n-rows(sort animals-table "weeks" false) 11) "age"))
-(define exp4 '(pie-chart(first-n-rows(sort animals-table "weeks" true) 18) "species"))
+(define exp4 '(pie-chart(first-n-rows(sort animals-table "pounds" true) 18) "species"))
 (define exp5 '(box-plot(first-n-rows(sort animals-table "age" true) 12) "pounds"))
-(define exp6 '(pie-chart(first-n-rows(sort animals-table "age" false) 10) "legs"))
+(define exp6 '(pie-chart(first-n-rows(sort animals-table "pounds" false) 10) "legs"))
 }
 
-[.exercises.FillVerticalSpace, cols="1a"]
+[.FillVerticalSpace, cols="10a,10a", options="header"]
 |===
-|
+| Task
+| Circle of Evaluation
+
+| 
 @n Make a bar-chart of the lightest 16 animals by `sex`.
+
+@vspace{2ex}
+
+@star What other bar chart might you want to compare this to?
+
+| 
 
 @showsoln{(coe exp1)}
 
 @showsoln{(code exp1)}
 
-@star What other bar chart might you want to compare this to? @fitb{}{}
+| 
+@n Take the heaviest 20 animals and make a histogram of `weeks` to adoption.
+
+@vspace{2ex}
+
+@star What other histogram might you want to compare this to?
 
 | 
-@n Take the heaviest 20 animals and make a histogram of `weeks` to adoption (use `"species"` for your labels).
 
 @showsoln{(coe exp2)}
 
 @showsoln{(code exp2)}
 
-@star What other histogram might you want to compare this to? @fitb{}{}
-
 | 
 @n Make a box-plot of `age` for the 11 animals who spent the most `weeks` in the shelter.
+
+@vspace{2ex}
+
+@star What other box plot might you want to compare this to?
+
+| 
 
 @showsoln{(coe exp3)}
 
 @showsoln{(code exp3)}
 
-@star What other box plot might you want to compare this to? @fitb{}{}
-
 | 
 @n Make a pie-chart of `species` for the 18 animals who spent the fewest `weeks` in the shelter.
+
+@vspace{2ex}
+
+@star What other pie chart might you want to compare this to?
+
+| 
 
 @showsoln{(coe exp4)}
 
 @showsoln{(code exp4)}
 
-@star What other pie chart might you want to compare this to? @fitb{}{}
+| 
+@n Take the youngest 12 animals and make a box-plot of `pounds`.
 
+@vspace{2ex}
+
+@star What other box plot might you want to compare this to?
+
+| 
+
+@showsoln{(coe exp5)}
+
+@showsoln{(code exp5)}
+
+| 
+@n Make a pie-chart of `legs` for the 10 oldest animals.
+
+@vspace{2ex}
+
+@star What other pie chart might you want to compare this to?
+
+| 
+
+@showsoln{(coe exp6)}
+
+@showsoln{(code exp6)}
 |===

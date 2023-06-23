@@ -102,7 +102,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 
 * Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc}.
 * What do you __Notice__ about this dataset? 
-* Turn to @printable-exercise{pages/questions-and-column-descriptions.adoc}. 
+* Turn to @printable-exercise{pages/questions-and-column-descriptions.adoc} in your Student Workbook. 
 * Write down your observations in the first column.
 
 <!--

@@ -1,5 +1,7 @@
 #lang racket
 
+; last modified 2023-05-08
+
 (require json)
 ; (require file/sha1)
 (require "readers.rkt")
@@ -565,15 +567,11 @@
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g link-text
-                    (if (or *lesson-plan*
-                            (member link-type '("printable-exercise" "opt-printable-exercise")))
-                        ", window=\"_blank\"" ""))]
+                    (if *lesson-plan* ", window=\"_blank\"" ""))]
           [materials-link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g (or page-title link-text)
-                    (if (or *lesson-plan*
-                            (member link-type '("printable-exercise" "opt-printable-exercise")))
-                        ", window=\"_blank\"" ""))])
+                    (if *lesson-plan* ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
@@ -626,6 +624,8 @@
 (define (clean-up-url-in-image-text text)
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
+
+
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")])
@@ -904,7 +904,12 @@
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    (let ([existent-file? #f])
-                     (cond [(file-exists? (path-replace-extension f ".html"))
+                     (cond [(file-exists? f)
+                            (set! existent-file? #t)]
+                           ; [(file-exists? (path-replace-extension f ".adoc"))
+                           ;  (set! existent-file? #t)
+                           ;  (set! g (path-replace-extension g ".adoc"))]
+                           [(file-exists? (path-replace-extension f ".html"))
                             (set! existent-file? #t)
                             (set! g (path-replace-extension g ".html"))]
                            [(file-exists? (path-replace-extension f ".shtml"))
@@ -912,14 +917,7 @@
                             (set! g (path-replace-extension g ".shtml"))]
                            [(file-exists? (path-replace-extension f ".pdf"))
                             (set! existent-file? #t)
-                            (set! g (path-replace-extension g ".pdf"))]
-                           [(and (file-exists? f)
-                                 (equal? (path-get-extension f) #".adoc"))
-                            (set! existent-file? #t)
-                            (set! g (path-replace-extension g ".html"))]
-                           [(file-exists? f)
-                            (set! existent-file? #t)]
-                           )
+                            (set! g (path-replace-extension g ".pdf"))])
                      (when existent-file?
                        (set! f (build-path *containing-directory* g)))
                      ; (printf "link ~a refers to ~a\n\n" g f)
@@ -950,8 +948,7 @@
                  (set! link-text (call-with-input-file lesson-title-file read-line)))))
 
            (let ([link-output
-                   (cond [(or *lesson-plan* *teacher-resources*
-                              (member link-type '("online-exercise" "opt-online-exercise")))
+                   (cond [(or *lesson-plan* *teacher-resources*)
                           (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text)]
                          [else (format "link:pass:[~a][~a]" g link-text)])])
 
@@ -1453,7 +1450,7 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (string-join (rest args) "&#x2c; ") "")]
+                                   [link-text (if (> n 1) (second args) "")]
                                    [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
@@ -1743,16 +1740,15 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let* ([newly-added? (add-starter-file lbl)]
-                                             [p (hash-ref c *proglang-sym* #f)]
-                                             [starter-file-title (or (hash-ref p 'title #f)
-                                                                     (hash-ref c 'title))])
+                                      (let ([newly-added? (add-starter-file lbl)]
+                                            [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
-                                                                  starter-file-title)]
+                                                                  (hash-ref p 'title #f)
+                                                                  (hash-ref c 'title))]
                                                        [url (let ([url (hash-ref p 'url "")])
                                                               (cond [(string=? url "")
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
@@ -1768,13 +1764,7 @@
                                                            )])
                                                   (when (and newly-added?
                                                              (not (member lbl *do-not-autoinclude-in-material-links*)))
-                                                    (let* ([materials-link-output
-                                                             (format
-                                                               "link:pass:[~a][~a~a]"
-                                                               url
-                                                               starter-file-title
-                                                               ", window=\"_blank\""
-                                                               )]
+                                                    (let* ([materials-link-output link-output]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
@@ -1812,7 +1802,6 @@
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
-                              (display (enclose-span ".prefix" "Optional Project: ") o)
                               (display project-link-output o)
                               (display " __{startsb}" o)
                               (display rubric-link-output o)

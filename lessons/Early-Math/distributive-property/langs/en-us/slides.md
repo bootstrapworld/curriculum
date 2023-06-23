@@ -173,7 +173,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 # The Distributive Property & Mental Math
 
 - Do you find this process more efficient than the standard algorithm for multiplication? Explain.
-- Complete the rest of the page by creating equivalent expressions that we can solve in our heads.
+- Complete the rest of the workbook page by creating equivalent expressions that we can solve in our heads.
 
 @image{images/mental-math.png}
 

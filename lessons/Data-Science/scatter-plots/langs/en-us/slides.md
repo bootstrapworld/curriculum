@@ -220,7 +220,7 @@ These numbers and scatter plot come from different datasets. The patterns in the
 
 @image{images/CloudToCircle.gif}
 <!--
-This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
+This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.autodesk.com/research/publications/same-stats-different-graphs, Autodesk website}!
 -->
 
 ---

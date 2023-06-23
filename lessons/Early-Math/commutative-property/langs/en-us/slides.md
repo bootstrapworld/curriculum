@@ -117,7 +117,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="Investigate"}
 # Tying it All Together
 
-- Look at @printable-exercise{pages/which-coe-is-correct.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
+- Look at @printable-exercise{pages/claire-and-walker.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
 - In the column on the right, record if Claire, Walker, or both students correctly translated the words into a Circle.
 
 
@@ -125,7 +125,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="InvestigateC"}
 # Tying it All Together
 
-- Optional: Complete @printable-exercise{pages/which-coe-is-correct-2.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
+- Optional: Complete @printable-exercise{pages/words-to-circles-challenge.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
 
 @image{images/claire-walker.png}
 

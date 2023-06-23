@@ -60,6 +60,10 @@ If we use the correct syntax, we can include all three of these function represe
 
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!
 
+<!--
+Optional: If students feel confident with the Circles of Evaluation but less confident about typing examples, use @opt-printable-exercise{MappingExamplesWithCoE.adoc} to make the connection explicit.
+-->
+
 ---
 {layout="Investigate-DN"}
 # Three Representations of a Function

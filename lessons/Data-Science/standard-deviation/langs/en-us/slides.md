@@ -12,8 +12,12 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 **The Animal Shelter Bureau reports that the mean age of shelter cats is 3 years.**
 
-- Look at the Animals Dataset in your student workbook, or the @opt-online-exercise{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Dataset spreadsheet}.
-- Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?
+_Does this mean all the cats are close to 3 years old?_ 
+
+_Why or why not?_
+
+(Feel free to look at the Animals Dataset in your student workbook, or @opt-online-exercise{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Dataset spreadsheet})
+
 
 ---
 {layout="Launch"}
@@ -51,15 +55,33 @@ Unfortunately, that measure comes from only a small number of data points! If po
 
 Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
+<!--
+
+-->
 ---
 {layout="InvestigateC"}
 # Measuring "Deviance"
 
-@right{@image{images/histogram-w-mean.png, 450}} We could imagine a shelter where every cat is between 2 and 4, so *each cat only deviates from the mean by 1 year*! But we could also imagine a shelter with only kittens and very old cats, where *cats deviate by as much as 10 years from the mean!*
+@image{images/histogram-w-mean.png} 
+
+In this image, we've drawn a star to show the mean at 3. 
+
+But there are _all sorts of datasets_ that have a mean of 3! 
+<!--
+
+-->
+---
+{layout="InvestigateC"}
+# Measuring "Deviance"
+
+@image{images/histogram-w-mean.png} 
+
+We could imagine a shelter where every cat is between 2 and 4, so **each cat only deviates from the mean by 1 year**! But we could also imagine a shelter with only kittens and very old cats, where **cats deviate by as much as 10 years from the mean!**
 
 How far away is each data point from 3?
+<!--
 
-
+-->
 ---
 {layout="LaunchC"}
 # Measuring "Deviance"
@@ -68,26 +90,24 @@ How far away is each data point from 3?
 
 In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
+<!--
 
+-->
 ---
 {layout="Launch"}
 # Measuring "Deviance"
 
 **Complete numbers 4 to 6** of @printable-exercise{computing-stdev.adoc}, and then STOP.
 
----
-{layout="Launch"}
-# Measuring "Deviance"
-
-To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
-
-@teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of the worksheet to support students in doing so.}
-
----
-{layout="Launch"}
-# Measuring "Deviance"
+To compute the standard deviation we square each distance and take the average, then take the square root of the average. The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.
 
 **Complete numbers 7-10** of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
+
+<!--
+When completing #4-6 of the worksheet, students will need to stretch their visual imaginations a bit! In problem number 6, they are asked to summarize all 10 distances from the mean into a single number. The goal here is for students to make an educated guess about standard deviation (SD) _before_ learning the algorithm for computing it. Invite and encourage discussion about students' different approaches for guessing at the best summary number _before_ sharing the key idea about standard deviation!
+
+Students are likely to hone in on the __Mean Average Deviation__, or MAD. Both SD and MAD measure variability or "spread" by computing individual deviations from the mean, but MAD averages these deviations and SD transforms them via square/square-root.
+-->
 
 ---
 {layout="Synthesize"}
@@ -103,7 +123,7 @@ stdev(animals-table, "pounds")
 What is the standard deviation for the weights of _all_ the animals at our dataset?
 
 <!--
-__Approximately 48.5__ Optional: For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
+	__Approximately 48.5__ Optional: For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
 -->
 
 ---
@@ -121,40 +141,52 @@ __Approximately 48.5__ Optional: For additional practice, have students complete
 -->
 
 ---
+{layout="Launch"}
+# Measuring "Deviance"
+
+- Make a histogram showing the ages of *all the cats* in the dataset.
+- What is the shape of this histogram?
+- How does it differ from the one we just looked at?
+
+<!--
+
+-->
+
+---
 {layout="LaunchC"}
-# Comparing Standard Deviations
+# Measuring "Deviance"
 
-Take a look at the histogram below. It is the same histogram we saw in the previous section, but now with an 11th cat that is 16 years old. That's quite an outlier!
+Invite students to take a look at the histogram below. It is the same histogram we saw in the previous section, but now with an 11th cat that is 16 years old. That's quite an outlier!
 
-@center{@image{images/histogram-with-outlier.png, 500}}
+@image{images/histogram-with-outlier.png} 
 
 ---
 {layout="Launch"}
-# Comparing Standard Deviations
+# Measuring "Deviance"
 
 - What is the shape of this histogram?
 - How does it differ from the one we just looked at?
-- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset.
+- Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset._
 - What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.
 - What did this outlier do to the standard deviation?
 - Optional: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 
-@teacher{
+<!--
 - What is the shape of this histogram?
 ** _The histogram has high outliers, therefore it is skewed right._
 - How does it differ from the one we just looked at?
 ** _The previous histogram - with the 16-year-old cat omitted - was roughly symmetric._
 - Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset._
 - What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.
-** __Previously, the mean was ~2.45; now it is ~5.83.__
+** __Previously, the mean was 3; now it is approximately 4.33.__
 - What did this outlier do to the standard deviation?
-** _The outlier caused the standard deviation to increase by ~3.38._
+** _The outlier caused the standard deviation to increase by about 1.33._
 - Optional: To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
-} 
+-->
 
 ---
 {layout="Investigate"}
-# Comparing Standard Deviations
+# Measuring "Deviance"
 
 The mean and standard deviation tell us where the data is centered and how far the data strays from that center.
 
@@ -178,7 +210,7 @@ Treating each point independantly allows each deviation to contribute to the mea
 
 ---
 {layout="Synthesize"}
-# Comparing Standard Deviations
+# Measuring "Deviance"
 
 - How much did adding an outlier change the mean? The standard deviation?
 - Extreme values affect both the mean and standard deviation of a dataset.

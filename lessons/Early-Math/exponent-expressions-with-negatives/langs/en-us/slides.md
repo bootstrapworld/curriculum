@@ -46,7 +46,7 @@ On @printable-exercise{pages/true-or-false.adoc}, draw two Circles of Evaluation
 - An exponent expression has a negative base _inside_ parentheses. Which do we apply first: `expt` or `negate`?
 - An exponent expression has a negative base and no grouping symbols. Which do we apply first: `expt` or
 `negate`?
-- Why were _some_ of the equations on the page true, but not all of them?
+- Why were _some_ of the equations on the workbook page true, but not all of them?
 
 <!--
 - An exponent expression has a negative base _inside_ parentheses. Which do we apply first: `expt` or `negate`?
@@ -54,7 +54,7 @@ On @printable-exercise{pages/true-or-false.adoc}, draw two Circles of Evaluation
 - An exponent expression has a negative base and no grouping symbols. Which do we apply first: `expt` or
 `negate`?
 ** _First, we apply `expt`, then `negate`._
-- Why were _some_ of the equations on the page true, but not all of them?
+- Why were _some_ of the equations on the workbook page true, but not all of them?
 ** _Possible response: Exponent expressions with negatives but no grouping symbols were always negative, because the negation came last. Exponent expressions with grouping symbols were sometimes negative and sometimes positive, depending on how many times we multiplied the base by itself._
 -->
 

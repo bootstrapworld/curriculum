@@ -8,37 +8,30 @@ Contracts tell us how to use a function. For example:  `num-sqr {two-colons} (n 
 
 |Name||Domain||Range
 
-| `above`
+| `triangle`
 | `{two-colons}`
-| `Image, Image`
+| `(side-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
 | `->`
 | `Image`
-5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
-
-| `and`
-| `{two-colons}`
-| `(test1 {two-colons} Boolean, test2 {two-colons} Boolean)`
-| `->`
-| `Boolean`
 5+|`#`
-
-| `below`
-| `{two-colons}`
-| `Image, Image`
-| `->`
-| `Image`
-5+|`_below(star(50, "solid", "orange"), circle(50, "solid", "green"))_`
-
-| `beside`
-| `{two-colons}`
-| `Image, Image`
-| `->`
-| `Image`
-5+|`_beside(star(50, "solid", "orange"), circle(50, "solid", "green"))_`
 
 | `circle`
 | `{two-colons}`
 | `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`#`
+
+| `star`
+| `{two-colons}`
+| `(radius {two-colons} Number, style {two-colons} String, color {two-colons} String)`
+| `->`
+| `Image`
+5+|`#`
+
+| `rectangle`
+| `{two-colons}`
+| `(width {two-colons} Num, height {two-colons} Num, style {two-colons} Str, color {two-colons} Str)`
 | `->`
 | `Image`
 5+|`#`
@@ -50,27 +43,34 @@ Contracts tell us how to use a function. For example:  `num-sqr {two-colons} (n 
 | `Image`
 5+|`#`
 
-| `num-sqr`
+| `square`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| `(size-length {two-colons} Number, style {two-colons} String, color {two-colons} String)`
 | `->`
-| `Number`
+| `Image`
 5+|`#`
 
-| `num-sqrt`
+| `text`
 | `{two-colons}`
-| `(n {two-colons} Number)`
+| `(str {two-colons} String, size {two-colons} Number, color {two-colons} String)`
 | `->`
-| `Number`
+| `Image`
 5+|`#`
 
-| `num-max`
+| `overlay`
 | `{two-colons}`
-| `(a {two-colons} Number, b{two-colons} Number)`
+| `(img1 {two-colons} Image, img2 {two-colons} Image)`
 | `->`
-| `Number`
+| `Image`
 5+|`#`
 
+
+| `beside`
+| `{two-colons}`
+| `Image, Image`
+| `->`
+| `Image`
+5+|`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`
 
 |===
 

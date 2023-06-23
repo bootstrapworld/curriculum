@@ -25,7 +25,7 @@ What do you Notice? What do you Wonder?
 {layout="LaunchC"}
 # The Identity Property
 
-Now, complete the page by filling in the blanks for the remaining Circles. Avoid putting the same operator more than once.
+Now, complete the workbook page by filling in the blanks for the remaining Circles. Avoid putting the same operator more than once.
 
 What did you observe about the Identity Property for division? Subtraction?
 

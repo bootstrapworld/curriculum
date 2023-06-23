@@ -185,7 +185,7 @@ Let's try diagraming what we need to do for the journalist, using the Circles of
 {layout="LaunchC"}
 # Composing
 
-But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need another Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can’t be the animals-table again, because that doesn’t have a `"kilos"` column.
+But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need another Circle of Evaluation. We know `build-column` goes at the top. But what table are we using for the first argument? It can’t be the animals-table again, because that doesn’t have a `"kilos"` column.
 
 
 @ifproglang{pyret}{
@@ -193,7 +193,7 @@ But we also need to filter by that new column, so that we only have animals weig
 {layout="LaunchC"}
 # Composing
 
-3\. Circles can contain other Circles!
+3) Circles can contain other Circles!
 
 Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
 

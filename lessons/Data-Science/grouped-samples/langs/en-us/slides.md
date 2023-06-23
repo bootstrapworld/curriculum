@@ -35,20 +35,23 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 - Looking at this scatter plot, does it make sense to analyze all the animals together? Why or why not?{style="font-size: 16pt"}
 - Are there some questions where it would be important to break up the animals into species-specific samples? What are they?{style="font-size: 16pt"}
 - Are there some questions where it would be important to keep the whole population together? What are they?{style="font-size: 16pt"}
-- Be ready to share your answers with the class!{style="font-size: 16pt"}
 
-@teacher{
-Divide the class into groups of 3-4, with one student identified as the "reporter".
+<!--
+Divide the class into groups of 3-4, with one student identified as the "reporter". Have the groups answer these questions.
+-->
+---
+{layout="Synthesize"}
+# Problems with a Single Population
 
-Sample responses:
-- Looking at this scatter plot (above), does it make sense to analyze all the animals together? Why or why not?
-** _No. Every data point after 25 pounds belongs to a dog from the shelter. The cats are clumped in the lower weight range._
-- Are there some questions where it would be important to break up the population into species-specific populations? What are they?
-** _Sample response: Yes. If we want to know whether dogs or cats are more likely to be fixed, we would need to look at each species separately._
+Report back on your answers to these questions!
+
+- Looking at this scatter plot, does it make sense to analyze all the animals together? Why or why not?
+- Are there some questions where it would be important to break up the animals into species-specific samples? What are they?
 - Are there some questions where it would be important to keep the whole population together? What are they?
-** _Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population._
-}
 
+<!--
+
+-->
 ---
 {layout="Synthesize"}
 # Problems with a Single Population
@@ -58,15 +61,20 @@ You've been handed a dataset from a country where half the people have access to
 * Why might it be important to look at a subset of a population?
 * Why is it sometimes bad to blindly take random samples?
 
-@teacher{
-Sample responses:
+<!--
 
-* Why might it be important to look at a particular sample of a population?
-** _Sample response: Maybe we want to determine if emissions from a nearby factory impact the health of residents of one particular neighborhood._
-* Why is it sometimes bad to blindly take random samples?
-** _If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!_
-}
+-->
+---
+{layout="Synthesize"}
+# Problems with a Single Population
 
+If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. 
+
+But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!
+
+<!--
+
+-->
 ---
 {layout="Launch"}
 # Grouped Samples
@@ -75,6 +83,9 @@ Depending on the question we're asking, sometimes it makes more sense to ask abo
 
 **Averaging every animal together will give us an answer, but they may not be _useful_ answers.**
 
+<!--
+
+-->
 ---
 {layout="Launch"}
 # Grouped Samples
@@ -102,9 +113,9 @@ Let's use this skill to define _Tables..._
 # Grouped Samples
 
 We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:{style="font-size:16pt"}
-
-@show{(code '(define dogs (filter animals-table is-dog)))}
-
+```
+dogs  = filter(animals-table, is-dog)
+```
 The `filter` function walks across each row in the table, and passes it to the `is-dog` function.{style="font-size:16pt"}
 **If `is-dog` produces `true`, `filter` adds it to a new table.** Otherwise, it just silently moves on to the next row.{style="font-size:16pt"}}
 Finally, we define the name `dogs` to be the table produced by `filter`.{style="font-size:16pt"}
@@ -126,8 +137,12 @@ A “kitten” is an animal who _is a cat_ and who _is young_. **How would you d
 {layout="Synthesize"}
 # Grouped Samples
 
-* How could we filter _and_ sort a table?
-* How can we combine functions?
+* Make bar charts showing the `sex` column for every grouped sample. 
+* Which one best represents the distribution of species for the whole population? Why?
+
+<!--
+Debrief with students. Thoughtful question: how could we filter _and_ sort a table? How can we combine functions?
+-->
 
 ---
 {layout="Launch"}
@@ -148,6 +163,9 @@ __What's the ratio of fixed to unfixed *cats* at the shelter?__
 Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
 
 _Starting off: Is this a lookup, arithmetic, or statistical question?_
+<!--
+Have students discuss their answers
+-->
 
 ---
 {layout="LaunchR"}

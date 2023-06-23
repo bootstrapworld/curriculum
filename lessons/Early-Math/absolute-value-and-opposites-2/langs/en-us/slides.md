@@ -105,7 +105,7 @@ Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highligh
 {layout="Investigate"}
 # Evaluating Absolute Value & Opposite
 
-Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The page starts with numeric values and then integrates @vocab{variables}. 
+Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates @vocab{variables}. 
 
 Place a check mark by each Circle of Evaluation that meets the condition stated on the left.
 
@@ -116,7 +116,7 @@ Place a check mark by each Circle of Evaluation that meets the condition stated 
 # Evaluating Absolute Value & Opposite
 
 - Next, try @printable-exercise{matching-expression-to-circle.adoc}, where you will match expressions with their corresponding Circles of Evaluation. Note: some expressions can be matched to more than one correct Circle of Evaluation!
-- At the bottom of the page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
+- At the bottom of the matching workbook page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
 
 ---
 {layout="Synthesize"}
