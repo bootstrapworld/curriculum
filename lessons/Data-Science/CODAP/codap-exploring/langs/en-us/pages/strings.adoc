@@ -1,0 +1,47 @@
+= Strings
+++++
+<style>
+  #content { display: block !important; }
+</style>
+++++
+
+- For each of three sections below, refer @starter-file{animals}.
+- In order to follow the directives, you must first create a new column that appears after you select the table.
+- Next, click on the attribute name (`newAttr`) and select `Edit Formula`.
+- *In order to follow the directives below, you must type text into the "Edit Formula" box.*
+
+@vspace{1ex}
+
+@left{@image{../images/edit-formula.png, 450}} @right{@image{../images/edit-formula-box.png, 250}}
+
+@vspace{1ex}
+
+== Task 1: "Hello, my name is"
+
+The shelter wants to put a name tag in front of each animal's cage so visitors can learn their names. One shelter employee suggests populating all the rows of an entire column with "Hello, my name is" to create enough tags for all of the animals. After printing the tags, shelter employees will write in each animal's name.
+
+@n Click on `newAttr`. Select `Edit Formula`. Type `Hello, my name is` into the formula box that appears, then select `Apply`. What error message appears in all the rows of this column? @fitb{}{@ifsoln{SyntaxError}}
+
+@n Click `new Attr` again, then select `Edit Formula`. This time, type `"Hello, my name is"` (_with quotation marks!_) into the formula box. What happens? @fitb{}{@ifsoln{"Hello, my name is" appears in every row of the column.}}
+
+@n Try typing `Hello, my name is` with the opening quote, but without the closing quote, and select `Apply`. What do you think a "syntax error" is? @fitb{}{@ifsoln{A syntax error is an error where the computer cannot make sense of the code, e.g. missing commas, missing parentheses, unclosed strings.}}
+
+@n A string is any value that is entered within @fitb{}{@ifsoln{quotes}}.
+
+@vspace{1ex}
+
+== Task 2: "Hello, my name is Sasha" ... "Hello, my name is Snuffles" ...
+
+The employee who proposed this solution is happy with it... but you wonder: Wouldn't it be cool if CODAP could input each animal's unique name after "Hello, my name is"? Then, you wouldn't need to handwrite in all those animals' names.
+
+@n Access the formula box again. Try typing in `"Hello, my name is Name"`. Did you get the result you want? @fitb{}{@ifsoln{No, each row now says, "Hello, my name is Name."}}
+
+@n That didn't work! This time, try typing the `"Hello, my name is " + Name`, being sure to leave `+ Name` out of the string. What happens? @fitb{}{@ifsoln{It worked!}}
+
+@n Do you get the same result if you use `"Hello, my name is " + name`? Does CODAP care about capitalization of attribute names? @fitb{}{}
+
+@fitb{}{@ifsoln{We get a different result, because CODAP does care about capitalization.}}
+
+@n Now you're feeling like you can create all kinds of nametags! Edit the formula box to create tags for all of the animals resembling this one: "Hello, my name is Felix. I am a 16 year old cat who weighs 9.2 pounds."
+
+

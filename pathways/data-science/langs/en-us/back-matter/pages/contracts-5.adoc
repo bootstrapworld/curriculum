@@ -7,6 +7,20 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 |===
 |Name||Domain||Range
 
+| `rotate`
+| `{two-colons}`
+| `Number, Image`
+| `->`
+| `Image`
+5+|`_rotate(35, rectangle(30, 80, "solid", "purple"))_`
+
+| `row-n`
+| `{two-colons}`
+| `(t {two-colons} Table, index {two-colons} Number)`
+| `->`
+| `Row`
+5+|`_row-n(animals-table, 5)_`
+
 | `r-value`
 | `{two-colons}`
 | `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String)`
@@ -14,61 +28,46 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 | `Number`
 5+|`_r-value(animals-table,"pounds", "weeks")_`
 
-| `lr-plot`
+| `scale`
+| `{two-colons}`
+| `Number, Image`
+| `->`
+| `Image`
+5+|`_scale( 0.8, triangle(30, "solid", "red"))_`
+
+| `scatter-plot`
 | `{two-colons}`
 | `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
 | `->`
 | `Image`
-5+|`_lr-plot(animals-table, "species", "pounds", "weeks")_`
+5+|`_scatter-plot(animals-table, "species", "pounds", "weeks")_`
 
-| `random-rows`
+| `square`
 | `{two-colons}`
-| `(t {two-colons} Table, num-rows {two-colons} Number)`
+| `Number, String, String`
 | `->`
-| `Table`
-5+|`_random-rows(animals-table, 5)_`
+| `Image`
+5+| `_square(10, "outline", "red")_`
 
-| `row-n`
+| `string-contains`
 | `{two-colons}`
-| `(t {two-colons Table}, index {two-colons} Number)`
+| `String, String`
 | `->`
-| `Row`
-5+|`_animals-table.row-n(5)_`
+| `Boolean`
+5+|`_string-contains("rockstar", "star")_`
+
+| `string-repeat`
+| `{two-colons}`
+| `String, Number`
+| `->`
+| `String`
+5+|`_string-repeat("cheetah ", 5)_`
 
 | `sort`
 | `{two-colons}`
-| `(t {two-colons Table}, col {two-colons} String, increasing {two-colons} Boolean)`
+| `(t {two-colons} Table, col {two-colons} String, increasing {two-colons} Boolean)`
 | `->`
 | `Table`
 5+|`_sort(animals-table, "species", true)_`
-
-| `filter`
-| `{two-colons}`
-| `(t {two-colons Table}, test {two-colons} (Row -> Boolean))`
-| `->`
-| `Table`
-5+|`_filter(animals-table, is-cat)_`
-
-| `build-column`
-| `{two-colons}`
-| `(t {two-colons Table}, col {two-colons} String, builder {two-colons} (Row -> Any))`
-| `->`
-| `Table`
-5+|`_build-column(animals-table, "sticker", label)_`
-
-| `bar-chart-summarized`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
-| `->`
-| `Image`
-5+|`_bar-chart-summarized(animals-table, "species", "pounds")_`
-
-| `pie-chart-summarized`
-| `{two-colons}`
-| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
-| `->`
-| `Image`
-5+|`_pie-chart-summarized(animals-table, "age", "pounds")_`
-
 
 |===

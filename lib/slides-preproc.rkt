@@ -11,8 +11,6 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-(define *use-mathjax-for-math?* #f)
-
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed* #f)
 
@@ -89,13 +87,41 @@
         (format "![~a](~a)~a" text img
                 (if (string=? width "") "" (format "{width=~a}" width))))))
 
+(define (variable-or-number? s)
+  (let ([result #t])
+    (for ([c s])
+      (when (not (or (char-alphabetic? c) (char-numeric? c)))
+        (set! result #f)))
+    result))
+
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  ((if *use-mathjax-for-math?* make-mathjax-math make-ascii-math) text))
+  (let ([use-mathjax?
+          (cond [(regexp-match "\\\\frac" text)
+                 (cond [(regexp-match "\\\\div" text) #t]
+                       [(regexp-match "\\^" text) #t]
+                       [(>= (string-length text) 40) #t]
+                       [(regexp-match* "\\\\frac{(.+?)}" text)
+                        => (lambda (mm)
+                             (cond [(null? mm) #f]
+                                   [else (let ([use-mathjax? #f])
+                                           (for ([m mm])
+                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                               (unless (variable-or-number? frac-arg)
+                                                 (set! use-mathjax? #t))))
+                                           use-mathjax?)]))])]
+                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                [(regexp-match "\\\\\\\\" text) #t]
+                [(regexp-match "\\\\mbox" text) #t]
+                [else #f])])
+    ;
+    ((if use-mathjax?
+         make-mathjax-math
+         make-ascii-math) text)))
 
 (define (make-mathjax-math text)
   (string-append
-    "$$$ math\n"
+    "\n$$$ math\n"
     text
     "\n"
     "$$$\n"))
@@ -150,11 +176,12 @@
   (format "<code>~s</code>" exp))
 
 (define (coe exp)
-  (string-append "$$$ html\n"
+  (string-append "\n$$$ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
     "<style>\n"
+    "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
@@ -204,6 +231,15 @@
     (if purpose
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
+
+(define (contracts . args)
+  (let ([res ""])
+    (let loop ([args args])
+      (unless (null? args)
+        (set! res (string-append res "\n\n"
+                    (apply contract (append (first args)))))
+        (loop (rest args))))
+    res))
 
 (define (make-dist-link f link-text)
 
@@ -336,7 +372,7 @@
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
          [page (first args)]
-         [link-text (if (> num-args 1) (second args) #f)]
+         [link-text (if (> num-args 1) (string-join (rest args) ", ") #f)]
          [page-components (regexp-split #rx"/" page)]
          [local-dir ""]
          [local-file ""]
@@ -470,6 +506,7 @@
                           (let* ([arg1 (read-commaed-group i directive read-group)]
                                  [project-file (first arg1)]
                                  [rubric-file (and (> (length arg1) 1) (second arg1))])
+                            (fprintf o "<span class=\"prefix\">Optional Project: </span>")
                             (display (fully-qualify-link (list project-file) directive) o)
                             (when rubric-file
                               (display " [" o)
@@ -506,6 +543,9 @@
                          [(string=? directive "math")
                           (let ([text (read-group i directive)])
                             (display (make-math text) o))]
+                         [(string=? directive "blockmath")
+                          (let ([text (read-group i directive)])
+                            (display (make-mathjax-math text) o))]
                          [(string=? directive "smath")
                           (let* ([text (read-group i directive #:scheme? #t)]
                                  [exprs (string-to-form (format "(math '~a)" text))])

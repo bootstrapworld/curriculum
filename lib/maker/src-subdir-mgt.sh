@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-04-11
-
 function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
@@ -51,9 +49,21 @@ function shadowcopydir() {
   done
 }
 
+function save_old_solution_pages() {
+  # echo doing save_old_solution_pages
+  test -d solution-pages || return
+  test -d solution-pages-3 && rm -fr solution-pages-3
+  mv solution-pages solution-pages-3
+}
+
 function make_solution_pages() {
+  # echo doing make_solution_pages
   test -d solution-pages-2 && rm -fr solution-pages-2
-  $CP -pr pages solution-pages-2
+  test -d solution-pages-3 && mv solution-pages-3 solution-pages-2
+  mkdir -p solution-pages-2
+  if test -d pages; then
+    (find pages -maxdepth 0 -empty|grep -q .) || $CP -pr pages/* solution-pages-2
+  fi
   $CP -p $TOPDIR/lib/.hta* solution-pages-2
   if test -d solution-pages; then
     shadowcopydir solution-pages solution-pages-2

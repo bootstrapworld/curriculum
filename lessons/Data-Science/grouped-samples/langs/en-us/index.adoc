@@ -3,7 +3,8 @@
 @description{Students practice creating grouped samples (non-random subsets) and think about why it might sometimes be useful to answer questions about a dataset through the lens of one group or another.}
 
 @ifproglang{pyret}{
-@lesson-prereqs{defining-table-functions}
+@lesson-prereqs{defining-table-functions, choosing-your-dataset}
+@add-to-lang{filter}
 }
 
 @ifproglang{codap}{
@@ -50,7 +51,9 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 @center{@image{images/image-scatter-plot.png,550}}
 
 === Investigate
+@teacher{
 Divide the class into groups of 3-4, with one student identified as the "reporter".
+}
 
 [.lesson-instruction]
 - Looking at this scatter plot (above), does it make sense to analyze all the animals together? Why or why not?
@@ -59,6 +62,7 @@ Divide the class into groups of 3-4, with one student identified as the "reporte
 ** _Sample response: Yes. If we want to know whether dogs or cats are more likely to be fixed, we would need to look at each species separately._
 - Are there some questions where it would be important to keep the whole population together? What are they?
 ** _Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population._
+- Be ready to share your answers with the class!
 
 Have the reporters share their findings with the class.
 
@@ -95,9 +99,8 @@ Earlier, you learned how to define values in Pyret. We can define Numbers, Strin
 Let's use this skill to define __Tables...__
 
 We already know how to define values, and how to filter a dataset. So let’s put those skills together to define a grouped sample of the dogs in the shelter:
-----
-dogs  = filter(animals-table, is-dog)
-----
+
+@show{(code '(define dogs (filter animals-table is-dog)))}
 
 The `filter` function walks across each row in the table, and passes it to the `is-dog` function. If `is-dog` produces `true`, `filter` adds it to a new table. Otherwise, it just silently moves on to the next row. Finally, we define the name `dogs` to be the table produced by `filter`.
 }
@@ -182,7 +185,9 @@ What grouped samples make sense for your dataset?
 - Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `filter` function to define your new sample tables.
 
 === Synthesize
-Have students share the grouped samples they created for their datasets. After each share-back, ask the class if they have suggestions for other possible grouped samples.
+- What grouped samples did you make for your dataset?
+- What other samples would be good to examine?
+- Do you have suggestions for your colleagues?
 
 == Additional Exercises
 - Extra, @opt-printable-exercise{design-recipe-helper-funs-2.adoc, blank design recipes} are provided in the workbook

@@ -7,7 +7,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 -->
 ---
 {layout="Launch"}
-# Pie and Bar Charts
+# Grouping by Value
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Where have you seen infographics and graphs used to display data in the real world?
@@ -16,42 +16,46 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 Solicit student ideas for infographics, and/or provide some of your own
 -->
 ---
-{layout="LaunchR"}
-# Pie and Bar Charts
+{layout="Launch"}
+# Grouping by Value
 
-@left{@image{images/legsp.png, 300}}
+- In the Interactions Area, type @show{(code '(count animals-table "species"))} and hit "Enter". What happens?
+- Now type @show{(code '(bar-chart animals-table "species"))} and hit "Enter". What happens?
+- What does each bar represent?
+- What does this have to do with our `count` table?
 
-Here is the @vocab{Contract} for a function that makes @vocab{pie charts}:
-
-@show{(contract "pie-chart" '("Table" "String") "Image" )}
-
-And here is an example of _using_ the function:
-
-@show{(code '(pie-chart animals-table "legs"))}
 
 <!--
+1. __A table appears, with rows each species of animal, with a count of how many animals are in each species.__
+2. __A bar chart appears.__
+3. __The number of animals belonging to each specific species.__
+4. __The height of each bar matches the count of each species.__
 
 -->
 ---
 {layout="Launch"}
-# Pie and Bar Charts
+# Grouping by Value
 
-@show{(code '(pie-chart animals-table "legs"))}
+- Now type @show{(code '(count animals-table "pounds"))} and hit "Enter". What happens?
+- Now type @show{(code '(bar-chart animals-table "pounds"))} and hit "Enter". What happens?
+- What does each bar represent?
 
-- What is the Name of this function?
-- How many inputs are in its @vocab{Domain}?
-- In the Interactions Area, type @show{(code '(pie-chart animals-table "legs"))} and hit "Enter". What happens?
 
 <!--
+1. __A table appears, with rows showing each weight and how many animals have that weight.__
+2. __A bar chart appears, with many equally-sized bars.__
+3. __The number of animals having each specific weight.__
 
 -->
 ---
 {layout="LaunchR"}
-# Pie and Bar Charts
+# Grouping by Value
 
-@left{@image{images/legsp.png,300}}
+@image{images/bar-species.png, 300}
 
-Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal with 0 legs, representing 3.1% of the population.
+**Bar charts group data _by value_ to show frequency**
+
+Hovering over a bar reveals the label, as well as the number of animals in that species. 
 
 We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
 
@@ -59,58 +63,69 @@ We can also resize the window by dragging its borders. This allows us to experim
 
 -->
 ---
-{layout="Launch"}
-# Pie and Bar Charts
+{layout="LaunchR"}
+# Grouping by Value
 
-`pie-chart` consumes a Table of data, along with the _name of a *categorical* column you want to display_. The computer counts the number of times that each value appears.
+@image{images/bar-species.png, 300}
 
-Then it draws a slice for each value, with the size being the percentage of cells with that value.
+Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket. Both functions show us the same information as the `count` function, but using a picture instead of a table.
 
-This pie chart shows the distribution of the number of `legs` across the shelter.
-
-Can you make a pie chart for the `sex` column?
-
-<!--
-When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
-
--->
-
----
-{layout="Investigate-DN"}
-# Pie and Bar Charts
-
-Here is the @vocab{Contract} for another function, which makes @vocab{bar charts}:
-
-@show{(contract "bar-chart" '("Table" "String") "Image" )}
-
-- Which column of the animals table tells us which species the animal is?
-- Use `bar-chart` to make a display showing how many animals there are of each species.
+**Which do you like better: the chart or a table? Why?**
 
 <!--
 
 -->
 ---
 {layout="Investigate"}
-# Pie and Bar Charts
+# Grouping by Value
 
-- Experiment with pie and bar charts, passing in different column names. If you get an error message, _read it carefully!_
-- What do you think are the rules for what kinds of columns can be used by _bar-chart_ and _pie-chart_?
-- When would you want to use one chart instead of another?
-- Complete @printable-exercise{matching-bar-to-pie.adoc}.
+Here is the @vocab{Contract} for another function, which makes @vocab{pie charts}:
 
+@show{(contract "pie-chart" '("Table" "String") "Image" )}
 
+Now type @show{(code '(pie-chart animals-table "species"))} and hit "Enter". What happens?
 
 <!--
-Optional: To dig deeper into pie charts and bar charts, have students complete @opt-printable-exercise{bar-and-pie-notice.adoc}. They can also focus on one display at a time using @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
+
 -->
+
 ---
-{layout="Synthesize"}
+{layout="InvestigateR"}
 # Pie and Bar Charts
 
-* What strategies did you use to match the bar charts to the pie charts?
-* Which displays do you find it easier to interpret? Why?
-* What information is provided in bar charts that is hidden in pie charts?
-* Why might this sometimes be problematic?
+@right{@image{images/pie-species.png, 300}} 
+
+Hovering over a pie slice reveals the label, as well as the count and the @vocab{percentage} of the whole. In this example we see that there are 2 animals that are lizards, representing 6.3% of the population.
+
+<!--
+
+-->
+---
+{layout="Investigate"}
+# Grouping by Value
+
+- Use `pie-chart` to make a display showing how many animals there from each sex.
+- Use `pie-chart` to make a display for the `pounds` column. How is this similar to `bar-chart`? How is it different?
+- Why weren't these functions useful when grouping the `pounds` column?
+- How is this similar to `bar-chart`? How is it different?
+- When would you want to use one chart instead of another?
+
+<!--
+
+-->
+---
+{layout="Investigate"}
+# Grouping by Value
+
+Grouping by value works well for @vocab{categorical data}, when there lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.
+
+---
+{layout="Investigate"}
+# Grouping by Value
+
+Complete @printable-exercise{bar-and-pie-notice.adoc}, and @printable-exercise{matching-bar-to-pie.adoc}.
+
+Optional: To dig deeper into each individual chart, @opt-printable-exercise{pie-chart-notice.adoc} or @opt-printable-exercise{bar-chart-notice.adoc}.
 
 <!--
 Common Misconceptions
@@ -121,75 +136,118 @@ Common Misconceptions
 -->
 ---
 {layout="Synthesize"}
-# Pie and Bar Charts
+# Grouping by Value
 
-Bar Charts and Pie Charts are mostly used to _display categorical columns_.
+* What strategies did you use to match the bar charts to the pie charts?
+* Which displays do you find it easier to interpret? Why?
+* What information is provided in bar charts that is hidden in pie charts?
 
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can technically be placed in _any_ order, without changing the meaning of the chart.
+<!--
+Answer to last question" _In a bar chart, categories with no values are shown as empty categories, but there are no wedges for categories with 0% on a pie chart._
+-->
+---
+{layout="Synthesize"}
+# Grouping by Value
+
+As with the `count` functions, pie and bar charts *group data by value*, sorting it into buckets to show the frequency of each value. 
+
+If our data is based on sample data from a larger population, we can use these charts to _infer_ the proportion of a whole population that might belong to each category. 
+
+For example, the distribution of species in our shelter might help us make guesses about the distribution of species in other shelters.
+
+---
+{layout="Synthesize"}
+# Grouping by Value
+
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.
+
+---
+{layout="Launch"}
+# Groups and Subgroups 
+
+- Take a moment to answer the following questions: How many cats are male? How many cats are female?
+- Do you think there are about as many male dogs as female dogs?
+- Do you think this distribution is similar for every species at the shelter?
+
 
 <!--
 
 -->
 ---
 {layout="Launch"}
-# Exploring other Displays
+# Groups and Subgroups 
 
-There are _lots_ of other functions, for all different kinds of data displays. 
+Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. 
 
-Even if you don’t know what these plots are for yet, see if you can use your knowledge of Contracts to figure out how to use them!
-
+In this example, we want to compare the distribution of sexes across each species.
 
 <!--
 
+-->
+
+---
+{layout="Launch"}
+# Groups and Subgroups 
+
+Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
+
+@show{(contract "stacked-bar-chart" '("Table" "String" "String") "Image" )}{style="font-size:17pt"}
+
+@show{(contract "multi-bar-chart" '("Table" "String" "String") "Image" )}{style="font-size:17pt"}
+
+- Try using both of these functions to show the distribution of sexes across species in our shelter.
+- Which display do you think is easier to read?
+
+Complete @printable-exercise{stacked-and-multi-notice.adoc}
+
+<!--
 -->
 ---
-{layout="Investigate-DN"}
-# Exploring other Displays
+{layout="Investigate"}
+# Groups and Subgroups 
 
-Complete @printable-exercise{pages/exploring-displays-1.adoc} and @printable-exercise{pages/exploring-displays-2.adoc}.
+**Stacked bar charts make it easier to compare _groups_ than subgroups**
+
+* What displays did you find that work with just one column of data?
+* What displays did you find that work with more than one column of data?
+* What displays did you find that work with _categorical_ data?
+* What displays did you find that work with _quantitative_ data?
 
 <!--
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
 -->
+---
+{layout="InvestigateR"}
+# Groups and Subgroups 
+
+@right{@image{images/stacked-species-sex.png, 300}} Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
 
 ---
 {layout="InvestigateR"}
-# Exploring other Displays
+# Groups and Subgroups 
 
-@image{images/legsp.png,300}
+@right{@image{images/multi-species-sex.png, 300}} 
 
-Turn to @printable-exercise{pages/kind-v-display.adoc}, and see if you can identify what kind of data each display needs!
+**Multi bar charts make it easy to compare _subgroups_ than groups**
 
-<!--
-Have students share their answers and discuss.
+Multi bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
 
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal is to have them develop some loose familiarity, and to get more practice reading Contracts.
+- Complete @printable-exercise{matching-stacked-to-multi.adoc}
 
--->
 ---
 {layout="Synthesize"}
-# Exploring other Displays
+# Groups and Subgroups 
 
-* What displays did you find that work with just one column of data?
-* What displays did you find that work with more than one column of data?
-* What displays did you find that work with _categorical_ data?
-* What displays did you find that work with _quantitative_ data?
+All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
-<!--
-* What displays did you find that work with just one column of data?
-** _pie and bar charts, histograms and box plots_
-* What displays did you find that work with more than one column of data?
-** _scatter plots and lr-plots_
-* What displays did you find that work with _categorical_ data?
-** _pie and bar charts_
-* What displays did you find that work with _quantitative_ data?
-** _histograms, box plots, scatterplots, and lr-plots_
--->
+- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts?
+- What kinds of questions are better answered by stacked bar charts?
+- What kinds of questions are better answered by multi bar charts?
+
 ---
 {layout="Supplemental"}
 
 # Additional Exercises:
 
-- @opt-printable-exercise{bar-and-pie-notice.adoc}
 - @opt-printable-exercise{bar-chart-notice.adoc}
 - @opt-printable-exercise{pie-chart-notice.adoc}
+- @opt-project{infographic.adoc, rubric-infographic.adoc}

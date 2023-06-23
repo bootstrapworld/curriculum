@@ -188,7 +188,7 @@ In this activity, each person in your group will start with a different word pro
 
 **Set 2 - Putting it all together**
 
-@printable-exercise{data-cycle-2.adoc}
+@printable-exercise{data-cycle-1.adoc}
 
 
 <!--

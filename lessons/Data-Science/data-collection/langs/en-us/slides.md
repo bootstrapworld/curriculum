@@ -14,7 +14,7 @@ There are lots of reasons to gather data:
 
 * A company might want to survey its customers to see if they are happy with the product.{style="font-size:16pt"}
 * We might want to gather data on plant growth to see whether a plant grows faster with a lot or a little sun.{style="font-size:16pt"}
-* The CDC might gather data on symptoms to see how serious a disease is
+* The CDC might gather data on symptoms to see how serious a disease is.{style="font-size:16pt"}
 * An airline could gather data on fuel usage to see which airplane routes are the most efficient.{style="font-size:16pt"}
 * We might want to gather data on our friends to see what's stressing them out, or our classmates to see which teachers are the easiest!{style="font-size:16pt"}
 
@@ -43,7 +43,12 @@ Humans make mistakes, and that can happen when we are collecting data or enterin
 
 **There is a _lot_ of dirty data out there that Data Scientists have to deal with!**
 
-Open the @starter-file{fav-desserts} and answer the questions on @printable-exercise{survey-analysis.adoc}.
+- Open the @starter-file{fav-desserts}.
+- Answer the questions on @printable-exercise{survey-analysis.adoc}.
+
+<!--
+This could be an opportunity to have students practice cleaning data and importing a google sheet into a pyret starter file. If you want to take the time to have your students work on these skills and see the difference of what the file looks like cleaned up, have them make a copy of the @link{https://docs.google.com/spreadsheets/d/1Hv9eqiwQ3h2YvdLmm9_vuZuJpa2WsW4ENZsa2kI1pFs/, google sheet}, clean the data by hand, change the google file id in @starter-file{fav-desserts}, click "Run" and build the displays again to see how different they look with "clean" data.
+-->
 
 ---
 {layout="Synthesize"}
@@ -58,9 +63,9 @@ Open the @starter-file{fav-desserts} and answer the questions on @printable-exer
 
 Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Here are four ways that data can be dirty:
 
-(1) **Missing Data** - A column containing some cells with data, but some cells left blank.
+1.\ **Missing Data** - A column containing some cells with data, but some cells left blank.
 
-(2) **Inconsistent Types** - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
+2.\ **Inconsistent Types** - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
 
 ---
 {layout="Launch"}
@@ -68,9 +73,9 @@ Sometimes data is so "dirty" that it can't even be processed by tools like Pyret
 
 Sometimes data is so "dirty" that it can't even be processed by tools like Pyret! Here are four ways that data can be dirty:
 
-(3) **Inconsistent Units** - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
+3\. **Inconsistent Units** - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
 
-(4) **Inconsistent Naming** - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
+4\. **Inconsistent Naming** - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
 
 ---
 {layout="Launch"}
@@ -142,8 +147,17 @@ Suppose we want to test this for ourselves, by surveying students at a school...
 
 Complete @printable-exercise{bad-survey.adoc} in pairs or small groups.
 
+<!--
+
+Depending on your school or district, it may be difficult for students to edit or even view the @starter-file{bad-survey}. To prepare for this lesson, **we recommend making a copy of the survey using your school acount**, and then sharing __that__ copy with your students.
+
+You can also print out a copy of the survey for students to study on paper. It's not as concrete as having them submit real, ugly data, but it's a way of getting the idea across even if their access to the file is shut down.
+-->
+
+
+
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Data Hygiene
 
 @image{images/required.png} 
@@ -193,11 +207,21 @@ Most survey tools include advanced options to help Data Scientists get data that
 - When someone conducts a survey and provides a dataset from it, is it important for them to share the survey? Why or why not?
 - When someone shares a dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
 
+<!--
+Project Option: Designing a Survey
+
+In this project, students come up with a research question and @opt-project{survey-design.adoc, rubric-survey-design.adoc} to gather data to answer it. They exchange surveys and try to "hack" each other's study with garbage data. Teachers can have their students import the resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they've already learned.
+
+Finally, this project can also be used to support __original data collection__ for the final research paper.
+-->
+
 ---
 {layout="Supplemental"}
 # Additional Practice
 
-If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @opt-online-exercise{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.
+- @opt-project{survey-design.adoc, rubric-survey-design.adoc}
+
+- If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @opt-online-exercise{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.
 
 <!--
 

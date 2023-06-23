@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-04-25
+-- last modified 2023-05-16
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -15,7 +15,6 @@ function make_titletxt_file(f)
   end
   base = base:gsub('%..*', '')
   local titletxt_file = dir .. '.cached/.' .. base .. '.titletxt'
-  os.remove(titletxt_file)
   local i = io.open(f)
   for L in i:lines() do
     if L:find('^=%s') then
