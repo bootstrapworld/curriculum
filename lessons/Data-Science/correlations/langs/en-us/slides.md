@@ -18,9 +18,7 @@ You've learned several ways to analyze a single quantitative variable, such as `
 
 Together, those numbers tell us what value is **typical**, how much the values **vary**, and what kind of values are **usual or unusual**.
 
-<!--
-
--->
+@teacher{(The bolded words above all deal with notions of what it means for a value to be "normal" or "abnormal". These words have loaded meaning in the context of variability, and should be used carefully!)}
 ---
 {layout="Launch"}
 # Correlations have _Form_
