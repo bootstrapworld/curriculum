@@ -77,16 +77,6 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 ** _true sorted the values from least to greatest. false sorted the values from biggest to smallest._	
 }
 ---
-{layout="Investigate"}
-# Functions for Working with Tables
-
-Once you know how to read Contracts, you can easily use all the tools in our programming language. Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
-
-@teacher{
-Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @{show(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.	
-}
-
----
 {layout="Synthesize"}
 # Functions for Working with Tables
 
