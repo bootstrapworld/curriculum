@@ -38,30 +38,34 @@
 * @link{http://tylervigen.com/, Spurious Correlations}
 * @link{http://guessthecorrelation.com/, Guess the Correlation}
 
+| Key Points For The Facilitator
+|
+* Students frequently confuse correlation for causation! It can be tempting for focus on the _computational_ element of the lesson alone, getting kids to think about R-value and identify patterns in graphcs. But this ignores the critical point about correlation and causation, and students who over-focus on obtaining R-values are likely to develop this misconception!
+
 |===
 
 == Correlations have _Form_ @duration{5 minutes}
 
 === Overview
-Students identify and make use of patterns in scatter plots, learning to characterize them as being linear, curved, or showing no clear pattern. Determining that  a @vocab{form} is linear is a prerequisite for proceeding to @vocab{correlation} and @vocab{linear regression}.
+Students identify and make use of patterns in scatter plots, learning to characterize them as appearing to be linear, curved, or showing no clear pattern. Determining that a @vocab{form} appears to be linear is a prerequisite for proceeding to @vocab{correlation} and @vocab{linear regression}.
+
+_Note: We can’t make any definitive assertions about correlations without computation, which students will learn about in our @lesson-link{linear-regression} lesson, but it doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships, so it is important for students to develop an intuitive sense of what form means before engaging with the abstraction of computation._
 
 === Launch
 We can analyze a single quantitative variable, such as `age` or `pounds` to identify a value that is **typical**, how much the values **vary**, and what kind of values are **usual or unusual**.
 
+@teacher{(The bolded words above all deal with notions of what it means for a value to be "normal" or "abnormal". These words have loaded meaning in the context of variability, and should be used carefully!)}
+
 But those analyses tell us nothing about the _relationship_ between animals' ages and weights. In order to understand such relationships, we have to expand our view from one column to two. This goes hand-in-hand with expanding our display from a 1-dimensional histogram or box plot to a 2-dimensional scatter plot.
 
-Rather than summarizing each distribution in one dimension, we can search for a _linear relationship_ between two quantitative variables. Linear relationships only make sense if the scatter plot follows a _straight-line pattern_, so the first thing we need to ask is whether the @vocab{form} of the relationship is linear or not.
+Rather than summarizing each distribution in one dimension, we can search for a _linear relationship_ between two quantitative variables. Linear relationships only make sense if the scatter plot follows a _straight-line pattern_, so the first thing we need to ask is whether the @vocab{form} of the relationship appears to be linear or not.
 
 === Investigate
 
 Form indicates whether a relationship is linear, non-linear or undefined:
 
-
-
 [.FillVerticalSpace, cols="^.^2a,^.^2a,^.^2a", frame="none"]
 |===
-
-
 | @image{images/1b1.gif, 250}
 | @image{images/2NL.gif, 250}
 | @image{images/B.gif, 250}
@@ -77,20 +81,20 @@ Some patterns are **non-linear**, and may look like a curve or an arc. That mean
 
 And sometimes there is **no relationship** or pattern at all! That means there's no predictable change in the y-axis as we go from one side of the x-axis to the other.
 
-
 [.lesson-instruction]
-Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship is linear, non-linear or if there's no relationship at all.
+Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship appears to be linear, non-linear or if there's no relationship at all.
 
 === Synthesize
 - Which scatter plots seem to have _linear_ relationships?
-** _A, C, D, and F seem to have linear relationships._
+** _Students should feel very confident that A and C seem to have linear relationships._
+** _Students will likely also identify D and F as seeming to have linear relationships._
 - Which scatter plots seem to have _non-linear_ relationships?
 ** _Scatter plot E seems to have a non-linaer relationship._
 - Which scatter plots seem to have _no relationships_?
 ** _Scatter plot B seems to have no relationship._
 
 
-Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships!
+Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships! 
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -127,12 +131,11 @@ A *negative* direction means that the line slopes _down_ as we look from left-to
 
 === Investigate
 [.lesson-instruction]
-Complete @printable-exercise{pages/identifying-form.adoc} and focus __just on the second question__, determining whether each of the relationships you previously identified as linear is positive or negative.
+Complete @printable-exercise{pages/identifying-form.adoc} and focus __just on the second question__, determining whether each of the possible linear relationships you previously identified appears to have a positive or negative correlation.
 
 === Synthesize
-It only makes sense to look for direction in linear relationships!
-
-Confirm that students have correctly identified the direction of each linear relationship.
+- It only makes sense to look for direction in linear relationships!
+- Which data sets appear to have a positive correlation between the variables?
 
 == Correlations have __Strength__ @duration{10 minutes}
 
@@ -162,7 +165,7 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 === Investigate
 [.lesson-instruction]
-- Complete @printable-exercise{pages/identifying-form.adoc}, and focus on the third question for each scatter plot, identifying whether the relationship is strong or weak.
+- Complete @printable-exercise{pages/identifying-form.adoc}, and focus on the third question for each scatter plot, identifying whether the relationship appears to be strong or weak.
 - Optional: Complete the card sort on @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, Identifying Strength}.
 
 === Common Misconceptions
@@ -196,26 +199,28 @@ If it works for you, give students five minutes to play a few rounds of the onli
 
 === Investigate
 [.lesson-instruction]
-- Complete @printable-exercise{pages/identifying-form-open-ended.adoc}. For each scatter plot, identify whether the relationship is linear, and, if it is, use @math{r} to summarize direction and strength.
+- Complete @printable-exercise{pages/identifying-form-open-ended.adoc}. For each scatter plot, identify whether the relationship appears to be linear, and, if so, use @math{r} to summarize direction and strength.
 - Be prepared to discuss your answers with the class!
 
 Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
-
-[.lesson-point]
-Correlation does NOT imply causation.
-
-It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
-
-[.lesson-instruction]
-Complete @printable-exercise{correlation-is-not-causation.adoc}
-
-If time allows, you may want to emphasize the point that correlation does not imply causation by having students look at the nonsense claims that could be made from the graphs of real world data on the @link{http://tylervigen.com/, Spurious Correlations website}.
 
 [.lesson-instruction]
 - Let's look for correlations in the Animals Dataset!
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Complete @printable-exercise{correlations-animals.adoc}.
 
+It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
+
+[.lesson-point]
+Correlation does NOT imply causation.
+
+[.lesson-instruction]
+Complete @printable-exercise{correlation-is-not-causation.adoc}
+
+If time allows, you may want to emphasize the point that correlation does not imply causation by having students look at the nonsense claims that could be made from the graphs of real world data on the @link{http://tylervigen.com/, Spurious Correlations website}.
+
+=== Common Misconceptions
+Students often giggle at some of the Spurious Correlations examples, but fail to internalize the point when it comes to the Animals dataset or their own analysis. Pay close attention to students' language when describing their correlations, and make sure they are not using causative wording!
 
 === Synthesize
 Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`? What does this _mean_?
@@ -223,7 +228,7 @@ Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`? W
 _The correlation with `"pounds"` is higher, meaning that an animal's weight is a better predictor of the number of weeks an animal will live at the shelter before being adopted than its age._
 
 - People often confuse correlation with causation. What are some examples of this?
-- Why is a problem for society, that people confuse the two?
+- Why is a problem for society, that people confuse correlation and causation?
 
 == Your Analysis @duration{flexible}
 
@@ -239,7 +244,7 @@ What correlations do you think there are in your dataset? Would you like to inve
 [.lesson-instruction]
 - Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
 - Turn to @printable-exercise{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
-- Investigate these correlations. If you need blank Design Recipes, you can find them at the back of your workbook, just before the Contracts.
+- Investigate these correlations. If you're using a printed workbook, you'll find some blank Design Recipes at the back, just before the Contracts.
 
 === Synthesize
 - What correlations did you find?

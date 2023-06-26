@@ -11,11 +11,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Making Box Plots
 
-**_FACT: The Animal Shelter Bureau says the average pet weighs almost 41 pounds_**
+**_FACT: The Animal Shelter Bureau says the average pet weighs almost 40 pounds_**
 
 Once we have a summary number like "mean", it's important to ask another question:
 
-_If the average pet is 41 pounds, just **how typical** is that?_
+_If the average pet is 40 pounds, just **how typical** is that?_
 
 - Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
 - But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
