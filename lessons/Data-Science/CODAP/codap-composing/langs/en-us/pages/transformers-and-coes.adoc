@@ -1,0 +1,78 @@
+= Transformers and Circles of Evaluation
+
+
+Fill in the blanks beneath the Transformer type to indicate the specific arguments required by that Transformer.
+
+[cols= '3',options="header"]
+|===
+| Filter
+| Build
+| Transform
+
+| Dataset
+
+Expression
+
+@vspace{5ex}
+
+| @ifsoln{Dataset}
+
+@ifsoln{"Name of New Attribute"}
+
+@ifsoln{Expression}
+
+| @ifsoln{Dataset}
+
+@ifsoln{"Attribute to Transform"}
+
+@ifsoln{"New Name for Transformed Attribute"}
+
+@ifsoln{Expression}
+
+|===
+
+@vspace{1ex}
+
+The table `t` below represents four animals from the shelter:
+
+[.data, cols='5', options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
+|===
+
+@vspace{1ex}
+
+For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
+
+[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+|===
+|
+| Prompt
+| Circle of Evaluation
+
+| @n
+| Produce a Table containing all animals younger than 5.
+| @show{(coe '(Filter t age<5))}
+
+| @n
+| Produce a Table showing all fixed animals.
+| @show{(coe '(Filter t fixed=true ))}
+
+| @n
+| Produce a Table with a new column ("age next year") that adds 1 year to each age.
+| @show{(coe '(Build t "age next year" age+1))}
+
+| @n
+| Produce Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
+| @show{(coe '(Transform t "pounds" "kilos" pounds/2.205 ))}
+
+| @n
+| Produce Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
+| @show{(coe '(Transform t "pounds" "kilos" pounds/2.205 ))}
+
+
+|===
