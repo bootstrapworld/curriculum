@@ -167,7 +167,7 @@ A journalist comes to the shelter who wants to write a story about a successful 
 - To provide the journalist with a list of possible pets, what transformations do we need to do to apply to the @starter-file{animals}?
 ** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.205.__
 - What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
-** __(Sample responses:) It will crash! The computer won't like it!__
+** __Sample responses: It will crash! The computer won't like it!__
 
 If we use our Transformers in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program.
 
@@ -178,9 +178,7 @@ Order matters: Build / Transform, _then_ Filter.
 
 === Investigate
 
-Let's diagram how we will transform the table using Circles of Evaluation.
-
-Note: @printable-exercise{composing-transformers.adoc} is designed to be completed as a class, with discussion interwoven throughout.
+Let's work together as a class to diagram how we will transform the table using Circles of Evaluation.
 
 [.lesson-instruction]
 - We always build first, so let's start there.
@@ -195,32 +193,28 @@ The Transformer produces a _table_! We will use this table as our dataset for th
 [.lesson-instruction]
 - In the _inner_ Circle of Q3, copy down the Circle of Evaluation that you drew for Q1. We'll use the inner Circle as the Outer Circle's first argument.
 - Diagram a Circle-within-a-Circle to create a table that includes only animals that weigh more than 9 kilograms.
-
-
-=== Investigate
-
-[.lesson-instruction]
-- Complete @printable-exercise{pages/matching-composed-transformers.adoc}.
-- Optional: For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
-
-
+- And finally: In the @starter-file{animals}, create and apply the Transformers you've just diagrammed. How many animals at the shelter meet the journalist's criteria?
 
 A perk of composing Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
-@span{.title}{Tip: Saving Transformers and Renaming Tables}
+@span{.title}{Tip: Renaming Tables}
 
-We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider using renaming the table. For instance, `light-animals-in-kg` might be a more useful table name, here.
+Encourage students to rename tables descriptively. As students compose Transformers, they may notes that table names start to become quite length, i.e. `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider renaming the table something simpler. For instance, `light-animals-in-kg` might be a more useful table name.
 |===
 
 
+=== Investigate
 
-[.lesson-point]
-Circles of Evaluation let us think and plan, without worrying about small details.
+Circles of Evaluation let us think and plan, without getting bogged down by small details.
 
-Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportiunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
+[.lesson-instruction]
+Complete @printable-exercise{pages/matching-composed-transformers.adoc}.
+
+
+Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
 
 Armed with these tools, we can do some pretty complex analysis! We can even think of data displays as another kind of table operation. What will this Circle of Evaluation produce?
 
@@ -235,5 +229,3 @@ Was it helpful to think about the Circles, without worrying about CODAP? Why or 
 
 @opt-printable-exercise{pages/building-from-circles-2.adoc}
 
-
-We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider using renaming the table. For instance, `light-animals-in-kg` might be a more useful table name, here.
