@@ -1,5 +1,3 @@
--- last modified 2023-03-12
-
 -- requires readers.lua to be loaded first
 
 -- read_json_file(f) reads the (single) JSON object from f
@@ -49,7 +47,9 @@ local function json_read_string(i)
   local in_escape_p = false
   while true do
     local c = i:read(1)
-    if in_escape_p then
+    if not c then
+      error 'Bad JSON string'; break
+    elseif in_escape_p then
       in_escape_p = false
       table.insert(result, c)
     elseif c == '\\' then
@@ -124,8 +124,12 @@ end
 function read_json_file(f)
   current_json_file = f
   local i = io.open_buffered(f)
-  local result = json_read(i)
+  local status, result = pcall(json_read, i)
   i:close()
-  -- print('read_json_file retd', result)
-  return result
+  if status then
+    -- print('read_json_file retd', result)
+    return result
+  else
+    error(result .. ' in ' .. f)
+  end
 end
