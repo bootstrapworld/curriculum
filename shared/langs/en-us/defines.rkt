@@ -99,13 +99,13 @@
         "is __away from the keyboard!__ Our lesson plans are tightly integrated\n"
         "with a detailed Student Workbook, allowing for paper-and-pencil practice and\n"
         "activities that don't require a computer.\n"
-        "\n"
-        "link:"
-          (if c (second c) "missing-link")
-          "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
+              "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
         "\n"
         "Of course, we understand that printing them yourself can be expensive!\n"
-        "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
+        "\n"
+         "link:"
+          (if c (second c) "missing-link")
+          "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
         "\n") o)))
 
 (define (print-link-to-standards course o)
