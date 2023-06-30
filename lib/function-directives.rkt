@@ -1175,7 +1175,9 @@
     "\n\n"
     (encoded-ans ".data-cycle-build.stretch" build-fn *show-build?*)
     "\n\n"
-    (encoded-ans ".data-cycle-expression.stretch" expression *show-expression?*)
+    (encoded-ans ".data-cycle-expression.stretch"
+                 (if (string? expression) expression (wescheme->pyret expression))
+                 *show-expression?*)
     "\n\n"
     "| "
     "image:" dist-root-dir "lib/images/InterpretData.png[Interpret icon]"
