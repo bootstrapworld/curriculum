@@ -61,90 +61,37 @@ The table `t` below represents four animals from the shelter:
 
 Draw Circles of Evaluation that represent the Transformers needed to respond to the prompt on the left. Remember to give each Transformer a descriptive name, which will go at the top of each Circle. We've done the first one to get you started.
 
-[.FillVerticalSpace, cols="^.^1a,^.^10a,.^8a,^.^30a, ^.^10a",stripes="none",frame="none", options="header"]
+[.FillVerticalSpace, cols="^.^2a,^.^10a,^.^30a, ^.^20a",stripes="none",frame="none", options="header"]
 |===
 |
 | Prompt
-| Transformer Type
 | Circle of Evaluation
 | Transformer Name
 
 | @n
 | Produce a Table containing all animals younger than 5.
-|
-* [x] Filter
-* [ ] Build
-* [ ] Transform
-
 | @show{(coe '(filter t age<5))}
 | `filter-if-young`
 
 | @n
 | Produce a Table showing all fixed animals.
-| @ifnotsoln{
-* [ ] Filter
-* [ ] Build
-* [ ] Transform
-}
-
-@ifsoln{
-* [x] Filter
-* [ ] Build
-* [ ] Transform
-}
-
 | @showsoln{(coe '(filter t fixed=true ))}
 | @ifsoln{`filter-if-fixed`}
 
 | @n
 | Produce a Table with a new column ("age next year") that adds 1 year to each age.
-| @ifnotsoln{
-* [ ] Filter
-* [ ] Build
-* [ ] Transform
-}
-
-@ifsoln{
-* [ ] Filter
-* [x] Build
-* [ ] Transform
-}
-
 | @showsoln{(coe '(build t "age next year" age+1))}
 | @ifsoln{`build-older`}
 
 
 | @n
 | Produce a Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
-| @ifnotsoln{
-* [ ] Filter
-* [ ] Build
-* [ ] Transform
-}
-
-@ifsoln{
-* [ ] Filter
-* [ ] Build
-* [x] Transform
-}
-
 | @showsoln{(coe '(transform t "pounds" "kilos" pounds/2.205 ))}
 | @ifsoln{`transform-pounds`}
 
 
 | @n
 | Produce a Table that doubles pounds but does *not* add a new column.
-| @ifnotsoln{
-* [ ] Filter
-* [ ] Build
-* [ ] Transform
-}
-
-@ifsoln{
-* [ ] Filter
-* [ ] Build
-* [x] Transform
-}
 | @showsoln{(coe '(transform t "pounds" "pounds-doubled" pounds*2 ))}
 | @ifsoln{`transform-double`}
 

@@ -1,4 +1,4 @@
-= Composing Table Operations
+= Matching Composed Transformers
 ++++
 <style>
 .literalblock pre { 0.5em 0 !important; }
@@ -9,15 +9,17 @@ div.circleevalsexp .value { font-size: 0.7rem; }
 
 @do{
 
-(define exp1 '(sort t "age" ascending))
-(define exp2 '(filter t "fixed"=true))
-(define exp3 '(build-column t "elderly" age>10))
-(define exp4 '(filter t "age"<4))
-(define exp5 '(filter (filter t "age"<4) "fixed"=true))
-(define exp6 '(sort (filter t "age"<4) "pounds" descending))
-(define exp7 '(sort (build-column t "old" age>10) "age" ascending))
-(define exp8 '(sort t "sex" descending))
+(define exp1 '(transform-attribute t age age-last-year age-1))
+(define exp2 '(filter t fixed=true))
+(define exp3 '(build-attribute t elderly age>10))
+(define exp4 '(filter t age<4))
+(define exp5 '(filter (filter t age<4) pounds>50))
+(define exp6 '(filter (filter t pounds<40) age<4))
+(define exp7 '(filter (build-attribute t old age>5) old=true))
+(define exp8 '(build-attribute (filter t old=true) old age>10))
+
 }
+
 
 The table `t` below represents four animals from the shelter:
 
@@ -30,23 +32,6 @@ The table `t` below represents four animals from the shelter:
 | `"Maple"`   | `"female"`| `3`   | `true`  | `51.6`
 |===
 
-The following Transformers are created and saved:
-
-[cols=4]
-|===
-| *transform-kilos*
-
-
-| *filter-is-fixed*
-
-
-| *build-is-old*
-
-
-| *filter-is-young*
-|===
-
-
 _Match_ each Circle of Evaluation (left) to the description of what it does (right).
 
 [.FillVerticalSpace, cols=".^12a,^.^2a,2,^.^1a,.^7a",stripes="none",grid="none",frame="none"]
@@ -58,11 +43,11 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp2)}
 |*@n*@ifsoln{(F)} ||*B*
-| Produces a table of only young, fixed animals
+| Produces a table with only Maple
 
 | @show{(coe exp3)}
 |*@n*@ifsoln{(D)} ||*C*
-| Produces a table, sorted youngest-to-oldest
+| Produces a table that no longer has an "age" column
 
 | @show{(coe exp4)}
 |*@n*@ifsoln{(A)} ||*D*
@@ -70,10 +55,10 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp5)}
 |*@n*@ifsoln{(B)} ||*E*
-| Produces a table containing Maple and Toggle, in that order
+| Produces an empty table
 
 | @show{(coe exp6)}
-|*@n*@ifsoln{(E)} ||*F*
+|*@n*@ifsoln{(B)} ||*F*
 | Produces a table containing the same four animals
 
 | @show{(coe exp7)}
@@ -82,6 +67,6 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 
 | @show{(coe exp8)}
 |*@n*@ifsoln{(G)} ||*H*
-| Produces a table with an extra "old" column, sorted youngest-to-oldest
+| Produces a table with only Nori
 
 |===
