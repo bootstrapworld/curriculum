@@ -9,25 +9,38 @@ Fill in the blanks beneath the Transformer type to indicate the specific argumen
 | Build
 | Transform
 
-| Dataset
+| 1 Dataset
+@vspace{1ex}
 
-Expression
+2 Expression
 
 @vspace{5ex}
 
-| @ifsoln{Dataset}
+| 1 @ifsoln{Dataset}
 
-@ifsoln{"Name of New Attribute"}
+@vspace{1ex}
 
-@ifsoln{Expression}
+2 @ifsoln{"Name of New Attribute"}
 
-| @ifsoln{Dataset}
+@vspace{1ex}
 
-@ifsoln{"Attribute to Transform"}
+3 @ifsoln{Expression}
 
-@ifsoln{"New Name for Transformed Attribute"}
+@vspace{1ex}
 
-@ifsoln{Expression}
+| 1 @ifsoln{Dataset}
+
+@vspace{1ex}
+
+2 @ifsoln{"Attribute to Transform"}
+
+@vspace{1ex}
+
+3 @ifsoln{"New Name for Transformed Attribute"}
+
+@vspace{1ex}
+
+4 @ifsoln{Expression}
 
 |===
 
@@ -46,33 +59,86 @@ The table `t` below represents four animals from the shelter:
 
 @vspace{1ex}
 
-For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
+Draw Circles of Evaluation that represent the Transformers needed to respond to the prompt on the left. Remember to give each Transformer a descriptive name, which will go at the top of each Circle. We've done the first one to get you started.
 
-[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+[.FillVerticalSpace, cols="^.^2a,^.^10a,.^10a,^.^30a",stripes="none",frame="none", options="header"]
 |===
 |
 | Prompt
+| Transformer Type
 | Circle of Evaluation
 
 | @n
 | Produce a Table containing all animals younger than 5.
-| @show{(coe '(Filter t age<5))}
+|
+* [x] Filter
+* [ ] Build
+* [ ] Transform
+
+| @show{(coe '(filter-if-young t age<5))}
 
 | @n
 | Produce a Table showing all fixed animals.
-| @show{(coe '(Filter t fixed=true ))}
+| @ifnotsoln{
+* [ ] Filter
+* [ ] Build
+* [ ] Transform
+}
+
+@ifsoln{
+* [x] Filter
+* [ ] Build
+* [ ] Transform
+}
+
+| @showsoln{(coe '(filter-if-fixed t fixed=true ))}
 
 | @n
 | Produce a Table with a new column ("age next year") that adds 1 year to each age.
-| @show{(coe '(Build t "age next year" age+1))}
+| @ifnotsoln{
+* [ ] Filter
+* [ ] Build
+* [ ] Transform
+}
+
+@ifsoln{
+* [ ] Filter
+* [x] Build
+* [ ] Transform
+}
+
+| @showsoln{(coe '(build-older t "age next year" age+1))}
 
 | @n
-| Produce Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
-| @show{(coe '(Transform t "pounds" "kilos" pounds/2.205 ))}
+| Produce a Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
+| @ifnotsoln{
+* [ ] Filter
+* [ ] Build
+* [ ] Transform
+}
+
+@ifsoln{
+* [ ] Filter
+* [ ] Build
+* [x] Transform
+}
+
+| @showsoln{(coe '(transform-lbs t "pounds" "kilos" pounds/2.205 ))}
 
 | @n
-| Produce Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
-| @show{(coe '(Transform t "pounds" "kilos" pounds/2.205 ))}
+| Produce a Table that doubles pounds but does *not* add a new column.
+| @ifnotsoln{
+* [ ] Filter
+* [ ] Build
+* [ ] Transform
+}
+
+@ifsoln{
+* [ ] Filter
+* [ ] Build
+* [x] Transform
+}
+| @showsoln{(coe '(transform-double t "pounds" "kilos" pounds*2 ))}
 
 
 |===
