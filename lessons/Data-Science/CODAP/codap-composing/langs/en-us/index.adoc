@@ -99,15 +99,13 @@ When we want to compose _different_ Transformers, however, this strategy will no
 == Circles of Evaluation @duration{25 minutes}
 
 === Overview
-Students learn to diagram expressions using the Circles of Evaluation. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
+Students learn to diagram Transformers using @vocab{Circles of Evaluation}. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
 
 === Launch
 
-A @vocab{Circle of Evaluation} is a way to organize our thoughts and diagram what we want a given Transformer to do.
+A @vocab{Circle of Evaluation} is a way to organize our thoughts and diagram what we want a given Transformer to do. Circles of Evaluation require a bit _more_ planning and a bit _less_ experimentation than creating a Transformer in CODAP. The rules are simple:
 
-The rules are simple:
-
-**1) Every Circle must have one - and only one! - Transformer name written at the top.** Give your Transformers useful names that describe what they do.
+**1) Every Circle must have one - and only one! - Transformer type written at the top.**
 
 **2) The arguments of the Transformer are written left-to-right, in the middle of the Circle.** Note that different Transformers require different arguments!
 
@@ -118,23 +116,22 @@ The rules are simple:
 [cols= "^.^5, ^.^7" ,options="header"]
 |===
 | Filter
-| Build
+| Build Attribute
 
 
-| @show{(coe '(transformer-name-of-your-choice Dataset Expression))}
-| @show{(coe '(transformer-name-of-your-choice Dataset "Name of New Attribute" Expression))}
+| @show{(coe '(TransformerType Dataset Expression))}
+| @show{(coe '(TransformerType Dataset "Name of New Attribute" Expression))}
 |===
 
 [cols= "^.^10",options="header"]
 |===
-| Transform
-| @show{(coe '(transformer-name-of-your-choice Dataset "Attribute to Transform" "New Name for Transformed Attribute" Expression))}
+| Transform Attribute
+| @show{(coe '(TransformerType Dataset "Attribute to Transform" "New Name for Transformed Attribute" Expression))}
 |===
 
-- How many arguments does Filter require? How about Build? Transform?
-** _Filter reuqires 2 arguments. Build requires 3 arguments. Transform requires 4 arguments._
+- How many arguments does Filter require? How about Build Attribute? Transform Attribute?
+** _Filter requires 2 arguments. Build Attribute requires 3 arguments. Transform Attribute requires 4 arguments._
 - Why is naming your Transformers important?
-** _Naming Transformers will result in ease of use later. The Transformer's name should tell us what it does!_
 --
 
 === Investigate
@@ -144,47 +141,59 @@ Let's practice creating Circles of Evaluation to represent various Transformers.
 [.lesson-instruction]
 - Turn to @printable-exercise{transformers-and-coes.adoc}.
 - Complete the table at the top of the page to use as a reference.
-- Respond to the prompts, drawing Circles of Evaluation that represent the Transformers needed to create the desired table.
+- Respond to the prompts, drawing Circles of Evaluation that represent the transformation needed to create the desired table.
+- In the last column, give each Transformer a useful and descriptive name.
 
 === Synthesize
 
-Was it helpful to think about the Circles, without worrying about CODAP? Why or why not?
+- Was it helpful to think about the Circles without worrying about CODAP? Why or why not?
+- What is the value of naming Transformers?
 
 
 
+== Composing Transformers @duration{25 minutes}
 
-We already know how to filter, transform, and build columns - but what if we want to do _multiple things, all at once?_ Filtering, transforming and building are powerful transformations, but when they are _combined_ they become even more powerful!
+=== Overview
 
+Filtering, transforming and building are powerful transformations, but when they are _combined_ they become even more powerful!
 
+=== Launch
 
+We already know how to filter, transform, and build columns - but what if we want to do _multiple things, all at once?_
 
 A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
 
-* To provide her with this data, what operations do we need to do to our dataset?
-** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.__
-
-[.lesson-point]
-Order matters: Build @ifproglang{codap}{/ Transform}, Filter, Sort.
-
-* What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
+[.lesson-instruction]
+- To provide the journalist with a list of possible pets, what transformations do we need to do to apply to the @starter-file{animals}?
+** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.205.__
+- What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
 ** __(Sample responses:) It will crash! The computer won't like it!__
 
 If we use our Transformers in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results!
 
-Values like Numbers, String, and Booleans are still written by themselves. It's only when we want to _use a Transformer_ that we need to draw a Circle, and write the values inside from left-to-right.
+[.lesson-point]
+Order matters: Build / Transform, _then_ Filter.
 
-Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. We know that our Transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.
+=== Investigate
 
-@show{(coe '(build-attribute animals-table "kilos" pounds/2.205))}
+Let diagram what we need to do for the journalist using the Circles of Evaluation.
 
+Note: @printable-exercise{composing-transformers.adoc} is designed to be completed as a class, with discussion woven throughout.
 
-But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
+[.lesson-instruction]
+- We always build first, so let's start there.
+- For Q1 on @printable-exercise{composing-transformers.adoc}, diagram how you would build a column that gives each animal's weight in kilograms.
+- What will this Circle of Evaluation produce?
+** _It will produce a table with a new column that gives the animals' weights in kilograms._
 
-**__3) Circles can contain other Circles!__**
+The Transformer produces a _table_! We will use this table as our dataset for the Filter transformer we are about to create... which brings us to the third rule of Circles of Evaluation:
 
-Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
+**3) Circles can contain other Circles!**
 
-@show{(coe '(filter (build-attribute animals-table "kilos" pounds/2.2) kilos>10))}
+[.lesson-instruction]
+- In the _inner_ Circle of Q3, copy down the Circle of Evaluation that you drew for Q1. We'll use the inner Circle as the Outer Circle's first argument.
+- Draw a Circle-within-a-Circle to create a table that includes only animals that weigh more than 9 kilograms.
+
 
 
 
@@ -217,11 +226,8 @@ Armed with these tools, we can do some pretty complex analysis! We can even thin
 
 @show{(coe '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}
 
-[.lesson-instruction]
-Complete @printable-exercise{pages/planning-table-operations.adoc}.
 
 === Synthesize
-Review student answers to @printable-exercise{pages/planning-table-operations.adoc}.
 
 Was it helpful to think about the Circles, without worrying about CODAP? Why or why not?
 
