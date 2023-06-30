@@ -1,0 +1,87 @@
+= Function Composition: Matching
+++++
+<style>
+#content .listingblock pre {padding: 0;}
+#content .topTable tr:first-child td * { background-color: #f7f7f8; }
+table table { border: none !important; }
+</style>
+++++
+
+[.topTable, cols="1,1,1,1", stripes="none"]
+|===
+a|
+----
+g :: Number -> Number
+Consumes a number, multiplies by 6 to produce the result
+----
+a|
+----
+h :: Number -> Number
+Consumes a number, subtracts 6 to produce the result
+----
+a|
+----
+j :: Number -> Number
+Consumes a number, adds 6 to produce the result
+----
+a|
+----
+k :: Number -> Number
+Consumes a number, divides by 6 to produce the result
+----
+|
+@math{ g(n) = n \times 6}
+|
+@math{ h(n) = n - 6 }
+|
+@math{ j(n) = n + 6 }
+|
+@math{ k(n) = n \div 6 }
+|===
+
+Draw a line from each expression on the left to the corresponding Circle of Evaluation on the right.
+
+@do{
+  (define comp1 '(g (h (j n))))
+  (define expr1 '(*  (- (+ n 6) 6) 6))
+
+  (define comp2 '(h (j (k n))))
+  (define expr2 '(- (+ (/ n 6) 6) 6))
+
+  (define comp3 '(g (k (h n))))
+  (define expr3 '(* (/ (- n 6) 6) 6))
+
+  (define comp4 '(k (h (g n))))
+  (define expr4 '(/ (- (* n 6) 6) 6))
+
+  (define comp5 '(j (g (k n))))
+  (define expr5 '(+ (* (/ n 6) 6) 6))
+}
+
+[.FillVerticalSpace,cols="^.^10a,^.^3a,5a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| Function Notation
+|||
+| Circle of Evaluation
+
+| @show{(math comp1 #:parens true)}
+|*@n*@showsoln{"-E" }||*A*
+| @show{(coe expr2)}
+
+| @show{(math comp2 #:parens true)}
+|*@n*@showsoln{"-A" }||*B*
+| @show{(coe expr4 )}
+
+| @show{(math comp3 #:parens true)}
+|*@n*@showsoln{"-C" }||*C*
+| @show{(coe expr3 )}
+
+| @show{(math comp4 #:parens true)}
+|*@n*@showsoln{"-B" }||*D*
+| @show{(coe expr5 )}
+
+| @show{(math comp5 #:parens true)}
+|*@n*@showsoln{"-D" }||*E*
+| @show{(coe expr1 )}
+
+|===
