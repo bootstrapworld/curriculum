@@ -1,0 +1,88 @@
+= Create Transformer Cards
+
+The table `t` below represents four animals from the shelter:
+
+[.data, cols='5', options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+|===
+
+@vspace{1ex}
+
+Create a Transformer card that responds to the given prompt on the left. When you're done, give the Transformer a useful name. We've done the first one to get you started.
+
+[.FillVerticalSpace, cols="2,15,26,20",stripes="none",frame="none", options="header"]
+|===
+|
+| Prompt
+| Transformer Card
+| Transformer Name
+
+| @n
+| Create a Transformer that produces a Table containing all animals younger than 5.
+| *Type:* @fitbruby{20em}{ filter }{[filter/build/transform]}
+
+*Dataset:* @fitb{}{ `t` }
+
+*Expression:* @fitb{}{ `age<5` }
+
+| `filter-if-young`
+
+| @n
+| Create a Transformer that produces a Table showing all fixed animals.
+
+| *Type:* @fitbruby{20em}{ @ifsoln{filter} }{[filter/build/transform]}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Expression:* @fitb{}{ @ifsoln{`fixed=true`} }
+| @ifsoln{`filter-if-fixed`}
+
+| @n
+| Create a Transformer that produces a Table with a new column ("age next year") that adds 1 year to each age.
+| *Type:* @fitbruby{20em}{ @ifsoln{build} }{[filter/build/transform]}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`older`} }
+
+*Expression:* @fitb{}{ @ifsoln{`age+1`} }
+
+| @ifsoln{`build-older`}
+
+| @n
+| Create a Transformer that produces a Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
+
+| *Type:* @fitbruby{20em}{ @ifsoln{Transform} }{[filter/build/transform]}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Attribute to Transform:* @fitb{}{ @ifsoln{`pounds`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`kilos`} }
+
+*Expression:* @fitb{}{ @ifsoln{`pounds/2.205`} }
+
+| @ifsoln{`transform-pounds`}
+
+
+| @n
+| Create a Transformer that produces a Table that doubles pounds but does *not* add a new column.
+
+| *Type:* @fitbruby{20em}{ @ifsoln{Transform} }{[filter/build/transform]}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Attribute to Transform:* @fitb{}{ @ifsoln{`pounds`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`pounds-doubled`} }
+
+*Expression:* @fitb{}{ @ifsoln{`pounds`} }
+| @ifsoln{`transform-double`}
+
+
+
+|===

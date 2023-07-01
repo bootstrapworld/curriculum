@@ -9,15 +9,14 @@ div.circleevalsexp .value { font-size: 0.7rem; }
 
 @do{
 
-(define exp1 '(transform-attribute t age age-last-year age-1))
-(define exp2 '(filter t fixed=true))
-(define exp3 '(build-attribute t elderly age>10))
-(define exp4 '(filter t age<4))
-(define exp5 '(filter (filter t age<4) pounds>50))
-(define exp6 '(filter (filter t pounds<40) age<4))
-(define exp7 '(filter (build-attribute t old age>5) old=true))
-(define exp8 '(build-attribute (filter t old=true) old age>10))
-
+(define exp1 '(transform-age t))
+(define exp2 '(filter-if-fixed t))
+(define exp3 '(build-elderly t))
+(define exp4 '(filter-if-young t))
+(define exp5 '(filter-if-heavy (filter-if-young t)))
+(define exp6 '(filter-if-young (filter-if-heavy t)))
+(define exp7 '(filter-if-elderly (build-elderly t)))
+(define exp8 '(build-elderly (filter-if-elderly t)))
 }
 
 
@@ -34,7 +33,7 @@ The table `t` below represents four animals from the shelter:
 
 _Match_ each Circle of Evaluation (left) to the description of what it does (right).
 
-[.FillVerticalSpace, cols=".^12a,^.^2a,2,^.^1a,.^7a",stripes="none",grid="none",frame="none"]
+[.FillVerticalSpace, cols=".^5a,^.^2a,2,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 
 | @show{(coe exp1)}

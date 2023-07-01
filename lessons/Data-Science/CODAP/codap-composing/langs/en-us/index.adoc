@@ -1,6 +1,5 @@
 = Composing Transformers
 
-
 @description{Students learn how to compose Transformers, which act as functions operating on tables.}
 
 @lesson-prereqs{codap-building}
@@ -96,59 +95,77 @@ When we want to compose _different_ Transformers, however, this strategy will no
 
 
 
-== Circles of Evaluation @duration{25 minutes}
+== Defining Transformers @duration{25 minutes}
 
 === Overview
-Students learn to diagram Transformers using @vocab{Circles of Evaluation}. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
+
+Students have already explored how to use Transformers to Filter, Transform, and Build. In this lesson, students practice creating and saving Transformers for future use.
 
 === Launch
 
-A @vocab{Circle of Evaluation} is a way to organize our thoughts and diagram what we want a given Transformer to do. Circles of Evaluation require a bit _more_ planning and a bit _less_ experimentation than creating a Transformer in CODAP. The rules are simple:
+One of the perks of using a tool like CODAP is that it invites experimentation, prompting us to play with a variety of inputs until we have designed exactly the Transformer we need.
 
-**1) Every Circle must have one - and only one! - Transformer type written at the top.**
+Sometimes, however, relying on experimentation can limit our ability to _plan_ our data analysis... which is why it is important to consider exactly which inputs each Transformer requires to do the work that we want it to do.
 
-**2) The arguments of the Transformer are written left-to-right, in the middle of the Circle.** Note that different Transformers require different arguments!
+Each of the three Transformers we've worked with consumes a different amount of arguments.
 
-[.lesson-instruction]
---
-- What do you Notice about the @vocab{Circles of Evaluation} below? What do you Wonder?
-
-[cols= "^.^5, ^.^7" ,options="header"]
+[cols= "10,10,10",options="header"]
 |===
 | Filter
 | Build Attribute
-
-
-| @show{(coe '(TransformerType Dataset Expression))}
-| @show{(coe '(TransformerType Dataset "Name of New Attribute" Expression))}
-|===
-
-[cols= "^.^10",options="header"]
-|===
 | Transform Attribute
-| @show{(coe '(TransformerType Dataset "Attribute to Transform" "New Name for Transformed Attribute" Expression))}
+
+| 1 Transformer Type
+
+2 Dataset
+
+3 Expression
+
+| 1 Transformer Type
+
+2 Dataset
+
+3 Name of New Attribute
+
+4 Expression
+
+| 1 Transformer Type
+
+2 Dataset
+
+3 Attribute to Transform
+
+4 New Name for Transformed Attribute
+
+5 Expression
+
 |===
 
-- How many arguments does Filter require? How about Build Attribute? Transform Attribute?
+[.lesson-instruction]
+- Refer to the table above - a set of three "Transformer Cards" to determine: How many arguments does Filter require? How about Build Attribute? Transform Attribute?
 ** _Filter requires 2 arguments. Build Attribute requires 3 arguments. Transform Attribute requires 4 arguments._
-- Why is naming your Transformers important?
---
+- Why does each Transformer require a different number of arguments?
+** _All Transformeres require a Transformer type and a dataset. Beyond that, Filter only needs a Boolean to know which rows to include and exclude from the new dataset. Build and Transform both require a new attribute name. Transform also needs to know which attribute is being transformed._
 
 === Investigate
 
-Let's practice creating Circles of Evaluation to represent various Transformers.
+A Transformer Card is a place to organize our thoughts and plan out what we want a given Transformer to do.
+
+
+Let's practice creating Transformer Cards to represent various Transformers.
 
 [.lesson-instruction]
-- Turn to @printable-exercise{transformers-and-coes.adoc}.
 - Complete the table at the top of the page to use as a reference.
 - Respond to the prompts, drawing Circles of Evaluation that represent the transformation needed to create the desired table.
 - In the last column, give each Transformer a useful and descriptive name.
+- Turn to @printable-exercise{create-transformer-cards.adoc}.
+- Turn to @printable-exercise{create-transformer-cards-2.adoc}.
+
 
 === Synthesize
 
 - Was it helpful to think about the Circles without worrying about CODAP? Why or why not?
 - What is the value of naming Transformers?
-
 
 
 == Composing Transformers @duration{25 minutes}
@@ -161,11 +178,13 @@ Filtering, transforming and building are powerful transformations, but when they
 
 We already know how to filter, transform, and build columns - but what if we want to do _multiple things, all at once?_
 
-A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
+A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. She wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
 
 [.lesson-instruction]
 - To provide the journalist with a list of possible pets, what transformations do we need to do to apply to the @starter-file{animals}?
 ** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.205.__
+- Should we filter first? Or build a column first? Why?
+** __We need to build a column first.__
 - What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
 ** __Sample responses: It will crash! The computer won't like it!__
 
@@ -174,7 +193,7 @@ If we use our Transformers in the wrong order (trying to filter by a column that
 [.lesson-point]
 Order matters: Build / Transform, _then_ Filter.
 
-...even worse, the program might run but produce nonsensical results!
+In some scenarios, the program might run but produce nonsensical results!
 
 === Investigate
 
