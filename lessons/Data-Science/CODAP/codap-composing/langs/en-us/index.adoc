@@ -27,87 +27,24 @@
 
 | Preparation
 |
-* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
+* This lesson requires each pair of students to create a cut-out set of "Transformer Cards". Have scissors available.
 |===
 
-== Design Recipe Practice @duration{25 minutes}
-
-=== Overview
-In this lesson students build on what they have already learned to formalize their understanding of the Design Recipe, and then gain fluency with using the Design Recipe.
-
-=== Launch
-When filtering rows or building columns, we need to write Transformer expressions. __This should be done carefully!__ We want our results to be rock solid and accurate, especially if they're going to be used in ways that affect the world around us.
-
-The Design Recipe is a sequence of steps that helps us document, test out, and write Transformer expressions that let us dig deeper into our data, and analyze it more carefully. It's important for this to be like second nature, so let's get some practice using it.
-
-[.lesson-instruction]
-Let's look at @printable-exercise{pages/design-recipe-1.adoc} together.
-
-First, we need to decide which Transformer to use: Filter, Transform, or Build. Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
-
-@image{images/transformer-name.png, 800, "top section of a Design Recipe"}
-
-Next, we provide *example tables*. In this case, we want to know the animals' names and their species, so we write down those column names. We want to list a few different animals - at least one that is a dog, and at least one that is not - to represent the variety of animals on the table. Then we think about what our transformed table will look like:
-
-- Will Sasha be on the new table? _No, Sasha is a cat. We only want dogs!_
-
-- Will Fritz be on the new table? _Yes, Fritz is a dog._
-
-- Will Toggle be on the new table? _Yes, Toggle is a dog._
-
-@image{images/example-tables.png, 800, "filled in example tables from Design Recipe worksheet" }
-
-Now, we are ready to drill down on the contents of our Transformer.
-
-- First - the *contract*, which requires a domain (what type of data will we provide) and a range (what type of data will be produced). Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
-
-- Next, we need a clear *purpose statement*, which describes what the expression does to each row. In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
-
-- And finally, we enter our *expression*, in this case: `species = "dog"`.
-
-@image{images/contents.png, "contract, purpose statement, expression", 800}
-
-Each time students encounter a new word problem, we encourage working through it with paper and pencil, as above; the Design Recipe slows down students' thinking and encourages them to reason through each scenario fully rather than guessing haphazardly.
-
-
-=== Investigate
-
-[.lesson-instruction]
-- Open your saved @starter-file{animals}.
-- Define the Transformers and expressions on @printable-exercise{pages/design-recipe-1.adoc} and @printable-exercise{pages/design-recipe-2.adoc}.
-
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Optional: Combining Booleans}
-
-Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
-
-By using the `and` and `or` operators, we can _combine_ Boolean tests on a single Transformer, like `Filter`. Once we've opened the `Filter` Transformer, we would tell CODAP to keep all rows that satisfy `Species = "cat" and Species = "dog"`. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
-
-When we want to compose _different_ Transformers, however, this strategy will not work. We'll need to find another way!
-|===
-
-=== Synthesize
-- Did you find yourselves getting faster at using the Design Recipe?
-- What patterns or shortcuts are you noticing, when you use the Design Recipe?
-
-
-
-== Defining Transformers @duration{25 minutes}
+== Creating Transformers (Review) @duration{25 minutes}
 
 === Overview
 
-Students have already explored how to use Transformers to Filter, Transform, and Build. In this lesson, students practice creating and saving Transformers for future use.
+Students practice creating, naming, and saving all of the Trasnsformer types that they have discovered: Filter, Build Attribute, and Transform Attribute.
 
 === Launch
 
 One of the perks of using a tool like CODAP is that it invites experimentation, prompting us to play with a variety of inputs until we have designed exactly the Transformer we need.
 
-Sometimes, however, relying on experimentation can limit our ability to _plan_ our data analysis... which is why it is important to consider exactly which inputs each Transformer requires to do the work that we want it to do.
+Sometimes, however, relying on experimentation can limit our ability to _plan_ our data transformations. Familiarizing ourselves with exactly which inputs each Transformer requires can help us to efficiently transform data, without relying on guessing and checking every time.
 
-Each of the three Transformers we've worked with consumes a different amount of arguments.
+[.lesson-instruction]
+--
+- Each Transformer we've worked with consumes a different amount of arguments, represented in the table below.
 
 [cols= "10,10,10",options="header"]
 |===
@@ -141,30 +78,31 @@ Each of the three Transformers we've worked with consumes a different amount of 
 
 |===
 
-[.lesson-instruction]
-- Refer to the table above - a set of three "Transformer Cards" to determine: How many arguments does Filter require? How about Build Attribute? Transform Attribute?
+- How many arguments does Filter require? How about Build Attribute? Transform Attribute?
 ** _Filter requires 2 arguments. Build Attribute requires 3 arguments. Transform Attribute requires 4 arguments._
 - Why does each Transformer require a different number of arguments?
 ** _All Transformeres require a Transformer type and a dataset. Beyond that, Filter only needs a Boolean to know which rows to include and exclude from the new dataset. Build and Transform both require a new attribute name. Transform also needs to know which attribute is being transformed._
+--
 
 === Investigate
 
-A Transformer Card is a place to organize our thoughts and plan out what we want a given Transformer to do.
-
+In the subsequent activities, "Transformer Cards" are a tool for students to think about what specific arguments each Transformer requires. These cards will later support students in composing Transformers.
 
 Let's practice creating Transformer Cards to represent various Transformers.
 
 [.lesson-instruction]
-- Complete the table at the top of the page to use as a reference.
+- Turn to @printable-exercise{create-transformer-cards.adoc}.
 - Respond to the prompts, drawing Circles of Evaluation that represent the transformation needed to create the desired table.
 - In the last column, give each Transformer a useful and descriptive name.
-- Turn to @printable-exercise{create-transformer-cards.adoc}.
-- Turn to @printable-exercise{create-transformer-cards-2.adoc}.
+- Now, complete the handout @handout{create-transformer-cards-2.adoc}. On this page, you will need to determine how many arguments each Transformer requires before creating the appropriate card.
+
+Confirm that students have correct responses on their Transformer Cards, as these cards are central to the subsequent segment of the lesson.
 
 
 === Synthesize
 
-- Was it helpful to think about the Circles without worrying about CODAP? Why or why not?
+- Did you get more comfortable creating Transformer cards as you completed these two pages?
+- What obstacles did you encounter?
 - What is the value of naming Transformers?
 
 
@@ -172,79 +110,86 @@ Let's practice creating Transformer Cards to represent various Transformers.
 
 === Overview
 
-Filtering, transforming and building are powerful transformations, but when they are _combined_ they become even more powerful!
+Students learn to diagram composed Transformers using the Circles of Evaluation. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
+
 
 === Launch
 
-We already know how to filter, transform, and build columns - but what if we want to do _multiple things, all at once?_
+We already know how to filter, transform, and build columns - but what if we want to do _multiple things, all at once?_ Filtering, transforming and building are powerful transformations, but when they are _combined_ they become even more powerful!
 
-A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. She wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
+Let's play a game to explore what happens when we combine Transformers.
 
 [.lesson-instruction]
-- To provide the journalist with a list of possible pets, what transformations do we need to do to apply to the @starter-file{animals}?
-** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.205.__
-- Should we filter first? Or build a column first? Why?
-** __We need to build a column first.__
-- What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
-** __Sample responses: It will crash! The computer won't like it!__
+--
+*Get Ready:*
 
-If we use our Transformers in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program.
+- Each pair of students needs one set of cut-out cards from @handout{create-transformer-cards-2.adoc}.
+- Each pair of students will need to refer to the three-row table of animals on @handout{create-transformer-cards-2.adoc}.
 
-[.lesson-point]
-Order matters: Build / Transform, _then_ Filter.
+*Gameplay:*
 
-In some scenarios, the program might run but produce nonsensical results!
+- Student 1: Randomly choose two cards and lay them down face up in front of your partner _in the order that you chose them_.
+- Student 2: Determine the output of "playing" those two cards _in that order_ by referring to the three-row table of animals.
+- Return the cards to the deck and play another round.
+
+*Challlenges:*
+
+- See if you can deal your partner two cards that...
+** produce an error
+** produce the same dataset, regardless of the order in which they are dealt
+** produce a dataset with just _one_ animal
+** produce an empty dataset (not an error!)
+- What did you discover about _composing_ Transformers?
+--
+
+If we use our Transformers in the wrong order (trying to filter by a column that doesn’t exist yet, for example), we might wind up crashing the program. *Order matters: Build / Transform, _then_ Filter.*
 
 === Investigate
 
-Let's work together as a class to diagram how we will transform the table using Circles of Evaluation.
+One way to organize our thoughts is to diagram what we want to do, using the @vocab{Circles of Evaluation}. The rules are simple:
 
-[.lesson-instruction]
-- We always build first, so let's start there.
-- For Q1 on @printable-exercise{composing-transformers.adoc}, diagram how you would build a column that gives each animal's weight in kilograms.
-- What will this Circle of Evaluation produce?
-** _It will produce a table with a new column that gives the animals' weights in kilograms._
+**1) Every Circle must have one - and only one! - saved Transformer written at the top.**
 
-The Transformer produces a _table_! We will use this table as our dataset for the Filter transformer we are about to create... which brings us to the third rule of Circles of Evaluation:
+Each Transformer card that you created required different information, including the Transformer Type, the dataset, the expression, etc.
+
+Once a Transformer is named and _saved_, however, it needs just *one* piece of information from you: the dataset that you want to transform! This leads us to the second rule of Circles of Evaluation:
+
+**2) The dataset that the Transformer consumes is written in the the middle of the Circle.**
+
+Let's think about our Transformer cards again. The @vocab{Circle of Evaluation} for `filter-if-fixed` looks like this:
+
+@show{(coe '(filter-if-fixed t)) }
+
+But what if we want to play _another_ Transformer card? The  Circle of Evaluation above produces a _table_ ... which brings us to the third rule of Circles of Evaluation:
 
 **3) Circles can contain other Circles!**
 
-[.lesson-instruction]
-- In the _inner_ Circle of Q3, copy down the Circle of Evaluation that you drew for Q1. We'll use the inner Circle as the Outer Circle's first argument.
-- Diagram a Circle-within-a-Circle to create a table that includes only animals that weigh more than 9 kilograms.
-- And finally: In the @starter-file{animals}, create and apply the Transformers you've just diagrammed. How many animals at the shelter meet the journalist's criteria?
+Let's say that after drawing `filter-if-fixed`, your partner draws `filter-if-young`. You could represent this sequence of cards like this:
 
-A perk of composing Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
+@show{(coe '(filter-if-young (filter-if-fixed t))) }
+
+A perk of composing saved Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
 @span{.title}{Tip: Renaming Tables}
 
-Encourage students to rename tables descriptively. As students compose Transformers, they may notes that table names start to become quite length, i.e. `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider renaming the table something simpler. For instance, `light-animals-in-kg` might be a more useful table name.
+Encourage students to rename tables descriptively.
+
+As students compose Transformers, they may note that table names start to become quite lengthy, i.e. `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider renaming the table something simpler. For instance, `light-animals-in-kg` would be a more easily interpreted table name.
 |===
 
 
-=== Investigate
-
-Circles of Evaluation let us think and plan, without getting bogged down by small details.
+Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportunity to think through what we want to do, before getting in front of the computer and worrying about how to do it. Circles of Evaluation let us think and plan, without getting bogged down by small details.
 
 [.lesson-instruction]
-Complete @printable-exercise{pages/matching-composed-transformers.adoc}.
-
-
-Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
-
-Armed with these tools, we can do some pretty complex analysis! We can even think of data displays as another kind of table operation. What will this Circle of Evaluation produce?
-
-@show{(coe '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}
+- Complete @printable-exercise{pages/matching-composed-transformers.adoc}.
+- Optional: Explore how function notation and Circles of Evaluation go hand in hand! Complete *opt-printable-exercise DO WE WANT A FUNCTION NOTATION CODAP WORKSHEET?*
 
 
 === Synthesize
 
 Was it helpful to think about the Circles, without worrying about CODAP? Why or why not?
 
-== Additional Exercises
-
-@opt-printable-exercise{pages/building-from-circles-2.adoc}
 

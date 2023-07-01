@@ -1,0 +1,45 @@
+= Transformers and Circles of Evaluation
+
+@vspace{1ex}
+
+A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal from the @starter-file{animals} that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
+
+@n We always build first, so let's start there. Diagram a Circle of Evaluation to show how you would build a column that gives each animal's weight in kilograms.
+
+@ifsoln{
+@show{(coe '(build-attribute animals-table "Kilos" Pounds/2.205))}
+@vspace{10ex}}
+
+@ifnotsoln{@vspace{24ex}}
+
+@n What will this Circle of Evaluation produce? @fitb{}{}
+
+@fitb{}{@ifsoln{It will produce a table with a new column called "Kilos".}}
+
+@vspace{1ex}
+
+@n *Circles of Evaluation can contain other Circles.* In the _inner_ Circle, copy down the Circle of Evaluation that you drew for Q1. We'll use this inner Circle as the Outer Circle's _first argument_. Draw a Circle-within-a-Circle to create a table that includes only animals that weigh more than 9 kilograms.
+
+@ifsoln{
+@show{(coe '(filter (build-attribute animals-table "Kilos" Pounds/2.205) Kilos>9))}
+@vspace{10ex}}
+
+@ifnotsoln{@vspace{24ex}}
+
+@n _Let's try another scenario._ Now, the journalist wants you to produce a dataset from the original @starter-file{animals} that includes female cats only. Draw a Circle of Evaluation to diagram how you would do so.
+
+@ifsoln{
+@show{(coe '(filter (filter animals-table Species="cat") Sex="female"))}
+@vspace{10ex}}
+
+@ifnotsoln{@vspace{24ex}}
+
+
+@n Did you filter out females first... or cats first? When you are filtering by _two_ different attributes, does it matter which one you filter first?
+
+@fitb{}{@ifsoln{No, it does not matter.}}
+
+@fitb{}{}
+
+
+
