@@ -985,7 +985,7 @@
 (define (make-pathway-link f link-text)
   ; (printf "doing make-pathway-link ~s ~s\n" f link-text)
   (enclose-span ".pathway-link"
-    (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
+    (format "link:pass:[../../courses/~a][~s, window=\"_blank\"]" f link-text)))
 
 (define *lesson-summary-file* #f)
 
@@ -1458,7 +1458,7 @@
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
-                           [(string=? directive "pathwaylink")
+                           [(string=? directive "pathway-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]
                                    [link-text (string-join (map string-trim (rest args)) ", ")])
