@@ -176,7 +176,7 @@ function make_workbook_json_1(course_dir, tgt)
           for smallpdffile in ls_output:lines() do
             o:write(', { "file": "')
             o:write(smallpdffile)
-            o:write('", "pageinate": false }\n')
+            o:write('", "paginate": false }\n')
           end
         end
       end
