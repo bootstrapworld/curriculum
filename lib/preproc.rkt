@@ -1299,8 +1299,7 @@
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
-  (let ([gl *glossary-list*]
-        [ngl '()])
+  (let ([gl *glossary-list*])
     ;
     (when (or *lesson* *lesson-plan*)
       (let ([f (format "distribution/~a/lessons/~a/shadow-glossary.txt" *natlang* *lesson*)])
