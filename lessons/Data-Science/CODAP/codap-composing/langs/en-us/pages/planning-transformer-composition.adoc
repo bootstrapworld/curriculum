@@ -21,13 +21,36 @@ The table `t` below represents four animals from the shelter:
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
 |===
 
+@vspace{1ex}
+
 You have several Transformers already defined:
 
-- `filter-if-young` filters out animals who are younger than 4
-- `filter-if-female` filters out animals that are female
-- `filter-if-fixed` filters out animals that are fixed
-- `build-kilos` builds a new column that converts `pounds` to `kilos`
-- `transform-kilos` transforms `kilos` to `grams`
+[cols='5']
+|===
+
+| *filter-if-young*
+
+filters out animals younger than 4
+
+| *filter-if-female*
+
+filters out animals that are female
+
+| *filter-if-heavy*
+
+filters out animals whose weight is greater than 20 kilos
+
+| *build-kilos*
+
+builds a new column that converts pounds to kilos
+
+| *transform-kilos*
+
+transforms kilos to grams
+
+|===
+
+@vspace{1ex}
 
 For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
 
@@ -39,11 +62,15 @@ For each prompt on the left, draw the Circle of Evaluation that will produce the
 
 | @n
 | Produce a Table containing all young, fixed animals
-| @show{(coe '(filter-if-young (filter-if-fixed t))) }
+| @showsoln{(coe '(filter-if-young (filter-if-fixed t))) }
 
 | @n
-| Produce a Table showing all fixed, female animals
-| @show{(coe '(filter-if-fixed (filter-if-female t))) }
+| Produce a Table showing all animals that weigh more than 20 kilograms
+| @showsoln{(coe '(filter-if-heavy (build-kilos t))) }
+
+| @n
+| Produce a Table showing all female animals that weigh more than 20 kilograms
+| @showsoln{(coe '(filter-if-female (filter-if-heavy (build-kilos t)))) }
 
 | @n
 | Produce a Table that provides all animals' weights in grams
@@ -52,6 +79,7 @@ For each prompt on the left, draw the Circle of Evaluation that will produce the
 | @n
 | Produce a Table for all female animals, which includes their weight in grams
 | @showsoln{(coe '(filter-if-female (transform-kilos (build-kilos t))))}
+
 
 
 |===
