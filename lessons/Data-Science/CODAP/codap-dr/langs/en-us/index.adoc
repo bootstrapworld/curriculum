@@ -1,6 +1,6 @@
-= Purpose Statements, Examples, and Expressions
+= Examples, Purpose Statements, and Expressions
 
-@description{Students learn how to compose Transformers, which act as functions operating on tables.}
+@description{Students practice writing examples, Purpose Statements, and expressions.}
 
 @lesson-prereqs{codap-filtering}
 
@@ -30,13 +30,74 @@
 * All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
 |===
 
+== Examples, Purpose Statements, and Expressions
 
+=== Overview
 
+Students use @vocab{examples} to support them in generating Transformers' Purpose Statements and Expressions.
 
-@printable-exercise{writing-purpose-statements.adoc}
+=== Launch
 
+The shelter needs to purchase larger kennels for animals that weigh over 50 pounds. To determine how many kennels to buy, we'd need to create a filter Transformer. Doing so requires that we have a clear understanding of two important elements. The @vocab{Purpose Statement} describes what the expression does to each row. The expression indicates what rows from the original dataset we will keep.
 
+Jotting down some @vocab{examples} is a useful practice to ensure that we get the correct Purpose Statement and expression.
 
+=== Investigate
+
+Examples must include some rows will stay in our new, filtered dataset... and some rows that will be filtered out.
+
+Here are some questions we might pose as we generate examples for the scenario above:
+
+- Will Snuggles be included in the new dataset? _No, Snuggles weighs 0.1 pounds. That's not heavy enough!_
+
+- Will Fritz be included in  the new dataset? _Yes, Fritz weighs 92 pounds, which is greater than 50._
+
+- Will Nori be included in the new dataset? _No, Nori weighs 35.3 pounds, which is less than 50._
+
+We can capture the information we generated on a pair of tables:
+
+[cols="1a,1a", options="header"]
+|===
+| Original Table
+| Transformed Table
+|  [cols="1a,1a"]
+!===
+! *Name* 		! *Pounds*
+! Snuggles	! 0.1
+! Fritz		! 92
+! Nori		! 35.3
+!===
+|  [cols="1a,1a"]
+!===
+! *Name*	! *Pounds*
+! Fritz	! 92
+!===
+|===
+
+These examples help us identify a pattern before we jump straight to variables and formulas.
+
+When we study the pair of tables above, describing what the expression does to each row of the dataset becomes much simpler. And so, our Purpose Statement will say something like, _"Checks each row to see if pounds is greater than 50"_.
+
+Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can’t explain a problem to someone else, you probably don’t understand it yourself!
+
+[.lesson-instruction]
+- Turn to @printable-exercise{writing-purpose-statements-filter.adoc}. Study each pair of tables and write a Purpose Statement that describes what is going on.
+- Do not respond to the prompts about the Transformers' expressions. We will return to that later.
+
+Once students have written their Purpose Statements, it's time to think about Expressions. This is where students identify the structure of the rule or pattern, independently of any specific inputs. *If students' Purpose Statements were carefully written, they should be able to write the Expression without referring to the example tables.*
+
+[.lesson-instruction]
+- On @printable-exercise{writing-purpose-statements-filter.adoc}, use your Purpose Statements to fill in the expressions for each pair of tables.
+- Complete @printable-exercise{matching-tables-expressions.adoc}.
+- Complete @printable-exercise{writing-examples.adoc}, where you will come up with your own examples!
+
+When students get stuck, we encourage working the problem through with paper and pencil. This process slows down thinking and encourages students to reason through each scenario fully rather than guessing haphazardly.
+
+=== Synthesize
+
+- What are the important elements of Purpose Statements? Why are Purpose Statements useful?
+- What strategies did you use to match pairs of tables with their expressions?
+- What strategies did you use to decide which rows to include in your examples?
 
 
 
