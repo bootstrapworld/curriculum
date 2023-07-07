@@ -47,7 +47,7 @@ This second set of cards includes Circles of Evaluation.
 
 - The inputs of the operator are written left to right, in the middle of the Circle. 
 
-@image{images/coe1.png}
+@show{(coe '(/ 15 3))}
 
 
 ---
@@ -60,13 +60,13 @@ This second set of cards includes Circles of Evaluation.
 - Discuss any questions that arose.
 
 <!--
-    Circulate as students sort their cards, ensuring that they are carefully analyzing each card so that they see the connection between the arithmetic expression and the Circle of Evaluation. This first phase of matching cards should be relatively quick - but it might raise questions on a few topics:
+Circulate as students sort their cards, ensuring that they are carefully analyzing each card so that they see the connection between the arithmetic expression and the Circle of Evaluation. This first phase of matching cards should be relatively quick - but it might raise questions on a few topics:
 
-    - *Symbols*. Circles of Evaluation utilize `*` to represent multiplication and `/` to represent division. (Why? Circles of Evaluation are a bridge representation - one which can eventually be used to help students learn to code! These are also the symbols used to type mathematical expressions into a search bar! _Although we use these symbols on all of our materials, you and your students can use whichever operator symbols are most comfortable._)
+- *Symbols*. Circles of Evaluation utilize `*` to represent multiplication and `/` to represent division. (Why? Circles of Evaluation are a bridge representation - one which can eventually be used to help students learn to code! These are also the symbols used to type mathematical expressions into a search bar! _Although we use these symbols on all of our materials, you and your students can use whichever operator symbols are most comfortable._)
 
-    - *Order of terms*. While @math{5 + 3} and @math{3 + 5} both evaluate to the same _answer_, they are not the same _expression_. Highlight this difference for students.
+- *Order of terms*. While @math{5 + 3} and @math{3 + 5} both evaluate to the same _answer_, they are not the same _expression_. Highlight this difference for students.
 
-    - *Position of the operator*. The operator always belongs at the top of the Circle, and not in between terms. Explain to students that this is a convention we must follow when working with Circles of Evaluation.
+- *Position of the operator*. The operator always belongs at the top of the Circle, and not in between terms. Explain to students that this is a convention we must follow when working with Circles of Evaluation.
 -->
 
 ---
@@ -111,8 +111,7 @@ Circles of Evaluation can contain other Circles of Evaluation.
 
 The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
-@image{images/nested-coe.png}
-
+@show{(coe '(+ (* 3 5) 3))}
 
 ---
 {layout="Investigate"}
@@ -124,7 +123,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 - When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, the verbal expression).
 
-- Optional: Try Matching Math to Words @printable-exercise{pages/matching-math-to-words.adoc},
+- Optional: Try @printable-exercise{pages/matching-math-to-words.adoc},
 
 <!-- Note: On Translating from Circles to Words, there are multiple correct translations. Be sure to spend a moment going over students' solutions. Some translations into words are clearer than others; the subsequent section of this lesson will explore that notion in greater depth.
 -->
