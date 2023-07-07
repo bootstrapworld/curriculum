@@ -1,0 +1,86 @@
+= Writing Purpose Statements
+// filter only
+
+Decide whether filtering, building, or transforming changed the original table. Then, write a Purpose Statement that describes what the Transformer's expression does. For some scenarios, there are multiple correct responses.
+
+@vspace{1ex}
+
+*Scenario 1*
+
+[cols="1a,1a", options="header"]
+|===
+| Original Table
+| Transformed Table
+|  [cols="1a,1a"]
+!===
+! *Name* 		! *Species*
+! Gila 		! lizard
+! Bo		! dog
+! Nibblet	! rabbit
+!===
+|  [cols="1a,1a"]
+!===
+! *Name*	! *Species*
+! Gila		! lizard
+!===
+|===
+
+- *Purpose Statement:*  Checks the row to see whether the @fitb{15em}{@ifsoln{species}} is a @fitb{17em}{@ifsoln{snail}}
+
+- *What would be a good name for this Transformer?* @fitb{}{@ifsoln{`filter-if-lizard`}}
+
+@vspace{6ex}
+
+*Scenario 2*
+
+[cols="1a,1a", options="header"]
+|===
+| Original Table
+| Transformed Table
+|  [cols="1a,1a"]
+!===
+! *Name* 		! *Pounds*
+! Maple		! 51.6
+! Bo		! 76.1
+! Lucky		! 45.4
+!===
+|  [cols="1a,1a"]
+!===
+! *Name*	! *Species*
+! Maple		! 51.6
+! Bo		! 76.1
+!===
+|===
+
+- *Purpose Statement:*  @fitb{}{@ifsoln{Checks the row to see if weight is greater than 50 pounds.}}
+
+- *What would be a good name for this Transformer?* @fitb{}{@ifsoln{`filter-if-heavy`}}
+
+
+@vspace{6ex}
+
+*Scenario 3*
+
+[cols="1a,1a", options="header"]
+|===
+| Original Table
+| Transformed Table
+|
+!===
+! *Name* 	! *Sex*
+! Sasha 	! female
+! Felix 	! male
+! Sheba 	! female
+!===
+|  [cols="1a,1a"]
+!===
+! *Name*	! *Sex*
+! Sasha 	! female
+! Sheba 	! female
+!===
+|===
+
+- *Purpose Statement:* @fitb{}{@ifsoln{Checks the row to see whether the sex is female.}}
+
+- *What would be a good name for this Transformer?* @fitb{}{@ifsoln{`filter-if-female`}}
+
