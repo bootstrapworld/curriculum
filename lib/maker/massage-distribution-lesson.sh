@@ -43,8 +43,8 @@ for pl in $proglangs; do
   if test "$pl" != pyret -a "$pl" != none; then
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
-    cp -upr "$lessonName"/* "$lessonNamePl"
-    cp -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
+    $CP -upr "$lessonName"/* "$lessonNamePl"
+    $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
   #
   cd "$lessonNamePl"

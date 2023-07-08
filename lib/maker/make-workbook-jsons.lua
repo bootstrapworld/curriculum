@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-13
-
 local courses_list_file = ...
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
@@ -9,6 +7,8 @@ dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 local natlang = os.getenv('NATLANG')
 
 local distr_courses = 'distribution/' .. natlang .. '/courses/'
+
+local makemasterPDFs = os.getenv('MASTERWORKBOOK')
 
 ---------------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ function make_workbook_json_1(course_dir, tgt)
 
   local includesolutions = false
 
-  if memberp(tgt, { 'workbook-sols', 'bm-contracts-sols', 'workbook-long-sols', 'opt-exercises-sols' }) then
+  if memberp(tgt, { 'workbook-sols', 'bm-contracts-sols', 'workbook-long-sols', 'opt-exercises-sols', 'pd-workbook' }) then
     includesolutions = true
   end
 
@@ -130,6 +130,12 @@ function make_workbook_json_1(course_dir, tgt)
 
   if memberp(tgt, { 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }) then
     includeoptexercises = true
+  end
+
+  local includelessons = false
+
+  if memberp(tgt, { 'pd-workbook' }) then
+    includelessons = true
   end
 
   local o = io.open(workbook_input .. '-' .. tgt .. '.json', 'w+')
@@ -161,8 +167,19 @@ function make_workbook_json_1(course_dir, tgt)
 
     if freshlesson then
       currlesson = lessondir
-      docfile = currlesson .. '/index.shtml'
-      --fixme: not really using this?
+      if includelessons then
+        pdffile = currlesson .. '/index.pdf'
+        if file_exists_p(pdffile) then
+          os.execute('rm -f pg_*.pdf')
+          os.execute('cd ' .. currlesson .. '; pdftk index.pdf burst')
+          local ls_output = io.popen('ls ' .. currlesson .. '/pg_*.pdf')
+          for smallpdffile in ls_output:lines() do
+            o:write(', { "file": "')
+            o:write(smallpdffile)
+            o:write('", "paginate": false }\n')
+          end
+        end
+      end
     end
 
     docfile = lessondir .. '/' .. (includesolutions and 'solution-pages' or 'pages') .. '/' .. workbookpage
@@ -208,6 +225,10 @@ end
 
 do
   local workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
+  --
+  if makemasterPDFs then
+    table.insert(workbook_inputs, 'pd-workbook')
+  end
   --
   for _,course in ipairs(all_courses) do
     local course_dir = distr_courses .. course
