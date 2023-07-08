@@ -43,7 +43,7 @@ Starting in 2019, the covid spread across the globe. Most of heard terms like "f
 But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
 
 [.lesson-instruction]
-- Open the @starter-file{alg2-covid}. This data looks at the covid infection rates for New England states in the summer of 2020.
+- Open the @starter-file{alg2-covid}. This data looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
 - From the File menu, select "Save a Copy", and click "Run"
 - Working in pairs or small groups, complete questions 1-10 of @printable-exercise{exploring-covid.adoc}
 
@@ -121,6 +121,20 @@ Students explore their newly-filtered `MA-covid` dataset, trying to fit differen
 === Launch
 
 Make a scatter-plot showing the Covid infection rate for Massachusetts. What kind of model do you think would fit this best?
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Why are we starting from June 9th?!?}
+
+We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
+
+For students who are farther along, we recommending showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
+
+Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. **You may also wish to return to the __full__ dataset later on, once students are comfortable with polynomial functions.**
+|===
+
 
 === Investigate
 
@@ -207,11 +221,11 @@ Now we need to figure out the values of @math{a}, @math{b} and @math{k} for _thi
 |
 @span{.title}{Precision v. Efficiency in Computation}
 
-On @printable-exercise{exponential-models.adoc} you'll see a note about the use of `~1` to tell Pyret to prioritize efficiency over precision. Unlike most calculators that students will engage with, Pyret usually prioiritizes precision.
+On @printable-exercise{exponential-models.adoc} you'll see a note about the use of `~1` to tell Pyret to prioritize speed over precision. Unlike most calculators that students will engage with, Pyret usually prioiritizes precision.
 
 In a math classroom, this is the difference between @math{\frac {2}{3}} rendering as @math{ 0.\overline{666}} or being rounded to 0.666666667.
 
-In data processing, opting to round for efficiency over preserving precision can have ethical or technical consequences. For example:
+In data processing, opting to round for speed over preserving precision can have ethical or technical consequences. For example:
 
 1) When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 
@@ -223,16 +237,4 @@ In data processing, opting to round for efficiency over preserving precision can
 
 - What makes exponential models different from the linear and quadratic models you've seen before?
 - How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
-@span{.title}{Going Deeper: Polynomial Models}
-
-For students who are farther along, we recommending showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
-
-We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
-
-Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
-|===
+- Is it always alright for Data Scientists to round off their numbers to speed up computation? Why or why not?

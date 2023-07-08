@@ -55,7 +55,7 @@ When you're driving, what speed will save you the most money on gas?
 
 @center{@image{images/fuel-efficiency-quadratic.png}}
 
-There's definitely a relationship here. Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to around 45-55mph. But after 55mph, fuel efficiency _decreases._
+There's definitely a relationship here. Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to around 40-60mph. But after about 60mph, fuel efficiency _decreases._
 
 [.lesson-instruction]
 - Let's try to build a linear model for this data.
@@ -91,13 +91,22 @@ Students are introduced to quadratic relationships in the real world, then learn
 
 Linear models are great for fitting simple relationships. But the real world isn't so simple, and, more often than not, linear models are just too primitive to handle that complexity.
 
-Relationships like the one in the fuel efficiency scatter plot are called _quadratic relationships_. They form shapes that look like arches, called parabolas. Sometimes the data only includes the _rising_ part of the parabola, sometimes it only includes the _falling_ part, and sometimes it includes both.
+Relationships like the one in the fuel efficiency scatter plot are called _quadratic relationships_. They form shapes that look like arches, or "parabolas". Sometimes the data only includes the _rising_ part of the parabola, sometimes it only includes the _falling_ part, and sometimes it includes both.
 
 **Quadratic relationships show up all the time:**
 
 - When an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength.
 - A ball dropped from a tall building will get faster and faster as it falls.
 - Many nutrients are good for you, and the more you take the healthier you are...up to a point. After that, too much of a mineral or vitamin can cause problems.
+
+[.lesson-instruction]
+In the case of our fuel efficiency dataset, there's a definite "rise and fall" pattern! But there almost appears to be a "dip" around 40mph. Does that mean we should stick to linear models? Why or why not?
+
+@teacher{Have students discuss and share back with the class. If necessary, remind students that _models are - by defintion - approximations of the real world._ The fact that a parabola isn't a perfect fit doesn't mean that it's not a quadratic relationship!}
+
+The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. There's no such thing as a perfect model! If we try to draw a parabola through this dataset, we wind up with something like the image below:
+
+@center{@image{images/fuel-efficiency-fit.png, 600}}
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -111,7 +120,9 @@ A quadratic relationship often means that one or more variables is _interacting_
 |===
 
 [.lesson-instruction]
-Can you think of other real-world examples where a relationship is likely quadratic?
+* Can you think of other real-world examples where a relationship is likely quadratic?
+** Production of an athlete as they age
+** Projectile motion
 
 === Investigate
 
@@ -180,7 +191,7 @@ Depending on what part of the model we care about most, we might choose to use o
 [.lesson-instruction]
 Given what we've already found out about this dataset, which form should we start with?
 
-In this case, we've already come to some conclusions about the @vocab{vertex} of our parabola, where cars are most fuel-efficient: *45mph*. That makes Vertex Form a useful place to start, since we already know the value of @math{H}:
+In this case, we've already come to some conclusions about the @vocab{vertex} of our parabola, where our model predicts the greatest fuel-efficiency: *45mph*. That makes Vertex Form a useful place to start, since we already know the value of @math{H}:
 
 @center{@math{y=a(x-45)^2+k}}
 
