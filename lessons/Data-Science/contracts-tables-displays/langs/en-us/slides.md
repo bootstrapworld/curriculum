@@ -14,7 +14,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - What do you Wonder? 
 
 <!--
-If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions area, where `animals-table` is defined along with the names of the 8 columns.
+If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.
 -->
 
 ---
