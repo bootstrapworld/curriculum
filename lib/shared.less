@@ -518,7 +518,7 @@ body.workbookpage {
   /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
   .autonum { 
     display: inline-block; 
-    padding-top: 1.2rem; 
+    padding-top: @top-padding-for-writing; 
     &::after { content: ')'; }
     &.star::after { content: unset; }
   }
@@ -632,7 +632,7 @@ body.LessonNotes {
     &::after { display: none; };
   }
   .data-cycle-expression, .data-cycle-filter, .data-cycle-build { 
-    font-family: Hack, "Courier New", monospace; 
+    font-family: @code-font;
   }
 }
 
@@ -924,7 +924,7 @@ table.pyret-table {
     border:             none;
     border-right:       1px white solid;
     color:              #1f1180;
-    font-family:        monospace;
+    font-family:        @code-font;
   }
 }
 
@@ -1106,8 +1106,4 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 
   /* Get rid of collapsing headers */
   .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
-
-  /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  .questions    { min-width: 36%; width: auto; }
-  .answers      { width: auto; }
 }
