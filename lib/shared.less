@@ -14,8 +14,9 @@
 @top-padding-for-writing: 1.2rem;
 @top-padding-for-dr: 1rem;
 
+html, body { font-size: 9pt; }
+
 body {
-  font-size:      12pt;
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -233,6 +234,8 @@ body:not(.LessonPlan, .narrativepage) p {
 * LESSON PAGE STYLES
 */
 .LessonPlan {
+  font-size: 12pt;
+
   /* The summary table at the top of each lesson */
   .preamble {
     &.left-header tr td:nth-child(1) { background-color: #b7d893; }
@@ -449,6 +452,8 @@ body:not(.LessonPlan, .narrativepage) p {
   .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+
+  div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 }
 
 /************************************************************************************
@@ -834,7 +839,7 @@ div.circleevalsexp {
   }
   .value {
     display:            inline-block;
-    margin:             0.65rem 0.5rem;
+    margin:             0.5rem 0.4rem;
     vertical-align:     top;
   }
   .operator {
@@ -861,7 +866,6 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
-  font-size:          0.8rem;
   color:              #666;
   font-style:         normal;
   clear:              both;
@@ -1104,7 +1108,6 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
 
   /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  html, body    { font-size:      9pt; }
   .questions    { min-width: 36%; width: auto; }
   .answers      { width: auto; }
 }
