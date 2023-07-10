@@ -1,10 +1,15 @@
 = Transformer Cards to Cut Out (2)
-
+++++
+<style>
+/* Make all rows use FRactional height, all being 1 unit (aka equal) */
+.FillVerticalSpace { grid-template-rows: repeat(4,1fr) !important; }
+</style>
+++++
 Provide the information needed to define each Transformer. Refer to the table of animals on @printable-exercise{create-transformer-cards.adoc} as needed.
 
 @vspace{1ex}
 
-[cols="15,15",stripes="none"]
+[.FillVerticalSpace, cols="1,1",stripes="none"]
 |===
 
 | *`transform-age`* produces a table that transforms `age` to `age-last-year`
@@ -19,7 +24,6 @@ Provide the information needed to define each Transformer. Refer to the table of
 
 *Expression:* @fitb{}{ @ifsoln{`age-1`} }
 
-@vspace{5ex}
 
 | *`filter-if-fixed`* produces a table with only fixed animals
 
@@ -37,7 +41,6 @@ Provide the information needed to define each Transformer. Refer to the table of
 
 *Expression:* @fitb{}{ @ifsoln{`pounds>50` }}
 
-@vspace{8ex}
 
 | *`filter-if-young`* produces a table with only animals that are younger than 5
 
@@ -58,7 +61,6 @@ Provide the information needed to define each Transformer. Refer to the table of
 
 *Expression:* @fitb{}{ @ifsoln{`age>5`} }
 
-@vspace{5ex}
 
 | *`filter-if-elderly`* produces a table that only animals where `elderly = true`
 
@@ -81,7 +83,6 @@ Provide the information needed to define each Transformer. Refer to the table of
 
 *Expression:* @fitb{}{ @ifsoln{`pounds-5`} }
 
-@vspace{5ex}
 
 | *`filter-if-lightest`* produces a table with only animals' whose `lighter-weight` is below 30 pounds.
 
@@ -91,7 +92,6 @@ Provide the information needed to define each Transformer. Refer to the table of
 *Dataset:* @fitb{}{ @ifsoln{`t` }}
 
 *Expression:* @fitb{}{ @ifsoln{`lighter-weight<30` }}
-
 
 
 |===
