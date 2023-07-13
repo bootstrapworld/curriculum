@@ -35,6 +35,7 @@ local function create_glossary_html_json(html_file, json_file)
       o:write('] \n')
       break
     end
+    line = line:gsub('"', '\\"')
     if line:match('</dt>') then
       line = line:gsub('</dt>', '", ')
     end
