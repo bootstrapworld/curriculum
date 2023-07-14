@@ -1,5 +1,5 @@
 ---
-{layout="DS Title Slide"} 
+{layout="DS Title Slide"}  
 # Dot Plots and Bar Charts  
 
 <!--
@@ -17,7 +17,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 -->
 
 ---
-{layout="Launch"}
+{layout="LaunchC"}
 # Displaying Categorical Variables
 
 - Open  @starter-file{animals} in CODAP.
@@ -35,7 +35,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 
 
 <!--
-    If students report that a blank graph appears (rather than a scatter plot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).
+If students report that a blank graph appears (rather than a scatter plot), prompt them to whitelist CODAP on their ad-blocker. Ad-blockers do seem to inhibit some of the functionality of CODAP (which will fortunately never advertise to users!).
 
 - Select a dot with your mouse. What happens?
 ** _The dot turns blue, and the corresponding row in the table is highlighted._
@@ -53,11 +53,10 @@ Where have you seen infographics and graphs used to display data in the real wor
 {layout="Launch"}
 # Displaying Categorical Variables
 
-Initially, the data points are randomly distributed on the graph. 
+Until we assign variables for the axes, the data points are randomly distributed on the graph. 
 
-Hovering over an orange dot reveals the `name` of that particular animal. Selecting a particular dot causes the table row for that animal to be highlighted in blue. 
+Hovering over an orange dot reveals the `name` of that particular animal. Selecting a particular dot causes the table row for that animal to be highlighted in blue. Holding the shift button allows you to select multiple dots in the graphical display, or multiple rows in the table.
 
-Holding the shift button allows you to select multiple dots in the graphical display, or multiple rows in the table.
 
 
 ---
@@ -78,7 +77,7 @@ Once we have a graph of randomly distributed data points, we can organize the da
 - Optional: To dig deeper into bar charts, complete @opt-printable-exercise{bar-chart-notice.adoc}.
 
 <!--
-    Remind students that categorical data is used to classify, rather than to measure. Only when data is being treated categorically will students be invited to fuse data points to create a bar chart. Quantitative (or numeric) data must measure or compare; it is subject to the laws of arithmetic.
+Remind students that categorical data is used to classify, rather than to measure. Only when data is being treated categorically will students be invited to fuse data points to create a bar chart. Quantitative (or numeric) data must measure or compare; it is subject to the laws of arithmetic.
 
 When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
 
@@ -109,7 +108,7 @@ Bar charts are mostly used to _display categorical columns_.
 While bars in bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
 
 <!--
-    Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 -->
 
 --- 
@@ -131,11 +130,11 @@ If students need a bit of encouraging, you might prod them to make histograms an
 Let's share!
 
 * What did you discover?
-* When did the `configuration` menu appear?
-* When did the `measure` menu appear?
+* When did the `configuration` menu appear? (That's the one that looks like a stacked bar chart.)
+* When did the `measure` menu appear? (That's the one that looks like a ruler.)
 
 <!--
-- The configuration menu appears when there is another possible configuration of the data - for instance, when dots can be fused into bars - we see this menu.
+- The configuration menu appears when there is another possible configuration of the data. For instance, when dots can be fused into bars - we see this menu.
 - The measure menu appears when there is an opportunity to change what is shown *along with the points* (that is, on the same display as a dot plot or scatterplot) - for instance, connecting lines or calculating the count. Histograms and boxplots appear alongside an existing display, so they appear are on the `measure` menu._
 -->
 
@@ -176,7 +175,7 @@ It might sound like this:
 # Exploring Other Displays
 
 - With your partner, complete @printable-exercise{pages/plot-practice-2.adoc} and @printable-exercise{pages/plot-practice-3.adoc}.
-- Finally, summarize what you've observed about what display goes with what kind of data on the @printable-exercise{data-displays-organizer.adoc}. It may help to refer back to the "Practice Plotting" worksheets that you just completed. The "Notes" column can be filled in today, or you can add to it in future classes to use a reference.
+- Finally, summarize what you've observed about what display goes with what kind of data on the @printable-exercise{data-displays-organizer.adoc}. It may help to refer back to the "Practice Plotting" worksheets that you just completed. *The "Notes" column can be filled in today, or you can add to it in future classes to use a reference.*
 
 <!--
 There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal at this stage is to have them build familiarity and confidence with the CODAP tool and how it makes data displays.

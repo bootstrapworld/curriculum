@@ -8,13 +8,13 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="Launch"}
-# Filtering Tables
+# Manually Filtering Tables
 
 What if the shelter needs to look at some information about only the dogs, or only the animals that have been fixed? There are many situations where, given a table, we want to _filter out_ some of the rows and only look at a specific group from that table.
 
 ---
 {layout="Launch"}
-# Filtering Tables
+# Manually Filtering Tables
 
 - Open @starter-file{animals}.
 - Using what you've learned about deleting rows, create a table that includes _only dogs_.
@@ -28,18 +28,18 @@ What if the shelter needs to look at some information about only the dogs, or on
 
 ---
 {layout="Launch"}
-# Filtering Tables
+# Manually Filtering Tables
 
 Can you summarize the work that you just completed?
 
 <!--
-Invite a few students to share. When possible, urge students to break down their process into a series of concrete steps (_see below_). This will prime them to better understand exactly what is going on in CODAP when the filtering happens nearly instantaneously (as will be the case in the subsequent portion of this lesson!).
+Invite a few students to share. When possible, urge students to break down their process into a series of concrete steps (_see next slide_). This will prime them to better understand exactly what is going on in CODAP when the filtering happens nearly instantaneously (as will be the case in the subsequent portion of this lesson!).
 -->
 
 
 ---
 {layout="Launch"}
-# Filtering Tables
+# Manually Filtering Tables
 
 To create a table with only dogs, here's what we did:
 
@@ -50,8 +50,8 @@ To create a table with only dogs, here's what we did:
 - We repeated this process over and over, until we had inspected the entire table.
 
 ---
-{layout="Investigate"}
-# Filtering Tables
+{layout="Launch"}
+# Manually Filtering Tables
 
 - Did this feel efficient or like a good use of our time?
 - Did anyone wish for a simpler way? 
@@ -64,13 +64,13 @@ Some students may have deleted a dog row by accident! Or initially missed a cat 
 
 ---
 {layout="Investigate}
-# Filtering Tables
+# Manually Filtering Tables
 
-- Now I want everyone to create _two_ filtered tables: one table with just dogs, and one table with all pets that weigh less than 5 pounds.
+- Now I want everyone to create _two_ filtered tables: one table with just dogs, and one table with all pets that weigh less than 32 pounds.
 - I'd like these tables to exist side-by-side within the same CODAP file, so we can discuss them together.
 
 <!--
-    ** _Allow students to give this task a try, but cut them off after a few minutes._
+** _Allow students to give this task a try, but cut them off after a few minutes._
 
 Students will likely run into major difficulties. Some may attempt to "undo" previous actions; some may hit "refresh" to reload the original file (effective, if they haven't saved yet!); some may attempt to create a new blank table within the same file that they repopulate manually.
 
@@ -79,10 +79,10 @@ The goal here is to manufacture a situation that will propel students to see the
 
 ---
 {layout="Synthesize"}
-# Filtering Tables
+# Manually Filtering Tables
 
 - What problems did you encounter when trying to manually filter the Animals dataset?
-- What strategies did you try in order to create two side-by-side filtered tables, one with just dogs and one with all pets that weigh more than 50 pounds?
+- What strategies did you try in order to create two side-by-side filtered tables, one with just dogs and one with all pets that weigh more than 32 pounds?
 
 ---
 {layout="Launch"}
@@ -96,59 +96,76 @@ The original dataset is always preserved!
 
 
 ---
-{layout="LaunchC-DN"}
+{layout="InvestigateR-DN"}
+# Filtering with Booleans
+
+- Open the @starter-file{boolean}.
+- Turn to @printable-exercise{pages/booleans-with-filter.adoc}.
+- What do you Notice about the Transformer pictured on the left of the page?
+- What do you Wonder?
+
+@image{images/filter-is-heavy.png, 350}
+
+
+<!--
+** _Possible responses: The Transformer is named `filter-is-heavy`. It looks like the Transformer is going to filter out animals that weigh more than 32 pounds. There is a contract and a purpose statement. We can apply or edit the Transformer._
+** _Possible responses: I wonder if this Transformer will modify the dataset or create a new dataset. I wonder what that Contract is all about. I wonder what a Boolean is._
+-->
+
+---
+{layout="Investigate"}
+# Filtering with Booleans
+
+Did you wonder what a contract is?
+
+A @vocab{contract} is a statement of  of the name, Domain, and Range of a Transformer's expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+
+
+---
+{layout="Investigate"}
+# Filtering with Booleans
+
+Did you wonder what a Purpose Statement is?
+
+@vocab{Purpose Statement} is a way of describing what a Transformer's expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is a dog", or "Computes the sum of `Age` and 2."
+
+
+---
+{layout="Investigate"}
+# Filtering with Booleans
+
+Did anyone wonder what a *Boolean* is?
+
+- On the second section of @printable-exercise{booleans-with-filter.adoc}, predict whether each Boolean expression is `true` or `false`.
+- When you're done, move onto @printable-exercise{booleans-with-filter-2.adoc}.
+
+
+---
+{layout="Synthesize"}
+# Filtering with Booleans
+
+- What sets Booleans apart from the other @vocab{data types} we've explored, Strings and Numbers?
+
+
+---
+{layout="InvestigateC-DN"}
 # Filtering Tables with Transformers
 
-- Open @starter-file{animals}.
-- Access "Plugins," then select "Transformers."
-- Find _three_ Transformers where you think you can guess what they do. What are they?
+- Open the @starter-file{animals}.
+- At the start of the page, you will be asked to select the Plugins icon, then choose Transformers. The screenshot below illustrates how to do that.
 
 @image{images/plugins-location.png}
 
-<!--
-    Invite students to share their observations. Build enthusiasm for the new possibilities that are now available!
--->
-
-
 ---
-{layout="Investigate-DN"}
+{layout="InvestigateR-DN"}
 # Filtering Tables with Transformers
 
-- Open the @starter-file{animals}.s
-- Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer. We will pause to work on questions 4 and 5 together.
+
+- Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer.
+- Optional: Get extra practice @opt-printable-exercise{writing-purpose-statements-filter.adoc}.
+- Optional: On @opt-printable-exercise{writing-examples.adoc}, provide some sample rows from the original dataset and then show what the transformed table would look when given a Purpose Statement.
 
 @image{images/filter-ui-annotated.png}
-
-<!--
-    Questions 4 and 5 are all about the @vocab{contract} and @vocab{purpose statement} for this expression. You will want to devote a few minutes to discussing these important concepts.
--->
-
-
-
----
-{layout="Investigate"}
-# Filtering Tables with Transformers
-
-Questions 4 and 5 are all about the @vocab{contract} for the expression.
-
-A @vocab{contract} is a statement of the @vocab{domain} (input) and @vocab{range} (output) of an expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs.
-
-Why does this contract make sense?
-
-<!--
- For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
--->
-
----
-{layout="Investigate"}
-# Filtering Tables with Transformers
-
-Question 6 is all about the @vocab{Purpose Statement} for the expression.
-
-A @vocab{Purpose Statement} is a way of describing what an expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is dog", or "Computes the sum of `Age` and 2."
-
-Look at Q6. What would be a good purpose statement for the expression `filter-is-dog`?
-
 
 ---
 {layout="Investigate"}
@@ -185,8 +202,6 @@ Students should observe that new and modified tables created by Transformers are
 ---
 {layout="Synthesize"}
 # Filtering Tables with Transformers
-
-
 
 - What is the role of the `Filter` Transformer? How is its role unique from that of the Transformer's _expression_?
 - Suppose we wanted to determine whether cats or dogs get adopted faster. How might using the `Filter` Transformer help?
