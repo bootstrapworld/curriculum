@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 We've already explored the `Filter` Transformer, which walks through a dataset, applying the @vocab{Boolean} expression that we give it to each row - and then creating a modified copy of our original dataset.
 
-Suppose we want to _transform_ our table in a different way! Let's say we want to convert `Pounds` to `Kilograms` or `Weeks` to `Days`. The `Transform Attribute` Transformer makes that possible!
+Suppose we want to _transform_ our table in a different way! Let's say we want to convert `Pounds` to `Kilograms` or `Weeks` to `Days`.  Maybe we want to transform the `Pounds` column into the `Heavy` column, which produces `true` or `false` depending on if the animal is heavy. The `Transform Attribute` Transformer makes that possible!
 
 
 ---
@@ -31,7 +31,7 @@ In this lesson, we will transform and build columns to create _new attributes_. 
 
 
 ---
-{layout="Investigate-DN"}
+{layout="InvestigateR-DN"}
 # Transforming Columns
 
 Complete @printable-exercise{pages/codap-transform.adoc} in the @starter-file{animals} to explore how to create and apply a `Transform Attribute` Transformer.
@@ -55,14 +55,12 @@ So far, we've used Transformers to _filter_ and to _transform an attribute_. The
 
 
 ---
-{layout="Investigate-DN"}
+{layout="InvestigateR-DN"}
 # Building Columns
 
 @image{images/build-ui-annotated.png}
 
-- Complete @printable-exercise{pages/codap-build.adoc} in the @starter-file{animals}.
-- Optional: Complete @opt-printable-exercise{pages/what-table-do-we-get.adoc}
-
+Complete @printable-exercise{pages/codap-build.adoc} in the @starter-file{animals}.
 
 <!--
 	Now that students have some familiarity with creating and defining Transformers, invite them to explore `Build Attribute` to see if they can determine what it does. (It creates an additional column in the dataset, rather than _transforming_ the existing column.)
@@ -88,4 +86,6 @@ So far, we've used Transformers to _filter_ and to _transform an attribute_. The
 {layout="Synthesize"}
 # Building Columns
 
-Being able to create and define a Transformer is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
+Being able to create and define a Transformer is a _huge_ upgrade in our ability to analyze data! But as a wise person once said, "with great power comes great responsibility"! 
+
+Dropping all the dogs from our dataset might be a cute exercise in this class, but suppose we want to drop certain populations from a national census? Even a small programming error could erase millions of people, impact funding for things like roads and schools, etc.
