@@ -1124,7 +1124,8 @@
           ;   (set! notes-title-done? #t)
           ;   (fprintf o "\n\n- *All Lesson Notes*\n"))
           (set! page (regexp-replace ".adoc$" page ""))
-          (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
+          (let ([title-file (format "distribution/~a/lessons/~a/pages/.cached/.~a.titletxt"
+                                    *natlang* lesson page)]
                 [link-text page])
             (when (file-exists? title-file)
               (set! link-text (call-with-input-file title-file read-line)))
