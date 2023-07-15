@@ -275,7 +275,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65"
     },
       "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FXd93rXr4kM3wB693dNed%2Ffile.json"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2Fa6Vjchpf73QwZYMcB1nO%2Ffile.json"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV"

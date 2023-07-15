@@ -1,0 +1,92 @@
+= Transform Attribute
+++++
+<style>
+body.workbookpage td .autonum::after { content: ')' !important; }
+/* Cram everything to the top instead of distributing space equally */
+#content { display: block !important; }
+</style>
+++++
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
+
+@vspace{1ex}
+
+== Create, Apply, and Save a Transform Attribute Transformer (Step by Step)
+
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
+
+|
+@image{../images/transform-ui-annotated.png, 350}
+
+|
+@n Choose Transform Attribute from the drop-down menu.
+
+@vspace{1ex}
+
+@n We want to create a Transformer that will replace all ages less than 5 with the Boolean `true`. In other words, it will _transform_ our "age" column into a column that tells us if an animal is young or not. What is a good name for this Transformer?
+
+@fitb{}{@ifsoln{transform-is-young}}
+
+@vspace{1ex}
+
+@n Select the dataset you'd like to transform.
+
+
+@n What attribute will we be transforming? @fitb{}{@ifsoln{Age}}
+
+@vspace{1ex}
+
+@star Select the attribute. Notice that CODAP replaced the blank in the starred line of text (left) with the attribute name you selected!
+
+@n What would be an appropriate name for our transformed attribute? @fitb{}{@ifsoln{`Young`}}
+
+@n The contract includes a Domain (row) only. What is the Range? @fitb{}{@ifsoln{`Boolean`}
+
+@vspace{1ex}
+
+@n Let's write a Purpose Statement: _Checks each_ @fitb{15em}{@ifsoln{row}} _to see if_ @fitb{}{@ifsoln{age is less than 5.}}
+
+@n What is the expression? @fitb{}{@ifsoln{`Age < 5`}}
+
+@vspace{1ex}
+
+@n Apply, the Transformer, and then Save it.
+
+|===
+
+@vspace{2ex}
+
+== More Transforming (On Your Own)
+
+*Create a Transformer called `transform-pounds-kg`. (Note: To convert pounds to kilograms, divide pounds by 2.205.)*
+
+@vspace{1ex}
+
+@n How many kilograms is the heaviest animal in the shelter? _Hint: If you want to see the animals listed in order by weight, select the attribute name and select "Sort Ascending."_
+
+@fitb{}{@ifsoln{Kujo is 78 kilograms.}}
+
+@vspace{1ex}
+
+*Create a Transformer called `transform-pounds-round` that uses this expression: `round(Pounds)`.*
+
+@n What do you think the `round` function does? @fitb{}{@ifsoln{Pounds were rounded to the nearest whole number.}}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+*Create a Transformer called `transform-Name+Species` that transforms Name using this expression: `concat(Name, Species).` Let's call the Transformed Attribute `Name+Species`.*
+
+Write a Purpose Statement that describes what this expression does to each row. @fitb{}{@ifsoln{Computes `Name+Species`}}
+
+@fitb{}{@ifsoln{by linking together `Name` and `Species` together in a series.}}
+
+@vspace{1ex}
+
+*Create a Transformer to change the number of weeks to adoption to instead show the number of days to adoption.*
+
+@n What is your Purpose Statement? @fitb{}{@ifsoln{"Computes the product of `Weeks` and 7."}}
+
+@n What expression will you use? @fitb{}{@ifsoln{`Weeks * 7`}}
+

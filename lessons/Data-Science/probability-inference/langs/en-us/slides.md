@@ -56,6 +56,10 @@ Do any samples seem to undermine the null hypothesis?
 @teacher{
 Have students share back their sample results, and their predictions after 5 samples and then 20 samples.}
 
+<!--
+@ifproglang{codap}{The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any to complete the lesson. They will simply hit "Run" several times.}
+-->
+
 ---
 {layout="Investigate"}
 # How to Spot a Scam
