@@ -1144,13 +1144,17 @@
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       ;(printf "tackling lesson ~s\n" lesson)
-      (let ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
-            [lesson-title-file (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                                       *natlang* lesson)]
-            [lesson-desc-file (format "distribution/~a/lessons/~a/.cached/.index-desc.txt.kp"
-                                      *natlang* lesson)]
-            [lesson-title lesson]
-            [lesson-description #f])
+      (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
+             [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
+             [lesson-title-file (format "~a.cached/.index.titletxt"
+                                        lesson-directory)]
+             [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
+                                       lesson-directory)]
+             [lesson-title lesson]
+             [lesson-description #f])
+        (unless (directory-exists? lesson-directory)
+          (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
+                  *target-pathway* lesson))
         (when (file-exists? lesson-title-file)
           ;(printf "~a exists\n" lesson-title-file)
           (set! lesson-title (call-with-input-file lesson-title-file read-line)))
@@ -1168,12 +1172,11 @@
                         (loop))))
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
-        (when #t
-          ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          (if lesson-description
-              (display lesson-description o)
-              (display " {nbsp}" o)))
+        ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
+        (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+        (if lesson-description
+            (display lesson-description o)
+            (display " {nbsp}" o))
         ;(when lesson-description
         ;(display lesson-description o)
         ;(newline o))
