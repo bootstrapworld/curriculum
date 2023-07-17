@@ -815,7 +815,7 @@
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
-  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+  ; (printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
 
   (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
          [dir (second m)]
@@ -823,7 +823,8 @@
          [dir-compts (regexp-split #rx"/" dir)])
 
     (let* ([first-compt (first dir-compts)]
-           [q (qualify-proglang first-compt "lessons" *proglang*)])
+           [q (qualify-proglang first-compt (format "distribution/~a/lessons" *natlang*)
+                                *proglang*)])
       (unless (string=? q first-compt)
         (set! dir
           (string-join
