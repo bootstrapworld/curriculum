@@ -35,7 +35,7 @@
 * Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
 |===
 
-== Looking for Patterns @duration{20 minutes}
+== Looking for Patterns @duration{15 minutes}
 
 === Overview
 Students explore the @starter-file{alg2-fuel-efficiency}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
@@ -47,9 +47,9 @@ When you're driving, what speed will save you the most money on gas?
 [.lesson-instruction]
 - Open the @starter-file{alg2-fuel-efficiency}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete questions 1-10 of @printable-exercise{pages/exploring-mpg.adoc}.
+- Working in pairs or small groups, complete @printable-exercise{pages/exploring-mpg.adoc}.
 
-@teacher{Review student answers to confirm that students see a _non-linear_ relationship in the dataset with a relatively strong correlation. **Make sure students have agreed on a "most efficient speed"**, as the location of the vertex is important for the next activity!}
+@teacher{Review student answers to confirm that students see a _non-linear_ relationship in the dataset with a relatively strong correlation. Students should generally agree that the relationship is a curve (parabola), which opens downwards and has a vertex at _roughly_ 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!}
 
 === Investigate
 
@@ -57,17 +57,13 @@ When you're driving, what speed will save you the most money on gas?
 
 There's definitely a relationship here. Even though some cars are more efficient than others, fuel efficiency generally increases from 15 to around 40-60mph. But after about 60mph, fuel efficiency _decreases._
 
-[.lesson-instruction]
-- Let's try to build a linear model for this data.
-- Working in pairs or small groups, complete the rest of of @printable-exercise{pages/exploring-mpg.adoc}.
-
-By now we've tried to fit quite a few linear models to this data, and we're not getting anywhere.
+We also know that the best-possible linear model isn't very good!
 
 [cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
 |===
-| We can build linear models that fit the increasing half of the data...
-| We can build linear models that fit the decreasing half of the data...
-| We can build linear models that try to split the difference...
+| We could build linear models that fit the increasing half of the data...
+| We could build linear models that fit the decreasing half of the data...
+| We could build linear models that try to split the difference...
 
 | @image{images/fuel-efficiency-linear1.png}
 | @image{images/fuel-efficiency-linear2.png}
@@ -78,14 +74,14 @@ By now we've tried to fit quite a few linear models to this data, and we're not 
 
 === Synthesize
 
-- Why didn't linear models work for us?
+- Why don't linear models work for us?
 - What kinds of curves did you draw to fit better?
-- Can you think of functions that look like those curves?
+- Are there any mathematical functions that look like those curves?
 
-== Quadratic Relationships @duration{10 minutes}
+== Quadratic Relationships @duration{25 minutes}
 
 === Overview
-Students are introduced to quadratic relationships in the real world, then learn about them in abstract, mathematical terms. They develop vocabulary for describing parts of a parabola.
+Students are introduced to quadratic models (vocabulary, uses, different forms, and more), and extend the model-fitting techniques from the @lesson-link{exploring-linear-models} lesson into quadratic relationships.
 
 === Launch
 
@@ -119,13 +115,6 @@ We often think about variables of a model being _independent_ from one another, 
 A quadratic relationship often means that one or more variables is _interacting_ with another variable. In our miles-per-gallon example, it turns out that a linear increase in speed has a _more than linear effect_ on mpg!
 |===
 
-[.lesson-instruction]
-* Can you think of other real-world examples where a relationship is likely quadratic?
-** Production of an athlete as they age
-** Projectile motion
-
-=== Investigate
-
 You already know that linear relationships can be described with terms like "slope" and "y-intercept". Parabolas have their own terms, as well.
 
 [.lesson-instruction]
@@ -151,24 +140,13 @@ You already know that linear relationships can be described with terms like "slo
 @image{images/roots.png, 200}
 |===
 
-=== Synthesize
-
-- How are quadratic models _similar_ to linear ones?
-- How are they _different?_
-
-== Fitting Quadratic Models @duration{25 minutes}
-
-=== Overview
-
-Students are introduced to quadratic models, and extend the model-fitting techniques from the @lesson-link{exploring-linear-models} lesson into quadratic relationships.
-
-=== Launch
+=== Investigate
 
 You should already be familiar with the different forms of linear models:
 
 [cols="^1,^1,^1", options="header"]
 |===
-| Slope-intercept		| Point-slope				| Standard 	
+| Slope-intercept		| Point-slope				| Standard
 | @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
 |===
 
@@ -197,19 +175,12 @@ In this case, we've already come to some conclusions about the @vocab{vertex} of
 
 Now we need to figure out the values of @math{a} and @math{k}.
 
-=== Investigate
 
 But what do each of the coefficients in Vertex Form mean?
 
 [.lesson-instruction]
 - Open @starter-file{alg2-exploring-quadratics} in Desmos.
 - Use Desmos to complete @printable-exercise{graphing-models.adoc}.
-
-Now that we have a sense for what these coefficients mean, let's try to model the speed-v-mpg relationship using a quadratic model.
-
-[.lesson-instruction]
-Complete @printable-exercise{model-speed-v-mpg.adoc}
-
 
 === Synthesize
 
@@ -224,6 +195,23 @@ You've had a chance to experiment with quadratic models in vertex form:
 * How do you make a parabola "narrower" or "wider"?
 ** Change the value of @math{a}
 
+* How are quadratic models _similar_ to linear ones?
+* How are they _different?_
+
+== Fitting Quadratic Models @duration{15 minutes}
+
+=== Overview
+Students apply their understanding of coefficients in vertex form to fit a quadratic model for the fuel efficiency dataset
+
+=== Launch
+
+Now that we have a sense for what these coefficients mean, let's try to model the speed-v-mpg relationship using a quadratic model.
+
+[.lesson-instruction]
+Complete @printable-exercise{model-speed-v-mpg.adoc}
+
+
+=== Synthesize
 * What was the highest @math{R^2} you were able to get? What model was it?
 ** Responses will vary
 * Could a quadratic model be used to fit a linear relationship?
