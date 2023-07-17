@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-11
-
 local dict_js_file = ...
 
 if not dict_js_file then
@@ -15,8 +13,14 @@ local o = io.open(dict_js_file, 'w+')
 local function display_sublist(dictionaries)
   for _,dictionary in ipairs(dictionaries) do
     local dict_name = dictionary[1]
+    local dict_fullname = dictionary[2]
     local dict_hash_tbl = dictionary[3]
+    local dict_url = dictionary[4]
     o:write('    "' .. dict_name .. '": {\n')
+    o:write('      "__metadata": {\n')
+    o:write('         "fullname": "' .. dict_fullname .. '",\n')
+    o:write('         "url": "' .. dict_url .. '"\n')
+    o:write('      },\n')
     for _,lbl in ipairs(dict_hash_tbl.__json_keys) do
       local entry = dict_hash_tbl[lbl]
       local desc = entry.description:gsub('"', '\\"'):gsub('\n', '\\n')
