@@ -1147,7 +1147,7 @@
       ;(printf "tackling lesson ~s\n" lesson)
       (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
              [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
-             [lesson-title-file (format "~a.cached/.index.titletxt"
+             [lesson-title-file (format "~a/.cached/.index.titletxt"
                                         lesson-directory)]
              [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
                                        lesson-directory)]
