@@ -8,7 +8,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="LaunchR"}
-# Numbers & Strings 
+# Strings & Numbers
 
 When programming in this class, you'll be working together using the Driver/Navigator model.{style="font-size:16pt"} 
 
@@ -21,13 +21,13 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 
 ---
 {layout="Launch"}
-# Numbers & Strings
+# Strings & Numbers
 
 Open @starter-file{editor} and click "Log In", then start a new program.
 
 ---
 {layout="LaunchR"}
-# Numbers & Strings
+# Strings & Numbers
 
 The @vocab{Editor} looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.{style="font-size:17pt"} 
 
@@ -39,7 +39,7 @@ For now, we will only be writing programs in the *Interactions Area*.{style="fon
 
 ---
 {layout="Investigate"}
-# Numbers & Strings
+# Strings & Numbers
 
 Math and programming are languages. **Instead of nouns, they have _values_**, like the numbers 1, 2 and 3. **Instead of verbs, they have _functions_**, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:16pt"} 
 
@@ -51,15 +51,15 @@ Keeping the importance of *syntax* and *grammar* in mind is helpful when learnin
 
 ---
 {layout="Investigate-DN"}
-# Numbers & Strings
+# Strings & Numbers
 
-Complete @printable-exercise{numbers-n-strings.adoc}. 
+Complete @printable-exercise{strings-n-numbers.adoc}. 
 
 Pay special attention to the error messages!
 
 ---
 {layout="Investigate"}
-# Numbers & Strings
+# Strings & Numbers
 
 - What did you Notice? 
 
@@ -77,7 +77,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Strings & Numbers
 
 - Numbers and Strings evaluate to themselves.{style="font-size:17pt"} 
 - Our Editor is pretty smart. When we click on a rational number, it switches between showing a fraction and decimal.{style="font-size:17pt"} 
@@ -87,7 +87,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 @ifproglang{pyret}{
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Strings & Numbers
 
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
 - In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
@@ -97,7 +97,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 
 ---
 {layout="Synthesize"}
-# Numbers & Strings
+# Strings & Numbers
 
 Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
 

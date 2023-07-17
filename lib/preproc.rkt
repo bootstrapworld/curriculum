@@ -453,7 +453,7 @@
       [(1)
        (cond [*lesson*
                (make-workbook-link #f
-                 "pages"
+                 (if *solutions-mode?* "solution-pages" "pages")
                  first-compt
                  link-text
                  #:link-type directive)]
