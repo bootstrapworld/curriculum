@@ -1324,7 +1324,7 @@
                         (hash-ref h 'description ""))
                   *natlang-glossary-list*))))))
 
-  (when *lesson-plan*
+  (when (or *lesson-plan* *lesson*)
     (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
 
   (erase-span-stack!)
