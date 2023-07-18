@@ -104,6 +104,7 @@
     (when (eqv? dir 'relative) (set! dir 'same))
     (let ([basename (path->string (path-replace-extension fname ""))]
           [ext (path-get-extension fname)])
+      (unless ext (set! ext ""))
       (build-path dir
                   (path-replace-extension
                     (substring
