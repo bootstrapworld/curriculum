@@ -97,19 +97,6 @@ It's often better to name our Row definitions according to the _property we care
 <!--
 -->
 ---
-{layout="Investigate"}
-# Row Lookups
-
-`cat-row = row-n(animals-table, 0)`
-
-- In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young ones, etc.
-- Complete @printable-exercise{pages/defining-rows.adoc}.
-- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
-
-<!--
-
--->
----
 {layout="Synthesize"}
 # Row Lookups
 
@@ -164,6 +151,20 @@ cat-row["fixed"]
 <!--
 Debrief student answers here
 -->
+---
+{layout="Investigate"}
+# Row Lookups
+
+`cat-row = row-n(animals-table, 0)`
+
+- In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young ones, etc.
+- Complete @printable-exercise{pages/defining-rows.adoc}.
+- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
+
+<!--
+
+-->
+
 ---
 {layout="Synthesize"}
 # Column Lookups

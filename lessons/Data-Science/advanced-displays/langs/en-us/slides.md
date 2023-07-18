@@ -28,6 +28,12 @@ The third column being visualized is `species`! By drawing the dots differently,
 
 To dig deeper into your data, sometimes you need to see more than 2 variables at once! By processing each Row separately, we can make use of all the columns we want to draw beautiful, creative, and insightful data displays. In this lesson, you'll learn how to do just that.
 
+<!--
+Answer to #1: __What a function consumes__ is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.
+
+Answer to #2: It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.
+
+-->
 ---
 {layout="Launch"}
 # Processing Rows with Functions
@@ -203,7 +209,7 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 {layout="InvestigateR"}
 # Piecewise/Conditional Functions
 
-@image{images/age-v-weeks-species-dot.png, 450}
+@center{@image{images/pounds-v-weeks.png, 450}}
 
 * __Starting on paper__, complete @printable-exercise{pages/piecewise-explore.adoc}.
 * When you're finishing thinking and writing, open the @starter-file{piecewise-displays} and experiment!
@@ -213,6 +219,75 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 <!--
 
 -->
+---
+{layout="Investigate"}
+# Image Scatter Plots
+
+```
+image-scatter-plot :: (
+  t  :: Table,
+  xs :: String,
+  ys :: String,
+  f  :: (Row -> Image)
+) -> Image
+```
+
+The function `image-scatter-plot` has an interesting Domain: Table, String, String and... what is that last part?... *a Function that consumes a Row and produces an Image*!
+
+<!--
+
+-->
+---
+{layout="Investigate"}
+# Image Scatter Plots
+
+- What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-dot.adoc}.
+- Now complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.
+
+---
+{layout="InvestigateR"}
+# Image Scatter Plots
+
+@center{@image{images/age-dot.png, 450}}
+
+- Do the bottom portion of the worksheet, which invites you to consider what new insights you can glean from your custom displays.
+- How did having the dots labeled with the *species* change your understanding of the data?
+
+<!--
+__The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)__
+
+-->
+---
+{layout="Synthesize"}
+# Image Scatter Plots
+
+* What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?
+* How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)
+* How might image-scatter-plot be useful to your own analysis?
+
+<!--
+
+-->
+---
+{layout="Launch"}
+# Piecewise/Conditional Functions
+
+So far, we've seen that...
+
+* the `scatter-plot` function makes uniform blue dots
+* the `image-scatter-plot` function can label each point with a custom image, computed by a helper function that consumes a Row and produces an Image
+
+How could we use *different colored dots* for each species? Or perhaps draw different shapes depending on whether an animal was fixed or not?
+
+<!--
+*NOTE:* Math teachers may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not a part of the Data Science pathway, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics, with greater emphasis on the math connections.
+-->
+
+---
+{layout="Launch"}
+# Piecewise/Conditional Functions
+
+This requires a more powerful kind of function, known in math as a @vocab{piecewise function} because it has more than one "piece". In programming, these are often called "conditional" functions, because each piece is used depending on which condition is met.
 
 ---
 {layout="Investigate"}
@@ -233,3 +308,8 @@ Pyret allows us to create advanced displays for several types of charts. You can
 
 - How do piecewise functions expand what is possible for displaying data?
 - How could you see this power being used to help express complex relationships?
+
+---
+{layout="Supplemental"}
+
+- @opt-project{beautiful-data-project.adoc, beautiful-data-rubric.adoc} 

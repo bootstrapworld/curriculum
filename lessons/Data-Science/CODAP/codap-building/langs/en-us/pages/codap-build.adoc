@@ -1,0 +1,95 @@
+= Build Attribute
+++++
+<style>
+body.workbookpage td .autonum::after { content: ')' !important; }
+/* Cram everything to the top instead of distributing space equally */
+#content { display: block !important; }
+</style>
+++++
+
+Make sure you’re logged into the @starter-file{animals} in CODAP. Select the Plugins icon, then choose Transformers.
+
+@vspace{1ex}
+
+== Create, Apply, and Save a Build Attribute Transformer (Step by Step)
+
+[cols="5, 10", frame="none", grid="none", stripes="none"]
+|===
+
+|
+@image{../images/build-ui-annotated.png, 350}
+
+|
+@n Choose Build Attribute from the drop-down menu (Box 1).
+
+@vspace{1ex}
+
+@n At the shelter, animals are considered heavy when they weigh more than 40 pounds. Enter `build-is-heavy` as the Transformer Name (Box 2). What does this name tell you about the Transformer we are creating?
+
+@fitb{}{@ifsoln{It will build a column that states `true` for heavy animals and `false` for lightweight animals.}}
+
+@vspace{1ex}
+
+@n Select the dataset you'd like to transform (Box 3).
+
+@vspace{1ex}
+
+@n Let's name our new attribute `Heavy` (Box 4). What happened to the starred text (left) when you named the attribute?
+
+@fitb{}{}
+
+@vspace{1ex}
+
+@n Ensure that the collection you are adding to is "cases" (Box 5).
+
+@vspace{1ex}
+
+@n A domain is provided (row), but not a range. What is the desired output for `build-is-heavy`? @fitb{}{@ifsoln{Boolean.}}
+
+@vspace{1ex}
+
+@n Write a purpose statement (Box 7). What do we want the expression to do?
+
+@fitb{}{@ifsoln{Checks each row to see if Weight is greater than a specified amount.}}
+
+@vspace{1ex}
+
+@n Enter `Pounds > 40` as the expression (Box 8).
+
+@vspace{1ex}
+
+@n Apply the Transformer. To define the Transformer for future use, select `Save`.
+
+|===
+
+
+== More Building (On Your Own)
+
+*Create a Transformer called `build-updated-age`, which will give the animals' ages one year from today.*
+
+@n How many animals are 9 years-old one year from today? @fitb{}{@ifsoln{Three animals.}}
+
+@vspace{1ex}
+
+*Create a Transformer that builds a column with the number of letters in each animal's name.*
+
+@n What did you name your Transformer and the new attribute? @fitb{}{@ifsoln{Possible answer: build-nameLength and nameLength}}
+
+@n How many animals have exactly 8 letters in their names? (Feeling adventurous? Try using the `Count` Transformer here!) @fitb{}{@ifsoln{Five}}
+
+@vspace{1ex}
+
+**Create a Transformer to build a column that returns `true` if the number of letters in an animal's name (the column you created in Question 11!) is less than or equal to five.**
+
+@vspace{1ex}
+
+_Note:_ Does your new attribute name have a space or a hyphen? If so, CODAP will produce an error when you apply your Transformer. Either change the name of the attribute or wrap your entire attribute name inside tick marks (`````) when you type in your expression. (The tick mark key is in the upper left-hand corner of your keyboard.)
+
+@n What expression will you use? @fitb{}{@ifsoln{Possible response: `nameLength <= 5`}}
+
+@n Which dataset will you need to apply this Transformer to? Why? @fitb{}{@ifsoln{I'll need to use}}
+
+@fitb{}{@ifsoln{the dataset that I created in Q11 - otherwise my column with number of letters won't be included!}}
+
+
+

@@ -84,7 +84,7 @@
   *id-counter*)
 
 (define (qualify-proglang dirname rel-root *proglang*)
-  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" container dirname *proglang*)
+  ; (printf "doing qualify-proglang ~s ~s ~s\n\n" dirname rel-root *proglang*)
   (unless (or (string=? *proglang* "pyret")
               (regexp-match (string-append "-" *proglang* "$") dirname))
     (let ([q (string-append dirname "-" *proglang*)])

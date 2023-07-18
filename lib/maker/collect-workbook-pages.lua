@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-05-16
+-- last modified 2023-07-13
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -36,7 +36,7 @@ workbook_pages_og_file = 'pages/workbook-pages.txt'
 
 workbook_pages_file = 'pages/.cached/.workbook-pages.txt.kp'
 workbook_pages_ls_file = 'pages/.cached/.workbook-pages-ls.txt.kp'
-notes_pages_ls_file = 'pages/.cached/.notes-pages-ls.txt.kp'
+notes_pages_ls_file = 'pages/.cached/.workbook-notes-pages-ls.txt.kp'
 
 if not file_exists_p(workbook_pages_og_file) then
   touch(workbook_pages_og_file)
@@ -50,11 +50,14 @@ do
   local i = io.open(workbook_pages_og_file)
   local o = io.open(workbook_pages_file, 'w+')
   local ol = io.open(workbook_pages_ls_file, 'w+')
+  local on = io.open(notes_pages_ls_file, 'w+')
   --
   for f in i:lines() do
+    if f:find('^ *;') or f:find('^ *//') or f:find('^ *$') then
+      goto continue
+    end
     local g = f
-    if f:find('^ *;') or f:find('^ *//') or f:find('^ *$') then --nothing
-    elseif f:find('landscape') or f:find('portrait') then
+    if f:find('landscape') or f:find('portrait') then
       o:write(f, '\n')
       g = f:gsub('^ *([^ ]+).*', '%1')
       ol:write(g, '\n')
@@ -68,11 +71,16 @@ do
       o:write(f, '\n')
       ol:write(g, '\n')
     end
+    if g:find('^notes%-') then
+      on:write(g, '\n')
+    end
+    ::continue::
   end
   --
   i:close()
   o:close()
   ol:close()
+  on:close()
 end
 
 function make_workbook_page_titletxt_files(dir)

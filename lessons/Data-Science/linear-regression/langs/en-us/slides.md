@@ -65,7 +65,7 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 
 @image{images/lr-pounds-v-weeks.png, 300}
 
-Given a value on the x-axis, this line allows us to predict what the corresponding value on the y-axis might be. **This allows us to make predictions based on our data!**
+Given a value on the x-axis, this line allows us to predict what the corresponding value on the y-axis might be. **This allows us to make predictions based on our data!**{style="font-size:16pt"}
 
 ---
 {layout="Launch"}

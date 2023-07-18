@@ -1,0 +1,54 @@
+= Fitting a Model: College Degrees v. Income (2)
+++++
+<style>
+.studentAnswerMedium { min-width: 8em !important; }
+td { padding: 0 !important; }
+body.workbookpage .fitbruby { padding-top: 1.1rem; }
+.center { padding: 0; }
+</style>
+++++
+
+For this page, you'll need to the @starter-file{alg2-states} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+== Build a Model through Trial {amp} Error
+
+**Let's try using Massachusetts (row 21) and Nevada (row 28) instead of Alabama and Alaska.**
+
+@n Record the `college-or-higher` and `median-income` values for MA and NV, as (x,y) pairs below:
+
+@center{
+ (@fitbruby{10em}{@ifsoln{22.6}}{MA college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{MA median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{NV college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{NV median-income})
+}
+
+@n What is the slope of the line between these two points? @right{@fitb{10em}{@ifsoln{}}}
+
+@n What is the y-intercept of the line between these two points? @right{@fitb{10em}{@ifsoln{}}}
+
+@n Now that you have the slope and y-intercept, write the complete MA-NV model below:
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
+}
+
+@n Define the function in Pyret, then fit the model to the data. What @math{R^2} do you get? @right{@fitb{10em}{@ifsoln{2.84}}}
+
+@n Play with the slope and y-intercept of this model. What is the **best** @math{R^2} you can get?** @right{@fitb{10em}{}}
+
+@n Write the best model below:
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))}
+}
+
+== Build a Model Computationally
+
+`lr-plot` computes the __optimal linear model__ using all of the data points.
+
+@n Evaluate @show{(code '(lr-plot states-table "state" "college-or-higher" "median-income"))}. What is @math{R^2}? @fitb{5em}{@ifsoln{}}
+
+@n On the line below, write the optimal linear model that was computed through linear regression:
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{1142}}}{slope}x + @fitbruby{8em}{@ifsoln{20868.14}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 1142) x) (?ANS 20868.14))))}
+}
+
