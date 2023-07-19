@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Computation and Equivalence
+# Equivalence
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -23,7 +23,7 @@ To create a Circle of Evaluation of the same value, we could write what you see 
 @image{images/coe2.png}
 
 ---
-{layout="LaunchR"}
+{layout="LaunchC"}
 # Computation and Equivalence
 
 Because we know that @math{8 + 2} produces 10, we can use it _in place of 10_. 
@@ -36,9 +36,9 @@ We could also simply write @math{16}!
 
 
 <!--
-    In this last example, the Circle of Evaluation has been simplified down to just one number; since every Circle of Evaluation must have an operator or function, the Circle disappears.
+In this last example, the Circle of Evaluation has been simplified down to just one number; since every Circle of Evaluation must have an operator or function, the Circle disappears.
 
-    Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before moving onto the next slide.
+Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before moving onto the next slide.
 -->
 
 ---
@@ -47,7 +47,9 @@ We could also simply write @math{16}!
 
 Numeric expressions are *equivalent* when they simplify to the same value.{style="font-size:24pt"}
 
-
+<!--
+Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before delivering the following instructions:
+-->
 
 ---
 {layout="Launch"}
@@ -173,7 +175,7 @@ Pedagogy note: To recap: *yes*, we are advocating for a flexible order of operat
 
 
 - Each row on @printable-exercise{pages/computation-whole-nums.adoc} represents a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators!
-- Fill in those numbers and operators so that each sequence of circles will end with the answer shown on the right.
+- Fill in those numbers and operators so that each sequence of Circles will end with the answer shown on the right.
 - When you're done, complete  @printable-exercise{pages/computation-frac-dec.adoc}, a version of the activity with more challenging numbers.
 - Did you fill in blanks in the Circles of Evaluation from left to right or right to left? Why?
 

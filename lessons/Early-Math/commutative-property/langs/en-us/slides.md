@@ -45,7 +45,6 @@ The *_Commutative Property_* tells us that for any expression involving only add
 - Turn to @printable-exercise{pages/comm-prop-table.adoc}.
 - How many different ways can you apply the Commutative Property? Draw as many different Circles of Evaluation as you can. The first one (below) is done for you.
 
-@image{images/comm-prop-table.png}
 
 <!--
 This activity is similar to one students’ completed during the previous lesson. In both activities, students develop equivalent expressions. That said, in this lesson, students cannot write down any equivalent Circle of Evaluation; they must develop equivalent arithmetic expressions that illustrate commutativity.
@@ -88,7 +87,7 @@ Q3: Possible response: Circles with only addition and multiplication, as well as
 {layout="LaunchC"}
 # Tying it All Together
 
-Claire, Walker, and Soraya are both translating verbal expressions into Circles of Evaluation. Their teacher asks them to represent the following expression: "one half the product of five and six."
+Claire, Walker, and Soraya are translating verbal expressions into Circles of Evaluation. Their teacher asks them to represent the following expression: "one half the product of five and six."
 
 All three students compute that this expression evaluates to 15.
 
@@ -122,12 +121,11 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Tying it All Together
 
 - Optional: Complete @printable-exercise{pages/which-coe-is-correct-2.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
 
-@image{images/claire-walker.png}
 
 
 
