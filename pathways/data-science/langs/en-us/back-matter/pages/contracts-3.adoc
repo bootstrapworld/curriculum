@@ -7,13 +7,6 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 |===
 |Name||Domain||Range
 
-| `mean`
-| `{two-colons}`
-| `Table, String`
-| `->`
-| `Number`
-5+|`_mean(animals-table, "age")_`
-
 | `median`
 | `{two-colons}`
 | `Table, String`
@@ -35,6 +28,13 @@ Contracts tell us how to use a function. For example: `num-min {two-colons} (a {
 | `->`
 | `Image`
 5+|`_modified-box-plot(animals-table, "age")_`
+
+| `multi-bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, group {two-colons} String, subgroup {two-colons} String)`
+| `->`
+| `Image`
+5+|`_multi-bar-chart(animals-table, "sex", "species")_`
 
 | `num-max`
 | `{two-colons}`

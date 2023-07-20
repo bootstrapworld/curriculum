@@ -7,72 +7,93 @@ body.workbookpage td .autonum:after { content: ')'; }
 </style>
 ++++
 
-Decide whether each representation is best described by a linear, quadratic, or exponential function.
+Decide whether each representation describes a linear, quadratic, or exponential function.
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
 |===
-@math{}
+| @math{f(x) = 6x^2 - 5}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Linear
+! @ifsoln-choice{Quadratic}
+! Exponential
+!===
+
+| @math{miles(hours) = \frac{22 \times hours + 14}{12 - 9}}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Linear}
 ! Quadratic
 ! Exponential
 !===
 
-@show{(code `(define (f x) (+ (* 3 (num-sqr x)) 18))}
+| @math{cost(w) = 1.2^w + 16}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Linear
 ! Quadratic
-! Exponential
-
-// need empty line here so the closing table block isn't swallowed
+! @ifsoln-choice{Exponential}
 !===
 
-@math{}
+| @show{(code `(define (cost w) (+ (sqr (* 1.2 w)) 16)))}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Linear
-! Quadratic
-! Exponential
-!===
-
-@math{}
-
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! Quadratic
-! Exponential
-!===
-
-@show{(code `(define (f x) (+ (* 3 (num-sqr x)) 18))}
-
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! Quadratic
-! Exponential
-!===
-
-@show{(code `(define (f x) (+ (* 3 (num-sqr x)) 18))}
-
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! Quadratic
+! @ifsoln-choice{Quadratic}
 ! Exponential
 
 // need empty line here so the closing table block isn't swallowed
 !===
 
+| @show{(code `(define (price d) (+ (expt d 2) (* 6 d) )))}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! @ifsoln-choice{Quadratic}
+! Exponential
+!===
+
+| @math{j(i) = 2e^i + 22}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! Quadratic
+! @ifsoln-choice{Exponential}
+
+// need empty line here so the closing table block isn't swallowed
+!===
+
+| @show{(code `(define (f x) (- 20000 (expt 4.1 x)  )))}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! Quadratic
+! @ifsoln-choice{Exponential}
+!===
+
+| @math{g(x) = 3^{-4x}}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! Quadratic
+! @ifsoln-choice{Exponential}
+
+// need empty line here so the closing table block isn't swallowed
+!===
 |===
