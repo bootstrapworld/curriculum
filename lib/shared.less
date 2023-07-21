@@ -532,6 +532,8 @@ body.workbookpage {
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
 
+  /* use 'thin' instead of 1px border to try and avoid disappearing 
+  lines on some browsers */
   .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top:        @top-padding-for-writing;
     position:           relative;
@@ -539,7 +541,7 @@ body.workbookpage {
     min-width:          4em;
     text-align:         center;
     line-height:        1rem;
-    border-bottom:      solid 1px black;
+    border-bottom:      solid thin black;
     vertical-align:     baseline;
   }
   .fitbruby { 
