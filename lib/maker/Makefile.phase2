@@ -221,6 +221,7 @@ dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NAT
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	$(MAKE_DIR)make-dependency-graph.lua $@
+	$(MAKE_DIR)check-graph.sh
 
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
 	$(CP) -p $< $@
