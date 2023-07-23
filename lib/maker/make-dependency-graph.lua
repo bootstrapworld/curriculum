@@ -188,3 +188,7 @@ for _,lesson in ipairs(lessons) do
 end
 
 o:write('}\n')
+o:write('// if we\'re in node, provide the module exports\n')
+o:write('if(typeof module !== "undefined"){\n')
+o:write('  module.exports = graph;\n')
+o:write('}\n')

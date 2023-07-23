@@ -1,124 +1,200 @@
 ---
 {layout="Math Title Slide"}
-# The Associative Property
+# The Additive Inverse Property
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
 ---
 {layout="Launch"}
-# The Associative Property
- 
+# The Additive Inverse Property
 
-- The @vocab{Associative Property} of Addition tells us that no matter how we group numbers being added, the end result will always be the same.
-- Turn to @printable-exercise{pages/assoc-prop-launch.adoc}, where you will explore the Associative Property of Addition. In particular, you will explore different ways to re-group and re-order this expression: @math{88 + 637 + 71 + 129 + 12} 
-
-<!--
-Allow students to work, encouraging them to try not only different groupings but different _structures_ as well - all of which will produce the same outcome! If possible, invite students to draw their Circles of Evaluation on the board so that the class can see all possible configurations. After students have drawn their Circles of Evaluation and had some time to consider the reflection questions, follow up with a class discussion.
--->
-
----
-{layout="Launch"}
-# The Associative Property
-
-- Which Circle of Evaluation seemed like it would be the most difficult to solve in your head? Why?
-- Which Circle of Evaluation seemed like it would be the easiest to solve in your head? Why?
-- Did you think that any Circles of Evaluation were _equally_ easy or difficult to evaluate? What was going on in those Circles of Evaluation?
-
-<!--
-Students who applied the Commutative Property - merely changing the order of two numbers in the same group - would encounter Circles of Evaluation that were equally easy / challenging to evaluate.
--->
-
-
----
-{layout="InvestigateC"}
-# The Associative Property
-
-- Turn to @printable-exercise{pages/discover-assoc.adoc}. Look at the first problem.
-- What do you Notice about the three Circles of Evaluation? How about the two expressions that accompany them? What do you Wonder?
-
-@image{images/coes.png}
-
-
-<!--
-As students complete the first page, instruct them to move on to "Discovery the Associative Property (2)" .
--->
-
----
-{layout="Investigate"}
-# The Associative Property
-
-The Associative Property holds for addition and multiplication, but not division or subtraction.
-
-
----
-{layout="Investigate"}
-# The Associative Property
-
-- On @printable-exercise{pages/assoc-prop-table.adoc}, apply the Associative Property to create @vocab{equivalent} Circles of Evaluation. Pay attention to the operators!
-- Now try @printable-exercise{pages/true-or-false.adoc}. Determine if each equation is true, and be sure to explain your response.
-
-<!--
-Follow up to confirm understanding of the activities, paying specific attention to expressions with multiple operations. In these instances, students _can_ apply the Associative Property - but only on the parts of the expression that feature only addition or only multiplication.
--->
-
----
-{layout="Synthesize"}
-# The Associative Property
-
-
-- For which operations does the Associative Property hold?
-- Can you ever apply the Associative Property on an expression that includes division or subtraction?
-- When applying the Associative Property, did you ever change the order of the numbers?
-- When applying the Associative Property, did you ever change the architecture of the circles? When was that necessary? Why?
-
-<!--
-- For which operations does the Associative Property hold?
-** _The Associative Property holds for multiplication and addition, but not division or subtraction._
-- Can you ever apply the Associative Property on an expression that includes division or subtraction?
-** _Yes. If the expression *also* includes addition or multiplication, there might be an opportunity to change the groupings without changing the value of the expression._
-- When applying the Associative Property, did you ever change the order of the numbers?
-** _Yes, students will change the numbers' order throughout the lesson._
-- When applying the Associative Property, did you ever change the architecture of the circles? (For instance, did you ever change “three nested circles” to “two-circles-in-a-circle”?) When was that necessary? Why?
-** _Yes, sometimes to change the groupings, we also changed the structure of the expression._
--->
-
+We’ve learned that the Commutative and Associative Properties apply to addition... but not subtraction. What if there was a way to rewrite subtraction as addition? Then we could apply the Commutative and Associative Properties to subtraction expressions, too! Let’s explore this idea.
 
 
 ---
 {layout="Launch"}
-# The Associative Property & Mental Math
+# The Additive Inverse Property
 
-- Think of an addition or multiplication problem that _appears_ to be very challenging, but is _much_ easier to solve after applying the Associative Property. Write it down on a piece of paper. Try to be creative!
-- Trade papers with a partner. How do your problems compare?
-- Turn your paper in to your teacher.
+Let's play a game. 
+
+I'm going to write a number in the left-hand column. You are going to tell me what value I should _add_ to that number, to get a sum of zero. I'll record your response in the right-hand column.
+
+@image{images/table.png}
+
+---
+{layout="Launch"}
+# The Additive Inverse Property
+
+- The first number is @math{5}. What do I need to add to @math{5} to get @math{0}?
+- The next number is @math{20}. What do I need to add to @math{20} to get @math{0}?
+- How about @math{\frac{1}{2}}?
+- How about @math{-45}?
+- Can someone offer me another pair of numbers that add up to @math{0}?
+
 
 <!--
-We encourage you to review students' submissions, and write a few on the board to discuss as a class. We want to sharpen students' eyes and help them develop the ability to spot instances when they might apply the Associative Property in any context.
+- The first number is @math{5}. What do I need to add to @math{5} to get @math{0}?
+** _@math{-5}. If this is students' first exposure to negative numbers, consider modeling a few examples._
+- The next number is @math{20}. What do I need to add to @math{20} to get @math{0}?
+- How about @math{\frac{1}{2}}?
+- How about @math{-45}?
+- Can someone offer me another pair of numbers that add up to @math{0}?
+** _Allow a variety of students to share. Record responses on the table._
 -->
+
+---
+{layout="Launch"}
+# The Additive Inverse Property
+
+These number pairs all represent *opposites*.
+
+The @vocab{Additive Inverse Property} tells us that adding a number and its opposite always produces zero.
+
+---
+{layout="Investigate"}
+# The Additive Inverse Property
+
+
+- Turn to @printable-exercise{pages/additive-inverse.adoc}.
+- In the first section, determine the additive inverses and write them in the spaces provided.
+- Then, fill in the missing number to complete the equations. Some equations use mathematical notation and some use Circles of Evaluation.
+
+---
+{layout="Synthesize"}
+# The Additive Inverse Property
+
+- Can you think of a way to visually represent that adding a number and its opposite always produces zero?
+- How would you explain the concept of the Additive Inverse Property to another student?
+- Looking forward: Can you predict what effect the Multiplicative Inverse Property might have?
+
+---
+{layout="Launch"}
+# Addition and Subtraction: Inverse Operations
+
+- Complete @printable-exercise{pages/discover-inverse.adoc}.
+- When you're done, complete @printable-exercise{pages/discover-inverse-cont.adoc}.
+- What did you observe about the additive inverse?
 
 
 ---
-{layout="InvestigateC"}
-# The Associative Property & Mental Math
+{layout="Launch"}
+# Addition and Subtraction: Inverse Operations
 
-Complete @printable-exercise{pages/which-circles-make-the-math-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression. The first problem is below.
+- Subtraction is equivalent to adding the @vocab{opposite}.
+- We can rewrite any subtraction expression as addition, and any addition expression as subtraction!
 
-@image{images/assoc-mental-math.png}
+*We now can apply the Commutative and Associative Properties to a much broader set of expressions!*
 
 
 ---
 {layout="Investigate"}
-# The Associative Property & Mental Math
+# Addition and Subtraction: Inverse Operations
 
-- Now, try @printable-exercise{pages/props-make-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
-- Try @printable-exercise{pages/props-make-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
+Complete @printable-exercise{pages/wodb.adoc}.
+
+What strategies did you use to determine equivalence?
+
+<!--
+To complete this worksheet, students do not need to be fluent at integer addition and subtraction. We just want students thinking about when expressions are @vocab{equivalent} based on what they have learned about the additive inverse.
+-->
 
 
 ---
 {layout="Synthesize"}
-# The Associative Property & Mental Math
+# Addition and Subtraction: Inverse Operations
 
 
-- How can the Associative Property help you do mental math more efficiently?
-- How are the Commutative and Associative Properties similar? How are they different?
+- Claire and Soraya want to write an equivalent expression for @math{22 - 30}. Claire studies the expression and announces that, because it involves subtraction, the Commutative Property cannot be applied. Is she correct?
+- Soraya grabs a pencil and writes the following: @math{22 + -30}. She says, "There! I fixed it. Now we can apply the Commutative Property." Explain what Soraya did. Is she correct?
+- Use the Additive Inverse Property to simplify this expression using mental computation: @math{3 + 96.8 - 42.74 - 96.8 + 7 - 3 + 42.74}
+
+
+---
+{layout="Launch"}
+# The "Left-to-Right" Rule
+
+- Consider this expression: @math{10 + 9 - 4}
+- What do we get when we simplify it to a single value?
+** _15_
+- How did you arrive at your answer?
+
+---
+{layout="Launch"}
+# The "Left-to-Right" Rule
+
+Most students simplify the expression like this:
+
+@show{(coe '(- (+ 10 9) 4))}
+
+
+---
+{layout="Launch"}
+# The "Left-to-Right" Rule
+
+*But is it essential to solve from left to right?*
+
+What happens if we subtract before adding?
+
+@show{(coe '(+ 10 (- 9 4)))}
+
+---
+{layout="Launch"}
+# The "Left-to-Right" Rule
+
+We’ve learned that the Associative Property applies for expressions with only addition... not addition _and_ subtraction. Many of us have also learned that when an expression includes addition and subtraction, we must work from left to right. *So… what’s going on!?* It appears that we get the same result regardless of how we simplify this expression.
+
+---
+{layout="Investigate"}
+# The "Left-to-Right" Rule
+
+Does subtracting _first_ work every time? Can we rearrange the groupings of any expression with both addition and subtraction? Let's investigate.
+
+- Turn to @printable-exercise{subtract-first-or-left-to-right.adoc}.
+- There, you will test out the this algorithm on several different expressions to see if subtracting and then adding produces the correct result every time.
+- What do you Notice? What do you Wonder?
+
+---
+{layout="Investigate"}
+# The "Left-to-Right" Rule
+
+- Why are we able to change the groupings for an expression like @math{10 + 9 - 4} ... but _not_ for an expression like @math{10 - 9 - 4}?
+- Describe why the this "subtraction first" algorithm works. (Hint: Think about the @vocab{Additive Inverse Property}!)
+
+<!--
+Encourage students to think deeply about why this algorithm works – and if you’d like, invite them to consider and discuss why students all across the country are typically taught just one algorithm when, typically, there are an abundance to choose from!
+-->
+
+---
+{layout="Investigate"}
+# The "Left-to-Right" Rule
+
+Now, let's put our new knowledge to use! Project the problems below one at a time, and invite students to solve using mental math.
+
+Scan each problem on the next to identify any additive inverses, then solve using mental computation.
+
+ @math{4 + 5 + 97 - 4 + 3}
+ @math{9 + 17 + 41 - 17}
+ @math{67 - 104 + 937 - 67 + 104}
+
+<!--
+- @math{4 + 5 + 97 - 4 + 3}
+** _Solution: @math{105}_
+
+- @math{9 + 17 + 41 - 17}
+** _Solution: @math{50}_
+
+- @math{67 - 104 + 937 - 67 + 104}
+** _Solution: @math{937}_
+-->
+
+
+---
+{layout="Synthesize"}
+# The "Left-to-Right" Rule
+
+
+- How did it feel to scan the problem, find any additive inverses, and then solve mentally?
+- Did you like this new approach, or do you prefer solving left to right?
+- How would you explain to another student why they do _not_ always need to solve from left to right when evaluating expressions with addition and subtraction.
+- What are some advantages of solving left to right? What are some disadvantages?

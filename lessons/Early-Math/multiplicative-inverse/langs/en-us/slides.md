@@ -1,124 +1,219 @@
 ---
 {layout="Math Title Slide"}
-# The Associative Property
+# The Multiplicative Inverse Property
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
 ---
 {layout="Launch"}
-# The Associative Property
+# The Multiplicative Inverse Property
  
-
-- The @vocab{Associative Property} of Addition tells us that no matter how we group numbers being added, the end result will always be the same.
-- Turn to @printable-exercise{pages/assoc-prop-launch.adoc}, where you will explore the Associative Property of Addition. In particular, you will explore different ways to re-group and re-order this expression: @math{88 + 637 + 71 + 129 + 12} 
-
-<!--
-Allow students to work, encouraging them to try not only different groupings but different _structures_ as well - all of which will produce the same outcome! If possible, invite students to draw their Circles of Evaluation on the board so that the class can see all possible configurations. After students have drawn their Circles of Evaluation and had some time to consider the reflection questions, follow up with a class discussion.
--->
-
----
-{layout="Launch"}
-# The Associative Property
-
-- Which Circle of Evaluation seemed like it would be the most difficult to solve in your head? Why?
-- Which Circle of Evaluation seemed like it would be the easiest to solve in your head? Why?
-- Did you think that any Circles of Evaluation were _equally_ easy or difficult to evaluate? What was going on in those Circles of Evaluation?
-
-<!--
-Students who applied the Commutative Property - merely changing the order of two numbers in the same group - would encounter Circles of Evaluation that were equally easy / challenging to evaluate.
--->
-
-
----
-{layout="InvestigateC"}
-# The Associative Property
-
-- Turn to @printable-exercise{pages/discover-assoc.adoc}. Look at the first problem.
-- What do you Notice about the three Circles of Evaluation? How about the two expressions that accompany them? What do you Wonder?
-
-@image{images/coes.png}
-
-
-<!--
-As students complete the first page, instruct them to move on to "Discovery the Associative Property (2)" .
--->
-
----
-{layout="Investigate"}
-# The Associative Property
-
-The Associative Property holds for addition and multiplication, but not division or subtraction.
-
-
----
-{layout="Investigate"}
-# The Associative Property
-
-- On @printable-exercise{pages/assoc-prop-table.adoc}, apply the Associative Property to create @vocab{equivalent} Circles of Evaluation. Pay attention to the operators!
-- Now try @printable-exercise{pages/true-or-false.adoc}. Determine if each equation is true, and be sure to explain your response.
-
-<!--
-Follow up to confirm understanding of the activities, paying specific attention to expressions with multiple operations. In these instances, students _can_ apply the Associative Property - but only on the parts of the expression that feature only addition or only multiplication.
--->
-
----
-{layout="Synthesize"}
-# The Associative Property
-
-
-- For which operations does the Associative Property hold?
-- Can you ever apply the Associative Property on an expression that includes division or subtraction?
-- When applying the Associative Property, did you ever change the order of the numbers?
-- When applying the Associative Property, did you ever change the architecture of the circles? When was that necessary? Why?
-
-<!--
-- For which operations does the Associative Property hold?
-** _The Associative Property holds for multiplication and addition, but not division or subtraction._
-- Can you ever apply the Associative Property on an expression that includes division or subtraction?
-** _Yes. If the expression *also* includes addition or multiplication, there might be an opportunity to change the groupings without changing the value of the expression._
-- When applying the Associative Property, did you ever change the order of the numbers?
-** _Yes, students will change the numbers' order throughout the lesson._
-- When applying the Associative Property, did you ever change the architecture of the circles? (For instance, did you ever change “three nested circles” to “two-circles-in-a-circle”?) When was that necessary? Why?
-** _Yes, sometimes to change the groupings, we also changed the structure of the expression._
--->
+We know that the Commutative and Associative Properties apply to multiplication...but not division. But what if there was a way to _rewrite_ division as multiplication? Then we could apply the Commutative and Associative Properties to division expressions, too! Let’s explore this idea.
 
 
 
 ---
 {layout="Launch"}
-# The Associative Property & Mental Math
+# The Multiplicative Inverse Property
 
-- Think of an addition or multiplication problem that _appears_ to be very challenging, but is _much_ easier to solve after applying the Associative Property. Write it down on a piece of paper. Try to be creative!
-- Trade papers with a partner. How do your problems compare?
-- Turn your paper in to your teacher.
+Let's play a game. 
+
+I'm going to write a number in the left-hand column. You are going to tell me what value I should _add_ to that number, to get a sum of zero. I'll record your response in the right-hand column.
+
+@image{images/table.png}
+
+---
+{layout="Launch"}
+# The Multiplicative Inverse Property
+
+- The first number is @math{\frac{1}{2}}. What do I need to multiply @math{\frac{1}{2}} to get 1?
+- The next number is @math{\frac{1}{3}}. What do I need to multiply @math{\frac{1}{3}} to get 1?
+- How about @math{\frac{1}{100}}?
+- How about @math{10}?
+- Can someone offer me another pair of numbers - a fraction and a whole number - that multiply together to produce 1?
 
 <!--
-We encourage you to review students' submissions, and write a few on the board to discuss as a class. We want to sharpen students' eyes and help them develop the ability to spot instances when they might apply the Associative Property in any context.
+** _Allow a variety of students to share. Record responses on the table._
 -->
+
+---
+{layout="Launch"}
+# The Multiplicative Inverse Property
+
+These number pairs all represent @vocab{reciprocals}. The reciprocal of a real number @math{n} is @math{\frac{1}{n}}. These number pairs are also illustrative of the @vocab{Multiplicative Inverse Property}: when we multiply them together, we always end up with a product of @math{1}.
 
 
 ---
-{layout="InvestigateC"}
-# The Associative Property & Mental Math
+{layout="Launch"}
+# The Multiplicative Inverse Property
 
-Complete @printable-exercise{pages/which-circles-make-the-math-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression. The first problem is below.
+The @vocab{Multiplicative Inverse Property} tells us that multiplying a number by its @vocab{reciprocal} always produces one.
 
-@image{images/assoc-mental-math.png}
+Every number, except zero, has a multiplicative inverse.
 
 
 ---
 {layout="Investigate"}
-# The Associative Property & Mental Math
+# The Multiplicative Inverse Property
 
-- Now, try @printable-exercise{pages/props-make-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
-- Try @printable-exercise{pages/props-make-comp-easier-challenge.adoc} to apply the Associative Property to expressions with fractions and decimals.
+- Turn to @printable-exercise{multiplicative-inverse.adoc}.
+- In the first section, practice finding reciprocals and write them in the space provided.
+- Then, fill in the missing number to complete the equations. Some equations use mathematical notation and some use Circles of Evaluation.
+
+---
+{layout="Synthesize"}
+# The Multiplicative Inverse Property
+
+- Can you think of a way to visually represent that a number multiplied by its reciprocal produces one?
+- How would you explain the Multiplicative Inverse Property to another student?
+
+
+---
+{layout="Launch"}
+# Multiplication and Division: Inverse Operations{style="font-size:24pt"}
+
+Now that we understand what a reciprocal is, we are ready to think about how we can put it to use... perhaps it can make some computations simpler?
+
+- Complete @printable-exercise{discover-inverse.adoc}.
+- When you're finished, complete @printable-exercise{discover-inverse-cont.adoc}.
+- What did you observe about the multiplicative inverse and its value when doing mental computation?
+
+---
+{layout="Launch"}
+# Multiplication and Division: Inverse Operations{style="font-size:24pt"}
+
+Two main ideas emerged during the previous exploration:
+
+- Dividing by @math{x} produces the same result as multiplying by its reciprocal, @math{\frac{1}{x}}.
+- Dividing by @math{\frac{1}{x}} produces the same result as multiplying by its reciprocal, @math{x}.
+
+<!--
+In other words, when students see multiplication or division by a unit fraction (a fraction with a numerator of @math{1}), there is likely a path forward using mental computation only.
+-->
+
+
+---
+{layout="Investigate"}
+# Multiplication and Division: Inverse Operations{style="font-size:24pt"}
+
+- Complete @printable-exercise{wodb.adoc}.
+- Which problems were the most challenging? Which ones felt simple?
+- What strategies did you use to determine equivalence?
+
+---
+{layout="Synthesize"}
+# Multiplication and Division: Inverse Operations{style="font-size:24pt"}
+
+- Claire and Soraya want to write an equivalent expression for @math{45 \div 9}. Claire studies the expression and announces that, because it involves division, the Commutative Property cannot be applied. Is she correct?
+- Soraya grabs a pencil and writes the following: @math{45 \times \frac{1}{9}}. She says, "There! I fixed it. Now we can apply the Commutative Property." Explain what Soraya did. Is she correct?
+
+<!--
+** _Sample response: Instead of dividing by 9, sorry is multiplying by the reciprocal. Yes, Soraya has written an equivalent expression and can apply the Commutative Property - but the computation will not be any simpler._
+-->
+
+---
+{layout="Launch"}
+# Is the Order of Operations Universal?
+
+
+- Consider this expression: @math{100 \times 20 \div 5}
+- Rewrite the expression - either by adding parentheses or drawing a Circle of Evaluation - to show your process for solving.
+- What do we get when we simplify the expression to a single value?
+- How did you arrive at your answer?
+
+<!--
+Invite students to share their responses. If your students have spent any time at all studying the order of operations, they will notice both multiplication and division in the expression. From there, they will likely conclude that they must work from left to right to arrive at a correct result. 
+-->
+
+---
+{layout="Launch"}
+# Is the Order of Operations Universal?
+
+The solving strategy that most students used can be represented like this:
+
+@show{(coe '(/ (* 100 20) 5))}
+
+
+
+---
+{layout="Launch"}
+# Is the Order of Operations Universal?
+
+
+But does this strategy work? Do we get the same result?
+
+@show{(coe '(* 100 (/ 20 5)))}
+
+<!-- 
+yes, both circles produce the same result!
+-->
+
+
+---
+{layout="Investigate"}
+# Is the Order of Operations Universal?
+
+In Kenya, students are actually taught that, when confronted with an expression like @math{100 \times 20 \div 5}, they must divide first... and then multiply! But does it actually work, _every_ time? Let’s investigate.
+
+
+---
+{layout="InvestigateR"}
+# Is the Order of Operations Universal?
+
+- Turn to @printable-exercise{divide-first-or-left-to-right.adoc}.
+- There, you will test out the "Kenya algorithm" on several different expressions to see if dividing and then multiplying produces the correct result every time.
+- What do you Notice? What do you Wonder?
+
+@image{images/kenya-flag.png}
+
+---
+{layout="Investigate"}
+# Is the Order of Operations Universal?
+
+- Why are we able to change the groupings for an expression like @math{100 \times 20 \div 5} ... but _not_ for an expression like @math{100 \div 20 \div 5}?
+- Describe why the "Kenya algorithm" works. (Hint: Think about the @vocab{Multiplicative Inverse Property}!)
+
+<!--
+** _We can rewrite any division expression as multiplication by the reciprocal. Once we transform a division expression into a multiplication expression, we can apply the Commutative and Associative Properties freely!_
+
+Encourage students to think deeply about why this algorithm works – and if you’d like, invite them to consider and discuss why students all across the country are typically taught just one algorithm when, typically, there are an abundance to choose from!
+
+-->
+
+
+---
+{layout="Investigate"}
+# Is the Order of Operations Universal?
+
+
+Scan each expression to determine the simplest solving strategy, then compute mentally.
+
+@math{114 \times 17 \div 17}
+
+@math{15 \times 3 \div 15}
+
+@math{2 \times 16 \times \frac{1}{27} \times 27}
+
 
 
 ---
 {layout="Synthesize"}
-# The Associative Property & Mental Math
+# Is the Order of Operations Universal?
+
+- How did it feel to scan the problem, choose your strategy, and then solve mentally?
+- Did you like this new approach - or do you prefer solving from left to right?
+- Knowledge of inverse operations creates _more_ opportunities to apply the @vocab{Commutative Property} and the @vocab{Associative Property}? Explain why this is the case.
 
 
-- How can the Associative Property help you do mental math more efficiently?
-- How are the Commutative and Associative Properties similar? How are they different?
+---
+{layout="Synthesize"}
+# Is the Order of Operations Universal?
+
+- Do you think the Order of Operations is universal? Why or why not?
+- Can you think of any other examples - they can be math-related or not! - of when you thought there was just one way to do something... and then learned that you were wrong?
+
+<!--
+- Do you think the Order of Operations is universal? Why or why not?
+_Yes, there is a basic agreed upon order across countries, but numerous differences exist within tiers and how they are described._
+-->

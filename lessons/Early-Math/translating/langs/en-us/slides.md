@@ -55,7 +55,7 @@ This second set of cards includes Circles of Evaluation.
 # Circles of Evaluation
 
 - With your partner, match each Arithmetic Expression card with the corresponding Circle of Evaluation card. Do not sort the Verbal Expression cards yet.
-- There are more Circles of Evaluation than expressions. Create a separate pile for any cards that do not have a match.
+- Create a separate pile for any cards that do not have a match.
 - Lay the cards out on the table in front of you so you can clearly see both the Circle of Evaluation and the expression.
 - Discuss any questions that arose.
 
@@ -113,6 +113,10 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 @show{(coe '(+ (* 3 5) 3))}
 
+<!--
+Teacher Note: Your students do not need to know that multiplication precedes addition in the subsequent activities.
+-->
+
 ---
 {layout="Investigate"}
 # Circles of Evaluation
@@ -123,7 +127,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 
 - When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, the verbal expression).
 
-- Optional: Try @printable-exercise{pages/matching-math-to-words.adoc},
+- Optional: Try @opt-printable-exercise{pages/matching-math-to-words.adoc},
 
 <!-- Note: On Translating from Circles to Words, there are multiple correct translations. Be sure to spend a moment going over students' solutions. Some translations into words are clearer than others; the subsequent section of this lesson will explore that notion in greater depth.
 -->
@@ -142,8 +146,6 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 ---
 {layout="Launch"}
 # The Ambiguity of Words
-
-Read this sentence: 
 
 *"Bruno told Gus that Mr. Schneider suspected that he had cheated on the science test."* {style="font-size:24pt"}
 
@@ -165,9 +167,9 @@ Math is precise, but that precision is difficult to preserve when we switch to w
 {layout="InvestigateC"}
 # The Ambiguity of Words
 
-Take a look at this expression: _"the sum of three and two multiplied by eight"_ {style="font-size:16pt"}
+_"the sum of three and two multiplied by eight"_ {style="font-size:16pt"}
 
-Are we multiplying first and then adding (as represented by the Circle on the left), or adding first and then multiplying (as represented by the Circle on the right)? {style="font-size:16pt"}
+In this expression, are we multiplying first and then adding (as represented by the Circle on the left), or adding first and then multiplying (as represented by the Circle on the right)? {style="font-size:16pt"}
 
 @image{images/coes.png}
 
@@ -186,7 +188,7 @@ Are we multiplying first and then adding (as represented by the Circle on the le
 
 - Did you notice anything interesting about the last two expressions, compared to the others on the page?
 
-- Now, try @printable-exercise{rewriting-ambiguous-expressions.adoc}.
+- Now, try @printable-exercise{pages/rewriting-ambiguous-expressions.adoc}.
 
 - Did the two versions of the expressions produce the same results?
 
