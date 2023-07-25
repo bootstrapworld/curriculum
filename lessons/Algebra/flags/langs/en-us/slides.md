@@ -49,7 +49,7 @@ Professional programmers use comments __all the time__. They are a way for progr
 1. Type `japan-flag` into the Interactions Area. What do you get back?
 1. Type `japan` into the Interactions Area and compare the image to `japan-flag`.
 1. Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
-1. What is the @vocab{Contract} for `put-image`? (Write it in your Contracts page!)
+1. What is the @vocab{Contract} for `put-image`? 
 
 ---
 {layout="Investigate-DN"}

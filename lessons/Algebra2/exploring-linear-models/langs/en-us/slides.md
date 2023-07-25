@@ -270,7 +270,7 @@ Before students complete the remainder of the workbook page, confirm that they w
 {layout="Investigate"}
 # Fitting Linear Models
 
-Pyret includes a function called `fit-model`. Find this contract in your contracts pages! Like `scatter-plot`, it consumes columns for our labels, our @math{x}s and ours @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
+Pyret includes a function called `fit-model`. Find this contract in your @pathway-link{resources/pages/contracts.pdf, Contracts pages}! Like `scatter-plot`, it consumes columns for our labels, our @math{x}s and ours @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 - Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.
 - What does @math{R^2} mean?
