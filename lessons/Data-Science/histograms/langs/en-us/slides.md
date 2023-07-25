@@ -190,5 +190,5 @@ Choosing the right bin size for a column has a lot to do with how data is distri
 
 
 <!--
-But how do we talk about that shape, and what does the shape actually tell us? @lesson-link{histograms2} addresses all of these questions...
+But how do we talk about that shape, and what does the shape actually tell us? @lesson-link{visualizing-the-shape-of-data} addresses all of these questions...
 -->

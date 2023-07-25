@@ -170,7 +170,7 @@ The goal here is for students to become familiar with __using contracts to write
 
 * @lesson-link{bar-and-pie-charts}
 * @lesson-link{histograms}
-* @lesson-link{histograms2}
+* @lesson-link{visualizing-the-shape-of-data}
 * @lesson-link{box-plots}
 
 We also have dedicated lessons for other displays not mentioned here, such as @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
