@@ -64,7 +64,7 @@ _Answers vary: It consumes a @vocab{String}, which is a URL (an image location o
 
 `image-url :: String  ->  Image`
 
-- This function takes in a web address for an image, and produces the image! (Is it in your contracts page?)
+- This function takes in a web address for an image, and produces the image! 
 - You can use `rotate`, `scale`, etc. with this image!
 - Save a copy to your account
 
