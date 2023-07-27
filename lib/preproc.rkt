@@ -1462,6 +1462,17 @@
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
+                           [(string=? directive "pathway-only")
+                            (let ([text (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".pathway-only")
+                                  (call-with-input-string text
+                                    (lambda (i)
+                                      (call-with-output-string
+                                        (lambda (o)
+                                          (expand-directives i o)))))
+                                  (create-end-tag "span")) o))]
                            [(string=? directive "pathway-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]

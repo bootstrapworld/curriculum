@@ -177,28 +177,6 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 
 //////////////////////////
-Pyret-specific content
-//////////////////////////
-@ifproglang{pyret}{
-To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}.
-
-[.lesson-instruction]
-- Type this into Pyret and see what you get!
-- Draw the Circle of Evaluation showing how to make a bar chart showing the species in the shelter, __but only for old animals__. Then convert it to code and type it into Pyret.
-- For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
-
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Teaching Tip}
-
-Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
-|===
-
-}
-
-//////////////////////////
 CODAP-specific content
 //////////////////////////
 @ifproglang{codap}{
@@ -225,6 +203,28 @@ Sometimes, the hardest part of solving a problem is knowing what you want to do,
 Armed with these tools, we can do some pretty complex analysis! We can even think of data displays as another kind of table operation. What will this Circle of Evaluation produce?
 
 @show{(coe '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}
+
+//////////////////////////
+Pyret-specific content
+//////////////////////////
+@ifproglang{pyret}{
+To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}.
+
+[.lesson-instruction]
+- Type this into Pyret and see what you get!
+- Draw the Circle of Evaluation showing how to make a bar chart showing the species in the shelter, __but only for old animals__. Then convert it to code and type it into Pyret.
+- For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Teaching Tip}
+
+Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
+|===
+
+}
 
 [.lesson-instruction]
 Complete @printable-exercise{pages/planning-table-operations.adoc}.
