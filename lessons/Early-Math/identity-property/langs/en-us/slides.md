@@ -47,7 +47,9 @@ Multiplying or dividing an expression by 1 does not change its value; similarly,
 
 How does the Circle of Evaluation below illustrate the Identity Property?
 
-@image{images/coe.png,250}
+@show{(coe '(+ 27 (- 8 8)))}
+
+
 
 ---
 {layout="Investigate"}
