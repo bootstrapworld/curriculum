@@ -79,7 +79,7 @@ Now, turn to @printable-exercise{pages/exponents-intro.adoc}, where you will pra
 - When you're done, consider the Circle of Evaluation (right) that Jayla drew to represent the expanded form of @math{2^4}.
 - Jayla's Circle is different from the solution provided for the first problem on the worksheet. Is her response correct? Why or why not?
 
-@image{images/two-to-the-fourth.png}
+@show{(coe '(* (* 2 2) (* 2 2)))}
 
 <!--
 ** _Yes, students may group the bases in a variety of ways, as per the @vocab{Associative Property} of Multiplication!_

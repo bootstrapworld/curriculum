@@ -72,8 +72,8 @@ The function used to represent "the opposite" is called `negate`.
 
 What do you think the Circle to the right evaluates to?
 
-@image{images/negate-2.png}
 
+@show{(coe '(negate 2))}
 
 ---
 {layout="InvestigateR"}
@@ -81,8 +81,8 @@ What do you think the Circle to the right evaluates to?
 
 What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle, as you see on the right?
 
-@image{images/negate-negate-2.png
-}
+@show{(coe '(negate (negate 2)))}
+
 <!--
 _The opposite of the opposite of a number is the number itself._
 -->
