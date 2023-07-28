@@ -68,7 +68,7 @@ For now, while students are still looking at expressions with numbers, they can 
 {layout="InvestigateC"}
 # Seeing Equivalence
 
-Complete @printable-exercise{true-or-false.adoc} using your knowledge of the Associative Property and the Commutative Property. Be sure to explain your responses. The first problem is below.
+Complete @printable-exercise{pages/true-or-false.adoc} using your knowledge of the Associative Property and the Commutative Property. Be sure to explain your responses. The first problem is below.
 
 @image{images/true-or-false1.png}
 
@@ -76,7 +76,7 @@ Complete @printable-exercise{true-or-false.adoc} using your knowledge of the Ass
 {layout="Investigate"}
 # Seeing Equivalence
 
-Examine the Circles to decide @printable-exercise{which-one-doesnt-belong.adoc} Be sure to explain your thinking.  The first problem is below.
+Examine the Circles to decide @printable-exercise{pages/which-one-doesnt-belong.adoc} Be sure to explain your thinking.  The first problem is below.
 
 @image{images/wodb1.png}
 
@@ -160,7 +160,7 @@ We can't use computation to prove that @math{12 + h} and @math{h + 12} are equiv
 {layout="InvestigateC"}
 # Equivalence with Variables
 
-Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge of the Associative Property and the Commutative Property. The first problem is below.
+Complete @printable-exercise{pages/true-or-false-variables.adoc} using your knowledge of the Associative Property and the Commutative Property. The first problem is below.
 
 @image{images/true-or-false2.png}
 
@@ -174,7 +174,7 @@ Students are also welcome to choose values to represent the variables if they in
 {layout="InvestigateC"}
 # Equivalence with Variables
 
-Examine each of the Circles of Evaluation to decide @printable-exercise{which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking. The first problem is below.
+Examine each of the Circles of Evaluation to decide @printable-exercise{pages/which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking. The first problem is below.
 
 @image{images/wodb2.png}
 
