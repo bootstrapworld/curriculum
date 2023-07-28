@@ -53,7 +53,7 @@ Form tells us whether a relationship is linear, non-linear or undefined.
 {layout="InvestigateR"}
 # Correlations have _Form_
 
-Some patterns are **non-linear**, and may look like a curve or an arc. That means there _is_ a relationship, but we can't use linear regression to measure it.
+Some patterns are **non-linear**, and may look like a curve or an arc. That means there _is_ a relationship, but it's not purely going up or down.
 
 @image{images/2NL.gif}
 
