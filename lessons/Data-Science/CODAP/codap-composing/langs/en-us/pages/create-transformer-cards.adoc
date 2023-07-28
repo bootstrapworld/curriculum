@@ -1,4 +1,4 @@
-= Create Transformer Cards (1)
+= Create Transformer Cards
 
 The table `t` below represents three animals from the shelter:
 
@@ -31,6 +31,8 @@ Create a Transformer card that responds to the given prompt on the left. When yo
 
 | `filter-if-young`
 
+Checks the row to see whether age is less than 5.
+
 | @n
 | Create a Transformer that produces a Table showing all fixed animals.
 
@@ -40,6 +42,8 @@ Create a Transformer card that responds to the given prompt on the left. When yo
 
 *Expression:* @fitb{}{ @ifsoln{`fixed=true`} }
 | @ifsoln{`filter-if-fixed`}
+
+@ifsoln{Checks the row to see if the animal is fixed.}
 
 | @n
 | Create a Transformer that produces a Table with a new column ("age next year") that adds 1 year to each age.
@@ -52,6 +56,9 @@ Create a Transformer card that responds to the given prompt on the left. When yo
 *Expression:* @fitb{}{ @ifsoln{`age+1`} }
 
 | @ifsoln{`build-older`}
+
+@ifsoln{For each row, computes the age plus 1.}
+
 
 | @n
 | Create a Transformer that produces a Table that transforms pounds to kilos (divide by 2.205) but does *not* add a new column.
@@ -68,6 +75,8 @@ Create a Transformer card that responds to the given prompt on the left. When yo
 
 | @ifsoln{`transform-pounds`}
 
+@ifsoln{For each row, computes pounds divided by 2.205.}
+
 
 | @n
 | Create a Transformer that produces a Table that doubles pounds but does *not* add a new column.
@@ -83,6 +92,7 @@ Create a Transformer card that responds to the given prompt on the left. When yo
 *Expression:* @fitb{}{ @ifsoln{`pounds`} }
 | @ifsoln{`transform-double`}
 
+@ifsoln{For each row, computes pounds multiplied by 2.}
 
 
 |===
