@@ -114,7 +114,7 @@ Matching activities to support student thinking:
 - Once you're done, return to the @starter-file{flags} and define those parts.
 - Then, compose those parts using `put-image`, and make your flag!
 
-OPTIONAL CHALLENGE: Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
+Optional Challenge: Have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
 
 
 <!-- 
