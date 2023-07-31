@@ -44,7 +44,7 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 - Today we'll be looking at data from each state in the US, and searching for possible relationships within the data!
 - Open the @starter-file{alg2-states}
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete questions 1 and 2 in @printable-exercise{exploring-states.adoc}.
+- Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}
 
 @teacher{Have students share back what they Notice and Wonder about the dataset.}
 
@@ -67,7 +67,7 @@ The variables `alabama` and `alaska` are _rows_ from the table.
 {layout="Investigate"}
 # Looking for Patterns
 
-- Working in pairs or small groups, complete questions 3 and 4 (making displays and suggesting possible relationships) in @printable-exercise{exploring-states.adoc}.
+- Working in pairs or small groups, complete questions 1 through 4 (making displays and suggesting possible relationships) in @printable-exercise{looking-for-patterns.adoc}.
 - **Do not go on to question 5!** We'll be returning to that later in the lesson.
 
 @teacher{Note: During this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
