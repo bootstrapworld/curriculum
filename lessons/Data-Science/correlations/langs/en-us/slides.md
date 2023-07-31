@@ -265,7 +265,7 @@ If time allows, you may want to emphasize the point that correlation does not im
 Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`? What does this _mean_?
 
 - People often confuse correlation with causation. What are some examples of this?
-- Why is a problem for society, that people confuse the two?
+- Why is it a problem for society, that people confuse the two?
 
 <!--
 _The correlation with `"pounds"` is higher, meaning that an animal's weight is a better predictor of the number of weeks an animal will live at the shelter before being adopted than its age._
