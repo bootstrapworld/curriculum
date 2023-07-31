@@ -58,6 +58,10 @@ But what we really want is a display that will help us search for *a relationshi
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
+* What is the contract for `scatter-plot`?
+** @show{(contract "scatter-plot" '("Table" "String" "String" "String") "Image")}}
+
+
 Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `age` for x and `weeks` for y.
@@ -78,7 +82,7 @@ Statisticians commonly use the words @vocab{explanatory variable} and @vocab{res
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete questions 1 and 2 in @printable-exercise{exploring-states.adoc}.
 
-Have students share back what they Notice and Wonder about the dataset.
+@teacher{Have students share back what they Notice and Wonder about the dataset.}
 
 === Investigate
 
@@ -89,7 +93,7 @@ alabama = row-n(states-table, 0)
 alaska  = row-n(states-table, 1)
 ```
 
-In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! On lines 13 and 14 of this file, the variables `alabama` and `alaska` are _rows_ from the table.
+@teacher{In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! On lines 13 and 14 of this file, the variables `alabama` and `alaska` are _rows_ from the table.}
 
 * What columns in this dataset have to do with wealth?
 ** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
@@ -97,17 +101,17 @@ In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use
 ** _Examples:_ `college-or-higher`, `hs-or-higher`
 
 [.lesson-instruction]
-- What is the contract for `scatter-plot`?
 - Working in pairs or small groups, complete questions 3 and 4 (making displays and suggesting possible relationships) in @printable-exercise{exploring-states.adoc}.
 - **Do not go on to question 5.** We'll be returning to that later in the lesson.
 
-Note: During this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. You may want to
+@teacher{Note: During this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
 === Synthesize
 
 - Share your scatter-plots with one another (copying and pasting scatter plot displays into a shared document, for example, and then labeling those displays). What possible relationships did you find in question 3?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
-** Teacher note: the next section of the lesson is all about identifying form, direction, and strength. Students will acquire the formal vocabulary that data scientists use to assess relationships.
+
+@teacher{Teacher note: the next section of the lesson is all about identifying form, direction, and strength. Students will acquire the formal vocabulary that data scientists use to assess relationships.}
 
 == Describing Patterns @duration{15 minutes}
 
@@ -163,17 +167,17 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 === Investigate
 
-Now that you've dug into the role the form, direction and strength play in quantifying a correlation, it's time to put those concepts to work!
+Now that you've dug into the role that form, direction and strength play in quantifying a correlation, it's time to put those concepts to work!
 
 [.lesson-instruction]
 In pairs or small groups, complete @printable-exercise{pages/identifying-form-matching.adoc}.
 
-Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.
+@teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
 
 [.lesson-instruction]
 In pairs or small groups, complete @printable-exercise{pages/identifying-form.adoc}
 
-Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective.
+@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective.}
 
 [.lesson-instruction]
 Return to @printable-exercise{exploring-states.adoc}, and complete the rest of the page.
@@ -210,7 +214,7 @@ This scatter plot appears to show a positive, linear relationship: states with h
 [.lesson-instruction]
 Suppose the United States were to add a new state. **Based on the data for the existing 50 states (plus DC!), what median household income would you predict, if exactly 50% of the new state's citizens had attended college?** What about 20%? 60%
 
-Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x- and y-axes of our display.
+@teacher{Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x- and y-axes of our display.}
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
@@ -242,7 +246,7 @@ Since we're looking for both the slope and the y-intercept for this model, it ma
 - How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
 - How can we measure "how well a model fits"?
 
-Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
+@teacher{Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
 
 Pyret includes a function called `fit-model`. @pathway-only{Find this contract in your @pathway-link{resources/pages/contracts.pdf, Contracts pages}.} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
