@@ -103,9 +103,6 @@ Form indicates whether a relationship is linear, non-linear or undefined.
 | @image{images/1b1.gif, 250} | @image{images/2NL.gif, 250} | @image{images/B.gif, 250}
 | Some patterns are **linear**, and cluster around a straight line sloping up or down. | Some patterns are **non-linear**, and may look like a curve or an arc. | And sometimes there is **no relationship** or pattern at all!
 
-<!--
-
--->
 ---
 {layout="LaunchR"}
 # Describing Patterns
@@ -126,9 +123,6 @@ For straight-line relationships, we can talk about **direction**.
 
 Note: Not every shape has a direction! For example, a curve can start out sloping upwards, but then peak and slope downwards.
 
-<!--
-
--->
 ---
 {layout="Launch"}
 # Describing Patterns
@@ -137,10 +131,6 @@ Note: Not every shape has a direction! For example, a curve can start out slopin
 
 How well does knowing the x-value allow us to predict what the y-value will be?
 
-
-<!--
-
--->
 ---
 {layout="LaunchR"}
 # Describing Patterns
@@ -152,9 +142,6 @@ For example: a knowing a student's age gives us a very good idea of what grade t
 
 A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
-<!--
-
--->
 ---
 {layout="LaunchR"}
 # Describing Patterns
@@ -166,9 +153,6 @@ For example: a student's age doesn't tell us much about their number of siblings
 
 A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Describing Patterns
@@ -194,7 +178,6 @@ In pairs or small groups, complete @printable-exercise{pages/identifying-form.ad
 Return to @printable-exercise{exploring-states.adoc}, and complete the rest of the page.
 
 ---
-{layout="SynthesizeR"}
 # Describing Patterns
 
 - What relationships did you find in the states dataset?
@@ -213,10 +196,6 @@ Return to @printable-exercise{exploring-states.adoc}, and complete the rest of t
 
 In Pyret, make a scatter plot showing the the relationship between `college-or-higher` and `median-income`.
 
-
-<!--
-
--->
 ---
 {layout="LaunchC"}
 # Fitting Linear Models
@@ -224,9 +203,6 @@ In Pyret, make a scatter plot showing the the relationship between `college-or-h
 @image{images/college-v-income.png}
 This scatter plot appears to show a positive, linear relationship: states with higher percentages of college graduates tend to have higher median household incomes.
 
-<!--
-
--->
 ---
 {layout="LaunchC"}
 # Fitting Linear Models
@@ -243,9 +219,8 @@ Suppose the United States were to add a new state. **Based on the data for the e
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
-<!--
-These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, these are _linear functions_ or "linear models". The straight-line graph of these models is sometimes called the "regression line" or the "predictor function", but you may have heard it called the @vocab{line of best fit}.
--->
+@teacher{These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, these are _linear functions_ or "linear models". The straight-line graph of these models is sometimes called the "regression line" or the "predictor function", but you may have heard it called the @vocab{line of best fit}.}
+
 ---
 {layout="Launch"}
 # Fitting Linear Models
@@ -262,16 +237,16 @@ You may already be familiar with the different forms of linear models:
 | Standard Form | Point-Slope Form | Slope-Intercept Form
 | @math{Ax+By = C}|@math{y-y_1 = m(x-x_1)}|@math{y = mx+b}
 
-
 Depending on what part of the model we care about most, we might choose to use one display over another.
 
-<!--
+@teacher{
 - Standard Form makes it easy to find the x- and y-intercepts of the line
 - Point-Slope Form makes it easy to find the equation of the line given a single point and slope
 - Slope-Intercept Form makes it really easy to read off the slope and y-intercept
 
 Since we're looking for both the slope and the y-intercept for this model, it makes sense to use Slope-Intercept form.
--->
+}
+
 ---
 {layout="Investigate"}
 # Fitting Linear Models
@@ -291,9 +266,6 @@ Pyret includes a function called `fit-model`. Like `scatter-plot`, it consumes c
 - Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.
 - Based on the @math{R^2} values and plots you created on this page, what do you think @math{R^2} means?
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Fitting Linear Models
@@ -314,11 +286,11 @@ If the model is perfect, the @math{R^2} value will be 1.00, meaning 100% of the 
 But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether! Did you see any models with a negative @math{R^2} value?
 
 - Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-2.adoc}.
+- Optional: For each of your trials, graph the resulting linear model on @opt-printable-exercise{graphing-models.adoc}.
 - What was the best model you could come up with?
 
-<!--
-Have students share their "best" models
--->
+@teacher{Have students share their "best" models}
+
 ---
 {layout="Investigate"}
 # Fitting Linear Models
@@ -340,9 +312,6 @@ In this example, **a model built from Alaska and Alabama predicts that a 1 perce
 
 But based on the @math{R^2} value of **-15.63**, this is a pretty terrible model and shouldn't be trusted!
 
-<!--
-
--->
 ---
 {layout="Investigate"}
 # Fitting Linear Models
@@ -352,10 +321,6 @@ These models are useless if we can't make sense of them!
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
 - Optional: For more practice, build linear models for **other** relationships in the data! You can use @opt-printable-exercise{model-your-own.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
 
-
-<!--
-
--->
 ---
 {layout="Synthesize"}
 # Fitting Linear Models
@@ -364,9 +329,6 @@ These models are useless if we can't make sense of them!
 - How could we use them to find out if wealthier people live longer?
 - How could we use them to find answers to _other_ questions?
 
-<!--
-
--->
 ---
 {layout="Supplemental"}
 # Additional Exercises
