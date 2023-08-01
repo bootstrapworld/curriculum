@@ -73,7 +73,7 @@ Relationships that rise and fall like this are called _quadratic relationships_.
 {layout="Launch"}
 # Fitting Quadratic Models
 
-*Linear relationships* grow by a fixed intervals. *Quadratic relationships* grow by intervals that get bigger by fixed amounts!
+*Linear relationships* grow by a fixed intervals that do not grow. Quadratic relationships grow by intervals that increase by fixed amounts!
 
 OPTIONAL
 - Complete @opt-printable-exercise{classifying-tables.adoc} to explore the growth of quadratic functions.
@@ -250,8 +250,8 @@ Complete @printable-exercise{model-speed-v-mpg.adoc}
 ** They are the coordinates of the vertex!	
 }
 ---
-== Additional Exercises
+{layout="Supplemental"}
+# Additional Exercises
 
 - @opt-printable-exercise{classifying-tables.adoc}
 - @opt-printable-exercise{classifying-plots.adoc}
----

@@ -334,5 +334,3 @@ These models are useless if we can't make sense of them!
 # Additional Exercises
 
 Practice switching between linear forms using @opt-printable-exercise{other-forms-linear-models.adoc}.
-
----
