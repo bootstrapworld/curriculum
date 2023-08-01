@@ -47,6 +47,16 @@
         originalOrder = firstContainers.concat(rest);
     }
 
+    // check if (a) this lesson is suffixed with a proglang, and
+    // (b) there's an un-suffixed lesson in graph for this already
+    function suffixed(lesson) {
+        const suffixes = ["-codap", "-wescheme", "-none"];
+        return suffixes.some(suffix => {
+            const unsuffixed = lesson.replace(suffix,"");
+            return (graph[unsuffixed]) && (lesson !== unsuffixed)
+        });
+    }
+
     // 1) Starting with projects, then preferred lessons, 
     // then non-preferred lesson in prerequisite order,
     // draw the container for each lesson and add it to the 
@@ -60,6 +70,11 @@
                 console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
                 return; 
             }
+            // if it's a suffixed lesson for which a non-suffixed version exists, delete it
+            if(suffixed(l)) {
+                delete graph[l];
+                return;
+            };
             var container = document.createElement("div");
             graph[l].title = tmpLessonRename[l] || graph[l].title;
             container.id  = l;

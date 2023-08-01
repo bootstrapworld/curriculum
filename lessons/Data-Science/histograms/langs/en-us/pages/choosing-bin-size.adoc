@@ -1,10 +1,29 @@
 = Choosing the Right Bin Size
 
+++++
+<style>
+#content img { width: 50%; }
+#content .forceShadedBlockWTF { background-color: #f7f7f8; }
+.highlight { padding: 0 !important; }
+</style>
+++++
+
 Open your saved @starter-file{animals}, or make a new copy, and click "Run".
 
 @vspace{1ex}
 
-@show{(contract 'histogram '((table-name Table) (labels String) (column String) (bin-size Number)) "Image")}
+[.forceShadedBlockWTF]
+--
+@show{(code 'histogram)}`{two-colons} (`
+```
+	table-name :: Table,
+	labels :: String,
+	column-name :: String,
+	bin-size :: Number,
+) -> Image
+
+```
+--
 
 @vspace{1ex}
 
@@ -20,7 +39,7 @@ Try some other bin sizes (be sure to experiment with bigger and smaller bins!)
 
 @n What shape emerges? @fitb{}{@ifsoln{right skew}}
 
-@n What bin size gives you the best picture of the distribution (_ideally your histogram should have between 5 and 10 bars_)? @fitb{}{@ifsoln{5}}
+@n What bin size gives you the best picture of the distribution? (Note: _ideally your histogram should have between 5 and 10 bars_) @fitb{}{@ifsoln{5}}
 
 @n Are there any outliers? If so, are they high or low? @fitb{}{@ifsoln{high}}
 
@@ -32,12 +51,18 @@ Try some other bin sizes (be sure to experiment with bigger and smaller bins!)
 
 @fitb{}{@ifsoln{Students will likely notice that a bin size of 3 gets rounded down to 2 and a bin size of 4 gets rounded down to 2.5}}
 
-@fitb{}{@ifsoln{This rounding is inherited from google charts.}}
+@fitb{}{@ifsoln{This rounding is inherited from a known bug google charts.}}
 
 @fitb{}{@ifsoln{}}
 
-@fitb{}{@ifsoln{We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less.}}
+@fitb{}{@ifsoln{We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for}}
 
-@fitb{}{@ifsoln{We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.}}
+@fitb{}{@ifsoln{an animal to be adopted in 10 weeks or less.}}
 
-@fitb{}{@ifsoln{More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks. }}
+@fitb{}{@ifsoln{We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals}}
+
+@fitb{}{@ifsoln{took an unusually long time to be adopted: one took even more than 30 weeks.}}
+
+@fitb{}{@ifsoln{More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times}}
+
+@fitb{}{@ifsoln{pulled the average up to 5.8 weeks.}}
