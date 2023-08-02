@@ -1419,6 +1419,8 @@
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
                            [(string=? directive "star")
                             (fprintf o "[.autonum.star]##★##")]
+                           [(string=? directive "optional")
+                            (fprintf o "[.optionaltag]##Optional: ##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
