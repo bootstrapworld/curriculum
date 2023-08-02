@@ -124,7 +124,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="Investigate"}
 # Tying it All Together
 
-- Optional: Complete @printable-exercise{pages/which-coe-is-correct-2.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
+- @optional Complete @printable-exercise{pages/which-coe-is-correct-2.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
 
 
 

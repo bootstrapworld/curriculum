@@ -218,7 +218,7 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 # Composing
 
 - Complete @printable-exercise{pages/composing-table-operations.adoc}.
-- Optional: For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
+- @optional For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
 
 
 @ifproglang{pyret}{

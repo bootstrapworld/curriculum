@@ -59,7 +59,7 @@ On @printable-exercise{pages/threats-to-validity-1.adoc} and @printable-exercise
 
 Each one of those claims suffers from a serious threat to validity. Can you figure out what those threats are?
 
-Optional: respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
+@optional respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
 
 <!--
 

@@ -115,7 +115,7 @@ The freedom to solve in a variety of ways rather than just moving left to right 
 
 - Turn to @printable-exercise{pages/restructuring-addition-expressions.adoc}, where you will reorder and regroup a given addition expression using a Circle of Evaluation.
 - Now, complete @printable-exercise{pages/restructuring-multiplication-expressions.adoc}, where you will reorder and regroup a multiplication expression using a Circle of Evaluation.
-- Ready for a challenge? Optional: Try @opt-printable-exercise{pages/associativity-makes-comp-easier-challenge.adoc} to apply the evaluate expressions with fractions and decimals.
+- Ready for a challenge? @optional Try @opt-printable-exercise{pages/associativity-makes-comp-easier-challenge.adoc} to apply the evaluate expressions with fractions and decimals.
 - What was your strategy for restructuring the expressions to make them simpler to evaluate?
 
 ---

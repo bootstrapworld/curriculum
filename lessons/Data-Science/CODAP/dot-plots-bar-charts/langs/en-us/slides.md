@@ -74,7 +74,7 @@ You can also resize the window by dragging its borders.
 Once we have a graph of randomly distributed data points, we can organize the data by selecting attributes from our _table_ that we want to appear on the axes of our graph.
 
 - Practice manipulating the data by completing @printable-exercise{pages/codap-displays-intro.adoc}.
-- Optional: To dig deeper into bar charts, complete @opt-printable-exercise{bar-chart-notice.adoc}.
+- @optional To dig deeper into bar charts, complete @opt-printable-exercise{bar-chart-notice.adoc}.
 
 <!--
 Remind students that categorical data is used to classify, rather than to measure. Only when data is being treated categorically will students be invited to fuse data points to create a bar chart. Quantitative (or numeric) data must measure or compare; it is subject to the laws of arithmetic.

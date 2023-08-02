@@ -220,7 +220,7 @@ Let’s see what happens if we switch from smaller to larger sample sizes.
 
 - **Open** the @starter-file{expanded-animals}, **save** a copy and click "**Run**".
 - Complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
-- Optional: complete @opt-printable-exercise{pages/predictions-from-samples.adoc}
+- @optional complete @opt-printable-exercise{pages/predictions-from-samples.adoc}
 
 }
 
