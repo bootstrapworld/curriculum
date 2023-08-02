@@ -64,7 +64,7 @@ Let's focus on one of the games we just brainstormed.
 * How _many people_ do you think it takes to create a game like that?
 * How _much money_ does it take to create a game like that?
 
-*Optional:* Use the Internet to research these questions and compare the actual numbers to your estimates.
+@optional Use the Internet to research these questions and compare the actual numbers to your estimates.
 
 ---
 {layout="Investigate"}

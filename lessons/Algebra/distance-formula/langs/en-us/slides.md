@@ -166,7 +166,7 @@ On the next slide you'll watch a  video created by Tovah Brown of a geometric pr
 <!--
 Note: If it's been a long time since your students have used the Pythagorean Theorem, now would be a good time to do some  @opt-printable-exercise{pages/pythag-practice.pdf, Pythagorean Theorem Practice}
 	
-Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theoream. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.
+@optional On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theoream. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.
 -->
 
 ---
@@ -183,7 +183,7 @@ Optional: On @printable-exercise{distance-write-code-from-lengths.adoc} we've pr
 
 For more practice writing code to generate the distance between two fixed points, complete @printable-exercise{pages/distance-from-game-coordinates.adoc}
 
-Optional: for more practice, complete @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
+@optional for more practice, complete @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}
 
 <!--
 Debrief these pages - or have students pair-and-share - before moving on to writing the full distance function.

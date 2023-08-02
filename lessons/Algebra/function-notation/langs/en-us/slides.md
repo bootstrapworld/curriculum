@@ -128,7 +128,7 @@ For example, to evaluate @math{f(2)}:{style="font-size:15pt"}
 
 Complete @printable-exercise{function-notation-graphs.adoc}.
 
-Optional: If you're ready for piecewise functions, try @opt-printable-exercise{function-notation-graphs-pw.adoc}.
+@optional If you're ready for piecewise functions, try @opt-printable-exercise{function-notation-graphs-pw.adoc}.
 
 ---
 {layout="Synthesize"}

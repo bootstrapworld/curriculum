@@ -68,7 +68,7 @@ The line representing the @vocab{linear} relationship would not only include the
 
 Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
 
-Optional: If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+@optional If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 
 ---
@@ -91,7 +91,7 @@ On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis mu
 We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
 
 <!--
-Optional: If you're ready to challenge your students to match tables and graphs with shuffled rows, and they haven't completed it already, you can direct them to complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
+@optional If you're ready to challenge your students to match tables and graphs with shuffled rows, and they haven't completed it already, you can direct them to complete @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 -->
 
@@ -184,8 +184,8 @@ Sometimes there is _no function_ that will give us a particular table or graph! 
 
 Complete:
 - @printable-exercise{linear-nonlinear-bust.adoc} 
-- Optional: @opt-printable-exercise{linear-nonlinear-bust-graphs.adoc}
-- Optional: @opt-printable-exercise{linear-nonlinear-bust-graphs-2.adoc}
+- @optional @opt-printable-exercise{linear-nonlinear-bust-graphs.adoc}
+- @optional @opt-printable-exercise{linear-nonlinear-bust-graphs-2.adoc}
 
 ---
 {layout="Synthesize"}

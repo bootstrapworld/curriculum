@@ -274,7 +274,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 {layout="Supplemental"}
 # Additional Practice
 
-Optional: If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of practice pages! {style="font-size:16pt"}
+@optional If you're digging into Order or Operations and want more practice with Circles of Evaluation before introducing code, we have lots of practice pages! {style="font-size:16pt"}
 
 * @opt-printable-exercise{pages/matching-coe-exp.adoc, A printable set of cards for physically matching expressions with Circles of Evaluation}{style="font-size:16pt"} 
 * @opt-printable-exercise{pages/arith-to-coe.adoc}{style="font-size:16pt"} 
@@ -289,7 +289,7 @@ Optional: If you're digging into Order or Operations and want more practice with
 {layout="Supplemental"}
 # Additional Practice
 
-Optional: More practice connecting Circles of Evaluation to Code {style="font-size:16pt"}
+@optional More practice connecting Circles of Evaluation to Code {style="font-size:16pt"}
 
 * @opt-printable-exercise{pages/coe-to-code.adoc} {style="font-size:16pt"}
 * @opt-printable-exercise{pages/coe-to-code2.adoc} {style="font-size:16pt"}
