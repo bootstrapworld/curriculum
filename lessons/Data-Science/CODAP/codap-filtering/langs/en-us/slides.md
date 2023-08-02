@@ -162,8 +162,8 @@ Did anyone wonder what a *Boolean* is?
 
 
 - Complete the worksheet @printable-exercise{pages/codap-filter-transformer.adoc} to explore the functionality of the `Filter` Transformer.
-- Optional: Get extra practice @opt-printable-exercise{writing-purpose-statements-filter.adoc}.
-- Optional: On @opt-printable-exercise{writing-examples.adoc}, provide some sample rows from the original dataset and then show what the transformed table would look when given a Purpose Statement.
+- @optional Get extra practice @opt-printable-exercise{writing-purpose-statements-filter.adoc}.
+- @optional On @opt-printable-exercise{writing-examples.adoc}, provide some sample rows from the original dataset and then show what the transformed table would look when given a Purpose Statement.
 
 @image{images/filter-ui-annotated.png}
 

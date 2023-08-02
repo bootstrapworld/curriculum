@@ -272,7 +272,7 @@ When should each measure of center be used?
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
 <!--
-*Optional:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
+@optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 -->
 ---
 {layout="Supplemental"}

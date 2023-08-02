@@ -245,7 +245,7 @@ This makes sense: the points on the scatter plot are somewhere between being rea
 
 - Make another lr-plot, comparing the `age` v. `weeks` columns for **only the cats**.
 - Complete @printable-exercise{which-questions-make-sense.adoc}
-- _Optional:_ open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
+- @optional open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
 
 ---
 {layout="Synthesize"}
@@ -304,7 +304,7 @@ Have students explain the connection between the Ask Questions and Consider Data
 
 - Turn to @printable-exercise{pages/describing-relationships-1.adoc}
 - Using the language you saw on @printable-exercise{pages/regression-analysis-example.adoc}, how would you write up the findings on this page?
-- Optional: for more practice, you can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
+- @optional for more practice, you can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
 
 <!--
 *Common Misconceptions*

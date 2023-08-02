@@ -164,7 +164,7 @@ Example of a strong relationship: knowing a student's age gives us a very good i
 # Correlations have _Strength_
 
 - Complete @printable-exercise{pages/identifying-form.adoc}, and focus on the third question for each scatter plot, identifying whether the relationship is strong or weak.
-- Optional: Complete the card sort on @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, Identifying Strength}.
+- @optional Complete the card sort on @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, Identifying Strength}.
 
 <!--
 Have the class discuss their answers

@@ -281,9 +281,9 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 
 Complete @printable-exercise{pages/triangle-contracts.adoc}.
 
-- Optional: @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
-- Optional: @printable-exercise{pages/radial-star.adoc} 
-- Optional: @opt-printable-exercise{pages/star-polygon.adoc} 
+- @optional @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
+- @optional @printable-exercise{pages/radial-star.adoc} 
+- @optional @opt-printable-exercise{pages/star-polygon.adoc} 
 
 ---
 {layout="Synthesize"}

@@ -119,7 +119,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 
 - Turn to @printable-exercise{which-question-type.adoc}, and fill out the "Type" column in the table at the bottom. *For now, ignore the other columns.*
 - Look at the Wonders you wrote on @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are these Lookup, Arithmetic, or Statistical questions?
-- Optional: For more practice, complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
+- @optional For more practice, complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
 
 <!--
 - Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.

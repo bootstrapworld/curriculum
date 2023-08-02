@@ -55,7 +55,7 @@ What is the relationship between profit, cost, and revenue? Profit = Revenue - C
 
 - Complete @printable-exercise{pages/profit.adoc}, using the Design Recipe. (There are multiple correct solutions!)
 - Add your code for `profit` in @starter-file{sallys-lemonade} below the third prompt; be sure to type all examples and definitions. Click "Run". Do all your tests pass?
-- Optional: complete @opt-printable-exercise{sallys-bike.adoc}
+- @optional complete @opt-printable-exercise{sallys-bike.adoc}
 
 @teacher{While students are working, walk the room and gauge student understanding.  There is more than one way to write the `profit` function!  Encourage discussion between students and push them to develop their thinking on the advantages and disadvantages of each correct solution.}
 

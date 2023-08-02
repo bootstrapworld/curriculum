@@ -127,7 +127,7 @@ Teacher Note: Your students do not need to know that multiplication precedes add
 
 - When you’re finished, complete @printable-exercise{pages/translation-table1.adoc} and @printable-exercise{pages/translation-table2.adoc, "Part 2"} to practice moving between all three representations (the mathematical expression, the Circle of Evaluation, the verbal expression).
 
-- Optional: Try @opt-printable-exercise{pages/matching-math-to-words.adoc},
+- @optional Try @opt-printable-exercise{pages/matching-math-to-words.adoc},
 
 <!-- Note: On Translating from Circles to Words, there are multiple correct translations. Be sure to spend a moment going over students' solutions. Some translations into words are clearer than others; the subsequent section of this lesson will explore that notion in greater depth.
 -->

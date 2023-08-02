@@ -286,7 +286,7 @@ If the model is perfect, the @math{R^2} value will be 1.00, meaning 100% of the 
 But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether! Did you see any models with a negative @math{R^2} value?
 
 - Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-2.adoc}.
-- Optional: For each of your trials, graph the resulting linear model on @opt-printable-exercise{graphing-models.adoc}.
+- @optional For each of your trials, graph the resulting linear model on @opt-printable-exercise{graphing-models.adoc}.
 - What was the best model you could come up with?
 
 @teacher{Have students share their "best" models}
@@ -319,7 +319,7 @@ But based on the @math{R^2} value of **-15.63**, this is a pretty terrible model
 These models are useless if we can't make sense of them!
 
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- Optional: For more practice, build linear models for **other** relationships in the data! You can use @opt-printable-exercise{model-your-own.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
+- @optional For more practice, build linear models for **other** relationships in the data! You can use @opt-printable-exercise{model-your-own.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
 
 ---
 {layout="Synthesize"}
