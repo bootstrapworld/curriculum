@@ -975,9 +975,13 @@
 
            ]
           [else
-            (let ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".cached/.\\1.asc")])
+            (let* ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".cached/.\\1.asc")]
+                   [f.uses-mathjax (string-append f.asc ".uses-mathjax")])
               ;(printf "make-link checking ~s vs ~s\n" f.asc f)
               ;TODO: probably not needed anymore
+
+              (when (file-exists? f.uses-mathjax)
+                (create-zero-file (format "~a.uses-mathjax" *out-file*)))
 
               ;FIXME: avoid erroring include: if file doesn't exist?
               (format "include::~a[~a]"

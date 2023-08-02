@@ -10,7 +10,7 @@ body.workbookpage .fitbruby { padding-top: 1.1rem; }
 </style>
 ++++
 
-For this page, you'll need to the @starter-file{alg2-states} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+For this page, you'll need to open the @starter-file{alg2-states} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
 
 == Build a Model from Samples
 
@@ -20,28 +20,16 @@ For this page, you'll need to the @starter-file{alg2-states} open on your comput
  (@fitbruby{10em}{@ifsoln{22.6}}{AK college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AK median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AL college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AL median-income})
 }
 
-@n What is the difference  in `college-or-higher` (known as @math{\Delta college\mbox{-}or\mbox{-}higher}) between Alabama and Alaska? @right{@fitb{8em}{@ifsoln{4.9}}}
-
-@vspace{1ex}
-
-@n What is the difference  in `median-income` (known as @math{\Delta median\mbox{-}income}) between Alabama and Alaska? @right{@fitb{8em}{@ifsoln{27507}}}
-
-@vspace{1ex}
+@vspace{4ex}
 
 [.tallFitb]
-@n We want to understand how these two differences (@math{\Delta}s) relate to one another. Compute @math{\frac{\Delta college\mbox{-}or\mbox{-}higher}{\Delta median\mbox{-}income}}. @right{@fitb{8em}{@ifsoln{5613.67}}}
+@n We want to understand how these two differences (@math{\Delta}s) relate to one another. Compute @math{\frac{\Delta median\mbox{-}income}{\Delta college\mbox{-}or\mbox{-}higher}} @fitb{8em}{@ifsoln{5613.67}}
 
-@vspace{1ex}
+@vspace{4ex}
 
-@center{**This is the _slope_ of our linear model.**}
+@n Using the space below, compute the y-intercept and write the complete model below (in both Function and Pyret notation):
 
-@n Multiply AL's `college-or-higher` value by the slope. What did you get? @right{@fitb{8em}{@ifsoln{126868.942}}}
-
-@n This is the predicted income _if the y-intercept was zero_. Subtract the result from AL's _actual_ `median-income`. @right{@fitb{8em}{@ifsoln{-83616.02}}}
-
-@center{**This is the _y-intercept_ of our linear model.**}
-
-@n Now that you have the slope and y-intercept, write the complete model below (in both Function and Pyret notation):
+@vspace{25ex}
 
 @center{
  @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}

@@ -18,8 +18,12 @@ fi
 # this is just to avoid problems copying an empty dir
 (find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
-# ensure lesson plan adoc always present, even if empty
-test ! -f $d/index.adoc && touch $d/index.adoc
+# ensure lesson plan .adoc present, unless .shtml present
+if test ! -f $d/index.adoc; then
+  if test ! -f $d/index.shtml; then
+    touch $d/index.adoc
+  fi
+fi
 
 echo $src > $d/.repodir.txt.kp
 

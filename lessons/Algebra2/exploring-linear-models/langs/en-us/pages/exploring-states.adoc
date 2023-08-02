@@ -4,6 +4,32 @@ For this page, you'll need to open the @starter-file{alg2-states} open on your c
 
 @n Click "Run" and type `states-table` into the Interactions Area on the right to see the dataset.
 
+@n What code will produce a table showing the number of states in each region? +
+@fitb{}{@ifsoln{@show{(code '(count states-table "region"))}}}
+
+@n _Which states do you *think* have the most people?_ What code will produce a table containing the five states with the largest population in 2020? +
+@fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "pop-2020" false) 4))}}}
+
+@n _Which states do you *think* have the highest poverty?_ What code will produce a table containing the ten states with the highest poverty rate? +
+@fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "poverty-rate" true) 10))}}}
+
+@n What code will produce a table containing the states with the lowest *median* income? +
+@fitb{}{@ifsoln{@show{(code '(sort states-table "median-income" false))}}}
+
+@n What code will produce a table containing the states with the lowest *per-capita* ("average" or "mean") income?? +
+@fitb{}{@ifsoln{@show{(code '(sort states-table "per-capita-income" false))}}}
+
+@star What does it mean if a state has a higher `per-capita income` than `median-income`? @fitb{}{} +
+@fitb{}{@ifsoln{The state has a number of "high-earning outliers", which skew the average}}
+
+The two lines of code under `# Define some rows` *extract rows 0 and 1 from the table, and define them as `alabama` and `alaska`*.
+
+@n Type `alabama` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{Just the Row for Alabama}}
+
+@n Underneath the definition of those rows, *add a new definition* for `california`. Be sure to *click "Run"*, so that Pyret reads your new definition!
+
+@n **Add a definition for your own state**!
+
 @vspace{2ex}
 
 [.FillVerticalSpace, cols="^1a,^1a",options="header",stripes="none"]
@@ -13,44 +39,3 @@ For this page, you'll need to open the @starter-file{alg2-states} open on your c
 |
 |
 |===
-
-The two lines of code under `# Define some rows` *extract rows 0 and 1 from the table, and define them as `alabama` and `alaska`*.
-
-@n Type `alabama` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{Just the Row for Alabama}}
-
-
-@n What columns do you think might be related to one another? (e.g. - is the number of veterans related the amount of land-area? Is the population in 2010 related to the population in 2020?) List three possible relationships below.
-
-+a.+ I think that @fitb{25em}{} may be related to @fitb{}{}
-
-+b.+ I think that @fitb{25em}{} may be related to @fitb{}{}
-
-+c.+ I think that @fitb{25em}{} may be related to @fitb{}{}
-
-@vspace{1ex}
-
-@n Make a scatter plot for each of the three relationships you listed. What do you think each display tells you about the relationship between those two columns? (**Reminder:** @show{(contract 'scatter-plot (list "Table" "String" "String" "String") "Image")})
-
-+a.+ @fitb{}{}
-
-@fitb{}{}
-
-+b.+ @fitb{}{}
-
-@fitb{}{}
-
-+c.+ @fitb{}{}
-
-@fitb{}{}
-
-@vspace{3ex}
-
-@center{**STOP HERE! You will finish this page AFTER diving deeper into statistical relationships.**}
-
-@n For the three relationships in Question 3....
-
-- Place a star by any relationships that you think might be linear.
-- Place a "P" by any relationships that were positive.
-- Place an "N" by any relationships that were negative.
-- Place an "S" by the strongest-looking relationship.
-- Place a "W" by the weakest-looking relationship.
