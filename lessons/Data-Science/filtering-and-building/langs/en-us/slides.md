@@ -66,30 +66,31 @@ Select 6-8 students, each of whom will represent a unique Row of a dataset calle
 {layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
-
-- I am going to select a volunteer who will play the role of… `filter`!
-- I will hand the volunteer a function card from the @handout{pages/function-cards.adoc, Function Cards} set. 
-- Next, `filter` will read the card carefully, making sure they understand what it will do for each "Row" (student!) in the "Table", but they will __keep it a secret__.
-- The volunteer playing Filter will walk from one student to the next, referring to the function (on the card) in order to determine if each student should step forward or step backward.
-
-<!--
-Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.
--->
-
-
+- I need one volunteer who will play the role of `filter`, and another who will be their trusty helper function.
+- The helper chooses one @handout{pages/function-cards.adoc, Function Card}. They’ll read it carefully, making sure they understand what it will do for each "Row" (student!), but **keeping it a secret**. @teacher{(Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)}
+- `filter` walks from one student to the next, pointing to each one and asking “keep ‘em?”.
+- The helper will answer with whatever the function on the card would produce for that student: `true` or `false`
+- If the helper replies "true", `filter` asks that student to take a step forward
+- If the helper says "false", `filter` asks them to take a step back.
 
 ---
 {layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
-- `filter` _stands in front of Student 1 and checks if they are wearing glasses._
-- *`filter` to Student 1 (who wears glasses)*: Step forward. (Student 1 steps forward.)
-- `filter` _stands in front of Student 2 and checks if they are wearing glasses._
-- *`filter` to Student 2 (who does not wear glasses)*: Step back. (Student 2 steps back.)
+Here’s how that might look if `filter` chose a function card `has-glasses`.
 
-<!--
-Have your `filter` volunteer go through all their peers, applying their card to each one. Based on who stepped forward and backward, what was on the card? Repeat for several cards. Give the volunteer a round of applause!
--->
+- `filter` stands in front of Student 1. “Keep ‘em?”
+- The helper checks if they are wearing glasses, and says “true”
+- `filter` to Student 1 (who wears glasses): Step forward. (Student 1 steps forward.)
+- `filter` stands in front of Student 2. “Keep ‘em?”
+- The helper checks if they are wearing glasses, and says “false”
+- `filter` to Student 2 (who does not wear glasses): Step back. (Student 2 steps back.)
+
+--
+
+@teacher{
+Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a _different_ card to a _different_ helper, and repeat the exercise.
+}
 
 ---
 {layout="Investigate-DN"}
