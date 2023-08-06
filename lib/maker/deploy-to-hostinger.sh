@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-03-25
-
 test ! -d distribution && echo distribution/ not found\; make it first && exit 0
 
 # env vars HOSTINGER_PORT, HOSTINGER_USER, HOSTINGER_IPADDR *must* be set!
@@ -36,6 +34,7 @@ ALL_THE_LANGS="en-us es-mx"
 for lang in $ALL_THE_LANGS; do
   mkdir -p $DEPLOYABLES_DIR/$lang/courses
   mkdir -p $DEPLOYABLES_DIR/$lang/lessons
+  mkdir -p $DEPLOYABLES_DIR/$lang/textbooks
 done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
@@ -56,15 +55,6 @@ function correctgdriveurls() {
   done
 }
 
-function copyCourse() {
-  local dir=$1
-  for lang in $ALL_THE_LANGS; do
-    test -d $lang/courses/$dir || continue
-    cp -pr $lang/courses/$dir $DEPLOYABLES_DIR/$lang/courses/$dir
-    correctgdriveurls $DEPLOYABLES_DIR/$lang/courses/$dir
-  done
-}
-
 for lang in $ALL_THE_LANGS; do
   if test -z "$SKIPLIB"; then
     if test -d $lang/extlib; then
@@ -78,17 +68,12 @@ for lang in $ALL_THE_LANGS; do
       cp -p $f $DEPLOYABLES_DIR/$lang
     fi
   done
-  if test -d $lang/lib; then
-    cp -pr $lang/lib $DEPLOYABLES_DIR/$lang
-  fi
-  if test -d $lang/lessons; then
-    cp -pr $lang/lessons $DEPLOYABLES_DIR/$lang
-    correctgdriveurls $DEPLOYABLES_DIR/$lang/lessons
-  fi
-  if test -d $lang/courses; then
-    cp -pr $lang/courses $DEPLOYABLES_DIR/$lang
-    correctgdriveurls $DEPLOYABLES_DIR/$lang/courses
-  fi
+  for d in lib lessons courses textbooks; do
+    if test -d $lang/$d; then
+      cp -pr $lang/$d $DEPLOYABLES_DIR/$lang
+      correctgdriveurls $DEPLOYABLES_DIR/$lang/$d
+    fi
+  done
 done
 
 find $DEPLOYABLES_DIR -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
