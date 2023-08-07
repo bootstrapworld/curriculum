@@ -33,20 +33,6 @@
         cs : ["ds-intro", "simple-data-types", "contracts", "defining-values", "defining-functions", "re-intro-to-data-structures", "function-composition", "displays-and-lookups", "if-expressions", "making-game-images", "table-methods", "composing-table-operations", "advanced-displays", "functions-for-character-animation", "player-animation", "problem-decomposition", "re-adding-collisions", "re-adding-levels", "re-build-your-own-animation", "re-functions-that-ask-questions", "re-key-events", "re-making-pong", "re-nested-structures", "re-refactoring", "re-scoring", "re-structures-reactors-animations", "re-timers", "re-your-own-drawing-functions"]
     };
 
-    function orderLessons() {
-        // Always put "preferred lessons" for each subject preference first,
-        // and put the rest in their own array
-        var firstContainers = subjectPreference[subject];
-        var rest = Object.keys(graph)
-            .filter(l => !firstContainers.includes(l));
-        // Sort the "rest" by prerequisite
-        rest.sort((a,b) =>
-            graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
-
-        checked = [];
-        originalOrder = firstContainers.concat(rest);
-    }
-
     // check if (a) this lesson is suffixed with a proglang, and
     // (b) there's an un-suffixed lesson in graph for this already
     function suffixed(lesson) {
@@ -55,6 +41,24 @@
             const unsuffixed = lesson.replace(suffix,"");
             return (graph[unsuffixed]) && (lesson !== unsuffixed)
         });
+    }
+
+    function orderLessons() {
+        // delete suffixed lessons if there's an unsuffixed equivalent
+        Object.keys(graph).forEach(l => { if(suffixed(l)) delete graph[l]});
+
+        // Always put "preferred lessons" for each subject preference first,
+        // and put the rest in their own array
+        var firstContainers = subjectPreference[subject];
+        
+        var rest = Object.keys(graph)
+            .filter(l => !firstContainers.includes(l));
+        // Sort the "rest" by prerequisite
+        rest.sort((a,b) =>
+            graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1);
+
+        checked = [];
+        originalOrder = firstContainers.concat(rest);
     }
 
     // 1) Starting with projects, then preferred lessons, 
@@ -70,11 +74,6 @@
                 console.warn(l, 'is listed as a preferred lesson, but is not in the graph');
                 return; 
             }
-            // if it's a suffixed lesson for which a non-suffixed version exists, delete it
-            if(suffixed(l)) {
-                delete graph[l];
-                return;
-            };
             var container = document.createElement("div");
             graph[l].title = tmpLessonRename[l] || graph[l].title;
             container.id  = l;
@@ -136,10 +135,6 @@
                 : [...new Set([name, ...checked , ...graph[name].prerequisites])];
         }
 
-        // sort with the shortest list of prereqs listing first
-        checked.filter(onlyUnique).sort((a,b) => 
-            graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
-
         // update the list of accessible lessons
         var accessible =  Object.getOwnPropertyNames(graph).filter(name => 
             graph[name].prerequisites.every(p => checked.includes(p)));
@@ -148,12 +143,18 @@
         document.getElementById("checkedCount").innerHTML = checked.length;
         document.getElementById("accessibleCount").innerHTML = accessible.length - checked.length;
         document.getElementById('summary').style.display = checked.length > 0? "block" : "none";
-        checked.filter(onlyUnique).forEach(t => {
-            var link = document.createElement('a');
-            link.href = "lessons/" + (graph[t].lesson || t);
-            link.innerHTML = graph[t].title + ", ";
-            document.getElementById('selectedLessons').appendChild(link);
-        });
+        document.getElementById('selectedLessons').innerHTML = '';
+
+        // sort with the shortest list of prereqs listing first
+        checked
+            .filter(onlyUnique)
+            .sort((a,b) => graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1)
+            .forEach(t => {
+                var link = document.createElement('a');
+                link.href = "lessons/" + (graph[t].lesson || t);
+                link.innerHTML = graph[t].title + ", ";
+                document.getElementById('selectedLessons').appendChild(link);
+            });
 
         // update the lesson display
         Object.getOwnPropertyNames(graph).forEach(name => {
