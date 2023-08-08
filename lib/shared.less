@@ -14,8 +14,9 @@
 @top-padding-for-writing: 1.2rem;
 @top-padding-for-dr: 1rem;
 
+html, body { font-size: 9pt; }
+
 body {
-  font-size:      12pt;
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -185,11 +186,16 @@ body:not(.LessonPlan, .narrativepage) p {
 /*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
 .glossary { 
   margin-bottom: 20px; 
-  * { display: inline; }
-  .title    { display: block; font-weight: bold; color: inherit;}
+  * { display: inline; font-size: 16px;}
   dt::after { content: '::'; margin: 0px 5px; }
   dd        { margin: 0px; }
   dd::after { content: '\A'; white-space: pre; }
+  .title    { 
+    display: block; 
+    font-weight: bold; 
+    color: inherit; 
+    font-size: 18px;
+  }
 }
 
 .alignedEntries { display: none; }
@@ -213,11 +219,12 @@ body:not(.LessonPlan, .narrativepage) p {
 * NARRATIVE PAGE STYLES
 */
 .narrativepage {
+  font-size: 12pt;
   .logo     { float: right; }
   .logo img { width: 400px; }
   #lesson-list {
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
-    dt        { margin-top: 15px; display: inline-block; }
+    dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
     dd:after  { display: block; content: ''; }
     dd:before { display: inline; content: '::'; font-weight: 900; }
   }
@@ -236,6 +243,8 @@ body:not(.LessonPlan, .narrativepage) p {
 * LESSON PAGE STYLES
 */
 .LessonPlan {
+  font-size: 12pt;
+
   /* The summary table at the top of each lesson */
   .preamble {
     &.left-header tr td:nth-child(1) { background-color: #b7d893; }
@@ -362,7 +371,7 @@ body:not(.LessonPlan, .narrativepage) p {
     table { background: none !important; border: none; width: auto; }
     table td, table tr { padding: 0; background: none; border: 0; }
     table .title { display: none; }
-    dl * { font-size:  0.75rem !important; margin: 0; display: inline; }
+    dl * { font-size:  9pt !important; margin: 0; display: inline; }
     dl { line-height: 0.4rem; }
     dd::after { content: '\A'; white-space: pre; }
     dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
@@ -377,7 +386,7 @@ body:not(.LessonPlan, .narrativepage) p {
         max-height: 250px;
         overflow:   scroll;
         padding:    10px;
-        font-size:  0.8rem !important;
+        font-size:  10pt !important;
       }
       li:nth-child(odd) { background: #b7d89333; }
     }
@@ -435,7 +444,7 @@ body:not(.LessonPlan, .narrativepage) p {
   .notice-box   { border-color: #7747a5 !important; }
 
   h2 { font-size: 1.75em; font-weight: normal; }
-  h3 { font-size: 1.5em; font-weight: 300;  }
+  h3 { font-size: 18pt; font-weight: 300;  }
 
   /* Direct link to a section of a lesson */
   .section-link a {
@@ -452,6 +461,8 @@ body:not(.LessonPlan, .narrativepage) p {
   .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+
+  div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 }
 
 /************************************************************************************
@@ -516,7 +527,7 @@ body.workbookpage {
   /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
   .autonum { 
     display: inline-block; 
-    padding-top: 1.2rem; 
+    padding-top: @top-padding-for-writing; 
     &::after { content: ')'; }
     &.star::after { content: unset; }
   }
@@ -529,6 +540,8 @@ body.workbookpage {
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
 
+  /* use 'thin' instead of 1px border to try and avoid disappearing 
+  lines on some browsers */
   .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top:        @top-padding-for-writing;
     position:           relative;
@@ -536,7 +549,7 @@ body.workbookpage {
     min-width:          4em;
     text-align:         center;
     line-height:        1rem;
-    border-bottom:      solid 1px black;
+    border-bottom:      solid thin black;
     vertical-align:     baseline;
   }
   .fitbruby { 
@@ -546,7 +559,7 @@ body.workbookpage {
     position:           absolute;
     bottom:             -0.9rem;
     left:               0;
-    font-size:          0.65rem;
+    font-size:          9.5px;
     font-weight:        normal;
     width:              100%;
     text-align:         center;
@@ -623,14 +636,14 @@ body.LessonNotes {
     font-size:  0.75rem !important; 
     &::after { bottom: 0 !important; color: black; text-align: left !important; } 
   }
-  .question_type { display: block; text-align: center; }
+  .question_type { display: block; font-size: 10px; }
   .question_type.chosen { 
     font-style: italic; font-weight: bold; border: solid 1px black; 
     border-radius: 50%;
     &::after { display: none; };
   }
   .data-cycle-expression, .data-cycle-filter, .data-cycle-build { 
-    font-family: Hack, "Courier New", monospace; 
+    font-family: @code-font;
   }
 }
 
@@ -837,7 +850,7 @@ div.circleevalsexp {
   }
   .value {
     display:            inline-block;
-    margin:             0.65rem 0.5rem;
+    margin:             0.5rem 0.4rem;
     vertical-align:     top;
   }
   .operator {
@@ -864,7 +877,6 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
-  font-size:          0.8rem;
   color:              #666;
   font-style:         normal;
   clear:              both;
@@ -923,7 +935,7 @@ table.pyret-table {
     border:             none;
     border-right:       1px white solid;
     color:              #1f1180;
-    font-family:        monospace;
+    font-family:        @code-font;
   }
 }
 
@@ -1105,9 +1117,4 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 
   /* Get rid of collapsing headers */
   .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
-
-  /***** Change sizes:  HERE BE DRAGONS!!!!! ******/
-  html, body    { font-size:      9pt; }
-  .questions    { min-width: 36%; width: auto; }
-  .answers      { width: auto; }
 }
