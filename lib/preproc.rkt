@@ -1473,11 +1473,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".pathway-only")
-                                  (call-with-input-string text
-                                    (lambda (i)
-                                      (call-with-output-string
-                                        (lambda (o)
-                                          (expand-directives i o)))))
+                                  (expand-directives-string text)
                                   (create-end-tag "span")) o))]
                            [(string=? directive "pathway-link")
                             (let* ([args (read-commaed-group i directive read-group)]
@@ -1525,11 +1521,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [converted-text (call-with-input-string text
-                                                     (lambda (i)
-                                                       (call-with-output-string
-                                                         (lambda (o)
-                                                           (expand-directives i o)))))])
+                                   [converted-text (expand-directives-string text)])
                               (display-lesson-description converted-text
                                                           (path-replace-extension *out-file* "-desc.txt.kp")
                                                           o))]
@@ -1636,11 +1628,7 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (call-with-input-string text
-                                      (lambda (i)
-                                        (call-with-output-string
-                                          (lambda (o)
-                                            (expand-directives i o)))))
+                                    (expand-directives-string text)
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))
@@ -1650,11 +1638,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".teacherNote")
-                                  (call-with-input-string text
-                                    (lambda (i)
-                                      (call-with-output-string
-                                        (lambda (o)
-                                          (expand-directives i o)))))
+                                  (expand-directives-string text)
                                   (create-end-tag "span")) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
@@ -1668,11 +1652,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [*solutions-mode?*
                                       (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                             [converted-text (call-with-input-string text
-                                                               (lambda (i)
-                                                                 (call-with-output-string
-                                                                   (lambda (o)
-                                                                     (expand-directives i o)))))])
+                                             [converted-text (expand-directives-string text)])
                                         (display
                                           (cond [contains-nl?
                                                   (string-append
@@ -1687,11 +1667,7 @@
                            [(string=? directive "ifsoln-choice")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                     [converted-text (call-with-input-string text
-                                                       (lambda (i)
-                                                         (call-with-output-string
-                                                           (lambda (o)
-                                                             (expand-directives i o)))))])
+                                     [converted-text (expand-directives-string text)])
                                 (display (enclose-div
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
@@ -1702,11 +1678,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
                                      (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                            [converted-text (call-with-input-string text
-                                                              (lambda (i)
-                                                                (call-with-output-string
-                                                                  (lambda (o)
-                                                                    (expand-directives i o)))))])
+                                            [converted-text (expand-directives-string text)])
                                        (display
                                          (cond [contains-nl?
                                                  (string-append
