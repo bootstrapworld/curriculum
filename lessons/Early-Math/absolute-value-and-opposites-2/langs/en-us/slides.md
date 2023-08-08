@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Translating Absolute Value & Opposite
 
-You are going to receive @printable-exercise{three-sets-cards.adoc, three sets of cards}.
+You are going to receive @printable-exercise{pages/translating-card-sort.adoc, three sets of cards}.
 
 The first set of cards includes Circles of Evaluation that use the `negate` and `abs` functions.
 
@@ -47,14 +47,14 @@ Again, circulate during the activity. As students match Verbal Expressions to th
 {layout="Investigate"}
 # Translating Absolute Value & Opposite
 
-- Each row on @printable-exercise{translating-abs-val-opp.adoc} represents a single @vocab{arithmetic expression}, written in three different forms. Sometimes, you will be provided with a Circle to translate, other times you will start with a verbal or mathematical expression.
+- Each row on @printable-exercise{pages/translating-abs-val-opp.adoc} represents a single @vocab{arithmetic expression}, written in three different forms. Sometimes, you will be provided with a Circle to translate, other times you will start with a verbal or mathematical expression.
 -  Fill in the empty spaces so that all three forms represent the same expression.
 
 ---
 {layout="Synthesize"}
 # Translating Absolute Value & Opposite
 
-Here are some key take-aways from this lesson:
+Here are some key takeaways from this lesson:
 
 - We can find the @vocab{opposite} of an @vocab{absolute value}: @math{- | x |}
 - We can find the @vocab{absolute value} of an @vocab{opposite}: @math{ |- x |}
@@ -93,7 +93,7 @@ Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highligh
 {layout="Launch"}
 # Evaluating Absolute Value & Opposite
 
-- Turn to @printable-exercise{true-or-false.adoc} to examine additional pairs of Circles of Evaluation that use both `negate` and `abs`.
+- Turn to @printable-exercise{pages/true-or-false.adoc} to examine additional pairs of Circles of Evaluation that use both `negate` and `abs`.
 - Are the expressions on either side of the equal sign?
 - Evaluate each side of the equation to confirm your response.
 - The first one (below) is done for you.
@@ -105,7 +105,7 @@ Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highligh
 {layout="Investigate"}
 # Evaluating Absolute Value & Opposite
 
-Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The workbook page starts with numeric values and then integrates @vocab{variables}. 
+Examine the Circles of Evaluation to determine @printable-exercise{pages/wodb-abs-val-negate.adoc}. The page starts with numeric values and then integrates @vocab{variables}. 
 
 Place a check mark by each Circle of Evaluation that meets the condition stated on the left.
 
@@ -115,8 +115,8 @@ Place a check mark by each Circle of Evaluation that meets the condition stated 
 {layout="Investigate"}
 # Evaluating Absolute Value & Opposite
 
-- Next, try @printable-exercise{matching-expression-to-circle.adoc}, where you will match expressions with their corresponding Circles of Evaluation. Note: some expressions can be matched to more than one correct Circle of Evaluation!
-- At the bottom of the matching workbook page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
+- Next, try @printable-exercise{pages/matching-circles-to-expressions.adoc}, where you will match expressions with their corresponding Circles of Evaluation. Note: some expressions can be matched to more than one correct Circle of Evaluation!
+- At the bottom of the page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
 
 ---
 {layout="Synthesize"}

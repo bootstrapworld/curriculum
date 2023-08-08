@@ -1,0 +1,73 @@
+[.landscape]
+= Contracts
+
+Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
+
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+|Name||Domain||Range
+
+| `first-n-rows`
+| `{two-colons}`
+| `(t {two-colons} Table, n {two-colons}  Number)`
+| `->`
+| `Table`
+5+|`_first-n-rows(animals-table, 10)_`
+
+| `fit-model`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String, model {two-colons} (Number -> Number))`
+| `->`
+| `Image`
+5+|`_fit-model(animals-table, "species", "pounds", "weeks", num-sqrt)_`
+
+| `multi-bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, group {two-colons} String, subgroup {two-colons} String)`
+| `->`
+| `Image`
+5+|`_multi-bar-chart(animals-table, "sex", "species")_`
+
+| `histogram`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, column {two-colons} String, bin-width {two-colons} Number)`
+| `->`
+| `Image`
+5+|`_histogram(animals-table, "name", "age", 2)_`
+
+| `image-scatter-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, xs {two-colons} String, ys {two-colons} String, f {two-colons} (Row -> Image))`
+| `->`
+| `Image`
+5+|`_image-scatter-plot(animals-table, "pounds", "weeks", animal-img)_`
+
+| `isosceles-triangle`
+| `{two-colons}`
+| `Number, Number, String, String`
+| `->`
+| `Image`
+5+| `_isosceles-triangle(100, 30, "solid", "black")_`
+
+| `lr-plot`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, xs {two-colons} String, ys {two-colons} String)`
+| `->`
+| `Image`
+5+|`_lr-plot(animals-table, "species", "pounds", "weeks")_`
+
+| `mean`
+| `{two-colons}`
+| `Table, String`
+| `->`
+| `Number`
+5+|`_mean(animals-table, "age")_`
+
+| `median`
+| `{two-colons}`
+| `Table, String`
+| `->`
+| `Number`
+5+|`_median(animals-table, "age")_`
+
+|===

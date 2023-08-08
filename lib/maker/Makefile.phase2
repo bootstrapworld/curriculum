@@ -1,4 +1,4 @@
-# last modified 2023-03-17
+# last modified 2023-07-31
 
 include $(MAKE_DIR)utils.mk
 
@@ -23,6 +23,7 @@ $(eval $(foreach lessf,$(less-files),$(call make-css-from-less-rule, $(lessf))))
 ##########################################################################
 
 pathway-independent-adoc-files := $(wildcard \
+	distribution/$(NATLANG)/*.adoc \
 	distribution/$(NATLANG)/lib/*.adoc \
 	distribution/$(NATLANG)/textbooks/*.adoc \
 	distribution/$(NATLANG)/textbooks/*/*.adoc \
@@ -71,9 +72,9 @@ relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
 
 relevant-adoc-files := $(foreach \
 	lesson,$(relevant-lessons),$(wildcard \
-	$(lesson)/*/*.adoc \
-	$(lesson)/*/*/*.adoc \
 	$(lesson)/*/*/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*.adoc \
 	))
 
 relevant-asc-files := $(foreach \
@@ -220,6 +221,7 @@ dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NAT
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	$(MAKE_DIR)make-dependency-graph.lua $@
+	$(MAKE_DIR)check-graph.sh
 
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
 	$(CP) -p $< $@

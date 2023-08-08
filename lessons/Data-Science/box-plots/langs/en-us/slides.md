@@ -11,11 +11,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Making Box Plots
 
-**_FACT: The Animal Shelter Bureau says the average pet weighs almost 41 pounds_**
+**_FACT: The Animal Shelter Bureau says the average pet weighs almost 40 pounds_**
 
 Once we have a summary number like "mean", it's important to ask another question:
 
-_If the average pet is 41 pounds, just **how typical** is that?_
+_If the average pet is 40 pounds, just **how typical** is that?_
 
 - Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
 - But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
@@ -98,16 +98,16 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 {layout="Investigate"}
 # Making Box Plots
 
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-weight:16pt"}
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-size:16pt"}
 
-```{style="font-weight:bold;font-weight:16pt"}
+```
 # box-plot :: (t::Table, col::String) -> Image
 # Consumes a table and the name of the column
 # and produces a box plot
 ```
+- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.{style="font-size:16pt"}
+- Type this into the Interactions Area, and see the resulting plot:{style="font-size:16pt"}
 
-- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.{style="font-weight:16pt"}
-- Type in this into the Interactions Area, and see the resulting plot:{style="font-weight:16pt"}
 @show{(code '(box-plot animals-table "pounds"))}{style="font-weight:bold"}
 
 
@@ -199,20 +199,21 @@ Box plots and Histograms can both tell us a lot about the shape of a dataset, bu
 -->
 
 ---
-{layout="Investigate"}
+{layout="Investigate-K"}
 # Interpreting Box Plots
 
-Optional Activity
+1. Each group of three should have a ruler and a ball of playdough.{style="font-size:14pt"} 
+2. Draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches.{style="font-size:14pt"} 
+3. Roll the dough into a thick cylinder.{style="font-size:14pt"} 
+4. Divide that cylinder in half, and then split each half to form four __equally-sized cylinders__.{style="font-size:14pt"}  
+
+_The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}. Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile._{style="font-size:14pt"}  
+
+5. On your number line, you have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. {style="font-size:14pt"} 
+6. Roll your cylinders so that they fill each of these intervals, retaining a uniform thickness.{style="font-size:14pt"} 
 
 <!--
-Kinesthetic Activity Directions
-
-Divide the class into groups of three, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}.
-
-Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students roll their cylinders so that they fill each of these intervals, retaining a uniform thickness.
-
-They should notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the datapoints, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
-
+Notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the data points, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
 -->
 
 ---
@@ -268,7 +269,7 @@ Are they clumped on the right, with a few outliers skewing to the left? Or are t
 
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/601c35a8e9fd103e94acee2b, Card Sort: What Information does the Box & Whisker Plot tell us?}
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fe89eeaaef67d0cea85ba5e, "Matching Vocabulary to Definitions"}
-
+- @opt-project{stress-project.html, rubric-stress-or-chill.adoc} 
 <!--
 
 -->

@@ -49,7 +49,7 @@ This data is used to set public policy, draw voting districts, approve drugs, ca
 
 **Here Come the Datasets!**
 
-Working in pairs, explore the list of @link{https://bootstrapworld.org/materials/latest/en-us/lessons/choosing-your-dataset/index.shtml?pathway=data-science#Datasets, provided datasets}. 
+Working in pairs, explore the list of @link{https://bootstrapworld.org/materials/spring2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, provided datasets}. 
 
 Which one is the most interesting to you?
 
@@ -57,6 +57,9 @@ When you've selected a dataset to work on, open the Starter File and save a copy
 
 <!--
 _Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @starter-file{blank-ds-tutorial} for help importing your own data into Pyret.
+
+**NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
+
 -->
 ---
 {layout="Investigate"}
@@ -95,12 +98,9 @@ Now, you're going to do the same thing **with your own dataset.**
 ---
 {layout="Investigate"}
 # Exploring Your Dataset 
-- Look at the spreadsheet or table for your dataset with your partner and complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
 
----
-{layout="Investigate"}
-# Exploring Your Dataset 
-- 
+Look at the spreadsheet or table for your dataset with your partner and complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
+
 ---
 {layout="Investigate"}
 # Exploring Your Dataset 
@@ -115,7 +115,7 @@ Now, you're going to do the same thing **with your own dataset.**
 
 Collaborate with your partner(s), to fill in the first two pages of your @starter-file{exploration-paper}, drawing on the thinking you did on @printable-exercise{pages/my-dataset.adoc}.
 
-Remember: More than one person can work on a googledoc at the same time! If you have access to two computers, someone can work on page 1 while someone else works on page 2!
+Remember: More than one person can work on a google doc at the same time! If you have access to two computers, someone can work on page 1 while someone else works on page 2!
 
 ---
 {layout="Investigate"}

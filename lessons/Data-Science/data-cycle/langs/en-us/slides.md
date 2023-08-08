@@ -12,7 +12,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 **Are more animals fixed or unfixed?**
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset} in your student workbooks, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
+- Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.html, The Animals Dataset}, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
 - You and your partner are going to answer a simple question: **are more animals fixed or unfixed?**
 
 <!--
@@ -77,13 +77,13 @@ There’s an art to asking the right questions, and good Data Scientists think h
 
 Most questions can be broken down into one of four categories:
 
-- **Lookup questions** can be answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
+- **Lookup questions** - Answered simply by looking up a single value in the table and reading it out. Once you find the value, you’re done!{style="font-size:16pt"}
 
-- **Arithmetic questions** can be answered by computing an answer across a single column.{style="font-size:16pt"}
+- **Arithmetic questions** - Answered by computing an answer within a single column.{style="font-size:16pt"}
 
-- **Statistical questions** are where things get interesting! If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
+- **Statistical questions** If we asked, "How old are animals at the shelter?", there are lots of ways to answer! We could report the _average_ age, the age that shows up _most frequently_ or the _range_ of the ages. Which one is "right"? As you'll see in this class, it depends...{style="font-size:16pt"}
 
-- **Questions we can't answer** would need data that we don't have. {style="font-size:16pt"}
+- **Questions we can't answer** - Need data that we don't have. {style="font-size:16pt"}
 
 <!--
 Examples of lookup questions might be “How many legs does Felix have?” or "What species is Sheba?"
@@ -119,7 +119,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 
 - Turn to @printable-exercise{which-question-type.adoc}, and fill out the "Type" column in the table at the bottom. *For now, ignore the other columns.*
 - Look at the Wonders you wrote on @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are these Lookup, Arithmetic, or Statistical questions?
-- Optional: For more practice, complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
+- @optional For more practice, complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
 
 <!--
 - Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.
@@ -218,8 +218,8 @@ How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyre
 Once we know what data we need, we can turn our attention to what we want to build with it!
 
 - Do we need to filter out certain rows and make a new table?
-@ifproglang{pyret}{- Do we need a pie chart?}
-- Should we make a histogram?
+@ifproglang{pyret}{- Do we need a pie chart?} A scatter plot?
+
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
 ---

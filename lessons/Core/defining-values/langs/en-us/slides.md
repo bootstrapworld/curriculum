@@ -88,6 +88,9 @@ _All of them - Number, String, Image_
 
 Complete @printable-exercise{chinese-flag.adoc}
 
+When you are finished with this page, open the @starter-file{flags-china} and click "Run".
+
+Can you clean up all this code, so it user your definition?
 <!--
 It will direct them to open the @starter-file{flags-china} once they complete the first half of the questions on the page.
 -->
@@ -101,7 +104,7 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 - The first row of the table has been completed for you. Could I get a volunteer to explain what they see happening in that first row?
 - What code is being replaced by `sunny`? 
 - Write the code on the line provided in question 2. Then type it into the Interactions Area and click "Run".
-- Define the value `sunny` in the definitions area.
+- Define the value `sunny` in the Definitions Area.
 - Complete the page and test your code in the editor.
 
 <!--

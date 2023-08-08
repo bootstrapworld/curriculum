@@ -36,7 +36,7 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 
 * Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
-* Optional: for more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
+* @optional for more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
 
 ---
 {layout="Launch"}
@@ -83,7 +83,7 @@ The order of the recipe is a recommendation based on 20+ years of research about
 
 ---
 {layout="Launch"}
-# Rocket Height! 
+# Rocket Height
 
 A few students found some Artificial Intelligence (A.I.) tools that claim to be able to write Pyret programs for them. 
 
@@ -93,7 +93,7 @@ How do they know if it really solved the problem correctly?
 
 ---
 {layout="Launch-DN"}
-# Rocket Height! 
+# Rocket Height
 
 * Open the @starter-file{rocket-height} in a new tab, and Save/Remix a copy of your own.
 * Read the code before you click Run.
@@ -101,7 +101,7 @@ How do they know if it really solved the problem correctly?
 
 ---
 {layout="Launch-DN"}
-# Rocket Height! 
+# Rocket Height
 
 Click Run to see the simulation start running on your computer.
 
@@ -123,7 +123,7 @@ Click Run to see the simulation start running on your computer.
 -->
 ---
 {layout="Launch-DN"}
-# Rocket Height! 
+# Rocket Height
 
 Let's investigate why we weren't alerted to the problem when the computer checked the function definition against the examples.{style="font-size:17pt"}
 
@@ -149,7 +149,7 @@ What happens when we give the `rocket-height` function an input of 0?
 
 ---
 {layout="Investigate"}
-# Rocket Height! 
+# Rocket Height
 
 Let's use the Design Recipe to fix `rocket-height` and get comfortable with writing *purpose statements*.
 
@@ -177,7 +177,7 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 
 ---
 {layout="Investigate-DN"}
-# Rocket Height! 
+# Rocket Height
 
 Once you've completed the Design Recipe page for `rocket-height`, type the code into Definitions Area, replacing any missing and incorrect code with your own.
 
@@ -188,7 +188,7 @@ Save your work when you're done!
 
 ---
 {layout="Investigate-DN"}
-# Rocket Height!
+# Rocket Height
 
 At the bottom of the Definitions Area, you'll see some commented lines of code with instructions. 
 
@@ -198,15 +198,14 @@ You already know what @show{(code '(start rocket-height))} does.
 
 ---
 {layout="Synthesize"}
-# Rocket Height! 
+# Rocket Height
 
 - What problems did you fix in the starter file?
 - What did the other functions do?
 
 ---
-{layout="Supplemental"}
-# Additional Exercises
-
+{layout="Synthesize"}
+# Rocket Height
 
 * Can you make the rocket fly faster? 
 * Can you make the rocket fly slower?

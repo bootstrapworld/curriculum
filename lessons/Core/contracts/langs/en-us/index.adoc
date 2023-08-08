@@ -6,6 +6,8 @@
 
 @keywords{}
 
+@add-to-lang{sqrt, sqr, string-length, string-contains, triangle, star, circle, square, rectangle, ellipse, text, radial-star, isosceles-triangle, right-triangle, star-polygon, triangle/sas, triangle/asa}
+
 [@lesson-intro-table]
 |===
 | Lesson Goals
@@ -29,15 +31,12 @@
 
 | Preparation
 |
-All students should log into @starter-file{editor}.
+* All students should log into @starter-file{editor}.
+* @pathway-only{If you're using a printed workbook with your class, you could choose to use the contracts pages at the back of the book @pathway-link{resources/pages/contracts.pdf, (link)} instead of the @opt-printable-exercise{image-contracts.adoc, image contracts}.}
 
 | Key Points For The Facilitator
 |
 * Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
-
-@ifproglang{wescheme}{
-* Students will use their Contracts page frequently, so it should be kept in an accessible, convenient location.
-}
 
 |===
 
@@ -52,7 +51,7 @@ reinforcing concepts from standard Algebra, and practice reading error messages 
 === Launch
 In human languages, verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a sandwich". "Throw" and "Eat" are verbs, and "ball" and "sandwich" are nouns.
 
-In programming languages, values are like nouns. You've learned about values in our programming language, like Numbers (`42`, `-8.3`, etc), Strings (`"hello!"`), and Booleans (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` - each of which _does something_ to Numbers.}
+In programming languages, values are like nouns. You've learned about values in our programming language, like Numbers (`42`, `-8.3`, etc), Strings (`"hello!"`), and Booleans (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` ... each of which _does something_ to Numbers.}
 
 In programming, our verbs are called @vocab{functions}. A function is like a machine, and it does three things:
 
@@ -100,7 +99,7 @@ Encourage students to try giving different arguments to `string-length`. Does it
 
 @ifproglang{pyret}{
 
-**If your students are already familiar with function notation, Pyret mirrors it precisely, so this is a terrific opportunity to make the connection!** _If your students are not yet familiar with function notation, no need to introduce it now... it will make more sense to introduce once they are fluent in how Pyret works, and we have an entire lesson devoted to making the connection._
+**If your students are already familiar with function notation, Pyret mirrors it precisely, so this is a terrific opportunity to make the connection!** _If your students are not yet familiar with function notation, no need to introduce it now... it will make more sense to introduce once they are fluent in how Pyret works, and we have an entire @lesson-link{function-notation} lesson devoted to making the connection._
 
 Note that @vocab{arguments} (or "inputs") are the _values_ passed into a function. This is different from @vocab{variables}, which are the placeholders that get _replaced_ with those arguments! Pyret has lots of built-in functions, which we can use to write more interesting programs.
 }
@@ -210,7 +209,7 @@ Let’s take a look at the Name, Domain, and Range of the functions we've seen b
 [.lesson-point]
 When the input matches what the function consumes, the function produces the output we expect.
 
-*Optional:* Have students make a @opt-printable-exercise{pages/frayer-model.adoc, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words. You might also have students complete @opt-printable-exercise{pages/frayer-model-2.adoc, Function and Variable Frayer model.}
+@optional Have students make a @opt-printable-exercise{pages/frayer-model.adoc, Domain and Range Frayer model} and use the visual organizer to explain the concepts of Domain and Range in their own words. You might also have students complete @opt-printable-exercise{pages/frayer-model-2.adoc, Function and Variable Frayer model.}
 
 [.lesson-instruction]
 --
@@ -269,10 +268,10 @@ The error messages in this environment are _designed_ to be as student-friendly 
 
 === Investigate
 
-Explain to students that at the back of their workbooks, they'll find pages with space to write down a contract and example or other notes for every function in this course. (Optional: If your students do not have workbooks, print and copy the @opt-printable-exercise{image-contracts.adoc, contracts pages}.) A few contracts have been completed for them. Tell students that they will be adding to their contract pages and referring back to them for the remainder of this Bootstrap class!
+Today's lesson will focus on these @opt-printable-exercise{image-contracts.adoc, image-producing functions}. If you're using a printed workbook with your class, a list of all of the functions used in this course can be found in the back of the book, along with space to write down a contract and example or other notes for each of them. 
 
 [.lesson-instruction]
-- Take the next 10 minutes to experiment with the image functions listed in the contracts pages.
+- Turn to @opt-printable-exercise{image-contracts.adoc} and take the next 10 minutes to experiment with the functions.
 - When you've got working expressions, record the contracts and the code!
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
@@ -307,7 +306,7 @@ You just investigated image functions by guessing and checking what the contract
 
 [.lesson-instruction]
 - Complete @printable-exercise{pages/using-contracts.adoc}, experimenting with your editor.
-- Optional: Try @opt-printable-exercise{pages/using-contracts-cont.adoc} for additional practice with contracts.
+- @optional Try @opt-printable-exercise{pages/using-contracts-cont.adoc} for additional practice with contracts.
 
 Once students have discovered how to build a version of each image function that satisfies them, have them record the example code in their contracts table. Encourage students to explore what aspect of the image each of the inputs specifies. It may help students to jot down notes about their discoveries.
 
@@ -322,12 +321,12 @@ Once students have discovered how to build a version of each image function that
 ** _A right triangle requires the base (Number) and the height (Number). An isosceles triangle requires a leg (Number) and an angle (Number)._
 - Now, turn to @printable-exercise{pages/triangle-contracts.adoc} and use the contracts that are provided to write example expressions.
 
-Optional: If students are ready to dig into more complex triangles, you can also have them work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
+@optional If students are ready to dig into more complex triangles, you can also have them work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
 
 [.lesson-instruction]
 Turn to @printable-exercise{pages/radial-star.adoc} and use the provided contract to help you match the images to the corresponding expressions.
 
-Contracts that tell us more information about the arguments can be helpful, but are not a focal point of our work in this course. The @printable-exercise{pages/radial-star.adoc} worksheet is designed to give students a taste of these more complex contracts. Optional: For more practice with detailed contracts, students can also complete  @opt-printable-exercise{pages/star-polygon.adoc}. Both `star-polygon` and `radial-star` generate a wide range of interesting shapes!
+Contracts that tell us more information about the arguments can be helpful, but are not a focal point of our work in this course. The @printable-exercise{pages/radial-star.adoc} worksheet is designed to give students a taste of these more complex contracts. @optional For more practice with detailed contracts, students can also complete  @opt-printable-exercise{pages/star-polygon.adoc}. Both `star-polygon` and `radial-star` generate a wide range of interesting shapes!
 
 Make sure that all students have completed the shape functions in their contracts pages with both contracts and example code so they have something to refer back to.
 

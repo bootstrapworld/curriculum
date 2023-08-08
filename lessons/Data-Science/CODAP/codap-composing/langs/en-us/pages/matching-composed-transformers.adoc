@@ -1,0 +1,71 @@
+= Matching Composed Transformers
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; }
+</style>
+++++
+
+@do{
+
+(define exp1 '(transform-age t))
+(define exp2 '(filter-if-fixed t))
+(define exp3 '(build-elderly t))
+(define exp4 '(filter-if-young t))
+(define exp5 '(filter-if-heavy (filter-if-young t)))
+(define exp6 '(filter-if-young (filter-if-heavy t)))
+(define exp7 '(filter-if-elderly (build-elderly t)))
+(define exp8 '(build-elderly (filter-if-elderly t)))
+}
+
+
+The table `t` below represents four animals from the shelter:
+
+[cols='5',options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Maple"`   | `"female"`| `3`   | `true`  | `51.6`
+|===
+
+_Match_ each Circle of Evaluation (left) to the description of what it does (right).
+
+[.FillVerticalSpace, cols=".^5a,^.^2a,2,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+|===
+
+| @show{(coe exp1)}
+|*@n*@ifsoln{+(C)+} ||*A*
+| Produces a table containing only Toggle and Maple
+
+| @show{(coe exp2)}
+|*@n*@ifsoln{(F)} ||*B*
+| Produces a table with only Maple
+
+| @show{(coe exp3)}
+|*@n*@ifsoln{(D)} ||*C*
+| Produces a table that no longer has an "age" column
+
+| @show{(coe exp4)}
+|*@n*@ifsoln{(A)} ||*D*
+| Produces a table with an extra column, named "elderly"
+
+| @show{(coe exp5)}
+|*@n*@ifsoln{(B)} ||*E*
+| Produces an empty table
+
+| @show{(coe exp6)}
+|*@n*@ifsoln{(B)} ||*F*
+| Produces a table containing the same four animals
+
+| @show{(coe exp7)}
+|*@n*@ifsoln{(H)} ||*G*
+| Won’t run: will produce an error (if so, why?)
+
+| @show{(coe exp8)}
+|*@n*@ifsoln{(G)} ||*H*
+| Produces a table with only Nori
+
+|===

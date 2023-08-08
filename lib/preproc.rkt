@@ -1,7 +1,5 @@
 #lang racket
 
-; last modified 2023-05-08
-
 (require json)
 ; (require file/sha1)
 (require "readers.rkt")
@@ -455,7 +453,7 @@
       [(1)
        (cond [*lesson*
                (make-workbook-link #f
-                 "pages"
+                 (if *solutions-mode?* "solution-pages" "pages")
                  first-compt
                  link-text
                  #:link-type directive)]
@@ -567,11 +565,15 @@
     (let ([link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g link-text
-                    (if *lesson-plan* ", window=\"_blank\"" ""))]
+                    (if (or *lesson-plan*
+                            (member link-type '("printable-exercise" "opt-printable-exercise")))
+                        ", window=\"_blank\"" ""))]
           [materials-link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g (or page-title link-text)
-                    (if *lesson-plan* ", window=\"_blank\"" ""))])
+                    (if (or *lesson-plan*
+                            (member link-type '("printable-exercise" "opt-printable-exercise")))
+                        ", window=\"_blank\"" ""))])
       (when *lesson-plan*
         (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
@@ -624,8 +626,6 @@
 (define (clean-up-url-in-image-text text)
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
-
-
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")])
@@ -815,7 +815,7 @@
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
-  ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
+  ; (printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
 
   (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
          [dir (second m)]
@@ -823,7 +823,8 @@
          [dir-compts (regexp-split #rx"/" dir)])
 
     (let* ([first-compt (first dir-compts)]
-           [q (qualify-proglang first-compt "lessons" *proglang*)])
+           [q (qualify-proglang first-compt (format "distribution/~a/lessons" *natlang*)
+                                *proglang*)])
       (unless (string=? q first-compt)
         (set! dir
           (string-join
@@ -904,12 +905,7 @@
                  [(regexp-match #rx"^#" f) #f]
                  [else
                    (let ([existent-file? #f])
-                     (cond [(file-exists? f)
-                            (set! existent-file? #t)]
-                           ; [(file-exists? (path-replace-extension f ".adoc"))
-                           ;  (set! existent-file? #t)
-                           ;  (set! g (path-replace-extension g ".adoc"))]
-                           [(file-exists? (path-replace-extension f ".html"))
+                     (cond [(file-exists? (path-replace-extension f ".html"))
                             (set! existent-file? #t)
                             (set! g (path-replace-extension g ".html"))]
                            [(file-exists? (path-replace-extension f ".shtml"))
@@ -917,7 +913,14 @@
                             (set! g (path-replace-extension g ".shtml"))]
                            [(file-exists? (path-replace-extension f ".pdf"))
                             (set! existent-file? #t)
-                            (set! g (path-replace-extension g ".pdf"))])
+                            (set! g (path-replace-extension g ".pdf"))]
+                           [(and (file-exists? f)
+                                 (equal? (path-get-extension f) #".adoc"))
+                            (set! existent-file? #t)
+                            (set! g (path-replace-extension g ".html"))]
+                           [(file-exists? f)
+                            (set! existent-file? #t)]
+                           )
                      (when existent-file?
                        (set! f (build-path *containing-directory* g)))
                      ; (printf "link ~a refers to ~a\n\n" g f)
@@ -948,7 +951,8 @@
                  (set! link-text (call-with-input-file lesson-title-file read-line)))))
 
            (let ([link-output
-                   (cond [(or *lesson-plan* *teacher-resources*)
+                   (cond [(or *lesson-plan* *teacher-resources*
+                              (member link-type '("online-exercise" "opt-online-exercise")))
                           (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text)]
                          [else (format "link:pass:[~a][~a]" g link-text)])])
 
@@ -971,9 +975,13 @@
 
            ]
           [else
-            (let ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".cached/.\\1.asc")])
+            (let* ([f.asc (regexp-replace "([^/]+)\\.adoc" f ".cached/.\\1.asc")]
+                   [f.uses-mathjax (string-append f.asc ".uses-mathjax")])
               ;(printf "make-link checking ~s vs ~s\n" f.asc f)
               ;TODO: probably not needed anymore
+
+              (when (file-exists? f.uses-mathjax)
+                (create-zero-file (format "~a.uses-mathjax" *out-file*)))
 
               ;FIXME: avoid erroring include: if file doesn't exist?
               (format "include::~a[~a]"
@@ -982,7 +990,7 @@
 (define (make-pathway-link f link-text)
   ; (printf "doing make-pathway-link ~s ~s\n" f link-text)
   (enclose-span ".pathway-link"
-    (format "link:pass:[~a][~s, window=\"_blank\"]" f link-text)))
+    (format "link:pass:[../../courses/~a][~s, window=\"_blank\"]" f link-text)))
 
 (define *lesson-summary-file* #f)
 
@@ -1121,7 +1129,8 @@
           ;   (set! notes-title-done? #t)
           ;   (fprintf o "\n\n- *All Lesson Notes*\n"))
           (set! page (regexp-replace ".adoc$" page ""))
-          (let ([title-file (format "lessons/~a/pages/.cached/.~a.titletxt" lesson page)]
+          (let ([title-file (format "distribution/~a/lessons/~a/pages/.cached/.~a.titletxt"
+                                    *natlang* lesson page)]
                 [link-text page])
             (when (file-exists? title-file)
               (set! link-text (call-with-input-file title-file read-line)))
@@ -1140,13 +1149,17 @@
     (fprintf o "[#lesson-list]\n")
     (for ([lesson lessons])
       ;(printf "tackling lesson ~s\n" lesson)
-      (let ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
-            [lesson-title-file (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                                       *natlang* lesson)]
-            [lesson-desc-file (format "distribution/~a/lessons/~a/.cached/.index-desc.txt.kp"
-                                      *natlang* lesson)]
-            [lesson-title lesson]
-            [lesson-description #f])
+      (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
+             [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
+             [lesson-title-file (format "~a/.cached/.index.titletxt"
+                                        lesson-directory)]
+             [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
+                                       lesson-directory)]
+             [lesson-title lesson]
+             [lesson-description #f])
+        (unless (directory-exists? lesson-directory)
+          (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
+                  *target-pathway* lesson))
         (when (file-exists? lesson-title-file)
           ;(printf "~a exists\n" lesson-title-file)
           (set! lesson-title (call-with-input-file lesson-title-file read-line)))
@@ -1164,12 +1177,11 @@
                         (loop))))
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
-        (when #t
-          ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          (if lesson-description
-              (display lesson-description o)
-              (display " {nbsp}" o)))
+        ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
+        (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+        (if lesson-description
+            (display lesson-description o)
+            (display " {nbsp}" o))
         ;(when lesson-description
         ;(display lesson-description o)
         ;(newline o))
@@ -1296,8 +1308,7 @@
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
-  (let ([gl *glossary-list*]
-        [ngl '()])
+  (let ([gl *glossary-list*])
     ;
     (when (or *lesson* *lesson-plan*)
       (let ([f (format "distribution/~a/lessons/~a/shadow-glossary.txt" *natlang* *lesson*)])
@@ -1317,7 +1328,7 @@
                         (hash-ref h 'description ""))
                   *natlang-glossary-list*))))))
 
-  (when *lesson-plan*
+  (when (or *lesson-plan* *lesson*)
     (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
 
   (erase-span-stack!)
@@ -1408,6 +1419,8 @@
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
                            [(string=? directive "star")
                             (fprintf o "[.autonum.star]##★##")]
+                           [(string=? directive "optional")
+                            (fprintf o "[.optionaltag]##Optional: ##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
@@ -1450,12 +1463,23 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
                                    [page (first args)]
-                                   [link-text (if (> n 1) (second args) "")]
+                                   [link-text (if (> n 1) (string-join (rest args) "&#x2c; ") "")]
                                    [page-compts (regexp-split #rx"/" page)])
                               ;
                               (display (dispatch-make-workbook-link page-compts link-text directive) o)
                               )]
-                           [(string=? directive "pathwaylink")
+                           [(string=? directive "pathway-only")
+                            (let ([text (read-group i directive)])
+                              (display
+                                (string-append
+                                  (create-begin-tag "span" ".pathway-only")
+                                  (call-with-input-string text
+                                    (lambda (i)
+                                      (call-with-output-string
+                                        (lambda (o)
+                                          (expand-directives i o)))))
+                                  (create-end-tag "span")) o))]
+                           [(string=? directive "pathway-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [adocf (first args)]
                                    [link-text (string-join (map string-trim (rest args)) ", ")])
@@ -1740,15 +1764,16 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let ([newly-added? (add-starter-file lbl)]
-                                            [p (hash-ref c *proglang-sym* #f)])
+                                      (let* ([newly-added? (add-starter-file lbl)]
+                                             [p (hash-ref c *proglang-sym* #f)]
+                                             [starter-file-title (or (hash-ref p 'title #f)
+                                                                     (hash-ref c 'title))])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
                                                 (let* ([title (or link-text
-                                                                  (hash-ref p 'title #f)
-                                                                  (hash-ref c 'title))]
+                                                                  starter-file-title)]
                                                        [url (let ([url (hash-ref p 'url "")])
                                                               (cond [(string=? url "")
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
@@ -1764,7 +1789,13 @@
                                                            )])
                                                   (when (and newly-added?
                                                              (not (member lbl *do-not-autoinclude-in-material-links*)))
-                                                    (let* ([materials-link-output link-output]
+                                                    (let* ([materials-link-output
+                                                             (format
+                                                               "link:pass:[~a][~a~a]"
+                                                               url
+                                                               starter-file-title
+                                                               ", window=\"_blank\""
+                                                               )]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
                                                                      (if opt? " Optional" "")
@@ -1802,6 +1833,7 @@
                               (unless (assoc project-link-output *opt-project-links*)
                                 (set! *opt-project-links*
                                   (cons (list project-link-output rubric-link-output) *opt-project-links*)))
+                              (display (enclose-span ".prefix" "Optional Project: ") o)
                               (display project-link-output o)
                               (display " __{startsb}" o)
                               (display rubric-link-output o)

@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="LaunchC"}
 # The Commutative Property
 
-- Turn to @printable-exercise{pages/discover-comm.adoc}. Look at the first problem. What do you Notice about the two Circles of Evaluation? What do you Wonder?
+- Turn to @printable-exercise{pages/discover-comm.adoc}. What do you Notice about the two Circles of Evaluation in the first problem? What do you Wonder?
 
 @image{images/coes.png}
 
@@ -45,7 +45,6 @@ The *_Commutative Property_* tells us that for any expression involving only add
 - Turn to @printable-exercise{pages/comm-prop-table.adoc}.
 - How many different ways can you apply the Commutative Property? Draw as many different Circles of Evaluation as you can. The first one (below) is done for you.
 
-@image{images/comm-prop-table.png}
 
 <!--
 This activity is similar to one students’ completed during the previous lesson. In both activities, students develop equivalent expressions. That said, in this lesson, students cannot write down any equivalent Circle of Evaluation; they must develop equivalent arithmetic expressions that illustrate commutativity.
@@ -88,7 +87,7 @@ Q3: Possible response: Circles with only addition and multiplication, as well as
 {layout="LaunchC"}
 # Tying it All Together
 
-Claire, Walker, and Soraya are both translating verbal expressions into Circles of Evaluation. Their teacher asks them to represent the following expression: "one half the product of five and six."
+Claire, Walker, and Soraya are translating verbal expressions into Circles of Evaluation. Their teacher asks them to represent the following expression: "one half the product of five and six."
 
 All three students compute that this expression evaluates to 15.
 
@@ -117,17 +116,16 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 {layout="Investigate"}
 # Tying it All Together
 
-- Look at @printable-exercise{pages/claire-and-walker.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
+- Look at @printable-exercise{pages/which-coe-is-correct.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely __or__ when they show a deep understanding of computation or commutativity.
 - In the column on the right, record if Claire, Walker, or both students correctly translated the words into a Circle.
 
 
 ---
-{layout="InvestigateC"}
+{layout="Investigate"}
 # Tying it All Together
 
-- Optional: Complete @printable-exercise{pages/words-to-circles-challenge.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
+- @optional Complete @printable-exercise{pages/which-coe-is-correct-2.adoc}: Claire and Walker each draw a Circle of Evaluation for the following expression: _Add 10 and 2. Multiply the sum by 3. Next, add 1 to the product, then double the result._  Who is correct?
 
-@image{images/claire-walker.png}
 
 
 

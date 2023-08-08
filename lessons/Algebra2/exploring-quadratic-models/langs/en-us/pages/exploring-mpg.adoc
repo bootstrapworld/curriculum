@@ -1,0 +1,88 @@
+= Exploring the Fuel Efficiency Dataset
+++++
+<style>
+body.workbookpage td .autonum::after { content: ')' !important; }
+
+table div.graph:first-of-type {
+    background-color: rgba(#fff, .5);
+    background-image:
+        linear-gradient(lightblue 2px, transparent 2px),
+        linear-gradient(270deg, lightblue 2px, transparent 2px),
+        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
+        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: 80px -10px;
+}
+
+table td:first-child,
+table td:first-child .content,
+table td:first-child .notsolution,
+table td:first-child .graph {
+    display: flex; flex-direction: column; flex-grow: 1;
+}
+
+</style>
+++++
+For this page, you'll need to open the  @starter-file{alg2-fuel-efficiency} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you. **Read the comments at the top of the file**, which descibe what each column in the dataset means.
+
+== Fitting Linear Models
+
+@n Evaluate `A15`, `A45` and `A75` in the Interactions Area. What *model* of car is used in all three rows? @fitb{}{@ifsoln{`A`}}
+
+@n At what three *speeds* is this model being tested in these rows? @fitb{}{@ifsoln{15, 45 and 75 miles per gallon}}
+
+@n Does there appear to be a correlation between speed and miles-per-gallon? @fitb{5em}{@ifsoln{Yes}}.
+
+@n If so, describe its *form* (e.g. - linear, non-linear, or none) and *strength* (strong, weak, moderate, or none). If it appears to be linear, What is the *direction*? If it does _not_ appear to be linear, describe its shape.
+
+@fitb{}{@ifsoln{There seems to be a moderate/strong, non-linear correlation}}
+
+@fitb{}{@ifsoln{It looks like a parabola that opens down, with a dimple at the top}}
+
+@fitb{}{}
+
+@n Use @show{(code '(lr-plot mpg-table "model" "speed" "mpg"))} to find the optimal *linear* model. What is the @math{R^2}? @fitb{}{@ifsoln{0.00426}}
+
+Write the model below, in both math and Pyret notation.
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
+}
+
+@vspace{1ex}
+
+@n Is the best-possible linear model good? @fitb{5em}{@ifsoln{No}}. Why or why not? @fitb{}{}
+
+@fitb{}{}
+
+== Fitting Curves
+
+[.FillVerticalSpace, cols="1a,1a", options="frame"]
+|===
+|
+@n Sketch your lr-plot in the space below, showing the relationship between `speed` and `mpg`. Be sure to label your axes, and draw the linear model!
+
+@ifnotsoln{@center{@image{../images/fuel-efficiency-quadratic.png, 300}}}
+
+@ifsoln{@center{@image{../images/fuel-efficiency-scatter.png, 300}}}
+
+|
+@n What do you *Notice?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n What do you *Wonder?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n Do you think a *curve* would fit better? @fitb{}{@ifsoln{yes}}
+
+@vspace{1ex}
+
+@n Draw a *curve* on your scatter-plot, which shows the overall shape in the data.
+
+@vspace{1ex}
+
+@n At what speed does your curve "peak"? @fitb{}{@ifsoln{45-55mpg}}
+
+|===

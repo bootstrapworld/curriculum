@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# last modified 2023-04-28
-
 # echo massage-distribution-lesson "$@"
 
 src=$1
 
 d=$2
 
+source ${MAKE_DIR}src-subdir-mgt.sh
+
 if test  -d "$d"; then
   echo Updating existing lesson $d
+  (cd $d; save_old_solution_pages)
 else
   mkdir -p $d
 fi
@@ -17,8 +18,12 @@ fi
 # this is just to avoid problems copying an empty dir
 (find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
-# ensure lesson plan adoc always present, even if empty
-test ! -f $d/index.adoc && touch $d/index.adoc
+# ensure lesson plan .adoc present, unless .shtml present
+if test ! -f $d/index.adoc; then
+  if test ! -f $d/index.shtml; then
+    touch $d/index.adoc
+  fi
+fi
 
 echo $src > $d/.repodir.txt.kp
 
@@ -42,8 +47,8 @@ for pl in $proglangs; do
   if test "$pl" != pyret -a "$pl" != none; then
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
-    cp -upr "$lessonName"/* "$lessonNamePl"
-    cp -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
+    $CP -upr "$lessonName"/* "$lessonNamePl"
+    $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
   #
   cd "$lessonNamePl"
@@ -53,7 +58,6 @@ for pl in $proglangs; do
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
   test -d pages || mkdir pages
-  test -d pages/.cached || mkdir -p pages/.cached
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"

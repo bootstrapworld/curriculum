@@ -1,0 +1,73 @@
+[.landscape]
+= Contracts
+
+Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
+
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+|Name||Domain||Range
+
+| `row-n`
+| `{two-colons}`
+| `(t {two-colons Table}, index {two-colons} Number)`
+| `->`
+| `Row`
+5+|`_row-n(animals-table, 5)_`
+
+| `scale`
+| `{two-colons}`
+| `Number, Image`
+| `->`
+| `Image`
+5+|`_scale( 0.8, triangle(30, "solid", "red"))_`
+
+| `sort`
+| `{two-colons}`
+| `(t {two-colons Table}, col {two-colons} String, increasing {two-colons} Boolean)`
+| `->`
+| `Table`
+5+|`_sort(animals-table, "species", true)_`
+
+| `stacked-bar-chart`
+| `{two-colons}`
+| `(t {two-colons} Table, group {two-colons} String, subgroup {two-colons} String)`
+| `->`
+| `Image`
+5+|`_stacked-bar-chart(animals-table, "sex", "species")_`
+
+| `star`
+| `{two-colons}`
+| `Number, String, String`
+| `->`
+| `Image`
+5+| `_star(50, "solid", "teal")_`
+
+| `string-contains`
+| `{two-colons}`
+| `String, String`
+| `->`
+| `Boolean`
+5+|`_string-contains("rockstar", "star")_`
+
+| `string-repeat`
+| `{two-colons}`
+| `String, Number`
+| `->`
+| `String`
+5+|`_string-repeat("cheetah ", 5)_`
+
+| `text`
+| `{two-colons}`
+| `String, Number, String`
+| `->`
+|  `Image`
+5+| `_text("I'm thankful for...", 50, "green")_`
+
+| `triangle`
+| `{two-colons}`
+| `Number, String, String`
+| `->`
+| `Image`
+5+|`_triangle(80, "solid", "darkgreen")_`
+
+|===

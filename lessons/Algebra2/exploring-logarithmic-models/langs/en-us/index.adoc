@@ -1,0 +1,146 @@
+= Exploring Logarithmic Models
+
+@description{Students investigate logarithmic relationships in demographic data about world countries, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
+
+@lesson-prereqs{exploring-linear-models, lookups}
+
+@keywords{logarithm, base}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Model logarithmic and exponential relationships using functions
+
+| Student-facing Lesson Goals
+|
+
+* Let's use Pyret to model logarithmic relationships in data
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+|
+* All students should log into @starter-file{program-list} and, open the @starter-file{alg2-countries}.
+
+| Key Points For The Facilitator
+|
+* This lesson assumes that students have been introduced to logarithms before, and are familiar with computation involving logarithmic functions.
+* The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
+|===
+
+== Looking for Patterns  @duration{30 minutes}
+
+=== Overview
+Students explore the @starter-file{alg2-countries}, and find a relationship between wealth and median life expectancy. They also learn how to build a new column for a table in Pyret.
+
+=== Launch
+
+[.lesson-instruction]
+--
+@right{@image{images/questions.png, 250}}
+
+- Do people who make more money generally live longer?
+- Open the @starter-file{alg2-countries}
+- From the File menu, select "Save a Copy", and click "Run".
+- Working in pairs or small groups, complete questions 1-6 on @printable-exercise{exploring-countries.adoc}.
+- Be ready to discuss your answers.
+--
+
+@teacher{
+Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
+
+Be attentive to sense-making: If a wealthy country is suffering heavy causalties in a war, where would we expect to see the datapoint? Why? What other conditions would cause a point to shift up, down, left or right?
+}
+=== Investigate
+
+[.lesson-instruction]
+--
+Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc} using @online-exercise{https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95, Fitting Wealth-v-Health} to try fitting linear, quadratics, and exponential models for this dataset
+--
+
+@teacher{
+Note: This worksheet involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to __discover that a new kind of  model is necessary__.
+}
+=== Synthesize
+
+- What's the best model you came up with?
+- What kinds of lines or curves did you draw?
+
+== Transforming the x-Axis @duration{20 minutes}
+
+=== Overview
+Students discover that by transforming the x-axis, they can fit a linear model to a logarithmic relationship.
+
+=== Launch
+
+@center{@image{images/wealth-v-life-linear.png}}
+
+There definitely appears to be a relationship here, but it's not one we've seen before. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.
+
+[.lesson-instruction]
+How well did our linear, quadratic, and exponential models fit this data? Is there another kind of function that starts off rising fast, but then levels off quickly?
+
+=== Investigate
+
+The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
+
+@center{@math{f(x) = b \times log(x) + c} }
+
+Logarithmic relationships grow very quickly at first, but then level out as @math{x} increases until they approach a horizontal line, called an _asymptote_.
+
+@optional For practice differentiating between quadratic, exponential, and logarithmic relationships, optional exercises are available for @opt-printable-exercise{classifying-tables.adoc, Tables}, @opt-printable-exercise{classifying-plots.adoc, Graphs} and @opt-printable-exercise{classifying-defs.adoc, Definitions}.
+
+We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
+
+[.lesson-instruction]
+Complete the first section of @printable-exercise{transforming-axis.adoc}, using @online-exercise{https://www.desmos.com/calculator/cbtooos3of, Wealth-v-Health - Logarithmic}.
+
+@teacher{Crowdsource the values students came up with for @math{b} and @math{c} in their best-guess logarithmic model. Were they very similar or very different? What were the @math{R^2} values?}
+
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
+
+Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
+
+[.lesson-instruction]
+Complete the last section of @printable-exercise{transforming-axis.adoc}, using @online-exercise{https://www.desmos.com/calculator/cbtooos3of, Wealth-v-Health - Logarithmic}.
+
+* A person running on a treadmill is still standing in the same place. Why?
+** Their forward movement is balanced by the backwards movement of the treadmill.
+* If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?
+** The treadmill needs to go faster as well - by the same amount.
+
+As long as the treadmill speed increases at the same rate as the runner, they will _balance one another's growth_. That's the same thing that's happening in our transformed graph.
+
+By __transforming the x-axis__ to grow exponentially, we are "squashing" the coordinate plane so that each interval of  represents 10x the growth in `pc-gdp` as the one before it. This balances  the logarithmic growth in `median-lifespan`, makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Going Deeper: Connecting to Inverse Functions}
+
+While this doesn't cover inverses in any real depth, the treadmill analogy opens the door to discussing how one kind of change can "cancel out" or "undo" another. A person running at a constant speed is adding distance per unit time, which is inverted by the treadmill subtracting that same distance per unit time.
+
+In Desmos, the tick marks on the Desmos axis increased exponentially when we switched to a log scale. If that person were accelerating exponentially, the treadmill would need to do so as well.
+|===
+
+=== Synthesize
+
+- How does seeing the point cloud as linear help us think about logarithmic growth?
+- What if we wanted to change the axis to show a quadratic scale? Or something more complicated?
+
+Even our best-guess logarithmic model looks like a straight line. But transforming the axes only makes things _look_ linear - the actual points haven't changed at all, and we still can't use linear regression to find the best model.
+
+- Can you think of a way we could we transform the _data_, instead of the axes?
+
+
+== Additional Exercises
+
+- @opt-printable-exercise{classifying-tables.adoc, Tables}
+- @opt-printable-exercise{classifying-plots.adoc, Graphs}
+- @opt-printable-exercise{classifying-defs.adoc, Definitions}

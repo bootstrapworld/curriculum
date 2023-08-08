@@ -37,7 +37,7 @@ The Circles of Evaluation are equivalent because of the Distributive Property, w
 {layout="LaunchC"}
 # The Distributive Property
 
-- On @printable-exercise{sum-to-product.adoc}, fill in the blanks so that the Circle of Evaluation on the right is equivalent to the Circle of Evaluation on the left.
+- On @printable-exercise{pages/sum-to-product.adoc}, fill in the blanks so that the Circle of Evaluation on the right is equivalent to the Circle of Evaluation on the left.
 - Use computation to confirm that the Circles of Evaluation in each pair are equivalent.
 - Place a checkmark next to the Circle of Evaluation that you think results in a simpler computation.
 
@@ -57,7 +57,7 @@ When was it easier to compute the _sum_? When was it easier to compute the _prod
 {layout="Launch"}
 # The Distributive Property
 
-On @printable-exercise{product-to-sum.adoc}, the Circle of Evaluation representing a product is provided, and you will complete the Circle of Evaluation that represents a sum.
+On @printable-exercise{pages/product-to-sum.adoc}, the Circle of Evaluation representing a product is provided, and you will complete the Circle of Evaluation that represents a sum.
 
 @image{images/product-to-sum.png}
 
@@ -65,7 +65,7 @@ On @printable-exercise{product-to-sum.adoc}, the Circle of Evaluation representi
 {layout="Launch"}
 # The Distributive Property
 
-- Now try @printable-exercise{distributive-challenge.adoc}, where you will practice applying the Distributive Property in both directions - and with expressions that include fractions and decimals!
+- Now try @printable-exercise{pages/distribution-challenge.adoc}, where you will practice applying the Distributive Property in both directions - and with expressions that include fractions and decimals!
 
 @image{images/challenge.png}
 
@@ -91,7 +91,7 @@ Elise says, "The second Circle should say 200 + 15, not 200 + 8."
 {layout="Investigate"}
 # The Distributive Property
 
-Turn to @printable-exercise{true-or-false.adoc}, where you will determine if equations represented by the Circles of Evaluation are true or false. Explain your response. The first problem is below.
+Turn to @printable-exercise{pages/true-or-false.adoc}, where you will determine if equations represented by the Circles of Evaluation are true or false. Explain your response. The first problem is below.
 
 @image{images/true-or-false.png}
 
@@ -99,7 +99,7 @@ Turn to @printable-exercise{true-or-false.adoc}, where you will determine if equ
 {layout="Investigate"}
 # The Distributive Property
 
-Next, try @printable-exercise{wodb.adoc}. Cross out the Circle of Evaluation that doesn’t belong with the others, and then explain your choice. The first problem is below.
+Next, try @printable-exercise{pages/wodb.adoc}. Cross out the Circle of Evaluation that doesn’t belong with the others, and then explain your choice. The first problem is below.
 
 @image{images/wodb.png}
 
@@ -157,7 +157,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 {layout="Investigate"}
 # The Distributive Property & Mental Math
 
-- Turn to @printable-exercise{mental-math.adoc} and look at the first problem.
+- Turn to @printable-exercise{pages/mental-math.adoc} and look at the first problem.
 - Make the math easier by creating an equivalent expression that we can solve in our heads. 
 - Let's talk through the first problem.
 
@@ -173,7 +173,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 # The Distributive Property & Mental Math
 
 - Do you find this process more efficient than the standard algorithm for multiplication? Explain.
-- Complete the rest of the workbook page by creating equivalent expressions that we can solve in our heads.
+- Complete the rest of the page by creating equivalent expressions that we can solve in our heads.
 
 @image{images/mental-math.png}
 

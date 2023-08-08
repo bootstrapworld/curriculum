@@ -1,0 +1,74 @@
+[.landscape]
+= Contracts
+
+Contracts tell us how to use a function. For example: `num-min {two-colons} (a {two-colons} Number, b {two-colons} Number) -> Number` tells us that the name of the function is  `num-min`, it takes two inputs (both Numbers), and it evaluates to a  `Number`. From the contract, we know  `num-min(4, 6)` will evaluate to a  `Number`. *Use the blank line under each contract for notes or sample code for that function!*
+
+[.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+
+|Name||Domain||Range
+
+| `above`
+| `{two-colons}`
+| `Image, Image`
+| `->`
+| `Image`
+5+|`_above(triangle(30, "solid", "red"),square(30, "solid", "blue"))_`
+
+| `bar-chart`
+| `{two-colons}`
+| `Table, String`
+| `->`
+| `Image`
+5+|`_bar-chart(animals-table, "legs"_`)
+
+| `bar-chart-summarized`
+| `{two-colons}`
+| `(t {two-colons} Table, labels {two-colons} String, values {two-colons} String)`
+| `->`
+| `Image`
+5+|`_bar-chart-summarized(animals-table, "species", "pounds")_`
+
+| `beside`
+| `{two-colons}`
+| `Image, Image`
+| `->`
+| `Image`
+5+|`_beside(star(50, "solid", "orange"),circle(50, "solid", "green"))_`
+
+| `box-plot`
+| `{two-colons}`
+| `Table, String`
+| `->`
+| `Image`
+5+|`_box-plot(animals-table, "age")_`
+
+| `build-column`
+| `{two-colons}`
+| `(t {two-colons} Table, col {two-colons} String, builder {two-colons} (Row -> Any))`
+| `->`
+| `Table`
+5+|`_build-column(animals-table, "sticker", label)_`
+
+| `circle`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| `Image`
+5+| @ifsoln{`_circle(30, "outline", "fuchsia")_`}
+
+| `count`
+| `{two-colons}`
+| `Table, String`
+| `->`
+| `Table`
+5+|`_count(animals-table, "species")_`
+
+| `ellipse`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_ellipse(30, 70, "outline", "lightblue")_`}
+
+|===

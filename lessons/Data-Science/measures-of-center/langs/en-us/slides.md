@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Mean
 
-**According to the Animal Shelter Bureau, the average pet weighs almost 41 pounds.**
+**According to the Animal Shelter Bureau, the average pet weighs almost 40 pounds.**
 
 Some medicines are dosed by weight: heavier animals need a larger dose that could be dangerous for smaller animals. 
 
@@ -22,7 +22,7 @@ If someone from the shelter needs to give a dose of medicine to the animals, **i
 {layout="Launch"}
 # Mean
 
-“The average pet weighs 41 pounds” is a statement about the entire dataset, which summarizes a whole column of values with a single number. 
+“The average pet weighs almost 40 pounds” is a statement about the entire dataset, which summarizes a whole column of values with a single number. 
 
 Summarizing a big dataset means that some information gets lost, so it’s important to pick an appropriate summary. Picking the wrong summary can have serious implications! 
 
@@ -54,6 +54,18 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 <!--
 
 -->
+{layout="Investigate-K"}
+# Mean
+
+The arithmetic mean is the number that "balances" all the other numbers in the sample. So let's do some real balancing!{style="font-size:14pt"}
+
+_Each group of three will need a ruler, 4-8 pennies, and at least one pen or pencil._{style="font-size:14pt"}
+
+1. The ruler represents a number line with values (weight) distributed equally across the line. If there's values at every inch from 0 to 12, where should the pencil be placed in order to balance the ruler on top of it?{style="font-size:14pt"}
+2. Place a penny at 1 and 11. Where must the pencil be placed to balance those two values? What is the mean of the values [1, 11]?{style="font-size:14pt"}
+3. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?{style="font-size:14pt"}
+4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?{style="font-size:14pt"}
+
 ---
 {layout="InvestigateC"}
 # Mean
@@ -62,7 +74,6 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 - Is there a **midpoint**? 
 - Is there a point that shows up **most often**? Each of these are different ways of “measuring center”.
 
-@image{images/num-line-pounds.png}
 <!--
 
 -->
@@ -90,7 +101,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 - Type `mean(animals-table, "pounds")`. 
 - What does this give us?
 - Does this support the Bureau’s claims?
-- Open your workbooks to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
+- Turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
 
 <!--
 
@@ -100,11 +111,10 @@ Notice that calculating the mean requires being able to add and divide, so the m
 {layout="Launch"}
 # Median
 
-You computed the mean of that column to be almost exactly 41 pounds, but if we look at the dataset we'll quickly see that most of the animals weigh less than 41 pounds! 
+You computed the mean of that column to be almost exactly 40 pounds, but if we look at the dataset we'll quickly see that most of the animals weigh less than 40 pounds! 
 
 In fact, more than half of the animals weigh less than _15 pounds_. What is throwing off the average so much?
 
-@image{images/num-line-pounds.png}
 <!--
 
 -->
@@ -262,7 +272,7 @@ When should each measure of center be used?
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
 <!--
-*Optional:* We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
+@optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 -->
 ---
 {layout="Supplemental"}

@@ -99,13 +99,14 @@
         "is __away from the keyboard!__ Our lesson plans are tightly integrated\n"
         "with a detailed Student Workbook, allowing for paper-and-pencil practice and\n"
         "activities that don't require a computer.\n"
-        "\n"
-        "link:"
-          (if c (second c) "missing-link")
-          "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
+          "That's why we provide a free PDF of the link:./workbook/workbook.pdf[core workbook],"
+          " as well as a link to link:./workbook/workbook-long.pdf[the book with every optional exercise included].\n"
         "\n"
         "Of course, we understand that printing them yourself can be expensive!\n"
-        "link:./workbook/workbook.pdf[Click Here to download a free PDF of the workbook].\n"
+        "\n"
+         "link:"
+          (if c (second c) "missing-link")
+          "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
         "\n") o)))
 
 (define (print-link-to-standards course o)
@@ -125,7 +126,7 @@
       "answer key to the student workbook, keys to all the exercises,\n"
       "and pre- and post-tests for teachers who are participating in our\n"
       "research study. For access to these materials, please fill out the\n"
-      "link:https://docs.google.com/a/bootstrapworld.org/spreadsheet/viewform?formkey=dHpQc0VHV2dBU2tSN1ptMktBUmtoZWc6MQ#gid=0[password request form].\n"
+      "https://docs.google.com/forms/d/e/1FAIpQLSefQhHo-AA6ruZyICrx51OnJp0sU63b_Y3h05f4KZKHiUbPXw/viewform[password request form].\n"
       "We'll get back to you soon with the necessary login information.\n") o))
 
 (define (print-link-to-forum o)

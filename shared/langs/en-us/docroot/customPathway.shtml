@@ -15,6 +15,7 @@
             margin-right: 5px;
         }
     </style>
+    <script src="lib/bootstraplesson.js"></script>
     <script src="dependency-graph.js"></script>
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
@@ -30,21 +31,7 @@
         // load required symbols, trim the dependency graph
         const { PDFDocument, rgb, degrees } = PDFLib
 
-        const lessonsToIgnore = ['__sample-lesson','__sample-lesson-wescheme', 'zample-lesson', 'hoc-wescheme-intro', 'hoc-winter', 'hoc-winter-parley', '__sample-lesson-codap', 'codap-bar-charts-codap', 'codap-exploring-codap', 'codap-transformers-1-codap', 'codap-transformers-2-codap', 'composing-table-operations-codap', 'computing-needs-all-voices-codap', 'data-cycle-codap', 'ds-intro-codap', 'ethics-privacy-and-bias-codap', 'grouped-samples-codap', 'composing-table-operations-codap', 'probability-inference-codap', 'project-exploration-paper-codap', 'sw-what-ships-carried-spreadsheets', 'sw-where-in-asia-spreadsheets','exploring-linear-relationships','exploring-quadratic-relationships','exploring-logarithmic-relationships','maya-skulls-spreadsheets', 'maya-1-spreadsheets'];
-        lessonsToIgnore.forEach(l => delete graph[l]);
-
-        // used with [].filter to produce an array of unique elts
-        const onlyUnique = (value, index, self) => self.indexOf(value) === index;
-        const getPrereqs = (l) => {
-            if(!graph[l]) {
-                throw "an unknown lesson was passed to getPrereqs:" + l;
-            }
-            return graph[l].prerequisites.concat(...graph[l].prerequisites.map(getPrereqs));
-        }
-
-        // recursively compute all prerequisites for each lesson and project
-        Object.keys(graph).forEach(k =>
-            graph[k].prerequisites = getPrereqs(k).filter(onlyUnique));
+        configureGraph(graph);
 
         function populateLessonList(ul, lessonNames, showDescription) {
             var search = location.search.substring(1);
@@ -215,7 +202,7 @@ specific recommendations for in-person v. remote instruction.</p>
                 answer key to the student workbook, keys to all the exercises,
                 and pre- and post-tests for teachers who are participating in our
                 research study. For access to these materials, please fill out the
-                <a href="https://docs.google.com/a/bootstrapworld.org/spreadsheet/viewform?formkey=dHpQc0VHV2dBU2tSN1ptMktBUmtoZWc6MQ#gid=0">password request form</a>.
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSefQhHo-AA6ruZyICrx51OnJp0sU63b_Y3h05f4KZKHiUbPXw/viewform">password request form</a>.
                 We'll get back to you soon with the necessary login information.</p>
                 </li>
             -->

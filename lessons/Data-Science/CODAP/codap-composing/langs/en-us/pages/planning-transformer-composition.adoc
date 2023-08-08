@@ -1,0 +1,85 @@
+= Planning Transformer Composition
+++++
+<style>
+.literalblock pre { 0.5em 0 !important; }
+table:first-of-type td {padding: .25em .5em !important; }
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+.data th:last-of-type, .data td:last-of-type * {
+  font-style: italic !important; text-align: center;
+}
+</style>
+++++
+
+The table `t` below represents four animals from the shelter:
+
+[.data, cols='5', options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
+|===
+
+@vspace{1ex}
+
+You have several Transformers already defined:
+
+[cols='5']
+|===
+
+| *filter-if-young*
+
+filters out animals younger than 4
+
+| *filter-if-female*
+
+filters out animals that are female
+
+| *filter-if-heavy*
+
+filters out animals whose weight is greater than 20 kilos
+
+| *build-kilos*
+
+builds a new column that converts pounds to kilos
+
+| *transform-kilos*
+
+transforms kilos to grams
+
+|===
+
+@vspace{1ex}
+
+For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
+
+[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+|===
+|
+| Prompt
+| Circle of Evaluation
+
+| @n
+| Produce a Table containing all young, fixed animals
+| @showsoln{(coe '(filter-if-young (filter-if-fixed t))) }
+
+| @n
+| Produce a Table showing all animals that weigh more than 20 kilograms
+| @showsoln{(coe '(filter-if-heavy (build-kilos t))) }
+
+| @n
+| Produce a Table showing all female animals that weigh more than 20 kilograms
+| @showsoln{(coe '(filter-if-female (filter-if-heavy (build-kilos t)))) }
+
+| @n
+| Produce a Table that provides all animals' weights in grams
+| @showsoln{(coe '(transform-kilos (build-kilos t)))}
+
+| @n
+| Produce a Table for all female animals, which includes their weight in grams
+| @showsoln{(coe '(filter-if-female (transform-kilos (build-kilos t))))}
+
+
+
+|===

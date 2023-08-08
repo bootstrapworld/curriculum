@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-13
-
 local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
@@ -109,13 +107,18 @@ function add_aspect(f, o)
 end
 
 function collect_exercise_info(lesson_dir, proglang)
+  local lesson_plan_file = lesson_dir .. '/index.adoc'
+  --
+  if not file_exists_p(lesson_plan_file) then
+    return
+  end
+  --
   local lesson_cache = lesson_dir .. '/pages/.cached/'
   local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
   local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'
   local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
   local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
   local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
-  local lesson_plan_file = lesson_dir .. '/index.adoc'
   --
   local workbook_pages = {}
   if file_exists_p(workbook_page_list_file) then

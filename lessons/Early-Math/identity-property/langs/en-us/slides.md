@@ -25,7 +25,7 @@ What do you Notice? What do you Wonder?
 {layout="LaunchC"}
 # The Identity Property
 
-Now, complete the workbook page by filling in the blanks for the remaining Circles. Avoid putting the same operator more than once.
+Now, complete the page by filling in the blanks for the remaining Circles. Avoid putting the same operator more than once.
 
 What did you observe about the Identity Property for division? Subtraction?
 
@@ -47,7 +47,9 @@ Multiplying or dividing an expression by 1 does not change its value; similarly,
 
 How does the Circle of Evaluation below illustrate the Identity Property?
 
-@image{images/coe.png,250}
+@show{(coe '(+ 27 (- 8 8)))}
+
+
 
 ---
 {layout="Investigate"}

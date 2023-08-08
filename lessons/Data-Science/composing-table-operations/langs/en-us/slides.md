@@ -1,6 +1,6 @@
 ---
 {layout="DS Title Slide"}
-# Method Chaining
+# Composing Table Operations
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -10,14 +10,21 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Design Recipe Practice
 
-The Design Recipe is a powerful tool for solving problems by writing @ifproglang{pyret}{functions} @ifproglang{codap}{expressions}. It's important for this to be like second nature, so let's get some more practice using it.
+When filtering rows or building columns, we need to write @ifproglang{pyret}{functions}@ifproglang{codap}{Transformer expressions}. __This should be done carefully!__ We want our results to be rock solid and accurate, especially if they're going to be used in ways that affect the world around us.
+
+---
+{layout="Launch"}
+# Design Recipe Practice
+
+The Design Recipe is a sequence of steps that helps us document, test out, and write @ifproglang{pyret}{functions} @ifproglang{codap}{Transformer expressions} that let us dig deeper into our data, and analyze it more carefully. It's important for this to be like second nature, so let's get some practice using it.
+
 
 @ifproglang{codap}{
 ---
 {layout="LaunchC"}
 # Design Recipe Practice
 
-Let's look at this @printable-exercise{pages/design-recipe-1.adoc} worksheet together.
+Let's look at @printable-exercise{pages/design-recipe-1.adoc} together.
 
 First, we need to decide which Transformer to use: Filter, Transform, or Build. 
 
@@ -58,7 +65,7 @@ Now, we are ready to drill down on the contents of our Transformer.
 
 - First - the *contract*, which requires a domain and a range. 
 
-- Next, we need a clear *purpose statement* which describes what the expression does to each row. 
+- Next, we need a clear *purpose statement*, which describes what the expression does to each row. 
 
 - And finally, we enter our *expression*, in this case: `species = "dog"`.
 
@@ -77,13 +84,19 @@ Each time students encounter a new word problem, we encourage working through it
 {layout="Investigate"}
 # Design Recipe Practice
 
-- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
+Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
+
+Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
 
 
 <!--
+Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
 
+By using the `and` and `or` operators, we can _combine_ Boolean tests @ifproglang{codap}{on a single Transformer, like `Filter`.} @ifproglang{pyret}{, as in: `(1 > 2) and ("a" == "b")`} @ifproglang{codap}{Once we've opened the `Filter` Transformer, we would tell CODAP to keep all rows that satisfy `Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
+
+@ifproglang{pyret}{For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called _Composition_!} @ifproglang{codap}{When we want to compose _different_ Transformers, however, this strategy will not work. We'll need to find another way!}
 -->
+
 ---
 {layout="Synthesize"}
 # Design Recipe Practice
@@ -95,184 +108,201 @@ Each time students encounter a new word problem, we encourage working through it
 
 -->
 
+---
+{layout="Launch"}
+# Composing
+
+We already know how to filter, sort, and build columns - but what if we want to do _multiple things, all at once?_ Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
+
+---
+{layout="Launch"}
+# Composing
+
+A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
+
+To provide her with this data, what operations do we need to do to our dataset?
+
+<!--
+We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.
+-->
+
+---
+{layout="Launch"}
+# Composing
+
+Order matters: Build @ifproglang{codap}{/ Transform}, Filter, Sort.
+
+What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
+
+<!--
+(Sample responses:) It will crash! The computer won't like it!
+-->
+
+---
+{layout="Launch"}
+# Composing
+
+If we use our @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results!
+
+---
+{layout="Investigate"}
+# Composing
+
+One way to organize our thoughts is to diagram what we want to do, using the @vocab{Circles of Evaluation}. The rules are simple:
+
+1) Every Circle must have one - and only one! - @ifproglang{pyret}{function} @ifproglang{codap}{Transformer type}, written at the top.
+
+2) The arguments of the @ifproglang{pyret}{function} @ifproglang{codap}{Transformer} are written left-to-right, in the middle of the Circle.
+
+---
+{layout="Launch"}
+# Composing
+
+Values like Numbers, String, and Booleans are still written by themselves. It's only when we want to use a @ifproglang{pyret}{function} @ifproglang{codap}{Transformer} that we need to draw a Circle, and write the values inside from left-to-right.
+
+
 @ifproglang{pyret}{
 ---
-{layout="Launch"}
-# Chaining
+{layout="LaunchC"}
+# Composing
 
-Suppose we start with some number A, and want to add B, C and D to it. The code below will get the job done:
-```
-x = A + B                # starting with A, add B
-y = x + C                # then add C....
-result = y + D           # then add D to get our result
-```
+Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. According to the @vocab{contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.
 
-Why is this code ugly, or hard to read?
-
-<!--
-Why is this code ugly, or hard to read? Many lines of code means more to read and more possible places for bugs. This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
--->  
-
----
-{layout="Launch"}
-# Chaining
-
-We can easily _chain these operators together_, to do all the calculation in one line of code:
-```
-result = A + B + C + D
-```
----
-{layout="Launch"}
-# Chaining
-
-- Open your saved Table Methods Starter File (or @starter-file{table-methods, open a new one}), and click "Run".
-- Can you make a table with a new column called "nametag" that is populated using the `label` function?
-- Can you take _that_ table, and filter it so it only shows the fixed animals?
-- Can you sort _that_ table by species?
-
----
-{layout="Launch"}
-# Chaining
-
-
-Let's look at one possible solution to these challenges:
-```
-x = animals-table.build-column("labels", nametag)    # starting with our table, and add labels
-y = with-labels.filter(is-fixed)                     # then filter by is-fixed...
-result = fixed-with-labels.order-by("species", true) # then sort by species to get our result
-```
-
-Why is this code ugly, or hard to read?
-
-<!--
-  Many lines of code means more to read and more possible places for bugs. This code creates names for each step. But we don't really care about `x` or `y` -- we just want the final answer `result`!
--->
-
----
-{layout="Launch"}
-# Chaining
-
-
-Pyret allows table methods to be _chained together_, so that we can build, filter _and_ order a Table in one shot. 
-
-```
-result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
-```
-
- 
-<!--
-- We take the `animals-table`, and produce a new table with an extra column called `label`.
-- Then call _that_ Table's `.filter` method, producing a new table with a `label` column and only rows for fixed animals.
-- Then we call _that_ Table’s `order-by` method, producing a new, sorted table of fixed animals with a `label` column.
-
--->
----
-{layout="Launch"}
-# Chaining
-
-It can be difficult to read code that has lots of method calls chained together, so we can add a line-break before each `.` to make it more readable. Here’s the exact same code, written with each method on its own line:
-
-```
-# get a table with the nametags of all 
-# the fixed animals, ordered by species
-result = animals-table.build-column("labels", nametag).filter(is-fixed).order-by("species", true)
-```
-
-
----
-{layout="Launch"}
-# Chaining
-
-* Take a minute to think about what code you would write to sort the animals table by the kilograms column.
-* Do you think
-`animals-table.order-by("kilograms", true).build-column("kilograms", kilos)`
-will generate the table we want? Why or why not? 
-
-Test your hypothesis by typing the code that you think will build the table into the starter file!
+@image{images/build-col-coe.png}
 }
 
+
 @ifproglang{codap}{
+---
+{layout="LaunchC"}
+# Composing
+
+Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. We know that our transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.
+
+}
 
 ---
-{layout="Launch"}
-# Chaining
+{layout="LaunchC"}
+# Composing
 
-Now that we are doing more sophisticated analyses, we might find ourselves in a situation where we want to use a series of Transformers!
+But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need another Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can’t be the animals-table again, because that doesn’t have a `"kilos"` column.
 
+
+@ifproglang{pyret}{
 ---
-{layout="Launch"}
-# Chaining
+{layout="LaunchC"}
+# Composing
 
-Suppose a journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs no more than 9 kilograms.
+3\. Circles can contain other Circles!
 
-She also wants to review an updated copy of the dataset each week (reflecting changes to the shelter's population) before making a decision about which animal to showcase.
+Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
 
+@image{images/filter-build-col-coe.png}
+}
+
+
+
+@ifproglang{codap}{
 ---
-{layout="Launch"}
-# Chaining
+{layout="LaunchC"}
+# Composing
 
-In CODAP, we can use the result of one Transformer as the dataset for another Transformer! 
+1) Circles can contain other Circles!
 
-To help the journalist, you decide that you want to use *two* Transformers: _Build Attribute_ and _Filter_. But in which order?
-
----
-{layout="Launch"}
-# Chaining
-
-- The _Build Attribute_ Transformer we must define uses this formula: `pounds/2.205`. It also requires that we provide a name for our new attribute, such as `kilograms`.
-- The _Filter_ Transformer that we must define uses this formula: `kilograms<9`.
-- Which of the two above Transformers should we apply _first_, `weight-in-kg` or `filter-if-light`?
-- What do you predict will happen if we apply them in the wrong order? Why?
-
----
-{layout="Launch"}
-# Chaining
-
-A perk of applying Transformers, rather than manipulating the dataset, is that any updates made to the original dataset will flow through the chain. As you chain together Transformers, it is important to remember the following:
-
-**Order matters: Build / Transform, Filter, Sort.**
-
-<!--
-**Tip: Saving Transformers and Renaming Tables**
-
-Saving a particular configuration of a Transformer is useful so that the Transformer can be easily accessed in the future. When we save a Transformer, we want to give it a useful name and purpose statement for ease of use later.
-
-We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(Sort(Filter(BuildAttribute(Animals-Dataset))))`. That's a lot of parentheses! As an alternative, students might consider using the following table names in this activity: `animals-in-kg`, followed by `light-animals-in-kg`, and then `ordered-light-animals-in-kg`.
--->
+Our first Circle of Evaluation _produces a table_, and that's the one we want to use as the first input to `filter`!
 
 }
 
 ---
 {layout="Investigate"}
-# Chaining
+# Composing
 
-**Order matters: Build @ifproglang{codap}{/Transform}, Filter, Sort.**
+- Complete @printable-exercise{pages/composing-table-operations.adoc}.
+- @optional For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
 
-How well do you know your table methods? Complete @printable-exercise{pages/chaining-methods.adoc} and @printable-exercise{pages/chaining-methods-order-matters.adoc} to find out.
+
+@ifproglang{pyret}{
+---
+{layout="Investigate"}
+# Composing
+
+To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}.
+
+
+---
+{layout="Investigate"}
+# Composing
+
+@show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}
+
+- Type the above code into Pyret and see what you get!
+- Draw the Circle of Evaluation showing how to make a bar chart showing the species in the shelter, __but only for old animals__. Then convert it to code and type it into Pyret.
+- For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
+
+<!--
+Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
+-->
+}
+
+@ifproglang{codap}{
+---
+{layout="Investigate"}
+# Composing
+
+A perk of composing Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. 
+
+Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. 
+
+Transformers can also be reused, eliminating duplicate work.
+
+<!--
+Saving a particular configuration of a Transformer is useful so that the Transformer can be easily accessed in the future. When we save a Transformer, we want to give it a useful name and purpose statement for ease of use later.
+
+We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider using renaming the table. For instance, `light-animals-in-kg` might be a more useful table name, here.
+-->
+}
+
+---
+{layout="Investigate"}
+# Composing
+
+Circles of Evaluation let us think and plan, without worrying about small details.
+
+Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. 
+
+
+<!--
+For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportiunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
+-->
+
+---
+{layout="InvestigateC"}
+# Composing
+
+Armed with these tools, we can do some pretty complex analysis! We can even think of data displays as another kind of table operation. What will this Circle of Evaluation produce?
+
+@image{images/box-plot-coe.png}
+
+
+---
+{layout="Investigate"}
+# Composing
+
+Complete @printable-exercise{pages/planning-table-operations.adoc}.
+
+<!--
+Review student answers to @printable-exercise{pages/planning-table-operations.adoc}.
+-->
 
 ---
 {layout="Synthesize"}
-# Chaining
+# Composing
 
-Share your answers - which expressions will produce errors? Why?
-
-As our analysis gets more complex, chaining is a great way to **re-use code we've already written**. 
-
-Less code means a **smaller chance of bugs**. 
-
-<!--
-Ask students about their answers to @printable-exercise{pages/chaining-methods-order-matters.adoc}. Which ones produce an error? Why do will they produce an error, and how can this be fixed?
--->
-
-@ifproglang{codap}{
+Was it helpful to think about the Circles, without worrying about @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}? Why or why not?
 
 ---
 {layout="Supplemental"}
-# Additional Exercises
+# Additional Materials
 
-- @opt-printable-exercise{pages/chaining-methods-table-transformations.adoc}
+@opt-printable-exercise{pages/building-from-circles-2.adoc}
 
-<!--
-
--->
-}

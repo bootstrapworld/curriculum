@@ -9,11 +9,11 @@
 }
 
 @ifproglang{pyret}{
-@lesson-prereqs{functions-dr, table-functions}
+@lesson-prereqs{functions-dr, filtering-and-building}
 }
 
 @ifproglang{codap}{
-@lesson-prereqs{codap-transformers-2}
+@lesson-prereqs{codap-building}
 }
 
 @keywords{}
@@ -63,7 +63,7 @@ The Design Recipe is a sequence of steps that helps us document, test out, and w
 
 @ifproglang{codap}{
 [.lesson-instruction]
-- Let's look at this @printable-exercise{pages/design-recipe-1.adoc} worksheet together.
+Let's look at @printable-exercise{pages/design-recipe-1.adoc} together.
 
 First, we need to decide which Transformer to use: Filter, Transform, or Build. Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
 
@@ -83,7 +83,7 @@ Now, we are ready to drill down on the contents of our Transformer.
 
 - First - the *contract*, which requires a domain (what type of data will we provide) and a range (what type of data will be produced). Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
 
-- Next, we need a clear *purpose statement* which describes what the expression does to each row. In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
+- Next, we need a clear *purpose statement*, which describes what the expression does to each row. In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
 
 - And finally, we enter our *expression*, in this case: `species = "dog"`.
 
@@ -93,6 +93,7 @@ Each time students encounter a new word problem, we encourage working through it
 }
 
 === Investigate
+
 [.lesson-instruction]
 - Open your saved @starter-file{animals}.
 - Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
@@ -124,15 +125,15 @@ Students learn to diagram expressions using the Circles of Evaluation. This tool
 === Launch
 We already know how to filter, sort, and build columns - but what if we want to do _multiple things, all at once?_ Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
 
-A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *no more than 9 kilograms* (they don't use "pounds" in Britain!).
+A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *more than 9 kilograms* (they don't use "pounds" in Britain!).
 
 * To provide her with this data, what operations do we need to do to our dataset?
-** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2__
+** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.__
 
 [.lesson-point]
 Order matters: Build @ifproglang{codap}{/ Transform}, Filter, Sort.
 
-* What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a "kilos" column?
+* What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
 ** __(Sample responses:) It will crash! The computer won't like it!__
 
 If we use our @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results!
@@ -154,7 +155,7 @@ Let's try diagraming what we need to do for the journalist, using the Circles of
 @show{(coe '(build-attribute animals-table "kilos" pounds/2.205))}
 }
 
-But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know @ifproglang{pyret}{`build-column`} @ifproglang{codap}{`build-attribute`} goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
+But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
 
 **__3) Circles can contain other Circles!__**
 
@@ -172,37 +173,15 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 [.lesson-instruction]
 - Complete @printable-exercise{pages/composing-table-operations.adoc}.
-- Optional: For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
+- @optional For more of a challenge, tackle @opt-printable-exercise{pages/composing-table-operations-order-matters.adoc}
 
-
-//////////////////////////
-Pyret-specific content
-//////////////////////////
-@ifproglang{pyret}{
-To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}.
-
-[.lesson-instruction]
-- Type this into Pyret and see what you get!
-- Draw the Circle of Evaluation showing how to make a bar chart showing the species in the shelter, __but only for old animals__. Then convert it to code and type it into Pyret.
-- For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
-
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
-@span{.title}{Teaching Tip}
-
-Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
-|===
-
-}
 
 //////////////////////////
 CODAP-specific content
 //////////////////////////
 @ifproglang{codap}{
 
-A perk of composing Transformers is that everything is just a "view" on the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be re-used, eliminating duplicate work.
+A perk of composing Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -225,14 +204,36 @@ Armed with these tools, we can do some pretty complex analysis! We can even thin
 
 @show{(coe '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}
 
+//////////////////////////
+Pyret-specific content
+//////////////////////////
+@ifproglang{pyret}{
+To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}.
+
 [.lesson-instruction]
--  Complete @printable-exercise{pages/planning-table-operations.adoc}
+- Type this into Pyret and see what you get!
+- Draw the Circle of Evaluation showing how to make a bar chart showing the species in the shelter, __but only for old animals__. Then convert it to code and type it into Pyret.
+- For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
+
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Teaching Tip}
+
+Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
+|===
+
+}
+
+[.lesson-instruction]
+Complete @printable-exercise{pages/planning-table-operations.adoc}.
 
 === Synthesize
 Review student answers to @printable-exercise{pages/planning-table-operations.adoc}.
 
-Was it helpful to think about the Circles, without worrying about @proglang? Why or why not?
+Was it helpful to think about the Circles, without worrying about @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}? Why or why not?
 
 == Additional Exercises
 
-- @opt-printable-exercise{pages/building-from-circles-2.adoc}
+@opt-printable-exercise{pages/building-from-circles-2.adoc}

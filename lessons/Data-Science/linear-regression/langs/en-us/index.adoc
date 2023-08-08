@@ -2,7 +2,7 @@
 
 @description{Students compute the “line of best fit” using the function for linear regression, and summarize linear relationships in a dataset.}
 
-@lesson-prereqs{correlations, scatter-plots, ds-intro}
+@lesson-prereqs{correlations}
 
 @keywords{line of best fit}
 
@@ -39,9 +39,9 @@ Students are introduced to the _concept_ of @vocab{linear regression}, and learn
 _For teachers who have the need and the bandwidth to go deeper, this is a good opportunity to teach the algorithm behind linear regression. This algorithm is not part of Bootstrap:Data Science._
 
 === Launch
+Make two scatterplots from the `animals-table`, using `age` as the explanatory variable in one plot and `pounds` as the @vocab{explanatory variable} in the other.
 
-[.lesson-instruction]
-Have students turn to Part 1 of @printable-exercise{lr-plot-intro.adoc} and consider the scatter plots for weeks-v-pounds and weeks-v-age.
+In both plots, use `weeks` as your @vocab{response variable} and `name` for the `labels`. We will refer to the explanatory column as “xs” and the response column as “ys.”
 
 [cols="1a,1a", grid="none", frame="none"]
 |===
@@ -49,27 +49,33 @@ Have students turn to Part 1 of @printable-exercise{lr-plot-intro.adoc} and cons
 | @image{images/age-v-weeks.gif, 400}
 |===
 
-[.lesson-instruction]
---
+@teacher{
 Quickly survey the class about whether they think we can use an animal’s size or age to predict how long it will take to be adopted.
 
 - _A scatter plot of adoption time versus size does suggest that smaller animals get adopted faster than larger animals._
 - _Similarly, younger animals tend to be adopted faster than older ones._
---
+}
 
 Can we be more precise about this, and actually _predict_ how long it will take an animal to be adopted, based on these factors? And which one would give us a better prediction?
 
-[.lesson-point]
 Just as the mean, median, and mode can summarize data from a _single quantitative variable_, the “center” of points in a _two-dimensional_ cloud can be described by a @vocab{line of best fit}. Given a value for the @vocab{explanatory variable}, this line allows us to predict what the corresponding value for the @vocab{response variable} might be.
 
 [.lesson-instruction]
---
+Open the @online-exercise{https://www.geogebra.org/m/ZcVIxKtF, Interactive Regression Line}, and use it to complete @printable-exercise{lr-plot-intro.adoc}.
+
+@teacher{
+Have students talk about their answers to the first section.
+* Why do x-values that are far to the left or right of the point cloud have a larger impact on R?
+** Think of their distance from the "anchor" of the data as the length of a wrench. The longer the handle, the more "force" P applies on the regression line.
+* Why can't we have a regression line with all points above or below the line?
+** Because the points exert a _balanced_ force on the line. If all the points were on one side, there would be nothing to balance them out on the other side.
+}
+
 Data scientists use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. Linear regression is the math behind the @vocab{line of best fit}, which allows us to make predictions based on our data.
 
-When we draw our @vocab{line of best fit} on a scatter plot, we can imagine a rubber band stretching vertically between the line itself and each point in the plot -- every point pulls the line a little “up” or “down”.
+Each point in our scatter plot “pulls” on the line, with points above the line yanking it up and points below the line dragging it down. Points that are really far away -- especially influential observations that are far to the left or right of the point cloud —- pull on the line with more force.
 
-The line can be described by a @vocab{predictor function}.
---
+This line can be graphed on top of the scatter plot as a function, called the @vocab{predictor function}.
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
@@ -81,16 +87,16 @@ We prefer the words “explanatory” and “response” in our curriculum, beca
 
 The straight line that best fits the points on a scatter plot has several names, depending on the context, subject, or grade level. All of the following terms refer to the same concept:
 
-_Regression Line - Line of Best Fit - Least Squares Line - Predictor - Trendline_
+- Regression Line
+- Line of Best Fit
+- Least Squares Line
+- Predictor
+- Trendline
 
 The line itself is computed through a process called _linear regression_, which also goes by the name _least squares regression_.
 |===
 
 === Investigate
-[.lesson-instruction]
-Turn to Part 2 of @printable-exercise{lr-plot-intro.adoc} and answer the questions using the @online-exercise{https://www.geogebra.org/m/ZcVIxKtF, Interactive Regression Line}.
-
-Debrief as a class.
 
 [.lesson-instruction]
 * Turn to @printable-exercise{pages/drawing-predictors.adoc}.
@@ -99,7 +105,7 @@ Debrief as a class.
 * Then assess the strength of the correlation.
 
 === Common Misconceptions
-* *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three datapoints!
+* *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three data points!
 
 === Synthesize
 Give students some time to experiment, then share back observations.
@@ -160,7 +166,7 @@ Students may notice another value in the lr-plot, called @math{R^2}. This value 
 [.lesson-instruction]
 - Turn to @printable-exercise{lr-plot-explore.adoc}.
 - Complete @printable-exercise{which-questions-make-sense.adoc}.
-- _Optional:_ Open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
+- @optional Open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
 
 === Synthesize
 
@@ -210,7 +216,7 @@ Let's take a look at how the Data Cycle can be used with Linear Regression, and 
 [.lesson-instruction]
 - Turn to @printable-exercise{describing-relationships-1.adoc}.
 - Using the language you saw on @printable-exercise{regression-analysis-example.adoc}, how would you write up the findings on this page?
-- Optional: For more practice, you can complete @opt-printable-exercise{describing-relationships-2.adoc}.
+- @optional For more practice, you can complete @opt-printable-exercise{describing-relationships-2.adoc}.
 
 === Common Misconceptions
 * *Don't call it "accuracy"!* One of the most common misconceptions about Linear Regression is that the @math{r} or @math{R^2} value is a _measure of accuracy._ For example, a student who sees a very high @math{r}-value when plotting age vs. weeks might say "this prediction is 95% accurate." But these values only speak to _how much variation in the y-axis can be explained by variation in the x-axis_, so the statement should be "95% of the variation in weeks can be explained by variation in the age."
@@ -247,7 +253,7 @@ There are many other kinds of statistical models out there, but all of them work
 |
 @span{.title}{Project Option: Olympic Records}
 
-In this project, students analyze @opt-project{olympics-project.adoc, olympics-project-rubric.adoc} data in running, swimming, or speed skating. They analyze change over time using scatter plots and linear regression. This project can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. Check out the @link{pages/olympics-project-rubric.html, rubric} too.
+In this project, students analyze Olympic data in running, swimming, or speed skating. They analyze change over time using scatter plots and linear regression. @opt-project{olympics-project.adoc, olympics-project-rubric.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. 
 
 @span{.center}{__(Project designed by Joy Straub)__}
 |===

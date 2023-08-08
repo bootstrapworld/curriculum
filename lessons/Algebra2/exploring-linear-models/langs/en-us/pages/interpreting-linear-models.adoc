@@ -1,0 +1,60 @@
+= Interpreting Linear Models
+++++
+<style>
+.studentAnswerMedium { min-width: 8em !important; }
+td { padding: 0 !important; }
+.example { font-style: italic; }
+.example p { line-height: 1 !important; }
+.example .fitbruby {
+	padding-top: 0.25rem !important;
+	border-color: lightgray !important;
+}
+</style>
+++++
+
+For this page, you'll need the @online-exercise{https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1, State Demographics Starter File} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+
+@vspace{1ex}
+
+**We started with a model based on Alabama and Alaska. We can interpret the slope and @math{R^2} value below:**
+
+[.example]
+--
+The @fitbruby{20em}{Alabama-Alaska}{sensible name} model predicts that a 1 @fitbruby{10em}{percent}{[x-axis units]} increase in @fitbruby{20em}{percent college degrees}{[x-axis]} is associated with a @fitbruby{15em}{5613 dollar}{[slope, y-units]} @fitbruby{10em}{increase}{increase / decrease} in @fitbruby{20em}{median household income}{[y-axis]}. Based on the @math{R^2} of @fitbruby{10em}{-15.63}{R^2^ value}, this model fits @fitbruby{15em}{really, really poorly}{really well, decently, poorly, etc.}.
+--
+
+@n Describe the optimal model YOU created via linear regression:
+
+The @fitbruby{20em}{linear-regression}{sensible name} model predicts that a 1 @fitbruby{10em}{percent}{[x-axis units]} increase in @fitbruby{20em}{percent college degrees}{[x-axis]} is associated with a @fitbruby{15em}{@ifsoln{1142 dollar}}{[slope, y-units]} @fitbruby{10em}{@ifsoln{increase}}{increase / decrease} in @fitbruby{20em}{median household income}{[y-axis]}. With an @math{R^2} of @fitbruby{10em}{@ifsoln{.585}}{R^2^ value}, this model fits @fitbruby{15em}{@ifsoln{pretty well}}{really well, decently, poorly, etc.}.
+
+@vspace{3ex}
+@span{.sectionbreak}{}
+@vspace{1ex}
+
+@n What does the **slope** of this linear model tell us? @fitb{}{}
+
+@fitb{}{@ifsoln{The amount by which median income increases for each percentage of citizens who finished college}}
+
+@n What does the **y-intercept** of a linear model tell us? @fitb{}{}
+
+@fitb{}{@ifsoln{The median income of a state with no college graduates}}
+
+@n Suppose a state goes from 10% to 11% college graduation. According to this model, what kind of change would we expect to see in the median household income? @fitb{7em}{@ifsoln{$1142}} What if it goes from 50% to 51%? @fitb{7em}{@ifsoln{$1142}} From 90% to 91%? @fitb{}{@ifsoln{$1142}}
+
+@n Does this model predict the same increase in income for __every__ additional 1% `college-or-higher`? Why or why not? @fitb{}{}
+
+@fitb{}{@ifsoln{Linear models increase by equal amounts over all equal intervals}}
+
+@n Use `fit-model` to fit your model to the scatter plot again, but **swap the x- and y-columns**. Do you get the same @math{R^2}? Why or why not? @fitb{}{}
+
+@fitb{}{@ifsoln{Yes, because every point is reflected across the line, and a the distance from each point to a straight line is the same.}}
+
+@fitb{}{}
+
+@vspace{3ex}
+@span{.sectionbreak}{}
+@vspace{1ex}
+
+@n Describe another model you created:
+
+The @fitbruby{20em}{}{sensible name} model predicts that a 1 @fitbruby{10em}{@ifsoln{percent}}{[x-axis units]} increase in @fitbruby{20em}{@ifsoln{percent college degrees}}{[x-axis]} is associated with a @fitbruby{15em}{@ifsoln{1142 dollar}}{[slope, y-units]} @fitbruby{10em}{@ifsoln{increase}}{increase / decrease} in @fitbruby{20em}{@ifsoln{median household income}}{[y-axis]}. With an @math{R^2} of @fitbruby{10em}{}{R^2^ value}, model fits @fitbruby{15em}{}{really well, decently, poorly, etc.}.

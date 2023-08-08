@@ -1,6 +1,6 @@
 ---
 {layout="Math Title Slide"}
-# Equivalence and Variables
+# Equivalence
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
@@ -8,190 +8,233 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 ---
 {layout="LaunchC"}
-# Seeing Equivalence
+# Computation and Equivalence
+ 
+Look at this @vocab{Circle of Evaluation}:
 
-Look at Equation 1, below. 
+@image{images/coe1.png}
+
+---
+{layout="LaunchC"}
+# Computation and Equivalence
+
+To create a Circle of Evaluation of the same value, we could write what you see on the right:
+
+@image{images/coe2.png}
+
+---
+{layout="LaunchC"}
+# Computation and Equivalence
+
+Because we know that @math{8 + 2} produces 10, we can use it _in place of 10_. 
+
+In fact, we could replace 10 with a variety of different expressions to produce an @vocab{equivalent} Circle of Evaluation - one which simplifies to the same value.
+
+We could also simply write @math{16}!
+
+@image{images/coe2.png}
+
+
+<!--
+In this last example, the Circle of Evaluation has been simplified down to just one number; since every Circle of Evaluation must have an operator or function, the Circle disappears.
+
+Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before moving onto the next slide.
+-->
+
+---
+{layout="Launch"}
+# Computation and Equivalence
+
+Numeric expressions are *equivalent* when they simplify to the same value.{style="font-size:24pt"}
+
+<!--
+Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before delivering the following instructions:
+-->
+
+---
+{layout="Launch"}
+# Computation and Equivalence
+
+- On a piece of paper, you and your partner are going to create as many equivalent Circles of Evaluation for @math{10 + 6} as you can!
+
+- You may use any numbers and any operators, and as many of them as you like.
+
+- Compute the value of each Circle of Evaluation to confirm equivalence.
+
+- You have 5 minutes.
+
+<!--
+This activity offers students an opportunity to practice constructing Circles of Evaluation as they explore the notion of equivalence.
+    
+As students discovered in the previous lesson, Circles of Evaluation help us to see the underlying structure of mathematics. In this activity, Circles of Evaluation visually highlight the way in which expressions with the same value can have a variety of unique mathematical structures.
+
+-->
+
+---
+{layout="Investigate"}
+# Computation and Equivalence
+
+Let's share the different Circles of Evaluation we created!
+
+The goal is to put on the board as many _unique_ Circles of Evaluation as possible.
 
 What do you Notice? What do you Wonder?
 
-@image{images/eq1.png}
+<!--
+Invite students to draw their Circles of Evaluation on the board.
+
+The Notice & Wonder pedagogy is a widely-used best practice in Math-Ed, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent "What's going on in this Graph?" activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
+-->
+
+---
+{layout="Investigate"}
+# Computation and Equivalence
+
+- Let’s sort some of these Circles of Evaluation into groups (of any size!).
+- There is no right or wrong way to sort; in fact, you may choose to put one Circle of Evaluation into multiple groups, and you may leave some Circles of Evaluation ungrouped.
+- You and your partner will record your groupings on a piece of paper. Come up with a name for each group so that someone else could identify what you think makes that group unique.
+- Who sees a category for sorting Circles of Evaluation?
+
 
 <!--
-** _Possible responses: The outer circle subtracts @math{4}, the inner circle multiplies 22 and 3. The difference between the two Circles of Evaluation is that @math{22} and @math{3} swap positions._
+Work with students to identify one or two groupings as a class. If students are struggling to sort the Circles of Evaluation, you might offer one of the examples on the next slide.
+-->
+
+---
+{layout="Investigate"}
+# Computation and Equivalence
+
+Some examples of groups:
+
+- @math{10 + 6} and @math{6 + 10} could go into a group called "10 and 6" because they both include 10 and 6.
+
+- @math{10 + 6}, @math{6 + 10}, and @math{7 - 4} could go into a group called "Single Circles" because they are both examples of expressions with exactly one Circle (no nesting).
+
+- @math{10 + 6} and @math{20 - 4} could go into a group called "Sixteens" because they both evaluate to 16.
+
+<!--
+Subsequent lessons in this series introduce students to the Associative Property, the Commutative Property, the Identity Property, and the Distributive Property. Although students they may not know these properties by name, some will likely arise organically throughout the activity. There is no need to name properties today; instead, highlight students’ contributions and probe.
+
+For instance, if a student observes that @math{2 \times 8} is the same as @math{8 \times 2}, you might inquire whether the equivalence holds if we use division rather than multiplication.
+
+In short: there are no wrong answers here! The goal is to help students develop a deep yet flexible understanding of the language of mathematics.
+-->
+
+
+---
+{layout="Synthesize"}
+# Computation and Equivalence
+
+Let's share out the category names we developed!
+
+- Are there any groupings of expressions that are mirror-images of one another?
+
+- Are there any groupings that all compute the same answer?
+
+- Are there any groupings that have the same numbers and operations, but shuffled into different orders?
+
+<!--
+There is no need to evaluate categories’ names or qualify students’ observations; rather, challenge students to identify and articulate the patterns they have observed to lay a foundation upon which to formalize the laws of arithmetic.
+-->
+
+---
+{layout="LaunchC"}
+# Simplifying Arithmetic Expressions
+
+Look at the example of computation as a tool for solving, below. 
+
+Why is the first Circle of Evaluation equivalent to the second Circle of Evaluation? 
+
+Why is the second Circle of Evaluation equivalent to the final result?
+
+@image{images/comp-diagram1.png}
+
+<!--
+_To get from the the first Circle of Evaluation to the next: @math{5} less than @math{14} becomes 9. To get to the final result, @math{3} increased by @math{9} becomes @math{12}._
+-->
+
+---
+{layout="LaunchC"}
+# Simplifying Arithmetic Expressions
+
+Look at another example, below.
+
+Does the order in which we evaluate the two inner Circles matter? Why or why not?
+
+@image{images/comp-diagram2.png}
+
+<!--
+_No, the order does not matter! We could evaluate the Circle on the left first, or the Circle on the right first because the Circles are independent of one another. However, we have to evaluate both of the circles before we can find their sum!_
+
+Pedagogy note: To recap: *yes*, we are advocating for a flexible order of operations that relies on students' abilities to make sense of the underlying structure of math! To learn more about this notion, check out @link{https://thinking101canada.files.wordpress.com/2016/10/order-of-operations-the-myth-and-the-math.pdf, "Order of Operations: The Myth and the Math"}
+-->
+
+---
+{layout="Investigate"}
+# Simplifying Arithmetic Expressions
+
+
+- Each row on @printable-exercise{pages/computation-whole-nums.adoc} represents a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators!
+- Fill in those numbers and operators so that each sequence of Circles will end with the answer shown on the right.
+- When you're done, complete  @printable-exercise{pages/computation-frac-dec.adoc}, a version of the activity with more challenging numbers.
+- Did you fill in blanks in the Circles of Evaluation from left to right or right to left? Why?
+
+---
+{layout="Synthesize"}
+# Simplifying Arithmetic Expressions
+
+How can you determine whether two Circles of Evaluation are equivalent or not?
+
+
+---
+{layout="Launch"}
+# Are They Equivalent?
+
+We are about to learn to play two different games! 
+
+The first is *True or False?*
+
+The second is called *Which One Doesn't Belong?*
+
+We will return to these games often!
+
+<!--
+
+These activities are designed to help students develop a _relational view_ of the equal sign. Students often interpret the equal sign _operationally_, or they think of it as an instruction that means "now get the answer." Students with an operational view of the equal sign often solve solve 8 + 4 = ? + 5 incorrectly, as either 12 or 17.
+
+Conversely, students who have a relational view of the equal sign recognize that a relationship exists between the numbers or expressions on either side of the equal sign. Decades of research suggest that students who interpret the equal sign to mean "the same as" are better positioned to think algebraically down the road.
 -->
 
 
 ---
 {layout="LaunchC"}
-# Seeing Equivalence
+# Are They Equivalent?
 
-Now, look at Equation 2.
-
-Here, what do you Notice? What do you Wonder?
-
-@image{images/eq2.png}
-
-<!--
-Possible responses: The same numbers and operations are included. This time, the difference between the Circles of Evaluation is that the 4 moves from the beginning to the end.
--->
-
----
-{layout="Launch"}
-# Seeing Equivalence
-
-Which is true: Equation 1, Equation 2, or both? How do you know?
-
-@image{images/eq1&2.png}
-
-
-<!--
-** _The first equation is true. We see the Commutative Property of multiplication being applied when @math{22 \times 3} is transformed to @math{3 \times 22}._
-** _In the second equation, it looks as though there has been a misguided attempted to apply the Commutative Property; this does not work because the Commutative Property does not hold for subtraction._
-** _We can also use Computation to verify that both sides of the first equation equal @math{62}. The second equation's left side is @math{62}, but its right side is @math{-62}._
--->
-
----
-{layout="Investigate"}
-# Seeing Equivalence
-
-We have learned that computation is an effective strategy for determining whether or not two expressions are equivalent. 
-
-Pretty soon we'll be looking at expressions with variables, where our computation strategy won't work as well. 
-
-Let's see if we can figure out how to determine whether or not two expressions are equivalent without computation! 
-
-<!--
-For now, while students are still looking at expressions with numbers, they can double check their thinking with computation.
--->
-
----
-{layout="InvestigateC"}
-# Seeing Equivalence
-
-Complete @printable-exercise{true-or-false.adoc} using your knowledge of the Associative Property and the Commutative Property. Be sure to explain your responses. The first problem is below.
+- Look at the two Circles, below.
+- Use computation (or any other strategy) to determine if the statement of equivalence is true or false.
+- Once we're in agreement on the example, you may complete the rest of @printable-exercise{pages/true-or-false.adoc}
 
 @image{images/true-or-false1.png}
 
----
-{layout="Investigate"}
-# Seeing Equivalence
-
-Examine the Circles to decide @printable-exercise{which-one-doesnt-belong.adoc} Be sure to explain your thinking.  The first problem is below.
-
-@image{images/wodb1.png}
-
----
-{layout="Synthesize"}
-# Seeing Equivalence
-
-- Summarize the Associative Property in your own words. When does it apply?
-- Summarize the Commutative Property in your own words. When does it apply?
-- How can we computation to verify equivalence?
-- Can you think of any expressions involving subtraction or division when the Associative Property or the Commutative Property would apply?
-- What strategies did you use to locate equations that were false, or expressions that did not belong?
-
-
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-- In this class, sometimes we’ll work with @vocab{variables} - symbols that stand for values we don’t know yet.
-- The equation @math{c + a = r} could be true or false.
-- What are some values that make the equation true?
-- What are some values that make the equation false?
-
 <!--
-- What are some values that make the equation true?
-** _Sample answer: @math{c = 5}, @math{a = 10}, @math{r = 15}_
-- What are some values that make the equation false?
-** _Sample answer: @math{c = 1}, @math{a = 2}, @math{r = 900}_
--->
-
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-We can represent the Associative Property like this:
-
-@image{images/assocprop1.png}
-
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-Or like this:
-
-@image{images/assocprop2.png}
-
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-The same goes for the Commutative Property! We can represent it with variables, like this:
-
-@image{images/commprop1.png}
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-Or like this:
-
-@image{images/commprop2.png}
-
----
-{layout="Launch"}
-# Equivalence with Variables
-
-The Associative and Commutative Properties will hold no matter what values we substitute in for our variables.
-
-These examples on the previous slides show us that mathematical properties are _more powerful_ than sheer computation!
-
-<!--
-We can't use computation to prove that @math{12 + h} and @math{h + 12} are equivalent  – because without knowing what @math{h} is, we can't evaluate the expression! Commutativity lets us prove that these expressions are equivalent even with variables.
+The Circles of Evaluation in this activity were designed to support students in practicing various mental math strategies. If students can recognize structure and avoid computation, that's fine too!
 -->
 
 
 ---
 {layout="InvestigateC"}
-# Equivalence with Variables
+# Are They Equivalent?
 
-Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge of the Associative Property and the Commutative Property. The first problem is below.
+The second game involves analyzing four different Circles of Evaluation to determine which one is not equivalent.
 
-@image{images/true-or-false2.png}
+- Turn to @printable-exercise{pages/wodb.adoc}. Let's try the first problem (below) together. Which one doesn't belong and why?
+- Now complete the worksheet on your own.
 
-<!--
-This activity (and the subsequent one) invites students to apply their knowledge of the Associative and Commutative Properties in equations and Circles of Evaluation that include variables. For some students, this cognitive leap can be a challenging one. The familiarity of the workbook pages (they all parallel those in the previous section) can make this transition a bit smoother.
-
-Students are also welcome to choose values to represent the variables if they in fact want to evaluate the expressions to confirm if they are equivalent (or not). Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct. The ability to make substitutions to check equivalence is an extremely valuable skill.
--->
-
----
-{layout="InvestigateC"}
-# Equivalence with Variables
-
-Examine each of the Circles of Evaluation to decide @printable-exercise{which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking. The first problem is below.
-
-@image{images/wodb2.png}
-
-<!--
-If students get stuck, ask: What do you notice, at first glance? What makes the Circles of Evaluation alike? What makes them different?
--->
+@image{images/wodb.png}
 
 ---
 {layout="Synthesize"}
-# Equivalence with Variables
+# Are They Equivalent?
 
-- Are equations with variables always true?
-- What does it mean for two expressions with variables to be equivalent?
-
-<!--
-- Are equations with variables always true?
-** _No. If we see a representation of the Associative Property or the Commutative Property, then yes. An equation such as @math{j - y = y - j} is only sometimes true. And an equation like @math{g \times 0 = 600} is never true._
-- What does it mean for two expressions with variables to be equivalent?
-** _When two expressions with variables are equivalent, that means that *no matter what number we substitute in,* we will still get the same result._
--->
+- What strategies did you use to determine whether or not Circles of Evaluation were equivalent?
+- Did you find that some strategies were more efficient than others? Why?

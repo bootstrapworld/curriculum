@@ -2,9 +2,11 @@
 
 @description{Students learn about functions for sorting and counting data in tables, then are introduced to one-variable displays.}
 
-@lesson-prereqs{ds-intro, simple-data-types}
+@lesson-prereqs{simple-data-types}
 
 @keywords{pie chart, bar chart, histogram, box plot, data displays, count, sort, contract, function}
+
+@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
 
 [@lesson-intro-table]
 |===
@@ -48,13 +50,13 @@ If you have time and interest in digging deeper into contracts, we have a @lesso
 ** _Is it possible to alphabetize the list, or sort it in other ways?_
 --
 
-(If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions area, where `animals-table` is defined along with the names of the 8 columns.)
+(If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.)
 
 
 === Investigate
 
 [.lesson-instruction]
-Have students turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
+Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
 
 - What did these `sort` expressions do?
 ** _They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)_
@@ -64,15 +66,33 @@ Have students turn to @printable-exercise{functions-for-tables.adoc} and complet
 - What does it mean that the Range of `sort` is Table?
 ** _The function produces a new table._
 
+As you can imagine, there are many other functions that work with tables, each with a different set of inputs. For each of these functions, we need to keep track of three things:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
+
+[.lesson-point]
+Contracts are the _instruction manual_ for functions
+
+The Domain in the contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
+
 [.lesson-instruction]
-Have students complete question 7-10.
+Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 - How did `sort` work with quantitative columns?
 ** _true sorted the values from least to greatest. false sorted the values from biggest to smallest._
 - What new questions did you think of that could be answered using `sort`?
 
 [.lesson-instruction]
-Have students complete @printable-exercise{functions-for-tables-cont.adoc}, working with the `count` and `first-n-rows` functions.
+Once you know how to read Contracts, you can easily use all the tools in our programming language. Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+
+
+=== Common Misconceptions
+
+Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @{show(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
 
 === Synthesize
 
@@ -86,20 +106,74 @@ Have students complete @printable-exercise{functions-for-tables-cont.adoc}, work
 - How else do journalists and newscasters display summaries of data besides in tables?
 ** _Ideally someone will say bar charts!_
 
-== Functions for Making Displays @duration{20 minutes}
+== Composing with Circles of Evaluation @duration{10 minutes}
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+
+What if we wanted to see the ten youngest animals? How could the `first-n-rows` and `sort` functions work together? What order should we use the functions in?
+
+=== Investigate
+
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+
+1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+
+2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+
+3) Circles can contain other Circles!
+
+
+If we want to see the ten youngest animals, our diagram would look like this.
+
+@do{
+(define exp1 '(first-n-rows (sort animals-table "age" true) 10))
+}
+
+@show{(coe exp1)}
+
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
+
+@show{(code exp1)}
+
+If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
+
+@do{
+(define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
+}
+
+@show{(coe exp2)}
+
+That would translate to the following code:
+
+@show{(code exp2)}
+
+[.lesson-instruction]
+--
+- Turn to @printable-exercise{coe-sort-count.adoc}. 
+- Draw Circles of Evaluation and write code for each of the given scenarios.
+- Then test your code out in @starter-file{animals}.
+--
+
+=== Synthesize
+
+- What did you Notice?
+- What did you wonder?
+
+== Functions for Making Displays @duration{25 minutes}
 
 === Overview
 
 Students will be introduced to functions for making one-variable displays in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
 
-The goal here is for students to become familiar with __using contracts to write expressions that will produce displays__. Knowing how to _make_ a histogram doesn't mean a student really understands histograms! We have dedicated, in-depth lessons that focus on each display mentioned in this lesson:
+The goal here is for students to become familiar with __using contracts to write expressions that will produce displays__. Knowing how to _make_ a histogram doesn't mean a student really understands histograms! 
 
-* @lesson-link{bar-and-pie-charts}
-* @lesson-link{histograms}
-* @lesson-link{histograms2}
-* @lesson-link{box-plots}
-
-We also have dedicated lessons for other displays not mentioned here, such as @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
+Once students know how to use contracts to write expressions to make these displays, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms}, @lesson-link{visualizing-the-shape-of-data}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
 
 === Launch
 
@@ -109,7 +183,7 @@ The `count` function summarized the data for a single variable in a new table. B
 
 [.lesson-instruction]
 --
-- Turn to @printable-exercise{exploring-displays-alt.adoc}.
+- Turn to @printable-exercise{exploring-displays.adoc}.
 - Let's look at the first function together.
 - What is the name of the function?
 ** _bar-chart_
@@ -125,13 +199,42 @@ The `count` function summarized the data for a single variable in a new table. B
 - Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the contract to get them building!
 --
 
+__Optional:
+@teacher{
+If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-displays-2.adoc}.
+}__
+
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays.
+
+@show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+
+- What expression would this Circle of Evaluation generate?
+** @show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+- What would be the resulting display?
+** _a pie chart showing the species of the 10 youngest animals_
+
+If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.
+
+[.lesson-instruction]
+- Have students complete @printable-exercise{coe-displays.adoc}.
+- Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. *Consider what display it might be interesting to compare each of the displays on this page with.* 
+
+For more practice composing table functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}.
+
 === Synthesize
 
 - Which displays worked with categorical data?
-** _pie-chart & bar-chart_
+** `pie-chart` _and_ `bar-chart`
 - Why might you choose a bar chart over a pie chart or vice versa?
 ** `pie-chart` _only makes sense when you have the full picture, since it's representing the proportion of the whole_
 ** `bar-chart` _shows the count_
 - How are bar charts and histograms different?
 ** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
 ** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
+
+== Additional Exercises
+
+For more practice composing table functions, you can complete
+
+- @opt-printable-exercise{coe-displays-2.adoc} and/or
+- @opt-printable-exercise{matching-coe-to-descriptions.adoc}.

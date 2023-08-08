@@ -1,0 +1,97 @@
+= Transformer Cards to Cut Out
+++++
+<style>
+/* Make all rows use FRactional height, all being 1 unit (aka equal) */
+.FillVerticalSpace { grid-template-rows: repeat(4,1fr) !important; }
+</style>
+++++
+Provide the information needed to define each Transformer. Refer to the table of animals on @printable-exercise{create-transformer-cards.adoc} as needed.
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols="1,1",stripes="none"]
+|===
+
+| *`transform-age`* produces a table that transforms `age` to `age-last-year`
+
+*Type:* @fitb{}{@ifsoln{transform}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Attribute to Transform:* @fitb{}{ @ifsoln{`age`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`age-last-year`} }
+
+*Expression:* @fitb{}{ @ifsoln{`age-1`} }
+
+
+| *`filter-if-fixed`* produces a table with only fixed animals
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{@ifsoln{ `t` }}
+
+*Expression:* @fitb{}{ @ifsoln{`fixed=true` }}
+
+| *`filter-if-heavy`* produces a table with animals that weigh more than 50 pounds
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t` }}
+
+*Expression:* @fitb{}{ @ifsoln{`pounds>50` }}
+
+
+| *`filter-if-young`* produces a table with only animals that are younger than 5
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t` }}
+
+*Expression:* @fitb{}{ @ifsoln{`age<5`} }
+
+
+| *`build-elderly`* produces a table with an extra column named `elderly` that indicates if an animal is older than 5
+
+*Type:* @fitb{}{@ifsoln{build}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`older`} }
+
+*Expression:* @fitb{}{ @ifsoln{`age>5`} }
+
+
+| *`filter-if-elderly`* produces a table that only animals where `elderly = true`
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{@ifsoln{ `t` }}
+
+*Expression:* @fitb{}{@ifsoln{ `eldery=true` }}
+
+
+| *`transform-weight-loss`* produces a table where `pounds` becomes `lighter-weight`, which indicates weight after losing 5 pounds
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t`} }
+
+*Attribute to Transform:* @fitb{}{ @ifsoln{`pounds`} }
+
+*Name of New Attribute:* @fitb{}{ @ifsoln{`lighter-weight`} }
+
+*Expression:* @fitb{}{ @ifsoln{`pounds-5`} }
+
+
+| *`filter-if-lightest`* produces a table with only animals' whose `lighter-weight` is below 30 pounds.
+
+
+*Type:* @fitb{}{@ifsoln{filter}}
+
+*Dataset:* @fitb{}{ @ifsoln{`t` }}
+
+*Expression:* @fitb{}{ @ifsoln{`lighter-weight<30` }}
+
+
+|===

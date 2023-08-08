@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-03-14
-
 # echo doing do-lesson-plan.sh $1
 
 adocfile=$1
@@ -15,6 +13,10 @@ distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$
 adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
+
+glossaryfile=$containingdirectory/.cached/.${adocbasename%.adoc}-glossary.asc
+
+touch $glossaryfile
 
 if test ! -s $adocfile; then
   touch $containingdirectory/.cached/.${adocbasename%.adoc}.asc
@@ -59,6 +61,8 @@ touch $containingdirectory/.cached/.index-standards.asc
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
 echo $ascfile >> $ADOC_INPUT
+
+echo $glossaryfile >> $ADOC_INPUT
 
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_LESSONPLAN_INPUT
 

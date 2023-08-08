@@ -222,11 +222,12 @@ No! The Domain and Range are the same, but the function name is different... and
 
 # Exploring Image Functions
 
-- Take the next 10 minutes to experiment with the image functions listed in the contract pages at the back of your workbook. (_These pages are also available as an @opt-printable-exercise{image-contracts.adoc, optional handout}._)
+- Take the next 10 minutes to experiment with the image functions listed in @opt-printable-exercise{image-contracts.adoc, the contracts pages}. 
 
 - When you've got working expressions, record the contracts and the code!
 
 You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
+
 
 ---
 {layout="Synthesize"}
@@ -280,9 +281,9 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 
 Complete @printable-exercise{pages/triangle-contracts.adoc}.
 
-- Optional: @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
-- Optional: @printable-exercise{pages/radial-star.adoc} 
-- Optional: @opt-printable-exercise{pages/star-polygon.adoc} 
+- @optional @opt-printable-exercise{pages/triangle-contracts-cont.adoc}
+- @optional @printable-exercise{pages/radial-star.adoc} 
+- @optional @opt-printable-exercise{pages/star-polygon.adoc} 
 
 ---
 {layout="Synthesize"}

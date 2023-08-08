@@ -1,0 +1,78 @@
+= Classifying Function Definitions
+
+++++
+<style>
+#content img {width: 75%; height: 75%;}
+body.workbookpage td .autonum:after { content: ')'; }
+</style>
+++++
+
+Decide whether each representation describes a quadratic, exponential, or logarithmic function.
+
+[.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
+|===
+| @math{f(x) = 2log(x^4) - 3x + 9}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Quadratic
+! Exponential
+! @ifsoln-choice{Logarithmic}
+!===
+
+| @show{(code `(define (p q) (+ (* 3 (sqr x)) (* 2 x))))}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Quadratic}
+! Exponential
+! Logarithmic
+
+// need empty line here so the closing table block isn't swallowed
+!===
+
+| @math{population(d) = x + 2e^x}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Quadratic
+! @ifsoln-choice{Exponential}
+! Logarithmic
+!===
+
+| @math{z(t) = 3t^4 + log(t^2) + tx - 5}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Quadratic
+! Exponential
+! @ifsoln-choice{Logarithmic}
+!===
+
+| @show{(code `(define (h x) (+ (- (sqr x) (* 4 x)) 7)) )}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Quadratic}
+! Exponential
+! Logarithmic
+!===
+
+| @show{(code `(define (b a) (+ a (num-expt e (* 3 x)))) )}
+
+[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Quadratic
+! @ifsoln-choice{Exponential}
+! Logarithmic
+
+// need empty line here so the closing table block isn't swallowed
+!===
+
+|===

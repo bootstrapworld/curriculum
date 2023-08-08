@@ -1,0 +1,72 @@
+= Numbers
+++++
+<style>
+  #content { display: block !important; }
+</style>
+++++
+
+== Task 3: Playing with Pounds
+
+@vspace{1ex}
+
+As an employee of the shelter, you want each of these animals to be adopted! You wonder if visitors to the shelter might prefer to receive each animal's weight in kilograms, or maybe rounded to the nearest whole number.
+
+@n But first... let's make sure we understand how numbers work in CODAP. Create a new column, then enter the specified information into the formula box. (You can delete what's in the formula box once you've observed the output.)
+
+- Type `42` (no quotes). _Click Apply._
+
+- Type a fraction. _Click Apply._
+
+- Type a decimal. _Click Apply._
+
+- Type an integer. _Click Apply._
+
+- Enter some expressions that include operators, such as `5 * (8 + 2)`. _Click Apply._
+
+Does anything surprise you about how numbers behave in CODAP? Does CODAP know the order of operations? @fitb{}{}
+
+@fitb{}{}
+
+
+@n Create a new column. Name it `Kilograms`.  Note that to convert pounds to kilograms, we divide by 2.205. What will you enter in the formula box to populate this column with each animal's weight in kilograms? @fitb{}{}
+
+@fitb{}{@ifsoln{`Pounds/2.205`}}
+
+@n Create another new column. Name it `Rounded Kilograms`. Here, you will use the function `round`, which returns the value of its input, rounded. Enter `round(Kilograms)` in the formula box. What place value did `round` round to? @fitb{}{@ifsoln{It rounded to the nearest whole number.}}
+
+@n Enter `round(Kilograms, 1)`, then change it to `round(Kilograms, 2)`. What does the round function do with that second - optional - argument?"
+
+@fitb{}{@ifsoln{The function rounds to the specified number of digits after the decimal point.}}
+
+@fitb{}{}
+
+@n Click on `Kilograms`. From the drop-down menu that appears, select `Edit Attribute Properties`. Try changing the precision. How is changing precision different from rounding?@fitb{}
+
+@fitb{}{@ifsoln{Precision describes the number of digits used to express a value. No rounding occurs when we adjust precision.}}
+
+@vspace{1ex}
+
+== Task 4: You're the official CODAP expert at the shelter!
+
+@vspace{1ex}
+
+You've been so successful answering people's CODAP questions that now _everyone_ is ocming to you for help! You decide to spend some time playing around with more of the available functions, so you can help anyone who asks.
+
+@n Enter `sqrt(16)` into the `Edit Formula` box. How many arguments does `sqrt` expect? @fitb{}{@ifsoln{_1_}}
+
+@n What type of argument does the function `sqrt` expect? @fitbruby{30em}{@ifsoln{Number}}{Number? String?}
+
+@n What type of output does `sqrt` produce? @fitbruby{30em}{@ifsoln{Number}}{Number? String?}
+
+@n Put a check-mark next to expression below that will successfully populate a column. If you're not sure, try them out in @starter-file{animals}.
+
+[cols="1,1,1"]
+|===
+| `sqrt(Weight)`
+| @ifsoln-choice{`sqrt(Legs)`}
+| `sqrt(Name)`
+|===
+
+@n Why will some of these expressions work and some generate errors? @fitb{}{@ifsoln{CODAP finds the square root when the attribute provided_}}
+
+@fitb{}{@ifsoln{is numerical, but CODAP produces an error message when given a string, because it can only calculate the square root of a number. Weight is not a column in the dataset, so it generates an error as well!}}

@@ -1,0 +1,127 @@
+= Surface Area of a Rectangular Prism
+
+@description{Students define the shapes used to build a rectangular prism, print them, cut them out, and build the rectangular prism. Then they use their model to calculate the surface area.}
+
+@lesson-prereqs{contracts}
+
+@keywords{geometry, solid figures, 3-d, 3-dimensional}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+
+* Demonstrate understanding of @vocab{surface area} and use that understanding to calculate surface area of @vocab{rectangular prisms}
+
+| Student-facing Goals
+|
+* Let's take a look at the surfaces of a rectangular prism, deepen our understanding of @vocab{surface area}, and write code to calculate the surface area of any @vocab{rectangular prism}.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Preparation
+|
+* This lesson requires a printer, scissors and tape.
+* Decide whether students will be printing in black & white or in color.
+* If you're printing in black & white, colored pencils may be useful for some students.
+
+| Key Points For The Facilitator
+|
+* This lesson focuses on developing students' understanding of @vocab{Surface Area} of prisms, such that they can build their own formulas. Instructors are encouraged not to reference any pre-defined formulas during the exploration.
+|===
+
+== Surface Area
+
+=== Overview
+Students build on their experience with writing code to define shapes.  They will define shapes for all of the @vocab{faces} of a @vocab{rectangular prism}, print them, cut them out, and build the rectangular prism. Then they will use their model to calculate the surface area and write code to do the same.
+
+=== Launch
+
+[.lesson-instruction]
+- Turn to @printable-exercise{prism-explore.adoc}. Complete the first two questions.
+
+Invite students to share out to gauge their prior knowledge of surface area.
+
+[.lesson-instruction]
+- Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run". 
+
+[.indentedpara]
+_If your students are new to our editor, note that most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right. The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. We need to click "Run" to load the program when we first open a file and if we make a change in the @vocab{Definitions Area}. Clicking "Run" will also clear the @vocab{Interactions Area}._
+
+[.lesson-instruction]
+- Type `prism` into the Interactions Area (on the right) to see an image of a rectangular prism. What do you notice about the prism?
+
+Be sure that students notice that the @vocab{faces} and @vocab{dimensions} (length, width, and height) are labeled. Invite them to observe how many faces there are, as well as how many *differently sized* faces there are. Students who clearly see that there are three sizes of faces, with two faces in each size, will be able to move more confidently through the remainder of the activity.
+
+[.lesson-point]
+Faces are the flat surfaces on the outside of a solid figure. Edges are the line segments where the faces meet in each of the three dimensions. The surface area of a prism is calculated by adding the areas of its faces.
+
+[.lesson-instruction]
+- Go to PART 1 and look at the definitions for `front` and `back`. Type `front` into the Interactions Area. What do you get?
+** _A black-outlined rectangle that has a width of 180 and a height of 50._
+- Just as `front` has been defined to draw a rectangle whose dimensions are width and height, you will need to write definitions for each of the other faces of the prism.
+- Click "Run" and test each of the faces in the Interactions Area to make sure that they match the prism you started with.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+|
+@span{.title}{Facilitation Note}
+The sample definitions were written to make images of outlined rectangles with a black and white printer in mind.  If you have access to a color printer in your classroom, you may want students to change the code of `front` and `back` to better match what they see in the image of `prism` and code the remaining faces with solid rectangles to match the image they are looking at. If you do not have access to a color printer, but think that colors would support your students, you can have them color the rectangles on the printout before cutting and assembling the prism.
+
+If you do not have a classroom printer, consider splitting this lesson over two days - the Launch segment on Day 1, and the Investigate and Synthesize segments on Day 2. At the end of Day 1, direct students to share their images with you. Print the images and distribute them before beginning the Investigate segment on Day 2.
+|===
+
+[.lesson-instruction]
+- Go to PART 2 in the code. Type @show{(code '(print-imgs faces))} into the Interactions Area.  How many rectangles do you see?
+** _Two._
+- The code in PART 2 says @show{(code '(define faces (list front back )))} , which defines `faces` to be a list of values. This list will include all of the faces of the prism, but right now it only includes `front` and `back`. Add the names of each of the remaining faces to the list. @ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}
+
+Ensure that students' lists include all six faces of the rectangular prism.
+
+[.lesson-instruction]
+- When you've finished, click "Run" and again type @show{(code '(print-imgs faces))}.
+What do you Notice? What do you Wonder?
+- Do you have enough shapes to cover all of the faces of the prism?
+- Read the comments in PART 3 of the file to learn how to print the faces to build your prism.
+
+=== Investigate
+
+Have students cut out and tape together the images they defined to form a 3-dimensional paper model of a rectangular prism. Students will then use their models to calculate the surface area.
+
+[.strategy-box, cols="1", grid="none", stripes="none"]
+|===
+
+a|
+@span{.title}{Supporting students with learning variations}
+
+- Labeling the shapes with face names and/or area before taping them together may help some students.
+- Printing two copies of the file (one to cut and one to write on) might best support other students.
+
+|===
+
+[.lesson-instruction]
+- Once you've built your prism, use it to help you calculate the surface area of the figure.
+- Then, go to PART 4 in the @starter-file{prism} and define `surface-area` using length, width, and height.
+
+=== Synthesize
+
+Have students share the code they wrote to define `surface-area`. Did students all write the code the same way?
+
+@ifproglang{pyret}{
+Three possible correct ways to define surface area are:
+
+- `surface-area = A-front + A-back + A-left + A-right + A-top + A-bottom`
+- `surface-area = (2 * A-front) + (2 * A-left) + (2 * A-top)`
+- `surface-area = 2 (A-front + A-left + A-top)`
+}
+
+For further debriefing, discuss the following:
+
+- How did building the prism help you to understand surface area?
+
+- How did writing the code for surface area help you to understand surface area?

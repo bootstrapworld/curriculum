@@ -1,0 +1,84 @@
+= Exploring the Covid Dataset
+++++
+<style>
+body.workbookpage td .autonum::after { content: ')' !important; }
+td:last-child { padding-top: 0; padding-bottom: 0; }
+
+.mainTable div.graph:first-of-type {
+    background-color: rgba(#fff, .5);
+    background-image:
+        linear-gradient(lightblue 2px, transparent 2px),
+        linear-gradient(270deg, lightblue 2px, transparent 2px),
+        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
+        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: 80px -10px;
+}
+
+</style>
+++++
+_For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you._
+
+@n Click "Run", and evaluate `covid-table` in the Interactions Area. 
+
+@n Take a look at the Definitions Area and find the "notes on columns". What is the start date for the data in this table? @fitb{}{@ifsoln{June 20, 2020}}
+
+@n In the Definitions Area we see rows defined for Connecticut (`CT1`), Massachusetts (`MA1`) and Maine (`ME1`). What do we learn by evaluating `MA1` in the Interactions Area?
+
+@fitb{}{@ifsoln{On Day 1 after June 20,2020 there were 104156 positive cases in Massachusetts.}}
+
+@n Define three new Rows called `VT1`, `NH1` and `RI1` for Vermont, New Hampshire and Rhode Island. Click "Run" and test them out.
+
+[.FillVerticalSpace.mainTable, cols="1a,1a", options="frame",stripes="none"]
+!===
+| @n In Pyret, make a scatter plot showing the relationship between `day` and `positive`, using `state` as your labels, then sketch the resulting scatter plot below.
+
+@ifnotsoln{
+[.graph]
+@vspace{1.7in}
+}
+
+@ifsoln{@center{@image{../images/covid-scatterplot.png, 200}}}
+
+|
+--
+@n What do you *Notice?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n What do you *Wonder?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n In which state did the number of cases grow _fastest_? @fitb{}{@ifsoln{MA}}
+
+@n In which state did the number of cases grow _slowest_? @fitb{}{@ifsoln{VT}}
+
+@n Are these strong or weak relationship(s)? @fitb{}{@ifsoln{strong}}
+--
+!===
+
+@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in this dataset. 
+
+What do you notice about the line? @fitb{}{} 
+
+@fitb{}{}
+
+@n What is the @math{R^2} value? @fitb{10em}{@ifsoln{0.07983}} and what does it tell us about the model? @fitb{}{}
+
+@fitb{}{}
+
+@n Find the function called `is-MA` (under "Define some helper functions" in your Pyret file). Read them both carefully!
+
+What is the *Domain* of `is-MA`? @fitb{20em}{@ifsoln{Row}} Its *Range*? @fitb{}{@ifsoln{Boolean}}
+
+@n What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{7em}{@ifsoln{false}}
+
+@center{**Try typing each of these into the Interactions Area on the right. Were you correct?**}
+
+@n Find `MA-table` in the Definitions Area (the first definition under "Define some grouped and/or random samples" in your Pyret file). What is that code doing? @fitb{}{} +
+@fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
+
+@n Type `MA-table` into the Interactions Area. What does it evaluate to? @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
+
+@star Using the code for `is-MA` and `MA-table` as a reference, **define a new function** `is-VT`, and use it to **create a new grouped sample** called `VT-table`.

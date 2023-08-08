@@ -59,7 +59,7 @@ On @printable-exercise{pages/threats-to-validity-1.adoc} and @printable-exercise
 
 Each one of those claims suffers from a serious threat to validity. Can you figure out what those threats are?
 
-Optional: respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
+@optional respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}
 
 <!--
 
@@ -113,6 +113,8 @@ With all the news being shared through newspapers, television, radio, and social
 
 * On @printable-exercise{pages/fake-news.adoc}, you’ll find some deliberately misleading claims made by slimy Data Scientists. **Why shouldn't these claims should be trusted?**
 * Once you’ve finished, consider your own dataset and analysis: what misleading claims could someone make about your work? Turn to @printable-exercise{pages/lies-darned-lies-n-statistics.adoc}, and **come up with four misleading claims based on data or displays from your work.**
+* Trade papers with another group, and see if you can figure out why each other’s claims are not to be trusted!
+
 
 <!--
 Have students trade papers with another group, and see if you can figure out why each other’s claims are not to be trusted!
@@ -146,7 +148,7 @@ In every analysis, there are always threats to validity. It's important to alway
 Fill in the Findings portion of your @starter-file{research-paper}, discussing threats to validity and drawing conclusions from their linear regression results.
 
 <!--
-
+In this @opt-project{project-threats-to-validity.adoc, rubric-threats-to-validity.adoc}, students pretend to be terrible data scientists who develop and support claims based on faulty sampling techniques (selection bias, bias in the study design, poor choice of summary data, and confounding variables). This is a fun opportunity for your students to demonstrate their understanding of the impact of various threats to validity.
 -->
 
 ---
