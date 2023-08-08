@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 2.0.17">
+  <title>Contracts</title>
+  <link rel="stylesheet" href="lib/curriculum.css" />
+  <script src="lib/bootstraplesson.js"></script>
+  <script src="lib/langtable.js"></script>
+  <script>
+    var searchTimeout;
+    function search() {
+        const tbody = document.querySelector('#contracts tbody');
+        tbody.innerHTML = ''; // erase all rows
+        const contracts = Array.prototype.concat(
+          ...Object.values(langTable).map(t => t.primitives))
+          .sort((a,b) => a.name > b.name? 1 : -1)
+          .filter(c => c.name.match(/[a-z]/i))
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout( () => {
+            var str = document.getElementById('searchBox').value;
+            var results;
+            // filter by the search string, and populate the table
+            contracts
+              .filter(c => c.name.includes(str))
+              .forEach(c => {
+                const row1 = document.createElement('tr');
+                row1.innerHTML  = '<td># ' + c.name + '</td>';
+                row1.innerHTML += '<td> :: </td>';
+                row1.innerHTML += '<td>' + c.domain + '</td>';
+                row1.innerHTML += '<td> -> </td>';
+                row1.innerHTML += '<td>' + c.range + '</td>';
+                const row2 = document.createElement('tr');
+                row2.innerHTML = '<td colspan="7">' + c.example + '</td>';
+                tbody.appendChild(row1);
+                tbody.appendChild(row2);
+              });
+        }, 250);
+    }
+  </script>
+  <style>
+    .contracts-table { width: 100%; }
+    #search { background: black; color: white; padding: 5px; margin: 10px 0; }
+    #search input { width: 250px; font-size: 14px; margin-left: 15px; }
+  </style>
+</head>
+<body class="narrativepage article" onload="search()">
+  <!--#include virtual="/menubar.ssi"-->
+  <div id="body">
+    <div id="header">
+      <h1>Contracts</h1>
+    </div>
+    <div id="content">
+      <div class="paragraph">
+        <p>
+          Contracts tell us how to use a function. For example: <tt>num-min :: (Number, Number) -> Number</tt> tells us that the name of the function is  <tt>num-min</tt>, it takes two inputs (both Numbers), and it produces a Number. From the contract, we know  <tt>num-min(4, 6)</tt> will evaluate to a Number.
+        </p>
+        <div id="search">
+            Searching for a function? <input id="searchBox" type="search" onInput="search()"
+            placeholder="Type its name here!"/>
+        </div>
+        <table id="contracts" class="contracts-table">
+          <thead>
+            <th>Name</th>
+            <th></th>
+            <th>Domain</th>
+            <th></th>
+            <th>Range</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
