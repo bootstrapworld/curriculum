@@ -30,6 +30,8 @@
 
 (define *natlang* 'en-us)
 
+(define *optional-flag?* #f)
+
 (define *other-proglangs* #f)
 
 (define *all-lessons* '())
@@ -575,7 +577,8 @@
                             (member link-type '("printable-exercise" "opt-printable-exercise")))
                         ", window=\"_blank\"" ""))])
       (when *lesson-plan*
-        (cond [(equal? link-type "opt-printable-exercise")
+        (cond [(or (equal? link-type "opt-printable-exercise")
+                   (and (equal? link-type "printable-exercise") *optional-flag?*))
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
                                            materials-link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
@@ -962,7 +965,9 @@
                    (set! *online-exercise-links*
                      (cons styled-link-output *online-exercise-links*)))))
 
-             (when (and *lesson-plan* external-link? (equal? link-type "opt-online-exercise"))
+             (when (and *lesson-plan* external-link? (or (equal? link-type "opt-online-exercise")
+                                                         (and (equal? link-type "online-exercise")
+                                                              *optional-flag?*)))
                (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
                                            link-output "##")])
                  (unless (member styled-link-output *opt-online-exercise-links*)
@@ -1284,6 +1289,7 @@
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
+  (set! *optional-flag?* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1419,8 +1425,6 @@
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
                            [(string=? directive "star")
                             (fprintf o "[.autonum.star]##★##")]
-                           [(string=? directive "optional")
-                            (fprintf o "[.optionaltag]##Optional: ##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
@@ -1725,13 +1729,22 @@
                                         (lambda (i)
                                           (expand-directives i o)
                                           )))))))]
-                           [(or (string=? directive "starter-file")
+                           [(string=? directive "optional")
+                            (fprintf o "[.optionaltag]##Optional: ##")]
+                           [(string=? directive "opt")
+                            (let ([text (read-group i directive)]
+                                  [old-optional-flag? *optional-flag?*])
+                              (set! *optional-flag?* #t)
+                              (fprintf o "[.optionaltag]##Optional: ##")
+                              (display (expand-directives-string text) o)
+                              (set! *optional-flag?* old-optional-flag?))]
+                          [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
                                    [c (hash-ref *starter-files* lbl #f)]
-                                   [opt? (string=? directive "opt-starter-file")])
+                                   [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
