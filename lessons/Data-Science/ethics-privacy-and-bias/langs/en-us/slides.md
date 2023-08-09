@@ -101,7 +101,7 @@ Give students time to discuss and share back. Encourage students to share back d
 -->
 ---
 {layout="Supplemental"}
-# Additional Exercises:
+# Additional Exercises
 - Read this article on @opt-online-exercise{https://www.statnews.com/2020/06/17/racial-bias-skews-algorithms-widely-used-to-guide-patient-care/, Racial Bias in Algorithms used to determine Medical Care}. Write arguments for or against health care providers using algorithms to make medical decisions.
 - Watch or read CBS News Coverage from when @opt-online-exercise{https://www.cbsnews.com/news/microsoft-shuts-down-ai-chatbot-after-it-turned-into-racist-nazi/, Microsoft Shut Down its AI Teen Chatbot after it made Racist Tweets} and write a response.
 <!--
