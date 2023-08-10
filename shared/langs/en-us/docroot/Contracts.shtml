@@ -9,44 +9,71 @@
   <link rel="stylesheet" href="lib/curriculum.css" />
   <script src="lib/bootstraplesson.js"></script>
   <script src="lib/langtable.js"></script>
-  <script>
-    var searchTimeout;
-    function search() {
-        const tbody = document.querySelector('#contracts tbody');
-        tbody.innerHTML = ''; // erase all rows
-        const contracts = Array.prototype.concat(
-          ...Object.values(langTable).map(t => t.primitives))
-          .sort((a,b) => a.name > b.name? 1 : -1)
-          .filter(c => c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout( () => {
-            var str = document.getElementById('searchBox').value;
-            var results;
-            // filter by the search string, and populate the table
-            contracts
-              .filter(c => c.name.includes(str))
-              .forEach(c => {
-                const row1 = document.createElement('tr');
-                row1.innerHTML  = '<td># ' + c.name + '</td>';
-                row1.innerHTML += '<td> :: </td>';
-                row1.innerHTML += '<td>' + c.domain + '</td>';
-                row1.innerHTML += '<td> -> </td>';
-                row1.innerHTML += '<td>' + c.range + '</td>';
-                const row2 = document.createElement('tr');
-                row2.innerHTML = '<td colspan="7">' + c.example + '</td>';
-                tbody.appendChild(row1);
-                tbody.appendChild(row2);
-              });
-        }, 250);
-    }
-  </script>
-  <style>
+    <style>
     .contracts-table { width: 100%; }
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
     #search input { width: 250px; font-size: 14px; margin-left: 15px; }
+    .contracts-table td { white-space: pre; }
   </style>
+
+  <script>
+    // set the list of contracts (hard-coded for Pyret right now)
+    const contracts = Array.prototype.concat(
+      ...Object.values(langTable).map(t => t.primitives))
+      .sort((a,b) => a.name > b.name? 1 : -1)
+      .filter(c => c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
+
+    // the domain is an array of {name, type} pairs
+    function processDomain(domain) {
+      return "(" + domain
+        .map(input => input.name + " :: " + input.type)
+        .join(", ") + ")";
+    }
+
+    // for each contract, add a row to the table
+    // handle domains separately because they require more preprocessing
+    function buildTable() {
+      const table = document.getElementById('contracts');
+      contracts
+        .forEach(c => {
+          // build the domain
+          domain_str = processDomain(c.domain);
+          // make the tbody
+          const tbody = document.createElement('tbody');
+          // make the row
+          const row1 = document.createElement('tr');
+          row1.innerHTML  = '<td># ' + c.name + '</td>';
+          row1.innerHTML += '<td> :: </td>';
+          row1.innerHTML += '<td>' + domain_str + '</td>';
+          row1.innerHTML += '<td> -> </td>';
+          row1.innerHTML += '<td>' + c.range + '</td>';
+          const row2 = document.createElement('tr');
+          row2.innerHTML = '<td colspan="7">' + c.example + '</td>';
+          tbody.appendChild(row1);
+          tbody.appendChild(row2);
+          table.appendChild(tbody);
+        });
+
+    }
+
+    var searchTimeout;
+    function search(str) {
+      clearTimeout(searchTimeout);
+      const tbodies = [...document.querySelectorAll('#contracts tbody')];
+      searchTimeout = setTimeout( () => {
+        console.time('time to filter');
+        const table = document.getElementById('contracts');
+        table.style.display = "none";
+        tbodies.forEach((tbody, idx) =>
+          // if it's a match, make this tbody visible. Otherwise, invisible
+          tbody.style.display = contracts[idx].name.includes(str)? "table-row-group" : "none");
+        table.style.display = "table";
+        console.timeEnd('time to filter');
+      }, 250);
+    }
+  </script>
 </head>
-<body class="narrativepage article" onload="search()">
+<body class="narrativepage article" onload="buildTable()">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">
@@ -69,7 +96,7 @@
           With these three pieces of information, we know what to type: <tt>num-min(4, 6)</tt>, and we know this will evaluate to a Number.
         </p>
         <div id="search">
-            Searching for a function? <input id="searchBox" type="search" onInput="search()"
+            Searching for a function? <input id="searchBox" type="search" onInput="search(this.value)"
             placeholder="Type its name here!"/>
         </div>
         <table id="contracts" class="contracts-table">
@@ -80,8 +107,6 @@
             <th></th>
             <th>Range</th>
           </thead>
-          <tbody>
-          </tbody>
         </table>
       </div>
     </div>
