@@ -41,10 +41,14 @@
         c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
 
     // the domain is an array of {name, type} pairs
-    function processDomain(domain) {
-      return "(" + domain
+    function processDomain(contract) {
+      return "(" + contract.domain
         .map(input => input.name + " :: " + input.type)
         .join(", ") + ")";
+    }
+    // use the right example
+    function processExample(contract) {
+      return (proglang == "wescheme")? contract["example-wescheme"] : contract["example-pyret"];
     }
 
     // for each contract, add a row to the table
@@ -54,19 +58,20 @@
       const prefix = (proglang == "wescheme")? "; " : "# ";
       contracts
         .forEach(c => {
-          // build the domain
-          domain_str = processDomain(c.domain);
+          // build the domain and example
+          domain = processDomain(c);
+          example= processExample(c);
           // make the tbody
           const tbody = document.createElement('tbody');
           // make the row
           const row1 = document.createElement('tr');
           row1.innerHTML  = '<td>' + prefix + c.name + '</td>' +
             '<td> :: </td>' +
-            '<td>' + domain_str + '</td>' + 
+            '<td>' + domain + '</td>' + 
             '<td> -> </td>' + 
             '<td>' + c.range + '</td>';
           const row2 = document.createElement('tr');
-          row2.innerHTML  = '<td colspan="7">' + c.example +
+          row2.innerHTML  = '<td colspan="7">' + example +
             (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
           tbody.appendChild(row1);
           tbody.appendChild(row2);
