@@ -16,6 +16,10 @@
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
     #search input { width: 250px; font-size: 14px; margin-left: 15px; }
     .contracts-table td { white-space: pre; }
+
+    @media print {
+      #search { display: none; }
+    }
   </style>
 
   <script>
@@ -25,12 +29,16 @@
     // if there's a pathway, extract the primitives
     const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
 
+    // take note of whether we are in wescheme or not
+    const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
+
     // set the list of contracts (hard-coded for Pyret right now)
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
       .sort((a,b) => a.name > b.name? 1 : -1)
       .filter(c => primitives? primitives.includes(c.name) : true)
-      .filter(c => c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
+      .filter(c => (proglang == "wescheme")? 
+        c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
 
     // the domain is an array of {name, type} pairs
     function processDomain(domain) {
@@ -43,6 +51,7 @@
     // handle domains separately because they require more preprocessing
     function buildTable() {
       const table = document.getElementById('contracts');
+      const prefix = (proglang == "wescheme")? "; " : "# ";
       contracts
         .forEach(c => {
           // build the domain
@@ -51,13 +60,14 @@
           const tbody = document.createElement('tbody');
           // make the row
           const row1 = document.createElement('tr');
-          row1.innerHTML  = '<td># ' + c.name + '</td>';
-          row1.innerHTML += '<td> :: </td>';
-          row1.innerHTML += '<td>' + domain_str + '</td>';
-          row1.innerHTML += '<td> -> </td>';
-          row1.innerHTML += '<td>' + c.range + '</td>';
+          row1.innerHTML  = '<td>' + prefix + c.name + '</td>' +
+            '<td> :: </td>' +
+            '<td>' + domain_str + '</td>' + 
+            '<td> -> </td>' + 
+            '<td>' + c.range + '</td>';
           const row2 = document.createElement('tr');
-          row2.innerHTML = '<td colspan="7">' + c.example + '</td>';
+          row2.innerHTML  = '<td colspan="7">' + c.example +
+            (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
           tbody.appendChild(row1);
           tbody.appendChild(row2);
           table.appendChild(tbody);
