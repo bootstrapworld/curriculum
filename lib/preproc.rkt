@@ -2847,7 +2847,7 @@
 
 ;;; expanded contracts
 
-(define (expanded-contract-type x)
+(define (annotated-contract-type x)
   ; (printf "doing contract-type ~s\n" x)
   (if (list? x)
       (begin
@@ -2855,9 +2855,9 @@
           (if (list? type)
               (begin
                 (format "~a {two-colons} ~a" name
-                        (string-append (expanded-contract-type (first type))
+                        (string-append (annotated-contract-type (first type))
                           " -> "
-                          (expanded-contract-types-to-commaed-string (rest type)))))
+                          (annotated-contract-types-to-commaed-string (rest type)))))
               (let* ([name-w (string-length name)]
                      [type-w (string-length type)]
                      [w (+ 0 (max name-w type-w))])
@@ -2871,19 +2871,19 @@
       (begin
         x)))
 
-(define (expanded-contract-types-to-commaed-string xx)
+(define (annotated-contract-types-to-commaed-string xx)
   ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
   (let* ([n (length xx)]
          [contains-parens? (ormap list? xx)]
          [s
            (string-join
-             (map expanded-contract-type xx)
+             (map annotated-contract-type xx)
              ", ")])
     (if contains-parens?
         (string-append "(" s ")")
         s)))
 
-(define (expanded-contract funname domain-list range [purpose #f] #:single? [single? #t])
+(define (annotated-contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;FIXME: do we need a keyword to avoid the prefix character
   ; (printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
@@ -2901,7 +2901,7 @@
           "{two-colons}"
           " "
           ; used to not have commas in WeScheme
-          (expanded-contract-types-to-commaed-string domain-list)
+          (annotated-contract-types-to-commaed-string domain-list)
           " ‑> "
           range
           (if purpose
@@ -2917,12 +2917,12 @@
             (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multi-line #t))
           s))))
 
-(define (expanded-contracts . args)
+(define (annotated-contracts . args)
   (let ([res ""])
     (let loop ([args args])
       (unless (null? args)
         (set! res (string-append res "\n"
-                    (keyword-apply expanded-contract '(#:single?) '(#f)
+                    (keyword-apply annotated-contract '(#:single?) '(#f)
                                    (first args))))
         (loop (rest args))))
     (create-zero-file (format "~a.uses-codemirror" *out-file*))
