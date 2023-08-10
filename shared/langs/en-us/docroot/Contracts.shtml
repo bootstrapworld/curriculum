@@ -12,15 +12,20 @@
   <script src="lib/bootstraplesson.js"></script>
   <script src="lib/langtable.js"></script>
     <style>
-    .contracts-table { width: 100%; }
+    /* override some asciidoctor and shared.less defaults */
+    *:not(pre)>code { background-color: transparent !important; }
+    table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
+    .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
+
+    html, body, div#body { width: 9.8in !important; max-width: 9.8in !important; }
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
     #search input { width: 250px; font-size: 14px; margin-left: 15px; }
-    .contracts-table td { white-space: pre; }
-    *:not(pre)>code { background-color: transparent !important; }
-    .fitbruby { border-bottom: solid thin gray !important; padding-top: unset !important; }
-    table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
+    .contracts-table { width: 100%; }
+    thead { background: lightgray !important; }
+    td { white-space: pre; vertical-align: baseline; }
 
     @media print {
+      @page   { size: landscape; }
       #search { display: none; }
     }
   </style>
@@ -48,8 +53,13 @@
       const code = document.createElement('code');
       code.className = "pyret-comment";
       code.innerHTML = '(' + 
-        [...contract.domain.map(i => 
-          `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`)].join(',')
+        [...contract.domain.map(i => {
+          if(i.name && i.name.length) {
+            return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
+          } else {
+            return `${i.type}`
+          }
+        })].join(',')
         + ')';
       return code;
     }
