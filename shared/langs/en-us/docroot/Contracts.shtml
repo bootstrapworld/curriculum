@@ -16,6 +16,9 @@
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
     #search input { width: 250px; font-size: 14px; margin-left: 15px; }
     .contracts-table td { white-space: pre; }
+    *:not(pre)>code { background-color: transparent !important; }
+    .fitbruby { border-bottom: solid thin gray !important; padding-top: unset !important; }
+    table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
 
     @media print {
       #search { display: none; }
@@ -41,10 +44,18 @@
         c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
 
     // the domain is an array of {name, type} pairs
-    function processDomain(domain) {
-      return "(" + domain
-        .map(input => input.name + " :: " + input.type)
-        .join(", ") + ")";
+    function processDomain(contract) {
+      const code = document.createElement('code');
+      code.className = "pyret-comment";
+      code.innerHTML = '(' + 
+        [...contract.domain.map(i => 
+          `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`)].join(',')
+        + ')';
+      return code;
+    }
+    // use the right example
+    function processExample(contract) {
+      return (proglang == "wescheme")? contract["example-wescheme"] : contract["example-pyret"];
     }
 
     // for each contract, add a row to the table
@@ -54,19 +65,20 @@
       const prefix = (proglang == "wescheme")? "; " : "# ";
       contracts
         .forEach(c => {
-          // build the domain
-          domain_str = processDomain(c.domain);
+          // build the domain and example
+          domain = processDomain(c).outerHTML;
+          example= processExample(c);
           // make the tbody
           const tbody = document.createElement('tbody');
           // make the row
           const row1 = document.createElement('tr');
           row1.innerHTML  = '<td>' + prefix + c.name + '</td>' +
             '<td> :: </td>' +
-            '<td>' + domain_str + '</td>' + 
+            '<td>' + domain + '</td>' + 
             '<td> -> </td>' + 
             '<td>' + c.range + '</td>';
           const row2 = document.createElement('tr');
-          row2.innerHTML  = '<td colspan="7">' + c.example +
+          row2.innerHTML  = '<td colspan="7">' + example +
             (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
           tbody.appendChild(row1);
           tbody.appendChild(row2);
@@ -92,7 +104,7 @@
     }
   </script>
 </head>
-<body class="narrativepage article" onload="buildTable()">
+<body class="narrativepage workbookpage article" onload="buildTable()">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">
