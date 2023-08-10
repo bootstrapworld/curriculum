@@ -7,6 +7,8 @@
   <meta name="generator" content="Asciidoctor 2.0.17">
   <title>Contracts</title>
   <link rel="stylesheet" href="lib/curriculum.css" />
+  <script src="dependency-graph.js"></script>
+  <script src="pathway-tocs.js"></script>
   <script src="lib/bootstraplesson.js"></script>
   <script src="lib/langtable.js"></script>
     <style>
@@ -17,10 +19,17 @@
   </style>
 
   <script>
+    configureGraph(graph);
+    // narrow the primitives by url params
+    const {pathway, lessons, lesson} = getParams();
+    // if there's a pathway, extract the primitives
+    const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
+
     // set the list of contracts (hard-coded for Pyret right now)
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
       .sort((a,b) => a.name > b.name? 1 : -1)
+      .filter(c => primitives? primitives.includes(c.name) : true)
       .filter(c => c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
 
     // the domain is an array of {name, type} pairs
