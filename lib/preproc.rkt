@@ -790,7 +790,6 @@
                  [f.html (path-replace-extension f ".html")]
                  [f.shtml (path-replace-extension f ".shtml")]
                  [f.pdf (path-replace-extension f ".pdf")])
-             (printf "checking filext of ~s in ~s\n" f.shtml (current-directory))
              (cond [(file-exists? (build-path dist-natlang-dir f.html))
                     (set! f f.html) (set! existent-file? #t)]
                    [(file-exists? (build-path dist-natlang-dir f.shtml))
@@ -803,7 +802,7 @@
                    [(path-has-extension? f ".adoc")
                     (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
           [(path-has-extension? f ".pdf")
-           (when (file-exists? f) (set! existent-file? #t))])
+           (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
     (unless existent-file?
       (check-link f)
       (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
