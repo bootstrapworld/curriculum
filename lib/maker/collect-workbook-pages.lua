@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-07-13
-
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
 function make_titletxt_file(f)
@@ -19,7 +17,7 @@ function make_titletxt_file(f)
   for L in i:lines() do
     if L:find('^=%s') then
       local o = io.open(titletxt_file, 'w+')
-      o:write((L:gsub('^=%s+', '')))
+      o:write((L:gsub('^=%s+', ''):gsub(',', '&#x2c;')))
       o:write('\n')
       o:close()
       break
