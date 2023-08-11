@@ -992,11 +992,6 @@
               (format "include::~a[~a]"
                       f.asc link-text))])))
 
-(define (make-pathway-link f link-text)
-  ; (printf "doing make-pathway-link ~s ~s\n" f link-text)
-  (enclose-span ".pathway-link"
-    (format "link:pass:[../../courses/~a][~s, window=\"_blank\"]" f link-text)))
-
 (define *lesson-summary-file* #f)
 
 (define *page-title* #f)
@@ -1479,12 +1474,6 @@
                                   (create-begin-tag "span" ".pathway-only")
                                   (expand-directives-string text)
                                   (create-end-tag "span")) o))]
-                           [(string=? directive "pathway-link")
-                            (let* ([args (read-commaed-group i directive read-group)]
-                                   [adocf (first args)]
-                                   [link-text (string-join (map string-trim (rest args)) ", ")])
-                              (set! link-text (string-trim link-text "\""))
-                              (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise"))
