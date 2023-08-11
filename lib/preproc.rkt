@@ -773,6 +773,7 @@
 (define (make-dist-link f link-text)
   (cond [(regexp-match "^ *$" f) (set! f "./index.adoc")]
         [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
+        [(regexp-match "html$" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
         [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
   (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
          [dir (second m)] [snippet (third m)]
@@ -781,19 +782,24 @@
                        (build-path dir ".cached" snippet) ".titletxt")]
          [page-title (and (file-exists? f.titletxt)
                           (call-with-input-file f.titletxt read-line))]
-         [existent-file? #f])
+         [existent-file? #f]
+         [dist-natlang-dir (format "distribution/~a" *natlang*)])
     (cond [(or (path-has-extension? f ".adoc")
                (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
            (let ([f.adoc (path-replace-extension f ".adoc")]
                  [f.html (path-replace-extension f ".html")]
                  [f.shtml (path-replace-extension f ".shtml")]
                  [f.pdf (path-replace-extension f ".pdf")])
-             (cond [(file-exists? f.html) (set! f f.html) (set! existent-file? #t)]
-                   [(file-exists? f.shtml) (set! f f.shtml) (set! existent-file? #t)]
-                   [(file-exists? f.adoc)
+             (printf "checking filext of ~s in ~s\n" f.shtml (current-directory))
+             (cond [(file-exists? (build-path dist-natlang-dir f.html))
+                    (set! f f.html) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.shtml))
+                    (set! f f.shtml) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.adoc))
                     (set! f (if (= (length dir-compts) 2) f.shtml f.html))
                     (set! existent-file? #t)]
-                   [(file-exists? f.pdf) (set! f f.pdf) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.pdf))
+                    (set! f f.pdf) (set! existent-file? #t)]
                    [(path-has-extension? f ".adoc")
                     (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
           [(path-has-extension? f ".pdf")
