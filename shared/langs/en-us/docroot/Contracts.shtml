@@ -15,7 +15,7 @@
     /* override some asciidoctor and shared.less defaults */
     *:not(pre)>code { background-color: transparent !important; }
     table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
-    .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
+    .fitb, .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
 
     html, body, div#body { width: 9.8in !important; max-width: 9.8in !important; }
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
@@ -58,7 +58,7 @@
           if(i.name && i.name.length) {
             return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
           } else {
-            return `${i.type}`
+            return `<span class="fitb">${i.type}</span>`
           }
         })].join(',')
         + ')';
