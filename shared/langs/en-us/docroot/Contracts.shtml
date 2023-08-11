@@ -24,6 +24,7 @@
     thead { background: lightgray !important; }
     th:nth-child(3) { text-align: center; }
     td { white-space: pre; vertical-align: baseline; }
+    tbody tr:last-child { font-style: italic; }
 
     @media print {
       @page   { size: landscape; }
@@ -87,11 +88,12 @@
           const tbody = document.createElement('tbody');
           // make the row
           const row1 = document.createElement('tr');
-          row1.innerHTML  = '<td>' + prefix + c.name + '</td>' +
+          row1.innerHTML  = 
+            '<td><code>' + prefix + c.name + '</code></td>' +
             '<td> :: </td>' +
             '<td>' + domain + '</td>' + 
             '<td> -> </td>' + 
-            '<td>' + c.range + '</td>';
+            '<td><code>' + c.range + '</code></td>';
           const row2 = document.createElement('tr');
           row2.innerHTML  = '<td colspan="7">' + example +
             (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
