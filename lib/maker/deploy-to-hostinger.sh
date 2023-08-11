@@ -32,9 +32,7 @@ mkdir $DEPLOYABLES_DIR
 ALL_THE_LANGS="en-us es-mx"
 
 for lang in $ALL_THE_LANGS; do
-  mkdir -p $DEPLOYABLES_DIR/$lang/courses
-  mkdir -p $DEPLOYABLES_DIR/$lang/lessons
-  mkdir -p $DEPLOYABLES_DIR/$lang/textbooks
+  mkdir -p $DEPLOYABLES_DIR/$lang
 done
 
 SEMESTER_YEAR=$SEMESTER$YEAR
@@ -56,22 +54,16 @@ function correctgdriveurls() {
 }
 
 for lang in $ALL_THE_LANGS; do
-  if test -z "$SKIPLIB"; then
-    if test -d $lang/extlib; then
-      cp -pr $lang/extlib $DEPLOYABLES_DIR/$lang
-    else
-      echo Skipping copying extlib...
-    fi
-  fi
-  for f in $lang/*; do
-    if test -f $f; then
-      cp -p $f $DEPLOYABLES_DIR/$lang
-    fi
-  done
-  for d in lib lessons courses textbooks; do
-    if test -d $lang/$d; then
-      cp -pr $lang/$d $DEPLOYABLES_DIR/$lang
-      correctgdriveurls $DEPLOYABLES_DIR/$lang/$d
+  for d in $lang/*; do
+    if test -f $d; then
+      cp -p $d $DEPLOYABLES_DIR/$lang
+    elif test -d $d; then
+      if test "$d" = $lang/extlib; then
+        test -n "$SKIPLIB" && continue
+      fi
+      mkdir -p $DEPLOYABLES_DIR/$d
+      cp -pr $d $DEPLOYABLES_DIR/$lang
+      correctgdriveurls $DEPLOYABLES_DIR/$d
     fi
   done
 done
@@ -90,6 +82,8 @@ rm -fr \$DEPLOY_DIR
 mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
 rm \$DEPLOY_DIR/deploy-to-public_html.sh
 EOF
+
+# exit
 
 CONVENIENT_PASSWORD=
 
