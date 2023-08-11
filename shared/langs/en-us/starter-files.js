@@ -111,7 +111,7 @@ var starterFiles = {
     }
   },
   "exploration-paper": {
-    "title": "Dataset Exploration",
+    "title": "Dataset Exploration Project",
     "pyret": {
       "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
     },
