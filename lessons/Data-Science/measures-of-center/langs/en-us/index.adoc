@@ -20,7 +20,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let's use mean, median, and mode to describe our data.
+* Let's use mean, median, and modes to describe our data.
 
 | Materials
 |[.materials-links]
@@ -169,7 +169,7 @@ Mean is generally the best measure of center, because it includes information fr
 == Modes @duration{25 minutes}
 
 === Overview
-Students learn about the mode(s) of a dataset, how to compute the mode, and when it is appropriate to use this as a measure of center.
+Students learn about the mode(s) of a dataset, how to compute them, and when it is appropriate to use them as a measure of center.
 
 === Launch
 The third measure of center is called the @vocab{modes} of a dataset. The @vocab{modes} of a dataset are the values that appear _most often_.
@@ -189,9 +189,9 @@ Consider the following three datasets:
 - The mode of the second dataset is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
 
-Mode is rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
+Modes are rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
 
-In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
+In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
 @show{ (contract "modes" '("Table" "String") "List<Number>" )}
 
@@ -224,7 +224,7 @@ You now have three different ways to measure center in a dataset. But how do you
 
 - If the data doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
-- If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
+- If there are very few possible values, such as AP Scores (1–5), @vocab{modes} could be a useful way to summarize the dataset.
 
 @optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{data-cycle-practice.adoc}. Sometimes what's created isn't a table __or__ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 
@@ -237,34 +237,37 @@ Students apply what they have learned about measures of center to their chosen d
 
 === Launch
 
-Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and mode.
+Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and modes.
 
 [.lesson-instruction]
-- Describe how to compute mean, median, and mode.
+- Describe how to compute mean, median, and modes.
 - When @vocab{mean} provide the best summary?
 ** _It includes information from every single point, so it is useful when the data doesn't show much skewness or have outliers._
 - When does @vocab{median} provide the best summary?
 ** _Statisticians fall back to the median when working with highly skewed datasets._
-- When is @vocab{mode} a useful way to summarize a dataset?
-** _Mode is very useful when a dataset has very few values._
+- When are @vocab{mode}(s) a useful way to summarize a dataset?
+** _Mode(s) are most useful when a dataset has very few values._
 
 === Investigate
 
-Let’s connect what we know about histograms to your chosen dataset.
+Let’s connect what we know about measures of center to your chosen dataset.
 
 
 [.lesson-instruction]
 - Open your chosen dataset starter file in Pyret.
-** _Teachers: Students have the opportunity to choose a dataset that interests them in @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"}._
-- Choose one quantitative column that you'd like to analyze.
-- Use Pyret to compute the mean, median and mode.
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- Choose two quantitative columns that you'd like to analyze.
+- Use Pyret to compute the mean, median and modes of one of them.
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Locate the "Measures of Center" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
+- Then type in the mean, median and modes that you just identified. Leave the other rows blank. We will come back to them another day.
+- Go to the next slide and replace `Column B` with the second column you're interested in.
+- Then, compute the mean, median and modes of that column and type them into this slide.
 
 Invite students to discuss their results and consider how to interpret them.
 
 [.lesson-instruction]
-- *It’s time to add to your @starter-file{exploration-project}.*
-- Locate the "Measures of Center" section of your Exploration Project. Type in the mean, median and mode that you just identified.
-- Now, add your interpretation of the measures of center and record any questions that emerged.
+Add your interpretations to the two measures of center slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 
 === Synthesize
 
@@ -276,9 +279,7 @@ Which measures of center do they think were the most useful for their two chosen
 
 What questions did the measures of center inspire them to ask about their dataset?
 
-When students compared their findings with those of their classmates, did they make any interesting discoveries? (For instance: Did everyone find a mode or modes? Did anyone have a measure of center that was dramatically influenced by an outlier?)
-
-
+When students compared their findings with those of their classmates, did they make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
 
 == Additional Exercises
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}
