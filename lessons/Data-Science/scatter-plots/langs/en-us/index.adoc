@@ -90,9 +90,9 @@ As an alternative to plotting the small table, assign a handful of rows from the
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
-The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels (ls), x-coordinates (xs), and y-coordinates (ys). Here's the contract:
+The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the contract:
 
-`scatter-plot {two-colons} (t::Table, ls::String, xs::String, ys::String)`
+@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 
 [.lesson-instruction]
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.

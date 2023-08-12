@@ -289,7 +289,7 @@
      "standard-deviation"
      "box-plots"
      "measures-of-center"
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
     )
     ("6.DR.C.3"
@@ -303,14 +303,14 @@
      "measures-of-center"
      "visualizing-the-shape-of-data"
      "box-plots"
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     ("6.DR.D.4"
      "Interpret quantitative measures of center to describe differences between groups from data collected to answer investigative questions."
      "measures-of-center"
      "standard-deviation"
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     
@@ -429,33 +429,33 @@
     ("7.DR.B"
      "Collect and Consider Data"
      "random-samples"
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      "hoc-data"
      )
     ("7.DR.B.2"
      "Collect or consider data from a random sample to compare and draw inferences about a population with an unknown characteristic of interest."
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     ("7.DR.C"
      "Analyze, summarize and describe data"
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     ("7.DR.C.3"
      "Analyze two data distributions visually to compare multiple measures of center and variability."
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     ("7.DR.D"
      "Interpret data and answer investigative questions."
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )
     ("7.DR.D.4"
      "Interpret measures of center and measures of variability for numerical data from random samples to compare between two populations, and to answer investigative questions."
-     "project-exploration-paper"
+     "project-data-exploration"
      "project-research-paper"
      )    
     ; Grade 8
@@ -618,7 +618,7 @@
      "linear-regression"
      "scatter-plots"
      "project-research-paper"
-     "project-exploration-paper"
+     "project-data-exploration"
      )
 
     ;High School Algebraic Reasoning: Expressions and Equations Standards
@@ -897,7 +897,7 @@
     ("HS.DR.D.11"	
      "Use statistical evidence from analyses to answer statistical investigative questions, and communicate the findings in a variety of formats (verbal, written, visual) to support informed data-based decisions."
      "project-research-paper"
-     "project-exploration-paper"
+     "project-data-exploration"
      )
     ("HS.DR.D.12"	
      "Articulate what it means for an outcome or an estimate of a population characteristic to be plausible or not plausible compared to chance variation."

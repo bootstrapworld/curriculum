@@ -254,7 +254,7 @@ Are they clumped on the right, with a few outliers skewing to the left? Or are t
 @printable-exercise{data-cycle-quantitative.adoc}, and **explore two quantitative columns with box plots**.
 - Then add these displays - and your interpretations! - to "Making Displays" section.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
-- Complete @printable-exercise{shape-of-my-dataset.adoc}, and **explain the connection between measures of center and your box plots**. - Complete the "Measures of Center and Spread" section of the @starter-file{exploration-paper}.
+- Complete @printable-exercise{shape-of-my-dataset.adoc}, and **explain the connection between measures of center and your box plots**. - Complete the "Measures of Center and Spread" section of the @starter-file{exploration-project}.
 ---
 {layout="Synthesize"}
 # Your Own Analysis 

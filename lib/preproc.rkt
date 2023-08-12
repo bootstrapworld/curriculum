@@ -2813,7 +2813,8 @@
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;FIXME: do we need a keyword to avoid the prefix character
   ; (printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
-  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
+  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
+        [funname-str (if (string? funname) funname (format "~a" funname))])
     (add-prereq funname-sym)
     (let* (
       [prefix (cond
@@ -2822,7 +2823,7 @@
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
-          (if *pyret?* (wescheme->pyret funname-sym) funname)
+          (if *pyret?* (wescheme->pyret funname-str) funname-str)
           " "
           ; used to be single colon for WeScheme
           "{two-colons}"
