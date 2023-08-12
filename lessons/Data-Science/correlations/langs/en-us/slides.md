@@ -303,7 +303,7 @@ Let’s connect what we know about correlations to your chosen dataset.
 - Repeat this process for at least one more correlation.
 
 @teacher{
-** _Teachers: Students have the opportunity to choose a dataset that interests them in @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"}._
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 
 Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
 }
