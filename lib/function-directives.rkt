@@ -9,7 +9,6 @@
          wescheme-symbol->pyret
          wescheme->pyret
          wescheme->wescheme
-         vars-to-commaed-string vars-to-string
          design-codap-recipe
          data-cycle
          )

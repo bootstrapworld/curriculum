@@ -194,8 +194,8 @@ Let’s connect what we know about visualizing the shape of the data to the hist
 
 - *It’s time to add to your @starter-file{exploration-project}.*
 - For each of the histograms that you have added, edit and / or expand upon the interpretations you provided during the @lesson-link{histograms} lesson.
-- Be sure to integrate the new vocabulary we have learned, including: shape, skewed left, skewed right, and symmetric.
-- Describe what your histograms _shape_ tells you about the quantitative column you chose.
+- Be sure to integrate the new vocabulary we have learned, including: @vocab{shape}, @vocab{skewed left}, @vocab{skewed right}, and @vocab{symmetric}.
+- Describe what this shape tells you about the quantitative column you chose.
 
 ---
 {layout="Synthesize"}

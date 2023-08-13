@@ -200,7 +200,6 @@ Let’s review what we have learned about making and interpreting histograms.
 - Does a histogram display categorical or quantitative data? How many columns of data does a histogram display?
 - How is a histogram different from a bar chart?
 - What do histograms show us about a dataset?
-** Histograms allow us to see the shape of one column of dataset.
 - How can you decide an appropriate bin size for your histogram?
 
 @teacher{
@@ -228,7 +227,6 @@ Let’s connect what we know about histograms to your chosen dataset.
 - Repeat this process for at least one more quantitative column.
 
 @teacher{
-- Open your chosen dataset starter file in Pyret.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Choose one quantitative column from your data set that you will represent with a histogram!
 - What question does your display answer?
