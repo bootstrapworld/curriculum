@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-04-11
-
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 -- dir_prefix = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
@@ -86,15 +84,22 @@ function postproc(fhtml_cached, tipe)
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
         x = x:gsub('<body class="', '%0workbookpage ')
+      elseif tipe == 'pwyindep' then
+        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
+          x = x:gsub('<body class="', '%0workbookpage ')
+        else
+          x = x:gsub('<body class="', '%0narrativepage ')
+        end
+      elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
+        x = x:gsub('^<body class="', '%0narrativepage ')
+      end
+      if tipe == 'workbookpage' then
         if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
           x = x:gsub('<body class="', '%0back-matter ')
         end
         if fbase:find('^notes%-') then
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
-      end
-      if not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage ')
       end
       if tipe ~= 'narrativeaux' then
         x = x:gsub('^<body ', '%1 onload="renderSaveToDrive()" ')
@@ -274,9 +279,9 @@ function postproc(fhtml_cached, tipe)
 [=[<script>
   MathJax = {
     options: { enableMenu: false, },
-    tex:     { 
-      inlineMath: [['$$', '$$'], ['\\(', '\\)']], 
-      displayMath: [], 
+    tex:     {
+      inlineMath: [['$$', '$$'], ['\\(', '\\)']],
+      displayMath: [],
     },
     svg:     { fontCache: 'global' },
     startup: {
