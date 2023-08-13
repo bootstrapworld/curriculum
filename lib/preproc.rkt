@@ -2775,28 +2775,27 @@
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
   (if (list? x)
-      (begin
-        (let ([name (first x)] [type (second x)])
-          (unless (string? name) (set! name (format "~a" name)))
-          (if (list? type)
-              (begin
-                (format "~a {two-colons} ~a" name
-                        (string-append (contract-type (first type))
-                          " -> "
-                          (contract-types-to-commaed-string (rest type)))))
-              (let* ([type (if (string? type) type (format "~a" type))]
-                     [name-w (string-length name)]
-                     [type-w (string-length type)]
-                     [w (+ 0 (max name-w type-w))])
-                (string-append (create-begin-tag "span" ".fitbruby" #:attribs
-                                                 (format "style=\"width: ~aem\"" w))
-                  type
-                  (create-begin-tag "span" ".ruby")
-                  name
-                  (create-end-tag "span")
-                  (create-end-tag "span"))))))
-      (begin
-        x)))
+      (let ([name (first x)] [type (second x)])
+        (unless (string? name) (set! name (format "~a" name)))
+        (if (list? type)
+            (format "~a {two-colons} ~a" name
+                    (string-append (contract-type (first type))
+                      " -> "
+                      (contract-types-to-commaed-string (rest type))))
+            (let* ([type (if (string? type) type (format "~a" type))]
+                   ; [name-w (string-length name)]
+                   ; [type-w (string-length type)]
+                   ; [w (+ 0 (max name-w type-w))]
+                   )
+              (string-append (create-begin-tag "span" ".fitbruby"
+                                               ; #:attribs (format "style=\"width: ~aem\"" w)
+                                               )
+                type
+                (create-begin-tag "span" ".ruby")
+                name
+                (create-end-tag "span")
+                (create-end-tag "span")))))
+      x))
 
 (define (contract-types-to-commaed-string xx)
   ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
@@ -2823,7 +2822,7 @@
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
-          (if *pyret?* (wescheme->pyret funname-str) funname-str)
+          (if *pyret?* (wescheme->pyret funname-sym) funname-str)
           " "
           ; used to be single colon for WeScheme
           "{two-colons}"
