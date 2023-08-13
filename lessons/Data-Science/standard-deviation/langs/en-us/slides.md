@@ -196,7 +196,7 @@ Let’s review what we have learned about standard deviation.
 - Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.
 
 @teacher{
-- Do we compute standard deviation categorical data or quantitative data? How many columns of data does standard deviation tell us about?
+- Do we compute standard deviation with categorical data or quantitative data? How many columns of data does standard deviation tell us about?
 ** _Standard deviation is a measure that tells us about the spread of a single quantitative column of data._
 - Standard deviation is a measure of @vocab{spread}. In your own words, what does @vocab{spread} mean?
 ** _Spread is the extent to which values in a dataset vary, either from one another or from the center._
@@ -210,23 +210,24 @@ Let’s review what we have learned about standard deviation.
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-Let’s connect what we know about standard deviation to your chosen dataset.
-
 - Open your chosen dataset starter file in Pyret.
-- Use Pyret to compute its standard deviation.
-- What question does your display answer?
-- Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
-- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for at least one more quantitative column.
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use Pyret to compute the standard deviation for one of them.
+- What question does your computation answer?
+- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for the other column you explored before (and any others you are curious about).
 
 @teacher{
 - Open your chosen dataset starter file in Pyret.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
-** - Choose one quantitative column that you'd like to analyze.
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use Pyret to compute the standard deviation for one of them.
 ** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
-- Use Pyret to compute its standard deviation.
-- What question does your display answer?
+- What question does your computation answer?
 ** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_
+- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for the other column you explored before (and any others you are curious about).
+** _Note: If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Explorartion Project and calculate the mean, median, modes and 5-number summaries for the new columns._
 
 Invite students to discuss their results and consider how to interpret them.
 }
@@ -236,8 +237,8 @@ Invite students to discuss their results and consider how to interpret them.
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
 - *It’s time to add to your @starter-file{exploration-project}.*
-- Locate the "Measures of Center" section of your Exploration Project, and type in the the standard deviations you just identified.
-- Add your interpretation of the standard deviation and record any questions that emerged.
+- Locate the "Measures of Center and Spread" section of your Exploration Project. Type the standard deviations you just identified into the tables for the corresponding columns.
+- Now, add your interpretations of the standard deviations and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 
 ---
 {layout="Synthesize"}

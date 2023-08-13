@@ -307,7 +307,7 @@ Let’s connect what we know about measures of center to your chosen dataset.
 - Choose two quantitative columns that you'd like to analyze.
 - Use Pyret to compute the mean, median and modes of one of them.
 - *It’s time to add to your @starter-file{exploration-project}.*
-- Locate the "Measures of Center" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
+- Locate the "Measures of Center and Spread" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
 
 ---
 {layout="Investigate"}
@@ -325,7 +325,7 @@ Invite students to discuss their results and consider how to interpret them.}
 {layout="Investigate"}
 # Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
-Add your interpretations to the two measures of center slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
+Once you've discussed your results and how to interpret them, add your interpretations to the two "Measures of Center and Spread" slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 
 ---
 {layout="Synthesize"}
