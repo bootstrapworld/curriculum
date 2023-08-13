@@ -179,7 +179,13 @@ var starterFiles = {
       "url": "TBD"
     }
   },
-  "height": {
+  "hair": {
+    "title": "Hair Color Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc&v=4d870d2" 
+    }
+  },
+   "height": {
     "title": "Age vs. Height Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_"

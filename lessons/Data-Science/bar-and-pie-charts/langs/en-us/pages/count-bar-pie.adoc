@@ -1,0 +1,73 @@
+= Count, Bar Charts and Pie Charts
+
+Open the @starter-file{animals} and click "Run".
+
+@vspace{1ex}
+
+*Part A:*
+
+Test the following expressions in the Interactions Area:
+
+- @show{(code '(count animals-table "species"))} 
+- @show{(code '(bar-chart animals-table "species"))} 
+
+@n How do they compare?
+
+@fitb{}{@ifsoln{The height of each bar matches the count of each species.}}
+
+@n Which do you like better: the bar chart or the table? Why?
+
+@fitb{}{}
+
+@vspace{1ex}
+
+Now test out the expression @show{(code '(pie-chart animals-table "species"))}
+
+@n How does this pie chart compare to the bar chart you just made?
+
+@fitb{}{@ifsoln{The pie chart shows percentages. The bar chart shows the count. We could figure out how many animals were in the sample from the bar chart.}}
+
+@fitb{}{@ifsoln{With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.}}
+
+@vspace{1ex}
+
+When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.  Hit the up arrow in the interactions area to reload your last expression and test it out!
+
+@n Make a `pie-chart` and `bar-chart` for the `pounds` column. Why isn't grouping the `pounds` column very useful?
+
+@fitb{}{@ifsoln{Grouping by value works well for categorical data, when lots of different data points can be sorted into a smaller number of buckets.}}
+
+@fitb{}{@ifsoln{But for quantitative data - which can have lots of different values - the number of buckets is too large to be useful.}}
+
+@n Look at the list of columns in the Definitions Area. For which columns do you expect pie charts to be most useful?
+
+@fitb{}{@ifsoln{Species, Sex, Fixed, and Legs}}
+
+@vspace{1ex}
+
+*Part B:* _(Best completed after @printable-exercise{bar-and-pie-notice.adoc} and @printable-exercise{matching-bar-to-pie.adoc})_
+
+@n How is `pie-chart` similar to `bar-chart`? 
+
+@fitb{}{@ifsoln{They both groups data by value to show frequency.}}
+
+@n How are `pie-chart` and `bar-chart` different?
+
+@fitb{}{@ifsoln{Bar charts show frequency as a count. Pie charts show frequency as a percentage.}}
+
+@n When would you want to use one chart instead of another?
+
+@fitb{}{@ifsoln{Pie charts only make sense when our data reflects the whole.  For example, if a shelter has horses, sheep, goats, and donkeys...}}
+
+@fitb{}{@ifsoln{ but we only had data for the horses and the sheep, we shouldn't make a pie chart of the species}}
+
+@n What information is provided in bar charts that is hidden in pie charts?
+
+@fitb{}{@ifsoln{In a bar chart, categories with no values are shown as empty categories, but there are no wedges for categories with 0% on a pie chart.}}
+
+@n Why might this sometimes be problematic?
+
+@fitb{}{@ifsoln{Answers will vary.}}  
+
+@fitb{}{@ifsoln{If a service isn't reaching a sector of the population, it's easier to ignore the issue if that population doesn't get represented in the display.}}
+
