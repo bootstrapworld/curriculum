@@ -46,6 +46,8 @@ The first one makes sense, and reflects our suspicion that age plays a role in a
 {layout="Investigate"}
 # Making Scatter Plots
 
+We will produce our scatter plot by graphing each animal’s `age` and `weeks` values as a point on the x and y axes.
+
 Complete @printable-exercise{pages/creating-scatterplot.adoc}, to get a feel for making scatter plots by hand.
 
 <!--
@@ -72,36 +74,32 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 * Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
 * Are there any patterns or trends that you see here?
 
-<!--
-Have students report back on their findings from the starter file and on @printable-exercise{pages/creating-scatter plot.adoc}.
--->
+@teacher{
+* Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
+* Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
+** _To do this, students will need to type in:_ `scatter-plot(animals-table,"name", "age", "weeks")`
+* Are there any patterns or trends that you see here?
+** _It appears that younger animals get adopted more quickly._
+
+}
 ---
 {layout="SynthesizeR"}
 # Making Scatter Plots
 
 @image{images/no-relationship.png, 250} 
 
-Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
+Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.{style="font-size:16pt"}
 
-Think back to our discussion of random sampling and statistical inference. In this case, the @vocab{null hypothesis} is that there is no relationship between these two columns. The image on the right shows a collection of points, but the y-values don't seem to vary no matter what the x-values are.
-<!--
+- What pattern do you see in _your_ scatter plot?{style="font-size:16pt"}
+- Are there any points that seem unusual? Why?{style="font-size:16pt"}
 
--->
----
-{layout="Synthesize"}
-# Synthesize
+Suppose we plotted the age and adoption ime of four random animals, and found that they all fell in a line. Is this enough to determine that there's a relationship between the variables?{style="font-size:16pt"}
 
-Suppose we picked four animals at random out of our table, plotted them on a scatter plot, and they all fell in a line. Is this enough to reject the null hypothesis? 
+@teacher{
+* Suppose we picked four animals at random out of our table, plotted their age and adoption time on a scatter plot, and they all fell in a line. Is this enough to determine that there's a relationship between the variables?
+** __No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.__
+}
 
-_No! Four flips of a fair coin might still come up tails, and four points chosen from a scatter plot with no pattern might still fall on a line!_
-
-As our sample size increases, however, the chance of us _seeing a pattern by random chance gets smaller and smaller._
-
-<!--
-**Ask Students**
-* What pattern do you see in _your_ scatter plot?
-* Are there any points that seem unusual? Why?
--->
 
 ---
 {layout="Launch"}
@@ -271,31 +269,72 @@ This function could take in a row from the animals table, and draw a special dot
 
 ---
 {layout="Launch"}
-# Your Own Analysis
+# Data Exploration Project (Scatter Plots) 
 
-What relationships do you think might be lurking in _your_ dataset?
+Let’s review what we have learned about making and interpreting scatter plots.
 
-Which pairs of columns would you like to examine?
+- Does a scatter plot display categorical or quantitative data? How many columns of data does a scatter plot display?
+- What do scatter plots show us about a dataset?
+
+@teacher{
+- Does a scatter plot display categorical or quantitative data? How many columns of data does a scatter plot display?
+** _Scatter plots display two columns of quantitative data and a third column of quantitative or categorical data is used to label the points._
+- What do scatter plots show us about a dataset?
+** _Scatter plots allow us to look for relationships between two columns of dataset._
+}
+---
+{layout="Investigate"}
+# Data Exploration Project (Scatter Plots) 
+
+Let’s connect what we know about scatter plots to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
+- Choose two quantitative columns from your dataset whose relationship you want to explore, and another column that makes sense to use as labels for your points.
+- What question does your display answer?
+- Write down that question in the top section of @printable-exercise{data-cycle-scatter-plot.adoc}.
+
+@teacher{
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- What question does your display answer?
+** _Possible response: What is the relationship between column A and column B of my dataset?_
+}
 
 ---
-{layout="Investigate-DN"}
-# Your Own Analysis
+{layout="Investigate"}
+# Data Exploration Project (Scatter Plots) 
 
-- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and add them to the "Making Displays" section of your exploration document.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
+- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one other pair of quantitative columns.
+
+@teacher{
+Confirm that all students have created and understand how to interpret their scatter plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+}
 
 ---
-{layout="Synthesize"}
-# Your Own Analysis
+{layout="Investigate"}
+# Data Exploration Project (Scatter Plots) 
 
+*It’s time to add to your @starter-file{exploration-project}.*
+- Copy/paste at least two scatter plots. Be sure to also add any interesting questions that you developed while making and thinking about your scatter plots.
 - Which relationships did you look for?
 - Do you see any possible relationships or trends?
 - What do those findings mean?
 - What new questions come up for you?
 
+@teacher{
+** _You may need to help students locate the “Scatter plot” slide in the "Making Displays" section. They will need to duplicate the slide to add their second display. The “My Questions” section is at the end of the slide deck._
+}
+
 ---
 {layout="Synthesize"}
-# Your Own Analysis
+# Data Exploration Project (Scatter Plots) 
 
-The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
-- Does your dataset contain any sub-groups? If so, what are they?
+Share your findings!
+
+Were the relationships you investigated stronger or weaker than they expected?
+
+What questions did the scatter plots raise about your dataset?
+
+What, if any, outliers did you discover when making scatter plots?
+
+Were there any surprises when you compared your findings with other students? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
