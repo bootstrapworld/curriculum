@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 2.0.17">
+  <title>Contracts</title>
+  <link rel="stylesheet" href="lib/curriculum.css" />
+  <script src="dependency-graph.js"></script>
+  <script src="pathway-tocs.js"></script>
+  <script src="lib/bootstraplesson.js"></script>
+  <script src="lib/langtable.js"></script>
+    <style>
+    /* override some asciidoctor and shared.less defaults */
+    *:not(pre)>code { background-color: transparent !important; }
+    table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
+    .fitb, .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
+
+    html, body, div#body { width: 9.8in !important; max-width: 9.8in !important; }
+    #search { background: black; color: white; padding: 5px; margin: 10px 0; }
+    #search input { width: 250px; font-size: 14px; margin-left: 15px; }
+    .contracts-table { width: 100%; }
+    thead { background: lightgray !important; }
+    td { white-space: pre; vertical-align: baseline; }
+    tbody tr:last-child { font-style: italic; }
+
+    @media print {
+      @page   { size: landscape; }
+      #search { display: none; }
+    }
+  </style>
+
+  <script>
+    configureGraph(graph);
+    // narrow the primitives by url params
+    const {pathway, lessons, lesson} = getParams();
+    // if there's a pathway, extract the primitives
+    const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
+
+    // take note of whether we are in wescheme or not
+    const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
+
+    // set the list of contracts (hard-coded for Pyret right now)
+    const contracts = Array.prototype.concat(
+      ...Object.values(langTable).map(t => t.primitives))
+      .sort((a,b) => a.name > b.name? 1 : -1)
+      .filter(c => primitives? primitives.includes(c.name) : true)
+      .filter(c => (proglang == "wescheme")? 
+        c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
+
+    // the domain is an array of {name, type} pairs
+    function processDomain(contract) {
+      // short-circuit for algebra, where kids discover their own contracts and examples
+      if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
+        return document.createElement('span');
+
+      const code = document.createElement('code');
+      code.className = "pyret-comment";
+      code.innerHTML = '(' + 
+        [...contract.domain.map(i => {
+          if(i.name && i.name.length) {
+            return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
+          } else {
+            return `<span class="fitb">${i.type}</span>`
+          }
+        })].join(',')
+        + ')';
+      return code;
+    }
+
+    // use the right example for the proglang
+    function processExample(contract) {
+      // short-circuit for algebra, where kids discover their own contracts and examples
+      if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
+        return "";
+      return (proglang == "wescheme")?
+       contract["example-wescheme"] : contract["example-pyret"];
+    }
+
+    // for each contract, add a row to the table
+    // handle domains separately because they require more preprocessing
+    function buildTable() {
+      const table = document.getElementById('contracts');
+      const prefix = (proglang == "wescheme")? "; " : "# ";
+      contracts
+        .forEach(c => {
+          // build the domain and example
+          domain = processDomain(c).outerHTML;
+          example= processExample(c);
+          // make the tbody
+          const tbody = document.createElement('tbody');
+          // make the row
+          const row1 = document.createElement('tr');
+          row1.innerHTML  = 
+            '<td><code>' + prefix + c.name + '</code></td>' +
+            '<td> :: </td>' +
+            '<td>' + domain + '</td>' + 
+            '<td> -> </td>' + 
+            '<td><code>' + c.range + '</code></td>';
+          const row2 = document.createElement('tr');
+          row2.innerHTML  = '<td colspan="7">' + example +
+            (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
+          tbody.appendChild(row1);
+          tbody.appendChild(row2);
+          table.appendChild(tbody);
+        });
+
+    }
+
+    var searchTimeout;
+    function search(str) {
+      clearTimeout(searchTimeout);
+      const tbodies = [...document.querySelectorAll('#contracts tbody')];
+      searchTimeout = setTimeout( () => {
+        console.time('time to filter');
+        const table = document.getElementById('contracts');
+        table.style.display = "none";
+        tbodies.forEach((tbody, idx) =>
+          // if it's a match, make this tbody visible. Otherwise, invisible
+          tbody.style.display = contracts[idx].name.includes(str)? "table-row-group" : "none");
+        table.style.display = "table";
+        console.timeEnd('time to filter');
+      }, 250);
+    }
+  </script>
+</head>
+<body class="narrativepage workbookpage article" onload="buildTable()">
+  <!--#include virtual="/menubar.ssi"-->
+  <div id="body">
+    <div id="header">
+      <h1>Contracts</h1>
+    </div>
+    <div id="content">
+      <div class="paragraph">
+        <p>
+          Contracts tell us how to use a function, by telling us three important things:
+          <ol>
+            <li>The <b>Name</b></li>
+            <li>The <b>Domain</b> of the function - what kinds of inputs do we need to give the function, and how many?</li>
+            <li>The <b>Range</b> of the function - what kind of output will the function give us back?</li>
+          </ol>
+        </p>
+        <p>
+          For example: The contract <tt>num-min :: (Number, Number) -> Number</tt> tells us that the name of the function is  <tt>num-min</tt>, it needs two inputs (both Numbers), and it produces a Number. 
+        </p>
+        <p>
+          With these three pieces of information, we know what to type: <tt>num-min(4, 6)</tt>, and we know this will evaluate to a Number.
+        </p>
+        <div id="search">
+            Searching for a function? <input id="searchBox" type="search" onInput="search(this.value)"
+            placeholder="Type its name here!"/>
+        </div>
+        <table id="contracts" class="contracts-table">
+          <thead>
+            <th>Name</th>
+            <th></th>
+            <th>Domain</th>
+            <th></th>
+            <th>Range</th>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

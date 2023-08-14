@@ -113,7 +113,7 @@
 (define (print-link-to-standards course o)
   (display
     (string-append
-      "\n- link:./pathway-alignments.shtml?pathway=" course "[Standards Alignment]\n"
+      "\n- link:../../Alignments.shtml?pathway=" course "[Standards Alignment]\n"
       "-- Find out how our materials align with National and State\n"
       "Standards, as well as some of the most commonly used math\n"
       " textbooks.\n")

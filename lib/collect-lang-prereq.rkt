@@ -20,11 +20,14 @@
 (define *proglang* #f)
 (define sym-to-adocstr #f)
 
-(define *number-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Number) 'primitives)))
-(define *string-list* (map string->symbol (hash-ref (hash-ref *language-table* 'String) 'primitives)))
-(define *boolean-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Boolean) 'primitives)))
-(define *image-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Image) 'primitives)))
-(define *table-list* (map string->symbol (hash-ref (hash-ref *language-table* 'Table) 'primitives)))
+(define (get-primitive-name p)
+  (string->symbol (hash-ref p 'name)))
+
+(define *number-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Number) 'primitives)))
+(define *string-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'String) 'primitives)))
+(define *boolean-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Boolean) 'primitives)))
+(define *image-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Image) 'primitives)))
+(define *table-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Table) 'primitives)))
 
 (define (display-prereq-row name o)
   ;(printf "doing display-prereq-row ~s\n" name)
@@ -36,7 +39,7 @@
                        [(eq? name 'Table) "Table"]
                        )]
          [name-data (hash-ref *language-table* name)]
-         [name-fns (hash-ref name-data 'primitives)]
+         [name-fns (map get-primitive-name (hash-ref name-data 'primitives))]
          [name-vals (hash-ref name-data 'values)]
          [fns (filter (lambda (x) (member x *prereqs-used*))
                       name-fns)]
