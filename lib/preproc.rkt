@@ -2777,13 +2777,15 @@
   (if (list? x)
       (begin
         (let ([name (first x)] [type (second x)])
+          (unless (string? name) (set! name (format "~a" name)))
           (if (list? type)
               (begin
                 (format "~a {two-colons} ~a" name
                         (string-append (contract-type (first type))
                           " -> "
                           (contract-types-to-commaed-string (rest type)))))
-              (let* ([name-w (string-length name)]
+              (let* ([type (if (string? type) type (format "~a" type))]
+                     [name-w (string-length name)]
                      [type-w (string-length type)]
                      [w (+ 0 (max name-w type-w))])
                 (string-append (create-begin-tag "span" ".fitbruby" #:attribs
