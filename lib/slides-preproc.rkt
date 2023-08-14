@@ -529,7 +529,7 @@
                                 (lambda (i)
                                   (expand-directives i o)))))]
                          [(string=? directive "teacher")
-                          (let ([text (read-group i directive)])
+                          (let ([text (read-group i directive #:multiline? #t)])
                             (display "<!--\n" o)
                             (call-with-input-string text
                               (lambda (i)
