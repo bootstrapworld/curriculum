@@ -2779,17 +2779,31 @@
       (cm-code x #:multi-line multi-line #:parens parens)))
 
 (define (contract-type x)
+  ; (printf "doing contract-type ~s\n" x)
   (if (list? x)
-      (let ([name (first x)] [type (second x)])
-        (format "~a {two-colons} ~a" name
-                (if (list? type)
-                    (string-append (contract-type (first type))
-                      " -> "
-                      (contract-types-to-commaed-string (rest type)))
-                    type)))
-      x))
+      (begin
+        (let ([name (first x)] [type (second x)])
+          (if (list? type)
+              (begin
+                (format "~a {two-colons} ~a" name
+                        (string-append (contract-type (first type))
+                          " -> "
+                          (contract-types-to-commaed-string (rest type)))))
+              (let* ([name-w (string-length name)]
+                     [type-w (string-length type)]
+                     [w (+ 0 (max name-w type-w))])
+                (string-append (create-begin-tag "span" ".fitbruby" #:attribs
+                                                 (format "style=\"width: ~aem\"" w))
+                  type
+                  (create-begin-tag "span" ".ruby")
+                  name
+                  (create-end-tag "span")
+                  (create-end-tag "span"))))))
+      (begin
+        x)))
 
 (define (contract-types-to-commaed-string xx)
+  ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
   (let* ([n (length xx)]
          [contains-parens? (ormap list? xx)]
          [s
@@ -2802,7 +2816,7 @@
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;FIXME: do we need a keyword to avoid the prefix character
-  ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
+  ; (printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
   (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
     (add-prereq funname-sym)
     (let* (
@@ -2830,8 +2844,8 @@
           )])
       (if single?
           (begin
-            (create-zero-file (format "~a.uses-codemirror" *out-file*))
-            (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t))
+            ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
+            (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multi-line #t))
           s))))
 
 (define (contracts . args)
@@ -2842,88 +2856,5 @@
                     (keyword-apply contract '(#:single?) '(#f)
                                    (first args))))
         (loop (rest args))))
-    (create-zero-file (format "~a.uses-codemirror" *out-file*))
-    (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
-
-;;; expanded contracts
-
-(define (annotated-contract-type x)
-  ; (printf "doing contract-type ~s\n" x)
-  (if (list? x)
-      (begin
-        (let ([name (first x)] [type (second x)])
-          (if (list? type)
-              (begin
-                (format "~a {two-colons} ~a" name
-                        (string-append (annotated-contract-type (first type))
-                          " -> "
-                          (annotated-contract-types-to-commaed-string (rest type)))))
-              (let* ([name-w (string-length name)]
-                     [type-w (string-length type)]
-                     [w (+ 0 (max name-w type-w))])
-                (string-append (create-begin-tag "span" ".fitbruby" #:attribs
-                                                 (format "style=\"width: ~aem\"" w))
-                  type
-                  (create-begin-tag "span" ".ruby")
-                  name
-                  (create-end-tag "span")
-                  (create-end-tag "span"))))))
-      (begin
-        x)))
-
-(define (annotated-contract-types-to-commaed-string xx)
-  ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
-  (let* ([n (length xx)]
-         [contains-parens? (ormap list? xx)]
-         [s
-           (string-join
-             (map annotated-contract-type xx)
-             ", ")])
-    (if contains-parens?
-        (string-append "(" s ")")
-        s)))
-
-(define (annotated-contract funname domain-list range [purpose #f] #:single? [single? #t])
-  ;FIXME: do we need a keyword to avoid the prefix character
-  ; (printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
-  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
-    (add-prereq funname-sym)
-    (let* (
-      [prefix (cond
-                [(string=? *proglang* "pyret") "# "]
-                [(string=? *proglang* "wescheme") "; "]
-                [(string=? *proglang* "codap") ""])]
-      [s (string-append
-          prefix
-          (if *pyret?* (wescheme->pyret funname-sym) funname)
-          " "
-          ; used to be single colon for WeScheme
-          "{two-colons}"
-          " "
-          ; used to not have commas in WeScheme
-          (annotated-contract-types-to-commaed-string domain-list)
-          " ‑> "
-          range
-          (if purpose
-              (string-append "\n"
-                prefix
-                purpose)
-              "")
-          ;(if single? "\n```\n" "")
-          )])
-      (if single?
-          (begin
-            (create-zero-file (format "~a.uses-codemirror" *out-file*))
-            (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multi-line #t))
-          s))))
-
-(define (annotated-contracts . args)
-  (let ([res ""])
-    (let loop ([args args])
-      (unless (null? args)
-        (set! res (string-append res "\n"
-                    (keyword-apply annotated-contract '(#:single?) '(#f)
-                                   (first args))))
-        (loop (rest args))))
-    (create-zero-file (format "~a.uses-codemirror" *out-file*))
-    (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
+    ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
+    (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))
