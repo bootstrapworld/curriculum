@@ -1643,7 +1643,7 @@
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".teacherNote")
