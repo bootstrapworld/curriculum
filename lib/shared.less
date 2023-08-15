@@ -216,6 +216,47 @@ body:not(.LessonPlan, .narrativepage) p {
   content: '\00200b';
 }
 
+/* use 'thin' instead of 1px border to try and avoid disappearing 
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin black;
+  vertical-align:     baseline;
+}
+.fitbruby { 
+  margin-bottom: 0.75rem;
+}
+.fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
+  position:           absolute;
+  bottom:             -0.9rem;
+  left:               0;
+  font-size:          9.5px;
+  font-weight:        normal;
+  width:              100%;
+  text-align:         center;
+  font-style:         normal;
+  font-family:        @text-font;
+  white-space:        nowrap;
+}
+.fitb.stretch, .fitbruby.stretch { 
+  margin-left:        5px; 
+  vertical-align:     baseline; 
+  width:              auto;
+  border-color:       transparent; /* hide the normal underline */
+  /* add an underline that goes past the end of the page */
+  &::after { 
+    content:"\00a0";
+    position:           absolute;
+    width:              1000px;
+    left:               0;
+    bottom :            -1px;
+  }
+}
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
@@ -540,48 +581,6 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
-
-  /* use 'thin' instead of 1px border to try and avoid disappearing 
-  lines on some browsers */
-  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-    padding-top:        @top-padding-for-writing;
-    position:           relative;
-    display:            inline-block;
-    min-width:          4em;
-    text-align:         center;
-    line-height:        1rem;
-    border-bottom:      solid thin black;
-    vertical-align:     baseline;
-  }
-  .fitbruby { 
-    margin-bottom: 0.75rem;
-  }
-  .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
-    position:           absolute;
-    bottom:             -0.9rem;
-    left:               0;
-    font-size:          9.5px;
-    font-weight:        normal;
-    width:              100%;
-    text-align:         center;
-    font-style:         normal;
-    font-family:        @text-font;
-    white-space:        nowrap;
-  }
-  .fitb.stretch, .fitbruby.stretch { 
-    margin-left:        5px; 
-    vertical-align:     baseline; 
-    width:              auto;
-    border-color:       transparent; /* hide the normal underline */
-    /* add an underline that goes past the end of the page */
-    &::after { 
-      content:"\00a0";
-      position:           absolute;
-      width:              1000px;
-      left:               0;
-      bottom :            -1px;
-    }
-  }
 }
 
 /* Back-of-the-book contracts table */
