@@ -40,22 +40,23 @@
 === Overview
 Students learn one way of grouping data, showing the _frequency_ of values in a dataset using bar and pie charts.
 
-=== Launch
-
 @optional Written instuctions and questions for the discussion in the _Grouping by Value_ section of this lesson are available on @opt-printable-exercise{count-bar-pie.adoc}.
 
+=== Launch
+
+Have students open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area. 
+
+=== Investigate
+
 [.lesson-instruction]
-- Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area. 
-- How do they compare?
+- How do the count table and bar chart you just made compare?
 ** __The height of each bar matches the count of each species.__
 - Which do you like better: the bar chart or the table? Why?
 - Now test out the expression @show{(code '(pie-chart animals-table "species"))}
 - How does this pie chart compare to the bar chart you just made?
 ** __The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.__
 - When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.
-- Hit the up arrow in the interactions area to reload your last expression and test it out! 
-
-=== Investigate
+- Hit the up arrow in the Interactions Area to reload your last expression and test it out! 
 
 @image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385} @image{images/pie-species-popout.png, 275}
 
@@ -143,9 +144,8 @@ Sometimes we want to visualize data that is _already summarized:_
 !===
 
 In this situation, we want to use the values in the _first_ column for the labels of our pie slices or bars, and the values in the _second_ column for the size. We have contracts for those, too:
-
-@show{(contract "pie-chart-summarized" '("Table" "String" "String") "Image" )}
-@show{(contract "bar-chart-summarized" '("Table" "String" "String") "Image" )}
+@show{(contract 'pie-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
+@show{(contract 'bar-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
 
 Open the @starter-file{hair} to try them out!
 
@@ -169,8 +169,10 @@ Comparing groups is great, but sometimes we want to compare __sub-groups across 
 
 Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
 
-@show{(contract "stacked-bar-chart" '("Table" "String" "String") "Image" )} +
-@show{(contract "multi-bar-chart" '("Table" "String" "String") "Image" )}
+
+@show{(contract 'stacked-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
+
+@show{(contract 'multi-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
 
 [.lesson-instruction]
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
@@ -210,6 +212,9 @@ Infographics are a powerful tool for communicating information, especially when 
 |===
 
 == Additional Exercises
+
 - @opt-printable-exercise{bar-chart-notice.adoc}
 - @opt-printable-exercise{pie-chart-notice.adoc}
+- If you are looking to offer your students more practice making and interpreting these chart types in Pyret, we have a second teaching dataset on @opt-starter-file{food} for you to work with!
+
 
