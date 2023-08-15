@@ -535,6 +535,8 @@
                               (lambda (i)
                                 (expand-directives i o)))
                             (display "\n-->" o))]
+                         [(string=? directive "optional")
+                          #f]
                          [(member directive '("left" "right" "center"))
                           (let ([fragment (read-group i directive #:multiline? #t)])
                             (call-with-input-string fragment
