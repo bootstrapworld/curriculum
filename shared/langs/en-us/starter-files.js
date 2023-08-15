@@ -122,7 +122,7 @@ var starterFiles = {
   "research-paper": {
     "title": "Research Paper",
     "pyret": {
-      "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
+      "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
