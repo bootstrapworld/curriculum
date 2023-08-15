@@ -186,7 +186,7 @@ Scaffolding provided on next slide!
 # Your Own Analysis
 
 - Turn to @printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to explore two quantitative columns with histograms.
-- Then add these displays - and your interpretations! - to the "Making Displays" section of your @starter-file{exploration-paper}.
+- Then add these displays - and your interpretations! - to the "Making Displays" section of your @starter-file{exploration-project}.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 ---

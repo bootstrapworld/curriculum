@@ -107,13 +107,13 @@ Look at the spreadsheet or table for your dataset with your partner and complete
 
 - Open the starter file for your chosen dataset and save a copy. 
 - In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
-- Make a copy of @starter-file{exploration-paper} and share it with your partner(s) and your teacher.
+- Make a copy of @starter-file{exploration-project} and share it with your partner(s) and your teacher.
 
 ---
 {layout="Investigate"}
 # Exploring Your Dataset 
 
-Collaborate with your partner(s), to fill in the first two pages of your @starter-file{exploration-paper}, drawing on the thinking you did on @printable-exercise{pages/my-dataset.adoc}.
+Collaborate with your partner(s), to fill in the first two pages of your @starter-file{exploration-project}, drawing on the thinking you did on @printable-exercise{pages/my-dataset.adoc}.
 
 Remember: More than one person can work on a google doc at the same time! If you have access to two computers, someone can work on page 1 while someone else works on page 2!
 
@@ -122,7 +122,7 @@ Remember: More than one person can work on a google doc at the same time! If you
 # Exploring Your Dataset
 
 - What is the distribution of data in your categorical columns? Turn to Complete @printable-exercise{data-cycle-categorical.adoc}, and use the Data Cycle to generate pie and bar charts.
-- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of your @starter-file{exploration-paper}.
+- What do these charts tell you? Add the images of these charts - along with your interpretation! - to the "Making Displays" section of your @starter-file{exploration-project}.
 - Do these displays bring up any interesting questions? If so, add them to the end of the document.
 
 ---
