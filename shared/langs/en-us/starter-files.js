@@ -110,10 +110,10 @@ var starterFiles = {
       "url": "https://drive.google.com/file/d/1DX_oEJgUr9uSUxYdN4YdybQjwEvEP7fC/"
     }
   },
-  "exploration-paper": {
-    "title": "Dataset Exploration Project",
+  "exploration-project": {
+    "title": "Data Exploration Project",
     "pyret": {
-      "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
+      "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
