@@ -11,7 +11,7 @@
   <script src="pathway-tocs.js"></script>
   <script src="lib/bootstraplesson.js"></script>
   <script src="lib/langtable.js"></script>
-    <style>
+  <style>
     /* override some asciidoctor and shared.less defaults */
     *:not(pre)>code { background-color: transparent !important; }
     table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
@@ -41,7 +41,7 @@
     // take note of whether we are in wescheme or not
     const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
 
-    // set the list of contracts (hard-coded for Pyret right now)
+    // set the list of contracts
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
       .sort((a,b) => a.name > b.name? 1 : -1)
@@ -49,38 +49,39 @@
       .filter(c => (proglang == "wescheme")? 
         c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
 
-    // the domain is an array of {name, type} pairs
-    function processDomain(contract) {
-      // short-circuit for algebra, where kids discover their own contracts and examples
-      if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
-        return document.createElement('span');
-
-      const code = document.createElement('code');
-      code.className = "pyret-comment";
-      code.innerHTML = '(' + 
-        [...contract.domain.map(i => {
-          if(i.name && i.name.length) {
-            return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
-          } else {
-            return `<span class="fitb">${i.type}</span>`
-          }
-        })].join(',')
-        + ')';
-      return code;
-    }
-
-    // use the right example for the proglang
-    function processExample(contract) {
-      // short-circuit for algebra, where kids discover their own contracts and examples
-      if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
-        return "";
-      return (proglang == "wescheme")?
-       contract["example-wescheme"] : contract["example-pyret"];
-    }
-
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
     function buildTable() {
+
+      // the domain is an array of {name, type} pairs
+      function processDomain(contract) {
+        // short-circuit for algebra, where kids discover their own contracts and examples
+        if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
+          return document.createElement('span');
+
+        const code = document.createElement('code');
+        code.className = "pyret-comment";
+        code.innerHTML = '(' + 
+          [...contract.domain.map(i => {
+            if(i.name && i.name.length) {
+              return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
+            } else {
+              return `<span class="fitb">${i.type}</span>`
+            }
+          })].join(',')
+          + ')';
+        return code;
+      }
+
+      // use the right example for the proglang
+      function processExample(contract) {
+        // short-circuit for algebra, where kids discover their own contracts and examples
+        if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
+          return "";
+        return (proglang == "wescheme")?
+         contract["example-wescheme"] : contract["example-pyret"];
+      }
+      
       const table = document.getElementById('contracts');
       const prefix = (proglang == "wescheme")? "; " : "# ";
       contracts
@@ -149,7 +150,7 @@
         </p>
         <div id="search">
             Searching for a function? <input id="searchBox" type="search" onInput="search(this.value)"
-            placeholder="Type its name here!"/>
+            placeholder="Type it here!"/>
         </div>
         <table id="contracts" class="contracts-table">
           <thead>
