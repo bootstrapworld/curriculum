@@ -60,7 +60,7 @@ But what we really want is a display that will help us search for *a relationshi
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
 * What is the contract for `scatter-plot`?
-** @show{(contract "scatter-plot" '("Table" "String" "String" "String") "Image")}
+ @show{(contract 'scatter-plot '("Table" (labels String) (explanatory String) (response String)) "Image")}
 
 Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
 
