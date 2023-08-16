@@ -44,7 +44,7 @@ Students learn one way of grouping data, showing the _frequency_ of values in a 
 
 === Launch
 
-Have students open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area. 
+Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
 
 === Investigate
 
@@ -58,7 +58,7 @@ Have students open the @starter-file{animals}, click "Run" and test the expressi
 - When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.
 - Hit the up arrow in the Interactions Area to reload your last expression and test it out! 
 
-@image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385} @image{images/pie-species-popout.png, 275}
+@image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385}
 
 Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
 
@@ -67,7 +67,7 @@ Hovering over a bar reveals the label, as well as the number of animals in that 
 [.lesson-point]
 Bar charts group data _by value_ to show frequency as a count. 
 
-Pie charts show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
+@right{@image{images/pie-species-popout.png, 275}}Pie charts show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
 
 [.lesson-point]
 Pie charts group data _by value_ to show frequency as a percentage.
@@ -111,7 +111,7 @@ When students make a display of the `sex` of the animals, they will see that som
 * Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on pie- and bar charts.
 
 === Synthesize
-Confirm that students have correctly matched the displays on @printable-exercise{matching-bar-to-pie.adoc}.
+@teacher{Confirm that students have correctly matched the displays on @printable-exercise{matching-bar-to-pie.adoc}.}
 
 - What did you Notice? What did you Wonder? +
 _Answers will vary, but here are some important points:_
@@ -168,7 +168,6 @@ Students learn how to create __groups within groups__, showing the relative freq
 Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across each species.
 
 Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
-
 
 @show{(contract 'stacked-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
 
