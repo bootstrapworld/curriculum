@@ -2823,7 +2823,7 @@
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
-          (if *pyret?* (wescheme->pyret funname-str) funname-str)
+          (if *pyret?* (wescheme->pyret funname-sym) funname-str)
           " "
           ; used to be single colon for WeScheme
           "{two-colons}"
