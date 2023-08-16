@@ -11,14 +11,11 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Making Box Plots
 
-**_FACT: The Animal Shelter Bureau says the average pet weighs almost 40 pounds_**
+When we explored measures of center, we tried to answer a question about "typical" values. We considered a fact - that _the Animal Shelter Bureau says the average pet weighs almost 40 pounds_.
 
-Once we have a summary number like "mean", it's important to ask another question:
+How useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
 
-_If the average pet is 40 pounds, just **how typical** is that?_
-
-- Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
-- But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
+So once we have our summary for a "normal value", it's likely we'll ask another question: _If the average pet is 40 pounds, just **how typical** is that?_
 
 ---
 {layout="Launch"}
@@ -30,9 +27,6 @@ So we'd expect some deviation - or @vocab{spread} - in any class of students! So
 
 How do we measure the @vocab{spread} of a population?
 
-<!--
-
--->
 ---
 {layout="LaunchC"}
 # Making Box Plots
@@ -129,7 +123,7 @@ This plot shows us the center and spread in our dataset according to those five 
 
 @image{images/5-plot.png, 400}
 ---
-{layout="Investigate"}
+{layout="InvestigateC"}
 # Making Box Plots
 
 
@@ -238,30 +232,72 @@ We started talking about measures of center with a single question: __is "averag
 -->
 ---
 {layout="Launch"}
-# Your Own Analysis 
+# Data Exploration Project (Box Plots) 
 
-**What are the quantitative columns in _your_ dataset? How are they distributed?**
+Let’s review what we have learned about making and interpreting box plots.
 
-Are all the values pretty close together, or really spread out?
+- Does a box plot display categorical or quantitative data? How many columns of data does a box plot display?
+- How are box plots similar to histograms? How are they different?
+- What does the five-number summary tell us about a quantitative column?
 
-Are they clumped on the right, with a few outliers skewing to the left? Or are they clumped on the left, with a few outliers skewing to the right?
+@teacher{
+Let’s review what we have learned about making and interpreting box plots.
+
+- Does a box plot display categorical or quantitative data? How many columns of data does a box plot display?
+** _Box plots display a single column of quantitative data._
+- How are box plots similar to histograms? How are they different?
+** _Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variables numbers of data points in each one. Boxplots have variable intervals ("quartiles") with a fixed number of data points in each one._
+- What does the five-number summary tell us about a quantitative column?
+** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
+}
 
 ---
 {layout="Investigate"}
-# Your Own Analysis 
+# Data Exploration Project (Box Plots) 
 
-- How are quantitative columns in your dataset distributed? Complete
-@printable-exercise{data-cycle-quantitative.adoc}, and **explore two quantitative columns with box plots**.
-- Then add these displays - and your interpretations! - to "Making Displays" section.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
-- Complete @printable-exercise{shape-of-my-dataset.adoc}, and **explain the connection between measures of center and your box plots**. - Complete the "Measures of Center and Spread" section of the @starter-file{exploration-project}.
+- Open your chosen dataset starter file in Pyret.
+- Choose one quantitative column from your data set that you will represent with a box plot!
+- What question does your display answer?
+- Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+@teacher{
+- Open your chosen dataset starter file in Pyret.
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- Choose one quantitative column from your data set that you will represent with a box plot!
+** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
+- What question does your display answer?
+** _Possible responses: How is the data for a certain column distributed? Are the values close together or really spread out? Are their any outliers?_
+- Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Box Plots) 
+
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Find the box plot slide in the "Making Displays" section. Copy/paste at least two box plots *and* their corresponding five-number summaries. Be sure to also add any interesting questions that you developed while making and thinking about box plots.
+
+@teacher{_You may need to help students locate the “Box Plots” section and the “Measures of Center and Spread” section. The “My Questions” page is at the end of the template._}
+
 ---
 {layout="Synthesize"}
-# Your Own Analysis 
+# Data Exploration Project (Box Plots) 
 
-- Were any of them surprising?
-- What, if any, outliers did you discover when making box plots?
-- What measures of center make the most sense for one column or another?
+Share your findings!
+
+What @vocab{shape} did you notice in your box-plots?
+
+Did you discover anything surprising or interesting about your dataset?
+
+What, if any, outliers did you discover when making box plots?
+
+When your compared your findings with others, did they make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
 
 ---
 {layout="Supplemental"}
