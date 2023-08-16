@@ -196,7 +196,7 @@ Let’s review what we have learned about standard deviation.
 - Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.
 
 @teacher{
-- Do we compute standard deviation categorical data or quantitative data? How many columns of data does standard deviation tell us about?
+- Do we compute standard deviation with categorical data or quantitative data? How many columns of data does standard deviation tell us about?
 ** _Standard deviation is a measure that tells us about the spread of a single quantitative column of data._
 - Standard deviation is a measure of @vocab{spread}. In your own words, what does @vocab{spread} mean?
 ** _Spread is the extent to which values in a dataset vary, either from one another or from the center._
@@ -209,8 +209,6 @@ Let’s review what we have learned about standard deviation.
 ---
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
-
-Let’s connect what we know about standard deviation to your chosen dataset.
 
 - Open your chosen dataset starter file in Pyret.
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use Pyret to compute the standard deviation for one of them.
