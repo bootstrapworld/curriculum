@@ -271,9 +271,81 @@ When should each measure of center be used?
 - If the data doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
-<!--
+
+@teacher{
 @optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
--->
+}
+
+---
+{layout="Launch"}
+# Data Exploration Project (Measures of Center)
+
+Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and modes.
+
+- Describe how to compute mean, median, and modes.
+- When @vocab{mean} provide the best summary?
+- When does @vocab{median} provide the best summary?
+- When are @vocab{mode}(s) a useful way to summarize a dataset?
+
+@teacher{
+- Describe how to compute mean, median, and modes.
+- When @vocab{mean} provide the best summary?
+** _It includes information from every single point, so it is useful when the data doesn't show much skewness or have outliers._
+- When does @vocab{median} provide the best summary?
+** _Statisticians fall back to the median when working with highly skewed datasets._
+- When are @vocab{mode}(s) a useful way to summarize a dataset?
+** _Mode(s) are most useful when a dataset has very few values._  
+}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Measures of Center)
+
+Let’s connect what we know about measures of center to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
+- Choose two quantitative columns that you'd like to analyze.
+- Use Pyret to compute the mean, median and modes of one of them.
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Locate the "Measures of Center" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Measures of Center)
+
+- Then type in the mean, median and modes that you just identified. Leave the other rows blank. We will come back to them another day.
+- Go to the next slide and replace `Column B` with the second column you're interested in.
+- Then, compute the mean, median and modes of that column and type them into this slide.
+
+@teacher{
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+
+Invite students to discuss their results and consider how to interpret them.}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Measures of Center)
+
+Add your interpretations to the two measures of center slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
+
+---
+{layout="Synthesize"}
+# Data Exploration Project (Measures of Center)
+
+Share your findings!
+
+Did you discover anything surprising or interesting about your dataset?
+
+Which measures of center do you think were the most useful for their two chosen quantitative columns?
+
+What questions did the measures of center inspire you to ask about their dataset?
+
+When you compared their findings with other students, did they make any interesting discoveries?
+
+@teacher{
+(For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
+}
+
 ---
 {layout="Supplemental"}
 # Additional Activities
