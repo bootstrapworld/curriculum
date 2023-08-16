@@ -193,7 +193,7 @@ But how do we talk about or describe that shape, and what does the shape actuall
 
 ---
 {layout="Launch"}
-# Data Exploration Project
+# Data Exploration Project (Histograms)
 
 Let’s review what we have learned about making and interpreting histograms.
 
@@ -216,7 +216,7 @@ Let’s review what we have learned about making and interpreting histograms.
 
 ---
 {layout="Investigate"}
-# Data Exploration Project
+# Data Exploration Project (Histograms)
 
 Let’s connect what we know about histograms to your chosen dataset.
 
@@ -242,7 +242,7 @@ Confirm that all students have created and understand how to interpret their his
 
 ---
 {layout="Investigate"}
-# Data Exploration Project
+# Data Exploration Project (Histograms)
 
 - *It’s time to add to your @starter-file{exploration-project}.*
 - Copy/paste at least two histograms. Be sure to also add any interesting questions that you developed while making and thinking about histograms.
@@ -254,7 +254,7 @@ Confirm that all students have created and understand how to interpret their his
 
 ---
 {layout="Synthesize"}
-# Data Exploration Project
+# Data Exploration Project (Histograms)
 
 Share your findings with the class!
 
