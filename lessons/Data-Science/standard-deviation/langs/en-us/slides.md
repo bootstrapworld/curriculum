@@ -10,7 +10,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Measuring "Deviance"
 
-**The Animal Shelter Bureau reports that the mean age of shelter cats is 3 years.**
+**The Animal Shelter Bureau reports that the @vocab{mean} age of shelter cats is 3 years.**
 
 - Look at the Animals Dataset in your student workbook, or the @opt-online-exercise{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Dataset spreadsheet}.
 - Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?
@@ -186,21 +186,72 @@ Treating each point independantly allows each deviation to contribute to the mea
 
 ---
 {layout="Launch"}
-# Your Own Analysis
+# Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-What can standard deviation tell you about quantitative columns in _your_ dataset?
+Let’s review what we have learned about standard deviation.
+
+- Do we compute standard deviation categorical data or quantitative data? How many columns of data does standard deviation tell us about?
+- Standard deviation is a measure of @vocab{spread}. In your own words, what does @vocab{spread} mean?
+- How can two datasets have the same mean, but different standard deviations?
+- Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.
+
+@teacher{
+- Do we compute standard deviation categorical data or quantitative data? How many columns of data does standard deviation tell us about?
+** _Standard deviation is a measure that tells us about the spread of a single quantitative column of data._
+- Standard deviation is a measure of @vocab{spread}. In your own words, what does @vocab{spread} mean?
+** _Spread is the extent to which values in a dataset vary, either from one another or from the center._
+- How can two datasets have the same mean, but different standard deviations?
+** _Mean is a measure of central tendency, whereas standard deviation measures the variation of some sample._
+- Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.
+** _Standard deviation summarizes distance from the mean in either direction._
+}
 
 ---
-{layout="Launch"}
-# Your Own Analysis
+{layout="Investigate"}
+# Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-- What is the standard deviation for these columns? Complete @printable-exercise{analysis-stdev-my-dataset.adoc}, and add your findings to the "Measures of Center and Spread" section.
-- Do these measures bring up any interesting questions? If so, add them to the end of the document.
+Let’s connect what we know about standard deviation to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
+- Use Pyret to compute its standard deviation.
+- What question does your display answer?
+- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+Let’s connect what we know about standard deviation to your chosen dataset.
+
+@teacher{
+- Open your chosen dataset starter file in Pyret.
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+** - Choose one quantitative column that you'd like to analyze.
+** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
+- Use Pyret to compute its standard deviation.
+- What question does your display answer?
+** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_
+- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+Invite students to discuss their results and consider how to interpret them.
+}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Standard Deviation){style="font-size:27pt"}
+
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Locate the "Measures of Center" section of your Exploration Project. Type in the the standard deviations you just identified.
+- Now, add your interpretation of the standard deviation and record any questions that emerged.
 
 ---
 {layout="Synthesize"}
-# Your Own Analysis
+# Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-- Share your findings!
-- Are some columns more spread out - with a larger standard deviation - than others?
-- What does that mean about your data?
+Share your findings with the class!
+
+Did you discover anything surprising or interesting about your dataset?
+
+What questions did the standard deviations inspire you to ask?
+
+When your compared their findings with other students, did they make any interesting discoveries?
