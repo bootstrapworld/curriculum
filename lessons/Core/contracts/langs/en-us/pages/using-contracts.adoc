@@ -1,19 +1,12 @@
 = Using Contracts
 
-++++
-<style>
-	td { padding: 0 .5em !important; }
-	td p.tableblock { text-align: left; }
-	tr > td:nth-child(2) { vertical-align: top; text-align: left; }
-</style>
-++++
-
 Use the contracts to write expressions to generate images similar to those pictured. Go to @starter-file{editor} to test your code.
 
 [.center]
 --
-@show{(code 'ellipse)}`{two-colons} Number, Number, String, String -> Image`
+@show{(contract 'ellipse '("Number" "Number" "String" "String") "Image")}
 --
+
 [.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/ellipse-50-150-outline.png}
@@ -38,8 +31,9 @@ Use the contracts to write expressions to generate images similar to those pictu
 
 [.center]
 --
-@show{(code 'regular-polygon)}`{two-colons} Number, Number, String, String -> Image`
+@show{(contract 'regular-polygon '("Number" "Number" "String" "String") "Image")}
 --
+
 [.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
 | @centered-image{../images/reg-polygon-50-5-solid.png}
