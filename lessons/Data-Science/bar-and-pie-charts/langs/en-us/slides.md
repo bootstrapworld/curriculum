@@ -146,17 +146,17 @@ Fortunately, Pyret has two functions that let us specify both a group and a subg
 
 Complete @printable-exercise{stacked-and-multi-notice.adoc}
 
-**Stacked bar charts make it easier to compare _groups_ than subgroups**
+On a stacked bar chart, we can easily to compare _groups_, but it is more difficult to compare subgroups.
 
-@right{@image{images/stacked-species-sex.png, 300}} Stacked bar charts put the totals side-by-side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._{style="font-size:16pt"}
+@right{@image{images/stacked-species-sex.png, 300}} Stacked bar charts put the totals side by side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._{style="font-size:16pt"}
 
 ---
 {layout="InvestigateR"}
 # Groups and Subgroups
 
-Multi bar charts make it easy to compare _subgroups_ than groups
+On a multi bar chart, we can easily compare _subgroups_, but it is more difficult to compare groups.
 
-@right{@image{images/multi-species-sex.png, 300}} Multi bar charts put the subgroups side-by-side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.{style="font-size:16pt"}
+@right{@image{images/multi-species-sex.png, 300}} Multi bar charts put the subgroups side by side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.{style="font-size:16pt"}
 
 ---
 {layout="Investigate"}

@@ -278,7 +278,7 @@ When should each measure of center be used?
 
 ---
 {layout="Launch"}
-# Data Exploration Project (Measures of Center)
+# Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
 Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and modes.
 
@@ -299,7 +299,7 @@ Let’s review what we have learned about computing and interpreting three measu
 
 ---
 {layout="Investigate"}
-# Data Exploration Project (Measures of Center)
+# Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
 Let’s connect what we know about measures of center to your chosen dataset.
 
@@ -311,11 +311,10 @@ Let’s connect what we know about measures of center to your chosen dataset.
 
 ---
 {layout="Investigate"}
-# Data Exploration Project (Measures of Center)
+# Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
 - Then type in the mean, median and modes that you just identified. Leave the other rows blank. We will come back to them another day.
-- Go to the next slide and replace `Column B` with the second column you're interested in.
-- Then, compute the mean, median and modes of that column and type them into this slide.
+- On the next slide, repeat with `Column B` using the second column you're interested in.
 
 @teacher{
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
@@ -324,7 +323,7 @@ Invite students to discuss their results and consider how to interpret them.}
 
 ---
 {layout="Investigate"}
-# Data Exploration Project (Measures of Center)
+# Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
 Once you've discussed your results and how to interpret them, add your interpretations to the two "Measures of Center and Spread" slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 

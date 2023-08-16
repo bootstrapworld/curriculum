@@ -219,8 +219,6 @@ Let’s connect what we know about standard deviation to your chosen dataset.
 - Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for the other column you explored before (and any others you are curious about).
 
-Let’s connect what we know about standard deviation to your chosen dataset.
-
 @teacher{
 - Open your chosen dataset starter file in Pyret.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._

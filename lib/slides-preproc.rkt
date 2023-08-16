@@ -212,6 +212,36 @@
 
 (define math code)
 
+(define (contract-type x)
+  ; (printf "doing contract-type ~s\n" x)
+  (if (list? x)
+      (let ([name (first x)] [type (second x)])
+        (unless (string? name) (set! name (format "~a" name)))
+        (if (list? type)
+            (begin
+              (format "~a :: ~a" name
+                      (string-append (contract-type (first type))
+                        " -> "
+                        (contract-types-to-commaed-string (rest type)))))
+            (let* ([type (if (string? type) type (format "~a" type))]
+                   [name-w (string-length name)]
+                   [type-w (string-length type)]
+                   [w (+ 0 (max name-w type-w))])
+              (format "~a :: ~a" name type))))
+      x))
+
+(define (contract-types-to-commaed-string xx)
+  ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
+  (let* ([n (length xx)]
+         [contains-parens? (ormap list? xx)]
+         [s
+           (string-join
+             (map contract-type xx)
+             ", ")])
+    (if contains-parens?
+        (string-append "(" s ")")
+        s)))
+
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
          [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
@@ -222,7 +252,7 @@
              prefix
              funname-str
              " :: "
-             (vars-to-commaed-string domain-list)
+             (contract-types-to-commaed-string domain-list)
              " -> "
              range)]
         [s2 (and purpose
