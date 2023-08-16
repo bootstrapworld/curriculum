@@ -167,38 +167,44 @@ Each team looks at the region they're in front of, and must (a) draw a histogram
 
 Histograms are a powerful way to display a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a quantitative dataset. We will also want to learn about center and spread!
 
-<!--
-
--->
-
 ---
 {layout="Launch"}
-# Your Own Analysis
+# Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 
-Let's take a look at the shape of the quantitative columns in _your_ dataset...
+Let’s review what we have learned about visualizing the shape of data.
 
-<!--
-Scaffolding provided on next slide!
--->
+- Describe a histogram that is _skewed right_. Are its outliers high or low?
+- Describe a histogram that is _skewed left_. Are its outliers high or low?
+- Describe a histogram that is symmetric.
+
+@teacher{
+- Describe a histogram that is _skewed right_. Are its outliers high or low?
+** _Values are clumped around what's typical, with low outliers._
+- Describe a histogram that is _skewed left_. Are its outliers high or low?
+** _Values are clumped around what's typical, with high outliers._
+- Describe a histogram that is symmetric.
+** _It’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle._  
+}
 
 ---
 {layout="Investigate"}
-# Your Own Analysis
+# Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 
-- Turn to @printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to explore two quantitative columns with histograms.
-- Then add these displays - and your interpretations! - to the "Making Displays" section of your @starter-file{exploration-paper}.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
+Let’s connect what we know about visualizing the shape of the data to the histograms we created for your chosen dataset.
+
+- *It’s time to add to your @starter-file{exploration-project}.*
+- For each of the histograms that you have added, edit and / or expand upon the interpretations you provided during the @lesson-link{histograms} lesson.
+- Be sure to integrate the new vocabulary we have learned, including: @vocab{shape}, @vocab{skewed left}, @vocab{skewed right}, and @vocab{symmetric}.
+- Describe what this shape tells you about the quantitative column you chose.
 
 ---
 {layout="Synthesize"}
-# Your Own Analysis
+# Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 
-Share your findings! 
+Share your findings!
 
-Were any of them surprising? 
+What @vocab{shape} did you notice in your histograms?
 
-What, if any, outliers did you discover when making histograms?
+Did you discover anything surprising or interesting about your dataset?
 
-<!--
-
--->
+When your compared your findings with others, did they make any interesting discoveries?

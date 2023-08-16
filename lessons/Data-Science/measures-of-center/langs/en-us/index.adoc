@@ -20,7 +20,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let's use mean, median, and mode to describe our data.
+* Let's use mean, median, and modes to describe our data.
 
 | Materials
 |[.materials-links]
@@ -111,6 +111,11 @@ Notice that calculating the mean requires being able to add and divide, so the m
 ** _No, the mean is less than 40 pounds._
 - Now, turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, fill in the computed mean.
 
+=== Synthesize
+
+- Three animals weighing 5, 5, 10, and 100 pounds will have an average mean of 30 pounds. Can you think of another set of four animals that would have the same average? How many sets can you come up with?
+- If you heard that the mean age of students in a kindergarden class was 21, would you be surprised? Why or why not?
+
 == Median @duration{15 minutes}
 
 === Overview
@@ -148,7 +153,7 @@ The median of this list is 8, because 8 is the mean of the two middle numbers, 7
 
 === Investigate
 [.lesson-instruction]
-* Pyret has a function to compute the median of a list as well. Find the contract in your @pathway-link{resources/pages/contracts.pdf, Contracts pages}.
+* Pyret has a function to compute the median of a list as well. Find the contract for `median` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
 * Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.
 ** _The median is 11.3._
 * Is it different than the mean?
@@ -159,7 +164,7 @@ The median of this list is 8, because 8 is the mean of the two middle numbers, 7
 ** _Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3._
 
 === Synthesize
-By looking at the histogram, we can see that it's probably better to use the mean or median.
+Looking at the shape of the data (via a histogram, for example), helps us determine whether it's probably better to use the mean or median.
 
 Strong left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up above the median.
 
@@ -169,7 +174,7 @@ Mean is generally the best measure of center, because it includes information fr
 == Modes @duration{25 minutes}
 
 === Overview
-Students learn about the mode(s) of a dataset, how to compute the mode, and when it is appropriate to use this as a measure of center.
+Students learn about the mode(s) of a dataset, how to compute them, and when it is appropriate to use them as a measure of center.
 
 === Launch
 The third measure of center is called the @vocab{modes} of a dataset. The @vocab{modes} of a dataset are the values that appear _most often_.
@@ -189,15 +194,15 @@ Consider the following three datasets:
 - The mode of the second dataset is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
 
-Mode is rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
+Modes are rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
 
-In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
+In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
 @show{ (contract "modes" '("Table" "String") "List<Number>" )}
 
 === Investigate
 [.lesson-instruction]
-- Compute the `modes` of the `pounds` column, and add it to @printable-exercise{pages/summarizing-columns-in-animals.adoc}. What did you get?
+- Compute the `modes` of the `pounds` column, and add it to @printable-exercise{summarizing-columns-in-animals.adoc}. What did you get?
 ** _0.1 and 6.5_
 
 === Synthesize
@@ -224,11 +229,61 @@ You now have three different ways to measure center in a dataset. But how do you
 
 - If the data doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
-- If there are very few possible values, such as AP Scores (1–5), the @vocab{mode} could be a useful way to summarize the dataset.
+- If there are very few possible values, such as AP Scores (1–5), @vocab{modes} could be a useful way to summarize the dataset.
 
-@optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table __or__ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
+@teacher{
+@optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{data-cycle-practice.adoc}. Sometimes what's created isn't a table __or__ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.}
+
+
+== Data Exploration Project (Measures of Center) @duration{flexible}
+
+=== Overview
+Students apply what they have learned about measures of center to their chosen dataset. In their @starter-file{exploration-project}, they will complete the first four rows of the "Measures of Center and Spread" table. They will also interpret those measures of center, and record any interesting questions that emerge. To learn more about the sequence and scope of the Exploration Project, visit @lesson-link{project-data-exploration}.
+
+=== Launch
+Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and modes.
+
+[.lesson-instruction]
+- Describe how to compute mean, median, and modes.
+- When @vocab{mean} provide the best summary?
+** _It includes information from every single point, so it is useful when the data doesn't show much skewness or have outliers._
+- When does @vocab{median} provide the best summary?
+** _Statisticians fall back to the median when working with highly skewed datasets._
+- When are @vocab{mode}(s) a useful way to summarize a dataset?
+** _Mode(s) are most useful when a dataset has very few values._
+
+=== Investigate
+
+Let’s connect what we know about measures of center to your chosen dataset.
+
+[.lesson-instruction]
+- Open your chosen dataset starter file in Pyret.
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- Choose two quantitative columns that you'd like to analyze.
+- Use Pyret to compute the mean, median and modes of one of them.
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Locate the "Measures of Center" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
+- Then type in the mean, median and modes that you just identified. Leave the other rows blank. We will come back to them another day.
+- On the next slide, repeat with `Column B` using the second column you're interested in.
+
+@teacher{Invite students to discuss their results and consider how to interpret them.}
+
+[.lesson-instruction]
+Add your interpretations to the two measures of center slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
+
+=== Synthesize
+
+Share your findings!
+
+Did you discover anything surprising or interesting about your dataset?
+
+Which measures of center do you think were the most useful for their two chosen quantitative columns?
+
+What questions did the measures of center inspire you to ask about their dataset?
+
+When you compared their findings with other students, did they make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
 
 == Additional Exercises
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}
-- @opt-printable-exercise{pages/critiquing-findings.adoc}
-- @opt-printable-exercise{pages/data-cycle-practice.adoc}
+- @opt-printable-exercise{critiquing-findings.adoc}
+- @opt-printable-exercise{data-cycle-practice.adoc}

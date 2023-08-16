@@ -185,10 +185,82 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 
 **Rule of thumb: a histogram should have between 5–10 bins.**
 
-Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column. 
+Histograms are a powerful way to display a dataset and assess its @vocab{shape}. Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column.
  
+@teacher{
+But how do we talk about or describe that shape, and what does the shape actually tell us? Our @lesson-link{visualizing-the-shape-of-data} lesson addresses all of these questions... and our @lesson-link{measures-of-center} lesson explores the effect of the shape of a histogram on the average (the mean).
+}
 
+---
+{layout="Launch"}
+# Data Exploration Project (Histograms)
 
-<!--
-But how do we talk about that shape, and what does the shape actually tell us? @lesson-link{visualizing-the-shape-of-data} addresses all of these questions...
--->
+Let’s review what we have learned about making and interpreting histograms.
+
+- Does a histogram display categorical or quantitative data? How many columns of data does a histogram display?
+- How is a histogram different from a bar chart?
+- What do histograms show us about a dataset?
+- How can you decide an appropriate bin size for your histogram?
+
+@teacher{
+- Does a histogram display categorical or quantitative data? How many columns of data does a histogram display?
+** _Histograms display a single column of quantitative data._
+- How is a histogram different from a bar chart?
+** Because a bar chart displays categorical data, we can rearrange the bars in any order we wish. Because the quantitative data of a histogram must follow a natural order, bars cannot be rearranged.
+- What do histograms show us about a dataset?
+** Histograms allow us to see the shape of one column of dataset.
+- How can you decide an appropriate bin size for your histogram?
+** _A histogram should have 5-10 bins. We want to choose a bin size that lets us the shape of a quantitative column._
+}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Histograms)
+
+Let’s connect what we know about histograms to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
+- Choose one quantitative column from your data set that you will represent with a histogram!
+- What question does your display answer?
+- Now, write down that question in the top section of @printable-exercise{box-plots/pages/data-cycle-quantitative.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+@teacher{
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- Choose one quantitative column from your data set that you will represent with a histogram!
+- What question does your display answer?
+** _Possible response: What is the shape of a particular quantitative column of my dataset?_
+- Now, write down that question in the top section of @printable-exercise{box-plots/pages/data-cycle-quantitative.adoc}.
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+Confirm that all students have created and understand how to interpret their histograms. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+}
+
+---
+{layout="Investigate"}
+# Data Exploration Project (Histograms)
+
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Copy/paste at least two histograms. Be sure to also add any interesting questions that you developed while making and thinking about histograms.
+
+@teacher{
+** _You may need to help students locate the “Histogram” slide in the "Making Displays" section. They will need to duplicate the slide to add their second display. The “My Questions” section is at the end of the slide deck._
+** _Note: During the next lesson, @lesson-link{visualizing-the-shape-of-data}, students will learn additional vocabulary to help them describe what they see in their histogram. They can add to their histogram interpretations at that point._
+}
+
+---
+{layout="Synthesize"}
+# Data Exploration Project (Histograms)
+
+Share your findings with the class!
+
+Did you discover anything surprising or interesting about your dataset?
+
+What questions did the bar and pie charts inspire raise?
+
+Did other students make any discoveries that were surprising or interesting to you? 
+
+@teacher{(For instance: Did everyone find outliers? Was there more or less similarity than expected?)
+}

@@ -132,36 +132,6 @@ Was anyone able to stump the other group?
 -->
 
 ---
-{layout="Launch"}
-# Your Analysis
-
-In every analysis, there are always threats to validity. It's important to always be upfront about what those threats are, so that anyone who reads your analysis can make their own decision.
-
-<!--
-
--->
-
----
-{layout="Investigate"}
-# Your Analysis
-
-Fill in the Findings portion of your @starter-file{research-paper}, discussing threats to validity and drawing conclusions from their linear regression results.
-
-<!--
-In this @opt-project{project-threats-to-validity.adoc, rubric-threats-to-validity.adoc}, students pretend to be terrible data scientists who develop and support claims based on faulty sampling techniques (selection bias, bias in the study design, poor choice of summary data, and confounding variables). This is a fun opportunity for your students to demonstrate their understanding of the impact of various threats to validity.
--->
-
----
-{layout="Synthesize"}
-# Your Analysis
-
-What threats to validity did you find? What were they?
-
-<!--
-
--->
-
----
 {layout="Supplemental"}
 # Additional Practice
 

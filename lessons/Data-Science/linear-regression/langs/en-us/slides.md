@@ -18,9 +18,9 @@ In both plots, use `weeks` as your @vocab{response variable} and `name` for the 
 {layout="Launch"}
 # Intro to Linear Regression 
 
-*“Can we _predict_ an animal's adoption time based on its size? Its age?”*
+*“Can we _predict_ an animal's adoption time based on its size? Its age?”*{style="font-size:16pt"}
 
-We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{style="font-size:16pt"}
+We are asking if we can use an animal’s **size** or **age** to predict how long it will take to be adopted. A scatter plot of adoption time versus size _does_ suggest that smaller animals get adopted faster than larger animals. Similarly, younger animals tend to be adopted faster than older ones.{style="font-size:15pt"}
 
 @image{images/pounds-v-weeks.gif, 400}
 @image{images/age-v-weeks.gif, 400}
@@ -266,35 +266,59 @@ Have students explain the connection between the Ask Questions and Consider Data
 -->
 ---
 {layout="Launch"}
-# Your Analysis
+# Exploration Project (Linear Regression)
 
-Now that you've gotten some practice performing linear regression on the Animals Dataset, it's time to apply that knowledge to your own data!
+Let’s review what we have learned about linear regression.
+
+Linear Regression is a way to calculate the line-of-best-fit (or "predictor function") for the relationship between two quantitative columns.
+
+- Will `lr-plot` still find a line of best fit, even if there's no correlation?
+- What does the slope of the line-of-best-fit tell us about a correlation?
+- If the @math{r}-value is close to 1, does this mean the predictor function will always give us a good prediction of the y-value, based on _any_ x-value? Why or why not?
+
+@teacher{
+- Will `lr-plot` still find a line of best fit, even if there's no correlation?
+** _Yes! Linear regression will always find a line of best fit -- it just might not fit very well!_
+- What does the slope of the line-of-best-fit tell us about a correlation?
+** If the slope is positive, the correlation is positive. If it's negative, so is the correlation._
+- If the @math{r}-value is close to 1, does this mean the predictor function will always give us a good prediction of the y-value, based on _any_ x-value? Why or why not?
+** No! Even with an exremely high @math{r}-value, the predictor function should not be used to make predictions far outside the range of the dataset.	
+}
 
 ---
 {layout="Investigate"}
-# Your Analysis
+# Exploration Project (Linear Regression)
 
-- Ask your questions and tell your story on @printable-exercise{pages/regression-analysis-1.adoc}.
-- Fill in the Correlations portion of your @starter-file{research-paper}, using the scatter plots and linear regression plots they've constructed for their dataset and explaining what they show.
+Let’s connect what we know about linear regression to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
+- Choose one correlation you were investigating, and use the Data Cycle to ask the question about the relationship between those two columns. Tell the story on @printable-exercise{regression-analysis-1.adoc}.
+- You can explore another question in the same way, using @opt-printable-exercise{regression-analysis-2.adoc}.
+
+@teacher{Confirm that all students have created and understand how to interpret their LR plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
 
 ---
-{layout="SynthesizeR"}
-# Your Analysis
+{layout="Investigate"}
+# Exploration Project (Linear Regression)
 
-@image{images/lin-reg-2.png, 400}
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Find the "Correlations I want to look into" section of the slide deck.
+- Choose one correlation you explored, and duplicate the slide.
+- On the new slide, replace your scatter plot with the linear regression plot and add your interpretation of that plot.
 
-You’ve learned how linear regression can be used to fit a line to a linear cloud, and how to determine the direction and strength of that relationship. The word “linear” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line!{style="font-size:15pt"} 
+---
+{layout="Synthesize"}
+# Exploration Project (Linear Regression)
 
-There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.{style="font-size:15pt"}
+@teacher{Have students share their findings.}
 
-<!--
-Have students share their findings with the class. Get excited about the connections they are making and the conclusions they are drawing! Encourage students to make suggestions to one another about further analysis.
+Did you discover anything surprising or interesting about their dataset?
 
--->
+Did the results from `lr-plot` confirm your suspicions about the correlation? Were any of them surprising?
 
 ---
 {layout="Supplemental"}
 # Your Analysis
 
-- @opt-printable-exercise{pages/describing-relationships-2.adoc}
+- An extra, @opt-printable-exercise{regression-analysis-2.adoc, blank regression analysis pages} is available
 - @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}

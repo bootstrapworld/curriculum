@@ -60,7 +60,7 @@ But what we really want is a display that will help us search for *a relationshi
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
 * What is the contract for `scatter-plot`?
-** @show{(contract "scatter-plot" '("Table" "String" "String" "String") "Image")}
+ @show{(contract 'scatter-plot '("Table" (labels String) (explanatory String) (response String)) "Image")}
 
 Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
 
@@ -248,7 +248,7 @@ Since we're looking for both the slope and the y-intercept for this model, it ma
 
 @teacher{Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
 
-Pyret includes a function called `fit-model`. @pathway-only{Find this contract in your @pathway-link{resources/pages/contracts.pdf, Contracts pages}.} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
+Pyret includes a function called `fit-model`. Find its contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 [.lesson-instruction]
 - Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.

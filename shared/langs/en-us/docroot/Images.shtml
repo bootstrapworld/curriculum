@@ -53,6 +53,7 @@
   </div>
 </div>
 <script>
+  configureGraph(graph);
 
   // filename.type -> sha1(filename).type
   async function sha1(source) {
@@ -77,6 +78,7 @@
   const table = document.getElementById("imageTable");
   const metadata = Array.prototype.concat(
     ...Object.keys(images)
+      .filter(l => graph[l])
       .map(lesson => Object.keys(images[lesson])
         .map(image => ({
             lesson: lesson,

@@ -220,25 +220,6 @@ We might have _new_ questions about whether a higher percentage of dogs are spay
 - What connections do you see between the "Consider Data" and "Analyze Data" steps?
 - How do we know when we need to filter? How do we know when we _don't?_
 
-@ifproglang{pyret}{
----
-{layout="Launch"}
-# Your Analysis
-
-Are there grouped samples that you'd like to explore in your own dataset? Here are a few examples, taken from some of the sample datasets:
-
-- In the RI Schools dataset, it might be good to create grouped samples for **public v. charter schools**
-- In the Movies dataset, it might be valuable to create grouped samples for **modern v. older movies**, and analyze them separately.
-- In the US Presidents dataset, it could be useful to make a grouped sample for **each political party**.
-
----
-{layout="Investigate"}
-# Your Analysis
-
-- **What grouped samples make sense for your dataset?**
-- Name these subsets and write the Pyret code to test an individual row from your dataset on @printable-exercise{pages/samples-from-my-dataset.adoc}.
-- Turn to @printable-exercise{pages/design-recipe-helper-funs.adoc}, and use the Design Recipe to write the filter functions that you planned out on @printable-exercise{pages/samples-from-my-dataset.adoc}. When the teacher has checked your work, type them into the Definitions Area and use the `filter` function to define your new sample tables.
-
 ---
 {layout="Synthesize"}
 # Your Analysis
@@ -246,4 +227,3 @@ Are there grouped samples that you'd like to explore in your own dataset? Here a
 - What grouped samples did you make for your dataset?
 - What other samples would be good to examine? 
 - Do you have suggestions for your colleagues?
-}

@@ -110,10 +110,10 @@ var starterFiles = {
       "url": "https://drive.google.com/file/d/1DX_oEJgUr9uSUxYdN4YdybQjwEvEP7fC/"
     }
   },
-  "exploration-paper": {
-    "title": "Dataset Exploration",
+  "exploration-project": {
+    "title": "Data Exploration Project",
     "pyret": {
-      "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
+      "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
@@ -122,7 +122,7 @@ var starterFiles = {
   "research-paper": {
     "title": "Research Paper",
     "pyret": {
-      "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
+      "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
@@ -179,7 +179,13 @@ var starterFiles = {
       "url": "TBD"
     }
   },
-  "height": {
+  "hair": {
+    "title": "Hair Color Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc&v=4d870d2" 
+    }
+  },
+   "height": {
     "title": "Age vs. Height Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_"

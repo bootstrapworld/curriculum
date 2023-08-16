@@ -119,7 +119,7 @@ Why is defining values useful?{style="font-size:24pt"}
 
 ---
 {layout="Supplemental"}
-# Additional Exercises:
+# Additional Exercises
 
 * @printable-exercise{pages/writing-code-using-defined-values.adoc}
 @ifproglang{wescheme}{

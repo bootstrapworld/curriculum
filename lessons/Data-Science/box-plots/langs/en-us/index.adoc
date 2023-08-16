@@ -176,7 +176,7 @@ a|
 @span{.title}{Modified Box Plots}
 More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
 
-@show{(contract 'modified-box-plot '((t Table) (col String)) "Image")}
+@show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
 |===
 
 
@@ -196,34 +196,57 @@ We started talking about measures of center with a single question: __is "averag
 Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. 
 |===
 
-== Optional: Your Own Analysis @duration{flexible}
+== Data Exploration Project (Box Plots) @duration{flexible}
 
 === Overview
-Students who are exploring their own data apply what they've learned to their own dataset.
+Students apply what they have learned about box plots to their chosen dataset. They will add three items to their @starter-file{exploration-project}: (1) at least two box plots, (2) the corresponding five-number summaries, and (3) any interesting questions they develop. To learn more about the sequence and scope of the Exploration Project, visit @lesson-link{project-data-exploration}.
 
 === Launch
-What are the quantitative columns in _your_ dataset? How are they distributed?
 
-Are all the values pretty close together, or really spread out?
+Let’s review what we have learned about making and interpreting box plots.
 
-Are they clumped on the right, with a few outliers skewing to the left? Or are they clumped on the left, with a few outliers skewing to the right?
+[.lesson-instruction]
+- Does a box plot display categorical or quantitative data? How many columns of data does a box plot display?
+** _Box plots display a single column of quantitative data._
+- How are box plots similar to histograms? How are they different?
+** _Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variables numbers of data points in each one. Boxplots have variable intervals ("quartiles") with a fixed number of data points in each one._
+- What does the five-number summary tell us about a quantitative column?
+** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
 
 === Investigate
 
+Let’s connect what we know about box plots to your chosen dataset.
+
 [.lesson-instruction]
-- How are the quantitative columns in your dataset distributed?
-@printable-exercise{data-cycle-quantitative.adoc}, and use the Data Cycle to **explore two quantitative columns with box plots**.
-- Then add these displays - and your interpretations! - to the "Making Displays" section.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
-- Complete @printable-exercise{shape-of-my-dataset.adoc}, and **explain the connection between measures of center and your box plots**.
-- Complete the "Measures of Center and Spread" section of the @starter-file{exploration-paper}.
+- Open your chosen dataset starter file in Pyret.
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+- Choose one quantitative column from your data set that you will represent with a box plot!
+** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
+- What question does your display answer?
+** _Possible responses: How is the data for a certain column distributed? Are the values close together or really spread out? Are their any outliers?_
+- Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
+- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for at least one more quantitative column.
+
+@teacher{Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
+
+[.lesson-instruction]
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Find the box plot slide in the "Making Displays" section. Copy/paste at least two box plots *and* their corresponding five-number summaries. Be sure to also add any interesting questions that you developed while making and thinking about box plots.
+** _You may need to help students locate the “Box Plots” section and the “Measures of Center and Spread” section. The “My Questions” page is at the end of the template._
+
 
 === Synthesize
-Have students share their findings.
+Share your findings!
 
-- Were any of them surprising?
-- What, if any, outliers did they discover when making box plots?
-- What measures of center make the most sense for one column or another?
+What @vocab{shape} did you notice in your box-plots?
+
+Did you discover anything surprising or interesting about your dataset?
+
+What, if any, outliers did you discover when making box plots?
+
+When your compared your findings with others, did they make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
+
 
 == Additional Exercises
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/601c35a8e9fd103e94acee2b, Card Sort: What Information does the Box & Whisker Plot tell us?}

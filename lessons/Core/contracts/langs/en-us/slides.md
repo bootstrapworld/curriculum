@@ -319,7 +319,7 @@ If you see an error and you know the syntax is right, ask yourself these three q
 
 ---
 {layout="Supplemental"}
-# Additional Exercises:
+# Additional Exercises
 
 @ifproglang{pyret}{
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7, Matching Images to Code}

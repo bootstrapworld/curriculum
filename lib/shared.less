@@ -11,6 +11,7 @@
 @translucent-bg-color: #75328AAA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
+@code-comment-color: #cd7054;
 @top-padding-for-writing: 1.2rem;
 @top-padding-for-dr: 1rem;
 
@@ -78,7 +79,7 @@ body {
   }
   .acknowledgment {
     padding-bottom:   5px !important;
-    font-size:        0.8rem !important;
+    font-size:        12px !important;
     font-style:       italic !important;
     line-height:      inherit !important;
     * { line-height: inherit !important; }
@@ -215,6 +216,47 @@ body:not(.LessonPlan, .narrativepage) p {
   content: '\00200b';
 }
 
+/* use 'thin' instead of 1px border to try and avoid disappearing 
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin black;
+  vertical-align:     baseline;
+}
+.fitbruby { 
+  margin-bottom: 0.75rem;
+}
+.fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
+  position:           absolute;
+  bottom:             -0.9rem;
+  left:               0;
+  font-size:          9.5px;
+  font-weight:        normal;
+  width:              100%;
+  text-align:         center;
+  font-style:         normal;
+  font-family:        @text-font;
+  white-space:        nowrap;
+}
+.fitb.stretch, .fitbruby.stretch { 
+  margin-left:        5px; 
+  vertical-align:     baseline; 
+  width:              auto;
+  border-color:       transparent; /* hide the normal underline */
+  /* add an underline that goes past the end of the page */
+  &::after { 
+    content:"\00a0";
+    position:           absolute;
+    width:              1000px;
+    left:               0;
+    bottom :            -1px;
+  }
+}
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
@@ -539,60 +581,20 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
-
-  /* use 'thin' instead of 1px border to try and avoid disappearing 
-  lines on some browsers */
-  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-    padding-top:        @top-padding-for-writing;
-    position:           relative;
-    display:            inline-block;
-    min-width:          4em;
-    text-align:         center;
-    line-height:        1rem;
-    border-bottom:      solid thin black;
-    vertical-align:     baseline;
-  }
-  .fitbruby { 
-    margin-bottom: 0.75rem;
-  }
-  .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
-    position:           absolute;
-    bottom:             -0.9rem;
-    left:               0;
-    font-size:          9.5px;
-    font-weight:        normal;
-    width:              100%;
-    text-align:         center;
-    font-style:         normal;
-    font-family:        @text-font;
-    white-space:        nowrap;
-  }
-  .fitb.stretch, .fitbruby.stretch { 
-    margin-left:        5px; 
-    vertical-align:     baseline; 
-    width:              auto;
-    border-color:       transparent; /* hide the normal underline */
-    /* add an underline that goes past the end of the page */
-    &::after { 
-      content:"\00a0";
-      position:           absolute;
-      width:              1000px;
-      left:               0;
-      bottom :            -1px;
-    }
-  }
-
-  /* Back-of-the-book contracts table */
-  table.contracts-table {
-    border-collapse: collapse;
-    p  { margin-top: 0; }
-    td { padding: .1em .625em !important; height: 23pt; }
-    tr:nth-child(odd) { border-top: solid 2px black; }
-    tbody tr:nth-child(odd) * { color: #cd7054 !important; }
-    tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
-    tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
-  }
 }
+
+/* Back-of-the-book contracts table */
+table.contracts-table {
+  border-collapse: collapse;
+  p  { margin-top: 0; }
+  td { padding: .1em .625em !important; height: 23pt; }
+  tr:nth-child(odd) { border-top: solid 2px black; }
+  tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+  tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
+  tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
+  tbody tr:nth-child(even) * { font-family: monospace; }
+}
+
 
 /* TODO(Emmanuel): do we even need all of these? Clean up */
 body:not(.LessonPlan) {
@@ -888,13 +890,13 @@ div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
 .wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
-.wescheme-comment,    .cm-scheme-comment  { color: orange; }
+.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color; }
 span.cm-scheme-punctuation                { color: black;}
 span.cm-scheme-rparen                     { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
-.cm-comment                               { color: #cd7054; }
+.cm-comment                               { color: @code-comment-color; }
 .cm-boolean                               { color: darkred; }
 .cm-builtin                               { color: #555; }
 .cm-variable                              { color: #4d5966; }
@@ -964,6 +966,9 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   color: #666;
   word-break: break-word;
 }
+
+code.pyret-comment { background-color: #f7f7f8 !important; color: #a50; }
+code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
 /************************************************************************************
 * SCREEN MEDIA

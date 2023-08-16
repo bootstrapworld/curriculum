@@ -773,6 +773,7 @@
 (define (make-dist-link f link-text)
   (cond [(regexp-match "^ *$" f) (set! f "./index.adoc")]
         [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
+        [(regexp-match "html$" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
         [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
   (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
          [dir (second m)] [snippet (third m)]
@@ -781,23 +782,27 @@
                        (build-path dir ".cached" snippet) ".titletxt")]
          [page-title (and (file-exists? f.titletxt)
                           (call-with-input-file f.titletxt read-line))]
-         [existent-file? #f])
+         [existent-file? #f]
+         [dist-natlang-dir (format "distribution/~a" *natlang*)])
     (cond [(or (path-has-extension? f ".adoc")
                (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
            (let ([f.adoc (path-replace-extension f ".adoc")]
                  [f.html (path-replace-extension f ".html")]
                  [f.shtml (path-replace-extension f ".shtml")]
                  [f.pdf (path-replace-extension f ".pdf")])
-             (cond [(file-exists? f.html) (set! f f.html) (set! existent-file? #t)]
-                   [(file-exists? f.shtml) (set! f f.shtml) (set! existent-file? #t)]
-                   [(file-exists? f.adoc)
+             (cond [(file-exists? (build-path dist-natlang-dir f.html))
+                    (set! f f.html) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.shtml))
+                    (set! f f.shtml) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.adoc))
                     (set! f (if (= (length dir-compts) 2) f.shtml f.html))
                     (set! existent-file? #t)]
-                   [(file-exists? f.pdf) (set! f f.pdf) (set! existent-file? #t)]
+                   [(file-exists? (build-path dist-natlang-dir f.pdf))
+                    (set! f f.pdf) (set! existent-file? #t)]
                    [(path-has-extension? f ".adoc")
                     (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
           [(path-has-extension? f ".pdf")
-           (when (file-exists? f) (set! existent-file? #t))])
+           (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
     (unless existent-file?
       (check-link f)
       (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
@@ -991,11 +996,6 @@
               ;FIXME: avoid erroring include: if file doesn't exist?
               (format "include::~a[~a]"
                       f.asc link-text))])))
-
-(define (make-pathway-link f link-text)
-  ; (printf "doing make-pathway-link ~s ~s\n" f link-text)
-  (enclose-span ".pathway-link"
-    (format "link:pass:[../../courses/~a][~s, window=\"_blank\"]" f link-text)))
 
 (define *lesson-summary-file* #f)
 
@@ -1479,12 +1479,6 @@
                                   (create-begin-tag "span" ".pathway-only")
                                   (expand-directives-string text)
                                   (create-end-tag "span")) o))]
-                           [(string=? directive "pathway-link")
-                            (let* ([args (read-commaed-group i directive read-group)]
-                                   [adocf (first args)]
-                                   [link-text (string-join (map string-trim (rest args)) ", ")])
-                              (set! link-text (string-trim link-text "\""))
-                              (display (make-pathway-link adocf link-text) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
                                 (string=? directive "opt-online-exercise"))
@@ -1638,7 +1632,7 @@
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".teacherNote")
@@ -2779,17 +2773,33 @@
       (cm-code x #:multi-line multi-line #:parens parens)))
 
 (define (contract-type x)
+  ; (printf "doing contract-type ~s\n" x)
   (if (list? x)
-      (let ([name (first x)] [type (second x)])
-        (format "~a {two-colons} ~a" name
-                (if (list? type)
-                    (string-append (contract-type (first type))
-                      " -> "
-                      (contract-types-to-commaed-string (rest type)))
-                    type)))
-      x))
+      (begin
+        (let ([name (first x)] [type (second x)])
+          (unless (string? name) (set! name (format "~a" name)))
+          (if (list? type)
+              (begin
+                (format "~a {two-colons} ~a" name
+                        (string-append (contract-type (first type))
+                          " -> "
+                          (contract-types-to-commaed-string (rest type)))))
+              (let* ([type (if (string? type) type (format "~a" type))]
+                     [name-w (string-length name)]
+                     [type-w (string-length type)]
+                     [w (+ 0 (max name-w type-w))])
+                (string-append (create-begin-tag "span" ".fitbruby" #:attribs
+                                                 (format "style=\"width: ~aem\"" w))
+                  type
+                  (create-begin-tag "span" ".ruby")
+                  name
+                  (create-end-tag "span")
+                  (create-end-tag "span"))))))
+      (begin
+        x)))
 
 (define (contract-types-to-commaed-string xx)
+  ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
   (let* ([n (length xx)]
          [contains-parens? (ormap list? xx)]
          [s
@@ -2802,8 +2812,9 @@
 
 (define (contract funname domain-list range [purpose #f] #:single? [single? #t])
   ;FIXME: do we need a keyword to avoid the prefix character
-  ;(printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
-  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))])
+  ; (printf "doing contract ~s ~s ~s ~s ~s\n" funname domain-list range purpose single?)
+  (let ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
+        [funname-str (if (string? funname) funname (format "~a" funname))])
     (add-prereq funname-sym)
     (let* (
       [prefix (cond
@@ -2812,7 +2823,7 @@
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
-          (if *pyret?* (wescheme->pyret funname-sym) funname)
+          (if *pyret?* (wescheme->pyret funname-str) funname-str)
           " "
           ; used to be single colon for WeScheme
           "{two-colons}"
@@ -2830,8 +2841,8 @@
           )])
       (if single?
           (begin
-            (create-zero-file (format "~a.uses-codemirror" *out-file*))
-            (enclose-textarea (if *pyret?* ".pyret" ".racket") s #:multi-line #t))
+            ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
+            (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multi-line #t))
           s))))
 
 (define (contracts . args)
@@ -2842,5 +2853,5 @@
                     (keyword-apply contract '(#:single?) '(#f)
                                    (first args))))
         (loop (rest args))))
-    (create-zero-file (format "~a.uses-codemirror" *out-file*))
-    (enclose-textarea (if *pyret?* ".pyret" ".racket") res #:multi-line #t)))
+    ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
+    (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))

@@ -1,67 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
-<title>Glossary</title>
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Asciidoctor 2.0.17">
+  <title>Glossary</title>
   <link rel="stylesheet" href="lib/curriculum.css" />
-    <script src="lib/bootstraplesson.js"></script>
-    <script src="lib/dictionaries.js"></script>
-    <script src="dependency-graph.js"></script>
-    <script src="pathway-tocs.js"></script>
-    <script>var pathway;</script>
-    <script type="text/javascript">
-      function populateGlossary() {
+  <script src="dependency-graph.js"></script>
+  <script src="pathway-tocs.js"></script>
+  <script src="lib/bootstraplesson.js"></script>
+  <script src="lib/dictionaries.js"></script>
 
-        // get the pathway and lesson list from the URL
-        var {pathway, lessons, lesson} = getParams();
+  <style>
+    #search { background: black; color: white; padding: 5px; margin: 10px 0; }
+    #search input { width: 250px; font-size: 14px; margin-left: 15px; }
+    @media print {
+      #search { display: none; }
+    }
+  </style>
 
-        // If the pathway is invalid or missing, set it to false
-        if(!pathway || !pathwayTocs[pathway]) {
-          pathway = false;
-          // If lessons is missing, use the entire graph
-          if(!lessons) {
-            lessons = Object.keys(graph);
-          }
-        }
-        console.log(lessons);
-        // get prior data for every lesson in the pathway (or prereqs, if pathway is false)
-        const priorData = computeTransitiveData(false, pathway, lessons);
-        const parentDOM = document.getElementById('glossary');
-        
-        console.log(
-          "pathway is", pathway, 
-          "lesson is", lesson,
-          "pathwayLessons are", pathwayTocs[pathway], 
-          "prior lessons are", priorData.titles,
-          "prior data is", priorData);
+  <script type="text/javascript">
+    configureGraph(graph);
+    let {pathway, lessons, lesson} = getParams();
+    lessons = lessons || Object.keys(graph);
+    console.log('lessons are', lessons)
+    const glossary = computeTransitiveData(false,false,lessons).glossary;
 
-        // collapse the glossary into a single dictionary
-        // use an object to remove duplicates
-        const dictionary = Object.values(priorData.glossary).reduce((dict, v) => {
-          dict[v.vocab] = v.description;
-          return dict;
-        }, {})
+    function populateGlossary() {
+      const parentDOM = document.getElementById('glossary');
 
-        // sort alphabetically, then for each one add the appropriate DOM
-        Object.keys(dictionary).sort((a,b) => a.localeCompare(b))
-          .forEach( key => {
-          const dt = document.createElement('dt');
-          dt.classList.add('hdlist1');
-          dt.innerHTML = key;
-          parentDOM.appendChild(dt);
-          const dd = document.createElement('dd');
-          dd.innerHTML = "<p>" + dictionary[key] + "</p>";
-          parentDOM.appendChild(dd);
+      // sort words alphabetically, then add the appropriate DOM
+      [...glossary.keys()].sort()
+        .forEach(key => {
+        const dt = document.createElement('dt');
+        dt.classList.add('hdlist1');
+        dt.innerHTML = key;
+        parentDOM.appendChild(dt);
+        const dd = document.createElement('dd');
+        dd.innerHTML = "<p>" + glossary.get(key) + "</p>";
+        parentDOM.appendChild(dd);
+      });
+
+    }
+
+    var searchTimeout;
+    function search(str) {
+      clearTimeout(searchTimeout);
+      const dds = [...document.querySelectorAll('dd')];
+      const dts = [...document.querySelectorAll('dt')];
+      searchTimeout = setTimeout( () => {
+        console.time('time to filter');
+        const dl = document.querySelector('dl');
+        dl.style.display = "none";
+        [...glossary.keys()].sort().forEach((word, idx) => {
+          // if it's a match, make the dd/dt visible. Otherwise, invisible
+          dds[idx].style.display = dts[idx].style.display = 
+            word.toLowerCase().includes(str)? "inline" : "none";
         });
-
-      }
-
-    </script>
-
+        dl.style.display = "inline";
+        console.timeEnd('time to filter');
+      }, 250);
+    }
+  </script>
 </head>
 <body class="narrativepage article" onload="populateGlossary()">
   <!--#include virtual="/menubar.ssi"-->
@@ -72,6 +73,10 @@
     <div id="content">
       <div class="paragraph">
         <p><strong>Note:</strong> We also provide a <a href="lib/bilingual-glossary.html">bilingual glossary</a>, which defines all vocabulary words across our lessons in English and Spanish.</p>
+        <div id="search">
+            Searching for a word? <input id="searchBox" type="search" onInput="search(this.value)"
+            placeholder="Type it here!"/>
+        </div>
         <div class="dlist glossary">
           <dl id="glossary">
             <!-- dictionary entries go here -->

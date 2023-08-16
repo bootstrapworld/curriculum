@@ -272,23 +272,61 @@ _The correlation with `"pounds"` is higher, meaning that an animal's weight is a
 -->
 ---
 {layout="Launch"}
-# Your Analysis
+# Exploration Project (Correlations)
 
-- What correlations do you think there are in your dataset? 
-- Would you like to investigate a grouped sample (subset) of your data to find those correlations?
+Let’s review what we have learned about correlations.
+
+- What kind of displays can we use to visualize a correlation?
+
+- When Data Scientists describe correlations to one another, what three properties do they talk about, and what do they mean?
+
+@teacher{
+- What kind of displays can we use to visualize a correlation?
+** _Scatter plots are used to visualize correlations._
+- When Data Scientists describe correlations to one another, what three properties do they talk about, and what do they mean?
+** _1) Form - describes the *shape* of a correlation. Correlations can be linear, non-linear, or non existant (N/A)._
+** _2) Direction - linear correlations can be *positive* or *negative*, describing whether the point cloud seems to rise or fall as the explanatory variable gets larger._
+** _3) Strength - describes how tightly the data is clustered around a line or curve._
+}
 
 ---
 {layout="Investigate"}
-# Your Analysis
+# Exploration Project (Correlations)
 
-- Brainstorm a few possible correlations that you might expect to find in your dataset, and make some scatter plots to investigate.
+Let’s connect what we know about correlations to your chosen dataset.
+
+- Open your chosen dataset starter file in Pyret.
 - Turn to @printable-exercise{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
-- Investigate these correlations. If you're using a printed workbook, you'll find blank Design Recipes and Data Cycles at the back, just before the Contracts.
+- Pick **one correlation** to explore. Which column do you think is the @vocab{explanatory variable}? The @vocab{response variable}?
+- Make a scatter plot with the explanatory variable on the x-axis and the response variable on the y-axis.
+- Do you see a correlation? What is its form? If it's linear, what is its direction and strength?
+- Repeat this process for at least one more correlation.
+
+@teacher{
+** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
+
+Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+}
+
+---
+{layout="Investigate"}
+# Exploration Project (Correlations)
+
+- *It’s time to add to your @starter-file{exploration-project}.*
+- Find the "Correlations I want to look into" section of the slide deck.
+- For each correlation you wrote in @printable-exercise{pages/correlations-in-my-dataset.adoc}, copy what you wrote into the slide.
+- On the same slide, add your scatter plot and your description of the result.
+- Repeat the process for each additional correlation you explored, making copies of the correlation slide as-needed.
 
 ---
 {layout="Synthesize"}
-# Correlations in the Animals Dataset
+# Exploration Project (Correlations)
 
-- What correlations did you find?
-- Did you search within any grouped samples? Was the correlation different between groups, or different from the whole population?
-- What can you infer from these correlations?
+@teacher{Have students share their findings.}
+
+Did you discover anything surprising or interesting about their dataset?
+
+Were any of the correlations especially strong? Were any of them surprising?
+
+When students compared their your findings with those of their classmates, did they make any interesting discoveries? (For instance: Did everyone find a strong correlation? A linear one?)
+
