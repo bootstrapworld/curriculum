@@ -142,7 +142,7 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 Let's see how the Design Recipe could help us to write a piecewise function.
 
 * Turn to @printable-exercise{red-shape-dr.adoc}
-* How do the Contract and Purpose Statement compare to other Contracts we've seen?
+* How do the Contract and Purpose Statement compare to other @dist-link{Contracts.shtml, Contracts} we've seen?
 * How do the examples compare to other examples we've seen?
 
 <!--
