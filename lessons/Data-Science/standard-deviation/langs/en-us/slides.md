@@ -215,11 +215,9 @@ Let’s connect what we know about standard deviation to your chosen dataset.
 - Open your chosen dataset starter file in Pyret.
 - Use Pyret to compute its standard deviation.
 - What question does your display answer?
-- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for at least one more quantitative column.
-
-Let’s connect what we know about standard deviation to your chosen dataset.
 
 @teacher{
 - Open your chosen dataset starter file in Pyret.
@@ -229,9 +227,6 @@ Let’s connect what we know about standard deviation to your chosen dataset.
 - Use Pyret to compute its standard deviation.
 - What question does your display answer?
 ** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_
-- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for at least one more quantitative column.
 
 Invite students to discuss their results and consider how to interpret them.
 }
@@ -241,8 +236,8 @@ Invite students to discuss their results and consider how to interpret them.
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
 - *It’s time to add to your @starter-file{exploration-project}.*
-- Locate the "Measures of Center" section of your Exploration Project. Type in the the standard deviations you just identified.
-- Now, add your interpretation of the standard deviation and record any questions that emerged.
+- Locate the "Measures of Center" section of your Exploration Project, and type in the the standard deviations you just identified.
+- Add your interpretation of the standard deviation and record any questions that emerged.
 
 ---
 {layout="Synthesize"}
