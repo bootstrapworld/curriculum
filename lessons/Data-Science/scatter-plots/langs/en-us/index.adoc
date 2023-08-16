@@ -55,7 +55,7 @@ Students create @vocab{scatter plots}, which are visualizations that show the re
 
 Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
-But what we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
+What we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
 
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
@@ -69,7 +69,7 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 |
 @span{.title}{Why not Independent/Dependent?}
 
-When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are __never__ fully dependant on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
+When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are __never__ fully dependent on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
 
 Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in _explaining_ another when searching for a relationship.
 |===
@@ -120,10 +120,10 @@ Have students report back on their findings from the starter file and on @printa
 
 Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
 
-* Suppose we picked four animals at random out of our table, plotted their age and adoption time on a scatter plot, and they all fell in a line. Is this enough to determine that there's a relationship between the variables?
-** __No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.__
 * What pattern do you see in _your_ scatter plot?
 * Are there any points that seem unusual? Why?
+* Suppose we plotted the age and adoption ime of four random animals, and found that they all fell in a line. Is this enough to determine that there's a relationship between the variables?
+** __No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.__
 
 == The Data Cycle @duration{15 minutes}
 
@@ -145,7 +145,7 @@ Let's use the Data Cycle to explore whether there's a connection between weight 
 
 === Investigate
 [.lesson-instruction]
-Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}.
+Complete the first Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}.
 
 Discuss as a class:
 
@@ -155,7 +155,7 @@ Discuss as a class:
 - What follow-up questions do you have?
 
 [.lesson-instruction]
-Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and complete the Data Cycle for your new question.
+Write your follow-up question in the second Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
 
 === Synthesize
 There are many ways to visualize or reason about single columns of data, but scatter plots are special because they let us see relationships between two columns at the same time!
@@ -209,7 +209,7 @@ Each of these scatter plots and accompanying set of numbers corresponds to a dat
 
 @image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
 
-@optional this animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
+@optional this animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
 
 [.lesson-instruction]
 --
@@ -234,34 +234,6 @@ It might be tempting to go straight into making a scatter plot to explore how we
 
 This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet! There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
 
-== Optional: Your Own Analysis @duration{flexible}
-
-=== Overview
-Students who are exploring their own data apply what they've learned to their own dataset.
-
-=== Launch
-
-[.lesson-instruction]
-- What relationships do you think might be lurking in _your_ dataset?
-- Which pairs of columns would you like to examine?
-
-=== Investigate
-
-[.lesson-instruction]
-- Turn to @printable-exercise{pages/data-cycle-scatter-plot.adoc}. Use the Data Cycle to generate some scatter plots and add them to the "Making Displays" section of your exploration document.
-- Do these displays bring up any interesting questions? If so, add them to the end of the document.
-
-=== Synthesize
-
-- Which relationships did you look for?
-- Do you see any possible relationships or trends?
-- What do those findings mean?
-- What new questions come up for you?
-
-The Animals Dataset contains a number of sub-groups that we might want to compare to one another. For example: maybe we'd like to compare the average adoption time for dogs v. cats!
-
-- Does your dataset contain any sub-groups? If so, what are they?
-
 == Data Exploration Project (Scatter Plots) @duration{flexible}
 
 === Overview
@@ -285,14 +257,14 @@ Let’s connect what we know about scatter plots to your chosen dataset.
 [.lesson-instruction]
 - Open your chosen dataset starter file in Pyret.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
-- Choose two quantitative columns from your data set whose relationship you are interested in exploring in a scatter plot and another column that might make sense to use as labels for your points!
+- Choose two quantitative columns from your dataset whose relationship you want to explore, and another column that makes sense to use as labels for your points.
 - What question does your display answer?
 ** _Possible response: What is the relationship between column A and column B of my dataset?_
-- Now, write down that question in the top section of @printable-exercise{box-plots/pages/data-cycle-quantitative.adoc}.
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Write down that question in the top section of @printable-exercise{data-cycle-scatter-plot.adoc}.
+- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for at least one other pair of quantitative columns.
 
-Confirm that all students have created and understand how to interpret their scatter plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+@teacher{Confirm that all students have created and understand how to interpret their scatter plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
 
 [.lesson-instruction]
 - *It’s time to add to your @starter-file{exploration-project}.*
@@ -301,15 +273,12 @@ Confirm that all students have created and understand how to interpret their sca
 
 === Synthesize
 
-Have students share their findings.
+Share your findings!
 
-Did they discover anything surprising or interesting about their dataset?
+Were the relationships you investigated stronger or weaker than they expected?
 
-Did they discover the relationships they investigated to be stronger or weaker than they expected?
+What questions did the scatter plots raise about your dataset?
 
-What questions did the scatter plots inspire them to ask about their dataset?
+What, if any, outliers did you discover when making scatter plots?
 
-What, if any, outliers did they discover when making scatter plots?
-
-When students compared their findings with those of their classmates, did they make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
-
+Were there any surprises when you compared your findings with other students? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
