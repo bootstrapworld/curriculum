@@ -111,7 +111,7 @@ var starterFiles = {
     }
   },
   "exploration-project": {
-    "title": "Data Exploration Project",
+    "title": "Data Exploration Project slide template",
     "pyret": {
       "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/"
     },
