@@ -2774,28 +2774,29 @@
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
-  (if (list? x)
-      (let ([name (first x)] [type (second x)])
-        (unless (string? name) (set! name (format "~a" name)))
-        (if (list? type)
-            (format "~a {two-colons} ~a" name
-                    (string-append (contract-type (first type))
-                      " -> "
-                      (contract-types-to-commaed-string (rest type))))
-            (let* ([type (if (string? type) type (format "~a" type))]
-                   ; [name-w (string-length name)]
-                   ; [type-w (string-length type)]
-                   ; [w (+ 0 (max name-w type-w))]
-                   )
-              (string-append (create-begin-tag "span" ".fitbruby"
-                                               ; #:attribs (format "style=\"width: ~aem\"" w)
-                                               )
-                type
-                (create-begin-tag "span" ".ruby")
-                name
-                (create-end-tag "span")
-                (create-end-tag "span")))))
-      x))
+  (cond [(list? x)
+         (let ([name (first x)] [type (second x)])
+           (unless (string? name) (set! name (format "~a" name)))
+           (if (list? type)
+               (format "~a {two-colons} ~a" name
+                       (string-append (contract-type (first type))
+                         " -> "
+                         (contract-types-to-commaed-string (rest type))))
+               (let* ([type (if (string? type) type (format "~a" type))]
+                      ; [name-w (string-length name)]
+                      ; [type-w (string-length type)]
+                      ; [w (+ 0 (max name-w type-w))]
+                      )
+                 (string-append (create-begin-tag "span" ".fitbruby"
+                                                  ; #:attribs (format "style=\"width: ~aem\"" w)
+                                                  )
+                   type
+                   (create-begin-tag "span" ".ruby")
+                   name
+                   (create-end-tag "span")
+                   (create-end-tag "span")))))]
+        [(string? x) x]
+        [else (format "~a" x)]))
 
 (define (contract-types-to-commaed-string xx)
   ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
