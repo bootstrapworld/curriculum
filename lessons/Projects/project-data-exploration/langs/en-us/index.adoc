@@ -1,65 +1,87 @@
-= Project: Exploring A New Dataset
+= Project: Dataset Exploration
 
 @description{Students choose a dataset that is interesting to them, and explore it by creating and interpreting displays.}
 
-@ifproglang{pyret}{
-@lesson-prereqs{ds-intro, simple-data-types, contracts, bar-and-pie-charts, data-cycle, probability-inference, choosing-your-dataset, histograms, visualizing-the-shape-of-data, measures-of-center, box-plots, standard-deviation, scatter-plots, ethics-privacy-and-bias}
-}
-
-@ifproglang{codap}{
-@lesson-prereqs{ds-intro, codap-exploring, dot-plots-bar-charts, data-cycle, codap-filtering, codap-building, composing-table-operations, probability-inference, grouped-samples}
-}
-
-== Overview
-
-For this project, you will need to make a copy of the @starter-file{exploration-project} template. This contains instructions and example text in blue - you'll want to *delete all of the blue text before submitting!*
-
-On the title page, be sure to include (1) your name(s), (2) your teacher's name, (3) the date, (4) a link to your published @ifproglang{pyret}{Pyret} @ifproglang{codap}{CODAP} file, and (5) a link to the spreadsheet containing the dataset
-
-=== Assessment and Grading
-We provide a student-facing @opt-printable-exercise{exploration-paper-rubric.adoc}, but teachers should always feel free to edit and adapt it for their classroom.
+@lesson-prereqs{choosing-your-dataset}
 
 
-== About this Dataset
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
 
-- Explain why this dataset matters to you. Why would your family, friends, school, or neighborhood care about this dataset? 
-- Why should a stranger care about this dataset?
-- Do you know where the dataset came from? Why was it collected? Was there any agenda behind the creation of this dataset?
-- How large is the dataset? What columns does it contain, and what do they represent? Are they categorical or quantitative? Are they Numbers, Strings, Booleans, or something else?
-- If you have any questions about this dataset, add them to the last section of the paper, entitled "My Questions."
+* create a variety of displays about a dataset of their choosing
+* compute a the measures of center and spread about a dataset of their choosing
 
-== Making Displays
+| Student-facing Lesson Goals
+|
 
-Some displays only work with one column, while others work with more than one. Some displays are designed for categorical data, and others for quantitative data.
+* Let's explore and interpret a dataset that we find intriguing.
 
-For each of the columns in your dataset, consider what display would make the most sense. Make sure you've made at least one of the following: Pie Chart, Bar Chart, Histogram, Box Plot, Scatter Plot, Linear Regression Plot
+| Materials
+|[.materials-links]
 
-Include an image of each display, along with a title, the code you used to generate the image, and the columns you examined. After you've made the display, consider the following:
+@material-links
 
-- Is this display _interesting?_
-- What do you think it tells you?
+| Preparation
+|
+* This project spans multiple lessons in the data science curriculum.
+* Before introducing students to this project, we recommend that you review and revise the template to meet the needs of your students. We've included a vast array of displays and measures of center; you don't need to use all of them!
 
-*It's ok if you don't know what every display means!* Your goal here is to make an educated guess about what these displays might tell us about the dataset.
+|===
 
-If any of these displays spark your curiosity, add your questions to the last section of the document.
+== Dataset Exploration Project  @duration{flexible}
 
-@ifproglang{pyret}{
-== Measures of Center and Spread
+=== Overview
 
-- Select at least two quantitative columns from your dataset, which you would like to focus on.
-- For each column, explore the mean, median and modes
-- For each column, compute the 5-Number Summary by making a box plot
-- For each column, compute the standard deviation
-- Copy each result into the summary table in the document.
+In this multi-lesson capstone project, students explore and interpret a chosen dataset. First, they reflect on the dataset's source, structure, and relevance. Then, they create and interpret a range of categorical and quantitative displays. They also compute and analyze various measures of spread and center. This work culminates in students developing a research question for possible further study.
 
-What do the center and spread of these columns tell you? Write your interpretation below the summary table.
+=== Launch
 
-Based on these measures, do you think these columns are related in some way? What other relationships might there be in the dataset? Add these questions about proposed relationships to the last section of the document.
-}
+The official launch of this project occurs during @lesson-link{choosing-your-dataset}. There are four project-related items to accomplish during this lessons:
 
-== Developing a Research Question
+[.lesson-instruction]
+--
+- Students select a dataset of interest from the Bootstrap @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"}.
 
-- After looking at all of your accumulated questions, which ones are the most interesting?
-- Do you have any theories about what the answers might be?
-- Does this dataset have any grouped samples that would make sense to explore separately? (For example, it might make sense to explore dogs v. cats separately)
+- Students copy, save, and explore the @starter-file{exploration-project} template. Invite them to peruse the slide deck and familiarize themselves it; they'll be revisiting and adding to it often.
 
+- Students complete the "About My Dataset" section of the slide deck.
+
+- Students add and interpret a bar chart and a pie chart to the "Making Displays" section of the slide deck.
+--
+
+_Note: Students add their bar and pie charts during @lesson-link{choosing-your-dataset} rather than during the @lesson-link{bar-and-pie-charts}. For all other displays, students will add to their slide deck during the relevant lesson._
+
+We recommend printing and distributing the student-facing @opt-printable-exercise{exploration-paper-rubric.adoc} to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.
+
+=== Investigate
+
+We've titled the closing section of *eight* different data science lessons _Dataset Exploration Project_. This title is an indication that it is time for students to revisit their chosen dataset and apply what they have learned in that particular lesson.
+
+[.lesson-instruction]
+The eight lessons include:
+- @lesson-link{histograms}
+- @lesson-link{visualizing-the-shape-of-data}
+- @lesson-link{measures-of-center}
+- @lesson-link{box-plots}
+- @lesson-link{standard-deviation}
+- @lesson-link{scatter-plots}
+- @lesson-link{correlations}
+- @lesson-link{linear-regression}
+
+For these lesson sections, students will always need on hand (1) the starter file for their chosen dataset and (2) the slide deck template.
+
+_When working on their Dataset Exploration Project, encourage students to create *multiple* displays._ This project - as its name suggests - is all about _exploration_.
+
+For teachers who have additional time available or students who are interested, the @lesson-link{project-research-paper} is an extension, where students investigate a single focused question and use their data to tell a story.
+
+=== Synthesize
+
+Invite students to customize their slides, add graphics, and beautify their slide decks.
+
+Encourage students to self-assess and revise their work. Similarly, peer review is a powerful tool if time allows! The @opt-printable-exercise{exploration-paper-rubric.adoc} is a useful tool for guiding students through both self and peer review.
+
+Finally, celebrate students' work! In many instances, students will want to share their work, given how much time they have invested. Class or public presentations can instill a sense of pride.
+
+@optional Use the questions students have developed as the jumping-off point for @lesson-link{project-research-paper}!
