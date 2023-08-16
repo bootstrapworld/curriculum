@@ -123,7 +123,7 @@ Don’t trust the behavior of a complex system! Examples are where you look firs
 @image{images/sam-slide.png}{width="700"}
 
 <!--
-Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the contract and code, as written in the program.
+Recruit three student volunteers to roleplay the functions @ifproglang{wescheme}{`safe-left?`, `safe-right?` and `onscreen?`} @ifproglang{pyret}{`is-safe-left`, `is-safe-right`, and `is-onscreen`}. Give them 1 minute to read the Contract and code, as written in the program.
 
 @ifproglang{wescheme}{
 *Note:* In this programming language, question marks are pronounced "huh?". So `safe-left?` would be pronounced "safe left huh?" This can be a source of some amusement for students!

@@ -181,7 +181,7 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 
 Once you've completed the Design Recipe page for `rocket-height`, type the code into Definitions Area, replacing any missing and incorrect code with your own.
 
-Be sure to add the contract, purpose statement, and examples.
+Be sure to add the Contract, purpose statement, and examples.
 
 Save your work when you're done!
 

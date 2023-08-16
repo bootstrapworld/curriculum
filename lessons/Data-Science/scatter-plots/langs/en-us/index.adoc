@@ -90,7 +90,7 @@ As an alternative to plotting the small table, assign a handful of rows from the
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
-The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the contract:
+The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
 @show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 
@@ -228,7 +228,7 @@ Debrief, showing the plots on the board. Make sure students see plots for which 
 
 It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
 
-**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a contract like:
+**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a Contract like:
 
 `species-dot {two-colons} (r {two-colons} Row) -> Image`
 

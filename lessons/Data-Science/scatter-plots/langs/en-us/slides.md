@@ -59,7 +59,7 @@ Complete @printable-exercise{pages/creating-scatterplot.adoc}, to get a feel for
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
-The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels, xs, and ys. Here's the contract:
+The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels, xs, and ys. Here's the Contract:
 
 `scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`{style="font-size:15pt"}
 
@@ -261,7 +261,7 @@ A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully
 {layout="Synthesize"}
 # Looking for Trends
 
-**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a contract like:
+**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a Contract like:
 
 `species-dot :: (r :: Row) -> Image`
 

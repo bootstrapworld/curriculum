@@ -63,7 +63,7 @@ What jobs could we hand over to the computer to make it possible for us to play 
 # Animation
 
 * Examine the `update-danger` function in your game file. 
-* Identify the contract, and interpret what the function is currently doing
+* Identify the Contract, and interpret what the function is currently doing
 * Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}
 * Copy the code for `update-danger` into your starter file and click Run.
 

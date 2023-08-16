@@ -28,14 +28,14 @@ If this is the first time your students are seeing a table in @starter-file{edit
 # Functions for Working with Tables
 
 - What did these `sort` expressions do?
-- Just below question 6, we see the contract for `sort`
+- Just below question 6, we see the Contract for `sort`
 - What does it mean that the Domain of `sort` is Table, String, Boolean?
 - What does it mean that the Range of `sort` is Table?
 
 @teacher{
 - What did these `sort` expressions do?
 ** _They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)_
-- Just below question 6, we see the contract for `sort`
+- Just below question 6, we see the Contract for `sort`
 - What does it mean that the Domain of `sort` is Table, String, Boolean?
 ** _The functions needs a Table, a String (describing a column), and a Boolean (an order to sort the column by) in order to do its job._
 - What does it mean that the Range of `sort` is Table?
@@ -59,7 +59,7 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 
 **Contracts are the _instruction manual_ for functions**
 
-The Domain in the contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
+The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
 
 Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
@@ -205,14 +205,14 @@ We also have dedicated lessons for other displays not mentioned here, such as @l
 - What does the resulting display tell us?
 - Make a sketch of the display you just built in Pyret.
 
-Complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the contract to get them building!
+Complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
 
 @teacher{
 - Did `bar-chart` consume a categorical or quantitative column of data?
 ** _categorical_
 - What does the resulting display tell us?
 - Make a sketch of the display you just built in Pyret.
-- Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the contract to get them building!
+- Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
 }
 
 ---

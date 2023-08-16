@@ -72,7 +72,7 @@ Now, we are ready to drill down on the contents of our Transformer.
 @image{images/contents.png}
 
 <!--
-Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
+Whenever we are filtering, we can expect the Contract to be the same: Row -> Boolean.
 
 In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
 

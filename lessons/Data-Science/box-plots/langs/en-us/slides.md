@@ -92,7 +92,7 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 {layout="Investigate"}
 # Making Box Plots
 
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-size:16pt"}
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-size:16pt"}
 
 ```
 # box-plot :: (t::Table, col::String) -> Image

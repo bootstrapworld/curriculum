@@ -139,9 +139,9 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 Where else have you heard the word "contract"?  How can you connect that meaning to contracts in programming?
 
 <!--
-_An actor signs a contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a contract in programming is an *agreement* between what the function is given and what it produces._
+_An actor signs a Contract agreeing to perform in a film in exchange for compensation, a contractor makes an agreement with a homeowner to build or repair something in a set amount of time for compensation, or a parent agrees to pizza for dinner in exchange for the child completing their chores. Similarly, a Contract in programming is an *agreement* between what the function is given and what it produces._
 
-@vocab{Contracts} tell us a lot about how to use a function. In fact, we can figure out how to use functions we've never seen before, just by looking at the contract! Most of the time, error messages occur when we've accidentally broken a contract.
+@vocab{Contracts} tell us a lot about how to use a function. In fact, we can figure out how to use functions we've never seen before, just by looking at the Contract! Most of the time, error messages occur when we've accidentally broken a Contract.
 
 @vocab{Contracts} don't tell us _specific_ inputs. They tell us the _@vocab{data type}_ of input a function needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we _use_ a Contract, we plug specific numbers or strings into the expression we are coding.
 
@@ -170,7 +170,7 @@ Here is an example of another function:
 
 @show{(code '(string-append "sun" "shine"))}
 
-Type it into @starter-file{editor, the editor}. What is its contract? 
+Type it into @starter-file{editor, the editor}. What is its Contract? 
 
 <!--
 contract: `string-append :: String, String -> String`
@@ -210,8 +210,8 @@ The error messages in this environment are _designed_ to be as student-friendly 
 # Exploring Image Functions
 
 
-- What is the contract for `star`? 
-- The contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
+- What is the Contract for `star`? 
+- The Contract for `square` also has `Number String String` as the Domain and `Image` as the Range. Does that mean the functions are the same? 
 
 <!--
 No! The Domain and Range are the same, but the function name is different... and that's important because the `star` and `square` functions do something very different with those inputs!_
@@ -226,7 +226,7 @@ No! The Domain and Range are the same, but the function name is different... and
 
 - When you've got working expressions, record the contracts and the code!
 
-You will be adding to these contract pages and referring back to them for the remainder of this Bootstrap class!
+You will be adding to these Contract pages and referring back to them for the remainder of this Bootstrap class!
 
 
 ---
@@ -289,9 +289,9 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
-- How was it different to code expressions for the shape functions when you started with a contract?
+- How was it different to code expressions for the shape functions when you started with a Contract?
 - For some of you, the word `ellipse` was new. How would you describe what an ellipse looks like to someone who'd never seen one before?  
-- Why did the contract for `ellipse` require two numbers? What happened when the two numbers were the same?
+- Why did the Contract for `ellipse` require two numbers? What happened when the two numbers were the same?
 
 ---
 {layout="Synthesize"}
@@ -306,7 +306,7 @@ All the other errors are @vocab{contract errors}.{style="font-size:15pt"}
 If you see an error and you know the syntax is right, ask yourself these three questions:{style="font-size:15pt"}
 
 - What is the function that is generating that error?{style="font-size:15pt"}
-- What is the contract for that function?{style="font-size:15pt"}
+- What is the Contract for that function?{style="font-size:15pt"}
 - Is the function getting what it needs, according to its Domain?{style="font-size:15pt"}
 
 <!-- Common Misconceptions: Students are _very_ likely to randomly experiment, rather than to actually use the Contracts. You should plan to ask lots of direct questions to make sure students are making this connection, such as:

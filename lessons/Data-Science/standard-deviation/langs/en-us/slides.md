@@ -93,7 +93,7 @@ To compute the standard deviation we add the squares of all _N_ distances, divid
 {layout="Synthesize"}
 # Measuring "Deviance"
 
-Now that you know how to compute standard deviation on your own, here is the contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
+Now that you know how to compute standard deviation on your own, here is the Contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
 
 ```
 # stdev :: (t :: Table, col :: String) -> Number
