@@ -2850,6 +2850,5 @@
   (let ([res (string-join (map (lambda (arg)
                                  (keyword-apply contract '(#:single?) '(#f) arg))
                                args) "\n")])
-    (printf "res = **~s**\n" res)
     ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))
