@@ -2847,12 +2847,9 @@
           s))))
 
 (define (contracts . args)
-  (let ([res ""])
-    (let loop ([args args])
-      (unless (null? args)
-        (set! res (string-append res "\n"
-                    (keyword-apply contract '(#:single?) '(#f)
-                                   (first args))))
-        (loop (rest args))))
+  (let ([res (string-join (map (lambda (arg)
+                                 (keyword-apply contract '(#:single?) '(#f) arg))
+                               args) "\n")])
+    (printf "res = **~s**\n" res)
     ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))
