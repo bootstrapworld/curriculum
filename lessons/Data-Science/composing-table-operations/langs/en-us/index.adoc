@@ -81,7 +81,7 @@ Next, we provide *example tables*. In this case, we want to know the animals' na
 
 Now, we are ready to drill down on the contents of our Transformer.
 
-- First - the *contract*, which requires a domain (what type of data will we provide) and a range (what type of data will be produced). Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
+- First - the *contract*, which requires a domain (what type of data will we provide) and a range (what type of data will be produced). Whenever we are filtering, we can expect the Contract to be the same: Row -> Boolean.
 
 - Next, we need a clear *purpose statement*, which describes what the expression does to each row. In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
 
@@ -146,7 +146,7 @@ One way to organize our thoughts is to diagram what we want to do, using the @vo
 
 Values like Numbers, String, and Booleans are still written by themselves. It's only when we want to _use a @ifproglang{pyret}{function} @ifproglang{codap}{Transformer}_ that we need to draw a Circle, and write the values inside from left-to-right.
 
-Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. @ifproglang{pyret}{According to the @vocab{contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.} @ifproglang{codap}{We know that our transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.}
+Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. @ifproglang{pyret}{According to the @vocab{Contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.} @ifproglang{codap}{We know that our transformer needs three things: the animals table, the name of the new column `"kilos"` and the formula expression.}
 
 @ifproglang{pyret}{
 @show{(coe '(build-column animals-table "kilos" kilograms))}

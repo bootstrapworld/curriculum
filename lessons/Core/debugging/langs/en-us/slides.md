@@ -42,7 +42,7 @@ In this lesson, we'll be talking about different kinds of mistakes, which can ha
 
 <!--
 - @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message.   Syntax errors are are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
-- @vocab{Contract Errors} - Code that produces a value that breaks a function's contract, preventing the computer from _running_ the program any further. Like syntax errors, contract errors will also result in an error message.    Contract errors -  For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! 
+- @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. Like syntax errors, contract errors will also result in an error message.    Contract errors -  For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the Contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! 
 - @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
 -->
@@ -105,9 +105,9 @@ Contract Errors prevent the computer from _running_ code. A program might be run
 {layout="Synthesize"}
 # Contract Errors 
 
-- Which contract errors were the easiest to find? The hardest?
+- Which Contract errors were the easiest to find? The hardest?
 - Which error messages were the most helpful? Least helpful?
-- Which contract errors do _you_ make the most often?
+- Which Contract errors do _you_ make the most often?
 - What strategies could we use to avoid making them in the first place?
 - What strategies could we use to fix them faster?
 
@@ -122,13 +122,13 @@ Ho-ming wanted to write a function to produce green triangles, and she went stra
 She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
 
 Did she have a syntax error? Why or why not?
-Did she have a contract error? Why or why not?
+Did she have a Contract error? Why or why not?
 
 ---
 {layout="Launch"}
 # Logic Errors
 
-Ho-ming's mistake was that the function `gt` always made triangles of size 100! It took in `size` as a variable, but then didn't use it all. The computer had no trouble reading her code, and she followed the contract for `triangle`. _As far as the computer is concerned, there's nothing wrong with her code!_
+Ho-ming's mistake was that the function `gt` always made triangles of size 100! It took in `size` as a variable, but then didn't use it all. The computer had no trouble reading her code, and she followed the Contract for `triangle`. _As far as the computer is concerned, there's nothing wrong with her code!_
 
 _Logic Errors don't prevent code from running at all!_
 

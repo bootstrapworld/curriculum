@@ -134,19 +134,9 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 
 @teacher{_Discuss as a class, or in small groups. See explanation, below, of the `image-scatter-plot` Contract._}
 
-The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
+The Contract for `image-scatter-plot` looks pretty different from other @dist-link{Contracts.shtml, Contracts} we've seen.
 
-[.forceShading]
---
-```
-image-scatter-plot :: (
-  t  :: Table,
-  xs :: String,
-  ys :: String,
-  f  :: (Row -> Image)
-) -> Image
-```
---
+@show{(contract `image-scatter-plot `((table-name Table) (xs String) (ys String) (f "(Row -> Image)")) "Image")}
 
 This Domain is interesting: Table, String, String and...*a Function that consumes a Row and produces an Image!*
 

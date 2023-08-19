@@ -33,7 +33,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 # Defining Piecewise Functions
 
 * Look for `update-player` in your game file.
-* What is the contract for `update-player`?
+* What is the Contract for `update-player`?
 * What does each part of the domain and range represent?
 * How does the y-coordinate of `PLAYER` change when the user presses the "up" key?
 
@@ -103,7 +103,7 @@ It's likely that once they hear other students' ideas, they will want more time 
 # Cheat Codes and Customizations 
 
 * What would it take to make the player move left and right? 
-* Why can't we do this without changing the contract?
+* Why can't we do this without changing the Contract?
 
 ---
 {layout="Supplemental"}

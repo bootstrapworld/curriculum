@@ -75,7 +75,7 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 - Q3 - Q1 = @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
 
 === Investigate
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
@@ -174,7 +174,7 @@ They should notice that shorter intervals have __thicker cylinders__, and longer
 |===
 a|
 @span{.title}{Modified Box Plots}
-More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following contract:
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
 
 @show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
 |===
@@ -210,7 +210,7 @@ Let’s review what we have learned about making and interpreting box plots.
 ** _Box plots display a single column of quantitative data._
 - How are box plots similar to histograms? How are they different?
 ** _Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variables numbers of data points in each one. Boxplots have variable intervals ("quartiles") with a fixed number of data points in each one._
-- What does the five-number summary tell us about a quantitative column?
+- When we build a box plot from a quantitative column in Pyret, there's a five-number summary at the top. What does it tell us about the column?
 ** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
 
 === Investigate
@@ -220,26 +220,26 @@ Let’s connect what we know about box plots to your chosen dataset.
 [.lesson-instruction]
 - Open your chosen dataset starter file in Pyret.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
-- Choose one quantitative column from your data set that you will represent with a box plot!
-** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.
 - What question does your display answer?
 ** _Possible responses: How is the data for a certain column distributed? Are the values close together or really spread out? Are their any outliers?_
 - Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
 - Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for at least one more quantitative column.
+- Repeat this process for the other column you explored before (and any others you are curious about).
+** _Note: If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Explorartion Project and calculate the mean, median and modes for the new columns._
 
 @teacher{Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
 
 [.lesson-instruction]
 - *It’s time to add to your @starter-file{exploration-project}.*
-- Find the box plot slide in the "Making Displays" section. Copy/paste at least two box plots *and* their corresponding five-number summaries. Be sure to also add any interesting questions that you developed while making and thinking about box plots.
-** _You may need to help students locate the “Box Plots” section and the “Measures of Center and Spread” section. The “My Questions” page is at the end of the template._
-
+- Find the box plot slide in the "Making Displays" section and copy/paste your first box plot here. Duplicate the slide to add your other box plots.
+- Add the five-number summaries from these plots to the corresponding "Measures of Center and Spread" slides. 
+- Be sure to also add any interesting questions that you developed while making and thinking about box plots to the "My Questions" slide at the end of the deck.
 
 === Synthesize
 Share your findings!
 
-What @vocab{shape} did you notice in your box-plots?
+What @vocab{shape} did you notice in your box plots?
 
 Did you discover anything surprising or interesting about your dataset?
 

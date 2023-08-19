@@ -1,7 +1,9 @@
 = Exploring Table Functions
 ++++
 <style>
-body:not(.LessonPlan, .narrativepage) p { line-height: 1.2; }
+/* manually tweak page height because for some reason
+this page forces a second blank */
+body { height: 9.7in !important;}
 </style>
 ++++
 This page refers to the @starter-file{table-functions}.
@@ -25,7 +27,7 @@ This page refers to the @starter-file{table-functions}.
 
 @fitb{}{@ifsoln{They all produce Booleans}}
 
-@n Find the contract for `filter` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Explain how `filter` uses the two inputs specified in the Domain.
+@n Find the Contract for `filter` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Explain how `filter` uses the two inputs specified in the Domain.
 
 @fitb{}{@ifsoln{`filter` needs a Table, and the name of a function. It makes a new copy of}}
 
@@ -37,7 +39,6 @@ This page refers to the @starter-file{table-functions}.
 
 @fitb{}{@ifsoln{Error, because filter needs a function that produces a Boolean}}
 
-
 == Building Columns
 @n What does @show{(code '(build-column shapes-table "red" is-red))} evaluate to?
 
@@ -47,7 +48,7 @@ This page refers to the @starter-file{table-functions}.
 
 @fitb{}{@ifsoln{A table with a new column called "img", filled with values from `draw-shape`}}
 
-@n Find the contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}Explain how `build-column` uses the three inputs specified in the Domain.
+@n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}Explain how `build-column` uses the three inputs specified in the Domain.
 
 @fitb{}{@ifsoln{`build-column` needs a Table, the name of a column to add, and the name of a helper function}}
 
@@ -58,5 +59,4 @@ This page refers to the @starter-file{table-functions}.
 @fitb{}{}
 
 == Challenge!
-
 @star In the Definitions Area, define a table of your own using `filter` or `build-column`. Add a comment to describe what's in it!

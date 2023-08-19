@@ -72,7 +72,7 @@ Now, we are ready to drill down on the contents of our Transformer.
 @image{images/contents.png}
 
 <!--
-Whenever we are filtering, we can expect the contract to be the same: Row -> Boolean.
+Whenever we are filtering, we can expect the Contract to be the same: Row -> Boolean.
 
 In this case, the expression will consume an animal and compute whether the species is "dog" - as our example tables (above) demonstrate!
 
@@ -166,7 +166,7 @@ Values like Numbers, String, and Booleans are still written by themselves. It's 
 {layout="LaunchC"}
 # Composing
 
-Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. According to the @vocab{contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.
+Let's try diagraming what we need to do for the journalist, using the Circles of Evaluation. We always build first, so let's start there. According to the @vocab{Contract}, we know the name of the function is `build-column`, and it needs three arguments: the animals table, the name of the new column `"kilos"`, and the `kilograms` function.
 
 @image{images/build-col-coe.png}
 }

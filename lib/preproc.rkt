@@ -733,7 +733,7 @@
                              adoc-img
                              (if image-caption
                                  (enclose-tag "span" ".image-caption"
-                                   (expand-directives-string image-caption)
+                                   (expand-directives:string->string image-caption)
                                    #:attribs (format "id=~s" img-id))
                                  ""))
                            #:attribs
@@ -1477,7 +1477,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".pathway-only")
-                                  (expand-directives-string text)
+                                  (expand-directives:string->string text)
                                   (create-end-tag "span")) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
@@ -1519,7 +1519,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [converted-text (expand-directives-string text)])
+                                   [converted-text (expand-directives:string->string text)])
                               (display-lesson-description converted-text
                                                           (path-replace-extension *out-file* "-desc.txt.kp")
                                                           o))]
@@ -1626,7 +1626,7 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (expand-directives-string text)
+                                    (expand-directives:string->string text)
                                     (create-begin-tag "span" ".ruby")
                                     ruby
                                     (create-end-tag "span"))
@@ -1636,7 +1636,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".teacherNote")
-                                  (expand-directives-string text)
+                                  (expand-directives:string->string text)
                                   (create-end-tag "span")) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
@@ -1650,7 +1650,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [*solutions-mode?*
                                       (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                             [converted-text (expand-directives-string text)])
+                                             [converted-text (expand-directives:string->string text)])
                                         (display
                                           (cond [contains-nl?
                                                   (string-append
@@ -1665,7 +1665,7 @@
                            [(string=? directive "ifsoln-choice")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                     [converted-text (expand-directives-string text)])
+                                     [converted-text (expand-directives:string->string text)])
                                 (display (enclose-div
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
@@ -1676,7 +1676,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
                                      (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                            [converted-text (expand-directives-string text)])
+                                            [converted-text (expand-directives:string->string text)])
                                        (display
                                          (cond [contains-nl?
                                                  (string-append
@@ -1719,10 +1719,8 @@
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
-                                      (call-with-input-string s
-                                        (lambda (i)
-                                          (expand-directives i o)
-                                          )))))))]
+                                      (expand-directives:string->port s o)
+                                      )))))]
                            [(string=? directive "optional")
                             (fprintf o "[.optionaltag]##Optional: ##")]
                            [(string=? directive "opt")
@@ -1730,7 +1728,7 @@
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (fprintf o "[.optionaltag]##Optional: ##")
-                              (display (expand-directives-string text) o)
+                              (display (expand-directives:string->string text) o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -1871,12 +1869,15 @@
                           [else (display c o)])])
                 (loop))))))
 
-(define (expand-directives-string s)
+(define (expand-directives:string->string s)
+  (call-with-output-string
+    (lambda (o)
+      (expand-directives:string->port s o))))
+
+(define (expand-directives:string->port s o)
   (call-with-input-string s
     (lambda (i)
-      (call-with-output-string
-        (lambda (o)
-          (expand-directives i o))))))
+      (expand-directives i o))))
 
 (define (preproc-adoc-file in-file
                            #:all-pathway-lessons [all-pathway-lessons #f]
@@ -2774,29 +2775,29 @@
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
-  (if (list? x)
-      (begin
-        (let ([name (first x)] [type (second x)])
-          (unless (string? name) (set! name (format "~a" name)))
-          (if (list? type)
-              (begin
-                (format "~a {two-colons} ~a" name
-                        (string-append (contract-type (first type))
-                          " -> "
-                          (contract-types-to-commaed-string (rest type)))))
-              (let* ([type (if (string? type) type (format "~a" type))]
-                     [name-w (string-length name)]
-                     [type-w (string-length type)]
-                     [w (+ 0 (max name-w type-w))])
-                (string-append (create-begin-tag "span" ".fitbruby" #:attribs
-                                                 (format "style=\"width: ~aem\"" w))
-                  type
-                  (create-begin-tag "span" ".ruby")
-                  name
-                  (create-end-tag "span")
-                  (create-end-tag "span"))))))
-      (begin
-        x)))
+  (cond [(list? x)
+         (let ([name (first x)] [type (second x)])
+           (unless (string? name) (set! name (format "~a" name)))
+           (if (list? type)
+               (format "~a {two-colons} ~a" name
+                       (string-append (contract-type (first type))
+                         " -> "
+                         (contract-types-to-commaed-string (rest type))))
+               (let* ([type (if (string? type) type (format "~a" type))]
+                      ; [name-w (string-length name)]
+                      ; [type-w (string-length type)]
+                      ; [w (+ 0 (max name-w type-w))]
+                      )
+                 (string-append (create-begin-tag "span" ".fitbruby"
+                                                  ; #:attribs (format "style=\"width: ~aem\"" w)
+                                                  )
+                   type
+                   (create-begin-tag "span" ".ruby")
+                   name
+                   (create-end-tag "span")
+                   (create-end-tag "span")))))]
+        [(string? x) x]
+        [else (format "~a" x)]))
 
 (define (contract-types-to-commaed-string xx)
   ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
@@ -2823,7 +2824,7 @@
                 [(string=? *proglang* "codap") ""])]
       [s (string-append
           prefix
-          (if *pyret?* (wescheme->pyret funname-str) funname-str)
+          (if *pyret?* (wescheme->pyret funname-sym) funname-str)
           " "
           ; used to be single colon for WeScheme
           "{two-colons}"
@@ -2846,12 +2847,8 @@
           s))))
 
 (define (contracts . args)
-  (let ([res ""])
-    (let loop ([args args])
-      (unless (null? args)
-        (set! res (string-append res "\n"
-                    (keyword-apply contract '(#:single?) '(#f)
-                                   (first args))))
-        (loop (rest args))))
+  (let ([res (string-join (map (lambda (arg)
+                                 (keyword-apply contract '(#:single?) '(#f) arg))
+                               args) "\n")])
     ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))

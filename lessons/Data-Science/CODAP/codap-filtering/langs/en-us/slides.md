@@ -108,7 +108,7 @@ The original dataset is always preserved!
 
 
 <!--
-** _Possible responses: The Transformer is named `filter-is-heavy`. It looks like the Transformer is going to filter out animals that weigh more than 32 pounds. There is a contract and a purpose statement. We can apply or edit the Transformer._
+** _Possible responses: The Transformer is named `filter-is-heavy`. It looks like the Transformer is going to filter out animals that weigh more than 32 pounds. There is a Contract and a purpose statement. We can apply or edit the Transformer._
 ** _Possible responses: I wonder if this Transformer will modify the dataset or create a new dataset. I wonder what that Contract is all about. I wonder what a Boolean is._
 -->
 
@@ -116,9 +116,9 @@ The original dataset is always preserved!
 {layout="Investigate"}
 # Filtering with Booleans
 
-Did you wonder what a contract is?
+Did you wonder what a Contract is?
 
-A @vocab{contract} is a statement of  of the name, Domain, and Range of a Transformer's expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
+A @vocab{Contract} is a statement of  of the name, Domain, and Range of a Transformer's expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
 
 
 ---

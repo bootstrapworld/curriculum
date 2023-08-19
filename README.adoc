@@ -805,6 +805,12 @@ or `contracts` (for multiple).
 
   @show{(contract "/" '("Number" "Number") "Number")}
 
+Strings may drop the double-quotes (i.e., become symbols) as long as
+they're quoted somehow. Thus, the above contract is equivalent to:
+
+  @show{(contract "/" '(Number Number) "Number")}
+  @show{(contract '/ '(Number Number) 'Number)}
+
 This states that the function name is `/`, its domain list is
 `("Number" "Number")` and its range is `"Number"`.
 
@@ -813,15 +819,23 @@ This states that the function name is `/`, its domain list is
 
 adds an optional fourth argument stating the function's purpose.
 
+You can add parameter names for each function argument:
+
+  @show{(contract "/" '(("dividend" "Number") ("divisor" "Number"))
+    "Number")}
+
+This adds the parameter names (`dividend`, `divisor`) as annotations
+under the corresponding type names.
+
 To show multiple contracts,
 
   @show{(contracts
-    '("/" '("Number" "Number") "Number" "divides one number by another")
-    '("*" '("Number" "Number") "Number" "multiples one number by another")
+    '("/" ("Number" "Number") "Number" "divides one number by another")
+    '("*" ("Number" "Number") "Number" "multiples one number by another")
    }
 
 Note that `contracts` takes a list of arguments. Also note that
-quoting each such argument obviates the need for quoting the
+quoting each such argument removes the need to quote the
 domain-list argument.
 
 The directive `@showsoln` is similar to `@show` but renders
@@ -955,5 +969,4 @@ text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
 
-// last modified 2023-06-08
 // vi:tw=72

@@ -134,7 +134,7 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 {layout="Investigate"}
 # Image Scatter Plots
 
-The contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
+The Contract for `image-scatter-plot` looks pretty different from other contracts we've seen.
 
 ```
 image-scatter-plot :: (

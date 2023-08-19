@@ -17,7 +17,7 @@ What do you notice? What do you wonder?
 {layout="Launch"}
 # Three Representations of a Function
 
-Every function has a contract: {style="font-size:22pt"}
+Every function has a Contract: {style="font-size:22pt"}
 
 
 @show{(contract "gt" '("Number" ) "Number")} {style="font-size:22pt"}
@@ -100,9 +100,9 @@ There are many more materials for students to work with in the Additional Practi
 
 Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 
-* On the top half of the page you will see the contract, examples, and function definition for `gt`. 
+* On the top half of the page you will see the Contract, examples, and function definition for `gt`. 
 * Circle what is changing and label it with the word `size`. 
-* Using `gt` as a model, complete the contract, examples and function definition for `bc`.  
+* Using `gt` as a model, complete the Contract, examples and function definition for `bc`.  
 * Then type the Contract, Examples and Definition into the Definitions Area of @starter-file{bc}. 
 * Click *Run*, and make sure all of the examples pass!
 

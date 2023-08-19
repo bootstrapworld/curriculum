@@ -112,7 +112,7 @@ Why not? _order matters!_
 While students are exploring, be available for support but encourage student discussion to solve problems. Many student questions can be addressed with these responses:
 
 Did you try drawing the Circle of Evaluation first? 
-Did you check the contract? 
+Did you check the @dist-link{Contracts.shtml, contract}? 
 Have you pressed the Run button to save your Definitions changes?
 
 Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
