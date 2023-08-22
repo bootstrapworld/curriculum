@@ -32,6 +32,7 @@
   </style>
 
   <script>
+    window.status = "not_ready_to_print";
     configureGraph(graph);
     // narrow the primitives by url params
     const {pathway, lessons, lesson} = getParams();
@@ -106,7 +107,7 @@
           tbody.appendChild(row2);
           table.appendChild(tbody);
         });
-
+      window.status = "ready";
     }
 
     var searchTimeout;
