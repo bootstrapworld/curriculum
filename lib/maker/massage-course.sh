@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-04-11
-
 # echo massage-course.sh "$@"
 
 src=$1
@@ -84,6 +82,14 @@ for pl in $proglangs; do
   fi
 
   cd ..
+
+  if test -n "$BOOK"; then
+    # inputfile="distribution/$NATLANG/Contracts.shtml%3fpathway%3d$targetpathway"
+    # inputfile="distribution/$NATLANG/Contracts.shtml"
+    inputfile="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway"
+    outputfile="distribution/$NATLANG/Contracts-$targetpathway.pdf"
+    echo ", { \"input\": \"$inputfile\", \"output\": \"$outputfile\" }" >> $PUPPETEER_INPUT
+  fi
 
 done
 
