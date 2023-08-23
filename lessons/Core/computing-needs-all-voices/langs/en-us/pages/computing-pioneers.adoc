@@ -121,7 +121,8 @@ list.className = "thumbnailList";
 
 pioneers.forEach((p) => {
 	var li = document.createElement('li');
-	li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png"></a>`;
+	var altText = p.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
+	li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png" alt="${altText}"></a>`;
 	list.appendChild(li);
 });
 document.getElementById('thumbnails').appendChild(list);
