@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
         .logo img { width: 300px; }
-        .drag-handle img { width: 15px; }
+        .drag-handle img { width: 15px; user-select: none; }
         dl { counter-reset: term; min-height: 3in; }
         dl .list-group-item { 
             display:        flex !important; 
@@ -39,7 +39,7 @@
             content: counter(term) ".";
             margin-right: 5px;
         }
-        button { background: none; border: none; font-weight: 900; padding: 0; }
+        button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
         #accessible * { font-size: 14px; }
         #accessible h2 { font-size:16px; font-weight:bold; }
@@ -50,8 +50,8 @@
         #status, label, progress { width: 100%; }        
     </style>
 
-  <!-- Latest compiled and minified CSS -->
-  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 
     <script src="lib/bootstraplesson.js"></script>
     <script src="dependency-graph.js"></script>
@@ -144,11 +144,11 @@
             lessons = newLessonOrder;
             url.searchParams.set("lessons", newLessonOrder.join(','));
             history.pushState({}, "", url);
-            populateLessons();
+            init();
         }
 
         // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
-        function populateLessons() {
+        function init() {
             console.log('redrawing lesson list');
             url = new URL(location);
             
@@ -192,7 +192,7 @@
                 lessons = lessonSort.toArray();
                 url.searchParams.set("lessons", newLessonOrder.join(','));
                 history.pushState({}, "", url);
-                populateLessons();
+                init();
                }
              });
 
@@ -200,7 +200,7 @@
              // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
              const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
              const relatedLesson = evt.related.getAttribute('data-lesson-title');
-             const oldLessonOrder = lessonSort.toArray().slice(0,-1);
+             const oldLessonOrder = lessonSort.toArray().filter(onlyUnique);
              const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
              const insertingAfter = evt.willInsertAfter;
              //console.log('old order is', oldLessonOrder)
@@ -210,7 +210,7 @@
              const relatedIndex = otherLessons.indexOf(relatedLesson);
              const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
              const after = otherLessons.filter(l => !before.includes(l))
-             //console.log('before', before, 'after', after)
+             console.log('before', before, 'after', after)
              
              // Invalid Case 1: dragging lesson is a prereq of a prior one
              const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
@@ -306,12 +306,12 @@
             node.contentEditable = false;
             url.searchParams.set("pathway", pathway);
             history.pushState({}, "", url);
-            populateLessons();
+            init();
         }
     </script>
 </head>
 
-<body class="narrativepage article narrative pyret" onload="populateLessons();">
+<body class="narrativepage article narrative pyret" onload="init();">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div id="header">
