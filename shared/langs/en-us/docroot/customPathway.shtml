@@ -156,7 +156,7 @@
             document.querySelectorAll('#content a').forEach(link => {
                 newLink = new URL(link.href);
                 newLink.search = url.search;
-                link.href = url.href;
+                link.href = newLink.href;
             });
 
             // set pathway title
@@ -297,11 +297,13 @@
 
         function makeEditable(node) {
             node.contentEditable = true;
+            node.onkeydown = e => { if(e.key == 'Enter') save(node); }
             node.focus();
         }
         function save(node) {
-            console.log(node)
             if(node.id == "pathwayTitle") { pathway = node.textContent; }
+            node.onkeydown = null;
+            node.contentEditable = false;
             url.searchParams.set("pathway", pathway);
             history.pushState({}, "", url);
             populateLessons();
