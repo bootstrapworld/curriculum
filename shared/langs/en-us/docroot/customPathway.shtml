@@ -7,20 +7,35 @@
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
         .logo img { width: 300px; }
+        .drag-handle img { width: 15px; opacity: 0.5; }
         dl { counter-reset: term; }
+        dl .list-group-item { 
+            display:        flex !important; 
+            align-items:    center; 
+            padding:        0; 
+            margin-bottom:  15px;
+            border:         none;
+        }
+        dl .list-group-item span.drag-handle { width: 15px; flex: 0 0 15px; margin: 0 10px; }
+        dl .list-group-item .itemContent { flex: 1; }
+        span.drag-handle:hover { cursor: grab; }
 
-        dl > dt:not(.sortable-drag):before {
+        dl#lesson-list > dt:not(.sortable-drag) a:before {
             counter-increment: term;
             content: counter(term) ".";
             margin-right: 5px;
         }
-        dl > dt:hover {
-            cursor: grab;
-        }
+        #accessible * { font-size: 14px; }
+        #accessible h2 { font-size:16px; font-weight:bold; }
+        #accessible-lesson-list dd { display: none; }
+        
+        #status { display: none; }
+        #status, label, progress { width: 100%; }        
     </style>
 
-    <!-- SortableJS CDN -->
-    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 
     <script src="lib/bootstraplesson.js"></script>
     <script src="dependency-graph.js"></script>
@@ -46,32 +61,51 @@
             if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
         }
 
+        // sorting configuraton
+        const sortingOptions = {
+            animation: 150,
+            group: 'lessons',
+            ghostClass: 'sortable-ghost',
+            forceFallback: true,
+            dataIdAttr: 'data-lesson-title',
+            handle: ".drag-handle",
+        };
+
         // load required symbols, trim the dependency graph
         const { PDFDocument, rgb, degrees } = PDFLib
 
-        function populateLessonList(ul, lessonNames, showDescription) {
+        function populateLessonList(parent, lessonNames, showDescription) {
             lessonNames.forEach(l => {
-                var lesson = graph[l];
-                var dt = document.createElement('dt');
-                dt.className = "hdlist1";
-                dt.innerHTML = `<dt class="list-group-item"><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>`;
-                dt.setAttribute('data-lesson-title', l);
+                const lesson = graph[l];
+                const item = document.createElement('div');
+                item.className = "list-group-item";
+                item.innerHTML  = `<span class="drag-handle"><img src="lib/images/drag-handle.png" aria-hidden="true"/></span>`
+                const content = document.createElement('span');
+                content.className = "itemContent";
+                const dt = document.createElement('dt');
+                const dd = document.createElement('dd');
+                dt.className  = "hdlist1";
+                dt.innerHTML += `<a href="./lessons/${l}/index.shtml">${lesson.title}</a>`;
+                item.setAttribute('data-lesson-title', l);
                 if(showDescription) {
-                    dt.innerHTML += `<dd><p>${lesson.description}</p></dd>`
+                    dd.innerHTML += `<p>${lesson.description}</dd>`
                 };
-                ul.appendChild(dt);
+                content.appendChild(dt);
+                content.appendChild(dd);
+                item.appendChild(content);
+                parent.appendChild(item);
             });
         }
 
         // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
         function populateLessons() {
+            console.log('redrawing lesson list');
             document.getElementById('pathwayTitle').innerHTML = pathway;
-            var lessonList = document.getElementById('lesson-list').children[0];
-
-            populateLessonList(lessonList, lessons, true);
+            var lessonList = document.getElementById('lesson-list');
+            var accessibleList = document.getElementById('accessible-lesson-list');
+            lessonList.innerHTML = accessibleList.innerHTML = null;
 
             // update the list of accessible lessons
-            var accessibleList = document.getElementById('accessible-lesson-list');
             var accessible =  Object.getOwnPropertyNames(graph)
                 .filter(name => graph[name].prerequisites
                     .every(p => lessons.includes(p)))
@@ -83,56 +117,62 @@
             //console.log('lessons are', lessons);
             //console.log('accessible', accessible);
 
-            // List all the accessible lessons based on this pathway,
-            // or don't show the accessible list at all
-            if(accessibleList.length > 0) {
+            // populate the list of lessons in this pathway, AND
+            // the list of lessons accessible *from* this pathway
+            populateLessonList(lessonList, lessons, true);
+            if(accessible.length > 0) {
                 populateLessonList(accessibleList, accessible, true)
             } else {
                 accessibleList.parentNode.remove();
             }
+
+            // make accessible list sortable
+            const accessibleSort = new Sortable(accessibleList, sortingOptions);
             
             // make sortable, and grab msg element
-            const sortablelist = document.querySelector('dl');
-            const sort = new Sortable(sortablelist, {
-               animation: 150,
-               ghostClass: 'sortable-ghost',
-               forceFallback: true,
-               dataIdAttr: 'data-lesson-title',
-               onStart: (evt) => {
-               },
-               onMove: (evt, originalEvt) => { 
-                // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
-                const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
-                const relatedLesson = evt.related.getAttribute('data-lesson-title');
-                const oldLessonOrder = sort.toArray().slice(0,-1);
-                const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
-                const insertingAfter = evt.willInsertAfter;
-                //console.log('old order is', oldLessonOrder)
-                //console.log('inserting', draggingLesson, evt.willInsertAfter? 'after' : 'before', relatedLesson);
-
-                // Split the lesson list into prior and later, based on whether insertion happens after or before
-                const relatedIndex = otherLessons.indexOf(relatedLesson);
-                const priorLessons = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
-                const laterLessons = otherLessons.filter(l => !priorLessons.includes(l))
-                //console.log('priorLessons', priorLessons)
-                //console.log('laterLessons', laterLessons)
-
-                // compute the prereqs for all prior lessons, and for the dragged lesson
-                const priorPrereqs = computeTransitiveData(false, false, priorLessons).prerequisites;
-                const draggingPrereqs   = graph[draggingLesson].prerequisites;
-                
-                // Invalid Case 1: the dragging lesson is a prereq of a prior lesson
-                if(priorPrereqs.includes(draggingLesson)) {
-                    console.error('Invalid move: the dragging lesson is a prereq of a prior lesson');
-                    return false;
-                }
-                // Invalid Case 2: a prior lesson is a prereq of the dragging lesson
-                if(draggingPrereqs.some(l => laterLessons.includes(l))) {
-                    console.error('Invalid move: a prior lesson is a prereq of the dragging lesson')
-                    return false;
-                }
-               },
+            const lessonSort = new Sortable(lessonList, {
+                ...sortingOptions,
+               onAdd: e => {
+                const newLessonOrder = lessonSort.toArray();
+                lessons = lessonSort.toArray();
+                populateLessons();
+               }
              });
+
+            function safeToDrop(evt, originalEvt) { 
+             // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
+             const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
+             const relatedLesson = evt.related.getAttribute('data-lesson-title');
+             const oldLessonOrder = lessonSort.toArray().slice(0,-1);
+             const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
+             const insertingAfter = evt.willInsertAfter;
+             //console.log('old order is', oldLessonOrder)
+             //console.log('inserting', draggingLesson, evt.willInsertAfter? 'after' : 'before', relatedLesson);
+
+             // Split the lesson list into prior and later, based on whether insertion happens after or before
+             const relatedIndex = otherLessons.indexOf(relatedLesson);
+             const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
+             const after = otherLessons.filter(l => !before.includes(l))
+             //console.log('before', before)
+             //console.log('after', after)
+             
+             // Invalid Case 1: dragging lesson is a prereq of a prior one
+             const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
+             if(tooLate) {
+                 console.error(`Invalid move: ${draggingLesson} must come before ${tooLate}`);
+                 return false;
+             }
+             // Invalid Case 2: dragging lesson depends on a later one
+             const draggingPrereqs   = graph[draggingLesson].prerequisites;
+             const tooSoon = draggingPrereqs.find(l => after.includes(l))
+             if(tooSoon) {
+                 console.error(`${draggingLesson} must come after ${tooSoon}`)
+                 return false;
+             }
+            }
+
+            accessibleSort.option('onMove', safeToDrop);
+            lessonSort.option('onMove', safeToDrop);
         }
 
         function addParamsToLinks() {
@@ -142,8 +182,10 @@
 
         async function printWorkook(lessons, graph) {
             console.log('printing', lessons);
-            const status = document.getElementById('status');
-            const pdfDoc = await PDFDocument.create();
+            const status   = document.getElementById('status');
+            const label    = status.querySelector('label');
+            const progress = status.querySelector('progress');
+            const pdfDoc   = await PDFDocument.create();
             // print out wb page paths
             var pageUrls = lessons
                 .map(l => graph[l].pages
@@ -156,7 +198,11 @@
 
             console.log(pageUrls)
 
+        // turn on status DOM, and initialize progress bar
+        status.style.display = "inline-block";
+        progress.max = pageUrls.length;
         for (const [idx, url] of pageUrls.entries()) {
+            progress.value = idx + 1;
             console.log(idx, url);
             const page = pdfDoc.addPage();
             const bytes = await fetch(url).then((res) => res.arrayBuffer());
@@ -180,7 +226,7 @@
 
             page.drawPage(embedded, {...dimensions, ...pageSettings});
 
-            status.innerHTML = "Collecting Workbook Pages: " + (idx+1) +"/"+ pageUrls.length;
+            label.innerHTML = "Collecting Workbook Pages: ";
 
             if(idx <= 1 ) continue;
             page.drawText(String(idx - 1), {
@@ -192,12 +238,11 @@
             })
           }
 
-          status.innerHTML = "Assembling Book..."
           // Serialize the PDFDocument to bytes (a Uint8Array)
           const pdfBytes = await pdfDoc.save()
-          status.innerHTML = "Downloading..."
+          label.innerHTML = "Downloading..."
           download(pdfBytes, pathway + "- Student Workbook.pdf", "application/pdf");
-          status.innerHTML = "";
+          status.style.display = "none";
         }
     </script>
 </head>
@@ -217,21 +262,32 @@
                 </div>
             </div>
 
-        <div class="clearfix item bottom-border">
+        <div class="clearfix item bottom-border two-thirds">
             <h2>Lesson Plans</h2>
             <div class="sectionbody">
-                <div id="lesson-list" class="dlist">
-                    <dl>
-                    </dl>
-                </div>
+                <dl id="lesson-list" >
+                </dl>
             </div>
         </div>
+        
+        <div id="accessible" class="clearfix item bottom-border one-third">
+            <h2>What's within reach?</h2>
+            <p/>
+            Some or all of lessons you've chosen are a prerequisite to any of the following lessons:
+            <dl id="accessible-lesson-list" >
+            </dl>
+        </div>
+
 
         <div class="clearfix item bottom-border">
             <h2>Student Workbooks</h2>
             <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="printWorkook(lessons, graph)">Student Workbook</a>. 
             <p/>
-            <span id="status"></span></p>
+            <span id="status">
+                <label for="file">Assembling Workbook:</label>
+                <progress id="file"></progress>
+            </span>
+            </p>
         </div>
 
         <div class="clearfix item bottom-border">
@@ -251,7 +307,7 @@ specific recommendations for in-person v. remote instruction.</p>
             <ul>
                 <li>
                 <p><a href="./Glossary.shtml">Glossary</a>&nbsp; - &nbsp;A list of vocabulary words used in this pathway.
-                We also provide a <a href="../lib/bilingual-glossary.html">bilingual glossary</a>,
+                We also provide a <a href="./lib/bilingual-glossary.html">bilingual glossary</a>,
                 which defines all vocabulary words across our lessons in English and Spanish.</p>
                 </li>
 
@@ -284,13 +340,6 @@ specific recommendations for in-person v. remote instruction.</p>
             </div>
         </div>
 
-        <div class="clearfix item bottom-border">
-            <h2>Where can we go next?</h2>
-            <p/>
-            Once your students have finished this pathway, they can jump right into <i>any</i> of the following lessons:
-            <ul id="accessible-lesson-list">
-            </ul>
-        </div>
     </div>
 </body>
 </html>
