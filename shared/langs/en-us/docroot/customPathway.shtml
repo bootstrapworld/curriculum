@@ -59,16 +59,16 @@
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
     <script src="https://unpkg.com/downloadjs@1.4.7"></script>
     <script>
-        // configure the graph and fully compute the prereqs for these lessons
+        // load required symbols, configure the dependency graph
+        const { PDFDocument, rgb, degrees } = PDFLib
         configureGraph(graph);
         let url = new URL(location);
         
-        // Default to all pyret lessons, sorted in prereq order
-        let pathway = "Custom Pathway";
+        // Default to all pyret lessons
         let proglang = "pyret";
-        let lessons;
 
-        ({pathway, lessons, lesson} = getParams());
+        // Get and initialize parameters
+        let {pathway, lessons, lesson} = getParams();
         if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
         if(!lessons) lessons = [];
         if(!pathway) pathway = "Click here to name this pathway";
@@ -83,74 +83,52 @@
             handle: ".drag-handle",
         };
 
-        // load required symbols, trim the dependency graph
-        const { PDFDocument, rgb, degrees } = PDFLib
-
-        function populateLessonList(parent, lessonNames, showDescription) {
+        function populateselectedList(parent, lessonNames, showDescription) {
             lessonNames.forEach(l => {
                 const lesson = graph[l];
-                const item = document.createElement('div');
-                item.className = "list-group-item";
-                item.innerHTML  = `
-                    <span class="drag-handle">
-                        <button 
-                            onMouseover="maybeDeleteLesson('${l}')" 
-                            onMouseout="resetDeletionIndicators()"
-                            onClick="deleteLesson('${l}')"
-                            >
-                            &times;
-                        </button>
-                        <img src="lib/images/drag-handle.png" aria-hidden="true"/>
-                    </span>`
-                const content = document.createElement('span');
-                content.className = "itemContent";
-                const dt = document.createElement('dt');
-                const dd = document.createElement('dd');
-                dt.className  = "hdlist1";
-                dt.innerHTML += `<a href="./lessons/${l}/index.shtml">${lesson.title}</a>`;
-                item.setAttribute('data-lesson-title', l);
-                if(showDescription) {
-                    dd.innerHTML += `<p>${lesson.description}</dd>`
-                };
-                content.appendChild(dt);
-                content.appendChild(dd);
-                item.appendChild(content);
-                parent.appendChild(item);
+                const html = `
+                    <div class="list-group-item" data-lesson-title=${l}>
+                        <span class="drag-handle">
+                            <button 
+                                onMouseover="maybeDeleteLesson('${l}')" 
+                                onMouseout="resetDeletionIndicators()"
+                                onClick="deleteLesson('${l}')">
+                                &times;
+                            </button>
+                            <img src="lib/images/drag-handle.png" aria-hidden="true"/>
+                        </span>
+                        <span class="itemContent">
+                            <dt><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>
+                            <dd>${lesson.description}</dd>
+                        </span>
+                    <div>`;
+                const template = document.createElement('template');
+                template.innerHTML = html.trim();
+                parent.appendChild(template.content.firstChild);
             });
         }
 
-        function resetDeletionIndicators() {
-            document.getElementById('lesson-list')
-                .querySelectorAll('[data-lesson-title]').forEach(n => {
-                    n.style.background = "none"; 
-                });
-        }
-
-        function maybeDeleteLesson(l) {
-            const maybeDelete = [...document.getElementById('lesson-list')
-                .querySelectorAll('[data-lesson-title]')]
-                .filter(n => graph[n.getAttribute('data-lesson-title')].prerequisites.includes(l)
-                    || n.getAttribute('data-lesson-title') == l);
-            maybeDelete.forEach(n => {n.style.background = "#fcc"; });
-        }
+        // utility functions for getting lesson nodes and handling deletion
+        lessonNodes = () => [...document.querySelectorAll('#lesson-list [data-lesson-title]')]
+        lessonAndDependants = (l) => [...lessons.filter(dep => graph[dep].prerequisites.includes(l)), l]
+        resetDeletionIndicators = () => lessonNodes().forEach(n => n.style.background = "none");
+        maybeDeleteLesson = (l) => lessonAndDependants(l).forEach(l => 
+            document.querySelector(`[data-lesson-title="${l}"`).style.background = "#fcc");
 
         function deleteLesson(l) {
-            const toDelete = [...document.getElementById('lesson-list')
-                .querySelectorAll('[data-lesson-title]')]
-                .filter(n => graph[n.getAttribute('data-lesson-title')].prerequisites.includes(l)
-                    || n.getAttribute('data-lesson-title') == l)
-                .map(n => n.getAttribute('data-lesson-title'));
-            const newLessonOrder = lessons.filter(l => !toDelete.includes(l));
-            lessons = newLessonOrder;
-            url.searchParams.set("lessons", newLessonOrder.join(','));
+            const toDelete = lessonAndDependants(l);
+            lessons = lessons.filter(l => !toDelete.includes(l));
+            url.searchParams.set("lessons", lessons.join(','));
             history.pushState({}, "", url);
             init();
         }
 
         // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
         function init() {
-            console.log('redrawing lesson list');
+            // get URL and important list nodes
             url = new URL(location);
+            const selectedList   = document.getElementById('lesson-list');
+            const accessibleList = document.getElementById('accessible-lesson-list');
             
             // revise search params for content links
             document.querySelectorAll('#content a').forEach(link => {
@@ -159,48 +137,47 @@
                 link.href = newLink.href;
             });
 
-            // set pathway title
+            // set pathway title and lesson lists
             document.getElementById('pathwayTitle').innerHTML = pathway;
-            const lessonList = document.getElementById('lesson-list');
-            const accessibleList = document.getElementById('accessible-lesson-list');
-            lessonList.innerHTML = accessibleList.innerHTML = null;
+            selectedList.innerHTML = accessibleList.innerHTML = null;
 
-            // update the list of accessible lessons
+            // update the list of accessible lessons based on selected lessons
             var accessible =  Object.getOwnPropertyNames(graph)
-                .filter(name => graph[name].prerequisites
-                    .every(p => lessons.includes(p)))
-                .filter(name => graph[name].proglang == proglang)
-                .filter(name => !lessons.includes(name))
+                .filter(l => graph[l].prerequisites.every(p => lessons.includes(p)))
+                .filter(l => graph[l].proglang == proglang)
+                .filter(l => !lessons.includes(l))
                 .filter(onlyUnique)
                 .sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
             //console.log('selected lessons are', lessons, 'accessible lessons are', accessible);
 
-            // populate the list of lessons in this pathway, AND
+            // populate the list of lessons in this pathway, and
             // the list of lessons accessible *from* this pathway
-            populateLessonList(lessonList, lessons, true);
-            populateLessonList(accessibleList, accessible, true)
+            populateselectedList(selectedList,   lessons,    true);
+            populateselectedList(accessibleList, accessible, true)
 
-            // make accessible list sortable
+            // make accessible and selected lists sortable
+            // special behavior for adding a lesson to selected
             const accessibleSort = new Sortable(accessibleList, sortingOptions);
-            
-            // make sortable, and grab msg element
-            const lessonSort = new Sortable(lessonList, {
+            const selectedSort = new Sortable(selectedList, {
                 ...sortingOptions,
-               onAdd: e => {
-                const newLessonOrder = lessonSort.toArray();
-                lessons = lessonSort.toArray();
+               onUpdate: updateList,
+               onAdd: updateList
+             });
+
+            function updateList(evt) {
+                const newLessonOrder = selectedSort.toArray();
+                lessons = selectedSort.toArray();
                 url.searchParams.set("lessons", newLessonOrder.join(','));
                 history.pushState({}, "", url);
-                init();
-               }
-             });
+                init();                
+            }
 
             function safeToDrop(evt, originalEvt) { 
              // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
              const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
              const relatedLesson = evt.related.getAttribute('data-lesson-title');
-             const oldLessonOrder = lessonSort.toArray().filter(onlyUnique);
+             const oldLessonOrder = selectedSort.toArray().filter(onlyUnique);
              const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
              const insertingAfter = evt.willInsertAfter;
              //console.log('old order is', oldLessonOrder)
@@ -210,7 +187,7 @@
              const relatedIndex = otherLessons.indexOf(relatedLesson);
              const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
              const after = otherLessons.filter(l => !before.includes(l))
-             console.log('before', before, 'after', after)
+             //console.log('before', before, 'after', after)
              
              // Invalid Case 1: dragging lesson is a prereq of a prior one
              const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
@@ -228,7 +205,7 @@
             }
 
             accessibleSort.option('onMove', safeToDrop);
-            lessonSort.option('onMove', safeToDrop);
+            selectedSort.option('onMove', safeToDrop);
         }
 
         async function printWorkook(lessons, graph) {
@@ -354,8 +331,7 @@
 
         <div class="clearfix item bottom-border">
             <h2>Teaching Remotely?</h2>
-            <p>If you're teaching remotely, we've assembed an <a href="../../ImplementationNotes.shtml">Implementation Notes</a> page that makes
-specific recommendations for in-person v. remote instruction.</p>
+            <p>If you're teaching remotely, we've assembed an <a href="../../ImplementationNotes.shtml">Implementation Notes</a> page that makes specific recommendations for in-person v. remote instruction.</p>
         </div>
 
         <div class="clearfix item bottom-border">
