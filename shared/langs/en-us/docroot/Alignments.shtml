@@ -12,7 +12,13 @@
     <script src="lib/dictionaries.js"></script>
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
-    <script>var pathway;</script>
+    <script>
+      function populatePathwayAlignment() {
+        const { lesson, pathway, lessons } = getParams();
+        populateAlignmentDictionaries(pathway);
+        showAlignment('standards-CCSS-Math');
+      }
+    </script>
 </head>
 <body class="narrativepage article">
   <!--#include virtual="/menubar.ssi"-->

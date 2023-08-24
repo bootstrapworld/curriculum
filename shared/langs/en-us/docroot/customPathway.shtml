@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
         .logo img { width: 300px; }
-        .drag-handle img { width: 15px; opacity: 0.5; }
-        dl { counter-reset: term; }
+        .drag-handle img { width: 15px; }
+        dl { counter-reset: term; min-height: 3in; }
         dl .list-group-item { 
             display:        flex !important; 
             align-items:    center; 
@@ -16,17 +16,34 @@
             margin-bottom:  15px;
             border:         none;
         }
-        dl .list-group-item span.drag-handle { width: 15px; flex: 0 0 15px; margin: 0 10px; }
+        dl .list-group-item span.drag-handle { 
+            width: 15px; 
+            flex: 0 0 15px; 
+            margin: 0 10px; 
+            text-align: center; 
+            opacity: 0.5; 
+        }
         dl .list-group-item .itemContent { flex: 1; }
         span.drag-handle:hover { cursor: grab; }
 
+        dl#lesson-list:empty { display: flex; justify-content: center; }
+        dl#lesson-list:empty:after { 
+            display: flex;
+            align-items: center;
+            font-style: italic;
+            width: 75%;
+            content: "You haven't selected any Bootstrap lessons...yet! Fortunately, the lessons on the right can be taught without ANY prerequisites at all! Drag one of them over here to start your list, and see what other lessons get unlocked as your list of Bootstrap lessons grows!" 
+        }
         dl#lesson-list > dt:not(.sortable-drag) a:before {
             counter-increment: term;
             content: counter(term) ".";
             margin-right: 5px;
         }
+        button { background: none; border: none; font-weight: 900; padding: 0; }
+
         #accessible * { font-size: 14px; }
         #accessible h2 { font-size:16px; font-weight:bold; }
+        #accessible button {display: none; }
         #accessible-lesson-list dd { display: none; }
         
         #status { display: none; }
@@ -34,7 +51,6 @@
     </style>
 
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
   <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 
     <script src="lib/bootstraplesson.js"></script>
@@ -45,21 +61,17 @@
     <script>
         // configure the graph and fully compute the prereqs for these lessons
         configureGraph(graph);
-        var search = location.search.substring(1);
+        let url = new URL(location);
         
         // Default to all pyret lessons, sorted in prereq order
         let pathway = "Custom Pathway";
         let proglang = "pyret";
-        let lessons = Object.keys(graph)
-            .filter(l => graph[l].proglang == proglang)
-            .sort((a,b) => graph[a].prerequisites.length < graph[b].prerequisites.length? -1 : 1)
+        let lessons;
 
-        // if a pathway name and lessons are specified, use them instead of defaults
-        // Correct pathway name if it's retrieved from the Table of Contents
-        if(search) {
-            ({pathway, lessons, lesson} = getParams());
-            if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
-        }
+        ({pathway, lessons, lesson} = getParams());
+        if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
+        if(!lessons) lessons = [];
+        if(!pathway) pathway = "Click here to name this pathway";
 
         // sorting configuraton
         const sortingOptions = {
@@ -79,7 +91,17 @@
                 const lesson = graph[l];
                 const item = document.createElement('div');
                 item.className = "list-group-item";
-                item.innerHTML  = `<span class="drag-handle"><img src="lib/images/drag-handle.png" aria-hidden="true"/></span>`
+                item.innerHTML  = `
+                    <span class="drag-handle">
+                        <button 
+                            onMouseover="maybeDeleteLesson('${l}')" 
+                            onMouseout="resetDeletionIndicators()"
+                            onClick="deleteLesson('${l}')"
+                            >
+                            &times;
+                        </button>
+                        <img src="lib/images/drag-handle.png" aria-hidden="true"/>
+                    </span>`
                 const content = document.createElement('span');
                 content.className = "itemContent";
                 const dt = document.createElement('dt');
@@ -97,12 +119,50 @@
             });
         }
 
+        function resetDeletionIndicators() {
+            document.getElementById('lesson-list')
+                .querySelectorAll('[data-lesson-title]').forEach(n => {
+                    n.style.background = "none"; 
+                });
+        }
+
+        function maybeDeleteLesson(l) {
+            const maybeDelete = [...document.getElementById('lesson-list')
+                .querySelectorAll('[data-lesson-title]')]
+                .filter(n => graph[n.getAttribute('data-lesson-title')].prerequisites.includes(l)
+                    || n.getAttribute('data-lesson-title') == l);
+            maybeDelete.forEach(n => {n.style.background = "#fcc"; });
+        }
+
+        function deleteLesson(l) {
+            const toDelete = [...document.getElementById('lesson-list')
+                .querySelectorAll('[data-lesson-title]')]
+                .filter(n => graph[n.getAttribute('data-lesson-title')].prerequisites.includes(l)
+                    || n.getAttribute('data-lesson-title') == l)
+                .map(n => n.getAttribute('data-lesson-title'));
+            const newLessonOrder = lessons.filter(l => !toDelete.includes(l));
+            lessons = newLessonOrder;
+            url.searchParams.set("lessons", newLessonOrder.join(','));
+            history.pushState({}, "", url);
+            populateLessons();
+        }
+
         // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
         function populateLessons() {
             console.log('redrawing lesson list');
+            url = new URL(location);
+            
+            // revise search params for content links
+            document.querySelectorAll('#content a').forEach(link => {
+                newLink = new URL(link.href);
+                newLink.search = url.search;
+                link.href = url.href;
+            });
+
+            // set pathway title
             document.getElementById('pathwayTitle').innerHTML = pathway;
-            var lessonList = document.getElementById('lesson-list');
-            var accessibleList = document.getElementById('accessible-lesson-list');
+            const lessonList = document.getElementById('lesson-list');
+            const accessibleList = document.getElementById('accessible-lesson-list');
             lessonList.innerHTML = accessibleList.innerHTML = null;
 
             // update the list of accessible lessons
@@ -114,17 +174,12 @@
                 .filter(onlyUnique)
                 .sort((a,b) => 
                 graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
-            //console.log('lessons are', lessons);
-            //console.log('accessible', accessible);
+            //console.log('selected lessons are', lessons, 'accessible lessons are', accessible);
 
             // populate the list of lessons in this pathway, AND
             // the list of lessons accessible *from* this pathway
             populateLessonList(lessonList, lessons, true);
-            if(accessible.length > 0) {
-                populateLessonList(accessibleList, accessible, true)
-            } else {
-                accessibleList.parentNode.remove();
-            }
+            populateLessonList(accessibleList, accessible, true)
 
             // make accessible list sortable
             const accessibleSort = new Sortable(accessibleList, sortingOptions);
@@ -135,6 +190,8 @@
                onAdd: e => {
                 const newLessonOrder = lessonSort.toArray();
                 lessons = lessonSort.toArray();
+                url.searchParams.set("lessons", newLessonOrder.join(','));
+                history.pushState({}, "", url);
                 populateLessons();
                }
              });
@@ -153,8 +210,7 @@
              const relatedIndex = otherLessons.indexOf(relatedLesson);
              const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
              const after = otherLessons.filter(l => !before.includes(l))
-             //console.log('before', before)
-             //console.log('after', after)
+             //console.log('before', before, 'after', after)
              
              // Invalid Case 1: dragging lesson is a prereq of a prior one
              const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
@@ -175,13 +231,7 @@
             lessonSort.option('onMove', safeToDrop);
         }
 
-        function addParamsToLinks() {
-            const links = document.querySelectorAll('#content a');
-            links.forEach(link => link.href += `?${search}`);
-        }
-
         async function printWorkook(lessons, graph) {
-            console.log('printing', lessons);
             const status   = document.getElementById('status');
             const label    = status.querySelector('label');
             const progress = status.querySelector('progress');
@@ -244,14 +294,26 @@
           download(pdfBytes, pathway + "- Student Workbook.pdf", "application/pdf");
           status.style.display = "none";
         }
+
+        function makeEditable(node) {
+            node.contentEditable = true;
+            node.focus();
+        }
+        function save(node) {
+            console.log(node)
+            if(node.id == "pathwayTitle") { pathway = node.textContent; }
+            url.searchParams.set("pathway", pathway);
+            history.pushState({}, "", url);
+            populateLessons();
+        }
     </script>
 </head>
 
-<body class="narrativepage article narrative pyret" onload="populateLessons(); addParamsToLinks();">
+<body class="narrativepage article narrative pyret" onload="populateLessons();">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div id="header">
-            <h1 id="pathwayTitle" style="border-bottom: none;"></h1>
+            <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
         </div>
         <div id="content">
             <div id="preamble_disabled" class="lessonSummary">
@@ -262,24 +324,22 @@
                 </div>
             </div>
 
-        <div class="clearfix item bottom-border two-thirds">
-            <h2>Lesson Plans</h2>
+        <div class="clearfix item two-thirds">
             <div class="sectionbody">
-                <dl id="lesson-list" >
-                </dl>
+                <h2>Lesson Plans</h2>
+                <dl id="lesson-list" ></dl>
             </div>
         </div>
         
-        <div id="accessible" class="clearfix item bottom-border one-third">
+        <div id="accessible" class="clearfix item one-third">
             <h2>What's within reach?</h2>
             <p/>
             Some or all of lessons you've chosen are a prerequisite to any of the following lessons:
-            <dl id="accessible-lesson-list" >
-            </dl>
+            <dl id="accessible-lesson-list"></dl>
         </div>
 
 
-        <div class="clearfix item bottom-border">
+        <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
             <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="printWorkook(lessons, graph)">Student Workbook</a>. 
             <p/>
