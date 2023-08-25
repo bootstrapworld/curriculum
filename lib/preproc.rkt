@@ -1722,7 +1722,7 @@
                                       (expand-directives:string->port s o)
                                       )))))]
                            [(string=? directive "optional")
-                            (fprintf o "[.optionaltag]##Optional: ##")]
+                            (display (enclose-span ".optionaltag" "Optional: ") o)]
                            [(string=? directive "opt")
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
