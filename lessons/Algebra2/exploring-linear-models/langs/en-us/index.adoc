@@ -222,22 +222,7 @@ These models are just functions being graphed on top of the scatter plot, with t
 
 When we make a model, we want it to be the closest possible approximation of all the points. A "good fit" has most of the points very close to the line, and a "bad fit" has the points very far away.
 
-You may already be familiar with the different forms of linear models:
-
-[cols="^1,^1,^1", options="header"]
-|===
-| Slope-Intercept Form    |Point-Slope Form				| Standard Form 			
-| @math{y = mx+b}		  | @math{y-y_1 = m(x-x_1)}		| @math{Ax+By = C}		
-|===
-
-Depending on what part of the model we care about most, we might choose to use one display over another.
-
-- Slope-Intercept Form makes it really easy to read the slope and y-intercept
-- Point-Slope Form makes it easy to find the equation of the line given a single point and slope
-- Standard Form makes it easy to find the x- and y-intercepts of the line
-
-Since we're looking for both the slope and the y-intercept for this model, it makes sense to use Slope-Intercept form.
-
+What's the best fit we can make for this dataset?
 
 === Investigate
 
@@ -246,7 +231,11 @@ Since we're looking for both the slope and the y-intercept for this model, it ma
 - How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
 - How can we measure "how well a model fits"?
 
-@teacher{Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
+@teacher{
+@optional If students need more scaffolding defining a function from two points, use @opt-printable-exercise{def-2-points.adoc}
+
+Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
+}
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
@@ -269,9 +258,9 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 [.lesson-instruction]
 - Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-2.adoc}.
 - How close did you come to the optimal model? Did anything about the model surprise you?
-- @optional For each of the three models on @printable-exercise{model-college-v-income.adoc} and @printable-exercise{model-college-v-income-2.adoc}, graph the line on @opt-printable-exercise{graphing-models.adoc}.
+- @optional For each of the three models on @printable-exercise{model-college-v-income.adoc} and @printable-exercise{model-college-v-income-2.adoc}, and graph the line on @opt-printable-exercise{graphing-models.adoc}.
 
-@teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23E5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
+@teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
 [.strategy-box, cols="1a", grid="none", stripes="none"]
 |===
@@ -297,6 +286,64 @@ These models are useless if we can't make sense of them!
 - How could we use them to find out if wealthier people live longer?
 - How could we use them to find answers to _other_ questions?
 
+== Other Forms of Linear Models @duration{flexible}
+
+=== Overview
+
+Students explore other forms of linear models, and consider why it's useful to have more than one form.
+
+=== Launch
+
+You may already be familiar with the different forms of linear models:
+
+[cols="^1,^1,^1", options="header"]
+|===
+| Slope-Intercept Form    |Point-Slope Form				| Standard Form
+| @math{y = mx+b}		  | @math{y-y_1 = m(x-x_1)}		| @math{Ax+By = C}
+|===
+
+Depending on what part of the model we care about most, we might choose to use one display over another.
+
+- Slope-Intercept Form makes it really easy to read the slope and y-intercept
+- Point-Slope Form makes it easy to find the equation of the line given a single point and slope
+- Standard Form makes it easy to find the x- and y-intercepts of the line
+
+* Suppose our scatterplot had data for a state with 0% college enrollment, and another with 0% median income. Would one form make the model easier to build than another? Why or why not?
+** Standard Form
+* Suppose we only knew the slope of a model, and but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?
+** Point-Slope Form
+* Another researcher asks for the slope and y-intercept of our model. Which form make it as easy as possible to communicate them?
+* Slope-Intercept Form
+
+=== Investigate
+
+When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well!
+
+[.lesson-instruction]
+- @optional To get some practice reading these models, try your hand at @opt-printable-exercise{match-graph-ps.adoc}, @opt-printable-exercise{match-graph-sf.adoc}, and @opt-printable-exercise{match-graph-si.adoc}.
+- Challenge yourself with @opt-printable-exercise{match-graph-def.adoc}.
+
+@teacher{
+Have students share their answers and discuss.
+
+@optional For more practice working with the math of linear models, students can work on either/both of the two exercises below.
+}
+
+[.lesson-instruction]
+- @optional Practice working with other forms, by translating your models on @opt-printable-exercise{other-forms-linear-models.adoc}.
+- @optional Linear models can be shifted in a number of ways, both horizontally and vertically. Explore this concept in @opt-printable-exercise{horizontal-shift.adoc}, @opt-printable-exercise{hor-vert-shift-positive.adoc}, and @opt-printable-exercise{hor-vert-shift-negative.adoc}
+
+=== Synthesize
+If you needed to draw the graph of a linear model, which form would you like to start from? Why?
+
 == Additional Exercises
 
-Practice switching between linear forms using @opt-printable-exercise{other-forms-linear-models.adoc}.
+- @opt-printable-exercise{other-forms-linear-models.adoc}
+- @opt-printable-exercise{match-graph-ps.adoc}
+- @opt-printable-exercise{match-graph-sf.adoc}
+- @opt-printable-exercise{match-graph-si.adoc}
+- @opt-printable-exercise{hor-vert-shift-positive.adoc}
+- @opt-printable-exercise{hor-vert-shift-negative.adoc}
+- @opt-printable-exercise{other-forms-linear-models.adoc}
+- @opt-printable-exercise{horizontal-shift.adoc}
+- @opt-printable-exercise{match-graph-def.adoc}
