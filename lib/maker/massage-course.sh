@@ -84,11 +84,11 @@ for pl in $proglangs; do
   cd ..
 
   if test -n "$BOOK"; then
-    # inputfile="distribution/$NATLANG/Contracts.shtml%3fpathway%3d$targetpathway"
-    # inputfile="distribution/$NATLANG/Contracts.shtml"
-    inputfile="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway"
-    outputfile="distribution/$NATLANG/Contracts-$targetpathway.pdf"
-    echo ", { \"input\": \"$inputfile\", \"output\": \"$outputfile\" }" >> $PUPPETEER_INPUT
+    if test "$pl" = pyret -o "$pl" = wescheme; then
+      inputfile="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway"
+      outputfile="distribution/$NATLANG/courses/$targetpathway/resources/Contracts.pdf"
+      echo ", { \"input\": \"$inputfile\", \"output\": \"$outputfile\" }" >> $PUPPETEER_INPUT
+    fi
   fi
 
 done

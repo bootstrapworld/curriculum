@@ -12,6 +12,18 @@ local makemasterPDFs = os.getenv('MASTERWORKBOOK')
 
 ---------------------------------------------------------------------------
 
+function write_page1(lesson_dir, page, aspect, pageno, o, ol, oe, back_matter_port)
+  local x = '{ lessondir = "' .. lesson_dir .. '",' ..
+             ' page = "' .. page .. '",' ..
+             ' aspect = "' .. aspect .. '",' ..
+             ' pageno = ' .. pageno .. ' },\n'
+  o:write(x)
+  ol:write(x)
+  if back_matter_port and contracts_page_p(lesson_dir, page) then
+    back_matter_port:write(x)
+  end
+end
+
 function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
   -- by default, don't skip pageno
   --
@@ -23,13 +35,9 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
       local file = line:gsub('^ *([^ ]*).*', '%1')
       local aspect = line:match('^ *[^ ]+ +([^ ]+).*') or 'portrait'
       local this_skip_pageno = line:match('^ *[^ ]+ +[^ ]+ +([^ ]+).*') or skip_pageno
+      local pageno = tostring(not this_skip_pageno)
       --
-      local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = ' .. tostring(not this_skip_pageno) .. '},\n'
-      o:write(x)
-      ol:write(x)
-      if back_matter_port and contracts_page_p(lesson_dir, file) then
-        back_matter_port:write(x)
-      end
+      write_page1(lesson_dir, file, aspect, pageno, o, ol, oe, back_matter_port)
     end
     i:close()
   end
@@ -85,13 +93,23 @@ do
     write_pages_info(course_dir .. '/front-matter', o, ol, oe, 'skip_pageno')
     local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
     -- print('workbook_lessons_file is ', workbook_lessons_file, ' ', file_exists_p(workbook_lessons_file))
-    w = io.open(workbook_lessons_file)
+    local w = io.open(workbook_lessons_file)
     for lsn in w:lines() do
       write_pages_info(distr_lessons .. lsn, o, ol, oe)
     end
     w:close()
 
     write_pages_info(course_dir .. '/back-matter', o, ol, oe, 'skip_pageno', ob)
+
+    local resources_dir = 'distribution/' .. natlang .. '/courses/' .. course .. '/resources'
+    if file_exists_p(resources_dir .. '/Contracts.pdf') then
+      write_page1(resources_dir, 'Contracts.pdf', 'portrait', 'false', o, ol, oe, back_matter_port)
+    end
+
+    local backpages_dir = course_dir .. '/back-matter'
+    if file_exists_p(backpages_dir .. '/pages/back-cover.adoc') then
+      write_page1(backpages_dir, 'back-cover.adoc', 'portrait', 'false', o, ol, oe, back_matter_port)
+    end
 
     o:write('}\n'); o:close()
     ol:write('}\n'); ol:close()
@@ -149,9 +167,15 @@ function make_workbook_json_1(course_dir, tgt)
   for _,line in ipairs(lynes) do
     local lessondir = line.lessondir
 
-    if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
-      goto continue
+    local docrootp = true
+
+    if lessondir:find('/lessons/') or lessondir:find('/front%-matter') or lessondir:find('/back%-matter') then
+      docrootp = false
     end
+
+    -- if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
+    --   goto continue
+    -- end
 
     local workbookpage = line.page
     local aspect = line.aspect
@@ -182,7 +206,15 @@ function make_workbook_json_1(course_dir, tgt)
       end
     end
 
-    docfile = lessondir .. '/' .. (includesolutions and 'solution-pages' or 'pages') .. '/' .. workbookpage
+    local docfile = lessondir .. '/'
+
+    if docrootp then
+      docfile = docfile .. workbookpage
+    elseif includesolutions then
+      docfile = docfile .. 'solution-pages/' .. workbookpage
+    else
+      docfile = docfile .. 'pages/' .. workbookpage
+    end
 
     local docfileext = docfile:gsub('.*%.([^.]*)$', '%1')
 
