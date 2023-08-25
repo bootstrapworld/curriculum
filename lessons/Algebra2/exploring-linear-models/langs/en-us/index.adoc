@@ -41,37 +41,47 @@ This lesson focuses on _linear relationships_, and the math content of the lesso
 == Looking for Patterns @duration{15 minutes}
 
 === Overview
-Students explore the State Demographics dataset, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
+After a discussion of the displays they've already encountered, students explore the State Demographics dataset, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class.
 
 === Launch
 
-- Do you think that younger animals get adopted faster? Why or why not?
+Think back to the animals at the shelter and our work with @lesson-link{contracts-tables-displays/pages/exploring-displays.adoc}.
+
+- Would you imagine that younger animals get adopted faster than older animals? Why or why not?
 ** _The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)_
-- What kind of data is `age`? What kind of data is `weeks`?
+- What kind of data is `age` at adoption? What kind of data is `weeks` to adoption?
 ** _Both `age` and `weeks` are quantitative._
 - What kind of display would help us analyze the relationship between age and adoption time?
 ** _Again, solicit students ideas and discuss why each display type would or would not work._
 
-Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
+Pie and Bar charts help us see the _frequency_ of values in a single _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
 
-But what we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
+But what we really want is a display that will help us search for _a relationship between two quantitative columns_, and that's exactly what scatter plots do.
 
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
-* What is the Contract for `scatter-plot`?
- @show{(contract 'scatter-plot '("Table" (labels String) (explanatory String) (response String)) "Image")}
+What is the Contract for `scatter-plot`?
 
-Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
+@center{@show{(contract 'scatter-plot '("Table" (labels String) (explanatory String) (response String)) "Image")}}
 
-It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `age` for x and `weeks` for y.
+Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? 
+
+In this case...
+
+- are we suspecting that an animal’s age might explain how long it takes to be adopted?
+- or are we suspecting that the weeks it takes for an animal to be adopted might explain how many years old it is? 
+
+The first one makes sense, and reflects our suspicion that age plays a role in adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.  
+
+It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
 |
 @span{.title}{Why not Independent/Dependent?}
 
-When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are __never__ fully dependant on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
+When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are __never__ fully dependent on the x-values. Plenty of scatter plots have no correlation, in which case the y-coordinates do not depend on the x-coordinates at all!
 
 Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in _explaining_ another when searching for a relationship.
 |===
@@ -86,14 +96,14 @@ Statisticians commonly use the words @vocab{explanatory variable} and @vocab{res
 
 === Investigate
 
-The code on lines 13 and 14 show us how Pyret defines values:
+In the `# Define some rows` section of the Definitions Area we see how Pyret defines values:
 
 ```
 alabama = row-n(states-table, 0)
 alaska  = row-n(states-table, 1)
 ```
 
-@teacher{In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! On lines 13 and 14 of this file, the variables `alabama` and `alaska` are _rows_ from the table.}
+@teacher{In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as _rows_ from the table.}
 
 * What columns in this dataset have to do with wealth?
 ** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
@@ -101,22 +111,24 @@ alaska  = row-n(states-table, 1)
 ** _Examples:_ `college-or-higher`, `hs-or-higher`
 
 [.lesson-instruction]
-- Working in pairs or small groups, complete questions 1 through 4 (making displays and suggesting possible relationships) in @printable-exercise{looking-for-patterns.adoc}.
-- **Do not go on to question 5.** We'll be returning to that later in the lesson.
+- We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+- Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
+- _Do not go on to Part 2._ We'll be returning to that later in the lesson.
 
-@teacher{Note: During this activity, don't let students just make scatter plot for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
+@teacher{Note: During this activity, don't let students just make scatter plots for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
 === Synthesize
 
-- Share your scatter-plots with one another (copying and pasting scatter plot displays into a shared document, for example, and then labeling those displays). What possible relationships did you find in question 3?
+- Share your scatter plots with one another (copying and pasting `scatter-plot` displays into a shared document, for example, and then labeling those displays). 
+- What possible relationships did you find?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
 
-@teacher{Teacher note: the next section of the lesson is all about identifying form, direction, and strength. Students will acquire the formal vocabulary that data scientists use to assess relationships.}
+@teacher{Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength.}
 
 == Describing Patterns @duration{15 minutes}
 
 === Overview
-Students identify and make use of correlations in scatter plots, learning to characterize their form as being linear, curved, or showing no clear pattern. They learn how to describe the @vocab{strength} of correlations, and that linear patterns have direction.
+Students identify and make use of @vocab{correlations} in scatter plots, learning to characterize their @vocab{form} as being linear, curved, or showing no clear pattern. They learn how to describe the @vocab{strength} of correlations. And they learn that linear patterns have @vocab{direction}.
 
 === Launch
 
@@ -124,22 +136,19 @@ Scatter plots let us visualize the relationship between two columns. If no relat
 
 These patterns can be described using three qualities: form, direction, and strength.
 
-[.lesson-point]
-Form indicates whether a relationship is linear, non-linear or undefined.
-
 [cols="^1a,^1a,^1a", stripes="none"]
 |===
 | @image{images/1b1.gif, 250}
 | @image{images/2NL.gif, 250}
 | @image{images/B.gif, 250}
 
-| Some patterns are @vocab{linear}, and cluster around a straight line sloping up or down.
+| Some patterns are *linear*, and cluster around a straight line sloping up or down.
 | Some patterns are **non-linear**, and may look like a curve or an arc.
 | And sometimes there is **no relationship** or pattern at all!
 |===
 
 [.lesson-point]
-Linear relationships have direction
+@vocab{Form} indicates whether a relationship is linear, non-linear or undefined.
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
@@ -152,7 +161,7 @@ If the relationship clusters around a straight line, we can talk about _directio
 Note: Not every shape has a direction! For example, a curve can start out sloping upwards, but then peak and slope downwards.
 
 [.lesson-point]
-Strength indicates how closely the two variables are correlated.
+Only @vocab{linear} relationships have @vocab{direction}.
 
 How well does knowing the x-value allow us to predict what the y-value will be?
 
@@ -164,23 +173,26 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 @clear
 
+[.lesson-point]
+@vocab{Strength} indicates how closely the two variables are @vocab{correlated}.
 
 === Investigate
 
 Now that you've dug into the role that form, direction and strength play in quantifying a correlation, it's time to put those concepts to work!
 
 [.lesson-instruction]
-In pairs or small groups, complete @printable-exercise{pages/identifying-form-matching.adoc}.
+- We are going to learn how to compute correlations using Pyret, but before we can trust the computer, we need to train our eyes to look for form so that we know what kind of correlations to run. And sometimes there's a bug in a program, so we want to be able to recognize whether the results we get from Pyret for form, direction, and strength make sense!
+- Let's start by practicing matching the scatterplots to their descriptions on @printable-exercise{pages/identifying-form-matching.adoc}.
 
 @teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
 
 [.lesson-instruction]
 In pairs or small groups, complete @printable-exercise{pages/identifying-form.adoc}
 
-@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective.}
+@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok.}
 
 [.lesson-instruction]
-Return to @printable-exercise{looking-for-patterns.adoc}, and complete the rest of the page.
+Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
 
 
 === Common Misconceptions
@@ -191,8 +203,8 @@ Return to @printable-exercise{looking-for-patterns.adoc}, and complete the rest 
 
 === Synthesize
 
-- What relationships did you find in the states dataset?
-- What was their form, direction, and strength?
+- What relationships did you explore in the states dataset?
+- Which appeared to have strong correlations? Were they positive or negative?
 - Were any of these relationships a surprise? Why or why not?
 
 
@@ -200,29 +212,39 @@ Return to @printable-exercise{looking-for-patterns.adoc}, and complete the rest 
 
 === Overview
 
-The line of best fit is framed as a _predictor function_, which attempts to predict where a new point would fall on the plane based on the relationship in the data. Students define their predictors (linear functions) to find the line of best fit, using @vocab{R-squared} to determine goodness of fit and making predictions with the result. They explore the impact that slope and and y-intercept have on goodness of it.
+The line of best fit is framed as a _predictor function_, which attempts to predict where a new point would fall on the plane based on the relationship in the data. Students define their predictors (linear functions) to find the line of best fit, using @vocab{R-squared} to determine goodness of fit and making predictions with the result. They explore the impact that slope and and y-intercept have on goodness of fit.
 
 === Launch
 
 [.lesson-instruction]
-In Pyret, make a scatter plot showing the the relationship between `college-or-higher` and `median-income`.
+Return to Pyret and the @starter-file{alg2-states}.
+Make a scatter plot showing the the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
 
 @center{@image{images/college-v-income.png}}
 
 This scatter plot appears to show a positive, linear relationship: states with higher percentages of college graduates tend to have higher median household incomes.
 
 [.lesson-instruction]
-Suppose the United States were to add a new state. **Based on the data for the existing 50 states (plus DC!), what median household income would you predict, if exactly 50% of the new state's citizens had attended college?** What about 20%? 60%
+--
+Suppose the United States were to add a new state. 
 
-@teacher{Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x- and y-axes of our display.}
+__Based on the data for the existing 50 states (plus DC!)...__
+
+- What median household income would you predict, if exactly 50% of the new state's citizens had attended college? 
+- What would you predict if 20% had attended college? 
+- If 60% had attended college?
+
+--
+
+@right{@image{images/pyret-window.png, 150}} @teacher{Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatterplot and clicking "Redraw".}
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
-These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, these are _linear functions_ or "linear models". The straight-line graph of these models is sometimes called the "regression line" or the "predictor function", but you may have heard it called the @vocab{line of best fit}.
+These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, the "predictor functions" are _linear functions_ or "linear models". The straight-line graph of these models is also sometimes called the "regression line" or @vocab{line of best fit}.
 
 When we make a model, we want it to be the closest possible approximation of all the points. A "good fit" has most of the points very close to the line, and a "bad fit" has the points very far away.
 
-What's the best fit we can make for this dataset?
+Let's find the best fit we can make for this dataset!
 
 === Investigate
 

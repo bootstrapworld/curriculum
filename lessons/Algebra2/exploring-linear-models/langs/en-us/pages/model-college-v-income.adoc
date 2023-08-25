@@ -10,20 +10,22 @@ body.workbookpage .fitbruby { padding-top: 1.1rem; }
 </style>
 ++++
 
-For this page, you'll need to open the @starter-file{alg2-states} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+_Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save a Copy** now._
+
+@vspace{1ex}
 
 == Build a Model from Samples
 
-@n Record the `college-or-higher` and `median-income` values for the `alabama` (AL) and `alaska` (AK) rows, as (x,y) pairs below:
+@n Record the `pct-college-or-higher` and `median-income` values for the `alabama` (AL) and `alaska` (AK) rows, as (x,y) pairs below:
 
 @center{
- (@fitbruby{10em}{@ifsoln{22.6}}{AK college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AK median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AL college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AL median-income})
+ (@fitbruby{10em}{@ifsoln{22.6}}{AK pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AK median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AL pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AL median-income})
 }
 
 @vspace{4ex}
 
 [.tallFitb]
-@n We want to understand how these two differences (@math{\Delta}s) relate to one another. Compute @math{\frac{\Delta median\mbox{-}income}{\Delta college\mbox{-}or\mbox{-}higher}} @fitb{8em}{@ifsoln{5613.67}}
+@n We want to understand how these two differences (@math{\Delta}s) relate to one another. Compute @math{\frac{\Delta median\mbox{-}income}{\Delta pct\mbox{-}college\mbox{-}or\mbox{-}higher}} @fitb{8em}{@ifsoln{5613.67}}
 
 @vspace{4ex}
 
@@ -35,11 +37,11 @@ For this page, you'll need to open the @starter-file{alg2-states} open on your c
  @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
 }
 
-@n Type your function into the Definitions Area on the left, modifying the existing function `f(x)`. Then click "Run", and make sure you fix any errors or warnings. In the Interactions Area, try plugging in the `college-or-higher` value for Alabama by typing `f(22.6)`. How well does it predict the correct median income for Alabama? What about Alaska? Consider: If it doesn't predict it perfectly, why might that be?
+@n Type your function into the Definitions Area on the left, modifying the existing function `f(x)`. Then click "Run", and make sure you fix any errors or warnings. In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `f(22.6)`. How well does it predict the correct median income for Alabama? What about Alaska? Consider: If it doesn't predict it perfectly, why might that be?
 
 [.shortFitb]
 --
-@n Try different `college-or-higher` values from _other_ states, to see how well a model our Alabama-Alaska model fits the rest of the country. 
+@n Try different `pct-college-or-higher` values from _other_ states, to see how well a model our Alabama-Alaska model fits the rest of the country. 
 
 @n Identify a state for which this model works well: @fitb{}{@ifsoln{Examples: Iowa, Indiana...}}
 
@@ -47,7 +49,8 @@ For this page, you'll need to open the @starter-file{alg2-states} open on your c
 --
 == Fit the Model
 
-**Evaluate @show{(code '(fit-model states-table "state" "college-or-higher" "median-income" f))} in the Interactions Area, and find the points for AL and AK along the predictor line.**
+_Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" f))} in the Interactions Area.
+Then find the points for AL and AK along the predictor line._
 
 @n In the upper left corner, you'll see that it says "R-sqr", followed by a number. What is that number? @fitb{}{@ifsoln{-15.63}}
 

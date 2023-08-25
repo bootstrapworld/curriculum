@@ -609,7 +609,7 @@ var starterFiles = {
     }
   },
   "alg2-states": {
-    "title": "States Demographics Starter File",
+    "title": "State Demographics Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
     }

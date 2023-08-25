@@ -4,13 +4,26 @@ Open the @starter-file{alg2-states} and **Save a Copy** of the file that's just 
 
 Then, click "Run" and type `states-table` into the Interactions Area on the right to see the dataset.
 
-@n What code will produce a table showing the number of states in each region? +
-@fitb{}{@ifsoln{@show{(code '(count states-table "region"))}}}
+@vspace{1ex}
 
-@n _Which states do you *think* have the most people?_ What code will produce a table containing the five states with the largest population in 2020? +
+[.FillVerticalSpace, cols="^1a,^1a",options="header",stripes="none"]
+|===
+| What do you Notice about this dataset?
+| What do you Wonder about this dataset?
+|
+|
+|===
+
+@n What code will produce a table showing the number of states in each region? @fitb{}{@ifsoln{@show{(code '(count states-table "region"))}}}
+
+@n Which states do you *think* have the most people? @fitb{}{}
+
+@n What code will produce a table containing the five states with the largest population in 2020? +
 @fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "pop-2020" false) 4))}}}
 
-@n _Which states do you *think* have the highest poverty?_ What code will produce a table containing the ten states with the highest poverty rate? +
+@n Which states do you *think* have the most poverty? @fitb{}{}
+
+@n What code will produce a table containing the ten states with the highest poverty rate? +
 @fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "poverty-rate" true) 10))}}}
 
 @n What code will produce a table containing the states with the lowest *median* income? +
@@ -22,20 +35,16 @@ Then, click "Run" and type `states-table` into the Interactions Area on the righ
 @star What does it mean if a state has a higher `per-capita income` than `median-income`? @fitb{}{} +
 @fitb{}{@ifsoln{The state has a number of "high-earning outliers", which skew the average}}
 
-The two lines of code under `# Define some rows` *extract rows 0 and 1 from the table, and define them as `alabama` and `alaska`*.
+@vspace{1ex}
+
+_The two lines of code under `# Define some rows` extract rows 0 and 1 from the table, and define them as `alabama` and `alaska`._
 
 @n Type `alabama` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{Just the Row for Alabama}}
 
-@n Underneath the definition of those rows, *add a new definition* for `california`. Be sure to *click "Run"*, so that Pyret reads your new definition!
+@n Underneath the definition of those rows, add a new definition for `california` and click "Run", so that Pyret reads your new definition!
 
-@n **Add a definition for your own state**!
+@n Add a definition for your own state! Then *click "Run"* and test it out in the Interactions Area!
 
-@vspace{2ex}
+@n Add any additional Notices or Wonderings you have about this dataset to the table at the top.
 
-[.FillVerticalSpace, cols="^1a,^1a",options="header",stripes="none"]
-|===
-| What do you Notice about this dataset?
-| What do you Wonder about this dataset?
-|
-|
-|===
+
