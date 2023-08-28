@@ -180,13 +180,16 @@ Quadratic models capture _parabolic relationships_, where one quantity varies ba
 - Do you think this data shows a quadratic relationship? Why or why not?
 - Do you think this data shows some other kind of relationship? Why or why not?
 
-== Fitting Exponential Models @duration{20 minutes}
+== Exponential Functions
 
 === Overview
-
-Students are introduced to exponential models, and extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
+Having identified that _shape_ of exponential functions in the covid scatter plot, students deepen their understanding of exponential functions in graphical, tabular, and function notation form.
 
 === Launch
+We can rule out linear and quadratic functions for this pattern. None of them exhibit the behavior of growing really slowly for a while, and then taking off like a rocket.
+
+- Linear functions grow by *fixed intervals*. That means they don't grow very quickly, and they grow at the same (slow) speed all the time.
+- Quadratic relationships grow by intervals that increase...by fixed amounts. That means they grow faster and faster over time, but the _rate of_ growth is fixed.
 
 There is, however, a class of functions that grow even faster than quadratics: **exponential functions**.
 
@@ -195,21 +198,46 @@ There is, however, a class of functions that grow even faster than quadratics: *
 Exponential functions grow by equal *factors*, (multiplying by _n_ each time).
 --
 
-Linear functions grow by *fixed intervals*.
-
-Quadratic relationships grow by intervals that increase by fixed amounts.
-
 Exponential relationships show up all the time!
 
-- Cells that constantly divide, doubling the total number of cells each time
-- A tree that's on fire will likely catch neighboring trees on fire, so that the fire spreads to 2 or more trees each time
-- Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow
-
+- Most cells (e.g. - bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn in 2, then those 2 will turn into 4, then 8, then 16, and so on.
+- A tree that's on fire will likely catch neighboring trees on fire, so that the fire spreads to 2 or more trees each time. That's why forest fires can be so dangerous - even a tiny fire can grow out of control in a short time.
+- Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow. If you start saving just a few dollars every month, the account will start growing so quickly that you'll have a lot of money down the road.
 
 [.lesson-instruction]
-Can you think of other real-world examples where a relationship is likely exponential?
+Can you think of other examples of exponential relationships?
 
+=== Investigate
+You've identified one exponential pattern in a graph: it grows really slowly for a while, then explodes sharply upward. Can you tell the difference between linear, quadratic, and exponential graphs?
+
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-plots.adoc}
+- Be ready to discuss your answers with the class!
+-
+@teacher{Have students share their answers. Encourage them to talk about where the exponential functions suddenly shoot up, asking them to identify the approximate x-value where that occurs.}
+
+Exponential sequences grow by equal factors, meaning the rate of growth gets bigger and bigger by equal leaps. Can you tell the difference between linear, quadratic, and exponential growth of a sequence?
+
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-tables.adoc}
+- Be ready to discuss your answers with the class!
+
+@teacher{Have students share their answers. For exponential functions, it's especially important to have students discuss the _growth factor_ for exponential relationships on this page.}
+
+[.lesson-point]
 Exponential models have the form @math{y = ab^x + k}
+
+The term @math{b} specifies the _growth factor_ for the function. This is the term you found for the exponential sequences on @printable-exercise{classifying-tables.adoc}.
+
+The term @math{a} is the _initial value_, which is the value of the function when @math{x=0}. Looking back at the the exponential relationships on @printable-exercise{classifying-tables.adoc}, what was the initial value - @math{a} - for each one?
+
+== Fitting Exponential Models @duration{20 minutes}
+
+=== Overview
+
+Students are introduced to exponential models, and extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
+
+=== Launch
 
 [.lesson-instruction]
 - Complete the first section of @printable-exercise{exponential-models.adoc}, using @starter-file{alg2-covid-desmos-e}.
@@ -222,7 +250,6 @@ Exponential models have the form @math{y = ab^x + k}
 ** @math{a} is the initial value, which is the contribution of the exponential term when @math{x} is zero. Another way to think of it is "the value of the function _above k_ when @math{x} is zero"
 ** @math{b} is a @vocab{growth factor}, which is the rate at which the exponential term grows (@math{b > 1}) or decays (@math{b < 1}) as @math{x} increases.
 - @optional for more practice modeling relationships using exponentials, complete @opt-printable-exercise{grading-models.adoc}
-- @optional For practice differentiating between linear, quadratic and exponential relationships, optional exercises are available for @opt-printable-exercise{classifying-tables.adoc, Tables}, @opt-printable-exercise{classifying-plots.adoc, Graphs} and @opt-printable-exercise{classifying-defs.adoc, Definitions}.
 
 === Investigate
 
@@ -260,7 +287,5 @@ In data processing, opting to round for speed over preserving precision can have
 
 == Additional Exercises
 
-- @opt-printable-exercise{classifying-tables.adoc}
-- @opt-printable-exercise{classifying-plots.adoc}
 - @opt-printable-exercise{classifying-defs.adoc}
 - @opt-printable-exercise{grading-models.adoc}
