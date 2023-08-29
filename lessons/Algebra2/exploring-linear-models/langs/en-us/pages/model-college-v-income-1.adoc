@@ -20,37 +20,12 @@ _Open your copy of the @starter-file{alg2-states}. If you haven't already, **Sav
  (@fitbruby{10em}{@ifsoln{22.6}}{AL pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AL median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AK median-income})
 }
 
-@n We want to understand how change (@math{\Delta}) in the percent of the population that attended college relates to change (@math{\Delta}) in the median income. 
+@n Using the space below, compute the equation of the line passing between these two points. **This line will be your linear model** (also known as the "predictor function", or "line of best fit"), which predicts `median-income` as a function of `pct-college-or-higher`.
 
-[.indentedpara]
---
-Compute @math{\Delta median\mbox{-}income =} @fitbruby{12em}{@ifsoln{70760}}{AK median-income} @math{-} @fitbruby{12em}{@ifsoln{43253}}{AL median-income} = @fitb{}{@ifsoln{27507}}
-
-Compute @math{\Delta pct\mbox{-}college\mbox{-}or\mbox{-}higher =} @fitbruby{12em}{@ifsoln{27.5}}{AK pct-college-or-higher} @math{-} @fitbruby{12em}{@ifsoln{22.6}}{AL pct-college-or-higher} = @fitb{}{@ifsoln{4.9}}
-
-@vspace{1ex}
-
-Compute the slope/rate of change between `AL` and `AK`: @math{\frac{\Delta median\mbox{-}income}{\Delta pct\mbox{-}college\mbox{-}or\mbox{-}higher} =} @ifnotsoln{@math{\frac{\qquad\qquad\qquad}{\qquad \qquad \qquad \qquad } =} } @ifsoln{@math{\frac{27507}{4.9} = }} @fitb{}{@ifsoln{5613.67}}
-
-_Based solely on data from Alabama and Alaska, we are seeing that a @fitbruby{10em}{@ifsoln{4.9}}{&#916; pct-college-or-higher} percent increase in college graduates among the population translates to a @fitbruby{10em}{@ifsoln{27507}}{&#916; median-income} dollar increase in median income._
-
---
-
-@n Now, let's use the slope intercept form of the line to calculate the y-intercept of the line passing through `AK` and `AL`.
-[.indentedpara]
---
-
-A) Replace @math{m} with the slope we just calculated.
-
-B) Replace @math{x} and @math{y} with the relevant values from the `AK` row: (@fitbruby{12em}{@ifsoln{27.5}}{ *x* {two-colons} AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{ *y* {two-colons} AK median-income})
-
-C) Solve for @math{b}. @fitbruby{10em}{@ifsoln{70760}}{y} @math{=} @fitbruby{10em}{@ifsoln{5613.67}}{m} @math{\times} @fitbruby{10em}{@ifsoln{27.5}}{x} @math{+} @hspace{2em} @math{b}
-
-@vspace{10ex}
-
-@math{b =} @fitb{8em}{@ifsoln{-83616.02}}
-
---
+[.FillVerticalSpace, cols="1", frame="none", grid="none"]
+|===
+|
+|===
 
 @n Write the complete model below (in both Function and Pyret notation):
 
@@ -81,4 +56,4 @@ Try different `pct-college-or-higher` values from _other_ states, to see how wel
 
 @n Identify a state for which this model works poorly: @fitb{}{@ifsoln{Examples: Vermont, Massachusetts...}}
 
-@n What median income does this model expect a state without college graduates to earn? @fitb{}{@ifsoln{-$83616.02}}
+@n What median income does this model expect a state without ANY college graduates (0%) to earn? @fitb{}{@ifsoln{-$83616.02}}

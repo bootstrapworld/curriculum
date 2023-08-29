@@ -266,18 +266,20 @@ When we make a model, we want it to be the closest possible approximation of all
 Let's find the best fit we can make for this dataset!
 
 [.lesson-instruction]
-- Complete @printable-exercise{model-college-v-income-A.adoc}.
+- Complete @printable-exercise{model-college-v-income-1.adoc}.
 - How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
 - How can we measure "how well a model fits"?
 
 @teacher{
+*_NOTE:_* for students who need more scaffolding/review to find the equation of the line between two points, you may wish to use @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc}
+
 Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
 }
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 [.lesson-instruction]
-- Complete @printable-exercise{model-college-v-income-B.adoc}.
+- Complete @printable-exercise{model-college-v-income-2.adoc}.
 - Based on the @math{R^2} values of the plots you created on this page, what do you think @math{R^2} means?
 
 @math{R^2} describes the _percentage of the variation in the y-variable that is explained by the x variable_ in our model. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation.
@@ -287,15 +289,15 @@ If the model is perfect, the @math{R^2} value will be 1.00, meaning the @math{y}
 But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether. Did you see any models with a negative @math{R^2} value?
 
 [.lesson-instruction]
-- Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-C.adoc}.
+- Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-3.adoc}.
 - What was the best model you could come up with?
 
 But how do we find the __best__ model? In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
 
 [.lesson-instruction]
-- Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-C.adoc}.
+- Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-3.adoc}.
 - How close did you come to the optimal model? Did anything about the model surprise you?
-- @optional Turn to @opt-printable-exercise{graphing-models.adoc} and sketch graphs for three of the models you wrote on @printable-exercise{model-college-v-income-A.adoc} and @printable-exercise{model-college-v-income-C.adoc}.
+- @optional Turn to @opt-printable-exercise{graphing-models.adoc} and sketch graphs for three of the models you wrote on @printable-exercise{model-college-v-income-1.adoc} and @printable-exercise{model-college-v-income-2.adoc}.
 
 @teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
