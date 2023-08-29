@@ -115,7 +115,7 @@ alaska  = row-n(states-table, 1)
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
 - _Do not go on to Part 2._ We'll be returning to that later in the lesson.
 
-@teacher{Note: During this activity, don't let students just make scatter plots for random pairs of columns. Instead, encourage them to first _think about which columns might be related_, and then create the scatter plot to search for this relationship. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
+@teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
 === Synthesize
 
@@ -123,7 +123,7 @@ alaska  = row-n(states-table, 1)
 - What possible relationships did you find?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
 
-@teacher{Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength.}
+@teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength._}
 
 == Describing Patterns @duration{15 minutes}
 
@@ -149,6 +149,8 @@ These patterns can be described using three qualities: form, direction, and stre
 
 [.lesson-point]
 @vocab{Form} indicates whether a relationship is linear, non-linear or undefined.
+
+@optional Turn to @opt-printable-exercise{linear-nonlinear-bust.adoc} and decide whether you would imagine that each of the scatter plots could be modeled by a linear relationship, a non-linear relationship, or there doesn't appear to be a pattern.
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
@@ -200,21 +202,38 @@ Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
 - Students may also falsely believe that there is ALWAYS a correlation between any two variables in their dataset.
 - Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
 
-
 === Synthesize
 
 - What relationships did you explore in the states dataset?
 - Which appeared to have strong correlations? Were they positive or negative?
 - Were any of these relationships a surprise? Why or why not?
 
-
 == Fitting Linear Models @duration{25 minutes}
 
 === Overview
 
-The line of best fit is framed as a _predictor function_, which attempts to predict where a new point would fall on the plane based on the relationship in the data. Students define their predictors (linear functions) to find the line of best fit, using @vocab{R-squared} to determine goodness of fit and making predictions with the result. They explore the impact that slope and and y-intercept have on goodness of fit.
+Building on prior-knowledge of linear functions, students learn about the line of best fit, framed as a _predictor function_, which attempts to predict where a new point would fall on the plane based on the relationship in the data. Students define their predictors (linear functions) to find the line of best fit, using @vocab{R-squared} to determine goodness of fit and making predictions with the result. They explore the impact that slope and and y-intercept have on goodness of fit.
 
 === Launch
+
+Before we learn to fit linear models to scatter plots, let's review. *What do you remember about linear functions?*
+
+@teacher{We'd expect students to be able to surface much of the following:
+
+- Linear functions look like straight lines.
+- Vertical lines are not functions, because their slope is undefined as a result of their horizontal change being zero.
+- The steepness of a line can be described by its @vocab{slope} (or _constant_ @vocab{rate of change}).
+- The @vocab{slope} can be calculated from any two points.
+- Students may remember the @vocab{slope} as @math{\frac{change \; in \; y}{change \; in \; x}} or @math{\frac{rise}{run}} or @math{\frac{y_2 - y_1}{x_2 - x_1}}. 
+- The point where the line crosses the y-axis is called the @vocab{y-intercept}.
+- The x-coordinate of the @vocab{y-intercept} always starts with zero, e.g. @math{(0, y)}.
+- Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
+- Horizontal lines have a constant rate of change of zero.
+}
+
+@optional Students are about to be asked to write the slope-intercept form of the line, given two points in our states dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.
+
+=== Investigate
 
 [.lesson-instruction]
 Return to Pyret and the @starter-file{alg2-states}.
@@ -246,23 +265,19 @@ When we make a model, we want it to be the closest possible approximation of all
 
 Let's find the best fit we can make for this dataset!
 
-=== Investigate
-
 [.lesson-instruction]
-- Complete the first section ("Build a Model from Samples") in @printable-exercise{model-college-v-income.adoc}.
+- Complete @printable-exercise{model-college-v-income-A.adoc}.
 - How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
 - How can we measure "how well a model fits"?
 
 @teacher{
-@optional If students need more scaffolding defining a function from two points, use @opt-printable-exercise{def-2-points.adoc}
-
-Before students complete the remainder of the workbook page, confirm that they were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
+Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.
 }
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 [.lesson-instruction]
-- Complete the second section ("Fit the Model") in @printable-exercise{model-college-v-income.adoc}.
+- Complete @printable-exercise{model-college-v-income-B.adoc}.
 - Based on the @math{R^2} values and plots you created on this page, what do you think @math{R^2} means?
 
 @math{R^2} describes the _percentage of the variation in the y-variable that is explained by the x variable_ in our model. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation.
@@ -272,15 +287,15 @@ If the model is perfect, the @math{R^2} value will be 1.00, meaning the @math{y}
 But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether. Did you see any models with a negative @math{R^2} value?
 
 [.lesson-instruction]
-- Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-2.adoc}.
+- Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-C.adoc}.
 - What was the best model you could come up with?
 
 But how do we find the __best__ model? In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
 
 [.lesson-instruction]
-- Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-2.adoc}.
+- Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-C.adoc}.
 - How close did you come to the optimal model? Did anything about the model surprise you?
-- @optional For each of the three models on @printable-exercise{model-college-v-income.adoc} and @printable-exercise{model-college-v-income-2.adoc}, and graph the line on @opt-printable-exercise{graphing-models.adoc}.
+- @optional Turn to @opt-printable-exercise{graphing-models.adoc} and sketch graphs for three of the models you wrote on @printable-exercise{model-college-v-income-A.adoc} and @printable-exercise{model-college-v-income-C.adoc}.
 
 @teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
@@ -299,73 +314,92 @@ When we interpret a model, we try to make sense of the slope, the axes, the @mat
 These models are useless if we can't make sense of them!
 
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- @optional For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}.
+- @optional For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. 
 --
 
 === Synthesize
 
 - How could we use scatter plots and linear models to find out if taller NBA players tend to make more three-pointers?
-- How could we use them to find out if wealthier people live longer?
-- How could we use them to find answers to _other_ questions?
+- How could we use scatter plots and linear models to find out if wealthier people live longer?
+- How could we use scatter plots and linear models to find answers to _other_ questions?
 
 == Other Forms of Linear Models @duration{flexible}
 
 === Overview
-
-Students explore other forms of linear models, and consider why it's useful to have more than one form.
+Students are reminded of the three forms of linear models available to us, discuss when and why we might choose one form over another, and practice translating between them.
 
 === Launch
 
-You may already be familiar with the different forms of linear models:
+When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
+
+So far, we've focused on models using the *slope-intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment. Depending on who we're communicating with and what information we have available to us, we might opt to use other forms of linear models, but we can always translate any model into another! 
+
+You may already be familiar with the different forms of linear models available to us:
 
 [cols="^1,^1,^1", options="header"]
 |===
-| Slope-Intercept Form    |Point-Slope Form				| Standard Form
-| @math{y = mx+b}		  | @math{y-y_1 = m(x-x_1)}		| @math{Ax+By = C}
+| Slope-Intercept Form    |Point-Slope Form					| Standard Form
+| @math{y = mx + b}		  | @math{y - y_1 = m(x - x_1)}		| @math{Ax + By = C}
 |===
 
-Depending on what part of the model we care about most, we might choose to use one display over another.
+Why we might choose to use one form over another?
 
-- Slope-Intercept Form makes it really easy to read the slope and y-intercept
-- Point-Slope Form makes it easy to find the equation of the line given a single point and slope
-- Standard Form makes it easy to find the x- and y-intercepts of the line
+- *Slope-Intercept Form* makes it really easy to read the slope and y-intercept.
+- *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope.
+- *Standard Form* makes it easy to find the x- and y-intercepts of the line.
 
-* Suppose our scatterplot had data for a state with 0% college enrollment, and another with 0% median income. Would one form make the model easier to build than another? Why or why not?
+Suppose...
+
+* Our scatterplot had data for a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?
 ** Standard Form
-* Suppose we only knew the slope of a model, and but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?
+* We only knew the slope of a model, but we knew the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?
 ** Point-Slope Form
 * Another researcher asks for the slope and y-intercept of our model. Which form make it as easy as possible to communicate them?
-* Slope-Intercept Form
+** Slope-Intercept Form
 
 === Investigate
 
-When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well!
-
-[.lesson-instruction]
-- @optional To get some practice reading these models, try your hand at @opt-printable-exercise{match-graph-ps.adoc}, @opt-printable-exercise{match-graph-sf.adoc}, and @opt-printable-exercise{match-graph-si.adoc}.
-- Challenge yourself with @opt-printable-exercise{match-graph-def.adoc}.
-
-@teacher{
-Have students share their answers and discuss.
-
-@optional For more practice working with the math of linear models, students can work on either/both of the two exercises below.
-}
-
-[.lesson-instruction]
-- @optional Practice working with other forms, by translating your models on @opt-printable-exercise{other-forms-linear-models.adoc}.
-- @optional Linear models can be shifted in a number of ways, both horizontally and vertically. Explore this concept in @opt-printable-exercise{horizontal-shift.adoc}, @opt-printable-exercise{hor-vert-shift-positive.adoc}, and @opt-printable-exercise{hor-vert-shift-negative.adoc}
+While it's easier to write one linear form or the other based on the information available to us, and might be easier for someone else to extract the information they're looking for based on the model we supply them with, we can easily translate back and forth between linear forms!
 
 === Synthesize
 If you needed to draw the graph of a linear model, which form would you like to start from? Why?
 
+== Investigating Horizontal and Vertical Shifts @duration{optional}
+
+=== Overview
+
+Students will be guided through an exploration of the relationship between horizontal and vertical shifts of the line. Written exercises accompany a Desmos activity we've written.
+
+=== Launch
+
+Lines can be shifted up, down, left and right by adding and subtracting to their definitions. Let's see if we can decode the pattern! 
+
+=== Investigate
+
+[.lesson-instruction]
+* Turn to @opt-printable-exercise{horizontal-shift.adoc}, which will guide you through the Desmos activity: @online-exercise{https://www.desmos.com/calculator/hong7gv82k, Exploring Horizontal and Linear Shifts in Linear Functions} step by step.
+* As you work through the activities, pay careful attention to directions telling you know which graphs to turn "on" and "off" for each section.
+
+@teacher{There are 3 folders in this Desmos activity. Students will be opening them one at a time by clicking on the triangles and then turning the lines defined within them on and off as directed using the circles in front of the folders.}
+
+@optional: These two paper and pencil exercises guide students through thinking about how horizontal and vertical shifts are related, depending on whether a line has a positive or negative slope: 
+
+* @opt-printable-exercise{hor-vert-shift-positive.adoc} 
+* @opt-printable-exercise{hor-vert-shift-negative.adoc}
+
+=== Synthesize
+
+What did you discover about recognizing horizontal and vertical shifts from linear equations?
+
 == Additional Exercises
 
-- @opt-printable-exercise{other-forms-linear-models.adoc}
-- @opt-printable-exercise{match-graph-ps.adoc}
-- @opt-printable-exercise{match-graph-sf.adoc}
-- @opt-printable-exercise{match-graph-si.adoc}
-- @opt-printable-exercise{hor-vert-shift-positive.adoc}
-- @opt-printable-exercise{hor-vert-shift-negative.adoc}
-- @opt-printable-exercise{other-forms-linear-models.adoc}
-- @opt-printable-exercise{horizontal-shift.adoc}
-- @opt-printable-exercise{match-graph-def.adoc}
+To practice reading linear models and connecting them to graphs: 
+
+* @opt-printable-exercise{match-graph-ps.adoc}
+* @opt-printable-exercise{match-graph-sf.adoc}
+* @opt-printable-exercise{match-graph-si.adoc}. 
+* @opt-printable-exercise{match-graph-def.adoc}.
+
+For practice translating the models we've written today into other forms:
+
+* @opt-printable-exercise{other-forms-linear-models.adoc}.
