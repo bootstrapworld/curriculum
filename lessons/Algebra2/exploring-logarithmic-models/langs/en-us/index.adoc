@@ -72,13 +72,12 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 - What's the best model you came up with?
 - What kinds of lines or curves did you draw?
 
-== Transforming the x-Axis @duration{20 minutes}
+== Logarithmic Functions
 
 === Overview
-Students discover that by transforming the x-axis, they can fit a linear model to a logarithmic relationship.
+Having identified that the wealth-v-lifespan scatter plot is neither linear, quadratic, or exponential, students learn about characteristics of logarithmic functions in graphical, tabular, and function notation form.
 
 === Launch
-
 @center{@image{images/wealth-v-life-linear.png}}
 
 There definitely appears to be a relationship here, but it's not one we've seen before. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.
@@ -86,16 +85,56 @@ There definitely appears to be a relationship here, but it's not one we've seen 
 [.lesson-instruction]
 How well did our linear, quadratic, and exponential models fit this data? Is there another kind of function that starts off rising fast, but then levels off quickly?
 
+None of the kinds of functions we've seen so far exhibit the behavior we see here. In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off.
+
+The shape of this relationship is _logarithmic_, meaning it can be modeled using a **logarithmic function**.
+
+Logarithmic relationships grow very quickly at first, but then level out as @math{x} increases until they approach a horizontal line (called an _asymptote_).
+
+Logarithmic relationships are often used to help humans get a handle on quantities in nature that grow so quickly we can barely imagine them. Here's one example:
+
+Our ears can hear incredibly quiet sounds (like a pin dropping), but also process incredibly loud sounds (like a fog horn). A fire alarm, for example, is thousands of times louder than a dog barking, but it's difficult for our brains to process that much more "loudness". As a result, we _percieve_ loudness on a logarithmic scale: for us to percieve a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
+
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-descriptions.adoc}
+- Be ready to discuss your answers with the class!
+
+@teacher{Have students share their answers. Be especially attentive to students who mis-label logarithmic relationships as "exponential" -- they're on to something! Logarithmic relationships are used to "linearize" exponential ones, something students will explore in detail in @lesson-link{exploring-logarithmic-models-2}.}
+
 === Investigate
+You've identified one logarithmic pattern in a graph: it grows really fast right away, then levels off. Can you tell the difference between quadratic, exponential, and logarithmic graphs?
 
-The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-plots.adoc}
+- Be ready to discuss your answers with the class!
 
-@center{@math{f(x) = b \times log(x) + c} }
+@teacher{Have students share their answers. Encourage them to talk about where the logarithmic functions level out shoot up, asking them to identify the approximate x-value where that occurs.}
 
-Logarithmic relationships grow very quickly at first, but then level out as @math{x} increases until they approach a horizontal line, called an _asymptote_.
+Logarithmic sequences grow more slowly the farther out you get, so that it takes many more steps just to grow by the same amount. For example, it might take 10 steps to go from `1` to `2`, but then a hundred more to get to `3` and a _thousand_ more to get to `4`. In some ways, this kind of growth is the exact opposite of exponential functions, which grow by increasing factors for every step! Can you tell the difference between linear, quadratic, and exponential growth of a sequence?
 
-@optional For practice differentiating between quadratic, exponential, and logarithmic relationships, optional exercises are available for @opt-printable-exercise{classifying-tables.adoc, Tables}, @opt-printable-exercise{classifying-plots.adoc, Graphs} and @opt-printable-exercise{classifying-examples.adoc, Examples}.
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-tables.adoc}
+- Be ready to discuss your answers with the class!
 
+@teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about how much `x` needs to increase just to get a fix increase in `y`. This foreshadows the idea of _base_ for logarithmic relationships.}
+
+[.lesson-point]
+Logarithmic models have the form @math{f(x) = b \times log(x) + c}
+
+- The term @math{b} is the _base_ of the logarithm. This is the term you found for the logarithmic sequences on @printable-exercise{classifying-tables.adoc}.
+- The term @math{a} is the _scaling factor_, which amplifies or reduces the growth or decay of the function as @math{x} increases
+- The term @math{c} is something we've seen before: it's the _vertical shift_ of the function, which moves the curve up or down. (In other kinds of functions, this is often given the name @math{k})
+
+=== Synthesize
+- What _similarities_ do you see between exponential and logarithmic functions?
+- What _differences_ do you see between exponential and logarithmic functions?
+
+== Transforming the x-Axis @duration{20 minutes}
+
+=== Overview
+Students discover that by transforming the x-axis with an exponential function, they can fit a linear model to a logarithmic relationship.
+
+=== Launch
 We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
 
 [.lesson-instruction]
@@ -105,6 +144,7 @@ Complete the first section of @printable-exercise{transforming-axis.adoc}, using
 
 Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
 
+=== Investigate
 Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
 
 [.lesson-instruction]
@@ -137,9 +177,3 @@ In Desmos, the tick marks on the Desmos axis increased exponentially when we swi
 Even our best-guess logarithmic model looks like a straight line. But transforming the axes only makes things _look_ linear - the actual points haven't changed at all, and we still can't use linear regression to find the best model.
 
 - Can you think of a way we could we transform the _data_, instead of the axes?
-
-
-== Additional Exercises
-
-- @opt-printable-exercise{classifying-tables.adoc, Tables}
-- @opt-printable-exercise{classifying-plots.adoc, Graphs}
