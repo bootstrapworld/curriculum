@@ -1628,7 +1628,7 @@
                                   (string-append
                                     (expand-directives:string->string text)
                                     (create-begin-tag "span" ".ruby")
-                                    ruby
+                                    (expand-directives:string->string ruby)
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
