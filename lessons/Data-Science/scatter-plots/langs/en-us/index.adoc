@@ -55,12 +55,22 @@ Students create @vocab{scatter plots}, which are visualizations that show the re
 
 Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
+@slidebreak
+
 What we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
 
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
-Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs? The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
+@slidebreak
+
+Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}?
+
+In this case, are we suspecting that an animal’s weight can explain how long it takes to be adopted, or that how long it takes to be adopted can explain how much an animal weighs?
+
+The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
+
+@slidebreak
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `age` for x and `weeks` for y.
 
@@ -88,11 +98,15 @@ Complete @printable-exercise{pages/creating-scatterplot.adoc} to get a feel for 
 As an alternative to plotting the small table, assign a handful of rows from the _full table_ to each student and have them plot those animals on the board. This can be done collaboratively, resulting in a whole-class scatter plot!
 |===
 
+@slidebreak
+
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
 The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
 @show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+
+@slidebreak
 
 [.lesson-instruction]
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
@@ -116,7 +130,9 @@ For students who want to use line graphs, the Contract is:
 |===
 
 === Synthesize
-Have students report back on their findings from the starter file and on @printable-exercise{pages/creating-scatterplot.adoc}.
+@teacher{Have students report back on their findings from the starter file and on @printable-exercise{pages/creating-scatterplot.adoc}.}
+
+@right{@image{images/no-relationship.png, 250}}
 
 Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
 
@@ -134,14 +150,18 @@ Students apply what they've learned about scatter plots to the Data Cycle, using
 [.lesson-instruction]
 Is age the only factor that determines how long it takes for an animal to get adopted?
 
-Have students discuss.
+@teacher{Have students discuss.}
 
-Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be. Bigger dogs are not welcome in many apartments. Perhaps the weight of an animal influences the adoption time!
+Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be. Bigger dogs are not welcome in many apartments.
+
+_Perhaps the **weight** of an animal influences the adoption time!_
+
+@slidebreak
 
 [.lesson-instruction]
-Take a look at the The Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @printable-exercise{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front). Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
+Take a look at the The Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @printable-exercise{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
 
-Let's use the Data Cycle to explore whether there's a connection between weight and adoption time.
+Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 
 === Investigate
 [.lesson-instruction]
@@ -153,6 +173,12 @@ Discuss as a class:
 - Does there appear to be a pattern or trend?
 - What might be problematic about including every species in the same scatter plot of weight?
 - What follow-up questions do you have?
+
+@teacher{
+Pose these questions to the whole class, and debrief as a large group.
+}
+
+@slidebreak
 
 [.lesson-instruction]
 Write your follow-up question in the second Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
@@ -174,6 +200,14 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 
 @center{@image{images/pounds-v-weeks.png}}
 
+@slidebreak
+
+There are many ways to visualize or reason about single columns of data, but scatter plots are special because they let us see relationships between two columns at the same time!
+
+- What new questions did the Data Cycle lead you to ask? What did you find?
+
+@slidebreak
+
 [.lesson-instruction]
 * Does the number of weeks to adoption seem to go up or down as the weight increases?
 * Are there any points that “stray from the pack”? Which ones?
@@ -187,9 +221,16 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 Project the scatter plot at the front of the room, and have students come up to the plot to point out their patterns.
 |===
 
+@slidebreak
 A straight-line pattern in the cloud of points suggests a linear relationship between two columns. If we can find a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
 
-Do any data points seem unusually far away from the main cloud of points? Which animals are those? These points are called *unusual observations*. Unusual observations in a scatter plot are like outliers in a histogram, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
+@slidebreak
+
+Do any data points seem unusually far away from the main cloud of points? Which animals are those?
+
+These points are called *unusual observations*. Unusual observations in a scatter plot are like outliers in a histogram, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
+
+@slidebreak
 
 [.lesson-point]
 Unusual observations are _always_ worth thinking about!
@@ -199,17 +240,22 @@ Unusual observations are _always_ worth thinking about!
 - Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
 === Investigate
-
 Data Scientists and Statisticians use their eyes all the time. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. Until we really look at the _shape_ of the data, we aren't seeing the whole picture.
+
+@slidebreak
 
 [.lesson-point]
 It's not just about the numbers!
 
 Each of these scatter plots and accompanying set of numbers corresponds to a dataset. The patterns in the scatter plots vary wildly, but the numbers that summarize the datasets barely change at all!
 
-@image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}
+@center{@image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}}
 
-@optional this animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
+@teacher{
+This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
+}
+
+@slidebreak
 
 [.lesson-instruction]
 --
@@ -222,18 +268,35 @@ For practice, consider each of the following relationships. First think about wh
 - Are there any unusual observations?
 --
 
+@teacher{
+All of these are phrased as "how is the _explanatory variable_ related to the _response variable_"
+}
+
 === Synthesize
 
+@teacher{
 Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
+}
 
-It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans! A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
+It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans!
+
+Why does that matter?
+
+@slidebreak
+
+A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
+
+@slidebreak
 
 **It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a Contract like:
 
 `species-dot {two-colons} (r {two-colons} Row) -> Image`
 
-This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet! There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
+This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet!
 
+@teacher{
+There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
+}
 == Data Exploration Project (Scatter Plots) @duration{flexible}
 
 === Overview
@@ -261,10 +324,15 @@ Let’s connect what we know about scatter plots to your chosen dataset.
 - What question does your display answer?
 ** _Possible response: What is the relationship between column A and column B of my dataset?_
 - Write down that question in the top section of @printable-exercise{data-cycle-scatter-plot.adoc}.
+
+@slidebreak
+
 - Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for at least one other pair of quantitative columns.
 
 @teacher{Confirm that all students have created and understand how to interpret their scatter plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
+
+@slidebreak
 
 [.lesson-instruction]
 - *It’s time to add to your @starter-file{exploration-project}.*
