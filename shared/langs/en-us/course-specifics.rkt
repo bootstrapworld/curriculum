@@ -13,6 +13,7 @@
     ("data-science-codap" "Bootstrap:Data Science (in CODAP)")
     ("history-social-studies" "Bootstrap:Social Studies")
     ("hour-of-code" "Hour of Code")
+    ("early-math" "Bootstrap:Early Math")
     ("math-grade5" "Bootstrap:Grade 5 Math")
     ("math-grade6" "Bootstrap:Grade 6 Math")
     ("math-grade7" "Bootstrap:Grade 7 Math")
