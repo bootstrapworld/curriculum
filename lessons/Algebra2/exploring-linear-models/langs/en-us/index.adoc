@@ -34,7 +34,7 @@
 |
 This lesson focuses on _linear relationships_, and the math content of the lesson is primarily a review of those concepts from Algebra 1 (the third section includes topics that may be new to some students). That being said, the bulk of the new learning serves two objectives:
 
-* This lesson establishes a structure for exploring relationships in data: (1) build a model from samples, (2) fit a model, and (3) better modelling. Students will repeat this process in subsequent explorations.
+* This lesson establishes a structure for exploring relationships in data: (1) build a model from samples, (2) fit a model, and (3) better modeling. Students will repeat this process in subsequent explorations.
 * The lesson also includes some programming content, allowing students to learn necessary programming skills while practicing the math they already know.
 |===
 
@@ -45,7 +45,29 @@ After a discussion of the displays they've already encountered, students explore
 
 === Launch
 
-Think back to the animals at the shelter and our work with @lesson-link{contracts-tables-displays/pages/exploring-displays.adoc}.
+We're going to search for possible relationships within a dataset about each of the states in the US! But first, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
+
+[.lesson-instruction]
+- Open the @starter-file{alg2-states}.
+- From the File menu, select "Save a Copy", and click "Run".
+- Working in pairs or small groups, complete the _Notice and Wonder_ section on @printable-exercise{exploring-states.adoc}.
+** _Have students share back what they Notice and Wonder about the dataset._
+- Complete the rest of the worksheet.
+- What did you learn about defining rows in Pyret?
+** _Allow students to share what they discovered when completing Q8-Q10._
+** _In math, x = 4 will define a variable x to be the value 4. Any time we use x after that, we can substitute in the value of 4. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables alabama and alaska are defined as rows from the table._
+
+@teacher{Debrief with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.}
+
+[.lesson-instruction]
+* What columns in this dataset have to do with wealth?
+** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
+* What columns might be related to wealth?
+** _Examples:_ `college-or-higher`, `hs-or-higher`
+
+=== Investigate
+
+Before we dig deeper into @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
 [.lesson-instruction]
 - Would you imagine that younger animals get adopted faster than older animals? Why or why not?
@@ -62,10 +84,6 @@ But what we really want is a display that will help us search for _a relationshi
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
-What is the Contract for `scatter-plot`?
-
-@center{@show{(contract 'scatter-plot '("Table" (labels String) (explanatory String) (response String)) "Image")}}
-
 Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? 
 
 In this case...
@@ -74,8 +92,6 @@ In this case...
 - or are we suspecting that the weeks it takes for an animal to be adopted might explain how many years old it is? 
 
 The first one makes sense, and reflects our suspicion that age plays a role in adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.  
-
-It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -87,32 +103,12 @@ When modeling with functions, we typically use terms like @vocab{dependent varia
 Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in _explaining_ another when searching for a relationship.
 |===
 
-[.lesson-instruction]
-- Today we'll be looking at data from each state in the US, and searching for possible relationships within the data!
-- Open the @starter-file{alg2-states}.
-- From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete the _Notice and Wonder_ section on @printable-exercise{exploring-states.adoc}.
-** _Have students share back what they Notice and Wonder about the dataset._
-- Now complete the rest of the worksheet.
-
-=== Investigate
-
-In the `# Define some rows` section of the Definitions Area of @starter-file{alg2-states}, we see how Pyret defines values:
-
-```
-alabama = row-n(states-table, 0)
-alaska  = row-n(states-table, 1)
-```
-
-@teacher{In math, `x = 4` will define a variable `x` to be the value `4`. Any time we use `x` after that, we can substitute in the value of `4`. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as _rows_ from the table.}
-
-* What columns in this dataset have to do with wealth?
-** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
-* What columns might be related to wealth?
-** _Examples:_ `college-or-higher`, `hs-or-higher`
+It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
 
 [.lesson-instruction]
+- It's time to return to the @starter-file{alg2-states}!
 - We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+** _Come to a consensus about which states your students will explore to produce richer full-class dialogue._
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
 - _Do not go on to Part 2._ We'll be returning to that later in the lesson.
 
