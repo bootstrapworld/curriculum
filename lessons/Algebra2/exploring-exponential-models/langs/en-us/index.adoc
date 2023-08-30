@@ -31,7 +31,7 @@
 
 |===
 
-== Filtering {amp} Simpson's Paradox @duration{20 minutes}
+== Filtering {amp} Simpson's Paradox
 
 === Overview
 Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
@@ -124,7 +124,7 @@ It's extremely common for students to think that filtering a table *changes the 
 - Another example can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}.
 }
 
-== Looking for Patterns @duration{15 minutes}
+== Looking for Patterns
 
 === Overview
 
@@ -188,21 +188,36 @@ Having identified that the covid scatter plot is neither linear nor quadratic, s
 === Launch
 We can rule out linear and quadratic functions for this pattern. None of them exhibit the behavior of growing really slowly for a while, and then taking off like a rocket.
 
-- Linear functions grow by *fixed intervals*. That means they don't grow very quickly, and they grow at the same (slow) speed all the time.
-- Quadratic relationships grow by intervals that increase...by fixed amounts. That means they grow faster and faster over time, but the _rate of_ growth is fixed.
+- Linear functions grow by *fixed intervals*. That means they don't grow very quickly, and they grow at the same (slow) speed regardless of the value of x.
+- Quadratic relationships grow by intervals that increase...by fixed amounts. That means they grow faster and faster as x increases, but the _rate_ that growth is fixed.
 
 There is, however, a class of functions that grow even faster than quadratics: **exponential functions**.
+
+[.lesson-instruction]
+- Open @starter-file{alg2-exploring-exponentials} in Desmos.
+- Use Desmos to complete @printable-exercise{graphing-models.adoc}.
+
+@teacher{
+Review students answers, focusing on the following takeaways:
+
+- Vertical shift (@math{k}) means the same thing as it always does
+- Base (@math{b}) must be positive (!), and determines whether the function growth is positive (@math{b > 1}), flat (@math{b = 1}), or negative (@math{b < 1}).
+}
 
 [.lesson-point]
 --
 Exponential functions grow by equal *factors*, (multiplying by _n_ each time).
 --
 
-Exponential relationships show up all the time!
+- When @math{b > 1}, this growth is _positive_. A base of 2 means _y_ will double for every increment of _x_. This is called exponential growth.
+- When @math{b < 1}, this growth is _negative_. A base of 0.5 means _y_ will drop by half for every increment of _x_. This is called exponential decay.
+
+Exponential growth and decay show up all the time!
 
 - Most cells (e.g. - bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn in 2, then those 2 will turn into 4, then 8, then 16, and so on.
-- A tree that's on fire will likely catch neighboring trees on fire, so that the fire spreads to 2 or more trees each time. That's why forest fires can be so dangerous - even a tiny fire can grow out of control in a short time.
+- Unstable particles degrade into stable particles over time, emitting radiation as a biproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
 - Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow. If you start saving just a few dollars every month, the account will start growing so quickly that you'll have a lot of money down the road.
+
 
 [.lesson-instruction]
 - Complete @printable-exercise{classifying-descriptions.adoc}
@@ -246,7 +261,7 @@ Exponential models have the form @math{y = ab^x + k}
 
 Can you think of other examples of exponential relationships?
 
-== Fitting Exponential Models @duration{20 minutes}
+== Fitting Exponential Models
 
 === Overview
 
@@ -297,6 +312,8 @@ In data processing, opting to round for speed over preserving precision can have
 - How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
 - Is it always ok for Data Scientists to round off their numbers to speed up computation? Why or why not?
 
+////
 == Additional Exercises
 
 - @opt-printable-exercise{grading-models.adoc}
+////

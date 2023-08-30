@@ -626,6 +626,12 @@ var starterFiles = {
       "url": "https://www.desmos.com/calculator/geyx4aetop"
     }
   },
+  "alg2-exploring-exponentials": {
+    "title": "Exploring Exponentials",
+    "pyret": {
+      "url": "https://www.desmos.com/calculator/7n6g2j9zoh"
+    }
+  },
   "alg2-covid-desmos" : {
     "title" : "Modeling Covid Spread in Desmos",
     "pyret": {
@@ -663,5 +669,3 @@ var starterFiles = {
     }
   }
 }
-
-
