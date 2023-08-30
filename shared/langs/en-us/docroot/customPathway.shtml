@@ -11,11 +11,11 @@
         dl { counter-reset: term; min-height: 3in; }
         dl .list-group-item { 
             display:        flex !important; 
-            align-items:    center; 
             padding:        0; 
             margin-bottom:  15px;
             border:         none;
         }
+        dl#accessible-lesson-list .list-group-item { align-items:    center; }
         dl .list-group-item span.drag-handle { 
             width: 15px; 
             flex: 0 0 15px; 
@@ -23,6 +23,7 @@
             text-align: center; 
             opacity: 0.5; 
         }
+        dl#lesson-list .list-group-item span.drag-handle { margin-top: 30px; }
         dl .list-group-item .itemContent { flex: 1; }
         span.drag-handle:hover { cursor: grab; }
 
@@ -39,6 +40,9 @@
             content: counter(term) ".";
             margin-right: 5px;
         }
+        dd ul { max-height: 0; overflow: hidden; transition: all 1s ease-out; }
+        /*dd:hover ul { max-height: 1000px; }*/
+
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
         #accessible * { font-size: 14px; }
@@ -86,6 +90,9 @@
         function populateselectedList(parent, lessonNames, showDescription) {
             lessonNames.forEach(l => {
                 const lesson = graph[l];
+                const pagesLI = graph[l].pages.map(p => 
+                    `<li>${p}</li>`).join('\n');
+                console.log(pagesLI)
                 const html = `
                     <div class="list-group-item" data-lesson-title=${l}>
                         <span class="drag-handle">
@@ -99,7 +106,10 @@
                         </span>
                         <span class="itemContent">
                             <dt><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>
-                            <dd>${lesson.description}</dd>
+                            <dd>
+                                ${lesson.description}
+                                <ul>${pagesLI}</ul>
+                            </dd>
                         </span>
                     <div>`;
                 const template = document.createElement('template');
@@ -288,7 +298,7 @@
     </script>
 </head>
 
-<body class="narrativepage article narrative pyret" onload="init();">
+<body class="article narrative pyret" onload="init();">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div id="header">
