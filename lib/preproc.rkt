@@ -2242,21 +2242,7 @@
         (fprintf op "~%~%")))
     #:exists 'replace)
 
-  (let ([missing-glossary-items-file "pathway-missing-glossary-items.rkt.kp"])
-    (when (file-exists? missing-glossary-items-file)
-      (delete-file missing-glossary-items-file))
-
-    (unless (null? *missing-glossary-items*)
-      (call-with-output-file missing-glossary-items-file
-        (lambda (o)
-          (display "(" o) (newline o)
-          (for-each
-            (lambda (g)
-              (write g o) (newline o))
-            (reverse *missing-glossary-items*))
-          (display ")" o) (newline o)
-          )
-        #:exists 'replace)))
+  ;if we wish, we can store missing glossary items in a temp file for later inspection
 
   )
 
