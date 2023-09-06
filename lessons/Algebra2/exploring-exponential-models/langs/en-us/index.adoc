@@ -81,14 +81,14 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox, and you can @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, learn more at Wikipedia}.
 
-**For Example:** School A and B both have basketball teams. The 6 foot kids on School A's team are better than the 6 foot kids on School B's team. The 5' 10" kids from School A are also better than 5' 10" kids from School B. In fact, at every height, the kids from School A are better than the kids from School B. __But School B's team is better than School A.__
+**For Example:** School A and B both have basketball teams. The 6 foot kids on School A's team are better than the 6 foot kids on School B's team. The 5'10" kids from School A are also better than 5' 10" kids from School B. In fact, at every height, the kids from School A are better than the kids from School B. __But School B's team is better than School A.__
 
 * How is this possible?
 ** School B has __more tall kids__ than School A!
 
 [.lesson-instruction]
 - We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
-- Working in pairs or small groups, complete the rest of of @printable-exercise{exploring-covid.adoc}.
+- Working in pairs or small groups, complete the rest of @printable-exercise{exploring-covid.adoc}.
 
 @teacher{
 The term "Grouped Samples" is used instead of "Random Samples". Grouped samples are non-random by design!
@@ -114,15 +114,16 @@ Create helper functions to filter at least three other states, then use them to 
 
 === Common Misconceptions
 
-It's extremely common for students to think that filtering a table *changes the original table*. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
+It's extremely common for students to think that filtering a table _changes the original table_. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
 
 === Synthesize
 - In what other situations would it be useful to filter a dataset?
 - Can you think of other examples where Simpson's Paradox might arise?
 
 @teacher{
-- When comparing one country's schools to another's, a researcher finds that poor students in country A outperform poor students in country B. They also find that the _rich_ students in A outperform their wealthy peers in B. In fact, for every income level, A outperforms B! But if B has _less child poverty overall_, it will still outperform A.
-- Another example can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}.
+
+** _When comparing one country's schools to another's, a researcher finds that poor students in country A outperform poor students in country B. They also find that the rich students in A outperform their wealthy peers in B. In fact, for every income level, A outperforms B! But if B has less child poverty overall, it will still outperform A._
+** _Another example can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}._
 }
 
 == Looking for Patterns
