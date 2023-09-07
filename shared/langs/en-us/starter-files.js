@@ -667,5 +667,11 @@ var starterFiles = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
     }
+  },
+  "alg2-wealth-transformed-desmos": {
+    "title": "Wealth v Health - Transformed (Desmos)",
+    "pyret": {
+      "url": "https://www.desmos.com/calculator/hgp5a9n7it"
+    }
   }
 }
