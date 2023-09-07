@@ -24,25 +24,27 @@ For this page, you'll need to load @starter-file{alg2-wealth-transformed-desmos}
 
 == Transforming the Data
 
-**Open the `Wealth vs. Health` folder by clicking on the triangle ([.desmosbutton]#{caret}#)**
+- **Find the `Wealth vs. Health` folder, which is open at the top of the expression list**
+- This is the same table we've seen before, and the "points" circle ([.desmosbutton]#{points}#) shows us that these are the dots are "on" and visible.
+- Underneath the `Wealth vs. Health` folder, you'll see a *function* @math{g(x)} and a *list* @math{y_2} defined to be the same as @math{y_1}.
+- **Open the `Log(Wealth) vs. Health` folder by clicking on the triangle ([.desmosbutton]#{caret}#)**
 
-- This first table is the same table we've seen before. Notice that the "points" circle ([.desmosbutton]#{points}#) is empty, indicating that these dots are not being displayed.
-- Underneath the `Wealth vs. Health` folder, you'll see a function @math{g(x)} and a list @math{y_2} defined.
-- Open the `Log(Wealth) vs. Health` folder by clicking on the triangle ([.desmosbutton]#{caret}#)
-- You'll see a new table here. Notice that the "points" circle ([.desmosbutton]#{points}#) is filled, indicating that the dots on the scatter plot come from this second table. 
-
-@n What is the shape of the point cloud? Is it linear? Quadratic? Exponential? @fitb{}{@ifsoln{It's linear!}}
-
-@n Compare the two tables. What do you *Notice*? @fitb{}{} +
+@n Compare the two tables. What do you *Notice*? @fitb{}{@ifsoln{the 2nd columns are the same, but the 1st columns are really different}} +
 @fitb{}{}
 
 @n What do you *Wonder*? @fitb{}{} +
 @fitb{}{}
 
-@n Our new @math{y_2} is identical to @math{y_1}, so the second column (`median-lifespan`) is unchanged. But what is happening in the first column? @fitb{}{} +
-@fitb{}{@ifsoln{We are using the function @math{g(x)} to take the ln of `pc-gdp`}}
+@n Why is the second column of both tables the same? @fitb{}{@ifsoln{we defined @math{y_2} to be the same as @math{y_1}}}
+
+@n How is the first column of this new table different from the original? @fitb{}{} +
+@fitb{}{@ifsoln{We are using the function @math{g(x)} to take the log of `pc-gdp`}}
 
 @vspace{1ex}
+
+**Turn the points for the first table OFF, then turn the points for our new table ON.** Our log transformation is so drastic that it looks like all the black datapoints are smashed against the y-axis!
+
+@n *Rescale* the graph ([.desmosbutton]#{magnifying}#) to see the cloud. What is the shape of this point cloud? Is it linear? Quadratic? Exponential? @fitb{}{@ifsoln{It's linear!}}
 
 @n Move the sliders for @math{m} and @math{b} to create the best-fitting linear model you can find, and write it below.
 
@@ -52,9 +54,9 @@ For this page, you'll need to load @starter-file{alg2-wealth-transformed-desmos}
 @math{f(x) = }@fitbruby{10em}{}{slope (m)}@math{x + }@fitbruby{10em}{}{y-intercept / vertical shift (b)}
 |===
 
-@n Why did transforming the *x-values* make our data look linear? @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
+@n Why do you think transforming the *x-values* make our data look linear? @fitb{}{@ifsoln{The amount of extra income needed}} +
+@fitb{}{@ifsoln{to create an extra year of predicted lifespan increased exponentially. By taking the log of that income,}} +
+@fitb{}{we are "cancelling out" that exponential growth and making it linear.}
 
 == Transforming Axes vs. Transforming Data
 
@@ -62,18 +64,18 @@ For this page, you'll need to load @starter-file{alg2-wealth-transformed-desmos}
 
 [cols="^1a,^1a", grid="none", frame="none", stripes="none"]
 |===
-| @fitbruby{15em}{}{slope (m)}
-| @fitbruby{15em}{}{vertical shift (c)}
+| @fitbruby{15em}{@ifsoln{~12 to ~16}}{slope (m)}
+| @fitbruby{15em}{@ifsoln{~8 to ~25}}{vertical shift (c)}
 |===
 
-@n Look back at the values you wrote for growth factor and vertical shift on question 3 of @printable-exercise{exploring-logarithmic-models/pages/transforming-axis.adoc} and copy them here:
+@n Look back at the values you wrote for growth factor and vertical shift on question 8 of @printable-exercise{exploring-logarithmic-models/pages/transforming-axis.adoc} and copy them here:
 
 [cols="^1a,^1a", grid="none", frame="none", stripes="none"]
 |===
-| @fitbruby{15em}{}{growth factor (b)}
-| @fitbruby{15em}{}{vertical shift (c)}
+| @fitbruby{15em}{@ifsoln{~12 to ~16}}{growth factor (b)}
+| @fitbruby{15em}{@ifsoln{~8 to ~25}}{vertical shift (c)}
 |===
 
-@n Are they similar? @fitb{5em}{} Why or why not? @fitb{}{} +
-@fitb{}{} +
+@n Are they similar? @fitb{5em}{} Why or why not? @fitb{}{@ifsoln{they are similar because we changed the _kind_ of growth from logarithmic to linear, but not the _amount_. }} +
+@fitb{}{@ifsoln{Instead increasing logarithmically by @math{B}, our new function increases _linearly_ by @math{B}}} +
 @fitb{}{}

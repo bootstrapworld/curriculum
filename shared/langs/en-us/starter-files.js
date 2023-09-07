@@ -671,7 +671,7 @@ var starterFiles = {
   "alg2-wealth-transformed-desmos": {
     "title": "Wealth v Health - Transformed (Desmos)",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/hgp5a9n7it"
+      "url": "https://www.desmos.com/calculator/einx8sg3fq"
     }
   }
 }
