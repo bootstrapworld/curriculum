@@ -71,7 +71,7 @@ Discuss in groups or pairs, and prepare to share out to the class:
 - If we fit a model to this data, would it have a high @math{r}-value?
 --
 
-With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not true at all.
+With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not what we see when we group all the together!
 
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations._
 
@@ -81,28 +81,31 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox, and you can @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, learn more at Wikipedia}.
 
-**For Example:** A waterpark opens with four new rides, and collects information on who goes down each one:
+**For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at the bookings to partner cities:
 
-[options="header"]
+[options="header", width="75%"]
 |===
-| Ride  		| Boys		| Girls
-| Avalanche		| 10		|  6
-| Bioshock		| 12		|  7
-| Candy Flume	|  2		| 20
-| Dynamite Dive | 14		|  9
-| *Total*		| 38		| 42
+| City  		| Tourists 	| % 35 and over	| % Under 35
+| Rome			| 428		| 42%			|  58%
+| Istanbul		| 395		| 48%			|  52%
+| Marrakesh		| 158		| 35%			|  65%
+| Punta Cana 	| 219		| 31%			|  69%
+| Boca Raton	| 639		| 67%			|  33%
 |===
-
-
-The girls went down Ride C more times than the boys, and the boys went down Rides A, B _and_ D more than the girls. But adding all the rides together, the girls had _far_ more than the boys.
-
-* How is this possible?
-** Ride B had a long line, and the others had short lines!
-
-If we grouped the data by
 
 [.lesson-instruction]
-- We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
+In pairs or small groups: which group do you think the agency serves more? Why?
+
+@teacher{Have students share their thoughts}
+
+**It turns out that the agency is _split_: almost exactly half their clients fall into each category!**
+
+* How is this possible?
+** We can see a clear trend when comparing within cities: with Boca Raton as the outlier, the under-35 crowd dominates _every other city!_
+** But when aggregating all of the data together, _the number of tourists in each city matters_. Boca Raton was our outlier, but it also makes up the largest portion of all tourists!
+
+[.lesson-instruction]
+- We need to break the covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
 - Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
 
 @teacher{
