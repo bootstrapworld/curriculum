@@ -629,7 +629,7 @@ var starterFiles = {
   "alg2-exploring-exponentials": {
     "title": "Exploring Exponentials",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/7n6g2j9zoh"
+      "url": "https://www.desmos.com/calculator/wk3m64ylys"
     }
   },
   "alg2-covid-desmos" : {
