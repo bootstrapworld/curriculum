@@ -45,8 +45,8 @@ But Data Scientists who were looking at the data knew differently. Let's take a 
 
 [.lesson-instruction]
 - Open the @starter-file{alg2-covid}. This data looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
-- From the File menu, select "Save a Copy", and click "Run"
-- Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}
+- From the File menu, select "Save a Copy", and click "Run."
+- Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
 
 @teacher{This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England.
 }
@@ -71,7 +71,7 @@ Discuss in groups or pairs, and prepare to share out to the class:
 - If we fit a model to this data, would it have a high @math{r}-value?
 --
 
-With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not what we see when we group all the together!
+With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not what we see when we group all the data together!
 
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations._
 
@@ -86,47 +86,35 @@ Normally we think that "more data means more power!", and that the more data we 
 [cols="2a,^1a,^1a,^1a", options="header", width="80%"]
 |===
 | City  		| # Tourists 	| % 35 and over	| % Under 35
-| Marrakesh		| 158			| 35%			|  65%
-| Istanbul		| 195			| 18%			|  82%
-| Punta Cana 	| 219			| 31%			|  69%
-| Goa			| 428			| 42%			|  58%
-| Sarasota		| 639			| 67%			|  33%
+| Marrakesh		| 160			| 30%			|  70%
+| Istanbul		| 200			| 20%			|  80%
+| Punta Cana 	| 204			| 25%			|  75%
+| Goa			| 450			| 46%			|  52%
+| Sarasota		| 676			| 75%			|  25%
 |===
 
+// in the slide deck, we should show stuents the table without the Tourists column... then advance the slide, and include the Tourist column //
 
 [.lesson-instruction]
-In pairs or small groups: which group do you think the agency serves more? Why?
+Which group do you think the agency serves more? Why?
 
-@teacher{Have students share their thoughts - most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+@teacher{Have discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
 
 **Most of the agency's clients are 35 and over!**
 
-* How is this possible?
-** We can see a clear trend when _comparing_ within cities: with Sarasota as the outlier, the under-35 crowd dominates _every other city!_
-** But when aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
+How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
 
-This is the same phenomenon we're seeing in our Covid data: a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together.
+We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together.
 
 [.lesson-instruction]
-- We need to break the covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
+- We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
+- How is a grouped sample different from a random sample?
+** _A grouped sample is a non-random subset chosen from a larger set. Grouped samples are non-random by design!_
 - Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
+- You just used the `filter` function. How does the `filter` function work?
+** __The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
 
-@teacher{
-The term "Grouped Samples" is used instead of "Random Samples". Grouped samples are non-random by design!
-}
-
-How does the `filter` function work?
-
-__The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.__
-
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
-@span{.title}{More Practice with Filtering}
-
-While filtering is introduced in this lesson, the primary goal is about exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.
-|===
+@teacher{@optional While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
 
 
 === Common Misconceptions
@@ -149,7 +137,7 @@ Students explore their newly-filtered `MA-table` dataset, trying to fit differen
 === Launch
 
 [.lesson-instruction]
-- Open @starter-file{alg2-covid}.
+- Open the @starter-file{alg2-covid}.
 - Make a scatter-plot showing the Covid infection rate for Massachusetts.
 - What kind of model do you think would fit this best?
 
@@ -175,21 +163,19 @@ Complete @printable-exercise{linear-models.adoc}, using @starter-file{alg2-covid
 Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
 
 [.lesson-instruction]
-Class discussion: Are linear models a good fit for this data? Why or why not?
+Are linear models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
 @right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty good @math{R^2}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 [.lesson-instruction]
-Complete @printable-exercise{quadratic-models.adoc}, using @starter-file{alg2-covid-desmos-q}.
-
-Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
-
-[.lesson-instruction]
-Class discussion: Are quadratic models a good fit for this data? Why or why not?
+- Complete @printable-exercise{quadratic-models.adoc}, using @starter-file{alg2-covid-desmos-q}.
+- Are quadratic models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
+
+Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
 
 @right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty good @math{R^2} value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
@@ -205,25 +191,61 @@ Class discussion: Are quadratic models a good fit for this data? Why or why not?
 Having identified that the covid scatter plot is neither linear nor quadratic, students learn about characteristics of exponential functions in graphical, tabular, and function notation form.
 
 === Launch
+
 Let's review what we know about the behavior of the models we've seen so far:
 
-@right{@image{images/difference-table-linear.png}} Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increased by 1, we saw that the y-value increased by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
+[cols="15a,^.^5a", frame="none", stripes="none"]
+|===
 
-@clear
+|
+Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
 
-@right{@image{images/difference-table-quadratic.png}} Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! **If the "growth of the growth" is constant, the relationship is quadratic.**
+|
 
-@clear
+@image{images/difference-table-linear.png}
 
-There is, however, a class of functions that grow even faster than quadratics: @vocab{exponential functions}.
+|
+Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! **If the "growth of the growth" is constant, the relationship is quadratic.**
 
-@right{@image{images/difference-table-exponential-1.png}} If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)...we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+|
 
-@clear
+@image{images/difference-table-quadratic.png}
 
-@right{@image{images/difference-table-exponential-2.png}} Exponential functions grow so rapidly that looking for "what is added to y" isn't helpful at all. The only way to talk about their growth is to stop asking "what is added", and start noticing _"what is multiplied by y"_. In this case, we can see that the y-values are doubling each time!
 
-@clear
+|===
+
+
+
+There is, however, a class of functions that grows even faster than quadratics: @vocab{exponential functions}.
+
+
+[cols="15a,^.^5a", frame="none", stripes="none"]
+|===
+
+|
+If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+
+|
+@image{images/difference-table-exponential-1.png}
+
+|
+Exponential functions grow so rapidly that looking for "what is added to y" isn't helpful at all. The only way to talk about their growth is to stop asking "what is added", and start noticing _"what is multiplied by y"_.
+
+*In this case, we can see that the y-values are doubling each time!*
+
+|
+@image{images/difference-table-exponential-2.png}
+|===
+
+
+[.lesson-instruction]
+- Complete @printable-exercise{classifying-tables.adoc}
+- Be ready to discuss your answers with the class!
+
+@teacher{Have students share their answers. For exponential functions, it's especially important to have students discuss whether the function is doubling, tripling, etc. This foreshadows the idea of a _growth factor_ for exponential relationships.}
+
+=== Investigate
+
 
 [.lesson-instruction]
 - Open @starter-file{alg2-exploring-exponentials} in Desmos.
@@ -257,7 +279,6 @@ Exponential growth and decay show up all the time!
 
 @teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before?}
 
-=== Investigate
 You've identified one exponential pattern in a graph: it grows really slowly for a while, then explodes sharply upward. Can you tell the difference between linear, quadratic, and exponential graphs?
 
 [.lesson-instruction]
@@ -268,11 +289,6 @@ You've identified one exponential pattern in a graph: it grows really slowly for
 
 Since exponential sequences grow by equal factors, the rate of growth gets bigger and bigger by equal leaps (e.g. - doubling each time, tripling each time, etc). Can you tell the difference between linear, quadratic, and exponential growth of a sequence?
 
-[.lesson-instruction]
-- Complete @printable-exercise{classifying-tables.adoc}
-- Be ready to discuss your answers with the class!
-
-@teacher{Have students share their answers. For exponential functions, it's especially important to have students discuss whether the function is doubling, tripling, etc. This foreshadows the idea of a _growth factor_ for exponential relationships.}
 
 [.lesson-point]
 Exponential models have the form @math{y = ab^x + k}
