@@ -189,9 +189,8 @@ This makes sense: the points on the scatter plot are somewhere between being rea
 
 @image{images/lr-explained.png, 400}
 
-- If an animal is 5 years old, how long would our line of best fit predict they would wait to be adopted? What if they were a newborn, just 0 years old?
-- Make another lr-plot, but this time **use the animals' weight as our explanatory variable instead of their age.**
-- If an animal weighs 21 pounds, how long would our line of best fit predict they would wait to be adopted? What if they weighed 0.1 pounds?
+Complete @printable-exercise{lr-plot-explore.adoc}!
+
 ---
 {layout="Investigate"}
 # Linear Regression in Pyret
