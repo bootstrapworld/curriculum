@@ -32,7 +32,7 @@
 
 |===
 
-== Filtering {amp} Simpson's Paradox
+== Filtering {amp} Simpson's Paradox @duration{45 minutes}
 
 === Overview
 Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
@@ -71,7 +71,7 @@ Discuss in groups or pairs, and prepare to share out to the class:
 - If we fit a model to this data, would it have a high @math{r}-value?
 --
 
-With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not true at all.
+With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not what we see when we group all the together!
 
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations._
 
@@ -81,13 +81,34 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox, and you can @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, learn more at Wikipedia}.
 
-**For Example:** School A and B both have basketball teams. The 6 foot kids on School A's team are better than the 6 foot kids on School B's team. The 5'10" kids from School A are also better than 5' 10" kids from School B. In fact, at every height, the kids from School A are better than the kids from School B. __But School B's team is better than School A.__
+**For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
 
-* How is this possible?
-** School B has __more tall kids__ than School A!
+[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
+|===
+| City  		| # Tourists 	| % 35 and over	| % Under 35
+| Marrakesh		| 158			| 35%			|  65%
+| Istanbul		| 195			| 18%			|  82%
+| Punta Cana 	| 219			| 31%			|  69%
+| Goa			| 428			| 42%			|  58%
+| Sarasota		| 639			| 67%			|  33%
+|===
+
 
 [.lesson-instruction]
-- We need to break this dataset up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
+In pairs or small groups: which group do you think the agency serves more? Why?
+
+@teacher{Have students share their thoughts - most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+
+**Most of the agency's clients are 35 and over!**
+
+* How is this possible?
+** We can see a clear trend when _comparing_ within cities: with Sarasota as the outlier, the under-35 crowd dominates _every other city!_
+** But when aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
+
+This is the same phenomenon we're seeing in our Covid data: a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together.
+
+[.lesson-instruction]
+- We need to break the covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
 - Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
 
 @teacher{
@@ -119,7 +140,7 @@ It's extremely common for students to think that filtering a table _changes the 
 ** _Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}._
 
 
-== Looking for Patterns
+== Looking for Patterns	@duration{45 minutes}
 
 === Overview
 
@@ -158,7 +179,7 @@ Class discussion: Are linear models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak, almost all of the points bulge out below our line of best fit. If we make the line fit the bulge, all the points fall above it. We always have either too many points _below_ the line in the middle or to many point _above_ the line at the ends. **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty good @math{R^2}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 [.lesson-instruction]
 Complete @printable-exercise{quadratic-models.adoc}, using @starter-file{alg2-covid-desmos-q}.
@@ -170,7 +191,7 @@ Class discussion: Are quadratic models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. But they still don't have the explosive growth we need to model this data, which starts out incredibly slow and then suddenly takes off like a rocket.
+@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty good @math{R^2} value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
 === Synthesize
 
@@ -178,18 +199,31 @@ Class discussion: Are quadratic models a good fit for this data? Why or why not?
 - Do you think this data shows a quadratic relationship? Why or why not?
 - Do you think this data shows some other kind of relationship? Why or why not?
 
-== Exponential Functions
+== Exponential Functions @duration{55 minutes}
 
 === Overview
 Having identified that the covid scatter plot is neither linear nor quadratic, students learn about characteristics of exponential functions in graphical, tabular, and function notation form.
 
 === Launch
-We can rule out linear and quadratic functions for this pattern. None of them exhibit the behavior of growing really slowly for a while, and then taking off like a rocket.
+Let's review what we know about the behavior of the models we've seen so far:
 
-- Linear functions grow by fixed intervals. That means they don't grow very quickly, and they grow at the same (slow) speed regardless of the value of x.
-- Quadratic relationships grow by intervals that increase...by fixed amounts. That means they grow faster and faster as x increases, but the _rate_ that growth is fixed.
+@right{@image{images/difference-table-linear.png}} Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increased by 1, we saw that the y-value increased by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
+
+@clear
+
+@right{@image{images/difference-table-quadratic.png}} Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! **If the "growth of the growth" is constant, the relationship is quadratic.**
+
+@clear
 
 There is, however, a class of functions that grow even faster than quadratics: @vocab{exponential functions}.
+
+@right{@image{images/difference-table-exponential-1.png}} If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)...we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+
+@clear
+
+@right{@image{images/difference-table-exponential-2.png}} Exponential functions grow so rapidly that looking for "what is added to y" isn't helpful at all. The only way to talk about their growth is to stop asking "what is added", and start noticing _"what is multiplied by y"_. In this case, we can see that the y-values are doubling each time!
+
+@clear
 
 [.lesson-instruction]
 - Open @starter-file{alg2-exploring-exponentials} in Desmos.
@@ -259,7 +293,7 @@ Exponential models have the form @math{y = ab^x + k}
 
 Can you think of other examples of exponential relationships?
 
-== Fitting Exponential Models
+== Fitting Exponential Models 	@duration{30 minutes}
 
 === Overview
 
@@ -286,7 +320,7 @@ Now that you're familiar with exponential functions, let's use them to model thi
 === Investigate
 
 [.lesson-instruction]
-- Complete @printable-exercise{exponential-models.adoc}.
+- Open @starter-file{alg2-covid-desmos-e}, and complete @printable-exercise{exponential-models.adoc}.
 - Class discussion: Are exponential models a good fit for this data? Why or why not?
 
 @star @optional build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
