@@ -205,13 +205,13 @@ As a class: why do these coefficients match?
 
 We transformed the `pc-gdp` column in three steps:
 
-1. We defined a transformation function - @math{g(x)} - which produces the log of whatever it's given (the `pc-gdp` column).
+1. We defined a transformation function: @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp` column).
 2. We defined a new column to use as our x-values, populating it by applying the transformation to each of our original x-values.
 3. We displayed these transformed datapoints as a scatterplot.
 
 **It's easy to do the same thing in Pyret**
 
-In the @starter-file{alg2-countries}, find the definition of `g(r)`.
+Find the definition of `g(r)` in your copy of the @starter-file{alg2-countries}.
 
 * What does this function do?
 ** `g` produces the log of the `pc-gdp` column, which it gets from the country it's given
@@ -224,16 +224,16 @@ At the end of the program, you'll find this code:
 
 @show{(code '(define countries-transformed (build-column countries-table "log(pc-gdp)" g)))}
 
-Click "Run", and evaluare `countries-transformed` in the Interactions Area on the right.
+Click "Run", and evaluate `countries-transformed` in the Interactions Area on the right.
 
 * What did you get back?
 ** A Table
 * What is different about this Table?
-** It has an extra column called "log(pc-gdp)"
+** It has an extra column called "log(pc-gdp)".
 * Where did the column on the right come from?
-** It was created by `build-column`, which named it `"log(pc-gdp)` and filled it using the function `g`
+** It was created by `build-column`, which named it `"log(pc-gdp)` and filled it using the function `g`.
 * What does that line of code at the end of the program do?
-** It defines a new table called `countries-transformed`, which is the result of building our new column
+** It defines a new table called `countries-transformed`, which is the result of building our new column.
 
 
 @right{@image{images/wealth-v-life-transformed-linear.png, 550}}
