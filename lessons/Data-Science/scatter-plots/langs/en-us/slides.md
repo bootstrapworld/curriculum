@@ -136,7 +136,7 @@ Pose these questions to the whole class, and debrief as a large group.
 {layout="Investigate-DN"}
 # The Data Cycle
 
-Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot.adoc}, and complete the Data Cycle for your new question.
+Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
 
 ---
 {layout="Synthesize"}
