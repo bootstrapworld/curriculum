@@ -197,20 +197,13 @@ Let's review what we know about the behavior of the models we've seen so far:
 [cols="15a,^.^5a", frame="none", stripes="none"]
 |===
 
-|
-Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
+| Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
 
-|
+| @image{images/difference-table-linear.png}
 
-@image{images/difference-table-linear.png}
+| Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! **If the "growth of the growth" is constant, the relationship is quadratic.**
 
-|
-Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! **If the "growth of the growth" is constant, the relationship is quadratic.**
-
-|
-
-@image{images/difference-table-quadratic.png}
-
+| @image{images/difference-table-quadratic.png}
 
 |===
 
@@ -222,14 +215,11 @@ There is, however, a class of functions that grows even faster than quadratics: 
 [cols="15a,^.^5a", frame="none", stripes="none"]
 |===
 
-|
-If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+| If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
 
-|
-@image{images/difference-table-exponential-1.png}
+| @image{images/difference-table-exponential-1.png}
 
-|
-Exponential functions grow so rapidly that looking for "what is added to y" isn't helpful at all. The only way to talk about their growth is to stop asking "what is added", and start noticing _"what is multiplied by y"_.
+| Exponential functions grow so rapidly that looking for "what is added to y" isn't helpful at all. The only way to talk about their growth is to stop asking "what is added", and start noticing _"what is multiplied by y"_.
 
 *In this case, we can see that the y-values are doubling each time!*
 
@@ -242,72 +232,89 @@ Exponential functions grow so rapidly that looking for "what is added to y" isn'
 - Complete @printable-exercise{classifying-tables.adoc}
 - Be ready to discuss your answers with the class!
 
-@teacher{Have students share their answers. For exponential functions, it's especially important to have students discuss whether the function is doubling, tripling, etc. This foreshadows the idea of a _growth factor_ for exponential relationships.}
+Exponential functions, like the ones you identified on tables 2 and 6, can be written in the form @math{y = ab^x}.
+
+When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! Growth factor is the rate at which an exponential function is increasing or decreasing. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the _growth factor_.
+
+When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_.
 
 === Investigate
 
+Sometimes, we write exponential functions like this: @math{y=ab^x + k}.
+
+The term @math{k} (something you've actually seen before!) is easier to think about when we're looking at graphs, rather than tables. In fact, exponential graphs can help us appreciate the impact of all three variables - growth factor, initial value, and vertical shift.
 
 [.lesson-instruction]
 - Open @starter-file{alg2-exploring-exponentials} in Desmos.
 - Use Desmos to complete @printable-exercise{graphing-models.adoc}.
 
 @teacher{
-Review students answers, focusing on the following takeaways:
+Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
 
-- Vertical shift (@math{k}) refers to the point where the line levels out. Adjusting this value shifts the curve up and down.
-- Base (@math{b}) must be positive (!), and determines whether the function growth is positive (@math{b > 1}), flat (@math{b = 1}), or negative (@math{b < 1}).
-}
+[.lesson-instruction]
+- Graphically, what does @math{k} tell us about an exponential function?
+** _Vertical shift (@math{k}) refers to the point where the line levels out. Adjusting this value shifts the curve up and down._
+- Graphically, what does @math{b} tell us about an exponential function?
+** _Base (@math{b}) determines whether the function growth is positive (@math{b > 1}), flat (@math{b = 1}), or negative (@math{b < 1}). See table below._
+- @math{b} must always be positive. Why is that so?
+- Graphically, what does @math{a} tell us about an exponential function?
+** _@math{a} is the function's value when @math{x=0}. If the function has not been shifted vertically, @math{a} is the y-intercept._
 
-[.lesson-point]
---
-Exponential functions grow by equal *factors*, (multiplying by _n_ each time).
---
+[cols="^.^3a,^.^3a,^.^3a", stripes="none", options="header"]
+|===
 
-- When @math{b > 1}, this growth is _positive_. A base of 2 means _y_ will double for every increment of _x_. This is called @vocab{exponential growth}.
-- When @math{b < 1}, this growth is _negative_. A base of 0.5 means _y_ will drop by half for every increment of _x_. This is called @vocab{exponential decay}.
+| Exponential Growth
+
+| Flat
+
+| Exponential Decay
+
+| @image{images/growth.png, 150}
+| @image{images/flat.png, 150}
+| @image{images/decay.png, 150}
+
+| @math{b > 1}
+
+A base of @math{2} means @math{y} will double for every increment of @math{x}
+
+| @math{b = 1}
+
+A base if @math{1} means that @math{y} will remain constant.
+
+| @math{b < 1}
+
+A base of @math{0.5} means @math{y} will drop by half for every increment of @math{x}.
+
+|===
+
 
 Exponential growth and decay show up all the time!
 
-- Most cells (e.g. - bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn into 2, then those 2 will turn into 4, then 8, then 16, and so on.
+- Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn into 2, then those 2 will turn into 4, then 8, then 16, and so on.
 - Unstable particles degrade into stable particles over time, emitting radiation as a biproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
 - Money in a savings account grows by a certain percentage each year, meaning every year there's that much more money to grow. If you start saving just a few dollars every month, the account will start growing so quickly that you'll have a lot of money down the road.
 
+@teacher{In the following two activities, students will decide whether various scenarios and definitions represent quadratic, linear, or exponential functions. They will also have opportunities to think about and apply their knowledge of growth, decay, initial value, and growth factor.}
 
 [.lesson-instruction]
 - Complete @printable-exercise{classifying-descriptions.adoc}
-- Be ready to discuss your answers with the class!
+- What new insights did you gain about exponential functions by thinking about them in real-world scenarios?
 
-@teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before?}
-
-You've identified one exponential pattern in a graph: it grows really slowly for a while, then explodes sharply upward. Can you tell the difference between linear, quadratic, and exponential graphs?
-
-[.lesson-instruction]
-- Complete @printable-exercise{classifying-plots.adoc}
-- Be ready to discuss your answers with the class!
-
-@teacher{Have students share their answers. Encourage them to talk about where the exponential functions suddenly shoot up, asking them to identify the approximate x-value where that occurs.}
-
-Since exponential sequences grow by equal factors, the rate of growth gets bigger and bigger by equal leaps (e.g. - doubling each time, tripling each time, etc). Can you tell the difference between linear, quadratic, and exponential growth of a sequence?
-
-
-[.lesson-point]
-Exponential models have the form @math{y = ab^x + k}
-
-- The term @math{b} specifies the _growth factor_ for the function. This is the term you found for the exponential sequences on @printable-exercise{classifying-tables.adoc}.
-
-- The term @math{a} is the _initial value_, which is the value of the function when @math{x=0}. Looking back at the the exponential relationships on @printable-exercise{classifying-tables.adoc}, what was the initial value - @math{a} - for each one?
-
-- The term @math{k} is something we've seen before: it's the _vertical shift_ of the function, which moves the curve up or down.
+@teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before? }
 
 [.lesson-instruction]
 - Complete @printable-exercise{classifying-defs.adoc}
-- Be ready to discuss your answers with the class!
+- What strategies did you use to decide if a function was linear, quadratic, or exponential?
+- What new insights did you gain about exponential functions by thinking about their definitions?
 
-@teacher{Have students share their answers. Pay special attention to their use of vocabulary when describing the initial value and the growth factor.}
+@teacher{As students discuss their answers, pay special attention to their use of vocabulary when describing the initial value and the growth factor.}
 
 === Synthesize
 
-Can you think of other examples of exponential relationships?
+- You looked at several different representations of exponential functions: tables, graphs, descriptions, and equations.
+- Which representation was the most useful for you? Why?
+- Which representation was the least useful for you? Why?
+
 
 == Fitting Exponential Models 	@duration{30 minutes}
 
@@ -316,28 +323,30 @@ Can you think of other examples of exponential relationships?
 Students extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
 
 === Launch
-Now that you're familiar with exponential functions, let's use them to model this covid data!
+
+Now that you're familiar with exponential functions, let's use them to model this Covid data!
+
+@teacher{Direct students to create a scatter plot showing the change in positive Covid cases for `MA-Table`. Then, support them in making educated guesses about the values of @math{a}, @math{b}, and @math{k}. Students should have respond to the disucssion questions below in pairs or small groups.}
 
 [.lesson-instruction]
 --
-- Make a scatter plot showing the change in positive covid cases for `MA-Table`
-- Discuss in pairs or groups: Can we make any educated guesses about the values of @math{a}, @math{b} and @math{k}?
+- Does your scatter plot show exponential growth or exponential decay?
+** _The scatter plot shows growth. The "hockey stick" is pointing up, meaning that positive cases are increasing._
+- Can we make any conclusions about the value of @math{b}? Explain.
+** _Because we see exponential growth, we know that @math{b} must be greater than one._
+- Can we make any conclusions about the value of @math{a}? Explain.
+** _@math{a} must be positive, because the line is consistently above @math{k}._
+- Can we make any conclusions about the value of @math{k}?
 --
 
-* Is this showing exponential growth or decay?
-** Growth, because the "hockey stick" is pointing up (positive cases is _increasing_)
-* What does that tell us about @math{b}?
-** It has to be greater than 1
-* Is our value of @math{a} positive or negative?
-** Positive
-* How do you know?
-** The line is consistently above @math{k}
 
 === Investigate
 
+@teacher{In the next activity, students use Desmos to find promising exponential models, and then fit the model programmatically in Pyret!}
+
 [.lesson-instruction]
 - Open @starter-file{alg2-covid-desmos-e}, and complete @printable-exercise{exponential-models.adoc}.
-- Class discussion: Are exponential models a good fit for this data? Why or why not?
+- Is an exponential model a good fit for this data? Why or why not?
 
 @star @optional build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
 
