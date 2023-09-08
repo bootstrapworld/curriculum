@@ -32,7 +32,7 @@
 
 |===
 
-== Filtering {amp} Simpson's Paradox
+== Filtering {amp} Simpson's Paradox @duration{45 minutes}
 
 === Overview
 Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
@@ -81,29 +81,31 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox, and you can @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, learn more at Wikipedia}.
 
-**For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at the bookings to partner cities:
+**For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
 
 [cols="2a,^1a,^1a,^1a", options="header", width="80%"]
 |===
 | City  		| # Tourists 	| % 35 and over	| % Under 35
-| Rome			| 428		| 42%			|  58%
-| Istanbul		| 395		| 48%			|  52%
-| Marrakesh		| 158		| 35%			|  65%
-| Punta Cana 	| 219		| 31%			|  69%
-| Boca Raton	| 639		| 67%			|  33%
+| Marrakesh		| 158			| 35%			|  65%
+| Istanbul		| 195			| 18%			|  82%
+| Punta Cana 	| 219			| 31%			|  69%
+| Goa			| 428			| 42%			|  58%
+| Sarasota		| 639			| 67%			|  33%
 |===
 
 
 [.lesson-instruction]
 In pairs or small groups: which group do you think the agency serves more? Why?
 
-@teacher{Have students share their thoughts}
+@teacher{Have students share their thoughts - most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
 
-**It turns out that the agency is _split_: almost exactly half their clients fall into each category!**
+**Most of the agency's clients are 35 and over!**
 
 * How is this possible?
-** We can see a clear trend when comparing within cities: with Boca Raton as the outlier, the under-35 crowd dominates _every other city!_
-** But when aggregating all of the data together, _the number of tourists in each city matters_. Boca Raton was our outlier, but it also makes up the largest portion of all tourists!
+** We can see a clear trend when _comparing_ within cities: with Sarasota as the outlier, the under-35 crowd dominates _every other city!_
+** But when aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
+
+This is the same phenomenon we're seeing in our Covid data: a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together.
 
 [.lesson-instruction]
 - We need to break the covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
@@ -138,7 +140,7 @@ It's extremely common for students to think that filtering a table _changes the 
 ** _Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}._
 
 
-== Looking for Patterns
+== Looking for Patterns	@duration{45 minutes}
 
 === Overview
 
@@ -194,7 +196,7 @@ Class discussion: Are quadratic models a good fit for this data? Why or why not?
 - Do you think this data shows a quadratic relationship? Why or why not?
 - Do you think this data shows some other kind of relationship? Why or why not?
 
-== Exponential Functions
+== Exponential Functions @duration{55 minutes}
 
 === Overview
 Having identified that the covid scatter plot is neither linear nor quadratic, students learn about characteristics of exponential functions in graphical, tabular, and function notation form.
@@ -275,7 +277,7 @@ Exponential models have the form @math{y = ab^x + k}
 
 Can you think of other examples of exponential relationships?
 
-== Fitting Exponential Models
+== Fitting Exponential Models 	@duration{30 minutes}
 
 === Overview
 
