@@ -3,7 +3,7 @@
 
 @description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model of sense-making, hypothesizing, modeling and testing. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
 
-@lesson-prereqs{exploring-quadratic-models}
+@lesson-prereqs{exploring-quadratic-models, lookups}
 
 @keywords{exponential, quadratic, square, coefficient}
 
@@ -38,10 +38,9 @@
 Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
 
 === Launch
+Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
 
-Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" more than we ever thought possible. Even in 2020, very few people could have predicted the impact it would have on the world.
-
-But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
+Even in 2020, very few people could have predicted the impact it would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
 
 [.lesson-instruction]
 - Open the @starter-file{alg2-covid}. This data looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
@@ -53,7 +52,7 @@ But Data Scientists who were looking at the data knew differently. Let's take a 
 
 @center{@image{images/multiple-models.png}}
 
-The scatterplot we just produced doesn't look much like a scatterplot all! It looks like someone took a blue marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
+The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a blue marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
 
 @teacher{Review student answers to confirm that students have made a number of observations:
 
@@ -79,7 +78,7 @@ Datasets like these are impossible to model all at once, because there will alwa
 Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
 
 @right{@image{images/Simpsons_animation.gif, 300}}
-Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox, and you can @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, learn more at Wikipedia}.
+Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox.
 
 **For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
 
@@ -104,7 +103,7 @@ Which group do you think the agency serves more? Why?
 
 How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
 
-We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together.
+We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia})
 
 [.lesson-instruction]
 - We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
@@ -192,9 +191,15 @@ Having identified that the covid scatter plot is neither linear nor quadratic, s
 
 === Launch
 
+++++
+<style>
+.growth td { padding: 0; }
+</style>
+++++
+
 Let's review what we know about the behavior of the models we've seen so far:
 
-[cols="15a,^.^5a", frame="none", stripes="none"]
+[.growth, cols="15a,^.^5a", grid="none", frame="none", stripes="none"]
 |===
 
 | Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! **If the "growth" is constant, the relationship is linear.**
@@ -208,11 +213,10 @@ Let's review what we know about the behavior of the models we've seen so far:
 |===
 
 
-
 There is, however, a class of functions that grows even faster than quadratics: @vocab{exponential functions}.
 
 
-[cols="15a,^.^5a", frame="none", stripes="none"]
+[.growth, cols="15a,^.^5a", grid="none", frame="none", stripes="none"]
 |===
 
 | If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
