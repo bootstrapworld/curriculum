@@ -621,13 +621,13 @@ var starterFiles = {
     }
   },
   "alg2-exploring-quadratics": {
-    "title": "Exploring Quadratics (Desmos)",
+    "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
       "url": "https://www.desmos.com/calculator/geyx4aetop"
     }
   },
   "alg2-exploring-exponentials": {
-    "title": "Exploring Exponentials (Desmos)",
+    "title": "Exploring Exponential Functions (Desmos)",
     "pyret": {
       "url": "https://www.desmos.com/calculator/wk3m64ylys"
     }
@@ -675,7 +675,7 @@ var starterFiles = {
     }
   },
   "alg2-connecting-logarithms-and-exponents" : {
-    "title" : "Exploring Logarithms (Desmos)",
+    "title" : "Connecting Logarithmic and Exponential Functions (Desmos)",
     "pyret" : {
       "url" : "https://www.desmos.com/calculator/tagjbgu8ra"
     }

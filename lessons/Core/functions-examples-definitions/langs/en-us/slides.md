@@ -20,7 +20,7 @@ What do you notice? What do you wonder?
 Every function has a Contract: {style="font-size:22pt"}
 
 
-@show{(contract "gt" '("Number" ) "Number")} {style="font-size:22pt"}
+@show{(contract "gt" '("Number" ) "Image")} {style="font-size:22pt"}
 
 ---
 {layout="Launch"}

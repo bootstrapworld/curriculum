@@ -54,6 +54,14 @@ Even in 2020, very few people could have predicted the impact it would have on t
 
 @center{@image{images/multiple-models.png}}
 
+[.lesson-instruction]
+--
+Discuss in groups or pairs, and prepare to share out to the class:
+
+- Based on the look of the scatter plot you just made, do you think there's a strong correlation here?
+- If we fit a curve or straight line to this data, do you think it would have a high @math{R^2}-value?
+--
+
 The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a blue marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
 
 @teacher{Review student answers to confirm that students have made a number of observations:
@@ -61,16 +69,6 @@ The scatterplot you made doesn't look much like a scatterplot all! It looks like
 * There is _more than one_ relationship in this dataset
 * Every relationship seems extremely strong
 * Most/all relationships appear non-linear}
-
-=== Investigate
-
-[.lesson-instruction]
---
-Discuss in groups or pairs, and prepare to share out to the class:
-
-- Based on the look of this scatter plot, do you think there's a strong correlation here?
-- If we fit a model to this data, would it have a high @math{r}-value?
---
 
 With all these clear, tight lines, we might think this would be a dataset with a very strong correlation. Unfortunately, that's not what we see when we group all the data together!
 
@@ -82,7 +80,11 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox.
 
-**For Example:** A travel agency wants to know which whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
+=== Investigate
+
+[.lesson-instruction]
+--
+A travel agency wants to know whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
 
 [cols="2a,^1a,^1a,^1a", options="header", width="80%"]
 |===
@@ -96,10 +98,12 @@ Normally we think that "more data means more power!", and that the more data we 
 
 // in the slide deck, we should show students the table without the Tourists column... then advance the slide, and include the Tourist column //
 
-[.lesson-instruction]
 Which group do you think the agency serves more? Why?
 
-@teacher{Have discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+@optional: If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}
+
+--
+@teacher{Have students discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
 
 **Most of the agency's clients are 35 and over!**
 
@@ -153,6 +157,8 @@ We have _artificially constrained this dataset_, showing only the data from June
 For students who are farther along, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/,the __full__ dataset} later on, once students are comfortable with polynomial functions.
+
+**To use all available data, change the sheet on line 7 of the @starter-file{alg2-covid} from `"New England"` to `"All"`**
 |===
 
 
@@ -227,7 +233,7 @@ There is, however, a class of functions that grows even faster than quadratics: 
 
 | @image{images/difference-table-exponential-1.png}
 
-| Exponential functions grow so rapidly that looking for _"what is added to y?"_ isn't helpful at all. The only way to talk about their growth is to start noticing _"what is y multiplied by?"_.
+| Exponential functions grow so rapidly that looking for _"what is added to y?"_ isn't helpful at all. The only way to talk about their growth is to start noticing _"what y is multiplied by"_.
 
 *In this case, we can see that the y-values are doubling each time!*
 
@@ -240,17 +246,15 @@ There is, however, a class of functions that grows even faster than quadratics: 
 - Complete @printable-exercise{classifying-tables.adoc}
 - Be ready to discuss your answers with the class!
 
-Exponential functions, like the ones you identified on tables 2 and 6, can be written in the form @math{y = ab^x}.
+When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! @vocab{Growth factor} is the amount each term in an exponential sequence is multiplied by to get the next term (either 1 plus the @vocab{growth rate} or 1 minus the @vocab{decay rate}. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the growth factor.
 
-When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! Growth factor is the rate at which an exponential function is increasing or decreasing. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the _growth factor_.
-
-When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_.
+When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_. +
+_Note: This initial value is sometimes (but not always!) the y-intercept._
 
 === Investigate
 
-Sometimes, we write exponential functions like this: @math{y=ab^x + k}.
-
-The term @math{k} (something you've actually seen before!) is easier to think about when we're looking at graphs, rather than tables. In fact, exponential graphs can help us appreciate the impact of all three variables - growth factor, initial value, and vertical shift.
+Sometimes, we write exponential functions like this: @math{f(x)=ab^x + k}. +
+Let's explore what the @math{k} term specifies.
 
 [.lesson-instruction]
 - Open @starter-file{alg2-exploring-exponentials}.
@@ -262,7 +266,7 @@ Review students answers, and then debrief via class discussion. Invite students 
 [.lesson-instruction]
 - Graphically, what does @math{k} tell us about an exponential function?
 ** On a graph, an exponential function will always "level out", getting closer and closer to a horizontal line as @math{x} approaches infinity (when the curve slopes down) or or zero (when the curve slops up). This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}.
-** Adjusting @math{k} shifts the @vocab{asymptote} up and down, along with the rest of the exponential curve that approaches it.
+** Adjusting @math{k} shifts the asymptote up and down, along with the rest of the exponential curve that approaches it.
 - Graphically, what does @math{b} tell us about an exponential function?
 ** _The base (@math{b}) determines the rate of growth or decay. Smaller values of @math{b} lead to faster rates of decay. Larger values of @math{b} lead to faster rates of growth. See table below._
 - @math{b} must always be positive. Why is that so?
@@ -299,7 +303,7 @@ A base of @math{0.5} means @math{y} will drop by half for every increment of @ma
 |===
 
 
-Exponential growth and decay show up all the time!
+@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn into 2, then those 2 will turn into 4, then 8, then 16, and so on.
 - Unstable particles degrade into stable particles over time, emitting radiation as a biproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
