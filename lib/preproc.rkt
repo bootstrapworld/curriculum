@@ -783,8 +783,7 @@
          [page-title (and (file-exists? f.titletxt)
                           (call-with-input-file f.titletxt read-line))]
          [existent-file? #f]
-         [dist-natlang-dir (format "distribution/~a" *natlang*)]
-         [tack-on-solns-true? #f])
+         [dist-natlang-dir (format "distribution/~a" *natlang*)])
     (cond [(or (path-has-extension? f ".adoc")
                (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
            (let ([f.adoc (path-replace-extension f ".adoc")]
@@ -801,11 +800,7 @@
                    [(file-exists? (build-path dist-natlang-dir f.pdf))
                     (set! f f.pdf) (set! existent-file? #t)]
                    [(path-has-extension? f ".adoc")
-                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))])
-             (when (and *solutions-mode?*
-                        (eq? f f.shtml)
-                        (regexp-match "Contracts\\.shtml$" f))
-               (set! tack-on-solns-true? #t)))]
+                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
           [(path-has-extension? f ".pdf")
            (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
     (unless existent-file?
@@ -813,9 +808,8 @@
       (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
     (when (and (or (not link-text) (string=? link-text "")) page-title)
       (set! link-text page-title))
-    (let ([link-output (format "link:~apass:[~a~a][~a~a]"
-                               *dist-root-dir* f (if tack-on-solns-true? "?solns=true" "")
-                               link-text
+    (let ([link-output (format "link:~apass:[~a][~a~a]"
+                               *dist-root-dir* f link-text
                                (if *lesson-plan* ", window=\"_blank\"" ""))])
       link-output)))
 
