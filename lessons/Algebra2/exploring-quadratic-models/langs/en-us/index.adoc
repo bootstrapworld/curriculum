@@ -1,7 +1,7 @@
 [.beta]
 = Exploring Quadratic Models
 
-@description{Students investigate quadratic relationships in data about Fuel Efficiency, using an inquiry-based model of sense-making, hypothesizing, modeling and testing. They are introduced to table transformations and inverse functions, which are used to fit quadratic models onto nonlinear data.}
+@description{Students investigate quadratic relationships in data about Fuel Efficiency, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
 
 @lesson-prereqs{exploring-linear-models}
 
@@ -89,7 +89,7 @@ Even though some cars are more efficient than others, fuel efficiency generally 
 
 @teacher{Review student answers to confirm that students see a _non-linear_ relationship in the dataset with a relatively strong correlation. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!
 
-Have students share their curves, encouraging them to identify where they "peak" and where they cross the bottom of the scatter plot (one option is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it). These locations will be important anchor concepts on which to build in the next section.
+Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it). 
 }
 
 === Synthesize
@@ -101,7 +101,7 @@ Have students share their curves, encouraging them to identify where they "peak"
 == Quadratic Functions @duration{45 minutes}
 
 === Overview
-Students are introduced to quadratic functions. They become familiar with scenarios involving quadratics and  terminology to describe parabolas. They also learn how to identify quadratic sequences, and then explore the meaning of coefficients Vertex Form.
+Students are introduced to quadratic functions. They become familiar with scenarios involving quadratics and terminology to describe parabolas. They also learn how to identify quadratic sequences, and then explore each of the coefficients in Vertex Form.
 
 === Launch
 Linear models are great for fitting simple relationships. But the real world isn't so simple, and _linear models are often just too primitive_ to handle that complexity.
@@ -123,11 +123,12 @@ Relationships like the one in the fuel efficiency scatter plot are best describe
 === Investigate
 Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part.
 
-But what if we only have a list of x-y pairs showing only one part of the parabola? **How can we identify quadratic relationships from a sequence of numbers?**
+But what if we only have a list of x-y pairs showing only one part of the parabola? +
+**How can we identify quadratic relationships from a sequence of numbers?**
 
 @right{@image{images/difference-table-linear.png}} Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increased by 1, we saw that the y-value increased by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
 @vspace{1ex} +
-**If the "size of the growth" is constant, the relationship is linear.**
+**If the rate of growth is constant, the relationship is linear.**
 
 @clear
 
@@ -241,7 +242,8 @@ We just examined a series of quadratic and linear functions that looked a lot li
 [.lesson-instruction]
 - A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph.
 - Does that mean we shouldn't use a quadratic model for the relationship between speed and fuel efficiency? Why or why not?
-** _Have students discuss and share back with the class. If necessary, remind students that *models are - by defintion - approximations of the real world*._
+** _Have students discuss and share back with the class._
+** _If necessary, remind students that *models are - by definition - approximations of the real world*._
 
 The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. There's no such thing as a perfect model!
 
@@ -263,7 +265,9 @@ What do each of these coefficients mean for our model?
 * How do you make a parabola "narrower" or "wider"?
 ** Change the value of @math{a}
 
-We know that @math{h} in the speed-v-fuel efficiency model is the x-coordinate of our @vocab{vertex}, and that the @vocab{vertex} of our efficiency curve is predicted at roughly @math{45mph}. All we need to do is figure out @math{a} and @math{k}! @teacher{Note that before students fit the parabola in the next activity, they will learn about `num-sqr`, a Pyret function which is used throughout.}
+We know that @math{h} in the speed-v-fuel efficiency model is the x-coordinate of our vertex, and that the @vocab{vertex} of our efficiency curve is predicted at roughly @math{45mph}. All we need to do is figure out @math{a} and @math{k}! 
+
+@teacher{Before we focus on that, we need to learn about a new Pyret function `num-sqr`.}
 
 [.lesson-instruction]
 Return to @starter-file{alg2-fuel-efficiency} and work through @printable-exercise{model-speed-v-mpg.adoc}.
@@ -283,7 +287,7 @@ A quadratic relationship often means that one or more variables is _interacting_
 
 * What was the highest @math{R^2} you were able to get? 
 * What did you figure out about how adjusting @math{a} changed the shape of the parabola?
-** Negative @math{a} made the parabola open down. Bigger values of @math{a} made the curve steeper.
+** The _sign_ of @math{a} determines whether the parabola opens up (@math{a > 0}), opens down (@math{a < 0}), or exist as a straight line (@math{a = 0}) Negative @math{a} made the parabola open down. The _magnitude_ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.
 
 == Additional Exercises
 
