@@ -36,10 +36,10 @@ Click "Run", and evaluate `countries-transformed` in the Interactions Area on th
 - But we want @math{x} to represent the **original, un-transformed** value, simply using _per-capita gdp_ as-is...
 - We've learned that:
 
-** the *slope* in the transformed, linear model is the same as the *growth factor* in the un-transformed logarithmic model
+** the *slope* in the transformed, linear model is the same as the *scaling factor* in the un-transformed logarithmic model
 ** the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
 
-@n Use the values you calculated using `lr-plot` to complete the model: @math{logarithmic(x) =} @fitbruby{9em}{@ifsoln{11.9011}}{slope} @math{\times log(x) +} @fitbruby{9em}{@ifsoln{24.2636}}{growth factor}
+@n Use the values produced by `lr-plot` to complete the model: @math{logarithmic(x) =} @fitbruby{9em}{@ifsoln{11.9011}}{slope} @math{\times log_10(x) +} @fitbruby{9em}{@ifsoln{24.2636}}{scaling factor}
 
 @n Rewrite your model as a pyret definition: @ifnotsoln{`fun logarithmic(x):`@fitb{30em}{} `end`}  @showsoln{(code '(define (logarithmic x) (+ (* 11.9011 (log x)) 24.2636)))}
 

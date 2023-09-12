@@ -131,11 +131,11 @@ Logarithmic sequences grow more slowly the farther out you get, so that it takes
 @teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about how much `x` needs to increase just to get a fixed increase in `y`. This foreshadows the idea of _base_ for logarithmic relationships.}
 
 [.lesson-point]
-Logarithmic models have the form @math{f(x) = b \times log(x) + c}
+Logarithmic models have the form @math{f(x) = a \times log_b(x) + c}
 
-- The term @math{b} is the _base_ of the logarithm. Look back to your answers on @printable-exercise{classifying-tables.adoc}. For tables that represent logarithmic functions, by what factor does @math{x} need to grow in order to get a constant increase in @math{y}?
+- The term @math{a} is the _base_ of the logarithm. Look back to your answers on @printable-exercise{classifying-tables.adoc}. For tables that represent logarithmic functions, by what factor does @math{x} need to grow in order to get a constant increase in @math{y}?
 - The term @math{a} is the _scaling factor_, which amplifies or reduces the growth or decay of the function as @math{x} increases
-- The term @math{c} is something we've seen before: it's the _vertical shift_ of the function, which moves the curve up or down (in other kinds of functions, this is often given the name @math{k}). It's also the y-value of the @vocab{asymptote} for the function.
+- The term @math{c} is something we've seen before: it's the _vertical shift_ of the function, which moves the curve up or down (in other kinds of functions, this is often given the name @math{c}). It's also the y-value of the @vocab{asymptote} for the function.
 
 === Synthesize
 - What _similarities_ do you see between exponential and logarithmic functions?
@@ -147,12 +147,12 @@ Logarithmic models have the form @math{f(x) = b \times log(x) + c}
 Students discover that by transforming the x-axis with an exponential function, they can fit a linear model to a logarithmic relationship.
 
 === Launch
-We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
+We need to find @math{a} and @math{c}, such that the model fits the data as closely as possible.
 
 [.lesson-instruction]
-Complete the first section of @printable-exercise{transforming-axis.adoc}, using @online-exercise{https://www.desmos.com/calculator/cbtooos3of, Wealth-v-Health - Logarithmic}.
+Complete the first section of @printable-exercise{transforming-axis.adoc}, using @online-exercise{https://www.desmos.com/calculator/5phlco1zyl, Wealth-v-Health - Logarithmic}.
 
-@teacher{Crowdsource the values students came up with for @math{b} and @math{c} in their best-guess logarithmic model. Were they very similar or very different? What were the @math{R^2} values?}
+@teacher{Crowdsource the values students came up with for @math{a} and @math{c} in their best-guess logarithmic model. Were they very similar or very different? What were the @math{R^2} values?}
 
 Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models. If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
 
@@ -266,7 +266,7 @@ At each point in our linear model, @math{f} is the _predicted median lifespan_, 
 
 From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
 
-- @math{h(x) = 11.9011 \times log(x) + 24.2636}
+- @math{h(x) = 11.9011 \times log_10(x) + 24.2636}
 - @show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
