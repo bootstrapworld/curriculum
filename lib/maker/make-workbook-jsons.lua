@@ -102,7 +102,7 @@ do
     write_pages_info(course_dir .. '/back-matter', o, ol, oe, 'skip_pageno', ob)
 
     local resources_dir = 'distribution/' .. natlang .. '/courses/' .. course .. '/resources'
-    if file_exists_p(resources_dir .. '/Contracts.pdf') then
+    if file_exists_p(resources_dir .. '/pages/Contracts.pdf') then
       write_page1(resources_dir, 'Contracts.pdf', 'portrait', 'false', o, ol, oe, back_matter_port)
     end
 
@@ -169,7 +169,7 @@ function make_workbook_json_1(course_dir, tgt)
 
     local docrootp = true
 
-    if lessondir:find('/lessons/') or lessondir:find('/front%-matter') or lessondir:find('/back%-matter') then
+    if lessondir:find('/lessons/') or lessondir:find('/front%-matter$') or lessondir:find('/back%-matter$') or lessondir:find('/resources$') then
       docrootp = false
     end
 
