@@ -1,7 +1,7 @@
 [.beta]
 = Exploring Logarithmic Models
 
-@description{Students investigate logarithmic relationships in demographic data about world countries, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
+@description{Students investigate logarithmic relationships in demographic data about countries of the world, using an inquiry-based model of sense-making, hypothesizing, modeling and testing.}
 
 @lesson-prereqs{exploring-exponential-models, lookups}
 
@@ -13,7 +13,7 @@
 | Lesson Goals
 | Students will be able to...
 
-* Model logarithmic and exponential relationships using functions
+* Model logarithmic relationships using functions
 
 | Student-facing Lesson Goals
 |
@@ -46,11 +46,10 @@ Students explore the @starter-file{alg2-countries}, and find a relationship betw
 --
 @right{@image{images/questions.png, 250}}
 
-- Do people who make more money generally live longer?
+- Do you think people living in wealthier countries generally live longer?
 - Open the @starter-file{alg2-countries}
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete questions 1-6 on @printable-exercise{exploring-countries.adoc}.
-- Be ready to discuss your answers.
 --
 
 @teacher{
@@ -62,11 +61,11 @@ Be attentive to sense-making: If a wealthy country is suffering heavy casualties
 
 [.lesson-instruction]
 --
-Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc} using @online-exercise{https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95, Fitting Wealth-v-Health} to try fitting linear, quadratics, and exponential models for this dataset
+Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc} using @online-exercise{https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95, Fitting Wealth-v-Health}. 
 --
 
 @teacher{
-Note: This worksheet involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to __discover that a new kind of  model is necessary__.
+_Note: This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to discover that a new kind of  model is necessary_.
 }
 === Synthesize
 
@@ -86,9 +85,7 @@ The shape of this starts out rising fast on the left, before tapering off as `pc
 - How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp`?
 ** _It starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right._
 - How well did our linear, quadratic, and exponential models fit this data?
-- Is there another kind of function that starts off rising fast, but then levels off quickly?
-
-None of the kinds of functions we've seen so far exhibit the behavior we see here. In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off.
+** _None of the kinds of functions we've seen so far exhibit the behavior we see here!In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off._
 
 ++++
 <style>
@@ -96,45 +93,42 @@ None of the kinds of functions we've seen so far exhibit the behavior we see her
 </style>
 ++++
 
-Let's review what we know about the behavior of the models we've seen so far:
-
 [.growth, cols=".^15a,^.^5a", grid="none", frame="none", stripes="none"]
 |===
-| We know that exponentials grow by _equal factors over the same interval_, so instead of calculating "what is added to y", we calculate "what is multiplied by y" to produce the next value over a constant interval.
+| We know that @vocab{exponential functions} grow by _equal factors over the same interval_, so instead of calculating "what is added to y", we calculate "what y is multiplied by" to produce the next value over a constant interval.
 | @image{images/difference-table-exponential-2.png}
 
-| This behavior is almost the reverse of exponential growth: instead of multiplying y to find the next value, we need to _multiply the size of our interval_ by a constant factor just to get a constant growth in y!
+| The behavior in this relationship is almost the reverse of exponential growth: instead of multiplying y to find the next value, we need to _multiply the size of our x-interval_ by a constant factor just to get a constant growth in y! This relationship can be modeled using a @vocab{logarithmic function}.
 |@image{images/difference-table-logarithmic.png}
 |===
 
-The shape of this relationship is _logarithmic_, meaning it can be modeled using a @vocab{logarithmic function}.
+@vocab{Logarithmic relationships} grow or decay very quickly at first, but then level out as @math{x} increases. Our intervals need to grow longer and longer just to reach a small change in y. On a graph, this shows up as a horizontal line called an @vocab{asymptote}. As we saw with exponential functions, logarithmic functions will always get closer and closer to the asymptote as @math{x} increases, but never get all the way there.
 
-Logarithmic relationships grow or decay very quickly at first, but then level out as @math{x} increases. Our intervals need to grow longer and longer just to reach a small change in y. On a graph, this shows up as a horizontal line (an @vocab{asymptote}). As we saw with exponential functions, Logarithmic functions will always get closer and closer to the asymptote as @math{x} increases, but never get all the way there.
-
-Logarithmic relationships are often used to help humans get a handle on quantities in nature that grow so quickly we can barely imagine them. For example, our ears can hear incredibly quiet sounds (like a pin dropping), but also process incredibly loud sounds (like a fog horn). A fire alarm, for example, is thousands of times louder than a dog barking, but it's difficult for our brains to process that much more "loudness". As a result, we _perceive_ loudness on a logarithmic scale: for us to percieve a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
+Logarithmic relationships are often used to help humans get a handle on quantities in nature that grow so quickly we can barely imagine them. For example, our ears can hear incredibly quiet sounds (like a pin dropping), but also process incredibly loud sounds (like a fog horn). A fire alarm, for example, is thousands of times louder than a dog barking, but it's difficult for our brains to process that much more "loudness". As a result, we _perceive_ loudness on a logarithmic scale: for us to perceive a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
 
 [.lesson-instruction]
-- Complete @printable-exercise{classifying-descriptions.adoc}
-- What clues did you use to help you identify if a function was linear, quadratic, exponential, or logarithmic?
+- Let's practice recognizing whether scenarios would be best modeled by linear quadratic, exponential or logarithmic functions. Complete @printable-exercise{classifying-descriptions.adoc}
+- What clues did you use to help you identify which relationships were which?
 
-@teacher{Have students share their answers. Be especially attentive to students who mis-label logarithmic relationships as "exponential" -- they're on to something! Logarithmic relationships are used to "linearize" exponential ones, which will explore more deeply later in this lesson.}
+@teacher{Have students share their answers. Be especially attentive to students who mis-label logarithmic relationships as "exponential" -- they're on to something! Logarithmic relationships are used to "linearize" exponential ones, which we will explore more deeply later in this lesson.}
 
 === Investigate
-You've identified one logarithmic pattern in a graph: it grows really fast right away, then levels off. Can you tell the difference between quadratic, exponential, and logarithmic graphs?
+You've identified one logarithmic pattern in a graph: it grows really fast right away, then levels off. +
+
 
 [.lesson-instruction]
+- Let's practice recognizing the difference between quadratic, exponential, and logarithmic graphs. 
 - Complete @printable-exercise{classifying-plots.adoc}
-- Be ready to discuss your answers with the class!
 
-@teacher{Have students share their answers. Encourage them to talk about where the logarithmic functions level out shoot up, asking them to identify the approximate x-value where that occurs.}
+@teacher{Have students share their answers. Encourage them to talk about where the logarithmic functions change from shooting up to leveling out, asking them to identify the approximate x-value of the shift in direction.}
 
-Logarithmic sequences grow more slowly the farther out you get, so that it takes many more steps just to grow by the same amount. For example, it might take 10 steps to go from `1` to `2`, but then a hundred more to get to `3` and a _thousand_ more to get to `4`. In some ways, this kind of growth is the exact opposite of exponential functions, which grow by increasing factors for every step! Can you tell the difference between linear, quadratic, and exponential growth of a sequence?
+Logarithmic sequences grow more slowly the farther out you get, so that it takes many more steps just to grow by the same amount. For example, it might take 10 steps to go from `1` to `2`, but then a hundred more to get to `3` and a _thousand_ more to get to `4`. 
 
 [.lesson-instruction]
+- Let's practice recognizing the difference between linear, quadratic, and exponential growth in a sequence. 
 - Complete @printable-exercise{classifying-tables.adoc}
-- Be ready to discuss your answers with the class!
 
-@teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about how much `x` needs to increase just to get a fix increase in `y`. This foreshadows the idea of _base_ for logarithmic relationships.}
+@teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about how much `x` needs to increase just to get a fixed increase in `y`. This foreshadows the idea of _base_ for logarithmic relationships.}
 
 [.lesson-point]
 Logarithmic models have the form @math{f(x) = b \times log(x) + c}
