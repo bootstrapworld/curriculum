@@ -662,6 +662,12 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
     }
   },
+  "alg2-exploring-logarithms" : {
+    "title" : "Exploring Logarithms (Desmos)",
+    "pyret" : {
+      "url" : "https://www.desmos.com/calculator/9chrdmoydi"
+    }
+  },
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
@@ -671,7 +677,7 @@ var starterFiles = {
   "alg2-wealth-transformed-desmos": {
     "title": "Wealth v Health - Transformed (Desmos)",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/einx8sg3fq"
+      "url": "https://www.desmos.com/calculator/b3dgt8gaat"
     }
   }
 }
