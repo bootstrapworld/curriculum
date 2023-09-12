@@ -665,13 +665,19 @@ var starterFiles = {
   "alg2-exploring-logarithms" : {
     "title" : "Exploring Logarithms (Desmos)",
     "pyret" : {
-      "url" : "https://www.desmos.com/calculator/9chrdmoydi"
+      "url" : "https://www.desmos.com/calculator/ovrvvokduw"
     }
   },
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+    }
+  },
+  "alg2-connecting-logarithms-and-exponents" : {
+    "title" : "Exploring Logarithms (Desmos)",
+    "pyret" : {
+      "url" : "https://www.desmos.com/calculator/tagjbgu8ra"
     }
   },
   "alg2-wealth-transformed-desmos": {

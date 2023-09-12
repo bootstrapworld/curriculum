@@ -1,0 +1,109 @@
+= Graphing Logarithmic Models
+////
+* Import Desmos Styles
+*
+* This includes some inline CSS which loads the Desmos font,
+* which includes special glyphs used for icons on Desmos.com
+*
+* It also defines the classname '.desmosbutton', which is used
+* to style all demos glphys
+*
+* Finally, it defines AsciiDoc variables for glyphs we use:
+* {points}
+* {caret}
+* {magnifying}
+* {wrench}
+*
+* Here's an example of using these:
+* This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+++++
+<style>
+.autonum { font-weight: bold; padding-top: 0.3rem !important; }
+.autonum:after { content: ')' !important; }
+
+.FillVerticalSpace { grid-gap: 20px; margin-top: 5px; }
+
+td {
+  background-color: rgba(#fff, .5);
+  background-image:
+    linear-gradient(lightblue 2px, transparent 2px),
+    linear-gradient(270deg, lightblue 2px, transparent 2px),
+    linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
+    linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -3px 74px;
+  min-height: 1.6in;
+  max-height: 1.6in;
+  max-width: 2in;
+}
+
+td p.tableblock { position: absolute; }
+
+/* Add labels for axes */
+td::before, td::after { display: flex; font-style: italic; }
+td::before {
+  content: 'y';
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5em;
+  margin-top: -2em;
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform:rotate(270deg);
+    transform: rotate(270deg);
+}
+td::after {
+  content: 'x';
+  align-items: start;
+  justify-content: right;
+  margin-top: 2em;
+  margin-right: -0.5em;
+}
+</style>
+++++
+
+For this page, you'll need to have @starter-file{alg2-exploring-logarithms} open in Desmos. The curve you see is the graph of @math{h(x)=5 log_10 x + 1}. Another, *identical* curve @math{g(x)} is hiding behind it. Each coefficient starts at values to make @math{g(x)} equivalent to @math{h(x)}.
+
+== Vertical Shift @math{c}
+@n Try changing the value of @math{c} to -10, 0, and 10, graphing each curve in the squares below. Be sure to identify the y-value where the curve "levels out".
+
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{c=-10} | @math{c=0}  | @math{c=10}
+|===
+
+@n What does @math{c} tell us about a logarithmic function? @fitb{}{@ifsoln{How far the curve is shifted up (positive k) or down (negative k),}} +
+@fitb{}{}
+
+== Scaling Factor @math{a}
+@n **Set @math{c} to zero.** What is the value of @math{x} when @math{y = 1}? @fitb{5em}{@ifsoln{10}} @hspace{2em} @math{y = 2}? @fitb{5em}{@ifsoln{100}} @hspace{2em} @math{y = 3}? @fitb{5em}{@ifsoln{1000}} @hspace{2em} @math{y = 4}? @fitb{}{@ifsoln{10000}}
+
+@n Change the value of @math{a} to -2, 0, and 2, graphing each curve in the squares below. For each curve, label the points at x=1, 2, and 3.
+
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{a=-2} | @math{a=0}  | @math{a=2}
+|===
+
+@n What does @math{a} tell us about a logarithmic function? @fitb{}{@ifsoln{@math{b} determines how sharply the curve grows}}
+
+@n How does the *sign* of @math{a} effect the behavior of a logarithmic function? @fitb{}{@ifsoln{negative values create decay, and positive values create growth}}
+
+== Connecting to Exponentials
+- Click the blue function icon ([.desmosbutton]#{curve}#) to "turn off" the display of @math{h(x)}, then click the triangle ([.desmosbutton]#{caret}#) to open the *Connecting to Exponential Functions* folder.
+
+- Click the black and orange function icons ([.desmosbutton]#{curve}#) to "turn on" the line for @math{y = x}, and the display of @math{f(x)}.
+
+@n Change the sliders for @math{a} and @math{c}, and see how the curves change. What do you Notice? @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@n What do you Wonder? @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
