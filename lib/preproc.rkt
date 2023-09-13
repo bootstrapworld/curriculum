@@ -936,7 +936,6 @@
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml");remove ;FIXME
-                                   (and *teacher-resources* (string=? g "solution-pages/bm-contracts.pdf"))
                                    short-ref?)
                          (check-link f)
                          ; This warning is too eager. Leave it to --lint
