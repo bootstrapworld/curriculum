@@ -1538,7 +1538,7 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-other-resources-intro o)
-                            (print-other-resources *target-pathway* o)]
+                            (print-other-resources *target-pathway* *proglang* o)]
                            [(string=? directive "starter-file-list")
                             (display
                               (enclose-div ".starterFileList" "") o)
@@ -1957,7 +1957,7 @@
                 (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
-                (print-other-resources *target-pathway* o))
+                (print-other-resources *target-pathway* *proglang* o))
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
