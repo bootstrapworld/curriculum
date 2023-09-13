@@ -100,16 +100,16 @@ A travel agency wants to know whether they serve more people 35 and over, or tra
 
 Which group do you think the agency serves more? Why?
 
-@optional: If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}
+@optional If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}.
 
 --
-@teacher{Have discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+@teacher{Have students discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
 
 **Most of the agency's clients are 35 and over!**
 
 How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
 
-We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia})
+We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
 
 [.lesson-instruction]
 - We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
@@ -158,14 +158,14 @@ For students who are farther along, we recommend showing them _all_ the data thr
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/,the __full__ dataset} later on, once students are comfortable with polynomial functions.
 
-**To use all available data, change the sheet on line 7 from `"New England"` to `"All"`**
+**To use all available data, change the sheet on line 7 of the @starter-file{alg2-covid} from `"New England"` to `"All"`**
 |===
 
 
 === Investigate
 
 [.lesson-instruction]
-Complete @printable-exercise{linear-models.adoc}, using @starter-file{alg2-covid-desmos-l}.
+Complete @printable-exercise{linear-models.adoc}, using the first slide of @starter-file{alg2-covid-desmos}.
 
 Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
 
@@ -177,7 +177,7 @@ Are linear models a good fit for this data? Why or why not?
 @right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty good @math{R^2}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 [.lesson-instruction]
-- Complete @printable-exercise{quadratic-models.adoc}, using @starter-file{alg2-covid-desmos-q}.
+- Complete @printable-exercise{quadratic-models.adoc}, using the second slide of @starter-file{alg2-covid-desmos}.
 - Are quadratic models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
@@ -195,7 +195,7 @@ Quadratic models capture _parabolic relationships_, where one quantity varies ba
 == Exponential Functions @duration{55 minutes}
 
 === Overview
-Having identified that the covid scatter plot is neither linear nor quadratic, students learn about characteristics of exponential functions in graphical, tabular, and function notation form.
+Having identified that the Covid scatter plot is neither linear nor quadratic, students learn about characteristics of exponential functions in tabular, graphical, and function notation form.
 
 === Launch
 
@@ -233,7 +233,7 @@ There is, however, a class of functions that grows even faster than quadratics: 
 
 | @image{images/difference-table-exponential-1.png}
 
-| Exponential functions grow so rapidly that looking for _"what is added to y?"_ isn't helpful at all. The only way to talk about their growth is to start noticing _"what is y multiplied by?"_.
+| Exponential functions grow so rapidly that looking for _"what is added to y?"_ isn't helpful at all. The only way to talk about their growth is to start noticing _"what y is multiplied by"_.
 
 *In this case, we can see that the y-values are doubling each time!*
 
@@ -246,27 +246,27 @@ There is, however, a class of functions that grows even faster than quadratics: 
 - Complete @printable-exercise{classifying-tables.adoc}
 - Be ready to discuss your answers with the class!
 
-When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! Growth factor is the rate at which an exponential function is increasing or decreasing. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the _growth factor_.
+When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! @vocab{Growth factor} is the amount each term in an exponential sequence is multiplied by to get the next term (either 1 plus the @vocab{growth rate} or 1 minus the @vocab{decay rate}. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the growth factor.
 
-When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_.
+When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_. +
+_Note: This initial value is sometimes (but not always!) the y-intercept._
 
 === Investigate
 
-Sometimes, we write exponential functions like this: @math{f(x)=ab^x + k}.
-
-The term @math{k} (something you've actually seen before!) is easier to think about when we're looking at graphs, rather than tables. In fact, exponential graphs can help us appreciate the impact of all three variables - growth factor, initial value, and vertical shift.
+Sometimes, we write exponential functions like this: @math{f(x)=ab^x + k}. +
+Let's explore what the @math{k} term specifies.
 
 [.lesson-instruction]
-- Open @starter-file{alg2-exploring-exponentials}.
+- Open to the third slide of @starter-file{alg2-covid-desmos}.
 - Use Desmos to complete @printable-exercise{graphing-models.adoc}.
 
 @teacher{
-Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
+Review students answers, and then debrief via class discussion. Invite students to consider wha new information they have gained by looking at graphical representations rather than tables.}
 
 [.lesson-instruction]
 - Graphically, what does @math{k} tell us about an exponential function?
 ** On a graph, an exponential function will always "level out", getting closer and closer to a horizontal line as @math{x} approaches infinity (when the curve slopes down) or or zero (when the curve slops up). This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}.
-** Adjusting @math{k} shifts the @vocab{asymptote} up and down, along with the rest of the exponential curve that approaches it.
+** Adjusting @math{k} shifts the asymptote up and down, along with the rest of the exponential curve that approaches it.
 - Graphically, what does @math{b} tell us about an exponential function?
 ** _The base (@math{b}) determines the rate of growth or decay. Smaller values of @math{b} lead to faster rates of decay. Larger values of @math{b} lead to faster rates of growth. See table below._
 - @math{b} must always be positive. Why is that so?
@@ -303,7 +303,7 @@ A base of @math{0.5} means @math{y} will drop by half for every increment of @ma
 |===
 
 
-Exponential growth and decay show up all the time!
+@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will turn into 2, then those 2 will turn into 4, then 8, then 16, and so on.
 - Unstable particles degrade into stable particles over time, emitting radiation as a biproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
@@ -312,13 +312,14 @@ Exponential growth and decay show up all the time!
 @teacher{In the following two activities, students will decide whether various scenarios and definitions represent quadratic, linear, or exponential functions. They will also have opportunities to think about and apply their knowledge of growth, decay, initial value, and growth factor.}
 
 [.lesson-instruction]
-- Complete @printable-exercise{classifying-descriptions.adoc}
+- Complete @printable-exercise{classifying-descriptions.adoc}.
+- What strategies did you use to decide if a function was linear, quadratic, or exponential?
 - What new insights did you gain about exponential functions by thinking about them in real-world scenarios?
 
 @teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before? }
 
 [.lesson-instruction]
-- Complete @printable-exercise{classifying-defs.adoc}
+- Complete @printable-exercise{classifying-defs.adoc}.
 - What strategies did you use to decide if a function was linear, quadratic, or exponential?
 - What new insights did you gain about exponential functions by thinking about their definitions?
 
@@ -351,7 +352,7 @@ Now that you're familiar with exponential functions, let's use them to model thi
 ** _Because we see exponential growth, we know that @math{b} must be greater than one._
 - Can we make any conclusions about the value of @math{k}?
 - Can we make any conclusions about the value of @math{a}? Explain.
-** _@math{a} must be positive, because the line is consistently above @math{k}._
+** _@math{a} must be positive, because the curve is consistently above @math{k}._
 --
 
 
@@ -360,10 +361,10 @@ Now that you're familiar with exponential functions, let's use them to model thi
 @teacher{In the next activity, students use Desmos to find promising exponential models, and then fit the model programmatically in Pyret!}
 
 [.lesson-instruction]
-- Open @starter-file{alg2-covid-desmos-e}, and complete @printable-exercise{exponential-models.adoc}.
+- Open to the fourth slide of @starter-file{alg2-covid-desmos}, and complete @printable-exercise{exponential-models.adoc}.
 - Is an exponential model a good fit for this data? Why or why not?
 
-@star @optional build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
+@star @optional Build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -387,7 +388,7 @@ In data processing, opting to round for speed over preserving precision can have
 
 - What makes exponential models different from the linear and quadratic models you've seen before?
 - How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
-- Is it always ok for Data Scientists to round off their numbers to speed up computation? Why or why not?
+- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
 
 ////
 == Additional Exercises

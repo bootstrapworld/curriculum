@@ -621,13 +621,13 @@ var starterFiles = {
     }
   },
   "alg2-exploring-quadratics": {
-    "title": "Exploring Quadratics (Desmos)",
+    "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
       "url": "https://www.desmos.com/calculator/geyx4aetop"
     }
   },
   "alg2-exploring-exponentials": {
-    "title": "Exploring Exponentials (Desmos)",
+    "title": "Exploring Exponential Functions (Desmos)",
     "pyret": {
       "url": "https://www.desmos.com/calculator/wk3m64ylys"
     }
@@ -635,28 +635,10 @@ var starterFiles = {
   "alg2-covid-desmos" : {
     "title" : "Modeling Covid Spread (Desmos)",
     "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/6485ee2b0877394eb63a76d0"
+      "url": "https://https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
-  "alg2-covid-desmos-l" : {
-    "title" : "Modeling Covid Spread - Linear (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
-    }
-  },
-  "alg2-covid-desmos-q" : {
-    "title" : "Modeling Covid Spread - Quadratic (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf5e84656b1a46531fd1"
-    }
-  },
-  "alg2-covid-desmos-e" : {
-    "title" : "Modeling Covid Spread - Exponential (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf81e9b928155c629da0"
-    }
-  },
-  "alg2-covid": {
+    "alg2-covid": {
     "title": "Covid Spread Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
@@ -675,7 +657,7 @@ var starterFiles = {
     }
   },
   "alg2-connecting-logarithms-and-exponents" : {
-    "title" : "Exploring Logarithms (Desmos)",
+    "title" : "Connecting Logarithmic and Exponential Functions (Desmos)",
     "pyret" : {
       "url" : "https://www.desmos.com/calculator/tagjbgu8ra"
     }
