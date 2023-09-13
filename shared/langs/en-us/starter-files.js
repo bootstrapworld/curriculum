@@ -626,16 +626,10 @@ var starterFiles = {
       "url": "https://www.desmos.com/calculator/geyx4aetop"
     }
   },
-  "alg2-exploring-exponentials": {
-    "title": "Exploring Exponential Functions (Desmos)",
-    "pyret": {
-      "url": "https://www.desmos.com/calculator/wk3m64ylys"
-    }
-  },
   "alg2-covid-desmos" : {
     "title" : "Modeling Covid Spread (Desmos)",
     "pyret": {
-      "url": "https://https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
     "alg2-covid": {
