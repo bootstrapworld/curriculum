@@ -2584,21 +2584,22 @@
 (define (display-math text o)
   (if *math-unicode?*
       (case text
-        [("a")   (display "𝑎" o)]
-        [("b")   (display "𝑏" o)]
-        [("c")   (display "𝑐" o)]
-        [("f")   (display "𝑓" o)]
-        [("g")   (display "𝑔" o)]
-        [("h")   (display "ℎ" o)]
-        [("r")   (display "𝑟" o)]
-        [("x")   (display "𝑥" o)]
-        [("y")   (display "𝑦" o)]
+        [("a")   (display "𝑎"  o)]
+        [("b")   (display "𝑏"  o)]
+        [("c")   (display "𝑐"  o)]
+        [("f")   (display "𝑓"  o)]
+        [("g")   (display "𝑔"  o)]
+        [("h")   (display "ℎ"  o)]
+        [("r")   (display "𝑟"  o)]
+        [("x")   (display "𝑥"  o)]
+        [("y")   (display "𝑦"  o)]
         [("R^2") (display "𝑅²" o)]
         [("x_1") (display "𝑥₁" o)]
         [("x_2") (display "𝑥₂" o)]
         [("y_1") (display "𝑦₁" o)]
         [("y_2") (display "𝑦₂" o)]
-        [("=")   (display "=" o)]
+        [("=")   (display "="  o)]
+        [("±")   (display "±"  o)]
         [else (display-mathjax-math text o)])
       (display-mathjax-math text o)))
 
