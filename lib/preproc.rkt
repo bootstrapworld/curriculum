@@ -20,8 +20,6 @@
 
 (define *force* (truthy-getenv "FORCE"))
 
-(define *nopdf* (truthy-getenv "NOPDF"))
-
 (define *book* (truthy-getenv "BOOK"))
 
 (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
@@ -64,11 +62,7 @@
 
 (define *narrative* #f)
 
-(define *boilerplate* (truthy-getenv "BOILERPLATE"))
-
 (define *teacher-resources* #f)
-
-(define *link-lint?* (truthy-getenv "LINT"))
 
 (define *autonumber-index* 1)
 
@@ -750,12 +744,11 @@
 
 (define (check-link f #:external? [external? #f])
   ; (unless external? (printf "doing check-link ~s \n" f))
-  (when (or *link-lint?* #t)
-    (cond [external? (display f *external-links-port*)
-                     (newline *external-links-port*)]
-          [(not (file-exists? f))
-           (display f *internal-links-port*)
-           (newline *internal-links-port*)])))
+  (cond [external? (display f *external-links-port*)
+                   (newline *external-links-port*)]
+        [(not (file-exists? f))
+         (display f *internal-links-port*)
+         (newline *internal-links-port*)]))
 
 (define (abbreviated-index-page? f)
   (and (directory-exists? f)
@@ -1931,12 +1924,11 @@
       (set! *title-reached?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
-      (when (or *link-lint?* #t)
-        (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
-              [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
-          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
-          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
-          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
+      (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
+            [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
+        ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
+        (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
+        (set! *external-links-port* (open-output-file external-links-file #:exists 'replace)))
       ;
       (when (or *lesson-plan*
                 *narrative*
