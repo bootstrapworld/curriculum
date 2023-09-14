@@ -661,5 +661,11 @@ var starterFiles = {
     "pyret": {
       "url": "https://www.desmos.com/calculator/b3dgt8gaat"
     }
+  },
+   "alg2-wealth-v-health-logarithimic-desmos": {
+    "title": "Wealth v Health - Logarithmic (Desmos)",
+    "pyret": {
+      "url": "https://www.desmos.com/calculator/xectdnnqdy"
+    }
   }
 }
