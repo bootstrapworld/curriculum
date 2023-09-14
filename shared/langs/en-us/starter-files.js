@@ -636,13 +636,13 @@ var starterFiles = {
     "title": "Covid Spread Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
-    }
+    } 
   },
-  "alg2-exploring-logarithms" : {
-    "title" : "Exploring Logarithms (Desmos)",
+  "alg2-exploring-logarithms-desmos" : {
+    "title" : "Exploring Logarithmic Functions (Desmos)",
     "pyret" : {
-      "url" : "https://www.desmos.com/calculator/ovrvvokduw"
-    }
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
+    } 
   },
   "alg2-countries": {
     "title": "Countries of the World Starter File",
@@ -656,16 +656,16 @@ var starterFiles = {
       "url" : "https://www.desmos.com/calculator/tagjbgu8ra"
     }
   },
-  "alg2-wealth-transformed-desmos": {
-    "title": "Wealth v Health - Transformed (Desmos)",
+  "alg2-wealth-v-health-desmos": {
+    "title": "Fitting Wealth-v-Health (Desmos)",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/b3dgt8gaat"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
     }
   },
-   "alg2-wealth-v-health-logarithimic-desmos": {
-    "title": "Wealth v Health - Logarithmic (Desmos)",
+  "alg2-wealth-v-health-2-desmos": {
+    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/xectdnnqdy"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
     }
   }
 }
