@@ -37,7 +37,7 @@
 == Filtering {amp} Simpson's Paradox @duration{45 minutes}
 
 === Overview
-Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ trends instead of just one! This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
+Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ correlations, instead of just one. This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
 
 === Launch
 Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
@@ -62,7 +62,7 @@ Discuss in groups or pairs, and prepare to share out to the class:
 - If we fit a curve or straight line to this data, do you think it would have a high @math{R^2}-value?
 --
 
-The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a blue marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
+The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
 
 @teacher{Review student answers to confirm that students have made a number of observations:
 
@@ -109,7 +109,7 @@ Which group do you think the agency serves more? Why?
 
 How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
 
-We observe the same phenomenon in our Covid data. There is a relationship that we can clearly see _within_ groups, but that relationship almost disappears when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
+We can see the same phenomenon in our Covid data. There is a strong relationship that we can clearly see _within_ each group, but that relationship is really weak when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
 
 [.lesson-instruction]
 - We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.
@@ -150,7 +150,7 @@ Students explore their newly-filtered `MA-table` dataset, trying to fit differen
 |===
 
 |
-@span{.title}{Why are we starting from June 9th?!?}
+@span{.title}{Why just New England, starting from June 9th?!?}
 
 We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
 
@@ -158,7 +158,7 @@ For students who are farther along, we recommend showing them _all_ the data thr
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to full dataset later on, once students are comfortable with polynomial functions.
 
-__To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`__
+To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`
 |===
 
 
@@ -229,11 +229,11 @@ There is, however, a class of functions that grows even faster than quadratics: 
 [.growth, cols="15a,^.^5a", grid="none", frame="none", stripes="none"]
 |===
 
-| If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. Even if we calculate the "growth of the growth of the growth" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+| If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. Even if we calculate the "growth of the __growth of the growth__" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
 
 | @image{images/difference-table-exponential-1.png}
 
-| Exponential functions grow so rapidly that looking for _"what is added to y?"_ isn't helpful at all. The only way to talk about their growth is to start noticing _"what y is multiplied by"_.
+| Exponential functions grow so rapidly that looking for "what is _added_ to y?" isn't helpful at all. The only way to talk about their growth is to start noticing "what y is _multiplied_ by?"
 
 *In this case, we can see that the y-values are doubling each time!*
 
@@ -246,61 +246,48 @@ There is, however, a class of functions that grows even faster than quadratics: 
 - Complete @printable-exercise{classifying-tables.adoc}
 - Be ready to discuss your answers with the class!
 
-When you determined if the y-value doubled, tripled, or grew by a factor of 6, you were thinking about growth factor! @vocab{Growth factor} is the amount each term in an exponential sequence is multiplied by to get the next term (either 1 plus the @vocab{growth rate} or 1 minus the @vocab{decay rate}. For any exponential function @math{y = ab^x}, the term @math{b} (base) specifies the growth factor.
-
-When you looked at the row where @math{x=0} and observed the function's y-value, you were thinking about the initial value. For any exponential function @math{y=ab^x}, the term @math{a} specifies the _initial value_. +
-_Note: This initial value is sometimes (but not always!) the y-intercept._
-
 === Investigate
 
-Sometimes, we write exponential functions like this: @math{f(x)=ab^x + k}. +
-Let's explore what the @math{k} term specifies.
+We generally write exponential functions like this: @math{f(x)=ab^x + k}. +
+Let's explore what each coefficient means!
 
 [.lesson-instruction]
-- Open to the third slide of @starter-file{alg2-covid-desmos}.
-- Use Desmos to complete @printable-exercise{graphing-models.adoc}.
+- Use the third slide of @starter-file{alg2-covid-desmos} complete the first section ("base") of @printable-exercise{graphing-models.adoc}.
 
 @teacher{
 Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
 
-[.lesson-instruction]
-- Graphically, what does @math{k} tell us about an exponential function?
-** On a graph, an exponential function will always "level out", getting closer and closer to a horizontal line as @math{x} approaches infinity (when the curve slopes down) or zero (when the curve slopes up). This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}.
-** Adjusting @math{k} shifts the asymptote up and down, along with the rest of the exponential curve that approaches it.
-- Graphically, what does @math{b} tell us about an exponential function?
-** _The base (@math{b}) is the growth factor. See table below for more details._
-** @math{b} must always be positive because exponential functions live entirely on one side or the other of the x-axis. A negative @math{b} would result in points on both sides._
-- Graphically, what does @math{a} tell us about an exponential function?
-** _@math{a} is the initial value. If the function has not been shifted vertically, @math{a} is the y-intercept. In a function definition where we don't see @math{a}, the initial value is @math{1}._
-
+The base of an exponential function (@math{b}) must *always be positive*, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
 
 [cols="^.^3a,^.^3a,^.^3a", stripes="none", options="header"]
 |===
-
 | Exponential Growth
-
 | Flat
-
 | Exponential Decay
 
 | @image{images/growth.png, 150}
 | @image{images/flat.png, 150}
 | @image{images/decay.png, 150}
 
-| @math{b > 1}
+| @math{b > 1} +
+When the base is *larger* than 1, the function starts out flat and then grows by the "percentage greater than 1". A base of 1.25 - or @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. This percentage is called the @vocab{growth factor}, since it determines how quickly the function grows.
 
-A base of @math{2} means @math{y} will double for every increment of @math{x}
+| @math{b = 1} +
+When the base is equal to 1, the function stays flat without any growth of all (raising 1 to _any_ power will always produce 1!).
 
-| @math{b = 1}
-
-A base of @math{1} means that @math{y} will remain constant.
-
-| @math{0 < b < 1}
-
-A base of @math{0.5} means @math{y} will drop by half for every increment of @math{x}.
-
+| @math{0 < b < 1} +
+When the base is *smaller* than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. This percentage is called the @vocab{decay factor}, since it determines how quickly the function shrinks.
 |===
 
+[.lesson-instruction]
+- Use the third slide of @starter-file{alg2-covid-desmos} complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc}.
+
+An exponential function with a growth factor will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a decay factor will drop quickly, then level out close to a horizontal line. This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. Adjusting @math{k} shifts the asymptote up and down, along with the rest of the exponential curve that approaches it.
+
+[.lesson-instruction]
+- Use the third slide of @starter-file{alg2-covid-desmos} complete the last section ("initial value") of @printable-exercise{graphing-models.adoc}.
+
+The coefficient @math{a} is the initial value, where @math{x = 0}. The y-intercept of an exponential function is @math{a + k}. As with linear and quadratic functions, if a coefficient like @math{a} is "missing", the value of the coefficient is is @math{1} (After all, @math{1(2^x) = 2^x}!)
 
 @vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
 
