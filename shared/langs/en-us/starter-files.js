@@ -623,7 +623,7 @@ var starterFiles = {
   "alg2-exploring-quadratics": {
     "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/geyx4aetop"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
     }
   },
   "alg2-covid-desmos" : {
