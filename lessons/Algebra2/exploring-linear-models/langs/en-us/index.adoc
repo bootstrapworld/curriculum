@@ -56,10 +56,11 @@ We're going to search for relationships within a dataset about each of the state
 - Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
 - What did you Notice and Wonder?
 - What did you learn about defining rows in Pyret?
-** _Allow students to share what they discovered when completing Q8-Q10._
-** _In math, x = 4 will define a variable x to be the value 4. Any time we use x after that, we can substitute in the value of 4. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables alabama and alaska are defined as rows from the table._
 
-@teacher{Debrief with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.}
+In math, x = 4 will define a variable x to be the value 4. Any time we use x after that, we can substitute in the value of 4. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
+
+@teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
+}
 
 [.lesson-instruction]
 * What columns in this dataset have to do with wealth?
@@ -86,14 +87,13 @@ But what we really want is a display that will help us search for _a relationshi
 [.lesson-point]
 Scatter plots reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 
-Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}? 
+Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is the _cause_ - called the @vocab{explanatory} variable - and which is the _effect_ (@vocab{response variable})?
 
 In this case...
 
-- are we suspecting that an animal’s age might explain how long it takes to be adopted?
-- or are we suspecting that the weeks it takes for an animal to be adopted might explain how many years old it is? 
+Which do we suspect is the cause and which is the effect: age or time-to-adoption?
 
-The first one makes sense, and reflects our suspicion that age plays a role in adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.  
+We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.
 
 [.strategy-box, cols="1", grid="none", stripes="none"]
 |===
@@ -112,7 +112,7 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 - We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
 ** _Come to a consensus about which states your students will explore to produce richer full-class dialogue._
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
-- _Do not go on to Part 2._ We'll be returning to that later in the lesson.
+- Do not go on to Part 2! We'll return to that later in the lesson.
 
 @teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
@@ -161,7 +161,7 @@ Students identify and make use of @vocab{correlations} in scatter plots. They le
 
 Scatter plots let us visualize the relationship between two columns. If no relationship exists, the points in the scatter plot just appear as a shapeless cloud. But if there _is_ a relationship, the points will form some kind of pattern. When we build scatter plots, we are searching for patterns - or @vocab{correlations} between two quantitative variables.
 
-These patterns can be described using three qualities: form, direction, and strength.
+These patterns can be described using three qualities: **form**, **direction**, and **strength**.
 
 [cols="^1a,^1a,^1a", stripes="none"]
 |===
@@ -187,10 +187,11 @@ If the relationship clusters around a straight line, we can talk about _directio
 
 @right{@image{images/A.gif, 200}}**Negative**: The line slopes _down_ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
-Note: Not every shape has a direction! For example, a curve can start out sloping upwards, but then peak and slope downwards.
-
 [.lesson-point]
 Only @vocab{linear} relationships have @vocab{direction}.
+
+Not every shape has a direction! For example, a curve can start out sloping upwards, but then peak and slope downwards.
+
 
 How well does knowing the x-value allow us to predict what the y-value will be?
 
@@ -210,7 +211,7 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 Now that you've dug into the role that form, direction and strength play in quantifying a correlation, it's time to put those concepts to work!
 
 [.lesson-instruction]
-- We are going to learn how to compute correlations using Pyret, but before we can trust the computer, we need to train our eyes to look for form so that we know what kind of correlations to run. And sometimes there's a bug in a program, so we want to be able to recognize whether the results we get from Pyret for form, direction, and strength make sense!
+- We are going to learn how to compute correlations using Pyret, but before we can trust the computer, we need to train our eyes to look for form so that we know what kind of correlations to run. Sometimes there's a bug in a program, so we want to be able to recognize whether the results we get from Pyret for form, direction, and strength make sense!
 - Let's start by practicing matching the scatterplots to their descriptions on @printable-exercise{pages/identifying-form-matching.adoc}.
 
 @teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
@@ -218,7 +219,7 @@ Now that you've dug into the role that form, direction and strength play in quan
 [.lesson-instruction]
 In pairs or small groups, complete @printable-exercise{pages/identifying-form.adoc}
 
-@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok.}
+@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
 
 [.lesson-instruction]
 Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
@@ -299,7 +300,9 @@ __Based on the data for the existing 50 states (plus DC!)...__
 
 --
 
-@right{@image{images/pyret-window.png, 150}} @teacher{Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatterplot and clicking "Redraw".}
+@teacher{
+@right{@image{images/pyret-window.png, 150}} Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatterplot and clicking "Redraw".
+}
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
