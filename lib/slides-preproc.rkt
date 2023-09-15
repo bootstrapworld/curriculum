@@ -603,7 +603,10 @@
                      [(string=? directive "Q")
                       (let ([text (read-group i directive)])
                         (display "\n* " o)
-                        (expand-directives:string->port text o))]
+                        (expand-directives:string->port text o)
+                        (display "\n<!--\n" o)
+                        (expand-directives:string->port text o)
+                        (display "\n-->\n" o))]
                      [(string=? directive "A")
                       (let ([text (read-group i directive)])
                         (display "<!--\n" o)
