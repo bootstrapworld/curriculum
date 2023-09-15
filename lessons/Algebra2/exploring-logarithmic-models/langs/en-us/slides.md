@@ -79,7 +79,7 @@ Logarithmic relationships grow very quickly at first, but then level out as @mat
 
 We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
 
-Complete the first section of @printable-exercise{transforming-axis.adoc}, using @online-exercise{https://www.desmos.com/calculator/xectdnnqdy, Wealth-v-Health - Logarithmic}.
+Complete the first section of @printable-exercise{changing-scale.adoc}, using @online-exercise{https://www.desmos.com/calculator/xectdnnqdy, Wealth-v-Health - Logarithmic}.
 
 @teacher{Crowdsource the values students came up with for @math{b} and @math{c} in their best-guess logarithmic model. Were they very similar or very different? What were the @math{R^2} values?}
 
