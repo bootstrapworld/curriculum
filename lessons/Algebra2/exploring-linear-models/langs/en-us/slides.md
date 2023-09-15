@@ -41,10 +41,15 @@ Debrief the rest of the page with students. Then, initiate a conversation about 
 # Looking for Patterns
 
 * What columns in this dataset have to do with wealth?
-** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
-* What columns might be related to wealth?
-** _Examples:_ `college-or-higher`, `hs-or-higher`
+* What columns might be related to education?
 
+
+@teacher{
+* What columns in this dataset have to do with wealth?
+    - _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
+* What columns might be related to education?
+    - _Examples:_ `college-or-higher`, `hs-or-higher`
+}
 ---
 {layout="Investigate"}
 # Looking for Patterns
@@ -238,7 +243,7 @@ We'd expect students to be able to surface much of the following:
 
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
 
-* Try comparing intervals of 2, instead of intervals of 1. Is the difference between x=1 and x=3 the same as the difference between x=2 and x=4?
+* Try comparing intervals of 2, instead of intervals of 1. Is the difference between x=1 and x=3 the same as the difference between x=2 and x=4?{style="font-size: 14pt"}
 
 @teacher{
 * Try comparing intervals of 2, instead of intervals of 1. Is the difference between x=1 and x=3 the same as the difference between x=2 and x=4?
@@ -271,9 +276,9 @@ Suppose the United States were to add a new state.
 
 __Based on the data for the existing 50 states (plus DC!)...__
 
-- What median household income would you predict, if exactly 50% of the new state's citizens had attended college? 
-- What would you predict if 20% had attended college? 
-- If 60% had attended college?
+- What median household income would you predict, if exactly 50% of the new state's citizens had attended college?{style="font-size: 14pt"}
+- What would you predict if 20% had attended college?{style="font-size: 14pt"}
+- If 60% had attended college?{style="font-size: 14pt"}
 
 
 @teacher{
@@ -326,7 +331,7 @@ Let's find the best fit we can make for this dataset!
 {layout="Investigate"}
 # Fitting Linear Models
 
-Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
+Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 
 ---
@@ -424,20 +429,10 @@ So far, we've focused on models using the *Slope-Intercept* form of the line. Th
 
 You may already be familiar with the different forms of linear models available to us:
 
-table{3}
+@table{3}
 | Slope-Intercept		| Point-Slope				| Standard
 | @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
-| 
-- m: slope
-- b: y-intercept
-|
-- m: slope
-- @math{y_1}: y-coordinate of a point
-- @math{x_1}: x-coordinate of the same point
-|
-- x-int: @math{\frac{C}{A}}
-- y-int: @math{\frac{C}{B}}
-- slope: @math{- \frac{A}{B}}
+|  - m: slope - b: y-intercept | - m: slope - @math{y_1}: y-coordinate of a point - @math{x_1}: x-coordinate of the same point | - x-int: @math{\frac{C}{A}} - y-int: @math{\frac{C}{B}} - slope: @math{-\frac{A}{B}}
 
 ---
 {layout="Launch"}
