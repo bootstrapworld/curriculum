@@ -1810,7 +1810,7 @@
                               (display rubric-link-output o)
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.q-and-a]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
