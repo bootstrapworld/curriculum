@@ -44,6 +44,8 @@
 
 (define *missing-image-json-files* '())
 
+(define *output-answers?* #f)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -600,18 +602,25 @@
                      [(string=? directive "slideLayout")
                       (let ([x (read-group i directive)])
                         (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
+                     [(string=? directive "QandA")
+                      (let ([text (read-group i directive #:multiline? #t)])
+                        (expand-directives:string->port text o)
+                        (display "\n<!--\n" o)
+                        (set! *output-answers?* #t)
+                        (expand-directives:string->port text o)
+                        (set! *output-answers?* #f)
+                        (display "\n-->\n" o))]
                      [(string=? directive "Q")
                       (let ([text (read-group i directive)])
                         (display "\n* " o)
                         (expand-directives:string->port text o)
-                        (display "\n<!--\n" o)
-                        (expand-directives:string->port text o)
-                        (display "\n-->\n" o))]
+                        (display "\n" o))]
                      [(string=? directive "A")
-                      (let ([text (string-append "-    " (read-group i directive))])
-                        (display "<!--\n" o)
-                        (expand-directives:string->port text o)
-                        (display "\n-->" o))]
+                      (let ([text (read-group i directive)])
+                        (when *output-answers?*
+                          (display "\n-    " o)
+                          (expand-directives:string->port text o)
+                          (display "\n" o)))]
                      [(member directive '("pathway-only" "scrub"))
                       (read-group i directive)]
                      [else (display c o) (display directive o)]))]
