@@ -3,6 +3,7 @@
 # Q and A
 
 Here are some directions
+@QandA{
 @Q{What day is it today?}
 @A{Monday}
 * Here are some more directions
@@ -10,4 +11,4 @@ Here are some directions
 @A{Caramel}
 @A{Nougat}
 @A{Chocolate}
-
+}
