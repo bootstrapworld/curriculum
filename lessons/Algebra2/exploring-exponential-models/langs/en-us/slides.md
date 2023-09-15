@@ -64,7 +64,7 @@ With all these clear, tight lines, we might think this would be a dataset with a
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations._
 
 ---
-{layout="InvestigateC"}
+{layout="InvestigateR"}
 # Filtering & Simpson's Paradox
 
 @right{@image{images/Simpsons_animation.gif, 300}}
@@ -252,12 +252,19 @@ Quadratic functions grow by intervals that _increase by fixed amounts!_ In the t
 
 @image{images/difference-table-exponential-1.png}
 
-There is, however, a class of functions that grows even faster than quadratics: @vocab{exponential functions}.{style="font-size: 16pt"}
+There is, however, a class of functions that grows even faster than quadratics: @vocab{exponential functions}.
 
+If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. 
 
-If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. Even if we calculate the "growth of the __growth of the growth__" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.{style="font-size: 16pt"}
+---
+{layout="LaunchR"}
+# Exponential Functions
 
+@image{images/difference-table-exponential-1.png}
 
+Even if we calculate the "growth of the __growth of the growth__" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! 
+
+Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
 
 ---
 {layout="LaunchR"}
@@ -301,7 +308,7 @@ Review students answers, and then debrief via class discussion. Invite students 
 
 
 ---
-{layout="InvestigateC"}
+{layout="InvestigateR"}
 # Exponential Functions
 
 @image{images/growth.png}
@@ -311,7 +318,7 @@ Review students answers, and then debrief via class discussion. Invite students 
 
 
 ---
-{layout="InvestigateC"}
+{layout="InvestigateR"}
 # Exponential Functions
 
 @image{images/flat.png}
@@ -320,7 +327,7 @@ Review students answers, and then debrief via class discussion. Invite students 
 
 
 ---
-{layout="InvestigateC"}
+{layout="InvestigateR"}
 # Exponential Functions
 
 @image{images/decay.png}
@@ -340,7 +347,9 @@ Use the third slide of @starter-file{alg2-covid-desmos} to complete the second s
 {layout="Investigate"}
 # Exponential Functions
 
-An exponential function with a @vocab{growth factor} will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a @vocab{decay factor} will drop quickly, then level out close to a horizontal line. This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. 
+An exponential function with a @vocab{growth factor} will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a @vocab{decay factor} will drop quickly, then level out close to a horizontal line. 
+
+This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. 
 
 
 *Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
@@ -351,16 +360,6 @@ An exponential function with a @vocab{growth factor} will always start close to 
 # Exponential Functions
 
 Use the third slide of @starter-file{alg2-covid-desmos} to complete the last section ("initial value") of @printable-exercise{graphing-models.adoc}.
-
-
----
-{layout="Investigate"}
-# Exponential Functions
-
-An exponential function with a @vocab{growth factor} will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a @vocab{decay factor} will drop quickly, then level out close to a horizontal line. This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. 
-
-*Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
-
 
 ---
 {layout="Investigate"}
@@ -392,7 +391,7 @@ That means that if we don't see @math{a} or @math{k} in an exponential equation,
 
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, which will become 8, then 16, and so on.{style="font-size: 15pt"}
-- Unstable particles degrade into stable particles over time, emitting radiation as a biproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.{style="font-size: 15pt"}
+- Unstable particles degrade into stable particles over time, emitting radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.{style="font-size: 15pt"}
 - Money in a savings account grows by a certain percentage each year. 3% growth on $100 would turn into $103. The next year that would become $106.09. And the next year $109.27. Every year there's a little more money to grow. If you start saving early, the account will grow into quite a lot more money down the road.{style="font-size: 15pt"}
 
 

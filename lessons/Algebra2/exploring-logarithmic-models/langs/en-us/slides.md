@@ -114,7 +114,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the first sectio
  @math{b} of the logarithm* is similar to the base in exponential functions. 
 
 * @math{2^4} means "calculate 2 to the power of 4"
-* @math{log_2(16)} means "calculate what power 2 should be raised to in order to reach 16". 
+* @math{\log_2(16)} means "calculate what power 2 should be raised to in order to reach 16". 
 
 Look back to your answers on @printable-exercise{classifying-tables.adoc}. For tables that represent logarithmic functions, by what factor does @math{x} need to grow in order to get a constant increase in @math{y}?
 
@@ -125,12 +125,12 @@ Look back to your answers on @printable-exercise{classifying-tables.adoc}. For t
 
 @table{3}
 | logarithm 		| Translation					| Solution
-| @math{log_2(8)}	| 2 raised to what power is 8?	| 3
-| @math{log_2(1)}	| 2 raised to what power is 1?	| 0
-| @math{log_5(25)}	| 5 raised to what power is 25?	| 2
-| @math{log_5(1)}	| 5 raised to what power is 1?	| 0
-| @math{log_3(8)}	| 3 raised to what power is 81?	| 4
-| @math{log_3(1)}	| 3 raised to what power is 1?	| 0
+| @math{\log_2(8)}	| 2 raised to what power is 8?	| 3
+| @math{\log_2(1)}	| 2 raised to what power is 1?	| 0
+| @math{\log_5(25)}	| 5 raised to what power is 25?	| 2
+| @math{\log_5(1)}	| 5 raised to what power is 1?	| 0
+| @math{\log_3(8)}	| 3 raised to what power is 81?	| 4
+| @math{\log_3(1)}	| 3 raised to what power is 1?	| 0
 
 
 
@@ -151,7 +151,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the second secti
 
 (_We've seen vertical shifts in other kinds of functions given different names, like @math{k} for quadratics and @math{b} for linear function._) 
 
-Because @math{log_{anything}(1) = 0}
+Because @math{\log_{anything}(1) = 0}
 
 * the logarithmic term will always be zero at @math{x=1}
 * @math{y} will always be the value of @math{c} at @math{x=1}
@@ -213,7 +213,9 @@ We measure sound intensity on a logarithmic scale, which proceeds in multiples o
 {layout="Launch"}
 # Changing the Scale
 
-Remember that logarithmic models have the form @math{f(x) = a \log_b(x) + c}
+Remember that logarithmic models have the form:
+
+@math{f(x) = a \log_b(x) + c}
 
 To fit our logarithmic model, we need to find @math{a} and @math{c}, such that the model fits the data as closely as possible.
 
@@ -395,9 +397,9 @@ With the transformation applied, our linear model (in both function and Pyret no
 @right{@image{images/logarithmic-model.png, 350}}
 From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
 
-@math{h(x) = 11.9011 \log_{10}(x) + 24.2636}
+@math{h(x) = 11.9011 \log_{10}(x) + 24.2636}{style="font-size:16pt"}
 
-@show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}
+@show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}{style="font-size:16pt"}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
