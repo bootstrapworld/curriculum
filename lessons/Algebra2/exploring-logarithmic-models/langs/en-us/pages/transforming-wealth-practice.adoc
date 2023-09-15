@@ -1,45 +1,51 @@
-= Does Wealth Matter as much with Universal Healthcare?
+= Does Wealth impact lifespan equally if there's Universal Healthcare?
 ++++
 <style>
 table td:first-of-type p { font-weight: bold; }
 </style>
 ++++
 
-For this page, you'll need to the  @starter-file{alg2-countries} open on your computer. __If you haven't already__, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+For this page, you'll need the @starter-file{alg2-countries} open on your computer. __If you haven't already__, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
 
-Does the relationship between wealth and median lifespan look different in countries with universal healthcare than it does in countries without?
+@n Read the function definition carefully: `fun no-universal(r): not(r["has-univ-healthcare"]) end`
 
-@vspace{1ex}
+@hspace{3em} What do you think this function does? @fitb{}{@ifsoln{it looks up the value of the `has-univ-healthcare`}}
 
-Read the function below carefully:
-
-`fun no-universal(r): not(r["has-univ-healthcare"]) end`
-
-@n What do you think this function does? @fitb{}{@ifsoln{it looks up the value of the `has-univ-healthcare`}}
-
-@fitb{}{@ifsoln{column in whatever row it was passed and produces the opposite.}}
+@hspace{3em}@fitb{}{@ifsoln{column in whatever row it was passed and produces the opposite.}}
 
 @vspace{1ex}
 
-@center{**Add the code for this function at the bottom of the Definitions Area, then click Run.**}
-
-@n What does @show{(code '(no-universal albania))} evaluate to? @fitb{}{@ifsoln{`true`}}
+@n Add `fun no-universal(r): not(r["has-univ-healthcare"]) end` at the bottom of the Definitions Area. 
 
 @vspace{1ex}
 
-@center{**At the bottom of the Definitions Area, type `countries-wo-univ = filter(countries2, no-universal)`, then click Run.**}
+@hspace{3em} Click "Run" and evaluate @show{(code '(no-universal albania))} in the Interactions Area. 
 
-@n What does `countries-wo-univ` produce? @fitb{}{}
-
-@fitb{}{@ifsoln{A table of all the countries without universal healthcare}}
+@hspace{3em} What does Pyret return? @fitb{}{@ifsoln{`true`}}
 
 @vspace{1ex}
 
-@center{**In the Definitions Area, define a new function called `yes-universal`**, which returns the value in the `has-univ-healthcare` column. Then use it with the `filter` function to **define a new table called `countries-w-univ`**.}
+@n Add `countries-wo-univ = filter(countries2, no-universal)` to the bottom of the Definitions Area, then click "Run".
+
+@hspace{3em}What does evaluating `countries-wo-univ` in the Interactions Area produce? @fitb{}{}
+
+@hspace{3em} @fitb{}{@ifsoln{A table of all the countries without universal healthcare}}
 
 @vspace{1ex}
 
-@n Use the transformed column `log-pc-gdp` in each of the two tables to find the best possible linear model with `lr-plot`, then use these results to create logarithmic models. Fill in the table below.
+@n Using the two definitions you just added as models:
+
+[.indentedpara]
+- Define a new function called `yes-universal`, which returns the value in the `has-univ-healthcare` column. 
+- Define a new table called `countries-w-univ`, which shows all the countries with universal healthcare.
+- Click "Run" to load these new definitions once you have them both typed into the Definitions Area.
+
+@n Fill in the table below by:
+
+[.indentedpara]
+- Building an `lr-plot` for each of these tables with the transformed-column `log-pc-gdp`.
+- Using what you learn from `lr-plot` to write logarithmic models for each table.
+- Using `fit-model` to find @math{R^2} for each of your logarithmic models and their corresponding un-transformed `countries-w-univ` and `countries-wo-univ` tables. 
 
 @vspace{1ex}
 
@@ -62,7 +68,7 @@ Read the function below carefully:
 | @fitb{10em}{}
 |===
 
-@n Try using `fit-model` with your new models, fitting it to the original, un-transformed `countries-w-univ` and `countries-wo-univ` tables. For which table was the relationship _strongest?_ @fitb{}{}
+@n Was the relationship stronger for `countries-wo-univ` or `countries-w-univ`? @fitb{}{}
 
 @n What does this mean about the impact of universal healthcare?
 
