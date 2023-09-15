@@ -1809,6 +1809,14 @@
                               (display " __{startsb}" o)
                               (display rubric-link-output o)
                               (display "{endsb}__" o))]
+                           [(string=? directive "Q")
+                            (let ([text (read-group i directive)])
+                              (display "\n* " o)
+                              (expand-directives:string->port text o))]
+                           [(string=? directive "A")
+                            (let ([text (read-group i directive)])
+                              (display "\n** " o)
+                              (expand-directives:string->port text o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
