@@ -97,11 +97,11 @@ These patterns can be described using three qualities: **form**, **direction**, 
 
 @vocab{Form} refers to the shape of the pattern. Sometimes a pattern looks like a straight line, or a curve, or a hockey stick. And sometime, there's no clear shape at all!
 
-Form indicates whether a relationship is linear, non-linear or undefined.
+Form indicates whether a relationship is linear, nonlinear or undefined.
 
 @table{3}
 | @image{images/1b1.gif, 250} | @image{images/2NL.gif, 250} | @image{images/B.gif, 250}
-| Some patterns are **linear**, and cluster around a straight line sloping up or down. | Some patterns are **non-linear**, and may look like a curve or an arc. | And sometimes there is **no relationship** or pattern at all!
+| Some patterns are **linear**, and cluster around a straight line sloping up or down. | Some patterns are **nonlinear**, and may look like a curve or an arc. | And sometimes there is **no relationship** or pattern at all!
 
 ---
 {layout="LaunchR"}

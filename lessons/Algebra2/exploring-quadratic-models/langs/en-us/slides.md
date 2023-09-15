@@ -15,7 +15,7 @@ When you're driving, what speed will save you the most money on gas?
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete the first section of @printable-exercise{pages/exploring-mpg.adoc}.
 
-@teacher{Review student answers to confirm that students see a _non-linear_ relationship in the dataset with a relatively strong correlation. Students should generally agree that the relationship is a curve (parabola), which opens downwards and has a vertex at _roughly_ 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!}
+@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset with a relatively strong correlation. Students should generally agree that the relationship is a curve (parabola), which opens downwards and has a vertex at _roughly_ 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!}
 
 ---
 {layout="InvestigateR"}

@@ -40,7 +40,7 @@ Each relationship appears very strong, almost as if there is _more than one mode
 
 * There is _more than one_ relationship in this dataset
 * Every relationship seems extremely strong
-* Most/all relationships appear non-linear}
+* Most/all relationships appear nonlinear}
 
 
 ---
