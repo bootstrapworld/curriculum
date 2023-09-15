@@ -100,7 +100,7 @@ The behavior in this relationship is the _reverse_ of exponential growth: instea
 {layout="Investigate"}
 # Logarithmic Functions
 
-Logarithmic models have the form @math{f(x) = a log_b(x) + c}
+Logarithmic models have the form @math{f(x) = a \log_b(x) + c}
 
 Use @starter-file{alg2-exploring-logarithms-desmos} to complete the first section ("base") of @printable-exercise{graphing-models.adoc}
 
@@ -168,7 +168,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the last section
 {layout="Investigate"}
 # Logarithmic Functions
 
-*The term @math{a} is called the logarithmic coefficient*, which - like @math{b} - determines how quickly the function grows. @teacher{Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 log_{10}(10) = log_{10}(10^2)}!}
+*The term @math{a} is called the logarithmic coefficient*, which - like @math{b} - determines how quickly the function grows. @teacher{Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
 
 Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly. In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
 
@@ -213,7 +213,7 @@ We measure sound intensity on a logarithmic scale, which proceeds in multiples o
 {layout="Launch"}
 # Changing the Scale
 
-Remember that logarithmic models have the form @math{f(x) = a log_b(x) + c}
+Remember that logarithmic models have the form @math{f(x) = a \log_b(x) + c}
 
 To fit our logarithmic model, we need to find @math{a} and @math{c}, such that the model fits the data as closely as possible.
 
@@ -317,7 +317,7 @@ We tried changing the scale on the x-axis from linear to exponential, which canc
 
 Transforming the points instead of the axis has the same visual effect: the dots appear to fall in a straight line. But now we can plot them on a linear-scale axis, and use linear regression to find the best-possible model!
 
-This transformation changed the _kind of growth_ from logarithmic to linear: the term went from @math{a log_{10}(x)} to @math{ax}. Instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by @math{a}.
+This transformation changed the _kind of growth_ from logarithmic to linear: the term went from @math{a \log_{10}(x)} to @math{ax}. Instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by @math{a}.
 
 
 ---
@@ -395,7 +395,7 @@ With the transformation applied, our linear model (in both function and Pyret no
 @right{@image{images/logarithmic-model.png, 350}}
 From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
 
-@math{h(x) = 11.9011 log_{10}(x) + 24.2636}
+@math{h(x) = 11.9011 \log_{10}(x) + 24.2636}
 
 @show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}
 
