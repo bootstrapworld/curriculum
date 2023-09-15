@@ -608,7 +608,7 @@
                         (expand-directives:string->port text o)
                         (display "\n-->\n" o))]
                      [(string=? directive "A")
-                      (let ([text (read-group i directive)])
+                      (let ([text (string-append "-    " (read-group i directive))])
                         (display "<!--\n" o)
                         (expand-directives:string->port text o)
                         (display "\n-->" o))]
