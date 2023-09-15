@@ -64,7 +64,7 @@ Datasets like these are impossible to model all at once, because there will alwa
 {layout="InvestigateR"}
 # Filtering & Simpson's Paradox
 
-@right{@image{../images/Simpsons_animation.gif, 300}}
+@right{@image{images/Simpsons_animation.gif, 300}}
 
 **Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.**{style="font-size: 16pt"}
 
