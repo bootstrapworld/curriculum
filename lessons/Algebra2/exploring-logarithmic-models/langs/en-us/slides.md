@@ -11,11 +11,10 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 @image{images/questions.png, 250}
 
-- Do people who make more money generally live longer?
+- Do you think people living in wealthier countries generally live longer?
 - Open the @starter-file{alg2-countries}
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete questions 1-6 on @printable-exercise{exploring-countries.adoc}.
-- Be ready to discuss!
 
 @teacher{
 Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
@@ -27,10 +26,10 @@ Be attentive to sense-making: If a wealthy country is suffering heavy causalties
 {layout="Launch"}
 # Looking for Patterns
 
-Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc} using @online-exercise{https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95, Fitting Wealth-v-Health} to try fitting linear, quadratics, and exponential models for this dataset
+Working in pairs or small groups, complete the rest of @printable-exercise{exploring-countries.adoc} using @starter-file{alg2-wealth-v-health-desmos}.
 
 @teacher{
-Note: This worksheet involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to __discover that a new kind of  model is necessary__.
+_Note: This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to discover that a new kind of  model is necessary_.
 }
 
 
@@ -39,112 +38,385 @@ Note: This worksheet involves lots of trial and error, as students try to come u
 # Looking for Patterns
 
 - What's the best model you came up with?
-- What sketches did you draw. What kinds of lines or curves did you use?
-
----
-{layout="LaunchC"}
-# Transforming the x-Axis 
-
-@image{images/wealth-v-life-linear.png} There definitely appears to be a relationship here, but it's not one we've seen before. Using `lr-plot` only shows a moderate correlation, because the straight line doesn't really fit the curve. The shape of this starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.{style="font-size:15pt"}
+- What kinds of lines or curves did you use?
 
 
 ---
-{layout="LaunchC"}
-# Fitting Logarithmic Models
+{layout="Synthesize"}
+# Looking for Patterns
 
-@image{images/wealth-v-life-linear.png} How well did our linear, quadratic, and exponential models fit this data? Is there another kind of function that starts off rising fast, but then levels off quickly?
-
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-The shape of this relationship is _logarithmic_, meaning it can be modeled using a logarithmic function:
-
-@center{@math{f(x) = b \times log(x) + c}  }
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-@center{@math{f(x) = b \times log(x) + c}  }
-
-Logarithmic relationships grow very quickly at first, but then level out as @math{x} increases until they approach a horizontal line, called an _asymptote_.
-
-@optional For practice differentiating between quadratic, exponential, and logarithmic relationships, optional exercises are available for @opt-printable-exercise{classifying-tables.adoc, Tables}, @opt-printable-exercise{classifying-graphs.adoc, Graphs} and @opt-printable-exercise{classifying-defs.adoc, Definitions}.
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-We need to find @math{b} and @math{c}, such that the model fits the data as closely as possible.
-
-Complete the first section of @printable-exercise{changing-scale.adoc}, using @online-exercise{https://www.desmos.com/calculator/xectdnnqdy, Wealth-v-Health - Logarithmic}.
-
-@teacher{Crowdsource the values students came up with for @math{b} and @math{c} in their best-guess logarithmic model. Were they very similar or very different? What were the @math{R^2} values?}
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** 
-
-Unfortunately, `lr-plot` only finds linear models. If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. 
-
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-Data Scientists often use *transformations* to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
-
-* A person running on a treadmill is still standing in the same place. Why?
-* If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?
+- How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp`?
+- How well did our linear, quadratic, and exponential models fit this data?
 
 @teacher{
-* A person running on a treadmill is still standing in the same place. Why?
-** Their forward movement is balanced by the backwards movement of the treadmill.
-* If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?
-** The treadmill needs to go faster as well - by the same amount.	
+- How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp`?
+** _It starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right._
+- How well did our linear, quadratic, and exponential models fit this data?
+** _None of the kinds of functions we've seen so far exhibit the behavior we see here! In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off._}
+
+
+
+
+---
+{layout="LaunchR"}
+# Logarithmic Functions
+
+@image{images/difference-table-exponential-2.png}
+
+We know that exponential functions grow by _equal factors over the same interval_, so instead of calculating "what is added to @math{y}", we calculate "what @math{y} is multiplied by" to produce the next value over a constant interval.
+
+
+---
+{layout="LaunchR"}
+# Logarithmic Functions
+
+@image{images/difference-table-logarithmic.png}
+
+The behavior in this relationship is the _reverse_ of exponential growth: instead of multiplying @math{y} by a constant factor to find the next value, we need to _multiply the size of our x-interval_ by a constant factor just to get a constant growth in @math{y}! This relationship can be modeled using a @vocab{logarithmic function}.
+
+
+---
+{layout="Launch"}
+# Logarithmic Functions
+
+- Complete @printable-exercise{classifying-tables.adoc}.
+- What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?
+- Was it especially difficult (or simple) to recognize any these function types? Why?
+
+
+@teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about how much @math{x} needs to increase just to get a fixed increase in @math{y}. This foreshadows the idea of _base_ for logarithmic relationships.}
+
+
+
+---
+{layout="Launch"}
+# Logarithmic Functions
+
+
+@vocab{Logarithmic relationships} - like the ones you identified on tables 1, 4, and 6 - grow or decay very quickly at first, but then level out as @math{x} increases. Our intervals need to grow longer and longer just to reach a small change in @math{y}. For example, it might take 10 steps to go from @math{1} to @math{2}, but then a hundred more to get to @math{3} and a _thousand_ more to get to @math{4}.
+
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+Logarithmic models have the form @math{f(x) = a log_b(x) + c}
+
+Use @starter-file{alg2-exploring-logarithms-desmos} to complete the first section ("base") of @printable-exercise{graphing-models.adoc}
+
+@teacher{Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+*The base
+ @math{b} of the logarithm* is similar to the base in exponential functions. 
+
+* @math{2^4} means "calculate 2 to the power of 4"
+* @math{log_2(16)} means "calculate what power 2 should be raised to in order to reach 16". 
+
+Look back to your answers on @printable-exercise{classifying-tables.adoc}. For tables that represent logarithmic functions, by what factor does @math{x} need to grow in order to get a constant increase in @math{y}?
+
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+@table{3}
+| logarithm 		| Translation					| Solution
+| @math{log_2(8)}	| 2 raised to what power is 8?	| 3
+| @math{log_2(1)}	| 2 raised to what power is 1?	| 0
+| @math{log_5(25)}	| 5 raised to what power is 25?	| 2
+| @math{log_5(1)}	| 5 raised to what power is 1?	| 0
+| @math{log_3(8)}	| 3 raised to what power is 81?	| 4
+| @math{log_3(1)}	| 3 raised to what power is 1?	| 0
+
+
+
+(Don't forget -- anything to the power of zero is always 1, so the log of 1 will always be zero - _for any base!_)
+
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+Use @starter-file{alg2-exploring-logarithms-desmos} to complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc}
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+*The term @math{c} is the vertical shift* of the function, which moves the curve up or down. 
+
+(_We've seen vertical shifts in other kinds of functions given different names, like @math{k} for quadratics and @math{b} for linear function._) 
+
+Because @math{log_{anything}(1) = 0}
+
+* the logarithmic term will always be zero at @math{x=1}
+* @math{y} will always be the value of @math{c} at @math{x=1}
+
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+Use @starter-file{alg2-exploring-logarithms-desmos} to complete the last section ("logarithmic coefficient") of @printable-exercise{graphing-models.adoc}
+
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+*The term @math{a} is called the logarithmic coefficient*, which - like @math{b} - determines how quickly the function grows. @teacher{Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 log_{10}(10) = log_{10}(10^2)}!}
+
+Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly. In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+- We observed a logarithmic relationship between wealth and health in our Countries of the World dataset.
+- There are lots of relationships like this, where the function grows or decays very quickly at first, but then moves at a glacial pace the farther out it goes.
+- Can you think of any other real-world relationships that logarithmic functions might do a good job modeling?
+
+@teacher{_Logarithms are primarily applied in science and technology. It may be a challenge for students to think of relevant examples. We've provided one for class discussion, below._}
+
+
+---
+{layout="InvestigateC"}
+# Logarithmic Functions
+
+@image{images/decibels-table.png}
+We measure sound intensity on a logarithmic scale, which proceeds in multiples of 10. The table to the right gives some intensity levels in _watts per square meter_ and in _decibels_. Our ears can hear incredibly quiet sounds (like a pin dropping), but also process incredibly loud sounds (like a fog horn). A fire alarm, for example, is thousands of times louder than a dog barking, but it's difficult for our brains to process that much more "loudness". As a result, we also _perceive_ loudness on a logarithmic scale: for us to perceive a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.{style="font-size:14pt"}
+
+---
+{layout="Investigate"}
+# Logarithmic Functions
+
+- Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
+- What clues did you use to help you identify which relationships were which?
+
+@teacher{Have students share their answers. Be especially attentive to students who mis-label logarithmic relationships as "exponential" -- the relationship between the two is extremely subtle!}
+
+
+---
+{layout="Synthesize"}
+# Logarithmic Functions
+
+- What _similarities_ do you see between exponential and logarithmic functions?
+- What _differences_ do you see between exponential and logarithmic functions?
+
+
+
+---
+{layout="Launch"}
+# Changing the Scale
+
+Remember that logarithmic models have the form @math{f(x) = a log_b(x) + c}
+
+To fit our logarithmic model, we need to find @math{a} and @math{c}, such that the model fits the data as closely as possible.
+
+
+
+---
+{layout="Launch"}
+# Changing the Scale
+
+- Complete the first section of @printable-exercise{changing-scale.adoc}, using @starter-file{alg2-wealth-v-health-2-desmos}.
+- What values did you come up with for @math{a} and @math{c} in your best-guess logarithmic model.
+- Were those values very similar or very different? What were the @math{R^2} values?
+
+@teacher{** _Crowdsource and record students' responses on the board._
 }
 
----
-{layout="Investigate"}
-# Fitting Logarithmic Models
-
-As long as the treadmill speed increases at the same rate as the runner, they will _balance one another's growth_. That's the same thing that's happening in our transformed graph.
 
 ---
-{layout="Investigate"}
-# Fitting Logarithmic Models
+{layout="Launch"}
+# Changing the Scale
 
-By __transforming the x-axis__ to grow exponentially, we are "squashing" the coordinate plane so that each interval of  represents 10x the growth in `pc-gdp` as the one before it. This balances  the logarithmic growth in `median-lifespan`, makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. **We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.** Unfortunately, `lr-plot` only finds linear models!
+
+If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
+
+
+
+---
+{layout="Investigate"}
+# Changing the Scale
+
+Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use transformations to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
+
+Complete the last section of @printable-exercise{changing-scale.adoc}, using @starter-file{alg2-wealth-v-health-2-desmos}.
+
+---
+{layout="Investigate"}
+# Changing the Scale
+
+By __transforming the x-axis__ to grow exponentially, we are "squashing" the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
+
+@teacher{The following metaphor might help students make sense of this.}
+
+
+
+---
+{layout="Investigate"}
+# Changing the Scale
+
+
+
+* A person running on a treadmill doesn't change location. Why not?
+* If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?
+* How is the treadmill example comparable to what we've done with our x-axis transformation?
+
+
+
+@teacher{
+* A person running on a treadmill doesn't change location. Why not?
+** _Their forward movement is balanced by the backwards movement of the treadmill._
+* If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?
+** _The treadmill needs to go faster as well. As long as the treadmill speed increases at the same rate as the runner, they will balance one another's growth._
+* How is the treadmill example comparable to what we've done with our x-axis transformation?
+
+While this metaphor doesn't cover inverses in any real depth, the treadmill analogy opens the door to discussing how one kind of change can "cancel out" or "undo" another. 
+
+We are working to add additional material on inverse functions to our Algebra 2 materials, and hope to release them by Fall 2024!}
+
+
 
 ---
 {layout="Synthesize"}
-# Fitting Logarithmic Models
+# Changing the Scale
 
 - How does seeing the point cloud as linear help us think about logarithmic growth?
-- What if we wanted to change the axis to show a quadratic scale? Or something more complicated?
+- Transforming the axes only makes things _look_ linear - the actual points haven't changed at all, and we still can't use linear regression to find the best logarithmic model... Can you think of a way we could we transform the _data_, instead of the axes?
+
+---
+{layout="Launch"}
+# Transforming the Data
+
+We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by "shrinking the axis". Another strategy is to "shrink the data", by _transforming the x-coordinates themselves_. Instead of plotting `pc-gdp` on a *logarithmic* x-axis, we could plot `log(gdp)` on a *linear* x-axis.
+
+---
+{layout="Launch"}
+# Transforming the Data
+
+- Complete @printable-exercise{transforming-data.adoc}, using @starter-file{alg2-wealth-v-health-2-desmos}.
+- What values did you come up with for our coefficients @math{m} and @math{b} in your best-guess linear model.
+- Were those values very similar or very different?
+- How close were the values from our best-guess logarithmic model?
+
+@teacher{
+** _Crowdsource and record students' responses on the board._
+** _Students should discover that the values match the coefficients of the logarithmic model as well._}
+
+
+---
+{layout="Launch"}
+# Transforming the Data
+
+Transforming the points instead of the axis has the same visual effect: the dots appear to fall in a straight line. But now we can plot them on a linear-scale axis, and use linear regression to find the best-possible model!
+
+This transformation changed the _kind of growth_ from logarithmic to linear: the term went from @math{a log_{10}(x)} to @math{ax}. Instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by @math{a}.
+
+
+---
+{layout="Investigate"}
+# Transforming the Data
+
+
+We transformed the `pc-gdp` column in three steps:
+
+1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp` column).
+2. We defined a new column to use as our x-values, populating it by applying the transformation to each of our original x-values.
+3. We displayed these transformed datapoints as a scatterplot.
+
+**It's easy to do the same thing in Pyret!**
+
+
+---
+{layout="Investigate"}
+# Transforming the Data
+
+
+- Turn to @printable-exercise{logarithmic-models.adoc}.
+- Complete Part 1, then pause for class discussion.
+
+@teacher{Address any student questions about the Pyret function they've just discovered, `build-column.` Verify that studetns have recorded the slope and vertical shift for their regression line. Then, emphasize the key ideas on the next slide.}
+
+
+---
+{layout="Investigate"}
+# Transforming the Data
+
+- At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp_.
+
+- We want @math{x} to represent the **original, un-transformed** value, simply using _per-capita gdp_ as-is...
+
+- We've learned that:
+	(1) The *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
+
+	(2) The *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
+
+
+
+---
+{layout="Investigate"}
+# Transforming the Data
+
+Now complete Part 2 of @printable-exercise{logarithmic-models.adoc}.
+
+
+
+---
+{layout="InvestigateR"}
+# Transforming the Data
+
+
+@right{@image{images/lr-plot-transformed.png, 350}}
+Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `11.9011` and a y-intercept of `24.2636`. Our @math{R^2} has jumped to 0.66311, showing a vastly better correlation than before.
+
+---
+{layout="Investigate"}
+# Transforming the Data
+
+
+With the transformation applied, our linear model (in both function and Pyret notation) is:
+
+@math{f(x) = 11.9011x + 24.2636}
+
+@show{(code '(define (f x) (+ (* 11.9011 x) 24.2636)))}
+
+---
+{layout="InvestigateR"}
+# Transforming the Data
+
+
+@right{@image{images/logarithmic-model.png, 350}}
+From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
+
+@math{h(x) = 11.9011 log_{10}(x) + 24.2636}
+
+@show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}
+
+The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
 ---
 {layout="Synthesize"}
-# Fitting Logarithmic Models
+# Transforming the Data
 
-Even our best-guess logarithmic model looks like a straight line. But transforming the axes only makes things _look_ linear - the actual points haven't changed at all, and we still can't use linear regression to find the best model.
 
-- Can you think of a way we could we transform the _data_, instead of the axes?
+- Why is the @math{R^2} value for our logarithmic model the same as the value for our linear model after transforming?
+- Why were our coefficients for linear and logarithmic models the same, even though they were for different terms?
+- How do you interpret this model?
+- Why do you think the relationship between wealth is logarithmic?
 
 ---
-{layout="Synthesize"}
+{layout="Supplemental"}
 # Additional Exercises
 
-- @opt-printable-exercise{classifying-tables.adoc, Tables}
-- @opt-printable-exercise{classifying-graphs.adoc, Graphs}
-- @opt-printable-exercise{classifying-defs.adoc, Definitions}
 
+
+Does the model look different for countries with universal healthcare v. those without?  
+
+For more practice transforming data and programming with filters, @opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and Linearization techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and poverty.
