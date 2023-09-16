@@ -98,28 +98,29 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  (let ([use-mathjax?
-          (cond [(regexp-match "\\\\frac" text)
-                 (cond [(regexp-match "\\\\div" text) #t]
-                       [(regexp-match "\\^" text) #t]
-                       [(>= (string-length text) 40) #t]
-                       [(regexp-match* "\\\\frac{(.+?)}" text)
-                        => (lambda (mm)
-                             (cond [(null? mm) #f]
-                                   [else (let ([use-mathjax? #f])
-                                           (for ([m mm])
-                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
-                                               (unless (variable-or-number? frac-arg)
-                                                 (set! use-mathjax? #t))))
-                                           use-mathjax?)]))])]
-                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
-                [(regexp-match "\\\\\\\\" text) #t]
-                [(regexp-match "\\\\mbox" text) #t]
-                [else #f])])
-    ;
-    ((if use-mathjax?
-         make-mathjax-math
-         make-ascii-math) text)))
+  (or (math-unicode-if-possible text)
+      (let ([use-mathjax?
+              (cond [(regexp-match "\\\\frac" text)
+                     (cond [(regexp-match "\\\\div" text) #t]
+                           [(regexp-match "\\^" text) #t]
+                           [(>= (string-length text) 40) #t]
+                           [(regexp-match* "\\\\frac{(.+?)}" text)
+                            => (lambda (mm)
+                                 (cond [(null? mm) #f]
+                                       [else (let ([use-mathjax? #f])
+                                               (for ([m mm])
+                                                 (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                                   (unless (variable-or-number? frac-arg)
+                                                     (set! use-mathjax? #t))))
+                                               use-mathjax?)]))])]
+                    [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                    [(regexp-match "\\\\\\\\" text) #t]
+                    [(regexp-match "\\\\mbox" text) #t]
+                    [else #f])])
+        ;
+        ((if use-mathjax?
+             make-mathjax-math
+             make-ascii-math) text))))
 
 (define (make-mathjax-math text)
   (string-append
