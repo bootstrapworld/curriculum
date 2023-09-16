@@ -1533,10 +1533,15 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
+                           [(string=? directive "remotely")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @remotely valid only in pathway narrative"))
+                            (print-teach-remotely o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
                               (error 'ERROR
-                                     "adoc-preproc: @workbooks valid only in pathway narrative"))
+                                     "adoc-preproc: @other-resources valid only in pathway narrative"))
                             (print-other-resources-intro o)
                             (print-other-resources *target-pathway* *proglang* o)]
                            [(string=? directive "starter-file-list")
