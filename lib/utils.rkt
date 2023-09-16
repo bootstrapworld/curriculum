@@ -11,6 +11,7 @@
   qualify-proglang
   create-zero-file
   anonymize-filename
+  math-unicode-if-possible
   )
 
 (require file/sha1)
@@ -111,3 +112,23 @@
                       (bytes->hex-string (call-with-input-string basename sha1-bytes))
                       0 16)
                     ext)))))
+
+(define (math-unicode-if-possible text)
+  (case text
+    [("a")   "𝑎"]
+    [("b")   "𝑏"]
+    [("c")   "𝑐"]
+    [("f")   "𝑓"]
+    [("g")   "𝑔"]
+    [("h")   "ℎ"]
+    [("r")   "𝑟"]
+    [("x")   "𝑥"]
+    [("y")   "𝑦"]
+    [("R^2") "𝑅²"]
+    [("x_1") "𝑥₁"]
+    [("x_2") "𝑥₂"]
+    [("y_1") "𝑦₁"]
+    [("y_2") "𝑦₂"]
+    [("=")   "="]
+    [("±")   "±"]
+    [else    #f]))
