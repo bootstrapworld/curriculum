@@ -1,65 +1,43 @@
-= Fitting a Model: College Degrees v. Income (2)
-++++
-<style>
-.studentAnswerMedium { min-width: 8em !important; }
-td { padding: 0 !important; }
-body.workbookpage .fitbruby { padding-top: 1.1rem; }
-.center { padding: 0; }
-</style>
-++++
+= Fit a Model: College Degrees v. Income
 
-For this page, you'll need to open the @starter-file{alg2-states} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
-
-== Build a Model through Trial {amp} Error
-**In the `# Define some rows` section, look closely at the definitions for `alaska` and `alabama`. **Add two new definitions** for MA (row 21) and NV (row 28).**
-
-@n Record the `college-or-higher` and `median-income` values for MA and NV, as (x,y) pairs below:
-
-@center{
- (@fitbruby{10em}{@ifsoln{22.6}}{MA college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{MA median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{NV college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{NV median-income})
-}
-
-@n Derive the MA-NV model and write it below (in both Function and Pyret notation), then fit the model and record the @math{R^2}:
-
-@vspace{13ex}
-
-@center{
- @math{g(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{4em} @show{(code '(define (g x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))} @hspace{4em} @fitbruby{4em}{@ifsoln{2.84}}{r-squared}
-}
+_This page will require you to work with your copy of the @starter-file{alg2-states} in which you should have already defined `f(x)` based on your work on @printable-exercise{model-college-v-income-2.adoc}._
 
 @vspace{1ex}
 
-@center{**Choose two other states that you think would make a better model, and __add two new definitions__ for these states.**}
+_Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" f))} in the Interactions Area._
 
-@n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
+@n Find the points for AL and AK along the predictor line. 
 
-@center{
- (@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})
-}
+@n What do you Notice?
 
-@n Derive your model and write it below (in both Function and Pyret notation), then fit the model and record the @math{R^2}:
+@fitb{}{@ifsoln{Answers will vary. AL and AK are both on the line, but they don't seem to be very representative of the group.}} 
 
-@vspace{13ex}
+@fitb{}{@ifsoln{The line goes all the way up to $200,000 but median income doesn't seem to exceed $80000.}}
 
-@center{
- @math{g(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{4em} @show{(code '(define (h x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{4em} @fitbruby{4em}{}{r-squared}
-}
+@fitb{}{}
 
-@n Adjust the slope and y-intercept of your model to get the **best @math{R^2} possible.** Write the best model (and @math{R^2}) below:
+@n What do you Wonder?
 
-@center{
- @math{h(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{4em} @show{(code '(define (h x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{4em} @fitbruby{4em}{}{r-squared}
-}
+@fitb{}{@ifsoln{Answers will vary. What states might have been more representative of the trend?}} 
 
-== Build a Model Computationally
+@fitb{}{}
 
-`lr-plot` computes the __optimal linear model__ using all of the data points.
+@fitb{}{}
 
-@n Evaluate @show{(code '(lr-plot states-table "state" "college-or-higher" "median-income"))}. What is @math{R^2}? @fitb{5em}{@ifsoln{}}
+@n In the upper left corner, you'll see that it says "R-sqr", followed by a number. What is that number? @fitb{}{@ifsoln{-15.63}}
 
-@n On the line below, write the optimal linear model that was computed through linear regression:
+@n Change the definition of `f` so that the slope is _less steep_ and click "Run". What is the @math{R^2} value now? @fitb{}{}
 
-@center{
- @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{1142}}}{slope}x + @fitbruby{8em}{@ifsoln{20868.14}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 1142) x) (?ANS 20868.14))))}
-}
+@n Change the definition of `f` so that the slope is _negative_ and click "Run". What is the @math{R^2} value now? @fitb{}{}
 
+@n Change the definition of `f` so that it draws a horizontal line and click "Run". What is the @math{R^2} value? @fitb{}{}
+
+@n Change the y-intercept so that the horizontal line passes through more of the points. What is the @math{R^2} value? @fitb{}{}
+
+@n What do you think @math{R^2} tells us? @fitb{}{@ifsoln{It measures how well the model fits the data}}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}

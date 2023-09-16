@@ -12,7 +12,16 @@ local makemasterPDFs = os.getenv('MASTERWORKBOOK')
 
 ---------------------------------------------------------------------------
 
-function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
+function write_page1(lesson_dir, page, aspect, pageno, o, ol, oe)
+  local x = '{ lessondir = "' .. lesson_dir .. '",' ..
+             ' page = "' .. page .. '",' ..
+             ' aspect = "' .. aspect .. '",' ..
+             ' pageno = ' .. pageno .. ' },\n'
+  o:write(x)
+  ol:write(x)
+end
+
+function write_pages_info(lesson_dir, o, ol, oe, skip_pageno)
   -- by default, don't skip pageno
   --
   local workbook_pages_file = lesson_dir .. '/pages/.cached/.workbook-pages.txt.kp'
@@ -23,13 +32,9 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
       local file = line:gsub('^ *([^ ]*).*', '%1')
       local aspect = line:match('^ *[^ ]+ +([^ ]+).*') or 'portrait'
       local this_skip_pageno = line:match('^ *[^ ]+ +[^ ]+ +([^ ]+).*') or skip_pageno
+      local pageno = tostring(not this_skip_pageno)
       --
-      local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = ' .. tostring(not this_skip_pageno) .. '},\n'
-      o:write(x)
-      ol:write(x)
-      if back_matter_port and contracts_page_p(lesson_dir, file) then
-        back_matter_port:write(x)
-      end
+      write_page1(lesson_dir, file, aspect, pageno, o, ol, oe)
     end
     i:close()
   end
@@ -50,20 +55,6 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno, back_matter_port)
   end
 end
 
-function contracts_page_p(dir, file)
-  local f = dir .. '/solution-pages/' .. file
-  if not file_exists_p(f) then return false end
-  local i = io.open(f)
-  local n = 1
-  for line in i:lines() do
-    if n > 10 then return false end
-    if line:find('^=.*[Cc][Oo][Nn][Tt][Rr][Aa][Cc][Tt]') then return true end
-    n = n + 1
-  end
-  i:close()
-  return false
-end
-
 local all_courses = dofile(courses_list_file)
 
 do
@@ -75,28 +66,35 @@ do
     local o = io.open(course_cache .. '.workbook-page-index.lua', 'w+')
     local ol = io.open(course_cache .. '.workbook-long-page-index.lua', 'w+')
     local oe = io.open(course_cache .. '.opt-exercises-index.lua', 'w+')
-    local ob = io.open(course_cache .. '.back-matter-contracts-index.lua', 'w+')
 
     o:write('return {\n')
     ol:write('return {\n')
     oe:write('return {\n')
-    ob:write('return {\n')
 
     write_pages_info(course_dir .. '/front-matter', o, ol, oe, 'skip_pageno')
     local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
     -- print('workbook_lessons_file is ', workbook_lessons_file, ' ', file_exists_p(workbook_lessons_file))
-    w = io.open(workbook_lessons_file)
+    local w = io.open(workbook_lessons_file)
     for lsn in w:lines() do
       write_pages_info(distr_lessons .. lsn, o, ol, oe)
     end
     w:close()
 
-    write_pages_info(course_dir .. '/back-matter', o, ol, oe, 'skip_pageno', ob)
+    write_pages_info(course_dir .. '/back-matter', o, ol, oe, 'skip_pageno')
+
+    local resources_dir = 'distribution/' .. natlang .. '/courses/' .. course .. '/resources'
+    if file_exists_p(resources_dir .. '/pages/Contracts.pdf') then
+      write_page1(resources_dir, 'Contracts.pdf', 'portrait', 'false', o, ol, oe)
+    end
+
+    local backpages_dir = course_dir .. '/back-matter'
+    if file_exists_p(backpages_dir .. '/pages/back-cover.adoc') then
+      write_page1(backpages_dir, 'back-cover.adoc', 'portrait', 'false', o, ol, oe)
+    end
 
     o:write('}\n'); o:close()
     ol:write('}\n'); ol:close()
     oe:write('}\n'); oe:close()
-    ob:write('}\n'); ob:close()
 
   end
 end
@@ -110,9 +108,7 @@ function make_workbook_json_1(course_dir, tgt)
   local workbook_input = course_dir .. '/.cached/.filelist'
   local workbook_index_file
 
-  if memberp(tgt, { 'bm-contracts', 'bm-contracts-sols' }) then
-    workbook_index_file = course_dir .. '/.cached/.back-matter-contracts-index.lua'
-  elseif memberp(tgt, { 'workbook', 'workbook-sols' }) then
+  if memberp(tgt, { 'workbook', 'workbook-sols' }) then
     workbook_index_file = course_dir .. '/.cached/.workbook-page-index.lua'
   elseif memberp(tgt, { 'opt-exercises', 'opt-exercises-sols' }) then
     workbook_index_file = course_dir .. '/.cached/.opt-exercises-index.lua'
@@ -122,7 +118,7 @@ function make_workbook_json_1(course_dir, tgt)
 
   local includesolutions = false
 
-  if memberp(tgt, { 'workbook-sols', 'bm-contracts-sols', 'workbook-long-sols', 'opt-exercises-sols', 'pd-workbook' }) then
+  if memberp(tgt, { 'workbook-sols', 'workbook-long-sols', 'opt-exercises-sols', 'pd-workbook' }) then
     includesolutions = true
   end
 
@@ -149,9 +145,15 @@ function make_workbook_json_1(course_dir, tgt)
   for _,line in ipairs(lynes) do
     local lessondir = line.lessondir
 
-    if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
-      goto continue
+    local docrootp = true
+
+    if lessondir:find('/lessons/') or lessondir:find('/front%-matter$') or lessondir:find('/back%-matter$') or lessondir:find('/resources$') then
+      docrootp = false
     end
+
+    -- if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
+    --   goto continue
+    -- end
 
     local workbookpage = line.page
     local aspect = line.aspect
@@ -182,7 +184,15 @@ function make_workbook_json_1(course_dir, tgt)
       end
     end
 
-    docfile = lessondir .. '/' .. (includesolutions and 'solution-pages' or 'pages') .. '/' .. workbookpage
+    local docfile = lessondir .. '/'
+
+    if docrootp then
+      docfile = docfile .. workbookpage
+    elseif includesolutions then
+      docfile = docfile .. 'solution-pages/' .. workbookpage
+    else
+      docfile = docfile .. 'pages/' .. workbookpage
+    end
 
     local docfileext = docfile:gsub('.*%.([^.]*)$', '%1')
 
@@ -224,7 +234,7 @@ function make_workbook_json_1(course_dir, tgt)
 end
 
 do
-  local workbook_inputs = { 'workbook', 'bm-contracts', 'bm-contracts-sols', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
+  local workbook_inputs = { 'workbook', 'workbook-sols', 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }
   --
   if makemasterPDFs then
     table.insert(workbook_inputs, 'pd-workbook')

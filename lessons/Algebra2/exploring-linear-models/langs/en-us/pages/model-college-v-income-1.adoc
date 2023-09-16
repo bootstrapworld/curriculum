@@ -1,0 +1,54 @@
+= Build a Model from Samples: College Degrees v. Income
+++++
+<style>
+.studentAnswerMedium { min-width: 8em !important; }
+</style>
+++++
+
+_Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save a Copy** now._
+
+@vspace{1ex}
+
+@n Record the `pct-college-or-higher` and `median-income` values for the `alabama` and `alaska` rows, as @math{(x,y)} pairs below:
+
+@center{
+ (@fitbruby{10em}{@ifsoln{22.6}}{AL pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AL median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AK median-income})
+}
+
+@n Using the space below, compute the equation of the line passing between these two points. **This line will be your linear model** (also known as the "predictor function", or "line of best fit"), which predicts `median-income` as a function of `pct-college-or-higher`.
+
+[.FillVerticalSpace, cols="1", frame="none", grid="none"]
+|===
+|
+|===
+
+@n Write the complete model below (in both Function and Pyret notation):
+
+@center{
+ @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
+}
+
+[.indentedpara]
+--
+- Type your function into the Definitions Area on the left, modifying the existing function `f(x)`. 
+
+- Then click "Run", and make sure you fix any errors or warnings. 
+
+- In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `f(22.6)` 
+
+--
+
+@n How well does it predict the correct median income for Alabama? @fitb{10em}{@ifsoln{close! 43252.922}} What about Alaska? @fitb{}{@ifsoln{close! 70759.905}}
+
+[.indentedpara]
+_Consider: If it doesn't predict it perfectly, why might that be?_
+
+@vspace{1ex}
+
+Try different `pct-college-or-higher` values from _other_ states, to see how well our Alabama-Alaska model fits the rest of the country. 
+
+@n Identify a state for which this model works well: @fitb{}{@ifsoln{Examples: Iowa, Indiana...}}
+
+@n Identify a state for which this model works poorly: @fitb{}{@ifsoln{Examples: Vermont, Massachusetts...}}
+
+@n What median income does this model expect a state without ANY college graduates (0%) to earn? @fitb{}{@ifsoln{-$83616.02}}

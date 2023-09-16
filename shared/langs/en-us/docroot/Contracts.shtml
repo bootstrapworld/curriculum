@@ -16,8 +16,10 @@
     *:not(pre)>code { background-color: transparent !important; }
     table.contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
     .fitb, .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
+    table.contracts-table tr:nth-child(odd) { border: 0; }
+    td code.pyret-comment { background-color: transparent !important; }
 
-    html, body, div#body { width: 9.8in !important; max-width: 9.8in !important; }
+    html, body, div#body { height: 9.7in !important; max-height: 9.8in !important; }
     #search { background: black; color: white; padding: 5px; margin: 10px 0; }
     #search input { width: 250px; font-size: 14px; margin-left: 15px; }
     .contracts-table { width: 100%; }
@@ -26,15 +28,20 @@
     tbody tr:last-child { font-style: italic; }
 
     @media print {
-      @page   { size: landscape; }
       #search { display: none; }
+      tbody { 
+        break-inside: avoid !important; 
+        page-break-inside: avoid !important; 
+      }
+
     }
   </style>
 
   <script>
+    window.status = "not_ready_to_print";
     configureGraph(graph);
     // narrow the primitives by url params
-    const {pathway, lessons, lesson} = getParams();
+    const {pathway, lessons, lesson, solns} = getParams();
     // if there's a pathway, extract the primitives
     const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
 
@@ -76,7 +83,7 @@
       // use the right example for the proglang
       function processExample(contract) {
         // short-circuit for algebra, where kids discover their own contracts and examples
-        if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
+        if (!solns && pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
           return "";
         return (proglang == "wescheme")?
          contract["example-wescheme"] : contract["example-pyret"];
@@ -106,7 +113,7 @@
           tbody.appendChild(row2);
           table.appendChild(tbody);
         });
-
+      window.status = "ready";
     }
 
     var searchTimeout;

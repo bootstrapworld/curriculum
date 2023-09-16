@@ -1,0 +1,67 @@
+= Logarithmic Models
+
+Open your copy of the @starter-file{alg2-countries} and click "Run".
+
+== Part 1
+
+@n Find the definition of `g(r)`. What does this function do? @fitb{}{@ifsoln{`g` produces the log of the `pc-gdp` column, which it gets from the country it's given}}
+
+@fitb{}{}
+
+@n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}.
+
+[.indentedpara]
+What is its Range? @fitb{20em}{@ifsoln{Table}} What is its Domain? @fitb{20em}{@ifsoln{Table, String, Function}}
+
+@n At the end of the program, you'll find this code:
+
+[.indentedpara]
+--
+@vspace{1ex}
+
+@show{(code '(define countries-transformed (build-column countries-table "log(pc-gdp)" g)))}
+
+What do you think it does? @fitb{}{}
+
+@fitb{}{@ifsoln{It defines a new table called `countries-transformed`, which is the result of building our new column,"log(pc-gdp)".}}
+
+--
+
+@n Click "Run", and evaluate `countries-transformed` in the Interactions Area on the right to test it out!
+
+@hspace{3em}+a.+ What did you get back? @fitb{}{@ifsoln{A Table}}
+
+@hspace{3em}+b.+ What is different about this Table? @fitb{}{@ifsoln{It has an extra column called `log(pc-gdp`).}}
+
+@hspace{3em}+c.+ Where did the column on the right come from? @fitb{}{@ifsoln{It was created by `build-column`, which named it `log(pc-gdp)` and filled it using the function `g`.}}
+
+@hspace{3em}+d.+ What does that line of code at the end of the program do? @fitb{}{@ifsoln{It defines a new table called `countries-transformed`}}
+
+@hspace{3em}@fitb{}{@ifsoln{which is the result of building our new column.}}
+
+
+@n Use this new table to make an `lr-plot` comparing `log(pc-gdp)` and `median-lifespan` with `country` as the label.
+
+@ifsoln{code students should type: lr-plot(countries-transformed, "country", "log(pc-gdp)", "median-lifespan")}
+
+@n Record the regression line here: @math{y = } @fitbruby{10em}{@ifsoln{11.9011}}{slope} @math{x + } @fitbruby{10em}{@ifsoln{24.2636}}{vertical shift} @hspace{5em} @math{R^2:}@fitb{10em}{@ifsoln{0.66311}}
+
+== Part 2
+
+@n Use the values produced by `lr-plot` to complete the model: @math{logarithmic(x) =} @fitbruby{7em}{@ifsoln{11.9011}}{log coefficient} @math{log_{10}(x) +} @fitbruby{7em}{@ifsoln{24.2636}}{vertical shift}
+
+@n Let's interpret this model:
+
+@hspace{3em} A _10x_ increase in `per-capita-GDP` is associated with `median-lifespan` increasing by @fitb{10em}{@ifsoln{11.9 years}}.
+
+@n Rewrite your model as a pyret definition: @ifnotsoln{`fun logarithmic(x):`@fitb{25em}{} `end`}  @showsoln{(code '(define (logarithmic x) (+ (* 11.9011 (log x)) 24.2636)))}
+
+@n Add the definition to your starter file and click "Run" to load it.
+
+@n Use `fit-model` to calculate the value of @math{R^2}: @fitb{8em}{@ifsoln{0.66311}} 
+
+@n Let's interpert this @math{R^2} value:
+
+@hspace{3em} Roughly @fitb{3em}{@ifsoln{66}} percent of the variation in @fitb{12em}{@ifsoln{median lifespan}} is explained by the variation in @fitb{12em}{@ifsoln{per-capita GDP}}.
+
+@star Are there other relationships you can think of, which might be logarithmic?

@@ -42,7 +42,12 @@ Students learn one way of grouping data, showing the _frequency_ of values in a 
 
 === Launch
 
-Open the @starter-file{animals} and click "Run".
+Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
+
+=== Investigate
+
+@teacher{For the questions and prompts below, you can guide students verbally and via class discussion. +
+@optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{count-bar-pie.adoc}. Part A of this page includes the same questions and prompts along with space for students to record their responses.}
 
 [.lesson-instruction]
 - What do we need to type to see the animals table?
@@ -73,6 +78,15 @@ Pie charts group data _by value_ to show frequency as a percentage.
 If our data is based on sample data from a larger population, we can use these charts to _infer_ the proportion of a whole population that might belong to each category. For example, the distribution of species in our shelter might help us make guesses about the distribution of species in other shelters.
 
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.
+
+////
+- Now test the expressions @show{(code '(count animals-table "pounds"))} and @show{(code '(bar-chart animals-table "pounds"))}. Which do you prefer and why?
+** __Answers will vary, but a bar chart with many equally-sized bars representing the number of animals having each specific weight is less useful than the last.__
+////
+
+@teacher{
+@optional B & C of @opt-printable-exercise{count-bar-pie.adoc} correspond with the questions and prompts below.
+}
 
 [.lesson-instruction]
 - Return to @printable-exercise{count-bar-pie.adoc}, and complete the second section ("Bar and Pie Charts for Quantitative Data").
@@ -133,7 +147,7 @@ In this situation, we want to use the values in the _first_ column for the label
 @show{(contract 'pie-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
 @show{(contract 'bar-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
 
-Open the @starter-file{hair} to try them out!
+Open the @opt-starter-file{hair} to try them out!
 
 |===
 
@@ -145,6 +159,9 @@ Students learn how to create __groups within groups__, showing the relative freq
 
 === Launch
 
+@teacher{ For the questions and prompts below, you can guide students verbally and via class discussion. +
+@optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{intro-stacked-multi.adoc} and direct students to complete Part A now.
+}
 [.lesson-instruction]
 - Take a moment to answer the following questions: How many cats are male? How many cats are female?
 ** __5 are male, 6 are female__
@@ -153,7 +170,18 @@ Students learn how to create __groups within groups__, showing the relative freq
 
 Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across each species.
 
-Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
+[.lesson-instruction]
+* Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make answering questions like these easier to answer by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
+* What do you Notice? What do you Wonder?
+
+=== Investigate
+
+
+@teacher{
+@optional Part B of @opt-printable-exercise{intro-stacked-multi.adoc} corresponds with the questions and prompts below.
+}
+
+Pyret has two functions that let us specify both a group and a subgroup:
 
 @show{(contract 'stacked-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
 
@@ -162,11 +190,6 @@ Fortunately, Pyret has two functions that let us specify both a group and a subg
 [.lesson-instruction]
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
 - Which display do you think is easier to read?
-
-=== Investigate
-
-[.lesson-instruction]
-Complete @printable-exercise{stacked-and-multi-notice.adoc}
 
 [cols="^1a,^1a", options="header"]
 |===

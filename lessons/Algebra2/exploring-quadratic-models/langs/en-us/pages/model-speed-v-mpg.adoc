@@ -6,7 +6,8 @@
 </style>
 ++++
 
-For this page, you'll need to have the @starter-file{alg2-fuel-efficiency} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you and click "Run".
+Open your copy of the @starter-file{alg2-fuel-efficiency} and click "Run". +
+Before we try to model our fuel-efficiency data, we need to learn a new Pyret function! 
 
 @n Can you predict what the output of the following expressions will be? Enter them into the Interactions Area, and record the result.
 
@@ -22,15 +23,14 @@ For this page, you'll need to have the @starter-file{alg2-fuel-efficiency} open 
 
 == Interpreting a Quadratic Model
 
-@n The *vertex form* of a quadratic model is shown below. Fill in the blank using the "peak" of your curve from @printable-exercise{exploring-mpg.adoc}:
-
-@center{@math{f(x) = a(x−}@fitbruby{6em}{@ifsoln{45}}{peak efficiency}@math{)^2+k}}
-
-@center{**In the Definitions Area of your @starter-file{alg2-fuel-efficiency}, you'll find the definition of a quadratic model `quad1`.**}
+In the Definitions Area of your @starter-file{alg2-fuel-efficiency}, you'll find the definition of a quadratic model `quad1`.
 
 @n In `quad1`, the value of @math{a} is @fitb{10em}{@ifsoln{1}}, the value of @math{h} is @fitb{10em}{@ifsoln{0}}, and the value of @math{k} is @fitb{10em}{@ifsoln{0}}
 
-@n Fit this model to your dataset, using `fit-model`. What @math{R^2} value did you get? @fitb{}{@ifsoln{-10.4996}}
+@n Fit this model to your dataset, using `fit-model`. What @math{R^2} value did you get? @fitb{}{@ifsoln{-10.4996}} 
+
+[.indentedpara]
+_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, contracts pages}!_
 
 @n In your own words, describe what needs to change about this model to fit the data. @fitb{}{} +
 @fitb{}{} +
@@ -38,28 +38,40 @@ For this page, you'll need to have the @starter-file{alg2-fuel-efficiency} open 
 
 == Modeling Fuel Efficiency
 
-Complete the following sentences, referring back to @printable-exercise{graphing-models.adoc} as-needed. The first one has been completed for you.
+[cols="2a, 4a"]
+|===
+| *Vertex Form*: @hspace{2em} @math{y=a(x−h)^2+k}				
+|
+- @math{a}: determines whether the parabola opens up or down and how steep the curve is
+- @math{h}: x-coordinate of the vertex
+- @math{k}: y-coordinate of the vertex (in quadratic models, this is also the vertical shift!)
+|===
 
-@n When a parabola opens "up", @fitb{15em}{_a_ is positive}. When it opens "down", @fitb{}{@ifsoln{a is negative}}
+@n We've determined that peak fuel efficiency is around 45 mph. What variable in the equation should we replace with 45? @fitb{}{}
 
-@n When a parabola is "narrow", @fitb{11em}{@ifsoln{a is large}}. When it is "wide", @fitb{11em}{@ifsoln{a is small}}. When it is "flat", @fitb{}{@ifsoln{a is zero}}
+[.indentedpara]
+Update the definition of `quad1`, click "Run" and re-fit the model. What @math{R^2} value did you get? @fitb{}{@ifsoln{0.46179}}
 
-@n To shift a parabola right, @fitb{15em}{@ifsoln{make h larger}}. To shift it left, @fitb{}{@ifsoln{make h smaller}}
+@n What y-coordinate of the vertex would best match the shape of the curve? @fitb{5em}{@ifsoln{~32}} 
 
-@n To shift a parabola up, @fitb{15em}{@ifsoln{make k larger}}. To shift it down, @fitb{}{@ifsoln{make k smaller}}
+[.indentedpara]
+Update the definition of `quad1`, click "Run" and re-fit the model. What @math{R^2} value did you get?
+ @fitb{}{@ifsoln{~0.7}}
+
+@n What value of @math{a} best matches the shape of the curve? @fitb{5em}{@ifsoln{~0.01}} 
+[.indentedpara]
+Update the definition of `quad1`, click "Run" and re-fit the model. What @math{R^2} value did you get? @fitb{}{@ifsoln{~0.3-0.4}}
+
+@n See any small changes you'd like to make to the definition, trying to get @math{R^2} as close to 1 as you can? Write your final definition below.
+
+`fun f(x) :` @fitb{30em}{} `end` @hspace{5em} @math{R^2}: @fitb{}{}
 
 @vspace{1ex}
 
-@center{**For each of the following questions, define a _new function_ (e.g. - `quad2`, `quad3`, etc.) and click Run.**}
-
-@n What value of @math{h} best matches the shape of the curve? @fitb{5em}{@ifsoln{~45}} What @math{R^2} value did you get when you re-fit the model? @fitb{}{@ifsoln{0.46179}}
-
-@n What value of @math{a} best matches the shape of the curve? @fitb{5em}{@ifsoln{~0.01}} What @math{R^2} value did you get when you re-fit the model? @fitb{}{@ifsoln{~0.3-0.4}}
-
-@n What value of @math{k} best matches the shape of the curve? @fitb{5em}{@ifsoln{~32}} What @math{R^2} value did you get when you re-fit the model? @fitb{}{@ifsoln{~0.7}}
-
 @star **What does this model actually mean? Try completing the sentence below:**
 
-After experimenting, I came up with a quadratic model showing that _speed_ explains @fitbruby{8em}{@ifsoln{about 73.3}}{R-squared * 100}% of the variability in _gas mileage_ for cars in this dataset. The vertex of the parabola drawn by this model is @fitbruby{8em}{@ifsoln{about 45}}{x-value of vertex}, which means that @fitb{}{}
+After experimenting, I came up with a quadratic model showing that _speed_ explains @fitbruby{8em}{@ifsoln{about 73.3}}{R-squared * 100}% of the variability in _gas mileage_ for cars in this dataset. The vertex of the parabola drawn by this model is @fitbruby{8em}{@ifsoln{about 45}}{(x, y)}, which means that @fitb{}{}
 
-@fitb{}{@ifsoln{45mph is the most efficient speed to drive}}
+@fitb{}{@ifsoln{It's most efficient to drive at about 45pmh, at which speed cars seem to get about 32 miles per gallon.}}
+
+@star How does the fact that the value of @math{a} is negative impact this parabola? @fitb{}{}

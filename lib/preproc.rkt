@@ -20,9 +20,9 @@
 
 (define *force* (truthy-getenv "FORCE"))
 
-(define *nopdf* (truthy-getenv "NOPDF"))
-
 (define *book* (truthy-getenv "BOOK"))
+
+(define *math-unicode?* (truthy-getenv "MATHUNICODE"))
 
 (define *proglang* "pyret")
 
@@ -62,11 +62,7 @@
 
 (define *narrative* #f)
 
-(define *boilerplate* (truthy-getenv "BOILERPLATE"))
-
 (define *teacher-resources* #f)
-
-(define *link-lint?* (truthy-getenv "LINT"))
 
 (define *autonumber-index* 1)
 
@@ -748,12 +744,11 @@
 
 (define (check-link f #:external? [external? #f])
   ; (unless external? (printf "doing check-link ~s \n" f))
-  (when (or *link-lint?* #t)
-    (cond [external? (display f *external-links-port*)
-                     (newline *external-links-port*)]
-          [(not (file-exists? f))
-           (display f *internal-links-port*)
-           (newline *internal-links-port*)])))
+  (cond [external? (display f *external-links-port*)
+                   (newline *external-links-port*)]
+        [(not (file-exists? f))
+         (display f *internal-links-port*)
+         (newline *internal-links-port*)]))
 
 (define (abbreviated-index-page? f)
   (and (directory-exists? f)
@@ -936,7 +931,6 @@
                        ; (printf "g = ~s is valid short-ref\n" g)
                        (unless (or existent-file?
                                    (string=? g "pathway-standards.shtml");remove ;FIXME
-                                   (and *teacher-resources* (string=? g "solution-pages/contracts.pdf"))
                                    short-ref?)
                          (check-link f)
                          ; This warning is too eager. Leave it to --lint
@@ -1444,8 +1438,8 @@
                                                         #:centered? #t)
                                        o))]
                            [(string=? directive "math")
-                            (create-zero-file (format "~a.uses-mathjax" *out-file*))
-                            (display (enclose-math (read-group i directive)) o)]
+                            (let ([text (read-group i directive)])
+                              (display-math text o))]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
@@ -1539,12 +1533,17 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
+                           [(string=? directive "remotely")
+                            (unless *narrative*
+                              (error 'ERROR
+                                     "adoc-preproc: @remotely valid only in pathway narrative"))
+                            (print-teach-remotely o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
                               (error 'ERROR
-                                     "adoc-preproc: @workbooks valid only in pathway narrative"))
+                                     "adoc-preproc: @other-resources valid only in pathway narrative"))
                             (print-other-resources-intro o)
-                            (print-other-resources *target-pathway* o)]
+                            (print-other-resources *target-pathway* *proglang* o)]
                            [(string=? directive "starter-file-list")
                             (display
                               (enclose-div ".starterFileList" "") o)
@@ -1628,7 +1627,7 @@
                                   (string-append
                                     (expand-directives:string->string text)
                                     (create-begin-tag "span" ".ruby")
-                                    ruby
+                                    (expand-directives:string->string ruby)
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
@@ -1666,7 +1665,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
                                      [converted-text (expand-directives:string->string text)])
-                                (display (enclose-div
+                                (display (enclose-span
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
                                            converted-text)
@@ -1722,7 +1721,7 @@
                                       (expand-directives:string->port s o)
                                       )))))]
                            [(string=? directive "optional")
-                            (fprintf o "[.optionaltag]##Optional: ##")]
+                            (display (enclose-span ".optionaltag" "Optional: ") o)]
                            [(string=? directive "opt")
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
@@ -1815,6 +1814,19 @@
                               (display " __{startsb}" o)
                               (display rubric-link-output o)
                               (display "{endsb}__" o))]
+                           [(string=? directive "QandA")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.q-and-a]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
+                           [(string=? directive "Q")
+                            (let ([text (read-group i directive)])
+                              (display "\n* " o)
+                              (expand-directives:string->port text o))]
+                           [(string=? directive "A")
+                            (let ([text (read-group i directive)])
+                              (display "\n** " o)
+                              (expand-directives:string->port text o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1930,12 +1942,11 @@
       (set! *title-reached?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
-      (when (or *link-lint?* #t)
-        (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
-              [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
-          ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
-          (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
-          (set! *external-links-port* (open-output-file external-links-file #:exists 'replace))))
+      (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
+            [external-links-file (path-replace-extension *out-file* ".external-links.txt.kp")])
+        ;(printf "*ternal links ports set up ~a, ~a\n" internal-links-file external-links-file)
+        (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
+        (set! *external-links-port* (open-output-file external-links-file #:exists 'replace)))
       ;
       (when (or *lesson-plan*
                 *narrative*
@@ -1964,7 +1975,7 @@
                 (print-workbook-info *target-pathway* o)
                 (print-teach-remotely o)
                 (print-other-resources-intro o)
-                (print-other-resources *target-pathway* o))
+                (print-other-resources *target-pathway* *proglang* o))
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
@@ -2242,21 +2253,7 @@
         (fprintf op "~%~%")))
     #:exists 'replace)
 
-  (let ([missing-glossary-items-file "pathway-missing-glossary-items.rkt.kp"])
-    (when (file-exists? missing-glossary-items-file)
-      (delete-file missing-glossary-items-file))
-
-    (unless (null? *missing-glossary-items*)
-      (call-with-output-file missing-glossary-items-file
-        (lambda (o)
-          (display "(" o) (newline o)
-          (for-each
-            (lambda (g)
-              (write g o) (newline o))
-            (reverse *missing-glossary-items*))
-          (display ")" o) (newline o)
-          )
-        #:exists 'replace)))
+  ;if we wish, we can store missing glossary items in a temp file for later inspection
 
   )
 
@@ -2589,6 +2586,32 @@
   ; (printf "doing math ~s p:~s\n" e parens)
   (create-zero-file (format "~a.uses-mathjax" *out-file*))
   (enclose-math (sexp->arith e #:parens parens #:tex #t)))
+
+(define (display-mathjax-math text o)
+  (create-zero-file (format "~a.uses-mathjax" *out-file*))
+  (display (enclose-math text) o))
+
+(define (display-math text o)
+  (if *math-unicode?*
+      (case text
+        [("a")   (display "𝑎"  o)]
+        [("b")   (display "𝑏"  o)]
+        [("c")   (display "𝑐"  o)]
+        [("f")   (display "𝑓"  o)]
+        [("g")   (display "𝑔"  o)]
+        [("h")   (display "ℎ"  o)]
+        [("r")   (display "𝑟"  o)]
+        [("x")   (display "𝑥"  o)]
+        [("y")   (display "𝑦"  o)]
+        [("R^2") (display "𝑅²" o)]
+        [("x_1") (display "𝑥₁" o)]
+        [("x_2") (display "𝑥₂" o)]
+        [("y_1") (display "𝑦₁" o)]
+        [("y_2") (display "𝑦₂" o)]
+        [("=")   (display "="  o)]
+        [("±")   (display "±"  o)]
+        [else (display-mathjax-math text o)])
+      (display-mathjax-math text o)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-04-11
-
 # echo massage-course.sh "$@"
 
 src=$1
@@ -84,6 +82,17 @@ for pl in $proglangs; do
   fi
 
   cd ..
+
+  if test -n "$BOOK"; then
+    if test "$pl" = pyret -o "$pl" = wescheme; then
+      inputfile="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway"
+      outputfile="distribution/$NATLANG/courses/$targetpathway/resources/pages/Contracts.pdf"
+      echo ", { \"input\": \"$inputfile\", \"output\": \"$outputfile\" }" >> $PUPPETEER_INPUT
+      inputfilesols="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway&solns=true"
+      outputfilesols="distribution/$NATLANG/courses/$targetpathway/resources/solution-pages/Contracts.pdf"
+      echo ", { \"input\": \"$inputfilesols\", \"output\": \"$outputfilesols\" }" >> $PUPPETEER_INPUT
+    fi
+  fi
 
 done
 

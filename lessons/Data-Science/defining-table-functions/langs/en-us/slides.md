@@ -50,7 +50,7 @@ Take a closer look at the four examples in this file:
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 *          4,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
   weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
 
   weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
@@ -64,7 +64,7 @@ end
 
 ```{style="font-size:12pt;font-weight:bold"}
 examples:
-  weeks-dot(cat-row)   is circle(5 *          4,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
   weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
 
   weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
@@ -80,7 +80,7 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 
 ```{style="font-size:12pt;font-weight:bold"}
 examples:
-  weeks-dot(cat-row)   is circle(5 *          4,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
   weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
 
   weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
@@ -88,7 +88,7 @@ examples:
 end
 ```
 
-In those first examples, where are the number `4` and `1` coming from?
+In those first examples, where are the number `3` and `1` coming from?
 
 <!--
   The first two examples are _correct_, but they don't show all of their work. The last two examples show how those values are looked up from the example rows. If you're stuck on the examples step, here's a useful trick to get you started: "Complete the following sentence: __For this Row, I...__" Whatever you answer is the precise description of what to do for your example!
@@ -118,21 +118,6 @@ We're going to practice collaborative programming and try writing some other Tab
 
 <!--
 Divide the class into groups of three.
--->
----
-{layout="LaunchR"}
-# Design Recipe Telephone
-
-@image{images/DR-Telephone.png, 250}
-
-@table{2,header}
-| Word Problem Set 1: | Word Problem Set 2:
-| @handout{is-dog.adoc, is-dog}, @handout{days.adoc, days}, @handout{is-young.adoc, is-young} | @opt-printable-exercise{is-old.adoc, is-old}, @opt-printable-exercise{kilos.adoc, kilos}, @opt-printable-exercise{is-cat.adoc, is-cat}
-
-_★ When a team has completed these three Design Recipes, they can use @lesson-link{composing-table-operations/}._
-
-<!--
-Decide which groups will use Set 1, and which will use Set 2
 -->
 
 ---

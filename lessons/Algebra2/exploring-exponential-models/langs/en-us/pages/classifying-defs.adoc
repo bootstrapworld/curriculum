@@ -1,4 +1,4 @@
-= Classifying Function Definitions
+= What Kind of Model? (Definitions)
 
 ++++
 <style>
@@ -7,7 +7,8 @@ body.workbookpage td .autonum:after { content: ')'; }
 </style>
 ++++
 
-Decide whether each representation describes a linear, quadratic, or exponential function.
+Decide whether each representation describes a linear, quadratic, or exponential function. +
+**If the function is exponential:** Identify the growth factor and the initial value.
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
 |===
@@ -41,7 +42,8 @@ Decide whether each representation describes a linear, quadratic, or exponential
 ! @ifsoln-choice{Exponential}
 !===
 
-| @show{(code `(define (cost w) (+ (sqr (* 1.2 w)) 16)))}
+@ifsoln{growth factor: 1.2 @hspace{1em} initial value: 1}
+| @math{t(g) = 42 - 2g^2}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
@@ -53,7 +55,7 @@ Decide whether each representation describes a linear, quadratic, or exponential
 // need empty line here so the closing table block isn't swallowed
 !===
 
-| @show{(code `(define (price d) (+ (expt d 2) (* 6 d) )))}
+| @math{price(d) = d^2 + 6d}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
@@ -71,11 +73,10 @@ Decide whether each representation describes a linear, quadratic, or exponential
 ! Linear
 ! Quadratic
 ! @ifsoln-choice{Exponential}
-
-// need empty line here so the closing table block isn't swallowed
 !===
 
-| @show{(code `(define (f x) (- 20000 (expt 4.1 x)  )))}
+@ifsoln{growth factor: e @hspace{1em} initial value: 2}
+| @math{f(x) = 20000 - 4.1^x}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
 !===
@@ -84,7 +85,7 @@ Decide whether each representation describes a linear, quadratic, or exponential
 ! Quadratic
 ! @ifsoln-choice{Exponential}
 !===
-
+@ifsoln{growth factor: -4.1 @hspace{1em} initial value: 1}
 | @math{g(x) = 3^{-4x}}
 
 [cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
@@ -93,7 +94,6 @@ Decide whether each representation describes a linear, quadratic, or exponential
 ! Linear
 ! Quadratic
 ! @ifsoln-choice{Exponential}
-
-// need empty line here so the closing table block isn't swallowed
 !===
+@ifsoln{growth factor: 3 @hspace{1em} initial value: 1}
 |===
