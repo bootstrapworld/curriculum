@@ -1440,7 +1440,7 @@
                                                         #:centered? #t)
                                        o))]
                            [(string=? directive "math")
-                            (let ([text (read-group i directive)])
+                            (let ([text (string-trim (read-group i directive))])
                               (display-math text o))]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]

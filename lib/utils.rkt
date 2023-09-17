@@ -37,7 +37,6 @@
     (and (not (eof-object? result))
          result)))
 
-
 (define (unquote-string s)
   (string-trim s "\""))
 
@@ -77,7 +76,6 @@
                          (if (eof-object? x) (reverse xx)
                              (loop (cons x xx)))))])))))
 
-
 (define *id-counter* 0)
 
 (define (gen-new-id)
@@ -113,6 +111,21 @@
                       0 16)
                     ext)))))
 
+(define (math-id1-or-number text)
+  (cond [(math-unicode-if-possible text) => identity]
+        [(andmap (lambda (c) (or (char-numeric? c) (char=? c #\.)))
+                 (string->list text))
+         text]
+        [else #f]))
+
+(define (math-frac text)
+  (let ([x (regexp-match "^\\\\frac{([^}]*)} *{([^}]*)}" text)])
+    (and x
+         (let ([numr (math-id1-or-number (second x))]
+               [denr (math-id1-or-number (third x))])
+           (and numr denr
+                (list numr denr))))))
+
 (define (math-unicode-if-possible text)
   (case text
     [("a")   "𝑎"]
@@ -131,4 +144,8 @@
     [("y_2") "𝑦₂"]
     [("=")   "="]
     [("±")   "±"]
-    [else    #f]))
+    [else
+      (cond [(math-frac text)
+             => (lambda (xx)
+                  (string-append (first xx) "⁄" (second xx)))]
+            [else #f])]))
