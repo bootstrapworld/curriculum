@@ -22,7 +22,9 @@
 
 (define *book* (truthy-getenv "BOOK"))
 
-(define *math-unicode?* (truthy-getenv "MATHUNICODE"))
+; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
+
+(define *math-unicode?* #t)
 
 (define *proglang* "pyret")
 
