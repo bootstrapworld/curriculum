@@ -70,7 +70,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 
 ---
 {layout="Launch"}
-# Addition and Subtraction: Inverse Operations
+# Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
 - Complete @printable-exercise{pages/discover-inverse.adoc}.
 - When you're done, complete @printable-exercise{pages/discover-inverse-cont.adoc}.
@@ -79,7 +79,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 
 ---
 {layout="Launch"}
-# Addition and Subtraction: Inverse Operations
+# Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
 - Subtraction is equivalent to adding the @vocab{opposite}.
 - We can rewrite any subtraction expression as addition, and any addition expression as subtraction!
@@ -89,7 +89,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 
 ---
 {layout="Investigate"}
-# Addition and Subtraction: Inverse Operations
+# Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
 Complete @printable-exercise{pages/wodb.adoc}.
 
@@ -102,7 +102,7 @@ To complete this worksheet, students do not need to be fluent at integer additio
 
 ---
 {layout="Synthesize"}
-# Addition and Subtraction: Inverse Operations
+# Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
 
 - Claire and Soraya want to write an equivalent expression for @math{22 - 30}. Claire studies the expression and announces that, because it involves subtraction, the Commutative Property cannot be applied. Is she correct?
