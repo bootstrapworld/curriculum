@@ -280,6 +280,7 @@
     ("le" "≤")
     ("lt" "<")
     ("mul" "×")
+    ("times" "×")
     ))
 
 (define (math-superscript ss)
