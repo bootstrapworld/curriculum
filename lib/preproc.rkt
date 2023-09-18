@@ -2596,7 +2596,7 @@
 (define (display-math text o)
   (if *math-unicode?*
       (let ([mu (math-unicode-if-possible text)])
-        (if mu (display mu o)
+        (if mu (display (enclose-span ".mathunicode" mu) o)
             (display-mathjax-math text o)))
       (display-mathjax-math text o)))
 

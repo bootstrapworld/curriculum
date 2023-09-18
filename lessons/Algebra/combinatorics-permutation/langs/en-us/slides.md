@@ -119,14 +119,14 @@ The number of @vocab{permutations} is computed based on two things:
 
 Let's see this as a function:
 
-@math{permute\mbox{-}w\mbox{-}replace(items, choose) = choose^{items} \\ \\
+@math{\mbox{permute-w-replace}(items, choose) = choose^{items} \\ \\
 
-permute\mbox{-}w\mbox{-}replace(6, 1) = 6^{1} = 6 \\ \\
+\mbox{permute-w-replace}(6, 1) = 6^{1} = 6 \\ \\
 
 
-permute\mbox{-}w\mbox{-}replace(6, 2) = 6^{2} = 36 \\ \\
+\mbox{permute-w-replace}(6, 2) = 6^{2} = 36 \\ \\
 
-permute\mbox{-}w\mbox{-}replace(6, 3) = 6^{3} = 216}
+\mbox{permute-w-replace}(6, 3) = 6^{3} = 216}
 
 
 ---
@@ -135,7 +135,7 @@ permute\mbox{-}w\mbox{-}replace(6, 3) = 6^{3} = 216}
 
 How many permutations are there for a 4-course meal chosen from Luigi's 6-item menu?
 
-@math{permute\mbox{-}w\mbox{-}replace(6, 4) = 6^{4} = 1296}
+@math{\mbox{permute-w-replace}(6, 4) = 6^{4} = 1296}
 
 With four courses, it would take more than __3.5 years__ to try them all -- if we ate dinner at Luigi's every night!
 
@@ -274,7 +274,7 @@ With this number of possible combinations, it would take almost a year to try th
 
 We can write this relationship as a function:
 
-@math{permute\mbox{-}no\mbox{-}replace(items, choose) = \frac{items!}{(items - choose)!}}
+@math{\mbox{permute-no-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}
 
 
 ---
