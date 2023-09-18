@@ -78,9 +78,6 @@
 
       // use the right example for the proglang
       function processExample(contract) {
-        // short-circuit for algebra, where kids discover their own contracts and examples
-        if (!solns && pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
-          return "";
         return (proglang == "wescheme")?
          contract["example-wescheme"] : contract["example-pyret"];
       }
