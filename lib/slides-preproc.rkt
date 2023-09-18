@@ -98,28 +98,29 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  (let ([use-mathjax?
-          (cond [(regexp-match "\\\\frac" text)
-                 (cond [(regexp-match "\\\\div" text) #t]
-                       [(regexp-match "\\^" text) #t]
-                       [(>= (string-length text) 40) #t]
-                       [(regexp-match* "\\\\frac{(.+?)}" text)
-                        => (lambda (mm)
-                             (cond [(null? mm) #f]
-                                   [else (let ([use-mathjax? #f])
-                                           (for ([m mm])
-                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
-                                               (unless (variable-or-number? frac-arg)
-                                                 (set! use-mathjax? #t))))
-                                           use-mathjax?)]))])]
-                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
-                [(regexp-match "\\\\\\\\" text) #t]
-                [(regexp-match "\\\\mbox" text) #t]
-                [else #f])])
-    ;
-    ((if use-mathjax?
-         make-mathjax-math
-         make-ascii-math) text)))
+  (or (math-unicode-if-possible text)
+      (let ([use-mathjax?
+              (cond [(regexp-match "\\\\frac" text)
+                     (cond [(regexp-match "\\\\div" text) #t]
+                           [(regexp-match "\\^" text) #t]
+                           [(>= (string-length text) 40) #t]
+                           [(regexp-match* "\\\\frac{(.+?)}" text)
+                            => (lambda (mm)
+                                 (cond [(null? mm) #f]
+                                       [else (let ([use-mathjax? #f])
+                                               (for ([m mm])
+                                                 (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                                   (unless (variable-or-number? frac-arg)
+                                                     (set! use-mathjax? #t))))
+                                               use-mathjax?)]))])]
+                    [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                    [(regexp-match "\\\\\\\\" text) #t]
+                    [(regexp-match "\\\\mbox" text) #t]
+                    [else #f])])
+        ;
+        ((if use-mathjax?
+             make-mathjax-math
+             make-ascii-math) text))))
 
 (define (make-mathjax-math text)
   (string-append
@@ -134,6 +135,15 @@
         (let ([a (first s)])
           (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (rest s) (cons a r))]
                 [else (values r s)])))))
+
+(define (read-math-rev-token s)
+  (let ([first-s (first s)] [s (rest s)])
+    (cond [(char=? first-s #\{)
+           (let loop ([s s] [r '()])
+             (let ([a (first s)])
+               (cond [(char=? a #\}) (values r (rest s))]
+                     [else (loop (rest s) (cons a r))])))]
+          [else (values s (list first-s))])))
 
 (define (make-ascii-math text)
   ; (printf "doing make-ascii-math ~s\n" text)
@@ -160,9 +170,9 @@
                                                 (equal? w '(#\q #\e #\g)))
                                             (loop s-rest (cons #\≥ r))]
                                            [else (loop s-rest (append w r))]))]
-                            [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
+                            [(#\^) (let-values ([(w s-rest) (read-math-rev-token s)])
                                      (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
-                            [(#\_) (let-values ([(w s-rest) (read-math-rev-word s)])
+                            [(#\_) (let-values ([(w s-rest) (read-math-rev-token s)])
                                      (loop s-rest (append '(#\> #\b #\u #\s #\/ #\<) w '(#\> #\b #\u #\s #\<) r)))]
                             [else (loop s (cons a r))]))]))])
     ; (printf "returning ~s\n" ans)
@@ -485,7 +495,7 @@
                         (format "[~a](~a)" title (hash-ref p 'url)))]))])))
 
 (define read-group
-  (*make-read-group (lambda z (first z)) errmessage-file-context))
+  (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))
 
 (define (expand-directives i o)
   (let ([table-header-newlines #f]

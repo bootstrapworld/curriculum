@@ -36,7 +36,6 @@
     (and (not (eof-object? result))
          result)))
 
-
 (define (unquote-string s)
   (string-trim s "\""))
 
@@ -75,7 +74,6 @@
                        (let ([x (read i)])
                          (if (eof-object? x) (reverse xx)
                              (loop (cons x xx)))))])))))
-
 
 (define *id-counter* 0)
 
