@@ -302,7 +302,7 @@
 (define (math-unicode-if-possible text)
   (cond [(or (regexp-match "\\\\over" text)
              (regexp-match "\\\\require" text))
-         (printf "WARNING: @math{~a} needs MathJax\n\n" text)
+         ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
         [else (call-with-output-string
                 (lambda (o)
