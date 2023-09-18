@@ -119,7 +119,7 @@ The number of @vocab{permutations} is computed based on two things:
 
 Let's see this as a function:
 
-@math{\mbox{permute-w-replace}(items, choose) = choose^{items} \\ \\
+@math{\mbox{permute-w-replace}(\mbox{items}, \mbox{choose}) = \mbox{choose}^{\mbox{items}} \\ \\
 
 \mbox{permute-w-replace}(6, 1) = 6^{1} = 6 \\ \\
 
