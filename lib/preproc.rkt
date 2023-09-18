@@ -204,8 +204,8 @@
         [(string=? x "wescheme") "WeScheme"]
         [else (string-titlecase x)]))
 
-(define read-group (*make-read-group (lambda z (apply code z))
-                                     errmessage-file-context))
+(define read-group (*make-read-group #:code (lambda z (apply code z))
+                                     #:errmessage-file-context errmessage-file-context))
 
 (define (read-space i)
   (let loop ()

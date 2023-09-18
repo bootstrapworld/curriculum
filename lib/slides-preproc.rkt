@@ -495,7 +495,7 @@
                         (format "[~a](~a)" title (hash-ref p 'url)))]))])))
 
 (define read-group
-  (*make-read-group (lambda z (first z)) errmessage-file-context))
+  (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))
 
 (define (expand-directives i o)
   (let ([table-header-newlines #f]
