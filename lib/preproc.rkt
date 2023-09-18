@@ -22,7 +22,9 @@
 
 (define *book* (truthy-getenv "BOOK"))
 
-(define *math-unicode?* (truthy-getenv "MATHUNICODE"))
+; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
+
+(define *math-unicode?* #t)
 
 (define *proglang* "pyret")
 
@@ -202,8 +204,8 @@
         [(string=? x "wescheme") "WeScheme"]
         [else (string-titlecase x)]))
 
-(define read-group (*make-read-group (lambda z (apply code z))
-                                     errmessage-file-context))
+(define read-group (*make-read-group #:code (lambda z (apply code z))
+                                     #:errmessage-file-context errmessage-file-context))
 
 (define (read-space i)
   (let loop ()
@@ -1438,7 +1440,7 @@
                                                         #:centered? #t)
                                        o))]
                            [(string=? directive "math")
-                            (let ([text (read-group i directive)])
+                            (let ([text (string-trim (read-group i directive))])
                               (display-math text o))]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]
@@ -2593,24 +2595,9 @@
 
 (define (display-math text o)
   (if *math-unicode?*
-      (case text
-        [("a")   (display "𝑎"  o)]
-        [("b")   (display "𝑏"  o)]
-        [("c")   (display "𝑐"  o)]
-        [("f")   (display "𝑓"  o)]
-        [("g")   (display "𝑔"  o)]
-        [("h")   (display "ℎ"  o)]
-        [("r")   (display "𝑟"  o)]
-        [("x")   (display "𝑥"  o)]
-        [("y")   (display "𝑦"  o)]
-        [("R^2") (display "𝑅²" o)]
-        [("x_1") (display "𝑥₁" o)]
-        [("x_2") (display "𝑥₂" o)]
-        [("y_1") (display "𝑦₁" o)]
-        [("y_2") (display "𝑦₂" o)]
-        [("=")   (display "="  o)]
-        [("±")   (display "±"  o)]
-        [else (display-mathjax-math text o)])
+      (let ([mu (math-unicode-if-possible text)])
+        (if mu (display mu o)
+            (display-mathjax-math text o)))
       (display-mathjax-math text o)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
