@@ -306,7 +306,7 @@
                                               (math-unicode-if-possible de))]
                                   [else  
                                     (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => cadr]
-                                          [else (display "\\" o) ctl-seq])]))]
+                                          [else ctl-seq])]))]
                              [(char=? c #\^) (math-superscript (read-mathjax-token i))]
                              [(char=? c #\_) (math-subscript (read-mathjax-token i))]
                              [(assoc c *mathjax-special-chars*) => cadr]
