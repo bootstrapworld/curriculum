@@ -237,6 +237,7 @@
 
 (define *mathjax-special-chars*
   '(
+    (#\R "𝑅")
     (#\a "𝑎")
     (#\b "𝑏")
     (#\c "𝑐")
@@ -246,9 +247,6 @@
     (#\r "𝑟")
     (#\x "𝑥")
     (#\y "𝑦")
-    (#\= "=")
-    (#\< "<")
-    (#\> ">")
     (#\- "−")
     (#\± "±")
     ))
@@ -258,6 +256,7 @@
     ("mul" "×")
     ("div" "÷")
     ("Delta" "Δ")
+    ("Sigma" "Σ")
     ("gt" ">")
     ("lt" "<")
     ("ge" "≥")
@@ -281,7 +280,8 @@
         (string-append "~" ss "~"))))
 
 (define (math-unicode-if-possible text)
-  (and (not (regexp-match "\\\\over" text))
+  (and (not (or (regexp-match "\\\\over" text)
+                (regexp-match "\\\\require" text)))
        (call-with-output-string
          (lambda (o)
            (call-with-input-string text
