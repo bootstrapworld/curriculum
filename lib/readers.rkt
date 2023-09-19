@@ -299,9 +299,16 @@
           (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))
         (string-append "~" ss "~"))))
 
+(define (math-sqrt x)
+  (string-append "√"
+    (if (<= (string-length x) 1)
+        x
+        (string-append "(" x ")"))))
+
 (define (math-unicode-if-possible text)
   (cond [(or (regexp-match "\\\\over" text)
-             (regexp-match "\\\\require" text))
+             (regexp-match "\\\\require" text)
+             (regexp-match "\\\\sqrt{[^}]+[-+]" text))
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
         [else (call-with-output-string
@@ -318,9 +325,7 @@
                                          [("mbox") (let ([x (local-read-group i)])
                                                      x)]
                                          [("sqrt") (let ([x (local-read-group i)])
-                                                     (display "√(" o)
-                                                     (display (math-unicode-if-possible x) o)
-                                                     ")")]
+                                                     (math-sqrt (math-unicode-if-possible x)))]
                                          [("frac") (let* ([nu (read-mathjax-token i)]
                                                           [de (read-mathjax-token i)])
                                                      (display (math-unicode-if-possible nu) o)
