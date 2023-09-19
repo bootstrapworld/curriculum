@@ -284,7 +284,7 @@ The existence of a "dip" like this is normal in real data, but it doesn't mean t
 
 Let's *try to build the best possible quadratic model we can for our Fuel Efficiency dataset.* One form of a quadratic model looks like this: 
 
-@center{@math{f(x)=a(x−h)^2+k}}
+@center{@math{f(x)=a(x − h)^2 + k}}
 
 What do each of these coefficients mean for our model?
 

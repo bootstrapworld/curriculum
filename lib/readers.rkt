@@ -237,30 +237,50 @@
 
 (define *mathjax-special-chars*
   '(
+    (#\A "𝐴")
+    (#\B "𝐵")
+    (#\C "𝐶")
     (#\R "𝑅")
     (#\a "𝑎")
     (#\b "𝑏")
     (#\c "𝑐")
+    (#\d "𝑑")
+    (#\e "𝑒")
     (#\f "𝑓")
     (#\g "𝑔")
     (#\h "ℎ")
+    (#\i "𝑖")
+    (#\j "𝑗")
+    (#\k "𝑘")
+    (#\l "𝑙")
+    (#\m "𝑚")
+    (#\n "𝑛")
+    (#\p "𝑝")
+    (#\q "𝑞")
     (#\r "𝑟")
+    (#\s "𝑠")
+    (#\t "𝑡")
+    (#\v "𝑣")
+    (#\w "𝑤")
     (#\x "𝑥")
     (#\y "𝑦")
+    (#\z "𝑧")
     (#\- "−")
     (#\± "±")
     ))
 
 (define *standard-mathjax-ctl-seqs*
   '(
-    ("mul" "×")
-    ("div" "÷")
     ("Delta" "Δ")
     ("Sigma" "Σ")
-    ("gt" ">")
-    ("lt" "<")
+    ("div" "÷")
     ("ge" "≥")
+    ("gt" ">")
+    ("infty" "∞")
     ("le" "≤")
+    ("lt" "<")
+    ("mul" "×")
+    ("times" "×")
     ))
 
 (define (math-superscript ss)
@@ -268,7 +288,7 @@
          [ss-list (string->list ss)])
     (if (andmap (lambda (c) (assoc c *superscriptables*)) ss-list)
         (apply string-append
-          (map (lambda (c) (cadr (assoc c *superscriptables*))) ss-list))
+          (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))
         (string-append "^" ss "^"))))
 
 (define (math-subscript ss)
@@ -276,41 +296,43 @@
          [ss-list (string->list ss)])
     (if (andmap (lambda (c) (assoc c *subscriptables*)) ss-list)
         (apply string-append
-          (map (lambda (c) (cadr (assoc c *subscriptables*))) ss-list))
+          (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))
         (string-append "~" ss "~"))))
 
 (define (math-unicode-if-possible text)
-  (and (not (or (regexp-match "\\\\over" text)
-                (regexp-match "\\\\require" text)))
-       (call-with-output-string
-         (lambda (o)
-           (call-with-input-string text
-             (lambda (i)
-               (let loop ()
-                 (let ([c (read-char i)])
-                   (unless (eof-object? c)
-                     (display
-                       (cond [(char=? c #\\)
-                              (let ([ctl-seq (read-mathjax-word i)])
-                                (case ctl-seq
-                                  [("mbox") (let ([x (local-read-group i)])
-                                              (math-unicode-if-possible x))]
-                                  [("sqrt") (let ([x (local-read-group i)])
-                                              (display "√(" o)
-                                              (display (math-unicode-if-possible x) o)
-                                              ")")]
-                                  [("frac") (let* ([nu (read-mathjax-token i)]
-                                                   [de (read-mathjax-token i)])
-                                              (display (math-unicode-if-possible nu) o)
-                                              (display "⁄" o)
-                                              (math-unicode-if-possible de))]
-                                  [else  
-                                    (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => cadr]
-                                          [else ctl-seq])]))]
-                             [(char=? c #\^) (math-superscript (read-mathjax-token i))]
-                             [(char=? c #\_) (math-subscript (read-mathjax-token i))]
-                             [(assoc c *mathjax-special-chars*) => cadr]
-                             [else (string c)])
-                       o)
-                     (loop))))))))))
+  (cond [(or (regexp-match "\\\\over" text)
+             (regexp-match "\\\\require" text))
+         ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
+         #f]
+        [else (call-with-output-string
+                (lambda (o)
+                  (call-with-input-string text
+                    (lambda (i)
+                      (let loop ()
+                        (let ([c (read-char i)])
+                          (unless (eof-object? c)
+                            (display
+                              (cond [(char=? c #\\)
+                                     (let ([ctl-seq (read-mathjax-word i)])
+                                       (case ctl-seq
+                                         [("mbox") (let ([x (local-read-group i)])
+                                                     x)]
+                                         [("sqrt") (let ([x (local-read-group i)])
+                                                     (display "√(" o)
+                                                     (display (math-unicode-if-possible x) o)
+                                                     ")")]
+                                         [("frac") (let* ([nu (read-mathjax-token i)]
+                                                          [de (read-mathjax-token i)])
+                                                     (display (math-unicode-if-possible nu) o)
+                                                     (display "⁄" o)
+                                                     (math-unicode-if-possible de))]
+                                         [else  
+                                           (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
+                                                 [else ctl-seq])]))]
+                                    [(char=? c #\^) (math-superscript (read-mathjax-token i))]
+                                    [(char=? c #\_) (math-subscript (read-mathjax-token i))]
+                                    [(assoc c *mathjax-special-chars*) => second]
+                                    [else (string c)])
+                              o)
+                            (loop))))))))]))
 
