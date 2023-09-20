@@ -65,89 +65,80 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 {layout="Launch"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-- What are 4 solutions for @math{x \gt 5} ?
-- What are 4 non-solutions for @math{x \gt 5}?
-- What are 4 solutions for @math{x \le 15}?
-- What are 4 non-solutions for @math{x \le 15}?
-- What numbers are in the solutions set of  @math{x \gt 5} `and` @math{x \le 15}, making _both_ of these inequalities true?
-- How would that be different from the solution set of @math{x \gt 5} `or` @math{x \le 15}, making _at least one_ of these inequalities true?
-
-<!--
-The questions above could be printed from @opt-printable-exercise{compound-warmup.adoc}.
--->
+Complete @printable-exercise{compound-warmup.adoc}.
 
 ---
 {layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 * Open the @starter-file{inequalities-compound}.
-@ifproglang{wescheme}{
-* Select Edit to view the code.}
 * Click "Run" to see graphs of the inequalities you've just considered. 
 * Four graphs will appear: The top two are the simple inequalities we've just discussed. 
-* Were your solutions and non-solutions correct?
+* Complete @printable-exercise{compound-explore.adoc}.
 
 
 ---
 {layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-The bottom two graphs are produced by the special functions `and-intersection` and `or-union`. 
+`and-intersection` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{intersection} of values that make both of the inequalities true.
 
-- What does `and-intersection` do?
-- Why is the circle on 5 red and the circle on 15 green?
-- Do you think every graph made with `and-intersection` will have different color dots at the ends? Why or why not?
+---
+{layout="InvestigateC"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @image{images/intersection1.png}
 
+In this example,
+
+* the circle on 5 is red because 5 is not part of the solution - it _is not_ bigger than itself.
+* the circle on 15 is green because 15 is part of the solution - it _is_ less than or equal to 15.
+
 
 ---
 {layout="InvestigateC"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-- What does `or-union` do?
-- Why did the graph of this `or-union` result in the whole number line being shaded blue?
-- Not all graphs of `or-union` will look like this. Can you think of a pair of inequalities whose union won't shade the whole graph?
+`or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
+
+**In order to make an `or` statement true, a number only has to make one of the inequalities true**
+
+---
+{layout="InvestigateC"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @image{images/union-infinite1.png}
 
----
-{layout="Investigate"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+In this example, `or-union` resulted in the whole number line being shaded blue because every number in the universe is either greater than 5 or less than or equal to 15 - there aren't any non-solutions!
 
-Change the function definition on _line 8_ to @math{x \lt 5} and the definition on _line 9_ to @math{x \ge 15}.
-
-Before you click "Run", take a moment to think about what the new graphs of `and-intersection` and `or-union` will look like. 
-
-Then click "Run" and take a look.
+@teacher{Once students are familiar with the starter file, they are ready to use it as they practice identifying solutions and non-solutions for compound inequalities.}
 
 ---
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-- What does the new `and-intersection` graph look like?
-- What does the new `or-union` graph look like?
-- Why is the dot for 5 red and the dot for 15 green?
-- Which of the 8 numbers from the list are part of the solution set? How do you know?
-- Is 3 part of the solution set? How do you know?
-- Is 10 part of the solution set? How do you know?
-
----
-{layout="Investigate"}
-# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
-
-Once you are familiar with the @starter-file{inequalities-compound}, you are ready to use it as you practice identifying solutions and non-solutions for compound inequalities.
+Not all graphs of `or-union` will look like this! Consider @math{x \lt 1} `or` @math{x \lt 3}, for example.
 
 - Turn to @printable-exercise{compound-inequality-solutions.adoc}.
+- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
 
 ---
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-In the following activity, you will analyze inequality graphs and define a _single_ function that produces the graph. Let's look at the first example together.
+Instead of defining two functions as simple inequalities, we can produce an inequality graph by defining one function to be a @vocab{compound inequality}!
+
+In the following activity, we'll analyze inequality graphs and define a _single_ function that produces the graph.
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 - Turn to @printable-exercise{compound-inequality-functions.adoc}.
 - Write code to describe the compound inequalities pictured.
+
+@ifproglang{pyret}{@optional Try @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
+}
 
 ---
 {layout="Synthesize"}
