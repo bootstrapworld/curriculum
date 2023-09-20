@@ -8,7 +8,7 @@
 
 @show{(code '(define (safe-top? y) (<= y 510)))}
 
-@show{(code '(define (onscreen? y) (and (safe-bottom? y) (safe-top? y))))}
+@show{(code '(define (onscreen? x y) (and (safe-bottom? y) (safe-top? y))))}
 --
 
 @vspace{2ex}
@@ -21,21 +21,21 @@
 
 @show{(code '(define (safe-top? y) (< y 520)))}
 
-@show{(code '(define (onscreen? y) (and (> y -40) (< y 520))))}
+@show{(code '(define (onscreen? x y) (and (> y -40) (< y 520))))}
 --
 
 @vspace{2ex}
 
 @n Nokosee and Sabra have different strategies for keeping Sam on the screen. How does Nokosee's strategy work?
 
-@ifsoln{Nokosee's @show{(code '(onscreen? y))} function reuses his definitions of @show{(code '(safe-bottom? y))} and @show{(code '(safe-top? y))}.}
+@ifsoln{Nokosee's @show{(code '(onscreen? x y))} function reuses his definitions of @show{(code '(safe-bottom? y))} and @show{(code '(safe-top? y))}.}
 
 @vspace{10ex}
 
 
 @n How does Sabra's strategy work?
 
-@ifsoln{Sabra doesn't reuse her defined functions; instead, she provides @show{(code '(onscreen? y))} with specific booleans.}
+@ifsoln{Sabra doesn't reuse her defined functions; instead, she provides @show{(code '(onscreen? x y))} with specific booleans.}
 
 @vspace{10ex}
 
