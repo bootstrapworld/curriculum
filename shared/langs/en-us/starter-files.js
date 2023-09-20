@@ -470,7 +470,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?openEditor=ytUfr7fCwY"
+      "url": "https://www.wescheme.org/openEditor?openEditor=ytUfr7fCwY"
     }
   },
   "inequalities-compound": {
@@ -479,7 +479,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=8RStWgMhm4"
+      "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
     }
   },
   "inequalities-sam": {

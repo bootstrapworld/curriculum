@@ -65,16 +65,7 @@ When describing compound inequalities, be careful not to use "english shortcuts"
 {layout="Launch"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-- What are 4 solutions for @math{x \gt 5} ?
-- What are 4 non-solutions for @math{x \gt 5}?
-- What are 4 solutions for @math{x \le 15}?
-- What are 4 non-solutions for @math{x \le 15}?
-- What numbers are in the solutions set of  @math{x \gt 5} `and` @math{x \le 15}, making _both_ of these inequalities true?
-- How would that be different from the solution set of @math{x \gt 5} `or` @math{x \le 15}, making _at least one_ of these inequalities true?
-
-<!--
-The questions above could be printed from @opt-printable-exercise{compound-warmup.adoc}.
--->
+Complete @printable-exercise{compound-warmup.adoc}.
 
 ---
 {layout="Investigate-DN"}
@@ -123,10 +114,12 @@ This is not the time to discuss anything beyond the first two plots or line 18 o
 
 ---
 
-{layout="Investigate"}
+{layout="InvestigateIT"}
+
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @image{images/intersection1.png}
+
 
 @math{x \gt 5 and x \le 15}
 
@@ -144,6 +137,7 @@ Why is the circle on 5 red and the circle on 15 green?
 {layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
+<<<<<<< HEAD
 @image{images/intersection-ns.png}
 
 Why isn't there a solution to @math{x \lt 5 and x \ge 15}?
@@ -167,7 +161,7 @@ There aren't any numbers that are both smaller than 5 and greater than or equal 
 -->
 
 ---
-{layout="Investigate"}
+{layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 @image{images/union-infinite1.png}
@@ -180,15 +174,30 @@ In order to make an `or` statement true, a number only has to make one of the in
 Every number in the universe is either greater than 5 or less than or equal to 15 - there aren't any non-solutions!
 -->
 
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
+
+- Turn to @printable-exercise{compound-inequality-solutions.adoc}.
+- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
 
 ---
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-In the following activity, you will analyze inequality graphs and define a _single_ function that produces the graph. Let's look at the first example together.
+Instead of defining two functions as simple inequalities, we can produce an inequality graph by defining one function to be a @vocab{compound inequality}!
+
+In the following activity, we'll analyze inequality graphs and define a _single_ function that produces the graph.
+
+---
+{layout="Investigate"}
+# Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 - Turn to @printable-exercise{compound-inequality-functions.adoc}.
 - Write code to describe the compound inequalities pictured.
+
+@ifproglang{pyret}{@optional Try @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
+}
 
 ---
 {layout="Synthesize"}
