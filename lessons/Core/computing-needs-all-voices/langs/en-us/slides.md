@@ -13,7 +13,7 @@ We're going to watch this five-minute clip and take a few minutes to write down 
 <!--
 Pedagogy Note: Notice and Wonder!
 
-This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding in literature}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's going on in this Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
+This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding in literature}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
 -->
 
 ---

@@ -83,7 +83,7 @@ What do you Notice? What do you Wonder?
 <!--
 Invite students to draw their Circles of Evaluation on the board.
 
-The Notice & Wonder pedagogy is a widely-used best practice in Math-Ed, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent "What's going on in this Graph?" activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
+The Notice & Wonder pedagogy is a widely-used best practice in Math-Ed, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent "What's Going On in This Graph?" activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
 -->
 
 ---
