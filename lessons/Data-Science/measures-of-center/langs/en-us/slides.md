@@ -192,7 +192,7 @@ By looking at the histogram, we can see whether it's probably better to use the 
 * Strong left skewness and/or low outliers can pull the mean down below the median.
 * Right skewness and/or high outliers can pull the mean above the median. 
 
-Mean is generally the best measure of center, because it includes information from every single point. But it's inaccurate for highly-skewed datasets, so statisticians fall back to the median.
+Mean is generally the best measure of center, because it includes information from every single point. But it's misleading for highly-skewed datasets, so statisticians fall back to the median.
 
 ---
 {layout="Launch"}
