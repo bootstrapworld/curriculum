@@ -64,16 +64,15 @@ To further support students, consider asking what three functions are defined in
 @span{.title}{Why does @show{(code '(onscreen? x y))} take in both x and y?
 }
 |
-The "screen" that @show{(code '(onscreen? x y))} refers to is two-dimensional and Sam moves in both directions, so the function is able to keep track of both coordinates of Sam's location. 
+The "screen" that @show{(code '(onscreen? x y))} refers to is two-dimensional and Sam moves in both directions.
 |
-Even though the function is tracking both coordinates (x and y), for now we're looking to write a function that only evaluates where Sam is on the left and where Sam is on the right, because that's all we will need the function to evaluate when we use it in our Game Starter File. In other words, @show{(code '(onscreen? x y))} takes in two variables, but only uses one of them.
+Even though this function is tracking both coordinates (x and y) of Sam's location, for now we're looking to write a function that only evaluates where Sam is on the left and where Sam is on the right. In other words, @show{(code '(onscreen? x y))} takes in two variables, but only uses one of them. 
 |
-This convention is not unique to code. We see it in algebra, too. In function notation, whatever is between the parentheses specifies the variables the function takes in -- whether they are used or not! For instance, @math{f(x) = 15} and @math{f(g,m) = 15g} are two functions that have unused variables.
+When we add this function to our Game Starter File, it's important that @show{(code '(onscreen? x y))} only changes the x-coordinate, because the Game Starter File has other (hidden) functions that will control the characters' y-coordinates and we don't want to interfere with them.
 |
-Later on in _this lesson_ we will discuss how students with time and energy can challenge themselves to define a function that evaluates Sam's location in both dimensions.
+However, later on in _this lesson_ we will discuss how students with time and energy can challenge themselves to keep Sam safe in all directions by defining a function that uses both of the variables it takes in!
 |
-This
-
+Function definitions that take in variables and don't do anything with them to produce the output also appear in algebra! The y-values for all horizontal lines can be generated irregardless of the x-value; written in function notation, their definitions follow the form @math{f(x) = 15}. Function definitions can also take in many variables and only use some of them, for instance @math{f(g,m) = 15g}.
 |===
 }
 @ifproglang{wescheme}{
