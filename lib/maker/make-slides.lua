@@ -28,6 +28,8 @@ function make_slides_file()
 
   local processing_slides = false
 
+  local section_type = 'Launch'
+
   for L in i:lines() do
     if start then
       if L:match('^= ') then
@@ -39,7 +41,7 @@ function make_slides_file()
         o:write('# ', title_string, '\n\n')
         o:write('<!--\n')
         o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
-        o:write('-->\n---\n')
+        o:write('-->\n')
       end
       goto continue
     end
@@ -48,7 +50,16 @@ function make_slides_file()
       if L:match('^== ') then
         current_slide_title = L:gsub('^==%s*(.*)', '%1')
         current_slide_title = current_slide_title:gsub('@duration.*', '')
+        -- section_type is one of: Launch, Investigate, Synthesize
+        -- needs to be fleshed out
+        if current_slide_title:match('[Ll]aunch') then
+          section_type = 'Launch'
+        else
+          section_type = 'Investigate'
+        end
       end
+      o:write('---\n')
+      o:write('{layout="', section_type, '"\n')
       o:write('# ', current_slide_title, '\n')
     elseif processing_slides then
       o:write(L, '\n')
