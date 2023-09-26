@@ -1699,6 +1699,8 @@
                                       (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
+                           [(string=? directive "slidebreak") o]
+
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
