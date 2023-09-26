@@ -39,6 +39,7 @@ function get_segments(lplan_file)
       current_segment[#current_segment + 1] = L
     end
   end
+  segments[#segments + 1] = current_segment
   --
   i:close()
   --
@@ -66,6 +67,8 @@ function find_segment_title(segment)
     local heading = L:gsub('^=+%s*(.*)', '%1')
     heading = heading:gsub('@duration.*', '')
     return heading
+  elseif L:match('%s*@slidebreak') then
+    return 'slidebreak'
   else
     return nil
   end
@@ -81,8 +84,24 @@ function number_of_images(segment)
   return n
 end
 
-function find_section(segment)
-  return 'Launch'
+function find_section(text, level, last)
+  if level == 2 then
+    if not text then
+      return nil
+    elseif text:match('Launch') then
+      return 'Launch'
+    elseif text:match('Investigate') then
+      return 'Investigate'
+    elseif text:match('Synthesize') then
+      return 'Synthesize'
+    elseif text:match('slidebreak') then
+      return 'Repeat'
+    else
+      return nil
+    end
+  elseif last then
+    return 'Supplemental'
+  end
 end
 
 function contains_center(segment)
@@ -127,34 +146,41 @@ function make_slides_file(lplan_file, slides_file)
   local o = io.open(slides_file, 'w')
 
   local current_title = 'not_yet_set'
+  local current_section = 'not_yet_set'
 
   for k,current_segment in ipairs(segments) do
-    local section
-    if k == segments_last_index then
-      section = 'Supplemental'
-    else
-      section = find_section(current_segment)
-    end
-    local image_orientation = find_image_orientation(current_segment)
-    local suffix = find_suffix(current_segment)
-    local level = type_of_slide(current_segment)
-    if level <= 1 then
-      current_title = find_segment_title(current_segment)
-    end
+    local title = find_segment_title(current_segment)
+    --
     if k == 1 then
       o:write('---\n')
       o:write('{layout="', course_string, ' Title Slide"}\n')
-      o:write('# ', current_title, '\n\n')
+      o:write('# ', title, '\n\n')
       o:write('<!--\n')
       o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
       o:write('-->\n')
-    elseif level ~= 1 then
-      o:write('---\n')
-      o:write('{layout="', section, image_orientation, suffix, '"}\n')
-      o:write('# ', current_title, '\n\n')
-      for j,L in ipairs(current_segment) do
-        if j ~= 1 then
-          o:write(L, '\n')
+    else
+      local level = type_of_slide(current_segment)
+      local section = find_section(title, level, k == segments_last_index)
+      if section == 'Repeat' then
+        section = current_section
+      end
+      if section then
+        current_section = section
+      end
+      if level <= 1 then
+        current_title = title
+      end
+      if level == 2 and section then
+        local image_orientation = find_image_orientation(current_segment)
+        local suffix = find_suffix(current_segment)
+        --
+        o:write('---\n')
+        o:write('{layout="', section, image_orientation, suffix, '"}\n')
+        o:write('# ', current_title, '\n\n')
+        for j,L in ipairs(current_segment) do
+          if j ~= 1 then
+            o:write(L, '\n')
+          end
         end
       end
     end
