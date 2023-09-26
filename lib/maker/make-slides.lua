@@ -15,7 +15,6 @@ end
 
 local course_string = first_line('.cached/.record-superdir') or 'Default'
 
-
 function make_slides_file()
   local i = io.open(lplan_file)
   if not i then return end
@@ -24,30 +23,24 @@ function make_slides_file()
 
   local current_slide_title = 'default slide title'
 
-  local start = true
-
   local processing_slides = false
 
   local section_type = 'Launch'
 
   for L in i:lines() do
-    if start then
-      if L:match('^= ') then
-        local title_string = L:gsub('^=%s*(.*)', '%1')
-        current_slide_title = title_string
-        start = false
-        o:write('---\n')
-        o:write('{layout="', course_string, ' Title Slide"}\n')
-        o:write('# ', title_string, '\n\n')
-        o:write('<!--\n')
-        o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
-        o:write('-->\n')
-      end
-      goto continue
+    if (not processing_slides) and L:match('^= ') then
+      local title_string = L:gsub('^=%s*(.*)', '%1')
+      current_slide_title = title_string
+      o:write('---\n')
+      o:write('{layout="', course_string, ' Title Slide"}\n')
+      o:write('# ', title_string, '\n\n')
+      o:write('<!--\n')
+      o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
+      o:write('-->\n')
     end
     if L:match('^== ') or L:match('^=== ') or L:match('^%s*@slidebreak') then
-      if not processing_slides then processing_slides = true end
       if L:match('^== ') then
+        processing_slides = false
         current_slide_title = L:gsub('^==%s*(.*)', '%1')
         current_slide_title = current_slide_title:gsub('@duration.*', '')
         -- section_type is one of: Launch, Investigate, Synthesize
@@ -57,14 +50,15 @@ function make_slides_file()
         else
           section_type = 'Investigate'
         end
+      else
+        processing_slides = true
+        o:write('---\n')
+        o:write('{layout="', section_type, '"}\n')
+        o:write('# ', current_slide_title, '\n\n')
       end
-      o:write('---\n')
-      o:write('{layout="', section_type, '"\n')
-      o:write('# ', current_slide_title, '\n')
     elseif processing_slides then
       o:write(L, '\n')
     end
-    ::continue::
   end
 
   o:close()
