@@ -6,16 +6,18 @@
     <link rel="stylesheet" href="lib/curriculum.css">
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
+        #preamble_disabled { padding-bottom: 25px; }
         .logo img { width: 300px; }
         .drag-handle img { width: 15px; user-select: none; }
-        dl { counter-reset: term; min-height: 3in; }
+        dl { counter-reset: term; min-height: 3in; padding-top: 25px; }
         dl .list-group-item { 
             display:        flex !important; 
-            align-items:    center; 
             padding:        0; 
             margin-bottom:  15px;
             border:         none;
         }
+        dl#accessible-lesson-list .list-group-item { align-items:    center; }
+        dl#accessible-lesson-list .day { display: none; }
         dl .list-group-item span.drag-handle { 
             width: 15px; 
             flex: 0 0 15px; 
@@ -23,6 +25,22 @@
             text-align: center; 
             opacity: 0.5; 
         }
+        dl#lesson-list .list-group-item span.drag-handle { margin-top: 30px; }
+
+        /* styling of day input boxes */
+        .day { margin-right: 50px; float: right; white-space: pre; font-style: italic; font-weight: 100; }
+        .day input { 
+            max-width: 25px; 
+            display: inline;
+            margin: 0; 
+            padding: 0; 
+            border: none; 
+            text-align: left; 
+            font: inherit;
+            color: inherit;
+            background: transparent;
+        }
+
         dl .list-group-item .itemContent { flex: 1; }
         span.drag-handle:hover { cursor: grab; }
 
@@ -39,6 +57,9 @@
             content: counter(term) ".";
             margin-right: 5px;
         }
+        dd ul { max-height: 0; overflow: hidden; transition: all 1s ease-out; }
+        /*dd:hover ul { max-height: 1000px; }*/
+
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
         #accessible * { font-size: 14px; }
@@ -48,6 +69,7 @@
         
         #status { display: none; }
         #status, label, progress { width: 100%; }        
+        .pathway_external_links li { margin-top: 25px; }
     </style>
 
     <!-- Latest compiled and minified CSS -->
@@ -69,6 +91,10 @@
 
         // Get and initialize parameters
         let {pathway, lessons, lesson} = getParams();
+        let {days} = Object.fromEntries([...url.searchParams.entries()]);
+        days = days && days.split(",").map(Number) || [];
+        days = lessons.map((_, idx) => days[idx] || 1);
+        console.log(days)
         if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
         if(!lessons) lessons = [];
         if(!pathway) pathway = "Click here to name this pathway";
@@ -83,9 +109,13 @@
             handle: ".drag-handle",
         };
 
-        function populateselectedList(parent, lessonNames, showDescription) {
-            lessonNames.forEach(l => {
+        function populateselectedList(parent, lessonNames, useDays) {
+            lessonNames.forEach((l, idx) => {
                 const lesson = graph[l];
+                const pagesHTML = graph[l].pages.map(p => 
+                    `<li>${p}</li>`).join('\n');
+                const numDays = (useDays && days && days[idx])? days[idx] : 1;
+                const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
                 const html = `
                     <div class="list-group-item" data-lesson-title=${l}>
                         <span class="drag-handle">
@@ -98,8 +128,14 @@
                             <img src="lib/images/drag-handle.png" aria-hidden="true"/>
                         </span>
                         <span class="itemContent">
-                            <dt><a href="./lessons/${l}/index.shtml">${lesson.title}</a></dt>
-                            <dd>${lesson.description}</dd>
+                            <dt>
+                                <a href="./lessons/${l}/index.shtml">${lesson.title}</a>
+                                ${dayHTML}
+                            </dt>
+                            <dd>
+                                ${lesson.description}
+                                <ul>${pagesHTML}</ul>
+                            </dd>
                         </span>
                     <div>`;
                 const template = document.createElement('template');
@@ -112,15 +148,15 @@
         lessonNodes = () => [...document.querySelectorAll('#lesson-list [data-lesson-title]')]
         lessonAndDependants = (l) => [...lessons.filter(dep => graph[dep].prerequisites.includes(l)), l]
         resetDeletionIndicators = () => lessonNodes().forEach(n => n.style.background = "none");
-        maybeDeleteLesson = (l) => lessonAndDependants(l).forEach(l => 
-            document.querySelector(`[data-lesson-title="${l}"`).style.background = "#fcc");
+        maybeDeleteLesson = (l) => lessonAndDependants(l).forEach(l => {
+            if (document.querySelector('.sortable-ghost')) return; // ignore if we're dragging something
+            document.querySelector(`[data-lesson-title="${l}"`).style.background = "#fcc"
+        });
 
         function deleteLesson(l) {
             const toDelete = lessonAndDependants(l);
             lessons = lessons.filter(l => !toDelete.includes(l));
-            url.searchParams.set("lessons", lessons.join(','));
-            history.pushState({}, "", url);
-            init();
+            updateHistory();
         }
 
         // Based on an example at https://jsfiddle.net/Hopding/Lyb16ocj/13/
@@ -129,17 +165,12 @@
             url = new URL(location);
             const selectedList   = document.getElementById('lesson-list');
             const accessibleList = document.getElementById('accessible-lesson-list');
-            
-            // revise search params for content links
-            document.querySelectorAll('#content a').forEach(link => {
-                newLink = new URL(link.href);
-                newLink.search = url.search;
-                link.href = newLink.href;
-            });
 
             // set pathway title and lesson lists
             document.getElementById('pathwayTitle').innerHTML = pathway;
             selectedList.innerHTML = accessibleList.innerHTML = null;
+            const totalDays = days.reduce((d, acc) => d + acc, 0);
+            document.getElementById('totalDays').innerHTML = totalDays + '  days';
 
             // update the list of accessible lessons based on selected lessons
             var accessible =  Object.getOwnPropertyNames(graph)
@@ -154,7 +185,7 @@
             // populate the list of lessons in this pathway, and
             // the list of lessons accessible *from* this pathway
             populateselectedList(selectedList,   lessons,    true);
-            populateselectedList(accessibleList, accessible, true)
+            populateselectedList(accessibleList, accessible, false)
 
             // make accessible and selected lists sortable
             // special behavior for adding a lesson to selected
@@ -166,11 +197,8 @@
              });
 
             function updateList(evt) {
-                const newLessonOrder = selectedSort.toArray();
                 lessons = selectedSort.toArray();
-                url.searchParams.set("lessons", newLessonOrder.join(','));
-                history.pushState({}, "", url);
-                init();                
+                updateHistory()               
             }
 
             function safeToDrop(evt, originalEvt) { 
@@ -206,6 +234,13 @@
 
             accessibleSort.option('onMove', safeToDrop);
             selectedSort.option('onMove', safeToDrop);
+            
+            // revise search params for content links
+            document.querySelectorAll('#content a').forEach(link => {
+                newLink = new URL(link.href);
+                newLink.search = url.search;
+                link.href = newLink.href;
+            });
         }
 
         async function printWorkook(lessons, graph) {
@@ -281,14 +316,22 @@
             if(node.id == "pathwayTitle") { pathway = node.textContent; }
             node.onkeydown = null;
             node.contentEditable = false;
-            url.searchParams.set("pathway", pathway);
+            updateHistory();
+        }
+        function updateHistory() {
+            days = lessons
+                .map(t => document.querySelector('[data-lesson-title='+t+'] input'))
+                .map(inpt => Number(inpt.value));
+            console.log(pathway, lessons, days)
+            url.searchParams.set("lessons", lessons.join(','));
+            url.searchParams.set("days", days.join(','));
             history.pushState({}, "", url);
             init();
         }
     </script>
 </head>
 
-<body class="narrativepage article narrative pyret" onload="init();">
+<body class="article narrative pyret" onload="init();">
     <!--#include virtual="/menubar.ssi" -->
     <div id="body">
         <div id="header">
@@ -305,7 +348,7 @@
 
         <div class="clearfix item two-thirds">
             <div class="sectionbody">
-                <h2>Lesson Plans</h2>
+                <h2>Lesson Plans <span id="totalDays" class="day"/></h2>
                 <dl id="lesson-list" ></dl>
             </div>
         </div>

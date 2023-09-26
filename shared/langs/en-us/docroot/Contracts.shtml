@@ -41,7 +41,7 @@
     window.status = "not_ready_to_print";
     configureGraph(graph);
     // narrow the primitives by url params
-    const {pathway, lessons, lesson} = getParams();
+    const {pathway, lessons, lesson, solns} = getParams();
     // if there's a pathway, extract the primitives
     const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
 
@@ -62,10 +62,6 @@
 
       // the domain is an array of {name, type} pairs
       function processDomain(contract) {
-        // short-circuit for algebra, where kids discover their own contracts and examples
-        if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
-          return document.createElement('span');
-
         const code = document.createElement('code');
         code.className = "pyret-comment";
         code.innerHTML = '(' + 
@@ -82,9 +78,6 @@
 
       // use the right example for the proglang
       function processExample(contract) {
-        // short-circuit for algebra, where kids discover their own contracts and examples
-        if (pathway && ["algebra-pyret","algebra-wescheme"].includes(pathway)) 
-          return "";
         return (proglang == "wescheme")?
          contract["example-wescheme"] : contract["example-pyret"];
       }

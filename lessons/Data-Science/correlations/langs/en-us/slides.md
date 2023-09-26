@@ -37,7 +37,7 @@ This goes hand-in-hand with expanding our display **from a 1-dimensional histogr
 {layout="InvestigateC"}
 # Correlations have _Form_
 
-Form tells us whether a relationship is linear, non-linear or undefined.
+Form tells us whether a relationship is linear, nonlinear or undefined.
 
 @image{images/form.png}
 
@@ -53,7 +53,7 @@ Form tells us whether a relationship is linear, non-linear or undefined.
 {layout="InvestigateR"}
 # Correlations have _Form_
 
-Some patterns are **non-linear**, and may look like a curve or an arc. That means there _is_ a relationship, but it's not purely going up or down.
+Some patterns are **nonlinear**, and may look like a curve or an arc. That means there _is_ a relationship, but it's not purely going up or down.
 
 @image{images/2NL.gif}
 
@@ -69,7 +69,7 @@ And sometimes there is **no relationship** or pattern at all! That means there's
 {layout="Investigate"}
 # Correlations have _Form_
 
-Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship is linear, non-linear or if there's no relationship at all.
+Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship is linear, nonlinear or if there's no relationship at all.
 
 <!--
 Have the class discuss their answers
@@ -79,7 +79,7 @@ Have the class discuss their answers
 # Correlations have _Form_
 
 - Which scatter plots seem to have _linear_ relationships?
-- Which scatter plots seem to have _non-linear_ relationships?
+- Which scatter plots seem to have _nonlinear_ relationships?
 Which scatter plots seem to have _no relationships_?
 
 <!--
@@ -284,7 +284,7 @@ Let’s review what we have learned about correlations.
 - What kind of displays can we use to visualize a correlation?
 ** _Scatter plots are used to visualize correlations._
 - When Data Scientists describe correlations to one another, what three properties do they talk about, and what do they mean?
-** _1) Form - describes the *shape* of a correlation. Correlations can be linear, non-linear, or non existant (N/A)._
+** _1) Form - describes the *shape* of a correlation. Correlations can be linear, nonlinear, or non existant (N/A)._
 ** _2) Direction - linear correlations can be *positive* or *negative*, describing whether the point cloud seems to rise or fall as the explanatory variable gets larger._
 ** _3) Strength - describes how tightly the data is clustered around a line or curve._
 }

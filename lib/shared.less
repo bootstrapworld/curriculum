@@ -26,8 +26,8 @@ body {
   -webkit-font-smoothing: antialiased;
   &.beta::after { 
     position: absolute;
-    top: 1in;
-    left: 2in;
+    top: 40%;
+    left: 40%;
     transform: rotate(-45deg);
     content: "BETA";
     opacity: 0.2;
@@ -35,6 +35,7 @@ body {
     color: gray;
     font-size: 100pt;
     font-weight: 900;
+    z-index: -1;
   }
   /* Set Defaults (many asciidoc overrides) */
   h1 {
@@ -49,7 +50,7 @@ body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: smaller !important; }
+  sup     { font-size: smaller; }
   code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
@@ -59,6 +60,10 @@ body {
   ul { line-height: inherit; }
   .ulist ul { margin-bottom: 0px; }
   .ulist p  { margin: 5px 0px; }
+  /* Make .mathunicode and MathJax look similar */
+  .MathJax, .mathunicode { 
+    font-family: MJXZERO, 'MJXTEX'; font-size: inherit !important; 
+  }
 
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
@@ -185,7 +190,7 @@ body:not(.LessonPlan, .narrativepage) p {
   line-height:  1.3;
 }
 
-/*  RULES FOR GLOSSARY ITEMS AND VOCABULARY WORDS  */
+/*  RULES FOR GLOSSARY ITEMS  */
 .glossary { 
   margin-bottom: 20px; 
   * { display: inline; font-size: 16px;}
@@ -234,7 +239,7 @@ lines on some browsers */
 }
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
-  bottom:             -0.9rem;
+  bottom:             -11px;
   left:               0;
   font-size:          9.5px;
   font-weight:        normal;
@@ -245,6 +250,7 @@ lines on some browsers */
   white-space:        nowrap;
   user-select:        none;
 }
+.ruby  sup { top: -0.3em; font-size: 7px; }
 .fitb.stretch, .fitbruby.stretch { 
   margin-left:        5px; 
   vertical-align:     baseline; 
@@ -259,6 +265,9 @@ lines on some browsers */
     bottom :            -1px;
   }
 }
+
+.vocab { font-weight: bold; font-style: italic; color: @font-color; }
+
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
@@ -291,6 +300,7 @@ lines on some browsers */
 
   /* The summary table at the top of each lesson */
   .preamble {
+    color: black;
     /* Hide slide links intentionally left blank, and display useful feedback */
     a[href$='Intentionally-left-blank-as-this-lesson-does-not-have-any-slides/'] {
       font-size: 0;
@@ -444,8 +454,7 @@ lines on some browsers */
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
-  .vocab { font-weight: bold; font-style: italic; color: @font-color; }
-  .lesson-instruction, .lesson-roleplay {
+  .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
     background: #eee;
     clear:      both;
@@ -461,6 +470,7 @@ lines on some browsers */
       margin-left:-60px;
     }
   }
+  .q-and-a > *:first-child::before { content: url('q-and-a.png') }
   .lesson-roleplay > *:first-child::before { content: url('lesson-roleplay.png') }
 
   .lesson-point {
@@ -508,6 +518,8 @@ lines on some browsers */
     position:           relative;
     left:               -2em;
   }
+
+  .sectionbody td { color: inherit; }
 
   /* class for styling duration info in headers */
   .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
@@ -604,7 +616,7 @@ table.contracts-table {
   tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
   tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
   tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
-  tbody tr:nth-child(even) * { font-family: monospace; }
+  tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
 }
 
 
@@ -986,9 +998,9 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 /************************************************************************************
 * SCREEN MEDIA
 */
+
 @media screen {
-  /* add some left-padding to improve readability on screens */
-  html { height: 100%; display:  flex; padding-left: 3em; }
+  html { height: 100%; display: flex; padding-left: 3em;}
 
   .web-page-only {
     font-weight:      bold;
@@ -1061,6 +1073,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
       }
       .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
    }
+}
+
+
+@media all and (max-width: 600px) {
+  html { padding-left: 0 !important;}
 }
 
 /************************************************************************************

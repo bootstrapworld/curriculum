@@ -192,7 +192,7 @@ Save your work when you're done!
 
 At the bottom of the Definitions Area, you'll see some commented lines of code with instructions. 
 
-You already know what @show{(code '(start rocket-height))} does. 
+You already know what @show{(code '(blastoff rocket-height))} does. 
 - What about @show{(code '(space rocket-height))}?
 - Try out @show{(code '(everything rocket-height))}, too!
 

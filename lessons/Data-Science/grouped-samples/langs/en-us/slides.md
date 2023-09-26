@@ -116,16 +116,23 @@ Finally, we define the name `dogs` to be the table produced by `filter`.{style="
 
 A “kitten” is an animal who _is a cat_ and who _is young_. **How would you define a table of just kittens?**
 
-* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what @ifproglang{pyret}{code} @ifproglang{codap}{sequence of Transformers} will compute whether or not an animal is a kitten.
-* Can you fill in the @ifproglang{pyret}{code} @ifproglang{codap}{function notation} for the other grouped samples?
+@ifproglang{codap}{
+* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what sequence of Transformers will compute whether or not an animal is a kitten.
+* Can you fill in the function notation for the other grouped samples?
+}
+
 @ifproglang{pyret}{
-* When you're done, type these definitions into the Definitions Area.}
-* Make a bar chart showing the distribution of `sex` in the `kittens` subset @ifproglang{pyret}{, by typing @show{(code '(bar-chart kittens "sex"))}}.
+* Open the @starter-file{grouped-samples}, save a copy, and click "Run".
+* What functions do you see defined here? What do they do?
+* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what code define a table of only young cats.
+* Can you fill in the code to define the other grouped samples?
+* In the starter file, scroll to the bottom of the Definitions Area. Add your solutions from @printable-exercise{pages/samples-from-animals-dataset.adoc}. Test them out!
+}
 
 ---
 {layout="Synthesize"}
 # Grouped Samples
-
+* How could we make a bar chart showing the distribution of `sex` in the `kittens` sample?
 * How could we filter _and_ sort a table?
 * How can we combine functions?
 
@@ -213,6 +220,17 @@ We might have _new_ questions about whether a higher percentage of dogs are spay
 - Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
 - Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
 
+@ifproglang{pyret}{
+
+---
+{layout="Investigate"}
+# Your Own Dataset
+
+If you are working on your own dataset, use @printable-exercise{samples-from-my-dataset.adoc} to define your own grouped samples!
+
+Blank Design Recipes are also available @opt-printable-exercise{design-recipe-helper-funs.adoc, here}.
+
+}
 ---
 {layout="Synthesize"}
 # Displaying Samples

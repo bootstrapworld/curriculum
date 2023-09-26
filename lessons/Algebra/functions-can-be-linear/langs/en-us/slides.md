@@ -107,7 +107,7 @@ While a table represents a _sample_ of some larger trend, the graph is a way of 
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?
 
@@ -119,7 +119,7 @@ Continue to the next slide where students will have access to a page to record t
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 Linear relationships in a graph always appear as straight lines.
 
@@ -129,16 +129,16 @@ What do you Notice? What do you Wonder?
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
-Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vocab{linear} relationships, and three show other, non-linear relationships.  Which are linear?
+Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vocab{linear} relationships, and three show other, nonlinear relationships.  Which are linear?
 
 @image{images/set-of-6-graphs.png}{width="700"}
 
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 **If all linear relationships can be shown as tables, does that mean all tables are linear?**
 
@@ -146,7 +146,7 @@ Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vo
 
 ---
 {layout="Launch"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 Linear relationships in a table show up as sequences that change at a constant rate. 
 
@@ -158,9 +158,9 @@ Complete @printable-exercise{tables-all-linear.adoc}.
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
-Three of the tables show linear relationships, and three show non-linear relationships.{style="font-size:14pt"} 
+Three of the tables show linear relationships, and three show nonlinear relationships.{style="font-size:14pt"} 
 - Which are linear?{style="font-size:14pt"}
 - Were you able to figure out what the next (x,y) pair should be for each of them?{style="font-size:14pt"}
 - Were you able to guess what the y-value for each table would be when x is 0?{style="font-size:14pt"}
@@ -169,7 +169,7 @@ Three of the tables show linear relationships, and three show non-linear relatio
 
 ---
 {layout="LaunchC"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 Sometimes there is _no function_ that will give us a particular table or graph! Take a look at the table and points below. Can you predict the next two rows? Where will the next point be?
 
@@ -177,9 +177,9 @@ Sometimes there is _no function_ that will give us a particular table or graph! 
 
 ---
 {layout="Investigate"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
-* Can you tell when a relationship is a linear function? A non-linear one? Not a function at all?
+* Can you tell when a relationship is a linear function? A nonlinear one? Not a function at all?
 * Can someone remind us how to tell whether or not a graph represents a function? 
 
 Complete:
@@ -189,7 +189,7 @@ Complete:
 
 ---
 {layout="Synthesize"}
-# Linear, Non-Linear, or Bust!
+# Linear, Nonlinear, or Bust!
 
 Data has a "shape", and this shape can emerge when we look for patterns in that data. A @vocab{linear} function is one kind of pattern, and we can see it when viewing data as a table or a graph.
 

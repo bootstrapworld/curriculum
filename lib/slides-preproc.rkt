@@ -44,6 +44,8 @@
 
 (define *missing-image-json-files* '())
 
+(define *output-answers?* #f)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -96,28 +98,29 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  (let ([use-mathjax?
-          (cond [(regexp-match "\\\\frac" text)
-                 (cond [(regexp-match "\\\\div" text) #t]
-                       [(regexp-match "\\^" text) #t]
-                       [(>= (string-length text) 40) #t]
-                       [(regexp-match* "\\\\frac{(.+?)}" text)
-                        => (lambda (mm)
-                             (cond [(null? mm) #f]
-                                   [else (let ([use-mathjax? #f])
-                                           (for ([m mm])
-                                             (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
-                                               (unless (variable-or-number? frac-arg)
-                                                 (set! use-mathjax? #t))))
-                                           use-mathjax?)]))])]
-                [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
-                [(regexp-match "\\\\\\\\" text) #t]
-                [(regexp-match "\\\\mbox" text) #t]
-                [else #f])])
-    ;
-    ((if use-mathjax?
-         make-mathjax-math
-         make-ascii-math) text)))
+  (or (math-unicode-if-possible text)
+      (let ([use-mathjax?
+              (cond [(regexp-match "\\\\frac" text)
+                     (cond [(regexp-match "\\\\div" text) #t]
+                           [(regexp-match "\\^" text) #t]
+                           [(>= (string-length text) 40) #t]
+                           [(regexp-match* "\\\\frac{(.+?)}" text)
+                            => (lambda (mm)
+                                 (cond [(null? mm) #f]
+                                       [else (let ([use-mathjax? #f])
+                                               (for ([m mm])
+                                                 (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                                   (unless (variable-or-number? frac-arg)
+                                                     (set! use-mathjax? #t))))
+                                               use-mathjax?)]))])]
+                    [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                    [(regexp-match "\\\\\\\\" text) #t]
+                    [(regexp-match "\\\\mbox" text) #t]
+                    [else #f])])
+        ;
+        ((if use-mathjax?
+             make-mathjax-math
+             make-ascii-math) text))))
 
 (define (make-mathjax-math text)
   (string-append
@@ -132,6 +135,15 @@
         (let ([a (first s)])
           (cond [(or (char-alphabetic? a) (char-numeric? a)) (loop (rest s) (cons a r))]
                 [else (values r s)])))))
+
+(define (read-math-rev-token s)
+  (let ([first-s (first s)] [s (rest s)])
+    (cond [(char=? first-s #\{)
+           (let loop ([s s] [r '()])
+             (let ([a (first s)])
+               (cond [(char=? a #\}) (values r (rest s))]
+                     [else (loop (rest s) (cons a r))])))]
+          [else (values s (list first-s))])))
 
 (define (make-ascii-math text)
   ; (printf "doing make-ascii-math ~s\n" text)
@@ -158,9 +170,9 @@
                                                 (equal? w '(#\q #\e #\g)))
                                             (loop s-rest (cons #\≥ r))]
                                            [else (loop s-rest (append w r))]))]
-                            [(#\^) (let-values ([(w s-rest) (read-math-rev-word s)])
+                            [(#\^) (let-values ([(w s-rest) (read-math-rev-token s)])
                                      (loop s-rest (append '(#\> #\p #\u #\s #\/ #\<) w '(#\> #\p #\u #\s #\<) r)))]
-                            [(#\_) (let-values ([(w s-rest) (read-math-rev-word s)])
+                            [(#\_) (let-values ([(w s-rest) (read-math-rev-token s)])
                                      (loop s-rest (append '(#\> #\b #\u #\s #\/ #\<) w '(#\> #\b #\u #\s #\<) r)))]
                             [else (loop s (cons a r))]))]))])
     ; (printf "returning ~s\n" ans)
@@ -483,141 +495,157 @@
                         (format "[~a](~a)" title (hash-ref p 'url)))]))])))
 
 (define read-group
-  (*make-read-group (lambda z (first z)) errmessage-file-context))
+  (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))
+
+(define (expand-directives i o)
+  (let ([table-header-newlines #f]
+        [num-table-columns 0])
+    (let loop ()
+      (let ([c (read-char i)])
+        (unless (eof-object? c)
+          (cond
+            [(and table-header-newlines (char=? c #\newline))
+             (set! table-header-newlines (- table-header-newlines 1))
+             (when (= table-header-newlines 0)
+               (set! table-header-newlines #f)
+               (newline o)
+               (let loop ([j num-table-columns])
+                 (unless (<= j 0)
+                   (display "|---" o)
+                   (loop (- j 1)))))
+             (newline o)]
+            [(char=? c #\@)
+             (let ([directive (read-word i)])
+               ; (printf "directive is ~s\n" directive)
+               (cond [(string=? directive "") (display c o)]
+                     [(string=? directive "@") (display c o)]
+                     [(string=? directive "image")
+                      (let ([args (read-commaed-group i directive read-group)])
+                        (display (make-image (first args)
+                                             (if (>= (length args) 2) (second args) ""))
+                                 o))]
+                     [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
+                      (let ([args (read-commaed-group i directive read-group)])
+                        (display (fully-qualify-link args directive) o))]
+                     [(string=? directive "dist-link")
+                      (let* ([args (read-commaed-group i directive read-group)]
+                             [n (length args)]
+                             [page (first args)]
+                             [link-text (if (> n 1) (second args) "")])
+                        (display (make-dist-link page link-text) o))]
+                     [(string=? directive "lesson-link")
+                      (let* ([args (read-commaed-group i directive read-group)]
+                             [n (length args)]
+                             [page (first args)]
+                             [link-text (if (> n 1) (second args) "")])
+                        (display (make-lesson-link page link-text) o))]
+                     [(string=? directive "opt-project")
+                      (let* ([arg1 (read-commaed-group i directive read-group)]
+                             [project-file (first arg1)]
+                             [rubric-file (and (> (length arg1) 1) (second arg1))])
+                        (fprintf o "<span class=\"prefix\">Optional Project: </span>")
+                        (display (fully-qualify-link (list project-file) directive) o)
+                        (when rubric-file
+                          (display " [" o)
+                          (display (fully-qualify-link (list rubric-file "rubric") directive) o)
+                          (display "]" o)))]
+                     [(member directive '("link" "online-exercise" "opt-online-exercise"))
+                      (let ([args (read-commaed-group i directive read-group)])
+                        (display (external-link args directive) o)) ]
+                     [(member directive '("starter-file" "opt-starter-file"))
+                      (let* ([lbl+text (read-commaed-group i directive read-group)]
+                             [lbl (string->symbol (first lbl+text))]
+                             [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
+                        (display (starter-file-link lbl link-text) o))]
+                     [(string=? directive "ifproglang")
+                      (let* ([proglang (read-group i directive)]
+                             [fragment (read-group i directive #:multiline? #t)])
+                        ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
+                        (when (string-ci=? proglang *proglang*)
+                          (expand-directives:string->port fragment o)))]
+                     [(string=? directive "teacher")
+                      (let ([text (read-group i directive #:multiline? #t)])
+                        (display "<!--\n" o)
+                        (expand-directives:string->port text o)
+                        (display "\n-->" o))]
+                     [(string=? directive "optional")
+                      #f]
+                     [(member directive '("left" "right" "center"))
+                      (let ([fragment (read-group i directive #:multiline? #t)])
+                        (expand-directives:string->port fragment o))]
+                     [(string=? directive "math")
+                      (let ([text (read-group i directive)])
+                        (display (make-math text) o))]
+                     [(string=? directive "blockmath")
+                      (let ([text (read-group i directive)])
+                        (display (make-mathjax-math text) o))]
+                     [(string=? directive "smath")
+                      (let* ([text (read-group i directive #:scheme? #t)]
+                             [exprs (string-to-form (format "(math '~a)" text))])
+                        (for ([s exprs])
+                          (display (massage-arg s) o)))]
+                     [(string=? directive "show")
+                      (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                        (for ([s exprs])
+                          (display (massage-arg s) o)))]
+                     [(string=? directive "table")
+                      (let* ([args (read-commaed-group i directive read-group)]
+                             [n-args (length args)]
+                             [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
+                        (cond [(>= n-args 2)
+                               (set! table-header-newlines 2)
+                               (set! num-table-columns n)]
+                              [else (let loop ([j n])
+                                      (unless (<= j 0)
+                                        (display (if (= j n) "|DELETE THIS ROW" "|_") o)
+                                        (loop (- j 1))))
+                                    (newline o)
+                                    (let loop ([j n])
+                                      (unless (<= j 0)
+                                        (display "|---" o)
+                                        (loop (- j 1))))]))]
+                     [(string=? directive "vocab")
+                      (let ([arg (read-group i directive)])
+                        (display "<b><i>" o)
+                        (display arg o)
+                        (display "</i></b>" o))]
+                     [(string=? directive "slideLayout")
+                      (let ([x (read-group i directive)])
+                        (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
+                     [(string=? directive "QandA")
+                      (let ([text (read-group i directive #:multiline? #t)])
+                        (expand-directives:string->port text o)
+                        (display "\n<!--\n" o)
+                        (set! *output-answers?* #t)
+                        (expand-directives:string->port text o)
+                        (set! *output-answers?* #f)
+                        (display "\n-->\n" o))]
+                     [(string=? directive "Q")
+                      (let ([text (read-group i directive)])
+                        (display "\n* " o)
+                        (expand-directives:string->port text o)
+                        (display "\n" o))]
+                     [(string=? directive "A")
+                      (let ([text (read-group i directive)])
+                        (when *output-answers?*
+                          (display "\n-    " o)
+                          (expand-directives:string->port text o)
+                          (display "\n" o)))]
+                     [(member directive '("pathway-only" "scrub"))
+                      (read-group i directive)]
+                     [else (display c o) (display directive o)]))]
+            [else
+              (display c o)])
+          (loop))))))
+
+(define (expand-directives:string->port s o)
+  (call-with-input-string s
+    (lambda (i)
+      (expand-directives i o))))
 
 (define (preproc-slides-file in-file)
   (set! *in-file* in-file)
   (let ([out-file (path-replace-extension in-file ".mkd")])
-
-    (define (expand-directives i o)
-      (let ([table-header-newlines #f]
-            [num-table-columns 0]
-            )
-        (let loop ()
-          (let ([c (read-char i)])
-            (unless (eof-object? c)
-              (cond
-                [(and table-header-newlines (char=? c #\newline))
-                 (set! table-header-newlines (- table-header-newlines 1))
-                 (when (= table-header-newlines 0)
-                   (set! table-header-newlines #f)
-                   (newline o)
-                   (let loop ([j num-table-columns])
-                     (unless (<= j 0)
-                       (display "|---" o)
-                       (loop (- j 1)))))
-                 (newline o)]
-                [(char=? c #\@)
-                 (let ([directive (read-word i)])
-                   ; (printf "directive is ~s\n" directive)
-                   (cond [(string=? directive "") (display c o)]
-                         [(string=? directive "@") (display c o)]
-                         [(string=? directive "image")
-                          (let ([args (read-commaed-group i directive read-group)])
-                            (display (make-image (first args)
-                                                 (if (>= (length args) 2) (second args) ""))
-                                     o))]
-                         [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
-                          (let ([args (read-commaed-group i directive read-group)])
-                            (display (fully-qualify-link args directive) o))]
-                         [(string=? directive "dist-link")
-                          (let* ([args (read-commaed-group i directive read-group)]
-                                 [n (length args)]
-                                 [page (first args)]
-                                 [link-text (if (> n 1) (second args) "")])
-                            (display (make-dist-link page link-text) o))]
-                         [(string=? directive "lesson-link")
-                          (let* ([args (read-commaed-group i directive read-group)]
-                                 [n (length args)]
-                                 [page (first args)]
-                                 [link-text (if (> n 1) (second args) "")])
-                            (display (make-lesson-link page link-text) o))]
-                         [(string=? directive "opt-project")
-                          (let* ([arg1 (read-commaed-group i directive read-group)]
-                                 [project-file (first arg1)]
-                                 [rubric-file (and (> (length arg1) 1) (second arg1))])
-                            (fprintf o "<span class=\"prefix\">Optional Project: </span>")
-                            (display (fully-qualify-link (list project-file) directive) o)
-                            (when rubric-file
-                              (display " [" o)
-                              (display (fully-qualify-link (list rubric-file "rubric") directive) o)
-                              (display "]" o)))]
-                         [(member directive '("link" "online-exercise" "opt-online-exercise"))
-                          (let ([args (read-commaed-group i directive read-group)])
-                            (display (external-link args directive) o)) ]
-                         [(member directive '("starter-file" "opt-starter-file"))
-                          (let* ([lbl+text (read-commaed-group i directive read-group)]
-                                 [lbl (string->symbol (first lbl+text))]
-                                 [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
-                            (display (starter-file-link lbl link-text) o))]
-                         [(string=? directive "ifproglang")
-                          (let* ([proglang (read-group i directive)]
-                                 [fragment (read-group i directive #:multiline? #t)])
-                            ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
-                            (when (string-ci=? proglang *proglang*)
-                              (call-with-input-string fragment
-                                (lambda (i)
-                                  (expand-directives i o)))))]
-                         [(string=? directive "teacher")
-                          (let ([text (read-group i directive #:multiline? #t)])
-                            (display "<!--\n" o)
-                            (call-with-input-string text
-                              (lambda (i)
-                                (expand-directives i o)))
-                            (display "\n-->" o))]
-                         [(string=? directive "optional")
-                          #f]
-                         [(member directive '("left" "right" "center"))
-                          (let ([fragment (read-group i directive #:multiline? #t)])
-                            (call-with-input-string fragment
-                              (lambda (i)
-                                (expand-directives i o))))]
-                         [(string=? directive "math")
-                          (let ([text (read-group i directive)])
-                            (display (make-math text) o))]
-                         [(string=? directive "blockmath")
-                          (let ([text (read-group i directive)])
-                            (display (make-mathjax-math text) o))]
-                         [(string=? directive "smath")
-                          (let* ([text (read-group i directive #:scheme? #t)]
-                                 [exprs (string-to-form (format "(math '~a)" text))])
-                            (for ([s exprs])
-                              (display (massage-arg s) o)))]
-                         [(string=? directive "show")
-                          (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                            (for ([s exprs])
-                              (display (massage-arg s) o)))]
-                         [(string=? directive "table")
-                          (let* ([args (read-commaed-group i directive read-group)]
-                                 [n-args (length args)]
-                                 [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
-                            (cond [(>= n-args 2)
-                                   (set! table-header-newlines 2)
-                                   (set! num-table-columns n)]
-                                  [else (let loop ([j n])
-                                          (unless (<= j 0)
-                                            (display (if (= j n) "|DELETE THIS ROW" "|_") o)
-                                            (loop (- j 1))))
-                                        (newline o)
-                                        (let loop ([j n])
-                                          (unless (<= j 0)
-                                            (display "|---" o)
-                                            (loop (- j 1))))]))]
-                         [(string=? directive "vocab")
-                          (let ([arg (read-group i directive)])
-                            (display "<b><i>" o)
-                            (display arg o)
-                            (display "</i></b>" o))]
-                         [(string=? directive "scrub")
-                          (read-group i directive)]
-                         [(string=? directive "slideLayout")
-                          (let ([x (read-group i directive)])
-                            (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
-                         [else (display c o) (display directive o)]))]
-                [else
-                  (display c o)])
-              (loop))))))
-
     (call-with-input-file in-file
       (lambda (i)
         (call-with-output-file out-file

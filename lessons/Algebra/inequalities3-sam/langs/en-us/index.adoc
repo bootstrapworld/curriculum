@@ -53,8 +53,30 @@ To further support students, consider asking what three functions are defined in
 ** _Check to see if x is greater than -50._
 - What _should_ our right-checking function do?
 ** _Check to see if x is less than 690._
+@ifproglang{pyret}{
+- What should @show{(code '(onscreen? x y))} do?
+** _Answers may vary. Let students drive the discussion, and don't give away the answer!_
+
+[.strategy-box, cols="1a", grid="none", stripes="none"]
+|===
+|
+@span{.title}{Why does @show{(code '(onscreen? x y))} take in both x and y?
+}
+
+A common misconception about functions is that they need to use all of their variables. This misconception shows up as soon as students see a horizontal line written using function notation: @math{f(x) = 15} doesn't use the variable @math{x} at all. Function definitions can also take in many variables and only use some of them, for instance @math{f(g,m) = 15g}.
+
+In this case, the "screen" that @show{(code '(onscreen? x y))} refers to is two-dimensional and Sam moves in both directions. Even though @show{(code 'onscreen?)} is tracking both Sam's x- and y-coordinates, for now we're looking to write a function that only evaluates where Sam is on the **left** and **right**. In other words, @show{(code '(onscreen? x y))} takes in two variables, but __only uses one of them!__
+
+When we add this function to our Game Starter File, it's important that @show{(code '(onscreen? x y))} only changes the x-coordinate, because the Game Starter File has other (hidden) functions that will control the characters' y-coordinates and we don't want to interfere with them.
+
+However, later on in _this lesson_ we will discuss how students with time and energy can challenge themselves to keep Sam safe in all directions by defining a function that uses both of the variables it takes in!
+
+|===
+}
+@ifproglang{wescheme}{
 - What should `onscreen?` do?
 ** _Answers may vary. Let students drive the discussion, and don't give away the answer!_
+}
 
 === Investigate
 

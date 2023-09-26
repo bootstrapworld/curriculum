@@ -118,6 +118,14 @@
       " textbooks.\n")
     o))
 
+(define (print-link-to-contracts course o)
+  (display
+    (string-append
+      "\n- link:../../Contracts.shtml?pathway=" course "[Contracts Reference]\n"
+      "-- Complete student-facing documentation for all the functions used\n"
+      "in these lessons (also printed in the back of the student workbook).\n")
+    o))
+
 (define (print-link-to-teacher-resources course o)
   (display
     (string-append
@@ -137,7 +145,9 @@
       "changes? Want to ask a question or pose a lesson idea for other Bootstrap\n"
       "teachers? These forums are the place to do it.\n") o))
 
-(define (print-other-resources course o)
+(define (print-other-resources course proglang o)
+  (when (or (string=? proglang "wescheme") (string=? proglang "pyret")) 
+    (print-link-to-contracts course o))
   (print-link-to-glossary course o)
   (print-link-to-standards course o)
   (print-link-to-teacher-resources course o)
