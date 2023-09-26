@@ -25,6 +25,10 @@ end
 
 function get_segments(lplan_file)
   local i = io.open(lplan_file)
+  if not i then
+    return {}
+  end
+  --
   local segments = {}
   local current_segment = false
   --
@@ -60,6 +64,9 @@ function type_of_slide(segment)
 end
 
 function find_segment_title(segment)
+  if not segment then
+    return nil
+  end
   local L = segment[1]
   if not L then
     return nil
@@ -152,12 +159,14 @@ function make_slides_file(lplan_file, slides_file)
     local title = find_segment_title(current_segment)
     --
     if k == 1 then
-      o:write('---\n')
-      o:write('{layout="', course_string, ' Title Slide"}\n')
-      o:write('# ', title, '\n\n')
-      o:write('<!--\n')
-      o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
-      o:write('-->\n')
+      if title then
+        o:write('---\n')
+        o:write('{layout="', course_string, ' Title Slide"}\n')
+        o:write('# ', title, '\n\n')
+        o:write('<!--\n')
+        o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
+        o:write('-->\n')
+      end
     else
       local level = type_of_slide(current_segment)
       local section = find_section(title, level, k == segments_last_index)
