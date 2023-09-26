@@ -137,7 +137,6 @@ Why is the circle on 5 red and the circle on 15 green?
 {layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
-<<<<<<< HEAD
 @image{images/intersection-ns.png}
 
 Why isn't there a solution to @math{x \lt 5 and x \ge 15}?
