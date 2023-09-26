@@ -44,41 +44,48 @@ This lesson focuses on _linear relationships_, and the math content of the lesso
 == Looking for Patterns @duration{45 minutes}
 
 === Overview
-Students explore the State Demographics dataset and, building on a discussion of the displays they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns. 
+@teacher{Students explore the State Demographics dataset and, building on a discussion of the displays they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns.}
 
 === Launch
-
 We're going to search for relationships within a dataset about each of the states in the US. But first, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
 
 [.lesson-instruction]
 - Open the @starter-file{alg2-states}.
 - From the File menu, select "Save a Copy", and click "Run".
 - Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
-- What did you Notice and Wonder?
-- What did you learn about defining rows in Pyret?
+
+
+@QandA{
+@Q{What did you Notice and Wonder?}
+@Q{What did you learn about defining rows in Pyret?}
+@A{Example: `x = row-n(states-table, 3)` will make the name `x` have the value of the fourth row in the table (the index starts at zero!).}
+}
 
 In math, x = 4 will define a variable x to be the value 4. Any time we use x after that, we can substitute in the value of 4. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
 
 @teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
 }
 
-[.lesson-instruction]
-* What columns in this dataset have to do with wealth?
-** _Examples:_ `pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`
-* What columns might be related to education?
-** _Examples:_ `college-or-higher`, `hs-or-higher`
+@QandA{
+@Q{What columns in this dataset have to do with wealth?}
+@A{`pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`}
+@Q{What columns are about education levels?}
+@A{`college-or-higher`, `hs-or-higher`}
+}
 
 === Investigate
 
 Before we dig deeper into @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
-[.lesson-instruction]
-- Think back to the dataset we explored about animals at the shelter. Would you imagine that younger animals get adopted faster than older animals? Why or why not?
-** _The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)_
-- What kind of data is `age` at adoption? What kind of data is `weeks` to adoption?
-** _Both `age` and `weeks` are quantitative._
-- What kind of display would help us analyze the relationship between age and adoption time?
-** _Again, solicit students ideas and discuss why each display type would or would not work._
+@QandA{
+* Think back to the dataset we explored about animals at the shelter.
+@Q{Would you imagine that younger animals get adopted faster than older animals? Why or why not?}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
+@Q{What kind of data is `age` at adoption? What kind of data is `weeks` to adoption?}
+@A{Both `age` and `weeks` are quantitative.}
+@Q{What kind of display would help us analyze the relationship between age and adoption time?}
+@A{Again, solicit students ideas and discuss why each display type would or would not work.}
+}
 
 Pie and Bar charts help us see the _frequency_ of values in a single _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
 
@@ -89,9 +96,7 @@ Scatter plots reveal the relationship between two columns by plotting one on the
 
 Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is the _cause_ - called the @vocab{explanatory} variable - and which is the _effect_ (@vocab{response variable})?
 
-In this case...
-
-Which do we suspect is the cause and which is the effect: age or time-to-adoption?
+In this case, which do we suspect is the cause and which is the effect: age or time-to-adoption?
 
 We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.
 
