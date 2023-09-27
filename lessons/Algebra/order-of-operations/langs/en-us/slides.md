@@ -117,9 +117,13 @@ For more practice with this, turn to:
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
 
-The first thing the spider does is cross over a curved line - an open parenthesis - then visit the function @ifproglang{pyret}{ or operation} at the top. 
+@ifproglang{wescheme}{
+The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation - also called the _function_ - at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
 
-After that, she crawls from left to right, visiting each of the inputs. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+@ifproglang{pyret}{
+The first thing the spider does is cross over a curved line (an open parenthesis!). For _operators_ (addition, subtraction, etc.) - The spider visits the first number on the left, then she visits the top of the circle for the operation, then the number on the right. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
 
 ---
 {layout="InvestigateC"}
@@ -214,7 +218,7 @@ It is always better to at least start with the parentheses before taking them ou
 }
 
 ---
-{layout="Launch-DN"}
+{layout="LaunchC-DN"}
 # Testing out your Code
 
 - Open @starter-file{editor} and click run.
