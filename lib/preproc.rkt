@@ -584,11 +584,20 @@
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-               (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
+               (let* ([styled-link-output
+                        (let ([g-pdf (path-replace-extension g ".pdf")]
+                              [tack-on ", window=\"_blank\""])
+                          (format "~a {startsb} [.PrintableExercise]##link:~alessons/pass:[~a][html~a]## &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}" (or page-title link-text)
+                                  *dist-root-dir* g tack-on
+                                  *dist-root-dir* g-pdf tack-on))]
+                     ; [styled-link-output
+                     ;   (string-append "[.PrintableExercise]##" materials-link-output-with-pdf "##")]
+                     )
                  (unless (findf (lambda (L) (equal? (second L) styled-link-output))
                                 *printable-exercise-links*)
                    (set! *printable-exercise-links*
                      (cons (list snippet styled-link-output) *printable-exercise-links*))))]
+
               [(equal? link-type "handout")
                (let ([styled-link-output (string-append "[.handout]##"
                                            materials-link-output "##")])
@@ -2085,6 +2094,10 @@
             (for ([x (reverse *handout-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
+            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
+
+            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
+
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (first x))]
@@ -2093,6 +2106,9 @@
                                 (unless y-i (set! y-i -1))
                                 (cond [(and (= x-i -1) (= y-i -1)) #t]
                                       [else (< x-i y-i)]))))])
+
+              ; (printf "xx = ~s\n" xx)
+
               (for ([x xx])
                 (fprintf o "\n* ~a\n\n" (second x))))
 
