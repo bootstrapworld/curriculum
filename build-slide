@@ -11,6 +11,7 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
+experimental=
 proglang=
 lsn=
 
@@ -21,6 +22,8 @@ else
   while test $# -ne 0; do
     if test "$1" = -f; then
       regenid=1; shift
+    elif test "$1" = -z; then
+      experimental=1; shift
     elif test "$1" = --proglang; then
       shift; proglang="$1"; shift
     else
@@ -93,21 +96,29 @@ for natlang in *; do
     fi
   fi
 
+  slidesmd=slides.md
+  slidesmkd=slides.mkd
+
+  if test $experimental; then
+    slidesmd=zlides.md
+    slidesmkd=zlides.mkd
+  fi
+
   if test $regenid; then
     rm -f $idfile
   fi
-  if test -f slides.md; then
-    $topdir/lib/slides-preproc.rkt slides.md
-    if test -f slides.mkd; then
-      title=$(grep '^# ' slides.mkd|$SED -e 1q|$SED -e 's/^#  *//')
+  if test -f $slidesmd; then
+    $topdir/lib/slides-preproc.rkt $slidesmd
+    if test -f $slidesmkd; then
+      title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
-        # node $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
+        node $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        # node $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
-          echo Slides failed for $LESSON/slides.mkd
+          echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
             echo You likely have a slide with text preceding table
           fi
@@ -116,9 +127,9 @@ for natlang in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $topdir/node_modules/md2googleslides/bin/md2gslides.js slides.mkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
-          echo Slides failed for $LESSON/slides.mkd
+          echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
             echo You likely have a slide with text preceding table
           fi
@@ -136,10 +147,10 @@ for natlang in *; do
         $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
       fi
     else
-      echo WARNING: slides.md failed preprocessing
+      echo WARNING: $slidesmd failed preprocessing
     fi
   else
-    echo WARNING: Lesson \'$LESSON\' doesn\'t have slides.md
+    echo WARNING: Lesson \'$LESSON\' doesn\'t have $slidesmd
   fi
   cd ../../..
 done
