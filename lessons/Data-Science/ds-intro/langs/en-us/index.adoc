@@ -86,10 +86,7 @@ The process of learning from data is called @vocab{Data Science}. Data science t
 We’ll use a @vocab{programming language} to investigate these questions. Just like any human language, programming languages have their own vocabulary and grammar that you will need to learn. The language you’ll be learning for data science is called Pyret.}
 
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{Optional: Which Questions _Can_ we Answer?}
 
 Datasets are useful for answering questions, but they can't answer all the questions that we will wonder about for a given topic.  In this activity students will look at a small dataset about a cyclist's training rides and think about how they could use the table to answer each question or why a question cannot be answered using the table.
@@ -98,22 +95,19 @@ Datasets are useful for answering questions, but they can't answer all the quest
 
 *Which of you like to ride bikes? What data might you collect about bike rides?* Open to @opt-printable-exercise{pages/what-can-you-answer.adoc} This page includes a small dataset about a cyclist's training rides and a set of questions. The data can be used to answer some, but not all, of the questions. With your partner, read each question. If it can be answered with what we know, explain how you could use the table to answer it. If it can't be answered using the table, explain why not.
 
-|===
+}
 
 == Meet the Animals! @duration{25 minutes}
 
 === Overview
 Students explore the Animals Dataset, sharing observations and familiarizing themselves with the idiosyncrasies and patterns in the data. In the process, they learn about @vocab{Categorical} and @vocab{Quantitative data}.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{Notice and Wonder Pedagogy}
 
 This pedagogy is a @link{https://www.nctm.org/noticeandwonder/, widely-used best practice in Math-Ed}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! Students may notice that the animals table has corners, or that it's printed in black ink. But by listening to other students' observations, students may find themselves taking a closer look at the dataset to begin with. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". These phases should be done in groups or as a whole class, with ample time given to both Notice and Wonder.
 
-|===
+}
 
 === Launch
 [.lesson-instruction]
@@ -138,8 +132,9 @@ Have students share back their noticings (statements) and wonderings (questions)
 
 Any two animals in our dataset may have different ages, weights, etc. Each of these is called a *variable* in the dataset. Data Scientists work with two broad kinds of data: Categorical Data and Quantitative Data. Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on _how that data is being used!_
 
-[.lesson-point]
+@lesson-point{
 We use @vocab{Categorical Data} to answer “what kind?”, and @vocab{Quantitative Data} to answer "how much?".
+}
 
 @vocab{Categorical Data} is used to _classify_, not measure. The laws of arithmetic do not make sense when it comes to categorical data.
 
@@ -199,10 +194,7 @@ After that, we see a line of code that _defines_ `shelter-sheet` to be a spreads
 
 This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at!
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{What Happens when Pyret loads a spreadsheet?}
 
 - When using a spreadsheet, we can make a pie-chart out of any collection of cells - even if those cells are blank, contain mismatched data, or contain data from multiple, unrelated tables! This can jeopardize our analysis, so each cell has to be checked by hand in order for any data displays to be trusted!
@@ -214,7 +206,7 @@ This kind of tedious busywork - or the inability to undo a mistake - is problema
 
 For younger students, the strictness of programming may outweigh the benefits. But for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
 
-|===
+}
 
 After that, we see the following code:
 
@@ -225,8 +217,9 @@ After that, we see the following code:
 
 The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores. The next line defines a new table called animals-table, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 
-[.lesson-point]
+@lesson-point{
 Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
+}
 
 Every table is made of cells, which are arranged in a grid of rows and columns. _The first row and first column_ are special. The first row is called the @vocab{header row}, which gives a unique name to each variable (or “column”) in the table. The first column in the table is the @vocab{identifier column}, which contains a unique ID for each row. Often, this will be the name of each individual in the table, or sometimes just an ID number.
 
