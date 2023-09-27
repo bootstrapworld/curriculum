@@ -2136,6 +2136,8 @@
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
+            (fprintf o "\n* link:download-lessons-pdf[Download lessons PDF]\n\n")
+
             )
           #:exists 'replace)
 
