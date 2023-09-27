@@ -6,6 +6,8 @@
 
 @keywords{}
 
+@add-to-lang{num-expt}
+
 [@lesson-intro-table]
 |===
 
@@ -116,10 +118,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 - Why is the distance between two points always positive?
 ** _Because distance has nothing to do with direction - it takes just as long to drive from Seattle to Wichita as it does to drive from Wichita to Seattle._
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{Why line-length?}
 Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypotenuse is computed based on the distance in the x- and y-dimension.
 
@@ -135,7 +134,8 @@ This effectively rewrites the distance formula as:
 
 @center{  @math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
 
-|===
+}
+
 == Distance in 2 Dimensions @duration{30 minutes}
 
 === Overview
@@ -167,14 +167,12 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 
 // FD Suggests we write a better review page for teachers to use here!//
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Connecting Pythagorean Theorem to video games}
 We recommend carving out 4.5 minutes and wowing your students with @link{https://www.youtube.com/watch?v=Ln7myXQx8TM, Tova Brown's Video of a Geometric Proof of the Pythagorean Theorem and its application to finding distance between game characters}. Then have them try explaining the proof to one another.
 
 In our case, the lengths A and B are computed by the `line-length` function we already have!
-|===
+}
 
 @optional On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theoream. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.
 
@@ -190,8 +188,9 @@ For more practice writing code to generate the distance between two fixed points
 
 Debrief these pages - or have students pair-and-share - before moving on to writing the full distance function. Explain to students that all of the practice they've done so far today focused on a screenshot of a moment in time. With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them. *As we play our games, however, the characters are constantly changing locations!*
 
-[.lesson-point]
+@lesson-point{
 In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!
+}
 
 [.lesson-instruction]
 --
@@ -200,9 +199,7 @@ In order to calculate the distance between two objects whose locations are const
 * When you're done, fix the broken `distance` function in your game file, click "Run" and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 --
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Optional:}
 
 If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
@@ -214,7 +211,7 @@ Take a look at the two examples on @printable-exercise{pages/distance-comparing-
 - Can you explain why they need to be written differently?
 ** __Finding the hypotenuse requires finding the square root of the @math{A^2 + B^2}, whereas finding a leg requires finding the square root of the difference between @math{C^2} and @math{B^2}.__
 
-|===
+}
 
 
 === Common Misconceptions

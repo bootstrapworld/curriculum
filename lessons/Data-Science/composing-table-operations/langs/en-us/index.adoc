@@ -99,9 +99,7 @@ Each time students encounter a new word problem, we encourage working through it
 - Define the @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers and  expressions} on @ifproglang{pyret}{@printable-exercise{pages/design-recipe-1.adoc} and} @printable-exercise{pages/design-recipe-2.adoc}.
 
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Optional: Combining Booleans}
 
 Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
@@ -109,7 +107,7 @@ Suppose we want to build a table of Animals that are fixed _and_ old, or a table
 By using the `and` and `or` operators, we can _combine_ Boolean tests @ifproglang{codap}{on a single Transformer, like `Filter`.} @ifproglang{pyret}{, as in: `(1 > 2) and ("a" == "b")`} @ifproglang{codap}{Once we've opened the `Filter` Transformer, we would tell CODAP to keep all rows that satisfy `Species = "cat" and Species = "dog"`}. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
 
 @ifproglang{pyret}{For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called _Composition_!} @ifproglang{codap}{When we want to compose _different_ Transformers, however, this strategy will not work. We'll need to find another way!}
-|===
+}
 
 === Synthesize
 - Did you find yourselves getting faster at using the Design Recipe?
@@ -130,8 +128,9 @@ A journalist comes to the shelter who wants to write a story about a successful 
 * To provide her with this data, what operations do we need to do to our dataset?
 ** __We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.__
 
-[.lesson-point]
+@lesson-point{
 Order matters: Build @ifproglang{codap}{/ Transform}, Filter, Sort.
+}
 
 * What do you think will happen if we try to filter animals that weigh more than 9kg, before actually building a `"kilos"` column?
 ** __(Sample responses:) It will crash! The computer won't like it!__
@@ -183,20 +182,19 @@ CODAP-specific content
 
 A perk of composing Transformers is that everything is just a "view" of the original data, rather than a _change_ made to that data. Changes can cause tables to go out of sync, resulting in hard-to-find bugs and invalid results. With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Tip: Saving Transformers and Renaming Tables}
 
 Saving a particular configuration of a Transformer is useful so that the Transformer can be easily accessed in the future. When we save a Transformer, we want to give it a useful name and purpose statement for ease of use later.
 
 We also encourage students to rename tables descriptively. By the end of this exercise, the table students create will have quite a lengthy name: `(weight-in-kg(filter-if-light(Animals-Dataset)))`. That's a lot of parentheses! As an alternative, students might consider using renaming the table. For instance, `light-animals-in-kg` might be a more useful table name, here.
-|===
+}
 
 }
 
-[.lesson-point]
+@lesson-point{
 Circles of Evaluation let us think and plan, without worrying about small details.
+}
 
 Sometimes, the hardest part of solving a problem is knowing what you want to do, rather than worrying about how to do it. For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportiunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
 
@@ -216,13 +214,11 @@ To convert a Circle of Evaluation into code, **we start at the outside and work 
 - For practice converting Circles of Evaluation into code, complete @printable-exercise{pages/building-from-circles-1.adoc}.
 
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Teaching Tip}
 
 Use different color markers to draw the Circles of Evaluation, and then use those same colors when writing the code. This helps make the connection between Circles and code clearer.
-|===
+}
 
 }
 

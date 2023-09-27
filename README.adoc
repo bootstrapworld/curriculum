@@ -778,6 +778,33 @@ _not_ reflected in any part of the lesson (e.g., “PEMDAS”, “GEMDAS”). Th
 keywords can be added anywhere in the lesson with the `keywords`
 directive: `@keywords{PEMDAS, GEMDAS}`. Multiple keywords are comma-separated.
 
+==== Callout Boxes
+
+Use
+
+  @strategy{
+    @span{.title}{Title}
+
+    Some _body_ text.
+
+  }
+
+to generate a “strategy box”, a boxed text with a blue border.
+
+==== Lesson "Points"
+
+Use
+
+  @lesson-point{
+    This is an important point!
+  }
+
+to generate letterboxed text to emphasize critical points:
+
+@lesson-point{
+   This is an important point!
+}
+
 ==== Exercises
 
 Exercise files are typically recipes and have calls to one of two
@@ -931,25 +958,6 @@ fragment text for a specific programming language. E.g.,
 ==== Adding custom CSS classes
 
 Some standard CSS classes to emphasize certain regions of text.
-
-Use
-
-  [.strategy-box]
-  .Header
-  ****
-  Rem suscipit soluta quas recusandae dolor culpa non. Iste aut
-  ipsum qui eos quidem et. Debitis omnis ipsam cupiditate ut vero
-  odio.
-  ****
-
-to generate a “strategy box”, a boxed text with a blue border.
-
-Use
-
-   [.notice-box]
-
-to generate a “notice & wonder box”, a boxed text with a purple
-border.
 
 Add the class `.physics-table` to a table attribute to generate a
 single-arg function

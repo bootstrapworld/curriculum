@@ -46,8 +46,8 @@
     s
     (create-end-tag tag)))
 
-(define (enclose-span classes s)
-  (enclose-tag "span" classes s))
+(define (enclose-span classes s #:attribs [attribs #f])
+  (enclose-tag "span" classes s #:attribs attribs))
 
 (define (enclose-div classes s)
   (enclose-tag "div" classes s))

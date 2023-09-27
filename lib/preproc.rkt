@@ -725,12 +725,12 @@
                            (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
                    img-link)]
                [img-id (format "img_id_~a" (gen-new-id))]
-               [adoc-img (enclose-tag "span" ".image-figure"
+               [adoc-img (enclose-span ".image-figure"
                            (string-append
                              ; (if (string=? text "") "" (enclose-span ".tooltiptext" text))
                              adoc-img
                              (if image-caption
-                                 (enclose-tag "span" ".image-caption"
+                                 (enclose-span ".image-caption"
                                    (expand-directives:string->string image-caption)
                                    #:attribs (format "id=~s" img-id))
                                  ""))
@@ -1365,7 +1365,7 @@
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
                            [(string=? directive "clear")
-                            (display (enclose-tag "span" "" "" #:attribs "style=\"clear: both;display: block\"") o)]
+                            (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if *title-reached?*
@@ -1829,6 +1829,17 @@
                             (let ([text (read-group i directive)])
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
+                           [(string=? directive "strategy")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
+                              (display "|===\n|\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n|===\n" o))]
+                           [(string=? directive "lesson-point")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.lesson-point]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -2467,7 +2478,7 @@
         [(fitb? e)
          ; (printf "found fitb ~s\n" e)
          (let ([e (second e)])
-                     (enclose-tag "span" ".fitb" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
+                     (enclose-span ".fitb" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and pyret (or (memq a *list-of-hole-symbols*) ;XXX:
                                            (infix-op? a #:pyret #t)
@@ -2643,7 +2654,7 @@
                                                  fill-len)
                              "{nbsp}{nbsp}{nbsp}")))]
         [(fitb? e) (let ([e (second e)])
-                     (enclose-tag "span" "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
+                     (enclose-span "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (enclose-tag "table" ".gdrive-only.expression"
                        (if (or (symbol? a) (infix-op? a))
@@ -2703,7 +2714,7 @@
                                  (format ".value.fitb~a" fill-len))
                              "{nbsp}{nbsp}{nbsp}")))]
         [(fitb? e) (let ([e (second e)])
-                     (enclose-tag "span" ".fitb" "{nbsp}"
+                     (enclose-span ".fitb" "{nbsp}"
                        #:attribs (format "style=\"min-width: ~a\"" e)))]
         [(list? e) (let ([a (first e)])
                      (cond [(and (eq? a 'EXAMPLE) wescheme)

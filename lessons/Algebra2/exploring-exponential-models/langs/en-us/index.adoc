@@ -74,8 +74,9 @@ With all these clear, tight lines, we might think this would be a dataset with a
 
 Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no correlation_. Instead, we have several sub-groups each with their own _very strong correlations._
 
-[.lesson-point]
+@lesson-point{
 Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+}
 
 @right{@image{images/Simpsons_animation.gif, 300}}
 Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential correlations. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox.
@@ -146,10 +147,7 @@ Students explore their newly-filtered `MA-table` dataset, trying to fit differen
 - Make a scatter-plot showing the Covid infection rate for Massachusetts.
 - What kind of model do you think would fit this best?
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{Why just New England, starting from June 9th?!?}
 
 We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
@@ -159,7 +157,7 @@ For students who are farther along, we recommend showing them _all_ the data thr
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to full dataset later on, once students are comfortable with polynomial functions.
 
 To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`
-|===
+}
 
 
 === Investigate
@@ -359,10 +357,7 @@ Now that you're familiar with exponential functions, let's use them to model thi
 
 @star @optional Build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-
-|
+@strategy{
 @span{.title}{Precision v. Efficiency in Computation}
 
 On @printable-exercise{exponential-models.adoc} you'll see a note about the use of `~1` to tell Pyret to prioritize speed over precision. Unlike most calculators that students will engage with, Pyret usually prioritizes precision.
@@ -375,7 +370,7 @@ In data processing, opting to round for speed over preserving precision can have
 
 2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire subpopulation.
 
-|===
+}
 
 === Synthesize
 

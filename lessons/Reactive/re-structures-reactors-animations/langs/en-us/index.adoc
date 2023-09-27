@@ -41,8 +41,9 @@ Where will we get this sequence of images? We don’t want to create them all by
 
 This is a key point at which to emphasize why functions are important to computer science. Computers are good at repetition, but they need instructions telling them what steps to repeat. Functions capture those instructions.
 
-[.lesson-point]
+@lesson-point{
 Step 1: Define the data structure
+}
 
 The first step is to develop a @vocab{data structure} for the information that changes across frames. To do this, we need to figure out what @vocab{fields} our data structure will need.
 
@@ -77,13 +78,11 @@ The term "state" is used in computer science to refer to the details of a progra
 
 Have students copy the images into the workbook partly to make sure they understand what images they are working with, and partly so that they have a self-contained worksheet page for later reference.
 
-[.strategy-box, cols="1", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{What's in a Name?}
 
 We are adopting a convention here, in which we include "State" in the name of the data block, then use the same base name (without "State") for the constructor. By not conflating the names here, students should have an easier time distinguishing between the constructor name and data structure name.
-|===
+}
 
 Any time we make a data structure, we should make some sample @vocab{instances}: this helps check that we have the right fields and gives us data to use in making examples later.
 
@@ -92,8 +91,9 @@ Any time we make a data structure, we should make some sample @vocab{instances}:
 [.lesson-instruction]
 At the bottom of the worksheet, use the `sunset` constructor to write write down the `SunsetState` instance for the first frame (labeled "`Sketch A`"). It has x-coordinate 10 and y-coordinate 300.
 
-[.lesson-point]
+@lesson-point{
 Step 2: Draw one frame
+}
 
 The second step in making an animation is to write a function that consumes an instance of one state and produces the image for that instance. We call this function `draw-state`. For sunset, `draw-state` takes a `SunsetState` instance and produces an image with the sun at that location (dipping behind the horizon when low in the sky).
 
@@ -104,8 +104,9 @@ You may have noticed that we used `SunsetState` instead of `sunset` as the domai
 
 We can now draw one frame, but an animation needs many frames. How can we draw multiple frames? Let’s simply the problem a bit: if you have the instance for one frame, how do we compute the instance for the next frame? Note we didn’t ask how to produce the _image_ for the next frame. We only asked how to produce the next `SunsetState` instance. Why? We just wrote `draw-state`, which produces the image from a `SunsetState`. So if we can produce the instance for the next frame, we can use `draw-state` to produce the image.
 
-[.lesson-point]
+@lesson-point{
 Step 3: Produce the next frame instance
+}
 
 The third step in making an animation is to write a function that consumes an instance of one state and produces the instance for the next state. We call this function `next-state-tick`. For sunset, `next-state-tick` takes a `SunsetState` instance and produces a `SunsetState` instance that is just a little lower in the sky.
 
@@ -147,8 +148,9 @@ Do you see what this sequence of expressions does? Each one starts with the sun 
 These sequences show students how the two functions work together to create an animation. If you feel the second one that composes next-state-tick with itself many times is too complicated for your students, you can skip it. The goal of the second sequence is to show that we only need an initial instance and the two functions to generate a sequence of images that make up an animation.
 ////
 
-[.lesson-point]
+@lesson-point{
 Step 4: Define an animation with a reactor
+}
 
 The fourth (and final) step in making an animation is to tell
 Pyret to create an animation using an initial `SunsetState`
