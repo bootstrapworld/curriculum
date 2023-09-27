@@ -92,6 +92,7 @@
         // Get and initialize parameters
         let {pathway, lessons, lesson} = getParams();
         let {days} = Object.fromEntries([...url.searchParams.entries()]);
+        lessons = lessons || [];
         days = days && days.split(",").map(Number) || [];
         days = lessons.map((_, idx) => days[idx] || 1);
         console.log(days)
