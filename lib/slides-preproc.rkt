@@ -589,12 +589,17 @@
                               ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
                               (when (string-ci=? proglang *proglang*)
                                 (expand-directives:string->port fragment o)))]
-                           [(string=? directive "teacher")
+                           [(member directive '("strategy" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
                               (newline teacher-notes)
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
+                           [(string=? directive "lesson-point")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "**" o)
+                              (expand-directives:string->port text o)
+                              (display "**{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "optional")
                             #f]
                            [(member directive '("left" "right" "center"))
