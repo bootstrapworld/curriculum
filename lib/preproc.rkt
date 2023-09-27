@@ -1831,6 +1831,17 @@
                             (let ([text (read-group i directive)])
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
+                           [(string=? directive "strategy")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
+                              (display "|===\n|\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n|===\n" o))]
+                           [(string=? directive "lesson-point")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.lesson-point]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)

@@ -63,8 +63,9 @@ When summarizing a column, we'd like to use a measure that gathers data from eve
 
 Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
 
-[.lesson-point]
+@lesson-point{
 @vocab{Standard deviation} is the most useful way to summarize @vocab{spread} of a quantitative column.
+}
 
 Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
@@ -80,18 +81,17 @@ How far away is each data point from 3?
 [.lesson-instruction]
 Next, complete numbers 4 to 6 of @printable-exercise{computing-stdev.adoc}.
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Mean Average Deviation?}
 
 In this section of the worksheet, students will need to stretch their visual imaginations a bit! In problem number 6, they are asked to summarize all 10 distances from the mean into a single number. The goal here is for students to make an educated guess about standard deviation (SD) _before_ learning the algorithm for computing it. Invite and encourage discussion about students' different approaches for guessing at the best summary number _before_ sharing the key idea about standard deviation!
 
 Students are likely to hone in on the __Mean Average Deviation__, or MAD. Both SD and MAD measure variability or "spread" by computing individual deviations from the mean, but MAD averages these deviations and SD transforms them via square/square-root.
-|===
+}
 
-[.lesson-point]
+@lesson-point{
 To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
+}
 
 @teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.}
 
@@ -148,9 +148,7 @@ The mean and standard deviation tell us where the data is centered and how far t
 - The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks? _Solicit students' ideas, but do not reveal the answer._
 - Turn to @printable-exercise{pages/analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
 
-[.strategy-box, cols="1a", grid="none", stripes="none"]
-|===
-|
+@strategy{
 @span{.title}{Mean Average v. Standard Deviation}
 
 MAD and SD are both measures of a certain kind of _distance_, literally asking "how are far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
@@ -164,7 +162,7 @@ The pythagorean distance works in 3-dimensions as well (right pyramids!) - or fo
 Why use one measure of spread instead the other? The answer is closely related to the difference between two measures of _center_! `Mean` incorporates data from every point, while `median` does not. However, `mean` is sensitive to the effect of extreme outliers or @vocab{skew}. In those cases, `median` is considered to be the better measure of center.
 
 Treating each point independantly allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. This is why SD is used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
-|===
+}
 
 === Synthesize
 - How much did adding an outlier change the mean? The standard deviation?
