@@ -587,7 +587,7 @@
                (let* ([styled-link-output
                         (let ([g-pdf (path-replace-extension g ".pdf")]
                               [tack-on ", window=\"_blank\""])
-                          (format "~a {startsb} [.PrintableExercise]##link:~alessons/pass:[~a][html~a]## &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}" (or page-title link-text)
+                          (format "[.PrintableExercise]##~a {startsb} link:~alessons/pass:[~a][html~a] &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}##" (or page-title link-text)
                                   *dist-root-dir* g tack-on
                                   *dist-root-dir* g-pdf tack-on))]
                      ; [styled-link-output
