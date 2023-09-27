@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}  
 # Dot Plots and Bar Charts  
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Displaying Categorical Variables
 
@@ -16,7 +16,7 @@ Where have you seen infographics and graphs used to display data in the real wor
     Solicit student responses, and then share with them that today's lesson is all about producing displays in CODAP. Explain that, as a class, you'll walk through some of the basic mechanics of creating a display - and then students will have the opportunity to independently create and explore displays in CODAP.
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Displaying Categorical Variables
 
@@ -25,7 +25,7 @@ Where have you seen infographics and graphs used to display data in the real wor
 
 @image{images/codap-upper-left-toolbar.png, 500}
 
----
+@slidebreak
 {layout="LaunchR}
 # Displaying Categorical Variables
 
@@ -49,7 +49,7 @@ If students report that a blank graph appears (rather than a scatter plot), prom
 @image{images/codap-initial-display.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Displaying Categorical Variables
 
@@ -59,7 +59,7 @@ Hovering over an orange dot reveals the `name` of that particular animal. Select
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Displaying Categorical Variables
 
@@ -67,7 +67,7 @@ When you select a table row (or multiple table rows), the corresponding dots cha
 
 You can also resize the window by dragging its borders.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Displaying Categorical Variables
 
@@ -83,7 +83,7 @@ When students make a display of the `sex` of the animals, they will see that som
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Displaying Categorical Variables
 
@@ -91,7 +91,7 @@ Bar charts look a lot like another kind of display called a "histogram", which d
 
 Creating each of these displays begins the same way: we create a dot plot, and then modify it using CODAP's menus. Depending on what type of data the dot plot displays, we can transform it into either a bar chart (for categorical data) or a histogram (for numeric data).
 
----
+@slidebreak
 {layout="Synthesize"}
 # Displaying Categorical Variables
 
@@ -99,7 +99,7 @@ Bar charts display how much of the sample belongs to each category. If they are 
 
 Pie charts display categorical data, too, but CODAP doesn't offer them largely because many find them @link{https://www.data-to-viz.com/caveat/pie.html, "challenging to read."}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Displaying Categorical Variables
 
@@ -111,7 +111,7 @@ While bars in bar charts should follow some logical order (alphabetical, small-m
 Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 -->
 
---- 
+@slidebreak
 {layout="Launch"}
 # Exploring Other Displays
 
@@ -123,7 +123,7 @@ Spend three minutes seeing how many different displays you can produce using @st
 If students need a bit of encouraging, you might prod them to make histograms and scatterplots!)
 -->
 
---- 
+@slidebreak
 {layout="Launch"}
 # Exploring Other Displays
 
@@ -138,13 +138,13 @@ Let's share!
 - The measure menu appears when there is an opportunity to change what is shown *along with the points* (that is, on the same display as a dot plot or scatterplot) - for instance, connecting lines or calculating the count. Histograms and boxplots appear alongside an existing display, so they appear are on the `measure` menu._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Other Displays
 
 CODAP is designed to be student-friendly, and its interface encourages guesswork... but we can save some time by being a bit more strategic.
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Other Displays
 
@@ -170,7 +170,7 @@ It might sound like this:
 ** _We need to fuse the dots into bars._
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Exploring Other Displays
 
@@ -181,7 +181,7 @@ It might sound like this:
 There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal at this stage is to have them build familiarity and confidence with the CODAP tool and how it makes data displays.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploring Other Displays
 

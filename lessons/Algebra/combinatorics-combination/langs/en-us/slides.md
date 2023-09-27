@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Combinations
 
@@ -6,13 +6,13 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Combinations
 
 With his new set of rules, Luigi's Family Restaurant is more popular than ever! But with a full house every night, the cooks are busy and the kitchen gets backed up. Customers start complaining about slow service, and Luigi is once again in trouble.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Combinations
 
@@ -20,7 +20,7 @@ The cooks point out that it's easy to add twice as much ravioli to the same pot 
 
 @image{images/ravioli.jpg}
 
----
+@slidebreak
 {layout="Launch"}
 # Combinations
 
@@ -30,7 +30,7 @@ How is this situation similar to the permutation questions?
 
 How is it different?
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -40,7 +40,7 @@ Since there's no replacement, let's start by using our formula for permutation-w
 
 @math{\mbox{permute-no-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -51,7 +51,7 @@ Many platters are going to be the same _combination_: Lasagna, Soup, Ziti and Ch
 If we knew that every combination would have a duplicate, we'd divide the number of platters by 2. If we knew each one would have a triplicate, we'd divide by 3.
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -63,7 +63,7 @@ Using our formula for "permutation without replacement", we get 24 duplicates:
 
 @math{\mbox{permute-no-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -72,7 +72,7 @@ Now, we need to divide 'the number of permutations (without replacement) for cho
 @math{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -81,7 +81,7 @@ We can rewrite this using our functions from earlier:
 @math{combinations(items, choose) = \frac{\mbox{permute-no-replace}(items, choose)}{\mbox{permute-no-replace}(choose, choose)}}
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Combinations
 
@@ -90,13 +90,13 @@ In this situation, we have 6 possible choices and we get to choose 4 times:
 
 @math{combinations(6, 4) = \frac{\mbox{permute-no-replace}(6, 4)}{\mbox{permute-no-replace}(4, 4)}}
 
----
+@slidebreak
 {layout="Investigate"}
 # Combinations
 
 Complete @printable-exercise{combination.adoc} and @printable-exercise{combination-or-permutation.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Combinations
 
@@ -104,7 +104,7 @@ Complete @printable-exercise{combination.adoc} and @printable-exercise{combinati
 
 - What are some real-world examples of combinations?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Combinations
 

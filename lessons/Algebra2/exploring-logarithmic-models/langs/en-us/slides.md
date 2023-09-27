@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Exploring Logarithmic Models
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Looking for Patterns
 
@@ -22,7 +22,7 @@ Discuss students' findings. Pay special attention to the @vocab{form} that stude
 Be attentive to sense-making: If a wealthy country is suffering heavy causalties in a war, where would we expect to see the datapoint? Why? What other conditions would cause a point to shift up, down, left or right?
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -33,7 +33,7 @@ _Note: This activity involves lots of trial and error, as students try to come u
 }
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Looking for Patterns
 
@@ -41,7 +41,7 @@ _Note: This activity involves lots of trial and error, as students try to come u
 - What kinds of lines or curves did you use?
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Looking for Patterns
 
@@ -57,7 +57,7 @@ _Note: This activity involves lots of trial and error, as students try to come u
 
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Logarithmic Functions
 
@@ -66,7 +66,7 @@ _Note: This activity involves lots of trial and error, as students try to come u
 We know that exponential functions grow by _equal factors over the same interval_, so instead of calculating "what is added to @math{y}", we calculate "what @math{y} is multiplied by" to produce the next value over a constant interval.
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Logarithmic Functions
 
@@ -75,7 +75,7 @@ We know that exponential functions grow by _equal factors over the same interval
 The behavior in this relationship is the _reverse_ of exponential growth: instead of multiplying @math{y} by a constant factor to find the next value, we need to _multiply the size of our x-interval_ by a constant factor just to get a constant growth in @math{y}! This relationship can be modeled using a @vocab{logarithmic function}.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Logarithmic Functions
 
@@ -88,7 +88,7 @@ The behavior in this relationship is the _reverse_ of exponential growth: instea
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Logarithmic Functions
 
@@ -96,7 +96,7 @@ The behavior in this relationship is the _reverse_ of exponential growth: instea
 @vocab{Logarithmic relationships} - like the ones you identified on tables 1, 4, and 6 - grow or decay very quickly at first, but then level out as @math{x} increases. Our intervals need to grow longer and longer just to reach a small change in @math{y}. For example, it might take 10 steps to go from @math{1} to @math{2}, but then a hundred more to get to @math{3} and a _thousand_ more to get to @math{4}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -106,7 +106,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the first sectio
 
 @teacher{Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -119,7 +119,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the first sectio
 Look back to your answers on @printable-exercise{classifying-tables.adoc}. For tables that represent logarithmic functions, by what factor does @math{x} need to grow in order to get a constant increase in @math{y}?
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -137,13 +137,13 @@ Look back to your answers on @printable-exercise{classifying-tables.adoc}. For t
 (Don't forget -- anything to the power of zero is always 1, so the log of 1 will always be zero - _for any base!_)
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
 Use @starter-file{alg2-exploring-logarithms-desmos} to complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc}
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -157,14 +157,14 @@ Because @math{\log_{anything}(1) = 0}
 * @math{y} will always be the value of @math{c} at @math{x=1}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
 Use @starter-file{alg2-exploring-logarithms-desmos} to complete the last section ("logarithmic coefficient") of @printable-exercise{graphing-models.adoc}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -172,7 +172,7 @@ Use @starter-file{alg2-exploring-logarithms-desmos} to complete the last section
 
 Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly. In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -183,14 +183,14 @@ Logarithmic models have a *vertical @vocab{asymptote}* where the function increa
 @teacher{_Logarithms are primarily applied in science and technology. It may be a challenge for students to think of relevant examples. We've provided one for class discussion, below._}
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Logarithmic Functions
 
 @image{images/decibels-table.png}
 We measure sound intensity on a logarithmic scale, which proceeds in multiples of 10. The table to the right gives some intensity levels in _watts per square meter_ and in _decibels_. Our ears can hear incredibly quiet sounds (like a pin dropping), but also process incredibly loud sounds (like a fog horn). A fire alarm, for example, is thousands of times louder than a dog barking, but it's difficult for our brains to process that much more "loudness". As a result, we also _perceive_ loudness on a logarithmic scale: for us to perceive a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Logarithmic Functions
 
@@ -200,7 +200,7 @@ We measure sound intensity on a logarithmic scale, which proceeds in multiples o
 @teacher{Have students share their answers. Be especially attentive to students who mis-label logarithmic relationships as "exponential" -- the relationship between the two is extremely subtle!}
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Logarithmic Functions
 
@@ -209,7 +209,7 @@ We measure sound intensity on a logarithmic scale, which proceeds in multiples o
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Changing the Scale
 
@@ -221,7 +221,7 @@ To fit our logarithmic model, we need to find @math{a} and @math{c}, such that t
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Changing the Scale
 
@@ -233,7 +233,7 @@ To fit our logarithmic model, we need to find @math{a} and @math{c}, such that t
 }
 
 
----
+@slidebreak
 {layout="Launch"}
 # Changing the Scale
 
@@ -243,7 +243,7 @@ If only we could _transform_ this data to make it appear linear. Then we could u
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Changing the Scale
 
@@ -251,7 +251,7 @@ Imagine that the scatter plot is printed on a sheet of rubber, and can be stretc
 
 Complete the last section of @printable-exercise{changing-scale.adoc}, using @starter-file{alg2-wealth-v-health-2-desmos}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Changing the Scale
 
@@ -261,7 +261,7 @@ By __transforming the x-axis__ to grow exponentially, we are "squashing" the coo
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Changing the Scale
 
@@ -286,20 +286,20 @@ We are working to add additional material on inverse functions to our Algebra 2 
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Changing the Scale
 
 - How does seeing the point cloud as linear help us think about logarithmic growth?
 - Transforming the axes only makes things _look_ linear - the actual points haven't changed at all, and we still can't use linear regression to find the best logarithmic model... Can you think of a way we could we transform the _data_, instead of the axes?
 
----
+@slidebreak
 {layout="Launch"}
 # Transforming the Data
 
 We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by "shrinking the axis". Another strategy is to "shrink the data", by _transforming the x-coordinates themselves_. Instead of plotting `pc-gdp` on a *logarithmic* x-axis, we could plot `log(gdp)` on a *linear* x-axis.
 
----
+@slidebreak
 {layout="Launch"}
 # Transforming the Data
 
@@ -313,7 +313,7 @@ We tried changing the scale on the x-axis from linear to exponential, which canc
 ** _Students should discover that the values match the coefficients of the logarithmic model as well._}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Transforming the Data
 
@@ -322,7 +322,7 @@ Transforming the points instead of the axis has the same visual effect: the dots
 This transformation changed the _kind of growth_ from logarithmic to linear: the term went from @math{a \log_{10}(x)} to @math{ax}. Instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by @math{a}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming the Data
 
@@ -336,7 +336,7 @@ We transformed the `pc-gdp` column in three steps:
 **It's easy to do the same thing in Pyret!**
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming the Data
 
@@ -347,7 +347,7 @@ We transformed the `pc-gdp` column in three steps:
 @teacher{Address any student questions about the Pyret function they've just discovered, `build-column.` Verify that studetns have recorded the slope and vertical shift for their regression line. Then, emphasize the key ideas on the next slide.}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming the Data
 
@@ -362,7 +362,7 @@ We transformed the `pc-gdp` column in three steps:
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming the Data
 
@@ -370,7 +370,7 @@ Now complete Part 2 of @printable-exercise{logarithmic-models.adoc}.
 
 
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Transforming the Data
 
@@ -378,7 +378,7 @@ Now complete Part 2 of @printable-exercise{logarithmic-models.adoc}.
 @right{@image{images/lr-plot-transformed.png, 350}}
 Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `11.9011` and a y-intercept of `24.2636`. Our @math{R^2} has jumped to 0.66311, showing a vastly better correlation than before.
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming the Data
 
@@ -389,7 +389,7 @@ With the transformation applied, our linear model (in both function and Pyret no
 
 @show{(code '(define (f x) (+ (* 11.9011 x) 24.2636)))}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Transforming the Data
 
@@ -403,7 +403,7 @@ From @printable-exercise{transforming-data.adoc}, we know that the coefficients 
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Transforming the Data
 
@@ -413,7 +413,7 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 - How do you interpret this model?
 - Why do you think the relationship between wealth is logarithmic?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

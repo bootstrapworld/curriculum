@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Problem Decomposition
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Problem Decomposition 
 
@@ -23,7 +23,7 @@ __Sally runs a lemonade stand, which charges $1.75/glass. It costs her $0.30/gla
 - In order to figure out how many lemonade sales it will take to pay for the bike, we'd need to to divide the cost (with tax) by the profit per glass.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Problem Decomposition 
 
@@ -31,7 +31,7 @@ __Sally runs a lemonade stand, which charges $1.75/glass. It costs her $0.30/gla
 - Once you've defined the functions, open @starter-file{sallys-lemonade}.
 - Enter your code for `revenue` (including all examples and definitions) below the first prompt. Enter your code for `cost` below the second prompt. Click "Run" and make sure your tests pass.
 
----
+@slidebreak
 {layout="Investigate"}
 # Problem Decomposition 
 
@@ -49,7 +49,7 @@ How could Sally increase her profits? By decreasing her costs, raising her price
 What is the relationship between profit, cost, and revenue? Profit = Revenue - Cost
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Problem Decomposition 
 
@@ -59,7 +59,7 @@ What is the relationship between profit, cost, and revenue? Profit = Revenue - C
 
 @teacher{While students are working, walk the room and gauge student understanding.  There is more than one way to write the `profit` function!  Encourage discussion between students and push them to develop their thinking on the advantages and disadvantages of each correct solution.}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problem Decomposition 
 
@@ -67,7 +67,7 @@ This activity started with a situation, and you modeled that situation with func
 
 Turn to @printable-exercise{pages/profit-discussion.adoc} and reflect on the four function definitions presented. 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problem Decomposition 
 
@@ -85,7 +85,7 @@ Which of these four `profit` definitions do you think is "best", and why?
 `profit` can be _decomposed_ into a simpler function that uses the `cost` and `revenue` functions.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problem Decomposition 
 
@@ -102,7 +102,7 @@ What if Sally charges $2/glass? Which solution(s) would need to be changed?
 
 @show{(code '(define (profit g) (- (revenue g) (cost g))))}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problem Decomposition 
 
@@ -115,7 +115,7 @@ So what's the big deal?
 3. Re-using code means _less code_ overall. Less code means fewer places to make mistakes.{style="font-size:15pt"}
 4. Re-using code means _less duplicate code_. When code needs to be changed, that change only needs to made in one place, instead of in multiple places.{style="font-size:15pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Top-Down vs. Bottom-Up 
 
@@ -125,7 +125,7 @@ _Top-Down and Bottom-Up design are two different strategies for problem decompos
 
 **Bottom-Up:** start with the small, easy relationships like `revenue` and `cost` first. How are they connected with the outer circle? You'll get there eventually, but __we can leave it blank for now (`...`)__. In the Lemonade Stand, you defined `cost` and `revenue` first, and then put them together in `profit`. _This is the same approach as building your Circle of Evaluation inside-out!_{style="font-size:17pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Top-Down vs. Bottom-Up 
 
@@ -135,7 +135,7 @@ _Top-Down and Bottom-Up design are two different strategies for problem decompos
 
 **Top-Down:** start with the "big picture" and then worry about the details later. We could have started with `profit` as @show{(code '(- revenue cost))}, and __fill in the details of `revenue` and `cost` later (thus the `...`)__. _This is the same approach as building your Circle of Evaluation outside-in!_
 
----
+@slidebreak
 {layout="Investigate"}
 # Top-Down vs. Bottom-Up 
 
@@ -145,7 +145,7 @@ Take a moment to think: What would your first step be if you were trying to figu
 
 Then turn to @printable-exercise{topdown-bottomup-discussion.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Top-Down vs. Bottom-Up 
 

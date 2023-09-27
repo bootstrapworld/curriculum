@@ -1,18 +1,18 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Additive Inverse Property
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Additive Inverse Property
 
 We’ve learned that the Commutative and Associative Properties apply to addition... but not subtraction. What if there was a way to rewrite subtraction as addition? Then we could apply the Commutative and Associative Properties to subtraction expressions, too! Let’s explore this idea.
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Additive Inverse Property
 
@@ -22,7 +22,7 @@ I'm going to write a number in the left-hand column. You are going to tell me wh
 
 @image{images/table.png}
 
----
+@slidebreak
 {layout="Launch"}
 # The Additive Inverse Property
 
@@ -43,7 +43,7 @@ I'm going to write a number in the left-hand column. You are going to tell me wh
 ** _Allow a variety of students to share. Record responses on the table._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Additive Inverse Property
 
@@ -51,7 +51,7 @@ These number pairs all represent *opposites*.
 
 The @vocab{Additive Inverse Property} tells us that adding a number and its opposite always produces zero.
 
----
+@slidebreak
 {layout="Investigate"}
 # The Additive Inverse Property
 
@@ -60,7 +60,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 - In the first section, determine the additive inverses and write them in the spaces provided.
 - Then, fill in the missing number to complete the equations. Some equations use mathematical notation and some use Circles of Evaluation.
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Additive Inverse Property
 
@@ -68,7 +68,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 - How would you explain the concept of the Additive Inverse Property to another student?
 - Looking forward: Can you predict what effect the Multiplicative Inverse Property might have?
 
----
+@slidebreak
 {layout="Launch"}
 # Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
@@ -77,7 +77,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 - What did you observe about the additive inverse?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
@@ -87,7 +87,7 @@ The @vocab{Additive Inverse Property} tells us that adding a number and its oppo
 *We now can apply the Commutative and Associative Properties to a much broader set of expressions!*
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
@@ -100,7 +100,7 @@ To complete this worksheet, students do not need to be fluent at integer additio
 -->
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Addition and Subtraction: Inverse Operations{style="font-size:26pt"}
 
@@ -110,7 +110,7 @@ To complete this worksheet, students do not need to be fluent at integer additio
 - Use the Additive Inverse Property to simplify this expression using mental computation: @math{3 + 96.8 - 42.74 - 96.8 + 7 - 3 + 42.74}
 
 
----
+@slidebreak
 {layout="Launch"}
 # The "Left-to-Right" Rule
 
@@ -119,7 +119,7 @@ To complete this worksheet, students do not need to be fluent at integer additio
 ** _15_
 - How did you arrive at your answer?
 
----
+@slidebreak
 {layout="Launch"}
 # The "Left-to-Right" Rule
 
@@ -128,7 +128,7 @@ Most students simplify the expression like this:
 @show{(coe '(- (+ 10 9) 4))}
 
 
----
+@slidebreak
 {layout="Launch"}
 # The "Left-to-Right" Rule
 
@@ -138,13 +138,13 @@ What happens if we subtract before adding?
 
 @show{(coe '(+ 10 (- 9 4)))}
 
----
+@slidebreak
 {layout="Launch"}
 # The "Left-to-Right" Rule
 
 We’ve learned that the Associative Property applies for expressions with only addition... not addition _and_ subtraction. Many of us have also learned that when an expression includes addition and subtraction, we must work from left to right. *So… what’s going on!?* It appears that we get the same result regardless of how we simplify this expression.
 
----
+@slidebreak
 {layout="Investigate"}
 # The "Left-to-Right" Rule
 
@@ -154,7 +154,7 @@ Does subtracting _first_ work every time? Can we rearrange the groupings of any 
 - There, you will test out the this algorithm on several different expressions to see if subtracting and then adding produces the correct result every time.
 - What do you Notice? What do you Wonder?
 
----
+@slidebreak
 {layout="Investigate"}
 # The "Left-to-Right" Rule
 
@@ -165,7 +165,7 @@ Does subtracting _first_ work every time? Can we rearrange the groupings of any 
 Encourage students to think deeply about why this algorithm works – and if you’d like, invite them to consider and discuss why students all across the country are typically taught just one algorithm when, typically, there are an abundance to choose from!
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The "Left-to-Right" Rule
 
@@ -189,7 +189,7 @@ Scan each problem on the next to identify any additive inverses, then solve usin
 -->
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # The "Left-to-Right" Rule
 

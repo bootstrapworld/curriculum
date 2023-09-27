@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Measures of Center
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Mean
 
@@ -18,7 +18,7 @@ If someone from the shelter needs to give a dose of medicine to the animals, **i
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Mean
 
@@ -29,7 +29,7 @@ Summarizing a big dataset means that some information gets lost, so it’s impor
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Mean
 
@@ -43,7 +43,7 @@ _Can you think of other examples where someone uses a number or two to summarize
 <!--
 Every kind of summary has situations in which it does a good job of reporting what’s typical, and others where it doesn’t really do justice to the data. In fact, the shape of the data can play a huge role in whether or not one kind of summary is appropriate!
 -->
----
+@slidebreak
 {layout="Launch"}
 # Mean
 
@@ -66,7 +66,7 @@ _Each group of three will need a ruler, 4-8 pennies, and at least one pen or pen
 3. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?{style="font-size:14pt"}
 4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Mean
 
@@ -78,7 +78,7 @@ _Each group of three will need a ruler, 4-8 pennies, and at least one pen or pen
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Mean
 
@@ -94,7 +94,7 @@ What is the function's name? Domain? Range?
 Notice that calculating the mean requires being able to add and divide, so the mean only makes sense for quantitative data. For example, the mean of a list of Presidents doesn’t make sense. Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Mean
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
@@ -107,7 +107,7 @@ Notice that calculating the mean requires being able to add and divide, so the m
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Median
 
@@ -119,7 +119,7 @@ In fact, more than half of the animals weigh less than _15 pounds_. What is thro
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Median
 
@@ -134,7 +134,7 @@ The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided 
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Median
 
@@ -146,7 +146,7 @@ A different way to measure center is to line up all of the data points -- in ord
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Median
 
@@ -164,7 +164,7 @@ The algorithm for finding the median of a quantitative column is:
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Median
 
@@ -183,7 +183,7 @@ The algorithm for finding the median of a quantitative column is:
 * _There are some very heavy animals that are causing the mean to be higher._
 * _Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3._
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Median
 
@@ -194,7 +194,7 @@ By looking at the histogram, we can see whether it's probably better to use the 
 
 Mean is generally the best measure of center, because it includes information from every single point. But it's misleading for highly-skewed datasets, so statisticians fall back to the median.
 
----
+@slidebreak
 {layout="Launch"}
 # Modes
 
@@ -202,7 +202,7 @@ The third measure of center is called the @vocab{modes} of a dataset. The @vocab
 
 Median and Mean always produce one number, but if two or more values are equally common, there can be more than one mode. If all values are equally common, then there is no mode at all! 
 
----
+@slidebreak
 {layout="Launch"}
 # Modes
 
@@ -216,7 +216,7 @@ Median and Mean always produce one number, but if two or more values are equally
 - The first dataset has no mode at all!{style="font-size:14pt"}
 - The mode of the second dataset is 2, since 2 appears more than any other number.{style="font-size:14pt"}
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.{style="font-size:14pt"}
----
+@slidebreak
 {layout="Launch"}
 # Modes
 
@@ -224,7 +224,7 @@ In Pyret, the mode(s) are calculated by the modes function, which consumes a Tab
 
 @show{ (contract "modes" '("Table" "String") "List" )}
 
----
+@slidebreak
 {layout="Investigate"}
 # Modes
 
@@ -233,7 +233,7 @@ Compute the `modes` of the `pounds` column, and add it to @printable-exercise{pa
 <!--
 ** _0.1 and 6.5_
 -->  
----
+@slidebreak
 {layout="Synthesize"}
 # Modes
 
@@ -241,7 +241,7 @@ The most common animal weights are 0.1 and 6.5! These are well below our mean an
 
 At this point, we have a lot of evidence that suggests the Bureau’s use of “mean” to summarize animal weights isn’t ideal.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Modes
 
@@ -250,7 +250,7 @@ We have three reasons to suspect that @vocab{mean} isn’t the best value to use
 - The median is only 11.3 pounds.
 - The modes of our dataset are only 0.1 and 6.5 pounds, which suggests clusters of animals that weigh mere fractions of the mean.
 - When viewed as a histogram, we can see the right skewness and high outliers in the dataset. Mean is sensitive to datasets with skewness and/or outliers.
----
+@slidebreak
 {layout="Synthesize"}
 # Modes
 
@@ -262,7 +262,7 @@ Consider how many policies or laws are informed by statistics like this!
 
 Knowing about measures of center helps us see through misleading statements.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Modes
 
@@ -276,7 +276,7 @@ When should each measure of center be used?
 @optional We strongly recommend having students practice the Data Cycle with measures of center, using @opt-printable-exercise{pages/data-cycle-practice.adoc}. Sometimes what's created isn't a table _or_ a display, and this activity demonstrates that. It also drives home an important difference between Arithmetic and Statistical Questions.
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
@@ -297,7 +297,7 @@ Let’s review what we have learned about computing and interpreting three measu
 ** _Mode(s) are most useful when a dataset has very few values._  
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
@@ -309,7 +309,7 @@ Let’s connect what we know about measures of center to your chosen dataset.
 - *It’s time to add to your @starter-file{exploration-project}.*
 - Locate the "Measures of Center and Spread" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
@@ -321,13 +321,13 @@ Let’s connect what we know about measures of center to your chosen dataset.
 
 Invite students to discuss their results and consider how to interpret them.}
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Measures of Center){style="font-size:27pt"}
 
 Once you've discussed your results and how to interpret them, add your interpretations to the two "Measures of Center and Spread" slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Measures of Center)
 
@@ -345,7 +345,7 @@ When you compared their findings with other students, did they make any interest
 (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
 }
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Activities
 

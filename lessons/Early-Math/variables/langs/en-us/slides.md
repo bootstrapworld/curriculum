@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Equivalence and Variables
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Seeing Equivalence
 
@@ -21,7 +21,7 @@ What do you Notice? What do you Wonder?
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Seeing Equivalence
 
@@ -35,7 +35,7 @@ Here, what do you Notice? What do you Wonder?
 Possible responses: The same numbers and operations are included. This time, the difference between the Circles of Evaluation is that the 4 moves from the beginning to the end.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Seeing Equivalence
 
@@ -50,7 +50,7 @@ Which is true: Equation 1, Equation 2, or both? How do you know?
 ** _We can also use Computation to verify that both sides of the first equation equal @math{62}. The second equation's left side is @math{62}, but its right side is @math{-62}._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Seeing Equivalence
 
@@ -64,7 +64,7 @@ Let's see if we can figure out how to determine whether or not two expressions a
 For now, while students are still looking at expressions with numbers, they can double check their thinking with computation.
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Seeing Equivalence
 
@@ -72,7 +72,7 @@ Complete @printable-exercise{pages/true-or-false.adoc} using your knowledge of t
 
 @image{images/true-or-false1.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Seeing Equivalence
 
@@ -80,7 +80,7 @@ Examine the Circles to decide @printable-exercise{pages/which-one-doesnt-belong.
 
 @image{images/wodb1.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Seeing Equivalence
 
@@ -92,7 +92,7 @@ Examine the Circles to decide @printable-exercise{pages/which-one-doesnt-belong.
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -109,7 +109,7 @@ Examine the Circles to decide @printable-exercise{pages/which-one-doesnt-belong.
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -118,7 +118,7 @@ We can represent the Associative Property like this:
 @image{images/assocprop1.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -127,7 +127,7 @@ Or like this:
 @image{images/assocprop2.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -135,7 +135,7 @@ The same goes for the Commutative Property! We can represent it with variables, 
 
 @image{images/commprop1.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -143,7 +143,7 @@ Or like this:
 
 @image{images/commprop2.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Equivalence with Variables
 
@@ -156,7 +156,7 @@ We can't use computation to prove that @math{12 + h} and @math{h + 12} are equiv
 -->
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Equivalence with Variables
 
@@ -170,7 +170,7 @@ This activity (and the subsequent one) invites students to apply their knowledge
 Students are also welcome to choose values to represent the variables if they in fact want to evaluate the expressions to confirm if they are equivalent (or not). Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct. The ability to make substitutions to check equivalence is an extremely valuable skill.
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Equivalence with Variables
 
@@ -182,7 +182,7 @@ Examine each of the Circles of Evaluation to decide @printable-exercise{pages/wh
 If students get stuck, ask: What do you notice, at first glance? What makes the Circles of Evaluation alike? What makes them different?
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Equivalence with Variables
 

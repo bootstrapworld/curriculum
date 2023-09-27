@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Visualizing the "Shape" of Data
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Shape
 
@@ -20,7 +20,7 @@ If all you look at is the numbers, you lose a lot of insight into your dataset.
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Describing Shape
 
@@ -31,7 +31,7 @@ We can think of the data being "squeezed" into these fixed bins, like globs of p
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Shape
 
@@ -44,7 +44,7 @@ Let's look at some real-world examples of the most common shapes...
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Shape
 
@@ -64,7 +64,7 @@ We see this shape often in the real world, because there are many variables -- l
 - A dataset of earnings almost always shows right skewness or high outliers, because there are usually a few values that are so far above average, they can’t be balanced out by any values that are so far below average. (Earnings can’t be negative.)
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Shape
 
@@ -76,7 +76,7 @@ In a distribution that is @vocab{skewed left}, values are clumped around what’
 
 Most adults will have close to a full set of 32 teeth, but a few hockey players might have a very small number of teeth. We won’t get anyone in our dataset who has 10 or 20 _extra_ teeth in their mouths!{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Shape
 
@@ -88,7 +88,7 @@ It’s just as likely for a newborn baby to be a certain number of ounces below 
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Describing Shape
 
@@ -104,7 +104,7 @@ It’s just as likely for a newborn baby to be a certain number of ounces below 
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Describing Shape
 
@@ -119,7 +119,7 @@ It’s just as likely for a newborn baby to be a certain number of ounces below 
 * _Our rule of thumb is that a histogram should have between 5–10 bins. The first histogram we made - with 20-pound bins - had a total of ten bins, so it best satisfies our rule._
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Outliers: Do they stay or do they go?
 
@@ -129,7 +129,7 @@ Suppose we survey the heights of 12 year olds, and almost all values are cluster
 
 Probably not! This could very well be a typo (maybe someone meant to type "60" instead of "6"?). "Junk" data is harmful, because it can drastically change your results!{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Outliers: Do they stay or do they go?
 
@@ -139,7 +139,7 @@ Suppose we survey the number of minutes it takes for fans to find their seats at
 
 It's possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Outliers: Do they stay or do they go?
 
@@ -161,13 +161,13 @@ Using flip-chart paper or whiteboard space, designate poster-sized regions aroun
 Each team looks at the region they're in front of, and must (a) draw a histogram with that shape and (b) __brainstorm a sample that would likely result in that distribution__. Once each team has completed the task, the teams rotate to the next poster and brainstorm another sample. They complete this until every team has come up with at least one unique example for symmetric, skew left, and skew right distributions.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 
 Histograms are a powerful way to display a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a quantitative dataset. We will also want to learn about center and spread!
 
----
+@slidebreak
 {layout="Launch"}
 # Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 
@@ -186,7 +186,7 @@ Let’s review what we have learned about visualizing the shape of data.
 ** _It’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle._  
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 
@@ -197,7 +197,7 @@ Let’s connect what we know about visualizing the shape of the data to the hist
 - Be sure to integrate the new vocabulary we have learned, including: @vocab{shape}, @vocab{skewed left}, @vocab{skewed right}, and @vocab{symmetric}.
 - Describe what this shape tells you about the quantitative column you chose.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Visualizing Shape){style="font-size:28pt"}
 

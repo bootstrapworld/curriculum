@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Standard Deviation
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
@@ -15,7 +15,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - Look at the Animals Dataset in your student workbook, or the @opt-online-exercise{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Dataset spreadsheet}.
 - Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?
 
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
@@ -30,7 +30,7 @@ Let's take a look at some cats from our shelter.
 <!--
 Some possibilities include: {3,3,3,3}, {1,2,4,5}, {1,1,4,6}... any four ages that add up to 12 will work!
 -->
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
@@ -43,7 +43,7 @@ Unfortunately, that measure comes from only a small number of data points! If po
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
@@ -51,7 +51,7 @@ Unfortunately, that measure comes from only a small number of data points! If po
 
 Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Measuring "Deviance"
 
@@ -60,7 +60,7 @@ Instead of focusing on the handful of data points used in our Five Number Summar
 How far away is each data point from 3?
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Measuring "Deviance"
 
@@ -69,13 +69,13 @@ How far away is each data point from 3?
 In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
 **Complete numbers 4 to 6** of @printable-exercise{computing-stdev.adoc}, and then STOP.
 
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
@@ -83,13 +83,13 @@ To compute the standard deviation we add the squares of all _N_ distances, divid
 
 @teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of the worksheet to support students in doing so.}
 
----
+@slidebreak
 {layout="Launch"}
 # Measuring "Deviance"
 
 **Complete numbers 7-10** of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Measuring "Deviance"
 
@@ -106,7 +106,7 @@ What is the standard deviation for the weights of _all_ the animals at our datas
 __Approximately 48.5__ @optional For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Measuring "Deviance"
 
@@ -120,7 +120,7 @@ __Approximately 48.5__ @optional For additional practice, have students complete
 ** _A standard deviation of zero means that every number in the sample is exactly the same._
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Comparing Standard Deviations
 
@@ -128,7 +128,7 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 
 @center{@image{images/histogram-with-outlier.png, 500}}
 
----
+@slidebreak
 {layout="Launch"}
 # Comparing Standard Deviations
 
@@ -152,7 +152,7 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 - @optional To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 } 
 
----
+@slidebreak
 {layout="Investigate"}
 # Comparing Standard Deviations
 
@@ -176,7 +176,7 @@ Why use one measure of spread instead the other? The answer is closely related t
 Treating each point independantly allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. This is why SD is used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Comparing Standard Deviations
 
@@ -184,7 +184,7 @@ Treating each point independantly allows each deviation to contribute to the mea
 - Extreme values affect both the mean and standard deviation of a dataset.
 - **Unusually low values _decrease_ the mean, while unusually high values _increase_ it.** Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
 
----
+@slidebreak
 {layout="Launch"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
@@ -206,7 +206,7 @@ Let’s review what we have learned about standard deviation.
 ** _Standard deviation summarizes distance from the mean in either direction._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
@@ -232,7 +232,7 @@ Let’s review what we have learned about standard deviation.
 Invite students to discuss their results and consider how to interpret them.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
@@ -240,7 +240,7 @@ Invite students to discuss their results and consider how to interpret them.
 - Locate the "Measures of Center and Spread" section of your Exploration Project. Type the standard deviations you just identified into the tables for the corresponding columns.
 - Now, add your interpretations of the standard deviations and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 

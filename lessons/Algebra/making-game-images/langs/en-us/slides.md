@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Making Game Images
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # The Game Starter File
 
@@ -16,7 +16,7 @@ Taken together, that’s a lot of code you’re now able to understand!
 It’s time to flex your reading skills, and look at the file you’ll be working with to build your video game.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Game Starter File
 
@@ -27,7 +27,7 @@ This file contains a lot of code! Some of it you haven’t seen before.
 Going line-by-line, talk with your group about what you think each line does.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Game Starter File
 
@@ -58,7 +58,7 @@ _Answers vary: It consumes a @vocab{String}, which is a URL (an image location o
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Finding Your Game Images
 
@@ -69,14 +69,14 @@ _Answers vary: It consumes a @vocab{String}, which is a URL (an image location o
 - Save a copy to your account
 
 
----
+@slidebreak
 {layout="Launch"}
 # Finding Your Game Images
 
 @image{images/fair-use-diagram.png,300}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Your Game Images
 
@@ -85,7 +85,7 @@ Find an image you like, making sure it’s transparent. Then save it using a goo
 
 @[youtube](VO7fTACB87w)
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Your Game Images
 
@@ -93,7 +93,7 @@ Upload to GDrive, and make sure sharing settings allow anyone with the link to v
 
 @[youtube](fXQcnrvxBd0)
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Your Game Images
 
@@ -105,7 +105,7 @@ It will insert the code to display the image using `image-url`.{style="font-size
 @ifproglang{pyret}{@[youtube](bWxNXTrGQOE)}
 @ifproglang{wescheme}{@[youtube](lTl6bjbfCRo)}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Finding Your Game Images
 

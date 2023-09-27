@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Ethics, Privacy & Bias
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Case Studies
 
@@ -15,7 +15,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 **Should scientists be bound by any ethical rules? If so, what rules?**{style="font-size:24pt"}
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Case Studies
 
@@ -28,19 +28,19 @@ While the immediate goal was "win the war", many of the scientists realized that
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
 **Should doctors be bound by any ethical rules? If so, what rules?**{style="font-size:24pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
 Between 1932 and 1972, doctors in the US @link{https://en.wikipedia.org/wiki/Tuskegee_Syphilis_Study, gave syphilis to unknowing African-American citizens} as part of an experiment. In 1971, researchers at Stanford conducted an @link{https://en.wikipedia.org/wiki/Stanford_prison_experiment, experiment in human behavior that went horribly wrong, causing tremendous damage to their participants}.
 
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
@@ -48,7 +48,7 @@ History is filled with examples of those who study science - be it medicine, hum
 
 With tech companies hiring Data Scientists at a staggering rate and collecting massive datasets on users for those scientists to mine, there's **a new arms race** happening right now.
 
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
@@ -60,13 +60,13 @@ Both goals require building profiles on everyone, figuring out what their prefer
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
 But these datasets and profiles could be used for far more than that. **What if the FBI used them to try and figure out who is likely to commit a crime, or a company tries to learn their employees' religion or sexual orientation?**
 
----
+@slidebreak
 {layout="Launch"}
 # Case Studies
 
@@ -75,7 +75,7 @@ As they build ever-more sophisticated models based on ever-more accurate dataset
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Case Studies
 
@@ -88,7 +88,7 @@ Read one of the articles below, and complete @printable-exercise{pages/CaseStudy
 <!--
 Divide the class into groups of 3-4, and assign each group a different case study. After they complete the worksheet, have each group choose one person to share back with the class.
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Case Studies
 
@@ -99,7 +99,7 @@ Divide the class into groups of 3-4, and assign each group a different case stud
 Give students time to discuss and share back. Encourage students to share back differing views on the articles.
 
 -->
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 - Read this article on @opt-online-exercise{https://www.statnews.com/2020/06/17/racial-bias-skews-algorithms-widely-used-to-guide-patient-care/, Racial Bias in Algorithms used to determine Medical Care}. Write arguments for or against health care providers using algorithms to make medical decisions.

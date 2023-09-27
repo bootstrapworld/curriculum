@@ -1,10 +1,10 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Contracts: Making Tables and Displays
 <!-- 
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Functions for Working with Tables
 
@@ -17,13 +17,13 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Functions for Working with Tables
 
 - Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Functions for Working with Tables
 
@@ -41,7 +41,7 @@ If this is the first time your students are seeing a table in @starter-file{edit
 - What does it mean that the Range of `sort` is Table?
 ** _The function produces a new table._	
 }
----
+@slidebreak
 {layout="Investigate"}
 # Functions for Working with Tables
 
@@ -53,7 +53,7 @@ As you can imagine, there are many other functions that work with tables, each w
 
 The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Functions for Working with Tables
 
@@ -64,7 +64,7 @@ The Domain in the Contract for `sort` tells us exactly what kind of inputs it ne
 Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Functions for Working with Tables
 
@@ -76,7 +76,7 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 - How did `sort` work with quantitative columns?
 ** _true sorted the values from least to greatest. false sorted the values from biggest to smallest._	
 }
----
+@slidebreak
 {layout="Synthesize"}
 # Functions for Working with Tables
 
@@ -98,13 +98,13 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 ** _Ideally someone will say bar charts!_	
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Composing with Circles of Evaluation  
 
 What if we wanted to see the ten youngest animals? How could the `first-n-rows` and `sort` functions work together? What order should we use the functions in?
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing with Circles of Evaluation  
 
@@ -118,7 +118,7 @@ Values like Numbers, String, and Booleans are still written by themselves. It’
 
 **Circles can contain other Circles!**
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Composing with Circles of Evaluation  
 
@@ -130,7 +130,7 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 
 @show{(code '(first-n-rows (sort animals-table "age" true) 10))}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Composing with Circles of Evaluation  
 
@@ -142,7 +142,7 @@ That would translate to the following code:
 
 @show{(code '(count (first-n-rows (sort animals-table "age" true) 10) "species"))}
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing with Circles of Evaluation  
 
@@ -150,14 +150,14 @@ That would translate to the following code:
 - Draw Circles of Evaluation and write code for each of the given scenarios.
 - Then test your code out in @starter-file{animals}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Composing with Circles of Evaluation  
 
 - What did you Notice?
 - What did you wonder?
 
----
+@slidebreak
 {layout="Launch"}
 # Functions for Making Displays
 
@@ -176,7 +176,7 @@ The goal here is for students to become familiar with __using contracts to write
 We also have dedicated lessons for other displays not mentioned here, such as @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Functions for Making Displays
 
@@ -197,7 +197,7 @@ We also have dedicated lessons for other displays not mentioned here, such as @l
 ** _Image!_
 - Take a minute and see if you and your partner can write an expression that will generate a `bar-chart` and give me a thumbs up when you have one building.
 }
----
+@slidebreak
 {layout="Investigate-DN"}
 # Functions for Making Displays
 
@@ -215,7 +215,7 @@ Complete the page, generating each of the other 3 displays. Some of them may be 
 - Then work to complete the page, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
 }
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Functions for Making Displays
 
@@ -225,7 +225,7 @@ These functions can be visualized as another Circle of Evaluation:
 
 Just as we can use Circles of Evaluation with `sort`, `count`, and `first-n-rows`, we can put Circles to work to help us write code to build more specific displays.
 
----
+@slidebreak
 {layout="Investigate"}
 # Functions for Making Displays
 
@@ -251,7 +251,7 @@ Displays are often most interesting when compared with other displays. For examp
 ** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
 ** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
 }
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

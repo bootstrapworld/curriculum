@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"} 
 # Introduction to Transformers: Filter
 
@@ -6,13 +6,13 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Manually Filtering Tables
 
 What if the shelter needs to look at some information about only the dogs, or only the animals that have been fixed? There are many situations where, given a table, we want to _filter out_ some of the rows and only look at a specific group from that table.
 
----
+@slidebreak
 {layout="Launch"}
 # Manually Filtering Tables
 
@@ -26,7 +26,7 @@ What if the shelter needs to look at some information about only the dogs, or on
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Manually Filtering Tables
 
@@ -37,7 +37,7 @@ Invite a few students to share. When possible, urge students to break down their
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Manually Filtering Tables
 
@@ -49,7 +49,7 @@ To create a table with only dogs, here's what we did:
 - Again, we determined if `Species = "dog"` was TRUE or FALSE.
 - We repeated this process over and over, until we had inspected the entire table.
 
----
+@slidebreak
 {layout="Launch"}
 # Manually Filtering Tables
 
@@ -62,7 +62,7 @@ Some students may have deleted a dog row by accident! Or initially missed a cat 
 -->
 
 
----
+@slidebreak
 {layout="Investigate}
 # Manually Filtering Tables
 
@@ -77,14 +77,14 @@ Students will likely run into major difficulties. Some may attempt to "undo" pre
 The goal here is to manufacture a situation that will propel students to see the need for an as-yet unfamiliar tool. This tool will require a bit of practice to master, but will enable much more efficient data manipulation!
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Manually Filtering Tables
 
 - What problems did you encounter when trying to manually filter the Animals dataset?
 - What strategies did you try in order to create two side-by-side filtered tables, one with just dogs and one with all pets that weigh more than 32 pounds?
 
----
+@slidebreak
 {layout="Launch"}
 # Filtering Tables with Transformers
 
@@ -95,7 +95,7 @@ When we apply a Transformer, that Transformer creates a _copy_ of the original d
 The original dataset is always preserved!
 
 
----
+@slidebreak
 {layout="InvestigateR-DN"}
 # Filtering with Booleans
 
@@ -112,7 +112,7 @@ The original dataset is always preserved!
 ** _Possible responses: I wonder if this Transformer will modify the dataset or create a new dataset. I wonder what that Contract is all about. I wonder what a Boolean is._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering with Booleans
 
@@ -121,7 +121,7 @@ Did you wonder what a Contract is?
 A @vocab{Contract} is a statement of  of the name, Domain, and Range of a Transformer's expression. Contracts don’t tell us specific inputs. They tell us the data type of input the expression needs. For example, a Contract wouldn’t say that addition requires "3 and 4". Addition works on more than just those two inputs! Instead, it would tells us that addition requires "two Numbers". When we use a Contract, we plug specific numbers or strings into the expression.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering with Booleans
 
@@ -130,7 +130,7 @@ Did you wonder what a Purpose Statement is?
 @vocab{Purpose Statement} is a way of describing what a Transformer's expression does. Purpose Statements in CODAP begin with either _"Checks..."_  or _"Computes..."_. For example, "Checks the row to see whether the species is a dog", or "Computes the sum of `Age` and 2."
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering with Booleans
 
@@ -140,14 +140,14 @@ Did anyone wonder what a *Boolean* is?
 - When you're done, move onto @printable-exercise{booleans-with-filter-2.adoc}.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Filtering with Booleans
 
 - What sets Booleans apart from the other @vocab{data types} we've explored, Strings and Numbers?
 
 
----
+@slidebreak
 {layout="InvestigateC-DN"}
 # Filtering Tables with Transformers
 
@@ -156,7 +156,7 @@ Did anyone wonder what a *Boolean* is?
 
 @image{images/plugins-location.png}
 
----
+@slidebreak
 {layout="InvestigateR-DN"}
 # Filtering Tables with Transformers
 
@@ -167,7 +167,7 @@ Did anyone wonder what a *Boolean* is?
 
 @image{images/filter-ui-annotated.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering Tables with Transformers
 
@@ -199,7 +199,7 @@ Students should observe that new and modified tables created by Transformers are
 -->
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Filtering Tables with Transformers
 

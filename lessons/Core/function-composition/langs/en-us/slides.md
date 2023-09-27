@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Function Composition
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Composing Functions 
 
@@ -15,7 +15,7 @@ Each group has a set of @printable-exercise{pages/function-cards.adoc, "Function
 
 _If you don't have printed versions, you can use our Desmos version of the @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Function Cards} instead._
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Functions
 
@@ -27,7 +27,7 @@ Starting with 4,
 
 What other cards could you play to get from 4 to 10? 
  
----
+@slidebreak
 {layout="Launch"}
 # Composing Functions
 
@@ -40,7 +40,7 @@ Let's try some more numbers from this @link{https://www.google.com/search?q=rand
 
 You will need to use some functions more than once, and that's ok! If you're ready for a challenge, try to find the _shortest path_ from start to end, using the smallest number of compositions.
 
----
+@slidebreak
 {layout="Launch"}
 # Diagramming Function Composition
 
@@ -60,7 +60,7 @@ What if we composed them as `f(g(h(x)))` and evaluated them for `x = 4` ...
 Answer on next slide!
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Diagramming Function Composition
 
@@ -78,13 +78,13 @@ The circles of evaluation for @math{f(g(h(x)))} are shown below:
 9 * 3 = 27	
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Diagramming Function Composition
 
 Complete @printable-exercise{pages/diagramming-function-composition.adoc} with your partner.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Diagramming Function Composition
 
@@ -94,7 +94,7 @@ Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? {style="f
 Why not? _order matters!_
 -->
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Composing Functions in Code 
 
@@ -119,7 +119,7 @@ Encourage students to practice writing comments in the code to describe what is 
 -->
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Composing Functions in Code
 
@@ -136,7 +136,7 @@ Now that students have learned how to use all of these image-composing functions
 Our @lesson-link{flags/} also dives deeper into image composition.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Multiple Ways 
 
@@ -152,7 +152,7 @@ What’s another line of code I could write that would produce the exact same im
 @show{(code '(circle 150 "solid" "red"))}
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Composing Multiple Ways 
 
@@ -164,7 +164,7 @@ There is a special function that lets us test whether or not two images are equa
 
 Use it to test whether all of the expressions you wrote successfully build the same images.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Composing Multiple Ways 
 

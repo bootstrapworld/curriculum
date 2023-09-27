@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Equivalence
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Computation and Equivalence
  
@@ -14,7 +14,7 @@ Look at this @vocab{Circle of Evaluation}:
 
 @image{images/coe1.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Computation and Equivalence
 
@@ -22,7 +22,7 @@ To create a Circle of Evaluation of the same value, we could write what you see 
 
 @image{images/coe2.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Computation and Equivalence
 
@@ -41,7 +41,7 @@ In this last example, the Circle of Evaluation has been simplified down to just 
 Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before moving onto the next slide.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Computation and Equivalence
 
@@ -51,7 +51,7 @@ Numeric expressions are *equivalent* when they simplify to the same value.{style
 Solicit a few other student ideas of equivalent Circles of Evaluation (for instance: @math{4  \times 4} or @math{15 + 1} or @math{16 \div 1}) before delivering the following instructions:
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Computation and Equivalence
 
@@ -70,7 +70,7 @@ As students discovered in the previous lesson, Circles of Evaluation help us to 
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Computation and Equivalence
 
@@ -86,7 +86,7 @@ Invite students to draw their Circles of Evaluation on the board.
 The Notice & Wonder pedagogy is a widely-used best practice in Math-Ed, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent "What's Going On in This Graph?" activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Computation and Equivalence
 
@@ -100,7 +100,7 @@ The Notice & Wonder pedagogy is a widely-used best practice in Math-Ed, and is u
 Work with students to identify one or two groupings as a class. If students are struggling to sort the Circles of Evaluation, you might offer one of the examples on the next slide.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Computation and Equivalence
 
@@ -121,7 +121,7 @@ In short: there are no wrong answers here! The goal is to help students develop 
 -->
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Computation and Equivalence
 
@@ -137,7 +137,7 @@ Let's share out the category names we developed!
 There is no need to evaluate categories’ names or qualify students’ observations; rather, challenge students to identify and articulate the patterns they have observed to lay a foundation upon which to formalize the laws of arithmetic.
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Simplifying Arithmetic Expressions
 
@@ -153,7 +153,7 @@ Why is the second Circle of Evaluation equivalent to the final result?
 _To get from the the first Circle of Evaluation to the next: @math{5} less than @math{14} becomes 9. To get to the final result, @math{3} increased by @math{9} becomes @math{12}._
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Simplifying Arithmetic Expressions
 
@@ -169,7 +169,7 @@ _No, the order does not matter! We could evaluate the Circle on the left first, 
 Pedagogy note: To recap: *yes*, we are advocating for a flexible order of operations that relies on students' abilities to make sense of the underlying structure of math! To learn more about this notion, check out @link{https://thinking101canada.files.wordpress.com/2016/10/order-of-operations-the-myth-and-the-math.pdf, "Order of Operations: The Myth and the Math"}
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Simplifying Arithmetic Expressions
 
@@ -179,14 +179,14 @@ Pedagogy note: To recap: *yes*, we are advocating for a flexible order of operat
 - When you're done, complete  @printable-exercise{pages/computation-frac-dec.adoc}, a version of the activity with more challenging numbers.
 - Did you fill in blanks in the Circles of Evaluation from left to right or right to left? Why?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Simplifying Arithmetic Expressions
 
 How can you determine whether two Circles of Evaluation are equivalent or not?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Are They Equivalent?
 
@@ -206,7 +206,7 @@ Conversely, students who have a relational view of the equal sign recognize that
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Are They Equivalent?
 
@@ -221,7 +221,7 @@ The Circles of Evaluation in this activity were designed to support students in 
 -->
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Are They Equivalent?
 
@@ -232,7 +232,7 @@ The second game involves analyzing four different Circles of Evaluation to deter
 
 @image{images/wodb.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Are They Equivalent?
 

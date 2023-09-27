@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Permutations
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Permutation with Replacement
 
@@ -15,20 +15,20 @@ Luigi's Family Restaurant is about to open, and it's going to be the hottest res
 @image{images/pizza.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation with Replacement
 
 
 The gimmick is that diners can __choose the order of the courses:__ you might start with Lasagna, but your friend can start with the Chicken Parmesan, and so on. And if your friend happens to really, *really* like Chicken Parmesan, they can choose to eat it for all four courses!
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation with Replacement
 
 They advertise "an almost-endless number of dining experiences." In fact, Luigi himself guarantees free food for life for anyone who can eat every possible configuration. If you ate dinner there every night, how long would it take to try each one? In other words, __how many ways can you reshuffle those four courses__?
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation with Replacement
 
@@ -37,7 +37,7 @@ Luigi isn't going to give away free food just because you order four courses - h
 In Permutations, order matters!
 
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation with Replacement
 
@@ -45,14 +45,14 @@ In some restaurants, you're not allowed to order the same item for more than one
 
 Luigi is a nice guy, so once you order lasagna it is "replaced" with the option to order it again for the next course! This is called *permutation _with_ replacement*.
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation with Replacement
 
 With six dishes to choose from and four courses to eat, how many @vocab{permutations} are there? How many meals would we have to eat, to get free food for life?
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
@@ -63,14 +63,14 @@ Luigi has six possible dishes to choose from.
 - How many permutations could there be for a 3-course dinner?
 - Is there a pattern here?
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
 It's useful to use __tree diagrams__, so we can see what our possible choices are. A tree diagram is a way of tracking a series of events. In this case, each course we choose is an event.
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Permutation with Replacement
 
@@ -79,7 +79,7 @@ Let's diagram all permutations for a 1-course meal. With six menu items, a 1-cou
 @image{images/6-1-course-permute-w-replacement.png}
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Permutation with Replacement
 
@@ -96,14 +96,14 @@ Every time we get to make a choice, each endpoint in our tree sprouts six more b
 If we choose Lasagna for our first course... we can choose it again for the second course or we can choose any of the other options, which means we still have six choices. In other words, someone could order Lasagna & Lasagna (L-L), Lasagna & Pizza (L-P), Lasagna & Chicken (L-C), Lasagna & Ravioli (L-R), Lasagna & Soup (L-S), or Lasagna & Ziti (L-Z).  That's six possible orders with Lasagna as the first course. Each of the other first course options also comes with six possible second course order options... that's @math{6 \times 6} ! So, instead of taking six days to try all the permutations, now it takes __36 days__ - more than a month!
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
 - For practice with tree-diagrams and permutations, complete @printable-exercise{pages/tree-diagrams.adoc}.
 - How many permutations would there be in a 3-course meal?
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
@@ -113,7 +113,7 @@ The number of @vocab{permutations} is computed based on two things:
 - How many times we get to __choose__. (1-course meal? 3-course meal?)
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
@@ -129,7 +129,7 @@ Let's see this as a function:
 \mbox{permute-w-replace}(6, 3) = 6^{3} = 216}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
@@ -140,7 +140,7 @@ How many permutations are there for a 4-course meal chosen from Luigi's 6-item m
 With four courses, it would take more than __3.5 years__ to try them all -- if we ate dinner at Luigi's every night!
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Permutation with Replacement
 
@@ -149,7 +149,7 @@ With four courses, it would take more than __3.5 years__ to try them all -- if w
 - In the Definitions Area, use the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
 
 
---- 
+@slidebreak
 {layout="Synthesize"}
 #Permutation with Replacement
 
@@ -160,13 +160,13 @@ What are some other examples of permutation?
 Possible solutions: Password strength, guessing combination locks...
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
 After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. His daughter observes that there's no way to predict how many ingredients to buy, since some people might want four courses of Soup and others might want four courses of ziti. Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -177,7 +177,7 @@ He also decides to simplify his menu even further, down to just **four different
 With no one ordering four of the same thing and far fewer choices to make, it's a lot easier to predict what to buy, so it will waste less food and save Luigi a lot of money.
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Permutation without Replacement
 
@@ -188,7 +188,7 @@ Let's start by drawing the tree diagram for 1st place:
 @image{images/4-1-course-permute-wo-replacement.png}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Permutation without Replacement
 
@@ -196,7 +196,7 @@ There are *four* possible items we could eat for our first course, so we have 4 
 
 @image{images/4-2-course-permute-wo-replacement.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -207,7 +207,7 @@ If we start with Chicken, we can't order Chicken again, but we can choose from P
 
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Permutation without Replacement
 
@@ -230,7 +230,7 @@ That's six different permutatons that start with Chicken, and we have four diffe
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -243,7 +243,7 @@ This lesson assumes that students are familiar with factorial notation (@math{n!
 Reminder: @math{0! = 1} @link{https://www.chilimath.com/lessons/intermediate-algebra/zero-factorial/, Click here for an explanation}.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -256,7 +256,7 @@ In this situation, there might be six items on the menu, but we want to __stop m
 
 @math{6 \times 5 \times 4 \times 3 = 360}
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -265,7 +265,7 @@ We can write this by starting with our factorial notation from before (where eve
 
 @math{\frac{6 \times 5 \times 4 \times 3 \times 2 \times 1}{2 \times 1} = \frac{6!}{2!} = 360}
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -277,7 +277,7 @@ We can write this relationship as a function:
 @math{\mbox{permute-no-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Permutation without Replacement
 
@@ -287,7 +287,7 @@ In Pyret, we can compute the factorial of 6 with the `factorial` function. For e
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Permutation without Replacement
 
@@ -296,7 +296,7 @@ In Pyret, we can compute the factorial of 6 with the `factorial` function. For e
 - What are some real-world examples of each?
 
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

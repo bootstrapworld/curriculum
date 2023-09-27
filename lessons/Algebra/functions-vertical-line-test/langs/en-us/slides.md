@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Vertical Line Test 
 
@@ -9,7 +9,7 @@
 
 * To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Functions Are Reliable
 
@@ -21,7 +21,7 @@ Some examples of functions:
 
 What kind of relationships are functions, exactly?
 
----
+@slidebreak
 {layout="Investigate"}
 # Functions Are Reliable
 
@@ -35,7 +35,7 @@ What kind of relationships are functions, exactly?
 1. It may be easier for your situation to project each graph from the peardeck on the white board and have students come up to add points that satisfy the rules or dictate points that satisfy the rules to a scribe who will add them to the graph.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Functions Are Reliable
 
@@ -44,7 +44,7 @@ How can we make a graph of a function from its rule?
 Are there curves or lines that a function could not make? Why or why not?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Identifying Functions from Graphs
 
@@ -56,7 +56,7 @@ We can test a graph to see whether or not it's a function using the "vertical li
 Imagine overlaying a series of vertical lines on the graph. If the graph represents a function, none of the vertical lines will cross the graph at more than one point. If there is any vertical line that can be drawn that would intersect more than one point on the graph, it means the same input can have more than one output and the relationship is not a function.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Identifying Functions from Graphs
 
@@ -68,7 +68,7 @@ When you finish, go on to @printable-exercise{functions-graphs-2.adoc}.
 As students work, circulate around the room and make sure that they are actually drawing vertical lines on the graphs. Some students may benefit from circling the point where each vertical line intersects the graph.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Identifying Functions from Graphs
 
@@ -82,7 +82,7 @@ Record your responses on @printable-exercise{notice-wonder-functions.adoc}.
 1. Noticings might include: functions can be lines, curves, v-shaped, or scatterplots! 
 1. Wonderings might include: Why might some scatterplots represent functions and others not? Are there other forms functions can take? How do you end up with a circle on a graph?
 -->
----
+@slidebreak
 {layout="Launch"}
 # Identifying Functions from Tables
 
@@ -94,7 +94,7 @@ How can we identify whether or not a table of values represents a function?
 Circulate around the room verifying that students are remembering how to use the vertical line test and correctly identifying which tables represent functions.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Identifying Functions from Tables
 
@@ -106,7 +106,7 @@ When you're done, turn to @printable-exercise{notice-wonder-functions.adoc} and 
 As students work, circulate around the room and make sure that they are actually circling or highlighting the points on the tables that tell them that the table doesn't represent a function.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Identifying Functions from Tables
 

@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Function Notation
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Function Notation (Definitions)
  
@@ -14,7 +14,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 But how does this function work?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Function Notation (Definitions)
 
@@ -23,7 +23,7 @@ When applying a function to its inputs, we substitute for the variables in its d
 
 @image{images/fn-table.png}{width="700"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Function Notation (Definitions)
 
@@ -32,7 +32,7 @@ Math books use Function Notation to define functions, too, though most of the ti
 @image{images/fn-table-2.png}{width="700"}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Function Notation (Definitions)
 
@@ -44,7 +44,7 @@ Math books use Function Notation to define functions, too, though most of the ti
 You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Function Notation (Definitions)
 
@@ -59,7 +59,7 @@ You can think of @math{f(3)} as a question.
 1. _What is @math{3 + 8}?_
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Function Notation (Graphs)
 
@@ -69,7 +69,7 @@ If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
 @math{f(7) = 2} because @math{7 - 5 = 2}.
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Function Notation (Graphs)
 
@@ -85,7 +85,7 @@ If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
 1. _-2_
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Function Notation (Graphs)
 
@@ -104,7 +104,7 @@ If @math{f(x) = x - 5}, what is the value of @math{f(7)}, and why?
 1. _Answers will vary... for example, @math{f(-1) = 4} ...or... @math{f(2) = 4}_
 -->
 
----
+@slidebreak
 {layout="LaunchR"}	
 # Function Notation (Graphs)
 
@@ -122,7 +122,7 @@ For example, to evaluate @math{f(2)}:{style="font-size:15pt"}
 @image{images/pw.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Function Notation (Graphs)
 
@@ -130,7 +130,7 @@ Complete @printable-exercise{function-notation-graphs.adoc}.
 
 @optional If you're ready for piecewise functions, try @opt-printable-exercise{function-notation-graphs-pw.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Function Notation (Graphs)
 
@@ -140,7 +140,7 @@ Can you think of any values that it would be difficult to determine from one of 
 It would be hard to be precise for many of the points on the graphs that curve. For example, f(4) on the second graph would have to be a decimal value and it’s hard to know exactly what the decimal should be without a function definition to evaluate.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Function Notation (Tables)
 
@@ -158,13 +158,13 @@ Let’s take a look at a table of input-output pairs that satisfy the function @
 1. _@math{-15}_
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Function Notation (Tables)
 
 Complete @printable-exercise{function-notation-tables.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 #Function Notation (Tables)
 

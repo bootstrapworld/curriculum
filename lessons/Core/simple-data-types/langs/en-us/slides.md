@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Simple Data Types
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Strings & Numbers
 
@@ -19,13 +19,13 @@ If you're not a Driver, you're a "Navigator" - your job is to tell the Driver wh
 @image{images/driver-navigator.png, 150}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Strings & Numbers
 
 Open @starter-file{editor} and click "Log In", then start a new program.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Strings & Numbers
 
@@ -37,7 +37,7 @@ For now, we will only be writing programs in the *Interactions Area*.{style="fon
 
 @image{images/editor.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Strings & Numbers
 
@@ -49,7 +49,7 @@ Languages also have rules for *grammar*. The order of the words matters!{style="
 
 Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!{style="font-size:16pt"} 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Strings & Numbers
 
@@ -57,7 +57,7 @@ Complete @printable-exercise{strings-n-numbers.adoc}.
 
 Pay special attention to the error messages!
 
----
+@slidebreak
 {layout="Investigate"}
 # Strings & Numbers
 
@@ -75,7 +75,7 @@ Most of the error messages we've just seen were drawing our attention to syntax 
 Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading zero) results in a syntax error. Make sure students understand that Pyret needs decimals to start with a zero!}. 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Strings & Numbers
 
@@ -85,7 +85,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 - Strings _must_ have quotation marks on both sides.{style="font-size:17pt"} 
 
 @ifproglang{pyret}{
----
+@slidebreak
 {layout="Synthesize"}
 # Strings & Numbers
 
@@ -95,7 +95,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 - Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:17pt"} 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Strings & Numbers
 
@@ -105,13 +105,13 @@ Error messages are a way for Pyret to explain what went wrong, and are a really 
 - `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
 
 }
----
+@slidebreak
 {layout="Launch"}
 # Booleans 
 
 What's the answer: is 3 greater than 10?
 
----
+@slidebreak
 {layout="LaunchR"}
 # Booleans
 
@@ -121,7 +121,7 @@ For example, some roller coasters with loops require passengers to be a minimum 
 
 @image{images/at-least-this-tall-to-ride.jpeg}
 
---- 
+@slidebreak
 {layout="LaunchR"}
 # Booleans
 
@@ -131,13 +131,13 @@ Brainstorm other scenarios where Booleans are useful in and out of the programmi
 
 @image{images/login.png}
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Booleans
 
 Complete @printable-exercise{pages/booleans.adoc} with your partner, making predictions about what a variety of Boolean expressions will return and testing them in the editor.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Booleans
 

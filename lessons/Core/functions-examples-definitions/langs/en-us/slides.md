@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Functions: Contracts, Examples & Definitions
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
@@ -13,7 +13,7 @@ Open the @starter-file{bc}. You'll see the Contract, some Examples and the Funct
 
 What do you notice? What do you wonder?
 
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
@@ -22,7 +22,7 @@ Every function has a Contract: {style="font-size:22pt"}
 
 @show{(contract "gt" '("Number" ) "Image")} {style="font-size:22pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
@@ -31,7 +31,7 @@ We can write examples illustrating how a function should work to help us identif
 
 @image{images/examples.png, 500}
 
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
@@ -39,7 +39,7 @@ Function definitions replace whatever changes in the examples with a variable de
 
 @image{images/gt-fun.png, 600}
 
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
@@ -54,13 +54,13 @@ If we use the correct syntax, we can include all three of these function represe
 @ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}{style="font-size:16pt"}
 * Click *Run*. What happens?{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Three Representations of a Function
 
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Three Representations of a Function
 
@@ -87,14 +87,14 @@ And/or these Desmos card sort activities:
 There are many more materials for students to work with in the Additional Practice section at the end of the lesson!
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Three Representations of a Function
 
 - What strategies did you use to match the @vocab{examples} with the @vocab{contracts}?
 - What strategies did you use to match the @vocab{examples} with the @vocab{function definitions}?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Defining bc and Other Functions
 
@@ -106,7 +106,7 @@ Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
 * Then type the Contract, Examples and Definition into the Definitions Area of @starter-file{bc}. 
 * Click *Run*, and make sure all of the examples pass!
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Defining bc and Other Functions
 
@@ -118,14 +118,14 @@ Complete:
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Defining bc and Other Functions
 
 - How were each of the representations helpful?
 - Why is it important to write examples in our code?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

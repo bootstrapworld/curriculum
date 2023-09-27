@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Histograms
 
@@ -8,7 +8,7 @@ This slide deck includes an optional Kinesthetic Activity. Be sure to delete sli
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Histograms
 
@@ -19,7 +19,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Introducing Histograms
 
@@ -33,7 +33,7 @@ There are 2 displays on @printable-exercise{pages/summarizing-columns.adoc}. The
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Introducing Histograms
 
@@ -47,7 +47,7 @@ The second display is called a @vocab{histogram}.
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Introducing Histograms
 
@@ -55,7 +55,7 @@ To build a histogram, we start by **sorting all of the numbers in our column fro
 
 Once we have our bins, we put each value in our dataset into the bin where it belongs, and then count how many values fall in each bin. This count determines the height of the bars on our y-axis.
 
----
+@slidebreak
 {layout="Investigate-K"}
 # Introducing Histograms
 
@@ -81,7 +81,7 @@ Histograms pile the data points into equally-sized intervals, just as the cylind
 Perhaps they represent the number of teeth grownups have with most grownups having a full set of teeth, some missing one or two, and some outliers who've lost a significant number.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Introducing Histograms
 
@@ -90,7 +90,7 @@ Turn to @printable-exercise{pages/making-histograms.adoc}, and try drawing a his
 <!--
 For example, if our values ranged from 3 to 53 we might mark our x-axis from 0 to 60 and divide it into bins of width 10. If they range from 22 to 41 we might mark our x-axis from 20 to 45 and divide it into bins of width 5.
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Introducing Histograms
 
@@ -101,7 +101,7 @@ In the histogram we just made, we see that the data is clustered at the right-ha
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Introducing Histograms
 
@@ -113,7 +113,7 @@ Bar charts are used for categorical data, showing the count for data in each cat
 *Common Misconceptions*
 Note that intervals on this display include the left endpoint but not the right. If we included the right endpoint and someone had 0 teeth, we’d have to add on a bar from -5 to 0, which would be awfully strange!
 -->
----
+@slidebreak
 {layout="Launch"}
 # Choosing the Right Bin Size 
 
@@ -126,7 +126,7 @@ But how do you choose a good bin-size?
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Choosing the Right Bin Size
 
@@ -136,7 +136,7 @@ Suppose we want to know how long it takes for animals from the shelter to be ado
 * Find the Contract for the `histogram` function.
 * Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10.
 * How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?
----
+@slidebreak
 {layout="Investigate"}
 # Choosing the Right Bin Size
 
@@ -153,7 +153,7 @@ Some observations you can share with the class, to get them started:
 - We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.
 - More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks. We’ll talk more about Shape of a histogram in the next lesson, and about its effect on average (the mean) in the lesson after that.
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Choosing the Right Bin Size
 
@@ -168,7 +168,7 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Choosing the Right Bin Size
 
@@ -179,7 +179,7 @@ See if you can match descriptions to histograms, by completing @printable-exerci
 <!--
 *Have students talk about the bin sizes they tried*. Encourage open discussion as much as possible here, so that students can make their own meaning about bin sizes before moving on to the next point.
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Choosing the Right Bin Size
 
@@ -191,7 +191,7 @@ Histograms are a powerful way to display a dataset and assess its @vocab{shape}.
 But how do we talk about or describe that shape, and what does the shape actually tell us? Our @lesson-link{visualizing-the-shape-of-data} lesson addresses all of these questions... and our @lesson-link{measures-of-center} lesson explores the effect of the shape of a histogram on the average (the mean).
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Data Exploration Project (Histograms)
 
@@ -213,7 +213,7 @@ Let’s review what we have learned about making and interpreting histograms.
 ** _A histogram should have 5-10 bins. We want to choose a bin size that lets us the shape of a quantitative column._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Histograms)
 
@@ -238,7 +238,7 @@ Let’s connect what we know about histograms to your chosen dataset.
 Confirm that all students have created and understand how to interpret their histograms. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Histograms)
 
@@ -250,7 +250,7 @@ Confirm that all students have created and understand how to interpret their his
 ** _Note: During the next lesson, @lesson-link{visualizing-the-shape-of-data}, students will learn additional vocabulary to help them describe what they see in their histogram. They can add to their histogram interpretations at that point._
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Histograms)
 

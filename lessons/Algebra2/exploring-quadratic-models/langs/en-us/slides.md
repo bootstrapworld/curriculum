@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Exploring Quadratic Models
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -28,7 +28,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 }
 
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -39,7 +39,7 @@ In this lesson, we'll learn more about the relationship between fuel efficiency 
 - Working in pairs or small groups, complete the first section of @printable-exercise{pages/exploring-mpg.adoc}.
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Looking for Patterns
 
@@ -48,7 +48,7 @@ In this lesson, we'll learn more about the relationship between fuel efficiency 
 There's definitely a relationship here. But we know that the best-possible linear model isn't very good!
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -58,7 +58,7 @@ There's definitely a relationship here. But we know that the best-possible linea
 
 ...but all of them are so far away from so many points, and our @vocab{R&sup2;} is pretty bad.
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -74,7 +74,7 @@ Have students share their curves, encouraging them to identify where they "peak"
 }
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Looking for Patterns
 
@@ -83,7 +83,7 @@ Have students share their curves, encouraging them to identify where they "peak"
 - Are there any mathematical functions that look like those curves?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Quadratic Functions
 
@@ -91,7 +91,7 @@ Linear models are great for fitting simple relationships. But the real world isn
 
 Relationships like the one in the fuel efficiency scatter plot are best described by a _curve_. Today, we will learn about one kind of curved model called a quadratic model.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
 
----
+@slidebreak
 {layout="Launch"}
 # Quadratic Functions
 
@@ -100,7 +100,7 @@ We observed what appeared to be a @vocab{quadratic relationship} between speed a
 There are lots of relationships that change direction like this! For example, when an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength. In some relationships, the curve goes the other way - decreasing, bottoming out, and then rising again. For example, a bird might swoop down to the water to catch a fish, and then fly back up to carry it away.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Quadratic Functions
 
@@ -116,7 +116,7 @@ There are lots of relationships that change direction like this! For example, wh
 ** _The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -127,7 +127,7 @@ But what if we only have a list of x-y pairs showing only one part of the parabo
 **How can we identify quadratic relationships from a sequence of numbers?**
 
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Quadratic Functions
 
@@ -137,7 +137,7 @@ But what if we only have a list of x-y pairs showing only one part of the parabo
 
 
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Quadratic Functions
 
@@ -147,7 +147,7 @@ But what if we only have a list of x-y pairs showing only one part of the parabo
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -161,7 +161,7 @@ Turn to @printable-exercise{classifying-tables.adoc}. One of the first two table
 | x |  0 | 1 | 2  | 3 |  4 | 5  | 6
 | y |  0 | 3 | 6  | 9 | 12 | 15 | 18
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -183,13 +183,13 @@ _The first table is quadratic, and the second table is linear. Invite students t
 
 @teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, becuase the points won't fit the function perfectly!}
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
 When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. *Let's define the parts of a parabola together.*
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -209,7 +209,7 @@ Invite students to share what they know or can infer about a parabola's parts. I
 }
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -220,7 +220,7 @@ Invite students to share what they know or can infer about a parabola's parts. I
 | The point at which a parabola "changes direction" and goes from climbing to sinking (or vice versa). | Like linear models, parabolas always cross the y-axis once when @math{x=0}. | Also known as @vocab{roots} or @vocab{zeros}. A quadratic function can cross the x-axis once, twice, or not at all.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
@@ -232,14 +232,14 @@ There are two more specific terms that we can use to describe a parabola's verte
 Every parabola also has an @vocab{axis of symmetry}, an imaginary vertical line through the @vocab{vertex} that splits the curve into two congruent parts that mirror each other.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Quadratic Functions
 
 Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sketching and labelling some graphs.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Quadratic Functions
 
@@ -257,14 +257,14 @@ Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sket
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Fitting Quadratic Models
 
 We just examined a series of quadratic and linear functions that looked a lot like the ones you might find in an Algebra 2 textbook: clean and predictable. Real-world data, however, is messy! Let's return to our @starter-file{alg2-fuel-efficiency} to dig into that messiness.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Fitting Quadratic Models
 
@@ -278,7 +278,7 @@ The existence of a "dip" like this is normal in real data, but it doesn't mean t
 ** _If necessary, remind students that *models are - by definition - approximations of the real world*._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Quadratic Models
 
@@ -291,7 +291,7 @@ What do each of these coefficients mean for our model?
 - Open @starter-file{alg2-exploring-quadratics-desmos}.
 - Use the Desmos file to complete @printable-exercise{graphing-models.adoc}
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Quadratic Models
 
@@ -312,14 +312,14 @@ Before we focus on that, we need to learn about a new Pyret function `num-sqr`.
 ** Change the value of @math{a}	
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Quadratic Models
 
 Return to @starter-file{alg2-fuel-efficiency} and work through @printable-exercise{model-speed-v-mpg.adoc}.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Fitting Quadratic Models
 
@@ -331,7 +331,7 @@ Return to @starter-file{alg2-fuel-efficiency} and work through @printable-exerci
 
 The _sign_ of @math{a} determines whether the parabola opens up (@math{a > 0}), opens down (@math{a < 0}), or exist as a straight line (@math{a = 0}) Negative @math{a} made the parabola open down. The _magnitude_ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.
 }
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

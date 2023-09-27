@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Probability, Inference, & Sample Size{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # How to Spot a Scam
 
@@ -15,7 +15,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # How to Spot a Scam
 
@@ -33,7 +33,7 @@ If you decide to play the game, how could you then decide if the stranger’s co
 ** _Flip it! The more flips you make, the more accurately you can assess if it is fair or not._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # How to Spot a Scam
 
@@ -43,7 +43,7 @@ In general, we assume that in the long run, an ordinary coin will land on "heads
 
 _How do we test the null hypothesis?_
 
----
+@slidebreak
 {layout="InvestigateR"}
 # How to Spot a Scam
 
@@ -60,7 +60,7 @@ Have students share back their sample results, and their predictions after 5 sam
 @ifproglang{codap}{The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any to complete the lesson. They will simply hit "Run" several times.}
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # How to Spot a Scam
 
@@ -74,7 +74,7 @@ Students may think that _any_ sample from a fair coin should have an equal numbe
 
 This is where arithmetic thinking and statistical thinking diverge: it's not a question of what is _possible_, but rather what is _probable_.}
 
----
+@slidebreak
 {layout="Investigate"}
 # How to Spot a Scam
 
@@ -84,7 +84,7 @@ So here’s what we’d have to say about our hypothesis test:
 
 **"If the coin was fair, the probability of getting so few (zero) tails in 10 flips is just 0.001."**
 
----
+@slidebreak
 {layout="Investigate"}
 # How to Spot a Scam
 
@@ -95,7 +95,7 @@ __"If the null hypothesis were true, then the probability of getting sample resu
 
 But of course, there *is* a way. It's just..._incredibly unlikely_.
 
----
+@slidebreak
 {layout="Synthesize"}
 # How to Spot a Scam
 
@@ -112,7 +112,7 @@ But of course, there *is* a way. It's just..._incredibly unlikely_.
 ** _A fair coin should land on heads about 50% of the time._ If a coin has been designed to land on heads _100%_ of the time, it wouldn't take long to figure out that something was up! A trick coin designed to come up heads _60%_ of the time, however, would need a much larger sample to be detected. The smaller the bias, the larger the sample we need to see it. A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!
 }
 
----
+@slidebreak
 {layout="LaunchR"}
 # Probability v. Inference
 
@@ -122,7 +122,7 @@ But of course, there *is* a way. It's just..._incredibly unlikely_.
 
 Because we know that the chance of coming up heads each time for a "population" of flips of a fair coin is 0.5, we can do probability calculations like "the probability of getting all three heads in three coin flips is @math{0.5 \times 0.5 \times 0.5 = 0.125}." Likewise, we can say the probability of getting three of a kind in a randomly dealt set of five cards is 0.02.
 
----
+@slidebreak
 {layout="Launch"}
 # Probability v. Inference
 
@@ -130,7 +130,7 @@ Because we know that the chance of coming up heads each time for a "population" 
 
 _*This is the kind of reasoning involved in probability.*_
 
----
+@slidebreak
 {layout="Launch"}
 # Probability v. Inference
 
@@ -141,7 +141,7 @@ In the coin-flip activity, we took samples of coin flips and used our knowledge 
 In other words, we looked at sample results and used them to decide what to believe about the population of all flips of that coin: __was the overall chance of heads really 0.5?__
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Probability v. Inference
 
@@ -153,7 +153,7 @@ _*This is the kind of reasoning involved in inference.*_
 
 @vocab{Statistical inference} is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art!
 
----
+@slidebreak
 {layout="Launch"}
 # Probability v. Inference
 
@@ -161,7 +161,7 @@ Suppose we want to estimate what percentage of all Americans plan to vote for a 
 
 Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to convince us that one candidate is in the lead. _But if we survey enough people_ we can be fairly confident in inferring something about the whole population.
 
----
+@slidebreak
 {layout="Launch"}
 # Probability v. Inference
 
@@ -179,7 +179,7 @@ Just like our coin-flip, we can start out with the null hypothesis: assuming tha
 * Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
 ** _Calling only certain segments of the population will not reveal the way an entire population will vote._
 }
----
+@slidebreak
 {layout="Launch"}
 # Probability v. Inference
 
@@ -198,7 +198,7 @@ When designing a survey or collecting data, Data Scientists need to make sure th
 
 *Can you think of other examples where biased sampling has been used - or could be used - to harm people?*
 
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -210,7 +210,7 @@ The Animals Dataset we've been using is just one _sample_ taken from a very larg
 
 @ifproglang{pyret}{
 
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -226,13 +226,13 @@ Let’s see what happens if we switch from smaller to larger sample sizes.
 
 
 @ifproglang{codap}{
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
 We're going to analyze which is better at guessing the truth about an entire population - a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Probability v. Inference
 
@@ -246,7 +246,7 @@ What do you _notice_ about the `Sampler`? What do you _wonder_?
 <!--
 Possible wonderings include: How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -254,7 +254,7 @@ Possible wonderings include: How many turquoise balls are there? Why is there th
 
 If we pick cards from a deck, each sample _changes the outcomes_ of the ones that follow. There's only one Ace of Hearts in the deck, and you can't draw it twice! When flipping a coin, each sample has the same number of possible outcomes as the one before: heads or tails. It's as if each one has been _replaced_ with a copy of the same outcome.
 
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -269,7 +269,7 @@ If we pick cards from a deck, each sample _changes the outcomes_ of the ones tha
 <!--
 Discuss with the class, making sure everyone understands which one this is!
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -283,7 +283,7 @@ Discuss with the class, making sure everyone understands which one this is!
 <!--
 Ensure that students understand all the components of the new table they’ve created!
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Probability v. Inference
 
@@ -294,7 +294,7 @@ Ensure that students understand all the components of the new table they’ve cr
 
 **Random samples help avoid bias, and larger samples get closer estimates of what’s true for the whole population.**
 
----
+@slidebreak
 {layout="Synthesize"}
 # Probability v. Inference
 
@@ -305,7 +305,7 @@ Ensure that students understand all the components of the new table they’ve cr
 *Common Misconceptions*
 Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.}
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

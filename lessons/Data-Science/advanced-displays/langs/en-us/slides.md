@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Advanced Displays
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Processing Rows with Functions
 
@@ -22,7 +22,7 @@ What is the third column being visualized here?
 <!--
 The third column being visualized is `species`! By drawing the dots differently, we've been able to pack a third dimension of data into an otherwise 2d graph.
 -->
----
+@slidebreak
 {layout="Launch"}
 # Processing Rows with Functions
 
@@ -34,14 +34,14 @@ Answer to #1: __What a function consumes__ is not the same as the __work the fun
 Answer to #2: It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Processing Rows with Functions
 
 But how do we process each Row separately? You've learned how to take a complex value like a Row, and lookup a column. We could write a line of code that does that for every Row in the table... but that would take a long time and would result in a LOT of code! You've also seen how to define functions that consume simple values, and __do all the repetitive work for us__. Let's put those two concepts together, and define functions that consume Rows!
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Processing Rows with Functions
 
@@ -51,7 +51,7 @@ But how do we process each Row separately? You've learned how to take a complex 
 @teacher{
 Review student answers. Every student should have the same code for this part!
 }
----
+@slidebreak
 {layout="Investigate"}
 # Processing Rows with Functions
 
@@ -63,7 +63,7 @@ Review student answers. Every student should have the same code for this part!
 Review the Contract, Examples and Definition with students, making sure to point out the connections between each representation!
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Processing Rows with Functions
 
@@ -75,7 +75,7 @@ Review the Contract, Examples and Definition with students, making sure to point
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Processing Rows with Functions
 
@@ -89,7 +89,7 @@ Review the Contract, Examples and Definition with students, making sure to point
 * How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?
 ** It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.
 }
----
+@slidebreak
 {layout="LaunchR"}
 # Image Scatter Plots
 
@@ -102,7 +102,7 @@ Many apartment buildings have limits on how heavy a pet can be, which could make
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Image Scatter Plots
 
@@ -120,7 +120,7 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 
 Let's say we want to consider the influence of *age* on how how quickly an animal is adopted - while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... __custom scatter plots!__
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Image Scatter Plots
 
@@ -130,7 +130,7 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 
 @teacher{_Discuss as a class, or in small groups. See explanation, below, of the `image-scatter-plot` Contract._}
 
----
+@slidebreak
 {layout="Investigate"}
 # Image Scatter Plots
 
@@ -147,7 +147,7 @@ image-scatter-plot :: (
 
 This Domain is interesting: Table, String, String and...*a Function that consumes a Row and produces an Image!*
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Image Scatter Plots
 
@@ -163,7 +163,7 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 - Now complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.
 ** _The scatter plot that will be generated is on the right._
 }
----
+@slidebreak
 {layout="InvestigateR"}
 # Image Scatter Plots
 
@@ -175,7 +175,7 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 @teacher{
 ** __The `species-tag` @vocab{scatter plot} (right) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)__
 }
----
+@slidebreak
 {layout="SynthesizeR"}
 # Image Scatter Plots
 
@@ -194,7 +194,7 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 * How might image-scatter-plot be useful to your own analysis?
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Piecewise/Conditional Functions
 
@@ -205,7 +205,7 @@ How could we use _different color dots_ for each species? Or perhaps draw differ
 
 This requires a more powerful kind of function, known in math as a @vocab{piecewise function} because it has more than one "piece". In programming, these are often called "conditional" functions, because each piece is used depending on which condition is met.
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Piecewise/Conditional Functions
 
@@ -219,7 +219,7 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Image Scatter Plots
 
@@ -237,14 +237,14 @@ The function `image-scatter-plot` has an interesting Domain: Table, String, Stri
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Image Scatter Plots
 
 - What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-dot.adoc}.
 - Now complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Image Scatter Plots
 
@@ -257,7 +257,7 @@ The function `image-scatter-plot` has an interesting Domain: Table, String, Stri
 __The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)__
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Image Scatter Plots
 
@@ -268,7 +268,7 @@ __The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Piecewise/Conditional Functions
 
@@ -283,13 +283,13 @@ How could we use *different colored dots* for each species? Or perhaps draw diff
 *NOTE:* Math teachers may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not a part of the Data Science pathway, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics, with greater emphasis on the math connections.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Piecewise/Conditional Functions
 
 This requires a more powerful kind of function, known in math as a @vocab{piecewise function} because it has more than one "piece". In programming, these are often called "conditional" functions, because each piece is used depending on which condition is met.
 
----
+@slidebreak
 {layout="Investigate"}
 # Piecewise/Conditional Functions
 
@@ -302,14 +302,14 @@ Pyret allows us to create advanced displays for several types of charts. You can
   '("image-pie-chart" ("Table" "String" "(Row -> Image)") "Image")
 )}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Piecewise/Conditional Functions
 
 - How do piecewise functions expand what is possible for displaying data?
 - How could you see this power being used to help express complex relationships?
 
----
+@slidebreak
 {layout="Supplemental"}
 
 - @opt-project{beautiful-data-project.adoc, beautiful-data-rubric.adoc} 

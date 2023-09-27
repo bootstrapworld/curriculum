@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Collecting Data
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # When Data Gets Dirty!
 
@@ -21,7 +21,7 @@ There are lots of reasons to gather data:
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # When Data Gets Dirty!
 
@@ -35,7 +35,7 @@ Only _clean_ data can be properly processed and analyzed.
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # When Data Gets Dirty!
 
@@ -50,14 +50,14 @@ Humans make mistakes, and that can happen when we are collecting data or enterin
 This could be an opportunity to have students practice cleaning data and importing a google sheet into a pyret starter file. If you want to take the time to have your students work on these skills and see the difference of what the file looks like cleaned up, have them make a copy of the @link{https://docs.google.com/spreadsheets/d/1Hv9eqiwQ3h2YvdLmm9_vuZuJpa2WsW4ENZsa2kI1pFs/, google sheet}, clean the data by hand, change the google file id in @starter-file{fav-desserts}, click "Run" and build the displays again to see how different they look with "clean" data.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # When Data Gets Dirty!
 
 * What were some ways that the data was "dirty"?
 * What ideas do you have for how the survey designers could have solicited better data?
 
----
+@slidebreak
 {layout="Launch"}
 # Cleaning Data
 
@@ -67,7 +67,7 @@ Sometimes data is so "dirty" that it can't even be processed by tools like Pyret
 
 2.\ **Inconsistent Types** - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
 
----
+@slidebreak
 {layout="Launch"}
 # Cleaning Data
 
@@ -77,7 +77,7 @@ Sometimes data is so "dirty" that it can't even be processed by tools like Pyret
 
 4\. **Inconsistent Naming** - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
 
----
+@slidebreak
 {layout="Launch"}
 # Cleaning Data
 
@@ -85,7 +85,7 @@ Open @link{https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwH
 
 Be ready to discuss your answers with the class!
 
----
+@slidebreak
 {layout="Investigate"}
 # Cleaning Data
 
@@ -99,7 +99,7 @@ Be ready to discuss your answers with the class!
 THIS is a great slide to answer that question. Pyret is pretty smart, and does a lot of checking to make sure data is clean before analyzing it. But many tools - like Google Sheets, Microsoft Excel, etc. - don't. Suppose you tried to analyze this data in a tool that doesn't do all this checking...
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Cleaning Data
 
@@ -107,7 +107,7 @@ Sometimes, there's an easy way to clean up the data. Chanel and Bibbles have Str
 
 But what if the data is missing, like the `weight` for our dogs? Or what if it's weird data that we know is wrong but we don't know how to fix it, like the `time to adoption` for Boss and Porche?
 
----
+@slidebreak
 {layout="Investigate"}
 # Cleaning Data
 
@@ -117,7 +117,7 @@ Suppose we decided to delete all the rows with blank cells, removing Mona, Rover
 
 Suppose we decided to delete all the rows with weird data, having inconsistent types or units we don't recognize? We could delete Boss and Porche, but how might that bias our analysis? _Removing all the female lizards might affect the kind of food or habitat the shelter needs to buy!_
 
----
+@slidebreak
 {layout="Synthesize"}
 # Cleaning Data
 
@@ -127,7 +127,7 @@ Imagine a dataset about people in your town, which asks about height, religion, 
 2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?{style="font-size:16pt"}
 3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Data Hygiene
 
@@ -137,7 +137,7 @@ A person's height is generally the same as their "wingspan" (the length from fin
 
 Suppose we want to test this for ourselves, by surveying students at a school...
 
----
+@slidebreak
 {layout="Launch"}
 # Data Hygiene
 
@@ -156,7 +156,7 @@ You can also print out a copy of the survey for students to study on paper. It's
 
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Data Hygiene
 
@@ -165,7 +165,7 @@ You can also print out a copy of the survey for students to study on paper. It's
 Most survey tools include advanced options to help Data Scientists get data that is as clean possible. Here's an overview of those tools:
 
 - *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
----
+@slidebreak
 {layout="LaunchR"}
 # Data Hygiene
 
@@ -173,7 +173,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 - **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions B and C might be good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
 
----
+@slidebreak
 {layout="LaunchC"}
 # Data Hygiene
 
@@ -181,7 +181,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 - **Descriptive Instructions** - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Data Hygiene
 
@@ -191,14 +191,14 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 @image{images/validation.png, 600}
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Hygiene
 
 - @link{https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy, Make a copy of the bad survey}, and work in pairs or small groups to fix it!
 - Be ready to share your fixes with the class.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Hygiene
 
@@ -215,7 +215,7 @@ In this project, students come up with a research question and @opt-project{surv
 Finally, this project can also be used to support __original data collection__ for the final research paper.
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 
