@@ -661,5 +661,11 @@ var starterFiles = {
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
     }
+  }, 
+  "logos": {
+    "title": "Logo Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1zAmGO9PfiBFtxUEyiLojmddMIa_EHkhV&v=4d870d2"
+    }
   }
 }
