@@ -245,43 +245,7 @@
       });
     }
 
-    async function makeWorkook(lessons, graph, longworkbook = false) {
-        // collect paths
-        var pageUrls = lessons
-            .map(l => graph[l].pages
-                .filter(p => p !== "")
-                .map(p => "lessons/"+l+"/pages/"+p))
-            .flat()
-            .map(p => p.replace(".adoc", ".pdf"))
-            .map(p => p.replace(" landscape", ""));
 
-        // turn on status DOM, and initialize progress bar
-        const status   = document.getElementById('status');
-        const label    = status.querySelector('label');
-        const progress = status.querySelector('progress');   
-
-        status.style.display = "inline-block";
-        progress.max = pageUrls.length;
-        //console.log(pageUrls)
-
-        function downloadAndCleanup(file, bytes) {
-          label.innerHTML = "Downloading..."
-          download(bytes, pathway + "- Student Workbook.pdf", "application/pdf");
-          status.style.display = "none";
-        }
-
-        makeWorkbook(
-          PDFLib,
-          "Custom Pathway", 
-          pageUrls, 
-          "Custom Pathway", 
-          async (idx, url) => {
-            progress.value = idx + 1;
-            return await fetch(url).then((res) => res.arrayBuffer())
-          }, 
-          async (file, bytes) => await downloadAndCleanup(file, bytes), 
-          longworkbook);
-    }
 
     function makeEditable(node) {
         node.contentEditable = true;
@@ -339,7 +303,7 @@
 
         <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
-            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="makeWorkook(lessons, graph)">Student Workbook</a>. 
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="makeCustomBook(pathway, lessons)">Student Workbook</a>. 
             <p/>
             <span id="status">
                 <label for="file">Assembling Workbook:</label>
