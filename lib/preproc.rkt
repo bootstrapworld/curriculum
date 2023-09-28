@@ -2136,7 +2136,9 @@
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (fprintf o "\n* link:download-lessons-pdf[Download lessons PDF]\n\n")
+            (fprintf o "\n* link:javascript:downloadLessonPDFs()[Download a PDF of all required pages]\n\n")
+
+            (fprintf o "+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
             )
           #:exists 'replace)
