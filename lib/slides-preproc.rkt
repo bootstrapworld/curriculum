@@ -596,7 +596,7 @@
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
                            [(string=? directive "lesson-point")
-                            (let ([text (read-group i directive #:multiline? #t)])
+                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display "**" o)
                               (expand-directives:string->port text o)
                               (display "**{style=\"font-size: 22pt\"}" o))]

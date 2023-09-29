@@ -17,6 +17,9 @@ Here are some directions
 
 @strategy{strategy prose}
 
-@lesson-point{lesson point prose}
+@lesson-point{
+lesson point prose
+}
+
 
 @teacher{teacher prose}
