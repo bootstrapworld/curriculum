@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Absolute Value and Opposite
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Finding Opposites
 
@@ -26,14 +26,14 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 ** _Possible responses: @math{6.5} and @math{-6.5}; @math{4} and @math{-4}; @math{\frac {7}{3}} and @math{- \frac {7}{3}}._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Finding Opposites
 
 The pairs of numbers we've just identified are called @vocab{opposites} - two numbers that are the same distance from zero on the number line, with one negative and one positive.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Finding Opposites
 
@@ -45,7 +45,7 @@ What are some other pairs of opposites that you can identify?
 ** _Possible responses: @math{6.5} and @math{-6.5}; @math{4} and @math{-4}; @math{\frac {7}{3}} and @math{- \frac {7}{3}}._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -53,7 +53,7 @@ Today is an exciting day!
 
 Rather than using an @vocab{operator} at the top of each Circle of Evaluation, we are going to use... @vocab{functions}!
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -61,7 +61,7 @@ Operators always have two inputs and, in standard mathematical notation, they al
 
 Incorporating functions into our Circles of Evaluation will expand their utility. With functions, we can diagram and interpret expressions that include opposites, absolute value, exponents, square roots, Booleans... the list goes on.
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Finding Opposites
 
@@ -75,7 +75,7 @@ What do you think the Circle to the right evaluates to?
 
 @show{(coe '(negate 2))}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Finding Opposites
 
@@ -87,7 +87,7 @@ What happens if we nest a negating Circle of Evaluation _inside of_ another nega
 _The opposite of the opposite of a number is the number itself._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -97,7 +97,7 @@ What do each of these Circles evaluate to?
 
 @image{images/practice.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -106,7 +106,7 @@ Practice applying `negate` on @printable-exercise{pages/true-or-false-negate.ado
 @image{images/true-or-false.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -114,7 +114,7 @@ On @printable-exercise{pages/true-or-false-negate-2.adoc}, explore Circles of Ev
 
 @image{images/true-or-false-2.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding Opposites
 
@@ -131,7 +131,7 @@ In math we want students to read for _comprehension_, not just mechanically soun
 When we encounter a value such as @math{-20}, however, it is confusing and misleading to name that value "minus 5." Subtraction is not happening here - negation is! But if the teacher uses the "symbols in order" wording, it reinforces the lower level of reading comprehension for students.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Finding Opposites
 
@@ -152,7 +152,7 @@ When we encounter a value such as @math{-20}, however, it is confusing and misle
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Absolute Value
 
@@ -165,7 +165,7 @@ What is the distance between these two points on the number line: @math{-8} and 
 Give students a minute to contemplate, and then invite them to verbally share their strategies. Record students' thinking on the board, annotating the number line. All strategies are welcome, with a special interest in any discussion that hones in on the idea of _the distance of a number from zero._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Absolute Value
 
@@ -176,7 +176,7 @@ We annotate absolute value like this: @math{|x|}, with @math{x} being any given 
 When we encounter an expression like @math{|x|}, we say "the absolute value of @math{x}."
 
 
----
+@slidebreak
 {layout="Launch"}
 # Absolute Value
 
@@ -185,7 +185,7 @@ Because _opposites_ are the same distance away from zero, they will always have 
 So, @math{|4| = 4} and @math{|-4| = 4}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Absolute Value
 
@@ -195,7 +195,7 @@ It can be used like any other operator that we put at the top of a Circle of Eva
 
 As with `negate`, when we use `abs`, we include just one argument inside the Circle of Evaluation.
 
----
+@slidebreak
 {layout="Investigate"}
 # Absolute Value
 
@@ -205,7 +205,7 @@ What does each of the Circles below evaluate to?
 
 @image{images/practice2.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Absolute Value
 
@@ -213,7 +213,7 @@ What does each of the Circles below evaluate to?
 - On the bottom half of the page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Absolute Value
 
@@ -222,7 +222,7 @@ Examine the Circles of Evaluation to determine @printable-exercise{pages/wodb-ab
 @image{images/wodb.png}
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Absolute Value
 

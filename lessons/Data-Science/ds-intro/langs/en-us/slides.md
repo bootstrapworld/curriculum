@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 
 # Introduction to Data Science
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Questions that Matter
 
@@ -21,7 +21,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 
 2. We recommend posting these questions around the room, and having students physically move to the question they care about. 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Questions that Matter
 
@@ -35,7 +35,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 <!--
 Students are VERY likely to try and explain their reasoning when they give their gut answers. This can taint the answers of other students in the group - emphasize that this is about exposing our "gut reaction" or bias.
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Questions that Matter
 
@@ -50,7 +50,7 @@ _Take 5 minutes to think about what information you would need to collect, to fi
 Common Misconception: Students may lean towards questions about _individuals_, instead of questions about what's true for a _group of individuals_ who vary from one to another. For example, instead of wondering what movie gets the highest rating, they should ask what's the typical rating for movies in a list, or how much those ratings tend to vary.
 
 -->
----
+@slidebreak
 {layout="SynthesizeR"}
 # Questions that Matter
 
@@ -67,7 +67,7 @@ Share back!
 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Questions that Matter
 
@@ -81,7 +81,7 @@ Share back!
 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Questions that Matter
 
@@ -94,7 +94,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Meet the Animals!
 
@@ -108,7 +108,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 <!--
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Meet the Animals!
 
@@ -122,7 +122,7 @@ Sometimes, looking at data sparks questions.
 <!--
 Have students share back their noticings (statements) and wonderings (questions), and write them on the board.
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Meet the Animals!
 
@@ -133,7 +133,7 @@ Have students share back their noticings (statements) and wonderings (questions)
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Meet the Animals!
 
@@ -146,7 +146,7 @@ Sometimes it can be tricky to figure out if data is categorical or quantitative,
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Meet the Animals!
 
@@ -164,7 +164,7 @@ Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to
 * “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
 * We couldn’t ask if “cat is more than lizard” and it doesn’t make sense to "find the average ZIP code” in a list of addresses.
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Meet the Animals!
 
@@ -178,7 +178,7 @@ Still, if we took the average age of the animals from this particular shelter, i
 
 -->
 
----
+@slidebreak
 @ifproglang{pyret}{
 
 {layout="LaunchR"}
@@ -192,7 +192,7 @@ Still, if we took the average age of the animals from this particular shelter, i
 <!--
 Students will need to use a valid Google credential to log in. They can use school accounts, personal accounts, YouTube accounts, etc. Some teachers create a single account for the whole class to share.
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Meet Pyret!
 
@@ -205,7 +205,7 @@ Students will need to use a valid Google credential to log in. They can use scho
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Meet Pyret!
 
@@ -246,7 +246,7 @@ end
 The first line (starting with `#`) is called a _Comment_. Comments are notes for humans, which the computer ignores. The next line defines a new table called `animals-table`, which is loaded from the `shelter-sheet` defined above. We also create names for the columns: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Meet Pyret!
 
@@ -256,7 +256,7 @@ The first row is called the @vocab{header row}, which gives a unique name to eac
 
 The first column in the table is the @vocab{identifier column}, which contains a unique ID for each row. Often, this will be the name of each individual in the table, or sometimes just an ID number.
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Meet Pyret!
 
@@ -277,7 +277,7 @@ Each data row has values for every column variable (nothing can be left empty!).
 - Try changing the name of one of the columns, and click "Run". What happens when you try to  out the table?
 - What happens if you remove a column from the list? Or add an extra one?
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 

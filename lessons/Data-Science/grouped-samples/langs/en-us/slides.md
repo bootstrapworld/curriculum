@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Grouped Samples
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchC"}
 # Problems with a Single Population
 @image{images/scatter-plot.png,550}
@@ -15,7 +15,7 @@ When looking at a scatter plot of animals, it looks like the amount an animal we
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchC"}
 # Problems with a Single Population
 
@@ -26,7 +26,7 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 <!--
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Problems with a Single Population
 
@@ -49,7 +49,7 @@ Sample responses:
 ** _Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population._
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problems with a Single Population
 
@@ -67,7 +67,7 @@ Sample responses:
 ** _If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!_
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Grouped Samples
 
@@ -75,7 +75,7 @@ Depending on the question we're asking, sometimes it makes more sense to ask abo
 
 **Averaging every animal together will give us an answer, but they may not be _useful_ answers.**
 
----
+@slidebreak
 {layout="Launch"}
 # Grouped Samples
 
@@ -85,7 +85,7 @@ Data Scientists define @vocab{grouped samples} of datasets, breaking them up int
 
 @ifproglang{pyret}{
 
----
+@slidebreak
 {layout="Launch"}
 # Grouped Samples
 
@@ -97,7 +97,7 @@ Earlier, you learned how to define values in Pyret. We can define Numbers, Strin
   sasha= row-n(animals-table, 0)
 ```
 Let's use this skill to define _Tables..._
----
+@slidebreak
 {layout="Launch"}
 # Grouped Samples
 
@@ -110,7 +110,7 @@ The `filter` function walks across each row in the table, and passes it to the `
 Finally, we define the name `dogs` to be the table produced by `filter`.{style="font-size:16pt"}
 
 }
----
+@slidebreak
 {layout="Investigate"}
 # Grouped Samples
 
@@ -129,14 +129,14 @@ A “kitten” is an animal who _is a cat_ and who _is young_. **How would you d
 * In the starter file, scroll to the bottom of the Definitions Area. Add your solutions from @printable-exercise{pages/samples-from-animals-dataset.adoc}. Test them out!
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Grouped Samples
 * How could we make a bar chart showing the distribution of `sex` in the `kittens` sample?
 * How could we filter _and_ sort a table?
 * How can we combine functions?
 
----
+@slidebreak
 {layout="Launch"}
 # Displaying Samples
 
@@ -144,7 +144,7 @@ Making grouped and random samples is a powerful skill, which allows us to dig de
 
 **Now that we know how to make subsets, we can make much more sophisticated displays!**
 
----
+@slidebreak
 {layout="LaunchR"}
 # Displaying Samples
 
@@ -156,7 +156,7 @@ Let's use the Data Cycle to get an answer, using our knowledge of grouped sample
 
 _Starting off: Is this a lookup, arithmetic, or statistical question?_
 
----
+@slidebreak
 {layout="LaunchR"}
 # Displaying Samples
 
@@ -171,7 +171,7 @@ _Next: What rows do we need? What columns?_
 Have students discuss their answers
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Displaying Samples
 
@@ -186,7 +186,7 @@ _Next: What kind of table or display are we building?_
 <!--
 Have students discuss their answers
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Displaying Samples
 
@@ -201,7 +201,7 @@ _Next: What did our displays tell us?_
 <!--
 Have students discuss their answers
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Displaying Samples
 
@@ -213,7 +213,7 @@ In this case, we found out exactly how many fixed v. unfixed cats there are. But
 
 We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
----
+@slidebreak
 {layout="Investigate"}
 # Displaying Samples
 
@@ -222,7 +222,7 @@ We might have _new_ questions about whether a higher percentage of dogs are spay
 
 @ifproglang{pyret}{
 
----
+@slidebreak
 {layout="Investigate"}
 # Your Own Dataset
 
@@ -231,14 +231,14 @@ If you are working on your own dataset, use @printable-exercise{samples-from-my-
 Blank Design Recipes are also available @opt-printable-exercise{design-recipe-helper-funs.adoc, here}.
 
 }
----
+@slidebreak
 {layout="Synthesize"}
 # Displaying Samples
 
 - What connections do you see between the "Consider Data" and "Analyze Data" steps?
 - How do we know when we need to filter? How do we know when we _don't?_
 
----
+@slidebreak
 {layout="Synthesize"}
 # Your Analysis
 

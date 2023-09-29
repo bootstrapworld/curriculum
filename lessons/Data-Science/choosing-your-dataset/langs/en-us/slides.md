@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 
 # Choosing Your Dataset
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Review
 
@@ -16,7 +16,7 @@ Complete @printable-exercise{consider-and-analyze.adoc}.
 <!--
 Be sure to review student answers!
 -->
----
+@slidebreak
 {layout="Launch"}
 # Choosing a Dataset
 
@@ -31,7 +31,7 @@ We live in a world filled with data, gathered about almost every subject you can
 @teacher{
 Note: *If you are opting to focus your whole class on a single dataset, we recommend skipping this section of the lesson.* _You'll instead want to jump to "Dataset Exploration Project.")_
 }
----
+@slidebreak
 {layout="Launch"}
 # Choosing a Dataset
 
@@ -43,7 +43,7 @@ This data is used to set public policy, draw voting districts, approve drugs, ca
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Choosing a Dataset
 
@@ -63,13 +63,13 @@ For teachers using a single dataset, we recommend using @opt-starter-file{food}.
 
 **NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
 }
----
+@slidebreak
 {layout="Investigate"}
 # Choosing a Dataset
 
 * Look at the spreadsheet for your dataset. What do you *Notice*? What do you *Wonder*?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Choosing a Dataset
 
@@ -78,13 +78,13 @@ For teachers using a single dataset, we recommend using @opt-starter-file{food}.
 
 For the rest of this course, you'll be learning new programming and @vocab{Data Science} skills, practicing them with the Animals Dataset and then applying them to you own data.
 
----
+@slidebreak
 {layout="Launch"}
 # Exploring Your Dataset
 
 Today, we are going to start digging into the datasets we've chosen to study at length. Each time we learn about a new data science concept in this class, we will add displays, questions, and analyses to the @starter-file{exploration-project} template.
 
----
+@slidebreak
 {layout="Launch"}
 # Exploring Your Dataset
 
@@ -101,7 +101,7 @@ Encourage students to familiarize themselves with the template, highlighting som
 - Slides can be duplicated if students want to add additional displays or interpretations.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Your Dataset 
 
@@ -109,7 +109,7 @@ By now you've already learned what to do when you approach a new dataset. Think 
 
 Now, you're doing to do the same thing _with your own dataset._
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Your Dataset 
 
@@ -118,7 +118,7 @@ Now, you're doing to do the same thing _with your own dataset._
 - Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
 * Save a copy of your starter file. In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Your Dataset 
 
@@ -131,7 +131,7 @@ Today we will begin adding to our @starter-file{exploration-project}. First, we 
 Ensure that students have thoughtfully described their datasets. Then, explain that they are going to add  bar and pie charts, along with their interpretations of them.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Your Dataset
 
@@ -145,7 +145,7 @@ Ensure that students have thoughtfully described their datasets. Then, explain t
 Once students have at least one bar and pie chart, it's time to add their findings to the @starter-file{exploration-project}.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploring Your Dataset
 
@@ -155,7 +155,7 @@ Copy/paste at least one bar chart and one pie chart into your slide deck. Be sur
 _You may need to help students locate the “Bar Charts” section and the “Pie Charts” section. The “My Questions” slide is at the end of the template._
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploring Your Dataset 
 

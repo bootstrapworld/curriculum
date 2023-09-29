@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Surface Area of a Rectangular Prism{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Surface Area
 
@@ -14,7 +14,7 @@ Turn to @printable-exercise{prism-explore.adoc}.
 - What do you picture in your mind when you hear @vocab{rectangular prism}?
 - What do you picture in your mind when you hear @vocab{surface area}?
 
----
+@slidebreak
 {layout="LaunchR"}
 # Surface Area
 
@@ -23,7 +23,7 @@ Now, open the @starter-file{prism} in a new tab, save a copy, and click "Run".
 Type `prism` into the Interactions Area to see an image of a rectangular prism. What do you notice about the prism? 
 @image{images/prism.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Surface Area
 
@@ -31,7 +31,7 @@ Type `prism` into the Interactions Area to see an image of a rectangular prism. 
 - *Edges* are the line segments where the faces meet in each of the three dimensions. 
 - The *surface area* of a prism is calculated by adding the areas of its faces. 
 
----
+@slidebreak
 {layout="Launch"}
 # Surface Area
 
@@ -43,7 +43,7 @@ Type `prism` into the Interactions Area to see an image of a rectangular prism. 
 - Write definitions for each of the other faces of the prism!
 - Click "Run" and test each of them in the Interactions Area to make sure that they match the prism you started with.
 
----
+@slidebreak
 {layout="Launch"}
 # Surface Area
 
@@ -59,7 +59,7 @@ _This list will include all of the faces of the prism, but right now it only inc
 @ifproglang{pyret}{(Order doesn't matter - but be sure to put commas in between list items, and do not use the word “and”.)}{style="font-size:12pt"}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Surface Area
 
@@ -71,7 +71,7 @@ _This list will include all of the faces of the prism, but right now it only inc
 - Now, read the comments in PART 3 of the file to learn how to print the faces to build your prism.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Surface Area
 
@@ -85,7 +85,7 @@ _This list will include all of the faces of the prism, but right now it only inc
 Labeling the shapes with face names and/or area before taping them together may be helpful for some students. Printing two copies of the file (one to cut and one to write on) might also be useful!
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Surface Area
 

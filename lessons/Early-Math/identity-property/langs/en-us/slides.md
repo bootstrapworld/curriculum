@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Identity Property
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Identity Property
 
@@ -21,7 +21,7 @@ What do you Notice? What do you Wonder?
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Identity Property
 
@@ -34,14 +34,14 @@ Possible responses: I can multiply or divide by 1 	 and get an equivalent result
 and get an equivalent result. I need to remember that Commutativity does not apply for division and subtraction!
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Identity Property
 
 Multiplying or dividing an expression by 1 does not change its value; similarly, adding or subtracting 0 results in the original value.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property
 
@@ -51,7 +51,7 @@ How does the Circle of Evaluation below illustrate the Identity Property?
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property
 
@@ -65,7 +65,7 @@ How is the Identity Property at play when we find an equivalent fraction?
 When we find equivalent fractions, we _multiply by one_!In the example above, @math{\frac{3}{4}} was multiplied by @math{\frac{5}{5}} to get @math{\frac{15}{20}}.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property
 
@@ -73,7 +73,7 @@ Complete @printable-exercise{pages/identity-prop-table.adoc}, filling in the bla
 
 @image{images/identity-prop-table.png,800}
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property
 
@@ -86,7 +86,7 @@ Then, examine these Circles of Evaluation to decide @printable-exercise{pages/wh
 As students explain why various Circles of Evaluation do not belong with the others, encourage them to practice using vocabulary that they have encountered already. For instance, @math{12} is _not_ equal to @math{0 - 12} because __the Commutative Property only holds for addition__. Although this example illustrates misuse of the Identity Propery (we can subtract zero from twelve, but not twelve from zero!), thinking about the Commutative Property can help students recognize what is going on.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Identity Property
 
@@ -100,7 +100,7 @@ As students explain why various Circles of Evaluation do not belong with the oth
 ** _Yes! The Identity Property can be used in combination with the other properties we've discussed to create equivalent Circles._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Identity Property and Variables
 
@@ -109,7 +109,7 @@ We can represent the Identity Property with variables, in the same way that we c
 @image{images/identityprop1.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Identity Property and Variables
 
@@ -117,7 +117,7 @@ Or like this:
 
 @image{images/identityprop2.png}
 
----
+@slidebreak
 {layout="Launch"}
 # The Identity Property and Variables
 
@@ -125,7 +125,7 @@ The Identity Property will hold no matter what values we substitute in for @math
 
 The Identity Property lets us prove that these expressions are equivalent even with variables.
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property and Variables
 
@@ -137,7 +137,7 @@ Complete @printable-exercise{pages/true-or-false-variables.adoc} using your know
 If students would like, they may choose values to represent the variables. Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property and Variables
 
@@ -146,7 +146,7 @@ Examine the Circles of Evaluation to decide @printable-exercise{pages/which-one-
 @image{images/wodb-variables.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Identity Property and Variables
 
@@ -156,7 +156,7 @@ Now try @printable-exercise{pages/true-or-false-variables-challenge.adoc}.
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Identity Property and Variables
 

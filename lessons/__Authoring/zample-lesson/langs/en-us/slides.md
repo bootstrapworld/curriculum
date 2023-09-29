@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Launch"}
 # Q and A
 
@@ -12,3 +12,11 @@ Here are some directions
 @A{Nougat}
 @A{Chocolate}
 }
+
+@slidebreak
+
+@strategy{strategy prose}
+
+@lesson-point{lesson point prose}
+
+@teacher{teacher prose}

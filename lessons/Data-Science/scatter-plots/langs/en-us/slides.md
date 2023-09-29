@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Scatter Plots
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Making Scatter Plots
 
@@ -18,7 +18,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Making Scatter Plots
 
@@ -29,7 +29,7 @@ Scatter plots reveal the relationship between two columns by plotting one on the
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Making Scatter Plots
 
@@ -42,7 +42,7 @@ The first one makes sense, and reflects our suspicion that age plays a role in a
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Making Scatter Plots
 
@@ -53,7 +53,7 @@ Complete @printable-exercise{pages/creating-scatterplot.adoc}, to get a feel for
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Making Scatter Plots
 
@@ -66,7 +66,7 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate-DN"}
 # Making Scatter Plots
 
@@ -82,7 +82,7 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 ** _It appears that younger animals get adopted more quickly._
 
 }
----
+@slidebreak
 {layout="SynthesizeR"}
 # Making Scatter Plots
 
@@ -101,7 +101,7 @@ Suppose we plotted the age and adoption ime of four random animals, and found th
 }
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Data Cycle
 
@@ -111,7 +111,7 @@ Many apartment buildings do not allow large breeds of dogs, and have a limit on 
 
 _Perhaps the **weight** of an animal influences the adoption time!_
 
----
+@slidebreak
 {layout="Launch"}
 # The Data Cycle
 
@@ -119,7 +119,7 @@ Take a look at the animals dataset, either in your workbook or on the @link{http
 
 Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # The Data Cycle
 
@@ -134,13 +134,12 @@ Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-pl
 Pose these questions to the whole class, and debrief as a large group.
 }
 
----
 {layout="Investigate-DN"}
 # The Data Cycle
 
 Write your follow-up question in the second Data Cycle on @printable-exercise{pages/data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Data Cycle
 
@@ -148,7 +147,7 @@ There are many ways to visualize or reason about single columns of data, but sca
 
 - What new questions did the Data Cycle lead you to ask? What did you find?
 
----
+@slidebreak
 {layout="LaunchC"}
 # Looking for Trends
 
@@ -156,7 +155,7 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 
 @center{@image{images/pounds-v-weeks.png}}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Looking for Trends
 
@@ -175,7 +174,7 @@ There are many ways to visualize or reason about single columns of data, but sca
 
 A straight-line pattern in the cloud of points suggests a linear relationship between two columns. If we can find a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Trends
 
@@ -183,7 +182,7 @@ Do any data points seem unusually far away from the main cloud of points? Which 
 
 These points are called *unusual observations*. Unusual observations in a scatter plot are like outliers in a histogram, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Trends
 
@@ -191,7 +190,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 - Sometimes they’re _just random_. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Trends
 
@@ -199,7 +198,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 - Sometimes they can give you a _deeper insight_ into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Trends
 
@@ -207,7 +206,7 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 - Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Looking for Trends
 
@@ -221,7 +220,7 @@ These numbers and scatter plot come from different datasets. The patterns in the
 This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Trends
 
@@ -229,7 +228,7 @@ This animation is from Autodesk, which has an amazing page showing off how simil
 
 Until we really look at the _shape_ of the data, we aren't seeing the whole picture. 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Looking for Trends
 
@@ -245,7 +244,8 @@ For practice, consider each of the following relationships. First think about wh
 All of these are phrased as "how is the _explanatory variable_ related to the _response variable_"
 }
 
----
+@slidebreak
+>>>>>>> master
 {layout="Synthesize"}
 # Looking for Trends
 
@@ -257,13 +257,14 @@ Why does that matter?
 Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
 }
 
----
+@slidebreak
+
 {layout="Synthesize"}
 # Looking for Trends
 
 A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
 
----
+@slidebreak
 {layout="Synthesize"}
 # Looking for Trends
 
@@ -273,12 +274,12 @@ A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully
 
 This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet!
 
-
 @teacher{
 There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
 }
 
----
+@slidebreak
+
 {layout="Launch"}
 # Data Exploration Project (Scatter Plots) 
 
@@ -293,7 +294,8 @@ Let’s review what we have learned about making and interpreting scatter plots.
 - What do scatter plots show us about a dataset?
 ** _Scatter plots allow us to look for relationships between two columns of dataset._
 }
----
+
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Scatter Plots) 
 
@@ -310,7 +312,7 @@ Let’s connect what we know about scatter plots to your chosen dataset.
 ** _Possible response: What is the relationship between column A and column B of my dataset?_
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Scatter Plots) 
 
@@ -321,7 +323,7 @@ Let’s connect what we know about scatter plots to your chosen dataset.
 Confirm that all students have created and understand how to interpret their scatter plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Scatter Plots) 
 
@@ -336,7 +338,7 @@ Confirm that all students have created and understand how to interpret their sca
 ** _You may need to help students locate the “Scatter plot” slide in the "Making Displays" section. They will need to duplicate the slide to add their second display. The “My Questions” section is at the end of the slide deck._
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Scatter Plots) 
 

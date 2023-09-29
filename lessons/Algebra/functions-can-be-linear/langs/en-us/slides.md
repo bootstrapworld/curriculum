@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Functions Can Be Linear
 
@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 * __Linear functions can be represented as straight lines on a graph or as sequences that change at a constant rate in a table.__
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
@@ -26,7 +26,7 @@ Although answers will vary, important observations include:
 - the points on the graph are connected by a straight line.
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Simple Sequences and Straight Lines
 
@@ -46,7 +46,7 @@ _Be sure that students have noticed that:_
 - _the points on the graph are connected by a straight line_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Simple Sequences and Straight Lines
 
@@ -54,7 +54,7 @@ We can think of the "x" column as counting the __order in which the y-values app
 
 *Linear Relationships* are sequences that change at a constant rate, or points forming a straight line on a graph.
 
----
+@slidebreak
 {layout="Launch"}
 # Simple Sequences and Straight Lines
 
@@ -62,7 +62,7 @@ We can think of the "x" column as counting the __order in which the y-values app
 
 The line representing the @vocab{linear} relationship would not only include the points represented in the table, but also **all of the coordinate pairs that satisfy the same rule**, including lots of points whose x and y values are fractions and decimals.
 
----
+@slidebreak
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
@@ -71,7 +71,7 @@ Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exer
 @optional If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
@@ -80,7 +80,7 @@ Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exer
 The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
 they preserve their meaning if the rows are shuffled into a different order.
 
----
+@slidebreak
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
@@ -95,7 +95,7 @@ We can stretch the _scale_ of the axes to making the lines _look_ different, but
 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Simple Sequences and Straight Lines
 
@@ -105,7 +105,7 @@ Tables only show us _some points_ on a line, whereas a line itself is made up of
 
 While a table represents a _sample_ of some larger trend, the graph is a way of seeing the trend itself.
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -117,7 +117,7 @@ If all linear relationships can be shown as points on a graph, does that mean al
 Continue to the next slide where students will have access to a page to record their thinking.
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -127,7 +127,7 @@ Turn to @printable-exercise{graphs-all-linear.adoc}.
 
 What do you Notice? What do you Wonder? 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -136,7 +136,7 @@ Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vo
 @image{images/set-of-6-graphs.png}{width="700"}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -144,7 +144,7 @@ Three of the graphs on @printable-exercise{graphs-all-linear.adoc} represent @vo
 
 @image{images/set-of-6-tables.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Linear, Nonlinear, or Bust!
 
@@ -156,7 +156,7 @@ The other tables may show patterns, but they aren’t linear!
 
 Complete @printable-exercise{tables-all-linear.adoc}.
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -167,7 +167,7 @@ Three of the tables show linear relationships, and three show nonlinear relation
 
 @image{images/set-of-6-tables.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Linear, Nonlinear, or Bust!
 
@@ -175,7 +175,7 @@ Sometimes there is _no function_ that will give us a particular table or graph! 
 
 @image{images/table-and-dot-plot.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Linear, Nonlinear, or Bust!
 
@@ -187,13 +187,13 @@ Complete:
 - @optional @opt-printable-exercise{linear-nonlinear-bust-graphs.adoc}
 - @optional @opt-printable-exercise{linear-nonlinear-bust-graphs-2.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Linear, Nonlinear, or Bust!
 
 Data has a "shape", and this shape can emerge when we look for patterns in that data. A @vocab{linear} function is one kind of pattern, and we can see it when viewing data as a table or a graph.
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -203,7 +203,7 @@ Every linear relationship has two properties:
 
 2) The y-value when @math{x = 0} is called the @vocab{y-intercept}.
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -222,13 +222,13 @@ Turn to @printable-exercise{slope-int-tables-intro.adoc}
 * _The @vocab{y-intercept} is 1._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
 Complete @printable-exercise{slope-int-tables-basic.adoc} for more practice before we move on to more complicated tables.
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -244,7 +244,7 @@ Life isn't always so simple!
 - What if we only had a few random rows, for @math{x = 3} and @math{x = 1}?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -256,13 +256,13 @@ Try extending the table (#2 on @printable-exercise{slope-int-tables-intro.adoc})
 
 What strategies did you use to extend the table?
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
 You can find the y-intercept by expanding the table and following the pattern to figure out the value of @math{y} when @math{x = 0}, but sometimes that's a lot of work! How might we compute the slope and y-intercept, using only two rows in the table?
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -273,7 +273,7 @@ This is an easy way to see the change in y __as a proportion__ of the change in 
 This is often described as  @math{\frac{ChangeInY}{ChangeInX}} or @math{\frac{rise}{run}}.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Slope and y-Intercept from Tables
 
@@ -289,13 +289,13 @@ __Order matters!__ Whatever order we subtracted the y-values in must be the same
 * Are there other strategies we could have used to find the slope?{style="font-size:14pt"}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Slope and y-Intercept from Tables
 
 Let's get some practice identifying the slope of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Slope and y-Intercept from Tables
 
@@ -303,7 +303,7 @@ Let's get some practice identifying the slope of a linear function in a table by
 
 For example: If we know a car is moving at a consistent speed, all we need to know is __where it is located at two points in time__ in order to figure out the speed, and to predict where it will be at any other point during its trip!
 
----
+@slidebreak
 {layout="LaunchC"}
 # Slope and y-Intercept from Graphs
 
@@ -311,7 +311,7 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 
 @image{images/y-intercept-graphs.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Slope and y-Intercept from Graphs
 
@@ -320,7 +320,7 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 @image{images/slope-graphs.png}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Slope and y-Intercept from Graphs
 
@@ -328,7 +328,7 @@ We can compute the slope from a graph the same way we would with a table, by pic
 
 @image{images/slope-2-points.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Slope and y-Intercept from Graphs
 
@@ -340,7 +340,7 @@ If you have time, check out:
 - @opt-starter-file{exploring-linearity-in-graphs} to think about linearity, positive/negative/zero slopes and y-intercepts from interactive graphs
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Slope and y-Intercept from Graphs
 
@@ -350,7 +350,7 @@ We have learned how to find @vocab{slope} and @vocab{y-intercept} from tables an
 * Which representation do you feel more confident finding the y-intercept from? Why?
 Looking ahead, we will be learning about yet another representation of Linear Functions that you might find to be even more flexible and powerful.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Slope and y-Intercept from Graphs
 

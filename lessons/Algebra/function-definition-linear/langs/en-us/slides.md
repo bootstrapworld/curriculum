@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Defining Linear Functions
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Linear Functions
 
@@ -14,7 +14,7 @@ A *function definition* is a way of summarizing a relationship. You've seen how 
 
 Linear functions are defined by their slope and y-intercept.
 
----
+@slidebreak
 {layout="LaunchC"}
 # Defining Linear Functions
 
@@ -24,7 +24,7 @@ The *slope-intercept form of the line* includes the slope as the coefficient of 
 
 @image{images/slope-and-y.png}{style="font-size:15pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Linear Functions
 
@@ -35,7 +35,7 @@ The *slope-intercept form of the line* includes the slope as the coefficient of 
 
 While it is common to write the x-term first and the y-intercept second, they can be written in any order!
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Linear Functions
 
@@ -45,7 +45,7 @@ While it is common to write the x-term first and the y-intercept second, they ca
 
 When the slope is zero (and the line is horizontal)... we may choose whether or not to write the slope term.
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Linear Functions
 
@@ -55,7 +55,7 @@ When the slope is zero (and the line is horizontal)... we may choose whether or 
 
 When the y-intercept is @math{0} (and the line crosses the y-axis at the origin)... we may choose whether or not to write the slope term.
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Linear Functions
 
@@ -63,7 +63,7 @@ To check our work, we can apply the function to the x-value from any @vocab{coor
 
 As with tables and graphs, a function definition can also reveal whether or not the function is linear. Functions that are not linear will follow other forms, for example they may include exponents or absolute values.
 
----
+@slidebreak
 {layout="Investigate"}
 # Defining Linear Functions
 
@@ -81,7 +81,7 @@ _Students can identify slope and y-intercept from functions in Pyret as well, us
 }
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Defining Linear Functions
 
@@ -97,7 +97,7 @@ For more practice:
 
 What strategies did you use?
 
----
+@slidebreak
 {layout="Investigate"}
 # Defining Linear Functions
 
@@ -114,7 +114,7 @@ _Students can also practice defining linear functions when given tables and grap
 }
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Defining Linear Functions
 
@@ -129,7 +129,7 @@ What strategies did you use?
 Common misconception: It is common to think of the graph as the "output" of the function, rather than the function itself. Most math textbooks will use language like "matching the graph to the function", suggesting that the graph is somehow not the function! Since this language is pervasive, it's important to actively push against it.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Defining Linear Functions
 
@@ -139,7 +139,7 @@ Function definitions are a way of talking about relationships between quantities
 * a stone falls at @math{9.8m/s^2}
 * there are 30 students for every teacher at a certain school
 
----
+@slidebreak
 {layout="Synthesize"}
 # Defining Linear Functions
 
@@ -147,7 +147,7 @@ If we can figure out the relationship between a small sample of data, we can __m
 
 When we talk about functions, it's helpful to be able to switch between representations, and see the connections between them.
 
----
+@slidebreak
 {layout="Launch"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -167,7 +167,7 @@ Consider the function @math{f(x) = 3x}.
 * What is the y-value when x = 2? _6_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -179,7 +179,7 @@ Anytime the y-intercept is 0, we can multiply any x-value by the slope to get it
 
 But if the y-intercept isn't zero... there is another step to finding the y-value.
 
----
+@slidebreak
 {layout="Launch"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -199,7 +199,7 @@ Consider the function @math{f(x) = 3x - 2}.
 * What is the y-value when x = 2? _4. Two less than the y-value for @math{x=3} in the previous function, where the y-intercept was 0._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -209,7 +209,7 @@ Consider the function @math{f(x) = 3x - 2}.
 
 The y-intercept always gets added to / subtracted from the product of the slope and the x-value to find the corresponding y-value.
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -225,7 +225,7 @@ If we solve that for the y-intercept...
 
 In other words, _the y-intercept can be calculated by subtracting the product of the slope and any x-value from the corresponding y-value._
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"}
 
@@ -247,7 +247,7 @@ We can now use the slope and y-intercept to write our function definition:{style
 
 * @math{f(x) = 3x - 12}{style="font-size:14pt"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Finding the y-intercept from the Slope and a Point{style="font-size:20pt"} 
 
@@ -267,7 +267,7 @@ Consider the table below.
 * Do you get the same y-intercept if you use another pair? _Yes._
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Defining Linear Functions
 

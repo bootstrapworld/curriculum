@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Simple Inequalities
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchC"}
 # Introducing Booleans 
 
@@ -14,7 +14,7 @@ Convert these Circles of Evaluation into code. Then, log into @starter-file{edit
 @image{images/set-of-coes1.png}{width="550"}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Introducing Booleans 
 
@@ -22,7 +22,7 @@ Hypothesize: What do these Circles of Evaluation mean? What do they evaluate to?
 
 @image{images/set-of-coes2.png}{width="750"}
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Booleans 
 
@@ -30,7 +30,7 @@ Values like `true` and `false` obviously aren't Numbers or Images. But they also
 
 We've found a __new data type__, called a @vocab{Boolean}.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Introducing Booleans
 
@@ -39,7 +39,7 @@ We've found a __new data type__, called a @vocab{Boolean}.
 * All five functions produce @vocab{Booleans}. 
 * Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Introducing Booleans 
 
@@ -55,7 +55,7 @@ Common Misconceptions
 - Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this in advance, by explaining that our Boolean-producing functions _should sometimes return false_.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Inequalities
 
@@ -70,7 +70,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Introducing Inequalities
 
@@ -82,7 +82,7 @@ Inequality expressions divide all of the numbers in the universe into two catego
 Sample Graph for discussion on next slide
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Introducing Inequalities
 
@@ -105,7 +105,7 @@ Students might observe the following:
 ** red _when they are non-solutions_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Inequalities
 
@@ -117,7 +117,7 @@ Students might observe the following:
 Sample Graph for discussion on next slide
 -->
 	
----
+@slidebreak
 {layout="LaunchC"}
 # Introducing Inequalities
 
@@ -131,7 +131,7 @@ A successful input in this starter file will include 4 solutions and 4 non-solut
 When you modify the list of numbers, you will see that there are now 5 red dots and 4 green dots - along with a message that says, _"Challenge yourself: Find 4 true examples and 4 false"_.
 -->	
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Introducing Inequalities
 
@@ -139,13 +139,13 @@ When you modify the list of numbers, you will see that there are now 5 red dots 
 - For each inequality, find 4 solutions and 4 non-solutions.
 - Try using negatives, positives, fractions and decimals as you generate your lists.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Introducing Inequalities
 
 What patterns did you observe in how the inequalities worked?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

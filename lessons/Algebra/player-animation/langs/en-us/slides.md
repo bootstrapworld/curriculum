@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Player Animation
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch-DN"}
 # Defining Piecewise Functions 
 
@@ -13,14 +13,14 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to refresh your memory on how they work.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Piecewise Functions
 
 - What controlled the speed of your characters?
 - What controlled the _direction_ of your characters?
 
----
+@slidebreak
 {layout="Launch"}
 # Defining Piecewise Functions
 
@@ -28,7 +28,7 @@ If we wanted our `PLAYER` to go up all the time, we would already know how to do
 
 **Do we know how to make a function behave differently, based on its input?**
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Defining Piecewise Functions
 
@@ -47,7 +47,7 @@ _Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when 
 _When the user presses the "up" key, the y-coordinate should increase, the program should add something to it_
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Defining Piecewise Functions
 
@@ -60,7 +60,7 @@ Complete @printable-exercise{pages/update-player.adoc} with a partner, then type
 Students often think of this function as returning a _relative distance_ (e.g. "it adds 20"), instead of an absolute coordinate (e.g. "the new y-coordinate is the old y plus 20")
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Defining Piecewise Functions
 
@@ -69,7 +69,7 @@ Students often think of this function as returning a _relative distance_ (e.g. "
 - How could we change this function so that the "W" key makes the player go up, _in addition to_ the arrow key?
 - Suppose your little brother or sister walks by and hits a random key. What should happen if you hit a random key that doesn’t have a meaning in your function? What happens now?
 
----
+@slidebreak
 {layout="Launch"}
 # Cheat Codes and Customizations 
 
@@ -81,7 +81,7 @@ Reminder: Use `#` to add comments to code!
 }
 Adding useful comments to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Cheat Codes and Customizations 
 
@@ -98,14 +98,14 @@ Complete at least one of the @printable-exercise{pages/challenges.adoc} before t
 It's likely that once they hear other students' ideas, they will want more time to try them out. If time allows, give students additional _slices_ of "hacking time", bringing them back to share each other's ideas and solutions before sending them off to program some more. This dramatically ramps up the creativity and engagement in the classroom, giving better results than having one long stretch of programming time.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Cheat Codes and Customizations 
 
 * What would it take to make the player move left and right? 
 * Why can't we do this without changing the Contract?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Optional Extensions...
 

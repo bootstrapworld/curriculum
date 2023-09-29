@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Multiplicative Inverse Property
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Multiplicative Inverse Property
  
@@ -13,7 +13,7 @@ We know that the Commutative and Associative Properties apply to multiplication.
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Multiplicative Inverse Property
 
@@ -23,7 +23,7 @@ I'm going to write a number in the left-hand column. You are going to tell me wh
 
 @image{images/table.png}
 
----
+@slidebreak
 {layout="Launch"}
 # The Multiplicative Inverse Property
 
@@ -37,14 +37,14 @@ I'm going to write a number in the left-hand column. You are going to tell me wh
 ** _Allow a variety of students to share. Record responses on the table._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Multiplicative Inverse Property
 
 These number pairs all represent @vocab{reciprocals}. The reciprocal of a real number @math{n} is @math{\frac{1}{n}}. These number pairs are also illustrative of the @vocab{Multiplicative Inverse Property}: when we multiply them together, we always end up with a product of @math{1}.
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Multiplicative Inverse Property
 
@@ -53,7 +53,7 @@ The @vocab{Multiplicative Inverse Property} tells us that multiplying a number b
 Every number, except zero, has a multiplicative inverse.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Multiplicative Inverse Property
 
@@ -61,7 +61,7 @@ Every number, except zero, has a multiplicative inverse.
 - In the first section, practice finding reciprocals and write them in the space provided.
 - Then, fill in the missing number to complete the equations. Some equations use mathematical notation and some use Circles of Evaluation.
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Multiplicative Inverse Property
 
@@ -69,7 +69,7 @@ Every number, except zero, has a multiplicative inverse.
 - How would you explain the Multiplicative Inverse Property to another student?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Multiplication and Division: Inverse Operations{style="font-size:24pt"}
 
@@ -79,7 +79,7 @@ Now that we understand what a reciprocal is, we are ready to think about how we 
 - When you're finished, complete @printable-exercise{discover-inverse-cont.adoc}.
 - What did you observe about the multiplicative inverse and its value when doing mental computation?
 
----
+@slidebreak
 {layout="Launch"}
 # Multiplication and Division: Inverse Operations{style="font-size:24pt"}
 
@@ -93,7 +93,7 @@ In other words, when students see multiplication or division by a unit fraction 
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Multiplication and Division: Inverse Operations{style="font-size:24pt"}
 
@@ -101,7 +101,7 @@ In other words, when students see multiplication or division by a unit fraction 
 - Which problems were the most challenging? Which ones felt simple?
 - What strategies did you use to determine equivalence?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Multiplication and Division: Inverse Operations{style="font-size:24pt"}
 
@@ -112,7 +112,7 @@ In other words, when students see multiplication or division by a unit fraction 
 ** _Sample response: Instead of dividing by 9, sorry is multiplying by the reciprocal. Yes, Soraya has written an equivalent expression and can apply the Commutative Property - but the computation will not be any simpler._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Is the Order of Operations Universal?
 
@@ -126,7 +126,7 @@ In other words, when students see multiplication or division by a unit fraction 
 Invite students to share their responses. If your students have spent any time at all studying the order of operations, they will notice both multiplication and division in the expression. From there, they will likely conclude that they must work from left to right to arrive at a correct result. 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Is the Order of Operations Universal?
 
@@ -136,7 +136,7 @@ The solving strategy that most students used can be represented like this:
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Is the Order of Operations Universal?
 
@@ -150,14 +150,14 @@ yes, both circles produce the same result!
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Is the Order of Operations Universal?
 
 In Kenya, students are actually taught that, when confronted with an expression like @math{100 \times 20 \div 5}, they must divide first... and then multiply! But does it actually work, _every_ time? Let’s investigate.
 
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Is the Order of Operations Universal?
 
@@ -167,7 +167,7 @@ In Kenya, students are actually taught that, when confronted with an expression 
 
 @image{images/kenya-flag.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Is the Order of Operations Universal?
 
@@ -182,7 +182,7 @@ Encourage students to think deeply about why this algorithm works – and if you
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Is the Order of Operations Universal?
 
@@ -197,7 +197,7 @@ Scan each expression to determine the simplest solving strategy, then compute me
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Is the Order of Operations Universal?
 
@@ -206,7 +206,7 @@ Scan each expression to determine the simplest solving strategy, then compute me
 - Knowledge of inverse operations creates _more_ opportunities to apply the @vocab{Commutative Property} and the @vocab{Associative Property}? Explain why this is the case.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Is the Order of Operations Universal?
 

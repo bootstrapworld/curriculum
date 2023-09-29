@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Associative Property
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Associative Property
  
@@ -19,14 +19,14 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 Confirm that students are comfortable with the @vocab{Associative Property}. Specifically, they should recognize that, when adding three numbers, they can start by adding the first pair of numbers _or_ the last pair of numbers. Similarly, when multiplying three numbers, students can start by multiplying the first pair of numbers _or_ the last pair of numbers. Importantly:
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Associative Property
 
 The Associative Property holds for addition and multiplication, but not division or subtraction.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # The Associative Property
 
@@ -38,7 +38,7 @@ Allow students to work, encouraging them to try different groupings and _structu
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Associative Property
 
@@ -47,7 +47,7 @@ Allow students to work, encouraging them to try different groupings and _structu
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Associative Property
 
@@ -69,7 +69,7 @@ Allow students to work, encouraging them to try different groupings and _structu
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Associative Property and Mental Math{style="font-size:23pt"}
 
@@ -78,21 +78,21 @@ Allow students to work, encouraging them to try different groupings and _structu
 - Now it's your turn! You will explore different ways to group this expression: @math{98 + 3 + 7 + 26 + 4}
 - Draw as many equivalent circles of evaluation as you can in the boxes below, then answer the questions at the bottom of the page. You may change the groupings, but not the order!
 
----
+@slidebreak
 {layout="Launch"}
 # The Associative Property and Mental Math{style="font-size:23pt"}
 
 - Which Circle of Evaluation seemed like it would be the most difficult to solve in your head? Why?
 - Which Circle of Evaluation seemed like it would be the easiest to solve in your head? Why?
 
----
+@slidebreak
 {layout="Investigate"}
 # The Associative Property and Mental Math{style="font-size:23pt"}
 
 - Complete @printable-exercise{pages/which-grouping-makes-the-comp-easier.adoc}. Examine each Circle of Evaluation and put a check mark by the one that results in a simpler computation. Then, evaluate the expression.
 - Now, try @printable-exercise{pages/associativity-makes-comp-easier.adoc} to apply the Associative Property to expressions with more numbers and varying operators.
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Associative Property and Mental Math{style="font-size:23pt"}
 
@@ -100,7 +100,7 @@ Allow students to work, encouraging them to try different groupings and _structu
 - Did Circles help you to visualize associativity? Why or why not?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Applying the Commutative and Associative Properties{style="font-size:23pt"}
 
@@ -108,7 +108,7 @@ When asked to multiply @math{2 \times 17 \times 5}, a student who notices that @
 
 The freedom to solve in a variety of ways rather than just moving left to right opens up a world of possibility!
 
----
+@slidebreak
 {layout="Investigate"}
 # Applying the Commutative and Associative Properties{style="font-size:23pt"}
 
@@ -118,7 +118,7 @@ The freedom to solve in a variety of ways rather than just moving left to right 
 - Ready for a challenge? @optional Try @opt-printable-exercise{pages/associativity-makes-comp-easier-challenge.adoc} to apply the evaluate expressions with fractions and decimals.
 - What was your strategy for restructuring the expressions to make them simpler to evaluate?
 
----
+@slidebreak
 {layout="Investigate"}
 # Applying the Commutative and Associative Properties{style="font-size:23pt"}
 
@@ -128,7 +128,7 @@ The freedom to solve in a variety of ways rather than just moving left to right 
 - Turn your paper in to your teacher.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Applying the Commutative and Associative Properties{style="font-size:23pt"}
 

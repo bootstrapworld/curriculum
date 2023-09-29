@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # The Data Cycle
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Telling Your Data Story
 
@@ -18,7 +18,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Telling Your Data Story
 
@@ -29,7 +29,7 @@ Data Scientists ask a ton of questions, and each question adds a chapter to thei
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Telling Your Data Story
 
@@ -48,7 +48,7 @@ The Data Cycle is a _roadmap_, which helps guide us in the process of data analy
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Telling Your Data Story
 
@@ -61,7 +61,7 @@ _What other questions might come from counting the ratio of fixed to unfixed ani
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Ask Questions
 
@@ -71,7 +71,7 @@ _What other questions might come from counting the ratio of fixed to unfixed ani
 
 There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
 
----
+@slidebreak
 {layout="Launch"}
 # Ask Questions
 
@@ -94,7 +94,7 @@ Other  examples of statistical questions might include "How long does it take fo
 
 We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won't help us answer that question, so as Data Scientists we might need to do some research _beyond the data_. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Ask Questions
 
@@ -111,7 +111,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 * What kind of question is "How old is Toggle?"
 ** It's a _lookup question_.
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Ask Questions
 
@@ -125,7 +125,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 - Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.
 - They may think that "What's the average weight of the animals?" is a statistical question, because "average" is a term that shows up in statistics. But computing the average is just pure arithmetic! A _statistical_ question would be "What's the typical weight of an animal?", because it does not specify a particular arithmetic process. The answer could be the mean, the median, or even the mode! Figuring out which one to use depends on the distribution of the data, which we'll discuss more in a later lesson.
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 
@@ -138,7 +138,7 @@ We might wonder where the animal shelter is located, or what time of year the da
 
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Consider Data
 
@@ -149,7 +149,7 @@ When considering data, we ask:
 * **Which Rows** do we need?
 * **Which Column(s)** do we care about?
 
----
+@slidebreak
 {layout="Launch"}
 # Consider Data
 
@@ -159,7 +159,7 @@ Each Row represents one member of our population. In the Animals Dataset, each r
 
 Columns, on the other hand, represent information _about each row_. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Consider Data
 
@@ -169,7 +169,7 @@ If we want to know which cat is the heaviest, we _only care about rows for cats_
 
 If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Consider Data
 
@@ -185,7 +185,7 @@ If we want to know how many fixed animals are rabbits, _we only care about rows 
 3. We needed to look at _all_ the rows, but the only column we care about is `fixed`.
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Consider Data
 
@@ -199,7 +199,7 @@ Common Misconceptions
 - Students often forget that questions like "Who is the oldest?" or "What is the most?" require looking at _every row_ in the table.
 -->
 
----
+@slidebreak
 {layout="SynthesizeR"}
 # Consider Data
 
@@ -209,7 +209,7 @@ Debrief your answers!
 
 How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyret}{what code to write}@ifproglang{codap}{which configurations to use}?
 
----
+@slidebreak
 {layout="LaunchR"}
 # Analyzing Data
 
@@ -222,7 +222,7 @@ Once we know what data we need, we can turn our attention to what we want to bui
 
 What kinds of displays can help us analyze whether there are more fixed or unfixed animals? 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Analyzing Data
 
@@ -236,7 +236,7 @@ Once we've decided to make a bar chart and we know which rows and columns we're 
 
 @ifproglang{pyret}{
 
----
+@slidebreak
 {layout="LaunchR"}
 # Analyzing Data
 
@@ -247,7 +247,7 @@ Once we've decided what to make and we know which rows and columns we're plottin
 Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!
 }
 
----
+@slidebreak
 
 
 {layout="InvestigateR"}
@@ -261,7 +261,7 @@ Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fi
 <!--
 Have students share their results. What did their charts tell them?
 -->
----
+@slidebreak
 {layout="SynthesizeR"}
 # Analyzing Data
 

@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Composing Transformers
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Creating Transformers
 
@@ -14,7 +14,7 @@ One of the perks of using a tool like CODAP is that it invites experimentation, 
 
 Sometimes, however, relying on experimentation can limit our ability to _plan_ our data transformations. Familiarizing ourselves with exactly which inputs each Transformer requires can help us to efficiently transform data, without relying on guessing and checking every time.
 
----
+@slidebreak
 {layout="Launch"}
 # Creating Transformers
 
@@ -24,7 +24,7 @@ Each Transformer we've worked with consumes a different amount of arguments, rep
 @image{images/transformer-table.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Creating Transformers
 
@@ -38,7 +38,7 @@ Each Transformer we've worked with consumes a different amount of arguments, rep
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Creating Transformers
 
@@ -52,7 +52,7 @@ Each Transformer we've worked with consumes a different amount of arguments, rep
 Confirm that students have correct responses on their Transformer Cards, as these cards are central to the subsequent segment of the lesson.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Creating Transformers
 
@@ -60,7 +60,7 @@ Confirm that students have correct responses on their Transformer Cards, as thes
 - What obstacles did you encounter?
 - What is the value of naming Transformers?
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Transformers
 
@@ -69,7 +69,7 @@ We already know how to filter, transform, and build columns - but what if we wan
 Let's play a game to explore what happens when we combine Transformers...
 
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Transformers
 
@@ -78,7 +78,7 @@ Let's play a game to explore what happens when we combine Transformers...
 - Each pair of students needs one set of cut-out cards from @handout{create-transformer-cards-2.adoc}.
 - Each pair of students will need to refer to the three-row table of animals on the top of the page.
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Transformers
 
@@ -88,7 +88,7 @@ Let's play a game to explore what happens when we combine Transformers...
 - Student 2: Determine the output of "playing" those two cards _in that order_ by referring to the three-row table of animals.
 - Return the cards to the deck, shuffle, and play another round.
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Transformers
 
@@ -102,7 +102,7 @@ Look at the cards in the deck. See if you can deal your partner two cards that..
 
 What did you discover about _composing_ Transformers?
 
----
+@slidebreak
 {layout="Launch"}
 # Composing Transformers
 
@@ -110,7 +110,7 @@ If we use our Transformers in the wrong order (trying to filter by a column that
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -123,7 +123,7 @@ Each Transformer card that you created required different information, including
 @show{(coe '(filter-if-fixed t)) }
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -137,13 +137,13 @@ Let's think about our Transformer cards again. The @vocab{Circle of Evaluation} 
 
 @show{(coe '(filter-if-fixed t)) }
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
 But what if we want to play _another_ Transformer card? The  Circle of Evaluation above produces a _table_ ... which brings us to the third rule of Circles of Evaluation:
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -155,7 +155,7 @@ Let's say that after drawing `filter-if-fixed`, your partner draws `filter-if-yo
 @show{(coe '(filter-if-young (filter-if-fixed t))) }
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -163,7 +163,7 @@ A perk of composing saved Transformers is that everything is just a "view" of th
 
 With Transformers, any updates made to the original dataset will flow through the composition, keeping everything in sync. Transformers can also be reused, eliminating duplicate work.
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -175,7 +175,7 @@ As you compose Transformers, you may note that table names start to become quite
 
 That's a lot of parentheses! As an alternative, consider renaming the table something simpler. For instance, `light-animals-in-kg` would be a more easily interpreted table name.
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -183,7 +183,7 @@ Sometimes, the hardest part of solving a problem is knowing what you want to do,
 
 Circles of Evaluation give us an opportunity to think through what we want to do, before getting in front of the computer and worrying about how to do it. Circles of Evaluation let us think and plan, without getting bogged down by small details.
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing Transformers
 
@@ -191,7 +191,7 @@ Circles of Evaluation give us an opportunity to think through what we want to do
 - Complete @printable-exercise{pages/matching-composed-transformers.adoc}.
 - When you're finished, do @printable-exercise{pages/planning-transformer-composition.adoc}, where you will draw composed Circles of Evaluation based on a given prompt.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Composing Transformers
 

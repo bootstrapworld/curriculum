@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Evaluating Exponents
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Expressions with Exponents 
 
@@ -20,7 +20,7 @@ Do you know any other ways of translating this expression into words?
 ** _Two to the third power; two to the third; two cubed_
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Expressions with Exponents 
 
@@ -33,7 +33,7 @@ We multiply it by itself three times! In other words, we literally compute the v
 @image{images/cube.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Expressions with Exponents 
 
@@ -46,7 +46,7 @@ We multiply it by itself three times! In other words, we literally compute the v
 
 - There is no special terminology for any other exponents.
 
----
+@slidebreak
 {layout="Launch"}
 # Expressions with Exponents 
 
@@ -54,7 +54,7 @@ We can represent expressions with exponents as Circles of Evaluation.
 
 The function we use to do so is called `expt`; when we use `expt`, the first value is the _base_, and the second value is the exponent.
 
----
+@slidebreak
 {layout="LaunchC"}
 # Expressions with Exponents 
 
@@ -64,7 +64,7 @@ Exponents are valuable because they act as a shorthand.
 
 @image{images/coes1.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Expressions with Exponents 
 
@@ -72,7 +72,7 @@ Now, turn to @printable-exercise{pages/exponents-intro.adoc}, where you will pra
 
 @image{images/basics.png}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Expressions with Exponents 
 
@@ -86,7 +86,7 @@ Now, turn to @printable-exercise{pages/exponents-intro.adoc}, where you will pra
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Expressions with Exponents 
 
@@ -98,7 +98,7 @@ Angela says the Circles of Evaluation below are equivalent because of the @vocab
 ** _Angela is incorrect. The first expression evaluates to 25, while the second expression evaluates to 32. We cannot switch the order of the exponent and the base, as we could when adding or multiplying values._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Expressions with Exponents 
 
@@ -112,7 +112,7 @@ Are these two Circles of Evaluation equivalent? Why or why not?
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
@@ -125,7 +125,7 @@ How would you translate each of these Circles of Evaluation into words? Why are 
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
@@ -133,7 +133,7 @@ How would you translate each of these Circles of Evaluation into words? Why are 
 
 @image{images/coes4.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
@@ -147,7 +147,7 @@ How would you translate each of these Circles of Evaluation into mathematical ex
 Students will likely suggest @math{9 \times (3^2)} as a translation for the Circle of Evaluation on the right. This response is correct - but it is valuable for students to recognize that expressions with exponents are often written _without_ the parentheses. That said, the base and the exponent should always be placed within a Circle.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
@@ -155,21 +155,21 @@ Students will likely suggest @math{9 \times (3^2)} as a translation for the Circ
 
 @image{images/coes4.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
 In an expression with no grouping symbols, we evaluate the exponent before the other operations.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
 - Try the @printable-exercise{pages/matching-expressions-to-circles.adoc} to practice matching Circles of Evaluation with their corresponding mathematical expressions.
 - Translate between Circles of Evaluation, mathematical expressions, and words on @printable-exercise{pages/translating-exponent-expressions.adoc}
 
----
+@slidebreak
 {layout="Investigate"}
 # Expressions with Exponents 
 
@@ -177,7 +177,7 @@ In @printable-exercise{pages/wodb.adoc}, examine each Circle of Evaluation to de
 
 @image{images/wodb.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Expressions with Exponents 
 
@@ -194,7 +194,7 @@ Q2: _No, these expressions are not equivalent. For the first expression, we appl
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Algebraic Expressions with Exponents
 
@@ -206,13 +206,13 @@ Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4
 ** _Sample response: Jayla's Circle of Evaluation is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's Circle of Evaluation doesn't work because he added rather than finding a product. Aaron squared @math{4m}, rather than just squaring @math{m}._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Algebraic Expressions with Exponents
 
 When we _evaluate_ an @vocab{algebraic expression}, we substitute in a given value for the variable and then simplify the expression to a single number. 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Algebraic Expressions with Exponents
 
@@ -226,14 +226,14 @@ Do any of the expressions produce the same outcome? Why or why not?
 ** _Each Circle of Evaluation has a different result because they all have different structures; one Circle of Evaluation even uses addition rather than multiplication. Jayla's evaluates to 100; Keke's evaluates to 132; Joe's evaluates to 29; and Aaron's evaluates to 400._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Algebraic Expressions with Exponents
 
 - Turn to @printable-exercise{pages/exponents-variables-table.adoc}. Draw a Circle of Evaluation to represent each expression that is provided in the left-hand column. The first one is done for you.
 - Once you have completely filled in the Circle of Evaluation column, move to the Evaluate column, where you will evaluate each expression by substituting in the given value.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Algebraic Expressions with Exponents
 

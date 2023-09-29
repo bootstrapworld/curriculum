@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Table Functions
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Review
 
@@ -17,13 +17,13 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the `shapes-table` one row at a time.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Review
 
 With your partner, take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Review
 
@@ -43,14 +43,14 @@ Challenge students to use terminology like "looks up the value in the X column" 
 ** _It checks if the value in the `name` column contains `"triangle"`._
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Review
 
 - Were you able to guess what the functions did before testing them out? What was your strategy for making an educated guess?
 - What is the relationship between a _row definition_ and a _row-consuming function_?
 
----
+@slidebreak
 {layout="Launch"}
 # Filtering Rows, Building Columns
 
@@ -62,7 +62,7 @@ Select 6-8 students, each of whom will represent a unique Row of a dataset calle
 -->
 
 
----
+@slidebreak
 {layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
@@ -73,7 +73,7 @@ Select 6-8 students, each of whom will represent a unique Row of a dataset calle
 - If the helper replies "true", `filter` asks that student to take a step forward
 - If the helper says "false", `filter` asks them to take a step back.
 
----
+@slidebreak
 {layout="Launch-RP"}
 # Filtering Rows, Building Columns
 
@@ -92,7 +92,7 @@ Here’s how that might look if `filter` chose a function card `has-glasses`.
 Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a _different_ card to a _different_ helper, and repeat the exercise.
 }
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Filtering Rows, Building Columns
 
@@ -101,7 +101,7 @@ Pyret Tables have their own functions for filtering tables - and more! Let's exp
 Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering Rows, Building Columns
 
@@ -110,7 +110,7 @@ Did the activity help you to understand these two key ideas?
 * `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
 * `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
 
----
+@slidebreak
 {layout="Investigate"}
 # Filtering Rows, Building Columns
 
@@ -120,7 +120,7 @@ How would you filter and build using the Animals Dataset? For practice, complete
 *Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Filtering Rows, Building Columns
 
@@ -131,7 +131,7 @@ Using Table Functions is a _huge_ upgrade in our ability to analyze data!
 - A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see _what percentage of games_ those teams won.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Filtering Rows, Building Columns
 

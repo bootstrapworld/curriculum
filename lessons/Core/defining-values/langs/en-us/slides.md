@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Defining Values
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # What's in Common? 
 
@@ -36,7 +36,7 @@ rotate(45, scale(3, star(50, "solid", "green")))
 
 - What would happen if you were asked to change the color of all the stars to gold?
 
----
+@slidebreak
 {layout="Launch"}
 # What's in Common? 
 
@@ -46,7 +46,7 @@ Duplicate code is almost always bad!
 - __Performance:__ Why re-evaluate the same code a dozen times, when we can evaluate it _once_ and use the result as many times as we need?
 - __Maintainability:__ Suppose we need to change the size of the stars in the examples above. We would have to make sure every line is changed, which leaves a lot of room for error.
 
----
+@slidebreak
 {layout="Launch"}
 # What's in Common? 
 
@@ -60,7 +60,7 @@ WeScheme uses the word "define" to make this even clearer! We can type `(define 
 Pyret is no different!
 } 
 
----
+@slidebreak
 {layout="Investigate"}
 # What's in Common? 
 
@@ -70,7 +70,7 @@ Add some definitions of your own in the Definitions Area. Be sure to click *Run*
 
 Then complete @printable-exercise{which-value-to-define.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # What's in Common? 
 
@@ -82,7 +82,7 @@ Then complete @printable-exercise{which-value-to-define.adoc}.
 What data types can we define values for?
 _All of them - Number, String, Image_
 -->
----
+@slidebreak
 {layout="Launch"}
 # Using Defined Values
 
@@ -95,7 +95,7 @@ Can you clean up all this code, so it user your definition?
 It will direct them to open the @starter-file{flags-china} once they complete the first half of the questions on the page.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Using Defined Values
 
@@ -111,13 +111,13 @@ It will direct them to open the @starter-file{flags-china} once they complete th
 The code for sunny is @show{(code '(radial-star 30 20 50 "solid" "yellow"))}
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Using Defined Values
 
 Why is defining values useful?{style="font-size:24pt"}
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

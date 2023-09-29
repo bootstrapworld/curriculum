@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Piecewise Functions and Conditionals{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Intro to Piecewise Functions
 
@@ -15,7 +15,7 @@ How would you explain a _function_ to someone else? What are some rules that all
 A function has exactly one output for each input.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Piecewise Functions
 
@@ -37,7 +37,7 @@ Ask a student making an O with their arms how they knew what to do._
 _Since each student ("input") has only one action ("output"), it is still a function_.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Piecewise Functions
 
@@ -47,7 +47,7 @@ In this activity your behavior followed a _**set of rules**_ for which each inpu
 
 This is called a **piecewise function** in math, and a **conditional** in programming. The world is full of piecewise functions and conditionals!
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Piecewise Functions
 
@@ -68,7 +68,7 @@ This set of directions doesn't represent a function: people wearing a tshirt wer
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Intro to Piecewise Functions
 
@@ -88,7 +88,7 @@ Many phone plans include a certain price-per-gigabyte for data, but only up to a
 You may also want to discuss whether square root and absolute values are piecewise functions.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Conditionals in Programming 
 
@@ -96,7 +96,7 @@ The rule for `gt` was to take a number and make a solid, green triangle of that 
 
 __What if we want to write functions that apply different rules, based on certain conditions?__
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Conditionals in Programming 
 
@@ -107,7 +107,7 @@ __What if we want to write functions that apply different rules, based on certai
 If you have more time to devote to piecewise functions and conditionals, we have additional starter files and scaffolds in the Additional Practice materials.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Conditionals in Programming 
 
@@ -135,7 +135,7 @@ _We can chain them together to create multiple rules, with the last `else:` bein
 }
 -->
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Extending the Design Recipe 
 
@@ -151,7 +151,7 @@ _The Contract and Purpose Statements don't change: we still write down the name,
 _The examples are also pretty similar: we write the name of the function, followed by some example inputs, and then we write what the function produces with those inputs._
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Extending the Design Recipe 
 
@@ -168,7 +168,7 @@ Up until now, there's been a pattern that students may not have noticed: the num
 {style="font-size:16pt"}
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Extending the Design Recipe 
 
@@ -180,7 +180,7 @@ In this example, we have four _totally different_ patterns:
 - sometimes we produce `(star 20 "solid" "red")`
 - sometimes we produce `(text "Unknown shape name!" 20 "red")`
 
----
+@slidebreak
 {layout="Investigate"}
 # Extending the Design Recipe 
 
@@ -192,7 +192,7 @@ To define a piecewise function, each condition has both a result ("what should w
 * When do we make stars? When `shape == "star"`
 * When do we draw the "Unknown shape name" text? When `shape` is....anything `else`
 
----
+@slidebreak
 {layout="Investigate"}
 # Extending the Design Recipe 
 
@@ -204,7 +204,7 @@ Adding the questions to our pattern gives us:
 - When `shape == "star"`...we produce `(star 20 "solid" "red")`{style="font-size:16pt"}
 - When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Extending the Design Recipe 
 
@@ -221,7 +221,7 @@ This practically gives away the body of our function definition!{style="font-siz
 }{style="font-size:17pt"}
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Extending the Design Recipe 
 
@@ -234,7 +234,7 @@ This practically gives away the body of our function definition!{style="font-siz
 2. _The input, and also the **rule the function applies to the input**_
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 

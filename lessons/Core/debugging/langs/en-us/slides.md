@@ -1,15 +1,15 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Debugging
 
 
----
+@slidebreak
 {layout="Launch"}
 # Syntax Errors
 
 People often think that computers can't make mistakes, because they are "just machines". But who builds those machines? Who programs them? _Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*
 
----
+@slidebreak
 {layout="LaunchC"}
 # Syntax Errors
 
@@ -18,7 +18,7 @@ In the 1940s, computers were made from large wires, vacuum tubes, gears and dial
 
 @image{images/hopper.jpg} 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Syntax Errors
 
@@ -27,7 +27,7 @@ She traced the wires and relays, and eventually found a _moth_ that had gotten s
 
 @image{images/bug.jpg} 
 
----
+@slidebreak
 {layout="Launch"}
 # Syntax Errors
 
@@ -47,7 +47,7 @@ In this lesson, we'll be talking about different kinds of mistakes, which can ha
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Syntax Errors
 
@@ -58,7 +58,7 @@ Here are a few simple examples of syntax errors - can you find the problem?
 
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Syntax Errors 
 
@@ -68,7 +68,7 @@ Syntax Errors prevent the computer from _reading_ code.
 - For each piece of code, be sure to discuss as a team before deciding on the mistake.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Syntax Errors
 
@@ -80,7 +80,7 @@ Syntax Errors prevent the computer from _reading_ code.
 
 @teacher{Have students share back their findings. Leave time for discussion! The key here is to have students reflect on how useful it is to _read the error messages_ first, even the few errors that may not be as helpful as the others.}
 
----
+@slidebreak
 {layout="Launch"}
 # Contract Errors 
 
@@ -92,7 +92,7 @@ With no syntax errors, the computer can read our code and try to run it. But a r
 
 @show{(code '(or "true" false))}
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Contract Errors
 
@@ -101,7 +101,7 @@ Contract Errors prevent the computer from _running_ code. A program might be run
 - In pairs or small groups, complete @printable-exercise{contract-errors.adoc}. 
 - For each piece of code, be sure to discuss as a team before deciding on the mistake.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Contract Errors 
 
@@ -111,7 +111,7 @@ Contract Errors prevent the computer from _running_ code. A program might be run
 - What strategies could we use to avoid making them in the first place?
 - What strategies could we use to fix them faster?
 
----
+@slidebreak
 {layout="Launch"}
 # Logic Errors
 
@@ -124,7 +124,7 @@ She clicked "Run" and didn't get any syntax errors, so she was feeling really co
 Did she have a syntax error? Why or why not?
 Did she have a Contract error? Why or why not?
 
----
+@slidebreak
 {layout="Launch"}
 # Logic Errors
 
@@ -134,7 +134,7 @@ _Logic Errors don't prevent code from running at all!_
 
 Ho-ming's computer had no trouble reading or running her code. The problem is that the code didn't work the way she expected. Another way to think of it is that the bug isn't in the code at all - _it's in the way she was thinking when she wrote it._
 
----
+@slidebreak
 {layout="Launch"}
 # Logic Errors
 
@@ -150,7 +150,7 @@ What are some other ways Ho-ming could have thought through this function?
 - *She could have written Examples*, which would have helped her see how the input is used. And even if she made the exact same mistake, at least her examples would have generated a warning to alert her to the problem!
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Logic Errors
 
@@ -159,7 +159,7 @@ The Design Recipe helps us avoid logic errors, by demanding that we think throug
 - In pairs or small groups, complete @printable-exercise{pages/logic-errors.adoc},  @printable-exercise{pages/logic-errors-2.adoc}, and @printable-exercise{pages/logic-errors-3.adoc}.
 - In pairs or small groups, open the @starter-file{bug-hunting}, and see if you can fix all of the syntax errors in the file by completing @printable-exercise{pages/what-kind-of-error.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Logic Errors
 

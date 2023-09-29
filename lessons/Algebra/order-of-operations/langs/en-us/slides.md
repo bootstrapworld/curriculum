@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Order of Operations
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Order of Operations
 
@@ -13,7 +13,7 @@ If you were to write instructions for getting ready for school, it would matter 
 
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
----
+@slidebreak
 {layout="LaunchR"}
 # Order of Operations
 
@@ -21,7 +21,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 
 @image{images/pemdas.png, 300}
 
----
+@slidebreak
 {layout="Launch"}
 # Order of Operations
 
@@ -29,7 +29,7 @@ __@math{6 \div 2(1 + 2)}__{style="font-size:46pt"}
 
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 
----
+@slidebreak
 {layout="LaunchR"}
 # Order of Operations
 
@@ -48,7 +48,7 @@ In this example, the function is division and the inputs are 6 and 3 (in that or
 Math teachers: you may be used to calling division an *operator*, but operators are
 all just functions that we write a little differently! 
 -->
----
+@slidebreak
 {layout="LaunchC"}
 # Order of Operations
 
@@ -56,7 +56,7 @@ What if we want to use multiple functions?
 
 What is the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
 
----
+@slidebreak
 {layout="LaunchC"}
 # Order of Operations
 
@@ -64,13 +64,13 @@ Circles can contain other Circles. We basically replace the `3` from our earlier
 
 @show{(coe '(/ 6 (+ 1 2)))}
 
----
+@slidebreak
 {layout="Launch"}
 # Order of Operations
 
 What would the Circle of Evaluation for @math{5 \times 6} look like?
 
----
+@slidebreak
 {layout="LaunchC"}
 # Order of Operations
 
@@ -78,7 +78,7 @@ What would the Circle of Evaluation for @math{5 \times 6} look like?
 
 @show{(coe '(* 5 6))}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Order of Operations
 
@@ -86,7 +86,7 @@ How about the Circle of Evaluation for:
 
  @math{(10 - 5) \times 6}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Order of Operations
 
@@ -94,7 +94,7 @@ How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
 
 @show{(coe '(* (- 10 5) 6))}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Order of Operations
 
@@ -102,7 +102,7 @@ Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-
 
 Ignore the code column for now! We will come back to it later.
 
----
+@slidebreak
 {layout="Investigate"}
 # Order of Operations
 
@@ -111,30 +111,34 @@ For more practice with this, turn to:
 - @printable-exercise{pages/match-arith-coe.adoc}
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}
 
----
+@slidebreak
 {layout="Launch"}
 # From Circles of Evaluation to Code
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
 
-The first thing the spider does is cross over a curved line - an open parenthesis - then visit the function @ifproglang{pyret}{ or operation} at the top. 
+@ifproglang{wescheme}{
+The first thing the spider does is cross over a curved line (an open parenthesis!), then visit the operation - also called the _function_ - at the top. After that, she crawls from left to right, visiting each of the inputs to the function. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
 
-After that, she crawls from left to right, visiting each of the inputs. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+@ifproglang{pyret}{
+The first thing the spider does is cross over a curved line (an open parenthesis!). For _operators_ (addition, subtraction, etc.) - The spider visits the first number on the left, then she visits the top of the circle for the operation, then the number on the right. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 @image{images/coe-set1.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
 Arithmetic expressions involving more than one operation will end up with more than one circle,  @ifproglang{wescheme}{and more than one pair of parentheses.}@ifproglang{pyret}{and the code requires parentheses to clarify the order in which the operations should be completed - whether or not there are parentheses in the original expression.}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
@@ -148,13 +152,13 @@ advance to next slide to reveal the answer
 @show{(code '(* 2 (+ 3 8)))}
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
 @image{images/coe-set2.png}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
@@ -167,7 +171,7 @@ What would the code look like for this circle?
 -->
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # From Circles of Evaluation to Code
 
@@ -179,7 +183,7 @@ What would the code look like for this circle?
 @show{(code '(* (- 10 5) 6))}
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
@@ -188,7 +192,7 @@ Scaffolded practice:
 - @printable-exercise{pages/complete-code-from-coe.adoc} 
 - @printable-exercise{pages/match-coe-to-code.adoc}
 
----
+@slidebreak
 {layout="Investigate"}
 # From Circles of Evaluation to Code
 
@@ -198,7 +202,7 @@ Once you confirm that your code is correct, continue on to @printable-exercise{p
 
 Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # From Circles of Evaluation to Code
 
@@ -213,8 +217,8 @@ As in math, in Pyret there are some cases where the outermost parentheses can be
 It is always better to at least start with the parentheses before taking them out. **It is never wrong to include them!**
 }
 
----
-{layout="Launch-DN"}
+@slidebreak
+{layout="LaunchC-DN"}
 # Testing out your Code
 
 - Open @starter-file{editor} and click run.
@@ -224,7 +228,7 @@ It is always better to at least start with the parentheses before taking them ou
 - Hit Enter (or Return) to evaluate this expression. What happens?
 - Test each line of code you wrote by typing them into the Interactions Area. Use the error messages to edit your code to get it working.
 
----
+@slidebreak
 {layout="InvestigateC-DN"}
 # Testing out your Code
 
@@ -246,7 +250,7 @@ Possible responses:
 -->
 
 @ifproglang{pyret}{
----
+@slidebreak
 {layout="InvestigateC-DN"}
 # Testing out your Code
 
@@ -259,7 +263,7 @@ When converting a Circle of Evaluation that has a function, the spider starts at
 @show{(code  '(text "Good work!" 50 "red"))}
 }
 
----
+@slidebreak
 {layout="InvestigateC-DN"}
 # Testing out your Code
 
@@ -270,7 +274,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 
 @show{(coe '(string-length "fun!"))}
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 
@@ -285,7 +289,7 @@ Here is another circle to explore.{style="font-size:16pt"}
 * @opt-printable-exercise{pages/evaluate-coe.adoc}{style="font-size:16pt"} 
 * @opt-printable-exercise{pages/evaluate-coe2.adoc}{style="font-size:16pt"} 
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 
@@ -299,7 +303,7 @@ More 3-column practice connecting Arithmetic Expressions with Circles of Evaluat
 * @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-3.adoc}{style="font-size:16pt"} 
 * @opt-printable-exercise{pages/translate-arithmetic-to-coe-and-code-4.adoc}{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 

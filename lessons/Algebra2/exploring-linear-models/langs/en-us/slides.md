@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Exploring Linear Models
 
@@ -6,13 +6,13 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
 We're going to search for relationships within a dataset about each of the states in the US. But first, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -22,7 +22,7 @@ We're going to search for relationships within a dataset about each of the state
 - What did you Notice and Wonder?
 - What did you learn about defining rows in Pyret?
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -36,7 +36,7 @@ In math, x = 4 will define a variable x to be the value 4. Any time we use x aft
 Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Looking for Patterns
 
@@ -50,7 +50,7 @@ Debrief the rest of the page with students. Then, initiate a conversation about 
 * What columns might be related to education?
     - _Examples:_ `college-or-higher`, `hs-or-higher`
 }
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -69,7 +69,7 @@ Before we dig deeper into @starter-file{alg2-states}, let's think back to the an
 ** _Again, solicit students ideas and discuss why each display type would or would not work._	
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -77,7 +77,7 @@ Pie and Bar charts help us see the _frequency_ of values in a single _categorica
 
 But what we really want is a display that will help us search for _a relationship between two quantitative columns_, and that's exactly what scatter plots do.
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -89,14 +89,14 @@ Which do we suspect is the cause and which is the effect: age or time-to-adoptio
 
 We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.  
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Looking for Patterns
 
@@ -108,7 +108,7 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 
 @teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Looking for Patterns
 
@@ -119,7 +119,7 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 @teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength._}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Describing Patterns
 
@@ -127,7 +127,7 @@ Scatter plots let us visualize the relationship between two columns. If no relat
 
 These patterns can be described using three qualities: **form**, **direction**, and **strength**.
 
----
+@slidebreak
 {layout="Launch"}
 # Describing Patterns
 
@@ -141,7 +141,7 @@ Form indicates whether a relationship is linear, nonlinear or undefined.
 
 @teacher{@optional Have students turn to @opt-printable-exercise{linear-nonlinear-bust.adoc} and decide whether each of the scatter plots could be modeled by a linear relationship, a non-linear relationship, or that there doesn't appear to be a pattern.}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Patterns
 
@@ -150,7 +150,7 @@ If the relationship clusters around a straight line, we can talk about _directio
 @right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Patterns
 
@@ -160,7 +160,7 @@ If the relationship clusters around a straight line, we can talk about _directio
 
 Not every shape has a direction! For example, a curve can start out sloping upwards, but then peak and slope downwards.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Patterns
 
@@ -168,7 +168,7 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 @right{@image{images/A.gif, 200}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Describing Patterns
 
@@ -176,7 +176,7 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 @vocab{Strength} indicates how closely the two variables are @vocab{correlated}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Describing Patterns
 
@@ -187,7 +187,7 @@ Now that you've dug into the role that form, direction and strength play in quan
 
 @teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
 
----
+@slidebreak
 {layout="Investigate"}
 # Describing Patterns
 
@@ -195,14 +195,14 @@ In pairs or small groups, complete @printable-exercise{pages/identifying-form.ad
 
 @teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
 
----
+@slidebreak
 {layout="Investigate"}
 # Describing Patterns
 
 Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Describing Patterns
 
@@ -217,7 +217,7 @@ Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
 - Students often believe that strength and sample size are interchangeable, leading to mistaken assumptions like "any correlation found in a million data points _must_ be strong!"
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Fitting Linear Models
 
@@ -237,7 +237,7 @@ We'd expect students to be able to surface much of the following:
 - Horizontal lines have a constant rate of change of zero.
 }
 
----
+@slidebreak
 {layout="LaunchR"}
 # Fitting Linear Models
 
@@ -251,14 +251,14 @@ We'd expect students to be able to surface much of the following:
 
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 Return to Pyret and the @starter-file{alg2-states}.
 Make a scatter plot showing the the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Fitting Linear Models
 
@@ -266,7 +266,7 @@ Make a scatter plot showing the the relationship between `pct-college-or-higher`
 
 This scatter plot appears to show a positive, linear relationship: states with higher percentages of college graduates tend to have higher median household incomes.
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Fitting Linear Models
 
@@ -285,27 +285,27 @@ __Based on the data for the existing 50 states (plus DC!)...__
 @right{@image{images/pyret-window.png, 150}} Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatterplot and clicking "Redraw".
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the distance between the line and all the points on the plot. For straight-line relationships, the "predictor functions" are _linear functions_ or "linear models". The straight-line graph of these models is also sometimes called the "regression line" or @vocab{line of best fit}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 When we make a model, we want it to be the closest possible approximation of all the points. A "good fit" has most of the points very close to the line, and a "bad fit" has the points very far away.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -317,7 +317,7 @@ Let's find the best fit we can make for this dataset!
 @optional If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc} instead.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -327,34 +327,34 @@ Let's find the best fit we can make for this dataset!
 @teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 - Complete @printable-exercise{model-college-v-income-2.adoc}.
 - Based on the @vocab{R&sup2;} values of the plots you created on this page, what do you think @vocab{R&sup2;} means?
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 @vocab{R&sup2;} describes the _percentage of the variation in the y-variable that is explained by the x-variable_ in our model. In other words, an @vocab{R&sup2;} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 If the model is perfect, the @vocab{R&sup2;} value will be 1.00, meaning the @math{y}-values can be perfectly predicted by the @math{x}-values. Of course in the real world, no model is perfect! The @vocab{R&sup2;} value for no correlation at all is *zero*. If we just drew a horizontal predictor line _in the middle of the data_, it would mean that we expect a median income somewhere in that range but with no connection whatsoever to the percentage of people who finish college.
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -364,7 +364,7 @@ But sometimes models make predictions that are _even worse than useless_ - they 
 - What was the best model you could come up with?
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -372,7 +372,7 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -383,14 +383,14 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 @teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
 When we interpret a model, we try to make sense of the slope, the axes, the @math{R^2} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income. Based on the @math{R^2} value of **-15.63**, this is a pretty terrible model and shouldn't be trusted.__
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Fitting Linear Models
 
@@ -400,7 +400,7 @@ These models are useless if we can't make sense of them!
 - @optional For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Fitting Linear Models
 
@@ -409,21 +409,21 @@ These models are useless if we can't make sense of them!
 - How could we use scatter plots and linear models to find answers to _other_ questions?
 
 
----
+@slidebreak
 {layout="Launch"}
 # (Optional) Other Forms of Linear Models
 
 When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
 
 
----
+@slidebreak
 {layout="Launch"}
 # (Optional) Other Forms of Linear Models
 
 So far, we've focused on models using the *Slope-Intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment. Depending on who we're communicating with and what information we have available to us, we might opt to use other forms of linear models, but we can always translate any model into another!
 
 
----
+@slidebreak
 {layout="Launch"}
 # (Optional) Other Forms of Linear Models
 
@@ -434,7 +434,7 @@ You may already be familiar with the different forms of linear models available 
 | @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
 |  - m: slope - b: y-intercept | - m: slope - @math{y_1}: y-coordinate of a point - @math{x_1}: x-coordinate of the same point | - x-int: @math{\frac{C}{A}} - y-int: @math{\frac{C}{B}} - slope: @math{-\frac{A}{B}}
 
----
+@slidebreak
 {layout="Launch"}
 # (Optional) Other Forms of Linear Models
 
@@ -446,7 +446,7 @@ Why we might choose to use one form over another?
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # (Optional) Other Forms of Linear Models
 
@@ -465,14 +465,14 @@ Why we might choose to use one form over another?
 ** _Slope-Intercept Form_
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # (Optional) Other Forms of Linear Models
 
 While it's easier to write one linear form or the other based on the information available to us, and might be easier for someone else to extract the information they're looking for based on the model we supply them with, we can easily translate back and forth between linear forms!
 
 
----
+@slidebreak
 {layout="Investigate"}
 # (Optional) Other Forms of Linear Models
 
@@ -481,7 +481,7 @@ While it's easier to write one linear form or the other based on the information
 - When you're done, add your function definitions to your @starter-file{alg2-states} and test them out with `fit-model`.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # (Optional) Other Forms of Linear Models
 

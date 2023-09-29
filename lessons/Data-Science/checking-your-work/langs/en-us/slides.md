@@ -1,4 +1,4 @@
----
+@slidebreak
 
 {layout="DS Title Slide"}
 
@@ -6,14 +6,14 @@
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 **Samples are taken in Data Science and Computer Programming for different reasons**. 
 
 One of the main purposes of Data Science is to take a representative sample from a larger population, and use information from the sample to infer what’s true about the whole population. 
 
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 In programming, we often extract a smaller Table from a larger one, for the purpose of testing that our code seems to do what it’s supposed to. 
@@ -23,7 +23,7 @@ In programming, we often extract a smaller Table from a larger one, for the purp
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 
@@ -33,7 +33,7 @@ In programming, we often extract a smaller Table from a larger one, for the purp
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 
@@ -41,7 +41,7 @@ Data scientists usually think in terms of samples that best serve the purpose of
 
 Programmers need to think in terms of _Testing Tables_ that best serve the purpose of verifying that their code does what it’s supposed to: **Testing Tables should be designed to call attention to any imperfections in the code’s instructions**.
 
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 
@@ -55,14 +55,14 @@ A good Testing Table should be _representative_ of the population, and _relevant
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 
 Data scientists usually think in terms of samples that best serve the purpose of performing inference: Samples should be representative of the entire population, and large enough to get us fairly close to the truth about that population.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Confirming Analysis
 
@@ -77,7 +77,7 @@ Students have already written lots of code to analyze data. Millions of lines of
 But programmers are only human, and everyone makes mistakes! And with so-called "A.I. Code Generators" out there writing more and more code for us, we need better and better ways of _verifying_ that code does exactly what it claims to do!
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Confirming Analysis
 
@@ -98,13 +98,13 @@ An AI writes code that claims to filter out any shelter data to show only the ca
 ** No! Maybe the AI's code just removes dogs. We need to see if it removes other species as well.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Confirming Analysis
 
 Verifying that code does what it does is an important part of checking our work! That's why writing examples is so valuable: it's a chance to think about how the program _should_ work, without worrying as much about _how_ it works.
 
----
+@slidebreak
 {layout="Investigate"}
 # Confirming Analysis
 
@@ -115,7 +115,7 @@ The AI writes a function called `fixed-cats` and _claims_ that, given a table of
 * Complete @printable-exercise{pages/trust-but-verify.adoc}.
 * Open the @starter-file{trust-but-verify}. There are 3 versions of `fixed-cats`. Are they all correct? If not, which ones are broken?
 
----
+@slidebreak
 {layout="Investigate"}
 # Confirming Analysis
 
@@ -126,7 +126,7 @@ An AI writes a function called `fixed-cats` and _claims_ that, given a table of 
 * Which animals would you use in a Testing Table?
 * Turn to @printable-exercise{pages/trust-but-verify-2.adoc}. Using the same Starter File, construct a Testing Table and figure out which (if any) of the functions are correct!
 
----
+@slidebreak
 {layout="Synthesize"}
 # Confirming Analysis
 
@@ -137,7 +137,7 @@ Complex analysis has more room for mistakes, so it’s critical to think about a
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # When AI isn't Intelligent... 
 
@@ -148,7 +148,7 @@ Law enforcement in many towns has started using facial-recognition software to a
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # When AI isn't Intelligent... 
 
@@ -156,7 +156,7 @@ Law enforcement in many towns has started using facial-recognition software to a
 - Complete @printable-exercise{ai-reflection.adoc}
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 

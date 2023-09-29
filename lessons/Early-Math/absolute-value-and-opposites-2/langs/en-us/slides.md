@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Absolute Value and Opposites (2)
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Translating Absolute Value & Opposite
 
@@ -29,7 +29,7 @@ The second set of cards translates those Circles of Evaluation into Verbal Expre
 Circulate as students sort their cards, ensuring that they are carefully examine each card in order to see the connection between the Circle of Evaluation and its translation into words. Students will need to consider if translating the Circle of Evaluation into words involves reading from the outside-in or the inside-out.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Translating Absolute Value & Opposite
 
@@ -43,14 +43,14 @@ Again, circulate during the activity. As students match Verbal Expressions to th
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Translating Absolute Value & Opposite
 
 - Each row on @printable-exercise{pages/translating-abs-val-opp.adoc} represents a single @vocab{arithmetic expression}, written in three different forms. Sometimes, you will be provided with a Circle to translate, other times you will start with a verbal or mathematical expression.
 -  Fill in the empty spaces so that all three forms represent the same expression.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Translating Absolute Value & Opposite
 
@@ -60,7 +60,7 @@ Here are some key takeaways from this lesson:
 - We can find the @vocab{absolute value} of an @vocab{opposite}: @math{ |- x |}
 - Thinking about the structure of the expression can help us understand if it is positive or negative.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Translating Absolute Value & Opposite
 
@@ -68,7 +68,7 @@ Here is a question to consider:
 
 We did lots of different translations between Circles of Evaluation, verbal expressions, and mathematical expressions. Was there any type of translation that was more challenging for you?
 
----
+@slidebreak
 {layout="Launch"}
 # Evaluating Absolute Value & Opposite
 
@@ -81,7 +81,7 @@ We did lots of different translations between Circles of Evaluation, verbal expr
 ** _Jenny is not correct - although students commonly assume that the presence of absolute value indicates a positive outcome._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Evaluating Absolute Value & Opposite
 
@@ -89,7 +89,7 @@ Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highligh
 
 @image{images/not-equiv.png,500}
 
----
+@slidebreak
 {layout="Launch"}
 # Evaluating Absolute Value & Opposite
 
@@ -101,7 +101,7 @@ Representing the equation @math{-|4| = |-4|} with Circles of Evaluation highligh
 @image{images/true-or-false.png,700}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Evaluating Absolute Value & Opposite
 
@@ -111,14 +111,14 @@ Place a check mark by each Circle of Evaluation that meets the condition stated 
 
 @image{images/wodb.png,700}
 
----
+@slidebreak
 {layout="Investigate"}
 # Evaluating Absolute Value & Opposite
 
 - Next, try @printable-exercise{pages/matching-circles-to-expressions.adoc}, where you will match expressions with their corresponding Circles of Evaluation. Note: some expressions can be matched to more than one correct Circle of Evaluation!
 - At the bottom of the page, respond to the open response questions, thinking carefully about each Circle of Evaluation that you encountered.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Evaluating Absolute Value & Opposite
 

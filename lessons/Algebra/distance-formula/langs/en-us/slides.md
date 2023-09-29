@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Distance Formula
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Distance in 1 Dimension
 
@@ -21,7 +21,7 @@ It's almost fully-playable!
 
 @image{images/screenshot.jpg}
 
----
+@slidebreak
 {layout="Launch"}
 # Distance in 1 Dimension
 
@@ -40,7 +40,7 @@ _Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use
 * How will the computer know when the characters have collided? _When the coordinates of the characters are really close to each other._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Distance in 1 Dimension
 Role-Play: Two Characters Collide!
@@ -60,7 +60,7 @@ _overlapping_ in some way - NOT when they are _at the same point._
 @image{images/role-play1.png}{width="750"}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Distance in 1 Dimension
 
@@ -74,7 +74,7 @@ Do this until students can clearly see it’s when the two characters are 'touch
 
 @image{images/role-play2.png}{width="750"}
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Distance in 1 Dimension
 
@@ -90,7 +90,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 - What do you notice? _Both of the examples do the same thing, even though the numbers are given in a different order. It's a piecewise function! It uses inequalities._
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Distance in 1 Dimension
 
@@ -105,7 +105,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 Make absolutely certain that students understand that this line-length _always returns the positive distance_ between two points on a number line.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Distance in 1 Dimension
 
@@ -117,7 +117,7 @@ Make absolutely certain that students understand that this line-length _always r
 
 But what if the coordinates differ by **both x and y**...?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Distance in 2 Dimensions
 
@@ -134,7 +134,7 @@ The legs of these triangles show the distance in 1 dimension each (on the x- and
 Here's a link to a @opt-starter-file{sample-game-w-distance} to use if you're demoing on the board.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Distance in 2 Dimensions
 
@@ -147,7 +147,7 @@ When we turned on `distances-color` in our game, we saw the diagonal distance be
 
 - If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Distance in 2 Dimensions
 
@@ -158,7 +158,7 @@ On the next slide you'll watch a  video created by Tovah Brown of a geometric pr
 - Try your best to explain the proof from the video to a partner.
 - What questions do you have?
 
----
+@slidebreak
 {layout="LaunchC"}
 # Distance in 2 Dimensions
 
@@ -169,7 +169,7 @@ Note: If it's been a long time since your students have used the Pythagorean The
 @optional On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theoream. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
@@ -177,7 +177,7 @@ Note: If it's been a long time since your students have used the Pythagorean The
 - Then turn to @printable-exercise{distance-coe.adoc}. Convert this expression to a Circle of Evaluation, and then to code.
 - Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circles of evaluation, code, computation and a sketch on a graph.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
@@ -189,7 +189,7 @@ For more practice writing code to generate the distance between two fixed points
 Debrief these pages - or have students pair-and-share - before moving on to writing the full distance function.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Distance in 2 Dimensions
 
@@ -199,7 +199,7 @@ But, as we play our games, the characters are constantly changing locations!
 
 In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
@@ -209,7 +209,7 @@ __HINT:__ The code you wrote in @printable-exercise{pages/distance-coe.adoc} can
 
 When you're done, fix the broken `distance` function in your game file, click _Run_ and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Distance in 2 Dimensions
 
@@ -232,7 +232,7 @@ instead of `...num-sqrt(num-sqr(line-length(x2 x1)) + num-sqr(line-length(y2 y1)
 In this situation, remind students to look back at what they circled and labeled in the example steps. _This is why we label!
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

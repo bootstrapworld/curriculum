@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Coordinates
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Navigating a Grid
 
@@ -22,7 +22,7 @@ What coordinate would place the Dog beyond the left-hand edge of the screen?
 What coordinate would place the Dog beyond the right-hand edge of the screen?
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Navigating a Grid
 
@@ -35,7 +35,7 @@ But one number line isn't enough!
 What are the coordinates of the Dog, if it’s on the upper left-hand edge of the screen?
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Navigating a Grid
 
@@ -45,7 +45,7 @@ A coordinate pair is always written in the form of (x, y). When we write down th
 
 @image{images/2dPosition.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # Navigating a Grid
 
@@ -54,7 +54,7 @@ A coordinate pair is always written in the form of (x, y). When we write down th
 1. For each character, _estimate_ what you think the x- and y- coordinates are.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Navigating a Grid
 
@@ -72,7 +72,7 @@ A coordinate pair is always written in the form of (x, y). When we write down th
 ** _Answers vary: we need to know where characters are on the screen, we need a way for players to interact with certain parts of the screen, etc_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Bridging to video games
 
@@ -85,7 +85,7 @@ What do you Notice?
 What do you Wonder?
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Bridging to video games
 
@@ -97,7 +97,7 @@ As a group, come up with at least one idea for a game!
 - Every game has a DANGER (moves left/right - lose points if you hit it!)
 - Every game has a TARGET (moves left/right - gain points if you hit it!)
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Bridging to video games
 
@@ -106,7 +106,7 @@ In a minute, you're going to find images for your game! Tip: @link{http://www.Du
 @image{images/image-search.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Bridging to video games
 
@@ -118,7 +118,7 @@ Screenshot must include:
 - 2 characters that have similar x-coordinates.
 - 2 characters that have similar y-coordinates.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Bridging to video games
 

@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Composing Table Operations
 
@@ -6,13 +6,13 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Design Recipe Practice
 
 When filtering rows or building columns, we need to write @ifproglang{pyret}{functions}@ifproglang{codap}{Transformer expressions}. __This should be done carefully!__ We want our results to be rock solid and accurate, especially if they're going to be used in ways that affect the world around us.
 
----
+@slidebreak
 {layout="Launch"}
 # Design Recipe Practice
 
@@ -20,7 +20,7 @@ The Design Recipe is a sequence of steps that helps us document, test out, and w
 
 
 @ifproglang{codap}{
----
+@slidebreak
 {layout="LaunchC"}
 # Design Recipe Practice
 
@@ -34,7 +34,7 @@ First, we need to decide which Transformer to use: Filter, Transform, or Build.
   Based on the Transformer's already-provided name, students should deduce that they will use Filter. They can then record the Transformer's name on the line.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Design Recipe Practice
 
@@ -43,7 +43,7 @@ Next, we provide *example tables*.
 In this case, we want to know the animals' names and their species, so we write down those column names. We want to list a few different animals - at least one that is a dog, and at least one that is not - to represent the variety of animals on the table. 
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Design Recipe Practice
 
@@ -57,7 +57,7 @@ Then we think about what our transformed table will look like:
 
 @image{images/example-tables.png}
 
----
+@slidebreak
 {layout="LaunchC"}
 # Design Recipe Practice
 
@@ -80,7 +80,7 @@ Each time students encounter a new word problem, we encourage working through it
 -->
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Design Recipe Practice
 
@@ -97,7 +97,7 @@ By using the `and` and `or` operators, we can _combine_ Boolean tests @ifproglan
 @ifproglang{pyret}{For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called _Composition_!} @ifproglang{codap}{When we want to compose _different_ Transformers, however, this strategy will not work. We'll need to find another way!}
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Design Recipe Practice
 
@@ -108,13 +108,13 @@ By using the `and` and `or` operators, we can _combine_ Boolean tests @ifproglan
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Composing
 
 We already know how to filter, sort, and build columns - but what if we want to do _multiple things, all at once?_ Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
 
----
+@slidebreak
 {layout="Launch"}
 # Composing
 
@@ -126,7 +126,7 @@ To provide her with this data, what operations do we need to do to our dataset?
 We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Composing
 
@@ -138,13 +138,13 @@ What do you think will happen if we try to filter animals that weigh more than 9
 (Sample responses:) It will crash! The computer won't like it!
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Composing
 
 If we use our @ifproglang{pyret}{functions} @ifproglang{codap}{Transformers} in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results!
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -154,7 +154,7 @@ One way to organize our thoughts is to diagram what we want to do, using the @vo
 
 2) The arguments of the @ifproglang{pyret}{function} @ifproglang{codap}{Transformer} are written left-to-right, in the middle of the Circle.
 
----
+@slidebreak
 {layout="Launch"}
 # Composing
 
@@ -162,7 +162,7 @@ Values like Numbers, String, and Booleans are still written by themselves. It's 
 
 
 @ifproglang{pyret}{
----
+@slidebreak
 {layout="LaunchC"}
 # Composing
 
@@ -173,7 +173,7 @@ Let's try diagraming what we need to do for the journalist, using the Circles of
 
 
 @ifproglang{codap}{
----
+@slidebreak
 {layout="LaunchC"}
 # Composing
 
@@ -181,7 +181,7 @@ Let's try diagraming what we need to do for the journalist, using the Circles of
 
 }
 
----
+@slidebreak
 {layout="LaunchC"}
 # Composing
 
@@ -189,7 +189,7 @@ But we also need to filter by that new column, so that we only have animals weig
 
 
 @ifproglang{pyret}{
----
+@slidebreak
 {layout="LaunchC"}
 # Composing
 
@@ -203,7 +203,7 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 
 @ifproglang{codap}{
----
+@slidebreak
 {layout="LaunchC"}
 # Composing
 
@@ -213,7 +213,7 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -222,14 +222,14 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 
 @ifproglang{pyret}{
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
 To convert a Circle of Evaluation into code, **we start at the outside and work our way in**. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(pie-chart (filter animals-table is-dog) "fixed"))}.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -245,7 +245,7 @@ Use different color markers to draw the Circles of Evaluation, and then use thos
 }
 
 @ifproglang{codap}{
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -262,7 +262,7 @@ We also encourage students to rename tables descriptively. By the end of this ex
 -->
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -275,7 +275,7 @@ Sometimes, the hardest part of solving a problem is knowing what you want to do,
 For example, sometimes solving an equation is a lot easier than __setting it up in the first place__. Circles of Evaluation give us an opportiunity to think through what we want to do, before getting in front of the computer and worrying about how to do it.
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Composing
 
@@ -284,7 +284,7 @@ Armed with these tools, we can do some pretty complex analysis! We can even thin
 @image{images/box-plot-coe.png}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Composing
 
@@ -294,13 +294,13 @@ Complete @printable-exercise{pages/planning-table-operations.adoc}.
 Review student answers to @printable-exercise{pages/planning-table-operations.adoc}.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Composing
 
 Was it helpful to think about the Circles, without worrying about @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}? Why or why not?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Materials
 

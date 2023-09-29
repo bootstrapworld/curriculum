@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Collision Detection - Distance and Inequality{style="font-size:30pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Problem Decomposition Returns! 
 
@@ -13,7 +13,7 @@ Knowing how far apart our characters are is the first step. But in order to keep
 
 "Problem Decomposition" is a powerful tool, which lets us break apart complex problems into simpler ones that we can solve, test, and then glue together into a complex solution.
 
----
+@slidebreak
 {layout="Launch"}
 # Problem Decomposition Returns! 
 
@@ -26,7 +26,7 @@ You may remember that there are two strategies for decomposing problems:
 Before we focus on our game code, let's practice breaking apart a different complex word problem.
 
 
----
+@slidebreak
 {layout="Investigate-R"}
 # Problem Decomposition Returns! 
 
@@ -51,7 +51,7 @@ Does one function depend on (or "sit on top of") the other? If so, which one?{st
 * _Yes - `area` depends on `height`._
 -->
 
----
+@slidebreak
 {layout="Investigate-R"}
 # Problem Decomposition Returns! 
 
@@ -66,7 +66,7 @@ __*Write a function that computes the area of the triangle as a function of time
 
 @image{images/retracting-flag.jpg}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Problem Decomposition Returns! 
 
@@ -74,7 +74,7 @@ __*Write a function that computes the area of the triangle as a function of time
 - Did anyone start out with one, and then switch to another?
 - Which was easier for you?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Collision Detection 
 
@@ -84,7 +84,7 @@ Turn to @printable-exercise{pages/collision.adoc} and write a function that take
 
 Fix the @show{(code 'collision?)} function in @starter-file{program-list, your game file}, and click Run!
 
----
+@slidebreak
 {layout="Synthesize"}
 # Collision Detection 
 
@@ -95,7 +95,7 @@ We wrote the `distance` function first, and then @show{(code 'collision?)}. Is t
 - Connect this back to `profit`, `revenue`, `cost` and `onscreen` from @lesson-link{problem-decomposition}. Problem Decomposition is powerful!
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

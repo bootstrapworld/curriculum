@@ -1,17 +1,17 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Bar & Pie Charts
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Grouping by Value
 
 Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
 
----
+@slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
@@ -33,7 +33,7 @@ Open the @starter-file{animals}, click "Run" and test the expressions @show{(cod
 - Hit the up arrow in the Interactions Area to reload your last expression and test it out! 	
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
@@ -41,7 +41,7 @@ Both `bar-chart` and `count` *group the data in one column by value*, creating "
 
 @image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385} 
 
----
+@slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
@@ -49,7 +49,7 @@ Hovering over a bar reveals the label, as well as the number of animals in that 
 
 **Bar charts group data _by value_ to show frequency as a count.**
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Grouping by Value
 
@@ -57,7 +57,7 @@ Hovering over a bar reveals the label, as well as the number of animals in that 
 
 **Pie charts group data _by value_ to show frequency as a percentage.**
 
----
+@slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
@@ -65,7 +65,7 @@ If our data is based on sample data from a larger population, we can use these c
 
 While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.
 
----
+@slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
@@ -84,7 +84,7 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 - Look at the list of columns in the Definitions Area. For which columns do you expect pie charts to be most useful?
 ** _Species, Sex, Fixed, and Legs_ 
 }
----
+@slidebreak
 {layout="Synthesize"}
 # Grouping by Value
 
@@ -112,7 +112,7 @@ _Answers will vary, but here are some important points:_
 ** _Sample Answer: If a service isn't reaching a sector of the population, it's easier to ignore the issue if that population doesn't get represented in the display._
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Groups and Subgroups
 
@@ -127,7 +127,7 @@ Comparing groups is great, but sometimes we want to compare __sub-groups across 
 ** __5 are male, 6 are female__	
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Groups and Subgroups
 
@@ -140,7 +140,7 @@ Fortunately, Pyret has two functions that let us specify both a group and a subg
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
 - Which display do you think is easier to read?
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Groups and Subgroups
 
@@ -150,7 +150,7 @@ On a stacked bar chart, we can easily to compare _groups_, but it is more diffic
 
 @right{@image{images/stacked-species-sex.png, 300}} Stacked bar charts put the totals side by side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Groups and Subgroups
 
@@ -158,13 +158,13 @@ On a multi bar chart, we can easily compare _subgroups_, but it is more difficul
 
 @right{@image{images/multi-species-sex.png, 300}} Multi bar charts put the subgroups side by side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Investigate"}
 # Groups and Subgroups
 
 Complete @printable-exercise{matching-stacked-to-multi.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Groups and Subgroups
 
@@ -174,7 +174,7 @@ All of the charts we've looked at in this lesson work with @vocab{categorical da
 - What kinds of questions are better answered by stacked bar charts?
 - What kinds of questions are better answered by multi bar charts?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

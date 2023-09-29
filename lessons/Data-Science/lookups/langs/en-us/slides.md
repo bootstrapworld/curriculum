@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Row and Column Lookups
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Row Lookups
 
@@ -16,7 +16,7 @@ Sometimes we have a value that we want to use again and again, and it makes sens
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Row Lookups
 
@@ -37,7 +37,7 @@ Every definition includes a _name_ and a _value_. In the code below, we have def
 ** __the String "Flannery", the Number 16, and an Image of a solid red star__
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Row Lookups
 
@@ -52,7 +52,7 @@ Every definition includes a _name_ and a _value_. In the code below, we have def
 (Make sure sure students understand we only need one row!)
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Row Lookups
 
@@ -71,7 +71,7 @@ For example, we can get the first data row in a table by using the `row-n` funct
 <!--
 Drive the "data rows start at index zero" point home a LOT, as it's a source common errors
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Row Lookups
 
@@ -81,7 +81,7 @@ Find `row-n` in your Contracts page. What is the Domain of `row-n`? What is the 
 <!--
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Row Lookups
 
@@ -96,7 +96,7 @@ It's often better to name our Row definitions according to the _property we care
 `cat-row = row-n(animals-table, 0)`
 <!--
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Row Lookups
 
@@ -106,7 +106,7 @@ It's often better to name our Row definitions according to the _property we care
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Column Lookups
 
@@ -124,7 +124,7 @@ Row accessors start with a Row value, followed by square brackets, and the name 
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Column Lookups
 
@@ -140,7 +140,7 @@ cat-row["fixed"]
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Column Lookups
 
@@ -151,7 +151,7 @@ cat-row["fixed"]
 <!--
 Debrief student answers here
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Row Lookups
 
@@ -165,7 +165,7 @@ Debrief student answers here
 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Column Lookups
 
