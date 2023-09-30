@@ -127,7 +127,9 @@ function find_image_orientation(segment, default)
     return 'C'
   else
     local n = number_of_images(segment)
-    if n == 1 then
+    if n == 0 then
+      return ''
+    elseif n == 1 then
       return 'R'
     else
       return default
