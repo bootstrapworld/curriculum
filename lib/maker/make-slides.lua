@@ -160,7 +160,7 @@ function make_slides_file(lplan_file, slides_file)
     --
     if k == 1 then
       if title then
-        o:write('---\n')
+        o:write('@slidebreak\n')
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', title, '\n\n')
         o:write('<!--\n')
@@ -183,7 +183,7 @@ function make_slides_file(lplan_file, slides_file)
         local image_orientation = find_image_orientation(current_segment)
         local suffix = find_suffix(current_segment)
         --
-        o:write('---\n')
+        o:write('@slidebreak\n')
         o:write('{layout="', section, image_orientation, suffix, '"}\n')
         o:write('# ', current_title, '\n\n')
         for j,L in ipairs(current_segment) do
