@@ -32,7 +32,7 @@
 
 | Key Points For The Facilitator
 |
-* Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the bevahior of _three_ factors.
+* Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of _three_ factors.
 * Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
 |===
 
@@ -84,7 +84,7 @@ There's definitely a relationship here. But we know that the best-possible linea
 | @image{images/fuel-efficiency-linear3.png}
 |===
 
-...but all of them are so far away from so many points, and our @vocab{R&sup2;} is pretty bad.
+...but all of them are so far away from so many points, all three models will make very poor predictions for a large subset of x-values.
 
 @lesson-instruction{
 - Complete the rest of @printable-exercise{pages/exploring-mpg.adoc}. Be ready to share back and describe the curve you drew.
@@ -93,7 +93,7 @@ There's definitely a relationship here. But we know that the best-possible linea
 
 Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency _decreases!_
 
-@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset with a relatively strong correlation. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!
+@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!
 
 Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it).
 }
@@ -125,7 +125,7 @@ There are lots of relationships that change direction like this! For example, wh
 ** _A ball thrown in the air will rise quickly, slow down, peak, and then begin to fall._
 ** _The temperature of a puddle will warm and then cool over the course of the day._
 ** _The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets._
-* Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled ny linear or quadratic relationships.
+* Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear or quadratic relationships.
 }
 
 === Investigate
@@ -156,7 +156,7 @@ Turn to @printable-exercise{classifying-tables.adoc}. One of the first two table
 [.sideways-pyret-table]
 !===
 ! x !  0 ! 1 ! 2  !  3 !  4 ! 5  ! 6
-! y !  5 ! 6 ! 9  ! 14 ! 21 ! 24 ! 27
+! y !  5 ! 6 ! 9  ! 14 ! 21 ! 30 ! 41
 !===
 
 | @n
@@ -174,17 +174,17 @@ Turn to @printable-exercise{classifying-tables.adoc}. One of the first two table
 - Use the space to the right of the table to show any computations or work that you deem useful.
 }
 
-@teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, becuase the points won't fit the function perfectly!}
+@teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, because the points won't fit the function perfectly!}
 
 When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. *Let's define the parts of a parabola together.*
 
-@lesson-instruction{
-- Linear relationships can be described with terms like "slope" and "y-intercept". But what about quadratic relationships? Do parabolas have slope?
-** _No. They curve because they *do not* have a constant rate of change._
-- Do all parabolas have y-intercepts?
-** _No. Some do and some don't!_
-- Can you point out or describe other important parts of a parabola?
-** _Even without knowing the names for these things, students might point to the vertex, the axis of symmetry, etc._
+@QandA{
+@Q{Linear relationships can be described with terms like "slope" and "y-intercept". But what about quadratic relationships? Do parabolas have slope?}
+@A{No. They curve because they *do not* have a constant rate of change.}
+@Q{Do all parabolas have x-intercepts?}
+@A{No. Some do and some don't!}
+@Q{Can you point out or describe other important parts of a parabola?}
+@A{Even without knowing the names for these things, students might point to the vertex, the axis of symmetry, etc.}
 }
 
 @teacher{Invite students to share what they know or can infer about a parabola's parts. If needed, provide the definitions on the table below, which refer to specific points on a parabola.}
@@ -219,10 +219,10 @@ Also known as @vocab{roots} or @vocab{zeros}. A quadratic function can cross the
 
 There are two more specific terms that we can use to describe a parabola's vertex:
 
-- The @vocab{maxima} is the vertex of a parabola that "opens up."
-- The @vocab{minima} is the vertex of a parabola that "opens down."
+- The @vocab{maximum} is the vertex of a parabola that "opens up."
+- The @vocab{minimum} is the vertex of a parabola that "opens down."
 
-Every parabola also has an @vocab{axis of symmetry}, an imaginary vertical line through the @vocab{vertex} that splits the curve into two congruent parts that mirror each other.
+For parabolas representing y as a quadratic function x the @vocab{axis of symmetry} is an imaginary vertical line through the @vocab{vertex} that splits the curve into two congruent parts that mirror each other.
 
 @lesson-instruction{
 Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sketching and labelling some graphs.
@@ -232,9 +232,9 @@ Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sket
 
 * What key characteristics of a scatter plot would provide the clue that we should look for a quadratic model rather than a linear model?
 * Why do some parabolas have roots and others don't?
-** _The location of the minima or maxima in relationship to the x-axis determines the number of roots._
-* What is the difference between a minima and a maxima?
-** _A minima is the vertex of a parabola that opens up, while a maxima is the vertex of a parabola that opens down._
+** _The location of the minima or maximum in relationship to the x-axis determines the number of roots._
+* What is the difference between a minima and a maximum?
+** _A minima is the vertex of a parabola that opens up, while a maximum is the vertex of a parabola that opens down._
 
 == Fitting Quadratic Models @duration{45 minutes}
 
@@ -284,9 +284,9 @@ Return to @starter-file{alg2-fuel-efficiency} and work through @printable-exerci
 @strategy{
 @span{.title}{Going Deeper: Interaction Effects}
 
-We often think about variables of a model being _independent_ from one another, each contributing a little to the outcome we are measuring. But sometimes one input will amplify the result of another input, meaning their combined contribution is greater than the sum of their separate contributions.
+You may be wondering why fuel efficiency is a function of the square of the speed, rather than the speed itself. Physicists have determined that the drag of a moving object (that is, the effect of air slowing it down) is calculated based on squared velocity.
 
-A quadratic relationship often means that one or more variables is _interacting_ with another variable. In our miles-per-gallon example, it turns out that a linear increase in speed has a _more than linear effect_ on mpg!
+Quadratic relationships can _also_ show up in what are called "interaction effects". We often think about variables of a model being _independent_ from one another, each contributing a little to the outcome we are measuring. But sometimes one input will amplify the result of another input, meaning their combined contribution is greater than the sum of their separate contributions.
 }
 
 === Synthesize
