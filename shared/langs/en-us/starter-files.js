@@ -667,5 +667,12 @@ var starterFiles = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1zAmGO9PfiBFtxUEyiLojmddMIa_EHkhV&v=4d870d2"
     }
+  },
+  "functions": {
+    "title": "Function Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=14zWwnSiDBUC2pRaQF4hk2LnYBpiOYIjm&v=4d870d2"
+    }
   }
 }
+
