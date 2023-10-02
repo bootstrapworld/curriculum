@@ -70,15 +70,15 @@ rotate(45, scale(3, star(50, "solid", "green")))
 ** _We'd have to change the color everywhere it appeared._
 }
 
-@lesson-point{
-Duplicate code is almost always bad!
-}
-
 There are lots of potential problems with duplicate code:
 
 - *Readability:* The more code there is, the harder it can be to read.
 - *Performance:* Why re-evaluate the same code a dozen times, when we can evaluate it _once_ and use the result as many times as we need?
 - *Maintainability:* Suppose we needed to change the size of the stars in the examples above. We would have to make sure every line is changed, which leaves a lot of room for error.
+
+@lesson-point{
+Duplicate code is almost always bad!
+}
 
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
@@ -159,6 +159,7 @@ Note: The above worksheet will direct students to open the @starter-file{flags-c
 - Write the code on the line provided in question 2. Then type it into the Interactions Area and click "Run".
 - Define the value `sunny` in the Definitions Area.
 - Complete the page and test your code in the editor.
+- When you're done, turn to @printable-exercise{pages/writing-code-using-defined-values.adoc} and follow the directions to work with a new function you'll define called `PRIZE-STAR`.
 }
 
 === Synthesize
@@ -168,7 +169,6 @@ Note: The above worksheet will direct students to open the @starter-file{flags-c
 
 == Additional Exercises
 
-* @printable-exercise{pages/writing-code-using-defined-values.adoc}
 @ifproglang{wescheme}{
 * @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay & put-image}
 }
