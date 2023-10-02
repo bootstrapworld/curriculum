@@ -62,11 +62,12 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 
 The pyramid on the right is a model for summarizing the order of operations. When evaluating an expression, we begin by applying the operations written at the top of the pyramid (operations in parentheses and other grouping symbols). Only after we have completed all of those operations can we move down to the lower level. If both operations from the same level are present (as in @math{4 + 2 - 1}), we read the expression from left to right, applying the operations in the order in which they appear. This set of rules is brittle, and doesn't always make it clear what we need to do. Mnemonic devices for the order of operations like PEMDAS, GEMDAS, etc focus on how to get the answer. What we need is a __better way to read math__.
 
-[.lesson-instruction]
+@lesson-instruction{
 * Check out the expression below. What do you think the answer is?
 ** _Students will likely offer 9 (correct) and 1 (incorrect)._
 * This math problem went viral on social media recently, with math teachers arguing about what the answer was! Why might they disagree on the solution?
 ** _Disagreement on the solution is a result of disparate ideas of how to parse the problem._
+}
 
 
 ++++
@@ -87,8 +88,9 @@ Instead of using a rule for computing answers, let's start by diagramming the ma
 The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
 }
 
-[.lesson-instruction]
+@lesson-instruction{
 We can _draw the structure_ of this grammar in mathematics using something called the *Circles of Evaluation*. The rules are simple:
+}
 
 *1) Every Circle must have one - and only one! - function, written at the top.*
 
@@ -110,14 +112,16 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 [.centered-image]
 @show{(coe '(/ 6 (+ 1 2)))}
 
-[.lesson-instruction]
+@lesson-instruction{
 What would the Circle of Evaluation for @math{5 \times 6} look like?
+}
 
 [.centered-image]
 @show{(coe '(* 5 6))}
 
-[.lesson-instruction]
+@lesson-instruction{
 How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
+}
 
 [.centered-image]
 @show{(coe '(* (- 10 5) 6))}
@@ -141,8 +145,9 @@ In this case, the student __failed to see the structure__, viewing the term to t
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} and draw Circles of Evaluation for each of the expressions. (Ignore the code column for now! We will come back to it later.)
+}
 
 Spend some time ensuring that students have drawn their circles correctly. You may want to have them compare their circles with a partner and another pair of partners or you may want to post an answer key. Students will use their circles to write code in the next segment of the lesson - so this step is crucial.
 
@@ -207,8 +212,9 @@ Arithmetic expressions involving more than one operation, will end up with more 
 - Why are there two closing parentheses in a row, at the end of the code?
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
 
-[.lesson-instruction]
+@lesson-instruction{
 What would the code look like for these circles?
+}
 
 [.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -220,10 +226,11 @@ What would the code look like for these circles?
 
 If you have time, start with these two pages that scaffold translating circles to code: @printable-exercise{pages/complete-code-from-coe.adoc} and @printable-exercise{pages/match-coe-to-code.adoc}.
 
-[.lesson-instruction]
+@lesson-instruction{
 - Now that we know how to translate Circles of Evaluation into Code, turn back to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc}. Translate the circles you drew into code!
 - Once you confirm that your code is correct, continue on to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}.
 - If time allows, take turns entering the code into the editor with your partner.
+}
 
 Note: @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} offers students the scaffold of extra parentheses. Those scaffolds drop away on @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}.
 
@@ -260,18 +267,18 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 
 === Launch
 
-[.lesson-instruction]
+@lesson-instruction{
 - Open @starter-file{editor} and click "Run".
 - For now, we are only going to be working in the Interactions Area on the right hand side of your screen.
 - Type @show{(code '(+ (* 8 2) (/ 6 3)))} into the Interactions Area.
 - Notice how the editor highlights pairs of parentheses to help you confirm that you have closed each pair.
 - Hit Enter (or Return) to evaluate this expression. What happens? _If you typed the code correctly you'll get 18. If you make a mistake with your typing, the computer should help you identify your mistake so that you can correct it and try it again!_
 - Take a few minutes to go back and test each line of code you wrote on the pages you've completed by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.
+}
 
 === Investigate
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Here are two Circles of Evaluation.
 
 [cols="^1,^2", grid="none", frame="none"]
@@ -280,7 +287,7 @@ Here are two Circles of Evaluation.
 |===
 
 One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right?
---
+}
 
 [.indentedpara]
 --
@@ -309,8 +316,7 @@ Here's those same two Circles - one for an operator and another for a function -
 }
 
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Can you figure out the Name for the function in the second Circle? This is a chance to look for and make use of structure in deciphering a novel expression!
 _We know the name of the function is `text`, because that's what is at the top of the circle._
 - What do you think this expression will evaluate to?
@@ -323,7 +329,7 @@ Here is another circle to explore.
 
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
---
+}
 
 === Synthesize
 

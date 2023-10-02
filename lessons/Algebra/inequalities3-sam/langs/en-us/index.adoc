@@ -33,9 +33,10 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 
 === Launch
 
-[.lesson-instruction]
+@lesson-instruction{
 - Open the @starter-file{inequalities-sam} in a new tab and save a copy of your own.
 - Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
+}
 
 As students explore the program, they should notice that Sam's coordinates are displayed at the top of the screen. When Sam is at (0,0), we only see a part of Sam's wing because Sam's position is based on the _center_ of the butterfly image. Students should observe that Sam can go up to, but not beyond, an x of -50. Students can represent this algebraically as @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}.
 
@@ -49,7 +50,7 @@ Every time Sam moves, we want to check and see if Sam is safe.
 
 To further support students, consider asking what three functions are defined in their starter files. Then, ask students what each function _should_ do, when working properly.
 
-[.lesson-instruction]
+@lesson-instruction{
 - What _should_ our left-checking function do?
 ** _Check to see if x is greater than -50._
 - What _should_ our right-checking function do?
@@ -57,6 +58,7 @@ To further support students, consider asking what three functions are defined in
 @ifproglang{pyret}{
 - What should @show{(code '(onscreen? x y))} do?
 ** _Answers may vary. Let students drive the discussion, and don't give away the answer!_
+}
 
 @strategy{
 @span{.title}{Why does @show{(code '(onscreen? x y))} take in both x and y?
@@ -79,9 +81,10 @@ However, later on in _this lesson_ we will discuss how students with time and en
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 - Complete @printable-exercise{pages/left-and-right.adoc} with your partner.
 - Once finished, fix the corresponding functions in your Sam the Butterfly file, and test them out.
+}
 
 Students will notice that fixing @show{(code 'safe-left?)} keeps Sam from disappearing off the left side, but fixing @show{(code 'safe-right?)} doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why.
 
@@ -165,11 +168,12 @@ For example:
 Hopefully your students will notice that `safe-right?` did not participate in this roleplay scenario at all!
 --
 
-[.lesson-instruction]
+@lesson-instruction{
 - What is the problem with `onscreen?`?
 ** _It's only talking to `safe-left?`, it's not checking with ``safe-right?``_
 - How can `onscreen?` check with both?
 ** _It needs to talk to `safe-left?` AND ``safe-right?``_
+}
 }
 
 @ifproglang{pyret}{
@@ -191,21 +195,22 @@ Hopefully your students will notice that `safe-right?` did not participate in th
 - is-onscreen (turns back to facilitator): "true"
 
 Hopefully your students will notice that `is-safe-right` did not participate in this roleplay scenario at all!
---
 
 
-[.lesson-instruction]
+@lesson-instruction{
 - What is the problem with `is-onscreen`?
 ** _It's only talking to `is-safe-left`, it's not checking with ``is-safe-right``_
 - How can `is-onscreen` check with both?
 ** _It needs to talk to `is-safe-left` AND ``is-safe-right``_.
 }
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 - Complete @printable-exercise{pages/onscreen.adoc}.
 - When this function is entered into the editor, students should now see that Sam is protected on __both__ sides of the screen.
+}
 
 @strategy{
 @span{.title}{Extension Option}
@@ -230,7 +235,7 @@ Students identify common patterns between two-dimensional Boundary detection and
 
 Have students open their in-progress game file and click "Run". Invite them to analyze the movement of the danger and the target
 
-[.lesson-instruction]
+@lesson-instruction{
 - How are the `TARGET` and `DANGER` behaving right now?
 ** _They move across the screen._
 - What do we want to change?
@@ -239,11 +244,13 @@ Have students open their in-progress game file and click "Run". Invite them to a
 ** _An image is entirely off-screen if its x-coordinate is less than -50 and greater than 690._
 - How can we make the computer understand when an image has moved off the screen?
 ** _We can teach the computer to compare the image's coordinates to a boundary on the number line, just like we did with Sam the Butterfly!_
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 Apply what you learned from Sam the Butterly to fix the @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)} functions in your own code.
+}
 
 Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
 

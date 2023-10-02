@@ -37,26 +37,29 @@ Students practice carefully reading the contents of a starter file to review and
 
 === Launch
 
-[.lesson-instruction]
+@lesson-instruction{
 - Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
 - Hit "Run," then type `shapes-table` in the Interactions Area.
 - The way this file defines a table is different from what we've encountered before. How is it different?
 ** Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the `shapes-table` one row at a time.
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 With your partner, take 5 minutes to complete @printable-exercise{pages/row-and-function-definitions.adoc}.
+}
 
 Once students have completed the activity, follow up to confirm understanding.
 
-[.lesson-instruction]
+@lesson-instruction{
 * Who can explain what `is-red` does?
 ** _It looks up the color of the row, and checks if it is equal to the string `"red"`._
 * Who can explain what `is-polygon` does?
 ** _It looks up the value in the `polygon` column._
 * Who can explain what `is-triangle` does?
 ** _It checks if the value in the `name` column contains `"triangle"`._
+}
 
 Challenge students to use terminology like "looks up the value in the X column" when describing a lookup.
 
@@ -103,18 +106,20 @@ Have your helper function and `filter` work together to act out one round of thi
 === Investigate
 Pyret Tables have their own functions for filtering tables - and more! Let's explore some of these.
 
-[.lesson-instruction]
+@lesson-instruction{
 Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
+}
 
 Confirm that students understand the following key ideas:
 
 * `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
 * `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
 
-[.lesson-instruction]
+@lesson-instruction{
 * How would you filter and build using the Animals Dataset? 
 * For practice, complete @printable-exercise{pages/what-table-do-we-get.adoc}.
 * @optional Complete @opt-printable-exercise{design-recipe-1.adoc} and @opt-printable-exercise{design-recipe-2.adoc} to practice using the Design Recipe to write filter functions for the @starter-file{animals}.
+}
 
 === Common Misconceptions
 *Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.

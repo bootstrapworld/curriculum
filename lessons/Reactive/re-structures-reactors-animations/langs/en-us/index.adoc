@@ -47,18 +47,21 @@ Step 1: Define the data structure
 
 The first step is to develop a @vocab{data structure} for the information that changes across frames. To do this, we need to figure out what @vocab{fields} our data structure will need.
 
-[.lesson-instruction]
+@lesson-instruction{
 Turn to @printable-exercise{pages/sunset-animation-worksheet.adoc} in your workbook. Copy the three sunset images we gave you into the boxes at the top of the worksheet.
+}
 
 To identify the fields, we have to figure out what information is needed to create each frame image. Information that changes from frame to frame must be in the data structure.
 
-[.lesson-instruction]
+@lesson-instruction{
 On your worksheet, fill in the table just below the three images to indicate what information changes across the frames.
+}
 
 Hopefully, you identified two pieces of changing information: the x-coordinate of the sun and the y-coordinate of the sun. Each image also contains the horizon (the brown rectangle), but that is the same in every frame. Let’s write down a data structure that captures the two coordinates.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then turn to @printable-exercise{pages/blank-type.adoc} and fill in the `SunsetState` data structure definition at the top of the page. Use `sunset` as the name of the constructor.
+}
 
 You should have come up with something like this: a data block with numbers for the two coordinates.
 
@@ -88,8 +91,9 @@ Any time we make a data structure, we should make some sample @vocab{instances}:
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 At the bottom of the worksheet, use the `sunset` constructor to write write down the `SunsetState` instance for the first frame (labeled "`Sketch A`"). It has x-coordinate 10 and y-coordinate 300.
+}
 
 @lesson-point{
 Step 2: Draw one frame
@@ -97,8 +101,9 @@ Step 2: Draw one frame
 
 The second step in making an animation is to write a function that consumes an instance of one state and produces the image for that instance. We call this function `draw-state`. For sunset, `draw-state` takes a `SunsetState` instance and produces an image with the sun at that location (dipping behind the horizon when low in the sky).
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to @printable-exercise{pages/draw-state.adoc} in your workbook and develop the `draw-state` function described there. Type in your function and use it (in the interactions window) to draw several individual sunset frames.
+}
 
 You may have noticed that we used `SunsetState` instead of `sunset` as the domain name. Remember that `sunset` is just the name of the constructor, while `SunsetState` is the name of the type. We use `SunsetState` whenever we need a type name for the domain or range. 
 
@@ -110,13 +115,13 @@ Step 3: Produce the next frame instance
 
 The third step in making an animation is to write a function that consumes an instance of one state and produces the instance for the next state. We call this function `next-state-tick`. For sunset, `next-state-tick` takes a `SunsetState` instance and produces a `SunsetState` instance that is just a little lower in the sky.
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to @printable-exercise{pages/next-state-tick.adoc} in your workbook and develop the `next-state-tick` function described there. Use the sample `SunsetState` instances that you developed in step 1 as you make your examples of the function. Then, type in the code you have so far (including the data definition for `SunsetState` into the sunset starter file, and make sure your examples are producing the expected answers.
+}
 
 Together, the `draw-state` and `next-state-tick` functions are the building blocks for an animation. To start to see how, let’s first use these two functions to create the first several frames of an animation by hand (then we’ll show you how to make more frames automatically).
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Run each of the following expressions in the interactions window in turn. Just copy and paste them, rather than type them by hand each time:
 
 - `draw-state(sunset(10,300))`
@@ -128,19 +133,18 @@ Now use `draw-state` on the result of `next-state-tick`, then call `next-state-t
 - `next-state-tick(sunset(18,296))`
 - `draw-state(sunset(26,292))`
 - `next-state-tick(sunset(26,292))`
---
+}
 
 Do you see the sun getting lower in the sky from image to image? Do you see how we are creating a "`chain`" of images by alternating calls to `draw-state` and `next-state-tick`? We use `next-state-tick` to create the instance for a new frame, then use `draw-state` to produce the image for that frame.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 (Optional) Here’s another way to see the same sequence of expressions. Run each of the following expressions in the interactions window in turn. Just copy and paste them, rather than type them by hand each time:
 
 - `draw-state(sunset(10,300))`
 - `draw-state(next-state-tick(sunset(10,300)))`
 - `draw-state(next-state-tick(next-state-tick(sunset(10,300))))`
 - `draw-state(next-state-tick(next-state-tick(next-state-tick(sunset(10,300)))))`
---
+}
 
 Do you see what this sequence of expressions does? Each one starts with the sun in the upper-left corner, calls `next-state-tick` one or more times to compute a new position for the sun, then draws the state. Notice that this sequence only has us write down one `SunsetState` instance explicitly (the first one). All the others are computed from `next-state-tick`. If we could only get Pyret to keep making these calls for us, and to show us the images quickly one after the next, we’d have an animation!
 
@@ -189,8 +193,9 @@ starts. In this example, the program will start with a
 `to-draw` are event @vocab{handlers}, which connect `tick` and `draw` events to
 our `next-state-tick` and `draw-state` functions.
 
-[.lesson-instruction]
+@lesson-instruction{
 Copy this reactor definition into your sunset animation program.
+}
 
 === Common Misconceptions
 Separating the instance from the image of it is key here: when we produce an animation, we actually produce a sequence of instances, and use draw-state to produce each one. Students may need some practice to think of the instance as separate from the image that goes into the animation.
@@ -198,8 +203,9 @@ Separating the instance from the image of it is key here: when we produce an ani
 If you run your sunset program after adding the reactor, nothing seems to happen. We have set up an animation by defining `sunset-react`, but we haven’t told Pyret to run it. You could define multiple reactors in the same file, so we have to tell
 Pyret explicitly when we want to run one.
 
-[.lesson-instruction]
+@lesson-instruction{
 Type `interact(sunset-react)` in the interactions window to run your sunset animation.
+}
 
 What happens when we call `interact`? The following diagram summarizes what Pyret does to run the animation. It draws the initial instance, then repeatedly calls `next-state-tick` and `draw-state` to create and display successive frames of your animation.
 
@@ -242,18 +248,21 @@ Figuring out the data structure is actually one of the most creative tasks in pr
 
 *Exercise: Jumping Cow* -- Look at this animation of a cow jumping over the moon.
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to @printable-exercise{sunset-animation-worksheet.adoc} in the workbook. Draw three frames from this animation. Choose ones that highlight differences across the frames. The frames don’t need to be consecutive.
+}
 
 When you chose which frames to draw, did you include ones with different images or heights of the cow? Choosing images with some variation will help you think through the data in your animation.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what information changes across the frames.
+}
 
 In this case, the cow’s x-coordinate and y-coordinate are both changing. The image changes too, but the position (coordinates) determines which image to use. The state data structure therefore only needs to store the coordinates.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `CowState` to capture the data in this animation.
+}
 
 If students want to include the image in the state, that is fine too. Examples like this are good for raising discussion about what parts of an animation depend on one another. The image doesn’t need to be in the state, but it isn’t wrong to include it
 there either.
@@ -261,30 +270,35 @@ there either.
 @right{@image{images/cycling.gif, 400}}
 *Exercise: Bicycle Ride* -- Look at this animation of a person riding a bicycle along a street.
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to the next animation worksheet page in the workbook. Draw three frames from this animation. Choose ones that highlight differences across the frames. The frames don’t need to be consecutive. Then, fill in the table of what information changes across the frames.
+}
 
 In this case, there are two pieces of information: the x-coordinate of the cyclist, and the angle of rotation of the bike tires.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `BikeState` to capture the data in this animation.
+}
 
 
 @right{@image{images/pulsingstar.gif, 200}}
 *Exercise: Pulsing Star* -- Look at this animation of a star that pulses as it moves across the sky.
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to next animation worksheet page in the workbook. Draw three frames from this animation. Choose ones that highlight differences across the frames. The frames don’t need to be consecutive.
+}
 
 When you chose which frames to draw, did you show the star getting smaller and then getting larger again?
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what information changes across the frames.
+}
 
 The x- and y-coordinates of the star change, as does the size of the star. These changes are easy to see across two frames. Something else changes too, but you have to look across at least three frames to see it. Imagine you had a single frame with the star at size 25. In the next frame, should the star be larger or smaller? It’s hard to tell, because we don’t know whether the star is currently in a "`growing`" phase or a "`shrinking`" one. This animation actually has a fourth state field: the direction of growth of the star. When the star is getting bigger, the star’s size should increase in the next frame. When the star is getting smaller, the size should decrease in the next frame.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `StarState` to capture the data in this animation.
+}
 
 What type did you choose for the field that tracks the direction of growth? You have several choices: a Boolean such as `is-growing`, a string such as `direction` (with values `"grow"` or `"shrink"`), or a number such `growth-rate` which is the amount to add to the size from state to state (a positive value grows the star while a negative value shrinks it). The code for `next-state-tick` will be cleaner if you use the number, but the others make sense before you’ve thought ahead to the code.
 
@@ -295,18 +309,21 @@ The type for tracking direction of growth gives potential for a good discussion.
 @right{@image{images/dimmer.gif, 200}}
 *Exercise: Light Dimmer* -- Look at this animation of a slider to control the brightness of a light.
 
-[.lesson-instruction]
+@lesson-instruction{
 Go to the next animation worksheet in your workbook. Draw three frames from this animation. Choose ones that highlight differences across the frames. The frames don’t need to be consecutive.
+}
 
 When you chose which frames to draw, did you include the far left position when the light goes out? It can be useful to think about the extreme cases when picking frames to focus on.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what information changes across the frames.
+}
 
 In this case, we see two things changing: the y-coordinate of the slider and the brightness of the light. You could have one field for each of these. Or, you could just have a field for the y-coordinate and compute the brightness from that value (you can control the brightness of a shape by putting a number from 0 to 255 in place of `"solid"` or `"outline"` in the arguments to the shape-image functions).
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table of what fields you need for each piece of changing information. Write a data structure `LightState` to capture the data in this animation.
+}
 
 ////
 As an example of using the transparency argument, circle(25, 150, "white") creates a semi-bright white circle.
