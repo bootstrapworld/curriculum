@@ -54,6 +54,7 @@ do
     if f:find('^ *;') or f:find('^ *//') or f:find('^ *$') then
       goto continue
     end
+    f = f:gsub('%s+$', '') -- remove any non-Unix \r
     local g = f
     if f:find('landscape') or f:find('portrait') then
       o:write(f, '\n')

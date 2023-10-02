@@ -40,8 +40,9 @@ This lesson is part of a series of features meant to come at the end of the Boot
 
 Finding the distance in one dimesion is pretty easy: if the characters are on the same number line, we subtract the _smaller_ coordinate from the larger one, and we have our distance.
 
-[.lesson-instruction]
+@lesson-instruction{
 When the cat and dog were switched, did you still subtract the dog’s position from the cat’s, or subtract the cat’s position from the dog’s? Why?
+}
 
 ////
 Draw a number line on the board, with the cutouts of the cat and dog at the given positions. Ask students to tell you the distance between them, and move the images accordingly. Having students act this out can also work well: draw a number line, have two students stand at different points on the line, using their arms or cutouts to give objects of different sizes. Move students along the number line until they touch, then compute the distance on the number line.
@@ -52,14 +53,16 @@ Unfortunately, most distances aren’t only measured in one dimension. We’ll n
 @right{@image{images/hypotenuse.png, 400}}
 
 === Investigate
-[.lesson-instruction]
+@lesson-instruction{
 - How could you find the distance between the two points shown in this image?
 - How could you find the length of the C, also called the @vocab{Hypotenuse}?
+}
 
 Let’s start with what we do know: if we treat the x- and y-intercepts of C as lines A and B, we have a right triangle.
 
-[.lesson-instruction]
+@lesson-instruction{
 What is the line-length of A? Would it be different if the triangle pointed downward, and intercepted the point (0, −4)?
+}
 
 ////
 Draw this image on the board, with the lines labeled "A", "B", and "C".
@@ -83,8 +86,9 @@ Have students place their gray triangles onto the paper, to match the diagram.
 
 By moving the gray triangles, it is possible to create two rectangles that fit inside the original square. While the space taken up by the triangles has shifted, it hasn’t gotten any bigger or smaller. Likewise, the white space has been broken into two smaller squares, but in total it remains the same size. By using the side-lengths @math{A} and @math{B}, one can calculate the area of the two squares.
 
-[.lesson-instruction]
+@lesson-instruction{
 What is the area of the smaller square? The larger square?
+}
 
 ////
 You may need to explicitly point out that the side-lengths of the triangles can be used as the side-lengths of the squares.
@@ -96,8 +100,9 @@ The smaller square has an area of @math{A^2}, and the larger square has an area 
 
 @math{A^2 + B^2 = C^2}
 
-[.lesson-instruction]
+@lesson-instruction{
 Does the same equation work for any values of @math{A} and @math{B}?
+}
 
 To get _C_ by itself, we take the square-root of the sum of the areas:
 
@@ -108,8 +113,7 @@ Pythagoras proved that you can get the square of the hypotenuse by adding the sq
 
 Remind students that @math{A} and @math{B} are the horizontal and vertical lengths, which are calculated by line-length.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Turn to @printable-exercise{distance-desc.adoc} - you’ll see the formula written out.
 - Draw out the circle of evaluation, starting with the simplest expression you can see first.
 - Once you have the circle of evaluation, translate it into Pyret code at the bottom of the page, starting with
@@ -119,17 +123,16 @@ check:
   distance(4, 2, 0, 5) is...
 end
 ----
---
+}
 
 Now you’ve got code that tells you the distance between the points (4, 2) and (0, 5). But we want to have it work for _any_ two points. It would be great if we had a function that would just take the x’s and y’s as input, and do the math for us.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Turn @printable-exercise{distance.adoc}, and read the problem statement and function header carefully.
 - Use the Design Recipe to write your distance function. Feel free to use the work from the previous page as your first example, and then come up with a new one of your own.
 - When finished, type your `distance` functions into your game, and see what happens.
 - Does anything happen when things run into each other?
---
+}
 
 You still need a function to check whether or not two things are colliding.
 
@@ -148,16 +151,16 @@ Students implement a simple Boolean-producing function, which composes with the 
 === Launch
 So what do we want to do with this distance?
 
-[.lesson-instruction]
+@lesson-instruction{
 How close should your danger and your player be, before they hit each other?
+}
 
 At the top @printable-exercise{is-collision.adoc} you’ll find the Word Problem for `is-collision`.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Fill in the Contract, two examples, and then write the code. Remember: you WILL need to make use of the `distance` function you just wrote!
 - When you’re done, type it into your game, underneath `distance`.
---
+}
 
 ////
 Using visual examples, ask students to guess the distance between a danger and a player at different positions. How far apart do they need to be before one has hit the other? Make sure students understand what is going on by asking questions: If the collision distance is small, does that mean the game is hard or easy? What would make it easier?
@@ -166,18 +169,18 @@ Using visual examples, ask students to guess the distance between a danger and a
 Now that you have a function which will check whether two things are colliding, you can use it in your game! For extra practice, You can also implement collision detection in this @starter-file{ninja-cat-collisions}. This is the program we’ll be altering for this lesson. In Ninja Cat, when the cat collides with the dog, we want to put the dog offscreen so that it can come back to attack again.
 
 === Investigate
-[.lesson-instruction]
+@lesson-instruction{
 Out of the major functions in the game (`next-state-tick`, `draw-state`, or `next-state-key`), which do you think you’ll need to edit to handle collisions, changing the `GameState` when two characters collide?
+}
 
 We’ll need to make some more `if` branches for `next-state-tick`.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Start with the test: how could you check whether the cat and dog are colliding? Have you written a function to check that?
 - What do the inputs need to be?
 - How do you get the `playery` out of the `GameState`? `playerx`?
 - How do you get the `dangerx` out of the `GameState`? `dangery`?
---
+}
 
 ----
 if is-collision(
@@ -206,12 +209,11 @@ game(
   ...targetspeed...)
 ----
 
-[.lesson-instruction]
---
+@lesson-instruction{
 And what should happen when the cat and dog collide? Can you think of a number that puts the dog off the screen on the left side? What about the dog’s y-coordinate? We could choose a number and always place it at the same y-coordinate each time, but then the game would be really easy! To make it more challenging, we’d like the dog to appear at a random y-coordinate each time it collides with the cat. Thankfully, Pyret has a function which produces a random number between zero and its input:
 
 @show{ (contract "random" '("Number") "Number" )}
---
+}
 
 ----
 if is-collision(
@@ -232,13 +234,12 @@ game(
 
 Collision detection must be part of the next-state-tick function because the game should be checking for a collision each time the GameState is updated, on every tick. Students may assume that draw-state should handle collision detection, but point out that the Range of draw-state is an Image, and their function must return a new GameState in order to set the locations of the characters after a collision.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Once you’ve finished, write another branch to check whether the player and the target have collided. *Challenges:*
 
 - Change your first condition so that the danger gets reset only when the player and danger collide AND the cat is jumping. (What must be true about the player’s y-coordinate for it to be jumping?)
 - Add another condition to check whether the player has collided with the danger while the player is on the ground. This could be a single expression within `next-state-tick`, or you can write a @vocab{helper function} called `game-over` to do this work, and use it in other functions as well (maybe the GameState is drawn differently once the game is over.)
---
+}
 
 ////
 For reference, a complete version of the Pyret Ninja Cat game can be found here.

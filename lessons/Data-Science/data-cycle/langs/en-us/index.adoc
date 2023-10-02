@@ -43,10 +43,11 @@
 Students learn about the _Data Cycle_, which is a scaffold to support asking them in questions, thinking about how those questions relate to the data in front of them, analyzing that data, and interpreting the results.
 
 === Launch
-[.lesson-instruction]
+@lesson-instruction{
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Working in pairs, turn to @printable-exercise{ds-intro/pages/animals-dataset.adoc, The Animals Dataset}, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
 - You and your partner are going to answer a simple question: **are more animals fixed or unfixed?**
+}
 
 Data Science is all about _asking questions of data_. Sometimes the answer is easy to compute. Sometimes the answer to a question is _already in the dataset_ - no computation needed.  And sometimes the answer just sparks more questions!
 
@@ -66,9 +67,10 @@ The Data Cycle[*] is a _roadmap_, which helps guide us in the process of data an
 === Investigate
 **Are more animals fixed or unfixed?** was a pretty specific question, and it was straightforward to answer. But the answers to even simple questions can lead to more interesting questions down the road!
 
-[.lesson-instruction]
+@lesson-instruction{
 - What other questions might come from counting the ratio of fixed to unfixed animals?
 ** _Sample responses: Is there a higher percentage of fixed dogs or fixed cats? At what age do animals get fixed? Do fixed animals get adopted more quickly than unfixed animals?_
+}
 
 === Synthesize
 This is a short example of a *Data Story* - a description of how each step in the Data Cycle was used to go from a question to an answer, and then to the next question. When analyzing a real dataset, Data Scientists might explore lots of questions, resulting in many different Data Stories to tell.
@@ -93,18 +95,20 @@ Most questions can be broken down into one of four categories:
 
 - **Questions we can't answer** We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won't help us answer that question, so as Data Scientists we might need to do some research _beyond the data_. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 
-[.lesson-instruction]
+@lesson-instruction{
 * What kind of question is "Are more animals fixed or unfixed?"?
 ** It's an _arithmetic question_.
 * What kind of question is "How old is Toggle?"
 ** It's a _lookup question_.
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 - Turn to @printable-exercise{which-question-type.adoc}, and fill out the "Type" column in the table at the bottom. *For now, ignore the other columns.*
 - Look at the Wonders you wrote on @printable-exercise{ds-intro/pages/questions-and-column-descriptions.adoc}. Are these Lookup, Arithmetic, or Statistical questions?
 - @optional For more practice, complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
+}
 
 === Common Misconceptions
 - Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.
@@ -135,19 +139,21 @@ Columns, on the other hand, represent information _about each row_. Every animal
 
 If we want to know which cat is the heaviest, we _only care about rows for cats_, and _we only need the `pounds` column_. If we want to know how many fixed animals are rabbits, _we only care about rows for fixed animals_, and _we only need the `species` column_.
 
-[.lesson-instruction]
+@lesson-instruction{
 * If our question is "How old is Mittens?", what rows and column(s) do we need?
 ** _We only need one row for Mittens, and we just need the `age` column_
 * If our question is "Which animal is the heaviest?", what rows and column(s) do we need?
 ** _We need to compare every row, and we only look at the `pounds` column_
 * What rows and columns did we need to answer "Are more animals fixed or unfixed?"?
 ** We needed to look at _all_ the rows, but the only column we care about is `fixed`.
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 - Return to @printable-exercise{which-question-type.adoc} For each question, which rows would you need to answer them? (Sometimes we need all rows, and sometimes we only need a subset.) Which columns would you look at? Write your answers in the last two columns of the table at the bottom.
 - Complete @printable-exercise{which-rows-which-columns.adoc}.
+}
 
 === Common Misconceptions
 Students often forget that questions like "Who is the oldest?" or "What is the most?" require looking at _every row_ in the table.
@@ -180,8 +186,9 @@ Once we've decided what to make and we know which rows and columns we're plottin
 === Investigate
 Let's get some practice going from questions to code, and making data displays in the process!
 
-[.lesson-instruction]
+@lesson-instruction{
 Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
+}
 
 Have students share their results. What did their charts tell them?
 

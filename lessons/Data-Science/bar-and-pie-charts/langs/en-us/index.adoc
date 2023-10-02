@@ -50,16 +50,16 @@ Open the @starter-file{animals}, click "Run" and test the expressions @show{(cod
 @optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{count-bar-pie.adoc}. Part A of this page includes the same questions and prompts along with space for students to record their responses.}
 
 
-[.lesson-instruction]
-- How do the count table and bar chart you just made compare?
-** __The height of each bar matches the count of each species.__
-- Which do you like better: the bar chart or the table? Why?
-- Now test out the expression @show{(code '(pie-chart animals-table "species"))}
-- How does this pie chart compare to the bar chart you just made?
-** __The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.__
-- When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.
-- Hit the up arrow in the Interactions Area to reload your last expression and test it out! 
-
+@QandA{
+@Q{How do the count table and bar chart you just made compare?}
+@A{The height of each bar matches the count of each species.}
+@Q{Which do you like better: the bar chart or the table? Why?}
+@Q{Now test out the expression @show{(code '(pie-chart animals-table "species"))}}
+@Q{How does this pie chart compare to the bar chart you just made?}
+@A{The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.}
+@Q{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.}
+@Q{Hit the up arrow in the Interactions Area to reload your last expression and test it out!}
+}
 @image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385}
 
 Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
@@ -89,7 +89,7 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 @optional B & C of @opt-printable-exercise{count-bar-pie.adoc} correspond with the questions and prompts below.
 }
 
-[.lesson-instruction]
+@lesson-instruction{
 - Make a `pie-chart` and `bar-chart` for the `pounds` column. 
 - What happened?
 - Why isn't it useful to group the `pounds` column using these functions?
@@ -98,6 +98,7 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 ** _Species, Sex, Fixed, and Legs_ 
 - Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays.
 - Then complete @printable-exercise{matching-bar-to-pie.adoc}.
+}
 
 @lesson-point{
 Grouping by value works well when lots of different data points can be sorted into a smaller number of buckets.
@@ -168,17 +169,19 @@ Students learn how to create __groups within groups__, showing the relative freq
 @teacher{ For the questions and prompts below, you can guide students verbally and via class discussion. +
 @optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{intro-stacked-multi.adoc} and direct students to complete Part A now.
 }
-[.lesson-instruction]
+@lesson-instruction{
 - Take a moment to answer the following questions: How many cats are male? How many cats are female?
 ** __5 are male, 6 are female__
 - Do you think there are about as many male dogs as female dogs?
 - Do you think this distribution is similar for every species at the shelter?
+}
 
 Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across each species.
 
-[.lesson-instruction]
+@lesson-instruction{
 * Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make answering questions like these easier to answer by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
 * What do you Notice? What do you Wonder?
+}
 
 === Investigate
 
@@ -193,9 +196,10 @@ Pyret has two functions that let us specify both a group and a subgroup:
 
 @show{(contract 'multi-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
 
-[.lesson-instruction]
+@lesson-instruction{
 - Try using both of these functions to show the distribution of sexes across species in our shelter.
 - Which display do you think is easier to read?
+}
 
 [cols="^1a,^1a", options="header"]
 |===
@@ -212,8 +216,9 @@ Multi Bar Charts (right) put the _subgroups_ side by side, so it's easy to answe
 Stacked bar charts make it easy to compare _groups_. Multi bar charts make it easy to compare _subgroups_.
 }
 
-[.lesson-instruction]
+@lesson-instruction{
 Complete @printable-exercise{matching-stacked-to-multi.adoc}
+}
 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.

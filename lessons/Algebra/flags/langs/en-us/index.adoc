@@ -65,16 +65,18 @@ Think of the background image as a sheet of graph paper with the @vocab{origin} 
 The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
 }
 
-[.lesson-instruction]
+@lesson-instruction{
 
 - Take a look at @printable-exercise{japan-estimating-coordinates.adoc}.
 - The code beneath each image is missing the x and y coordinates to place the dot.
 - Estimate the x- and y-coordinate of the dot's location for each image to complete the code!
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 Open the @starter-file{flags} and click "Run".
+}
 
 The programmer who wrote this code included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.
 
@@ -84,7 +86,7 @@ Professional programmers use comments __all the time__.
 
 Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.
 
-[.lesson-instruction]
+@lesson-instruction{
 - @ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (`;`) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it?
 ** _Purple!_}
 @ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it?
@@ -97,11 +99,11 @@ Professional programmers work with teams who need to be able to follow each othe
 - Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
 - What is the Contract for `put-image`? 
 ** `put-image :: Image, Number, Number, Image`
+}
 
 Next, students will analyze code for the flag of the Netherlands, which uses `put-image` twice.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Open the @starter-file{flags-2} and click "Run". Look at the code for the flag of the Netherlands. How big is the flag?
 ** _The flag is 200 x 300 pixels._
 - What was the programmer thinking when she coded the height of the red stripe as @show{(code '(/ 200 3))}?
@@ -112,7 +114,7 @@ Next, students will analyze code for the flag of the Netherlands, which uses `pu
 ** _Each stripe occupies 1/3 of the flag's total height. That means the vertical center of the blue stripe is at 1/6 of the flag's height._
 - Explain the thinking behind coding the red stripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
 ** _The red strip's vertical center is at 5/6 of the flag's total height._
---
+}
 
 Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
 
@@ -170,15 +172,14 @@ If you have time, these matching activities will support student thinking.
 
 === Investigate
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Turn to @printable-exercise{decomposing-flags.adoc}, and choose ONE flag to focus on. On the blank lines below, describe the parts that make up that flag.
 ** _Note: You may want to project the color version of this page; otherwise, students using black-and-white photocopies will be unable to identify the colors on the the flags._
 - For a more tactile experience, construct your flag using construction paper.
 ** _If you have time, this is a valuable activity! The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank"._
 - Once you're done, return to the @starter-file{flags} and define those parts.
 - Then, compose those parts using `put-image`, and make your flag!
---
+}
 
 The opportunity to focus on a flag of their choosing is a big motivator for students. Coding flags also presents a rare opportunity for students to share a piece of their identity in math class. If you have more time to devote, we highly encourage you to give students the opportunity to create the image of a flag they connect with in some way.  Students might choose the flags of countries related to their heritage, a place they’ve visited, a country they’re interested in, or a group they identify with or support.
 

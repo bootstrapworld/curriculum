@@ -1851,6 +1851,11 @@
                               (display "\n[.lesson-point]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
+                           [(string=? directive "lesson-instruction")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.lesson-instruction]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
