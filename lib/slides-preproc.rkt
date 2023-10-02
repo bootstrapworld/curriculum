@@ -602,7 +602,7 @@
                               (display "**{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "lesson-instruction")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
-                              (set! text (regexp-replace* "\s\+\n" text "\n"))
+                              (set! text (regexp-replace* "[ \t]+\n" text "\n"))
                               (set! text (regexp-replace* "\n\n+" text "\n\n"))
                               (let ([texts (string-split text "\n\n")])
                                 (for ([text texts])
