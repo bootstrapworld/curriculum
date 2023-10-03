@@ -73,8 +73,7 @@ This gives us a good input and output test for the examples block when working o
 Use the Design Recipe to fill in your examples and definition of `next-state-key`. Use the sample instances you created before in the examples block.
 }
 
-It’s an important point that next-state-key takes in an extra piece of information: the pressed key. This makes it much richer in terms of its purpose statement, which should describe what different keys ought to do to the state of the reactor. Students will create something like this completed file by adding
-a next-state-key function
+It’s an important point that next-state-key takes in an extra piece of information: the pressed key. This makes it much richer in terms of its purpose statement, which should describe what different keys ought to do to the state of the reactor. Students will create something like this completed file by adding a `next-state-key` function
 
 @lesson-instruction{
 Once you’ve implemented `next-state-key`, experiment with it in the Interactions Area:
@@ -83,7 +82,6 @@ Once you’ve implemented `next-state-key`, experiment with it in the Interactio
 - Try using a few different calls to `next-state-key` to move the character several times, then draw it. For example: 
 +
 `draw-state(next-state-key(next-state-key(middle, "left"), "up"))`
--- 
 }
 
 As with tick-events, we can manually pass keypress strings into this function, see what the next state would be, and even draw that state to see what it looks like. That’s great, but we still want to hook this function up to a reactor, so that it actually handles keypresses from a user playing the game. To do this, we need to create a reactor use `on-key` to specify that our `next-state-key` function should be called when the user presses a key (we don’t need to specify an `on-tick` handler, since for now the only movement in our program comes from keypresses). Our reactor with a `to-draw` and `on-key` handler looks like this:
