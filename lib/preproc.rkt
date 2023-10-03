@@ -317,7 +317,6 @@
         [title (string-trim (read-line i))])
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration.*$" title ""))])
-        (printf "section-title = ~s\n" section-title)
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
     (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
@@ -1865,6 +1864,11 @@
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-instruction]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
+                           [(string=? directive "lesson-roleplay")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[lesson-roleplay]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [else
