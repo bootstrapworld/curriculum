@@ -71,6 +71,8 @@
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
 
+(define *first-level-section-titles* '())
+
 (define *natlang-glossary-list* '())
 
 (define-namespace-anchor *adoc-namespace-anchor*)
@@ -307,14 +309,22 @@
 
 (define (display-section-markup i o)
   (let ([section-level
-          (let loop ([section-level 1])
+          (let loop ([section-level 0])
             (let ([c (peek-char i)])
               (cond [(eof-object? c) section-level]
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
-                    [else section-level])))])
-    (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
+                    [else section-level])))]
+        [title (string-trim (read-line i))])
+    (when (and *lesson-plan* (= section-level 1))
+      (let ([section-title (string-trim (regexp-replace "@duration.*$" title ""))])
+        (printf "section-title = ~s\n" section-title)
+        (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
+    (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
-      (display #\= o))))
+      (display #\= o))
+    (display "= " o)
+    (expand-directives:string->port title o)
+    (newline o)))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
@@ -1053,6 +1063,8 @@
 (define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
+    (when *lesson-plan*
+      (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
@@ -1295,6 +1307,7 @@
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
   (set! *optional-flag?* #f)
+  (set! *first-level-section-titles* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -2157,6 +2170,12 @@
                       [else (display ",\n" o)])
                 (fprintf o "  ~s" k))
               (display " ]\n" o)))
+          #:exists 'replace)
+
+        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-sections.txt.kp")
+          (lambda (o)
+            (for ([s (reverse *first-level-section-titles*)])
+              (write s o) (newline o)))
           #:exists 'replace)
         )
 
