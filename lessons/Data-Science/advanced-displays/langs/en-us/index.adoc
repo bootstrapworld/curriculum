@@ -165,17 +165,23 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 @strategy{
 @span{.title}{Custom Colors!}
 
-We've created a special function called `make-color`, which allows students to generate colors based on values in the table.
+We've created a special function called `make-color`, which allows students to mix their own colors!
 
-@show{(contract 'make-color '(("red" "Number") ("green" "Number") ("blue" "Number") ("opacity" "Number")) "Color")}
+@show{(contract 'make-color '(("red" "Number") ("green" "Number") ("blue" "Number") ("opacity" "Number")) "Color")} 
 
-By supplying Numbers between 0-255 for each of the colors and 0-1 for the opacity, students can create custom colors and use them as arguments to functions like `circle`, `star`, etc. For example:
+* Use Numbers between 0 and 255 to specify how much red, green, and blue to mix  
+* Use Numbers between 0-1 to specify percent opacity (0 for invisible, 1 for full color)
 
-`star(50, "solid", make-color(100, 200, 0, 0.5))`
+For example, `star(50, "solid", make-color(100, 200, 0, 0.5))` +
+will generate a pale green star that's 50% transparent.
 
-...will make a pale green star that's 50% transparent.
+By using row accessors to extract these values from their dataset, students can make custom scatterplots where each data point is represented by a shape whose color indicates something about the data!
 
-Students can get these Numbers from their dataset, use row accessors to extract the values: `star(50, "solid", make-color(r["age"], r["pounds"], 0, 0.5))`
+We could, for example represent the Animals using the following code:
+`star(50, "solid", make-color(100, 0, r["pounds"], 0.5))` +
+
+* Which representation would be used for the heaviest animal: a red star, a purple star or a blue star? +
+** _Lightest would be red and heaviest would be blue, with purple landing in between!_ 
 }
 
 === Synthesize
