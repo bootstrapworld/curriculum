@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Correlations
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Correlations have _Form_
 
@@ -19,7 +19,7 @@ You've learned several ways to analyze a single quantitative variable, such as `
 Together, those numbers tell us what value is **typical**, how much the values **vary**, and what kind of values are **usual or unusual**.
 
 @teacher{(The bolded words above all deal with notions of what it means for a value to be "normal" or "abnormal". These words have loaded meaning in the context of variability, and should be used carefully!)}
----
+@slidebreak
 {layout="Launch"}
 # Correlations have _Form_
 
@@ -33,7 +33,7 @@ This goes hand-in-hand with expanding our display **from a 1-dimensional histogr
 
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Correlations have _Form_
 
@@ -41,7 +41,7 @@ Form tells us whether a relationship is linear, nonlinear or undefined.
 
 @image{images/form.png}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Correlations have _Form_
 
@@ -49,7 +49,7 @@ Form tells us whether a relationship is linear, nonlinear or undefined.
 
 @image{images/1b1.gif}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Correlations have _Form_
 
@@ -57,7 +57,7 @@ Some patterns are **nonlinear**, and may look like a curve or an arc. That means
 
 @image{images/2NL.gif}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Correlations have _Form_
 
@@ -65,7 +65,7 @@ Some patterns are **nonlinear**, and may look like a curve or an arc. That means
 
 And sometimes there is **no relationship** or pattern at all! That means there's no predictable change in the y-axis as we go from one side of the x-axis to the other.
 
----
+@slidebreak
 {layout="Investigate"}
 # Correlations have _Form_
 
@@ -74,7 +74,7 @@ Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just th
 <!--
 Have the class discuss their answers
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Correlations have _Form_
 
@@ -86,7 +86,7 @@ Which scatter plots seem to have _no relationships_?
 Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships!
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Correlations have _Direction_
 
@@ -94,7 +94,7 @@ _Direction_ tells us whether a linear relationship is **positive** or **negative
 
 @image{images/direction.png}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Correlations have _Direction_
 
@@ -102,7 +102,7 @@ _Direction_ tells us whether a linear relationship is **positive** or **negative
 
 A **positive** direction means that the line slopes up as we look from left-to-right. Positive relationships are by far most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”. This is usually true for human animals, too!
 
----
+@slidebreak
 {layout="LaunchR"}
 # Correlations have _Direction_
 
@@ -112,7 +112,7 @@ A **negative** direction means that the line slopes _down_ as we look from left-
 
 <!--
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Correlations have _Direction_
 
@@ -121,7 +121,7 @@ Complete @printable-exercise{pages/identifying-form.adoc} and focus __just on th
 <!--
 Have the class discuss their answers
 -->
----
+@slidebreak
 {layout="SynthesizeR"}
 # Correlations have _Direction_
 
@@ -135,14 +135,14 @@ Why do you think that is?
 
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Correlations have _Strength_
 
 **Strength** indicates how closely the two variables are correlated.
 
 
----
+@slidebreak
 {layout="LaunchR"}
 # Correlations have _Strength_
 
@@ -152,14 +152,14 @@ Why do you think that is?
 Example of a strong relationship: knowing a student's age gives us a very good idea of what grade they're in
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Correlations have _Strength_
 
 @right{@image{images/1a.gif}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Correlations have _Strength_
 
@@ -169,7 +169,7 @@ Example of a strong relationship: knowing a student's age gives us a very good i
 <!--
 Have the class discuss their answers
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Correlations have _Strength_
 
@@ -186,7 +186,7 @@ The worksheet here addresses some common misconceptions:
 If time permits, you might also want to have them complete @opt-printable-exercise{pages/identifying-form-matching.adoc}.
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Summarizing Correlations using r-values
 
@@ -197,7 +197,7 @@ Statisticians and Data Scientists have a shorter way of describing all three, ca
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Summarizing Correlations using r-values
 
@@ -208,7 +208,7 @@ Statisticians and Data Scientists have a shorter way of describing all three, ca
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Summarizing Correlations using r-values
 
@@ -223,14 +223,14 @@ Anything less than about **±0.25 or ±0.35 may be considered weak**.
 <!--
 If it works for you, give students five minutes to play a few rounds of the online game @link{http://guessthecorrelation.com/, Guess the Correlation} to develop intuition with r-values. (This will require creating an account.)
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Summarizing Correlations using r-values
 
 - Complete @printable-exercise{pages/identifying-form-open-ended.adoc}. For each scatter plot, identify whether the relationship is linear, and, if it is, use @math{r} to summarize direction and strength.
 - Be prepared to discuss your answers with the class!
 
----
+@slidebreak
 {layout="Investigate"}
 # Summarizing Correlations using r-values
 
@@ -238,7 +238,7 @@ If it works for you, give students five minutes to play a few rounds of the onli
 
 If the correlation between adoption time and age for a representative sample of about 30 of our shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
 
----
+@slidebreak
 {layout="Investigate"}
 # Summarizing Correlations using r-values
 
@@ -250,7 +250,7 @@ Complete @printable-exercise{correlation-is-not-causation.adoc}
 <!--
 If time allows, you may want to emphasize the point that correlation does not imply causation by having students look at the nonsense claims that could be made from the graphs of real world data on the @link{http://tylervigen.com/, Spurious Correlations website}.
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Summarizing Correlations using r-values
 
@@ -258,7 +258,7 @@ If time allows, you may want to emphasize the point that correlation does not im
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Complete @printable-exercise{correlations-animals.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Summarizing Correlations using r-values
 
@@ -270,7 +270,7 @@ Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`? W
 <!--
 _The correlation with `"pounds"` is higher, meaning that an animal's weight is a better predictor of the number of weeks an animal will live at the shelter before being adopted than its age._
 -->
----
+@slidebreak
 {layout="Launch"}
 # Exploration Project (Correlations)
 
@@ -289,7 +289,7 @@ Let’s review what we have learned about correlations.
 ** _3) Strength - describes how tightly the data is clustered around a line or curve._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploration Project (Correlations)
 
@@ -308,7 +308,7 @@ Let’s connect what we know about correlations to your chosen dataset.
 Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploration Project (Correlations)
 
@@ -318,7 +318,7 @@ Confirm that all students have created and understand how to interpret their box
 - On the same slide, add your scatter plot and your description of the result.
 - Repeat the process for each additional correlation you explored, making copies of the correlation slide as-needed.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploration Project (Correlations)
 

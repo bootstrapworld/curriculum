@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Linear Regression
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Intro to Linear Regression 
 
@@ -14,7 +14,7 @@ Make two scatterplots from the `animals-table`, using `age` as the explanatory v
 In both plots, use `weeks` as your @vocab{response variable} and `name` for the `labels`. We will refer to the explanatory column as “xs” and the response column as “ys.”
 
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Linear Regression 
 
@@ -32,7 +32,7 @@ Quickly survey the class about whether they think we can use an animal’s size 
 - _Similarly, younger animals tend to be adopted faster than older ones._
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Linear Regression 
 
@@ -41,7 +41,7 @@ Can we be more precise about this, and actually _predict_ how long it will take 
 @image{images/pounds-v-weeks.gif, 400}
 @image{images/age-v-weeks.gif, 400}
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Linear Regression 
 
@@ -58,7 +58,7 @@ Have students talk about their answers to the first section.
 }
 
 
----
+@slidebreak
 {layout="Launch"}
 # Intro to Linear Regression 
 
@@ -78,7 +78,7 @@ _Regression Line - Line of Best Fit - Least Squares Line - Predictor - Trendline
 The line itself is computed through a process called _linear regression_, which also goes by the name _least squares regression_.	
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Intro to Linear Regression 
 
@@ -91,7 +91,7 @@ The line itself is computed through a process called _linear regression_, which 
 * *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three data points!
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Intro to Linear Regression 
 
@@ -99,7 +99,7 @@ The line itself is computed through a process called _linear regression_, which 
 
 @teacher{Yes - as long as the forces are balanced}
 
----
+@slidebreak
 {layout="Launch"}
 # Linear Regression in Pyret
 
@@ -114,7 +114,7 @@ lr-plot(animals-table, "name", "age", "weeks")
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
@@ -132,14 +132,14 @@ lr-plot(animals-table, "name", "age", "weeks")
 
 Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.{style="font-size:13pt"}
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Linear Regression in Pyret
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 - Create an `lr-plot` for the `animals-table`, using `"names"` for the labels, `"age"` for the x-axis and `"weeks"` for the y-axis.
 
----
+@slidebreak
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
@@ -151,7 +151,7 @@ First, we can see the @vocab{line of best fit} drawn onto the plot. We can also 
 
 In this plot, we can see that **the slope of the line is 0.789**, which means that on average, **each extra year of age results in an extra 0.789 weeks of waiting to be adopted** (about 5 or 6 extra days).{style="font-size:12pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
@@ -161,7 +161,7 @@ By plugging in an animal’s age for _x_ in the predictor function @math{y = 0.7
 
 For example, **we predict a 5-year-old animal to be adopted in @math{0.789(5) + 2.309 = 6.254} weeks.** That’s the y-value exactly on the line at x=5.{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
@@ -171,7 +171,7 @@ For example, **we predict a 5-year-old animal to be adopted in @math{0.789(5) + 
 
 Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a baby animal, whose age is close to 0, would take only about 3 weeks to be adopted.{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="LaunchR"}
 # Linear Regression in Pyret
 
@@ -183,7 +183,7 @@ The fact that **the @math{r}-value is close to 0.5** tells us that the strength 
 
 This makes sense: the points on the scatter plot are somewhere between being really tightly clustered and really loosely scattered.{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Linear Regression in Pyret
 
@@ -191,7 +191,7 @@ This makes sense: the points on the scatter plot are somewhere between being rea
 
 Complete @printable-exercise{lr-plot-explore.adoc}!
 
----
+@slidebreak
 {layout="Investigate"}
 # Linear Regression in Pyret
 
@@ -199,7 +199,7 @@ Complete @printable-exercise{lr-plot-explore.adoc}!
 - Complete @printable-exercise{which-questions-make-sense.adoc}
 - @optional open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Linear Regression in Pyret
 
@@ -213,7 +213,7 @@ Complete @printable-exercise{lr-plot-explore.adoc}!
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Interpreting LR Plots
 
@@ -222,7 +222,7 @@ How well can you interpret the results of a linear regression analysis?{style="f
 
 How would you explain it to someone else?{style="font-size:26pt"}
 
----
+@slidebreak
 {layout="Launch"}
 # Interpreting LR Plots
 
@@ -237,7 +237,7 @@ How would you explain it to someone else?{style="font-size:26pt"}
 ** It means the y-value is _lower_ than the sample would have predicted for that x-value.
 - Turn to @printable-exercise{pages/interpreting-regression-lines-n-rvalues.adoc}, and match the write-up on the left with the line of best fit and @math{r}-value on the right.
 -->
----
+@slidebreak
 {layout="Launch"}
 # Interpreting LR Plots
 
@@ -250,7 +250,7 @@ When looking at a regression for adoption time v. age for just the cats, we saw 
 <!--
 Have students explain the connection between the Ask Questions and Consider Data step. Do they match? Why or why not?
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Interpreting LR Plots
 
@@ -263,7 +263,7 @@ Have students explain the connection between the Ask Questions and Consider Data
 * *Don't call it "accuracy"!* One of the most common misconceptions about Linear Regression is that the @math{r} or @math{r}-squared value is a _measure of accuracy._ For example, a student who sees a very high @math{r}-value when plotting age vs. weeks might say "this prediction is 95% accurate." But these values only speak to _how much variation in the y-axis can be explained by variation in the x-axis_, so the statement should be "95% of the variation in weeks can be explained by variation in the age."
 * *X and Y matter!* The correlation coefficient will be the same, even if you swap the x- and y-axes. However, the _interpretation_ of the display is different! The column used for the x-axis will always be interpreted as "the explanation" for the "result" seen in the y-axis. It's fine to say that being older tends to make an animal take longer to be adopted, but it is *not true* that taking longer to be adopted makes an animal older!
 -->
----
+@slidebreak
 {layout="Launch"}
 # Exploration Project (Linear Regression)
 
@@ -284,7 +284,7 @@ Linear Regression is a way to calculate the line-of-best-fit (or "predictor func
 ** No! Even with an exremely high @math{r}-value, the predictor function should not be used to make predictions far outside the range of the dataset.	
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploration Project (Linear Regression)
 
@@ -296,7 +296,7 @@ Let’s connect what we know about linear regression to your chosen dataset.
 
 @teacher{Confirm that all students have created and understand how to interpret their LR plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
 
----
+@slidebreak
 {layout="Investigate"}
 # Exploration Project (Linear Regression)
 
@@ -305,7 +305,7 @@ Let’s connect what we know about linear regression to your chosen dataset.
 - Choose one correlation you explored, and duplicate the slide.
 - On the new slide, replace your scatter plot with the linear regression plot and add your interpretation of that plot.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploration Project (Linear Regression)
 
@@ -315,7 +315,7 @@ Did you discover anything surprising or interesting about their dataset?
 
 Did the results from `lr-plot` confirm your suspicions about the correlation? Were any of them surprising?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Your Analysis
 

@@ -45,22 +45,22 @@ Students look at opening questions, either at their desks or in a walk around th
 
 === Launch
 
-[.lesson-instruction]
---
+@lesson-instruction{
 @right{@image{images/questions.png, 250}}
 
 - Look at the provided list of @handout{pages/OpeningQuestions.adoc}, and take one minute to select a question that grabs your attention. Arrange yourselves into groups based on the question you like, making sure that each group has between 2-5 people.
 - Have each person in the group quickly share their _gut reaction_: What do you think the answer is?
 - After sharing initial reactions, have each person share their reasoning.
 - Does everyone in your group agree about the answers to their question?
---
+}
 
 Note: Students are VERY likely to try and explain their reasoning as soon as they give their gut answers. This can taint the answers of other students in the group - emphasize that this is about exposing our "gut reaction" or bias.
 
 
 === Investigate
-[.lesson-instruction]
+@lesson-instruction{
 What information would you collect to answer the question you selected? _Take 5 minutes to think about what information you would need to collect, to find the answer._
+}
 
 === Common Misconceptions
 Students may lean towards questions about _individuals_, instead of questions about what's true for a _group of individuals_ who vary from one to another. For example, instead of wondering what movie gets the highest rating, they should ask what's the typical rating for movies in a list, or how much those ratings tend to vary.
@@ -110,25 +110,28 @@ This pedagogy is a @link{https://www.nctm.org/noticeandwonder/, widely-used best
 }
 
 === Launch
-[.lesson-instruction]
+@lesson-instruction{
 Open the @starter-file{animals-spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc}.
+}
 
 === Investigate
 
 @right{@image{images/notice-and-wonder.png, 200}}
 This table contains data from an animal shelter, listing animals that have been adopted. We’ll be analyzing this table as an example throughout the course, but you’ll be applying what you learn to __a dataset you choose__ as well.
 
-[.lesson-instruction]
+@lesson-instruction{
 - Turn to @printable-exercise{pages/questions-and-column-descriptions.adoc}. What do you __Notice__ about this dataset? Write down your observations in the first column.
 - Sometimes, looking at data sparks questions. What do you __Wonder__ about this dataset, and why? Write down your questions in the second column.
 - There’s a third column, called “Answered by Dataset” -- circle "Yes" if your Wonder can be answered by the dataset or "No" if it can't.
+}
 
 Have students share back their noticings (statements) and wonderings (questions), and write them on the board. Ask the class if each Wonder can be answered by the data, making sure that they have a few questions that _can_ be answered, and a few that _can't_. Also ask if some of their wonderings are about a group as a whole, rather than just individuals.
 
 
-[.lesson-instruction]
+@lesson-instruction{
 - If you look at the bottom of the @starter-file{animals-spreadsheet}, you’ll see that this document contains multiple sheets. One is called `"pets"` and the other is called `"README"`. Which sheet are we looking at?
 - Each sheet contains a table. For our purposes, we only care about the animals table on the `"pets"` sheet.
+}
 
 Any two animals in our dataset may have different ages, weights, etc. Each of these is called a *variable* in the dataset. Data Scientists work with two broad kinds of data: Categorical Data and Quantitative Data. Sometimes it can be tricky to figure out if data is categorical or quantitative, because it depends on _how that data is being used!_
 
@@ -141,21 +144,24 @@ We use @vocab{Categorical Data} to answer “what kind?”, and @vocab{Quantitat
 * “Species” is a categorical variable, because we can ask questions like “which species does Mittens belong to?"
 * We couldn’t ask if “cat is more than lizard” and it doesn’t make sense to "find the average ZIP code” in a list of addresses, because ZIP codes identify locations, not amounts.
 
-[.lesson-instruction]
-- What are some other categorical variables you see in this table?
-** _Name, Sex, and Fixed_
+@QandA{
+@Q{What are some other categorical variables you see in this table?}
+@A{Name, Sex, and Fixed}
+}
 
 @vocab{Quantitative Data} @ifproglang{codap}{- sometimes referred to as Numeric Data - }is used to measure an amount of something, or to compare two pieces of data to see how much _less or more_ one is compared to the other.
 
 * "Pounds" is a quantitative variable, because we can talk about how much more one animal weighs more than another or ask what the average weight of animals in the shelter is.
 * If we want to ask “how much” or “which is most”, we’re talking about Quantitative Data.
 
-[.lesson-instruction]
---
-- What are some other quantitative variables in this table?
-** _Age, Legs, Weight, and Time to Adoption_
-- Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
---
+@QandA{
+@Q{What are some other quantitative variables in this table?}
+@A{Age, Legs, Weight, and Time to Adoption}
+}
+
+@lesson-instruction{
+Complete @printable-exercise{pages/categorical-or-quantitative.adoc}. Be sure to discuss your answers with your partner or group!
+}
 
 === Synthesize
 
@@ -171,18 +177,20 @@ Students open up the Pyret environment (code.pyret.org, or "CPO") and see the An
 @right{@image{images/pyret.png, 100}}
 Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
 
-[.lesson-instruction]
+@lesson-instruction{
 - Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
 - Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+}
 
 === Investigate
 
-[.lesson-instruction]
+@lesson-instruction{
 - Click "Run" to tell Pyret to read the code on the left-hand side.
 - On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.
 - What happens?
 ** _A table of animals appears on the right-hand side of the screen._
 - Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
+}
 
 The first line on the left-hand side of the screen tells Pyret to use a provided file, which contains tools we’ll want to use for this course.
 
@@ -233,14 +241,15 @@ Below is an example of a table with one header row and two data rows:
 | "Mittens" | "cat"   | "female" | 2 	| true 	| 4 	| 7.4 	| 1
 |===
 
-[.lesson-instruction]
-- What is being used for the identifier column in this dataset? How many variables are listed in the header row for the Animals Dataset? What are they called?
-** __There are eight variables listed: name, species, sex, age, fixed, legs, pounds, and weeks. `name` is the identifier column.__
-- Try changing the name of one of the columns, and click "Run". What happens when you  look at the table?
-** _The column name also gets changed on the table._
-- What happens if you remove a column from the list? Or add an extra one?
-** _When I remove a column, I get this message: "Loaded worksheet has 8 columns, but 7 column names were given."_
-** _When I add a column, I get this message: "Loaded worksheet has 8 columns, but 9 column names were given."_
+@QandA{
+@Q{What is being used for the identifier column in this dataset? How many variables are listed in the header row for the Animals Dataset? What are they called?}
+@A{There are eight variables listed: name, species, sex, age, fixed, legs, pounds, and weeks. `name` is the identifier column.}
+@Q{Try changing the name of one of the columns, and click "Run". What happens when you look at the table?}
+@A{The column name also gets changed on the table.}
+@Q{What happens if you remove a column from the list? Or add an extra one?}
+@A{When I remove a column, I get this message: "Loaded worksheet has 8 columns, but 7 column names were given."}
+@A{When I add a column, I get this message: "Loaded worksheet has 8 columns, but 9 column names were given."}
+}
 
 After the header, Pyret tables can have any number of @vocab{data rows}.
 Each data row has values for every column variable (nothing can be left empty!). A table can have any number of data rows, including _zero_, as in the table below:

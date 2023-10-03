@@ -334,6 +334,8 @@
                                                      (display (math-unicode-if-possible nu) o)
                                                      (display "⁄" o)
                                                      (math-unicode-if-possible de))]
+                                         [("|") "&#x7c;"]
+                                         [(";") " "]
                                          [else  
                                            (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
                                                  [else ctl-seq])]))]

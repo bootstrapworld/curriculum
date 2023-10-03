@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Distributive Property
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property
 
@@ -22,7 +22,7 @@ What do you Notice? What do you Wonder?
 ** _Possible Wonderings: Are these equivalent? What do they evaluate to? Why is there one 9 in the first Circle of Evaluation, but two 9s in the second Circle?_
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Distributive Property
 
@@ -33,7 +33,7 @@ The Circles of Evaluation are equivalent because of the Distributive Property, w
 @image{images/distributive-prop.png}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Distributive Property
 
@@ -43,7 +43,7 @@ The Circles of Evaluation are equivalent because of the Distributive Property, w
 
 @image{images/sum-to-product.png}
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property
 
@@ -53,7 +53,7 @@ When was it easier to compute the _sum_? When was it easier to compute the _prod
 ** _There are no right or wrong answers, here. We want students to begin to consider how a nuanced understanding of the Distributive Property can result in more flexible and efficient mental math._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property
 
@@ -61,7 +61,7 @@ On @printable-exercise{pages/product-to-sum.adoc}, the Circle of Evaluation repr
 
 @image{images/product-to-sum.png}
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property
 
@@ -70,7 +70,7 @@ On @printable-exercise{pages/product-to-sum.adoc}, the Circle of Evaluation repr
 @image{images/challenge.png}
 
 
----
+@slidebreak
 {layout="InvestigateC"}
 # The Distributive Property
 
@@ -87,7 +87,7 @@ Elise says, "The second Circle should say 200 + 15, not 200 + 8."
 ** _Note - it may be helpful for some students to see the Circle for @math{(5 \times 40) + (5 \times 3)}._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Distributive Property
 
@@ -95,7 +95,7 @@ Turn to @printable-exercise{pages/true-or-false.adoc}, where you will determine 
 
 @image{images/true-or-false.png}
 
----
+@slidebreak
 {layout="Investigate"}
 # The Distributive Property
 
@@ -103,7 +103,7 @@ Next, try @printable-exercise{pages/wodb.adoc}. Cross out the Circle of Evaluati
 
 @image{images/wodb.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Distributive Property
 
@@ -118,7 +118,7 @@ Dani tells Elise that we must _always_ evaluate what's inside the parentheses fi
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property & Mental Math
 
@@ -130,7 +130,7 @@ Can we use the Distributive Property simplify this to an equivalent expression? 
 
 Can you represent your solving process with a chain of Circles of Evaluation?
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property & Mental Math
 
@@ -141,7 +141,7 @@ Can you represent your solving process with a chain of Circles of Evaluation?
 @image{images/circles-to-90.png}
 
 
----
+@slidebreak
 {layout="Launch"}
 # The Distributive Property & Mental Math
 
@@ -153,7 +153,7 @@ We can use distribution and mental math to make computation simpler!{style="font
 Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign is unnecessary and implied when not there. Encourage students to try out this notation, especially if it is one that they have not encountered before.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Distributive Property & Mental Math
 
@@ -168,7 +168,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 - We can now compute our solution by finding difference between two products.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Distributive Property & Mental Math
 
@@ -177,7 +177,7 @@ Note: In expressions such as @math{45 \times (81 - 79)}, the multiplication sign
 
 @image{images/mental-math.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Distributive Property & Mental Math
 

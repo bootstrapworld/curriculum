@@ -1,10 +1,10 @@
----
+@slidebreak
 
 # A Zorder of Zoperations II
 
 @scrub{Flannery's sample slide file form Order of Operations. Modified so it goes through.}
 
----
+@slidebreak
 
 # Order of Operations
 
@@ -14,7 +14,7 @@ Sometimes we need multiple expressions in mathematics, and the order matters the
 
 @show{(contract "gt" '("Number") "Number")}
 
----
+@slidebreak
 {Layout="Launch"}
 # Order of Operations
 
@@ -24,7 +24,7 @@ And the next paragraph goes back to normal!
 
 @image{images/pemdas.png, 300}
 
----
+@slidebreak
 
 # Order of Operations
 
@@ -32,7 +32,7 @@ And the next paragraph goes back to normal!
 
 Instead of using a rule for computing answers, let's start by diagramming the math itself!
 
----
+@slidebreak
 
 # Order of Operations
 
@@ -49,12 +49,12 @@ If we want to draw the Circle of Evaluation for @math{(/ 6 3)}, the division fun
 @show{(coe '(/ 6 3))}
 
 
----
+@slidebreak
 # Order of Operations
 
 What if we want to use multiple functions?  How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}?
  
----
+@slidebreak
 
 # Order of Operations
 
@@ -64,7 +64,7 @@ We basically replace the `3` from our earlier Circle of Evaluation with _another
 
 @show{(coe '(/ 6 (+ 1 2)))}
 
----
+@slidebreak
 
 # Order of Operations
 
@@ -82,20 +82,20 @@ This is a link
 
 @link{https://docs.google.com/presentation/d/1eLe5LmYNfVBN_6Yw6K41UIpLTO1GOfy2295HrbjlKhk/, Lesson Slides}
 
----
+@slidebreak
 
 # Order of Operations
 
 Turn to  @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc} in the student workbook and draw Circles of Evaluation for each of the expressions. (Ignore the code column for now! We will come back to it later.)
 
----
+@slidebreak
 # Order of Operaations
 
 For more practice with this, turn to:
 @printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc}
 @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
 
----
+@slidebreak
 # From Circles of Evaluation to Code
 
 When converting a Circle of Evaluation to code, it's useful to imagine a spider crawling through the circle from the left and exiting on the right. 
@@ -104,7 +104,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a spider 
 - After that, she crawls from left to right, visiting each of the inputs @ifproglang{wescheme}{to the function}. 
 - Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 
----
+@slidebreak
 # From Circles of Evaluation to Code
 
 Now that we know how to translate Circles of Evaluation into Code, turn back to @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc}.
@@ -113,7 +113,7 @@ Once you confirm that your code is correct, continue on to @printable-exercise{p
 
 Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-challenge.adoc}
 
----
+@slidebreak
 # Testing out your Code
 
 - Open @starter-file{editor} and click run.
@@ -123,7 +123,7 @@ Challenge:  @printable-exercise{pages/translate-arithmetic-to-circles-and-code-c
 - Hit Enter (or Return) to evaluate this expression. What happens?
 - Take a few minutes to go back and test each line of code you wrote on the pages you've completed by typing them into the Interactions Area. Use the error messages to help you identify any missing characters and edit your code to get it working.
 
----
+@slidebreak
 # Testing out your Code
 
 @scrub{Here are two Circles of Evaluation.}
@@ -138,7 +138,7 @@ One of them is familiar, but the other is very different from what you've been w
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
 
----
+@slidebreak
 # Testing out your Code
 
 Here is another circle to explore.
@@ -147,7 +147,7 @@ Here is another circle to explore.
 - What do you think this expression will evaluate to?
 - Convert this Circle to code and try it out!
 
----
+@slidebreak
 # Additional Practice
 
 If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!

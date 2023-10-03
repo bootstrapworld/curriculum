@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Sam the Butterfly - Applying Inequalities{style="font-size:36pt"}
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Introducing Sam 
 
@@ -21,7 +21,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 * How could we write this as an @vocab{expression}?
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Sam
 
@@ -38,7 +38,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 - How could we write this as an @vocab{expression}? _Appropriate responses are @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \geq -40}._
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Sam 
 
@@ -46,7 +46,7 @@ Every time Sam moves, we want to check and see if Sam is safe.
 
 There are three functions defined in @starter-file{inequalities-sam}. What are they?
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Sam
 
@@ -62,12 +62,12 @@ There are three functions defined in @starter-file{inequalities-sam}. What are t
 - What should `onscreen?` do? _Answers may vary. Let students drive the discussion, and don't give away the answer!_
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Introducing Sam 
 With your partner, complete @printable-exercise{pages/left-and-right.adoc}.  
 
----
+@slidebreak
 {layout="Investigate"}
 # Introducing Sam
 
@@ -81,7 +81,7 @@ Many students - especially traditionally high-achieving ones - will be very conc
 - Push students to think carefully about corner-cases, such as when Sam is _exactly_ at -50 or 690.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Introducing Sam
 
@@ -100,7 +100,7 @@ Students will notice that fixing `is-safe-left` keeps Sam from disappearing off 
 }
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Introducing Sam
 
@@ -116,7 +116,7 @@ Don’t trust the behavior of a complex system! Examples are where you look firs
 - Does `safe-right?` work correctly? How do you know?
 }
 
----
+@slidebreak
 {layout="Launch"}
 # Protecting Sam on Both Sides
 
@@ -178,7 +178,7 @@ Hopefully your students will notice that `is-safe-right` did not participate in 
 }
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Protecting Sam on Both Sides
 
@@ -207,7 +207,7 @@ What is the problem with `is-onscreen`? How can we fix it?
 
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Protecting Sam on Both Sides
 
@@ -220,7 +220,7 @@ Extension Option
 What if we wanted to keep Sam safe on the top and bottom edges of the screen as well?  What additional functions would we need?  What functions would need to change? We recommend that students tackling this challenge define a new function @ifproglang{pyret}{`is-onscreen-2`} @ifproglang{wescheme}{onscreen2?} because they will need their original @show{(code 'onscreen?)} code in the next section of this lesson.` 
 -->
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Boundary Detection in the Game 
 
@@ -234,7 +234,7 @@ Open your in-progress game file and press _Run_.
 
 - How can we make the computer understand when an image has moved off the screen? 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Boundary Detection in the Game 
 
@@ -253,7 +253,7 @@ Common Misconceptions:
 - Students may be surprised that the same code that "traps Sam" also "resets the `DANGER` and `TARGET` ". It's critical to explain that these functions do _neither_ of those things! All they do is test if a coordinate is within a certain range on the x-axis. There is other code (hidden in the teachpack) that determines _what to do if the coordinate is offscreen_. The ability to re-use function is one of the most powerful features of mathematics - and programming!
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Boundary Detection in the Game
 
@@ -264,7 +264,7 @@ The same code that "trapped" Sam also "resets" the `DANGER` and the `TARGET`. Wh
 -->
 
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

@@ -1,4 +1,4 @@
----
+@slidebreak
 
 {layout="DS Title Slide"}
 
@@ -7,7 +7,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Making Box Plots
 
@@ -17,7 +17,7 @@ How useful is this fact, really? Maybe all the pets weigh between 35 and 45 poun
 
 So once we have our summary for a "normal value", it's likely we'll ask another question: _If the average pet is 40 pounds, just **how typical** is that?_
 
----
+@slidebreak
 {layout="Launch"}
 # Making Box Plots
 
@@ -27,7 +27,7 @@ So we'd expect some deviation - or @vocab{spread} - in any class of students! So
 
 How do we measure the @vocab{spread} of a population?
 
----
+@slidebreak
 {layout="LaunchC"}
 # Making Box Plots
 
@@ -39,7 +39,7 @@ We can learn something about the @vocab{spread} of the dataset by taking the _me
 <!--
 
 -->
----
+@slidebreak
 {layout="LaunchC"}
 # Making Box Plots
 
@@ -53,7 +53,7 @@ _The third quartile is the value for which 75% of the animals weighed that amoun
 _Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more._
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # Making Box Plots
 
@@ -63,7 +63,7 @@ Besides looking at the median as center, and the spread between Q1 and Q3, we al
 <!--
 *Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
 -->
----
+@slidebreak
 {layout="Launch"}
 # Making Box Plots
 
@@ -76,7 +76,7 @@ Splitting a dataset into @vocab{quartiles} gives us five numbers that we can pla
 5. **Maximum**: _the largest value in a dataset_
 
 
----
+@slidebreak
 {layout="Launch"}
 # Making Box Plots
 
@@ -88,7 +88,7 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 <!--
 *Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Making Box Plots
 
@@ -108,7 +108,7 @@ We can use @vocab{box plots} to visualize the 5 number summary, the Range, and t
 <!--
 
 -->
----
+@slidebreak
 {layout="InvestigateR"}
 # Making Box Plots
 
@@ -122,7 +122,7 @@ This plot shows us the center and spread in our dataset according to those five 
 
 
 @image{images/5-plot.png, 400}
----
+@slidebreak
 {layout="InvestigateC"}
 # Making Box Plots
 
@@ -135,7 +135,7 @@ This plot shows us the center and spread in our dataset according to those five 
 <!--
 _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Making Box Plots
 
@@ -152,7 +152,7 @@ _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the anim
 - What percentage of points fall within the Range? _100%_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Interpreting Box Plots
 
@@ -165,7 +165,7 @@ Histograms make it easier to see skewness and more details of the shape, offerin
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Interpreting Box Plots
 
@@ -175,7 +175,7 @@ In a box plot, **left skewness** is seen as a longer left "whisker", or more spr
 
 Likewise, **right skewness** is shown as a longer right "whisker" or more spread in the right part of the box.
 
----
+@slidebreak
 {layout="Launch"}
 # Interpreting Box Plots
 
@@ -192,7 +192,7 @@ Box plots and Histograms can both tell us a lot about the shape of a dataset, bu
 *Box plots:* variable intervals (“quartiles”) with a fixed number of data points in each one. Treats data more like “pizza dough”, dividing it into four equal quarters showing where the data is tightly clumped or spread thin. _Smaller intervals show where the clusters are._
 -->
 
----
+@slidebreak
 {layout="Investigate-K"}
 # Interpreting Box Plots
 
@@ -210,7 +210,7 @@ _The playdough represents a @vocab{sample}, with values divided into four @vocab
 Notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the data points, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Interpreting Box Plots
 
@@ -220,7 +220,7 @@ Notice that shorter intervals have __thicker cylinders__, and longer ones have s
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 
@@ -230,7 +230,7 @@ We started talking about measures of center with a single question: __is "averag
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Data Exploration Project (Box Plots) 
 
@@ -251,7 +251,7 @@ Let’s review what we have learned about making and interpreting box plots.
 ** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Box Plots) 
 
@@ -275,7 +275,7 @@ Let’s review what we have learned about making and interpreting box plots.
 Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
 }
 
----
+@slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Box Plots) 
 
@@ -284,7 +284,7 @@ Confirm that all students have created and understand how to interpret their box
 - Add the five-number summaries from these plots to the corresponding "Measures of Center and Spread" slides. 
 - Be sure to also add any interesting questions that you developed while making and thinking about box plots to the "My Questions" slide at the end of the deck.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Data Exploration Project (Box Plots) 
 
@@ -298,7 +298,7 @@ What, if any, outliers did you discover when making box plots?
 
 When your compared your findings with others, did they make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 

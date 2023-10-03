@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Functions Make Life Easier
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # There's Got to Be a Better Way!  
 
@@ -16,7 +16,7 @@ write the code to make a solid green triangle of size 50!{style="font-size:18pt"
 
 @image{images/green-triangles-more.png}
 
----
+@slidebreak
 {layout="Launch"}
 # There's Got to Be a Better Way!  
 
@@ -29,7 +29,7 @@ Screenshot responses and/or share the class total at this point...
 We’ll be making a comparison to this achievement later in the lesson.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # There's Got to Be a Better Way!  
 
@@ -42,7 +42,7 @@ Look at the examples below and consider the following: What is constant? What st
 @show{(code '(triangle 500  "solid" "green"))}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # There's Got to Be a Better Way!  
 
@@ -54,7 +54,7 @@ For example:
 
 This shortcut makes the same green triangle _every_ time!
 
----
+@slidebreak
 {layout="Investigate"}
 # There's Got to Be a Better Way!  
 
@@ -68,7 +68,7 @@ I'm going to need a volunteer to help act out the process.
 Ask for a volunteer to act out gt.
 -->
 
---- 
+@slidebreak
 {layout="Investigate"}
 # There's Got to Be a Better Way!  
 
@@ -87,7 +87,7 @@ Continue the rehearsal with the next slide!
 
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # There's Got to Be a Better Way!  
 
@@ -118,7 +118,7 @@ When I say, "*gt 99!*",
 Once they're rehearsed, have the class add their own and record them on the board. 
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Identifying and Describing the Pattern
 
@@ -128,7 +128,7 @@ How can we program the computer to be as smart as our volunteer?
 
 In order to define a function, we need to identify what's changing and what stays the same. Once we've done that, we can define any function we'd like in the _Definitions Area_!
 
----
+@slidebreak
 {layout="Launch"}
 # Identifying and Describing the Pattern
 
@@ -139,7 +139,7 @@ As you look at the examples, consider the following:
 - How do we define our function? 
 - What would be a logical variable?
 
----
+@slidebreak
 {layout="Launch"}
 # Identifying and Describing the Pattern
 
@@ -157,7 +157,7 @@ As you look at the examples, consider the following:
 Highlight or circle the numbers in the gt column and in the triangle column to help students see that they’re the only thing changing! Draw arrows to the two highlighted columns and label them with the word size.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Identifying and Describing the Pattern
 
@@ -169,7 +169,7 @@ The way we write this in the editor is
 
 @show{(code '(define (gt size)(triangle size "solid" "green")))}
 
----
+@slidebreak
 {layout="Launch"}
 # Identifying and Describing the Pattern
 
@@ -179,7 +179,7 @@ Who is correct - Kermit or Oscar?
 
 Why might someone think the domain for `gt` contains a Number and two Strings? 
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Identifying and Describing the Pattern
 
@@ -189,7 +189,7 @@ Why might someone think the domain for `gt` contains a Number and two Strings?
 - In one minute, how many different green triangles can you make?!
 - How did making green triangles with `gt` compare to making them with your previous strategy?
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Identifying and Describing the Pattern
 
@@ -204,7 +204,7 @@ Other people have other favorite shapes. We need to be able to meet their needs,
 As students work, walk around the room and make sure that they are circling what changes in the examples and labeling it with a variable name that reflects what it represents.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Identifying and Describing the Pattern
 

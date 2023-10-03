@@ -1,17 +1,17 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Making Flags
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Putting Images Together 
 
 As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
 
----
+@slidebreak
 {layout="Launch"}
 # Putting Images Together
 
@@ -19,7 +19,7 @@ Think of the background image as a sheet of graph paper with the origin (0,0) in
 
 The `put-image` function works like `overlay`, but the numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
 
----
+@slidebreak
 {layout="Launch"}
 # Putting Images Together
 
@@ -27,7 +27,7 @@ The width of the rectangle is 300 and the height is 200. What coordinates for th
 
 @image{images/moving-red-dot.png}{width="550"}
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Putting Images Together
 
@@ -42,7 +42,7 @@ Professional programmers use comments __all the time__. They are a way for progr
 @ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. {style="font-size:16pt"}}
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Putting Images Together
 
@@ -51,7 +51,7 @@ Professional programmers use comments __all the time__. They are a way for progr
 1. Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
 1. What is the @vocab{Contract} for `put-image`? 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Putting Images Together
 
@@ -64,7 +64,7 @@ Professional programmers use comments __all the time__. They are a way for progr
 <!--
 200/3 evaluates to a Number that is exactly 1/3 the height of a flag that is 200 pixels tall. To locate these stripes vertically using their center points, we'll have to visualize the center lines of the rectangles... which effectively divides the flag into sixths with the centers of the rectangles located at 1/6, 3/6, and 5/6 of the height of the flag.
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Putting Images Together
 
@@ -76,7 +76,7 @@ Why or why not?
 If you have time, we have lots of additional starter files to push student thinking linked in the additional exercises at the end of this lesson and now would be the time to dive into them!
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Making Flags
 
@@ -95,7 +95,7 @@ If you have time, we have lots of additional starter files to push student think
 __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
 -->
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Making Flags
 
@@ -105,7 +105,7 @@ Matching activities to support student thinking:
 - @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay and put-image}
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Making Flags
 
@@ -121,7 +121,7 @@ Optional Challenge: Have students define the `WIDTH` and `HEIGHT` of their flags
 Paper Flag Models to Code: In this exercise, students will be decomposing the image of a flag. For a more tactile experience, you could have students construct images of the flags they choose using construction paper. This should happen between the step where they describe the shapes needed to compose the flags image and write the code to build the image.  The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank".
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Making Flags
 
@@ -129,7 +129,7 @@ Which flags were the easiest to make? The hardest?
 
 Why is it useful to define each part of the flag first, before stitching the images together?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

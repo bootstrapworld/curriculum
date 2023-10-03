@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # The Commutative Property
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="LaunchC"}
 # The Commutative Property
 
@@ -20,7 +20,7 @@ Build on prior knowledge by reminding students of the activity that they complet
 Students might notice that both Circles evaluate to 360, and that the order of the numbers changes from one Circle of Evaluation to the next.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Commutative Property
 
@@ -32,13 +32,13 @@ Students might notice that both Circles evaluate to 360, and that the order of t
 In each of the examples, the values were the same but the order of the values was different. Sometimes the structures of the Circles of Evaluation changed, like when I moved a nested circle from the right to the left. The Commutative Property holds for multiplication and addition, but not for subtraction or division.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Commutative Property
 
 The *_Commutative Property_* tells us that for any expression involving only addition or only multiplication, changing the order of the numbers will not change the result.{style="font-size:24pt"}
 
----
+@slidebreak
 {layout="InvestigateC"}
 # The Commutative Property
 
@@ -52,7 +52,7 @@ This activity is similar to one students’ completed during the previous lesson
 As students work, draw their attention to the operation as they rearrange the values inside the circle, helping them to notice that the Commutative Property does not apply for division and subtraction.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Commutative Property
 
@@ -65,7 +65,7 @@ Q1 Possible response: When expressions included addition and multiplication, the
 Q2 possible response: It was impossible to apply the Commutative Property because there were no instances of multiplication or addition, only division and subtraction.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Commutative Property
 
@@ -83,7 +83,7 @@ Q3: Possible response: Circles with only addition and multiplication, as well as
 -->
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Tying it All Together
 
@@ -94,7 +94,7 @@ All three students compute that this expression evaluates to 15.
 @image{images/claire-walker-soraya.png}
 
 
----
+@slidebreak
 {layout="LaunchC"}
 # Tying it All Together
 
@@ -112,7 +112,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Tying it All Together
 
@@ -120,7 +120,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 - In the column on the right, record if Claire, Walker, or both students correctly translated the words into a Circle.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Tying it All Together
 
@@ -131,7 +131,7 @@ What do you think? Are Soraya and Walker correct - or just Claire?
 
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Tying it All Together
 

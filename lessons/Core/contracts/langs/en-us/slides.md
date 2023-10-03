@@ -1,10 +1,10 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Contracts
 <!-- 
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Applying Functions
 
@@ -14,7 +14,7 @@ Verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a san
 
 In programming, **values are like nouns**. You've learned about _values_ in our programming language, like Numbers (`42`, `-8.3`, etc), Strings (`"hello!"`), and Booleans (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `*` - each of which _does something_ to Numbers.}
 
----
+@slidebreak
 {layout="Launch"}
 # Applying Functions
 
@@ -25,7 +25,7 @@ In programming, our verbs are called @vocab{functions}. A function is like a mac
 
 Let's play with a few functions, to get the hang of it.
 
----
+@slidebreak
 {layout="Launch"}
 # Applying Functions
 
@@ -54,7 +54,7 @@ Let's play with a few functions, to get the hang of it.
 **Encourage students to try giving different arguments to `sqrt`. Does it only work with Numbers? Does it only take one Number?**
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Applying Functions
 
@@ -85,7 +85,7 @@ Note that @vocab{arguments} (or "inputs") are the _values_ passed into a functio
 }
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Applying Functions
 
@@ -93,7 +93,7 @@ With your partner, complete @printable-exercise{pages/applying-functions.adoc}
 
 When you finish, try changing the expression @show{(code '(triangle 50 "solid" "red"))} to use `"outline"` for the second argument. Then try changing colors and sizes!
 
----
+@slidebreak
 {layout="Synthesize"}
 # Applying Functions
 
@@ -109,7 +109,7 @@ When you finish, try changing the expression @show{(code '(triangle 50 "solid" "
 - Which error messages did you encounter?
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
@@ -118,7 +118,7 @@ into the editor, you created an example of a new @vocab{data type}, called an _I
 
 The `triangle` function can make lots of different triangles! The size, style and color are all determined by the specific inputs provided in the code, but, if we don't provide the function with a number and two strings to define those parameters, we will get an error message instead of a triangle.
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
@@ -130,7 +130,7 @@ As you can imagine, there are many other functions for making images, each with 
 
 - **Range** - the type of data the function produces
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
@@ -148,7 +148,7 @@ _An actor signs a Contract agreeing to perform in a film in exchange for compens
 Contracts are general. Expressions are specific.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
@@ -156,13 +156,13 @@ Let’s take a look at some functions we've seen before:
 
 @image{images/sample-contracts-table.png}
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
 When the input matches what the function consumes, the function produces the output we expect.
 
----
+@slidebreak
 {layout="Launch"}
 # Contracts
 
@@ -175,7 +175,7 @@ Type it into @starter-file{editor, the editor}. What is its Contract?
 <!--
 contract: `string-append :: String, String -> String`
 -->
----
+@slidebreak
 {layout="Investigate-DN"}
 # Contracts
 
@@ -183,14 +183,14 @@ With your partner, complete:
 - @printable-exercise{pages/practicing-contracts.adoc} 
 - @printable-exercise{pages/matching-expressions.adoc} 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Contracts
 
 - What is the difference between a value like `17` and a type like `Number`?
 - For each expression where a function is given inputs, how many outputs are there? 
 
----
+@slidebreak
 {layout="Launch"}
 # Exploring Image Functions
 
@@ -205,7 +205,7 @@ Suppose we had never seen `star` before. How could we figure out how to use it, 
 The error messages in this environment are _designed_ to be as student-friendly as possible. Encourage students to read these messages aloud to one another, and ask them what they think the error message _means_. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the next activity!
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Exploring Image Functions
 
@@ -217,7 +217,7 @@ The error messages in this environment are _designed_ to be as student-friendly 
 No! The Domain and Range are the same, but the function name is different... and that's important because the `star` and `square` functions do something very different with those inputs!_
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 
 # Exploring Image Functions
@@ -229,14 +229,14 @@ No! The Domain and Range are the same, but the function name is different... and
 You will be adding to these Contract pages and referring back to them for the remainder of this Bootstrap class!
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploring Image Functions
 
 - Does having the same Domain and Range mean that the functions do the same things? 
 - A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Exploring Image Functions
 
@@ -245,7 +245,7 @@ You will be adding to these Contract pages and referring back to them for the re
 - How did you figure out what to do after seeing an error message? 
 - Which input determined the size of the Rhombus?  What did the other number determine?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Contracts Help Us Write Code
 
@@ -255,7 +255,7 @@ Once you've discovered how to build a version of each image function that satisf
 
 It may help you to jot down some notes about your discoveries. We will be sharing our findings later.
 
----
+@slidebreak
 {layout="Investigate"}
 # Contracts Help Us Write Code
 
@@ -275,7 +275,7 @@ It may help you to jot down some notes about your discoveries. We will be sharin
 ** _A right triangle requires the base (Number) and the height (Number). An isosceles triangle requires a leg (Number) and an angle (Number)._
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Contracts Help Us Write Code
 
@@ -285,7 +285,7 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 - @optional @printable-exercise{pages/radial-star.adoc} 
 - @optional @opt-printable-exercise{pages/star-polygon.adoc} 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
@@ -293,7 +293,7 @@ Complete @printable-exercise{pages/triangle-contracts.adoc}.
 - For some of you, the word `ellipse` was new. How would you describe what an ellipse looks like to someone who'd never seen one before?  
 - Why did the Contract for `ellipse` require two numbers? What happened when the two numbers were the same?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Contracts Help Us Write Code
 
@@ -317,7 +317,7 @@ If you see an error and you know the syntax is right, ask yourself these three q
 - What is the _type_ of the Range?
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

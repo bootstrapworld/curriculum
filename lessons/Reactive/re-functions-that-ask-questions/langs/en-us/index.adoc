@@ -26,8 +26,7 @@ Sometimes we want our functions to behave one way for a certain input or conditi
 
 === Investigate
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Open the @starter-file{what-to-wear}. After reading through the definition for the `wear` function:
 
 - Click "Run", so that you can use `wear` in the Interactions Area.
@@ -36,7 +35,7 @@ Open the @starter-file{what-to-wear}. After reading through the definition for t
 - What is the domain and range of the `wear` function?
 - What is the name of the variable in the `wear` function?
 - Change the `wear` function to return the shorts outfit when it’s cold (less than 30 degrees).
---
+}
 
 === Synthesize
 An `if` expression has four parts:
@@ -63,8 +62,7 @@ Students connect conditional functions with behaviors in games, and write one fr
 Let’s revisit the @starter-file{package-delivery} drone from earlier. We’re going to write a function that tells us where the package is for a given `DeliveryState`. This is the kind of function you might need to write later on in your game. For example, you may need to know whether a character has reached a portal at a certain part of the screen to advance to the next level, or if they’ve fallen into dangerous lava!
 
 === Investigate
-[.lesson-instruction]
---
+@lesson-instruction{
 @right{@image{images/bgimage.png, 400}}
 Open your workbook to @printable-exercise{pages/location.adoc}. Use the design recipe to write a function to tell you where the falling box is (either "`road`", "`house`", "`delivery zone`", or "`air`"), based on the `DeliveryState`. 
 
@@ -78,19 +76,18 @@ Once you’ve completed the problem on paper, open the Where's my Order? file. W
 ----
 
 Copy the work you have in your workbook to implement `location` on the computer.
---
+}
 
 In addition to writing your examples, you can also check that the `location` function’s behavior matches what a drawing of a `DeliveryState` instance shows. For example, if `location` returns `"road"` on some input, when we draw that same input, it ought to look like the package has landed in the road!
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Experiment with this function!
 
 - Click "Run" to compile your program, then close the animation window.
 - In the Interactions Area, evaluate `location(START)`. What does it return (hopefully `"air"`)?
 - Evaluate `draw-state(START)`. Does it look like the box is in the air?
 - Do the same for an instance of a DeliveryState where the box is in the road, on the house, and in the delivery zone.
---
+}
 
 === Synthesize
 These experiments show an important connection between functions that work with instances of a data structure, and the way we draw those instances. In our design for the animation, we have an understanding of what different regions of the screen mean. Here, we see that the draw-state and location functions both share this understanding to give consistent information about the animation.
@@ -116,20 +113,23 @@ Let’s return to your @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVSm
 In programming, it is fairly common that you will change a program that you’ve already written to do something new or different. Modifying existing code is a valuable skill, and one that we want to practice with this exercise. It is so useful, in fact, that we’ve created a worksheet to help you map out what needs to change in an existing animation to support new behavior.
 
 === Investigate
-[.lesson-instruction]
+@lesson-instruction{
 Turn to @printable-exercise{pages/animation-worksheet.adoc} and @printable-exercise{pages/animation-worksheet-samples.adoc}. Fill in the description of the animation change and three sample images at the top of the first page. If you don’t have colored pencils, just make an annotation near each sketch as to what color the sun should be in that sketch.
+}
 
 Once you know what new behavior you want, the next task is to build it into your code. The next two tables in the worksheet ask you to think about the NEW features that are changing in your game and how you might capture them.
 
-[.lesson-instruction]
+@lesson-instruction{
 Talk with your partner about what new information is changing and how you might build that into your program. Does the color change in a predictable way? Is the color a new field that is independent of the fields you already have? Based on your answer, do you think you will need to add something new to your `SunsetState` data structure, or can you change the look of your animation based on what is already there?
+}
 
 There are a number of ways students can solve this problem. Once students have brainstormed with their partners, have a classroom discussion to have pairs share their ideas.
 
 Since the color of the sun will be changing, we _could_ add a field to the `SunsetState` data structure, such as a String with the current color name. However, the color will not change independently: we want the color to change based on the position of the sun in the sky, and get darker as it gets lower. Let’s figure out how to make the sun color change based only on the fields we already have.
 
-[.lesson-instruction]
+@lesson-instruction{
 Fill in the table at the bottom of the worksheet assuming we are not changing the data structure: which components (including existing functions) need to change?
+}
 
 If we have decided not to add fields, you should have marked that the `draw-state` method changes, but nothing else needs to. We only change `next-state-tick` and `next-state-key` if there has been a change to the data structure.
 
@@ -169,8 +169,9 @@ fun draw-state(a-sunset):
 end
 ----
 
-[.lesson-instruction]
+@lesson-instruction{
 Open your workbook to @printable-exercise{pages/draw-sun.adoc}. Here we have directions for writing a function called `draw-sun`, which consumes a `SunsetState` and produces an image of the sun, whose color is either "`yellow`", "`orange`", or "`red`" depending on its y-coordinate.
+}
 
 The word problem assumes a background scene size of 400x300 pixels. Once students use their draw-sun function in their animation, they may need to change the specific conditions if they have a much larger or smaller scene.
 
@@ -178,13 +179,15 @@ Once you’ve completed and typed the `draw-sun` function into your sunset anima
 
 Now let’s think about having the sunset animation "`start again`"after the sun sets, with the sun reappearing in the upper-left corner.
 
-[.lesson-instruction]
+@lesson-instruction{
 Assume you edited your animation to restart the sun at the upper left after it sets. What color _should_ the sun be when it appears at the upper-left the second time around? What color _will_ it be based on your code? Will it be yellow again, or will the color have changed somehow to red?
+}
 
 To figure this out, think about what controls the color of the sun in your current code.
 
-[.lesson-instruction]
+@lesson-instruction{
 Edit the sunset animation so that the animation restarts. 
+}
 
 - Which of your functions has to be modified to include this change? 
 - Is restarting fundamentally about drawing one frame or about generating new instances? 

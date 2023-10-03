@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Solving Word Problems with the Design Recipe{font-size:36pt}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # The Design Recipe 
 
@@ -20,7 +20,7 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 * If students struggle with creating the examples, use the Circle of Evaluation mapping activity or use role-playing to help students build up their understanding around the concept.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Design Recipe 
 
@@ -29,7 +29,7 @@ In this lesson, you're going to learn a strategy for breaking down word problems
 * What pairs did you come up with?
 * What do you Notice about those purpose statements? Do they have anything in common?
 
----
+@slidebreak
 {layout="Launch"}
 # The Design Recipe 
 
@@ -38,7 +38,7 @@ Purpose statements should have enough details to allow us to write examples with
 * Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
 * @optional for more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.
 
----
+@slidebreak
 {layout="Launch"}
 # The Design Recipe 
 
@@ -50,7 +50,7 @@ A good purpose statement must have three things:
 
 1. All the _relevant information_ about how to produce that output
 
----
+@slidebreak
 {layout="Investigate"}
 # The Design Recipe 
 
@@ -62,7 +62,7 @@ ChatGPT has produced a purpose statement for each word problem... but ran into s
 
 1. What extra information was included, that wasn't needed to solve the problem?
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Design Recipe 
 
@@ -81,7 +81,7 @@ The three steps of the Design Recipe are designed to mirror best practices that 
 The order of the recipe is a recommendation based on 20+ years of research about what works for most students, but that doesn't mean this order works best for _every_ student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Rocket Height
 
@@ -91,7 +91,7 @@ They asked the A.I. to generate code that makes a rocket blast off, starting on 
 
 How do they know if it really solved the problem correctly?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Rocket Height
 
@@ -99,7 +99,7 @@ How do they know if it really solved the problem correctly?
 * Read the code before you click Run.
 * What do you Notice? What do you Wonder?
 
----
+@slidebreak
 {layout="Launch-DN"}
 # Rocket Height
 
@@ -121,7 +121,7 @@ Click Run to see the simulation start running on your computer.
 * Is `rocket-height` working?
 ** _No._
 -->
----
+@slidebreak
 {layout="Launch-DN"}
 # Rocket Height
 
@@ -147,7 +147,7 @@ What happens when we give the `rocket-height` function an input of 0?
 ** _The programmer only gave one example! We should always provide at least two examples. More complex functions will require us to think about what range of examples will be necessary to test that our function does what we want it to!_
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Rocket Height
 
@@ -160,14 +160,14 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 -->
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Rocket Height
 
 @image{images/rocket-height-contract.png}{width="700"}
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Rocket Height
 
@@ -175,7 +175,7 @@ As students work, circle the room and make sure that their @vocab{purpose statem
 
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Rocket Height
 
@@ -186,7 +186,7 @@ Be sure to add the Contract, purpose statement, and examples.
 Save your work when you're done!
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Rocket Height
 
@@ -196,14 +196,14 @@ You already know what @show{(code '(blastoff rocket-height))} does.
 - What about @show{(code '(space rocket-height))}?
 - Try out @show{(code '(everything rocket-height))}, too!
 
----
+@slidebreak
 {layout="Synthesize"}
 # Rocket Height
 
 - What problems did you fix in the starter file?
 - What did the other functions do?
 
----
+@slidebreak
 {layout="Synthesize"}
 # Rocket Height
 
@@ -223,7 +223,7 @@ For teachers who cover quadratic and exponential functions or have students who 
 - *Motivating Exponential Functions:* Can you make the rocket fly to the edge of the the universe?
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

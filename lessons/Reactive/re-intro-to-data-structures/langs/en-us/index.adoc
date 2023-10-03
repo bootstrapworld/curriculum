@@ -35,8 +35,9 @@ Ask a few introductory review questions to test students’ understanding:
 === Investigate
 To make sure the material from the previous unit is fresh in your mind, tackle the following activity:
 
-[.lesson-instruction]
+@lesson-instruction{
 Turn to @printable-exercise{pages/double-radius.adoc} in your workbook. Write a function called `double-radius`, which takes in a radius and a color. It produces an outlined circle of whatever color was passed in, with radius twice as big as the input.
+}
 
 If walking through this example as a class, use a projector so kids can see the function being written on the computer.
 
@@ -44,14 +45,13 @@ Remember how to use the design recipe to work through word problems?
 
 *Step 1: Contract and Purpose Statement*
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - What is the @vocab{Name} of this function? How do you know?
 - How many inputs does it have in its @vocab{Domain}?
 - What kind of data is the @vocab{Domain}?
 - What is the @vocab{Range} of this function?
 - What does this function do? Write a @vocab{Purpose Statement} describing what the function does in plain English.
---
+}
  
 ----
 # double-radius :: Number, String -> Image
@@ -62,15 +62,14 @@ Review the purpose of Contracts: once we know the Name, Domain, and Range of a f
 
 *Step 2: Examples*
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Using only the Contract and Purpose Statement, see if you can answer the following questions:
 
 - Every example begins with the name of the function. Where could you find the name of the function?
 - Every example has to include sample inputs. Where could you find out how many inputs this function needs, and what type(s) they are?
 - Every example has to include an expression for what the function should do when given an input. Where could you look to find out what this function does?
 - Write two examples on your paper, then circle and label what is changing between them. When labeling, think about what the changing things represent.
---
+}
 
 Don’t forget to include the lines `examples:` and `end`! Your examples should look similar to:  
 
@@ -87,8 +86,9 @@ Each one of these answers can be found in the Contract or Purpose Statement. Sug
 
 Once you know what is changing between our two examples, you can define the function easily. The things that were circled and labeled in the examples will be replaced with @vocab{variables} in the function definition.
 
-[.lesson-instruction]
+@lesson-instruction{
 Underneath your examples, copy everything that *doesn’t* change, and replace the changing things with the variable names you used. (Don’t forget to add the `fun` and `end` keywords, as well as the single colon (`:`) after the function header!)
+}
 
 ----
 # double-radius :: Number, String -> Image
@@ -98,35 +98,38 @@ fun double-radius(radius, color):
 end
 ----
  
-[.lesson-instruction]
+@lesson-instruction{
 For more practice, turn to @printable-exercise{pages/double-width.adoc} in your workbook and complete the Design Recipe for the `double-width` function.
+}
 
 Check students understanding: Why do we use variables in place of specific values? Why is it important to have descriptive variable names, as opposed to n or x? Remind students about nested functions: A function whose range is a number can be used inside of a function requiring a number in its domain, as in circle(2 * 25, "outline", "red").
 
 == Introducing Structures @duration{30 minutes}
 
-[.lesson-instruction]
+@lesson-instruction{
 Open the @starter-file{package-delivery} file on your computer and press "Run". What happens?
+}
 
 The drone tries to deliver a package directly to a house, but the box falls straight down, outside of the delivery zone. We want the package to fall _diagonally_, and land right in front of the house. Let’s take a look at the code to see why it falls into the road instead. There are a few new concepts in this file, but first, let’s focus on what you already know.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Look at the function defined here called `next-position`.
 
 - What is this function’s Domain? Its Range?
 - What does `next-position` do with its inputs?
---
+}
 
 This function takes in two numbers, representing the x- and y-coordinate of the box, but it only produces a new y-coordinate (after subtracting 5). If only the y-coordinate is changing, the box will always fall straight down. To reach the house, it will have to fall diagonally.
 
-[.lesson-instruction]
+@lesson-instruction{
 How should the box’s x-coordinate change if it moves diagonally to the right (toward the house)? How should its y-coordinate change?
+}
 
 Functions can return only one thing at a time, but we want to return a new x- *and* a y-coordinate in order to make the box fall diagonally. Thankfully, we have a way to combine multiple things within one container, called a @vocab{Data Structure}. For this project, we’ve created a structure for you to use called `DeliveryState`, which contains two Numbers. These represent an x and a y-coordinate.
 
-[.lesson-instruction]
+@lesson-instruction{
 Look at line 5, where we’ve defined `DeliveryState`. We’ll go through the new syntax for defining a data structure, because very soon you’ll be defining brand new structures of your own!
+}
  
 ----
 # The DeliveryState is two numbers: an x-coordinate and a y-coordinate
@@ -143,15 +146,17 @@ end
 
 This @vocab{data block} tells us that we’re defining a new data type called `DeliveryState`, whose constructor function `delivery` takes in two Numbers: x and y. Once we’ve listed each input and its data type, we finish defining the structure with the `end` keyword, just like finishing an `example` block.
 
-[.lesson-instruction]
+@lesson-instruction{
 In the Interactions Area, practice making some ``DeliveryState``s using the `delivery()` constructor function. Try making a `DeliveryState` that represents the box’s position if it’s on the road, another when it’s in the air, above the house, and one when it’s right in front of the house -- a successful delivery!
+}
 
 Students will soon be writing creating new data structures. Cover this new syntax carefully, paying special attention to capitalization (the name of the structure is capitalized (`DeliveryState`), whereas its constructor function (delivery) is lowercase), double colons (::) before data types, and commas between inputs to the constructor function.
 
 Now it’s up to us to get this box delivered sucessfully, and make sure it lands at the house.
 
-[.lesson-instruction]
+@lesson-instruction{
 Turn to @printable-exercise{pages/next-position.adoc} in your workbook, read the word problem, and fill in the Contract and Purpose Statement for the function `next-position`.
+}
 
  
 ----
@@ -164,8 +169,7 @@ Point out that we’re now using a new data type in a contract: next-position co
 
 Now for our two examples. Using, or @vocab{calling} `next-position` with two numbers is easy, but what happens to those numbers? We can’t return both at the same time...unless we use a data structure! To do so we’ll need to use the constructor function to make a structure from the data we already have.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - According to the definition for `DeliveryState`, what function makes a DeliveryState? What is its contract?
 - `# delivery :: Number, Number -> DeliveryState`
 - What two things are part of a DeliveryState? Do we have values for those things as part of our first example?
@@ -179,12 +183,13 @@ end
 ----
  
 - Once your first example is complete, write one more example with different inputs for the x and y coordinates.
---
+}
 
 Remind students to show every step of their work in the example step of the design recipe: if the x-coordinate increases by 5 while the y-coordinate decreases by 5, they should show the addition and subtraction within the DeliveryState data structure, instead of just returning the new numbers.
 
-[.lesson-instruction]
+@lesson-instruction{
 Now that you have two examples, it’s time to define the function. You know the drill: circle and label everything that changes between your two examples, copy everything that stays the same, and replace the changing things with the variables you chose.
+}
 
 When you finish, your function definition should look like:  
 
@@ -196,8 +201,9 @@ end
  
 Now, instead of just changing and returning one number (a y-coordinate), we can return *both* the x and y-coordinates of the box within a @vocab{Data Structure}.
 
-[.lesson-instruction]
+@lesson-instruction{
 Open the https://code.pyret.org/editor#share=0B9rKDmABYlJVWUlZTHVVRDFOdk0[Package Delivery] code again and replace the original `next-position` function with the one in your workbook to make the box land within the dlivery zone, in front of the house! Don’t forget to change the given examples to match your new function definition.
+}
 
 === Synthesize
 Until now, a function could only return atomic values: single Numbers, Strings, Images, or Booleans. In Bootstrap:Reactive, our functions will still return one value, but that value can be a @vocab{Data Structure}, (or just "`structure`" for short) containing any number of values. This way we can return both the x- and y-coordinate of a package using a `DeliveryState`. Later on, we’ll create new structures to record detail about characters in a game, like their health, position, amount of armor, or inventory.
@@ -212,8 +218,7 @@ Students walk through the process of defining a data structure based on a word p
 === Launch
 Suppose you own a famous bakery. You bake things like cookies, pastries, and tarts, but you’re especially known for your world-famous cakes. What type of thing is a cake? Is it a number? String? Image? Boolean? You couldn’t describe all of the important things about a cake with any one of those data types. However, we could say that we care about a couple of details about each cake, each of which can be described with the types we already know.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 For each of the following aspects of a cake, think about what data type you might use to represent it:
 
 - The flavor of the cake. That could be "`Chocolate`", "`Strawberry`", "`Red Velvet`", or something else.
@@ -221,35 +226,39 @@ For each of the following aspects of a cake, think about what data type you migh
 - Whether or not the cake is an ice cream cake.
 
 What data type could we use to represent the entire cake?
---
+}
 
 Now that we know everything that is part of a cake, we can use a data structure to represent the cake itself. Let’s take a look at how this works.
 
 === Investigate
 @right{@image{images/cake1.png, 400}}
 
-[.lesson-instruction]
+@lesson-instruction{
 Open your workbook to @printable-exercise{pages/caketype.adoc}.
+}
 
 On this page, we will define a data structure for cakes, which we call `CakeType` (since this is now a new data TYPE). At the top of this page we see a comment, stating what things are part of a `CakeType`. Below that is a line that says `data CakeType:`, which begins the definition of a new data structure, called CakeType. On the next line, we define the function that makes a CakeType (`cake`), and how _exactly_ to make a CakeType -- the names of each thing in a CakeType, and their data types. Each piece of information that makes up a cake (the flavor, etc) is called a @vocab{field}. A field has both a descriptive name (like `flavor`) and a data type.
 
-[.lesson-instruction]
+@lesson-instruction{
 What name describes the first field in a `CakeType`? What data type can we use to represent it?
+}
 
 Refer students back to their language table, to see what Types are available.
 
 There is a little bit of new syntax involved in defining structures. On the first line on @printable-exercise{pages/caketype.adoc}, we write `flavor {two-colons} String`, which tells Pyret that the first element of __any__ CakeType will be its flavor, represented by a String. This line shows how to define one field in a data structure.
 
-[.lesson-instruction]
+@lesson-instruction{
 What name describes the second field in a `CakeType`? What data type can we use to represent it?
+}
 
 On the next line, write `layers {two-colons} Number,`, which tells Pyret that
 the second element of any CakeType will be its number of layers,
 represented by a Number.
 
-[.lesson-instruction]
+@lesson-instruction{
 What data structure should we use to represent whether or not the
 CakeType is an ice cream cake? Use this to define another field.
+}
 
 On your paper, you should have:  
 
@@ -267,8 +276,9 @@ This is the code that defines the `CakeType data` structure. It tells the comput
 
 Stress the importance of being able to define your own data types to students: no longer are they bound by the single values of numbers, strings, or Booleans! Pyret allows you to define brand new Data Structures, containing any combination of values.
 
-[.lesson-instruction]
+@lesson-instruction{
 Open the @starter-file{cake-bakery} and look at lines 3–8. Do they match what you have on your paper?
+}
 
 Now take a look farther down, at line 10: `birthday-cake = cake("Vanilla", 4, false)`
 
@@ -286,8 +296,7 @@ Below the data definition for CakeType there are four CakeTypes defined:
 
 Ask students questions about these CakeTypes to get them thinking about how they would define their own.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 On line 14, define another CakeType, which you can name however
 you like (but choose something descriptive, like `pb-cake`,
 `lemon-cake`, etc.) To start,
@@ -299,7 +308,7 @@ you like (but choose something descriptive, like `pb-cake`,
 Now what do you expect to happen when you type the name of your
 new CakeType into the Interactions Area? Click "Run" and try it
 out.
---
+}
 
 Have students walk you through the process of defining a new value and making a `CakeType` with whatever flavor, etc. they like.
 
@@ -307,8 +316,9 @@ Have students walk you through the process of defining a new value and making a 
 pb-cake = cake("Peanut Butter", 2, true)
 ----
 
-[.lesson-instruction]
+@lesson-instruction{
 Define two new values for some of your favorite cakes. You can give them whatever names you prefer. You can make any kind of `CakeType` that you want, as long as your structure has the right types in the right orders!
+}
 
 @right{@image{images/cake2.png, 400}}
 Repetition is key in this lesson. Have students identify each part of the `CakeType` for every one they’ve defined. What is the flavor of their first `CakeType`? Its number of layers? Ensure that students are using their inputs in the right order!
@@ -320,12 +330,11 @@ Students often struggle with the difference between the _definition_ of a data s
 
 === Synthesize
 Based on these instances of CakeTypes you just wrote:
-[.lesson-instruction]
---
+@lesson-instruction{
 - What is the name of the function that creates a CakeType?
 - What is the Domain of this function?
 - How many things are in the domain?
---
+}
 
 The three things in the domain of cake are, in fact, the three things that we have already listed on @printable-exercise{pages/caketype.adoc}! With data structures, the order is very important: we always want the first string in cake to be the CakeType’s flavor, the first number to be its number of layers, etc.
 
@@ -333,8 +342,9 @@ The three things in the domain of cake are, in fact, the three things that we ha
 CakeTypes are the first example of defining a new data type that students will see, but Pyret allows you to define any number of new data structures to hold any combination of values. The important points to remember about creating structures at this point is that whenever the constructor function is called (in this case, cake), it must take in the same number and type of values as in the structure’s definition, and its inputs must be in the same order as the definition.
 ////
 
-[.lesson-instruction]
+@lesson-instruction{
 After clicking the "Run" button, in Pyret, type `birthday-cake` into the Interactions Area and hit enter. What do you get back?
+}
 
 Let's make sense of this output. What happens when you type just a number into the Interactions Area? We get that same number back! What about Strings? Images? Booleans? If we don’t do anything to our input, or use any function on it, we get back exactly what we put in! Here, you put in a `CakeType`, let’s see what we get back. At first glance, it looks like a function call was the answer! But there’s a few things different about what appears in the output. First, it isn’t the same color as a normal function call, which is the first hint that something’s different. Second, we can _click_ on it, and see that this value is storing three other values in its @vocab{fields} -- the flavor, layers, and whether or not it’s ice cream. This compound value that’s printed is an @vocab{instance} of a `CakeType`. It’s a value in its own right, so when we type in `birthday-cake` it shows us this value (just like with numbers and
 strings).
@@ -349,18 +359,18 @@ Students are introduced to the syntax of @vocab{dot accessors}, which allow them
 === Launch
 Suppose you want to get the flavor _out_ of `chocolate-cake`. You don’t care about the message, color, or anything else -- you just want to know the flavor. Pyret has syntax for doing precisely that: `.flavor`.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 If you type `chocolate-cake.flavor` into the Interactions Area, what should it evaluate to? Try it out!
 
 - What kind of thing did it return: A Number, String, Image, Boolean, or structure?
 - Practice taking the flavor out of every `CakeType` you have defined, using `.flavor`
---
+}
 
 Of course, there are ways to access any part of a `CakeType`, not just the flavor! What do you think you would get if you typed `chocolate-cake.layers` in the Interactions Area?
 
-[.lesson-instruction]
+@lesson-instruction{
 Try using the dot-accessors `.layers` and `.is-iceCream` on your CakeTypes! Do they do what you expect?
+}
 
 A way to prompt students to use these accessors is to ask: "How do you get the flavor out of a CakeType?" or "How do you get the layers out of a CakeType?" Throughout the course you can set up a call and response system with students, where the question "How do you get the X out of a Y?" will prompt the name of the accessor.
 
@@ -368,8 +378,9 @@ The syntax for getting a field from a structure is known as a @vocab{dot accesso
 
 Our CakeType structure is defined using `data CakeType:` and the `cake(...)` lines, which tell the computer what things make up that structure, and what order and type each thing is. In return, we get new functions to use. Until we write these lines, we don’t have `cake(...)` (to make a Cake), `.flavor` (to get the flavor out of the Cake), `.layers`, or any other dot-accessors, because Pyret doesn’t know what a CakeType is -- _we haven’t defined it_. 
 
-[.lesson-instruction] 
+@lesson-instruction{ 
 To see this for yourself, type a pound sign (`#`) before the line which begins with `cake(...)` and each of the fields. This comments out the definition, so that the computer ignores it. Hit run, and see what happens.
+}
 
 ////
 When the cake(...) lines are commented out, Pyret returns some errors, saying you’re trying to use cake before its definition. It doesn’t know what cake is or does, because we defined a CakeType structure with no constructor. Make sure students understand that the line beginning with data and a line similar to cake(...) are needed in order to create and work with any structure.
@@ -379,14 +390,13 @@ When the cake(...) lines are commented out, Pyret returns some errors, saying yo
 
 Of course, when programmers work with data structures, they don’t just define them and create instances. They also write functions that use and produce structures. Let’s get started writing some functions for CakeTypes.
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Turn to @printable-exercise{pages/taller-than.adoc} in your workbook. Write the contract and purpose statement for a function called taller-than, which consumes two CakeTypes, and produces true if the first CakeType is taller than the second.
 
 - What is the domain for this function?
 - What is the range of taller-than?
 - Which part(s) of the CakeTypes will you need to check to determine if one is taller than the other?
---
+}
  
 ----
 # taller-than :: CakeType, CakeType -> Boolean
@@ -397,8 +407,9 @@ Turn to @printable-exercise{pages/taller-than.adoc} in your workbook. Write the 
 
 For your first example, try comparing `birthday-cake` and `chocolate-cake`. Do we care about what flavor either of these CakeTypes are? What about whether or not one of them is an ice cream cake? All we need to figure out which one is taller is their number of layers.
 
-[.lesson-instruction]
+@lesson-instruction{
 How do you get the number of layers out of `birthday-cake`? What about `chocolate-cake`? Write your first example to figure out if `birthday-cake` has a greater number of layers than `chocolate-cake`.
+}
  
 ----
 examples:
@@ -407,11 +418,10 @@ examples:
 end
 ----
 
-[.lesson-instruction]
---
+@lesson-instruction{
 - Write one more example for the function taller-than, this time using it to compare any two CakeTypes you defined earlier. 
 - Next, circle and label what changes between the two examples. How many variables will this function need? Then write the definition, using your examples to help you.
---
+}
 
 After replacing the changing things with variables, your definition should look similar to:  
 
@@ -422,8 +432,7 @@ end
 ----
  
 
-[.lesson-instruction]
---
+@lesson-instruction{
 Turn to @printable-exercise{pages/will-melt.adoc} in your workbook. Your bakery needs to know if certain CakeTypes needs to be refrigerated. If the temperature is greater than 32 degrees AND the given CakeType is an ice cream cake, the function should return true.
 
 - Fill out the @vocab{Contract} and @vocab{Purpose Statement} for
@@ -432,7 +441,7 @@ Turn to @printable-exercise{pages/will-melt.adoc} in your workbook. Your bakery 
 - Circle and label what varies between those examples and label
   it with a @vocab{variable} name.
 - Define the function.
---
+}
 
 Give students plenty of time to practice using dot-accessors, extracting pieces of the Cake structures and writing expressions that compute with them.
 

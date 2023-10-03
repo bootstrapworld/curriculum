@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Translating Between Words and Math
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Circles of Evaluation
 
@@ -14,7 +14,7 @@ Your teacher is going to give you an envelope that contains three sets of cards.
 
 With your partner, look through the first card set (of three) that your teacher gave you. What do you notice?
 
----
+@slidebreak
 {layout="Launch"}
 # Circles of Evaluation
 
@@ -24,7 +24,7 @@ The expressions on these cards each include the number 15, the number 3, and an 
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Circles of Evaluation
 
@@ -37,7 +37,7 @@ What do you notice?
 
 -->
 
----
+@slidebreak
 {layout="LaunchR"}
 # Circles of Evaluation
 
@@ -50,7 +50,7 @@ This second set of cards includes Circles of Evaluation.
 @show{(coe '(/ 15 3))}
 
 
----
+@slidebreak
 {layout="Launch"}
 # Circles of Evaluation
 
@@ -69,7 +69,7 @@ Circulate as students sort their cards, ensuring that they are carefully analyzi
 - *Position of the operator*. The operator always belongs at the top of the Circle, and not in between terms. Explain to students that this is a convention we must follow when working with Circles of Evaluation.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Order of Operations
 
@@ -91,7 +91,7 @@ Reading expressions aloud can often help students think about the meaning of the
 -->
 
 
----
+@slidebreak
 {layout="Launch"}
 # Circles of Evaluation
 
@@ -103,7 +103,7 @@ Reading expressions aloud can often help students think about the meaning of the
     Ensure that students are confident creating and analyzing simple Circles, as the next section of the lesson introduces another layer of complexity.
 -->
 
----
+@slidebreak
 {layout="InvestigateC"}
 # Circles of Evaluation
 
@@ -117,7 +117,7 @@ The Circle of Evaluation for @math{3 \times 5 + 3} looks like this:
 Teacher Note: Your students do not need to know that multiplication precedes addition in the subsequent activities.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Circles of Evaluation
 
@@ -132,7 +132,7 @@ Teacher Note: Your students do not need to know that multiplication precedes add
 <!-- Note: On Translating from Circles to Words, there are multiple correct translations. Be sure to spend a moment going over students' solutions. Some translations into words are clearer than others; the subsequent section of this lesson will explore that notion in greater depth.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Circles of Evaluation
 
@@ -143,7 +143,7 @@ Teacher Note: Your students do not need to know that multiplication precedes add
 
 - Is there more than one way to draw the Circle of Evaluation for @math{1 + 2} ? If so, is one way more "correct" than the other?
 
----
+@slidebreak
 {layout="Launch"}
 # The Ambiguity of Words
 
@@ -157,13 +157,13 @@ How could you rewrite this sentence to make it clearer?
 ** _Discuss the two different possible interpretations of the sentence, which illustrate how even grammatically correct sentences in English can create confusion!_
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # The Ambiguity of Words
 
 Math is precise, but that precision is difficult to preserve when we switch to words. Often, sentences can be ambiguous, meaning that there is more than one way to interpret them!
 
----
+@slidebreak
 {layout="InvestigateC"}
 # The Ambiguity of Words
 
@@ -178,7 +178,7 @@ In this expression, are we multiplying first and then adding (as represented by 
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Ambiguity of Words
 
@@ -199,7 +199,7 @@ In this expression, are we multiplying first and then adding (as represented by 
 
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # The Ambiguity of Words
 
@@ -209,7 +209,7 @@ In this expression, are we multiplying first and then adding (as represented by 
 
 - When you encounter an expression that is clear, draw its Circle of Evaluation.
 
----
+@slidebreak
 {layout="Synthesize"}
 # The Ambiguity of Words
 

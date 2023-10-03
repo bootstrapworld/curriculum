@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Compound Inequalities: Solutions & Non-Solutions {style="font-size:27pt"} 
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Compound Inequalities
 
@@ -18,7 +18,7 @@ We use inequalities for lots of things:
 
 What other examples can you come up with?
 
----
+@slidebreak
 {layout="Launch"}
 # Introducing Compound Inequalities
 
@@ -33,7 +33,7 @@ What other examples can you come up with?
 Guide students through other examples of `and` and `or` with various statements, such as "I'm wearing a red shirt AND I'm a math teacher, true or false?" or "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?". This can make for a good sit-down, stand-up activity, where students take turns saying compound Boolean statements and everyone stands if that statement is true for them.
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Introducing Compound Inequalities
 
@@ -44,7 +44,7 @@ Complete:
 - @printable-exercise{pages/boolean-coe-to-code1.adoc}
 - @printable-exercise{pages/and-or.adoc}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Introducing Compound Inequalities
 
@@ -61,13 +61,13 @@ Write your own compound Boolean statements.
 When describing compound inequalities, be careful not to use "english shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 Complete @printable-exercise{compound-warmup.adoc}.
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -83,7 +83,7 @@ Complete @printable-exercise{compound-warmup.adoc}.
 <!-- 
 * Note: If students see thumbnails that are too small to read, have them click on the thumbnails to see full-size images!
 -->
----
+@slidebreak
 {layout="Investigate-2"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -104,7 +104,7 @@ Any questions about what you're seeing in the first two definitions or these ima
 This is not the time to discuss anything beyond the first two plots or line 18 of the code in the Definitions Area
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -112,7 +112,7 @@ This is not the time to discuss anything beyond the first two plots or line 18 o
 * Read the comments in the Definitions Area with your partner to learn how these functions are supposed to work.
 * Then complete @printable-exercise{compound-explore.adoc} using the @starter-file{inequalities-compound}.
 
----
+@slidebreak
 
 {layout="InvestigateIT"}
 
@@ -132,7 +132,7 @@ Why is the circle on 5 red and the circle on 15 green?
 * the circle on 15 is green becaus 15 is part of the solution - it _is_ less than or equal to 15.
 -->
 
----
+@slidebreak
 
 {layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
@@ -145,7 +145,7 @@ Why isn't there a solution to @math{x \lt 5 and x \ge 15}?
 There aren't any numbers that are both smaller than 5 and greater than or equal to 15, so there is no solution!
 -->
 
----
+@slidebreak
 {layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -159,7 +159,7 @@ There aren't any numbers that are both smaller than 5 and greater than or equal 
 
 -->
 
----
+@slidebreak
 {layout="InvestigateIT"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -173,14 +173,14 @@ In order to make an `or` statement true, a number only has to make one of the in
 Every number in the universe is either greater than 5 or less than or equal to 15 - there aren't any non-solutions!
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 - Turn to @printable-exercise{compound-inequality-solutions.adoc}.
 - Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
 
----
+@slidebreak
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -188,7 +188,7 @@ Instead of defining two functions as simple inequalities, we can produce an ineq
 
 In the following activity, we'll analyze inequality graphs and define a _single_ function that produces the graph.
 
----
+@slidebreak
 {layout="Investigate"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
@@ -198,13 +198,13 @@ In the following activity, we'll analyze inequality graphs and define a _single_
 @ifproglang{pyret}{@optional Try @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
 }
 
----
+@slidebreak
 {layout="Synthesize"}
 # Solutions and Non-Solutions of Compound Inequalities {style="font-size:22pt"}
 
 How did the graphs of intersections and unions differ?
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 

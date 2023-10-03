@@ -584,11 +584,20 @@
                      (cons styled-link-output *opt-printable-exercise-links*))))]
 
               [(equal? link-type "printable-exercise")
-               (let ([styled-link-output (string-append "[.PrintableExercise]##" materials-link-output "##")])
+               (let* ([styled-link-output
+                        (let ([g-pdf (path-replace-extension g ".pdf")]
+                              [tack-on ", window=\"_blank\""])
+                          (format "[.PrintableExercise]##~a {startsb} link:~alessons/pass:[~a][html~a] &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}##" (or page-title link-text)
+                                  *dist-root-dir* g tack-on
+                                  *dist-root-dir* g-pdf tack-on))]
+                     ; [styled-link-output
+                     ;   (string-append "[.PrintableExercise]##" materials-link-output-with-pdf "##")]
+                     )
                  (unless (findf (lambda (L) (equal? (second L) styled-link-output))
                                 *printable-exercise-links*)
                    (set! *printable-exercise-links*
                      (cons (list snippet styled-link-output) *printable-exercise-links*))))]
+
               [(equal? link-type "handout")
                (let ([styled-link-output (string-append "[.handout]##"
                                            materials-link-output "##")])
@@ -1441,7 +1450,7 @@
                                        o))]
                            [(string=? directive "math")
                             (let ([text (string-trim (read-group i directive))])
-                              (display-math text o))]
+                              (display (math->string text) o))]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
@@ -1589,7 +1598,7 @@
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
-                                                 (read-group i directive #:scheme? #t)))])
+                                                                 (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
                            [(string=? directive "clear")
@@ -1840,6 +1849,11 @@
                               (display "\n[.lesson-point]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
+                           [(string=? directive "lesson-instruction")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.lesson-instruction]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -2085,6 +2099,10 @@
             (for ([x (reverse *handout-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
+            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
+
+            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
+
             (let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (first x))]
@@ -2093,6 +2111,9 @@
                                 (unless y-i (set! y-i -1))
                                 (cond [(and (= x-i -1) (= y-i -1)) #t]
                                       [else (< x-i y-i)]))))])
+
+              ; (printf "xx = ~s\n" xx)
+
               (for ([x xx])
                 (fprintf o "\n* ~a\n\n" (second x))))
 
@@ -2119,6 +2140,10 @@
 
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
+
+            (fprintf o "\n* link:javascript:downloadLessonPDFs()[Download a PDF of all required pages]\n\n")
+
+            (fprintf o "+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
             )
           #:exists 'replace)
@@ -2597,19 +2622,19 @@
 
 (define (math e #:parens [parens #f])
   ; (printf "doing math ~s p:~s\n" e parens)
-  (create-zero-file (format "~a.uses-mathjax" *out-file*))
-  (enclose-math (sexp->arith e #:parens parens #:tex #t)))
+  ; (create-zero-file (format "~a.uses-mathjax" *out-file*))
+  (math->string (sexp->arith e #:parens parens #:tex #t)))
 
-(define (display-mathjax-math text o)
+(define (math->mathjax-string text)
   (create-zero-file (format "~a.uses-mathjax" *out-file*))
-  (display (enclose-math text) o))
+  (enclose-math text))
 
-(define (display-math text o)
+(define (math->string text)
   (if *math-unicode?*
       (let ([mu (math-unicode-if-possible text)])
-        (if mu (display (enclose-span ".mathunicode" mu) o)
-            (display-mathjax-math text o)))
-      (display-mathjax-math text o)))
+        (if mu (enclose-span ".mathunicode" mu)
+            (math->mathjax-string text)))
+      (math->mathjax-string text)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)

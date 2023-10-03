@@ -1,8 +1,8 @@
----
+@slidebreak
 {layout="Core Title Slide"}
 # Computing Needs All Voices
 
----
+@slidebreak
 {layout="Launch"}
 # Who writes the Code?
 
@@ -16,7 +16,7 @@ Pedagogy Note: Notice and Wonder!
 This pedagogy has a @link{https://www.learning-space.org/Page/96, rich grounding in literature}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Who writes the Code?
 
@@ -24,7 +24,7 @@ What did you Notice?
 
 What did you Wonder? 
 
----
+@slidebreak
 {layout="Investigate"}
 # Who writes the Code?
 
@@ -35,7 +35,7 @@ We're going to take a gallery walk of some @handout{computing-pioneers.html, Pio
 <!--To do a gallery walk, you will need to print and hang posters of @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}. If you aren't doing a gallery walk, decide on another format for engaging students with these pioneers.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Who writes the Code?
 
@@ -43,7 +43,7 @@ Take a few minutes to write about the @printable-exercise{windows-mirrors.adoc} 
 
 
 
----
+@slidebreak
 {layout="Launch"}
 # Advantages of Diverse Teams in Tech
 
@@ -53,7 +53,7 @@ Complete the Ketchup Use Google Form.
 In order to use this slide with your students, you’ll need to make a copy of this form and add the link to this slide https://docs.google.com/forms/d/16tCvWZmTvHrztrVvQeInusQovwoK61WLsg3OTV0VIwg/copy
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Advantages of Diverse Teams in Tech
 
@@ -61,7 +61,7 @@ Read this LA Times article, @online-exercise{https://www.latimes.com/business/te
 
 Then complete @printable-exercise{advantages-of-diverse-teams.adoc}.
 
----
+@slidebreak
 {layout="Synthesize"}
 # Advantages of Diverse Teams in Tech
 
@@ -72,7 +72,7 @@ Then complete @printable-exercise{advantages-of-diverse-teams.adoc}.
 * Can you think of a time when someone else had a strategy or idea that you would never have thought of, but was interesting to you and/or pushed your thinking to a new level?{style="font-size:16pt"}
 * Based on your experience of exceptions to mainstream assumptions, propose another pair of questions that could be used in place of "Where do you keep your ketchup?" and "What would you reach for instead?".{style="font-size:16pt"}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Advantages of Diverse Teams in Tech
 

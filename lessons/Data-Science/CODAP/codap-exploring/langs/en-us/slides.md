@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"}  
 # Exploring CODAP 
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Exploring CODAP
 
@@ -25,7 +25,7 @@ This model of pair programming is extremely useful for teasing apart the "thinki
 @link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Exploring CODAP
 
@@ -37,7 +37,7 @@ This model of pair programming is extremely useful for teasing apart the "thinki
 <!--
 Possible challenges: the grey plus sign does not appear unless a table or table row is selected; the button that minimizes doesn't appear unless the table's title is selected; and, the same button that minimizes also expands.
 -->
----
+@slidebreak
 
 {layout="Synthesize"}
 # Exploring CODAP
@@ -47,14 +47,14 @@ Possible challenges: the grey plus sign does not appear unless a table or table 
 - Did you make any discoveries about CODAP that you think others should know about?
 
 
----
+@slidebreak
 {layout="Launch"}
 # Strings and Numbers
 
 The folks at the shelter need help completing a variety of tasks using CODAP! To do this, they need to learn how CODAP handles the kinds of data in the animals data set (numbers, words, and more...).
 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Strings and Numbers
 
@@ -68,14 +68,14 @@ The folks at the shelter need help completing a variety of tasks using CODAP! To
 ** _Most of the error messages we've just seen were drawing our attention to @vocab{syntax errors}: missing commas, unclosed strings, etc._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Strings and Numbers
 
 As an employee of the shelter, you want each of these animals to be adopted! You wonder if visitors to the shelter might prefer to receive each animal’s weight in kilograms, or maybe rounded to the nearest whole number.
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Strings and Numbers
 
@@ -87,7 +87,7 @@ As an employee of the shelter, you want each of these animals to be adopted! You
 ** _The arguments are the inputs to a function._
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Strings and Numbers
 
@@ -96,7 +96,7 @@ So far, you have discovered two basic data types:
 - @vocab{String} - a data type for any sequence of characters between quotation marks
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Strings and Numbers
 
@@ -109,7 +109,7 @@ So far, you have discovered two basic data types:
 - CODAP follows the standard order of operations.
 
 
----
+@slidebreak
 {layout="Synthesize"}
 # Strings and Numbers
 

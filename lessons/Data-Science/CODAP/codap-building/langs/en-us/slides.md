@@ -1,4 +1,4 @@
----
+@slidebreak
 {layout="DS Title Slide"} 
 # More Transformers: Transform Attribute and Build Attribute
 
@@ -6,7 +6,7 @@
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Transforming Columns
 
@@ -15,13 +15,13 @@ We've already explored the `Filter` Transformer, which walks through a dataset, 
 Suppose we want to _transform_ our table in a different way! Let's say we want to convert `Pounds` to `Kilograms` or `Weeks` to `Days`.  Maybe we want to transform the `Pounds` column into the `Heavy` column, which produces `true` or `false` depending on if the animal is heavy. The `Transform Attribute` Transformer makes that possible!
 
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming Columns
 
 Like the `Filter` Transformer, the `Transform Attribute` Transformer walks through the table - but what the expression produces for each row becomes the value in a new column. We name that column when we create our `Transform Attribute` Transformer.
 
----
+@slidebreak
 {layout="Investigate"}
 # Transforming Columns
 
@@ -30,7 +30,7 @@ You may have noticed that when we create and save Transformers, we give them sen
 In this lesson, we will transform and build columns to create _new attributes_. These new attributes need sensible names, too! If we transform our `Weeks` attribute to days (multiplying by 7), the new attribute name should be `Days`.  If we build a new attribute showing the animals’ weight in kilos, the new attribute should be called `Kilos`.
 
 
----
+@slidebreak
 {layout="InvestigateC-DN"}
 # Transforming Columns
 
@@ -38,7 +38,7 @@ Complete @printable-exercise{pages/codap-transform.adoc} in the @starter-file{an
 
 @image{images/transform-ui-annotated.png}
 
----
+@slidebreak
 {layout="Synthesize"}
 # Transforming Columns
 
@@ -46,7 +46,7 @@ Complete @printable-exercise{pages/codap-transform.adoc} in the @starter-file{an
 - A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `Transform Attribute` to compute that for every row in the table.
 
 
----
+@slidebreak
 {layout="Launch"}
 # Building Columns
 
@@ -54,7 +54,7 @@ So far, we've used Transformers to _filter_ and to _transform an attribute_. The
 
 
 
----
+@slidebreak
 {layout="InvestigateR-DN"}
 # Building Columns
 
@@ -66,7 +66,7 @@ Complete @printable-exercise{pages/codap-build.adoc} in the @starter-file{animal
 	Now that students have some familiarity with creating and defining Transformers, invite them to explore `Build Attribute` to see if they can determine what it does. (It creates an additional column in the dataset, rather than _transforming_ the existing column.)
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Building Columns
 
@@ -82,7 +82,7 @@ Complete @printable-exercise{pages/codap-build.adoc} in the @starter-file{animal
 ** _We would build rather than transform if we want to do comparisons across columns, or need to preserve the original column for any reason (e.g., we want measurements in metric and standard units.)_
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Building Columns
 

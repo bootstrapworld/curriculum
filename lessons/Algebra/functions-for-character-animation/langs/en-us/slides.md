@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="Math Title Slide"}
 # Functions for Character Animation{style="font-size:36pt"}
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 ->
----
+@slidebreak
 {layout="Launch"}
 # Animation 
 
@@ -19,7 +19,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 1. If we change image coordinates a little bit at a time, they will appear to move.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Animation
 
@@ -42,7 +42,7 @@ Select 2 student volunteers - one to be TARGET, one to be DANGER. Start with jus
 - Practice this a few times with your volunteer, asking the class what their new x-coordinate is each time. Then have the other students call the update-danger function.
 -->
 
----
+@slidebreak
 {layout="Launch"}
 # Animation
 
@@ -58,7 +58,7 @@ Answers will vary: they were moving horizontally, their x-coordinates were chang
 What jobs could we hand over to the computer to make it possible for us to play the game? The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER.
 -->
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Animation
 
@@ -69,7 +69,7 @@ What jobs could we hand over to the computer to make it possible for us to play 
 
 _Did you close out of your game by accident? You can always go back to @starter-file{program-list} to find it._{style="font-size:12pt"} 
 
----
+@slidebreak
 {layout="Investigate-DN"}
 # Animation
 
@@ -82,7 +82,7 @@ Once you've gotten `update-target` and `update-danger` working, you can change t
 
 Be sure to modify your purpose statements and examples if you change your functions.{style="font-size:15pt"}
 
----
+@slidebreak
 {layout="Synthesize"}
 
 # Synthesize

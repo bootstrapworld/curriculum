@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Threats to Validity
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Threats to Validity
 
@@ -19,7 +19,7 @@ For example: suppose they surveyed 1,000 cat-owners and found that 95% of them t
 <!--
 Have students share back what they think. The issue here is that cat-owners are not a representative sample of the population, so the claim is invalid.
 -->
----
+@slidebreak
 {layout="Launch"}
 # Threats to Validity
 
@@ -30,7 +30,7 @@ This is just one example of what are called @vocab{Threats to Validity}.
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Threats to Validity
 
@@ -41,7 +41,7 @@ This is just one example of what are called @vocab{Threats to Validity}.
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Threats to Validity
 
@@ -51,7 +51,7 @@ This is just one example of what are called @vocab{Threats to Validity}.
 
 More examples of confounding variables can be found in @lesson-link{correlations/pages/correlation-is-not-causation.adoc}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Threats to Validity
 
@@ -64,7 +64,7 @@ Each one of those claims suffers from a serious threat to validity. Can you figu
 <!--
 
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Threats to Validity
 
@@ -75,7 +75,7 @@ Data Science is about doing the best you can to minimize those threats, and to b
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Fake News!
 
@@ -88,7 +88,7 @@ You've already seen a number of ways that statistics can be misused:
 <!--
 
 -->
----
+@slidebreak
 {layout="Launch"}
 # Fake News!
 
@@ -98,7 +98,7 @@ There are other ways to mislead the audience as well:
 
 **Changing the scale of a chart** - Changing the y-axis of a scatter plot can make the slope of the regression line seem smaller: "look, that line is basically flat anyway!"
 
----
+@slidebreak
 {layout="Launch"}
 # Fake News!
 
@@ -107,7 +107,7 @@ With all the news being shared through newspapers, television, radio, and social
 <!--
 
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Fake News!
 
@@ -119,7 +119,7 @@ With all the news being shared through newspapers, television, radio, and social
 <!--
 Have students trade papers with another group, and see if you can figure out why each other’s claims are not to be trusted!
 -->
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 
@@ -131,7 +131,7 @@ Was anyone able to stump the other group?
 
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Practice
 

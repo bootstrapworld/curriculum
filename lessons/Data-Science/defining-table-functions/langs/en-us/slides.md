@@ -1,11 +1,11 @@
----
+@slidebreak
 {layout="DS Title Slide"}
 # Defining Table Functions
 
 <!--
 To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
 -->
----
+@slidebreak
 {layout="Launch"}
 # Reviewing Function Definition 
 
@@ -17,7 +17,7 @@ By now you've had a chance to explore functions on their own, thinking of them i
 
 Now it's time to use those representations to help us work with Tables!
 
----
+@slidebreak
 {layout="Launch"}
 # Reviewing Function Definition 
 
@@ -28,7 +28,7 @@ Now it's time to use those representations to help us work with Tables!
 - How old is it?
 - Complete questions 1-3 on @printable-exercise{making-connections.adoc}.
 
----
+@slidebreak
 {layout="Investigate"}
 # Reviewing Function Definition 
 
@@ -39,7 +39,7 @@ _Complete the rest of @printable-exercise{making-connections.adoc}._
 <!--
 Review student answers, paying particular attention to the connections between "Contract and Purpose" and "Examples".
 -->
----
+@slidebreak
 {layout="Investigate"}
 # Reviewing Function Definition 
 
@@ -58,7 +58,7 @@ examples:
 end
 ```
 
----
+@slidebreak
 {layout="Investigate"}
 # Reviewing Function Definition 
 
@@ -74,7 +74,7 @@ end
 
 These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Miaulis" and "Nori", based on their `weeks` to adoption. But these examples only tell us part of the story!
 
----
+@slidebreak
 {layout="Investigate"}
 # Reviewing Function Definition 
 
@@ -96,7 +96,7 @@ In those first examples, where are the number `3` and `1` coming from?
 *You can use both kinds of examples in your code!* Sometimes we want to use real, concrete numbers to make sure our work is correct. And sometimes we need to show all of our work, to make sure we are defining the function correctly! Programmers often use a mix of the two.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Synthesize
 
@@ -108,7 +108,7 @@ Each step in the Design Recipe helps us write the next one.
 
 These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
 
----
+@slidebreak
 {layout="Launch"}
 # Design Recipe Telephone
 
@@ -120,7 +120,7 @@ We're going to practice collaborative programming and try writing some other Tab
 Divide the class into groups of three.
 -->
 
----
+@slidebreak
 {layout="Investigate"}
 # Design Recipe Telephone
 
@@ -134,7 +134,7 @@ In this activity, each person in your group will start with a different word pro
 * You will receive a different problem from the person to your left.{style="font-size:12pt"}
 * If at any point your realize that the person before you didn't provide enough information, you may hand the paper back to them for revision.{style="font-size:12pt"}
 * When you've finished all three Design Recipes, turn to the Data Cycle for your set and work as a team to complete it!{style="font-size:12pt"}
----
+@slidebreak
 {layout="InvestigateR"}
 # Design Recipe Telephone
 
@@ -160,7 +160,7 @@ In this activity, each person in your group will start with a different word pro
 * Using their partner's examples, every student writes their definition
 -->
 
----
+@slidebreak
 {layout="InvestigateR"}
 # Design Recipe Telephone
 
@@ -180,7 +180,7 @@ In this activity, each person in your group will start with a different word pro
 Have students compose their solutions to the three word problems together to complete their data cycles.
 -->
 
----
+@slidebreak
 {layout="Synthesize"}
 # Design Recipe Telephone
 
@@ -193,7 +193,7 @@ Have students compose their solutions to the three word problems together to com
 * If we already know how to get the answer, why would it ever be important to know how to do each step the slow way? _Someday we won't be able to get the answer, and knowing the steps will help / So we can help someone else who is stuck / So we can work with someone else and share our thinking / So we can check our work
 -->
 
----
+@slidebreak
 {layout="Supplemental"}
 # Additional Exercises
 
