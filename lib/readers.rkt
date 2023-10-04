@@ -1,5 +1,7 @@
 #lang racket
 
+(require "html-tag-gen.rkt")
+
 (provide
   read-word
   string-to-form
@@ -301,14 +303,12 @@
 
 (define (math-sqrt x)
   (string-append "√"
-    (if (<= (string-length x) 1)
-        x
-        (string-append "(" x ")"))))
+    (enclose-span ".overbar" x)))
 
 (define (math-unicode-if-possible text)
-  (cond [(or (regexp-match "\\\\over" text)
+  (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
-             (regexp-match "\\\\sqrt" text)
+             ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
              (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
@@ -341,6 +341,9 @@
                                                      ; (display "⁄" o)
                                                      (display "/" o)
                                                      (math-subscript de))]
+                                         [("overline") (let ([dec (read-mathjax-token i)])
+                                                         (enclose-span ".overbar"
+                                                           (math-unicode-if-possible dec)))]
                                          [("|") "&#x7c;"]
                                          [(";") " "]
                                          [else  
