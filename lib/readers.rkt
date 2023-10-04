@@ -350,9 +350,9 @@
                                            (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
                                                  [else ctl-seq])]))]
                                     [(char=? c #\^) (math-superscript (read-mathjax-token i)
-                                                                      #:use-unicode? #t)]
+                                                                      #:use-unicode? #f)]
                                     [(char=? c #\_) (math-subscript (read-mathjax-token i)
-                                                                    #:use-unicode? #t)]
+                                                                    #:use-unicode? #f)]
                                     [(assoc c *mathjax-special-chars*) => second]
                                     [else (string c)])
                               o)
