@@ -337,9 +337,10 @@
                                                      (math-sqrt (math-unicode-if-possible x)))]
                                          [("frac") (let* ([nu (read-mathjax-token i)]
                                                           [de (read-mathjax-token i)])
-                                                     (display (math-unicode-if-possible nu) o)
-                                                     (display "⁄" o)
-                                                     (math-unicode-if-possible de))]
+                                                     (display (math-superscript nu) o)
+                                                     ; (display "⁄" o)
+                                                     (display "/" o)
+                                                     (math-subscript de))]
                                          [("|") "&#x7c;"]
                                          [(";") " "]
                                          [else  
