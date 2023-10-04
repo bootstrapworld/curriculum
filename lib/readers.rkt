@@ -308,13 +308,19 @@
 (define (math-unicode-if-possible text)
   (cond [(or (regexp-match "\\\\over" text)
              (regexp-match "\\\\require" text)
-             (regexp-match "\\\\sqrt{[^}]+[-+]" text)
+             (regexp-match "\\\\sqrt" text)
+             ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
+             (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
              ; (and (regexp-match "\\\\div" text) (regexp-match "=" text))
              )
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
-        [else (call-with-output-string
+        [else
+          (set! text (regexp-replace "{ " text ""))
+          (set! text (regexp-replace " }" text ""))
+
+          (call-with-output-string
                 (lambda (o)
                   (call-with-input-string text
                     (lambda (i)
