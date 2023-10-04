@@ -285,18 +285,18 @@
     ("times" "×")
     ))
 
-(define (math-superscript ss)
+(define (math-superscript ss #:use-unicode? [use-unicode? #f])
   (let* ([ss (math-unicode-if-possible ss)]
          [ss-list (string->list ss)])
-    (if (andmap (lambda (c) (assoc c *superscriptables*)) ss-list)
+    (if (and use-unicode? (andmap (lambda (c) (assoc c *superscriptables*)) ss-list))
         (apply string-append
           (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))
         (string-append "^" ss "^"))))
 
-(define (math-subscript ss)
+(define (math-subscript ss #:use-unicode? [use-unicode? #f])
   (let* ([ss (math-unicode-if-possible ss)]
          [ss-list (string->list ss)])
-    (if (andmap (lambda (c) (assoc c *subscriptables*)) ss-list)
+    (if (and use-unicode? (andmap (lambda (c) (assoc c *subscriptables*)) ss-list))
         (apply string-append
           (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))
         (string-append "~" ss "~"))))
@@ -349,8 +349,10 @@
                                          [else  
                                            (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
                                                  [else ctl-seq])]))]
-                                    [(char=? c #\^) (math-superscript (read-mathjax-token i))]
-                                    [(char=? c #\_) (math-subscript (read-mathjax-token i))]
+                                    [(char=? c #\^) (math-superscript (read-mathjax-token i)
+                                                                      #:use-unicode? #t)]
+                                    [(char=? c #\_) (math-subscript (read-mathjax-token i)
+                                                                    #:use-unicode? #t)]
                                     [(assoc c *mathjax-special-chars*) => second]
                                     [else (string c)])
                               o)
