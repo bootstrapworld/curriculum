@@ -2653,11 +2653,13 @@
   (enclose-math text))
 
 (define (math->string text)
-  (if *math-unicode?*
-      (let ([mu (math-unicode-if-possible text)])
-        (if mu (enclose-span ".mathunicode" mu)
-            (math->mathjax-string text)))
-      (math->mathjax-string text)))
+  ; (printf "doing math->string ~s\n" text)
+  (cond [(and *math-unicode?* (math-unicode-if-possible text))
+         => (lambda (mu)
+              (enclose-span ".mathunicode" mu))]
+        [else
+          (set! text (regexp-replace* "\\\\over" text "\\\\over\\\\displaystyle"))
+          (math->mathjax-string text)]))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)
