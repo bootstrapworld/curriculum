@@ -1,5 +1,7 @@
 #lang racket
 
+(require "html-tag-gen.rkt")
+
 (provide
   read-word
   string-to-form
@@ -283,38 +285,42 @@
     ("times" "×")
     ))
 
-(define (math-superscript ss)
+(define (math-superscript ss #:use-unicode? [use-unicode? #f])
   (let* ([ss (math-unicode-if-possible ss)]
          [ss-list (string->list ss)])
-    (if (andmap (lambda (c) (assoc c *superscriptables*)) ss-list)
+    (if (and use-unicode? (andmap (lambda (c) (assoc c *superscriptables*)) ss-list))
         (apply string-append
           (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))
         (string-append "^" ss "^"))))
 
-(define (math-subscript ss)
+(define (math-subscript ss #:use-unicode? [use-unicode? #f])
   (let* ([ss (math-unicode-if-possible ss)]
          [ss-list (string->list ss)])
-    (if (andmap (lambda (c) (assoc c *subscriptables*)) ss-list)
+    (if (and use-unicode? (andmap (lambda (c) (assoc c *subscriptables*)) ss-list))
         (apply string-append
           (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))
         (string-append "~" ss "~"))))
 
 (define (math-sqrt x)
   (string-append "√"
-    (if (<= (string-length x) 1)
-        x
-        (string-append "(" x ")"))))
+    (enclose-span ".overbar" x)))
 
 (define (math-unicode-if-possible text)
-  (cond [(or (regexp-match "\\\\over" text)
+  (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
-             (regexp-match "\\\\sqrt{[^}]+[-+]" text)
+             ; (regexp-match "\\\\sqrt" text)
+             ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
+             (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
              ; (and (regexp-match "\\\\div" text) (regexp-match "=" text))
              )
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
-        [else (call-with-output-string
+        [else
+          (set! text (regexp-replace "{ " text ""))
+          (set! text (regexp-replace " }" text ""))
+
+          (call-with-output-string
                 (lambda (o)
                   (call-with-input-string text
                     (lambda (i)
@@ -331,14 +337,22 @@
                                                      (math-sqrt (math-unicode-if-possible x)))]
                                          [("frac") (let* ([nu (read-mathjax-token i)]
                                                           [de (read-mathjax-token i)])
-                                                     (display (math-unicode-if-possible nu) o)
-                                                     (display "⁄" o)
-                                                     (math-unicode-if-possible de))]
+                                                     (display (math-superscript nu) o)
+                                                     ; (display "⁄" o)
+                                                     (display "/" o)
+                                                     (math-subscript de))]
+                                         [("overline") (let ([dec (read-mathjax-token i)])
+                                                         (enclose-span ".overbar"
+                                                           (math-unicode-if-possible dec)))]
+                                         [("|") "&#x7c;"]
+                                         [(";") " "]
                                          [else  
                                            (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
                                                  [else ctl-seq])]))]
-                                    [(char=? c #\^) (math-superscript (read-mathjax-token i))]
-                                    [(char=? c #\_) (math-subscript (read-mathjax-token i))]
+                                    [(char=? c #\^) (math-superscript (read-mathjax-token i)
+                                                                      #:use-unicode? #t)]
+                                    [(char=? c #\_) (math-subscript (read-mathjax-token i)
+                                                                    #:use-unicode? #t)]
                                     [(assoc c *mathjax-special-chars*) => second]
                                     [else (string c)])
                               o)

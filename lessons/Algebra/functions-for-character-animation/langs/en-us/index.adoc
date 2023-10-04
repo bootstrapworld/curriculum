@@ -41,58 +41,70 @@ Students connect the behavior of functions with changing coordinate values, ulti
 
 === Launch
 
-[.lesson-instruction]
-* How does a flip-book animation work?
-** _Each page of the book is slightly different, and the pages go so fast that the motion looks smooth._
-* Why do we see movement from still images? +
-** _Our eyes fill in the gaps between rapidly changing images._
-* How might this apply to our game?
-** _If we change image @vocab{coordinates} a little bit at a time, they will appear to move._
+@QandA{
 
-[.lesson-roleplay]
---
-Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). Select 2 student volunteers - one to be `TARGET`, one to be `DANGER`.  Start with just `TARGET`. Have the class select a starting x- and y-coordinate for the `TARGET`.
+@Q{How does a flip-book animation work?}
+@A{Each page of the book is slightly different, and the pages go so fast that the motion looks smooth.}
 
-The `TARGET` starts at a particular position, and then moves by 50 (pixels) to the left on each frame of the game.
+@Q{Why do we see movement from still images?}
+@A{Our eyes fill in the gaps between rapidly changing images.}
 
-When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
+@Q{How might this apply to our game?}
+@A{If we change image @vocab{coordinates} a little bit at a time, they will appear to move.}
+}
+
+@lesson-roleplay{
+* Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). 
+* We are going to write a function, called `update-target`, that will be responsible for changing the x-coordinate of the `TARGET` location. +
+_Note: In our game, there is hidden code that will randomly generate the y-coordinate for where the `TARGET` enters the screen. @ifproglang{pyret}{Our `update-target` function will take in that coordinate, but won't change it. For this role play, it will likely make the most sense to work with a y-coordinate of 0.}_ 
+* Before we write the function, let's act it out!
+* Select a student volunteer to be `TARGET` and pick a starting location for our `TARGET`, eg. @ifproglang{pyret}{(300, 0)} @ifproglang{wescheme}{300}.
+* For this roleplay, we will have our `update-target` function move our `TARGET` left across the x-axis by 50 (pixels) each time the function is called.
+** When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
 
 @ifproglang{wescheme}{
-- Make `TARGET` move by calling out `(update-target 300)`, `(update-target 250)`, etc.
+** Make `TARGET` move by calling out the function and starting location, eg. `(update-target 300)`.
+** Make `TARGET` move several more times by calling out the function and new location, eg. `(update-target 250)`, etc.
 }
 @ifproglang{pyret}{
-- Make `TARGET` move by calling out `update-target(300, 200)`, `update-target(250, 100)`, etc.
+** Make `TARGET` move by calling out the function and starting location, eg. `update-target(300, 0)`.
+** Make `TARGET` move several more times by calling out the function and new location, eg. `update-target(250, 0)`, etc.
+}
 }
 
-Ask students: what if we wanted the `update-target` function to move the `TARGET` across the classroom __more quickly?__ How would the function have to change?
+@QandA{
 
-Repeat with `DANGER`, this time moving _right_ across the x-axis. Then ask: what if we wanted `update-danger` to move the `DANGER` in the __opposite direction?__
---
+@Q{Ask students: How could we change our `update-target` function to move the `TARGET` across the classroom __more quickly?__}
+@A{We could have the `TARGET` move by more pixels each time, for example by 100 instead of 50.}
 
-[.lesson-instruction]
-* What did you notice about the movement of TARGET and DANGER?  What was changing about them?
-** _Answers will vary: they were moving horizontally, their x-coordinates were changing, they were not moving smoothly, etc._
-* What jobs could we hand over to the computer to make it possible for us to play the game?
-** _The computer could handle automatically moving TARGET and DANGER, then we could control the movement of PLAYER._
+@Q{What did you notice about the movement of TARGET?  What was changing?}
+@A{Answers will vary: they were moving horizontally, their x-coordinates were changing, they were moving one step at a time, etc.}
+
+@Q{If we want to write another function called `update-danger` and have it move the `DANGER` 50 pixels to the right, how will the function work?}
+@A{It will take in the x and y-coordinate and add 50 to x.}
+
+}
 
 === Investigate
-[.lesson-instruction]
+@lesson-instruction{
 - Sign in to @starter-file{program-list} and open your saved Game Starter Files, or @starter-file{game, make a new copy}.
 - Examine the `update-danger` function. Identify the Contract, and interpret what the function is currently doing.
 - Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}.
 - Transfer the code to your Game Starter File.
+}
 
 When students click the "Run" button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
 
-[.lesson-instruction]
+@lesson-instruction{
 - Complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}.
 - With your partner, transfer the code to your Game Starter File.
 - Click "Run" to see `DANGER` and `TARGET` move across the screen independently!
+}
 
 @strategy{
 @span{.title}{Extension Activities}
 
-Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want!  They should be sure to modify their purpose statements and examples if they change their functions.
+Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want to make the game the most fun to play!  They should be sure to modify their purpose statements and examples if they change their functions.
 }
 
 

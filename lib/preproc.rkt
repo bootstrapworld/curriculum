@@ -71,6 +71,8 @@
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
 
+(define *first-level-section-titles* '())
+
 (define *natlang-glossary-list* '())
 
 (define-namespace-anchor *adoc-namespace-anchor*)
@@ -307,14 +309,21 @@
 
 (define (display-section-markup i o)
   (let ([section-level
-          (let loop ([section-level 1])
+          (let loop ([section-level 0])
             (let ([c (peek-char i)])
               (cond [(eof-object? c) section-level]
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
-                    [else section-level])))])
-    (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
+                    [else section-level])))]
+        [title (string-trim (read-line i))])
+    (when (and *lesson-plan* (= section-level 1))
+      (let ([section-title (string-trim (regexp-replace "@duration.*$" title ""))])
+        (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
+    (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
-      (display #\= o))))
+      (display #\= o))
+    (display "= " o)
+    (expand-directives:string->port title o)
+    (newline o)))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
@@ -1053,6 +1062,8 @@
 (define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
+    (when *lesson-plan*
+      (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
@@ -1295,6 +1306,7 @@
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
   (set! *optional-flag?* #f)
+  (set! *first-level-section-titles* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1450,7 +1462,7 @@
                                        o))]
                            [(string=? directive "math")
                             (let ([text (string-trim (read-group i directive))])
-                              (display-math text o))]
+                              (display (math->string text) o))]
                            [(string=? directive "dist-link")
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [n (length args)]
@@ -1598,7 +1610,7 @@
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
-                                                 (read-group i directive #:scheme? #t)))])
+                                                                 (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
                            [(string=? directive "clear")
@@ -1847,6 +1859,16 @@
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-point]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
+                           [(string=? directive "lesson-instruction")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.lesson-instruction]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
+                           [(string=? directive "lesson-roleplay")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[lesson-roleplay]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [else
@@ -2152,6 +2174,12 @@
                       [else (display ",\n" o)])
                 (fprintf o "  ~s" k))
               (display " ]\n" o)))
+          #:exists 'replace)
+
+        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-sections.txt.kp")
+          (lambda (o)
+            (for ([s (reverse *first-level-section-titles*)])
+              (write s o) (newline o)))
           #:exists 'replace)
         )
 
@@ -2617,19 +2645,19 @@
 
 (define (math e #:parens [parens #f])
   ; (printf "doing math ~s p:~s\n" e parens)
-  (create-zero-file (format "~a.uses-mathjax" *out-file*))
-  (enclose-math (sexp->arith e #:parens parens #:tex #t)))
+  ; (create-zero-file (format "~a.uses-mathjax" *out-file*))
+  (math->string (sexp->arith e #:parens parens #:tex #t)))
 
-(define (display-mathjax-math text o)
+(define (math->mathjax-string text)
   (create-zero-file (format "~a.uses-mathjax" *out-file*))
-  (display (enclose-math text) o))
+  (enclose-math text))
 
-(define (display-math text o)
+(define (math->string text)
   (if *math-unicode?*
       (let ([mu (math-unicode-if-possible text)])
-        (if mu (display (enclose-span ".mathunicode" mu) o)
-            (display-mathjax-math text o)))
-      (display-mathjax-math text o)))
+        (if mu (enclose-span ".mathunicode" mu)
+            (math->mathjax-string text)))
+      (math->mathjax-string text)))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)

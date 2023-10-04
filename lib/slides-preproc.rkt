@@ -596,10 +596,18 @@
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
                            [(string=? directive "lesson-point")
-                            (let ([text (read-group i directive #:multiline? #t)])
+                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display "**" o)
                               (expand-directives:string->port text o)
                               (display "**{style=\"font-size: 22pt\"}" o))]
+                           [(string=? directive "lesson-instruction")
+                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
+                              (set! text (regexp-replace* "[ \t]+\n" text "\n"))
+                              (set! text (regexp-replace* "\n\n+" text "\n\n"))
+                              (let ([texts (string-split text "\n\n")])
+                                (for ([text texts])
+                                  (expand-directives:string->port text o)
+                                  (display "{style=\"background-color: lightgray\"}\n\n" o))))]
                            [(string=? directive "optional")
                             #f]
                            [(member directive '("left" "right" "center"))
