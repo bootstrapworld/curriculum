@@ -667,5 +667,17 @@ var starterFiles = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
     }
+  }, 
+"functions": {
+    "title": "Functions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1&v=4d870d2"
+    }
+  },
+  "my-function": {
+    "title": "My Function Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
+      } 
+    } 
   }
-}
