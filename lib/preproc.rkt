@@ -18,6 +18,8 @@
 
 (define *progdir* (getenv "PROGDIR"))
 
+(define *book* (truthy-getenv "BOOK"))
+
 ; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
 
 (define *math-unicode?* #t)
@@ -816,7 +818,7 @@
            (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
     (unless existent-file?
       (check-link f)
-      (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
+      (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
     (when (and (or (not link-text) (string=? link-text "")) page-title)
       (set! link-text page-title))
     (let ([link-output (format "link:~apass:[~a][~a~a]"
@@ -858,35 +860,37 @@
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
-           [existent-file? #f])
+           [existent-file? #f]
+           [f.adoc (path-replace-extension f ".adoc")]
+           [f.html (path-replace-extension f ".html")]
+           [f.shtml (path-replace-extension f ".shtml")]
+           [f.pdf (path-replace-extension f ".pdf")])
       (cond [(or (path-has-extension? f ".adoc")
                  (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
-             (let ([f.adoc (path-replace-extension f ".adoc")]
-                   [f.html (path-replace-extension f ".html")]
-                   [f.shtml (path-replace-extension f ".shtml")]
-                   [f.pdf (path-replace-extension f ".pdf")])
-               (cond [(file-exists? f.html)
-                      (set! f f.html)
-                      (set! existent-file? #t)]
-                     [(file-exists? f.shtml)
-                      (set! f f.shtml)
-                      (set! existent-file? #t)]
-                     [(file-exists? f.adoc)
-                      (set! f
-                        (if (= (length dir-compts) 1) f.shtml f.html))
-                      (set! existent-file? #t)]
-                     [(file-exists? f.pdf)
-                      (set! f f.pdf)
-                      (set! existent-file? #t)]
-                     [(path-has-extension? f ".adoc")
-                      (set! f
-                        (if (= (length dir-compts) 1) f.shtml f.html))]))]
+             (cond [(file-exists? f.html)
+                    (set! f f.html)
+                    (set! existent-file? #t)]
+                   [(file-exists? f.shtml)
+                    (set! f f.shtml)
+                    (set! existent-file? #t)]
+                   [(file-exists? f.adoc)
+                    (set! f
+                      (if (= (length dir-compts) 1) f.shtml f.html))
+                    (set! existent-file? #t)]
+                   [(file-exists? f.pdf)
+                    (set! f f.pdf)
+                    (set! existent-file? #t)]
+                   [(path-has-extension? f ".adoc")
+                    (set! f
+                      (if (= (length dir-compts) 1) f.shtml f.html))])]
             [(path-has-extension? f ".pdf")
-             (when (file-exists? f)
+             (when (or (file-exists? f)
+                       (and *book* (or (file-exists? f.adoc)
+                                       (file-exists? f.html) (file-exists? f.shtml))))
                (set! existent-file? #t))])
       (unless existent-file?
         (check-link f)
-        (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
+        (printf "WARNING: ~a: @lesson-link: Missing file ~a\n\n" (errmessage-context) f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (when (path? f) (set! f (path->string f)))
@@ -2208,7 +2212,7 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: File ~a not found\n\n" id-file)])))
+            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
