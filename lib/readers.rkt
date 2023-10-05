@@ -306,6 +306,7 @@
     (enclose-span ".overbar" x)))
 
 (define (math-unicode-if-possible text)
+  ; (printf "doing math-unicode-if-possible ~s\n" text)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
              ; (regexp-match "\\\\sqrt" text)
@@ -317,6 +318,8 @@
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
         [else
+          (set! text (regexp-replace* "\\( +" text "("))
+          (set! text (regexp-replace* " +\\)" text ")"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text

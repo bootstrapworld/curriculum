@@ -349,7 +349,7 @@ When you compared their findings with other students, did they make any interest
 {layout="Supplemental"}
 # Additional Activities
 
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}
 - @opt-printable-exercise{pages/critiquing-findings.adoc}
 - @opt-printable-exercise{pages/data-cycle-practice.adoc}
 

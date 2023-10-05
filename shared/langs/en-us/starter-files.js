@@ -329,7 +329,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=jH25JejavW"
+      "url": "https://www.wescheme.org/openEditor?publicId=4JbTjy7Hup"
     }
   },
   "flags-mx": {
