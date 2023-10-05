@@ -109,7 +109,7 @@ Ignore the code column for now! We will come back to it later.
 For more practice with this, turn to:
 - @printable-exercise{pages/complete-coe-from-arith.adoc}
 - @printable-exercise{pages/match-arith-coe.adoc}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}
 
 @slidebreak
 {layout="Launch"}
