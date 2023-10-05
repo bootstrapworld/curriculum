@@ -97,8 +97,8 @@
                                        (loop (cons c r) #f (- nesting 1) #f #f))]
                                   [else (loop (cons c r) #f nesting #f #f)])))]
                        [else
-                         (printf "WARNING: Ill-formed metadata directive in ~a: @~a\n\n"
-                                 (errmessage-file-context) directive)
+                         (printf "WARNING: Ill-formed metadata directive in ~a: ~a, ~s\n\n"
+                                 (errmessage-file-context) directive c)
                          ""])))])
     read-group))
 
@@ -140,8 +140,8 @@
 
 (define local-read-group
   (let ([read-group (*make-read-group)])
-    (lambda (i)
-      (read-group i "_"))))
+    (lambda (i directive)
+      (read-group i directive))))
 
 (define (ignorespaces i)
   (let loop ()
@@ -154,7 +154,7 @@
   (ignorespaces i)
   (let ([c (peek-char i)])
     (cond [(eof-object? c) ""]
-          [(char=? c #\{) (local-read-group i)]
+          [(char=? c #\{) (local-read-group i "math braced token")]
           [else (string (read-char i))])))
 
 (define *superscriptables*
@@ -317,44 +317,51 @@
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
          #f]
         [else
-          (set! text (regexp-replace "{ " text ""))
-          (set! text (regexp-replace " }" text ""))
-
           (call-with-output-string
-                (lambda (o)
-                  (call-with-input-string text
-                    (lambda (i)
-                      (let loop ()
-                        (let ([c (read-char i)])
-                          (unless (eof-object? c)
-                            (display
-                              (cond [(char=? c #\\)
-                                     (let ([ctl-seq (read-mathjax-word i)])
-                                       (case ctl-seq
-                                         [("mbox") (let ([x (local-read-group i)])
-                                                     x)]
-                                         [("sqrt") (let ([x (local-read-group i)])
-                                                     (math-sqrt (math-unicode-if-possible x)))]
-                                         [("frac") (let* ([nu (read-mathjax-token i)]
-                                                          [de (read-mathjax-token i)])
-                                                     (display (math-superscript nu) o)
-                                                     ; (display "⁄" o)
-                                                     (display "/" o)
-                                                     (math-subscript de))]
-                                         [("overline") (let ([dec (read-mathjax-token i)])
-                                                         (enclose-span ".overbar"
-                                                           (math-unicode-if-possible dec)))]
-                                         [("|") "&#x7c;"]
-                                         [(";") " "]
-                                         [else  
-                                           (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
-                                                 [else ctl-seq])]))]
-                                    [(char=? c #\^) (math-superscript (read-mathjax-token i)
-                                                                      #:use-unicode? #t)]
-                                    [(char=? c #\_) (math-subscript (read-mathjax-token i)
-                                                                    #:use-unicode? #t)]
-                                    [(assoc c *mathjax-special-chars*) => second]
-                                    [else (string c)])
-                              o)
-                            (loop))))))))]))
+            (lambda (o)
+              (call-with-input-string text
+                (lambda (i)
+                  (let loop ()
+                    (let ([c (peek-char i)])
+                      (unless (eof-object? c)
+                        (display
+                          (cond [(char=? c #\\)
+                                 (read-char i)
+                                 (let ([ctl-seq (read-mathjax-word i)])
+                                   (case ctl-seq
+                                     [("mbox") (let ([x (local-read-group i "math mbox")])
+                                                 x)]
+                                     [("sqrt") (let ([x (local-read-group i "math sqrt")])
+                                                 (math-sqrt (math-unicode-if-possible x)))]
+                                     [("frac") (let* ([nu (read-mathjax-token i)]
+                                                      [de (read-mathjax-token i)])
+                                                 (display (math-superscript nu) o)
+                                                 ; (display "⁄" o)
+                                                 (display "/" o)
+                                                 (math-subscript de))]
+                                     [("overline") (let ([dec (read-mathjax-token i)])
+                                                     (enclose-span ".overbar"
+                                                       (math-unicode-if-possible dec)))]
+                                     [("|") "&#x7c;"]
+                                     [(";") " "]
+                                     [else
+                                       (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
+                                             [else ctl-seq])]))]
+                                [(char=? c #\{) (math-unicode-if-possible
+                                                  (local-read-group i "math brace"))]
+                                [(char=? c #\^)
+                                 (read-char i)
+                                 (math-superscript (read-mathjax-token i)
+                                                   #:use-unicode? #f)]
+                                [(char=? c #\_)
+                                 (read-char i)
+                                 (math-subscript (read-mathjax-token i)
+                                                 #:use-unicode? #f)]
+                                [(assoc c *mathjax-special-chars*)
+                                 => (lambda (x)
+                                      (read-char i)
+                                      (second x))]
+                                [else (read-char i) (string c)])
+                          o)
+                        (loop))))))))]))
 
