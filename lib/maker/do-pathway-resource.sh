@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-03-14
-
 # echo doing do-pathway-resource.sh $1
 
 adocfile=$1
@@ -20,7 +18,7 @@ htmlfile=${ascfile%.asc}.html
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+if $(echo $adocfile|grep -q $OTHERDIRS); then
   otherdirarg="#t"
 fi
 
