@@ -66,7 +66,7 @@ The line representing the @vocab{linear} relationship would not only include the
 {layout="Investigate"}
 # Simple Sequences and Straight Lines
 
-Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+Complete @printable-exercise{pages/match-tables-graphs.adoc} and/or @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
 
 @optional If you're ready for a challenge, try @opt-printable-exercise{pages/match-tables-graphs2.adoc}.
 

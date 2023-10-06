@@ -195,7 +195,7 @@ In the following activity, we'll analyze inequality graphs and define a _single_
 - Turn to @printable-exercise{compound-inequality-functions.adoc}.
 - Write code to describe the compound inequalities pictured.
 
-@ifproglang{pyret}{@optional Try @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
+@ifproglang{pyret}{@optional Try @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
 }
 
 @slidebreak
@@ -210,5 +210,5 @@ How did the graphs of intersections and unions differ?
 
 @opt-printable-exercise{pages/boolean-coe-to-code2.adoc}
 
-@ifproglang{pyret}{ @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
+@ifproglang{pyret}{ @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Matching Compound Inequality Functions and plots}
 }
