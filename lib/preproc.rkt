@@ -2852,7 +2852,7 @@
            (if (list? type)
                (format "~a {two-colons} ~a" name
                        (string-append (contract-type (first type))
-                         " -> "
+                         "&nbsp;-> "
                          (contract-types-to-commaed-string (rest type))))
                (let* ([type (if (string? type) type (format "~a" type))]
                       ; [name-w (string-length name)]
@@ -2902,7 +2902,7 @@
           " "
           ; used to not have commas in WeScheme
           (contract-types-to-commaed-string domain-list)
-          " ‑> "
+          "&nbsp;-> "
           range
           (if purpose
               (string-append "\n"
