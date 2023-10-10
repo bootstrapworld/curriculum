@@ -1082,11 +1082,14 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
 /************************************************************************************
  * PRINT MEDIA
+ * Use @page margin 0 to turn off header&footer in chrome. See
+ * https://stackoverflow.com/a/12854973/12026982
  */
-@page { size: letter portrait; margin: 0.5in; }
-@page landscape { size: letter landscape; margin: 0.5in; }
+@page { size: letter portrait; margin: 0; }
+@page landscape { size: letter landscape; }
 
 @media print {
+  body { margin: 0.5in; }
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
