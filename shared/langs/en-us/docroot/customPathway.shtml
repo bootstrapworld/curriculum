@@ -83,8 +83,6 @@
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
     <script>
-    // load required symbols, configure the dependency graph
-    configureGraph(graph);
     let url = new URL(location);
     
     // Default to all pyret lessons
@@ -117,6 +115,7 @@
         const pagesHTML = graph[l].pages.map(p => 
             `<li>${p}</li>`).join('\n');
         const numDays = (useDays && days && days[idx])? days[idx] : 1;
+        console.log(days[idx])
         const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
         const html = `
           <div class="list-group-item" data-lesson-title=${l}>
