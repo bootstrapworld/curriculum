@@ -162,6 +162,28 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 
 @center{@image{images/species-tag.png, 450}}
 
+@strategy{
+@span{.title}{Custom Colors!}
+
+We've created a special function called `make-color`, which allows students to mix their own colors!
+
+@show{(contract 'make-color '(("red" "Number") ("green" "Number") ("blue" "Number") ("opacity" "Number")) "Color")} 
+
+* Use Numbers between 0 and 255 to specify how much red, green, and blue to mix  
+* Use Numbers between 0-1 to specify percent opacity (0 for invisible, 1 for full color)
+
+For example, `star(50, "solid", make-color(100, 200, 0, 0.5))` +
+will generate a pale green star that's 50% transparent.
+
+By using row accessors to extract these values from their dataset, students can make custom scatterplots where each data point is represented by a shape whose color indicates something about the data!
+
+We could, for example, represent the Animals using the following code:
+`star(50, "solid", make-color(100, 0, r["pounds"], 0.5))` +
+
+* Which representation would be used for the heaviest animal: a red star, a purple star or a blue star? +
+** _Lightest would be red and heaviest would be blue, with purple landing in between!_ 
+}
+
 === Synthesize
 
 * What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?

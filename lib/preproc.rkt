@@ -18,8 +18,6 @@
 
 (define *progdir* (getenv "PROGDIR"))
 
-(define *force* (truthy-getenv "FORCE"))
-
 (define *book* (truthy-getenv "BOOK"))
 
 ; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
@@ -70,6 +68,8 @@
 
 (define *internal-links-port* #f)
 (define *external-links-port* #f)
+
+(define *first-level-section-titles* '())
 
 (define *natlang-glossary-list* '())
 
@@ -307,14 +307,21 @@
 
 (define (display-section-markup i o)
   (let ([section-level
-          (let loop ([section-level 1])
+          (let loop ([section-level 0])
             (let ([c (peek-char i)])
               (cond [(eof-object? c) section-level]
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
-                    [else section-level])))])
-    (fprintf o "[.lesson-section-~a]~n" (- section-level 1))
+                    [else section-level])))]
+        [title (string-trim (read-line i))])
+    (when (and *lesson-plan* (= section-level 1))
+      (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
+        (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
+    (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
-      (display #\= o))))
+      (display #\= o))
+    (display "= " o)
+    (expand-directives:string->port title o)
+    (newline o)))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
@@ -811,7 +818,7 @@
            (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
     (unless existent-file?
       (check-link f)
-      (printf "WARNING: @dist-link: Missing file ~a\n\n" f))
+      (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
     (when (and (or (not link-text) (string=? link-text "")) page-title)
       (set! link-text page-title))
     (let ([link-output (format "link:~apass:[~a][~a~a]"
@@ -853,35 +860,37 @@
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
-           [existent-file? #f])
+           [existent-file? #f]
+           [f.adoc (path-replace-extension f ".adoc")]
+           [f.html (path-replace-extension f ".html")]
+           [f.shtml (path-replace-extension f ".shtml")]
+           [f.pdf (path-replace-extension f ".pdf")])
       (cond [(or (path-has-extension? f ".adoc")
                  (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
-             (let ([f.adoc (path-replace-extension f ".adoc")]
-                   [f.html (path-replace-extension f ".html")]
-                   [f.shtml (path-replace-extension f ".shtml")]
-                   [f.pdf (path-replace-extension f ".pdf")])
-               (cond [(file-exists? f.html)
-                      (set! f f.html)
-                      (set! existent-file? #t)]
-                     [(file-exists? f.shtml)
-                      (set! f f.shtml)
-                      (set! existent-file? #t)]
-                     [(file-exists? f.adoc)
-                      (set! f
-                        (if (= (length dir-compts) 1) f.shtml f.html))
-                      (set! existent-file? #t)]
-                     [(file-exists? f.pdf)
-                      (set! f f.pdf)
-                      (set! existent-file? #t)]
-                     [(path-has-extension? f ".adoc")
-                      (set! f
-                        (if (= (length dir-compts) 1) f.shtml f.html))]))]
+             (cond [(file-exists? f.html)
+                    (set! f f.html)
+                    (set! existent-file? #t)]
+                   [(file-exists? f.shtml)
+                    (set! f f.shtml)
+                    (set! existent-file? #t)]
+                   [(file-exists? f.adoc)
+                    (set! f
+                      (if (= (length dir-compts) 1) f.shtml f.html))
+                    (set! existent-file? #t)]
+                   [(file-exists? f.pdf)
+                    (set! f f.pdf)
+                    (set! existent-file? #t)]
+                   [(path-has-extension? f ".adoc")
+                    (set! f
+                      (if (= (length dir-compts) 1) f.shtml f.html))])]
             [(path-has-extension? f ".pdf")
-             (when (file-exists? f)
+             (when (or (file-exists? f)
+                       (and *book* (or (file-exists? f.adoc)
+                                       (file-exists? f.html) (file-exists? f.shtml))))
                (set! existent-file? #t))])
       (unless existent-file?
         (check-link f)
-        (printf "WARNING: @lesson-link: Missing file ~a\n\n" f))
+        (printf "WARNING: ~a: @lesson-link: Missing file ~a\n\n" (errmessage-context) f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (when (path? f) (set! f (path->string f)))
@@ -1053,6 +1062,8 @@
 (define (display-title i o)
   (let* ([title (read-line i)]
          [title-txt (string-trim (regexp-replace "^=+ *" title ""))])
+    (when *lesson-plan*
+      (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
@@ -1295,6 +1306,7 @@
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
   (set! *optional-flag?* #f)
+  (set! *first-level-section-titles* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1708,6 +1720,8 @@
                                       (set! possible-beginning-of-line? (read-space i))]))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
+                           [(string=? directive "slidebreak") o]
+
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
@@ -1852,6 +1866,11 @@
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-instruction]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
+                           [(string=? directive "lesson-roleplay")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[lesson-roleplay]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [else
@@ -2158,6 +2177,12 @@
                 (fprintf o "  ~s" k))
               (display " ]\n" o)))
           #:exists 'replace)
+
+        (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-sections.txt.kp")
+          (lambda (o)
+            (for ([s (reverse *first-level-section-titles*)])
+              (write s o) (newline o)))
+          #:exists 'replace)
         )
 
       (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
@@ -2189,7 +2214,7 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: File ~a not found\n\n" id-file)])))
+            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
@@ -2630,11 +2655,13 @@
   (enclose-math text))
 
 (define (math->string text)
-  (if *math-unicode?*
-      (let ([mu (math-unicode-if-possible text)])
-        (if mu (enclose-span ".mathunicode" mu)
-            (math->mathjax-string text)))
-      (math->mathjax-string text)))
+  ; (printf "doing math->string ~s\n" text)
+  (cond [(and *math-unicode?* (math-unicode-if-possible text))
+         => (lambda (mu)
+              (enclose-span ".mathunicode" mu))]
+        [else
+          (set! text (regexp-replace* "\\\\over" text "\\\\over\\\\displaystyle"))
+          (math->mathjax-string text)]))
 
 (define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
   ; (printf "doing sexp->code ~s\n" e)
@@ -2827,7 +2854,7 @@
            (if (list? type)
                (format "~a {two-colons} ~a" name
                        (string-append (contract-type (first type))
-                         " -> "
+                         "&nbsp;-> "
                          (contract-types-to-commaed-string (rest type))))
                (let* ([type (if (string? type) type (format "~a" type))]
                       ; [name-w (string-length name)]
@@ -2877,7 +2904,7 @@
           " "
           ; used to not have commas in WeScheme
           (contract-types-to-commaed-string domain-list)
-          " ‑> "
+          "&nbsp;-> "
           range
           (if purpose
               (string-append "\n"

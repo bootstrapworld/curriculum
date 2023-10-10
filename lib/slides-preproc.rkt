@@ -178,7 +178,7 @@
     ; (printf "returning ~s\n" ans)
     (string-append "<code>" (list->string ans) "</code>")))
 
-(define (code exp)
+(define (code exp #:parens [parens #f])
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
     (set! x (regexp-replace* "{zwsp}" x ""))
@@ -667,7 +667,7 @@
                            [(string=? directive "A")
                             (let ([text (read-group i directive)])
                               (when *output-answers?*
-                                (display "\n-    " o)
+                                (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(member directive '("pathway-only" "scrub"))

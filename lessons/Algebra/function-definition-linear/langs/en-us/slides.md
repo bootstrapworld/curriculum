@@ -91,9 +91,9 @@ Let's connect definitions to tables and graphs. Writing down the slope and y-int
 - @printable-exercise{match-definitions-graphs.adoc}
 
 For more practice:
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, Matching Tables and Definitions}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, Matching Graphs and Definitions of Linear Functions}
-- @online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Definitions of Linear Functions 2}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc24d7d7768970b95efa813, Matching Tables and Definitions}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe72167f5cee0d57130b96, Matching Graphs and Definitions of Linear Functions}
+- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fbe7b4cf278460cdbd34bc8, Matching Graphs and Definitions of Linear Functions 2}
 
 What strategies did you use?
 

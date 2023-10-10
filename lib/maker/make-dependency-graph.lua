@@ -89,6 +89,7 @@ for _,lesson in ipairs(lessons) do
   local title_txt = ''
   local description_txt = ''
   local proglang_txt = 'pyret'
+  local sections_txt = ''
   local pages_txt = ''
   local exercisePages_txt = ''
   local primitives_txt = ''
@@ -98,8 +99,10 @@ for _,lesson in ipairs(lessons) do
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
   local proglang_file = lessoncache .. '.record-proglang'
+  local sections_file = lessoncache .. '.lesson-sections.txt.kp'
   local pages_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
   local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
+  local handoutPages_file = lessonpagecache .. '.handout-exercise-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
   local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
@@ -128,6 +131,14 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  if file_exists_p(sections_file) then
+    i = io.open(sections_file)
+    for line in i:lines() do
+      sections_txt = sections_txt .. line .. ', '
+    end
+    i:close()
+  end
+  --
   if file_exists_p(pages_file) then
     i = io.open(pages_file)
     for line in i:lines() do
@@ -138,6 +149,14 @@ for _,lesson in ipairs(lessons) do
   --
   if file_exists_p(exercisePages_file) then
     i = io.open(exercisePages_file)
+    for line in i:lines() do
+      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
+    end
+    i:close()
+  end
+  --
+  if file_exists_p(handoutPages_file) then
+    i = io.open(handoutPages_file)
     for line in i:lines() do
       exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
     end
@@ -172,8 +191,9 @@ for _,lesson in ipairs(lessons) do
   o:write('    title: \"' .. title_txt .. '\",\n')
   o:write('    description: \"' .. description_txt .. '\",\n')
   o:write('    proglang: \"' .. proglang_txt .. '\",\n')
+  o:write('    sections: [' .. sections_txt .. '],\n')
   o:write('    pages: [' .. pages_txt .. '],\n')
-  o:write('    exercisePages: [' .. exercisePages_txt .. '],\n')
+  o:write('    optPages: [' .. exercisePages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
   if file_exists_p(keywords_file) then
     o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')

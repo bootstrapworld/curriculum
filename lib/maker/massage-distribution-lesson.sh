@@ -6,6 +6,8 @@ src=$1
 
 d=$2
 
+superdir=$(echo $src|sed -e 's#lessons/##'|sed -e 's#\([^/]*\).*#\1#')
+
 source ${MAKE_DIR}src-subdir-mgt.sh
 
 if test  -d "$d"; then
@@ -55,6 +57,8 @@ for pl in $proglangs; do
   mkdir -p .cached
   touch .cached/.proglang-$pl
   echo $pl > .cached/.record-proglang
+  echo $superdir > .cached/.record-superdir
+  ${TOPDIR}/${MAKE_DIR}make-slides.lua
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
   test -d pages || mkdir pages

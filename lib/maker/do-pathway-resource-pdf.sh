@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# created 2023-02-13
-# last modified 2023-02-13
-
 # echo doing do-pathway-resource-pdf $1
 
 adocfile=$1
@@ -17,7 +14,7 @@ fi
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+if $(echo $adocfile|grep -q $OTHERDIRS); then
   otherdirarg="#t"
 fi
 
