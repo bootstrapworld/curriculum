@@ -72,7 +72,7 @@ function find_segment_title(segment)
     return nil
   elseif L:match('^=') then
     local heading = L:gsub('^=+%s*(.*)', '%1')
-    heading = heading:gsub('@duration.*', '')
+    heading = heading:gsub('@duration{(.-)}', '(%1)')
     return heading
   elseif L:match('%s*@slidebreak') then
     return 'slidebreak'
