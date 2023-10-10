@@ -314,7 +314,7 @@
                     [else section-level])))]
         [title (string-trim (read-line i))])
     (when (and *lesson-plan* (= section-level 1))
-      (let ([section-title (string-trim (regexp-replace "@duration.*$" title ""))])
+      (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
     (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
