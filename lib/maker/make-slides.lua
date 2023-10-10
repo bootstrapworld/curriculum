@@ -31,8 +31,15 @@ function get_segments(lplan_file)
   --
   local segments = {}
   local current_segment = false
+  local skipping_lines = false
   --
   for L in i:lines() do
+    if L:match('^%+%+%+%+') then
+      skipping_lines = not skipping_lines
+      goto continue
+    elseif skipping_lines then
+      goto continue
+    end
     if L:match('^=') or L:match('^%s*@slidebreak') then
       if current_segment then
         segments[#segments + 1] = current_segment
@@ -42,6 +49,7 @@ function get_segments(lplan_file)
     if current_segment then
       current_segment[#current_segment + 1] = L
     end
+    ::continue::
   end
   segments[#segments + 1] = current_segment
   --
