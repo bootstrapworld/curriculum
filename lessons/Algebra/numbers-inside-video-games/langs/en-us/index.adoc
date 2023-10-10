@@ -71,7 +71,7 @@ Work with your partner to complete @printable-exercise{pages/ReverseEngineerGame
 
 - 1st Column: What are all the various _things_ in this game? __(A dog, Clouds, etc.)__
 
-- 2nd Column: For each of those "things", what is changing about them? __(Location, Position, etc.)__
+- 2nd Column: For each of those "things", what is changing about them? __(Location, Value, etc.)__
 
 - 3rd Column: For each change, how is it modeled mathematically? What @vocab{variable}(s) does the program need to keep track of?__(x-coordinate, y-coordinate, amount, etc.)__
 }
@@ -83,16 +83,14 @@ Work with your partner to complete @printable-exercise{pages/ReverseEngineerGame
 The main idea here is to understand that while we see images on a screen, the computer only sees a small set of variables, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more variables.
 
 @QandA{
-@Q{If the x- and y-coordinates are each numbers, how many numbers does it take to represent a single frame of the video game?}
-@A{Seven: 2 for the cat (moves left and right), 2 for the cloud (moves left at random y-positions), and 1 each for the dog, ruby, and score}
+@Q{If each character is represented by both an x-coordinate and a y-coordinate (some of which are fixed and some of which are randomly generated), how many numbers does it take to represent a single frame of the video game?}
+@A{Nine: 2 for the cat (moves left and right), 2 each for the cloud and ruby (move left at random y-positions), 2 for the dog (moves left at a fixed y-position) and 1 for the score}
 @Q{How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?}
-@A{The cat's y-coordinate increases when they jump and decreases when they fall. x-coordinates increase when a character moves right, and decreases when they move left. The score increases when the cat gets a ruby or jumps on the dog.}
-@Q{How many variables would we need if the dog could also move up and down?}
-@A{Eight: we'd need to add the dog's y-coordinate.}
+@A{The cat's y-coordinate increases when they jump and decreases when they fall. x-coordinates increase when a character moves right, and decrease when they move left. The score increases by 1 when the cat gets a ruby and by 10 when the cat jumps on the dog.}
 @Q{How many variables would we need to have a two-player game with two cats?}
-@A{(Sample answer) Nine: we'd need to add a second set of x-y coordinates.}
+@A{(Sample answer) Eleven: we'd need to add another set of x-y coordinates.}
 @Q{How many variables would we need if the entire game was in 3d?}
-@A{(Sample answer) Nine: we'd need to add z-coordinates to each character.}
+@A{(Sample answer) Fifteen: we'd need to add z-coordinates to each character.}
 @Q{How many variables would we need to keep track of in a modern video game?}
 @A{A whole lot -- Thousands. Millions!}
 }

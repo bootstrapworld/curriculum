@@ -28,7 +28,7 @@ the various natural languages used for instruction, e.g., `en-us`
 for US English, and `es-mx` for Mexican Spanish. Inside these
 dwell centralized educational-standards dictionaries, e.g.,
 `standards/standards-csta-dictionary.json` is a list of standards defined
-by the CSTA. 
+by the CSTA.
 
 The file `Makefile` is used (via `make`) to
 constructs the web pages and PDFs a directory called
@@ -780,18 +780,22 @@ directive: `@keywords{PEMDAS, GEMDAS}`. Multiple keywords are comma-separated.
 
 ==== Callout Boxes
 
+===== Strategy boxes
+
 Use
 
-  @strategy{
-    @span{.title}{Title}
+----
+@strategy{
+  @span{.title}{Title}
 
-    Some _body_ text.
+  Some _body_ text.
 
-  }
+}
+----
 
 to generate a “strategy box”, a boxed text with a blue border.
 
-==== Lesson "Points"
+===== Lesson "Points"
 
 Use
 
@@ -799,11 +803,24 @@ Use
     This is an important point!
   }
 
-to generate letterboxed text to emphasize critical points:
+to generate letterboxed text to emphasize critical points.
 
-@lesson-point{
-   This is an important point!
-}
+// @lesson-point{
+//    This is an important point!
+// }
+
+===== Lesson Instruction
+
+Use
+
+  @lesson-instruction{
+  - Do this first
+  - Then this
+  - And finally this
+  }
+
+to generate a list of instructions, inside a box with the "letterhead"
+of a teacher at a whiteboard.
 
 ==== Exercises
 

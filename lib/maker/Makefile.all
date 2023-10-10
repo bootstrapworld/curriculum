@@ -41,6 +41,10 @@ export LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.lessons.t
 export SED := sed
 export CP := cp
 
+# "other" directories that shd be only minimally processed (no HTML/PDF)
+
+export OTHERDIRS := /\(fragments\|xtra\|xtras\)/
+
 export NUMCORES := $(shell getconf _NPROCESSORS_ONLN)
 
 all: phases dictionaries coverage

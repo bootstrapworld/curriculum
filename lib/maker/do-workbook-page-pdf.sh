@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-02-28
-
 # echo doing do-workbook-page-pdf $1
 
 adocfile=$1
@@ -22,7 +20,7 @@ fi
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q '/\(fragments\|xtra\|xtras\)/'); then
+if $(echo $adocfile|grep -q $OTHERDIRS); then
   otherdirarg="#t"
 fi
 

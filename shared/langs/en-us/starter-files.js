@@ -329,7 +329,7 @@ var starterFiles = {
       "url": "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=jH25JejavW"
+      "url": "https://www.wescheme.org/openEditor?publicId=4JbTjy7Hup"
     }
   },
   "flags-mx": {
@@ -660,6 +660,12 @@ var starterFiles = {
     "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+    }
+  }, 
+  "logos": {
+    "title": "Logo Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
     }
   }
 }
