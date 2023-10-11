@@ -156,6 +156,15 @@ var GameBasics = {
       "url": "https://www.wescheme.org/run?publicId=sggzRzgU5T"
     }
   },
+  "ninja-cat-desmos": {
+    "title": "Ninja Cat Desmos Graph",
+    "pyret": {
+      "url": "https://www.desmos.com/calculator/pbm9nxr2rd"
+    },
+    "wescheme": {
+      "url": "https://www.desmos.com/calculator/pbm9nxr2rd"
+    }
+  },
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
