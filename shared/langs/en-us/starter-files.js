@@ -1,7 +1,7 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-var starterFiles = {
+var Editors = {
   "editor": {
     "title": "the editor",
     "pyret": {
@@ -31,25 +31,11 @@ var starterFiles = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html",
       "title": "CODAP"
     }
-  },
-  "alices-restaurant": {
-    "title": "Alice's Restaurant Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GScGyigfRPJDdCiGKGnISTXoVBm9f7aE"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z"
-    }
-  },
-  "collaboration": {
-    "title": "Collaboration Starter File - For use with Design Recipe Telephone Set 1",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z"
-    }
-  },
+  }
+}
+
+
+var Core = {
   "bc": {
     "title": "bc Starter File",
     "pyret": {
@@ -77,6 +63,63 @@ var starterFiles = {
       "url": "https://www.wescheme.org/openEditor?publicId=nwVEttw9ZY"
     }
   },
+  "defining-values": {
+    "title": "Defining Values Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1nHYxDhgOsbQ-jI7OMZLcgcTJ8HFxPWCL"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6"
+    }
+  },
+  "boolean": {
+    "title": "Boolean Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65"
+    },
+      "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FLFCW7RX7lMYg3ynZmPOw%2Ffile.json"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV"
+    }
+  },
+   "rocket-height": {
+    "title": "Rocket Height Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
+    }
+  },
+  "logos": {
+    "title": "Logo Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
+    }
+  }
+}
+
+var Piecewise = {
+  "alices-restaurant": {
+    "title": "Alice's Restaurant Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GScGyigfRPJDdCiGKGnISTXoVBm9f7aE"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=AcThgFgX9z"
+    }
+  },
+  "collaboration": {
+    "title": "Collaboration Starter File - For use with Design Recipe Telephone Set 1",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z"
+    }
+  },
   "mood-generator": {
     "title": "Mood Generator Starter File",
     "pyret": {
@@ -100,7 +143,58 @@ var starterFiles = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=n4DkTyYbQh"
     }
+  }
+}
+
+var GameBasics = {
+  "ninja-cat": {
+    "title": "Ninja Cat Game",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1VB-XBcSzgYKnObyIH8BdCmiworNRLlvM"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/run?publicId=sggzRzgU5T"
+    }
   },
+  "game": {
+    "title": "Blank Game Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
+    }
+  },
+  "sample-game-no-distance-lines": {
+    "title": "Sample Game Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
+    }
+  },
+  "sample-game-w-distance": {
+    "title": "Sample Game with Distance Lines Made Visible",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1R8uAFAeYRy5L6FydesOBLHQHFtQEGxGV"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=QgT6PtTZ2v"
+    }
+  },
+  "sample-game-2d": {
+    "title": "Sample Game with 2D Motion",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
+    }
+  }
+}
+
+  var DSBasics = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
@@ -157,7 +251,10 @@ var starterFiles = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
     }
-  },
+  }
+}
+
+var moreDS = {
   "fair-coins": {
     "title": "Fair Coins Starter File",
     "pyret": {
@@ -268,64 +365,11 @@ var starterFiles = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb"
     }
-  },
-  "game": {
-    "title": "Blank Game Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
-    }
-  },
-  "boolean": {
-    "title": "Boolean Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65"
-    },
-      "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FLFCW7RX7lMYg3ynZmPOw%2Ffile.json"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV"
-    }
-  },
-  "permutations-and-combinations": {
-    "title": "Permutations and Combinations Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1pOwcDplD2vidTIvBMrBI5fVZ2jmk369Q"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=hHNjcj8rB6"
-    }
-  },
-  "defining-values": {
-    "title": "Defining Values Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1nHYxDhgOsbQ-jI7OMZLcgcTJ8HFxPWCL"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6"
-    }
-  },
-  "exploring-linearity-in-definitions": {
-    "title": "Exploring Linearity in Definitions Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1HqgHT0HYeAIViIZ37YC9MFlj2euoOwYb"
-    }
-  },
-  "exploring-linearity-in-graphs": {
-    "title": "Exploring Linearity in Graphs Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1fMvN_n9vEUfjy_a0vaIN3LOWkS1SFhu_"
-    }
-  },
-  "exploring-linearity-in-tables": {
-    "title": "Exploring Linearity in Tables Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP"
-    }
-  },
+  }
+}
+
+var Flags = {
+
   "flags": {
     "title": "Flags Starter File",
     "pyret": {
@@ -412,25 +456,10 @@ var starterFiles = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=V4AfQydAHu"
     }
-  },
-  "ninja-cat": {
-    "title": "Ninja Cat Game",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1VB-XBcSzgYKnObyIH8BdCmiworNRLlvM"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/run?publicId=sggzRzgU5T"
-    }
-  },
-  "rocket-height": {
-    "title": "Rocket Height Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
-    }
-  },
+  }
+}
+
+var moreAlg = {
   "prism": {
     "title": "Surface Area of a Rectangular Prism Starter File",
     "pyret": {
@@ -438,33 +467,6 @@ var starterFiles = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=Cyrw5bQa71"
-    }
-  },
-  "sample-game-no-distance-lines": {
-    "title": "Sample Game Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
-    }
-  },
-  "sample-game-w-distance": {
-    "title": "Sample Game with Distance Lines Made Visible",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1R8uAFAeYRy5L6FydesOBLHQHFtQEGxGV"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=QgT6PtTZ2v"
-    }
-  },
-  "sample-game-2d": {
-    "title": "Sample Game with 2D Motion",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
     }
   },
   "inequalities-simple": {
@@ -494,6 +496,33 @@ var starterFiles = {
       "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
     }
   },
+  "permutations-and-combinations": {
+    "title": "Permutations and Combinations Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1pOwcDplD2vidTIvBMrBI5fVZ2jmk369Q"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=hHNjcj8rB6"
+    }
+  },
+  "exploring-linearity-in-definitions": {
+    "title": "Exploring Linearity in Definitions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1HqgHT0HYeAIViIZ37YC9MFlj2euoOwYb"
+    }
+  },
+  "exploring-linearity-in-graphs": {
+    "title": "Exploring Linearity in Graphs Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1fMvN_n9vEUfjy_a0vaIN3LOWkS1SFhu_"
+    }
+  },
+  "exploring-linearity-in-tables": {
+    "title": "Exploring Linearity in Tables Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP"
+    }
+  },
   "sallys-lemonade": {
     "title": "Sally's Lemonade Starter File",
     "pyret": {
@@ -502,7 +531,67 @@ var starterFiles = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
     }
+  }
+}
+  
+  var Alg2 = {
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+    }
   },
+    "alg2-covid": {
+    "title": "Covid Spread Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
+    }
+  },
+   "alg2-fuel-efficiency": {
+    "title": "Fuel Efficiency Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
+    }
+  },
+   "alg2-states": {
+    "title": "State Demographics Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+    }
+  },
+  "alg2-exploring-quadratics-desmos": {
+    "title": "Exploring Quadratic Functions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
+    }
+  },
+  "alg2-covid-desmos" : {
+    "title" : "Modeling Covid Spread (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+    }
+  },
+  "alg2-exploring-logarithms-desmos" : {
+    "title" : "Exploring Logarithmic Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
+    }
+  },
+  "alg2-wealth-v-health-desmos": {
+    "title": "Fitting Wealth-v-Health (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
+    }
+  },
+  "alg2-wealth-v-health-2-desmos": {
+    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+    }
+  }
+}
+
+var Reactive = {
   "package-delivery": {
     "title": "Package Delivery Starter File",
     "pyret": {
@@ -610,71 +699,12 @@ var starterFiles = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
     }
-  },
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
-    }
-  },
-    "alg2-covid": {
-    "title": "Covid Spread Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
-    }
-  },
-   "alg2-fuel-efficiency": {
-    "title": "Fuel Efficiency Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
-    }
-  },
-   "alg2-states": {
-    "title": "State Demographics Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
-    }
-  },
-  "alg2-exploring-quadratics-desmos": {
-    "title": "Exploring Quadratic Functions (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
-    }
-  },
-  "alg2-covid-desmos" : {
-    "title" : "Modeling Covid Spread (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
-    }
-  },
-  "alg2-exploring-logarithms-desmos" : {
-    "title" : "Exploring Logarithmic Functions (Desmos)",
-    "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    }
-  },
-  "alg2-wealth-v-health-desmos": {
-    "title": "Fitting Wealth-v-Health (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
-    }
-  },
-  "alg2-wealth-v-health-2-desmos": {
-    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
-    }
-  },
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
-    }
   }
 }
 
+
 var subStarterFilesArray = [
-  starterFiles
+  Editors, Core, Piecewise, Flags, DSBasics, GameBasics, moreDS, moreAlg, Alg2, Reactive
 ];
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -683,7 +713,7 @@ var subStarterFilesArray = [
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-var allStarterFiles = {};
+var allStarterFiles = {}
 
 for (let i = 0; i < subStarterFilesArray.length; i++) {
   let subStarterFiles = subStarterFilesArray[i];
