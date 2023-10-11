@@ -1,3 +1,6 @@
+// Define various individual starterFiles here that will be combined by the
+// build into a JSON file. Comments are allowed, as this file is not JSON itself.
+
 var starterFiles = {
   "editor": {
     "title": "the editor",
@@ -182,7 +185,7 @@ var starterFiles = {
   "hair": {
     "title": "Hair Color Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc&v=4d870d2" 
+      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc&v=4d870d2"
     }
   },
    "height": {
@@ -618,7 +621,7 @@ var starterFiles = {
     "title": "Covid Spread Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
-    } 
+    }
   },
    "alg2-fuel-efficiency": {
     "title": "Fuel Efficiency Starter File",
@@ -648,7 +651,7 @@ var starterFiles = {
     "title" : "Exploring Logarithmic Functions (Desmos)",
     "pyret" : {
       "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    } 
+    }
   },
   "alg2-wealth-v-health-desmos": {
     "title": "Fitting Wealth-v-Health (Desmos)",
@@ -661,7 +664,7 @@ var starterFiles = {
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
     }
-  }, 
+  },
   "logos": {
     "title": "Logo Starter File",
     "pyret": {
@@ -669,3 +672,32 @@ var starterFiles = {
     }
   }
 }
+
+var subStarterFilesArray = [
+  starterFiles
+];
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// Don't edit below this!
+//
+////////////////////////////////////////////////////////////////////////////////
+
+var allStarterFiles = {};
+
+for (let i = 0; i < subStarterFilesArray.length; i++) {
+  let subStarterFiles = subStarterFilesArray[i];
+  for (let p in subStarterFiles) {
+    allStarterFiles[p] = subStarterFiles[p];
+  }
+}
+
+const fs = require('fs');
+
+const ofile = process.argv[2];
+
+if (fs.existsSync(ofile)) {
+  fs.unlinkSync(ofile);
+}
+
+fs.writeFileSync(ofile, JSON.stringify(allStarterFiles));
