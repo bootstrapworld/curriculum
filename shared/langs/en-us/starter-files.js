@@ -702,25 +702,24 @@ var Reactive = {
   }
 }
 
-
-var subStarterFilesArray = [
-  Editors, Core, Piecewise, Flags, DSBasics, GameBasics, moreDS, moreAlg, Alg2, Reactive
-];
+var allStarterFiles = {
+  ...Editors, 
+  ...Core, 
+  ...Piecewise, 
+  ...Flags, 
+  ...DSBasics, 
+  ...GameBasics, 
+  ...moreDS, 
+  ...moreAlg, 
+  ...Alg2, 
+  ...Reactive
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 // Don't edit below this!
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-var allStarterFiles = {}
-
-for (let i = 0; i < subStarterFilesArray.length; i++) {
-  let subStarterFiles = subStarterFilesArray[i];
-  for (let p in subStarterFiles) {
-    allStarterFiles[p] = subStarterFiles[p];
-  }
-}
 
 const fs = require('fs');
 
