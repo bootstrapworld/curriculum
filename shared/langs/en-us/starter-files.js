@@ -34,7 +34,6 @@ var Editors = {
   }
 }
 
-
 var Core = {
   "bc": {
     "title": "bc Starter File",
@@ -203,7 +202,7 @@ var GameBasics = {
   }
 }
 
-  var DSBasics = {
+var DSBasics = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
@@ -263,7 +262,7 @@ var GameBasics = {
   }
 }
 
-var moreDS = {
+var MoreDS = {
   "fair-coins": {
     "title": "Fair Coins Starter File",
     "pyret": {
@@ -378,7 +377,6 @@ var moreDS = {
 }
 
 var Flags = {
-
   "flags": {
     "title": "Flags Starter File",
     "pyret": {
@@ -468,7 +466,7 @@ var Flags = {
   }
 }
 
-var moreAlg = {
+var MoreAlg = {
   "prism": {
     "title": "Surface Area of a Rectangular Prism Starter File",
     "pyret": {
@@ -543,7 +541,7 @@ var moreAlg = {
   }
 }
   
-  var Alg2 = {
+var Alg2 = {
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
@@ -718,8 +716,8 @@ var allStarterFiles = {
   ...Flags, 
   ...DSBasics, 
   ...GameBasics, 
-  ...moreDS, 
-  ...moreAlg, 
+  ...MoreDS, 
+  ...MoreAlg, 
   ...Alg2, 
   ...Reactive
 }

@@ -1,6 +1,6 @@
 glossary_preface = [[
-Thanks to everyone whose help has allowed us to offer this bilingual glossary!
+Merci à tous ceux dont l'aide nous a permis de proposer ce glossaire bilingue !
 
-If you have suggestions on how to improve any of our Spanish definitions,
-please share your comments with contact@BootstrapWorld.org
+Si vous avez des suggestions sur la façon d'améliorer l'une de nos définitions espagnoles,
+veuillez partager vos commentaires avec contact@BootstrapWorld.org
 ]]
