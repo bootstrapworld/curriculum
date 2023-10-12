@@ -158,10 +158,10 @@ var GameBasics = {
   "ninja-cat-desmos": {
     "title": "Ninja Cat Desmos Graph",
     "pyret": {
-      "url": "https://www.desmos.com/calculator/pbm9nxr2rd"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6528186617a49a7e5fd5559b"
     },
     "wescheme": {
-      "url": "https://www.desmos.com/calculator/pbm9nxr2rd"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6528186617a49a7e5fd5559b"
     }
   },
   "game": {
