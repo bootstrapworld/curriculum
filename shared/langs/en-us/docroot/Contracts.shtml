@@ -60,6 +60,11 @@
     // handle domains separately because they require more preprocessing
     function buildTable() {
 
+      // add the appropriate example (pyret or wescheme)
+      let example = document.getElementById('exampleCode');
+      example.innerHTML = (pathway && pathway.includes("wescheme"))? 
+        `(triangle 20 "solid" "green")` : `triangle(20, "solid", "green")`
+
       // the domain is an array of {name, type} pairs
       function processDomain(contract) {
         const code = document.createElement('code');
@@ -143,10 +148,10 @@
           </ol>
         </p>
         <p>
-          For example: The contract <tt>num-min :: (Number, Number) -> Number</tt> tells us that the name of the function is  <tt>num-min</tt>, it needs two inputs (both Numbers), and it produces a Number. 
+          For example: The contract <tt>triangle :: (Number, String, String) -> Image</tt> tells us that the name of the function is  <tt>triangle</tt>, it needs three inputs (a Number and two Strings), and it produces an Image. 
         </p>
         <p>
-          With these three pieces of information, we know what to type: <tt>num-min(4, 6)</tt>, and we know this will evaluate to a Number.
+          With these three pieces of information, we know that typing <tt id="exampleCode"></tt>  will evaluate to an Image.
         </p>
         <div id="search">
             Searching for a function? <input id="searchBox" type="search" onInput="search(this.value)"

@@ -157,12 +157,10 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+  (let ([starter-files-file (format "distribution/~a/lib/starter-files.json" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
-          (lambda (i)
-            (read i) (read i) (read i)
-            (read-json i)))
+          read-json)
         '())))
 
 (define *do-not-autoinclude-in-material-links*
@@ -1528,7 +1526,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (when (member *proglang* '("pyret" "wescheme"))
+                            ; The line below can be deleted, once langTable links are generated via their own directive
+                            #;(when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
@@ -2113,16 +2112,19 @@
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
+            (fprintf o "\n* Click here to download:\n")
+            (fprintf o "\n** link:index.pdf[Lesson Plan]\n")
+            (fprintf o "\n** link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Workbook Pages]\n")
+            (fprintf o "\n** link:javascript:downloadLessonPDFs(true)[Optional pages in this lesson]\n")
 
-            (for ([x (reverse *handout-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
+            ;(for ([x (reverse *handout-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
 
             ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
 
             ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
 
-            (let ([xx (sort *printable-exercise-links*
+            #;(let ([xx (sort *printable-exercise-links*
                             (lambda (x y)
                               (let ([x-i (index-of *workbook-pages* (first x))]
                                     [y-i (index-of *workbook-pages* (first y))])
@@ -2133,8 +2135,9 @@
 
               ; (printf "xx = ~s\n" xx)
 
-              (for ([x xx])
-                (fprintf o "\n* ~a\n\n" (second x))))
+              ;(for ([x xx])
+              ;  (fprintf o "\n* ~a\n\n" (second x)))
+              )
 
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -2154,15 +2157,13 @@
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (for ([x (reverse *opt-printable-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
+            ;(for ([x (reverse *opt-printable-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
 
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (fprintf o "\n* link:javascript:downloadLessonPDFs()[Download a PDF of all required pages]\n\n")
-
-            (fprintf o "+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
+            (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
             )
           #:exists 'replace)

@@ -92,6 +92,7 @@ for _,lesson in ipairs(lessons) do
   local sections_txt = ''
   local pages_txt = ''
   local exercisePages_txt = ''
+  local handoutPages_txt = ''
   local primitives_txt = ''
   local starterFiles_txt = ''
   local prerequisites_txt = ''
@@ -158,7 +159,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(handoutPages_file) then
     i = io.open(handoutPages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
+      handoutPages_txt = handoutPages_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
@@ -194,6 +195,7 @@ for _,lesson in ipairs(lessons) do
   o:write('    sections: [' .. sections_txt .. '],\n')
   o:write('    pages: [' .. pages_txt .. '],\n')
   o:write('    optPages: [' .. exercisePages_txt .. '],\n')
+  o:write('    handouts: [' .. handoutPages_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
   if file_exists_p(keywords_file) then
     o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')

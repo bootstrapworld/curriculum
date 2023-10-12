@@ -34,12 +34,51 @@
 
 |===
 
-== Filtering {amp} Simpson's Paradox @duration{45 minutes}
+== When and Why do we Filter Data? @duration{45 minutes}
 
 === Overview
-Students explore the @starter-file{alg2-covid}, and discover that some scatter plots show __multiple__ correlations, instead of just one. This motivates a brief discussion of Simpson's Paradox, and teaches them to filter their dataset into grouped samples.
+Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then explore the @starter-file{alg2-covid}, and discover another motivation for filtering: some scatter plots show __multiple__ correlations, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the covid dataset into samples grouped by state.
 
 === Launch
+
+A travel agency wants to know whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
+
+[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
+|===
+| City  		| # Tourists 	| % 35 and over	| % Under 35
+| Marrakesh		| 160			| 30%			|  70%
+| Istanbul		| 200			| 20%			|  80%
+| Punta Cana 	| 204			| 25%			|  75%
+| Goa			| 450			| 46%			|  54%
+| Sarasota		| 676			| 75%			|  25%
+|===
+
+// in the slide deck, we should show students the table without the Tourists column... then advance the slide, and include the Tourist column //
+@lesson-instruction{
+Which group do you think the agency serves more? Why?
+
+@optional If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}.
+}
+
+@teacher{Have students discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+
+**Most of the agency's clients are 35 and over!**
+
+How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
+
+@lesson-point{
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+}
+
+@right{@image{images/Simpsons_animation.gif, 300}}
+Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
+
+@clear
+
+"More data" isn't always better! In this lesson, we'll explore some real data that's better analyzed __in pieces...__
+
+=== Investigate
+
 Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
 
 Even in 2020, very few people could have predicted the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
@@ -72,45 +111,7 @@ The scatterplot you made doesn't look much like a scatterplot all! It looks like
 
 With all these clear, tight curves, we might think this would be a dataset with a very strong relationship. Unfortunately, that's not what we see when we group all the data together!
 
-Datasets like these are impossible to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
-
-@lesson-point{
-Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
-}
-
-@right{@image{images/Simpsons_animation.gif, 300}}
-Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox.
-
-=== Investigate
-
-@lesson-instruction{
-A travel agency wants to know whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
-
-[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
-|===
-| City  		| # Tourists 	| % 35 and over	| % Under 35
-| Marrakesh		| 160			| 30%			|  70%
-| Istanbul		| 200			| 20%			|  80%
-| Punta Cana 	| 204			| 25%			|  75%
-| Goa			| 450			| 46%			|  54%
-| Sarasota		| 676			| 75%			|  25%
-|===
-
-// in the slide deck, we should show students the table without the Tourists column... then advance the slide, and include the Tourist column //
-
-Which group do you think the agency serves more? Why?
-
-@optional If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}.
-
-}
-
-@teacher{Have students discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
-
-**Most of the agency's clients are 35 and over!**
-
-How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
-
-We can see a less dramatic form of this phenomenon in our Covid data. There is a strong relationship that we can clearly see _within_ each group, but that relationship is really weak when we lump all the groups together. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
+Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
 
 @QandA{
 @Q{We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.}

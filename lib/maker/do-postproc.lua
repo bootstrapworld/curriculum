@@ -310,7 +310,6 @@ function postproc(fhtml_cached, tipe)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'starter-files.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --

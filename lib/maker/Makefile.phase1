@@ -1,8 +1,8 @@
-# last modified 2023-03-16
+# last modified 2023-10-11
 
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs
+phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
 
 ###############################################################################
 
@@ -115,6 +115,13 @@ bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
 
 distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 	@cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
+
+###############################################################################
+
+starter-files: distribution/$(NATLANG)/lib/starter-files.json
+
+distribution/$(NATLANG)/lib/starter-files.json: $(PROGDIR)/starter-files.js
+	node $< $@
 
 ###############################################################################
 
