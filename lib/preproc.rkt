@@ -1526,7 +1526,8 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (when (member *proglang* '("pyret" "wescheme"))
+                            ; The line below can be deleted, once langTable links are generated via their own directive
+                            #;(when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
@@ -2111,9 +2112,9 @@
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            (fprintf o "\n* Click here to download PDFs of the:\n")
+            (fprintf o "\n* Click here to download:\n")
             (fprintf o "\n** link:index.pdf[Lesson Plan]\n")
-            (fprintf o "\n** link:javascript:downloadLessonPDFs(false)[Required pages in this lesson]\n")
+            (fprintf o "\n** link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Workbook Pages]\n")
             (fprintf o "\n** link:javascript:downloadLessonPDFs(true)[Optional pages in this lesson]\n")
 
             ;(for ([x (reverse *handout-exercise-links*)])
