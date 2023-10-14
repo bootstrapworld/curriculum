@@ -2413,7 +2413,7 @@
     (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
     ;
     (enclose-span ".begin-ignore-for-gdrive" "")
-    (enclose-div ".circleevalsexp"
+    (enclose-span ".circleevalsexp"
       (sexp->block e #:pyret (string=? *proglang* "pyret")))
     (enclose-span ".end-ignore-for-gdrive" "")))
 
