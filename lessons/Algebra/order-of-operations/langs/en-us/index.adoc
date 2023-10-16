@@ -73,7 +73,7 @@ Take a minute to think about the answer before we learn a new strategy for _draw
 @strategy{
 @span{.title}{Circles of Evaluation}
 
-@right{@image{images/pemdas.png, 200}}The order of operations are often summarized by models like this pyramid or mnemonic like PEMDAS, GEMDAS, etc. This set of rules is brittle, and doesn't always make it clear what we need to do. 
+@right{@image{images/pemdas.png, 200}}The order of operations are often summarized by models like this pyramid or mnemonics like PEMDAS, GEMDAS, etc. These rules are brittle, and don't always make it clear what we need to do. 
 
 Imagine a student with only these tools confronting the expression, @math{\frac{7 + 8}{2}} or @math{\sqrt{11 + 5} - 2}
 
@@ -84,9 +84,14 @@ What we need is a __better way to read math__!
 The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
 }
 
+@lesson-instruction{
+- Let's take a look at a few @vocab{Circles of Evaluation} before we learn to draw them ourselves. 
+- Turn to @printable-exercise{coe-notice.adoc} and take a minute to record what you Notice and Wonder.}
+
+@teacher{Introduce the rules for Circles of Evaluation before debriefing and asking students what expressions were represented on the page.}
 
 @lesson-instruction{
-The rules for drawing Circles of Evaluation are simple:
+*The rules for drawing Circles of Evaluation are simple:*
 
 1) Every Circle must have one - and only one! - @ifproglang{pyret}{operator or} function, written at the top.
 
@@ -94,27 +99,37 @@ The rules for drawing Circles of Evaluation are simple:
 
 3) Circles can contain other Circles.
 
-Let's practice with some simpler problems so that you have the tools you need to solve the problem at the center of the internet debate!
+
+* Take one more minute and see if you can figure out what expression each of these circles represents.
 }
 
-[.centered-image]
-@show{(coe '(* (/ 15 3) 6))}
+@QandA{
 
+@Q{What expression do you think the first Circle of Evaluation represented?}
+@A{@show{(coe '(* 5 6))} represents @math{5 \times 6}}
 
+@Q{What expression do you think the second Circle of Evaluation represented?}
+@A{@show{(coe '(* (/ 15 3) 6))} represents @math{15 \div 3 \times 6}}
 
-@lesson-instruction{
-What would the Circle of Evaluation for @math{5 \times 6} look like?
+@Q{What expression do you think the third Circle of Evaluation represented?}
+@A{@show{(coe '(* 5 (- 28 22)))} represents @math{5 \times (28 - 22)}.
 }
 
-[.centered-image]
-@show{(coe '(* 5 6))}
-
-@lesson-instruction{
-How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
+@Q{What expression do you think the fourth Circle of Evaluation represented?}
+@A{@show{(coe '(* (/ 15 3) (- 28 22)))} represents @math{15 \div 3 \times (28 - 22)}
 }
 
-[.centered-image]
-@show{(coe '(* (- 10 5) 6))}
+@Q{What expression do you think the fifth Circle of Evaluation represented?}
+@A{@show{(coe '(* (/ 15 (- 4 1)) 2))} represents @math{15 \div (4 - 1) \times 2}
+}
+
+@Q{What else did you notice and wonder about the Circles of Evaluation on @printable-exercise{coe-notice.adoc}? __Answers will vary!__ }
+@A{Students may have noticed that the first 4 expressions evaluate to the same thing.}
+@A{Students may have noticed that included circles can be on the left or on the right.}
+
+@Q{How would we draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}?}
+@A{@show{(coe '(- 10 (+ 5 3)))}}
+}
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
@@ -149,6 +164,7 @@ Spend some time ensuring that students have drawn their circles correctly. You m
 
 You may also want to have students complete @printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc} and/or @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
 
+Besides helping us to see the structure of mathematical expressions in order to evaluate them correctly, Circles of Evaluation can also be used to help us write code!
 
 @strategy{
 @span{.title}{Pedagogy Note}
