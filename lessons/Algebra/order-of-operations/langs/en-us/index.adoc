@@ -3,7 +3,7 @@
 ++++
 <style>
 #content .embedded {min-width: 550px; width: 80%; margin: 0px auto;}
-.big .mathunicode {font-size: 4em !important; color: black;}
+.big .mathunicode {font-size: 3em !important; color: black;}
 .strategy-box span.circleevalsexp { width: unset; }
 </style>
 ++++
@@ -35,7 +35,6 @@
 
 | Supplemental Materials
 | [.opt-materials-links]
-this vide
 
 | Key Points For The Facilitator
 |
@@ -54,41 +53,29 @@ Students are given a challenging expression that exposes common misconceptions a
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first!
 
-Imagine what might happen if someone tried to follow these steps:
+Imagine what might happen if someone tried to follow these steps: 
 
 . Put on your sneakers.
 . Tie your sneakers.
 . Put on your socks.
-
+ 
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
 Mathematicians didn’t always agree on the order of operations, but at some point it became important to establish conventions that would allow them to work together.
 
 @lesson-instruction{
-This math problem went viral on social media recently, with math teachers arguing about what the answer was!
+This math problem went viral on social media recently, with math teachers arguing about what the answer was! 
 [.big]
 @center{@math{6 \div 2(1 + 2)}}
 
-Take a minute to think about the answer before we learn a new strategy for _drawing the structure_ of this expression so that we can settle the debate!
+- Take a minute to think about the answer before we learn a new strategy for _drawing the structure_ of this expression so that we can settle the debate! 
+- Then turn to @printable-exercise{coe-notice.adoc} and take a minute to record what you Notice and Wonder about the @vocab{Circles of Evaluation} you see.
 }
 
-@strategy{
-@span{.title}{Circles of Evaluation}
-
-@right{@image{images/pemdas.png, 200}}The order of operations are often summarized by models like this pyramid or mnemonic like PEMDAS, GEMDAS, etc. This set of rules is brittle, and doesn't always make it clear what we need to do.
-
-Imagine a student with only these tools confronting the expression, @math{\frac{7 + 8}{2}} or @math{\sqrt{11 + 5} - 2}
-
-What we need is a __better way to read math__!
-
-@hspace{5em} @show{(coe '(/ (+ 7 8) 2))} @hspace{10em} @show{(coe '(- (sqrt (+ 11 5)) 2))}
-
-The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
-}
-
+@teacher{Before debriefing, give students a second chance to engage with the expressions on the Notice and Wonder after introducing the rules for Circles of Evaluation.}
 
 @lesson-instruction{
-The rules for drawing Circles of Evaluation are simple:
+*The rules for drawing Circles of Evaluation are simple:*
 
 1) Every Circle must have one - and only one! - @ifproglang{pyret}{operator or} function, written at the top.
 
@@ -96,22 +83,53 @@ The rules for drawing Circles of Evaluation are simple:
 
 3) Circles can contain other Circles.
 
-Let's practice with some simpler problems so that you have the tools you need to solve the problem at the center of the internet debate!
+
+* Take another minute and see if you can figure out what expression each of these Circles of Evaluation represents.
+* What expressions do you think the Circles of Evaluation on  @printable-exercise{coe-notice.adoc} represent?
+
+@teacher{
+
+[cols="1a,2a,2a,3a,3a", options="header"]
+|===
+|1|2|3|4|5
+
+|@show{(coe '(* 5 6))} 
+|@show{(coe '(* (/ 15 3) 6))}
+|@show{(coe '(* 5 (- 28 22)))}
+|@show{(coe '(* (/ 15 3) (- 28 22)))}
+|@show{(coe '(* (/ 15 (- 4 1)) 2))}
+
+|@math{5 \times 6}}
+|@math{15 \div 3 \times 6}
+|@math{5 \times (28 - 22)}
+|@math{15 \div 3 \times (28 - 22)}
+|@math{15 \div (4 - 1) \times 2}
+|===
+
 }
 
-@center{@show{(coe '(* (/ 15 3) 6))}}
+@QandA{
+@Q{What else did you Notice and Wonder? __Answers will vary!__ }
+@A{Students may have noticed that the first 4 expressions evaluate to the same thing.}
+@A{Students may have noticed that included circles can be on the left or on the right.}
 
-@lesson-instruction{
-What would the Circle of Evaluation for @math{5 \times 6} look like?
+@Q{How would we draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}?}
+@A{@show{(coe '(- 10 (+ 5 3)))}}
 }
 
-@center{@show{(coe '(* 5 6))}}
+@strategy{
+@span{.title}{Circles of Evaluation}
 
-@lesson-instruction{
-How about the Circle of Evaluation for @math{(10 - 5) \times 6}?
+The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_.
+
+@right{@image{images/pemdas.png, 200}}The order of operations are often summarized by models like this pyramid or mnemonics like PEMDAS, GEMDAS, etc. These rules are brittle, and don't always make it clear what we need to do. 
+
+Imagine a student with only these tools confronting the expression, @math{\frac{7 + 8}{2}} or @math{\sqrt{11 + 5} - 2}
+
+What we need is a __better way to read math__! 
+
+Circles of Evaluation can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
 }
-
-@center{@show{(coe '(* (- 10 5) 6))}}
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
 
@@ -120,21 +138,15 @@ Suppose another student tells you that @smath{(+ 1 (* 2 3))} can be rewritten as
 *Take a moment to think: what's the problem?* We can use the Circles of Evaluation to figure it out!
 
 The first Circle is just the original expression. The second expression represents what the (incorrect) commutativity transformation gives us:
+
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-
 | @show{(coe '(+ 1 (* 2 3)))}
 | __ ? __ &rarr;
 | @show{(coe '(+ 2 (* 1 3)))}
 |===
 
 In this case, the student __failed to see the structure__, viewing the term to the right of the @smath{+} sign as @smath{2} instead of @smath{(* 2 3)}. The Circles of Evaluation help us see the structure of the expression, rather than forcing us to construct it and keep it in our heads.
-
-@strategy{
-@span{.title}{Circles of Evaluation}
-
-The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
-}
 
 === Investigate
 
@@ -146,6 +158,7 @@ Spend some time ensuring that students have drawn their circles correctly. You m
 
 You may also want to have students complete @printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc} and/or @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Matching Circles of Evaluation to Expressions}.
 
+Besides helping us to see the structure of mathematical expressions in order to evaluate them correctly, Circles of Evaluation can also be used to help us write code!
 
 @strategy{
 @span{.title}{Pedagogy Note}
