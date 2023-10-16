@@ -3,6 +3,8 @@
 ++++
 <style>
 #content .embedded {min-width: 550px; width: 80%; margin: 0px auto;}
+.big .mathunicode {font-size: 4em !important; color: black;}
+.strategy-box span.circleevalsexp { width: unset; }
 </style>
 ++++
 
@@ -64,7 +66,7 @@ Mathematicians didn’t always agree on the order of operations, but at some poi
 
 @lesson-instruction{
 This math problem went viral on social media recently, with math teachers arguing about what the answer was! 
-
+[.big]
 @center{@math{6 \div 2(1 + 2)}}
 
 Take a minute to think about the answer before we learn a new strategy for _drawing the structure_ of this expression so that we can settle the debate! 
@@ -79,7 +81,7 @@ Imagine a student with only these tools confronting the expression, @math{\frac{
 
 What we need is a __better way to read math__! 
 
-@center{@show{(coe '(/ (+ 7 8) 2))} @hspace{10em} @show{(coe '(- (sqrt (+ 11 5)) 2))}}
+@hspace{5em} @show{(coe '(/ (+ 7 8) 2))} @hspace{10em} @show{(coe '(- (sqrt (+ 11 5)) 2))}
 
 The Circles of Evaluation are a critical pedagogical tool in this course. They place the focus on the _structure_ of mathematical expressions, as a means of combating the harmful student belief that the only thing that matters is the _answer_. They can be used to diagram arithmetic sentences to expose common misconceptions about Order of Operations, and make an excellent scaffold for tracing mistakes when a student applies the Order of Operations incorrectly. They are also a bridge representation, which naturally connects to function composition and converting arithmetic into code.
 }
@@ -103,8 +105,8 @@ The Circles of Evaluation are a critical pedagogical tool in this course. They p
 * Take one more minute and see if you can figure out what expression each of these circles represents.
 }
 
-@QandA{
 
+@QandA{
 @Q{What expression do you think the first Circle of Evaluation represented?}
 @A{@show{(coe '(* 5 6))} represents @math{5 \times 6}}
 
@@ -129,6 +131,7 @@ The Circles of Evaluation are a critical pedagogical tool in this course. They p
 
 @Q{How would we draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}?}
 @A{@show{(coe '(- 10 (+ 5 3)))}}
+}
 }
 
 Aside from helping us catch mistakes before they happen, Circles of Evaluation are also a useful way to think about _transformation_ in mathematics. For example, you may have heard that "addition is commutative, so @smath{(+ a b)} can always be written as @smath{(+ b a)}." For example, @smath{(+ 1 2)} can be transformed to @smath{(+ 2 1)}.
