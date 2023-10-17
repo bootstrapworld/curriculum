@@ -1776,6 +1776,8 @@
                                              [p (hash-ref c *proglang-sym* #f)]
                                              [starter-file-title (or (hash-ref p 'title #f)
                                                                      (hash-ref c 'title))])
+                                        (set! starter-file-title
+                                          (regexp-replace* #rx"," starter-file-title "\\&#x2c;"))
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
