@@ -156,7 +156,7 @@ var GameBasics = {
     }
   },
   "ninja-cat-desmos": {
-    "title": "Ninja Cat Desmos Graph",
+    "title": "Ninja Cat (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/6528186617a49a7e5fd5559b"
     },
@@ -210,13 +210,13 @@ var DSBasics = {
     }
   },
   "blank-ds-tutorial": {
-    "title": "Tutorial Video",
+    "title": "Tutorial Video: Importing Your Own Data into Pyret",
     "pyret": {
       "url": "https://drive.google.com/file/d/1DX_oEJgUr9uSUxYdN4YdybQjwEvEP7fC/"
     }
   },
   "exploration-project": {
-    "title": "Data Exploration Project slide template",
+    "title": "Data Exploration Project Slide Template",
     "pyret": {
       "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/"
     },
@@ -273,7 +273,7 @@ var MoreDS = {
     }
   },
   "food": {
-    "title": "Global Food Supply & Production",
+    "title": "Global Food Supply & Production Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS&v=4d870d2"
     }
