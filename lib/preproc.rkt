@@ -1537,6 +1537,16 @@
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
                                      *containing-directory*)
                              ]
+                           [(string=? directive "language-table")
+                            (let ([link-text (string-trim (read-group i directive))])
+                              (unless *lesson-plan*
+                                (error 'ERROR
+                                       "WARNING: @language-table (~a, ~a) valid only in lesson plan"
+                                       *lesson-subdir* *in-file*))
+                              (when (member *proglang* '("pyret" "wescheme"))
+                                (set! link-text (regexp-replace* #rx"," link-text "\\&#x2c;"))
+                                (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[~a]"
+                                         link-text)))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
 
@@ -2161,8 +2171,8 @@
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-opt-mat.asc")
           (lambda (o)
-            ;; All optional materials should be moved to the "Supplemental Materials" Row
-            ; OPT-PROJECTS
+
+            ; OPTIONAL PROJECTS
             (let ([opt-proj-links (reverse *opt-project-links*)])
               (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
                 (lambda (o)
@@ -2170,17 +2180,22 @@
                     (write link-pair o)
                     (newline o)))
                 #:exists 'replace)
-
-              (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
+            (for ([x opt-proj-links])
+              (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
             ; OPTIONAL PRINTED PAGES
-            (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+            (unless (empty? *opt-printable-exercise-links*)
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n"))
             ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
+            ; NO OPTIONAL ANYTHING - display a helpful message
+            (when (and (empty? *opt-printable-exercise-links*)
+                       (empty? *opt-starter-file-links*)
+                       (empty? *opt-online-exercise-links*))
+              (fprintf o "_This lesson has no supplemental materials (yet!)_"))
 
             )
           #:exists 'replace)
