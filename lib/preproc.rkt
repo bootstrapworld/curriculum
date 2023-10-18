@@ -1529,6 +1529,14 @@
                             ; The line below can be deleted, once langTable links are generated via their own directive
                             #;(when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
+                           [(string=? directive "opt-material-links")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
+                                     *containing-directory*)
+                             ]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
 
@@ -1768,6 +1776,8 @@
                                              [p (hash-ref c *proglang-sym* #f)]
                                              [starter-file-title (or (hash-ref p 'title #f)
                                                                      (hash-ref c 'title))])
+                                        (set! starter-file-title
+                                          (regexp-replace* #rx"," starter-file-title "\\&#x2c;"))
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
@@ -2106,43 +2116,53 @@
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
-
-            (display-lesson-slides o)
-
+            ; REQUIRED PRINTABLE PAGES
+            (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]\n")
+            ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            (fprintf o "\n* Click here to download:\n")
-            (fprintf o "\n** link:index.pdf[Lesson Plan]\n")
-            (fprintf o "\n** link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Workbook Pages]\n")
-            (fprintf o "\n** link:javascript:downloadLessonPDFs(true)[Optional pages in this lesson]\n")
-
-            ;(for ([x (reverse *handout-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-
-            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
-
-            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
-
-            #;(let ([xx (sort *printable-exercise-links*
-                            (lambda (x y)
-                              (let ([x-i (index-of *workbook-pages* (first x))]
-                                    [y-i (index-of *workbook-pages* (first y))])
-                                (unless x-i (set! x-i -1))
-                                (unless y-i (set! y-i -1))
-                                (cond [(and (= x-i -1) (= y-i -1)) #t]
-                                      [else (< x-i y-i)]))))])
-
-              ; (printf "xx = ~s\n" xx)
-
-              ;(for ([x xx])
-              ;  (fprintf o "\n* ~a\n\n" (second x)))
-              )
-
+            ; ONLINE EXERCISES --- to be removed onces all required online exercises
+            ; have been turned into starter files
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
+            ; SLIDES
+            (display-lesson-slides o)
+            ; LESSON PLAN
+            (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n")
+
+
+            (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
+
+            ; NOTE(Emmanuel): These are no longer used, as of Nov 2023
+            ;(for ([x (reverse *handout-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
+            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
+            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
+            ;(let ([xx (sort *printable-exercise-links*
+            ;                (lambda (x y)
+            ;                  (let ([x-i (index-of *workbook-pages* (first x))]
+            ;                        [y-i (index-of *workbook-pages* (first y))])
+            ;                    (unless x-i (set! x-i -1))
+            ;                    (unless y-i (set! y-i -1))
+            ;                    (cond [(and (= x-i -1) (= y-i -1)) #t]
+            ;                          [else (< x-i y-i)]))))])
+            ;
+            ;   (printf "xx = ~s\n" xx)
+            ;
+            ;  (for ([x xx])
+            ;    (fprintf o "\n* ~a\n\n" (second x)))
+            ;  )
+            ;(for ([x (reverse *opt-printable-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
+
+            )
+          #:exists 'replace)
+
+        (call-with-output-file (path-replace-extension *out-file* "-extra-opt-mat.asc")
+          (lambda (o)
+            ;; All optional materials should be moved to the "Supplemental Materials" Row
+            ; OPT-PROJECTS
             (let ([opt-proj-links (reverse *opt-project-links*)])
               (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
                 (lambda (o)
@@ -2153,17 +2173,14 @@
 
               (for ([x opt-proj-links])
                 (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
-
+            ; OPTIONAL PRINTED PAGES
+            (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+            ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            ;(for ([x (reverse *opt-printable-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-
+            ; OPTIONAL ONLINE EXERCISES
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
             )
           #:exists 'replace)
