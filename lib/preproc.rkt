@@ -2174,13 +2174,15 @@
               (for ([x opt-proj-links])
                 (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
             ; OPTIONAL PRINTED PAGES
-            (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
-            ; OPTIONAL STARTER FILES
-            (for ([x (reverse *opt-starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-            ; OPTIONAL ONLINE EXERCISES
-            (for ([x (reverse *opt-online-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
+            (unless (and (empty? *opt-starter-file-links*)
+                         (empty? *opt-online-exercise-links*))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+              ; OPTIONAL STARTER FILES
+              (for ([x (reverse *opt-starter-file-links*)])
+                (fprintf o "\n* ~a\n\n" x))
+              ; OPTIONAL ONLINE EXERCISES
+              (for ([x (reverse *opt-online-exercise-links*)])
+                (fprintf o "\n* ~a\n\n" x)))
 
             )
           #:exists 'replace)
