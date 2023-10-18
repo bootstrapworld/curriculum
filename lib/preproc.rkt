@@ -1537,6 +1537,16 @@
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
                                      *containing-directory*)
                              ]
+                           [(string=? directive "language-table")
+                            (let ([link-text (string-trim (read-group i directive))])
+                              (unless *lesson-plan*
+                                (error 'ERROR
+                                       "WARNING: @language-table (~a, ~a) valid only in lesson plan"
+                                       *lesson-subdir* *in-file*))
+                              (when (member *proglang* '("pyret" "wescheme"))
+                                (set! link-text (regexp-replace* #rx"," link-text "\\&#x2c;"))
+                                (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[~a]"
+                                         link-text)))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
 
