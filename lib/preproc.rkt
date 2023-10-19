@@ -2127,7 +2127,8 @@
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
-            (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]\n")
+            (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]\n"))
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
