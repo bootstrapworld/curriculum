@@ -1,5 +1,3 @@
-# last modified 2023-10-11
-
 include $(MAKE_DIR)utils.mk
 
 phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
@@ -76,7 +74,12 @@ $(eval $(foreach lesson,$(the-lessons),$(call make-copy-lesson-rule,$(lesson))))
 
 #########################################################################
 
-the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
+ifndef COURSE
+	the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
+else
+	the-pathways := $(patsubst %,pathways/%/langs/$(NATLANG), \
+		$(subst $(COMMACHAR),$(SPACECHAR),$(COURSE)))
+endif
 
 the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                   $(notdir \

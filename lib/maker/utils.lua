@@ -1,5 +1,3 @@
--- last modified 2023-03-09
-
 function memberp(elt, tbl)
   -- true iff tbl contains elt
   -- tbl is not required to be pure array
@@ -49,6 +47,11 @@ function head(f, num, pat)
   end
   i:close()
   return res
+end
+
+function string_trim(s)
+  -- remove flanking blanks of string s
+  return (string.gsub(s, '^%s*(.-)%s*$', '%1'))
 end
 
 function string_split(s, c)
