@@ -68,7 +68,11 @@ $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathw
 # 	lesson-name,$(shell \
 # 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
 
-relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
+ifndef COURSE
+	relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
+else
+	relevant-lessons := $(foreach lesson-name,$(shell cat $(LESSONS_LIST_FILE)),distribution/$(NATLANG)/lessons/$(lesson-name))
+endif
 
 # shd use recursive wildcard if we can find one
 
@@ -114,8 +118,10 @@ $(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pd
 
 #########################################################################
 
-lesson-plan-adoc-files := $(wildcard \
-	distribution/$(NATLANG)/lessons/*/index.adoc)
+# lesson-plan-adoc-files := $(wildcard \
+# 	distribution/$(NATLANG)/lessons/*/index.adoc)
+
+lesson-plan-adoc-files := $(foreach lesson,$(relevant-lessons),$(lesson)/index.adoc)
 
 lesson-plan-asc-files := $(foreach \
 	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
@@ -248,7 +254,6 @@ postproc: preproc
 
 tocs: preproc
 	$(MAKE_DIR)make-pathway-tocs.lua
-
 
 ifeq "$(BOOK)" ""
 pdfs: postproc dependency-graph tocs
