@@ -9,15 +9,26 @@ local natlang = os.getenv 'NATLANG'
 -- collecting courses
 
 do
-  local courses_dir = 'distribution/' .. natlang .. '/courses'
-  local ls_output = io.popen('ls ' .. courses_dir)
   local o = io.open(os.getenv 'COURSES_LIST_FILE', 'w+')
+  local courses_dir = 'distribution/' .. natlang .. '/courses'
   o:write('return {\n')
-  for course in ls_output:lines() do
-    o:write(' \"' .. course .. '\",\n')
+
+  local course_ev = os.getenv 'COURSE'
+  if course_ev and course_ev ~= '' then
+    local courses = string_split(course_ev, ',')
+    for _,course in ipairs(courses) do
+      o:write(' \"' .. string_trim(course) .. '\",\n')
+    end
+
+  else
+    local ls_output = io.popen('ls ' .. courses_dir)
+    for course in ls_output:lines() do
+      o:write(' \"' .. course .. '\",\n')
+    end
+    ls_output:close()
   end
+
   o:write('}\n')
-  ls_output:close()
   o:close()
 end
 
