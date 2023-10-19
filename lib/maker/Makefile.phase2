@@ -131,6 +131,10 @@ all-lesson-plan-adoc-files := $(wildcard distribution/$(NATLANG)/lessons/*/index
 
 relevant-lesson-plan-adoc-files := $(foreach lesson,$(relevant-lessons),$(lesson)/index.adoc)
 
+relevant-lesson-plan-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/index.adoc))
+
 relevant-lesson-plan-asc-files := $(foreach \
 	adocf,$(all-lesson-plan-adoc-files),$(call asc-file,$(adocf)))
 
