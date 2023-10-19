@@ -102,12 +102,12 @@ This math problem went viral on social media recently, with math teachers arguin
 
 3) Circles can contain other Circles.
 
+}
 
-* Take another minute and see if you can figure out what expression each of these Circles of Evaluation represents.
-* What expressions do you think the Circles of Evaluation on  @printable-exercise{coe-notice.adoc} represent?
-
-@teacher{
-
+@QandA{
+@Q{Take another minute and see if you can figure out what expression each of the Circles of Evaluation on @printable-exercise{coe-notice.adoc} represents.
+}
+@A{
 [cols="1a,2a,2a,3a,3a", options="header"]
 |===
 |1|2|3|4|5
@@ -124,10 +124,8 @@ This math problem went viral on social media recently, with math teachers arguin
 |@math{15 \div 3 \times (28 - 22)}
 |@math{15 \div (4 - 1) \times 2}
 |===
-
 }
 
-@QandA{
 @Q{What else did you Notice and Wonder? __Answers will vary!__ }
 @A{Students may have noticed that the first 4 expressions evaluate to the same thing.}
 @A{Students may have noticed that included circles can be on the left or on the right.}
@@ -140,6 +138,7 @@ This math problem went viral on social media recently, with math teachers arguin
 
 @teacher{
 @optional 
+
 - If you have time, start by having students physically match expressions and Circles of Evaluations using @handout{pages/cards-for-matching-coe-exp.adoc, this set of cards.}
 - Althernatively, provide a more scaffolded entry with @printable-exercise{pages/complete-coe-from-arith.adoc} and @printable-exercise{pages/match-arith-coe.adoc}.
 }
@@ -155,14 +154,18 @@ Let's see if we can settle the internet debate about what @math{6 \div 2(1 + 2)}
 }
 
 @teacher{
+
 [.embedded, cols="^.^3,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|@show{(coe '(* (/ 6 2) (+ 1 2)))} | &rarr; | @show{(coe '(* 3 3))} | &rarr; | @math{ 3 \times 3 = 9}}
+|@show{(coe '(* (/ 6 2) (+ 1 2)))} | &rarr; | @show{(coe '(* 3 3))} | &rarr; | @math{ 3 \times 3 = 9}
 |===
+}
+
 @strategy{
 @span{.title}{Pedagogy Note}
 
 Circles of Evaluation are a great way to get older students to reengage with (and finally understand) the order of operations while their focus and motivation are on learning to code.  Because we recognize this work to be so foundational, and know that some teachers choose to spend a whole week on it, we have developed lots of additional materials to help scaffold and stretch. You will about 20 additional pages linked in @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson.
+
 }
 
 === Synthesize
@@ -303,61 +306,49 @@ Circles of Evaluation are a powerful tool that can be used without ever getting 
 === Investigate
 
 @lesson-instruction{
-Here are two Circles of Evaluation.
+Turn to @opt-printable-exercise{beyond-operations-notice.adoc}. You will see two Circles of Evaluation at the top. One of them is familiar, but the other is very different from what you've been working with. Complete Part A.
 
+@ifproglang{wescheme}{
 [cols="^1,^2", grid="none", frame="none"]
 |===
 | @show{(coe `(* 10 -4))}	| @show{(coe `(text "Good work!" 50 "red"))}
 |===
-
-One of them is familiar, but the other is very different from what you've been working with. What's different about the Circle on the right?
 }
-
-[.indentedpara]
---
-_Possible responses:_
-
-- _We've never seen `text` before_
-- _We've never seen words like "red" used in a Circle of Evaluation before_
-- _We've never seen *three* inputs_
-- _We've never seen a mix of Numbers and words_
---
 
 @ifproglang{pyret}{
-There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
-
-When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
-
-Here's those same two Circles - one for an operator and another for a function - along with the code for each one:
-
 [cols="^1,^2", grid="none", frame="none"]
 |===
-
-| @show{(coe  `(* 10 -4))}	| @show{(coe  `(text "Good work!" 50 "red"))}
-| @show{(code `(* 10 -4))}	| @show{(code `(text "Good work!" 50 "red"))}
+| @show{(coe `(* 10 -4))}			| @show{(coe `(text "Good work!" 50 "red"))}
+| Code: @show{(code `(* 10 -4))}	| Code: @show{(code `(text "Good work!" 50 "red"))}
 |===
-
+}
 }
 
+@QandA{
+@Q{What did you Notice and Wonder?}
+
+@ifproglang{pyret}{
+@A{
+There are more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no different.
+
+When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
+}
+}
+}
 
 @lesson-instruction{
-- Can you figure out the Name for the function in the second Circle of Evaluation? This is a chance to look for and make use of structure in deciphering a novel expression!
-_We know the name of the function is `text`, because that's what is at the top of the circle._
-- What do you think this expression will evaluate to?
-- Convert this Circle of Evaluation to code and try it out!
-- What does the `50` mean to the computer? Try replacing it with different values, and see what you get.
-- What does the `"blue"` mean to the computer? Try replacing it with different values, and see what you get.
-
-Here is another Circle of Evaluation to explore.
-@show{(coe `(string-length "fun!"))}
-
-- What do you think this expression will evaluate to?
-- Convert this Circle of Evaluation to code and try it out!
+Complete Part B on @opt-printable-exercise{beyond-operations-notice.adoc}.
 }
 
 === Synthesize
 
+
 Now that we understand the structure of Circles of Evaluation, we can use them to write code for any function!
+@ifproglang{pyret}{
+- What's the difference between how Pyret handles Operators and Functions?	
+}
+- What are you curious about after what we've explored today?
+- What other things could you imagine functions doing?
 
 == Additional Exercises
 
