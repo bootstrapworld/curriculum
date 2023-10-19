@@ -94,20 +94,20 @@ The Circles of Evaluation are a critical pedagogical tool in this course. They p
 
 @lesson-instruction{
 We can _draw the structure_ of this grammar in mathematics using something called the *Circles of Evaluation*. The rules are simple:
-}
+} 
 
-*1) Every Circle must have one - and only one! - function, written at the top.*
+*1) Every Circle must have one - and only one! - @ifproglang{pyret}{operator or} function, written at the top.*
 
 That means that Numbers (e.g. - @math{3}, @math{-29}, @math{77.01}...) are still written by themselves. It's only when we want to _do something_ like add, subtract, etc. that we need to draw a Circle.
 
-*2) The inputs to the function are written left-to-right, in the middle of the Circle.*
+*2) The inputs @ifproglang{wescheme}{to the function} are written left-to-right, in the middle of the Circle.*
 
 If we want to draw the Circle of Evaluation for @smath{(/ 6 3)}, the division @ifproglang{wescheme}{function} @ifproglang{pyret}{operator} (`/`) is written at the top, with the `6` on the left and the `3` on the right.
 
 [.centered-image]
 @show{(coe '(/ 6 3))}
 
-What if we want to use multiple functions? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
+What if we want to use multiple @ifproglang{wescheme}{functions} @ifproglang{pyret}{operators}? How would we draw the Circle of Evaluation for @smath{(/ 6 (+ 1 2))}? Drawing the Circle of Evaluation for the @smath{(+ 1 2)} is easy. But how do we take the result of that circle, and divide 6 by it?
 
 *3) Circles can contain other Circles*
 
@@ -304,11 +304,11 @@ _Possible responses:_
 --
 
 @ifproglang{pyret}{
-There's more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no differeny.
+There are more than just operators like addition and subtraction! Math also has _functions_, and so does Pyret! In math, the name of the function comes first, and Pyret is no different.
 
 When converting a Circle of Evaluation that has a function, the spider starts at the **top** and visits the function, then visits the inputs from left-to-right.
 
-Here's those same two Circles - one for an operator and another for a function - along with the code for each one:
+Here are those same two Circles - one for an operator and another for a function - along with the code for each one:
 
 [cols="^1,^2", grid="none", frame="none"]
 |===
@@ -337,7 +337,7 @@ Here is another circle to explore.
 
 === Synthesize
 
-Now that we understand the structure of Circles of Evaluation, we can use them to write code for any function!
+Now that we understand the structure of Circles of Evaluation, we can use them to write code for any function @ifproglang{pyret}{or operator}!
 
 == Additional Exercises
 
