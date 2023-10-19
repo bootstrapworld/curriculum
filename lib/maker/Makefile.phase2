@@ -68,13 +68,22 @@ $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathw
 # 	lesson-name,$(shell \
 # 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
 
+all-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
+
 ifndef COURSE
 	relevant-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
 else
-	relevant-lessons := $(foreach lesson-name,$(shell cat $(LESSONS_LIST_FILE)),distribution/$(NATLANG)/lessons/$(lesson-name))
+	relevant-lessons := $(foreach lesson-name,$(shell cat $(RELEVANT_LESSONS_LIST_FILE)),distribution/$(NATLANG)/lessons/$(lesson-name))
 endif
 
 # shd use recursive wildcard if we can find one
+
+all-adoc-files := $(foreach \
+	lesson,$(all-lessons),$(wildcard \
+	$(lesson)/*/*/*/*.adoc \
+	$(lesson)/*/*/*.adoc \
+	$(lesson)/*/*.adoc \
+	))
 
 relevant-adoc-files := $(foreach \
 	lesson,$(relevant-lessons),$(wildcard \
@@ -84,7 +93,7 @@ relevant-adoc-files := $(foreach \
 	))
 
 relevant-asc-files := $(foreach \
-	adocf,$(relevant-adoc-files),$(call asc-file,$(adocf)))
+	adocf,$(all-adoc-files),$(call asc-file,$(adocf)))
 
 relevant-pdf-files := $(foreach \
 	adocf,$(relevant-adoc-files),$(call pdf-file,$(adocf)))
@@ -92,7 +101,7 @@ relevant-pdf-files := $(foreach \
 ifeq "$(BOOK)" ""
 	workbook-pages := $(relevant-asc-files)
 else
-	workbook-pages := $(relevant-pdf-files)
+	workbook-pages := $(relevant-asc-files) $(relevant-pdf-files)
 endif
 
 build-workbook-pages: $(workbook-pages)
@@ -104,7 +113,7 @@ $(call asc-file,$1): $1
 
 endef
 
-$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
+$(eval $(foreach adocf,$(all-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
 
 define make-build-workbook-page-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -118,21 +127,24 @@ $(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pd
 
 #########################################################################
 
-# lesson-plan-adoc-files := $(wildcard \
-# 	distribution/$(NATLANG)/lessons/*/index.adoc)
+all-lesson-plan-adoc-files := $(wildcard distribution/$(NATLANG)/lessons/*/index.adoc)
 
-lesson-plan-adoc-files := $(foreach lesson,$(relevant-lessons),$(lesson)/index.adoc)
+relevant-lesson-plan-adoc-files := $(foreach lesson,$(relevant-lessons),$(lesson)/index.adoc)
 
-lesson-plan-asc-files := $(foreach \
-	adocf,$(lesson-plan-adoc-files),$(call asc-file,$(adocf)))
+relevant-lesson-plan-adoc-files := $(foreach \
+	lesson,$(relevant-lessons),$(wildcard \
+	$(lesson)/index.adoc))
 
-lesson-plan-pdf-files := $(foreach \
-	adocf,$(lesson-plan-adoc-files),$(call pdf-file,$(adocf)))
+relevant-lesson-plan-asc-files := $(foreach \
+	adocf,$(all-lesson-plan-adoc-files),$(call asc-file,$(adocf)))
+
+relevant-lesson-plan-pdf-files := $(foreach \
+	adocf,$(relevant-lesson-plan-adoc-files),$(call pdf-file,$(adocf)))
 
 ifeq "$(BOOK)" ""
-	lesson-plan-files := $(lesson-plan-asc-files)
+	lesson-plan-files := $(relevant-lesson-plan-asc-files)
 else
-	lesson-plan-files := $(lesson-plan-pdf-files)
+	lesson-plan-files := $(relevant-lesson-plan-asc-files) $(relevant-lesson-plan-pdf-files)
 endif
 
 build-lesson-plans: $(lesson-plan-files)
@@ -144,7 +156,7 @@ $(call asc-file,$1): $1
 
 endef
 
-$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
+$(eval $(foreach adocf,$(all-lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
 
 define make-build-lesson-plan-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -154,7 +166,7 @@ $(call pdf-file,$1): $1 $(call asc-file,$1)
 endef
 
 $(if $(BOOK),\
-$(eval $(foreach adocf,$(lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf)))),)
+$(eval $(foreach adocf,$(relevant-lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf)))),)
 
 ###############################################################################
 

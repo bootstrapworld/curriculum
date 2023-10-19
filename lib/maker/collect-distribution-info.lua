@@ -33,15 +33,14 @@ end
 
 do
   local o = io.open(os.getenv 'COURSES_LIST_FILE', 'w+')
+  local lo = io.open(os.getenv 'RELEVANT_LESSONS_LIST_FILE', 'w+')
   o:write('return {\n')
 
   if select_courses then
-    local lo = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
     for _,course in ipairs(select_courses) do
       o:write(' \"' .. string_trim(course) .. '\",\n')
       record_course_lessons(course, lo)
     end
-    lo:close()
 
   else
     local ls_output = io.popen('ls ' .. courses_dir)
@@ -53,6 +52,7 @@ do
 
   o:write('}\n')
   o:close()
+  lo:close()
 end
 
 ----------------------------------------------------------------------------
@@ -197,9 +197,9 @@ end
 -- collecting lessons
 
 do
-  if select_courses then
-    goto exit_do_block
-  end
+  -- if select_courses then
+  --   goto exit_do_block
+  -- end
   local ls_output = io.popen('ls ' .. lessons_dir)
   local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
   for lesson in ls_output:lines() do
@@ -222,6 +222,6 @@ do
   end
   ls_output:close()
   o:close()
-  ::exit_do_block::
+  -- ::exit_do_block::
 end
 
