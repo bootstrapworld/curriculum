@@ -218,7 +218,7 @@ var DSBasics = {
   "exploration-project": {
     "title": "Data Exploration Project Slide Template",
     "pyret": {
-      "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/"
+      "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/copy"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
@@ -227,14 +227,14 @@ var DSBasics = {
   "research-paper": {
     "title": "Research Paper Template",
     "pyret": {
-      "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/"
+      "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/copy"
     },
     "codap": {
       "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
     }
   },
   "research-project": {
-    "title": "Research Project Template",
+    "title": "Research Project Template Slide Template",
     "pyret": {
       "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
     },
