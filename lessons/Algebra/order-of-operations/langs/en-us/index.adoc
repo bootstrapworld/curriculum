@@ -241,19 +241,19 @@ Fill in the blanks to complete the code for each Circle of Evaluation on @printa
 @QandA{
 @Q{What would the code look like for these circles?
 
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
-|===
-|@show{(coe  '(/ 6 (+ 1 2)))}		| @show{(coe  '(* (- 10 5) 6))}
-|===
+@do{
+  (define expr1 '(/ 6 (+ 1 2)))
+  (define expr2 '(* (- 10 5) 6))
+}
 
-{empty}
-}
-@A{  {empty}
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^1a,^.^1a", grid="none", stripes="none" frame="none"]
 |===
-|@show{(code  '(/ 6 (+ 1 2)))}	| @show{(code  '(* (- 10 5) 6))}
+|@show{(coe expr1)}		| @show{(coe expr2)}
 |===
 }
+@A{ @show{(code expr1 #:parens true)}	@hspace{10em} @show{(code expr1 #:parens true)}
+}
+
 }
 
 === Investigate
