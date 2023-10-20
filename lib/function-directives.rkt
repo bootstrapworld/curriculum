@@ -403,15 +403,6 @@
         "")
     ))
 
-(define (longer-than? len . exprs)
-  (let ([exprs-len (foldl + 0
-                     (map (lambda (e)
-                            (let ([e (regexp-replace* #rx"{zwsp}" e "")])
-                              (string-length e)))
-                          exprs))])
-    ;(printf "elen = ~s; len = ~s\n" exprs-len len)
-    (> exprs-len len)))
-
 (define (write-each-example/wescheme funname show-funname? args show-args? body show-body?)
   ; (printf "write-each-example/scheme ~s ~s body= ~s\n" funname args body)
   (string-append

@@ -1726,15 +1726,15 @@
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
-
-                           [(string=? directive "ifpathway")
-                            ;(printf "doing ifpathway ~s\n" *pathway*)
-                            (let ([pathways (read-commaed-group i directive read-group)])
-                              (cond [(member *pathway* pathways)
-                                     (display-begin-span #f o)]
-                                    [else
-                                      (read-group i directive)
-                                      (set! possible-beginning-of-line? (read-space i))]))]
+                           [(or (string=? directive "ifpathway")
+                                (string=? directive "ifnotpathway"))
+                            (let ([pathways (read-commaed-group i directive read-group)]
+                                  [pfx (if (string=? directive "ifpathway") ".pathway-"
+                                           ".notpathway-")])
+                              (display-begin-span
+                                (apply string-append
+                                  (map (lambda (p) (string-append pfx (string-trim p)))
+                                       pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak") o]
@@ -1784,7 +1784,7 @@
                                     [else
                                       (let* ([newly-added? (add-starter-file lbl)]
                                              [p (hash-ref c *proglang-sym* #f)]
-                                             [starter-file-title (or (hash-ref p 'title #f)
+                                             [starter-file-title (or (and p (hash-ref p 'title #f))
                                                                      (hash-ref c 'title))])
                                         (set! starter-file-title
                                           (regexp-replace* #rx"," starter-file-title "\\&#x2c;"))
@@ -1864,11 +1864,11 @@
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [(string=? directive "Q")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "A")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
