@@ -277,6 +277,15 @@ to populate the `distribution/` directory with the built documentation.
   time-consuming process and is required only after the author is sure
   that the HTML conversions have been thoroughly debugged
 
+- `clean` -- removes `distribution/` so the next make builds from
+  scratch. If this is the only option, there is no build done!
+
+- `deploy` -- deploys. (See section on "Deployment")
+
+- `force` -- removes `distribution/` and builds from scratch
+
+- `help` -- displays a brief help message
+
 - `linkcheck` -- checks the various internal and external links in
   the documents to ensure they are valid. By default, this check isn't
   done to save time
@@ -294,6 +303,10 @@ build:
 - `YEAR=yyyy` -- typically the four-digit year
   of the Common Era. The default is the current year followed by
   `-BETA`
+
+- `COURSE=p1,p2,...` -- if `book` is also specified, this makes the
+  workbook PDFs and the related lesson PDFs _only_ for the comma-separated
+  pathways `p1`, `p2`, `...` specified
 
 [IMPORTANT]
 --
@@ -423,31 +436,6 @@ changed:
 
     make SKIPLIB=true deploy
 --
-
-=== The build wrapper
-
-A Bash script `build` is provided as a convenient wrapper for `make`:
-
-`build` takes the following options:
-
-- `--book` (aka `--pdf`, `-b`): generates PDFs, both for
-  individuals and the workbooks
-- `--deploy`: deploys to website. If dir `distribution/` not found,
-  makes it first; otherwise uses already-built distribution
-- `--force` (aka `--superforce`, `--super-force`, `-f`, `-F`):
-  builds from scratch, scrubbing any previous `distribution/`
-- `--help` (aka `-h`): displays help and exists
-- `--link` (aka `--verify-links`, `-l`): verify all the links in
-  the documentation
-- `--natlang L`: builds doc for the natural language `L`
-  (default: `en-us`)
-- `-bf` or `-fb`: combination of `-f` and `-b`
-
-Options can be combined in any order.
-
-NOTE: There was an older script called `build-pathway` that our authors have
-gotten used to. It is provided as a trivial identity wrapper for
-`build`.
 
 == Standards compliance
 
