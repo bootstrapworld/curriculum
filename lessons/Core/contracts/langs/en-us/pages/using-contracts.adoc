@@ -2,10 +2,8 @@
 
 Use the contracts to write expressions to generate images similar to those pictured. Go to @starter-file{editor} to test your code.
 
-[.center]
---
-@show{(contract 'ellipse '("Number" "Number" "String" "String") "Image")}
---
+@show{(contract 'ellipse '((width Number) (height Number) (fill-style String) (color String)) "Image")}
+
 
 [.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
@@ -19,20 +17,11 @@ Use the contracts to write expressions to generate images similar to those pictu
 
 @showsoln{(code '(ellipse 150 50 "solid" "black")) }
 
-| What changes with the first Number?
-| @ifsoln{width}
-
-| What about the shape changes with the second Number?
-| @ifsoln{height}
-
 | Write an expression using @show{(code 'ellipse)} to produce a circle.
 | @showsoln{(code '(ellipse 50 50 "solid" "black")) }
 |===
 
-[.center]
---
-@show{(contract 'regular-polygon '("Number" "Number" "String" "String") "Image")}
---
+@show{(contract 'regular-polygon '((side-length Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
 
 [.FillVerticalSpace, cols="^.^1a,^.^2a",stripes="none"]
 |===
@@ -45,12 +34,6 @@ Use the contracts to write expressions to generate images similar to those pictu
 | Use the Contract to write an expression that generates a similar image:
 
 @showsoln{(code '(regular-polygon 25 8 "outline" "black")) }
-
-| What changes with the first Number?
-| @ifsoln{the length of each side}
-
-| What about the shape changes with the second Number?
-| @ifsoln{the number of sides}
 
 | Use @show{(code 'regular-polygon)} to write an expression for a square!
 | @showsoln{(code '(regular-polygon 50 4 "solid" "black")) }

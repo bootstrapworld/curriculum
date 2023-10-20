@@ -14,27 +14,28 @@ Respond to the questions. Go to @starter-file{editor} to test your code.
 @n What kind of triangle does the `triangle` function produce?  @fitb{}{@ifsoln{equilateral}}
 @vspace{1ex}
 
-There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles!
+There are lots of other kinds of triangles!  And @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} has lots of other functions that make triangles! Let's start with these.
 @vspace{1ex}
 
 [.forceShading]
 --
-@show{(code 'triangle)}`{two-colons} (size{two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
+@hspace{3em} @show{(contract 'triangle '((size Number) (fill-style String) (color String)) "Image")}
 
-@show{(code 'right-triangle)}`{two-colons} (base{two-colons}Number, height{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
+@hspace{3em} @show{(contract 'right-triangle '((base Number) (height Number) (fill-style String) (color String)) "Image")}
 
-@show{(code 'isosceles-triangle)}`{two-colons} (leg{two-colons}Number, angle{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
+@hspace{3em} @show{(contract 'isosceles-triangle '((leg Number) (angle Number) (fill-style String) (color String)) "Image")}
+
 --
 
 @vspace{1ex}
 
-@n Why do you think @show{(code 'triangle)} only needs one number, while @show{(code 'right-triangle)} and @show{(code 'isosceles-triangle)} need two numbers and @show{(code 'triangle/sas)} needs three?
+@n Why do you think @show{(code 'triangle)} only needs one number, while @show{(code 'right-triangle)} and @show{(code 'isosceles-triangle)} need two numbers? 
 
-@fitb{}{@ifsoln{`triangle` makes equilateral triangles, so the angle is fixed at 60°. right-triangle needs to}}
+@fitb{}{@ifsoln{`triangle` makes equilateral triangles, so the angle is fixed at 60° and we only need to know one side length. }}
 
-@fitb{}{@ifsoln{know the length of the two legs, and triangle/sas needs to know both sides AND an angle }}
+@fitb{}{@ifsoln{`right-triangle` needs to know the length of the two legs because they are different!}}
 
-@n Write @show{(code 'right-triangle)} expressions for the images below. _One argument for each should be `100`._
+@n Write @show{(code 'right-triangle)} expressions for the images below using `100` as one argument for each._
 
 [.indented-para]
 --

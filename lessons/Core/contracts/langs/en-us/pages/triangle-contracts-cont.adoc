@@ -40,21 +40,20 @@ Think about how you would describe each of the arguments that @show{(code 'trian
 
 [.forceShading]
 --
-@show{(code 'triangle-sas)}`{two-colons} (`
-
-[.indentedpara]
-@fitb{30em}{@ifsoln{`side1`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`angle`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`side2`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`style`}} `{two-colons} String,`
-@fitb{30em}{@ifsoln{`color`}} `{two-colons} String`
-
+@show{(code 'triangle-sas)} {two-colons} `(`
+@fitbruby{9em}{Number}{@ifsoln{top-side}},  
+@fitbruby{9em}{Number}{@ifsoln{top-right-angle}}, 
+@fitbruby{9em}{Number}{@ifsoln{bottom-right-side}},
+@fitbruby{9em}{String}{@ifsoln{fill-style}},
+@fitbruby{9em}{String}{@ifsoln{color}}
 `) -> Image`
+
+@vspace{3ex}
 --
 
 @vspace{1ex}
 
-If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages.
+_If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages._
 
 @vspace{1ex}
 
@@ -62,13 +61,15 @@ If you have time, experiment with the @show{(code 'triangle-asa)} function.
 
 [.forceShading]
 --
-@show{(code 'triangle-asa)}`{two-colons} (`
-```
-	left-angle :: Number,
-	left-side :: Number,
-	bottom-angle :: Number,
-	style :: String
-	color :: String
-) -> Image
-```
+@show{(code 'triangle-asa)} {two-colons} `(`
+@fitbruby{9em}{Number}{top-left-angle},  
+@fitbruby{9em}{Number}{left-side}, 
+@fitbruby{9em}{Number}{bottom-angle},
+@fitbruby{9em}{String}{fill-style},
+@fitbruby{9em}{String}{color}
+`) -> Image`
 --
+
+@star Why did these two functions need to take in one more Number than `right-triangle` did?
+
+@fitb{}{@ifsoln{Because right triangles have one fixed angle and that means that the ratio of base to height can be used to determine the other two angles!}}
