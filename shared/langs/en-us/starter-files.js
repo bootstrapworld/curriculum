@@ -482,7 +482,7 @@ var MoreAlg = {
       "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=jJqUDeN8a7"
+      "url": "https://www.wescheme.org/openEditor?publicId=jJqUDeN8a7"
     }
   },
   "inequalities-compound": {
