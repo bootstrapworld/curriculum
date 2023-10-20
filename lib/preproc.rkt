@@ -1784,7 +1784,7 @@
                                     [else
                                       (let* ([newly-added? (add-starter-file lbl)]
                                              [p (hash-ref c *proglang-sym* #f)]
-                                             [starter-file-title (or (hash-ref p 'title #f)
+                                             [starter-file-title (or (and p (hash-ref p 'title #f))
                                                                      (hash-ref c 'title))])
                                         (set! starter-file-title
                                           (regexp-replace* #rx"," starter-file-title "\\&#x2c;"))
