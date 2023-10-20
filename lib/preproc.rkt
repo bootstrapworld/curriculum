@@ -1864,11 +1864,11 @@
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [(string=? directive "Q")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "A")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
