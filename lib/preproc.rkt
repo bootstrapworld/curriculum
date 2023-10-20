@@ -1726,15 +1726,15 @@
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
-
-                           [(string=? directive "ifpathway")
-                            ;(printf "doing ifpathway ~s\n" *pathway*)
-                            (let ([pathways (read-commaed-group i directive read-group)])
-                              (cond [(member *pathway* pathways)
-                                     (display-begin-span #f o)]
-                                    [else
-                                      (read-group i directive)
-                                      (set! possible-beginning-of-line? (read-space i))]))]
+                           [(or (string=? directive "ifpathway")
+                                (string=? directive "ifnotpathway"))
+                            (let ([pathways (read-commaed-group i directive read-group)]
+                                  [pfx (if (string=? directive "ifpathway") ".pathway-"
+                                           ".notpathway-")])
+                              (display-begin-span
+                                (apply string-append
+                                  (map (lambda (p) (string-append pfx (string-trim p)))
+                                       pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak") o]
