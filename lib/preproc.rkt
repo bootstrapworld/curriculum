@@ -2196,7 +2196,9 @@
             (when (and (empty? *opt-printable-exercise-links*)
                        (empty? *opt-starter-file-links*)
                        (empty? *opt-online-exercise-links*))
-              (fprintf o "_This lesson has no supplemental materials (yet!)_"))
+              (printf "WARNING: ~a has no supplemental materials yet!\n\n" (errmessage-context))
+              ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
+              )
 
             )
           #:exists 'replace)
