@@ -1,52 +1,19 @@
 [.canBeLongerThanAPage]
 = Computing Needs All Voices!
-
+////
+* Import Poster Printing/CSS
+*
+* This includes some inline CSS which controls thumbnail and status bar display
+* As well as the custom JS needed for collating all the pioneer PDFs
+////
+@include{fragments/posters-fragment.adoc}
 ++++
-<style>
 
-.thumbnailList li {
-	list-style: none;
-	display: inline-block;
-	margin: 2px;
-}
-.thumbnailList li img {
-	max-width: 200px;
-}
-.thumbnailList li img:hover {
-	box-shadow: black 2px 2px 4px;
-}
-
-#msg {
-	height:		1rem;
-	border: 	solid 1px black;
-	position: 	relative;
-	display: 	none;
-	vertical-align: middle;
-}
-#text {
-	font-size: 	0.75rem;
-	line-height:0.75rem;
-	color: 		black;
-	margin: 	0;
-	width: 		100%;
-	text-align:	center;
-}
-#text, #statusbar { position: absolute; top: 0; left: 0; }
-#statusbar { width: 0%; height: 100%; background: #75328A55; z-index: -1; }
-#PrintInstructions { display: none; }
-
-@media print {
-	#PrintInstructions { display: inline; }
-	#OnscreenInstructions { display: none; }
-	.thumbnailList li img { max-width: 125px; }
-}
-
-</style>
 <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
 <script src="https://unpkg.com/downloadjs@1.4.7"></script>
 
 <span id="OnscreenInstructions">
-Click on any thumbnail below to read about the contributions of the pioneer and download a full-page, printable version of the poster. You can download all of the pages as a single PDF by <a href="javascript:printPioneers()">clicking here</a>. We will be expanding this collection over time and are open to <a href="https://docs.google.com/forms/d/e/1FAIpQLSesCHpWZFuD4HE-im9qwjQZpw6pG2ESS5s-DfxfhACV-wQo0Q/viewform?usp=sf_link"> suggestions</a>!
+Click on any thumbnail below to read about the contributions of the pioneer and download a full-page, printable version of the poster. You can download all of the pages as a single PDF by <a href="javascript:printPioneers('../')">clicking here</a>. We will be expanding this collection over time and are open to <a href="https://docs.google.com/forms/d/e/1FAIpQLSesCHpWZFuD4HE-im9qwjQZpw6pG2ESS5s-DfxfhACV-wQo0Q/viewform?usp=sf_link"> suggestions</a>!
 </span>
 
 <span id="PrintInstructions">
@@ -62,108 +29,19 @@ The pioneers pictured below are featured in our Computing Needs All Voices lesso
 <div id="thumbnails">
 </div>
 
+<script src="pioneers.js"></script>
 <script>
-var pioneers = [
-// on web these display 3 to a row. in workbook they display 5 to a row.
+	var list = document.createElement('ul');
+	list.className = "thumbnailList";
 
-	"guillermo-camarena",
-	"vicki-hanson",
-	"mark-dean",
-	"farida-bedwei",
-	"ajay-bhatt",
-
-// row break in workbook
-
-	"thomas-david-petite",
-	"timnit-gebru",
-	"ellen-ochoa",
-	"alan-turing",
-
-	"ruchi-sanghvi",
-
-// row break in workbook
-
-	"joy-buolamwini",
-	"audrey-tang",
-	"robert-moses",
-	"chieko-asakawa",
-	"lisa-gelobter",
-
-// row break in workbook
-
-	"taher-elgamal",
-	"evelyn-granville",
-	"katherine-johnson",
-	"margaret-hamilton",
-	"grace-hopper",
-
-// row break in workbook
-
-	"jerry-lawson",
-	"lynn-conway",
-	"clarence-ellis",
-	"shaffi-goldwasser",
-	"luis-von-ahn",
-
-// row break in workbook
-
-	"mary-golda-ross",
-	"jon-maddog-hall",
-	"tim-cook",
-	"al-khwarizmi",
-	"ada-lovelace"
-	//"cristina-amon",
-	//"kimberly-bryant",
-	//"laura-gomez",
-];
-var list = document.createElement('ul');
-list.className = "thumbnailList";
-
-pioneers.forEach((p) => {
-	var li = document.createElement('li');
-	var altText = p.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
-	li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png" alt="${altText}"></a>`;
-	list.appendChild(li);
-});
-document.getElementById('thumbnails').appendChild(list);
-
-// load required symbols, trim the dependency graph
-const { PDFDocument, rgb, degrees } = PDFLib
-
-async function printPioneers() {
-	// show status bar
-	const msg = document.getElementById('msg');
-	const text = document.getElementById('text');
-	const statusbar = document.getElementById('statusbar');
-	text.innerHTML = "Gathering pages...";
-	msg.style.display = "block";
-
-  	const pdfDoc = await PDFDocument.create();
-	urls = pioneers.map(p => `../pages/${p}.pdf`);
-	urls.unshift("../pages/pioneers-cover.pdf"); // add cover page to beginning
-    for (const [i, url] of urls.entries()) {
-		statusbar.style.width = 100 * (i / (urls.length-1)) + "%";
-	    const page = pdfDoc.addPage();
-	    const bytes = await fetch(url).then((res) => res.arrayBuffer());
-	    const [embedded] = await pdfDoc.embedPdf(bytes);
-	    const dimensions = embedded.scale(1.0);
-	    const pageSettings = {
-	      x: (page.getWidth()  / 2) - dimensions.width  / 2,
-	      y: (page.getHeight() / 2) - dimensions.height / 2,
-	    };
-	    page.drawPage(embedded, {...dimensions, ...pageSettings});
-	};
-	text.innerHTML = "Assembling pages into one PDF..."
-	const pdfBytes = await pdfDoc.save()
-	text.innerHTML = "Your PDF is ready! Downloading now.";
-	download(pdfBytes, "ComputingPioneers.pdf", "application/pdf");
-
-	// hide and reset status bar
-	msg.style.display = "none";
-	statusbar.style.width = "0";
-}
+	pioneers.forEach((p) => {
+		var li = document.createElement('li');
+		var altText = p.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
+		li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png" alt="${altText}"></a>`;
+		list.appendChild(li);
+	});
+	document.getElementById('thumbnails').appendChild(list);
 </script>
-
 <span id="PrintInstructions">
 We are in the process of expanding our collection of pioneers. If there's someone else whose work inspires you, please let us know at <a href="https://bit.ly/pioneer-suggestion">https://bit.ly/pioneer-suggestion</a>.
 </span>

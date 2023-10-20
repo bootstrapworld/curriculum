@@ -1,4 +1,11 @@
 = Computing Needs All Voices
+////
+* Import Poster Printing/CSS
+*
+* This includes some inline CSS which controls thumbnail and status bar display
+* As well as the custom JS needed for collating all the pioneer PDFs
+////
+@include{pages/fragments/posters-fragment.adoc}
 
 @description{Students learn about a diverse group of programmers through a short film and a gallery walk of our Pioneers in Computing and Mathematics poster series, then consider the problem solving advantages that diverse teams foster.}
 
@@ -28,11 +35,19 @@
 * @link{pages/computing-pioneers.html, Pioneers in Computing and Mathematics}
 
 @material-links
-* _Downloadable Poster Set:_ @handout{pages/computing-pioneers.pdf}
+
 
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
+
+++++
+<a href="javascript:printPioneers()">Downloadable Poster Set</a> of all Computing Pioneers
+<div id="msg">
+	<p id="text"></p>
+	<span id="statusbar"></span>
+</div>
+++++
 
 | Preparation
 |
