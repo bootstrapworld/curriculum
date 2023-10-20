@@ -124,10 +124,19 @@ help:
 	@echo "  make book         -- updates PDFs and workbooks too"
 	@echo "  make linkcheck    -- additionally verifies all links"
 	@echo "  make force [book] -- build from scratch"
+	@echo "                       equivalent to:    make clean; make [book]"
 	@echo
 	@echo The following do not build
 	@echo
 	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
 	@echo "  make deploy       -- deploys existing distribution/ to webhost"
 	@echo "  make help         -- displays (this) help"
-
+	@echo
+	@echo The following guide the course of the build
+	@echo
+	@echo "  make book COURSE=algebra-pyret"
+	@echo "                    -- makes PDFs only for algebra-pyret and its lessons"
+	@echo "  make book COURSE=algebra-pyret,data-science"
+	@echo "                    -- COURSE takes comma-separated list of pathways"
+	@echo "  make NATLANG=es-mx"
+	@echo "                    -- builds for natural language es-mx. (Default: en-us)"
