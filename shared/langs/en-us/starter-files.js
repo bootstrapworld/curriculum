@@ -479,10 +479,10 @@ var MoreAlg = {
   "inequalities-simple": {
     "title": "Simple Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
+      "url": "https://code.pyret.org/editor#share=1YMSkIfzhfb9ykOhG7ToBjROwp3-TjeOE&v=4d870d2"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=ytUfr7fCwY"
+      "url": "https://www.wescheme.org/view?publicId=meMnPog2yl"
     }
   },
   "inequalities-compound": {
