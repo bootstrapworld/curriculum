@@ -194,7 +194,12 @@ The first thing the spider does is cross over a curved line (an open parenthesis
 }
 
 @ifproglang{pyret}{
-The first thing the spider does is cross over a curved line (an open parenthesis!). For Circles of Evaluation with _operators_ (addition, subtraction, etc.), the spider visits the first number on the left, then she visits the top of the circle for the operation, then the number on the right. Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
+* The first thing the spider does is cross over a curved line (an open parenthesis!). 
+* For Circles of Evaluation with _operators_ (addition, subtraction, etc.):
+** the spider visits the first number on the left
+** then she visits the top of the circle for the operation
+** then she visit the number on the right 
+* Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 }
 }
 
@@ -207,9 +212,9 @@ For now, we'll focus on Circles of Evalutation with @vocab{operators}.
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
 
-|*Expression*			| &rarr; | @show{(math '(+ 3 8)) }
+|*Expression*			      | &rarr; | @show{(math '(+ 3 8)) }
 |*Circle of Evaluation*	| &rarr; | @show{(coe  '(+ 3 8)) }
-|*Code*					| &rarr; | @show{(code '(+ 3 8) #:parens true) }
+|*Code*					        | &rarr; | @show{(code '(+ 3 8) #:parens true) }
 |===
 
 @ifproglang{wescheme}{
@@ -221,12 +226,15 @@ Arithmetic expressions involving more than one operation, will end up with more 
 @ifproglang{wescheme}{and more than one pair of parentheses.}
 @ifproglang{pyret}{and, whether or not there are parentheses in the original expression, the code requires parentheses to clarify the order in which the operations should be completed.}
 
+@do{
+  (define exprA '(+ 7 (* 3 2)))
+}
+
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-
-|*Expression*			| &rarr; | @show{(math '(* 2 (+ 3 8))) }
-|*Circle of Evaluation*	| &rarr; | @show{(coe  '(* 2 (+ 3 8))) }
-|*Code*					| &rarr; | @show{(code '(* 2 (+ 3 8)) #:parens true) }
+|*Expression*			      | &rarr; | @show{(math exprA)}
+|*Circle of Evaluation*	| &rarr; | @show{(coe exprA)}
+|*Code*					        | &rarr; | @show{(code exprA #:parens true) }
 |===
 
 @QandA{
@@ -239,19 +247,19 @@ Fill in the blanks to complete the code for each Circle of Evaluation on @printa
 }
 
 @QandA{
-@Q{What would the code look like for these circles?
-
+@Q{What would the code look like for these circles? 
++
 @do{
   (define expr1 '(/ 6 (+ 1 2)))
   (define expr2 '(* (- 10 5) 6))
 }
-
 [.embedded, cols="^.^1a,^.^1a", grid="none", stripes="none" frame="none"]
 |===
 |@show{(coe expr1)}		| @show{(coe expr2)}
 |===
 }
-@A{ @show{(code expr1 #:parens true)}	@hspace{10em} @show{(code expr1 #:parens true)}
+@A{ {empty} 
+@hspace{9em} @show{(code expr1 #:parens true)}	@hspace{12em} @show{(code expr2 #:parens true)}
 }
 
 }
@@ -261,10 +269,10 @@ Fill in the blanks to complete the code for each Circle of Evaluation on @printa
 @lesson-instruction{
 - Turn to @printable-exercise{pages/3-column-intro.adoc}. On this page, both the Arithmetic Expression and Circles of Evaluation are provided. All you have to do is translate them into code.
 - Once you confirm that your code is correct, continue on to @printable-exercise{pages/3-column-outro.adoc}.
-- If time allows, take turns entering the code into the editor with your partner.
+- If time allows, take turns entering the code into @starter-file{editor} with your partner.
 }
 
-@teacher{We have lots of challenge materials in the @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson so that you're ready to challenge students who fly, including @printable-exercise{pages/3-column-challenge.adoc}}
+@teacher{We have lots of challenge materials, including @printable-exercise{pages/3-column-challenge.adoc}, available in the @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson so that you're ready to challenge students who fly.}
 
 
 @strategy{
@@ -274,8 +282,9 @@ MLR 7 - Compare and Connect: Gather students' graphic organizers to highlight an
 }
 
 === Synthesize
-Have students share back what they learned from the Circles of Evaluation.
-
+- What is something that's working well for you about using the Circles of Evaluation?
+- What is something that is challenging for you about using the Circles of Evaluation?
+- What questions do you still have about the Circles of Evaluation?
 - If an expression has three sets of parentheses, how many Circles of Evaluation do you expect to need?
 
 @ifproglang{pyret}{
@@ -286,7 +295,6 @@ As in math, **there are some cases where the outermost parentheses can be remove
 
 You will likely see code written using this "shortcut", but it's always better to at least start with the parentheses to make sure your math/code is _correct_ before taking them out. **It is never wrong to include them!**
 }
-
 
 == Testing out your Code @duration{optional}
 
@@ -367,6 +375,7 @@ If you are digging into Order or Operations and are looking for more practice wi
 * @opt-printable-exercise{pages/coe-to-arith2.adoc}
 * @opt-printable-exercise{pages/evaluate-coe.adoc}
 * @opt-printable-exercise{pages/evaluate-coe2.adoc}
+* @opt-printable-exercise{pages/why-not-commutative.adoc}
 
 More practice connecting Circles of Evaluation to Code
 
