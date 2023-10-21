@@ -379,14 +379,44 @@ link:./README-slides.adoc[].
 For more on the build process in general, see
 link:lib/maker/doc/index.adoc[].
 
-=== Cleaning
+=== Sensible re-making
 
-The `make` target `clean` scrubs any existing `distribution`.
+As expected of `make`, subsequent calls to it will only rebuild those
+files in the `distribution/` that need to be updated, based on
+modifications to the source files in the repo.
 
-    make clean
+However, if you haven't changed the source docs, but there have been
+changes to the building programs themselves (in `lib/`), or the
+library/data files (in `shared/`), you will often need to regenerate the
+entire `distribution/` from scratch.
 
-The next
-`make` builds anew.
+You can manually delete the `distribution` directory and make again.
+
+Alternatively, you can use the `make` target `clean`:
+
+   make clean
+
+This deletes any existing `distribution` (it is not an error if it doesn't
+exist). A subsequent `make` builds anew.
+
+You can also use `make force` followed by any other options (if needed).
+This implicitly calls `make clean` before proceeding with the other
+options.
+
+Remember, re-making the entire distribution takes time, and is often too
+drastic a step if you're working on one or two lessons, are
+satisfied with local debugging, and immediate deployment is not the
+goal. In such cases, you can simply go into `distribution/en-us/lessons`
+and manually delete the lessons you want rebuilt. You can also manually
+delete pathways in `distribution/en-us/courses` to rebuild specific
+pathways. A subsequent `make` (even without `force`) will cleanly re-make
+just your desired lessons and/or pathways, leaving the rest of the
+`distribution/` untouched.
+
+Be careful while deleting stuff in `distribution/` expecting them to be
+regenerated. Deleting at too fine a grain (just one file, say) may not
+always succeed in regenerating it. It's best to stick to deleting whole
+lessons or pathways.
 
 === Deployment
 
@@ -721,7 +751,6 @@ word in the source is used to find the relevant sublist, and _its_ first
 item is used in the generated glossary.
 
 - \"description\", the definition for the glossed item.
-
 
 [TIP]
 --
