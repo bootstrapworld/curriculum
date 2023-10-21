@@ -15,8 +15,7 @@ for lessonName in *; do
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   lessonNamePl=
   for pl in $proglangs; do
-    test "$pl" = pyret && continue
-    test "$pl" = none && continue
+    test "$pl" = pyret -o "$pl" = none && continue
     lessonNamePl="$lessonName"-$pl
     test -d "$lessonNamePl" && continue
     echo re-added lesson $lessonNamePl
