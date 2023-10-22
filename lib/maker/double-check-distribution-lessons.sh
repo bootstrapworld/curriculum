@@ -7,11 +7,13 @@ source ${MAKE_DIR}src-subdir-mgt.sh
 cd distribution/$NATLANG/lessons
 
 for lessonName in *; do
-  # echo checking $lessonName
   test -d $lessonName || continue
   test -f $lessonName/.cached/.proglang-pyret || continue
-  test -f $lessonName/proglang.txt || continue
-  proglangs=$(cat $lessonName/proglang.txt)
+  proglangfile=$lessonName/proglang.txt
+  test -f $proglangfile || continue
+  test $(wc -l $proglangfile | cut -d" " -f1) -gt 1 || continue
+  # echo checking $lessonName
+  proglangs=$(cat $proglangfile)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
   lessonNamePl=
   for pl in $proglangs; do
