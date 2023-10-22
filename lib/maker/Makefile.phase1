@@ -129,5 +129,5 @@ distribution/$(NATLANG)/lib/starter-files.json: $(PROGDIR)/starter-files.js
 ###############################################################################
 
 courses-and-lessons: copy-lessons copy-pathways
+	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
 	$(MAKE_DIR)collect-distribution-info.lua
-
