@@ -4,6 +4,7 @@
 var Editors = {
   "editor": {
     "title": "the editor",
+    "autoinclude": false,
     "pyret": {
       "url": "https://code.pyret.org/editor",
       "title": "code.pyret.org (CPO)"
@@ -19,6 +20,7 @@ var Editors = {
   },
   "program-list": {
     "title": "program list",
+    "autoinclude": false,
     "pyret": {
       "url": "https://code.pyret.org/",
       "title": "code.pyret.org (CPO)"
