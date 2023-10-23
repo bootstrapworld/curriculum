@@ -2,9 +2,9 @@
 #
 # make SEMESTER=spring YEAR=2022
 
-export SEMESTER ?= fall
+export SEMESTER := fall
 
-export YEAR ?= $(shell date +%Y)
+export YEAR := $(shell date +%Y)
 
 # default NATLANG is en-us. To override: make NATLANG=es-mx
 
