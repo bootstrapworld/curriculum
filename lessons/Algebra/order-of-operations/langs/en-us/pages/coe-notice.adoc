@@ -2,57 +2,42 @@
 
 Let's take a look at a few @vocab{Circles of Evaluation} before we learn to draw them ourselves.
 
-[.FillVerticalSpace, cols="2a,3a,2a", options="header"]
-|===
-| Circle of Evaluation
-| What do you Notice?
-| What do you Wonder?
+@vspace{1ex}
 
+[cols="^1a, ^2a, ^2a, ^3a, ^3a"]
+|===
 |@show{(coe '(* 5 6))}
+@ifsoln{@math{5 \times 6}}
+|@show{(coe '(* (/ 15 3) 6))}
+@ifsoln{@math{15 \div 3 \times 6}}
+|@show{(coe '(* 5 (- 28 22)))}
+@ifsoln{@math{5 \times (28 - 22)}}
+|@show{(coe '(* (/ 15 (- 4 1)) 2))}
+@ifsoln{@math{15 \div (4 - 1) \times 2}}
+@vspace{3ex}
+|@show{(coe '(* (/ 15 3) (- 28 22)))}
+@ifsoln{@math{15 \div 3 \times (28 - 22)}}
+|===
+
+@vspace{1ex}
+
+[.FillVerticalSpace,cols="1a,1a", options="header"]
+|===
+|What do you Notice?
+|What do you Wonder?
 |@ifsoln{
-- Answers will vary. 
-- Discuss that the 
+Answers will vary. Discuss that 
+- the 
 @ifproglang{wescheme}{function} 
 @ifproglang{pyret}{operator}
 is at the top of the circle.
-- Be sure they recognize it represents the expression + 
-@math{5 \times 6}
-}
-|
-
-|@show{(coe '(* (/ 15 3) 6))}
-| @ifsoln{
-- Answers will vary. 
-- Be sure they know that `/` is the symbol computers use for division.
-- Discuss that each
+- `/` is the symbol computers use for division.
+- each
 @ifproglang{wescheme}{function} 
 @ifproglang{pyret}{operator}
 gets its own circle, but circles can contain circles.
-- Be sure they recognize that it represents the expression +
-@math{15 \div 3 \times 6}
-}
-| 
-
-|@show{(coe '(* 5 (- 28 22)))}
-| @ifsoln{
-- Be sure they recognize that it represents the expression + 
-@math{5 \times (28 - 22)}
+- the first four expressions on this page evaluate to the same thing.
 }
 |
-
-|@show{(coe '(* (/ 15 3) (- 28 22)))}
-| @ifsoln{
-- Be sure they recognize that it represents the expression +
-@math{15 \div 3 \times (28 - 22)}
-- The first four expressions on this page evaluate to the same thing.
-}
-|
-
-|@show{(coe '(* (/ 15 (- 4 1)) 2))}
-| @ifsoln{
-- Be sure they recognize that it represents the expression +
-@math{15 \div (4 - 1) \times 2}
-}
-|
-
 |===
+

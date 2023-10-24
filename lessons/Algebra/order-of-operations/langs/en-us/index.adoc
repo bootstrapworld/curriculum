@@ -80,7 +80,7 @@ Imagine what might happen if someone tried to follow these steps:
  
 Sometimes we need multiple expressions in mathematics, and the order matters there, too!
 
-Mathematicians didn’t always agree on the order of operations, but at some point it became important to establish conventions that would allow them to work together.
+Mathematicians didn’t always agree on the Order of Operations, but at some point it became important to establish conventions that would allow them to work together.
 
 @lesson-instruction{
 
@@ -90,11 +90,10 @@ This math problem went viral on social media recently, with math teachers arguin
 
 - Take a minute to think about the answer before we learn a new strategy for _drawing the structure_ of this expression so that we can settle the debate! 
 - Then turn to @printable-exercise{coe-notice.adoc} and take a minute to record what you Notice and Wonder about the @vocab{Circles of Evaluation} you see.
+- What did you Notice?
+- What did you Wonder?
 }
 
-@teacher{Before debriefing, give students a second chance to engage with the expressions on the Notice and Wonder after introducing the rules for Circles of Evaluation.}
-
-@lesson-instruction{
 *The rules for drawing Circles of Evaluation are simple:*
 
 1) Every Circle must have one - and only one! - @ifproglang{pyret}{operator or} function, written at the top.
@@ -103,9 +102,17 @@ This math problem went viral on social media recently, with math teachers arguin
 
 3) Circles can contain other Circles.
 
+@lesson-instruction{
+- Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}
 }
 
 @QandA{
+@Q{What should we do first?}
+@A{It depends! We can either work 
+- outside in: @show{(coe '(- 10 (?ANS ?ANS ?ANS)))}
+- or inside out: @show{(coe '(?ANS ?ANS (+ 5 3)))}
+- Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
+}
 @Q{Take another minute and see if you can figure out what expression each of the Circles of Evaluation on @printable-exercise{coe-notice.adoc} represents.
 }
 @A{ {empty}
@@ -127,13 +134,7 @@ This math problem went viral on social media recently, with math teachers arguin
 |===
 }
 
-@Q{What else did you Notice and Wonder? __Answers will vary!__ }
-@A{Students may have noticed that the first 4 expressions evaluate to the same thing.}
-@A{Students may have noticed that included circles can be on the left or on the right.}
 
-@Q{How would we draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}?}
-@A{@show{(coe '(- 10 (+ 5 3)))}}
-}
 
 === Investigate
 
