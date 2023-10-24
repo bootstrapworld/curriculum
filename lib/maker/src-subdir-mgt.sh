@@ -74,3 +74,28 @@ function make_solution_pages() {
   test -d pages/.cached || mkdir -p pages/.cached
   test -d solution-pages/.cached || mkdir -p solution-pages/.cached
 }
+
+function set_up_lesson_dir() {
+  local lessonNamePl=$1
+  local pl=$2
+  local firstproglang=$3
+  cd "$lessonNamePl"
+  mkdir -p .cached
+  touch .cached/.proglang-$pl
+  echo $pl > .cached/.record-proglang
+  echo $superdir > .cached/.record-superdir
+  ${TOPDIR}/${MAKE_DIR}make-slides.lua
+  touch .cached/.redo
+  test "$firstproglang" = $pl && touch .cached/.primarylesson
+  test -d pages || mkdir pages
+
+  for subdir in *; do
+    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
+  done
+  #
+  make_solution_pages
+
+  # echo calling collect-work-pages.lua in $(pwd)
+  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
+  cd ..
+}
