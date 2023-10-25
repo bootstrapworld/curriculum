@@ -732,10 +732,12 @@ var allStarterFiles = {
 
 const fs = require('fs');
 
-const ofile = process.argv[2];
+const jsFile = process.argv[2];
 
-if (fs.existsSync(ofile)) {
-  fs.unlinkSync(ofile);
+if (fs.existsSync(jsFile)) {
+  fs.unlinkSync(jsFile);
 }
 
-fs.writeFileSync(ofile, JSON.stringify(allStarterFiles));
+const jsonString = JSON.stringify(allStarterFiles);
+
+fs.writeFileSync(jsFile, 'var starterFiles = ' + jsonString + ';\n');
