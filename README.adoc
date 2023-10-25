@@ -843,11 +843,38 @@ introduce a recipe that needs to be debugged. For examples of
 such recipes, please see the `.adoc` files in the various
 `fragments` subdirectories in the repo.
 
-Some exercise files are more elaborate than recipes and contain
+==== Calling preproc routines directly
+
+Some files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
 use some extra directives like `@do`, `@show`, `@showsoln`, and `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
+
+===== Code fragments
+
+`@show` can call the preproc procedure `code` to typeset code fragments.
+The code fragment is specified in s-expression format, and gets
+converted to the appropriate format based on the prevailing programming
+lang, e.g., s-exp for WeScheme and in-fix for Pyret.
+
+  @show{(code '(+ 1 2))}
+
+===== Circles of Evaluation (CoEs)
+
+`@show` can invoke the procedure `coe` to typeset a _circle of
+evaluation_ (_CoE_):
+
+  @show{(coe '(+ 1 2))}
+
+Sometimes portions of the code are left blank as an exercise. Use `(?ANS
+suggested-solution)` in place of such portions. In student-facing pages,
+this shows up as a blank. In solutions mode, the suggested solution is
+inserted. E.g.,
+
+  @show{(coe '(+ (?ANS 1) 2))}
+
+===== Contracts
 
 Sometimes, just a contract (part of a recipe) needs to be shown
 in the text. Use `@show` to call the Racket procedures `contract`
