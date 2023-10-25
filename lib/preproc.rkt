@@ -157,19 +157,12 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+  (let ([starter-files-file (format "distribution/~a/starter-files.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
             (read i) (read i) (read i)
             (read-json i)))
-        '())))
-
-(define *do-not-autoinclude-in-material-links*
-  (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
-    (if (file-exists? starter-files-dont-mention-file)
-        (map string->symbol
-             (call-with-input-file starter-files-dont-mention-file read-json))
         '())))
 
 (define *starter-files-used* '())
@@ -314,7 +307,7 @@
                     [else section-level])))]
         [title (string-trim (read-line i))])
     (when (and *lesson-plan* (= section-level 1))
-      (let ([section-title (string-trim (regexp-replace "@duration.*$" title ""))])
+      (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
     (fprintf o "[.lesson-section-~a]~n" section-level)
     (for ([i section-level])
@@ -1528,8 +1521,27 @@
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
                                      *containing-directory*)
-                            (when (member *proglang* '("pyret" "wescheme"))
+                            ; The line below can be deleted, once langTable links are generated via their own directive
+                            #;(when (member *proglang* '("pyret" "wescheme"))
                               (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
+                           [(string=? directive "opt-material-links")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
+                                     *lesson-subdir* *in-file*))
+                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
+                                     *containing-directory*)
+                             ]
+                           [(string=? directive "language-table")
+                            (let ([link-text (string-trim (read-group i directive))])
+                              (unless *lesson-plan*
+                                (error 'ERROR
+                                       "WARNING: @language-table (~a, ~a) valid only in lesson plan"
+                                       *lesson-subdir* *in-file*))
+                              (when (member *proglang* '("pyret" "wescheme"))
+                                (set! link-text (regexp-replace* #rx"," link-text "\\&#x2c;"))
+                                (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[~a]"
+                                         link-text)))]
                            [(string=? directive "lesson-slides")
                             (display-lesson-slides o)]
 
@@ -1709,17 +1721,19 @@
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
                                     [else (set! possible-beginning-of-line? (read-space i))]))]
-
-                           [(string=? directive "ifpathway")
-                            ;(printf "doing ifpathway ~s\n" *pathway*)
-                            (let ([pathways (read-commaed-group i directive read-group)])
-                              (cond [(member *pathway* pathways)
-                                     (display-begin-span #f o)]
-                                    [else
-                                      (read-group i directive)
-                                      (set! possible-beginning-of-line? (read-space i))]))]
+                           [(or (string=? directive "ifpathway")
+                                (string=? directive "ifnotpathway"))
+                            (let ([pathways (read-commaed-group i directive read-group)]
+                                  [pfx (if (string=? directive "ifpathway") ".pathway-"
+                                           ".notpathway-")])
+                              (display-begin-span
+                                (apply string-append
+                                  (map (lambda (p) (string-append pfx (string-trim p)))
+                                       pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
+                           [(string=? directive "slidebreak") o]
+
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
@@ -1756,22 +1770,27 @@
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)]
-                                   [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)])
+                                   [c (hash-ref *starter-files* lbl #f)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let* ([newly-added? (add-starter-file lbl)]
-                                             [p (hash-ref c *proglang-sym* #f)]
-                                             [starter-file-title (or (hash-ref p 'title #f)
-                                                                     (hash-ref c 'title))])
+                                      (let* ([link-text (and (>= (length lbl+text) 2)
+                                                             (string-join (rest lbl+text) "&#x2c; "))]
+                                             [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
+                                             [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (let* ([title (or link-text
+                                                (let* ([newly-added? (add-starter-file lbl)]
+                                                       [starter-file-title
+                                                         (regexp-replace* #rx","
+                                                           (or (and p (hash-ref p 'title #f))
+                                                               (hash-ref c 'title)
+                                                               "missing-starter-file-title")
+                                                           "\\&#x2c;")]
+                                                       [title (or link-text
                                                                   starter-file-title)]
                                                        [url (let ([url (hash-ref p 'url "")])
                                                               (cond [(string=? url "")
@@ -1787,7 +1806,7 @@
                                                            ", window=\"_blank\""
                                                            )])
                                                   (when (and newly-added?
-                                                             (not (member lbl *do-not-autoinclude-in-material-links*)))
+                                                             (hash-ref c 'autoinclude #t))
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
@@ -1843,11 +1862,11 @@
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
                            [(string=? directive "Q")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "A")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
@@ -2105,39 +2124,53 @@
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
-
-            (display-lesson-slides o)
-
+            ; REQUIRED PRINTABLE PAGES
+            (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]\n"))
+            ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            (fprintf o "\n* [.materialSectionPlaceholder]## ##\n\n")
-
-            (for ([x (reverse *handout-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-
-            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
-
-            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
-
-            (let ([xx (sort *printable-exercise-links*
-                            (lambda (x y)
-                              (let ([x-i (index-of *workbook-pages* (first x))]
-                                    [y-i (index-of *workbook-pages* (first y))])
-                                (unless x-i (set! x-i -1))
-                                (unless y-i (set! y-i -1))
-                                (cond [(and (= x-i -1) (= y-i -1)) #t]
-                                      [else (< x-i y-i)]))))])
-
-              ; (printf "xx = ~s\n" xx)
-
-              (for ([x xx])
-                (fprintf o "\n* ~a\n\n" (second x))))
-
+            ; ONLINE EXERCISES --- to be removed onces all required online exercises
+            ; have been turned into starter files
             (for ([x (reverse *online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
 
-            ; (printf "outputting opt project links ~s in extra-mat\n" *opt-project-links*)
+            ; SLIDES
+            (display-lesson-slides o)
+            ; LESSON PLAN
+            (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n")
+
+            (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
+
+            ; NOTE(Emmanuel): These are no longer used, as of Nov 2023
+            ;(for ([x (reverse *handout-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
+            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
+            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
+            ;(let ([xx (sort *printable-exercise-links*
+            ;                (lambda (x y)
+            ;                  (let ([x-i (index-of *workbook-pages* (first x))]
+            ;                        [y-i (index-of *workbook-pages* (first y))])
+            ;                    (unless x-i (set! x-i -1))
+            ;                    (unless y-i (set! y-i -1))
+            ;                    (cond [(and (= x-i -1) (= y-i -1)) #t]
+            ;                          [else (< x-i y-i)]))))])
+            ;
+            ;   (printf "xx = ~s\n" xx)
+            ;
+            ;  (for ([x xx])
+            ;    (fprintf o "\n* ~a\n\n" (second x)))
+            ;  )
+            ;(for ([x (reverse *opt-printable-exercise-links*)])
+            ;  (fprintf o "\n* ~a\n\n" x))
+
+            )
+          #:exists 'replace)
+
+        (call-with-output-file (path-replace-extension *out-file* "-extra-opt-mat.asc")
+          (lambda (o)
+
+            ; OPTIONAL PROJECTS
             (let ([opt-proj-links (reverse *opt-project-links*)])
               (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
                 (lambda (o)
@@ -2145,22 +2178,24 @@
                     (write link-pair o)
                     (newline o)))
                 #:exists 'replace)
-
-              (for ([x opt-proj-links])
-                (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
-
+            (for ([x opt-proj-links])
+              (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
+            ; OPTIONAL PRINTED PAGES
+            (unless (empty? *opt-printable-exercise-links*)
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n"))
+            ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            (for ([x (reverse *opt-printable-exercise-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-
+            ; OPTIONAL ONLINE EXERCISES
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
-
-            (fprintf o "\n* link:javascript:downloadLessonPDFs()[Download a PDF of all required pages]\n\n")
-
-            (fprintf o "+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
+            ; NO OPTIONAL ANYTHING - display a helpful message
+            (when (and (empty? *opt-printable-exercise-links*)
+                       (empty? *opt-starter-file-links*)
+                       (empty? *opt-online-exercise-links*))
+              (printf "WARNING: ~a has no supplemental materials yet!\n\n" (errmessage-context))
+              ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
+              )
 
             )
           #:exists 'replace)

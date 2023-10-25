@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-12
+-- last modified 2023-10-11
 
 local glossary_terms_file, glossary_adoc_file = ...
 
@@ -9,6 +9,8 @@ local make_dir = os.getenv'MAKE_DIR'
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
 dofile(make_dir .. 'jread.lua')
+
+dofile(os.getenv'PROGDIR' .. '/defines.lua')
 
 local glossary_list = file_exists_p(glossary_terms_file) and read_json_file(glossary_terms_file) or {}
 
@@ -38,6 +40,10 @@ o:write '<style>\n'
 o:write '.missing { font-style: italic; color: #993333; }\n'
 o:write '</style>\n'
 o:write '++++\n\n'
+
+o:write(glossary_preface)
+
+o:write '\n\n'
 
 for _,entry in ipairs(glossary_list) do
   display_lang_entry(entry['en-us'])

@@ -34,18 +34,36 @@ export PUPPETEER_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-puppetee
 
 #
 
+export COURSE :=
+
 export COURSES_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.courses.lua
 
 export LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.lessons.txt.kp
 
+export RELEVANT_LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.relevant-lessons.txt.kp
+
 export SED := sed
 export CP := cp
+
+export EMPTYCHAR :=
+export COMMACHAR := ,
+export SPACECHAR := $(EMPTYCHAR) $(EMPTYCHAR)
+
+export BOOK :=
+export LINKCHECK :=
+
+export SCRATCHFILE := $(TOPDIR)/distribution/.scratch
+
+# "other" directories that shd be only minimally processed (no HTML/PDF)
+
+export OTHERDIRS := /\(fragments\|xtra\|xtras\)/
 
 export NUMCORES := $(shell getconf _NPROCESSORS_ONLN)
 
 all: phases dictionaries coverage
 
 phases:
+	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@mkdir -p distribution/$(NATLANG)/lib
 	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase1
@@ -54,12 +72,12 @@ phases:
 ###############################################################################
 
 book:
-	@BOOK=yes $(MAKE)
+	@$(MAKE) BOOK=yes
 
 ###############################################################################
 
 linkcheck:
-	@LINKCHECK=yes $(MAKE)
+	@$(MAKE) LINKCHECK=yes
 
 ###############################################################################
 
@@ -106,16 +124,23 @@ coverage-report.html: $(alignment-dictionaries)
 ###############################################################################
 
 help:
-	@echo The following make calls build
-	@echo
 	@echo "  make              -- updates distribution/, HTML only"
 	@echo "  make book         -- updates PDFs and workbooks too"
 	@echo "  make linkcheck    -- additionally verifies all links"
-	@echo "  make force [book] -- build from scratch"
+	@echo "  make force [book] -- builds from scratch"
+	@echo "                       equivalent to:    make clean; make [book]"
+	@echo "  make book COURSE=algebra-pyret"
+	@echo "                    -- makes PDFs only for algebra-pyret and its lessons"
+	@echo "  make book COURSE=algebra-pyret,data-science"
+	@echo "                    -- COURSE takes comma-separated list of pathways"
+	@echo "  make NATLANG=es-mx"
+	@echo "                    -- builds for natural language es-mx (default: en-us)"
 	@echo
-	@echo The following do not build
+	@echo To rebuild a particular lesson or pathway in the distribution/
+	@echo delete its folder and issue make again.
+	@echo
+	@echo The following make invocations do not build
 	@echo
 	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
 	@echo "  make deploy       -- deploys existing distribution/ to webhost"
 	@echo "  make help         -- displays (this) help"
-

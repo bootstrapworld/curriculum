@@ -57,8 +57,7 @@
             content: counter(term) ".";
             margin-right: 5px;
         }
-        dd ul { max-height: 0; overflow: hidden; transition: all 1s ease-out; }
-        /*dd:hover ul { max-height: 1000px; }*/
+        dd ul li { font-style: italic; font-size: smaller; }
 
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
@@ -73,7 +72,7 @@
     </style>
 
     <!-- Latest compiled and minified CSS -->
-    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
     <!-- Load PDF and Download modules -->
     <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
@@ -83,8 +82,6 @@
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
     <script>
-    // load required symbols, configure the dependency graph
-    configureGraph(graph);
     let url = new URL(location);
     
     // Default to all pyret lessons
@@ -96,7 +93,6 @@
     lessons = lessons || [];
     days = days && days.split(",").map(Number) || [];
     days = lessons.map((_, idx) => days[idx] || 1);
-    console.log(days)
     if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
     if(!lessons) lessons = [];
     if(!pathway) pathway = "Click here to name this pathway";
@@ -114,8 +110,8 @@
     function populateselectedList(parent, lessonNames, useDays) {
       lessonNames.forEach((l, idx) => {
         const lesson = graph[l];
-        const pagesHTML = graph[l].pages.map(p => 
-            `<li>${p}</li>`).join('\n');
+        const sectionsHTML = graph[l].sections.map(sec => 
+            `<li>${sec}</li>`).join('\n');
         const numDays = (useDays && days && days[idx])? days[idx] : 1;
         const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
         const html = `
@@ -136,7 +132,7 @@
               </dt>
               <dd>
                 ${lesson.description}
-                <ul>${pagesHTML}</ul>
+                <ul>${sectionsHTML}</ul>
               </dd>
             </span>
           <div>`;
@@ -172,7 +168,8 @@
       document.getElementById('pathwayTitle').innerHTML = pathway;
       selectedList.innerHTML = accessibleList.innerHTML = null;
       const totalDays = days.reduce((d, acc) => d + acc, 0);
-      document.getElementById('totalDays').innerHTML = totalDays + '  days';
+      const dayString = (totalDays == 1)? '1 day' : totalDays + ' days';
+      document.getElementById('totalDays').innerHTML = dayString;
 
       // update the list of accessible lessons based on selected lessons
       var accessible =  Object.getOwnPropertyNames(graph)

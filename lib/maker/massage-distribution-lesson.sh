@@ -6,6 +6,8 @@ src=$1
 
 d=$2
 
+superdir=$(echo $src|sed -e 's#lessons/##'|sed -e 's#\([^/]*\).*#\1#')
+
 source ${MAKE_DIR}src-subdir-mgt.sh
 
 if test  -d "$d"; then
@@ -26,8 +28,6 @@ if test ! -f $d/index.adoc; then
 fi
 
 echo $src > $d/.repodir.txt.kp
-
-source ${MAKE_DIR}src-subdir-mgt.sh
 
 lessonName=$(basename $d)
 
@@ -51,23 +51,7 @@ for pl in $proglangs; do
     $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
   #
-  cd "$lessonNamePl"
-  mkdir -p .cached
-  touch .cached/.proglang-$pl
-  echo $pl > .cached/.record-proglang
-  touch .cached/.redo
-  test "$firstproglang" = $pl && touch .cached/.primarylesson
-  test -d pages || mkdir pages
-
-  for subdir in *; do
-    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
-  done
-  #
-  make_solution_pages
-
-  # echo calling collect-work-pages.lua in $(pwd)
-  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-  cd ..
+  set_up_lesson_dir "$lessonNamePl" "$pl" "$firstproglang"
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
 

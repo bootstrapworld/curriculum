@@ -6,19 +6,53 @@ dofile(make_dir .. 'utils.lua')
 
 local natlang = os.getenv 'NATLANG'
 
+local select_courses = false
+
+do
+  local course_ev = os.getenv 'COURSE'
+  if course_ev and course_ev ~= '' then
+    select_courses = string_split(course_ev, ',')
+  end
+end
+
+local courses_dir = 'distribution/' .. natlang .. '/courses'
+local lessons_dir = 'distribution/' .. natlang .. '/lessons'
+
+function record_course_lessons(course, lo)
+  local course_lessons_file = courses_dir .. '/' .. course .. '/.cached/.workbook-lessons.txt.kp'
+  if not file_exists_p(course_lessons_file) then
+    return
+  end
+  local i = io.open(course_lessons_file, 'r')
+  for L in i:lines() do
+    lo:write(L, '\n')
+  end
+end
+
 -- collecting courses
 
 do
-  local courses_dir = 'distribution/' .. natlang .. '/courses'
-  local ls_output = io.popen('ls ' .. courses_dir)
   local o = io.open(os.getenv 'COURSES_LIST_FILE', 'w+')
+  local lo = io.open(os.getenv 'RELEVANT_LESSONS_LIST_FILE', 'w+')
   o:write('return {\n')
-  for course in ls_output:lines() do
-    o:write(' \"' .. course .. '\",\n')
+
+  if select_courses then
+    for _,course in ipairs(select_courses) do
+      o:write(' \"' .. string_trim(course) .. '\",\n')
+      record_course_lessons(course, lo)
+    end
+
+  else
+    local ls_output = io.popen('ls ' .. courses_dir)
+    for course in ls_output:lines() do
+      o:write(' \"' .. course .. '\",\n')
+    end
+    ls_output:close()
   end
+
   o:write('}\n')
-  ls_output:close()
   o:close()
+  lo:close()
 end
 
 ----------------------------------------------------------------------------
@@ -163,7 +197,9 @@ end
 -- collecting lessons
 
 do
-  local lessons_dir = 'distribution/' .. natlang .. '/lessons'
+  -- if select_courses then
+  --   goto exit_do_block
+  -- end
   local ls_output = io.popen('ls ' .. lessons_dir)
   local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
   for lesson in ls_output:lines() do
@@ -186,5 +222,6 @@ do
   end
   ls_output:close()
   o:close()
+  -- ::exit_do_block::
 end
 

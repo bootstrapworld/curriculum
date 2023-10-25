@@ -27,7 +27,8 @@
 (define *proglang-sym* (string->symbol *proglang*))
 
 (define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+  (let ([starter-files-file (format "~a/distribution/~a/starter-files.js"
+                                    *topdir* *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
@@ -178,7 +179,7 @@
     ; (printf "returning ~s\n" ans)
     (string-append "<code>" (list->string ans) "</code>")))
 
-(define (code exp)
+(define (code exp #:parens [parens #f])
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
     (set! x (regexp-replace* "{zwsp}" x ""))
@@ -667,7 +668,7 @@
                            [(string=? directive "A")
                             (let ([text (read-group i directive)])
                               (when *output-answers?*
-                                (display "\n-    " o)
+                                (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(member directive '("pathway-only" "scrub"))

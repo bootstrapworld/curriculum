@@ -129,10 +129,11 @@ Complete the first Data Cycle on @printable-exercise{pages/data-cycle-scatter-pl
 - Does there appear to be a pattern or trend?
 - What might be problematic about including every species in the same scatter plot of weight?
 - What follow-up questions do you have?
-<!--
+
+@teacher{
 Pose these questions to the whole class, and debrief as a large group.
--->
-@slidebreak
+}
+
 {layout="Investigate-DN"}
 # The Data Cycle
 
@@ -142,27 +143,17 @@ Write your follow-up question in the second Data Cycle on @printable-exercise{pa
 {layout="Synthesize"}
 # The Data Cycle
 
-We’ve got a lot of tools in our toolkit that help us think about an entire _column_ of a dataset:
+There are many ways to visualize or reason about single columns of data, but scatter plots are special because they let us see relationships between two columns at the same time!
 
-- We have ways to find measures of center and spread for a given quantitative column.
-- We have visualizations that let us see the shape of values in a quantitative column.
-- We have visualizations that let us see frequencies or percentages in a categorical column.
-
-@slidebreak
-{layout="Synthesize"}
-# The Data Cycle
-
-Now we also have a tool that lets us think about two columns at the same time!
-
-What new questions did the Data Cycle lead you to ask? What did you find?
+- What new questions did the Data Cycle lead you to ask? What did you find?
 
 @slidebreak
 {layout="LaunchC"}
 # Looking for Trends
 
-Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted. **Do you see a trend?**
+Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
 
-@image{images/pounds-v-weeks.png}
+@center{@image{images/pounds-v-weeks.png}}
 
 @slidebreak
 {layout="LaunchR"}
@@ -170,11 +161,18 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 
 @image{images/pounds-v-weeks.png}
 
-A straight-line pattern in the cloud of points suggests a linear relationship between two columns. 
+There are many ways to visualize or reason about single columns of data, but scatter plots are special because they let us see relationships between two columns at the same time!
 
-If we can find a line around which the points cluster (as we’ll do in a future lesson), it would be useful for **making predictions**. 
+- What new questions did the Data Cycle lead you to ask? What did you find?
 
-For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
+---
+{layout="Launch"}
+# Looking for Trends
+
+* Does the number of weeks to adoption seem to go up or down as the weight increases?
+* Are there any points that “stray from the pack”? Which ones?
+
+A straight-line pattern in the cloud of points suggests a linear relationship between two columns. If we can find a line around which the points cluster (as we’ll do in a future lesson), it would be useful for making predictions. For example, our line might predict how many `weeks` a new dog would wait to be adopted, if it weighs 68 `pounds`.
 
 @slidebreak
 {layout="Launch"}
@@ -216,10 +214,11 @@ These points are called *unusual observations*. Unusual observations in a scatte
 
 These numbers and scatter plot come from different datasets. The patterns in the scatter plot vary wildly, but the numbers that summarize dataset barely change at all!
 
-@image{images/CloudToCircle.gif}
-<!--
+@center{@image{images/CloudToCircle.gif}}
+
+@teacher{
 This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatterplots. If time allows, have students explore some of the visualizations on the @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Autodesk website}!
--->
+}
 
 @slidebreak
 {layout="Investigate"}
@@ -240,10 +239,13 @@ For practice, consider each of the following relationships. First think about wh
 - How are the number of `legs` an animal has related to its `age`?
 - Do you see a linear (straight-line) relationship in any of these?
 - Are there any unusual observations?
-<!--
+
+@teacher{
 All of these are phrased as "how is the _explanatory variable_ related to the _response variable_"
--->
+}
+
 @slidebreak
+>>>>>>> master
 {layout="Synthesize"}
 # Looking for Trends
 
@@ -251,7 +253,12 @@ It might be tempting to go straight into making a scatter plot to explore how we
 
 Why does that matter?
 
+@teacher{
+Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
+}
+
 @slidebreak
+
 {layout="Synthesize"}
 # Looking for Trends
 
@@ -267,7 +274,12 @@ A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully
 
 This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet!
 
+@teacher{
+There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
+}
+
 @slidebreak
+
 {layout="Launch"}
 # Data Exploration Project (Scatter Plots) 
 
@@ -282,6 +294,7 @@ Let’s review what we have learned about making and interpreting scatter plots.
 - What do scatter plots show us about a dataset?
 ** _Scatter plots allow us to look for relationships between two columns of dataset._
 }
+
 @slidebreak
 {layout="Investigate"}
 # Data Exploration Project (Scatter Plots) 

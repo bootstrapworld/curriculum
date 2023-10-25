@@ -1,8 +1,6 @@
-# last modified 2023-03-16
-
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs
+phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
 
 ###############################################################################
 
@@ -76,7 +74,12 @@ $(eval $(foreach lesson,$(the-lessons),$(call make-copy-lesson-rule,$(lesson))))
 
 #########################################################################
 
-the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
+ifndef COURSE
+	the-pathways := $(wildcard pathways/*/langs/$(NATLANG))
+else
+	the-pathways := $(patsubst %,pathways/%/langs/$(NATLANG), \
+		$(subst $(COMMACHAR),$(SPACECHAR),$(COURSE)))
+endif
 
 the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                   $(notdir \
@@ -118,6 +121,13 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-courses-and-lessons: copy-lessons copy-pathways
-	$(MAKE_DIR)collect-distribution-info.lua
+starter-files: distribution/$(NATLANG)/starter-files.js
 
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
+	node $< $@
+
+###############################################################################
+
+courses-and-lessons: copy-lessons copy-pathways
+	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
+	$(MAKE_DIR)collect-distribution-info.lua

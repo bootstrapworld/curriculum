@@ -9,7 +9,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 # Functions for Working with Tables
 
 - Open the @starter-file{animals} and click "Run".
-- In the Interactions Window on the right type `animals-table` and hit "Enter" to see the default view of the table.
+- In the Interactions Window on the right type `animals-table` and hit "Enter" to see the table.
 - What do you Notice? 
 - What do you Wonder? 
 

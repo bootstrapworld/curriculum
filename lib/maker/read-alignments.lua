@@ -1,7 +1,6 @@
--- last modified 2023-03-11
-
 local make_dir = 'lib/maker/'
 
+dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
 dofile(make_dir .. 'jread.lua')
 
