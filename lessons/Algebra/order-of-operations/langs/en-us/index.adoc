@@ -5,6 +5,9 @@
 #content .embedded {min-width: 550px; width: 80%; margin: 0px auto;}
 .big .mathunicode {font-size: 3em !important; color: black;}
 .strategy-box span.circleevalsexp { width: unset; }
+/* force a consistent width, so that circles with and without blanks
+ look similar */
+.circleevalsexp .value { min-width: 1.5em; }
 </style>
 ++++
 
@@ -116,7 +119,7 @@ This math problem went viral on social media recently, with math teachers arguin
 @Q{Take another minute and see if you can figure out what expression each of the Circles of Evaluation on @printable-exercise{coe-notice.adoc} represents.
 }
 @A{ {empty}
-[cols="1a,2a,2a,3a,3a", options="header"]
+[cols="^1a,^2a,^2a,^3a,^3a", options="header"]
 |===
 |1|2|3|4|5
 
@@ -157,7 +160,7 @@ Let's see if we can settle the internet debate about what @math{6 \div 2(1 + 2)}
 
 @teacher{
 
-[.embedded, cols="^.^3,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^5,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
 |@show{(coe '(* (/ 6 2) (+ 1 2)))} | &rarr; | @show{(coe '(* 3 3))} | &rarr; | @math{ 3 \times 3 = 9}
 |===
