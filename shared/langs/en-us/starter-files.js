@@ -253,6 +253,15 @@ var DSBasics = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
     }
   },
+   "threats": {
+    "title": "Threats to Validity Project Template",
+    "pyret": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    },
+    "codap": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    }
+  },
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
