@@ -27,7 +27,8 @@
 (define *proglang-sym* (string->symbol *proglang*))
 
 (define *starter-files*
-  (let ([starter-files-file (build-path *progdir* "starter-files.js")])
+  (let ([starter-files-file (format "~a/distribution/~a/starter-files.js"
+                                    *topdir* *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)

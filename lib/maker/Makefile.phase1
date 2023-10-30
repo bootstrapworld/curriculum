@@ -121,13 +121,13 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-starter-files: distribution/$(NATLANG)/lib/starter-files.json
+starter-files: distribution/$(NATLANG)/starter-files.js
 
-distribution/$(NATLANG)/lib/starter-files.json: $(PROGDIR)/starter-files.js
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
 	node $< $@
 
 ###############################################################################
 
 courses-and-lessons: copy-lessons copy-pathways
+	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
 	$(MAKE_DIR)collect-distribution-info.lua
-

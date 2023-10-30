@@ -29,8 +29,6 @@ fi
 
 echo $src > $d/.repodir.txt.kp
 
-source ${MAKE_DIR}src-subdir-mgt.sh
-
 lessonName=$(basename $d)
 
 cd $d/..
@@ -53,25 +51,7 @@ for pl in $proglangs; do
     $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
   #
-  cd "$lessonNamePl"
-  mkdir -p .cached
-  touch .cached/.proglang-$pl
-  echo $pl > .cached/.record-proglang
-  echo $superdir > .cached/.record-superdir
-  ${TOPDIR}/${MAKE_DIR}make-slides.lua
-  touch .cached/.redo
-  test "$firstproglang" = $pl && touch .cached/.primarylesson
-  test -d pages || mkdir pages
-
-  for subdir in *; do
-    test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
-  done
-  #
-  make_solution_pages
-
-  # echo calling collect-work-pages.lua in $(pwd)
-  $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-  cd ..
+  set_up_lesson_dir "$lessonNamePl" "$pl" "$firstproglang"
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
 done
 

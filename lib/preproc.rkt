@@ -157,17 +157,12 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/lib/starter-files.json" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/starter-files.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
-          read-json)
-        '())))
-
-(define *do-not-autoinclude-in-material-links*
-  (let ([starter-files-dont-mention-file (build-path *progdir* "starter-files-dont-mention.json")])
-    (if (file-exists? starter-files-dont-mention-file)
-        (map string->symbol
-             (call-with-input-file starter-files-dont-mention-file read-json))
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
         '())))
 
 (define *starter-files-used* '())
@@ -1775,24 +1770,27 @@
                                 (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [link-text (and (>= (length lbl+text) 2) (second lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)]
-                                   [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)])
+                                   [c (hash-ref *starter-files* lbl #f)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
-                                      (let* ([newly-added? (add-starter-file lbl)]
-                                             [p (hash-ref c *proglang-sym* #f)]
-                                             [starter-file-title (or (and p (hash-ref p 'title #f))
-                                                                     (hash-ref c 'title))])
-                                        (set! starter-file-title
-                                          (regexp-replace* #rx"," starter-file-title "\\&#x2c;"))
+                                      (let* ([link-text (and (>= (length lbl+text) 2)
+                                                             (string-join (rest lbl+text) "&#x2c; "))]
+                                             [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
+                                             [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*)]
                                               [else
-                                                (let* ([title (or link-text
+                                                (let* ([newly-added? (add-starter-file lbl)]
+                                                       [starter-file-title
+                                                         (regexp-replace* #rx","
+                                                           (or (and p (hash-ref p 'title #f))
+                                                               (hash-ref c 'title)
+                                                               "missing-starter-file-title")
+                                                           "\\&#x2c;")]
+                                                       [title (or link-text
                                                                   starter-file-title)]
                                                        [url (let ([url (hash-ref p 'url "")])
                                                               (cond [(string=? url "")
@@ -1808,7 +1806,7 @@
                                                            ", window=\"_blank\""
                                                            )])
                                                   (when (and newly-added?
-                                                             (not (member lbl *do-not-autoinclude-in-material-links*)))
+                                                             (hash-ref c 'autoinclude #t))
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
@@ -2141,7 +2139,6 @@
             (display-lesson-slides o)
             ; LESSON PLAN
             (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n")
-
 
             (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 

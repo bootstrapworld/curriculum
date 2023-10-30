@@ -290,7 +290,7 @@ to populate the `distribution/` directory with the built documentation.
   the documents to ensure they are valid. By default, this check isn't
   done to save time
 
-`make` can take the following environment-variable settings to guide the
+`make` can take the following variable settings on the command line to guide the
 build:
 
 - `NATLANG=lang` -- builds for the natural language `lang`. The default is
@@ -307,16 +307,6 @@ build:
 - `COURSE=p1,p2,...` -- if `book` is also specified, this makes the
   workbook PDFs and the related lesson PDFs _only_ for the comma-separated
   pathways `p1`, `p2`, `...` specified
-
-[IMPORTANT]
---
-These environment variables may also be set separately (i.e., not as a
-`make` argument) on your machine, either on the command line or in your
-shell profile. In such cases, they should be ``export``ed so that the make
-can see them, e.g.,
-
-    export SEMESTER=spring YEAR=2023
---
 
 The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
 resides in
@@ -379,14 +369,44 @@ link:./README-slides.adoc[].
 For more on the build process in general, see
 link:lib/maker/doc/index.adoc[].
 
-=== Cleaning
+=== Sensible re-making
 
-The `make` target `clean` scrubs any existing `distribution`.
+As expected of `make`, subsequent calls to it will only rebuild those
+files in the `distribution/` that need to be updated, based on
+modifications to the source files in the repo.
 
-    make clean
+However, if you haven't changed the source docs, but there have been
+changes to the building programs themselves (in `lib/`), or the
+library/data files (in `shared/`), you will often need to regenerate the
+entire `distribution/` from scratch.
 
-The next
-`make` builds anew.
+You can manually delete the `distribution` directory and make again.
+
+Alternatively, you can use the `make` target `clean`:
+
+   make clean
+
+This deletes any existing `distribution` (it is not an error if it doesn't
+exist). A subsequent `make` builds anew.
+
+You can also use `make force` followed by any other options (if needed).
+This implicitly calls `make clean` before proceeding with the other
+options.
+
+Remember, re-making the entire distribution takes time, and is often too
+drastic a step if you're working on one or two lessons, are
+satisfied with local debugging, and immediate deployment is not the
+goal. In such cases, you can simply go into `distribution/en-us/lessons`
+and manually delete the lessons you want rebuilt. You can also manually
+delete pathways in `distribution/en-us/courses` to rebuild specific
+pathways. A subsequent `make` (even without `force`) will cleanly re-make
+just your desired lessons and/or pathways, leaving the rest of the
+`distribution/` untouched.
+
+Be careful while deleting stuff in `distribution/` expecting them to be
+regenerated. Deleting at too fine a grain (just one file, say) may not
+always succeed in regenerating it. It's best to stick to deleting whole
+lessons or pathways.
 
 === Deployment
 
@@ -722,7 +742,6 @@ item is used in the generated glossary.
 
 - \"description\", the definition for the glossed item.
 
-
 [TIP]
 --
 As a convenience, it is not necessary to specify simple grammatical
@@ -824,11 +843,38 @@ introduce a recipe that needs to be debugged. For examples of
 such recipes, please see the `.adoc` files in the various
 `fragments` subdirectories in the repo.
 
-Some exercise files are more elaborate than recipes and contain
+==== Calling preproc routines directly
+
+Some files are more elaborate than recipes and contain
 sketches of solutions and tables that need to be filled. These
 use some extra directives like `@do`, `@show`, `@showsoln`, and `@code` that then
 use raw Racket code to format the exercise. Examples of
 these can be found in the `Supplemental` lesson.
+
+===== Code fragments
+
+`@show` can call the preproc procedure `code` to typeset code fragments.
+The code fragment is specified in s-expression format, and gets
+converted to the appropriate format based on the prevailing programming
+lang, e.g., s-exp for WeScheme and in-fix for Pyret.
+
+  @show{(code '(+ 1 2))}
+
+===== Circles of Evaluation (CoEs)
+
+`@show` can invoke the procedure `coe` to typeset a _circle of
+evaluation_ (_CoE_):
+
+  @show{(coe '(+ 1 2))}
+
+Sometimes portions of the code are left blank as an exercise. Use `(?ANS
+suggested-solution)` in place of such portions. In student-facing pages,
+this shows up as a blank. In solutions mode, the suggested solution is
+inserted. E.g.,
+
+  @show{(coe '(+ (?ANS 1) 2))}
+
+===== Contracts
 
 Sometimes, just a contract (part of a recipe) needs to be shown
 in the text. Use `@show` to call the Racket procedures `contract`
