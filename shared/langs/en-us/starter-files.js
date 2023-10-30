@@ -236,7 +236,7 @@ var DSBasics = {
     }
   },
   "research-project": {
-    "title": "Research Project Template Slide Template",
+    "title": "Research Project Slide Deck Template",
     "pyret": {
       "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
     },
