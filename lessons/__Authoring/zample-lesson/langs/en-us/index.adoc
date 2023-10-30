@@ -1,10 +1,35 @@
 = Problem Decomposition
 
+
+@QandA{
+@Q{What should we do first?}
+@A{It depends! We can either work
+- outside in: @show{(coe '(- 10 (- (?ANS _) (?ANS _))))}
+- or inside out: @show{(coe '(?ANS ?ANS (+ 5 3)))}
+- Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
+}
+}
+
+@QandA{
+@Q{What should we do first?}
+@A{It depends! We can either work
+- outside in: @show{(coe '(- 10 (?ANS ?ANS ?ANS)))}
+- or inside out: @show{(coe '(?ANS ?ANS (+ 5 3)))}
+- Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
+}
+}
+
 change
 
 @description{Students take a closer look at how functions can work together by investigating the relationship between revenue, cost, and profit.}
 
 alkdjfs @fitbruby{10em}{}{@math{\Delta} pct-college-or-higher} alkdflkjadf
+
+aa @ifpathway{algebra-pyret,data-science}{for algebra-pyret, data-science only} bb
+
+aa @ifnotpathway{algebra-pyret,data-science}{for everything othern algebra-pyret, data-science} bb
+
+Separate call to @language-table{Lang Table}
 
 [@lesson-intro-table]
 |===
@@ -24,12 +49,10 @@ alkdjfs @fitbruby{10em}{}{@math{\Delta} pct-college-or-higher} alkdflkjadf
 | Materials
 |[.materials-links]
 
-
-
 @material-links
 
 | Supplemental Materials
-|[.material-links]
+|[.materials-links]
 @opt-material-links
 
 | Preparation
@@ -42,7 +65,6 @@ alkdjfs @fitbruby{10em}{}{@math{\Delta} pct-college-or-higher} alkdflkjadf
 * There are several ways to write the `profit` function - use this opportunity for discussion and to promote higher-order critical thinking.
 * If students are struggling with understanding the basics of the problem, start by coming up with examples of `cost` and `revenue`.  If Sally sells one glass, what is her total revenue?  How much does it cost her to produce that one glass?
 * Ensure students understand the difference between "revenue" and "profit", and that "cost" refers to the cost of _making_ the lemonade, not the amount Sally is charging.
-
 
 |===
 
@@ -115,7 +137,6 @@ another paragraph
 }
 }
 
-
 == q and a
 
 @QandA{
@@ -136,8 +157,6 @@ Here are some directions
 - item two
 - @opt{item three}
 - item four
-
-
 
 @teacher{While students are working, walk the room and gauge student understanding.  There is more than one correct way to write the `profit` function!  Encourage discussion between students and push students to develop their thinking on the advantages and disadvantages of each correct solution.}
 

@@ -4,6 +4,7 @@
 var Editors = {
   "editor": {
     "title": "the editor",
+    "autoinclude": false,
     "pyret": {
       "url": "https://code.pyret.org/editor",
       "title": "code.pyret.org (CPO)"
@@ -19,6 +20,7 @@ var Editors = {
   },
   "program-list": {
     "title": "program list",
+    "autoinclude": false,
     "pyret": {
       "url": "https://code.pyret.org/",
       "title": "code.pyret.org (CPO)"
@@ -260,6 +262,15 @@ var DSBasics = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
     }
   },
+   "threats": {
+    "title": "Threats to Validity Project Template",
+    "pyret": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    },
+    "codap": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    }
+  },
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
@@ -491,7 +502,7 @@ var MoreAlg = {
       "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?openEditor=ytUfr7fCwY"
+      "url": "https://www.wescheme.org/openEditor?publicId=jJqUDeN8a7"
     }
   },
   "inequalities-compound": {
@@ -715,8 +726,80 @@ var Reactive = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
     }
+  },
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+    }
+  },
+    "alg2-covid": {
+    "title": "Covid Spread Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
+    } 
+  },
+   "alg2-fuel-efficiency": {
+    "title": "Fuel Efficiency Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
+    }
+  },
+   "alg2-states": {
+    "title": "State Demographics Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+    }
+  },
+  "alg2-exploring-quadratics-desmos": {
+    "title": "Exploring Quadratic Functions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
+    }
+  },
+  "alg2-covid-desmos" : {
+    "title" : "Modeling Covid Spread (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+    }
+  },
+  "alg2-exploring-logarithms-desmos" : {
+    "title" : "Exploring Logarithmic Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
+    } 
+  },
+  "alg2-wealth-v-health-desmos": {
+    "title": "Fitting Wealth-v-Health (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
+    }
+  },
+  "alg2-wealth-v-health-2-desmos": {
+    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+    }
+  }, 
+  "logos": {
+    "title": "Logo Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
+    }
+  }, 
+"functions": {
+    "title": "Functions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1&v=4d870d2"
+    }
+  },
+  "my-function": {
+    "title": "My Function Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
+      } 
+    } 
   }
-}
 
 var allStarterFiles = {
   ...Editors, 
@@ -739,10 +822,12 @@ var allStarterFiles = {
 
 const fs = require('fs');
 
-const ofile = process.argv[2];
+const jsFile = process.argv[2];
 
-if (fs.existsSync(ofile)) {
-  fs.unlinkSync(ofile);
+if (fs.existsSync(jsFile)) {
+  fs.unlinkSync(jsFile);
 }
 
-fs.writeFileSync(ofile, JSON.stringify(allStarterFiles));
+const jsonString = JSON.stringify(allStarterFiles);
+
+fs.writeFileSync(jsFile, 'var starterFiles = ' + jsonString + ';\n');

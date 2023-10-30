@@ -1,4 +1,4 @@
--- last modified 2023-03-06
+-- requires utils.lua to be loaded before
 
 -- metatable for buffered input ports
 -- NOTE: any field not found in an object is searched for in its metatable's .__index
@@ -40,11 +40,6 @@ end
 
 function buf_toss_back_char(c, bp)
   table.insert(bp.buffer, 1, c)
-end
-
-local function string_trim(s)
-  -- remove flanking blanks of string s
-  return (string.gsub(s, '^%s*(.-)%s*$', '%1'))
 end
 
 local function string_trim_quotes(s)
