@@ -32,8 +32,7 @@
 
 | Preparation
 |
-* There is an optional kinesthetic in this lesson that requires a ball of playdough for each group of 3.
-* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
+* There is an optional kinesthetic activity in this lesson that requires a ball of playdough for each group of 3.
 
 |===
 
@@ -48,52 +47,48 @@ When we explored measures of center, we tried to answer a question about "typica
 
 How useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
 
-
 So once we have our summary for a "normal value", it's likely we'll ask another question: _If the average pet is 40 pounds, just **how typical** is that?_
 
 There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! Some classes are more different than others. How do we measure the @vocab{spread} of a population?
 
 @center{@image{images/box-n-whisker-plot.png, 500}}
 
-Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking the _median of each half_, splitting the population into four equal-sized @vocab{quartiles}.
-
-@lesson-instruction{
-- The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less.
-- What animals does the *third* quartile represent?
-** _The third quartile is the value for which 75% of the animals weighed that amount or less.Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more._
-}
-
-Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire dataset — that is, the distance between minimum and maximum. This is called the @vocab{range of a dataset}. (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
-
-Splitting a dataset into @vocab{quartiles} gives us five numbers that we can play with to measure spread. To summarize what we've seen so far:
-
-. @vocab{Minimum}: _the smallest value in a dataset_
-. Q1: _the median that falls between the minimum and Q2_
-. Q2: @vocab{Median}: _the middle value (median) in a dataset_
-. Q3: _the median that falls between and Q2 and the maximum_
-. @vocab{Maximum}: _the largest value in a dataset_
-
-Taken together these are called the **5 Number Summary** of a dataset, and this summary is one tool for calculating spread. We can use these numbers to calculate two new values:
-
-- Maximum - Minimum = _@vocab{Range}_ :  _the distance spanned by the extreme values in the dataset_
-- Q3 - Q1 = @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
 
 === Investigate
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+
+Suppose we lined up all the animals' weights from smallest to largest. We can learn something about the @vocab{spread} of the dataset by splitting the population into four equal-sized @vocab{quartiles}. First we'll split them in half by finding the @vocab{median} and then we'll find the _median of each half_!
+
+Splitting a dataset into @vocab{quartiles} gives us five numbers that we can play with to measure spread. Taken together these are called the **5 Number Summary** of a dataset:
+
+. @vocab{Minimum}: _the smallest value in a dataset_
+. Q1: _the median that falls between the minimum and Q2 - and 25% of the data points will have that value or less_
+. Q2: @vocab{Median}: _the middle value (median) in a dataset_
+. Q3: _the median that falls between Q2 and the maximum_
+. @vocab{Maximum}: _the largest value in a dataset_
+
+
+We can use these numbers to calculate two new values:
+
+- Maximum - Minimum = _@vocab{Range}_ :  _the distance spanned by the extreme values in the dataset_ 
+** (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
+- Q3 - Q1 = @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
+
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. 
+
+Below is the Contract for `box-plot`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
 # Consumes a table and the name of the column
 # to plot, and produces a box plot"
-box-plot(animals-table, "pounds")
 ```
 
-@lesson-point{
-Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
-}
-
 @lesson-instruction{
-Type `box-plot(animals-table, "pounds")` into the Interactions Area, and see the resulting plot.
+* Let's see what we can learn about the spread of the data in the `pounds` column by making a `box-plot`!
+* Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
+** _If students don't have the file, they can open a new one from @starter-file{animals}._
+* Then turn to @printable-exercise{summarizing-columns-mos.adoc} and follow the directions to complete the *Summarizing the Pounds Column* section.
+** _Students will type `box-plot(animals-table, "pounds")` into the Interactions Area and use the resulting box plot to fill in the five-number summary for the `pounds` column, and sketch the box plot._
 }
 
 @center{@image{images/5-plot.png,  400}}
@@ -106,11 +101,24 @@ This plot shows us the center and spread in our dataset according to those five 
 - **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.
 - **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.
 
+@lesson-point{
+Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
+}
+
+@QandA{
+
+@Q{What conclusions can you draw about the distribution of values in this column?}
+@A{While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier.}
+
+@Q{If Q1 is the value for which 25% of the animals weighed that amount or less, what does Q3 represent?}
+@A{The third quartile is the value for which 75% of the animals weighed that amount or less. Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more.}
+
+@Q{Could we make a box plot for every column in the data set?}
+@A{No. We can only make box plots for @vocab{quantitative} columns.}
+}
+
 @lesson-instruction{
-* Turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
-* Fill in the five-number summary for the `pounds` column, and sketch the box plot.
-* What conclusions can you draw about the distribution of values in this column?
-** _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
+Choose another quantitative column to summarize and complete the second half of @printable-exercise{summarizing-columns-mos.adoc}
 }
 
 === Common Misconceptions
