@@ -41,18 +41,6 @@ SED=sed
 
 (which gsed | grep -q .) && SED=gsed
 
-function correctgdriveurl_1() {
-  local f=$1
-  $SED -i -e '/href=/s/\(spring\|fall\)[0-9][0-9][0-9][0-9]/'$SEMESTER_YEAR'/g' $f
-}
-
-function correctgdriveurls() {
-  local d=$1
-  for f in $(find $d -name \*gdrive-import.shtml); do
-    correctgdriveurl_1 $f
-  done
-}
-
 for lang in $ALL_THE_LANGS; do
   for d in $lang/*; do
     if test -f $d; then
@@ -63,7 +51,6 @@ for lang in $ALL_THE_LANGS; do
       fi
       mkdir -p $DEPLOYABLES_DIR/$d
       cp -pr $d $DEPLOYABLES_DIR/$lang
-      correctgdriveurls $DEPLOYABLES_DIR/$d
     fi
   done
 done
