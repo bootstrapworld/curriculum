@@ -332,13 +332,7 @@
 (define (write-purpose-prose purpose)
   (cond [*show-purpose?*
           (encoded-ans ".recipe_purpose.fitbruby" purpose *show-purpose?*)]
-        [else
-          (string-append
-            (enclose-span ".begin-ignore-for-gdrive" "")
-            (encoded-ans ".recipe_purpose" " " *show-purpose?*)
-            (enclose-span ".end-ignore-for-gdrive" "")
-            (enclose-span ".gdrive-only"
-              (encoded-ans ".recipe_purpose" purpose *show-purpose?*)))]))
+        [else (encoded-ans ".recipe_purpose" " " *show-purpose?*) ]))
 
 (define (write-examples funname num-examples example-list buggy-example-list)
   ; (printf "doing write-examples num-examples=~s example-list=~s buggy-example-list=~s\n" num-examples example-list buggy-example-list)
