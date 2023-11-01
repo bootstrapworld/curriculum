@@ -169,7 +169,7 @@ var GameBasics = {
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1rNabrhxIqcfHEjdzJqKQAnA9uVWdprQu"
+      "url": "https://code.pyret.org/editor#share=1Y0twOEdXPh15XcdjG_GGSmBIjkctfCj3&v=4d870d2"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
