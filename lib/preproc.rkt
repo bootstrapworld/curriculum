@@ -1339,6 +1339,7 @@
 (define *title-reached?* #f)
 (define *first-subsection-reached?* #f)
 (define *out-file* #f)
+(define *supplemental-materials-needed?* #f)
 
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
@@ -1515,6 +1516,7 @@
                               (error 'ERROR
                                      "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
+                            (set! *supplemental-materials-needed?* #t)
                             (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
                                      *containing-directory*)
                              ]
@@ -1989,6 +1991,7 @@
       (set! *out-file* (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc")))
       (set! *first-subsection-reached?* #f)
       (set! *title-reached?* #f)
+      (set! *supplemental-materials-needed?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
       (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
@@ -2176,7 +2179,8 @@
             (for ([x (reverse *opt-online-exercise-links*)])
               (fprintf o "\n* ~a\n\n" x))
             ; NO OPTIONAL ANYTHING - display a helpful message
-            (when (and (empty? *opt-printable-exercise-links*)
+            (when (and *supplemental-materials-needed?*
+                       (empty? *opt-printable-exercise-links*)
                        (empty? *opt-starter-file-links*)
                        (empty? *opt-online-exercise-links*))
               (printf "WARNING: ~a has no supplemental materials yet!\n\n" (errmessage-context))
