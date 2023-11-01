@@ -151,10 +151,6 @@ function make_workbook_json_1(course_dir, tgt)
       docrootp = false
     end
 
-    -- if not (lessondir:find('lessons') or lessondir:find('front%-matter') or lessondir:find('back%-matter')) then
-    --   goto continue
-    -- end
-
     local workbookpage = line.page
     local aspect = line.aspect
     local pageno = line.pageno
@@ -225,7 +221,6 @@ function make_workbook_json_1(course_dir, tgt)
     end
     o:write('", "paginate": ', tostring(pageno), ' }\n')
 
-    ::continue::
   end
 
   o:write('] }\n')

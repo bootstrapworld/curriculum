@@ -101,28 +101,12 @@ body {
     background: rgba(0,0,0,0.5);
     padding-left: 10px !important;
     position:   fixed;
-    top:        calc(100% + 250px); /* leave 250px space for acknowledgements+gdrive button */
+    top:        calc(100% + 250px); /* leave 250px space for acknowledgements button */
     padding:    0;
     z-index:    999;
   }
   /* But not if it's an extra-long page */
   &.canBeLongerThanAPage #footer { display: none; }
-
-  /* Hide anything that we only want seen on Google drive */
-  .gdrive-only { display: none; visibility: hidden; }
-
-  /* Warn the user the Save-to-Drive is broken on Safari */
-  #safariWarning { display: none; }
-  #savetodrive-div:hover + #safariWarning {
-    display:          block;
-    background:       @translucent-bg-color;
-    color:            white;
-    padding:          5px;
-    margin-top:       75px;
-    border-radius:    5px;
-    font-size:        10pt;
-    line-height:      1rem;
-  }
 
   /* outOfDate warning */
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
@@ -1008,11 +992,10 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5rem;
   }
 
-  /* on WB pages zoom the page 1.25x for a big screen, but not the SaveToDrive button */
+  /* on WB pages zoom the page 1.25x for a big screen */
   body.workbookpage {
     transform-origin: left top; 
     transform: scale(1.25); 
-    #savetodrive-div { transform: scale(0.8); }
   }
 
   /********************************************************************
@@ -1097,7 +1080,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
-  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgment, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
