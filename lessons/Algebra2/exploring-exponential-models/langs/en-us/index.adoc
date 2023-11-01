@@ -45,30 +45,54 @@ Students discuss an example of Simpson's Paradox, which motivates splitting a da
 
 === Launch
 
-A travel agency wants to know whether they serve more people 35 and over, or travelers under 35. They looked at their booking records, grouped by city:
+A college is looking at enrollment and housing data for a sample of students who've decided what their major will be, vs. those who are undecided:
 
 [cols="2a,^1a,^1a,^1a", options="header", width="80%"]
 |===
-| City  		| # Tourists 	| % 35 and over	| % Under 35
-| Marrakesh		| 160			| 30%			|  70%
-| Istanbul		| 200			| 20%			|  80%
-| Punta Cana 	| 204			| 25%			|  75%
-| Goa			| 450			| 46%			|  54%
-| Sarasota		| 676			| 75%			|  25%
+|   			| # On Campus 	| # Off Campus	| % On Campus
+| Undecided		| 120			|  80			|  120/200 = 60%
+| Decided		|  80			| 100			|   80/180 = 44%
 |===
 
-// in the slide deck, we should show students the table without the Tourists column... then advance the slide, and include the Tourist column //
-@lesson-instruction{
-Which group do you think the agency serves more? Why?
-
-@optional If your students need printed copies of this table, you can use @opt-printable-exercise{travel-data.adoc}.
+@QandA{
+@Q{According to the table, how many Undecided Majors live _off_-campus?}
+@A{80}
+@Q{How many Decided Majors live _on_-campus?}
+@A{80}
+@Q{Who is more likely to live on campus: Decided or Undecided Majors?}
+@teacher{Let students discuss the last question!}
 }
 
-@teacher{Have students discuss in pairs or small groups. Invite students to share their thoughts. Most likely they will say it's the under-35 crowd, because they are the bigger group in almost every city.}
+@teacher{
+@optional If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.
+}
 
-**Most of the agency's clients are 35 and over!**
+It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
 
-How is this possible? We can see a clear trend when _comparing_ within cities: the under-35 crowd dominates every city except Sarasota. When aggregating all of the data together, _the number of tourists in each city matters_. Sarasota was our outlier, but it also makes up the largest portion of all tourists!
+But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, _and_ they generally have not picked a major. **We need to take the _year_ into account.**
+
+[cols="^1a,^1a", strips="none", grid="none", frame="none"]
+|===
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      ! 100             ! 20            ! 100/120 = 83%
+! Decided        !  50             ! 10            !  50/60  = 83%
+!===
+
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      !  20             ! 60            !  20/80 = 25%
+! Decided        !  30             ! 90            !  30/120 = 25%
+!===
+|===
+
+Because **year at school** is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+
+How is this possible? When a third variable is lurking in the data, it can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
 
 @lesson-point{
 Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
@@ -79,7 +103,9 @@ Normally we think that "more data means more power!", and that the more data we 
 
 @clear
 
-"More data" isn't always better! In this lesson, we'll explore some real data that's better analyzed __in pieces...__
+"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on.
+
+ In this lesson, we'll explore some real data that's better analyzed __in pieces...__
 
 === Investigate
 

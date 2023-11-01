@@ -49,7 +49,7 @@ This data is used to set public policy, draw voting districts, approve drugs, ca
 
 **Here Come the Datasets!**
 
-Working in pairs, explore the list of @link{https://bootstrapworld.org/materials/spring2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, provided datasets}. 
+Working in pairs, explore the list of @handout{pages/datasets-and-starter-files.adoc, a direct link to this page}. 
 
 Which one is the most interesting to you?
 

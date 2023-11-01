@@ -194,26 +194,6 @@ function postproc(fhtml_cached, tipe)
         };
         </script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script>function renderSaveToDrive() {
-          var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-          gapi.savetodrive.render('savetodrive-div', {
-            src:]] ..
-            "(window.location.href.match(/\\/$/)?(window.location.href+'index-gdrive-import.html'):(window.location.href.replace(/([^\\/]+)\\.([^.\\/]+)$/, '$1-gdrive-import.html')))," ..
-            [[
-            filename:
-            ]] .. '"' .. page_title .. '",' ..
-            [[
-            sitename:"Bootstrap, Brown University"
-          });
-          if(isSafari){
-            var warning = document.createElement("div");
-            warning.id = "safariWarning";
-            warning.innerHTML = "You appear to be using Safari, which interferes with Google's Save-to-Drive button. You can fix it by going to Preferences, clicking 'Privacy', and making sure that 'Prevent cross-site tracking' is <b>not</b> checked."
-            var button = document.getElementById("savetodrive-div");
-            button.parentNode.insertBefore(warning, warning.nextSibling);
-          }
-        }
-        </script>
         ]])
         o:write(z, '\n')
         delete_line_p = true
@@ -310,6 +290,7 @@ function postproc(fhtml_cached, tipe)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'starter-files.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --
@@ -317,23 +298,6 @@ function postproc(fhtml_cached, tipe)
   --
   i:close()
   o:close()
-
-  if tipe ~= 'narrativeaux' then
-    local gdrive_fhtml = fhtml:gsub('%.s?html', '-gdrive-import.html')
-    i = io.open(dir_prefix .. fhtml, 'r')
-    o = io.open(dir_prefix .. gdrive_fhtml, 'w')
-    for x in i:lines() do
-      if x:find('src:%(window.location.href') then
-        o:write('src:window.location.href,\n')
-      else
-        o:write(x, '\n')
-      end
-    end
-
-    i:close()
-    o:close()
-
-  end
 
 end
 
