@@ -725,14 +725,11 @@
 
                [img-link-txt (string-append
                                (enclose-span ".big" "&#x1f5bc;") "Show image")]
-               [img-link (format "link:~a[~a,~a]" img img-link-txt "role=\"gdrive-only\"")]
                [adoc-img
-                 (string-append
-                   (cond [*lesson-subdir*
-                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
-                         [else
-                           (format "image:~a[~s~a]" img text-wo-url commaed-opts)])
-                   img-link)]
+                 (cond [*lesson-subdir*
+                         (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
+                       [else
+                         (format "image:~a[~s~a]" img text-wo-url commaed-opts)])]
                [img-id (format "img_id_~a" (gen-new-id))]
                [adoc-img (enclose-span ".image-figure"
                            (string-append
@@ -1232,20 +1229,9 @@
     (when (string=? num ht) (set! num "10"))
     (set! num (inexact->exact (floor (string->number num))))
     (set! num (quotient num 4))
-    (let ([reg-space (string-append
-                       (create-begin-tag "span" ".vspace" #:attribs
-                                         (format "style=\"height: ~a\"" ht))
-                       (create-end-tag "span"))]
-          [gd-space (let loop ([num num] [r ""])
-                      (cond [(= num 0) r]
-                            [else (loop (- num 1)
-                                        (string-append r
-                                          (create-begin-tag "span" ".gdrive-only")
-                                          (create-begin-tag "p" "")
-                                          "&#xa0;"
-                                          (create-end-tag "p")
-                                          (create-end-tag "span")))]))])
-      (string-append reg-space gd-space))))
+    (string-append (create-begin-tag "span" ".vspace" #:attribs
+                                     (format "style=\"height: ~a\"" ht))
+      (create-end-tag "span"))))
 
 (define (add-lesson-keywords kwds)
   (for ([k (reverse kwds)])
@@ -2440,14 +2426,8 @@
 (define (coe e)
   ;(printf "coe ~s\n" e)
   (create-zero-file (format "~a.uses-codemirror" *out-file*))
-  (string-append
-    ;enclosing following in span .gdrive-only doesn't seem to work
-    (sexp->block-table e #:pyret (string=? *proglang* "pyret"))
-    ;
-    (enclose-span ".begin-ignore-for-gdrive" "")
-    (enclose-div ".circleevalsexp"
-      (sexp->block e #:pyret (string=? *proglang* "pyret")))
-    (enclose-span ".end-ignore-for-gdrive" "")))
+  (enclose-div ".circleevalsexp"
+    (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
 (define *hole-symbol* '++_______++)
 (define *hole2-symbol* '++____________________++)
@@ -2716,62 +2696,6 @@
                     [(eq? e 'pi) " \\pi "]
                     [else
                       (format "~a" e)])]))
-
-(define (sexp->block-table e #:pyret [pyret #f])
-  ;(printf "doing sexp->block-table ~s ~a\n" e pyret)
-  (cond [(member e '(true false)) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
-        [(eq? e 'else) (enclose-span (if pyret "" ".wescheme-keyword") "else")]
-        [(number? e) (enclose-span (if pyret ".value" ".value.wescheme-number") (format "~a" e))]
-        [(string? e) (enclose-span (if pyret ".value" ".value.wescheme-string") (format "~s" e))]
-        [(boolean? e) (enclose-span (if pyret ".value" ".value.wescheme-boolean") (format "~a" e))]
-        [(symbol? e)
-         (enclose-span (if pyret ".value" ".value.wescheme-symbol")
-           (cond [(memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3))
-                  "{nbsp}{nbsp}{nbsp}"]
-                 [else (sym-to-adocstr e #:pyret pyret)]))]
-        [(answer? e) (let* ([e (second e)]
-                            [fill-len (answer-block-fill-length e)])
-                       (if *solutions-mode?*
-                           (enclose-span (format ".fitb~a" fill-len)
-                           (sexp->block-table e #:pyret pyret))
-                           (enclose-span (format ".value~a.fitb~a"
-                                                 (if pyret "" ".wescheme-symbol")
-                                                 fill-len)
-                             "{nbsp}{nbsp}{nbsp}")))]
-        [(fitb? e) (let ([e (second e)])
-                     (enclose-span "" "{nbsp}" #:attribs (format "style=\"min-width: ~a\"" e)))]
-        [(list? e) (let ([a (first e)])
-                     (enclose-tag "table" ".gdrive-only.expression"
-                       (if (or (symbol? a) (infix-op? a))
-                           (let ([args (map (lambda (e1)
-                                                (sexp->block-table e1 #:pyret pyret))
-                                              (rest e))])
-                             (string-append
-                               (enclose-tag "tr" ""
-                                 (enclose-tag "td" ".operator"
-                                   (enclose-span ".operator" (sexp->block-table a #:pyret pyret))))
-                                 (enclose-tag "tr" ""
-                                   (enclose-tag "td" ""
-                                     (enclose-tag "table" ".args"
-                                       (enclose-tag "tr" ""
-                                         (apply string-append
-                                                (map (lambda (arg)
-                                                       (enclose-tag "td" ".arg" arg))
-                                                     args))))))))
-                           ;is this else ever used in our docs? (Not really args)
-                           (let ([args (map (lambda (e1)
-                                                 (sexp->block-table e1 #:pyret pyret))
-                                               e)])
-                             (enclose-tag "tr" ""
-                               (enclose-tag "td" ""
-                                 (enclose-tag "table" ".args"
-                                   (enclose-tag "tr" ""
-                                     (apply string-append
-                                            (map (lambda (arg)
-                                                   (enclose-tag "td" "" arg))
-                                                 args)))))))
-                             )))]
-        [else (error 'ERROR "sexp->block-table: unknown s-exp")]))
 
 (define (sexp->block e #:pyret [pyret #f] #:wescheme [wescheme #f])
   ; (printf "doing sexp->block ~s ~a\n" e pyret)

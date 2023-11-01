@@ -90,16 +90,11 @@
 
 (define (enclose-math e)
   ;(printf "enclose-math of ~s\n" e)
-  (let ([pme (low-quality-math e)])
-    (string-append
-      (enclose-span ".gdrive-only" pme)
-      (enclose-span ".begin-ignore-for-gdrive" "")
-      "%CURRICULUMMATHJAXMARKER%"
-      "\\displaystyle "
-      e
-      "%CURRICULUMMATHJAXMARKER%"
-      (enclose-span ".end-ignore-for-gdrive" "")
-      )))
+  (string-append
+    "%CURRICULUMMATHJAXMARKER%"
+    "\\displaystyle "
+    e
+    "%CURRICULUMMATHJAXMARKER%"))
 
 ;for the @span{...}{...}
 
