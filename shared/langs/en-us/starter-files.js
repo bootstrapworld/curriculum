@@ -247,7 +247,7 @@ var DSBasics = {
   "animals": {
     "title": "Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz"
+      "url": "https://code.pyret.org/editor#share=146dX6xx9mOkuZjeICS66aD4Md0xNvcyZ&v=4d870d2"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
@@ -265,7 +265,7 @@ var DSBasics = {
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zkT8gS3gHMyLdI7VdrruJZvn4SPQmPDc"
+      "url": "https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0&v=4d870d2"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
