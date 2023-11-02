@@ -102,7 +102,7 @@ function postproc(fhtml_cached, tipe)
         end
       end
       if tipe ~= 'narrativeaux' then
-        x = x:gsub('^<body ', '%1 onload="renderSaveToDrive()" ')
+        x = x:gsub('^<body ', '%1 " ')
       end
       --
     end
@@ -199,10 +199,10 @@ function postproc(fhtml_cached, tipe)
         delete_line_p = true
       end
       if x:find('</h1>') then
-        x = x:gsub('</h1>.*', '%0\n<div id="savetodrive-div"></div>')
+        x = x:gsub('</h1>.*', '%0\n')
       end
       if x:find('^<div id="body"') then
-        x = x:gsub('id="body"', '%1 onload="renderSaveToDrive()"')
+        x = x:gsub('id="body"', '%1 "')
       end
     end
     --
