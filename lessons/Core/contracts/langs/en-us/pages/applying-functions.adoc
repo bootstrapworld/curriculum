@@ -1,87 +1,85 @@
 = Applying Functions
 
-Make sure you’ve loaded the @starter-file{editor}, clicked “Run”, and are working in the @vocab{Interactions Area}. Type this line of code into the Interactions Area and hit "Enter":
+++++
+<style>
+.fitbruby { min-width: 7em; }
+</style>
+++++
 
-@center{@show{(code '(triangle 50 "solid" "red"))}}
+Open @starter-file{editor} and click “Run”. We will be working in the Interactions Area on the right.
 
-@n What is the name of this function? @fitb{}{@ifsoln{triangle}}
+== regular-polygon
 
-@n What did the expression evaluate to? @fitb{}{@ifsoln{an image of a red triangle}}
+Test out these two expressions and record what you learn below:
 
-@n How many arguments does `triangle` expect? @fitb{}{@ifsoln{3}}
+* @show{(code '(regular-polygon 40 6 "solid" "green"))}
+* @show{(code '(regular-polygon 80 5  "outline" "dark-green"))}
 
-@n What data type does the `triangle` function produce? @fitb{}{@ifsoln{image}}
+@n Some functions produce Numbers, some produce Strings, some produce Booleans... What did the `regular-polygon` function produce? +
+@fitb{}{@ifsoln{an Image!}}
 
-== Functions for Tables
+@n How would you describe what a `regular-polygon` is?
 
-Open the @starter-file{animals} and click "Run".
+@fitb{}{@ifsoln{A shape made of straight sides (_aka a polygon_) whose sides (and angles) are congruent (_aka regular_)!}}
 
-In the Interactions Window on the right, type `animals-table` and hit "Enter" to see the default view of the table.
+@n The difference between `"solid"` and `"outline"` is @fitb{}{@ifsoln{Shapes that are "solid" are all one color.}} 
 
-== sort
+@fitb{}{@ifsoln{Shapes that are "outline" are white, with a color framing them.}}
 
-*Suppose we wanted to see the names of the animals in alphabetical order...*
-
-The `sort` function takes in three pieces of information:
-
-. A table
-. A column we want to sort the table by (declared using a String)
-. The order in which we want the column sorted (declared using a Boolean)
-
-@vspace{1ex}
-
-Test out these two expressions in the Interactions Area and record what you learn about ordering below:
-
-* @show{(code '(sort animals-table "species" true))}
-* @show{(code '(sort animals-table "species" false))}
-
-
-@n `true` sorts the table... @fitb{}{@ifsoln{from A-Z ... or from least to greatest - see question 4}}
-
-@n `false` sorts the table... @fitb{}{@ifsoln{from Z-A ... or from greatest to least - see question 4}}
+@n The `regular-polygon` function takes in four pieces of information (called arguments). Record what you know about them below.
 
 @vspace{1ex}
 
-*Suppose we wanted to sort the `animals-table` by the `weeks` column to determine which animals were
-adopted quickest...*
-
-@n Would you use `true` or `false`? Explain. @fitb{}{}
-
-@n Test it out, and write your thinking about @vocab{quantitative} columns at the end of your explanations of `true` and `false` above.
-
-@n Which animal(s) were adopted the quickest? @fitb{}{@ifsoln{Snuggles, Nori, Toggle, Wade and Mittens}}
-
-@n Some functions produce Numbers, some produce Strings, some produce Booleans. What did the `sort` function produce? @fitb{}{@ifsoln{a new table!}}
+[cols="1a,1a,2a", options="header"]
+|===
+| Argument 	| Data Type 		| Information it Contains
+| First		| @ifsoln{Number}	| @ifsoln{Side Length / Size}
+| Second	| @ifsoln{Number}	| @ifsoln{Number of Sides}
+| Third 	| @ifsoln{String} 	| @ifsoln{Fill Style}
+| Fourth	| @ifsoln{String}	| @ifsoln{Color}
+|=== 
 
 @vspace{1ex}
 
-There are many other functions available to us in Pyret. We can describe them using contracts. The Contract for `sort` is:
+There are many other functions available to us in Pyret. We can describe them using contracts. The Contract for `regular-polygon` is:
 
-@show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+@vspace{1ex}
 
-- Each Contract begins with the function name: @fitb{10em}{_in this case_ `sort`}
-- Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Table, String, Boolean}
-- And then declares the data type of the Range it will return. @fitb{10em}{_in this case_ Table}
+@hspace{2em}@show{(contract 'regular-polygon '(Number Number String String) "Image")}
+
+- Each Contract begins with the function name: @fitb{20em}{_in this case_ `regular-polygon`}
+- Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Number, Number, String, String}
+- And then declares the data type of the Range it will return. @fitb{10em}{_in this case_ Image}
+
+@vspace{1ex}
 
 Contracts can also be written with more detail, by adding _variable names_ in the Domain:
 
-@show{(contract 'sort '((table-name Table) (column-name String) (order Boolean)) "Table")}
+@hspace{2em}@show{(contract 'regular-polygon '((size Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
 
 @vspace{1ex}
 
-*Suppose we wanted to sort the `animals-table` by the `legs` column to determine which animals had the most legs...*
+*Suppose we wanted to make a big blue square using the `regular-polygon` function...*
 
-@n Fill in the blanks below with the code you'd use (We've put pieces of the Contract below each line to help you!):
+@n Fill in the blanks below with the code you'd use _(We've put pieces of the Contract below each line to help you!)_:
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{@ifsoln{"legs"}}{column-name {two-colons} String}, @fitbruby{10em}{@ifsoln{true}}{order {two-colons} Boolean})
+@fitbruby{15em}{@ifsoln{regular-polygon}}{function-name} ( @fitbruby{7em}{@ifsoln{100}}{size {two-colons} Number},  
+@fitbruby{10em}{@ifsoln{4}}{number-of-sides {two-colons} Number},
+@fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
+@fitbruby{10em}{@ifsoln{"blue"}}{color {two-colons} String})
 
-@n Which animal(s) had the most legs? @fitb{}{@ifsoln{Snuggles the tarantula}}
+== square
 
-@n Think of another question you might answer quickly by sorting the table.
+*We could also make a big blue square using the `square` function...*
 
-@fitb{}{}
+@hspace{2em} @show{(contract 'square '((size Number) (fill-style String) (color String)) "Image")}
 
-@n What code would you write to answer your question?
+@n Fill in the blanks below with the code you'd use _(We've put pieces of the Contract below each line to help you!)_:
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{}{column-name {two-colons} String}, @fitbruby{10em}{}{order {two-colons} Boolean})
+@fitbruby{15em}{@ifsoln{square}}{function-name} ( @fitbruby{7em}{@ifsoln{100}}{size {two-colons} Number},  
+@fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
+@fitbruby{10em}{@ifsoln{"blue"}}{color {two-colons} String})
 
+@n Why do you think the `square` function needs one fewer argument than `regular-polygon` does to make a square? 
+
+@fitb{}{@ifsoln{Since the number of sides is the same for all squares, the function definition for `square` includes that piece of information.}}
