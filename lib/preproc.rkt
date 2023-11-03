@@ -722,9 +722,6 @@
                                height-arg
                                (if (string=? text "") ""
                                    (format ", title=~s" text-wo-url)))]
-
-               [img-link-txt (string-append
-                               (enclose-span ".big" "&#x1f5bc;") "Show image")]
                [adoc-img
                  (cond [*lesson-subdir*
                          (format "image:~a[~s~a]" img text-wo-url commaed-opts)]
