@@ -219,7 +219,7 @@ Let’s review what we have learned about making and interpreting histograms.
 
 Let’s connect what we know about histograms to your chosen dataset.
 
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret.}@ifproglang{codap}{CODAP.}
 - Choose one quantitative column from your data set that you will represent with a histogram!
 - What question does your display answer?
 - Now, write down that question in the top section of @printable-exercise{box-plots/pages/data-cycle-quantitative.adoc}.
