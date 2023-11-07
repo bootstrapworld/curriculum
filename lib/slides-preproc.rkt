@@ -26,7 +26,7 @@
 
 (define *proglang-sym* (string->symbol *proglang*))
 
-(define *natlang* 'en-us)
+(define *natlang* (or (getenv "NATLANG") "en-us"))
 
 (define *starter-files*
   (let ([starter-files-file (format "~a/distribution/~a/starter-files.js"
