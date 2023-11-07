@@ -326,7 +326,34 @@ lines on some browsers */
       /* Opera doesn't support this in the shorthand */
       background-attachment: local, local, scroll, scroll;
     }
-    tr:hover td > * {max-height: 1000px;}
+    tr:hover td > * { max-height: 1000px; }
+
+    .materials-links li:first-child {
+      ul { 
+        transition: none;
+        max-height: 0; 
+        overflow: hidden;
+      }
+      p::after {
+        top:    0;
+        right:  0;
+        height: 25px;
+        width:  25px;
+        font-size: 18pt;
+        line-height: 18pt;
+        content: '⏱';
+        text-align: center;
+        clip-path: circle(50%);
+        transition: clip-path 0s;
+        position: absolute;
+        background: @translucent-bg-color;
+        display: inline-block;
+      };
+    }
+    .materials-links li:first-child:hover {
+      ul { transition: 1s linear 4s; max-height: 1000px; }
+      p::after { clip-path: circle(0%); transition: clip-path 5s; }
+    }
 
     /* Custom materials link styles */ 
     .Optional, .OptProject, .handout {font-style: italic;}
