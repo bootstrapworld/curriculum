@@ -295,64 +295,16 @@ lines on some browsers */
     &.left-header tr td:nth-child(1) { background-color: #b7d893; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
-    tr td > * {
-      max-height: 150pt;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.5s ease-out;
-    }
-    tr td:last-child > * {
-      background:
-        /* Shadow covers */
-        linear-gradient(white 30%, rgba(255,255,255,0)),
-        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-        /* Shadows */
-        radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-
-        background:
-        /* Shadow covers */
-        linear-gradient(white 30%, rgba(255,255,255,0)),
-        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-        /* Shadows */
-        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-
-      background-repeat: no-repeat;
-      background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-
-      /* Opera doesn't support this in the shorthand */
-      background-attachment: local, local, scroll, scroll;
-    }
-    tr:hover td > * { max-height: 1000px; }
-
-    .materials-links li:first-child {
-      ul { 
-        transition: none;
-        max-height: 0; 
-        overflow: hidden;
+    .materials-links li:first-child p {
+      a[href="javascript:showPageLinks()"] { 
+        text-decoration: none; 
+        &::after { content: ' ≫ '; }
       }
-      p::after {
-        top:    0;
-        right:  0;
-        height: 25px;
-        width:  25px;
-        font-size: 18pt;
-        line-height: 18pt;
-        content: '⏱';
-        text-align: center;
-        clip-path: circle(50%);
-        transition: clip-path 0s;
-        position: absolute;
-        background: @translucent-bg-color;
-        display: inline-block;
-      };
+      ul { transition: 1s ease-in; max-height: 0; overflow: hidden; }
     }
-    .materials-links li:first-child:hover {
-      ul { transition: 1s linear 4s; max-height: 1000px; }
-      p::after { clip-path: circle(0%); transition: clip-path 5s; }
+    .materials-links li:first-child p.open {
+      a[href="javascript:showPageLinks()"] { content: ' « '; }
+      ul { transition: 1s ease-in; max-height: 1000px; }
     }
 
     /* Custom materials link styles */ 
