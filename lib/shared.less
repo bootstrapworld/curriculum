@@ -298,12 +298,15 @@ lines on some browsers */
     .materials-links li:first-child p {
       a[href="javascript:showPageLinks()"] { 
         text-decoration: none; 
-        &::after { content: ' ≫ '; }
+        &::after { content: ' ▼ '; }
       }
-      ul { transition: 1s ease-in; max-height: 0; overflow: hidden; }
+      ul { 
+        transition: 1s ease-in; max-height: 0; overflow: hidden; 
+        padding-left: 1.25em; margin-left: 0; font-style: italic;
+      }
     }
     .materials-links li:first-child p.open {
-      a[href="javascript:showPageLinks()"] { content: ' « '; }
+      a[href="javascript:showPageLinks()"]::after { content: ' ▲ '; }
       ul { transition: 1s ease-in; max-height: 1000px; }
     }
 
@@ -995,14 +998,16 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
         outline: none;
         /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
         &::after {
-          content: '≫';
+          content: '▼';
           width: 16px;
+          font-size: 16px;
+          line-height: 32px;
           color: white;
           font-weight: bold;
           float: left;
           margin-right: 5px;
         }
-        &.active::after { content: '«'; }
+        &.active::after { content: '▲'; }
         &.active, &:hover { background-color: #b7d893; }
       }
       /* set collapsed size and transition rules */
