@@ -2113,7 +2113,7 @@
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
               (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
-              (fprintf o " link:javascript:showPageLinks()[ ]")
+              (fprintf o " link:javascript:showPageLinks(false)[ ]")
               )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
@@ -2170,7 +2170,9 @@
               (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
             ; OPTIONAL PRINTED PAGES
             (unless (empty? *opt-printable-exercise-links*)
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n"))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+              (fprintf o " link:javascript:showPageLinks(true)[ ]")
+            )
             ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
