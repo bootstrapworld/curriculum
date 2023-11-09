@@ -66,19 +66,21 @@ else
   cd distribution
 fi
 
-for natlang in *; do
-  test -d $natlang || continue
-  export PROGDIR=$topdir/distribution/.prog-$natlang
-  if test ! -d $natlang/lessons; then
+export NATLANG
+
+for NATLANG in *; do
+  test -d $NATLANG || continue
+  export PROGDIR=$topdir/distribution/.prog-$NATLANG
+  if test ! -d $NATLANG/lessons; then
     echo Missing lessons diry in distribution -- did you call build-pathway\?
     continue
   fi
-  if test ! -d  $natlang/lessons/$lsn; then
-    echo Lesson $natlang/lessons/$lsn not found in distribution
+  if test ! -d  $NATLANG/lessons/$lsn; then
+    echo Lesson $NATLANG/lessons/$lsn not found in distribution
     continue
   fi
-  cd $natlang/lessons/$lsn
-  export BOOTSTRAPPREFIX="$bootstraproot/$natlang"
+  cd $NATLANG/lessons/$lsn
+  export BOOTSTRAPPREFIX="$bootstraproot/$NATLANG"
   export LESSON="$lsn"
   # echo Doing $LESSON
   repoLESSON=$(cat .repodir.txt.kp)
