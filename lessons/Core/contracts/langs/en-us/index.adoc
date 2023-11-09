@@ -173,7 +173,7 @@ _If your students are not yet familiar with function notation, no need to introd
 }
 }
 
-== Bug Hunting
+== Bug Hunting @duration{10 minutes}
 
 === Overview
 This activity digs deeper into Contracts by focusing on what we can learn from error messages. The error messages in this environment are _designed_ to be as student-friendly as possible. 
@@ -318,6 +318,62 @@ If you see an error and you know the syntax is right, ask yourself these three q
 - Was it harder to find contracts for some of the functions than others? Why?
 - How was it different to code expressions for the shape functions when you started with a Contract?
 
+== Composing with Circles of Evaluation @duration{10 minutes}
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+
+What if we wanted to see your name written on a diagonal? 
+
+* We know that we can use the `text` function to make an Image of your name.
+
+@hspace{2em} @show{(contract 'text '((message String) (size Number) (color String)) "Image")}
+
+*  @ifproglang{pyret}{Pyret}
+@ifproglang{wescheme}{WeScheme}
+also has a function called `rotate` that will rotate any Image a specified number of degrees.
+
+@hspace{2em} @show{(contract 'rotate '(Number Image) "Image")}
+
+[.big]
+_But how could the `rotate` and `text` functions work together?_
+
+=== Investigate
+
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+
+1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+
+2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+
+3) Circles can contain other Circles!
+
+
+If we want to see the `text` "Diego" written in yellow, size 150 and rotated 90 degrees so that it's vertical, our diagram would look like this.
+
+@do{
+(define exp1 '(rotate 90 (text 150 "Diego" "yellow")))
+}
+
+@show{(coe exp1)}
+
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
+
+@show{(code exp1)}
+
+@lesson-instruction{Draw the Circle of Evaluation and write the code for printing your name in your favorite color and rotating it so that it's diagonal.}
+
+=== Synthesize
+
+- There were a lot of options for how many degrees to rotate your name in order to make it diagonal! What did you choose? Why? 
+- What Numbers wouldn't have made your name diagonal? Why?
+- What did you Notice?
+- What did you wonder?
 
 == Additional Exercises
 @ifproglang{pyret}{
