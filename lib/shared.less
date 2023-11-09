@@ -68,8 +68,8 @@ body {
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
   tr th.tableblock {
-    background:       #cccccc !important;
-    padding:          .25em .5em;
+    background:       #eee !important;
+    padding:          .2em .5em;
     font-size:        1rem;
   }
 
@@ -534,6 +534,8 @@ body.solution-page {
 body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
+  #header > h1:first-child { text-align: center; }
+
   /* set page dimensions */
   &:not(.landscape) { width: 7.5in; height: 9.8in; }
   &.landscape { width: 9.8in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
@@ -544,6 +546,8 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+
+  .lesson-section-1 { border: none; }
 
   /* make .FillVerticalSpace tables use CSS grid layout */
   table.FillVerticalSpace { 
@@ -587,6 +591,14 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
+
+  .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+    background:   @translucent-bg-color;
+    font-weight:  600;
+    font-size:    12pt;
+    color:        white;
+    padding:      2px 5px !important;
+  }
 }
 
 /* Back-of-the-book contracts table */
@@ -1092,7 +1104,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Change coloring of body text, lesson summary table, and code */
   html { -webkit-print-color-adjust: exact; }
   div#body, body { color: black; }
-  :not(body.LessonPlan) #header { background: black; color: white; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
@@ -1116,19 +1127,13 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body.workbookpage {
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child { 
-      background:       black;
-      color:            white;
-      text-align:       center;
-      padding:          1px;
+      color: black;
     }
-    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
-    .lesson-section-1 { border: none; }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
-      background:   #ccc;
-      font-weight:  600;
-      font-size:    12pt;
-      padding-left: 5px;
+      color: white;
     }
+
+    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
   /* Page Breaks for printed lesson plans, projects, and TR pages */
