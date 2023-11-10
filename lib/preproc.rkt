@@ -771,7 +771,8 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-dist-link f link-text)
-  (cond [(regexp-match "^ *$" f) (set! f "./index.adoc")]
+  (cond [(regexp-match "\\?.*=" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
+        [(regexp-match "^ *$" f) (set! f "./index.adoc")]
         [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
         [(regexp-match "html$" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
         [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
