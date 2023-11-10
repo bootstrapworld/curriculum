@@ -100,7 +100,8 @@ The Animal Shelter Bureau used one method of summary, called the @vocab{mean}, o
 
 Pyret has a way for us to compute the mean of any @vocab{quantitative} column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
-@show{ (contract "mean" '("Table" "String") "Number" )}
+@ifproglang{pyret}{
+@show{ (contract "mean" '("Table" "String") "Number" )}}
 
 @lesson-instruction{
 - What is the function's name? Domain? Range?
@@ -110,8 +111,12 @@ Pyret has a way for us to compute the mean of any @vocab{quantitative} column in
 Notice that calculating the mean requires being able to add and divide, so the mean only makes sense for quantitative data. For example, the mean of a list of Presidents doesn’t make sense. Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.
 
 @lesson-instruction{
+@ifproglang{pyret}{
 - Type `mean(animals-table, "pounds")`. What does this give us?
-** _39.715625._
+** _39.715625._}
+@ifproglang{codap}{
+- Let's find the mean of the animals' weights. Create a new graph with its points randomly positioned. Drag `Pounds` to the x-axis. From the `Measure` menu, select `Mean`. Hover your cursor over the blue line. What is the mean?
+** _39.715625._}
 - Does this support the Bureau’s claims?
 ** _No, the mean is less than 40 pounds._
 - Now, turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, fill in the computed mean.
@@ -159,17 +164,28 @@ The algorithm for finding the median of a quantitative column is:
 The median of this list is 8, because 8 is the mean of the two middle numbers, 7 and 9. To find their mean, we added 7 and 9 to get 16 and split 16 in half.
 
 === Investigate
-@lesson-instruction{
-* Pyret has a function to compute the median of a list as well. Find the Contract for `median` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
-* Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.
-** _The median is 11.3._
-* Is it different than the mean?
-** _Yes, it is very different!_
-* What can we conclude when the mean is so much greater than the median?
-** _There are some very heavy animals that are causing the mean to be higher._
-* For practice, compute the mean and median for the weeks and age columns.
-** _Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3._
-}
+
+@QandA{
+@ifproglang{pyret}{
+@Q{Pyret has a function to compute the median of a list as well. Find the Contract for `median` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{ _If you're working with a printed workbook, the contracts pages are included in the back._}}
+@Q{Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.}
+@A{The median is 11.3.}}
+
+
+
+@ifproglang{codap}{
+@Q{We can use CODAP to compute the median of a list as well. On the same graph that you created to find mean, go to the `Measure` menu and select `Median`. What value do you get when you hover over the red line that appears?}
+@A{The median is 11.3.}}
+
+@Q{Is it different than the mean?}
+@A{Yes, it is very different!}
+
+@Q{What can we conclude when the mean is so much greater than the median?}
+@A{There are some very heavy animals that are causing the mean to be higher.}
+
+@Q{For practice, compute the mean and median for the weeks and age columns.}
+@A{Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3.}}
+
 
 === Synthesize
 Looking at the shape of the data (via a histogram, for example), helps us determine whether it's probably better to use the mean or median.
@@ -204,9 +220,13 @@ Consider the following three datasets:
 
 Modes are rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.
 
+@ifproglang{pyret}{
 In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
-@show{ (contract "modes" '("Table" "String") "List<Number>" )}
+@show{ (contract "modes" '("Table" "String") "List<Number>" )}}
+
+@ifproglang{codap}{
+Right now, the easiest way to find the modes in CODAP is to sort a column. Do this by clicking on the column name and then selecting from the drop-down menu either Sort option.) Scan the column to see which values are the most common.}
 
 === Investigate
 @lesson-instruction{
