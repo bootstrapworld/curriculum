@@ -79,24 +79,40 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 - Q3 - Q1 = @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
 
 === Investigate
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range.
+
+@ifproglang{pyret}{Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
 # Consumes a table and the name of the column
-# to plot, and produces a box plot"
+# to plot, and produces a box plot
 box-plot(animals-table, "pounds")
 ```
+}
+
+
+
+@ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot.}
 
 @lesson-point{
 Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
 }
 
 @lesson-instruction{
+@ifproglang{pyret}{
 Type `box-plot(animals-table, "pounds")` into the Interactions Area, and see the resulting plot.
 }
+@ifproglang{codap}{
+Create a box plot in CODAP that displays the spread of `Pounds`.}
+}
 
-@center{@image{images/5-plot.png,  400}}
+@ifproglang{pyret}{
+@center{@image{images/5-plot.png,  400}}}
+
+@ifproglang{codap}{
+@center{@image{images/codap-box-plot.png, 300}}}
+
 
 This plot shows us the center and spread in our dataset according to those five numbers.
 
@@ -118,19 +134,25 @@ It is extremely common for students to forget that every quartile _always_ inclu
 
 === Synthesize
 
-@lesson-instruction{
-- What percentage of points fall in the first quartile?
-** 25%
-- What percentage of points fall in the second quartile?
-** 25%
-- What percentage of points fall in the third quartile?
-** 25%
-- What percentage of points fall in the fourth quartile?
-** 25%
-- What percentage of points fall in the **Interquartile Range** (IQR)?
-** 50%
-- What percentage of points fall within the Range?
-** 100%
+@QandA{
+
+@Q{What percentage of points fall in the first quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the second quartile?}
+@A{25%}
+
+@A{What percentage of points fall in the third quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the fourth quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the **Interquartile Range** (IQR)?}
+@A{50%}
+
+@Q{What percentage of points fall within the Range?}
+@A{100%}
 }
 
 == Interpreting Box Plots @duration{30 minutes}
@@ -180,10 +202,14 @@ They should notice that shorter intervals have __thicker cylinders__, and longer
 
 @strategy{
 @span{.title}{Modified Box Plots}
-More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot.
+
+@ifproglang{pyret}{Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
 
 @show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
 }
+
+@ifproglang{codap}{In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.}}
 
 
 @lesson-instruction{
@@ -195,11 +221,12 @@ Histograms, box plots, and measures of center and spread are all different ways 
 
 We started talking about measures of center with a single question: __is "average" the right measure to use when talking about animals' weights?__ Now that we've explored the spread of the dataset, do you agree or disagree that average is the right summary?
 
+@ifproglang{pyret}{
 @strategy{
 @span{.title}{Project Option: Stress or Chill?}
 
-Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. 
-}
+Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science.
+}}
 
 == Data Exploration Project (Box Plots) @duration{flexible}
 
@@ -215,7 +242,7 @@ Let’s review what we have learned about making and interpreting box plots.
 ** _Box plots display a single column of quantitative data._
 - How are box plots similar to histograms? How are they different?
 ** _Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variables numbers of data points in each one. Boxplots have variable intervals ("quartiles") with a fixed number of data points in each one._
-- When we build a box plot from a quantitative column in Pyret, there's a five-number summary at the top. What does it tell us about the column?
+- Building a box plot creates a five-number summary. What does the five-number summary tell us about the column?
 ** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
 }
 
@@ -224,7 +251,7 @@ Let’s review what we have learned about making and interpreting box plots.
 Let’s connect what we know about box plots to your chosen dataset.
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.
 - What question does your display answer?
