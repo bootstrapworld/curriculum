@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-23
-
 -- print('doing make-images-js.lua')
 
 local image_js_file = ...
@@ -12,8 +10,10 @@ dofile(make_dir .. 'utils.lua')
 
 dofile(make_dir .. 'readers.lua')
 
+local file_being_read = 'none-yet'
+
 local read_group = make_read_group(identity, function()
-  return 'Collecting images'
+  return file_being_read
 end)
 
 local function expand_some_directives(i, o)
@@ -50,6 +50,7 @@ for _,lesson in ipairs(lessons) do
   -- print('lesson_image_file is ' .. lesson_image_file)
   o:write('"' .. lesson .. '": ')
   local bi = io.open_buffered(lesson_image_file)
+  file_being_read = lesson_image_file
   expand_some_directives(bi, o)
   bi:close()
   o:write(',\n')
