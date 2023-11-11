@@ -71,6 +71,12 @@
       example.innerHTML = (pathway && pathway.includes("wescheme"))? 
         `(triangle 20 "solid" "green")` : `triangle(20, "solid", "green")`
 
+      // if proglang = "pyret", check to see if there's a pyret-name
+      function processName(contract) {
+        return (proglang=="pyret" && contract["name-pyret"])? 
+          contract["name-pyret"] : contract["name"];
+      }
+
       // the domain is an array of {name, type} pairs
       function processDomain(contract) {
         const code = document.createElement('code');
@@ -98,6 +104,7 @@
       contracts
         .forEach(c => {
           // build the domain and example
+          name   = processName(c);
           domain = processDomain(c).outerHTML;
           example= processExample(c);
           // make the tbody
@@ -105,7 +112,7 @@
           // make the row
           const row1 = document.createElement('tr');
           row1.innerHTML  = 
-            '<td><code>' + prefix + c.name + '</code></td>' +
+            '<td><code>' + prefix + name + '</code></td>' +
             '<td> :: </td>' +
             '<td>' + domain + '</td>' + 
             '<td> -> </td>' + 
