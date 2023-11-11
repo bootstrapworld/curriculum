@@ -771,48 +771,55 @@
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-dist-link f link-text)
-  (cond [(regexp-match "\\?.*=" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
-        [(regexp-match "^ *$" f) (set! f "./index.adoc")]
-        [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
-        [(regexp-match "html$" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
-        [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
-  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
-         [dir (second m)] [snippet (third m)]
-         [dir-compts (regexp-split #rx"/" dir)]
-         [f.titletxt (path-replace-extension
-                       (build-path dir ".cached" snippet) ".titletxt")]
-         [page-title (and (file-exists? f.titletxt)
-                          (call-with-input-file f.titletxt read-line))]
-         [existent-file? #f]
-         [dist-natlang-dir (format "distribution/~a" *natlang*)])
-    (cond [(or (path-has-extension? f ".adoc")
-               (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
-           (let ([f.adoc (path-replace-extension f ".adoc")]
-                 [f.html (path-replace-extension f ".html")]
-                 [f.shtml (path-replace-extension f ".shtml")]
-                 [f.pdf (path-replace-extension f ".pdf")])
-             (cond [(file-exists? (build-path dist-natlang-dir f.html))
-                    (set! f f.html) (set! existent-file? #t)]
-                   [(file-exists? (build-path dist-natlang-dir f.shtml))
-                    (set! f f.shtml) (set! existent-file? #t)]
-                   [(file-exists? (build-path dist-natlang-dir f.adoc))
-                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))
-                    (set! existent-file? #t)]
-                   [(file-exists? (build-path dist-natlang-dir f.pdf))
-                    (set! f f.pdf) (set! existent-file? #t)]
-                   [(path-has-extension? f ".adoc")
-                    (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
-          [(path-has-extension? f ".pdf")
-           (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
-    (unless existent-file?
-      (check-link f)
-      (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
-    (when (and (or (not link-text) (string=? link-text "")) page-title)
-      (set! link-text page-title))
-    (let ([link-output (format "link:~apass:[~a][~a~a]"
-                               *dist-root-dir* f link-text
-                               (if *lesson-plan* ", window=\"_blank\"" ""))])
-      link-output)))
+  (let ([url-has-query-string? #f])
+    (cond [(regexp-match "\\?.*=" f) (set! url-has-query-string? #t)
+                                     (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
+          [(regexp-match "^ *$" f) (set! f "./index.adoc")]
+          [(regexp-match "/$" f) (set! f (string-append f "index.adoc"))]
+          [(regexp-match "html$" f) (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
+          [(regexp-match "^[^/]+$" f) (set! f (string-append f "/index.adoc"))])
+    (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+           [dir (second m)] [snippet (third m)]
+           [dir-compts (regexp-split #rx"/" dir)]
+           [f.titletxt (path-replace-extension
+                         (build-path dir ".cached" snippet) ".titletxt")]
+           [page-title (and (file-exists? f.titletxt)
+                            (call-with-input-file f.titletxt read-line))]
+           [existent-file? #f]
+           [dist-natlang-dir (format "distribution/~a" *natlang*)]
+           [url-without-query-string #f])
+      (cond [url-has-query-string?
+              (set! url-without-query-string (regexp-replace "\\?.*" f ""))
+              (when (file-exists? (build-path dist-natlang-dir url-without-query-string))
+                (set! existent-file? #t))]
+            [(or (path-has-extension? f ".adoc")
+                 (path-has-extension? f ".html") (path-has-extension? f ".shtml"))
+             (let ([f.adoc (path-replace-extension f ".adoc")]
+                   [f.html (path-replace-extension f ".html")]
+                   [f.shtml (path-replace-extension f ".shtml")]
+                   [f.pdf (path-replace-extension f ".pdf")])
+               (cond [(file-exists? (build-path dist-natlang-dir f.html))
+                      (set! f f.html) (set! existent-file? #t)]
+                     [(file-exists? (build-path dist-natlang-dir f.shtml))
+                      (set! f f.shtml) (set! existent-file? #t)]
+                     [(file-exists? (build-path dist-natlang-dir f.adoc))
+                      (set! f (if (= (length dir-compts) 2) f.shtml f.html))
+                      (set! existent-file? #t)]
+                     [(file-exists? (build-path dist-natlang-dir f.pdf))
+                      (set! f f.pdf) (set! existent-file? #t)]
+                     [(path-has-extension? f ".adoc")
+                      (set! f (if (= (length dir-compts) 2) f.shtml f.html))]))]
+            [(path-has-extension? f ".pdf")
+             (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
+      (unless existent-file?
+        (check-link f)
+        (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
+      (when (and (or (not link-text) (string=? link-text "")) page-title)
+        (set! link-text page-title))
+      (let ([link-output (format "link:~apass:[~a][~a~a]"
+                                 *dist-root-dir* f link-text
+                                 (if *lesson-plan* ", window=\"_blank\"" ""))])
+        link-output))))
 
 (define (make-lesson-link f link-text)
   ; (printf "doing make-lesson-link ~s ~s\n\n" f link-text)
