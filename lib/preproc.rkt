@@ -873,8 +873,8 @@
                       (if (= (length dir-compts) 1) f.shtml f.html))])]
             [(path-has-extension? f ".pdf")
              (when (or (file-exists? f)
-                       (and *book* (or (file-exists? f.adoc)
-                                       (file-exists? f.html) (file-exists? f.shtml))))
+                       (file-exists? f.adoc)
+                       (file-exists? f.html) (file-exists? f.shtml))
                (set! existent-file? #t))])
       (unless existent-file?
         (check-link f)
