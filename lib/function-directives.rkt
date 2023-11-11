@@ -144,6 +144,8 @@
         [(eq? e 'string=?) "=="]
         [(eq? e 'string>=?) ">="]
         [(eq? e 'string>?) ">"]
+        [(eq? e 'triangle/sas) "triangle-sas"]
+        [(eq? e 'triangle/asa) "triangle-asa"]
         [else
           (let ([es (format "~a" e)])
             (cond [(regexp-match #rx"\\?$" es)

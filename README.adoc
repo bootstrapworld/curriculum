@@ -122,7 +122,7 @@ student or teacher. Thus:
 - The `langs` subdirectory uses further subdirectories, e.g.,
 `en-us` for US English, `es-mx` for Mexican Spanish, and `fr` for French. Source
 documents from the relevant natural language are chosen based on
-the value of the environment variable `$NATLANG` during build.
+the value of the makefile variable `$NATLANG` during build.
 The default is
 `en-us`. In order to ease transition, if a language other than
 `en-us` is chosen, any content unavailable in the new language is
@@ -135,10 +135,10 @@ programming language is used.
 
 - The directory `solution-pages` is used to house source
 that will shadow `pages`, when the pages meant only for
-teacher use are created.  Similarly,
+teacher use are created.
 
 In all these cases, it is important that the shadowing content
-have the same file basename as the content that is being
+have the same file _basename_ as the content that is being
 shadowed. Extensions can vary; thus it is possible for
 `filename.pdf` to shadow `filename.adoc` and vice versa.
 
@@ -156,7 +156,7 @@ this level.
 
 Images are in subdirectory `images`.
 
-Single printable pages & opt-printable are in subdirs `pages`
+Single printable and optionally printable pages are in subdirs `pages`
 and `solution-pages` (some of these can be static PDFs
 rather than adoc source files).
 (The `solution-` versions, as already explained, are meant to supply
@@ -308,6 +308,25 @@ build:
   workbook PDFs and the related lesson PDFs _only_ for the comma-separated
   pathways `p1`, `p2`, `...` specified
 
+[CAUTION]
+--
+`NATLANG`, `SEMESTER`, `YEAR`, and `COURSE` are _makefile_
+variables, *not* shell environment variables! You cannot set them as
+environment variables and expect `make` to pick them up. To set,
+`NATLANG`, say, to `es-mx`, use
+
+  make NATLANG=es-mx
+
+Calls such as
+
+  NATLANG=es-mx make
+  NATLANG=es-mx; make
+  export NATLANG=es-mx; make
+
+will not work! This is intentional: to avoid the build picking up
+environment variables that were possibly set for other purposes.
+--
+
 The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
 resides in
 `distribution/en-us/courses/`. Thus:
@@ -397,7 +416,7 @@ Remember, re-making the entire distribution takes time, and is often too
 drastic a step if you're working on one or two lessons, are
 satisfied with local debugging, and immediate deployment is not the
 goal. In such cases, you can simply go into `distribution/en-us/lessons`
-and manually delete the lessons you want rebuilt. You can also manually
+and manually delete only those lessons that you want rebuilt. You can also manually
 delete pathways in `distribution/en-us/courses` to rebuild specific
 pathways. A subsequent `make` (even without `force`) will cleanly re-make
 just your desired lessons and/or pathways, leaving the rest of the
@@ -440,6 +459,11 @@ a currently active deployment. _Always explicitly set `SEASON` and
 Deployment requires that you have enabled SSH access to the website machine,
 and that the environment variables `HOSTINGER_IPADDR`,
 `HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
+
+TIP: You are allowed to set these environment variables as makefile
+variables, i.e., as options to `make`. However, it may be more
+convenient to store these as environment variables, as, once set, they are unlikely
+to change.
 
 You will be prodded for your webhost password,
 once to copy the files over and another time
@@ -487,9 +511,9 @@ dictionary file `standards-cc-math-dictionary.json`
      }
 
 It associates the label `6.EE.B` with the description `Reason about and
-solve one-variable equations and inequalities`, and says that the two
+solve one-variable equations and inequalities.`, and says that the two
 lessons `inequalities1-simple` and `inequalities2-compound` comply with
-it. As you create or modify lessons, add to their names to the
+it. As you create or modify lessons, add their names to the
 appropriate standard entries as appropriate.
 
 The build process creates a menu for finding out the standards
@@ -653,6 +677,9 @@ Similarly for “subsections” at level 2, 3, 4, 5.
 
 (That's it. Headers of level 6+ are not provided.)
 
+TIP: By convention, the level of a section is one less than the number of `=` signs
+used to specify it.
+
 Itemized lists have each item paragraph preceded by a ``*`` or
 ``-`` and space.
 
@@ -712,6 +739,8 @@ constituent lessons are collected into a file
 `pathway-standards.shtml` that is linked to in the narrative
 page.
 
+// doesn't look like we're using shadowing glossaries anymore?
+
 There can be auxiliary glossary files in `lib/` that can be used
 to _shadow_ the main glossary for particular lessons. For now,
 the only such shadowing glossary file is `glossary-terms-ss.json`,
@@ -740,7 +769,7 @@ An example value could be `[ ["mean"], ["average" "ave" "avg"] ]`. The
 word in the source is used to find the relevant sublist, and _its_ first
 item is used in the generated glossary.
 
-- \"description\", the definition for the glossed item.
+- `"description"`, the definition for the glossed item.
 
 [TIP]
 --

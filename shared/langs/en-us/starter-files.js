@@ -382,6 +382,12 @@ var MoreDS = {
       "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl"
     }
   },
+  "olympic-records": {
+    "title": "Olympic Records Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1bUSNUJ73VE3wCpLebihVdWk-Z7EFwidx"
+    }
+  },
   "text-stats": {
     "title": "Text Stats Starter File",
     "pyret": {
