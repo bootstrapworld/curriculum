@@ -1505,7 +1505,7 @@
                                      *lesson-subdir* *in-file*))
                             (let ([args (map string->symbol (read-commaed-group i directive read-group))])
                               ;(printf "args = ~s\n" args)
-                              (for-each add-prereq args))]
+                              (for-each add-prereq/check args))]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
@@ -2616,13 +2616,21 @@
                            ))]
         [else (error 'ERROR "sexp->arith: unknown s-exp ~s" e)]))
 
-(define (add-prereq sym)
+(define (add-prereq sym #:check? [check? (lambda (x) #t)])
   ; (printf "doing add-prereq ~s\n" sym)
   (when (and (or *lesson-plan* *lesson*) (symbol? sym))
     ;use conditional here if you want to exclude some symbols
     ; (printf "it's happening\n")
     (unless (member sym *prereqs-used*)
-      (set! *prereqs-used* (cons sym *prereqs-used*)))))
+      (cond [(check? sym)
+             (set! *prereqs-used* (cons sym *prereqs-used*))]
+            [else
+              (printf "WARNING: ~a in ~a not mentioned in langtable.js\n\n"
+                      sym (errmessage-file-context))]))))
+
+(define (add-prereq/check sym)
+  ; (printf "doing add-prereq/check ~s\n\n" sym)
+  (add-prereq sym #:check? check-in-langtable?))
 
 (define (add-starter-file sf)
   (cond [(member sf *starter-files-used*) #f]
