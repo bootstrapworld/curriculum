@@ -587,9 +587,8 @@
                (let* ([styled-link-output
                         (let ([g-pdf (path-replace-extension g ".pdf")]
                               [tack-on ", window=\"_blank\""])
-                          (format "[.PrintableExercise]##~a {startsb} link:~alessons/pass:[~a][html~a] &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}##" (or page-title link-text)
-                                  *dist-root-dir* g tack-on
-                                  *dist-root-dir* g-pdf tack-on))]
+                          (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##" 
+                                  *dist-root-dir* g (or page-title link-text) tack-on))]
                      ; [styled-link-output
                      ;   (string-append "[.PrintableExercise]##" materials-link-output-with-pdf "##")]
                      )
@@ -2122,6 +2121,21 @@
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
               (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " link:javascript:showPageLinks(false)[ ]")
+              (for ([x (reverse *handout-exercise-links*)])
+                (fprintf o "\n** ~a\n\n" x))
+              (let ([xx (sort *printable-exercise-links*
+                              (lambda (x y)
+                                (let ([x-i (index-of *workbook-pages* (first x))]
+                                      [y-i (index-of *workbook-pages* (first y))])
+                                  (unless x-i (set! x-i -1))
+                                  (unless y-i (set! y-i -1))
+                                  (cond [(and (= x-i -1) (= y-i -1)) #t]
+                                        [else (< x-i y-i)]))))])
+              
+                (for ([x xx])
+                  (fprintf o "\n** ~a\n\n" (second x)))
+                )
+
               )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
@@ -2138,28 +2152,7 @@
 
             (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
-            ; NOTE(Emmanuel): These are no longer used, as of Nov 2023
-            ;(for ([x (reverse *handout-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
-            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
-            ;(let ([xx (sort *printable-exercise-links*
-            ;                (lambda (x y)
-            ;                  (let ([x-i (index-of *workbook-pages* (first x))]
-            ;                        [y-i (index-of *workbook-pages* (first y))])
-            ;                    (unless x-i (set! x-i -1))
-            ;                    (unless y-i (set! y-i -1))
-            ;                    (cond [(and (= x-i -1) (= y-i -1)) #t]
-            ;                          [else (< x-i y-i)]))))])
-            ;
-            ;   (printf "xx = ~s\n" xx)
-            ;
-            ;  (for ([x xx])
-            ;    (fprintf o "\n* ~a\n\n" (second x)))
-            ;  )
-            ;(for ([x (reverse *opt-printable-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-
+            
             )
           #:exists 'replace)
 
@@ -2180,6 +2173,9 @@
             (unless (empty? *opt-printable-exercise-links*)
               (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
               (fprintf o " link:javascript:showPageLinks(true)[ ]")
+              (for ([x (reverse *opt-printable-exercise-links*)])
+                (fprintf o "\n** ~a\n\n" x))
+
             )
             ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])

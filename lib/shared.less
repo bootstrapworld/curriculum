@@ -300,14 +300,14 @@ lines on some browsers */
         text-decoration: none; 
         &::after { content: ' ▼ '; }
       }
-      ul { 
+      &+.ulist { 
         transition: 1s ease-in; max-height: 0; overflow: hidden; 
-        padding-left: 1.25em; margin-left: 0; font-style: italic;
+        padding-left: 1.25em; margin: 0; font-style: italic;
       }
     }
     .materials-links li:first-child p.open {
       a[href*="javascript:showPageLinks"]::after { content: ' ▲ '; }
-      ul { transition: 1s ease-in; max-height: 1000px; }
+      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
     }
 
     /* Custom materials link styles */ 
