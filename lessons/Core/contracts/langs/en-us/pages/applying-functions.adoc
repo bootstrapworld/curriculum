@@ -3,6 +3,7 @@
 ++++
 <style>
 .fitbruby { min-width: 6em; }
+.indentedpara { width: 6in; }
 </style>
 ++++
 
@@ -16,18 +17,17 @@ Test out these two expressions and record what you learn below:
 * @show{(code '(regular-polygon 40 6 "solid" "green"))}
 * @show{(code '(regular-polygon 80 5  "outline" "dark-green"))}
 
-@n Some functions produce Numbers, some produce Strings, some produce Booleans... + 
-@hspace{1em} What did the `regular-polygon` function produce? @fitb{}{@ifsoln{an Image!}}
+@n You've seen data types like Numbers, Strings, and Booleans. What did the `regular-polygon` function produce? @fitb{}{@ifsoln{an Image!}}
 
 @n The `regular-polygon` function takes in four pieces of information (called arguments). Record what you know about them below.
 
 [cols="1a,1a,2a", options="header"]
 |===
-| Argument 	| Data Type 		| Information it Contains
-| First		| @ifsoln{Number}	| @ifsoln{Side Length / Size}
-| Second	| @ifsoln{Number}	| @ifsoln{Number of Sides}
-| Third 	| @ifsoln{String} 	| @ifsoln{Fill Style}
-| Fourth	| @ifsoln{String}	| @ifsoln{Color}
+|  					| Data Type 		| Information it Contains
+| **Argument 1**	| @ifsoln{Number}	| @ifsoln{Side Length / Size}
+| **Argument 2**	| @ifsoln{Number}	| @ifsoln{Number of Sides}
+| **Argument 3**	| @ifsoln{String} 	| @ifsoln{Fill Style}
+| **Argument 4**	| @ifsoln{String}	| @ifsoln{Color}
 |=== 
 
 @vspace{1ex}
@@ -38,23 +38,23 @@ There are many other functions available to us in Pyret. We can describe them us
 
 [.indentedpara]
 --
-- Each Contract begins with the function name: @fitb{20em}{_in this case_ `regular-polygon`}
-- Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Number, Number, String, String}
-- And then declares the data type of the Range it will return: @fitb{10em}{_in this case_ Image}
+- Each Contract begins with the function name: @fitb{}{_in this case_ `regular-polygon`}
+- Lists the data types required to satisfy its Domain: @fitb{}{_in this case_ Number, Number, String, String}
+- And then declares the data type of the Range it will return: @fitb{}{_in this case_ Image}
 
 @vspace{1ex}
 
-Contracts can also be written with more detail, by adding _variable names_ in the Domain:
+Contracts can also be written with more detail, by annotating the Domain with _variable names_:
 
 --
 
-@hspace{2em}@show{(contract 'regular-polygon '((size Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
+@show{(contract 'regular-polygon '((size Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
 
 @n We know that a square is a regular polygon because @fitb{}{@ifsoln{Regular polygons are shapes made of straight sides (_aka a polygon_)}}
 
 @fitb{}{@ifsoln{whose sides (and angles) are congruent (_aka regular_)! Square have 4 equal straight sides and 4 right angles.}}
 
-@n What code would you write to make a big blue square using the `regular-polygon` function?  + 
+@n What code would you write to make a big, blue square using the `regular-polygon` function?  +
 @fitbruby{16em}{@ifsoln{regular-polygon}}{function-name} ( @fitbruby{7em}{@ifsoln{100}}{size {two-colons} Number},  
 @fitbruby{10em}{@ifsoln{4}}{number-of-sides {two-colons} Number},
 @fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
@@ -62,19 +62,17 @@ Contracts can also be written with more detail, by adding _variable names_ in th
 
 @vspace{1ex}
  
-@hspace{2em} @show{(contract 'square '((size Number) (fill-style String) (color String)) "Image")}
+@show{(contract 'square '((size Number) (fill-style String) (color String)) "Image")}
 
 @n What code would you write to make a big blue square using the `square` function? +
 @fitbruby{10em}{@ifsoln{square}}{function-name} ( @fitbruby{10em}{@ifsoln{100}}{size {two-colons} Number},  
 @fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
 @fitbruby{10em}{@ifsoln{"blue"}}{color {two-colons} String})
 
-@n Why do you think the `square` function needs one fewer argument than `regular-polygon` does to make a square? 
+@n Why does `square` need fewer arguments to make a square than `regular-polygon`?
 
 @fitb{}{@ifsoln{Since the number of sides is the same for all squares, the function definition for `square` includes that piece of information.}}
 
-@n Besides `square`, what other specific regular polygons might it be helpful to define functions for?
+@star Where else have you heard the word @vocab{contract} used before? @fitb{}{}
 
-@fitb{}{@ifsoln{_Answers will vary! equilateral triangles? regular octagons?_}} 
-
-@star In what other contexts have you heard the word @vocab{contract} used before?
+@fitb{}{}
