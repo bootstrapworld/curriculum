@@ -105,11 +105,6 @@ With your partner, complete @printable-exercise{pages/applying-functions.adoc}.
 
 The expressions using the `regular-polygon` function produced a value that wasn't a Number, a String, or a Boolean. In the @proglang programming language, these values are called _Images_.
 
-@lesson-point{
-A Contract is an agreement between us and a function: if we give it what it needs, we get back what we want.
-}
-
-
 @QandA{
 
 @Q{What are the three parts of a contract?}
@@ -133,9 +128,13 @@ Contracts are _binding_ agreements! For example, we might sign a contract with a
 
 If one party breaks the contract, bad things can happen. In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time to use a function, so the only result is a helpful error message.
 
+@lesson-point{
+A Contract is an agreement between us and a function: if it gets what it expects, it'll give us what we expect. 
+}
+
 @lesson-instruction{
 - How much can you figure out about a function just by reading its contract? With your partner, complete @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc}.
-- _Note_: These pages use made-up functions that are not built into @proglang. Students who try to type them into the computer will get and error!
+- _Note_: These pages use made-up functions that are not built into @proglang. Students who try to type them into the computer will get an error!
 }
 
 @teacher{Review students' answers for `is-beach-weather` and `cylinder`.}
@@ -197,7 +196,7 @@ This means that the computer knows about a function called `triangle`.
 @QandA{
 @Q{What _hint_ does the error message give us about how to use this function?}
 @A{@image{images/triangle80.png, 500}}
-@A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the star we want.}
+@A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
 }
 
 @lesson-instruction{
@@ -256,7 +255,7 @@ Image exploration is a low threshold / high-ceiling activity that should be enga
 
 Later in this lesson students will be guided through more scaffolded and in-depth reflection on `isosceles-triangle`, `right-triangle`, `ellipse`, `rhombus`, `regular-polygon` and `radial-star`. There are also optional pages for digging deeper into `star-polygon`, `triangle-asa` and `triangle-sas`. 
 
-Students to **not** need to find all of the contracts on this page in order to complete the lesson or the following pages.
+Students do **not** need to find all of the contracts on this page in order to complete the lesson or the following pages.
 }
 
 In order to make sure that all students both remain engaged and are prepared to engage in productive class discussion, when you become aware that the first student in your class has successfully used the `text` function, give your students the following directions:
@@ -287,10 +286,7 @@ It can be empowering for students to develop expertise on a topic and get to sha
 - Complete @printable-exercise{pages/triangle-contracts.adoc}, @printable-exercise{pages/using-contracts.adoc} and @printable-exercise{pages/radial-star.adoc} with your partner.
 }
 
-@optional
-
-- If your students are ready to dig into more complex triangles, you can also have them work through @opt-printable-exercise{pages/triangle-contracts-cont.adoc}.
-- Students can also explore  @opt-printable-exercise{pages/star-polygon.adoc}. 
+@optional If your students are ready to dig into more complex triangles, @opt-printable-exercise{pages/triangle-contracts-cont.adoc} will be a good challenge. Another option for further investigation is @opt-printable-exercise{pages/star-polygon.adoc}. 
 
 @teacher{Note: Both `star-polygon` and `radial-star` generate a wide range of really interesting shapes!}
 
@@ -331,7 +327,9 @@ _But how could the `rotate` and `text` functions work together?_
 
 === Investigate
 
-One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. Circles of Evaluation help us think about what we want to do, without worrying about syntax like quotation marks, paretheses, etc. They let us use all our brains for _thinking_, before we use them for _coding_.
+
+The rules are simple:
 
 1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
 
@@ -341,25 +339,35 @@ One way to organize our thoughts is to diagram what we want to do, using the Cir
 
 3) Circles can contain other Circles!
 
-Suppose we want to see the `text` "Diego" written in yellow letters of size 150. The code would be @show{(code '(text "Diego" 150 "yellow"))}. What would the Circle of Evaluation look like?
-
-@show{(coe '(text "Diego" 150 "yellow"))}
-
-How can we use the `rotate` function with this Circle of Evaluation, to rotate the text 90 degrees?
-
-@do{
-(define exp1 '(rotate 90 (text 150 "Diego" "yellow")))
+@lesson-instruction{
+* Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150. 
+* Turn to @printable-exercise{pages/text-coe.adoc} and complete the Notice and Wonder section.
 }
 
-@show{(coe exp1)}
+[cols="^4, ^.^1,^5", grid="none", stripes="none" frame="none"]
+|===
 
-Circles of Evaluation help us think about what we want to do, without worrying about syntax like quotation marks, paretheses, etc. They let us use all our brains for _thinking_, before we use them for _coding_.
+|We can start by generating the Diego image.
+|
+|And then use the `rotate` function to rotate it 90 degrees.
 
-To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
+| @show{(coe '(text "Diego" 150 "yellow"))}  | &rarr; 	| @show{(coe exp1)}
 
-@show{(code exp1)}
+| @show{(code '(text "Diego" 150 "yellow"))} | 			| @show{(code exp1)}
 
-@lesson-instruction{Draw the Circle of Evaluation and write the code for printing your name in your favorite color and rotating it so that it's diagonal.}
+|===
+
+@lesson-instruction{
+What do you Notice? What do you Wonder?
+}
+
+
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle. 
+
+@lesson-instruction{
+Give it a try by completing the *Let's Rotate an image of your name!* section of @printable-exercise{pages/text-coe.adoc}
+}
+
 
 === Synthesize
 
