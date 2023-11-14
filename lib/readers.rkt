@@ -345,7 +345,7 @@
                                      [("overline") (let ([dec (read-mathjax-token i)])
                                                      (enclose-span ".overbar"
                                                        (math-unicode-if-possible dec)))]
-                                     [("|") "&#x7c;"]
+                                     [("|" "lvert" "rvert") "&#x7c;"]
                                      [(";") " "]
                                      [else
                                        (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
