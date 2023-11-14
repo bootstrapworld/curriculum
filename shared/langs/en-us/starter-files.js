@@ -804,8 +804,22 @@ var Reactive = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
       } 
-    } 
+    }, 
+"cats-only": {
+    "title": "Animals Dataset - Cats Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
+      }
+    },
+"dogs-only": {
+    "title": "Animals Dataset - Dogs Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
+      }
+    }
   }
+
+
 
 var allStarterFiles = {
   ...Editors, 
