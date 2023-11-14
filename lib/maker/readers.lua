@@ -99,7 +99,7 @@ function make_read_group(code, errmsg_file_context)
     while true do
       c = i:read(1)
       if not c then
-        print('read_group: Runaway directive @' .. directive)
+        print('read_group: ' .. errmsg_file_context() .. ': Runaway directive @' .. directive)
         print('Read so far: ' .. table.concat(r))
         error 'crash and burn'; break
       end
