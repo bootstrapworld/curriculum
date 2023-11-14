@@ -54,13 +54,26 @@
     // take note of whether we are in wescheme or not
     const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
 
+    // Swap in pyret names if we're in pyret
+    function processName(contract) {
+      return (proglang=="pyret" && contract["name-pyret"])? 
+        contract["name-pyret"] : contract["name"];
+    }
+
+    function ellideProgLangSpecificPrimitives(c) {
+      if(proglang == "wescheme") {
+        return c.name !== '<>' 
+      } else { 
+        return c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name);
+      }
+    }
+
     // set the list of contracts
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
-      .sort((a,b) => a.name > b.name? 1 : -1)
-      .filter(c => primitives? primitives.includes(c.name) : true)
-      .filter(c => (proglang == "wescheme")? 
-        c.name !== '<>' : c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name))
+      .sort((a,b) => processName(a) > processName(b)? 1 : -1)      // sort by proglang-specific names..
+      .filter(c => primitives? primitives.includes(c.name) : true) // for functions in our list..
+      .filter(ellideProgLangSpecificPrimitives);                   // but only valid ones
 
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
@@ -70,12 +83,6 @@
       let example = document.getElementById('exampleCode');
       example.innerHTML = (pathway && pathway.includes("wescheme"))? 
         `(triangle 20 "solid" "green")` : `triangle(20, "solid", "green")`
-
-      // if proglang = "pyret", check to see if there's a pyret-name
-      function processName(contract) {
-        return (proglang=="pyret" && contract["name-pyret"])? 
-          contract["name-pyret"] : contract["name"];
-      }
 
       // the domain is an array of {name, type} pairs
       function processDomain(contract) {
