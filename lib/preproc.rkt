@@ -2625,7 +2625,7 @@
       (cond [(check? sym)
              (set! *prereqs-used* (cons sym *prereqs-used*))]
             [else
-              (printf "WARNING: ~a in ~a not mentioned in langtable.js\n\n"
+              (printf "WARNING: ~a in ~a not mentioned in langtable.js (are you sure you're using the WeScheme name?)\n\n"
                       sym (errmessage-file-context))]))))
 
 (define (add-prereq/check sym)
