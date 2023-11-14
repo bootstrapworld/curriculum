@@ -2120,7 +2120,7 @@
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
               (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
-              (fprintf o " link:javascript:showPageLinks(false)[ ]")
+              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
               (let ([xx (sort *printable-exercise-links*
@@ -2172,7 +2172,7 @@
             ; OPTIONAL PRINTED PAGES
             (unless (empty? *opt-printable-exercise-links*)
               (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
-              (fprintf o " link:javascript:showPageLinks(true)[ ]")
+              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(true)[ ]#")
               (for ([x (reverse *opt-printable-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
 
