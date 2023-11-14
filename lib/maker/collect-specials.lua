@@ -8,10 +8,10 @@ do
   local lessons_dir = 'distribution/' .. os.getenv('NATLANG') .. '/lessons/'
   local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
   for _,lesson in ipairs(lessons) do
-    if not file_exists_p(lesson) then
+    local lesson_cache = lessons_dir .. lesson .. '/.cached/'
+    if not file_exists_p(lesson_cache) then
       goto continue
     end
-    local lesson_cache = lessons_dir .. lesson .. '/.cached/'
     local prims = {}
     local starter_files = {}
     --
