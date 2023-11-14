@@ -13,6 +13,8 @@
 @code-comment-color: #cd7054;
 @top-padding-for-writing: 1.2rem;
 @top-padding-for-dr: 1rem;
+@print-section-heading: lightgray;
+@table-header: #eee;
 
 html, body { font-size: 9pt; }
 
@@ -68,7 +70,7 @@ body {
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
   tr th.tableblock {
-    background:       #eee !important;
+    background:       @table-header !important;
     padding:          .2em .5em;
     font-size:        1rem;
   }
@@ -350,7 +352,7 @@ lines on some browsers */
     p { font-family: monospace; }
     
     tr:first-of-type, tr:first-of-type p {
-      background-color:   lightgray;
+      background-color:   @print-section-heading;
       font-weight:        bold;
       text-align:         center;
       font-family:        inherit; /* Header row should not be monospace */
@@ -438,7 +440,7 @@ lines on some browsers */
   }
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
-    background: #eee;
+    background: lightgray;
     clear:      both;
     padding:    5px;
     margin:     2ex 0;
@@ -650,7 +652,7 @@ body.LessonNotes {
 .data-cycle { 
   border-collapse: collapse;
   width: 100%;
-  td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
+  td:first-of-type { background: @print-section-heading; border: solid white; min-width: 1in; }
   td { padding: 0.2rem 0.325rem; }
   td p.tableblock { font-size: 1rem; }
 
@@ -678,7 +680,7 @@ body.LessonNotes {
 table.recipe_title    { 
   background: @translucent-bg-color; border: @translucent-bg-color; 
   td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-  td:last-child { border: 2px solid gray !important; }
+  td:last-child { border: 2px solid @translucent-bg-color !important; }
   td:last-child .content { width: 16px; height: 16px; background: white; }
   p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 }
@@ -954,7 +956,7 @@ table.pyret-table {
   border:             1px black solid;
   border-radius:      1em;
   overflow:           hidden;
-  background:         #eee;
+  background:         @print-section-heading;
   tr:nth-child(even){background-color: #f2f2f2}
   thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
   td p { margin: 0px; }
@@ -971,7 +973,7 @@ table.sideways-pyret-table {
   tr { background: none; text-align: right; }
   td:first-child {
     display: table-cell;
-    background: #cccccc;
+    background: @table-header;
     text-align: center;
     width: 50px;
   }
@@ -1137,6 +1139,12 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
       color: white;
     }
+
+    .recipe_title, h2 { 
+      background: @print-section-heading !important; 
+      td:last-child { border: 2px solid @print-section-heading !important; }
+    }
+    h2, table.recipe_title p { color: black !important; }
 
     .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
