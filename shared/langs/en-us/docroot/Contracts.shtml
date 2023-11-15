@@ -40,7 +40,6 @@
         break-inside: avoid !important; 
         page-break-inside: avoid !important; 
       }
-
     }
   </style>
 
@@ -78,6 +77,15 @@
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
     function buildTable() {
+      // If we're in a pathway, add it to the title
+      if(pathway) {
+        const h1 = document.querySelector('#header h1');
+        const title = pathway.split("-")
+          .map(w => w[0].toUpperCase() + w.substring(1))
+          .map(w => ["Wescheme", "Pyret"].includes(w)? '('+w+')' : w)
+          .join(' ');
+        h1.innerHTML += " for " + title;
+      }
 
       // add the appropriate example (pyret or wescheme)
       let example = document.getElementById('exampleCode');
