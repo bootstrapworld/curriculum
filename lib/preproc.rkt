@@ -585,11 +585,9 @@
 
               [(equal? link-type "printable-exercise")
                (let* ([styled-link-output
-                        (let ([g-pdf (path-replace-extension g ".pdf")]
-                              [tack-on ", window=\"_blank\""])
-                          (format "[.PrintableExercise]##~a {startsb} link:~alessons/pass:[~a][html~a] &#x7c; link:~alessons/pass:[~a][pdf~a] {endsb}##" (or page-title link-text)
-                                  *dist-root-dir* g tack-on
-                                  *dist-root-dir* g-pdf tack-on))]
+                        (let ([tack-on ", window=\"_blank\""])
+                          (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##" 
+                                  *dist-root-dir* g (or page-title link-text) tack-on))]
                      ; [styled-link-output
                      ;   (string-append "[.PrintableExercise]##" materials-link-output-with-pdf "##")]
                      )
@@ -2120,7 +2118,24 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]\n"))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
+              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
+              (for ([x (reverse *handout-exercise-links*)])
+                (fprintf o "\n** ~a\n\n" x))
+              (let ([xx (sort *printable-exercise-links*
+                              (lambda (x y)
+                                (let ([x-i (index-of *workbook-pages* (first x))]
+                                      [y-i (index-of *workbook-pages* (first y))])
+                                  (unless x-i (set! x-i -1))
+                                  (unless y-i (set! y-i -1))
+                                  (cond [(and (= x-i -1) (= y-i -1)) #t]
+                                        [else (< x-i y-i)]))))])
+              
+                (for ([x xx])
+                  (fprintf o "\n** ~a\n\n" (second x)))
+                )
+
+              )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -2136,28 +2151,7 @@
 
             (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
-            ; NOTE(Emmanuel): These are no longer used, as of Nov 2023
-            ;(for ([x (reverse *handout-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-            ; (printf "*printable-exercise-links* = ~s\n\n" *printable-exercise-links*)
-            ; (printf "*workbook-pages* = ~s\n\n" *workbook-pages*)
-            ;(let ([xx (sort *printable-exercise-links*
-            ;                (lambda (x y)
-            ;                  (let ([x-i (index-of *workbook-pages* (first x))]
-            ;                        [y-i (index-of *workbook-pages* (first y))])
-            ;                    (unless x-i (set! x-i -1))
-            ;                    (unless y-i (set! y-i -1))
-            ;                    (cond [(and (= x-i -1) (= y-i -1)) #t]
-            ;                          [else (< x-i y-i)]))))])
-            ;
-            ;   (printf "xx = ~s\n" xx)
-            ;
-            ;  (for ([x xx])
-            ;    (fprintf o "\n* ~a\n\n" (second x)))
-            ;  )
-            ;(for ([x (reverse *opt-printable-exercise-links*)])
-            ;  (fprintf o "\n* ~a\n\n" x))
-
+            
             )
           #:exists 'replace)
 
@@ -2176,7 +2170,12 @@
               (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
             ; OPTIONAL PRINTED PAGES
             (unless (empty? *opt-printable-exercise-links*)
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n"))
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(true)[ ]#")
+              (for ([x (reverse *opt-printable-exercise-links*)])
+                (fprintf o "\n** ~a\n\n" x))
+
+            )
             ; OPTIONAL STARTER FILES
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
@@ -2625,7 +2624,7 @@
       (cond [(check? sym)
              (set! *prereqs-used* (cons sym *prereqs-used*))]
             [else
-              (printf "WARNING: ~a in ~a not mentioned in langtable.js\n\n"
+              (printf "WARNING: ~a in ~a not mentioned in langtable.js (are you sure you're using the WeScheme name?)\n\n"
                       sym (errmessage-file-context))]))))
 
 (define (add-prereq/check sym)
