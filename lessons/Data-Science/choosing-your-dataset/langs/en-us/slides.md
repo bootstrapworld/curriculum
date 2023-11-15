@@ -31,6 +31,7 @@ We live in a world filled with data, gathered about almost every subject you can
 @teacher{
 Note: *If you are opting to focus your whole class on a single dataset, we recommend skipping this section of the lesson.* _You'll instead want to jump to "Dataset Exploration Project.")_
 }
+
 @slidebreak
 {layout="Launch"}
 # Choosing a Dataset
@@ -59,7 +60,7 @@ When you've selected a dataset to work on, open the Starter File and save a copy
 _Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @starter-file{blank-ds-tutorial} for help importing your own data into Pyret.
 
 
-For teachers using a single dataset, we recommend using @opt-starter-file{food}._ This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
+For teachers using a single dataset, we recommend using @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "Global Food Supply and Production"}}. _ This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
 
 **NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
 }
