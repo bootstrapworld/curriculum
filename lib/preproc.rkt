@@ -585,8 +585,7 @@
 
               [(equal? link-type "printable-exercise")
                (let* ([styled-link-output
-                        (let ([g-pdf (path-replace-extension g ".pdf")]
-                              [tack-on ", window=\"_blank\""])
+                        (let ([tack-on ", window=\"_blank\""])
                           (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##" 
                                   *dist-root-dir* g (or page-title link-text) tack-on))]
                      ; [styled-link-output
