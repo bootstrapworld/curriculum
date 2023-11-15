@@ -520,10 +520,19 @@ var MoreAlg = {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
     }
   },
-  "inequalities-sam": {
+  "inequalities-samX": {
     "title": "Sam the Butterfly Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=13d5j4CAfaHu1Y1DzPBvqapzO-Gpr9BrH"
+      "url": "https://code.pyret.org/editor#share=1wP6m2gAouUk9TmOyOXmU3CkskcVfHm79"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
+    }
+  },
+  "inequalities-samXY": {
+    "title": "Sam the Butterfly Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1xM5Ipf0poIOc2WM-Fs-E-SJRzPmj8DjI"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
