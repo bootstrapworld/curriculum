@@ -299,38 +299,21 @@ lines on some browsers */
     &.left-header tr td:nth-child(1) { background-color: #b7d893; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
-    tr td > * {
-      max-height: 150pt;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.5s ease-out;
+    .materials-links li p {
+      .showPageLinks a { 
+        text-decoration: none; 
+        &::after { content: ' ▼ '; }
+      }
+      &+.ulist { 
+        transition: 1s ease-in; max-height: 0; overflow: hidden; 
+        padding-left: 5px; margin: 0; font-style: italic; font-size: 10pt;
+        .pageNum { float: right; margin-right: 10%; }
+      }
     }
-    tr td:last-child > * {
-      background:
-        /* Shadow covers */
-        linear-gradient(white 30%, rgba(255,255,255,0)),
-        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-        /* Shadows */
-        radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-
-        background:
-        /* Shadow covers */
-        linear-gradient(white 30%, rgba(255,255,255,0)),
-        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-        /* Shadows */
-        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-
-      background-repeat: no-repeat;
-      background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-
-      /* Opera doesn't support this in the shorthand */
-      background-attachment: local, local, scroll, scroll;
+    .materials-links li p.open {
+      .showPageLinks a::after { content: ' ▲ '; }
+      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
     }
-    tr:hover td > * {max-height: 1000px;}
 
     /* Custom materials link styles */ 
     .Optional, .OptProject, .handout {font-style: italic;}
@@ -1020,13 +1003,16 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
         outline: none;
         /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
         &::after {
-          content: '\002B';
+          content: '▼';
+          width: 16px;
+          font-size: 16px;
+          line-height: 32px;
           color: white;
           font-weight: bold;
           float: left;
           margin-right: 5px;
         }
-        &.active::after { content: "\2212"; }
+        &.active::after { content: '▲'; }
         &.active, &:hover { background-color: #b7d893; }
       }
       /* set collapsed size and transition rules */
