@@ -39,7 +39,7 @@ proglangarg="pyret"
 
 for f in $containingdirectory/.cached/.proglang-*; do
   if test -f $f; then
-    proglangarg=$(echo $f|sed -e 's/.*\.cached\/\.proglang-\(.*\)/\1/')
+    proglangarg=$(echo $f|$SED -e 's/.*\.cached\/\.proglang-\(.*\)/\1/')
   fi
 done
 
