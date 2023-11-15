@@ -2,7 +2,8 @@
 
 ++++
 <style>
-table .autonum::after { content: ')'; }
+table .autonum::after { content: ')' !important; }
+#content { display: block !important; }
 </style>
 ++++
 
@@ -14,11 +15,11 @@ table .autonum::after { content: ')'; }
 
 }
 
-Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure.
+_Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure._
 
 @vspace{1ex}
 
-[cols="^4, ^.^1,^5", grid="none", stripes="none" frame="none"]
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===
 
 |We can start by generating the Diego image.
@@ -40,24 +41,28 @@ Suppose we want to see the `text` "Diego" written vertically in yellow letters o
 
 @fitb{}{}
 
+@vspace{1ex}
+
 == Let's Rotate an Image of Your Name!
 
-Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal...
+_Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal..._
 
-[cols="4, ^.^1,5", grid="none", stripes="none" frame="none"]
+@vspace{1ex}
+
+[cols=".<1a, .<1a", stripes="none"]
 |===
 
 | @n Draw the circle of evaluation to generate the image of your name in your favorite color.
-| @vspace{15em}
+
 | @n Draw the circle of evaluation to `rotate` it so that it's diagonal.
 
-^| @showsoln{(coe '(text "Shriram" 45 "purple"))}  	| &rarr; 	^| @showsoln{(coe exp2)}
+^| @showsoln{(coe '(text "Shriram" 45 "purple"))}  	^| @showsoln{(coe exp2)}
+@ifnotsoln{@vspace{35ex}}
 
-| @n Convert the Circle of Evaluation to code.		| 			| @n Convert the Circle of Evaluation to code.
+| @n Convert the Circle of Evaluation to code.		 | @n Convert the Circle of Evaluation to code.
 
-
-| @showsoln{(code '(text "Shriram" 45 "purple"))} 	| 			| @showsoln{(code exp2)}
-
+| @showsoln{(code '(text "Shriram" 45 "purple"))} 	 | @showsoln{(code exp2)}
+ @ifnotsoln{@vspace{3ex}}
 |===
 
 

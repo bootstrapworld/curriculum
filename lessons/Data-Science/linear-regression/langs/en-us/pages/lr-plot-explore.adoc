@@ -2,7 +2,8 @@
 
 ++++
 <style>
-    #content .forceShading { background: #f7f7f8; font-size:0.8rem;}
+    #content .forceShading { background: #f7f7f8; font-size:0.8rem; }
+    #content { display: block !important; }
 </style>
 ++++
 
@@ -38,7 +39,9 @@ _Make another lr-plot, but this time use the animals' weight as our explanatory 
 
 == cats
 
-_Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the cats_ using the following code:_
+_Make another `lr-plot`, comparing the `age` v. `weeks` columns for **only the cats** using the following code:_
+
+@vspace{1ex}
 
 [.indentedpara .forceShading]
 --
@@ -46,6 +49,8 @@ _Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the ca
 lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 ``
 --
+
+@vspace{1ex}
 
 @n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.23161}} @math{x +} @fitb{5em}{@ifsoln{2.48598}}
 
@@ -63,4 +68,4 @@ lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 
 @vspace{3ex}
 
-*★ *Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.*
+★ *Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.*
