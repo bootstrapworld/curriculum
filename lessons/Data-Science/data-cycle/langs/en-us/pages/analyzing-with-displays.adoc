@@ -22,7 +22,7 @@ For each question below, complete the first three steps of the Data Cycle. For t
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(count animals-table "species")
+  #:expression (if (string=? *proglang* "pyret") '(count animals-table "species") "dot plot with count displayed")
   #:show-expression? #f
   #:finding ""
   #:show-finding? #f
@@ -45,8 +45,7 @@ For each question below, complete the first three steps of the Data Cycle. For t
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(count animals-table "sex")
-  #:show-expression? #f
+  #:expression (if (string=? *proglang* "pyret") '(count animals-table "species")  #:show-expression? #f
   #:finding ""
   #:show-finding? #f
   #:new-question ""
