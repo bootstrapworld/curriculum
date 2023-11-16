@@ -101,61 +101,82 @@ The line itself is computed through a process called _linear regression_, which 
 
 @slidebreak
 {layout="Launch"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-Pyret includes a powerful display, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line:
+@ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP} includes a powerful display called @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line}, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line.
 
+@ifproglang{pyret}{
 ```{style="font-size:16pt"}
 # lr-plot :: Table, String, String, String -> Image
 # consumes a table, and 3 column names: labels, xs and ys
 # produces a scatter plot, and draws the line of best fit
 lr-plot(animals-table, "name", "age", "weeks")
 ```
+}
+
 <!--
 
 -->
 @slidebreak
 {layout="LaunchR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
+@ifproglang{pyret}{
 ```{style="font-size:14pt"}
 # lr-plot :: Table,String,String,String -> Image
 lr-plot(animals-table, "name", "age", "weeks")
 ```
+}
 
-@image{images/lr-explained.png,  400}
+
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
+
+@ifproglang{codap}{
+To perform linear regression in CODAP, simply create a scatter plot and select Least Squares Line from the `Measure` menu.
+
+Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.}
+
+@ifproglang{pyret}{
 `lr-plot` is a function that takes a Table & the names of *3 columns*:{style="font-size:13pt"}
 
 - `ls` -- the name of the column to use for _labels_ (e.g. “names of pets”){style="font-size:13pt"}
 - `xs` -- the name of the column to use for _x-coordinates_ (e.g. “age of each pet”){style="font-size:13pt"}
 - `ys` -- the name of the column to use for _y-coordinates_ (e.g. “weeks for each pet to be adopted”){style="font-size:13pt"}
 
-Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.{style="font-size:13pt"}
+Our goal is to use values of the variable on our x-axis to _predict_ values of the variable on our y-axis.{style="font-size:13pt"}}
 
 @slidebreak
-{layout="Launch-DN"}
-# Linear Regression in Pyret
+{layout="Launch"}
+# Performing Linear Regression
 
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Create an `lr-plot` for the `animals-table`, using `"names"` for the labels, `"age"` for the x-axis and `"weeks"` for the y-axis.
+- Create @ifproglang{pyret}{an `lr-plot`}@ifproglang{codap}{a Least Squares Line} for the Animals Table.
+
+** Use `"name"` for the labels.
+** Use `"age"` for the x-axis.
+** Use `"weeks"` for the y-axis.
+
 
 @slidebreak
 {layout="LaunchR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-@image{images/lr-explained.png, 400}
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
 
 The resulting scatter plot looks like those we’ve seen before, but it has a few important additions.{style="font-size:12pt"}
 
-First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line (in red).{style="font-size:12pt"}
+First, we can see the @vocab{line of best fit} drawn onto the plot. We can also see the equation for that line.{style="font-size:12pt"}
 
 In this plot, we can see that **the slope of the line is 0.789**, which means that on average, **each extra year of age results in an extra 0.789 weeks of waiting to be adopted** (about 5 or 6 extra days).{style="font-size:12pt"}
 
 @slidebreak
 {layout="LaunchR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-@image{images/lr-explained.png, 400}
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
 
 By plugging in an animal’s age for _x_ in the predictor function @math{y = 0.789x + 2.309}, we can make a _prediction_ about how many weeks it will take to be adopted.{style="font-size:16pt"}
 
@@ -163,21 +184,23 @@ For example, **we predict a 5-year-old animal to be adopted in @math{0.789(5) + 
 
 @slidebreak
 {layout="LaunchR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-@image{images/lr-explained.png, 400}
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
 
-**The intercept is `2.309`**. This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this _too_ literally, and say that a newborn animal would be adopted in 2.309 weeks, because none of the animals in our dataset was that young.{style="font-size:16pt"} 
+**The intercept is @ifproglang{pyret}{`2.2309`}@ifproglang{codap}{`2.3`}.** This is where the best-fitting line crosses the y-axis. We want to be careful not to interpret this _too_ literally, and say that a newborn animal would be adopted in  @ifproglang{pyret}{2.309}@ifproglang{codap}{2.3} weeks, because none of the animals in our dataset was that young.{style="font-size:16pt"} 
 
 Still, the @vocab{regression line} (or @vocab{line of best fit}) suggests that a baby animal, whose age is close to 0, would take only about 3 weeks to be adopted.{style="font-size:16pt"}
 
 @slidebreak
 {layout="LaunchR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-@image{images/lr-explained.png, 400}
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
 
-We also see **the @math{r}-value is +0.448**. The sign is positive, consistent with the fact that the scatter plot point cloud and line of best fit, slope upward.{style="font-size:16pt"}
+@ifproglang{pyret}{We also see the @math{r}-value is `+0.448`.}@ifproglang{codap}{We also see that the @math{R^2} value is `0.201`. When we know @math{R^2}, we can find @math{r} by taking the square root of @math{R^2}. The @math{r}-value is `+0.448`.}
 
 The fact that **the @math{r}-value is close to 0.5** tells us that the strength is **moderate**.{style="font-size:16pt"}
 
@@ -185,23 +208,26 @@ This makes sense: the points on the scatter plot are somewhere between being rea
 
 @slidebreak
 {layout="InvestigateR"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
-@image{images/lr-explained.png, 400}
+@ifproglang{pyret}{@image{images/lr-explained.png, 400}}
+@ifproglang{codap}{@image{images/codap-lr-explained.png, 400}}
 
 Complete @printable-exercise{lr-plot-explore.adoc}!
 
 @slidebreak
 {layout="Investigate"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
 - Make another lr-plot, comparing the `age` v. `weeks` columns for **only the cats**.
 - Complete @printable-exercise{which-questions-make-sense.adoc}
-- @optional open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.
+@ifproglang{pyret}{
+- @optional Open @opt-starter-file{height} to explore the same student dataset broken down by gender identity using @opt-printable-exercise{age-v-height-explore.adoc}.}
+
 
 @slidebreak
 {layout="Synthesize"}
-# Linear Regression in Pyret
+# Performing Linear Regression
 
 **A predictor only makes sense within the range of the data that was used to generate it.**
 
@@ -256,7 +282,7 @@ Have students explain the connection between the Ask Questions and Consider Data
 
 - Turn to @printable-exercise{pages/describing-relationships-1.adoc}
 - Using the language you saw on @printable-exercise{pages/regression-analysis-example.adoc}, how would you write up the findings on this page?
-- @optional for more practice, you can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
+- @optional For more practice, you can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
 
 <!--
 *Common Misconceptions*
@@ -271,12 +297,12 @@ Let’s review what we have learned about linear regression.
 
 Linear Regression is a way to calculate the line-of-best-fit (or "predictor function") for the relationship between two quantitative columns.
 
-- Will `lr-plot` still find a line of best fit, even if there's no correlation?
+- Will @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line} still find a line of best fit, even if there's no correlation?
 - What does the slope of the line-of-best-fit tell us about a correlation?
 - If the @math{r}-value is close to 1, does this mean the predictor function will always give us a good prediction of the y-value, based on _any_ x-value? Why or why not?
 
 @teacher{
-- Will `lr-plot` still find a line of best fit, even if there's no correlation?
+- Will @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{a Least Squares Line} still find a line of best fit, even if there's no correlation?
 ** _Yes! Linear regression will always find a line of best fit -- it just might not fit very well!_
 - What does the slope of the line-of-best-fit tell us about a correlation?
 ** If the slope is positive, the correlation is positive. If it's negative, so is the correlation._
@@ -290,7 +316,7 @@ Linear Regression is a way to calculate the line-of-best-fit (or "predictor func
 
 Let’s connect what we know about linear regression to your chosen dataset.
 
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file @ifproglang{pyret}{in Pyret}@ifproglang{codap}{in CODAP}.
 - Choose one correlation you were investigating, and use the Data Cycle to ask the question about the relationship between those two columns. Tell the story on @printable-exercise{regression-analysis-1.adoc}.
 - You can explore another question in the same way, using @opt-printable-exercise{regression-analysis-2.adoc}.
 
@@ -313,11 +339,12 @@ Let’s connect what we know about linear regression to your chosen dataset.
 
 Did you discover anything surprising or interesting about their dataset?
 
-Did the results from `lr-plot` confirm your suspicions about the correlation? Were any of them surprising?
+Did the results from @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{your Least Squares Line} confirm your suspicions about the correlation? Were any of them surprising?
 
 @slidebreak
 {layout="Supplemental"}
 # Your Analysis
 
 - An extra, @opt-printable-exercise{regression-analysis-2.adoc, blank regression analysis pages} is available
-- @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}
+@ifproglang{pyret}{
+- @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}}
