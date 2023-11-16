@@ -101,7 +101,7 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  (or (math-unicode-if-possible text)
+  (or (math-unicode-if-possible text #:asciidoc? #f)
       (let ([use-mathjax?
               (cond [(regexp-match "\\\\frac" text)
                      (cond [(regexp-match "\\\\div" text) #t]
