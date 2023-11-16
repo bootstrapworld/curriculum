@@ -84,7 +84,7 @@ Now, let's hack each other's surveys!
 Using what they learned from reflecting on the other team's survey and the written feedback they received, students should revise their survey so that it's ready to collect "cleaner" data from the general public!{style="font-size:20pt"}
 
 <!--
-Some teachers have students import their resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they have already learned.
+Some teachers have students import their resulting spreadsheets into @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}, and analyze the data using the skills and concepts they have already learned.
 
 This project can also be used to support original data collection for the final research paper.
 -->
