@@ -8,15 +8,33 @@ containingdirectory=$(dirname $adocfile)
 
 lessondirectory=$(echo $containingdirectory|$SED -e 's#\(.*/lessons/[^/]*\).*#\1#')
 
+pagesdirectory=$lessondirectory/pages
+
+solnpagesdirectory=$lessondirectory/solution-pages
+
+adocbasename=$(basename $adocfile)
+
+ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
+
+workpagelistfile=$pagesdirectory/.cached/.workbook-pages-ls.txt.kp
+exerciselistfile=$pagesdirectory/.cached/.exercise-pages-ls.txt.kp
+
+if test $containingdirectory = $pagesdirectory -o $containingdirectory = $solnpagesdirectory; then
+  if test -f $workpagelistfile -a -f $exerciselistfile; then
+    if ! grep -q $adocbasename $workpagelistfile; then
+      if ! grep -q $adocbasename $exerciselistfile; then
+        touch $ascfile
+        exit
+      fi
+    fi
+  fi
+fi
+
 test -f $lessondirectory/.proglang-ignore && exit
 
 test -d $containingdirectory/.cached || mkdir -p $containingdirectory/.cached
 
 distrootdir=$(realpath --relative-to=$containingdirectory $TOPDIR/distribution/$NATLANG)/
-
-adocbasename=$(basename $adocfile)
-
-ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
 whtmlfile=$containingdirectory/${adocbasename%.adoc}.html
 
