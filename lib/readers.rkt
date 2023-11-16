@@ -285,27 +285,32 @@
     ("times" "×")
     ))
 
-(define (math-superscript ss #:use-unicode? [use-unicode? #f])
-  (let* ([ss (math-unicode-if-possible ss)]
+(define (math-superscript ss #:use-unicode? [use-unicode? #f] #:asciidoc? [asciidoc? #t])
+  (let* ([ss (math-unicode-if-possible ss #:asciidoc? asciidoc?)]
          [ss-list (string->list ss)])
-    (if (and use-unicode? (andmap (lambda (c) (assoc c *superscriptables*)) ss-list))
-        (apply string-append
-          (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))
-        (string-append "^" ss "^"))))
+    (cond [(and use-unicode? (andmap (lambda (c) (assoc c *superscriptables*)) ss-list))
+           (apply string-append
+             (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
+          [asciidoc?
+            (string-append "^" ss "^")]
+          [else
+            (string-append "<sup>" ss "</sup>")])))
 
-(define (math-subscript ss #:use-unicode? [use-unicode? #f])
-  (let* ([ss (math-unicode-if-possible ss)]
+(define (math-subscript ss #:use-unicode? [use-unicode? #f] #:asciidoc? [asciidoc? #t])
+  (let* ([ss (math-unicode-if-possible ss #:asciidoc? asciidoc?)]
          [ss-list (string->list ss)])
-    (if (and use-unicode? (andmap (lambda (c) (assoc c *subscriptables*)) ss-list))
-        (apply string-append
-          (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))
-        (string-append "~" ss "~"))))
+    (cond [(and use-unicode? (andmap (lambda (c) (assoc c *subscriptables*)) ss-list))
+           (apply string-append
+             (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))]
+          [asciidoc?
+            (string-append "~" ss "~")]
+          [else (string-append "<sub>" ss "</sub>")])))
 
 (define (math-sqrt x)
   (string-append "√"
     (enclose-span ".overbar" x)))
 
-(define (math-unicode-if-possible text)
+(define (math-unicode-if-possible text #:asciidoc? [asciidoc? #t])
   ; (printf "doing math-unicode-if-possible ~s\n" text)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
@@ -335,7 +340,8 @@
                                      [("mbox") (let ([x (local-read-group i "math mbox")])
                                                  x)]
                                      [("sqrt") (let ([x (local-read-group i "math sqrt")])
-                                                 (math-sqrt (math-unicode-if-possible x)))]
+                                                 (math-sqrt (math-unicode-if-possible
+                                                              x #:asciidoc? asciidoc?)))]
                                      [("frac") (let* ([nu (read-mathjax-token i)]
                                                       [de (read-mathjax-token i)])
                                                  (display (math-superscript nu) o)
@@ -344,22 +350,26 @@
                                                  (math-subscript de))]
                                      [("overline") (let ([dec (read-mathjax-token i)])
                                                      (enclose-span ".overbar"
-                                                       (math-unicode-if-possible dec)))]
+                                                       (math-unicode-if-possible
+                                                         dec #:asciidoc? asciidoc?)))]
                                      [("|" "lvert" "rvert") "&#x7c;"]
                                      [(";") " "]
                                      [else
                                        (cond [(assoc ctl-seq *standard-mathjax-ctl-seqs*) => second]
                                              [else ctl-seq])]))]
                                 [(char=? c #\{) (math-unicode-if-possible
-                                                  (local-read-group i "math brace"))]
+                                                  (local-read-group i "math brace")
+                                                  #:asciidoc? asciidoc?)]
                                 [(char=? c #\^)
                                  (read-char i)
                                  (math-superscript (read-mathjax-token i)
-                                                   #:use-unicode? #f)]
+                                                   #:use-unicode? #f
+                                                   #:asciidoc? asciidoc?)]
                                 [(char=? c #\_)
                                  (read-char i)
                                  (math-subscript (read-mathjax-token i)
-                                                 #:use-unicode? #f)]
+                                                 #:use-unicode? #f
+                                                 #:asciidoc? asciidoc?)]
                                 [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
