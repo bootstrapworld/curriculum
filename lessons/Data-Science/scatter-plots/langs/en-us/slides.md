@@ -9,15 +9,18 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Making Scatter Plots
 
-- Do you think that younger animals get adopted faster? Why or why not?
-- What kind of data is `age`? What kind of data is `weeks`?
-- What kind of display would help us analyze the relationship between age and adoption time?
+@QandA{
+@Q{Do you think that younger animals get adopted faster? Why or why not?}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
+@Q{What kind of data is `age`? What kind of data is `weeks`?}
+@A{Both `age` and `weeks` are quantitative.}
+@Q{What kind of display would help us analyze the relationship between age and adoption time?}
+@A{Again, solicit students ideas and discuss why each display type would or would not work.}
+}
 
-**Pie** and **bar charts** help us see the _frequency_ of values in a _categorical_ column. **Histograms** and **box plots** help us explore the _distribution_ of values in a _quantitative_ column.
+@ifproglang{pyret}{Pie}@ifproglang{codap}{Dot charts} and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
-<!--
 
--->
 @slidebreak
 {layout="Launch"}
 # Making Scatter Plots
@@ -59,9 +62,13 @@ Complete @printable-exercise{pages/creating-scatterplot.adoc}, to get a feel for
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
-The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels, xs, and ys. Here's the Contract:
+@ifproglang{pyret}{
+The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
-`scatter-plot :: (t::Table, ls::String, xs::String, ys::String)`{style="font-size:15pt"}
+@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+
+@ifproglang{codap}{
+To create a scatter plot in CODAP, place a quantitative attribute on each axis. The labels that appear will correspond with the left-hand column on the table.}
 
 <!--
 
@@ -77,7 +84,7 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 @teacher{
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
 * Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
-** _To do this, students will need to type in:_ `scatter-plot(animals-table,"name", "age", "weeks")`
+@ifproglang{pyret}{** _To do this, students will need to type in:_ `scatter-plot(animals-table,"name", "age", "weeks")`}
 * Are there any patterns or trends that you see here?
 ** _It appears that younger animals get adopted more quickly._
 
@@ -245,7 +252,6 @@ All of these are phrased as "how is the _explanatory variable_ related to the _r
 }
 
 @slidebreak
->>>>>>> master
 {layout="Synthesize"}
 # Looking for Trends
 
@@ -268,6 +274,12 @@ A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully
 {layout="Synthesize"}
 # Looking for Trends
 
+
+@ifproglang{codap}{CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
+
+Remember the impact of considering a third attribute before drawing conclusions about your data.}
+
+@ifproglang{pyret}{
 **It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a Contract like:
 
 `species-dot :: (r :: Row) -> Image`
@@ -276,7 +288,7 @@ This function could take in a row from the animals table, and draw a special dot
 
 @teacher{
 There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
-}
+}}
 
 @slidebreak
 
@@ -301,7 +313,7 @@ Let’s review what we have learned about making and interpreting scatter plots.
 
 Let’s connect what we know about scatter plots to your chosen dataset.
 
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
 - Choose two quantitative columns from your dataset whose relationship you want to explore, and another column that makes sense to use as labels for your points.
 - What question does your display answer?
 - Write down that question in the top section of @printable-exercise{data-cycle-scatter-plot.adoc}.
