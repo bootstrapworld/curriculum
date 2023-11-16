@@ -2,7 +2,10 @@
 
 (require json)
 
-(provide store-functions-used create-lang-prereq-file)
+(provide
+  check-in-langtable?
+  store-functions-used
+  create-lang-prereq-file)
 
 (define lang-table-file "lib/langtable.js")
 
@@ -14,7 +17,6 @@
               (read i) (read i) (read i)
               (string->jsexpr
               (port->string i))))]))
-
 
 (define *prereqs-used* #f)
 (define *proglang* #f)
@@ -28,6 +30,8 @@
 (define *boolean-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Boolean) 'primitives)))
 (define *image-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Image) 'primitives)))
 (define *table-list* (map get-primitive-name (hash-ref (hash-ref *language-table* 'Table) 'primitives)))
+
+(define *allowed-prims* (list *number-list* *string-list* *boolean-list* *image-list* *table-list*))
 
 (define (display-prereq-row name o)
   ;(printf "doing display-prereq-row ~s\n" name)
@@ -69,19 +73,19 @@
     (display "\n\n" o)
     ))
 
-(define (store-functions-used prereqs-used prim-file)
+(define (check-in-langtable? prim)
+  (ormap (lambda (s) (member prim s)) *allowed-prims*))
 
+(define (store-functions-used prereqs-used prim-file)
   ;(printf "doing store-functions-used ~s ~s\n" prereqs-used prim-file)
 
-  (let ([allowed-prims (list *number-list* *string-list* *boolean-list* *image-list* *table-list*)])
-
-    (call-with-output-file prim-file
-      (lambda (o)
-        (for ([prim prereqs-used])
-          (when (ormap (lambda (s) (member prim s))
-                       allowed-prims)
-            (write prim o) (newline o))))
-      #:exists 'replace)))
+  (call-with-output-file prim-file
+    (lambda (o)
+      (for ([prim prereqs-used])
+        (when (ormap (lambda (s) (member prim s))
+                     *allowed-prims*)
+          (write prim o) (newline o))))
+    #:exists 'replace))
 
 (define (create-lang-prereq-file prereqs-used proglang sym-to-adocstr-fn in-file)
   ;(printf "doing create-lang-prereq-file ~s ~s ~s ~s\n" prereqs-used proglang sym-to-adocstr-fn in-file)

@@ -65,8 +65,10 @@ function emit_empty_string()
   return ''
 end
 
+local file_being_read = 'none-yet'
+
 read_group = make_read_group(emit_empty_string, function()
-  return 'Collecting exercises'
+  return file_being_read
 end)
 
 function read_first_arg(i, directive)
@@ -160,6 +162,7 @@ function collect_exercise_info(lesson_dir, proglang)
   end
   --
   local i = io.open_buffered(lesson_plan_file)
+  file_being_read = lesson_plan_file
   local opt_exercise_files, workbook_exercise_files, handout_exercise_files = scan_exercise_directives(i, proglang, workbook_pages, lesson_dir)
   i:close()
   --

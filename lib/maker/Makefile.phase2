@@ -170,6 +170,27 @@ $(eval $(foreach adocf,$(relevant-lesson-plan-adoc-files),$(call make-build-less
 
 ###############################################################################
 
+the-output-courses := $(foreach course-index-file,$(wildcard distribution/$(NATLANG)/courses/*/index.adoc),$(dir $(course-index-file)))
+
+ifeq "$(BOOK)" ""
+	the-course-contracts-pdfs :=
+else
+	the-course-contracts-pdfs := $(foreach course,$(the-output-courses),$(patsubst %,%resources/pages/Contracts.pdf,$(course)))
+endif
+
+define make-build-contracts-pdf-rule
+$1: distribution/$(NATLANG)/Contracts.shtml
+	@$(MAKE_DIR)make-contracts-pdf.sh $$@
+
+endef
+
+$(if $(BOOK),\
+$(eval $(foreach contracts-pdf,$(the-course-contracts-pdfs),$(call make-build-contracts-pdf-rule,$(contracts-pdf)))),)
+
+build-contracts-pdfs: $(the-course-contracts-pdfs)
+
+###############################################################################
+
 resource-adoc-files := $(wildcard \
 	distribution/$(NATLANG)/courses/*/*/*.adoc \
 	distribution/$(NATLANG)/courses/*/*/*/*.adoc \
@@ -245,7 +266,7 @@ distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 
 ##########################################################################
 
-preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives
+preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives build-contracts-pdfs
 	@echo ")" >> $(ADOCABLES_INPUT)
 	@echo } >> $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo } >> $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
