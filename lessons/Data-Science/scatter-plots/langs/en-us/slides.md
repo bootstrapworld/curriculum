@@ -18,7 +18,7 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 @A{Again, solicit students ideas and discuss why each display type would or would not work.}
 }
 
-@ifproglang{pyret}{Pie}@ifproglang{codap}{Dot charts} and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
+@ifproglang{pyret}{Pie}@ifproglang{codap}{Dot plots} and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
 
 @slidebreak
