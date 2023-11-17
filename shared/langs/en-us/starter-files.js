@@ -93,12 +93,6 @@ var Core = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
     }
-  },
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
-    }
   }
 }
 
@@ -795,26 +789,38 @@ var Reactive = {
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
     }
-  }, 
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
-    }
-  }, 
-"functions": {
+  }
+}
+
+var Projects = {
+  "functions": {
     "title": "Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
     }
   },
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
-      } 
-    } 
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
+    }
+  },
+  "logos": {
+    "title": "Logo Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
+    }
   }
+}
 
 var allStarterFiles = {
   ...Editors, 
@@ -826,7 +832,8 @@ var allStarterFiles = {
   ...MoreDS, 
   ...MoreAlg, 
   ...Alg2, 
-  ...Reactive
+  ...Reactive,
+  ...Projects
 }
 
 ////////////////////////////////////////////////////////////////////////////////
