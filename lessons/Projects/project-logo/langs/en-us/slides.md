@@ -1,46 +1,15 @@
-= Project: Create Your Own Logo
+@slidebreak
 
-@description{Students use functions that produce and transform images to create their own personal logo. _This project supports the learning goals of @lesson-link{function-composition}._}
+{layout="DS Title Slide"}
 
-@lesson-prereqs{function-composition}
+# Project: Create Your Own Logo
+<!--
+To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en
+-->
 
-
-[@lesson-intro-table]
-|===
-| Lesson Goals
-| Students will be able to...
-
-* represent function composition with Circles of Evaluation
-* use functions that produce and transform images to create their own personal logo
-
-| Student-facing Lesson Goals
-|
-
-* Let's make a logo in Pyret!
-
-| Materials
-|[.materials-links]
-@material-links
-
-| Preparation
-|
-* Before launching this project, ensure that students are comfortable using image-producing functions and function composition.
-* Note that for this project, students must submit four different components: (1) Sample Logo Study, (2) Designing Your Logo, (3) Coding Your Logo, and (4) the link to their published Pyret program. It is up to you whether you collect student work all at once (at the end of the project) or intermittently, after each worksheet has been completed.
-* This project is designed to span multiple days.
-
-|===
-
-== Create Your Own Logo @duration{flexible}
-
-=== Overview
-
-Students design their logo and consider which functions they will need to compose in order to build it. Then, they represent their logo first with a Circle of Evaluation, next with code. Finally, they publish and share their logo.
-
-=== Launch
-
-@teacher{To launch this project, begin with a conversation about students' favorite logos. Then, invite students to study some example logos (and the corresponding code that produced them!). Finally, students begin sketching their own logo design.
-
-Before you dive in, we recommend printing and distributing the student-facing @handout{logo-rubric.adoc} to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.}
+@slidebreak
+{layout="Launch"}
+# Create Your Own Logo
 
 @QandA{
 @Q{If I ask you to think of a logo (any logo!), what are some of the first that come to mind?}
@@ -51,15 +20,23 @@ Before you dive in, we recommend printing and distributing the student-facing @h
 @Q{Why do you think the programmer added so many indentations to their code?}
 @A{The code becomes easier to interpret! There is a new line everytime a new function appears.}}
 
-@lesson-instruction{
+@teacher{To launch this project, begin with a conversation about students' favorite logos. Then, invite students to study some example logos (and the corresponding code that produced them!). Finally, students begin sketching their own logo design.
+
+Before you dive in, we recommend printing and distributing the student-facing @handout{logo-rubric.adoc} to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.}
+
+@slidebreak
+{layout="Launch"}
+# Create Your Own Logo
+
 Using the @starter-file{logos}, complete @handout{sample-logo-study.adoc}.
-}
 
 
 @teacher{Debrief with students as a class to discuss any difficulties they encountered. If you'd like, you can collect the @handout{sample-logo-study.adoc} and assess students on the first rubric row of the @handout{logo-rubric.adoc}. Some students may benefit from receiving feedback along the way, rather than only at the end of the project.}
 
+@slidebreak
+{layout="Investigate"}
+# Create Your Own Logo
 
-=== Investigate
 
 @lesson-instruction{
 - On @handout{design-your-logo.adoc} (or on a separate sheet of paper) sketch your logo. Choose @link{https://pyret.org/docs/latest/color.html, "Pyret colors"} for each region of your logo.
@@ -69,6 +46,12 @@ Using the @starter-file{logos}, complete @handout{sample-logo-study.adoc}.
 
 @teacher{Circulate as students work to understand any obstacles that students are facing. Discuss with students any common struggles and how to solve them. If you like, you may choose to have students submit their work again to receive teacher feedback on the second rubric row.}
 
+
+@slidebreak
+{layout="Investigate"}
+# Create Your Own Logo
+
+
 @lesson-instruction{
 - It's time to code your logo! On @handout{code-your-logo.adoc}, draw a Circle of Evaluation that will produce the logo you've sketched.
 - Swap papers with a partner to give and receive feedback on your Circle of Evaluation.
@@ -77,9 +60,8 @@ Using the @starter-file{logos}, complete @handout{sample-logo-study.adoc}.
 
 @teacher{At the end of the page, students are asked to publish the link to their program and share it with their teacher. You may use a variety of methods for link submission including (but not limited to!) email, a web form, or your favorite LMS (Google Classroom, Schoology, etc).}
 
-=== Synthesize
+@slidebreak
+{layout="Synthesize"}
+# Create Your Own Logo
 
-* Once finished, encourage students to self-assess and revise their work. Peer review is built into the lesson, but you might also have students use @handout{logo-rubric.adoc} to facilitate further self and peer review.
-
-* Finally, celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
-
+When you're finished, take some time to self-assess using @handout{logo-rubric.adoc} before submitting your work.

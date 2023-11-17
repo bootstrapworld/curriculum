@@ -1,12 +1,10 @@
 #!/bin/bash
 
-# last modified 2023-03-01
-
 BROKEN_EXTERNAL_LINKS=
 
 for g in "$@"; do
   containingFile=${g%.external-links.txt.kp}
-  containingFile=$(echo $containingFile|sed -e 's/\.cached\/\.//').adoc
+  containingFile=$(echo $containingFile|$SED -e 's/\.cached\/\.//').adoc
 
   for f in $(cat $g); do
 

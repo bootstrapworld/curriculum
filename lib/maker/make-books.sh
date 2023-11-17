@@ -6,7 +6,7 @@ if test -n "$DEBUGNOBOOK"; then
   echo node lib/makeWorkbook.js for all the courses
 
 elif test -n "$COURSE"; then
-  for c in $(echo $COURSE|sed -e 's/,/ /g'); do
+  for c in $(echo $COURSE|$SED -e 's/,/ /g'); do
     p=distribution/$NATLANG/courses/$c
     test -d $p || continue
     COURSE_DIR=$p node lib/makeWorkbook.js &
