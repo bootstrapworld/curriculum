@@ -97,7 +97,7 @@ var Core = {
   "logos": {
     "title": "Logo Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
     }
   }
 }
