@@ -42,6 +42,8 @@
 
 (define *solutions-mode?* #f)
 
+(define *possibly-invalid-page?* #f)
+
 (define *pathway* "BOGUSPATHWAY")
 
 (define *lesson-plan* #f)
@@ -586,7 +588,7 @@
               [(equal? link-type "printable-exercise")
                (let* ([styled-link-output
                         (let ([tack-on ", window=\"_blank\""])
-                          (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##" 
+                          (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##"
                                   *dist-root-dir* g (or page-title link-text) tack-on))]
                      ; [styled-link-output
                      ;   (string-append "[.PrintableExercise]##" materials-link-output-with-pdf "##")]
@@ -1267,7 +1269,7 @@
           (display p o) (newline o)))
       #:exists 'replace)))
 
-(define (init-flags)
+(define (init-flags in-file)
   ;(printf "doing init-flags\n")
   (set! *autonumber-index* 1)
   (set! *glossary-items* '())
@@ -1289,8 +1291,11 @@
   (set! *natlang* (string->symbol (getenv "NATLANG")))
   (set! *optional-flag?* #f)
   (set! *first-level-section-titles* '())
+  (set! *possibly-invalid-page?* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
+
+  (set! *proglang-sym* (string->symbol *proglang*))
 
   (when (and *lesson-plan* (not *lesson*))
     (set! *lesson* *lesson-plan*))
@@ -1310,6 +1315,23 @@
         (error 'ERROR "File ~a not found" workbook-pages-ls-file))
       (set! *workbook-pages*
         (read-data-file workbook-pages-ls-file #:mode 'files))))
+
+  (set! *in-file* (build-path *containing-directory* in-file))
+
+  (when (and *lesson* (not *lesson-plan*) (not *other-dir*))
+    (let* ([exercise-pages-ls-file
+            (format "distribution/~a/lessons/~a/pages/.cached/.exercise-pages-ls.txt.kp"
+                    *natlang* *lesson*)]
+           [exercise-pages (read-data-file exercise-pages-ls-file)]
+           [handout-pages-ls-file
+            (format "distribution/~a/lessons/~a/pages/.cached/.handout-exercise-pages-ls.txt.kp"
+                    *natlang* *lesson*)]
+           [handout-pages (read-data-file handout-pages-ls-file)]
+           )
+      (unless (or (member in-file *workbook-pages*)
+                  (member in-file exercise-pages)
+                  (member in-file handout-pages))
+        (set! *possibly-invalid-page?* #t))))
 
   ; (printf "lesson-plan= ~s; lesson-plan-base= ~s\n\n" *lesson-plan* *lesson-plan-base*)
 
@@ -1337,6 +1359,9 @@
     (set! *all-lessons* (read-data-file (getenv "LESSONS_LIST_FILE"))))
 
   (erase-span-stack!)
+
+  (set! *out-file* (build-path *containing-directory* ".cached"
+                               (path-replace-extension (string-append "." in-file) ".asc")))
   )
 
 (define *title-reached?* #f)
@@ -1771,8 +1796,9 @@
                                              [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
                                              [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
+                                               (unless *possibly-invalid-page?*
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                                       (errmessage-context) directive lbl *proglang*)]
+                                                       (errmessage-context) directive lbl *proglang*))]
                                               [else
                                                 (let* ([newly-added? (add-starter-file lbl)]
                                                        [starter-file-title
@@ -1968,20 +1994,12 @@
   (set! *narrative* narrative)
   (set! *other-dir* other-dir)
   (set! *proglang* proglang)
-  (set! *proglang-sym* (string->symbol proglang))
   (set! *other-proglangs* other-proglangs)
   (set! *solutions-mode?* solutions-mode?)
   (set! *target-pathway* target-pathway)
   (set! *teacher-resources* resources)
 
-  (init-flags)
-
-  (set! *lesson-plan-base* *lesson-plan*)
-  (when *lesson-plan*
-    (unless *pyret?*
-      (let ([x (regexp-replace (format "-~a$" *proglang*) *lesson-plan* "")])
-        (unless (string=? *lesson-plan* x)
-          (set! *lesson-plan-base* x)))))
+  (init-flags in-file)
 
   ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
 
@@ -1990,8 +2008,7 @@
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* (build-path containing-directory in-file))
     ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
-    (let ([dot-in-file (string-append "." in-file)])
-      (set! *out-file* (build-path containing-directory ".cached" (path-replace-extension dot-in-file ".asc")))
+
       (set! *first-subsection-reached?* #f)
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
@@ -2130,7 +2147,7 @@
                                   (unless y-i (set! y-i -1))
                                   (cond [(and (= x-i -1) (= y-i -1)) #t]
                                         [else (< x-i y-i)]))))])
-              
+
                 (for ([x xx])
                   (fprintf o "\n** ~a\n\n" (second x)))
                 )
@@ -2151,7 +2168,6 @@
 
             (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
-            
             )
           #:exists 'replace)
 
@@ -2227,7 +2243,7 @@
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
-      ))
+      )
 
   ;(printf "done preproc-adoc-file ~s\n\n" in-file)
 
