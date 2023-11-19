@@ -103,7 +103,7 @@ The line itself is computed through a process called _linear regression_, which 
 {layout="Launch"}
 # Performing Linear Regression
 
-@ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP} includes a powerful display called @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line}, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line.
+@proglang includes a powerful display called @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line}, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even displays the equation for that line.
 
 @ifproglang{pyret}{
 ```{style="font-size:16pt"}

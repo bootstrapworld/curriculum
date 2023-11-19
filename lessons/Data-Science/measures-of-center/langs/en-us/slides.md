@@ -84,7 +84,7 @@ _Each group of three will need a ruler, 4-8 pennies, and at least one pen or pen
 
 The mean of a dataset is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
 
-@ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP} has a way for us to compute the mean of any @vocab{quantitative} column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
+@proglang has a way for us to compute the mean of any @vocab{quantitative} column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
 @ifproglang{pyret}{
 @show{ (contract "mean" '("Table" "String") "Number" )}

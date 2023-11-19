@@ -313,7 +313,7 @@ Let’s review what we have learned about making and interpreting scatter plots.
 
 Let’s connect what we know about scatter plots to your chosen dataset.
 
-- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
+- Open your chosen dataset starter file in @proglang.
 - Choose two quantitative columns from your dataset whose relationship you want to explore, and another column that makes sense to use as labels for your points.
 - What question does your display answer?
 - Write down that question in the top section of @printable-exercise{data-cycle-scatter-plot.adoc}.

@@ -282,7 +282,7 @@ Let’s review what we have learned about making and interpreting box plots.
 {layout="Investigate"}
 # Data Exploration Project (Box Plots) 
 
-- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
+- Open your chosen dataset starter file in @proglang.
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.
 - What question does your display answer?
 - Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}

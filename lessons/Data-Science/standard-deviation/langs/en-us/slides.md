@@ -229,8 +229,8 @@ Let’s review what we have learned about standard deviation.
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
-- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP} to compute the standard deviation for one of them.
+- Open your chosen dataset starter file in @proglang.
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @proglang to compute the standard deviation for one of them.
 - What question does your computation answer?
 - Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
 - Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
