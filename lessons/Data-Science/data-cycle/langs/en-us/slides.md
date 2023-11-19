@@ -255,7 +255,7 @@ Once we know that we want a pie-chart, and that we're using it to look at the `f
 
 @image{images/AnalyzeData.png, 100}
 
-Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}.
+Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @proglang.
 
 
 <!--

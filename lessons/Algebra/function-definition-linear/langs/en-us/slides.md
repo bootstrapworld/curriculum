@@ -29,7 +29,7 @@ The *slope-intercept form of the line* includes the slope as the coefficient of 
 # Defining Linear Functions
 
 @table{2}
-| Function Notation        | @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme} Code
+| Function Notation        | @proglang Code
 | @math{f(x) = 6x - 10}    | @show{(code '(define (f x) (- (* 6 x) 10)))}
 | @math{f(x) = -10 + 6x}   | @show{(code '(define (f x) (+ -10 (* 6 x))))}
 
