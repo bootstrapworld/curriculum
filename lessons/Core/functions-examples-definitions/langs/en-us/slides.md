@@ -43,7 +43,7 @@ Function definitions replace whatever changes in the examples with a variable de
 {layout="Launch"}
 # Three Representations of a Function
 
-If we use the correct syntax, we can include all three of these function representations in our @ifproglang{pyret}{Pyret}@ifproglang{wescheme}{WeScheme} files. Let's take a look!
+If we use the correct syntax, we can include all three of these function representations in our @proglang files. Let's take a look!
 
 * Go back to @starter-file{bc} and click *Run*.
 @ifproglang{pyret}{

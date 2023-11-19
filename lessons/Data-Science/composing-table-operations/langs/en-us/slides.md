@@ -298,7 +298,7 @@ Review student answers to @printable-exercise{pages/planning-table-operations.ad
 {layout="Synthesize"}
 # Composing
 
-Was it helpful to think about the Circles, without worrying about @ifproglang{pyret}{Pyret}@ifproglang{codap}{CODAP}? Why or why not?
+Was it helpful to think about the Circles, without worrying about @proglang? Why or why not?
 
 @slidebreak
 {layout="Supplemental"}
