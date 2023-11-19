@@ -194,11 +194,6 @@
   (format "~a" *in-file*)
   )
 
-(define (nicer-case x)
-  (cond [(string=? x "codap") "CODAP"]
-        [(string=? x "wescheme") "WeScheme"]
-        [else (string-titlecase x)]))
-
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
 
