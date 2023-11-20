@@ -592,6 +592,8 @@
                               ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
                               (when (string-ci=? proglang *proglang*)
                                 (expand-directives:string->port fragment o)))]
+                           [(string=? directive "proglang")
+                            (fprintf o "~a" (nicer-case *proglang*))]
                            [(member directive '("strategy" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
