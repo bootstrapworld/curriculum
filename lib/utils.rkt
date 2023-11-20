@@ -11,6 +11,7 @@
   qualify-proglang
   create-zero-file
   anonymize-filename
+  nicer-case
   )
 
 (require file/sha1)
@@ -109,3 +110,8 @@
                       (bytes->hex-string (call-with-input-string basename sha1-bytes))
                       0 16)
                     ext)))))
+
+(define (nicer-case x)
+  (cond [(string=? x "codap") "CODAP"]
+        [(string=? x "wescheme") "WeScheme"]
+        [else (string-titlecase x)]))
