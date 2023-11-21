@@ -56,7 +56,7 @@ function report_missing_images(logf, image_json_file)
     end
   end
   for _,file in ipairs(res) do
-    print('WARNING: Image ' .. file .. ' in ' .. image_json_file .. ' not found')
+    print('WARNING: Image file ' .. file .. ' referenced in ' .. image_json_file .. ' not found')
   end
 end
 
