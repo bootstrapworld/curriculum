@@ -633,7 +633,15 @@
   (regexp-replace* #rx"https://" text ""))
 
 (define (read-image-json-file-in image-dir)
-  (let ([json-file (build-path image-dir "lesson-images.json")])
+  (let ([json-file (build-path image-dir "lesson-images.json")]
+        [missing-image-log-file #f]
+        [missing-images '()])
+
+    (when *lesson*
+      (set! missing-image-log-file
+        (format "distribution/~a/lessons/~a/.cached/.missing-image-files.txt"
+                *natlang* *lesson*)))
+        
     (cond [(file-exists? json-file)
            (let ([images-hash (call-with-input-file json-file read-json)])
              ; (printf "images-hash is ~s\n" images-hash)
@@ -648,15 +656,26 @@
                        (cond [(file-exists? image-file)
                               (rename-file-or-directory image-file anon-image-file #t)]
                              [else
-                               (printf "WARNING: ~a: Image file ~a not found\n"
-                                       (errmessage-context) image-file)]))))))
+                               (unless (member key missing-images)
+                                 (set! missing-images (cons key missing-images)))
+                               #;(printf "WARNING: ~a: Image file ~a not found\n"
+                                       (errmessage-context) image-file)
+                             ]))))))
              images-hash)]
           [else
             (when (or *lesson-plan* *lesson*)
               (unless (member json-file *missing-image-json-files*)
                 (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
                 (printf "!! WARNING: Image json file ~a not found\n" json-file)))
-            'not-found])))
+            'not-found])
+
+    (when missing-image-log-file
+      (call-with-output-file missing-image-log-file
+        (lambda (o)
+          (for ([f missing-images])
+            (write f o) (newline o)))
+        #:exists 'append))
+    ))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
   ; (printf "doing make-image ~s ~s\n" img width)
