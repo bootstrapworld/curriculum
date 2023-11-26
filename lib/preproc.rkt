@@ -1930,7 +1930,11 @@
                    (set! possible-beginning-of-line? #f)
                    (newline o)
                    (display c o)]
-                  [(and beginning-of-line? (char=? c '#\=))
+                  [(and beginning-of-line? (char=? c #\@))
+                   (let ([n (process-as-many-pluses-as-possible i o)])
+                     (when (>= n 4)
+                       (process-passthrough-lines i o)))]
+                  [(and beginning-of-line? (char=? c #\=))
                    (set! beginning-of-line? #f)
                    (set! possible-beginning-of-line? #f)
                    (cond [*title-reached?*
