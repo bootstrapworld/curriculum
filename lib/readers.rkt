@@ -7,6 +7,8 @@
   string-to-form
   *make-read-group
   read-commaed-group
+  process-as-many-pluses-as-possible
+  process-passthrough-lines
   math-unicode-if-possible
   )
 
@@ -149,6 +151,22 @@
       (when (char-whitespace? c)
         (read-char i)
         (loop)))))
+
+(define (process-as-many-pluses-as-possible i o)
+  (display #\+ o)
+  (let loop ([n 1])
+    (let ([c (peek-char i)])
+      (cond [(eof-object? c) n]
+            [(char=? c #\+) (display (read-char i) o) (loop (+ n 1))]
+            [else n]))))
+
+(define (process-passthrough-lines i o)
+  (let loop ()
+    (let ([L (read-line i)])
+      (unless (eof-object? L)
+        (display L o) (newline o)
+        (unless (regexp-match #rx"^\\+\\+\\+\\+" L)
+          (loop))))))
 
 (define (read-mathjax-token i)
   (ignorespaces i)

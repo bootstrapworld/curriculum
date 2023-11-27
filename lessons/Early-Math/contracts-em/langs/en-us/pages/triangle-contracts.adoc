@@ -1,0 +1,82 @@
+= Triangle Contracts
+
+++++
+<style>
+#content .forceShading { background: #f7f7f8; font-size:0.8rem;}
+td { padding: 0 0.5rem !important; }
+.centered-img { padding: 0 !important; }
+p .editbox {font-size: 0.75rem;}
+</style>
+++++
+
+Respond to the questions. Go to @starter-file{editor} to test your code.
+
+@n What kind of triangle does the `triangle` function produce?  @fitb{}{@ifsoln{equilateral}}
+@vspace{1ex}
+
+There are lots of other kinds of triangles!  And @proglang has lots of other functions that make triangles!
+@vspace{1ex}
+
+[.forceShading]
+--
+@show{(code 'triangle)}`{two-colons} (size{two-colons} Number, style {two-colons} String, color {two-colons} String) -> Image`
+
+@show{(code 'right-triangle)}`{two-colons} (base{two-colons}Number, height{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
+
+@show{(code 'isosceles-triangle)}`{two-colons} (leg{two-colons}Number, angle{two-colons}Number, style{two-colons}String, color{two-colons}String) -> Image`
+--
+
+@vspace{1ex}
+
+@n Why do you think @show{(code 'triangle)} only needs one number, while @show{(code 'right-triangle)} and @show{(code 'isosceles-triangle)} need two numbers and @show{(code 'triangle/sas)} needs three?
+
+@fitb{}{@ifsoln{`triangle` makes equilateral triangles, so the angle is fixed at 60°. right-triangle needs to}}
+
+@fitb{}{@ifsoln{know the length of the two legs, and triangle/sas needs to know both sides AND an angle }}
+
+@n Write @show{(code 'right-triangle)} expressions for the images below. _One argument for each should be `100`._
+
+[.indented-para]
+--
+[cols="^.^8a, <.^14a", stripes="none", grid="none", frame="none"]
+|===
+| @centered-image{../images/right-50-100.png}
+| @fitb{}{@showsoln{(code '(right-triangle 50 100 "solid" "black")) }}
+
+| @centered-image{../images/right-100-50.png}
+| @fitb{}{@showsoln{(code '(right-triangle 100 50 "solid" "black")) }}
+|===
+--
+
+@vspace{1ex}
+
+@n What do you think the numbers in @show{(code 'right-triangle)} represent? @fitb{}{@ifsoln{base & height}}
+
+@n Write @show{(code 'isosceles-triangle)} expressions for the images below. _1 argument for each should be `100`._
+
+[.indented-para]
+--
+[cols="^.^8a, <.^14a", stripes="none", grid="none", frame="none"]
+|===
+| @centered-image{../images/isosceles-100-30.png}
+| @fitb{}{@showsoln{(code '(isosceles-triangle 100  30 "solid" "black")) }}
+
+| @centered-image{../images/isosceles-100-130.png}
+| @fitb{}{@showsoln{(code '(isosceles-triangle 100 130 "solid" "black")) }}
+|===
+--
+@n What do you think the numbers in @show{(code 'isosceles-triangle)} represent?
+
+@fitb{}{@ifsoln{The length of the sides, and the size of the angle between them}}
+
+@n Write 2 expressions that would build *right-isosceles* triangles. Use @show{(code 'right-triangle)} for one expression and @show{(code 'isosceles-triangle)} for the other expression.
+
+[cols="1a, 4a",stripes="none", grid="none", frame="none"]
+|===
+|@centered-image{../images/right-isosceles.png}
+| [cols="1a", stripes="none", grid="none", frame="none"]
+!===
+! @fitb{}{@showsoln{(code '(right-triangle 100 100 "solid" "black")) }}
+! @fitb{}{@showsoln{(code '(isosceles-triangle 100 90 "solid" "black")) }}
+!===
+|===

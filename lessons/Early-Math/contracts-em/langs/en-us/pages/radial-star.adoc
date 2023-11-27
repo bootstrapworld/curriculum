@@ -1,0 +1,63 @@
+= Radial Star
+
+++++
+<style>
+#content img { width: 50%; }
+#content .forceShadedBlockWTF { background-color: #f7f7f8; }
+.highlight { padding: 0 !important; }
+</style>
+++++
+
+[.forceShadedBlockWTF]
+--
+@show{(code 'radial-star)}`{two-colons} (`
+```
+	points :: Number,
+	inner-radius :: Number,
+	full-radius :: Number,
+	style :: String,
+	color :: String
+) -> Image
+
+```
+--
+
+Using the detailed Contract above, match each image to the expression that describes it. Go to @starter-file{editor} to test your code.
+
+
+@vspace{1ex}
+[.FillVerticalSpace, cols="3,^.^3a,1,^.^1a,^.^12a",stripes="none",grid="none",frame="none", options="header"]
+|===
+|  Image
+|  ||
+|  Expression
+
+| @centered-image{../images/radial-star-10-150-200-solid-black.png}
+| *@n* @ifsoln{-D} || *A*
+| @show{(code '(radial-star 5 50 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-5-50-200-solid-black.png}
+| *@n* @ifsoln{-A} || *B*
+| @show{(code '(radial-star 7 100 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-100-100-200-outline-black.png}
+| *@n* @ifsoln{-G} || *C*
+| @show{(code '(radial-star 7 100 200 "outline" "black"))}
+
+| @centered-image{../images/radial-star-100-20-200-outline-black.png}
+| *@n* @ifsoln{-F} || *D*
+| @show{(code '(radial-star 10 150 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-7-100-200-outline-black.png}
+| *@n* @ifsoln{-C} || *E*
+| @show{(code '(radial-star 10 20 200 "solid" "black"))}
+
+| @centered-image{../images/radial-star-7-100-200-solid-black.png}
+| *@n* @ifsoln{-D} || *F*
+| @show{(code '(radial-star 100 20 200 "outline" "black"))}
+
+| @centered-image{../images/radial-star-10-20-200-solid-black.png}
+| *@n* @ifsoln{-E} || *G*
+| @show{(code '(radial-star 100 100 200 "outline" "black"))}
+
+|===
