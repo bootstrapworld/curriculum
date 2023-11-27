@@ -43,7 +43,7 @@ Students review the notion of @vocab{spread} itself, and build up to the formula
 **The Animal Shelter Bureau reports that the @vocab{mean} age of shelter cats is 3 years.**
 
 @QandA{
-Take a look at the The Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @printable-exercise{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
+Take a look at the the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @lesson-link{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
 @Q{Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?}
 @A{No, we cannot assume all cats are close to 3 years old. There are some outliers in the dataset.}
 }
@@ -102,15 +102,26 @@ To compute the standard deviation we add the squares of all _N_ distances, divid
 @teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.}
 
 @lesson-instruction{
-- Complete numbers 7-10 of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
+Complete numbers 7-10 of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
 }
 
+@ifproglang{pyret}{
 Now that you know how to compute standard deviation on your own, here is the Contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
 
 ```
 # stdev :: (t :: Table, col :: String) -> Number
 stdev(animals-table, "pounds")
 ```
+}
+
+@ifproglang{codap}{
+To compute standard deviation in CODAP, create a graph with only one quantitative attribute. Open the `Measure` menu, then select the button that says "Measures of Spread." (Note that this button only appears when one quantitative attribute displayed.) Selected Standard Deviation. Move your cursor back to the display, and hover over the edge of the purple shading that appears.
+
+@center{@image{images/codap-st-dev.png, 300}}
+
+}
+
+
 
 @QandA{
 @Q{What is the standard deviation for the weights of _all_ the animals at our dataset?}
@@ -212,8 +223,8 @@ Reminder: Students have the opportunity to choose a dataset that interests them 
 }
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
-- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use Pyret to compute the standard deviation for one of them.
+- Open your chosen dataset starter file in @proglang.
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @proglang to compute the standard deviation for one of them.
 ** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
 - What question does your computation answer?
 ** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_

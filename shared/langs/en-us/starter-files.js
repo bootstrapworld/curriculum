@@ -226,7 +226,7 @@ var DSBasics = {
       "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
+      "url": "https://docs.google.com/document/d/1Xnp-y2n2lOX4sz6cEMmRsrweQSjaiatgWI-VpBKLnh8/copy"
     }
   },
   "research-project": {
@@ -235,7 +235,7 @@ var DSBasics = {
       "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
+      "url": "https://docs.google.com/presentation/d/1uVNO3gRvBxjmE4NRCyiKBhq181dit1wmB17ifQxjTTY/copy"
     }
   },
   "animals-spreadsheet": {
@@ -796,7 +796,7 @@ var Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
@@ -809,9 +809,23 @@ var Projects = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
+    }, 
+  },
+  "cats-only": {
+    "title": "Animals Dataset - Cats Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
+    }
+  },
+  "dogs-only": {
+    "title": "Animals Dataset - Dogs Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
     }
   }
 }
+
+
 
 var allStarterFiles = {
   ...Editors, 

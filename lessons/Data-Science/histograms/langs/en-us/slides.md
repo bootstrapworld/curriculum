@@ -133,9 +133,11 @@ But how do you choose a good bin-size?
 Suppose we want to know how long it takes for animals from the shelter to be adopted.
 
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
+@ifproglang{codap}{
 * Find the Contract for the `histogram` function.
 * Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10.
-* How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?
+* How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?}
+
 @slidebreak
 {layout="Investigate"}
 # Choosing the Right Bin Size
@@ -219,7 +221,7 @@ Let’s review what we have learned about making and interpreting histograms.
 
 Let’s connect what we know about histograms to your chosen dataset.
 
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret.}@ifproglang{codap}{CODAP.}
 - Choose one quantitative column from your data set that you will represent with a histogram!
 - What question does your display answer?
 - Now, write down that question in the top section of @printable-exercise{box-plots/pages/data-cycle-quantitative.adoc}.

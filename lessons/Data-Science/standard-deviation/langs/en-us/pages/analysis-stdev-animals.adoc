@@ -21,7 +21,7 @@ The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally g
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(stdev animals-table "weeks")
+  #:expression (if (string=? *proglang* "pyret") '(stdev animals-table "weeks") "standard deviation from measures menu")
   #:show-expression? #f
   #:finding "With a standard deviation of more than 6 weeks, there's a lot of variability"
   #:show-finding? #f

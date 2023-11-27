@@ -61,7 +61,7 @@ How far away is each data point from 3?
 
 
 @slidebreak
-{layout="LaunchC"}
+{layout="InvestigateC"}
 # Measuring "Deviance"
 
 @image{images/histogram-w-arrows.png}
@@ -70,13 +70,13 @@ In this image, we've draw an arrow for each of the 1-year-old cats. That means t
 
 
 @slidebreak
-{layout="Launch"}
+{layout="Investigate"}
 # Measuring "Deviance"
 
 **Complete numbers 4 to 6** of @printable-exercise{computing-stdev.adoc}, and then STOP.
 
 @slidebreak
-{layout="Launch"}
+{layout="Investigate"}
 # Measuring "Deviance"
 
 To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
@@ -84,13 +84,15 @@ To compute the standard deviation we add the squares of all _N_ distances, divid
 @teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of the worksheet to support students in doing so.}
 
 @slidebreak
-{layout="Launch"}
+{layout="Investigate"}
 # Measuring "Deviance"
 
 **Complete numbers 7-10** of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
 
 @slidebreak
-{layout="Synthesize"}
+
+@ifproglang{pyret}{
+{layout="Investigate"}
 # Measuring "Deviance"
 
 Now that you know how to compute standard deviation on your own, here is the Contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
@@ -105,6 +107,23 @@ What is the standard deviation for the weights of _all_ the animals at our datas
 <!--
 __Approximately 48.5__ @optional For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
 -->
+
+}
+
+@ifproglang{codap}{
+{layout="InvestigateR"}
+# Measuring "Deviance"
+
+To compute standard deviation in CODAP, create a graph with only one quantitative attribute. Open the `Measure` menu, then select the button that says "Measures of Spread." (Note that this button only appears when one quantitative attribute displayed.) Move your cursor back to the display, and hover over the edge of the purple shading that appears.
+
+@image{images/codap-st-dev.png, 300}
+
+What is the standard deviation for the weights of _all_ the animals at our dataset?
+
+<!--
+__Approximately 48.5__ @optional For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
+-->
+}
 
 @slidebreak
 {layout="Synthesize"}
@@ -210,11 +229,11 @@ Let’s review what we have learned about standard deviation.
 {layout="Investigate"}
 # Data Exploration Project (Standard Deviation){style="font-size:27pt"}
 
-- Open your chosen dataset starter file in Pyret.
-- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use Pyret to compute the standard deviation for one of them.
+- Open your chosen dataset starter file in @proglang.
+- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @proglang to compute the standard deviation for one of them.
 - What question does your computation answer?
-- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for the other column you explored before (and any others you are curious about).
 
 @teacher{

@@ -3,15 +3,16 @@
 Fill in the tables below by considering the rows and columns you need. Look up the @dist-link{Contracts.shtml, Contract} for the display and record the Pyret code you'd need to make it. If time allows, type your code into @starter-file{editor} to see your display! _The first column has been filled in for you._
 
 
-@n A `pie-chart` showing the `species` of animals from the shelter.
+@n A @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{dot plot} showing the `species` of animals from the shelter.
 [cols="^1,^1,^1",options="header"]
 |===
 | Which Rows?			| Which Column(s)?		| What will you Create?
-| _All the animals_		| @ifsoln{species}		| @ifsoln{pie chart}
+| _All the animals_		| @ifsoln{species}		| @ifproglang{pyret}{@ifsoln{pie chart}}@ifproglang{codap}{@ifsoln{dot plot}}
 
 |===
 
-*code:* @fitb{}{@showsoln{(code '(pie-chart animals-table "species"))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(pie-chart animals-table "species"))}}}
 
 @vspace{1ex}
 
@@ -22,8 +23,8 @@ Fill in the tables below by considering the rows and columns you need. Look up t
 | _All the animals_		| @ifsoln{sex}			| @ifsoln{bar chart}
 
 |===
-
-*code:* @fitb{}{@showsoln{(code '(bar-chart animals-table "sex"))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(bar-chart animals-table "sex"))}}}
 
 @vspace{1ex}
 
@@ -34,8 +35,8 @@ Fill in the tables below by considering the rows and columns you need. Look up t
 | _All the animals_		| @ifsoln{pounds}		| @ifsoln{histogram}
 
 |===
-
-*code:* @fitb{}{@showsoln{(code '(histogram animals-table  "name" "pounds" 10))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(histogram animals-table  "name" "pounds" 10))}}}
 
 @vspace{1ex}
 
@@ -47,7 +48,8 @@ Fill in the tables below by considering the rows and columns you need. Look up t
 
 |===
 
-*code:* @fitb{}{@showsoln{(code '(box-plot animals-table "pounds"))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(box-plot animals-table "pounds"))}}}
 
 @vspace{1ex}
 
@@ -59,7 +61,8 @@ Fill in the tables below by considering the rows and columns you need. Look up t
 
 |===
 
-*code:* @fitb{}{@showsoln{(code '(scatter-plot animals-table "species" "age" "pounds"))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(scatter-plot animals-table "species" "age" "pounds"))}}}
 
 @vspace{1ex}
 
@@ -72,4 +75,5 @@ Fill in the tables below by considering the rows and columns you need. Look up t
 
 |===
 
-*code:* @fitb{}{@showsoln{(code '(scatter-plot animals-table "name" "pounds" "weeks"))}}
+@ifproglang{pyret}{
+*code:* @fitb{}{@showsoln{(code '(scatter-plot animals-table "name" "pounds" "weeks"))}}}

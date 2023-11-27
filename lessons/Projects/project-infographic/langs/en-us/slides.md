@@ -91,7 +91,7 @@ For the remainder of the project, students will (1) do some brainstorming and re
 
 There are a number of options for the data that might be the basis of your students' infographics.
 
-- *Option 1:* Students can build bar or pie charts in Pyret from the @starter-file{food} or any of the @link{https://www.bootstrapworld.org/materials/fall2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, data sets in our library}.  __This option is appropriate for students who are comfortable independently building and interpreting displays.__
+- *Option 1:* Students can build bar or pie charts in @ifproglang{pyret}{Pyret} from the ifproglang{pyret}{starter-file{food}}@ifproglang{pyret}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673}, "Food Consumption and Impacts}" or any of the @link{https://www.bootstrapworld.org/materials/fall2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, data sets in our library}.  __This option is appropriate for students who are comfortable independently building and interpreting displays.__
 
 - *Option 2:* Students may find a pie or bar chart on the internet about a topic of interest to use as a starting point. _This option works best for students who can confidently conduct an internet search and discern which internet sources are reliable, but may struggle with independently building displays._
 

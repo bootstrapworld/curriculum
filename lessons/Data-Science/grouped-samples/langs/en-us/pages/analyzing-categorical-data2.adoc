@@ -8,11 +8,11 @@
   #:show-rows? #f
   #:cols "species"
   #:show-cols? #f
-  #:filter-fn "fun is-fixed(r): r[\"fixed\"] end"
+  #:filter-fn (if (string=? *proglang* "pyret") "fun is-fixed(r): r[\"fixed\"] end" "Fixed = TRUE")
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "count(fixed, \"species\")"
+  #:expression (if (string=? *proglang* "pyret") '("count(fixed, \"species\")") "dot plot displaying count")
   #:show-expression? #f
   #:finding "There are more fixed dogs than any other species"
   #:show-finding? #f
@@ -31,11 +31,11 @@
   #:show-rows? #f
   #:cols "sex"
   #:show-cols? #f
-  #:filter-fn "fun is-cat(r): r[\"species\"] == \"cat\" end"
+  #:filter-fn (if (string=? *proglang* "pyret") "fun is-cat(r): r[\"species\"] == \"cat\" end" "Species = cat")
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "pie-chart(filter(animals-table, is-cat), \"sex\")"
+  #:expression (if (string=? *proglang* "pyret") '("pie-chart(filter(animals-table, is-cat), \"sex\")") "bar chart displaying male versus female cats")
   #:show-expression? #f
   #:finding "There are 6 female cats and 5 male cats"
   #:show-finding? #f
