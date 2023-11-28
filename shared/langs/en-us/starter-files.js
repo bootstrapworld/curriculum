@@ -90,6 +90,9 @@ var Core = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
     },
+    "codap": {
+      "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
+    },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
     }
@@ -362,6 +365,9 @@ var MoreDS = {
     "title": "Height vs. Wingspan Survey (make a copy)",
     "pyret": {
       "url": "https://docs.google.com/forms/d/126JbqtnRLnkpzhePXHZWFQW7EUs5oAM5hhvVMeebwh4/template/preview"
+    },
+    "codap": {
+      "url": "https://docs.google.com/forms/d/126JbqtnRLnkpzhePXHZWFQW7EUs5oAM5hhvVMeebwh4/template/preview"
     }
   },
   "dirty-data": {
@@ -373,7 +379,10 @@ var MoreDS = {
   "fav-desserts": {
     "title": "Survey of Eighth Graders and their Favorite Desserts Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl"
+      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl",
+    },
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcavDE7LbB461CodyyaMh%2Ffile.json"
     }
   },
   "olympic-records": {
