@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- print('doing make-images-js.lua')
+print('doing make-images-js.lua')
 
 local image_js_file = ...
 
@@ -44,8 +44,26 @@ local o = io.open(image_js_file, 'w+')
 
 o:write('var images = {\n')
 
+function report_missing_images(logf, image_json_file)
+  if not file_exists_p(logf) then return end
+  local files = read_file_lines(logf)
+  local already_read = {}
+  local res = {}
+  for _,file in ipairs(files) do
+    if not already_read[file] then
+      already_read[file] = true
+      table.insert(res, file)
+    end
+  end
+  for _,file in ipairs(res) do
+    print('WARNING: Image file ' .. file .. ' referenced in ' .. image_json_file .. ' not found')
+  end
+end
+
 for _,lesson in ipairs(lessons) do
   local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
+  local missing_image_logf = lessons_dir .. lesson .. '/.cached/.missing-image-files.txt'
+  report_missing_images(missing_image_logf, lesson_image_file)
   if not file_exists_p(lesson_image_file) then goto continue end
   -- print('lesson_image_file is ' .. lesson_image_file)
   o:write('"' .. lesson .. '": ')

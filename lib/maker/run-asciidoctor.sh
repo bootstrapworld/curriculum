@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# last modified 2023-03-07
-
 $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
 test -f "$ADOC_INPUT" || exit 0
@@ -9,7 +7,14 @@ test -f "$ADOC_INPUT" || exit 0
 # echo calling asciidoctor in dir $(pwd)
 
 if test -z "$ASCIIDOCTOR_NODE"; then
-  asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+  if test -z "$DEBUGADOC"; then
+    asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+  else
+    for f in $(cat $ADOC_INPUT); do
+      echo asciidoctor $f
+      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $f
+    done
+  fi
 else
   NODE_ADOC_INPUT=$ADOC_INPUT-node.js
   echo "let adocFiles = [" > $NODE_ADOC_INPUT

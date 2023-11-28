@@ -1,0 +1,74 @@
+= Triangle Contracts (SAS & ASA)
+
+++++
+<style>
+td, #content .forceShading { font-size: 1rem !important; }
+#content p { font-size: 0.9rem; margin: 0;}
+#content .listingblock .highlight { padding: 0; }
+.forceShading { background: #f7f7f8; }
+</style>
+++++
+
+Type each expression (left) below into the @starter-file{editor} and match it to the image it creates (right).
+
+[.FillVerticalSpace, cols="^.^18a,^.^2,3,^.^2,^.^8a",stripes="none",grid="none",frame="none", options="header"]
+|===
+| Expression
+|||
+| Image
+
+| @show{(code '(triangle-sas 120 45 70 "solid" "black"))}
+| *@n* @ifsoln{-D} || *A*
+| @centered-image{../images/sas-120-90-70.png, 55}
+
+| @show{(code '(triangle-sas 120 90 70 "solid" "black"))}
+| *@n* @ifsoln{-A} || *B*
+| @centered-image{../images/sas-120-135-70.png}
+
+| @show{(code '(triangle-sas 120 135 70 "solid" "black"))}
+| *@n*@ifsoln{-B} || *C*
+| @centered-image{../images/sas-70-135-120.png}
+
+| @show{(code '(triangle-sas 70 135 120 "solid" "black"))}
+| *@n*@ifsoln{-C} || *D*
+| @centered-image{../images/sas-120-45-70.png}
+|===
+
+Think about how you would describe each of the arguments that @show{(code 'triangle-sas)} takes in to someone who'd never used the function before and annotate the Contract below using descriptive variable names.
+
+@vspace{1ex}
+
+[.forceShading]
+--
+@show{(code 'triangle-sas)}`{two-colons} (`
+
+[.indentedpara]
+@fitb{30em}{@ifsoln{`side1`}} `{two-colons} Number,`
+@fitb{30em}{@ifsoln{`angle`}} `{two-colons} Number,`
+@fitb{30em}{@ifsoln{`side2`}} `{two-colons} Number,`
+@fitb{30em}{@ifsoln{`style`}} `{two-colons} String,`
+@fitb{30em}{@ifsoln{`color`}} `{two-colons} String`
+
+`) -> Image`
+--
+
+@vspace{1ex}
+
+If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages.
+
+@vspace{1ex}
+
+If you have time, experiment with the @show{(code 'triangle-asa)} function.
+
+[.forceShading]
+--
+@show{(code 'triangle-asa)}`{two-colons} (`
+```
+	left-angle :: Number,
+	left-side :: Number,
+	bottom-angle :: Number,
+	style :: String
+	color :: String
+) -> Image
+```
+--
