@@ -1696,12 +1696,17 @@
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
-                            (let ([text (read-group i directive #:multiline? #t)])
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [contains-blocks? (regexp-match "\n[-*] " text)]
+                                   [contains-nl? (regexp-match "^ *\n" text)] ;FIXME
+                                   [converted-text (expand-directives:string->string text)])
                               (display
-                                (string-append
-                                  (create-begin-tag "span" ".teacherNote")
-                                  (expand-directives:string->string text)
-                                  (create-end-tag "span")) o))]
+                                (cond [contains-blocks?
+                                        (string-append "\n\n[.teacherNote]\n--\n"
+                                          converted-text
+                                          "\n--\n\n")]
+                                      [else ((if contains-nl? enclose-div enclose-span)
+                                             ".teacherNote" converted-text)]) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
                               (cond [(string-ci=? proglang *proglang*)
