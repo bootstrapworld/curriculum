@@ -641,7 +641,7 @@
       (set! missing-image-log-file
         (format "distribution/~a/lessons/~a/.cached/.missing-image-files.txt"
                 *natlang* *lesson*)))
-        
+
     (cond [(file-exists? json-file)
            (let ([images-hash (call-with-input-file json-file read-json)])
              ; (printf "images-hash is ~s\n" images-hash)
@@ -987,20 +987,22 @@
                           (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text)]
                          [else (format "link:pass:[~a][~a]" g link-text)])])
 
-             (when (and *lesson-plan* external-link? (equal? link-type "online-exercise"))
-               (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
-                 (unless (member styled-link-output *online-exercise-links*)
-                   (set! *online-exercise-links*
-                     (cons styled-link-output *online-exercise-links*)))))
+             (when (and *lesson-plan* external-link?)
+               (when (equal? link-type "online-exercise")
+                 (let ([styled-link-output (string-append "[.OnlineExercise]##" link-output "##")])
+                   (unless (assoc g *online-exercise-links*)
+                     (set! *online-exercise-links*
+                       (cons (cons g styled-link-output) *online-exercise-links*)))))
 
-             (when (and *lesson-plan* external-link? (or (equal? link-type "opt-online-exercise")
-                                                         (and (equal? link-type "online-exercise")
-                                                              *optional-flag?*)))
-               (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
-                                           link-output "##")])
-                 (unless (member styled-link-output *opt-online-exercise-links*)
-                   (set! *opt-online-exercise-links*
-                     (cons styled-link-output *opt-online-exercise-links*)))))
+               (when (or (equal? link-type "opt-online-exercise")
+                         (and (equal? link-type "online-exercise")
+                              *optional-flag?*))
+                 (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
+                                             link-output "##")])
+                   (unless (assoc g *opt-online-exercise-links*)
+                     (set! *opt-online-exercise-links*
+                       (cons (cons g styled-link-output) *opt-online-exercise-links*)))))
+               )
 
              ; (printf "make-link outputting ~s\n" link-output)
 
@@ -2181,7 +2183,7 @@
               (fprintf o "\n* ~a\n\n" x))
             ; ONLINE EXERCISES --- to be removed onces all required online exercises
             ; have been turned into starter files
-            (for ([x (reverse *online-exercise-links*)])
+            (for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
 
             ; SLIDES
@@ -2219,7 +2221,7 @@
             (for ([x (reverse *opt-starter-file-links*)])
               (fprintf o "\n* ~a\n\n" x))
             ; OPTIONAL ONLINE EXERCISES
-            (for ([x (reverse *opt-online-exercise-links*)])
+            (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
             ; NO OPTIONAL ANYTHING - display a helpful message
             (when (and *supplemental-materials-needed?*
