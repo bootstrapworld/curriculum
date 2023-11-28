@@ -309,8 +309,11 @@ build:
   pathways `p1`, `p2`, `\...` specified
 
 - `DEBUGADOC=yes` -- this runs Asciidoctor individually on each file.
-  This is slow as molasses, but helps locate any AsciiDoc syntax error (as
-  opposed to preprocessing error)
+  This is slow as molasses, but helps locate any AsciiDoc syntax error
+  such as unterminated table blocks, as
+  opposed to preprocessing errors. (The `yes` can be replaced by any
+  nonempty alphanumeric string, e.g., `DEBUGADOC=yes`, `DEBUGADOC=true`, `DEBUGADOC=t`, `DEBUGADOC=1`
+  all do the same thing.)
 
 [CAUTION]
 --
