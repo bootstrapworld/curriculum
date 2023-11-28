@@ -418,8 +418,7 @@ var Flags = {
   "flags-ak": {
     "title": "Alaskan Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX"
-    },
+      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1&v=78aeaeb"},
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p"
     }

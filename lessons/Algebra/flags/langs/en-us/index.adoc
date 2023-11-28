@@ -160,19 +160,15 @@ For each image, calculate what the x- and y-coordinates of where the center shou
 We stack the parts on top of the bottom image using the coordinates we found.
 __TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
 
-@ifproglang{pyret}{
-If you have time, these matching activities will support student thinking.
 
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, Scaling Flag Ratios}
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay and put-image}
+@optional If you have time, 
+@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, this Desmos activity}
 }
+@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169, this Desmos activity}
+} 
+contains two cardsorts that will support student thinking. The first focuses on scaling official flag ratios and the second focuses on matching images to code using `overlay` and `put-image`.
 
-@ifproglang{wescheme}{
-If you have time, these matching activities will support student thinking.
 
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169?collections=5fbecc2b40d7aa0d844956f0, Scaling Flag Ratios}
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay and put-image}
-}
 
 === Investigate
 
@@ -189,43 +185,31 @@ The opportunity to focus on a flag of their choosing is a big motivator for stud
 
 Encourage students to choose an appropriately challenging flag that will demonstrate what they've learned.  The teacher may introduce parameters if necessary, such as “Flags need at least 5 different shapes”. Once students have coded their flags, host a tour of the flags of the world in your classroom!
 
-@strategy{
-@span{.title}{Flags Project}
-
-Many teachers enjoy devoting a few days of class to making flags! If you choose to use this task as a summative project, check out the @handout{rubric-flags.adoc} as a tool to assess student learning.
-
-}
-
-
 Note: To reinforce ratio and proportion concepts, have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
 
 
 @strategy{
 @span{.title}{Around the World in your Classroom}
 
+Many teachers enjoy devoting a few days of class to making flags! If you choose to use this task as a summative project, check out the @opt-printable-exercise{rubric-flags.adoc} as a tool to assess student learning.
+
 Be mindful of the fact that not every student will know their family’s geographical history, and
 that immigration can be a sensitive topic for some students.  For this reason, it is important that students have the option to choose a flag based on interest instead of just family history.
 
 Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ+ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
 
-Optional: @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
+@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
 }
-
-
-
-
 
 === Synthesize
 
-Which flags were the easiest to make? The hardest?
+Which flags were the easiest to make? The hardest? 
 
 Why is it useful to define each part of the flag first, before stitching the images together?
 
 == Additional Exercises
 
 - @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
-
-- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
 - @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics.
 
@@ -234,3 +218,5 @@ Why is it useful to define each part of the flag first, before stitching the ima
 - @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.
+
+- @opt-printable-exercise{alaska-flag.adoc} - Has students look at a starter file and think about the images defined in the code, along with engaging them with the history of the Alaskan flag.
