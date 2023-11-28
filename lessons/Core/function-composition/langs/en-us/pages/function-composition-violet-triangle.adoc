@@ -1,0 +1,88 @@
+= Function Composition -- Violet Triangle
+
+++++
+<style>
+.center {padding: 0;}
+
+.contracts td { padding: 0 !important; }
+.contracts .editbox { background: none; }
+.contracts { background-color: #f7f7f8 !important; }
+
+#content table .autonum::after { content: ')'; }
+
+/* Give more space for the bottom row */
+table { grid-template-rows: 2fr 3fr !important; }
+
+/* Force the code solution to the bottom of the row */
+.content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
+</style>
+++++
+
+@do{
+	(define name-sexp '(text "X" 30 "red"))
+}
+
+You’ll be investigating these functions with your partner:
+
+[.contracts, cols="1", frame="none", grid="none"]
+|===
+| @show{ (contracts
+'("flip-horizontal" ("Image") "Image")
+'("above" ("Image" "Image") "Image")
+'("beside" ("Image" "Image") "Image")
+)}
+|===
+
+@do{
+	(define violet-tri '(triangle 50 "solid" "violet"))
+}
+
+@n Draw a Circle of Evaluation and write the Code for a *solid, violet triangle, size 50*. Go to @starter-file{editor} to test your code.
+
+*Circle of Evaluation:*
+
+@showsoln{(coe violet-tri) }
+@vspace{10ex}
+
+*Code:* @fitb{}{@showsoln{(code violet-tri) }}
+
+@vspace{2ex}
+
+Using the triangle described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Test your code in the editor.
+
+[.FillVerticalSpace, cols="1a,1a",stripes="none"]
+|===
+
+| @n A solid, violet triangle that is double the size of the original (using `scale`)
+
+@showsoln{(coe `(scale 2 ,violet-tri)) }
+
+@showsoln{(code `(scale 2 ,violet-tri)) }
+
+
+| @n A solid, violet triangle that is flipped horizontally.
+
+@showsoln{(coe `(flip-horizontal ,violet-tri)) }
+
+@showsoln{(code `(flip-horizontal ,violet-tri)) }
+
+
+
+
+
+| @n A solid, violet triangle that is above a solid, 50-pixel yellow triangle.
+
+@showsoln{(coe `(above, violet-tri (triangle 50 "solid" "yellow"))) }
+
+@showsoln{(code `(above, violet-tri (triangle 50 "solid" "yellow"))) }
+
+
+| @n A solid, violet triangle, beside a solid, violet triangle that has been flipped horizontally.
+
+@showsoln{(coe `(beside ,violet-tri (flip-horizontal, violet-tri))) }
+
+@showsoln{(code `(beside ,violet-tri (flip-horizontal, violet-tri))) }
+
+
+
+|===

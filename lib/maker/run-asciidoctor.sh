@@ -10,9 +10,16 @@ if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
     asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
   else
+    echo 🐌 Will be slow! Running asciidoctor once per file because DEBUGADOC = $DEBUGADOC
+    errfile=.error.tmp
     for f in $(cat $ADOC_INPUT); do
-      echo asciidoctor $f
-      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $f
+      rm -f $errfile; touch $errfile
+      # echo asciidoctor $f
+      asciidoctor -a linkcss -a stylesheet=$TOPDIR/distribution/$NATLANG/lib/curriculum.css -a cachedir=.cached/ -B . $f > $errfile 2>&1
+      if test -s "$errfile"; then
+        echo Error occurred while asciidoctoring $f
+        cat $errfile
+      fi
     done
   fi
 else
