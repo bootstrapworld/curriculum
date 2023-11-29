@@ -49,17 +49,17 @@ function shadowcopydir() {
   done
 }
 
-function save_old_solution_pages() {
-  # echo doing save_old_solution_pages
+function save_previously_built_solution_pages() {
+  # echo doing save_previously_built_solution_pages
   test -d solution-pages || return
-  test -d solution-pages-3 && rm -fr solution-pages-3
-  mv solution-pages solution-pages-3
+  test -d .previously-built-solution-pages && rm -fr .previously-built-solution-pages
+  mv solution-pages .previously-built-solution-pages
 }
 
 function make_solution_pages() {
   # echo doing make_solution_pages
   test -d solution-pages-2 && rm -fr solution-pages-2
-  test -d solution-pages-3 && mv solution-pages-3 solution-pages-2
+  test -d .previously-built-solution-pages && mv .previously-built-solution-pages solution-pages-2
   mkdir -p solution-pages-2
   if test -d pages; then
     # copy everything from pages to solution-pages-2 except *html. May need to make this more robust

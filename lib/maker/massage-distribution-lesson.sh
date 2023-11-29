@@ -6,13 +6,18 @@ src=$1
 
 d=$2
 
+# echo massage-distribution-lesson src= $src d= $d
+
 superdir=$(echo $src|$SED -e 's#lessons/##'|$SED -e 's#\([^/]*\).*#\1#')
 
 source ${MAKE_DIR}src-subdir-mgt.sh
 
-if test  -d "$d"; then
+updatingexistinglesson=
+
+if test -d "$d"; then
   echo Updating existing lesson $d
-  (cd $d; save_old_solution_pages)
+  updatingexistinglesson=yes
+  (cd $d; save_previously_built_solution_pages)
 else
   mkdir -p $d
 fi
@@ -26,8 +31,6 @@ if test ! -f $d/index.adoc; then
     touch $d/index.adoc
   fi
 fi
-
-echo $src > $d/.repodir.txt.kp
 
 lessonName=$(basename $d)
 
@@ -43,13 +46,20 @@ fi
 
 lessonNamePl=
 for pl in $proglangs; do
+  alternateproglang=
   lessonNamePl="$lessonName"
   if test "$pl" != pyret -a "$pl" != none; then
+    alternateproglang=yes
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
-    $CP -upr "$lessonName"/* "$lessonNamePl"
-    $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
   fi
+  if test -n "$updatingexistinglesson"; then
+    (cd "$lessonNamePl"; save_previously_built_solution_pages)
+  fi
+  if test -n "$alternateproglang"; then
+    $CP -upr "$lessonName"/* "$lessonNamePl"
+  fi
+  echo $src > $lessonNamePl/.repodir.txt.kp
   #
   set_up_lesson_dir "$lessonNamePl" "$pl" "$firstproglang"
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
