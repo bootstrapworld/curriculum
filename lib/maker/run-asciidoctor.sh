@@ -28,7 +28,7 @@ if test -z "$ASCIIDOCTOR_NODE"; then
 else
   NODE_ADOC_INPUT=$ADOC_INPUT-node.js
   echo "let adocFiles = [" > $NODE_ADOC_INPUT
-  cat $ADOC_INPUT | sed -e 's/.*/"\0",/' >> $NODE_ADOC_INPUT
+  cat $ADOC_INPUT | $SED -e 's/.*/"\0",/' >> $NODE_ADOC_INPUT
   echo "];" >> $NODE_ADOC_INPUT
   echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
   #
