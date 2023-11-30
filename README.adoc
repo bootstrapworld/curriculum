@@ -308,9 +308,12 @@ build:
   workbook PDFs and the related lesson PDFs _only_ for the comma-separated
   pathways `p1`, `p2`, `\...` specified
 
-- `DEBUGADOC=yes` -- this runs Asciidoctor individually on each file.
-  This is slow as molasses, but helps locate any AsciiDoc syntax error (as
-  opposed to preprocessing error)
+- `DEBUGADOC=nonempty` -- this runs Asciidoctor individually on each file.
+  This is slow as molasses, but helps locate any AsciiDoc syntax error
+  such as unterminated table blocks, as
+  opposed to preprocessing errors. `nonempty` is any non-empty
+  alphanumeric string. Some mnemonic values are `yes`, `y`, `true`, `t`,
+  `1`.
 
 [CAUTION]
 --
