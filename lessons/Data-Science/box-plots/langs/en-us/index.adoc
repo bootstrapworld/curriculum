@@ -32,7 +32,7 @@
 
 | Preparation
 |
-* There is an optional kinesthetic in this lesson that requires a ball of playdough for each group of 3.
+* There is an optional kinesthetic activity in this lesson that requires a ball of playdough for each group of 3.
 * All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
 
 |===
@@ -48,14 +48,13 @@ When we explored measures of center, we tried to answer a question about "typica
 
 How useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
 
-
 So once we have our summary for a "normal value", it's likely we'll ask another question: _If the average pet is 40 pounds, just **how typical** is that?_
 
 There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! Some classes are more different than others. How do we measure the @vocab{spread} of a population?
 
 @center{@image{images/box-n-whisker-plot.png, 500}}
 
-Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking the _median of each half_, splitting the population into four equal-sized @vocab{quartiles}.
+Suppose we lined up all animals' weights from smallest to largest, and then split them in half by taking the @vocab{median}. We can learn something about the @vocab{spread} of the dataset by taking the _median of each half_, splitting the population into four equal-sized quarters. The boundary points between these quarters are called @vocab{quartiles}.
 
 @lesson-instruction{
 - The first quartile (Q1) is the value for which 25% of the animals weighed that amount or less.
@@ -65,18 +64,20 @@ Suppose we lined up all animals' weights from smallest to largest, and then spli
 
 Besides looking at the median as center, and the spread between Q1 and Q3, we also gain valuable information from the spread of the entire dataset — that is, the distance between minimum and maximum. This is called the @vocab{range of a dataset}. (*Note*: the term “Range” means something different in statistics than it does in algebra and programming!)
 
-Splitting a dataset into @vocab{quartiles} gives us five numbers that we can play with to measure spread. To summarize what we've seen so far:
+Splitting a dataset into quarters gives us five numbers that we can use to measure spread: the minimum, the maximum and the three quartiles that split the dataset into quarters. 
 
-. @vocab{Minimum}: _the smallest value in a dataset_
-. Q1: _the median that falls between the minimum and Q2_
+. @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
+. Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
 . Q2: @vocab{Median}: _the middle value (median) in a dataset_
-. Q3: _the median that falls between and Q2 and the maximum_
-. @vocab{Maximum}: _the largest value in a dataset_
+. Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
+. @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
 
 Taken together these are called the **5 Number Summary** of a dataset, and this summary is one tool for calculating spread. We can use these numbers to calculate two new values:
 
-- Maximum - Minimum = _@vocab{Range}_ :  _the distance spanned by the extreme values in the dataset_
-- Q3 - Q1 = @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
+- _@vocab{Range}_ :  _the distance spanned by the extreme values in the dataset_
+** Maximum - Minimum
+- @vocab{IQR}:  _the @vocab{Interquartile Range}, or the distance spanned by the middle half of the data_
+** Q3 - Q1
 
 === Investigate
 We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
@@ -89,7 +90,7 @@ box-plot(animals-table, "pounds")
 ```
 
 @lesson-point{
-Box plots divide our sample into equally-sized groups, and show where those groups are spread thin or clumped together.
+Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.
 }
 
 @lesson-instruction{
@@ -98,20 +99,20 @@ Type `box-plot(animals-table, "pounds")` into the Interactions Area, and see the
 
 @center{@image{images/5-plot.png,  400}}
 
-This plot shows us the center and spread in our dataset according to those five numbers.
+@lesson-instruction{
+* Then turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
+* Fill in the five-number summary for the `pounds` column, and sketch the box plot.
+* What conclusions can you draw about the distribution of values in this column?
+** _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
+}
+
+@teacher{If students are struggling to write conclusions, go over the following five number summary from the box plot they made:
 
 - **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.
 - **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.
 - **Q2** / Median value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.
 - **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.
-- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.
-
-@lesson-instruction{
-* Turn to @printable-exercise{measures-of-center/pages/summarizing-columns-in-animals.adoc}
-* Fill in the five-number summary for the `pounds` column, and sketch the box plot.
-* What conclusions can you draw about the distribution of values in this column?
-** _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
-}
+- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.}
 
 === Common Misconceptions
 It is extremely common for students to forget that every quartile _always_ includes 25% of the dataset. This will need to be heavily reinforced.
@@ -119,13 +120,13 @@ It is extremely common for students to forget that every quartile _always_ inclu
 === Synthesize
 
 @lesson-instruction{
-- What percentage of points fall in the first quartile?
+- What percentage of points fall in the first quarter?
 ** 25%
-- What percentage of points fall in the second quartile?
+- What percentage of points fall in the second quarter?
 ** 25%
-- What percentage of points fall in the third quartile?
+- What percentage of points fall in the third quarter?
 ** 25%
-- What percentage of points fall in the fourth quartile?
+- What percentage of points fall in the fourth quarter?
 ** 25%
 - What percentage of points fall in the **Interquartile Range** (IQR)?
 ** 50%
@@ -163,11 +164,11 @@ Box plots and histograms give us two different views on the concept of shape.
 @strategy{
 @span{.title}{Kinesthetic Activity}
 
-Divide the class into groups, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four @vocab{quartiles}.
+Divide the class into groups, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four quarters.
 
-Box plots stretch and squeeze these equal quartiles across a number line, so that each quartile fills up an interval in that quartile. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students roll their cylinders so that they fill each of these intervals, retaining a uniform thickness.
+Box plots stretch and squeeze these equal quarters of the data across a number line, so that they fit into their respective intervals. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students shape their cylinders into rectangles that fill each of these intervals, and are all about 1 inch thick.
 
-They should notice that shorter intervals have __thicker cylinders__, and longer ones have skinny ones. Even though a box plot doesn't show us the thickness of the data points, we can tell that a small intervals has the same amount of data "squeezed" into it as a large interval.
+Students should notice that the playdough is __taller for shorter intervals__ and thinner for longer intervals. Even though a box plot doesn't show us the thickness of the data points, we know that a small interval has the same amount of data "squeezed" into it as a large interval has spread across it.
 
 }
 
