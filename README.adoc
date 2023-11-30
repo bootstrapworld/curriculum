@@ -294,8 +294,8 @@ to populate the `distribution/` directory with the built documentation.
 build:
 
 - `NATLANG=lang` -- builds for the natural language `lang`. The default is
-  `en-us` (US English). Currently, the only other language that has
-  significant support is `es-mx` (español mexicano)
+  `en-us` (**En**glish *US*) . Currently, the only other language that has
+  significant support is `es-mx` (**es**pañol **m**e**x**icano)
 
 - `SEMESTER=season` -- typically either `fall` or
   `spring`. The default is `fall`
@@ -304,13 +304,20 @@ build:
   of the Common Era. The default is the current year followed by
   `-BETA`
 
-- `COURSE=p1,p2,...` -- if `book` is also specified, this makes the
+- `COURSE=p1,p2,\...` -- if `book` is also specified, this makes the
   workbook PDFs and the related lesson PDFs _only_ for the comma-separated
-  pathways `p1`, `p2`, `...` specified
+  pathways `p1`, `p2`, `\...` specified
+
+- `DEBUGADOC=yes` -- this runs Asciidoctor individually on each file.
+  This is slow as molasses, but helps locate any AsciiDoc syntax error
+  such as unterminated table blocks, as
+  opposed to preprocessing errors. (The `yes` can be replaced by any
+  nonempty alphanumeric string, e.g., `DEBUGADOC=yes`, `DEBUGADOC=true`, `DEBUGADOC=t`, `DEBUGADOC=1`
+  all do the same thing.)
 
 [CAUTION]
 --
-`NATLANG`, `SEMESTER`, `YEAR`, and `COURSE` are _makefile_
+`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, and `DEBUGADOC` are _makefile_
 variables, *not* shell environment variables! You cannot set them as
 environment variables and expect `make` to pick them up. To set,
 `NATLANG`, say, to `es-mx`, use
