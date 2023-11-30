@@ -2,7 +2,12 @@
 
 @description{Students investigate scatter plots as a method of visualizing the relationship between two quantitative variables. In the programming environment, points on the scatter plot can be labelled with a third variable!}
 
+@ifproglang{pyret}{
 @lesson-prereqs{contracts-tables-displays}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-exploring}}
 
 @keywords{}
 @add-to-lang{scatter-plot, line-graph}
@@ -15,14 +20,14 @@
 
 * consider explanatory and response roles of variables​
 * make scatter plots by hand, given a list of (x,y) pairs
-* make scatter plots using Pyret
-* identify a possible linear relationship by looking at a point cloud
-* Consider unusual observations in a scatter plot
+* make scatter plots using @proglang.
+* identify a possible linear relationship by looking at a point cloud.
+* Consider unusual observations in a scatter plot.
 
 | Student-facing Lesson Goals
 |
 
-* Let's use Pyret to create scatter plots of data.
+* Let's use @proglang to create scatter plots of data.
 
 | Materials
 |[.materials-links]
@@ -46,7 +51,7 @@
 == Making Scatter Plots @duration{20 minutes}
 
 === Overview
-Students create @vocab{scatter plots}, which are visualizations that show the relationship between two @vocab{quantitative} variables. They learn how to construct scatter plots by hand, and in Pyret.
+Students create @vocab{scatter plots}, which are visualizations that show the relationship between two @vocab{quantitative} variables. They learn how to construct scatter plots by hand, and in @proglang.
 
 === Launch
 
@@ -61,7 +66,7 @@ Students create @vocab{scatter plots}, which are visualizations that show the re
 
 @slidebreak
 
-Pie and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
+@ifproglang{pyret}{Pie}@ifproglang{codap}{Dot plots} and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
 
 What we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
 
@@ -108,9 +113,13 @@ As an alternative to plotting the small table, assign a handful of rows from the
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
+@ifproglang{pyret}{
 The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
-@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+
+@ifproglang{codap}{
+To create a scatter plot in CODAP, place a quantitative attribute on each axis. The labels that appear will correspond with the left-hand column on the table.}
 
 @slidebreak
 
@@ -119,7 +128,8 @@ The `scatter-plot` function works exactly the same way: it starts with a table, 
 * Make a scatter plot that displays the relationship between `age` and adoption time (`weeks`).
 }
 
-@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}
+@ifproglang{pyret}{
+@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}}
 
 @QandA{
 @Q{Are there any patterns or trends that you see here?}
@@ -133,9 +143,11 @@ Line graphs and scatter plots have a lot in common! They both visualize the rela
 
 There is an important difference, however, in that **line graphs are typically used when the x-axis measures _time_**. Only in this situation can it be appropriate to "connect the dots", because they represent the _rise_ and _fall_ of a measure over time. Without time, there's no notion of "slope"!
 
-For students who want to use line graphs, the Contract is:
+@ifproglang{pyret}{For students who want to use line graphs, the Contract is:
 
-@show{(contract "line-graph" '("Table" "String" "String") "Image")}
+@show{(contract "line-graph" '("Table" "String" "String") "Image")}}
+
+@ifproglang{codap}{For students who want to use line graphs, create a scatter plot, then open the `Measure` menu and select Connecting Lines.}
 }
 
 === Synthesize
@@ -176,7 +188,7 @@ _Perhaps the **weight** of an animal influences the adoption time!_
 @slidebreak
 
 @lesson-instruction{
-Take a look at the The Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @printable-exercise{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front). Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
+Take a look at the Tte Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @lesson-link{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front). Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 }
 
 Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
@@ -214,7 +226,7 @@ Students are asked to identify patterns in their scatter plots. This activity bu
 
 Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
 
-@center{@image{images/pounds-v-weeks.png}}
+@center{@image{images/pounds-v-weeks.png, 350}}
 
 @slidebreak
 
@@ -307,6 +319,11 @@ A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully
 
 @slidebreak
 
+@ifproglang{codap}{CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
+
+Remember the impact of considering a third attribute before drawing conclusions about your data.}
+
+@ifproglang{pyret}{
 **It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. *But making a special image for every single row in the table would take a very long time!* If only there was a function with a Contract like:
 
 `species-dot {two-colons} (r {two-colons} Row) -> Image`
@@ -315,7 +332,7 @@ This function could take in a row from the animals table, and draw a special dot
 
 @teacher{
 There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
-}
+}}
 == Data Exploration Project (Scatter Plots) @duration{flexible}
 
 === Overview
@@ -338,7 +355,7 @@ Let’s review what we have learned about making and interpreting scatter plots.
 Let’s connect what we know about scatter plots to your chosen dataset.
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @proglang.
 @teacher{
 ** _Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 }

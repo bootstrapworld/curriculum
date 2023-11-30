@@ -31,6 +31,7 @@ We live in a world filled with data, gathered about almost every subject you can
 @teacher{
 Note: *If you are opting to focus your whole class on a single dataset, we recommend skipping this section of the lesson.* _You'll instead want to jump to "Dataset Exploration Project.")_
 }
+
 @slidebreak
 {layout="Launch"}
 # Choosing a Dataset
@@ -55,11 +56,12 @@ Which one is the most interesting to you?
 
 When you've selected a dataset to work on, open the Starter File and save a copy.
 
+@ifproglang{pyret}{
 @teacher{
-_Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @starter-file{blank-ds-tutorial} for help importing your own data into Pyret.
+_Students can also find their own dataset_, and use this @starter-file{blank-ds}. See this @starter-file{blank-ds-tutorial} for help importing your own data into Pyret.}
 
 
-For teachers using a single dataset, we recommend using @opt-starter-file{food}._ This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
+For teachers using a single dataset, we recommend using @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "Global Food Supply and Production"}}. _ This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
 
 **NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
 }
@@ -116,7 +118,7 @@ Now, you're doing to do the same thing _with your own dataset._
 - Open your chosen dataset starter file in Pyret.
 - Look at the spreadsheet or table for your dataset. What do you *Notice*? What do you *Wonder*?
 - Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
-* Save a copy of your starter file. In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
+* Save a copy of your starter file. @ifproglang{pyret}{In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.}
 
 @slidebreak
 {layout="Investigate"}

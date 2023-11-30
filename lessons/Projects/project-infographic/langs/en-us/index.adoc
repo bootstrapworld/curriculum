@@ -1,8 +1,12 @@
 = Project: Make an Infographic
 
-@description{Infographics are a powerful tool for communicating information, especially when made by people who understand how to connect visuals to data in meaningful ways. This project is an opportunity for students to become more flexible math thinkers while tapping into their creativity. _This project supports the learning goals of @lesson-link{bar-and-pie-charts}._}
+@description{Infographics are a powerful tool for communicating information, especially when made by people who understand how to connect visuals to data in meaningful ways. This project is an opportunity for students to become more flexible math thinkers while tapping into their creativity. _This project supports the learning goals of @ifproglang{pyret}{@lesson-link{bar-and-pie-charts}}@ifproglang{codap}{@lesson-link{codap-dot-plots-bar-charts}}._}
 
-@lesson-prereqs{bar-and-pie-charts}
+@ifproglang{pyret}{
+@lesson-prereqs{bar-and-pie-charts}}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-dot-plots-bar-charts}}
 
 
 [@lesson-intro-table]
@@ -42,17 +46,17 @@ Infographics are graphic visual representations of data, information, or knowled
 
 @right{@image{images/challenger-infographic.png, 350}}
 
-A day before the 1986 launch of the Challenger, a team of engineers urged NASA to postpone the launch, arguing that launching in cold weather would be extremely dangerous. Parts called "O-rings", they argued, were at risk of cracking when the temperature was too low. A cracked O-ring could lead to a catastrophic explosion, and the death of every astronaut onboard.
+A day before the 1986 launch of the Challenger, a team of engineers urged NASA to postpone, arguing that launching in cold weather would be extremely dangerous. Parts called "O-rings", they said, were likely to crack in cold weather. A cracked O-ring could lead to a catastrophic explosion – and the death of every astronaut onboard.
 
-Mission control asked the engineers to provide data, to help them understand the risk. To make their case, the engineers created an infographic that displayed outlines of 48 rockets, each representing a previous launch. Each rocket was labeled with the temperature at launch, with marks showing O-ring damage. These marks were explained in a legend, to help mission control understand what the damage was.
+Mission control asked the engineers to explain this risk with _data_. To make their case, the engineers created an infographic that displayed outlines of 48 rockets, each representing a previous launch. Each rocket was labeled with the temperature at launch, with marks showing O-ring damage. These marks were explained in a legend, to help mission control understand what the damage was.
 
-Unfortunately, their infographic was confusing, and very hard to read:
+Unfortunately, their infographic was very hard to read:
 
-- Instead of sorting the rockets by _temperature_ or _amount-of-damage_ (the two variables the engineers claimed were related!), they were sorted by the date when they'd been launched.
-- The temperature at launch, which was the most important thing the engineers wanted mission control to see, was written _sideways_, in a tiny font that was very difficult to read.
-- The marks showing O-ring damage were difficult to understand, and the legend that explained them __was on a separate page!__
+- Instead of sorting the rockets by _temperature_ or _amount-of-damage_ (the two variables the engineers claimed were related!), they were sorted by...the date they launched.
+- The temperature at launch, which was the most important thing the engineers wanted mission control to see, was written _sideways_, in a tiny font that was  difficult to read.
+- The marks showing O-ring damage were hard to understand, and the legend that explained them __was on a separate page!__
 
-The infographic failed to clearly explain the risk of launching in cold weather, and mission control made the decision to go ahead with the launch. 73 seconds into the flight, the rocket exploded over the coast of Florida, killing everyone onboard. The tragedy crippled NASA, which did not launch another rocket for nearly three years. **The Challenger's explosion was, in the end, attributed to O-ring failure.**
+The engineers created an infographic that failed to clearly explain the risk, and mission control made the decision to go ahead with the launch. 73 seconds into the flight, the rocket exploded over the coast of Florida, killing everyone onboard. The tragedy crippled NASA, which did not launch another rocket for nearly three years. **The Challenger's explosion was, in the end, attributed to O-ring failure.**
 
 A good infographic is worth a thousand words. And sometimes it even saves lives.
 
@@ -78,17 +82,17 @@ For the remainder of the project, students will (1) do some brainstorming and re
 
 There are a number of options for the data that might be the basis of your students' infographics.
 
-- *Option 1:* Students can build bar or pie charts in Pyret from the @starter-file{food} or any of the @link{https://www.bootstrapworld.org/materials/fall2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, data sets in our library}.  __This option is appropriate for students who are comfortable independently building and interpreting displays.__
+- *Option 1:* Students can build bar charts or @ifproglang{pyret}{pie charts}@ifproglang{codap}{dot plots} in @ifproglang{pyret}{Pyret from the @starter-file{food}}@ifproglang{codap}{in CODAP from the @ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "the Global Food Supply and Production dataset"}}} or any of the @link{https://www.bootstrapworld.org/materials/fall2023/en-us/lessons/choosing-your-dataset/pages/datasets-and-starter-files.html, data sets in our library}.  __This option is appropriate for students who are comfortable independently building and interpreting displays.__
 
-- *Option 2:* Students may find a pie or bar chart on the internet about a topic of interest to use as a starting point. _This option works best for students who can confidently conduct an internet search and discern which internet sources are reliable, but may struggle with independently building displays._
+- *Option 2:* Students may find a @ifproglang{pyret}{pie or bar chart}@ifproglang{codap}{dot plot or bar chart} on the internet about a topic of interest to use as a starting point. _This option works best for students who can confidently conduct an internet search and discern which internet sources are reliable, but may struggle with independently building displays._
 
 - *Option 3:* Students build a pie or bar chart in google sheets based on a summary statistic that they find about an issue that is of interest. _For this option, students need to be able to recognize reliable internet sources. Option 3 is valuable if there is a school-wide (or interdiscplinary) interest in students developing comfort with google sheets._
 
-- *Option 4:* _This option is the most appropriate for younger students, who need more teacher support._ As a class, agree on a topic of interest, and then generate as many quantitative questions as possible about that topic. (E.g., if the topic is veterans, students might ask: What's the gender breakdown? Do veterans have higher suicide rates? What percentage of veterans struggle with mental health?) Then, spend some time locating data that answers each question to develop a list of ratio statements for students to choose from. Students will their chosen statement to make a bar or pie chart and a corresponding infographic.
+- *Option 4:* _This option is the most appropriate for younger students, who need more teacher support._ As a class, agree on a topic of interest, and then generate as many quantitative questions as possible about that topic. (E.g., if the topic is veterans, students might ask: What's the gender breakdown? Do veterans have higher suicide rates? What percentage of veterans struggle with mental health?) Then, spend some time locating data that answers each question to develop a list of ratio statements for students to choose from. Students will use their chosen statement to make a @ifproglang{pyret}{pie or bar chart}@ifproglang{codap}{dot plot or bar chart} and a corresponding infographic.
 
 Some teachers prefer that all students work from the same dataset while others encourage students to pursue their own unique interests. It is up to you how much freedom or structure you offer your students during this phase.
 
-Once students have conducted their research, it is time to write a ratio statement (for options 1-3) or create a bar/pie chart (for option 4). Urge students to refer to their rubrics for guidance on doing this well!
+Once students have conducted their research, it is time to write a ratio statement (for options 1-3) or create a bar/pie chart @ifproglang{codap}{or dot plot} (for option 4). Urge students to refer to their rubrics for guidance on doing this well!
 
 Some teachers have students submit their work up to this point to monitor progress and ensure that all students have a solid foundation for the remainder of the project. Others opt to conduct a peer review using the @handout{rubric-infographic.adoc}.
 

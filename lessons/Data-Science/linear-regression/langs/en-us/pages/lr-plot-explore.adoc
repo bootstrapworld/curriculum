@@ -6,9 +6,9 @@
 </style>
 ++++
 
-*Part 1: You should already have plotted @show{(code '(lr-plot animals-table "name" "age" "weeks"))} in the @starter-file{animals}.*
+*Part 1: You should already have @ifproglang{pyret}{plotted @show{(code '(lr-plot animals-table "name" "age" "weeks"))}}@ifproglang{codap}{created a Least Squares line with `Weeks` on the x-axis and `Age` on the y-axis} in the @starter-file{animals}.*
 
-@n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.78924}} @math{x +} @fitb{5em}{@ifsoln{2.30936}}
+@n What is the predictor function? @math{y =} @fitb{10em}{@ifsoln{0.78924}} @math{x +} @fitb{10em}{@ifsoln{2.30936}}
 
 @n What is the slope? @fitb{}{@ifsoln{0.78924}}
 
@@ -24,7 +24,7 @@
 
 @vspace{3ex}
 
-*Part 2: Make another lr-plot, but this time use the animals' weight as our explanatory variable instead of their age.*
+*Part 2: Make another @ifproglang{pyret}{lr-plot}@ifproglang{codap}{Least Squares Line}, but this time use the animals' weight as our explanatory variable instead of their age.*
 
 @n How long would our line of best fit predict it would take for an animal weighing 21 pounds to be adopted? @fitb{}{@ifsoln{about 4 weeks}}
 
@@ -32,6 +32,7 @@
 
 @vspace{3ex}
 
+@ifproglang{pyret}{
 *Part 3: `lr-plot` with filtered tables*
 
 @n Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the cats_ using the following code:
@@ -42,6 +43,13 @@
 lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 ``
 --
+}
+
+@ifproglang{codap}{
+*Part 3: Least Squares Lines with filtered tables*
+
+@n Using the @starter-file{cats-only}, make another Least Squares Line, comparing the `age` v. `weeks` columns for __only the cats__.
+}
 
 @n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.23161}} @math{x +} @fitb{5em}{@ifsoln{2.48598}}
 
@@ -59,4 +67,9 @@ lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 
 @vspace{3ex}
 
+@ifproglang{pyret}{
 *★ *Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.*
+}
+
+@ifproglang{codap}{
+@n Using @starter-file{dogs-only}, make another Least Squares line, comparing the `age` v. `weeks` columns for __only the dogs__.}

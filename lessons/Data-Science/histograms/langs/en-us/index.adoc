@@ -2,7 +2,13 @@
 
 @description{Students are introduced to Histograms by comparing them to bar charts, learning to construct them by hand and in the programming environment.}
 
+@ifproglang{pyret}{
 @lesson-prereqs{contracts-tables-displays, ds-intro}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-dot-plots-bar-charts}
+}
 
 @keywords{histogram, bin, interval}
 
@@ -33,7 +39,8 @@
 | Preparation
 |
 * There is an optional kinesthetic in this lesson that requires a ball of playdough for each group of 3.
-* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.
+@ifproglang{pyret}{
+* All students should log into @starter-file{program-list} and open their saved "Animals Starter File". If they don't have the file, they can open a new one from @starter-file{animals}.}
 
 |===
 
@@ -113,26 +120,36 @@ Suppose we want to know how long it takes for animals from the shelter to be ado
 
 @lesson-instruction{
 * Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-* Find the Contract for `histogram` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
-}
-* Optionally, provide students with @opt-printable-exercise{choosing-bin-size.adoc}, a handout with space to respond to the guided questions below.
-* `histogram` takes in a table, a column to use for the labels, a column for the values, and a Number for the bin-size.
-* Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10 and the `"name"` column for your labels.
-* How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?
-** _29 animals took between 0 and 10 weeks to be adopted; just 1 animal took between 10 and 20 weeks._
-* Try some other bin sizes (be sure to experiment with bigger and smaller bins!)
-* What shapes emerge? What bin size gives you the best picture of the distribution?
-* Are there any outliers? Are they high or low?
-* Count how many animals took between 0 and 5 weeks to be adopted. How many took between 5 and 10 weeks?
-** _18 animals took between 0 and 5 weeks to be adopted; 11 animals took between 5 and 10 weeks._
-* What else do you Notice? What do you Wonder?
+@ifproglang{pyret}{
+* Find the Contract for `histogram` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{ _If you're working with a printed workbook, the contracts pages are included in the back._ }}
+@ifproglang{codap}{
+* Turn to your Data Displays Organizer to remind yourself how to create a histogram in CODAP.}
 }
 
-Some observations you can share with the class, to get them started:
+@teacher{Optionally, provide students with @opt-printable-exercise{choosing-bin-size.adoc}, a handout with space to respond to the guided questions below.}
 
-- We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less.
-- We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.
-- More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks. 
+@lesson-instruction{Make a histogram for the `"weeks"` column in the `animals-table`, using a bin size of 10 and the `"name"` column for your labels.}
+
+@QandA{
+@Q{How many animals took between 0 and 10 weeks to be adopted? Between 10 and 20?}
+@A{29 animals took between 0 and 10 weeks to be adopted; just 1 animal took between 10 and 20 weeks.}}
+
+@lesson-instruction{
+Try some other bin sizes (be sure to experiment with bigger and smaller bins!)}
+
+@QandA{
+@Q{What shapes emerge? What bin size gives you the best picture of the distribution?}
+
+@Q{Are there any outliers? Are they high or low?}
+
+@Q{Count how many animals took between 0 and 5 weeks to be adopted. How many took between 5 and 10 weeks?}
+@A{18 animals took between 0 and 5 weeks to be adopted; 11 animals took between 5 and 10 weeks.}
+
+@Q{What else do you Notice? What do you Wonder?}
+@A{We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less.}
+@A{We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.}
+@A{More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks.}
+}
 
 If someone asked what was a typical adoption time, we could say: “Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!” It would have been hard to give this summary by reading through the table, but the histogram makes it easy to see!
 
@@ -182,7 +199,8 @@ Let’s review what we have learned about making and interpreting histograms.
 Let’s connect what we know about histograms to your chosen dataset.
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @ifproglang{pyret}{Pyret.} @ifproglang{codap}{CODAP.}
+
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Choose one quantitative column from your data set that you will represent with a histogram!
 - What question does your display answer?

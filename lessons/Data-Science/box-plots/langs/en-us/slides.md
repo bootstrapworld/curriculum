@@ -92,7 +92,10 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 {layout="Investigate"}
 # Making Box Plots
 
-We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range. Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-size:16pt"}
+@ifproglang{pyret}{
+We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range.
+
+@ Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.{style="font-size:16pt"}
 
 ```
 # box-plot :: (t::Table, col::String) -> Image
@@ -102,7 +105,15 @@ We can use @vocab{box plots} to visualize the 5 number summary, the Range, and t
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.{style="font-size:16pt"}
 - Type this into the Interactions Area, and see the resulting plot:{style="font-size:16pt"}
 
-@show{(code '(box-plot animals-table "pounds"))}{style="font-weight:bold"}
+@show{(code '(box-plot animals-table "pounds"))}{style="font-weight:bold"}}
+
+
+
+@ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot.}
+
+
+@ifproglang{codap}{
+Create a box plot in CODAP that displays the spread of `Pounds`.}
 
 
 <!--
@@ -121,7 +132,14 @@ This plot shows us the center and spread in our dataset according to those five 
 - **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.{style="font-size:12pt"}
 
 
-@image{images/5-plot.png, 400}
+@ifproglang{pyret}{
+@image{images/5-plot.png,  400}}
+
+@ifproglang{codap}{
+@image{images/codap-box-plot.png, 300}}
+
+
+
 @slidebreak
 {layout="InvestigateC"}
 # Making Box Plots
@@ -139,18 +157,27 @@ _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the anim
 {layout="Synthesize"}
 # Making Box Plots
 
-- What percentage of points fall in the first quartile?
-- What percentage of points fall in the second quartile?
-- What percentage of points fall in the third quartile?
-- What percentage of points fall in the fourth quartile?
-- What percentage of points fall in the **Interquartile Range** (IQR)?
-- What percentage of points fall within the Range?
 
-<!--
-- It is extremely common for students to forget that every quartile _always_ includes 25% of the dataset. This will need to be heavily reinforced.
-- What percentage of points fall in the **Interquartile Range** (IQR)? _50%_
-- What percentage of points fall within the Range? _100%_
--->
+@QandA{
+
+@Q{What percentage of points fall in the first quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the second quartile?}
+@A{25%}
+
+@A{What percentage of points fall in the third quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the fourth quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the **Interquartile Range** (IQR)?}
+@A{50%}
+
+@Q{What percentage of points fall within the Range?}
+@A{100%}
+}
 
 @slidebreak
 {layout="Launch"}
@@ -255,14 +282,14 @@ Let’s review what we have learned about making and interpreting box plots.
 {layout="Investigate"}
 # Data Exploration Project (Box Plots) 
 
-- Open your chosen dataset starter file in Pyret. 
+- Open your chosen dataset starter file in @proglang.
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.
 - What question does your display answer?
 - Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
 - Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 
 @teacher{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make box plots for at least these two columns.
 - What question does your display answer?

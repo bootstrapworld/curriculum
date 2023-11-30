@@ -20,7 +20,7 @@ Use the Data Cycle to search for relationships! The first cycle has a question t
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(scatter-plot animals-table "name" "pounds" "weeks")
+  #:expression (if (string=? *proglang* "pyret") '(scatter-plot animals-table "name" "pounds" "weeks") "scatter plot")
   #:show-expression? #f
   #:finding "It appears that heavier animals take longer to get adopted"
   #:show-finding? #f
