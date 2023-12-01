@@ -306,7 +306,7 @@
     (if (string=? directions "")
         (format "\n[~a]\n{sp}\n\n" classes)
         ; (enclose-div classes "")
-        (format "\n[~a]\n**Directions**: ~a\n\n" classes directions))))
+        (format "\n[~a]\n~a\n\n" classes directions))))
 
 (define (write-title title-txt)
   (string-append
