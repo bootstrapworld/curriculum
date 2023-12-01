@@ -11,8 +11,8 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
-experimental=
-proglang=
+export EXPERIMENTAL
+export PROGLANG
 lsn=
 
 if test $# -eq 0; then
@@ -23,39 +23,39 @@ else
     if test "$1" = -f; then
       regenid=1; shift
     elif test "$1" = -z; then
-      experimental=1; regenid=1; shift
+      EXPERIMENTAL=1; regenid=1; shift
     elif test "$1" = --proglang; then
-      shift; proglang="$1"; shift
+      shift; PROGLANG="$1"; shift
     else
       lsn="$1"; shift
     fi
   done
 fi
 
-if test "$proglang" = wescheme; then
+lsn=${lsn%/}
+
+if test "$PROGLANG" = wescheme; then
   lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
   lsn=$lsn-wescheme
-elif test "$proglang" = codap; then
+elif test "$PROGLANG" = codap; then
   lsn=$(echo $lsn|$SED -e 's/-codap$//')
   lsn=$lsn-codap
 fi
 
 if echo $lsn|grep -q "\-wescheme$"; then
-  proglang=wescheme
+  PROGLANG=wescheme
 elif echo $lsn|grep -q "\-codap$"; then
-  proglang=codap
+  PROGLANG=codap
 fi
 
-if test -z "$proglang"; then
-  proglang=pyret
+if test -z "$PROGLANG"; then
+  PROGLANG=pyret
 fi
 
-export topdir=$(pwd)
+export TOPDIR=$(pwd)
 
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
 parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
-
-export PROGLANG=$proglang
 
 make
 
@@ -70,7 +70,7 @@ export NATLANG
 
 for NATLANG in *; do
   test -d $NATLANG || continue
-  export PROGDIR=$topdir/distribution/.prog-$NATLANG
+  export PROGDIR=$TOPDIR/distribution/.prog-$NATLANG
   if test ! -d $NATLANG/lessons; then
     echo Missing lessons diry in distribution -- did you call build-pathway\?
     continue
@@ -89,7 +89,7 @@ for NATLANG in *; do
 
   idfile=slides-$PROGLANG.id
 
-  if test ! $regenid; then
+  if test -z "$regenid"; then
     if test -f "$idfile"; then
       read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
       if test "$goahead" != y; then
@@ -101,24 +101,24 @@ for NATLANG in *; do
   slidesmd=slides.md
   slidesmkd=slides.mkd
 
-  if test $experimental; then
+  if test -n "$EXPERIMENTAL"; then
     slidesmd=zlides.md
     slidesmkd=zlides.mkd
   fi
 
-  if test $regenid; then
+  if test -n "$regenid"; then
     rm -f $idfile
   fi
   if test -f $slidesmd; then
-    $topdir/lib/slides-preproc.rkt $slidesmd
+    $TOPDIR/lib/slides-preproc.rkt $slidesmd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
-        # node $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
+        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
@@ -129,7 +129,7 @@ for NATLANG in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $topdir/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
@@ -138,7 +138,7 @@ for NATLANG in *; do
           cat .tmp.txt
         else
           grep 'View your presentation at' .tmp.txt | $SED -e 's/.*docs\.google\.com\/presentation\/d\///' > "$idfile"
-          cp "$idfile" $topdir/$repoLESSON/
+          cp "$idfile" $TOPDIR/$repoLESSON/
           echo Remember to push $repoLESSON/$idfile to Git repo
         fi
       fi
