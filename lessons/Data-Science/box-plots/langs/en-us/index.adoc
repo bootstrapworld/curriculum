@@ -82,7 +82,8 @@ Taken together these are called the **5 Number Summary** of a dataset, and this 
 === Investigate
 We can use @vocab{box plots} to visualize the 5 number summary, the Range, and the Interquartile Range.
 
-@ifproglang{pyret}{Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
+@ifproglang{pyret}{
+Below is the Contract for `box-plot`, along with an example that will make a box plot for the `pounds` column in the `animals-table`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
@@ -97,13 +98,13 @@ box-plot(animals-table, "pounds")
 @ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot. *If this information is not on your Data Displays Organizer, add it now!*}
 
 @lesson-point{
-Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.
-}
+Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.}
 
 @lesson-instruction{
 @ifproglang{pyret}{
 Type `box-plot(animals-table, "pounds")` into the Interactions Area, and see the resulting plot.
 }
+
 @ifproglang{codap}{
 Create a box plot in CODAP that displays the spread of `Pounds`.}
 }
@@ -122,7 +123,7 @@ Create a box plot in CODAP that displays the spread of `Pounds`.}
 ** _While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier._
 }
 
-@teacher{If students are struggling to write conclusions, go over the following five number summary from the box plot they made:
+@teacher{If students are struggling to write conclusions, go over the following five number summary from the box plot they made.}
 
 - **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.
 - **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.
@@ -211,6 +212,7 @@ Students should notice that the playdough is __taller for shorter intervals__ an
 }
 
 @strategy{
+
 @span{.title}{Modified Box Plots}
 More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot.
 
@@ -219,7 +221,8 @@ More Statistics- or Math-oriented classes will also be familiar with __modified 
 @show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
 }
 
-@ifproglang{codap}{In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.}}
+@ifproglang{codap}{In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.}
+}
 
 
 @lesson-instruction{
