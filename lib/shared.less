@@ -653,8 +653,12 @@ table.recipe_title    {
   p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 }
 
-/* common height for headless and non-headless DRs */
-.recipe_word_problem { min-height: 0.65in; }
+/* common height for headless and non-headless DRs with no directions */
+.recipe_word_problem p::before { font-weight: bold; }
+.recipe_word_problem p { 
+  margin-bottom: 0.05in !important;
+  &:empty { min-height: 0.6in !important; }
+}
 
 .recipe {
 

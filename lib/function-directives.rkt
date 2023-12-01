@@ -304,9 +304,9 @@
   (let ([classes (format ".recipe_word_problem~a"
                          (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) ""))])
     (if (string=? directions "")
-        (format "\n[~a]\n--\n--\n" classes)
+        (format "\n[~a]\n{sp}\n\n" classes)
         ; (enclose-div classes "")
-        (format "\n[~a]\n**Directions**: ~a\n\n" classes directions))))
+        (format "\n[~a]\n~a\n\n" classes directions))))
 
 (define (write-title title-txt)
   (string-append
