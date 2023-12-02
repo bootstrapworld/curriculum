@@ -1,11 +1,24 @@
 #! /usr/bin/env lua
 
+-- print('doing make-slides.lua')
+
+local make_dir = os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR'
+
+dofile(make_dir .. 'utils.lua')
+dofile(make_dir .. 'readers.lua')
+
+local file_being_read = 'noneyet'
+
+local read_group = make_read_group(identity, function()
+  return file_being_read
+end)
+
 local lplan_file = 'index.adoc'
 
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
-function first_line(f)
+local function first_line(f)
   local i = io.open(f)
   if not i then return false end
   local x = i:read()
@@ -23,187 +36,156 @@ elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Early-Math' then
   course_string = 'A'
 end
 
-function get_segments(lplan_file)
-  local i = io.open(lplan_file)
-  if not i then
-    return {}
-  end
-  --
-  local segments = {}
-  local current_segment = false
-  local skipping_lines = false
-  --
-  for L in i:lines() do
-    if L:match('^%+%+%+%+') then
-      skipping_lines = not skipping_lines
-      goto continue
-    elseif skipping_lines then
-      goto continue
-    end
-    if L:match('^=') or L:match('^%s*@slidebreak') then
-      if current_segment then
-        segments[#segments + 1] = current_segment
+local function read_if_poss(i, xxx)
+  for k=1,#xxx do
+    local c = i:read(1)
+    if c ~= xxx:sub(k,k) then
+      buf_toss_back_char(c, i)
+      for j=k,1,-1 do
+        buf_toss_back_char(xxx:sub(j,j), i)
       end
-      current_segment = {}
+      return false
     end
-    if current_segment then
-      current_segment[#current_segment + 1] = L
-    end
-    ::continue::
   end
-  segments[#segments + 1] = current_segment
-  --
+  return true
+end
+
+local function get_imageorientation(containscenter, numimages)
+  return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
+end
+
+local function newslide()
+  return {
+    text = '',
+    level = 2,
+    header = '',
+    numimages = 0,
+    section = false,
+    suffix = '',
+    containscenter = false,
+    imageorientation = 'R',
+  }
+end
+
+local function set_imageorientation(slide)
+  slide.imageorientation = ((slide.containscenter and 'C') or ((slide.numimages == 0) and '') or 'R')
+end
+
+local function get_slides(lsn_plan_adoc_file)
+  if not file_exists_p(lsn_plan_adoc_file) then return end
+  local i = io.open_buffered(lsn_plan_adoc_file)
+  local slides = {}
+  local curr_slide = newslide()
+  local inside_css_p = false
+  local beginning_of_line_p = true
+  file_being_read = lsn_plan_adoc_file
+  while true do
+    local c = i:read(1)
+    if not c then
+      if curr_slide.text ~= '' then
+        set_imageorientation(curr_slide)
+        slides[#slides + 1] = curr_slide
+      end
+      break
+    elseif c == '\n' then
+      curr_slide.text = curr_slide.text .. c
+      beginning_of_line_p = true
+    elseif c == '@' then
+      local directive = read_word(i)
+      if directive == 'scrub' then
+        read_group(i, directive)
+      elseif directive == 'slidebreak' then
+        if curr_slide.text ~= '' then
+          set_imageorientation(curr_slide)
+          slides[#slides + 1] = curr_slide
+        end
+        curr_slide = newslide()
+        curr_slide.header = directive
+      else
+        if directive == 'image' then
+          curr_slide.numimages = curr_slide.numimages + 1
+        elseif directive == 'center' then
+          curr_slide.containscenter = true
+        end
+        curr_slide.text = curr_slide.text .. c .. directive
+      end
+    elseif beginning_of_line_p then
+      beginning_of_line_p = false
+      if c == '=' then
+        local L = i:read_line()
+        -- print('L = ' .. L)
+        if not L then
+          curr_slide.text = curr_slide.text .. c
+          set_imageorientation(curr_slide)
+          slides[#slides + 1] = curr_slide
+          break
+        else
+          if curr_slide.text ~= '' then
+            set_imageorientation(curr_slide)
+            slides[#slides + 1] = curr_slide
+          end
+          curr_slide = newslide()
+          curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+          curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+          -- print('curr slide header = ' .. curr_slide.header)
+          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and 'Investigate') or (curr_slide.header:match('Synthesize') and 'Synthesize')))
+        end
+      elseif c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
+        inside_css_p = true
+      elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
+        inside_css_p = false
+      elseif c == '[' and read_if_poss(i, '.lesson-instruction]') then
+        curr_slide.suffix = '-DN'
+        curr_slide.text = curr_slide.text + '[.lesson-instruction]'
+      else
+        curr_slide.text = curr_slide.text .. c
+      end
+    else
+      curr_slide.text = curr_slide.text .. c
+    end
+  end
   i:close()
-  --
-  return segments
+  local n = #slides
+  if n > 1 then
+    local last_slide = slides[n]
+    if not last_slide.section then last_slide.section = 'Supplemental' end
+  end
+  return slides
 end
 
-function type_of_slide(segment)
-  local L1 = segment[1]
-  if not L1 then
-    return 2
-  elseif L1:match('^= ') then
-    return 0
-  elseif L1:match('^== ') then
-    return 1
-  else
-    return 2
-  end
-end
-
-function find_segment_title(segment)
-  if not segment then
-    return nil
-  end
-  local L = segment[1]
-  if not L then
-    return nil
-  elseif L:match('^=') then
-    local heading = L:gsub('^=+%s*(.*)', '%1')
-    heading = heading:gsub('@duration.*', '')
-    return heading
-  elseif L:match('%s*@slidebreak') then
-    return 'slidebreak'
-  else
-    return nil
-  end
-end
-
-function number_of_images(segment)
-  local n = 0
-  for _,L in ipairs(segment) do
-    if L:match('@image') then
-      n = n + 1
-    end
-  end
-  return n
-end
-
-function find_section(text, level, last)
-  if level == 2 then
-    if not text then
-      return nil
-    elseif text:match('Launch') then
-      return 'Launch'
-    elseif text:match('Investigate') then
-      return 'Investigate'
-    elseif text:match('Synthesize') then
-      return 'Synthesize'
-    elseif text:match('slidebreak') then
-      return 'Repeat'
-    else
-      return nil
-    end
-  elseif last then
-    return 'Supplemental'
-  end
-end
-
-function contains_center(segment)
-  for _,L in ipairs(segment) do
-    if L:match('@center') then
-      return true
-    end
-  end
-  return false
-end
-
-function find_image_orientation(segment, default)
-  default = default or 'R'
-  local centered = contains_center(segment)
-  if centered then
-    return 'C'
-  else
-    local n = number_of_images(segment)
-    if n == 0 then
-      return ''
-    elseif n == 1 then
-      return 'R'
-    else
-      return default
-    end
-  end
-end
-
-function find_suffix(segment)
-  for _,L in ipairs(segment) do
-    if L:match('%[%.lesson%-instruction%]') then
-      return '-DN'
-    end
-  end
-  return ''
-end
-
-function make_slides_file(lplan_file, slides_file)
-
-  local segments = get_segments(lplan_file)
-
-  local segments_last_index = #segments
-
+local function make_slides_file(lplan_file, slides_file)
+  local slides = get_slides(lplan_file)
+  -- print('got ' .. #slides .. ' slides')
+  local slides_last_idx = #slides
+  local curr_header = 'notsetyet'
+  local curr_section = 'notsetyet'
   local o = io.open(slides_file, 'w')
 
-  local current_title = 'not_yet_set'
-  local current_section = 'not_yet_set'
-
-  for k,current_segment in ipairs(segments) do
-    local title = find_segment_title(current_segment)
-    --
+  for k,slide in ipairs(slides) do
+    -- print('doing slide ' .. k .. ' of level ' .. slide.level)
     if k == 1 then
-      if title then
+      if slide.header then
         o:write('@slidebreak\n')
         o:write('{layout="', course_string, ' Title Slide"}\n')
-        o:write('# ', title, '\n\n')
+        o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
         o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
         o:write('-->\n')
       end
     else
-      local level = type_of_slide(current_segment)
-      local section = find_section(title, level, k == segments_last_index)
-      if section == 'Repeat' then
-        section = current_section
-      end
-      if section then
-        current_section = section
-      end
-      if level <= 1 then
-        current_title = title
-      end
-      if level == 2 and section then
-        local image_orientation = find_image_orientation(current_segment)
-        local suffix = find_suffix(current_segment)
-        --
+      if slide.section == 'Repeat' then slide.section = curr_section end
+      -- print('level = ' .. slide.level .. '; header = ' .. tostring(slide.header))
+      if slide.section then curr_section = slide.section end
+      if slide.level <= 1 then curr_header = slide.header
+      elseif slide.level == 2 and slide.section then
         o:write('@slidebreak\n')
-        o:write('{layout="', section, image_orientation, suffix, '"}\n')
-        o:write('# ', current_title, '\n\n')
-        for j,L in ipairs(current_segment) do
-          if j ~= 1 then
-            o:write(L, '\n')
-          end
-        end
+        o:write('{layout="', slide.section, slide.imageorientation, slide.suffix, '"}\n')
+        o:write('# ', curr_header, '\n\n')
+        o:write(slide.text)
       end
     end
   end
+  o:close()
 end
 
 make_slides_file(lplan_file, slides_file)

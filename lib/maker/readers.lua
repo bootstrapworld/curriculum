@@ -29,6 +29,26 @@ function buffered_input_port_metatable.__index:read(arg)
   return self.port:read(1)
 end
 
+function buffered_input_port_metatable.__index:read_line()
+  local buf = self.buffer
+  local s = ''
+  if #buf > 0 then
+    for k=1,#buf do
+      local c = table.remove(buf, 1)
+      if c == '\n' then return s end
+      s = s .. c
+    end
+  end
+  s_extra = self.port:read()
+  if s_extra then
+    return s .. s_extra
+  elseif s == '' then
+    return nil
+  else
+    return s
+  end
+end
+
 function buf_peek_char(bp)
   -- find next character in port without actually reading it
   local buf = bp.buffer
