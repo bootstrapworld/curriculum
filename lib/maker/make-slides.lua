@@ -41,7 +41,7 @@ local function read_if_poss(i, xxx)
     local c = i:read(1)
     if c ~= xxx:sub(k,k) then
       buf_toss_back_char(c, i)
-      for j=k,1,-1 do
+      for j=k-1,1,-1 do
         buf_toss_back_char(xxx:sub(j,j), i)
       end
       return false
@@ -88,8 +88,49 @@ local function get_slides(lsn_plan_adoc_file)
       end
       break
     elseif c == '\n' then
-      curr_slide.text = curr_slide.text .. c
+      if not inside_css_p then
+        curr_slide.text = curr_slide.text .. c
+      end
       beginning_of_line_p = true
+    elseif beginning_of_line_p then
+      beginning_of_line_p = false
+      if c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
+        inside_css_p = true
+      elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
+        inside_css_p = false
+      elseif inside_css_p then
+        --noop
+      elseif c == '=' then
+        local L = i:read_line()
+        beginning_of_line_p = true
+        -- print('L = ' .. L)
+        if not L then
+          curr_slide.text = curr_slide.text .. c
+          set_imageorientation(curr_slide)
+          slides[#slides + 1] = curr_slide
+          break
+        else
+          if curr_slide.text ~= '' then
+            set_imageorientation(curr_slide)
+            slides[#slides + 1] = curr_slide
+          end
+          curr_slide = newslide()
+          curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+          curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+          -- print('curr slide header = ' .. curr_slide.header)
+          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and 'Investigate') or (curr_slide.header:match('Synthesize') and 'Synthesize')))
+        end
+      elseif c == '[' and read_if_poss(i, '.lesson-instruction]') then
+        curr_slide.suffix = '-DN'
+        curr_slide.text = curr_slide.text + '[.lesson-instruction]'
+      elseif c == '|' and read_if_poss(i, '===') then
+        i:read_line()
+        beginning_of_line_p = true
+      else
+        curr_slide.text = curr_slide.text .. c
+      end
+    elseif inside_css_p then
+      --noop
     elseif c == '@' then
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
@@ -108,37 +149,6 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.containscenter = true
         end
         curr_slide.text = curr_slide.text .. c .. directive
-      end
-    elseif beginning_of_line_p then
-      beginning_of_line_p = false
-      if c == '=' then
-        local L = i:read_line()
-        -- print('L = ' .. L)
-        if not L then
-          curr_slide.text = curr_slide.text .. c
-          set_imageorientation(curr_slide)
-          slides[#slides + 1] = curr_slide
-          break
-        else
-          if curr_slide.text ~= '' then
-            set_imageorientation(curr_slide)
-            slides[#slides + 1] = curr_slide
-          end
-          curr_slide = newslide()
-          curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
-          curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-          -- print('curr slide header = ' .. curr_slide.header)
-          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and 'Investigate') or (curr_slide.header:match('Synthesize') and 'Synthesize')))
-        end
-      elseif c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
-        inside_css_p = true
-      elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
-        inside_css_p = false
-      elseif c == '[' and read_if_poss(i, '.lesson-instruction]') then
-        curr_slide.suffix = '-DN'
-        curr_slide.text = curr_slide.text + '[.lesson-instruction]'
-      else
-        curr_slide.text = curr_slide.text .. c
       end
     else
       curr_slide.text = curr_slide.text .. c
