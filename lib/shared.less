@@ -696,6 +696,8 @@ table.recipe_title    {
     &::before { color: black; position: absolute; left: 0; }
   }
   &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
+  /* If there's a section break between recipes, eat up all vertical space */
+  &+div.paragraph:not(.recipe) { margin: auto 0; }
 }
 
 /* Proglang-specific adaptations */
