@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- print('doing make-slides.lua')
+-- print('doing make-slides.lua in ' .. os.getenv'PWD')
 
 local make_dir = os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR'
 
@@ -92,7 +92,7 @@ local function get_slides(lsn_plan_adoc_file)
       beginning_of_line_p = true
     elseif c == '@' then
       local directive = read_word(i)
-      if directive == 'scrub' then
+      if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
       elseif directive == 'slidebreak' then
         if curr_slide.text ~= '' then
@@ -154,6 +154,7 @@ local function get_slides(lsn_plan_adoc_file)
 end
 
 local function make_slides_file(lplan_file, slides_file)
+  if not file_exists_p(lplan_file) then return end
   local slides = get_slides(lplan_file)
   -- print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides

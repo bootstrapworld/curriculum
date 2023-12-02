@@ -1418,8 +1418,11 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("scrub" "slideLayout"))
+                           [(member directive '("ifslide" "scrub" "slideLayout" "table"))
                             (read-group i directive)]
+                           [(string=? directive "ifnotslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (expand-directives:string->port text o))]
                            [(string=? directive "page-of-lines")
                             (let ([n (string->number (read-group i directive))])
                               ; (printf "doing @page-of-lines ~s\n" n)
