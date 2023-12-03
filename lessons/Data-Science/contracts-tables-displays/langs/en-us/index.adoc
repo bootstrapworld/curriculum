@@ -39,8 +39,6 @@
 
 Students will be introduced to functions for working with tables, including: @show{(code 'sort)},  @show{(code 'count)} and @show{(code 'first-n-rows)}. In the process they will review simple @vocab{data types} and be introduced to @vocab{contracts} for describing the @vocab{Domain} and @vocab{Range} of any function.
 
-If you have time and interest in digging deeper into contracts, we have a @lesson-link{contracts, whole lesson focused on contracts for image-producing functions}, which students find highly motivating!
-
 === Launch
 
 @lesson-instruction{
@@ -53,7 +51,7 @@ If you have time and interest in digging deeper into contracts, we have a @lesso
 ** _Is it possible to alphabetize the list, or sort it in other ways?_
 }
 
-(If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge line 7 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.)
+(If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge lines 7-9 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.)
 
 
 === Investigate
@@ -79,7 +77,7 @@ As you can imagine, there are many other functions that work with tables, each w
 The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
 
 @lesson-point{
-Contracts are the _instruction manual_ for functions
+Contracts are the _instruction manual_ for functions.
 }
 
 The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
@@ -171,15 +169,122 @@ That would translate to the following code:
 - What did you Notice?
 - What did you wonder?
 
+== Bug Hunting @duration{10 minutes}
+
+=== Overview
+This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
+
+=== Launch
+
+Let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
+
+@lesson-instruction{
+* Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{editor}.
+* Start by typing `triangle` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
+}
+
+@QandA{
+@Q{What do you get back?}
+@A{`<function:triangle>`}
+}
+
+This means that the computer knows about a function called `triangle`.
+
+@lesson-instruction{
+* We know that all functions will need an open parentheses and at least one input!
+* We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+* Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
+}
+ 
+@QandA{
+@Q{What _hint_ does the error message give us about how to use this function?}
+@A{@image{images/triangle80.png, 500}}
+@A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
+}
+
+@lesson-instruction{
+* We know that `triangle` needs 3 arguments. But what kinds of arguments are they?
+* Try different inputs to make a triangle, and see if you can figure out the Contract!}
+
+@QandA{
+@Q{What is the Contract for `triangle`?}
+@A{@show{(contract `triangle `(Number String String) "Image")}}
+}
+
+=== Investigate
+
+Mistakes happen, especially if we're just figuring things out! Diagnosing and fixing errors are skills that we will continue developing throughout this course.
+
+@lesson-instruction{
+* Turn to the second section of @printable-exercise{pages/catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
+* Then turn to the third section of @printable-exercise{pages/catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
+}
+
+=== Synthesize
+
+- What kinds of @vocab{syntax errors} did you find?
+- What kinds of @vocab{contract errors} did you find?
+
+== Exploring Image Functions @duration{10 minutes}
+
+=== Overview
+
+Making images is a highly motivating context for reading error messages and writing contracts.
+
+@teacher{If you have time and interest in digging deeper we have a @lesson-link{contracts, whole lesson focused on contracts for image-producing functions}, with many scaffolded pages of additional practice.}
+
+=== Launch
+
+@lesson-instruction{
+- Turn to @printable-exercise{image-contracts-ds.adoc} and find `triangle`.
+- You'll see that both the contract and a working expression have been recorded for you.
+- Take the next 10 minutes to experiment with trying to build other shapes using the functions listed.
+- As you figure out these functions, record the contracts and the code!
+}
+
+@strategy{
+
+@span{.title}{Supporting Diverse Learners}
+
+Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for __everyone to have the opportunity to explore.__
+
+Students do **not** need to find all of the contracts on this page in order to complete the lesson or the following pages.
+}
+
+In order to make sure that all students both remain engaged and are prepared to engage in productive class discussion, when you become aware that the first student in your class has successfully used the `text` function, give your students directions about which functions to prioritize with the remaining time.
+
+@teacher{
+Make sure students at least find the contracts for `star`, `rectangle` and `text` before moving ahead.
+}
+
+=== Investigate
+
+@QandA{
+@Q{Does having the same Domain and Range mean that two functions do the same things?}
+@A{No! For instance, `square`, `star`, `triangle` and `circle` all have the same Domain and Range, yet they make very different images because they have different function Names, and each of those functions are defined to do something very different with the inputs!}
+
+@Q{What error messages did you see?}
+@A{Error messages include: too few / too many arguments given, missing parentheses, etc.}
+@Q{How did you figure out what to do after seeing an error message?}
+@A{Reading the error message and thinking about what the computer is trying to tell us can inform next steps.}
+}
+
+
+=== Synthesize
+
+- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
+- Was it harder to find contracts for some of the functions than others? Why?
+- How was it different to code expressions for the shape functions when you started with a Contract?
+
 == Functions for Making Displays @duration{20 minutes}
 
 === Overview
 
 Students will be introduced to functions for making one-variable displays in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
 
-The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce displays. Knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms!
+The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce displays. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's ok! 
 
-Once students know how to use Contracts to write expressions to make these displays, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms}, @lesson-link{visualizing-the-shape-of-data}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.
+@teacher{Once students know how to use Contracts to write expressions to make these displays, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms}, @lesson-link{visualizing-the-shape-of-data}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.}
 
 === Launch
 
