@@ -1418,7 +1418,7 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout" "table"))
+                           [(member directive '("ifslide" "scrub" "slideLayout"))
                             (read-group i directive)]
                            [(string=? directive "ifnotslide")
                             (let ([text (read-group i directive #:multiline? #t)])

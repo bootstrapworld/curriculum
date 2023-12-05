@@ -41,9 +41,7 @@ local function read_if_poss(i, xxx)
     local c = i:read(1)
     if c ~= xxx:sub(k,k) then
       buf_toss_back_char(c, i)
-      for j=k-1,1,-1 do
-        buf_toss_back_char(xxx:sub(j,j), i)
-      end
+      buf_toss_back_string(xxx:sub(1,k-1), i)
       return false
     end
   end
@@ -120,9 +118,33 @@ local function get_slides(lsn_plan_adoc_file)
           -- print('curr slide header = ' .. curr_slide.header)
           curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and 'Investigate') or (curr_slide.header:match('Synthesize') and 'Synthesize')))
         end
-      elseif c == '[' and read_if_poss(i, '.lesson-instruction]') then
-        curr_slide.suffix = '-DN'
-        curr_slide.text = curr_slide.text + '[.lesson-instruction]'
+      elseif c == '[' then
+        local table_line = false
+        local table_numcols = 0
+        local table_header = false
+        local L = i:read_line()
+        if not L then break
+        elseif L:match('cols=[%d"\']') then
+          table_line = true
+          if L:match('header') then table_header = true end
+          if L:match('cols=(%d+)') then
+            table_numcols = tonumber(L:gsub('.-cols=(%d+).*', '%1'))
+          else
+            local table_cols = L:gsub('.-cols=["\'](.-)["\'].*', '%1')
+            _, table_numcols = table_cols:gsub(',', 'x')
+          end
+          beginning_of_line_p = true
+          curr_slide.text = curr_slide.text .. '@table{' .. (table_numcols + 1)
+          if table_header then
+            curr_slide.text = curr_slide.text .. ',header'
+          end
+          curr_slide.text = curr_slide.text .. '}\n'
+        elseif L:match('^%.lesson%-instruction]') then
+          curr_slide.suffix = '-DN'
+          curr_slide.text = curr_slide.text .. '['
+          o:buf_toss_back_char('\n')
+          o:buf_toss_back_string(L)
+        end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
         beginning_of_line_p = true
