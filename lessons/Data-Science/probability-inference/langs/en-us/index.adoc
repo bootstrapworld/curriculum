@@ -44,7 +44,7 @@
 == How to Spot a Scam @duration{20 minutes}
 
 === Overview
-Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about whether a coin is fair or not?"
+Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about the fairness of a coin?"
 
 === Launch
 
@@ -78,17 +78,15 @@ Open @starter-file{fair-coins}, and complete @printable-exercise{fair-coins.adoc
 
 @teacher{Have students share back their sample results, and their predictions after 5 samples and then 20 samples.}
 
-Do any samples seem to undermine the null hypothesis?
+Do any samples seem to contradict the null hypothesis?
 
 In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _produce enough evidence to reject the null hypothesis, or fail to do so_. If the null hypothesis is actually false, larger samples give us a better chance of producing evidence to reject it.
 
 The chances of getting "heads" from a fair coin three times in a row aren't too small: 1-in-8! Maybe it was just the luck of the draw, and the coin is still fair.
 
-Should we suspect a scam if the stranger’s coin flipped heads 10 times in a row? The probability of a fair coin getting no tails in 10 flips is @math{{\frac{1}{2}}^{10}}, or roughly 0.001. So here’s what we’d have to say about our hypothesis test:
+Should we suspect a scam if the stranger’s coin flipped heads 10 times in a row? The probability of a fair coin getting all heads for 10 flips in a row is @math{{\frac{1}{2}}^{10}}, or roughly 0.001.
 
-"If the coin was fair, the probability of getting so few (zero) tails in 10 flips is just 0.001."
-
-Statisticians would say it slightly differently:
+Statisticians would explain this as follows:
 "If the null hypothesis were true, then the probability of getting sample results at least as extreme as the ones observed is 0.001."
 
 @strategy{
