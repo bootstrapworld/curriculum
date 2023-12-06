@@ -52,18 +52,18 @@
 (define (enclose-div classes s)
   (enclose-tag "div" classes s))
 
-(define (enclose-textarea classes s #:multi-line [multi-line #f])
+(define (enclose-textarea classes s #:multiline? [multiline? #f])
   (let ([textarea "code"]) ;shd be "textarea" eventually
     (let ([ta (enclose-tag textarea classes s)])
-      (if multi-line
+      (if multiline?
           (enclose-span ".obeyspaces" ta)
           ta))))
 
-(define (enclose-textarea-2 classes s #:multi-line [multi-line #f])
+(define (enclose-textarea-2 classes s #:multiline? [multiline? #f])
   ;(printf "doing enclose-textarea-2 ~s\n" s)
   (set! classes ".codetwo")
   (let ([ta (enclose-tag "span" classes s)])
-    (if multi-line (enclose-span ".obeyspaces" ta)
+    (if multiline? (enclose-span ".obeyspaces" ta)
         ta)))
 
 (define (enclose-math e)
