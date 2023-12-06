@@ -2,7 +2,12 @@
 
 @description{Students practice making a variety of chart types and then begin to investigate a real world dataset, which they will continue to work with for the remainder of the course. }
 
-@lesson-prereqs{contracts-tables-displays}
+@ifproglang{pyret}{
+@lesson-prereqs{contracts-tables-displays}}
+
+@ifproglang{codap}{
+@lesson-prereqs{}}
+
 
 @keywords{}
 
@@ -25,18 +30,19 @@
 
 @material-links
 
+@ifproglang{pyret}{
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-
+}
 
 | Preparation
 |
 * Decide how much choice you're ready to offer your students before you begin. Research shows that choice increases student engagement! But focusing the whole class on a single dataset is also an option.
-** Would focusing your students on a single dataset make this doable for you? Because you teach younger students who might need more scaffolding? Or because you are new to teaching data science and managing fewer moving parts would increase your confidence? We recommend focusing on @opt-starter-file{food}.
+** Would focusing your students on a single dataset make this doable for you? Because you teach younger students who might need more scaffolding? Or because you are new to teaching data science and managing fewer moving parts would increase your confidence? We recommend focusing on @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "the Global Food Supply and Production dataset"}}.
 ** Are you ready to jump straight into supporting your students in working on a wide range of topics of their choosing? We have a full dataset library!
 ** Want to give students choice from a shorter curated list...to shorten the decision-making process, focus on topics related to curriculur goals, or just to have fewer options to manage during class?  We've assembled @opt-online-exercise{about-datasets/for-teachers-about-datasets.html, descriptions of individual datasets here}. For those looking for a precurated shorter list, we've starred a few of them for you.
-** *If you have time*, you may want to complete all of the lessons with everyone getting extra practice analyzing @opt-starter-file{food} and then have your students choose a dataset to analyze for their culminating research papers!
+** *If you have time*, you may want to complete all of the lessons with everyone getting extra practice analyzing  @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "the Global Food Supply and Production" dataset}} and then have your students choose a dataset to analyze for their culminating research papers!
 
 |===
 
@@ -49,17 +55,22 @@ Students practice making lots of chart types, focusing specifically on the "Cons
 
 The Data Cycle is a roadmap that guides us in the process of data analysis. You've learned that the Data Cycle includes four steps. Let's review what those steps entail.
 
-@lesson-instruction{
-- In the *Ask Questions* phase of the Data Cycle, what are some of the different types of questions we can ask?
-** _Lookup, arithmetic, and statistical questions._
-- What's the difference between an arithmetic question question and a statistical question?
-** _A statistical question does not specify a particular arithmetic process, while an arithmetic question does._
-- What does the *Consider Data* phase entail?
-** _We need to ask two questions: "What rows should we investigate?" and "What columns do we need?"_
-- During the *Analyze Data* phase of the Data Cycle, we choose what kind of display we'll need to answer our question. Which two displays work with categorical data? Why might you choose one over the other?
-** _Bar and pie charts work with categorical data. A pie chart only makes sense when you have the full picture, whereas a bar chart shows the count._
-- In your own words, what happens during the *Interpret the Data* phase?
-** _We answer questions and summarize results, which often leads to new questions._
+@QandA{
+
+@Q{In the *Ask Questions* phase of the Data Cycle, what are some of the different types of questions we can ask?}
+@A{Lookup, arithmetic, and statistical questions.}
+
+@Q{What's the difference between an arithmetic question question and a statistical question?}
+@A{A statistical question does not specify a particular arithmetic process, while an arithmetic question does.}
+
+@Q{What does the *Consider Data* phase entail?}
+@A{We need to ask two questions: "What rows should we investigate?" and "What columns do we need?"}
+
+@Q{During the *Analyze Data* phase of the Data Cycle, we choose what kind of display we'll need to answer our question. Which two displays work with categorical data? Why might you choose one over the other?}
+@A{@ifproglang{pyret}{Bar and pie charts work}@ifproglang{codap}{Dot plots and bar charts} with categorical data. @ifproglang{pyret}{A pie chart only makes sense when you have the full picture, whereas a bar chart shows the count.} @ifproglang{codap}{A dot plot conveys more precise information than a bar chart, but can be overwhelming if there is a lot of data}.}
+
+@Q{In your own words, what happens during the *Interpret the Data* phase?}
+@A{We answer questions and summarize results, which often leads to new questions.}
 }
 
 === Investigate
@@ -106,13 +117,14 @@ This data is used to set public policy, draw voting districts, approve drugs, ca
 * What are some other ways data is used in the world around you?
 }
 
-Below is a list of every @vocab{dataset} already provided to students, with a corresponding Starter File that instantly imports the (cleaned) data into Pyret. We suggest giving students @handout{pages/datasets-and-starter-files.adoc, a direct link to this page}, which lists all of the relevant links found in the lesson plan.
-
 @teacher{
-_Students can also find their own dataset_, and use this @opt-starter-file{blank-ds}. For help, see this @opt-starter-file{blank-ds-tutorial}.
+What follows is a list of every @vocab{dataset}@ifproglang{pyret}{ already provided to students, with a corresponding Starter File that instantly imports the (cleaned) data into Pyret}. We suggest giving students @handout{pages/datasets-and-starter-files.adoc, a direct link to this page}, which lists all of the relevant links found in the lesson plan.
+
+@ifproglang{pyret}{
+_Students can also find their own dataset_, and use this @opt-starter-file{blank-ds}. For help, see this @opt-starter-file{blank-ds-tutorial}.}
 
 
-For teachers using a single dataset, we recommend using @opt-starter-file{food}._ This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
+For teachers using a single dataset, we recommend using @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "the Global Food Supply and Production dataset"}}. This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
 
 **NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
 }
@@ -135,10 +147,10 @@ Students are introduced to the Dataset Exploration Project. They will apply what
 
 === Launch
 
-Today, we are going to start digging into the datasets we've chosen to study at length. Each time we learn about a new data science concept in this class, we will add displays, questions, and analyses to the @starter-file{exploration-project} template.
+Today, we are going to start digging into the datasets we've chosen to study at length. Each time we learn about a new data science concept in this class, we will add displays, questions, and analyses to the @starter-file{exploration-project}.
 
 @lesson-instruction{
-- Open the blank template for the @starter-file{exploration-project}.
+- Open the @starter-file{exploration-project}.
 - Create and save your own copy of the slide deck.
 - Let's take a look! Peruse the slides to get a sense of what this cumulative project includes.
 - What do you Notice? What do you Wonder?
@@ -160,10 +172,11 @@ By now you've already learned what to do when you approach a new dataset. Think 
 Now, you're doing to do the same thing _with your own dataset._
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file @ifproglang{pyret}{in Pyret}@ifproglang{codap}{in CODAP}.
 - Look at the spreadsheet or table for your dataset. What do you *Notice*? What do you *Wonder*?
 - Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
-* Save a copy of your starter file. In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.
+@ifproglang{pyret}{
+- Save a copy of your starter file. In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.}
 }
 
 Today we will begin adding to our @starter-file{exploration-project}. First, we are going to describe our dataset.

@@ -12,17 +12,19 @@
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
-(define *max-images-processed* #f)
+(define *max-images-processed*
+  (cond [(truthy-getenv "EXPERIMENTAL") 0]
+        [else #f]))
 
 (define *num-images-processed* 0)
 
 (define *in-file* "doesnt-exist")
 
-(define *topdir* (getenv "topdir"))
+(define *topdir* (getenv "TOPDIR"))
 
 (define *progdir* (getenv "PROGDIR"))
 
-(define *proglang* (or (getenv "PROGLANG") "pyret"))
+(define *proglang* (or (truthy-getenv "PROGLANG") "pyret"))
 
 (define *proglang-sym* (string->symbol *proglang*))
 
@@ -652,6 +654,9 @@
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (expand-directives:string->port text o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o)

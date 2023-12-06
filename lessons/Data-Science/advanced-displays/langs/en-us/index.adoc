@@ -220,10 +220,25 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 === Investigate
 
 @lesson-instruction{
-* __Starting on paper__, complete @printable-exercise{pages/piecewise-explore.adoc}.
-* When you're finished thinking and writing, open the @starter-file{piecewise-displays} and experiment!
+* Complete @printable-exercise{pages/piecewise-explore.adoc}.
 * Can you come up with another piecewise function?
-* Make sure to finish the remainder of the page!
+}
+
+@QandA{
+@Q{What did the function produce for a dog Row?}
+@A{A black square}
+@Q{What did the function produce for a cat Row?}
+@A{An orange square}
+@Q{What happened when you took away the condition for snails?}
+@A{An error}
+}
+
+Piecewise functions are extremely powerful, allowing us to specify different rules for different inputs. But with great power comes great responsibility: if an input has no rule, the function will be undefined for that input! You've seen undefined behavior before, where division fails if the second input is zero. Removing the condition for snails, for example, created undefined behavior for all rows where the species is `"snail"`.
+
+@teacher{
+CS/Programming teachers may find this to be a useful place to teach about `else:`, which is a catch-all rule for "any input that we don't already have a condition for". But beware! __Teaching kids to use `else:` without considering the input is a really bad programming habit!__
+
+Error messages tell us when something goes wrong. In the case of the animals starter file, we have a fixed, predefined number of species. Adding an `else` clause will prevent us from seeing any errors if there's a typo in one of the conditions, if an unexpected animal gets added to the dataset, etc. In situations like this, good programming practice demands a condition for each species, and no `else` clause.
 }
 
 @strategy{

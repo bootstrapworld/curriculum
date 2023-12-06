@@ -295,7 +295,7 @@ Let’s review what we have learned about correlations.
 
 Let’s connect what we know about correlations to your chosen dataset.
 
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @proglang.
 - Turn to @printable-exercise{pages/correlations-in-my-dataset.adoc}, and list three correlations you’d like to search for.
 - Pick **one correlation** to explore. Which column do you think is the @vocab{explanatory variable}? The @vocab{response variable}?
 - Make a scatter plot with the explanatory variable on the x-axis and the response variable on the y-axis.

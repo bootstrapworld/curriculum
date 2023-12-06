@@ -300,11 +300,13 @@
             title-txt)))
 
 (define (write-directions directions headless?)
-  (format (string-append
-            "\n[.recipe_word_problem~a]\n"
-            "**Directions**: ~a\n\n")
-          (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) "")
-          directions))
+  ; (printf "doing write-directions ~s ~s\n\n" directions headless?)
+  (let ([classes (format ".recipe_word_problem~a"
+                         (if headless? (format ".headless-design-recipe.FOR~a" *proglang*) ""))])
+    (if (string=? directions "")
+        (format "\n[~a]\n{sp}\n\n" classes)
+        ; (enclose-div classes "")
+        (format "\n[~a]\n~a\n\n" classes directions))))
 
 (define (write-title title-txt)
   (string-append
@@ -788,8 +790,8 @@
   (when (string=? funname "")
     (set! funname " ")
     (set! page-header "Design Recipe")
-    (when (string=? directions "")
-      (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
+    ; (when (string=? directions "")
+    ;   (set! directions (format "{sp} +\n{sp} +\n{sp}\n")))
     )
   (when *pyret?*
     (set! funname (wescheme->pyret-s funname)))

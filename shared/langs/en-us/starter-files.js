@@ -90,6 +90,9 @@ var Core = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
     },
+    "codap": {
+      "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
+    },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
     }
@@ -210,14 +213,14 @@ var DSBasics = {
     "pyret": {
       "url": "https://drive.google.com/file/d/1DX_oEJgUr9uSUxYdN4YdybQjwEvEP7fC/"
     }
-  },
+  }, 
   "exploration-project": {
     "title": "Data Exploration Project Slide Template",
     "pyret": {
       "url": "https://docs.google.com/presentation/d/1WNSuO7dlMahelCKXJWBZ92UZRy1ZSS4t_gZW4dXfaJ4/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/document/d/1eBYMjAxrn0rPp0Mqd52cRjmwyXSz51RfBWe67DR93es/copy"
+      "url": "https://docs.google.com/presentation/d/1M1MCtRU4lYJ2g7PDXYCNczToFDvSoPn6C0YhAyUEbzo/copy"
     }
   },
   "research-paper": {
@@ -226,7 +229,7 @@ var DSBasics = {
       "url": "https://docs.google.com/document/d/1QBWvIyp1NIJtULHxc6Yt8fuZsxSS3hpyR40-6q-40hQ/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/document/d/1rSaR8dGEDtZz3NRVsvAjw_W50BiCNrM6zxID5hgkBY8/copy"
+      "url": "https://docs.google.com/document/d/1Xnp-y2n2lOX4sz6cEMmRsrweQSjaiatgWI-VpBKLnh8/copy"
     }
   },
   "research-project": {
@@ -235,7 +238,7 @@ var DSBasics = {
       "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
+      "url": "https://docs.google.com/presentation/d/1uVNO3gRvBxjmE4NRCyiKBhq181dit1wmB17ifQxjTTY/copy"
     }
   },
   "animals-spreadsheet": {
@@ -362,6 +365,9 @@ var MoreDS = {
     "title": "Height vs. Wingspan Survey (make a copy)",
     "pyret": {
       "url": "https://docs.google.com/forms/d/126JbqtnRLnkpzhePXHZWFQW7EUs5oAM5hhvVMeebwh4/template/preview"
+    },
+    "codap": {
+      "url": "https://docs.google.com/forms/d/126JbqtnRLnkpzhePXHZWFQW7EUs5oAM5hhvVMeebwh4/template/preview"
     }
   },
   "dirty-data": {
@@ -373,7 +379,10 @@ var MoreDS = {
   "fav-desserts": {
     "title": "Survey of Eighth Graders and their Favorite Desserts Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl"
+      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl",
+    },
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcavDE7LbB461CodyyaMh%2Ffile.json"
     }
   },
   "olympic-records": {
@@ -804,7 +813,7 @@ var Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
@@ -817,9 +826,23 @@ var Projects = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
+    }, 
+  },
+  "cats-only": {
+    "title": "Animals Dataset - Cats Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
+    }
+  },
+  "dogs-only": {
+    "title": "Animals Dataset - Dogs Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
     }
   }
 }
+
+
 
 var allStarterFiles = {
   ...Editors, 
