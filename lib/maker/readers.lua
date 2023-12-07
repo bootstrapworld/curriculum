@@ -66,7 +66,7 @@ function buf_toss_back_string(s, bp)
   local k = #s
   if k == 0 then return end
   for j=k,1,-1 do
-    buf_toss_back_char(s:sub(j,j), i)
+    buf_toss_back_char(s:sub(j,j), bp)
   end
 end
 
