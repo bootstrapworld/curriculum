@@ -48,55 +48,65 @@ When we explored measures of center, we tried to answer a question about "typica
 
 @indented{_The Animal Shelter Bureau says the average pet weighs almost 40 pounds_.}
 
-How useful is this fact, really? 
+@slidebreak
 
-* Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
-* But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
 
-So once we have our summary for a "normal value", it's likely we'll ask another question: 
-@indented{_If the average pet is 40 pounds, just how typical is that?_}
+But, how useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and none are anywhere _near_ the mean!
 
-There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! Some classes are more different than others. 
+@slidebreak
 
-** How do we measure the spread of a population?**
+Once we have our summary for a "normal value", it's likely we'll ask: **How typical is the average?** +
+We'd expect some deviation - or @vocab{spread} - in any population!
+
+@slidebreak
+
+**How do we measure the spread of a population?**
 
 * We can start by lining up all the animals' weights from smallest to largest.
 * We can compute the @vocab{range of a dataset}, by finding the distance between @vocab{minimum} and @vocab{maximum} values. 
 
-@teacher{Note: the term “Range” means something different in statistics than it does in algebra and programming!}
+@indented{_Note: the term “Range” means something different in statistics than it does in algebra and programming!_}
 
-* To learn more about how evenly distributed the data is, we can split the data in half by finding the @vocab{median}.
-* When we split each of these halves in half, we've split the population into four equal-sized quarters. 
-* The boundary points between the quarters are called @vocab{quartiles} and, combined with the minimum and the maximum, they give us the **5 Number Summary** of a dataset: 
+@slidebreak
+
+**To learn more about how evenly distributed the data is**
+
+* We can find the @vocab{median} by splitting the data in half.
+* We can split the population into four equal-sized quarters by splitting each of these halves in half.
+* The boundary points between these equal quarters are called @vocab{quartiles}.
+
+@slidebreak 
+
+* Combined with the minimum and the maximum, the quartiles give us the **5 Number Summary** of a dataset: 
 
 @indented{
-. @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
-. Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
-. Q2: @vocab{Median}: _the middle value (median) in a dataset_
-. Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
-. @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
+* @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
+* Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
+* Q2: @vocab{Median}: _the middle value (median) in a dataset_
+* Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
+* @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
 }
 
-We can use these numbers to calculate two new values!
+@slidebreak
 
-- _@vocab{Range of the dataset}_ :  _the distance spanned by the extreme values in the dataset_
-** Maximum - Minimum
-- @vocab{IQR} (@vocab{Interquartile Range}) : _the distance spanned by the middle half of the data_
-** Q3 - Q1
+* We can also use the @vocab{quartiles} to calculate a new value:
+@indented{
+* @vocab{IQR} (@vocab{Interquartile Range}) = Q3 - Q1 : _the distance spanned by the middle half of the data_
+}
 
-== Investigate
+=== Investigate
 
 To visualize the 5 number summary, the Range and the Interquartile Range we can use @vocab{box plots}.
 
 @center{@image{images/box-n-whisker-plot.png, 500}} 
 
-@ifproglang{pyret}{
-Below is the Contract for `box-plot`.
+@ifproglang{pyret}{Below is the Contract for `box-plot`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
 # Consumes a table and the name of the column to plot, and produces a box plot
 ```
+
 }
 
 @ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot. *If this information is not on your Data Displays Organizer, add it now!*}
@@ -104,7 +114,7 @@ box-plot :: (t::Table, col::String) -> Image
 @lesson-point{
 Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.}
 
-@ifproglang{pyret}{pyret}
+@ifproglang{pyret}{
 * Let's see what we can learn about the spread of the data in the `pounds` column by making a `box-plot`!
 * Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
 ** _If students don't have the file, they can open a new @starter-file{animals}._
@@ -113,14 +123,16 @@ Box plots divide our sample into four equally populated groups, and show which o
 }
 
 @ifproglang{codap}{
-Create a box plot in CODAP that displays the spread of `Pounds`.}
+Create a box plot in CODAP that displays the spread of `Pounds`.
 }
 
 @ifproglang{pyret}{
-@center{@image{images/5-plot.png,  400}}}
+@center{@image{images/5-plot.png,  400}}
+}
 
 @ifproglang{codap}{
-@center{@image{images/codap-box-plot.png, 300}}}
+@center{@image{images/codap-box-plot.png, 300}}
+}
 
 
 @QandA{
