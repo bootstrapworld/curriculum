@@ -12,7 +12,7 @@
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(lr-plot animals-table "name" "age" "weeks")
+  #:expression (if (string=? *proglang* "pyret") '(lr-plot animals-table "name" "age" "weeks") "least squares line")
   #:show-expression? #t
   #:finding "The slope is positive (0.789) and R=0.448, so there is a moderate, positive relationship"
   #:show-finding? #t

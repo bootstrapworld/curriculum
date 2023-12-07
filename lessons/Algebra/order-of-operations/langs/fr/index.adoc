@@ -115,8 +115,7 @@ Alors, les nombres (par exemple, @math{3}, @math{-29}, @math{77.01}...) sont tou
 Si nous voulons dessiner le cercle d'évaluation de @smath{(/ 6 3)}, la fonction de division (`/`) est écrite en haut, avec le `6` à gauche et le `3` à droite.
 
 
-[.centered-image]
-@show{(coe '(/ 6 3))}
+@center{@show{(coe '(/ 6 3))}}
 
 Que faire si l'on veut utiliser plusieurs fonctions? Comment dessiner le cercle d'évaluation de @smath{(/ 6 (+ 1 2))}? Le cercle d'évaluation de l’expression @smath{(+ 1 2)} est facile à dessiner. Comment prendre le résultat de ce cercle et diviser 6 par ce résultat?
 
@@ -124,22 +123,19 @@ Que faire si l'on veut utiliser plusieurs fonctions? Comment dessiner le cercle 
 
 En fait, nous remplaçons le 3 de notre premier cercle d'évaluation par un autre cercle, qui ajoute 1 et 2!
 
-[.centered-image]
-@show{(coe '(/ 6 (+ 1 2)))}
+@center{@show{(coe '(/ 6 (+ 1 2)))}}
 
 @lesson-instruction{
 À quoi ressemblerait le cercle d'évaluation de @math{5 \times 6}?
 }
 
-[.centered-image]
-@show{(coe '(* 5 6))}
+@center{@show{(coe '(* 5 6))}}
 
 @lesson-instruction{
 À quoi ressemblerait le cercle d'évaluation de @math{(10 - 5) \times 6}?
 }
 
-[.centered-image]
-@show{(coe '(* (- 10 5) 6))}
+@center{@show{(coe '(* (- 10 5) 6))}}
 
 En plus de nous aider à détecter les erreurs avant qu'elles ne se produisent, les cercles d'évaluation sont également un moyen utile de réfléchir à la _transformation_ en mathématiques. Par exemple, vous avez peut-être entendu que « l'addition est commutative, donc @smath{(+ a b)} peut toujours s'écrire @smath{(+ b a)}. » Par exemple, @smath{(+ 1 2)} peut être transformé en @smath{(+ 2 1)}.
 

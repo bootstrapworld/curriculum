@@ -84,11 +84,13 @@ _Each group of three will need a ruler, 4-8 pennies, and at least one pen or pen
 
 The mean of a dataset is the sum of values divided by the number of values. To take the average of a column, we add all the numbers in that column and divide by the number of rows.
 
-Pyret has a way for us to compute the mean of any quantitative column in a Table:
+@proglang has a way for us to compute the mean of any @vocab{quantitative} column in a Table. It consumes a Table and the name of the column you want to measure, and produces the mean -- or average -- of the numbers in that column.
 
+@ifproglang{pyret}{
 @show{ (contract "mean" '("Table" "String") "Number" )}
 
 What is the function's name? Domain? Range?
+}
 
 <!--
 Notice that calculating the mean requires being able to add and divide, so the mean only makes sense for quantitative data. For example, the mean of a list of Presidents doesn’t make sense. Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.
@@ -98,14 +100,27 @@ Notice that calculating the mean requires being able to add and divide, so the m
 {layout="Investigate"}
 # Mean
 - Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Type `mean(animals-table, "pounds")`. 
-- What does this give us?
+
+@ifproglang{pyret}{
+- Type `mean(animals-table, "pounds")`. What does this give us?}
+@ifproglang{codap}{
+- Let's find the mean of the animals' weights. Create a new graph with its points randomly positioned. Drag `Pounds` to the x-axis. From the `Measure` menu, select `Mean`. Hover your cursor over the blue line. What is the mean?}
 - Does this support the Bureau’s claims?
-- Turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, *fill in the computed mean.*
+- Now, turn to @printable-exercise{summarizing-columns-in-animals.adoc}. In the “measures of center” section, fill in the computed mean.
 
 <!--
-
+The mean is 39.715625. This does not support the Bureau's claims, because the mean is less than 40 pounds.
 -->
+
+
+
+@slidebreak
+{layout="Synthesize"}
+# Median
+
+- Three animals weighing 5, 5, 10, and 100 pounds will have an average mean of 30 pounds. Can you think of another set of four animals that would have the same average? How many sets can you come up with?
+- If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?
+
 
 @slidebreak
 {layout="Launch"}
@@ -168,21 +183,29 @@ The algorithm for finding the median of a quantitative column is:
 {layout="Investigate"}
 # Median
 
-* Pyret has a function to compute the median of a list as well:
 
-@show{ (contract "median" '("Table" "String") "Number" )}
+@QandA{
+@ifproglang{pyret}{
+@Q{Pyret has a function to compute the median of a list as well. Find the Contract for `median` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{ _If you're working with a printed workbook, the contracts pages are included in the back._}}
+@Q{Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.}
+@A{The median is 11.3.}}
 
-* Compute the median for the `pounds` column in the Animals Dataset, and add this to @printable-exercise{summarizing-columns-in-animals.adoc}.
-* Is it different than the mean?
-* What can we conclude when the mean is so much greater than the median?
-* For practice, compute the mean and median for the weeks and age columns.
 
-<!--
-* _The median is 11.3._
-* _It is very different from the mean!_
-* _There are some very heavy animals that are causing the mean to be higher._
-* _Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3._
--->
+
+@ifproglang{codap}{
+@Q{We can use CODAP to compute the median of a list as well. On the same graph that you created to find mean, go to the `Measure` menu and select `Median`. What value do you get when you hover over the red line that appears?}
+@A{The median is 11.3.}}
+
+@Q{Is it different than the mean?}
+@A{Yes, it is very different!}
+
+@Q{What can we conclude when the mean is so much greater than the median?}
+@A{There are some very heavy animals that are causing the mean to be higher.}
+
+@Q{For practice, compute the mean and median for the weeks and age columns.}
+@A{Weeks: mean - 5.75; median - 4. Age: mean - 4.359375; median - 3.}}
+
+
 @slidebreak
 {layout="Synthesize"}
 # Median
@@ -220,9 +243,14 @@ Median and Mean always produce one number, but if two or more values are equally
 {layout="Launch"}
 # Modes
 
-In Pyret, the mode(s) are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
 
-@show{ (contract "modes" '("Table" "String") "List" )}
+@ifproglang{pyret}{
+In Pyret, the modes are calculated by the modes function, which consumes a Table and the name of the column you want to measure, and produces a _List_ of Numbers.
+
+@show{ (contract "modes" '("Table" "String") "List<Number>" )}}
+
+@ifproglang{codap}{
+The easiest way to determine modes in CODAP is to sort a column. Do this by clicking on the column name and then selecting either Sort option from the drop-down menu. Scan the column to see which values are the most common.}
 
 @slidebreak
 {layout="Investigate"}

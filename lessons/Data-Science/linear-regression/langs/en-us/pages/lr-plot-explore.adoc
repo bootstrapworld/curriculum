@@ -9,9 +9,9 @@
 
 == age
 
-_You should already have plotted @show{(code '(lr-plot animals-table "name" "age" "weeks"))} in the @starter-file{animals}._
+_You should already have @ifproglang{pyret}{plotted @show{(code '(lr-plot animals-table "name" "age" "weeks"))}}@ifproglang{codap}{created a Least Squares line with `Weeks` on the x-axis and `Age` on the y-axis} in the @starter-file{animals}.__
 
-@n What is the predictor function? @math{y =} @fitb{5em}{@ifsoln{0.78924}} @math{x +} @fitb{5em}{@ifsoln{2.30936}}
+@n What is the predictor function? @math{y =} @fitb{10em}{@ifsoln{0.78924}} @math{x +} @fitb{10em}{@ifsoln{2.30936}}
 
 @n What is the slope? @fitb{}{@ifsoln{0.78924}}
 
@@ -29,7 +29,7 @@ _You should already have plotted @show{(code '(lr-plot animals-table "name" "age
 
 == weight
 
-_Make another lr-plot, but this time use the animals' weight as our explanatory variable instead of their age._
+_Make another @ifproglang{pyret}{lr-plot}@ifproglang{codap}{Least Squares Line}, but this time use the animals' weight as our explanatory variable instead of their age._
 
 @n How long would our line of best fit predict it would take for an animal weighing 21 pounds to be adopted? @fitb{}{@ifsoln{about 4 weeks}}
 
@@ -38,6 +38,7 @@ _Make another lr-plot, but this time use the animals' weight as our explanatory 
 @vspace{3ex}
 
 == cats
+@ifproglang{pyret}{
 
 _Make another `lr-plot`, comparing the `age` v. `weeks` columns for **only the cats** using the following code:_
 
@@ -49,6 +50,12 @@ _Make another `lr-plot`, comparing the `age` v. `weeks` columns for **only the c
 lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 ``
 --
+}
+
+@ifproglang{codap}{
+
+@n Using the @starter-file{cats-only}, make another Least Squares Line, comparing the `age` v. `weeks` columns for __only the cats__.
+}
 
 @vspace{1ex}
 
@@ -68,4 +75,9 @@ lr-plot(filter(animals-table, is-cat), "name", "age", "weeks")
 
 @vspace{3ex}
 
-★ *Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.*
+@ifproglang{pyret}{
+@star Make another `lr-plot`, comparing the `age` v. `weeks` columns for _only the dogs_.
+}
+
+@ifproglang{codap}{
+@star Using @starter-file{dogs-only}, make another Least Squares line, comparing the `age` v. `weeks` columns for __only the dogs__.}

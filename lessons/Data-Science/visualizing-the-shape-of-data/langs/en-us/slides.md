@@ -113,10 +113,16 @@ It’s just as likely for a newborn baby to be a certain number of ounces below 
 - On @printable-exercise{pages/identifying-shape-histograms.adoc}, describe the shape of the histograms you see there.
 - On @printable-exercise{pages/shape-of-animals-dataset.adoc}, describe the pounds histogram and another one you make yourself. When writing down what you notice, try to use the language Data Scientists use, discussing both skew and outliers.
 <!--
+
+@ifproglang{pyret}{
 * __Students should enter the code: @show{(code '(histogram animals-table "name" "pounds" 20))}__
 * _The histogram is skewed left._
 * _The statement "a few of the animals were unusually heavy" is the only one that applies, given the histogram's shape._
 * _Our rule of thumb is that a histogram should have between 5–10 bins. The first histogram we made - with 20-pound bins - had a total of ten bins, so it best satisfies our rule._
+}
+
+@ifproglang{codap}{
+@A{Students should select the "Graph" button on the upper left. Drag `Pounds` to the x-axis. From the Configuration menu, select "Group into Bins" and "Fuse Dots into Bars." From the same menu, confirm that the bin width is 20.}}
 
 -->
 @slidebreak

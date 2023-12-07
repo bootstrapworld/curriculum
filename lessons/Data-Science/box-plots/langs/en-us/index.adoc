@@ -44,51 +44,77 @@
 Students are introduced to the notion of _spread_ in a dataset. They learn about quartiles, box plots, and how to use them to talk about spread.
 
 === Launch
-When we explored measures of center, we tried to answer a question about "typical" values. We considered a fact - that _the Animal Shelter Bureau says the average pet weighs almost 40 pounds_.
+When we explored measures of center, we tried to answer a question about "typical" values.  
 
-How useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and no one is even _near_ to the mean!
+@indented{_The Animal Shelter Bureau says the average pet weighs almost 40 pounds_.}
 
-So once we have our summary for a "normal value", it's likely we'll ask another question: _If the average pet is 40 pounds, just **how typical** is that?_
+@slidebreak
 
-There are differences in every class of students. Not everyone likes the same music, not everyone dresses the same, etc. So we'd expect some deviation - or @vocab{spread} - in any class of students! Some classes are more different than others. How do we measure the @vocab{spread} of a population?
 
-Suppose we lined up all the animals' weights from smallest to largest... 
-We can learn something about the @vocab{spread} of the dataset by finding the distance between @vocab{minimum} and @vocab{maximum} values. This distance is called the @vocab{range of a dataset}. 
+But, how useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and none are anywhere _near_ the mean!
 
-*Note*: the term “Range” means something different in statistics than it does in algebra and programming!
+@slidebreak
 
-To learn more about how evenly distributed the data is, we can split the population into four equal-sized quarters. First we'll split the data in half by finding the @vocab{median} and then we'll find the _median of each half_! The boundary points between the quarters are called @vocab{quartiles} and, combined with the minimum and the maximum, they give us the **5 Number Summary** of a dataset: 
+Once we have our summary for a "normal value", it's likely we'll ask: **How typical is the average?** +
+We'd expect some deviation - or @vocab{spread} - in any population!
 
-. @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
-. Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
-. Q2: @vocab{Median}: _the middle value (median) in a dataset_
-. Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
-. @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
+@slidebreak
 
-We can use these numbers to calculate two new values!
+**How do we measure the spread of a population?**
 
-- _@vocab{Range of the dataset}_ :  _the distance spanned by the extreme values in the dataset_
-** Maximum - Minimum
-- @vocab{IQR} (@vocab{Interquartile Range}) : _the distance spanned by the middle half of the data_
-** Q3 - Q1
+* We can start by lining up all the animals' weights from smallest to largest.
+* We can compute the @vocab{range of a dataset}, by finding the distance between @vocab{minimum} and @vocab{maximum} values. 
+
+@indented{_Note: the term “Range” means something different in statistics than it does in algebra and programming!_}
+
+@slidebreak
+
+**To learn more about how evenly distributed the data is**
+
+* We can find the @vocab{median} by splitting the data in half.
+* We can split the population into four equal-sized quarters by splitting each of these halves in half.
+* The boundary points between these equal quarters are called @vocab{quartiles}.
+
+@slidebreak 
+
+* Combined with the minimum and the maximum, the quartiles give us the **5 Number Summary** of a dataset: 
+
+@indented{
+* @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
+* Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
+* Q2: @vocab{Median}: _the middle value (median) in a dataset_
+* Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
+* @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
+}
+
+@slidebreak
+
+* We can also use the @vocab{quartiles} to calculate a new value:
+@indented{
+* @vocab{IQR} (@vocab{Interquartile Range}) = Q3 - Q1 : _the distance spanned by the middle half of the data_
+}
+
+=== Investigate
 
 To visualize the 5 number summary, the Range and the Interquartile Range we can use @vocab{box plots}.
 
 @center{@image{images/box-n-whisker-plot.png, 500}} 
 
-Below is the Contract for `box-plot`.
+@ifproglang{pyret}{Below is the Contract for `box-plot`.
 
 ```
 box-plot :: (t::Table, col::String) -> Image
-# Consumes a table and the name of the column
-# to plot, and produces a box plot"
+# Consumes a table and the name of the column to plot, and produces a box plot
 ```
 
-@lesson-point{
-Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.
 }
 
-@lesson-instruction{
+@ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot. *If this information is not on your Data Displays Organizer, add it now!*}
+
+@lesson-point{
+Box plots divide our sample into four equally populated groups, and show which of those groups are spread wide or are tightly packed.}
+
+@ifproglang{pyret}{
 * Let's see what we can learn about the spread of the data in the `pounds` column by making a `box-plot`!
 * Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
 ** _If students don't have the file, they can open a new @starter-file{animals}._
@@ -96,7 +122,18 @@ Box plots divide our sample into four equally populated groups, and show which o
 ** _Students will type `box-plot(animals-table, "pounds")` into the Interactions Area and use the resulting box plot to fill in the five-number summary for the `pounds` column, and sketch the box plot._
 }
 
+@ifproglang{codap}{
+Create a box plot in CODAP that displays the spread of `Pounds`.
+}
+
+@ifproglang{pyret}{
 @center{@image{images/5-plot.png,  400}}
+}
+
+@ifproglang{codap}{
+@center{@image{images/codap-box-plot.png, 300}}
+}
+
 
 @QandA{
 
@@ -110,28 +147,44 @@ Box plots divide our sample into four equally populated groups, and show which o
 @A{No. We can only make box plots for @vocab{quantitative} columns.}
 }
 
+@teacher{If students are struggling to write conclusions, go over the following five number summary from the box plot they made.
+
+- **Minimum** (the left “whisker”) - the smallest value in the dataset . In our dataset, that’s just 0.1 pounds.
+- **Q1** (the left edge of the box) - computed by taking the _median of the lower half of the values_. In the pounds column, that’s 3.9 pounds.
+- **Q2** / Median value (the line in the middle), which is the middle Quartile of the whole dataset. We already computed this to be 11.3 pounds.
+- **Q3** (the right edge of the box), which is computed by taking the _median of the upper half of the values_. That’s 60.4 pounds in our dataset.
+- **Maximum** (the right “whisker”) - the largest value in the dataset . In our dataset, that’s 172 pounds.
+}
+
 @lesson-instruction{
 Choose another quantitative column to summarize and complete the second half of @printable-exercise{summarizing-columns-mos.adoc}
 }
+
 
 === Common Misconceptions
 It is extremely common for students to forget that the quartiles divide the data into quarters, each of which includes 25% of the dataset. This will need to be heavily reinforced.
 
 === Synthesize
 
-@lesson-instruction{
-- What percentage of points fall in the first quarter?
-** 25%
-- What percentage of points fall in the second quarter?
-** 25%
-- What percentage of points fall in the third quarter?
-** 25%
-- What percentage of points fall in the fourth quarter?
-** 25%
-- What percentage of points fall in the **Interquartile Range** (IQR)?
-** 50%
-- What percentage of points fall within the Range?
-** 100%
+@QandA{
+
+@Q{What percentage of points fall in the first quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the second quartile?}
+@A{25%}
+
+@A{What percentage of points fall in the third quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the fourth quartile?}
+@A{25%}
+
+@Q{What percentage of points fall in the **Interquartile Range** (IQR)?}
+@A{50%}
+
+@Q{What percentage of points fall within the Range?}
+@A{100%}
 }
 
 == Interpreting Box Plots @duration{30 minutes}
@@ -175,25 +228,34 @@ Students should notice that the playdough is __taller for shorter intervals__ an
 }
 
 @strategy{
+
 @span{.title}{Modified Box Plots}
-More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
+More Statistics- or Math-oriented classes will also be familiar with __modified box plots__ (@link{https://www.youtube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot.
+
+@ifproglang{pyret}{
+Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
 
 @show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
+}
+
+@ifproglang{codap}{In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.}
 }
 
 @lesson-instruction{
 You've learned about @vocab{quartiles}, @vocab{maximum} and @vocab{minimum}, @vocab{interquartile range}, and more. With a partner, complete the @printable-exercise{boxplot-vocab-map.pdf, Box Plot Vocab Concept Map} and see if you can draw connections between these concepts!
 }
 
+
 === Synthesize
 
 We started talking about measures of center with a single question: __is "average" the right measure to use when talking about animals' weights?__ Now that we've explored the spread of the dataset, do you agree or disagree that average is the right summary?
 
+@ifproglang{pyret}{
 @strategy{
 @span{.title}{Project Option: Stress or Chill?}
 
-Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. 
-}
+Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science.
+}}
 
 == Data Exploration Project (Box Plots) @duration{flexible}
 
@@ -211,7 +273,7 @@ Let’s review what we have learned about making and interpreting box plots.
 ** _Box plots display a single column of quantitative data._
 - How are box plots similar to histograms? How are they different?
 ** _Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variables numbers of data points in each one. Boxplots have variable intervals ("quartiles") with a fixed number of data points in each one._
-- When we build a box plot from a quantitative column in Pyret, there's a five-number summary at the top. What does it tell us about the column?
+- Building a box plot creates a five-number summary. What does the five-number summary tell us about the column?
 ** _The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points._
 }
 
@@ -220,7 +282,7 @@ Let’s review what we have learned about making and interpreting box plots.
 Let’s connect what we know about box plots to your chosen dataset.
 
 @lesson-instruction{
-- Open your chosen dataset starter file in Pyret.
+- Open your chosen dataset starter file in @proglang.
 ** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.
 - What question does your display answer?
