@@ -139,11 +139,13 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.text = curr_slide.text .. ',header'
           end
           curr_slide.text = curr_slide.text .. '}\n'
-        elseif L:match('^%.lesson%-instruction]') then
-          curr_slide.suffix = '-DN'
+        else
+          if L:match('^%.lesson%-instruction]') then
+            curr_slide.suffix = '-DN'
+          end
           curr_slide.text = curr_slide.text .. '['
-          o:buf_toss_back_char('\n')
-          o:buf_toss_back_string(L)
+          buf_toss_back_char('\n', i)
+          buf_toss_back_string(L, i)
         end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
