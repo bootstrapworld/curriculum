@@ -3,7 +3,7 @@
 @description{Students are introduced to the Data Cycle, a four-step scaffold for getting an answer from a dataset - and then generating the next question! Students learn to identify - and ask - statistical questions, by comparing and contrasting them with other kinds of questions. }
 
 @ifproglang{pyret}{
-@lesson-prereqs{ds-intro}
+@lesson-prereqs{ds-intro, contracts-tables-displays}
 }
 
 @ifproglang{codap}{
@@ -179,14 +179,16 @@ Note that @dist-link{pages/2-blank-data-cycles.adoc, blank Data Cycle worksheets
 
 @right{@image{images/AnalyzeData.png, 200}} Once we know what data we need, we can turn our attention to what we want to build with it!
 
-- Do we need all the rows, or just some of them?
+- Do we need to filter out certain rows and make a new table?
 - Do we need a bar chart? @ifproglang{pyret}{A pie chart?} A scatter plot?
 
-What kinds of displays can help us analyze whether there are more fixed or unfixed animals? @ifproglang{pyret}{We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice.} @ifproglang{codap}{A bar chart will allow us to see the actual count ("20 fixed vs. 10 fixed") of animals in each category.}
+@ifproglang{pyret}{We could use a bar-chart _or_ a pie-chart to do this analysis, but since we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed") a pie chart is the better choice.} 
 
-Once we've decided what to make and we know which rows and columns we're plotting, the next step is to @ifproglang{pyret}{_write the code!_}@ifproglang{codap}{choose the appropriate configuration.}
+@ifproglang{codap}{A bar chart will allow us to see the actual count ("20 fixed vs. 10 fixed") of animals in each category.}
 
-@ifproglang{pyret}{Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, analyzing the data is as easy as reading the Contract!}
+@ifproglang{pyret}{Once we know that we want a pie-chart, and that we're using it to look at the `fixed` column, the next step is to read the Contract and write the code!}
+
+@ifproglang{codap}{Once we've decided what to make and we know which rows and columns we're plotting, the next step is to choose the appropriate configuration.}
 
 === Investigate
 Let's get some practice going from questions to code, and making data displays in the process!
@@ -195,7 +197,11 @@ Let's get some practice going from questions to code, and making data displays i
 Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @proglang.
 }
 
-Have students share their results. What did their charts tell them?
+@slidebreak
+
+@QandA{
+@Q{What did you learn from the displays you made?}
+}
 
 === Synthesize
 @right{@image{images/InterpretData.png, 100}} In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might be curious about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
