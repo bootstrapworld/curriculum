@@ -1,6 +1,6 @@
 = Project: Make a Flag
 
-@description{Students apply their knowledge of ratios and the coordinate plane while using functions that produce and transform images to code an existing flag. _This project supports the learning goals of @lesson-link{flag}._}
+@description{Students recreate a flag of their choice by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely. _This project supports the learning goals of @lesson-link{flags}._}
 
 @lesson-prereqs{flags}
 
@@ -16,7 +16,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let's create a video game!
+* Let's code flags!
 
 | Materials
 |[.materials-links]
@@ -25,8 +25,8 @@
 
 | Preparation
 |
-* Before launching this project, ensure that students are comfortable using image-producing functions, `put-image`, and function composition.
-* Student knowledge of ratios and the coordinate plane is also necessary.
+* Before launching this project, ensure that students are comfortable using image-producing functions, `put-image`, and function composition. Student knowledge of ratios and the coordinate plane is also necessary.
+* We recommend offering students the tactile experience of creating flags by layering pieces of construction paper. If you opt to include this activity, you will need construction paper, scissors, and glue for your stuents.
 * Note that for this project, students must submit four different components: (1) Sample Logo Study, (2) Designing Your Logo, (3) Coding Your Logo, and (4) the link to their published Pyret program. It is up to you whether you collect student work all at once (at the end of the project) or intermittently, after each worksheet has been completed.
 * This project is designed to span multiple days.
 
@@ -40,74 +40,88 @@
 == Making Flags @duration{25 minutes}
 
 === Overview
-Students focus on decomposing complex images into simple ones and using `put-image` to combine images.
+
 
 === Launch
-Let's dig into the process for how the flags we’ve seen so far were made:
 
-*1) Decompose the Image*
+During @lesson-link{flags}, we
+went through worked together to create some different flags together. For this project, you will build a flag of your own - one that is important to you, and requires you to define values and compose functions.
 
-We observe that the Japanese flag is made up of two simpler images: a black, outline rectangle and a red dot.
+The first step is to determine which flag you are going to create.
+
+@QandA{
+@Q{Let's brainstorm. *What are some different flags that you connect with in some way?*}
+@Q{Think about places you've visited, a country you're interested in or connected to, or even a group you identify with or support.}}
+
+@teacher{Invite students to share out - either with the class or with a partner - emphasizing that this is simply a time to share ideas and excitement! You will find that the opportunity to focus on a flag of their choosing is a big motivator for students. Coding flags also presents a rare opportunity for students to share a piece of their identity in math class.
+
+Be mindful of the fact that not every student will know their family’s geographical history, and that immigration can be a sensitive topic for some students. For this reason, it is important that students have the option to choose a flag based on interest instead of just family history.
+
+Be prepared that students might choose flags representing groups other than countries. Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ+ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag). There are also some flags that represent political or activist groups. It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.}
 
 
-*2) Define those Parts*
+@lesson-instruction{
+- On Q1 of @printable-exercise{choosing-flags.adoc}, write down some ideas of flags you are interested in. Don't worry - you don't need to commit to any particular flag yet.
+- Complete the remaining questions on @printable-exercise{choosing-flags.adoc}.}
 
-We define `dot` and `background`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
-
-
-*3) Find the Coordinates*
-
-For each image, calculate what the x- and y-coordinates of where the center should be. __TIP: this is a lot easier if you have a sheet of graph paper handy!__
+@teacher{@printable-exercise{choosing-flags.adoc} is designed to support students in choosing a flag. Encourage students to choose an appropriately challenging flag that will demonstrate what they've learned. You may introduce parameters if necessary, such as “Flags need at least 5 different shapes”.
+}
 
 
-*4) Build the Image & Check that it Matches the Target Image*
+=== Investigate
 
-We stack the parts on top of the bottom image using the coordinates we found.
-__TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
+@teacher{Once students have selected their flags, it is time to start _decomposing._
+@printable-exercise{decomposing-flags.adoc} includes four different flags. We urge you to complete at least one flag as a class. This process will involve three steps: (1) Decompose the flag, (2) consider the flag's parts (including color, width, and heigh), (3) determine the x and y coordinates for each part.
+
+For this activity, you will want to project the color version of @printable-exercise{decomposing-flags.adoc}. Otherwise, students with black-and-white photocopies will be unable to identify the colors on the the flags.
+
+Note that flags on @printable-activity{decomposing-flags.adoc} are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
+}
+
+@lesson-instruction{
+- Turn to @printable-exercise{decomposing-flags.adoc}.
+- Let's complete Cameroon's flag together.}
+
+@teacher{Guide students through this process.
+
+We strongly recommend that either you or your students *build the flag with construction paper*. The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank".
+
+*Identifying coordinates is much easier when students have graph paper handy!* To streamline this process and improve accuracy, encourage students to use fractions for widths and heights.
+
+Confirm that all students have accurately decomposed the flag before inviting students to work in Pyret.}
+
+Let's build the image in the @starter-file{flags} and check that it matches the target image! This will involve defining flag parts, then stacking those parts on top of the bottom image using the coordinates we found.
+
+Some suggestions for elegant and accurate code:
+- Don't cram everything into one line! If you break code up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.
+- Consider defining `WIDTH` and `HEIGHT` of their flags as values - and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
+- Be sure to compare the image you get with the target image!
+
+
+@teacher{
+For students who need additional support and practice before diving into building their own flags, we offer a variety of resources. Many teachers complete additional flags from @printable-exercise{decomposing-flags.adoc} as a class.
 
 @ifproglang{pyret}{
-If you have time, these matching activities will support student thinking.
+Additionally, these matching activities further support student thinking.
 
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, Scaling Flag Ratios}
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay and put-image}
 }
 
 @ifproglang{wescheme}{
-If you have time, these matching activities will support student thinking.
+Additionally, these matching activities further support student thinking.
 
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169?collections=5fbecc2b40d7aa0d844956f0, Scaling Flag Ratios}
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay and put-image}
-}
-
-=== Investigate
-
-@lesson-instruction{
-- Turn to @printable-exercise{decomposing-flags.adoc}, and choose ONE flag to focus on. On the blank lines below, describe the parts that make up that flag.
-** _Note: You may want to project the color version of this page; otherwise, students using black-and-white photocopies will be unable to identify the colors on the the flags._
-- For a more tactile experience, construct your flag using construction paper.
-** _If you have time, this is a valuable activity! The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank"._
-- Once you're done, return to the @starter-file{flags} and define those parts.
-- Then, compose those parts using `put-image`, and make your flag!
-}
-
-The opportunity to focus on a flag of their choosing is a big motivator for students. Coding flags also presents a rare opportunity for students to share a piece of their identity in math class. If you have more time to devote, we highly encourage you to give students the opportunity to create the image of a flag they connect with in some way.  Students might choose the flags of countries related to their heritage, a place they’ve visited, a country they’re interested in, or a group they identify with or support.
-
-Encourage students to choose an appropriately challenging flag that will demonstrate what they've learned.  The teacher may introduce parameters if necessary, such as “Flags need at least 5 different shapes”. Once students have coded their flags, host a tour of the flags of the world in your classroom!
+}}
 
 
-Note: To reinforce ratio and proportion concepts, have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
 
 
-@strategy{
-@span{.title}{Around the World in your Classroom}
 
-Be mindful of the fact that not every student will know their family’s geographical history, and
-that immigration can be a sensitive topic for some students.  For this reason, it is important that students have the option to choose a flag based on interest instead of just family history.
 
-Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ+ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
 
-Optional: @opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
-}
+
 
 
 
@@ -119,18 +133,4 @@ Which flags were the easiest to make? The hardest?
 
 Why is it useful to define each part of the flag first, before stitching the images together?
 
-== Additional Exercises
-
-- @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
-
-- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
-
-- @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics.
-
-- @opt-starter-file{flags-mx} - Similar to the Puerto Rico Flag Starter File, but this one involves an imported image.
-
-- @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.
-
-- @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.
-
-
+- Once students have coded their flags, host a tour of the flags of the world in your classroom!
