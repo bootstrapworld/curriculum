@@ -654,6 +654,9 @@
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (expand-directives:string->port text o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o)

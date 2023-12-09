@@ -427,18 +427,24 @@ lines on some browsers */
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
     background: #eee;
+    display:    flow-root;
     clear:      both;
-    padding:    5px;
-    margin:     2ex 0;
+    margin-top: 10px;
     > *:first-child { margin-left: 60px; }
     > *:first-child::before {
       content:  url('lesson-instruction.png');
       height:   50px;
       width:    50px;
       float:    left;
-      margin-right: 10px;
-      margin-left:-60px;
+      margin-left:-50px;
+      margin-top:10px;
     }
+  }
+  .lesson-instruction+.lesson-instruction,
+  .lesson-roleplay+.lesson-roleplay,
+  .q-and-a+.q-and-a { 
+    margin: 0;
+    > *:first-child::before { display: none; } 
   }
   .q-and-a > *:first-child::before { content: url('q-and-a.png') }
   .q-and-a .ulist .ulist li { font-style: italic; }
@@ -696,6 +702,8 @@ table.recipe_title    {
     &::before { color: black; position: absolute; left: 0; }
   }
   &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
+  /* If there's a section break between recipes, eat up all vertical space */
+  &+div.paragraph:not(.recipe) { margin: auto 0; }
 }
 
 /* Proglang-specific adaptations */
