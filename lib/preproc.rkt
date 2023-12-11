@@ -1702,7 +1702,8 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
+                                   [contains-blocks? (or (regexp-match "\n[-*] " text)
+                                                         (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "^ *\n" text)] ;FIXME
                                    [converted-text (expand-directives:string->string text)])
                               (display
@@ -2175,7 +2176,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
