@@ -42,10 +42,12 @@
 
 * The distance formula is an excellent review of Circles of Evaluation. Have students work out the expression in small groups to foster discussion.
 
+| Preparation
+| This lesson includes a roleplay. In the roleplay students will move along a number line displayed on the board or on the floor. The numberline represents the x-axis in our game, which ranges from 0 to 640. 
 
 |===
 
-== Distance in 1 Dimension @duration{15 minutes}
+== What's Missing from Our Game? @duration{15 minutes}
 
 === Overview
 Students discover the need for distance calculation (first in one dimension, then in two) in video games.
@@ -55,7 +57,6 @@ Students discover the need for distance calculation (first in one dimension, the
 @lesson-instruction{
 Sign in to @starter-file{program-list} and open your saved Game Starter Files.
 }
-
 
 @right{@image{images/screenshot.jpg, 200}}
 
@@ -67,79 +68,86 @@ At this point:
 
 It's almost fully-playable!
 
-_Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use if you're demoing on the board._
+@teacher{Here's a link to a @opt-starter-file{sample-game-no-collision} you can use if you're demoing on the board.}
 
-@lesson-instruction{
-* What seems to be missing from this game?
-** _The characters aren't doing anything when they collide._
+@lesson-instruction{Take a minute to play with your games and think about what is left to do.}
+@QandA{
+@Q{What is missing from the game?}
+@A{The characters aren't doing anything when they collide and, as a result, the score isn't changing!}
 
-* What does it mean for characters to 'hit' one another? To collide?
-** _They have to be close enough to touch._
-
-* How will the computer know when the characters have collided?
-** _When the coordinates of the characters are really close to each other._
+@Q{What does it mean for characters to 'hit' one another? To collide?}
+@A{The characters touch.}
 }
 
+@teacher{In the following activity, your students will role play two game characters moving across the screen.  Draw or project a "number line" on the floor or across a wall of your classroom as the backdrop for the roleplay.}
 
 @lesson-roleplay{
-In the following activity, students will role play a collision between two characters.
+* This number line represents the x-axis in our game. I need two volunteers to represent our `DANGER` and `PLAYER`.
+* Come stand along it about 10 steps away from each other.
+* Each image in the game is located based on its center, in the case of a human, our location would probably be given by our belly buttons.  But the images in our game are much larger than their center points that locate them on the screen, so let's have our `DANGER` and `PLAYER` hold their arms out like a T to represent the full width of the images they represent.
+}
 
-Draw a "number line" on the floor or across a wall of your classroom as the backdrop for your movement, and select a volunteer to represent a character in the game (either `TARGET` or `DANGER`), while represent the `PLAYER`. Emphasize that this represents _one dimension_ (perhaps the x-axis). Both of you should stand on the number line, 8-10 steps away from one another.
+@QandA{
+@Q{Are our characters currently colliding?}
+@A{No.}
+@Q{How do you know?}
+@A{They aren't touching.}
+@Q{How will the computer know whether or not they are colliding?}
+@A{We will have to teach it to check whether the coordinates of the characters are really close to each other.}
+@Q{What do you think would be the most straight forward way for us to program the computer to be able to determine that?}
+@A{Find the distance between the characters.}	
+@Q{How far apart are the `DANGER` and the `PLAYER`?}
+@Q{How did you figure that out?}
+@A{The goal is to illicit the response that students would subtract the smaller coordinate from the larger one (or subtract in any order and take the absolute value).}
+} 
 
-Each image in the game is located based on its center. Make sure that you and your volunteer stand with feet as close together as possible, representing the infinitely small point that identifies your center. Have you and the volunteer raise your arms to form a "T shape", representing the outer edges of the characters.
+@lesson-roleplay{
+* Let's have our `DANGER` and `TARGET` each take a step toward each other.
+}
 
-Ask the class how far apart you and your volunteer are. How they would calculate this if you were standing on a number line and they could see the actual coordinates under your feet? The goal is to illicit the response that students would subtract the smaller coordinate from the larger one (or subtract in any order and take the absolute value).
+@QandA{
+@Q{How far apart are the `DANGER` and the `PLAYER` now?}
+}
 
-Side-step towards each other one step at a time, each time asking the class, "We are colliding: True or False?" __Be sure to only accept "true" and "false" as responses - not "yes" and "no"!__
+@lesson-roleplay{
+* Let's have our `DANGER` and `TARGET` switch places.
+}
 
-After a few iterations, try switching places and repeating. _Point out that students always subtract the smaller number from the larger one, regardless of the character order!_ *The results are always positive.*
-
-Do this until students can clearly see that collision happens when the two characters are _touching_ or
-_overlapping_ in some way - NOT when they are _at the same point._
+@QandA{
+@Q{How far apart are the `DANGER` and the `PLAYER` now?}
+@Q{Did changing their positions change anything about how we calculated their distance?}
+@A{Point out that students always subtract the smaller number from the larger one, regardless of the character order!} 
+@A{Distance is always positive.}
 }
 
 === Investigate
 
 Our game computes 1-dimensional distance (vertical or horizontal) using a function called `line-length`. Let's explore how it works!
 
-@optional If you want to provide students with the questions below, use  @opt-printable-exercise{pages/line-length-explore.adoc}.
+@lesson-instruction{Turn to the first section of @printable-exercise{pages/line-length-explore.adoc}, find the definition of `line-length` in your game starter file and take a few minutes to record your notices and wonderings with your partner.}
 
-@lesson-instruction{
-* Find the `line-length` function in your game files and take a minute to look at the code.
-* What do you notice?
-** _Both of the examples do the same thing, even though the numbers are given in a different order._
-** _It's a piecewise function!_
-** _It uses inequalities._
-* What do you wonder?
-* Click "Run", and practice using `line-length` in the Interactions Area with different values for `a` and `b`.
-* What does the `line-length` function _do?_
-** _It always subtracts the smaller number from the larger number and evaluates to a positive distance!_
-* Why does it use @vocab{conditionals}?
-** _To determine whether or not to subtract the numbers in the given order or to swap the order to get a positive result._
+@QandA{
+@Q{What do you notice? _Answers will vary._}
+@A{Both of the examples do the same thing, even though the numbers are given in a different order.}
+@A{It's a piecewise function!}
+@A{It uses inequalities.}
+
+@Q{What do you wonder?}
 }
 
+@lesson-instruction{Complete @printable-exercise{pages/line-length-explore.adoc} with your partner.}
+}
 
+@QandA{
+@Q{How does the way the `line-length` function works relate to how we calculated the distance between the characters in our role play?}
+@A{The distance it calculates is always positive!}
+}
 
 === Synthesize
-- Why is the distance between two points always positive?
-** _Because distance has nothing to do with direction - it takes just as long to drive from Seattle to Wichita as it does to drive from Wichita to Seattle._
 
-@strategy{
-@span{.title}{Why line-length?}
-Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypotenuse is computed based on the distance in the x- and y-dimension.
-
-Most math textbook, however, show the distance formula without connecting back to that theorem.
-
-@center{  @math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}  }
-
-A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on!
-
-Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connect back to the @vocab{Pythagorean Theorem} itself.
-
-This effectively rewrites the distance formula as:
-
-@center{
-	@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
+@QandA{}
+@Q{Why is the distance between two points always positive?}
+@A{Because distance has nothing to do with direction. Route 66 is the same number of miles from Chicago to Los Angeles as it is from Los Angeles to Chicago.}
 }
 
 == Distance in 2 Dimensions @duration{30 minutes}
@@ -243,3 +251,22 @@ In this situation, remind students to look back at what they circled and labeled
 
 - Have students use the Design Recipe to solve @opt-printable-exercise{line-length.adoc} on their own.
 - You might also want to have them modify `line-length` to make use of the absolute value function: @show{(code 'abs)}.
+
+@strategy{
+@span{.title}{Why line-length?}
+Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypotenuse is computed based on the distance in the x- and y-dimension.
+
+Most math textbooks, however, show the distance formula without connecting back to that theorem.
+
+@center{  @math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}  }
+
+A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on!
+
+Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connect back to the @vocab{Pythagorean Theorem} itself.
+
+This effectively rewrites the distance formula as:
+
+@center{
+	@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
+}
+

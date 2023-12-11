@@ -196,6 +196,15 @@ var GameBasics = {
       "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
     },
     "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=HA2U428Ykk"
+    }
+  },
+  "sample-game-no-collision": {
+    "title": "Sample Game with No Collision",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Jlv8kWZPogedtBSIzrMA2s345Kp5OWPA&v=78aeaeb"
+    },
+    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
     }
   }
