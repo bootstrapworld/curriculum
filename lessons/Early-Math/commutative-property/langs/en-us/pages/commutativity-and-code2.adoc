@@ -8,7 +8,7 @@
 </style>
 ++++
 
-Commutativity in code means that we can change the order of a function's arguments and still get exactly the same result. Complete the exploration to determine if @show{(code 'string-contains?)}, @show{(code 'min)}, and @show{(code 'max)}, @show{(code 'blend-images)} are commutative.
+Open the @starter-file{comm-and-assoc}. Complete the exploration to determine if @show{(code 'string-contains?)}, @show{(code 'min)}, and @show{(code 'max)}, @show{(code 'blend-images)} are commutative.
 
 @n *Is @show{(code 'string-contains)} commutative?* Make a prediction, then translate the two Circles of Evaluation into code. Test your code in @proglang.
 
@@ -28,7 +28,7 @@ Commutativity in code means that we can change the order of a function's argumen
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
 | Circle of Evaluation | @show{(coe '(min  200 23))} | @ifsoln{@show{(coe  '(min 23 200))}}
-| Code | @ifsoln{@show{(coe '(min  200 23))}} | @ifsoln{@show{(coe  '(min 23 200))}}
+| Code | @ifsoln{@show{(code '(min  200 23))}} | @ifsoln{@show{(code  '(min 23 200))}}
 
 |===
 
@@ -58,9 +58,9 @@ Commutativity in code means that we can change the order of a function's argumen
 
 
 
-@n Were any of the above functions commutative? Explain. @fitb{}{}
+@n Were any of the above functions commutative? Explain. @fitb{}{@ifsoln{@show{(code  'blend-images)} and @show{(code 'min)} are commutative because they}}
 
-@fitb{}{}
+@fitb{}{@ifsoln{always produce the same result. @show{(code 'string-contains)} is not commutative.}}
 
 @fitb{}{}
 
