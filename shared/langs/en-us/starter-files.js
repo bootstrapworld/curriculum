@@ -196,6 +196,15 @@ var GameBasics = {
       "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
     },
     "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=HA2U428Ykk"
+    }
+  },
+  "sample-game-no-collision": {
+    "title": "Sample Game with No Collision",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Jlv8kWZPogedtBSIzrMA2s345Kp5OWPA&v=78aeaeb"
+    },
+    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
     }
   }
@@ -253,7 +262,7 @@ var DSBasics = {
   "animals": {
     "title": "Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz"
+      "url": "https://code.pyret.org/editor#share=146dX6xx9mOkuZjeICS66aD4Md0xNvcyZ&v=4d870d2"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
@@ -271,7 +280,7 @@ var DSBasics = {
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zkT8gS3gHMyLdI7VdrruJZvn4SPQmPDc"
+      "url": "https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0&v=4d870d2"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
@@ -427,8 +436,7 @@ var Flags = {
   "flags-ak": {
     "title": "Alaskan Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX"
-    },
+      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1&v=78aeaeb"},
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p"
     }
@@ -508,10 +516,10 @@ var MoreAlg = {
   "inequalities-simple": {
     "title": "Simple Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
+      "url": "https://code.pyret.org/editor#share=1YMSkIfzhfb9ykOhG7ToBjROwp3-TjeOE&v=4d870d2"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=jJqUDeN8a7"
+      "url": "https://www.wescheme.org/openEditor?publicId=meMnPog2yl"
     }
   },
   "inequalities-compound": {
@@ -523,10 +531,19 @@ var MoreAlg = {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
     }
   },
-  "inequalities-sam": {
+  "inequalities-samX": {
     "title": "Sam the Butterfly Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=13d5j4CAfaHu1Y1DzPBvqapzO-Gpr9BrH"
+      "url": "https://code.pyret.org/editor#share=1wP6m2gAouUk9TmOyOXmU3CkskcVfHm79"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
+    }
+  },
+  "inequalities-samXY": {
+    "title": "Sam the Butterfly Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1xM5Ipf0poIOc2WM-Fs-E-SJRzPmj8DjI"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"

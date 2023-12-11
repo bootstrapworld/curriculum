@@ -62,6 +62,14 @@ function buf_toss_back_char(c, bp)
   table.insert(bp.buffer, 1, c)
 end
 
+function buf_toss_back_string(s, bp)
+  local k = #s
+  if k == 0 then return end
+  for j=k,1,-1 do
+    buf_toss_back_char(s:sub(j,j), bp)
+  end
+end
+
 local function string_trim_quotes(s)
   -- if string s is in double quotes, remove them
   return (string.gsub(s, '^"(.-)"$', '%1'))

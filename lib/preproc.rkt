@@ -1418,7 +1418,7 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout" "table"))
+                           [(member directive '("ifslide" "scrub" "slideLayout"))
                             (read-group i directive)]
                            [(string=? directive "ifnotslide")
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1702,16 +1702,29 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
-                                   [contains-nl? (regexp-match "^ *\n" text)] ;FIXME
+                                   [contains-blocks? (or (regexp-match "\n[-*] " text)
+                                                         (regexp-match "\n[0-9]+\\. " text))]
+                                   [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
                               (display
-                                (cond [contains-blocks?
+                                (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
                                           converted-text
                                           "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
+                                      [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
+                           [(string=? directive "indented")
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [contains-blocks? (regexp-match "\n[-*] " text)]
+                                   [contains-nl? (regexp-match "^ *\n" text)]
+                                   [converted-text (expand-directives:string->string text)])
+                              (display
+                                (cond [contains-blocks?
+                                        (string-append "\n\n[.indentedpara]\n--\n"
+                                          converted-text
+                                          "\n--\n\n")]
+                                      [else ((if contains-nl? enclose-div enclose-span)
+                                             ".indentedpara" converted-text)]) o))]
                            [(string=? directive "ifproglang")
                             (let ([proglang (read-group i directive)])
                               (cond [(string-ci=? proglang *proglang*)
@@ -2163,7 +2176,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
@@ -2699,23 +2712,23 @@
               (add-prereq e)
               e]))))
 
-(define (sexp->wescheme e #:multi-line [multi-line #f])
+(define (sexp->wescheme e #:multiline? [multiline? #f])
   ; (printf "doing sexp->wescheme ~s\n" e)
   (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ; (printf "h2u retn'd ~s\n" h)
 
     ; (enclose-textarea ".racket" (sexp->block h #:wescheme #t))
-    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t) #:multi-line multi-line)
+    (enclose-textarea-2 ".racket" (sexp->block h #:wescheme #t) #:multiline? multiline?)
 
     ))
 
-(define (sexp->pyret e #:parens [parens #f] #:multi-line [multi-line #f])
+(define (sexp->pyret e #:parens [parens #f] #:multiline? [multiline? #f])
   ; (printf "\ndoing sexp->pyret ~s\n" e)
   (let ([h (holes-to-underscores e)])
     ; (printf "h2u retn'd ~s\n" h)
     ; (enclose-textarea ".pyret" (sexp->arith h #:pyret #t #:parens parens))
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens) #:multi-line multi-line)
+    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens) #:multiline? multiline?)
     ))
 
 (define (math e #:parens [parens #f])
@@ -2736,11 +2749,11 @@
           (set! text (regexp-replace* "\\\\over" text "\\\\over\\\\displaystyle"))
           (math->mathjax-string text)]))
 
-(define (sexp->code e #:parens [parens #f] #:multi-line [multi-line #f])
+(define (sexp->code e #:parens [parens #f] #:multiline? [multiline? #f])
   ; (printf "doing sexp->code ~s\n" e)
   (if (string=? *proglang* "pyret")
-      (sexp->pyret e #:parens parens #:multi-line multi-line)
-      (sexp->wescheme e #:multi-line multi-line)))
+      (sexp->pyret e #:parens parens #:multiline? multiline?)
+      (sexp->wescheme e #:multiline? multiline?)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
   ;(printf "sym-to-adocstr ~s p:~a t:~a\n" e pyret tex)
@@ -2841,13 +2854,13 @@
                  (sexp->block exp #:pyret (string=? *proglang* "pyret"))]
         [else (sexp->block exp #:pyret (string=? *proglang* "pyret"))]))
 
-(define (cm-code x #:multi-line [multi-line #t] #:parens [parens #f]) ;TODO or #f?
+(define (cm-code x #:multiline? [multiline? #t] #:parens [parens #f]) ;TODO or #f?
   ; (printf "doing cm-code ~s\n" x)
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (create-zero-file (format "~a.uses-codemirror" *out-file*))
-    (enclose-textarea #:multi-line multi-line
+    (enclose-textarea #:multiline? multiline?
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")
           x))))
@@ -2857,11 +2870,11 @@
         [(list? xx) (ormap (lambda (x) (eq? x tree)) xx)]
         [else (eq? xx tree)]))
 
-(define (code x #:multi-line [multi-line #t] #:parens [parens #f])
+(define (code x #:multiline? [multiline? #t] #:parens [parens #f])
   ; (printf "doing code ~s ~s\n" x parens)
   (if (tree-member? '(?ANS ?ANSWER ?FITB) x)
-      (sexp->code x #:multi-line multi-line #:parens parens)
-      (cm-code x #:multi-line multi-line #:parens parens)))
+      (sexp->code x #:multiline? multiline? #:parens parens)
+      (cm-code x #:multiline? multiline? #:parens parens)))
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
@@ -2933,7 +2946,7 @@
       (if single?
           (begin
             ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
-            (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multi-line #t))
+            (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") s #:multiline? #t))
           s))))
 
 (define (contracts . args)
@@ -2941,4 +2954,4 @@
                                  (keyword-apply contract '(#:single?) '(#f) arg))
                                args) "\n")])
     ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
-    (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multi-line #t)))
+    (enclose-textarea (if *pyret?* ".pyret-comment" ".racket-comment") res #:multiline? #t)))

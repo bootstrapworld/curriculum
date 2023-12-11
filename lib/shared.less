@@ -13,6 +13,8 @@
 @code-comment-color: #cd7054;
 @top-padding-for-writing: 1.2rem;
 @top-padding-for-dr: 1rem;
+@print-section-heading: lightgray;
+@table-header: #eee;
 
 html, body { font-size: 9pt; }
 
@@ -59,6 +61,8 @@ body {
   ul { line-height: inherit; }
   .ulist ul { margin-bottom: 0px; }
   .ulist p  { margin: 5px 0px; }
+  .quad { display: inline-block; }
+  
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; font-size: inherit !important; 
@@ -66,14 +70,17 @@ body {
       border-top: 1px solid;
       display: inline-block;
       line-height: 1.2;
+      margin-left: 2px;
     }
-  }
+    sub { font-size: 65% !important; }
+  }  
+
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
   tr th.tableblock {
-    background:       #cccccc !important;
-    padding:          .25em .5em;
+    background:       @table-header !important;
+    padding:          .2em .5em;
     font-size:        1rem;
   }
 
@@ -142,7 +149,7 @@ body {
     display:          block;
     width:            auto;
     border-bottom:    solid 3px black;
-    margin:           5px 0px;
+    margin:           4px 0px;
   }
 
   /* Images and Captions */
@@ -202,10 +209,9 @@ body:not(.LessonPlan, .narrativepage) p {
   div:nth-child(2) { width: 25%;}
 }
 
-.quad   { display: inline-block; min-height: 15px; }
 .vspace { display: inline-block; }
 
-.quad::before, .fitbruby::before, .fitb::before {
+.fitbruby::before, .fitb::before {
   content: '\00200b';
 }
 
@@ -338,7 +344,7 @@ lines on some browsers */
     p { font-family: monospace; }
     
     tr:first-of-type, tr:first-of-type p {
-      background-color:   lightgray;
+      background-color:   @print-section-heading;
       font-weight:        bold;
       text-align:         center;
       font-family:        inherit; /* Header row should not be monospace */
@@ -427,18 +433,25 @@ lines on some browsers */
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
     background: #eee;
+    display:    flow-root;
     clear:      both;
-    padding:    5px;
-    margin:     2ex 0;
+    margin-top: 10px;
     > *:first-child { margin-left: 60px; }
     > *:first-child::before {
       content:  url('lesson-instruction.png');
       height:   50px;
       width:    50px;
       float:    left;
-      margin-right: 10px;
-      margin-left:-60px;
+      margin-left:-50px;
+      margin-top:10px;
     }
+  }
+  .q-and-a { min-height: 85px; }
+  .lesson-instruction+.lesson-instruction,
+  .lesson-roleplay+.lesson-roleplay,
+  .q-and-a+.q-and-a { 
+    margin: 0;
+    > *:first-child::before { display: none; } 
   }
   .q-and-a > *:first-child::before { content: url('q-and-a.png') }
   .q-and-a .ulist .ulist li { font-style: italic; }
@@ -457,7 +470,7 @@ lines on some browsers */
   /* Callout boxes */
   .strategy-box {
     background:         #efefef;
-    border:             solid 5px !important;
+    border:             solid #1a73b5 5px !important;
     width:              75%;
     margin:             15px auto;
     display:            block;
@@ -473,7 +486,19 @@ lines on some browsers */
       font-size:          1.5rem;
     }
   }
-  .strategy-box { border-color: #1a73b5 !important; }
+  .teacherNote { 
+    display:            inline-block;
+    padding:            5px;
+    border:             black dashed 1px; 
+    font-style:         italic;
+    width:              100%;
+  }
+  /* Special styling of teacherNotes used inside overview sections */
+  h3[id^="_overview"]~.paragraph .teacherNote {  
+    width: 100%;
+    border-width: 0 0 0 1px !important; 
+    padding-left: 20px;
+  }
 
   h2 { font-size: 1.75em; font-weight: normal; }
   h3 { font-size: 18pt; font-weight: 300;  }
@@ -497,7 +522,7 @@ lines on some browsers */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
   code { line-height: 1.5 !important; }
-  div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
+  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 }
 
 /************************************************************************************
@@ -521,6 +546,8 @@ body.solution-page {
 body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
+  #header > h1:first-child { text-align: center; }
+
   /* set page dimensions */
   &:not(.landscape) { width: 7.5in; height: 9.8in; }
   &.landscape { width: 9.8in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
@@ -532,12 +559,15 @@ body.workbookpage {
     flex-grow: 1;
   }
 
+  .lesson-section-1 { border: none; }
+
   /* make .FillVerticalSpace tables use CSS grid layout */
   table.FillVerticalSpace { 
     display: grid;
     height: 100%;
     grid-template-columns: auto;
     grid-template-rows: max-content;
+    &.SameHeight { grid-template-rows: auto; }
     > colgroup { display: none; }
     > tbody, > thead {
       display: contents;
@@ -574,6 +604,15 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
+
+  .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+    background:   @translucent-bg-color;
+    font-weight:  600;
+    font-size:    12pt;
+    color:        white;
+    padding:      1px 10px !important;
+    margin-top:   2px;
+  }
 }
 
 /* Back-of-the-book contracts table */
@@ -602,7 +641,6 @@ body:not(.LessonPlan) {
   .sect2 > h3:first-child {
     width:            100%;
     padding:          5px 0px;
-    margin:           0;
   }
   .description { display: none; }
 }
@@ -620,7 +658,7 @@ body.LessonNotes {
 .data-cycle { 
   border-collapse: collapse;
   width: 100%;
-  td:first-of-type { background: lightgray; border: solid white; min-width: 1in; }
+  td:first-of-type { background: @print-section-heading; border: solid white; min-width: 1in; }
   td { padding: 0.2rem 0.325rem; }
   td p.tableblock { font-size: 1rem; }
 
@@ -646,12 +684,13 @@ body.LessonNotes {
 
 /* We use tables (perhaps not the best idea) for our DR headings */
 table.recipe_title    { 
-  background: gray; border: gray; 
+  background: @translucent-bg-color; border: @translucent-bg-color; 
   td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
-  td:last-child { border: 2px solid gray !important; }
+  td:last-child { border: 2px solid @translucent-bg-color !important; }
   td:last-child .content { width: 16px; height: 16px; background: white; }
   p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
 }
+
 
 /* common height for headless and non-headless DRs with no directions */
 .recipe_word_problem p::before { font-weight: bold; }
@@ -834,13 +873,13 @@ td.tableblock .listingblock { margin-bottom: 0 !important; }
 * FORMATTING OF CIRCLES, AND TEXT CODE
 */
 
-div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+.codesexp, .circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
   font-family: @code-font;
 }
 
-td.halign-center div.circleevalsexp { text-align: center; }
+td.halign-center .circleevalsexp { text-align: center; }
 
-div.circleevalsexp {
+.circleevalsexp {
   .expression {
     display:            inline-block;
     padding-top:        6px;
@@ -875,7 +914,7 @@ div.circleevalsexp {
   .fitb { border: none; padding: 0;}
 }
 
-div.codesexp, div.circleevalsexp, .editbox, .cm-s-scheme {
+.codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
   width:              100%;
   margin:             0px 3px;
   display:            inline-block;
@@ -931,7 +970,7 @@ table.pyret-table {
   border-radius:      1em;
   overflow:           hidden;
   background:         #eee;
-  tr:nth-child(even){background-color: #f2f2f2}
+  tr:nth-child(even){ background-color: #f2f2f2 }
   thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
   td p { margin: 0px; }
   td, th {
@@ -947,7 +986,7 @@ table.sideways-pyret-table {
   tr { background: none; text-align: right; }
   td:first-child {
     display: table-cell;
-    background: #cccccc;
+    background: @table-header;
     text-align: center;
     width: 50px;
   }
@@ -1085,7 +1124,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Change coloring of body text, lesson summary table, and code */
   html { -webkit-print-color-adjust: exact; }
   div#body, body { color: black; }
-  :not(body.LessonPlan) #header { background: black; color: white; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
@@ -1109,19 +1147,19 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body.workbookpage {
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child { 
-      background:       black;
-      color:            white;
-      text-align:       center;
-      padding:          1px;
+      color: black;
     }
-    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
-    .lesson-section-1 { border: none; }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
-      background:   #ccc;
-      font-weight:  600;
-      font-size:    12pt;
-      padding-left: 5px;
+      color: white;
     }
+
+    .recipe_title, h2 { 
+      background: @print-section-heading !important; 
+      td:last-child { border: 2px solid @print-section-heading !important; }
+    }
+    h2, table.recipe_title p { color: black !important; }
+
+    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
   /* Page Breaks for printed lesson plans, projects, and TR pages */

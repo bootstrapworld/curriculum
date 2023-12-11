@@ -2,12 +2,20 @@
 
 ////
 The refugee charts below are drawn from the Refugee Starter File:
-https://code.pyret.org/editor#share=144kvFXVhg9wP1S9Y805s7ra3p1srsAqn&v=4d870d2
+https://code.pyret.org/editor#share=1rettr-BwPIJ5sSLRJFM8S8J4nyiHCtaZ&v=78aeaeb
 
-The code use to filter the tables and generate them is:
+The code used to filter the tables and generate them is:
 t = refugees-table.filter(lam(r): string-contains(r["region"], "America") end)
 stacked-bar-chart(t, "region", "democracy")
 multi-bar-chart(t, "region", "democracy")
+
+The animals charts are drawn from the expanded animals starter file:
+https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0&v=4d870d2
+
+The code used to filter the tables and generate them is:
+t = more-animals.filter(lam(r): string-contains(r["species"], "r" )end)
+stacked-bar-chart(t, "species", "sex")
+multi-bar-chart(t,  "species", "sex")
 ////
 
 ++++
@@ -18,7 +26,8 @@ table.stripes-odd tr:nth-of-type(odd) td { background: lightgray; }
 </style>
 ++++
 
-What do you Notice and Wonder about the displays below?
+The displays on the left are called *multi bar charts*. The displays on the right are called *stacked barcharts*.
+
 
 [cols="^.^1a,^.^1a", stripes=odd]
 |===
@@ -39,3 +48,14 @@ What do you Notice and Wonder about the displays below?
 |===
 
 
+@n Is it possible that the same data was used for the multi bar charts as for the stacked bar charts? How do you know?
+
+@fitb{}{}
+
+@n Write a question that it would be easiest to answer by looking at one of the multi bar charts.
+
+@fitb{}{}
+
+@n Write a question that it would be easiest to answer by looking at one of the stacked bar charts.
+
+@fitb{}{}

@@ -1,0 +1,44 @@
+= Circles of Evaluation - Notice and Wonder
+
+Let's take a look at a few @vocab{Circles of Evaluation} before we learn to draw them ourselves.
+
+@vspace{1ex}
+
+[cols="^2a, ^2a, ^2a, ^3a, ^3a", stripes="none"]
+|===
+
+|@show{(coe '(* 5 6))}
+@ifsoln{@math{5 \times 6}}
+|@show{(coe '(* (/ 15 3) 6))}
+@ifsoln{@math{15 \div 3 \times 6}}
+|@show{(coe '(* 5 (- 28 22)))}
+@ifsoln{@math{5 \times (28 - 22)}}
+|@show{(coe '(* (/ 15 (- 4 1)) 2))}
+@ifsoln{@math{15 \div (4 - 1) \times 2}}
+@vspace{3ex}
+|@show{(coe '(* (/ 15 3) (- 28 22)))}
+@ifsoln{@math{15 \div 3 \times (28 - 22)}}
+|===
+
+@vspace{1ex}
+
+[.FillVerticalSpace,cols="1a,1a", options="header"]
+|===
+|What do you Notice?
+|What do you Wonder?
+|@ifsoln{
+Answers will vary. Discuss that 
+- the 
+@ifproglang{wescheme}{function} 
+@ifproglang{pyret}{operator}
+is at the top of the circle.
+- `/` is the symbol computers use for division.
+- each
+@ifproglang{wescheme}{function} 
+@ifproglang{pyret}{operator}
+gets its own circle, but circles can contain circles.
+- the first four expressions on this page evaluate to the same thing.
+}
+|
+|===
+
