@@ -1,0 +1,57 @@
+= Associativity and Code
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  div.circleevalsexp .value,
+  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+</style>
+++++
+
+Open the @starter-file{comm-and-assoc}. Complete the exploration to determine if @show{(code 'beside)}, @show{(code 'above)}, and @show{(code 'overlay)} are associative.
+
+@n *Is @show{(code 'beside)} associative?* Make a prediction, then translate the two Circles of Evaluation into code. Test your code in @proglang.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation
+| @show{(coe '(beside(beside aqua-star orange-dot) red-star))}
+| @show{(coe '(beside aqua-star(beside orange-dot red-star)))}
+| Code
+| @ifsoln{@show{(code '(beside aqua-star(beside orange-dot red-star)))}}
+| @ifsoln{@show{(code  '(beside aqua-star(beside orange-dot red-star)))}}
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ images? @fitb{}{@ifsoln{Yes.}}
+
+@n *Is @show{(code 'above)} associative?* Make a prediction, then draw a second Circle of Evaluation that changes the grouping of the arguments without changing the order. Translate both Circles into code and test it out in @proglang.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation |@show{(coe '(above yellow-rect (above purple-square orange-dot)))} | @ifsoln{@show{(coe  '(above (above yellow-rect purple-square) orange-dot))}}
+| Code | @ifsoln{@show{(code '(above yellow-rect (above purple-square orange-dot)))}} | @ifsoln{@show{(code '(above (above yellow-rect purple-square) orange-dot))}}
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ images? @fitb{}{@ifsoln{Yes.}}
+
+@n *Is @show{(code 'overlay)} associative?* Draw two Circles of Evaluation that will help you decide if @show{(code 'overlay)} is commutative. Translate your Circles into code and test the code.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation ||
+| Code | |
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ images? @fitb{}{@ifsoln{Yes.}}
+
+@n *Is `blend-images` associative?* Draw two Circles of Evaluation on a separate piece of paper to help you decide, then test your code. Did the two Circles of Evaluation produce _identical_ images? @fitb{}{@ifsoln{Yes.}}
+
+@n Were any of the above functions associative? Explain. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
