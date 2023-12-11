@@ -1702,7 +1702,8 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
+                                   [contains-blocks? (or (regexp-match "\n[-*] " text)
+                                                         (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "^ *\n" text)] ;FIXME
                                    [converted-text (expand-directives:string->string text)])
                               (display
