@@ -1,0 +1,66 @@
+= Commutativity and Code (String, Number, Color Blending)
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  div.circleevalsexp .value,
+  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+</style>
+++++
+
+Open the @starter-file{comm-and-assoc}. Complete the exploration to determine if @show{(code 'string-contains?)}, @show{(code 'min)}, and @show{(code 'max)}, @show{(code 'blend-images)} are commutative.
+
+@n *Is @show{(code 'string-contains)} commutative?* Make a prediction, then translate the two Circles of Evaluation into code. Test your code in @proglang.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation | @show{(coe '(string-contains "rainbow" "bow"))} | @show{(coe '(string-contains "bow" "rainbow"))}
+| Code | @show{(code '(string-contains "rainbow" "bow"))} | @show{(code '(string-contains "bow" "rainbow"))}
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ results? Explain. @fitb{}{@ifsoln{No. The first is true and the second is false.}}
+
+@fitb{}{}
+
+@n *Is @show{(code 'min)} commutative?* Make a prediction, then draw a second Circle of Evaluation that changes the order of the arguments. Translate both Circles into code and test it out in @proglang.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation | @show{(coe '(min  200 23))} | @ifsoln{@show{(coe  '(min 23 200))}}
+| Code | @ifsoln{@show{(code '(min  200 23))}} | @ifsoln{@show{(code  '(min 23 200))}}
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ results? Explain. @fitb{}{@ifsoln{Yes. Both circles produce 23.}}
+
+@fitb{}{}
+
+@n Make a prediction. Do you think @show{(code 'max)} is commutative? Why or why not? @fitb{}{}
+
+@fitb{}{}
+
+@n Use @proglang to test your prediction. What did you discover? @fitb{}{}
+
+@n *Is @show{(code 'blend-images)} commutative?* Make a prediction, then translate the two Circles of Evaluation into code. Test your code in @proglang.
+
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation | @show{(coe '(blend-images purple-square white-dot))} | @show{(coe  '(blend-images white-dot purple-square))}
+| Code | @ifsoln{@show{(code '(blend-images purple-square white-dot))}} | @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
+
+|===
+
+@n Did the two Circles of Evaluation produce _identical_ images? Explain. @fitb{}{@ifsoln{Yes. Both times, I saw a purple square}}
+
+@fitb{}{@ifsoln{with a light purple circle in the middle.}}
+
+
+
+@n Were any of the above functions commutative? Explain. @fitb{}{@ifsoln{@show{(code  'blend-images)} and @show{(code 'min)} are commutative because they}}
+
+@fitb{}{@ifsoln{always produce the same result. @show{(code 'string-contains)} is not commutative.}}
+
+@fitb{}{}
+
