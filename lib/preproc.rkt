@@ -1704,14 +1704,14 @@
                             (let* ([text (read-group i directive #:multiline? #t)]
                                    [contains-blocks? (or (regexp-match "\n[-*] " text)
                                                          (regexp-match "\n[0-9]+\\. " text))]
-                                   [contains-nl? (regexp-match "^ *\n" text)] ;FIXME
+                                   [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
                               (display
-                                (cond [contains-blocks?
+                                (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
                                           converted-text
                                           "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
+                                      [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let* ([text (read-group i directive #:multiline? #t)]
