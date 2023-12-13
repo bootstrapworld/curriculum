@@ -8,7 +8,7 @@
 </style>
 ++++
 
-Open the @starter-file{comm-and-assoc}. You’ll be investigating these functions with your partner:
+Open the @starter-file{comm-and-assoc}, which you will use to investigate three functions:
 
 [.contracts, cols="1", frame="none", grid="none"]
 |===
@@ -19,53 +19,47 @@ Open the @starter-file{comm-and-assoc}. You’ll be investigating these function
 )}
 |===
 
+For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in Pyret.
 
-@n *Is @show{(code 'beside)} commutative?* Draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return.
+@n *Is @show{(code 'beside)} commutative?*
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
+
 | Circle of Evaluation |@show{(coe '(beside aqua-star orange-dot))} | @ifsoln{@show{(coe  '(beside orange-dot aqua-star))}}
+
 | Code | @show{(code '(beside aqua-star orange-dot))} | @ifsoln{@show{(code  '(beside orange-dot aqua-star))}}
 
-| Sketch | @image{../images/aqua-orange.png, 100} | @ifsoln{@image{../images/orange-aqua.png, 100}}
+| Sketch | @image{../images/aqua-orange.png, 90} | @ifsoln{@image{../images/orange-aqua.png, 90}}
 
 |===
+@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
 
-@n Did the two Circles of Evaluation produce _identical_ images? Explain. @fitb{}{@ifsoln{No. For the first Circle of Evaluation,}}
-
-@fitb{}{@ifsoln{the aqua star was on the left, but for the second Circle, it was on the right.}}
-
-@n *Is @show{(code 'above)} commutative?* Make a prediction, then draw a second Circle of Evaluation that changes the order of the arguments. Translate both Circles into code and test it out in @proglang.
+@n *Is @show{(code 'above)} commutative?*
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
+
 | Circle of Evaluation |@show{(coe '(above  purple-square orange-dot))} | @ifsoln{@show{(coe  '(above orange-dot purple-square))}}
-| Code | @ifsoln{@show{(code '(above purple-square orange-dot))}} | @ifsoln{@show{(code '(above orange-dot purple-sqare))}}
 
+| Code | @show{(code '(above purple-square orange-dot))} | @ifsoln{@show{(code '(above orange-dot purple-sqare))}}
+
+| Sketch | @image{../images/purple-orange.png, 40} | @ifsoln{@image{../images/orange-purple.png, 40}}
 |===
 
-@n Did the two Circles of Evaluation produce _identical_ images? Explain. @fitb{}{@ifsoln{No. For the first Circle of Evaluation,}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
 
-@fitb{}{@ifsoln{the purple square was on the top, but for the second Circle, it was on the bottom.}}
-
-@n *Is @show{(code 'overlay)} commutative?* @show{(code 'overlay)} takes in two images and produces an image. Draw two Circles of Evaluation that will help you decide if @show{(code 'overlay)} is commutative. Translate your Circles into code and test the code.
+@n *Is @show{(code 'overlay)} commutative?*
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
-| Circle of Evaluation ||
-| Code | |
+
+| Circle of Evaluation |@show{(coe '(overlay  white-dot yellow-rect))} | @ifsoln{@show{(coe  '(overlay yellow-rect white-dot))}}
+
+| Code | @show{(code '(overlay white-dot yellow-rect))} | @ifsoln{@show{(code '(overlay yellow-rect white-dot))}}
+
+| Sketch | @image{../images/yellow-white.png, 90} | @ifsoln{@image{../images/yellow.png, 90}}
 
 |===
 
-@n Did the two Circles of Evaluation produce _identical_ images? Explain. @fitb{}{@ifsoln{No. For the first Circle of Evaluation...}}
-
-@fitb{}{@ifsoln{Responses will vary.}}
-
-
-
-@n Were any of the above functions commutative? Explain. @fitb{}{@ifsoln{No. They all produced a different result}}
-
-@fitb{}{@ifsoln{when we changed the order of the arguments.}}
-
-@fitb{}{}
-
+@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
