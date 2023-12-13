@@ -51,6 +51,8 @@
 
 (define *output-answers?* #f)
 
+(define *definitions* '())
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -654,6 +656,11 @@
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
+                           [(string=? directive "define")
+                            (let* ([id (read-group i directive)]
+                                   [prose (read-group i directive #:multiline? #t)])
+                              (set! *definitions*
+                                (cons (cons id prose) *definitions*)))]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
@@ -675,8 +682,11 @@
                                 (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
-                           [(member directive '("pathway-only" "scrub"))
+                           [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
+                           [(assoc directive *definitions*)
+                            => (lambda (c)
+                                 (expand-directives:string->port (cdr c) o))]
                            [else (display c o) (display directive o)]))]
                   [else
                     (display c o)])
