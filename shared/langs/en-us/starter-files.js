@@ -262,7 +262,7 @@ var DSBasics = {
   "animals": {
     "title": "Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=146dX6xx9mOkuZjeICS66aD4Md0xNvcyZ&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1rj_zKiheibxod8IihAFeMpP91XjLROum&v=78aeaeb"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
