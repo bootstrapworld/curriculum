@@ -30,11 +30,11 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
 
-| Circle of Evaluation | @show{(coe '(string-contains "rainbow" "bow"))} | @show{(coe '(string-contains "bow" "rainbow"))}
+| Circle of Evaluation | @show{(coe '(string-contains "rainbow" "bow"))} | @ifsoln{@show{(coe '(string-contains "bow" "rainbow"))}}
 
-| Code | @show{(code '(string-contains "rainbow" "bow"))} | @show{(code '(string-contains "bow" "rainbow"))}
+| Code | @show{(code '(string-contains "rainbow" "bow"))} | @ifsoln{@show{(code '(string-contains "bow" "rainbow"))}}
 
-| Result | `true` | `false`
+| Result | `true` | @ifsoln{`false`}
 
 |===
 @n Did both expressions produce the same result in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is  @show{(code 'string-contains)} commutative or not? @fitb{}{@ifsoln{It is not.}}
@@ -46,7 +46,7 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 
 | Circle of Evaluation | @show{(coe '(min  200 23))} | @ifsoln{@show{(coe  '(min 23 200))}}
 
-| Code | @ifsoln{@show{(code '(min  200 23))}} | @ifsoln{@show{(code  '(min 23 200))}}
+| Code | @show{(code '(min  200 23))} | @ifsoln{@show{(code  '(min 23 200))}}
 
 | Result | `23` | `23`
 
@@ -60,8 +60,13 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
+
 | Circle of Evaluation | @show{(coe '(blend-images purple-square white-dot))} | @show{(coe  '(blend-images white-dot purple-square))}
-| Code | @ifsoln{@show{(code '(blend-images purple-square white-dot))}} | @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
+
+| Code | @show{(code '(blend-images purple-square white-dot))} | @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
+
+| Sketch | @image{../images/blended.png, 60} | @ifsoln{@image{../images/blended.png, 60}}
+
 
 |===
 
