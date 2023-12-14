@@ -1969,8 +1969,8 @@
                      (when (>= n 4)
                        (process-passthrough-lines i o)))]
                   [(and beginning-of-line? (char=? c #\=))
-                   (set! beginning-of-line? #f)
-                   (set! possible-beginning-of-line? #f)
+                   ; (set! beginning-of-line? #f)
+                   ; (set! possible-beginning-of-line? #f)
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
