@@ -1,0 +1,54 @@
+= Data Cycle: Distribution of Fixed Animals
+++++
+<style>
+/* hide the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+</style>
+++++
+
+Use the Data Cycle with *bar-chart* to develop a question that you can explore with a *stacked-bar-chart* or *multi-bar-chart*.
+
+@data-cycle{ ""
+  #:question "Are more animals fixed or unfixed?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #t
+  #:cols "fixed"
+  #:show-cols? #t
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression "bar-chart(more-animals, \"fixed\")"
+  #:show-expression? #f
+  #:finding "The number of unfixed animals at the shelter (213) is slightly higher than the number of fixed animals (194)."
+  #:show-finding? #f
+  #:new-question "How does the ratio of fixed to unfixed animals differ by @hspace{12em}?"
+  #:show-new-question? #t
+}
+
+@span{.sectionbreak}{}
+
+Use the Data Cycle to explore the distribution of fixed animals with another column using *stacked-bar-chart* or *multi-bar-chart* and write down your findings.
+
+@data-cycle{ ""
+  #:question "How does the ratio of fixed to unfixed animals differ by @hspace{12em}?"
+  #:show-question? #t
+  #:question-type "statistical"
+  #:rows "All the rows"
+  #:show-rows? #t
+  #:cols ""
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression ""
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
