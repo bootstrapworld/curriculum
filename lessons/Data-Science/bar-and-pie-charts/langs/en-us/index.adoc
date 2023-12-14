@@ -35,6 +35,9 @@
 @opt-material-links
 * @lesson-link{project-infographic}
 
+| Key Points for the Facilitator
+| This lesson uses the @starter-file{expanded-animals}, which includes far more animals than the smaller sample represented in the @starter-file{animals} used in most of our lessons. 
+
 |===
 
 == Grouping by Value @duration{25 minutes}
@@ -45,10 +48,11 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 === Launch
 
 @lesson-instruction{
-* Open the @starter-file{animals} and click "Run".
-* Then complete Part A of @printable-exercise{count-bar-pie.adoc}, by testing the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
+* Open the @starter-file{expanded-animals} and click "Run".
+* Then complete Part A of @printable-exercise{count-bar-pie.adoc}, by testing the expressions @show{(code '(count more-animals "species"))} and @show{(code '(bar-chart more-animals "species"))} in the Interactions Area.
 }
 
+@slidebreak
 @QandA{
 @Q{How do the count table and bar chart you just made compare?}
 @A{The height of each bar matches the count of each species.}
@@ -60,19 +64,26 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 
 @optional Have students complete @opt-printable-exercise{bar-chart-notice.adoc} and @opt-printable-exercise{pie-chart-notice.adoc}.
 
-@lesson-instruction{Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays. Then compare your notices and wonderings with your partner.}
+@lesson-instruction{
+Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays. Then compare your notices and wonderings with your partner.
+}
  
-@image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385}
+@slidebreak
+
+@image{images/count-more-species.png, 160} @image{images/bar-more-species.png, 385}
 
 Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
 
-When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+@define{popout}{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.}
+
+@ifnotslide{@popout}
+@ifslide{@teacher{@popout}}
 
 @lesson-point{
 @vocab{Bar charts} group data _by value_ to show frequency as a count.
 }
 
-@right{@image{images/pie-species-popout.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
+@right{@image{images/pie-more-species.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
 
 @lesson-point{
 Pie charts group data _by value_ to show frequency as a percentage.
@@ -101,7 +112,6 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 @lesson-point{
 Grouping by value works well when lots of different data points can be sorted into a smaller number of buckets.
 }
-
 
 === Common Misconceptions
 
@@ -174,8 +184,8 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 |===
 | Stacked Bar Chart
 | Multi Bar Chart
-| @image{images/stacked-species-sex.png, 300}
-| @image{images/multi-species-sex.png, 300}
+| @image{images/stacked-bar-species-sex.png, 300}
+| @image{images/multi-bar-species-sex.png, 300}
 |===
 
 Stacked Bar Charts (left) put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
@@ -183,7 +193,7 @@ Stacked Bar Charts (left) put the _groups_ side by side, so it's easy to answer 
 Multi Bar Charts (right) put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
 
 @lesson-point{
-Stacked bar charts make it easy to compare _between groups_. Multi bar charts make it easy to compare within groups_.
+Stacked bar charts make it easy to compare _between groups_. Multi bar charts make it easy to compare _within groups_.
 }
 
 === Synthesize
@@ -198,9 +208,9 @@ All of the charts we've looked at in this lesson work with @vocab{categorical da
 @span{.title}{Optional Project: Making Infographics}
 
 Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @lesson-link{project-infographic} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper.
-}
+} 
 
-== Additional Exercises
+== Additional Exercises  
 
 - For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! Checkout the @opt-starter-file{food}.  
 - For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.

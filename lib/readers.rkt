@@ -15,14 +15,13 @@
 (define (read-word i)
   (let loop ([r '()])
     (let ([c (peek-char i)])
-      (if (or (char-alphabetic? c) (char=? c #\-))
-          (loop (cons (read-char i) r))
-          (cond [(null? r)
-                 (if (char=? c #\@)
-                     (begin (read-char i) "@")
-                     "")]
-                [else
-                  (list->string (reverse r))])))))
+      (cond [(eof-object? c) (list->string (reverse r))]
+            [(or (char-alphabetic? c) (char=? c #\-))
+             (loop (cons (read-char i) r))]
+            [(null? r)
+             (cond [(char=? c #\@) (read-char i) "@"]
+                   [else ""])]
+            [else (list->string (reverse r))]))))
 
 (define (read-mathjax-word i)
   (let ([c (read-char i)])
