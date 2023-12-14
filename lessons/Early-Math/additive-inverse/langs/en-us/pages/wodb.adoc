@@ -1,0 +1,67 @@
+= Which One Doesn't Belong?
+
+Identify the Circle of Evaluation that does not belong with the others.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+.chosen::after { content: '❌' !important; }
+td .autonum::after { content: ')' !important; }
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="^.^1a,^.^11a",stripes="none", options="header"]
+|===
+| 	 | Circles of Evaluation
+
+| @n
+| @show{(coe '(+ 20 -20))}
+@show{(coe '(+ -20 20))}
+@show{(coe '(- 20 20))}
+@ifsoln-choice{@show{(coe '(- -20 20))}}
+
+
+| @n
+| @show{(coe '(+ -2 5))}
+@show{(coe '(+ 5 -2))}
+@show{(coe '(- 5 2))}
+@ifsoln-choice{@show{(coe '(- 2 5))}}
+
+
+| @n
+| @show{(coe '(+ 6 -3))}
+@show{(coe '(- 6 3))}
+@ifsoln-choice{@show{(coe '(- 3 6))}}
+@show{(coe '(+ -3 6))}
+
+
+| @n
+| @show{(coe '(+ 100 -30))}
+@ifsoln-choice{@show{(coe '(- -30 100))}}
+@show{(coe '(+ -30 100))}
+@show{(coe '(- 100 30))}
+
+
+| @n
+| @ifsoln-choice{@show{(coe '(- 50 0))}}
+@show{(coe '(+ 0 -50))}
+@show{(coe '(+ -50 0))}
+@show{(coe '(- 0 50))}
+
+
+| @n
+| @show{(coe '(- 5 8))}
+@show{(coe '(+ 5 -8))}
+@show{(coe '(+ -8 5))}
+@ifsoln-choice{@show{(coe '(- 8 5))}}
+
+|===
+
