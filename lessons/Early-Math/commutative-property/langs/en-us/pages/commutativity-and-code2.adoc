@@ -25,30 +25,42 @@ Open the @starter-file{comm-and-assoc}, which you will use to investigate four f
 For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in Pyret.
 
 
-@n *Is @show{(code 'string-contains)} commutative?*
+== Is @show{(code 'string-contains)} Commutative?
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
 
-| Circle of Evaluation | @show{(coe '(string-contains "rainbow" "bow"))} | @ifsoln{@show{(coe '(string-contains "bow" "rainbow"))}}
+| Circle of Evaluation
+| @show{(coe '(string-contains "rainbow" "bow"))}
+| @ifsoln{@show{(coe '(string-contains "bow" "rainbow"))}}
 
-| Code | @show{(code '(string-contains "rainbow" "bow"))} | @ifsoln{@show{(code '(string-contains "bow" "rainbow"))}}
+| Code
+| @show{(code '(string-contains "rainbow" "bow"))}
+| @ifsoln{@show{(code '(string-contains "bow" "rainbow"))}}
 
-| Result | `true` | @ifsoln{`false`}
+| Result
+| `true`
+| @ifsoln{`false`}
 
 |===
 @n Did both expressions produce the same result in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is  @show{(code 'string-contains)} commutative or not? @fitb{}{@ifsoln{It is not.}}
 
-@n *Is @show{(code 'min)} commutative?*
+== Is @show{(code 'min)} Commutative?
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
 
-| Circle of Evaluation | @show{(coe '(min  200 23))} | @ifsoln{@show{(coe  '(min 23 200))}}
+| Circle of Evaluation
+| @show{(coe '(min  200 23))}
+| @ifsoln{@show{(coe  '(min 23 200))}}
 
-| Code | @show{(code '(min  200 23))} | @ifsoln{@show{(code  '(min 23 200))}}
+| Code
+| @show{(code '(min  200 23))}
+| @ifsoln{@show{(code  '(min 23 200))}}
 
-| Result | `23` | `23`
+| Result
+| `23`
+| `23`
 
 |===
 
@@ -56,17 +68,22 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 
 @n Make a prediction. Do you think @show{(code 'max)} is commutative?  @fitb{8em}{} @hspace{2em} Test your prediction. Were you right? @fitb{}{}
 
-@n *Is @show{(code 'blend-images)} commutative?*
+== Is @show{(code 'blend-images)} Commutative?
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
 
-| Circle of Evaluation | @show{(coe '(blend-images purple-square white-dot))} | @show{(coe  '(blend-images white-dot purple-square))}
+| Circle of Evaluation
+| @show{(coe '(blend-images purple-square white-dot))}
+| @show{(coe  '(blend-images white-dot purple-square))}
 
-| Code | @show{(code '(blend-images purple-square white-dot))} | @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
+| Code
+| @show{(code '(blend-images purple-square white-dot))}
+| @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
 
-| Sketch | @image{../images/blended.png, 60} | @ifsoln{@image{../images/blended.png, 60}}
-
+| Sketch
+| @image{../images/blended.png, 60}
+| @ifsoln{@image{../images/blended.png, 60}}
 
 |===
 
