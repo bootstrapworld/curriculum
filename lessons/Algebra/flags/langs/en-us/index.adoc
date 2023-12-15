@@ -7,7 +7,7 @@
 </style>
 ++++
 
-@description{Students investigate the function `put-image` while recreating images of flags of varying complexity. They transform and compose image functions and apply their knowledge of ratios and coordinates to scale and position shape precisely.}
+@description{Students investigate the function `put-image` while recreating images of flags of varying complexity. They explore image transformation and compose image functions, applying their knowledge of ratios and coordinates to scale and position shape precisely.}
 
 @lesson-prereqs{defining-values}
 
@@ -56,7 +56,7 @@
 == Putting Images Together @duration{50 minutes}
 
 === Overview
-Students learn about the `put-image` function.
+Students learn about the `put-image` function, which uses coordinates to overlay one image on top of the other. Students practice with estimating coordinates to place a solid red circle on top of a rectangle background, in a variety of different locations. Then, students will use function composition with `put-image` in order to layer 3 or more shapes, creating more complex images.
 
 === Launch
 As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
@@ -69,16 +69,18 @@ Think of the background image as a sheet of graph paper with the @vocab{origin} 
 The numbers in `put-image` specify a point on that graph paper, with the center of the top image being placed there.
 }
 
-@teacher{The next activity offers students practice with estimating coordinates for a solid red circle in a variety of different locations on top of a rectangle background.}
-
 @lesson-instruction{
 
 - On @printable-exercise{japan-estimating-coordinates.adoc}, the code beneath each image is missing the x and y coordinates to place the dot.
 - Estimate the x- and y-coordinate of the dot's location for each image to complete the code!
 }
+@strategy{
+@span{.title}{Why is it so Hard to Center a `triangle`?}
 
-@teacher{Ensure that students understand that `put-image` places the _center_ of the image at the specified location.}
+We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place is atop another image. In this example, x- and y-coordinates we use with `put-image` are describing where _that specific point_ lies on the background. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's _center_. The same is true for squares, rectangles, and many other shapes.
 
+But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by the center of their shapes. Instead, they are "grabbed" by the center of their _bounding box_. A bounding box is the tightest possible rectangle that can be drawn around an image. Try drawing a triangle on a piece of paper, and draw a dot it's center. Then, draw a rectangle so that all three points touch the edges. You'll find that the center of the bounding box is not the same as the center of the triangle!
+}
 === Investigate
 
 Now that we've had practice estimating coordinates, we are going to use `put-image` in Pyret to reposition the solid red circle of the Japanese flag to the correct coordinates.
@@ -91,13 +93,10 @@ Now that we've had practice estimating coordinates, we are going to use `put-ima
 The programmer who wrote the @starter-file{flags} included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.
 
 @lesson-point{
-Professional programmers use comments __all the time__.
+Professional programmers use comments __all the time!__
 }
 
 Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.
-
-
-@teacher{Next, students will analyze code for the flag of the Netherlands, which uses `put-image` _twice_.}
 
 @lesson-instruction{
 - Open the @starter-file{flags-2} and click "Run".
@@ -109,18 +108,13 @@ Professional programmers work with teams who need to be able to follow each othe
 
 At this point, we've built flags that are composed primarily of rectangles. Let's see if we can build a flag with more complexity - Puerto Rico's flag.
 
-@teacher{@starter-file{flags-pr} generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.}
+The @starter-file{flags-pr} generates a jumbled pile of shapes. We'll need to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
 
 @lesson-instruction{
-- Open @starter-file{flags-pr} and complete the Do Now section (line 9).}
-
-@QandA{
-@Q{How is `puerto-rico-flag` different from `puerto-rico`?}
-@A{`puerto-rico-flag` is the target image, where as `puerto-rico` includes all of the shapes needed - but they are incorrectly positioned and they are the wrong color and/or size.}}
-
-@lesson-instruction{
-With your partner, work through the remainder of the starter file until `puerto-rico` and `puerto-rico-flag` are identical.}
-
+- Open @starter-file{flags-pr} and complete the Do Now section (line 9).
+- `puerto-rico-flag` is the target image, where as `puerto-rico` includes all of the shapes needed - but they are incorrectly positioned and they are the wrong color and/or size.
+- With your partner, work through the remainder of the starter file until `puerto-rico` and `puerto-rico-flag` are identical.
+}
 
 === Synthesize
 
@@ -147,6 +141,4 @@ If you have time, we have lots of additional starter files to push student think
 - @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it.
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.
-
-
 

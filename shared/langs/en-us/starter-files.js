@@ -262,7 +262,7 @@ var DSBasics = {
   "animals": {
     "title": "Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=146dX6xx9mOkuZjeICS66aD4Md0xNvcyZ&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1rj_zKiheibxod8IihAFeMpP91XjLROum&v=78aeaeb"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
@@ -862,6 +862,18 @@ var Projects = {
     "title": "Animals Dataset - Dogs Only",
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
+    }
+  }
+}
+
+var EarlyMath = {
+  "comm-and-assoc": {
+    "title": "Commutativity and Associativity Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
     }
   }
 }

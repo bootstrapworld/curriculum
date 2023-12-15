@@ -116,6 +116,8 @@
 
 ;(printf "*workbook-pagenums* = ~s\n" *workbook-pagenums*)
 
+(define *definitions* '())
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -1308,6 +1310,7 @@
   (set! *optional-flag?* #f)
   (set! *first-level-section-titles* '())
   (set! *possibly-invalid-page?* #f)
+  (set! *definitions* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1411,6 +1414,11 @@
                             (display-begin-span ".center" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
+                           [(string=? directive "define")
+                            (let* ([id (read-group i directive)]
+                                   [prose (read-group i directive #:multiline? #t)])
+                              (set! *definitions*
+                                (cons (cons id prose) *definitions*)))]
                            [(string=? directive "comment")
                             (let ([prose (read-group i directive)])
                               (if *title-reached?*
@@ -1944,6 +1952,9 @@
                               (display "\n[lesson-roleplay]\n--\n" o)
                               (expand-directives:string->port text o)
                               (display "\n--\n" o))]
+                           [(assoc directive *definitions*)
+                            => (lambda (c)
+                                 (expand-directives:string->port (cdr c) o))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1953,13 +1964,13 @@
                    (set! possible-beginning-of-line? #f)
                    (newline o)
                    (display c o)]
-                  [(and beginning-of-line? (char=? c #\@))
+                  [(and beginning-of-line? (char=? c #\+))
                    (let ([n (process-as-many-pluses-as-possible i o)])
                      (when (>= n 4)
                        (process-passthrough-lines i o)))]
                   [(and beginning-of-line? (char=? c #\=))
-                   (set! beginning-of-line? #f)
-                   (set! possible-beginning-of-line? #f)
+                   ; (set! beginning-of-line? #f)
+                   ; (set! possible-beginning-of-line? #f)
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
