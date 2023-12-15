@@ -1,13 +1,14 @@
-= Data Cycle: Distribution of Fixed Animals
+= Bar and Stacked Bar Charts: Distribution of Fixed Animals
 ++++
 <style>
-/* hide the sub-questions for Analyze */
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
 </style>
 ++++
 
-Use the Data Cycle with *bar-chart* to develop a question that you can explore with a *stacked-bar-chart* or *multi-bar-chart*.
+Let's make a *bar-chart* to see what we can learn about the distribution of fixed animals and what new questions it may lead us to.
 
 @data-cycle{ ""
   #:question "Are more animals fixed or unfixed?"
@@ -25,18 +26,35 @@ Use the Data Cycle with *bar-chart* to develop a question that you can explore w
   #:show-expression? #f
   #:finding "The number of unfixed animals at the shelter (213) is slightly higher than the number of fixed animals (194)."
   #:show-finding? #f
-  #:new-question "How does the ratio of fixed to unfixed animals differ by @hspace{12em}?"
+  #:new-question "How does the ratio of fixed to unfixed animals differ by species?"
   #:show-new-question? #t
 }
 
+[cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The bar chart shows that there are @fitbruby{18em}{}{more / less / about the same number of} fixed animals @fitbruby{3em}{}{as / than} unfixed animals. 
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@fitb{}{How does the ratio of fixed to unfixed animals differ by species?}
+
+@fitb{}{How does the ratio of fixed to unfixed animals differ by...}
+
+@fitb{}{}
+|===
+
 @span{.sectionbreak}{}
 
-Use the Data Cycle to explore the distribution of fixed animals with another column using *stacked-bar-chart* or *multi-bar-chart* and write down your findings.
+Let's make a *stacked-bar-chart* to see what we can learn about the distribution of fixed animals by species and what new questions it leads us to.
 
 @data-cycle{ ""
-  #:question "How does the ratio of fixed to unfixed animals differ by @hspace{12em}?"
+  #:question "How does the ratio of fixed to unfixed animals differ by species?"
   #:show-question? #t
-  #:question-type "statistical"
+  #:question-type "arithmetic"
   #:rows "All the rows"
   #:show-rows? #t
   #:cols ""
@@ -52,3 +70,20 @@ Use the Data Cycle to explore the distribution of fixed animals with another col
   #:new-question ""
   #:show-new-question? #f
 }
+
+[cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The `stacked-bar-chart` shows that @fitbruby{12em}{}{all / most / some / a few / no} species have @fitbruby{15em}{}{more / the same number of / fewer} fixed animals @fitbruby{3em}{}{as / than} unfixed animals.
+
+I also notice @fitb{}{}
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@fitb{}{How does the ratio of fixed to unfixed animals differ by species?}
+
+@fitb{}{}
+|===
