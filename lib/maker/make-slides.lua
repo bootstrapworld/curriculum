@@ -101,8 +101,8 @@ local function get_slides(lsn_plan_adoc_file)
           slides[#slides + 1] = curr_slide
         end
         curr_slide = newslide()
-        -- curr_slide.header = directive
-        curr_slide.header = "SLIDE BREAK"
+        curr_slide.section = 'Repeat'
+        curr_slide.header = 'SLIDE BREAK'
       else
         if directive == 'image' then
           curr_slide.numimages = curr_slide.numimages + 1
@@ -211,10 +211,9 @@ local function make_slides_file(lplan_file, slides_file)
       end
     else
       if slide.section == 'Repeat' then slide.section = curr_section end
-      -- print('level = ' .. slide.level .. '; header = ' .. tostring(slide.header))
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
-      elseif slide.level == 2 then
+      elseif slide.level == 2 and slide.section then
         o:write('@slidebreak\n')
         o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
         o:write('# ', curr_header, '\n\n')
