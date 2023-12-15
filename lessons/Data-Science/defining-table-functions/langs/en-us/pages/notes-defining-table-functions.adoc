@@ -1,7 +1,7 @@
 = Defining Table Functions
 ++++
 <style>
-  p { line-height: 1.5; }
+body.LessonNotes li { margin-bottom: 5px; }
 </style>
 ++++
 
@@ -21,22 +21,21 @@ _Write a function `is-lizard`, which tells us whether an animal is a lizard._
 
 The goal of the Examples step is to _find the pattern_ that represents what the function does. When working with Rows, sometimes we have to start by just focusing on what the answer should be.
 
-
-Suppose `animalC` is a lizard, and `animalD` is a cat. We can imagine the answers for an `is-lizard` to be...
+Suppose we have two rows defined: `lizard-row` (which happens to be a lizard), and `cat-row` (which happens to be a cat). We can imagine the answers for an `is-lizard` function to be...
 
 ```
 examples:
-	is-lizard(animalC) is true
-	is-lizard(animalD) is false
+	is-lizard(lizard-row) is true
+	is-lizard(cat-row)    is false
 end
 ```
 
-But how do we know these are `true` and `false`? Well, we KNOW `animalC` is a lizard, and we KNOW `animalD` is a cat. So let's replace those answers with the Boolean expressions that compare their species:
+But how do we know these are `true` and `false`? Well, we KNOW `lizard-row` is a lizard, and we KNOW `cat-row` is a cat. So let's replace those answers with the Boolean expressions that compare their species:
 
 ```
 examples:
-	is-lizard(animalC) is "lizard" == "lizard"  # will produce true
-	is-lizard(animalD) is "cat" == "lizard"     # will produce false
+	is-lizard(lizard-row) is "lizard" == "lizard"  # will produce true
+	is-lizard(cat-row)    is "cat"    == "lizard"  # will produce false
 end
 ```
 
@@ -44,8 +43,8 @@ But what work gives us "lizard" and "cat"? Well, we can look in the `species` co
 
 ```
 examples:
-	is-lizard(animalC) is animalC["species"] == "lizard" # will produce true
-	is-lizard(animalD) is animalD["species"] == "lizard" # will produce false
+	is-lizard(lizard-row) is lizard-row["species"] == "lizard" # will produce true
+	is-lizard(cat-row)    is cat-row["species"]    == "lizard" # will produce false
 end
 ```
 
@@ -60,8 +59,16 @@ The final step in the Design Recipe is to take the pattern from our examples and
 
 @vspace{1ex}
 
-Once again, our previous step is a huge help. We can simply *copy everything that stays the same*, and replace the part that changes with the label we used:
+Once again, our previous step is a huge help. We can simply *copy everything that stays the same*, and replace the part that changes with the label we used.
+
+Combining the Contract, Purpose, Examples and Definitions, we have:
 
 ```
+# is-lizard :: Row -> Boolean
+# Consumes a Row, and checks to see if the species column is "lizard"
+examples:
+	is-lizard(lizard-row) is lizard-row["species"] == "lizard" # will produce true
+	is-lizard(cat-row)    is cat-row["species"]    == "lizard" # will produce false
+end
 fun is-lizard(r): r["species"] == "lizard" end
 ```
