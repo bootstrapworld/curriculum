@@ -1,4 +1,4 @@
-= Making Flags
+= Putting Images Together
 ++++
 <style>
 #content .whiteBG img {background: white;}
@@ -7,7 +7,7 @@
 </style>
 ++++
 
-@description{Students recreate images of flags of varying complexity by transforming and composing image functions and applying their knowledge of ratios and coordinates to scale and position the shapes precisely.}
+@description{Students investigate the function `put-image` while recreating images of flags of varying complexity. They explore image transformation and compose image functions, applying their knowledge of ratios and coordinates to scale and position shape precisely.}
 
 @lesson-prereqs{defining-values}
 
@@ -53,10 +53,10 @@
 
 |===
 
-== Putting Images Together @duration{25 minutes}
+== Putting Images Together @duration{50 minutes}
 
 === Overview
-Students learn about the `put-image` function.
+Students learn about the `put-image` function, which uses coordinates to overlay one image on top of the other. Students practice with estimating coordinates to place a solid red circle on top of a rectangle background, in a variety of different locations. Then, students will use function composition with `put-image` in order to layer 3 or more shapes, creating more complex images.
 
 === Launch
 As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
@@ -71,60 +71,59 @@ The numbers in `put-image` specify a point on that graph paper, with the center 
 
 @lesson-instruction{
 
-- Take a look at @printable-exercise{japan-estimating-coordinates.adoc}.
-- The code beneath each image is missing the x and y coordinates to place the dot.
+- On @printable-exercise{japan-estimating-coordinates.adoc}, the code beneath each image is missing the x and y coordinates to place the dot.
 - Estimate the x- and y-coordinate of the dot's location for each image to complete the code!
 }
+@strategy{
+@span{.title}{Why is it so Hard to Center a `triangle`?}
 
+We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place is atop another image. In this example, x- and y-coordinates we use with `put-image` are describing where _that specific point_ lies on the background. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's _center_. The same is true for squares, rectangles, and many other shapes.
+
+But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by the center of their shapes. Instead, they are "grabbed" by the center of their _bounding box_. A bounding box is the tightest possible rectangle that can be drawn around an image. Try drawing a triangle on a piece of paper, and draw a dot it's center. Then, draw a rectangle so that all three points touch the edges. You'll find that the center of the bounding box is not the same as the center of the triangle!
+}
 === Investigate
 
+Now that we've had practice estimating coordinates, we are going to use `put-image` in Pyret to reposition the solid red circle of the Japanese flag to the correct coordinates.
+
 @lesson-instruction{
-Open the @starter-file{flags} and click "Run".
+- Open the @starter-file{flags} and click "Run".
+- Complete the first section @printable-exercise{put-image-investigate.adoc}
 }
 
-The programmer who wrote this code included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.
+The programmer who wrote the @starter-file{flags} included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.
 
 @lesson-point{
-Professional programmers use comments __all the time__.
+Professional programmers use comments __all the time!__
 }
 
 Professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of their thinking when _they_ come back to their code another day.
 
 @lesson-instruction{
-- @ifproglang{wescheme}{Each language has its own symbol for commenting. In WeScheme, we use the semi colon (`;`) to tell the computer to ignore what we're typing. What color does the code turn when it has a semicolon in front of it?
-** _Purple!_}
-@ifproglang{pyret}{In Pyret, we use the number sign (`#`) to tell the computer to ignore what we're typing. What color does the code turn when it has a number sign in front of it?
-** _Red!_}
-- Type `japan-flag` into the Interactions Area. What do you get back?
-** _We see Japan's flag - a white background with a red dot in the center._
-- Type `japan` into the Interactions Area and compare the image to `japan-flag`.
-** _We see a variant of Japan's flag; the dot is in the lower left now._
-- `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
-- Take a look at the `japan` code and fix it so that it matches the `japan-flag` image.
-- What is the Contract for `put-image`? 
-** `put-image :: Image, Number, Number, Image`
+- Open the @starter-file{flags-2} and click "Run".
+- Complete the second section of @printable-exercise{put-image-investigate.adoc}.
 }
 
-Next, students will analyze code for the flag of the Netherlands, which uses `put-image` twice.
+
+@teacher{Once you've discussed the code for the flag of the Netherlands with your class, have students keep working with the starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
+}
+
+At this point, we've built flags that are composed primarily of rectangles. Let's see if we can build a flag with more complexity - Puerto Rico's flag.
+
+The @starter-file{flags-pr} generates a jumbled pile of shapes. We'll need to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
 
 @lesson-instruction{
-- Open the @starter-file{flags-2} and click "Run". Look at the code for the flag of the Netherlands. How big is the flag?
-** _The flag is 200 x 300 pixels._
-- What was the programmer thinking when she coded the height of the red stripe as @show{(code '(/ 200 3))}?
-** _The red stripe's height is one-third of the total height (200)._
-- The center of the blue stripe is placed at (@show{(code `150)}, @show{(code '(/ 200 6))}). How did the programmer know to use 150 as the x-coordinate?
-** _150 is half of the rectangle's width; that position will horizontally center the blue stripe._
-- What was the programmer thinking when she coded the y-coordinate as @show{(code '(/ 200 6))}?
-** _Each stripe occupies 1/3 of the flag's total height. That means the vertical center of the blue stripe is at 1/6 of the flag's height._
-- Explain the thinking behind coding the red stripe's y-coordinate as @show{(code '(* 5 (/ 200 6)))}.
-** _The red strip's vertical center is at 5/6 of the flag's total height._
+- Open @starter-file{flags-pr} and complete the Do Now section (line 9).
+- `puerto-rico-flag` is the target image, where as `puerto-rico` includes all of the shapes needed - but they are incorrectly positioned and they are the wrong color and/or size.
+- With your partner, work through the remainder of the starter file until `puerto-rico` and `puerto-rico-flag` are identical.
 }
-
-Once you've discussed the code for the flag of the Netherlands with your class, have them keep working with this starter file to write code for the flags of Ireland and Mauritius.  Some students will make it through the challenges. Some students may only complete one flag. All of them will be synthesizing how to apply put-image and locate images on the coordinate grid.
 
 === Synthesize
 
 Could we completely replace `overlay` with `put-image`? Why or why not?
+
+Which flags were the easiest to make? The hardest?
+
+Why is it useful to define each part of the flag first, before stitching the images together?
 
 @strategy{
 @span{.title}{Going Deeper}
@@ -132,84 +131,9 @@ Could we completely replace `overlay` with `put-image`? Why or why not?
 If you have time, we have lots of additional starter files to push student thinking linked in the additional exercises at the end of this lesson and now would be the time to dive into them!
 }
 
-== Making Flags @duration{25 minutes}
-
-=== Overview
-Students focus on decomposing complex images into simple ones and using `put-image` to combine images.
-
-=== Launch
-Let's dig into the process for how the flags we’ve seen so far were made:
-
-*1) Decompose the Image*
-
-We observe that the Japanese flag is made up of two simpler images: a black, outline rectangle and a red dot.
-
-
-*2) Define those Parts*
-
-We define `dot` and `background`. Once we’ve defined those images, we test them out in the Interactions Area to make sure they look right!
-
-
-*3) Find the Coordinates*
-
-For each image, calculate what the x- and y-coordinates of where the center should be. __TIP: this is a lot easier if you have a sheet of graph paper handy!__
-
-
-*4) Build the Image & Check that it Matches the Target Image*
-
-We stack the parts on top of the bottom image using the coordinates we found.
-__TIP: don't cram all the code into one line! If you break it up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.__ Be sure to compare the image you get with the target image!
-
-
-@optional If you have time, 
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c, this Desmos activity}
-}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169, this Desmos activity}
-} 
-contains two cardsorts that will support student thinking. The first focuses on scaling official flag ratios and the second focuses on matching images to code using `overlay` and `put-image`.
-
-
-
-=== Investigate
-
-@lesson-instruction{
-- Turn to @printable-exercise{decomposing-flags.adoc}, and choose ONE flag to focus on. On the blank lines below, describe the parts that make up that flag.
-** _Note: You may want to project the color version of this page; otherwise, students using black-and-white photocopies will be unable to identify the colors on the the flags._
-- For a more tactile experience, construct your flag using construction paper.
-** _If you have time, this is a valuable activity! The act of physically building the flag from layers of paper makes the layering of the coded images visible and helps students to remember that white space is not just "blank"._
-- Once you're done, return to the @starter-file{flags} and define those parts.
-- Then, compose those parts using `put-image`, and make your flag!
-}
-
-The opportunity to focus on a flag of their choosing is a big motivator for students. Coding flags also presents a rare opportunity for students to share a piece of their identity in math class. If you have more time to devote, we highly encourage you to give students the opportunity to create the image of a flag they connect with in some way.  Students might choose the flags of countries related to their heritage, a place they’ve visited, a country they’re interested in, or a group they identify with or support.
-
-Encourage students to choose an appropriately challenging flag that will demonstrate what they've learned.  The teacher may introduce parameters if necessary, such as “Flags need at least 5 different shapes”. Once students have coded their flags, host a tour of the flags of the world in your classroom!
-
-Note: To reinforce ratio and proportion concepts, have students define the `WIDTH` and `HEIGHT` of their flags as values, and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
-
-
-@strategy{
-@span{.title}{Around the World in your Classroom}
-
-Many teachers enjoy devoting a few days of class to making flags! If you choose to use this task as a summative project, check out the @opt-printable-exercise{rubric-flags.adoc} as a tool to assess student learning.
-
-Be mindful of the fact that not every student will know their family’s geographical history, and
-that immigration can be a sensitive topic for some students.  For this reason, it is important that students have the option to choose a flag based on interest instead of just family history.
-
-Be prepared that students might choose flags representing groups other than countries.  Indigenous students might choose a flag that represents their indigenous nation or the American Indian Movement. Students might also choose to focus on the pride flag (representing solidarity amongst members of the LGBTQ+ community) or an ethnic flag (representing solidarity amongst members of different ethnic groups, such as the Hispanic flag).  There are also some flags that represent political or activist groups.  It is important for the teacher to be open to different beliefs and ideologies, but it is also up to the teacher’s discretion as to whether or not a flag is appropriate for use in this project. Flags associated with hate groups, or any institution that denies the dignity of other students, are not appropriate.
-
-@opt-printable-exercise{pages/flags-of-the-world-resource.pdf, Flags of the World} and @opt-online-exercise{http://www.flagwizard.net/, Flag Wizard} may be useful to students looking for ideas. Flags are listed with their width:length @vocab{ratios} in the opposite order of how we define the sides of a flag in code. e.g. 2:3 could be scaled up to a 300 x 200 flag or 8:11 could be scaled up to 330 by 240.
-}
-
-=== Synthesize
-
-Which flags were the easiest to make? The hardest? 
-
-Why is it useful to define each part of the flag first, before stitching the images together?
-
 == Additional Exercises
 
-- @opt-starter-file{flags-pr} - This starter file generates a jumbled pile of shapes. Students work to fix the code by resizing, rotating, and correctly locating the components on the background in order to compose an image that looks like the original flag.
+- @opt-starter-file{flags-ak} - For a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
 - @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics.
 
@@ -219,4 +143,3 @@ Why is it useful to define each part of the flag first, before stitching the ima
 
 - @opt-starter-file{flags-turkey} - For a fun function-composition puzzle.
 
-- @opt-printable-exercise{alaska-flag.adoc} - Has students look at a starter file and think about the images defined in the code, along with engaging them with the history of the Alaskan flag.

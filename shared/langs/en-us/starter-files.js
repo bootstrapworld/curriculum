@@ -809,6 +809,21 @@ var Reactive = {
   }
 }
 
+var EarlyMath = {
+  "comm-and-assoc": {
+    "title": "Commutativity and Associativity Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
+    }
+  }
+}
+
+
+
+
 var Projects = {
   "functions": {
     "title": "Functions Starter File",
@@ -876,8 +891,8 @@ var allStarterFiles = {
   ...MoreAlg, 
   ...Alg2, 
   ...Reactive,
-  ...Projects, 
-  ...EarlyMath
+  ...EarlyMath,
+  ...Projects
 }
 
 ////////////////////////////////////////////////////////////////////////////////
