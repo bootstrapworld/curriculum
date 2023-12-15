@@ -1,13 +1,16 @@
-= Data Cycle: Distribution of Fixed Animals
+= Data Cycle: Distribution of Categorical Columns
 ++++
 <style>
-/* hide the sub-questions for Analyze */
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
 </style>
 ++++
 
-Use the Data Cycle to explore the distribution of one or more categorical columns using *pie-chart*, *bar-chart*, *stacked-bar-chart* or *multi-bar-chart* and write down your findings.
+Explore the distribution of a categorical column using *pie-chart* or *bar-chart*.
 
 @data-cycle{ ""
   #:question ""
@@ -27,9 +30,29 @@ Use the Data Cycle to explore the distribution of one or more categorical column
   #:new-question ""
   #:show-new-question? #f
 }
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+- [ ] The chart shows that there is an even distribution of @fitbruby{10em}{}{variable}.
+- [ ] The chart shows that the most common @fitbruby{10em}{}{variable} is/are @fitb{}{}
+
+I notice that @fitb{}{}
+
+I wonder @fitb{}{}
+
+* How does the distribution of @fitbruby{10em}{}{variable} differ by @fitbruby{10em}{}{variable}?
+
+* @fitbruby{}{}{Another question I have is...}
+
+|===
 
 @span{.sectionbreak}{}
 
+
+Explore the distribution of two categorical columns using *stacked-bar-chart* or *multi-bar-chart*.
+
 @data-cycle{ ""
   #:question ""
   #:show-question? #f
@@ -48,3 +71,17 @@ Use the Data Cycle to explore the distribution of one or more categorical column
   #:new-question ""
   #:show-new-question? #f
 }
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+When we break the distribution of @fitbruby{10em}{}{variable} down by @fitbruby{10em}{}{variable}:
+
+* I notice that @fitb{}{}
+
+* I wonder @fitb{}{}
+
+@fitbruby{}{}{Another question I have is...}
+
+|===
