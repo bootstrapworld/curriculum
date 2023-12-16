@@ -801,6 +801,12 @@ var EarlyMath = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
     }
+  },
+   "variables-code": {
+    "title": "Variables & the Commutative Property",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1s2Yiq452nDUcwYiTkdn2YHCC0fIV1VzQ&v=78aeaeb"
+    }
   }
 }
 
