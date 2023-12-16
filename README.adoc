@@ -1029,7 +1029,15 @@ requirement is that any braces within it should be paired. (This is
 obviously needed to keep the extent of
 ``@scrub``'s argument recognizable.)
 
-==== Programming-language specific text
+==== Conditional text
+
+We sometimes need the same document to generate differing content in
+different contexts, e.g., different target programming languages;
+whether the page is in student- or solutions-mode; whether the page is
+being converted into slide. We have a bunch of directives starting with
+`@if...` that makes specifying this variation easier.
+
+===== Programming-language specific text
 
 Use the `@ifproglang` directive to conditonally include a
 fragment text for a specific programming language. E.g.,
@@ -1041,6 +1049,57 @@ fragment text for a specific programming language. E.g.,
   @ifproglang{wescheme}{
   This text occurs in the WeScheme version of this document.
   }
+
+===== Slide-specific text
+
+Lesson plan files are autoconverted to Google slides. To specify
+that content should not be part of the slide:
+
+  @ifnotslide{This content should not show up in the slide}
+
+To specify that it should show up only in the slide:
+
+  @ifslide{This content is slide-specific}
+
+===== Student- vs solution mode
+
+As described above, workbook pages get converted to both student and
+solution versions. For content that should show up only in the student
+version, use `@ifnotsoln`. For content that should show up only in
+solutions mode, use `@ifsoln`.
+
+We often have situations where a choice of answers is presented to the reader, but
+the correct answer is identified only in solutions mode. Use
+`@ifsoln-choice` to enclose this correct answer.
+
+===== Pathway-specific text
+
+As described above, a lesson can be picked up by different pathways.
+Parts of a lesson file may be relevant only for certain pathways. Use
+
+  @ifpathway{p1,p2,...}{text}
+
+to specify that `text` should only be used
+for the comma-separated list of pathways `p1, p2, ...`.
+
+To specify that something should be used only for pathways that are
+_not_ `p1, p2, ...`, use
+
+  @ifnotpathway{p1,p2,...}{text}
+
+===== Reusable text
+
+When using `@if...` and `@ifnot...` pairs of conditional text, we may
+often find that the controlled text nevertheless contains commonalities
+that may be too tedious and/or error-prone to repeat. In such cases use
+the `@define` directive to save reusable text in a dynamic directive,
+and use call the directive (rather than repeat the reusable text)
+whenever it needs to be used. E.g.,
+
+  @define{savedtext}{... long piece of text ...}
+
+  @ifslide{... slide-specific text containing @savedtext ...}
+  @ifnoslide{.. non-slide text, also containing @savedtext ...}
 
 ==== Adding custom CSS classes
 
