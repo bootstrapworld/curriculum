@@ -803,9 +803,15 @@ var EarlyMath = {
     }
   },
    "variables-code": {
-    "title": "Variables & the Commutative Property",
+    "title": "Variables & the Commutative Property Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1s2Yiq452nDUcwYiTkdn2YHCC0fIV1VzQ&v=78aeaeb"
+    }
+  },
+   "variables-code2": {
+    "title": "Variables & the Associative Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
     }
   }
 }
@@ -851,18 +857,6 @@ var Projects = {
     "title": "Animals Dataset - Dogs Only",
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
-    }
-  }
-}
-
-var EarlyMath = {
-  "comm-and-assoc": {
-    "title": "Commutativity and Associativity Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk&v=78aeaeb"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
     }
   }
 }
