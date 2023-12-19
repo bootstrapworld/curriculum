@@ -5,18 +5,24 @@
   table {grid-template-rows: 3fr 1fr !important;}
   div.circleevalsexp .value,
   div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  .sect1 > h2:first-child { padding: 0 5px !important; }
+  .sect1 > h2 { font-size: 11pt !important; }
+  .autonum { padding: 0 !important; }
 </style>
 ++++
 
 Open the @starter-file{comm-and-assoc}, which you will use to investigate three functions:
 
-[.contracts, cols="1", frame="none", grid="none"]
+[.contracts, cols="1,1", frame="none", grid="none"]
 |===
 | @show{ (contracts
 '("beside" ("Image" "Image") "Image")
 '("above" ("Image" "Image") "Image")
+)}
+| @show{ (contracts
 '("overlay" ("Image" "Image") "Image")
 )}
+
 |===
 
 For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in Pyret.
@@ -33,7 +39,7 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 | Sketch | @image{../images/aqua-orange.png, 90} | @ifsoln{@image{../images/orange-aqua.png, 90}}
 
 |===
-@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
 
 == Is @show{(code 'above)} Commutative?
 
@@ -54,7 +60,7 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
 
 == Is @show{(code 'overlay)} Commutative?
 
@@ -75,4 +81,4 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{8em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
