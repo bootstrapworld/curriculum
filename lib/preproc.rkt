@@ -2187,7 +2187,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
