@@ -6,10 +6,6 @@ pdffile=$1
 
 targetpathway=$(echo $pdffile|$SED -e 's/\/resources\/pages\/Contracts.pdf//' -e 's/.*\/courses\///')
 
-if test "$targetpathway" = hour-of-code; then
-  exit
-fi
-
 # do only for pyret and wescheme?
 
 inputfile="distribution/$NATLANG/Contracts.shtml?pathway=$targetpathway"
