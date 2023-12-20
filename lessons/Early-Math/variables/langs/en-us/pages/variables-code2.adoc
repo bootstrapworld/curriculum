@@ -15,6 +15,7 @@
 
 @vspace{1ex}
 
+@ifproglang{pyret}{
 [cols="^.^1,^.^1,^.^1,^.^1", stripes="none"]
 |===
 
@@ -24,6 +25,19 @@
 | 1 test passed, 3 tests failed
 
 |===
+}
+
+@ifproglang{wescheme}{
+[cols="^.^1,^.^1,^.^1,^.^1", stripes="none"]
+|===
+
+| All examples pass
+| 3 examples pass, 1 fails
+| 2 examples pass, 2 fail
+| 1 example passes, 3 fail
+
+|===
+}
 
 @n Explain how you made your prediction (above). @fitb{}{}
 
@@ -47,25 +61,22 @@
 
 @n Are there any sets of values for `a`, `b`, and `c` that will cause example 1 or example 2 to fail? If so, list them here: @fitb{}{@ifsoln{No.}}
 
-@n Are any of the examples true *every time*, no matter what values we use for `a` and `b`? If so, which ones? @fitb{}{@ifsoln{No.}}
+@n Are any of the examples true *every time*, no matter what values we use for `a`, `b`, and `c`? If so, which ones? @fitb{}{@ifsoln{No.}}
 
-@n Are any of the examples true *some of the time*, depending on what values we use for `a` and `b`? If so, which ones? @fitb{}{@ifsoln{Yes, examples 3 and 4.}}
+@n Are any of the examples true *some of the time*, depending on what values we use for `a`, `b`, and `c`? If so, which ones? @fitb{}{@ifsoln{Yes, examples 3 and 4.}}
 
-@n Deena and Marcus want to edit the code of their starter file in their Definitions Window so that when they hit "Run", all four tests pass. They each have a different idea.
+@n Deena wants to edit the starter file's code so that when she hits "Run", all four tests pass. She suggests changing all the values of the variables so that `a`, `b`, and `c` are each equal to zero. Do you agree with her idea? _Before deciding, feel free to test out the idea!_ Explain. @fitb{}{}
 
-- Marcus suggests leaving `a`, `b`, and `c` how they are (equal to 1) and instead changing the `true` in line 17 to say `false`.
-- Deena thinks they should change the values of the variables so that `a`, `b`, and `c` are each equal to zero.
-
-Who do you agree with? _Before deciding, feel free to test out Marcus's idea and Deena's idea._ @fitb{10em}{} Explain. @fitb{}{}
-
-@fitb{}{@ifsoln{Marcus's idea will work, but Deena's will not. When we test Deena's idea, examples 1, 2, and 3 pass, but example 4 fails }}
+@fitb{}{@ifsoln{Deena's idea will not. When we test Deena's idea, examples 1, 2, and 3 pass, but example 4 fails }}
 
 @fitb{}{@ifsoln{because we cannot divide by zero.}}
 
 @fitb{}{}
 
-@star Janae dislikes Marcus's solution. She points to his code on line 17 and says, "This example is "false", so it has to be *wrong*. We can't leave it." How would you respond? @fitb{}{@ifsoln{Boolean-producing functions _should sometimes return false_! Just because an expression produces `false`}}
+@star Can you think of any values for `a`, `b`, and `c` that will result in all four tests passing? @fitb{}{}
 
-@fitb{}{does not mean that it is somehow _incorrect_.}
+@fitb{}{}
+
+@fitb{}{}
 
 

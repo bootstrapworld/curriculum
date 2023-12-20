@@ -805,15 +805,21 @@ var EarlyMath = {
    "variables-code": {
     "title": "Variables & the Commutative Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1s2Yiq452nDUcwYiTkdn2YHCC0fIV1VzQ&v=78aeaeb"
-    }
+      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
+    },
+    "wescheme": {
+     "url": "https://www.wescheme.org/view?publicId=iP1f3ZH2ki"
+   }
   },
    "variables-code2": {
     "title": "Variables & the Associative Property Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
-    }
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=S1vWZ2AHlv"
   }
+ }
 }
 
 
