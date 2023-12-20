@@ -44,7 +44,7 @@ Students are given a scaffolded activity that forces them to use the output of o
 
 === Launch
 @teacher{
-- Divide students into groups of 3 and distribute a set of @handout{function-cards.adoc} to each group. __(If you're teaching remotely you can use the @link{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Desmos version of our Function Cards} instead.)__ 
+- Divide students into groups of 3 and distribute a set of @handout{function-cards.adoc} to each group. __(If you're teaching remotely you can use the @link{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Desmos version of our Function Cards} instead.)__
 - Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficult). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
 - Have students practice reading contracts by asking them questions about one or two of these cards.
 }
@@ -67,13 +67,13 @@ And, if we composed `add6` `4` with `double` _and_ with `half`? _We'd get 10._
 - You will need to use some functions more than once, and that's okay!
 }
 
-Give students time to experiment with this! 
+Give students time to experiment with this!
 
 @teacher{Make the activity more challenging:
 
 * ask students to find the shortest path from start to end, using the smallest number of compositions.
 
-Other ways to play: Show students a starting number and an ending number and... 
+Other ways to play: Show students a starting number and an ending number and...
 
 * _ask them to give a card back._
 * _ask them which cards are the most valuable._
@@ -82,54 +82,6 @@ Other ways to play: Show students a starting number and an ending number and...
 
 === Synthesize
 If two groups come up with different compositions that achieve the same end result, have them share their ideas!
-
-== Diagramming Function Composition @duration{15 minutes}
-
-=== Overview
-The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
-
-=== Launch
-Three of the function cards we just used were for the functions `f`, `g` and `h`:
-
-* `f` multiplied its input by 3
-
-* `g` added six to its input
-
-* `h` subtracted one from its input
-
-We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
-
-We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
-
-[cols="^1,^2", options="header", stripes="none"]
-|===
-
-| Function Composition
-| Order of Operations
-| @show{(coe `(f (g (h x))))}
-| @show{(coe `(* 3 (+ (- x 1) 6)))}
-|===
-
-The circles show us that in order to evaluate @math{f(g(h(4))))}
-
-- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
-- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
-- Then we would evaluate @math{f(9)}, tripling `9` to get `27`
-
-=== Investigate
-
-@lesson-instruction{
-Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions. 
-}
-
-More practice is available on @opt-printable-exercise{function-comp-matching.adoc} and @opt-printable-exercise{diagramming-function-composition-2.adoc}.
-
-=== Synthesize
-
-@lesson-instruction{
-* Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? Why or why not?
-** _No, they do not. Order matters!_
-}
 
 == Composing Functions in Code @duration{20 minutes}
 
