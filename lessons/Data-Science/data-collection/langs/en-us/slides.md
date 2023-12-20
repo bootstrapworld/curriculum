@@ -171,7 +171,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 @image{images/format.png}
 
-- **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions B and C might be good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
+- **Question Format** - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and B might be good candidates for dropdowns. Question B is especially bad, because it allows respondents to select multiple grades!
 
 @slidebreak
 {layout="LaunchC"}
@@ -187,7 +187,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 
 @image{images/validate.png} 
 
-- **Adding Validation** - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. You can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. 
+- **Adding Validation** - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. You can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions C and D would benefit from some validation. 
 
 @image{images/validation.png, 600}
 
