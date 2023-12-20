@@ -90,6 +90,27 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.text = curr_slide.text .. c
       end
       beginning_of_line_p = true
+    elseif c == '@' and not inside_css_p then
+      beginning_of_line_p = false
+      local directive = read_word(i)
+      if directive == 'scrub' or directive == 'ifnotslide' then
+        read_group(i, directive)
+      elseif directive == 'slidebreak' then
+        if curr_slide.text ~= '' then
+          set_imageorientation(curr_slide)
+          slides[#slides + 1] = curr_slide
+        end
+        curr_slide = newslide()
+        curr_slide.section = 'Repeat'
+        curr_slide.header = 'SLIDE BREAK'
+      else
+        if directive == 'image' then
+          curr_slide.numimages = curr_slide.numimages + 1
+        elseif directive == 'center' then
+          curr_slide.containscenter = true
+        end
+        curr_slide.text = curr_slide.text .. c .. directive
+      end
     elseif beginning_of_line_p then
       beginning_of_line_p = false
       if c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
@@ -155,25 +176,6 @@ local function get_slides(lsn_plan_adoc_file)
       end
     elseif inside_css_p then
       --noop
-    elseif c == '@' then
-      local directive = read_word(i)
-      if directive == 'scrub' or directive == 'ifnotslide' then
-        read_group(i, directive)
-      elseif directive == 'slidebreak' then
-        if curr_slide.text ~= '' then
-          set_imageorientation(curr_slide)
-          slides[#slides + 1] = curr_slide
-        end
-        curr_slide = newslide()
-        curr_slide.header = directive
-      else
-        if directive == 'image' then
-          curr_slide.numimages = curr_slide.numimages + 1
-        elseif directive == 'center' then
-          curr_slide.containscenter = true
-        end
-        curr_slide.text = curr_slide.text .. c .. directive
-      end
     else
       curr_slide.text = curr_slide.text .. c
     end
@@ -209,12 +211,11 @@ local function make_slides_file(lplan_file, slides_file)
       end
     else
       if slide.section == 'Repeat' then slide.section = curr_section end
-      -- print('level = ' .. slide.level .. '; header = ' .. tostring(slide.header))
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
       elseif slide.level == 2 and slide.section then
         o:write('@slidebreak\n')
-        o:write('{layout="', slide.section, slide.imageorientation, slide.suffix, '"}\n')
+        o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
         o:write('# ', curr_header, '\n\n')
         o:write(slide.text)
       end
