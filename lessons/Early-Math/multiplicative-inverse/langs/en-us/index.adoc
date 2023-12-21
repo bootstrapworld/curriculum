@@ -189,3 +189,68 @@ Scan each expression to determine the simplest solving strategy, then compute me
 - Do you think the Order of Operations is universal? Why or why not?
 _Yes, there is a basic agreed upon order across countries, but numerous differences exist within tiers and how they are described._
 - Can you think of any other examples - they can be math-related or not! - of when you thought there was just one way to do something... and then learned that you were wrong?
+
+
+== Programming Exploration: The Multiplicative Inverse
+
+=== Overview
+
+Students apply their knowledge of examples in @proglang to think about multiplication and division as inverse operations.
+
+=== Launch
+
+@lesson-instruction{
+- Open the @starter-file{multiplicative-inverse}, but *do not click "Run" yet!*
+- Let's predict! Complete questions q on @printable-exercise{examples-multiplicative.adoc}.
+- Let's share out some of our Noticings and Wonderings.
+}
+
+@slidebreak
+
+Here are some common Noticings. Is there anything on this list that you _didn't_ notice?
+
+- Sections 1 and 2 each include five examples.
+- Some words are in bold.
+- Some words are in different colors and have @ifproglang{pyret}{hashes}@ifproglang{wescheme}{semicolons} in front of them.
+@ifproglang{pyret}{
+- The examples end with `end`.}
+
+@slidebreak
+
+@lesson-point{Comments let programmers write notes.}
+
+Lines and lines of code can be difficult to read! Sometimes programmers want to write down their thinking, or leave notes to help others understand what the code is doing. That's what @vocab{comments} are for: a @ifproglang{pyret}{hash}@ifproglang{wescheme}{semicolon} at the start of a line tells the computer that the rest of the line is a @vocab{comment} instead of code. To make comments stand out, they are colored @ifproglang{pyret}{dark orange}@ifproglang{wescheme}{purple}.
+
+The comments in lines 2, 14, and 26 are used to break up the code into sections that make the starter file easier for users to interpret.
+
+@slidebreak
+
+@lesson-point{Examples let programmers test their code.}
+
+Sometimes a comment isn't enough. A programmer might want to write down their thoughts so _that the computer can test their thinking_. These are called @vocab{examples}.
+
+Take a look at the first _examples block_ (lines 4-12). We start @ifproglang{pyret}{by typing `examples:`, then} writing one or more _examples_ of how we want some code to work@ifproglang{pyret}{ before closing with with `end`}.@ifproglang{pyret}{ Notice that all of the examples are indented slightly, grouping them together between the bolded words.} When we click "Run", @proglang will test each of our examples, and report back which ones are correct and which ones are not.
+
+@slidebreak
+
+@lesson-instruction{
+- Return to your starter file and click "Run".
+- With your partner, respond to questions 2 through 3 on @printable-exercise{examples-additive.adoc}.
+}
+
+@teacher{Debrief with students to ensure that they are looking at the messages that appear in @proglang. This activity not only provides practice thinking about the additive inverse; it also gives students exposure to tests - bits of code used to verify that code is working as we would expect. Examples and tests are widely used in programming! We explore examples in greater depth in @lesson-link{functions-examples-definitions}.}
+
+=== Investigate
+
+For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples!
+
+@lesson-instruction{With your partner, complete @printable-exercise{examples-additive.adoc}.}
+
+@teacher{@optional If you would like to offer students additional practice with the additive inverse in @proglang, two optional activities include @opt-printable-exercise{are-they-identical.adoc} and @opt-printable-exercise{writing-equivalent-code-additive.adoc}.}
+
+
+=== Synthesize
+
+- Using @proglang allows us to evaluate arithmetic expressions easily and efficiently. In your own words, describe _how_ you tested the equivalence of different expression - and how you interpreted the results that @proglang produced.
+- In @proglang, what does it mean for a test to pass? What does it mean for a test to fail?
+- What did this programming exploration teach you about the additive inverse?
