@@ -817,7 +817,7 @@ var EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1K1j4DDRAVKP0hZKGbAOd-qLvC8Y0ocDq&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
     }
   },
     "multiplicative-inverse-2": {
@@ -826,7 +826,7 @@ var EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
     }
   },
 }
