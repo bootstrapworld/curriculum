@@ -818,6 +818,15 @@ var EarlyMath = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
     }
+  },
+  "additive-inverse": {
+    "title": "Additive Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+    }
   }
 }
 
