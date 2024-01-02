@@ -814,7 +814,7 @@ var EarlyMath = {
   "multiplicative-inverse": {
     "title": "Multiplicative Inverse Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1K1j4DDRAVKP0hZKGbAOd-qLvC8Y0ocDq&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4&v=78aeaeb"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
