@@ -76,7 +76,7 @@ var Core = {
   "boolean": {
     "title": "Boolean Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz&v=22f3b65"
+      "url": "https://code.pyret.org/editor#share=1DTNdiyiqobjoYS8AGVyM3Np_VRjaP8oz"
     },
       "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FLFCW7RX7lMYg3ynZmPOw%2Ffile.json"
@@ -166,7 +166,7 @@ var GameBasics = {
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Y0twOEdXPh15XcdjG_GGSmBIjkctfCj3&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1Y0twOEdXPh15XcdjG_GGSmBIjkctfCj3"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
@@ -292,7 +292,7 @@ var MoreDS = {
   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS"
     }
   },
   "grouped-samples": {
@@ -307,7 +307,7 @@ var MoreDS = {
   "hair": {
     "title": "Hair Color Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc"
     }
   },
    "height": {
@@ -796,7 +796,7 @@ var EarlyMath = {
   "comm-and-assoc": {
     "title": "Commutativity and Associativity Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
@@ -805,12 +805,30 @@ var EarlyMath = {
   "additive-inverse": {
     "title": "Additive Inverse Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
     }
-  }
+  },
+  "multiplicative-inverse": {
+    "title": "Multiplicative Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
+    }
+  },
+    "multiplicative-inverse-2": {
+    "title": "Multiplicative Inverse Starter File 2",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+    }
+  },
 }
 
 
@@ -829,7 +847,7 @@ var Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh&v=4d870d2"
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
