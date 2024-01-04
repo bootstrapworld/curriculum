@@ -210,7 +210,7 @@ Most survey tools include advanced options to help Data Scientists get data that
 <!--
 Project Option: Designing a Survey
 
-In this project, students come up with a research question and @opt-project{survey-design.adoc, rubric-survey-design.adoc} to gather data to answer it. They exchange surveys and try to "hack" each other's study with garbage data. Teachers can have their students import the resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they've already learned.
+In this project, students come up with a research question and @lesson-link{project-design-a-survey} to gather data to answer it. They exchange surveys and try to "hack" each other's study with garbage data. Teachers can have their students import the resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they've already learned.
 
 Finally, this project can also be used to support __original data collection__ for the final research paper.
 -->
@@ -219,8 +219,7 @@ Finally, this project can also be used to support __original data collection__ f
 {layout="Supplemental"}
 # Additional Practice
 
-- @opt-project{survey-design.adoc, rubric-survey-design.adoc}
-
+- @lesson-link{design-a-survey}
 - If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @opt-online-exercise{https://www.nytimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.
 
 <!--
