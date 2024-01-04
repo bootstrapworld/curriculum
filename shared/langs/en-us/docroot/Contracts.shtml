@@ -77,6 +77,10 @@
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
     function buildTable() {
+      if(pathway && pathway.includes("hour-of-code")) {
+        throw "Pathway is 'hour-of-code', which has no contracts. Terminating.";
+      }
+
       // If we're in a pathway, add it to the title
       if(pathway) {
         const h1 = document.querySelector('#header h1');
@@ -116,6 +120,7 @@
       
       const table = document.getElementById('contracts');
       const prefix = (proglang == "wescheme")? "; " : "# ";
+
       contracts
         .forEach(c => {
           // build the domain and example

@@ -361,10 +361,10 @@
                                                               x #:asciidoc? asciidoc?)))]
                                      [("frac") (let* ([nu (read-mathjax-token i)]
                                                       [de (read-mathjax-token i)])
-                                                 (display (math-superscript nu) o)
+                                                 (display (math-superscript nu #:asciidoc? asciidoc?) o)
                                                  ; (display "⁄" o)
                                                  (display "/" o)
-                                                 (math-subscript de))]
+                                                 (math-subscript de #:asciidoc? asciidoc?))]
                                      [("overline") (let ([dec (read-mathjax-token i)])
                                                      (enclose-span ".overbar"
                                                        (math-unicode-if-possible
