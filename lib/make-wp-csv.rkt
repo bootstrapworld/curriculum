@@ -13,9 +13,9 @@
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
-(define *lesson-csv-file* "lessons.csv")
-(define *page-csv-file* "xyz-pages.csv")
-(define *solution-page-csv-file* "xyz-solution-pages.csv")
+(define *lesson-csv-file* (build-path *dist-en-us* "lessons.csv"))
+(define *page-csv-file* (build-path *dist-en-us* "xyz-pages.csv"))
+(define *solution-page-csv-file* (build-path *dist-en-us* "xyz-solution-pages.csv"))
 
 (define (string->uniqid s)
   (when (path? s)
