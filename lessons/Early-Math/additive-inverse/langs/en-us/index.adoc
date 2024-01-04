@@ -28,7 +28,7 @@
 |
 * This lesson is all about __mathematical flexibility__, and may challenge preexisting ideas about arithmetic. For students who've had a mostly procedural introduction to mathematics - or who have high math anxiety - the flexibility introduced by this lesson can be intimidating!
 * Embrace an open mind and expect the same of your students, and be attentive to their emotional response as the lesson progresses. If students are getting anxious, they will not be able to concentrate and focus on the content.
-* There is no expectation that they will master operations with integers. Rather, the lesson is designed to get students thinking about how every number has an additive inverse.
+* There is no expectation that students will master operations with integers. Rather, the lesson is designed to get students thinking about how every number has an additive inverse.
 |===
 
 == The Additive Inverse Property @duration{10 minutes}
@@ -41,20 +41,25 @@ Students discover the Additive Inverse Property, which tells us that adding a nu
 
 We’ve learned that the @vocab{Commutative Property} and @vocab{Associative Property} apply to addition... but not division. What if there was a way to rewrite subtraction as addition? Then we could apply the Commutative and Associative Properties to subtraction expressions, too! Let’s explore this idea.
 
-@teacher{Draw a two-column table on the board to record student responses. Label the left-hand side "Starting Value," and label the right-hand side "?" (See example below.)}
 
 @slidebreak
 
+I'm going to draw a two-column table on the board. I'm labelling the left-hand side "Starting Value," and I'm labelling the right-hand side "Additive Inverse".
+
+I'm going to write a number in the left-hand column. You are going to tell me what value I should add to that number, to get a sum of zero. I'll record your response in the right-hand column.
+
+@table{
 [cols="^1,^1", options="header"]
 |===
-| Starting Values		| ?
+| Starting Value		| Additive Inverse
 | @vspace{3ex}			|
 |===
+}
+
+@slidebreak
 
 
 @QandA{
-I'm going to write a number in the left-hand column. You are going to tell me what value I should _add_ to that number, to get a sum of zero. I'll record your response in the right-hand column.
-
 @Q{The first number is @math{5}. What do I need to add to @math{5} to get @math{0}?}
 @A{@math{-5}. If this is students' first exposure to negative numbers, consider modeling a few examples.}
 
@@ -165,9 +170,7 @@ Did you work from left to right to arrive your result? This solving strategy can
 
 *Is it essential to solve from left to right?*
 
-@teacher{
-Ask if anyone opted to subtract _before_ adding. If so, invite them to share their method and then invite other students to weigh in.
-}
+@teacher{Ask if anyone opted to subtract _before_ adding. If so, invite them to share their method and then invite other students to weigh in.}
 
 Evaluate the Circle of Evaluation below. Is it equivalent to the previous Circle of Evaluation?
 
@@ -220,3 +223,68 @@ Scan each problem to identify any additive inverses, then solve using mental com
 - Did you like this new approach, or do you prefer solving left to right?
 - How would you explain to another student why they do _not_ always need to solve from left to right when evaluating expressions with addition and subtraction.
 - What are some advantages of solving left to right? What are some disadvantages?
+
+
+== Programming Exploration: The Additive Inverse
+
+=== Overview
+
+Students learn about examples in @proglang, and use their new knowledge to think about addition and subtraction as inverse operations.
+
+=== Launch
+
+@lesson-instruction{
+- Open the @starter-file{additive-inverse}, but *do not click "Run" yet!*
+- On @printable-exercise{examples-additive.adoc}, record what you Notice and what you Wonder about the starter file.
+- Let's share out some of our Noticings and Wonderings.
+}
+
+@slidebreak
+
+Here are some common Noticings. Is there anything on this list that you _didn't_ notice?
+
+- Sections 1 and 2 each include five examples.
+- Some words are in bold.
+- Some words are in different colors and have @ifproglang{pyret}{hashes}@ifproglang{wescheme}{semicolons} in front of them.
+@ifproglang{pyret}{
+- The examples end with `end`.}
+
+@slidebreak
+
+@lesson-point{Comments let programmers write notes.}
+
+Lines and lines of code can be difficult to read! Sometimes programmers want to write down their thinking, or leave notes to help others understand what the code is doing. That's what @vocab{comments} are for: a @ifproglang{pyret}{hash}@ifproglang{wescheme}{semicolon} at the start of a line tells the computer that the rest of the line is a @vocab{comment} instead of code. To make comments stand out, they are colored @ifproglang{pyret}{dark orange}@ifproglang{wescheme}{purple}.
+
+The comments in lines 2, 14, and 26 are used to break up the code into sections that make the starter file easier for users to interpret.
+
+@slidebreak
+
+@lesson-point{Examples let programmers test their code.}
+
+Sometimes a comment isn't enough. A programmer might want to write down their thoughts so _that the computer can test their thinking_. These are called @vocab{examples}.
+
+Take a look at the first _examples block_ (lines 4-12). We start @ifproglang{pyret}{by typing `examples:`, then} writing one or more _examples_ of how we want some code to work@ifproglang{pyret}{ before closing with with `end`}.@ifproglang{pyret}{ Notice that all of the examples are indented slightly, grouping them together between the bolded words.} When we click "Run", @proglang will test each of our examples, and report back which ones are correct and which ones are not.
+
+@slidebreak
+
+@lesson-instruction{
+- Return to your starter file and click "Run".
+- With your partner, respond to questions 2 through 3 on @printable-exercise{examples-additive.adoc}.
+}
+
+@teacher{Debrief with students to ensure that they are looking at the messages that appear in @proglang. This activity not only provides practice thinking about the additive inverse; it also gives students exposure to tests - bits of code used to verify that code is working as we would expect. Examples and tests are widely used in programming! We explore examples in greater depth in @lesson-link{functions-examples-definitions}.}
+
+=== Investigate
+
+For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples!
+
+@lesson-instruction{With your partner, complete @printable-exercise{examples-additive.adoc}.}
+
+@teacher{@optional If you would like to offer students additional practice with the additive inverse in @proglang, two optional activities include @opt-printable-exercise{are-they-identical.adoc} and @opt-printable-exercise{writing-equivalent-code-additive.adoc}.}
+
+
+=== Synthesize
+
+- Using @proglang allows us to evaluate arithmetic expressions easily and efficiently. In your own words, describe _how_ you tested the equivalence of different expression - and how you interpreted the results that @proglang produced.
+- In @proglang, what does it mean for a test to pass? What does it mean for a test to fail?
+- What did this programming exploration teach you about the additive inverse?

@@ -199,12 +199,12 @@
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
 
-(define (read-space i)
+(define (skip-1-newline-if-possible i o)
   (let loop ()
     (let ([c (peek-char i)])
       (cond [(eof-object? c) #f]
-            [(or (char=? c #\space) (char=? c #\tab)) (read-char i) (loop)]
-            [(or (char=? c #\newline)) (read-char i) #t]
+            [(or (char=? c #\space) (char=? c #\tab)) (display (read-char i) o) (loop)]
+            [(char=? c #\newline) (read-char i) #t]
             [else #f]))))
 
 (define (assoc-glossary term)
@@ -1734,12 +1734,12 @@
                                       [else ((if contains-nl? enclose-div enclose-span)
                                              ".indentedpara" converted-text)]) o))]
                            [(string=? directive "ifproglang")
-                            (let ([proglang (read-group i directive)])
+                            (let* ([proglang (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
                               (cond [(string-ci=? proglang *proglang*)
-                                     (display-begin-span #f o)]
-                                    [else
-                                      (read-group i directive)
-                                      (set! possible-beginning-of-line? (read-space i))]))]
+                                     (expand-directives:string->port text o)]
+                                    [else (set! possible-beginning-of-line?
+                                            (skip-1-newline-if-possible i o))]))]
 
                            [(string=? directive "ifsoln")
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1755,7 +1755,8 @@
                                                     "\n--\n\n")]
                                                 [else (enclose-span ".solution" converted-text)])
                                           o))]
-                                    [else (set! possible-beginning-of-line? (read-space i))]))]
+                                    [else (set! possible-beginning-of-line?
+                                            (skip-1-newline-if-possible i o))]))]
 
                            [(string=? directive "ifsoln-choice")
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1781,7 +1782,8 @@
                                                    "\n--\n\n")]
                                                [else (enclose-span ".notsolution" converted-text)])
                                          o))]
-                                    [else (set! possible-beginning-of-line? (read-space i))]))]
+                                    [else (set! possible-beginning-of-line?
+                                            (skip-1-newline-if-possible i o))]))]
                            [(or (string=? directive "ifpathway")
                                 (string=? directive "ifnotpathway"))
                             (let ([pathways (read-commaed-group i directive read-group)]
@@ -2187,7 +2189,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
