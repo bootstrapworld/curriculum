@@ -339,18 +339,29 @@ The rules are simple:
 * Turn to @printable-exercise{pages/text-coe.adoc} and complete the Notice and Wonder section.
 }
 
-[cols="^4, ^.^1,^5", grid="none", stripes="none" frame="none"]
+@do{
+(define expd '(text 150 "Diego" "yellow"))
+(define exprd '(rotate 90 (text 150 "Diego" "yellow")))
+
+}
+
+_Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure._
+
+@vspace{1ex}
+
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===
 
 |We can start by generating the Diego image.
 |
 |And then use the `rotate` function to rotate it 90 degrees.
 
-| @show{(coe '(text "Diego" 150 "yellow"))}  | &rarr; 	| @show{(coe exp1)}
+| @show{(coe expd)}  | &rarr; 	| @show{(coe exprd)}
 
-| @show{(code '(text "Diego" 150 "yellow"))} | 			| @show{(code exp1)}
+| @show{(code expd)} | 			| @show{(code exprd)}
 
 |===
+
 
 @lesson-instruction{
 What do you Notice? What do you Wonder?
