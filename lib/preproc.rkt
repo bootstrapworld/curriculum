@@ -118,6 +118,8 @@
 
 (define *definitions* '())
 
+(define *local-scheme-definitions* '())
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -318,6 +320,20 @@
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
   (eval arg *adoc-namespace*))
+
+(define (massage-arg-def arg)
+  (when (and (list? arg) (eq? (car arg) 'define) (> (length arg) 2))
+    (let ([x (cadr arg)])
+      (when (list? x) (set! x (car x)))
+      (set! *local-scheme-definitions* (cons x *local-scheme-definitions*))))
+  (massage-arg arg))
+
+(define (erase-local-scheme-definitions)
+  (for ([n *local-scheme-definitions*])
+    ; (printf "erasing ~a\n" n)
+    (namespace-undefine-variable! n *adoc-namespace*)
+    ; (eval `(define ,n "NOT A VALID DEFINITION") *adoc-namespace*)
+    ))
 
 (define (rearrange-args args)
   ;(printf "doing rearrange-args ~s\n" args)
@@ -1311,6 +1327,7 @@
   (set! *first-level-section-titles* '())
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
+  (set! *local-scheme-definitions* '())
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1652,7 +1669,7 @@
                             ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
-                              (for-each massage-arg exprs))]
+                              (for-each massage-arg-def exprs))]
                            [(string=? directive "show")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
@@ -2297,6 +2314,7 @@
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
+      (erase-local-scheme-definitions)
       )
 
   ;(printf "done preproc-adoc-file ~s\n\n" in-file)
