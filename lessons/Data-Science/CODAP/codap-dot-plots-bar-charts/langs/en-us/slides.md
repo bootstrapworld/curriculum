@@ -108,7 +108,7 @@ Bar charts are mostly used to _display categorical columns_.
 While bars in bar charts should follow some logical order (alphabetical, small-medium-large, etc), they can technically be placed in _any_ order, without changing the meaning of the chart.
 
 <!--
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @opt-project{infographics.adoc, infographic-rubric.adoc} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @lesson-link{project-infographic} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @link{pages/infographic-rubric.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
 -->
 
 @slidebreak
