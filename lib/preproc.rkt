@@ -2222,7 +2222,6 @@
                 (for ([x xx])
                   (fprintf o "\n** ~a\n\n" (second x)))
                 )
-
               )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
@@ -2231,12 +2230,14 @@
             ; have been turned into starter files
             (for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
-
             ; SLIDES
             (display-lesson-slides o)
             ; LESSON PLAN
-            (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n")
-
+            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
+            ; CONTRACTS REFERENCE
+            (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
+              (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
+            ; STATUS BAR FOR PRINTING PDFS
             (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
 
             )
