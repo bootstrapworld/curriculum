@@ -2245,6 +2245,16 @@
         (call-with-output-file (path-replace-extension *out-file* "-extra-opt-mat.asc")
           (lambda (o)
 
+            ; OPTIONAL PRINTED PAGES
+            (unless (empty? *opt-printable-exercise-links*)
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
+              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(true)[ ]#")
+              (for ([x (reverse *opt-printable-exercise-links*)])
+                (fprintf o "\n** ~a\n\n" x))
+            )
+            ; OPTIONAL STARTER FILES
+            (for ([x (reverse *opt-starter-file-links*)])
+              (fprintf o "\n* ~a\n\n" x))
             ; OPTIONAL PROJECTS
             (let ([opt-proj-links (reverse *opt-project-links*)])
               (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
@@ -2255,17 +2265,6 @@
                 #:exists 'replace)
             (for ([x opt-proj-links])
               (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
-            ; OPTIONAL PRINTED PAGES
-            (unless (empty? *opt-printable-exercise-links*)
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
-              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(true)[ ]#")
-              (for ([x (reverse *opt-printable-exercise-links*)])
-                (fprintf o "\n** ~a\n\n" x))
-
-            )
-            ; OPTIONAL STARTER FILES
-            (for ([x (reverse *opt-starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
