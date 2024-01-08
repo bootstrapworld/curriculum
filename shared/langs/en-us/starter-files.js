@@ -85,7 +85,7 @@ var Core = {
       "url": "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV"
     }
   },
-   "rocket-height": {
+  "rocket-height": {
     "title": "Rocket Height Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
@@ -95,6 +95,15 @@ var Core = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
+    }
+  },
+  "contractsDesmos": {
+    "title": "Matching Examples to Contracts and Definitions (Desmos)",
+    "pyret" : {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659871707142c469829daef9"
+    },
+    "wescheme" : {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c2928cbfcb303c21f4da2"
     }
   }
 }
