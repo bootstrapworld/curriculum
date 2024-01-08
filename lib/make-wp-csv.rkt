@@ -7,13 +7,13 @@
 
 (define *dist-en-us* "distribution/en-us")
 
-(define *season* "fall")
+(define *season* "spring")
 (define *year* (number->string (date-year (current-date))))
 
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
-(define *lesson-csv-file* (build-path *dist-en-us* "lessons.csv"))
+(define *csv-file* (build-path *dist-en-us* "lessons.csv"))
 
 (define (string->uniqid s)
   (when (path? s)
@@ -25,8 +25,24 @@
       0 15) 16))
 
 (define (escape-html s #:kill-newlines? [kill-newlines? #f])
-  (when kill-newlines? ;FIXME
+  (when kill-newlines?
     (set! s (regexp-replace* #rx"\n" s " ")))
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
+            (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)
+            ))
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.html\"" s
+            (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)
+            ))
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.html\"" s
+            (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)
+            ))
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*\\.js)\"" s
+            (format "src=\"/wp-content/themes/pro-child/js/~a/\\1\"" *season-year*)))
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*\\.css)\"" s
+            (format "href=\"/wp-content/themes/pro-child/css/~a/\\1\"" *season-year*)))
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*\\.png)\"" s
+            "src=\"/wp-content/uploads/lib-images/~a/\\1\""))
+
   (set! s (regexp-replace* #rx"\"" s "\"\""))
   s)
 
@@ -35,16 +51,15 @@
 
 (define (make-lesson-permalink f)
   (when (path? f) (set! f (path->string f)))
-  (format "/materials/lessons/~a~a/~a/"
-          *season* *year*
+  (format "/materials/lessons/~a/~a/"
+          *season-year*
           f))
 
 (define (make-page-permalink f pages)
   ; (printf "doing make-page-permalink ~a ~a\n" f pages)
   (when (path? f) (set! f (path->string f)))
-  (format "/materials/lessons/~a~a~a/~a/"
-          (if (string=? pages "pages") "" "-solution")
-          *season* *year*
+  (format "/materials/lessons/~a/~a/"
+          *season-year*
           f))
 
 (define (convert-lessons o)
@@ -89,7 +104,7 @@
                   (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
-                           (make-page-permalink lesson/p pages) ; permalink
+                           (make-lesson-permalink lesson/p) ; permalink
                            (string->uniqid lesson-dir) ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
@@ -105,13 +120,12 @@
 
 ; (printf "season = ~s; year = ~s\n" *season* *year*)
 
-(call-with-output-file *lesson-csv-file*
+(define *season-year* (format "~a~a" *season* *year*))
+
+(call-with-output-file *csv-file*
   (lambda (o)
     (fprintf o "ID,Title,Permalink,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
     (convert-lessons o)
     (convert-workbook-pages o)
     (convert-workbook-pages o #:pages "solution-pages"))
   #:exists 'replace)
-
-
-
