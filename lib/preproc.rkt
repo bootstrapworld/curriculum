@@ -2130,7 +2130,7 @@
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
                 (fprintf o (hash-ref *common-text* 'acknowledgment))
-                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
+                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/images/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
                 (fprintf o "~a " *copyright-name*)
                 (fprintf o (hash-ref *common-text* 'copyright))
                 (fprintf o "\n--\n")
