@@ -829,6 +829,15 @@ var EarlyMath = {
       "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
     }
   },
+  "scale-rotate":{
+  "title": "Identity Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+    }
+  }
 }
 
 
