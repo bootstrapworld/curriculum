@@ -13,7 +13,7 @@
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
-(define *csv-file* (build-path *dist-en-us* "lessons.csv"))
+(define *csv-file* (build-path *dist-en-us* "curriculum.csv"))
 
 (define (string->uniqid s)
   (when (path? s)
@@ -36,15 +36,17 @@
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.html\"" s
             (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)
             ))
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*\\.js)\"" s
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
             (format "src=\"/wp-content/themes/pro-child/js/~a/\\1\"" *season-year*)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*\\.css)\"" s
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
             (format "href=\"/wp-content/themes/pro-child/css/~a/\\1\"" *season-year*)))
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*\\.png)\"" s
-            "src=\"/wp-content/uploads/lib-images/~a/\\1\""))
-
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
+            "src=\"/wp-content/uploads/lib-images/\\1\""))
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
+            "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
   (set! s (regexp-replace* #rx"\"" s "\"\""))
   s)
+
 
 (define (escaped-file-content f #:kill-newlines? [kill-newlines? #f])
   (escape-html (file->string f) #:kill-newlines? kill-newlines?))
