@@ -628,6 +628,9 @@
                                    [exprs (string-to-form (format "(math '~a)" text))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
+                           [(string=? directive "do")
+                            (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                              (for-each massage-arg exprs))]
                            [(string=? directive "show")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
