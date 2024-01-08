@@ -81,10 +81,11 @@ Sometimes, we will encounter the Identity Property in more sneaky forms!
 @QandA{
 How does the Circle of Evaluation below illustrate the Identity Property?
 
-@center{@show{(coe '(+ 27 (- 8 8)))}}
-
-A{In the Circle, _zero_ (or @math{8 - 8}) is being added to @math{27}!}
+@A{In the Circle, _zero_ (or @math{8 - 8}) is being added to @math{27}!}
 }
+
+@show{(coe '(+ 27 (- 8 8)))}
+
 
 @slidebreak
 
@@ -177,12 +178,22 @@ Let's say we have a number, `w`. The Identity Property tells us that we can mult
 Let's say we enter @show{(code '(scale 3 (triangle 30 "solid" "purple")))}. We can expect @proglang to produce a 90-pixel solid purple triangle. The original image's size was _tripled_.
 
 @lesson-instruction{
-Use @starter-file{scale-rotate} to experiment with the `scale` function and complete @printable-exercise{scale-rotate-identity.adoc}
+Use @starter-file{scale-rotate} to experiment with the `scale` function and complete @printable-exercise{scale-rotate-identity.adoc} through question 5.
 }
-
-
 
 
 === Investigate
 
+According to the Identity Property, we can also add or subtract 0 from a number - and we get that same number back.
+
+Rotation transformations work similarly. Let's say we have a @proglang image of a dog. After we rotate it in a full circle around a center point, the image of the dog will look exactly the same as it did before the transformation. If we rotate the image just halfway, however, the transformed image will not be identical to the original.
+
+@lesson-instruction{
+ Complete @printable-exercise{scale-rotate-identity.adoc}.
+}
+
+
 === Synthesize
+
+- What did you discover? For what values do `scale` and `rotate` produce identical images?
+- In your own words, describe how `scale` and `rotate` help you understand the Identity Property.

@@ -832,10 +832,10 @@ var EarlyMath = {
   "scale-rotate":{
   "title": "Identity Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
+      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+      "url": "https://www.wescheme.org/view?publicId=EzqLq7wl8a"
     }
   }
 }
