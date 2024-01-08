@@ -14,8 +14,6 @@
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
 (define *lesson-csv-file* (build-path *dist-en-us* "lessons.csv"))
-(define *page-csv-file* (build-path *dist-en-us* "xyz-pages.csv"))
-(define *solution-page-csv-file* (build-path *dist-en-us* "xyz-solution-pages.csv"))
 
 (define (string->uniqid s)
   (when (path? s)
@@ -37,13 +35,16 @@
 
 (define (make-lesson-permalink f)
   (when (path? f) (set! f (path->string f)))
-  (format "https://bootstrap3dev.wpenginepowered.com/materials/lesson/~a-~a/~a/"
+  (format "/materials/lessons/~a~a/~a/"
           *season* *year*
           f))
 
-(define (make-page-permalink f)
+(define (make-page-permalink f pages)
+  ; (printf "doing make-page-permalink ~a ~a\n" f pages)
   (when (path? f) (set! f (path->string f)))
-  (format "https://bootstrap3dev.wpenginepowered.com/unit/~a/"
+  (format "/materials/lessons/~a~a~a/~a/"
+          (if (string=? pages "pages") "" "-solution")
+          *season* *year*
           f))
 
 (define (convert-lessons o)
@@ -51,23 +52,22 @@
     (let ([lesson-plan-file (path->string (build-path *lessons-dir* lesson-dir "index.shtml"))]
           [title-file (path->string (build-path *lessons-dir* lesson-dir ".cached/.index.titletxt"))])
       (when (and (file-exists? lesson-plan-file) (file-exists? title-file))
-        ;id, title, permalink, lesson-raw-code, lesson-categories, lesson-season
-        (fprintf o "~a,\"~a\",~a,\"~a\",,~a ~a\n"
-                 (string->uniqid lesson-plan-file)
-                 (string-trim (escaped-file-content title-file #:kill-newlines? #t))
-                 (make-lesson-permalink lesson-dir)
-                 (escaped-file-content lesson-plan-file)
-                 ;
-                 (string-titlecase *season*)
-                 *year*)))))
+        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
+        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+                 (string->uniqid lesson-plan-file) ;id
+                 (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
+                 (make-lesson-permalink lesson-dir) ;permalink
+                 "" ; parent
+                 (format "~a ~a" (string-titlecase *season*) *year*) ;season
+                 "" ; child categories
+                 (escaped-file-content lesson-plan-file) ; raw code
+                 )))))
 
 (define (convert-workbook-pages o #:pages [pages "pages"])
   ; (printf "doing convert-workbook-pages ~a\n" pages)
   (for ([lesson-dir (directory-list *lessons-dir*)])
     (let* ([lesson-dir-path (build-path *lessons-dir* lesson-dir)]
-           [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))]
-           [pages-dir (build-path lesson-dir "pages")]
-           [solution-pages-dir (build-path lesson-dir "solution-pages")])
+           [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
       (let ([pages-dir-path (build-path lesson-dir-path pages)])
         (when (directory-exists? pages-dir-path)
           (for ([p (directory-list pages-dir-path)])
@@ -75,7 +75,9 @@
             (set! p (path->string p))
             (when (regexp-match #rx"\\.html" p)
               ;id, title, permalink, lesson-parent, unit-raw-code
-              (let* ([q-p (build-path pages p)]
+              (let* ([p-base (regexp-replace #rx"\\.html" p "")]
+                     [lesson/p (format "~a/~a~a" lesson-dir p-base
+                                       (if (string=? pages "pages") "" "-solution"))]
                      [page-file (path->string (build-path pages-dir-path p))]
                      [page-title-file (path->string (build-path pages-dir-path ".cached"
                                                                 (string-append "."
@@ -83,12 +85,16 @@
                 ; (printf "page-title-file is ~a\n" page-title-file)
                 (when (file-exists? page-title-file)
                   ; (printf "going ahead with ~a\n" p)
-                  (fprintf o "~a,\"~a\",~a,\"a:1:{i:0;s:2:\"\"~a\"\";}\",\"~a\"\n"
-                           (string->uniqid q-p)
-                           (string-trim (escaped-file-content page-title-file #:kill-newlines? #t))
-                           (make-page-permalink q-p)
-                           (string->uniqid lesson-plan-file)
-                           (escaped-file-content page-file)))))))))))
+                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
+                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+                           (string->uniqid lesson/p) ;id
+                           (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
+                           (make-page-permalink lesson/p pages) ; permalink
+                           (string->uniqid lesson-dir) ; parent
+                           (format "~a ~a" (string-titlecase *season*) *year*) ;season
+                           (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
+                           (escaped-file-content page-file) ; raw code
+                           ))))))))))
 
 (let* ([cla (current-command-line-arguments)]
        [n (vector-length cla)])
@@ -99,13 +105,13 @@
 
 ; (printf "season = ~s; year = ~s\n" *season* *year*)
 
-(call-with-output-file *lesson-csv-file* convert-lessons
+(call-with-output-file *lesson-csv-file*
+  (lambda (o)
+    (fprintf o "ID,Title,Permalink,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
+    (convert-lessons o)
+    (convert-workbook-pages o)
+    (convert-workbook-pages o #:pages "solution-pages"))
   #:exists 'replace)
 
-(call-with-output-file *page-csv-file* convert-workbook-pages
-  #:exists 'replace)
 
-(call-with-output-file *solution-page-csv-file*
-  (lambda (o) (convert-workbook-pages o #:pages "solution-pages"))
-  #:exists 'replace)
 
