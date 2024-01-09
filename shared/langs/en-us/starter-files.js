@@ -432,6 +432,15 @@ var DSdesmos = {
     "codap":{
       "url": "https://teacher.desmos.com/activitybuilder/custom/65983aa243f27bc5de14513c"
     }
+  },
+  "correlations":{
+    "title": "Identifying Direction and Strength (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
+    },
+    "codap":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
+    }
   }
 }
 
