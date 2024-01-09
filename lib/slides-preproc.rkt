@@ -13,7 +13,7 @@
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed*
-  (cond [(truthy-getenv "EXPERIMENTAL") 0]
+  (cond [(truthy-getenv "EXPERIMENTAL") #f]
         [else #f]))
 
 (define *num-images-processed* 0)
