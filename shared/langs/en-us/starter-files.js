@@ -105,6 +105,24 @@ var Core = {
     "wescheme" : {
       "url": "https://teacher.desmos.com/activitybuilder/custom/659c2928cbfcb303c21f4da2"
     }
+  },
+  "functioncompDesmos": {
+    "title": "Function Composition Matching Activity (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b"
+    }
+  },
+  "functioncardsDesmos": {
+    "title": "Desmos version of our Function Cards",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d"
+    },
+    "wescheme": {
+        "url": "https://teacher.desmos.com/activitybuilder/custom/5f1e33ca178c797f87aa1c37"
+    }
   }
 }
 
