@@ -47,18 +47,11 @@
   (set! s (regexp-replace* #rx"\"" s "\"\""))
   s)
 
-
 (define (escaped-file-content f #:kill-newlines? [kill-newlines? #f])
   (escape-html (file->string f) #:kill-newlines? kill-newlines?))
 
 (define (make-lesson-permalink f)
-  (when (path? f) (set! f (path->string f)))
-  (format "/materials/lessons/~a/~a/"
-          *season-year*
-          f))
-
-(define (make-page-permalink f pages)
-  ; (printf "doing make-page-permalink ~a ~a\n" f pages)
+  ; (printf "doing make-lesson-permalink ~a\n" f)
   (when (path? f) (set! f (path->string f)))
   (format "/materials/lessons/~a/~a/"
           *season-year*
@@ -71,7 +64,7 @@
       (when (and (file-exists? lesson-plan-file) (file-exists? title-file))
         ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
         (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
-                 (string->uniqid lesson-plan-file) ;id
+                 (string->uniqid lesson-dir) ;id
                  (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
                  (make-lesson-permalink lesson-dir) ;permalink
                  "" ; parent
@@ -83,7 +76,8 @@
 (define (convert-workbook-pages o #:pages [pages "pages"])
   ; (printf "doing convert-workbook-pages ~a\n" pages)
   (for ([lesson-dir (directory-list *lessons-dir*)])
-    (let* ([lesson-dir-path (build-path *lessons-dir* lesson-dir)]
+    (let* ([lesson-id (string->uniqid lesson-dir)]
+           [lesson-dir-path (build-path *lessons-dir* lesson-dir)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
       (let ([pages-dir-path (build-path lesson-dir-path pages)])
         (when (directory-exists? pages-dir-path)
@@ -107,7 +101,7 @@
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            (make-lesson-permalink lesson/p) ; permalink
-                           (string->uniqid lesson-dir) ; parent
+                           lesson-id ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
                            (escaped-file-content page-file) ; raw code
