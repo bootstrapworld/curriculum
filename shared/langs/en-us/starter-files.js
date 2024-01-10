@@ -405,6 +405,18 @@ var MoreDS = {
   }
 }
 
+var DSdesmos = {
+  "boxplots":{
+    "title": "Box plot practice (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65983aa243f27bc5de14513c"
+    },
+    "codap":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65983aa243f27bc5de14513c"
+    }
+  }
+}
+
 var Flags = {
   "flags": {
     "title": "Flags Starter File",
@@ -895,6 +907,7 @@ var allStarterFiles = {
   ...DSBasics, 
   ...GameBasics, 
   ...MoreDS, 
+  ...DSdesmos,
   ...MoreAlg, 
   ...Alg2, 
   ...Reactive,

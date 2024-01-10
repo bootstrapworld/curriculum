@@ -13,7 +13,7 @@
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
 (define *max-images-processed*
-  (cond [(truthy-getenv "EXPERIMENTAL") 0]
+  (cond [(truthy-getenv "EXPERIMENTAL") #f]
         [else #f]))
 
 (define *num-images-processed* 0)
@@ -628,6 +628,9 @@
                                    [exprs (string-to-form (format "(math '~a)" text))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
+                           [(string=? directive "do")
+                            (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
+                              (for-each massage-arg exprs))]
                            [(string=? directive "show")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
