@@ -67,10 +67,10 @@ var Core = {
   "defining-values": {
     "title": "Defining Values Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1nHYxDhgOsbQ-jI7OMZLcgcTJ8HFxPWCL"
+      "url": "https://code.pyret.org/editor#share=18Y3sCev196YEbzSSzWj5XPrS_M_cVkza"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6"
+      "url": "https://www.wescheme.org/openEditor?publicId=4FgZs4PZp4"
     }
   },
   "boolean": {
