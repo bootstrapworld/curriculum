@@ -466,7 +466,7 @@ var Flags = {
   "flags-ak": {
     "title": "Alaskan Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1&v=78aeaeb"},
+      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1"},
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p"
     }
@@ -474,10 +474,10 @@ var Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1pi0API2gERKokehisGvg7717xaHHPEui"
+      "url": "https://code.pyret.org/editor#share=1_a7C_8YOfOuH1tRaKMcBMShpGFmgSPk_"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=Vl5yocVoU4"
+      "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"
     }
   },
   "flags-2": {
