@@ -21,12 +21,14 @@
   </style>
 
   <script type="text/javascript">
-    let {pathway, lessons, lesson} = getParams();
-    lessons = lessons || Object.keys(graph);
+    let {lesson} = getParams();
+    configureGraph(graph);
+    lessons = lesson? [lesson] : [...Object.keys(graph)];
     console.log('lessons are', lessons)
-    const glossary = computeTransitiveData(false,false,lessons).glossary;
-
     function populateGlossary() {
+      glossary = lessons.map(l => {console.log(l); return graph[l].glossary}).flat()
+        .reduce((acc, {vocab, description}) => acc.set(vocab,description), new Map());
+
       const parentDOM = document.getElementById('glossary');
 
       // sort words alphabetically, then add the appropriate DOM

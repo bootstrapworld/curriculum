@@ -1993,9 +1993,9 @@
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! *first-subsection-reached?* #t)
-                                  (when *lesson-plan*
-                                    (include-glossary o))]
+                                  (set! *first-subsection-reached?* #t)]
+                                  ;(when *lesson-plan*
+                                  ;  (include-glossary o))]
                                  [else #f])
                            (cond [*lesson*
                                    (display-section-markup i o)]
@@ -2232,9 +2232,11 @@
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
-            ; LESSON PLAN
-            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
             ; CONTRACTS REFERENCE
+            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
+            ; GLOSSARY REFERENCE
+            (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Glossary of Vocabulary Used in this Lesson]\n" *dist-root-dir* *lesson*)
+            ; LESSON PLAN
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
             ; STATUS BAR FOR PRINTING PDFS
