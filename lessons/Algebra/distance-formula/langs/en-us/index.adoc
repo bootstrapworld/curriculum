@@ -43,7 +43,7 @@
 * The distance formula is an excellent review of Circles of Evaluation. Have students work out the expression in small groups to foster discussion.
 
 | Preparation
-| This lesson includes a roleplay. In the roleplay students will move along a number line displayed on the board or on the floor. The numberline represents the x-axis in our game, which ranges from 0 to 640. 
+| This lesson includes a roleplay. In the roleplay students will move along a number line representing the x-axis in our game, which ranges from 0 to 640. Decide whether you will project, draw, or tape a number line on the board or floor.
 
 |===
 
@@ -96,7 +96,7 @@ It's almost fully-playable!
 @teacher{In the following activity, your students will role play two game characters moving across the screen.  Draw or project a "number line" on the floor or across a wall of your classroom as the backdrop for the roleplay.}
 
 @lesson-roleplay{
-This number line represents the x-axis in our game. I need two volunteers to represent our `DANGER` and `PLAYER` and come find a spot to stand along it. _Make sure students start far enough apart that they'll be able to take steps toward each other during the role play without touching._
+This number line represents the x-axis in our game. I need two volunteers to represent our `DANGER` and `PLAYER` and come find a spot to stand along it. _Make sure to stand far enough apart that you'll be able to take steps toward each other during the role play without touching._
 
 Each image in the game is located based on its center, in the case of a human, our location would probably be given by our belly buttons.  But the images in our game are much larger than their center points that locate them on the screen, so let's have our `DANGER` and `PLAYER` hold their arms out like a T to represent the full width of the images they represent.
 }
@@ -113,6 +113,7 @@ Each image in the game is located based on its center, in the case of a human, o
 @Q{What do you think would be the most straight forward way for us to program the computer to be able to determine that?}
 @A{Find the distance between the characters.}	
 @Q{How far apart are the `DANGER` and the `PLAYER`?}
+@A{Answers will be roleplay-dependent.}
 @Q{How did you figure that out?}
 @A{The goal is to illicit the response that students would subtract the smaller coordinate from the larger one (or subtract in any order and take the absolute value).}
 } 
@@ -125,6 +126,7 @@ Let's have our `DANGER` and `TARGET` each take a step toward each other.
 
 @QandA{
 @Q{How far apart are the `DANGER` and the `PLAYER` now?}
+@A{Answers will be roleplay-dependent.}
 @Q{Are our characters colliding now?}
 @A{No.}
 }
@@ -139,6 +141,7 @@ Let's have our `DANGER` and `TARGET` switch places.
 @Q{Are our characters colliding now?}
 @A{No.}
 @Q{How far apart are the `DANGER` and the `PLAYER`?}
+@A{Answers will be roleplay-dependent.}
 @Q{Did changing their positions change anything about how we calculated their distance?}
 @A{Point out that students always subtract the smaller number from the larger one, regardless of the character order!} 
 @A{Distance is always positive.}
@@ -290,7 +293,9 @@ Students extend their understanding of _distance_ from one dimension to two.
 We know that we can use the Pythagorean Theorem to find the hypotenuse of a triangle from the lengths of its legs. And we know that there are hidden right triangles connecting the characters in our game. Now we have to figure out how to apply what we know in our game code.
 
 @QandA{
-@Q{If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?}
+@Q{If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. 
+@centered-image{images/graph00to43.jpeg, 200}
+How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?}
 @A{We would add @math{3^2} and @math{4^2}, or 9 and 16, to get 25. The square root of 25 is 5, so the length of the hypotenuse is 5.}
 }
 
@@ -299,28 +304,60 @@ We know that we can use the Pythagorean Theorem to find the hypotenuse of a tria
 === Investigate
 
 @lesson-instruction{
-* Turn to @printable-exercise{distance-on-coordinate-plane.adoc} and look at how the `line-length` function is used in the code. See if you can figure out how to write the code for the second problem.
-* Then turn to @printable-exercise{distance-coe.adoc}. Convert the expression to a Circle of Evaluation, and then to code.
-* Then we'll make sure we really understand it all with @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points} by combining circles of evaluation, code, computation and a sketch on a graph.
+* With your partner, complete the reading code section of @printable-exercise{distance-on-coordinate-plane.adoc}.
+* When you're prepared to discuss how the `line-length` function is used in the code, seee if you can figure out how to write the code for the second problem.
 }
 
-For more practice writing code to generate the distance between two fixed points, complete @printable-exercise{pages/distance-from-game-coordinates.adoc}.
-@optional more practice can be found at @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}.
+@strategy{
+@span{.title}{Why line-length?}
+Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypotenuse is computed based on the distance in the x- and y-dimension.
 
-Debrief these pages - or have students pair-and-share - before moving on to writing the full distance function. Explain to students that all of the practice they've done so far today focused on a screenshot of a moment in time. With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them. *As we play our games, however, the characters are constantly changing locations!*
+Most math textbooks, however, show the distance formula without connecting back to that theorem.
+
+@center{  @math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}  }
+
+A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on!
+
+Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connect back to the @vocab{Pythagorean Theorem} itself.
+
+This effectively rewrites the distance formula as:
+
+@center{
+	@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
+}
+
+@QandA{
+@Q{What is `line-length` being used for in the code?}
+@A{To compute the horizontal distance between the x-coordinates of the 2 characters.}
+@A{To compute the vertical distance between the y-coordinates of the 2 characters.}
+}
+
+@lesson-instruction{
+* Turn to @printable-exercise{distance-coe.adoc}. Convert the expression to a Circle of Evaluation, and then to code.
+* Then complete @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points}. This page will ask you to draw circles of evaluation, write code, do computations and make a sketch on a graph to make sure you really understand what's happening.
+}
+
+@optional For more practice writing code to generate the distance between two fixed points, complete @printable-exercise{pages/distance-from-game-coordinates.adoc} and  @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}.
 
 @lesson-point{
-In order to calculate the distance between two objects whose locations are constantly changing, we need to use variables!
+All of the distance work we've done so far has been focused on a screenshot of a moment in time.
+}
+
+With the game stopped in that moment, we knew either the exact location of our characters or the exact distances between them. But, as we play our games, the characters are constantly changing locations.
+
+@lesson-point{
+To calculate the distance between objects whose locations are constantly changing, we need to use variables!
 }
 
 @lesson-instruction{
 * Turn to @printable-exercise{pages/distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
+@centered-image{images/pxpy.png, 500}
 * HINT: The code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!
 * When you're done, fix the broken `distance` function in your game file, click "Run" and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 }
 
 @strategy{
-@span{.title}{Finding the length of the leg of a triangle}
+@span{.title}{Extension: Finding the length of the leg of a triangle}
 
 If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
 
@@ -332,9 +369,7 @@ Take a look at the two examples on @printable-exercise{pages/distance-comparing-
 @Q{Can you explain why they need to be written differently?}
 @A{Finding the hypotenuse requires finding the square root of the @math{A^2 + B^2}, whereas finding a leg requires finding the square root of the difference between @math{C^2} and @math{B^2}.}
 }
-
 }
-
 
 === Common Misconceptions
 
@@ -355,22 +390,4 @@ In this situation, remind students to look back at what they circled and labeled
 
 - Have students use the Design Recipe to solve @opt-printable-exercise{line-length.adoc} on their own.
 - You might also want to have them modify `line-length` to make use of the absolute value function: @show{(code 'abs)}.
-
-@strategy{
-@span{.title}{Why line-length?}
-Students learn early on that distance in 1-dimension is computed via @math{\lvert x_2 - x_1 \rvert}, and that distance is always a positive value. The Pythagorean Theorem teaches students that the length of the hypotenuse is computed based on the distance in the x- and y-dimension.
-
-Most math textbooks, however, show the distance formula without connecting back to that theorem.
-
-@center{  @math{\sqrt{{(x_2 - x_1)}^2 + {(y_2 - y_1)}^2}}  }
-
-A student who asks whether it's a problem when @math{x_2 - x_1} is negative is displaying a deep understanding of what's going on!
-
-Using the `line-length` function explicitly connects the distance formula back to the 1-dimensional distance students know, allowing them to apply prior knowledge and better connect back to the @vocab{Pythagorean Theorem} itself.
-
-This effectively rewrites the distance formula as:
-
-@center{
-	@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
-}
 
