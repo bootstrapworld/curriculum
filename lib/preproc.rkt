@@ -2232,10 +2232,8 @@
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
-            ; CONTRACTS REFERENCE
-            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
             ; GLOSSARY REFERENCE
-            (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Glossary of Vocabulary Used in this Lesson]\n" *dist-root-dir* *lesson*)
+            (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*)
             ; LESSON PLAN
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
@@ -2271,6 +2269,8 @@
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
+            ; CONTRACTS REFERENCE
+            (fprintf o "\n* link:~aContracts.shtml[Pathway Contracts]\n" *dist-root-dir* )
             ; NO OPTIONAL ANYTHING - display a helpful message
             (when (and *supplemental-materials-needed?*
                        (empty? *opt-printable-exercise-links*)
