@@ -24,31 +24,36 @@
         (call-with-input-string s sha1-bytes))
       0 15) 16))
 
-(define (escape-html s #:kill-newlines? [kill-newlines? #f])
+(define (escape-html s #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
   (when kill-newlines?
     (set! s (regexp-replace* #rx"\n" s " ")))
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)
-            ))
+            (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.html\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)
-            ))
+            (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.html\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)
-            ))
+            (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
+
   (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
-            (format "src=\"/wp-content/themes/pro-child/js/~a/\\1\"" *season-year*)))
+            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?/([^/]*?\\.js)\"" s
+            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
             (format "href=\"/wp-content/themes/pro-child/css/~a/\\1\"" *season-year*)))
+
   (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
-            "src=\"/wp-content/uploads/lib-images/\\1\""))
+            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
+
+  (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
+
   (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
             "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
   (set! s (regexp-replace* #rx"\"" s "\"\""))
   s)
 
-(define (escaped-file-content f #:kill-newlines? [kill-newlines? #f])
-  (escape-html (file->string f) #:kill-newlines? kill-newlines?))
+(define (escaped-file-content f #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
+  (escape-html (file->string f) #:kill-newlines? kill-newlines? #:static-prefix static-prefix))
 
 (define (make-lesson-permalink f)
   ; (printf "doing make-lesson-permalink ~a\n" f)
@@ -56,6 +61,10 @@
   (format "/materials/lessons/~a/~a/"
           *season-year*
           f))
+
+(define (make-lesson-static-url f)
+  (when (path? f) (set! f (path->string f)))
+  (format "/wp-content/themes/pro-child/static-resources/~a/lib/lessons/~a/" *season-year* f))
 
 (define (convert-lessons o)
   (for ([lesson-dir (directory-list *lessons-dir*)])
@@ -70,13 +79,14 @@
                  "" ; parent
                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
                  "" ; child categories
-                 (escaped-file-content lesson-plan-file) ; raw code
+                 (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
                  )))))
 
 (define (convert-workbook-pages o #:pages [pages "pages"])
   ; (printf "doing convert-workbook-pages ~a\n" pages)
   (for ([lesson-dir (directory-list *lessons-dir*)])
     (let* ([lesson-id (string->uniqid lesson-dir)]
+           [static-prefix (make-lesson-static-url lesson-dir)]
            [lesson-dir-path (build-path *lessons-dir* lesson-dir)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
       (let ([pages-dir-path (build-path lesson-dir-path pages)])
@@ -104,7 +114,7 @@
                            lesson-id ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
-                           (escaped-file-content page-file) ; raw code
+                           (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
                            ))))))))))
 
 (let* ([cla (current-command-line-arguments)]
