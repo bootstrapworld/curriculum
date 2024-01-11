@@ -27,7 +27,14 @@
     lessons = lesson? [lesson] : [...Object.keys(graph)];
     console.log('lessons are', lessons)
     function populateGlossary() {
-      glossary = lessons.map(l => {console.log(l); return graph[l].glossary}).flat()
+
+      // if just one lesson, add it to the title
+      if(lessons.length == 1) {
+        document.getElementsByTagName("h1")[0]
+          .innerHTML += " for " + kebabToTitleCase(lessons[0]);
+      }
+
+      glossary = lessons.map(l => graph[l].glossary).flat()
         .reduce((acc, {vocab, description}) => acc.set(vocab,description), new Map());
 
       const parentDOM = document.getElementById('glossary');
