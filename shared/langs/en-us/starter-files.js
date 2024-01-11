@@ -552,6 +552,15 @@ var Flags = {
 }
 
 var MoreAlg = {
+  "right-trianglesDesmos": {
+    "title": "Exploring Proofs without Words (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65789fa3f7ec22b6692ab676"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65789fa3f7ec22b6692ab676"
+    }
+  },
   "prism": {
     "title": "Surface Area of a Rectangular Prism Starter File",
     "pyret": {
