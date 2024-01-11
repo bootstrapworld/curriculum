@@ -1,0 +1,87 @@
+= Distribution and Code
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  div.circleevalsexp .value,
+  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  .sect1 > h2:first-child { padding: 0 5px !important; }
+  .sect1 > h2 { font-size: 11pt !important; }
+  .autonum { padding: 0 !important; }
+</style>
+++++
+
+Open the @starter-file{comm-and-assoc}, which you will use to investigate three functions:
+
+[.contracts, cols="1,1", frame="none", grid="none"]
+|===
+| @show{ (contracts
+'("beside" ("Image" "Image") "Image")
+'("above" ("Image" "Image") "Image")
+'("rotate" ("Number" "Image") "Image")
+)}
+| @show{ (contracts
+'("overlay" ("Image" "Image") "Image")
+'("scale" ("Number" "Image") "Image")
+)}
+
+|===
+
+For each function, draw a second Circle of Evaluation that distributes the _outer_ function over the _inner_ function. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in Pyret.
+
+== Does @show{(code 'scale)} distribute over @show{(code 'beside)}?
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+
+| Circle of Evaluation |@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))}
+
+| Code | @show{(code '(beside aqua-star orange-dot))} | @ifsoln{@show{(code  '(beside orange-dot aqua-star))}}
+
+| Sketch | @image{../images/aqua-orange.png, 90} | @ifsoln{@image{../images/orange-aqua.png, 90}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
+
+== Does @show{(code 'scale)} distribute over @show{(code 'above)}?
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+
+| Circle of Evaluation
+| @show{(coe '(above  purple-square orange-dot))}
+| @ifsoln{@show{(coe  '(above orange-dot purple-square))}}
+
+| Code
+| @show{(code '(above purple-square orange-dot))}
+| @ifsoln{@show{(code '(above orange-dot purple-sqare))}}
+
+| Sketch
+| @image{../images/purple-orange.png, 40}
+| @ifsoln{@image{../images/orange-purple.png, 40}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+
+== Is @show{(code 'overlay)} Commutative?
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+
+| Circle of Evaluation
+| @show{(coe '(overlay  white-dot yellow-rect))}
+| @ifsoln{@show{(coe  '(overlay yellow-rect white-dot))}}
+
+| Code
+| @show{(code '(overlay white-dot yellow-rect))}
+| @ifsoln{@show{(code '(overlay yellow-rect white-dot))}}
+
+| Sketch
+| @image{../images/yellow-white.png, 90}
+| @ifsoln{@image{../images/yellow.png, 90}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
