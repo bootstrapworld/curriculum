@@ -455,7 +455,7 @@ var Flags = {
     }
   },
   "flags-2": {
-    "title": "Flags of Netherland, France & Mauritius Starter File",
+    "title": "Flags of Netherlands, France & Mauritius Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1O_3WGOcqaTzR7cuZY3ZSh5TEFg3ZNPV6"
     },
