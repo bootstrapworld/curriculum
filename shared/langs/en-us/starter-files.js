@@ -933,7 +933,7 @@ var Projects = {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS&v=78aeaeb" 
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=n6DnmNRC4T"
+      "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
     }, 
   },
   "cats-only": {
