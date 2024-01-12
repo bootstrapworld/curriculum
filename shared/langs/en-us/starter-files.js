@@ -930,10 +930,10 @@ var Projects = {
   "logos": {
     "title": "Logo Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
+      "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS&v=78aeaeb" 
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
+      "url": "https://www.wescheme.org/view?publicId=n6DnmNRC4T"
     }, 
   },
   "cats-only": {
