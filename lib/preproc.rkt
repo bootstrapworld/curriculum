@@ -2233,7 +2233,8 @@
             ; SLIDES
             (display-lesson-slides o)
             ; GLOSSARY REFERENCE
-            (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*)
+            (unless (empty? *glossary-items*)
+              (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
             ; LESSON PLAN
             (fprintf o "\n* link:~aContracts.shtml[Pathway Contracts]\n" *dist-root-dir* )
             ; CONTRACTS REFERENCE
