@@ -928,7 +928,7 @@ var Projects = {
     }
   },
   "logos": {
-    "title": "Logo Starter File",
+    "title": "Logos Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS&v=78aeaeb" 
     },
