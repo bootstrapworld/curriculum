@@ -31,7 +31,9 @@
       // if just one lesson, add it to the title
       if(lessons.length == 1) {
         document.getElementsByTagName("h1")[0]
-          .innerHTML += " for " + kebabToTitleCase(lessons[0]);
+          .innerHTML += " for " + graph[lessons[0]].title;
+      } else {
+        document.getElementById("wholeGlossary").style.display = 'none';
       }
 
       glossary = lessons.map(l => graph[l].glossary).flat()
@@ -81,6 +83,7 @@
     </div>
     <div id="content">
       <div class="paragraph">
+        <span id="wholeGlossary">You are viewing a limited glossary, used in one lesson. <a href="Glossary.shtml">Click here</a> to load the entire glossary for <i>all</i> Bootstrap lessons.</span>
         <p><strong>Note:</strong> We also provide a <a href="lib/bilingual-glossary.html">bilingual glossary</a>, which defines all vocabulary words across our lessons in English and Spanish.</p>
         <div id="search">
             Searching for a word? <input id="searchBox" type="search" onInput="search(this.value)"
