@@ -445,10 +445,6 @@
   (display "\ninclude::.index-standards.asc[]\n" o)
   (display "|===\n" o))
 
-(define (include-glossary o)
-  ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
-
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
       (call-with-input-file f
@@ -1241,7 +1237,7 @@
         (let ([lesson-asc-file
                 (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.json"
+                (format "distribution/~a/lessons/~a/.cached/.index-glossary.json"
                         *natlang* lesson)]
               [lesson-title-file
                 (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
@@ -1253,7 +1249,7 @@
             (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
           (when (file-exists? lesson-glossary-file)
-            ;(printf "~a exists i\n" lesson-glossary-file)
+            ; (printf "~a exists i\n" lesson-glossary-file)
             (for ([s (call-with-input-file lesson-glossary-file read-json)])
               (unless (member s *glossary-items*)
                 (set! *glossary-items*
@@ -1993,9 +1989,7 @@
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! *first-subsection-reached?* #t)
-                                  (when *lesson-plan*
-                                    (include-glossary o))]
+                                  (set! *first-subsection-reached?* #t)]
                                  [else #f])
                            (cond [*lesson*
                                    (display-section-markup i o)]
@@ -2166,15 +2160,6 @@
                                    "-glossary"
                                    )))
 
-      (when *lesson-plan*
-        (accumulate-glossary-and-alignments))
-
-      ;(printf "pathwayrootdir = ~a\n" *pathway-root-dir*)
-      ;(printf "lesson = ~a\n" *lesson*)
-      ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
-
-      ; (printf "\nprereqs-used= ~s\n\n" *prereqs-used*)
-
       (when (pair? *prereqs-used*)
         ; (printf "lessonplan?= ~s; lesson?= ~s\n\n" *lesson-plan* *lesson*)
         (let ([prim-file (if *lesson-plan*
@@ -2232,6 +2217,9 @@
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
+            ; GLOSSARY REFERENCE
+            (unless (empty? *glossary-items*)
+              (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
             ; LESSON PLAN
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
@@ -2415,23 +2403,19 @@
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
   (print-menubar (string-append file "-comment.txt"))
-  (call-with-output-file (string-append file ".asc")
-    (lambda (op)
-      (unless (empty? *glossary-items*)
-        (set! *glossary-items*
-          (sort *glossary-items* #:key first string-ci<=?))
-        (when *narrative*
-          (fprintf op "= Glossary\n\n"))
-        (when *lesson*
-          (fprintf op ".Glossary\n\n"))
-        (fprintf op "[.glossary]~%")
-        (for ([s *glossary-items*])
-          ;(fprintf op "* *~a*: ~a~%" (first s) (second s))
-          (fprintf op "~a:: ~a~%" (first s) (second s)))
-        (fprintf op "~%~%")))
-    #:exists 'replace)
-
-  ;if we wish, we can store missing glossary items in a temp file for later inspection
+  (unless (empty? *glossary-items*)
+    (set! *glossary-items*
+      (sort *glossary-items* #:key first string-ci<=?))
+    (call-with-output-file (string-append file ".json")
+      (lambda (op)
+        (display "[\n" op)
+        (let ([first? #t])
+          (for ([s *glossary-items*])
+            (cond [first? (display "  " op) (set! first? #f)]
+                  [else (display ",  " op)])
+            (fprintf op "[~s, ~s]\n" (first s) (second s))))
+        (display "]\n" op))
+      #:exists 'replace))
 
   )
 
@@ -2485,20 +2469,6 @@
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
   )
-
-(define (accumulate-glossary-and-alignments)
-  ; (printf "doing accumulate-glossary-and-alignments\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
-    (lambda (op)
-      (let ([first? #t])
-        (display "[\n" op)
-        (for ([s *glossary-items*])
-          (cond [first? (set! first? #f)]
-                [else (display ",\n" op)])
-          (fprintf op "  [~s, ~s]" (first s) (second s))
-          )
-        (display "\n]\n" op)))
-    #:exists 'replace))
 
 ;coe
 (define (hspace n)
