@@ -36,7 +36,9 @@
         document.getElementById("wholeGlossary").style.display = 'none';
       }
 
-      glossary = lessons.map(l => graph[l].glossary).flat()
+      // iterate through all the lessons, collecting glossary words
+      // and definitions in a Map
+      glossary = lessons.map(l => graph[l].glossary || []).flat()
         .reduce((acc, {vocab, description}) => acc.set(vocab,description), new Map());
 
       const parentDOM = document.getElementById('glossary');
