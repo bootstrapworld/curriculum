@@ -2221,8 +2221,6 @@
             (unless (empty? *glossary-items*)
               (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
             ; LESSON PLAN
-            (fprintf o "\n* link:~aContracts.shtml[Pathway Contracts]\n" *dist-root-dir* )
-            ; CONTRACTS REFERENCE
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
             ; STATUS BAR FOR PRINTING PDFS
@@ -2257,6 +2255,8 @@
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
+            ; CONTRACTS REFERENCE
+            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference]\n" *dist-root-dir* )
             ; NO OPTIONAL ANYTHING - display a helpful message
             (when (and *supplemental-materials-needed?*
                        (empty? *opt-printable-exercise-links*)

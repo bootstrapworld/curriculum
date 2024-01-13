@@ -548,6 +548,15 @@ var Flags = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=V4AfQydAHu"
     }
+  },
+  "flags-desmos": {
+    "title": "Flags and other images (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169"
+    }
   }
 }
 
@@ -640,6 +649,99 @@ var MoreAlg = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
+    }
+  }
+}
+
+var EarlyMath = {
+  "comm-and-assoc": {
+    "title": "Commutativity and Associativity Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
+    }
+  },
+  "additive-inverse": {
+    "title": "Additive Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+    }
+  },
+  "multiplicative-inverse": {
+    "title": "Multiplicative Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
+    }
+  },
+    "multiplicative-inverse-2": {
+    "title": "Multiplicative Inverse Starter File 2",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+    }
+  },
+  "strings-n-numbers": {
+    "title": "Strings and Numbers Starter File",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
+    }
+  },
+  "expressions-functions": {
+    "title": "Expressions and Functions Starter File",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
+    }
+  }
+}
+
+var Projects = {
+  "functions": {
+    "title": "Functions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
+    }
+  },
+  "my-function": {
+    "title": "My Function Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
+    }
+  },
+  "logos": {
+    "title": "Logos Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS&v=78aeaeb" 
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
+    }, 
+  },
+  "cats-only": {
+    "title": "Animals Dataset - Cats Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
+    }
+  },
+  "dogs-only": {
+    "title": "Animals Dataset - Dogs Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
     }
   }
 }
@@ -797,160 +899,8 @@ var Reactive = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
-  },
-  "strings-n-numbers": {
-    "title": "Strings and Numbers Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
-    }
-  },
-  "expressions-functions": {
-    "title": "Expressions and Functions Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
-    }
-  },
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
-    }
-  },
-    "alg2-covid": {
-    "title": "Covid Spread Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
-    } 
-  },
-   "alg2-fuel-efficiency": {
-    "title": "Fuel Efficiency Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
-    }
-  },
-   "alg2-states": {
-    "title": "State Demographics Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
-    }
-  },
-  "alg2-exploring-quadratics-desmos": {
-    "title": "Exploring Quadratic Functions (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
-    }
-  },
-  "alg2-covid-desmos" : {
-    "title" : "Modeling Covid Spread (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
-    }
-  },
-  "alg2-exploring-logarithms-desmos" : {
-    "title" : "Exploring Logarithmic Functions (Desmos)",
-    "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    } 
-  },
-  "alg2-wealth-v-health-desmos": {
-    "title": "Fitting Wealth-v-Health (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
-    }
-  },
-  "alg2-wealth-v-health-2-desmos": {
-    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
-    }
   }
 }
-
-var EarlyMath = {
-  "comm-and-assoc": {
-    "title": "Commutativity and Associativity Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
-    }
-  },
-  "additive-inverse": {
-    "title": "Additive Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
-    }
-  },
-  "multiplicative-inverse": {
-    "title": "Multiplicative Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
-    }
-  },
-    "multiplicative-inverse-2": {
-    "title": "Multiplicative Inverse Starter File 2",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
-    }
-  },
-}
-
-
-
-
-var Projects = {
-  "functions": {
-    "title": "Functions Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
-    }
-  },
-  "my-function": {
-    "title": "My Function Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
-    }
-  },
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
-    }, 
-  },
-  "cats-only": {
-    "title": "Animals Dataset - Cats Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
-    }
-  },
-  "dogs-only": {
-    "title": "Animals Dataset - Dogs Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
-    }
-  }
-}
-
-
 
 var allStarterFiles = {
   ...Editors, 
@@ -961,11 +911,11 @@ var allStarterFiles = {
   ...GameBasics, 
   ...MoreDS, 
   ...DSdesmos,
-  ...MoreAlg, 
-  ...Alg2, 
-  ...Reactive,
+  ...MoreAlg,
   ...EarlyMath,
-  ...Projects
+  ...Projects, 
+  ...Alg2, 
+  ...Reactive
 }
 
 ////////////////////////////////////////////////////////////////////////////////
