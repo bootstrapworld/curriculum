@@ -29,10 +29,13 @@
     (set! s (regexp-replace* #rx"\n" s " ")))
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
             (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.html\"" s
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
             (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.html\"" s
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
             (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
+
+  (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
+            (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
 
   (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
             (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
@@ -126,7 +129,7 @@
 
 ; (printf "season = ~s; year = ~s\n" *season* *year*)
 
-(define *season-year* (format "~a~a" *season* *year*))
+(define *season-year* (format "~a-~a" *season* *year*))
 
 (call-with-output-file *csv-file*
   (lambda (o)
