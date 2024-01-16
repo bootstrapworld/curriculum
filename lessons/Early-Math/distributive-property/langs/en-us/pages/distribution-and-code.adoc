@@ -27,61 +27,81 @@ Open the @starter-file{comm-and-assoc}, which you will use to investigate three 
 
 |===
 
-For each function, draw a second Circle of Evaluation that distributes the _outer_ function over the _inner_ function. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in Pyret.
+For each function, draw a second Circle of Evaluation that distributes the _outer_ function over the _inner_ function. Sketch the image that you think each Circle will return. Finally, test the code in Pyret.
 
 == Does @show{(code 'scale)} distribute over @show{(code 'beside)}?
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation |@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))}
 
-| Code | @show{(code '(beside aqua-star orange-dot))} | @ifsoln{@show{(code  '(beside orange-dot aqua-star))}}
-
-| Sketch | @image{../images/aqua-orange.png, 90} | @ifsoln{@image{../images/orange-aqua.png, 90}}
+| Sketch | @image{../images/aqua-orange.png, 50} | @ifsoln{@image{../images/aqua-orange.png, 50}}
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes.}} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
 
 == Does @show{(code 'scale)} distribute over @show{(code 'above)}?
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
-| Circle of Evaluation
-| @show{(coe '(above  purple-square orange-dot))}
-| @ifsoln{@show{(coe  '(above orange-dot purple-square))}}
-
-| Code
-| @show{(code '(above purple-square orange-dot))}
-| @ifsoln{@show{(code '(above orange-dot purple-sqare))}}
+| Circle of Evaluation | @show{(coe '(scale 2 (above  purple-square orange-dot)))}
+| @ifsoln{@show{(coe  '(above (scale 2 orange-dot) (scale 2 purple-square)))}}
 
 | Sketch
-| @image{../images/purple-orange.png, 40}
-| @ifsoln{@image{../images/orange-purple.png, 40}}
+| @image{../images/orange-purple.png, 20}
+| @ifsoln{@image{../images/orange-purple.png, 20}}
 
 |===
 
 @n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
 
-== Is @show{(code 'overlay)} Commutative?
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+== Does @show{(code 'rotate)} distribute over @show{(code 'beside)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
-| Circle of Evaluation
-| @show{(coe '(overlay  white-dot yellow-rect))}
-| @ifsoln{@show{(coe  '(overlay yellow-rect white-dot))}}
-
-| Code
-| @show{(code '(overlay white-dot yellow-rect))}
-| @ifsoln{@show{(code '(overlay yellow-rect white-dot))}}
+| Circle of Evaluation | @show{(coe '(rotate 30 (beside  blue-ellipse yellow-rect)))}
+| @ifsoln{@show{(coe  '(beside (rotate 30 blue-ellipse) (rotate 30 yellow-rect)))}}
 
 | Sketch
-| @image{../images/yellow-white.png, 90}
-| @ifsoln{@image{../images/yellow.png, 90}}
+| @image{../images/blue-yellow.png, 50}
+| @ifsoln{@image{../images/blue-yellow-2.png, 50}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Does `rotate` distribute over `beside`? @fitb{}{@ifsoln{It is not.}}
+
+
+
+== Does @show{(code 'rotate)} distribute over @show{(code 'above)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
+|===
+
+| Circle of Evaluation | @show{(coe '(rotate 45 (above  bootstrap yellow-rect)))}
+| @ifsoln{@show{(coe  '(above (rotate 45 bootstrap) (rotate 45 yellow-rect)))}}
+
+| Sketch
+| @image{../images/green-yellow.png, 50}
+| @ifsoln{@image{../images/green-yellow-2.png, 50}}
 
 |===
 
 @n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+
+
+
+
+
+
+
+
+
+
+
+
+
