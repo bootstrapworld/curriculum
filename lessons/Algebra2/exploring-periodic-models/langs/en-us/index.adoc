@@ -1,11 +1,11 @@
 [.beta]
-= Exploring Exponential Models
+= Exploring Periodic Models
 
-@description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
+@description{Students investigate periodic relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
-@lesson-prereqs{exploring-quadratic-models, lookups}
+@lesson-prereqs{exploring-quadratic-models}
 
-@keywords{exponential, quadratic, square, coefficient}
+@keywords{periodic, period, amplitude, frequency}
 
 [@lesson-intro-table]
 |===
@@ -14,15 +14,14 @@
 | Students will be able to...
 
 * Read and interpret real-world data, presented in a scatter plot
-* Recognize exponential growth in tables and graphs
-* Model exponential relationships using functions
+* Recognize periodic behavior in tables and graphs
+* Model periodic relationships using functions
 
 
 | Student-facing Lesson Goals
 |
 
-* Let's use Pyret to model exponential relationships in data
-* Let's use Pyret to filter a dataset into subsets
+* Let's use Pyret to model periodic relationships in data
 
 | Materials
 |[.materials-links]
@@ -34,147 +33,60 @@
 
 |===
 
-== When and Why do we Filter Data? @duration{45 minutes}
+== Round and Round We Go @duration{45 minutes}
 
 === Overview
-Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then explore the @starter-file{alg2-covid}, and discover another motivation for filtering: some scatter plots show __multiple__ correlations, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the covid dataset into samples grouped by state.
+Students are introduced to the notion of @vocab{periodic} relationships: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
 
 === Launch
 
-A college is looking at enrollment and housing data for a sample of students who've decided what their major will be, vs. those who are undecided:
-
-[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
-|===
-|   			| # On Campus 	| # Off Campus	| % On Campus
-| Undecided		| 120			|  80			|  120/200 = 60%
-| Decided		|  80			| 100			|   80/180 = 44%
-|===
-
-@QandA{
-@Q{According to the table, how many Undecided Majors live _off_-campus?}
-@A{80}
-@Q{How many Decided Majors live _on_-campus?}
-@A{80}
-@Q{Who is more likely to live on campus: Decided or Undecided Majors?}
-@teacher{Let students discuss the last question!}
+@lesson-instruction{
+Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}
 }
 
-@teacher{
-@optional If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.
-}
+The relationship you just explored is an example of a _periodic relationship_.
 
-It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
+- It repeats itself every 30 minutes
+- It goes from 0 to 450ft in 15m, and then back down to 0ft in 15m
+- The "halfway" point is at 7.5 minutes, when height is 225ft.
 
-But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, _and_ they generally have not picked a major. **We need to take the _year_ into account.**
+@lesson-point{Line graphs are often used instead of scatterplots when the explanatory variable is _time_.}
 
-[cols="^1a,^1a", strips="none", grid="none", frame="none"]
-|===
-|
-[cols="^1a,^1a,^1a,^2a", options="header"]
-!===
-! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
-! Undecided      ! 100             ! 20            ! 100/120 = 83%
-! Decided        !  50             ! 10            !  50/60  = 83%
-!===
+We can visualize the same pattern in both scatter plots and line-graphs
 
-|
-[cols="^1a,^1a,^1a,^2a", options="header"]
-!===
-! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
-! Undecided      !  20             ! 60            !  20/80 = 25%
-! Decided        !  30             ! 90            !  30/120 = 25%
-!===
-|===
+*None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing or decreasing. We've studied relationships that grow one way until they a maxima or minima, before growing in the other direction. But we don't have any functions that keep repeating, going up and down over time.
 
-Because **year at school** is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+That's a problem for us as data scientists, because so many things in nature are _cyclical:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom born in the Spring, or that everyone tends to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
 
-How is this possible? When a third variable is lurking in the data, it can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
-
-@lesson-point{
-Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
-}
-
-@right{@image{images/Simpsons_animation.gif, 300}}
-Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
-
-@clear
-
-"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on.
-
- In this lesson, we'll explore some real data that's better analyzed __in pieces...__
+In this lesson we'll explore these periodic relationships, and a new class of functions - _periodic functions_ - that we can use to model them.
 
 === Investigate
 
-Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
+When graphed, periodic functions look like waves:
 
-Even in 2020, very few people could have predicted the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
+TBD - image!
 
-@lesson-instruction{
-- Open the @starter-file{alg2-covid}. This data looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
-- From the File menu, select "Save a Copy", and click "Run."
-- Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
-}
+Starting at some initial value at x=0, a periodic function will rise or fall as x-increases until it reaches some maximum or minimum value, before returning to its initial value. As x continues to increase, it will repeat this pattern over and over, fluctuating between its maximum and minimum value over regular intervals.
 
-@teacher{_Note: This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England._
-}
+TBD - explain amplitude, frequency, period, midline, vertical shift, horizontal shift
 
-@center{@image{images/multiple-models.png}}
-
-@lesson-instruction{
-Discuss in groups or pairs, and prepare to share out to the class:
-
-- Based on the look of the scatter plot you just made, do you think there's a strong relationship here?
-- If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
-}
-
-The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
-
-@teacher{Review student answers to confirm that students have made a number of observations:
-
-* There is _more than one_ relationship in this dataset
-* Every relationship seems extremely strong
-* Most/all relationships appear nonlinear}
-
-With all these clear, tight curves, we might think this would be a dataset with a very strong relationship. Unfortunately, that's not what we see when we group all the data together!
-
-Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
-
-@QandA{
-@Q{We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.}
-@Q{How is a grouped sample different from a random sample?}
-@A{A grouped sample is a non-random subset chosen from a larger set. Grouped samples are non-random by design!}
-}
-
-@lesson-instruction{
-Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
-}
-
-The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
-
-@teacher{@optional While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
 
 
 === Common Misconceptions
-It's extremely common for students to think that filtering a table _changes the original table_. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
 
 === Synthesize
-- In what other situations would it be useful to filter a dataset?
-- Can you think of other examples where Simpson's Paradox might arise?
-
-** _When comparing one country's schools to another's, a researcher finds that students living in poverty in country A outperform students living in poverty in country B. They also find that the wealthy students in A outperform their wealthy peers in B. In fact, for every income level, country A outperforms country B! But if country B has less child poverty overall, it will still outperform A._
-** _Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}._
-
+-
 
 == Looking for Patterns	@duration{45 minutes}
 
 === Overview
 
-Students explore their newly-filtered `MA-table` dataset, trying to fit different kinds of models to it. This section makes heavy use of interactive slider activities we've built in Desmos to support open-ended experimentation.
+Students explore the @math{CO_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
 === Launch
 
 @lesson-instruction{
-- Open the @starter-file{alg2-covid}.
+- Open the @starter-file{alg2-co2}.
 - Make a scatter-plot showing the Covid infection rate for Massachusetts.
 - What kind of model do you think would fit this best?
 }
