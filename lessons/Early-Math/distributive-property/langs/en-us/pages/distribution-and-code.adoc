@@ -18,10 +18,9 @@ Open the @starter-file{comm-and-assoc}, which you will use to investigate three 
 | @show{ (contracts
 '("beside" ("Image" "Image") "Image")
 '("above" ("Image" "Image") "Image")
-'("rotate" ("Number" "Image") "Image")
 )}
 | @show{ (contracts
-'("overlay" ("Image" "Image") "Image")
+'("rotate" ("Number" "Image") "Image")
 '("scale" ("Number" "Image") "Image")
 )}
 
@@ -56,7 +55,7 @@ For each function, draw a second Circle of Evaluation that distributes the _oute
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes.}} @hspace{2em} Is `scale` distributive over `above`? @fitb{}{@ifsoln{It is.}}
 
 
 == Does @show{(code 'rotate)} distribute over @show{(code 'beside)}?
@@ -73,7 +72,7 @@ For each function, draw a second Circle of Evaluation that distributes the _oute
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Does `rotate` distribute over `beside`? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `beside`? @fitb{}{@ifsoln{It is not.}}
 
 
 
@@ -82,16 +81,16 @@ For each function, draw a second Circle of Evaluation that distributes the _oute
 [cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
-| Circle of Evaluation | @show{(coe '(rotate 45 (above  bootstrap yellow-rect)))}
-| @ifsoln{@show{(coe  '(above (rotate 45 bootstrap) (rotate 45 yellow-rect)))}}
+| Circle of Evaluation | @ifsoln{@show{(coe '(rotate 45 (above  bootstrap yellow-rect)))}}
+| @show{(coe  '(above (rotate 45 bootstrap) (rotate 45 yellow-rect)))}
 
 | Sketch
-| @image{../images/green-yellow.png, 50}
-| @ifsoln{@image{../images/green-yellow-2.png, 50}}
+| @ifsoln{@image{../images/green-yellow.png, 30}}
+| @image{../images/green-yellow-2.png, 30}
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is the `beside` function commutative or not? @fitb{}{@ifsoln{It is not.}}
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `above`? @fitb{}{@ifsoln{It is not.}}
 
 
 
