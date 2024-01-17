@@ -2317,7 +2317,8 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
+            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #f])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
