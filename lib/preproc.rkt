@@ -1051,14 +1051,14 @@
                     (map (lambda (x)
                            (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
                                  [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
-                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-pyret][Pyret]" *dist-root-dir*)]
                                  [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
-                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-wescheme][WeScheme]" *dist-root-dir*)]
                                  [(and (string=? x "pyret") *lesson-plan*)
-                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                  (format "link:pass:[~alessons/~a/index.shtml][Pyret]" *dist-root-dir*
                                           (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
                                  [*lesson-plan*
-                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                   (format "link:pass:[~alessons/~a/index.shtml][~a]" *dist-root-dir*
                                            (if (string=? *proglang* "pyret")
                                                (string-append *lesson-plan* "-" x)
                                                (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
