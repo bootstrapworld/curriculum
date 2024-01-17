@@ -1425,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "big")
+                            (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "define")
