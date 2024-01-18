@@ -912,6 +912,7 @@ var allStarterFiles = {
   ...DSBasics, 
   ...GameBasics, 
   ...MoreDS, 
+  ...DSadvanceDisplays,
   ...DSdesmos,
   ...MoreAlg,
   ...EarlyMath,
