@@ -43,7 +43,7 @@
             (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
 
   (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
-            (format "href=\"/wp-content/themes/pro-child/css/~a/\\1\"" *season-year*)))
+            (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/css/\\1\"" *season-year*)))
 
   (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
             (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
