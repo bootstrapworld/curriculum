@@ -2,35 +2,18 @@
 
 ++++
 <style>
-#content img { width: 50%; }
-#content .forceShadedBlockWTF { background-color: #f7f7f8; }
-.highlight { padding: 0 !important; }
+.fitbruby { min-width: 7.85em; }
 </style>
 ++++
 
-[.forceShadedBlockWTF]
---
-@show{(code 'radial-star)}`{two-colons} (`
-```
-	points :: Number,
-	inner-radius :: Number,
-	full-radius :: Number,
-	style :: String,
-	color :: String
-) -> Image
-
-```
---
-
-Using the detailed Contract above, match each image to the expression that describes it. Go to @starter-file{editor} to test your code.
-
+@show{(contract 'radial-star '((points Number) (inner-radius Number) (full-radius Number) (fill-style String) (color String)) "Image")}
 
 @vspace{1ex}
-[.FillVerticalSpace, cols="3,^.^3a,1,^.^1a,^.^12a",stripes="none",grid="none",frame="none", options="header"]
+
+Using the Contract above, match the images on the left to the expressions on the right. You can test the code at @starter-file{editor}.
+
+[.FillVerticalSpace, cols="^.^3,^.^3a,1,^.^1a,^.^12a",stripes="none",grid="none",frame="none"]
 |===
-|  Image
-|  ||
-|  Expression
 
 | @centered-image{../images/radial-star-10-150-200-solid-black.png}
 | *@n* @ifsoln{-D} || *A*

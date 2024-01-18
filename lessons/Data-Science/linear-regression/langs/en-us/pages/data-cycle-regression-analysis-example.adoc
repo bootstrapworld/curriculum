@@ -1,0 +1,33 @@
+= Data Cycle: Regression Analysis (Example)
+
+@data-cycle{ ""
+  #:question "How big of a factor is age in determining adoption time?"
+  #:show-question? #t
+  #:question-type "statistical"
+  #:rows "all animals at the shelter"
+  #:show-rows? #t
+  #:cols "name, age, and weeks"
+  #:show-cols? #t
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(lr-plot animals-table "name" "age" "weeks") "least squares line")
+  #:show-expression? #t
+  #:finding "The slope is positive (0.789) and R=0.448, so there is a moderate, positive relationship"
+  #:show-finding? #t
+  #:new-question "Is weight a bigger factor?"
+  #:show-new-question? #t
+}
+
+*This was a statistical question.*
+
+@vspace{1ex}
+
+_Write your Data Story below:_
+
+
+I performed a linear regression on a sample of @fitbruby{60ex}{animals at the shelter}{[dataset or subset]} and found @fitbruby{80ex}{moderate (R=.448), positive}{a weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{50ex}{age}{[x-axis]} and @fitbruby{60ex}{time to adoption}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{year}{[x-axis units]} increase in @fitbruby{20ex}{age}{[x-axis]} is associated with a @fitbruby{30ex}{.789 week}{[slope, y-units]} @fitbruby{30ex}{increase}{increase / decrease} in @fitbruby{30ex}{time to adoption}{[y-axis]}. 
+
+
+

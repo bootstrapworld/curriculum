@@ -309,23 +309,19 @@ Just like in Desmos, transforming the `pc-gdp` column with a log function produc
 
 With the transformation applied, our linear model (in both function and Pyret notation) is:
 
-[.indentedpara]
---
-@math{f(x) = 11.9011x + 24.2636}
+@indented{@math{f(x) = 11.9011x + 24.2636}}
 
-@show{(code '(define (f x) (+ (* 11.9011 x) 24.2636)))}
---
+@indented{@show{(code '(define (f x) (+ (* 11.9011 x) 24.2636)))}}
+
 
 @vspace{3ex}
 
 @right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
 
-[.indentedpara]
---
-@math{h(x) = 11.9011 \log_{10}(x) + 24.2636}
+@indented{@math{h(x) = 11.9011 \log_{10}(x) + 24.2636}}
 
-@show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}
---
+@indented{@show{(code '(define (h x) (+ (* 11.9011 (log x)) 24.2636)))}}
+
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
@@ -340,8 +336,9 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 
 For more practice transforming data and programming with filters: 
 
-[.indentedpara]
+@indented{
 @opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and Linearization techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and median lifespan.
+}
 
 @comment{
 - @opt-printable-exercise{grading-models.adoc}
