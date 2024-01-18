@@ -1,6 +1,6 @@
 = Function Notation
 
-@description{Students learn to read function notation and evaluate expressions using function definitions, tables, and graphs.}
+@description{Students learn to read function notation and evaluate expressions using function definitions, tables, and graphs. Students also describe the order of operations involved in algebraic function compositions such as f(g(h(x)))}
 
 @lesson-prereqs{functions-make-life-easier, defining-values}
 
@@ -13,6 +13,7 @@
 | Students will be able to:
 
 * Identify the value that applying a function (e.g. - f(3)) produces from symbolic definitions, tables, or graphs.
+* Describe the order of operations involved in algebraic function compositions.
 
 | Student-Facing Lesson Goals
 |
@@ -30,6 +31,8 @@ _**This lesson is unplugged** and does not require a computer._
 |[.materials-links]
 @opt-material-links
 
+| Preparation
+| * There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 
 |===
 
@@ -247,3 +250,51 @@ Complete @printable-exercise{function-notation-tables.adoc}.
 * How did the fact that those tables weren't functions impact our ability to describe a value using function notation?
 ** _When x appeared more than once in the table and was associated with different outputs, it wasn't clear what number the expression should evaluate to._
 
+
+== Diagramming Function Composition @duration{15 minutes}
+
+=== Overview
+The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
+
+=== Launch
+Three of the function cards we just used were for the functions `f`, `g` and `h`:
+
+* `f` multiplied its input by 3
+
+* `g` added six to its input
+
+* `h` subtracted one from its input
+
+We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
+
+We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
+
+[cols="^1,^2", options="header", stripes="none"]
+|===
+
+| Function Composition
+| Order of Operations
+| @show{(coe `(f (g (h x))))}
+| @show{(coe `(* 3 (+ (- x 1) 6)))}
+|===
+
+The circles show us that in order to evaluate @math{f(g(h(4))))}
+
+- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
+- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
+- Then we would evaluate @math{f(9)}, tripling `9` to get `27`
+
+=== Investigate
+
+@lesson-instruction{
+Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+}
+
+More practice is available on @opt-printable-exercise{function-comp-matching.adoc} and @opt-printable-exercise{diagramming-function-composition-2.adoc}.
+
+=== Synthesize
+
+@lesson-instruction{
+* Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? Why or why not?
+** _No, they do not. Order matters!_
+}

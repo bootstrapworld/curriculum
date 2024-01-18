@@ -1,6 +1,6 @@
 = Function Composition
 
-@description{Students learn to combine image transformation functions as well as to describe the order of operations involved in algebraic function compositions such as f(g(h(x))) using Circles of Evaluation.}
+@description{Students learn to combine image transformation functions using Circles of Evaluation.}
 
 @lesson-prereqs{order-of-operations, contracts}
 
@@ -33,6 +33,9 @@
 * @link{https://www.google.com/search?q=random+number, Random Integer Generator}
 * @lesson-link{project-logo}
 
+|Preparation
+| * There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+
 | Key Points For The Facilitator
 |
 * Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
@@ -44,85 +47,44 @@ Students are given a scaffolded activity that forces them to use the output of o
 
 === Launch
 @teacher{
-Divide students into groups of 3-4, and distribute a set of @handout{function-cards.adoc} to each group. __(If you're teaching remotely you can use @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d, Function Cards} instead.)__ Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficult). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
-
-Have students practice reading contracts by asking them questions about one or two of these cards. For example: "pick a card at random: according to its Contract, what is the name? Domain? Range?"
+- Divide students into groups of 3 and distribute a set of @handout{function-cards.adoc} to each group. __(If you're teaching remotely you can use the @opt-starter-file{functioncardsDesmos} instead.)__
+- Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficult). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
+- Have students practice reading contracts by asking them questions about one or two of these cards.
 }
 
-These cards represent a collection of functions, each of which takes an input and produces an output. I can start with the number `4`, for example, and give it to the function `add6`. What will the output be?
-** _10_
-I can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, I could compose `add6` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`. What would happen if I composed `add6` with `double` _and_ with `half`?
-** _10_
+@lesson-instruction{
+* Pick a card at random.
+* According to its Contract, what is the function's Name, Domain, and Range?
+}
 
+These cards represent a collection of functions, each of which takes an input and produces an output. For example, we can start with the number `4`, and give it to the function `add6`. The output will be `10`.
+
+We can also _compose_ functions, meaning that the output of one is immediately passed into another. For example, we could compose `add6` `4` and `double`, so the `10` gets passed into the next function, and doubled to produce `20`.
+
+And, if we composed `add6` `4` with `double` _and_ with `half`? _We'd get 10._
+
+=== Investigate
 
 @lesson-instruction{
 - For each of the starting numbers on the board, your job is to figure out which functions to compose in order to get to the end.
 - You will need to use some functions more than once, and that's okay!
 }
 
-=== Investigate
-Give students time to experiment with this. You can make the activity more challenging by asking them to find the _shortest path_ from start to end, using the smallest number of compositions.
+Give students time to experiment with this!
 
-@teacher{
-Other ways to play...
+@teacher{Make the activity more challenging:
 
-- What solution uses the smallest number of *steps*?
-- What solution uses the smallest number of *cards*?
-- Show students a list of starting and ending numbers..._then ask them to give a card back._
-- Show students a list of starting and ending numbers..._then ask them which are the most valuable_
-- Show students a list of starting and ending numbers..._then give them a blank card and let them come up with a new function_
+* ask students to find the shortest path from start to end, using the smallest number of compositions.
+
+Other ways to play: Show students a starting number and an ending number and...
+
+* _ask them to give a card back._
+* _ask them which cards are the most valuable._
+* _give them a blank card and let them come up with a new function._
 }
 
 === Synthesize
 If two groups come up with different compositions that achieve the same end result, have them share their ideas!
-
-== Diagramming Function Composition @duration{15 minutes}
-
-=== Overview
-The Circles of Evaluation are extended to provide a visual-spatial metaphor for function composition, in addition to Order of Operations.
-
-=== Launch
-Three of the function cards we just used were for the functions `f`, `g` and `h`:
-
-* `f` multiplied its input by 3
-
-* `g` added six to its input
-
-* `h` subtracted one from its input
-
-We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
-
-We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
-
-[cols="^1,^2", options="header", stripes="none"]
-|===
-
-| Function Composition
-| Order of Operations
-| @show{(coe `(f (g (h x))))}
-| @show{(coe `(* 3 (+ (- x 1) 6)))}
-|===
-
-The circles show us that in order to evaluate @math{f(g(h(4))))}
-
-- First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
-- Then we would evaluate @math{g(3)}, adding `6` to `3` to get `9`
-- Then we would evaluate @math{f(9)}, tripling `9` to get `27`
-
-=== Investigate
-
-@lesson-instruction{
-Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions. 
-}
-
-More practice is available on @opt-printable-exercise{function-comp-matching.adoc} and @opt-printable-exercise{diagramming-function-composition-2.adoc}.
-
-=== Synthesize
-
-@lesson-instruction{
-* Do @math{f(g(h(x)))} and @math{g(h(f(x)))} evaluate to the same thing? Why or why not?
-** _No, they do not. Order matters!_
-}
 
 == Composing Functions in Code @duration{20 minutes}
 
@@ -156,11 +118,7 @@ While students are exploring, be available for support but encourage student dis
 Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
 }
 
-If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01, Function Composition Matching Activity}
-}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b?collections=5fbecc2b40d7aa0d844956f0, Function Composition Matching Activity}
-}
+@optional If you have time, you can also have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @opt-starter-file{functioncompDesmos}.
 
 @strategy{
 @span{.title}{Optional Project: Create Your Own Logo}
@@ -200,7 +158,7 @@ Student pairs can then share with another pair and compare their responses befor
 @span{.title}{Fun with Images!}
 Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing.
 
-Our @lesson-link{flags/} also dives deeper into image composition.
+Our @lesson-link{transform-compose-images/} and @lesson-link{project-flags/} also dive deeper into image composition.
 }
 
 == Composing Multiple Ways @duration{Optional}

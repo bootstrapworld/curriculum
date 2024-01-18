@@ -2,10 +2,12 @@
 
 ++++
 <style>
-td, #content .forceShading { font-size: 1rem !important; }
-#content p { font-size: 0.9rem; margin: 0;}
+#content div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
+#content img { width: 55%; }
 #content .listingblock .highlight { padding: 0; }
-.forceShading { background: #f7f7f8; }
+#content .forceShading { background-color: #f7f7f8; }
+td.tableblock:nth-of-type(2) p.tableblock { text-align: left; }
+.fitbruby { min-width: 7em; }
 </style>
 ++++
 
@@ -34,41 +36,39 @@ Type each expression (left) below into the @starter-file{editor} and match it to
 | @centered-image{../images/sas-120-45-70.png}
 |===
 
-Think about how you would describe each of the arguments that @show{(code 'triangle-sas)} takes in to someone who'd never used the function before and annotate the Contract below using descriptive variable names.
+== Contracts
+
+Think about how you would describe each @show{(code 'triangle-sas)} argument to someone who'd never used the function before.
+
+@n Annotate the Contract below using descriptive variable names.
 
 @vspace{1ex}
 
 [.forceShading]
 --
-@show{(code 'triangle-sas)}`{two-colons} (`
-
-[.indentedpara]
-@fitb{30em}{@ifsoln{`side1`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`angle`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`side2`}} `{two-colons} Number,`
-@fitb{30em}{@ifsoln{`style`}} `{two-colons} String,`
-@fitb{30em}{@ifsoln{`color`}} `{two-colons} String`
-
+@show{(code 'triangle-sas)} {two-colons} `(`
+@fitbruby{7em}{Number}{@ifsoln{top-side}},  
+@fitbruby{7em}{Number}{@ifsoln{top-right-angle}}, 
+@fitbruby{7em}{Number}{@ifsoln{bottom-right-side}},
+@fitbruby{7em}{String}{@ifsoln{fill-style}},
+@fitbruby{7em}{String}{@ifsoln{color}}
 `) -> Image`
+
+@vspace{3ex}
+
 --
 
 @vspace{1ex}
 
-If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages.
+_If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages._
 
 @vspace{1ex}
 
-If you have time, experiment with the @show{(code 'triangle-asa)} function.
+@star If you have time, experiment with the @show{(code 'triangle-asa)} function.
 
-[.forceShading]
---
-@show{(code 'triangle-asa)}`{two-colons} (`
-```
-	left-angle :: Number,
-	left-side :: Number,
-	bottom-angle :: Number,
-	style :: String
-	color :: String
-) -> Image
-```
---
+@show{(contract 'triangle-asa  `((top-left-angle Number) (left-side Number) (bottom-angle Number) (fill-style String) (color String)) "Image")}
+
+
+@star Why did these two functions need to take in one more Number than `right-triangle` did?
+
+@fitb{}{@ifsoln{Because right triangles have one fixed angle and that means that the ratio of base to height can be used to determine the other two angles!}}

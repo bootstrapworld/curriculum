@@ -18,54 +18,9 @@ local function read_list_from_file(f)
   return ('[ "' .. table.concat(read_json_file(f), '", "') .. '" ]')
 end
 
-local function create_glossary_html_json(html_file, json_file)
-  local i = io.open(html_file)
-  local o = io.open(json_file, 'w+')
-  local first = true
-  local writing = false
-  for line in i:lines() do
-    if not writing then
-      if line:match('<dl>') then
-        writing = true
-        o:write('[ \n')
-      end
-      goto continue
-    end
-    if line:match('</dl>') then
-      o:write('] \n')
-      break
-    end
-    line = line:gsub('"', '\\"')
-    if line:match('</dt>') then
-      line = line:gsub('</dt>', '", ')
-    end
-    if line:match('<p>') then
-      line = line:gsub('<p>', ' "')
-    end
-    if line:match('</p>') then
-      line = line:gsub('</p>', '" ]\n')
-    end
-    line = line:gsub('<dd>', '')
-    line = line:gsub('</dd>', '')
-    if line:match('<dt.->') then
-      if first then
-        first = false
-        line = line:gsub('<dt.->', '[ "')
-      else
-        line = line:gsub('<dt.->', ', [ "')
-      end
-    end
-    o:write(line)
-    ::continue::
-  end
-  i:close()
-  o:close()
-end
-
-local function read_list_of_glosses_from_file(f, g)
-  -- print('read_list_of_glosses_from_file', f, g)
-  create_glossary_html_json(f, g)
-  local lol = read_json_file(g)
+local function read_list_of_glosses_from_file(f)
+  -- print('read_list_of_glosses_from_file', f)
+  local lol = read_json_file(f)
   if not lol then return '[]' end
   if #lol <= 0 then return '[]' end
   local tbl = {}
@@ -107,8 +62,7 @@ for _,lesson in ipairs(lessons) do
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
   local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
-  local glossary_file = lessoncache .. '.index-glossary.html'
-  local glossary_html_file = lessoncache .. '.index-glossary.json'
+  local glossary_json_file = lessoncache .. '.index-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
   local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp'
   --
@@ -200,8 +154,8 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(keywords_file) then
     o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')
   end
-  if file_exists_p(glossary_file) then
-    o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_file, glossary_html_file) .. ',\n')
+  if file_exists_p(glossary_json_file) then
+    o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_json_file) .. ',\n')
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')

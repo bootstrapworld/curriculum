@@ -1,8 +1,10 @@
 = Composing Table Operations
 ++++
 <style>
-.literalblock pre { 0.5em 0 !important; }
-table:first-of-type td {padding: .25em .5em !important; }
+p.tableblock { margin: 0; }
+.t td { padding: 0 5px !important; }
+.m td { padding: 2px 8px !important; }
+
 div.circleevalsexp .value { font-size: 0.7rem; }
 </style>
 ++++
@@ -21,7 +23,7 @@ div.circleevalsexp .value { font-size: 0.7rem; }
 
 The table `t` below represents four animals from the shelter:
 
-[cols='5',options="header"]
+[.t, cols='5',options="header"]
 |===
 | name        | sex       | age   | fixed   | pounds
 | `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
@@ -30,15 +32,14 @@ The table `t` below represents four animals from the shelter:
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
 |===
 
-You have the following functions defined below (read them _carefully!_):
+Using the following predefined functions, match each table description on the left, to the Circle of Evaluation that will produce it.
 
   fun is-fixed(r): r["fixed"]                 end
   fun is-young(r): r["age"] < 4               end
   fun nametag(r):  text(r["name"], 20, "red") end
 
-For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
 
-[.FillVerticalSpace, cols=">.^6a,^.^2a,2,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+[.m, cols=">.^6a,^.^2a,2,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
 |===
 
 | A table containing only Toggle and Sasha
