@@ -303,6 +303,12 @@ var DSBasics = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
     }
+  },
+  "food": {
+    "title": "Global Food Supply & Production Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T&v=78aeaeb"
+    }
   }
 }
 
@@ -314,12 +320,6 @@ var MoreDS = {
     },
     "codap": {
       "url": "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf"
-    }
-  },
-  "food": {
-    "title": "Global Food Supply & Production Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T&v=78aeaeb"
     }
   },
   "grouped-samples": {
@@ -341,30 +341,6 @@ var MoreDS = {
     "title": "Age vs. Height Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1vq2IHuribi-aLF6tIZAWhwgiJg5Raj3o&v=78aeaeb"
-    }
-  },
-  "custom-scatter-plot": {
-    "title": "Custom Scatter Plot Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QZglYDq9W8bnNOITttlqO7TxhfLsH6I6&v=78aeaeb"  
-    }
-  },
-  "piecewise-displays": {
-    "title": "Piecewise Displays Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1F7diOSLPYeVJqi-iPll2CA_Hst3JyvLM&v=78aeaeb"
-    }
-  },
-  "piecewise-animal-images": {
-    "title": "Animal Images Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GkDFv1a_ZxAfAX7UE-vgk9ZJ7HTk99B5&v=78aeaeb"
-    }
-  },
-  "custom-scatter-plot-w-range": {
-    "title": "Dots for Value Ranges Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1fjtcMYGQHtUmHPP0xKYYulL7xu1Nl0eQ"
     }
   },
   "row-functions": {
@@ -427,6 +403,33 @@ var MoreDS = {
     "title": "Word Length Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb"
+    }
+  }
+}
+
+var DSadvanceDisplays = {
+  "custom-scatter-plot": {
+    "title": "Custom Scatter Plot Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1QZglYDq9W8bnNOITttlqO7TxhfLsH6I6&v=78aeaeb"  
+    }
+  },
+  "piecewise-displays": {
+    "title": "Piecewise Displays Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1F7diOSLPYeVJqi-iPll2CA_Hst3JyvLM&v=78aeaeb"
+    }
+  },
+  "piecewise-animal-images": {
+    "title": "Animal Images Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GkDFv1a_ZxAfAX7UE-vgk9ZJ7HTk99B5&v=78aeaeb"
+    }
+  },
+  "custom-scatter-plot-w-range": {
+    "title": "Dots for Value Ranges Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1QApEE-ji0Yhj9d4niA_WHV8vGar1yQC1&v=78aeaeb"
     }
   }
 }
@@ -671,7 +674,7 @@ var EarlyMath = {
       "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
     }
   },
-    "multiplicative-inverse-2": {
+  "multiplicative-inverse-2": {
     "title": "Multiplicative Inverse Starter File 2",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
@@ -722,7 +725,7 @@ var Projects = {
       "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
     }, 
   },
-     "threats": {
+  "threats": {
     "title": "Threats to Validity Project Template",
     "pyret": {
       "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
