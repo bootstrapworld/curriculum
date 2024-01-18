@@ -841,6 +841,15 @@ var EarlyMath = {
       "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
     }
   },
+    "distributive-prop": {
+    "title": "Distributive Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
+    }
+  }
 }
 
 
