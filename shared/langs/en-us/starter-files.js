@@ -241,7 +241,7 @@ var DSBasics = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QHraJArnEZJCwyfGKakcn8N6NvJ0f9ua"
+      "url": "https://code.pyret.org/editor#share=1xu1XQQr9cYbCJaidK6n-NhvKFC-Xe296&v=78aeaeb" 
     }
   },
   "blank-ds-tutorial": {
@@ -295,15 +295,6 @@ var DSBasics = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
     }
   },
-   "threats": {
-    "title": "Threats to Validity Project Template",
-    "pyret": {
-      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
-    },
-    "codap": {
-      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
-    }
-  },
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
@@ -328,13 +319,13 @@ var MoreDS = {
   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS"
+      "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T&v=78aeaeb"
     }
   },
   "grouped-samples": {
     "title": "Grouped Samples Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=16nzX2t8M_Z83owrq9u-XXF0xrodayW9A"
+      "url": "https://code.pyret.org/editor#share=1Tv81bTmc0-kGr-bXUdjaVayPW66F-1AA&v=78aeaeb" 
     },
     "codap": {
       "url": "TBD"
@@ -343,31 +334,31 @@ var MoreDS = {
   "hair": {
     "title": "Hair Color Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc"
+      "url": "https://code.pyret.org/editor#share=1yA2zA86eHHRKujFHvbhmHns2vwxdDkBK&v=78aeaeb"
     }
   },
    "height": {
     "title": "Age vs. Height Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_"
+      "url": "https://code.pyret.org/editor#share=1vq2IHuribi-aLF6tIZAWhwgiJg5Raj3o&v=78aeaeb"
     }
   },
   "custom-scatter-plot": {
     "title": "Custom Scatter Plot Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1DKazhJNmH1LB2J46qYMt4h2YgWPBvZEY"
+      "url": "https://code.pyret.org/editor#share=1QZglYDq9W8bnNOITttlqO7TxhfLsH6I6&v=78aeaeb"  
     }
   },
   "piecewise-displays": {
     "title": "Piecewise Displays Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1XK78l3FOYzmKPWrYmYBMUumvEWtwN03b"
+      "url": "https://code.pyret.org/editor#share=1F7diOSLPYeVJqi-iPll2CA_Hst3JyvLM&v=78aeaeb"
     }
   },
   "piecewise-animal-images": {
     "title": "Animal Images Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1hmVFpA2zWBWaKulm6LwHHzKrDhH15jvP"
+      "url": "https://code.pyret.org/editor#share=1GkDFv1a_ZxAfAX7UE-vgk9ZJ7HTk99B5&v=78aeaeb"
     }
   },
   "custom-scatter-plot-w-range": {
@@ -379,13 +370,13 @@ var MoreDS = {
   "row-functions": {
     "title": "Row Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=17266_Kczy0pJxp8TzkMsawaMavG4PDpk"
+      "url": "https://code.pyret.org/editor#share=1AqRli9LkPdkkNP2KDp20hkjwepS3JAyp&v=78aeaeb"
     }
   },
   "table-functions": {
     "title": "Table Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1lk56IOB08ir43MZ3Vbi5R5d69uqcbaL3"
+      "url": "https://code.pyret.org/editor#share=1c-dM-cQlJuuGx5I1VYFiCRSfBkWoAgbx&v=78aeaeb"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json"
@@ -394,8 +385,7 @@ var MoreDS = {
   "trust-but-verify": {
     "title": "Trust but Verify Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QeOuoKMORAbJ1xAnqhcLKTZikdFkPCKs"
-    }
+      "url": "https://code.pyret.org/editor#share=1ELldH6tPGvrBXE-p474U3Iqvz9sOWiPc&v=78aeaeb"    }
   },
   "bad-survey": {
     "title": "Height vs. Wingspan Survey (make a copy)",
@@ -409,13 +399,13 @@ var MoreDS = {
   "dirty-data": {
     "title": "New Animals! Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12MKYPQ8apNrBsstlJo-EWzYWz95vhL8L"
+      "url": "https://code.pyret.org/editor#share=1gPv48mFogsm2D6V1y4rubczF4IZcoMUT&v=78aeaeb"
     }
   },
   "fav-desserts": {
     "title": "Survey of Eighth Graders and their Favorite Desserts Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl",
+      "url": "https://code.pyret.org/editor#share=1yWthj9wzb3vJgzyju1q3fVLDxUlrAbt8&v=78aeaeb"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcavDE7LbB461CodyyaMh%2Ffile.json"
@@ -424,7 +414,7 @@ var MoreDS = {
   "olympic-records": {
     "title": "Olympic Records Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1bUSNUJ73VE3wCpLebihVdWk-Z7EFwidx"
+      "url": "https://code.pyret.org/editor#share=1WAl-23Nb8qvkOpFW3CKDCJDZ4BCpOsUq&v=78aeaeb" 
     }
   },
   "text-stats": {
@@ -731,6 +721,15 @@ var Projects = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
     }, 
+  },
+     "threats": {
+    "title": "Threats to Validity Project Template",
+    "pyret": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    },
+    "codap": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    }
   },
   "cats-only": {
     "title": "Animals Dataset - Cats Only",
