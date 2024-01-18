@@ -723,7 +723,7 @@ var Projects = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
-    }, 
+    } 
   },
   "threats": {
     "title": "Threats to Validity Project Template",
