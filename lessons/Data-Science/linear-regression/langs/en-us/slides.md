@@ -267,7 +267,7 @@ How would you explain it to someone else?{style="font-size:26pt"}
 {layout="Launch"}
 # Interpreting LR Plots
 
-Read @printable-exercise{pages/regression-analysis-example.adoc}.
+Read @printable-exercise{pages/data-cycle-regression-analysis-example.adoc}.
 
 At the bottom of the page we have the _Data Story_ for this question, which includes the results of the analysis and a responsible way to write about them. 
 
@@ -281,7 +281,7 @@ Have students explain the connection between the Ask Questions and Consider Data
 # Interpreting LR Plots
 
 - Turn to @printable-exercise{pages/describing-relationships-1.adoc}
-- Using the language you saw on @printable-exercise{pages/regression-analysis-example.adoc}, how would you write up the findings on this page?
+- Using the language you saw on @printable-exercise{pages/data-cycle-regression-analysis-example.adoc}, how would you write up the findings on this page?
 - @optional For more practice, you can complete @opt-printable-exercise{pages/describing-relationships-2.adoc}
 
 <!--
@@ -317,8 +317,8 @@ Linear Regression is a way to calculate the line-of-best-fit (or "predictor func
 Let’s connect what we know about linear regression to your chosen dataset.
 
 - Open your chosen dataset starter file @ifproglang{pyret}{in Pyret}@ifproglang{codap}{in CODAP}.
-- Choose one correlation you were investigating, and use the Data Cycle to ask the question about the relationship between those two columns. Tell the story on @printable-exercise{regression-analysis-1.adoc}.
-- You can explore another question in the same way, using @opt-printable-exercise{regression-analysis-2.adoc}.
+- Choose one correlation you were investigating, and use the Data Cycle to ask the question about the relationship between those two columns. Tell the story on @printable-exercise{data-cycle-regression-analysis-1.adoc}.
+- You can explore another question in the same way, using @opt-printable-exercise{data-cycle-regression-analysis-2.adoc}.
 
 @teacher{Confirm that all students have created and understand how to interpret their LR plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
 
@@ -345,6 +345,6 @@ Did the results from @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{your Least 
 {layout="Supplemental"}
 # Your Analysis
 
-- An extra, @opt-printable-exercise{regression-analysis-2.adoc, blank regression analysis pages} is available
+- An extra, @opt-printable-exercise{data-cycle-regression-analysis-2.adoc, blank regression analysis pages} is available
 @ifproglang{pyret}{
 - @opt-project{olympics-project.adoc, olympics-project-rubric.adoc}}

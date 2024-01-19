@@ -14,18 +14,12 @@ adocbasename=$(basename $adocfile)
 
 ascfile=$containingdirectory/.cached/.${adocbasename%.adoc}.asc
 
-glossaryfile=$containingdirectory/.cached/.${adocbasename%.adoc}-glossary.asc
-
-touch $glossaryfile
-
 if test ! -s $adocfile; then
   touch $containingdirectory/.cached/.${adocbasename%.adoc}.asc
   # exit
 fi
 
 htmlfile=${ascfile%.asc}.html
-
-# whtmlfile=$containingdirectory/${adocbasename%.adoc}.shtml
 
 solutionsmodearg="#f"
 
@@ -55,15 +49,11 @@ if test -f "$proglangfile"; then
   done
 fi
 
-# touch $containingdirectory/.cached/.index-sidebar.asc
 touch $containingdirectory/.cached/.index-standards.asc
 
 echo "(\"$adocbasename\" #:containing-directory \"$containingdirectory\" #:dist-root-dir \"$distrootdir\" #:lesson-plan \"$lesson\" #:proglang \"$proglangarg\" #:other-proglangs '($otherproglangs))" >>  $ADOCABLES_INPUT
 
 echo $ascfile >> $ADOC_INPUT
 
-echo $glossaryfile >> $ADOC_INPUT
-
 echo "  " \"$htmlfile\", >> $ADOC_POSTPROC_LESSONPLAN_INPUT
 
-# echo ", { \"input\": \"$whtmlfile\", \"aspect\": \"portrait\" }" >> $PUPPETEER_INPUT

@@ -445,10 +445,6 @@
   (display "\ninclude::.index-standards.asc[]\n" o)
   (display "|===\n" o))
 
-(define (include-glossary o)
-  ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
-
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
       (call-with-input-file f
@@ -1055,14 +1051,14 @@
                     (map (lambda (x)
                            (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
                                  [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
-                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-pyret][Pyret]" *dist-root-dir*)]
                                  [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
-                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-wescheme][WeScheme]" *dist-root-dir*)]
                                  [(and (string=? x "pyret") *lesson-plan*)
-                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                  (format "link:pass:[~alessons/~a/index.shtml][Pyret]" *dist-root-dir*
                                           (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
                                  [*lesson-plan*
-                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                   (format "link:pass:[~alessons/~a/index.shtml][~a]" *dist-root-dir*
                                            (if (string=? *proglang* "pyret")
                                                (string-append *lesson-plan* "-" x)
                                                (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
@@ -1241,7 +1237,7 @@
         (let ([lesson-asc-file
                 (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.json"
+                (format "distribution/~a/lessons/~a/.cached/.index-glossary.json"
                         *natlang* lesson)]
               [lesson-title-file
                 (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
@@ -1253,7 +1249,7 @@
             (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
           (when (file-exists? lesson-glossary-file)
-            ;(printf "~a exists i\n" lesson-glossary-file)
+            ; (printf "~a exists i\n" lesson-glossary-file)
             (for ([s (call-with-input-file lesson-glossary-file read-json)])
               (unless (member s *glossary-items*)
                 (set! *glossary-items*
@@ -1429,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "big")
+                            (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "define")
@@ -1843,8 +1841,9 @@
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (fprintf o "[.optionaltag]##Optional: ##")
+                              (display "\n[.optionaltag]\n--" o)
                               (display (expand-directives:string->string text) o)
+                              (display "--\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -1993,9 +1992,7 @@
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! *first-subsection-reached?* #t)
-                                  (when *lesson-plan*
-                                    (include-glossary o))]
+                                  (set! *first-subsection-reached?* #t)]
                                  [else #f])
                            (cond [*lesson*
                                    (display-section-markup i o)]
@@ -2166,15 +2163,6 @@
                                    "-glossary"
                                    )))
 
-      (when *lesson-plan*
-        (accumulate-glossary-and-alignments))
-
-      ;(printf "pathwayrootdir = ~a\n" *pathway-root-dir*)
-      ;(printf "lesson = ~a\n" *lesson*)
-      ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
-
-      ; (printf "\nprereqs-used= ~s\n\n" *prereqs-used*)
-
       (when (pair? *prereqs-used*)
         ; (printf "lessonplan?= ~s; lesson?= ~s\n\n" *lesson-plan* *lesson*)
         (let ([prim-file (if *lesson-plan*
@@ -2206,7 +2194,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
@@ -2232,9 +2220,10 @@
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
+            ; GLOSSARY REFERENCE
+            (unless (empty? *glossary-items*)
+              (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
             ; LESSON PLAN
-            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
-            ; CONTRACTS REFERENCE
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
             ; STATUS BAR FOR PRINTING PDFS
@@ -2269,6 +2258,8 @@
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
+            ; CONTRACTS REFERENCE
+            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference]\n" *dist-root-dir* )
             ; NO OPTIONAL ANYTHING - display a helpful message
             (when (and *supplemental-materials-needed?*
                        (empty? *opt-printable-exercise-links*)
@@ -2329,7 +2320,8 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
+            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #f])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
@@ -2415,23 +2407,19 @@
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
   (print-menubar (string-append file "-comment.txt"))
-  (call-with-output-file (string-append file ".asc")
-    (lambda (op)
-      (unless (empty? *glossary-items*)
-        (set! *glossary-items*
-          (sort *glossary-items* #:key first string-ci<=?))
-        (when *narrative*
-          (fprintf op "= Glossary\n\n"))
-        (when *lesson*
-          (fprintf op ".Glossary\n\n"))
-        (fprintf op "[.glossary]~%")
-        (for ([s *glossary-items*])
-          ;(fprintf op "* *~a*: ~a~%" (first s) (second s))
-          (fprintf op "~a:: ~a~%" (first s) (second s)))
-        (fprintf op "~%~%")))
-    #:exists 'replace)
-
-  ;if we wish, we can store missing glossary items in a temp file for later inspection
+  (unless (empty? *glossary-items*)
+    (set! *glossary-items*
+      (sort *glossary-items* #:key first string-ci<=?))
+    (call-with-output-file (string-append file ".json")
+      (lambda (op)
+        (display "[\n" op)
+        (let ([first? #t])
+          (for ([s *glossary-items*])
+            (cond [first? (display "  " op) (set! first? #f)]
+                  [else (display ",  " op)])
+            (fprintf op "[~s, ~s]\n" (first s) (second s))))
+        (display "]\n" op))
+      #:exists 'replace))
 
   )
 
@@ -2485,20 +2473,6 @@
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
   )
-
-(define (accumulate-glossary-and-alignments)
-  ; (printf "doing accumulate-glossary-and-alignments\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
-    (lambda (op)
-      (let ([first? #t])
-        (display "[\n" op)
-        (for ([s *glossary-items*])
-          (cond [first? (set! first? #f)]
-                [else (display ",\n" op)])
-          (fprintf op "  [~s, ~s]" (first s) (second s))
-          )
-        (display "\n]\n" op)))
-    #:exists 'replace))
 
 ;coe
 (define (hspace n)

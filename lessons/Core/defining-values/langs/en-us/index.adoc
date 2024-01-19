@@ -29,6 +29,9 @@
 |[.materials-links]
 @opt-material-links
 
+| Preparation
+| * There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+
 | Key Points For The Facilitator
 |
 * Learning how to define values is a big milestone! It will be used consistently throughout other lessons, so be sure to give students plenty of time to practice this new skill.
@@ -86,19 +89,16 @@ Duplicate code is almost always bad!
 
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
---
 You already know how to do this in math:
 
-[.indentedpara]
-@math{x = 4} _defines_ the nickname @math{x} to be the value 4.
---
+@indented{@math{x = 4} _defines_ the nickname @math{x} to be the value 4.}
+
 
 @ifproglang{wescheme}{
 --
 WeScheme uses the word "define" to make this even clearer!
 
-[.indentedpara]
-We can type `(define x 4)` to define `x` to be the value 4.
+@indented{We can type `(define x 4)` to define `x` to be the value 4.}
 --
 }
 
@@ -106,8 +106,7 @@ We can type `(define x 4)` to define `x` to be the value 4.
 --
 Pyret is no different!
 
-[.indentedpara]
-We type `x = 4` to define `x` to be the value 4.
+@indented{We type `x = 4` to define `x` to be the value 4.}
 --
 }
 
@@ -118,15 +117,36 @@ Of course, the whole point of defining a value is so that it sticks around and c
 === Investigate
 
 @lesson-instruction{
-- Open the @starter-file{defining-values} and complete @printable-exercise{pages/defining-values-explore.adoc} with your partner.
+Open the @starter-file{defining-values}. **Do NOT click "Run"!**
+}
+
+@QandA{
+This file has a lot of values defined on the left, including the example we just talked about: `x` is defined to be `4`.
+
+@Q{What do expect @proglang will produce if we type `x` into the Interactions Area and hit Enter?}
+@A{We expect the number `4` to come back}
+
+@Q{Making sure you have NOT clicked "Run", try it out. What did you get back?}
+@A{An error!}
+
+@Q{Read the error out loud. What do you think it means?}
+@A{Answers will vary}
+}
+
+@lesson-point{The "Run" button tells @proglang to read all the definitions}
+
+Some of you may have wondered what the "Run" button does. Now we have our answer! If @proglang hasn't run the program we just loaded, it doesn't know about _any_ of the definitions!
+
+@lesson-instruction{
+- With your partner, complete @printable-exercise{pages/defining-values-explore.adoc}.
 - Add some definitions of your own in the Definitions Area. Be sure to click "Run" again before you try testing them out.
-- Complete @printable-exercise{which-value-to-define.adoc}.
 }
 
 === Synthesize
 
 - What data types can we define values for?
 ** _All of them - Number, String, Image_
+- In question 13, you looked at different ways of writing the same definition. Each way broke the definition up into multiple lines. Which one did you like best, and why?
 - What values did you decide to define? When might they be useful?
 
 
@@ -136,7 +156,7 @@ Of course, the whole point of defining a value is so that it sticks around and c
 MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the programming-specific language, such as "define" and "value".
 }
 
-== Using Defined Values
+== Look for and Make Use of Structure
 
 === Overview
 Now that we know _how_ to define values, we've got two more things to consider:
@@ -146,13 +166,32 @@ Now that we know _how_ to define values, we've got two more things to consider:
 
 === Launch
 
+Once you know how to define values, you can start looking for re-usable logic and ways to simplify the solution to a problem.
+
+@lesson-instruction{
+Complete @printable-exercise{which-value-to-define.adoc}. Can you find the re-usable shapes in these flags?
+}
+
+
+=== Investigate
+
 @lesson-instruction{
 Complete @printable-exercise{chinese-flag.adoc}.
 }
 
-Note: The above worksheet will direct students to open the @starter-file{flags-china} once they complete the first half of the questions.
+@teacher{
+This worksheet will direct students to open the @starter-file{flags-china} once they complete the first half of the questions.
 
-=== Investigate
+Have students share their answers about why the code for the Chinese Flag is broken up into multiple lines, and what they think it means for two or more lines lines to start at the same position.
+}
+
+In this exercise, you saw a really long definition that is broken up into many lines. In this example, all of the inputs to each `put-image` followed a pattern:
+
+- The first line contains the image being put on top
+- The second line contains the x- and y-coordinates that position that image on the bottom image
+- The last line contains the code for the bottom image.
+
+This makes the code a _lot_ easier to read! Programmers break up their code in sensible ways in order to communicate the _structure_ of the program.
 
 @lesson-instruction{
 - Open a new file in @starter-file{editor} and name it `sunny`, then turn to @printable-exercise{pages/coe-why-define-values.adoc}
@@ -163,7 +202,7 @@ Note: The above worksheet will direct students to open the @starter-file{flags-c
 - Write the code on the line provided in question 2. Then type it into the Interactions Area and click "Run".
 - Define the value `sunny` in the Definitions Area.
 - Complete the page and test your code in the editor.
-- When you're done, turn to @printable-exercise{pages/writing-code-using-defined-values.adoc} and follow the directions to work with a new function you'll define called `PRIZE-STAR`.
+- When you're done, turn to @printable-exercise{pages/writing-code-using-defined-values.adoc} and follow the directions to work with a new definition called `PRIZE-STAR`.
 }
 
 === Synthesize

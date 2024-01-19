@@ -1,13 +1,16 @@
 = Data Cycle: Shape of My Dataset
 ++++
 <style>
-/* hide the sub-questions for Analyze */
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
 </style>
 ++++
 
-Use the Data Cycle to explore the distribution of one or more quantitative columns using *histograms and box plots*, and write down your findings.
+Use the Data Cycle to explore the distribution of one or more quantitative columns using *box plots*, and write down your findings.
 
 @data-cycle{ ""
   #:question ""
@@ -27,6 +30,23 @@ Use the Data Cycle to explore the distribution of one or more quantitative colum
   #:new-question ""
   #:show-new-question? #f
 }
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| The box plot for @fitbruby{21em}{}{x-variable in context} is @fitbruby{21em}{}{skewed left / skewed right / symmetric / etc.}.  
+
+The 5-number summary is: min = @fitb{5em}{} Q1 = @fitb{5em}{} median = @fitb{5em}{} Q3 = @fitb{5em}{} max = @fitb{4em}{}
+
+The middle 50% of the data lies between @fitb{6em}{} and @fitb{6em}{} so the Interquartile Range is @fitb{}{}
+
+I notice that @fitbruby{}{}{Consider statements like:  75% of the data fall below ... / The top 25% of the data fall between ... / etc}
+
+@fitb{}{}
+
+I wonder @fitb{}{}
+
+|===
 
 @span{.sectionbreak}{}
 
@@ -48,3 +68,20 @@ Use the Data Cycle to explore the distribution of one or more quantitative colum
   #:new-question ""
   #:show-new-question? #f
 }
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| The box plot for @fitbruby{21em}{}{x-variable in context} is @fitbruby{21em}{}{skewed left / skewed right / symmetric / etc.}.  
+
+The 5-number summary is: min = @fitb{5em}{} Q1 = @fitb{5em}{} median = @fitb{5em}{} Q3 = @fitb{5em}{} max = @fitb{4em}{}
+
+The middle 50% of the data lies between @fitb{6em}{} and @fitb{6em}{} so the Interquartile Range is @fitb{}{}
+
+I notice that @fitbruby{}{}{Consider statements like:  75% of the data fall below ... / The top 25% of the data fall between ... / etc}
+
+I wonder @fitb{}{}
+
+@fitb{}{}
+
+|===

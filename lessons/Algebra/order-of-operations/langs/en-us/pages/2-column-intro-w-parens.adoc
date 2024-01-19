@@ -1,0 +1,46 @@
+= Expressions -> Circles of Evaluation
+
+Translate each of the arithmetic expressions below into Circles of Evaluation. 
+
+@do{
+  (define expr1 '(- (/ 6 2) (- 5 3)))
+  (define expr2 '(- 9 (* 2 4)))
+  (define expr3 '(- 8 (+ 1 (* 2 3))))
+  (define expr4 '(- (+ 1 (* 4 7)) 3))
+}
+
+[.FillVerticalSpace, cols="^2a,^10a,^15a",options="header",stripes="none"]
+|===
+|
+| Arithmetic Expression
+| Circle of Evaluation
+
+
+|*@n*
+| 
+@show{    (math expr1 #:parens true)}
+| @showsoln{(coe  expr1)}
+
+|*@n*
+| @show{    (math expr2 #:parens true)}
+| @showsoln{(coe  expr2)}
+
+|*@n*
+| @show{    (math expr3 #:parens true)}
+| @showsoln{(coe  expr3)}
+
+|*@n*
+| @show{    (math expr4 #:parens true)}
+| @showsoln{(coe  expr4)}
+|===
+
+@star Rewrite each of these expressions with one less pair of parentheses without changing its Order of Operations.
+
+@ifsoln{1)} @showsoln{(math expr1)}
+@ifsoln{2)} @showsoln{(math expr2)} 
+@ifsoln{3)} @showsoln{(math expr3)} 
+@ifsoln{4)} @showsoln{(math expr1)}
+
+@star Evaluate each of the expressions following the structures you drew in the Circles of Evaluation. + 
+@hspace{1em} Record your process by showing the calculations you make along the way.
+@ifsoln{1)@fitb{5em}{} 2)@fitb{5em}{} 3) @fitb{5em}{} 4)@fitb{5em}{}}
