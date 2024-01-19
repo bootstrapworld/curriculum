@@ -904,7 +904,7 @@ const Reactive = {
   }
 }
 
-var EarlyMath = {
+const EarlyMath = {
   "comm-and-assoc": {
     "title": "Commutativity and Associativity Starter File",
     "pyret": {
@@ -953,7 +953,7 @@ var EarlyMath = {
 }
 
 
-var allStarterFiles = {
+const allStarterFiles = {
   ...Editors, 
   ...Core, 
   ...Piecewise, 
