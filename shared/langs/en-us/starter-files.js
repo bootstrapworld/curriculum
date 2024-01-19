@@ -1,7 +1,7 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-var Editors = {
+const Editors = {
   "editor": {
     "title": "the editor",
     "autoinclude": false,
@@ -36,7 +36,7 @@ var Editors = {
   }
 }
 
-var Core = {
+const Core = {
   "bc": {
     "title": "bc Starter File",
     "pyret": {
@@ -126,7 +126,7 @@ var Core = {
   }
 }
 
-var Piecewise = {
+const Piecewise = {
   "alices-restaurant": {
     "title": "Alice's Restaurant Starter File",
     "pyret": {
@@ -171,7 +171,7 @@ var Piecewise = {
   }
 }
 
-var GameBasics = {
+const GameBasics = {
   "ninja-cat": {
     "title": "Ninja Cat Game",
     "pyret": {
@@ -237,7 +237,7 @@ var GameBasics = {
   }
 }
 
-var DSBasics = {
+const DSBasics = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
@@ -312,7 +312,7 @@ var DSBasics = {
   }
 }
 
-var MoreDS = {
+const MoreDS = {
   "fair-coins": {
     "title": "Fair Coins Starter File",
     "pyret": {
@@ -407,7 +407,7 @@ var MoreDS = {
   }
 }
 
-var DSadvanceDisplays = {
+const DSadvanceDisplays = {
   "custom-scatter-plot": {
     "title": "Custom Scatter Plot Starter File",
     "pyret": {
@@ -434,7 +434,7 @@ var DSadvanceDisplays = {
   }
 }
 
-var DSdesmos = {
+const DSdesmos = {
   "boxplots":{
     "title": "Box plot practice (Desmos)",
     "pyret":{
@@ -455,7 +455,7 @@ var DSdesmos = {
   }
 }
 
-var Flags = {
+const Flags = {
   "flags": {
     "title": "Flags Starter File",
     "pyret": {
@@ -553,7 +553,7 @@ var Flags = {
   }
 }
 
-var MoreAlg = {
+const MoreAlg = {
   "right-trianglesDesmos": {
     "title": "Exploring Proofs without Words (Desmos)",
     "pyret": {
@@ -646,7 +646,7 @@ var MoreAlg = {
   }
 }
 
-var EarlyMath = {
+const EarlyMath = {
   "comm-and-assoc": {
     "title": "Commutativity and Associativity Starter File",
     "pyret": {
@@ -697,7 +697,7 @@ var EarlyMath = {
   }
 }
 
-var Projects = {
+const Projects = {
   "functions": {
     "title": "Functions Starter File",
     "pyret": {
@@ -748,7 +748,7 @@ var Projects = {
   }
 }
   
-var Alg2 = {
+const Alg2 = {
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
@@ -805,7 +805,7 @@ var Alg2 = {
   }
 }
 
-var Reactive = {
+const Reactive = {
   "package-delivery": {
     "title": "Package Delivery Starter File",
     "pyret": {
