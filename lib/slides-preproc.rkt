@@ -598,8 +598,10 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
-                           [(member directive '("strategy" "teacher"))
+                           [(member directive '("opt" "strategy" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
+                              (when (string=? directive "opt")
+                                (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
                               (newline teacher-notes)
                               (expand-directives:string->port text teacher-notes)
