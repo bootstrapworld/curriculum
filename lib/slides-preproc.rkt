@@ -554,9 +554,14 @@
                             (display "\n---\n" o)]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (display (make-image (first args)
-                                                   (if (>= (length args) 2) (second args) ""))
-                                       o))]
+                              (cond [(not teacher-notes)
+                                     (display (make-image (first args)
+                                                          (if (>= (length args) 2) (second args) ""))
+                                              o)]
+                                    [else
+                                      (printf "WARNING: Using @image inside teacher notes\n")
+                                      (fprintf o "@image{~a}" args)
+                                      (display "@image{~a}" o)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
