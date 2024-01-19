@@ -78,7 +78,8 @@
         (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
                  (string->uniqid lesson-dir) ;id
                  (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
-                 (make-lesson-permalink lesson-dir) ;permalink
+                 lesson-dir
+                 ;(make-lesson-permalink lesson-dir) ;permalink
                  "" ; parent
                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
                  "" ; child categories
@@ -100,8 +101,9 @@
             (when (regexp-match #rx"\\.html" p)
               ;id, title, permalink, lesson-parent, unit-raw-code
               (let* ([p-base (regexp-replace #rx"\\.html" p "")]
-                     [lesson/p (format "~a/~a~a" lesson-dir p-base
-                                       (if (string=? pages "pages") "" "-solution"))]
+                     [p-prime (format "~a~a" p-base
+                                (if (string=? pages "pages") "" "-solution"))]
+                     [lesson/p (format "~a/~a" lesson-dir p-prime)]
                      [page-file (path->string (build-path pages-dir-path p))]
                      [page-title-file (path->string (build-path pages-dir-path ".cached"
                                                                 (string-append "."
@@ -113,7 +115,8 @@
                   (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
-                           (make-lesson-permalink lesson/p) ; permalink
+                           p-prime
+                           ;(make-lesson-permalink lesson/p) ; permalink
                            lesson-id ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
@@ -133,7 +136,7 @@
 
 (call-with-output-file *csv-file*
   (lambda (o)
-    (fprintf o "ID,Title,Permalink,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
+    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
     (convert-lessons o)
     (convert-workbook-pages o)
     (convert-workbook-pages o #:pages "solution-pages"))
