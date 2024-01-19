@@ -167,33 +167,104 @@ Students explore two functions - `scale` and `rotate` - each of which consumes a
 
 === Launch
 
-Let's say we have a number, `w`. The Identity Property tells us that we can multiply or divide `w` by 1... and we'll always get `w` back. If we multiply `w` by some value *other* than 1, however, we should expect a new outcome!
+You’ve discovered that multiplying or dividing an expression by 1 does not change its value. Similarly, adding or subtracting 0 results in the original value. Each of these four applications of the Identity Property is represented in the four Circles of Evaluation below.
+
+@ifnotslide{
+[.embedded, cols="^.^6a,^.^6a,^.^6a,^.^6a",stripes="none"]
+|===
+
+| @show{(coe '(* m 1))}
+| @show{(coe '(/ m 1))}
+| @show{(coe '(+ m 0))}
+| @show{(coe '(- m 0))}
+
+|===
+}
+
+Each of these four Circles evaluates to @math{m} which means *the Identity Property requires an operation that does… nothing!*
 
 @slidebreak
 
-`scale` is a @proglang function that can grow or shrink any image by a factor that we provide. Here is its contract:
+We can also represent these four applications of the Identity Property with the Circles of Evaluation below, with some made-up functions that take in just ONE input. The functions' describe what they do!
 
-@show{(contract "scale" '(("factor" "Number") ("img" "Image")) "Image")}
+@teacher{If students struggle with this idea, revisiting the idea of a "function machine" can be helpful!}
 
-Let's say we enter @show{(code '(scale 3 (triangle 30 "solid" "purple")))}. We can expect @proglang to produce a 90-pixel solid purple triangle. The original image's size was _tripled_.
+@ifnotslide{
+[.embedded, cols="^.^6a,^.^6a,^.^6a,^.^6a",stripes="none"]
+|===
 
-@lesson-instruction{
-Use @starter-file{scale-rotate} to experiment with the `scale` function and complete @printable-exercise{scale-rotate-identity.adoc} through question 5.
+| @show{(coe '(multiply-by-one m))}
+| @show{(coe '(divide-by-one m))}
+| @show{(coe '(add-zero m))}
+| @show{(coe '(subtract-zero m))}
+
+|===
 }
 
 
+No matter what value we use for @math{m}, we will get that value back.
+
+@slidebreak
+
+
+@lesson-roleplay{
+Select four students - one to _act out_ each of the four functions above (`multiply-by-one`, `divide-by-one`, `add-zero`, and `subtract-zero`). Make it clear to the class what each function's name is. Emphasize that each function expects a Number, and will produce Number.
+
+Just as with any acting career, this one will begin with a rehearsal. When I say, "*multiply-by-one 24*", you say, "*24*" Let's try it.
+
+- Teacher: *multiply-by-one... 24*
+- Student: 24!
+- Teacher: *divide-by-one... 366*
+- Student: _366_
+- Teacher: *add-zero... 4*
+- Student: _4_
+- Teacher: *subtract-zero... 16*
+- Student: _16_
+
+That was a great rehearsal. You're ready for the stage! Now it's the class' turn to give you cues! Who's got an in put for our one of our actors?
+
+Go around the room soliciting expressions from students until it's clear that everyone could run this script in their sleep.
+}
+
 === Investigate
 
-According to the Identity Property, we can also add or subtract 0 from a number - and we get that same number back.
+We just talked about four different functions. Each one consumed a number and produced a number. But what about functions that consume images? Can the Identity Property apply to those?
 
-Rotation transformations work similarly. Let's say we have a @proglang image of a dog. After we rotate it in a full circle around a center point, the image of the dog will look exactly the same as it did before the transformation. If we rotate the image just halfway, however, the transformed image will not be identical to the original.
+@QandA{
+@Q{What is something we can do to this dog (below) that will _transform_ it... but still result in the *exact same image*?}
+}
+
+@right{@image{images/dog.png, 150}}
+
+@teacher{
+Solicit student responses and record them on the board. If students do not volunteer answers, consider sharing one or two of the following possible responses: flip it vertically twice; flip it horizontally twice; rotate it 360 degrees clockwise; rotate it 360 counter-clockwise; scale it by 1; slide it some distance and then return it to its original position.
+
+Students will be working in @proglang soon - but we recommend keeping things unplugged for now! You might even print up an image of the dog - or any other image you choose - to display on the board at the front of the room. Invite students to the board to demonstrate their ideas by manipulating it.}
+
+@slidebreak
+
 
 @lesson-instruction{
- Complete @printable-exercise{scale-rotate-identity.adoc}.
+- Open @starter-file{identity-prop} and click “Run.”
+- Type `dog` into the Interactions Area to see what the defined image looks like.
+- How many different ways you can transform dog and still get the same image back!
+- Spend a few minutes to see how many “do-nothing” transformations you can make.
+- Up for a challenge? Try applying multiple “do-nothing” functions to the `dog` image.
+}
+
+@QandA{
+@Q{What “do-nothing” transformations did you come up with? Let’s share.}
+}
+
+@teacher{As students share, record their responses on the board by drawing the Circles of Evaluation that represent their ideas. Some possible responses are below.}
+
+@lesson-instruction{
+- Complete @printable-exercise{scale-rotate-identity.adoc}, where you will explore `scale`, `rotate`. `flip-vertical`, and `flip-horizontal` further.
+- As you work through this activity, be sure to make predictions about the code before testing it out!
 }
 
 
 === Synthesize
 
-- What did you discover? For what values do `scale` and `rotate` produce identical images?
-- In your own words, describe how `scale` and `rotate` help you understand the Identity Property.
+- What did you discover? For what values did `scale` and `rotate` produce identical images of the dog?
+- In your own words, describe how functions in @proglang helped you understand the Identity Property.

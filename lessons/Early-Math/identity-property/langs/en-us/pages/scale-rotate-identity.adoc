@@ -1,4 +1,4 @@
-= Scale, Rotate and the Identity Property
+= The Identity Property and Images
 
 ++++
 <style>
@@ -8,39 +8,19 @@
 </style>
 ++++
 
-Use @starter-file{scale-rotate} to respond to the questions below. Refer to the contacts as needed.
-
-
-[.table1, cols="1,1", grid="none", frame="none", stripes="none"]
-|===
-
-| @show{(contract "scale" '(("factor" "Number") ("img" "Image"))
-    "Image")}
-| @show{(contract "rotate" '(("degree" "Number") ("img" "Image"))
-    "Image")}
-|===
+Use @starter-file{identity-prop} to respond to the questions below.
 
 == Scale
 
-@n Click “Run”, then type `hello` into the interactions area of @proglang. Hit Enter. What does @proglang return? @fitb{}{}
+@n With your partner, predict what belongs in each blank below. Then, test your prediction using @proglang to see if you were correct.
 
-@fitb{}{}
+@hspace{1em} Scaling by 1 will produce an image that is @fitb{}{@ifsoln{identical to the original image!}}
 
-@n Type @show{(code '(scale 2 "hello"))}. What happened? How is the image returned different from what you saw for Q1? @fitb{}{}
+@hspace{1em} Scaling by @math{\frac{1}{2}} will produce an image that is @fitb{}{@ifsoln{1/2 the size of the original image}}.
 
-@fitb{}{}
+@hspace{1em} Scaling by @math{\frac{1}{10}} will produce an image that is @fitb{}{@ifsoln{one-tenth as big as the original image}}.
 
-@n The Identity Property tells us that multiplying or dividing an expression by 1 does not change its value. Sometimes, `scale` produces an identical result, too: scaling by 1 will always produce an image that is identical to the original image! Try scaling by 1 in @proglang to confirm.
-
-@n With your partner, predict what belongs in each blank below. Then, test your prediction using @proglang to see if you were correct. We’ve completed the first one for you.
-
-@hspace{1em} Scaling by @fitb{1em}{1} will produce an image that is identical to the original image!
-
-@hspace{1em} Scaling by @math{\frac{1}{2}} will produce an image that is @fitb{}{}.
-
-@hspace{1em} Scaling by @fitb{2em}{@math{\frac{1}{10}}} will produce an image that is @fitb{}{one-tenth as big as the original image}.
-
-@hspace{1em} Scaling by @fitb{2em}{@ifsoln{0}} will produce @fitb{}{nothing - no image at all!}
+@hspace{1em} Scaling by 0 will produce @fitb{}{@ifsoln{nothing - no image at all!}}
 
 @n Place a checkmark next to lines of code that you predict will produce an image identical to the original. Then, run the code to test your predictions.
 
@@ -53,47 +33,71 @@ Use @starter-file{scale-rotate} to respond to the questions below. Refer to the 
 @fitb{1em}{} @show{(code '(scale (+ -20 20 1) hello))}}
 
 @ifproglang{pyret}{
-@fitb{1em}{} `scale(-20 + 20 + 1, hello)`}
+@fitb{1em}{} `scale(-20 + 20 + 1, dog)`}
 
-|| @fitb{1em}{} @show{(code '(scale (* 1/2 2) "hello"))}
+|| @fitb{1em}{} @show{(code '(scale (* 1/2 2) dog))}
 
-| @fitb{1em}{} @show{(code '(scale 0 hello))}
+| @fitb{1em}{} @show{(code '(scale 0 dog))}
 
-|| @fitb{1em}{} @show{(code '(scale -1 hello))}
+|| @fitb{1em}{} @show{(code '(scale -1 dog))}
 
-| @fitb{1em}{} @show{(code '(scale (+ 45 -45) hello))}
+| @fitb{1em}{} @show{(code '(scale (+ 45 -45) dog))}
 
 |===
 
 == Rotate
 
-@n In the Interactions Area (right), type @show{(code '(rotate 90 hello))}. What happened? How is the image returned different from the original? @fitb{}{}
+@n In the Interactions Area (right), type @show{(code '(rotate 90 dog))}. What happened? @fitb{}{}
 
 @fitb{}
 
-@n Place a checkmark next to lines of code that you predict will produce an image identical to the original. Then, run the code to test your predictions.
+@n Place a checkmark next to the code that you predict will produce an image identical to the original. Run the code to test your predictions.
 
 [.table2, cols="1,15,15", grid="none", frame="none", stripes="none"]
 |===
 
-|| @fitb{1em}{} @show{(code '(rotate 180 hello))}
+|| @fitb{1em}{} @show{(code '(rotate 180 dog))}
 
-| @fitb{1em}{} @show{(code '(rotate 90 hello))}
+| @fitb{1em}{} @show{(code '(rotate 90 dog))}
 
-|| @fitb{1em}{} @show{(code '(rotate -90 hello))}
+|| @fitb{1em}{} @show{(code '(rotate -90 dog))}
 
-| @fitb{1em}{} @show{(code '(rotate -180 hello))}
+| @fitb{1em}{} @show{(code '(rotate -180 dog))}
 
-|| @fitb{1em}{} @show{(code '(rotate 360 hello))}
+|| @fitb{1em}{} @show{(code '(rotate 360 dog))}
 
-| @fitb{1em}{} @show{(code '(rotate -360 hello))}
+| @fitb{1em}{} @show{(code '(rotate -360 dog))}
 
-|| @fitb{1em}{} @show{(code '(rotate 450 hello))}
+|| @fitb{1em}{} @show{(code '(rotate 450 dog))}
 
-| @fitb{1em}{} @show{(code '(rotate (* 360 19) hello))}
+| @fitb{1em}{} @show{(code '(rotate (* 360 19) dog))}
 
 |===
 
 @n What did you discover? For what degrees did `rotate` produce an identical image? @fitb{}{}
 
 @fitb{}{}
+
+== Flip
+
+@n In the Interactions Area (right), type @show{(code '(flip-vertical dog))}. Try @show{(code '(flip-horizontal dog))}. What happened? How is the image returned different from the original? @fitb{}{}
+
+@fitb{}
+
+@n Place a checkmark next to lines of code that you predict will produce an image identical to the original. Then, run the code to test your predictions.
+
+
+[.table3, cols="1,15,15", grid="none", frame="none", stripes="none"]
+|===
+
+|| @fitb{1em}{} @show{(code '(flip-vertical (flip-horizontal dog)))}
+
+| @fitb{1em}{} @show{(code '(flip-horizontal (flip-vertical dog)))}
+
+|| @fitb{1em}{} @show{(code '(flip-vertical (flip-vertical dog)))}
+
+| @fitb{1em}{} @show{(code '(flip-horizontal (flip-horizontal dog)))}
+
+|===
+
+@star Write the longest, most complex line of code you can that applies several transformations to `dog`, but produces an identical output.

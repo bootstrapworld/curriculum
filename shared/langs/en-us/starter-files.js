@@ -841,13 +841,13 @@ var EarlyMath = {
       "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
     }
   },
-  "scale-rotate":{
+  "identity-prop":{
   "title": "Identity Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm"
+      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=EzqLq7wl8a"
+      "url": "https://www.wescheme.org/view?publicId=5hRzeYdvpB"
     }
   }
 }
