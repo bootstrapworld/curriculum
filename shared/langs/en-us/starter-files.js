@@ -953,53 +953,6 @@ var EarlyMath = {
 }
 
 
-
-
-var Projects = {
-  "functions": {
-    "title": "Functions Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
-    }
-  },
-  "my-function": {
-    "title": "My Function Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
-    }
-  },
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
-    }, 
-  },
-  "cats-only": {
-    "title": "Animals Dataset - Cats Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
-    }
-  },
-  "dogs-only": {
-    "title": "Animals Dataset - Dogs Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
-    }
-  }
-}
-
-
-
-
 var allStarterFiles = {
   ...Editors, 
   ...Core, 
