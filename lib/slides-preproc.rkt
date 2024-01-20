@@ -193,7 +193,7 @@
   (format "<code>~s</code>" exp))
 
 (define (coe exp)
-  (string-append "\n$$$ html\n"
+  (string-append "\n\n$$$ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
@@ -692,6 +692,8 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
+                           [(string=? directive "include")
+                            (printf "WARNING: @include found outside of @ifnotslide!\n")]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
