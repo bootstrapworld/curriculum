@@ -693,7 +693,8 @@
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
                            [(string=? directive "include")
-                            (printf "WARNING: @include found outside of @ifnotslide!\n")]
+                            (printf "WARNING: @include found outside of @ifnotslide!\n")
+                            (display "@include found outside of @ifnotslide!\n" o)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
