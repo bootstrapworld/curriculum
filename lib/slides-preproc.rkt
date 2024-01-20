@@ -193,7 +193,7 @@
   (format "<code>~s</code>" exp))
 
 (define (coe exp)
-  (string-append "\n$$$ html\n"
+  (string-append "\n\n$$$ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
@@ -552,9 +552,14 @@
                             (display "\n---\n" o)]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
-                              (display (make-image (first args)
-                                                   (if (>= (length args) 2) (second args) ""))
-                                       o))]
+                              (cond [(not teacher-notes)
+                                     (display (make-image (first args)
+                                                          (if (>= (length args) 2) (second args) ""))
+                                              o)]
+                                    [else
+                                      (printf "WARNING: Using @image inside teacher notes\n")
+                                      (fprintf o "@image{~a}" args)
+                                      (display "@image{~a}" o)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -687,6 +692,9 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
+                           [(string=? directive "include")
+                            (printf "WARNING: @include found outside of @ifnotslide!\n")
+                            (display "@include found outside of @ifnotslide!\n" o)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
