@@ -13,14 +13,122 @@
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
     <script>
-      function populatePathwayAlignment() {
-        const { lesson, pathway, lessons } = getParams();
-        populateAlignmentDictionaries(pathway);
-        showAlignment('standards-CCSS-Math');
+      function findEntriesForLesson(lesson) {
+        let entries = [];
+        [...Object.values(dictionaries)].forEach(group => {
+          [...Object.values(group)].forEach(terms => {
+            [...Object.entries(terms)].forEach(([entry, {lessons}]) => {
+              if(lessons && lessons.includes(lesson)) { entries.push(entry); }
+            });
+          });
+        });
+        return entries;
       }
+
+      function populateByLesson() {
+        const { pathway, lessons } = getParams();
+        const dictParent = document.querySelector('#content');
+        let alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph)
+          .filter(onlyUnique)
+          .sort((a,b) => a.title < b.title? -1 : 1);
+        
+        let html = '<div class="dlist alignedStandards"><dl>';
+        alignedLessons.forEach(l => {
+          console.log(l)
+          const {title, description} = graph[l];
+          html += `<dt>${title}</dt><dd><p>${findEntriesForLesson(l).join(', ')}</p></dd>`;
+        })
+        html += '</dl></div>';
+        dictParent.innerHTML = html;
+      }
+
+      function populateByAlignment() {
+        const { pathway, lessons } = getParams();
+        let alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph);
+        const normalizedAlignedLessons = alignedLessons.map(removeProglangSuffix);
+
+        // get DOM for alignment parent and alignment dropdown menu
+        const dictParent = document.querySelector('#content');
+        const dropdown = document.getElementsByClassName('alignmentSelect')[0];
+        const url = new URL(location);
+
+        // add a group of standards to the page
+        function addGroup(keyName, groupLabel) {
+          // add the dropdown optgroup
+          const group = document.createElement('optgroup');
+          group.label = groupLabel;
+
+          // Walk over dictionaries, adding an alignment div for each
+          for( const [dict, entries] of Object.entries(dictionaries[keyName]) ) {
+            let {fullname, url:stdUrl} = entries['__metadata'];
+            // build the alignment div, and add a dictionary list to it
+            const div = document.createElement('div');
+            div.classList.add('dlist', 'alignedStandards', keyName+'-'+dict);
+            div.innerHTML = `<div class="title">
+              <h2><a href="${stdUrl}">${fullname}</a></h2>
+            </div><dl></dl>`;
+            const list = div.querySelector('dl')
+
+            // Walk over entries, adding each to the list if it aligns with the current lesson
+            // OR if there's a lesson in the current pathway or graph that aligns to it
+            // SKIP __metadata, which does not contain a 'lessons' field
+            for( const [id, entry] of Object.entries(entries) ) {
+              if(entry.lessons && entry.lessons.filter(l => normalizedAlignedLessons.includes(l)).length) {
+                list.innerHTML += `<dt>${id}</dt>`;
+                // if there are aligned standards,
+                // add all lessons (and links!) to the description
+                var relevantLessons = alignedLessons.filter(l => entry.lessons.includes(removeProglangSuffix(l)));
+                // if we're not aligned to any specific pathway or lesson, remove suffixed duplicates
+                if(!pathway && !lessons) {
+                  relevantLessons = relevantLessons.filter(l => removeProglangSuffix(l) == l);
+                }
+                entry.description += " [See: ";
+                entry.description += relevantLessons.map(l =>
+                    `<a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a>`)
+                  .join(", ");
+                entry.description += "]";
+                list.innerHTML += `<dd><p>${entry.description}</p></dd>`;
+              }
+            }
+            div.appendChild(list);
+            dictParent.append(div);
+
+            // if we actually have alignments and they aren't state-specific, 
+            // add them to the page and optgroup
+            if (list.children.length > 0 && !stateMap.get(dict)) {
+              const opt = document.createElement('option');
+              opt.value = keyName + '-' + dict;
+              opt.appendChild(document.createTextNode(fullname));
+              group.append(opt);
+            }
+          }
+          
+          // add non-empty groups to the dropdown
+          if (group.children.length > 0) {
+            dropdown.appendChild(group);
+          }
+        }
+
+        // Add Menu Groups for all the built-in alignment dictionaries
+        addGroup("standards", "By Standard");
+        addGroup("practices", "By Practice");
+        addGroup("textbooks", "By Textbook");
+
+        // Add Menu Group for states
+        const stateGroup = document.createElement('optgroup');
+        stateGroup.label = "By State";
+        [...stateMap.entries()].forEach(entry => {
+          const opt = document.createElement('option');
+          opt.value = 'standards-'+entry[0]; 
+          opt.appendChild(document.createTextNode(entry[1]));
+          stateGroup.appendChild(opt);
+        });
+        dropdown.appendChild(stateGroup);
+      }
+      
     </script>
 </head>
-<body class="narrativepage article">
+<body class="narrativepage article" onLoad="populateByAlignment(); showAlignment('standards-CCSS-Math');">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">
