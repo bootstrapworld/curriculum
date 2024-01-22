@@ -13,17 +13,10 @@
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
     <script>
-      function findEntriesForLesson(lesson) {
-        let entries = [];
-        [...Object.values(dictionaries)].forEach(group => {
-          [...Object.values(group)].forEach(terms => {
-            [...Object.entries(terms)].forEach(([entry, {lessons}]) => {
-              if(lessons && lessons.includes(lesson)) { entries.push(entry); }
-            });
-          });
-        });
-        return entries;
-      }
+      configureGraph(graph);
+      let lessonMap = new WeakMap();
+      Object.values(graph).forEach(lesson => lessonMap.set(lesson.title, new WeakMap()));
+      console.log(lessonMap);
 
       function populateByLesson() {
         const { pathway, lessons } = getParams();
