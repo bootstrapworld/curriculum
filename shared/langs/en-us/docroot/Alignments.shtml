@@ -12,41 +12,41 @@
     <script src="lib/dictionaries.js"></script>
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
-    <script>
-      let lessonMap = {};
-      Object.values(graph).forEach(lesson => lessonMap[lesson.title] = {});
-
-      function populateByLesson() {
-        const { pathway, lessons } = getParams();
-        const dictParent = document.querySelector('#content');
-        let alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph)
-          .filter(onlyUnique)
-          .sort((a,b) => a.title < b.title? -1 : 1);
-        
-        let html = '<div class="dlist alignedStandards"><dl>';
-        alignedLessons.forEach(l => {
-          const {title, description} = graph[l];
-          const alignedStandards = lessonMap[title];
-          html += `<dt>${title}</dt>`
-          if(!alignedStandards) {
-            html += `<dd>No Alignments for this Lesson</dd>`; 
-          } else {
-            const list = [...Object.keys(alignedStandards)].sort().map(k => 
-              `<li><b>${k}</b> : ${alignedStandards[k].join(", ")}</li>`);
-            html+=`<dd><ul>${list.join('')}</ul></dd>`;  
-          }
-        })
-        html += '</dl></div>';
-        dictParent.innerHTML = html;
+    <style>
+      select { width: unset; }
+      .standard-menu-container, #search {display: inline-block; }
+      #byLesson { display: none; }
+      #criteria { background: black; color: white; padding: 5px; margin: 10px 0; width: 100%; }
+      #criteria input { width: 250px; font-size: 14px; }
+      #search { float: right; padding: 10px; }
+      @media print {
+        #criteria { display: none; }
+        tbody { 
+          break-inside: avoid !important; 
+          page-break-inside: avoid !important; 
+        }
       }
+    </style>
+    <script>
 
-      function populateByAlignment() {
+      let groupBy = "Alignment";
+
+      // this function walks the dictionary structure largely in-order,
+      // drawing the dom for a by-alignment page. In doing so, it also
+      // populates a reverse dictionary called lessonMap
+      function populateAlignments() {
         const { pathway, lessons } = getParams();
-        let alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph);
+
+        const alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph)
+          .sort((a,b) => a.title < b.title? -1 : 1);
         const normalizedAlignedLessons = alignedLessons.map(removeProglangSuffix);
 
+        let lessonMap = {};
+        Object.values(graph).forEach(lesson => lessonMap[lesson.title] = {});
+
+
         // get DOM for alignment parent and alignment dropdown menu
-        const dictParent = document.querySelector('#content');
+        let dictParent = document.querySelector('#byAlignment');
         const dropdown = document.getElementsByClassName('alignmentSelect')[0];
         const url = new URL(location);
 
@@ -111,8 +111,8 @@
           if (group.children.length > 0) {
             dropdown.appendChild(group);
           }
-        }
 
+        }
         // Add Menu Groups for all the built-in alignment dictionaries
         addGroup("standards", "By Standard");
         addGroup("practices", "By Practice");
@@ -128,11 +128,75 @@
           stateGroup.appendChild(opt);
         });
         dropdown.appendChild(stateGroup);
+
+        // now that our inverse data structure has been filled, draw the byLesson div
+        dictParent = document.querySelector('#byLesson');
+        
+        let html = '<div class="dlist"><dl>';
+        
+        alignedLessons.forEach(l => {
+          if(removeProglangSuffix(l) == l) return;
+          const {title, description} = graph[l];
+          const alignedStandards = lessonMap[title];
+          html += `<dt>${title}</dt>`
+          if([...Object.keys(alignedStandards)].length == 0) {
+            html += `<dd>No Alignments for this Lesson</dd>`; 
+          } else {
+            const list = [...Object.keys(alignedStandards)].sort().map(k => 
+              `<li><b>${k}</b> : ${alignedStandards[k].join(", ")}</li>`);
+            html+=`<dd><ul>${list.join('')}</ul></dd>`;  
+          }
+        })
+        html += '</dl></div>';
+        dictParent.innerHTML = html;
       }
       
+      function switchGrouping(by) {
+        groupBy = by;
+        const standardMenu = document.querySelector('.alignmentSelect');
+        if(groupBy == "Alignment") {
+          standardMenu.style.display = 'inline-block';
+          document.getElementById('byAlignment').style.display = 'block';
+          document.getElementById('byLesson').style.display = 'none';
+        } else if(groupBy == "Lesson") {
+          document.getElementById('byAlignment').style.display = 'none';
+          document.getElementById('byLesson').style.display = 'block';
+          standardMenu.style.display = 'none';
+        }
+      }
+
+      var searchTimeout;
+      function search(needle) {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout( () => {
+          console.time('time to filter');
+          let query;
+          if (groupBy == "Alignment") {
+            const active = document.querySelector('.alignmentSelect').value;
+            query = `#byAlignment div.${active} dl`;
+          } else {
+            query = `#byLesson dl`;
+          }
+          const list = document.querySelector(query);
+          const terms = list.querySelectorAll('dt');
+          list.style.display = "none";
+          // if it's a match, make this tbody visible. Otherwise, invisible
+          terms.forEach((dt, idx) => {
+            const haystack = (dt.textContent + dt.nextSibling.textContent).toLowerCase();
+            if(haystack.includes(needle.toLowerCase())) {
+              dt.style.display = dt.nextSibling.style.display = 'block';
+            } else {
+              dt.style.display = dt.nextSibling.style.display = 'none';
+            }
+          })
+          list.style.display = "block";
+          console.timeEnd('time to filter');
+        }, 250);
+      }
+
     </script>
 </head>
-<body class="narrativepage article" onLoad="populateByAlignment(); showAlignment('standards-CCSS-Math');">
+<body class="narrativepage article" onLoad="populateAlignments(); showAlignment('standards-CCSS-Math');">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">
@@ -141,11 +205,27 @@
     <div id="content">
       <div class="paragraph">
         <p>
-          <div class="standard-menu-container"><div>
           Bootstrap lessons align with several important teaching standards, textbooks, and practices. Select from the following menu to see which lessons meet those alignments.
         </p>
-        <div><select class="alignmentSelect" onchange="showAlignment(this.value)"></select></div>
+        <div id="criteria">
+        View 
+        <div class="standard-menu-container">
+          <select id="groupingMenu" onchange="switchGrouping(this.value)">
+            <option value="Alignment" selected>By alignment</option>  
+            <option value="Lesson">By lesson</option>
+          </select>
+        </div>
+        <div class="standard-menu-container">
+          <select class="alignmentSelect" onchange="showAlignment(this.value)"></select>
+        </div>
+        <div id="search">
+          Searching for a lesson or standard? <input id="searchBox" type="search" onInput="search(this.value)"
+          placeholder="Type it here!"/>
+        </div>
       </div>
+      </div>
+      <div id="byLesson"></div>
+      <div id="byAlignment"></div>
     </div>
   </div>
 </body>
