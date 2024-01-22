@@ -702,7 +702,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=5hRzeYdvpB"
+      "url": "https://www.wescheme.org/openEditor?publicId=5hRzeYdvpB"
     }
   },
 }
