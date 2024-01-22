@@ -51,7 +51,7 @@ Students will be introduced to functions for working with tables, including: @sh
 ** _Is it possible to alphabetize the list, or sort it in other ways?_
 }
 
-(If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge lines 7-9 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.)
+@teacher{If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge lines 7-9 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.}
 
 
 === Investigate
@@ -60,13 +60,21 @@ Students will be introduced to functions for working with tables, including: @sh
 Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
 }
 
-- What did these `sort` expressions do?
-** _They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)_
-- Just below question 6, we see the Contract for `sort`
-- What does it mean that the Domain of `sort` is Table, String, Boolean?
-** _The functions needs a Table, a String (describing a column), and a Boolean (an order to sort the column by) in order to do its job._
-- What does it mean that the Range of `sort` is Table?
-** _The function produces a new table._
+@slidebreak
+
+@QandA{
+@Q{What did these `sort` expressions do?}
+@A{They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)}
+
+@Q{Just below question 6, we see the Contract for `sort`}
+@Q{What does it mean that the Domain of `sort` is Table, String, Boolean?}
+@A{The functions needs a Table, a String (describing a column), and a Boolean (an order to sort the column by) in order to do its job.}
+
+@Q{What does it mean that the Range of `sort` is Table?}
+@A{The function produces a new table.}
+}
+
+@slidebreak
 
 As you can imagine, there are many other functions that work with tables, each with a different set of inputs. For each of these functions, we need to keep track of three things:
 
@@ -75,6 +83,8 @@ As you can imagine, there are many other functions that work with tables, each w
 3. *Range* -- the type of data the function produces
 
 The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
+
+@slidebreak
 
 @lesson-point{
 Contracts are the _instruction manual_ for functions.
@@ -86,12 +96,20 @@ The Domain in the Contract for `sort` tells us exactly what kind of inputs it ne
 Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 }
 
-- How did `sort` work with quantitative columns?
-** _true sorted the values from least to greatest. false sorted the values from biggest to smallest._
-- What new questions did you think of that could be answered using `sort`?
+@slidebreak
+
+@QandA{
+@Q{How did `sort` work with quantitative columns?}
+@A{true sorted the values from least to greatest. false sorted the values from biggest to smallest.}
+
+@Q{What new questions did you think of that could be answered using `sort`?}
+}
+
+@slidebreak
 
 @lesson-instruction{
-Once you know how to read Contracts, you can easily use all the tools in our programming language. Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+* Once you know how to read Contracts, you can easily use all the tools in our programming language. 
+* Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
 }
 
 
@@ -101,15 +119,20 @@ Students are likely to think that `sort` _changes the table_, when instead it _p
 
 === Synthesize
 
-- How is the function of `count` different from `sort`?
-** `sort` _made a new table that was reordered_
-** `count` _made a new table that summarized the data from a column of the original table!_
-- How does the function `first-n-rows` work?
-** _It makes a new smaller table with the number of rows you type into the expression._
-- Does anyone have any questions about the functions or expressions you've worked with today?
-- Where have you seen tables summarizing counts in the real world?
-- How else do journalists and newscasters display summaries of data besides in tables?
-** _Ideally someone will say bar charts!_
+@QandA{
+@Q{How is the function of `count` different from `sort`?}
+@A{`sort` made a new table that was reordered_}
+@A{`count` made a new table that summarized the data from a column of the original table!}
+
+@Q{How does the function `first-n-rows` work?}
+@A{It makes a new smaller table with the number of rows you type into the expression.}
+
+@Q{Do you have any questions about the functions or expressions you've worked with today?}
+@Q{Where have you seen tables summarizing counts in the real world?}
+
+@Q{How else do journalists and newscasters display summaries of data besides in tables?}
+@A{Ideally someone will say bar charts!}
+}
 
 == Composing with Circles of Evaluation @duration{15 minutes}
 
@@ -119,7 +142,9 @@ Students learn to work with more than one function at once, by way of Circles of
 
 === Launch
 
-What if we wanted to see the ten youngest animals? How could the `first-n-rows` and `sort` functions work together? What order should we use the functions in?
+What if we wanted to see the ten youngest animals? 
+* How could the `first-n-rows` and `sort` functions work together? 
+* What order should we use the functions in?
 
 === Investigate
 
@@ -142,9 +167,17 @@ If we want to see the ten youngest animals, our diagram would look like this.
 
 @show{(coe exp1)}
 
+@slidebreak
+
+@ifslide{
+@show{(coe exp1)} 
+} 
+
 To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
 
 @show{(code exp1)}
+
+@slidebreak
 
 If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
 
@@ -157,6 +190,8 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 That would translate to the following code:
 
 @show{(code exp2)}
+
+@slidebreak
 
 @lesson-instruction{
 - Turn to @printable-exercise{coe-sort-count.adoc}. 
@@ -186,24 +221,27 @@ Let's see how error messages in @proglang can help us to figure out the contract
 @QandA{
 @Q{What do you get back?}
 @A{`<function:triangle>`}
+@A{This means that the computer knows about a function called `triangle`.}
 }
 
-This means that the computer knows about a function called `triangle`.
+@slidebreak
 
 @lesson-instruction{
 * We know that all functions will need an open parentheses and at least one input!
 * We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
 * Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
 }
- 
+
 @QandA{
 @Q{What _hint_ does the error message give us about how to use this function?}
 @A{@image{images/triangle80.png, 500}}
 @A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
 }
 
+@slidebreak
+
 @lesson-instruction{
-* We know that `triangle` needs 3 arguments. But what kinds of arguments are they?
+* Now we know that `triangle` needs 3 arguments. But what kinds of arguments are they?
 * Try different inputs to make a triangle, and see if you can figure out the Contract!}
 
 @QandA{
@@ -211,9 +249,19 @@ This means that the computer knows about a function called `triangle`.
 @A{@show{(contract `triangle `(Number String String) "Image")}}
 }
 
+@ifslide{
+
+@teacher{The contract is shown on the next slide.}
+
+@slidebreak
+@show{(contract `triangle `(Number String String) "Image")}
+}
+
 === Investigate
 
+@ifnotslide{
 Mistakes happen, especially if we're just figuring things out! Diagnosing and fixing errors are skills that we will continue developing throughout this course.
+}
 
 @lesson-instruction{
 * Turn to the second section of @printable-exercise{pages/catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
@@ -251,7 +299,9 @@ Image exploration is a low threshold / high-ceiling activity that should be enga
 Students do **not** need to find all of the contracts on this page in order to complete the lesson or the following pages.
 }
 
+@ifnotslide{
 In order to make sure that all students both remain engaged and are prepared to engage in productive class discussion, when you become aware that the first student in your class has successfully used the `text` function, give your students directions about which functions to prioritize with the remaining time.
+}
 
 @teacher{
 Make sure students at least find the contracts for `star`, `rectangle` and `text` before moving ahead.
@@ -306,6 +356,8 @@ Turn to @printable-exercise{exploring-displays.adoc}. Let's look at the first fu
 @Q{What does the resulting display tell us?}
 }
 
+@slidebreak
+
 @lesson-instruction{
 - Make a sketch of the display you just built in Pyret.
 - Then work to complete @printable-exercise{exploring-displays.adoc}, generating each of the other 3 displays. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
@@ -319,30 +371,37 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
 
-- What expression would this Circle of Evaluation generate?
-** @show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
-- What would be the resulting display?
-** _a pie chart showing the species of the 10 youngest animals_
+@QandA{
+@Q{What expression would this Circle of Evaluation generate?}
+@A{@show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}}
 
-@teacher{ If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
+@Q{What would be the resulting display?}
+@A{a pie chart showing the species of the 10 youngest animals}
+}
+
+@opt{If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
 
 @lesson-instruction{
-- Have students complete @printable-exercise{coe-displays.adoc}.
+- Complete @printable-exercise{coe-displays.adoc}.
 - Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. *Consider what display it might be interesting to compare each of the displays on this page with.* 
 }
 
-@optional For more practice making tables and displays by composing functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}
+@opt{For more practice making tables and displays by composing functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}}
 
 === Synthesize
 
-- Which displays worked with categorical data?
-** `pie-chart` _and_ `bar-chart`
-- Why might you choose a bar chart over a pie chart or vice versa?
-** `pie-chart` _only makes sense when you have the full picture, since it's representing the proportion of the whole_
-** `bar-chart` _shows the count_
-- How are bar charts and histograms different?
-** `bar-chart` _summarizes @vocab{categorical} data. Each bar represents the count of a specific category._
-** `histogram` _displays the distribution of @vocab{quantitative} data across the range._
+@QandA{
+@Q{Which displays worked with categorical data?}
+@A{`pie-chart` _and_ `bar-chart`}
+
+@Q{Why might you choose a bar chart over a pie chart or vice versa?}
+@A{`pie-chart` only makes sense when you have the full picture, since it's representing the proportion of the whole}
+@A{`bar-chart` shows the count}
+
+@Q{How are bar charts and histograms different?}
+@A{`bar-chart` summarizes @vocab{categorical} data. Each bar represents the count of a specific category.}
+@A{`histogram` displays the distribution of @vocab{quantitative} data across the range.}
+}
 
 == Additional Exercises
 
