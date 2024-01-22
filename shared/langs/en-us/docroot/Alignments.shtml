@@ -13,10 +13,8 @@
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
     <script>
-      configureGraph(graph);
-      let lessonMap = new WeakMap();
-      Object.values(graph).forEach(lesson => lessonMap.set(lesson.title, new WeakMap()));
-      console.log(lessonMap);
+      let lessonMap = {};
+      Object.values(graph).forEach(lesson => lessonMap[lesson.title] = {});
 
       function populateByLesson() {
         const { pathway, lessons } = getParams();
@@ -27,9 +25,16 @@
         
         let html = '<div class="dlist alignedStandards"><dl>';
         alignedLessons.forEach(l => {
-          console.log(l)
           const {title, description} = graph[l];
-          html += `<dt>${title}</dt><dd><p>${findEntriesForLesson(l).join(', ')}</p></dd>`;
+          const alignedStandards = lessonMap[title];
+          html += `<dt>${title}</dt>`
+          if(!alignedStandards) {
+            html += `<dd>No Alignments for this Lesson</dd>`; 
+          } else {
+            const list = [...Object.keys(alignedStandards)].sort().map(k => 
+              `<li><b>${k}</b> : ${alignedStandards[k].join(", ")}</li>`);
+            html+=`<dd><ul>${list.join('')}</ul></dd>`;  
+          }
         })
         html += '</dl></div>';
         dictParent.innerHTML = html;
@@ -81,6 +86,12 @@
                   .join(", ");
                 entry.description += "]";
                 list.innerHTML += `<dd><p>${entry.description}</p></dd>`;
+                // build the lessonMap, adding every standard to every dictionary-array
+                relevantLessons.forEach(l => {
+                  let map = lessonMap[graph[l].title];
+                  if(!map[fullname]) { map[fullname] = []; } // first time we've seen this dict!
+                  map[fullname].push(id);
+                })
               }
             }
             div.appendChild(list);
