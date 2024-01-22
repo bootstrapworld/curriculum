@@ -609,6 +609,10 @@
                               (newline teacher-notes)
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
+                           [(string=? directive "big")
+                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
+                              (expand-directives:string->port text o)
+                              (display "{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display "**" o)
