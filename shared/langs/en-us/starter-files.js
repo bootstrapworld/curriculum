@@ -646,57 +646,6 @@ const MoreAlg = {
   }
 }
 
-const EarlyMath = {
-  "comm-and-assoc": {
-    "title": "Commutativity and Associativity Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
-    }
-  },
-  "additive-inverse": {
-    "title": "Additive Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
-    }
-  },
-  "multiplicative-inverse": {
-    "title": "Multiplicative Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
-    }
-  },
-  "multiplicative-inverse-2": {
-    "title": "Multiplicative Inverse Starter File 2",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
-    }
-  },
-  "strings-n-numbers": {
-    "title": "Strings and Numbers Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
-    }
-  },
-  "expressions-functions": {
-    "title": "Expressions and Functions Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
-    }
-  }
-}
-
 const Projects = {
   "functions": {
     "title": "Functions Starter File",
