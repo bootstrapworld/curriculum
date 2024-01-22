@@ -57,39 +57,34 @@ The Data Cycle is a roadmap that guides us in the process of data analysis. You'
 
 @QandA{
 
-@Q{In the *Ask Questions* phase of the Data Cycle, what are some of the different types of questions we can ask?}
+@Q{*Ask Questions* - What are the different types of questions we can ask?}
 @A{Lookup, arithmetic, and statistical questions.}
 
 @Q{What's the difference between an arithmetic question question and a statistical question?}
 @A{A statistical question does not specify a particular arithmetic process, while an arithmetic question does.}
 
-@Q{What does the *Consider Data* phase entail?}
-@A{We need to ask two questions: "What rows should we investigate?" and "What columns do we need?"}
+@Q{*Consider Data* - What does this phase entail?}
+@A{We need to determine: "What rows should we investigate?" and "What columns do we need?"}
 
-@Q{During the *Analyze Data* phase of the Data Cycle, we choose what kind of display we'll need to answer our question. Which two displays work with categorical data? Why might you choose one over the other?}
+@Q{*Analyze Data* - We'll choose what kind of display we'll need to answer our question. Which two displays work with categorical data? Why might you choose one over the other?}
 @A{@ifproglang{pyret}{Bar and pie charts work}@ifproglang{codap}{Dot plots and bar charts} with categorical data. @ifproglang{pyret}{A pie chart only makes sense when you have the full picture, whereas a bar chart shows the count.} @ifproglang{codap}{A dot plot conveys more precise information than a bar chart, but can be overwhelming if there is a lot of data}.}
 
-@Q{In your own words, what happens during the *Interpret the Data* phase?}
+@Q{*Interpret the Data* - In your own words, what happens during this phase?}
 @A{We answer questions and summarize results, which often leads to new questions.}
 }
 
 === Investigate
 
-In this lesson, we're going to get some practice with the second step of the cycle - Consider Data. This entails isolating the Rows and Columns needed to answer various questions, and using our knowledge of Contracts to help turn those questions into working code!
+In this lesson, we're going to get some practice with the second step of the cycle - Consider Data - identifying the Rows and Columns needed to answer various questions, and using our knowledge of Contracts to help turn those questions into working code!
 
 @lesson-instruction{
 Complete @printable-exercise{consider-and-analyze.adoc}.
 }
 
-@teacher{Be sure to review student answers.}
-
 === Synthesize
 
-- What strategies did you use to determine which columns to isolate?
+- What strategies did you use to determine which columns to use?
 - Why do the contracts for some displays require more arguments than others?
-
-
-
 
 == Choosing a Dataset @duration{30 minutes}
 
@@ -104,13 +99,17 @@ Note: *If you are opting to focus your whole class on a single dataset, we recom
 
 **Data Science: it's all about YOU!**
 
-What data matters to *_you?_* What questions do *_you_* care about? We live in a world filled with data, gathered about almost every subject you can imagine.
+What data matters to *_you?_* What questions do *_you_* care about? 
+
+We live in a world filled with data, gathered about almost every subject you can imagine.
 
 - Climate sensors are gathering data on temperature, humidity, oxygen and more...practically everywhere on the globe.
 - Census data tracks the number of different groups of people, as well as their education, income level, and more.
 - Companies like Facebook, Amazon, and Google gather massive amounts of data on the websites you visit, what you chat about online, what you purchase, etc.
 
-This data is used to set public policy, draw voting districts, approve drugs, calculate school funding, decide which advertisements you see, and more.
+@slidebreak
+
+Data is used to set public policy, draw voting districts, approve drugs, calculate school funding, decide which advertisements you see, and more.
 
 @lesson-instruction{
 * Where else do you see data being gathered?
@@ -131,7 +130,8 @@ For teachers using a single dataset, we recommend using @ifproglang{pyret}{@opt-
 === Investigate
 Have students choose a dataset that is interesting to them and save a copy of it in their programs!
 
-@include{fragments/dataset-table.adoc}
+@ifnotslide{@include{fragments/dataset-table.adoc}}
+@ifslide{@lesson-link{choosing-your-dataset/dataset-table}}
 
 === Synthesize
 - What did you select, and why?
