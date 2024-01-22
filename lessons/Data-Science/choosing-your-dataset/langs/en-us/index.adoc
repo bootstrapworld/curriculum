@@ -89,13 +89,13 @@ Complete @printable-exercise{consider-and-analyze.adoc}.
 == Choosing a Dataset @duration{30 minutes}
 
 === Overview
-Students select a dataset that interests them, and do some thinking about _why_ it interests them, _what questions they'd like to answer_ and _what hypotheses they have_. They'll be analyzing this data for a long time, so it's critical to ensure a high degree of buy-in before signing off on a student's choice!
-
-=== Launch
+Students select a dataset that interests them (or are assigned a realworld dataset to focus on), and do some thinking about _why_ it interests them, _what questions they'd like to answer_ and _what hypotheses they have_. They'll be analyzing this data for a long time, so it's critical to ensure a high degree of buy-in before signing off on a student's choice!
 
 @teacher{
-Note: *If you are opting to focus your whole class on a single dataset, we recommend skipping this section of the lesson.* _You'll instead want to jump to "Dataset Exploration Project.")_
+Note: Some teachers opt to focus their classes on a single dataset. We recommend @opt-starter-file{food} for this purpose.
 }
+
+=== Launch
 
 **Data Science: it's all about YOU!**
 
@@ -116,110 +116,115 @@ Data is used to set public policy, draw voting districts, approve drugs, calcula
 * What are some other ways data is used in the world around you?
 }
 
+@slidebreak
+
+For the rest of this course, you'll be:
+- learning new programming and @vocab{Data Science} skills
+- practicing them with the Animals Dataset 
+- and then applying them to another dataset.
+
 @teacher{
-What follows is a list of every @vocab{dataset}@ifproglang{pyret}{ already provided to students, with a corresponding Starter File that instantly imports the (cleaned) data into Pyret}. We suggest giving students @handout{pages/datasets-and-starter-files.adoc, a direct link to this page}, which lists all of the relevant links found in the lesson plan.
+What follows is our *Dataset Library*@ifproglang{pyret}{ with Starter Files that instantly import the (cleaned) data into Pyret}. 
 
+* If you are planning to give students this full list, here's @handout{pages/datasets-and-starter-files.adoc, a direct link to this table}.
+* Many teachers opt to offer a smaller curated list that is more tailored to their goals. We've assembled @opt-online-exercise{about-datasets/for-teachers-about-datasets.html, descriptions of individual datasets here} to help you decide which you'd like your students to focus on.
 @ifproglang{pyret}{
-_Students can also find their own dataset_, and use this @opt-starter-file{blank-ds}. For help, see this @opt-starter-file{blank-ds-tutorial}.}
-
-
-For teachers using a single dataset, we recommend using @ifproglang{pyret}{@opt-starter-file{food}}@ifproglang{codap}{@link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/edit#gid=161884673, "the Global Food Supply and Production dataset"}}. This dataset focuses on global food supply and production through environmental / geographic / cultural lenses and the variables were carefully selected to make sure it lends itself well for all kinds of data displays and discussions. You can, of course, opt to choose any dataset you'd like, from our library or otherwise.
-
-**NOTE:** _We have compiled some @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.adoc, Notes on our provided datasets}, to help you decide which might be most useful in your classroom._
+* _Students can also find their own dataset_ and follow the directions in  @opt-starter-file{blank-ds-tutorial} to import a spreadsheet into @opt-starter-file{blank-ds, a copy of this pyret Dataset Starterfile Template}.
+* *Note: If you are opting to focus your whole class on a single dataset, share the links to the @link{https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA/, spreadsheet} and @opt-starter-file{food, starter file} now and skip to the Investigate section.*
 }
-=== Investigate
-Have students choose a dataset that is interesting to them and save a copy of it in their programs!
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Choose a dataset that is of interest to you@ifslide{ from 
+@handout{pages/datasets-and-starter-files.adoc, our Dataset Library}}. 
+- Open your dataset's starter file in @proglang @ifproglang{pyret}{and save a copy}.
+- Look at the spreadsheet or table for your dataset.
+- What do you *Notice*? What do you *Wonder*?}
 
 @ifnotslide{@include{fragments/dataset-table.adoc}}
-@ifslide{@lesson-link{choosing-your-dataset/dataset-table}}
+
+=== Investigate
+
+@teacher{
+By now students will either have chosen a dataset of their own or you will have decided to focus your class on a single dataset (we recommend @opt-starter-file{food} for this purpose.) They will be applying what they learn to this new dataset.
+}
+
+@lesson-instruction{
+- Using your @proglang starter file, complete @printable-exercise{pages/my-dataset.adoc}.
+- Make sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
+@ifproglang{pyret}{
+- In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.}
+}
 
 === Synthesize
-- What did you select, and why?
-- What questions did you come up with?
 
-For the rest of this course, you'll be learning new programming and @vocab{Data Science} skills, practicing them with the Animals Dataset and then applying them to you own data.
+* Which dataset did you select? And why? 
+* What questions are you curious to dig into?
 
 == Dataset Exploration Project @duration{flexible}
 
 === Overview
 
-Students are introduced to the Dataset Exploration Project. They will apply what they have learned to add four items to their @starter-file{exploration-project}: (1) a description their dataset, including its source, structure, and relevance, (2) at least one bar chart, (3) at least one pie chart, and (4) any interesting questions they develop.
+Students are introduced to the Dataset Exploration Project, which will be woven into lessons from here on out. 
 
-@strategy{
-To learn more about the sequence and scope of the exploration project, visit @lesson-link{project-data-exploration}.
+Today we'll start by adding four items to their @starter-file{exploration-project}: 
+
+. a description of their dataset, including its source, structure, and relevance
+. at least one bar chart
+. at least one pie chart
+. any interesting questions they develop
+
+@teacher{
+To learn more about the scope and sequence of the exploration project, visit @lesson-link{project-data-exploration}.
 }
 
 === Launch
 
-Today, we are going to start digging into the datasets we've chosen to study at length. Each time we learn about a new data science concept in this class, we will add displays, questions, and analyses to the @starter-file{exploration-project}.
+For the rest of this course, each time we learn about a new data science concept, you will add displays, questions, and analyses about your Dataset Exploration Project.
 
 @lesson-instruction{
 - Open the @starter-file{exploration-project}.
-- Create and save your own copy of the slide deck.
-- Let's take a look! Peruse the slides to get a sense of what this cumulative project includes.
-- What do you Notice? What do you Wonder?
-** _Students will likely notice that many displays they are unfamiliar with are referenced. They may wonder how there is going to be so much analysis on just one dataset!_
-}
+- Save your own copy of the slide deck.
+- Let's get a sense of what this project is all about - take a few minutes to look at the slides.}
 
-@teacher{
-Encourage students to familiarize themselves with the template, highlighting some important features:
-
-- Blue text is included to provide examples.
-
-- Slides can be duplicated if students want to add additional displays or interpretations.
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@A{Students will likely notice references to many displays they are unfamiliar with.}
+@A{They may wonder how there is going to be so much analysis on just one dataset!}
+@A{Blue text is included to provide examples.}
+@A{Slides can be duplicated if students want to add additional displays or interpretations.}
 }
 
 === Investigate
 
-By now you've already learned what to do when you approach a new dataset. Think back to your first exposure to the Animals Dataset. You read the data and wrote down your Notices and Wonders. You described the columns. You even took some @vocab{random samples} of the dataset to explore @vocab{inference} and probability.
-
-Now, you're doing to do the same thing _with your own dataset._
-
 @lesson-instruction{
-- Open your chosen dataset starter file @ifproglang{pyret}{in Pyret}@ifproglang{codap}{in CODAP}.
-- Look at the spreadsheet or table for your dataset. What do you *Notice*? What do you *Wonder*?
-- Complete @printable-exercise{pages/my-dataset.adoc}, making sure to include at least two questions that __can__ be answered by your dataset and one that __cannot__.
-@ifproglang{pyret}{
-- Save a copy of your starter file. In the Definitions Area, use `random-rows` to define *at least three* tables of different sizes: `tiny-sample`, `small-sample`, and `medium-sample`.}
+- Complete all of the slides you see in the "About this Dataset" portion of the slide deck. 
+- It may be helpful to refer to what you wrote on @printable-exercise{pages/my-dataset.adoc}.
 }
 
-Today we will begin adding to our @starter-file{exploration-project}. First, we are going to describe our dataset.
-
-@lesson-instruction{
-- *It’s time to add to your @starter-file{exploration-project}.*
-- Complete all of the slides you see in the "About this Dataset" portion of the slide deck. It may be helpful to refer to @printable-exercise{pages/my-dataset.adoc}.
-}
-
-@teacher{
-Ensure that students have thoughtfully described their datasets. Then, explain that they are going to add  bar and pie charts, along with their interpretations of them.
-}
+@slidebreak
 
 @lesson-instruction{
 - Choose one categorical column from your dataset that you will represent with a bar chart.
-- What question does your display answer?
-- Now, write down that question in the top section of @printable-exercise{data-cycle-categorical.adoc}.
+- Turn to the top section of @printable-exercise{data-cycle-categorical.adoc} and record a question that your bar chart could answer.
 - Complete the rest of the data cycle, recording how you considered, analyzed, and interpreted the question.
 - Repeat this process for at least one more categorical column - but this time, create a pie chart.
+- Then, copy/paste at least one bar chart and one pie chart into that section of your slide deck. 
+- Be sure to also add any interesting questions that you developed while making and thinking about these displays to the "My Questions" slide at the end of the template.
 }
 
 @teacher{
-Once students have at least one bar and pie chart, it's time to add their findings to the @starter-file{exploration-project}.
-}
-
-@lesson-instruction{
-Copy/paste at least one bar chart and one pie chart into your slide deck. Be sure to also add any interesting questions that you developed while making and thinking about these displays.
-}
-
-@teacher{
-_You may need to help students locate the “Bar Charts” section and the “Pie Charts” section. The “My Questions” slide is at the end of the template._
+_You may need to help students locate the “Bar Charts” section, “Pie Charts” section, and “My Questions” slide in the template._
 }
 
 === Synthesize
 
-Share your findings with the class!
+Let's share what we learned about our datasets!
 
-Did you discover anything surprising or interesting about your dataset?
+- Did you discover anything surprising or interesting about your dataset?
 
-What questions did the bar and pie charts inspire raise?
+- What questions did the bar and pie charts inspire?
 
-Did other students make any discoveries that were surprising or interesting to you?
+- Did other students make any discoveries that were surprising or interesting to you?

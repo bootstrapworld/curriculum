@@ -320,9 +320,12 @@ const DSBasics = {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T"
+    },
+    "codap": {
+      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
+      }
     }
   }
-}
 
 const MoreDS = {
   "fair-coins": {
