@@ -231,21 +231,22 @@
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
-  (if (list? x)
-      (let ([name (first x)] [type (second x)])
-        (unless (string? name) (set! name (format "~a" name)))
-        (if (list? type)
-            (begin
-              (format "~a :: ~a" name
-                      (string-append (contract-type (first type))
-                        " -> "
-                        (contract-types-to-commaed-string (rest type)))))
-            (let* ([type (if (string? type) type (format "~a" type))]
-                   [name-w (string-length name)]
-                   [type-w (string-length type)]
-                   [w (+ 0 (max name-w type-w))])
-              (format "~a :: ~a" name type))))
-      x))
+  (cond [(list? x)
+         (let ([name (first x)] [type (second x)])
+           (unless (string? name) (set! name (format "~a" name)))
+           (if (list? type)
+               (begin
+                 (format "~a :: ~a" name
+                         (string-append (contract-type (first type))
+                           " -> "
+                           (contract-types-to-commaed-string (rest type)))))
+               (let* ([type (if (string? type) type (format "~a" type))]
+                      [name-w (string-length name)]
+                      [type-w (string-length type)]
+                      [w (+ 0 (max name-w type-w))])
+                 (format "~a :: ~a" name type))))]
+        [(string? x) x]
+        [else (format "~a" x)]))
 
 (define (contract-types-to-commaed-string xx)
   ; (printf "doing contract-types-to-commaed-string ~s\n" xx)
@@ -259,6 +260,11 @@
         (string-append "(" s ")")
         s)))
 
+; replace characters with html entities
+; there's probably a better way to do this...
+(define (htmlize str)
+  (string-replace (string-replace str "<" "&lt;") ">" "&gt;"))
+
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
          [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
@@ -271,7 +277,7 @@
              " :: "
              (contract-types-to-commaed-string domain-list)
              " -> "
-             range)]
+             (htmlize range))]
         [s2 (and purpose
                  (string-append
                    prefix purpose))])
@@ -665,6 +671,13 @@
                               (display "<b><i>" o)
                               (display arg o)
                               (display "</i></b>" o))]
+                           [(string=? directive "hspace")
+                            (let* ([arg (read-group i directive)]
+                                  [match (regexp-match (pregexp "([\\d]+)(em|ex)") arg)]
+                                  [num (string->number (second match))]
+                                  [unit (if (string=? (third match) "ex") 2 3)]
+                                  [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
+                              (display spaces o))]
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
