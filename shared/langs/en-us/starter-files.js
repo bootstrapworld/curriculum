@@ -699,7 +699,7 @@ const EarlyMath = {
   "identity-prop":{
     "title": "Identity Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=5hRzeYdvpB"
