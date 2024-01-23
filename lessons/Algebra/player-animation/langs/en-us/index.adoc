@@ -62,29 +62,27 @@ Direct students to open their saved Game Project files. Tell them to look for up
 MLR 6 - Three Reads: Have students read through the problem statement three times, looking for different information.  What is the problem asking me?  What is the @vocab{Contract} for this @vocab{function}?  What information do I need to create that function?
 }
 
-@lesson-instruction{
-* What is the Contract for `update-player`?
-+
 @ifproglang{wescheme}{
-** _The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number._
+@QandA{
+@Q{What is the Contract for `update-player`?}
+@A{The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number.}
+@Q{What does each part of the domain and range represent?}
+@A{Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``.}
+@Q{How does the y-coordinate of `PLAYER` change when the user presses the "up" key?}
+@A{It should increase, the program should add something to it.}
+}
+}
 
-* What does each part of the domain and range represent?
-+
-** _Domain: the Number is the y-coordinate of `PLAYER`, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``._}
+@QandA{
+@Q{What is the Contract for `update-player`?}
+@A{The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number.}
+@Q{What does each part of the domain and range represent?}
+@A{Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`.}
+@Q{How does the y-coordinate of `PLAYER` change when the user presses the "up" key?}
+@A{It should increase, the program should add something to it.}
+}
 
-@ifproglang{pyret}{
-+
-** _The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number._
-
-* What does each part of the domain and range represent?
-+
-** _Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of ``PLAYER``._}
-
-* How does the y-coordinate of `PLAYER` change when the user presses the "up" key?
-+
-** _It should increase, the program should add something to it._
-
-@centered-image{images/player-move.png,  400}
+@center{@image{images/player-move.png,  400}}
 
 - Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your *Game Project file* and test.
 }
@@ -128,12 +126,10 @@ Some possible features students might include are:
 
 * *Hiding* - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
 
-@ifproglang{wescheme}{
-Reminder: Use `;` to add comments to code! +
-}
-@ifproglang{pyret}{
-Reminder: Use `+#+` to add comments to code! +
-}
+@ifproglang{wescheme}{Reminder: Use `;` to add comments to code!}
+
+@ifproglang{pyret}{Reminder: Use `#` to add comments to code!}
+
 Adding useful @vocab{comments} to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
 
 === Synthesize
