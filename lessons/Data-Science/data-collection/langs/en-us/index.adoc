@@ -131,9 +131,9 @@ Suppose we decided to delete all the rows with weird data, having inconsistent t
 
 These animal examples were a useful way to illustrate the problem, but dirty data shows up _everywhere_. Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
 
-. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
-. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
-. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
+1. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
+2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
+3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
 
 == Data Hygiene @duration{20 minutes}
 
@@ -164,13 +164,13 @@ While it's almost impossible to _guarantee_ 100% clean data, most survey tools i
 
 [.hygiene-tools]
 --
-. @right{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
+1. @right{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
 
-. @right{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
+2. @right{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
 
-. @right{@image{images/description.png}} *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
+3. @right{@image{images/description.png}} *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
 
-. @right{@image{images/validate.png}} *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. @right{@image{images/validation.png}}
+4. @right{@image{images/validate.png}} *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. @right{@image{images/validation.png}}
 --
 
 === Investigate
