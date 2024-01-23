@@ -52,19 +52,19 @@ Knowing how to find and fix bugs is a valuable skill for any programmer, and the
 
 When you Run a program, you expect the computer to do three things:
 
-. Read the code
-. Run the code
-. Give you the result you expected
+- Read the code
+- Run the code
+- Give you the result you expected
 
 @slidebreak
 
 In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases:
 
-. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
+1. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
 
-. @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the Contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! Like syntax errors, contract errors will also result in an error message.
+2. @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the Contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! Like syntax errors, contract errors will also result in an error message.
 
-. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
+3. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
 === Investigate
 Here are a few simple examples of syntax errors:
@@ -86,11 +86,11 @@ Syntax Errors prevent the computer from _reading_ code
 === Synthesize
 Have students share back their findings. Leave time for discussion! The key here is to have students reflect on how useful it is to _read the error messages_ first, even the few errors that may not be as helpful as the others.
 
-. Which syntax errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least helpful?
-. Which syntax errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which syntax errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least helpful?
+- Which syntax errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 == Contract Errors @duration{15 min}
 
@@ -128,11 +128,11 @@ In pairs or small groups, complete @printable-exercise{contract-errors.adoc}. Fo
 === Synthesize
 Have students share back their findings. Leave time for discussion! When facilitating this discussion, drive home the point that reading the error and consulting the Contracts are critical strategies for fixing these bugs.
 
-. Which Contract errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least helpful?
-. Which Contract errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which Contract errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least helpful?
+- Which Contract errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 == Logic Errors @duration{20 min}
 
@@ -180,6 +180,6 @@ The Design Recipe helps us avoid logic errors, by demanding that we think throug
 === Synthesize
 Have students share back their findings. Leave time for discussion! The main idea for this discussion is that Logic Errors happen in the programmer's mind, _not_ in the code. The best way to help prevent them is to think things through completely, and there are many strategies to do this. The Design Recipe, for example, forces students to think through the same solution in multiple representation - and the computer checks that those representations match.
 
-. Did you find any logic errors that you've made in the past?
-. What can you do in your own programming, to minimize the chances of logic errors?
+- Did you find any logic errors that you've made in the past?
+- What can you do in your own programming, to minimize the chances of logic errors?
 
