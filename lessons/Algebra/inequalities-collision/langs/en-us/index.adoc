@@ -39,38 +39,58 @@
 Students revisit problem decomposition - the idea of breaking down a complex problem into simpler pieces, solving those pieces separately, and then composing the solutions to solve the original.
 
 === Launch
-Knowing how far apart our characters are is the first step. But in order to keep track of the score, we need to know when they are close enough to collide!
+Knowing how far apart our characters are is the first step.
 
-"Problem Decomposition" is a powerful tool, which lets us break apart complex problems into simpler ones that we can solve, test, and then glue together into a complex solution.
+But in order to keep track of the score, we need to know when they are close enough to collide!
 
-Students may remember that there are two strategies for doing this:
+"Problem Decomposition" lets us break complex problems into simpler ones that we can solve, test, and then glue back together.
+
+@slidebreak
+
+You may remember that there are two strategies for decomposing problems:
 
 . *Top-Down:* Describe the problem at a high level, then fill in the details later
 . *Bottom-Up:* Focus on the smaller parts that you're sure of, then build them together to get the big picture
 
 === Investigate
+
+@ifnotslide{
 For the following complex word problem, have students *first* decide which strategy they want to use, and then apply the Design Recipe to build the functions they need.
+}
 
 @lesson-instruction{
 * Before we focus on our game code, let's practice breaking apart a different complex word problem.
-* A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. Write a function that computes the area of the triangle as a function of time.
+* A retractable flag pole starts out 24 inches tall, and can grow at a rate of 0.6in/sec. An elastic is tied to the top of the pole and anchored 200 inches from the base, forming a right triangle. +
+@image{images/retracting-flag.jpg}
+* Write a function that computes the area of the triangle as a function of time.
 * This is easier to think about as two functions:
 ** one that computes the height of the pole, based on the seconds
 ** another that computes the area of the triangle, based on the height
-* Does one function depend on (or "sit on top of") the other? If so, which one?
-** _Yes - `area` depends on `height`._
-* Which strategy will YOU use: bottom-up (independent first) or top-down (dependent first)?
-** _Students answers will vary! They can define either function first._
-* Complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy for Problem Decomposition!
+}
+@QandA{
+@Q{Does one function depend on (or "sit on top of") the other? If so, which one?}
+@A{Yes - `area` depends on `height`.}
+}
+@slidebreak
+
+@QandA{
+@Q{Which strategy will YOU use: bottom-up (independent first) or top-down (dependent first)?}
+@A{Students answers will vary! They can define either function first.}
+} 
+
+@lesson-instruction{Complete @printable-exercise{pages/top-down-bottom-up.adoc}, using your chosen strategy for Problem Decomposition!
 }
 
 === Synthesize
-**Note:** Defining the `height` first is bottom-up, and solving `area` first is top-down.
 
-- Which strategy did students use?
-- Did they try starting with one function, and then switch to another?
-** _Invite students to share. Oftentimes, responses are not only intriguing but can highlight the value of each approach. Explicitly point out that the `area` function _uses_ `height`, allowing us to break a big problem down into two smaller ones._
+@teacher{Note: Defining the `height` first is bottom-up, and solving `area` first is top-down.}
 
+@QandA{
+@Q{Which strategy did you use?}
+@Q{Did anyone try starting with one function, and then switch to another?}
+@A{Invite students to share. Oftentimes, responses are not only intriguing but can highlight the value of each approach.} 
+@A{Explicitly point out that the `area` function _uses_ `height`, allowing us to break a big problem down into two smaller ones.}
+}
 
 == Collision Detection @duration{20 minutes}
 
@@ -78,7 +98,9 @@ For the following complex word problem, have students *first* decide which strat
 Students once again see function composition at work, as they compose a simple inequality with the `distance` function they've created.
 
 === Launch
-Knowing how far apart our characters are is the first step. We still need the computer to be asking: "True or False: is there a collision?"
+Knowing how far apart our characters are is the first step. 
+
+We still need the computer to be asking: "True or False: is there a collision?"
 
 === Investigate
 
@@ -92,10 +114,15 @@ Knowing how far apart our characters are is the first step. We still need the co
 }
 
 === Synthesize
-- In our flag-pole exercise, we had to write two functions and could start with one or the other. In our game, however, we began already having written  the `distance` function! Is this *Top-Down* or *Bottom-Up* decomposition?
-- Explicitly point out that the @show{(code 'collision?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.
-- Connect this back to `profit` (from @lesson-link{problem-decomposition, Problem Decomposition}), which relied on `revenue` and `cost`. Which function(s) would a top-down strategy address first?
-- Connect this back to @show{(code 'onscreen?)} (from @lesson-link{inequalities3-sam, Sam the Butterfly}), which relied on @show{(code 'safe-left?)} and @show{(code 'safe-right?)}. Which function(s) would a bottom-up strategy address first?
 
+@QandA{
+@Q{In our flag-pole exercise, we had to write two functions and could start with one or the other. In our game, however, we began already having written  the `distance` function! Is this *Top-Down* or *Bottom-Up* decomposition?}
+@A{Explicitly point out that the @show{(code 'collision?)} function _uses_ `height`, allowing us to break a big problem down into two smaller ones.}
+@A{Connect this back to `profit` (from @lesson-link{problem-decomposition, Problem Decomposition}), which relied on `revenue` and `cost`. Which function(s) would a top-down strategy address first?}
+@A{Connect this back to @show{(code 'onscreen?)} (from @lesson-link{inequalities3-sam, Sam the Butterfly}), which relied on @show{(code 'safe-left?)} and @show{(code 'safe-right?)}. Which function(s) would a bottom-up strategy address first?}
+}
+
+@ifnotslide{
 == Additional Exercises
 For teachers who've already introduced your class to flags, @opt-starter-file{flags-trinidad} makes use of Pythagorean Theorem and could make for an interesting connection to this lesson.
+}
