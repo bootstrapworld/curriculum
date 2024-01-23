@@ -80,11 +80,11 @@
                 if(!pathway && !lessons) {
                   relevantLessons = relevantLessons.filter(l => removeProglangSuffix(l) == l);
                 }
-                entry.description += " [See: ";
+                entry.description += " <br/><i>[See: ";
                 entry.description += relevantLessons.map(l =>
                     `<a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a>`)
                   .join(", ");
-                entry.description += "]";
+                entry.description += "</i>]";
                 list.innerHTML += `<dd><p>${entry.description}</p></dd>`;
                 // build the lessonMap, adding every standard to every dictionary-array
                 relevantLessons.forEach(l => {
@@ -143,7 +143,7 @@
             html += `<dd>No Alignments for this Lesson</dd>`; 
           } else {
             const list = [...Object.keys(alignedStandards)].sort().map(k => 
-              `<li><b>${k}</b> : ${alignedStandards[k].join(", ")}</li>`);
+              `<li><i>${k}</i> : ${alignedStandards[k].join(", ")}</li>`);
             html+=`<dd><ul>${list.join('')}</ul></dd>`;  
           }
         })
