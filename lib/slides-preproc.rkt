@@ -666,6 +666,13 @@
                               (display "<b><i>" o)
                               (display arg o)
                               (display "</i></b>" o))]
+                           [(string=? directive "hspace")
+                            (let* ([arg (read-group i directive)]
+                                  [match (regexp-match (pregexp "([\\d]+)(em|ex)") arg)]
+                                  [num (string->number (second match))]
+                                  [unit (if (string=? (third match) "ex") 2 3)]
+                                  [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
+                              (display spaces o))]
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
