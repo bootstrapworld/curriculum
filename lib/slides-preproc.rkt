@@ -260,6 +260,11 @@
         (string-append "(" s ")")
         s)))
 
+; replace characters with html entities
+; there's probably a better way to do this...
+(define (htmlize str)
+  (string-replace (string-replace str "<" "&lt;") ">" "&gt;"))
+
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
          [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
@@ -272,7 +277,7 @@
              " :: "
              (contract-types-to-commaed-string domain-list)
              " -> "
-             range)]
+             (htmlize range))]
         [s2 (and purpose
                  (string-append
                    prefix purpose))])
