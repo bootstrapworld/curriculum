@@ -13,16 +13,16 @@
 | Lesson Goals
 | Students will be able to:
 
-* Explain the three core elements of a _Contract_ (a set-based representation of function machines): Name, Domain, and Range
-* Use Contracts to apply functions that produce Numbers, Strings, and Images
-* Demonstrate understanding of @vocab{Domain} and @vocab{Range} and how they relate to @vocab{Functions}
+- Explain the three core elements of a _Contract_ (a set-based representation of function machines): Name, Domain, and Range
+- Use Contracts to apply functions that produce Numbers, Strings, and Images
+- Demonstrate understanding of @vocab{Domain} and @vocab{Range} and how they relate to @vocab{Functions}
 
 | Student-facing Lesson Goals
 |
 
-* Let's write code to make images!
-* Let's learn to identify the Domain and Range of a function.
-* Let's use Contracts to apply functions.
+- Let's write code to make images!
+- Let's learn to identify the Domain and Range of a function.
+- Let's use Contracts to apply functions.
 
 | Materials
 |[.materials-links]
@@ -34,11 +34,11 @@
 @opt-material-links
 
 | Preparation
-| * There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+| - There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 
 | Key Points For The Facilitator
 |
-* Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
+- Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
 
 |===
 
@@ -54,9 +54,11 @@ In programming languages, values are like nouns. You've learned about different 
 
 In programming, most verbs are called @vocab{functions}. A function is like a machine at a factory:
 
-. It takes in some values (called @vocab{arguments})
-. It _does something_ to those values
-. It produces a new value
+1. It takes in some values (called @vocab{arguments})
+
+2. It _does something_ to those values
+
+3. It produces a new value
 
 Let's play with a function to get the hang of it.
 
@@ -175,8 +177,8 @@ Encourage students to read these messages aloud to one another, and ask them wha
 Mistakes happen, especially if we're just figuring things out! Let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
 
 @lesson-instruction{
-* Let's complete the first section of @printable-exercise{catching-bugs.adoc} together. We'll be working in @starter-file{editor}.
-* Start by typing `triangle` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
+- Let's complete the first section of @printable-exercise{catching-bugs.adoc} together. We'll be working in @starter-file{editor}.
+- Start by typing `triangle` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
 }
 
 @QandA{
@@ -187,9 +189,9 @@ Mistakes happen, especially if we're just figuring things out! Let's see how err
 This means that the computer knows about a function called `triangle`.
 
 @lesson-instruction{
-* We know that all functions will need an open parentheses and at least one input!
-* We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
-* Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
+- We know that all functions will need an open parentheses and at least one input!
+- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+- Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
 }
 
 @QandA{
@@ -199,8 +201,8 @@ This means that the computer knows about a function called `triangle`.
 }
 
 @lesson-instruction{
-* We know that `triangle` needs 3 arguments. But what kinds of arguments are they?
-* Try different inputs to make a triangle, and see if you can figure out the Contract!}
+- We know that `triangle` needs 3 arguments. But what kinds of arguments are they?
+- Try different inputs to make a triangle, and see if you can figure out the Contract!}
 
 @QandA{
 @Q{What is the Contract for `triangle`?}
@@ -222,8 +224,8 @@ Turn to the second section of @printable-exercise{pages/catching-bugs.adoc} with
 }
 
 @lesson-instruction{
-* Turn to the third section of @printable-exercise{pages/catching-bugs.adoc}.
-* Read each error message carefully, decide whether it's a contract error or a syntax error and work to decipher what it's trying to tell us.
+- Turn to the third section of @printable-exercise{pages/catching-bugs.adoc}.
+- Read each error message carefully, decide whether it's a contract error or a syntax error and work to decipher what it's trying to tell us.
 }
 
 === Synthesize
@@ -291,9 +293,11 @@ It can be empowering for students to develop expertise on a topic and get to sha
 
 **If you see an error and you know the syntax is right**, ask yourself these three questions:
 
-. What is the function that is generating that error?
-. What is the Contract for that function?
-. Is the function getting what it needs, according to its Domain?
+1. What is the function that is generating that error?
+
+2. What is the Contract for that function?
+
+3. Is the function getting what it needs, according to its Domain?
 
 === Synthesize
 
@@ -311,11 +315,11 @@ Students learn to work with more than one function at once, by way of Circles of
 
 What if we wanted to see your name written on a diagonal?
 
-* We know that we can use the `text` function to make an Image of your name.
+- We know that we can use the `text` function to make an Image of your name.
 
 @hspace{2em} @show{(contract 'text '((message String) (size Number) (color String)) "Image")}
 
-*  @ifproglang{pyret}{Pyret}
+-  @ifproglang{pyret}{Pyret}
 @ifproglang{wescheme}{WeScheme}
 also has a function called `rotate` that will rotate any Image a specified number of degrees.
 
@@ -329,17 +333,17 @@ One way to organize our thoughts is to diagram what we want to do, using the Cir
 
 The rules are simple:
 
-1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+(1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
 
-2) The arguments of the function are written left-to-right, in the middle of the Circle.
+(2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
-** Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+ * Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
 
-3) Circles can contain other Circles!
+(3) Circles can contain other Circles!
 
 @lesson-instruction{
-* Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
-* Turn to @printable-exercise{pages/text-coe.adoc} and complete the Notice and Wonder section.
+- Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
+- Turn to @printable-exercise{pages/text-coe.adoc} and complete the Notice and Wonder section.
 }
 
 @do{
@@ -349,8 +353,6 @@ The rules are simple:
 }
 
 _Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure._
-
-@vspace{1ex}
 
 [cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===

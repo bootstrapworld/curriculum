@@ -41,20 +41,29 @@
 Students _define_ a piecewise function. This is a challenging task, which is motivated by introducing key events in their video game.
 
 === Launch
-Have students sign in to @starter-file{program-list} and open their saved game starter files.
-
-You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code or the Design Recipe page focused on `DANGER` and `TARGET`, and refresh your memory on how they work.
 
 @lesson-instruction{
-- What controlled the speed of your characters?
-- What controlled the _direction_ of your characters?
+Sign in to @starter-file{program-list} and open your saved game starter files.
+
+You've already defined functions to move your `DANGER` and `TARGET`. Take a moment to look at your code or the Design Recipe page focused on `DANGER` and `TARGET`, and refresh your memory on how they work.
 }
 
-If we wanted our `PLAYER` to go up all the time, we would already know how to do that. If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that. But we want the player to go up _only_ when the "up" arrow is pressed, and down _only_ when the "down" arrow is pressed. Do we know how to make a function behave differently, based on its input?
+@QandA{
+@Q{What controlled the speed of your characters?}
+@Q{What controlled the _direction_ of your characters?}
+}
+
+@slidebreak
+
+* If we wanted our `PLAYER` to go up all the time, we would already know how to do that. 
+* If we wanted our `PLAYER` to go _down_ all the time, we would already know how to do that.
+* But we want the player to go up _only_ when the "up" arrow is pressed, and down _only_ when the "down" arrow is pressed... 
+
+@QandA{
+@Q{Do we know how to make a function behave differently, based on its input?}
+}
 
 === Investigate
-
-Direct students to open their saved Game Project files. Tell them to look for update player. Lead a discussion by posing the following questions.
 
 @strategy{
 @span{.title}{Strategies for English Language Learners}
@@ -62,7 +71,6 @@ Direct students to open their saved Game Project files. Tell them to look for up
 MLR 6 - Three Reads: Have students read through the problem statement three times, looking for different information.  What is the problem asking me?  What is the @vocab{Contract} for this @vocab{function}?  What information do I need to create that function?
 }
 
-@ifproglang{wescheme}{
 @QandA{
 @Q{What is the Contract for `update-player`?}
 @A{The Name is `update-player`, the Domain consists of a Number and String, and Range is a Number.}
@@ -71,26 +79,23 @@ MLR 6 - Three Reads: Have students read through the problem statement three time
 @Q{How does the y-coordinate of `PLAYER` change when the user presses the "up" key?}
 @A{It should increase, the program should add something to it.}
 }
-}
-
-@QandA{
-@Q{What is the Contract for `update-player`?}
-@A{The Name is `update-player`, the Domain consists of two Numbers and a String, and the Range is a Number.}
-@Q{What does each part of the domain and range represent?}
-@A{Domain: the Numbers are the x-coordinate and the y-coordinate of `PLAYER` when the key is pressed, the String is the key that the user pressed; Range: the Number is the new y-coordinate of `PLAYER`.}
-@Q{How does the y-coordinate of `PLAYER` change when the user presses the "up" key?}
-@A{It should increase, the program should add something to it.}
-}
 
 @center{@image{images/player-move.png,  400}}
 
-- Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your *Game Project file* and test.
+@slidebreak
+
+@lesson-instruction{
+Complete @printable-exercise{pages/update-player.adoc} with a partner, then type your code into your game starterfile and test it out.
 }
 
 @strategy{
 @span{.title}{2-D Game Movement}
 
-If your students have their games working and you are ready to support them in delving into the Posn data type that will support 2-d movement in the game, the first step is to complete @opt-printable-exercise{2d-character-movement.adoc} and @opt-printable-exercise{2d-character-movement-cont.adoc}. Once they've gotten their danger moving diagonally, they're ready to build upon their understanding of Posn and piecewise functions to tackle @opt-printable-exercise{update-player-2.adoc}.
+If your students have their games working and you are ready to support them in delving into the Posn data type that will support 2-d movement in the game...
+
+The first step is to complete @opt-printable-exercise{2d-character-movement.adoc} and @opt-printable-exercise{2d-character-movement-cont.adoc}. 
+
+Once they've gotten their danger moving diagonally, they're ready to build upon their understanding of Posn and piecewise functions to tackle @opt-printable-exercise{update-player-2.adoc}.
 }
 
 
@@ -112,10 +117,12 @@ Students choose one or more features to make their game more unique. These featu
 Right now, all of your games allow the player to move up and down at a constant speed. But what if we wanted to add a special key that made the player warp to the top of the screen, or move down twice as fast? What if we wanted the player to _wrap_, so going off one side of the screen would make it re-appear on the other?
 
 === Investigate
+
 @lesson-instruction{
 Complete at least one of the @printable-exercise{pages/challenges.adoc} before turning to your computer to customize your game.
 }
 
+@teacher{
 Some possible features students might include are:
 
 * *Warping* - program one key to "warp" the player to a set location, such as the center of the screen
@@ -125,17 +132,19 @@ Some possible features students might include are:
 * *Wrapping* - add code to `update-player` such that when `PLAYER` moves to the top of the screen, it reappears at the bottom, and vice versa
 
 * *Hiding* - add a key that will make `PLAYER` seem to disappear, and reappear when the same key is pressed again
+}
 
 @ifproglang{wescheme}{Reminder: Use `;` to add comments to code!}
 
 @ifproglang{pyret}{Reminder: Use `#` to add comments to code!}
 
-Adding useful @vocab{comments} to code is an important part of programming. It lets us leave messages for other programmers, leave notes for ourselves, or "turn off" pieces of code that we don't want or need to @vocab{debug} later.
+Adding useful @vocab{comments} to code is an important part of programming. It lets us leave messages for other programmers or our future selves and "turn off" pieces of code that we either don't want or need to @vocab{debug} later.
 
 === Synthesize
-Have students share back what they implemented. Sharing solutions is encouraged!
 
-What would it take to make the player move left and right? Why can't we do this without changing the Contract?
+* Share what you implemented!
+* What would it take to make the player move left and right? 
+* Why can't we do this without changing the Contract?
 
 @strategy{
 @span{.title}{Pedagogy Note}
