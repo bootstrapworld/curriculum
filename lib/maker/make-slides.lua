@@ -221,6 +221,7 @@ local function make_slides_file(lplan_file, slides_file)
         for _,l1 in ipairs(slide_lines) do
           l1 = l1:gsub('__(.-)__', '_%1_')
           l1 = l1:gsub(' %+$', '')
+          l1 = l1:gsub('^%+$', '\n')
           o:write(l1, '\n')
         end
       end
