@@ -170,6 +170,7 @@ local function get_slides(lsn_plan_adoc_file)
         end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
+        curr_slide.text = curr_slide.text .. (inside_table_p and '}' or '{')
         inside_table_p = not inside_table_p
         beginning_of_line_p = true
       else
