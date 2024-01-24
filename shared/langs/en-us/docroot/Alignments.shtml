@@ -71,17 +71,23 @@
             // OR if there's a lesson in the current pathway or graph that aligns to it
             // SKIP __metadata, which does not contain a 'lessons' field
             for( const [id, entry] of Object.entries(entries) ) {
+
               if(entry.lessons && entry.lessons.filter(l => normalizedAlignedLessons.includes(l)).length) {
                 list.innerHTML += `<dt>${id}</dt>`;
                 // if there are aligned standards,
                 // add all lessons (and links!) to the description
                 var relevantLessons = alignedLessons.filter(l => entry.lessons.includes(removeProglangSuffix(l)));
+                
                 // if we're not aligned to any specific pathway or lesson, remove suffixed duplicates
                 if(!pathway && !lessons) {
-                  relevantLessons = relevantLessons.filter(l => removeProglangSuffix(l) == l);
+                  relevantLessons = relevantLessons.filter(lesson => {
+                    normalizedLesson = removeProglangSuffix(lesson);
+                    return (lesson == normalizedLesson) || !relevantLessons.includes(normalizedLesson);
+                  });
                 }
+
                 entry.description += " <br/><i>";
-                entry.description += relevantLessons.map(l =>
+                entry.description += relevantLessons.map(l => 
                     `<a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a>`)
                   .join(", ");
                 entry.description += "</i>";
@@ -138,7 +144,7 @@
           if(removeProglangSuffix(l) == l) return;
           const {title, description} = graph[l];
           const alignedStandards = lessonMap[title];
-          html += `<dt>${title}</dt>`
+          html += `<dt><a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a></dt>`
           if([...Object.keys(alignedStandards)].length == 0) {
             html += `<dd>No Alignments for this Lesson</dd>`; 
           } else {
