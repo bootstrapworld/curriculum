@@ -73,6 +73,7 @@ local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
+  local inside_table_p = false
   local curr_slide = newslide()
   local inside_css_p = false
   local beginning_of_line_p = true
@@ -86,7 +87,8 @@ local function get_slides(lsn_plan_adoc_file)
       end
       break
     elseif c == '\n' then
-      if not inside_css_p then
+      if not inside_css_p and
+        (not inside_table_p or not beginning_of_line_p) then
         curr_slide.text = curr_slide.text .. c
       end
       beginning_of_line_p = true
@@ -140,13 +142,11 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
         end
       elseif c == '[' then
-        local table_line = false
         local table_numcols = 0
         local table_header = false
         local L = i:read_line()
         if not L then break
         elseif L:match('cols=[%d"\']') then
-          table_line = true
           if L:match('header') then table_header = true end
           if L:match('cols=(%d+)') then
             table_numcols = tonumber(L:gsub('.-cols=(%d+).*', '%1'))
@@ -170,6 +170,7 @@ local function get_slides(lsn_plan_adoc_file)
         end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
+        inside_table_p = not inside_table_p
         beginning_of_line_p = true
       else
         curr_slide.text = curr_slide.text .. c
