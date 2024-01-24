@@ -52,6 +52,8 @@ In human languages, verbs _do things to nouns_. For example, I can "_throw_ a ba
 
 In programming languages, values are like nouns. You've learned about different data types in our programming language, like Number values (`42`, `-8.3`, etc), String values (`"hello!"`), and Boolean values (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` ... each of which _does something_ to Number values.}
 
+@slidebreak
+
 In programming, most verbs are called @vocab{functions}. A function is like a machine at a factory:
 
 1. It takes in some values (called @vocab{arguments})
@@ -59,6 +61,8 @@ In programming, most verbs are called @vocab{functions}. A function is like a ma
 2. It _does something_ to those values
 
 3. It produces a new value
+
+@slidebreak
 
 Let's play with a function to get the hang of it.
 
@@ -68,8 +72,9 @@ Let's play with a function to get the hang of it.
 - What do you think this function does? Come up with a theory about what `string-length` does, and test that theory by using it with other inputs.
 }
 
-
 Be sure to read any error messages you get back carefully! They might have clues to help you understand what's going on.
+
+@slidebreak
 
 @QandA{
 
@@ -104,6 +109,7 @@ _If your students are not yet familiar with function notation, no need to introd
 With your partner, complete @printable-exercise{pages/applying-functions.adoc}.
 }
 
+@slidebreak
 The expressions using the `regular-polygon` function produced a value that wasn't a Number, a String, or a Boolean. In the @proglang programming language, these values are called _Images_.
 
 @QandA{
@@ -125,6 +131,8 @@ The expressions using the `regular-polygon` function produced a value that wasn'
 @Q{Where else have you heard the word "contract" used in the real world? How can you connect that meaning to contracts in programming? _Answers will vary!_}
 }
 
+@slidebreak
+
 Contracts are _binding_ agreements! For example, we might sign a contract with a plumber to install a sink for $200. As long as they install the sink, we are obligated to pay them $200. If a parent promises to order pizza if their child does their chores, they'd better order that pizza if the child does those chores!
 
 If one party breaks the contract, bad things can happen. In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time to use a function, so the only result is a helpful error message.
@@ -133,6 +141,8 @@ If one party breaks the contract, bad things can happen. In some programming lan
 A Contract is an agreement between us and a function: if it gets what it expects, it'll give us what we expect.
 }
 
+@slidebreak
+
 @lesson-instruction{
 - How much can you figure out about a function just by reading its contract? With your partner, complete @printable-exercise{pages/practicing-contracts.adoc} and @printable-exercise{pages/matching-expressions.adoc}.
 - _Note_: These pages use made-up functions that are not built into @proglang. Students who try to type them into the computer will get an error!
@@ -140,7 +150,7 @@ A Contract is an agreement between us and a function: if it gets what it expects
 
 @teacher{Review students' answers for `is-beach-weather` and `cylinder`.}
 
-@optional We've just encountered a lot of new vocabulary! Solidify your understanding by working through @opt-printable-exercise{pages/frayer-model.adoc, Domain and Range} and/or @opt-printable-exercise{pages/frayer-model-2.adoc, Function and Variable} to explain these ideas in your own words, using these Frayer Model visual organizers.
+@opt{We've just encountered a lot of new vocabulary! Solidify your understanding by working through @opt-printable-exercise{pages/frayer-model.adoc, Domain and Range} and/or @opt-printable-exercise{pages/frayer-model-2.adoc, Function and Variable} to explain these ideas in your own words, using these Frayer Model visual organizers.}
 
 @strategy{
 @span{.title}{Strategies for English Language Learners}
@@ -186,11 +196,21 @@ Mistakes happen, especially if we're just figuring things out! Let's see how err
 @A{@ifproglang{pyret}{`<function:triangle>`} @ifproglang{wescheme}{`#<function:triangle>`}}
 }
 
+@slidebreak
+
+@ifslide{
+@ifproglang{pyret}{`<function:triangle>`} 
+@ifproglang{wescheme}{`#<function:triangle>`}
+}
+
 This means that the computer knows about a function called `triangle`.
 
 @lesson-instruction{
 - We know that all functions will need an open parentheses and at least one input!
 - We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+
+@slidebreak
+
 - Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
 }
 
@@ -199,6 +219,8 @@ This means that the computer knows about a function called `triangle`.
 @A{@image{images/triangle80.png, 500}}
 @A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
 }
+
+@slidebreak
 
 @lesson-instruction{
 - We know that `triangle` needs 3 arguments. But what kinds of arguments are they?
@@ -217,11 +239,15 @@ Diagnosing and fixing errors are skills that we will continue developing through
 Turn to the second section of @printable-exercise{pages/catching-bugs.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
 }
 
+@slidebreak
+
 @QandA{
 @Q{What is the difference between a _contract_ error and a _syntax_ error?}
 @A{@vocab{syntax errors} are  typos (including missing @ifproglang{pyret}{commas,} quotation marks, parentheses, etc.) that prevent the computer from reading our code.}
 @A{@vocab{contract errors} are when we don't give the function the arguments it needs - either because we give it the wrong number or type of arguments.}
 }
+
+@slidebreak
 
 @lesson-instruction{
 - Turn to the third section of @printable-exercise{pages/catching-bugs.adoc}.
@@ -282,14 +308,18 @@ Make sure students at least find the contracts for `star`, `rectangle` and `text
 It can be empowering for students to develop expertise on a topic and get to share it with their peers! This section of the lesson could be reframed as an opportunity for students to become experts in an image-producing function and teach their classmates about it. For example, Pair 1 and pair 4 might focus on `radial-star`, pair 2 and pair 5 might focus on `polygon-star`, pair 3 and pair 6 might focus on `regular-polygon`, etc. First, each pair would explore their function. Perhaps each pair could make a poster, starter-file or slide deck about their function including: the Contract, an explanation of how it works in their own words, a few images that it can generate illustrating the range of possibilities with the expressions that generate them. Next, they might compare their thinking with another pair that focused on the same Contract. Finally, pairs could be grouped with other pairs who focused on different functions and teach each other about what they learned.
 }
 
+@slidebreak
+
 @lesson-instruction{
 - Let's do some more experimenting with some of the more complex image functions from the list we just saw! This time around we'll start with their contracts.
 - Complete @printable-exercise{pages/triangle-contracts.adoc}, @printable-exercise{pages/using-contracts.adoc} and @printable-exercise{pages/radial-star.adoc} with your partner.
 }
 
-@optional If your students are ready to dig into more complex triangles, @opt-printable-exercise{pages/triangle-contracts-cont.adoc} will be a good challenge. Another option for further investigation is @opt-printable-exercise{pages/star-polygon.adoc}.
+@opt{If your students are ready to dig into more complex triangles, @opt-printable-exercise{pages/triangle-contracts-cont.adoc} will be a good challenge. Another option for further investigation is @opt-printable-exercise{pages/star-polygon.adoc}.}
 
 @teacher{Note: Both `star-polygon` and `radial-star` generate a wide range of really interesting shapes!}
+
+@slidebreak
 
 **If you see an error and you know the syntax is right**, ask yourself these three questions:
 
@@ -319,9 +349,7 @@ What if we wanted to see your name written on a diagonal?
 
 @hspace{2em} @show{(contract 'text '((message String) (size Number) (color String)) "Image")}
 
--  @ifproglang{pyret}{Pyret}
-@ifproglang{wescheme}{WeScheme}
-also has a function called `rotate` that will rotate any Image a specified number of degrees.
+-  @proglang also has a function called `rotate` that will rotate any Image a specified number of degrees.
 
 @hspace{2em} @show{(contract 'rotate '(Number Image) "Image")}
 
@@ -329,7 +357,7 @@ _But how could the `rotate` and `text` functions work together?_
 
 === Investigate
 
-One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. Circles of Evaluation help us think about what we want to do, without worrying about syntax like quotation marks, paretheses, etc. They let us use all our brains for _thinking_, before we use them for _coding_.
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. Circles of Evaluation help us think about what we want to do, without worrying about syntax like quotation marks, parentheses, etc. They let us use all our brains for _thinking_, before we use them for _coding_.
 
 The rules are simple:
 
@@ -341,6 +369,8 @@ The rules are simple:
 
 (3) Circles can contain other Circles!
 
+@slidebreak
+
 @lesson-instruction{
 - Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
 - Turn to @printable-exercise{pages/text-coe.adoc} and complete the Notice and Wonder section.
@@ -351,6 +381,8 @@ The rules are simple:
 (define exprd '(rotate 90 (text 150 "Diego" "yellow")))
 
 }
+
+@slidebreak
 
 _Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure._
 
@@ -367,18 +399,30 @@ _Suppose we want to see the `text` "Diego" written vertically in yellow letters 
 
 |===
 
-
 @lesson-instruction{
 What do you Notice? What do you Wonder?
 }
 
+@slidebreak
+
+@ifslide{
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+|===
+
+| @show{(coe expd)}  | &rarr; 	| @show{(coe exprd)}
+
+| @show{(code expd)} | 			| @show{(code exprd)}
+
+|===
+}
 
 To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
 
-@lesson-instruction{
-Give it a try by completing the *Let's Rotate an image of your name!* section of @printable-exercise{pages/text-coe.adoc}
-}
+@slidebreak
 
+@lesson-instruction{
+Turn to the *Let's Rotate an image of your name!* section of @printable-exercise{pages/text-coe.adoc} and practice converting the Circle of Evaluation you draw into code.
+}
 
 === Synthesize
 
@@ -389,10 +433,6 @@ Give it a try by completing the *Let's Rotate an image of your name!* section of
 - Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?
 
 == Additional Exercises
-@ifproglang{pyret}{
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7, Matching Images to Code}
-}
-@ifproglang{wescheme}{
-- @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fecf203a29e040d182be6c6?collections=5fbecc2b40d7aa0d844956f0, Matching Images to Code}
-}
+
+@opt-starter-file{images-code}
 
