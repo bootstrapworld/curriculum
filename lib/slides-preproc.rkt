@@ -554,15 +554,17 @@
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
                            [(string=? directive "image")
-                            (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(not teacher-notes)
-                                     (display (make-image (first args)
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [img-file (first args)])
+                              (cond [*output-answers?*
+                                      (fprintf o "[click here for image](~a)" img-file)]
+                                    [(not teacher-notes)
+                                     (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
                                       (printf "WARNING: Using @image inside teacher notes\n")
-                                      (fprintf o "@image{~a}" args)
-                                      (display "@image{~a}" o)]))]
+                                      (fprintf o "@image{~a}" args)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
