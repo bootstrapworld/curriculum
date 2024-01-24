@@ -680,9 +680,8 @@
                                    [n (string->number (first args))]
                                    [header? (>= n-args 2)]
                                    [cells (map string-trim
-                                               (cdr
                                                  (string-split
-                                                   (read-group i directive #:multiline? #t) "|")))]
+                                                   (read-group i directive #:multiline? #t) "|"))]
                                    [header-cells (if header? (take cells n) '())]
                                    [body-cells (if header? (drop cells n) cells)])
                               (set! *outputting-table?* #t)
