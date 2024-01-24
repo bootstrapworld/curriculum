@@ -735,7 +735,7 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=oi9q6tZC0v"
+      "url": "https://www.wescheme.org/openEditor?pid=4799555149758464"
     }, 
   },
   "threats": {
