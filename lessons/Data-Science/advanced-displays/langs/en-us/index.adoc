@@ -100,11 +100,12 @@ But how do we process each Row separately? You've learned how to take a complex 
 }
 
 === Synthesize
-
-* One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_
-** __What a function consumes__ is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.
-* How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?
-** It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.
+@QandA{
+@Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
+@A{What a function consumes is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.}
+@Q{How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?}
+@A{It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.}
+}
 
 
 == Image Scatter Plots @duration{15 minutes}
@@ -191,13 +192,14 @@ We could, for example, represent the Animals using the following code:
 }
 
 === Synthesize
-
-* What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?
-** Use legs and age to determine width and height of a rectangle
-** Use different colors or shapes based on species, sex, or fixed-status
-* How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)
-** `image-scatter-plot` consumes a function that can draw different dots depending on each Row in the dataset, along with information about which columns contain the x- and y-coordinates. In contrast, `scatter-plot` because it only consumes information about _where_ the dots are drawn, and not _how_ they are drawn.
-* How might image-scatter-plot be useful to your own analysis?
+@QandA{
+@Q{What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?}
+@A{Use legs and age to determine width and height of a rectangle}
+@A{Use different colors or shapes based on species, sex, or fixed-status}
+@Q{How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)}
+@A{`image-scatter-plot` consumes a function that can draw different dots depending on each Row in the dataset, along with information about which columns contain the x- and y-coordinates. In contrast, `scatter-plot` because it only consumes information about _where_ the dots are drawn, and not _how_ they are drawn.}
+@Q{How might image-scatter-plot be useful to your own analysis?}
+}
 
 == Piecewise/Conditional Functions @duration{15 minutes}
 
