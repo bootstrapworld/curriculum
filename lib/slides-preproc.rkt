@@ -405,7 +405,7 @@
     (set! local-f (build-path local-dir snippet))
 
     (let* ([f.titletxt (path-replace-extension
-                         (build-path local-dir ".cached" snippet)
+                         (build-path local-dir ".cached" (string-append "." snippet))
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
