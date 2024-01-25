@@ -16,9 +16,18 @@
       select { width: unset; }
       .standard-menu-container, #search {display: inline-block; }
       #byLesson { display: none; }
-      #criteria { background: black; color: white; padding: 5px; margin: 10px 0; width: 100%; }
-      #criteria input { width: 250px; font-size: 14px; }
-      #search { float: right; padding: 10px; }
+      #criteria { 
+        display: flex;
+        background: black; 
+        color: white; 
+        padding: 0 10px; 
+        width: 100%; 
+        align-items: baseline;
+        white-space: nowrap;
+        min-width: 500px;
+      }
+      #criteria input { width: 100%; min-width: 100px; font-size: 14px; }
+      #searchBox { margin-left: 1ex; margin: 10px; }
       @media print {
         #criteria { display: none; }
         tbody { 
@@ -200,7 +209,6 @@
           console.timeEnd('time to filter');
         }, 250);
       }
-
     </script>
 </head>
 <body class="narrativepage article" onLoad="populateAlignments(); showAlignment('standards-CCSS-Math');">
@@ -215,7 +223,7 @@
           Bootstrap lessons align with several important teaching standards, textbooks, and practices. Select from the following menu to see which lessons meet those alignments.
         </p>
         <div id="criteria">
-        View 
+        View
         <div class="standard-menu-container">
           <select id="groupingMenu" onchange="switchGrouping(this.value)">
             <option value="Alignment" selected>By alignment</option>  
@@ -225,10 +233,9 @@
         <div class="standard-menu-container">
           <select class="alignmentSelect" onchange="showAlignment(this.value)"></select>
         </div>
-        <div id="search">
-          Searching for a lesson or standard? <input id="searchBox" type="search" onInput="search(this.value)"
-          placeholder="Type it here!"/>
-        </div>
+        Search for 
+          <input id="searchBox" type="search" onInput="search(this.value)"
+          placeholder=" lesson or standard"/>
       </div>
       </div>
       <div id="byLesson"></div>
