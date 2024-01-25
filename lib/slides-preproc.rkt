@@ -583,7 +583,9 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
                               (cond [*output-answers?*
-                                      (fprintf o "[click here for image](~a)" img-file)]
+                                      (let* ([img-hash-path (anonymize-filename img-file)]
+                                             [url (build-path *bootstrap-prefix* "lessons" *lesson* img-hash-path)])
+                                      (fprintf o "[click here for image](~a)" url))]
                                     [(not teacher-notes)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
@@ -644,9 +646,6 @@
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)
                               (display "{style=\"font-size: 22pt\"}" o))]
-                           [(string=? directive "lesson-roleplay")
-                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
-                              (expand-directives:string->port text o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)
