@@ -97,6 +97,12 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
+      elseif directive == 'lesson-instruction' then
+        curr_slide.suffix = '-DN'
+        curr_slide.text = curr_slide.text .. c .. directive
+      elseif directive == 'lesson-roleplay' then
+        curr_slide.suffix = '-RP'
+        curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
         if curr_slide.text ~= '' then
           set_imageorientation(curr_slide)
@@ -161,9 +167,6 @@ local function get_slides(lsn_plan_adoc_file)
           end
           curr_slide.text = curr_slide.text .. '}\n'
         else
-          if L:match('^%.lesson%-instruction]') then
-            curr_slide.suffix = '-DN'
-          end
           curr_slide.text = curr_slide.text .. '['
           buf_toss_back_char('\n', i)
           buf_toss_back_string(L, i)
