@@ -142,14 +142,11 @@ local function get_slides(lsn_plan_adoc_file)
           if ((curr_slide.level == 2) and 
               (curr_slide.header == "Common Misconceptions") and 
               (new_level == 2)) then
-            print('while reading the text following a common Misconceptions header...')
             if (new_header == 'Synthesize')
             then
-              print('I saw a Synthesize header')
               curr_slide.header = new_header
               curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
               curr_slide.section = 'Synthesize'
-              print(curr_slide.text)
             else
               error "ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'\n"
               break
