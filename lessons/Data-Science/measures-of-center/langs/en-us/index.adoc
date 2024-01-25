@@ -52,7 +52,7 @@ One of the ways that Data Scientists summarize quantitative data is by talking a
 Let's take a moment to consider what values might be typical for the weight of our animals by completing @printable-exercise{typical.adoc}.
 }
 
-@centered-image{images/pounds.png}
+@center{@image{images/pounds.png}}
 
 @QandA{
 @Q{Do you think there is a midpoint of this sample?}
@@ -73,8 +73,8 @@ Each of these are different ways of “measuring center”.
 The Animal Shelter Bureau used a method of summary, called the @vocab{mean}, or "average" to report about the typical weight of pets.
 
 @QandA{
-@Q{What do you already know about averages? _Answers will vary._}
-@A{To find the @vocab{mean} of a dataset we add all of the values and then divide their sum by the number of values in the dataset.} 
+@Q{What do you already know about averages?}
+@A{Sample Answer: To find the @vocab{mean} of a dataset we add all of the values and then divide their sum by the number of values in the dataset.}
 @A{The @vocab{mean} is the number that "balances" all the other numbers in the sample.}
 
 @Q{We are going to learn to let Pyret compute the mean for us, but let's first make sure we understand what we're asking Pyret to do! How would we find the mean weight of five animals who weigh 17, 25, 23, 23 and 22 pounds?}
@@ -93,10 +93,10 @@ The arithmetic mean is the number that "balances" all the other numbers in the s
 
 __Divide the class into groups of three. Supply each group with a ruler and 4-8 pennies. Make sure every group has at least one pen or pencil.__
 
-. The ruler represents a number line with values (weight) distributed equally across the line. If there's values at every inch from 0 to 12, where should the pencil be placed in order to balance the ruler on top of it?
-. Place a penny at 1 and 11. Where must the pencil be placed to balance those two values? What is the mean of the values [1, 11]?
-. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?
-. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?
+1. The ruler represents a number line with values (weight) distributed equally across the line. If there's values at every inch from 0 to 12, where should the pencil be placed in order to balance the ruler on top of it?
+2. Place a penny at 1 and 11. Where must the pencil be placed to balance those two values? What is the mean of the values [1, 11]?
+3. Place pennies at 1, 9 and 11. Where must the pencil be placed to balance those two values? What is the mean of of the values [1, 9, 11]?
+4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?
 }
 
 Pyret has a function that will compute the mean -- or average -- of any quantitative column in a Table. 
@@ -106,9 +106,9 @@ Pyret has a function that will compute the mean -- or average -- of any quantita
 Let's test it out!
 
 @lesson-instruction{
-* Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run". 
-** _If students don't have the file, they can open a new one from @starter-file{animals}._
-* Turn to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the @vocab{mean} weight.
+- Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
+  * _If students don't have the file, they can open a new one from @starter-file{animals}._
+- Turn to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the @vocab{mean} weight.
 }
 
 @QandA{
@@ -155,10 +155,10 @@ Here 29 is the @vocab{median}, because it separates the "bottom half” (5 value
 
 The algorithm for finding the median of a quantitative column is:
 
-. Sort the numbers
-. Cross out the highest and lowest number
-. Repeat until there is only one number left...
-. When there are an even number of numbers in the list, as in the example below, there will be two numbers left at the end. Take the _mean_ of those two numbers.
+1. Sort the numbers
+2. Cross out the highest and lowest number
+3. Repeat until there is only one number left...
+4. When there are an even number of numbers in the list, as in the example below, there will be two numbers left at the end. Take the _mean_ of those two numbers.
 
 `3, 7, 9, 21`
 
@@ -169,17 +169,17 @@ Find the @vocab{median} value of each of these two lists:
 
 * 11, 3, 7 ,4, 5 
 * 11, 3, 7, 4
-
-@optional Turn to the Median section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has space to complete these problems and three others.
 }
+
+@opt{Turn to the Median section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has space to complete these problems and three others.}
+
 @teacher{
-
-* The median of 11, 3, 7 ,4, 5 is 5, 
-** because it's the middle value of 3, 4, 5, 7, 11.
-* The median of 11, 3, 7, 4 is 5.5 
-** because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11
-
+- The median of 11, 3, 7 ,4, 5 is 5,
+  * because it's the middle value of 3, 4, 5, 7, 11.
+- The median of 11, 3, 7, 4 is 5.5
+  * because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11
 }
+
 === Investigate
 @lesson-instruction{
 * Turn back to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the median for the `pounds` column in the Animals Dataset.}
@@ -196,7 +196,7 @@ Find the @vocab{median} value of each of these two lists:
 }
 
 @lesson-point{
-The @vocab{mean} is a useful calculation when all of the points are fairly balanced on either side of the middle, but it distorts things for datasets with imbalance and extreme outliers. For skewed datasets, the vocab{median} is a better summary.}
+The @vocab{mean} is a useful calculation when all of the points are fairly balanced on either side of the middle, but it distorts things for datasets with imbalance and extreme outliers. For skewed datasets, the @vocab{median} is a better summary.}
 
 === Synthesize
 Looking at the shape of the data (via a histogram, for example), helps us determine whether it's probably better to use the mean or median.
@@ -338,24 +338,25 @@ Students apply what they have learned about measures of center to their chosen d
 === Launch
 Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and modes.
 
-@lesson-instruction{
-- Describe how to compute mean, median, and modes.
-- When does @vocab{mean} provide the best summary?
-** _It includes information from every single point, so it is useful when the data doesn't show much skewness or have outliers._
-- When does @vocab{median} provide the best summary?
-** _Statisticians fall back to the median when working with highly skewed datasets._
-- When are @vocab{mode(s)} a useful way to summarize a dataset?
-** _Mode(s) are most useful when a dataset has very few values._
+@QandA{
+@Q{Describe how to compute mean, median, and modes.}
+@Q{When does @vocab{mean} provide the best summary?}
+@A{It includes information from every single point, so it is useful when the data doesn't show much skewness or have outliers.}
+@Q{When does @vocab{median} provide the best summary?}
+@A{Statisticians fall back to the median when working with highly skewed datasets.}
+@Q{When are @vocab{mode(s)} a useful way to summarize a dataset?}
+@A{Mode(s) are most useful when a dataset has very few values.}
 }
 
 === Investigate
 
 Let’s connect what we know about measures of center to your chosen dataset.
 
+@teacher{Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson.
+}
+
 @lesson-instruction{
 - Open your chosen dataset @ifproglang{pyret}{starter file in Pyret.}@ifproglang{codap}{in CODAP.}
-
-** _Teachers: Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson._
 - Choose two quantitative columns that you'd like to analyze.
 - Use @proglang to compute the mean, median and modes of one of them.
 - *It’s time to add to your @starter-file{exploration-project}.*
@@ -372,15 +373,15 @@ Add your interpretations to the two "Measures of Center and Spread" slides and r
 
 === Synthesize
 
-Share your findings!
+@teacher{Have students share their findings.}
 
-Did you discover anything surprising or interesting about your dataset?
+- Did you discover anything surprising or interesting about your dataset?
 
-Which measures of center do you think were the most useful for the quantitative columns you chose?
+- Which measures of center do you think were the most useful for the quantitative columns you chose?
 
-What questions did the measures of center inspire you to ask about your dataset?
+- What questions did the measures of center inspire you to ask about your dataset?
 
-When you compared your findings with other students, did you make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
+- When you compared your findings with other students, did you make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
 
 == Additional Exercises
 - @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e, Mode(s)}

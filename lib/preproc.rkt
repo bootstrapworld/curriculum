@@ -1051,14 +1051,14 @@
                     (map (lambda (x)
                            (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
                                  [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
-                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-pyret][Pyret]" *dist-root-dir*)]
                                  [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
-                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-wescheme][WeScheme]" *dist-root-dir*)]
                                  [(and (string=? x "pyret") *lesson-plan*)
-                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                  (format "link:pass:[~alessons/~a/index.shtml][Pyret]" *dist-root-dir*
                                           (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
                                  [*lesson-plan*
-                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                   (format "link:pass:[~alessons/~a/index.shtml][~a]" *dist-root-dir*
                                            (if (string=? *proglang* "pyret")
                                                (string-append *lesson-plan* "-" x)
                                                (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
@@ -1425,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "big")
+                            (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "define")
@@ -1839,8 +1841,9 @@
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (fprintf o "[.optionaltag]##Optional: ##")
+                              (display "[.optionaltag]\n" o)
                               (display (expand-directives:string->string text) o)
+                              (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -2317,7 +2320,8 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
+            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #f])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
