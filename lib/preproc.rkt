@@ -1729,6 +1729,7 @@
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
+                              (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
@@ -1950,9 +1951,13 @@
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
-                            (let ([text (read-group i directive #:multiline? #t)])
+                            (let* ([title (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
                               (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
                               (display "|===\n|\n" o)
+                              (display "**" o)
+                              (expand-directives:string->port title o)
+                              (display "**\n\n" o)
                               (expand-directives:string->port text o)
                               (display "\n|===\n" o))]
                            [(string=? directive "lesson-point")

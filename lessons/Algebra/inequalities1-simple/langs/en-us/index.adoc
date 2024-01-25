@@ -13,12 +13,12 @@
 | Lesson Goals
 | Students will be able to:
 
-* Describe the solution set of a simple inequality
+- Describe the solution set of a simple inequality
 
 | Student-Facing Lesson Goals
 |
 
-* Let's find solutions and non-solutions to inequalities.
+- Let's find solutions and non-solutions to inequalities.
 
 | Materials
 |[.materials-links]
@@ -33,13 +33,13 @@
 
 | Supplemental Resources
 |
-* @link{https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0, Booleans Review}
+- @link{https://quizizz.com/admin/quiz/5d9919516dbee7001e08a4a0, Booleans Review}
 
 | Key Points for the Facilitator
-|* A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images.  But unlike those types, there are only _two_ values: `true` and `false`. While simple to explain, this different behavior can be confusing for some students.
-* Boolean-producing functions are essentially yes-or-no questions, so the names of the functions in this lesson read like questions.
-
-* For example, @show{(code 'odd?)} and @show{(code 'even?)} @ifproglang{wescheme}{(pronounced "odd-huh?" and "even-huh?" in Scheme)} are both functions that ask if a given number is odd or even.
+| 
+- A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images.  But unlike those types, there are only _two_ values: `true` and `false`. While simple to explain, this different behavior can be confusing for some students.
+- Boolean-producing functions are essentially yes-or-no questions, so the names of the functions in this lesson read like questions.
+- For example, @show{(code 'odd?)} and @show{(code 'even?)} @ifproglang{wescheme}{(pronounced "odd-huh?" and "even-huh?" in Scheme)} are both functions that ask if a given number is odd or even.
 }
 
 |===
@@ -51,9 +51,8 @@
 While students have been cursorily introduced to the @vocab{Boolean} data type in our @lesson-link{simple-data-types} lesson, Booleans are so different from other data types and so foundational to inequalities that this section reintroduces students to Booleans (by way of Circles of Evaluation and a starter file) in preparation for working with inequalities in the second section of the lesson.
 
 === Launch
-Students should be logged into @starter-file{editor}.
 
-Ask students to evaluate Circles of Evaluation for simple expressions they've seen before, and ask them to convert them into code.
+@lesson-instruction{To get ourselves warmed up, evaluate these Circles of Evaluation, convert them into code, and then log into @starter-file{editor}.}
 
 [cols="^.^3,^.^3,^.^3, 18", frame="none", grid="none"]
 |===
@@ -65,7 +64,11 @@ Ask students to evaluate Circles of Evaluation for simple expressions they've se
 
 |===
 
-Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize what they think they mean, what they will evaluate to, and what the code would look like.
+@slidebreak
+
+@lesson-instruction{Take a minute to think: What do you think these expressions mean? What do you expect them to evaluate to? 
+
+Then convert these Circles of Evaluation to code and test them out.}
 
 [cols="^.^3,^.^3,^.^3, 18", frame="none", grid="none"]
 |===
@@ -77,35 +80,33 @@ Then show them unfamiliar Circles of Evaluation, and ask them to hypothesize wha
 
 |===
 
-
-Have students convert these Circles to code and type them in. What did they evaluate to? What do they think the outputs mean?
+@slidebreak
 
 Values like `true` and `false` obviously aren't Numbers or Images. But they also aren't Strings, or else they would have quotes around them. We've found a __new data type__, called a @vocab{Boolean}.
-
-=== Investigate
-
-
-Have students open the @starter-file{boolean}.
-
-@lesson-instruction{
-- Explore the five functions in this starter file: @show{(code 'odd?)}, @show{(code 'even?)}, @show{(code 'less-than-one?)}, @show{(code 'continent?)}, and @show{(code 'primary-color?)}
-- All five functions produce @vocab{Booleans}. Through your exploration, see if you can come up with an explanation of what a @vocab{Boolean} is.
-}
 
 @lesson-point{
 A @vocab{Boolean} is just another @vocab{data type}, like Numbers or Images. But unlike the others there are only two values: `true` and `false`.
 }
 
+=== Investigate
+
 @lesson-instruction{
-- Turn to @printable-exercise{boolean-functions.adoc} and use the starter file to complete the questions, identifying inputs that will make each function produce `true`, and inputs that will make each function `false`.
+Turn to @printable-exercise{boolean-functions.adoc} and use the @starter-file{boolean} to complete the questions.
+}
+
+@teacher{
+
+- Students will see functions in this activity that they've never encountered before ( @show{(code 'odd?)}, @show{(code 'even?)}, @show{(code 'less-than-one?)}, @show{(code 'continent?)}, and @show{(code 'primary-color?)})! All five functions produce @vocab{Booleans}. 
+- Instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
+- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
 }
 
 === Common Misconceptions
-- Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this by explaining that our Boolean-producing functions _should sometimes return false_.
+Many students - especially traditionally high-achieving ones - will be very concerned about writing examples that are "wrong." The misconception here is that an expression that produces `false` is somehow _incorrect_. You can preempt this by explaining that our Boolean-producing functions _should sometimes return false_.
 
 === Synthesize
-- Students will see functions on this page that they've never encountered before! But instead of answering their questions, encourage them to make a _guess_ about what they do, and then type it in to discover for themselves.
-- Explicitly point out that _everything they know still works!_ They can use their reasoning about Circles of Evaluation and Contracts to figure things out.
+
+How would you describe what a Boolean is?
 
 == Introducing Inequalities @duration{20 minutes}
 
@@ -118,41 +119,51 @@ Students discover (or expand their understanding of) inequalities by identifying
 How are equations different from inequalities?
 }
 
-@vocab{Equations} typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. @vocab{Inequalities}, on the other hand, can have _infinite_ solutions.  Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.
+@slidebreak
 
-_It is important that students learn to recognize that there are many possible solutions and non-solutions to an inequality and are able to identify whether or not a given number is or isn't part of the @vocab{solution set}._
+@vocab{Equations} typically have finite solution sets: there's only one answer for an unknown, or perhaps several answers. 
 
+@vocab{Inequalities}, on the other hand, can have _infinite_ solutions.  Inequality expressions divide all of the numbers in the universe into two categories: solutions and non-solutions.
+
+@teacher{It is important that students learn to recognize that there are many possible solutions and non-solutions to an inequality and are able to identify whether or not a given number is or isn't part of the @vocab{solution set}.}
+
+@slidebreak
 
 @lesson-instruction{
 - We are going to practice identifying whether or not a given number is part of the @vocab{solution set}.
 - Open the @starter-file{inequalities-simple} and click "Run".
-- Look at the graph that appears (image below), as well as the provided code (lines 10, 18, and 26).
+- This starter file includes a special `inequality` function that takes in a function __(which tests numbers in an inequality)__ and a list of 8 numbers __(to test in the function)__.
+- Look at the graph that appears (image below), as well as the provided code.
 @image{images/inequality-works.png}
 - What do you Notice? What do you Wonder?
 }
 
-Students might observe the following:
+@teacher{
+Be sure to surface the following:
 
-* This starter file includes a special `inequality` function that takes in a function __(which tests numbers in an inequality)__ and a list of 8 numbers __(to test in the function)__.
+- When we click "Run", we see a graph of the inequality on a number line.
 
-* When we click "Run", we see a graph of the inequality on a number line.
+- The solution set is shaded in blue.
 
-* The solution set is shaded in blue.
+- The 8 numbers provided in the list are shown as dots on the numberline. They will appear:
+  * green _when they're part of the solution set_
+  * red _when they are non-solutions_
+}
 
-* The 8 numbers provided in the list are shown as dots on the numberline. They will appear:
-** green _when they're part of the solution set_
-** red _when they are non-solutions_
+@slidebreak
 
 @lesson-instruction{
-- Look at line 18. Edit the list of values by deleting _one_ of the `-` symbols.
+- Find line 17. Edit the list of values by deleting _one_ of the `-` symbols.
 - Hit "Run". Examine the graph that appears (sample image below).
 @image{images/not-quite2.png}
 - How is this graph different from the one you first produced?
 }
 
+@teacher{
 A successful input in this starter file will include 4 solutions and 4 non-solutions; in other words, the image returned will show 4 green dots and 4 red dots.
 
 When students modify the list of numbers, they will see there are now 5 red dots and 4 green dots - along with a message that says, _"Challenge yourself: Find 4 true examples and 4 false"_.
+}
 
 === Investigate
 

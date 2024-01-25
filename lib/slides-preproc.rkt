@@ -49,6 +49,8 @@
 
 (define *output-answers?* #f)
 
+(define *outputting-table?* #f)
+
 (define *definitions* '())
 
 (define (massage-arg arg)
@@ -189,22 +191,43 @@
     (set! x (regexp-replace* "{zwsp}" x ""))
     (string-append "<code>" x "</code>")))
 
-(define (old-coe exp)
-  (format "<code>~s</code>" exp))
-
-(define (coe exp)
+(define (iii-dollar-html x)
   (string-append "\n\n$$$ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/asciidoctor.css\"/>\n"
     "<style>\n"
     "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
-    (coe-spans exp)
+    x
     "</div>\n"
     "$$$\n"))
+
+(define (make-html-table cells n #:head? [head? #f])
+  ; (printf "doing make-html-table ~a ~a ~a\n" cells n head?)
+  (let ([tag (if head? "thead" "tbody")])
+    (string-append (format "<~a>" tag)
+      (let loop ([cells cells] [res ""])
+        (let* ([m (length cells)]
+               [row (if (>= m n) (take cells n) cells)]
+               [cells2 (if (>= m n) (drop cells n) '())])
+          (if (null? cells) res
+              (loop cells2
+                    (string-append res
+                      "<tr>"
+                      (apply string-append
+                        (map (lambda (c) (string-append "<td>" c "</td>"))
+                             (map expand-directives:string->string row)))
+                      "</tr>")))))
+      (format "</~a>" tag))))
+
+(define (coe exp)
+  (let ([x (coe-spans exp)])
+    (if *outputting-table?* x
+        (iii-dollar-html x))))
 
 (define (coe-spans exp)
   (cond [(list? exp)
@@ -382,7 +405,7 @@
     (set! local-f (build-path local-dir snippet))
 
     (let* ([f.titletxt (path-replace-extension
-                         (build-path local-dir ".cached" snippet)
+                         (build-path local-dir ".cached" (string-append "." snippet))
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
@@ -557,15 +580,19 @@
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
                            [(string=? directive "image")
-                            (let ([args (read-commaed-group i directive read-group)])
-                              (cond [(not teacher-notes)
-                                     (display (make-image (first args)
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [img-file (first args)])
+                              (cond [*output-answers?*
+                                      (let* ([img-hash-path (anonymize-filename img-file)]
+                                             [url (build-path *bootstrap-prefix* "lessons" *lesson* img-hash-path)])
+                                      (fprintf o "[click here for image](~a)" url))]
+                                    [(not teacher-notes)
+                                     (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
                                       (printf "WARNING: Using @image inside teacher notes\n")
-                                      (fprintf o "@image{~a}" args)
-                                      (display "@image{~a}" o)]))]
+                                      (fprintf o "@image{~a}" args)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -607,7 +634,17 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
-                           [(member directive '("opt" "strategy" "teacher"))
+                           [(string=? directive "strategy")
+                            (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (ensure-teacher-notes)
+                              (newline teacher-notes)
+                              (display "**" teacher-notes)
+                              (expand-directives:string->port title teacher-notes)
+                              (display "**\n" teacher-notes)
+                              (expand-directives:string->port text teacher-notes)
+                              (newline teacher-notes))]
+                           [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
@@ -621,10 +658,9 @@
                               (display "{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
-                              (display "**" o)
-                              (expand-directives:string->port text o)
-                              (display "**{style=\"font-size: 22pt\"}" o))]
-                           [(string=? directive "lesson-instruction")
+                              (display ":pushpin: " o)
+                              (expand-directives:string->port text o))]
+                           [(member directive '("lesson-instruction" "lesson-roleplay"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(string=? directive "optional")
@@ -651,21 +687,25 @@
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
                            [(string=? directive "table")
-                            (let* ([args (read-commaed-group i directive read-group)]
+                            (let* ([args (begin0 (read-commaed-group i directive read-group)
+                                           (ignorespaces i))]
                                    [n-args (length args)]
-                                   [n (if (= n-args 0) 0 (or (string->number (first args)) 0))])
-                              (cond [(>= n-args 2)
-                                     (set! table-header-newlines 2)
-                                     (set! num-table-columns n)]
-                                    [else (let loop ([j n])
-                                            (unless (<= j 0)
-                                              (display (if (= j n) "|DELETE THIS ROW" "|_") o)
-                                              (loop (- j 1))))
-                                          (newline o)
-                                          (let loop ([j n])
-                                            (unless (<= j 0)
-                                              (display "|---" o)
-                                              (loop (- j 1))))]))]
+                                   [n (string->number (first args))]
+                                   [header? (>= n-args 2)]
+                                   [cells (map string-trim
+                                                 (string-split
+                                                   (read-group i directive #:multiline? #t) "|"))]
+                                   [header-cells (if header? (take cells n) '())]
+                                   [body-cells (if header? (drop cells n) cells)])
+                              (set! *outputting-table?* #t)
+                              (display (iii-dollar-html
+                                         (string-append
+                                           "<table>"
+                                           (if header?
+                                               (make-html-table header-cells n #:head? #t) "")
+                                           (make-html-table body-cells n)
+                                           "</table>")) o)
+                              (set! *outputting-table?* #f))]
                            [(string=? directive "vocab")
                             (let ([arg (read-group i directive)])
                               (display "<b><i>" o)
@@ -722,6 +762,11 @@
     ; (printf "expand-directives done\n")
 
     ))
+
+(define (expand-directives:string->string s)
+  (call-with-output-string
+    (lambda (o)
+      (expand-directives:string->port s o))))
 
 (define (expand-directives:string->port s o)
   ; (printf "doing expand-directives:string->port ~s\n\n" s )

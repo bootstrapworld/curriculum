@@ -7,6 +7,7 @@
   string-to-form
   *make-read-group
   read-commaed-group
+  ignorespaces
   process-as-many-pluses-as-possible
   process-passthrough-lines
   math-unicode-if-possible
