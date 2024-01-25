@@ -45,16 +45,16 @@ Students are introduced to their first non-operator @vocab{function} - `negate`.
 
 === Launch
 
-Instruct students to draw a number line that spans from @math{-10} to @math{10}, or draw/project one at the front of the room.
+@teacher{Instruct students to draw a number line that spans from @math{-10} to @math{10}, or draw/project one at the front of the room.}
 
-@lesson-instruction{
-- What number is the same distance from zero as @math{8}?
-** _@math{-8}_
-- What number is the same distance from zero as @math{-3}?
-** _@math{3}_
-- The pairs of numbers we've just identified are called @vocab{opposites} - two numbers that are the same distance from zero on the number line, with one negative and one positive.
-- What are some other pairs of opposites that you can identify?
-** _Possible responses: @math{6.5} and @math{-6.5}; @math{4} and @math{-4}; @math{\frac {7}{3}} and @math{- \frac {7}{3}}._
+@QandA{
+@Q{What number is the same distance from zero as @math{8}?}
+@A{@math{-8}}
+@Q{What number is the same distance from zero as @math{-3}?}
+@A{@math{3}}
+The pairs of numbers we've just identified are called @vocab{opposites} - two numbers that are the same distance from zero on the number line, with one negative and one positive.
+@Q{What are some other pairs of opposites that you can identify?}
+@A{Possible responses: @math{6.5} and @math{-6.5}; @math{4} and @math{-4}; @math{\frac {7}{3}} and @math{- \frac {7}{3}}.}
 }
 
 === Investigate
@@ -67,16 +67,18 @@ Incorporating @vocab{functions} into our Circles of Evaluation will expand their
 
 The function used to represent "the opposite" is called `negate`. It can be used like any other operator that we put at the top of a Circle of Evaluation - with one important difference: when we use `negate`, we include just one argument inside the Circle.
 
-@lesson-instruction{
-- What does the Circle of Evaluation below evaluate to?
-** _The Circle below evaluates to @math{-2}._
+@QandA{
+@Q{What does the Circle of Evaluation below evaluate to?}
+@A{The Circle below evaluates to @math{-2}.}
+}
 
 [.image]
 @show{(coe '(negate 2))}
 
-- What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle?
-** _The opposite of the opposite of a number is the number itself._
-
+@QandA{
+@Q{What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle?}
+@A{The opposite of the opposite of a number is the number itself.}
+}
 [.image]
 @show{(coe '(negate (negate 2)))}
 
@@ -116,16 +118,16 @@ When we encounter a value such as @math{-20}, however, it is confusing and misle
 
 
 === Synthesize
-
-- Two opposites are 8 units apart from each other. What are they?
-** @math{4} and @math{-4}
-- Two opposites are 42.5 units apart from each other. What are they?
-** @math{21.5} and @math{-21.5}
-- Cia says that opposites are always negative. Are they right? Why?
-** _No, opposites are not always negative. Positive numbers always have negative opposites - but negative numbers have positive opposites!_
-- We have learned that opposites are two numbers that are the same distance from zero on the number line, with one negative and one positive. Knowing this, what do you think is the opposite of zero?
-** _Zero is its own opposite!_
-
+@QandA{
+@Q{Two opposites are 8 units apart from each other. What are they?}
+@A{@math{4} and @math{-4}}
+@Q{Two opposites are 42.5 units apart from each other. What are they?}
+@A{@math{21.5} and @math{-21.5}}
+@Q{Cia says that opposites are always negative. Are they right? Why?}
+@A{No, opposites are not always negative. Positive numbers always have negative opposites - but negative numbers have positive opposites!}
+@Q{We have learned that opposites are two numbers that are the same distance from zero on the number line, with one negative and one positive. Knowing this, what do you think is the opposite of zero?}
+@A{Zero is its own opposite!}
+}
 
 == Absolute Value @duration{30 minutes}
 
@@ -156,9 +158,10 @@ Because _opposites_ are the same distance away from zero, they will always have 
 
 The @vocab{function} that we will use to represent absolute value is `abs`. It can be used like any other operator that we put at the top of a Circle of Evaluation. As with `negate`, when we use `abs`, we include just one argument inside the Circle of Evaluation.
 
-@lesson-instruction{
-- Let's try evaluating some Circles of Evaluation with `abs`! What does each of the Circles below evaluate to?
-** @math{20}, @math{20}, @math{43}, @math{43}, @math{43}
+@QandA{
+@Q{Let's try evaluating some Circles of Evaluation with `abs`! What does each of the Circles below evaluate to?}
+@A{@math{20}, @math{20}, @math{43}, @math{43}, @math{43}}
+}
 
 [cols="^.^1,^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none", frame="none"]
 |===
@@ -175,6 +178,7 @@ The @vocab{function} that we will use to represent absolute value is `abs`. It c
 
 |===
 
+@lesson-instruction{
 - On @printable-exercise{true-or-false-abs-val.adoc}, you will compare expressions with `abs` to expressions with `negate`
 - On the bottom half of the page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
 - Examine the Circles of Evaluation to determine @printable-exercise{wodb-abs-val-negate.adoc}. The page starts with numeric values and then integrates variables. Place a check mark by each Circle that meets the condition stated on the left.
@@ -186,12 +190,11 @@ Check in with students to ensure that they have a solid understanding of absolut
 
 Think about the @vocab{algebraic expressions} @math{|h|} and @math{-h}.
 
-- What do we know about the outcomes of each of these expressions?
-** _@math{|h|} is always positive or zero, while @math{-h} can be negative, zero, or positive._
-
-- When do they produce the same outcome?
-** _@math{-h} is positive when @math{h} is negative, and @math{-h} is negative when @math{h} is positive. As a result, @math{|h|} and @math{-h} produce the same outcome only when @math{h} is negative or zero._
-
-- When do they produce different outcomes?
-** _@math{|h|} and @math{-h} produce different outcomes when @math{h} is positive._
-
+@QandA{
+@Q{What do we know about the outcomes of each of these expressions?}
+@A{@math{|h|} is always positive or zero, while @math{-h} can be negative, zero, or positive.}
+@Q{When do they produce the same outcome?}
+@A{@math{-h} is positive when @math{h} is negative, and @math{-h} is negative when @math{h} is positive. As a result, @math{|h|} and @math{-h} produce the same outcome only when @math{h} is negative or zero.}
+@Q{When do they produce different outcomes?}
+@A{@math{|h|} and @math{-h} produce different outcomes when @math{h} is positive.}
+}

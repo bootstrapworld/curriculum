@@ -59,16 +59,16 @@ Walk around the room and give positive feedback on the green triangles. When the
 
 Invite students to analyze the examples you recorded by posing the following questions:
 
-@lesson-instruction{
-- Is there a pattern?
-** _Yes, the code mostly stayed the same with one change each time._
-- What stayed the same?
-** _The function name `triangle`, "solid", "green"._
-- What changed?
-** _The size of the `triangle`, or the Number input._
-- How many of you typed out the code from scratch each time?
-- How many triangles were you able to code in a minute?
-** _Write this down so that you can compare to it later!_
+@QandA{
+@Q{Is there a pattern?}
+@A{Yes, the code mostly stayed the same with one change each time.}
+@Q{What stayed the same?}
+@A{The function name `triangle`, "solid", "green".}
+@Q{What changed?}
+@A{The size of the `triangle`, or the Number input.}
+@Q{How many of you typed out the code from scratch each time?}
+@Q{How many triangles were you able to code in a minute?}
+@A{Write this down so that you can compare to it later!}
 }
 
 === Investigate
@@ -130,9 +130,9 @@ We need to program the computer to be as smart as our volunteer. But how do we d
 
 @show{(code '(gt 220))} &rarr; @show{(code '(triangle 220 "solid" "green"))}
 
-@lesson-instruction{
-* What's changing?
-**  _The size. Everything else is the same in every single example!_
+@QandA{
+@Q{What's changing?}
+@A{The size. Everything else is the same in every single example!}
 }
 
 Highlight or circle the numbers in the gt column and in the triangle column to help students see that they're the only thing changing! Explain that we can define our function by replacing the numbers that change with a variable that describes them. In this case, `size` would be a logical variable.
@@ -148,17 +148,19 @@ The way we write this in the editor is
 @center{@show{(code '(define (gt size)(triangle size "solid" "green")))}}
 
 @lesson-instruction{
-- Turn to @printable-exercise{gt-domain-debate.adoc} and "decide and defend" whether Kermit's assertion that __The domain of ``gt`` is ``Number, String, String``__ or Oscar's assertion that __The domain of ``gt`` is ``Number``__ is correct.
+- Turn to @printable-exercise{gt-domain-debate.adoc} and "decide and defend" whether Kermit's assertion that __The domain of `gt` is `Number, String, String` __ or Oscar's assertion that __The domain of `gt` is `Number` __ is correct.
 }
 
 In the case of `gt`, the domain was a number and that number stood for the `size` of the triangle we wanted to make. Whatever number we gave `gt` for the size of the triangle is the number our volunteer substituted into the `triangle` expression. Everything else stayed the same no matter what!
 
-@lesson-instruction{
-- Why might someone think the domain for `gt` contains a Number and two Strings?
-** _The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be._
+@QandA{
+@Q{Why might someone think the domain for `gt` contains a Number and two Strings?}
+@A{The function `gt` only needs one Number input because that's the only part that's changing. The function `gt` makes use of `triangle`, whose Domain is Number String String, but `gt` already knows what those strings should be.}
 }
 
+@teacher{
 Next, direct students to open the @starter-file{gt}, and save a copy of their own. After clicking "Run" and evaluating @show{(code '(gt 10))} in the Interactions Area (they will see a little green triangle appear!), challenge them to take one minute to see how many different green triangles they can make using the `gt` function.
+}
 
 @lesson-instruction{
 - How many were you able to make?

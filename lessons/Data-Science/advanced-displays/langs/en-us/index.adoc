@@ -100,11 +100,12 @@ But how do we process each Row separately? You've learned how to take a complex 
 }
 
 === Synthesize
-
-* One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_
-** __What a function consumes__ is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.
-* How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?
-** It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.
+@QandA{
+@Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
+@A{What a function consumes is not the same as the __work the function does__. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.}
+@Q{How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?}
+@A{It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.}
+}
 
 
 == Image Scatter Plots @duration{15 minutes}
@@ -127,9 +128,9 @@ Many apartment buildings have limits on how heavy a pet can be, which could make
 
 There seems to be a positive relationship, but it's not very strong.
 
-@lesson-instruction{
-- What other factors might influence how quickly an animal is adopted?
-** _Invite students to share their ideas and explain their rationale. Possible responses: Maybe fixed animals are adopted more quickly. Maybe some species are adopted more quickly. Maybe age plays a role..._
+@QandA{
+@Q{What other factors might influence how quickly an animal is adopted?}
+@A{Invite students to share their ideas and explain their rationale. Possible responses: Maybe fixed animals are adopted more quickly. Maybe some species are adopted more quickly. Maybe age plays a role...}
 }
 
 Let's say we want to consider the influence of *age* on how how quickly an animal is adopted - while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... __custom scatter plots!__
@@ -147,23 +148,23 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 
 The Contract for `image-scatter-plot` looks pretty different from other @dist-link{Contracts.shtml, Contracts} we've seen.
 
-@show{(contract `image-scatter-plot `((table-name Table) (xs String) (ys String) (f "(Row -> Image)")) "Image")}
+@show{(contract 'image-scatter-plot '((table-name Table) (xs String) (ys String) (f "(Row -> Image)")) "Image")}
 
 This Domain is interesting: Table, String, String and...*a Function that consumes a Row and produces an Image!*
 
 @lesson-instruction{
 - What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-dot.adoc}.
-** _Students should make predictions based on their work on @printable-exercise{age-dot.adoc}._
+  * _Students should make predictions based on their work on @printable-exercise{age-dot.adoc}._
 - Now complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.
-** _The scatter plot that will be generated is below._
+  * _The scatter plot that will be generated is below._
 }
 
 @center{@image{images/age-dot.png, 450}}
 
-@lesson-instruction{
-- Do the bottom portion of the worksheet, which invites you to consider what new insights you can glean from your custom displays.
-- How did having the dots labeled with the _species_ change your understanding of the data?
-** __The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)__
+@QandA{
+Do the bottom portion of the worksheet, which invites you to consider what new insights you can glean from your custom displays.
+@Q{How did having the dots labeled with the _species_ change your understanding of the data?}
+@A{The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)}
 }
 
 @center{@image{images/species-tag.png, 450}}
@@ -191,13 +192,14 @@ We could, for example, represent the Animals using the following code:
 }
 
 === Synthesize
-
-* What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?
-** Use legs and age to determine width and height of a rectangle
-** Use different colors or shapes based on species, sex, or fixed-status
-* How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)
-** `image-scatter-plot` consumes a function that can draw different dots depending on each Row in the dataset, along with information about which columns contain the x- and y-coordinates. In contrast, `scatter-plot` because it only consumes information about _where_ the dots are drawn, and not _how_ they are drawn.
-* How might image-scatter-plot be useful to your own analysis?
+@QandA{
+@Q{What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?}
+@A{Use legs and age to determine width and height of a rectangle}
+@A{Use different colors or shapes based on species, sex, or fixed-status}
+@Q{How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)}
+@A{`image-scatter-plot` consumes a function that can draw different dots depending on each Row in the dataset, along with information about which columns contain the x- and y-coordinates. In contrast, `scatter-plot` because it only consumes information about _where_ the dots are drawn, and not _how_ they are drawn.}
+@Q{How might image-scatter-plot be useful to your own analysis?}
+}
 
 == Piecewise/Conditional Functions @duration{15 minutes}
 

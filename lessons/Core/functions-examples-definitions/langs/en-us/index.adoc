@@ -62,19 +62,18 @@ We know that...
 
 @indented{@image{images/gt-fun.png}}
 
-@lesson-instruction{
+@QandA{
 If we use the correct syntax, we can include all three of these function representations in our @proglang files. Let's take a look!
 
-* Click "Run". @ifproglang{pyret}{ What message do you get back?
-** _Looks shipshape, all 5 tests passed, mate!_
-* What do you think that message means?
-** _The editor has checked to see whether the 5 examples work with the function definition and they do!_
-}
-* Change
-@ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
-@ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
-* Click "Run". What happens?
-** _The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
+@Q{Click "Run". @ifproglang{pyret}{ What message do you get back?}}
+@A{Looks shipshape, all 5 tests passed, mate!}
+@Q{What do you think that message means?}
+@A{The editor has checked to see whether the 5 examples work with the function definition and they do!}
+
+Change @show{(code '(EXAMPLE (gt 10) (triangle 10 "solid" "green")))} to @show{(code '(EXAMPLE (gt 10) (triangle 15 "solid" "green")))}
+
+@Q{Click "Run". What happens?}
+@A{The editor lets us know that the function doesn't match the examples so that we can fix our mistake!}
 }
 
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!

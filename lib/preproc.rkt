@@ -1729,6 +1729,7 @@
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
+                              (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
@@ -1841,9 +1842,9 @@
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "\n[.optionaltag]\n--" o)
+                              (display "[.optionaltag]\n" o)
                               (display (expand-directives:string->string text) o)
-                              (display "--\n" o)
+                              (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
