@@ -11,17 +11,17 @@
 | Lesson Goals
 | Students will be able to:
 
-* Identify and explain the difference between syntax, contract, and logic errors
-* Use strategies to correct each kind of error
+- Identify and explain the difference between syntax, contract, and logic errors
+- Use strategies to correct each kind of error
 
 | Student-Facing Lesson Goals
 |
-* Let's learn how to read error messages, and use them to help fix coding errors
+- Let's learn how to read error messages, and use them to help fix coding errors
 
 | Key Points for the Facilitator
 |
-* Meta-cognition is especially important here. Make sure you give _lots_ of space for students to discuss their bug-fixing strategies
-* Productive struggle is critical in this lesson, to build up students' confidence in their ability to fix their own mistakes
+- Meta-cognition is especially important here. Make sure you give _lots_ of space for students to discuss their bug-fixing strategies
+- Productive struggle is critical in this lesson, to build up students' confidence in their ability to fix their own mistakes
 
 
 |Materials
@@ -36,7 +36,12 @@
 Students are introduced to _syntax errors_, the error messages they generate, and how to read those errors and fix them.
 
 === Launch
-People often think that computers can't make mistakes, because they are "just machines". But who builds those machines? Who programs them? _Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*
+People often think that computers can't make mistakes, because they are "just machines". 
+
+- But who builds those machines? 
+- Who programs them? 
+
+@lesson-point{_Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*}
 
 @slidebreak
 
@@ -56,15 +61,21 @@ When you Run a program, you expect the computer to do three things:
 - Run the code
 - Give you the result you expected
 
+In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases@ifnotslide{:}@ifslide{.}
+
 @slidebreak
 
-In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases:
+(1)@vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. 
+  * These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
 
-1. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
+(2) @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. 
+  * @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. 
+  * But look at the contract `circle :: Number, String, String -> Image`
+  * The `circle` function is expecting a Number for its first argument and "hello" is a String!  
+  * Like syntax errors, contract errors will also result in an error message.
 
-2. @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the Contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! Like syntax errors, contract errors will also result in an error message.
-
-3. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
+(3) @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! 
+  * When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
 === Investigate
 Here are a few simple examples of syntax errors:
@@ -72,15 +83,17 @@ Here are a few simple examples of syntax errors:
 - `"hello`
 - @ifproglang{pyret}{``1+2``} @ifproglang{wescheme}{``(+ 1 2``}
 
-Can you find the problem?
-
 @lesson-point{
 Syntax Errors prevent the computer from _reading_ code
 }
 
+Can you find the problems?
+
+@slidebreak
+
 @lesson-instruction{
-* Complete @printable-exercise{syntax-errors.adoc} in pairs or small groups. 
-* For each piece of code, be sure to discuss as a team before deciding on the mistake.
+- Complete @printable-exercise{syntax-errors.adoc} in pairs or small groups. 
+- For each piece of code, be sure to discuss as a team before deciding on the mistake.
 }
 
 === Synthesize
@@ -104,13 +117,13 @@ But a program can still have problems _running_!
 
 Here are a few examples of programs that have perfect syntax, but will generate an error when we try to run them. 
 
-@show{(code '(+ 1 "Zari"))}
+- @show{(code '(+ 1 "Zari"))}
 
-@show{(code '(triangle "50" "solid" "blue"))}
+- @show{(code '(triangle "50" "solid" "blue"))}
 
-@show{(code '(or "true" false))}
+- @show{(code '(or "true" false))}
 
-Can you spot the problem?
+Can you spot the problems?
 
 @slidebreak
 
@@ -146,22 +159,40 @@ Ho-ming wanted to write a function to produce green triangles, and she went stra
 
 @show{(code '(define (gt size) (triangle 100 "solid" "green")))}
 
-She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
+@slidebreak
+
+She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. 
+
+When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! 
+
+But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
 
 Did she have a syntax error? Why or why not?
 Did she have a Contract error? Why or why not?
 
-Ho-ming's mistake was that the function `gt` always made triangles of size 100! It took in `size` as a variable, but then didn't use it all. The computer had no trouble reading her code, and she followed the Contract for `triangle`. _As far as the computer is concerned, there's nothing wrong with her code!_
+@slidebreak
+
+Ho-ming's mistake was that the function `gt` always made triangles of size 100! 
+
+It took in `size` as a variable, but then didn't use it all. 
+
+The computer had no trouble reading her code, and she followed the Contract for `triangle`. 
+
+_As far as the computer is concerned, there's nothing wrong with her code!_
+
+@slidebreak
 
 @lesson-point{
-Logic Errors don't prevent code from running at all!
+Logic Errors don't prevent code from running!
 }
 
-Ho-ming's computer had no trouble reading or running her code. The problem is that the code didn't work the way she expected. Another way to think of it is that the bug isn't in the code at all - _it's in the way she was thinking when she wrote it._
+The problem is that the code didn't work the way she expected. Another way to think of it is that the bug isn't in the code at all - _it's in the way she was thinking when she wrote it._
 
 @lesson-point{
 Logic Errors occur in our brains, not on the computer!
 }
+
+@slidebreak
 
 The only way to prevent logic errors - or to fix them when they happen! - is to be disciplined about the way we program. By thinking through a problem in multiple ways, we are less likely to make a mistake. What are some other ways Ho-ming could have thought through this function?
 
