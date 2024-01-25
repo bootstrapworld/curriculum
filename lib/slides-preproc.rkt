@@ -634,6 +634,16 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
+                           [(string=? directive "strategy")
+                            (let* ([title (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (ensure-teacher-notes)
+                              (newline teacher-notes)
+                              (display "**" teacher-notes)
+                              (expand-directives:string->port title teacher-notes)
+                              (display "**\n" teacher-notes)
+                              (expand-directives:string->port text teacher-notes)
+                              (newline teacher-notes))]
                            [(member directive '("opt" "strategy" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
