@@ -178,7 +178,7 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 The mean and standard deviation tell us where the data is centered and how far the data strays from that center.
 
 - The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks?
-- Turn to @printable-exercise{pages/analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
+- Turn to @printable-exercise{pages/data-cycle-analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
 
 
 <!--
@@ -232,7 +232,7 @@ Let’s review what we have learned about standard deviation.
 - Open your chosen dataset starter file in @proglang.
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @proglang to compute the standard deviation for one of them.
 - What question does your computation answer?
-- Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Write down that question in the top section of the @printable-exercise{data-cycle-analysis-stdev-my-dataset.adoc}.
 - Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for the other column you explored before (and any others you are curious about).
 
@@ -243,7 +243,7 @@ Let’s review what we have learned about standard deviation.
 ** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
 - What question does your computation answer?
 ** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_
-- Now, write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
+- Now, write down that question in the top section of the @printable-exercise{data-cycle-analysis-stdev-my-dataset.adoc}.
 - Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
 - Repeat this process for the other column you explored before (and any others you are curious about).
 ** _Note: If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Explorartion Project and calculate the mean, median, modes and 5-number summaries for the new columns._

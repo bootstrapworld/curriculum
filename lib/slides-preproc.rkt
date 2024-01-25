@@ -12,9 +12,7 @@
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
-(define *max-images-processed*
-  (cond [(truthy-getenv "EXPERIMENTAL") #f]
-        [else #f]))
+(define *max-images-processed* 100)
 
 (define *num-images-processed* 0)
 
@@ -198,6 +196,7 @@
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
+    "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/asciidoctor.css\"/>\n"
     "<style>\n"
     "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
@@ -284,6 +283,11 @@
         (string-append "(" s ")")
         s)))
 
+; replace characters with html entities
+; there's probably a better way to do this...
+(define (htmlize str)
+  (string-replace (string-replace str "<" "&lt;") ">" "&gt;"))
+
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
          [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
@@ -296,7 +300,7 @@
              " :: "
              (contract-types-to-commaed-string domain-list)
              " -> "
-             range)]
+             (htmlize range))]
         [s2 (and purpose
                  (string-append
                    prefix purpose))])
@@ -579,7 +583,9 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
                               (cond [*output-answers?*
-                                      (fprintf o "[click here for image](~a)" img-file)]
+                                      (let* ([img-hash-path (anonymize-filename img-file)]
+                                             [url (build-path *bootstrap-prefix* "lessons" *lesson* img-hash-path)])
+                                      (fprintf o "[click here for image](~a)" url))]
                                     [(not teacher-notes)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
@@ -628,7 +634,17 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
-                           [(member directive '("opt" "strategy" "teacher"))
+                           [(string=? directive "strategy")
+                            (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (ensure-teacher-notes)
+                              (newline teacher-notes)
+                              (display "**" teacher-notes)
+                              (expand-directives:string->port title teacher-notes)
+                              (display "**\n" teacher-notes)
+                              (expand-directives:string->port text teacher-notes)
+                              (newline teacher-notes))]
+                           [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
@@ -636,11 +652,14 @@
                               (newline teacher-notes)
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
+                           [(string=? directive "big")
+                            (let ([text (string-trim (read-group i directive #:multiline? #t))])
+                              (expand-directives:string->port text o)
+                              (display "{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
-                              (display "**" o)
-                              (expand-directives:string->port text o)
-                              (display "**{style=\"font-size: 22pt\"}" o))]
+                              (display ":pushpin: " o)
+                              (expand-directives:string->port text o))]
                            [(member directive '("lesson-instruction" "lesson-roleplay"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
@@ -692,6 +711,13 @@
                               (display "<b><i>" o)
                               (display arg o)
                               (display "</i></b>" o))]
+                           [(string=? directive "hspace")
+                            (let* ([arg (read-group i directive)]
+                                  [match (regexp-match (pregexp "([\\d]+)(em|ex)") arg)]
+                                  [num (string->number (second match))]
+                                  [unit (if (string=? (third match) "ex") 2 3)]
+                                  [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
+                              (display spaces o))]
                            [(string=? directive "slideLayout")
                             (let ([x (read-group i directive)])
                               (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
@@ -723,6 +749,9 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
+                           [(string=? directive "include")
+                            (printf "WARNING: @include found outside of @ifnotslide!\n")
+                            (display "@include found outside of @ifnotslide!\n" o)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]

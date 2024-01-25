@@ -21,7 +21,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let's explore scatter plots and what they can tell us about data relationships.
+- Let's explore scatter plots and what they can tell us about data relationships.
 
 | Materials
 |[.materials-links]
@@ -31,15 +31,15 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
+- @link{http://tylervigen.com/, Spurious Correlationsn (tylervigen.com)}
+- @link{http://guessthecorrelation.com/, Guess the Correlation (guessthecorrelation.com)}
 
-| Supplemental Resources
-|
-* @link{http://tylervigen.com/, Spurious Correlations}
-* @link{http://guessthecorrelation.com/, Guess the Correlation}
+| Preparation
+| - There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 
 | Key Points For The Facilitator
 |
-* Students frequently confuse correlation for causation! It can be tempting for focus on the _computational_ element of the lesson alone, getting kids to think about R-value and identify patterns in graphcs. But this ignores the critical point about correlation and causation, and students who over-focus on obtaining R-values are likely to develop this misconception!
+- Students frequently confuse correlation for causation! It can be tempting for focus on the _computational_ element of the lesson alone, getting kids to think about R-value and identify patterns in graphcs. But this ignores the critical point about correlation and causation, and students who over-focus on obtaining R-values are likely to develop this misconception!
 
 |===
 
@@ -58,11 +58,17 @@ We can analyze a single quantitative variable, such as `age` or `pounds` to iden
 
 But those analyses tell us nothing about the _relationship_ between animals' ages and weights. In order to understand such relationships, we have to expand our view from one column to two. This goes hand-in-hand with expanding our display from a 1-dimensional histogram or box plot to a 2-dimensional scatter plot.
 
-Rather than summarizing each distribution in one dimension, we can search for a _linear relationship_ between two quantitative variables. Linear relationships only make sense if the scatter plot follows a _straight-line pattern_, so the first thing we need to ask is whether the @vocab{form} of the relationship appears to be linear or not.
+@slidebreak
+
+Rather than summarizing each distribution in one dimension, we can search for a _linear relationship_ between two quantitative variables. 
+
+Linear relationships only make sense if the scatter plot follows a _straight-line pattern_, so the first thing we need to ask is whether the @vocab{form} of the relationship appears to be linear or not.
 
 === Investigate
 
-Form indicates whether a relationship is linear, nonlinear or undefined:
+Form indicates whether a relationship is linear, nonlinear or undefined@ifnotslide{:}@ifslide{.}
+
+@slidebreak
 
 [.FillVerticalSpace, cols="^.^2a,^.^2a,^.^2a", frame="none"]
 |===
@@ -81,24 +87,27 @@ Some patterns are **nonlinear**, and may look like a curve, a hockey-stick, or s
 
 And sometimes there is **no relationship** or pattern at all! That means there's no predictable change in the y-axis as we go from one side of the x-axis to the other.
 
+@slidebreak
+
 @lesson-instruction{
 Turn to @printable-exercise{pages/identifying-form.adoc}, and complete __just the first question__ for each scatter plot, identifying whether the relationship appears to be linear, nonlinear or if there's no relationship at all.
 }
 
 === Synthesize
-- Which scatter plots seem to have _linear_ relationships?
-** _Students should feel very confident that A and C seem to have linear relationships._
-** _Students will likely also identify D and F as seeming to have linear relationships._
-- Which scatter plots seem to have _nonlinear_ relationships?
-** _Scatter plot E seems to have a non-linaer relationship._
-- Which scatter plots seem to have _no relationships_?
-** _Scatter plot B seems to have no relationship._
-
+@QandA{
+@Q{Which scatter plots seem to have _linear_ relationships?}
+@A{Students should feel very confident that A and C seem to have linear relationships.}
+@A{Students will likely also identify D and F as seeming to have linear relationships.}
+@Q{Which scatter plots seem to have _nonlinear_ relationships?}
+@A{Scatter plot E seems to have a non-linear relationship.}
+@Q{Which scatter plots seem to have _no relationships_?}
+@A{Scatter plot B seems to have no relationship.}
+}
 
 Data Scientists use their eyes all the time! It doesn't make sense to search for correlations when there's no pattern at all, and summarizing with a correlation only makes sense for linear relationships! 
 
-@strategy{
-@span{.title}{Going Deeper}
+@strategy{Going Deeper}{
+
 
 In an AP Statistics class or full-year Data Science class, it's appropriate to discuss nonlinear relationships here. In a dedicated computer science class, it may also be appropriate to talk about _transforming_ the x- or y-axis (using `build-column`!) via a quadratic, exponential, or logarithmic function and then looking for a linear pattern in the resulting scatter plot. All of these are *extensions* to the materials presented here.
 }
@@ -128,6 +137,8 @@ A *positive* direction means that the line slopes up as we look from left-to-rig
 
 A *negative* direction means that the line slopes _down_ as we look from left-to-right. Negative relationships can also occur. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
+@slidebreak
+
 If the form is nonlinear or non-existent, "direction" doesn't apply: A parabola might look like it has both a positive _and_ negative correlation, and if there's no form at all then there certainly can't be a direction!
 
 === Investigate
@@ -146,10 +157,11 @@ We'll explore another quality of a possible linear relationship: its @vocab{stre
 
 === Launch
 
+@ifnotslide{
 Strength indicates how closely the two variables are correlated.
 
 How well does knowing the x-value allow us to predict what the y-value will be?
-
+}
 
 [.FillVerticalSpace, cols="^.^2a,^.^2a", frame="none"]
 |===
@@ -165,13 +177,16 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 
 **A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
+@slidebreak
+
 If the form is non-existent, "strength" doesn't apply: without any form at all, there's nothing for data points to be tightly or loosely clustered around!
 
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{pages/identifying-form.adoc}, and focus on the third question for each scatter plot, identifying whether the relationship appears to be strong or weak.
-- @optional Complete the card sort on @opt-online-exercise{ https://teacher.desmos.com/activitybuilder/custom/6018c857328251526caea801, Identifying Strength}.
+Complete @printable-exercise{pages/identifying-form.adoc}, and focus on the third question for each scatter plot, identifying whether the relationship appears to be strong or weak.
 }
+
+@opt{If time permits, have students complete @opt-printable-exercise{pages/identifying-form-matching.adoc} and/or the @opt-starter-file{correlations} card sort.}
 
 === Common Misconceptions
 - Students often conflate strength and direction, thinking that a strong correlation _must_ be positive and a weak one _must_ be negative.
@@ -180,14 +195,34 @@ If the form is non-existent, "strength" doesn't apply: without any form at all, 
 
 === Synthesize
 
-@lesson-instruction{
-- Complete @printable-exercise{pages/reflection-correlations.adoc}.
-- Be ready to discuss your answers with the class!
+@ifnotslide{
+@lesson-instruction{Complete @printable-exercise{pages/reflection-correlations.adoc} with your partner and be ready to discuss your thinking with the class.
+}
 }
 
-This page includes a series of probing questions that get at the common misconceptions listed above. Discuss the answers as a class.
+@ifslide{
+Discuss the following questions with your partner and record your thinking on @printable-exercise{pages/reflection-correlations.adoc}
 
-@optional If time permits, have students complete @opt-printable-exercise{pages/identifying-form-matching.adoc}.
+@QandA{
+@Q{What has to be true about the _shape_ of a relationship in order to start talking about a correlation?}
+@A{It must be linear}
+
+@Q{What is the difference between a _weak_ relationship and a _negative_ relationship?} 
+@A{A weak relationship is one in which knowing the x-value does not allow us to predict the y-value very well, and the points are not clustered tightly around a line whereas, if a relationship is negative, it means that one variable decreases as the other increases.}
+
+@Q{What is the difference between a _strong_ relationship and a _positive_ relationship?}
+@A{A strong relationship is one in which (1) knowing the x-value allows us to predict the y-value very well, and (2) the points are clustered tightly around a line, whereas if a relationship is positive, it means that the variables increase together.}
+
+@Q{If we find a strong relationship in a sample from a larger population, will that relationship _always hold_ for the whole population? Why or why not?}
+@A{No. Maybe the sample was biased, or maybe it was random but we *just happened* to choose points for which there is a correlation.}
+
+@Q{If two correlations are both positive, is the stronger one _more positive_ (steeper slope) than the other}
+@A{No. Direction and Strength are unrelated}}
+
+@Q{A news report claims that after surveying __10 million people__, a positive correlation was found between how much chocolate a person eats and how happy they are. Does this mean eating chocolate almost certainly makes you happier? Why or why not?}
+@A{No. A correlation drawn from a giant sample can still be a weak correlation! Sample size is not connected to strength.}
+}
+
 
 == Summarizing Correlations using r-values @duration{20 minutes}
 
@@ -195,21 +230,36 @@ This page includes a series of probing questions that get at the common misconce
 Now that students know how to identify _direction_ and _strength_ for linear relationships, they'll learn to read how these are expressed in the @math{r}-value.
 
 === Launch
-Students have learned that a correlation can be described by three pieces of information: _Form_, _Direction_, and _Strength_. Statisticians and Data Scientists have a shorter way of describing all three, called @vocab{r-value}.
+We have learned that a correlation can be described by three pieces of information: _Form_, _Direction_, and _Strength_. 
 
-@math{r} is positive or negative depending on whether the correlation is positive or negative. *The strength of a correlation is the distance from zero*: an @math{r}-value of zero means there is no correlation at all, and stronger correlations will be closer to −1 or 1.
+Statisticians and Data Scientists have a shorter way of describing all three, called @vocab{r-value}.
 
-An @math{r}-value of about ±0.65 or ±0.70 or more is typically considered a strong correlation, and anything between ±0.35 and ±0.65 is “moderately correlated”. Anything less than about ±0.25 or ±0.35 may be considered weak. However, these cutoffs are not an exact science! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+- @math{r} is positive or negative depending on whether the correlation is positive or negative. 
 
+- *The strength of a correlation is the distance from zero*: 
+  * an @math{r}-value of zero means there is no correlation at all
+  * a perfect correlation would be either represented by −1 or 1.
+- Typically, @math{r}-values are categorized as follows:
+  * ±0.65 or ±0.70 or more is considered a strong correlation.
+  * ±0.35 to ±0.65 is “moderately correlated”. 
+  * less than ±0.25 or ±0.35 may be considered weak. 
+- These cutoffs are not an exact science, however! In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+
+@teacher{
 If it works for you, give students five minutes to play a few rounds of the online game @link{http://guessthecorrelation.com/, Guess the Correlation} to develop intuition with r-values. (This will require creating an account.)
+}
 
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{pages/identifying-form-open-ended.adoc}. For each scatter plot, identify whether the relationship appears to be linear, and, if so, use @math{r} to summarize direction and strength.
-- Be prepared to discuss your answers with the class!
+- Complete @printable-exercise{pages/identifying-form-open-ended.adoc}. 
+- For each scatter plot, identify whether the relationship appears to be linear, and, if so, use @math{r} to summarize direction and strength.
 }
 
+@slidebreak
+
 Calculating @math{r} from a dataset only tells us the direction and strength of the relationship in _that particular sample_. If the correlation between adoption time and age for a representative sample of about 30 shelter animals turns out to be +0.44, the correlation for the larger population of animals will probably be _close_ to that, but certainly not the same.
+
+@slidebreak
 
 @lesson-instruction{
 - Let's look for correlations in the Animals Dataset!
@@ -217,29 +267,39 @@ Calculating @math{r} from a dataset only tells us the direction and strength of 
 - Complete @printable-exercise{correlations-animals.adoc}.
 }
 
+@slidebreak
+
 @right{@image{images/correlation-cartoon.jpg, 300}} It’s easy to be seduced by large @math{r}-values, and believe that we're really onto something that will help us claim that one variable really impacts another! But Data Scientists know better than that...
 
 @lesson-point{
 Correlation does NOT imply causation.
 }
 
+@slidebreak
+
 @lesson-instruction{
 Complete @printable-exercise{correlation-is-not-causation.adoc}
 }
 
+@teacher{
 If time allows, you may want to emphasize the point that correlation does not imply causation by having students look at the nonsense claims that could be made from the graphs of real world data on the @link{http://tylervigen.com/, Spurious Correlations website}.
+}
 
 === Common Misconceptions
-Students often giggle at some of the Spurious Correlations examples, but fail to internalize the point when it comes to the Animals dataset or their own analysis. Pay close attention to students' language when describing their correlations, and make sure they are not using causative wording!
+Pay close attention to students' language when describing their correlations, and make sure they are not using causative wording!
+
+Students often giggle at some of the Spurious Correlations examples, but fail to internalize the point when it comes to the Animals dataset or their own analysis. 
 
 === Synthesize
-Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`? What does this _mean_?
 
-_The correlation with `"pounds"` is higher, meaning that an animal's weight is a better predictor of the number of weeks an animal will live at the shelter before being adopted than its age._
+@QandA{
+@Q{Which corresponded more strongly with time to adoption, `"age"` or `"pounds"`?}
+@Q{What does this _mean_?}
+@A{The correlation with `"pounds"` is higher, meaning that an animal's weight is a better predictor of the number of weeks an animal will live at the shelter before being adopted than its age.}
 
-- People often confuse correlation with causation. What are some examples of this?
-- Why is it a problem for society, that people confuse correlation and causation?
-
+@Q{People often confuse correlation with causation. What are some examples of this?}
+@Q{Why is it a problem for society, that people confuse correlation and causation?}
+}
 
 == Exploration Project (Correlations) @duration{flexible}
 
@@ -290,7 +350,7 @@ Let’s connect what we know about correlations to your chosen dataset.
 
 @teacher{Have students share their findings.}
 
-- Did you discover anything surprising or interesting about their dataset?
+- Did you discover anything surprising or interesting about your dataset?
 
 - Were any of the correlations especially strong? Were any of them surprising?
 

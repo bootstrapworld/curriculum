@@ -14,16 +14,16 @@
 | Lesson Goals
 | Students will be able to:
 
-* Read and create pie and bar charts
-* Explain the difference between pie and bar charts
-* Read and create stacked and multi bar charts
-* Explain the difference between pie and bar charts
+- Read and create pie and bar charts
+- Explain the difference between pie and bar charts
+- Read and create stacked and multi bar charts
+- Explain the difference between pie and bar charts
 
 | Student-facing Lesson Goals
 |
 
-* Let's use functions to create pie and bar charts to visualize categorical data
-* Let's visualize categorical data grouped in different ways
+- Let's use functions to create pie and bar charts to visualize categorical data
+- Let's visualize categorical data grouped in different ways
 
 | Materials
 |[.materials-links]
@@ -33,7 +33,10 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-* @lesson-link{project-infographic}
+- @lesson-link{project-infographic}
+
+| Key Points for the Facilitator
+| This lesson uses the @starter-file{expanded-animals}, which includes far more animals than the smaller sample represented in the animals starter file used in most of our lessons. 
 
 |===
 
@@ -44,101 +47,104 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 
 === Launch
 
-Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
+@lesson-instruction{
+- Open the @starter-file{expanded-animals} and click "Run".
+- Then complete Part A of @printable-exercise{count-bar-pie.adoc}, by testing the expressions @show{(code '(count more-animals "species"))} and @show{(code '(bar-chart more-animals "species"))} in the Interactions Area.
+}
 
-=== Investigate
-
-@teacher{For the questions and prompts below, you can guide students verbally and via class discussion. +
-@optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{count-bar-pie.adoc}. Part A of this page includes the same questions and prompts along with space for students to record their responses.}
-
-
+@slidebreak
 @QandA{
 @Q{How do the count table and bar chart you just made compare?}
 @A{The height of each bar matches the count of each species.}
-@Q{Which do you like better: the bar chart or the table? Why?}
-@Q{Now test out the expression @show{(code '(pie-chart animals-table "species"))}}
 @Q{How does this pie chart compare to the bar chart you just made?}
 @A{The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.}
-@Q{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.}
-@Q{Hit the up arrow in the Interactions Area to reload your last expression and test it out!}
 }
-@image{images/count-table.png, 160} @image{images/bar-chart-popout.png, 385}
+
+=== Investigate
+
+@opt{Have students complete @opt-printable-exercise{bar-chart-notice.adoc} and @opt-printable-exercise{pie-chart-notice.adoc}.
+}
+
+@lesson-instruction{
+Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays. Then compare your notices and wonderings with your partner.
+}
+ 
+@slidebreak
+
+@image{images/count-more-species.png, 160} @image{images/bar-more-species.png, 385}
 
 Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
 
-Hovering over a bar reveals the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.
+@define{about-interactive-displays}{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.}
+
+@ifnotslide{@about-interactive-displays}
+@ifslide{@teacher{@about-interactive-displays}}
 
 @lesson-point{
 @vocab{Bar charts} group data _by value_ to show frequency as a count.
 }
 
-@right{@image{images/pie-species-popout.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
+@slidebreak
+
+@right{@image{images/pie-more-species.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
 
 @lesson-point{
 Pie charts group data _by value_ to show frequency as a percentage.
 }
 
+@define{infer}{
 If our data is based on sample data from a larger population, we can use these charts to _infer_ the proportion of a whole population that might belong to each category. For example, the distribution of species in our shelter might help us make guesses about the distribution of species in other shelters.
 
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.}
 
-////
-- Now test the expressions @show{(code '(count animals-table "pounds"))} and @show{(code '(bar-chart animals-table "pounds"))}. Which do you prefer and why?
-** __Answers will vary, but a bar chart with many equally-sized bars representing the number of animals having each specific weight is less useful than the last.__
-////
+@ifnotslide{@infer}
+@ifslide{@teacher{@infer}}
 
-@teacher{
-@optional B & C of @opt-printable-exercise{count-bar-pie.adoc} correspond with the questions and prompts below.
-}
+@slidebreak
 
 @lesson-instruction{
-- Make a `pie-chart` and `bar-chart` for the `pounds` column. 
-- What happened?
-- Why isn't it useful to group the `pounds` column using these functions?
-** _Grouping by value works well for @vocab{categorical data}, when lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful._
-- Look at the list of columns in the Definitions Area. For which columns do you expect pie charts to be most useful?
-** _Species, Sex, Fixed, and Legs_ 
-- Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays.
-- Then complete @printable-exercise{matching-bar-to-pie.adoc}.
+- Complete @printable-exercise{matching-bar-to-pie.adoc} with your partner.
+- Then return to @printable-exercise{count-bar-pie.adoc} and complete parts B & C.
 }
+
+@slidebreak
+
+@QandA{
+@Q{What information is provided in bar charts that is hidden in pie charts?}
+@A{Categories containing 0% of the data aren't represented on a pie chart.}
+
+@Q{Why might it sometimes be problematic to use a pie chart, thereby hiding a category?} 
+@A{If, for example, a sector of the population is unrepresented in positions of power, it's easier to ignore the issue if that population doesn't get represented in the display.}
+
+@Q{Why isn't it useful to group the `pounds` column using `bar-chart` or `pie-chart`?}
+@A{Grouping by value works well for @vocab{categorical data}, when lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.}
+}
+
+@slidebreak
 
 @lesson-point{
 Grouping by value works well when lots of different data points can be sorted into a smaller number of buckets.
 }
 
-////
-strategy{
-@span{.title}{People aren't Hermaphrodite?}
-When students make a display of the `sex` of the animals, they will see that some animals are male, some are female and some are hermaphrodites. We use the descriptor _sex_ rather than _gender_ because sex refers to biology, whereas gender refers to identity. Hermaphrodite is the biological term for animals that carry eggs & produce sperm (nearly 1/3 of the non-insect animal species on the planet!). Plants that produce pollen & ovules are also hermaphrodites. While the term was previously used by the medical community to describe intersex people or people who identify as transgender or gender non-binary, it is not biologically accurate. Humans are not able to produce both viable eggs and sperm, so "hermaphrodite" is no longer considered an acceptable term to apply to people.
-}
-////
-
 
 === Common Misconceptions
 
-* Pie charts and bar charts can show _counts_ or _percentages_ of categorical data. If there are more people with brown hair than blond hair, for example, a pie chart of hair color will have a larger slice or longer bar for "brown" than for "blond". In Pyret, pie charts show percentages, and bar charts show counts.
-* Pie charts have a wedge for each represented category. Unlike in bar charts, empty categories will not be included in a pie chart. When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
-* Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. This lesson focuses entirely on pie- and bar charts.
+@ifslide{*Common Misconceptions*}
+
+- Bar charts look a lot like another kind of chart - called a "histogram" - which are actually quite different because they display _quantitative_ data, not categorical. @ifnotslide{_This lesson focuses entirely on pie- and bar charts._}
+- When comparing bar charts, it is important to read the scales on the y-axes. If the scales do not match, a taller bar may not represent a larger value.
+- The percentages on pie charts will always add to 100%, so if there are 5 subgroups of a population and we're only going to look at data from 2 of the subgroups, it wouldn't make sense to use a pie chart to compare them!
+- Relatedly, pie charts only have a wedge for each category whose population is large enough to claim a percentage of the pie. Unlike in bar charts, empty categories will not be included in a pie chart. 
 
 === Synthesize
-@teacher{Confirm that students have correctly matched the displays on @printable-exercise{matching-bar-to-pie.adoc}.}
 
-- What did you Notice? What did you Wonder? +
-_Answers will vary, but here are some important points:_
-** _One of the pie charts has more categories for race than the other and the bar charts have more categories for race than we see on either of the pie charts._ 
-** _In a pie chart, when there isn't any data in a category it goes unrepresented, but in a bar chart its absence is made visible._
-** _The scale is different for each bar chart, whereas for pie charts the percentages will always add to 100%._
 - How is `pie-chart` similar to `bar-chart`? How is it different?
 - When would you want to use one chart instead of another?
-- What strategies did you use to match the bar charts to the pie charts?
 - Which displays do you find it easier to interpret? Why?
-- What information is provided in bar charts that is hidden in pie charts?
-** _In a bar chart, every category is visible and those with no values are missing a bar. Categories containing 0% of the data aren't represented on a pie chart._
-- Why might this sometimes be problematic?
-** _Sample Answer: If a service isn't reaching a sector of the population, it's easier to ignore the issue if that population doesn't get represented in the display._
 
-@strategy{
-@span{.title}{Optional Extension}
+@ifnotslide{
+@strategy{Optional Extension}{
+
 
 Sometimes we want to visualize data that is _already summarized:_
 
@@ -159,7 +165,7 @@ In this situation, we want to use the values in the _first_ column for the label
 Open the @opt-starter-file{hair} to try them out!
 
 }
-
+}
 
 == Groups and Subgroups @duration{20 minutes}
 
@@ -168,29 +174,19 @@ Students learn how to create __groups within groups__, showing the relative freq
 
 === Launch
 
-@teacher{ For the questions and prompts below, you can guide students verbally and via class discussion. +
-@optional If you'd prefer, another option is to print and distribute @opt-printable-exercise{intro-stacked-multi.adoc} and direct students to complete Part A now.
+@lesson-instruction{Turn to @printable-exercise{intro-stacked-multi.adoc} and complete Part A now.
 }
-@lesson-instruction{
-- Take a moment to answer the following questions: How many cats are male? How many cats are female?
-** __5 are male, 6 are female__
-- Do you think there are about as many male dogs as female dogs?
-- Do you think this distribution is similar for every species at the shelter?
-}
+
+@slidebreak
 
 Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across each species.
 
 @lesson-instruction{
-* Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make answering questions like these easier to answer by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
-* What do you Notice? What do you Wonder?
+- Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make it easier to answer questions like these by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
+- What do you Notice? What do you Wonder?
 }
 
 === Investigate
-
-
-@teacher{
-@optional Part B of @opt-printable-exercise{intro-stacked-multi.adoc} corresponds with the questions and prompts below.
-}
 
 Pyret has two functions that let us specify both a group and a subgroup:
 
@@ -199,28 +195,34 @@ Pyret has two functions that let us specify both a group and a subgroup:
 @show{(contract 'multi-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
 
 @lesson-instruction{
-- Try using both of these functions to show the distribution of sexes across species in our shelter.
-- Which display do you think is easier to read?
+Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 }
+
+@slidebreak
 
 [cols="^1a,^1a", options="header"]
 |===
 | Stacked Bar Chart
 | Multi Bar Chart
-| @image{images/stacked-species-sex.png, 300}
-| @image{images/multi-species-sex.png, 300}
+| @image{images/stacked-bar-species-sex.png, 300}
+| @image{images/multi-bar-species-sex.png, 300}
+| Stacked Bar Charts put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
+| Multi Bar Charts put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
 |===
-Stacked Bar Charts (left) put the _totals_ side by side, so it's easy to answer whether there are more dogs than cats in the shelter. But it's a little more difficult to see whether there are more male dogs than female dogs, because the bars are _on top of one another._
 
-Multi Bar Charts (right) put the _subgroups_ side by side, so it's easy to answer whether there are more male dogs than female dogs in the shelter. But it's a little more difficult to see whether there are more dogs than cats, because there aren't any bars showing the totals.
+@slidebreak
 
 @lesson-point{
-Stacked bar charts make it easy to compare _groups_. Multi bar charts make it easy to compare _subgroups_.
+Stacked bar charts make it easy to compare _between groups_. Multi bar charts make it easy to compare _within groups_.
 }
 
-@lesson-instruction{
-Complete @printable-exercise{matching-stacked-to-multi.adoc}
-}
+@slidebreak
+
+@lesson-instruction{Complete @printable-exercise{data-cycle-fixed.adoc}.}
+
+@opt{Complete @opt-printable-exercise{data-cycle-categorical.adoc}.}
+
+@teacher{Note: This page is a preview of @lesson-link{data-cycle}, which we will discuss in depth in a dedicated lesson and revisit throughout this course.} 
 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
@@ -229,17 +231,13 @@ All of the charts we've looked at in this lesson work with @vocab{categorical da
 - What kinds of questions are better answered by stacked bar charts?
 - What kinds of questions are better answered by multi bar charts?
 
+@strategy{Optional Project: Making Infographics}{
 
-@strategy{
-@span{.title}{Optional Project: Making Infographics}
 
 Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @lesson-link{project-infographic} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper.
-}
+} 
 
-== Additional Exercises
+== Additional Exercises  
 
-- @opt-printable-exercise{bar-chart-notice.adoc}
-- @opt-printable-exercise{pie-chart-notice.adoc}
-- If you are looking to offer your students more practice making and interpreting these chart types in Pyret, we have a second teaching dataset on @opt-starter-file{food} for you to work with!
-
-
+- For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students complete additional @opt-printable-exercise{data-cycle-categorical.adoc, data cycles} using @opt-starter-file{food}.  
+- For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.

@@ -137,15 +137,32 @@ local function get_slides(lsn_plan_adoc_file)
           slides[#slides + 1] = curr_slide
           break
         else
-          if curr_slide.text ~= '' then
-            set_imageorientation(curr_slide)
-            slides[#slides + 1] = curr_slide
+          new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+          new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+          if ((curr_slide.level == 2) and 
+              (curr_slide.header == "Common Misconceptions") and 
+              (new_level == 2)) then
+            if (new_header == 'Synthesize')
+            then
+              curr_slide.header = new_header
+              curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
+              curr_slide.section = 'Synthesize'
+            else
+              error "ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'\n"
+              break
+            end
+          else
+            if curr_slide.text ~= '' then
+              set_imageorientation(curr_slide)
+              slides[#slides + 1] = curr_slide
+            end
+            curr_slide = newslide()
+            curr_slide.level = new_level
+            curr_slide.header = new_header
+
+            -- print('curr slide header = ' .. curr_slide.header)
+            curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
           end
-          curr_slide = newslide()
-          curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
-          curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-          -- print('curr slide header = ' .. curr_slide.header)
-          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
         end
       elseif c == '[' then
         local table_numcols = 0
@@ -225,7 +242,8 @@ local function make_slides_file(lplan_file, slides_file)
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
           l1 = l1:gsub('__(.-)__', '_%1_')
-          l1 = l1:gsub(' %+$', '')
+          l1 = l1:gsub(' %+$', '\n')
+          l1 = l1:gsub('^%+$', '\n')
           o:write(l1, '\n')
         end
       end

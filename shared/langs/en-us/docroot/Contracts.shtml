@@ -59,7 +59,7 @@
         contract["name-pyret"] : contract["name"];
     }
 
-    function ellideProgLangSpecificPrimitives(c) {
+    function elideProgLangSpecificPrimitives(c) {
       if(proglang == "wescheme") {
         return c.name !== '<>' 
       } else { 
@@ -72,12 +72,13 @@
       ...Object.values(langTable).map(t => t.primitives))
       .sort((a,b) => processName(a) > processName(b)? 1 : -1)      // sort by proglang-specific names..
       .filter(c => primitives? primitives.includes(c.name) : true) // for functions in our list..
-      .filter(ellideProgLangSpecificPrimitives);                   // but only valid ones
+      .filter(elideProgLangSpecificPrimitives);                   // but only valid ones
 
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
     function buildTable() {
       if(pathway && pathway.includes("hour-of-code")) {
+        delete window.status;
         throw "Pathway is 'hour-of-code', which has no contracts. Terminating.";
       }
 
@@ -164,7 +165,7 @@
     }
   </script>
 </head>
-<body class="narrativepage workbookpage article" onload="buildTable()">
+<body class="narrativepage workbookpage article canBeLongerThanAPage" onload="buildTable()">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">

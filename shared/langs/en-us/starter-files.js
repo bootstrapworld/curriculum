@@ -1,7 +1,7 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-var Editors = {
+const Editors = {
   "editor": {
     "title": "the editor",
     "autoinclude": false,
@@ -36,7 +36,7 @@ var Editors = {
   }
 }
 
-var Core = {
+const Core = {
   "bc": {
     "title": "bc Starter File",
     "pyret": {
@@ -67,10 +67,22 @@ var Core = {
   "defining-values": {
     "title": "Defining Values Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1nHYxDhgOsbQ-jI7OMZLcgcTJ8HFxPWCL"
+      "url": "https://code.pyret.org/editor#share=18Y3sCev196YEbzSSzWj5XPrS_M_cVkza"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=Dus6Kaigy6"
+      "url": "https://www.wescheme.org/openEditor?publicId=4FgZs4PZp4"
+    }
+  },
+  "strings-n-numbers": {
+    "title": "Strings and Numbers Starter File",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
+    }
+  },
+  "expressions-functions": {
+    "title": "Expressions and Functions Starter File",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
     }
   },
   "boolean": {
@@ -85,7 +97,7 @@ var Core = {
       "url": "https://www.wescheme.org/openEditor?publicId=EA6R0E97nV"
     }
   },
-   "rocket-height": {
+  "rocket-height": {
     "title": "Rocket Height Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
@@ -96,10 +108,37 @@ var Core = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=N47mpskeWS"
     }
+  },
+  "contractsDesmos": {
+    "title": "Matching Examples to Contracts and Definitions (Desmos)",
+    "pyret" : {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659871707142c469829daef9"
+    },
+    "wescheme" : {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c2928cbfcb303c21f4da2"
+    }
+  },
+  "functioncompDesmos": {
+    "title": "Function Composition Matching Activity (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc946c8d135d036ef1edd01"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fece8bb695f3d0d363c331b"
+    }
+  },
+  "functioncardsDesmos": {
+    "title": "Desmos version of our Function Cards",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/62b8a5cb4b545ec2e57ac76d"
+    },
+    "wescheme": {
+        "url": "https://teacher.desmos.com/activitybuilder/custom/5f1e33ca178c797f87aa1c37"
+    }
   }
 }
 
-var Piecewise = {
+const Piecewise = {
   "alices-restaurant": {
     "title": "Alice's Restaurant Starter File",
     "pyret": {
@@ -144,7 +183,7 @@ var Piecewise = {
   }
 }
 
-var GameBasics = {
+const GameBasics = {
   "ninja-cat": {
     "title": "Ninja Cat Game",
     "pyret": {
@@ -196,16 +235,25 @@ var GameBasics = {
       "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
     },
     "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=HA2U428Ykk"
+    }
+  },
+  "sample-game-no-collision": {
+    "title": "Sample Game with No Collision",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Jlv8kWZPogedtBSIzrMA2s345Kp5OWPA"
+    },
+    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
     }
   }
 }
 
-var DSBasics = {
+const DSBasics = {
   "blank-ds": {
     "title": "Blank Dataset Starter File for Bootstrap:Data Science",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QHraJArnEZJCwyfGKakcn8N6NvJ0f9ua"
+      "url": "https://code.pyret.org/editor#share=1xu1XQQr9cYbCJaidK6n-NhvKFC-Xe296"
     }
   },
   "blank-ds-tutorial": {
@@ -253,33 +301,33 @@ var DSBasics = {
   "animals": {
     "title": "Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1G7rKDbVeekl2iT0zEgx9gwiqRNIA0CZz"
+      "url": "https://code.pyret.org/editor#share=1rj_zKiheibxod8IihAFeMpP91XjLROum"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FF68tyYBcf1ri9yLFpVcO%2Ffile.json"
     }
   },
-   "threats": {
-    "title": "Threats to Validity Project Template",
-    "pyret": {
-      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
-    },
-    "codap": {
-      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
-    }
-  },
   "expanded-animals": {
     "title": "Expanded Animals Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zkT8gS3gHMyLdI7VdrruJZvn4SPQmPDc"
+      "url": "https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
     }
+  },
+  "food": {
+    "title": "Global Food Supply & Production Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T"
+    },
+    "codap": {
+      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
+      }
+    }
   }
-}
 
-var MoreDS = {
+const MoreDS = {
   "fair-coins": {
     "title": "Fair Coins Starter File",
     "pyret": {
@@ -289,16 +337,10 @@ var MoreDS = {
       "url": "https://code.pyret.org/editor#share=1VpwvnzGS57riIH76_sbdgXojMVIifkrf"
     }
   },
-  "food": {
-    "title": "Global Food Supply & Production Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1XpmYOmsozC7tsuBChuLEMWXKYU8gfdtS"
-    }
-  },
   "grouped-samples": {
     "title": "Grouped Samples Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=16nzX2t8M_Z83owrq9u-XXF0xrodayW9A"
+      "url": "https://code.pyret.org/editor#share=1Tv81bTmc0-kGr-bXUdjaVayPW66F-1AA"
     },
     "codap": {
       "url": "TBD"
@@ -307,49 +349,25 @@ var MoreDS = {
   "hair": {
     "title": "Hair Color Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1gdIgGJtop0fp7PmCDNNj9f9aEb9IBzpc"
+      "url": "https://code.pyret.org/editor#share=1yA2zA86eHHRKujFHvbhmHns2vwxdDkBK"
     }
   },
    "height": {
     "title": "Age vs. Height Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1I2l4kaSk3CnDs_dK4MLKyeV6cavPYIQ_"
-    }
-  },
-  "custom-scatter-plot": {
-    "title": "Custom Scatter Plot Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1DKazhJNmH1LB2J46qYMt4h2YgWPBvZEY"
-    }
-  },
-  "piecewise-displays": {
-    "title": "Piecewise Displays Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1XK78l3FOYzmKPWrYmYBMUumvEWtwN03b"
-    }
-  },
-  "piecewise-animal-images": {
-    "title": "Animal Images Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1hmVFpA2zWBWaKulm6LwHHzKrDhH15jvP"
-    }
-  },
-  "custom-scatter-plot-w-range": {
-    "title": "Dots for Value Ranges Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1fjtcMYGQHtUmHPP0xKYYulL7xu1Nl0eQ"
+      "url": "https://code.pyret.org/editor#share=1vq2IHuribi-aLF6tIZAWhwgiJg5Raj3o"
     }
   },
   "row-functions": {
     "title": "Row Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=17266_Kczy0pJxp8TzkMsawaMavG4PDpk"
+      "url": "https://code.pyret.org/editor#share=1AqRli9LkPdkkNP2KDp20hkjwepS3JAyp"
     }
   },
   "table-functions": {
     "title": "Table Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1lk56IOB08ir43MZ3Vbi5R5d69uqcbaL3"
+      "url": "https://code.pyret.org/editor#share=1c-dM-cQlJuuGx5I1VYFiCRSfBkWoAgbx"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FeZEwgF1qSm396MC6CNM9%2Ffile.json"
@@ -358,8 +376,8 @@ var MoreDS = {
   "trust-but-verify": {
     "title": "Trust but Verify Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QeOuoKMORAbJ1xAnqhcLKTZikdFkPCKs"
-    }
+      "url": "https://code.pyret.org/editor#share=1ELldH6tPGvrBXE-p474U3Iqvz9sOWiPc"
+    },
   },
   "bad-survey": {
     "title": "Height vs. Wingspan Survey (make a copy)",
@@ -373,13 +391,13 @@ var MoreDS = {
   "dirty-data": {
     "title": "New Animals! Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12MKYPQ8apNrBsstlJo-EWzYWz95vhL8L"
+      "url": "https://code.pyret.org/editor#share=1gPv48mFogsm2D6V1y4rubczF4IZcoMUT"
     }
   },
   "fav-desserts": {
     "title": "Survey of Eighth Graders and their Favorite Desserts Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1qmvw47gW4e73fJafXcW4BUV62CbJCVwl",
+      "url": "https://code.pyret.org/editor#share=1yWthj9wzb3vJgzyju1q3fVLDxUlrAbt8"
     },
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcavDE7LbB461CodyyaMh%2Ffile.json"
@@ -388,7 +406,7 @@ var MoreDS = {
   "olympic-records": {
     "title": "Olympic Records Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1bUSNUJ73VE3wCpLebihVdWk-Z7EFwidx"
+      "url": "https://code.pyret.org/editor#share=1WAl-23Nb8qvkOpFW3CKDCJDZ4BCpOsUq"
     }
   },
   "text-stats": {
@@ -405,7 +423,34 @@ var MoreDS = {
   }
 }
 
-var DSdesmos = {
+const DSadvanceDisplays = {
+  "custom-scatter-plot": {
+    "title": "Custom Scatter Plot Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1QZglYDq9W8bnNOITttlqO7TxhfLsH6I6"
+    }
+  },
+  "piecewise-displays": {
+    "title": "Piecewise Displays Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1F7diOSLPYeVJqi-iPll2CA_Hst3JyvLM"
+    }
+  },
+  "piecewise-animal-images": {
+    "title": "Animal Images Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1GkDFv1a_ZxAfAX7UE-vgk9ZJ7HTk99B5"
+    }
+  },
+  "custom-scatter-plot-w-range": {
+    "title": "Dots for Value Ranges Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1QApEE-ji0Yhj9d4niA_WHV8vGar1yQC1"
+    }
+  }
+}
+
+const DSdesmos = {
   "boxplots":{
     "title": "Box plot practice (Desmos)",
     "pyret":{
@@ -414,10 +459,31 @@ var DSdesmos = {
     "codap":{
       "url": "https://teacher.desmos.com/activitybuilder/custom/65983aa243f27bc5de14513c"
     }
+  },
+  "correlations":{
+    "title": "Identifying Direction and Strength (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
+    },
+    "codap":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
+    }
   }
 }
 
-var Flags = {
+const Desmos = {
+  "images-code":{
+    "title": "Matching Images to Code (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7"
+    },
+    "wescheme":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fecf203a29e040d182be6c6"
+    }
+  }
+}
+
+const Flags = {
   "flags": {
     "title": "Flags Starter File",
     "pyret": {
@@ -439,8 +505,7 @@ var Flags = {
   "flags-ak": {
     "title": "Alaskan Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1f3sX5IaNDKd3l6QFFblRHvyLFKVQXYvX"
-    },
+      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1"},
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p"
     }
@@ -448,10 +513,10 @@ var Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1pi0API2gERKokehisGvg7717xaHHPEui"
+      "url": "https://code.pyret.org/editor#share=1_a7C_8YOfOuH1tRaKMcBMShpGFmgSPk_"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=Vl5yocVoU4"
+      "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"
     }
   },
   "flags-2": {
@@ -504,10 +569,28 @@ var Flags = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=V4AfQydAHu"
     }
+  },
+  "flags-desmos": {
+    "title": "Flags and other images (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc53aeef328540d3ad2123c"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fece28cc64e8d0cca2a2169"
+    }
   }
 }
 
-var MoreAlg = {
+const MoreAlg = {
+  "right-trianglesDesmos": {
+    "title": "Exploring Proofs without Words (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65789fa3f7ec22b6692ab676"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65789fa3f7ec22b6692ab676"
+    }
+  },
   "prism": {
     "title": "Surface Area of a Rectangular Prism Starter File",
     "pyret": {
@@ -520,10 +603,10 @@ var MoreAlg = {
   "inequalities-simple": {
     "title": "Simple Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1iTfgXFO_ODI8ucmReFxD_1T-RVanXNnc"
+      "url": "https://code.pyret.org/editor#share=1YMSkIfzhfb9ykOhG7ToBjROwp3-TjeOE"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=jJqUDeN8a7"
+      "url": "https://www.wescheme.org/openEditor?publicId=meMnPog2yl"
     }
   },
   "inequalities-compound": {
@@ -535,10 +618,19 @@ var MoreAlg = {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
     }
   },
-  "inequalities-sam": {
+  "inequalities-samX": {
     "title": "Sam the Butterfly Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=13d5j4CAfaHu1Y1DzPBvqapzO-Gpr9BrH"
+      "url": "https://code.pyret.org/editor#share=1wP6m2gAouUk9TmOyOXmU3CkskcVfHm79"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
+    }
+  },
+  "inequalities-samXY": {
+    "title": "Sam the Butterfly Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1xM5Ipf0poIOc2WM-Fs-E-SJRzPmj8DjI"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
@@ -581,8 +673,107 @@ var MoreAlg = {
     }
   }
 }
-  
-var Alg2 = {
+
+const EarlyMath = {
+  "comm-and-assoc": {
+    "title": "Commutativity and Associativity Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
+    }
+  },
+  "additive-inverse": {
+    "title": "Additive Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+    }
+  },
+  "multiplicative-inverse": {
+    "title": "Multiplicative Inverse Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
+    }
+  },
+  "multiplicative-inverse-2": {
+    "title": "Multiplicative Inverse Starter File 2",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+    }
+  },
+  "identity-prop":{
+    "title": "Identity Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1pedISvOwuhhPfPD_vOTwrTEY--IcJnWm"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=5hRzeYdvpB"
+    }
+  },
+}
+
+const Projects = {
+  "functions": {
+    "title": "Functions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
+    }
+  },
+  "my-function": {
+    "title": "My Function Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
+    }
+  },
+  "logos": {
+    "title": "Logos Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?pid=4799555149758464"
+    }, 
+  },
+  "threats": {
+    "title": "Threats to Validity Project Template",
+    "pyret": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    },
+    "codap": {
+      "url": "https://docs.google.com/presentation/u/1/d/1M8gj9gHvo-TkweYVdYfyFGLWbLUyWyWzQAfH5dRwfUU/copy"
+    }
+  },
+  "cats-only": {
+    "title": "Animals Dataset - Cats Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
+    }
+  },
+  "dogs-only": {
+    "title": "Animals Dataset - Dogs Only",
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
+    }
+  }
+}
+
+const Alg2 = {
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
@@ -639,7 +830,7 @@ var Alg2 = {
   }
 }
 
-var Reactive = {
+const Reactive = {
   "package-delivery": {
     "title": "Package Delivery Starter File",
     "pyret": {
@@ -735,158 +926,9 @@ var Reactive = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
-  },
-  "strings-n-numbers": {
-    "title": "Strings and Numbers Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2F85MHIWjn0zKugXJ6bKS9%2Ffile.json"
-    }
-  },
-  "expressions-functions": {
-    "title": "Expressions and Functions Starter File",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FFwFTRMO3nPA3YKAMdvSC%2Ffile.json"
-    }
-  },
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
-    }
-  },
-    "alg2-covid": {
-    "title": "Covid Spread Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
-    } 
-  },
-   "alg2-fuel-efficiency": {
-    "title": "Fuel Efficiency Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
-    }
-  },
-   "alg2-states": {
-    "title": "State Demographics Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
-    }
-  },
-  "alg2-exploring-quadratics-desmos": {
-    "title": "Exploring Quadratic Functions (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
-    }
-  },
-  "alg2-covid-desmos" : {
-    "title" : "Modeling Covid Spread (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
-    }
-  },
-  "alg2-exploring-logarithms-desmos" : {
-    "title" : "Exploring Logarithmic Functions (Desmos)",
-    "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    } 
-  },
-  "alg2-wealth-v-health-desmos": {
-    "title": "Fitting Wealth-v-Health (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
-    }
-  },
-  "alg2-wealth-v-health-2-desmos": {
-    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
-    }
   }
 }
 
-var EarlyMath = {
-  "comm-and-assoc": {
-    "title": "Commutativity and Associativity Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
-    }
-  },
-  "additive-inverse": {
-    "title": "Additive Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
-    }
-  },
-  "multiplicative-inverse": {
-    "title": "Multiplicative Inverse Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
-    }
-  },
-    "multiplicative-inverse-2": {
-    "title": "Multiplicative Inverse Starter File 2",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
-    }
-  },
-}
-
-
-
-
-var Projects = {
-  "functions": {
-    "title": "Functions Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
-    }
-  },
-  "my-function": {
-    "title": "My Function Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
-    }
-  },
-  "logos": {
-    "title": "Logo Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1GaRxWxlWCpKvsNC4-qY19hkHcf4mz4q_"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=D2dfSrHp6M"
-    }, 
-  },
-  "cats-only": {
-    "title": "Animals Dataset - Cats Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FmtyhFCS9uFBQPmwclO5u%2Ffile.json"
-    }
-  },
-  "dogs-only": {
-    "title": "Animals Dataset - Dogs Only",
-    "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
-    }
-  }
-}
 
 
 
@@ -898,12 +940,14 @@ var allStarterFiles = {
   ...DSBasics, 
   ...GameBasics, 
   ...MoreDS, 
+  ...DSadvanceDisplays,
   ...DSdesmos,
-  ...MoreAlg, 
-  ...Alg2, 
-  ...Reactive,
+  ...Desmos,
+  ...MoreAlg,
+  ...EarlyMath,
   ...Projects, 
-  ...EarlyMath
+  ...Alg2, 
+  ...Reactive
 }
 
 ////////////////////////////////////////////////////////////////////////////////

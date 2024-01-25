@@ -87,17 +87,16 @@ Regardez l'expression ci-dessous. Selon vous, quelle est la réponse? Ce problè
 
 ++++
 <style>
-.centered-image.big, .centered-image.big p {margin-top: 0px; padding-top: 0px;}
+.big, .big p {margin-top: 0px; padding-top: 0px;}
 .big .MathJax {font-size: 4em; color: black;}
 </style>
 ++++
-[.centered-image.big]
-@math{6 \div 2(1 + 2)}
+@center{@big{@math{6 \div 2(1 + 2)}}}
 
 Au lieu d'utiliser une règle pour calculer les réponses, commençons par schématiser les maths elles-mêmes!
 
-@strategy{
-@span{.title}{Cercles d'évaluation}
+@strategy{Cercles d'évaluation}{
+
 
 Les cercles d'évaluation sont un outil pédagogique essentiel dans ce cours. Ils mettent l'accent sur la _structure_ des expressions mathématiques afin de combattre la fausse idée des élèves selon laquelle la seule chose qui compte est la _réponse_. Ils peuvent être utilisés pour schématiser des phrases arithmétiques afin d'exposer les fausses idées les plus courantes sur l'ordre des opérations et constituent un excellent moyen d’accompagner les élèves quand ils appliquent l'ordre des opérations incorrectement. Ils sont également une sorte de représentation « pont », c’est-à-dire qui se connecte naturellement à la composition de fonctions et à la conversion d’expressions arithmétiques en code.
 }
@@ -164,8 +163,8 @@ et de dessiner des cercles d'évaluation pour chacune des expressions. (Ignorez 
 Vous pouvez également demander aux élèves de réaliser les exercices  @printable-exercise{pages/complete-coe-from-arith.adoc}, @printable-exercise{pages/match-arith-coe.adoc} et @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc980e05de8ae2e71174aeb?collections=5fbecc2b40d7aa0d844956f0, Associer des cercles d'évaluation à des expressions}.
 }
 
-@strategy{
-@span{.title}{Remarque pédagogique}
+@strategy{Remarque pédagogique}{
+
 
 Les cercles d'évaluation sont un excellent moyen d’amener les élèves plus âgés à réviser (et à enfin comprendre) l'ordre des opérations tout en étant motivés et en se concentrant sur l'apprentissage de la programmation.	Nous reconnaissons l'importance de ce travail et savons que certains enseignants choisissent d'y consacrer une semaine entière. C’est pourquoi nous avons développé de nombreuses ressources supplémentaires pour favoriser l’accompagnement et l'approfondissement. Vous trouverez quelques pages supplémentaires dans le guide et plus de 20 autres liées dans @link{#_additional_exercices, la section Exercices supplémentaires} à la fin de cette leçon.
 
@@ -206,7 +205,7 @@ Vous verrez probablement du code écrit en utilisant ce « raccourci », mais il
 |===
 
 @ifproglang{wescheme}{
-Toutes les expressions qui suivent le nom de la fonction sont appelées des « arguments » de la fonction. Le schéma suivant résume la forme d'une expression qui utilise une fonction. @span{.center}{@image{images/wescheme-code-diagram.fr, "Schéma d’une expression WeScheme", 400}}
+Toutes les expressions qui suivent le nom de la fonction sont appelées des « arguments » de la fonction. Le schéma suivant résume la forme d'une expression qui utilise une fonction. @center{@image{images/wescheme-code-diagram.fr, "Schéma d’une expression WeScheme", 400}}
 }
 
 Les expressions arithmétiques comprenant plus d'une opération se retrouveront avec plus d'un cercle
@@ -244,15 +243,17 @@ S’il vous reste du temps, commencez par les deux pages du guide de l'élève q
 Maintenant que nous savons comment traduire les cercles d'évaluation en code, revenez à @printable-exercise{pages/translate-arithmetic-to-coe-and-code-1-intro-w-parenth.adoc}.
 }
 
-[.indentedpara]
+@indented{
 *Avant de demander aux élèves de compléter le code de cette page, assurez-vous qu'ils ont dessiné leurs cercles correctement!* Vous pouvez leur demander de comparer leurs cercles avec un partenaire et une autre paire de partenaires ou vous pouvez mettre un corrigé à leur disposition.
+}
 
 @lesson-instruction{
 Quand vous avez confirmé que votre code est bon, continuez avec @printable-exercise{pages/translate-arithmetic-to-coe-and-code-2-outro.adoc}
 }
 
-[.indentedpara]
+@indented{
 (La page précédente du guide offrait aux élèves du soutien pour traduire une expression en code avec des parenthèses supplémentaires. Ce soutien s’arrête sur cette page.)
+}
 
 @lesson-instruction{
 Si vous en avez le temps, demandez aux élèves d’écrire le code dans l'éditeur avec leur partenaire, chacun leur tour.
@@ -269,8 +270,8 @@ Dans Pyret, les _opérateurs_ comme `+`, `-`, `*`, et `/` sont écrits entre les
 
 
 
-@strategy{
-@span{.title}{Stratégies pour les élèves qui apprennent l’anglais}
+@strategy{Stratégies pour les élèves qui apprennent l’anglais}{
+
 
 MLR 7 - Comparer et associer : Rassemblez les organisateurs graphiques des élèves pour en souligner et analyser quelques-uns en grand groupe. Demandez aux élèves de comparer et d’associer les différentes représentations.
 }
@@ -312,15 +313,14 @@ Voici deux cercles d'évaluation.
 Vous reconnaissez un des cercles, mais l’autre est très différent de ceux que vous avez connus jusqu’à présent. Qu'est-ce qui est différent dans le cercle de droite?
 }
 
-[.indentedpara]
---
+@indented{
 _Réponses possibles :_
 
 - _Nous n'avons jamais vu la fonction `text` auparavant_
 - _Nous n'avons jamais vu de mots dans un cercle d'évaluation auparavant_
 - _Nous n’avons jamais vu une fonction prendre trois entrées auparavant_
 - _Nous n'avons jamais vu une fonction prendre un mélange de nombre et de mots auparavant_
---
+}
 
 @lesson-instruction{
 - Pouvez-vous trouver le nom de la fonction dans le deuxième cercle? C'est l'occasion de chercher et d'utiliser la structure pour déchiffrer une nouvelle expression!

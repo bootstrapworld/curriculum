@@ -9,28 +9,21 @@ To learn more about how to use PearDeck, and how to view the embedded links on t
 {layout="Launch"}
 # Grouping by Value
 
-Open the @starter-file{animals}, click "Run" and test the expressions @show{(code '(count animals-table "species"))} and @show{(code '(bar-chart animals-table "species"))} in the Interactions Area.
+Open the @starter-file{animals} and click "Run".
+
+- What do we need to type to see the animals table?
+- How many dogs are there? How many rabbits?
 
 @slidebreak
 {layout="Investigate"}
 # Grouping by Value
 
-- How do the count table and bar chart you just made compare?
-- Which do you like better: the bar chart or the table? Why?
-- Now test out the expression @show{(code '(pie-chart animals-table "species"))}
-- How does this pie chart compare to the bar chart you just made?
-- When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.
-- Hit the up arrow in the Interactions Area to reload your last expression and test it out! 
+Turn to @printable-exercise{count-bar-pie.adoc}, and complete the first section ("Making Bar and Pie Charts").
 
 @teacher{
-- How do the count table and bar chart you just made compare?
 ** __The height of each bar matches the count of each species.__
-- Which do you like better: the bar chart or the table? Why?
-- Now test out the expression @show{(code '(pie-chart animals-table "species"))}
 - How does this pie chart compare to the bar chart you just made?
 ** __The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.__
-- When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over them for more information.
-- Hit the up arrow in the Interactions Area to reload your last expression and test it out! 	
 }
 
 @slidebreak
@@ -69,16 +62,11 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 {layout="Investigate"}
 # Grouping by Value
 
-- Make a `pie-chart` and `bar-chart` for the `pounds` column. 
-- What happened?
-- Why isn't it useful to group the `pounds` column using these functions?
-- Look at the list of columns in the Definitions Area. For which columns do you expect pie charts to be most useful?
 - Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays.
 - Then complete @printable-exercise{matching-bar-to-pie.adoc}.
+- Return to @printable-exercise{count-bar-pie.adoc}, and complete the second section ("Comparing Bar and Pie Charts").
 
 @teacher{
-- Make a `pie-chart` and `bar-chart` for the `pounds` column. 
-- What happened?
 - Why isn't it useful to group the `pounds` column using these functions?
 ** _Grouping by value works well for @vocab{categorical data}, when lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful._
 - Look at the list of columns in the Definitions Area. For which columns do you expect pie charts to be most useful?

@@ -102,26 +102,28 @@ In this case, which do we suspect is the cause and which is the effect: age or t
 
 We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.
 
-@strategy{
-@span{.title}{Why not Independent/Dependent?}
+@strategy{Why not Independent/Dependent?}{
+
 
 Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are _dependent_ or they are _independent_. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are **causally connected**: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
 }
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
 
+We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+
+@teacher{Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!}
+
 @lesson-instruction{
 - It's time to return to the @starter-file{alg2-states}!
-- We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
-** _Come to a consensus about which states your students will explore to produce richer full-class dialogue._
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
 - Do not go on to Part 2! We'll return to that later in the lesson.
 }
 
 @teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
 
-@strategy{
-@span{.title}{Exploring the States Dataset}
+@strategy{Exploring the States Dataset}{
+
 
 The @starter-file{alg2-states} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
 
@@ -272,22 +274,24 @@ Before we learn to fit linear models to scatter plots, let's review. *What do yo
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
 **If the rate of change is constant, the relationship is linear.**
 
-@lesson-instruction{
-* Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from x=1 to x=3 the same as the difference between y-values from x=2 to x=4?
-** _Yes._
+@QandA{
+@Q{Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from x=1 to x=3 the same as the difference between y-values from x=2 to x=4?}
+@A{Yes.}
 }
 
 
 @comment{
-* What is the y-value when x=0?
-** By following the pattern of the blue arrows backwards, we can subtract 2 and arrive at y=3
-* What is the slope of the line?
-** 2, because the arrows show that y increases by 2
+@QandA{
+@Q{What is the y-value when x=0?}
+@A{By following the pattern of the blue arrows backwards, we can subtract 2 and arrive at y=3}
+@Q{What is the slope of the line?}
+@A{2, because the arrows show that y increases by 2}
 
 Knowing the y-intercept and the "size of the growth", we can tell that the equation of this line is @math{f(x) = 2x + 3}.
 }
+}
 
-@optional Students are about to be asked to write the Slope-Intercept form of the line, given two points in our states dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.
+@opt{Students are about to be asked to write the Slope-Intercept form of the line, given two points in our states dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.}
 
 === Investigate
 
@@ -365,8 +369,8 @@ But how do we find the __best__ model? In Statistics, an algorithm called linear
 
 @teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
-@strategy{
-@span{.title}{More `lr-plot` material}
+@strategy{More `lr-plot` material}{
+
 
 If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. Deeper discussion of @math{R^2} and least-squares regression may be appropriate for older students, or in a dedicated statistics class.
 }
@@ -424,13 +428,13 @@ Why we might choose to use one form over another?
 
 @teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
 
-@lesson-instruction{
-* Suppose our scatterplot has data for a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?
-** _Standard Form_
-* Suppose we only know the slope of a model, but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?
-** _Point-Slope Form_
-* Suppose we want to define our model in Pyret. Which form makes it easiest to do that?
-** _Slope-Intercept Form_
+@QandA{
+@Q{Suppose our scatterplot has data for a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?}
+@A{Standard Form}
+@Q{Suppose we only know the slope of a model, but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?}
+@A{Point-Slope Form}
+@Q{Suppose we want to define our model in Pyret. Which form makes it easiest to do that?}
+@A{Slope-Intercept Form}
 }
 
 === Investigate
