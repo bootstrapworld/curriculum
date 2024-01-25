@@ -137,15 +137,35 @@ local function get_slides(lsn_plan_adoc_file)
           slides[#slides + 1] = curr_slide
           break
         else
-          if curr_slide.text ~= '' then
-            set_imageorientation(curr_slide)
-            slides[#slides + 1] = curr_slide
+          new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+          new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+          if ((curr_slide.level == 2) and 
+              (curr_slide.header == "Common Misconceptions") and 
+              (new_level == 2)) then
+            print('while reading the text following a common Misconceptions header...')
+            if (new_header == 'Synthesize')
+            then
+              print('I saw a Synthesize header')
+              curr_slide.header = new_header
+              curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
+              curr_slide.section = 'Synthesize'
+              print(curr_slide.text)
+            else
+              error "ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'\n"
+              break
+            end
+          else
+            if curr_slide.text ~= '' then
+              set_imageorientation(curr_slide)
+              slides[#slides + 1] = curr_slide
+            end
+            curr_slide = newslide()
+            curr_slide.level = new_level
+            curr_slide.header = new_header
+
+            -- print('curr slide header = ' .. curr_slide.header)
+            curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
           end
-          curr_slide = newslide()
-          curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
-          curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-          -- print('curr slide header = ' .. curr_slide.header)
-          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
         end
       elseif c == '[' then
         local table_numcols = 0
