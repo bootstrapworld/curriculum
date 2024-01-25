@@ -641,7 +641,7 @@
                               (display "**" o)
                               (expand-directives:string->port text o)
                               (display "**{style=\"font-size: 22pt\"}" o))]
-                           [(string=? directive "lesson-instruction")
+                           [(member directive '("lesson-instruction" "lesson-roleplay"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(string=? directive "optional")
