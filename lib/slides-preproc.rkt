@@ -635,7 +635,7 @@
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
                            [(string=? directive "strategy")
-                            (let* ([title (read-group i directive)]
+                            (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
                               (newline teacher-notes)
@@ -644,7 +644,7 @@
                               (display "**\n" teacher-notes)
                               (expand-directives:string->port text teacher-notes)
                               (newline teacher-notes))]
-                           [(member directive '("opt" "strategy" "teacher"))
+                           [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
