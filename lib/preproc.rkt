@@ -1729,6 +1729,7 @@
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
+                              (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
