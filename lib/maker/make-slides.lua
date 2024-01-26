@@ -26,9 +26,9 @@ local function first_line(f)
   return x
 end
 
-local lesson_superdir = first_line('.cached/.record-superdir') or 'Default'
+local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
-local course_string = 'Default'
+local course_string = 'Core'
 
 if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
   course_string = 'DS'
@@ -52,6 +52,32 @@ local function get_imageorientation(containscenter, numimages)
   return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
 end
 
+local slideLayouts = {
+  "Core Title Slide",
+  "Math Title Slide",
+  "Math Title and Body",
+  "DS Title Slide",
+  "DS Title and Body",
+  "LegendSlide",
+  "Launch",
+  "Launch-RP",
+  "Launch-DN",
+  "Launch-R",
+  "LaunchC",
+  "LaunchC-DN",
+  "Investigate",
+  "Investigate-DN",
+  "Investigate-K",
+  "Investigate-R",
+  "Investigate-C",
+  "Investigate2",
+  "InvestigateC-DN",
+  "Synthesize",
+  "SynthesizeR",
+  "SynthesizeC",
+  "Supplemental"
+}
+
 local function newslide()
   return {
     text = '',
@@ -63,6 +89,17 @@ local function newslide()
     containscenter = false,
     imageorientation = 'R',
   }
+end
+
+local function contains_layout (tab, val)
+    for index, value in ipairs(tab) do
+        -- We grab the first index of our sub-table instead
+        if value == val then
+            return true
+        end
+    end
+
+    return false
 end
 
 local function set_imageorientation(slide)
@@ -240,6 +277,17 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
       elseif slide.level == 2 and slide.section then
+        local layout = curr_section .. slide.imageorientation .. slide.suffix
+        if not contains_layout(slideLayouts, layout) then
+          print('Unknown slide template: ' 
+            .. curr_section 
+            .. slide.imageorientation 
+            .. slide.suffix
+            .. '. Falling back to ' 
+            .. curr_section 
+            .. slide.imageorientation)
+          slide.suffix = ''
+        end
         o:write('@slidebreak\n')
         o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
         o:write('# ', curr_header, '\n\n')

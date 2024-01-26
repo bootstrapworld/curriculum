@@ -59,7 +59,10 @@ parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 
 make
 
-if test ! -d distribution; then
+if test -f .make.error.log; then
+  echo make failed\; build-slide aborted
+  exit
+elif test ! -d distribution; then
   echo WARNING: Did not find any built pathways
   exit
 else
