@@ -205,7 +205,7 @@ const GameBasics = {
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Y0twOEdXPh15XcdjG_GGSmBIjkctfCj3"
+      "url": "https://code.pyret.org/editor#share=1_4uSefNKa07Ye-iNqh6fh1snxqaMlySd"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
@@ -513,7 +513,7 @@ const Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1_a7C_8YOfOuH1tRaKMcBMShpGFmgSPk_"
+      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE&v=0c33ff0"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"

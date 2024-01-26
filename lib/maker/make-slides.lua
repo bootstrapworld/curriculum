@@ -113,9 +113,13 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.header = 'SLIDE BREAK'
       else
         if directive == 'image' then
-          curr_slide.numimages = curr_slide.numimages + 1
+          if not inside_table_p then
+            curr_slide.numimages = curr_slide.numimages + 1
+          end
         elseif directive == 'center' then
-          curr_slide.containscenter = true
+          if not inside_table_p then
+            curr_slide.containscenter = true
+          end
         end
         curr_slide.text = curr_slide.text .. c .. directive
       end
@@ -242,6 +246,9 @@ local function make_slides_file(lplan_file, slides_file)
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
           l1 = l1:gsub('__(.-)__', '_%1_')
+          l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
+          l1 = l1:gsub('%*(%S.-%S)%*', '__%1__')
+          l1 = l1:gsub('%*(%S)%*', '__%1__')
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
           o:write(l1, '\n')

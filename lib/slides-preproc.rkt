@@ -60,7 +60,7 @@
   *in-file*)
 
 (define (make-image img width)
-  ; (printf "make-image ~s in ~s\n" img (current-directory))
+  ; (printf "make-image ~s (w ~s) in ~s\n" img width (current-directory))
   (set! *num-images-processed* (+ *num-images-processed* 1))
 
   (unless *images-hash*
@@ -91,10 +91,17 @@
     (when (and (hash? *images-hash*) image-attribs (string=? text ""))
       (printf "WARNING: Image ~a missing metadata\n" image-file))
 
-    (if (and *max-images-processed* (> *num-images-processed* *max-images-processed*))
-        (format "**-- INSERT IMAGE ~a HERE --**" img)
-        (format "![~a](~a)~a" text img
-                (if (string=? width "") "" (format "{width=~a}" width))))))
+    (cond [(and *max-images-processed* (> *num-images-processed* *max-images-processed*))
+           (format "**-- INSERT IMAGE ~a HERE --**" img)]
+          [*outputting-table?*
+            (format "<img src=\"~a\" alt=\"~a\"~a>"
+                    (fully-qualify-image img)
+                    text
+                    (if (string=? width "") ""
+                        (format " width=\"~a\"" width)))]
+          [else
+            (format "![~a](~a)~a" text img
+                    (if (string=? width "") "" (format "{width=~a}" width)))])))
 
 (define (variable-or-number? s)
   (let ([result #t])
@@ -445,6 +452,11 @@
               (format "[~a](~a)" link-text (build-path *bootstrap-prefix* "lessons" f))])
         link-output))))
 
+(define (fully-qualify-image img-file)
+  (build-path
+    *bootstrap-prefix* "lessons" *lesson*
+    img-file))
+
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
          [page (first args)]
@@ -583,9 +595,8 @@
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
                               (cond [*output-answers?*
-                                      (let* ([img-hash-path (anonymize-filename img-file)]
-                                             [url (build-path *bootstrap-prefix* "lessons" *lesson* img-hash-path)])
-                                      (fprintf o "[click here for image](~a)" url))]
+                                      (fprintf o "[click here for image](~a)"
+                                               (fully-qualify-image (anonymize-filename img-file)))]
                                     [(not teacher-notes)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
@@ -663,7 +674,7 @@
                            [(member directive '("lesson-instruction" "lesson-roleplay"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
-                           [(string=? directive "optional")
+                           [(member directive '("clear" "optional"))
                             #f]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
