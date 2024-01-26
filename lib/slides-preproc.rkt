@@ -672,7 +672,7 @@
                            [(member directive '("lesson-instruction" "lesson-roleplay"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
-                           [(string=? directive "optional")
+                           [(member directive '("clear" "optional"))
                             #f]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
@@ -758,8 +758,6 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
-                           [(member directive '("clear"))
-                            (display "" o)]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
                             (display "@include found outside of @ifnotslide!\n" o)]

@@ -242,6 +242,8 @@ local function make_slides_file(lplan_file, slides_file)
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
           l1 = l1:gsub('__(.-)__', '_%1_')
+          l1 = l1:gsub('%*(%S.-%S)%*', '__%1__')
+          l1 = l1:gsub('%*(%S)%*', '__%1__')
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
           o:write(l1, '\n')
