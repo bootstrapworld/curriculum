@@ -93,7 +93,7 @@ local function newslide()
   }
 end
 
-local function contains_layout (tab, val)
+local function contains_string (tab, val)
     for index, value in ipairs(tab) do
         -- We grab the first index of our sub-table instead
         if value == val then
@@ -105,9 +105,9 @@ local function contains_layout (tab, val)
 end
 
 local function set_imageorientation(slide)
-  slide.imageorientation = ((slide.containscenter and 'C') or 
+  slide.imageorientation = ((slide.numimages == 2) and '') or 
+    ((slide.containscenter and 'C') or 
     ((slide.numimages == 0) and '') or 
-    ((slide.numimages == 2) and '') or
     'R')
 end
 
@@ -294,7 +294,7 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.level <= 1 then curr_header = slide.header
       elseif (slide.level == 2 and slide.section) then
         local layout = curr_section .. slide.imageorientation .. slide.suffix
-        if not contains_layout(slideLayouts, layout) then
+        if not contains_string(slideLayouts, layout) then
           print('WARNING: Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
             .. ' in ' .. os.getenv('PWD') .. "\n"
             .. '. Falling back to ' .. curr_section .. slide.imageorientation)
