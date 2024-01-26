@@ -758,6 +758,8 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub"))
                             (read-group i directive)]
+                           [(member directive '("clear"))
+                            (display "" o)]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
                             (display "@include found outside of @ifnotslide!\n" o)]
