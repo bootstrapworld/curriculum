@@ -195,7 +195,7 @@ local function get_slides(lsn_plan_adoc_file)
               curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
               curr_slide.section = 'Synthesize'
             else
-              error "ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'\n"
+              error("ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize' in " .. os.getenv('PWD'))
               break
             end
           else
@@ -285,7 +285,8 @@ local function make_slides_file(lplan_file, slides_file)
       elseif slide.level == 2 and slide.section then
         local layout = curr_section .. slide.imageorientation .. slide.suffix
         if not contains_layout(slideLayouts, layout) then
-          print('Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
+          print('WARNING: Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
+            .. ' in ' .. os.getenv('PWD') .. "\n"
             .. '. Falling back to ' .. curr_section .. slide.imageorientation)
           slide.suffix = ''
         end
