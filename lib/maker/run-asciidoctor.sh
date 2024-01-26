@@ -10,6 +10,8 @@ cssfile=$TOPDIR/distribution/$NATLANG/lib/curriculum.css
 
 errfile=.make.error.log
 
+rm -f $errfile
+
 if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
     asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $errfile 2>&1
@@ -36,4 +38,8 @@ else
   echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
   #
   node lib/callAdoc.js $NODE_ADOC_INPUT 
+fi
+
+if test -f $errfile; then
+  test -s $errfile || rm -f $errfile
 fi
