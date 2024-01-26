@@ -73,6 +73,7 @@ local slideLayouts = {
   "Investigate-R",
   "Investigate2",
   "InvestigateC-DN",
+  "InvestigateR-DN",
   "Synthesize",
   "SynthesizeR",
   "SynthesizeC",
