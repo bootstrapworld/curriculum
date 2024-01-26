@@ -94,7 +94,9 @@
     (cond [(and *max-images-processed* (> *num-images-processed* *max-images-processed*))
            (format "**-- INSERT IMAGE ~a HERE --**" img)]
           [*outputting-table?*
-            (format "<img src=\"~a\" alt=\"~a\"~a>" (fully-qualify-image img) text
+            (format "<img src=\"~a\" alt=\"~a\"~a>"
+                    (fully-qualify-image img)
+                    text
                     (if (string=? width "") ""
                         (format " width=\"~a\"" width)))]
           [else
@@ -453,7 +455,7 @@
 (define (fully-qualify-image img-file)
   (build-path
     *bootstrap-prefix* "lessons" *lesson*
-    (anonymize-filename img-file)))
+    img-file))
 
 (define (fully-qualify-link args directive)
   (let* ([num-args (length args)]
@@ -594,7 +596,7 @@
                                    [img-file (first args)])
                               (cond [*output-answers?*
                                       (fprintf o "[click here for image](~a)"
-                                               (fully-qualify-image img-file))]
+                                               (fully-qualify-image (anonymize-filename img-file)))]
                                     [(not teacher-notes)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
