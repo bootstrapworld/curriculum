@@ -60,16 +60,17 @@ local slideLayouts = {
   "DS Title and Body",
   "LegendSlide",
   "Launch",
+  "LaunchR",
+  "LaunchC",
   "Launch-RP",
   "Launch-DN",
-  "Launch-R",
-  "LaunchC",
   "LaunchC-DN",
   "Investigate",
+  "InvestigateR",
+  "InvestigateC",
   "Investigate-DN",
   "Investigate-K",
   "Investigate-R",
-  "Investigate-C",
   "Investigate2",
   "InvestigateC-DN",
   "Synthesize",
@@ -134,9 +135,9 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
-      elseif directive == 'lesson-instruction' then
-        curr_slide.suffix = '-DN'
-        curr_slide.text = curr_slide.text .. c .. directive
+      --elseif directive == 'lesson-instruction' then
+      --  curr_slide.suffix = '-DN'
+      --  curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'lesson-roleplay' then
         curr_slide.suffix = '-RP'
         curr_slide.text = curr_slide.text .. c .. directive
