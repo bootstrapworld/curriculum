@@ -113,9 +113,13 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.header = 'SLIDE BREAK'
       else
         if directive == 'image' then
-          curr_slide.numimages = curr_slide.numimages + 1
+          if not inside_table_p then
+            curr_slide.numimages = curr_slide.numimages + 1
+          end
         elseif directive == 'center' then
-          curr_slide.containscenter = true
+          if not inside_table_p then
+            curr_slide.containscenter = true
+          end
         end
         curr_slide.text = curr_slide.text .. c .. directive
       end
