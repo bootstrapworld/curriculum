@@ -745,7 +745,6 @@
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (set! *single-question?* (= (length (regexp-match* "@Q{" text)) 1))
-                              (printf "single-question? = ~s\n" *single-question?*)
                               (expand-directives:string->port text o)
                               (set! *single-question?* #f)
                               (ensure-teacher-notes)
