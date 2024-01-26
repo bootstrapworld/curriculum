@@ -115,6 +115,7 @@ local function get_slides(lsn_plan_adoc_file)
   local curr_slide = newslide()
   local inside_css_p = false
   local beginning_of_line_p = true
+  local inside_lesson_instruction = false
   file_being_read = lsn_plan_adoc_file
   while true do
     local c = i:read(1)
@@ -135,9 +136,12 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
-      --elseif directive == 'lesson-instruction' then
-      --  curr_slide.suffix = '-DN'
-      --  curr_slide.text = curr_slide.text .. c .. directive
+      elseif directive == 'lesson-instruction' then
+        inside_lesson_instruction = true
+        curr_slide.text = curr_slide.text .. c .. directive
+      elseif directive == 'starter-file' then
+        curr_slide.suffix = '-DN'
+        curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'lesson-roleplay' then
         curr_slide.suffix = '-RP'
         curr_slide.text = curr_slide.text .. c .. directive
@@ -280,13 +284,8 @@ local function make_slides_file(lplan_file, slides_file)
       elseif slide.level == 2 and slide.section then
         local layout = curr_section .. slide.imageorientation .. slide.suffix
         if not contains_layout(slideLayouts, layout) then
-          print('Unknown slide template: ' 
-            .. curr_section 
-            .. slide.imageorientation 
-            .. slide.suffix
-            .. '. Falling back to ' 
-            .. curr_section 
-            .. slide.imageorientation)
+          print('Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
+            .. '. Falling back to ' .. curr_section .. slide.imageorientation)
           slide.suffix = ''
         end
         o:write('@slidebreak\n')
