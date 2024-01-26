@@ -14,13 +14,13 @@
 | Lesson Goals
 | Students will be able to...
 
-* Students explore the concept of center of a distribution, learning how to compute the mean, median and mode(s) of a dataset
-* Students find the mean, median and mode(s) of various columns in the Animals table
+- Students explore the concept of center of a distribution, learning how to compute the mean, median and mode(s) of a dataset
+- Students find the mean, median and mode(s) of various columns in the Animals table
 
 | Student-facing Lesson Goals
 |
 
-* Let's use mean, median, and modes to describe our data.
+- Let's use mean, median, and modes to describe our data.
 
 | Materials
 |[.materials-links]
@@ -33,9 +33,9 @@
 
 | Preparation
 |
-* The kinesthetic activity in this lesson requires a ruler and 4-8 pennies for each group of 3. 
-* There is an optional activity in this that would require you to print an extra datacycle for your students. 
-* If you are using the slide deck, adjust it based on which of these activities you will be doing with your students.
+- The kinesthetic activity in this lesson requires a ruler and 4-8 pennies for each group of 3. 
+- There is an optional activity in this that would require you to print an extra datacycle for your students. 
+- If you are using the slide deck, adjust it based on which of these activities you will be doing with your students.
 
 |===
 
@@ -46,11 +46,17 @@ Students learn about @vocab{mean} (or "average") as one way (among others!) to s
 
 === Launch
 
-One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.  But there are many different ways to define "center", and each method has strengths and weaknesses. The shape of the data can play a huge role in whether or not one kind of summary is appropriate!
+One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.  
+
+But there are many different ways to define "center", and each method has strengths and weaknesses. The shape of the data can play a huge role in whether or not one kind of summary is appropriate!
+
+@slidebreak
 
 @lesson-instruction{
 Let's take a moment to consider what values might be typical for the weight of our animals by completing @printable-exercise{typical.adoc}.
 }
+
+@slidebreak 
 
 @center{@image{images/pounds.png}}
 
@@ -76,14 +82,19 @@ The Animal Shelter Bureau used a method of summary, called the @vocab{mean}, or 
 @Q{What do you already know about averages?}
 @A{Sample Answer: To find the @vocab{mean} of a dataset we add all of the values and then divide their sum by the number of values in the dataset.}
 @A{The @vocab{mean} is the number that "balances" all the other numbers in the sample.}
-
-@Q{We are going to learn to let Pyret compute the mean for us, but let's first make sure we understand what we're asking Pyret to do! How would we find the mean weight of five animals who weigh 17, 25, 23, 23 and 22 pounds?}
-@A{First add @math{17 + 25 + 23 + 23 + 22 = 110} and then divide @math{110 \div 5 = 27}}
-
-@optional Complete the Mean section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has 5 problems including the one listed above.
 }
 
-@teacher{If you have time, we recommend completing this kinesthetic activity with your students to give them a deeper understanding!
+@slidebreak
+
+@QandA{
+@Q{We are going to learn to let Pyret compute the mean for us, but let's first make sure we understand what we're asking Pyret to do! How would we find the mean weight of five animals who weigh 17, 25, 23, 23 and 22 pounds?}
+@A{First add @math{17 + 25 + 23 + 23 + 22 = 110} and then divide @math{110 \div 5 = 27}}
+}
+
+@opt{Complete the Mean section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has 5 problems including the one listed above.
+}
+
+@teacher{If you have time, we recommend completing the kinesthetic activity on Finding the Value of the Balancing Point with your students to give them a deeper understanding!
 }
 
 @strategy{Kinesthetic Activity - Finding the Value of the Balancing Point}{
@@ -99,6 +110,8 @@ __Divide the class into groups of three. Supply each group with a ruler and 4-8 
 4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?
 }
 
+@slidebreak
+
 Pyret has a function that will compute the mean -- or average -- of any quantitative column in a Table. 
 
 @hspace{2em} @show{ (contract "mean" '("Table" "String") "Number" )}
@@ -107,9 +120,11 @@ Let's test it out!
 
 @lesson-instruction{
 - Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
-  * _If students don't have the file, they can open a new one from @starter-file{animals}._
+  * _Any who student who doesn't have the file can open a new one from @starter-file{animals}._
 - Turn to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the @vocab{mean} weight.
 }
+
+@slidebreak
 
 @QandA{
 @Q{How did your calculation compare to the Animal Shelter Bureau's claim that the average pet weighs nearly 40 pounds?}
@@ -128,7 +143,7 @@ Just because a column contains numbers doesn't mean the data is quantitative. We
 
 === Synthesize
 
-- If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?
+If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?
 
 == Median @duration{15 minutes}
 
@@ -136,22 +151,17 @@ Just because a column contains numbers doesn't mean the data is quantitative. We
 Students learn the algorithm and code for a second measure of center: the @vocab{median} and consider situations where taking the median is more appropriate than the mean. 
 
 === Launch
-You computed the mean of that column to be almost exactly 40 pounds. That IS the average, but if we scan the dataset we'll quickly see that most of the animals weigh less than 40 pounds! In fact, more than half of the animals weigh less than just 15 pounds. Why is the average so high?
+You computed the mean of that column to be almost exactly 40 pounds. That IS the average...
 
-_Kujo and Mr. Peanutbutter!_
+...but if we scan the dataset we'll quickly see that most of the animals weigh less than 40 pounds.  In fact, more than half of the animals weigh less than just 15 pounds. 
 
-The mean is being thrown off by a few extreme data points, called @vocab{outliers} because they fall far outside of the rest of the dataset. 
+Why is the average so high? @slidebreak _Kujo and Mr. Peanutbutter!_
 
-The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
+**The mean is being thrown off by a few extreme data points**, called @vocab{outliers} because they fall far outside of the rest of the dataset. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
 
-Another measure of center is the @vocab{median}, or “middle” value of a list. 
-To find it we line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger.
+@slidebreak
 
-As an example, consider this list of ages:
-
-`25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
-
-Here 29 is the @vocab{median}, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
+**There is another measure of center we can use** called the @vocab{median}. Instead of averaging the data points, it identifies the “middle” value, which half of the values are smaller than and the other half are larger than.
 
 The algorithm for finding the median of a quantitative column is:
 
@@ -160,9 +170,23 @@ The algorithm for finding the median of a quantitative column is:
 3. Repeat until there is only one number left...
 4. When there are an even number of numbers in the list, as in the example below, there will be two numbers left at the end. Take the _mean_ of those two numbers.
 
-`3, 7, 9, 21`
+@slidebreak
 
-The median of this list is 8, because 8 is the mean of 7 and 9, the two middle numbers. (@math{7 + 9 = 16 and 16 \div 2 = 8})
+Consider this list of ages: `25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
+
+@indented{
+Here 29 is the @vocab{median}. It's the middle number of the list and it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
+}
+
+@slidebreak
+
+Now consider this list of ages: `3, 7, 9, 21`
+
+@indented{
+There is no middle number. So the median of this list will be the mean of the two middle numbers, 7 and 9, which is 8. 
+
+@math{7 + 9 = 16 and 16 \div 2 = 8}
+}
 
 @lesson-instruction{
 Find the @vocab{median} value of each of these two lists:
@@ -174,10 +198,10 @@ Find the @vocab{median} value of each of these two lists:
 @opt{Turn to the Median section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has space to complete these problems and three others.}
 
 @teacher{
-- The median of 11, 3, 7 ,4, 5 is 5,
-  * because it's the middle value of 3, 4, 5, 7, 11.
-- The median of 11, 3, 7, 4 is 5.5
-  * because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11
+- The median of 11, 3, 7 ,4, 5
+  * is 5 because it's the middle value of 3, 4, 5, 7, 11.
+- The median of 11, 3, 7, 4 
+  * is 5.5 because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11
 }
 
 === Investigate
@@ -238,7 +262,8 @@ Take a minute to identify the mode(s) for each of the following datasets:
 * 5, 7, 11, 11, 7, 7    
 * 2, 3, 5, 4, 3, 7, 4
 
-@optional Turn to the Mode(s) section of @opt-printable-exercise{pages/mean-median-modes.adoc} to complete these problems along with two others.
+@opt{Have students complete these problems along with two others on the Mode(s) section of @opt-printable-exercise{pages/mean-median-modes.adoc}.
+}
 }
 
 @ifproglang{pyret}{
