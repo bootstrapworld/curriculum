@@ -260,7 +260,10 @@ local function get_slides(lsn_plan_adoc_file)
   local n = #slides
   if n > 1 then
     local last_slide = slides[n]
-    if not last_slide.section then last_slide.section = 'Supplemental' end
+    if not last_slide.section and (last_slide.header == "Additional Exercises") then 
+      last_slide.section = 'Supplemental' 
+      curr_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
+    end
   end
   return slides
 end
@@ -268,14 +271,14 @@ end
 local function make_slides_file(lplan_file, slides_file)
   if not file_exists_p(lplan_file) then return end
   local slides = get_slides(lplan_file)
-  -- print('got ' .. #slides .. ' slides')
+  --print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides
   local curr_header = 'notsetyet'
   local curr_section = 'notsetyet'
   local o = io.open(slides_file, 'w')
 
   for k,slide in ipairs(slides) do
-    -- print('doing slide ' .. k .. ' of level ' .. slide.level)
+    --print('doing slide ' .. k .. ' of level ' .. slide.level)
     if k == 1 then
       if slide.header then
         o:write('@slidebreak\n')
@@ -289,7 +292,7 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
-      elseif slide.level == 2 and slide.section then
+      elseif (slide.level == 2 and slide.section) then
         local layout = curr_section .. slide.imageorientation .. slide.suffix
         if not contains_layout(slideLayouts, layout) then
           print('WARNING: Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
