@@ -105,7 +105,10 @@ local function contains_layout (tab, val)
 end
 
 local function set_imageorientation(slide)
-  slide.imageorientation = ((slide.containscenter and 'C') or ((slide.numimages == 0) and '') or 'R')
+  slide.imageorientation = ((slide.containscenter and 'C') or 
+    ((slide.numimages == 0) and '') or 
+    ((slide.numimages == 2) and '') or
+    'R')
 end
 
 local function get_slides(lsn_plan_adoc_file)
@@ -158,6 +161,10 @@ local function get_slides(lsn_plan_adoc_file)
         if directive == 'image' then
           if not inside_table_p then
             curr_slide.numimages = curr_slide.numimages + 1
+          end
+          if (curr_slide.numimages == 2) then
+            curr_slide.imageorientation = ''
+            curr_slide.suffix = '2'
           end
         elseif directive == 'center' then
           if not inside_table_p then
