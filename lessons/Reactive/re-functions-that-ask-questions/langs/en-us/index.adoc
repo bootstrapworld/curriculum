@@ -159,11 +159,11 @@ How do we change `draw-state`? We can turn it into a piecewise function, and dra
 fun draw-state(a-sunset):
   if a-sunset.y < 150:
     translate(
-      rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-        200, 50,
-        translate(circle(25, "solid", "yellow"),
-          a-sunset.x, a-sunset.y,
-          rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
+    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+              200, 50,
+              translate(circle(25, "solid", "yellow"),
+                        a-sunset.x, a-sunset.y,
+     rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
   else if a.sunset.y < 225:
     # same as above with "orange" as sun color
   else:
@@ -183,10 +183,10 @@ Assume for the moment that we had written a helper function called `draw-sun` th
 ```
 fun draw-state(a-sunset):
   translate(
-    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-      200, 50,
-      translate(draw-sun(a-sunset),
-        a-sunset.x, a-sunset.y,
+  rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+            200, 50,
+            translate(draw-sun(a-sunset),
+                      a-sunset.x, a-sunset.y,
         rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
 end
 ```
