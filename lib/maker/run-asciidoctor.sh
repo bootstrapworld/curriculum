@@ -8,12 +8,15 @@ test -s "$ADOC_INPUT" || exit 0
 
 cssfile=$TOPDIR/distribution/$NATLANG/lib/curriculum.css
 
+errfile=.make.error.log
+
+rm -f $errfile
+
 if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
-    asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT)
+    asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $errfile 2>&1
   else
     echo $'\e[1;31m'🐌 Will be slow! Running asciidoctor once per file because DEBUGADOC=$DEBUGADOC $'\e[0m'
-    errfile=.error.tmp
     for f in $(cat $ADOC_INPUT); do
       rm -f $errfile; touch $errfile
       # echo asciidoctor $f
@@ -35,4 +38,8 @@ else
   echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
   #
   node lib/callAdoc.js $NODE_ADOC_INPUT 
+fi
+
+if test -f $errfile; then
+  test -s $errfile || rm -f $errfile
 fi
