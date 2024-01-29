@@ -1062,6 +1062,17 @@ To specify that it should show up only in the slide:
 
   @ifslide{This content is slide-specific}
 
+The slide converter will use the content of the lesson text to infer
+the slide layout to use. While these heuristics may vary slightly over 
+time, the general rules are:
+
+- The slide layout will be partially determined by whether the text occurs within a Launch, Investigate, or Synthesize section
+- @teacher{...} and "Common Misconceptions" will be auto converted into slide notes
+- If the text has a right-aligned image, one of the "R" templates will be used
+- If the text has a center-aligned image, one of the "C" templates will be used
+- If the text has no image, one of the standard full-text templates will be used 
+
+
 ===== Student- vs solution mode
 
 As described above, workbook pages get converted to both student and

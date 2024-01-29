@@ -76,8 +76,8 @@ Let's take a look at some dirty data.
 * What were some ways that the data was "dirty"?
 * What ideas do you have for how the survey designers could have solicited better data?
 
-@strategy{
-@span{.title}{Pedagogy Note!}
+@strategy{Pedagogy Note!}{
+
 
 This could be an opportunity to have students practice cleaning data and importing a google sheet into a pyret starter file. If you want to take the time to have your students work on these skills and see the difference of what the file looks like cleaned up, have them make a copy of the @link{https://docs.google.com/spreadsheets/d/1Hv9eqiwQ3h2YvdLmm9_vuZuJpa2WsW4ENZsa2kI1pFs/, google sheet}, clean the data by hand, change the google file id in @starter-file{fav-desserts}, click "Run" and build the displays again to see how different they look with "clean" data.
 }
@@ -131,9 +131,9 @@ Suppose we decided to delete all the rows with weird data, having inconsistent t
 
 These animal examples were a useful way to illustrate the problem, but dirty data shows up _everywhere_. Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
 
-. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
-. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
-. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
+1. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
+2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
+3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
 
 == Data Hygiene @duration{20 minutes}
 
@@ -147,8 +147,8 @@ It is often said that a person's height is generally the same as their "wingspan
 
 Open @starter-file{bad-survey}, so that students can see it on the projector, tv, or their own screens. This Google form was __intentionally designed to gather bad data!__ Can you see anything wrong with it?
 
-@strategy{
-@span{.title}{Avoid IT Issues!}
+@strategy{Avoid IT Issues!}{
+
 
 Depending on your school or district, it may be difficult for students to edit or even view the @starter-file{bad-survey}. To prepare for this lesson, **we recommend making a copy of the survey using your school acount**, and then sharing __that__ copy with your students.
 
@@ -164,13 +164,13 @@ While it's almost impossible to _guarantee_ 100% clean data, most survey tools i
 
 [.hygiene-tools]
 --
-. @right{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
+1. @right{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
 
-. @right{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
+2. @right{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a dropdown can ensure that everyone selects one - and only one! - category. Questions A and C might be a good candidates for dropdowns. Question C is especially bad, because it allows respondents to select multiple grades!
 
-. @right{@image{images/description.png}} *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
+3. @right{@image{images/description.png}} *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
 
-. @right{@image{images/validate.png}} *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. @right{@image{images/validation.png}}
+4. @right{@image{images/validate.png}} *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions B and E would benefit from some validation. @right{@image{images/validation.png}}
 --
 
 === Investigate
@@ -189,8 +189,8 @@ Have student share back what changes they made, and what they discussed.
 - When someone conducts a survey and provides a dataset from it, is it important for them to share the survey? Why or why not?
 - When someone shares a dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
 
-@strategy{
-@span{.title}{Project Option: Designing a Survey}
+@strategy{Project Option: Designing a Survey}{
+
 
 In @lesson-link{project-design-a-survey}, students come up with a research question and gather data to answer it. They exchange surveys and try to "hack" each other's study with garbage data. Teachers can have their students import the resulting spreadsheets into Pyret, and analyze the data using the skills and concepts they've already learned.
 

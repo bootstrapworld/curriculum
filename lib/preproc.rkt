@@ -1425,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "big")
+                            (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "define")
@@ -1727,6 +1729,7 @@
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
+                              (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
@@ -1839,8 +1842,9 @@
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (fprintf o "[.optionaltag]##Optional: ##")
+                              (display "[.optionaltag]\n" o)
                               (display (expand-directives:string->string text) o)
+                              (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -1947,9 +1951,13 @@
                               (display "\n** " o)
                               (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
-                            (let ([text (read-group i directive #:multiline? #t)])
+                            (let* ([title (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
                               (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
                               (display "|===\n|\n" o)
+                              (display "[.title]\n" o)
+                              (expand-directives:string->port title o)
+                              (display "\n\n" o)
                               (expand-directives:string->port text o)
                               (display "\n|===\n" o))]
                            [(string=? directive "lesson-point")
@@ -2317,7 +2325,8 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
+            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #f])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )

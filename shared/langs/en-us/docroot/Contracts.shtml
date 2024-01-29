@@ -78,6 +78,7 @@
     // handle domains separately because they require more preprocessing
     function buildTable() {
       if(pathway && pathway.includes("hour-of-code")) {
+        delete window.status;
         throw "Pathway is 'hour-of-code', which has no contracts. Terminating.";
       }
 

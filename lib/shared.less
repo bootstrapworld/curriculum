@@ -174,8 +174,8 @@ body {
     vertical-align:     baseline;
     &:empty { display: none; } /* If empty after JS post-processing, hide */
   }
-  .optionaltag {
-    font-style: italic;
+  .optionaltag>p::before {
+    font-style: italic; 
   }
 }
 
@@ -295,6 +295,7 @@ lines on some browsers */
   /* The summary table at the top of each lesson */
   .preamble {
     color: black;
+    background: transparent;
     /* Hide slide links intentionally left blank, and display useful feedback */
     a[href$='Intentionally-left-blank-as-this-lesson-does-not-have-any-slides/'] {
       font-size: 0;
