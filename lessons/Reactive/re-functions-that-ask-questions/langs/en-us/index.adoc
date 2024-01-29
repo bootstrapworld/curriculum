@@ -140,10 +140,10 @@ How do we change `draw-state`? Our first instinct may be to turn it into a piece
 ----
 fun draw-state(a-sunset):
   if a-sunset.y < 150:
-    put-image(
+    translate(
     rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
               200, 50,
-              put-image(circle(25, "solid", "yellow"),
+              translate(circle(25, "solid", "yellow"),
                         a-sunset.x, a-sunset.y,
      rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
   else if a.sunset.y < 225:
@@ -154,16 +154,16 @@ fun draw-state(a-sunset):
 end
 ----
 
-Notice that this version contains three very similar calls to `put-image`. The _only_ thing that is different about these three calls is the color we use to draw the sun. Whenever you find yourself writing nearly-identical expressions multiple times, you should create another function that computes the piece that is different. You can then write the overall expression just once, calling the new function to handle the different part. Functions that handle one part of an overall computation are called @vocab{helper functions}.
+Notice that this version contains three very similar calls to `translate`. The _only_ thing that is different about these three calls is the color we use to draw the sun. Whenever you find yourself writing nearly-identical expressions multiple times, you should create another function that computes the piece that is different. You can then write the overall expression just once, calling the new function to handle the different part. Functions that handle one part of an overall computation are called @vocab{helper functions}.
 
 Assume for the moment that we had written a helper function called `draw-sun` that takes a `SunsetState` and returns the image to use for the sun. If we had such a function, then our `draw-state` function would look as follows:
 
 ----
 fun draw-state(a-sunset):
-  put-image(
+  translate(
   rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
             200, 50,
-            put-image(draw-sun(a-sunset),
+            translate(draw-sun(a-sunset),
                       a-sunset.x, a-sunset.y,
         rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
 end

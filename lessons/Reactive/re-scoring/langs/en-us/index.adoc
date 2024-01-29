@@ -134,7 +134,7 @@ Now your scoring system is in place, but how will the person playing your game k
 Which function handles how the game state is drawn?
 }
 
-In the `draw-state` function, images are placed onto the background using `put-image` to draw the game. But the score is represented by a Number: we need a way to represent it as an Image. Thankfully, Pyret has some built-in functions that can help with this: the function `num-to-string` takes in a Number for its domain and returns a String representation of that number. This string can then be passed to the text function to return an Image that can be used in `draw-state`.
+In the `draw-state` function, images are placed onto the background using `translate` to draw the game. But the score is represented by a Number: we need a way to represent it as an Image. Thankfully, Pyret has some built-in functions that can help with this: the function `num-to-string` takes in a Number for its domain and returns a String representation of that number. This string can then be passed to the text function to return an Image that can be used in `draw-state`.
 
 @lesson-instruction{
 Copy the following contracts into your workbook:
@@ -149,7 +149,7 @@ Copy the following contracts into your workbook:
 The expression:  
 
 ----
-put-image(text(num-to-string(g.score), 20, "white"), 320, 240, BACKGROUND-IMG)
+translate(text(num-to-string(g.score), 20, "white"), 320, 240, BACKGROUND-IMG)
 ----
  
 will place the score (drawn in size 20 white text) onto the center of the BACKGROUND-IMG.

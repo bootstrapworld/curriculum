@@ -13,7 +13,7 @@
 
 @keywords{ratio, proportion, coordinate plane, proportional, scaling}
 
-@add-to-lang{put-image}
+@add-to-lang{translate}
 
 [@lesson-intro-table]
 |===
@@ -21,7 +21,7 @@
 | Lesson Goals
 | Students will be able to:
 
-* Put one image on top of another, using the `put-image` function.
+* Put one image on top of another, using the `translate` function.
 * Decompose complex images into parts.
 * Combine and manipulate images to create more complex images.
 
@@ -48,17 +48,17 @@
 == Putting Images Together @duration{20 minutes}
 
 === Overview
-Students learn about the `put-image` function, which uses coordinates to position one image on top of the other. Students think through what coordinates will place a solid red circle on top of a rectangular background, in a variety of different locations.
+Students learn about the `translate` function, which uses coordinates to position one image on top of the other. Students think through what coordinates will place a solid red circle on top of a rectangular background, in a variety of different locations.
 
 === Launch
 As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
 
-The `put-image` function works like `overlay`, but instead of centering the top image on the bottom image, it specifies where on the bottom image to place the center of the top image.
+The `translate` function works like `overlay`, but instead of centering the top image on the bottom image, it specifies where on the bottom image to place the center of the top image.
 
 @lesson-point{
 Think of the background image as a sheet of graph paper with the @vocab{origin} (0,0) in the bottom left corner.
 
-The numbers in `put-image` specify the point on the paper where the center of the top image should be placed.
+The numbers in `translate` specify the point on the paper where the center of the top image should be placed.
 }
 
 @lesson-instruction{
@@ -73,7 +73,7 @@ The numbers in `put-image` specify the point on the paper where the center of th
 }
 
 === Investigate
-Let's apply what we just learned about `put-image` to getting the Japanese flag building correctly. 
+Let's apply what we just learned about `translate` to getting the Japanese flag building correctly.
 
 We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.
 
@@ -85,7 +85,7 @@ Professional programmers work with teams who need to be able to follow each othe
 
 @lesson-instruction{
 - Open the @starter-file{flags} and click "Run".
-- Turn to @printable-exercise{put-image-investigate.adoc} and complete the first section (titled Japan).
+- Turn to @printable-exercise{translate-investigate.adoc} and complete the first section (titled Japan).
 }
 
 @teacher{
@@ -94,7 +94,7 @@ For students who finish early, there is an optional extension activity in this s
 
 === Synthesize
 
-Could we completely replace `overlay` with `put-image`? Why or why not?
+Could we completely replace `overlay` with `translate`? Why or why not?
 
 == Transforming Shapes for Composition @duration{30 minutes}
 
@@ -105,11 +105,11 @@ Students will use proportional reasoning to determine what sizes various flag co
 
 @lesson-instruction{
 - Open the @starter-file{flags-2} and click "Run".
-- Complete the second section of @printable-exercise{put-image-investigate.adoc}, titled The Netherlands.
+- Complete the second section of @printable-exercise{translate-investigate.adoc}, titled The Netherlands.
 - When you've answered all of the questions, continue working through the starter file.
 }
 
-@teacher{The primary goal of this file is for students to practice thinking about the dimensions of flag stripes as fractions of the full dimensions of the flag. There are many sections of this starter file, and some students will make it through the challenges. Some students may only complete one flag. All of them will be using their proportional reasoning, and synthesizing how to apply put-image to locate images on the coordinate grid.
+@teacher{The primary goal of this file is for students to practice thinking about the dimensions of flag stripes as fractions of the full dimensions of the flag. There are many sections of this starter file, and some students will make it through the challenges. Some students may only complete one flag. All of them will be using their proportional reasoning, and synthesizing how to apply `translate` to locate images on the coordinate grid.
 }
 
 === Investigate
@@ -131,7 +131,7 @@ Why is it useful to define each part of the flag first, before stitching the ima
 
 - @opt-printable-exercise{alaska-flag.adoc} - For a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
-- @opt-starter-file{flags-desmos} - Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `put-image`. 
+- @opt-starter-file{flags-desmos} - Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `translate`.
 
 - @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics.
 
@@ -145,7 +145,7 @@ Why is it useful to define each part of the flag first, before stitching the ima
 @strategy{Why is it so Hard to Center a `star`?}{
 
 
-We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's __center__. The same is true for squares, rectangles, and many other shapes.
+We can think about using `translate` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's __center__. The same is true for squares, rectangles, and many other shapes.
 
 But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by their centers. Instead, they are "grabbed" by the center of their _bounding box_. A bounding box is the tightest possible rectangle that can be drawn around an image. 
 
