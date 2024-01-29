@@ -52,7 +52,7 @@ local function get_imageorientation(containscenter, numimages)
   return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
 end
 
-local slideLayouts = {
+local allowedSlideLayouts = {
   "Core Title Slide",
   "Math Title Slide",
   "Math Title and Body",
@@ -162,10 +162,6 @@ local function get_slides(lsn_plan_adoc_file)
           if not inside_table_p then
             curr_slide.numimages = curr_slide.numimages + 1
           end
-          if (curr_slide.numimages == 2) then
-            curr_slide.imageorientation = ''
-            curr_slide.suffix = '2'
-          end
         elseif directive == 'center' then
           if not inside_table_p then
             curr_slide.containscenter = true
@@ -215,7 +211,10 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.header = new_header
 
             -- print('curr slide header = ' .. curr_slide.header)
-            curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
+            curr_slide.section = ((curr_slide.level == 2) and
+              ((curr_slide.header:match('Launch') and 'Launch') or
+              (curr_slide.header:match('Investigate') and 'Investigate') or
+              (curr_slide.header:match('Synthesize') and 'Synthesize')))
           end
         end
       elseif c == '[' then
@@ -260,9 +259,9 @@ local function get_slides(lsn_plan_adoc_file)
   local n = #slides
   if n > 1 then
     local last_slide = slides[n]
-    if not last_slide.section and (last_slide.header == "Additional Exercises") then 
-      last_slide.section = 'Supplemental' 
-      curr_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
+    if not last_slide.section and (last_slide.header == "Additional Exercises") then
+      last_slide.section = 'Supplemental'
+      last_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
     end
   end
   return slides
@@ -293,15 +292,31 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
       elseif (slide.level == 2 and slide.section) then
-        local layout = curr_section .. slide.imageorientation .. slide.suffix
-        if not contains_string(slideLayouts, layout) then
-          print('WARNING: Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
+        if slide.numimages == 2 then slide.imageorientation = '' end
+        if curr_section == 'Investigate' then
+          if slide.numimages == 2 then slide.suffix = '2' end
+          if slide.suffix ~= '2' then
+            slide.suffix = ''
+          end
+        elseif curr_section == 'Launch' then
+          if slide.imageorientation == 'R' then
+            if slide.suffix ~= '' then slide.suffix = '' end
+          end
+        elseif curr_section == 'Synthesize' then
+          if slide.suffix ~= '' then
+            slide.suffix = ''
+          end
+        end
+        local curr_layout = curr_section .. slide.imageorientation .. slide.suffix
+        if not contains_string(allowedSlideLayouts, curr_layout) then
+          print('WARNING: Unknown slide template: ' .. curr_layout
             .. ' in ' .. os.getenv('PWD') .. "\n"
             .. '. Falling back to ' .. curr_section .. slide.imageorientation)
           slide.suffix = ''
+          curr_layout = curr_section .. slide.imageorientation
         end
         o:write('@slidebreak\n')
-        o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
+        o:write('{layout="', curr_layout, '"}\n')
         o:write('# ', curr_header, '\n\n')
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
