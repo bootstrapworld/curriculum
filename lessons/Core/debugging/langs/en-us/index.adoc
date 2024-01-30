@@ -11,17 +11,17 @@
 | Lesson Goals
 | Students will be able to:
 
-* Identify and explain the difference between syntax, contract, and logic errors
-* Use strategies to correct each kind of error
+- Identify and explain the difference between syntax, contract, and logic errors
+- Use strategies to correct each kind of error
 
 | Student-Facing Lesson Goals
 |
-* Let's learn how to read error messages, and use them to help fix coding errors
+- Let's learn how to read error messages, and use them to help fix coding errors
 
 | Key Points for the Facilitator
 |
-* Meta-cognition is especially important here. Make sure you give _lots_ of space for students to discuss their bug-fixing strategies
-* Productive struggle is critical in this lesson, to build up students' confidence in their ability to fix their own mistakes
+- Meta-cognition is especially important here. Make sure you give _lots_ of space for students to discuss their bug-fixing strategies
+- Productive struggle is critical in this lesson, to build up students' confidence in their ability to fix their own mistakes
 
 
 |Materials
@@ -36,52 +36,74 @@
 Students are introduced to _syntax errors_, the error messages they generate, and how to read those errors and fix them.
 
 === Launch
-People often think that computers can't make mistakes, because they are "just machines". But who builds those machines? Who programs them? _Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*
+People often think that computers can't make mistakes, because they are "just machines". 
+
+- But who builds those machines? 
+- Who programs them? 
+
+@lesson-point{_Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*}
+
+@slidebreak
 
 @right{@image{images/hopper.jpg, 200}} In the 1940s, computers weren't made from tiny microprocessors. They were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
 
+@slidebreak
+
 @right{@image{images/bug.jpg, 200}} She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*
+
+@slidebreak
 
 Knowing how to find and fix bugs is a valuable skill for any programmer, and the kind of logical thinking you gain by fixing errors can help you find mistakes _outside_ of a program as well!
 
 When you Run a program, you expect the computer to do three things:
 
-. Read the code
-. Run the code
-. Give you the result you expected
+- Read the code
+- Run the code
+- Give you the result you expected
 
-In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases:
+In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases@ifnotslide{:}@ifslide{.}
 
-. @vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
+@slidebreak
 
-. @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. For example, @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. However, the Contract for circle is `circle :: Number, String, String -> Image` so the  the `circle` function is expecting a Number for it's first argument and "hello" is a String! Like syntax errors, contract errors will also result in an error message.
+(1)@vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. 
+  * These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
 
-. @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
+(2) @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. 
+  * @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. 
+  * But look at the contract `circle :: Number, String, String -> Image`
+  * The `circle` function is expecting a Number for its first argument and "hello" is a String!  
+  * Like syntax errors, contract errors will also result in an error message.
+
+(3) @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! 
+  * When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
 === Investigate
-Here are a few simple examples of syntax errors - can you find the problem?
+Here are a few simple examples of syntax errors:
 
 - `"hello`
 - @ifproglang{pyret}{``1+2``} @ifproglang{wescheme}{``(+ 1 2``}
-
-+
 
 @lesson-point{
 Syntax Errors prevent the computer from _reading_ code
 }
 
+Can you find the problems?
+
+@slidebreak
+
 @lesson-instruction{
-- In pairs or small groups, complete @printable-exercise{syntax-errors.adoc}. For each piece of code, be sure to discuss as a team before deciding on the mistake.
+- Complete @printable-exercise{syntax-errors.adoc} in pairs or small groups. 
+- For each piece of code, be sure to discuss as a team before deciding on the mistake.
 }
 
 === Synthesize
 Have students share back their findings. Leave time for discussion! The key here is to have students reflect on how useful it is to _read the error messages_ first, even the few errors that may not be as helpful as the others.
 
-. Which syntax errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least helpful?
-. Which syntax errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which syntax errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least helpful?
+- Which syntax errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 == Contract Errors @duration{15 min}
 
@@ -89,19 +111,27 @@ Have students share back their findings. Leave time for discussion! The key here
 Students are introduced to _contract errors_. They read the error messages they generate, and discuss strategies to fix them.
 
 === Launch
-With no syntax errors, the computer can read our code and try to run it. But a running program can still have problems! Here are a few examples of programs that have perfect syntax, but will generate an error when we try to run them. Can you spot the problem?
+With no syntax errors, the computer can _read_ our code and try to run it. 
 
-@show{(code '(+ 1 "Zari"))}
+But a program can still have problems _running_! 
 
-@show{(code '(triangle "50" "solid" "blue"))}
+Here are a few examples of programs that have perfect syntax, but will generate an error when we try to run them. 
 
-@show{(code '(or "true" false))}
+- @show{(code '(+ 1 "Zari"))}
 
-@lesson-point{
-Contract Errors prevent the computer from _running_ code
-}
+- @show{(code '(triangle "50" "solid" "blue"))}
+
+- @show{(code '(or "true" false))}
+
+Can you spot the problems?
+
+@slidebreak
 
 A program might be running along just fine, but as soon as a function is given the wrong type of value, the program halts with an error!
+
+@lesson-point{
+Contract Errors stop the program from finishing _running_.
+}
 
 === Investigate
 @lesson-instruction{
@@ -111,11 +141,11 @@ In pairs or small groups, complete @printable-exercise{contract-errors.adoc}. Fo
 === Synthesize
 Have students share back their findings. Leave time for discussion! When facilitating this discussion, drive home the point that reading the error and consulting the Contracts are critical strategies for fixing these bugs.
 
-. Which Contract errors were the easiest to find? The hardest?
-. Which error messages were the most helpful? Least helpful?
-. Which Contract errors do _you_ make the most often?
-. What strategies could we use to avoid making them in the first place?
-. What strategies could we use to fix them faster?
+- Which Contract errors were the easiest to find? The hardest?
+- Which error messages were the most helpful? Least helpful?
+- Which Contract errors do _you_ make the most often?
+- What strategies could we use to avoid making them in the first place?
+- What strategies could we use to fix them faster?
 
 == Logic Errors @duration{20 min}
 
@@ -129,24 +159,44 @@ Ho-ming wanted to write a function to produce green triangles, and she went stra
 
 @show{(code '(define (gt size) (triangle 100 "solid" "green")))}
 
-She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
+@slidebreak
 
-Did she have a syntax error? Why or why not?
-Did she have a Contract error? Why or why not?
+She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. 
 
-Ho-ming's mistake was that the function `gt` always made triangles of size 100! It took in `size` as a variable, but then didn't use it all. The computer had no trouble reading her code, and she followed the Contract for `triangle`. _As far as the computer is concerned, there's nothing wrong with her code!_
+When she typed @show{(code '(gt 100))} she got a solid green triangle of size 100, and she was thrilled! 
+
+But when she tried to make triangles of _different_ sizes, her heart broke: all of the triangles were of size 100!
+
+- Did she have a syntax error? Why or why not?
+- Did she have a Contract error? Why or why not?
+
+@slidebreak
+
+Ho-ming's mistake was that the function `gt` always made triangles of size 100! 
+
+It took in `size` as a variable, but then didn't use it all. 
+
+The computer had no trouble reading her code, and she followed the Contract for `triangle`. 
+
+_As far as the computer is concerned, there's nothing wrong with her code!_
+
+@slidebreak
 
 @lesson-point{
-Logic Errors don't prevent code from running at all!
+Logic Errors don't prevent code from running!
 }
 
-Ho-ming's computer had no trouble reading or running her code. The problem is that the code didn't work the way she expected. Another way to think of it is that the bug isn't in the code at all - _it's in the way she was thinking when she wrote it._
+The problem is that the code didn't work the way she expected. Another way to think of it is that the bug isn't in the code at all - _it's in the way she was thinking when she wrote it._
 
 @lesson-point{
 Logic Errors occur in our brains, not on the computer!
 }
 
-The only way to prevent logic errors - or to fix them when they happen! - is to be disciplined about the way we program. By thinking through a problem in multiple ways, we are less likely to make a mistake. What are some other ways Ho-ming could have thought through this function?
+@slidebreak
+
+The only way to prevent logic errors - or to fix them when they happen! - is to be disciplined about the way we program. By thinking through a problem in multiple ways, we are less likely to make a mistake. 
+
+What are some other ways Ho-ming could have thought through this function?
 
 - *She could have written the Contract*, which might have put more emphasis on the input.
 - *She could have written a Purpose Statement*, which would have forced her to talk about what happens to that input.
@@ -161,8 +211,9 @@ The Design Recipe helps us avoid logic errors, by demanding that we think throug
 }
 
 === Synthesize
-Have students share back their findings. Leave time for discussion! The main idea for this discussion is that Logic Errors happen in the programmer's mind, _not_ in the code. The best way to help prevent them is to think things through completely, and there are many strategies to do this. The Design Recipe, for example, forces students to think through the same solution in multiple representation - and the computer checks that those representations match.
 
-. Did you find any logic errors that you've made in the past?
-. What can you do in your own programming, to minimize the chances of logic errors?
+@teacher{Have students share back their findings. Leave time for discussion! The main idea for this discussion is that Logic Errors happen in the programmer's mind, _not_ in the code. The best way to help prevent them is to think things through completely, and there are many strategies to do this. The Design Recipe, for example, forces students to think through the same solution in multiple representation - and the computer checks that those representations match.}
+
+- Did you find any logic errors that you've made in the past?
+- What can you do in your own programming, to minimize the chances of logic errors?
 

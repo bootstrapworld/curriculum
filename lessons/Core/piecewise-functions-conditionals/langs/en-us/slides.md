@@ -120,18 +120,18 @@ _The program told us that the shape was unknown. Think about other functions tha
 
 @ifproglang{pyret}{_Pyret allows us to write if-expressions, which contain:_
 
-. _the keyword `if`, followed by a condition._
-. _a colon (`:`), followed by a rule for what the function should do if the condition is_ `true`
-. _an `else:`, followed by a rule for what to do if the condition is_ `false`
+1. _the keyword `if`, followed by a condition._
+2. _a colon (`:`), followed by a rule for what the function should do if the condition is_ `true`
+3. _an `else:`, followed by a rule for what to do if the condition is_ `false`
 
 _We can chain them together to create multiple rules, with the last `else:` being our fallback in case every other condition is `false`._
 }
 
 @ifproglang{wescheme}{_WeScheme allows us to write piecewise functions as follows:_
 
-. _the keyword `cond`, followed by a list of conditions_
-. _each condition is a Boolean expression, followed by a rule for what the function should do if the condition is_ `true`.
-. _ending with an `else` statement, being our fallback in case every other condition is_ `false`.
+1. _the keyword `cond`, followed by a list of conditions_
+2. _each condition is a Boolean expression, followed by a rule for what the function should do if the condition is_ `true`.
+3. _ending with an `else` statement, being our fallback in case every other condition is_ `false`.
 }
 -->
 

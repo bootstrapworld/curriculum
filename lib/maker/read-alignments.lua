@@ -38,6 +38,6 @@ practices_list = {
   -- read_alignment_file('MLR', 'Math Lang. Routines', 'practices/practices-mlr-dictionary.json', 'https://achievethecore.org/peersandpedagogy/developing-math-language-routines/'),
   read_alignment_file('SPLC', 'Social Justice', 'practices/practices-sj-dictionary.json',          'https://www.learningforjustice.org/sites/default/files/2017-06/TT_Social_Justice_Standards_0.pdf' ),
   read_alignment_file('NGSS', 'Science and Engineering', 'practices/practices-sep-dictionary.json', 'https://ngss.nsta.org/practicesfull.aspx' ),
-  read_alignment_file('CCSS', 'Math', 'practices/practices-cc-dictionary.json',  'http://corestandards.org/Math/'),
+  read_alignment_file('CCSS', 'Common Core Math', 'practices/practices-cc-dictionary.json',  'http://corestandards.org/Math/'),
   read_alignment_file('K12CS', 'K12CS', 'practices/practices-k12cs-dictionary.json', 'https://k12cs.org' ),
 }

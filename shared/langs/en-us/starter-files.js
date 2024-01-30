@@ -205,7 +205,7 @@ const GameBasics = {
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Y0twOEdXPh15XcdjG_GGSmBIjkctfCj3"
+      "url": "https://code.pyret.org/editor#share=1_4uSefNKa07Ye-iNqh6fh1snxqaMlySd"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
@@ -471,6 +471,18 @@ const DSdesmos = {
   }
 }
 
+const Desmos = {
+  "images-code":{
+    "title": "Matching Images to Code (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc90a1937b6430d836b67e7"
+    },
+    "wescheme":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fecf203a29e040d182be6c6"
+    }
+  }
+}
+
 const Flags = {
   "flags": {
     "title": "Flags Starter File",
@@ -501,7 +513,7 @@ const Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1_a7C_8YOfOuH1tRaKMcBMShpGFmgSPk_"
+      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE&v=0c33ff0"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"
@@ -723,19 +735,19 @@ const Projects = {
   "functions": {
     "title": "Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BmQe7uPDEezvLUwwoSN_j0bgbmm_7bY1"
+      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=2qBdfBqww1"
+      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
     }
   },
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Cv5gmq6FmMq_LwUKOvvWXLbi8v_wDSqh"
+      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=F7PeMwD2Wj"
+      "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
     }
   },
   "logos": {
@@ -938,6 +950,7 @@ const allStarterFiles = {
   ...MoreDS, 
   ...DSadvanceDisplays,
   ...DSdesmos,
+  ...Desmos,
   ...MoreAlg,
   ...EarlyMath,
   ...Projects, 
