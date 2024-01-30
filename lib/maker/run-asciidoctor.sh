@@ -14,14 +14,14 @@ rm -f $errfile
 
 if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
-    asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $errfile 2>&1
+    asciidoctor -a linkcss -a reproducible -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $errfile 2>&1
   else
     echo $'\e[1;31m'🐌 Will be slow! Running asciidoctor once per file because DEBUGADOC=$DEBUGADOC $'\e[0m'
     for f in $(cat $ADOC_INPUT); do
       rm -f $errfile; touch $errfile
       # echo asciidoctor $f
       echo -n .
-      asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $f > $errfile 2>&1
+      asciidoctor -a linkcss -a reproducible -a stylesheet=$cssfile -a cachedir=.cached/ -B . $f > $errfile 2>&1
       if test -s "$errfile"; then
         echo
         echo Error occurred while asciidoctoring $f
