@@ -52,7 +52,7 @@ local function get_imageorientation(containscenter, numimages)
   return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
 end
 
-local allowedSlideLayouts = {
+local allowed_slide_layouts = {
   "Core Title Slide",
   "Math Title Slide",
   "Math Title and Body",
@@ -91,17 +91,6 @@ local function newslide()
     containscenter = false,
     imageorientation = 'R',
   }
-end
-
-local function contains_string (tab, val)
-    for index, value in ipairs(tab) do
-        -- We grab the first index of our sub-table instead
-        if value == val then
-            return true
-        end
-    end
-
-    return false
 end
 
 local function set_imageorientation(slide)
@@ -308,7 +297,7 @@ local function make_slides_file(lplan_file, slides_file)
           end
         end
         local curr_layout = curr_section .. slide.imageorientation .. slide.suffix
-        if not contains_string(allowedSlideLayouts, curr_layout) then
+        if not memberp(curr_layout, allowed_slide_layouts) then
           print('WARNING: Unknown slide template: ' .. curr_layout
             .. ' in ' .. os.getenv('PWD') .. "\n"
             .. '. Falling back to ' .. curr_section .. slide.imageorientation)
