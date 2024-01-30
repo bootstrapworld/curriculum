@@ -48,10 +48,6 @@ local function read_if_poss(i, xxx)
   return true
 end
 
-local function get_imageorientation(containscenter, numimages)
-  return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
-end
-
 local allowed_slide_layouts = {
   "Core Title Slide",
   "Math Title Slide",
@@ -100,6 +96,14 @@ local function set_imageorientation(slide)
     'R')
 end
 
+local function set_current_slide(slides, curr_slide)
+  if curr_slide.text ~= '' then
+    set_imageorientation(curr_slide)
+    slides[#slides + 1] = curr_slide
+  end
+end
+
+
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   local i = io.open_buffered(lsn_plan_adoc_file)
@@ -113,10 +117,7 @@ local function get_slides(lsn_plan_adoc_file)
   while true do
     local c = i:read(1)
     if not c then
-      if curr_slide.text ~= '' then
-        set_imageorientation(curr_slide)
-        slides[#slides + 1] = curr_slide
-      end
+      set_current_slide(slides, curr_slide)
       break
     elseif c == '\n' then
       if not inside_css_p and
@@ -139,10 +140,7 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.suffix = '-RP'
         curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
-        if curr_slide.text ~= '' then
-          set_imageorientation(curr_slide)
-          slides[#slides + 1] = curr_slide
-        end
+        set_current_slide(slides, curr_slide)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
@@ -191,10 +189,7 @@ local function get_slides(lsn_plan_adoc_file)
               break
             end
           else
-            if curr_slide.text ~= '' then
-              set_imageorientation(curr_slide)
-              slides[#slides + 1] = curr_slide
-            end
+            set_current_slide(slides, curr_slide)
             curr_slide = newslide()
             curr_slide.level = new_level
             curr_slide.header = new_header
