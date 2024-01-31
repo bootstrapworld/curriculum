@@ -48,11 +48,7 @@ local function read_if_poss(i, xxx)
   return true
 end
 
-local function get_imageorientation(containscenter, numimages)
-  return ((containscenter and 'C') or ((numimages == 0) and '') or 'R')
-end
-
-local slideLayouts = {
+local allowed_slide_layouts = {
   "Core Title Slide",
   "Math Title Slide",
   "Math Title and Body",
@@ -93,23 +89,20 @@ local function newslide()
   }
 end
 
-local function contains_string (tab, val)
-    for index, value in ipairs(tab) do
-        -- We grab the first index of our sub-table instead
-        if value == val then
-            return true
-        end
-    end
-
-    return false
-end
-
 local function set_imageorientation(slide)
   slide.imageorientation = ((slide.numimages == 2) and '') or 
     ((slide.containscenter and 'C') or 
     ((slide.numimages == 0) and '') or 
     'R')
 end
+
+local function set_current_slide(slides, curr_slide)
+  if curr_slide.text ~= '' then
+    set_imageorientation(curr_slide)
+    slides[#slides + 1] = curr_slide
+  end
+end
+
 
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
@@ -124,10 +117,7 @@ local function get_slides(lsn_plan_adoc_file)
   while true do
     local c = i:read(1)
     if not c then
-      if curr_slide.text ~= '' then
-        set_imageorientation(curr_slide)
-        slides[#slides + 1] = curr_slide
-      end
+      set_current_slide(slides, curr_slide)
       break
     elseif c == '\n' then
       if not inside_css_p and
@@ -150,10 +140,7 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.suffix = '-RP'
         curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
-        if curr_slide.text ~= '' then
-          set_imageorientation(curr_slide)
-          slides[#slides + 1] = curr_slide
-        end
+        set_current_slide(slides, curr_slide)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
@@ -161,10 +148,6 @@ local function get_slides(lsn_plan_adoc_file)
         if directive == 'image' then
           if not inside_table_p then
             curr_slide.numimages = curr_slide.numimages + 1
-          end
-          if (curr_slide.numimages == 2) then
-            curr_slide.imageorientation = ''
-            curr_slide.suffix = '2'
           end
         elseif directive == 'center' then
           if not inside_table_p then
@@ -206,16 +189,16 @@ local function get_slides(lsn_plan_adoc_file)
               break
             end
           else
-            if curr_slide.text ~= '' then
-              set_imageorientation(curr_slide)
-              slides[#slides + 1] = curr_slide
-            end
+            set_current_slide(slides, curr_slide)
             curr_slide = newslide()
             curr_slide.level = new_level
             curr_slide.header = new_header
 
             -- print('curr slide header = ' .. curr_slide.header)
-            curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
+            curr_slide.section = ((curr_slide.level == 2) and
+              ((curr_slide.header:match('Launch') and 'Launch') or
+              (curr_slide.header:match('Investigate') and 'Investigate') or
+              (curr_slide.header:match('Synthesize') and 'Synthesize')))
           end
         end
       elseif c == '[' then
@@ -260,9 +243,9 @@ local function get_slides(lsn_plan_adoc_file)
   local n = #slides
   if n > 1 then
     local last_slide = slides[n]
-    if not last_slide.section and (last_slide.header == "Additional Exercises") then 
-      last_slide.section = 'Supplemental' 
-      curr_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
+    if not last_slide.section and (last_slide.header == "Additional Exercises") then
+      last_slide.section = 'Supplemental'
+      last_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
     end
   end
   return slides
@@ -293,15 +276,31 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section then curr_section = slide.section end
       if slide.level <= 1 then curr_header = slide.header
       elseif (slide.level == 2 and slide.section) then
-        local layout = curr_section .. slide.imageorientation .. slide.suffix
-        if not contains_string(slideLayouts, layout) then
-          print('WARNING: Unknown slide template: ' .. curr_section .. slide.imageorientation .. slide.suffix
+        if slide.numimages == 2 then slide.imageorientation = '' end
+        if curr_section == 'Investigate' then
+          if slide.numimages == 2 then slide.suffix = '2' end
+          if slide.suffix ~= '2' then
+            slide.suffix = ''
+          end
+        elseif curr_section == 'Launch' then
+          if slide.imageorientation == 'R' then
+            if slide.suffix ~= '' then slide.suffix = '' end
+          end
+        elseif curr_section == 'Synthesize' then
+          if slide.suffix ~= '' then
+            slide.suffix = ''
+          end
+        end
+        local curr_layout = curr_section .. slide.imageorientation .. slide.suffix
+        if not memberp(curr_layout, allowed_slide_layouts) then
+          print('WARNING: Unknown slide template: ' .. curr_layout
             .. ' in ' .. os.getenv('PWD') .. "\n"
             .. '. Falling back to ' .. curr_section .. slide.imageorientation)
           slide.suffix = ''
+          curr_layout = curr_section .. slide.imageorientation
         end
         o:write('@slidebreak\n')
-        o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
+        o:write('{layout="', curr_layout, '"}\n')
         o:write('# ', curr_header, '\n\n')
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
