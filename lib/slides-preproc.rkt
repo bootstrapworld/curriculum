@@ -51,6 +51,8 @@
 
 (define *outputting-table?* #f)
 
+(define *single-question?* #f)
+
 (define *definitions* '())
 
 (define (massage-arg arg)
@@ -671,7 +673,7 @@
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)
                               (expand-directives:string->port text o))]
-                           [(member directive '("lesson-instruction" "lesson-roleplay"))
+                           [(member directive '("lesson-instruction" "lesson-roleplay" "indented"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(member directive '("clear" "optional"))
@@ -742,14 +744,18 @@
                               (expand-directives:string->port text o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
+                              (set! *single-question?* (= (length (regexp-match* "@Q{" text)) 1))
                               (expand-directives:string->port text o)
+                              (set! *single-question?* #f)
                               (ensure-teacher-notes)
                               (set! *output-answers?* #t)
                               (expand-directives:string->port text teacher-notes)
                               (set! *output-answers?* #f))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive)])
-                              (display "\n* " o)
+                              (display "\n" o)
+                              (unless *single-question?*
+                                (display "* " o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
