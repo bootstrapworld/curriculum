@@ -1,0 +1,106 @@
+= Distribution and Code
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  div.circleevalsexp .value,
+  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  .sect1 > h2:first-child { padding: 0 5px !important; }
+  .sect1 > h2 { font-size: 11pt !important; }
+  .autonum { padding: 0 !important; }
+</style>
+++++
+
+Open the @starter-file{comm-and-assoc}, which you will use to investigate four functions:
+
+[.contracts, cols="1,1", frame="none", grid="none"]
+|===
+| @show{ (contracts
+'("beside" ("Image" "Image") "Image")
+'("above" ("Image" "Image") "Image")
+)}
+| @show{ (contracts
+'("rotate" ("Number" "Image") "Image")
+'("scale" ("Number" "Image") "Image")
+)}
+
+|===
+
+For each function, draw a second Circle of Evaluation that distributes the _outer_ function over the _inner_ function. Sketch the image that you think each Circle will return. Finally, test the code in Pyret.
+
+== Does @show{(code 'scale)} distribute over @show{(code 'beside)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
+|===
+
+| Circle of Evaluation |@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))}
+
+| Sketch | @image{../images/aqua-orange.png, 50} | @ifsoln{@image{../images/aqua-orange.png, 50}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes.}} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
+
+== Does @show{(code 'scale)} distribute over @show{(code 'above)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
+|===
+
+| Circle of Evaluation | @show{(coe '(scale 2 (above  purple-square orange-dot)))}
+| @ifsoln{@show{(coe  '(above (scale 2 orange-dot) (scale 2 purple-square)))}}
+
+| Sketch
+| @image{../images/orange-purple.png, 20}
+| @ifsoln{@image{../images/orange-purple.png, 20}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes.}} @hspace{2em} Is `scale` distributive over `above`? @fitb{}{@ifsoln{It is.}}
+
+
+== Does @show{(code 'rotate)} distribute over @show{(code 'beside)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
+|===
+
+| Circle of Evaluation | @show{(coe '(rotate 30 (beside  blue-ellipse yellow-rect)))}
+| @ifsoln{@show{(coe  '(beside (rotate 30 blue-ellipse) (rotate 30 yellow-rect)))}}
+
+| Sketch
+| @image{../images/blue-yellow.png, 50}
+| @ifsoln{@image{../images/blue-yellow-2.png, 50}}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `beside`? @fitb{}{@ifsoln{It is not.}}
+
+
+
+== Does @show{(code 'rotate)} distribute over @show{(code 'above)}?
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
+|===
+
+| Circle of Evaluation | @ifsoln{@show{(coe '(rotate 45 (above  bootstrap yellow-rect)))}}
+| @show{(coe  '(above (rotate 45 bootstrap) (rotate 45 yellow-rect)))}
+
+| Sketch
+| @ifsoln{@image{../images/green-yellow-2.png, 30}}
+| @image{../images/green-yellow.png, 30}
+
+|===
+
+@n Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `above`? @fitb{}{@ifsoln{It is not.}}
+
+
+
+
+
+
+
+
+
+
+
+
+
