@@ -720,6 +720,15 @@ const EarlyMath = {
       "url": "https://www.wescheme.org/openEditor?publicId=5hRzeYdvpB"
     }
   },
+  "negation":{
+    "title": "Negation Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
+    }
+  },
 }
 
 const Projects = {

@@ -8,7 +8,7 @@ td > .content > .paragraph > * { vertical-align: middle; }
 </style>
 ++++
 
-@n Predict what image each Circle of Evaluation will produce. Then, test your code.
+@n Predict what image each Circle of Evaluation will produce. Then, test your code using the @starter-file{negation}.
 
 [.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
 |===
@@ -32,7 +32,7 @@ td > .content > .paragraph > * { vertical-align: middle; }
 
 |===
 
-@n What happens when you rotate an image 90 degrees? 180 degrees? @fitb{}{}
+@n What did you discover? (Some questions to consider: What happens when you rotate an image 90 degrees? 180 degrees? Were rotations clockwise or counter-clockwise?) @fitb{}{}
 
 @fitb{}{}
 
@@ -40,7 +40,7 @@ td > .content > .paragraph > * { vertical-align: middle; }
 
 @vspace{1ex}
 
-@n The table below includes negation, absolute value, and composed rotations. Predict what image each Circle of Evaluation will produce. Then, test your code.
+@n The table below includes negation, absolute value, and composed rotations. Predict what image each Circle of Evaluation will produce. Then, test your code using the @starter-file{negation}.
 
 [.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
 |===
@@ -51,7 +51,7 @@ td > .content > .paragraph > * { vertical-align: middle; }
 | @show{(coe '(rotate -30 (rotate 30 hello)))}
 | @show{(coe '(rotate (num-abs 225) hello))}
 
-| @image{../images/hello-180.png, 20}
+| @ifsoln{@image{../images/hello-180.png, 20}}
 | @ifsoln{@image{../images/hello.png, 20}}
 | @ifsoln{@image{../images/hello-45.png, 20}}
 | @ifsoln{@image{../images/hello.png, 20}}
@@ -61,7 +61,7 @@ td > .content > .paragraph > * { vertical-align: middle; }
 
 @vspace{1ex}
 
-By including `num-abs` and `negate`, the Circles of Evaluation were needlessly complex code. Write simpler, cleaner line of equivalent code. Test that your code produces an identical output.
+By including `num-abs` and `negate`, the Circles of Evaluation above were needlessly complex. Streamline the complicated code so that it produces an identical output without using `negate` or `num-abs`. Test your code in the @starter-file{negation}.
 
 @n @show{(code '(rotate (negate 180) hello))} @fitb{}{@ifsoln{@show{(code '(rotate 180 hello))}}}
 
