@@ -1,0 +1,76 @@
+[.landscape]
+= Exploring Rotations
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+@n Predict what image each Circle of Evaluation will produce. Then, test your code.
+
+[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+|===
+
+| @show{(coe '(rotate 45 hello))}
+| @show{(coe '(rotate 90 hello))}
+| @show{(coe '(rotate 135 hello))}
+| @show{(coe '(rotate 180 hello))}
+| @show{(coe '(rotate 225 hello))}
+| @show{(coe '(rotate 270 hello))}
+| @show{(coe '(rotate 315 hello))}
+
+| @image{../images/hello-45.png, 20}
+| @ifsoln{@image{../images/hello-90.png, 10}}
+| @ifsoln{@image{../images/hello-135.png, 20}}
+| @ifsoln{@image{../images/hello-180.png, 20}}
+| @ifsoln{@image{../images/hello-225.png, 20}}
+| @ifsoln{@image{../images/hello-270.png, 10}}
+| @ifsoln{@image{../images/hello-315.png, 20}}
+
+
+|===
+
+@n What happens when you rotate an image 90 degrees? 180 degrees? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+@n The table below includes negation, absolute value, and composed rotations. Predict what image each Circle of Evaluation will produce. Then, test your code.
+
+[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+|===
+
+| @show{(coe '(rotate (negate 180) hello))}
+| @show{(coe '(rotate (negate (negate 90)) hello))}
+| @show{(coe '(rotate (num-abs -45) hello))}
+| @show{(coe '(rotate -30 (rotate 30 hello)))}
+| @show{(coe '(rotate (num-abs 225) hello))}
+
+| @image{../images/hello-180.png, 20}
+| @ifsoln{@image{../images/hello.png, 20}}
+| @ifsoln{@image{../images/hello-45.png, 20}}
+| @ifsoln{@image{../images/hello.png, 20}}
+| @ifsoln{@image{../images/hello-225.png, 20}}
+
+|===
+
+@vspace{1ex}
+
+By including `num-abs` and `negate`, the Circles of Evaluation were needlessly complex code. Write simpler, cleaner line of equivalent code. Test that your code produces an identical output.
+
+@n @show{(code '(rotate (negate 180) hello))} @fitb{}{@ifsoln{@show{(code '(rotate 180 hello))}}}
+
+@n @show{(code '(rotate (negate (negate 90)) hello))} @fitb{}{@ifsoln{@show{(code '(rotate 90 hello))}}}
+
+@n @show{(code '(rotate (num-abs -45) hello))} @fitb{}{@ifsoln{@show{(code '(rotate 45 hello))}}}
+
+@n @show{(code '(rotate -30 (rotate 30 hello)))}
+@fitb{}{@ifsoln{@show{(code 'hello)}}}
+
+@n @show{(code '(rotate (num-abs 225) hello))}
+@fitb{}{@ifsoln{@show{(code '(rotate 225 hello))}}}
