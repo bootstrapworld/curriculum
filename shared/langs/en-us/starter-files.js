@@ -612,7 +612,7 @@ const MoreAlg = {
   "inequalities-compound": {
     "title": "Compound Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre"
+      "url": "https://code.pyret.org/editor#share=1wmfqAhQelP4L49nVuqosbfjcB0gpfS6T&v=0c33ff0"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"

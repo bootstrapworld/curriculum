@@ -4,8 +4,9 @@
 #content { display: block !important; }
 </style>
 ++++
-Open the @starter-file{animals} and click "Run".
 
+[.linkInstructions]
+Open the @starter-file{animals} and click "Run". +
 In the Interactions Window on the right, type `animals-table` and hit "Enter" to see the default view of the table.
 
 == sort
@@ -45,15 +46,14 @@ adopted quickest...*
 
 There are many other functions available to us in Pyret. We can describe them using contracts. The Contract for `sort` is:
 
-@show{(contract "sort" '("Table" "String" "Boolean") "Table")}
+@indented{@show{(contract "sort" '("Table" "String" "Boolean") "Table")}}
 
 - Each Contract begins with the function name: @fitb{10em}{_in this case_ `sort`}
 - Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Table, String, Boolean}
 - And then declares the data type of the Range it will return. @fitb{10em}{_in this case_ Table}
+- Contracts can also be written with more detail, by adding _variable names_ in the Domain:
 
-Contracts can also be written with more detail, by adding _variable names_ in the Domain:
-
-@show{(contract 'sort '((table-name Table) (column-name String) (order Boolean)) "Table")}
+@indented{@show{(contract 'sort '((table-name Table) (column-name String) (order Boolean)) "Table")}}
 
 @vspace{1ex}
 
