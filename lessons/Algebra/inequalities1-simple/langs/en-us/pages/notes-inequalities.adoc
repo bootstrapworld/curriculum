@@ -6,18 +6,109 @@
 </style>
 ++++
 
-- Sometimes we want to _ask questions_ about data. For example, is `x` greater than `y`? Is one string equal to another? These questions can't be answered with *Numbers*. Instead, they are answered with a new data type called a *Boolean*.
+**Sometimes we want to _ask questions_ about data:**
 
-- Video games use Booleans for many things: asking when a player's health is equal to zero, whether two characters are close enough to bump into one another, or if a character's coordinates put it off the edge of the screen.
+@vspace{1ex}
 
-- A Boolean value is either `true` or `false`. Unlike Numbers, Strings, and Images, Booleans have only two possible values.
+@indented{
+- Is `x` greater than `y`? 
+- Is one string equal to another? 
+}
 
-- You already know some functions that produce Booleans, such as `<` and `>`! Our programming language has them, too: @show{(code '(< 3 4))}, @show{(code '(> 10 2))}, and @show{(code '(= -10 19))}.
+@vspace{1ex}
 
-- We also have ways of writing *Compound Inequalities*, so we can ask more complicated questions using the `and` and `or` functions. 
+These questions are answered with a new data type called a @vocab{Boolean}. 
 
-** @show{(code '(and (> 3 4) (< 10 2)))} translates to "three is greater than four _and_ ten is less than two". This will evaluate to `false`, since the `and` function requires that both sub-expressions be `true`.
+@vspace{1ex}
 
-** @show{(code '(or (> 3 4) (< 10 2)))}, which translates to "three is greater than four _or_ ten is less than two". This will evaluate to `true`, since the `or` function only requires that one sub-expression be `true`.
+[.indentedpara]
+--
+Unlike Numbers, Strings, and Images, Booleans have only two possible values. A Boolean value is either `true` or `false`. 
 
-- The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images: @show{(coe `(and (> 3 4) (< 10 2)))}  @show{(coe `(or (> 3 4) (< 10 2)))}
+You already know some functions that produce Booleans, such as `<` and `>`!
+
+@vspace{1ex}
+
+Our programming language has them, too. We can evaluate:
+
+[cols="^1a,^1a,^1a"]
+|===
+| @show{(code '(< 3 4))}
+| @show{(code '(> 2 10))}
+| @show{(code '(= -10 19))}
+
+| "3 is less than 4" is `true`
+| "2 is greater than 10" is `false`
+| "-10 is equal to 19" is `false`
+|===
+
+--
+
+@vspace{1ex}
+
+**We can also ask more complicated questions:**
+
+@vspace{1ex}
+
+@indented{
+- Is the elephant small enough and light enough to ride in the boat?
+- Do we have enough rice and enough time to make it for dinner? 
+}
+
+@vspace{2ex}
+
+Our programming language uses the `and` and `or` functions to combine to **_Simple Inequalities_** to make a @vocab{Compound Inequality}.
+
+@vspace{1ex}
+
+[.indentedpara]
+--
+- The `and` function requires that **both** sub-expressions be `true`.
+- The `or` function requires that **at least one** sub-expression be `true`.
+
+@vspace{1ex}
+
+[cols="^3a, ^3a"]
+|===
+| @show{(code '(and (> 5 6) (< 7 9)))} 
+| @show{(code '(or (> 5 6) (< 7 9)))} 
+
+| "5 is greater than 6 _and_ 7 is less than 9"
+| "5 is greater than 6 _or_ 7 is less than 9"
+
+| This will evaluate to `false`, +
+because the expressions aren't both `true`.
+| This will evaluate to `true`, +
+because at least one of the expressions is `true`.
+|===
+
+--
+
+@vspace{1ex}
+
+The Circles of Evaluation work the same way with Booleans that they do with Numbers, Strings and Images. 
+
+@vspace{1ex}
+
+[.indentedpara]
+--
+
+[cols="^3a,^3a"]
+|===
+| @show{(coe '(and (> 5 6) (< 7 9)))}   
+| @show{(coe '(or (> 5 6) (< 7 9)))}
+|===
+--
+
+@vspace{1ex}
+
+Video games use Booleans for many things including: 
+
+@vspace{1ex}
+
+@indented{
+- asking when a player's health is equal to zero
+- determining whether two characters are close enough to bump into one another
+- figuring out if a character's coordinates put it off the edge of the screen
+
+}
