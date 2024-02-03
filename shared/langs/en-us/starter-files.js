@@ -723,7 +723,7 @@ const EarlyMath = {
   "negation":{
     "title": "Negation Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
