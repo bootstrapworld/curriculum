@@ -7,6 +7,8 @@
 .ulist li { border: solid 1px green; height: 1.5rem; position: relative;}
 .ulist li p { border: solid 1px blue; }
 .ulist li p .fitb{ border: solid 1px red; }
+td { padding: 5px !important; }
+tr { height: 25px; }
 
 @media screen {
 	.ulist p { min-height: 1.5rem !important; }
@@ -16,46 +18,37 @@
 
 @n An ice cream truck sells 2-scoop cones, and each scoop can be Chocolate, Vanilla, or Strawberry. They also let you choose *one* topping: whipped cream or sprinkles. In the space below, draw the tree-diagram for all the possible ice cream cones you can order (with toppings!):
 
-@ifnotsoln{ @vspace{40ex} }
+[.FillVerticalSpace, cols="1", frame="none", grid="none"]
+|===
+| @ifsoln{@image{../images/ice-cream-tree.png}}
+|===
 
-@ifsoln{@image{../images/ice-cream-tree.png}}
 
-@n How many different permutations are there for these ice cream cones?
-@ifsoln{ @math{\mbox{permute-w-replace}(4, 2) \times 3 = 4^2 \times 3 = 48} }
-@vspace{10ex}
+@n How many permutations are there for these 2-scoop cones and toppings?
+@fitb{}{@ifsoln{ @math{\mbox{permute-w-replace}(3, 2) \times 2 = 3^2 \times 2 = 27} }}
 
-@n Each 2-scoop cone costs $3.99, but if you pick two _different_ flavors you can save $0.50. In the space below, we've started making an organized list of the possibilities for ice cream orders where the two flavors are different, listing the bottom scoop's flavor & the top scoop's flavor.  Complete the list.
+@n Now the truck adds a 4th-flavor: _Rocky Road_. To get more people trying new flavors, the truck offers $1 off a 2-scoop cone, as long as both scoops are different flavors. In the space below, we've started making a list of every possible 2-scoop cone where both scoops are different. Can you finish the list?
 
-@fitb{}{Chocolate & Vanilla}
+[cols="^1,^1"]
+|===
+| Bottom Scoop 				| Top Scoop
 
-@fitb{}{Chocolate & Strawberry}
-
-@fitb{}{Chocolate & Rocky Road}
-
-@fitb{}{Vanilla & @ifnotsoln{...} @ifsoln{Chocolate}}
-
-@fitb{}{@ifsoln{Vanilla & Strawberry}}
-
-@fitb{}{@ifsoln{Vanilla & Rocky Road}}
-
-@fitb{}{@ifsoln{Strawberry & Vanilla}}
-
-@fitb{}{@ifsoln{Strawberry & Rocky Road}}
-
-@fitb{}{@ifsoln{Strawberry & Chocolate}}
-
-@fitb{}{@ifsoln{Rocky Road & Vanilla}}
-
-@fitb{}{@ifsoln{Rocky Road & Strawberry}}
-
-@fitb{}{@ifsoln{Rocky Road & Chocolate}}
+| Chocolate					| Vanilla
+| Chocolate					| Strawberry
+| Chocolate					| Rocky Road
+| Vanilla 					| Chocolate
+| @ifsoln{Vanilla}			| @ifsoln{Strawberry}
+| @ifsoln{Vanilla}			| @ifsoln{Rocky Road}
+| @ifsoln{Strawberry}		| @ifsoln{Vanilla}
+| @ifsoln{Strawberry}		| @ifsoln{Rocky Road}
+| @ifsoln{Strawberry}		| @ifsoln{Chocolate}
+| @ifsoln{Rocky Road}		| @ifsoln{Vanilla}
+| @ifsoln{Rocky Road}		| @ifsoln{Strawberry}
+| @ifsoln{Rocky Road}		| @ifsoln{Chocolate}
+|===
 
 @n How many different permutations are there for these ice cream cones?
 
-@ifnotsoln{
-@fitb{}{}
+@fitb{}{@ifsoln{ @math{\mbox{permute-wo-replace}(4, 2) \times 3 = \frac{4!}{(4 2)!} \times 3 = 48} }}
 
 @fitb{}{}
-}
-
-@ifsoln{ @math{\mbox{permute-wo-replace}(4, 2) \times 3 = \frac{4!}{(4 2)!} \times 3 = 48} }
