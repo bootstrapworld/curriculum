@@ -513,7 +513,7 @@ const Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"
@@ -723,7 +723,7 @@ const EarlyMath = {
   "negation":{
     "title": "Negation Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
@@ -732,7 +732,7 @@ const EarlyMath = {
   "distributive-prop": {
     "title": "Distributive Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
@@ -744,7 +744,7 @@ const Projects = {
   "functions": {
     "title": "Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
@@ -753,7 +753,7 @@ const Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
