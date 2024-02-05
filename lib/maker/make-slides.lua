@@ -109,6 +109,8 @@ local function get_slides(lsn_plan_adoc_file)
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
   local inside_table_p = false
+  local table_numcols = 0
+  local table_header = false
   local curr_slide = newslide()
   local inside_css_p = false
   local beginning_of_line_p = true
@@ -202,8 +204,6 @@ local function get_slides(lsn_plan_adoc_file)
           end
         end
       elseif c == '[' then
-        local table_numcols = 0
-        local table_header = false
         local L = i:read_line()
         if not L then break
         elseif L:match('cols=[%d"\']') then
@@ -215,11 +215,6 @@ local function get_slides(lsn_plan_adoc_file)
             _, table_numcols = table_cols:gsub(',', 'x')
           end
           beginning_of_line_p = true
-          curr_slide.text = curr_slide.text .. '@table{' .. (table_numcols + 1)
-          if table_header then
-            curr_slide.text = curr_slide.text .. ',header'
-          end
-          curr_slide.text = curr_slide.text .. '}\n'
         else
           curr_slide.text = curr_slide.text .. '['
           buf_toss_back_char('\n', i)
@@ -227,9 +222,19 @@ local function get_slides(lsn_plan_adoc_file)
         end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
-        curr_slide.text = curr_slide.text .. (inside_table_p and '}' or '{')
         inside_table_p = not inside_table_p
         beginning_of_line_p = true
+        if inside_table_p then
+          curr_slide.text = curr_slide.text .. '@table{' .. (table_numcols + 1)
+          if table_header then
+            curr_slide.text = curr_slide.text .. ',header'
+          end
+          curr_slide.text = curr_slide.text .. '}{\n'
+        else
+          table_header = false
+          table_numcols = 0
+          curr_slide.text = curr_slide.text .. '}\n'
+        end
       else
         curr_slide.text = curr_slide.text .. c
       end
