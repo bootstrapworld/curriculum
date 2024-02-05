@@ -729,6 +729,15 @@ const EarlyMath = {
       "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
     }
   },
+  "distributive-prop": {
+    "title": "Distributive Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
+    }
+  }
 }
 
 const Projects = {
@@ -756,8 +765,8 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?pid=4799555149758464"
-    }, 
+      "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
+    } 
   },
   "threats": {
     "title": "Threats to Validity Project Template",
@@ -940,8 +949,7 @@ const Reactive = {
 
 
 
-
-var allStarterFiles = {
+const allStarterFiles = {
   ...Editors, 
   ...Core, 
   ...Piecewise, 
