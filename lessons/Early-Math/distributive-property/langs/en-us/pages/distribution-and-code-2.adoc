@@ -2,12 +2,17 @@
 
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
   div.circleevalsexp .value,
   div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
-  .sect1 > h2:first-child { padding: 0 5px !important; }
-  .sect1 > h2 { font-size: 11pt !important; }
-  .autonum { padding: 0 !important; }
+  .sect1 { padding-bottom: 0.5em !important; }
+  .sect1 > h2:first-child { padding: 0 3px !important; }
+  .sect1 > h2 { font-size: 10pt !important; }
+  td, .autonum { padding: 0 !important; }
+  table tr:last-child td { text-align: left; }
+  .sect1 table tr:first-child { height: 1.25in; }
+  .fitb{ padding-top: 0.5rem; }
+  td.tableblock code { line-height: 1.2 !important }
+  .contracts { margin-bottom: 10px; }
 </style>
 ++++
 
@@ -26,73 +31,75 @@ Open the @starter-file{comm-and-assoc}, which you will use to investigate four f
 
 |===
 
-For each function, draw a second Circle of Evaluation that distributes the _outer_ function over the _inner_ function. Sketch the image that you think each Circle will return. Finally, test the code in Pyret.
+What image operations can be distributed? Follow the example in the table below.
 
-== Does @show{(code 'flip-vertical)} distribute over @show{(code 'beside)}?
+== Example: Does @show{(code 'flip-vertical)} distribute over @show{(code 'beside)}?
 
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4", stripes="none"]
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation | @show{(coe '(flip-vertical (beside yellow-rect blue-ellipse)))}
-| @ifsoln{@show{(coe  '(beside (flip-vertical yellow-rect) (flip-vertical blue-ellipse)))}}
+| @show{(coe  '(beside (flip-vertical yellow-rect) (flip-vertical blue-ellipse)))}
 
 | Sketch
-| @image{../images/yellow-blue.png, 50}
-| @ifsoln{@image{../images/yellow-blue.png, 50}}
+| @image{../images/yellow-blue.png, 85}
+| @image{../images/yellow-blue.png, 85}
 
+3+| Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{Yes.}} @hspace{1em} Is `flip-vertical` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{Yes.}} @hspace{1em} Is `flip-vertical` distributive over `beside`? @fitb{}{@ifsoln{It is.}}
-
-== Does @show{(code 'flip-horizontal)} distribute over @show{(code 'beside)}?
 
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4", stripes="none"]
+== @n Does @show{(code 'flip-horizontal)} distribute over @show{(code 'beside)}?
+
+
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation | @show{(coe '(flip-horizontal (beside yellow-rect blue-ellipse)))}
 | @ifsoln{@show{(coe  '(beside (flip-horizontal yellow-rect) (flip-horizontal blue-ellipse)))}}
 
 | Sketch
-| @image{../images/yellow-blue.png, 50}
-| @ifsoln{@image{../images/blue-yellow-3.png, 50}}
+| @image{../images/yellow-blue.png, 85}
+| @ifsoln{@image{../images/blue-yellow-3.png, 85}}
 
+
+3+| Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{No.}} @hspace{1em} Is `flip-horizontal` distributive over `beside`? @fitb{}{@ifsoln{It is not.}}
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{No.}} @hspace{1em} Is `flip-horizontal` distributive over `beside`? @fitb{}{@ifsoln{It is not.}}
+== @n Does @show{(code 'flip-vertical)} distribute over @show{(code 'above)}?
 
-
-== Does @show{(code 'flip-vertical)} distribute over @show{(code 'above)}?
-
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4", stripes="none"]
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation | @show{(coe '(flip-vertical (above yellow-rect blue-ellipse)))}
 | @ifsoln{@show{(coe  '(above (flip-vertical yellow-rect) (flip-vertical blue-ellipse)))}}
 
 | Sketch
-| @image{../images/blue-over-yellow.png, 30}
-| @ifsoln{@image{../images/yellow-over-blue.png, 30}}
+| @image{../images/blue-over-yellow.png, 55}
+| @ifsoln{@image{../images/yellow-over-blue.png, 55}}
+
+3+| Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{No.}} @hspace{1em} Is `flip-vertical` distributive over `above`? @fitb{}{@ifsoln{It is not.}}
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{No.}} @hspace{1em} Is `flip-vertical` distributive over `above`? @fitb{}{@ifsoln{It is not.}}
 
 
-== Does @show{(code 'flip-horizontal)} distribute over @show{(code 'above)}?
+== @n Does @show{(code 'flip-horizontal)} distribute over @show{(code 'above)}?
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4", stripes="none"]
+[cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation | @show{(coe '(flip-horizontal (above yellow-rect blue-ellipse)))}
 | @ifsoln{@show{(coe  '(above (flip-horizontal yellow-rect) (flip-horizontal blue-ellipse)))}}
 
 | Sketch
-| @image{../images/yellow-over-blue.png, 30}
-| @ifsoln{@image{../images/yellow-over-blue.png, 30}}
+| @image{../images/yellow-over-blue.png, 55}
+| @ifsoln{@image{../images/yellow-over-blue.png, 55}}
+
+3+| Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{Yes.}} @hspace{1em} Is `flip-horizontal` distributive over `above`? @fitb{}{@ifsoln{It is.}}
 
 |===
 
-@n Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{Yes.}} @hspace{1em} Is `flip-horizontal` distributive over `above`? @fitb{}{@ifsoln{It is.}}
 
