@@ -85,10 +85,11 @@
       // If we're in a pathway, add it to the title
       if(pathway) {
         const h1 = document.querySelector('#header h1');
-        const title = pathway.split("-")
+        let title = pathway.split("-")
           .map(w => w[0].toUpperCase() + w.substring(1))
           .map(w => ["Wescheme", "Pyret"].includes(w)? '('+w+')' : w)
           .join(' ');
+        if (title == 'Ok') title = 'OK';
         h1.innerHTML += " for " + title;
       }
 
