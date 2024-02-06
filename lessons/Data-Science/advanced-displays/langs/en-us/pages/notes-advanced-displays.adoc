@@ -1,45 +1,68 @@
 = Advanced Displays
-
+++++
+<style>
+body code { line-height: 16px !important; }
+</style>
+++++
 == Functions as Data
 
-You've learned that functions are __machines that consume and produce data__, and by now you've learned plenty of data types (e.g. - Numbers, Strings, Images, Booleans, Rows and Tables). In the real world, we see machines do this sort of thing all the time: bulbs that consume electricity and produce light, or consume bread and produce toast.
+**You've learned that functions are __machines that consume and produce data__.** +
 
-But sometimes, **machines even consume other machines:**
+- In the real world, we see machines consume things to produce things all the time:
+  * bulbs consume electricity and produce light
+  * toasters consume bread and produce toast
+- **Sometimes, machines consume other machines:**
+  * the stereo from your car could be swapped out for a new one with more features. Each stereo is a machine!
+  * a blender or kitchen mixer might have different attachments. Each attachment is a machine of its own!
 
-- A blender or kitchen mixer might have different attachments. Each attachment is a machine of its own!
-- You might swap out the stereo from your car for a new one with more features. Each stereo is a machine!
+This is true of function machines in math and programming, as well!
+By now you've learned plenty of data types (e.g. - Numbers, Strings, Images, Booleans, Rows and Tables).
 
-This is true of function machines in math and programming, as well! Functions can be their own kind of data type!
+@vspace{1ex}
 
-Imagine a function `species-dot`, that consumes a Row from the Animals Dataset, and produces a different-colored square depending on the species. What if, instead of drawing the same blue dot for each animal in a scatter plot, we used `species-dot` to customize the color for each row? In this example, we're using the `species-dot` function __as an input to our scatter plot function!__
+**Functions can be their own kind of data type!**
 
-Printed below is the Contract for a special scatter plot function, which __consumes functions__. In fact, there are special functions for other kinds of displays as well:
+- Imagine a function `species-dot`, that consumes a Row from the Animals Dataset, and produces a different-colored square depending on the species.
+- What if we used `species-dot` to customize the dots on our scatterplot, instead of using the same blue dot for each animal? +
+@hspace{1em} __In this example, we'd be using the `species-dot` function as an input to our `scatter-plot` function!__
 
+Here are the Contracts for some special display **functions that consume functions**, including the scatterplot we just described:
+
+@vspace{1ex}
+
+@indented{
 @show{(contracts
   '("image-scatter-plot" ("Table" "String" "String" "(Row -> Image)") "Image")
   '("image-histogram" ("Table" "String" "Number" "(Row -> Image)") "Image")
   '("image-bar-chart" ("Table" "String" "(Row -> Image)") "Image")
   '("image-pie-chart" ("Table" "String" "(Row -> Image)") "Image")
 )}
+}
 
-Look carefully at the last argument in each Domain. In each case, it's a function that **consumes a Row and produces an Image**.
-
-@vspace{1ex}
+Look carefully at the last argument in each Domain. In each case, **the function consumes a Row and produces an Image**.
 
 == Piecewise Functions
 
-- Functions always appy a particular rule to their input. In an earlier lesson, you saw how `gt` always draws a solid, green triangle using the input as the size.
-- But in `species-dot` example above, there's no single rule that will generate a different color for each species. We need a way for functions to change rules, depending on their input.
+Functions always apply a particular rule to their input. +
 
-- In math, *Piecewise Functions* are functions that can behave one way for part of their Domain, and another way for a different part. In our `species-dot` example, our function might draw black squares when the input is a dog, but orange squares when the input is a cat.
+- In an earlier lesson, you saw how `gt` always draws a solid, green triangle using the input as the size.
+- In the `species-dot` example above, there's no single rule that will generate a different color for each species. +
 
-- Piecewise functions are divided into "pieces". Each piece is divided into two parts:
+**We need a way for functions to change rules, depending on their input.**
 
-1. How the function should behave
-2. The domain where it behaves that way
+@vspace{1ex}
 
-- Each "piece" of our piecewise function has two parts: the "if" and the "then". This tells the computer _when_ to apply each rule, and _what_ the rule is.
+**Piecewise Functions** are functions that can behave one way for part of their Domain, and another way for a different part.
 
+- Piecewise functions are divided into "pieces".
+- Each piece has two parts: the "if" and the "then".
+- This tells the computer _when_ to apply each rule, and _what_ the rule is.
+
+In our `species-dot` example, our function might draw black squares when the input is a dog, but orange squares when the input is a cat.  +
+The function definition would look like this:
+
+[.indentedpara]
+--
 ```
 # species-dot :: (Row) -> Image
 fun species-dot(r):
@@ -51,4 +74,4 @@ fun species-dot(r):
   end
 end
 ```
-
+--
