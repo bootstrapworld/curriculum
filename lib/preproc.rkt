@@ -1943,17 +1943,19 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a]\n--\n" o)
+                              (display "\n[.actually-openblock.q-and-a]\n====\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n* " o)
-                              (expand-directives:string->port text o))]
+                              (display "\n[.q-and-a-q]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n** " o)
-                              (expand-directives:string->port text o))]
+                              (display "\n[.q-and-a-a]\n--\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n--\n" o))]
                            [(string=? directive "strategy")
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])

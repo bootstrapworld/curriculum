@@ -1,4 +1,11 @@
-= Catching Bugs
+= Catching Bugs when Making Triangles
+
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; outline: 1px dashed gray; }
+</style>
+++++
+
 
 == Learning about a Function through Error Messages
 
@@ -35,7 +42,7 @@ _The following lines of code are all BUGGY! Read the code and the error messages
 
 @n `(triangle 20 "solid")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects 3 arguments, but given 2: @span{.underline}{20} @span{.underline}{solid}
 at: line 1, column 0, in <interactions>
@@ -47,7 +54,7 @@ at: line 1, column 0, in <interactions>
 
 @n `(triangle "solid" "red" 20)`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects a non-negative number as 1st argument, but given: @span{.underline}{solid}; other arguments were: @span{.underline}{red} @span{.underline}{20}
 at: line 1, column 0, in <interactions>
@@ -60,7 +67,7 @@ at: line 1, column 0, in <interactions>
 
 @n `(triangle 20 40 "solid" "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects 3 arguments, but given 4: @span{.underline}{20} @span{.underline}{40} @span{.underline}{solid} @span{.underline}{red}
 at: line 1, column 0, in <interactions>
@@ -73,7 +80,7 @@ at: line 1, column 0, in <interactions>
 
 @n `(triangle 20 solid "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*solid*}: this variable is not defined
 at: line 1, column 0, in <interactions>
@@ -84,7 +91,7 @@ at: line 1, column 0, in <interactions>
 
 @star `(triangle 20 "striped" "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects a style ("solid" / "outline") or an opacity value [0-255]) as 2nd argument, but given: @span{.underline}{"striped"}; other arguments were: @span{.underline}{20} @span{.underline}{"red"}
 at: line 1, column 0, in <interactions>
