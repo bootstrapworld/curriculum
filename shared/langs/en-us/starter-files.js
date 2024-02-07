@@ -759,7 +759,7 @@ const EarlyMath = {
   "exponents": {
     "title": "Exponents Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1kyf0ZKbPJIusO4WYI9F3iS7aBbApx61s&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H&v=0c33ff0"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=gadP2T1dKH"
