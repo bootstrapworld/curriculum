@@ -1,5 +1,9 @@
-= Catching Bugs (`sort`)
-
+= Catching Bugs when Sorting Tables
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; outline: 1px dashed gray; }
+</style>
+++++
 == Learning about a Function through Error Messages
 
 @n Type `sort` into the Interactions Area of @starter-file{editor} and hit "Enter". What do you learn? @fitb{}{@ifsoln{sort is a function}}
@@ -26,7 +30,7 @@ _The following lines of code are all BUGGY! Read the code and the error messages
 
 @n `sort(animals-table, name , true)`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 The identifier @span{.underline}{*name*} is unbound:
 
@@ -41,7 +45,7 @@ It is @span{.underline}{*used*} but not previously defined.
 
 @n `sort(animals-table, "name" , "true")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 The @span{.underline}{*Boolean annotation*}: +
 fun sort(t :: Table, col :: String, asc :: *Boolean*) +
@@ -56,7 +60,7 @@ was not satisfied by the value +
 
 @n `sort(animals-table "name" true)`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 Pyret didn't understand your program around:
 
@@ -71,7 +75,7 @@ You may need to add or remove some text to fix your program. Look carefully befo
 
 @n `sort(animals-table, "name", true`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 Pyret didn't expect your program to @span{.underline}{end} as soon as it did:
 
@@ -86,7 +90,7 @@ You may be missing an "end", or closing punctuation like ")" or "]" somewhere in
 
 @n `sort (animals-table, "name", true)`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 Pyret thinks this code is probably a function call:
 
