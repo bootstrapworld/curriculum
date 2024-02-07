@@ -8,7 +8,7 @@
 </style>
 ++++
 
-== Examples and the Multiplicative Inverse
+== Examples and Exponents
 
 @n Below, place a checkmark next to each of the equations that you *predict* will pass when you click "Run".
 
@@ -31,21 +31,22 @@
 
 @ifproglang{wescheme}{
 
-@hspace{2em}  @fitb{1em}{} @hspace{1em}  @show{(code '(EXAMPLE (num-expt 5 2) (* 2 (* 2 (* 2 (* 2 (* 2)))))))}
+@hspace{2em}  @fitb{1em}{} `(EXAMPLE (expt 5 2) (* 2 (* 2 (* 2 (* 2 (* 2))))))`
 
-@hspace{2em}  @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (num-expt 4 6) (* 4 (* 4 (* 4 (* 4 (* 4 (* 4))))))))}
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 4 6) (* 4 (* 4 (* 4 (* 4 (* 4 (* 4)))))))`
 
-@hspace{2em}  @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (num-expt 2 3) (* 3 3)))}
 
-@hspace{2em}  @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (num-expt 8 3) (* 8 (* 8 (* 8)))))}
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 2 3) (* 3 3))`
 
-@hspace{2em}  @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (num-expt 3 5)(+ 3 (+ 3 (+ 3 (+ 3 (+ 3)))))))}
+@hspace{2em}  @fitb{2em}{} `(EXAMPLE (expt 8 3) (* 8 (* 8 (* 8))))`
 
-@hspace{2em} @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (num-expt 1 4) (1 * (* 1 (* 1 (* 1))))))}
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 3 5)(+ 3 (+ 3 (+ 3 (+ 3 (+ 3))))))`
+
+@hspace{2em} @fitb{2em}{} `(EXAMPLE (expt 1 4) (* 1 (* 1 (* 1 (* 1)))))`
 
 }
 
-@n Open the @starter-file{multiplicative-inverse} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+@n Open the @starter-file{exponents} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
 
 @hspace{2em} Test # @fitb{3em}{@ifsoln{1}} failed because the left side was @fitb{3em}{@ifsoln{25}} and the right side was @fitb{3em}{@ifsoln{32}}.
 
@@ -53,11 +54,13 @@
 
 @hspace{2em} Test # @fitb{3em}{@ifsoln{5}} failed because the left side was @fitb{3em}{@ifsoln{243}} and the right side was @fitb{3em}{@ifsoln{15}}.
 
-@n Edit each of the *failing* examples on the left so that _all examples pass_ when you click "Run". Be sure to change *only* the part of the example after the `is`! Describe one of the changes you had to make. @fitb{}{}
+@n Edit each of the *failing* examples so that _all examples pass_ when you click "Run". Be sure to change *only* the @ifproglang{wescheme}{second part of the example} @ifproglang{pyret}{part of the example after the `is`}! Describe one of the changes you had to make. @fitb{}{}
 
 @fitb{}{}
 
 @fitb{}{}
+
+@vspace{1ex}
 
 == Does it equal 16?
 
@@ -95,36 +98,33 @@
 [.table1, cols="1,12,12", frame="none", grid="none", stripes="none"]
 |===
 
-|| @fitb{1em}{} @hspace{1em} `num-expt(2, 4)` *is* `16`
+|| @fitb{1em}{} `(EXAMPLE (expt 2 4) 16)`
 
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `2 * 2 * num-expt(2, 2)`  *is* `16`
+| @fitb{2em}{@ifsoln{x}} `(EXAMPLE (* 2 (* 2 (* (expt 2 2)))) 16)`
 
-|| @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(2, 3) + 10` *is* `16`
+|| @fitb{2em}{@ifsoln{x}} `(EXAMPLE (+ (expt 2 3) 10) 16)`
 
-| @fitb{2em}{} @hspace{1em} `num-expt(4, 2) * 2`  *is* `16`
+| @fitb{2em}{} `(EXAMPLE (* (expt 4 2) 2) 16)`
 
-|| @fitb{2em}{} @hspace{1em} `4 * num-expt(1, 4)`  *is* `16`
+|| @fitb{2em}{} `(EXAMPLE (* 4 (expt 1 4)) 16)`
 
-| @fitb{2em}{} @hspace{1em}  `num-expt(4, 3) / 2 / 2`  *is* `16`
+| @fitb{2em}{} `(EXAMPLE(/ (/ (expt 4 3) 2) 2) 16)`
 
-|| @fitb{2em}{} @hspace{1em}  `2 * num-expt(2, 3)` *is* `16`
+|| @fitb{2em}{}  `(EXAMPLE (* 2 (expt 2 3)) 16)`
 
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(4, 3) / 2 / 2`  *is* `16`
+| @fitb{2em}{@ifsoln{x}}  `(EXAMPLE (/ (/ (expt 4 3) 2) 2) 16)`
 |===
 }
 
 
-@n Open the @starter-file{multiplicative-inverse-2} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many blanks as needed below to describe the examples that failed.
+@n Open the @starter-file{is-it-16} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Which tests failed? @fitb{}{@ifsoln{Examples 2, 3, and 6.}}
 
-@hspace{2em} Test # @fitb{3em}{@ifsoln{2}} failed because @fitb{}{@ifsoln{The left side was 1.5. The right side was 0.166...}}
+@n The students who wrote the three failing examples all have the same misconception about how to evaluate exponential expressions. What mistake did these three students make? @fitb{}{@ifsoln{Rather than multiplying the basetimes itself as many times as the exponent indicates,}}
 
-@hspace{2em} Test # @fitb{3em}{@ifsoln{4}} failed because @fitb{}{@ifsoln{The left side was 50. The right side was 0.08.}}
-
-@hspace{2em} Test # @fitb{3em}{} failed because @fitb{}{}
-
-
-@n Notice that all of the examples appear to follow the same pattern in terms of groupings. Why do you think *some* of the examples passed, but others did not?  @fitb{}{}
-
-@fitb{}{@ifsoln{We need to look at the operators, not just the parentheses!}}
+@fitb{}{@ifsoln{they multiplied the base times the exponent.}}
 
 @fitb{}{}
+
+@n Come up with a unique exponent expression of your own that evaluates to 25, using any numbers and operators. (We've included one example for you in Section 2 of the starter file.) Write it in mathematical notation (not code) on the line: @fitb{}{}
+
+@n Translate your expression to code and add it to the second examples block. Does your example pass? If not, revise it until it does.

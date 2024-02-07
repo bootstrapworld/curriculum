@@ -746,6 +746,24 @@ const EarlyMath = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
     }
+  },
+  "exponents": {
+    "title": "Exponents Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1kyf0ZKbPJIusO4WYI9F3iS7aBbApx61s&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=gadP2T1dKH"
+    }
+  },
+  "is-it-16": {
+    "title": "Is it 16? Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=j0ExQBqaqm"
+    }
   }
 }
 
