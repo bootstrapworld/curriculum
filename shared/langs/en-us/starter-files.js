@@ -316,6 +316,15 @@ const DSBasics = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
     }
   },
+  "new-animals": {
+    "title": "New Animals Dataset",
+    "pyret": {
+      "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
+    },
+    "codap": {
+      "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
+    }
+  },
   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
@@ -612,7 +621,7 @@ const MoreAlg = {
   "inequalities-compound": {
     "title": "Compound Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre"
+      "url": "https://code.pyret.org/editor#share=1wmfqAhQelP4L49nVuqosbfjcB0gpfS6T"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
