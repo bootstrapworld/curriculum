@@ -52,6 +52,11 @@ Students are introduced to the concept of @vocab{permutation} (with replacement)
 
 Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. 
 
+@lesson-instruction{
+- Open @starter-file{permutations-and-combinations}, save a copy, and click "Run".
+- In the Definitions Area, you'll see six variables defined: `ravioli`, `pizza`, `ziti`, `chicken`, `lasagna`, and `soup`. Try typing some of them into the Interactions Area to see what each menu item looks like.
+}
+
 @slidebreak
 
 @ifslide{@right{@image{images/pizza.png}}}
@@ -72,13 +77,9 @@ If you ate dinner there every night, how long would it take to try each one? In 
 
 @ifslide{@right{@image{images/pizza.png}}}
 
-@lesson-point{
-In Permutations, order matters!
-}
-
 Luigi isn't going to give away free food just because you order four courses - he wants you to order four courses _in every possible order_! 
 
-In situations where order matters, the set of possible options is called @vocab{permutations}.
+In situations where order matters, the list of possible options is called @vocab{permutations}.
 
 @slidebreak
 
@@ -93,12 +94,20 @@ With six dishes to choose from and four courses to eat, how many @vocab{permutat
 === Investigate
 
 @lesson-instruction{
+- In pairs or small groups, follow the instructions for the `PERMUTATIONS` section, completing 1a, 1b, and 1c.
+}
+
+@QandA{
 Luigi has six possible dishes to choose from.
 
-- How many permutations could there be for a 1-course dinner?
-- How many permutations could there be for a 2-course dinner?
-- How many permutations could there be for a 3-course dinner?
-- Is there a pattern here?
+@Q{How many permutations could there be for a 1-course dinner?}
+@A{6}
+@Q{How many permutations could there be for a 2-course dinner?}
+@A{36}
+@Q{How many permutations could there be for a 3-course dinner?}
+@A{216}
+@Q{Is there a pattern here?}
+@A{Each course results in six times more permutations than the course before.}
 }
 
 It's useful to use __tree diagrams__, so we can see what our possible choices are. A tree diagram is a way of tracking a series of events. In this case, each course we choose is an event.
@@ -134,7 +143,7 @@ That's six possible orders with Lasagna as the first course.
 
 But, each of the other first course options also comes with six possible second course order options... 
 
-@right{@image{images/6-2-course-permute-w-replacement.png}}Every time we get to make a choice, each endpoint in our tree sprouts six more branches.
+@right{@image{images/6-2-course-permute-w-replacement.png}} Every time we get to make a choice, each endpoint in our tree sprouts six more branches.
 
 @clear
 
@@ -196,9 +205,10 @@ With four courses, it would take more than __3.5 years__ to try them all -- if w
 
 In @proglang, we can raise a 6 to the power of four with the `num-expt` function.
 
-For example, `num-expt(6, 4)` will compute @math{6^4}.
+For example, @show{(code '(expt 6 4))} will compute @math{6^4}.
 
-@lesson-instruction{In the Definitions Area, use the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
+@lesson-instruction{
+@opt{Complete @opt-printable-exercise{permute-w-replace-dr.adoc}, by using the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).}
 }
 
 === Synthesize
@@ -323,10 +333,10 @@ For practice, complete @printable-exercise{permutation.adoc}.
 
 In Pyret, we can compute the factorial of 6 with the `factorial` function. 
 
-For example, `factorial(6)` will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}. 
+For example, @show{(code '(factorial 6))} will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}.
 
 @lesson-instruction{
-In the Definitions Area, use the Design Recipe to define `num-permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).
+@opt{Complete @opt-printable-exercise{permute-wo-replace-dr.adoc}, by using the Design Recipe to define `num-permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).}
 }
 
 === Synthesize
@@ -337,5 +347,6 @@ In the Definitions Area, use the Design Recipe to define `num-permute-wo-replace
 
 == Additional Exercises
 
-- @opt-starter-file{permutations-and-combinations} provides students with a chance to view all the permutations and combinations for Luigi's menu.
 - @opt-printable-exercise{tree-diagrams2.adoc}
+- @opt-printable-exercise{permute-w-replace-dr.adoc}
+- @opt-printable-exercise{permute-wo-replace-dr.adoc}

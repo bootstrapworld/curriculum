@@ -316,6 +316,15 @@ const DSBasics = {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
     }
   },
+  "new-animals": {
+    "title": "New Animals Dataset",
+    "pyret": {
+      "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
+    },
+    "codap": {
+      "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
+    }
+  },
   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
@@ -513,7 +522,7 @@ const Flags = {
   "flags-china": {
     "title": "Chinese Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QdgfyZ4rl0"
@@ -612,7 +621,7 @@ const MoreAlg = {
   "inequalities-compound": {
     "title": "Compound Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=12dM89RqRWRoh51-saMBzLZyITbtrNQre"
+      "url": "https://code.pyret.org/editor#share=1wmfqAhQelP4L49nVuqosbfjcB0gpfS6T"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
@@ -720,13 +729,40 @@ const EarlyMath = {
       "url": "https://www.wescheme.org/openEditor?publicId=5hRzeYdvpB"
     }
   },
+  "negation":{
+    "title": "Negation Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
+    }
+  },
+  "negation-2":{
+    "title": "Negation Starter File (2)",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
+    }
+  },
+  "distributive-prop": {
+    "title": "Distributive Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
+    }
+  }
 }
 
 const Projects = {
   "functions": {
     "title": "Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
@@ -735,7 +771,7 @@ const Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
@@ -747,8 +783,8 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?pid=4799555149758464"
-    }, 
+      "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
+    } 
   },
   "threats": {
     "title": "Threats to Validity Project Template",
@@ -931,8 +967,7 @@ const Reactive = {
 
 
 
-
-var allStarterFiles = {
+const allStarterFiles = {
   ...Editors, 
   ...Core, 
   ...Piecewise, 
