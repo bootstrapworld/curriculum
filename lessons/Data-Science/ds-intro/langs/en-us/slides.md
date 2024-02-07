@@ -100,7 +100,7 @@ We’ll use a @vocab{programming language} to investigate these questions. Just 
 
 @image{images/notice-and-wonder.png, 200}
 
-* Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @printable-exercise{pages/animals-dataset.adoc}.
+* Open the @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet} in a browser tab, or turn to @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table}.
 * What do you __Notice__ about this dataset? 
 * Turn to @printable-exercise{pages/questions-and-column-descriptions.adoc}. 
 * Write down your observations in the first column.
