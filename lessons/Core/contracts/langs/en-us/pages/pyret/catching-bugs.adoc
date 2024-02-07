@@ -1,4 +1,10 @@
-= Catching Bugs
+= Catching Bugs when Making Triangles
+
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; outline: 1px dashed gray; }
+</style>
+++++
 
 == Learning about a Function through Error Messages
 
@@ -8,7 +14,7 @@
 
 @fitb{}{}
 
-@n Using what you learned from the error message, experiment until you get a triangle building. What is the contract for `triangle`? @fitb{}{}
+@n Using what you learned from the error message, experiment until you can build a triangle. What is the contract for the `triangle` function? @fitb{}{}
 
 == What Kind of Error is it?
 
@@ -21,11 +27,11 @@
 
 == Finding Mistakes with Error Messages
 
-_The following lines of code are all BUGGY! Read the code and the error messages below, and see if you can the mistake WITHOUT typing it into @proglang._
+_The following lines of code are all BUGGY! Read the code and the error messages below. See if you can find the mistake WITHOUT typing it into @proglang._
 
 @n `triangle(20, "solid" "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 Pyret didn't understand your program around
 
@@ -38,7 +44,7 @@ triangle(20, "solid" *"red"*)
 
 @n `triangle(20, "solid")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 This @span{.underline}{application expression} errored:
 
@@ -55,7 +61,7 @@ An @span{.underline}{application expression} expects the number of parameters an
 
 @n `triangle(20, 10, "solid", "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 This @span{.underline}{application expression} errored:
 
@@ -72,7 +78,7 @@ An @span{.underline}{application expression} expects the number of parameters an
 
 @n `triangle (20, "solid", "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 Pyret thinks this code is probably a function call:
 

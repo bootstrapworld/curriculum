@@ -1,33 +1,49 @@
 = Computing Standard Deviation (2)
 
-Shown below are ten different family incomes:
+Here are ten different family incomes: _$43k, $62k, $39k, $141k, $58k, $82k, $41k, $73k, $68k, $73k_
 
-$43k, $62k, $39k, $141k, $58k, $82k, $41k, $73k, $68, $73k
+@n Draw the *distribution* of these incomes by placing a dot on the number line below. If two families have the same income, put one dot on top of the other. Finally, draw a @vocab{box plot} on the number line, making sure to label the axis and show each quartile.
 
-@n Draw a **number line** representing the distribution of this data.
+@vspace{10ex}
 
 @center{@image{../images/numline.svg}}
 
+@vspace{1ex}
+
+@n Describe the shape of this box-plot. @fitb{}{@ifsoln{right skew}}
+
 @n What is the mean income of the families in this dataset? @fitb{}{@ifsoln{$68k}}
 
-@n *Draw a star to locate the mean on the number line above*.
+@n How many families earn $39k? $43k? Fill in the table below. The first column has been done for you.
 
-@n For each family on the number line you drew, *draw a horizontal arrow* under the axis from your star to that family's income, and *label the arrow with its distance from the mean*. (For example, if the mean is $50k and a family's income is $82k, your arrow would stretch from $50k to $82k, and be labeled with the distance "$32k")
+[.sideways-pyret-table, cols=">1,^1,^1,^1,^1,^1,^1,^1"]
+|===
+| income   	|$39k| 	$41k    | 	$43k   |   $58k   |   $62k   |   $68k   | 	 $73k  |  $82k    |  $141k
+| count 	|  1 |@ifsoln{1}|@ifsoln{1}|@ifsoln{1}|@ifsoln{1}|@ifsoln{1}|@ifsoln{2}|@ifsoln{1}|@ifsoln{1}
+|===
 
 @vspace{1ex}
 
-@lesson-point{
-To compute the standard deviation we square each distance and take the average, then take the square root of the average.
-}
+@n *Draw a star to locate the mean on the number line above*.
+
+@n For each family on the number line you drew, 
+
+- *Draw a horizontal arrow* under the axis from the star you drew in #5 to the dot for that family's income
+- *Label the arrow with its distance from the mean*. +
+__e.g. if the mean is $50k and a family's income is $82k, your arrow would stretch from $50k to $82k, and be labeled with the distance "$32k"__
+
+@vspace{1ex}
+
+*To compute the standard deviation we square each distance and take the average, then take the square root of the average.*
 
 
-@n For each of the 10 incomes in the table below, list the distance-from-mean for each income, using the mean you computed above. Then fill in the squared distance in the next row.
+@n For each of the 10 incomes in the table below, list the distance-from-mean for each income, using the mean you computed above. Then fill in the squared distance in the next row to complete the table.
 
 
 @ifnotsoln{
 [.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1,^1"]
 |===
-| income (in 10s of thousand)   | 39 | 41 | 43 | 58 | 62 | 68 | 73 | 73 | 82 | 141
+| income (in 10s of thousands)  | 39 | 41 | 43 | 58 | 62 | 68 | 73 | 73 | 82 | 141
 | distance from mean     		|    |    |    |    |    |    |    |    |    |
 | squared distance 	     		|    |    |    |    |    |    |    |    |    |
 |===

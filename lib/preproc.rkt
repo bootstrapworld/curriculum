@@ -1224,7 +1224,11 @@
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
         ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-        (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+        (if (string-prefix? lesson "project-")
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          )
+        
         (if lesson-description
             (display lesson-description o)
             (display " {nbsp}" o))
