@@ -5,23 +5,29 @@ body.LessonNotes li { margin-bottom: 5px; }
 </style>
 ++++
 
-The steps of the Design Recipe don't change just because we're working with Rows, but we can make some adjustments when using Row-consuming functions to filter tables and build columns! Let's try a concrete example:
+The steps of the Design Recipe don't change just because we're working with Rows, but we can make some adjustments when using Row-consuming functions to filter tables and build columns! 
 
 @vspace{1ex}
 
-_Write a function `is-lizard`, which tells us whether an animal is a lizard._
+Let's try a concrete example: _Write a function `is-lizard`, which tells us whether an animal is a lizard._
 
 == Contract and Purpose
 
-- We still want to pick good names. Are we writing a function to check if an animal is a lizard? Call it `is-lizard`!
+- We still want to pick good names. Since we're writing a function to check if an animal is a lizard, call it `is-lizard`!
 - The Domain is a lot easier -- it's _always_ a `Row`!
 - The Range is easier, too. If we're writing a function to filter a Table, we know the Range _has to be a Boolean_. (What would it be if we were building a column of Numbers? Images? Strings?)
 
 == Examples
 
-The goal of the Examples step is to _find the pattern_ that represents what the function does. When working with Rows, sometimes we have to start by just focusing on what the answer should be.
+The goal of the Examples step is to _find the pattern_ that represents what the function does. When working with Rows, sometimes we have to start by just focusing on what the answer should be. +
+Suppose we have two rows defined: 
 
-Suppose we have two rows defined: `lizard-row` (which happens to be a lizard), and `cat-row` (which happens to be a cat). We can imagine the answers for an `is-lizard` function to be...
+[cols="2a,2a,1a", grid="none", frame="none"]
+|===
+|`lizard-row` (which happens to be a lizard) |`cat-row` (which happens to be a cat) |
+|===
+
+We can imagine the answers for an `is-lizard` function to be...
 
 ```
 examples:
@@ -30,7 +36,9 @@ examples:
 end
 ```
 
-But how do we know these are `true` and `false`? Well, we KNOW `lizard-row` is a lizard, and we KNOW `cat-row` is a cat. So let's replace those answers with the Boolean expressions that compare their species:
+But why do we think these expressions will evaluate to `true` and `false`? +
+__We KNOW `lizard-row` is a lizard, and we KNOW `cat-row` is a cat and not a lizard...__ +
+If we replace our answers with the Boolean expressions that compare their species, someone else would be able to follow our logic.
 
 ```
 examples:
@@ -39,7 +47,7 @@ examples:
 end
 ```
 
-But what work gives us "lizard" and "cat"? Well, we can look in the `species` column!
+And what work would the computer need to do to know that `lizard-row` is a lizard and `cat-row` is a cat? Look in the `species` column! 
 
 ```
 examples:
@@ -47,21 +55,17 @@ examples:
 	is-lizard(cat-row)    is cat-row["species"]    == "lizard" # will produce false
 end
 ```
-
-Sometimes we can go straight to this final form, doing the whole thing in one step. But it's nice to know we can break it down into pieces if we have to.
-
-@vspace{1ex}
-
-Once we see the pattern, we can _circle and label what changes_. In this case, only the Row representing the animal changes! We might use `r` as label, to represent the Row.
+Sometimes we can get straight to this final form in one step, but sometimes it helps to break our thinking down into pieces. +
+Once we see the pattern, we can _circle and label what changes_. +
+In this case, only the Row representing the animal changes! So we might use `r` as our label, to represent the Row.
 
 == Definition
-The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input. It's no different when working with Rows.
-
+The final step in the Design Recipe is to take the pattern from our examples and _generalize it_ to work with any input. +
+It's no different when working with Rows. 
 @vspace{1ex}
 
-Once again, our previous step is a huge help. We can simply *copy everything that stays the same*, and replace the part that changes with the label we used.
-
-Combining the Contract, Purpose, Examples and Definitions, we have:
+Our previous step is a huge help. We can *copy everything that stays the same*, and replace the part that changes with the label we used. +
+Combining the Contract, Purpose, Examples and Definitions, we end up with:
 
 ```
 # is-lizard :: Row -> Boolean

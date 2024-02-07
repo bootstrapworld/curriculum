@@ -8,7 +8,11 @@
 
 If you were to write instructions for getting ready for school, it would matter very much which instruction came first!
 
+@vspace{1ex}
+
 Imagine what might happen if someone tried to follow these steps: 
+
+@vspace{1ex}
 
 1. Put on your sneakers.
 2. Tie your sneakers.
@@ -20,7 +24,19 @@ Mathematicians didn’t always agree on the *Order of Operations*, but at some p
 
 @vspace{1ex}
 
-To help us organize our math into something we can trust, we can _diagram_ a math expression using the *Circles of Evaluation*. For example, the expression @smath{(+ (- 1 4) (* 10 7))} can be diagrammed as shown below.
+To help us organize our math thinking into something we can trust, we can _diagram_ an expression using the *Circles of Evaluation*. 
+
+@vspace{1ex}
+
+For example, this expression: 
+
+@vspace{1ex}
+
+@hspace{1em}@big{@smath{(+ (- 1 4) (* 10 7))}}
+
+@vspace{1ex}
+
+@hspace{1em}can be diagrammed as:
 
 @center{@show{(coe `(+ (- 1 4) (* 10 7)))}}
 
@@ -30,10 +46,23 @@ To help us organize our math into something we can trust, we can _diagram_ a mat
 
 @vspace{1ex}
 
+To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right.
+
+@vspace{1ex}
+
+1. Type an open parenthesis when we _start_ a circle.
+
 @ifproglang{wescheme}{
-To convert a *Circle of Evaluation* into Code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right. The circle above, for example, would be programmed as @show{(code '(+ (- 1 4) (* 10 7)))}.
+2. Once we're in a circle, we first write the *function* at the top, then write the inputs from left to right.
+}
+@ifproglang{pyret}{
+2. Once we're in a circle, we write whatever is on the left of the circle, then the *operation* at the top, and then whatever is on the right.
 }
 
-@ifproglang{pyret}{
-To convert a *Circle of Evaluation* into code, we walk through the circle from outside-in, moving left-to-right. We type an open parenthesis when we _start_ a circle, and a close parenthesis when we _end_ one. Once we're in a circle, we write whatever is on the left of the circle, then the *operation* at the top, and then whatever is on the right. The circle above, for example, would be programmed as @show{(code '(+ (- 1 4) (* 10 7)) #:parens true)}.
-}
+3. Type a close parenthesis when we _end_ a circle. 
+
+So, the Circle of Evaluation above would be programmed as: +
+@hspace{1em}@ifproglang{wescheme}{@show{(code '(+ (- 1 4) (* 10 7)))}}
+@ifproglang{pyret}{@show{(code '(+ (- 1 4) (* 10 7)) #:parens true)}}
+
+
