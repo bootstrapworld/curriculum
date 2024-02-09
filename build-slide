@@ -59,14 +59,15 @@ parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 
 make
 
-if test -s .make.error.log; then
-  echo make failed\; build-slide aborted
-  exit
-elif test ! -d distribution; then
+if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
   exit
 else
   cd distribution
+  if test -s .make.error.log; then
+    echo make failed\; build-slide aborted
+    exit
+  fi
 fi
 
 export NATLANG
