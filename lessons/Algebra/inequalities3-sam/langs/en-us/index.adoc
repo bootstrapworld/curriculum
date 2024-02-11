@@ -38,7 +38,7 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 === Launch
 
 @lesson-instruction{
-- Open the @starter-file{inequalities-samX} in a new tab and save a copy of your own.
+- Open the @starter-file{inequalities-sam} in a new tab and save a copy of your own.
 - Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 }
 
@@ -49,7 +49,7 @@ Every time Sam moves, we want to check and see if Sam is safe.
 }
 
 @ifproglang{wescheme}{
-@teacher{*Note:* In this programming language, question marks are prounced "huh?" So `safe-left?` would be prounounced "safe left huh?" This can be a source of some amusement for students!}
+@lesson-point{In this programming language, question marks are prounced "huh?" So `safe-left?` would be prounounced "safe-left-huh?"}
 }
 
 To further support students, consider asking what three functions are defined in their starter files. Then, ask students what each function _should_ do, when working properly.
@@ -117,58 +117,52 @@ Students solve a word problem involving compound inequalities, using `and` to co
 
 === Launch
 
-@lesson-roleplay{
-Recruit three student volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}. Give them 1 minute to read the Contract and code, as written in the program.
+@lesson-instruction{
+- We need three volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}!
+- Take 1 minute to read the Contract and code for your function, as written in the program.
+}
 
+@teacher{
 Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @show{(code 'safe-left?)} and @show{(code 'safe-right?)} will respond with either "true" or "false".
+}
 
-The function @show{(code 'onscreen?)}, however, will call the @show{(code 'safe-left?)} function! So the student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
+@lesson-roleplay{
 
+The function @show{(code 'onscreen?)}, will call the @show{(code 'safe-left?)} function, giving them a number representing Sam's x-coordinate. The student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
 
-For example:
 @ifproglang{wescheme}{
-
-- Facilitator: "onscreen-huh 70"
-- onscreen? (turns to safe-left?): "safe-left-huh 70"
-- safe-left?: "true"
-- onscreen? (turns back to facilitator): "true" +
-{empty} +
-
-- Facilitator: "onscreen-huh -100"
-- onscreen? (turns to safe-left?): "safe-left-huh -100"
-- safe-left?: "false"
-- onscreen? (turns back to facilitator): "false" +
-{empty} +
-
-- Facilitator: "onscreen-huh 900"
-- onscreen? (turns to safe-left?): "safe-left-huh 900"
-- safe-left?: "true"
-- onscreen? (turns back to facilitator): "true"
+@define{onscreen-pronounce}{onscreen-huh}
+@define{safe-left-pronounce}{safe-left-huh}
+@define{safe-right-pronounce}{safe-right-huh}
 }
 
 @ifproglang{pyret}{
-- Facilitator: "is-onscreen 70"
-- is-onscreen (turns to is-safe-left): "is-safe-left 70"
-- is-safe-left: "true"
-- is-onscreen (turns back to facilitator): "true" +
-{empty} +
-
-- Facilitator: "is-onscreen -100"
-- is-onscreen (turns to is-safe-left): "is-safe-left -100"
-- is-safe-left: "false"
-- is-onscreen (turns back to facilitator): "false" +
-{empty} +
-
-- Facilitator: "is-onscreen 900"
-- is-onscreen (turns to is-safe-left): "is-safe-left 900"
-- is-safe-left: "true"
-- is-onscreen (turns back to facilitator): "true"
+@define{onscreen-pronounce}{is-onscreen}
+@define{safe-left-pronounce}{is-safe-left}
+@define{safe-right-pronounce}{is-safe-right}
 }
+
+For example:
+
+- Facilitator: "@onscreen-pronounce 70"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left-pronounce 70"
+- @show{(code 'safe-left?)}: "true"
+- @show{(code 'onscreen?)} (turns back to facilitator): "true" +
+{empty} +
+
+- Facilitator: "@onscreen-pronounce -100"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left-pronounce -100"
+- @show{(code 'safe-left?)}: "false"
+- @show{(code 'onscreen?)} (turns back to facilitator): "false" +
+{empty} +
+
+- Facilitator: "@onscreen-pronounce 900"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left-pronounce 900"
+- @show{(code 'safe-left?)}: "true"
+- @show{(code 'onscreen?)} (turns back to facilitator): "true"
 }
 
 @QandA{
-Hopefully your students will notice that @show{(code 'safe-right?)} did not participate in this roleplay scenario at all!
-
 @Q{What is the problem with @show{(code 'onscreen?)}?}
 @A{It's only talking to @show{(code 'safe-left?)}, it's not checking with @show{(code 'safe-right?)}}
 @Q{What should @show{(code 'onscreen?)} be doing?}
@@ -190,12 +184,9 @@ What if we wanted to keep Sam safe on the top and bottom edges of the screen as 
 - What additional functions would we need?  
 - What functions would need to change? 
 
-@ifproglang{pyret}{Students ready to tackle this challenge can open the @opt-starter-file{inequalities-samXY} where @show{(code '(onscreen2? x y))} is defined to take in both x and y.} 
+_Note: In the context of Sam the Butterfly, there's a clear reason why we want to stop Sam from going off the top and bottom of the screen! But when we add the @show{(code 'onscreen?)} function to our Game Starter File, we might *want* to let the player go above and below the screen. It will be important that the @show{(code 'onscreen?)} function we use in the game only checks the x-coordinate._
 
-_Note: In the context of Sam the Butterfly, being able to control x and y coordinates is optimal, but, when we add the @show{(code 'onscreen?)} function to our Game Starter File, other (hidden) functions will control the characters' y-coordinates and we don't want to interfere with them, so it'll be important that the @show{(code 'onscreen?)} function we use only changes the x-coordinate._ 
-
-@ifproglang{wescheme}{We recommend that students tackling this challenge define a new function @show{(code 'onscreen2?)} so that their initial @show{(code 'onscreen?)} code remains ready for them to use in the next section of this lesson.
-}
+We recommend that students tackling this challenge define a new function @show{(code 'onscreen2?)} so that their initial @show{(code 'onscreen?)} code remains ready for them to use in the next section of this lesson.
 }
 
 === Synthesize
