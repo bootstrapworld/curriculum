@@ -1941,14 +1941,12 @@
                               (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a-q]\n--\n" o)
-                              (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n* " o)
+                              (expand-directives:string->port text o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a-a]\n--\n" o)
-                              (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n** " o)
+                              (expand-directives:string->port text o))]
                            [(string=? directive "strategy")
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
