@@ -1740,17 +1740,10 @@
                                       [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
-                            (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
-                                   [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
-                              (display
-                                (cond [contains-blocks?
-                                        (string-append "\n\n[.indentedpara]\n--\n"
-                                          converted-text
-                                          "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
-                                             ".indentedpara" converted-text)]) o))]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
