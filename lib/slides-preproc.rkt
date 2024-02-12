@@ -792,16 +792,13 @@
       (expand-directives i o))))
 
 (define (preproc-slides-file in-file out-file)
-  (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
+  ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
   (set! *in-file* in-file)
   (call-with-input-file in-file
     (lambda (i)
       (call-with-output-file out-file
         (lambda (o)
-          (expand-directives i o)
-          ; (printf "preproc-slides-file done\n")
-
-          )
+          (expand-directives i o))
         #:exists 'replace))))
 
 (let* ([cla (current-command-line-arguments)]
