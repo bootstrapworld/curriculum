@@ -12,9 +12,7 @@
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
 ;if md2gslides can't handle too many images, set this to a small number, e.g., 6
-(define *max-images-processed*
-  (cond [(truthy-getenv "EXPERIMENTAL") #f]
-        [else #f]))
+(define *max-images-processed* #f)
 
 (define *num-images-processed* 0)
 
@@ -708,7 +706,6 @@
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (set! *single-question?* (= (length (regexp-match* "@Q{" text)) 1))
-                              (printf "single-question? = ~s\n" *single-question?*)
                               (expand-directives:string->port text o)
                               (set! *single-question?* #f)
                               (ensure-teacher-notes)
@@ -752,22 +749,23 @@
     (lambda (i)
       (expand-directives i o))))
 
-(define (preproc-slides-file in-file)
-  ; (printf "\ndoing preproc-slides-file ~s\n" in-file)
+(define (preproc-slides-file in-file out-file)
+  (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
   (set! *in-file* in-file)
-  (let ([out-file (path-replace-extension in-file ".mkd")])
-    (call-with-input-file in-file
-      (lambda (i)
-        (call-with-output-file out-file
-          (lambda (o)
-            (expand-directives i o)
-            ; (printf "preproc-slides-file done\n")
+  (call-with-input-file in-file
+    (lambda (i)
+      (call-with-output-file out-file
+        (lambda (o)
+          (expand-directives i o)
+          ; (printf "preproc-slides-file done\n")
 
-            )
-          #:exists 'replace)))))
+          )
+        #:exists 'replace))))
 
-(let ([in-file (vector-ref (current-command-line-arguments) 0)])
-  (preproc-slides-file in-file))
+(let* ([cla (current-command-line-arguments)]
+       [in-file (vector-ref cla 0)]
+       [out-file (vector-ref cla 1)])
+  (preproc-slides-file in-file out-file))
 
 (void)
 
