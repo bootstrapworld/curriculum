@@ -791,22 +791,23 @@
     (lambda (i)
       (expand-directives i o))))
 
-(define (preproc-slides-file in-file)
-  ; (printf "\ndoing preproc-slides-file ~s\n" in-file)
+(define (preproc-slides-file in-file out-file)
+  (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
   (set! *in-file* in-file)
-  (let ([out-file (path-replace-extension in-file ".mkd")])
-    (call-with-input-file in-file
-      (lambda (i)
-        (call-with-output-file out-file
-          (lambda (o)
-            (expand-directives i o)
-            ; (printf "preproc-slides-file done\n")
+  (call-with-input-file in-file
+    (lambda (i)
+      (call-with-output-file out-file
+        (lambda (o)
+          (expand-directives i o)
+          ; (printf "preproc-slides-file done\n")
 
-            )
-          #:exists 'replace)))))
+          )
+        #:exists 'replace))))
 
-(let ([in-file (vector-ref (current-command-line-arguments) 0)])
-  (preproc-slides-file in-file))
+(let* ([cla (current-command-line-arguments)]
+       [in-file (vector-ref cla 0)]
+       [out-file (vector-ref cla 1)])
+  (preproc-slides-file in-file out-file))
 
 (void)
 
