@@ -8,7 +8,7 @@ test -s "$ADOC_INPUT" || exit 0
 
 cssfile=$TOPDIR/distribution/$NATLANG/lib/curriculum.css
 
-errfile=.make.error.log
+errfile=$TOPDIR/distribution/.make.error.log
 
 rm -f $errfile
 

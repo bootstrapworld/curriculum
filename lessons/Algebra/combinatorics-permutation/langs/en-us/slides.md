@@ -146,7 +146,7 @@ With four courses, it would take more than __3.5 years__ to try them all -- if w
 
 - In Pyret, we can raise a 6 to the power of four with the `num-expt` function. 
 - For example, `num-expt(6, 4)` will compute @math{6^4}. 
-- In the Definitions Area, use the Design Recipe to define `num-permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
+- In the Definitions Area, use the Design Recipe to define `permute-w-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (with replacement).
 
 
 @slidebreak
@@ -274,7 +274,7 @@ With this number of possible combinations, it would take almost a year to try th
 
 We can write this relationship as a function:
 
-@math{\mbox{permute-no-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}
+@math{\mbox{permute-wo-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}
 
 
 @slidebreak
@@ -283,7 +283,7 @@ We can write this relationship as a function:
 
 For practice, complete @printable-exercise{permutation.adoc}.
 
-In Pyret, we can compute the factorial of 6 with the `factorial` function. For example, `factorial(6)` will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}. In the Definitions Area, use the Design Recipe to define `num-permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).
+In Pyret, we can compute the factorial of 6 with the `factorial` function. For example, `factorial(6)` will compute @math{6 \times 5 \times 4 \times 3 \times 2 \times 1}. In the Definitions Area, use the Design Recipe to define `permute-wo-replace`, which consumes the number of items and the number of choices and produces the number of possible permutations (_without_ replacement).
 
 
 
