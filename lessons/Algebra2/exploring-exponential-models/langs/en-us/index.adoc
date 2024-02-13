@@ -55,12 +55,12 @@ A college is looking at enrollment and housing data for a sample of students who
 @A{80}
 @Q{How many Decided Majors live _on_-campus?}
 @A{80}
-@Q{Who is more likely to live on campus: Decided or Undecided Majors?}
-@teacher{Let students discuss the last question!}
+@Q{Discuss: Who is more likely to live on campus: Decided or Undecided Majors?}
+@A{(Give students time to talk about this, and explain their thinking!	)}
 }
 
 @teacher{
-@optional If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.
+@opt{If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.}
 }
 
 It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
@@ -99,9 +99,7 @@ Normally we think that "more data means more power!", and that the more data we 
 
 @clear
 
-"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on.
-
- In this lesson, we'll explore some real data that's better analyzed __in pieces...__
+"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on. In this lesson, we'll explore some real data that's better analyzed _in pieces..._
 
 === Investigate
 
@@ -207,7 +205,7 @@ Are linear models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty good @math{R^2}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty small @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
 
 @lesson-instruction{
 - Complete @printable-exercise{quadratic-models.adoc}, using the second slide of @starter-file{alg2-covid-desmos}.
@@ -218,7 +216,7 @@ Are linear models a good fit for this data? Why or why not?
 
 Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
 
-@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty good @math{R^2} value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
+@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty low @math{S}-value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
 === Synthesize
 

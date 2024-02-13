@@ -64,9 +64,10 @@ Luigi decides to change the rules again, to help his kitchen staff. There are st
 
 When order __doesn't__ matter, all the possible options are called @vocab{combinations} (think of Luigi's "combination platter!").
 
-Since there's no replacement, let's start by using our formula for `permutation-without-replacement` to compute all the possible permutations. We have six items to choose from and are selecting four of them:
+Since there's no replacement, let's start by using our formula for `permutation-without-replacement` to compute all the possible permutations. +
+We have six items to choose from and are selecting four of them:
 
-@math{\mbox{permute-no-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@math{\mbox{permute-wo-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
 @slidebreak
 
@@ -78,13 +79,15 @@ If we knew that every combination would have a duplicate, we'd divide the number
 How do we compute the number of duplicates in a four-course platter?
 }
 
-We already know how to do this! This is the same question as "How many permutations are there for the same four courses?"
+We already know how to do this! 
+
+__This is the same question as__ **"How many permutations are there for the same four courses?"**
 
 @slidebreak
 
 Using our formula for "permutation without replacement" we get 24 duplicates:
 
-@math{\mbox{permute-no-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
+@math{\mbox{permute-wo-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
 
 Now, we need to divide 'the number of permutations (without replacement) for choosing 4 courses out of six items" by "the number of duplicate permutations in any four-course platter".
 
@@ -97,11 +100,11 @@ Now, we need to divide 'the number of permutations (without replacement) for cho
 
 We can rewrite this using our functions from earlier:
 
-@math{combinations(items, choose) = \frac{\mbox{permute-no-replace}(items, choose)}{\mbox{permute-no-replace}(choose, choose)}}
+@math{combinations(items, choose) = \frac{\mbox{permute-wo-replace}(items, choose)}{\mbox{permute-wo-replace}(choose, choose)}}
 
 In this situation, we have 6 possible choices and we get to choose 4 times:
 
-@math{combinations(6, 4) = \frac{\mbox{permute-no-replace}(6, 4)}{\mbox{permute-no-replace}(4, 4)}}
+@math{combinations(6, 4) = \frac{\mbox{permute-wo-replace}(6, 4)}{\mbox{permute-wo-replace}(4, 4)}}
 
 @slidebreak
 
