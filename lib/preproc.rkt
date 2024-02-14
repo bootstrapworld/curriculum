@@ -648,6 +648,7 @@
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")]
+        [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
 
@@ -657,31 +658,28 @@
                 *natlang* *lesson*)))
 
     (cond [(file-exists? json-file)
-           (let ([images-hash (call-with-input-file json-file read-json)])
-             ; (printf "images-hash is ~s\n" images-hash)
-             (set! *images-hash-list*
-               (cons (cons *containing-directory* images-hash) *images-hash-list*))
-             (unless (or *narrative* *target-pathway* *teacher-resources*)
-               (hash-for-each images-hash
-                 (lambda (key val)
-                   (let* ([image-file (build-path image-dir (symbol->string key))]
-                          [anon-image-file (anonymize-filename image-file)])
-                     (unless (file-exists? anon-image-file)
-                       (cond [(file-exists? image-file)
-                              (rename-file-or-directory image-file anon-image-file #t)]
-                             [else
-                               (unless (member key missing-images)
-                                 (set! missing-images (cons key missing-images)))
-                               #;(printf "WARNING: ~a: Image file ~a not found\n"
-                                       (errmessage-context) image-file)
-                             ]))))))
-             images-hash)]
+           (set! images-hash (call-with-input-file json-file read-json))
+           ; (printf "images-hash is ~s\n" images-hash)
+           (set! *images-hash-list*
+             (cons (cons *containing-directory* images-hash) *images-hash-list*))
+           (unless (or *narrative* *target-pathway* *teacher-resources*)
+             (hash-for-each images-hash
+               (lambda (key val)
+                 (let* ([image-file (build-path image-dir (symbol->string key))]
+                        [anon-image-file (anonymize-filename image-file)])
+                   (unless (file-exists? anon-image-file)
+                     (cond [(file-exists? image-file)
+                            (rename-file-or-directory image-file anon-image-file #t)]
+                           [else
+                             (unless (member key missing-images)
+                               (set! missing-images (cons key missing-images)))
+                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                             ]))))))]
           [else
             (when (or *lesson-plan* *lesson*)
               (unless (member json-file *missing-image-json-files*)
                 (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))
-            'not-found])
+                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -689,6 +687,8 @@
           (for ([f missing-images])
             (write f o) (newline o)))
         #:exists 'append))
+
+    images-hash
     ))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
@@ -1742,17 +1742,10 @@
                                       [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
-                            (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
-                                   [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
-                              (display
-                                (cond [contains-blocks?
-                                        (string-append "\n\n[.indentedpara]\n--\n"
-                                          converted-text
-                                          "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
-                                             ".indentedpara" converted-text)]) o))]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -1943,9 +1936,9 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a]\n--\n" o)
+                              (display "\n[.actually-openblock.q-and-a]\n====\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)

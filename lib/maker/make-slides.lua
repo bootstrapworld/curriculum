@@ -109,12 +109,11 @@ local function get_slides(lsn_plan_adoc_file)
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
   local inside_table_p = false
-  local table_numcols = 0
-  local table_header = false
   local curr_slide = newslide()
   local inside_css_p = false
   local beginning_of_line_p = true
   local inside_lesson_instruction = false
+  local tableIdx = -1 -- to skip the preamble table
   file_being_read = lsn_plan_adoc_file
   while true do
     local c = i:read(1)
@@ -130,7 +129,9 @@ local function get_slides(lsn_plan_adoc_file)
     elseif c == '@' and not inside_css_p then
       beginning_of_line_p = false
       local directive = read_word(i)
-      if directive == 'scrub' or directive == 'ifnotslide' then
+      if inside_table_p then
+        --noop
+      elseif directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
       elseif directive == 'lesson-instruction' then
         inside_lesson_instruction = true
@@ -207,13 +208,6 @@ local function get_slides(lsn_plan_adoc_file)
         local L = i:read_line()
         if not L then break
         elseif L:match('cols=[%d"\']') then
-          if L:match('header') then table_header = true end
-          if L:match('cols=(%d+)') then
-            table_numcols = tonumber(L:gsub('.-cols=(%d+).*', '%1'))
-          else
-            local table_cols = L:gsub('.-cols=["\'](.-)["\'].*', '%1')
-            _, table_numcols = table_cols:gsub(',', 'x')
-          end
           beginning_of_line_p = true
         else
           curr_slide.text = curr_slide.text .. '['
@@ -225,23 +219,21 @@ local function get_slides(lsn_plan_adoc_file)
         inside_table_p = not inside_table_p
         beginning_of_line_p = true
         if inside_table_p then
-          curr_slide.text = curr_slide.text .. '@table{' .. (table_numcols + 1)
-          if table_header then
-            curr_slide.text = curr_slide.text .. ',header'
-          end
-          curr_slide.text = curr_slide.text .. '}{\n'
-        else
-          table_header = false
-          table_numcols = 0
+          tableIdx = tableIdx + 1
+          curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
           curr_slide.text = curr_slide.text .. '}\n'
         end
       else
-        curr_slide.text = curr_slide.text .. c
+        if not inside_table_p then
+          curr_slide.text = curr_slide.text .. c
+        end
       end
     elseif inside_css_p then
       --noop
     else
-      curr_slide.text = curr_slide.text .. c
+      if not inside_table_p then
+        curr_slide.text = curr_slide.text .. c
+      end
     end
   end
   i:close()
