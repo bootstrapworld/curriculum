@@ -115,6 +115,7 @@ local function get_slides(lsn_plan_adoc_file)
   local inside_css_p = false
   local beginning_of_line_p = true
   local inside_lesson_instruction = false
+  local tableIdx = -1 -- to skip the preamble table
   file_being_read = lsn_plan_adoc_file
   while true do
     local c = i:read(1)
@@ -225,9 +226,10 @@ local function get_slides(lsn_plan_adoc_file)
         inside_table_p = not inside_table_p
         beginning_of_line_p = true
         if inside_table_p then
-          curr_slide.text = curr_slide.text .. '@table{' .. (table_numcols + 1)
+          tableIdx = tableIdx + 1
+          curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
           if table_header then
-            curr_slide.text = curr_slide.text .. ',header'
+            --curr_slide.text = curr_slide.text .. ',header'
           end
           curr_slide.text = curr_slide.text .. '}{\n'
         else
