@@ -10,6 +10,9 @@
   td, .autonum { padding: 0 !important; }
   table tr:last-child td { text-align: left; }
   .sect1 table tr:first-child { height: 1.25in; }
+
+  /* squish the example table to save vertical space*/
+  .sect1 .example-table tr:first-child { height: 1in; }
   .fitb{ padding-top: 0.5rem; }
   td.tableblock code { line-height: 1.2 !important }
   .contracts { margin-bottom: 10px; }
@@ -31,11 +34,11 @@ Open the @starter-file{comm-and-assoc}, which you will use to investigate four f
 
 |===
 
-What image operations can be distributed? Follow the example in the table below.
+What image operations can be distributed? *Follow the example in the table below.*
 
 == Example: Does @show{(code 'scale)} distribute over @show{(code 'beside)}?
 
-[cols="^.^1,^.^4,^.^4", stripes="none"]
+[.example-table,cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
 | Circle of Evaluation |@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))}
