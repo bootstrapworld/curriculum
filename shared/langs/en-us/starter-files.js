@@ -627,19 +627,10 @@ const MoreAlg = {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
     }
   },
-  "inequalities-samX": {
+  "inequalities-sam": {
     "title": "Sam the Butterfly Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1wP6m2gAouUk9TmOyOXmU3CkskcVfHm79"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
-    }
-  },
-  "inequalities-samXY": {
-    "title": "Sam the Butterfly Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1xM5Ipf0poIOc2WM-Fs-E-SJRzPmj8DjI"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0elP8WrmfM"
@@ -754,6 +745,24 @@ const EarlyMath = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
+    }
+  },
+  "exponents": {
+    "title": "Exponents Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=gadP2T1dKH"
+    }
+  },
+  "is-it-16": {
+    "title": "Is it 16? Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL&v=0c33ff0"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=j0ExQBqaqm"
     }
   }
 }

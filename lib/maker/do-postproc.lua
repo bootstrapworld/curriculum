@@ -132,6 +132,8 @@ function postproc(fhtml_cached, tipe)
     x = x:gsub('%%CURRICULUMCOMMENT%%', '<!-- ')
     x = x:gsub('%%ENDCURRICULUMCOMMENT%%', '\n-->')
     --
+    x = x:gsub('class="exampleblock actually%-openblock ', 'class="openblock ')
+    --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')

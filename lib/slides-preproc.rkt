@@ -700,25 +700,10 @@
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
                            [(string=? directive "table")
-                            (let* ([args (begin0 (read-commaed-group i directive read-group)
-                                           (ignorespaces i))]
-                                   [n-args (length args)]
-                                   [n (string->number (first args))]
-                                   [header? (>= n-args 2)]
-                                   [cells (map string-trim
-                                                 (string-split
-                                                   (read-group i directive #:multiline? #t) "|"))]
-                                   [header-cells (if header? (take cells n) '())]
-                                   [body-cells (if header? (drop cells n) cells)])
-                              (set! *outputting-table?* #t)
-                              (display (iii-dollar-html
-                                         (string-append
-                                           "<table>"
-                                           (if header?
-                                               (make-html-table header-cells n #:head? #t) "")
-                                           (make-html-table body-cells n)
-                                           "</table>")) o)
-                              (set! *outputting-table?* #f))]
+                            (let* ([idx (read-group i directive)]
+                                   [path (string-append ".cached/TABLE" idx ".png")]
+                                   [markdown (string-append "![table image](" path ")")])
+                              (display markdown o))]
                            [(string=? directive "vocab")
                             (let ([arg (read-group i directive)])
                               (display "<b><i>" o)
@@ -791,22 +776,23 @@
     (lambda (i)
       (expand-directives i o))))
 
-(define (preproc-slides-file in-file)
-  ; (printf "\ndoing preproc-slides-file ~s\n" in-file)
+(define (preproc-slides-file in-file out-file)
+  ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
+  (system (string-append 
+    "node " *topdir* 
+    "/lib/maker/screenshot-elts.js " *topdir* "/distribution"))
   (set! *in-file* in-file)
-  (let ([out-file (path-replace-extension in-file ".mkd")])
-    (call-with-input-file in-file
-      (lambda (i)
-        (call-with-output-file out-file
-          (lambda (o)
-            (expand-directives i o)
-            ; (printf "preproc-slides-file done\n")
+  (call-with-input-file in-file
+    (lambda (i)
+      (call-with-output-file out-file
+        (lambda (o)
+          (expand-directives i o))
+        #:exists 'replace))))
 
-            )
-          #:exists 'replace)))))
-
-(let ([in-file (vector-ref (current-command-line-arguments) 0)])
-  (preproc-slides-file in-file))
+(let* ([cla (current-command-line-arguments)]
+       [in-file (vector-ref cla 0)]
+       [out-file (vector-ref cla 1)])
+  (preproc-slides-file in-file out-file))
 
 (void)
 

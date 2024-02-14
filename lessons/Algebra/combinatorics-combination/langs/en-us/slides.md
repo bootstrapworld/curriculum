@@ -38,13 +38,13 @@ When order _doesn't_ matter, all the possible options are called @vocab{combinat
 
 Since there's no replacement, let's start by using our formula for permutation-without-replacement to compute all the possible permutations. We have six items to choose from and are selecting four of them:
 
-@math{\mbox{permute-no-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@math{\mbox{permute-wo-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
 @slidebreak
 {layout="InvestigateC"}
 # Combinations
 
-@math{\mbox{permute-no-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@math{\mbox{permute-wo-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
 Many platters are going to be the same _combination_: Lasagna, Soup, Ziti and Chicken might have lots of @vocab{permutations}, but all of them are just a @vocab{combination} of the same four items! 
 
@@ -61,7 +61,7 @@ We already know how to do this! This is the same question as "How many permutati
 
 Using our formula for "permutation without replacement", we get 24 duplicates:
 
-@math{\mbox{permute-no-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
+@math{\mbox{permute-wo-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
 
 @slidebreak
 {layout="InvestigateC"}
@@ -78,7 +78,7 @@ Now, we need to divide 'the number of permutations (without replacement) for cho
 
 We can rewrite this using our functions from earlier:
 
-@math{combinations(items, choose) = \frac{\mbox{permute-no-replace}(items, choose)}{\mbox{permute-no-replace}(choose, choose)}}
+@math{combinations(items, choose) = \frac{\mbox{permute-wo-replace}(items, choose)}{\mbox{permute-wo-replace}(choose, choose)}}
 
 
 @slidebreak
@@ -88,7 +88,7 @@ We can rewrite this using our functions from earlier:
 
 In this situation, we have 6 possible choices and we get to choose 4 times:
 
-@math{combinations(6, 4) = \frac{\mbox{permute-no-replace}(6, 4)}{\mbox{permute-no-replace}(4, 4)}}
+@math{combinations(6, 4) = \frac{\mbox{permute-wo-replace}(6, 4)}{\mbox{permute-wo-replace}(4, 4)}}
 
 @slidebreak
 {layout="Investigate"}

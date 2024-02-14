@@ -14,14 +14,15 @@
 | Lesson Goals
 | Students will be able to...
 
-* sort & count columns of data in the programming environment
-* make pie charts, bar charts, histograms and box plots in Pyret
-* understand how to read contracts for any Pyret function
+- sort & count columns of data in the programming environment
+- make pie charts, bar charts, histograms and box plots in Pyret
+- understand how to read contracts for any Pyret function
 
 | Student-facing Lesson Goals
 |
-* Let's learn some functions for counting and sorting data.
-* Let's learn how to make data displays in Pyret!
+
+- Let's learn some functions for counting and sorting data.
+- Let's learn how to make data displays in Pyret!
 
 | Materials
 |[.materials-links]
@@ -108,8 +109,8 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 @slidebreak
 
 @lesson-instruction{
-* Once you know how to read Contracts, you can easily use all the tools in our programming language. 
-* Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+- Once you know how to read Contracts, you can easily use all the tools in our programming language. 
+- Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
 }
 
 
@@ -143,18 +144,29 @@ Students learn to work with more than one function at once, by way of Circles of
 === Launch
 
 What if we wanted to see the ten youngest animals? 
-* How could the `first-n-rows` and `sort` functions work together? 
-* What order should we use the functions in?
+
+- How could the `first-n-rows` and `sort` functions work together? 
+- What order should we use the functions in?
 
 === Investigate
 
 One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
 
+__Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
+
 (1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
 
 (2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
-Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+@ifslide{
+@do{
+(define expB '(first-n-rows animals-table 5))
+}
+
+@show{(coe expB)}
+
+@slidebreak
+}
 
 (3) Circles can contain other Circles!
 
@@ -214,48 +226,28 @@ This activity focuses on what we can learn about @proglang functions from the me
 Let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
 
 @lesson-instruction{
-* Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{editor}.
-* Start by typing `triangle` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
+- Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{animals}.
+- Start by typing `sort` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
 }
 
 @QandA{
 @Q{What do you get back?}
-@A{`<function:triangle>`}
-@A{This means that the computer knows about a function called `triangle`.}
+@A{`<function:sort>`}
+@A{This means that the computer knows about a function called `sort`.}
 }
 
 @slidebreak
 
 @lesson-instruction{
-* We know that all functions will need an open parentheses and at least one input!
-* We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
-* Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
+- We know that all functions will need an open parentheses and at least one input!
+- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+- Type @show{(code '(sort animals-table))} in the Interactions Area and read the error message.
 }
 
 @QandA{
 @Q{What _hint_ does the error message give us about how to use this function?}
-@A{@image{images/triangle80.png, 500}}
-@A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
-}
-
-@slidebreak
-
-@lesson-instruction{
-* Now we know that `triangle` needs 3 arguments. But what kinds of arguments are they?
-* Try different inputs to make a triangle, and see if you can figure out the Contract!}
-
-@QandA{
-@Q{What is the Contract for `triangle`?}
-@A{@show{(contract `triangle `(Number String String) "Image")}}
-}
-
-@ifslide{
-
-@teacher{The contract is shown on the next slide.}
-
-@slidebreak
-
-@show{(contract `triangle `(Number String String) "Image")}
+@A{@image{images/sort-error.png, 650}}
+@A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
 }
 
 === Investigate
@@ -265,8 +257,8 @@ Mistakes happen, especially if we're just figuring things out! Diagnosing and fi
 }
 
 @lesson-instruction{
-* Turn to the second section of @printable-exercise{pages/catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
-* Then turn to the third section of @printable-exercise{pages/catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
+- Turn to the second section of @printable-exercise{pages/catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
+- Then turn to the third section of @printable-exercise{pages/catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
 }
 
 === Synthesize
@@ -275,7 +267,7 @@ Mistakes happen, especially if we're just figuring things out! Diagnosing and fi
 - What kinds of @vocab{contract errors} did you find?
 
 == Exploring Image Functions @duration{10 minutes}
-
+ 
 === Overview
 
 Making images is a highly motivating context for reading error messages and writing contracts.
