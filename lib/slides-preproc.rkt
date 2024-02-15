@@ -749,7 +749,7 @@
                                 (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
-                           [(member directive '("ifnotslide" "pathway-only" "scrub"))
+                           [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
                             (read-group i directive)]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
