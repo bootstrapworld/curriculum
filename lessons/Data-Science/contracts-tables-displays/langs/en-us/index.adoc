@@ -172,25 +172,31 @@ If we want to see the first ten animals, our diagram would look like this.
 
 (3) Circles can contain other Circles!
 
-@indented{If we want to see the ten youngest animals, our diagram would look like this.}
+@indented{
+If we want to see the ten youngest animals, our diagram would look like this.
 
 @do{
 (define exp1 '(first-n-rows (sort animals-table "age" true) 10))
 }
 
 @show{(coe exp1)}
+}
 
 @slidebreak
 
-@indented{If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.}
+@indented{
+If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
 
 @do{
 (define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
 }
 
 @show{(coe exp2)}
+}
 
 __Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
+
+@slidebreak
 
 **To convert a Circle of Evaluation into code:**
 
@@ -198,10 +204,11 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 - After each function we open a pair of parentheses, and then convert each argument inside the Circle. 
 - We close each pair of parentheses as we finish with the arguments in its Circle of Evaluation.
 
-@indented{This diagram would translate to the code that follows. @show{(coe exp1)}} 
+@indented{This diagram would translate to the code that follows. 
+@show{(coe exp1)} 
 
-@indented{
-@show{(code exp1)}}
+@show{(code exp1)}
+}
 
 @slidebreak
 
