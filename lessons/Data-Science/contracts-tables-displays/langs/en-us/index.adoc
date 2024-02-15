@@ -150,27 +150,29 @@ What if we wanted to see the ten youngest animals?
 
 === Investigate
 
-One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. 
 
-__Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
+**The rules for Circles of Evaluation are simple:**
 
 (1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
 
 (2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
-@ifslide{
+@indented{
+If we want to see the first ten animals, our diagram would look like this.
+
 @do{
-(define expB '(first-n-rows animals-table 5))
+(define expB '(first-n-rows animals-table 10))
 }
 
 @show{(coe expB)}
+}
 
 @slidebreak
-}
 
 (3) Circles can contain other Circles!
 
-
+@indented{
 If we want to see the ten youngest animals, our diagram would look like this.
 
 @do{
@@ -178,19 +180,11 @@ If we want to see the ten youngest animals, our diagram would look like this.
 }
 
 @show{(coe exp1)}
+}
 
 @slidebreak
 
-@ifslide{
-@show{(coe exp1)} 
-} 
-
-To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
-
-@show{(code exp1)}
-
-@slidebreak
-
+@indented{
 If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
 
 @do{
@@ -198,10 +192,23 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 }
 
 @show{(coe exp2)}
+}
 
-That would translate to the following code:
+__Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
 
-@show{(code exp2)}
+@slidebreak
+
+**To convert a Circle of Evaluation into code:**
+
+- We start at the outside and work our way in. 
+- After each function we open a pair of parentheses, and then convert each argument inside the Circle. 
+- We close each pair of parentheses as we finish with the arguments in its Circle of Evaluation.
+
+@indented{This diagram would translate to the code that follows. 
+@show{(coe exp1)} 
+
+@show{(code exp1)}
+}
 
 @slidebreak
 
@@ -333,7 +340,9 @@ The goal here is for students to become familiar with using @dist-link{Contracts
 
 === Launch
 
-The `count` function summarized the data for a single variable in a new table. But the same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make displays for us!
+The `count` function summarized the data for a single variable in a new table. 
+
+The same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make displays for us!
 
 === Investigate
 
@@ -366,7 +375,9 @@ Turn to @printable-exercise{exploring-displays.adoc}. Let's look at the first fu
 If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-displays-2.adoc}.
 }
 
-Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays.
+@slidebreak
+
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays. Consider this:
 
 @show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
 
@@ -380,10 +391,14 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @opt{If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
 
+@slidebreak
+
 @lesson-instruction{
 - Complete @printable-exercise{coe-displays.adoc}.
-- Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. *Consider what display it might be interesting to compare each of the displays on this page with.* 
-}
+- Then consider what display it might be interesting to compare each of the displays on this page with.
+  * _Displays are often most informative when compared with other displays._ 
+  * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
+} 
 
 @opt{For more practice making tables and displays by composing functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}}
 
