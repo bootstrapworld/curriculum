@@ -109,6 +109,17 @@ function read_word(i)
   return table.concat(w)
 end
 
+function ignore_spaces(i)
+  while true do
+    local c = buf_peek_char(i)
+    if c == ' ' or c == '\t' or c == '\n' then
+      i:read(1)
+    else
+      break
+    end
+  end
+end
+
 function make_read_group(code, errmsg_file_context)
   local function read_group (i, directive, scheme_p, multiline_p)
     -- reads braced input, without the braces
