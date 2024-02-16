@@ -1833,13 +1833,11 @@
                                     (let ([s (keyword-apply f key-list key-vals args)])
                                       (expand-directives:string->port s o)
                                       )))))]
-                           [(string=? directive "optional")
-                            (display (enclose-span ".optionaltag" "Optional: ") o)]
                            [(string=? directive "opt")
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]\n" o)
+                              (display "[.optionaltag]##{empty}##\n" o)
                               (display (expand-directives:string->string text) o)
                               (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]

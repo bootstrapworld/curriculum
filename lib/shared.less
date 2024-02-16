@@ -174,7 +174,7 @@ body {
     vertical-align:     baseline;
     &:empty { display: none; } /* If empty after JS post-processing, hide */
   }
-  .optionaltag>p::before {
+  .optionaltag::before {
     font-style: italic; 
   }
 }
@@ -273,7 +273,7 @@ lines on some browsers */
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
     dt a.project {
-      &::before { content: '🛠🧵 '; }
+      &::before { content: '🎨 '; text-decoration: none; }
     }
     dd:after  { display: block; content: ''; }
     dd:before { display: inline; content: ' :: '; font-weight: 900; }
@@ -618,6 +618,11 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
+
+  .circleevalsexp .studentBlockAnswerFilled { 
+    font-weight: bold; font-style: italic; display: inline-block; 
+    .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
+  }
 
   .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
     background:   @translucent-bg-color;

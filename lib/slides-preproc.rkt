@@ -750,10 +750,6 @@
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
                             (read-group i directive)]
-                           [(member directive '("optional"))
-                            (printf "WARNING: @optional found in lesson plan! ")
-                            (printf "To fix, replace with @opt{...}\n")
-                            #f]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
                             (display "@include found outside of @ifnotslide!\n" o)]
