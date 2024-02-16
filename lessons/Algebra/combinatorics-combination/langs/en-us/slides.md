@@ -69,7 +69,7 @@ Using our formula for "permutation without replacement", we get 24 duplicates:
 
 Now, we need to divide 'the number of permutations (without replacement) for choosing 4 courses out of six items" by "the number of duplicate permutations in any four-course platter".
 
-@math{combinations(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
+@math{\mbox{combinations}(6, 4) = \frac{6!}{(6 - 4)!} \div 4! = 360 \div 24 = 15}
 
 
 @slidebreak
@@ -78,7 +78,7 @@ Now, we need to divide 'the number of permutations (without replacement) for cho
 
 We can rewrite this using our functions from earlier:
 
-@math{combinations(items, choose) = \frac{\mbox{permute-wo-replace}(items, choose)}{\mbox{permute-wo-replace}(choose, choose)}}
+@math{\mbox{combinations}(items, choose) = \frac{\mbox{permute-wo-replace}(items, choose)}{\mbox{permute-wo-replace}(choose, choose)}}
 
 
 @slidebreak
@@ -88,7 +88,7 @@ We can rewrite this using our functions from earlier:
 
 In this situation, we have 6 possible choices and we get to choose 4 times:
 
-@math{combinations(6, 4) = \frac{\mbox{permute-wo-replace}(6, 4)}{\mbox{permute-wo-replace}(4, 4)}}
+@math{\mbox{combinations}(6, 4) = \frac{\mbox{permute-wo-replace}(6, 4)}{\mbox{permute-wo-replace}(4, 4)}}
 
 @slidebreak
 {layout="Investigate"}
