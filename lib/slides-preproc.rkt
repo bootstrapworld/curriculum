@@ -207,7 +207,6 @@
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/asciidoctor.css\"/>\n"
     "<style>\n"
-    "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
