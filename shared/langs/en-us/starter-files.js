@@ -100,7 +100,7 @@ const Core = {
   "rocket-height": {
     "title": "Rocket Height Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
+      "url": "https://code.pyret.org/editor#share=1uzvl8rId2kaLL0mrE-9s4FsmNXsh301I"
     },
     "codap": {
       "url": "https://code.pyret.org/editor#share=1Wvu39Uf0vmlA6s2HO5nOmGm-PtnTvfCf"
@@ -151,10 +151,16 @@ const Piecewise = {
   "collaboration": {
     "title": "Collaboration Starter File - For use with Design Recipe Telephone Set 1",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1_IQ5bKqbQujDU9NvLyvU_YFFyVAXWa6k"
+      "url": "https://code.pyret.org/editor#share=1oWd-1TSw-mq_4QQF2muuVdETuRJTJ8eL"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=SR2kj0Xt6z"
+    }
+  },
+  "collaboration-solution": {
+    "title": "Collaboration Starter File - Solution",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1MPaX9lO--t2JI-pJvLthfXWJPuIdq3eN&v=0c33ff0"
     }
   },
   "mood-generator": {
@@ -496,7 +502,7 @@ const Flags = {
   "flags": {
     "title": "Flags Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1mjNzzf4iiQkjosPExCKtYyCaDihSs-Qr"
+      "url": "https://code.pyret.org/editor#share=1polQFNtPpR8RHkGcllZAj3b1_vZGfSJK"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=4JbTjy7Hup"
@@ -505,7 +511,7 @@ const Flags = {
   "flags-mx": {
     "title": "Flag of Mexico Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1xUVPGNns_0g6g9-70W6CbxqXv1QJZvK6"
+      "url": "https://code.pyret.org/editor#share=1vBQi8cZZ4KdmFvtxkbPmD_ogyqESpbol"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=SnLx13yt5W"
@@ -514,7 +520,7 @@ const Flags = {
   "flags-ak": {
     "title": "Alaskan Flag Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Fdc64p2z-65iPa_F58NCTQCE8oJQMTm1"},
+      "url": "https://code.pyret.org/editor#share=1HVC8BOD1C-Dny0jpHU0vBlP7Q5Axfcsf"},
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=ve2gTEY06p"
     }
@@ -531,7 +537,7 @@ const Flags = {
   "flags-2": {
     "title": "Flags of Netherlands, France & Mauritius Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1O_3WGOcqaTzR7cuZY3ZSh5TEFg3ZNPV6"
+      "url": "https://code.pyret.org/editor#share=15vRxPzlNlB8msSxdFlCvZA-lVNAhu7CL"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=81WrTGQglP"
@@ -540,7 +546,7 @@ const Flags = {
   "flags-pr": {
     "title": "Flag of Puerto Rico Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1QX4pU7j2hK4rR0zfLXGAgEarCSsLVwqD"
+      "url": "https://code.pyret.org/editor#share=1fnDg1RY4a0QoT9_Y1kJFuKjmUyjyiUke"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=6TJ0N2CJqU"
@@ -549,7 +555,7 @@ const Flags = {
   "flags-trinidad": {
     "title": "Flag of Trinidad and Tobago Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1-TtjC_NYZTtT5U0T3HSdvcfBHb90bh2n"
+      "url": "https://code.pyret.org/editor#share=1d2_lPMblOUGHhnHaYe1-Ekh8qPCGRfaP"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=SQRHKcqQvW"
@@ -558,7 +564,7 @@ const Flags = {
   "flags-lebanon": {
     "title": "Flag of Lebanon Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1H1yf0uFJgiT6NBHqW8kh_JjLKHNQRXpH"
+      "url": "https://code.pyret.org/editor#share=1vEJbRALHqDNish3llap6yY6qUo_leikt"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=x0nJrP1UYp"
@@ -567,7 +573,7 @@ const Flags = {
   "flags-turkey": {
     "title": "Flag of Turkey Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=17HZOT0Y6rHAmwv8BZNN9YIsoqI7yWmHj"
+      "url": "https://code.pyret.org/editor#share=18zxfCDMaa2z5KWy6Hu_cqkDBsJvrVY2C"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0Sdq8F2b3q"
@@ -575,8 +581,11 @@ const Flags = {
   },
   "flags-panama": {
     "title": "Flag of Panama Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
+    },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=V4AfQydAHu"
+      "url": "https://www.wescheme.org/view?publicId=A3N1Kcg7iy"
     }
   },
   "flags-desmos": {
@@ -603,7 +612,7 @@ const MoreAlg = {
   "prism": {
     "title": "Surface Area of a Rectangular Prism Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Y520nufSQfWas0aePgaQRVnI2oES3_86"
+      "url": "https://code.pyret.org/editor#share=19KchllPnZ1zKJqZecwBF3ABo5YbExKxT"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=Cyrw5bQa71"
@@ -621,7 +630,7 @@ const MoreAlg = {
   "inequalities-compound": {
     "title": "Compound Inequalities Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1wmfqAhQelP4L49nVuqosbfjcB0gpfS6T"
+      "url": "https://code.pyret.org/editor#share=1IxulGTwk8hFk1B_eWBHuMYt4GI5gKnVx"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
