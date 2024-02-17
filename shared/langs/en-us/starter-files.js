@@ -211,7 +211,7 @@ const GameBasics = {
   "game": {
     "title": "Blank Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1_4uSefNKa07Ye-iNqh6fh1snxqaMlySd"
+      "url": "https://code.pyret.org/editor#share=13tAs-hITS02zGNMCkt1C0SXOGI37vhdj"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
@@ -220,7 +220,7 @@ const GameBasics = {
   "sample-game-no-distance-lines": {
     "title": "Sample Game Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1uUEsPwha-Siw-sMNf7Zaz_Z4gAog7Prl"
+      "url": "https://code.pyret.org/editor#share=1U2XOROBIV2vQJ3Umb1MqpuXe0vcx2n6Z"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
@@ -229,7 +229,7 @@ const GameBasics = {
   "sample-game-w-distance": {
     "title": "Sample Game with Distance Lines Made Visible",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1R8uAFAeYRy5L6FydesOBLHQHFtQEGxGV"
+      "url": "https://code.pyret.org/editor#share=1-S9RRrpHa-TYkrWKgggcr3N6l0C22AwK"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QgT6PtTZ2v"
@@ -238,7 +238,7 @@ const GameBasics = {
   "sample-game-2d": {
     "title": "Sample Game with 2D Motion",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k_dn3TCwVY2ykFqxQL8BpnQHMey1IgzW"
+      "url": "https://code.pyret.org/editor#share=1DcsQ280Po_GjlPXHsI4f7k_o2aNKwT1U"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=HA2U428Ykk"
@@ -247,7 +247,7 @@ const GameBasics = {
   "sample-game-no-collision": {
     "title": "Sample Game with No Collision",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Jlv8kWZPogedtBSIzrMA2s345Kp5OWPA"
+      "url": "https://code.pyret.org/editor#share=1U2XOROBIV2vQJ3Umb1MqpuXe0vcx2n6Z"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
