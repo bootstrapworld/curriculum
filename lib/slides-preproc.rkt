@@ -207,7 +207,6 @@
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/asciidoctor.css\"/>\n"
     "<style>\n"
-    "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
@@ -749,7 +748,7 @@
                                 (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
-                           [(member directive '("ifnotslide" "pathway-only" "scrub"))
+                           [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
                             (read-group i directive)]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
