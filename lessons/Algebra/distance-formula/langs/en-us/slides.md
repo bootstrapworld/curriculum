@@ -30,7 +30,7 @@ It's almost fully-playable!
 * How will the computer know when the characters have collided?
 
 <!--
-_Here's a link to a @opt-starter-file{sample-game-no-distance-lines} you can use if you're demoing on the board._
+_Here's a link to a @opt-starter-file{sample-game-no-collision} you can use if you're demoing on the board._
 
 
 * What seems to be missing from this game? _The characters aren't doing anything when they collide._
