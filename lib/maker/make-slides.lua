@@ -97,6 +97,11 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
+      elseif directive == 'ifpathway' then
+        local pwys = read_group(i, directive)
+        ignore_spaces(i)
+        local text = read_group(i, directive, false, true)
+        curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
       elseif directive == 'lesson-instruction' then
         curr_slide.suffix = '-DN'
         curr_slide.text = curr_slide.text .. c .. directive
