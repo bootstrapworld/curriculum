@@ -224,6 +224,7 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('# ', curr_header, '\n\n')
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
+          l1 = l1:gsub('^(%s+)#', '%1\\#')
           l1 = l1:gsub('__(.-)__', '_%1_')
           l1 = l1:gsub(' %+$', '')
           o:write(l1, '\n')
