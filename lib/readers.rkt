@@ -343,6 +343,7 @@
         [else
           (set! text (regexp-replace* "\\( +" text "("))
           (set! text (regexp-replace* " +\\)" text ")"))
+          (set! text (regexp-replace* "\\pi" text "π"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text

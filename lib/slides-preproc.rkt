@@ -207,7 +207,6 @@
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/asciidoctor.css\"/>\n"
     "<style>\n"
-    "body {transform-origin: left top; transform: scale(5);}\n"
     ".circleevalsexp { width: unset !important; }\n"
     "</style>\n"
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
@@ -676,7 +675,7 @@
                            [(member directive '("lesson-instruction" "lesson-roleplay" "indented"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
-                           [(member directive '("clear" "optional"))
+                           [(member directive '("clear"))
                             #f]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
@@ -700,25 +699,10 @@
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
                            [(string=? directive "table")
-                            (let* ([args (begin0 (read-commaed-group i directive read-group)
-                                           (ignorespaces i))]
-                                   [n-args (length args)]
-                                   [n (string->number (first args))]
-                                   [header? (>= n-args 2)]
-                                   [cells (map string-trim
-                                                 (string-split
-                                                   (read-group i directive #:multiline? #t) "|"))]
-                                   [header-cells (if header? (take cells n) '())]
-                                   [body-cells (if header? (drop cells n) cells)])
-                              (set! *outputting-table?* #t)
-                              (display (iii-dollar-html
-                                         (string-append
-                                           "<table>"
-                                           (if header?
-                                               (make-html-table header-cells n #:head? #t) "")
-                                           (make-html-table body-cells n)
-                                           "</table>")) o)
-                              (set! *outputting-table?* #f))]
+                            (let* ([idx (read-group i directive)]
+                                   [path (string-append ".cached/TABLE" idx ".png")]
+                                   [markdown (string-append "![table image](" path ")")])
+                              (display markdown o))]
                            [(string=? directive "vocab")
                             (let ([arg (read-group i directive)])
                               (display "<b><i>" o)
@@ -764,8 +748,12 @@
                                 (display "\n  -  " o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
-                           [(member directive '("ifnotslide" "pathway-only" "scrub"))
+                           [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
                             (read-group i directive)]
+                           [(member directive '("optional"))
+                            (printf "WARNING: @optional found in lesson plan! ")
+                            (printf "To fix, replace with @opt{...}\n")
+                            #f]
                            [(string=? directive "include")
                             (printf "WARNING: @include found outside of @ifnotslide!\n")
                             (display "@include found outside of @ifnotslide!\n" o)]
@@ -793,6 +781,9 @@
 
 (define (preproc-slides-file in-file out-file)
   ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
+  (system (string-append 
+    "node " *topdir* 
+    "/lib/maker/screenshot-elts.js " *topdir* "/distribution"))
   (set! *in-file* in-file)
   (call-with-input-file in-file
     (lambda (i)

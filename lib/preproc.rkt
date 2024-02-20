@@ -1950,13 +1950,12 @@
                            [(string=? directive "strategy")
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
-                              (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
-                              (display "|===\n|\n" o)
+                              (display "\n[.strategy-box]\n--\n" o)
                               (display "[.title]\n" o)
                               (expand-directives:string->port title o)
                               (display "\n\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n|===\n" o))]
+                              (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-point]\n--\n" o)
