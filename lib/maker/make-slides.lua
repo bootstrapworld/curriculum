@@ -26,6 +26,8 @@ local function first_line(f)
   return x
 end
 
+local proglang = first_line('.cached/.record-proglang') or 'pyret'
+
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Default'
 
 local course_string = 'Default'
@@ -97,6 +99,13 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
+      elseif directive == 'ifproglang' then
+        local pls = read_group(i, directive)
+        if not pls:match(proglang) then
+          read_group(i, directive)
+        else
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. pls .. '}'
+        end
       elseif directive == 'ifpathway' then
         local pwys = read_group(i, directive)
         ignore_spaces(i)
