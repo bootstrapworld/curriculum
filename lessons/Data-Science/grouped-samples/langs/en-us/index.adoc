@@ -39,8 +39,11 @@
 This activity is all about @vocab{grouped samples}: Students make a bunch of non-random samples from the Animals Dataset, and see how each samples might answer the same question differently.
 
 === Launch
+
 When looking at a scatter plot of animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
 @center{@image{images/scatter-plot.png,550}}
+
+@slidebreak
 
 But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
 
@@ -60,7 +63,9 @@ Divide the class into groups of 3-4, with one student identified as the "reporte
 @A{Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population.}
 }
 
+@teacher{
 Have the reporters share their findings with the class.
+}
 
 === Synthesize
 
@@ -86,13 +91,16 @@ Sometimes important facts about samples get _lost_ if we mix them with the rest 
 Data Scientists define @vocab{grouped samples} of datasets, breaking them up into sub-groups that may be helpful in their analysis.
 
 @ifproglang{pyret}{
+@slidebreak
 
 Earlier, you learned how to define values in Pyret. We can define Numbers, Strings, Images, and even rows:
 
-  name = "Flannery"
-  age  = 16
-  logo = star(50, "solid", "red")
-  sasha= row-n(animals-table, 0)
+    name = "Flannery"
+    age  = 16
+    logo = star(50, "solid", "red")
+    sasha= row-n(animals-table, 0)
+
+@slidebreak
 
 Let's use this skill to define __Tables...__
 
@@ -135,13 +143,19 @@ Students revisit the data display activity, now using the samples they created.
 === Launch
 Making grouped and random samples is a powerful skill, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make grouped samples, we can make much more sophisticated displays!
 
+@slidebreak
+
 Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
 
 @left{@image{images/AskQuestions.png, 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
 
+@slidebreak
+
 @vspace{1ex}
 
 @left{@image{images/ConsiderData.png, 100}} We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
+
+@slidebreak
 
 @vspace{1ex}
 
@@ -149,6 +163,8 @@ Let's start with question: __what's the ratio of fixed to unfixed *cats* at the 
 
 
 @vspace{1ex}
+
+@slidebreak
 
 @left{@image{images/InterpretData.png, 100}} What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
@@ -159,9 +175,9 @@ Let's start with question: __what's the ratio of fixed to unfixed *cats* at the 
 }
 
 @ifproglang{pyret}{
-@opt{For students working on their own datasets...
+@opt{
 
-If you are working on your own dataset, use @printable-exercise{samples-from-my-dataset.adoc} to define your own grouped samples!
+For students who are working on their own dataset, use @printable-exercise{samples-from-my-dataset.adoc} to define grouped samples!
 
 Blank Design Recipes are also available @printable-exercise{design-recipe-helper-funs.adoc, here}.
 }
