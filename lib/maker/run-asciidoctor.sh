@@ -47,5 +47,9 @@ else
 fi
 
 if test -f $errfile; then
-  test -s $errfile || rm -f $errfile
+  if test -s $errfile; then
+    cat $errfile
+  else
+    rm -f $errfile
+  fi
 fi
