@@ -4,6 +4,7 @@
 ++++
 <style>
 table {grid-auto-rows: 1fr;}
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -17,23 +18,23 @@ table {grid-auto-rows: 1fr;}
 | Circle of Evaluation
 
 | @math{\|-m\|}
-|*@n*@showsoln{"-A,G" }||*A*
+|*@n* @ifsoln{A,G}||*A*
 | @show{(coe '(abs (negate m)))}
 
 | @math{-\|m\|}
-|*@n*@showsoln{"-B" }||*B*
+|*@n* @ifsoln{B}||*B*
 | @show{(coe '(negate (abs m)))}
 
 | @math{- (-m)}
-|*@n*@showsoln{"-C, F" }||*C*
+|*@n* @ifsoln{C,F}||*C*
 | @show{(coe '(negate (negate m)))}
 
 | @math{-m}
-|*@n*@showsoln{"-E" }||*D*
+|*@n* @ifsoln{E}||*D*
 | @show{(coe '(negate (abs -m)))}
 
 | @math{- \| -m \|}
-|*@n*@showsoln{"-D" }||*E*
+|*@n* @ifsoln{D}	||*E*
 | @show{(coe '(negate m))}
 
 |

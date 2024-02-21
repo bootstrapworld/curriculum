@@ -4,6 +4,7 @@
 ++++
 <style>
 table {grid-auto-rows: 1fr;}
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -17,43 +18,43 @@ Draw a line from the words on the left to the Circle on the right. Some Circles 
 | Circle of Evaluation
 
 | 25 tripled
-|*@n*@showsoln{"-C" }||
+|*@n* @ifsoln{C}	||
 |
 
 | 3 less than 25
-|*@n*@showsoln{"-E" }||
+|*@n* @ifsoln{E}	||
 |
 
 | 25 less than 3
-|*@n*@showsoln{"-F" }||*A*
+|*@n* @ifsoln{F}	||*A*
 | @show{(coe '(/ 25 3))}
 
 | one-third of 25
-|*@n*@showsoln{"-G" }||*B*
+|*@n* @ifsoln{G}	||*B*
 | @show{(coe '(/ 3 25))}
 
 | add 3 and 25
-|*@n*@showsoln{"-D" }||*C*
+|*@n* @ifsoln{D}	||*C*
 | @show{(coe '(* 25 3))}
 
 | divide 25 into 3 groups
-|*@n*@showsoln{"-A" }||*D*
+|*@n* @ifsoln{A}	||*D*
 | @show{(coe '(+ 3 25))}
 
 | the quotient of 3 and 25
-|*@n*@showsoln{"-B" }||*E*
+|*@n* @ifsoln{B}	||*E*
 | @show{(coe '(- 25 3))}
 
 | the quotient of 25 and 3
-|*@n*@showsoln{"-A" }||*F*
+|*@n* @ifsoln{A}	||*F*
 | @show{(coe '(- 3 25))}
 
 | 25 decreased by 3
-|*@n*@showsoln{"-E" }||
+|*@n* @ifsoln{E}	||
 | @show{(coe '(* 1/3 25))}
 
 | the product of 25 and 3
-|*@n*@showsoln{"-C" }||
+|*@n* @ifsoln{C}	||
 |
 
 
