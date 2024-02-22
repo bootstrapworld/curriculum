@@ -571,6 +571,13 @@ body.workbookpage {
     flex-grow: 1;
   }
 
+  .teacherNote { 
+    font-style: italic; display: inline;
+    line-height: 1.3;
+    * { display: inline; }
+    &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
+  }
+
   .lesson-section-1 { border: none; }
 
   .linkInstructions { font-style: italic; }
@@ -599,7 +606,7 @@ body.workbookpage {
   p .editbox, pre .editbox { font-size: 9pt !important; }
 
   /* Some elements show either solution mode or a blank */
-  .solution { font-style: italic; }
+  .solution, .solution code { font-style: italic !important; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
 
