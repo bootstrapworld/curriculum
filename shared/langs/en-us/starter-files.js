@@ -217,15 +217,6 @@ const GameBasics = {
       "url": "https://www.wescheme.org/openEditor?publicId=duCnqdg8Re"
     }
   },
-  "sample-game-no-distance-lines": {
-    "title": "Sample Game Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1U2XOROBIV2vQJ3Umb1MqpuXe0vcx2n6Z"
-    },
-    "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=QweXHnMPxg"
-    }
-  },
   "sample-game-w-distance": {
     "title": "Sample Game with Distance Lines Made Visible",
     "pyret": {
@@ -880,6 +871,12 @@ const Alg2 = {
     "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+    }
+  },
+  "alg2-exploring-periodic-desmos" : {
+    "title" : "Exploring Periodic Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/65cfad5a183d2d4096470654"
     }
   }
 }
