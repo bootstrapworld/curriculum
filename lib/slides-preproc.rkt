@@ -788,8 +788,8 @@
     (lambda (i)
       (call-with-output-file out-file
         (lambda (o)
-          (expand-directives i o))
-          (display-teacher-notes o)
+          (expand-directives i o)
+          (display-teacher-notes o))
         #:exists 'replace))))
 
 (let* ([cla (current-command-line-arguments)]
