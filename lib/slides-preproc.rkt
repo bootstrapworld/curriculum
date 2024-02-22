@@ -703,7 +703,7 @@
                                 (display (massage-arg s) o)))]
                            [(string=? directive "table")
                             (let* ([idx (read-group i directive)]
-                                   [path (string-append ".cached/TABLE" idx ".png")]
+                                   [path (string-append "images/TABLE" idx ".png")]
                                    [markdown (string-append "![table image](" path ")")])
                               (display markdown o))]
                            [(string=? directive "vocab")
