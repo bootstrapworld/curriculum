@@ -142,21 +142,20 @@ Grouping by value works well when lots of different data points can be sorted in
 - When would you want to use one chart instead of another?
 - Which displays do you find it easier to interpret? Why?
 
-@ifnotslide{
 @strategy{Optional Extension}{
 
 
 Sometimes we want to visualize data that is _already summarized:_
 
 [.pyret-table,cols="1,1",options="header"]
-!===
-! Hair Color		! Number of Students
-! "Black"			! 5
-! "Brown"			! 13
-! "Blond"			! 4
-! "Red"				! 2
-! "Pink"			! 1
-!===
+|===
+| Hair Color		| Number of Students
+| "Black"			| 5
+| "Brown"			| 13
+| "Blond"			| 4
+| "Red"				| 2
+| "Pink"			| 1
+|===
 
 In this situation, we want to use the values in the _first_ column for the labels of our pie slices or bars, and the values in the _second_ column for the size. We have contracts for those, too:
 @show{(contract 'pie-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
@@ -165,7 +164,7 @@ In this situation, we want to use the values in the _first_ column for the label
 Open the @opt-starter-file{hair} to try them out!
 
 }
-}
+
 
 == Groups and Subgroups @duration{20 minutes}
 

@@ -26,6 +26,8 @@ local function first_line(f)
   return x
 end
 
+local proglang = first_line('.cached/.record-proglang') or 'pyret'
+
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
 local course_string = 'Core'
@@ -133,6 +135,18 @@ local function get_slides(lsn_plan_adoc_file)
         --noop
       elseif directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
+      elseif directive == 'ifproglang' then
+        local pls = read_group(i, directive)
+        if not pls:match(proglang) then
+          read_group(i, directive)
+        else
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. pls .. '}'
+        end
+      elseif directive == 'ifpathway' then
+        local pwys = read_group(i, directive)
+        ignore_spaces(i)
+        local text = read_group(i, directive, false, true)
+        curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
       elseif directive == 'lesson-instruction' then
         inside_lesson_instruction = true
         curr_slide.text = curr_slide.text .. c .. directive
@@ -301,6 +315,8 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('# ', curr_header, '\n\n')
         local slide_lines = string_split(slide.text, '\n')
         for _,l1 in ipairs(slide_lines) do
+          l1 = l1:gsub('^(%s+)#', '%1\\#')
+          l1 = l1:gsub('^%-%-%-%-$', '````')
           l1 = l1:gsub('__(.-)__', '_%1_')
           l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
           l1 = l1:gsub('%*(%S.-%S)%*', '__%1__')

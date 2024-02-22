@@ -675,7 +675,7 @@
                            [(member directive '("lesson-instruction" "lesson-roleplay" "indented"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
-                           [(member directive '("clear" "optional"))
+                           [(member directive '("clear"))
                             #f]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
