@@ -55,6 +55,8 @@
 
 (define *definitions* '())
 
+(define *teacher-notes* #f)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -544,32 +546,33 @@
 (define read-group
   (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))
 
+(define (ensure-teacher-notes)
+  ; (printf "doing ensure-teacher-notes\n")
+  (unless *teacher-notes*
+    ; (printf "setting *teacher-notes*\n")
+    (set! *teacher-notes* (open-output-string))))
+
+(define (display-teacher-notes o)
+  ; (printf "doing display-teacher-notes ~s\n" o)
+  (when *teacher-notes*
+    (display "\n<!--\n" o)
+    (display (get-output-string *teacher-notes*) o)
+    (display "\n-->\n" o)
+    ; (printf "setting *teacher-notes* to #f\n")
+    (set! *teacher-notes* #f)))
+
 (define (expand-directives i o)
   ; (printf "doing expand-directives ~s ~s\n" i o)
   (let ([table-header-newlines #f]
-        [teacher-notes #f]
         [num-table-columns 0])
-    (define (ensure-teacher-notes)
-      ; (printf "doing ensure-teacher-notes\n")
-      (unless teacher-notes
-        ; (printf "setting teacher-notes\n")
-        (set! teacher-notes (open-output-string))))
-
-    (define (display-teacher-notes o)
-      ; (printf "doing display-teacher-notes ~s\n" o)
-      (when teacher-notes
-        (display "\n<!--\n" o)
-        (display (get-output-string teacher-notes) o)
-        (display "\n-->\n" o)
-        ; (printf "setting *teacher-notes* to #f\n")
-        (set! teacher-notes #f)))
 
     (let loop ()
       (let ([c (read-char i)])
         (cond [(eof-object? c)
                ; (printf "end of file\n")
-               (display-teacher-notes o)
+               ; (display-teacher-notes o)
                ; (printf "final display-teacher-notes done\n")
+               #f
 
                ]
               [else
@@ -598,7 +601,7 @@
                               (cond [*output-answers?*
                                       (fprintf o "[click here for image](~a)"
                                                (fully-qualify-image (anonymize-filename img-file)))]
-                                    [(not teacher-notes)
+                                    [(not *teacher-notes*)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
@@ -661,9 +664,9 @@
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
-                              (newline teacher-notes)
-                              (expand-directives:string->port text teacher-notes)
-                              (newline teacher-notes))]
+                              (newline *teacher-notes*)
+                              (expand-directives:string->port text *teacher-notes*)
+                              (newline *teacher-notes*))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)
@@ -733,7 +736,7 @@
                               (set! *single-question?* #f)
                               (ensure-teacher-notes)
                               (set! *output-answers?* #t)
-                              (expand-directives:string->port text teacher-notes)
+                              (expand-directives:string->port text *teacher-notes*)
                               (set! *output-answers?* #f))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive)])
@@ -786,6 +789,7 @@
       (call-with-output-file out-file
         (lambda (o)
           (expand-directives i o))
+          (display-teacher-notes o)
         #:exists 'replace))))
 
 (let* ([cla (current-command-line-arguments)]
