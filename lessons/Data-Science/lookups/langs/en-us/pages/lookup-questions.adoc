@@ -1,11 +1,11 @@
 = Lookup Questions
-
 ++++
 <style>
-.solution::before{ content: ' → '; }
+.FillVerticalSpace .solution::before { content: ' → '; }
+td .fitb { padding-top: 0; width: 100%; text-align: right; }
+table:last-of-type tr { height: 3em; }
 </style>
 ++++
-
 The table below represents four pets at an animal shelter:
 
 @vspace{1ex}
@@ -60,13 +60,13 @@ The table below represents four pets at an animal shelter:
 
 |===
 
-@n Write the Pyret code that will produce each value .
+@n For each value on the left, write the Pyret expression that will produce that value on the right. The first one has been completed for you.
 
-[cols="1a,29a,70a"]
+[cols="^1a,19a,70a"]
 |===
-| a. | `"Maple"`	| @fitb{}{row-n(_pets-table, 3)["name"]_}				
-| b. | `"male"`		| @fitb{}{@ifsoln{row-n(pets-table, 1)["sex"]}}		
-| c. | `4`			| @fitb{}{@ifsoln{row-n(pets-table, 1)["age"]}}		
-| d. | `48`			| @fitb{}{@ifsoln{row-n(pets-table, 0)["pounds"]}}	
-| e. | `"Nori"`		| @fitb{}{@ifsoln{row-n(pets-table, 2)["name"]}}		
+| a. | `"Maple"`	| row-n(pets-table, 3)["name"]
+| b. | `"male"`		| @ifsoln{@ifsoln{row-n(pets-table, 1)["sex"]}}
+| c. | `4`			| @ifsoln{@ifsoln{row-n(pets-table, 1)["age"]}}
+| d. | `48`			| @ifsoln{@ifsoln{row-n(pets-table, 0)["pounds"]}}
+| e. | `"Nori"`		| @ifsoln{@ifsoln{row-n(pets-table, 2)["name"]}}
 |===
