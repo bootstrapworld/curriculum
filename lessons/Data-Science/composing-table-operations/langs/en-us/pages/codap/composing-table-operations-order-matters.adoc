@@ -4,6 +4,9 @@
 .literalblock pre { 0.5em 0 !important; }
 table:first-of-type td {padding: .25em .5em !important; }
 div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -34,27 +37,27 @@ _Match_ each Circle of Evaluation (left) to the description of what it does (rig
 |===
 
 | @show{(coe exp1)}
-|*@n*@ifsoln{(D)} ||*A*
+|*@n*@ifsoln{D} ||*A*
 | Produces a table containing Toggle, Nori and Maple, with an extra column showing their weight in kilograms
 
 | @show{(coe exp2)}
-|*@n*@ifsoln{(A)} ||*B*
+|*@n*@ifsoln{A} ||*B*
 | Produces a table containing Maple, Nori and Toggle (in that order)
 
 | @show{(coe exp3)}
-|*@n*@ifsoln{+(C)+} ||*C*
+|*@n*@ifsoln{C} ||*C*
 | Produces a table with an extra column for kilos, but only rows with more than 25 kilos
 
 | @show{(coe exp4)}
-|*@n*@ifsoln{(D)} ||*D*
+|*@n*@ifsoln{D} ||*D*
 | Won’t run: will produce an error (if so, why?)
 
 | @show{(coe exp5)}
-|*@n*@ifsoln{+(C)+} ||*E*
+|*@n*@ifsoln{C} ||*E*
 | Produces a table containing only Fritz, with two extra columns.
 
 | @show{(coe exp6)}
-|*@n*@ifsoln{+(E)+} ||*G*
+|*@n*@ifsoln{E} ||*G*
 | Produces a table containing Maple and Fritz.
 
 |===
