@@ -1,14 +1,15 @@
 = Matching Circles and Expressions
 
-
 ++++
 <style>
 table {grid-auto-rows: 1fr;}
+td .solution::before { content: ' → '; }
 </style>
 ++++
 
 
-@math{m} is a non-zero integer. Draw a line from the expression on the left to the Circle of Evaluation on the right. Some expressions have more than one correct Circle of Evaluation.
+Assume @math{m} is a non-zero integer. Draw a line from the expression on the left to the Circle of Evaluation on the right. +
+_Note: Some expressions have more than one correct Circle of Evaluation!_
 
 [cols="^.^10a,^.^3a,10a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
 |===
@@ -17,23 +18,23 @@ table {grid-auto-rows: 1fr;}
 | Circle of Evaluation
 
 | @math{\|-m\|}
-|*@n* @ifsoln{ → A,G}||*A*
+|*@n* @ifsoln{A, G}||*A*
 | @show{(coe '(abs (negate m)))}
 
 | @math{-\|m\|}
-|*@n* @ifsoln{ → B}||*B*
+|*@n* @ifsoln{B}||*B*
 | @show{(coe '(negate (abs m)))}
 
 | @math{- (-m)}
-|*@n* @ifsoln{ → C,F}||*C*
+|*@n* @ifsoln{C, F}||*C*
 | @show{(coe '(negate (negate m)))}
 
 | @math{-m}
-|*@n* @ifsoln{ → E}||*D*
+|*@n* @ifsoln{E}||*D*
 | @show{(coe '(negate (abs -m)))}
 
 | @math{- \| -m \|}
-|*@n* @ifsoln{ → D}	||*E*
+|*@n* @ifsoln{D}	||*E*
 | @show{(coe '(negate m))}
 
 |
