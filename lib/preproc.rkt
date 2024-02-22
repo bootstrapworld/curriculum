@@ -1678,7 +1678,7 @@
                             (let ([exprs (read-group i directive #:scheme? #t)])
                               (when *solutions-mode?*
                                 (for ([s (string-to-form exprs)])
-                                  (display (enclose-span ".solution" (massage-arg s)) o))))]
+                                  (display (enclose-span ".solution" (format "~a" (massage-arg s))) o))))]
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
