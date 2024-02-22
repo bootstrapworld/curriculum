@@ -161,6 +161,9 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
+      elseif directive == 'A' then
+        local ans = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. ans .. '}'
       else
         if directive == 'image' then
           if not inside_table_p then
