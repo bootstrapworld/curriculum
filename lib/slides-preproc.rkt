@@ -653,12 +653,12 @@
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
-                              (newline teacher-notes)
-                              (display "**" teacher-notes)
-                              (expand-directives:string->port title teacher-notes)
-                              (display "**\n" teacher-notes)
-                              (expand-directives:string->port text teacher-notes)
-                              (newline teacher-notes))]
+                              (newline *teacher-notes*)
+                              (display "**" *teacher-notes*)
+                              (expand-directives:string->port title *teacher-notes*)
+                              (display "**\n" *teacher-notes*)
+                              (expand-directives:string->port text *teacher-notes*)
+                              (newline *teacher-notes*))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
@@ -788,8 +788,8 @@
     (lambda (i)
       (call-with-output-file out-file
         (lambda (o)
-          (expand-directives i o))
-          (display-teacher-notes o)
+          (expand-directives i o)
+          (display-teacher-notes o))
         #:exists 'replace))))
 
 (let* ([cla (current-command-line-arguments)]
