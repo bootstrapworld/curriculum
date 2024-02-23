@@ -1447,7 +1447,7 @@
                                   ))]
                            [(member directive '("ifslide" "scrub" "slideLayout"))
                             (read-group i directive)]
-                           [(string=? directive "ifnotslide")
+                           [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
                            [(string=? directive "page-of-lines")
