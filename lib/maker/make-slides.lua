@@ -72,6 +72,7 @@ local allowed_slide_layouts = {
   "Investigate2",
   "InvestigateC-DN",
   "InvestigateR-DN",
+  "Investigate2T",
   "Synthesize",
   "SynthesizeR",
   "SynthesizeC",
@@ -161,9 +162,13 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
         set_current_slide(slides, curr_slide)
+        local c2 = buf_peek_char(i)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
+        if c2 == '{' then
+          curr_slide.style = read_group(i, directive)
+        end
       elseif directive == 'A' then
         local ans = read_group(i, directive)
         curr_slide.text = curr_slide.text .. c .. directive .. '{' .. ans .. '}'
@@ -313,7 +318,7 @@ local function make_slides_file(lplan_file, slides_file)
             slide.suffix = ''
           end
         end
-        local curr_layout = curr_section .. slide.imageorientation .. slide.suffix
+        local curr_layout = slide.style or (curr_section .. slide.imageorientation .. slide.suffix)
         if not memberp(curr_layout, allowed_slide_layouts) then
           print('WARNING: Unknown slide template: ' .. curr_layout
             .. ' in ' .. os.getenv('PWD') .. "\n"

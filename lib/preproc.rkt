@@ -1801,8 +1801,10 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak") o]
-
+                           [(string=? directive "slidebreak")
+                            (let ([c (peek-char i)])
+                              (when (and (char? c) (char=? c #\{))
+                                (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
