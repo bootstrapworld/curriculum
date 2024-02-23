@@ -711,9 +711,6 @@
                                   [unit (if (string=? (third match) "ex") 2 3)]
                                   [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
                               (display spaces o))]
-                           [(string=? directive "slideLayout")
-                            (let ([x (read-group i directive)])
-                              (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
                            [(string=? directive "define")
                             (let* ([id (read-group i directive)]
                                    [prose (read-group i directive #:multiline? #t)])
