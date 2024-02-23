@@ -120,29 +120,49 @@ Of course, the whole point of defining a value is so that it sticks around and c
 === Investigate
 
 @lesson-instruction{
-Open the @starter-file{defining-values}. **Do NOT click "Run"!**
+Open the @starter-file{defining-values}.
 }
 
 @QandA{
 This file has a lot of values defined on the left, including the example we just talked about: `x` is defined to be `4`.
 
-@Q{What do expect @proglang will produce if we type `x` into the Interactions Area and hit Enter?}
+@Q{What do you expect @proglang will produce if we type `x` into the Interactions Area and hit Enter?}
 @A{We expect the number `4` to come back}
 
-@Q{Making sure you have NOT clicked "Run", try it out. What did you get back?}
-@A{An error!}
-
-@Q{Read the error out loud. What do you think it means?}
-@A{Answers will vary}
+@Q{__If you got ahead of us and clicked "Run", please reload the starter file now before proceeding.__}
+@Q{Type 4 into the Interactions Area and hit return/enter. What did you get back?}
+@A{An error! (Assuming students followed your directions and didn't hit "Run" yet.)}
 }
 
-@lesson-point{The "Run" button tells @proglang to read all the definitions}
+@slidebreak
 
-Some of you may have wondered what the "Run" button does. Now we have our answer! If @proglang hasn't run the program we just loaded, it doesn't know about _any_ of the definitions!
+@QandA{
+@ifproglang{wescheme}{
+```
+x: this variable is not defined
+at: line 1, column 0, in <interactions0>
+```
+}
+@ifproglang{pyret}{
+```
+The identifier x is unbound:
+It is used but not previously defined.
+```  
+}
+@Q{What do you think this error message means?}
+@A{Answers will vary... but it's telling us that the definition is missing, and that means we need to click "Run"!}
+}
+
+@slidebreak
+
+@lesson-point{The "Run" button tells @proglang to read all the definitions. If @proglang hasn't run the program we just loaded, it doesn't know about _any_ of the definitions!}
+
+@ifslide{@vspace{1ex}}
 
 @lesson-instruction{
 - With your partner, complete @printable-exercise{pages/defining-values-explore.adoc}.
-- Add some definitions of your own in the Definitions Area. Be sure to click "Run" again before you try testing them out.
+- Add some definitions of your own in the Definitions Area. +
+- Be sure to click "Run" again before you try testing them out.
 }
 
 === Synthesize
@@ -151,7 +171,7 @@ Some of you may have wondered what the "Run" button does. Now we have our answer
 @Q{What data types can we define values for?}
 @A{All of them - Number, String, Image}
 @Q{In question 13, you looked at different ways of writing the same definition. Each way broke the definition up into multiple lines. Which one did you like best, and why?}
-@Q{What values did you decide to define? When might they be useful?}
+@Q{What new values did you decide to define? When might they be useful?}
 }
 
 @strategy{Support for English Language Learners}{
@@ -165,29 +185,35 @@ MLR 8 - Discussion Supports: As students discuss, rephrase responses as question
 === Overview
 Now that we know _how_ to define values, we've got two more things to consider:
 
-* When it would be _useful_ to define them?
-* How do we _use_ them once we've defined them?
+- When it would be _useful_ to define them?
+- How do we _use_ them once we've defined them?
 
 === Launch
 
 Once you know how to define values, you can start looking for re-usable logic and ways to simplify the solution to a problem.
 
+@teacher{The page which students are about to work with (@printable-exercise{which-value-to-define.adoc}) is best discussed with color versions, but they are likely working with black and white versions. We recommend projecting a version of the file at the front of the room for reference.}
+
 @lesson-instruction{
-Complete @printable-exercise{which-value-to-define.adoc}. Can you find the re-usable shapes in these flags?
+Turn to @printable-exercise{which-value-to-define.adoc} and identify the shapes it would make sense to "reuse" when building these flag images?
 }
 
 
 === Investigate
 
+
 @lesson-instruction{
-Complete @printable-exercise{chinese-flag.adoc}.
+- Now that we've thought about why it might make sense to define and reuse values in our code, let's dig into cleaning up some code!
+- Complete @printable-exercise{chinese-flag.adoc}.
 }
 
 @teacher{
 This worksheet will direct students to open the @starter-file{flags-china} once they complete the first half of the questions.
 
-Have students share their answers about why the code for the Chinese Flag is broken up into multiple lines, and what they think it means for two or more lines lines to start at the same position.
+Have students share their answers about why the code for the Chinese Flag is broken up into multiple lines, and what they think it means for two or more lines to start at the same position.
 }
+
+@slidebreak
 
 In this exercise, you saw a really long definition that is broken up into many lines. In this example, all of the inputs to each `put-image` followed a pattern:
 
@@ -197,15 +223,21 @@ In this exercise, you saw a really long definition that is broken up into many l
 
 This makes the code a _lot_ easier to read! Programmers break up their code in sensible ways in order to communicate the _structure_ of the program.
 
+@slidebreak
+
 @lesson-instruction{
-- Open a new file in @starter-file{editor} and name it `sunny`, then turn to @printable-exercise{pages/coe-why-define-values.adoc}
-- The first row of the table has been completed for you. What is happening in that first row?
-  * _The original Circle of Evaluation has been simplified by using a defined value `sunny`._
-- What code is being replaced by `sunny`?
-  * @show{(code '(radial-star 30 20 50 "solid" "yellow"))}
-- Write the code on the line provided in question 2. Then type it into the Interactions Area and click "Run".
-- Define the value `sunny` in the Definitions Area.
-- Complete the page and test your code in the editor.
+- Open a new file in @starter-file{editor} and name it `sunny`.
+- Then turn to @printable-exercise{pages/coe-why-define-values.adoc} and take a look at the first row of the table.
+}
+@QandA{
+@Q{What is happening in that first row?}
+@A{The original Circle of Evaluation has been simplified by using a defined value `sunny`.}
+@Q{Find the code that is being replaced by `sunny` and write it on the line at the top of the page.}
+@A{@show{(code '(radial-star 30 20 50 "solid" "yellow"))}}
+}
+@lesson-instruction{
+- Complete @printable-exercise{pages/coe-why-define-values.adoc}.
+- Then add a definition for `sunny` in the Definitions Area of your file and test your code in the editor.
 - When you're done, turn to @printable-exercise{pages/writing-code-using-defined-values.adoc} and follow the directions to work with a new definition called `PRIZE-STAR`.
 }
 
