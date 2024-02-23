@@ -1,0 +1,54 @@
+= Fitting the Ferris Wheel Data
+++++
+<style>
+.studentAnswerMedium { min-width: 70pt !important; }
+</style>
+++++
+////
+* Import Desmos Styles
+*
+* This includes some inline CSS which loads the Desmos font,
+* which includes special glyphs used for icons on Desmos.com
+*
+* It also defines the classname '.desmosbutton', which is used
+* to style all demos glphys
+*
+* Finally, it defines AsciiDoc variables for glyphs we use:
+* {points}
+* {caret}
+* {magnifying}
+* {wrench}
+*
+* Here's an example of using these:
+* This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+
+For this page, you'll need to load @starter-file{alg2-exploring-periodic-desmos} open on your computer, and be on the last slide.
+
+You'll find the data from the Ferris Wheel plotted in red, along with a basic periodic model of the form @math{f(x) = a \sin(b(x - d)) + c}.
+
+@n The @vocab{peaks} of this data are at @math{y = }@fitb{10em}{@ifsoln{205}}, and the @vocab{troughs} are at @math{y = }@fitb{10em}{@ifsoln{5}}.
+
+@n The @vocab{midline} (or @vocab{center line}) of the data is at @math{y =}@fitb{10em}{@ifsoln{105}}.
+
+@n Use the sliders to fit a periodic function to this data as closely as possible, then write your model on the space below in both Function and Pyret notation.
+
+@vspace{1ex}
+
+[cols="1a, 10a", frame="none", stripes="none"]
+|===
+| Function Notation
+|
+@hspace{2em}
+@math{f(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
+@math{sin}(
+ @fitbruby{70pt}{@ifsoln{0.209}}{frequency} (x - @fitbruby{70pt}{@ifsoln{7.4612}}{h-shift})
+) + @fitbruby{70pt}{@ifsoln{105}}{v-shift}
+
+| Pyret Notation
+|
+@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (?ANS 0.209) (- x (?ANS 7.4612))))) (?ANS 105))))}
+|===
+

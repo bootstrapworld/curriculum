@@ -1,6 +1,11 @@
 [.beta]
 = Exploring Periodic Models
-
+++++
+<style>
+table.rideData tr * { padding: 0 !important; margin: 2px !important; }
+table.rideData { width: 70%; margin: auto; }
+</style>
+++++
 @description{Students investigate periodic relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
 @lesson-prereqs{exploring-quadratic-models}
@@ -33,12 +38,34 @@
 
 |===
 
-== Round and Round We Go @duration{45 minutes}
+== Around and Around We Go @duration{45 minutes}
 
 === Overview
 Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
 
 === Launch
+
+@right{@image{images/state-fair.png, 200}} Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Rollercoaster? Bumper cars? Merry-Go-Round? Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch:
+
+[.rideData, cols="^1a,^1a", options="header"]
+|===
+| `time` (minutes)  | `height` (feet)
+|  0				|   5.0
+|  5				|  55.0
+| 10				| 154.9
+| 15				| 205.0
+| 20				| 155.2
+| 25				|  55.2
+| 30				|   5.0
+| 35				|  54.7
+| 40				| 154.6
+| 45				| 205.0
+| 50				| 155.5
+| 55				|  55.5
+| 60				|   5.0
+|===
+
+What ride do you think they were on?
 
 @lesson-instruction{
 Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}
@@ -51,8 +78,8 @@ Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc
 @A{Yes - it was difficult to see the pattern until we added the line!}
 @Q{Is there a relationship between `time` and `height`? Why or why not?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
-@Q{What kind of ride do you think this teacher was on?}
-@A{A ferris wheel}
+@Q{What kind of ride do you think this teacher was on, and why?}
+@A{A ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down}
 }
 
 This worksheet had you create a different type of data display, called a @vocab{line graph}.
@@ -81,7 +108,7 @@ In this lesson we'll explore these periodic relationships, and a new class of fu
 
 When graphed, periodic functions look like waves that rise to a certain height above a midline, then drop the same distance below it, then rise again and repeat the pattern:
 
-@center{@image{images/wave-labeled-terms.png}}
+@center{@image{images/wave-labeled-terms.png, 75%}}
 
 - @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
 - @vocab{Troughs} - the lowest points on the wave
@@ -94,7 +121,7 @@ When graphed, periodic functions look like waves that rise to a certain height a
 @ifslide{
 @center{@image{images/wave-labeled-terms.png, 650}}
 }
-Starting at some initial value at x=0, a periodic function will rise or fall as x-increases until it reaches some maximum (@vocab{crest}) or minimum value (@vocab{trough}), before returning to its initial value. As x continues to increase, it will repeat this pattern over and over, fluctuating between its maximum and minimum value over regular intervals (@vocab{periods}).
+Starting at some initial value at @math{x=0}, a periodic function will rise or fall as @math{x} increases until it reaches some maximum (@vocab{peak}) or minimum value (@vocab{trough}), before returning to its initial value. As @math{x} continues to increase, it will repeat this pattern over and over, fluctuating between its maximum and minimum value over regular intervals (@vocab{periods}).
 
 You may already be familiar with two of the best-known periodic functions, @math{sin} and @math{cos}. Here are their contracts:
 
@@ -125,14 +152,20 @@ Let's explore the coefficients of periodic models!
 
 - Open @starter-file{alg2-exploring-periodic-desmos}.
 - With your partner, complete @printable-exercise{graphing-models.adoc} using the first slide of the Desmos activity.
-- Complete @printable-exercise{matching-periodic-descriptions.adoc}
 }
 
 @teacher{Review student answers to the worksheet, giving ample time for them to hear one another's answers. Concepts like amplitude and frequence can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
 
+@lesson-instruction{
+- Now that you have a sense for what terms like @vocab{amplitude} and @vocab{midline} mean, complete @printable-exercise{matching-periodic-descriptions.adoc} by matching the graphs of periodic functions to their written descriptions.
+- What strategies did you use to match the graphs to the descriptions?
+}
 
-- With your partner, complete @printable-exercise{exploring-periodic-2.adoc} using the first slide of the Desmos activity.
+Let's return to the Ferris Wheel data, and see if we can use our knowledge of periodic functions to fit a model to it.
 
+@lesson-instruction{
+- With your partner, complete @printable-exercise{fitting-ferris-wheel.adoc} using the last slide of the Desmos activity.
+}
 
 
 TBD - tidal data https://www.tidetime.org/
