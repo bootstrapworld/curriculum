@@ -791,13 +791,6 @@
                     "index.adoc"
                     "index.asciidoc"))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (make-dist-link f link-text)
   (let ([url-has-query-string? #f])
     (cond [(regexp-match "\\?.*=" f) (set! url-has-query-string? #t)

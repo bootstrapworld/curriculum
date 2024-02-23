@@ -509,13 +509,6 @@
     (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
       (format "[~a](~a)" link-text fq-uri))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (external-link args directive)
   (let* ([num-args (length args)]
          [link (first args)]
