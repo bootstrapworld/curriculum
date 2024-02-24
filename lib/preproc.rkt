@@ -1441,7 +1441,7 @@
                            [(string=? directive "scrub")
                             (read-group i directive)]
                            [(string=? directive "ifslide")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (when (regexp-match "\\|===" text)
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o)
