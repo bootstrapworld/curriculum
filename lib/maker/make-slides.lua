@@ -137,8 +137,13 @@ local function get_slides(lsn_plan_adoc_file)
         if directive == 'preparation' then
           curr_slide.preparation = read_group(i, directive, false, true)
         end
-      elseif directive == 'scrub' or directive == 'ifnotslide' then
+      elseif directive == 'scrub' then
         read_group(i, directive)
+      elseif directive == 'ifnotslide' then
+        local txt = read_group(i, directive)
+        local _, n = txt:gsub('|===', 'z')
+        n = math.floor(n / 2)
+        tableIdx = tableIdx + n
       elseif directive == 'ifproglang' then
         local pls = read_group(i, directive)
         if not pls:match(proglang) then
