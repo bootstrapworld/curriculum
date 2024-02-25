@@ -110,15 +110,16 @@ end
 
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
+  file_being_read = lsn_plan_adoc_file
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
   local inside_table_p = false
-  local curr_slide = newslide()
+  local inside_code_display_p = false
   local inside_css_p = false
-  local beginning_of_line_p = true
   local inside_lesson_instruction = false
+  local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
-  file_being_read = lsn_plan_adoc_file
+  local curr_slide = newslide()
   while true do
     local c = i:read(1)
     if not c then
@@ -191,10 +192,16 @@ local function get_slides(lsn_plan_adoc_file)
       end
     elseif beginning_of_line_p then
       beginning_of_line_p = false
-      if c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
-        inside_css_p = true
+      if c == '+' and read_if_poss(i, '+++') then
+        inside_css_p = not inside_css_p
       elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
         inside_css_p = false
+      elseif c == '-' and read_if_poss(i, '---') then
+        curr_slide.text = curr_slide.text .. '----'
+        inside_code_display_p = not inside_code_display_p
+      elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
+        i:read_line()
+        beginning_of_line_p = true
       elseif inside_css_p then
         --noop
       elseif c == '=' then
