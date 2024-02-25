@@ -599,7 +599,8 @@
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (printf "WARNING: Using @image{~a} inside @teacher, @QandA, or @strategy\n" args)]))]
+                                      (printf "WARNING: Using @image{~a} inside @teacher, @QandA, or @strategy\n" args)
+                                      (display (fully-qualify-image img-file) o)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
