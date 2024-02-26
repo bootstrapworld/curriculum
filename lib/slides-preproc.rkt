@@ -57,6 +57,8 @@
 
 (define *teacher-notes* #f)
 
+(define *autonumber-index* 1)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -642,6 +644,17 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
+                           [(string=? directive "n")
+                            (fprintf o "~a\\)" *autonumber-index*)
+                            (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "nfrom")
+                            (let* ([arg (read-group i directive)]
+                                   [n (string->number arg)])
+                              (unless n
+                                (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
+                              (set! *autonumber-index* n))]
+                           [(string=? directive "star")
+                            (display "★" o)]
                            [(string=? directive "strategy")
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
