@@ -14,12 +14,12 @@
 | Lesson Goals
 | Students will be able to:
 
-* Apply previous knowledge of @vocab{functions} to new situations
-* Use reasoning skills to select appropriate functions and combine their effects
+- Apply previous knowledge of @vocab{functions} to new situations
+- Use reasoning skills to select appropriate functions and combine their effects
 
 | Student-Facing Lesson Goals
 |
-* Let's use @vocab{functions} to transform @vocab{images} so that we can use them in our games!
+- Let's use @vocab{functions} to transform @vocab{images} so that we can use them in our games!
 
 | Materials
 |[.materials-links]
@@ -38,11 +38,11 @@ Students should have their completed “Game Design” work.
 
 | Key Points for the Facilitator
 |
-* Discuss copyright and fair use guidelines with your students.
-* Instructional time may vary based on students’ experience with using Google Image Search.
-* Check beforehand for any issues the school Internet security blocker might cause with searching for images.
-* There are two ways of importing images: linking directly to the image on the web or downloading the image to Google Drive and then using the "Insert" button.  An advantage to working with images from Google Drive is that your game will work in perpetuity, regardless of what happens to the image on the web. See the "Linking Images Guide" below for more information on linking directly.
-* Encourage students to focus on finding and scaling each image as needed before moving on to the next one.
+- Discuss copyright and fair use guidelines with your students.
+- Instructional time may vary based on students’ experience with using Google Image Search.
+- Check beforehand for any issues the school Internet security blocker might cause with searching for images.
+- There are two ways of importing images: linking directly to the image on the web or downloading the image to Google Drive and then using the "Insert" button.  An advantage to working with images from Google Drive is that your game will work in perpetuity, regardless of what happens to the image on the web. See the "Linking Images Guide" below for more information on linking directly.
+- Encourage students to focus on finding and scaling each image as needed before moving on to the next one.
 
 
 |===
@@ -56,7 +56,7 @@ This activity is primarily about _review and reading comprehension_, in which st
 
 By now you've learned about defining values, composing functions, and reading contracts. Taken together, that's a lot of code you're now able to understand! It's time to flex your reading skills, and look at the file you'll be working with to build your video game.
 
-*This file has code you haven't seen before! And that's ok!* For now, see what parts you recognize, and make sure you understand them.
+**This file has code you haven't seen before! And that's ok!** For now, see what parts you recognize, and make sure you understand them.
 
 === Investigate
 @lesson-instruction{
@@ -101,6 +101,8 @@ Guide the students through finding an image, saving it to their Drive, importing
 
 @centered-image{images/transparent-image-search.png, 400}
 
+@slidebreak
+
 - Once an image has been selected, click it to expand and save the image to Google Drive. For file management, students may want to create a folder to store their game images.
   * If using a Chromebook, this is done by right-clicking and selecting "Google Drive" on the left for the save location.
   * On a PC or Mac, follow this @opt-printable-exercise{pages/SavingImagesGuide.pdf, Quick Guide to Saving Images to Drive}.
@@ -112,33 +114,19 @@ Once the image is saved to Google Drive, it can be brought into the program by u
 button.  This will automatically bring in the image using the `image-url` function, and students can run the code to see the image.
 
 === Investigate
-What happens if the image we find needs to be made bigger or smaller? 
-
-- Students can use the `scale` function to resize their image. 
-- If your class could use some practice with scaling first, turn to @opt-printable-exercise{scaling-practice.adoc} and/or @opt-printable-exercise{matching-scale.adoc}.
-
-What if the image needs to be rotated, or flipped?
-
-@ifproglang{pyret}{
-- Students can make-use of the image manipulation functions `rotate`, `flip-horizontal`, and `flip-vertical`. You'll find their contracts in the @dist-link{Contracts.shtml?pathway=algebra-pyret, Contracts Page}.
-}
-
-@ifproglang{wescheme}{
-- Students can make-use of the image manipulation functions `rotate`, `flip-horizontal`, and `flip-vertical`. You'll find their contracts in the @dist-link{Contracts.shtml?pathway=algebra-wescheme, Contracts Page}.
-}
-
-
-@pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
-
-@strategy{Strategies for English Language Learners}{
-
-
-MLR 8 - Discussion Supports: As students discuss, rephrase responses as questions and encourage precision in the words being used to reinforce the meanings behind some of the functions, such as `scale` and `flip-horizontal`.
-}
 
 @lesson-instruction{
-With your partner, search the Internet for images to use in your game. You will need 4 images, one for each visual element of their game: `BACKGROUND`, `PLAYER`, `DANGER`, `TARGET`
+- With your partner, search the Internet for images to use in your game. You will need 4 images, one for each visual element of their game: `BACKGROUND`, `PLAYER`, `DANGER`, `TARGET`
+- If the image you find needs to be made bigger or smaller, use the `scale` function to resize it.
+- If the image needs to be rotated, or flipped, you can make use of the following image manipulation functions:
+  * `rotate`
+  * `flip-horizontal`
+  * `flip-vertical`. 
+  * You'll find their contracts in the @ifproglang{pyret}{ @dist-link{Contracts.shtml?pathway=algebra-pyret, Contracts Page}} @ifproglang{wescheme}{@dist-link{Contracts.shtml?pathway=algebra-wescheme, Contracts Page}}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
 }
+
+
+@teacher{If your class could use some practice with scaling first, turn to @opt-printable-exercise{scaling-practice.adoc} and/or @opt-printable-exercise{matching-scale.adoc}.}
 
 @strategy{Copyright and Fair Use}{
 
@@ -146,10 +134,12 @@ With your partner, search the Internet for images to use in your game. You will 
 @right{ @image{images/fair-use-diagram.png,300} }
 The students will be using images from the Internet for their game, and while this falls entirely under the "Educational Use" umbrella of Fair Use Guidelines, it is still important to make sure students of all ages understand the purpose of copyright law and the differences between educational and commercial purposes.
 
-*When adding an image to their game, students _must_ include a comment which gives attribution to the source of the image.*
+*When adding an image to their game, have students include a comment which gives attribution to the source of the image.*
 }
 
-Students should:
+@slidebreak
+
+As you work, be sure to:
 
 - Save the chosen images to their Drive
 - Bring them into the programming environment
@@ -158,7 +148,7 @@ Students should:
 - Plan out how to resize and reorient them in their game
 - Make sure the final version of each image is defined as either `BACKGROUND`, `TARGET`, `DANGER`, or `PLAYER`
 
-When finished, students should be able to type `SCREENSHOT` in the interactions window and see all four of their images appropriately sized and oriented.
+When you're finished, you should be able to type `SCREENSHOT` in the Interactions Area (after clicking "Run") and see all four of their images appropriately sized and oriented.
 
 === Synthesize
 
