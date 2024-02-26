@@ -12,11 +12,11 @@
 | Lesson Goals
 | Students will be able to:
 
-* apply their understanding of inequalities to keep a game character on the screen
+- apply their understanding of inequalities to keep a game character on the screen
 
 | Student-Facing Lesson Goals
 |
-* Let's use what we know about inequalities to define the boundaries that will keep a game character on the screen.
+- Let's use what we know about inequalities to define the boundaries that will keep a game character on the screen.
 
 | Materials
 |[.materials-links]
@@ -57,6 +57,8 @@ Every time Sam moves, we want to check and see if Sam is safe.
 @ifproglang{wescheme}{
 @lesson-point{In this programming language, question marks are prounced "huh?" So `safe-left?` would be prounounced "safe-left-huh?"}
 }
+
+@slidebreak
 
 @QandA{
 @Q{What three functions do you see defined in this file?}
@@ -108,9 +110,11 @@ By writing the answer first ( `is-safe-left(-65) is false` ), it reduces anxiety
 }
 }
 
-If a car starts up when you turn the key, does that mean we know the sunroof works? Of course not! _You can't trust the behavior of a complex system, just because one part of it works!_
+@slidebreak
 
-The only way to see if the sunroof works is to test it, and the only way to know if @show{(code 'safe-right?)} works is to test it by itself. Did you write examples for that function...?
+The only way to know if @show{(code 'safe-right?)} works is to test it by itself. Did you write examples for that function...?
+
+If a car starts up when you turn the key, does that mean we know the sunroof works? Of course not! _You can't trust the behavior of a complex system, just because one part of it works!_ The only way to see if the sunroof works is to test it.
 
 === Synthesize
 
@@ -132,6 +136,8 @@ Students solve a word problem involving compound inequalities, using `and` to co
 @teacher{
 Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @show{(code 'safe-left?)} and @show{(code 'safe-right?)} will respond with either "true" or "false".
 }
+
+@slidebreak
 
 @lesson-roleplay{
 
@@ -157,6 +163,7 @@ For example:
 - @show{(code 'onscreen?)} (turns back to facilitator): "true" +
 {empty} +
 
+@ifslide{@teacher{
 - Facilitator: "@onscreen -100"
 - @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left -100"
 - @show{(code 'safe-left?)}: "false"
@@ -167,7 +174,11 @@ For example:
 - @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left 900"
 - @show{(code 'safe-left?)}: "true"
 - @show{(code 'onscreen?)} (turns back to facilitator): "true"
+}}
+
 }
+
+@slidebreak
 
 @QandA{
 @Q{What is the problem with @show{(code 'onscreen?)}?}
@@ -196,8 +207,10 @@ _Note: In the context of Sam the Butterfly, there's a clear reason why we want t
 We recommend that students tackling this challenge define a new function @show{(code 'onscreen2?)} so that their initial @show{(code 'onscreen?)} code remains ready for them to use in the next section of this lesson.
 }
 
+@slidebreak
+
 @lesson-roleplay{
-Let's have our three student volunteers roleplay those functions again, with the onscreen function now working properly. Be sure to test out values where Sam is off one edge, off the other, and on the screen!
+Let's have our three student volunteers roleplay those functions again, with the @show{(code 'onscreen?)} function working properly. Be sure to test out values where Sam is off one edge, off the other, and on the screen!
 }
 
 @teacher{Repeat the back-and-forth that happened earlier, making sure that the onscreen function calls both the left-checking and right-checking functions _and_ that those functions work correctly!}
