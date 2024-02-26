@@ -57,6 +57,8 @@
 
 (define *teacher-notes* #f)
 
+(define *autonumber-index* 1)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
@@ -509,13 +511,6 @@
     (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
       (format "[~a](~a)" link-text fq-uri))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (external-link args directive)
   (let* ([num-args (length args)]
          [link (first args)]
@@ -606,8 +601,8 @@
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (printf "WARNING: Using @image inside teacher notes\n")
-                                      (fprintf o "@image{~a}" args)]))]
+                                      (printf "WARNING: Using @image{~a} inside @teacher, @QandA, or @strategy\n" args)
+                                      (display (fully-qualify-image img-file) o)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -649,6 +644,17 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
+                           [(string=? directive "n")
+                            (fprintf o "~a\\)" *autonumber-index*)
+                            (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "nfrom")
+                            (let* ([arg (read-group i directive)]
+                                   [n (string->number arg)])
+                              (unless n
+                                (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
+                              (set! *autonumber-index* n))]
+                           [(string=? directive "star")
+                            (display "★" o)]
                            [(string=? directive "strategy")
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
@@ -718,9 +724,6 @@
                                   [unit (if (string=? (third match) "ex") 2 3)]
                                   [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
                               (display spaces o))]
-                           [(string=? directive "slideLayout")
-                            (let ([x (read-group i directive)])
-                              (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
                            [(string=? directive "define")
                             (let* ([id (read-group i directive)]
                                    [prose (read-group i directive #:multiline? #t)])

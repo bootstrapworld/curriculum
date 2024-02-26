@@ -14,14 +14,14 @@
 | Lesson Goals
 | Students will be able to...
 
-* Given a human-language request for a data display involving the entire Animals Dataset, break it down into parts and generate the display.
-* Given a Table, use the `row-n` function to extract any Row from that table
-* Given a Row, use the column lookups to extract the value of any column in the Row
+- Given a human-language request for a data display involving the entire Animals Dataset, break it down into parts and generate the display.
+- Given a Table, use the `row-n` function to extract any Row from that table
+- Given a Row, use the column lookups to extract the value of any column in the Row
 
 | Student-facing Lesson Goals
 |
 
-* Let's practice making data displays to answer our questions about the data and retrieving information from tables.
+- Let's practice making data displays to answer our questions about the data and retrieving information from tables.
 
 | Materials
 |[.materials-links]
@@ -38,7 +38,7 @@ Students learn how to define values in Pyret, and practice by defining Numbers, 
 
 Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
 
-  name = "Flannery"
+  name = "Denny"
   age = 16
   logo = star(50, "solid", "red")
 
@@ -46,36 +46,45 @@ Sometimes we have a value that we want to use again and again, and it makes sens
 @Q{What are the names given in each of these definitions?}
 @A{name, age, and logo}
 @Q{What are the values given to each of these names?}
-@A{The String "Flannery", the Number 16, and an Image of a solid red star.}
+@A{The String "Denny", the Number 16, and an Image of a solid red star.}
 }
 
 === Investigate
 
-Remind students that examples of lookup questions include, “How many legs does Felix have?” or "What species is Sheba?"
+Examples of lookup questions include, “How many legs does Felix have?” or "What species is Sheba?"
 
 @QandA{
 @Q{How many rows do we need to answer a Lookup question?}
 @A{Just one! Lookups can be answered just by finding the right row!}
 }
 
+@teacher{
 Make sure sure students understand we only need one row!
+}
 
 @right{@image{images/AskQuestions.png, 100}}
-*What code can we write, to let us define a single row?* Tables have special functions associated with them, which allow us to do all sorts of things. For example, we can get the first @vocab{data row} in a table by using the @show{(code 'row-n)} function: `row-n(animals-table, 0)`
+**What code can we write, to let us define a single row?** 
 
-Don't forget: data rows start at index _zero_!
+- Tables have special functions associated with them, which allow us to do all sorts of things. 
+- For example, we can get the first @vocab{data row} in a table by using the @show{(code 'row-n)} function: 
+  * `row-n(animals-table, 0)`
+
+Remember: Data rows start at index _zero_!
+
+@slidebreak
 
 @lesson-instruction{
 - Open your saved Animals Starter File (or make a new @starter-file{animals} copy), and click “Run”.
 - In the Interactions Area, use the `row-n` function to get the second and third data rows.
 - Find `row-n` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
-- What is its Domain? Its Range?
-  * _Its domain is Number. Its range is Row._
 }
 
-@lesson-instruction{
-How would you get the _second_ row out of the animals table? The third?
+@QandA{
+@Q{What is its Domain? Its Range?}
+@A{Its domain is Number. Its range is Row.}
 }
+
+@slidebreak
 
 The code below will define the first row from the animals table:
 
@@ -84,6 +93,14 @@ The code below will define the first row from the animals table:
 It's often better to name our Row definitions according to the _property we care about_. In this case, the fact that this row is a cat is _much_ more interesting than the fact that her name is Sasha:
 
 `cat-row = row-n(animals-table, 0)`
+
+@QandA{
+@Q{How would you get the _second_ row out of the animals table? The third?}
+@A{`row-n(animals-table, 1)` will get the second row}
+@A{`row-n(animals-table, 2)` will get the third row}
+}
+
+@slidebreak
 
 @lesson-instruction{
 - In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young animals, fixed animals, etc.

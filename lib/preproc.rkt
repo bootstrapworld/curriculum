@@ -791,13 +791,6 @@
                     "index.adoc"
                     "index.asciidoc"))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (make-dist-link f link-text)
   (let ([url-has-query-string? #f])
     (cond [(regexp-match "\\?.*=" f) (set! url-has-query-string? #t)
@@ -1445,9 +1438,15 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
-                           [(string=? directive "ifnotslide")
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when (regexp-match "\\|===" text)
+                                (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
+                                (expand-directives:string->port text o)
+                                (display "\n====\n" o)))]
+                           [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
                            [(string=? directive "page-of-lines")
@@ -1808,8 +1807,10 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak") o]
-
+                           [(string=? directive "slidebreak")
+                            (let ([c (peek-char i)])
+                              (when (and (char? c) (char=? c #\{))
+                                (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
