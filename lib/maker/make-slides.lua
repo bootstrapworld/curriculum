@@ -69,6 +69,7 @@ local allowed_slide_layouts = {
   "Investigate-DN",
   "Investigate-K",
   "Investigate-R",
+  "Investigate-RP",
   "Investigate2",
   "InvestigateC-DN",
   "InvestigateR-DN",
@@ -318,9 +319,6 @@ local function make_slides_file(lplan_file, slides_file)
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
           if slide.numimages == 2 then slide.suffix = '2' end
-          if slide.suffix ~= '2' then
-            slide.suffix = ''
-          end
         elseif curr_section == 'Launch' then
           if slide.imageorientation == 'R' then
             if slide.suffix ~= '' then slide.suffix = '' end
@@ -351,6 +349,7 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('%*(%S)%*', '__%1__')
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
+          l1 = l1:gsub('{two%-colons}', '::')
           o:write(l1, '\n')
         end
       end
