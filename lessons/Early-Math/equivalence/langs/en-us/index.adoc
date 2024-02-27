@@ -182,12 +182,11 @@ Students use Circles of Evaluation to simplify arithmetic expressions to a singl
 @Q{Why is the first Circle of Evaluation (below) equivalent to the second Circle of Evaluation? Why is the second Circle of Evaluation equivalent to the final result?}
 @A{To get from the the first Circle of Evaluation to the next: @math{5} less than @math{14} becomes 9. To get to the final result, @math{3} increased by @math{9} becomes @math{12}.}}
 
-@ifnotslide{
 [.embedded, cols="^.^3,^.^1,^.^3,^.^1,^.^3", grid="none", stripes="none", frame="none"]
 |===
 | @show{(coe '(+ 3 (- 14 5)))} | &rarr; | @show{(coe '(+ 3 9))} | &rarr; | @math{12}
 |===
-}
+
 
 @slidebreak
 
@@ -197,12 +196,11 @@ Students use Circles of Evaluation to simplify arithmetic expressions to a singl
 @A{No, the order does not matter! We could evaluate the Circle on the left first, or the Circle on the right first because the Circles are independent of one another. However, we have to evaluate both of the circles before we can find their sum!}
 }
 
-@ifnotslide{
 [.embedded, cols="^.^3,^.^1,^.^3,^.^1,^.^3", grid="none", stripes="none", frame="none"]
 |===
 | @show{(coe '(+ (- 10 8) (* 3 6)))} | &rarr; | @show{(coe '(+ 2 18))} | &rarr; | @math{20}
 |===
-}
+
 
 @teacher{
 @strategy{Pedagogy Note: A Flexible Order of Operations?}{
