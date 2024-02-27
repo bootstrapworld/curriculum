@@ -590,7 +590,7 @@
                            [(string=? directive "slidebreak")
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
-                           [(string=? directive "image")
+                           [(member directive '("image" "centered-image"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
                               (cond [*output-answers?*
