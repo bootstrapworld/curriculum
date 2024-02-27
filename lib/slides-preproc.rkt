@@ -607,7 +607,9 @@
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (display (fully-qualify-image (anonymize-filename img-file)) o)]))]
+                                      (display "<" o)
+                                      (display (fully-qualify-image (anonymize-filename img-file)) o)
+                                      (display ">" o)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
