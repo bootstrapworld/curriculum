@@ -245,7 +245,7 @@ local function get_slides(lsn_plan_adoc_file)
       elseif c == '[' then
         local L = i:read_line()
         if not L then break
-        elseif L:match('cols=[%d"\']') then
+        elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
           beginning_of_line_p = true
         else
           curr_slide.text = curr_slide.text .. '['
