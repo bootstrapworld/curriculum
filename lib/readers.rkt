@@ -71,7 +71,7 @@
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)
                                    (loop (cons c r) #f nesting in-string? #t)]
-                                  [in-string?
+                                  [(and scheme? in-string?)
                                     (if (char=? c #\")
                                         (loop (cons c r) #f nesting #f #f)
                                         (loop (cons c r) #f nesting #t #f))]
