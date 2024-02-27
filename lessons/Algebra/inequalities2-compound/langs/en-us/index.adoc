@@ -84,7 +84,14 @@ This can make for a good sit-down, stand-up activity, where students take turns 
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
 
 @lesson-instruction{
+@ifnotslide{
 Complete @printable-exercise{boolean-coe-to-code1.adoc} and @printable-exercise{and-or.adoc}.
+}
+@ifslide{
+Complete:
+- @printable-exercise{boolean-coe-to-code1.adoc}
+- @printable-exercise{and-or.adoc}
+}
 }
 
 === Synthesize
@@ -179,22 +186,32 @@ Sometimes unions overlap and cover the entire number line!
 
 @lesson-instruction{
 - Turn to @printable-exercise{compound-inequality-solutions.adoc}.
-- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+- Use the @starter-file{inequalities-compound} to explore the inequalities on the page, identifying solutions and non-solutions for each.
 }
 
 @slidebreak
 
 Instead of defining two functions as simple inequalities, we can produce an inequality graph by defining one function to be a @vocab{compound inequality}!
 
-In the following activity, we'll analyze inequality graphs and define a _single_ function that produces the graph.
-
-@teacher{Walk students through the completed first example before they attempt to write this code on their own.}
-
-@slidebreak
-
 @lesson-instruction{
-- Turn to @printable-exercise{compound-inequality-functions.adoc}.
-- Write code to describe the compound inequalities pictured.
+- Turn to @printable-exercise{compound-inequality-functions.adoc} and take a minute to look at the code in the example and think about what you Notice and Wonder.}
+@QandA{
+
+@Q{What do you Notice about how the code works?}
+@A{_Answers will vary. Facilitate a conversation to draw out all of the things students will need to understand in order to write definitions for the remaining examples!_}
+@A{We see that the left end of the shaded region is at 0 and the dot on zero is red so it's not part of the solution set. +
+This tells us that the first inequality is @math{x > 0}.}
+@A{We see that the right end of the shaded region is at 8.1 and the dot on zero is green so it is part of the solution set. +
+This tells us that the second inequlality is @math{x \le 8.1}.}
+@A{Since the shaded area is where these two inequalities overlap, we know that it's a union, which means they are linked with `and`.}
+@A{Each of the simple inequality expressions is enclosed in a set of parentheses.}
+@A{The definition starts with @ifproglang{wescheme}{define.}@ifproglang{pyret}{`fun` and ends with `end`}}
+
+@Q{What do you Wonder?}
+@A{_Answers will vary, but make space for questions._}
+}
+@lesson-instruction{
+- With your partner, define compound inequality functions for the remaining graphs on the page.
 }
 
 @ifproglang{pyret}{@opt{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Match Compound Inequality Functions with Plots of their Solution Sets}.}
