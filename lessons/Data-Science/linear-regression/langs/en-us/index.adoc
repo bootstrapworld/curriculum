@@ -64,6 +64,8 @@ The straight line that best fits the points on a scatter plot has several names,
 The line itself is computed through a process called _linear regression_, which also goes by the name _least squares regression_.
 }
 
+@clear
+
 @lesson-instruction{
 - Make two scatterplots from the `animals-table`, using `age` as the explanatory variable in one plot and `pounds` as the @vocab{explanatory variable} in the other.
 
@@ -159,13 +161,16 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 
 @slidebreak
 
+@ifproglang{pyret}{@right{@image{images/lr-explained.png, 400}}}
+@ifproglang{codap}{@right{@image{images/codap-lr-explained.png, 400}}}
+
 (1) The resulting scatter plot looks like those we’ve seen before!
 
 (2) The @vocab{line of best fit} is now drawn onto the plot.
 
 (3) @ifproglang{pyret}{Above the display,}@ifproglang{codap}{In the yellow box on the display,} we see the @vocab{predictor function} for that line.
 
-@right{@image{images/lr-explained.png, 400}}
+
 
 @slidebreak
 
@@ -275,17 +280,20 @@ Turn to @printable-exercise{interpreting-regression-lines-n-rvalues.adoc}, and f
 Let's take a look at how the Data Cycle can be used with Linear Regression, and how the result can be used to form our Data Story.
 
 @lesson-instruction{
-- Read @printable-exercise{pages/data-cycle-regression-analysis-example.adoc}.
+- Read @printable-exercise{pages/data-cycle-regression-analysis-example.adoc}, including the __Data Story__ in the Interpret Data section.
 }
 
 @QandA{
 @Q{What do you Notice? What do you Wonder?}
 @Q{Do the `Ask Questions` and `Consider Data` steps match each other? Why or why not?}
 @A{Yes. We're thinking about how age of cats impact time to adoption by looking a the cat rows and comparing `age` and `weeks`.}
+
+@Q{Do you think the results of the analysis and the accompanying _Data Story_ are written responsibly? Why or why not?}
+@A{Responses will vary, but in general, there is a high level of detail and the story feels unbiased.}
 }
 
 @lesson-instruction{
-Read the _Data Story_ at the bottom of the page, which includes the results of the analysis and a responsible way to write about them.
+- Using the Animals Dataset, complete the second Data Cycle on @printable-exercise{pages/data-cycle-regression-analysis-example.adoc}.
 }
 
 === Investigate
@@ -306,7 +314,7 @@ Read the _Data Story_ at the bottom of the page, which includes the results of t
 Have students read their data stories aloud, to get comfortable with the phrasing.
 }
 
-@right{@image{images/lin-reg-2.png,  400}}
+@right{@image{images/lin-reg-2.png, 300}}
 
 The word “linear” in “linear regression” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line!
 
@@ -357,10 +365,11 @@ Students have the opportunity to choose a dataset that interests them in @lesson
 @lesson-instruction{
 - Open your chosen dataset starter file in @proglang.
 - Choose one correlation you were investigating, and use the Data Cycle to ask the question about the relationship between those two columns. Tell the story on @printable-exercise{data-cycle-regression-analysis-1.adoc}.
-- You can explore another question in the same way, using @opt-printable-exercise{data-cycle-regression-analysis-2.adoc}.
+- Complete the second regression analysis on the page with another correlation.
 }
 
-@teacher{Confirm that all students have created and understand how to interpret their LR plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.}
+@teacher{Confirm that all students have created and understand how to interpret their LR plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
+}
 
 @slidebreak
 
@@ -378,7 +387,7 @@ Students have the opportunity to choose a dataset that interests them in @lesson
 
 @teacher{Have students share their findings.}
 
-- Did you discover anything surprising or interesting about their dataset?
+- Did you discover anything surprising or interesting about your dataset?
 
 - Did the results from @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{your Least Squares Line} confirm your suspicions about the correlation? Were any of them surprising?
 

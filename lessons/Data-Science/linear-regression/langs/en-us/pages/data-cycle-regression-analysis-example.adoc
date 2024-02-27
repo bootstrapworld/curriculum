@@ -1,5 +1,17 @@
 = Data Cycle: Regression Analysis (Example)
 
+
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+</style>
+++++
+
 @data-cycle{ ""
   #:question "How big of a factor is age in determining adoption time?"
   #:show-question? #t
@@ -21,12 +33,49 @@
   #:show-new-question? #t
 }
 
-@vspace{1ex}
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| I performed a linear regression on a sample of @fitbruby{40ex}{animals at the shelter}{[dataset or subset]} and found a
 
-_Write your Data Story below:_
+@fitbruby{40ex}{moderate (R=.448), positive}{weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{20ex}{age}{[x-axis]} and
 
+@fitbruby{20ex}{time to adoption}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{year}{[x-axis units]} increase in @fitbruby{20ex}{age}{[x-axis]} is
 
-I performed a linear regression on a sample of @fitbruby{60ex}{animals at the shelter}{[dataset or subset]} and found @fitbruby{80ex}{moderate (R=.448), positive}{a weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{50ex}{age}{[x-axis]} and @fitbruby{60ex}{time to adoption}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{year}{[x-axis units]} increase in @fitbruby{20ex}{age}{[x-axis]} is associated with a @fitbruby{30ex}{.789 week}{[slope, y-units]} @fitbruby{30ex}{increase}{increase / decrease} in @fitbruby{30ex}{time to adoption}{[y-axis]}. 
+associated with a @fitbruby{20ex}{.789 week}{[slope, y-units]} @fitbruby{20ex}{increase}{increase / decrease} in @fitbruby{20ex}{time to adoption}{[y-axis]}.
 
+|===
 
+@span{.sectionbreak}{}
 
+@data-cycle{ ""
+  #:question ""
+  #:show-question? #f
+  #:rows ""
+  #:show-rows? #f
+  #:cols ""
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression ""
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| I performed a linear regression on a sample of @fitbruby{40ex}{}{[dataset or subset]} and found a
+
+@fitbruby{40ex}{}{weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{20ex}{}{[x-axis]} and
+
+@fitbruby{20ex}{}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{}{[x-axis units]} increase in @fitbruby{20ex}{}{[x-axis]} is
+
+associated with a @fitbruby{20ex}{}{[slope, y-units]} @fitbruby{20ex}{}{increase / decrease} in @fitbruby{20ex}{}{[y-axis]}.
+
+|===
