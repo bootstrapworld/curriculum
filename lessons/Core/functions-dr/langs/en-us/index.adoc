@@ -12,13 +12,13 @@
 | Lesson Goals
 | Students will be able to:
 
-* Understand how to use the Design Recipe to break down word problems.
-* Create a strong purpose statement that details in their own words what the function should do.
+- Understand how to use the Design Recipe to break down word problems.
+- Create a strong purpose statement that details in their own words what the function should do.
 
 | Student-Facing Lesson Goals
 |
-* Let's write our own functions in @proglang!
-* Let's use the Design Recipe to write functions from word problems.
+- Let's write our own functions in @proglang!
+- Let's use the Design Recipe to write functions from word problems.
 
 | Materials
 |[.materials-links]
@@ -30,10 +30,10 @@
 
 | Key Points for the Facilitator
 |
-* Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores - they are for human eyes only!
-* The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code - something the computer doesn't read.
-* Remind students that the @vocab{Domain} and @vocab{Range} of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like Integers, Rationals, etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
-* If students struggle with creating the examples, use "Where'd You Get That" to help students build up their understanding around the concept.
+- Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores - they are for human eyes only!
+- The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code - something the computer doesn't read.
+- Remind students that the @vocab{Domain} and @vocab{Range} of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like Integers, Rationals, etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
+- If students struggle with creating the examples, use "Where'd You Get That" to help students build up their understanding around the concept.
 
 
 |===
@@ -45,31 +45,43 @@ In this lesson students build on what they already know about multiple represent
 
 === Launch
 
-A word problem is a description of a situation, but seeing the math behind the words can be challenging!
+A word problem is a description of a situation, but seeing the math behind the words can be challenging! We are going to learn a strategy for breaking down word problems, called the **Design Recipe**. 
 
-In this lesson, students are going to learn a strategy for breaking down word problems, called the *Design Recipe*. They have actually seen most of the steps of the Design Recipe, but they _haven't_ seen how to put them together. There's also one part of the Design Recipe that they haven't seen yet: _writing a purpose statement_.
+Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
 
-On its own, a Contract is not enough information to generate examples and write a @vocab{function definition}. For example, the Contract for `circle` says it needs a Number and two Strings, but that's not the whole story! We can't use negative numbers for the radius, we can only use `"solid"` or `"outline"` for the first String, and the last String has to be a color!
+In the **Design Recipe** we call this **Writing a Purpose Statement**.
 
-Contracts are great, but we need more detail! Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
+@slidebreak
+
+We write @vocab{Purpose Statements}, because Contracts don't provide enough details to generate examples and write a @vocab{function definition}. 
+
+For example, the Contract for `circle` says it needs a Number and two Strings, but that's not the whole story! 
+
+- We can't use negative numbers for the radius.
+- We can only use `"solid"` or `"outline"` for the first String.
+- The last String has to be a color!
+
+@slidebreak
 
 @lesson-instruction{
-* On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four @vocab{purpose statements}.
-* Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
-* What pairs did you come up with?
-* What do you Notice about those purpose statements? Do they have anything in common?
+- On @printable-exercise{matching-wp-purpose.adoc}, we see four word problems and four @vocab{purpose statements}.
+- Take 2 minutes to read them and see if you can find any that describe the same thing and should be matched to each other.
+- What pairs did you come up with?
+- What do you Notice about those purpose statements? Do they have anything in common?
 }
+
+@slidebreak
 
 @lesson-point{
 Purpose statements should have enough details to allow us to write examples without looking at the word problem!
 }
 
 @lesson-instruction{
-* Turn to @printable-exercise{create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
-* @opt{For more practice, complete @opt-printable-exercise{create-examples-contracts-purpose-2.adoc}.}
+- Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
+- @opt{For more practice, complete @opt-printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.}
 }
 
-A good @vocab{purpose statement} must have three things:
+A good @vocab{Purpose Statement} must have three things:
 
 1. A description of what the function _consumes_
 
@@ -111,7 +123,11 @@ Students are given a non-working program, which uses a linear function to determ
 === Launch
 
 @QandA{
-There's a lot of buzz out there around Artificial Intelligence (A.I.) tools, which claim to be able to solve math problems, write essays, and even write code for us! A few students found some A.I. tools that claim to be able to write Pyret programs for them. They asked the A.I. to generate code that makes a rocket blast off, starting on the ground (height=0) when the rocket first blasts off (time=0). The A.I. wrote the program for them - but are they ready to hand it in to their teacher? How do they know if it really solved the problem correctly?
+There's a lot of buzz out there around Artificial Intelligence (A.I.) tools, which claim to be able to solve math problems, write essays, and even write code for us! 
+
+A few students found A.I. tools that claim to be able to write Pyret programs for them. They asked the A.I. to generate code that makes a rocket blast off, starting on the ground (height=0) when the rocket first blasts off (time=0). The A.I. wrote the program for them.
+
+How do they know if it really solved the problem correctly?
 
 Open the @starter-file{rocket-height}, and click "Run".
 
@@ -125,10 +141,13 @@ Open the @starter-file{rocket-height}, and click "Run".
 @A{No.}
 }
 
+@teacher{
 Direct students to close the window with the rocket, so that they can see the code.
+}
+
+@slidebreak
 
 If there are examples for how the program _should_ work, we can automatically detect when AI writes bad code for us. But we didn't get any warning here! Why not?
-}
 
 @QandA{
 Type @show{(code '(rocket-height 0))} into the Interactions Area.
@@ -144,6 +163,8 @@ Type @show{(code '(rocket-height 0))} into the Interactions Area.
 @A{The programmer only gave one example! We should always provide at least two examples. More complex functions will require us to think about what range of examples will be necessary to test that our function does what we want it to!}
 }
 
+@slidebreak
+
 @lesson-point{
 We should always test a function definition against at least 2 examples!
 }
@@ -156,13 +177,16 @@ Let's use the Design Recipe to fix `rocket-height`, and get comfortable with wri
 Complete @printable-exercise{rocket-height.adoc}.
 }
 
+@teacher{
 As students work, circle the room and make sure that their @vocab{purpose statements} are strong enough that they could write @vocab{examples} without looking at the original word problem. Encourage students to circle what's changing in their examples and label with descriptive @vocab{variables}.
+}
 
 @lesson-instruction{
 - Once you've completed the Design Recipe page for `rocket-height`, type the code into Definitions Area, replacing any missing and incorrect code with your own.
 - When it's working correctly, explore the other functions in the file.
 }
 
+@teacher{
 For students needing more specific instructions about exploring the file, try the following:
 
 - Remove the comment from before the `(blastoff rocket-height)` and test the program.
@@ -172,6 +196,7 @@ For students needing more specific instructions about exploring the file, try th
 - Try out `(space rocket-height)`
 
 - Try out `(everything rocket-height)`
+}
 
 @strategy{Teacher Tool: "Where'd You Get That?"}{
 
@@ -182,24 +207,25 @@ The Challenger starts at the *bottom* of the page, physically pointing to one pa
 
 Next, the Challenger starts asking about the _Examples_ and the Defender needs to show how their _Contract and Purpose_ support them. This is repeated for every other step in the recipe, as students work their way back to the original word problem:
 
-- *Challenger* (pointing at the `seconds` variable in the Definition): Where'd you get that?
-- *Defender* (pointing at label in the Examples): Well, I circled the parts of the Examples that change, and labeled them as "seconds".
-- *Challenger* (pointing at the label): OK, but where did you get that label?
-- *Defender* (pointing at Purpose Statement): I used "seconds" in the Purpose Statement.
-- *Challenger* (pointing at Purpose Statement): Where'd you get that term?
-- *Defender* (pointing to Word Problem): I got it from reading the Word Problem.
+- **Challenger** (pointing at the `seconds` variable in the Definition): Where'd you get that?
+- **Defender** (pointing at label in the Examples): Well, I circled the parts of the Examples that change, and labeled them as "seconds".
+- **Challenger**(pointing at the label): OK, but where did you get that label?
+- **Defender** (pointing at Purpose Statement): I used "seconds" in the Purpose Statement.
+- **Challenger** (pointing at Purpose Statement): Where'd you get that term?
+- **Defender** (pointing to Word Problem): I got it from reading the Word Problem.
 }
 
 
-**@opt{For teachers who cover quadratic and exponential functions, or have students who need more of a challenge**, checkout the @opt-printable-exercise{rocket-challenges.adoc}}:
+@opt{**For teachers who cover quadratic and exponential functions, or have students who need more of a challenge**, checkout the @opt-printable-exercise{rocket-challenges.adoc}:
 
-- *Changing slope:* Can you make the rocket fly faster? Slower?
-- *Changing sign:* Can you make the rocket sink down instead of fly up?
-- *Motivating Quadratic Functions:* Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
-- *Practicing the Quadratic Formula:* Can you make the rocket blast off _and then land again_?
-- *More practice:* Can you make the rocket blast off, _reach a maximum height of exactly 1000 meters_, and then land?
-- *More practice:* Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
-- *Motivating Exponential Functions:* Can you make the rocket fly to the edge of the the universe?
+- **Changing slope:** Can you make the rocket fly faster? Slower?
+- **Changing sign:** Can you make the rocket sink down instead of fly up?
+- **Motivating Quadratic Functions:** Can you make the rocket _accelerate over time_, so that it moves faster the longer it flies?
+- **Practicing the Quadratic Formula:** Can you make the rocket blast off _and then land again_?
+- **More practice:** Can you make the rocket blast off, __reach a maximum height of exactly 1000 meters__, and then land?
+- **More practice:** Can you make the rocket blast off, reach a maximum height of exactly 1000 meters, and then land after exactly 100 seconds?
+- **Motivating Exponential Functions:** Can you make the rocket fly to the edge of the the universe?
+}
 
 === Synthesize
 
@@ -207,32 +233,23 @@ Even great programmers make mistakes sometimes. And in a world where AI is being
 
 - What problems did you fix in AI's code?
 - What did the other functions do?
-- Which step in the Design Recipe are you feeling the most confident about? The least? _At this stage, it is normal for students to feel most confident about the Contract and Examples, and the least confident about Purpose Statements and Definitions._
+- Which step in the Design Recipe are you feeling the most confident about? The least? 
 
-@strategy{Project Idea: Design Recipe Telephone}{
+@teacher{At this stage, it is normal for students to feel most confident about the Contract and Examples, and the least confident about Purpose Statements and Definitions.}
 
-
+@strategy{Design Recipe Telephone}{
 Most computer programs are written by huge teams! It is critical that each team member records their thinking with enough detail for other team members to be able to pick up where they left off. In @opt-project{dr-telephone.adoc, rubric-dr.adoc}, students collaborate to complete a series of Design Recipe Problems, with each student being responsible for only one part of each problem in the set.
 
 You can use any word problems you like, but we have provided two sets that lend themselves particularly well to the activity. One set can be used to collaboratively update the functions in @opt-starter-file{collaboration}, which generates a cool mystery image if all three problems are solved correctly!
-
 }
 
 == Additional Exercises
 
-For more practice connecting Examples and Contracts, have students complete @opt-printable-exercise{create-examples-contracts-purpose-2.adoc}.
+- For more practice connecting Examples and Contracts, complete @opt-printable-exercise{create-examples-contracts-purpose-2.adoc}.
 
-While most problems in a math book ask students to _solve_ something, the actual challenge is figuring out _what the equation is that needs to be solved:_ setting it up is where the thinking happens, and solving it is just arithmentic.
+@teacher{
 
-@ifproglang{pyret}{
-You can find blank Design Recipes at the back of the book, or @dist-link{pages/2-blank-pyret-recipes.adoc, print additional ones of your own}.
-}
-
-@ifproglang{wescheme}{
-You can find blank Design Recipes at the back of the book, or @dist-link{pages/2-blank-wescheme-recipes.adoc, print additional ones of your own}.
-}
-
-Ask students to create their own appropriately challenging word problem (with a solution) and collect the responses for later use as "Do Now" tasks or formative assessment.
+While most problems in a math book ask students to __solve__ something, the actual challenge is figuring out __what the equation is that needs to be solved:__ setting it up is where the thinking happens, and solving it is just arithmetic.
 
 To help you apply the Design Recipe to more of your scope and sequence, we've provided a library of Design Recipe worksheets which connect to various curricular goals. We hope that you will be inspired by this library, and begin using the Design Recipe with more of the problems in your book!
 
@@ -246,5 +263,13 @@ To help you apply the Design Recipe to more of your scope and sequence, we've pr
 - @opt-printable-exercise{dr-geometry-cylinder.adoc}
 - @opt-printable-exercise{dr-breaking-even.adoc}
 - @opt-printable-exercise{dr-marquee.adoc}
+
+You may also want to ask students to create their own appropriately challenging word problem (with a solution) and collect the responses for later use as "Do Now" tasks or formative assessment.
+
+You can find blank Design Recipes at the back of the book, or 
+@ifproglang{pyret}{@dist-link{pages/2-blank-pyret-recipes.adoc, print additional ones of your own}}
+@ifproglang{wescheme}{@dist-link{pages/2-blank-wescheme-recipes.adoc, print additional ones of your own}}.
+}
+
 
 
