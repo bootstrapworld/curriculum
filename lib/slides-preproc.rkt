@@ -209,6 +209,7 @@
         (lambda (in)
           (process/ports out in 'stdout
                          (format "~a/lib/maker/get-CM-formatted-string.js ~a"
+                                 *topdir*
                                  (if (eq? *proglang-sym* 'wescheme) 'racket
                                      *proglang-sym*)))))
       (format "<code>~a</code>"
