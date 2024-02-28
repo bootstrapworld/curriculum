@@ -204,7 +204,15 @@
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
     (set! x (regexp-replace* "{zwsp}" x ""))
-    (string-append "<code>" x "</code>")))
+    (let ([out (open-output-string)])
+      (call-with-input-string x
+        (lambda (in)
+          (process/ports out in 'stdout
+                         (format "~a/lib/maker/get-CM-formatted-string.js ~a"
+                                 (if (eq? *proglang-sym* 'wescheme) 'racket
+                                     *proglang-sym*)))))
+      (format "<code>~a</code>"
+              (get-output-string out)))))
 
 (define (iii-dollar-html x)
   (string-append "\n\n$$$ html\n"
