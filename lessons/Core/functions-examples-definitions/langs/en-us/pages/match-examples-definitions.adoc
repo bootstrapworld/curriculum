@@ -5,30 +5,32 @@
 #content td { padding: 0 !important; margin: 0 !important; }
 #content td:first-child {border-bottom: 1pt solid gray !important;}
 #content td * {font-size: .7rem !important;}
-
-
 @media print {
    #content td * {font-size: 0.9rem !important;}
 }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
-Find the variables in `gt` and label them with the word "size".
+(1) Find the variables in `gt` and label them with the word "size".
 
 @ifproglang{pyret}{
-*examples:*
+@hspace{1em}*examples:*
 [.indentedpara]
 --
 `gt(20) is triangle(20, "solid", "green")`
 
 `gt(50) is triangle(50, "solid", "green")`
 --
-*end*
+@hspace{1em}*end*
 
-*fun* `gt(size): triangle(size, "solid", "green")` *end*}
+@hspace{1em}*fun* `gt(size): triangle(size, "solid", "green")` *end*}
 
 
 @ifproglang{wescheme}{
+[.indentedpara]
 --
 `(EXAMPLE (gt 20) (triangle 20 "solid" "green"))`
 
@@ -38,7 +40,9 @@ Find the variables in `gt` and label them with the word "size".
 --
 }
 
-Highlight and label the variables in the example lists below. Then, using `gt` as a model, match the examples to their corresponding function definitions.
+(2) Highlight and label the variables in the example lists below. 
+
+(3) Then, using `gt` as a model, match the examples to their corresponding function definitions.
 
 @do{
 
@@ -93,9 +97,9 @@ Highlight and label the variables in the example lists below. Then, using `gt` a
 [.FillVerticalSpace, cols=".^12a,^.^3a,1a,^.^1a,>.^11a", options="header", stripes="none", grid="none", frame="none"]
 |===
 | Examples    |              ||       | Definition
-| @show{e2}   |*1*@ifsoln{-D}||*A*    | @show{f3}
-| @show{e5}   |*2*@ifsoln{-B}||*B*    | @show{f5}
-| @show{e1}   |*3*@ifsoln{-E}||*C*    | @show{f4}
-| @show{e4}   |*4*@ifsoln{-C}||*D*    | @show{f2}
-| @show{e3}   |*5*@ifsoln{-A}||*E*    | @show{f1}
+| @show{e2}   |*1*@ifsoln{D}||*A*    | @show{f3}
+| @show{e5}   |*2*@ifsoln{B}||*B*    | @show{f5}
+| @show{e1}   |*3*@ifsoln{E}||*C*    | @show{f4}
+| @show{e4}   |*4*@ifsoln{C}||*D*    | @show{f2}
+| @show{e3}   |*5*@ifsoln{A}||*E*    | @show{f1}
 |===

@@ -1,4 +1,4 @@
-= Functions for Character Animation
+= 🎮 Functions for Character Animation
 
 @description{Students define functions that control the movement of the target and danger in their games.}
 
@@ -12,23 +12,26 @@
 | Lesson Goals
 | Students will be able to:
 
-* Apply the @vocab{Design Recipe} to create a @vocab{function} given the constraints of a word problem.
-* Explain the basics of animation.
+- Apply the @vocab{Design Recipe} to create a @vocab{function} given the constraints of a word problem.
+- Explain the basics of animation.
 
 |Student-Facing Lesson Goals
 |
 
-* Let's learn about animation.
-* Let's use the Design Recipe to help us breakdown word problems that will get our game characters moving!
+- Let's use the Design Recipe to help us breakdown word problems that will get our game characters moving!
 
 | Materials
 |[.materials-links]
 @material-links
 
+| Preparation
+| This lesson involves a roleplay in which students will act out character animation along a number line representing the x-axis. Decide where this roleplay will take place in your classroom and whether you will project, draw or make a numberline (from 0 to 1000) for your volunteers to move along.
+
 | Key Points for the Facilitator
 |
-* Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
-* Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`. `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we click the "Run" button!
+- Encourage students to take their time in understanding _why_ we want to fix `update-danger` and `update-target`.
+- Students might be confused as to _how_ the animation is working.  The `make-game` function at the bottom of the file has many inputs - including `update-danger` and `update-target`. `make-game` takes in all those inputs, including the functions we'll write, and creates the interactive window that we see when we click the "Run" button!
+- Note: This lesson does *not* result in the player (avatar) moving! This lesson is strictly about automated characters (called @link{https://en.wikipedia.org/wiki/Non-player_character, Non-Player Characters, or 'NPCs' }). Player movement will be covered in a future lesson.
 
 |===
 
@@ -51,28 +54,35 @@ Students connect the behavior of functions with changing coordinate values, ulti
 @A{If we change image @vocab{coordinates} a little bit at a time, they will appear to move.}
 }
 
-@lesson-roleplay{
-* Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!). 
-* We are going to write a function, called `update-target`, that will be responsible for changing the x-coordinate of the `TARGET` location. +
-_Note: In our game, there is hidden code that will randomly generate the y-coordinate for where the `TARGET` enters the screen. @ifproglang{pyret}{Our `update-target` function will take in that coordinate, but won't change it. For this role play, it will likely make the most sense to work with a y-coordinate of 0.}_ 
-* Before we write the function, let's act it out!
-* Select a student volunteer to be `TARGET` and pick a starting location for our `TARGET`, eg. @ifproglang{pyret}{(300, 0)} @ifproglang{wescheme}{300}.
-* For this roleplay, we will have our `update-target` function move our `TARGET` left across the x-axis by 50 (pixels) each time the function is called.
-** When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
+@slidebreak
 
-@ifproglang{wescheme}{
-** Make `TARGET` move by calling out the function and starting location, eg. `(update-target 300)`.
-** Make `TARGET` move several more times by calling out the function and new location, eg. `(update-target 250)`, etc.
+We are going to write a function, called `update-target`, that will be responsible for changing the x-coordinate of the `TARGET` location. 
+
+@indented{__Note: In our game, there is hidden code that will randomly generate the y-coordinate for where the `TARGET` enters the screen.__}
+
+@teacher{
+- Draw a number line on the board, running from 0 to 1000 (you can also lay tape on the floor, or use a tile floor as a coordinate plane!) __Make sure spacing is such that a student will be able to visibly move along it in increments of 50.__
+- Select a student volunteer to be the `TARGET`.
 }
-@ifproglang{pyret}{
-** Make `TARGET` move by calling out the function and starting location, eg. `update-target(300, 0)`.
-** Make `TARGET` move several more times by calling out the function and new location, eg. `update-target(250, 0)`, etc.
+
+@slidebreak
+
+@lesson-roleplay{
+- Before we write our `update-target` function, let's have a volunteer act it out!
+- For this roleplay, we will have our `update-target` function move our `TARGET` left across the x-axis by 50 (pixels) each time the function is called.
+  * When the `TARGET` hears "update target" followed by their current location, they take a step in the negative direction, moving left across the x-axis by 50 (pixels).
+- Let's have our `TARGET` start at 800.
+- To get them moving, we'll call `(update-target 800)`.
+- To make them move again, we'll need to call the function and new location. What will our new function call be?
 }
-}
+
+@teacher{Crowdsource the function calls to move the `TARGET` several more times.}
+
+@slidebreak
 
 @QandA{
 
-@Q{Ask students: How could we change our `update-target` function to move the `TARGET` across the classroom __more quickly?__}
+@Q{How could we change our `update-target` function to move the `TARGET` across the classroom __more quickly?__}
 @A{We could have the `TARGET` move by more pixels each time, for example by 100 instead of 50.}
 
 @Q{What did you notice about the movement of TARGET?  What was changing?}
@@ -87,24 +97,23 @@ _Note: In our game, there is hidden code that will randomly generate the y-coord
 @lesson-instruction{
 - Sign in to @starter-file{program-list} and open your saved Game Starter Files, or @starter-file{game, make a new copy}.
 - Examine the `update-danger` function. Identify the Contract, and interpret what the function is currently doing.
-- Complete the first word problem on @printable-exercise{pages/character-animation-dr.adoc}.
-- Transfer the code to your Game Starter File.
+- With your partner, complete the first word problem on @printable-exercise{character-animation-dr.adoc}.
+- Transfer the code to your Game Starter File and click "Run" to load the code. +
+_The working `update-danger` function should automatically move the `DANGER` image across the screen!_
+- Then complete the second word problem on @printable-exercise{character-animation-dr.adoc}.
+- Transfer the code to your Game Starter File and click "Run". +
+_Now you should see the `DANGER` and `TARGET` moving across the screen independently!_
 }
 
-When students click the "Run" button, the working `update-danger` function should automatically move the `DANGER` image across the screen!
+@strategy{Extension Activities}{
 
-@lesson-instruction{
-- Complete the second word problem on @printable-exercise{pages/character-animation-dr.adoc}.
-- With your partner, transfer the code to your Game Starter File.
-- Click "Run" to see `DANGER` and `TARGET` move across the screen independently!
+
+Once students have successfully gotten `update-target` and `update-danger` working, they can change those functions to make their targets and dangers move in whichever direction and whatever speed they want to make the game the most fun to play!  They should be sure to modify their purpose statements and examples if they change their functions.
 }
 
-@strategy{
-@span{.title}{Extension Activities}
-
-Once students have successfully gotten `update-target` and `update-danger` working, they can change the functions to make the characters move in whichever direction and whatever speed they want to make the game the most fun to play!  They should be sure to modify their purpose statements and examples if they change their functions.
+@teacher{
+Students may ask about animating their player and we won't get to that until a future lesson on @lesson-link{player-animation}. You can point out that the player will need to be able to move both up *and* down, and right now they don't know the math or programming for a function to have two completely different behaviors.
 }
-
 
 === Synthesize
 Connecting the code to the underlying math is important - especially if you want to customize your game!

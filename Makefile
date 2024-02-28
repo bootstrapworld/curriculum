@@ -5,7 +5,7 @@
 
 export SEMESTER := fall
 
-export YEAR := $(shell date +%Y)
+export YEAR := 2024-beta
 
 # default NATLANG is en-us. To override: make NATLANG=es-mx
 

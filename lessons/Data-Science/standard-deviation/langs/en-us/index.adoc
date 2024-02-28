@@ -18,7 +18,7 @@
 | Student-facing Lesson Goals
 |
 
-* Let’s compare different uses for box plots and histograms when talking about data.
+- Let’s compare different uses for box plots and histograms when talking about data.
 
 | Materials
 |[.materials-links]
@@ -39,7 +39,7 @@ Students review the notion of @vocab{spread} itself, and build up to the formula
 **The Animal Shelter Bureau reports that the @vocab{mean} age of shelter cats is 3 years.**
 
 @QandA{
-Take a look at the the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @lesson-link{ds-intro/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
+Take a look at the the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
 @Q{Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?}
 @A{No, we cannot assume all cats are close to 3 years old. There are some outliers in the dataset.}
 }
@@ -52,7 +52,7 @@ Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
 @A{The mean is 3; yes, it matches what the Animal Shelter Bureau says.}
 @Q{Can you think of four ages, such that the mean age for all of them is 3?}
 @A{Some possibilities include: {3,3,3,3}, {1,2,4,5}, {1,1,4,6}... any four ages that add up to 12 will work!}
-@Q{Can you think of a _different_ spread of four ages that would have the same mean?}
+@Q{Can you think of a __different__ spread of four ages that would have the same mean?}
 @A{See above.}
 @Q{How many different sets of four ages can you think of, which all have a mean of 3?}
 @A{See above.}
@@ -72,7 +72,7 @@ Instead of focusing on the handful of data points used in our Five Number Summar
 
 === Investigate
 
-@right{@image{images/histogram-w-mean.png, 450}} We could imagine a shelter where every cat is between 2 and 4, so *each cat only deviates from the mean by 1 year*! But we could also imagine a shelter with only kittens and very old cats, where *cats deviate by as much as 10 years from the mean!*
+@right{@image{images/histogram-w-mean.png, 450}} We could imagine a shelter where every cat is between 2 and 4, so **each cat only deviates from the mean by 1 year**! But we could also imagine a shelter with only kittens and very old cats, where **cats deviate by as much as 10 years from the mean!**
 
 
 How far away is each data point from 3?
@@ -83,8 +83,8 @@ How far away is each data point from 3?
 Next, complete numbers 4 to 6 of @printable-exercise{computing-stdev.adoc}.
 }
 
-@strategy{
-@span{.title}{Mean Average Deviation?}
+@strategy{Mean Average Deviation?}{
+
 
 In this section of the worksheet, students will need to stretch their visual imaginations a bit! In problem number 6, they are asked to summarize all 10 distances from the mean into a single number. The goal here is for students to make an educated guess about standard deviation (SD) _before_ learning the algorithm for computing it. Invite and encourage discussion about students' different approaches for guessing at the best summary number _before_ sharing the key idea about standard deviation!
 
@@ -124,13 +124,15 @@ To compute standard deviation in CODAP, create a graph with only one quantitativ
 @A{Approximately 48.5}
 }
 
-@optional For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.
+@opt{For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.}
 
 === Synthesize
-- Can you explain why two datasets can have the same mean, but different standard deviations?
-** _Mean is a measure of *central tendency*, whereas standard deviation measures the *variation* of some sample._
-- What kind of dataset would have a standard deviation of zero?
-** _A standard deviation of zero means that every number in the sample is exactly the same._
+@QandA{
+@Q{Can you explain why two datasets can have the same mean, but different standard deviations?}
+@A{Mean is a measure of **central tendency**, whereas standard deviation measures the **variation** of some sample.}
+@Q{What kind of dataset would have a standard deviation of zero?}
+@A{A standard deviation of zero means that every number in the sample is exactly the same.}
+}
 
 == Comparing Standard Deviations @duration{20 minutes}
 
@@ -149,15 +151,17 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 @Q{How does it differ from the one we just looked at?}
 @Q{The previous histogram - with the 16-year-old cat omitted - was roughly symmetric.}
 
-Turn to @printable-exercise{pages/effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset.
+@lesson-instruction{
+Turn to @printable-exercise{effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset.
+}
 
 @Q{What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.}
 @A{Previously, the standard deviation was ~2.45; now it is ~5.83.}
 @Q{What did this outlier do to the standard deviation?}
 @A{The outlier caused the standard deviation to increase by ~3.38.}
-
-@optional To see how changes in data values affect the mean and standard deviation, complete @opt-printable-exercise{pages/match-mean-stdev-to-dataset.adoc}.
 }
+
+@opt{@opt-printable-exercise{match-mean-stdev-to-dataset.adoc}}
 
 === Investigate
 
@@ -165,12 +169,12 @@ The mean and standard deviation tell us where the data is centered and how far t
 
 @lesson-instruction{
 - The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks? _Solicit students' ideas, but do not reveal the answer._
-- Turn to @printable-exercise{pages/analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
+- Turn to @printable-exercise{data-cycle-analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
 }
 
-@strategy{
-@span{.title}{Mean Average v. Standard Deviation}
+@clear
 
+@strategy{Mean Average v. Standard Deviation}{
 MAD and SD are both measures of a certain kind of _distance_, literally asking "how are far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
 
 Before learning the distance formula, students might guess at a number of ways to compute the hypotenuse. They can quickly rule out the sum of the legs, and the difference between them. At some point they might suggest _averaging_ the lengths of the legs. Mean Average Deviation (MAD) does exactly that, by flattening each points' deviation into a single "dimension".
@@ -189,7 +193,6 @@ Treating each point independantly allows each deviation to contribute to the mea
 - Extreme values affect both the mean and standard deviation of a dataset.
 - Unusually low values _decrease_ the mean, while unusually high values _increase_ it. Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
 
-
 == Data Exploration Project (Standard Deviation) @duration{flexible}
 
 === Overview
@@ -203,10 +206,13 @@ Let’s review what we have learned about standard deviation.
 @QandA{
 @Q{Do we compute standard deviation with categorical data or quantitative data? How many columns of data does standard deviation tell us about?}
 @A{Standard deviation is a measure that tells us about the spread of a single quantitative column of data.}
+
 @Q{Standard deviation is a measure of @vocab{spread}. In your own words, what does @vocab{spread} mean?}
 @A{Spread is the extent to which values in a dataset vary, either from one another or from the center.}
+
 @Q{How can two datasets have the same mean, but different standard deviations?}
 @A{Mean is a measure of central tendency, whereas standard deviation measures the variation of some sample.}
+
 @Q{Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.}
 @A{Standard deviation summarizes distance from the mean in *either* direction.}
 }
@@ -221,29 +227,40 @@ Reminder: Students have the opportunity to choose a dataset that interests them 
 @lesson-instruction{
 - Open your chosen dataset starter file in @proglang.
 - Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and use @proglang to compute the standard deviation for one of them.
-** _Note: Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck._
-- What question does your computation answer?
-** _Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?_
-- Write down that question in the top section of the @printable-exercise{analysis-stdev-my-dataset.adoc}.
-- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for the other column you explored before (and any others you are curious about).
-** _Note: If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Explorartion Project and calculate the mean, median, modes and 5-number summaries for the new columns._
 }
 
-@teacher{Invite students to discuss their results and consider how to interpret them.}
+@teacher{
+Consider recommending that students choose the same column they used when they found their @lesson-link{measures-of-center}. If students use a different column, they will need to copy/paste additional slides into their slide deck.
+}
+
+@QandA{
+@Q{What question does your computation answer?}
+@A{Possible responses: How is the data for a certain column distributed? How does the standard deviation compare to the mean?}
+}
 
 @lesson-instruction{
-- *It’s time to add to your @starter-file{exploration-project}.*
+- Write down that question in the top section of the @printable-exercise{data-cycle-analysis-stdev-my-dataset.adoc}.
+- Complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
+- Repeat this process for the other column you explored before (and any others you are curious about).
+}
+
+@teacher{
+If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Explorartion Project and calculate the mean, median, modes and 5-number summaries for the new columns.
+
+Invite students to discuss their results and consider how to interpret them.}
+
+@lesson-instruction{
+**It’s time to add to your @starter-file{exploration-project}.**
 - Locate the "Measures of Center and Spread" section of your Exploration Project. Type the standard deviations you just identified into the tables for the corresponding columns.
 - Now, add your interpretations of the standard deviations and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 }
 
 === Synthesize
-Share your findings with the class!
 
-Did you discover anything surprising or interesting about your dataset?
+@teacher{Have students share their findings.}
 
-What questions did the standard deviations inspire you to ask?
+- Did you discover anything surprising or interesting about your dataset?
 
-When your compared their findings with other students, did they make any interesting discoveries?
+- What questions did the standard deviations inspire you to ask?
 
+- Were there any surprises when you compared your findings with other students?

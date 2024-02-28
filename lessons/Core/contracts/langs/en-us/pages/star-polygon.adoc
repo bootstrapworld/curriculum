@@ -2,33 +2,23 @@
 
 ++++
 <style>
-#content div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
-#content img { width: 55%; }
-#content .listingblock .highlight { padding: 0; }
-#content .forceShading { background-color: #f7f7f8; }
-td.tableblock:nth-of-type(2) p.tableblock { text-align: left; }
+.fitbruby { min-width: 7em; }
+.FillVerticalSpace { grid-auto-rows: 1fr !important; }
 </style>
 ++++
 
-[.forceShading]
---
-@show{(code 'star-polygon)}`{two-colons} (`
-```
-	side-length :: Number,
-	points-on-polygon :: Number,
-	polygon-points-to-skip-between-star-points :: Number,
-	shading-style  :: String,
-	color :: String
+@show{(contract 'star-polygon '((side-length Number) (points-on-polygon Number) (points-to-skip-for-star Number) (fill-style String) (color String)) "Image")}
 
-) -> Image
-```
---
+@vspace{1ex}
 
-Using the detailed Contract above, write expressions to create each image below.
+1. Using the Contract above, write expressions to create images like those pictured below.
 
-Then make two more star polygons of your choosing. Sketch them and write expressions to generate them. Go to @starter-file{editor} to test your code.
+2. Go to @starter-file{editor} to test your code.
 
-[.FillVerticalSpace, cols="^.^1,^.^2",stripes="none"]
+3. Then write expressions to generate two more star polygons of your choosing. +
+@hspace{1em} Sketch them and record your working code.
+
+[.FillVerticalSpace, cols="^.^1,.^2",stripes="none"]
 |===
 | @centered-image{../images/star-polygon-50-8-3-outline.png}
 | @fitb{}{@ifsoln{@show{(code '(star-polygon 50 8 3 "outline" "black"))}}}
@@ -36,9 +26,9 @@ Then make two more star polygons of your choosing. Sketch them and write express
 | @centered-image{../images/star-polygon-50-8-2-solid.png}
 | @fitb{}{@ifsoln{@show{(code '(star-polygon 50 8 2 "solid" "black"))}}}
 
-| @vspace{15ex}
+|
 | @fitb{}{}
 
-| @vspace{15ex}
+|
 | @fitb{}{}
 |===

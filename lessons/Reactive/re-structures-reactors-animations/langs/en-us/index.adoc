@@ -48,7 +48,7 @@ Step 1: Define the data structure
 The first step is to develop a @vocab{data structure} for the information that changes across frames. To do this, we need to figure out what @vocab{fields} our data structure will need.
 
 @lesson-instruction{
-Turn to @printable-exercise{pages/sunset-animation-worksheet.adoc} in your workbook. Copy the three sunset images we gave you into the boxes at the top of the worksheet.
+Turn to @printable-exercise{sunset-animation-worksheet.adoc} in your workbook. Copy the three sunset images we gave you into the boxes at the top of the worksheet.
 }
 
 To identify the fields, we have to figure out what information is needed to create each frame image. Information that changes from frame to frame must be in the data structure.
@@ -60,7 +60,7 @@ On your worksheet, fill in the table just below the three images to indicate wha
 Hopefully, you identified two pieces of changing information: the x-coordinate of the sun and the y-coordinate of the sun. Each image also contains the horizon (the brown rectangle), but that is the same in every frame. Let’s write down a data structure that captures the two coordinates.
 
 @lesson-instruction{
-Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then turn to @printable-exercise{pages/blank-type.adoc} and fill in the `SunsetState` data structure definition at the top of the page. Use `sunset` as the name of the constructor.
+Fill in the second table, giving a name and type for each of the x-coordinate and y-coordinate. Then turn to @printable-exercise{blank-type.adoc} and fill in the `SunsetState` data structure definition at the top of the page. Use `sunset` as the name of the constructor.
 }
 
 You should have come up with something like this: a data block with numbers for the two coordinates.
@@ -81,8 +81,8 @@ The term "state" is used in computer science to refer to the details of a progra
 
 Have students copy the images into the workbook partly to make sure they understand what images they are working with, and partly so that they have a self-contained worksheet page for later reference.
 
-@strategy{
-@span{.title}{What's in a Name?}
+@strategy{What's in a Name?}{
+
 
 We are adopting a convention here, in which we include "State" in the name of the data block, then use the same base name (without "State") for the constructor. By not conflating the names here, students should have an easier time distinguishing between the constructor name and data structure name.
 }
@@ -102,7 +102,7 @@ Step 2: Draw one frame
 The second step in making an animation is to write a function that consumes an instance of one state and produces the image for that instance. We call this function `draw-state`. For sunset, `draw-state` takes a `SunsetState` instance and produces an image with the sun at that location (dipping behind the horizon when low in the sky).
 
 @lesson-instruction{
-Go to @printable-exercise{pages/draw-state.adoc} in your workbook and develop the `draw-state` function described there. Type in your function and use it (in the interactions window) to draw several individual sunset frames.
+Go to @printable-exercise{draw-state.adoc} in your workbook and develop the `draw-state` function described there. Type in your function and use it (in the interactions window) to draw several individual sunset frames.
 }
 
 You may have noticed that we used `SunsetState` instead of `sunset` as the domain name. Remember that `sunset` is just the name of the constructor, while `SunsetState` is the name of the type. We use `SunsetState` whenever we need a type name for the domain or range. 
@@ -116,7 +116,7 @@ Step 3: Produce the next frame instance
 The third step in making an animation is to write a function that consumes an instance of one state and produces the instance for the next state. We call this function `next-state-tick`. For sunset, `next-state-tick` takes a `SunsetState` instance and produces a `SunsetState` instance that is just a little lower in the sky.
 
 @lesson-instruction{
-Go to @printable-exercise{pages/next-state-tick.adoc} in your workbook and develop the `next-state-tick` function described there. Use the sample `SunsetState` instances that you developed in step 1 as you make your examples of the function. Then, type in the code you have so far (including the data definition for `SunsetState` into the sunset starter file, and make sure your examples are producing the expected answers.
+Go to @printable-exercise{next-state-tick.adoc} in your workbook and develop the `next-state-tick` function described there. Use the sample `SunsetState` instances that you developed in step 1 as you make your examples of the function. Then, type in the code you have so far (including the data definition for `SunsetState` into the sunset starter file, and make sure your examples are producing the expected answers.
 }
 
 Together, the `draw-state` and `next-state-tick` functions are the building blocks for an animation. To start to see how, let’s first use these two functions to create the first several frames of an animation by hand (then we’ll show you how to make more frames automatically).
@@ -218,10 +218,10 @@ Functions are essential to creating animations, because each frame comes from a 
 === Synthesize
 Summarizing what we have seen so far, we have to write four things in order to make an animation:
 
-. Create a @vocab{data structure} to hold the information that changes across frames. This information is called the @vocab{state}.
-. Write a @vocab{function} to generate an image of the current state (we’ll call this `draw-state`).
-. Write a @vocab{function} to generate a new state from a given state (we’ll call this `next-state-tick`).
-. Define a {reactor} that will use an initial instance of the state and the two functions to create an animation.
+1. Create a @vocab{data structure} to hold the information that changes across frames. This information is called the @vocab{state}.
+2. Write a @vocab{function} to generate an image of the current state (we’ll call this `draw-state`).
+3. Write a @vocab{function} to generate a new state from a given state (we’ll call this `next-state-tick`).
+4. Define a {reactor} that will use an initial instance of the state and the two functions to create an animation.
 
 At this point, you could create your own animation from scratch by following these four steps. If you do, you may find it helpful to use one of the animation design worksheets at the back of your workbook: it takes you through sketching out your frames, developing the data structure for your animation state, and writing the functions for the animation. It also gives you a checklist of the four steps above. The checklist mentions a fifth (optional) step, which involves getting your characters to respond when the user presses a key. You’ll learn how to do that in the next unit.
 

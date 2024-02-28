@@ -1,0 +1,74 @@
+= Circles of Evaluation: Distance between (0, 2) and (4, 5)
+
+++++
+<style>
+#content .editbox{width: auto;}
+#content .MathJax{display: inline; }
+#content .compare tbody tr { height: 6rem; }
+body .big .mathunicode { font-size: 1.5em !important; color: black; }
+body .big .mathunicode sup { top: -1em; font-size: 10px; }
+body .big .mathunicode .overbar { margin-left: 0.5px; }
+body .medium .mathunicode { font-size: 1.2em !important; color: black; }
+body .medium .mathunicode sup { top: -1em; font-size: 7px; }
+body .medium .mathunicode .overbar { margin-left: 0px; }
+td { padding: 0 0.5rem !important; }
+</style>
+++++
+
+[.big]
+*Suppose your player is at (0, 2) and a character is at (4, 5)...*
+
+@n Identify the values of @math{x_{1}}, @math{y_{1}}, @math{x_{2}}, and @math{y_{2}}
+
+[cols="^.<1a,^.<1a,^.<1a,^.<1a", stripes="none"]
+|===
+| @math{x_{1}} | @math{y_{1}} | @math{x_{2}} | @math{y_{2}}
+
+| _(x-value of 1st point)_
+| _(y-value of 1st point)_
+| _(x-value of 2nd point)_
+| _(y-value of 2nd point)_
+
+| @vspace{4ex}
+|
+|
+|
+
+|===
+
+@vspace{1ex}
+
+@big{What is the distance between your player and the character?}
+
+- We can use `line-length` to computer the horizontal and vertical distances and then use those to find the diagonal distance.
+ * The horizontal distance between @math{x_{1}} and @math{x_{2}} is computed by @show{(code '(line-length x2 x1))}.
+ * The vertical distance between @math{y_{2}} and @math{y_{1}} is computed by @show{(code '(line-length y2 y1))}.
+- The hypotenuse of a right triangle with legs the lengths of those distances is computed by:
+[.medium]#@math{\sqrt{\mbox{line-length}(x_{2}, x_{1})^2 + \mbox{line-length}(y_{2}, y_{1})^2}}#
+- So, when we substitute these points in, the distance between them will be computed by:
+
+@center{@big{@math{\sqrt{\mbox{line-length}(4, 0)^2 + \mbox{line-length}(5, 2)^2}}}}
+
+@vspace{1ex}
+
+@n The points are (0,2) and (4,5). Why aren't we using @show{(code '(line-length 0 2))} and @show{(code '(line-length 4 5))}?
+
+@fitb{}{@ifsoln{`line-length` is used to either find the horizontal distance between the x-coordinates or the vertical distance between the y-coordinates!}}
+
+@n Translate the expression above, for (0,2) and (4,5) into a Circle of Evaluation below.
+
+@hspace{2em} _Hint: In our programming language @show{(code 'sqr)} is used for @math{x^2} and @show{(code 'sqrt)} is used for @math{\sqrt{x}}_
+
+@vspace{1ex}
+
+@center{@image{../images/coe-distance2.png, 550}}
+
+@n Convert the Circle of Evaluation to Code below.
+
+@ifnotsoln{
+@fitb{}{}
+
+@fitb{}{}
+}
+
+@showsoln{(code '(sqrt (+ (sqr (line-length 4 0)) (line-length 5 2))))}

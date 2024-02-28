@@ -7,6 +7,7 @@
   string-to-form
   *make-read-group
   read-commaed-group
+  ignorespaces
   process-as-many-pluses-as-possible
   process-passthrough-lines
   math-unicode-if-possible
@@ -70,7 +71,7 @@
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)
                                    (loop (cons c r) #f nesting in-string? #t)]
-                                  [in-string?
+                                  [(and scheme? in-string?)
                                     (if (char=? c #\")
                                         (loop (cons c r) #f nesting #f #f)
                                         (loop (cons c r) #f nesting #t #f))]
@@ -260,6 +261,7 @@
     (#\B "𝐵")
     (#\C "𝐶")
     (#\R "𝑅")
+    (#\S "𝑆")
     (#\a "𝑎")
     (#\b "𝑏")
     (#\c "𝑐")
@@ -279,6 +281,7 @@
     (#\r "𝑟")
     (#\s "𝑠")
     (#\t "𝑡")
+    (#\u "𝑢")
     (#\v "𝑣")
     (#\w "𝑤")
     (#\x "𝑥")
@@ -331,6 +334,7 @@
   ; (printf "doing math-unicode-if-possible ~s\n" text)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
+             (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
@@ -342,6 +346,7 @@
         [else
           (set! text (regexp-replace* "\\( +" text "("))
           (set! text (regexp-replace* " +\\)" text ")"))
+          (set! text (regexp-replace* "\\pi" text "π"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text
@@ -361,10 +366,10 @@
                                                               x #:asciidoc? asciidoc?)))]
                                      [("frac") (let* ([nu (read-mathjax-token i)]
                                                       [de (read-mathjax-token i)])
-                                                 (display (math-superscript nu) o)
+                                                 (display (math-superscript nu #:asciidoc? asciidoc?) o)
                                                  ; (display "⁄" o)
                                                  (display "/" o)
-                                                 (math-subscript de))]
+                                                 (math-subscript de #:asciidoc? asciidoc?))]
                                      [("overline") (let ([dec (read-mathjax-token i)])
                                                      (enclose-span ".overbar"
                                                        (math-unicode-if-possible

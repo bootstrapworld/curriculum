@@ -1,10 +1,10 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
+phase1: initialization node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
 
 ###############################################################################
 
-initialization: distribution/$(NATLANG)/extlib/mathjax
+initialization:
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -22,7 +22,7 @@ initialization: distribution/$(NATLANG)/extlib/mathjax
 	@$(CP) -p lib/*.rkt $(PROGDIR)
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
-	@$(CP) -p lib/*.png distribution/$(NATLANG)/lib
+	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
@@ -37,14 +37,8 @@ initialization: distribution/$(NATLANG)/extlib/mathjax
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
 # but I don't think it buys us much
 
-node_modules/mathjax:
+node_modules:
 	npm install
-
-distribution/$(NATLANG)/extlib/mathjax: node_modules/mathjax
-	@mkdir -p $@
-	@mkdir -p $@/output
-	@$(CP) -upr node_modules/mathjax/es5/output/chtml $@/output/
-	@$(CP) -upr node_modules/mathjax/es5/tex-chtml-full-speech.js $@/
 
 ###############################################################################
 

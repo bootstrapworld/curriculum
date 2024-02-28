@@ -12,6 +12,7 @@
   create-zero-file
   anonymize-filename
   nicer-case
+  extract-domain-name
   )
 
 (require file/sha1)
@@ -115,3 +116,10 @@
   (cond [(string=? x "codap") "CODAP"]
         [(string=? x "wescheme") "WeScheme"]
         [else (string-titlecase x)]))
+
+(define (extract-domain-name f)
+  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
+    (and x
+         (let ([y (first x)])
+           (and (not (string-ci=? y "google"))
+                (string-titlecase (substring y 0 (- (string-length y) 4))))))))

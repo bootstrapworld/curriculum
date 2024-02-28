@@ -1,13 +1,20 @@
 [.landscape]
 = Why Define Values?
+++++
+<style>
+.autonum { padding-top: 0 !important; }
+</style>
+++++
+
+Take a close look at the Original Circle of Evaluation & Code and how it got simplified.
+
+@n Write the code that must have been used to define the value of @show{(code 'sunny)}. @fitb{}{@showsoln{(code '(define sunny (radial-star 30 20 50 "solid" "yellow"))) }}
 
 @n Complete the table using the first row as an example.
 
-@n Write the code to define the value of @show{(code 'sunny)}. @fitb{}{@showsoln{(code '(define sunny (radial-star 30 20 50 "solid" "yellow"))) }}
-
 @vspace{1ex}
 
-[.FillVerticalSpace, cols="11a,^.^1a,5a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
 |===
 | Original Circle of Evaluation & Code
 | &rarr;
@@ -17,31 +24,43 @@
 |&rarr;
 | @show{(coe '(scale 3 sunny))}
 
-| Code: +
-@show{(code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
+| @show{(code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: +
-@show{(code '(scale 3 sunny))}
+| Code: @show{(code '(scale 3 sunny))}
+|===
+
+[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
+|===
+| Second Circle of Evaluation & Code
+| &rarr;
+| Use the _defined value_ @show{(code 'sunny)} to simplify!
+
 
 | @show{(coe '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | @showsoln{(coe '(frame sunny)) }
 
-| Code: +
-@show{(code '(frame (radial-star 30 20 50 "solid" "yellow")))}
+| @show{(code '(frame (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: +
-@showsoln{(code '(frame sunny)) }
+| Code: @showsoln{(code '(frame sunny)) }
+
+|===
+
+[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
+|===
+| Third Circle of Evaluation & Code
+| &rarr;
+| Use the _defined value_ @show{(code 'sunny)} to simplify!
 
 | @show{(coe '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | @showsoln{(coe '(overlay (text "sun" 30 "black") sunny)) }
 
-| Code: +
-@show{(code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
+| @show{(code '(overlay (text "sun" 30 "black")(radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
-| Code: +
-@showsoln{(code '(overlay (text "sun" 30 "black") sunny)) }
+| Code: @showsoln{(code '(overlay (text "sun" 30 "black") sunny)) }
 |===
+
+@n Define `sunny` in the Definitions Area using the code you recorded at the top of the page.
 
 @n Test your code in the editor and make sure it produces what you would expect it to.
