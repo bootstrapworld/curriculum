@@ -599,17 +599,14 @@
                            [(member directive '("image" "centered-image"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
-                              (cond [*output-answers?*
-                                      (fprintf o "[click here for image](~a)"
-                                               (fully-qualify-image (anonymize-filename img-file)))]
-                                    [(not *slurping-up-teacher-notes*)
+                              (cond [(not *slurping-up-teacher-notes*)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (display "<" o)
-                                      (display (fully-qualify-image (anonymize-filename img-file)) o)
-                                      (display ">" o)]))]
+                                      (fprintf o "[[click here for image]](~a)"
+                                               (fully-qualify-image (anonymize-filename img-file)))]
+                              ))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
