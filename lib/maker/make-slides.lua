@@ -34,7 +34,7 @@ local course_string = 'Core'
 
 if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
   course_string = 'DS'
-elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Early-Math' then
+elseif lesson_superdir == 'Algebra' then
   course_string = 'A'
 end
 
@@ -112,7 +112,6 @@ end
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   file_being_read = lsn_plan_adoc_file
-  local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
   local inside_table_p = false
   local inside_code_display_p = false
@@ -121,165 +120,171 @@ local function get_slides(lsn_plan_adoc_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local curr_slide = newslide()
-  while true do
-    local c = i:read(1)
-    if not c then
-      set_current_slide(slides, curr_slide)
-      break
-    elseif c == '\n' then
-      if not inside_css_p and
-        (not inside_table_p or not beginning_of_line_p) then
-        curr_slide.text = curr_slide.text .. c
-      end
-      beginning_of_line_p = true
-    elseif c == '@' and not inside_css_p then
-      beginning_of_line_p = false
-      local directive = read_word(i)
-      if inside_table_p then
-        if directive == 'preparation' then
-          curr_slide.preparation = read_group(i, directive, false, true)
-        end
-      elseif directive == 'scrub' then
-        read_group(i, directive)
-      elseif directive == 'ifnotslide' then
-        local txt = read_group(i, directive)
-        local _, n = txt:gsub('|===', 'z')
-        n = math.floor(n / 2)
-        tableIdx = tableIdx + n
-      elseif directive == 'ifproglang' then
-        local pls = read_group(i, directive)
-        if not pls:match(proglang) then
-          read_group(i, directive)
-        else
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. pls .. '}'
-        end
-      elseif directive == 'ifpathway' then
-        local pwys = read_group(i, directive)
-        ignore_spaces(i)
-        local text = read_group(i, directive, false, true)
-        curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
-      elseif directive == 'lesson-instruction' then
-        inside_lesson_instruction = true
-        curr_slide.text = curr_slide.text .. c .. directive
-      elseif directive == 'starter-file' then
-        curr_slide.suffix = '-DN'
-        curr_slide.text = curr_slide.text .. c .. directive
-      elseif directive == 'lesson-roleplay' then
-        curr_slide.suffix = '-RP'
-        curr_slide.text = curr_slide.text .. c .. directive
-      elseif directive == 'slidebreak' then
-        set_current_slide(slides, curr_slide)
-        local c2 = buf_peek_char(i)
-        curr_slide = newslide()
-        curr_slide.section = 'Repeat'
-        curr_slide.header = 'SLIDE BREAK'
-        if c2 == '{' then
-          curr_slide.style = read_group(i, directive)
-        end
-      elseif directive == 'A' then
-        local arg = read_group(i, directive)
-        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
-      elseif directive == 'strategy' then
-        local arg1 = read_group(i, directive)
-        ignore_spaces(i)
-        local arg2 = read_group(i, directive)
-        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
-      else
-        if directive == 'image' then
-          if not inside_table_p then
-            curr_slide.numimages = curr_slide.numimages + 1
-          end
-        elseif directive == 'center' then
-          if not inside_table_p then
-            curr_slide.containscenter = true
-          end
-        end
-        curr_slide.text = curr_slide.text .. c .. directive
-      end
-    elseif beginning_of_line_p then
-      beginning_of_line_p = false
-      if c == '+' and read_if_poss(i, '+++') then
-        inside_css_p = not inside_css_p
-      elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
-        inside_css_p = false
-      elseif c == '-' and read_if_poss(i, '---') then
-        curr_slide.text = curr_slide.text .. '----'
-        inside_code_display_p = not inside_code_display_p
-      elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
-        i:read_line()
-        beginning_of_line_p = true
-      elseif inside_css_p then
-        --noop
-      elseif c == '=' then
-        local L = i:read_line()
-        beginning_of_line_p = true
-        -- print('L = ' .. L)
-        if not L then
-          curr_slide.text = curr_slide.text .. c
-          set_imageorientation(curr_slide)
-          slides[#slides + 1] = curr_slide
-          break
-        else
-          new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
-          new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-          if ((curr_slide.level == 2) and 
-              (curr_slide.header == "Common Misconceptions") and 
-              (new_level == 2)) then
-            if (new_header == 'Synthesize')
-            then
-              curr_slide.header = new_header
-              curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
-              curr_slide.section = 'Synthesize'
-            else
-              error("ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize' in " .. os.getenv('PWD'))
-              break
-            end
-          else
-            set_current_slide(slides, curr_slide)
-            curr_slide = newslide()
-            curr_slide.level = new_level
-            curr_slide.header = new_header
 
-            -- print('curr slide header = ' .. curr_slide.header)
-            curr_slide.section = ((curr_slide.level == 2) and
+  local function scan_directives (i, nested)
+    while true do
+      local c = i:read(1)
+      if not c then
+        if not nested then
+          set_current_slide(slides, curr_slide)
+        end
+        break
+      elseif c == '\n' then
+        if not inside_css_p and
+          (not inside_table_p or not beginning_of_line_p) then
+          curr_slide.text = curr_slide.text .. c
+        end
+        beginning_of_line_p = true
+      elseif c == '@' and not inside_css_p then
+        beginning_of_line_p = false
+        local directive = read_word(i)
+        if inside_table_p then
+          if directive == 'preparation' then
+            curr_slide.preparation = read_group(i, directive, false, true)
+          end
+        elseif directive == 'scrub' then
+          read_group(i, directive)
+        elseif directive == 'ifnotslide' then
+          local txt = read_group(i, directive)
+          local _, n = txt:gsub('|===', 'z')
+          n = math.floor(n / 2)
+          tableIdx = tableIdx + n
+        elseif directive == 'ifproglang' then
+          local pls = read_group(i, directive)
+          if not pls:match(proglang) then
+            read_group(i, directive)
+          else
+            local txt = read_group(i, directive, false, true)
+            scan_directives(io.open_buffered(false, txt), true)
+          end
+        elseif directive == 'ifpathway' then
+          local pwys = read_group(i, directive)
+          ignore_spaces(i)
+          local text = read_group(i, directive, false, true)
+          curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
+        elseif directive == 'lesson-instruction' then
+          inside_lesson_instruction = true
+          curr_slide.text = curr_slide.text .. c .. directive
+        elseif directive == 'starter-file' then
+          curr_slide.suffix = '-DN'
+          curr_slide.text = curr_slide.text .. c .. directive
+        elseif directive == 'lesson-roleplay' then
+          curr_slide.suffix = '-RP'
+          curr_slide.text = curr_slide.text .. c .. directive
+        elseif directive == 'slidebreak' then
+          set_current_slide(slides, curr_slide)
+          local c2 = buf_peek_char(i)
+          curr_slide = newslide()
+          curr_slide.section = 'Repeat'
+          curr_slide.header = 'SLIDE BREAK'
+          if c2 == '{' then
+            curr_slide.style = read_group(i, directive)
+          end
+        elseif directive == 'A' then
+          local arg = read_group(i, directive)
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+        elseif directive == 'strategy' then
+          local arg1 = read_group(i, directive)
+          ignore_spaces(i)
+          local arg2 = read_group(i, directive)
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
+        else
+          if directive == 'image' then
+            if not inside_table_p then
+              curr_slide.numimages = curr_slide.numimages + 1
+            end
+          elseif directive == 'center' then
+            if not inside_table_p then
+              curr_slide.containscenter = true
+            end
+          end
+          curr_slide.text = curr_slide.text .. c .. directive
+        end
+      elseif beginning_of_line_p then
+        beginning_of_line_p = false
+        if c == '+' and read_if_poss(i, '+++') then
+          inside_css_p = not inside_css_p
+        elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
+          inside_css_p = false
+        elseif c == '-' and read_if_poss(i, '---') then
+          curr_slide.text = curr_slide.text .. '----'
+          inside_code_display_p = not inside_code_display_p
+        elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
+          i:read_line()
+          beginning_of_line_p = true
+        elseif inside_css_p then
+          --noop
+        elseif c == '=' then
+          local L = i:read_line()
+          beginning_of_line_p = true
+          -- print('L = ' .. L)
+          if not L then
+            curr_slide.text = curr_slide.text .. c
+            set_imageorientation(curr_slide)
+            slides[#slides + 1] = curr_slide
+            break
+          else
+            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+            new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+            if ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
+              if (new_header == 'Synthesize') then
+                curr_slide.header = new_header
+                curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
+                curr_slide.section = 'Synthesize'
+              else
+                error("ERROR: Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize' in " .. os.getenv('PWD'))
+                break
+              end
+            else
+              set_current_slide(slides, curr_slide)
+              curr_slide = newslide()
+              curr_slide.level = new_level
+              curr_slide.header = new_header
+
+              -- print('curr slide header = ' .. curr_slide.header)
+              curr_slide.section = ((curr_slide.level == 2) and
               ((curr_slide.header:match('Launch') and 'Launch') or
               (curr_slide.header:match('Investigate') and 'Investigate') or
               (curr_slide.header:match('Synthesize') and 'Synthesize')))
+            end
+          end
+        elseif c == '[' then
+          local L = i:read_line()
+          if not L then break
+          elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
+            beginning_of_line_p = true
+          else
+            curr_slide.text = curr_slide.text .. '['
+            buf_toss_back_char('\n', i)
+            buf_toss_back_string(L, i)
+          end
+        elseif c == '|' and read_if_poss(i, '===') then
+          i:read_line()
+          inside_table_p = not inside_table_p
+          beginning_of_line_p = true
+          if inside_table_p then
+            tableIdx = tableIdx + 1
+            curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
+            curr_slide.text = curr_slide.text .. '}\n'
+          end
+        else
+          if not inside_table_p then
+            curr_slide.text = curr_slide.text .. c
           end
         end
-      elseif c == '[' then
-        local L = i:read_line()
-        if not L then break
-        elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
-          beginning_of_line_p = true
-        else
-          curr_slide.text = curr_slide.text .. '['
-          buf_toss_back_char('\n', i)
-          buf_toss_back_string(L, i)
-        end
-      elseif c == '|' and read_if_poss(i, '===') then
-        i:read_line()
-        inside_table_p = not inside_table_p
-        beginning_of_line_p = true
-        if inside_table_p then
-          tableIdx = tableIdx + 1
-          curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
-          curr_slide.text = curr_slide.text .. '}\n'
-        end
+      elseif inside_css_p then
+        --noop
       else
         if not inside_table_p then
           curr_slide.text = curr_slide.text .. c
         end
       end
-    elseif inside_css_p then
-      --noop
-    else
-      if not inside_table_p then
-        curr_slide.text = curr_slide.text .. c
-      end
     end
+    i:close()
   end
-  i:close()
+
+  scan_directives(io.open_buffered(lsn_plan_adoc_file))
+
   local n = #slides
   if n > 1 then
     local last_slide = slides[n]
