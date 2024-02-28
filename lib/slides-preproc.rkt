@@ -57,6 +57,8 @@
 
 (define *teacher-notes* #f)
 
+(define *slurping-up-teacher-notes* #f)
+
 (define *autonumber-index* 1)
 
 (define (massage-arg arg)
@@ -543,9 +545,13 @@
 
 (define (ensure-teacher-notes)
   ; (printf "doing ensure-teacher-notes\n")
+  (set! *slurping-up-teacher-notes* #t)
   (unless *teacher-notes*
     ; (printf "setting *teacher-notes*\n")
     (set! *teacher-notes* (open-output-string))))
+
+(define (exit-teacher-notes)
+  (set! *slurping-up-teacher-notes* #f))
 
 (define (display-teacher-notes o)
   ; (printf "doing display-teacher-notes ~s\n" o)
@@ -590,18 +596,17 @@
                            [(string=? directive "slidebreak")
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
-                           [(string=? directive "image")
+                           [(member directive '("image" "centered-image"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
-                              (cond [*output-answers?*
-                                      (fprintf o "[click here for image](~a)"
-                                               (fully-qualify-image (anonymize-filename img-file)))]
-                                    [(not *teacher-notes*)
+                              (cond [(not *slurping-up-teacher-notes*)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (display (fully-qualify-image img-file) o)]))]
+                                      (fprintf o "[[click here for image]](~a)"
+                                               (fully-qualify-image (anonymize-filename img-file)))]
+                              ))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -663,7 +668,8 @@
                               (expand-directives:string->port title *teacher-notes*)
                               (display "**\n" *teacher-notes*)
                               (expand-directives:string->port text *teacher-notes*)
-                              (newline *teacher-notes*))]
+                              (newline *teacher-notes*)
+                              (exit-teacher-notes))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
@@ -671,7 +677,8 @@
                               (ensure-teacher-notes)
                               (newline *teacher-notes*)
                               (expand-directives:string->port text *teacher-notes*)
-                              (newline *teacher-notes*))]
+                              (newline *teacher-notes*)
+                              (exit-teacher-notes))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)
@@ -739,7 +746,8 @@
                               (ensure-teacher-notes)
                               (set! *output-answers?* #t)
                               (expand-directives:string->port text *teacher-notes*)
-                              (set! *output-answers?* #f))]
+                              (set! *output-answers?* #f)
+                              (exit-teacher-notes))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive)])
                               (display "\n" o)
