@@ -30,15 +30,18 @@
 
 == The Additive Inverse Property @duration{10 minutes}
 
-
-
 === Investigate
 
-For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples!
+For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples! @show{(code '(+ 9 2))}
 
-
-@teacher{
-@opt{If you would like to offer students additional practice with the additive inverse in @proglang, two optional activities include opt-printable-exercise{are-they-identical.adoc} and opt-printable-exercise{writing-equivalent-code-additive.adoc}.}
+@show{
+(code '(define (red-shape shape)
+  (cond
+    [(string=? shape "circle")     (circle 20 "solid" "red")]
+    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
+    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
+    [(string=? shape "star")       (star 20 "solid" "red")]
+	[else (text "Unknown shape name!" 20 "red")])))
 }
 
 @slidebreak
