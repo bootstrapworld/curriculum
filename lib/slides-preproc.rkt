@@ -200,22 +200,18 @@
     ; (printf "returning ~s\n" ans)
     (string-append "<code>" (list->string ans) "</code>")))
 
-(define (code exp #:parens [parens #f])
-  (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
-    ; what about codap?
+(define (cm-code x #:multiline? [multiline? #t] #:parens [parens #f])
+  (let ([pyret? (string=? *proglang* "pyret")])
+    (unless (string? x)
+      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (set! x (regexp-replace* "{zwsp}" x ""))
-    (let* ([y (with-output-to-string
-              (lambda ()
-                (with-input-from-string x
-                  (lambda ()
-                    (system
-                      (format
-                        "node ~a/lib/maker/get-CM-formatted-string.js ~a"
-                        *topdir*
-                        (if (eq? *proglang-sym* 'wescheme) 'scheme2 *proglang-sym*)
-                        ))))))]
-           [tag (if (regexp-match "\n" y) "code" "code")]) ; <pre> sometimes?
-      (format "<~a>~a</~a>" tag y tag))))
+    x))
+
+(define (code x #:multiline? [multiline? #t] #:parens [parens #f])
+  (let ([x (cm-code x #:multiline? multiline? #:parens parens)])
+    (if (regexp-match "\n" x)
+        (string-append "```\n" x "\n```")
+        (string-append "``" x "``"))))
 
 (define (iii-dollar-html x)
   (string-append "\n\n$$$ html\n"
@@ -275,13 +271,13 @@
                 (format "~s" exp))
             "</span>\n")]))
 
-(define (old-math exp #:parens [parens #f])
+(define (old-code exp #:parens [parens #f])
   (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
     ;what about codap
     (set! x (regexp-replace* "{zwsp}" x ""))
     (string-append "<code>" x "</code>")))
 
-(define math code)
+(define math old-code)
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
