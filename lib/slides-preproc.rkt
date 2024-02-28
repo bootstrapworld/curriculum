@@ -61,8 +61,6 @@
 
 (define *slurping-up-teacher-notes* #f)
 
-(define *nested-expand-directive?* #f)
-
 (define *autonumber-index* 1)
 
 (define (massage-arg arg)
@@ -611,9 +609,6 @@
                      (cond [(string=? directive "") (display c o)]
                            [(string=? directive "@") (display c o)]
                            [(string=? directive "slidebreak")
-                            (when *nested-expand-directive?*
-                              (error 'ERROR "~a: @slidebreak inside another directive\n"
-                                     (errmessage-file-context)))
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
                            [(member directive '("image" "centered-image"))
@@ -806,10 +801,7 @@
   ; (printf "doing expand-directives:string->port ~s\n\n" s )
   (call-with-input-string s
     (lambda (i)
-      (let ([old-nested-expand-directive? *nested-expand-directive?*])
-        (set! *nested-expand-directive?* #t)
-        (expand-directives i o)
-        (set! *nested-expand-directive?* old-nested-expand-directive?)))))
+      (expand-directives i o))))
 
 (define (preproc-slides-file in-file out-file)
   ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
