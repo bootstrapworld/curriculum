@@ -1835,7 +1835,7 @@
                                       (expand-directives:string->port s o)
                                       )))))]
                            [(string=? directive "opt")
-                            (let ([text (read-group i directive)]
+                            (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display "[.optionaltag]##{empty}##\n" o)
