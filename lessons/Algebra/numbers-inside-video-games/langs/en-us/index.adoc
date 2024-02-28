@@ -72,30 +72,40 @@ This pedagogy is a @link{https://www.nctm.org/noticeandwonder/, widely-used best
 === Investigate
 @lesson-instruction{
 Work with your partner to complete @printable-exercise{ReverseEngineerGame.adoc}.
-
-- 1st Column: What are all the various _things_ in this game? __(A dog, Clouds, etc.)__
-
-- 2nd Column: For each of those "things", what is changing about them? __(Location, Value, etc.)__
-
-- 3rd Column: For each change, how is it modeled mathematically? What @vocab{variable}(s) does the program need to keep track of?__(x-coordinate, y-coordinate, amount, etc.)__
 }
+
+@teacher{
+Debrief what changed, what changed about them, and how the changes are modeled mathematically!
+}
+
+@slidebreak
+
+@QandA{
+@Q{How many numbers does it take to represent a single frame of the video game? +
+__Hint: Each character is represented by both an x-coordinate and a y-coordinate (some of which are fixed and some of which are randomly generated).__}
+@A{Nine: 2 for the cat (moves left and right), 2 each for the cloud and ruby (move left at random y-positions), 2 for the dog (moves left at a fixed y-position) and 1 for the score}
+@Q{How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?}
+@A{The cat's y-coordinate increases when they jump and decreases when they fall.}
+@A{x-coordinates increase when a character moves right, and decrease when they move left.} 
+@A{The score increases by 1 when the cat gets a ruby and by 10 when the cat jumps on the dog.}
+@Q{How many variables would we need to have a two-player game with two cats?}
+@A{(Sample answer) Eleven: we'd need to add another set of x-y coordinates.}
+@Q{How many variables would we need if the entire game was in 3d?}
+@A{(Sample answer) Fifteen: we'd need to add z-coordinates to each character.}
+}
+
+@teacher{
+The main idea here is to understand that while we see images on a screen, the computer only sees a small set of variables, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more variables.
+}
+
 === Common Misconceptions
 - Students are likely to describe what the character is _doing_, as opposed to _what changes_. For example: "The dog is moving to the left" is not actualy describing the property being changed (position, place, location, etc).
 - Students may write down what they _hope_ is changeable, as opposed to what actually changes. It's common for students to say the cat's costume is changing, because they assume the cat will somehow "level up" if they get enough points.
 
 === Synthesize
-The main idea here is to understand that while we see images on a screen, the computer only sees a small set of variables, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more variables.
 
 @QandA{
-@Q{If each character is represented by both an x-coordinate and a y-coordinate (some of which are fixed and some of which are randomly generated), how many numbers does it take to represent a single frame of the video game?}
-@A{Nine: 2 for the cat (moves left and right), 2 each for the cloud and ruby (move left at random y-positions), 2 for the dog (moves left at a fixed y-position) and 1 for the score}
-@Q{How are those numbers changing - or _varying_ - as the game plays? When do they increase? Decrease?}
-@A{The cat's y-coordinate increases when they jump and decreases when they fall. x-coordinates increase when a character moves right, and decrease when they move left. The score increases by 1 when the cat gets a ruby and by 10 when the cat jumps on the dog.}
-@Q{How many variables would we need to have a two-player game with two cats?}
-@A{(Sample answer) Eleven: we'd need to add another set of x-y coordinates.}
-@Q{How many variables would we need if the entire game was in 3d?}
-@A{(Sample answer) Fifteen: we'd need to add z-coordinates to each character.}
-@Q{How many variables would we need to keep track of in a modern video game?}
+@Q{How many variables do you think are being kept track of in a modern video game?}
 @A{A whole lot -- Thousands. Millions!}
 }
 
@@ -155,7 +165,11 @@ Collect students estimates for each of the questions above.
 
 |===
 
-The 3d, two-player version of NinjaCat needed a lot more numbers than the simple one you saw here, _but the actual concepts at work are the same_. Even if we don't have time to make games like the ones we chose here, you'll learn the same concepts just by making a simpler one.
+@slidebreak
+
+The 3d, two-player version of NinjaCat needed a lot more numbers than the simple one we played with today, _but the actual concepts at work are the same_. 
+
+We don't have time in this course to make games that are as complex as your favorite games, but you'll be learning the same concepts just by making a simpler one.
 
 @teacher{
 The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
@@ -163,6 +177,11 @@ The goal here is not to discourage students from the possibility of eventually c
 
 === Synthesize
 
-Are we likely to create games like the ones you researched?
+@QandA{
+@Q{Why won't we be making video games that are as complex as games like Call of Duty in this course?}
+@A{They take years to build, even with a huge professional team!}
+@Q{What kind of video games are we likely make in this course?}
+@A{Fairly basic games with a player, target and danger, like the Ninjacat Game we played at the beginning of today's class.}
+}
 
 
