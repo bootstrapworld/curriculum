@@ -177,8 +177,13 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.style = read_group(i, directive)
         end
       elseif directive == 'A' then
-        local ans = read_group(i, directive)
-        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. ans .. '}'
+        local arg = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+      elseif directive == 'strategy' then
+        local arg1 = read_group(i, directive)
+        ignore_spaces(i)
+        local arg2 = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
       else
         if directive == 'image' then
           if not inside_table_p then
