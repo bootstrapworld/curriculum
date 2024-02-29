@@ -59,13 +59,15 @@
 
 (define *slurping-up-teacher-notes* #f)
 
+(define *nested-expand-directive?* #f)
+
 (define *autonumber-index* 1)
 
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
 (define (errmessage-file-context)
-  *in-file*)
+  (format "~a/~a" *lesson* *in-file*))
 
 (define (make-image img width)
   ; (printf "make-image ~s (w ~s) in ~s\n" img width (current-directory))
@@ -607,6 +609,9 @@
                      (cond [(string=? directive "") (display c o)]
                            [(string=? directive "@") (display c o)]
                            [(string=? directive "slidebreak")
+                            (when *nested-expand-directive?*
+                              (error 'ERROR "~a: @slidebreak inside another directive\n"
+                                     (errmessage-file-context)))
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
                            [(member directive '("image" "centered-image"))
@@ -765,13 +770,13 @@
                             (let ([text (read-group i directive)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* ​" o))
+                                (display "* &#8203;" o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive)])
                               (when *output-answers?*
-                                (display "\n  -  ​" o)
+                                (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
@@ -799,7 +804,10 @@
   ; (printf "doing expand-directives:string->port ~s\n\n" s )
   (call-with-input-string s
     (lambda (i)
-      (expand-directives i o))))
+      (let ([old-nested-expand-directive? *nested-expand-directive?*])
+        (set! *nested-expand-directive?* #t)
+        (expand-directives i o)
+        (set! *nested-expand-directive?* old-nested-expand-directive?)))))
 
 (define (preproc-slides-file in-file out-file)
   ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
