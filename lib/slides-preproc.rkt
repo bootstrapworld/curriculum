@@ -765,13 +765,13 @@
                             (let ([text (read-group i directive)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* " o))
+                                (display "* ​" o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive)])
                               (when *output-answers?*
-                                (display "\n  -  " o)
+                                (display "\n  -  ​" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))

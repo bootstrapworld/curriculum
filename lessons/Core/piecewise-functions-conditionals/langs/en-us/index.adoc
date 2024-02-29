@@ -253,23 +253,23 @@ Once we know that we're dealing with multiple patterns, we're ready to define th
 
 **In this example, we have four patterns:**
 
-- sometimes we produce `(circle 20 "solid" "red")`
-- sometimes we produce `(triangle 20 "solid" "red")`
-- sometimes we produce `(rectangle 20 20 "solid" "red")`
-- sometimes we produce `(star 20 "solid" "red")`
-- sometimes we produce `(text "Unknown shape name!" 20 "red")`
+- sometimes we produce @show{(code '(circle 20 "solid" "red"))}
+- sometimes we produce @show{(code '(triangle 20 "solid" "red"))}
+- sometimes we produce @show{(code '(rectangle 20 20 "solid" "red"))}
+- sometimes we produce @show{(code '(star 20 "solid" "red"))}
+- sometimes we produce @show{(code '(text "Unknown shape name!" 20 "red"))}
 
 **To define a piecewise function, each condition has both a result ("what should we do") and a question ("when should we do it?").**
 
 @QandA{
 @Q{When should we make circles?}
-@A{When `shape == "circle"`}
+@A{When @show{(code '(string=? shape "circle"))}}
 @Q{When should we make triangles?}
-@A{When `shape == "triangle"`}
+@A{When @show{(code '(string=? shape "triangle"))}}
 @Q{When should we make rectangles?}
-@A{When `shape == "rectangle"`}
+@A{When @show{(code '(string=? shape "rectangle"))}}
 @Q{When should we make stars?}
-@A{When `shape == "star"`}
+@A{When @show{(code '(string=? shape "star"))}}
 @Q{When should we draw the "Unknown shape name" text?}
 @A{When `shape` is....anything `else`}
 }
@@ -278,11 +278,11 @@ Once we know that we're dealing with multiple patterns, we're ready to define th
 
 **Adding the questions to our pattern gives us:**
 
-- When `shape == "circle"`...we produce `(circle 20 "solid" "red")`
-- When `shape == "triangle"`...we produce `(triangle 20 "solid" "red")`
-- When `shape == "rectangle"`...we produce `(rectangle 20 20 "solid" "red")`
-- When `shape == "star"`...we produce `(star 20 "solid" "red")`
-- When `shape` is anything `else`...we produce `(text "Unknown shape name!" 20 "red")`
+- When @show{(code '(string=? shape "circle"))}...we produce @show{(code '(circle 20 "solid" "red"))}
+- When @show{(code '(string=? shape "triangle"))}...we produce @show{(code '(triangle 20 "solid" "red"))}
+- When @show{(code '(string=? shape "rectangle"))}...we produce @show{(code '(rectangle 20 20 "solid" "red"))}
+- When @show{(code '(string=? shape "star"))}...we produce @show{(code '(star 20 "solid" "red"))}
+- When `shape` is anything `else`...we produce @show{(code '(text "Unknown shape name!" 20 "red"))}
 
 **This practically gives away the body of our function definition!**
 
