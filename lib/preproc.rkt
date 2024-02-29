@@ -1752,7 +1752,7 @@
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (cond [(string-ci=? proglang *proglang*)
-                                     (expand-directives:string->port text o)]
+                                     (expand-directives:string->port text o #:enclosing-directive #f)]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
 
@@ -1811,8 +1811,7 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
-                            (when (and (string? *enclosing-directive*)
-                                       (string=? *enclosing-directive* "ifproglang"))
+                            (when *enclosing-directive*
                               (error 'ERROR "~a: @slidebreak inside another directive" 
                                      (errmessage-file-context)))
                             (let ([c (peek-char i)])
