@@ -308,12 +308,12 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
-        o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
         if slide.preparation then
           o:write('\nPreparation:\n')
           o:write(slide.preparation)
           o:write('\n')
         end
+        o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
         o:write('-->\n')
       end
     else

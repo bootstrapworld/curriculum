@@ -26,6 +26,8 @@
 
 (define *proglang-sym* (string->symbol *proglang*))
 
+(define *triple-backtick-proglang* (if (string=? *proglang* "wescheme") "scheme" "pyret"))
+
 (define *natlang* (or (getenv "NATLANG") "en-us"))
 
 (define *starter-files*
@@ -212,7 +214,7 @@
 (define (code x #:multiline? [multiline? #t] #:parens [parens #f])
   (let ([x (cm-code x #:multiline? multiline? #:parens parens)])
     (if (regexp-match "\n" x)
-        (string-append "```\n" x "\n```")
+        (string-append "```" *triple-backtick-proglang* "\n" x "\n```")
         (string-append "``" x "``"))))
 
 (define (iii-dollar-html x)
