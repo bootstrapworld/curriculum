@@ -29,7 +29,9 @@
 
 | Preparation
 |
+@preparation{
 * Draw or project a number line of the integers from -10 to 10. This will be the focal point of a lot of the conversation for today's lesson. 
+}
 
 | Key Points For The Facilitator
 |
@@ -67,6 +69,8 @@ Operators always have two inputs and, in standard mathematical notation, they al
 
 But what if we want to do something to just _one_ number? On which side does the operator go? Or what if we want to do something to _more than two_ numbers? Forcing the "verb" to always be in the middle really limits what we can do!
 
+@slidebreak
+
 @vocab{Functions} are very similar to operators... except that functions can have _any number_ of inputs!  If you've completed any of the programming explorations so far, then you are familiar with a wide variety of functions: `scale`, `rotate`, `beside`, etc.
 
 Math has functions too, and they work the same way!
@@ -86,19 +90,18 @@ The function used to represent "the opposite" is called `negate`. When we use `n
 @slidebreak
 
 @QandA{
+@show{(coe '(negate 2))}
 @Q{What does this Circle of Evaluation evaluate to?}
 @A{The Circle evaluates to @math{-2}.}
-@show{(coe '(negate 2))}
 }
 
 
 @slidebreak
 
 @QandA{
-@Q{What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle, like in this Circle?}
-@A{The opposite of the opposite of a number is the number itself, so it evaluates to @math{2}.}
-
 @show{(coe '(negate (negate 2)))}
+@Q{What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle, like in the above Circle?}
+@A{The opposite of the opposite of a number is the number itself, so it evaluates to @math{2}.}
 }
 
 
@@ -187,6 +190,8 @@ We have a term for _the distance of a number from zero_ - it's @vocab{absolute v
 Absolute value is the (positive) distance of a number from zero.
 }
 
+@slidebreak
+
 We annotate absolute value like this: @math{|x|}, with @math{x} being any given number. When we encounter an expression like @math{|x|}, we say "the absolute value of @math{x}."
 
 Because _opposites_ are the same distance away from zero, they will always have the same absolute value. So, @math{|4| = 4} and @math{|-4| = 4}.
@@ -195,6 +200,8 @@ Because _opposites_ are the same distance away from zero, they will always have 
 === Investigate
 
 The @vocab{function} that we will use to represent absolute value is @show{(code 'abs)}. It can be used like any other operator that we put at the top of a Circle of Evaluation. As with `negate`, when we use @show{(code 'abs)}, we include just one argument inside the Circle of Evaluation.
+
+@slidebreak
 
 @QandA{
 @Q{Let's try evaluating some Circles of Evaluation with `abs`! What does each of these Circles evaluate to?}
@@ -215,7 +222,7 @@ The @vocab{function} that we will use to represent absolute value is @show{(code
 @slidebreak
 
 @lesson-instruction{
-- On @printable-exercise{true-or-false-abs-val.adoc}, you will compare expressions with `abs` to expressions with `negate`
+- On @printable-exercise{true-or-false-abs-val.adoc}, compare expressions with `abs` to expressions with `negate`
 - On the bottom half of the page, determine whether variable equations featuring `negate` and `abs` are always, sometimes, or never true. Be sure to explain your response.
 - Complete @printable-exercise{wodb-abs-val-negate.adoc}. Cross out any Circle of Evaluation that does *not* meet the condition stated on the left.
 }

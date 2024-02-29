@@ -174,8 +174,11 @@ body {
     vertical-align:     baseline;
     &:empty { display: none; } /* If empty after JS post-processing, hide */
   }
-  .optionaltag>p::before {
+  .optionaltag::before {
     font-style: italic; 
+  }
+  div.hiddenblock {
+    display: none;
   }
 }
 
@@ -273,7 +276,7 @@ lines on some browsers */
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
     dt a.project {
-      &::before { content: '🛠🧵 '; }
+      &::before { content: '🎨 '; text-decoration: none; }
     }
     dd:after  { display: block; content: ''; }
     dd:before { display: inline; content: ' :: '; font-weight: 900; }
@@ -557,6 +560,7 @@ body.solution-page {
 
 body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  color: black !important;
 
   #header > h1:first-child { text-align: center; }
 
@@ -569,6 +573,13 @@ body.workbookpage {
   #preamble_disabled .sectionbody table.FillVerticalSpace,
   #content > .sect1 { 
     flex-grow: 1;
+  }
+
+  .teacherNote { 
+    font-style: italic; display: inline;
+    line-height: 1.3;
+    * { display: inline; }
+    &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
   }
 
   .lesson-section-1 { border: none; }
@@ -599,7 +610,7 @@ body.workbookpage {
   p .editbox, pre .editbox { font-size: 9pt !important; }
 
   /* Some elements show either solution mode or a blank */
-  .solution { font-style: italic; }
+  .solution, .solution code { font-style: italic !important; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
 
@@ -618,6 +629,11 @@ body.workbookpage {
   .studentAnswerShort  { min-width: 20pt;  }
   .studentAnswerMedium { min-width: 100pt; }
   .studentAnswerLong   { min-width: 140pt; }
+
+  .circleevalsexp .studentBlockAnswerFilled { 
+    font-weight: bold; font-style: italic; display: inline-block; 
+    .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
+  }
 
   .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
     background:   @translucent-bg-color;
@@ -847,6 +863,8 @@ table.recipe_title    {
 }
 
 .codap {
+  .data-cycle-expression { font-family: inherit; }
+
   .cm-keyword { font-weight: normal !important; }
   .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
   .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
@@ -939,30 +957,30 @@ td.halign-center .circleevalsexp { text-align: center; }
 }
 
 /* WESCHEME COLORS */
-.wescheme-string,     .cm-scheme-string   { color: green;}
+.wescheme-string,     .cm-scheme-string   { color: forestgreen;}
 .wescheme-number,     .cm-scheme-number   { color: blue;}
 .wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
 .wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color; }
-span.cm-scheme-punctuation                { color: black;}
-span.cm-scheme-rparen                     { color: black;}
+.cm-scheme-punctuation                    { color: black;}
+.cm-scheme-rparen                         { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
-.cm-comment                               { color: @code-comment-color; }
+.cm-comment, .hljs-comment                { color: @code-comment-color; }
 .cm-boolean                               { color: darkred; }
-.cm-builtin                               { color: #555; }
-.cm-variable                              { color: #4d5966; }
+.cm-builtin, .hljs-built_in               { color: #555; }
+.cm-variable, .hljs-name                  { color: #4d5966; }
 .cm-keyword                               { color: black; font-weight: bold; }
-.cm-number                                { color: navy; }
+.cm-number, .hljs-number                  { color: navy; }
 .cm-roughnum                              { color: blue; }
 .cm-bad-number                            { color: red; font-weight: bold; }
-.cm-string                                { color: forestgreen; }
+.cm-string, .hljs-string                  { color: forestgreen; }
 .cm-type                                  { color: #374049; }
 .cm-function-name                         { color: #374049; }
 .cm-unterminated-string                   { color: red; font-weight: bold; }
-.pyretkeyword                             { font-weight: 900; margin-right: 1ex; }
+.pyretkeyword, .hljs-keyword              { font-weight: 900; margin-right: 1ex; }
 * + .pyretkeyword { margin-left: 1ex;}
 
 /* compact tables */

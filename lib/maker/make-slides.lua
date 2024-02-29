@@ -10,7 +10,7 @@ dofile(make_dir .. 'readers.lua')
 local file_being_read = 'noneyet'
 
 local read_group = make_read_group(identity, function()
-  return file_being_read
+  return file_being_read .. ' in ' .. os.getenv('PWD')
 end)
 
 local lplan_file = 'index.adoc'
@@ -25,6 +25,8 @@ local function first_line(f)
   if not x then return false end
   return x
 end
+
+local proglang = first_line('.cached/.record-proglang') or 'pyret'
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
@@ -67,9 +69,11 @@ local allowed_slide_layouts = {
   "Investigate-DN",
   "Investigate-K",
   "Investigate-R",
+  "Investigate-RP",
   "Investigate2",
   "InvestigateC-DN",
   "InvestigateR-DN",
+  "Investigate2T",
   "Synthesize",
   "SynthesizeR",
   "SynthesizeC",
@@ -86,6 +90,7 @@ local function newslide()
     suffix = '',
     containscenter = false,
     imageorientation = 'R',
+    preparation = false,
   }
 end
 
@@ -106,15 +111,16 @@ end
 
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
+  file_being_read = lsn_plan_adoc_file
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
   local inside_table_p = false
-  local curr_slide = newslide()
+  local inside_code_display_p = false
   local inside_css_p = false
-  local beginning_of_line_p = true
   local inside_lesson_instruction = false
+  local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
-  file_being_read = lsn_plan_adoc_file
+  local curr_slide = newslide()
   while true do
     local c = i:read(1)
     if not c then
@@ -130,9 +136,23 @@ local function get_slides(lsn_plan_adoc_file)
       beginning_of_line_p = false
       local directive = read_word(i)
       if inside_table_p then
-        --noop
-      elseif directive == 'scrub' or directive == 'ifnotslide' then
+        if directive == 'preparation' then
+          curr_slide.preparation = read_group(i, directive, false, true)
+        end
+      elseif directive == 'scrub' then
         read_group(i, directive)
+      elseif directive == 'ifnotslide' then
+        local txt = read_group(i, directive)
+        local _, n = txt:gsub('|===', 'z')
+        n = math.floor(n / 2)
+        tableIdx = tableIdx + n
+      elseif directive == 'ifproglang' then
+        local pls = read_group(i, directive)
+        if not pls:match(proglang) then
+          read_group(i, directive)
+        else
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. pls .. '}'
+        end
       elseif directive == 'ifpathway' then
         local pwys = read_group(i, directive)
         ignore_spaces(i)
@@ -149,9 +169,21 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
         set_current_slide(slides, curr_slide)
+        local c2 = buf_peek_char(i)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
+        if c2 == '{' then
+          curr_slide.style = read_group(i, directive)
+        end
+      elseif directive == 'A' then
+        local arg = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+      elseif directive == 'strategy' then
+        local arg1 = read_group(i, directive)
+        ignore_spaces(i)
+        local arg2 = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
       else
         if directive == 'image' then
           if not inside_table_p then
@@ -166,10 +198,16 @@ local function get_slides(lsn_plan_adoc_file)
       end
     elseif beginning_of_line_p then
       beginning_of_line_p = false
-      if c == '+' and (not inside_css_p) and read_if_poss(i, '+++') then
-        inside_css_p = true
+      if c == '+' and read_if_poss(i, '+++') then
+        inside_css_p = not inside_css_p
       elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
         inside_css_p = false
+      elseif c == '-' and read_if_poss(i, '---') then
+        curr_slide.text = curr_slide.text .. '----'
+        inside_code_display_p = not inside_code_display_p
+      elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
+        i:read_line()
+        beginning_of_line_p = true
       elseif inside_css_p then
         --noop
       elseif c == '=' then
@@ -212,7 +250,7 @@ local function get_slides(lsn_plan_adoc_file)
       elseif c == '[' then
         local L = i:read_line()
         if not L then break
-        elseif L:match('cols=[%d"\']') then
+        elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
           beginning_of_line_p = true
         else
           curr_slide.text = curr_slide.text .. '['
@@ -270,6 +308,11 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
+        if slide.preparation then
+          o:write('\nPreparation:\n')
+          o:write(slide.preparation)
+          o:write('\n')
+        end
         o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
         o:write('-->\n')
       end
@@ -281,9 +324,6 @@ local function make_slides_file(lplan_file, slides_file)
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
           if slide.numimages == 2 then slide.suffix = '2' end
-          if slide.suffix ~= '2' then
-            slide.suffix = ''
-          end
         elseif curr_section == 'Launch' then
           if slide.imageorientation == 'R' then
             if slide.suffix ~= '' then slide.suffix = '' end
@@ -293,7 +333,7 @@ local function make_slides_file(lplan_file, slides_file)
             slide.suffix = ''
           end
         end
-        local curr_layout = curr_section .. slide.imageorientation .. slide.suffix
+        local curr_layout = slide.style or (curr_section .. slide.imageorientation .. slide.suffix)
         if not memberp(curr_layout, allowed_slide_layouts) then
           print('WARNING: Unknown slide template: ' .. curr_layout
             .. ' in ' .. os.getenv('PWD') .. "\n"
@@ -310,10 +350,11 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('^%-%-%-%-$', '````')
           l1 = l1:gsub('__(.-)__', '_%1_')
           l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
-          l1 = l1:gsub('%*(%S.-%S)%*', '__%1__')
+          l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
           l1 = l1:gsub('%*(%S)%*', '__%1__')
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
+          l1 = l1:gsub('{two%-colons}', '::')
           o:write(l1, '\n')
         end
       end

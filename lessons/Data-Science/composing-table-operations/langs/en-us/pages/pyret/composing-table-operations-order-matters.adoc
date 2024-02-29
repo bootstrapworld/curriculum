@@ -9,6 +9,9 @@ div.circleevalsexp .value { font-size: 0.6rem; margin: 0.5rem 0.5rem; }
   font-style: italic !important; text-align: center; padding: 0 5px !important;
 }
 .m td { padding: 2px 8px !important; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -46,27 +49,27 @@ Match each table description on the left, to the Circle of Evaluation that will 
 |===
 
 | Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
-|*@n*@ifsoln{(B)} ||*A*
+|*@n*@ifsoln{B} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table containing Sasha, Nori and Toggle (in that order)
-|*@n*@ifsoln{(A)} ||*B*
+|*@n*@ifsoln{A} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table with an extra column for kilos, but only animals with more than 25 kilos
-|*@n*@ifsoln{+(C)+} ||*C*
+|*@n*@ifsoln{C} ||*C*
 | @show{(coe exp3)}
 
 | Won’t run: will produce an error (if so, why?)
-|*@n*@ifsoln{(D)} ||*D*
+|*@n*@ifsoln{D} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Sasha, Toggle, and Nori (in that order)
-|*@n*@ifsoln{+(F)+} ||*E*
+|*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces an empty table - with no animals at all!
-|*@n*@ifsoln{+(E)+} ||*F*
+|*@n*@ifsoln{E} ||*F*
 | @show{(coe exp6)}
 
 |===

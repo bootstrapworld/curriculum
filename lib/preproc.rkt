@@ -120,6 +120,8 @@
 
 (define *local-scheme-definitions* '())
 
+(define *enclosing-directive* #f)
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -791,13 +793,6 @@
                     "index.adoc"
                     "index.asciidoc"))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (make-dist-link f link-text)
   (let ([url-has-query-string? #f])
     (cond [(regexp-match "\\?.*=" f) (set! url-has-query-string? #t)
@@ -1328,6 +1323,7 @@
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
+  (set! *enclosing-directive* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1445,9 +1441,15 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
-                           [(string=? directive "ifnotslide")
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when (regexp-match "\\|===" text)
+                                (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
+                                (expand-directives:string->port text o)
+                                (display "\n====\n" o)))]
+                           [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
                            [(string=? directive "page-of-lines")
@@ -1680,7 +1682,7 @@
                             (let ([exprs (read-group i directive #:scheme? #t)])
                               (when *solutions-mode?*
                                 (for ([s (string-to-form exprs)])
-                                  (display (massage-arg s) o))))]
+                                  (display (enclose-span ".solution" (format "~a" (massage-arg s))) o))))]
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
@@ -1808,8 +1810,14 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak") o]
-
+                           [(string=? directive "slidebreak")
+                            (when (and (string? *enclosing-directive*)
+                                       (string=? *enclosing-directive* "ifproglang"))
+                              (error 'ERROR "~a: @slidebreak inside another directive" 
+                                     (errmessage-file-context)))
+                            (let ([c (peek-char i)])
+                              (when (and (char? c) (char=? c #\{))
+                                (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
@@ -1833,13 +1841,11 @@
                                     (let ([s (keyword-apply f key-list key-vals args)])
                                       (expand-directives:string->port s o)
                                       )))))]
-                           [(string=? directive "optional")
-                            (display (enclose-span ".optionaltag" "Optional: ") o)]
                            [(string=? directive "opt")
-                            (let ([text (read-group i directive)]
+                            (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]\n" o)
+                              (display "[.optionaltag]##{empty}##\n" o)
                               (display (expand-directives:string->string text) o)
                               (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
@@ -2030,15 +2036,18 @@
                           [else (display c o)])])
                 (loop))))))
 
-(define (expand-directives:string->string s)
+(define (expand-directives:string->string s #:enclosing-directive [enclosing-directive #t])
   (call-with-output-string
     (lambda (o)
-      (expand-directives:string->port s o))))
+      (expand-directives:string->port s o #:enclosing-directive enclosing-directive))))
 
-(define (expand-directives:string->port s o)
+(define (expand-directives:string->port s o #:enclosing-directive [enclosing-directive #t])
   (call-with-input-string s
     (lambda (i)
-      (expand-directives i o))))
+      (let ([old-enclosing-directive *enclosing-directive*])
+        (set! *enclosing-directive* enclosing-directive)
+        (expand-directives i o)
+        (set! *enclosing-directive* old-enclosing-directive)))))
 
 (define (preproc-adoc-file in-file
                            #:all-pathway-lessons [all-pathway-lessons #f]

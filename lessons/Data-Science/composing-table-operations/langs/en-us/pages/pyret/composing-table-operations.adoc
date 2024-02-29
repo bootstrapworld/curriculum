@@ -4,8 +4,10 @@
 p.tableblock { margin: 0; }
 .t td { padding: 0 5px !important; }
 .m td { padding: 2px 8px !important; }
-
 div.circleevalsexp .value { font-size: 0.7rem; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -32,10 +34,11 @@ _The table `t` below represents four animals from the shelter:_
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
 |===
 
-
-  fun is-fixed(r): r["fixed"]                 end
-  fun is-young(r): r["age"] < 4               end
-  fun nametag(r):  text(r["name"], 20, "red") end
+```
+fun is-fixed(r): r["fixed"]                 end
+fun is-young(r): r["age"] < 4               end
+fun nametag(r):  text(r["name"], 20, "red") end
+```
 
 Match each table description on the left, to the Circle of Evaluation that will produce it.
 
@@ -43,35 +46,35 @@ Match each table description on the left, to the Circle of Evaluation that will 
 |===
 
 | A table containing only Toggle and Sasha
-|*@n*@ifsoln{+(D)+} ||*A*
+|*@n*@ifsoln{D} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table of only young, fixed animals
-|*@n*@ifsoln{(E)} ||*B*
+|*@n*@ifsoln{E} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table, sorted youngest-to-oldest
-|*@n*@ifsoln{(A)} ||*C*
+|*@n*@ifsoln{A} ||*C*
 | @show{(coe exp3)}
 
 | Produces a table with an extra column, named "sticker"
-|*@n*@ifsoln{+(C)+} ||*D*
+|*@n*@ifsoln{C} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Toggle and Sasha, in that order
-|*@n*@ifsoln{(F)} ||*E*
+|*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces a table containing Toggle, Fritz, and Nori
-|*@n*@ifsoln{(B)} ||*F*
+|*@n*@ifsoln{B} ||*F*
 | @show{(coe exp6)}
 
 | Won’t run: will produce an error (why?)
-|*@n*@ifsoln{(H)} ||*G*
+|*@n*@ifsoln{H} ||*G*
 | @show{(coe exp7)}
 
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
-|*@n*@ifsoln{(G)} ||*H*
+|*@n*@ifsoln{G} ||*H*
 | @show{(coe exp8)}
 
 |===
