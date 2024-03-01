@@ -1812,8 +1812,8 @@
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
                             (when *enclosing-directive*
-                              (error 'ERROR "~a: @slidebreak inside another directive" 
-                                     (errmessage-file-context)))
+                              (printf "WARNING: ~a: @slidebreak inside another directive\n\n"
+                                      (errmessage-file-context)))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
