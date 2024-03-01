@@ -119,9 +119,10 @@ local function get_slides(lsn_plan_adoc_file)
   local inside_lesson_instruction = false
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
-  local curr_slide = newslide()
+  local curr_slide
 
   local function scan_directives (i, nested)
+    if not nested then curr_slide = newslide() end
     while true do
       local c = i:read(1)
       if not c then
