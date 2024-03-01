@@ -30,15 +30,18 @@
 
 == The Additive Inverse Property @duration{10 minutes}
 
-
-
 === Investigate
 
-For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples!
+For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples! @show{(code '(+ 9 2))}
 
-
-@teacher{
-@opt{If you would like to offer students additional practice with the additive inverse in @proglang, two optional activities include @opt-printable-exercise{are-they-identical.adoc} and @opt-printable-exercise{writing-equivalent-code-additive.adoc}.}
+@show{
+(code '(define (red-shape shape)
+  (cond
+    [(string=? shape "circle")     (circle 20 "solid" "red")]
+    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
+    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
+    [(string=? shape "star")       (star 20 "solid" "red")]
+	[else (text "Unknown shape name!" 20 "red")])))
 }
 
 @slidebreak
@@ -51,23 +54,35 @@ For the remainder of the activity, we will examine examples blocks. The first on
 
 @QandA{
 @Q{What _hint_ does the error message give us about how to use this function?}
-@A{@image{images/sort-error.png, 650}}
+@A{image{images/sort-error.png, 650}}
 @A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
 }
 
 @slidebreak
 
-@indented{
-If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
+- At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp_.
 
-@do{
-(define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
+- We want @math{x} to represent the **original, un-transformed** value, simply using _per-capita gdp_ as-is...
+
+- We've learned that:
+
+** the *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
+
+** the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
+
+@ifproglang{pyret}{
+
+@slidebreak
+
+pyret aaaa
+
+@slidebreak
+
+pyret bbbb
+
+
 }
 
-@show{(coe exp2)}
-}
-
-__Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
 
 === Synthesize
 

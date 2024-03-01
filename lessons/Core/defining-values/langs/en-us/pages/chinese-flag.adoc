@@ -2,18 +2,36 @@
 ++++
 <style>
   table { margin-top: 5px; }
-  table .listingblock pre { font-size: 9pt; margin-bottom: 0 !important; }
-  td img { margin-bottom: 15px; }
+  body td.tableblock .listingblock pre {
+    font-size:      9pt;
+    margin-bottom:  0 !important;
+    background:     #f7f7f8 !important;
+    padding:        10px;
+    line-height:    1.4;
+  }
   td { padding: 0 !important; }
+  td:last-child { background: #f7f7f8 !important; }
   td .autonum::after { content: ')' !important; }
 </style>
 ++++
 
-The code on the left defines an image value called `china`, which is shown on the right.
+The image value on the left called `china` is defined by the code on the right.
 
-[cols="5a,.^3a", frame="none", grid="none"]
+[cols=".<9a,1,14a", frame="none", grid="none"]
 |===
 
+| @centered-image{../images/china-flag.png, 300}
+
+@n What image do you see repeated in the flag? @fitb{}{@ifsoln{small yellow stars}}
+
+@vspace{4ex}
+
+@n **Highlight or underline** every place in the code ➡️ +
+that you see the repeated expression for that image. +
+  @ifsoln{students should highlight or circle:} @showsoln{(code '(star 15 "solid" "yellow")) }
+
+@vspace{1ex}
+|
 |
 
 ----
@@ -57,15 +75,6 @@ china =
 }
 ----
 
-| @centered-image{../images/china-flag.png, 300}
-
-@n What image do you see repeated in the flag? @fitb{}{@ifsoln{small yellow stars}}
-
-@vspace{1ex}
-
-@n In the code on the left, **highlight or underline** every place you see the repeated expression. +
-  @ifsoln{students should highlight or circle:} @showsoln{(code '(star 15 "solid" "yellow")) }
-
 |===
 
 @n Write the code to **define a value** for the repeated expression.
@@ -102,8 +111,10 @@ china =
 
 @fitb{}{@ifsoln{The lines under each `put-image` are all inputs to that function.}} +
 @fitb{}{@ifsoln{Each new `put-image` happens _inside_ the one that comes before it, so the inputs shift farther and farther to the right}} +
+@ifnotsoln{
 @fitb{}{} +
 @fitb{}{}
+}
 
-@star This file uses a function we haven’t seen before! What is its name? @fitb{9em}{@ifsoln{`put-image`}}_Hint: Focus on the last instance of the function._  +
+@star This file uses a function we haven’t seen before! What is its name? @fitb{11em}{@ifsoln{`put-image`}}_Hint: Focus on the last instance of the function._  +
 How many inputs are in its domain? @fitb{4em}{@ifsoln{4}}. What are the types of those inputs? @fitb{}{@ifsoln{Image, Number, Number, Image}}

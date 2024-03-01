@@ -54,13 +54,13 @@ Students explore a simple @vocab{arithmetic expression} to create as many equiva
 
 Let's look at the @vocab{Circle of Evaluation} below:
 
-@center{ @show{(coe '(+ 10 6))} }
+@show{(coe '(+ 10 6))}
 
 @slidebreak
 
 To create a Circle of Evaluation of the same value, we could write this:
 
-@center{ @show{(coe '(+ (+ 8 2) 6))} }
+@show{(coe '(+ (+ 8 2) 6))}
 
 @slidebreak
 
@@ -117,11 +117,15 @@ Circles of Evaluation help us to see the underlying structure of mathematics. Th
 @Q{What do you Wonder?}
 }
 
+@clear
+
 @strategy{Pedagogy Note: Notice and Wonder!}{
 
 
 This pedagogy is a @link{https://www.nctm.org/noticeandwonder/, widely-used best practice in Math-Ed}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.nytimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
 }
+
+@clear
 
 @slidebreak
 
@@ -178,33 +182,34 @@ Students use Circles of Evaluation to simplify arithmetic expressions to a singl
 
 @teacher{Because Circles of Evaluation help students visualize the structure of the math, they are a terrific solving tool. They create structure for students while simultaneously offering more flexibility than adhering to a strict sequential solving algorithm.}
 
+[.embedded, cols="^.^2,^.^3,^.^1,^.^3,^.^1,^.^3,^.^2", grid="none", stripes="none", frame="none"]
+|===
+|| @show{(coe '(+ 3 (- 14 5)))} | &rarr; | @show{(coe '(+ 3 9))} | &rarr; | @math{12} |
+|===
+
 @QandA{
-@Q{Why is the first Circle of Evaluation (below) equivalent to the second Circle of Evaluation? Why is the second Circle of Evaluation equivalent to the final result?}
+@Q{Why is the first Circle of Evaluation (above) equivalent to the second Circle of Evaluation? Why is the second Circle of Evaluation equivalent to the final result?}
 @A{To get from the the first Circle of Evaluation to the next: @math{5} less than @math{14} becomes 9. To get to the final result, @math{3} increased by @math{9} becomes @math{12}.}}
 
-@ifnotslide{
-[.embedded, cols="^.^3,^.^1,^.^3,^.^1,^.^3", grid="none", stripes="none", frame="none"]
-|===
-| @show{(coe '(+ 3 (- 14 5)))} | &rarr; | @show{(coe '(+ 3 9))} | &rarr; | @math{12}
-|===
-}
+
+
 
 @slidebreak
 
 
+[.embedded, cols="^.^2,^.^4,^.^1,^.^3,^.^1,^.^3,^.^2", grid="none", stripes="none", frame="none"]
+|===
+|| @show{(coe '(+ (- 10 8) (* 3 6)))} | &rarr; | @show{(coe '(+ 2 18))} | &rarr; | @math{20}|
+|===
+
+
 @QandA{
-@Q{Does the order in which we evaluate the two inner Circles (below) matter?  Why or why not?}
+@Q{Does the order in which we evaluate the two inner Circles (above) matter?  Why or why not?}
 @A{No, the order does not matter! We could evaluate the Circle on the left first, or the Circle on the right first because the Circles are independent of one another. However, we have to evaluate both of the circles before we can find their sum!}
 }
 
-@ifnotslide{
-[.embedded, cols="^.^3,^.^1,^.^3,^.^1,^.^3", grid="none", stripes="none", frame="none"]
-|===
-| @show{(coe '(+ (- 10 8) (* 3 6)))} | &rarr; | @show{(coe '(+ 2 18))} | &rarr; | @math{20}
-|===
-}
+@clear
 
-@teacher{
 @strategy{Pedagogy Note: A Flexible Order of Operations?}{
 
 
@@ -215,7 +220,7 @@ __Think for a moment about a commonly heard statement in teaching the order of o
 To recap: *yes*, we are advocating for a flexible order of operations that relies on students' abilities to make sense of the underlying structure of math!
 
 }
-}
+
 
 === Investigate
 
@@ -243,14 +248,18 @@ Students explore computation and equivalence through two different activities - 
 === Launch
 
 @teacher{
-Explain to students that they are about to learn to play two different games, which they will revisit periodically throughout this course. The first is "True or False?"
+Explain to students that they are about to learn to play two different games, which they will revisit periodically throughout this course. The first is "True or False?"}
+
+@clear
 
 @strategy{Pedagogy Note: Viewing the Equal Sign as Relational}{
 
 These activities are designed to help students develop a _relational view_ of the equal sign. Students often interpret the equal sign _operationally_, or they think of it as an instruction that means "now get the answer." Students with an operational view of the equal sign often solve solve 8 + 4 = ? + 5 incorrectly, as either 12 or 17.
 
 Conversely, students who have a relational view of the equal sign recognize that a relationship exists between the numbers or expressions on either side of the equal sign. Decades of @link{https://link.springer.com/content/pdf/10.1007/BF02655897.pdf, "research"} suggest that students who interpret the equal sign to mean "the same as" are better positioned to think algebraically down the road.
-}}
+}
+
+@clear
 
 @lesson-instruction{
 - Let's play a round of @printable-exercise{true-or-false.adoc}!
@@ -269,6 +278,8 @@ The Circles of Evaluation in this activity were designed to support students in 
 @lesson-instruction{
 Complete @printable-exercise{wodb.adoc}, looking closely at each Circle of Evaluation to determine the one that is not equivalent.
 }
+
+@clear
 
 @strategy{Pedagogy Note: Which One Doesn't Belong?}{
 
@@ -320,7 +331,7 @@ We are now ready to think about whether _lines of code_ are equivalent! To do so
 @A{*Similar:* We used computation. We wanted to see if the outcomes would be the same or not. *Different:* We were looking at images, not numbers; We relied on contracts to help us predict the output, not our understanding of mathematical operations. Responses will vary.}
 }
 
-@teacher{Ensuring comprehension of @printable-exercise{are-they-identical.adoc} will lead to a smoother experience on @printable-exercise{writing-equivalent-code.adoc}. In the second activity, just _one_ line of code is provided - and students develop the second on their own. Students will exercise a different cognitive muscle here: rather than making a prediction about code, they must write their own!}
+@teacher{Ensuring comprehension of @printable-exercise{are-they-identical.adoc} will lead to a smoother experience on @printable-exercise{writing-equivalent-code.adoc}. In the second activity, just __one__ line of code is provided - and students develop the second on their own. Students will exercise a different cognitive muscle here: rather than making a prediction about code, they must write their own!}
 
 @slidebreak
 

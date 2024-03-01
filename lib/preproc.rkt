@@ -120,6 +120,8 @@
 
 (define *local-scheme-definitions* '())
 
+(define *enclosing-directive* #f)
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -1321,6 +1323,7 @@
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
+  (set! *enclosing-directive* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1438,8 +1441,14 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when (regexp-match "\\|===" text)
+                                (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
+                                (expand-directives:string->port text o)
+                                (display "\n====\n" o)))]
                            [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
@@ -1743,7 +1752,7 @@
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (cond [(string-ci=? proglang *proglang*)
-                                     (expand-directives:string->port text o)]
+                                     (expand-directives:string->port text o #:enclosing-directive #f)]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
 
@@ -1802,6 +1811,9 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
+                            (when *enclosing-directive*
+                              (printf "WARNING: ~a: @slidebreak inside another directive\n\n"
+                                      (errmessage-file-context)))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
@@ -1829,7 +1841,7 @@
                                       (expand-directives:string->port s o)
                                       )))))]
                            [(string=? directive "opt")
-                            (let ([text (read-group i directive)]
+                            (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display "[.optionaltag]##{empty}##\n" o)
@@ -2023,15 +2035,18 @@
                           [else (display c o)])])
                 (loop))))))
 
-(define (expand-directives:string->string s)
+(define (expand-directives:string->string s #:enclosing-directive [enclosing-directive #t])
   (call-with-output-string
     (lambda (o)
-      (expand-directives:string->port s o))))
+      (expand-directives:string->port s o #:enclosing-directive enclosing-directive))))
 
-(define (expand-directives:string->port s o)
+(define (expand-directives:string->port s o #:enclosing-directive [enclosing-directive #t])
   (call-with-input-string s
     (lambda (i)
-      (expand-directives i o))))
+      (let ([old-enclosing-directive *enclosing-directive*])
+        (set! *enclosing-directive* enclosing-directive)
+        (expand-directives i o)
+        (set! *enclosing-directive* old-enclosing-directive)))))
 
 (define (preproc-adoc-file in-file
                            #:all-pathway-lessons [all-pathway-lessons #f]

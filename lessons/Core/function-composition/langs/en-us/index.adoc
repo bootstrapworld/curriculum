@@ -14,14 +14,14 @@
 | Lesson Goals
 | Students will be able to:
 
-* Use functions as building-blocks, composing them to achieve a desired affect
-* Diagram function composition using the Circles of Evaluation
-* Compose functions when programming
+- Use functions as building-blocks, composing them to achieve a desired affect
+- Diagram function composition using the Circles of Evaluation
+- Compose functions when programming
 
 | Student-facing Goals
 |
-* Let's learn to use functions as building blocks that can be combined or composed to achieve desired outcomes.
-* Let's use Circles of Evaluation to show how functions can be composed.
+- Let's learn to use functions as building blocks that can be combined or composed to achieve desired outcomes.
+- Let's use Circles of Evaluation to show how functions can be composed.
 
 | Materials
 |[.materials-links]
@@ -30,19 +30,19 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-* @link{https://www.google.com/search?q=random+number, Random Integer Generator}
-* @lesson-link{project-logo}
+- @link{https://www.google.com/search?q=random+number, Random Integer Generator}
+- @lesson-link{project-logo}
 
 |Preparation
 | 
 @preparation{
-* There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
 
 | Key Points For The Facilitator
 |
-* Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
-* When students encounter errors, encourage them to check their @dist-link{Contracts.shtml, contracts} @pathway-only{(which, if you're using a printed workbook, are included in the back)} and show their work using Circles of Evaluation.
+- Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
+- When students encounter errors, encourage them to check their @dist-link{Contracts.shtml, contracts} @pathway-only{(which, if you're using a printed workbook, are included in the back)} and show their work using Circles of Evaluation.
 |===
 
 == Composing Functions @duration{10 minutes}
@@ -56,9 +56,11 @@ Students are given a scaffolded activity that forces them to use the output of o
 }
 
 @lesson-instruction{
-* Pick a card at random.
-* According to its Contract, what is the function's Name, Domain, and Range?
+- Pick a card at random.
+- According to its Contract, what is the function's Name, Domain, and Range?
 }
+
+@slidebreak
 
 These cards represent a collection of functions, each of which takes an input and produces an output. For example, we can start with the number `4`, and give it to the function `add6`. The output will be `10`.
 
@@ -73,21 +75,27 @@ And, if we composed `add6` `4` with `double` _and_ with `half`? _We'd get 10._
 - You will need to use some functions more than once, and that's okay!
 }
 
+@teacher{
 Give students time to experiment with this!
 
-@teacher{Make the activity more challenging:
+To make the activity more challenging:
 
-* ask students to find the shortest path from start to end, using the smallest number of compositions.
+- ask students to find the shortest path from start to end, using the smallest number of compositions.
 
 Other ways to play: Show students a starting number and an ending number and...
 
-* _ask them to give a card back._
-* _ask them which cards are the most valuable._
-* _give them a blank card and let them come up with a new function._
+- __ask them to give a card back.__
+- __ask them which cards are the most valuable.__
+- __give them a blank card and let them come up with a new function.__
 }
 
 === Synthesize
-If two groups come up with different compositions that achieve the same end result, have them share their ideas!
+
+@teacher{
+If two groups come up with different compositions that achieve the same end result, have them share 
+their ideas!}
+
+Did it matter what order you put the cards in? Why or why not?
 
 == Composing Functions in Code @duration{20 minutes}
 
@@ -96,7 +104,8 @@ If two groups come up with different compositions that achieve the same end resu
 The Circles of Evaluation are extended to functions that do more than compute values.
 
 === Launch
-Explain to students that the functions available to them in @proglang can be composed just like the Function Cards from the activity. Their job as programmers is to figure out how to compose functions to achieve their goals in the most clever or elegant way possible.
+
+The functions available to us in @proglang can be composed just like the Function Cards from the activity. Our job as programmers is to figure out how to compose functions to achieve our goals in the most clever or elegant way possible.
 
 === Investigate
 
@@ -104,14 +113,15 @@ Explain to students that the functions available to them in @proglang can be com
 - Have students open @starter-file{program-list} in their browser, and @ifproglang{wescheme}{"Log In"} @ifproglang{pyret}{"Sign In"} using a valid Google account (Gmail, Google Classroom, YouTube, etc.) and their password for that account.
 - This will take them to the "Programs" page. This page is empty - they don’t have any programs yet!
 - Have them open a new program by clicking @ifproglang{WeScheme}{"Start a new program"} @ifproglang{Pyret}{"File" -> "New"} and save it as "Function Composition"
-- Complete @printable-exercise{pages/function-composition-green-star.adoc}, in which you will draw circles of evaluation to help you write expressions to compose a series of images.
+- Complete @printable-exercise{function-composition-green-star.adoc}, in which you will draw circles of evaluation to help you write expressions to compose a series of images.
 - Be sure to use the *Definitions Area* (left side) for code you want to keep and the *Interactions Area* (right side) to test code or try out new ideas.
 }
 
-When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of their choosing.
+@teacher{
+When students are finished, check their work, and ask them to change the color of all of the stars to “gold” or another color of their choosing.}
 
 @lesson-instruction{
-Now, turn to @printable-exercise{pages/function-composition-your-name.adoc} in which you will create a text @vocab{image} of your name and experiment with other functions.
+Now, turn to @printable-exercise{function-composition-your-name.adoc} in which you will create a text @vocab{image} of your name and experiment with other functions.
 }
 
 @strategy{Strategies for Facilitation}{
@@ -121,11 +131,9 @@ While students are exploring, be available for support but encourage student dis
 Encourage students to practice writing comments in the code to describe what is being produced, using @ifproglang{wescheme}{`;`} @ifproglang{pyret}{`#`} at the beginning of the line.
 }
 
-@opt{If you have time, you can have students work with @printable-exercise{pages/function-composition-scale-xy.adoc} and/or @opt-starter-file{functioncompDesmos} - or use either onefor assessment!}
+@opt{If you have time, you can have students work with @printable-exercise{function-composition-scale-xy.adoc} and/or @opt-starter-file{functioncompDesmos} - or use either one for assessment!}
 
 @strategy{Optional Project: Create Your Own Logo}{
-
-
 Extend and solidify student understanding of function composition by challenging your students to create their own logos! @lesson-link{project-logo} walks students through the process of designing and building a personal design or logo.
 }
 
@@ -148,17 +156,12 @@ Extend and solidify student understanding of function composition by challenging
 @A{Because the @show{(code 'text)} function produces an Image, which is then used as the input for @show{(code 'flip-horizontal)}.}
 }
 
-
-
 @strategy{Strategies for English Language Learners}{
-
-
 MLR 1 - Stronger and Clearer Each Time: As an alternative, display the discussion questions during the last 5 minutes of the Explore and ask students to discuss the questions with their partner, asking each other for explanation and details and coming up with the clearest, most precise answer they can.
 Student pairs can then share with another pair and compare their responses before moving into a full class discussion.
 }
 
 @strategy{Fun with Images!}{
-
 Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing.
 
 Our @lesson-link{transform-compose-images/} and @lesson-link{project-flags/} also dive deeper into image composition.
@@ -182,14 +185,15 @@ Suppose I wrote the code: @show{(code '(scale 3 (circle 50 "solid" "red")))}.
 === Investigate
 
 @lesson-instruction{
-Complete @printable-exercise{pages/more-than-one-way.adoc}
+Complete @printable-exercise{more-than-one-way.adoc}
 }
 
-When students have completed the worksheet, explain that there is a special function that lets us test whether or not two images are equal:
+There is a special function that lets us test whether or not two images are equal:
 
-@show{(code 'image=?)}`{two-colons} Image, Image -> Boolean`
+@show{(contract 'image=? '(Image Image) "Boolean")}
 
-Invite students to use the above function to test whether all of the expressions that they wrote successfully build the same images.
+
+We can use it to test whether the expressions we wrote really build the same images.
 
 === Synthesize
 

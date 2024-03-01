@@ -46,8 +46,6 @@ Show students the following expression: @math{2^3}
 @Q{One way of reading this expression is "two raised to the power of three." Do you know any other ways of translating this expression into words?}
 @A{Two to the third power; two to the third; two cubed}
 
-@slidebreak
-
 @right{@image{images/cube.png, 150}}
 
 @Q{What does it mean to _cube_ a number?}
@@ -77,16 +75,16 @@ We can represent expressions with exponents as Circles of Evaluation. The functi
 
 Look at the two @vocab{equivalent} Circles of Evaluation, below. One is written in exponent notation, and the other is written in expanded notation.
 
-[.embedded, cols="^.^5,^.^1,^.^5", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^4,^.^5,^.^1,^.^5,^.^4", grid="none", stripes="none" frame="none"]
 
 |===
-| @math{2^5}
+|| @math{2^5}
 |
-| @math{2 \times 2 \times 2 \times 2 \times 2}
+| @math{2 \times 2 \times 2 \times 2 \times 2}|
 
-| @show{(coe '(expt 2 5))}
+|| @show{(coe '(expt 2 5))}
 | @math{=}
-| @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}
+| @show{(coe '(* (* (* (* 2 2) 2) 2) 2))}|
 |===
 
 @slidebreak
@@ -121,20 +119,25 @@ Ensure that students are comfortable shifting between representations before dis
 
 @QandA{
 
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
-|@math{5^2}							| @math{2^5}
-|@show{(coe  '(expt 5 2))}		| @show{(coe  '(expt 2 5))}
+||@math{5^2}	| @math{2^5} |
+||@show{(coe  '(expt 5 2))}		| @show{(coe  '(expt 2 5))} |
 |===
 
 @Q{Angela says the Circles of Evaluation above are equivalent because of the @vocab{Commutative Property}. Do you agree with Angela?}
 
 @A{Angela is incorrect. The first expression evaluates to 25, while the second expression evaluates to 32. We cannot switch the order of the exponent and the base, as we could when adding or multiplying values.}
+}
 
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+@slidebreak
+
+@QandA{
+
+[.embedded, cols="^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
-|@math{5^2}							| @math{5 \times 2}
-|@show{(coe  '(expt 5 2))}		| @show{(coe  '(* 5 2))}
+||@math{5^2}	| @math{5 \times 2} |
+||@show{(coe  '(expt 5 2))}		| @show{(coe  '(* 5 2))} |
 |===
 
 @Q{Are these two Circles of Evaluation (above) equivalent? Explain.}
@@ -148,10 +151,10 @@ Let's explore how Circles of Evaluation can help us when evaluating more complic
 
 @QandA{
 
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
 
-|@show{(coe  '(* 9 (expt 3 2)))}		| @show{(coe  '(expt (* 9 3) 2))}
+||@show{(coe  '(* 9 (expt 3 2)))}		| @show{(coe  '(expt (* 9 3) 2))}|
 |===
 
 @Q{How would you translate each of these Circles of Evaluation (above) into verbal expressions? Why are their translations different?}
@@ -165,6 +168,8 @@ Let's explore how Circles of Evaluation can help us when evaluating more complic
 @A{Both students are correct.}
 
 }
+
+@slidebreak
 
 While it is acceptable to enclose a base and its exponent in parentheses, expressions with exponents are often written _without_ the parentheses.
 
@@ -206,17 +211,25 @@ Students use Circles of Evaluation to parse and evaluate exponential expressions
 
 Ms. Brenneman asked her class to draw Circles of Evaluation to represent @math{4m^2}. Four students produced four different Circles of Evaluation (below).
 
-
-[.embedded, cols="^.^1,^.^1", grid="none", stripes="none", frame="none"]
+[.embedded, cols="^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none", frame="none"]
 |===
-| Keke: @show{(coe  '(* 4 (expt 2 m)))} | Jayla: @show{(coe  '(* 4 (expt m 2)))}
-| Joe: @show{(coe  '(+ 4 (expt m 2)))}  | Aaron: @show{(coe  '(expt (* 4 m) 2))}
+|| Keke: @show{(coe  '(* 4 (expt 2 m)))} | Jayla: @show{(coe  '(* 4 (expt m 2)))} |
+|| Joe: @show{(coe  '(+ 4 (expt m 2)))}  | Aaron: @show{(coe  '(expt (* 4 m) 2))} |
 |===
 
+@slidebreak
 
 @QandA{
-@Q{Which Circle of Evaluation do you think matches the expression? If you're not sure, are there any that you can rule out right away?}
+@Q{Which Circle of Evaluation do you think matches the expression @math{4m^2}? If you're not sure, are there any that you can rule out right away?}
 @A{Sample response: Jayla's Circle of Evaluation is correct. I know that Keke's response is incorrect because we cannot change the order of the base and the exponent. Joe's Circle of Evaluation doesn't work because he added rather than finding a product. Aaron squared @math{4m}, rather than just squaring @math{m}.}
+}
+
+@ifslide{
+[.embedded, cols="^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none", frame="none"]
+|===
+|| Keke: @show{(coe  '(* 4 (expt 2 m)))} | Jayla: @show{(coe  '(* 4 (expt m 2)))} |
+|| Joe: @show{(coe  '(+ 4 (expt m 2)))}  | Aaron: @show{(coe  '(expt (* 4 m) 2))} |
+|===
 }
 
 @teacher{Lead a discussion where students explain which Circle of Evaluation they chose and why.}

@@ -11,16 +11,16 @@
 | Lesson Goals
 | Students will be able to...
 
-* write functions that consume a Row and perform a _lookup_ to produce a column
-* write functions that consume a Row and _compute_ to produce an Image
-* write functions that consume a Row and _compute_ to produce a Boolean
+- write functions that consume a Row and perform a _lookup_ to produce a column
+- write functions that consume a Row and _compute_ to produce an Image
+- write functions that consume a Row and _compute_ to produce a Boolean
 
 | Student-facing Lesson Goals
 |
 
-* Let's define functions that look up values from a Row.
-* Let's define functions that produce Images from a Row.
-* Let's define functions that compute a Boolean from a Row.
+- Let's define functions that look up values from a Row.
+- Let's define functions that produce Images from a Row.
+- Let's define functions that compute a Boolean from a Row.
 
 | Materials
 |[.materials-links]
@@ -46,7 +46,7 @@ Students use different representations of functions to define functions that con
 
 === Launch
 
-By now you've had a chance to explore functions on their own, thinking of them in terms of several different representations:
+By now you've had a chance to explore functions on your own, thinking of them in terms of several different representations:
 
 - A mapping between _Domain_ and _Range_
 - A list of discrete _input values_ and _output values_
@@ -54,26 +54,39 @@ By now you've had a chance to explore functions on their own, thinking of them i
 
 Now it's time to use those representations to help us work with Tables!
 
+@slidebreak
+
 @lesson-instruction{
 - Open the @starter-file{row-functions}, save a copy, and click "Run".
 - Scroll until you see the definition for `cat-row`. What will you get back if you evaluate `cat-row` in the Interactions Area?
 - What species is the animal?
 - What is its name?
 - How old is it?
-- Complete questions 1-3 on @printable-exercise{making-connections.adoc}.
+- Complete the first section of @printable-exercise{making-connections.adoc} (questions 1-4).
 }
 
 === Investigate
 
-The Design Recipe uses multiple representations of functions in a specific order to help us solve problems. Let's look at an example to see how this works!
+You've already had a chance to work with the Design Recipe.
+
+Each step in the Design Recipe helps us write the next one.
+
+- If we can't write our Contract and Purpose, it means we haven't thought through the problem enough. Better to find this out _before_ we write the rest of our function!
+- If we're having trouble writing our Examples, **we can check our Contract and Purpose for hints**.
+- If we're having trouble writing the Definition, **we can check our Examples to see the pattern.**
+
+These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
+
+Let's look at an example to see how this works with table-functions!
 
 @lesson-instruction{
-Complete the rest of @printable-exercise{making-connections.adoc}.
+Complete the `weeks-dot` section of @printable-exercise{making-connections.adoc}.
 }
 
-Review student answers, paying particular attention to the connections between "Contract and Purpose" and "Examples".
+@slidebreak
 
-Take a closer look at the four examples in this file:
+@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".}
+
 
 ```
 # weeks-dot :: Row -> Image
@@ -88,25 +101,75 @@ examples:
 end
 ```
 
-These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Sasha" and "Wade", based on their `weeks` to adoption. But these examples only tell us part of the story!
+@slidebreak
 
-@lesson-instruction{
-In those first examples, where are the number `3` and `1` coming from?
+@ifslide{
+
+```
+# weeks-dot :: Row -> Image
+# consumes an animal, and draws a solid purple circle whose
+# radius is 5x the number of weeks it took to be adopted
+examples:
+  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
+  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+
+  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
+end
+```
+
 }
 
-The first two examples are _correct_, but they don't show all of their work. The last two examples show how those values are looked up from the example rows. If you're stuck on the examples step, here's a useful trick to get you started: "Complete the following sentence: __For this Row, I...__" Whatever you answer is the precise description of what to do for your example!
+These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Sasha" and "Wade", based on their `weeks` to adoption. 
 
-*You can use both kinds of examples in your code!* Sometimes we want to use real, concrete numbers to make sure our work is correct. And sometimes we need to show all of our work, to make sure we are defining the function correctly! Programmers often use a mix of the two.
+@lesson-instruction{
+- Take a closer look at the examples.
+- Think about how the first pair of examples relates to the second.
+}
+
+@slidebreak
+
+@ifslide{
+
+```
+# weeks-dot :: Row -> Image
+# consumes an animal, and draws a solid purple circle whose
+# radius is 5x the number of weeks it took to be adopted
+examples:
+  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
+  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+
+  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
+end
+```
+
+}
+
+Both pairs of examples are _correct_!
+
+- In the first pair, we see the values `3` and `1` , but no explanation of where they are coming from
+- The last two examples show how those values are looked up from the example rows.
+
+
+@lesson-point{
+If you're stuck on the examples step, here's a useful trick to get you started. Complete the following sentence: +
+"__For this Row, I...__" +
+Whatever you answer is the precise description of what to do for your example!
+}
+
+@slidebreak
+
+**You can use both kinds of examples in your code!** 
+
+- Sometimes we want to use real, concrete numbers to make sure our work is correct. 
+- And sometimes we need to show all of our work, to make sure we are defining the function correctly! 
+
+Programmers often use a mix of the two.
 
 === Synthesize
-Each step in the Design Recipe helps us write the next one.
 
-- If we can't write our Contract and Purpose, it means we haven't thought through the problem enough. Better to find this out _before_ we write the rest of our function!
-- If we're having trouble writing our Examples, **we can check our Contract and Purpose for hints**.
-- If we're having trouble writing the Definition, **we can check our Examples to see the pattern.**
-
-These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
-
+Why might it be beneficial to include both kinds of examples?
 
 == Design Recipe Telephone @duration{40 minutes}
 
@@ -157,6 +220,10 @@ We're going to practice collaborative programming and try writing some other Tab
 - Meanwhile, you will receive a different problem from the person to your left. If at any point your realize that the person before you didn't provide enough information, you may hand the paper back to them for revision.
 }
 
+@slidebreak
+
+@ifnotslide{
+
 @vspace{1ex}
 
 [.indentedpara]
@@ -189,38 +256,52 @@ We're going to practice collaborative programming and try writing some other Tab
 |===
 --
 
+}
+
 @ifslide{
-*Round 1:*
+
+**Round 1:**
 You should have a page with a Word Problem.
-@n Write the Contract and Purpose Statement.
-@n Fold your paper to hide the Word Problem.
+
+- Write the Contract and Purpose Statement.
+- Fold your paper to hide the Word Problem.
 
 @teacher{
 Choose which set of word problems you are going to start with and give each student within each group a different word problem.
 
-* Set 1: @handout{is-dog.adoc, is-dog}, @handout{days.adoc, days}, @handout{is-young.adoc, is-young}
-* Set 2: @opt-printable-exercise{is-old.adoc, is-old}, @opt-printable-exercise{kilos.adoc, kilos}, @opt-printable-exercise{is-cat.adoc, is-cat}
+- Set 1: @handout{is-dog.adoc, is-dog}, @handout{days.adoc, days}, @handout{is-young.adoc, is-young}
+- Set 2: @opt-printable-exercise{is-old.adoc, is-old}, @opt-printable-exercise{kilos.adoc, kilos}, @opt-printable-exercise{is-cat.adoc, is-cat}
 
 }
 }
+
+@slidebreak
 
 @ifslide{
 Make sure you’ve folded your paper over so that only the Contract and Purpose are visible.
 Pass your paper to the person to your right.
-*Round 2:*
 
-@n Write Examples from the Contract and Purpose Statement you just received.
-Circle the Variables.
-@n Fold your paper so that only the Example are visible.
+@vspace{1ex}
+
+**Round 2:**
+
+- Write Examples from the Contract and Purpose Statement you just received.
+- Circle the Variables.
+- Fold your paper so that only the Examples are visible.
 
 }
+
+@slidebreak
 
 @ifslide{
 Make sure you’ve folded your paper over so that only the Examples are visible.
 Pass your paper to the person to your right.
-*Round 3:*
 
-@n Write a Definition from the Examples you just received.
+@vspace{1ex}
+
+**Round 3:**
+
+- Write a Definition from the Examples you just received.
 
 }
 
@@ -243,4 +324,4 @@ The Design Recipe is a way of slowing down and thinking through each step of a p
 
 == Additional Exercises
 
-- For students using a printed workbook, you'll find a page with @opt-printable-exercise{pages/2-blank-recipes.adoc, two blank Design Recipes} at the back of the book.
+- For students using a printed workbook, you'll find a page with @opt-printable-exercise{2-blank-recipes.adoc, two blank Design Recipes} at the back of the book.

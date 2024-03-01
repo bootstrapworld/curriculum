@@ -82,10 +82,17 @@ Complete Part 1 of @printable-exercise{notice-wonder-linearity.adoc} and Notice 
 
 @QandA{
 @Q{What do you *Notice?*}
+@A{_Answers will vary._}
 @A{each (x, y) pair on the table corresponds to a point on the graph}
 @A{both the x and y values in the table are increasing by consistent intervals}
 @A{the points on the graph are connected by a straight line.}
 @Q{What do you *Wonder?*}
+@A{_Answers will vary._}
+}
+
+@slidebreak
+
+@lesson-instruction{
 Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
 }
 
@@ -121,6 +128,38 @@ Complete Part 2 of @printable-exercise{notice-wonder-linearity.adoc} and conside
 - What would the y-values be when x is 0?
 }
 
+@slidebreak
+
+@ifslide{ 
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+|
+
+[.pyret-table.first-table,cols="^1,^1",options="header"]
+!===
+! x ! y
+! 1   ! 2
+! 2   ! 3
+! 3   ! 4
+! 4   ! 5
+! 5   ! 6
+!===
+
+|
+[.pyret-table.first-table,cols="^1,^1",options="header"]
+!===
+! independent ! dependent
+! 1 ! 20
+! 2 ! 17
+! 3 ! 14
+! 4 ! 11
+! 5 ! 8
+!===
+
+|===
+
+}
+
 We can think of the "x" column as counting the __order in which the y-values appear__ (1st value, 2nd value, etc). When we notice that x-values change at a _constant rate_ and the y-values also change at a _constant rate_, we know that if we were to plot those values on a graph, all of the points would fall on a straight line.
 
 @lesson-point{
@@ -132,20 +171,24 @@ The @vocab{line} representing the @vocab{linear relationship} would not only inc
 === Investigate
 
 @lesson-instruction{
-- Let's get some practice connecting tables and graphs on @printable-exercise{pages/match-tables-graphs.adoc}.
-- Another option for additional practice is @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+Let's get some practice connecting tables and graphs on @printable-exercise{pages/match-tables-graphs.adoc}.
 }
+
+@opt{Another option for additional practice is @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13, "Matching Tables to Graphs"}.
+}
+
+@slidebreak
 
 @lesson-point{
 @vocab{Axes} on a graph need an order. @vocab{Rows} in a table don't!
 }
 
-The points in a table are _discrete_. While ordering the rows in a table can make it easier for us to find the function,
+The points in a table are __discrete__. While ordering the rows in a table can make it easier for us to find the function,
 they preserve their meaning if the rows are shuffled into a different order.
 
-On a graph, the points on the x-axis _cannot_ be shuffled, because the x-axis must always be ordered. We can stretch the _scale_ of the axes to making the lines _look_ different, but the points will always be in the same order.
+On a graph, the points on the x-axis __cannot__ be shuffled, because the x-axis must always be ordered. We can stretch the __scale__ of the axes to making the lines __look__ different, but the points will always be in the same order.
 
-@opt{@opt-printable-exercise{pages/match-tables-graphs2.adoc} uses tables with shuffled rows.
+@opt{@opt-printable-exercise{match-tables-graphs2.adoc} uses tables with shuffled rows.
 }
 
 @strategy{Pedagogy Note}{
@@ -164,7 +207,10 @@ Students deepen their understanding of linearity, by seeing counterexamples (non
 
 === Launch
 
-Have students turn to @printable-exercise{graphs-all-linear.adoc}, where they'll Notice and Wonder about the six graphs below and consider the question,
+@lesson-instruction{
+Complete the Notice and Wonder on @printable-exercise{graphs-all-linear.adoc}}
+
+@teacher{On this page, students will refer to the six graphs below to consider the question:
 **If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?**
 
 [.graph-table, stripes="none", frame="none"]
@@ -179,18 +225,61 @@ Have students turn to @printable-exercise{graphs-all-linear.adoc}, where they'll
   @image{images/num-sqr.png}
 |===
 
+}
+
+@slidebreak
+
+@ifslide{
+[.graph-table, stripes="none", frame="none"]
+|===
+
+| @image{images/constant-linear.png}
+  @image{images/num-abs.png}
+  @image{images/num-sqrt.png}
+
+| @image{images/negative-linear.png}
+  @image{images/positive-linear.png}
+  @image{images/num-sqr.png}
+|===
+
+}
+
 @lesson-instruction{
 - What do you **Notice?**
 - What do you **Wonder?**
+- If all linear relationships can be shown as points on a graph, does that mean all graphs are linear?
 }
+
+@slidebreak
 
 @lesson-point{
-Linear relationships in a graph always appear as straight lines
+On a graph, linear relationships always appear as straight lines.
 }
 
-Three of the graphs above represent @vocab{linear relationships}, and three show other, nonlinear relationships. As we can see, the linear graphs can go in lots of directions and nonlinear relationships can follow patterns that aren't linear!
+@ifslide{
+[.graph-table, stripes="none", frame="none"]
+|===
 
-Have students turn to @printable-exercise{tables-all-linear.adoc}, where they'll Notice and Wonder about the six tables below and consider the question,
+| @image{images/constant-linear.png}
+  @image{images/num-abs.png}
+  @image{images/num-sqrt.png}
+
+| @image{images/negative-linear.png}
+  @image{images/positive-linear.png}
+  @image{images/num-sqr.png}
+|===
+
+}
+
+Three of the graphs above represent @vocab{linear relationships}, and three are not linear. As we can see, the linear graphs can go in lots of directions and there are other kinds of relationships that follow patterns that are not linear!
+
+@slidebreak
+
+@lesson-instruction{
+Complete the Notice and Wonder on @printable-exercise{tables-all-linear.adoc}.
+}
+
+@teacher{On this page, students will refer to the six tables below to consider the question:
 **If all linear relationships can be shown as tables, does that mean all tables are linear?**
 
 [cols="^.^1a,^.^1a", frame="none"]
@@ -245,9 +334,68 @@ Have students turn to @printable-exercise{tables-all-linear.adoc}, where they'll
 
 |===
 
+}
+
+@slidebreak
+
+@ifslide{
+[cols="^.^1a,^.^1a", frame="none"]
+|===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -2 ! -1 !  0 !  1 !  2
+! y ! -2 ! -3 ! -4 ! -5 ! -6
+!===
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 1 ! 2 ! 3 !  4 !  5
+! y ! 1 ! 4 ! 9 ! 16 ! 25
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  12 !  13 !  14 !  15 !  16
+! y ! -12 ! -14 ! -16 ! -18 ! -20
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! 5 ! 6 ! 7 ! 8 ! 9
+! y ! 3 ! 3 ! 3 ! 3 ! 3
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x !  1 !  2 !   3 !   4 !  5
+! y ! 84 ! 94 ! 104 ! 114 ! 124
+!===
+
+|
+
+[.sideways-pyret-table]
+!===
+! x ! -10 ! -9 ! -8 !  -7 ! -6
+! y ! @math{\frac{-1}{10}} ! @math{\frac{-1}{9}} ! @math{\frac{-1}{8}} ! @math{\frac{-1}{7}} ! @math{\frac{-1}{6}}
+!===
+
+|===
+}
+
 @lesson-instruction{
 - What do you **Notice?**
 - What do you **Wonder?**
+- If all linear relationships can be shown as tables, does that mean all tables are linear?
 - Can you figure out what the next (x,y) pair should be for each of them?
 - Can you guess what the y-value for each table would be when x is 0?
 }
@@ -256,7 +404,17 @@ Have students turn to @printable-exercise{tables-all-linear.adoc}, where they'll
 In a table representing a linear relationship, a change in the independent variable (typically graphed as x) corresponds to a proportional change in the dependent variable (typically graphed as y). When sequences change at a constant rate, the points will form a straight line on a graph.
 }
 
-Three of the tables above show @vocab{linear} relationships, and three show other, nonlinear relationships. As we can see, the linear tables can have y-values that change by zero (no change), by a positive number (constant increase), or a negative number (constant decrease) as the x-values increase. The other tables may show patterns, but they aren't linear!
+@ifnotslide{
+Three of the tables above show @vocab{linear} relationships. As we can see, as the x-value increases in the linear relationships, the y-values can change:
+
+- by zero (no change)
+- by a positive number (constant increase)
+- by a negative number (constant decrease) 
+
+Three of the tables above are not linear. They might show patterns, but they aren't linear!
+}
+
+@slidebreak
 
 Sometimes there is __no function__ that will give us a particular table or graph! Take a look at the table and graph below. Can you predict the next two rows? Where will the next point be?
 
@@ -279,7 +437,6 @@ Sometimes there is __no function__ that will give us a particular table or graph
 
 === Investigate
 @QandA{
-@Q{Can you tell when a relationship is a linear function? A nonlinear one? Not a function at all?}
 @Q{Can someone remind us how to tell whether or not a graph represents a function?}
 @A{It has to pass the vertical line test!}
 }
@@ -301,10 +458,6 @@ Students refine their understanding of linearity, identifying properties like @v
 
 === Launch
 
-@lesson-point{
-All linear relationships are defined by slope and y-intercept.
-}
-
 Every linear relationship has two properties:
 
 1. The sequence of y-values always changes at a constant rate - called @vocab{slope} - increasing or decreasing by the same amount for each change in the x-value.
@@ -313,7 +466,7 @@ Every linear relationship has two properties:
 Have students turn to @printable-exercise{slope-int-tables-intro.adoc} and facilitate a discussion.
 
 @lesson-instruction{
-Consider the first table on @printable-exercise{slope-int-tables-intro.adoc, the page}:
+Let's consider the first table on @printable-exercise{slope-int-tables-intro.adoc} together:
 [.sideways-pyret-table]
 |===
 | x | -1 | 0 | 1 | 2 | 3 | 4
@@ -362,11 +515,13 @@ You can find the y-intercept by expanding the table and following the pattern to
 
 @teacher{Leave some time for group discussion...}
 
+@slidebreak
+
 **TO FIND THE SLOPE: Find any two pairs of values in the table, and divide the difference in y's by the difference in x's.**
 
-This is an easy way to see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
+This let's us see the change in y __as a proportion__ of the change in x, which gives you the @vocab{slope} of the function.
 
-This is often described as  @math{\frac{\mbox{ChangeInY}}{\mbox{ChangeInX}}} or @math{\frac{\mbox{rise}}{\mbox{run}}}.
+This strategy is often described by the algorithm @math{\frac{\mbox{ChangeInY}}{\mbox{ChangeInX}}} or @math{\frac{\mbox{rise}}{\mbox{run}}}.
 
 [.sideways-pyret-table]
 |===
@@ -375,15 +530,23 @@ This is often described as  @math{\frac{\mbox{ChangeInY}}{\mbox{ChangeInX}}} or 
 | y | **5** | **56** | 11 | 23 | -1
 |===
 
-Taking the first two pairs of values in the the last table on @printable-exercise{slope-int-tables-intro.adoc, the page}, this gives us @math{\frac{56 - 5}{20 - 3}}. We can simplify that to @math{\frac{51}{17}}, for a slope of @math{3}.
+Taking the first two pairs of values in the the last table on @printable-exercise{slope-int-tables-intro.adoc, the page}, gives us:
 
-We would get the same answer if we subtracted the coordinates in the opposite order... @math{\frac{5 - 56}{3 - 20} = \frac{-51}{-17} = 3}.
+@indented{@math{\frac{56 - 5}{20 - 3}}}
+@indented{We can simplify that to @math{\frac{51}{17}}, for a slope of @math{3}.}
 
-@lesson-point{
-Order matters!
-}
+We would get the same answer for this example if we subtracted the coordinates in the opposite order... 
 
-We can use the two points in any order we wish, but we need to use the same order for our x's and y's. If we mixed up the order for this example, we'd get @math{\frac{56 - 5}{3 - 20} = \frac{51}{-17} = -3}.
+@indented{@math{\frac{5 - 56}{3 - 20} = \frac{-51}{-17} = 3}}
+
+But if we mixed subtracted the x values in a different order than we subtracted the y-values, we'd get the wrong answer! 
+
+@indented{@math{\frac{56 - 5}{3 - 20} = \frac{51}{-17} = -3}}
+
+[.lesson-point]
+We can work with the two points in any order, but we need to use the same order for our x's as we use for our y's. 
+
+@slidebreak
 
 @lesson-instruction{
 - Pick two other pairs of values from the third table and compute the @vocab{slope}. Did you get the same answer?
@@ -397,7 +560,7 @@ We'll talk more about how to find the y-intercept in the Defining Linear Functio
 === Investigate
 
 @lesson-instruction{
-Let's get some practice identifying the slope of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}
+Let's get some practice identifying the slope of a linear function in a table by completing @printable-exercise{slope-and-y-tables.adoc}.
 }
 
 === Synthesize
@@ -419,6 +582,8 @@ On a graph, the y-intercept is the value where the line "intercepts" the y-axis.
 @centered-image{images/y-intercept-horizontal.png}
 |===
 
+@slidebreak
+
 On a graph, the slope refers to both the "steepness" and "direction" of the line.
 
 [cols="^1,^1, ^1"]
@@ -430,6 +595,8 @@ On a graph, the slope refers to both the "steepness" and "direction" of the line
 | @centered-image{images/negative.png}
 | @centered-image{images/horizontal.png}
 |===
+
+@slidebreak
 
 We can compute the @vocab{slope} from a graph the same way we would with a table, by picking two points we know the exact coordinates of.
 
@@ -446,20 +613,19 @@ Once students are comfortable computing slope, try having them compute the slope
 }
 
 === Synthesize
-We have learned how to find @vocab{slope} and @vocab{y-intercept} from tables and graphs of linear relationships. Check in with yourself and what we've learned today.
 
-- Which representation do you feel more confident finding the slope from? Why?
-- Which representation do you feel more confident finding the y-intercept from? Why?
-Looking ahead, we will be learning about yet another representation of Linear Functions that you might find to be even more flexible and powerful.
+We have learned how to find @vocab{slope} and @vocab{y-intercept} from tables and graphs of linear relationships. Looking ahead, we will be learning about yet another representation of Linear Functions that you might find to be even more flexible and powerful.
 
-Linear relationships are __everywhere__:
+- Check in with yourself and what we've learned today.
+  * Which representation do you feel more confident finding the slope from? Why?
+  * Which representation do you feel more confident finding the y-intercept from? Why?
 
-- "On average, for each extra gallon I pump into my tank, I can drive an additional 31 miles."
-- "For each additional hour Carlo babysits, he earns 15 more dollars."
-- "Each cockroach the lizard eats decreases the number of cockroaches in the house by one."
-- "Every 10 additional people in line for the ride at the amusement park increases the wait time by 3 minutes."
-
-What other linear relationships can you think of?
+- Linear relationships are __everywhere__...
+  * "On average, for each extra gallon I pump into my tank, I can drive an additional 31 miles."
+  * "For each additional hour Carlo babysits, he earns 15 more dollars."
+  * "Each cockroach the lizard eats decreases the number of cockroaches in the house by one."  
+  * "Every 10 additional people in line for the ride at the amusement park increases the wait time by 3 minutes."
+  * **What other linear relationships can you think of?**
 
 === Additional Exercises
 

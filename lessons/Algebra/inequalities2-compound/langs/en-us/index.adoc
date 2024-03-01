@@ -14,15 +14,15 @@
 | Lesson Goals
 | Students will be able to:
 
-* Understand how the conjunctions `and` and `or` differ
-* Describe how functions can work together
-* Describe the solution set of a @vocab{compound inequality}
+- Understand how the conjunctions `and` and `or` differ
+- Describe how functions can work together
+- Describe the solution set of a @vocab{compound inequality}
 
 | Student-Facing Lesson Goals
 |
-* Let's use two or more inequalities together. 
-* Let's learn the difference between how `and` and `or` are used in programming.
-* Let's find solutions and non-solutions for compound inequalities.
+- Let's use two or more inequalities together. 
+- Let's learn the difference between how `and` and `or` are used in programming.
+- Let's find solutions and non-solutions for compound inequalities.
 //* I can tell someone else how two or more @vocab{function}s work together
 
 | Materials
@@ -38,7 +38,7 @@
 | Preparation
 | 
 @preparation{
-* There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
 
 |===
@@ -60,6 +60,8 @@ We use inequalities for lots of things:
 What other examples can you come up with?
 }
 
+@slidebreak
+
 Many times we need to _combine_ inequalities:
 
 - Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"})
@@ -69,18 +71,27 @@ Many times we need to _combine_ inequalities:
 Can you think of examples of when we might want to combine inequalities?
 }
 
+@teacher{
 Guide students through other examples of `and` and `or` with various statements, such as:
 
 - "I'm wearing a red shirt AND I'm a math teacher, true or false?"
 - "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?"
 
 This can make for a good sit-down, stand-up activity, where students take turns saying compound Boolean statements and everyone stands if that statement is true for them.
+}
 
 === Investigate
 Both mathematics and programming have ways of combining - or _composing_ - inequalities.
 
 @lesson-instruction{
-Complete @printable-exercise{pages/boolean-coe-to-code1.adoc} and @printable-exercise{pages/and-or.adoc}.
+@ifnotslide{
+Complete @printable-exercise{boolean-coe-to-code1.adoc} and @printable-exercise{and-or.adoc}.
+}
+@ifslide{
+Complete:
+- @printable-exercise{boolean-coe-to-code1.adoc}
+- @printable-exercise{and-or.adoc}
+}
 }
 
 === Synthesize
@@ -107,8 +118,8 @@ Complete @printable-exercise{compound-warmup.adoc}.
 === Investigate
 
 @lesson-instruction{
-* Open the @starter-file{inequalities-compound}.
-* Click "Run" to see graphs of the inequalities you've just considered.
+- Open the @starter-file{inequalities-compound}.
+- Click "Run" to see graphs of the inequalities you've just considered.
 }
 
 @teacher{
@@ -116,16 +127,20 @@ When students click "Run", four graphs will appear. The top two are the simple i
 }
 
 @lesson-instruction{
-* The bottom two graphs are produced by the special functions `and-intersection` and `or-union`. 
-* Read the comments in the Definitions area with your partner to learn how these functions are supposed to work.
-* Then complete @printable-exercise{compound-explore.adoc}.
+- The bottom two graphs are produced by the special functions `and-intersection` and `or-union`. 
+- Read the comments in the Definitions area with your partner to learn how these functions are supposed to work.
+- Then complete @printable-exercise{compound-explore.adoc}.
 }
+
+@slidebreak
 
 @QandA{
 @Q{Why is the circle on 5 red and the circle on 15 green?}
 @A{The circle on 5 is red because 5 is not part of the solution - it _is not_ bigger than itself.}
 @A{The circle on 15 is green because 15 is part of the solution - it _is_ less than or equal to 15.}
 }
+
+@slidebreak
 
 @centered-image{images/intersection-ns.png}
 
@@ -134,11 +149,15 @@ When students click "Run", four graphs will appear. The top two are the simple i
 @A{There aren't any numbers that are both smaller than 5 and greater than or equal to 15, so there is no solution!}
 }
 
+@slidebreak
+
 `or-union` takes in two functions and a list of numbers and produces a graph with the points and the shaded @vocab{union} of values that make either or both of the inequalities true.
 
 @lesson-point{
 In order to make an `or` statement true, a value only has to make one of the inequalities true. 
 }
+
+@slidebreak
 
 @centered-image{images/union1.png}
 
@@ -152,6 +171,10 @@ Sometimes unions overlap and appear as a single arrow pointing in one direction.
 
 Sometimes unions overlap and cover the entire number line!
 
+@slidebreak
+
+@ifslide{@centered-image{images/union-infinite1.png}}
+
 @QandA{
 @Q{Why is the whole graph of @math{x \gt 5 or x \le 15} shaded blue?}
 @A{Because every number in the universe is either greater than 5 or less than or equal to 15, so there aren't any non-solutions!}
@@ -159,29 +182,46 @@ Sometimes unions overlap and cover the entire number line!
 
 @teacher{Once students are familiar with the starter file, they are ready to use it as they practice identifying solutions and non-solutions for compound inequalities.}
 
+@slidebreak
+
 @lesson-instruction{
 - Turn to @printable-exercise{compound-inequality-solutions.adoc}.
-- Explore the compound inequalities listed using the @starter-file{inequalities-compound}, identifying solutions and non-solutions for each.
+- Use the @starter-file{inequalities-compound} to explore the inequalities on the page, identifying solutions and non-solutions for each.
 }
+
+@slidebreak
 
 Instead of defining two functions as simple inequalities, we can produce an inequality graph by defining one function to be a @vocab{compound inequality}!
 
-In the following activity, we'll analyze inequality graphs and define a _single_ function that produces the graph.
-
-@teacher{Walk students through the completed first example before they attempt to write this code on their own.}
-
 @lesson-instruction{
-- Turn to @printable-exercise{compound-inequality-functions.adoc}.
-- Write code to describe the compound inequalities pictured.
+- Turn to @printable-exercise{compound-inequality-functions.adoc} and take a minute to look at the code in the example and think about what you Notice and Wonder.}
+@QandA{
+
+@Q{What do you Notice about how the code works?}
+@A{_Answers will vary. Facilitate a conversation to draw out all of the things students will need to understand in order to write definitions for the remaining examples!_}
+@A{We see that the left end of the shaded region is at 0 and the dot on zero is red so it's not part of the solution set. +
+This tells us that the first inequality is @math{x > 0}.}
+@A{We see that the right end of the shaded region is at 8.1 and the dot on zero is green so it is part of the solution set. +
+This tells us that the second inequlality is @math{x \le 8.1}.}
+@A{Since the shaded area is where these two inequalities overlap, we know that it's a union, which means they are linked with `and`.}
+@A{Each of the simple inequality expressions is enclosed in a set of parentheses.}
+@A{The definition starts with @ifproglang{wescheme}{define.}@ifproglang{pyret}{`fun` and ends with `end`}}
+
+@Q{What do you Wonder?}
+@A{_Answers will vary, but make space for questions._}
+}
+@lesson-instruction{
+- With your partner, define compound inequality functions for the remaining graphs on the page.
 }
 
 @ifproglang{pyret}{@opt{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85, Match Compound Inequality Functions with Plots of their Solution Sets}.}
 }
 
 === Synthesize
-- How did the graphs of intersections and unions differ?
+
+How did the graphs of intersections and unions differ?
 
 == Additional Exercises
 
-- @opt-printable-exercise{pages/boolean-coe-to-code2.adoc}
+@opt-printable-exercise{boolean-coe-to-code2.adoc}
 

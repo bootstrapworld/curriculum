@@ -44,6 +44,7 @@
 | 
 @preparation{
 - This lesson includes a roleplay. In the roleplay students will move along a number line representing the x-axis in our game, which ranges from 0 to 640. Decide whether you will project, draw, or tape a number line on the board or floor.
+- Decide whether or not you plan to teach the option section on **Finding the Hypotenuse of a Right Triangle**. If you aren't teaching the section and you are using our Google Slides, we suggest deleting the corresponding slides from the deck.
 }
 
 |===
@@ -68,7 +69,7 @@ At this point:
 
 - The Target and Danger move on their own.
 - The Player responds to keypresses.
-- The Target and Danger re-appear after they leave the screen.
+- The Target and Danger reappear after they leave the screen.
 
 It's almost fully-playable!
 
@@ -111,7 +112,7 @@ Each image in the game is located based on its center, in the case of a human, o
 @A{They aren't touching.}
 @Q{How will the computer know whether or not they are colliding?}
 @A{We will have to teach it to check whether the coordinates of the characters are really close to each other.}
-@Q{What do you think would be the most straight forward way for us to program the computer to be able to determine that?}
+@Q{What do you think would be the most straightforward way for us to program the computer to be able to determine that?}
 @A{Find the distance between the characters.}	
 @Q{How far apart are the `DANGER` and the `PLAYER`?}
 @A{Answers will be roleplay-dependent.}
@@ -152,13 +153,14 @@ Let's have our `DANGER` and `TARGET` switch places.
 
 Our game computes 1-dimensional distance (vertical or horizontal) using a function called `line-length`. Let's explore how it works!
 
-@lesson-instruction{Turn to the first section of @printable-exercise{pages/line-length-explore.adoc}, find the definition of `line-length` in your game starter file and take a few minutes to record your notices and wonderings with your partner.}
+@lesson-instruction{Turn to the first section of @printable-exercise{line-length-explore.adoc}, find the definition of `line-length` in your game starter file and take a few minutes to record your notices and wonderings with your partner.}
 
 @slidebreak
 
 @QandA{
 
-@Q{What do you notice? _Answers will vary._}
+@Q{What do you notice?}
+@A{Answers will vary.}
 @A{Both of the examples do the same thing, even though the numbers are given in a different order.}
 @A{It's a piecewise function!}
 @A{It uses inequalities.}
@@ -169,7 +171,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 
 @slidebreak
 
-@lesson-instruction{Complete @printable-exercise{pages/line-length-explore.adoc} with your partner.}
+@lesson-instruction{Complete @printable-exercise{line-length-explore.adoc} with your partner.}
 
 @QandA{
 
@@ -182,6 +184,8 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 }
 
 We just practiced computing the distance in 1-dimension, which is useful if the Player and Danger have the same x- or y-coordinate. But how do we compute the distance between two points when both the x- _and_ y-coordinates are different?
+
+@slidebreak
 
 @lesson-instruction{
 - Scroll down to `4. Collisions` in your game file and look for the `distances-color` definition. 
@@ -233,7 +237,7 @@ Let's take a few minutes to explore and respond to @opt-starter-file{right-trian
 
 === Investigate
 
-As we saw in the GeogGebra activities, there is a special relationship between the area of the 3 squares that can be drawn using the 3 legs of a right triangle to determine the lengths of the sides: 
+As we saw in the GeoGebra activities, there is a special relationship between the area of the 3 squares that can be drawn using the 3 legs of a right triangle to determine the lengths of the sides:
 
 @lesson-point{
 The areas of the two smaller squares will add up to the area of the larger square. 
@@ -241,10 +245,13 @@ The areas of the two smaller squares will add up to the area of the larger squar
 
 @center{@image{images/pythag-diagram.png}}
 
+@slidebreak
+
+@ifslide{@center{@image{images/pythag-diagram.png}}}
+
 If we label the two legs `a` and `b` and the hypotenuse `c`, as seen in the diagram, this rule, known as the @vocab{Pythagorean Theorem} can be described using the following equation: 
 
 @center{@big{@math{a^2 + b^2 = c^2}}}
-
 
 @QandA{
 @Q{But how does the Pythagorean Theorem relate to distance in a videogame?}
@@ -252,18 +259,23 @@ If we label the two legs `a` and `b` and the hypotenuse `c`, as seen in the diag
 @A{If we solve the Pythagorean Theorem for @math{c} instead of @math{c^2}, it calculates diagonal distance based on horizontal and vertical distances!}
 }
 
+@slidebreak
+
 @center{@big{@math{c = \sqrt{a^2 + b^2}}}}
 
+@center{@image{images/characters-on-grid.jpeg, 400}}
+
 @QandA{
-@Q{How could we use the equation to find the distance between these two pyret characters?
-@center{@image{images/characters-on-grid.jpeg, 400}}}
+@Q{How could we use the equation to find the distance between these two pyret characters?}
 @A{@math{c = \sqrt{8^2 + 6^2}}}
 @A{@math{c = \sqrt{64+36}}}
 @A{@math{c = \sqrt{100}}}
 @A{@math{c = 10}}
 }
 
-@teacher{If you would like your students to do some @opt-printable-exercise{pages/pythag-practice.pdf, Pythagorean Theorem Practice} during this lesson, now would be a good time.}
+@teacher{If you would like your students to do some @opt-printable-exercise{pythag-practice.pdf, Pythagorean Theorem Practice} during this lesson, now would be a good time.}
+
+@clear
 
 @strategy{ Pythagorean Theorem to video games}{
 
@@ -276,7 +288,6 @@ In our case, the lengths A and B are computed by the `line-length` function we a
 
 === Synthesize
 
-- What does the Pythagorean Theorem tell us?
 - The Pythagorean Theorem describes right triangles. Why is it also able to help us find distance?
 
 == Diagonal Distance in Our Game @duration{30 minutes}
@@ -302,8 +313,10 @@ How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?
 
 @lesson-instruction{
 - With your partner, complete the reading code section of @printable-exercise{distance-on-coordinate-plane.adoc}.
-- When you're prepared to discuss how the `line-length` function is used in the code, seee if you can figure out how to write the code for the second problem.
+- When you're prepared to discuss how the `line-length` function is used in the code, see if you can figure out how to write the code for the second problem.
 }
+
+@clear
 
 @strategy{Why line-length?}{
 
@@ -323,18 +336,26 @@ This effectively rewrites the distance formula as:
 	@math{\sqrt{{\lvert x_2 - x_1 \rvert}^2 + {\lvert y_2 - y_1 \rvert}^2}}  }
 }
 
+@clear
+
+@slidebreak
+
 @QandA{
 @Q{What is `line-length` being used for in the code?}
 @A{To compute the horizontal distance between the x-coordinates of the 2 characters.}
 @A{To compute the vertical distance between the y-coordinates of the 2 characters.}
 }
 
+@slidebreak
+
 @lesson-instruction{
 - Turn to @printable-exercise{distance-coe.adoc}. Convert the expression to a Circle of Evaluation, and then to code.
-- Then complete @printable-exercise{pages/Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points}. This page will ask you to draw circles of evaluation, write code, do computations and make a sketch on a graph to make sure you really understand what's happening.
+- Then complete @printable-exercise{Distance-bw-Two-Points-Multiple-Representations.pdf, Multiple Representations: Distance between two points}. This page will ask you to draw circles of evaluation, write code, do computations and make a sketch on a graph to make sure you really understand what's happening.
 }
 
-@opt{For more practice writing code to generate the distance between two fixed points, have students complete @printable-exercise{pages/distance-from-game-coordinates.adoc} and  @opt-printable-exercise{pages/distance-from-game-coordinates-2.adoc}.}
+@opt{For more practice writing code to generate the distance between two fixed points, have students complete @printable-exercise{distance-from-game-coordinates.adoc} and  @opt-printable-exercise{distance-from-game-coordinates-2.adoc}.}
+
+@slidebreak
 
 @lesson-point{
 All of the distance work we've done so far has been focused on a screenshot of a moment in time.
@@ -346,19 +367,22 @@ With the game stopped in that moment, we knew either the exact location of our c
 To calculate the distance between objects whose locations are constantly changing, we need to use variables!
 }
 
+@slidebreak
+
 @lesson-instruction{
-- Turn to @printable-exercise{pages/distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
-@center{@image{images/pxpy.png, 500}}
-- HINT: The code you wrote in @printable-exercise{pages/distance-coe.adoc} can be used to give you your first example!
+- @right{@image{images/pxpy2.png, 300}}Turn to @printable-exercise{distance.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
+- HINT: The code you wrote in @printable-exercise{distance-coe.adoc} can be used to give you your first example!
 - When you're done, fix the broken `distance` function in your game file, click "Run" and check that the right triangles in your file now appear with reasonable distances for the hypotenuse.
 }
+
+@vspace{1ex}
 
 @strategy{Extension: Finding the length of the leg of a triangle}{
 
 
 If we knew the lengths of the hypotenuse and one leg of the triangle, could we use the formula @math{A^2 + B^2 = C^2} to compute the length of the other leg?
 
-Take a look at the two examples on @printable-exercise{pages/distance-comparing-code.adoc}.
+Take a look at the two examples on @printable-exercise{distance-comparing-code.adoc}.
 
 @QandA{
 @Q{There's a subtle difference between the two examples! What is it?}
@@ -380,11 +404,10 @@ In this situation, remind students to look back at what they circled and labeled
 
 === Synthesize
 
-- How does the length of the hypoteneuse rely on the length of each side?
 - Where do you see one formula being used inside the other?
 
 == Additional Exercises
 
-- Have students use the Design Recipe to solve @opt-printable-exercise{line-length.adoc} on their own.
-- You might also want to have them modify `line-length` to make use of the absolute value function: @show{(code 'abs)}.
+- Use the Design Recipe to solve @opt-printable-exercise{line-length.adoc}.
+- Modify `line-length` to make use of the absolute value function: @show{(code 'abs)}.
 
