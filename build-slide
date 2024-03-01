@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export SEASON=fall2023
+export SEMESTER=fall
+export YEAR=2024-beta
 
-bootstraproot=https://bootstrapworld.org/materials/$SEASON
-
+bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 SED=sed
 
 if which gsed|grep -q .; then
@@ -11,7 +11,7 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
-export EXPERIMENTAL
+export OLDFORMAT
 export PROGLANG
 lsn=
 
@@ -22,8 +22,10 @@ else
   while test $# -ne 0; do
     if test "$1" = -f; then
       regenid=1; shift
+    elif test "$1" = -old; then
+      OLDFORMAT=1; shift
     elif test "$1" = -z; then
-      EXPERIMENTAL=1; regenid=1; shift
+      echo WARNING: Obsolete option $1; regenid=1; shift
     elif test "$1" = --proglang; then
       shift; PROGLANG="$1"; shift
     else
@@ -57,6 +59,11 @@ export TOPDIR=$(pwd)
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
 parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 
+# md2googleslides can optionally take a path to a CSS file,
+# which is used for highlighting code. We use our standard
+# CSS file for this
+cssPath=$TOPDIR/distribution/en-us/lib/shared.css
+
 make
 
 if test ! -d distribution; then
@@ -64,6 +71,10 @@ if test ! -d distribution; then
   exit
 else
   cd distribution
+  if test -s .make.error.log; then
+    echo make failed\; build-slide aborted
+    exit
+  fi
 fi
 
 export NATLANG
@@ -98,26 +109,25 @@ for NATLANG in *; do
     fi
   fi
 
-  slidesmd=slides.md
+  slidesmd=zlides.md
   slidesmkd=slides.mkd
 
-  if test -n "$EXPERIMENTAL"; then
-    slidesmd=zlides.md
-    slidesmkd=zlides.mkd
+  if test -n "$OLDFORMAT"; then
+    slidesmd=slides.md
   fi
 
   if test -n "$regenid"; then
     rm -f $idfile
   fi
   if test -f $slidesmd; then
-    $TOPDIR/lib/slides-preproc.rkt $slidesmd
+    $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
@@ -129,7 +139,7 @@ for NATLANG in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then

@@ -1,12 +1,18 @@
 = Defining Functions
 
-Functions can be viewed in _multiple representations_. You already know one of them: @vocab{Contracts}, which specify the Name, Domain, and Range of a function. Contracts are a way of thinking of functions as a _mapping_ between one set of data and another. For example, a mapping from Numbers to Strings:
+**Functions can be viewed in __multiple representations__.**
 
-@show{(contract 'f '("Number") "String")}
+@vspace{1ex} 
+
+(1) @vocab{Contracts} specify the Name, Domain, and Range of a function. They are a way of thinking of functions as a _mapping_ between one set of data and another. For example, a mapping from Numbers to Strings:
 
 @vspace{1ex}
 
-Another way to view functions is with @vocab{Examples}. Examples are essentially input-output tables, showing what the function would do for a specific input:
+@indented{@show{(contract 'f '("Number") "String")}}
+
+@vspace{1ex}
+
+(2) @vocab{Examples} are essentially input-output tables, showing what the function would do for a specific input:
 
 [cols="2,1,3", stripes="none", grid="none" frame="none"]
 |===
@@ -22,10 +28,10 @@ Another way to view functions is with @vocab{Examples}. Examples are essentially
 
 |===
 
-@vspace{1ex}
-
 In our programming language, we focus on the last two columns and write them as code:
 
+[.indentedpara]
+--
 @ifproglang{wescheme}{
 ```
 (EXAMPLE (f 1) (+ 1 2))
@@ -44,21 +50,27 @@ examples:
 end
 ```
 }
+--
 
 @vspace{1ex}
 
-Finally, we write a formal **function definition** ourselves. The pattern in the Examples becomes _abstract_ (or "general"), replacing the inputs with @vocab{variables}. In the example below, the same definition is written in both math and code:
+(3) **_Function Definitions_** generalize the patterns in the Examples, replacing the inputs with @vocab{variables}. +
+In the example below, the same definition is written in both math and code:
 
 @vspace{1ex}
+
 [.indentedpara]
 --
 @math{f(x) = x + 2}
 
 @show{ (code '(define (f x) (+ x 2)) ) }
 --
+
 @vspace{1ex}
 
-Look for connections between these three representations!
+**Look for connections between these three representations!**
+
+@vspace{1ex}
 
 - The function name is always the same, whether looking at the Contract, Examples, or Definition.
 - The number of inputs in the Examples is always the same as the number of types in the Domain, which is always the same as the number of variables in the Definition.

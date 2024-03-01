@@ -5,9 +5,9 @@
 
 @lesson-prereqs{contracts-tables-displays}
 
-@keywords{linear, slope, intercept, slope-intercept, general normal form, point-slope}
+@keywords{linear, slope, intercept, slope-intercept, general normal form, point-slope, S, Sres, error}
 
-@add-to-lang{fit-model, r-value}
+@add-to-lang{fit-model, S}
 
 [@lesson-intro-table]
 |===
@@ -59,7 +59,9 @@ We're going to search for relationships within a dataset about all the states in
 @QandA{
 @Q{What did you Notice and Wonder?}
 @Q{What did you learn about defining rows in Pyret?}
-@A{Example: `x = row-n(states-table, 3)` will make the name `x` have the value of the fourth row in the table (the index starts at zero!).}
+@A{Example: `x = row-n(states-table, 0)` will make the name `x` have the value of the first row in the table (the index starts at zero!).}
+@Q{How would define a name `y` to be the value of the _second_ row in the table? The third?}
+@A{`y = row-n(states-table, 1)` for the second row. Change the `1` to a `2` for the third.}
 }
 
 In math, x = 4 will define a variable x to be the value 4. Any time we use x after that, we can substitute in the value of 4. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
@@ -104,7 +106,6 @@ We suspect that age affects the adoption time, so we'll use `age` as our @vocab{
 
 @strategy{Why not Independent/Dependent?}{
 
-
 Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are _dependent_ or they are _independent_. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are **causally connected**: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
 }
 
@@ -124,7 +125,6 @@ We are going to be focusing some of our thinking on our state and its neighbors.
 
 @strategy{Exploring the States Dataset}{
 
-
 The @starter-file{alg2-states} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
 
 Making sense: can students predict these relationships, and explain their thinking? (If so, probably not worth having them spend time on more than one of them!)
@@ -143,7 +143,6 @@ Surprises in the District of Columbia: DC often shows up as an outlier or extrem
 - `pct-college-or-higher` vs. `pct-home-owners`
 - `pct-home-owners`, `num-housing-units`
 - `median-income` vs. `per-capita-income`
-
 
 }
 
@@ -182,7 +181,9 @@ These patterns can be described by three terms: **form**, **direction**, and **s
 @vocab{Form} indicates whether a relationship is linear, nonlinear or undefined.
 }
 
-@teacher{@optional Have students turn to @opt-printable-exercise{linear-nonlinear-bust.adoc} and decide whether each of the scatter plots could be modeled by a linear relationship, a nonlinear relationship, or that there doesn't appear to be a pattern.}
+@teacher{
+@opt{Have students turn to @opt-printable-exercise{linear-nonlinear-bust.adoc} and decide whether each of the scatter plots could be modeled by a linear relationship, a nonlinear relationship, or that there doesn't appear to be a pattern.}
+}
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
@@ -213,7 +214,9 @@ How well does knowing the x-value allow us to predict what the y-value will be?
 @vocab{Strength} indicates how closely the two variables are related.
 }
 
-If a relationship is linear, we can report both its direction and its strength with a single number between -1 and +1 called the @vocab{correlation}. The way correlation reports direction is simple: it’s greater than zero if the relationship is positive, and less than zero if it’s negative. As for strength, correlation is closer to 1 in absolute value for strong relationships and closer to 0 for weak relationships; moderate relationships would have a correlation closer to 0.5 in absolute value.
+A strong correlation means that the data points are clustered tightly around the line of best fit. That means the line is a very good predictor of the y-value, based on the x-value: no matter where on the line the prediction falls, the real data point is pretty close!
+
+A weak correlation means that the data points are only clustered loosely around the line of best fit. That means the line is not a very good predictor of the y-value, based on the value of x. Our predicted output might be really far away from the real data point!
 
 === Investigate
 
@@ -221,13 +224,13 @@ Now that you've dug into the role that form, direction and strength play in asse
 
 @lesson-instruction{
 - We are going to learn how to compute correlations using Pyret, but before we can trust the computer, we need to train our eyes to look for form so that we know whether we're justified in fitting a line to the scatter plot and reporting a correlation, neither of which would be appropriate if the form is non-linear. (Alternatives are addressed in units on quadratic, exponential, and logarithmic models.) Also, sometimes there's a bug in a program, so we want to be able to recognize whether the results we get from Pyret for form, direction, and strength make sense!
-- Let's start by practicing matching the scatterplots to their descriptions on @printable-exercise{pages/identifying-form-matching.adoc}.
+- Let's start by practicing matching the scatterplots to their descriptions on @printable-exercise{identifying-form-matching.adoc}.
 }
 
 @teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
 
 @lesson-instruction{
-In pairs or small groups, complete @printable-exercise{pages/identifying-form.adoc}
+In pairs or small groups, complete @printable-exercise{identifying-form.adoc}
 }
 
 @teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
@@ -248,17 +251,18 @@ Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
 - Which appeared to have strong correlations? Were they positive or negative?
 - Were any of these relationships a surprise? Why or why not?
 
-== Fitting Linear Models @duration{45 minutes}
+== Building Linear Models @duration{45 minutes}
 
 === Overview
 
-Building on prior knowledge of linear functions, students learn to find the line of best fit to model the relationship in a scatter plot that looks linear. This yields a predictor function that tells what y-value to expect for a given x-value. Students also learn to use @vocab{R-squared} as a measure of how well their linear models fit the data.
+Building on prior knowledge of linear functions, students learn to find the line of best fit to model the relationship in a scatter plot that looks linear. This yields a predictor function that tells what y-value to expect for a given x-value. Students also learn how to quantify how closely a model fits a dataset, using @vocab{residuals} and @vocab{S} as a measure of how well their models fit the data.
 
 === Launch
 
 Before we learn to fit linear models to scatter plots, let's review. *What do you remember about linear functions?*
 
-@teacher{We'd expect students to be able to surface much of the following:
+@teacher{
+We'd expect students to be able to surface much of the following:
 
 - Linear functions look like straight lines.
 - Vertical lines are not functions, because their slope is undefined as a result of their horizontal change being zero.
@@ -331,7 +335,22 @@ Let's find the best fit we can make for this dataset!
 Complete @printable-exercise{model-college-v-income-1.adoc}.
 }
 
-@teacher{@optional If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc} instead.}
+@teacher{
+@opt{If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc} instead.}
+}
+
+
+=== Synthesize
+
+- ?
+- ?
+
+== Fitting Linear Models @duration{45 minutes}
+
+=== Overview
+Armed with their linear models, students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best?
+
+=== Launch
 
 @lesson-instruction{
 - How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
@@ -340,48 +359,84 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 
 @teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
 
+The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are _patterns_, which we can describe with _models_. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But which is the best model? *How do we even measure how good a model is in the first place?*
+
+@lesson-instruction{
+- TODO(Emmanuel): workbook page with simple points and two functions. Kids have to come up with a measurement
+- Share back
+}
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
+@teacher{Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to *scientific notation*. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
+
 @lesson-instruction{
 - Complete @printable-exercise{model-college-v-income-2.adoc}.
-- Based on the @vocab{R&sup2;} values of the plots you created on this page, what do you think @vocab{R&sup2;} means?
+- Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?
 }
 
-@vocab{R&sup2;} describes the _percentage of the variation in the y-variable that is explained by the x-variable_ in our model. In other words, an @vocab{R&sup2;} value of 0.20 could mean that “20% of the variation in median household income is explained by the percentage of college degrees in a state, according to our linear model”. Better models will explain a higher percentage of that variation.
+@right{@image{images/residual.png, 200}}Each datapoint has an @math{(x,y)} value, and your model tries to predict what @math{y} will be based on @math{x}. When you graph your model in Pyret, you can see that some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y}). But some points are quite far away ("real" @math{y} is far to "predicted" @math{y})! The distance between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data.
 
-If the model is perfectly linear, the @vocab{R&sup2;} value will be 1.00, meaning the @math{y}-values can be perfectly predicted by the @math{x}-values. Of course in the real world, the only "perfect" relationships are things like "height in inches v. height in centimeters". That relationship is perfectly linear...but we don't need to use modeling to figure that out! The @vocab{R&sup2;} value for no correlation at all is *zero*. If we just drew a horizontal predictor line _in the middle of the data_, it would mean that we expect a median income to equal whatever the average is but with no connection whatsoever to the percentage of people who finish college.
+The statistical term @vocab{S} refers to the @vocab{Standard Deviation of the Residuals}, which is a measure of how far away _all_ of datapoints are from the models you built. The closer they are to the model, the smaller the residuals are. Smaller residuals mean a smaller @vocab{S}, and a better model!
 
-But sometimes models make predictions that are _even worse than useless_ - they trend in the wrong direction altogether. Did you see any models with a negative @vocab{R&sup2;} value?
+There are many different tools to calculate the fitness of a model. You may even have heard of R, @math{R^2}, or others! Statisticians and Data Scientists are careful to use the right tool for the job. In this case, the tool we're going to use is called the @vocab{Standard Deviation of the Residuals}, or @vocab{S}. In a Statistics class, we'd spend some time talking about what a @vocab{residual} is, and how to compute @vocab{Standard Deviation}. But for our purposes, we can just use the value of @vocab{S} to tell us how well or poorly our model fits.
+
+@QandA{
+@Q{If a point falls exactly on the line, what would the value of the residual for that point be?}
+@A{Zero}
+@Q{Where would the datapoints be if a model _fit the all of the data perfectly?_}
+@A{All of the datapoints would fall precisely on the line.}
+@Q{What would the value of @vocab{S} be?}
+@A{Zero}
+}
+
+@strategy{Going Deeper}{
+
+Discussion of @vocab{S} and @vocab{Residuals} may be appropriate for older students, or in an AP Statistics class. There's also an entire Bootstrap lesson on @lesson-link{standard-deviation}. TODO(Emmanuel): Add a good reference for this, and maybe even a lesson on residuals!
+}
 
 @lesson-instruction{
 - Complete the first section ("Build a Model through Trial and Error") on @printable-exercise{model-college-v-income-3.adoc}.
-- What was the best model you could come up with?
+- What was the best model (lowest @vocab{S}!) you could come up with?
 }
 
-But how do we find the __best__ model? In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
+@opt{
+Pyret has a function that will compute @vocab{S} without drawing the graph. This may be useful, especially for students who are struggling with scientific notation:
+
+@show{(contract 'S '((t Table) (label String) (xs String) (ys String) (model Number->Number)) "Number")}
+}
+
+But how do we find the __best possible model?__ In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
 
 @lesson-instruction{
 - Complete the last section ("Build a Model Computationally") in @printable-exercise{model-college-v-income-3.adoc}.
-- How close did you come to the optimal model? Did anything about the model surprise you?
-- @optional Turn to @opt-printable-exercise{graphing-models.adoc} and sketch graphs for three of the models you wrote on @printable-exercise{model-college-v-income-1.adoc} and @printable-exercise{model-college-v-income-2.adoc}.
+- How close did your models come to the optimal model? Did anything about the optimal model surprise you?
+- @opt{Turn to @opt-printable-exercise{graphing-models.adoc} and sketch graphs for three of the models you wrote on @printable-exercise{model-college-v-income-1.adoc} and @printable-exercise{model-college-v-income-2.adoc}.}
 }
-
-@teacher{Sometimes the slope or y-intercept of a linear model have too many digits to be displayed clearly. When this happens, Pyret will convert them to scientific notation. While students have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to translate this notation into numbers before proceeding.}
 
 @strategy{More `lr-plot` material}{
 
 
-If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. Deeper discussion of @math{R^2} and least-squares regression may be appropriate for older students, or in a dedicated statistics class.
+If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. This lesson also includes a discussion of @math{R^2}, a different measure of model fitness.
 }
 
-When we interpret a model, we try to make sense of the slope, the axes, the @math{R^2} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income. Based on the @math{R^2} value of **-15.63**, this is a pretty terrible model and shouldn't be trusted.__
+When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income.__ B
+
+@lesson-instruction{
+- The @math{S} value is **$36,300**. Does that mean the model fits well?
+- As a class or in groups, discuss and be ready to share back.
+}
+
+The lowest median incomes are found in Mississippi ($39.031), Arkansas ($40,768), and West Virginia ($41,043). An @vocab{S} value of $36,300 means there's enough error in the model to predict $0 median incomes for these states, or to over-estimate and predict _double_ the median income! And a family in Maryland - with the highest median income of $73,538 - might be predicted to only earn half as much, or 50% more!
+
+Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,300 is pretty terrible. This model should not be trusted!
+
 
 @lesson-instruction{
 These models are useless if we can't make sense of them!
 
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- @optional For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. 
+- @opt{For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. }
 }
 
 === Synthesize
@@ -470,10 +525,11 @@ Lines can be shifted up, down, left and right by adding and subtracting to their
 
 @teacher{There are 3 folders in this Desmos activity. Students will be opening them one at a time by clicking on the triangles and then turning the lines defined within them on and off as directed using the circles in front of the folders.}
 
-@optional: These two paper and pencil exercises guide students through thinking about how horizontal and vertical shifts are related, depending on whether a line has a positive or negative slope: 
+@opt{These two paper and pencil exercises guide students through thinking about how horizontal and vertical shifts are related, depending on whether a line has a positive or negative slope:
 
-* @opt-printable-exercise{hor-vert-shift-positive.adoc} 
+* @opt-printable-exercise{hor-vert-shift-positive.adoc}
 * @opt-printable-exercise{hor-vert-shift-negative.adoc}
+}
 
 === Synthesize
 

@@ -1,6 +1,14 @@
 = Lookup Questions
-
+++++
+<style>
+.FillVerticalSpace .solution::before { content: ' → '; }
+td .fitb { padding-top: 0; width: 100%; text-align: right; }
+table:last-of-type tr { height: 3em; }
+</style>
+++++
 The table below represents four pets at an animal shelter:
+
+@vspace{1ex}
 
 `pets-table`
 
@@ -19,46 +27,46 @@ The table below represents four pets at an animal shelter:
 [.FillVerticalSpace, cols=">.^7a,^.^2a,4,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
 |===
 |“How much does Maple weigh?”
-|*1* @ifsoln{(E)} ||*A*
+|*1* @ifsoln{E} ||*A*
 | `row-n(pets-table, 3)`
 
 |“Which is the last row in the table?
-|*2* @ifsoln{(A)} ||*B*
+|*2* @ifsoln{A} ||*B*
 | `row-n(pets-table, 2)["name"]`
 
 |“What is Fritz’s sex?”
-|*3* @ifsoln{+(C)+} ||*C*
+|*3* @ifsoln{C} ||*C*
 | `row-n(pets-table, 1)["sex"]`
 
 |“What’s the third animal’s name?”
-|*4* @ifsoln{(B)} ||*D*
+|*4* @ifsoln{B} ||*D*
 | `row-n(pets-table, 3)["age"]`
 
 |“How much does Nori weigh?”
-|*5* @ifsoln{(G)} ||*E*
+|*5* @ifsoln{G} ||*E*
 | `row-n(pets-table, 3)["pounds"]`
 
 |“How old is Maple?”
-|*6* @ifsoln{(D)}||*F*
+|*6* @ifsoln{D}||*F*
 | `row-n(pets-table, 0)`
 
 |“What is Toggle’s sex?”
-|*7* @ifsoln{(H)} ||*G*
+|*7* @ifsoln{H} ||*G*
 | `row-n(pets-table, 2)["pounds"]`
 
 |“What is the first row in the table?”
-|*8* @ifsoln{(F)} ||*H*
+|*8* @ifsoln{F} ||*H*
 | `row-n(pets-table, 0)["sex"]`
 
 |===
 
-@n Write the Pyret code that will produce each value on the right.
+@n For each value on the left, write the Pyret expression that will produce that value on the right. The first one has been completed for you.
 
-[cols="1a,70a,29a"]
+[cols="^1a,19a,70a"]
 |===
-| a. | @fitb{}{row-n(_pets-table, 3)["name"]_}				| `"Maple"`
-| b. | @fitb{}{@ifsoln{row-n(pets-table, 1)["sex"]}}		| `"male"`
-| c. | @fitb{}{@ifsoln{row-n(pets-table, 1)["age"]}}		| `4`
-| d. | @fitb{}{@ifsoln{row-n(pets-table, 0)["pounds"]}}	| `48`
-| e. | @fitb{}{@ifsoln{row-n(pets-table, 2)["name"]}}		| `"Nori"`
+| a. | `"Maple"`	| row-n(pets-table, 3)["name"]
+| b. | `"male"`		| @ifsoln{@ifsoln{row-n(pets-table, 1)["sex"]}}
+| c. | `4`			| @ifsoln{@ifsoln{row-n(pets-table, 1)["age"]}}
+| d. | `48`			| @ifsoln{@ifsoln{row-n(pets-table, 0)["pounds"]}}
+| e. | `"Nori"`		| @ifsoln{@ifsoln{row-n(pets-table, 2)["name"]}}
 |===

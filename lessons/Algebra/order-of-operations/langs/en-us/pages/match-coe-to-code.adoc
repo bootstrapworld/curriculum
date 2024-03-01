@@ -1,5 +1,12 @@
 = Matching Circles of Evaluation to Code
 
+++++
+<style>
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
+
 Draw a line from each Circle of Evaluation on the left to the corresponding Code on the right.
 
 @do{
@@ -17,23 +24,23 @@ Draw a line from each Circle of Evaluation on the left to the corresponding Code
 | Code
 
 | @show{(coe expr1)}
-|*@n*@showsoln{"-B"}  ||*A*
+|*@n*@ifsoln{B}  ||*A*
 | @show{(code expr3 #:parens true)}
 
 | @show{(coe expr2)}
-|*@n*@showsoln{"-D"}  ||*B*
+|*@n*@ifsoln{D}  ||*B*
 | @show{(code expr1 #:parens true)}
 
 | @show{(coe expr3)}
-|*@n*@showsoln{"-A"}  ||*C*
+|*@n*@ifsoln{A}  ||*C*
 | @show{(code expr5 #:parens true)}
 
 | @show{(coe expr4)}
-|*@n*@showsoln{"-E"}  ||*D*
+|*@n*@ifsoln{E}  ||*D*
 | @show{(code expr2 #:parens true)}
 
 | @show{(coe expr5)}
-|*@n*@showsoln{"-C"}  ||*E*
+|*@n*@ifsoln{C}  ||*E*
 | @show{(code expr4 #:parens true)}
 
 |===

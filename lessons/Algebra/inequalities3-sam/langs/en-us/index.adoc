@@ -2,7 +2,7 @@
 
 @description{Students discover that inequalities have an important application in video games: keeping game characters on the screen! Students apply their understanding to edit code so that it will keep Sam the Butterfly safely in view.}
 
-@lesson-prereqs{inequalities2-compound}
+@lesson-prereqs{functions-dr}
 
 @keywords{compound inequalities, real world application, video game, on screen, bounds, limits}
 
@@ -12,11 +12,11 @@
 | Lesson Goals
 | Students will be able to:
 
-* apply their understanding of inequalities to keep a game character on the screen
+- apply their understanding of inequalities to keep a game character on the screen
 
 | Student-Facing Lesson Goals
 |
-* Let's use what we know about inequalities to define the boundaries that will keep a game character on the screen.
+- Let's use what we know about inequalities to define the boundaries that will keep a game character on the screen.
 
 | Materials
 |[.materials-links]
@@ -38,23 +38,30 @@ Students are introduced to Sam the Butterfly, a simple activity in which they mu
 === Launch
 
 @lesson-instruction{
-- Open the @starter-file{inequalities-samX} in a new tab and save a copy of your own.
-- Complete @printable-exercise{pages/sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
+- Open the @starter-file{inequalities-sam} in a new tab and save a copy of your own.
+- Complete @printable-exercise{sam-intro.adoc, Introducing Sam}, clicking "Run" and using the arrow keys to investigate the program with your partner.
 }
 
-As students explore the program, they should notice that Sam's coordinates are displayed at the top of the screen. When Sam is at (0,0), we only see a part of Sam's wing because Sam's position is based on the _center_ of the butterfly image. Students should observe that Sam can go up to, but not beyond, an x of -50. Students can represent this algebraically as @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \ge -40}.
+As you explore the program, notice that Sam's coordinates are displayed at the top of the screen! When Sam is at (0,0), we only see a part of Sam's wing because their position is based on the _center_ of the butterfly image.
+
+@teacher{
+Students should observe that Sam can go up to, but not beyond, an x of -50. Students can represent this algebraically as @math{x \gt -50}, or (for students who notice that Sam only moves in increments of 10) @math{x \ge -40}.
+
+Eagle-eyed students might also notice that the butterfly image is defined at the top of the file, as `IMG`! Changing this definition will allow them to customize the way Sam looks.
+}
 
 @lesson-point{
 Every time Sam moves, we want to check and see if Sam is safe.
 }
 
 @ifproglang{wescheme}{
-@teacher{*Note:* In this programming language, question marks are prounced "huh?" So `safe-left?` would be prounounced "safe left huh?" This can be a source of some amusement for students!}
+@lesson-point{In this programming language, question marks are prounced "huh?" So `safe-left?` would be prounounced "safe-left-huh?"}
 }
 
-To further support students, consider asking what three functions are defined in their starter files. Then, ask students what each function _should_ do, when working properly.
+@slidebreak
 
 @QandA{
+@Q{What three functions do you see defined in this file?}
 @Q{What _should_ our left-checking function do?}
 @A{Check to see if x is greater than -50.}
 @Q{What _should_ our right-checking function do?}
@@ -66,15 +73,15 @@ To further support students, consider asking what three functions are defined in
 === Investigate
 
 @lesson-instruction{
-- Complete @printable-exercise{pages/left-and-right.adoc} with your partner.
+- Complete @printable-exercise{left-and-right.adoc} with your partner.
 - Once finished, fix the corresponding functions in your Sam the Butterfly file, and test them out.
 }
 
+@teacher{
 Students will notice that fixing @show{(code 'safe-left?)} keeps Sam from disappearing off the left side, but fixing @show{(code 'safe-right?)} doesn't seem to keep Sam from disappearing off the right side!  When students encounter this, encourage them to look through the code to try and figure out why.
-
+}
 
 @strategy{"False" doesn't mean "Wrong"!}{
-
 
 A lot of students - especially confident ones - may struggle to come up with an example where @show{(code 'safe-left?)} returns `false`:
 
@@ -103,7 +110,11 @@ By writing the answer first ( `is-safe-left(-65) is false` ), it reduces anxiety
 }
 }
 
-Emphasize to students that they cannot trust the behavior of a complex system! After looking closely at examples and observing that they all pass, students should suspect that the bug is elsewhere.
+@slidebreak
+
+The only way to know if @show{(code 'safe-right?)} works is to test it by itself. Did you write examples for that function...?
+
+If a car starts up when you turn the key, does that mean we know the sunroof works? Of course not! _You can't trust the behavior of a complex system, just because one part of it works!_ The only way to see if the sunroof works is to test it.
 
 === Synthesize
 
@@ -117,58 +128,59 @@ Students solve a word problem involving compound inequalities, using `and` to co
 
 === Launch
 
-@lesson-roleplay{
-Recruit three student volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}. Give them 1 minute to read the Contract and code, as written in the program.
+@lesson-instruction{
+- We need three volunteers to roleplay the functions @show{(code 'safe-left?)}, @show{(code 'safe-right?)}, and @show{(code 'onscreen?)}!
+- Take 1 minute to read the Contract and code for your function, as written in the program.
+}
 
+@teacher{
 Ask the volunteers what their name, Domain and Range are. Explain that you, the facilitator, will be providing a coordinate input. The functions @show{(code 'safe-left?)} and @show{(code 'safe-right?)} will respond with either "true" or "false".
+}
 
-The function @show{(code 'onscreen?)}, however, will call the @show{(code 'safe-left?)} function! So the student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
+@slidebreak
 
+@lesson-roleplay{
 
-For example:
+The function @show{(code 'onscreen?)}, will call the @show{(code 'safe-left?)} function, giving them a number representing Sam's x-coordinate. The student roleplaying @show{(code 'onscreen?)} should turn to @show{(code 'safe-left?)} and give the input to them.
+
 @ifproglang{wescheme}{
-
-- Facilitator: "onscreen-huh 70"
-- onscreen? (turns to safe-left?): "safe-left-huh 70"
-- safe-left?: "true"
-- onscreen? (turns back to facilitator): "true" +
-{empty} +
-
-- Facilitator: "onscreen-huh -100"
-- onscreen? (turns to safe-left?): "safe-left-huh -100"
-- safe-left?: "false"
-- onscreen? (turns back to facilitator): "false" +
-{empty} +
-
-- Facilitator: "onscreen-huh 900"
-- onscreen? (turns to safe-left?): "safe-left-huh 900"
-- safe-left?: "true"
-- onscreen? (turns back to facilitator): "true"
+@define{onscreen}{onscreen-huh}
+@define{safe-left}{safe-left-huh}
+@define{safe-right}{safe-right-huh}
 }
 
 @ifproglang{pyret}{
-- Facilitator: "is-onscreen 70"
-- is-onscreen (turns to is-safe-left): "is-safe-left 70"
-- is-safe-left: "true"
-- is-onscreen (turns back to facilitator): "true" +
+@define{onscreen}{is-onscreen}
+@define{safe-left}{is-safe-left}
+@define{safe-right}{is-safe-right}
+}
+
+For example:
+
+- Facilitator: "@onscreen 70"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left 70"
+- @show{(code 'safe-left?)}: "true"
+- @show{(code 'onscreen?)} (turns back to facilitator): "true" +
 {empty} +
 
-- Facilitator: "is-onscreen -100"
-- is-onscreen (turns to is-safe-left): "is-safe-left -100"
-- is-safe-left: "false"
-- is-onscreen (turns back to facilitator): "false" +
+@ifslide{@teacher{
+- Facilitator: "@onscreen -100"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left -100"
+- @show{(code 'safe-left?)}: "false"
+- @show{(code 'onscreen?)} (turns back to facilitator): "false" +
 {empty} +
 
-- Facilitator: "is-onscreen 900"
-- is-onscreen (turns to is-safe-left): "is-safe-left 900"
-- is-safe-left: "true"
-- is-onscreen (turns back to facilitator): "true"
+- Facilitator: "@onscreen 900"
+- @show{(code 'onscreen?)} (turns to @show{(code 'safe-left?)}): "@safe-left 900"
+- @show{(code 'safe-left?)}: "true"
+- @show{(code 'onscreen?)} (turns back to facilitator): "true"
+}}
+
 }
-}
+
+@slidebreak
 
 @QandA{
-Hopefully your students will notice that @show{(code 'safe-right?)} did not participate in this roleplay scenario at all!
-
 @Q{What is the problem with @show{(code 'onscreen?)}?}
 @A{It's only talking to @show{(code 'safe-left?)}, it's not checking with @show{(code 'safe-right?)}}
 @Q{What should @show{(code 'onscreen?)} be doing?}
@@ -179,7 +191,7 @@ Hopefully your students will notice that @show{(code 'safe-right?)} did not part
 === Investigate
 
 @lesson-instruction{
-- Complete @printable-exercise{pages/onscreen.adoc}.
+- Complete @printable-exercise{onscreen.adoc}.
 - When this function is entered into the editor, students should now see that Sam is protected on __both__ sides of the screen.
 }
 
@@ -190,19 +202,22 @@ What if we wanted to keep Sam safe on the top and bottom edges of the screen as 
 - What additional functions would we need?  
 - What functions would need to change? 
 
-@ifproglang{pyret}{Students ready to tackle this challenge can open the @opt-starter-file{inequalities-samXY} where @show{(code '(onscreen2? x y))} is defined to take in both x and y.} 
+_Note: In the context of Sam the Butterfly, there's a clear reason why we want to stop Sam from going off the top and bottom of the screen! But when we add the @show{(code 'onscreen?)} function to our Game Starter File, we might *want* to let the player go above and below the screen. It will be important that the @show{(code 'onscreen?)} function we use in the game only checks the x-coordinate._
 
-_Note: In the context of Sam the Butterfly, being able to control x and y coordinates is optimal, but, when we add the @show{(code 'onscreen?)} function to our Game Starter File, other (hidden) functions will control the characters' y-coordinates and we don't want to interfere with them, so it'll be important that the @show{(code 'onscreen?)} function we use only changes the x-coordinate._ 
+We recommend that students tackling this challenge define a new function @show{(code 'onscreen2?)} so that their initial @show{(code 'onscreen?)} code remains ready for them to use in the next section of this lesson.
+}
 
-@ifproglang{wescheme}{We recommend that students tackling this challenge define a new function @show{(code 'onscreen2?)} so that their initial @show{(code 'onscreen?)} code remains ready for them to use in the next section of this lesson.
+@slidebreak
+
+@lesson-roleplay{
+Let's have our three student volunteers roleplay those functions again, with the @show{(code 'onscreen?)} function working properly. Be sure to test out values where Sam is off one edge, off the other, and on the screen!
 }
-}
+
+@teacher{Repeat the back-and-forth that happened earlier, making sure that the onscreen function calls both the left-checking and right-checking functions _and_ that those functions work correctly!}
 
 === Synthesize
 
-Bring back the three new student volunteers to roleplay those functions, with the onscreen function now working properly. Make sure students provide correct answers, testing both `true` and `false` conditions using coordinates where Sam is onscreen and offscreen.
-
-- How did it feel when you saw Sam hit both walls?
+- How did it feel when you clicked Run, and saw Sam hit both walls for the first time?
 - Are there multiple solutions for @show{(code 'onscreen?)}?
 - Is this _Top-Down_ or _Bottom-Up_ design?
 
@@ -214,19 +229,18 @@ Students identify common patterns between two-dimensional Boundary detection and
 
 === Launch
 
-Have students open their in-progress game file and click "Run". Invite them to analyze the movement of the danger and the target
-
 @QandA{
+Open your in-progress game file and click "Run".
+
 @Q{How are the `TARGET` and `DANGER` behaving right now?}
 @A{They move across the screen.}
+@Q{What happens when they go off the edge of the screen?}
+@A{They just keep going!}
 @Q{What do we want to change?}
 @A{We want them to come back after they leave one side of the screen.}
-@Q{What happens to an image's x-coordinate when it moves off the screen?}
-@A{An image is entirely off-screen if its x-coordinate is less than -50 and greater than 690.}
-@Q{How can we make the computer understand when an image has moved off the screen?}
-@A{We can teach the computer to compare the image's coordinates to a boundary on the number line, just like we did with Sam the Butterfly!}
+@Q{Is this similar to a problem we've already solved somewhere else?}
+@A{This is the same problem we solved with Sam!}
 }
-
 === Investigate
 
 @lesson-instruction{
@@ -235,7 +249,9 @@ Apply what you learned from Sam the Butterly to fix the @show{(code 'safe-left?)
 
 Since the screen dimensions for their game are 640x480, just like Sam, they can use their code from Sam as a starting point.
 
-NOTE: Students should NOT add @show{(code 'safe-top?)} and @show{(code 'safe-bottom?)} to their game code!
+@teacher{
+Students who tackled the optional @show{(code 'safe-top?)} and @show{(code 'safe-bottom?)} challenges should be sure *NOT* to add this to their game code! There are some exciting challenges in later lessons that rely on characters being able to go off the top or bottom edge of the screen!
+}
 
 === Common Misconceptions
 
@@ -248,5 +264,5 @@ NOTE: Students should NOT add @show{(code 'safe-top?)} and @show{(code 'safe-bot
 
 == Additional Exercises
 
-- @opt-printable-exercise{pages/onscreen-discussion.adoc}
-- @opt-printable-exercise{pages/keeping-ninjacat-in-the-game.adoc}
+- @opt-printable-exercise{onscreen-discussion.adoc}
+- @opt-printable-exercise{keeping-ninjacat-in-the-game.adoc}

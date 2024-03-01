@@ -1,56 +1,13 @@
-= Zample Page
+= Lorem ipsum
 
-LATEST
+Lorem ipsum
 
-@show{(math '(* (+ 4 (- 9 8)) 5))}
+@do{
+  (define expr1 '(/ 10 (* 2 (+ 3 1))))
+}
 
-@math{(4 + (9 - 8)) \times 5}
-
-@math{a} @math{ a} @math{a } @math{ a }
-
-@math{a}
-@math{b}
-@math{c}
-@math{f}
-@math{g}
-@math{h}
-@math{r}
-@math{x}
-@math{y}
-@math{R^2}
-@math{x_1}
-@math{y_1}
-@math{x_2}
-@math{y_2}
-
-@math{x < y}
-
-@math{x ± y}
-
-@math{a - b}
-
-@math{\frac{1}{2}}
-
-@math{\frac{x}{y}}
-
-@math{\mul}
-
-@math{\div}
-
-@show{(contract 'modified-box-plot '((t Table) (col String)) "Image")}
-
-FITBRUBYs!!!
-
-@fitbruby{13em}{}{column name}
-
-@fitbruby{}{numerator}{denominator}
-
-OLD
-
-@show{(contract "make-id" '("String" "Number") "Image")}
-
-NEW
-
-@show{(contract "rectangle" '(("width" "Number") ("length" "Number") ("fill-style" "String") ("color" "String")) "Image")}
-
-// @show{(contract "make-id" '("String" "Number") "Image")}
+[.FillVerticalSpace, cols="^.^1a,^.^10a,^.^10a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Arithmetic Expression
+|*@n*| @show{(coe expr1)}    | @showsoln{(math expr1) }
+|===

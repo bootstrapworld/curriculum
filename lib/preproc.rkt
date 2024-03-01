@@ -120,6 +120,8 @@
 
 (define *local-scheme-definitions* '())
 
+(define *enclosing-directive* #f)
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -648,6 +650,7 @@
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")]
+        [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
 
@@ -657,31 +660,28 @@
                 *natlang* *lesson*)))
 
     (cond [(file-exists? json-file)
-           (let ([images-hash (call-with-input-file json-file read-json)])
-             ; (printf "images-hash is ~s\n" images-hash)
-             (set! *images-hash-list*
-               (cons (cons *containing-directory* images-hash) *images-hash-list*))
-             (unless (or *narrative* *target-pathway* *teacher-resources*)
-               (hash-for-each images-hash
-                 (lambda (key val)
-                   (let* ([image-file (build-path image-dir (symbol->string key))]
-                          [anon-image-file (anonymize-filename image-file)])
-                     (unless (file-exists? anon-image-file)
-                       (cond [(file-exists? image-file)
-                              (rename-file-or-directory image-file anon-image-file #t)]
-                             [else
-                               (unless (member key missing-images)
-                                 (set! missing-images (cons key missing-images)))
-                               #;(printf "WARNING: ~a: Image file ~a not found\n"
-                                       (errmessage-context) image-file)
-                             ]))))))
-             images-hash)]
+           (set! images-hash (call-with-input-file json-file read-json))
+           ; (printf "images-hash is ~s\n" images-hash)
+           (set! *images-hash-list*
+             (cons (cons *containing-directory* images-hash) *images-hash-list*))
+           (unless (or *narrative* *target-pathway* *teacher-resources*)
+             (hash-for-each images-hash
+               (lambda (key val)
+                 (let* ([image-file (build-path image-dir (symbol->string key))]
+                        [anon-image-file (anonymize-filename image-file)])
+                   (unless (file-exists? anon-image-file)
+                     (cond [(file-exists? image-file)
+                            (rename-file-or-directory image-file anon-image-file #t)]
+                           [else
+                             (unless (member key missing-images)
+                               (set! missing-images (cons key missing-images)))
+                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                             ]))))))]
           [else
             (when (or *lesson-plan* *lesson*)
               (unless (member json-file *missing-image-json-files*)
                 (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))
-            'not-found])
+                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -689,6 +689,8 @@
           (for ([f missing-images])
             (write f o) (newline o)))
         #:exists 'append))
+
+    images-hash
     ))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
@@ -790,13 +792,6 @@
                     "index.shtml"
                     "index.adoc"
                     "index.asciidoc"))))
-
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-dist-link f link-text)
   (let ([url-has-query-string? #f])
@@ -1224,7 +1219,11 @@
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
         ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-        (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+        (if (string-prefix? lesson "project-")
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          )
+        
         (if lesson-description
             (display lesson-description o)
             (display " {nbsp}" o))
@@ -1324,6 +1323,7 @@
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
+  (set! *enclosing-directive* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1441,9 +1441,15 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
-                           [(string=? directive "ifnotslide")
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when (regexp-match "\\|===" text)
+                                (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
+                                (expand-directives:string->port text o)
+                                (display "\n====\n" o)))]
+                           [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
                            [(string=? directive "page-of-lines")
@@ -1676,7 +1682,7 @@
                             (let ([exprs (read-group i directive #:scheme? #t)])
                               (when *solutions-mode?*
                                 (for ([s (string-to-form exprs)])
-                                  (display (massage-arg s) o))))]
+                                  (display (enclose-span ".solution" (format "~a" (massage-arg s))) o))))]
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
@@ -1738,22 +1744,15 @@
                                       [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
-                            (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
-                                   [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
-                              (display
-                                (cond [contains-blocks?
-                                        (string-append "\n\n[.indentedpara]\n--\n"
-                                          converted-text
-                                          "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
-                                             ".indentedpara" converted-text)]) o))]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (cond [(string-ci=? proglang *proglang*)
-                                     (expand-directives:string->port text o)]
+                                     (expand-directives:string->port text o #:enclosing-directive #f)]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
 
@@ -1811,8 +1810,13 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak") o]
-
+                           [(string=? directive "slidebreak")
+                            (when *enclosing-directive*
+                              (printf "WARNING: ~a: @slidebreak inside another directive\n\n"
+                                      (errmessage-file-context)))
+                            (let ([c (peek-char i)])
+                              (when (and (char? c) (char=? c #\{))
+                                (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
@@ -1836,13 +1840,11 @@
                                     (let ([s (keyword-apply f key-list key-vals args)])
                                       (expand-directives:string->port s o)
                                       )))))]
-                           [(string=? directive "optional")
-                            (display (enclose-span ".optionaltag" "Optional: ") o)]
                            [(string=? directive "opt")
-                            (let ([text (read-group i directive)]
+                            (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]\n" o)
+                              (display "[.optionaltag]##{empty}##\n" o)
                               (display (expand-directives:string->string text) o)
                               (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
@@ -1939,9 +1941,9 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a]\n--\n" o)
+                              (display "\n[.actually-openblock.q-and-a]\n====\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
@@ -1953,13 +1955,12 @@
                            [(string=? directive "strategy")
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
-                              (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
-                              (display "|===\n|\n" o)
-                              (display "**" o)
+                              (display "\n[.strategy-box]\n--\n" o)
+                              (display "[.title]\n" o)
                               (expand-directives:string->port title o)
-                              (display "**\n\n" o)
+                              (display "\n\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n|===\n" o))]
+                              (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-point]\n--\n" o)
@@ -2034,15 +2035,18 @@
                           [else (display c o)])])
                 (loop))))))
 
-(define (expand-directives:string->string s)
+(define (expand-directives:string->string s #:enclosing-directive [enclosing-directive #t])
   (call-with-output-string
     (lambda (o)
-      (expand-directives:string->port s o))))
+      (expand-directives:string->port s o #:enclosing-directive enclosing-directive))))
 
-(define (expand-directives:string->port s o)
+(define (expand-directives:string->port s o #:enclosing-directive [enclosing-directive #t])
   (call-with-input-string s
     (lambda (i)
-      (expand-directives i o))))
+      (let ([old-enclosing-directive *enclosing-directive*])
+        (set! *enclosing-directive* enclosing-directive)
+        (expand-directives i o)
+        (set! *enclosing-directive* old-enclosing-directive)))))
 
 (define (preproc-adoc-file in-file
                            #:all-pathway-lessons [all-pathway-lessons #f]

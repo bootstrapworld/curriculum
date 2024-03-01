@@ -2,40 +2,42 @@
 
 == Japan
 
+[.linkInstructions]
 For this section of the page, you will refer to the @starter-file{flags}.
 
-@n Each language has its own symbol for commenting. @ifproglang{wescheme}{In WeScheme, we use the semicolon (`;`).} @ifproglang{pyret}{In Pyret, we use the hash mark (`#`).} What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purple}@ifproglang{pyret}{Red/orange}}}
-
+@n Each language has its own symbol for commenting code so that programmers can leave notes that won't be read by the computer. @ifproglang{wescheme}{In WeScheme, we use the semicolon (`;`).} 
+@ifproglang{pyret}{In Pyret, we use the hash mark (`#`).} 
+What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purple}@ifproglang{pyret}{Red/orange}}}
 
 @n Type `japan-flag` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{We see Japan's flag - a white background with}}
 
 @fitb{}{@ifsoln{a red dot in the center.}}
 
-@n Type `japan` into the Interactions Area and compare the image to `japan-flag`. How are they alike? How are they different?
+@n Type `japan` into the Interactions Area and compare the image to `japan-flag`. 
 
-@fitb{}{@ifsoln{We see a variant of Japan's flag; the dot is in the lower left now. The dot is the same color but a different size.}}
+- How are they alike? @fitb{}{@ifsoln{We see a variant of Japan's flag. The dot is the same color.}}
 
-@fitb{}{}
+- How are they different? @fitb{}{@ifsoln{The dot is in the lower left now. The dot is a different size.}}
 
 @n `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
 
 - dot: @fitb{}{@ifsoln{We see a 100-pixel solid red circle}}
 - background: @fitb{}{@ifsoln{We see a black-outlined rectangle that is 300 pixels by 200 pixels}}
 
+@n These images are combined using the `put-image` function. What is its contract? @fitb{}{@showsoln{(contract 'put-image '((top-image Image) (x-coordinate Number) (y-coordinate Number)(background Image)) "Image")}
+
 @n Fix the `japan` code so that it matches the `japan-flag` image. What did you need to change? @fitb{}{}
 
 @fitb{}{@ifsoln{We need to change the coordinates to (150, 100). We need to resize the red dot to about 60 pixels.}}
-
-@fitb{}{}
 
 @n How can you prove that you have placed the `dot` in exactly the right location? @fitb{}{}
 
 @fitb{}{@ifsoln{The x-coordinate is 150 (half of 300) and the y-coordinate is 100 (half of 200)}}
 
-@n What is the Contract for `put-image`? @fitb{}{}
 
 == The Netherlands
 
+[.linkInstructions]
 For this section of the page, you will refer to the @starter-file{flags-2}.
 
 @n What was the programmer thinking when she coded the height of the red stripe as @show{(code '(/ 200 3))}? @fitb{}{}

@@ -12,18 +12,18 @@
 | Lesson Goals
 | Students will be able to:
 
-* Identify the value that applying a function (e.g. - f(3)) produces from symbolic definitions, tables, or graphs.
-* Describe the order of operations involved in algebraic function compositions.
+- Identify the value that applying a function (e.g. - f(3)) produces from symbolic definitions, tables, or graphs.
+- Describe the order of operations involved in algebraic function compositions.
 
 | Student-Facing Lesson Goals
 |
 
-* Let's learn how to find the value of an expression such as f(3), from a table, a graph or a symbolic definiton.
+- Let's learn how to find the value of an expression such as f(3), from a table, a graph or a symbolic definiton.
 
 | Materials
 |[.materials-links]
 
-_**This lesson is unplugged** and does not require a computer._
+- __**This lesson is unplugged** and does not require a computer.__
 
 @material-links
 
@@ -32,7 +32,10 @@ _**This lesson is unplugged** and does not require a computer._
 @opt-material-links
 
 | Preparation
-| * There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+| 
+@preparation{
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. __If you're a first-time Desmos user, fear not!__ @dist-link{pages/desmos-instructions.adoc, __Here's what you need to do.__}
+}
 
 |===
 
@@ -46,7 +49,9 @@ Students connect their understanding of function definitions in @proglang to fun
 
 We've seen how functions like `gt` can be defined, and then @vocab{applied} to a number to create a green triangle. And once `gt` is defined, we can use it with many different numbers to create many different triangles - all without having to write out `"solid"`, `"green"`, etc.
 
-But how does this function _work?_
+But how does this function __work?__
+
+@slidebreak
 
 When we apply a function to some inputs, we @vocab{substitute} those inputs for the @vocab{variables} in the definition. In the example below, the inputs are @vocab{substituted} for the variable `size` in the body of the `gt` function.
 
@@ -63,8 +68,9 @@ When we apply a function to some inputs, we @vocab{substitute} those inputs for 
 
 @vspace{1ex}
 
-Let's take a look at a @vocab{function} that works with Numbers:
+@slidebreak
 
+Let's take a look at a @vocab{function} that works with Numbers:
 
 @center{**@show{(code '(define (f x) (+ x 8)))}**}
 [cols="^.^2,^.^3,^.^2", options="header"]
@@ -81,9 +87,11 @@ Let's take a look at a @vocab{function} that works with Numbers:
 
 Once again, the input is @vocab{substituted} for the variable.
 
+@slidebreak
+
 You've already seen that @proglang looks a little different from traditional math, even if it behaves the same way.
 
-Math books use something called @vocab{Function Notation} to define functions. Here's a side-by-side comparison of the same function, in our programming language and in function notation:
+Math books use something called @vocab{Function Notation} to define functions. Here's a side-by-side comparison of the same function, in @proglang and in function notation:
 
 [cols="^1,^1", options="header"]
 |===
@@ -93,14 +101,18 @@ Math books use something called @vocab{Function Notation} to define functions. H
 | @math{f(x) = x + 8}
 |===
 
+@slidebreak
+
 @QandA{
 @Q{What do these forms have in common?}
-@A{Both forms show the *name of the function*, as well as the *names of the variables*. They also show *what the function does with those variables*.}
+@A{Both forms show the **name of the function**, as well as the **names of the variables**. They also show **what the function does with those variables**.}
 @Q{How are these forms different from one another?}
 @A{In Pyret, we use a colon instead of an equals sign. In Pyret, we see `fun` at the beginning and `end` at the end.}
 }
 
-In math - just as in programming - *we compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition*, just as we did with `gt`.
+@slidebreak
+
+In math - just as in programming - **we compute the value of the expression for any specific input by substituting numbers for the variable(s) used in the definition**, just as we did with `gt`.
 
 @ifproglang{wescheme}{
 @center{**@math{f(x) = x + 8}**}
@@ -118,29 +130,33 @@ In math - just as in programming - *we compute the value of the expression for a
 === Investigate
 
 @lesson-instruction{
-- Turn to @printable-exercise{pages/match-examples-definitions-math.adoc} 
+- Turn to @printable-exercise{match-examples-definitions-math.adoc} 
 - Start by looking at each table and highlighting what is changing from the first row to the following rows.
 - Then, match each table to the function that defines it.
 }
 
+@opt{
 You may also want to have students complete @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38, Matching Examples & Function Definitions (Math)}
-
-@lesson-instruction{
-- Turn to @printable-exercise{pages/function-notation-substitution.adoc}.
 }
 
+@lesson-instruction{
+Turn to @printable-exercise{function-notation-substitution.adoc}.
+}
+
+@teacher{
 @star For more challenging function notation evaluation exercises direct students to @opt-printable-exercise{function-notation-challenge.adoc}.
+}
 
 === Synthesize
 
 @QandA{
-You can think of @math{f(3)} as a question.
-
-@Q{What question is it asking you to @vocab{evaluate}?}
+@Q{You can think of @math{f(3)} as a question. +
+What question is it asking you to @vocab{evaluate}?}
 @A{What is the value of @math{x + 8} when @math{x} is 3?}
 @Q{What is another way you can ask it?}
 @A{What is @math{3 + 8}?}
 }
+
 == Function Notation (Graphs) @duration{15 minutes}
 
 === Overview
@@ -160,6 +176,8 @@ Students will learn to connect function definitions to Graphs.
 
 For each of these inputs, we have an output. If we graph each input-output pair on the @vocab{coordinate plane}, we can "see" the function as a @vocab{line} on a graph.
 
+@slidebreak
+
 Let's take a look at the graph of @math{f(x) = x - 5}.
 
 @centered-image{images/gr1.png, 350}
@@ -173,7 +191,9 @@ Let's take a look at the graph of @math{f(x) = x - 5}.
 @A{Answers will vary. For example: @math{f(0) = -5} or @math{f(0.5) = -4.5}}
 }
 
-Even if we can't see the _definition_ of a function, we can reason about it just by looking at the graph!
+@slidebreak
+
+Even if we can't see the __definition__ of a function, we can reason about it just by looking at the graph!
 
 Let's look at the graph below, which shows only a few points on the line drawn by a function:
 
@@ -197,17 +217,16 @@ When evaluating an expression for a piecewise function, points on the graph mark
 
 @centered-image{images/pw.png}
 
-@QandA{
-@Q{What is the value of @math{f(0)} in the graph above?}
-@A{3}
+What is the value of @math{f(0)} in the graph above? __3__
 }
 
-}
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{function-notation-graphs.adoc}.
-- @optional If you're ready for a challenge (piecewise functions!), try out @opt-printable-exercise{function-notation-graphs-pw.adoc}.
+Complete @printable-exercise{function-notation-graphs.adoc}.
 }
+
+@opt{If your students are ready for a challenge (piecewise functions!), have them work on @opt-printable-exercise{function-notation-graphs-pw.adoc}.}
+
 
 === Synthesize
 @QandA{
@@ -223,14 +242,15 @@ Students will learn to connect function definitions to input-output Tables.
 
 === Launch
 
+@lesson-instruction{
+Take a look at the table of input-output pairs that satisfy the function @math{f(x) = x - 5}.
 [.sideways-pyret-table]
 |===
 | x | -10 | -5  | 5 | 7 | 13
 | y | -15 | -10 | 0 | 2 | 8
 |===
-
+}
 @QandA{
-Take a look at this table of input-output pairs that satisfy the function @math{f(x) = x - 5}.
 @Q{How could we have determined the value of @math{f(7)}, from looking at the table?}
 @A{We would just look for 7 in the x-column and see that the value beside it is 2.}
 @Q{Looking at the table, what is the value of @math{f(-10)}?}
@@ -262,15 +282,13 @@ The Circles of Evaluation are extended to provide a visual-spatial metaphor for 
 === Launch
 Three of the function cards we just used were for the functions `f`, `g` and `h`:
 
-* `f` multiplied its input by 3
-
-* `g` added six to its input
-
-* `h` subtracted one from its input
+- `f` multiplied its input by 3
+- `g` added six to its input
+- `h` subtracted one from its input
 
 We can compose those functions in any order. If we composed them as `f(g(h(x)))` and evaluated them for `x = 4` what would happen?
 
-We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with _what each function does_:
+We can diagram the function composition using Circles of Evaluation (see first column, below). In the second column, we've replaced the function names in each Circle of Evaluation with __what each function does__:
 
 [cols="^1,^2", options="header", stripes="none"]
 |===
@@ -281,6 +299,20 @@ We can diagram the function composition using Circles of Evaluation (see first c
 | @show{(coe `(* 3 (+ (- x 1) 6)))}
 |===
 
+@slidebreak
+
+@ifslide{
+[cols="^1,^2", options="header", stripes="none"]
+|===
+
+| Function Composition
+| Order of Operations
+| @show{(coe `(f (g (h x))))}
+| @show{(coe `(* 3 (+ (- x 1) 6)))}
+|===
+
+}
+
 The circles show us that in order to evaluate @math{f(g(h(4))))}
 
 - First we would have to evaluate @math{h(4)}, subtracting `1` from `4` to get `3`
@@ -290,10 +322,12 @@ The circles show us that in order to evaluate @math{f(g(h(4))))}
 === Investigate
 
 @lesson-instruction{
-Turn to @printable-exercise{pages/diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
+Turn to @printable-exercise{diagramming-function-composition.adoc} to practice writing, translating and evaluating Circles of Evaluation of composed functions.
 }
 
+@teacher{
 More practice is available on @opt-printable-exercise{function-comp-matching.adoc} and @opt-printable-exercise{diagramming-function-composition-2.adoc}.
+}
 
 === Synthesize
 

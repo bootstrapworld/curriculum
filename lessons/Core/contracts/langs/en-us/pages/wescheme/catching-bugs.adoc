@@ -1,4 +1,11 @@
-= Catching Bugs
+= Catching Bugs when Making Triangles
+
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; background: #efefef; }
+</style>
+++++
+
 
 == Learning about a Function through Error Messages
 
@@ -8,9 +15,9 @@
 
 @fitb{}{}
 
-@n Using what you learned from the error message, experiment until you get a triangle building. What is the contract for `triangle`? 
+@n Using the hint from the error message, experiment until you can make a triangle. What is the contract for `triangle`?
 
-@fitb{}{}
+@fitb{}{@showsoln{(contract 'triangle '(Number String String) "Image")}}
 
 @vspace{1ex}
 
@@ -23,7 +30,7 @@
 
 --
 
-@n The difference between *syntax errors* and *contract errors* is: @fitb{}{}
+@n In your own words, the difference between *syntax errors* and *contract errors* is: @fitb{}{}
 
 @fitb{}{}
 
@@ -31,11 +38,11 @@
 
 == Finding Mistakes with Error Messages
 
-_The following lines of code are all BUGGY! Read the code and the error messages below, and see if you can the mistake WITHOUT typing it into @proglang._
+_The following lines of code are all BUGGY! Read the code and the error messages below. See if you can find the mistake WITHOUT typing it into @proglang._
 
 @n `(triangle 20 "solid")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects 3 arguments, but given 2: @span{.underline}{20} @span{.underline}{solid}
 at: line 1, column 0, in <interactions>
@@ -43,11 +50,10 @@ at: line 1, column 0, in <interactions>
 
 @hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{It's missing a color.}}
 
-@vspace{1ex}
 
 @n `(triangle "solid" "red" 20)`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects a non-negative number as 1st argument, but given: @span{.underline}{solid}; other arguments were: @span{.underline}{red} @span{.underline}{20}
 at: line 1, column 0, in <interactions>
@@ -55,12 +61,10 @@ at: line 1, column 0, in <interactions>
 
 @hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{The number should come first.}}
 
-@vspace{1ex}
-
 
 @n `(triangle 20 40 "solid" "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects 3 arguments, but given 4: @span{.underline}{20} @span{.underline}{40} @span{.underline}{solid} @span{.underline}{red}
 at: line 1, column 0, in <interactions>
@@ -68,12 +72,10 @@ at: line 1, column 0, in <interactions>
 
 @hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{There are too many numbers.}}
 
-@vspace{1ex}
-
 
 @n `(triangle 20 solid "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*solid*}: this variable is not defined
 at: line 1, column 0, in <interactions>
@@ -84,7 +86,7 @@ at: line 1, column 0, in <interactions>
 
 @star `(triangle 20 "striped" "red")`
 
-[.indentedpara]
+[.indentedpara.error]
 --
 @span{.underline}{*triangle*}: expects a style ("solid" / "outline") or an opacity value [0-255]) as 2nd argument, but given: @span{.underline}{"striped"}; other arguments were: @span{.underline}{20} @span{.underline}{"red"}
 at: line 1, column 0, in <interactions>

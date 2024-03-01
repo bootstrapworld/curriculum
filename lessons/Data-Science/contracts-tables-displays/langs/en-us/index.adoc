@@ -14,14 +14,15 @@
 | Lesson Goals
 | Students will be able to...
 
-* sort & count columns of data in the programming environment
-* make pie charts, bar charts, histograms and box plots in Pyret
-* understand how to read contracts for any Pyret function
+- sort & count columns of data in the programming environment
+- make pie charts, bar charts, histograms and box plots in Pyret
+- understand how to read contracts for any Pyret function
 
 | Student-facing Lesson Goals
 |
-* Let's learn some functions for counting and sorting data.
-* Let's learn how to make data displays in Pyret!
+
+- Let's learn some functions for counting and sorting data.
+- Let's learn how to make data displays in Pyret!
 
 | Materials
 |[.materials-links]
@@ -108,8 +109,8 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 @slidebreak
 
 @lesson-instruction{
-* Once you know how to read Contracts, you can easily use all the tools in our programming language. 
-* Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+- Once you know how to read Contracts, you can easily use all the tools in our programming language. 
+- Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
 }
 
 
@@ -143,22 +144,35 @@ Students learn to work with more than one function at once, by way of Circles of
 === Launch
 
 What if we wanted to see the ten youngest animals? 
-* How could the `first-n-rows` and `sort` functions work together? 
-* What order should we use the functions in?
+
+- How could the `first-n-rows` and `sort` functions work together? 
+- What order should we use the functions in?
 
 === Investigate
 
-One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. The rules are simple:
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. 
+
+**The rules for Circles of Evaluation are simple:**
 
 (1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
 
 (2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
-Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
+@indented{
+If we want to see the first ten animals, our diagram would look like this.
+
+@do{
+(define expB '(first-n-rows animals-table 10))
+}
+
+@show{(coe expB)}
+}
+
+@slidebreak
 
 (3) Circles can contain other Circles!
 
-
+@indented{
 If we want to see the ten youngest animals, our diagram would look like this.
 
 @do{
@@ -166,19 +180,11 @@ If we want to see the ten youngest animals, our diagram would look like this.
 }
 
 @show{(coe exp1)}
+}
 
-@slidebreak
+@slidebreak{Investigate2T}
 
-@ifslide{
-@show{(coe exp1)} 
-} 
-
-To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be: 
-
-@show{(code exp1)}
-
-@slidebreak
-
+@indented{
 If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
 
 @do{
@@ -186,10 +192,23 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 }
 
 @show{(coe exp2)}
+}
 
-That would translate to the following code:
+__Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
 
-@show{(code exp2)}
+@slidebreak
+
+**To convert a Circle of Evaluation into code:**
+
+- We start at the outside and work our way in. 
+- After each function we open a pair of parentheses, and then convert each argument inside the Circle. 
+- We close each pair of parentheses as we finish with the arguments in its Circle of Evaluation.
+
+@indented{This diagram would translate to the code that follows. 
+@show{(coe exp1)} 
+
+@show{(code exp1)}
+}
 
 @slidebreak
 
@@ -214,48 +233,28 @@ This activity focuses on what we can learn about @proglang functions from the me
 Let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
 
 @lesson-instruction{
-* Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{editor}.
-* Start by typing `triangle` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
+- Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{animals}.
+- Start by typing `sort` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
 }
 
 @QandA{
 @Q{What do you get back?}
-@A{`<function:triangle>`}
-@A{This means that the computer knows about a function called `triangle`.}
+@A{`<function:sort>`}
+@A{This means that the computer knows about a function called `sort`.}
 }
 
 @slidebreak
 
 @lesson-instruction{
-* We know that all functions will need an open parentheses and at least one input!
-* We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
-* Type @show{(code '(triangle 80))} in the Interactions Area and read the error message.
+- We know that all functions will need an open parentheses and at least one input!
+- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+- Type @show{(code '(sort animals-table))} in the Interactions Area and read the error message.
 }
 
 @QandA{
 @Q{What _hint_ does the error message give us about how to use this function?}
-@A{@image{images/triangle80.png, 500}}
-@A{`triangle` has three elements in its Domain. And if we don't give it those three things we'll get an error instead of the triangle we want.}
-}
-
-@slidebreak
-
-@lesson-instruction{
-* Now we know that `triangle` needs 3 arguments. But what kinds of arguments are they?
-* Try different inputs to make a triangle, and see if you can figure out the Contract!}
-
-@QandA{
-@Q{What is the Contract for `triangle`?}
-@A{@show{(contract `triangle `(Number String String) "Image")}}
-}
-
-@ifslide{
-
-@teacher{The contract is shown on the next slide.}
-
-@slidebreak
-
-@show{(contract `triangle `(Number String String) "Image")}
+@A{@image{images/sort-error.png, 650}}
+@A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
 }
 
 === Investigate
@@ -265,8 +264,8 @@ Mistakes happen, especially if we're just figuring things out! Diagnosing and fi
 }
 
 @lesson-instruction{
-* Turn to the second section of @printable-exercise{pages/catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
-* Then turn to the third section of @printable-exercise{pages/catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
+- Turn to the second section of @printable-exercise{catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
+- Then turn to the third section of @printable-exercise{catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
 }
 
 === Synthesize
@@ -275,12 +274,14 @@ Mistakes happen, especially if we're just figuring things out! Diagnosing and fi
 - What kinds of @vocab{contract errors} did you find?
 
 == Exploring Image Functions @duration{10 minutes}
-
+ 
 === Overview
 
 Making images is a highly motivating context for reading error messages and writing contracts.
 
-@teacher{If you have time and interest in digging deeper we have a @lesson-link{contracts, whole lesson focused on contracts for image-producing functions}, with many scaffolded pages of additional practice.}
+@teacher{
+- If you have time and interest in digging deeper we have a @lesson-link{contracts, whole lesson focused on contracts for image-producing functions}, with many scaffolded pages of additional practice.
+- If you have already completed our @lesson-link{contracts} lesson with your class, skip to the next section of this lesson.}
 
 === Launch
 
@@ -339,7 +340,9 @@ The goal here is for students to become familiar with using @dist-link{Contracts
 
 === Launch
 
-The `count` function summarized the data for a single variable in a new table. But the same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make displays for us!
+The `count` function summarized the data for a single variable in a new table. 
+
+The same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make displays for us!
 
 === Investigate
 
@@ -372,7 +375,9 @@ Turn to @printable-exercise{exploring-displays.adoc}. Let's look at the first fu
 If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-displays-2.adoc}.
 }
 
-Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays.
+@slidebreak
+
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays. Consider this:
 
 @show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
 
@@ -386,10 +391,14 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @opt{If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
 
+@slidebreak
+
 @lesson-instruction{
 - Complete @printable-exercise{coe-displays.adoc}.
-- Displays are often most interesting when compared with other displays. For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly. *Consider what display it might be interesting to compare each of the displays on this page with.* 
-}
+- Then consider what display it might be interesting to compare each of the displays on this page with.
+  * _Displays are often most informative when compared with other displays._ 
+  * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
+} 
 
 @opt{For more practice making tables and displays by composing functions, have students complete @opt-printable-exercise{coe-displays-2.adoc}}
 

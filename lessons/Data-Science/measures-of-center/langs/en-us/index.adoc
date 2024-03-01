@@ -14,13 +14,13 @@
 | Lesson Goals
 | Students will be able to...
 
-* Students explore the concept of center of a distribution, learning how to compute the mean, median and mode(s) of a dataset
-* Students find the mean, median and mode(s) of various columns in the Animals table
+- Students explore the concept of center of a distribution, learning how to compute the mean, median and mode(s) of a dataset
+- Students find the mean, median and mode(s) of various columns in the Animals table
 
 | Student-facing Lesson Goals
 |
 
-* Let's use mean, median, and modes to describe our data.
+- Let's use mean, median, and modes to describe our data.
 
 | Materials
 |[.materials-links]
@@ -33,9 +33,12 @@
 
 | Preparation
 |
-* The kinesthetic activity in this lesson requires a ruler and 4-8 pennies for each group of 3. 
-* There is an optional activity in this that would require you to print an extra datacycle for your students. 
-* If you are using the slide deck, adjust it based on which of these activities you will be doing with your students.
+@preparation{
+- The kinesthetic activity in this lesson requires a ruler and 4-8 pennies for each group of 3. 
+- There is an optional activity in this lesson that would require you to print an extra datacycle for your students. 
+- In each of the first 3 Investigate sections of this lesson, students will calculate a Measure of Center from a list. If you would like to be able to direct students to printed versions with space for them to write, make copies of @opt-printable-exercise{mean-median-modes.adoc}.
+- If you are using the slide deck, adjust it based on which of these activities you will be doing with your students.
+}
 
 |===
 
@@ -46,11 +49,17 @@ Students learn about @vocab{mean} (or "average") as one way (among others!) to s
 
 === Launch
 
-One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.  But there are many different ways to define "center", and each method has strengths and weaknesses. The shape of the data can play a huge role in whether or not one kind of summary is appropriate!
+One of the ways that Data Scientists summarize quantitative data is by talking about its _center_ - literally asking "what is a typical value in this sample?", in the hopes of inferring something about a larger population.  
+
+But there are many different ways to define "center", and each method has strengths and weaknesses. The shape of the data can play a huge role in whether or not one kind of summary is appropriate!
+
+@slidebreak
 
 @lesson-instruction{
 Let's take a moment to consider what values might be typical for the weight of our animals by completing @printable-exercise{typical.adoc}.
 }
+
+@slidebreak 
 
 @center{@image{images/pounds.png}}
 
@@ -76,14 +85,18 @@ The Animal Shelter Bureau used a method of summary, called the @vocab{mean}, or 
 @Q{What do you already know about averages?}
 @A{Sample Answer: To find the @vocab{mean} of a dataset we add all of the values and then divide their sum by the number of values in the dataset.}
 @A{The @vocab{mean} is the number that "balances" all the other numbers in the sample.}
-
-@Q{We are going to learn to let Pyret compute the mean for us, but let's first make sure we understand what we're asking Pyret to do! How would we find the mean weight of five animals who weigh 17, 25, 23, 23 and 22 pounds?}
-@A{First add @math{17 + 25 + 23 + 23 + 22 = 110} and then divide @math{110 \div 5 = 27}}
-
-@optional Complete the Mean section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has 5 problems including the one listed above.
 }
 
-@teacher{If you have time, we recommend completing this kinesthetic activity with your students to give them a deeper understanding!
+@slidebreak
+
+@opt{The Mean section of @opt-printable-exercise{mean-median-modes.adoc} includes a printed version of the upcoming list.}
+
+@QandA{
+@Q{We are going to learn to let Pyret compute the mean for us, but let's first make sure we understand what we're asking Pyret to do! How would we find the mean weight of five animals who weigh 17, 25, 23, 23 and 22 pounds?}
+@A{First add @math{17 + 25 + 23 + 23 + 22 = 110} and then divide @math{110 \div 5 = 27}}
+}
+
+@teacher{If you have time, we recommend completing the kinesthetic activity on Finding the Value of the Balancing Point with your students to give them a deeper understanding!
 }
 
 @strategy{Kinesthetic Activity - Finding the Value of the Balancing Point}{
@@ -99,6 +112,8 @@ __Divide the class into groups of three. Supply each group with a ruler and 4-8 
 4. Suppose you were to place two pennies at 2, and a third penny at 8. Can you _predict_ where the pencil should be placed?
 }
 
+@slidebreak
+
 Pyret has a function that will compute the mean -- or average -- of any quantitative column in a Table. 
 
 @hspace{2em} @show{ (contract "mean" '("Table" "String") "Number" )}
@@ -107,9 +122,11 @@ Let's test it out!
 
 @lesson-instruction{
 - Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run".
-  * _If students don't have the file, they can open a new one from @starter-file{animals}._
+  * _Any student who doesn't have the file can open a new one from @starter-file{animals}._
 - Turn to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the @vocab{mean} weight.
 }
+
+@slidebreak
 
 @QandA{
 @Q{How did your calculation compare to the Animal Shelter Bureau's claim that the average pet weighs nearly 40 pounds?}
@@ -128,7 +145,7 @@ Just because a column contains numbers doesn't mean the data is quantitative. We
 
 === Synthesize
 
-- If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?
+If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?
 
 == Median @duration{15 minutes}
 
@@ -136,22 +153,17 @@ Just because a column contains numbers doesn't mean the data is quantitative. We
 Students learn the algorithm and code for a second measure of center: the @vocab{median} and consider situations where taking the median is more appropriate than the mean. 
 
 === Launch
-You computed the mean of that column to be almost exactly 40 pounds. That IS the average, but if we scan the dataset we'll quickly see that most of the animals weigh less than 40 pounds! In fact, more than half of the animals weigh less than just 15 pounds. Why is the average so high?
+You computed the mean of that column to be almost exactly 40 pounds. That IS the average...
 
-_Kujo and Mr. Peanutbutter!_
+...but if we scan the dataset we'll quickly see that most of the animals weigh less than 40 pounds.  In fact, more than half of the animals weigh less than just 15 pounds. 
 
-The mean is being thrown off by a few extreme data points, called @vocab{outliers} because they fall far outside of the rest of the dataset. 
+Why is the average so high? @slidebreak _Kujo and Mr. Peanutbutter!_
 
-The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
+**The mean is being thrown off by a few extreme data points**, called @vocab{outliers} because they fall far outside of the rest of the dataset. The mean may also be thrown off by the presence of @vocab{skewness}: a lopsided shape due to values trailing off to the left or right.
 
-Another measure of center is the @vocab{median}, or “middle” value of a list. 
-To find it we line up all of the data points -- in order -- and find a point in the center where half of the values are smaller and the other half are larger.
+@slidebreak
 
-As an example, consider this list of ages:
-
-`25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
-
-Here 29 is the @vocab{median}, because it separates the "bottom half” (5 values below it) from the top half” (5 values above it).
+**There is another measure of center we can use** called the @vocab{median}. Instead of averaging the data points, it identifies the “middle” value, which half of the values are smaller than and the other half are larger than.
 
 The algorithm for finding the median of a quantitative column is:
 
@@ -160,29 +172,43 @@ The algorithm for finding the median of a quantitative column is:
 3. Repeat until there is only one number left...
 4. When there are an even number of numbers in the list, as in the example below, there will be two numbers left at the end. Take the _mean_ of those two numbers.
 
-`3, 7, 9, 21`
+@slidebreak
 
-The median of this list is 8, because 8 is the mean of 7 and 9, the two middle numbers. (@math{7 + 9 = 16 and 16 \div 2 = 8})
+Consider this list of ages: `25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 
-@lesson-instruction{
+@indented{
+Here 29 is the @vocab{median}. It's the middle number of the list and it separates the "bottom half” (5 values below it) from the "top half” (5 values above it).
+}
+
+@slidebreak
+
+Now consider this list of ages: `3, 7, 9, 21`
+
+@indented{
+There is no middle number. So the median of this list will be the mean of the two middle numbers, 7 and 9, which is 8.}
+
+@indented{
+@math{7 + 9 = 16 and 16 \div 2 = 8}
+}
+
+@opt{The Median section of @opt-printable-exercise{mean-median-modes.adoc} includes a printed version of the upcoming list.}
+
+@slidebreak
+
+@QandA{
 Find the @vocab{median} value of each of these two lists:
+@Q{The median of 11, 3, 7 ,4, 5 is...} 
+@A{5 because it's the middle value of 3, 4, 5, 7, 11.}
 
-* 11, 3, 7 ,4, 5 
-* 11, 3, 7, 4
+@Q{The median of 11, 3, 7, 4 is...}
+@A{5.5 because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11}
 }
 
-@opt{Turn to the Median section of @opt-printable-exercise{pages/mean-median-modes.adoc}, which has space to complete these problems and three others.}
-
-@teacher{
-- The median of 11, 3, 7 ,4, 5 is 5,
-  * because it's the middle value of 3, 4, 5, 7, 11.
-- The median of 11, 3, 7, 4 is 5.5
-  * because it's the mean of 4 and 7, which are the middle values in the ordered list 3, 4, 7, 11
-}
 
 === Investigate
-@lesson-instruction{
-* Turn back to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the median for the `pounds` column in the Animals Dataset.}
+@lesson-instruction{Turn back to @printable-exercise{summarizing-columns-moc.adoc} and use the provided code to compute and record the median for the `pounds` column in the Animals Dataset.}
+
+@slidebreak{InvestigateC}
 
 @QandA{
 @Q{How do the mean and median compare?}
@@ -195,15 +221,16 @@ Find the @vocab{median} value of each of these two lists:
 @A{The dataset is skewed left or has some very low outliers.}
 }
 
+@slidebreak
+
 @lesson-point{
 The @vocab{mean} is a useful calculation when all of the points are fairly balanced on either side of the middle, but it distorts things for datasets with imbalance and extreme outliers. For skewed datasets, the @vocab{median} is a better summary.}
 
 === Synthesize
-Looking at the shape of the data (via a histogram, for example), helps us determine whether it's probably better to use the mean or median.
 
-Strong left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up above the median.
-
-Mean is generally the best measure of center, because it includes information from every single point. But it's misleading for highly-skewed datasets, so statisticians fall back to the median.
+- Looking at the shape of the data (via a histogram, for example), helps us determine whether it's probably better to use the mean or median.
+- Strong left skewness and/or low outliers can pull the mean down below the median, while right skewness and/or high outliers can pull it up above the median.
+- Mean is generally the best measure of center, because it includes information from every single point. But it's misleading for highly-skewed datasets, so statisticians fall back to the median.
 
 == Modes @duration{10 minutes}
 
@@ -215,15 +242,18 @@ The third measure of center is called the @vocab{modes} of a dataset. The @vocab
 
 Median and Mean always produce one number and many datasets are what we call “unimodal”, having just one mode. But sometimes there are exceptions!
 
-* If two or more values are equally common, there can be more than one mode.
-* If all values are equally common, then there is no mode at all!
+- If two or more values are equally common, there can be more than one mode.
+- If all values are equally common, then there is no mode at all!
+
+@slidebreak
 
 Consider the following three datasets:
 
-  1, 2, 3, 4
-  1, 2, 2, 3, 4
-  1, 1, 2, 3, 4, 4
-
+```
+1, 2, 3, 4
+1, 2, 2, 3, 4
+1, 1, 2, 3, 4, 4
+```
 - The first dataset has _no mode at all!_
 - The mode of the second dataset is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
@@ -231,15 +261,20 @@ Consider the following three datasets:
 @lesson-point{
 Modes are rarely used to summarize quantitative data. It is very common as a summary of _categorical_ data, telling us which category occurs most often.}
 
+@slidebreak
+
+@opt{The Modes section of @opt-printable-exercise{mean-median-modes.adoc} includes a printed version of the upcoming list.}
+
 @lesson-instruction{
 Take a minute to identify the mode(s) for each of the following datasets:
 
-* 11, 3, 7, 4, 5  
-* 5, 7, 11, 11, 7, 7    
-* 2, 3, 5, 4, 3, 7, 4
+- 11, 3, 7, 4, 5  
+- 5, 7, 11, 11, 7, 7    
+- 2, 3, 5, 4, 3, 7, 4
 
-@optional Turn to the Mode(s) section of @opt-printable-exercise{pages/mean-median-modes.adoc} to complete these problems along with two others.
 }
+
+@slidebreak
 
 @ifproglang{pyret}{
 Pyret has a function that will compute the modes of any quantitative column in a Table. 
@@ -260,6 +295,8 @@ The easiest way to determine modes in CODAP is to sort a column. Do this by clic
 - Then complete the remaining questions in the *Summarizing the `Pounds` Column* section.
 }
 
+@slidebreak
+
 @QandA{
 @Q{What did you learn from calculating the modes?}
 @A{The most common animal weights are 0.1 and 6.5! That’s well below our mean and even our median, which is further evidence of outliers or skewness.}
@@ -272,8 +309,8 @@ The easiest way to determine modes in CODAP is to sort a column. Do this by clic
 
 === Synthesize
 
-* What must be true about a dataset for the modes to do a good job of describing what is typical?
-* What can we learn from the modes of a dataset?
+- What must be true about a dataset for the modes to do a good job of describing what is typical?
+- What can we learn from the modes of a dataset?
 
 == The Risk of Summarizing Data with a Single Number @duration{15 minutes}
 
@@ -283,7 +320,11 @@ Students consider the complexity of summarizing with a single number and learn h
 
 === Launch
 
-Summarizing a big dataset means that some information gets lost, so it’s important to pick an appropriate summary. Picking the wrong summary can have serious implications! Here are just a few examples of summary data being used for important things:
+Summarizing a big dataset means that some information gets lost, so it’s important to pick an appropriate summary. Picking the wrong summary can have serious implications! 
+
+@slidebreak
+
+Here are just a few examples of summary data being used for important things:
 
 - Students are sometimes summarized by two numbers -- their GPA and SAT scores -- which can impact where they go to college or how much financial aid they get.
 - Schools are sometimes summarized by a few numbers -- student pass rates and attendance, for example -- which can determine whether or not a school gets shut down.
@@ -291,23 +332,31 @@ Summarizing a big dataset means that some information gets lost, so it’s impor
 - When buying uniforms for a sports team, a coach might look for the most common size that the players wear.
 
 @lesson-instruction{
-What examples can you think of where a number or two are used to summarize something complex?
+What other examples can you think of where a number or two are used to summarize something complex?
 }
 
 === Investigate
 
-You now have three different ways to measure center in a dataset. Every kind of summary has situations in which it does a good job of reporting what’s typical, and others where it doesn’t really do justice to the data. But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! 
+You now have three different ways to measure center in a dataset. Every kind of summary has situations in which it does a good job of reporting what’s typical, and others where it doesn’t really do justice to the data. 
+
+But how do you know which one to use? Depending on the shape of the dataset, a measure could be really useful or totally misleading! 
+
+@slidebreak
 
 @QandA{
-@Q{"In 2003, the average American family earned $43,000 a year -- well above the poverty line! +
-@hspace{1em} Therefore, very few Americans were living in poverty." +
-Do you trust this statement? Why or why not?}
+@Q{"In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore, very few Americans were living in poverty."} 
+@Q{Do you trust this statement? Why or why not?}
 @A{Sample response: The mean is sensitive to outliers, and billionaires like Elon Musk, Jeff Bezos, etc. pull the mean heavily to the right. This makes it appear that the "average" American family earns far more than they actually do. That's why the conclusion "very few Americans were living in poverty" cannot be drawn based on the mean.}
+}
 
+@slidebreak
+
+@QandA{
 @Q{Given the extreme income inequality in the United States, what measure of center would best represent a typical family income?}
 @A{The median}
 }
 
+@slidebreak
 Consider how many policies or laws are informed by statistics like this! Knowing about measures of center helps us see through misleading statements.
 
 
@@ -316,6 +365,8 @@ Consider how many policies or laws are informed by statistics like this! Knowing
 - If the data doesn’t show much skewness or have outliers, @vocab{mean} is the best summary because it incorporates information from every value.
 - If the data has noticeable outliers or skewness, @vocab{median} gives a better summary of center than the mean.
 - If there are very few possible values, such as AP Scores (1–5), @vocab{modes} could be a useful way to summarize the dataset.
+
+@slidebreak
 
 @lesson-instruction{
 * Choose a column from the Animals dataset and complete the second half of @printable-exercise{summarizing-columns-moc.adoc}. As you work, think about what the measures of center tell you about the shape of the dataset.
@@ -352,23 +403,30 @@ Let’s review what we have learned about computing and interpreting three measu
 
 Let’s connect what we know about measures of center to your chosen dataset.
 
-@teacher{Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson.
+@teacher{Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson. If you'd prefer to focus your class on a single dataset, we recommend the @starter-file{food}.
 }
 
 @lesson-instruction{
-- Open your chosen dataset @ifproglang{pyret}{starter file in Pyret.}@ifproglang{codap}{in CODAP.}
-- Choose two quantitative columns that you'd like to analyze.
-- Use @proglang to compute the mean, median and modes of one of them.
-- *It’s time to add to your @starter-file{exploration-project}.*
+Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that use measures of center to help you analyze and understand your chosen dataset.
+}
+
+@teacher{Invite students to discuss their results and consider how to interpret them.}
+
+@slidebreak
+
+@lesson-instruction{
+*It’s time to add to your @starter-file{exploration-project}.*
+
 - Locate the "Measures of Center and Spread" section of your Exploration Project and, in the slide following the example, replace `Column A` with the title of the column you just investigated.
 - Then type in the mean, median and modes that you just identified. Leave the other rows blank. We will come back to them another day.
 - On the next slide, repeat with `Column B` using the second column you're interested in.
 }
 
-@teacher{Invite students to discuss their results and consider how to interpret them.}
+@slidebreak
 
 @lesson-instruction{
-Add your interpretations to the two "Measures of Center and Spread" slides and record any questions that emerged in the "My Questions" section at the end of the slide deck.
+- Add your interpretations to the two "Measures of Center and Spread" slides. 
+- Record any questions that emerged in the "My Questions" section at the end of the slide deck.
 }
 
 === Synthesize

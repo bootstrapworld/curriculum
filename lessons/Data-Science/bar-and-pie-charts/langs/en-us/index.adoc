@@ -142,21 +142,20 @@ Grouping by value works well when lots of different data points can be sorted in
 - When would you want to use one chart instead of another?
 - Which displays do you find it easier to interpret? Why?
 
-@ifnotslide{
 @strategy{Optional Extension}{
 
 
 Sometimes we want to visualize data that is _already summarized:_
 
 [.pyret-table,cols="1,1",options="header"]
-!===
-! Hair Color		! Number of Students
-! "Black"			! 5
-! "Brown"			! 13
-! "Blond"			! 4
-! "Red"				! 2
-! "Pink"			! 1
-!===
+|===
+| Hair Color		| Number of Students
+| "Black"			| 5
+| "Brown"			| 13
+| "Blond"			| 4
+| "Red"				| 2
+| "Pink"			| 1
+|===
 
 In this situation, we want to use the values in the _first_ column for the labels of our pie slices or bars, and the values in the _second_ column for the size. We have contracts for those, too:
 @show{(contract 'pie-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
@@ -165,7 +164,7 @@ In this situation, we want to use the values in the _first_ column for the label
 Open the @opt-starter-file{hair} to try them out!
 
 }
-}
+
 
 == Groups and Subgroups @duration{20 minutes}
 
@@ -200,29 +199,16 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 
 @slidebreak
 
-[cols="^1a,^1a", options="header"]
+[cols="1a,1a", frame="none", stripes="none"]
 |===
-| Stacked Bar Chart
-| Multi Bar Chart
-| @image{images/stacked-bar-species-sex.png, 300}
-| @image{images/multi-bar-species-sex.png, 300}
+^| Stacked Bar Chart
+^| Multi Bar Chart
+^| @image{images/stacked-bar-species-sex.png, 300}
+^| @image{images/multi-bar-species-sex.png, 300}
 | Stacked Bar Charts put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
 | Multi Bar Charts put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
 |===
 
-@slidebreak
-
-@lesson-point{
-Stacked bar charts make it easy to compare _between groups_. Multi bar charts make it easy to compare _within groups_.
-}
-
-@slidebreak
-
-@lesson-instruction{Complete @printable-exercise{data-cycle-fixed.adoc}.}
-
-@opt{Complete @opt-printable-exercise{data-cycle-categorical.adoc}.}
-
-@teacher{Note: This page is a preview of @lesson-link{data-cycle}, which we will discuss in depth in a dedicated lesson and revisit throughout this course.} 
 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
@@ -239,5 +225,5 @@ Infographics are a powerful tool for communicating information, especially when 
 
 == Additional Exercises  
 
-- For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students complete additional @opt-printable-exercise{data-cycle-categorical.adoc, data cycles} using @opt-starter-file{food}.  
+- For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students create additional displays using @opt-starter-file{food}.
 - For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.
