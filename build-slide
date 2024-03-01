@@ -4,7 +4,6 @@ export SEMESTER=fall
 export YEAR=2024-beta
 
 bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
-
 SED=sed
 
 if which gsed|grep -q .; then
@@ -59,6 +58,11 @@ export TOPDIR=$(pwd)
 
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
 parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
+
+# md2googleslides can optionally take a path to a CSS file,
+# which is used for highlighting code. We use our standard
+# CSS file for this
+cssPath=$TOPDIR/distribution/en-us/lib/shared.css
 
 make
 
@@ -123,7 +127,7 @@ for NATLANG in *; do
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
@@ -135,7 +139,7 @@ for NATLANG in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then

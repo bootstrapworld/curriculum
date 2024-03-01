@@ -26,6 +26,8 @@
 
 (define *proglang-sym* (string->symbol *proglang*))
 
+(define *triple-backtick-proglang* (if (string=? *proglang* "wescheme") "scheme" "pyret"))
+
 (define *natlang* (or (getenv "NATLANG") "en-us"))
 
 (define *starter-files*
@@ -55,11 +57,17 @@
 
 (define *definitions* '())
 
+(define *teacher-notes* #f)
+
+(define *slurping-up-teacher-notes* #f)
+
+(define *autonumber-index* 1)
+
 (define (massage-arg arg)
   (eval arg *slides-namespace*))
 
 (define (errmessage-file-context)
-  *in-file*)
+  (format "~a/~a" *lesson* *in-file*))
 
 (define (make-image img width)
   ; (printf "make-image ~s (w ~s) in ~s\n" img width (current-directory))
@@ -194,11 +202,18 @@
     ; (printf "returning ~s\n" ans)
     (string-append "<code>" (list->string ans) "</code>")))
 
-(define (code exp #:parens [parens #f])
-  (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
-    ;what about codap
+(define (cm-code x #:multiline? [multiline? #t] #:parens [parens #f])
+  (let ([pyret? (string=? *proglang* "pyret")])
+    (unless (string? x)
+      (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
     (set! x (regexp-replace* "{zwsp}" x ""))
-    (string-append "<code>" x "</code>")))
+    x))
+
+(define (code x #:multiline? [multiline? #t] #:parens [parens #f])
+  (let ([x (cm-code x #:multiline? multiline? #:parens parens)])
+    (if (regexp-match "\n" x)
+        (string-append "```" *triple-backtick-proglang* "\n" x "\n```")
+        (string-append "``" x "``"))))
 
 (define (iii-dollar-html x)
   (string-append "\n\n$$$ html\n"
@@ -258,7 +273,13 @@
                 (format "~s" exp))
             "</span>\n")]))
 
-(define math code)
+(define (old-code exp #:parens [parens #f])
+  (let ([x ((if (string=? *proglang* "wescheme") wescheme->wescheme wescheme->pyret) exp)])
+    ;what about codap
+    (set! x (regexp-replace* "{zwsp}" x ""))
+    (string-append "<code>" x "</code>")))
+
+(define math old-code)
 
 (define (contract-type x)
   ; (printf "doing contract-type ~s\n" x)
@@ -507,13 +528,6 @@
     (let ([fq-uri (string-append fq-uri-dir "/" local-file)])
       (format "[~a](~a)" link-text fq-uri))))
 
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
-
 (define (external-link args directive)
   (let* ([num-args (length args)]
          [link (first args)]
@@ -544,32 +558,37 @@
 (define read-group
   (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))
 
+(define (ensure-teacher-notes)
+  ; (printf "doing ensure-teacher-notes\n")
+  (set! *slurping-up-teacher-notes* #t)
+  (unless *teacher-notes*
+    ; (printf "setting *teacher-notes*\n")
+    (set! *teacher-notes* (open-output-string))))
+
+(define (exit-teacher-notes)
+  (set! *slurping-up-teacher-notes* #f))
+
+(define (display-teacher-notes o)
+  ; (printf "doing display-teacher-notes ~s\n" o)
+  (when *teacher-notes*
+    (display "\n<!--\n" o)
+    (display (get-output-string *teacher-notes*) o)
+    (display "\n-->\n" o)
+    ; (printf "setting *teacher-notes* to #f\n")
+    (set! *teacher-notes* #f)))
+
 (define (expand-directives i o)
   ; (printf "doing expand-directives ~s ~s\n" i o)
   (let ([table-header-newlines #f]
-        [teacher-notes #f]
         [num-table-columns 0])
-    (define (ensure-teacher-notes)
-      ; (printf "doing ensure-teacher-notes\n")
-      (unless teacher-notes
-        ; (printf "setting teacher-notes\n")
-        (set! teacher-notes (open-output-string))))
-
-    (define (display-teacher-notes o)
-      ; (printf "doing display-teacher-notes ~s\n" o)
-      (when teacher-notes
-        (display "\n<!--\n" o)
-        (display (get-output-string teacher-notes) o)
-        (display "\n-->\n" o)
-        ; (printf "setting *teacher-notes* to #f\n")
-        (set! teacher-notes #f)))
 
     (let loop ()
       (let ([c (read-char i)])
         (cond [(eof-object? c)
                ; (printf "end of file\n")
-               (display-teacher-notes o)
+               ; (display-teacher-notes o)
                ; (printf "final display-teacher-notes done\n")
+               #f
 
                ]
               [else
@@ -592,19 +611,17 @@
                            [(string=? directive "slidebreak")
                             (display-teacher-notes o)
                             (display "\n---\n" o)]
-                           [(string=? directive "image")
+                           [(member directive '("image" "centered-image"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
-                              (cond [*output-answers?*
-                                      (fprintf o "[click here for image](~a)"
-                                               (fully-qualify-image (anonymize-filename img-file)))]
-                                    [(not teacher-notes)
+                              (cond [(not *slurping-up-teacher-notes*)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
                                               o)]
                                     [else
-                                      (printf "WARNING: Using @image inside teacher notes\n")
-                                      (fprintf o "@image{~a}" args)]))]
+                                      (fprintf o "[[click here for image]](~a)"
+                                               (fully-qualify-image (anonymize-filename img-file)))]
+                              ))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -646,24 +663,37 @@
                                 (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
+                           [(string=? directive "n")
+                            (fprintf o "~a\\)" *autonumber-index*)
+                            (set! *autonumber-index* (+ *autonumber-index* 1))]
+                           [(string=? directive "nfrom")
+                            (let* ([arg (read-group i directive)]
+                                   [n (string->number arg)])
+                              (unless n
+                                (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
+                              (set! *autonumber-index* n))]
+                           [(string=? directive "star")
+                            (display "★" o)]
                            [(string=? directive "strategy")
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
-                              (newline teacher-notes)
-                              (display "**" teacher-notes)
-                              (expand-directives:string->port title teacher-notes)
-                              (display "**\n" teacher-notes)
-                              (expand-directives:string->port text teacher-notes)
-                              (newline teacher-notes))]
+                              (newline *teacher-notes*)
+                              (display "**" *teacher-notes*)
+                              (expand-directives:string->port title *teacher-notes*)
+                              (display "**\n" *teacher-notes*)
+                              (expand-directives:string->port text *teacher-notes*)
+                              (newline *teacher-notes*)
+                              (exit-teacher-notes))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
-                              (newline teacher-notes)
-                              (expand-directives:string->port text teacher-notes)
-                              (newline teacher-notes))]
+                              (newline *teacher-notes*)
+                              (expand-directives:string->port text *teacher-notes*)
+                              (newline *teacher-notes*)
+                              (exit-teacher-notes))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)
@@ -700,7 +730,7 @@
                                 (display (massage-arg s) o)))]
                            [(string=? directive "table")
                             (let* ([idx (read-group i directive)]
-                                   [path (string-append ".cached/TABLE" idx ".png")]
+                                   [path (string-append "images/TABLE" idx ".png")]
                                    [markdown (string-append "![table image](" path ")")])
                               (display markdown o))]
                            [(string=? directive "vocab")
@@ -715,9 +745,6 @@
                                   [unit (if (string=? (third match) "ex") 2 3)]
                                   [spaces (string-append* (make-list (* num unit) "&nbsp;"))])
                               (display spaces o))]
-                           [(string=? directive "slideLayout")
-                            (let ([x (read-group i directive)])
-                              (fprintf o "\n---\n{Layout=\"~a\"}\n" x))]
                            [(string=? directive "define")
                             (let* ([id (read-group i directive)]
                                    [prose (read-group i directive #:multiline? #t)])
@@ -733,19 +760,20 @@
                               (set! *single-question?* #f)
                               (ensure-teacher-notes)
                               (set! *output-answers?* #t)
-                              (expand-directives:string->port text teacher-notes)
-                              (set! *output-answers?* #f))]
+                              (expand-directives:string->port text *teacher-notes*)
+                              (set! *output-answers?* #f)
+                              (exit-teacher-notes))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* " o))
+                                (display "* &#8203;" o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive)])
                               (when *output-answers?*
-                                (display "\n  -  " o)
+                                (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
@@ -785,7 +813,8 @@
     (lambda (i)
       (call-with-output-file out-file
         (lambda (o)
-          (expand-directives i o))
+          (expand-directives i o)
+          (display-teacher-notes o))
         #:exists 'replace))))
 
 (let* ([cla (current-command-line-arguments)]

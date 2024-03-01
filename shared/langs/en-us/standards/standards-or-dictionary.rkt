@@ -219,7 +219,7 @@
      "functions-for-character-animation"
      "function-definition-linear"
      "function-composition"
-     "distance-formula"
+     "distance"
      "piecewise-functions-conditionals"
      "defining-values"
      "functions-dr"
@@ -376,7 +376,7 @@
      "problem-decomposition"
      "player-animation"
      "inequalities3-sam"
-     "distance-formula"
+     "distance"
      "piecewise-functions-conditionals"
      "functions-dr"
      )
@@ -564,18 +564,18 @@
      )
     ("8.GM.B"
      "Understand and apply the Pythagorean Theorem."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.B.6"
      "Distinguish between applications of the Pythagorean Theorem and its Converse in authentic contexts."
      )
     ("8.GM.B.7"
      "Apply the Pythagorean Theorem in authentic contexts to determine unknown side lengths in right triangles."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.B.8"
      "Apply the Pythagorean Theorem to find the distance between two points in a coordinate system."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.C"
      "Solve real-world and mathematical problems involving volume of cylinders, cones, and spheres."
@@ -824,7 +824,7 @@
      )
     ("HS.GM.D.14"
      "Use the coordinate plane to determine parallel and perpendicular relationships, and the distance between points."
-     "distance-formula"
+     "distance"
      )
     ; High School Standards Data Reasoning
     ("HS.DR.A"	

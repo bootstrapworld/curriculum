@@ -45,47 +45,64 @@ Students learn about the _Data Cycle_, which is a scaffold to support asking the
 *_The Data Cycle is from the @link{http://introdatascience.org/, Mobilizing IDS project} and @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, GAISE}._
 
 === Launch
-@lesson-instruction{
-- Open your saved Animals Starter File, or @starter-file{animals, make a new copy}.
-- Working in pairs, turn to @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table}, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
-- With your partner, determine whether more animals are fixed or unfixed.}
-
-@slidebreak
 
 Data Science is all about _asking questions of data_. Sometimes the answer is easy to compute. Sometimes the answer to a question is _already in the dataset_ - no computation needed.  And sometimes the answer just sparks more questions!
 
 Data Scientists ask a ton of questions, and each question adds a chapter to their **data story**. Even if a question turns out to be a dead-end, it's valuable to share what the question was and what work you did to answer it!
 
-@slidebreak
-
 @right{@image{images/data-cycle.png, 400}}
 The Data Cycle is a _roadmap_, which helps guide us in the process of data analysis.
 
-1) We **Ask Questions** after reviewing and closely observing the data. These questions can come from initial wonderings, or as a result of previous data cycle.
+1) We **Ask Questions** after observing the data.
 
-2) We **Consider Data** by determining which parts of the data set we need to answer our question. Sometimes we don't have the data we need, so we conduct a survey, observe and record data, or find another existing dataset.
+2) We **Consider Data** by thinking about which parts of the dataset we need to answer our question. Sometimes we don't have what we need, so we find our data elsewhere.
 
 3) We **Analyze the Data** by completing calculations, creating data displays, creating new tables, or filtering existing tables. The result of this step are calculations, patterns, and relationships.
 
-4) We **Interpret the Data** by answering our original question and summarizing the process we took and the results we found. Sometimes the data cycle ends here, but often these interpretations lead to new questions... and the cycle begins again.
+4) We **Interpret the Data** by answering our original question and summarizing the process we took and the results of our analysis. Sometimes the data cycle ends here, but often these interpretations lead to new questions... and the cycle begins again.
 
 === Investigate
-**Are more animals fixed or unfixed?** was a pretty specific question, and it was straightforward to answer. But the answers to even simple questions can lead to more interesting questions down the road!
 
-@slidebreak
+Let's take the Data Cycle for a spin! To get you starterd, this time we're going to give you the question.
+
+@center{_*Are more animals fixed or unfixed?*_}
+
+**Ask Questions:**
+
+(In the future, you'll be coming up with the questions yourselves!)
+
+**Consider Data:**
+
+@lesson-instruction{
+- Turn to @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table}, or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
+- Do we need to look at all the rows, or just some of them?
+- Do we need all the columns to answer this question? If not, which ones?
+}
+
+**Analyze the Data:**
+
+@lesson-instruction{
+- Working in pairs, determine whether more animals are fixed or unfixed.
+}
+
+**Interpret the Data:**
 
 @QandA{
+Even the answers to _simple_ questions can lead to more interesting questions down the road!
 @Q{What other questions might come from counting the ratio of fixed to unfixed animals?}
 @A{Sample responses: Is there a higher percentage of fixed dogs or fixed cats? At what age do animals get fixed? Do fixed animals get adopted more quickly than unfixed animals?}
 }
 
 === Synthesize
 
+_"We wanted to know if more animals at the shelter were fixed on unfixed. To answer this, we counted how many were fixed and how many were unfixed. We found that more animals were fixed (18) than unfixed (14). This made us wonder if that proportion was the same for all species, or all ages - or whether fixed animals got adopted faster than unfixed ones."_
+
 This is a short example of a *Data Story* - a description of how each step in the Data Cycle was used to go from a question to an answer, and then to the next question. 
+
 
 When analyzing a real dataset, Data Scientists might explore lots of questions, resulting in many different Data Stories to tell.
 
-Each chapter in the Data Story is valuable, and the Data Cycle represents each chapter you plan to add.
+Each chapter in the Data Story is valuable, and each turn of the Data Cycle is another chapter to add to your story!
 
 == Ask Questions @duration{15 minutes}
 
@@ -103,7 +120,7 @@ Most questions can be broken down into one of four categories:
 
 - **Arithmetic questions** - Answered by doing calculations (comparing, averaging, totaling, etc.) with values from one single column. Examples of arithmetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
 
-- **Statistical questions** These often involve multiple steps to answer, and the answer isn't black and white. When we compare two statistics we are actually comparing two data sets. If we ask "are dogs heavier than cats?", we know that not every dog is heavier than every cat! We just want to know if it is generally true or generally false!
+- **Statistical questions** These kinds of questions are often best asked with "in general" attached, because the answer isn't black and white. If we ask "are dogs heavier than cats?", we know that not every dog is heavier than every cat! We just want to know if it is _generally true_ or _generally false_!
 
 - **Questions we can't answer** Questions we can’t answer: We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won’t help us answer that question, so as Data Scientists we might need to do some research beyond the data. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 
@@ -211,14 +228,22 @@ Note that @opt-printable-exercise{2-blank-data-cycles.adoc, blank Data Cycle wor
 === Investigate
 Let's get some practice going from questions to code, and making data displays in the process!
 
+@ifproglang{pyret}{
+
 @lesson-instruction{
-Turn to @printable-exercise{analyzing-with-displays.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, try to make the display in @proglang.
+Turn to @printable-exercise{analyzing-with-count.adoc}, and see if you can fill in the first 3 steps of the Data Cycle for a set of predefined questions. When you're finished, test your results in @proglang.
 }
 
 @slidebreak
 
 @QandA{
-@Q{What did you learn from the displays you made?}
+What did you learn from the displays you made?
+}
+}
+
+@lesson-instruction{
+- For more practice, complete @printable-exercise{data-cycle-fixed.adoc}.
+- @opt{Complete @opt-printable-exercise{data-cycle-categorical.adoc}.}
 }
 
 === Synthesize
