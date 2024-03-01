@@ -34,7 +34,7 @@ local course_string = 'Core'
 
 if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
   course_string = 'DS'
-elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Early-Math' then
+elseif lesson_superdir == 'Algebra' then
   course_string = 'A'
 end
 
