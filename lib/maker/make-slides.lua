@@ -189,6 +189,12 @@ local function get_slides(lsn_plan_adoc_file)
           ignore_spaces(i)
           local arg2 = read_group(i, directive)
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
+        elseif directive == 'show' then
+          local arg = read_group(i, directive, true, true)
+          if arg:match('%(coe') then
+            curr_slide.numimages = curr_slide.numimages + 1
+          end
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
         else
           if directive == 'image' then
             if not inside_table_p then
