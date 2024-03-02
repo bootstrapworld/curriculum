@@ -119,9 +119,10 @@ local function get_slides(lsn_plan_adoc_file)
   local inside_lesson_instruction = false
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
-  local curr_slide = newslide()
+  local curr_slide
 
   local function scan_directives (i, nested)
+    if not nested then curr_slide = newslide() end
     while true do
       local c = i:read(1)
       if not c then
@@ -188,6 +189,12 @@ local function get_slides(lsn_plan_adoc_file)
           ignore_spaces(i)
           local arg2 = read_group(i, directive)
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
+        elseif directive == 'show' then
+          local arg = read_group(i, directive, true, true)
+          if arg:match('%(coe') then
+            curr_slide.numimages = curr_slide.numimages + 1
+          end
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
         else
           if directive == 'image' then
             if not inside_table_p then
