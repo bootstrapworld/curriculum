@@ -9,9 +9,11 @@ dofile(make_dir .. 'readers.lua')
 
 local file_being_read = 'noneyet'
 
-local read_group = make_read_group(identity, function()
-  return file_being_read .. ' in ' .. os.getenv('PWD')
-end)
+local function errmsg_file_context()
+  return os.getenv('PWD') .. '/' .. file_being_read
+end
+
+local read_group = make_read_group(identity, errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
@@ -140,11 +142,21 @@ local function get_slides(lsn_plan_adoc_file)
         beginning_of_line_p = false
         local directive = read_word(i)
         if inside_table_p then
-          if directive == 'preparation' then
+          if directive == 'preparation' and #slides == 0 then
             curr_slide.preparation = read_group(i, directive, false, true)
           end
-        elseif directive == 'scrub' then
+        elseif directive == 'clear' then
+          --noop
+        elseif directive == 'scrub' or
+          directive == 'pathway-only' or
+          directive == 'vspace' then
+          --
           read_group(i, directive)
+        elseif directive == 'include' then
+          if #slides > 1 then
+            local arg = read_group(i, directive)
+            print('WARNING: Found @include{' .. arg .. '} outside @ifnotslide in ' .. errmsg_file_context())
+          end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
           local _, n = txt:gsub('|===', 'z')
@@ -158,6 +170,9 @@ local function get_slides(lsn_plan_adoc_file)
             local txt = read_group(i, directive, false, true)
             scan_directives(io.open_buffered(false, txt), true)
           end
+        elseif directive == 'ifslide' then
+          local txt = read_group(i, directive, false, true)
+          scan_directives(io.open_buffered(false, txt), true)
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
@@ -274,17 +289,15 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
             curr_slide.text = curr_slide.text .. '}\n'
           end
+        elseif inside_table_p then
+          --noop
         else
-          if not inside_table_p then
-            curr_slide.text = curr_slide.text .. c
-          end
-        end
-      elseif inside_css_p then
-        --noop
-      else
-        if not inside_table_p then
           curr_slide.text = curr_slide.text .. c
         end
+      elseif inside_css_p or inside_table_p then
+        --noop
+      else
+          curr_slide.text = curr_slide.text .. c
       end
     end
     i:close()
