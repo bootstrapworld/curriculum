@@ -66,7 +66,17 @@
                             (cond [(eof-object? c)
                                    (printf "Read so far: ~s\n"
                                            (let ([s (list->string (reverse r))])
-                                             (if multiline? s (string-trim s))))
+                                             (unless multiline?
+                                               (set! s (string-trim s)))
+                                             (let ([n (string-length s)]
+                                                   [max-length 120])
+                                               (when (> n max-length)
+                                                 (let ([m (quotient (- max-length 5) 2)])
+                                                   (set! s
+                                                     (format "~a ... ~a"
+                                                             (substring s 0 m)
+                                                             (substring s (- n m)))))))
+                                             s))
                                    (error 'ERROR "read-group: Runaway directive ~a" directive)]
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)
