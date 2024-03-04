@@ -24,7 +24,7 @@ Using the @starter-file{expanded-animals}, let's make a *bar-chart* to see what 
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "bar-chart(more-animals, \"fixed\")"
+  #:expression (if (string=? *proglang* "pyret") '(bar-chart more-animals "fixed") "Set x-axis to fixed. Select Fuse Dots into Bars from the Measure menu.")
   #:show-expression? #f
   #:finding "The number of unfixed animals at the shelter (213) is slightly higher than the number of fixed animals (194)."
   #:show-finding? #f

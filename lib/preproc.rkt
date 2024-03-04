@@ -2084,7 +2084,7 @@
   ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
 
   (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
+                               (printf "~a in ~a\n\n"
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* (build-path containing-directory in-file))
     ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
