@@ -121,6 +121,7 @@ local function get_slides(lsn_plan_adoc_file)
   local inside_lesson_instruction = false
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
+  local coeIdx = 0
   local curr_slide
 
   local function scan_directives (i, nested)
@@ -162,6 +163,8 @@ local function get_slides(lsn_plan_adoc_file)
           local _, n = txt:gsub('|===', 'z')
           n = math.floor(n / 2)
           tableIdx = tableIdx + n
+          _, n = txt:gsub('@show{%(coe', 'z')
+          coeIdx = coeIdx + n
         elseif directive == 'ifproglang' then
           local pls = read_group(i, directive)
           if not pls:match(proglang) then
@@ -207,9 +210,12 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'show' then
           local arg = read_group(i, directive, true, true)
           if arg:match('%(coe') then
-            curr_slide.numimages = curr_slide.numimages + 1
+            curr_slide.numimages = curr_slide.numimages + 1 --still needed?
+            coeIdx = coeIdx + 1
+            curr_slide.text = curr_slide.text .. '![coe' .. coeIdx .. '](images/AUTOGEN-COE' .. coeIdx .. '.png)'
+          else
+            curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
           end
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
         else
           if directive == 'image' then
             if not inside_table_p then
@@ -286,8 +292,7 @@ local function get_slides(lsn_plan_adoc_file)
           beginning_of_line_p = true
           if inside_table_p then
             tableIdx = tableIdx + 1
-            curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
-            curr_slide.text = curr_slide.text .. '}\n'
+            curr_slide.text = curr_slide.text .. '![table' .. tableIdx .. '](images/AUTOGEN-TABLE' .. tableIdx .. '.png)'
           end
         elseif inside_table_p then
           --noop

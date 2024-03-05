@@ -720,11 +720,6 @@
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
-                           [(string=? directive "table")
-                            (let* ([idx (read-group i directive)]
-                                   [path (string-append "images/TABLE" idx ".png")]
-                                   [markdown (string-append "![table image](" path ")")])
-                              (display markdown o))]
                            [(string=? directive "vocab")
                             (let ([arg (read-group i directive)])
                               (display "<b><i>" o)
