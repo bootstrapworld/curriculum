@@ -200,8 +200,10 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.style = read_group(i, directive)
           end
         elseif directive == 'A' then
-          local arg = read_group(i, directive)
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+          local arg = read_group(i, directive, false, true)
+          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          scan_directives(io.open_buffered(false, arg), true)
+          curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
@@ -212,7 +214,7 @@ local function get_slides(lsn_plan_adoc_file)
           if arg:match('%(coe') then
             curr_slide.numimages = curr_slide.numimages + 1 --still needed?
             coeIdx = coeIdx + 1
-            curr_slide.text = curr_slide.text .. '![coe' .. coeIdx .. '](images/AUTOGEN-COE' .. coeIdx .. '.png)'
+            curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
           else
             curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
           end
@@ -292,7 +294,7 @@ local function get_slides(lsn_plan_adoc_file)
           beginning_of_line_p = true
           if inside_table_p then
             tableIdx = tableIdx + 1
-            curr_slide.text = curr_slide.text .. '![table' .. tableIdx .. '](images/AUTOGEN-TABLE' .. tableIdx .. '.png)'
+            curr_slide.text = curr_slide.text .. '@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}'
           end
         elseif inside_table_p then
           --noop
