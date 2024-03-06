@@ -35,6 +35,12 @@
                      [else (loop (cons (read-char i) r))])))]
           [else (string c)])))
 
+(define (slim-runaway-text s [max-length 120])
+  (let ([n (string-length s)])
+    (cond [(<= n max-length) s]
+          [else (let ([m (quotient (- max-length 5) 2)])
+                  (format "~a ··· ~a" (substring s 0 m) (substring s (- n m))))])))
+
 (define (quote-rev-string s)
   (let ([n (string-length s)])
     (let loop ([i 0] [r (list #\")])
@@ -66,7 +72,9 @@
                             (cond [(eof-object? c)
                                    (printf "Read so far: ~s\n"
                                            (let ([s (list->string (reverse r))])
-                                             (if multiline? s (string-trim s))))
+                                             (unless multiline?
+                                               (set! s (string-trim s)))
+                                             (slim-runaway-text s)))
                                    (error 'ERROR "read-group: Runaway directive ~a" directive)]
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)

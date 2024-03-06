@@ -28,7 +28,7 @@ The first question is provided. You'll need to come up with the second question 
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression '(histogram animals-table "name" "pounds" 20)
+  #:expression (if (string=? *proglang* "pyret") '(histogram animals-table "name" "pounds" 20) "Histogram. Set y-axis to pounds. Select Group into Bins from Configuration menu. Fuse dots into bars, enter bin width")
   #:show-expression? #f
   #:finding ""
   #:show-finding? #f

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+errfile=$TOPDIR/distribution/.make.error.log
+
+rm -f $errfile
+
 $PROGDIR/adocables-preproc.rkt $ADOCABLES_INPUT
 
 test -s "$ADOC_INPUT" || exit 0
@@ -7,10 +11,6 @@ test -s "$ADOC_INPUT" || exit 0
 # echo calling asciidoctor in dir $(pwd)
 
 cssfile=$TOPDIR/distribution/$NATLANG/lib/curriculum.css
-
-errfile=$TOPDIR/distribution/.make.error.log
-
-rm -f $errfile
 
 if git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
   export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
