@@ -124,7 +124,7 @@ local function get_slides(lsn_plan_adoc_file)
   local coeIdx = 0
   local curr_slide
 
-  local function scan_directives (i, nested)
+  local function scan_directives (i, nested, dont_count_image_p)
     if not nested then curr_slide = newslide() end
     while true do
       local c = i:read(1)
@@ -171,11 +171,11 @@ local function get_slides(lsn_plan_adoc_file)
             read_group(i, directive)
           else
             local txt = read_group(i, directive, false, true)
-            scan_directives(io.open_buffered(false, txt), true)
+            scan_directives(io.open_buffered(false, txt), 'nested')
           end
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, false, true)
-          scan_directives(io.open_buffered(false, txt), true)
+          scan_directives(io.open_buffered(false, txt), 'true')
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
@@ -202,7 +202,7 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'A' then
           local arg = read_group(i, directive, false, true)
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
-          scan_directives(io.open_buffered(false, arg), true)
+          scan_directives(io.open_buffered(false, arg), 'nested', 'dont count images')
           curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
@@ -212,7 +212,9 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'show' then
           local arg = read_group(i, directive, true, true)
           if arg:match('%(coe') then
-            curr_slide.numimages = curr_slide.numimages + 1 --still needed?
+            if not dont_count_image_p then
+              curr_slide.numimages = curr_slide.numimages + 1
+            end
             coeIdx = coeIdx + 1
             curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
           else
@@ -220,7 +222,7 @@ local function get_slides(lsn_plan_adoc_file)
           end
         else
           if directive == 'image' then
-            if not inside_table_p then
+            if not inside_table_p and not dont_count_image_p then
               curr_slide.numimages = curr_slide.numimages + 1
             end
           elseif directive == 'center' then
@@ -387,6 +389,7 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
           l1 = l1:gsub('{two%-colons}', '::')
+          l1 = l1:gsub('{empty}', '')
           o:write(l1, '\n')
         end
       end
