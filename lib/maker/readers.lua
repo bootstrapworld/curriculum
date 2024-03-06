@@ -250,3 +250,11 @@ function read_commaed_group(ip, directive, read_group)
   end
   return r
 end
+
+function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  if not x then return false end
+  return x
+end

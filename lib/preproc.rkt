@@ -1664,6 +1664,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
                             (link-to-notes-pages o)]
+                           [(string=? directive "lesson-info")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-predoc: @lesson-info valid only in teacher resources"))
+                            (display (enclose-div ".lesson-info-table" "") o)
+                            (newline)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*

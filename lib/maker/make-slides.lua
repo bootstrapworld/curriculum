@@ -18,14 +18,6 @@ local lplan_file = 'index.adoc'
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
-local function first_line(f)
-  local i = io.open(f)
-  if not i then return false end
-  local x = i:read()
-  if not x then return false end
-  return x
-end
-
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
