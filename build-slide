@@ -153,10 +153,13 @@ for NATLANG in *; do
         fi
       fi
       if test -f "$idfile"; then
-        cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a target="_blank" href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+        id=$(cat "$idfile"|$SED -e 1q)
+        slideurl="https:\/\/docs.google.com\/presentation\/d\/$id"
+        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > slides-$PROGLANG.html
+        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> slides-$PROGLANG.html
         timestamp=$(date +%c)
-        $SED -i -e 's/$/">Google Slides generated INSERTTIMESTAMP<\/a>/' slides-$PROGLANG.html
         $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
+        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" slides-$PROGLANG.html
       fi
     else
       echo WARNING: $slidesmd failed preprocessing
