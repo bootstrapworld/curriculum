@@ -622,6 +622,11 @@
                                       (fprintf o "[[click here for image]](~a)"
                                                (fully-qualify-image (anonymize-filename img-file)))]
                               ))]
+                           [(string=? directive "autogen-image")
+                            (let* ([text (read-group i directive)] [img (read-group i directive)])
+                              (cond [(not *slurping-up-teacher-notes*)
+                                     (fprintf o "![~a](~a)" text img)]
+                                    [else (fprintf o "[[click here for image]](~a)" img)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
