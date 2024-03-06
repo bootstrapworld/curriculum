@@ -858,7 +858,7 @@ const Alg2 = {
    "alg2-states": {
     "title": "State Demographics Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+      "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
     }
   },
   "alg2-exploring-quadratics-desmos": {
