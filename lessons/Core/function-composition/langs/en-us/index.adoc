@@ -1,5 +1,10 @@
 = Function Composition
-
+++++
+<style>
+table table p { margin: 0;  }
+table table td { padding: 0; }
+</style>
+++++
 @description{Students learn to combine image transformation functions using Circles of Evaluation.}
 
 @lesson-prereqs{order-of-operations, contracts}
@@ -70,7 +75,7 @@ We can also _compose_ functions, meaning that the output of one is immediately p
 @vocab{Function composition} is the act of connecting two or more functions so that they work together to produce an outcome. The output ("range") of one function is used as the input ("domain") of the next.
 }
 
-For example, let's say we are going to compose two different functions: `add1` and `double`. If `add 1` takes in 4, we get `5`. After we pass `5` into the _next_ function (`double`), we get an output of `10`.
+For example, let's say we are going to compose two different functions: `add1` and `double`. Passing `4` into the `add1` function produces `5`. Passing that output into `double` produces an output of `10`:
 
 [.embedded, cols="<.^3,^.^1,<.^3,^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -129,31 +134,31 @@ To make the activity more challenging, ask students to find the shortest path fr
 
 There are two ways of thinking about the activity you just completed.
 
-- *Option 1*: Each function card is a stop along the way to a final outcome. The journey from the starting number to the ending number is a process that we've broken down into pieces.
+- *Option 1*: Each function produces a result. *The result is saved,* and then used as input for the next function.
 
-- *Option 2*: The function cards are strung together, forming a single unit. All of the work is done all at once.
+- *Option 2*: Each function passes its result directly into the next function.
 
-@clear
-
-[cols="3a,4a,^.^3a,3a", frame="none", grid="none"]
+@indented{
+[cols="^.^6a,1,^.^3a", frame="none", grid="none", stripes="none"]
 |===
+| *Three Steps*
+| *...or...*
+| *Three Circles*
 
 |
-
-| [cols="1a,2a,1a", stripes="none"]
+[cols="2a,3a", grid="none", frame="none", stripes="none"]
 !===
-! step1	! 4			! 4
-! step2	! `add1` 	! 5
-! step3	! `double` 	! 10
-! step4	! `half` 	! 5
+!`step1 = add1(4)`      ! (Start with `4`, and now we have `5`)
+!`step2 = double(step1)`! (now we have `10`)
+!`step3 - half(step2)`  ! (now we're back to `5`)
 !===
+|
 |
 @show{(coe '(half (double (add1 4))))}
 
-@math{h(d(a(1)))}
-
-|
+_half(double(add1(4)))_
 |===
+}
 
 @QandA{
 @Q{Which representation (above) corresponds with Option 1? How do you know?}
@@ -174,6 +179,8 @@ Some students may notice that the function composition on the right (above) is r
 If two groups come up with different compositions that achieve the same end result, have them share their ideas!}
 
 Did it matter what order you put the cards in? Why or why not?
+
+Remember that we can think of this using a list of steps where the result is saved each time, _or_ as a nested series of function applications. Which do you like best? Why or why not?
 
 == Composing Functions in Code @duration{20 minutes}
 
