@@ -122,7 +122,7 @@ What if, starting with `4`, we composed `add1`,`double` _and_ `half`?
 === Investigate
 
 @lesson-instruction{
-- For each pair of numbers on the board, figure out which functions to compose to get from the starting number to ending number.
+- For each pair of numbers on the board, figure out which functions to compose to get from the starting number to the ending number.
 - You will need to use some functions more than once, and that's okay!
 }
 
@@ -134,34 +134,15 @@ To make the activity more challenging, ask students to find the shortest path fr
 
 There are two ways of thinking about the activity you just completed.
 
-- *Option 1*: Each function produces a result. *The result is saved,* and then used as input for the next function.
+- *Option 1*: Each function produces a result. *The result is saved,* and then used as the input for the next function.
 
 - *Option 2*: Each function passes its result directly into the next function.
 
-@indented{
-[cols="^.^6a,1,^.^3a", frame="none", grid="none", stripes="none"]
-|===
-| *Three Steps*
-| *...or...*
-| *Three Circles*
-
-|
-[cols="2a,3a", grid="none", frame="none", stripes="none"]
-!===
-!`step1 = add1(4)`      ! (Start with `4`, and now we have `5`)
-!`step2 = double(step1)`! (now we have `10`)
-!`step3 - half(step2)`  ! (now we're back to `5`)
-!===
-|
-|
-@show{(coe '(half (double (add1 4))))}
-
-_half(double(add1(4)))_
-|===
-}
-
 @QandA{
-@Q{Which representation (above) corresponds with Option 1? How do you know?}
+@Q{Which representation (below) corresponds with Option 1? How do you know?}
+@A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
+
+@Q{Which representation (below) corresponds with Option 1? How do you know?}
 @A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
 @Q{Which representation corresponds with Option 2?}
 @A{The Circle of Evaluation. All of the nested circles form a single unit.}
@@ -169,8 +150,30 @@ _half(double(add1(4)))_
 
 @clear
 
+
+[cols=".^7a,^.<3a",  stripes="none"]
+|===
+| @hspace{10em} *Three Steps*
+| *Three Circles*
+
+|
+[cols="<2a,<3a", grid="none", frame="none", stripes="none"]
+!===
+!`step1 = add1(4)`      ! (Start with `4`, and now we have `5`)
+!`step2 = double(step1)`! (now we have `10`)
+!`step3 = half(step2)`  ! (now we're back to `5`)
+!===
+|
+@show{(coe '(half (double (add1 4))))}
+
+`half(double(add1(4)))`
+|===
+
+
+@clear
+
 @teacher{
-Some students may notice that the function composition on the right (above) is represented by both a Circle of Evaluation _and_ @vocab{function notation}. If your students are confident with function notation, you can make the connection here. Otherwise, students have the opportunity to think deeply about function notation in @lesson-link{function-notation, "this lesson"}.
+Some students may notice that both representations use @vocab{function notation}. If your students are confident with function notation, you can make the connection here. Otherwise, students have the opportunity to think deeply about function notation in @lesson-link{function-notation, "this lesson"}.
 }
 
 === Synthesize
@@ -180,7 +183,7 @@ If two groups come up with different compositions that achieve the same end resu
 
 Did it matter what order you put the cards in? Why or why not?
 
-Remember that we can think of this using a list of steps where the result is saved each time, _or_ as a nested series of function applications. Which do you like best? Why or why not?
+Remember that we can think of this activity as a list of steps where the result is saved each time, _or_ as a nested series of function applications. Which do you like best? Why?
 
 == Composing Functions in Code @duration{20 minutes}
 
