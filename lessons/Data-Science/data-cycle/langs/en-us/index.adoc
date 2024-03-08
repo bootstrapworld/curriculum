@@ -52,6 +52,24 @@ Data Science is all about __asking questions of data__.
 - Sometimes the answer to a question is __already in the dataset__ - no computation needed.  
 - And sometimes the answer just sparks more questions!
 
+@lesson-instruction{
+- With your partner, refer to any of the following:
+  * @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} 
+  * @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, Animals Spreadsheet}
+  * @starter-file{animals}
+- to answer the following questions:
+  * How much does Snuggles weigh?
+  * Are more animals male or female?
+}
+
+@QandA{
+@Q{What strategies did you use?}
+@A{Answers will vary! Sample followup questions for responses are provided.}
+@A{"We looked at the table and counted" - **What did you look at? What did you count?**}
+@ifproglang{pyret}{@A{"We used the starter file and the `count` function" - **What inputs did you give the count function? And how did you know which inputs to use?**}}
+@A{"We made a bar@ifproglang{pyret}{ or pie chart}" - **How did you know to use that display? How did you know what rows and columns to use?**}
+}
+
 Data Scientists ask a ton of questions, and each question adds a chapter to their **data story**. Even if a question turns out to be a dead-end, it's valuable to share what the question was and what work you did to answer it!
 
 @ifnotslide{@right{@image{images/data-cycle.png, 400}}}
@@ -72,24 +90,21 @@ The Data Cycle is a __roadmap__, which helps guide us in the process of data ana
 
 Let's take the Data Cycle for a spin! 
 
-@teacher{
-In the future, students will be coming up with their own questions. But, for demonstration purposes, this round we've identified a question for them.
-}
-
 (1) **Ask Questions:**
 __First we have to think of a good question.__
 
-@lesson-instruction{Let's investigate: __**Are more animals fixed or unfixed?**__
-
+@lesson-instruction{
+- In the future, you will be coming up with your own questions. But, for demonstration purposes, this round let's investigate: __**Are more animals fixed or unfixed?**__
+- Turn to your partner and discuss what ideas you have about how you might answer this question.
 }
 
 @slidebreak
 
 (2) **Consider Data:**
-__To answer our question we'll need to decide what part of our dataset to focus on!__
+__To get the computer to answer our question, we'll need to decide what part of our dataset to focus on!__
 
 @lesson-instruction{
-- Turn to the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
+- With your partner turn to the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} or open @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit?usp=sharing, the Animals Spreadsheet}.
 }
 @QandA{
 @Q{Do we need to look at all the rows to answer this question, or just some of them?}
@@ -102,15 +117,20 @@ __To answer our question we'll need to decide what part of our dataset to focus 
 @slidebreak
 
 (3) **Analyze the Data:**
-__Once we know where to look, we can write code to build a display or perform other analysis.__
+@ifproglang{pyret}{
+__Once we know where to look, we can write code to build a table or display.__
 
-@ifproglang{pyret}{We could use `bar-chart` __or__ `pie-chart` to do this analysis. Pie chart is the best choice, because we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed").} 
+We could use `bar-chart` __or__ `pie-chart` to do this analysis. 
+@indented{__Pie chart is the best choice, because we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed").__ I wanted a picture for what I like dealing with him and I have to close the screen but for some reason I can't figure out how to sit there and it came up as a background and said I was like oh it just makes me smile so then I'll be better on Simons well just keep it yes we the}
 
-@ifproglang{codap}{A bar chart will allow us to see the actual count ("20 fixed vs. 10 fixed") of animals in each category.}
+Once we know that we want a `pie-chart`, and that we're using it to look at the `fixed` column, the next step is to read the @dist-link{Contracts.shtml, Contract} and write the code!
+} 
 
-@ifproglang{pyret}{Once we know that we want a `pie-chart`, and that we're using it to look at the `fixed` column, the next step is to read the Contract and write the code!}
+@ifproglang{codap}{
+A bar chart will allow us to see the actual count ("20 fixed vs. 10 fixed") of animals in each category.
 
-@ifproglang{codap}{Once we've decided what to make and we know which rows and columns we're plotting, the next step is to choose the appropriate configuration.}
+Once we've decided what to make and we know which rows and columns we're plotting, the next step is to choose the appropriate configuration.
+}
 
 @lesson-instruction{
 - Open the @starter-file{animals}@ifproglang{pyret}{ and click "Run"}.
@@ -123,9 +143,9 @@ __Once we know where to look, we can write code to build a display or perform ot
 __Now that we've built our display, we can think about what we can learn from it and what else we might want to know. Even the answers to "simple" questions can lead to more interesting questions down the road!__
 
 @QandA{
-@Q{What did your display look like?}
-@ifproglang{pyret}{@A{Students will see the pie chart below, with a wedge for true and a wedge for false, rather than a wedge for fixed and a wedge for unfixed. They may need help thinking through what the Booleans mean. @image{images/fixed.png}}
-} 
+@Q{What does `true` mean in the display?@ifproglang{pyret}{ +
+@image{images/fixed.png}}}
+@A{"Fixed" is a Boolean column, so true means "yes - the animal is fixed"} 
 @Q{Are more animals fixed or unfixed?}
 @A{fixed}
 @Q{How could we describe that more specifically?}
@@ -195,19 +215,21 @@ Most questions can be broken down into one of four categories:
 @slidebreak
 
 @QandA{
-@Q{What kind of question is "Are more animals fixed or unfixed?"?}
-@A{It's an __arithmetic question__.}
-@Q{What kind of question is "How old is Toggle?"}
-@A{It's a __lookup question__.}
-@Q{What kind of question is "Are older animals adopted more quickly than younger animals?"}
-@A{It's a __statistical question__.}
+@Q{What kind of question is "Are more animals fixed or unfixed?"? How do you know?}
+@A{It's an __arithmetic question__ because answering it requires comparing two simple calculations.}
+@Q{What kind of question is "Are snails or tarantulas taller?"? How do you know?}
+@A{It's a __question we can't answer__ because there isn't any information in this data set about the heights of the animals.}
+@Q{What kind of question is "How old is Toggle?" How do you know?}
+@A{It's a __lookup question__ because it can be answered by just looking at the table.}
+@Q{What kind of question is "Are older animals adopted more quickly than younger animals?" How do you know?}
+@A{It's a __statistical question__ because we are wondering what is happening in general.}
 }
 
 === Investigate
 
 @lesson-instruction{
 Find the table at the bottom of @printable-exercise{which-question-type.adoc}. +
-**For now, complete __only__ the "Type" column - ignore the other columns titled "Which Rows" and "Column(s)".**
+**For now, complete __only__ the "Question Type" column - ignore the other columns titled "Which Rows" and "Column(s)".**
 }
 
 @opt{
