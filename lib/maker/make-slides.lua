@@ -20,6 +20,15 @@ local lplan_file = 'index.adoc'
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
+local function nicer_case(s)
+  if s == '' then return s
+  elseif s == 'codap' then return 'CODAP'
+  elseif s == 'wescheme' then return 'WeScheme'
+  else
+    return string.upper(s:sub(1,1)) .. s:sub(2)
+  end
+end
+
 local function first_line(f)
   local i = io.open(f)
   if not i then return false end
@@ -173,6 +182,8 @@ local function get_slides(lsn_plan_adoc_file)
             local txt = read_group(i, directive, false, true)
             scan_directives(io.open_buffered(false, txt), 'nested')
           end
+        elseif directive == 'proglang' then
+          curr_slide.text = curr_slide.text .. nicer_case(proglang)
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, false, true)
           scan_directives(io.open_buffered(false, txt), 'true')
