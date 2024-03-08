@@ -1,6 +1,6 @@
 = The Data Cycle
 
-@description{Students are introduced to the Data Cycle, a four-step scaffold for getting an answer from a dataset - and then generating the next question! Students learn to identify - and ask - statistical questions, by comparing and contrasting them with other kinds of questions. }
+@description{Students are introduced to the Data Cycle, a four-step scaffold for answering questions from a dataset...and then generating the next question! Students learn to identify - and ask - statistical questions, by comparing and contrasting them with other kinds of questions. }
 
 @ifproglang{pyret}{
 @lesson-prereqs{ds-intro, contracts-tables-displays, bar-and-pie-charts}
@@ -120,11 +120,13 @@ __To get the computer to answer our question, we'll need to decide what part of 
 @ifproglang{pyret}{
 __Once we know where to look, we can write code to build a table or display.__
 
-We could use `bar-chart` __or__ `pie-chart` to do this analysis. 
-@indented{__Pie chart is the best choice, because we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed").__ I wanted a picture for what I like dealing with him and I have to close the screen but for some reason I can't figure out how to sit there and it came up as a background and said I was like oh it just makes me smile so then I'll be better on Simons well just keep it yes we the}
+We could use `count`, `bar-chart` or `pie-chart` to do this analysis and answer our question. 
 
-Once we know that we want a `pie-chart`, and that we're using it to look at the `fixed` column, the next step is to read the @dist-link{Contracts.shtml, Contract} and write the code!
-} 
+@indented{__Pie charts might be the best choice, because we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed")__.}
+
+Once we decide that we want a `pie-chart`, and that we're using it to look at the `fixed` column, the next step is to read the @dist-link{Contracts.shtml, Contract} and write the code!
+}
+
 
 @ifproglang{codap}{
 A bar chart will allow us to see the actual count ("20 fixed vs. 10 fixed") of animals in each category.
@@ -133,7 +135,7 @@ Once we've decided what to make and we know which rows and columns we're plottin
 }
 
 @lesson-instruction{
-- Open the @starter-file{animals}@ifproglang{pyret}{ and click "Run"}.
+- Open the @starter-file{animals} @ifproglang{pyret}{and click "Run"}.
 - With your partner, build a @ifproglang{pyret}{pie chart} @ifproglang{codap}{bar chart} to determine whether more animals are fixed or unfixed.
 }
 
@@ -155,24 +157,29 @@ __Now that we've built our display, we can think about what we can learn from it
 @Q{What other questions might come from counting the ratio of fixed to unfixed animals?}
 @A{Sample responses: Is there a higher percentage of fixed dogs or fixed cats? At what age do animals get fixed? Do fixed animals get adopted more quickly than unfixed animals?}
 }
-We've completed our first Data Cycle... and we may want to start a new cycle with the questions that we generated!  But first...
-
-@slidebreak
-
-**We're Ready to Tell our Data Story...**   
 
 @ifnotslide{
 __The Data Story describes how each step in the Data Cycle was used to go from a question to an answer, and then to the next question. When analyzing a real dataset, Data Scientists might explore lots of questions, resulting in many different Data Stories to tell.__
 }
 
-@lesson-instruction{Let's read this example together.
+@slidebreak
 
-__"We wanted to know if more animals at the shelter were fixed or unfixed. To answer this, we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart}. We found that more animals were fixed (18) than unfixed (14). This made us wonder if about 56% of all species and all ages would be fixed - and whether fixed animals got adopted faster than unfixed ones."__
+Let's take a look at a story that's been written about the Data Cycle we just completed:
+@indented{
+_"We wanted to know if more animals at the shelter were fixed or unfixed. To answer this, we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart} using the `"fixed"` column of all the animals in the shelter. We found that more animals were fixed (18) than unfixed (14). This made us wonder if that percentage is the same for all species and all ages - and whether fixed animals got adopted faster than unfixed ones."_
 }
 
 @QandA{
-@Q{What information did the Data Scientists include in the data story?}
-@A{The question. The process. The findings. And the wonderings those findings generated.}
+@Q{What information did they include in the data story? Did they leave anything out?}
+@Q{What steps from the Data Cycle do you see in this story?}
+@A{The story included...
+
+- The question ("We wanted to know if more animals at the shelter were fixed or unfixed.")
+- The data considered ("...the `"fixed"` column of all the animals in the shelter.")
+- The analysis ("...we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart}...")
+- The interpretation ("..more animals were fixed (18) than unfixed (14)")
+- The wonderings those findings generated ("if that percentage is the same for all species and all ages - and whether fixed animals got adopted faster...")
+}
 }
 
 Each chapter in the Data Story is valuable, and each turn of the Data Cycle is another chapter to add to your story!
@@ -240,8 +247,8 @@ Find the table at the bottom of @printable-exercise{which-question-type.adoc}. +
 === Common Misconceptions
 Students generally struggle to make the leap into asking statistical questions. It's worth taking time on this, to support them coming up with better (and more engaging!) questions later.
 
-- They may think that "What's the average weight of the animals?" is a statistical question, because "average" is a term that shows up in statistics. But computing the average is just pure arithmetic! 
-- A __statistical__ question would be "What's the typical weight of an animal?", because it does not specify a particular arithmetic process. The answer could be the mean, the median, or even the mode! Figuring out which one to use depends on the distribution of the data, which we discuss in detail in our @lesson-link{measures-of-center} lesson.
+- They may think that "What's the *average* weight of the animals?" is a statistical question, because "average" is a term that shows up in statistics. But computing the average is just pure arithmetic!
+- A __statistical__ question would be "What's the *typical* weight of an animal?", because it does not specify a particular arithmetic process. The answer could be the mean, the median, or even the mode! Figuring out which one to use depends on the distribution of the data, which we discuss in detail in our @lesson-link{measures-of-center} lesson.
 
 === Synthesize
 
@@ -256,12 +263,17 @@ Students bridge from a human-language question into something more formal, by sp
 
 === Launch
 
-Tables are made of **Rows** and **Columns**. Each Row represents one member of our population. 
+Tables are made of **Rows** and **Columns**. Each Row represents __one member of our population__.
 
-- In the Animals Dataset, each row represents a single animal. 
-- In a dataset of temperature readings, each row might represent the temperature at a particular hour.
+- In the Animals Dataset, each row represents a single animal.
+- In a weather forecast, each row might represent the weather at a particular hour.
+- In a dataset of students, each row might represent one of you!
 
-Columns, on the other hand, represent information __about each row__. Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.
+Columns, on the other hand, represent information __about each row__.
+
+- Every animal, for example, has columns for their name, species, sex, age, weight, legs, whether they are fixed or unfixed, and how long it took to be adopted.
+- Our weather table might have columns for temperature, wind, and whether or not it will rain.
+- Every student could have columns for their name, height, hair color, birthday, favorite food, etc.
 
 @slidebreak
 
@@ -319,8 +331,8 @@ How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyre
 === Overview
 Students are introduced to the Data Cycle Pages they will be working with for the remainder of Bootstrap:Data Science.
 
-@teacher{If you'd like to start your students with a mini version of the Data Cycle, have them complete @opt-printable-exercise{analyzing-with-count.adoc}@ifproglang{pyret}{
-and test their code in Pyret}. 
+@teacher{
+If you'd like to start your students with a mini version of the Data Cycle, have them complete @opt-printable-exercise{analyzing-with-count.adoc} @ifproglang{pyret}{and test their code in Pyret}.
 }
 
 === Launch
@@ -346,7 +358,7 @@ Throughout the remainder of Bootstrap:Data Science we will be using Data Cycle p
 @ifproglang{pyret}{
 @lesson-instruction{
 - Complete @printable-exercise{data-cycle-fixed.adoc}.
-- When you're done, work on @printable-exercise{data-cycle-categorical.adoc}. 
+- When you're done, work on @printable-exercise{data-cycle-categorical.adoc}.
   * For this page you will need to come up with your own questions. 
   * You might be able to use a question from your first data cycle!
 }
