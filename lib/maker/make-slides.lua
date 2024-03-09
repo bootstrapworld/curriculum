@@ -125,6 +125,7 @@ local function get_slides(lsn_plan_adoc_file)
   file_being_read = lsn_plan_adoc_file
   local slides = {}
   local inside_table_p = false
+  local inside_nested_table_p = false
   local inside_code_display_p = false
   local inside_css_p = false
   local inside_lesson_instruction = false
@@ -169,7 +170,7 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
-          local _, n = txt:gsub('|===', 'z')
+          local _, n = txt:gsub('[|!]===', 'z')
           n = math.floor(n / 2)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
@@ -307,8 +308,16 @@ local function get_slides(lsn_plan_adoc_file)
           inside_table_p = not inside_table_p
           beginning_of_line_p = true
           if inside_table_p then
+            inside_nested_table_p = false
             tableIdx = tableIdx + 1
             curr_slide.text = curr_slide.text .. '@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}'
+          end
+        elseif c == '!' and read_if_poss(i, '===') then
+          i:read_line()
+          inside_nested_table_p = not inside_nested_table_p
+          beginning_of_line_p = true
+          if inside_nested_table_p then
+            tableIdx = tableIdx + 1
           end
         elseif inside_table_p then
           --noop
