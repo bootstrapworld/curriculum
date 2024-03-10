@@ -1,11 +1,15 @@
 = Contracts: Making Tables and Displays
 ++++
 <style>
-/* expressions nested two levels deep should be red */
-.circleevalsexp .expression > .expression { border-color: red; }
+/* all circle borders should be red, except....*/
+.circleevalsexp .expression { border-color: red; }
 
-/* expressions nested three levels deep should be blue */
-.circleevalsexp .expression > .expression > .expression { border-color: blue; }
+/* top-level circles should be black */
+.circleevalsexp > .expression { border-color: black; }
+
+/* for circles tagged with class "middle-blue", make the second expression blue */
+.middle-blue .circleevalsexp > .expression > .expression { border-color: blue; }
+
 </style>
 ++++
 @description{Students learn about functions for sorting and counting data in tables, then are introduced to one-variable displays.}
@@ -173,7 +177,6 @@ If we want to see the first ten animals, our diagram would look like this.
 @do{
 (define expB '(first-n-rows animals-table 10))
 }
-
 @show{(coe expB)}
 }
 
@@ -187,7 +190,6 @@ If we want to see the ten youngest animals, our diagram would look like this.
 @do{
 (define exp1 '(first-n-rows (sort animals-table "age" true) 10))
 }
-
 @show{(coe exp1)}
 }
 
@@ -199,7 +201,7 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 @do{
 (define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
 }
-
+[.middle-blue]
 @show{(coe exp2)}
 }
 
@@ -389,6 +391,7 @@ If your students are already familiar with scatter plots, linear regression plot
 
 Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays. Consider this:
 
+[.middle-blue]
 @show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
 
 @QandA{
