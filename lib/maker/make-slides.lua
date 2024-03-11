@@ -162,7 +162,8 @@ local function get_slides(lsn_plan_adoc_file)
           --noop
         elseif directive == 'scrub' or
           directive == 'pathway-only' or
-          directive == 'vspace' then
+          directive == 'vspace' or
+          directive == 'comment' then
           --
           read_group(i, directive)
         elseif directive == 'include' then
