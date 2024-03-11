@@ -678,6 +678,7 @@
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
                               (newline *teacher-notes*)
+                              (newline *teacher-notes*)
                               (display "**" *teacher-notes*)
                               (expand-directives:string->port title *teacher-notes*)
                               (display "**\n" *teacher-notes*)
@@ -689,6 +690,7 @@
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
+                              (newline *teacher-notes*)
                               (newline *teacher-notes*)
                               (expand-directives:string->port text *teacher-notes*)
                               (newline *teacher-notes*)
@@ -765,6 +767,8 @@
                                 (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
+                           [(member directive '("scrub" "comment"))
+                            (read-group i directive)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
