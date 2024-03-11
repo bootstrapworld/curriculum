@@ -764,6 +764,24 @@ const EarlyMath = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=j0ExQBqaqm"
     }
+  },
+  "variables-code": {
+    "title": "Variables & the Commutative Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
+    },
+    "wescheme": {
+     "url": "https://www.wescheme.org/view?publicId=iP1f3ZH2ki"
+    }
+  },
+  "variables-code2": {
+    "title": "Variables & the Associative Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=S1vWZ2AHlv"
+    }
   }
 }
 
@@ -840,7 +858,7 @@ const Alg2 = {
    "alg2-states": {
     "title": "State Demographics Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+      "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
     }
   },
   "alg2-exploring-quadratics-desmos": {
@@ -977,11 +995,10 @@ const Reactive = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
-  }
+  },
 }
 
-
-
+  
 const allStarterFiles = {
   ...Editors, 
   ...Core, 

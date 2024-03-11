@@ -14,14 +14,14 @@
 | Lesson Goals
 | Students will be able to...
 
-* Identify examples of the following data types: Numbers, Strings, and Booleans
-* Write Numbers, Strings, and Booleans in the Interactions Area
-* Write expressions that produce values of those types
+- Identify examples of the following data types: Numbers, Strings, and Booleans
+- Write Numbers, Strings, and Booleans in the Interactions Area
+- Write expressions that produce values of those types
 
 | Student-facing Lesson Goals
 |
 
-* Let's explore Numbers, Strings and Booleans and identify what makes these data types unique.
+- Let's explore Numbers, Strings and Booleans and identify what makes these data types unique.
 
 | Materials
 |[.materials-links]
@@ -31,12 +31,12 @@
 | Preparation
 |
 @preparation{
-* Make sure student computers can access @starter-file{editor}.
+- Make sure student computers can access @starter-file{editor}.
 }
 
 | Key Points For The Facilitator
 |
-* Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to error messages with interest to demonstrate to students that the messages are a helpful tool.
+- Error messages are the computer trying to give us a clue that something is wrong.  Model reacting to error messages with interest to demonstrate to students that the messages are a helpful tool.
 
 |===
 
@@ -48,44 +48,64 @@ Working together using a Driver/Navigator group setup, students experiment with 
 === Launch
 
 @right{@image{images/driver-navigator.png, 150 }}
-When programming in this class, you'll be working together using the _Driver/Navigator_ model. Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
+When programming in this class, you'll be working together using the __Driver/Navigator__ model. 
+
+- Each group can only have one "Driver" - their hands are on the keyboard, and their job is to manage the typing, clicking, shortcuts, etc. 
+
+- If you're not a Driver, you're a "Navigator" - your job is to tell the Driver where to go, what to type, etc. 
+
+- A good Driver types only what the Navigator tells them to, and a good Navigator makes sure to give clear and precise instructions.
 
 @strategy{The Driver/Navigator Model}{
-
-
 This model of pair programming is extremely useful for teasing apart the "thinking" step from the "typing" one. Students - especially those who are new to text-based programming or typing itself - can struggle to put their thoughts into the programming environment. This model allows them to focus on _communicating their ideas_, but letting the Driver focus on the coding. Likewise, the Driver has a chance to focus on syntax and programming. Finally, the requirement that ideas are translated through another person's hands is an excellent scaffold for getting students talking about their thinking and about code.
 
 @link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
 }
 
+@slidebreak
 
-Have students open @starter-file{editor}.
+@lesson-instruction{
+Open @starter-file{editor}.
+}
 
-@right{@image{images/editor.png, 250}} 
-
-This screen is called the @vocab{Editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
+@right{@image{images/editor.png, 250}} This screen is called the @vocab{Editor}, and it looks something like the diagram you see here. There are a few buttons at the top, but most of the screen is taken up by two large boxes: the @vocab{Definitions Area} on the left and the @vocab{Interactions Area} on the right.
 
 The @vocab{Definitions Area} is where programmers define values and functions that they want to keep, while the @vocab{Interactions Area} allows them to experiment with those values and functions. This is like putting a set of function definitions on the board, and having students use those functions to compute answers on scrap paper. 
+
+@slidebreak
 
 @lesson-point{
 We need to click "Run" to load the program when we first open a file and if we make a change in the @vocab{Definitions Area}.
 }
 
-Clicking "Run" will also clear the @vocab{Interactions Area}. For now, we will only be writing programs in the *Interactions Area* on the right.
+Clicking "Run" will also clear the @vocab{Interactions Area}. For now, we will only be writing programs in the @vocab{Interactions Area} on the right.
 
 === Investigate
 
-Math is a language, just like English, Spanish, or any other language. Languages have *nouns* (e.g. “ball”, “tomato”, etc.) and *verbs*, which are actions we can perform on these nouns (e.g. - I can “throw a ball”). Math and programming also have *values*, like the numbers 1, 2 and 3. And, instead of verbs, they have functions, which are actions we can perform on values (e.g. - “I can square a number”).
+Math is a language, just like English, Spanish, or any other language. 
 
-Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.
+- Languages have **nouns** (e.g. “ball”, “tomato”, etc.) and **verbs**, which are actions we can perform on these nouns (e.g. - I can “throw a ball”). 
+  * Math and programming have **values**, like the numbers 1, 2 and 3. 
+  * Instead of verbs, math and programming have functions, which are actions we can perform on values (e.g. - “I can square a number”).
 
-Languages also have rules for *grammar*. _The cat sat._ is a sentence, whereas _The sat cat._ is nonsense, even though all the words are valid syntax. The order of the words matters!
+- Languages have rules for **syntax**. 
+  * In English, for example, words don’t have `!` and `?` in the middle. 
+  * In math and programming numbers don’t have `&` in them.
 
-Keeping the importance of *syntax* and *grammar* in mind is helpful when learning to program!.
+- Languages also have rules for **grammar**. 
+  * _The cat sat._ is a sentence. 
+  * _The sat cat._ is nonsense, even though all the words are valid syntax. 
+  * The order of the words matters!
+
+@slidebreak
+
+Keeping the importance of **syntax** and **grammar** in mind is helpful when learning to program!.
 
 @lesson-instruction{
 Complete @printable-exercise{strings-n-numbers.adoc}.
 }
+
+@slidebreak
 
 @QandA{
 @Q{What did you Notice? What do you Wonder?}
@@ -97,33 +117,44 @@ Complete @printable-exercise{strings-n-numbers.adoc}.
 
 
 @ifproglang{pyret}{
+@teacher{
+Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
+
+- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
+- `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
+
+}}
+
+@ifproglang{pyret}{
+
 === Common Misconceptions
 
 In Pyret, writing decimals as `.5` (without the leading zero) results in a @vocab{syntax error}. Make sure students understand that Pyret needs decimals to start with a zero!
 }
 
 === Synthesize
-Our programming language knows about many types of numbers, and they behave pretty much the way they do in math.
-Discuss what students have learned:
+
+What have we learned about @proglang?
+
+@ifslide{@teacher{answers provided on next slide.}}
+
+@slidebreak
+
+@ifslide{What have we learned about @proglang?}
 
 - Numbers and Strings evaluate to themselves.
 - Our Editor is pretty smart, and can automatically switch between showing a rational number as a fraction or a decimal, just by clicking on it!
 - Anything in quotes is a String, even something like `"42"`.
-- Strings _must_ have quotation marks on both sides.
-
+- Strings __must__ have quotation marks on both sides.
 @ifproglang{pyret}{
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.
 - In pyret, the @vocab{operators} work just like they do in math.
 - Any time there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.
 - Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.
-
-Error messages are a way for Pyret to explain what went wrong, and are a really helpful way of finding mistakes. Emphasize how useful they can be, and why students should read those messages out loud before asking for help. Have students see the following errors:
-
-- `6 / 0`. In this case, Pyret obeys the same rules as humans, and gives an error.
-- `(2 + 2`. An unclosed quotation mark is a problem, and so is an unmatched parentheses.
-
-What other questions do you have about the way Strings and Numbers work in Pyret?
 }
+
+
+What other questions do you have about the way Strings and Numbers work in @proglang?
 
 == Booleans @duration{20 minutes}
 
@@ -136,15 +167,23 @@ This lesson introduces students to @vocab{Booleans}, a unique data type with onl
 What's the answer: is 3 greater than 10?
 }
 
-Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  The ability to separate inputs into two categories is unique and quite useful!
+Boolean-producing expressions are yes-or-no questions and will always evaluate to either `true` (“yes”) or `false` (“no”).  
 
-@right{@image{images/login.png, 300 }}
+The ability to separate inputs into two categories is unique and quite useful!
 
+@slidebreak
+
+@ifslide{@right{@image{images/at-least-this-tall-to-ride.jpeg, 300 }}}
+@ifnotslide{@right{@image{images/login.png, 300 }}}
 For example:
+Some roller coasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gatekeeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are tall enough, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.
 
-- Some rollercoasters with loops require passengers to be a minimum height to make sure that riders are safely held in place by the one-size-fits all harnesses. The gate keeper doesn't care exactly how tall you are, they just check whether you are as tall as the mark on the pole. If you are tall enough, you can ride, but they don't let people on the ride who are shorter than the mark because they can't keep them safe.
+@slidebreak
 
-- When you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
+@ifslide{@right{@image{images/login.png, 300 }}}
+Similarly, when you log into your email, the computer asks for your password and checks whether it matches what's on file. If the match is `true` it takes you to your messages, but, if what you enter doesn't match, you get an error message instead.
+
+@slidebreak
 
 @lesson-instruction{
 Brainstorm other scenarios where Booleans are useful in and out of the programming environment.
@@ -152,12 +191,16 @@ Brainstorm other scenarios where Booleans are useful in and out of the programmi
 
 === Investigate
 @lesson-instruction{
-- In pairs, complete @printable-exercise{booleans.adoc}.
+Complete @printable-exercise{booleans.adoc} with your partner.
 }
 
+@teacher{
 Students will make predictions about what a variety of Boolean expressions will return and testing them in the editor. Debrief student answers as a class.
-
+}
 
 === Synthesize
 
-What sets Booleans apart from other data types?
+@QandA{
+@Q{What sets Booleans apart from other data types?}
+@A{They can split data into two piles: the values that return true and the values that return false.}
+}

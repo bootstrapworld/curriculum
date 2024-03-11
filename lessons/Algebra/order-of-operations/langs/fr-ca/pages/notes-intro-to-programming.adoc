@@ -1,0 +1,64 @@
+= Introduction à la programmation
+
+L'*Editeur* est un logiciel que nous utilisons pour écrire du code. Notre éditeur nous permet d'expérimenter le code sur le côté droit, dans la *Zone d'interactions*. Pour le code que nous voulons _conserver_, nous pouvons le mettre sur le côté gauche dans la *Zone de définitions*. En cliquant sur le bouton « Exécuter », l'ordinateur relit tout ce qui se trouve dans la zone de définitions et efface tout ce qui a été saisi dans la zone d'interactions.
+
+== Types de données
+
+
+Les langages de programmation impliquent différents @vocab{types de données}, tels que des nombres, des chaînes, des booléens et même des images.
+
+	- Les nombres sont des valeurs telles que « 1 », « 0,4 », « 1/3 » et « -8261.003.
+
+	** Les nombres sont _généralement_ utilisés pour les données quantitatives et d'autres valeurs sont _généralement_ utilisées comme données catégorielles.
+
+@ifproglang{pyret}{** Dans Pyret, toute décimale _doit_ commencer par un 0. Par exemple, « 0.22 » est valide, mais « .22 » ne l'est pas.}
+
+	- Les chaînes sont des valeurs comme `"Emma"`, `"Rosanna"`, `"Jen and Ed"`, ou même `"08/28/1980"`.
+
+	** Toutes les chaînes _doivent_ être entourées de guillemets.
+
+	- Les booléens sont soit « vrai », soit « faux ».
+
+
+Toutes les valeurs s’évaluent par elles-mêmes. Le programme `42` sera évalué à `42`, la chaîne `"Hello"` sera évaluée à `"Hello"` et le booléen `false` sera évalué à `false`.
+
+== Opérateurs
+
+@ifproglang{pyret}{
+
+Les opérateurs (comme `+`, `-`, `*`, `<`, etc.) fonctionnent de la même manière en Pyret qu'en mathématiques.
+
+- Les opérateurs sont écrits entre les valeurs, par exemple : `4 + 2`.
+
+- A Pyret, les opérateurs doivent toujours disposer d'un espace autour d'eux. « 4 + 2 » est valide, mais « 4+2 » ne l'est pas.
+
+- Si une expression comporte différents opérateurs, des parenthèses doivent être utilisées pour indiquer l'ordre des opérations. « 4 + 2 + 6 » et « 4 + (2 * 6) » sont valides, mais « 4 + 2 * 6 » ne l'est pas.
+}
+
+@ifproglang{wescheme}{
+
+*Les opérateurs* (comme `+`, `-`, `*`, `<`, etc.) sont traités de la même manière que les fonctions : après tout, ils ont des entrées et des sorties et obéissent aux mêmes règles !
+
+}
+
+== Application de fonctions
+
+L'application des fonctions @ifproglang{wescheme}{(et opérateurs !)} fonctionne à peu près comme en mathématiques. Chaque fonction a un nom, prend des entrées et produit des sorties. Le nom de la fonction est écrit en premier, suivi d'une liste de @vocab{arguments} @ifproglang{pyret}{entre parenthèses}.
+
+- En mathématiques, cela pourrait ressembler à @math{f(5)} ou @math{g(10, 4)}.
+- Dans @ifproglang{pyret}{Pyret} @ifproglang{wescheme}{WeScheme}, ces exemples seraient écrits sous la forme @show{(code '(f 5))} et @show{(code '(g 10 4)) }.
+@ifproglang{wescheme}{
+- Appliquer l'opérateur @math{+} aux entrées 1 et 2 ressemblerait à @show{(code '(+ 1 2))}.
+}
+
+- Appliquer une fonction pour que les images ressemblent à @show{(code '(star 50 "solid" "red"))}.
+- Il existe de nombreuses autres fonctions, par exemple @show{(code 'num-sqr)}, @show{(code 'num-sqrt)}, @show{(code 'triangle)}, @show{(code 'square )}, @show{(code 'string-repeat)}, etc.
+
+@vspace{1ex}
+
+
+Les fonctions ont @vocab{contracts}, qui aident à expliquer comment une fonction doit être utilisée. Chaque contrat comporte trois parties :
+
+	- Le _Nom_ de la fonction - littéralement, comment on l'appelle.
+	- Le _Domaine_ de la fonction - quels _types de valeurs_ la fonction consomme et dans quel ordre.
+	- L'_Image_ de la fonction - quel _type de valeur_ la fonction produit.

@@ -46,8 +46,13 @@ Take a look at the the Animals Dataset on @link{https://docs.google.com/spreadsh
 
 @teacher{In the activity that follows, students will look at ten cats from the shelter to consider the distribution of their ages.}
 
-@QandA{
+@slidebreak
+
+@lesson-instruction{
 Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
+}
+
+@QandA{
 @Q{What did you get for the mean? Does it match what the Animal Shelter Bureau says?}
 @A{The mean is 3; yes, it matches what the Animal Shelter Bureau says.}
 @Q{Can you think of four ages, such that the mean age for all of them is 3?}
@@ -58,38 +63,44 @@ Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
 @A{See above.}
 }
 
+@slidebreak
+
 Without a measure of @vocab{spread}, just knowing the mean doesn't tell us enough about the shape of the data.
 
 When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box-plot.
 
-Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
+Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across __all__ the points.
+
+Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on __the "typical" distance from the mean__. In other words, we want to know what kind of deviation is "standard" for all the points.
 
 @lesson-point{
 @vocab{Standard deviation} is the most useful way to summarize @vocab{spread} of a quantitative column.
 }
 
-Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
-
 === Investigate
 
-@right{@image{images/histogram-w-mean.png, 450}} We could imagine a shelter where every cat is between 2 and 4, so **each cat only deviates from the mean by 1 year**! But we could also imagine a shelter with only kittens and very old cats, where **cats deviate by as much as 10 years from the mean!**
+@ifslide{@centered-image{images/histogram-w-mean.png, 450}}
+@ifnotslide{@right{@image{images/histogram-w-mean.png, 450}}}We could imagine a shelter where every cat is between 2 and 4, so **each cat only deviates from the mean by 1 year**! But we could also imagine a shelter with only kittens and very old cats, where **cats deviate by as much as 10 years from the mean!**
 
 
 How far away is each data point from 3?
 
-@right{@image{images/histogram-w-arrows.png, 450}} In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
+@slidebreak
+
+@ifslide{@centered-image{images/histogram-w-arrows.png, 450}}
+@ifnotslide{@right{@image{images/histogram-w-arrows.png, 450}}}In this image, we've draw an arrow for each of the 1-year-old cats. That means there are four arrows running from the mean at 3 to the interval at 1, and each arrow has the label 2.
 
 @lesson-instruction{
-Next, complete numbers 4 to 6 of @printable-exercise{computing-stdev.adoc}.
+Complete numbers 4 to 6 of @printable-exercise{computing-stdev.adoc}.
 }
 
 @strategy{Mean Average Deviation?}{
-
-
 In this section of the worksheet, students will need to stretch their visual imaginations a bit! In problem number 6, they are asked to summarize all 10 distances from the mean into a single number. The goal here is for students to make an educated guess about standard deviation (SD) _before_ learning the algorithm for computing it. Invite and encourage discussion about students' different approaches for guessing at the best summary number _before_ sharing the key idea about standard deviation!
 
 Students are likely to hone in on the __Mean Average Deviation__, or MAD. Both SD and MAD measure variability or "spread" by computing individual deviations from the mean, but MAD averages these deviations and SD transforms them via square/square-root.
 }
+
+@slidebreak
 
 @lesson-point{
 To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
@@ -100,6 +111,8 @@ To compute the standard deviation we add the squares of all _N_ distances, divid
 @lesson-instruction{
 Complete numbers 7-10 of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
 }
+
+@slidebreak
 
 @ifproglang{pyret}{
 Now that you know how to compute standard deviation on your own, here is the Contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
@@ -117,7 +130,7 @@ To compute standard deviation in CODAP, create a graph with only one quantitativ
 
 }
 
-
+@slidebreak
 
 @QandA{
 @Q{What is the standard deviation for the weights of _all_ the animals at our dataset?}
@@ -150,11 +163,17 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 @A{The histogram has high outliers, therefore it is skewed right.}
 @Q{How does it differ from the one we just looked at?}
 @Q{The previous histogram - with the 16-year-old cat omitted - was roughly symmetric.}
+}
+
+@slidebreak
 
 @lesson-instruction{
 Turn to @printable-exercise{effect-of-an-outlier.adoc} to explore the extent to which the inclusion of an outlier will affect the center and spread of a quantitative dataset.
 }
 
+@slidebreak
+
+@QandA{
 @Q{What did this outlier do to the mean? Refer back to @printable-exercise{computing-stdev.adoc} to help you.}
 @A{Previously, the standard deviation was ~2.45; now it is ~5.83.}
 @Q{What did this outlier do to the standard deviation?}
@@ -165,17 +184,27 @@ Turn to @printable-exercise{effect-of-an-outlier.adoc} to explore the extent to 
 
 === Investigate
 
-The mean and standard deviation tell us where the data is centered and how far the data strays from that center. For example, when writing about the ages of cats in our shelter, we might say "the mean age is 3 and the standard devation is 2.45, so most cats are between the ages of 1 and 5 years old."
+The mean and standard deviation tell us where the data is centered and how far the data strays from that center. For example, when writing about the ages of cats in our shelter, we might say "the mean age is 3 and the standard deviation is 2.45, so most cats are between the ages of 1 and 5 years old."
+
+@lesson-instruction{The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks?}
+
+@teacher{Solicit students' ideas, but do not reveal the answer.}
+
+@slidebreak
 
 @lesson-instruction{
-- The mean time-to-adoption is 5.75 weeks. Does that mean most animals generally get adopted in 4-6 weeks? _Solicit students' ideas, but do not reveal the answer._
-- Turn to @printable-exercise{data-cycle-analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
+Turn to @printable-exercise{data-cycle-analysis-stdev-animals.adoc} to get some practice using the Data Cycle to answer this question, then write your findings in the space at the bottom.
 }
 
-@clear
+@slidebreak
+
+@QandA{
+@Q{How much did adding an outlier change the mean?}
+@Q{The standard deviation?}
+}
 
 @strategy{Mean Average v. Standard Deviation}{
-MAD and SD are both measures of a certain kind of _distance_, literally asking "how are far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
+MAD and SD are both measures of a certain kind of _distance_, literally asking "how far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
 
 Before learning the distance formula, students might guess at a number of ways to compute the hypotenuse. They can quickly rule out the sum of the legs, and the difference between them. At some point they might suggest _averaging_ the lengths of the legs. Mean Average Deviation (MAD) does exactly that, by flattening each points' deviation into a single "dimension".
 
@@ -188,10 +217,16 @@ Why use one measure of spread instead the other? The answer is closely related t
 Treating each point independantly allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. This is why SD is used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
 }
 
+@slidebreak
+
+Extreme values affect both the mean and standard deviation of a dataset.
+
+ - Unusually low values __decrease__ the mean, while unusually high values __increase__ it. 
+ - Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
+
 === Synthesize
-- How much did adding an outlier change the mean? The standard deviation?
-- Extreme values affect both the mean and standard deviation of a dataset.
-- Unusually low values _decrease_ the mean, while unusually high values _increase_ it. Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
+
+Why is it useful to know the standard deviation of a dataset?
 
 == Data Exploration Project (Standard Deviation) @duration{flexible}
 
@@ -213,8 +248,8 @@ Let’s review what we have learned about standard deviation.
 @Q{How can two datasets have the same mean, but different standard deviations?}
 @A{Mean is a measure of central tendency, whereas standard deviation measures the variation of some sample.}
 
-@Q{Both unusually low and unusually high values (outliers) *increase* the standard deviation. Explain why.}
-@A{Standard deviation summarizes distance from the mean in *either* direction.}
+@Q{Both unusually low and unusually high values (outliers) **increase** the standard deviation. Explain why.}
+@A{Standard deviation summarizes distance from the mean in **either** direction.}
 }
 
 === Investigate
@@ -249,8 +284,11 @@ If students want to investigate new columns from their dataset, they will need t
 
 Invite students to discuss their results and consider how to interpret them.}
 
+@slidebreak
+
 @lesson-instruction{
 **It’s time to add to your @starter-file{exploration-project}.**
+
 - Locate the "Measures of Center and Spread" section of your Exploration Project. Type the standard deviations you just identified into the tables for the corresponding columns.
 - Now, add your interpretations of the standard deviations and record any questions that emerged in the "My Questions" section at the end of the slide deck.
 }
@@ -260,7 +298,5 @@ Invite students to discuss their results and consider how to interpret them.}
 @teacher{Have students share their findings.}
 
 - Did you discover anything surprising or interesting about your dataset?
-
 - What questions did the standard deviations inspire you to ask?
-
 - Were there any surprises when you compared your findings with other students?

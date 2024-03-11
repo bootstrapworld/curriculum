@@ -11,8 +11,8 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-;if md2gslides can't handle too many images, set this to a small number, e.g., 6
-(define *max-images-processed* 100)
+; slides should generally have fewer than 100 images
+(define *max-images-processed* 200)
 
 (define *num-images-processed* 0)
 
@@ -622,6 +622,11 @@
                                       (fprintf o "[[click here for image]](~a)"
                                                (fully-qualify-image (anonymize-filename img-file)))]
                               ))]
+                           [(string=? directive "autogen-image")
+                            (let* ([text (read-group i directive)] [img (read-group i directive)])
+                              (cond [(not *slurping-up-teacher-notes*)
+                                     (fprintf o "![~a](~a)" text img)]
+                                    [else (fprintf o "[[click here for image]](~a)" img)]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -655,12 +660,6 @@
                                    [lbl (string->symbol (first lbl+text))]
                                    [link-text (and (>= (length lbl+text) 2) (second lbl+text))])
                               (display (starter-file-link lbl link-text) o))]
-                           [(string=? directive "ifproglang")
-                            (let* ([proglang (read-group i directive)]
-                                   [fragment (read-group i directive #:multiline? #t)])
-                              ; (printf "ifproglang ** ~s ** ~s **\n" proglang fragment)
-                              (when (string-ci=? proglang *proglang*)
-                                (expand-directives:string->port fragment o)))]
                            [(string=? directive "proglang")
                             (fprintf o "~a" (nicer-case *proglang*))]
                            [(string=? directive "n")
@@ -705,8 +704,6 @@
                            [(member directive '("lesson-instruction" "lesson-roleplay" "indented"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
-                           [(member directive '("clear"))
-                            #f]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port fragment o))]
@@ -728,11 +725,6 @@
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for ([s exprs])
                                 (display (massage-arg s) o)))]
-                           [(string=? directive "table")
-                            (let* ([idx (read-group i directive)]
-                                   [path (string-append "images/TABLE" idx ".png")]
-                                   [markdown (string-append "![table image](" path ")")])
-                              (display markdown o))]
                            [(string=? directive "vocab")
                             (let ([arg (read-group i directive)])
                               (display "<b><i>" o)
@@ -750,9 +742,6 @@
                                    [prose (read-group i directive #:multiline? #t)])
                               (set! *definitions*
                                 (cons (cons id prose) *definitions*)))]
-                           [(string=? directive "ifslide")
-                            (let ([text (read-group i directive #:multiline? #t)])
-                              (expand-directives:string->port text o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (set! *single-question?* (= (length (regexp-match* "@Q{" text)) 1))
@@ -776,11 +765,6 @@
                                 (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
-                           [(member directive '("ifnotslide" "pathway-only" "scrub" "vspace"))
-                            (read-group i directive)]
-                           [(string=? directive "include")
-                            (printf "WARNING: @include found outside of @ifnotslide!\n")
-                            (display "@include found outside of @ifnotslide!\n" o)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
