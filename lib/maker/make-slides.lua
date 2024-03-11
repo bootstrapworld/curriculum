@@ -20,8 +20,6 @@ local lplan_file = 'index.adoc'
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
-<<<<<<< HEAD
-=======
 local function nicer_case(s)
   if s == '' then return s
   elseif s == 'codap' then return 'CODAP'
@@ -39,7 +37,6 @@ local function first_line(f)
   return x
 end
 
->>>>>>> fall2024
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
