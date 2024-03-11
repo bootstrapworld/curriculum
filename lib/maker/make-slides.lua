@@ -142,7 +142,7 @@ local function get_slides(lsn_plan_adoc_file)
       local c = i:read(1)
       if not c then
         if not nested then
-          set_current_slide(slides, curr_slide)
+          set_current_slide()
         end
         break
       elseif c == '\n' then
@@ -188,6 +188,8 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif directive == 'proglang' then
           curr_slide.text = curr_slide.text .. nicer_case(proglang)
+        elseif directive == 'star' then
+          curr_slide.text = curr_slide.text .. '★'
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, false, true)
           scan_directives(io.open_buffered(false, txt), 'true')
