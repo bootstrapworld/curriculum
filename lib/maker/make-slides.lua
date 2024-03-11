@@ -112,14 +112,6 @@ local function set_imageorientation(slide)
     'R')
 end
 
-local function set_current_slide(slides, curr_slide)
-  if curr_slide.text ~= '' then
-    set_imageorientation(curr_slide)
-    slides[#slides + 1] = curr_slide
-  end
-end
-
-
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   file_being_read = lsn_plan_adoc_file
@@ -133,6 +125,16 @@ local function get_slides(lsn_plan_adoc_file)
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
   local curr_slide
+
+  local function set_current_slide()
+    local n = #slides
+    if curr_slide.text == '' or
+      (n == 0 and curr_slide.header == '') then
+      return
+    end
+    set_imageorientation(curr_slide)
+    slides[n + 1] = curr_slide
+  end
 
   local function scan_directives (i, nested, dont_count_image_p)
     if not nested then curr_slide = newslide() end
@@ -203,7 +205,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          set_current_slide(slides, curr_slide)
+          set_current_slide()
           local c2 = buf_peek_char(i)
           curr_slide = newslide()
           curr_slide.section = 'Repeat'
@@ -264,8 +266,7 @@ local function get_slides(lsn_plan_adoc_file)
           -- print('L = ' .. L)
           if not L then
             curr_slide.text = curr_slide.text .. c
-            set_imageorientation(curr_slide)
-            slides[#slides + 1] = curr_slide
+            set_current_slide()
             break
           else
             new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
@@ -280,7 +281,7 @@ local function get_slides(lsn_plan_adoc_file)
                 break
               end
             else
-              set_current_slide(slides, curr_slide)
+              set_current_slide()
               curr_slide = newslide()
               curr_slide.level = new_level
               curr_slide.header = new_header
