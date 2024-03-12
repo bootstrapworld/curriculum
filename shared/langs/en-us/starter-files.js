@@ -1,6 +1,9 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
+// WeScheme/Pyret/CODAP starter file titles should end with Starter File
+// Desmos file titles should end with (Desmos)
+
 const Editors = {
   "editor": {
     "title": "the editor",
