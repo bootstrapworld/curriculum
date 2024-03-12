@@ -184,7 +184,7 @@ local function get_slides(lsn_plan_adoc_file)
             read_group(i, directive)
           else
             local txt = read_group(i, directive, false, true)
-            scan_directives(io.open_buffered(false, txt), 'nested')
+            scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
           end
         elseif directive == 'proglang' then
           curr_slide.text = curr_slide.text .. nicer_case(proglang)
@@ -192,7 +192,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. '★'
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, false, true)
-          scan_directives(io.open_buffered(false, txt), 'true')
+          scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
@@ -224,7 +224,7 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
-          local arg2 = read_group(i, directive)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
         elseif directive == 'show' then
           local arg = read_group(i, directive, true, true)
