@@ -156,7 +156,7 @@ local function get_slides(lsn_plan_adoc_file)
         local directive = read_word(i)
         if inside_table_p then
           if directive == 'preparation' and #slides == 0 then
-            curr_slide.preparation = read_group(i, directive, false, true)
+            curr_slide.preparation = read_group(i, directive, not 'scheme', 'multiline')
           end
         elseif directive == 'clear' then
           --noop
@@ -183,20 +183,20 @@ local function get_slides(lsn_plan_adoc_file)
           if not pls:match(proglang) then
             read_group(i, directive)
           else
-            local txt = read_group(i, directive, false, true)
-            scan_directives(io.open_buffered(false, txt), 'nested')
+            local txt = read_group(i, directive, not 'scheme', 'multiline')
+            scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
           end
         elseif directive == 'proglang' then
           curr_slide.text = curr_slide.text .. nicer_case(proglang)
         elseif directive == 'star' then
           curr_slide.text = curr_slide.text .. '★'
         elseif directive == 'ifslide' then
-          local txt = read_group(i, directive, false, true)
-          scan_directives(io.open_buffered(false, txt), 'true')
+          local txt = read_group(i, directive, not 'scheme', 'multiline')
+          scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
-          local text = read_group(i, directive, false, true)
+          local text = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
         elseif directive == 'lesson-instruction' then
           inside_lesson_instruction = true
@@ -217,17 +217,17 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.style = read_group(i, directive)
           end
         elseif directive == 'A' then
-          local arg = read_group(i, directive, false, true)
+          local arg = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg), 'nested', 'dont count images')
           curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
-          local arg2 = read_group(i, directive)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
         elseif directive == 'show' then
-          local arg = read_group(i, directive, true, true)
+          local arg = read_group(i, directive, 'scheme', 'multiline')
           if arg:match('%(coe') then
             if not dont_count_image_p then
               curr_slide.numimages = curr_slide.numimages + 1
