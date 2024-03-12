@@ -140,6 +140,7 @@
                     [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
                     [(regexp-match "\\\\\\\\" text) #t]
                     [(regexp-match "\\\\mbox" text) #t]
+                    [(regexp-match "\\\\over" text) #t]
                     [else #f])])
         ;
         ((if use-mathjax?
