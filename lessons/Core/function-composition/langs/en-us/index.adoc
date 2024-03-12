@@ -139,8 +139,6 @@ There are two ways of thinking about the activity you just completed.
 
 - *Option 2*: Each function passes its result directly into the next function.
 
-<<<<<<< HEAD
-=======
 @indented{
 [cols="^.^6a,.<1,^.^3a", frame="none", stripes="none"]
 |===
@@ -163,37 +161,16 @@ _half( double( add1(4) ) )_
 |===
 }
 
->>>>>>> a9ea06dd00240cc91a88729cd7ca4457355f36b3
+
 @QandA{
-@Q{Which representation (below) corresponds with Option 1? How do you know?}
+@Q{Which representation (above) corresponds with Option 1? How do you know?}
 @A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
 
-@Q{Which representation (below) corresponds with Option 1? How do you know?}
+@Q{Which representation (above) corresponds with Option 1? How do you know?}
 @A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
 @Q{Which representation corresponds with Option 2?}
 @A{The Circle of Evaluation. All of the nested circles form a single unit.}
 }
-
-@clear
-
-
-[cols=".^7a,^.<3a",  stripes="none"]
-|===
-| @hspace{10em} *Three Steps*
-| *Three Circles*
-
-|
-[cols="<2a,<3a", grid="none", frame="none", stripes="none"]
-!===
-!`step1 = add1(4)`      ! (Start with `4`, and now we have `5`)
-!`step2 = double(step1)`! (now we have `10`)
-!`step3 = half(step2)`  ! (now we're back to `5`)
-!===
-|
-@show{(coe '(half (double (add1 4))))}
-
-`half(double(add1(4)))`
-|===
 
 
 @clear
