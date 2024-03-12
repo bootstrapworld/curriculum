@@ -132,6 +132,8 @@ function postproc(fhtml_cached, tipe)
     x = x:gsub('%%CURRICULUMCOMMENT%%', '<!-- ')
     x = x:gsub('%%ENDCURRICULUMCOMMENT%%', '\n-->')
     --
+    x = x:gsub('class="exampleblock actually%-openblock ', 'class="openblock ')
+    --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
@@ -276,7 +278,8 @@ function postproc(fhtml_cached, tipe)
   };
   </script>
 ]=]);
-      o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js"></script>\n')
+      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      -- o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --

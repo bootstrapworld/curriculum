@@ -26,6 +26,8 @@ local function first_line(f)
   return x
 end
 
+local proglang = first_line('.cached/.record-proglang') or 'pyret'
+
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Default'
 
 local course_string = 'Default'
@@ -73,6 +75,7 @@ local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   local i = io.open_buffered(lsn_plan_adoc_file)
   local slides = {}
+  local inside_table_p = false
   local curr_slide = newslide()
   local inside_css_p = false
   local beginning_of_line_p = true
@@ -86,7 +89,8 @@ local function get_slides(lsn_plan_adoc_file)
       end
       break
     elseif c == '\n' then
-      if not inside_css_p then
+      if not inside_css_p and
+        (not inside_table_p or not beginning_of_line_p) then
         curr_slide.text = curr_slide.text .. c
       end
       beginning_of_line_p = true
@@ -95,6 +99,24 @@ local function get_slides(lsn_plan_adoc_file)
       local directive = read_word(i)
       if directive == 'scrub' or directive == 'ifnotslide' then
         read_group(i, directive)
+      elseif directive == 'ifproglang' then
+        local pls = read_group(i, directive)
+        if not pls:match(proglang) then
+          read_group(i, directive)
+        else
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. pls .. '}'
+        end
+      elseif directive == 'ifpathway' then
+        local pwys = read_group(i, directive)
+        ignore_spaces(i)
+        local text = read_group(i, directive, false, true)
+        curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
+      elseif directive == 'lesson-instruction' then
+        curr_slide.suffix = '-DN'
+        curr_slide.text = curr_slide.text .. c .. directive
+      elseif directive == 'lesson-roleplay' then
+        curr_slide.suffix = '-RP'
+        curr_slide.text = curr_slide.text .. c .. directive
       elseif directive == 'slidebreak' then
         if curr_slide.text ~= '' then
           set_imageorientation(curr_slide)
@@ -103,6 +125,9 @@ local function get_slides(lsn_plan_adoc_file)
         curr_slide = newslide()
         curr_slide.section = 'Repeat'
         curr_slide.header = 'SLIDE BREAK'
+      elseif directive == 'A' then
+        local ans = read_group(i, directive)
+        curr_slide.text = curr_slide.text .. c .. directive .. '{' .. ans .. '}'
       else
         if directive == 'image' then
           curr_slide.numimages = curr_slide.numimages + 1
@@ -137,16 +162,14 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
           curr_slide.header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
           -- print('curr slide header = ' .. curr_slide.header)
-          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and 'Investigate') or (curr_slide.header:match('Synthesize') and 'Synthesize')))
+          curr_slide.section = ((curr_slide.level == 2) and ((curr_slide.header:match('Launch') and 'Launch') or (curr_slide.header:match('Investigate') and (((curr_slide.numimages == 2) and 'Investigate2') or 'Investigate')) or (curr_slide.header:match('Synthesize') and 'Synthesize')))
         end
       elseif c == '[' then
-        local table_line = false
         local table_numcols = 0
         local table_header = false
         local L = i:read_line()
         if not L then break
         elseif L:match('cols=[%d"\']') then
-          table_line = true
           if L:match('header') then table_header = true end
           if L:match('cols=(%d+)') then
             table_numcols = tonumber(L:gsub('.-cols=(%d+).*', '%1'))
@@ -161,15 +184,14 @@ local function get_slides(lsn_plan_adoc_file)
           end
           curr_slide.text = curr_slide.text .. '}\n'
         else
-          if L:match('^%.lesson%-instruction]') then
-            curr_slide.suffix = '-DN'
-          end
           curr_slide.text = curr_slide.text .. '['
           buf_toss_back_char('\n', i)
           buf_toss_back_string(L, i)
         end
       elseif c == '|' and read_if_poss(i, '===') then
         i:read_line()
+        curr_slide.text = curr_slide.text .. (inside_table_p and '}' or '{')
+        inside_table_p = not inside_table_p
         beginning_of_line_p = true
       else
         curr_slide.text = curr_slide.text .. c
@@ -217,7 +239,14 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('@slidebreak\n')
         o:write('{layout="', curr_section, slide.imageorientation, slide.suffix, '"}\n')
         o:write('# ', curr_header, '\n\n')
-        o:write(slide.text)
+        local slide_lines = string_split(slide.text, '\n')
+        for _,l1 in ipairs(slide_lines) do
+          l1 = l1:gsub('^(%s+)#', '%1\\#')
+          l1 = l1:gsub('^%-%-%-%-$', '````')
+          l1 = l1:gsub('__(.-)__', '_%1_')
+          l1 = l1:gsub(' %+$', '')
+          o:write(l1, '\n')
+        end
       end
     end
   end

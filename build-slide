@@ -11,7 +11,7 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
-export EXPERIMENTAL
+export OLDFORMAT
 export PROGLANG
 lsn=
 
@@ -22,8 +22,10 @@ else
   while test $# -ne 0; do
     if test "$1" = -f; then
       regenid=1; shift
+    elif test "$1" = -old; then
+      OLDFORMAT=1; shift
     elif test "$1" = -z; then
-      EXPERIMENTAL=1; regenid=1; shift
+      echo WARNING: Obsolete option $1; regenid=1; shift
     elif test "$1" = --proglang; then
       shift; PROGLANG="$1"; shift
     else
@@ -64,6 +66,10 @@ if test ! -d distribution; then
   exit
 else
   cd distribution
+  if test -s .make.error.log; then
+    echo make failed\; build-slide aborted
+    exit
+  fi
 fi
 
 export NATLANG
@@ -98,19 +104,18 @@ for NATLANG in *; do
     fi
   fi
 
-  slidesmd=slides.md
+  slidesmd=zlides.md
   slidesmkd=slides.mkd
 
-  if test -n "$EXPERIMENTAL"; then
-    slidesmd=zlides.md
-    slidesmkd=zlides.mkd
+  if test -n "$OLDFORMAT"; then
+    slidesmd=slides.md
   fi
 
   if test -n "$regenid"; then
     rm -f $idfile
   fi
   if test -f $slidesmd; then
-    $TOPDIR/lib/slides-preproc.rkt $slidesmd
+    $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"

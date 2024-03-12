@@ -652,6 +652,7 @@
 
 (define (read-image-json-file-in image-dir)
   (let ([json-file (build-path image-dir "lesson-images.json")]
+        [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
 
@@ -661,31 +662,28 @@
                 *natlang* *lesson*)))
 
     (cond [(file-exists? json-file)
-           (let ([images-hash (call-with-input-file json-file read-json)])
-             ; (printf "images-hash is ~s\n" images-hash)
-             (set! *images-hash-list*
-               (cons (cons *containing-directory* images-hash) *images-hash-list*))
-             (unless (or *narrative* *target-pathway* *teacher-resources*)
-               (hash-for-each images-hash
-                 (lambda (key val)
-                   (let* ([image-file (build-path image-dir (symbol->string key))]
-                          [anon-image-file (anonymize-filename image-file)])
-                     (unless (file-exists? anon-image-file)
-                       (cond [(file-exists? image-file)
-                              (rename-file-or-directory image-file anon-image-file #t)]
-                             [else
-                               (unless (member key missing-images)
-                                 (set! missing-images (cons key missing-images)))
-                               #;(printf "WARNING: ~a: Image file ~a not found\n"
-                                       (errmessage-context) image-file)
-                             ]))))))
-             images-hash)]
+           (set! images-hash (call-with-input-file json-file read-json))
+           ; (printf "images-hash is ~s\n" images-hash)
+           (set! *images-hash-list*
+             (cons (cons *containing-directory* images-hash) *images-hash-list*))
+           (unless (or *narrative* *target-pathway* *teacher-resources*)
+             (hash-for-each images-hash
+               (lambda (key val)
+                 (let* ([image-file (build-path image-dir (symbol->string key))]
+                        [anon-image-file (anonymize-filename image-file)])
+                   (unless (file-exists? anon-image-file)
+                     (cond [(file-exists? image-file)
+                            (rename-file-or-directory image-file anon-image-file #t)]
+                           [else
+                             (unless (member key missing-images)
+                               (set! missing-images (cons key missing-images)))
+                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                             ]))))))]
           [else
             (when (or *lesson-plan* *lesson*)
               (unless (member json-file *missing-image-json-files*)
                 (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))
-            'not-found])
+                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -693,6 +691,8 @@
           (for ([f missing-images])
             (write f o) (newline o)))
         #:exists 'append))
+
+    images-hash
     ))
 
 (define (make-image img width #:text [author-supplied-text #f] #:centered? [centered? #f])
@@ -1055,14 +1055,14 @@
                     (map (lambda (x)
                            (cond [(or (not x) (string=? x "none") (string=? x *proglang*)) #f]
                                  [(and (string=? x "pyret") *narrative* (string=? *target-pathway* "algebra-wescheme"))
-                                  (format "link:~acourses/algebra-pyret[Pyret]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-pyret][Pyret]" *dist-root-dir*)]
                                  [(and (string=? x "wescheme") *narrative* (string=? *target-pathway* "algebra-pyret"))
-                                  (format "link:~acourses/algebra-wescheme[WeScheme]" *dist-root-dir*)]
+                                  (format "link:pass:[~acourses/algebra-wescheme][WeScheme]" *dist-root-dir*)]
                                  [(and (string=? x "pyret") *lesson-plan*)
-                                  (format "link:~alessons/~a/index.shtml[Pyret]" *dist-root-dir*
+                                  (format "link:pass:[~alessons/~a/index.shtml][Pyret]" *dist-root-dir*
                                           (regexp-replace "-[a-z]+$" *lesson-plan* ""))]
                                  [*lesson-plan*
-                                   (format "link:~alessons/~a/index.shtml[~a]" *dist-root-dir*
+                                   (format "link:pass:[~alessons/~a/index.shtml][~a]" *dist-root-dir*
                                            (if (string=? *proglang* "pyret")
                                                (string-append *lesson-plan* "-" x)
                                                (regexp-replace "-[a-z]+$" *lesson-plan* (string-append "-" x)))
@@ -1678,7 +1678,7 @@
                             (let ([exprs (read-group i directive #:scheme? #t)])
                               (when *solutions-mode?*
                                 (for ([s (string-to-form exprs)])
-                                  (display (massage-arg s) o))))]
+                                  (display (enclose-span ".solution" (format "~a" (massage-arg s))) o))))]
                            [(string=? directive "smath")
                             (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
@@ -1731,6 +1731,7 @@
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
                                    [converted-text (expand-directives:string->string text)])
+                              (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
                                         (string-append "\n\n[.teacherNote]\n--\n"
@@ -1739,17 +1740,10 @@
                                       [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
-                            (let* ([text (read-group i directive #:multiline? #t)]
-                                   [contains-blocks? (regexp-match "\n[-*] " text)]
-                                   [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
-                              (display
-                                (cond [contains-blocks?
-                                        (string-append "\n\n[.indentedpara]\n--\n"
-                                          converted-text
-                                          "\n--\n\n")]
-                                      [else ((if contains-nl? enclose-div enclose-span)
-                                             ".indentedpara" converted-text)]) o))]
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (expand-directives:string->port text o)
+                              (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -1838,13 +1832,14 @@
                                       (expand-directives:string->port s o)
                                       )))))]
                            [(string=? directive "optional")
-                            (display (enclose-span ".optionaltag" "Optional: ") o)]
+                            (display (enclose-span ".optionaltag" "") o)]
                            [(string=? directive "opt")
                             (let ([text (read-group i directive)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (fprintf o "[.optionaltag]##Optional: ##")
+                              (display "[.optionaltag]##{empty}##\n" o)
                               (display (expand-directives:string->string text) o)
+                              (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -1939,9 +1934,9 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.q-and-a]\n--\n" o)
+                              (display "\n[.actually-openblock.q-and-a]\n====\n" o)
                               (expand-directives:string->port text o)
-                              (display "\n--\n" o))]
+                              (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)

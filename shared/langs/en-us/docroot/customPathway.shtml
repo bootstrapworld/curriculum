@@ -241,9 +241,7 @@
         link.href = newLink.href;
       });
     }
-
-
-
+    
     function makeEditable(node) {
         node.contentEditable = true;
         node.onkeydown = e => { if(e.key == 'Enter') save(node); }
@@ -264,6 +262,14 @@
         url.searchParams.set("days", days.join(','));
         history.pushState({}, "", url);
         init();
+    }
+    
+    function makeBook(pathway, lessons) {
+        // for each lesson, walk through the pages
+        const pageCount = lessons.reduce((acc, l) => acc + graph[l].pages.length, 1)
+        const pageNums = Array.from({length: pageCount}, (_, i) => i + 1)
+        console.log('pageNums:', pageNums);
+        makeCustomBook(pathway, lessons, false, pageNums)
     }
     </script>
 </head>
@@ -300,7 +306,7 @@
 
         <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
-            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="#" onclick="makeCustomBook(pathway, lessons)">Student Workbook</a>. 
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void" onclick="makeBook(pathway, lessons)">Student Workbook</a>. 
             <p/>
             <span id="status">
                 <label for="file">Assembling Workbook:</label>
