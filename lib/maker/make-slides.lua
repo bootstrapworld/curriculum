@@ -20,6 +20,23 @@ local lplan_file = 'index.adoc'
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
+local function nicer_case(s)
+  if s == '' then return s
+  elseif s == 'codap' then return 'CODAP'
+  elseif s == 'wescheme' then return 'WeScheme'
+  else
+    return string.upper(s:sub(1,1)) .. s:sub(2)
+  end
+end
+
+local function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  if not x then return false end
+  return x
+end
+
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
@@ -108,6 +125,7 @@ local function get_slides(lsn_plan_adoc_file)
   file_being_read = lsn_plan_adoc_file
   local slides = {}
   local inside_table_p = false
+  local inside_nested_table_p = false
   local inside_code_display_p = false
   local inside_css_p = false
   local inside_lesson_instruction = false
@@ -152,7 +170,7 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
-          local _, n = txt:gsub('|===', 'z')
+          local _, n = txt:gsub('[|!]===', 'z')
           n = math.floor(n / 2)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
@@ -165,6 +183,8 @@ local function get_slides(lsn_plan_adoc_file)
             local txt = read_group(i, directive, false, true)
             scan_directives(io.open_buffered(false, txt), 'nested')
           end
+        elseif directive == 'proglang' then
+          curr_slide.text = curr_slide.text .. nicer_case(proglang)
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, false, true)
           scan_directives(io.open_buffered(false, txt), 'true')
@@ -275,7 +295,8 @@ local function get_slides(lsn_plan_adoc_file)
         elseif c == '[' then
           local L = i:read_line()
           if not L then break
-          elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
+          elseif L:match('cols=[%d"\']') or
+            L:match('%.[a-z-]+%-table') then
             beginning_of_line_p = true
           else
             curr_slide.text = curr_slide.text .. '['
@@ -287,8 +308,16 @@ local function get_slides(lsn_plan_adoc_file)
           inside_table_p = not inside_table_p
           beginning_of_line_p = true
           if inside_table_p then
+            inside_nested_table_p = false
             tableIdx = tableIdx + 1
             curr_slide.text = curr_slide.text .. '@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}'
+          end
+        elseif c == '!' and read_if_poss(i, '===') then
+          i:read_line()
+          inside_nested_table_p = not inside_nested_table_p
+          beginning_of_line_p = true
+          if inside_nested_table_p then
+            tableIdx = tableIdx + 1
           end
         elseif inside_table_p then
           --noop

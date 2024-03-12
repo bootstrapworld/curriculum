@@ -3,6 +3,7 @@
 <style>
 table table p { margin: 0;  }
 table table td { padding: 0; }
+table tr:first-of-type td:nth-of-type(2) { border-bottom: none !important; }
 </style>
 ++++
 @description{Students learn to combine image transformation functions using Circles of Evaluation.}
@@ -39,7 +40,7 @@ table table td { padding: 0; }
 - @lesson-link{project-logo}
 
 |Preparation
-| 
+|
 @preparation{
 - There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
@@ -138,6 +139,31 @@ There are two ways of thinking about the activity you just completed.
 
 - *Option 2*: Each function passes its result directly into the next function.
 
+<<<<<<< HEAD
+=======
+@indented{
+[cols="^.^6a,.<1,^.^3a", frame="none", stripes="none"]
+|===
+| *Three Steps*
+|
+| *Three Circles*
+
+|
+[cols="2a,3a", grid="none", frame="none", stripes="none"]
+!===
+!`step1 = add1(4)`      ! _(Start with `4`, and now we have `5`)_
+!`step2 = double(step1)`! _(now we have `10`)_
+!`step3 - half(step2)`  ! _(now we're back to `5`)_
+!===
+| *...or...*
+|
+@show{(coe '(half (double (add1 4))))}
+
+_half( double( add1(4) ) )_
+|===
+}
+
+>>>>>>> a9ea06dd00240cc91a88729cd7ca4457355f36b3
 @QandA{
 @Q{Which representation (below) corresponds with Option 1? How do you know?}
 @A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}

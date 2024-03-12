@@ -98,7 +98,8 @@ function read_word(i)
   local w = {}
   while true do
     local c = buf_peek_char(i)
-    if c:match('^%a') or c == '-' then
+    if not c then break
+    elseif c:match('^%a') or c == '-' then
       c = i:read(1)
       table.insert(w, c)
     else
