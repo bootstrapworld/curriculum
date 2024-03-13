@@ -697,7 +697,10 @@ const MoreAlg = {
     "title": "Interactive Functions Activity",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
     } 
+  }
 }
 
 const EarlyMath = {
