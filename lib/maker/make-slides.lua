@@ -173,7 +173,7 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
-          local _, n = txt:gsub('[|!]===', 'z')
+          local _, n = txt:gsub('|===', 'z')
           n = math.floor(n / 2)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
@@ -321,7 +321,7 @@ local function get_slides(lsn_plan_adoc_file)
           inside_nested_table_p = not inside_nested_table_p
           beginning_of_line_p = true
           if inside_nested_table_p then
-            tableIdx = tableIdx + 1
+            --tableIdx = tableIdx + 1
           end
         elseif inside_table_p then
           --noop
