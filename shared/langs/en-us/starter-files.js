@@ -4,7 +4,7 @@
 // WeScheme/Pyret/CODAP starter file titles should end with Starter File
 // Desmos file titles should end with (Desmos)
 
-const Editors = {
+const Editors = { 
   "editor": {
     "title": "the editor",
     "autoinclude": false,
@@ -676,23 +676,28 @@ const MoreAlg = {
     }
   },
   "method-1": {
-  "title": "Method 1: Composing Functions",
-  "pyret": {
-    "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
+    "title": "Method 1: Composing Functions",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
   },
-  "wescheme": {
-    "url": "https://www.wescheme.org/view?publicId=AXvgZkqnNi"
+   "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=AXvgZkqnNi"
     }
   },
   "method-2": {
-  "title": "Method 2: Defining Layers",
-  "pyret": {
-    "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
+    "title": "Method 2: Defining Layers",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
   },
-  "wescheme": {
-    "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
+   "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
     }
-  }
+  },
+   "interactive-functions": {
+    "title": "Interactive Functions Activity",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+    } 
 }
 
 const EarlyMath = {
