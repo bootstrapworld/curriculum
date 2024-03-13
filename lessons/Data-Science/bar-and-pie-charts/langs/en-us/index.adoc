@@ -73,7 +73,7 @@ Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to not
 
 @image{images/count-more-species.png, 160} @image{images/bar-more-species.png, 385}
 
-Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
+Both `bar-chart` and `count` **group the data in one column by value**, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
 
 @define{about-interactive-displays}{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.}
 
@@ -81,7 +81,7 @@ Both `bar-chart` and `count` *group the data in one column by value*, creating "
 @ifslide{@teacher{@about-interactive-displays}}
 
 @lesson-point{
-@vocab{Bar charts} group data _by value_ to show frequency as a count.
+@vocab{Bar charts} group data __by value__ to show frequency as a count.
 }
 
 @slidebreak
@@ -95,7 +95,7 @@ Pie charts group data _by value_ to show frequency as a percentage.
 @define{infer}{
 If our data is based on sample data from a larger population, we can use these charts to _infer_ the proportion of a whole population that might belong to each category. For example, the distribution of species in our shelter might help us make guesses about the distribution of species in other shelters.
 
-While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in _any_ order, without changing the meaning of the chart.}
+While bars in some bar charts should follow some logical order (alphabetical, small-medium-large, etc), the pie slices and bars can really be placed in __any__ order, without changing the meaning of the chart.}
 
 @ifnotslide{@infer}
 @ifslide{@teacher{@infer}}
@@ -141,6 +141,7 @@ Grouping by value works well when lots of different data points can be sorted in
 - How is `pie-chart` similar to `bar-chart`? How is it different?
 - When would you want to use one chart instead of another?
 - Which displays do you find it easier to interpret? Why?
+- What questions about the dataset are you curious to investigate using these displays?
 
 @strategy{Optional Extension}{
 
@@ -157,7 +158,7 @@ Sometimes we want to visualize data that is _already summarized:_
 | "Pink"			| 1
 |===
 
-In this situation, we want to use the values in the __first__ column for the labels of our pie slices or bars, and the values in the _second_ column for the size. We have contracts for those, too:
+In this situation, we want to use the values in the __first__ column for the labels of our pie slices or bars, and the values in the __second__ column for the size. We have contracts for those, too:
 @show{(contract 'pie-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
 @show{(contract 'bar-chart-summarized '((table-name Table) (labels String) (values String)) "Image" )}
 
@@ -205,15 +206,16 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 ^| Multi Bar Chart
 ^| @image{images/stacked-bar-species-sex.png, 300}
 ^| @image{images/multi-bar-species-sex.png, 300}
-| Stacked Bar Charts put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
-| Multi Bar Charts put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
+| Stacked Bar Charts put the __groups__ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
+| Multi Bar Charts put the __subgroups__ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
 |===
 
 
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
-- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts?
+- Wath are some of the questions you asked about the animals data set using these displays? And what did you learn?
+- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts
 - What kinds of questions are better answered by stacked bar charts?
 - What kinds of questions are better answered by multi bar charts?
 
