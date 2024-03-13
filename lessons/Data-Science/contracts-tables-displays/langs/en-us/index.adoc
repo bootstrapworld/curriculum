@@ -1,11 +1,11 @@
 = Contracts: Making Tables and Displays
 ++++
 <style>
-.circle2 .expression .expression { background: lightblue; }
+.circle2 .expression .expression { background: lightskyblue; }
 
-.circle3 .expression { background: lightgreen; }
+.circle3 .expression { background: aquamarine; }
 .circle3 .expression .expression { background: white; }
-.circle3 .expression .expression .expression { background: lightblue; }
+.circle3 .expression .expression .expression { background: lightskyblue; }
 </style>
 ++++
 @description{Students learn about functions for sorting and counting data in tables, then are introduced to one-variable displays.}
@@ -97,7 +97,7 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 @slidebreak
 
 @lesson-point{
-Contracts are the _instruction manual_ for functions.
+Contracts are the __instruction manual__ for functions.
 }
 
 The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
@@ -125,7 +125,7 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 === Common Misconceptions
 
-Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+Students are likely to think that `sort` __changes the table__, when instead it __produces a new, sorted table.__ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
 
 === Synthesize
 
@@ -173,7 +173,7 @@ If we want to see the first ten animals, our diagram would look like this.
 @do{
 (define expB '(first-n-rows animals-table 10))
 }
-[.circle1]
+
 @show{(coe expB)}
 }
 
@@ -217,11 +217,21 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 [.circle2]
 @show{(coe exp1)} 
 
-@ifnotslide{@show{(code exp1)}}
-@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;">first-n-rows(<span style="color:red">sort(animals-table, "age", true)</span>, 10)</span>}
+@ifnotslide{@image{images/exp1.png, 450}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;">first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true)</span>, 10)</span>}
 }
 
 @slidebreak
+
+@indented{And this diagram would translate to the code that follows.
+
+[.circle3]
+@show{(coe exp2)}
+
+@ifnotslide{@image{images/exp2.png, 600}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">count(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">"species")</span> </span>}
+}
+
 
 @lesson-instruction{
 - Turn to @printable-exercise{coe-sort-count.adoc}. 
@@ -237,7 +247,7 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 == Bug Hunting @duration{10 minutes}
 
 === Overview
-This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
+This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are __specially-designed__ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
 
 === Launch
 
@@ -395,7 +405,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @QandA{
 @Q{What expression would this Circle of Evaluation generate?}
-@A{@show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}}
+@A{@ifnotslide{@image{images/piecode.png, 600}}@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">pie-chart(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">)</span> </span>}}
 
 @Q{What would be the resulting display?}
 @A{a pie chart showing the species of the 10 youngest animals}
@@ -408,7 +418,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 @lesson-instruction{
 - Complete @printable-exercise{coe-displays.adoc}.
 - Then consider what display it might be interesting to compare each of the displays on this page with.
-  * _Displays are often most informative when compared with other displays._ 
+  * __Displays are often most informative when compared with other displays.__ 
   * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
 } 
 
@@ -418,7 +428,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @QandA{
 @Q{Which displays worked with categorical data?}
-@A{`pie-chart` _and_ `bar-chart`}
+@A{`pie-chart` __and__ `bar-chart`}
 
 @Q{Why might you choose a bar chart over a pie chart or vice versa?}
 @A{`pie-chart` only makes sense when you have the full picture, since it's representing the proportion of the whole}
