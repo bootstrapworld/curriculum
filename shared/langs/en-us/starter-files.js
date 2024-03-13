@@ -1,8 +1,8 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-// WeScheme/Pyret/CODAP starter file titles should end with Starter File
 // Desmos file titles should end with (Desmos)
+// WeScheme/Pyret/CODAP starter file titles should end with Starter File
 
 const Editors = { 
   "editor": {
@@ -694,7 +694,7 @@ const MoreAlg = {
     }
   },
    "interactive-functions": {
-    "title": "Interactive Functions Activity",
+    "title": "Interactive Functions Activity (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
   },
