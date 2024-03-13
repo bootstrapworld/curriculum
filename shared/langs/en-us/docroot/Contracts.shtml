@@ -15,7 +15,11 @@
     /* override some asciidoctor and shared.less defaults */
     *:not(pre)>code { background-color: transparent !important; }
     .contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
-    .fitb, .fitbruby { border-bottom-color: gray !important; padding: 0 !important; min-width: 7em !important; }
+    .fitb, .fitbruby { 
+      border-bottom-color: gray !important; 
+      padding: 0 !important; 
+      min-width: 7em !important; 
+    }
     .contracts-table tr:nth-child(odd) { border: 0; }
     .contracts-table tbody tr:nth-child(even) td { padding-left: 2em !important; }
     tbody tr:first-child td:nth-child(3) code { display: flex; }
@@ -67,12 +71,11 @@
       }
     }
 
-    // set the list of contracts
+    // set the list of contracts, sorted alphabetically and filtered by proglang
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
-      .sort((a,b) => processName(a) > processName(b)? 1 : -1)      // sort by proglang-specific names..
-      .filter(c => primitives? primitives.includes(c.name) : true) // for functions in our list..
-      .filter(elideProgLangSpecificPrimitives);                   // but only valid ones
+      .sort((a,b) => processName(a).toUpperCase() > processName(b).toUpperCase()? 1 : -1)
+      .filter(elideProgLangSpecificPrimitives);
 
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
@@ -143,6 +146,12 @@
             (c.comment? '<span class="cm-comment"> ' + prefix + c.comment + '</span>': '') + '</td>'
           tbody.appendChild(row1);
           tbody.appendChild(row2);
+
+          // by default, hide primitives that aren't in this pathway
+          if(primitives && !primitives.includes(c.name)) { 
+            tbody.style.display = 'none';
+          }
+
           table.appendChild(tbody);
         });
       window.status = "ready";
@@ -150,15 +159,19 @@
 
     var searchTimeout;
     function search(str) {
+      const searching = str.trim().length > 0;
       clearTimeout(searchTimeout);
       const tbodies = [...document.querySelectorAll('#contracts tbody')];
       searchTimeout = setTimeout( () => {
         console.time('time to filter');
         const table = document.getElementById('contracts');
         table.style.display = "none";
-        tbodies.forEach((tbody, idx) =>
+        tbodies.forEach((tbody, idx) => {
+          const inPathway = primitives && primitives.includes(contracts[idx].name);
+          const isMatch = contracts[idx].name.includes(str);
           // if it's a match, make this tbody visible. Otherwise, invisible
-          tbody.style.display = contracts[idx].name.includes(str)? "table-row-group" : "none");
+          tbody.style.display = ((searching && isMatch) || (!searching && inPathway))? "table-row-group" : "none";
+        });
         table.style.display = "table";
         console.timeEnd('time to filter');
       }, 250);
@@ -189,7 +202,7 @@
         </p>
         <div id="search">
             Searching for a function? <input id="searchBox" type="search" onInput="search(this.value)"
-            placeholder="Type it here!"/>
+            placeholder="Search the entire Bootstrap library!"/>
         </div>
         <table id="contracts" class="contracts-table">
           <thead>
