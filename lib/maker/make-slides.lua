@@ -29,14 +29,6 @@ local function nicer_case(s)
   end
 end
 
-local function first_line(f)
-  local i = io.open(f)
-  if not i then return false end
-  local x = i:read()
-  if not x then return false end
-  return x
-end
-
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
@@ -258,12 +250,12 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. '----'
           inside_code_display_p = not inside_code_display_p
         elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
-          i:read_line()
+          i:read()
           beginning_of_line_p = true
         elseif inside_css_p then
           --noop
         elseif c == '=' then
-          local L = i:read_line()
+          local L = i:read()
           beginning_of_line_p = true
           -- print('L = ' .. L)
           if not L then
@@ -296,13 +288,13 @@ local function get_slides(lsn_plan_adoc_file)
             end
           end
         elseif c == '[' then
-          local L = i:read_line()
+          local L = i:read()
           if not L then break
           else
             beginning_of_line_p = true
           end
         elseif c == '|' and read_if_poss(i, '===') then
-          i:read_line()
+          i:read()
           inside_table_p = not inside_table_p
           beginning_of_line_p = true
           if inside_table_p then
