@@ -1445,7 +1445,8 @@
                             (read-group i directive)]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (when (regexp-match "\\|===" text)
+                              (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
                                 (display "\n====\n" o)))]
