@@ -122,6 +122,7 @@ The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3
 @Q{Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}}
 @Q{What should we do first?}
 @A{It depends! We can either work
+
 - outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
 - or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
 }
@@ -132,15 +133,16 @@ The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3
 Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}.
 What should we do first?
 
-@teacher{options are shown on the next slide.}
+@teacher{Options are shown on the next slide.}
+}
 
 @slidebreak
 
+@ifslide{
 It depends! We can either work
+
 - outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
 - or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
-
-@slidebreak
 
 @teacher{The Circle of Evaluation for @math{10 - (5 + 3)} is shown on the next slide.}
 }
@@ -277,7 +279,7 @@ All of the expressions that follow the function name are called arguments to the
 
 @slidebreak
 
-Arithmetic expressions involving more than one operation, will end up with more than one circle.,
+Arithmetic expressions involving more than one operation, will end up with more than one circle.
 
 @do{
   (define exprA '(+ 7 (* 3 2)))
@@ -290,9 +292,9 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 [.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-|*Expression*			      | &rarr; | @show{(math exprA)}
-|*Circle of Evaluation*	| &rarr; | @show{(coe exprA)}
-|*Code*					        | &rarr; | @show{(code exprA #:parens true) }
+|**Expression**			      | &rarr; | @show{(math exprA)}
+|**Circle of Evaluation**	| &rarr; | @show{(coe exprA)}
+|**Code**					        | &rarr; | @show{(code exprA #:parens true) }
 |===
 
 @QandA{
@@ -446,8 +448,10 @@ Now that we understand the structure of Circles of Evaluation, we can use them t
 
 == Additional Exercises
 
+@ifnotslide{
+If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!}
 
-If you are digging into Order or Operations and are looking for more practice with Circles of Evaluation before introducing code, we have lots of options!
+@ifslide{More practice connecting Circles of Evaluation and Arithmetic Expressions}
 
 - @ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5dcad0b2ef54cc0c830fd4df, Matching Circles of Evaluation to Expressions}}
 @ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5feced272d0eff0ca8381baa}}.
@@ -461,6 +465,8 @@ If you are digging into Order or Operations and are looking for more practice wi
 - @opt-printable-exercise{evaluate-coe2.adoc}
 - @opt-printable-exercise{why-not-commutative.adoc}
 
+@slidebreak
+
 More practice connecting Circles of Evaluation to Code
 
 - @opt-printable-exercise{match-coe-to-code.adoc}
@@ -472,13 +478,15 @@ More practice connecting Circles of Evaluation to Code
 - @opt-printable-exercise{3-column-3.adoc}
 - @opt-printable-exercise{3-column-4.adoc}
 
+@slidebreak
+
 More 3-column practice with negatives:
 
 - @opt-printable-exercise{3-column-w-neg-5.adoc}
 - @opt-printable-exercise{3-column-w-neg-6.adoc}
 
 3-column challenge problems with square roots, brackets, and exponents: +
-@hspace{1ex} _Students must first complete_ @printable-exercise{beyond-operations-notice.adoc}!
+@hspace{1ex} __Students must first complete__ @printable-exercise{beyond-operations-notice.adoc}!
 
 - @printable-exercise{3-column-challenge.adoc}
 - @opt-printable-exercise{3-column-w-sqrts.adoc}
