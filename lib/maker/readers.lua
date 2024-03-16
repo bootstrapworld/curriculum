@@ -267,6 +267,6 @@ function first_line(f)
   local i = io.open(f)
   if not i then return false end
   local x = i:read()
-  if not x then return false end
+  i:close()
   return x
 end
