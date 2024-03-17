@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export SEASON=fall2023
+export SEMESTER=fall
+export YEAR=2024-beta
 
-bootstraproot=https://bootstrapworld.org/materials/$SEASON
-
+bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 SED=sed
 
 if which gsed|grep -q .; then
@@ -59,6 +59,11 @@ export TOPDIR=$(pwd)
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
 parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 
+# md2googleslides can optionally take a path to a CSS file,
+# which is used for highlighting code. We use our standard
+# CSS file for this
+cssPath=$TOPDIR/distribution/en-us/lib/shared.css
+
 make
 
 if test ! -d distribution; then
@@ -95,15 +100,6 @@ for NATLANG in *; do
 
   idfile=slides-$PROGLANG.id
 
-  if test -z "$regenid"; then
-    if test -f "$idfile"; then
-      read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
-      if test "$goahead" != y; then
-        exit
-      fi
-    fi
-  fi
-
   slidesmd=zlides.md
   slidesmkd=slides.mkd
 
@@ -119,10 +115,21 @@ for NATLANG in *; do
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
+
+      # warn if used without -f
+      if test -z "$regenid"; then
+        if test -f "$idfile"; then
+          read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
+          if test "$goahead" != y; then
+            exit
+          fi
+        fi
+      fi
+
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
@@ -134,7 +141,7 @@ for NATLANG in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId --use-fileio > .tmp.txt
+        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
@@ -148,10 +155,13 @@ for NATLANG in *; do
         fi
       fi
       if test -f "$idfile"; then
-        cat "$idfile"|$SED -e 1q|$SED -e 's/^/<a target="_blank" href="https:\/\/docs.google.com\/presentation\/d\//' > slides-$PROGLANG.html
+        id=$(cat "$idfile"|$SED -e 1q)
+        slideurl="https:\/\/docs.google.com\/presentation\/d\/$id"
+        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > slides-$PROGLANG.html
+        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> slides-$PROGLANG.html
         timestamp=$(date +%c)
-        $SED -i -e 's/$/">Google Slides generated INSERTTIMESTAMP<\/a>/' slides-$PROGLANG.html
         $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
+        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" slides-$PROGLANG.html
       fi
     else
       echo WARNING: $slidesmd failed preprocessing

@@ -1,5 +1,10 @@
-= Matching Circles of Evaluation and Arithmetic Expressions
-
+= Matching Expressions to Diagrams
+++++
+<style>
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
 Draw a line from each Circle of Evaluation on the left to the corresponding arithmetic expression on the right.
 
 @do{
@@ -24,23 +29,23 @@ Draw a line from each Circle of Evaluation on the left to the corresponding arit
 | Arithmetic Expression
 
 | @show{(coe expr1)}
-|*@n*@showsoln{"-C" }||*A*
+|*@n* @ifsoln{C}  ||*A*
 | @show{(math expr2 #:parens true)}
 
 | @show{(coe expr2)}
-|*@n*@showsoln{"-A" }||*B*
+|*@n* @ifsoln{A}  ||*B*
 | @show{(math expr4 #:parens true)}
 
 | @show{(coe expr3)}
-|*@n*@showsoln{"-E" }||*C*
+|*@n* @ifsoln{E}  ||*C*
 | @show{(math expr1 #:parens true)}
 
 | @show{(coe expr4)}
-|*@n*@showsoln{"-B" }||*D*
+|*@n* @ifsoln{B} ||*D*
 | @show{(math expr5 #:parens true)}
 
 | @show{(coe expr5)}
-|*@n*@showsoln{"-D" }||*E*
+|*@n* @ifsoln{D}  ||*E*
 | @show{(math expr3 #:parens true)}
 
 |===

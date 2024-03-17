@@ -1,4 +1,4 @@
-= The Additive Inverse Property
+= Let's test \over with slides!
 
 @description{Students develop a more nuanced interpretation of the Commutative and Associative Properties as a result of their exploration of the inverse relationship between addition and subtraction.}
 
@@ -28,35 +28,48 @@
 * nothing
 |===
 
-== The Additive Inverse Property @duration{10 minutes}
+== Testing
 
+=== Launch
 
+@math{{56 - 5}\over{20 - 3}}}
 
-=== Investigate
+@slidebreak
 
-For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples!
+@ifnotslide{
+@QandA{
+@Q{Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}}
+@Q{What should we do first?}
+@A{It depends! We can either work
 
+- outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
+- or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
+}
+}
+}
 
-@teacher{
-@opt{If you would like to offer students additional practice with the additive inverse in @proglang, two optional activities include @opt-printable-exercise{are-they-identical.adoc} and @opt-printable-exercise{writing-equivalent-code-additive.adoc}.}
+@ifslide{
+Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}.
+What should we do first?
+
+@teacher{Options are shown on the next slide.}
 }
 
 @slidebreak
 
-@lesson-instruction{
-- We know that all functions will need an open parentheses and at least one input!
-- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
-- Type @show{(code '(sort animals-table))} in the Interactions Area and read the error message.
+@ifslide{
+It depends! We can either work
+
+- outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
+- or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
+
+@teacher{The Circle of Evaluation for @math{10 - (5 + 3)} is shown on the next slide.}
 }
 
-@QandA{
-@Q{What _hint_ does the error message give us about how to use this function?}
-@A{@image{images/sort-error.png, 650}}
-@A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
+@slidebreak
+
+Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
+
+@teacher{
+@opt{If it works for you, use this set of cards to have students physically match expressions and Circles of Evaluations.}
 }
-
-=== Synthesize
-
-- Using @proglang allows us to evaluate arithmetic expressions easily and efficiently. In your own words, describe _how_ you tested the equivalence of different expression - and how you interpreted the results that @proglang produced.
-- In @proglang, what does it mean for a test to pass? What does it mean for a test to fail?
-- What did this programming exploration teach you about the additive inverse?

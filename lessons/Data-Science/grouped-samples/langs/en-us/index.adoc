@@ -39,8 +39,11 @@
 This activity is all about @vocab{grouped samples}: Students make a bunch of non-random samples from the Animals Dataset, and see how each samples might answer the same question differently.
 
 === Launch
+
 When looking at a scatter plot of animals, it looks like the amount an animal weighs may have something to do with how long it takes to be adopted.
 @center{@image{images/scatter-plot.png,550}}
+
+@slidebreak
 
 But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
 
@@ -51,27 +54,28 @@ But if we label the dots by animal, we notice _every data point_ after 25 pounds
 Divide the class into groups of 3-4, with one student identified as the "reporter".
 }
 
-@lesson-instruction{
-- Looking at this scatter plot (above), does it make sense to analyze all the animals together? Why or why not?
-** _No. Every data point after 25 pounds belongs to a dog from the shelter. The cats are clumped in the lower weight range._
-- Are there some questions where it would be important to break up the population into species-specific populations? What are they?
-** _Sample response: Yes. If we want to know whether dogs or cats are more likely to be fixed, we would need to look at each species separately._
-- Are there some questions where it would be important to keep the whole population together? What are they?
-** _Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population._
-- Be ready to share your answers with the class!
+@QandA{
+@Q{Looking at this scatter plot (above), does it make sense to analyze all the animals together? Why or why not?}
+@A{No. Every data point after 25 pounds belongs to a dog from the shelter. The cats are clumped in the lower weight range.}
+@Q{Are there some questions where it would be important to break up the population into species-specific populations? What are they?}
+@A{Sample response: Yes. If we want to know whether dogs or cats are more likely to be fixed, we would need to look at each species separately.}
+@Q{Are there some questions where it would be important to keep the whole population together? What are they?}
+@A{Sample response: Yes. If we want to know if, in general, young animals are adopted more quickly, we would look at the entire population.}
 }
 
+@teacher{
 Have the reporters share their findings with the class.
+}
 
 === Synthesize
 
 You've been handed a dataset from a country where half the people have access to amazing medical care, and the other half have no healthcare.
 
-@lesson-instruction{
-* Why might it be important to look at a particular sample of a population?
-** _Sample response: Maybe we want to determine if emissions from a nearby factory impact the health of residents of one particular neighborhood._
-* Why is it sometimes bad to blindly take random samples?
-** _If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!_
+@QandA{
+@Q{Why might it be important to look at a particular sample of a population?}
+@A{Sample response: Maybe we want to determine if emissions from a nearby factory impact the health of residents of one particular neighborhood.}
+@Q{Why is it sometimes bad to blindly take random samples?}
+@A{If we took a random sample of the population as a whole, we might think that they are generally middle-income and have average health. But if we ask the same question about the two groups _separately_, we would discover inequality hiding in plain sight!}
 }
 
 
@@ -87,13 +91,18 @@ Sometimes important facts about samples get _lost_ if we mix them with the rest 
 Data Scientists define @vocab{grouped samples} of datasets, breaking them up into sub-groups that may be helpful in their analysis.
 
 @ifproglang{pyret}{
+@slidebreak
 
 Earlier, you learned how to define values in Pyret. We can define Numbers, Strings, Images, and even rows:
 
-  name = "Flannery"
-  age  = 16
-  logo = star(50, "solid", "red")
-  sasha= row-n(animals-table, 0)
+```
+name = "Flannery"
+age  = 16
+logo = star(50, "solid", "red")
+sasha= row-n(animals-table, 0)
+```
+
+@slidebreak
 
 Let's use this skill to define __Tables...__
 
@@ -110,16 +119,16 @@ A “kitten” is an animal who _is a cat_ and who _is young_. How would you def
 
 @lesson-instruction{
 @ifproglang{codap}{
-* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what sequence of Transformers will compute whether or not an animal is a kitten.
+* Turn to @printable-exercise{samples-from-animals-dataset.adoc}, and see what sequence of Transformers will compute whether or not an animal is a kitten.
 * Can you fill in the function notation for the other grouped samples?
 }
 
 @ifproglang{pyret}{
 * Open the @starter-file{grouped-samples}, save a copy, and click "Run".
 * What functions do you see defined here? What do they do?
-* Turn to @printable-exercise{pages/samples-from-animals-dataset.adoc}, and see what code define a table of only young cats.
+* Turn to @printable-exercise{samples-from-animals-dataset.adoc}, and see what code define a table of only young cats.
 * Can you fill in the code to define the other grouped samples?
-* In the starter file, scroll to the bottom of the Definitions Area. Add your solutions from @printable-exercise{pages/samples-from-animals-dataset.adoc}. Test them out!
+* In the starter file, scroll to the bottom of the Definitions Area. Add your solutions from @printable-exercise{samples-from-animals-dataset.adoc}. Test them out!
 }
 }
 
@@ -136,13 +145,19 @@ Students revisit the data display activity, now using the samples they created.
 === Launch
 Making grouped and random samples is a powerful skill, which allows us to dig deeper than just making charts or asking questions about a whole dataset. Now that we know how to make grouped samples, we can make much more sophisticated displays!
 
+@slidebreak
+
 Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
 
 @left{@image{images/AskQuestions.png, 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
 
+@slidebreak
+
 @vspace{1ex}
 
 @left{@image{images/ConsiderData.png, 100}} We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
+
+@slidebreak
 
 @vspace{1ex}
 
@@ -151,24 +166,24 @@ Let's start with question: __what's the ratio of fixed to unfixed *cats* at the 
 
 @vspace{1ex}
 
+@slidebreak
+
 @left{@image{images/InterpretData.png, 100}} What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{pages/data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
-- Complete @printable-exercise{pages/analyzing-categorical-data2.adoc}.
+- Complete @printable-exercise{data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{analyzing-categorical-data2.adoc}.
 }
 
 @ifproglang{pyret}{
+@opt{
 
-@optional: For students working on their own datasets...
-
-If you are working on your own dataset, use @printable-exercise{samples-from-my-dataset.adoc} to define your own grouped samples!
+For students who are working on their own dataset, use @printable-exercise{samples-from-my-dataset.adoc} to define grouped samples!
 
 Blank Design Recipes are also available @printable-exercise{design-recipe-helper-funs.adoc, here}.
-
 }
-
+}
 
 === Synthesize
 - What connections do you see between the "Consider Data" and "Analyze Data" steps?

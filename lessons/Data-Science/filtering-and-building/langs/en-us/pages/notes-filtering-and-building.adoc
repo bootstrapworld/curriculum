@@ -1,12 +1,34 @@
-= Defining Row Functions &amp; Using Table Functions
+= Advanced Table Manipulation
 
-Pyret has special functions that we can use to manipulate Tables.
+You've seen that Pyret has special functions that we can use to manipulate Tables:
 
-- In this course, the functions we’ll be using are
+  * `sort` - consumes the name of a column and a Boolean value to determine if that table should be sorted by that column in ascending order
+  * `row-n` - consumes an index (starting with zero!) and produces a row from a table
+  * `filter` - consumes a __Boolean-producing function__, and produces a table containing only rows for which the function returns `true`
+  * `build-column` - consumes the name of a new column, and a function that produces the values in that column for each Row
 
-** `sort` - consumes the name of a column and a Boolean value to determine if that table should be sorted by that column in ascending order
-** `row-n` - consumes an index (starting with zero!) and produces a row from a table
-** `filter` - consumes a __Boolean-producing function__, and produces a table containing only rows for which the function returns `true`
-** `build-column` - consumes the name of a new column, and a function that produces the values in that column for each Row
+You've also seen the "Order of Operations" for things like addition, subtraction, multiplication and division. *Is there an Order of Operations for manipulating tables?*
 
-*Order Matters!* Table operations must be applied in the __appropriate order__. For example, trying to order a table by a column that hasn’t been built yet will result in an error.
+@vspace{2ex}
+
+Suppose you have the following function defined:
+
+@vspace{1ex}
+
+`fun days-to-adopt(r): r["weeks"] * 7 end`
+
+@vspace{1ex}
+
+One of the Circles of Evaluation below will sort the table by the number of days it took for each animal to be adopted. *One of them will produce an error!* Can you figure out which one?
+
+@vspace{2ex}
+
+@show{(coe '(sort (build-column animals-table "days" days-to-adopt) "days" true))}
+
+@vspace{2ex}
+
+@show{(coe '(build-column (sort animals-table "days" true) days-to-adopt "days"))}
+
+@vspace{2ex}
+
+_We can't `sort` by a column that doesn't exist yet!_ In fact, we can't `filter` by that column either. When filtering and building tables, it's important to keep the order of operations in mind!

@@ -1,12 +1,17 @@
 = Composing Table Operations: Order Matters!
 ++++
 <style>
-.literalblock pre { padding: 0.5em !important; }
-table:first-of-type td {padding: .25em .5em !important; }
-div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+p.tableblock { margin: 0; }
+.literalblock pre { padding: 0em !important; }
+table:first-of-type td {padding: .1em .1em !important; }
+div.circleevalsexp .value { font-size: 0.6rem; margin: 0.5rem 0.5rem; }
 .data th:last-of-type, .data td:last-of-type * {
-  font-style: italic !important; text-align: center;
+  font-style: italic !important; text-align: center; padding: 0 5px !important;
 }
+.m td { padding: 2px 8px !important; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -20,7 +25,7 @@ div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 (define exp6 '(build-column (sort (filter t is-female) "age" true) "kilos" kilograms))
 }
 
-The table `t` below represents four animals from the shelter:
+In table `t` below, fill in the "kilos" values by dividing each of the 4 animals' `pounds` column value by 2.2.
 
 [.data, cols='6', options="header"]
 |===
@@ -31,41 +36,40 @@ The table `t` below represents four animals from the shelter:
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`  | @ifsoln{ `2.95`}
 |===
 
-You have the following functions defined below (read them _carefully!_):
+Then consider the table and the 2 duntction definitions.
 
-  fun is-female(r): r["sex"] == "female"  end
-  fun kilograms(r): r["pounds"] / 2.2     end
-  fun is-heavy(r):  r["kilos"] > 25       end
+ fun is-female(r): r["sex"] == "female"  end
+ fun kilograms(r): r["pounds"] / 2.2     end
+ fun is-heavy(r):  r["kilos"] > 25       end
 
-**TIP: To help you complete this page, fill in the "kilos" values in the table above by dividing each animal's `pounds` column by 2.2.**
+Match each table description on the left, to the Circle of Evaluation that will produce it. 
 
-For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
-
-[.FillVerticalSpace, cols=">.^6a,^.^2a,1,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+ 
+[.m, cols=">.^8a,^.^2a,1,^.^1a,.^11a",stripes="none",grid="none",frame="none"]
 |===
 
 | Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
-|*@n*@ifsoln{(B)} ||*A*
+|*@n*@ifsoln{B} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table containing Sasha, Nori and Toggle (in that order)
-|*@n*@ifsoln{(A)} ||*B*
+|*@n*@ifsoln{A} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table with an extra column for kilos, but only animals with more than 25 kilos
-|*@n*@ifsoln{+(C)+} ||*C*
+|*@n*@ifsoln{C} ||*C*
 | @show{(coe exp3)}
 
 | Won’t run: will produce an error (if so, why?)
-|*@n*@ifsoln{(D)} ||*D*
+|*@n*@ifsoln{D} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Sasha, Toggle, and Nori (in that order)
-|*@n*@ifsoln{+(F)+} ||*E*
+|*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces an empty table - with no animals at all!
-|*@n*@ifsoln{+(E)+} ||*F*
+|*@n*@ifsoln{E} ||*F*
 | @show{(coe exp6)}
 
 |===

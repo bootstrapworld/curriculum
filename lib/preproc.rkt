@@ -120,6 +120,8 @@
 
 (define *local-scheme-definitions* '())
 
+(define *enclosing-directive* #f)
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -444,10 +446,6 @@
   (display " | \n" o)
   (display "\ninclude::.index-standards.asc[]\n" o)
   (display "|===\n" o))
-
-(define (include-glossary o)
-  ;(printf "include-glossary\n")
-  (fprintf o "\n\ninclude::~a/{cachedir}.index-glossary.asc[]\n\n" *containing-directory*))
 
 (define (exercise-title f)
   (if (and (file-exists? f) (path-has-extension? f ".adoc"))
@@ -794,13 +792,6 @@
                     "index.shtml"
                     "index.adoc"
                     "index.asciidoc"))))
-
-(define (extract-domain-name f)
-  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
-    (and x
-         (let ([y (first x)])
-           (and (not (string-ci=? y "google"))
-                (string-titlecase (substring y 0 (- (string-length y) 4))))))))
 
 (define (make-dist-link f link-text)
   (let ([url-has-query-string? #f])
@@ -1228,7 +1219,11 @@
                   r)))))
         ;(printf "lesson-description is ~s\n" lesson-description)
         ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-        (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+        (if (string-prefix? lesson "project-")
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+          )
+        
         (if lesson-description
             (display lesson-description o)
             (display " {nbsp}" o))
@@ -1241,7 +1236,7 @@
         (let ([lesson-asc-file
                 (format "distribution/~a/lessons/~a/.cached/.index.asc" *natlang* lesson)]
               [lesson-glossary-file
-                (format "distribution/~a/lessons/~a/.cached/.lesson-glossary.json"
+                (format "distribution/~a/lessons/~a/.cached/.index-glossary.json"
                         *natlang* lesson)]
               [lesson-title-file
                 (format "distribution/~a/lessons/~a/.cached/.index.titletxt" *natlang* lesson)]
@@ -1253,7 +1248,7 @@
             (set! lesson-title (call-with-input-file lesson-title-file read-line)))
 
           (when (file-exists? lesson-glossary-file)
-            ;(printf "~a exists i\n" lesson-glossary-file)
+            ; (printf "~a exists i\n" lesson-glossary-file)
             (for ([s (call-with-input-file lesson-glossary-file read-json)])
               (unless (member s *glossary-items*)
                 (set! *glossary-items*
@@ -1328,6 +1323,7 @@
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
+  (set! *enclosing-directive* #f)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1429,6 +1425,8 @@
                             (display-begin-span ".right" o)]
                            [(string=? directive "center")
                             (display-begin-span ".center" o)]
+                           [(string=? directive "big")
+                            (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
                            [(string=? directive "define")
@@ -1443,11 +1441,18 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("ifslide" "scrub" "slideLayout"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
-                           [(string=? directive "ifnotslide")
+                           [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (expand-directives:string->port text o))]
+                              (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@show{ *\\(coe" text))
+                                (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
+                                (expand-directives:string->port text o #:enclosing-directive directive)
+                                (display "\n====\n" o)))]
+                           [(member directive '("ifnotslide" "preparation"))
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "page-of-lines")
                             (let ([n (string->number (read-group i directive))])
                               ; (printf "doing @page-of-lines ~s\n" n)
@@ -1546,7 +1551,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".pathway-only")
-                                  (expand-directives:string->string text)
+                                  (expand-directives:string->string text #:enclosing-directive directive)
                                   (create-end-tag "span")) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
@@ -1608,7 +1613,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [converted-text (expand-directives:string->string text)])
+                                   [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                               (display-lesson-description converted-text
                                                           (path-replace-extension *out-file* "-desc.txt.kp")
                                                           o))]
@@ -1660,6 +1665,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
                             (link-to-notes-pages o)]
+                           [(string=? directive "lesson-info")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-predoc: @lesson-info valid only in teacher resources"))
+                            (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
+                            (newline)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
@@ -1720,9 +1731,9 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (expand-directives:string->string text)
+                                    (expand-directives:string->string text #:enclosing-directive directive)
                                     (create-begin-tag "span" ".ruby")
-                                    (expand-directives:string->string ruby)
+                                    (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
@@ -1730,7 +1741,7 @@
                                    [contains-blocks? (or (regexp-match "\n[-*] " text)
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
+                                   [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                               (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
@@ -1742,13 +1753,13 @@
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.actually-openblock.indentedpara]\n====\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (cond [(string-ci=? proglang *proglang*)
-                                     (expand-directives:string->port text o)]
+                                     (expand-directives:string->port text o #:enclosing-directive #f)]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
 
@@ -1756,7 +1767,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [*solutions-mode?*
                                       (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                             [converted-text (expand-directives:string->string text)])
+                                             [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                         (display
                                           (cond [contains-nl?
                                                   (string-append
@@ -1772,7 +1783,7 @@
                            [(string=? directive "ifsoln-choice")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                     [converted-text (expand-directives:string->string text)])
+                                     [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                 (display (enclose-span
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
@@ -1783,7 +1794,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
                                      (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                            [converted-text (expand-directives:string->string text)])
+                                            [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                        (display
                                          (cond [contains-nl?
                                                  (string-append
@@ -1806,8 +1817,16 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak") o]
-
+                           [(string=? directive "slidebreak")
+                            (when *enclosing-directive*
+                              (printf "WARNING: ~a: @slidebreak inside ~a\n\n"
+                                      (errmessage-file-context)
+                                      (if (string? *enclosing-directive*)
+                                          (string-append "@" *enclosing-directive*)
+                                          "another directive")))
+                            (let ([c (peek-char i)])
+                              (when (and (char? c) (char=? c #\{))
+                                (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(assoc directive *macro-list*)
@@ -1829,16 +1848,14 @@
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
-                                      (expand-directives:string->port s o)
+                                      (expand-directives:string->port s o #:enclosing-directive directive)
                                       )))))]
-                           [(string=? directive "optional")
-                            (display (enclose-span ".optionaltag" "") o)]
                            [(string=? directive "opt")
-                            (let ([text (read-group i directive)]
+                            (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display "[.optionaltag]##{empty}##\n" o)
-                              (display (expand-directives:string->string text) o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
@@ -1935,40 +1952,43 @@
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.actually-openblock.q-and-a]\n====\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
-                              (expand-directives:string->port text o))]
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
-                              (expand-directives:string->port text o))]
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "strategy")
-                            (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.strategy-box, cols=\"1a\", grid=\"none\", stripes=\"none\"]\n" o)
-                              (display "|===\n|\n" o)
-                              (expand-directives:string->port text o)
-                              (display "\n|===\n" o))]
+                            (let* ([title (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (display "\n[.strategy-box]\n--\n" o)
+                              (display "[.title]\n" o)
+                              (expand-directives:string->port title o #:enclosing-directive directive)
+                              (display "\n\n" o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-point]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-instruction]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-roleplay")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[lesson-roleplay]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
-                                 (expand-directives:string->port (cdr c) o))]
+                                 (expand-directives:string->port (cdr c) o #:enclosing-directive directive))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -1988,9 +2008,7 @@
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
-                                  (set! *first-subsection-reached?* #t)
-                                  (when *lesson-plan*
-                                    (include-glossary o))]
+                                  (set! *first-subsection-reached?* #t)]
                                  [else #f])
                            (cond [*lesson*
                                    (display-section-markup i o)]
@@ -2027,15 +2045,18 @@
                           [else (display c o)])])
                 (loop))))))
 
-(define (expand-directives:string->string s)
+(define (expand-directives:string->string s #:enclosing-directive [enclosing-directive #t])
   (call-with-output-string
     (lambda (o)
-      (expand-directives:string->port s o))))
+      (expand-directives:string->port s o #:enclosing-directive enclosing-directive))))
 
-(define (expand-directives:string->port s o)
+(define (expand-directives:string->port s o #:enclosing-directive [enclosing-directive #t])
   (call-with-input-string s
     (lambda (i)
-      (expand-directives i o))))
+      (let ([old-enclosing-directive *enclosing-directive*])
+        (set! *enclosing-directive* enclosing-directive)
+        (expand-directives i o)
+        (set! *enclosing-directive* old-enclosing-directive)))))
 
 (define (preproc-adoc-file in-file
                            #:all-pathway-lessons [all-pathway-lessons #f]
@@ -2070,7 +2091,7 @@
   ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
 
   (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
+                               (printf "~a in ~a\n\n"
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* (build-path containing-directory in-file))
     ; (printf "doing preproc-adoc-file ~a\n" *in-file*)
@@ -2161,15 +2182,6 @@
                                    "-glossary"
                                    )))
 
-      (when *lesson-plan*
-        (accumulate-glossary-and-alignments))
-
-      ;(printf "pathwayrootdir = ~a\n" *pathway-root-dir*)
-      ;(printf "lesson = ~a\n" *lesson*)
-      ;(printf "lessonsubdir = ~a\n" *lesson-subdir*)
-
-      ; (printf "\nprereqs-used= ~s\n\n" *prereqs-used*)
-
       (when (pair? *prereqs-used*)
         ; (printf "lessonplan?= ~s; lesson?= ~s\n\n" *lesson-plan* *lesson*)
         (let ([prim-file (if *lesson-plan*
@@ -2201,7 +2213,7 @@
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
             (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Page]")
+              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
                 (fprintf o "\n** ~a\n\n" x))
@@ -2227,9 +2239,10 @@
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
+            ; GLOSSARY REFERENCE
+            (unless (empty? *glossary-items*)
+              (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
             ; LESSON PLAN
-            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference for this Pathway]\n" *dist-root-dir* )
-            ; CONTRACTS REFERENCE
             (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
               (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
             ; STATUS BAR FOR PRINTING PDFS
@@ -2264,6 +2277,8 @@
             ; OPTIONAL ONLINE EXERCISES
             (for ([x (map cdr (reverse *opt-online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
+            ; CONTRACTS REFERENCE
+            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference]\n" *dist-root-dir* )
             ; NO OPTIONAL ANYTHING - display a helpful message
             (when (and *supplemental-materials-needed?*
                        (empty? *opt-printable-exercise-links*)
@@ -2324,7 +2339,8 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
           [else
-            (printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)])))
+            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #f])))
 
 (define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
@@ -2410,23 +2426,19 @@
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
   (print-menubar (string-append file "-comment.txt"))
-  (call-with-output-file (string-append file ".asc")
-    (lambda (op)
-      (unless (empty? *glossary-items*)
-        (set! *glossary-items*
-          (sort *glossary-items* #:key first string-ci<=?))
-        (when *narrative*
-          (fprintf op "= Glossary\n\n"))
-        (when *lesson*
-          (fprintf op ".Glossary\n\n"))
-        (fprintf op "[.glossary]~%")
-        (for ([s *glossary-items*])
-          ;(fprintf op "* *~a*: ~a~%" (first s) (second s))
-          (fprintf op "~a:: ~a~%" (first s) (second s)))
-        (fprintf op "~%~%")))
-    #:exists 'replace)
-
-  ;if we wish, we can store missing glossary items in a temp file for later inspection
+  (unless (empty? *glossary-items*)
+    (set! *glossary-items*
+      (sort *glossary-items* #:key first string-ci<=?))
+    (call-with-output-file (string-append file ".json")
+      (lambda (op)
+        (display "[\n" op)
+        (let ([first? #t])
+          (for ([s *glossary-items*])
+            (cond [first? (display "  " op) (set! first? #f)]
+                  [else (display ",  " op)])
+            (fprintf op "[~s, ~s]\n" (first s) (second s))))
+        (display "]\n" op))
+      #:exists 'replace))
 
   )
 
@@ -2480,20 +2492,6 @@
   (display (create-end-tag "div") o)
   (display (create-end-tag "div") o)
   )
-
-(define (accumulate-glossary-and-alignments)
-  ; (printf "doing accumulate-glossary-and-alignments\n")
-  (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-glossary.json")
-    (lambda (op)
-      (let ([first? #t])
-        (display "[\n" op)
-        (for ([s *glossary-items*])
-          (cond [first? (set! first? #f)]
-                [else (display ",\n" op)])
-          (fprintf op "  [~s, ~s]" (first s) (second s))
-          )
-        (display "\n]\n" op)))
-    #:exists 'replace))
 
 ;coe
 (define (hspace n)

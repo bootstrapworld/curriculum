@@ -63,7 +63,7 @@
         contract["name-pyret"] : contract["name"];
     }
 
-    function ellideProgLangSpecificPrimitives(c) {
+    function elideProgLangSpecificPrimitives(c) {
       if(proglang == "wescheme") {
         return c.name !== '<>' 
       } else { 
@@ -75,19 +75,20 @@
     const contracts = Array.prototype.concat(
       ...Object.values(langTable).map(t => t.primitives))
       .sort((a,b) => processName(a).toUpperCase() > processName(b).toUpperCase()? 1 : -1)
-      .filter(ellideProgLangSpecificPrimitives);
+      .filter(elideProgLangSpecificPrimitives);
 
     // for each contract, add a row to the table
     // handle domains separately because they require more preprocessing
     function buildTable() {
       if(pathway && pathway.includes("hour-of-code")) {
+        delete window.status;
         throw "Pathway is 'hour-of-code', which has no contracts. Terminating.";
       }
 
       // If we're in a pathway, add it to the title
-      if(pathway) {
+      if(pathway && (pathway !== "ok")) {
         const h1 = document.querySelector('#header h1');
-        const title = pathway.split("-")
+        let title = pathway.split("-")
           .map(w => w[0].toUpperCase() + w.substring(1))
           .map(w => ["Wescheme", "Pyret"].includes(w)? '('+w+')' : w)
           .join(' ');
@@ -177,7 +178,7 @@
     }
   </script>
 </head>
-<body class="narrativepage workbookpage article" onload="buildTable()">
+<body class="narrativepage workbookpage article canBeLongerThanAPage" onload="buildTable()">
   <!--#include virtual="/menubar.ssi"-->
   <div id="body">
     <div id="header">

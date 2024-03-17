@@ -315,9 +315,11 @@ build:
   alphanumeric string. Some mnemonic values are `yes`, `y`, `true`, `t`,
   `1`.
 
+- `TPC=n` -- We use puppeteer-cluster to generate the thousands of PDF files use in the student workbooks. By default, the cluster runs 2 tabs per core (TPC). This can be set to a higher number via this commandline argument, gaining speed at the cost of possible race-conditions.
+
 [CAUTION]
 --
-`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, and `DEBUGADOC` are _makefile_
+`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, `DEBUGADOC`, and `TPC` are _makefile_
 variables, *not* shell environment variables! You cannot set them as
 environment variables and expect `make` to pick them up. To set,
 `NATLANG`, say, to `es-mx`, use
@@ -619,7 +621,7 @@ On systems with `apt` (Ubuntu, WSL), the easiest way to install the
 latest
 Racket is:
 +
-  sudo apt-add-repository ppa:/plt/racket
+  sudo apt-add-repository ppa:plt/racket
   sudo apt install racket
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
@@ -829,10 +831,9 @@ directive: `@keywords{PEMDAS, GEMDAS}`. Multiple keywords are comma-separated.
 Use
 
 ----
-@strategy{
-  @span{.title}{Title}
+@strategy{This is the title}{
 
-  Some _body_ text.
+  This is some _body_ text.
 
 }
 ----

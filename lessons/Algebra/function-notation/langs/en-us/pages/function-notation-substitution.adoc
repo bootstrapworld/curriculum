@@ -2,22 +2,31 @@
 
 ++++
 <style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+
 /* Make every single MathJax instance inside .boldHeader bold */
 .boldHeader td .MathJax {
 	font-weight: bold !important; font-style: italic;
 }
+
 /* Make every MathJax instance that follows another NOT-bold
    This has the effect of "undoing" the previous rule, such that
    only the first instance is bold */
 .boldHeader td .MathJax ~ .MathJax {
 	font-weight: normal !important;
-}
+ }
+
 </style>
 ++++
 
+== Part 1
+
 Complete the table below, by substituting the given value into the expression and evaluating.
 
-[.FillVerticalSpace, cols=".^2a,.^1a,.^2a,.^1a", options="header"]
+@vspace{1ex}
+
+[cols=".^2a,.^1a,.^2a,.^1a", options="header"]
 |===
 | Function Definition	  	| Expression 		| Substitution 					| Evaluates to	
 | @math{f(x) = x + 2} 		| @math{f(3)} 		| @math{3 + 2}						| @math{5}
@@ -26,7 +35,13 @@ Complete the table below, by substituting the given value into the expression an
 | @math{k(x) = 2x - 1}		| @math{k(5)} 		| @ifsoln{@math{2(5) - 1}}		| @ifsoln{@math{9}}
 |===
 
-Now that you understand how to evaluate an expression, let's get some more practice! The table below includes four different functions. Beneath each of them are a collection of different expressions to evaluate.
+@vspace{1ex}
+
+== Part2
+
+The table below includes four different functions. Beneath each of them are a collection of different expressions for you to evaluate.
+
+@vspace{1ex}
 
 [.boldHeader, cols="1a,1a,1a,1a", options="header"]
 |===
@@ -76,11 +91,13 @@ Now that you understand how to evaluate an expression, let's get some more pract
 | @ifsoln{@math{2.25}}
 |===
 
-[.FillVerticalSpace, cols="^1a,^1a",options="header"]
+@vspace{1ex}
+
+[cols="^1a,^1a",options="header"]
 |===
 |What do you Notice?
 |What do you Wonder?
-| @ifnotsoln{@vspace{28ex}}
+| @ifnotsoln{@vspace{40ex}}
 @ifsoln{Sample answers: Each time we evaluated for zero, the answer was just the number being added or subtracted and when nothing was being added or subtracted the answer was zero.}
 
 | @ifsoln{Sample answers: What does the graph of @math{f(x) = x^2 } look like? Are there functions that use other exponents?}

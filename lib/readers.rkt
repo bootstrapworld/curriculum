@@ -35,6 +35,12 @@
                      [else (loop (cons (read-char i) r))])))]
           [else (string c)])))
 
+(define (slim-runaway-text s [max-length 120])
+  (let ([n (string-length s)])
+    (cond [(<= n max-length) s]
+          [else (let ([m (quotient (- max-length 5) 2)])
+                  (format "~a ··· ~a" (substring s 0 m) (substring s (- n m))))])))
+
 (define (quote-rev-string s)
   (let ([n (string-length s)])
     (let loop ([i 0] [r (list #\")])
@@ -66,12 +72,14 @@
                             (cond [(eof-object? c)
                                    (printf "Read so far: ~s\n"
                                            (let ([s (list->string (reverse r))])
-                                             (if multiline? s (string-trim s))))
+                                             (unless multiline?
+                                               (set! s (string-trim s)))
+                                             (slim-runaway-text s)))
                                    (error 'ERROR "read-group: Runaway directive ~a" directive)]
                                   [in-escape? (loop (cons c r) #f nesting in-string? #f)]
                                   [(char=? c #\\)
                                    (loop (cons c r) #f nesting in-string? #t)]
-                                  [in-string?
+                                  [(and scheme? in-string?)
                                     (if (char=? c #\")
                                         (loop (cons c r) #f nesting #f #f)
                                         (loop (cons c r) #f nesting #t #f))]
@@ -261,6 +269,7 @@
     (#\B "𝐵")
     (#\C "𝐶")
     (#\R "𝑅")
+    (#\S "𝑆")
     (#\a "𝑎")
     (#\b "𝑏")
     (#\c "𝑐")
@@ -275,11 +284,13 @@
     (#\l "𝑙")
     (#\m "𝑚")
     (#\n "𝑛")
+    (#\o "𝑜")
     (#\p "𝑝")
     (#\q "𝑞")
     (#\r "𝑟")
     (#\s "𝑠")
     (#\t "𝑡")
+    (#\u "𝑢")
     (#\v "𝑣")
     (#\w "𝑤")
     (#\x "𝑥")
@@ -332,6 +343,7 @@
   ; (printf "doing math-unicode-if-possible ~s\n" text)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
+             (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
@@ -343,6 +355,7 @@
         [else
           (set! text (regexp-replace* "\\( +" text "("))
           (set! text (regexp-replace* " +\\)" text ")"))
+          (set! text (regexp-replace* "\\pi" text "π"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text

@@ -1143,7 +1143,7 @@
     (set! *show-new-question?* #t))
 
   (string-append
-    "[.data-cycle, cols=\"^.^3, .^17, .^3\", stripes=\"none\"]\n"
+    "[.data-cycle, cols=\"^.^3, .^17, ^.^3\", stripes=\"none\"]\n"
     "|===\n"
     "| "
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"
