@@ -1,12 +1,21 @@
 = Contracts: Making Tables and Displays
+++++
+<style>
+.circle2 .expression .expression { background: lightskyblue !important; }
 
+.circle3 .expression { background: aquamarine !important; }
+.circle3 .expression .expression { background: white !important; }
+.circle3 .expression .expression .expression { background: lightskyblue !important; }
+</style>
+++++
 @description{Students learn about functions for sorting and counting data in tables, then are introduced to one-variable displays.}
 
 @lesson-prereqs{simple-data-types}
 
 @keywords{pie chart, bar chart, histogram, box plot, data displays, count, sort, contract, function}
 
-@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
+@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph, overlay, put-image, above, rotate, scale}
+
 
 [@lesson-intro-table]
 |===
@@ -22,7 +31,7 @@
 |
 
 - Let's learn some functions for counting and sorting data.
-- Let's learn how to make data displays in Pyret!
+- Let's learn how to make data displays in Pyret! 
 
 | Materials
 |[.materials-links]
@@ -88,7 +97,7 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 @slidebreak
 
 @lesson-point{
-Contracts are the _instruction manual_ for functions.
+Contracts are the __instruction manual__ for functions.
 }
 
 The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
@@ -116,7 +125,7 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 === Common Misconceptions
 
-Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+Students are likely to think that `sort` __changes the table__, when instead it __produces a new, sorted table.__ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
 
 === Synthesize
 
@@ -154,7 +163,7 @@ One way to organize our thoughts is to diagram what we want to do, using the Cir
 
 **The rules for Circles of Evaluation are simple:**
 
-(1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+(1) Every Circle of Evaluation must have a single function, written at the top.
 
 (2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
@@ -168,21 +177,26 @@ If we want to see the first ten animals, our diagram would look like this.
 @show{(coe expB)}
 }
 
-@slidebreak
-
 (3) Circles can contain other Circles!
 
+@ifslide{@teacher{This list of rules continues with a diagram for the third point on the next slide.}}
+
+@slidebreak{InvestigateC}
+
+@ifslide{**Circles can contain other circles!**
+
+}
 @indented{
 If we want to see the ten youngest animals, our diagram would look like this.
 
 @do{
 (define exp1 '(first-n-rows (sort animals-table "age" true) 10))
 }
-
+[.circle2]
 @show{(coe exp1)}
 }
 
-@slidebreak{Investigate2T}
+@slidebreak{InvestigateC}
 
 @indented{
 If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
@@ -190,13 +204,13 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 @do{
 (define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
 }
-
+[.circle3]
 @show{(coe exp2)}
 }
 
 __Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 **To convert a Circle of Evaluation into code:**
 
@@ -205,9 +219,22 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 - We close each pair of parentheses as we finish with the arguments in its Circle of Evaluation.
 
 @indented{This diagram would translate to the code that follows. 
+[.circle2]
 @show{(coe exp1)} 
 
-@show{(code exp1)}
+@ifnotslide{@image{images/exp1.png, 450}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;">first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true)</span>, 10)</span>}
+}
+
+@slidebreak{InvestigateC}
+
+@indented{And this diagram would translate to the code that follows.
+
+[.circle3]
+@show{(coe exp2)}
+
+@ifnotslide{@image{images/exp2.png, 600}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">count(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">"species")</span> </span>}
 }
 
 @slidebreak
@@ -226,7 +253,7 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 == Bug Hunting @duration{10 minutes}
 
 === Overview
-This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
+This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are __specially-designed__ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
 
 === Launch
 
@@ -375,28 +402,29 @@ Turn to @printable-exercise{exploring-displays.adoc}. Let's look at the first fu
 If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-displays-2.adoc}.
 }
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific displays. Consider this:
 
+[.circle3]
 @show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
 
 @QandA{
 @Q{What expression would this Circle of Evaluation generate?}
-@A{@show{(code '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}}
+@A{@ifnotslide{@image{images/pie-code.png, 600}}@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">pie-chart(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">)</span> </span>}}
 
 @Q{What would be the resulting display?}
 @A{a pie chart showing the species of the 10 youngest animals}
 }
 
-@opt{If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
+@opt{If your students would benefit from seeing a few more examples before drawing their own Circles of Evaluation, have them complete @opt-printable-exercise{matching-coe-to-descriptions.adoc}.}
 
 @slidebreak
 
 @lesson-instruction{
 - Complete @printable-exercise{coe-displays.adoc}.
 - Then consider what display it might be interesting to compare each of the displays on this page with.
-  * _Displays are often most informative when compared with other displays._ 
+  * __Displays are often most informative when compared with other displays.__ 
   * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
 } 
 
@@ -406,7 +434,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @QandA{
 @Q{Which displays worked with categorical data?}
-@A{`pie-chart` _and_ `bar-chart`}
+@A{`pie-chart` __and__ `bar-chart`}
 
 @Q{Why might you choose a bar chart over a pie chart or vice versa?}
 @A{`pie-chart` only makes sense when you have the full picture, since it's representing the proportion of the whole}

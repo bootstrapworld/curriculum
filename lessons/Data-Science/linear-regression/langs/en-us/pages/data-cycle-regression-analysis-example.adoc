@@ -25,7 +25,7 @@ table.template td:first-of-type { background: #ccc; }
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression (if (string=? *proglang* "pyret") '(lr-plot animals-table "name" "age" "weeks") "least squares line")
+  #:expression (if (string=? *proglang* "pyret") '(lr-plot animals-table "name" "age" "weeks") "Set y-axis to weeks, set x-axis to age. Select least squares line from the Measure menu.")
   #:show-expression? #t
   #:finding "The slope is positive (0.789) and R=0.448, so there is a moderate, positive relationship"
   #:show-finding? #t
@@ -51,6 +51,8 @@ associated with a @fitbruby{20ex}{.789 week}{[slope, y-units]} @fitbruby{20ex}{i
 @data-cycle{ ""
   #:question ""
   #:show-question? #f
+  #:question-type "statistical"
+  #:show-question-type? #t
   #:rows ""
   #:show-rows? #f
   #:cols ""

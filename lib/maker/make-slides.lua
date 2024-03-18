@@ -9,21 +9,24 @@ dofile(make_dir .. 'readers.lua')
 
 local file_being_read = 'noneyet'
 
-local read_group = make_read_group(identity, function()
-  return file_being_read .. ' in ' .. os.getenv('PWD')
-end)
+local function errmsg_file_context()
+  return os.getenv('PWD') .. '/' .. file_being_read
+end
+
+local read_group = make_read_group(identity, errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
-local function first_line(f)
-  local i = io.open(f)
-  if not i then return false end
-  local x = i:read()
-  if not x then return false end
-  return x
+local function nicer_case(s)
+  if s == '' then return s
+  elseif s == 'codap' then return 'CODAP'
+  elseif s == 'wescheme' then return 'WeScheme'
+  else
+    return string.upper(s:sub(1,1)) .. s:sub(2)
+  end
 end
 
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
@@ -101,14 +104,6 @@ local function set_imageorientation(slide)
     'R')
 end
 
-local function set_current_slide(slides, curr_slide)
-  if curr_slide.text ~= '' then
-    set_imageorientation(curr_slide)
-    slides[#slides + 1] = curr_slide
-  end
-end
-
-
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   file_being_read = lsn_plan_adoc_file
@@ -119,14 +114,26 @@ local function get_slides(lsn_plan_adoc_file)
   local inside_lesson_instruction = false
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
-  local curr_slide = newslide()
+  local coeIdx = 0
+  local curr_slide
 
-  local function scan_directives (i, nested)
+  local function set_current_slide()
+    local n = #slides
+    if curr_slide.text == '' or
+      (n == 0 and curr_slide.header == '') then
+      return
+    end
+    set_imageorientation(curr_slide)
+    slides[n + 1] = curr_slide
+  end
+
+  local function scan_directives (i, nested, dont_count_image_p)
+    if not nested then curr_slide = newslide() end
     while true do
       local c = i:read(1)
       if not c then
         if not nested then
-          set_current_slide(slides, curr_slide)
+          set_current_slide()
         end
         break
       elseif c == '\n' then
@@ -138,29 +145,62 @@ local function get_slides(lsn_plan_adoc_file)
       elseif c == '@' and not inside_css_p then
         beginning_of_line_p = false
         local directive = read_word(i)
-        if inside_table_p then
-          if directive == 'preparation' then
-            curr_slide.preparation = read_group(i, directive, false, true)
+        if directive == 'show' then
+          local arg = read_group(i, directive, 'scheme', 'multiline')
+          if arg:match('%(coe') then
+            coeIdx = coeIdx + 1
+            if not inside_table_p then
+              if not dont_count_image_p then
+                curr_slide.numimages = curr_slide.numimages + 1
+              end
+              curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
+            end
+          else
+            curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
           end
-        elseif directive == 'scrub' then
+        elseif inside_table_p then
+          if directive == 'preparation' and #slides == 0 then
+            curr_slide.preparation = read_group(i, directive, not 'scheme', 'multiline')
+          end
+        elseif directive == 'clear' then
+          --noop
+        elseif directive == 'scrub' or
+          directive == 'pathway-only' or
+          directive == 'vspace' or
+          directive == 'comment' then
+          --
           read_group(i, directive)
+        elseif directive == 'include' then
+          if #slides > 1 then
+            local arg = read_group(i, directive)
+            print('WARNING: Found @include{' .. arg .. '} outside @ifnotslide in ' .. errmsg_file_context())
+          end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
           local _, n = txt:gsub('|===', 'z')
           n = math.floor(n / 2)
           tableIdx = tableIdx + n
+          _, n = txt:gsub('@show{%(coe', 'z')
+          coeIdx = coeIdx + n
         elseif directive == 'ifproglang' then
           local pls = read_group(i, directive)
           if not pls:match(proglang) then
             read_group(i, directive)
           else
-            local txt = read_group(i, directive, false, true)
-            scan_directives(io.open_buffered(false, txt), true)
+            local txt = read_group(i, directive, not 'scheme', 'multiline')
+            scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
           end
+        elseif directive == 'proglang' then
+          curr_slide.text = curr_slide.text .. nicer_case(proglang)
+        elseif directive == 'star' then
+          curr_slide.text = curr_slide.text .. '★'
+        elseif directive == 'ifslide' then
+          local txt = read_group(i, directive, not 'scheme', 'multiline')
+          scan_directives(io.open_buffered(false, txt), 'nested', dont_count_image_p)
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
-          local text = read_group(i, directive, false, true)
+          local text = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
         elseif directive == 'lesson-instruction' then
           inside_lesson_instruction = true
@@ -172,7 +212,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          set_current_slide(slides, curr_slide)
+          set_current_slide()
           local c2 = buf_peek_char(i)
           curr_slide = newslide()
           curr_slide.section = 'Repeat'
@@ -181,16 +221,18 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.style = read_group(i, directive)
           end
         elseif directive == 'A' then
-          local arg = read_group(i, directive)
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+          local arg = read_group(i, directive, not 'scheme', 'multiline')
+          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          scan_directives(io.open_buffered(false, arg), 'nested', 'dont count images')
+          curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
-          local arg2 = read_group(i, directive)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
         else
           if directive == 'image' then
-            if not inside_table_p then
+            if not inside_table_p and not dont_count_image_p then
               curr_slide.numimages = curr_slide.numimages + 1
             end
           elseif directive == 'center' then
@@ -210,18 +252,17 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. '----'
           inside_code_display_p = not inside_code_display_p
         elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
-          i:read_line()
+          i:read()
           beginning_of_line_p = true
         elseif inside_css_p then
           --noop
         elseif c == '=' then
-          local L = i:read_line()
+          local L = i:read()
           beginning_of_line_p = true
           -- print('L = ' .. L)
           if not L then
             curr_slide.text = curr_slide.text .. c
-            set_imageorientation(curr_slide)
-            slides[#slides + 1] = curr_slide
+            set_current_slide()
             break
           else
             new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
@@ -236,7 +277,7 @@ local function get_slides(lsn_plan_adoc_file)
                 break
               end
             else
-              set_current_slide(slides, curr_slide)
+              set_current_slide()
               curr_slide = newslide()
               curr_slide.level = new_level
               curr_slide.header = new_header
@@ -249,35 +290,28 @@ local function get_slides(lsn_plan_adoc_file)
             end
           end
         elseif c == '[' then
-          local L = i:read_line()
+          local L = i:read()
           if not L then break
-          elseif L:match('cols=[%d"\']') or L:match('sideways%-pyret%-table') then
-            beginning_of_line_p = true
           else
-            curr_slide.text = curr_slide.text .. '['
-            buf_toss_back_char('\n', i)
-            buf_toss_back_string(L, i)
+            beginning_of_line_p = true
           end
         elseif c == '|' and read_if_poss(i, '===') then
-          i:read_line()
+          i:read()
           inside_table_p = not inside_table_p
           beginning_of_line_p = true
           if inside_table_p then
             tableIdx = tableIdx + 1
-            curr_slide.text = curr_slide.text .. '@table{' .. tableIdx
-            curr_slide.text = curr_slide.text .. '}\n'
+            curr_slide.text = curr_slide.text .. '@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}'
           end
+        elseif inside_table_p then
+          --noop
         else
-          if not inside_table_p then
-            curr_slide.text = curr_slide.text .. c
-          end
-        end
-      elseif inside_css_p then
-        --noop
-      else
-        if not inside_table_p then
           curr_slide.text = curr_slide.text .. c
         end
+      elseif inside_css_p or inside_table_p then
+        --noop
+      else
+          curr_slide.text = curr_slide.text .. c
       end
     end
     i:close()
@@ -360,6 +394,7 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub(' %+$', '\n')
           l1 = l1:gsub('^%+$', '\n')
           l1 = l1:gsub('{two%-colons}', '::')
+          l1 = l1:gsub('{empty}', '')
           o:write(l1, '\n')
         end
       end

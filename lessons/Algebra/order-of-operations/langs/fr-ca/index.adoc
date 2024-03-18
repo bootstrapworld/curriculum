@@ -1,0 +1,173 @@
+= Types de données simples
+
+@description{Les étudiants commencent à programmer, explorant comment les nombres, les chaînes de caractères, les booléens et les opérations sur ces types de données fonctionnent dans un langage de programmation. Les booléens offrent une excellente occasion aux étudiants d'explorer le sens et les utilisations réelles des inégalités.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+@add-to-lang{ -, +, * , /, <, >, =, <=, >=, <>}
+
+[@lesson-intro-table]
+|===
+
+| Objectifs de la leçon
+| Les étudiants seront capables de...
+
+* Identifier des exemples des types de données suivants : Nombres, Chaînes de caractères et Booléens
+* Écrire des Nombres, des Chaînes de caractères et des Booléens dans la Zone d'interactions
+* Rédiger des expressions qui produisent des valeurs de ces types
+
+| Objectifs affichés aux étudiants
+|
+
+* Explorons les Nombres, les Chaînes de caractères et les Booléens afin d'identifier ce qui rend ces types de données uniques.
+
+| Matériaux
+|[.materials-links]
+
+@material-links
+
+| Matériel supplémentaire
+|[.materials-links]
+@opt-material-links
+
+| Préparation
+|
+* S'assurer que les ordinateurs des étudiants peuvent accéder @starter-file{editor}.
+
+| Points clés pour le facilitateur
+|
+* Les messages d’erreur sont l’ordinateur qui essaie de nous indiquer que quelque chose ne va pas. Modélisez la réaction aux messages d’erreur avec intérêt pour démontrer aux élèves que les messages sont un outil utile.
+|===
+
+== Chaînes de caractères et Nombres @duration{20 minutes}
+
+=== Aperçu
+
+Aperçu
+En travaillant ensemble grâce à une configuration de groupe Pilote/Navigateur, les étudiants expérimentent avec l'Éditeur. Ils explorent les types de données Nombre et Chaîne de caractères, ainsi que leur comportement dans ce langage de programmation.
+
+=== Lancement
+
+@right{@image{images/driver-navigator.png, 150 }}
+Lors de la programmation dans cette classe, vous travaillerez ensemble en utilisant le modèle Pilote/Navigateur. Chaque groupe ne peut avoir qu'un seul "Pilote" - ses mains sont sur le clavier, et sa tâche est de gérer la saisie, les clics, les raccourcis, etc. Si vous n'êtes pas un Pilote, vous êtes un "Navigateur" - votre tâche est de dire au Pilote où aller, quoi taper, etc. Un bon Pilote ne tape que ce que le Navigateur lui dit, et un bon Navigateur s'assure de donner des instructions claires et précises.
+
+@strategy{Le modèle Pilote/Navigateur}{
+
+Ce modèle de programmation en dyades est extrêmement utile pour distinguer l'étape de « réflexion » de celle de « saisie ». Les étudiants - en particulier ceux qui débutent dans la programmation textuelle ou dans la saisie elle-même - peuvent avoir du mal à intégrer leurs pensées dans l'environnement de programmation. Ce modèle leur permet de se concentrer sur la _communication de leurs idées_, tout en laissant le conducteur se concentrer sur le codage. De même, le pilote a la possibilité de se concentrer sur la syntaxe et la programmation. Enfin, l'exigence selon laquelle les idées doivent être traduites entre les mains d'une autre personne constitue un excellent support pour inciter les étudiants à parler de leur réflexion et du code.
+@link{https://en.wikipedia.org/wiki/Pair_programming, You can read more about the Driver/Navigator model here...}
+}
+
+
+Demandez aux élèves d'ouvrir @starter-file{editor}.
+
+@right{@image{images/editor.png, 250}} 
+
+Cet écran est appelé l' @vocab{Éditeur}, et cela ressemble au diagramme que vous voyez ici. Il y a quelques boutons en haut, mais la majeure partie de l'écran est occupée par deux grandes sections : la @vocab{zone de définitions} à gauche et la @vocab{zone d'interactions} à droite.
+
+La @vocab{zone de définitions} c'est là que les programmeurs définissent les valeurs et les fonctions qu'ils souhaitent conserver, tandis que la @vocab{zone d'interactions} eur permet d’expérimenter ces valeurs et fonctions. Cela est comme mettre un ensemble de définitions de fonctions au tableau et à demander aux élèves d'utiliser ces fonctions pour calculer les réponses sur du papier brouillon. 
+
+@lesson-point{
+Nous devons cliquer sur "Exécuter" pour charger le programme lorsque nous ouvrons un fichier pour la première fois et si nous apportons une modification au fichier dans la @vocab{zone de définitions}.
+}
+
+Cliquer sur "Exécuter" effacera également la @vocab{zone d'interactions}. Pour l'instant, nous n'écrirons des programmes que dans la *Zone d'interactions* à droite.
+
+
+=== Enquêter
+
+Les mathématiques sont une langue, au même titre que l’anglais, l’espagnol ou toute autre langue. Les langues ont des *noms* (par exemple « balle », « tomate », etc.) et des *verbes*, qui sont des actions que nous pouvons effectuer sur ces noms (par exemple - Je peux « lancer une balle »). Les mathématiques et la programmation ont également des *valeurs*, comme les nombres 1, 2 et 3. Et, au lieu de verbes, ils ont des fonctions, qui sont des actions que nous pouvons effectuer sur des valeurs (par exemple : « Je peux mettre un nombre au carré »).
+
+Les langues ont également des règles pour la *syntaxe*. En anglais, par exemple, les mots n'ont pas « ! » et « ? » au milieu. En mathématiques et en programmation, les nombres ne contiennent pas de « & ».
+
+Les langues ont également des règles de *grammaire*. _Le chat mange._ est une phrase, alors que _Le mange chat._ est un non-sens, même si tous les mots sont une syntaxe valide. L'ordre des mots compte !
+
+Garder à l'esprit l'importance de la *syntaxe* et de la *grammaire* est utile lors de l'apprentissage de la programmation !.
+
+@lesson-instruction{
+* Terminez @printable-exercise{strings-n-numbers.adoc}.
+* Qu'avez-vous remarqué ? Qu'est-ce que vous vous demandez?
+** _Consultez la section Synthétiser ci-dessous pour obtenir une liste des principaux points à retenir de cette activité._
+* Avez-vous reçu des messages d'erreur ? Qu’avez-vous appris d’eux ?
+** _La plupart des messages d'erreur que nous avons vus attiraient notre attention sur @vocab{erreurs de syntaxe} : virgules manquantes, chaînes non fermées, etc._
+}
+
+@strategy{Salle de classe visuelle : Le tableau de terminologie}{
+
+L'un des visuels les plus couramment utilisés par les enseignants Bootstrap est le _Le tableau de terminologie._ Il résume les types de données et les fonctions que les étudiants ont vus jusqu'à présent et sert de référence utile pour de nombreuses questions courantes.
+
+La tableau de terminologie comporte trois colonnes : Type de données, Fonctions et Valeurs. Dans cette leçon, les élèves rempliront les trois premières lignes du tableau avec leurs types de données : nombres, chaînes et booléens. Au fur et à mesure qu’ils progressent dans le cours, ils complèteront la liste des fonctions pour chaque type au fur et à mesure qu’ils les rencontreront. Ils peuvent même ajouter de nouvelles lignes à mesure qu’ils découvrent de nouveaux types de données en plus de ceux présentés ici !
+
+Chaque leçon Bootstrap est écrite pour vous montrer à quoi ressemble le tableau de terminologie _à ce moment-là._ Vous pouvez accéder à ce tableau en cliquant sur le bouton link:javascript:showLangTable()[Tableau de terminologie] dans la section matériel en haut du plan de cours.
+}
+
+
+@ifproglang{pyret}{
+=== Erreur commune
+
+Dans Pyret, écrire des décimales sous la forme « .5 » (sans le zéro non significatif) entraîne une @vocab{erreur de syntaxe}. Assurez-vous que les élèves comprennent que Pyret a besoin que les nombres décimaux commencent par zéro !}
+
+=== Synthétiser
+
+Notre langage de programmation connaît de nombreux types de nombres, et ils se comportent à peu près comme ils le font en mathématiques.
+Discutez de ce que les élèves ont appris :
+
+- Les nombres et les chaînes s'évaluent par eux-mêmes.
+- Notre éditeur est assez intelligent et peut basculer automatiquement entre l'affichage d'un nombre rationnel sous forme de fraction ou de nombre décimal, simplement en cliquant dessus !
+- Tout ce qui est entre guillemets est une chaîne, même quelque chose comme " 42 " .
+- Les chaînes _doivent_ avoir des guillemets des deux côtés.
+
+
+@ifproglang{pyret}{
+- Les @vocab{opérateurs} comme `+`, `-`, `*`, et `/` doivent avoir des espaces de chaque côté.
+- En pyret, les @vocab{opérateurs} fonctionnent de la même façon qu'en mathématiques.
+- Chaque fois que plusieurs opérateurs sont utilisés, Pyret vous demande d'utiliser des parenthèses pour définir l'ordre des opérations.
+- Les types comptent ! Nous pouvons ajouter deux nombres ou deux chaînes l'une à l'autre, mais nous ne pouvons pas ajouter le nombre « 4 » à la chaîne "bonjour".
+
+Les messages d'erreur sont un moyen pour Pyret d'expliquer ce qui n'a pas fonctionné et sont un moyen très utile de trouver des erreurs. Insistez sur leur utilité et expliquez pourquoi les élèves devraient lire ces messages à haute voix avant de demander de l’aide. Demandez aux élèves de voir les erreurs suivantes :
+
+- `6 / 0`. Dans ce cas, Pyret obéit aux mêmes règles que les humains, et donne une erreur.
+- `(2 + 2`. Un guillemet non fermé est un problème, tout comme les parenthèses sans correspondance.
+
+
+Quelles autres questions avez-vous sur le fonctionnement des chaînes et des nombres dans Pyret ?
+}
+
+== Booléens @duration{20 minutes}
+
+=== Aperçu
+Cette leçon présente aux élèves le concept des @vocab{booléens}, un type de données unique avec seulement deux valeurs : "vrai" et "faux", et pourquoi elles sont utiles à la fois dans le monde réel et dans l'environnement de programmation.
+
+
+=== Lancement
+
+@lesson-instruction{
+Quelle est la réponse : 3 est-il supérieur à 10 ?
+}
+
+Les expressions produisant des booléens sont des questions à réponse oui ou non et seront toujours évaluées comme « vrai » (« oui ») ou « faux » (« non »). La possibilité de séparer les entrées en deux catégories est unique et très utile !
+
+@right{@image{images/login.png, 300 }}
+
+Par exemple:
+
+- Certaines montagnes russes avec boucles exigent que les passagers aient une taille minimale pour s'assurer que les passagers sont maintenus en place en toute sécurité par les harnais taille unique. Le gardien ne se soucie pas de votre taille exacte, il vérifie simplement si vous êtes aussi grand que la marque sur le poteau. Si vous êtes assez grand, vous pouvez monter à bord, mais ils ne laissent pas monter les personnes plus petites que la marque car ils ne peuvent pas assurer leur sécurité.
+
+- Lorsque vous vous connectez à votre messagerie, l'ordinateur vous demande votre mot de passe et vérifie s'il correspond à ce qui est dans le dossier. Si la correspondance est « vraie », cela vous amène à vos messages, mais si ce que vous entrez ne correspond pas, vous recevez un message d'erreur à la place.
+
+@lesson-instruction{
+Réfléchissez à d’autres scénarios dans lesquels les booléens sont utiles dans et hors de l’environnement de programmation.
+}
+
+=== Investigate
+@lesson-instruction{
+- En groupes de deux, complétez @printable-exercise{pages/booleans.adoc}.
+}
+
+Les élèves feront des prédictions sur ce qu'une variété d'expressions booléennes retourneront et les testeront dans l'éditeur. Faites un compte rendu des réponses des élèves en classe.
+
+
+=== Synthétiser
+
+Qu’est-ce qui distingue les booléens des autres types de données ?

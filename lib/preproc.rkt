@@ -1445,13 +1445,14 @@
                             (read-group i directive)]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (when (regexp-match "\\|===" text)
+                              (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
-                                (expand-directives:string->port text o)
+                                (expand-directives:string->port text o #:enclosing-directive directive)
                                 (display "\n====\n" o)))]
                            [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (expand-directives:string->port text o))]
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "page-of-lines")
                             (let ([n (string->number (read-group i directive))])
                               ; (printf "doing @page-of-lines ~s\n" n)
@@ -1550,7 +1551,7 @@
                               (display
                                 (string-append
                                   (create-begin-tag "span" ".pathway-only")
-                                  (expand-directives:string->string text)
+                                  (expand-directives:string->string text #:enclosing-directive directive)
                                   (create-end-tag "span")) o))]
                            [(or (string=? directive "link")
                                 (string=? directive "online-exercise")
@@ -1612,7 +1613,7 @@
                            [(or (string=? directive "lesson-description")
                                 (string=? directive "description"))
                             (let* ([text (read-group i directive #:multiline? #t)]
-                                   [converted-text (expand-directives:string->string text)])
+                                   [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                               (display-lesson-description converted-text
                                                           (path-replace-extension *out-file* "-desc.txt.kp")
                                                           o))]
@@ -1664,6 +1665,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
                             (link-to-notes-pages o)]
+                           [(string=? directive "lesson-info")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-predoc: @lesson-info valid only in teacher resources"))
+                            (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
+                            (newline)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
@@ -1724,9 +1731,9 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (expand-directives:string->string text)
+                                    (expand-directives:string->string text #:enclosing-directive directive)
                                     (create-begin-tag "span" ".ruby")
-                                    (expand-directives:string->string ruby)
+                                    (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
                                   (create-end-tag "span")) o))]
                            [(string=? directive "teacher")
@@ -1734,7 +1741,7 @@
                                    [contains-blocks? (or (regexp-match "\n[-*] " text)
                                                          (regexp-match "\n[0-9]+\\. " text))]
                                    [contains-nl? (regexp-match "\n *\n" text)]
-                                   [converted-text (expand-directives:string->string text)])
+                                   [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                               (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
@@ -1746,7 +1753,7 @@
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.actually-openblock.indentedpara]\n====\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
@@ -1760,7 +1767,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [*solutions-mode?*
                                       (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                             [converted-text (expand-directives:string->string text)])
+                                             [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                         (display
                                           (cond [contains-nl?
                                                   (string-append
@@ -1776,7 +1783,7 @@
                            [(string=? directive "ifsoln-choice")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                     [converted-text (expand-directives:string->string text)])
+                                     [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                 (display (enclose-span
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
@@ -1787,7 +1794,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [(not *solutions-mode?*)
                                      (let* ([contains-nl? (regexp-match "^ *\n" text)]
-                                            [converted-text (expand-directives:string->string text)])
+                                            [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
                                        (display
                                          (cond [contains-nl?
                                                  (string-append
@@ -1812,8 +1819,11 @@
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
                             (when *enclosing-directive*
-                              (printf "WARNING: ~a: @slidebreak inside another directive\n\n"
-                                      (errmessage-file-context)))
+                              (printf "WARNING: ~a: @slidebreak inside ~a\n\n"
+                                      (errmessage-file-context)
+                                      (if (string? *enclosing-directive*)
+                                          (string-append "@" *enclosing-directive*)
+                                          "another directive")))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
@@ -1838,14 +1848,14 @@
                                   (let-values ([(key-list key-vals args)
                                                 (rearrange-args args)])
                                     (let ([s (keyword-apply f key-list key-vals args)])
-                                      (expand-directives:string->port s o)
+                                      (expand-directives:string->port s o #:enclosing-directive directive)
                                       )))))]
                            [(string=? directive "opt")
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display "[.optionaltag]##{empty}##\n" o)
-                              (display (expand-directives:string->string text) o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
@@ -1942,43 +1952,43 @@
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.actually-openblock.q-and-a]\n====\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n====\n" o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
-                              (expand-directives:string->port text o))]
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
-                              (expand-directives:string->port text o))]
+                              (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "strategy")
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (display "\n[.strategy-box]\n--\n" o)
                               (display "[.title]\n" o)
-                              (expand-directives:string->port title o)
+                              (expand-directives:string->port title o #:enclosing-directive directive)
                               (display "\n\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-point]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[.lesson-instruction]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-roleplay")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n[lesson-roleplay]\n--\n" o)
-                              (expand-directives:string->port text o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n--\n" o))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
-                                 (expand-directives:string->port (cdr c) o))]
+                                 (expand-directives:string->port (cdr c) o #:enclosing-directive directive))]
                            [else
                              ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
                              (display c o) (display directive o)
@@ -2081,7 +2091,7 @@
   ;(printf "doing preproc-adoc-file ~s; lesson-plan= ~s; lesson-plan-base= ~s\n\n" in-file *lesson-plan* *lesson-plan-base*)
 
   (with-handlers ([exn:fail? (lambda (e)
-                               (printf "ERROR: ~a in ~s\n\n"
+                               (printf "~a in ~a\n\n"
                                        (exn-message e) (errmessage-file-context)))])
     (set! *in-file* (build-path containing-directory in-file))
     ; (printf "doing preproc-adoc-file ~a\n" *in-file*)

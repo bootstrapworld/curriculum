@@ -24,7 +24,7 @@ Using the @starter-file{expanded-animals}, let's make a *bar-chart* to see what 
   #:show-filter? #f
   #:build-fn ""
   #:show-build? #f
-  #:expression "bar-chart(more-animals, \"fixed\")"
+  #:expression (if (string=? *proglang* "pyret") '(bar-chart more-animals "fixed") "Set x-axis to fixed. Select Fuse Dots into Bars from the Measure menu.")
   #:show-expression? #f
   #:finding "The number of unfixed animals at the shelter (213) is slightly higher than the number of fixed animals (194)."
   #:show-finding? #f
@@ -56,7 +56,7 @@ Let's make a *stacked-bar-chart* to see what we can learn about the distribution
 @data-cycle{ ""
   #:question "How does the ratio of fixed to unfixed animals differ by species?"
   #:show-question? #t
-  #:question-type "statistical"
+  #:question-type "arithmetic"
   #:rows "All the rows"
   #:show-rows? #f
   #:cols "species, fixed"

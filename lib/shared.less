@@ -15,6 +15,7 @@
 @top-padding-for-dr: 1rem;
 @print-section-heading: lightgray;
 @table-header: #eee;
+@lesson-block-vertical-space: 1em;
 
 html, body { font-size: 9pt; }
 
@@ -228,7 +229,7 @@ lines on some browsers */
   min-width:          4em;
   text-align:         center;
   line-height:        1rem;
-  border-bottom:      solid thin black;
+  border-bottom:      solid thin gray;
   vertical-align:     baseline;
 }
 .fitbruby { 
@@ -437,12 +438,43 @@ lines on some browsers */
     }
     .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
+
+  h2 { font-size: 1.75em; font-weight: normal; }
+  h3 { font-size: 18pt; font-weight: 300;  }
+  /* Special styling of teacherNotes used inside overview sections */
+  h3[id^="_overview"]~.paragraph .teacherNote {  
+    width: 100%;
+    border-width: 0 0 0 1px !important; 
+    padding-left: 20px;
+  }
+
+  /* Lesson sections are comprised of content blocks, each separated by the same amount of space */
+  .lesson-section-2 > * { margin-top: @lesson-block-vertical-space; }
+
+  /* Direct link to a section of a lesson */
+  .section-link a {
+    margin-left:        -1.75em;
+    padding-right:      0.5em;
+    vertical-align:     middle;
+    text-decoration:    none !important;
+    font-size:          .9rem;
+    position:           relative;
+    left:               -2em;
+  }
+  /* class for styling duration info in headers */
+  .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
+  /* Special links back to older, pre-remix materials */
+  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+
+  code { line-height: 1.5 !important; }
+  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
+
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
     background: #eee;
     display:    flow-root;
     clear:      both;
-    margin-top: 5px;
+    padding-right: 5px;
     > *:first-child { margin-left: 60px; }
     > *:first-child::before {
       content:  url('images/lesson-instruction.png');
@@ -459,6 +491,14 @@ lines on some browsers */
     .q-and-a-q::before { content: 'Q: '; font-style: italic; font-weight: bold; }
     .q-and-a-a::before { content: 'A: '; font-style: italic; font-weight: bold; }
   }
+
+  /* 
+   * CONTENT BOXES: lesson-instruction, lesson-roleplay, teacherNote, q-and-a, lesson-point...
+   *
+   * back-to-back twins should have no space between them
+   * (used so that @slidebreak works, while maintaining
+   * the appearance of an uninterrupted block in the lesson)
+   */
   .lesson-instruction+.lesson-instruction,
   .lesson-roleplay+.lesson-roleplay,
   .q-and-a+.q-and-a { 
@@ -474,18 +514,18 @@ lines on some browsers */
     font-weight:        bold;
     color:              black;
     border-style:       solid;
-    margin:             2ex;
+    margin-left:        2em;
+    margin-right:       2em;
     border-width:       2px 0px;
     clear:              both;
     p { margin: 0ex 1ex; }
   }
-
-  /* Callout boxes */
   .strategy-box {
     background:         #efefef;
     border:             solid #1a73b5 5px !important;
     width:              75%;
-    margin:             auto;
+    margin-left:        auto;
+    margin-right:       auto;
     padding:            0 15px;
     display:            block;
     clear:              both;
@@ -502,42 +542,14 @@ lines on some browsers */
   }
   .teacherNote { 
     display:            inline-block;
-    padding:            5px;
-    margin:         5px 0;
+    padding:            0 5px;
     border:             black dashed 1px; 
     font-style:         italic;
     width:              100%;
   }
-  /* Special styling of teacherNotes used inside overview sections */
-  h3[id^="_overview"]~.paragraph .teacherNote {  
-    width: 100%;
-    border-width: 0 0 0 1px !important; 
-    padding-left: 20px;
-  }
 
-  h2 { font-size: 1.75em; font-weight: normal; }
-  h3 { font-size: 18pt; font-weight: 300;  }
-
-  /* Direct link to a section of a lesson */
-  .section-link a {
-    margin-left:        -1.75em;
-    padding-right:      0.5em;
-    vertical-align:     middle;
-    text-decoration:    none !important;
-    font-size:          .9rem;
-    position:           relative;
-    left:               -2em;
-  }
-
+  /* text within a table should inherit from the color outside the table */
   .sectionbody td { color: inherit; }
-
-  /* class for styling duration info in headers */
-  .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
-  /* Special links back to older, pre-remix materials */
-  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
-
-  code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 }
 
 /************************************************************************************
@@ -613,6 +625,8 @@ body.workbookpage {
   .solution, .solution code { font-style: italic !important; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
+  .teacherNote { display: none; }
+  &.solution-page .teacherNote { display: unset; }
 
   /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
   .autonum { 
@@ -900,6 +914,14 @@ table.recipe_title    {
 .pathway_external_links ul li { margin-top: 3ex 0ex; list-style-type: none; }
 
 td.tableblock .listingblock { margin-bottom: 0 !important; }
+
+#lesson-info-table table {
+  border: none;
+  td:nth-of-type(1) { line-height: 1.3; }
+  th:nth-of-type(2), td:nth-of-type(2) { width: 20%; text-align: center; };
+  th:nth-of-type(3), td:nth-of-type(3) { text-align: right; };
+  td { padding: 0.1em 0.5em; height: 55px; vertical-align: top; }
+}
 
 /************************************************************************************
 * FORMATTING OF CIRCLES, AND TEXT CODE

@@ -1,7 +1,10 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-const Editors = {
+// Desmos file titles should end with (Desmos)
+// WeScheme/Pyret/CODAP starter file titles should end with Starter File
+
+const Editors = { 
   "editor": {
     "title": "the editor",
     "autoinclude": false,
@@ -671,6 +674,33 @@ const MoreAlg = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
     }
+  },
+  "method-1": {
+    "title": "Method 1: Composing Functions",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
+  },
+   "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=AXvgZkqnNi"
+    }
+  },
+  "method-2": {
+    "title": "Method 2: Defining Layers",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
+  },
+   "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
+    }
+  },
+   "interactive-functions": {
+    "title": "Interactive Functions Activity (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+  },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+    } 
   }
 }
 
@@ -764,6 +794,24 @@ const EarlyMath = {
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=j0ExQBqaqm"
     }
+  },
+  "variables-code": {
+    "title": "Variables & the Commutative Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
+    },
+    "wescheme": {
+     "url": "https://www.wescheme.org/view?publicId=iP1f3ZH2ki"
+    }
+  },
+  "variables-code2": {
+    "title": "Variables & the Associative Property Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=S1vWZ2AHlv"
+    }
   }
 }
 
@@ -840,7 +888,7 @@ const Alg2 = {
    "alg2-states": {
     "title": "State Demographics Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=10bWYM4rOq_ZshtX6_M-xf-bPbfz61rd1"
+      "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
     }
   },
   "alg2-exploring-quadratics-desmos": {
@@ -977,11 +1025,10 @@ const Reactive = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
-  }
+  },
 }
 
-
-
+  
 const allStarterFiles = {
   ...Editors, 
   ...Core, 
