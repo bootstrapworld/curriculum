@@ -1,4 +1,4 @@
-= The Additive Inverse Property
+= Let's test \over with slides!
 
 @description{Students develop a more nuanced interpretation of the Commutative and Associative Properties as a result of their exploration of the inverse relationship between addition and subtraction.}
 
@@ -28,132 +28,39 @@
 * nothing
 |===
 
-== The Additive Inverse Property @duration{10 minutes}
+== Testing
 
-=== Investigate
+=== Launch
 
-@ifnotslide{
-THis is not for slides
+xyz
 
-}
+@teacher{
 
-@ifproglang{pyret}{This is in @proglang}
-
-For the remainder of the activity, we will examine examples blocks. The first one includes only examples that pass. The second one has some errors! And the third one includes just one examples... *you* will be responsible for providing additional examples! show{(coe '(+ 9 2))}
-
-@show{
-(code '(define (red-shape shape)
-  (cond
-    [(string=? shape "circle")     (circle 20 "solid" "red")]
-    [(string=? shape "triangle")   (triangle 20 "solid" "red")]
-    [(string=? shape "rectangle")  (rectangle 20 20 "solid" "red")]
-    [(string=? shape "star")       (star 20 "solid" "red")]
-	[else (text "Unknown shape name!" 20 "red")])))
-}
-
-@slidebreak
-
-@lesson-instruction{
-Complete Part 1 of printable-exercise{notice-wonder-linearity.adoc} and Notice and Wonder about this table and graph.
-}
-
-[cols="^.^1a,^.^1a", grid="none", frame="none"]
+[.embedded, cols="^.^5,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-
-|
-
-[.pyret-table.first-table,cols="1,1",options="header"]
-!===
-! x ! y
-! 0 ! 0
-! 1 ! 2
-! 2 ! 4
-! 3 ! 6
-! 4 ! 8
-!===
-| @image{images/2x.png}
+|@show{(coe '(* (/ 6 2) (+ 1 2)))} | &rarr; | @show{(coe '(* 3 3))} | &rarr; | xyz
 |===
-
-@QandA{
-@Q{What do you *Notice?*}
-@A{_Answers will vary._}
-@A{each (x, y) pair on the table corresponds to a point on the graph}
-@A{both the x and y values in the table are increasing by consistent intervals}
-@A{the points on the graph are connected by a straight line.}
-@Q{What do you *Wonder?*}
-@A{_Answers will vary._}
 }
+
+@slidebreak
+
+xyz
 
 
 
 @slidebreak
 
-@lesson-instruction{
-Complete Part 2 of printable-exercise{notice-wonder-linearity.adoc} and consider the questions about these two data tables.
-}
+It depends! We can either work
 
-[cols="^.^1a,^.^1a", frame="none"]
-|===
-|
+- outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
+- or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
 
-[.pyret-table.first-table,cols="^1,^1",options="header"]
-!===
-! x ! y
-! 1   ! 2
-! 2   ! 3
-! 3   ! 4
-! 4   ! 5
-! 5   ! 6
-!===
-
-|
-[.pyret-table.first-table,cols="^1,^1",options="header"]
-!===
-! independent ! dependent
-! 1 ! 20
-! 2 ! 17
-! 3 ! 14
-! 4 ! 11
-! 5 ! 8
-!===
-
-|===
-
-@lesson-instruction{
-- What would the next pair be for each of these tables?
-- What would the y-values be when x is 0?
-}
-
-
+@teacher{The Circle of Evaluation for xys  is shown on the next slide.}
 
 @slidebreak
 
-- At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp_.
+Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
 
-- We want @math{x} to represent the **original, un-transformed** value, simply using _per-capita gdp_ as-is...
-
-- We've learned that:
-
-** the *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
-
-** the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
-
-@ifproglang{pyret}{
-
-@slidebreak
-
-pyret aaaa
-
-@slidebreak
-
-pyret bbbb
-
-
+@teacher{
+If it works for you, use this set of cards to have students physically match expressions and Circles of Evaluations.
 }
-
-
-=== Synthesize
-
-- Using @proglang allows us to evaluate arithmetic expressions easily and efficiently. In your own words, describe _how_ you tested the equivalence of different expression - and how you interpreted the results that @proglang produced.
-- In @proglang, what does it mean for a test to pass? What does it mean for a test to fail?
-- What did this programming exploration teach you about the additive inverse?

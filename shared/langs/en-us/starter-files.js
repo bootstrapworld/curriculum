@@ -1,7 +1,10 @@
 // Define various individual starterFiles here that will be combined by the
 // build into a JSON file. Comments are allowed, as this file is not JSON itself.
 
-const Editors = {
+// Desmos file titles should end with (Desmos)
+// WeScheme/Pyret/CODAP starter file titles should end with Starter File
+
+const Editors = { 
   "editor": {
     "title": "the editor",
     "autoinclude": false,
@@ -671,6 +674,33 @@ const MoreAlg = {
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
     }
+  },
+  "method-1": {
+    "title": "Method 1: Composing Functions",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
+  },
+   "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=AXvgZkqnNi"
+    }
+  },
+  "method-2": {
+    "title": "Method 2: Defining Layers",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
+  },
+   "wescheme": {
+      "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
+    }
+  },
+   "interactive-functions": {
+    "title": "Interactive Functions Activity (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+  },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65f0c247fe25e43fb113e503"
+    } 
   }
 }
 

@@ -1445,7 +1445,8 @@
                             (read-group i directive)]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (when (regexp-match "\\|===" text)
+                              (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
                                 (display "\n====\n" o)))]
@@ -1664,6 +1665,12 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
                             (link-to-notes-pages o)]
+                           [(string=? directive "lesson-info")
+                            (unless *teacher-resources*
+                              (error 'ERROR
+                                     "adoc-predoc: @lesson-info valid only in teacher resources"))
+                            (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
+                            (newline)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
