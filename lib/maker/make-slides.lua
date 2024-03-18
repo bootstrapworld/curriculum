@@ -145,7 +145,20 @@ local function get_slides(lsn_plan_adoc_file)
       elseif c == '@' and not inside_css_p then
         beginning_of_line_p = false
         local directive = read_word(i)
-        if inside_table_p then
+        if directive == 'show' then
+          local arg = read_group(i, directive, 'scheme', 'multiline')
+          if arg:match('%(coe') then
+            coeIdx = coeIdx + 1
+            if not inside_table_p then
+              if not dont_count_image_p then
+                curr_slide.numimages = curr_slide.numimages + 1
+              end
+              curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
+            end
+          else
+            curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+          end
+        elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
             curr_slide.preparation = read_group(i, directive, not 'scheme', 'multiline')
           end
@@ -217,17 +230,6 @@ local function get_slides(lsn_plan_adoc_file)
           ignore_spaces(i)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
-        elseif directive == 'show' then
-          local arg = read_group(i, directive, 'scheme', 'multiline')
-          if arg:match('%(coe') then
-            if not dont_count_image_p then
-              curr_slide.numimages = curr_slide.numimages + 1
-            end
-            coeIdx = coeIdx + 1
-            curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
-          else
-            curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
-          end
         else
           if directive == 'image' then
             if not inside_table_p and not dont_count_image_p then
