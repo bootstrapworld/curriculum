@@ -7,7 +7,6 @@
 (require "html-tag-gen.rkt")
 (require "defines.rkt")
 (require "common-defines.rkt")
-(require "form-elements.rkt")
 (require "function-directives.rkt")
 (require "collect-lang-prereq.rkt")
 
@@ -74,6 +73,10 @@
 (define *first-level-section-titles* '())
 
 (define *natlang-glossary-list* '())
+
+(define *simple-directives*
+  (call-with-input-file (build-path *progdir* "simple-directives.json")
+    read-json))
 
 (define-namespace-anchor *adoc-namespace-anchor*)
 
@@ -1497,8 +1500,6 @@
                            [(string=? directive "n")
                             (fprintf o "[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
-                           [(string=? directive "star")
-                            (fprintf o "[.autonum.star]##★##")]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
@@ -1829,9 +1830,8 @@
                                 (read-group i directive)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
-                           [(assoc directive *macro-list*)
-                            => (lambda (s)
-                                 (display (second s) o))]
+                           [(hash-ref *simple-directives* (string->symbol directive) #f)
+                            => (lambda (s) (display s o))]
                            [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe" "data-cycle"))
                             (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise") design-recipe-exercise]
@@ -2155,7 +2155,6 @@
               (when *lesson-plan*
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
-                    ; (print-standards-js o #:sidebar #t)
                     (display-comment "%SIDEBARSECTION%" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
