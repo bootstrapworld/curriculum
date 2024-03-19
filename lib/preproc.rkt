@@ -1223,7 +1223,7 @@
           (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
           (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
           )
-        
+
         (if lesson-description
             (display lesson-description o)
             (display " {nbsp}" o))
@@ -2201,13 +2201,6 @@
       (set! *prereqs-used* '())
 
       (when *lesson-plan*
-        (let ([prev-prim-file (build-path *containing-directory* ".cached" ".prevlesson.primtxt")])
-          (when (file-exists? prev-prim-file)
-            (let ([prims (read-data-file prev-prim-file #:mode 'forms)])
-              (when (pair? prims)
-                (for ([prim prims])
-                  (add-prereq prim))))))
-        (create-lang-prereq-file *prereqs-used* *proglang* sym-to-adocstr *out-file*)
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
