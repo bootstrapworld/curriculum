@@ -1,20 +1,8 @@
 = Which Question Should We Ask First?
 
+In order to create the best possible decision tree for @handout{decision-tree-data.adoc, "the training data"}, we need to figure out where to start! Respond to the questions below to determine if "sex" or "age" will be our root node.
 
-[cols="1,1,1", stripes="none", options="header"]
-|===
-
-| sex		| age	| app
-| female 	| 16 	| tiktok
-| female 	| 24	| youtube
-| male		| 33	| facebook
-| female 	| 35	| youtube
-| male 		| 12 	| tiktok
-| male	 	| 13 	| tiktok
-
-|===
-
-== Let's consider "sex" first.
+== Is "sex" the best decision attribute for the root node?
 
 @n Using information from the "sex" column and the "app" column, fill in the blanks below.
 
@@ -22,14 +10,44 @@
 
 - The training data indicates that males are most likely to use @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook}.
 
-Here’s our rule: “Recommend @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook} to females and recommend @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook} to males.”
+Here’s our rule: __Recommend @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook} to females and recommend @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook} to males.__
 
 @n Will a computer following this rule provide the correct app for all six individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
 
-@n According to our training data, this rule is correct in @fitb{5m}{@ifsoln{four}} instances out of six.
+@n According to our training data, this rule is correct in @fitb{5em}{@ifsoln{four}} instances out of six.
 
-Here is one way to represent the decision tree for "sex". Place checkmarks below all correctly predicted values in the "male" leaf node.
+@n Here is one way to represent the decision tree for "sex". We call this a "decision stump" because it has just one level. Place checkmarks below all correctly predicted values in the "male" leaf node.
 
-@image{images/sex-stump.png, 200}
+@center{@image{../images/sex-stump.png, 150}}
 
-Are either of the leaf nodes for "sex" pure? (__Pure__ means that the leaf contains exclusively one single value.) @fitb{}{}
+@n Are either of the leaf nodes for "sex" pure? (__Pure__ means that the leaf contains exclusively one single value.) @fitb{5em}{@ifsoln{No}}
+
+
+
+== Is "age" the best decision attribute for the root node?
+
+@n Using information from the "age" column and the "app" column, fill in the blanks below.
+
+- The training data indicates that youth are most likely to use @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook}.
+
+- The training data indicates that males are most likely to use @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook}.
+
+Here’s our rule: __Recommend @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook} to youth and recommend @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook} to adults.__
+
+@n Will a computer following this rule provide the correct app for all six individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
+
+@n According to our training data, this rule is correct in @fitb{5m}{@ifsoln{five}} instances out of six.
+
+@n Create a decision stump for "age". Place checkmarks below all correctly predicted values in the "age" leaf node.
+
+@ifnotsoln{@vspace{15ex}}
+
+@ifsoln{@center{@image{../images/age-stump.png, 150}}}
+
+@n Are either of the leaf nodes for "age" pure? @fitb{5em}{@ifsoln{Yes}}
+
+== What should be our decision attribute at the root node?
+
+@n Age or sex? Explain your response. @fitb{}{}
+
+@fitb{}{}

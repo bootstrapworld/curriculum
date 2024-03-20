@@ -1,12 +1,8 @@
-= Artificial Intelligence & Machine Learning
+= Decision Trees
 
 @description{Students }
 
 @ifproglang{pyret}{
-@lesson-prereqs{ds-intro}
-}
-
-@ifproglang{codap}{
 @lesson-prereqs{ds-intro}
 }
 
@@ -17,14 +13,11 @@
 | Lesson Goals
 | Students will be able to...
 
-- Define artificial intelligence (AI) and machine learning (ML).
-- Recognize that data and training determine what AI can do.
+
 
 | Student-facing Lesson Goals
 |
 
-- Let's compare and contrast portrayals of AI in popular culture with our daily experiences with AI.
-- Let's explore how AI is trained.
 
 | Materials
 |[.materials-links]
@@ -33,42 +26,119 @@
 
 |===
 
-== Filling in the Blanks @duration{10 minutes}
+== What is a Decision Tree? @duration{10 minutes}
 
 === Overview
-Students learn about __machine learning__, .
 
 === Launch
 
-In the last few years, there has been a lot of buzz about Artificial Intelligence (AI) - technology that enables computers and machines to simulate human intelligence and problem-solving capabilities. How much of what we've heard can we trust? Should we be fearful... or optimistic?
+@right{@image{images/broken-lamp.png, 200}}
+
+You’ve probably encountered a flowchart before. Flowcharts are used for all kinds of things. They pop up everywhere because they are flexible and easy to interpret.  Below is a simple flowchart designed to help you decide what to do if your lamp doesn’t work.
+
+Flowcharts also help us to generate rules. As you might have guessed, the rule we arrive at from this chart looks like this: __if the lamp is plugged in and the bulb is not burned out, repair the lamp.__
+
+Flowcharts also help us identify which questions are important in a given situation. In deciding what to do with a lamp that won’t turn on, it would not be useful to consider questions like: Is the lamp dusty? Is it on a nightstand? Does it weigh more than 15 pounds? That information is available to you... it’s just not helpful.
+
+Flowcharts remind us that thoughtful *question-asking* drives good decision-making!
 
 @QandA{
-@Q{First, let's consider pop culture: What are some books, movies, video games, or TV shows you know of that feature artificial intelligence, or AI?}
-@A{Some possible responses include 2001: A Space Odyssey, Star Trek, the Matrix, Star Wars, Terminator, Wall-E, Iron Man, Big Hero 6, The Mitchells versus the Machines, Blade Runner, I Robot}
-@Q{How do those books, movies, video games, or TV shows characterize AI? Is AI usually portrayed in a positive or negative light?}
+@Q{Show of hands: Have you ever played 20 Questions?}
+@Q{What are the rules?}
+@A{Choose 1 player to be “it,” and have them think of a secret person, place or thing. The other players attempt to guess the secret person, place, or thing, but they only get 20 questions to do so.}
+@Q{Have you ever won 20 Questions? What do you think is the secret to success?}
 }
+
+@teacher{Invite students to share their strategies. Over the course of this lesson, students will develop a much more sophisticated response to this question.}
+
+As a class, we are going to play a __simplified__ version of 20 Questions. I will secretly write down on a piece of paper one of the four items on this list:
+
+@center{@big{*fish, bird, apple, spoon*}}
+
+You will ask me yes/no questions (however many you need!) until you figure out the object that I chose. As you ask questions, I will number and record them on the whiteboard.
+
+@teacher{Do not guide students in developing their questions. If you'd like, you can play additional rounds of the game or even have students play their own games in small groups.
+}
+
+Let’s make a flowchart to illustrate (1) our path to the correct answer, and (2) the most efficient paths to the other three possible answers.
 
 @teacher{
-As students discuss different representations of AI, pay attention to see if any themes emerge. Create a list on the board as the conversation evolves. Some possible themes include: robot turns on its creator; AI rebellion; robots usurp control; AI-controlled society; and simulated reality!
+
+See the diagram below for a sample flowchart. The one developed by your students will likely look different, and that is okay.
+
+NEED TO ADD FLOWCHART
 }
-
-As it turns, characterizations of AI featuring robot rebellion and the like draw on two types of AI that *do not currently exist*. In other words, these sorts of AI are entirely hypothetical! The only place you will encounter them is in sci fi, movies, and video games. *Artificial General Intelligence* (AGI) theoretically can think _on the same level as a human_, while *Artificial Super Intelligence* (ASI) __surpasses__ human intelligence and capabilities.
-
-That said, there is plenty of AI that we interact with each and every day. As it turns out, the futuristic dystopian fiction we consume can interfere with the way that we understand what the AI of the present actually does.
-
-The AI that we interact with is called Artificial Narrow Intelligence (ANI). ANI generally focuses on a single narrow task and has a limited range of abilities. Virtual assistants - Google Assistant, Siri, and Alexa, to name a few - are one example. These apps respond to voice commands in order to perform simple tasks (setting alarms, making phone class, and answering questions).
 
 @QandA{
-@Q{What forms of AI appear in your life on a day-to-day basis?}
-@A{Possible responses: FaceID, TikTok’s algorithm, GPS, text prediction, chess playing computers, grammarly.}
+@Q{How many questions did we ask in order to determine the correct object?}
+@Q{What do you think is the minimum number of questions we could ask to always arrive at the correct answer?}
 }
 
+
+When "flowcharts" are used in machine learning, we call them decision trees.
+
+@lesson-point{
+A decision tree is a supervised learning algorithm used to categorize and make predictions.}
+
+Decision trees make a lot of really cool things possible! A decision tree may have selected your next youtube video, predicted if your state would vote Democrat or Republican in the next election, or even made a medical diagnosis.
 
 === Investigate
 
+We're going to create a decision tree that recommends different apps to people based on their age and sex.
 
+To do so, we will train the computer using the dataset below (also available on @handout{decision-tree-data.adoc}), which tells us which app (tiktok, youtube, and facebook) six different individuals prefer.
 
+@QandA{
+@Q{What do you Notice about the dataset below? What do you wonder?}
+@Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
+}
+
+[cols="1,5,5,5", stripes="none", options="header"]
+|===
+
+| 	| sex		| age	| app
+| 1 | female 	| 16 	| tiktok
+| 2 | female 	| 24	| youtube
+| 3 | male		| 33	| facebook
+| 4 | female 	| 35	| youtube
+| 5 | male 		| 12 	| tiktok
+| 6 | male	 	| 13 	| tiktok
+
+|===
+
+One problem with this dataset is that age is continuous. That won’t work here! We need to break these ages down into two different groups - which will become two different __branches__ that grow out of a __decision node__. *For now, let’s agree that anyone below 20 is young and anyone 20 or above is an adult.*
+
+There are two possible questions we could use at the root of our decision tree are:
+
+- Is this individual male or female?
+- Is this individual young or an adult?
+
+It’s our job to figure out which question we should ask first. But how?
+
+@lesson-instruction{
+- As you complete @printable-exercise{which-question.adoc} you will create two different __decision stumps__.
+- When you are finished with @printable-exercise{which-question.adoc}, you will be ready to build the most efficient and accurate decision tree possible!
+- Be prepared to share with the class which decision attribute belongs at the root of the tree.
+}
+
+@teacher{
+Once students have finished, invite them to share which attribute they selected for the tree's root node. Have a few students defend their decision.
+}
+
+Great! Now we know how to *begin* our tree. Let's build it and test it to see if it makes accurate and useful predictions.
+
+@lesson-instruction{
+- Complete the first section @printable-exercise{build-and-test.adoc}, then let's share the rules we developed.
+- "Test the Tree" by completing the second section of @printable-exercise{build-and-test.adoc}.
+- Get some additional practice with decision stumps on the third section of the page.
+}
 
 === Synthesize
 
+We've covered a lot of ground, and learned a lot of new vocabulary. Let's review some of the main ideas.
 
+blah blah blah
+
+- synthesize Q1
+- synthesize Q2
+- synthesize Q3
