@@ -156,7 +156,9 @@ local function get_slides(lsn_plan_adoc_file)
               curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
             end
           else
-            curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+            if not inside_table_p then
+              curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+            end
           end
         elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
