@@ -121,7 +121,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(pages_file) then
     i = io.open(pages_file)
     for line in i:lines() do
-      pages_txt = pages_txt .. '[ \"' .. line .. '\", \"' .. page_title(line) .. '\"], '
+      pages_txt = pages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -129,7 +129,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(exercisePages_file) then
     i = io.open(exercisePages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '[ \"' .. line .. '\", \"' .. page_title(line) .. '\"], '
+      exercisePages_txt = exercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
