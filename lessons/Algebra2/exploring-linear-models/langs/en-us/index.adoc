@@ -1,7 +1,7 @@
 [.beta]
 = Exploring Linear Models
 
-@description{Students use linear models to investigate relationships in demographic data about US states using an inquiry-based approach, involving hypothesizing, experimental and computational modeling, and sense-making.}
+@description{Students use linear models to investigate relationships in data about minimum wage and median rent in California using an inquiry-based approach, involving hypothesizing, experimental and computational modeling, and sense-making.}
 
 @lesson-prereqs{contracts-tables-displays}
 
@@ -44,44 +44,56 @@ This lesson focuses on _linear relationships_, and the math content of the lesso
 == Looking for Patterns @duration{45 minutes}
 
 === Overview
-@teacher{Students explore the State Demographics dataset and, building on a discussion of the displays they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns.}
+@teacher{Students explore the CA Housing and Wage dataset and, building on a discussion of the displays they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns.}
 
 === Launch
-We're going to search for relationships within a dataset about all the states in the US. But first, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
+Is it getting more expensive to rent an apartment in California? Are wages growing fast enough to keep up? Before we dive into these questions, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
 
 @lesson-instruction{
-- Open the @starter-file{alg2-states}.
+- Open the @starter-file{alg2-ca-rent}.
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
+- In the Interactions Area on the right, type `ca-table` to see the data.
 }
 
 @slidebreak
 
 @QandA{
-@Q{What did you Notice and Wonder?}
+@Q{What columns in this dataset have to do with wealth or income?}
+@A{`wage`, `adj-wage`}
+@Q{What other columns are there?}
+@A{`year`, `adj-rent`}
+}
+
+@teacher{You will likely have to explain what "adjusted for inflation" means!}
+
+@lesson-instruction{
+- Working in pairs or small groups, complete the *first section* (Making Sense) of @printable-exercise{exploring-rent.adoc}.
+}
+
+@slidebreak
+
+In math, @math{a = 4} will define a variable @math{a} to be the value @math{4}. Any time we use @math{a} after that, we can substitute in the value of @math{4}. This works in Pyret, too: look at `a` in the Definitions Area. You can use `a` in an expression on the right, by typing in `a + 1`.
+
+But in Pyret, values can be more than just numbers! In this file, `ca-table` is defined to be our dataset and the variables `data1` and `data2` are defined as the first and second rows from the table.
+
+@lesson-instruction{
+- Working in pairs or small groups, complete the *second section* (Defining Rows) of @printable-exercise{exploring-rent.adoc}.
+}
+
+@slidebreak
+
+@QandA{
 @Q{What did you learn about defining rows in Pyret?}
-@A{Example: `x = row-n(states-table, 0)` will make the name `x` have the value of the first row in the table (the index starts at zero!).}
-@Q{How would define a name `y` to be the value of the _second_ row in the table? The third?}
-@A{`y = row-n(states-table, 1)` for the second row. Change the `1` to a `2` for the third.}
+@A{The first row has an index of 0!}
+@Q{Why is the `wage` column different from `adj-wage`?}
+@A{`wage` is the absolute amount someone was paid back then, but `adj-wage` is how much that amount would be worth in the present.}
 }
 
-In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. Any time we use @math{x} after that, we can substitute in the value of @math{4}. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
-
-@teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
-}
-
-@slidebreak
-
-@QandA{
-@Q{What columns in this dataset have to do with wealth?}
-@A{`pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`}
-@Q{What columns are about education levels?}
-@A{`college-or-higher`, `hs-or-higher`}
-}
+@teacher{Debrief the rest of the page with students.}
 
 === Investigate
 
-Before we dig deeper into @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
+Before we dig deeper into @starter-file{alg2-ca-rent}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
 @QandA{
 * Think back to the dataset we explored about animals at the shelter.
@@ -105,57 +117,13 @@ But what we really want is a display that will help us search for _a relationshi
 @vocab{Scatter plots} reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 }
 
-Before we can draw a scatter plot, we have to make an important decision: which variable do we think of as the _cause_ - called the @vocab{explanatory} variable - and which is the _effect_ (@vocab{response variable})?
-
-In this case, which do we suspect is the cause and which is the effect: age or time-to-adoption?
-
-@slidebreak
-
-We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.
-
-@strategy{Why not Independent/Dependent?}{
-
-Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are _dependent_ or they are _independent_. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are **causally connected**: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
-}
-
-It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
-
-@slidebreak
-
-We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
-
-@teacher{Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!}
-
 @lesson-instruction{
-- It's time to return to the @starter-file{alg2-states}!
-- Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
+- Return to the @starter-file{alg2-ca-rent}.
+- Working in pairs or small groups, complete Part 1 of @printable-exercise{ca-looking-for-patterns.adoc}.
 - Do not go on to Part 2! We'll return to that later in the lesson.
 }
 
 @teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
-
-@strategy{Exploring the States Dataset}{
-
-The @starter-file{alg2-states} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
-
-Making sense: can students predict these relationships, and explain their thinking? (If so, probably not worth having them spend time on more than one of them!)
-
-- `pop-2010` vs. `pop-2020`.
-- `pop-2020` vs. `num-households`
-- `num-housing-units` vs. `num-households`
-- `num-households` vs. `num-veterans`
-
-Surprises in the District of Columbia: DC often shows up as an outlier or extreme value. But why? Here are a few relationships to spark students' interest.
-
-- `pct-college-or-higher` vs. `pct-in-poverty`
-- `median-income` vs. `pct-college-or-higher`
-- `median-income` vs. `pct-home-owners`
-- `pct-college-or-higher` vs. `pct-home-owners`
-- `pct-college-or-higher` vs. `pct-home-owners`
-- `pct-home-owners`, `num-housing-units`
-- `median-income` vs. `per-capita-income`
-
-}
 
 
 === Synthesize
@@ -275,7 +243,7 @@ Building on prior knowledge of linear functions, students learn to find the line
 Before we learn to fit linear models to scatter plots, let's review. *What do you remember about linear functions?*
 
 @teacher{
-We'd expect students to be able to surface much of the following:
+We'd expect students in an Algebra 2 class to be able to surface much of the following:
 
 - Linear functions look like straight lines.
 - Vertical lines are not functions, because their slope is undefined as a result of their horizontal change being zero.
@@ -286,6 +254,9 @@ We'd expect students to be able to surface much of the following:
 - The x-coordinate of the @vocab{y-intercept} always starts with zero, e.g. @math{(0, y)}.
 - Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
 - Horizontal lines have a constant rate of change of zero.
+
+
+Depending on your students, you may need to teach or review some of this material!
 }
 
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
@@ -313,24 +284,21 @@ Knowing the y-intercept and the "size of the growth", we can tell that the equat
 === Investigate
 
 @lesson-instruction{
-Return to Pyret and the @starter-file{alg2-states}.
-Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
+Return to Pyret and the @starter-file{alg2-ca-rent}.
+Make a scatter plot showing the relationship between `adj-wage` and `year`, re-using `year` for the labels.
 }
 
 @slidebreak
 
-@center{@image{images/college-v-income.png}}
+@center{@image{images/scatter-age-year.png}}
 
-This scatter plot appears to show a positive, linear relationship: states with higher percentages of college graduates tend to have higher median household incomes.
+This scatter plot appears to show a positive, linear relationship: as we move from left to right (later in time) the adjusted wages generally get higher.
 
 @slidebreak
-@ifslide{@right{@image{images/college-v-income.png}}}
+@ifslide{@right{@image{images/scatter-age-year.png}}}
 @lesson-instruction{
-Suppose the United States were to add a new state. __Based on the data for the existing 50 states (plus DC!)...__
-
-- What median household income would you predict, if exactly 30% of the new state's citizens had attended college?
-- What would you predict if 20% had attended college? 
-- If 40% had attended college?
+- Based on the pattern you see here, what do you think the adjusted minimum wage will be in 2040?
+- Why or why not?
 }
 
 @teacher{
@@ -350,11 +318,11 @@ When we make a model, we want it to be the closest possible approximation of all
 Let's find the best fit we can make for this dataset!
 
 @lesson-instruction{
-Complete @printable-exercise{model-college-v-income-1.adoc}.
+Complete @printable-exercise{model-wage-v-year-1.adoc}.
 }
 
 @teacher{
-@opt{If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc} instead.}
+@opt{If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-wage-v-year-1-scaffolded.adoc} instead.}
 }
 
 
@@ -371,13 +339,13 @@ Armed with their linear models, students confront the notion of "model fitness".
 === Launch
 
 @lesson-instruction{
-- How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
+- How well did your model work for 1940 and 1950? Why didn't it work as well for other years?
 - How can we measure "how well a model fits"?
 }
 
 @teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
 
-The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are _patterns_, which we can describe with _models_. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But which is the best model?
+The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are _patterns_, which we can describe with _models_. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `year` and `adj-wage`. But which is the best model?
 
 *How do we even measure how good a model is in the first place?*
 
