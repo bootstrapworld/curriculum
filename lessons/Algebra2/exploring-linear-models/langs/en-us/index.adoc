@@ -290,12 +290,12 @@ Make a scatter plot showing the relationship between `adj-wage` and `year`, re-u
 
 @slidebreak
 
-@center{@image{images/scatter-age-year.png}}
+@center{@image{images/scatter-wage-year.png}}
 
 This scatter plot appears to show a positive, linear relationship: as we move from left to right (later in time) the adjusted wages generally get higher.
 
 @slidebreak
-@ifslide{@right{@image{images/scatter-age-year.png}}}
+@ifslide{@right{@image{images/scatter-wage-year.png}}}
 @lesson-instruction{
 - Based on the pattern you see here, what do you think the adjusted minimum wage will be in 2040?
 - Why or why not?
@@ -350,11 +350,6 @@ The real world is noisy and chaotic! But sometimes, somewhere in that noise and 
 *How do we even measure how good a model is in the first place?*
 
 @slidebreak
-
-@lesson-instruction{
-- TODO(Emmanuel): workbook page with simple points and two functions. Kids have to come up with a measurement
-- Share back
-}
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
@@ -428,29 +423,20 @@ If you'd like to have students dig deeper into linear regression, there's an @le
 
 @slidebreak
 
-When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income.__
+When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from 1940 and 1950 predicts that each year the adjusted minimum wage will be **$0.152** less than the year before!__
 
 @lesson-instruction{
-- The @math{S} value is **$36,300**. Does that mean the model fits well?
+- The @math{S} value is roughly **10.90**. Does that mean the model fits well?
 - As a class or in groups, discuss and be ready to share back.
 }
 
 @slidebreak
 
-The lowest median incomes are found in Mississippi ($39.031), Arkansas ($40,768), and West Virginia ($41,043).
+An @vocab{S} value of 10.9 means that the predicted wage is generally about $10.90 away from the actual wage. With all of our adjusted wage data falling between $9 and $15, and error of $10.90 means this predictor is pretty bad!
 
-An @vocab{S} value of $36,300 means there's enough error in the model to predict $0 median incomes for these states, or to over-estimate and predict _double_ the median income! And a family in Maryland - with the highest median income of $73,538 - might be predicted to only earn half as much, or 50% more!
-
-Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,300 is pretty terrible. _This model should not be trusted!_
+For this dataset, an @vocab{S} value of $10.90 is pretty terrible. _This model should not be trusted!_
 
 @slidebreak
-
-@lesson-instruction{
-These models are useless if we can't make sense of them!
-
-- For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- @opt{For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. }
-}
 
 === Synthesize
 
@@ -494,8 +480,8 @@ You may already be familiar with the different forms of linear models available 
 
 @slidebreak
 
-(1) *Slope-Intercept Form* makes it really easy to read the slope and y-intercept.
-(2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope.
+(1) *Slope-Intercept Form* makes it really easy to read the slope and y-intercept. +
+(2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope. +
 (3) *Standard Form* makes it easy to find the x- and y-intercepts of the line.
 
 @teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
