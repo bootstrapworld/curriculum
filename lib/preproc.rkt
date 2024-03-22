@@ -1584,17 +1584,18 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\n&nbsp;\n")
+                            (fprintf o "\n[#material-links]\n&nbsp;\n")
                             ; The line below can be deleted, once langTable links are generated via their own directive
                             #;(when (member *proglang* '("pyret" "wescheme"))
-                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))
+                            ]
                            [(string=? directive "opt-material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
                                      "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (set! *supplemental-materials-needed?* #t)
-                            (fprintf o "\n&nbsp;\n")]
+                            (fprintf o "\n[#opt-material-links]\n&nbsp;\n")]
                            [(string=? directive "language-table")
                             (let ([link-text (string-trim (read-group i directive))])
                               (unless *lesson-plan*
@@ -1651,18 +1652,13 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
-                            (display-exercise-collation o)]
+                            (fprintf o "\n[#exercises_and_solutions]\n&nbsp;\n")]
                            [(string=? directive "all-projects")
                             ; (printf "doing all-projects ~a\n" (errmessage-context))
                             (unless *teacher-resources*
                               (error 'ERROR
-                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                                     "adoc-preproc: @all-projects valid only in teacher resources"))
                             (link-to-opt-projects o)]
-                           [(string=? directive "all-lesson-notes")
-                            (unless *teacher-resources*
-                              (error 'ERROR
-                                     "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
-                            (link-to-notes-pages o)]
                            [(string=? directive "lesson-info")
                             (unless *teacher-resources*
                               (error 'ERROR
