@@ -1,5 +1,9 @@
 = Your Own Drawing Functions
-
+++++
+<style>
+.sect2 table .listingblock code.pyret { font-size: 9pt; }
+</style>
+++++
 @description{This lesson removes earlier scaffolding from working with Reactors, having students brainstorm an original animation of their own and implement it from start-to-finish. This requires them to plan out what kind of data structure they will need, and how it will be drawn and updated.}
 
 [@lesson-intro-table]
@@ -25,12 +29,15 @@ Students practice writing a simple function to draw the state of a Reactor, when
 === Launch
 The majority of reactive programs you’ll write in this course will use data structures consisting of multiple pieces of data, whether that be Numbers, Strings, Images, or Booleans. However, it’s not _required_ to have a full data structure in order to use a reactor. In fact, we can create an animation based on just a single number!
 
-@lesson-instruction{
-Open the @starter-file{single-number} file and take a look at the code. Before hitting "Run", can you guess what this code will do?
-}
-
 @slidebreak
 
+@lesson-instruction{
+Open the @starter-file{single-number} file and take a look at the code. Can you guess what this code will do?
+}
+
+[cols="1a,1a", frame="none"]
+|===
+|
 ```
 # next-state-tick :: Number -> Number
 fun next-state-tick(n):
@@ -39,11 +46,11 @@ end
 
 # draw-state :: Number -> Image
 fun draw-state(n):
-
   "fix me!"
-
 end
-
+```
+|
+```
 r = reactor:
   init: 1,
   # to-draw: draw-state,
@@ -52,34 +59,39 @@ end
 
 r.interact()
 ```
+|===
 
-Notice how there is no `data` block in this file. Both the `next-state-tick` and the `draw-state` function consume a single number, and the initial value given to the reactor is also a single number (in this case, 1.)
+@slidebreak
 
-@lesson-instruction{
-Click "Run". What do you see?
+Notice how there is no `data` block in this file. Both the `next-state-tick` and the `draw-state` function consume a *single number*, so the initial value given to the reactor is just a number (in this case, 1.)
+
+@QandA{
+@Q{Click "Run". What do you see?}
+@A{Just a single number, increasing in increments of 1}
+@Q{Why is the number increasing by 1?}
+@A{That's what `next-state-tick` does}
+@Q{Why don't we see any picture, or even the `"fix me"` from `draw-state`?}
+@A{The reactor has the `to-draw` handler commented out.}
+@Q{What do you think would happen if we had a reactor hooked up to a complete `draw-state` function, but a `next-state-tick` function that _never updated_ the state?}
+@A{We'd see an image, but it would never change because the state doesn't change.}
 }
 
-According to the `next-state-tick` function, on every clock tick the state (a single number) will increase by one, which is exactly what happens. Since we didn’t tell the reactor how to draw the state (the `to-draw` part of the reactor is commented out), when the reactor runs we see the state of the reactor (a single number) increasing, instead of an animation.
-
-@lesson-instruction{
-What do you think would happen if we had a reactor with a complete `draw-state` function, but a `next-state-tick` function that never updated the state? (Consuming and producing the same value.)
-}
-
-Reinforce the fact that, although the draw-state and next-state-tick functions work together within a reactor to produce an animation, each function can work without the other. In this example, next-state-tick will update the state even without a function to draw the state.
+@teacher{Reinforce the fact that, although the draw-state and next-state-tick functions work together within a reactor to produce an animation, each function can work without the other. In this example, next-state-tick will update the state even without a function to draw the state.}
 
 There are much more interesting things we can display using a number as the state of the reactor, however!
 
 === Investigate
 @lesson-instruction{
-Change the `draw-state` function so that it consumes a Number and produces an image. Then, uncomment the `to-draw: draw-state` line in the reactor to see an animation when the program runs!
+- Change the `draw-state` function so that it consumes a Number and produces an image. You get to decide what the image is, as long as it uses that number in some way.
+- Uncomment the `to-draw: draw-state` line in the reactor to see an animation when the program runs!
 }
 
-Encourage students to brainstorm and share ideas for the draw-state function before beginning. Some possible options
-include:
+Some ideas, to get you started:
 
-- Drawing a star of size n (so that it gets larger on each tick)
-- Display n as an image using the text function.
-- Have students share back the draw-state functions they wrote.
+- Draw a star of size `n`, so that it gets larger on each tick
+- Display `n` as an image using the `text` function
+
+@teacher{Have students share back the draw-state functions they wrote.}
 
 == Drawing with Two Numbers @duration{30 minutes}
 
@@ -93,12 +105,12 @@ You’ve practiced writing a `draw-state` function using a single number as a st
 Open the @starter-file{two-number} and take a look at the code.
 }
 
-----
-include image
-include reactors
-
+[cols="1a,1a", frame="none"]
+|===
+|
+```
 data AnimationState:
-  | state(
+  \| state(
       a :: Number,
       b :: Number)
 end
@@ -109,12 +121,12 @@ START = state(1, 100)
 fun next-state-tick(s):
   state(s.a + 1, s.b - 1)
 end
-
+```
+|
+```
 # draw-state :: AnimationState -> Image
 fun draw-state(s):
-
   "fix me!"
-
 end
 
 r = reactor:
@@ -124,7 +136,10 @@ r = reactor:
 end
 
 r.interact()
-----
+```
+|===
+
+@slidebreak
 
 This code includes a data structure (called `AnimationState`) containing two numbers as its fields, `a` and `b`. As before, the `draw-state` function is incomplete, and commented out from the reactor.
 
@@ -136,13 +151,15 @@ With only the `next-state-tick` function, we can see the state updating, increas
 
 === Investigate
 @lesson-instruction{
-How could you define a `draw-state` function to show something interesting when the program runs? Branstorm with your partner, then change the existing, broken `draw-state` function to consume an `AnimationState` and produce an image. Then, comment out the `to-draw: draw-state` line in the reactor to see an animation when the program runs!
+- How could you define a `draw-state` function to show something interesting when the program runs?
+- Branstorm with your partner, then change the existing, broken `draw-state` function to consume an `AnimationState` and produce an image.
+- Uncomment the `to-draw: draw-state` line in the reactor, to see an animation when the program runs!
 }
 
 Some possible ideas for this activity:
 
 - Display two shapes of size a and b, which get larger and smaller, respectively, as the reactor runs.
-- Make a and b the coordinates of an image, moving down and to the right across a background as the reactor runs.
+- Make a and b the (x, y) coordinates of an image, moving down and to the right across a background as the reactor runs.
 
 === Synthesize
-Have students share back what they brainstormed before beginning, then share the completed draw-state functions they wrote, and the animations they created!
+Share back what you brainstormed, and then share the completed `draw-state` functions you wrote and the animations you created!
