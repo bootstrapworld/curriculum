@@ -2410,7 +2410,7 @@
 
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
-  (print-menubar (string-append file "-comment.txt"))
+  ; (print-menubar (string-append file "-comment.txt"))
   (unless (empty? *glossary-items*)
     (set! *glossary-items*
       (sort *glossary-items* #:key first string-ci<=?))
