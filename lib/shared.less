@@ -266,6 +266,24 @@ lines on some browsers */
 
 .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 
+.materials-links p {
+  .showPageLinks a { 
+    text-decoration: none; 
+    &::after { content: ' ▼ '; }
+  }
+  &+.ulist { 
+    transition: 1s ease-in; max-height: 0; overflow: hidden; 
+    padding-left: 5px; margin: 0; font-style: italic; font-size: 10pt;
+    .pageNum { float: right; margin-right: 10%; }
+  }
+}
+.materials-links p.open {
+  .showPageLinks a::after { content: ' ▲ '; }
+  &+.ulist { transition: 1s ease-in; max-height: 1000px; }
+}
+
+
+
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
@@ -313,22 +331,6 @@ lines on some browsers */
     }
     &.left-header tr td:nth-child(1) { background-color: #b7d893; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
-
-    .materials-links li p {
-      .showPageLinks a { 
-        text-decoration: none; 
-        &::after { content: ' ▼ '; }
-      }
-      &+.ulist { 
-        transition: 1s ease-in; max-height: 0; overflow: hidden; 
-        padding-left: 5px; margin: 0; font-style: italic; font-size: 10pt;
-        .pageNum { float: right; margin-right: 10%; }
-      }
-    }
-    .materials-links li p.open {
-      .showPageLinks a::after { content: ' ▲ '; }
-      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
-    }
 
     /* Custom materials link styles */ 
     .Optional::before, .OptProject::before, .handout::before { color: gray;}

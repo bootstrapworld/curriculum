@@ -38,6 +38,11 @@ local function read_slidesURL(slidesId_file)
   return 'https://docs.google.com/presentation/d/' .. id
 end
 
+
+
+    
+
+
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')
@@ -66,6 +71,15 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  local function page_title(page_adoc_file)
+    local title_file = lessonpagecache .. '.' .. page_adoc_file:gsub('%.adoc', '') .. '.titletxt'
+    local title = page_adoc_file
+    if file_exists_p(title_file) then
+      local title2 = first_line(title_file)
+      if title2 then title = title2 end
+    end
+    return title
+  end
   --
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
@@ -107,7 +121,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(pages_file) then
     i = io.open(pages_file)
     for line in i:lines() do
-      pages_txt = pages_txt .. '\"' .. line .. '\", '
+      pages_txt = pages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -115,7 +129,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(exercisePages_file) then
     i = io.open(exercisePages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
+      exercisePages_txt = exercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end

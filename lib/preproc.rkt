@@ -1584,20 +1584,18 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)
+                            (fprintf o "\n[#material-links]\n&nbsp;\n")
                             ; The line below can be deleted, once langTable links are generated via their own directive
                             #;(when (member *proglang* '("pyret" "wescheme"))
-                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))
+                            ]
                            [(string=? directive "opt-material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
                                      "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (set! *supplemental-materials-needed?* #t)
-                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
-                                     *containing-directory*)
-                             ]
+                            (fprintf o "\n[#opt-material-links]\n&nbsp;\n")]
                            [(string=? directive "language-table")
                             (let ([link-text (string-trim (read-group i directive))])
                               (unless *lesson-plan*
@@ -1654,18 +1652,13 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
-                            (display-exercise-collation o)]
+                            (fprintf o "\n[#exercises_and_solutions]\n&nbsp;\n")]
                            [(string=? directive "all-projects")
                             ; (printf "doing all-projects ~a\n" (errmessage-context))
                             (unless *teacher-resources*
                               (error 'ERROR
-                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                                     "adoc-preproc: @all-projects valid only in teacher resources"))
                             (link-to-opt-projects o)]
-                           [(string=? directive "all-lesson-notes")
-                            (unless *teacher-resources*
-                              (error 'ERROR
-                                     "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
-                            (link-to-notes-pages o)]
                            [(string=? directive "lesson-info")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -2204,7 +2197,7 @@
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
-            (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
+            #;(unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
               (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
@@ -2227,7 +2220,7 @@
               (fprintf o "\n* ~a\n\n" x))
             ; ONLINE EXERCISES --- to be removed onces all required online exercises
             ; have been turned into starter files
-            (for ([x (map cdr (reverse *online-exercise-links*))])
+            #;(for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
