@@ -263,7 +263,9 @@ Students bridge from a human-language question into something more formal, by sp
 
 === Launch
 
-Tables are made of **Rows** and **Columns**. Each Row represents __one member of our population__.
+Tables are made of **Rows** and **Columns**. 
+
+Each Row represents __one member of our population__.
 
 - In the Animals Dataset, each row represents a single animal.
 - In a weather forecast, each row might represent the weather at a particular hour.
@@ -281,32 +283,38 @@ Columns, on the other hand, represent information __about each row__.
 When considering data, we first ask: **Which Rows** do we need? Then we ask: **Which Column(s)** do we care about?
 }
 
+If we want to know which animal is the heaviest, 
+
+- we are interested in __every row of our table__,
+- and we'll focus on the `pounds` column of our table.
+
 If we want to know which cat is the heaviest, we only care about __rows for cats__, so 
 
-- first, we'll identify the rows for cats 
-- then, we'll focus on the `pounds` column __in those rows__
+- first, we'll need to make a new table of the __rows for cats__,
+- then, we'll focus on the `pounds` column __of our new table__.
 
-If we want to know how many fixed animals are rabbits:
+Data scientists filter tables to make new tables all the time!
 
-- first, we'll make a new table of the __rows for fixed animals__, 
-- then,  we'll focus only on the `species` column
+While we haven't learned how to @lesson-link{filtering-and-building, filter and build tables} in @proglang yet, we are ready to start thinking about it...
 
 @slidebreak
 
 @QandA{
-@Q{If our question is "How old is Mittens?", what rows and column(s) do we need?}
+@Q{If our question is "How old is Mittens?", which rows and column(s) do we need?}
 @A{We only need one row for Mittens, and we just need the `age` column}
-@Q{If our question is "Which animal is the heaviest?", what rows and column(s) do we need?}
-@A{We need to compare every row, and we only look at the `pounds` column}
 @Q{Which rows and columns did we need to answer "Are more animals fixed or unfixed?"?}
 @A{We needed to look at __all__ the rows, but the only column we care about is `fixed`.}
+@Q{If we want to know how many fixed animals are rabbits, **Which Rows** and **Which Columns** do we need?}
+@A{First, we'll make a new table of just the __rows for fixed animals__.}
+@A{Then, we'll focus only on the `species` column __in our new table__.}
 }
 
 === Investigate
 
 @lesson-instruction{
 - Return to @printable-exercise{which-question-type.adoc} For each question, determine:
-  * Which rows would you need to answer them? __(Sometimes we need all rows, and sometimes we only need a subset.)__ 
+  * Which rows would you need to answer them? +
+  __(Sometimes we need all rows, and sometimes we only need a subset.)__ 
   * Which columns would you look at? 
   * Write your answers in the last two columns of the table at the bottom.
 - Complete @printable-exercise{which-rows-which-columns.adoc}.
@@ -316,16 +324,9 @@ If we want to know how many fixed animals are rabbits:
 Have students share their answers and discuss any questions they have about these pages.
 }
 
-=== Common Misconceptions
-
-Questions like "Who is the oldest?" or "What is the most?" require looking at __every row__ in the table.
-
-Students who don't internalize the importance of identifying the rows we want to focus on __before__ thinking about which columns we'll need, might mistakenly think we need the `species` column to answer the question, "Which cat is the heaviest?"  But we're not thinking about columns until __after__ we focus in on the cat rows, so the `species` would be cat for all of the rows we're working with!
-
 === Synthesize
 
 How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyret}{what code to write}@ifproglang{codap}{which configurations to use}?
-
 
 
 == Data Cycle Practice @duration{15 minutes}
