@@ -1664,7 +1664,7 @@
                               (error 'ERROR
                                      "adoc-predoc: @lesson-info valid only in teacher resources"))
                             (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
-                            (newline)]
+                            (newline o)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
