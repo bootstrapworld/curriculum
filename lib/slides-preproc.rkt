@@ -11,8 +11,8 @@
 
 (define *slides-namespace* (namespace-anchor->namespace *slides-namespace-anchor*))
 
-;if md2gslides can't handle too many images, set this to a small number, e.g., 6
-(define *max-images-processed* 100)
+; slides should generally have fewer than 100 images
+(define *max-images-processed* 200)
 
 (define *num-images-processed* 0)
 
@@ -140,6 +140,7 @@
                     [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
                     [(regexp-match "\\\\\\\\" text) #t]
                     [(regexp-match "\\\\mbox" text) #t]
+                    [(regexp-match "\\\\over" text) #t]
                     [else #f])])
         ;
         ((if use-mathjax?
@@ -678,6 +679,7 @@
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)
                               (newline *teacher-notes*)
+                              (newline *teacher-notes*)
                               (display "**" *teacher-notes*)
                               (expand-directives:string->port title *teacher-notes*)
                               (display "**\n" *teacher-notes*)
@@ -689,6 +691,7 @@
                               (when (string=? directive "opt")
                                 (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
+                              (newline *teacher-notes*)
                               (newline *teacher-notes*)
                               (expand-directives:string->port text *teacher-notes*)
                               (newline *teacher-notes*)
@@ -765,6 +768,11 @@
                                 (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
+                           [(string=? directive "ifslide")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (expand-directives:string->port text o))]
+                           [(string=? directive "ifnotslide")
+                            (read-group i directive)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]

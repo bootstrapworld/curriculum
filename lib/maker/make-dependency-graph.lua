@@ -32,6 +32,17 @@ local function read_list_of_glosses_from_file(f)
   return ('[\n' .. table.concat(tbl, ',\n') .. '\n    ]')
 end
 
+local function read_slidesURL(slidesId_file)
+  local id = first_line(slidesId_file)
+  if not id then return false end
+  return 'https://docs.google.com/presentation/d/' .. id
+end
+
+
+
+    
+
+
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')
@@ -48,23 +59,42 @@ for _,lesson in ipairs(lessons) do
   local pages_txt = ''
   local exercisePages_txt = ''
   local handoutPages_txt = ''
+  local notesFiles_txt = ''
   local primitives_txt = ''
   local starterFiles_txt = ''
   local prerequisites_txt = ''
   --
+  local proglang_file = lessoncache .. '.record-proglang'
+  if file_exists_p(proglang_file) then
+    i = io.open(proglang_file)
+    proglang_txt = i:read()
+    i:close()
+  end
+  --
+  local function page_title(page_adoc_file)
+    local title_file = lessonpagecache .. '.' .. page_adoc_file:gsub('%.adoc', '') .. '.titletxt'
+    local title = page_adoc_file
+    if file_exists_p(title_file) then
+      local title2 = first_line(title_file)
+      if title2 then title = title2 end
+    end
+    return title
+  end
+  --
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
-  local proglang_file = lessoncache .. '.record-proglang'
   local sections_file = lessoncache .. '.lesson-sections.txt.kp'
   local pages_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
   local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
   local handoutPages_file = lessonpagecache .. '.handout-exercise-pages-ls.txt.kp'
+  local notesFiles_file = lessonpagecache .. '.workbook-notes-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
   local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
   local glossary_json_file = lessoncache .. '.index-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
   local standards_file = lessoncache .. '.lesson-standards-w-prose.txt.kp'
+  local slidesId_file = lessondir .. 'slides-' .. proglang_txt .. '.id'
   --
   local i
   --
@@ -80,12 +110,6 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
-  if file_exists_p(proglang_file) then
-    i = io.open(proglang_file)
-    proglang_txt = i:read()
-    i:close()
-  end
-  --
   if file_exists_p(sections_file) then
     i = io.open(sections_file)
     for line in i:lines() do
@@ -97,7 +121,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(pages_file) then
     i = io.open(pages_file)
     for line in i:lines() do
-      pages_txt = pages_txt .. '\"' .. line .. '\", '
+      pages_txt = pages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -105,7 +129,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(exercisePages_file) then
     i = io.open(exercisePages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
+      exercisePages_txt = exercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -114,6 +138,14 @@ for _,lesson in ipairs(lessons) do
     i = io.open(handoutPages_file)
     for line in i:lines() do
       handoutPages_txt = handoutPages_txt .. '\"' .. line .. '\", '
+    end
+    i:close()
+  end
+  --
+  if file_exists_p(notesFiles_file) then
+    i = io.open(notesFiles_file)
+    for line in i:lines() do
+      notesFiles_txt = notesFiles_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
@@ -150,6 +182,7 @@ for _,lesson in ipairs(lessons) do
   o:write('    pages: [' .. pages_txt .. '],\n')
   o:write('    optPages: [' .. exercisePages_txt .. '],\n')
   o:write('    handouts: [' .. handoutPages_txt .. '],\n')
+  o:write('    notes: [' .. notesFiles_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')
   if file_exists_p(keywords_file) then
     o:write('    keywords: ' .. read_list_from_file(keywords_file) .. ',\n')
@@ -159,6 +192,12 @@ for _,lesson in ipairs(lessons) do
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
+  if file_exists_p(slidesId_file) then
+    local slidesURL = read_slidesURL(slidesId_file)
+    if slidesURL then
+      o:write('    slides: "' .. slidesURL .. '",\n')
+    end
+  end
   copy_file_to_port(standards_file, o)
   o:write(' },\n')
 end

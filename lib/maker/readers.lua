@@ -23,7 +23,7 @@ function buffered_input_port_metatable.__index:close()
   if self.port then self.port:close() end
 end
 
-function buffered_input_port_metatable.__index:read(arg)
+function buffered_input_port_metatable.__index:read_char()
   -- :read(1) works on buffered input ports
   -- arg is assumed to be 1. We don't need anything else
   local buf = self.buffer
@@ -50,6 +50,17 @@ function buffered_input_port_metatable.__index:read_line()
     return nil
   else
     return s
+  end
+end
+
+function buffered_input_port_metatable.__index:read(arg)
+  if not arg then
+    return self:read_line()
+  elseif arg == 1 then
+    return self:read_char()
+  else
+    print('Buffered input port .read: ' .. errmsg_file_context() .. ': Bad argument ' .. arg)
+    error 'crash and burn'; return
   end
 end
 
@@ -98,7 +109,8 @@ function read_word(i)
   local w = {}
   while true do
     local c = buf_peek_char(i)
-    if c:match('^%a') or c == '-' then
+    if not c then break
+    elseif c:match('^%a') or c == '-' then
       c = i:read(1)
       table.insert(w, c)
     else
@@ -249,4 +261,12 @@ function read_commaed_group(ip, directive, read_group)
     r[i] = string_trim_quotes(string_trim(s))
   end
   return r
+end
+
+function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  i:close()
+  return x
 end
