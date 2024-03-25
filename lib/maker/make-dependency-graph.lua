@@ -38,6 +38,11 @@ local function read_slidesURL(slidesId_file)
   return 'https://docs.google.com/presentation/d/' .. id
 end
 
+
+
+    
+
+
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')
@@ -66,6 +71,15 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  local function page_title(page_adoc_file)
+    local title_file = lessonpagecache .. '.' .. page_adoc_file:gsub('%.adoc', '') .. '.titletxt'
+    local title = page_adoc_file
+    if file_exists_p(title_file) then
+      local title2 = first_line(title_file)
+      if title2 then title = title2 end
+    end
+    return title
+  end
   --
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
