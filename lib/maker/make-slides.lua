@@ -39,6 +39,8 @@ if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
   course_string = 'DS'
 elseif lesson_superdir == 'Algebra' then
   course_string = 'A'
+elseif lesson_superdir == 'Reactive' then
+  course_string = 'R'
 end
 
 local function read_if_poss(i, xxx)
@@ -59,6 +61,8 @@ local allowed_slide_layouts = {
   "Math Title and Body",
   "DS Title Slide",
   "DS Title and Body",
+  "R Title Slide",
+  "R Title and Body",
   "LegendSlide",
   "Launch",
   "LaunchR",
