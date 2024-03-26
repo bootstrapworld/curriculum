@@ -32,49 +32,127 @@
 
 === Launch
 
-Thoughtful *question-asking* drives good decision-making!
+Consider each of three situations described below:
+
+- You just finished watching a youtube video. Another video appears... and it is exactly the video you never knew you wanted to watch.
+- Two individuals who work for the same company and earn the same salary apply for a loan from the same bank. One of them is granted a loan, the other is not.
+- A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using census data.
+
+On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that machine learning is at work in all three. In each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
+
+@QandA{
+Think about those three scenarios: recommending videos, classifying loan requests, predicting election outcomes. What sort of data do you think was used in each?
+}
+
+
+=== Investigate
+
+A *decision tree* is a type of machine learning that categorizes and makes predictions based on how a __previous__ set of questions was answered. Decision trees are a form of __supervised__ machine learning because the computer is trained on data that contains the desired categorizations.
+
+Decision trees pop up everywhere because they are flexible and easy to interpret--and they are flexible and easy to interpret because they imitate human thinking and decision-making.
+
+As a class, we are going to play a __simplified__ version of 20 Questions to help us understand the sort of thinking that decision trees imitate.
 
 @QandA{
 @Q{Show of hands: Have you ever played 20 Questions?}
 @Q{What are the rules?}
 @A{Choose 1 player to be “it,” and have them think of a secret person, place or thing. The other players attempt to guess the secret person, place, or thing, but they only get 20 questions to do so.}
 @Q{Have you ever won 20 Questions? What do you think is the secret to success?}
+@A{Possible responses: Ask questions with responses that can definitely be responded to with "yes" or "no". Ask questions that are likely to eliminate many objects... but be careful! A question that is too narrow could end up resulting in very little information gained. Start with questions that will quickly limit possibilities.}
 }
 
-@teacher{Invite students to share their strategies. Over the course of this lesson, students will develop a much more sophisticated response to this question.}
+@lesson-instruction{
 
-As a class, we are going to play a __simplified__ version of 20 Questions. I will secretly write down on a piece of paper one of the ten items on this list:
+Here's how our game works:
 
-@center{@big{*bowl, fork, cup, plate, knife, spoon, napkin, table, spork, mug*}}
+- I will secretly write down on a piece of paper one of the six items on this list: *spoon, knife, cup, plate, spork, and mug*.
 
-You will ask me yes/no questions (however many you need!) until you figure out the object that I chose. As you ask questions, I will number and record them on the whiteboard.
+- You will ask me yes/no questions (however many you need!) until you figure out the object that I chose.
 
-@teacher{Do not guide students in developing their questions. If you'd like, you can play additional rounds of the game or even have students play their own games in small groups.
+- As you ask questions, I will record them on the whiteboard connected by arrows.
 }
-
-Let’s make a flowchart to illustrate (1) our path to the correct answer, and (2) the most efficient paths to the other three possible answers.
 
 @teacher{
+@right{@image{images/tree1.png, 70}}
 
-See the diagram below for a sample flowchart. The one developed by your students will likely look different, and that is okay.
+Do not guide students in developing their questions.
 
-NEED TO ADD FLOWCHART
+The first round of this game will produce a diagram similar to the one on the right. Your diagram will probably have two or three arrows, depending on the questions your students pose.
+
 }
 
 @QandA{
 @Q{How many questions did we ask in order to determine the correct object?}
-@Q{What do you think is the minimum number of questions we could ask to always arrive at the correct answer?}
+@Q{How did we decide which questions to ask?}
+@Q{Which items did our very first question eliminate from the list of possibilities?}
+@A{Responses will vary. If students asked, "Is it a utensil?", then the eliminated items would include: plate, bowl, and mug.}
+}
+
+Let's play _another_ round of the game - but this time, you will try to guess one of the items that we eliminated when we asked our original question. As you ask questions, I will add to our previous diagram.
+
+@teacher{
+
+@right{@image{images/tree2.png, 200}}
+
+As students ask questions, add to your diagram. Round 2 of this game will produce a diagram similar to the one on the right. Notice that the root node - "is it a utensil?" - splits left ("yes, it is a utensil") and right ("no, it is not a utensil").
+
+}
+
+So far, our diagram offers two unique pathways from the root of the tree. One pathway leads to the first mystery item, and the other leads to the second mystery item.
+
+@lesson-instruction{
+- With a partner, complete the decision tree on a piece of paper so that all six items are categorized.
+- Now, draw an entirely different decision tree - one which has a new question at its root.
+}
+
+@teacher{
+
+@right{@image{images/tree3.png, 200}}
+
+One possible completed tree is on the right.
+
+As students finish, invite them to draw their trees on the board to see the different possibilities.
+
+}
+
+@QandA{
+@Q{Which of your trees was more efficient? How do you know?}
+@Q{Were your decision trees equally accurate?}
+@Q{How would your decision trees label a fork? What about a chopstick?}
+}
+
+As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. Computers build decision trees using only the data we provide it.
+
+Imagine a spreadsheet that indicates the weight, material, color, and cost of 100 different spoons, knives, cups, plates, sporks and mugs. Now, imagine that this spreadsheet contains the only information you have ever encountered about spoons, kinves, cups, plates, sporks and mugs.
+
+@QandA{
+@Q{Is it possible to build a decision tree from this dataset? If so, how?}
+@Q{Do you think a tree built from the dataset above would categorize spoons, knives, cups, plates, sporks and mugs with 100% accuracy? Why or why not?}
 }
 
 
-When "flowcharts" are used in machine learning, we call them decision trees.
+=== Synthesize
 
-@lesson-point{
-A decision tree is a supervised learning algorithm used to categorize and make predictions.}
 
-Decision trees make a lot of really cool things possible! A decision tree may have selected your next youtube video, predicted if your state would vote Democrat or Republican in the next election, or even made a medical diagnosis.
+
+
+== Decision Trees from Training Datasets
+
+=== Launch
+
+We have already built some extremely simple decision trees. We have a sense of heirarchical structure, flexibility, and versatility of decision trees.
+
+We have *not* yet considered useful, powerful decision trees from large datasets can make such amazingly accurate predictions, diagnoses, and recommendations.
+
+It turns out that an effective decision tree hinges on two important questions:
+
+- Which question should we ask first?
+
+- If we choose a question, what's the probability of getting the right answer?
+
 
 === Investigate
+
 
 We're going to create a decision tree that recommends different apps to people based on their age and sex.
 
@@ -83,6 +161,7 @@ To do so, we will train the computer using the dataset below (also available on 
 @QandA{
 @Q{What do you Notice about the dataset below? What do you wonder?}
 @Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
+@A{Responses will vary.}
 }
 
 [cols="1,5,5,5", stripes="none", options="header"]
@@ -98,7 +177,7 @@ To do so, we will train the computer using the dataset below (also available on 
 
 |===
 
-One problem with this dataset is that age is continuous. That won’t work here! We need to break these ages down into two different groups - which will become two different __branches__ that grow out of a __decision node__. *For now, let’s agree that anyone below 20 is young and anyone 20 or above is an adult.*
+One problem with this dataset is that __age is continuous__. That won’t work! We need to break these ages down into two different groups - which will become two different __branches__ that grow out of a __decision node__. *For now, let’s agree that anyone below 20 is young and anyone 20 or above is an adult.*
 
 There are two possible questions we could use at the root of our decision tree are:
 
@@ -117,7 +196,7 @@ It’s our job to figure out which question we should ask first. But how?
 Once students have finished, invite them to share which attribute they selected for the tree's root node. Have a few students defend their decision.
 }
 
-Great! Now we know how to *begin* our tree. Let's build it and test it to see if it makes accurate and useful predictions.
+Great! We know how to *begin* our tree. Let's build the rest, then test it to see if our tree makes accurate and useful predictions.
 
 @lesson-instruction{
 - Complete the first section @printable-exercise{build-and-test.adoc}, then let's share the rules we developed.
@@ -126,10 +205,6 @@ Great! Now we know how to *begin* our tree. Let's build it and test it to see if
 }
 
 === Synthesize
-
-We've covered a lot of ground, and learned a lot of new vocabulary. Let's review some of the main ideas.
-
-blah blah blah
 
 - synthesize Q1
 - synthesize Q2
