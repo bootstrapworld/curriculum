@@ -6,27 +6,30 @@ local buffered_input_port_metatable = {
   __index = {}
 }
 
-function io.open_buffered(f)
+function io.open_buffered(file, str)
   -- creates a buffered input port
   local o = {
-    port = io.open(f),
+    port = false,
     buffer = {}
   }
+  if file then o.port = io.open(file) end
+  if str then o.buffer = string_to_table(str) end
   setmetatable(o, buffered_input_port_metatable)
   return o
 end
 
 function buffered_input_port_metatable.__index:close()
   -- :close() works on buffered input ports
-  self.port:close()
+  if self.port then self.port:close() end
 end
 
-function buffered_input_port_metatable.__index:read(arg)
+function buffered_input_port_metatable.__index:read_char()
   -- :read(1) works on buffered input ports
   -- arg is assumed to be 1. We don't need anything else
   local buf = self.buffer
   if #buf > 0 then return table.remove(buf, 1) end
-  return self.port:read(1)
+  if self.port then return self.port:read(1) end
+  return nil
 end
 
 function buffered_input_port_metatable.__index:read_line()
@@ -39,7 +42,8 @@ function buffered_input_port_metatable.__index:read_line()
       s = s .. c
     end
   end
-  s_extra = self.port:read()
+  local s_extra = false
+  if self.port then s_extra = self.port:read() end
   if s_extra then
     return s .. s_extra
   elseif s == '' then
@@ -49,11 +53,23 @@ function buffered_input_port_metatable.__index:read_line()
   end
 end
 
+function buffered_input_port_metatable.__index:read(arg)
+  if not arg then
+    return self:read_line()
+  elseif arg == 1 then
+    return self:read_char()
+  else
+    print('Buffered input port .read: ' .. errmsg_file_context() .. ': Bad argument ' .. arg)
+    error 'crash and burn'; return
+  end
+end
+
 function buf_peek_char(bp)
   -- find next character in port without actually reading it
   local buf = bp.buffer
   if #buf > 0 then return buf[1] end
-  local c = bp.port:read(1)
+  local c = false
+  if bp.port then c = bp.port:read(1) end
   if c then table.insert(buf, c) end
   return c
 end
@@ -93,7 +109,8 @@ function read_word(i)
   local w = {}
   while true do
     local c = buf_peek_char(i)
-    if c:match('^%a') or c == '-' then
+    if not c then break
+    elseif c:match('^%a') or c == '-' then
       c = i:read(1)
       table.insert(w, c)
     else
@@ -107,6 +124,17 @@ function read_word(i)
     end
   end
   return table.concat(w)
+end
+
+function ignore_spaces(i)
+  while true do
+    local c = buf_peek_char(i)
+    if c == ' ' or c == '\t' or c == '\n' then
+      i:read(1)
+    else
+      break
+    end
+  end
 end
 
 function make_read_group(code, errmsg_file_context)
@@ -233,4 +261,12 @@ function read_commaed_group(ip, directive, read_group)
     r[i] = string_trim_quotes(string_trim(s))
   end
   return r
+end
+
+function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  i:close()
+  return x
 end

@@ -68,8 +68,7 @@ _If you flag a word as a vocabulary word, be sure to add it to the glossary in b
 
 === To center text horizontally on the line
 
-[.center]
-this text will be centered
+@center{this text will be centered}
 
 === Vertical spaces between lines of text
 
@@ -101,8 +100,8 @@ These 7 directives are for links that appear in the lesson plan and should be au
 _Note: What is included in the workbook is determined by what is listed in the workbook-pages.txt file in the lesson's "pages" folder._
 
 @comment{
-- @printable-exercise{pages/whateverthepagetitleis.adoc} This is for workbook pages only and will automatically be shown with the title and the page number in the lesson plan.
-- @opt-printable-exercise{pages/whateverthepagetitleis.adoc} This is for pages that can be printed but are not going to be included in the workbook. W
+- @printable-exercise{whateverthepagetitleis.adoc} This is for workbook pages only and will automatically be shown with the title and the page number in the lesson plan.
+- @opt-printable-exercise{whateverthepagetitleis.adoc} This is for pages that can be printed but are not going to be included in the workbook. W
 - @online-exercise{whateverthelink is} or  @online-exercise{whateverthelink is, however you want the link to be named in the lesson plan}. This link is designed for things that we expect all teachers to use while teaching the lesson
 - @opt-online-exercise{whateverthelink is} This link is desinged for things that some people may use.
 - @opt-project{project.adoc, rubric.adoc} This link not only adds projects to the materials section but to a table on the teacher resources page. Be sure that the project.adoc itself has an @description{} beneath the title
@@ -130,15 +129,25 @@ If you're using @link{} you need to use the file ending .html instead of .adoc
 
 @n but it's new
 
-. so you will see
-. some pages that are
-. numbered like this instead
-. if you have energy, switch them to our new numbering command
+1. so you will see
+2. some pages that are
+3. numbered like this instead
+4. if you have energy, switch them to our new numbering command
 
 @star is used for challenge problems
 
+Checkboxes can be written as follows:
+@ifnotsoln{
+- [ ] There are potential outliers at @fitb{}{}
+}
+@ifsoln{
+- [x] There are potential outliers at @fitb{}{45 and 500} 	
+}
+- [ ] There do not appear to be any potential outliers.
+
 
 === Tables
+
 
 In the code below, cols= could also be defined more simply as 4,2,3,1.
 
@@ -146,7 +155,7 @@ You can change the numbers to shift the ratio of the width of the columns and ad
 
 The other formatting defines where in the cell the words end up being placed (see alignment notes below)
 
-[cols="^.^4,<.^2,>.>3, 1" options="header", stripes="none"]
+[cols="^.^4,<.^2,>.>3, 1" options="header", stripes="none", grid="none", frame="none"]
 |===
 | each vertical 	| bar 		| is 		| a
 | break 			| between 	| columns	| .
@@ -195,10 +204,8 @@ There are also pathyway specific commands, which we only use sparingly to includ
 === Indentation
 You can use
 
-[.indentedpara]
---
-and whatever you write in here will be indented
---
+@indented{and whatever you write in here will be indented}
+
 
 === Landscape pages
 

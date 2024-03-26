@@ -1,0 +1,77 @@
+= Booléens
+
+*Les expressions booléennes sont des questions à réponse oui ou non et seront toujours évaluées comme « vrai » (« oui ») ou « faux » (« non »).* À quoi chacune des expressions ci-dessous sera-t-elle évaluée ? _Écrivez votre prédiction dans les espaces fournis, puis tapez le code dans la zone d'interactions pour voir ce qu'il renvoie._
+
+++++
+<style>
+#content td {padding: 0.6rem 0px !important}
+#content table .autonum::after { content: ')'; }
+#content th { text-align: center !important; }
+</style>
+++++
+
+
+[.table1, cols="2, .>2, .>2, 0, 3, .>2, .>2", frame="none", grid="none", stripes="none" options="header"]
+|===
+|								    	| *Prédiction*	| *Résultat*
+||                                		| *Prédiction*	| *Résultat*
+
+| @n @show{(code '(<= 3 4))}   			| @fitb{}{}  	| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string>? "a" "b"))} 	| @fitb{}{}  	| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(= 3 2))}				| @fitb{}{}		| @fitb{}{@ifsoln{false}
+||@n @show{(code '(string<? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+| @n @show{(code '(< 2 4))}				| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(>= 5 5))}			| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string<>? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+
+| @n @show{(code '(>= 4 6))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string>=? "a" "a"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+
+| @n @show{(code '(<> 3 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+||@n @show{(code '(string<>? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+
+| @n @show{(code '(<> 4 3))}			| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+||@n @show{(code '(string>=? "a" "b"))}	| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|===
+
+@n Dans vos propres mots, décrivez ce que fait « < ».
+
+@fitb{}{@ifsoln{vérifie si le premier nombre est inférieur au deuxième nombre ; renvoie vrai si c'est le cas et faux si ce n'est pas le cas}}
+
+@vspace{1ex}
+
+@n Dans vos propres mots, décrivez ce que fait `>=`.
+
+
+@fitb{}{@ifsoln{vérifie si le premier nombre est supérieur ou égal au deuxième nombre ; renvoie vrai si c'est le cas et faux si ce n'est pas le cas}}
+
+@vspace{1ex}
+
+@n Dans vos propres mots, décrivez ce que fait « <> ».
+
+@fitb{}{@ifsoln{vérifie si les deux nombres sont inégaux ; renvoie vrai s'ils sont inégaux et faux s'ils sont égaux}}
+
+@vspace{1ex}
+
+[cols="5, .>2, .>2", frame="none", grid="none", stripes="none"]
+|===
+|													 | *Prédiction:*	| *Résultat:*
+@ifproglang{wescheme}{
+|@n @show{(code '(string=? "a tree" "trees"))} 	 	 | @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|@n @show{(code '(string=? "tree"   "tree"))}		 | @fitb{}{}		| @fitb{}{@ifsoln{true}}
+}
+|@n @show{(code '(string-contains?  "catnap" "cat"))}| @fitb{}{}		| @fitb{}{@ifsoln{true}}
+|@n @show{(code '(string-contains?  "cat" "catnap"))}| @fitb{}{}		| @fitb{}{@ifsoln{false}}
+|===
+
+@n Dans vos propres mots, décrivez ce que fait « string-contains ». Pouvez-vous générer une autre expression en utilisant « string-contains » qui renvoie vrai ?
+
+@fitb{}{@ifsoln{vérifie si la deuxième chaîne est contenue dans la première chaîne ; renvoie vrai si c'est le cas et faux si ce n'est pas le cas}}
+
+@n Il existe des valeurs de nombres infinis (...-2,-1,0,-1,2... ) et des valeurs de chaîne infinies ("a", "aa", "aaa"...) Mais combien existe-t-il différentes valeurs _booléennes_ ?
+

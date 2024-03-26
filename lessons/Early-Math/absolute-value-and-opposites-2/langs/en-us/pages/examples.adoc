@@ -1,0 +1,98 @@
+= Programming with Absolute Value and Opposite
+
+
+++++
+<style>
+#content td {padding: 0.5rem 5px !important}
+#content table .autonum::after { content: ')'; }
+#content th { text-align: center !important; }
+</style>
+++++
+
+== Predict
+
+@vspace{1ex}
+
+Which equations in the table below will be _true_ when @math{m=6}? What about when @math{m=12}? @math{m=o}? With your partner, put a check ✓ in the boxes when you predict the equations will be true. Note: an equation might be true for some values and false for others!
+
+@vspace{1ex}
+
+@ifproglang{pyret}{
+
+[.table1, cols="16,^.^4,^.^4,^.^4", stripes="none"]
+|===
+| Example | `m = 6` | `m = -12` | `m = 0`
+
+| @n @show{(code '(negate m))} *is* @show{(code '(abs m))} ||@ifsoln{✓}|
+
+| @n @show{(code '(negate m))} *is* @show{(code '(negate(abs m)))} |@ifsoln{✓}||
+
+| @n @show{(code '(negate m))} *is* @show{(code '(abs(negate m)))} ||@ifsoln{✓}|
+
+| @n @show{(code '(abs(negate m)))} *is* @show{(code '(negate(negate m)))} |@ifsoln{✓}||
+
+| @n @show{(code '(abs(negate m)))} *is* @show{(code '(negate(abs m)))} |||
+
+|===
+
+}
+
+@ifproglang{wescheme}{
+
+[.table1, cols="16,^.^4,^.^4,^.^4", stripes="none"]
+|===
+| Example | `m = 6` | `m = -12` | `m = 0`
+
+| @n @show{(code '(EXAMPLE (negate m) (abs m)))} ||@ifsoln{✓}|
+
+| @n @show{(code '(EXAMPLE (negate m) (negate(abs m))))} |@ifsoln{✓}||
+
+| @n @show{(code '(EXAMPLE (negate m) (abs(negate m))))} ||@ifsoln{✓}|
+
+| @n @show{(code '(EXAMPLE (abs(negate m)) (negate(negate m))))}  |@ifsoln{✓}||
+
+| @n @show{(code '(EXAMPLE (abs(negate m)) (negate(abs m))))} |||
+
+|===
+}
+
+@vspace{1ex}
+
+
+== Test
+
+@n Open the @starter-file{negation-2} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{1}} failed because the left side was @fitb{2ex}{@ifsoln{-6}} and the right side was @fitb{2ex}{@ifsoln{6}}.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{3}} failed because the left side was @fitb{2ex}{@ifsoln{-6}} and the right side was @fitb{2ex}{@ifsoln{6}}.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{5}} failed because the left side was @fitb{2ex}{@ifsoln{6}} and the right side was @fitb{2ex}{@ifsoln{-6}}.
+
+
+@n Talia says that setting `m` equal to _any_ positive value will produce the same results. In other words, she thinks that the *same tests* will fail if `m > 0`? Do you agree? Explain. @fitb{}{@ifsoln{Yes. All positive values will produce the same result.}}
+
+@n Edit the definition of `m` (Section 1 in the starter file) to try out some other *positive* values. Was your prediction correct? Explain. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Change the definition of `m` so that it equals -12. Click "Run". Which tests failed? @fitb{}{@ifsoln{Tests 2, 4, and 5 failed.}}
+
+@n Edit the definition of `m` to test out other *negative* values. What do you observe? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Change the definition of `m` so that it equals 0. Click "Run". Which tests failed? @fitb{}{@ifsoln{None of them!}}
+
+== Reflect
+
+@n Which equations in the @proglang file are always *true*? @fitb{}{@ifsoln{None of them!}}
+
+@n Which equations in the @proglang file are always *false*? @fitb{}{@ifsoln{The last one!}}
+
+
+

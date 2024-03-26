@@ -1,11 +1,17 @@
 = Contracts for Image-Producing Functions
 ++++
 <style>
-table.contracts-table td { height: 21pt; }
+table.contracts-table td { height: 20pt; }
+.pyret .contracts-table tr:nth-child(odd) td:first-child::before {line-height: 1.3}
 </style>
 ++++
 
-Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Number, Number, String, String) -> Image` tells us that the name of the function is  `ellipse`, it takes four inputs (two Numbers and two Strings), and it evaluates to an `Image`. From the Contract, we know  `ellipse(50, 100, "solid", "teal")` will evaluate to an `Image`.
+[.linkInstructions]
+Log into @starter-file{editor} and click "Run". @ifnotsoln{Experiment with each of the functions listed below in the interactions area. Try to find an expression that produces an image. Record the contract and example code for each function you are able to use!
+}
+@ifsoln{
+@teacher{Students will see the contract and example for `triangle` and a list of function names. They are asked to experiment to get expressions building and record contracts and example code for each function.}
+}
 
 [.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
@@ -32,19 +38,26 @@ Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Nu
 | @ifsoln{`Image`}
 5+| @ifsoln{`_circle(30, "outline", "fuchsia")_`}
 
-| `square`
-| `{two-colons}`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_square(10, "outline", "red")_`}
-
 | `rectangle`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_rectangle(20, 80, "solid", "gold")_`}
+
+| `text`
+| `{two-colons}`
+| @ifsoln{`String, Number, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_text("I'm thankful for...", 50, "green")_`}
+
+| `square`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_square(10, "outline", "red")_`}
 
 | `rhombus`
 | `{two-colons}`
@@ -59,13 +72,6 @@ Contracts tell us how to use a function. For example:  `ellipse {two-colons} (Nu
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_ellipse(30, 70, "outline", "lightblue")_`}
-
-| `text`
-| `{two-colons}`
-| @ifsoln{`String, Number, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_text("I'm thankful for...", 50, "green")_`}
 
 | `regular-polygon`
 | `{two-colons}`

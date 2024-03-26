@@ -2,6 +2,8 @@
 
 The *Editor* is a software program we use to write Code. Our Editor allows us to experiment with Code on the right-hand side, in the *Interactions Area*. For Code that we want to _keep_, we can put it on the left-hand side in the *Definitions Area*. Clicking the "Run" button causes the computer to re-read everything in the Definitions Area and erase anything that was typed into the Interactions Area.
 
+@vspace{1ex}
+
 == Data Types
 Programming languages involve different @vocab{data types}, such as Numbers, Strings, Booleans, and even Images.
 
@@ -18,6 +20,8 @@ Programming languages involve different @vocab{data types}, such as Numbers, Str
 	- Booleans are either `true` or `false`.
 
 All values evaluate to themselves. The program `42` will evaluate to `42`, the String `"Hello"` will evaluate to `"Hello"`, and the Boolean `false` will evaluate to `false`.
+
+@vspace{1ex}
 
 == Operators
 
@@ -38,6 +42,8 @@ Operators (like `+`, `-`, `*`, `<`, etc.) work the same way in Pyret that they d
 
 }
 
+@vspace{1ex}
+
 == Applying Functions
 
 Applying functions @ifproglang{wescheme}{(and operators!)} works much the way it does in math. Every function has a name, takes some inputs, and produces some output. The function name is written first, followed by a list of @vocab{arguments} @ifproglang{pyret}{in parentheses}.
@@ -45,15 +51,17 @@ Applying functions @ifproglang{wescheme}{(and operators!)} works much the way it
 	- In math this could look like @math{f(5)} or @math{g(10, 4)}.
 	- In @proglang, these examples would be written as @show{(code '(f 5))} and @show{(code '(g 10 4))}.
 @ifproglang{wescheme}{
-	- Appling the operator @math{+} to the inputs 1 and 2 would look like @show{(code '(+ 1 2))}.
+	- Applying the operator @math{+} to the inputs 1 and 2 would look like @show{(code '(+ 1 2))}.
 }
 	- Applying a function to make images would look like @show{(code '(star 50 "solid" "red"))}.
-	- There are many other functions, for example @show{(code 'num-sqr)}, @show{(code 'num-sqrt)}, @show{(code 'triangle)}, @show{(code 'square)}, @show{(code 'string-repeat)}, etc.
+// Need to use wescheme function names to get proper rendering in wescheme and pyret workbooks
+// Need to update lib/langtable when ready to switch to pyret aliases.
+- There are many other functions, for example @show{(code 'sqr)}, @show{(code 'sqrt)}, @show{(code 'triangle)}, @show{(code 'square)}, @show{(code 'string-repeat)}, etc.
 
 @vspace{1ex}
 
 Functions have @vocab{contracts}, which help explain how a function should be used. Every Contract has three parts:
 
 	- The _Name_ of the function - literally, what it's called.
-	- The _Domain_ of the function - what _types of values_ the function consumes, and in what order.
+	- The _Domain_ of the function - what _type(s) of value(s)_ the function consumes, and in what order.
 	- The _Range_ of the function - what _type of value_ the function produces.

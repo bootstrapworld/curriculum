@@ -1,0 +1,14 @@
+@design-recipe-exercise{ "permute-wo-replace" "Use the Design Recipe to write a function @funname, which consumes the number of items and the number of choices and produces the number of possible permutations (without replacement)"
+  #:domain-list (list "Number" "Number")
+  #:range "Number"
+  #:purpose "Consumes the number of items and choices, and produces the number of possible permutations (with replacement)"
+  #:num-examples 2
+  #:example-list '((6 1 (/ (factorial 6) (factorial (- 6 1))))
+                   (6 2 (/ (factorial 6) (factorial (- 6 2)))))
+  #:show-examples '(#t #f)
+  #:param-list '(items choices)
+  #:show-params? #t
+  #:body '(/ (factorial items) (factorial (- items choices)))
+  #:show-body? #f
+  #:grid-lines? #t
+  }

@@ -74,6 +74,15 @@ function string_split(s, c)
   return r
 end
 
+function string_to_table(s)
+  -- return a table whose elements are the characters in the string
+  local t = {}
+  for i=1,#s do
+    t[i] = string.sub(s, i, i)
+  end
+  return t
+end
+
 function read_file_lines(f)
   -- return a table whose elements are the lines in the file
   local i = io.open(f)
@@ -83,4 +92,11 @@ function read_file_lines(f)
   end
   i:close()
   return result
+end
+
+function make_error_function(errmsg_file_context)
+  local function terror(s)
+    error('ERROR in ' .. errmsg_file_context() .. ':\n' .. s)
+  end
+  return terror
 end

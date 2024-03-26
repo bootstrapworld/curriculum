@@ -6,6 +6,6 @@ if grep -q input $PUPPETEER_INPUT; then
   if test -n "$DEBUGNOBOOK"; then
     echo node lib/html2pdf.js $PUPPETEER_INPUT
   else
-    node lib/html2pdf.js $PUPPETEER_INPUT
+    node lib/html2pdf.js $PUPPETEER_INPUT --tabsPerCore $TPC
   fi
 fi

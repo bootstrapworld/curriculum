@@ -13,16 +13,15 @@
 | Lesson Goals
 | Students will be able to...
 
-* Read and interpret real-world data, presented in a scatter plot
-* Recognize exponential growth in tables and graphs
-* Model exponential relationships using functions
-
+- Read and interpret real-world data, presented in a scatter plot
+- Recognize exponential growth in tables and graphs
+- Model exponential relationships using functions
 
 | Student-facing Lesson Goals
 |
 
-* Let's use Pyret to model exponential relationships in data
-* Let's use Pyret to filter a dataset into subsets
+- Let's use Pyret to model exponential relationships in data
+- Let's use Pyret to filter a dataset into subsets
 
 | Materials
 |[.materials-links]
@@ -32,6 +31,17 @@
 |[.materials-links]
 @opt-material-links
 
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+You will want to:
+ * Open @starter-file{alg2-covid-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+- __If you're a first-time Desmos user, fear not!__ @dist-link{pages/desmos-instructions-alg2.adoc, __Here's what you need to do.__}
+}
 |===
 
 == When and Why do we Filter Data? @duration{45 minutes}
@@ -53,26 +63,28 @@ A college is looking at enrollment and housing data for a sample of students who
 @QandA{
 @Q{According to the table, how many Undecided Majors live _off_-campus?}
 @A{80}
-@Q{How many Decided Majors live _on_-campus?}
+@Q{How many Decided Majors live __on__-campus?}
 @A{80}
-@Q{Who is more likely to live on campus: Decided or Undecided Majors?}
-@teacher{Let students discuss the last question!}
+@Q{Discuss: Who is more likely to live on campus: Decided or Undecided Majors?}
+@A{(Give students time to talk about this, and explain their thinking!	)}
 }
 
 @teacher{
-@optional If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.
+@opt{If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.}
 }
 
-It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
+@slidebreak
 
-But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, _and_ they generally have not picked a major. **We need to take the _year_ into account.**
+It __looks__ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
+
+But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, __and__ they generally have not picked a major. **We need to take the __year__ into account.**
 
 [cols="^1a,^1a", strips="none", grid="none", frame="none"]
 |===
 |
 [cols="^1a,^1a,^1a,^2a", options="header"]
 !===
-! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
+! **Freshmen**     ! # On Campus     ! # Off Campus  ! % On Campus
 ! Undecided      ! 100             ! 20            ! 100/120 = 83%
 ! Decided        !  50             ! 10            !  50/60  = 83%
 !===
@@ -80,28 +92,30 @@ But there's a third variable hiding in the background: freshmen college students
 |
 [cols="^1a,^1a,^1a,^2a", options="header"]
 !===
-! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
+! **Non-Freshmen** ! # On Campus     ! # Off Campus  ! % On Campus
 ! Undecided      !  20             ! 60            !  20/80 = 25%
 ! Decided        !  30             ! 90            !  30/120 = 25%
 !===
 |===
 
-Because **year at school** is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+@slidebreak
+
+Because **year at school** is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is __no correlation__ between between deciding on a major and living on- or off-campus.
 
 How is this possible? When a third variable is lurking in the data, it can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
 
+@slidebreak
+
 @lesson-point{
-Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+Simpson's Paradox: visible trends in sub-groups __disappear__ or even __reverse__ when the groups are combined.
 }
 
-@right{@image{images/Simpsons_animation.gif, 300}}
-Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
+@right{@image{images/Simpsons_animation.gif, 300}}Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox. (Learn more about Simpson's Paradox at @link{https://en.wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
 
 @clear
+@slidebreak
 
-"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on.
-
- In this lesson, we'll explore some real data that's better analyzed __in pieces...__
+"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on. In this lesson, we'll explore some real data that's better analyzed __in pieces...__
 
 === Investigate
 
@@ -109,17 +123,21 @@ Starting in 2019, Covid spread across the globe. Most of us heard terms like "fl
 
 Even in 2020, very few people could have predicted the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
 
+@slidebreak
+
 @lesson-instruction{
 - Open the @starter-file{alg2-covid}. This data looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
 - From the File menu, select "Save a Copy", and click "Run."
 - Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
 }
 
-@teacher{_Note: This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England._
+@teacher{__Note: This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England.__
 }
 
-@center{@image{images/multiple-models.png}}
+@slidebreak
 
+@ifslide{@right{@image{images/multiple-models.png}}}
+@ifnotslide{@center{@image{images/multiple-models.png}}}
 @lesson-instruction{
 Discuss in groups or pairs, and prepare to share out to the class:
 
@@ -127,20 +145,26 @@ Discuss in groups or pairs, and prepare to share out to the class:
 - If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
 }
 
-The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
+@slidebreak
+
+The scatterplot you made doesn't look much like a scatterplot all! It looks like someone took a marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is __more than one model__ here.
 
 @teacher{Review student answers to confirm that students have made a number of observations:
 
-* There is _more than one_ relationship in this dataset
-* Every relationship seems extremely strong
-* Most/all relationships appear nonlinear}
+- There is __more than one__ relationship in this dataset
+- Every relationship seems extremely strong
+- Most/all relationships appear nonlinear}
+
+@slidebreak
 
 With all these clear, tight curves, we might think this would be a dataset with a very strong relationship. Unfortunately, that's not what we see when we group all the data together!
 
-Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
+Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's __no relationship__ between the x- and y-variables. Instead, we have several sub-groups each with their own __very strong relationships.__
+
+@slidebreak
 
 @QandA{
-@Q{We need to break the Covid data up into _grouped samples_, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.}
+@Q{We need to break the Covid data up into __grouped samples__, so that all of the data for Rhode Island is in one table, all of the data for Maine is in another, etc.}
 @Q{How is a grouped sample different from a random sample?}
 @A{A grouped sample is a non-random subset chosen from a larger set. Grouped samples are non-random by design!}
 }
@@ -149,21 +173,26 @@ Datasets like these are very difficult to model all at once, because there will 
 Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
 }
 
+@slidebreak
+
 The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
 
-@teacher{@optional While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
+@teacher{
+@opt{While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
+}
 
 
 === Common Misconceptions
-It's extremely common for students to think that filtering a table _changes the original table_. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
+It's extremely common for students to think that filtering a table __changes the original table__. This is NOT how it works in Pyret! Instead, the `filter` function always produces a __new__ table, containing only the Rows for which the supplied function evaluates to `true`.
 
 === Synthesize
-- In what other situations would it be useful to filter a dataset?
-- Can you think of other examples where Simpson's Paradox might arise?
 
-** _When comparing one country's schools to another's, a researcher finds that students living in poverty in country A outperform students living in poverty in country B. They also find that the wealthy students in A outperform their wealthy peers in B. In fact, for every income level, country A outperforms country B! But if country B has less child poverty overall, it will still outperform A._
-** _Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}._
-
+@QandA{
+@Q{In what other situations would it be useful to filter a dataset?}
+@Q{Can you think of other examples where Simpson's Paradox might arise?}
+@A{When comparing one country's schools to another's, a researcher finds that students living in poverty in country A outperform students living in poverty in country B. They also find that the wealthy students in A outperform their wealthy peers in B. In fact, for every income level, country A outperforms country B! But if country B has less child poverty overall, it will still outperform A.}
+@A{Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}.}
+}
 
 == Looking for Patterns	@duration{45 minutes}
 
@@ -179,12 +208,12 @@ Students explore their newly-filtered `MA-table` dataset, trying to fit differen
 - What kind of model do you think would fit this best?
 }
 
-@strategy{
-@span{.title}{Why just New England, starting from June 9th?!?}
+@strategy{Why just New England, starting from June 9th?!?}{
 
-We have _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
 
-For students who are farther along, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
+We have __artificially constrained this dataset__, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
+
+For students who are farther along, we recommend showing them __all__ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is __polynomial__ behavior, where a linear term dominates when the exponential term is small.
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to full dataset later on, once students are comfortable with polynomial functions.
 
@@ -194,11 +223,15 @@ To use all available data, open the @starter-file{alg2-covid} and change the sou
 
 === Investigate
 
+@teacher{Make sure you have created a link or code for your class to @starter-file{alg2-covid-desmos} and synced the class to the first slide.}
+
 @lesson-instruction{
 Complete @printable-exercise{linear-models.adoc}, using the first slide of @starter-file{alg2-covid-desmos}.
 }
 
-Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
+@slidebreak
+
+Linear models capture __straight-line relationships__, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
 
 @lesson-instruction{
 Are linear models a good fit for this data? Why or why not?
@@ -206,7 +239,13 @@ Are linear models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty good @math{R^2}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+@slidebreak{InvestigateR}
+
+@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty small @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the __best-possible fit__ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide so that students are looking at the correct screen.}
+
+@slidebreak
 
 @lesson-instruction{
 - Complete @printable-exercise{quadratic-models.adoc}, using the second slide of @starter-file{alg2-covid-desmos}.
@@ -215,9 +254,11 @@ Are linear models a good fit for this data? Why or why not?
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
+@slidebreak
 
-@right{@image{images/MA-covid-quadratic.png, 300}} Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty good @math{R^2} value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
+Quadratic models capture __parabolic relationships__, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
+
+@right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty low @math{S}-value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it __could__ be.
 
 === Synthesize
 
@@ -240,38 +281,39 @@ Having identified that the Covid scatter plot is neither linear nor quadratic, s
 
 Let's review what we know about the behavior of the models we've seen so far:
 
-[.growth, cols="15a,^.^5a", grid="none", frame="none", stripes="none"]
-|===
-
-| Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
+@right{@image{images/difference-table-linear.png}}Remember that linear functions grow by __fixed intervals,__ so the rate of change is __constant__. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
 **If the "growth" is constant, the relationship is linear.**
 
-| @image{images/difference-table-linear.png}
+@clear
+@slidebreak
 
-| Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning _the function is definitely not linear!_ However, if we take a look at the _difference between those differences_(shown in red), we're back to constant growth! + 
+@right{@image{images/difference-table-quadratic.png}}Quadratic functions grow by intervals that __increase by fixed amounts!__ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning __the function is definitely not linear!__ However, if we take a look at the __difference between those differences__(shown in red), we're back to constant growth! +
 **If the "growth of the growth" is constant, the relationship is quadratic.**
 
-| @image{images/difference-table-quadratic.png}
-
-|===
+@clear
 
 There is, however, a class of functions that grows even faster than quadratics: @vocab{exponential functions}.
 
-[.growth, cols="15a,^.^5a", grid="none", frame="none", stripes="none"]
-|===
+@slidebreak
 
-| If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. Even if we calculate the "growth of the __growth of the growth__" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! Something is making this function grow so fast that our attempt to calculate the rate of change fails to simplify anything.
+@right{@image{images/difference-table-exponential-1.png}}If we try to calculate the growth between the y-values, we can immediately tell it's not linear. But then if we try to calculate the "growth of the growth", we see that it's not quadratic either. +
+{empty} +
+Even if we calculate the "growth of the __growth of the growth__" (shown in green)... we still haven't found a constant. In fact, each of these "growths" just repeats the original pattern of y-values! +
+{empty} +
+Something is making this function grow *so fast* that our attempt to calculate the rate of change fails to simplify anything.
 
-| @image{images/difference-table-exponential-1.png}
+@clear
+@slidebreak
 
-| Exponential functions grow so rapidly that looking for "what is _added_ to y?" isn't helpful at all. The only way to talk about their growth is to start noticing "what is y being _multiplied_ by?"
+@right{@image{images/difference-table-exponential-2.png}} +
+Exponential functions grow so rapidly that looking for "what is __added__ to y?" isn't helpful at all. +
+{empty} +
+The only way to talk about their growth is to start noticing "what is y being __multiplied__ by?" +
+{empty} +
+**In this case, we can see that the y-values are doubling each time!**
 
-*In this case, we can see that the y-values are doubling each time!*
-
-|
-@image{images/difference-table-exponential-2.png}
-|===
-
+@clear
+@slidebreak
 
 @lesson-instruction{
 - Complete @printable-exercise{classifying-tables.adoc}
@@ -283,6 +325,8 @@ There is, however, a class of functions that grows even faster than quadratics: 
 We generally write exponential functions like this: @math{f(x) = ab^x + k}. +
 Let's explore what each coefficient means!
 
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the third slide so that students are looking at the correct screen.}
+
 @lesson-instruction{
 Use the third slide of @starter-file{alg2-covid-desmos} to complete the first section ("base") of @printable-exercise{graphing-models.adoc}.
 }
@@ -290,7 +334,9 @@ Use the third slide of @starter-file{alg2-covid-desmos} to complete the first se
 @teacher{
 Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
 
-*The base of an exponential function (@math{b})* must *always be positive*, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
+@slidebreak
+
+**The base of an exponential function (@math{b})** must **always be positive**, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
 
 [cols="^3a,^3a,^3a", stripes="none", options="header"]
 |===
@@ -303,14 +349,16 @@ Review students answers, and then debrief via class discussion. Invite students 
 | @image{images/decay.png, 150}
 
 | @math{b > 1} +
-When the base is *larger* than 1, the function starts out flat and then grows by the "percentage greater than 1". A base of 1.25 - or @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{growth factor}, since it determines how quickly the function grows.
+When the base is **larger** than 1, the function starts flat and then grows by the "percentage greater than 1". A base of 1.25 - @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{growth factor}, since it determines how quickly the function grows.
 
 | @math{b = 1} +
-When the base is equal to 1, the function stays flat without any growth of all (raising 1 to _any_ power will always produce 1!).
+When the base is **equal** to 1, the function stays flat without any growth of all (raising 1 to __any__ power will always produce 1!).
 
 | @math{0 < b < 1} +
-When the base is *smaller* than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{decay factor}, since it determines how quickly the function shrinks.
+When the base is **smaller** than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{decay factor}, since it determines how quickly the function shrinks.
 |===
+
+@slidebreak
 
 @lesson-instruction{
 Use the third slide of @starter-file{alg2-covid-desmos} to complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc}.
@@ -318,28 +366,36 @@ Use the third slide of @starter-file{alg2-covid-desmos} to complete the second s
 
 An exponential function with a @vocab{growth factor} will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a @vocab{decay factor} will drop quickly, then level out close to a horizontal line. This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. 
 
-*Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
+@slidebreak
+
+**Adjusting @math{k} shifts the asymptote up and down**, along with the rest of the exponential curve that approaches it.
 
 @lesson-instruction{
 Use the third slide of @starter-file{alg2-covid-desmos} to complete the last section ("initial value") of @printable-exercise{graphing-models.adoc}.
 }
 
-*The y-intercept appears _differently_ in exponential function definitions than in linear and quadratic definitions:*
+@slidebreak
 
-* In both linear and quadratic functions, we could cross out the linear or quadratic term when @math{x = 0} (because anything multiplied by zero is zero) and the constant term being added or subtracted in the equation was our y-intercept. 
-* But, because any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, part of the exponential term _remains_, for example: @hspace{2em} @math{4(2^0) = 4(1) = 4}. 
-* As a result, *the y-intercept of an exponential function is @math{a + k}*.
-* When there is no @math{k}-term being added or subtracted, the coefficient @math{a} is the initial value where @math{x = 0}. 
-* And, if @math{a} is "missing", the value of the coefficient is @math{1}. @hspace{2em}_After all,_ @math{2^x = 1(2^x)} +
+**The y-intercept appears __differently__ in exponential function definitions than in linear and quadratic definitions:**
+
+- In both linear and quadratic functions, we could cross out the linear or quadratic term when @math{x = 0} (because anything multiplied by zero is zero) and the constant term being added or subtracted in the equation was our y-intercept. 
+- But, because any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, part of the exponential term __remains__, for example: @hspace{2em} @math{4(2^0) = 4(1) = 4}. 
+- As a result, **the y-intercept of an exponential function is @math{a + k}**.
+- When there is no @math{k}-term being added or subtracted, the coefficient @math{a} is the initial value where @math{x = 0}. 
+- And, if @math{a} is "missing", the value of the coefficient is @math{1}. @hspace{2em}__After all,__ @math{2^x = 1(2^x)} +
 That means that if we don't see @math{a} or @math{k} in an exponential equation, the y-intercept of the function is 1.
+
+@slidebreak
 
 @vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, which will become 8, then 16, and so on.
-- Unstable particles degrade into stable particles over time, emitting radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
+- Unstable particles degrade into stable particles over time, emitting radiation as a byproduct. We use the term __half-life__ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
 - Money in a savings account grows by a certain percentage each year. 3% growth on $100 would turn into $103. The next year that would become $106.09. And the next year $109.27. Every year there's a little more money to grow. If you start saving early, the account will grow into quite a lot more money down the road.
 
 @teacher{In the following two activities, students will decide whether various scenarios and definitions represent quadratic, linear, or exponential functions. They will also have opportunities to think about and apply their knowledge of growth, decay, initial value, and growth factor.}
+
+@slidebreak
 
 @lesson-instruction{
 - Complete @printable-exercise{classifying-descriptions.adoc}.
@@ -349,10 +405,12 @@ That means that if we don't see @math{a} or @math{k} in an exponential equation,
 
 @teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before? }
 
+@slidebreak
+
 @lesson-instruction{
 - Complete @printable-exercise{classifying-defs.adoc}.
 - What strategies did you use to decide if a function was linear, quadratic, or exponential?
-- What new insights did you gain about exponential functions by thinking about their definitions?
+- What new insights did you gain about exponential functions by looking at the terms in their definitions?
 }
 
 @teacher{As students discuss their answers, pay special attention to their use of vocabulary when describing the initial value and the growth factor.}
@@ -360,9 +418,8 @@ That means that if we don't see @math{a} or @math{k} in an exponential equation,
 === Synthesize
 
 - You looked at several different representations of exponential functions: tables, graphs, descriptions, and equations.
-- Which representation was the most useful for you? Why?
-- Which representation was the least useful for you? Why?
-
+- Which representation was the _most_ useful for you? Why?
+- Which representation was the _least_ useful for you? Why?
 
 == Fitting Exponential Models 	@duration{30 minutes}
 
@@ -374,34 +431,35 @@ Students extend their sampling techniques to exponential relationships. Students
 
 Now that you're familiar with exponential functions, let's use them to model this Covid data!
 
+@slidebreak
+
 @teacher{Direct students to create a scatter plot showing the change in positive Covid cases for `MA-Table`. Then, support them in making educated guesses about the values of @math{a}, @math{b}, and @math{k}. Have students respond to the discussion questions below in pairs or small groups.}
 
-@lesson-instruction{
-- Does your scatter plot show exponential growth or exponential decay?
-** _The scatter plot shows growth. The "hockey stick" is pointing up, meaning that positive cases are increasing._
-- Can we make any conclusions about the value of @math{b}? Explain.
-** _Because we see exponential growth, we know that @math{b} must be greater than one._
-- Can we make any conclusions about the value of @math{k}?
-- Can we make any conclusions about the value of @math{a}? Explain.
-** _@math{a} must be positive, because the curve is consistently above @math{k}._
+@QandA{
+@Q{Does your scatter plot show exponential growth or exponential decay?}
+@A{The scatter plot shows growth. The "hockey stick" is pointing up, meaning that positive cases are increasing.}
+@Q{Can we make any conclusions about the value of @math{b}? Explain.}
+@A{Because we see exponential growth, we know that @math{b} must be greater than one.}
+@Q{Can we make any conclusions about the value of @math{k}?}
+@Q{Can we make any conclusions about the value of @math{a}? Explain.}
+@A{@math{a} must be positive, because the curve is consistently above @math{k}.}
 }
-
 
 === Investigate
 
-@teacher{In the next activity, students use Desmos to find promising exponential models, and then fit the model programmatically in Pyret!}
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the fourth slide so that students are looking at the correct screen. In the next activity, students use Desmos to find promising exponential models, and then fit the model programmatically in Pyret!}
 
 @lesson-instruction{
-- Open to the fourth slide of @starter-file{alg2-covid-desmos}, and complete @printable-exercise{exponential-models.adoc}.
+- Open to the fourth slide of @starter-file{alg2-covid-desmos}, and complete the first section of @printable-exercise{exponential-models.adoc}.
+- Use @starter-file{alg2-covid} to complete the rest of the page.
 - Is an exponential model a good fit for this data? Why or why not?
 }
 
-@star @optional Build models for _other states_. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?
+@opt{@star Build models for __other states__. How do the coefficients differ from state to state? What differences between states could explain the different values of the coefficients?}
 
-@strategy{
-@span{.title}{Precision v. Efficiency in Computation}
+@strategy{Precision v. Efficiency in Computation}{
 
-On @printable-exercise{exponential-models.adoc} you'll see a note about the use of `*~*1` to tell Pyret to prioritize speed over precision. Unlike most calculators that students will engage with, Pyret usually prioritizes precision.
+On @printable-exercise{exponential-models.adoc} you'll see a note about the use of `~1` to tell Pyret to prioritize speed over precision. Unlike most calculators that students will engage with, Pyret usually prioritizes precision.
 
 In a math classroom, this is the difference between @math{\frac{2}{3}} rendering as @math{ 0.\overline{666}} or being rounded to 0.666666667.
 
@@ -409,8 +467,7 @@ In data processing, opting to round for speed over preserving precision can have
 
 1) When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 
-2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire subpopulation.
-
+2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
 }
 
 === Synthesize
