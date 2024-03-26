@@ -1998,6 +1998,12 @@
                   [(and beginning-of-line? (char=? c #\=))
                    ; (set! beginning-of-line? #f)
                    ; (set! possible-beginning-of-line? #f)
+                   (when *enclosing-directive*
+                              (printf "WARNING: ~a: AsciiDoc header inside ~a\n\n"
+                                      (errmessage-file-context)
+                                      (if (string? *enclosing-directive*)
+                                          (string-append "@" *enclosing-directive*)
+                                          "another directive")))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
