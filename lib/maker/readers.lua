@@ -183,7 +183,7 @@ function make_read_group(code, errmsg_file_context)
         end
         table_insert_string(r, gp)
         in_space_p = false
-      elseif c == '"' then
+      elseif scheme_p and c == '"' then
         -- print('starting string')
         table.insert(r, c)
         in_space_p = false
