@@ -1812,12 +1812,6 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
-                            (when *enclosing-directive*
-                              (printf "WARNING: ~a: @slidebreak inside ~a\n\n"
-                                      (errmessage-file-context)
-                                      (if (string? *enclosing-directive*)
-                                          (string-append "@" *enclosing-directive*)
-                                          "another directive")))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
@@ -1998,12 +1992,6 @@
                   [(and beginning-of-line? (char=? c #\=))
                    ; (set! beginning-of-line? #f)
                    ; (set! possible-beginning-of-line? #f)
-                   (when *enclosing-directive*
-                              (printf "WARNING: ~a: AsciiDoc header inside ~a\n\n"
-                                      (errmessage-file-context)
-                                      (if (string? *enclosing-directive*)
-                                          (string-append "@" *enclosing-directive*)
-                                          "another directive")))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
