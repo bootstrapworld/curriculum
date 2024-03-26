@@ -206,9 +206,9 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
           scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
-        elseif directive == 'teacher' then
+        elseif directive == 'teacher' or directive == 'QandA' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. '@teacher{'
+          curr_slide.text = curr_slide.text .. '@' .. directive .. '{'
           scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'ifpathway' then
@@ -238,6 +238,9 @@ local function get_slides(lsn_plan_adoc_file)
             curr_slide.style = read_group(i, directive)
           end
         elseif directive == 'A' then
+          if not nested_in or nested_in ~= 'QandA' then
+            terror('@A outside @QandA')
+          end
           local arg = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg), directive, 'dont count images')
