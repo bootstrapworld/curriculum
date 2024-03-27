@@ -13,7 +13,6 @@ do
       goto continue
     end
     local prims = {}
-    local starter_files = {}
     --
     local ls_output = io.popen('ls ' .. lesson_cache .. '.*.primtxt 2>/dev/null')
     local seen = {}
@@ -29,22 +28,7 @@ do
     end
     ls_output:close()
     --
-    ls_output = io.popen('ls ' .. lesson_cache .. '.*.starterfiles 2>/dev/null')
-    seen = {}
-    for sf_file in ls_output:lines() do
-      local i = io.open(sf_file)
-      for sf in i:lines() do
-        if not seen[sf] then
-          seen[sf] = true
-          table.insert(starter_files, sf)
-        end
-      end
-      i:close()
-    end
-    ls_output:close()
-    --
     table.sort(prims)
-    table.sort(starter_files)
     --
     local o = io.open(lesson_cache .. '.index-primitives.txt.kp', 'w+')
     for _,prim in ipairs(prims) do
@@ -52,11 +36,6 @@ do
     end
     o:close()
     --
-    o = io.open(lesson_cache .. '.index-starterfiles.txt.kp', 'w+')
-    for _,sf in ipairs(starter_files) do
-      o:write(sf, '\n')
-    end
-    o:close()
     ::continue::
   end
 end

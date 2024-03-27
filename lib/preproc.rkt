@@ -2296,7 +2296,7 @@
                                                         *natlang* *lesson*)))])
           (call-with-output-file sf-file
             (lambda (o)
-              (for ([sf *starter-files-used*])
+              (for ([sf (reverse *starter-files-used*)])
                 (display sf o) (newline o)))
             #:exists 'replace)))
 
