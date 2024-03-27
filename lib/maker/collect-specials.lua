@@ -36,6 +36,28 @@ do
     end
     o:close()
     --
+    seen = {}
+    local lesson_plan_sf_i = io.open(lesson_cache .. '.index.starterfiles')
+    if lesson_plan_sf_i then
+      for sf in lesson_plan_sf_i:lines() do
+        if not seen[sf] then
+          seen[sf] = true
+        end
+      end
+      lesson_plan_sf_i:close()
+    end
+    --
+    local lesson_wkbk_pages_sf_i = io.open(lesson_cache .. '.page.starterfiles')
+    if lesson_wkbk_pages_sf_i then
+      for sf in lesson_wkbk_pages_sf_i:lines() do
+        if not seen[sf] then
+          print('WARNING: @starter-file{' .. sf .. '} used in ' .. lesson .. '\'s workbook page but not in lesson plan')
+          seen[sf] = true -- warn only once per starter file
+        end
+      end
+      lesson_wkbk_pages_sf_i:close()
+    end
+    --
     ::continue::
   end
 end
