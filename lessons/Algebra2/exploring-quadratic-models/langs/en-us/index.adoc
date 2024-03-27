@@ -17,13 +17,13 @@
 | Lesson Goals
 | Students will be able to...
 
-* Read and interpret real-world data, presented in a scatter plot
-* Model quadratic relationships using functions
+- Read and interpret real-world data, presented in a scatter plot
+- Model quadratic relationships using functions
 
 | Student-facing Lesson Goals
 |
 
-* Let's use Pyret to model quadratic relationships in data
+- Let's use Pyret to model quadratic relationships in data
 
 
 | Materials
@@ -34,10 +34,21 @@
 |[.materials-links]
 @opt-material-links
 
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+You will want to:
+ * Open @starter-file{alg2-exploring-quadratics-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+- __If you're a first-time Desmos user, fear not!__ @dist-link{pages/desmos-instructions.adoc, __Here's what you need to do.__}
+}
+
 | Key Points For The Facilitator
 |
-* Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of _three_ factors.
-* Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
+- Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of __three__ factors.
+- Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
 |===
 
 == Looking for Patterns @duration{45 minutes}
@@ -47,7 +58,7 @@ Students explore the @starter-file{alg2-fuel-efficiency}, and create scatter plo
 
 === Launch
 
-@teacher{These questions are intended to spark student interest in _fuel efficiency_, which students will explore in this lesson.}
+@teacher{These questions are intended to spark student interest in __fuel efficiency__, which students will explore in this lesson.}
 
 @QandA{
 Since 1992, there have been laws about what information must be printed onto the labels of cars for sale. What do you think consumers should know about cars they are considering buying?
@@ -104,9 +115,9 @@ All of them are far away from so many points, and will make poor predictions for
 
 @slidebreak
 
-Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency generally _decreases!_
+Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency generally __decreases!__
 
-@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!
+@teacher{Review student answers to confirm that students see a __nonlinear__ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  **Make sure students have agreed on this vertex**, as its location is important for the next activity!
 
 Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it).
 }
@@ -123,9 +134,9 @@ Have students share their curves, encouraging them to identify where they "peak"
 Students are introduced to quadratic functions. They become familiar with scenarios involving quadratics and terminology to describe parabolas. They also learn how to identify quadratic sequences, and then explore each of the coefficients in Vertex Form.
 
 === Launch
-Linear models are great for fitting simple relationships. But the real world isn't so simple, and _linear models are often just too primitive_ to handle that complexity.
+Linear models are great for fitting simple relationships. But the real world isn't so simple, and __linear models are often just too primitive__ to handle that complexity.
 
-Relationships like the one in the fuel efficiency scatter plot are best described by a _curve_. Today, we will learn about one kind of curved model called a quadratic model.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
+Relationships like the one in the fuel efficiency scatter plot are best described by a __curve__. Today, we will learn about one kind of curved model called a quadratic model.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
 
 @slidebreak
 
@@ -144,28 +155,30 @@ In some relationships, the curve goes the other way - decreasing, bottoming out,
 @A{A ball thrown in the air will rise quickly, slow down, peak, and then begin to fall.}
 @A{The temperature of a puddle will warm and then cool over the course of the day.}
 @A{The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets.}
+}
 
 @slidebreak
 
+@lesson-instruction{
 Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear or quadratic relationships.
 }
 
 === Investigate
-Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part.
+Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the __rising__ part of the parabola or only the __falling__ part.
 
 But what if we only have a list of x-y pairs showing only one part of the parabola? +
 **How can we identify quadratic relationships from a sequence of numbers?**
 
 @slidebreak
 
-@right{@image{images/difference-table-linear.png}} Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increased by 1, we saw that the y-value increased by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
+@right{@image{images/difference-table-linear.png}} Remember that linear functions grow by __fixed intervals,__ so the rate of change is __constant__. In the table shown here, each time the x-value increased by 1, we saw that the y-value increased by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
 @vspace{1ex} +
 **If the rate of growth is constant, the relationship is linear.**
 
 @clear
 @slidebreak
 
-@right{@image{images/difference-table-quadratic.png}} Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take look at the _difference between those differences_(shown in red), we're back to constant growth! +
+@right{@image{images/difference-table-quadratic.png}} Quadratic functions grow by intervals that __increase by fixed amounts!__ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning __the function is definitely not linear!__ However, if we take look at the __difference between those differences__(shown in red), we're back to constant growth! +
 @vspace{1ex} +
 **If the "growth of the growth" is constant, the relationship is quadratic.**
 
@@ -209,13 +222,13 @@ Turn to @printable-exercise{classifying-tables.adoc}. One of the first two table
 
 @teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, because the points won't fit the function perfectly!}
 
-When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. *Let's define the parts of a parabola together.*
+When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. **Let's define the parts of a parabola together.**
 
 @slidebreak
 
 @QandA{
 @Q{Linear relationships can be described with terms like "slope" and "y-intercept". But what about quadratic relationships? Do parabolas have slope?}
-@A{No. They curve because they *do not* have a constant rate of change.}
+@A{No. They curve because they **do not** have a constant rate of change.}
 @Q{Do all parabolas have x-intercepts?}
 @A{No. Some do and some don't!}
 @Q{Can you point out or describe other important parts of a parabola?}
@@ -276,18 +289,20 @@ We just examined a series of quadratic and linear functions that looked a lot li
 @lesson-instruction{
 - A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph.
 - Does that mean we shouldn't use a quadratic model for the relationship between speed and fuel efficiency? Why or why not?
-  * _Have students discuss and share back with the class._
-  * _If necessary, remind students that *models are - by definition - approximations of the real world*._
+  * __Have students discuss and share back with the class.__
+  * __If necessary, remind students that **models are - by definition - approximations of the real world**.__
 }
 
 The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. __There's no such thing as a perfect model!__
 
 === Investigate
-Let's *try to build the best possible quadratic model we can for our Fuel Efficiency dataset.*
+Let's **try to build the best possible quadratic model we can for our Fuel Efficiency dataset.**
 
 One form of a quadratic model looks like this: @math{f(x) = a(x − h)^2 + k}
 
 What do each of these coefficients mean for our model?
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.}
 
 @lesson-instruction{
 - Open @starter-file{alg2-exploring-quadratics-desmos}.
@@ -323,7 +338,7 @@ Students may wonder why fuel efficiency is a function of the _square_ of the spe
 @QandA{
 @Q{What was the highest @math{S}-value you were able to get?}
 @Q{What did you figure out about how adjusting @math{a} changed the shape of the parabola?}
-@A{The _sign_ of @math{a} determines whether the parabola opens up (@math{a > 0}), opens down (@math{a < 0}), or exist as a straight line (@math{a = 0}) Negative @math{a} made the parabola open down. The _magnitude_ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.}
+@A{The __sign__ of @math{a} determines whether the parabola opens up (@math{a > 0}), opens down (@math{a < 0}), or exist as a straight line (@math{a = 0}) Negative @math{a} made the parabola open down. The __magnitude__ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.}
 }
 
 == Additional Exercises
