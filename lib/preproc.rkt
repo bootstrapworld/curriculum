@@ -1498,7 +1498,7 @@
                            [(string=? directive "empty")
                             (read-group i directive)]
                            [(string=? directive "n")
-                            (fprintf o "[.autonum]##~a##" *autonumber-index*)
+                            (fprintf o "{empty}[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
@@ -1812,12 +1812,6 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
-                            (when *enclosing-directive*
-                              (printf "WARNING: ~a: @slidebreak inside ~a\n\n"
-                                      (errmessage-file-context)
-                                      (if (string? *enclosing-directive*)
-                                          (string-append "@" *enclosing-directive*)
-                                          "another directive")))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]

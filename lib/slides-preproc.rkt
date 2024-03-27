@@ -137,7 +137,7 @@
                                                    (unless (variable-or-number? frac-arg)
                                                      (set! use-mathjax? #t))))
                                                use-mathjax?)]))])]
-                    [(and (regexp-match "\\\\sqrt" text) (regexp-match "\\^" text)) #t]
+                    [(regexp-match "\\\\sqrt" text) #t]
                     [(regexp-match "\\\\\\\\" text) #t]
                     [(regexp-match "\\\\mbox" text) #t]
                     [(regexp-match "\\\\over" text) #t]

@@ -54,7 +54,7 @@ Students consider a classic randomness scenario: the probability that a coin wil
 "It's a pure game of chance", they tell you, "we each have equal odds of winning".
 
 @QandA{
-Q{If you decide to play the game, how could you then decide if the croupier’s coin is fair, or if the croupier is scamming you?}
+@Q{If you decide to play the game, how could you then decide if the croupier’s coin is fair, or if the croupier is scamming you?}
 @Q{For a fair coin, what are the chances of it landing heads? Tails?}
 @A{A fair coin has a 50% chance of landing heads and a 50% chance of landing tails.}
 @Q{How do you know if a coin is fair or not?}
@@ -70,12 +70,20 @@ In general, we assume that in the long run, an ordinary coin will land on "heads
 _So how do we test the @vocab{null hypothesis}?_
 
 @lesson-instruction{
-Turn to @printable-exercise{fair-coins.adoc} and complete the first question with your partner using @starter-file{fair-coins}.
+- Turn to @printable-exercise{fair-coins.adoc}
+- Complete the first question with your partner using @starter-file{fair-coins}.
+- Be ready to discuss your answers with the class!
 }
 
-@ifproglang{codap}{The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any coding to complete the lesson. They will simply hit "Run" several times.}
+@ifproglang{codap}{
+@teacher{
+The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any coding to complete the lesson. They will simply hit "Run" several times.
+}
+}
 
 @teacher{Have students share back their sample results and their predictions after 5 samples.}
+
+@slidebreak
 
 @lesson-instruction{Complete the rest of @printable-exercise{fair-coins.adoc}.}
 
@@ -101,7 +109,7 @@ The probability of a fair coin getting all heads for 10 flips in a row is @math{
 Statisticians would explain this as follows:
 "If the null hypothesis were true, then the probability of getting sample results at least as extreme as the ones observed is 0.001."
 
-But of course, there *is* a way. It's just..._incredibly unlikely_.
+But of course, there *_is_* a way. It's just..._incredibly unlikely_.
 
 @strategy{Going Deeper: p-value}{
 
@@ -147,6 +155,8 @@ Because we know that the chance of coming up heads each time for a "population" 
 
 "Based on what we know is true in the population, what’s the chance of this or that happening in a sample?" __This is the kind of reasoning involved in probability.__
 
+@slidebreak
+
 *Inference reasons backwards.*
 
 In the coin-flip activity, we took samples of coin flips and used our knowledge about _chance_ and _probability_ to make @vocab{inferences} about whether the coin was fair or weighted.
@@ -154,6 +164,8 @@ In the coin-flip activity, we took samples of coin flips and used our knowledge 
 In other words, we looked at sample results and used them to decide what to believe about the population of all flips of that coin: __was the overall chance of heads really 0.5?__
 
 "Based on what we saw in our sample, what do we believe is true about the population the sample came from?" __This is the kind of reasoning involved in inference.__
+
+@slidebreak
 
 @vocab{Statistical inference} uses information from a sample to draw conclusions about the larger population from which the sample was taken. It is used in practically every field of study you can imagine: medicine, business, politics, history... even art!
 
@@ -163,11 +175,9 @@ Suppose we want to estimate what percentage of all Americans plan to vote for a 
 @slidebreak
 Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to convince us that one candidate is in the lead. _But if we survey enough people_ we can be fairly confident in inferring something about the whole population.
 
-@lesson-point{
-Sample size matters!
-}
-
 @slidebreak
+
+@lesson-point{Sample size matters!}
 
 Suppose we were able to make a million phone calls to use voters...
 @QandA{
@@ -192,11 +202,13 @@ Suppose we were able to make a million phone calls to use voters...
 
 When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! _But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people._
 
+@slidebreak
+
 * A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"
 * A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!
 * A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!
 
-Can you think of other examples where biased sampling could result in inentionally or unintentionally misleading results?
+Can you think of other examples where biased sampling could result in intentionally or unintentionally misleading results?
 
 === Investigate
 
@@ -206,12 +218,13 @@ A useful step along the way is to practice with situations where we happen to _k
 
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter.
 
+@slidebreak
 @ifproglang{pyret}{
 How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
 Let’s see what happens if we switch from smaller to larger sample sizes.
 
-Divide the class into groups of 3-5 students.
+@teacher{Divide the class into groups of 3-5 students.}
 
 @lesson-instruction{
 - Open the @starter-file{expanded-animals}, save a copy and click "Run".
@@ -227,15 +240,21 @@ We're going to analyze which is better at guessing the truth about an entire pop
 Select `Sampler` from the Plugins dropdown menu.
 }
 
-@center{@image{images/sampler-plugin-default.PNG,250}}
+@slidebreak
 
-The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+@right{@image{images/sampler-plugin-default.PNG,250}} The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+
+@clear
 
 @lesson-instruction{
 What do you _notice_ about the `Sampler`? What do you _wonder_?
 }
 
-(Possible wonderings include: __How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?__)
+@teacher{
+Possible wonderings include: __How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?__
+}
+
+@slidebreak
 
 *With or without "replacement"?*
 
@@ -243,13 +262,17 @@ If we pick cards from a deck, each sample _changes the outcomes_ of the ones tha
 
 That's the difference between sampling with or without replacement. If it's like rolling dice or flipping a coin, it's sampling _with_ replacement. If it's like drawing cards from a deck, it's sampling _without_ replacement.
 
+@slidebreak
+
 @lesson-instruction{
 - Can you think of other examples for each?
 - Select the `Options` tab of the `Sampler`.
 - Which makes the most sense for our dataset: collecting cases _with replacement_ or _without replacement_?
 }
 
-Discuss with the class, making sure everyone understands which one this is!
+@teacher{Discuss with the class, making sure everyone understands which one this is!}
+
+@slidebreak
 
 @lesson-instruction{
 - Designate the number of items to collect in each sample, and the number of samplings to take.
@@ -259,9 +282,11 @@ Discuss with the class, making sure everyone understands which one this is!
 - When it's complete, the sample will be shown as a new table called itled `experiment/samples/items`. Rename it (by clicking on its title) to `small-sample`.
 }
 
-Ensure that students understand all the components of the new table they’ve created!
+@teacher{
+Ensure that students understand all the components of the new table they’ve created! Now that students are comfortable using the `Sampler`, it's time to dig into the data.
+}
 
-Now that students are comfortable using the `Sampler`, it's time to dig into the data.
+@slidebreak
 
 @lesson-instruction{
 - We want `large-sample` (on the worksheet) to be its own unique table! To produce a new table using `Sampler`, reopen the plugin rather than simply modifying the number of items.
@@ -279,7 +304,6 @@ Many people mistakenly believe that larger populations need to be represented by
 
 @strategy{Extension}{
 
-
 In a statistics-focused class, or if appropriate for your learning goals, this is a great place to include more rigorous statistics content on @link{https://www.khanacademy.org/math/ap-statistics/estimating-confidence-ap/one-sample-z-interval-proportion/v/determining-sample-size-based-on-confidence-and-margin-of-error, sample size}, @link{https://www.youtube.com/watch?v=SRwMfEmKx3A, sampling bias}, etc.
 }
 
@@ -289,8 +313,6 @@ In a statistics-focused class, or if appropriate for your learning goals, this i
 * Why is taking a @vocab{random sample} important for avoiding bias in our analyses?
 
 @strategy{Project Options: Food Habits / Time Use}{
-
-
 
 @opt-project{food-habits-project.adoc, rubric-food-habits.adoc} and @opt-project{time-use-project.adoc, rubric-time-use.adoc} are both projects in which students gather data about their own lives and use what they've learned in the class so far to analyze it. These projects can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. Both projects also require that students break down tasks and follow a timeline - either individually or in groups. Rubrics for assessing the projects are linked in the materials section at the top of the lesson.
 
