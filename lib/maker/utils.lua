@@ -95,8 +95,8 @@ function read_file_lines(f)
 end
 
 function make_error_function(errmsg_file_context)
-  local function terror(s)
+  -- return an error function that adds context info
+  return function (s)
     error('ERROR in ' .. errmsg_file_context() .. ':\n' .. s)
   end
-  return terror
 end

@@ -2291,14 +2291,13 @@
       (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
         (let ([sf-file (if *lesson-plan*
                            (build-path *containing-directory* ".cached" ".index.starterfiles")
-                           (make-temporary-file ".page-~a.starterfiles" #f
-                                                (format "distribution/~a/lessons/~a/.cached"
-                                                        *natlang* *lesson*)))])
+                           (format "distribution/~a/lessons/~a/.cached/.page.starterfiles"
+                                   *natlang* *lesson*))])
           (call-with-output-file sf-file
             (lambda (o)
-              (for ([sf *starter-files-used*])
+              (for ([sf (reverse *starter-files-used*)])
                 (display sf o) (newline o)))
-            #:exists 'replace)))
+            #:exists (if *lesson-plan* 'replace 'append))))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))

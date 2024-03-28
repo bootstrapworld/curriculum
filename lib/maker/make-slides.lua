@@ -197,7 +197,7 @@ local function get_slides(lsn_plan_adoc_file)
             read_group(i, directive)
           else
             local txt = read_group(i, directive, not 'scheme', 'multiline')
-            scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
+            scan_directives(io.open_buffered(false, txt), nested_in, dont_count_image_p)
           end
         elseif directive == 'proglang' then
           curr_slide.text = curr_slide.text .. nicer_case(proglang)
@@ -227,7 +227,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
           if nested_in and nested_in ~= 'ifproglang' then
-            terror('@slidebreak inside ' .. nested_in)
+            terror('@slidebreak inside @' .. nested_in)
           end
           set_current_slide()
           local c2 = buf_peek_char(i)
