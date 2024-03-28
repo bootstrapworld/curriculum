@@ -903,22 +903,10 @@ const Alg2 = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
-  "alg2-exploring-logarithms-desmos" : {
-    "title" : "Exploring Logarithmic Functions (Desmos)",
+  "alg2-log-desmos" : {
+    "title" : "Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    }
-  },
-  "alg2-wealth-v-health-desmos": {
-    "title": "Fitting Wealth-v-Health (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
-    }
-  },
-  "alg2-wealth-v-health-2-desmos": {
-    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/66057c8e8aec42ab256cc304"
     }
   },
   "alg2-exploring-periodic-desmos" : {
