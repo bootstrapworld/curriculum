@@ -85,40 +85,21 @@ Complete the `weeks-dot` section of @printable-exercise{making-connections.adoc}
 
 @slidebreak
 
-@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".}
-
-
-```
-# weeks-dot :: Row -> Image
-# consumes an animal, and draws a solid purple circle whose
-# radius is 5x the number of weeks it took to be adopted
-examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
-
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
-  weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
-end
-```
-
-@slidebreak
-
-@ifslide{
+@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".
+@ifslide{_Note: Discussion continues on the next slide._}}
 
 ```
 # weeks-dot :: Row -> Image
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * 3,                  "solid", "green")
+  weeks-dot(young-row) is circle(5 * 1,                  "solid", "green")
 
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"],   "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
 ```
-
-}
 
 These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Sasha" and "Wade", based on their `weeks` to adoption. 
 
@@ -129,6 +110,11 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 
 @slidebreak
 
+Both pairs of examples are __correct__!
+
+- In the first pair, we see the values `3` and `1` , but no explanation of where they are coming from
+- The last two examples show how those values are looked up from the example rows.
+
 @ifslide{
 
 ```
@@ -136,21 +122,17 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 * 3, "solid", "green")
-  weeks-dot(young-row) is circle(5 * 1, "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * 3,                  "solid", "green")
+  weeks-dot(young-row) is circle(5 * 1,                  "solid", "green")
 
-  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"], "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"],   "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
 ```
 
 }
 
-Both pairs of examples are _correct_!
-
-- In the first pair, we see the values `3` and `1` , but no explanation of where they are coming from
-- The last two examples show how those values are looked up from the example rows.
-
+@slidebreak
 
 @lesson-point{
 If you're stuck on the examples step, here's a useful trick to get you started. Complete the following sentence: +
