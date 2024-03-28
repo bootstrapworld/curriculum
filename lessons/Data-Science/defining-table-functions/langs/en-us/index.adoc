@@ -136,10 +136,10 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * 3, "solid", "green")
+  weeks-dot(young-row) is circle(5 * 1, "solid", "green")
 
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"], "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
 ```
@@ -230,50 +230,16 @@ We're going to practice collaborative programming and try writing some other Tab
 
 @slidebreak
 
-@ifnotslide{
-
-@vspace{1ex}
-
-[.indentedpara]
---
-[cols="1a", options="header"]
-|===
-|Who's Doing What During Each Round of Design Recipe Telephone?
-|**Round 1 - Writing Contract and Purpose Statements from the Word Problem**
-
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem A  ! Student 2 - Problem B! Student 3 - Problem C
-!===
-
-|@center{__everyone folds over the previous section, and passes their paper to the right__}
-_
-| **Round 2 - Writing Examples __based solely on the Contract and Purpose Statement__**
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem C  ! Student 2 - Problem A! Student 3 - Problem B
-!===
-
-|@center{__everyone folds over the previous section, and passes their paper to the right__}
-
-|  **Round 3 - Writing Function Definitions __based solely on the Examples__**
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem B  ! Student 2 - Problem C! Student 3 - Problem A
-!===
-|===
---
-
-}
-
-@ifslide{
-
 **Round 1:**
+@lesson-instruction{
 You should have a page with a Word Problem.
 
 - Write the Contract and Purpose Statement.
 - Fold your paper to hide the Word Problem.
 
+}
+
+@ifslide{
 @teacher{
 Choose which set of word problems you are going to start with and give each student within each group a different word problem.
 
@@ -285,45 +251,59 @@ Choose which set of word problems you are going to start with and give each stud
 
 @slidebreak
 
-@ifslide{
-Make sure you’ve folded your paper over so that only the Contract and Purpose are visible.
-Pass your paper to the person to your right.
 
-@vspace{1ex}
+@ifslide{__Make sure you’ve folded your paper over so that only the Contract and Purpose are visible.__}
+Pass your paper to the person to your right.
 
 **Round 2:**
 
-- Write Examples from the Contract and Purpose Statement you just received.
-- Circle the Variables.
-- Fold your paper so that only the Examples are visible.
+@lesson-instruction{
+You should have just received a new page, that has been folded to hide the Word Problem.
 
+- Write Examples from the Contract and Purpose Statement.
+- Circle the Variables.
+- Then fold your paper to hide the Contract and Purpose Statement.
 }
 
 @slidebreak
 
-@ifslide{
-Make sure you’ve folded your paper over so that only the Examples are visible.
-Pass your paper to the person to your right.
+@ifslide{__Make sure you’ve folded the top of your paper over so that only the Examples are visible.__}
 
-@vspace{1ex}
+Pass your paper to the person to your right.
 
 **Round 3:**
 
-- Write a Definition from the Examples you just received.
+@lesson-instruction{
+You should have just received a new page that has been folded so that the Examples are at the top.
 
+- Write a Definition from the Examples you just received.
+- When you're done, pass your paper to your right to return it to the person it started with.
 }
 
 @slidebreak
+
+**Round 4:**
+
+@lesson-instruction{
+You should now be holding the page you started with.
+
+- Unfold the page and confirm that you think the function will do what the word problem wanted it to.
+- If not, collaborate with your team to identify which steps of the Design Recipe need to be reworked.
+}
+
+@slidebreak
+
+**Putting it All Together:**
 
 @lesson-instruction{
 Once your group has completed the three Design Recipes:
 
 - Add your new functions to the @starter-file{row-functions}. 
-- Complete the Design Recipe Telephone @printable-exercise{dr-telephone-wrap-1.adoc, Wrap Up for Set 1} __(or__@opt-printable-exercise{dr-telephone-wrap-2.adoc,_Set 2_} __)__,using the Circles of Evaluation to diagram how you would combine the functions to build the display.
+- Complete the Design Recipe Telephone @printable-exercise{dr-telephone-wrap-1.adoc, Wrap Up for Set 1} __(or__@opt-printable-exercise{dr-telephone-wrap-2.adoc,__Set 2})__,using the Circles of Evaluation to diagram how you would combine the functions to build the display.
 - Then test out the expression you come up with in @proglang and record what you learn from the display.
 }
 
-@ifnotslide{
+@teacher{
 This activity can be repeated several times, or done as a timed competition between teams. The goal is to emphasize that each step - if done correctly - makes the following step incredibly simple.}
 
 === Synthesize
@@ -339,7 +319,3 @@ The Design Recipe is a way of slowing down and thinking through each step of a p
 @Q{What step do you find the most challenging right now? The easiest?}
 @Q{What are some functions you might want to define for your __own__ analysis?}
 }
-
-== Additional Exercises
-
-- For students using a printed workbook, you'll find a page with @opt-printable-exercise{2-blank-recipes.adoc, two blank Design Recipes} at the back of the book.
