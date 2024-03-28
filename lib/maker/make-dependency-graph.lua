@@ -89,7 +89,7 @@ for _,lesson in ipairs(lessons) do
   local handoutPages_file = lessonpagecache .. '.handout-exercise-pages-ls.txt.kp'
   local notesFiles_file = lessonpagecache .. '.workbook-notes-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
-  local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
+  local starterFiles_file = lessoncache .. '.index.starterfiles'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
   local glossary_json_file = lessoncache .. '.index-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
