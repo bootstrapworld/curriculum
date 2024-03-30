@@ -197,7 +197,7 @@ local function get_slides(lsn_plan_adoc_file)
             read_group(i, directive)
           else
             local txt = read_group(i, directive, not 'scheme', 'multiline')
-            scan_directives(io.open_buffered(false, txt), nested_in, dont_count_image_p)
+            scan_directives(io.open_buffered(false, txt), nested_in or directive, dont_count_image_p)
           end
         elseif directive == 'proglang' then
           curr_slide.text = curr_slide.text .. nicer_case(proglang)
