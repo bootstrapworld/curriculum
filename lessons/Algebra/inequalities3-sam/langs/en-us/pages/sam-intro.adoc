@@ -3,11 +3,12 @@
 ++++
 <style>
 #content .right{margin-right: 20ex; }
+table .autonum::after { content: ')' !important; }
 </style>
 ++++
 
-Open the @starter-file{inequalities-sam} starter file and click “Run”. __(Hi, Sam!)__
-
+[.linkInstructions]
+Open the @starter-file{inequalities-sam} starter file and click “Run”. (Hi, Sam!)
 Move Sam around the screen using the arrow keys.
 
 @vspace{2ex}
@@ -32,7 +33,7 @@ Move Sam around the screen using the arrow keys.
 
 @fitb{}{@ifsoln{_Sam's x-coordinate_}}
 
-@n Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight. *How far to the left and right can Sam go and still remain visible?*
+@n Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight... __How far to the left and right can Sam go and still remain visible?__
 
 @fitb{}{@ifsoln{Sam can go to the left until their x-coordinate is less than -40, and to the right until x > 680}}
 
@@ -40,22 +41,25 @@ Move Sam around the screen using the arrow keys.
 
 @vspace{1ex}
 
-Use inequalities to answer the following questions _with code_:
 
-@vspace{2ex}
-
-@n Sam hasn't gone off the left edge of the screen as long as…
-@fitb{}{@ifsoln{@show{(code '(> x -50))} or @show{(code '(>= x -40))}}
-
-@vspace{2ex}
-
-@n Sam hasn't gone off the right edge of the screen as long as…
-@fitb{}{@ifsoln{@show{(code '(< x 690))} or @show{(code '(<= x 680))}}
-
-@vspace{2ex}
-
-@n Use the space below to draw Circles of Evaluation for these two expressions:
-
-@left{ @showsoln{(coe '(> x -50)) } }
-
-@right{@showsoln{(coe '(< x 690)) } }
+[cols="1a,1a",stripes="none",grid="none",frame="none"]
+|===
+2+| @n Write an inequality to complete each of the following statements:
+| @hspace{2em}__Sam hasn't gone off the left edge of the screen as long as…__
+@vspace{3ex}
+@fitb{}{@ifsoln{x > -50 +
+some students will also correctly say: x &#8805; -40}}
+| @hspace{2em}__Sam hasn't gone off the right edge of the screen as long as…__
+@vspace{3ex}
+@fitb{}{@ifsoln{x < 690 +
+some students will also correctly say: x &#8804; 680}}
+2+| @n Draw the Circle of Evaluation for each inequality you wrote above.
+| @ifnotsoln{@vspace{30ex}}
+@showsoln{(coe '(> x -50))}
+| @showsoln{(coe '(< x 690))}
+@ifproglang{wescheme}{
+2+| @n Translate each of the Circles of Evaluation into code.
+|code: @fitb{}{@showsoln{(code '(> x -50))}}
+|code: @fitb{}{@showsoln{(code '(< x 690))}}
+}
+|===

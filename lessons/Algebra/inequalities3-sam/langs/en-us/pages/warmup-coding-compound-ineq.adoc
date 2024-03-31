@@ -1,0 +1,54 @@
+= Warmup: Coding Compound Inequalities
+
+Remember:
+
+- some useful code for writing inequalities: @hspace{1em} `>=` @hspace{1em} `<=` @hspace{1em} `<>`
+- `and` expressions return true when both subexpressions return true
+- `or` expressions return true when at least one subexpression returns true
+@hspace{1em} `==`
+
+@vspace{1ex}
+
+@do{
+
+(define e1 '(or (<= 13 9) (<> 2 -3)))
+(define e2 '(and (>= 3 5) (< 5 8)))
+(define e3 '(or (<= 6 6)(> 12 -7) ))
+(define e4 '(and (<> 3 2) (== (+ 3 5) 8)))
+}
+
+[cols="2a, 3a, 3a", options="header"]
+|===
+| Expression | Circles of Evaluation | Code 
+
+| 13 is less than or equal to 9, +
+or 2 is not equal to -3
+| @show{(coe e1)} 
+| @show{(code e1)}
+
+3+| What will this evaluate to? Why? @fitb{}{True. The 2nd expression is true; `or` expressions return true if at least one subexpression is true.}
+
+| 3 is greater than or equal to 5, + 
+and 5 is less than 8
+| @showsoln{(coe e2)} @ifnotsoln{@vspace{25ex}}
+| @showsoln{(code e2)}
+
+3+| What will this evaluate to? Why?
+@fitb{}{@ifsoln{False. Only the second expression is true; `and` expressions return false unless both subexpressions are true.}}
+
+| 6 is less than or equal to 6, +
+or 12 is greater than -7
+| @showsoln{(coe e3)} @ifnotsoln{@vspace{25ex}}
+| @showsoln{(code e3)}
+
+3+| What will this evaluate to? Why?
+@fitb{}{@ifsoln{True. Both expressions are true, so, yes, at least one subexpression is true.}}
+
+| 3 is not equal to 2, +
+and 3 + 5 is equal to 8
+| @showsoln{(coe e4)} @ifnotsoln{@vspace{25ex}}
+| @showsoln{(code e4)}
+
+3+| What will this evaluate to?
+@fitb{}{@ifsoln{True. Both expressions are true.}}
+|===
