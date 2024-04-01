@@ -62,6 +62,7 @@ for _,lesson in ipairs(lessons) do
   local notesFiles_txt = ''
   local primitives_txt = ''
   local starterFiles_txt = ''
+  local optStarterFiles_txt = ''
   local prerequisites_txt = ''
   --
   local proglang_file = lessoncache .. '.record-proglang'
@@ -90,6 +91,7 @@ for _,lesson in ipairs(lessons) do
   local notesFiles_file = lessonpagecache .. '.workbook-notes-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
   local starterFiles_file = lessoncache .. '.index.starterfiles'
+  local optStarterFiles_file = lessoncache .. '.index.optstarterfiles'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
   local glossary_json_file = lessoncache .. '.index-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
@@ -166,6 +168,14 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  if file_exists_p(optStarterFiles_txt) then
+    i = io.open(optStarterFiles_file)
+    for line in i:lines() do
+      optStarterFiles_txt = optStarterFiles_txt .. '\"' .. line .. '\", '
+    end
+    i:close()
+  end
+  --
   if file_exists_p(prereqs_file) then
     i = io.open(prereqs_file)
     for line in i:lines() do
@@ -192,6 +202,7 @@ for _,lesson in ipairs(lessons) do
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
+  o:write('    optStarterFiles: [' .. optStarterFiles_txt .. '],\n')
   if file_exists_p(slidesId_file) then
     local slidesURL = read_slidesURL(slidesId_file)
     if slidesURL then
