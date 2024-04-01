@@ -19,6 +19,8 @@
 
 (define *book* (truthy-getenv "BOOK"))
 
+(define *only-some-courses* (truthy-getenv "COURSE"))
+
 ; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
 
 (define *math-unicode?* #t)
@@ -838,8 +840,9 @@
             [(path-has-extension? f ".pdf")
              (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
       (unless existent-file?
-        (check-link f)
-        (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
+        (check-link f) ;move inside next unless?
+        (unless (and *only-some-courses* (regexp-match "courses/" f))
+          (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f)))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"

@@ -333,6 +333,15 @@ const DSBasics = {
     "codap": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
       }
+    },
+  "food-sheet": {
+    "title": "Global Food Supply & Production Spreadsheet",
+    "pyret": {
+      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
+    },
+    "codap": {
+      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
+      }
     }
   }
 

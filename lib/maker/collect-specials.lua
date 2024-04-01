@@ -37,6 +37,7 @@ do
     o:close()
     --
     seen = {}
+    seen['editor'] = true
     local lesson_plan_sf_i = io.open(lesson_cache .. '.index.starterfiles')
     if lesson_plan_sf_i then
       for sf in lesson_plan_sf_i:lines() do
