@@ -331,7 +331,7 @@ const DSBasics = {
       "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T"
     },
     "codap": {
-      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2Fr49Wrb5M6Mf2y9UtA80d%2Ffile.json"
       }
     },
   "food-sheet": {
