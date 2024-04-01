@@ -325,7 +325,13 @@ const DSBasics = {
       "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
     }
   },
-  "food": {
+  "putting-it-all-together": {
+    "title": "Animals Dataset with Helper Functions",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU&v=0c33ff0"
+    }
+  },
+   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T"
