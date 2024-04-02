@@ -168,7 +168,7 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
-  if file_exists_p(optStarterFiles_txt) then
+  if file_exists_p(optStarterFiles_file) then
     i = io.open(optStarterFiles_file)
     for line in i:lines() do
       optStarterFiles_txt = optStarterFiles_txt .. '\"' .. line .. '\", '
