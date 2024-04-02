@@ -1,8 +1,13 @@
 = Data Cycle: Relationships in Your Dataset
+
 ++++
 <style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
 .data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
 </style>
 ++++
 
@@ -11,6 +16,8 @@ Use the Data Cycle to search for relationships between columns in your dataset!
 @data-cycle{ ""
   #:question ""
   #:show-question? #t
+  #:question-type "statistical"
+  #:show-question-type? #f
   #:rows ""
   #:show-rows? #f
   #:cols ""
@@ -27,11 +34,24 @@ Use the Data Cycle to search for relationships between columns in your dataset!
   #:show-new-question? #f
 }
 
-@span{.sectionbreak}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+- [ ] There appears to be no relationship between @fitbruby{13em}{}{x-variable} and @fitbruby{13em}{}{y-variable}.
+
+- [ ] There appears to be a @fitbruby{10em}{}{strong / weak / moderate}, @fitbruby{10em}{}{positive / negative}, @fitbruby{10em}{}{linear / non-linear} relationship between @fitbruby{15em}{}{x-variable} and @fitbruby{15em}{}{y-variable}. +
+Some possible outliers might be @fitb{}{}
+|===
+   
+@span{.sectionbreak}{}
 
 @data-cycle{ ""
   #:question ""
-  #:show-question? #f
+  #:show-question? #t
+  #:question-type "statistical"
+  #:show-question-type? #f
   #:rows ""
   #:show-rows? #f
   #:cols ""
@@ -47,3 +67,15 @@ Use the Data Cycle to search for relationships between columns in your dataset!
   #:new-question ""
   #:show-new-question? #f
 }
+
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+- [ ] There appears to be no relationship between @fitbruby{13em}{}{x-variable} and @fitbruby{13em}{}{y-variable}.
+
+- [ ] There appears to be a @fitbruby{10em}{}{strong / weak / moderate}, @fitbruby{10em}{}{positive / negative}, @fitbruby{10em}{}{linear / non-linear} relationship between @fitbruby{15em}{}{x-variable} and @fitbruby{15em}{}{y-variable}. +
+Some possible outliers might be @fitb{}{}
+|===
+

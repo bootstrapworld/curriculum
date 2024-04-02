@@ -53,6 +53,18 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno)
       oe:write(x)
     end
   end
+  --
+  local handout_exercise_pages_file = lesson_dir .. '/pages/.cached/.handout-exercise-pages.lua'
+  if file_exists_p(handout_exercise_pages_file) then
+    local handout_exercise_pages = dofile(handout_exercise_pages_file)
+    for _,page in ipairs(handout_exercise_pages) do
+      local file = page[1]
+      local aspect = page[2] or 'portrait'
+      local this_pageno = false
+      local x = '{ lessondir = "' .. lesson_dir .. '", ' .. 'page = "' .. file .. '", ' .. 'aspect = "' .. aspect .. '", ' .. 'pageno = false },\n'
+      ol:write(x)
+    end
+  end
 end
 
 local all_courses = dofile(courses_list_file)
@@ -120,12 +132,6 @@ function make_workbook_json_1(course_dir, tgt)
 
   if memberp(tgt, { 'workbook-sols', 'workbook-long-sols', 'opt-exercises-sols', 'pd-workbook' }) then
     includesolutions = true
-  end
-
-  local includeoptexercises = false
-
-  if memberp(tgt, { 'workbook-long', 'workbook-long-sols', 'opt-exercises', 'opt-exercises-sols' }) then
-    includeoptexercises = true
   end
 
   local includelessons = false

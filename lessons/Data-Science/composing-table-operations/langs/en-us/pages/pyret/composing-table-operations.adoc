@@ -1,9 +1,13 @@
 = Composing Table Operations
 ++++
 <style>
-.literalblock pre { 0.5em 0 !important; }
-table:first-of-type td {padding: .25em .5em !important; }
-div.circleevalsexp .value { font-size: 0.7rem; }
+p.tableblock { margin: 0; }
+.t td { padding: 0.1 5px !important; }
+.m td { padding: 2px 8px !important; }
+div.circleevalsexp .value { font-size: 1rem; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -19,9 +23,9 @@ div.circleevalsexp .value { font-size: 0.7rem; }
 (define exp8 '(sort t "cuteness" false))
 }
 
-The table `t` below represents four animals from the shelter:
+_The table `t` below represents four animals from the shelter:_
 
-[cols='5',options="header"]
+[.t, cols='5',options="header"]
 |===
 | name        | sex       | age   | fixed   | pounds
 | `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
@@ -30,47 +34,47 @@ The table `t` below represents four animals from the shelter:
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
 |===
 
-You have the following functions defined below (read them _carefully!_):
+```
+fun is-fixed(r): r["fixed"]                 end
+fun is-young(r): r["age"] < 4               end
+fun nametag(r):  text(r["name"], 20, "red") end
+```
 
-  fun is-fixed(r): r["fixed"]                 end
-  fun is-young(r): r["age"] < 4               end
-  fun nametag(r):  text(r["name"], 20, "red") end
+Match each table description on the left, to the Circle of Evaluation that will produce it.
 
-For each table on the left, _match_ it to the Circle of Evaluation that will produce it.
-
-[.FillVerticalSpace, cols=">.^6a,^.^2a,2,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+[.m, cols=">.^8a,^.^2a,4,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
 |===
 
 | A table containing only Toggle and Sasha
-|*@n*@ifsoln{+(D)+} ||*A*
+|*@n*@ifsoln{D} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table of only young, fixed animals
-|*@n*@ifsoln{(E)} ||*B*
+|*@n*@ifsoln{E} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table, sorted youngest-to-oldest
-|*@n*@ifsoln{(A)} ||*C*
+|*@n*@ifsoln{A} ||*C*
 | @show{(coe exp3)}
 
 | Produces a table with an extra column, named "sticker"
-|*@n*@ifsoln{+(C)+} ||*D*
+|*@n*@ifsoln{C} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Toggle and Sasha, in that order
-|*@n*@ifsoln{(F)} ||*E*
+|*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces a table containing Toggle, Fritz, and Nori
-|*@n*@ifsoln{(B)} ||*F*
+|*@n*@ifsoln{B} ||*F*
 | @show{(coe exp6)}
 
 | Won’t run: will produce an error (why?)
-|*@n*@ifsoln{(H)} ||*G*
+|*@n*@ifsoln{H} ||*G*
 | @show{(coe exp7)}
 
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
-|*@n*@ifsoln{(G)} ||*H*
+|*@n*@ifsoln{G} ||*H*
 | @show{(coe exp8)}
 
 |===

@@ -1,6 +1,9 @@
 = Exponential Models - MA Table
 ++++
 <style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+
 .autonum { font-weight: bold; }
 .autonum:after { content: ')' !important; }
 
@@ -25,7 +28,8 @@ td .MathJax { min-width: 30px !important; display: inline-block; }
 
 == Fitting the Model Visually @math{f(x) = ab^x + k}
 
-_For this section, you'll need to have @starter-file{alg2-covid-desmos} open on your computer._
+[.linkInstructions]
+For this section, you'll need to have **Slide 4: Exploring Exponential Models** of **Modeling Covid Spread (Desmos)** open on your computer.
 
 @n Try changing the value of @math{k}, then @math{a}, then @math{b} to find three promising exponential models, graphing each one and labeling your values on the grids below.
 
@@ -48,7 +52,8 @@ _For this section, you'll need to have @starter-file{alg2-covid-desmos} open on 
 
 == Fitting the Model Programmatically @math{f(x) = ab^x + k}
 
-_For this section, open your copy of the @starter-file{alg2-covid}._
+[.linkInstructions]
+For this section, open your copy of the @starter-file{alg2-covid}.
 
 @n In the space below, define `exponential1` for one of the models you fit in Desmos.
 
@@ -60,16 +65,16 @@ _For this section, open your copy of the @starter-file{alg2-covid}._
 
 `fun exponential1(x): (` @fitbruby{10em}{@ifsoln{31.6}}{a} `* num-expt(` @fitbruby{10em}{@ifsoln{1.047}}{b} `, (~1 * x))) +` @fitbruby{10em}{@ifsoln{119000}}{k} `end`
 
-_Two Notes on this function definition:_
+__Two Notes on this function definition:__
 
-* `num-expt` _is the function that we use for exponents. It takes in 2 numbers: the base and the power, in this case @math{b} and @math{x}._
-* _At first it may appear that @math{x} is being multiplied by negative 1 (`-1`), when it is actually being multiplied by `*~1*` (literally the value "roughly 1"). This tells Pyret to round off the calculation, prioritizing *speed* over *precision* to get a result that is "roughly accurate". We've added this to the function definition so that you won't have to wait for several minutes for Pyret to run `fit-model` to get an answer for question 4._
+* `num-expt` __is the function that we use for exponents. It takes in 2 numbers: the base and the power, in this case @math{b} and @math{x}.__
+* __At first it may appear that @math{x} is being multiplied by negative 1 (`-1`), when it is actually being multiplied by `*~1*` (literally the value "roughly 1"). This tells Pyret to round off the calculation, prioritizing **speed** over **precision** to get a result that is "roughly accurate". We've added this to the function definition so that you won't have to wait for several minutes for Pyret to run `fit-model` to get an answer for question 4.__
 
 @n Type your definition into the Definitions Area.
 
-@n Use `fit-model` to determine how closely `exponential1` fits the `MA-table`. @hspace{5em} @math{R^2 = } @fitb{}{@ifsoln{Answer will vary.}}
+@n Use `fit-model` to determine how closely `exponential1` fits the `MA-table`. @hspace{5em} @math{S = } @fitb{}{@ifsoln{Answer will vary.}}
 
-@ifsoln{For reference, for the above example @math{R^2} is @math{0.94694}}
+@ifsoln{For reference, for the above example @math{S} is @math{13,373.83}}
 
 @ifsoln{@vspace{1ex}}
 

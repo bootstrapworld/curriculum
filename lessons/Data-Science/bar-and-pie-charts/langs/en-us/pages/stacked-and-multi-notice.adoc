@@ -1,13 +1,21 @@
-= Stacked & Multi Bar Charts - Notice and Wonder
+= Multi Bar & Stacked Bar Charts - Notice and Wonder
 
 ////
 The refugee charts below are drawn from the Refugee Starter File:
-https://code.pyret.org/editor#share=144kvFXVhg9wP1S9Y805s7ra3p1srsAqn&v=4d870d2
+https://code.pyret.org/editor#share=1rettr-BwPIJ5sSLRJFM8S8J4nyiHCtaZ&v=78aeaeb
 
-The code use to filter the tables and generate them is:
+The code used to filter the tables and generate them is:
 t = refugees-table.filter(lam(r): string-contains(r["region"], "America") end)
 stacked-bar-chart(t, "region", "democracy")
 multi-bar-chart(t, "region", "democracy")
+
+The animals charts are drawn from the expanded animals starter file:
+https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0&v=4d870d2
+
+The code used to filter the tables and generate them is:
+t = more-animals.filter(lam(r): string-contains(r["species"], "r" )end)
+stacked-bar-chart(t, "species", "sex")
+multi-bar-chart(t,  "species", "sex")
 ////
 
 ++++
@@ -18,13 +26,18 @@ table.stripes-odd tr:nth-of-type(odd) td { background: lightgray; }
 </style>
 ++++
 
-What do you Notice and Wonder about the displays below?
+[cols="^.^1a,^.^1a", stripes=none, grid=none, frame =none]
+|===
+|The displays on the left are called *multi bar charts*. |The displays on the right are called *stacked barcharts*.
+|===
+
+@vspace{1ex}
 
 [cols="^.^1a,^.^1a", stripes=odd]
 |===
-2+| *Refugees in the Americas*
-|@image{../images/refugees-multi.png, 300}
-|@image{../images/refugees-stacked.png, 300}
+2+| *Political Structure of Countries in the Americas*
+|@image{../images/politics-multi.png, width}
+|@image{../images/politics-stacked.png, width} 
 
 2+| *Distribution of sexes across Cats, Dogs and Rabbits*
 |@image{../images/multi-species-sex2.png, width}
@@ -32,10 +45,22 @@ What do you Notice and Wonder about the displays below?
 |===
 
 @vspace{1ex}
+
 [.FillVerticalSpace, cols="^1a,^1a",options="header"]
 |===
 | What do you Notice? 	| What do you Wonder?
 |						|
 |===
 
+ 
+@n Is it possible that the same data was used for the multi bar charts as for the stacked bar charts? How do you know?
 
+@fitb{}{@ifsoln{yes. The proportions are consistent.}}
+
+@n Write a question that it would be easiest to answer by looking at one of the multi bar charts.
+
+@fitb{}{@ifsoln{Sample response: How many more rabbits are male than female?}}
+
+@n Write a question that it would be easiest to answer by looking at one of the stacked bar charts.
+
+@fitb{}{@ifsoln{Sample response: Which region had the highest proportion of full democracies?}}

@@ -2,9 +2,6 @@
 
 (provide
   truthy-getenv
-  ferror
-  file-mtime
-  system-echo
   unquote-string
   read-data-file
   gen-new-id
@@ -12,6 +9,7 @@
   create-zero-file
   anonymize-filename
   nicer-case
+  extract-domain-name
   )
 
 (require file/sha1)
@@ -20,22 +18,6 @@
   (let ([x (getenv ev)])
     (if (and x (string=? x "")) #f
         x)))
-
-(define (ferror tag fmt . args)
-  (apply error 'ERROR (format "~a: ~a" tag fmt) args))
-
-(define (file-mtime f)
-  (if (file-exists? f) (file-or-directory-modify-seconds f) 0))
-
-(define (system-echo cmd . args)
-  (let* ([x (apply process* cmd args)]
-         [i (first x)]
-         [result (format "~a" (read i))])
-    (close-input-port i)
-    (close-output-port (second x))
-    (close-input-port (fourth x))
-    (and (not (eof-object? result))
-         result)))
 
 (define (unquote-string s)
   (string-trim s "\""))
@@ -64,13 +46,6 @@
                                                  (if (eof-object? y) (reverse yy)
                                                      (loop2 (cons (format "~a" y) yy)))))))])
                                  (if (null? yy) xx (cons yy xx)))))))]
-            [(lua-return)
-             (read-line i)
-             (let loop ([xx '()])
-               (let ([c (peek-char i)])
-                 (cond [(or (eof-object? c) (char=? c #\})) (reverse xx)]
-                       [(or (char=? c #\,) (char-whitespace? c)) (read-char i) (loop xx)]
-                       [else (loop (cons (read i) xx))])))]
             [(forms) (let loop ([xx '()])
                        (let ([x (read i)])
                          (if (eof-object? x) (reverse xx)
@@ -115,3 +90,10 @@
   (cond [(string=? x "codap") "CODAP"]
         [(string=? x "wescheme") "WeScheme"]
         [else (string-titlecase x)]))
+
+(define (extract-domain-name f)
+  (let ([x (regexp-match "[a-zA-Z][^.:/]*[.](com|org)" f)])
+    (and x
+         (let ([y (first x)])
+           (and (not (string-ci=? y "google"))
+                (string-titlecase (substring y 0 (- (string-length y) 4))))))))

@@ -5,6 +5,7 @@ table td:first-of-type p { font-weight: bold; }
 </style>
 ++++
 
+[.linkInstructions]
 For this page, you'll need the @starter-file{alg2-countries} open on your computer. __If you haven't already__, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
 
 @n Read the function definition carefully: `fun no-universal(r): not(r["has-univ-healthcare"]) end`
@@ -16,14 +17,10 @@ For this page, you'll need the @starter-file{alg2-countries} open on your comput
 
 @n Add `fun no-universal(r): not(r["has-univ-healthcare"]) end` at the bottom of the Definitions Area. 
 
-@vspace{1ex}
-
-@hspace{3em} Click "Run" and evaluate @show{(code '(no-universal albania))} in the Interactions Area. 
-
-@hspace{3em} What does Pyret return? @fitb{}{@ifsoln{`true`}}
+@hspace{2em} Click "Run" and evaluate @show{(code '(no-universal albania))} in the Interactions Area. What does Pyret return? @fitb{}{@ifsoln{`true`}}
 
 
-@n Add `countries-wo-univ = filter(countries2, no-universal)` to the bottom of the Definitions Area, then click "Run".
+@n Add `countries-wo-univ = filter(countries-transformed, no-universal)` to the bottom of the Definitions Area, then click "Run".
 
 
 @hspace{3em}What does evaluating `countries-wo-univ` in the Interactions Area produce? @fitb{}{}
@@ -40,9 +37,9 @@ For this page, you'll need the @starter-file{alg2-countries} open on your comput
 @n Fill in the table below by:
 
 [.indentedpara]
-- Building an `lr-plot` for each of these tables with the transformed-column `log-pc-gdp`.
+- Building an `lr-plot` for each of these tables with the transformed-column `log(pc-gdp)`.
 - Using what you learn from `lr-plot` to write logarithmic models for each table.
-- Using `fit-model` to find @math{R^2} for each of your logarithmic models and their corresponding un-transformed `countries-w-univ` and `countries-wo-univ` tables. 
+- Using `fit-model` to find @math{S} for each of your logarithmic models and their corresponding un-transformed `countries-w-univ` and `countries-wo-univ` tables.
 
 @vspace{1ex}
 
@@ -60,16 +57,16 @@ For this page, you'll need the @starter-file{alg2-countries} open on your comput
 | @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{11.8617}}}{log coefficient} @math{\log_{10}(x) +} @fitbruby{8em}{@ifsoln{25.2718}}{y-intercept}
 | @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{11.2079}}}{log coefficient} @math{\log_{10}(x) +} @fitbruby{8em}{@ifsoln{26.5875}}{y-intercept}
 
-| @math{R^2}
-| @fitb{10em}{@ifsoln{0.66702}}
-| @fitb{10em}{@ifsoln{0.76222}}
+| @math{S}
+| @fitb{10em}{@ifsoln{3.151}}
+| @fitb{10em}{@ifsoln{4.943}}
 |===
 
 @n Was the relationship stronger for `countries-w-univ` or `countries-wo-univ`? @fitb{}{@ifsoln{Countries without universal healthcare}}
 
-@n In `countries-w-univ`, what is the expected increase in `median-lifespan` for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.8617}}
+@n In `countries-w-univ`, what increase in `median-lifespan` did the model predict for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.8617}}
 
-@n In `countries-wo-univ`, what's the expected increase in `median-lifespan` for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.2079}}
+@n In `countries-wo-univ`, what increase in `median-lifespan` did the model predict for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.2079}}
 
 @n For which table does an increase in `pc-gdp` have a bigger expected impact on `median-lifespan`? @fitb{}{@ifsoln{Countries with universal healthcare}}
 

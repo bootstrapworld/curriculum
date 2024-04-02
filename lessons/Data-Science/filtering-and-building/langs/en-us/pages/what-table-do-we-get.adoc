@@ -1,13 +1,15 @@
 = What Table Do We Get?
 
-You have the following functions defined below @ifsoln{read them _carefully!}:
+++++
+<style>
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
 
-  fun lookup-fixed(animal): animal["fixed"]                   end
-  fun is-dog(animal):       animal["species"] == "dog"        end
-  fun is-old(animal):       animal["age"] > 10                end
-  fun label(animal):        text(animal["name"], 20, "red")   end
+Consider the table below, and the four function definitions that follow:
 
-The table `t` below represents four animals from the shelter:
+_The table `t` below represents four animals from the shelter:_
 
 [cols='6',options="header"]
 |===
@@ -18,41 +20,48 @@ The table `t` below represents four animals from the shelter:
 |`"Sunflower"`|`"female"` |  `2`  | `false` | `"cat"` | `51.6`
 |===
 
+```
+fun lookup-fixed(animal): animal["fixed"]                   end
+fun is-dog(animal):       animal["species"] == "dog"        end
+fun is-old(animal):       animal["age"] > 10                end
+fun label(animal):        text(animal["name"], 20, "red")   end
+```
+
 Below is a list of expressions, eaching using one table function. _Match_ each expression to the description of the table it will produce.
 
 [.FillVerticalSpace, cols=">.^13a, ^.^4a, 3, ^.^1a, .^15a",stripes="none",grid="none",frame="none"]
 |===
 
 | `sort(t, "age", true)`
-|*1*@ifsoln{-B} ||*A*
+|*1*@ifsoln{B} ||*A*
 | Produces a table with Toggle, Fritz, and Nori - but not Sunflower.
 
 | `sort(t, "pounds", false)`
-|*2*@ifsoln{-F} ||*B*
+|*2*@ifsoln{F} ||*B*
 | Produces a table of all four animals, sorted youngest-to-oldest
 
 | `build-column(t, "sticker", label)`
-|*3*@ifsoln{-H} ||*C*
+|*3*@ifsoln{H} ||*C*
 | Produces a table, with only Toggle.
 
 | `filter(t, is-old)`
-|*4*@ifsoln{-C}||*D*
+|*4*@ifsoln{C}||*D*
 | Produces an identical table with an extra column called "dog", whose values are true, true, true, false
 
 | `filter(t, lookup-fixed)`
-|*5*@ifsoln{-E} ||*E*
+|*5*@ifsoln{E} ||*E*
 | Produces a table containing only Nori and Toggle.
 
 | `filter(t, is-dog)`
-|*6*@ifsoln{-A} ||*F*
+|*6*@ifsoln{A} ||*F*
 | Produces a table with all four animals, sorted from heaviest to lightest.
 
 | `build-column(t, "dog", is-dog)`
-|*7*@ifsoln{-D} ||*G*
+|*7*@ifsoln{D} ||*G*
 | Won’t run: will produce an error. (Why?)
 
 | `filter(t, label)`
-|*8*@ifsoln{-G} ||*H*
+|*8*@ifsoln{G} ||*H*
 | Produces an identical table with an extra column called "sticker", whose values are images
 
 |===

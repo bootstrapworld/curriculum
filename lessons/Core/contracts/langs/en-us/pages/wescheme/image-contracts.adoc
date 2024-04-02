@@ -1,11 +1,17 @@
 = Contracts for Image-Producing Functions
 ++++
 <style>
-table.contracts-table td { height: 21pt; }
+table.contracts-table td { height: 20pt; }
+.wescheme .contracts-table tr:nth-child(odd) td:first-child::before {line-height: 1.3}
 </style>
 ++++
 
-Contracts tell us how to use a function. e.g.  `ellipse {two-colons} Number, Number, String, String -> Image` tells us that the name of the function is  `ellipse`, and that it takes four inputs (two  Numbers and two Strings). From the Contract, we know  `(ellipse 100 50 "outline" "teal")` will evaluate to an Image.
+[.linkInstructions]
+Log into @starter-file{editor} and click "Run". @ifnotsoln{Experiment with each of the functions listed below, trying to find an expression that will build. Record the contract and example code for each function you are able to successfully build!
+}
+@ifsoln{
+@teacher{Students will see the contract and example for `triangle` and a list of function names. They are asked to experiment to get expressions building and record contracts and example code for each function.}
+}
 
 [.contracts-table, cols="4,1,10,1,2", options="header", grid="rows"]
 |===
@@ -16,105 +22,105 @@ Contracts tell us how to use a function. e.g.  `ellipse {two-colons} Number, Num
 |
 | Range
 
-| `;` `triangle`
+| `triangle`
 | `{two-colons}`
 | `Number, String, Sting`
 | `->`
 | `Image`
 5+| `_(triangle 80 "solid" "green")_`
 
-| `;` `star`
+| `star`
 | `{two-colons}`
 | @ifsoln{`Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(star 50 "solid" "teal")_`}
 
-| `;` `circle`
+| `circle`
 | `{two-colons}`
 | @ifsoln{`Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{ `_(circle 45 "outline" "darkgreen")_`}
 
-| `;` `square`
-| `{two-colons}`
-| @ifsoln{`Number, String, String`}
-| `->`
-| @ifsoln{`Image`}
-5+| @ifsoln{`_(square 70 "outline" "lightblue")_`}
-
-| `;` `rectangle`
+| `rectangle`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(rectangle 20 80 "solid" "gold")_`}
 
-| `;` `text`
+| `text`
 | `{two-colons}`
 | @ifsoln{`String, Number, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(text "I'm thankful for..." 50 "brown")_`}
 
-| `;` `ellipse`
+| `square`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+5+| @ifsoln{`_(square 70 "outline" "lightblue")_`}
+
+| `ellipse`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(ellipse 70 30 "outline" "red")_`}
 
-| `;` `regular-polygon`
+| `regular-polygon`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(regular-polygon  40 8 "solid" "red")_`}
 
-| `;` `rhombus`
+| `rhombus`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(rhombus 20 50 "solid" "turquoise")_`}
 
-| `;` `right-triangle`
+| `right-triangle`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(right-triangle 20 50 "outline" "black")_`}
 
-| `;` `isosceles-triangle`
+| `isosceles-triangle`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(isosceles-triangle 100 30 "solid" "black")_`}
 
-| `;` `radial-star`
+| `radial-star`
 | `{two-colons}`
 | @ifsoln{`Number, Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(radial-star  17 50 10 "solid" "orange")_`}
 
-| `;` `star-polygon`
+| `star-polygon`
 | `{two-colons}`
 | @ifsoln{`Number, Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(star-polygon 100 10 3 "outline" "yellow")_`}
 
-| `;` `triangle/sas`
+| `triangle/sas`
 | `{two-colons}`
 | @ifsoln{`Number, Number, Number, String, String`}
 | `->`
 | @ifsoln{`Image`}
 5+| @ifsoln{`_(triangle/sas 200 50 100 "solid" "blue")_`}
 
-| `;` `triangle/asa`
+| `triangle/asa`
 | `{two-colons}`
 | @ifsoln{`Number, Number, String, String`}
 | `->`

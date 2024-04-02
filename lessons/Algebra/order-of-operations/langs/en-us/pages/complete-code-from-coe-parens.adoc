@@ -1,0 +1,100 @@
+= Complete the Code by adding Parentheses!
+
+++++
+<style>
+  .studentAnswerShort { min-width: 50pt; }
+  td { font-family: Hack, "Courier New", monospace; }
+</style>
+++++
+
+For each Circle of Evaluation on the left, finish the Code on the right by adding parentheses. +
+@teacher{The answers below are shown with _all_ parentheses included. There are also correct solutions in which the unnecessary parentheses are left out.}
+
+@do{
+  (define expr1 '(- (+ 16 4) (* 2 7)))
+  (define expr2 '(/ (+ 17 13) (- 9 3)))
+  (define expr3 '(- 27 (* 10 2)))
+  (define expr4 '(* 6 (- 19 (+ 8 1))))
+  (define expr5 '(+ (/ (- 5 1) 3) (+ 5 3)))
+  (define expr6 '(/ (+ 7 9) (* 2 4)))
+}
+
+[.FillVerticalSpace, cols="^.^1a,^.^4a,^.^10a",options="header",stripes="none"]
+|===
+|    | Circle of Evaluation        | Code
+
+|*@n*| @show{(coe expr1)}    |
+@ifproglang{pyret}{
+16 @hspace{1em} + @hspace{1em} 4 @hspace{1em} - @hspace{1em} 2 @hspace{1em} * @hspace{1em} 7
+}
+  
+@ifproglang{wescheme}{
+-@hspace{1em} + @hspace{1em} 16 @hspace{1em} 4 @hspace{1em} * @hspace{1em} 2 @hspace{1em} 7
+}
+  
+@showsoln{(code expr1 #:parens true)}
+
+
+
+|*@n*| @show{(coe expr2)}    |
+@ifproglang{pyret}{
+17 @hspace{1em} + @hspace{1em} 13 @hspace{1em} + @hspace{1em} / @hspace{1em} 9 @hspace{1em} - @hspace{1em} 3
+}
+
+@ifproglang{wescheme}{
+/ @hspace{1em} + @hspace{1em} 17 @hspace{1em} 13 @hspace{1em} - @hspace{1em} 9 @hspace{1em} 3
+}
+
+@showsoln{(code expr2 #:parens true)}
+
+
+
+|*@n*| @show{(coe expr3)}    | 
+@ifproglang{pyret}{
+27 @hspace{1em} - @hspace{1em} 10 @hspace{1em} * @hspace{1em} 2
+}
+
+@ifproglang{wescheme}{
+-@hspace{1em} 27 @hspace{1em} * @hspace{1em} 10 @hspace{1em} 2
+}
+
+@showsoln{(code expr3 #:parens true)}
+
+
+
+|*@n*| @show{(coe expr4)}    | 
+@ifproglang{pyret}{
+6 @hspace{1em} * @hspace{1em} 19 @hspace{1em} - @hspace{1em} 8 @hspace{1em} + @hspace{1em} 1
+}
+
+@ifproglang{wescheme}{
+@hspace{1em} 6 @hspace{1em} - @hspace{1em} 19 @hspace{1em} + @hspace{1em} 8 @hspace{1em} 1
+}
+
+@showsoln{(code expr4 #:parens true)}
+
+
+
+|*@n*| @show{(coe expr5)}    | 
+@ifproglang{pyret}{
+5 @hspace{1em} - @hspace{1em} 1 @hspace{1em} / @hspace{1em} 3 @hspace{1em} + @hspace{1em} 5 @hspace{1em} + @hspace{1em} 3
+}
+
+@ifproglang{wescheme}{
++@hspace{1em} / @hspace{1em} - @hspace{1em} 5 @hspace{1em} 1 @hspace{1em} 3 @hspace{1em} + @hspace{1em} 5 @hspace{1em} 3
+}
+
+@showsoln{(code expr5 #:parens true)}
+
+
+
+|*@n*| @show{(coe expr6)}    | 
+@ifproglang{pyret}{
+7 @hspace{1em} + @hspace{1em} 9 @hspace{1em} / @hspace{1em} 2 @hspace{1em} * @hspace{1em} 4}
+
+@ifproglang{wescheme}{
+/ @hspace{1em} + @hspace{1em} 7 @hspace{1em} 9 @hspace{1em} * @hspace{1em} 2 @hspace{1em} 4}
+
+@showsoln{(code expr6 #:parens true)}
+
+|===

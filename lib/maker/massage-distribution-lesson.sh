@@ -32,6 +32,10 @@ if test ! -f $d/index.adoc; then
   fi
 fi
 
+if test ! -d $d/images; then
+  mkdir -p $d/images
+fi
+
 lessonName=$(basename $d)
 
 cd $d/..
@@ -52,9 +56,9 @@ for pl in $proglangs; do
     alternateproglang=yes
     lessonNamePl="$lessonName"-$pl
     mkdir -p "$lessonNamePl"
-  fi
-  if test -n "$updatingexistinglesson"; then
-    (cd "$lessonNamePl"; save_previously_built_solution_pages)
+    if test -n "$updatingexistinglesson"; then
+      (cd "$lessonNamePl"; save_previously_built_solution_pages)
+    fi
   fi
   if test -n "$alternateproglang"; then
     $CP -upr "$lessonName"/* "$lessonNamePl"

@@ -1,43 +1,41 @@
-= Defining Values - Chinese Flag
+= Chinese Flag
 ++++
 <style>
-  body:not(.LessonPlan, .narrativepage) p { line-height: 1; }
-  .centered-image{ padding: 0 !important; }
-  .listingblock { margin-bottom: 0 !important; }
+  table { margin-top: 5px; }
+  body td.tableblock .listingblock pre {
+    font-size:      9pt;
+    margin-bottom:  0 !important;
+    background:     #f7f7f8 !important;
+    padding:        10px;
+    line-height:    1.4;
+  }
+  td { padding: 0 !important; }
+  td:last-child { background: #f7f7f8 !important; }
+  td .autonum::after { content: ')' !important; }
 </style>
 ++++
 
-@centered-image{../images/china-flag.png, 300}
+The image value on the left called `china` is defined by the code on the right.
+
+[cols=".<9a,1,14a", frame="none", grid="none"]
+|===
+
+| @centered-image{../images/china-flag.png, 300}
 
 @n What image do you see repeated in the flag? @fitb{}{@ifsoln{small yellow stars}}
 
-@n In the code below, highlight or circle all instances of the expression that makes the repeated image. +
+@vspace{4ex}
+
+@n **Highlight or underline** every place in the code ➡️ +
+that you see the repeated expression for that image. +
   @ifsoln{students should highlight or circle:} @showsoln{(code '(star 15 "solid" "yellow")) }
 
-@ifproglang{wescheme}{
-----
-(define China
-  (put-image (
-   rotate 40 (star 15 "solid" "yellow"))
-   120 175
-       (put-image (
-        rotate 80 (star 15 "solid" "yellow"))
-        140 150
-            (put-image (
-             rotate 60 (star 15 "solid" "yellow"))
-             140 120
-                 (put-image (
-                  rotate 40 (star 15 "solid" "yellow"))
-                  120 90
-                      (put-image (
-                       scale 3 (star 15 "solid" "yellow"))
-                       60 140
-                          (rectangle 300 200 "solid" "red")))))))
-----
-}
+@vspace{1ex}
+|
+|
 
-@ifproglang{pyret}{
 ----
+@ifproglang{pyret}{
 china =
   put-image(
     rotate(40,star(15,"solid","yellow")),
@@ -54,26 +52,69 @@ china =
           put-image(scale(3,star(15,"solid","yellow")),
             60, 140,
             rectangle(300, 200, "solid", "red"))))))
-----
 }
-@n Write the code to define a value for the repeated expression.
+
+@ifproglang{wescheme}{
+(define china
+  (put-image
+     (rotate 40 (star 15 "solid" "yellow"))
+     120 175
+     (put-image
+       (rotate 80 (star 15 "solid" "yellow"))
+       140 150
+       (put-image
+          (rotate 60 (star 15 "solid" "yellow"))
+          140 120
+          (put-image
+             (rotate 40 (star 15 "solid" "yellow"))
+             120 90
+             (put-image
+                (scale 3 (star 15 "solid" "yellow"))
+                60 140
+                (rectangle 300 200 "solid" "red")))))))
+}
+----
+
+|===
+
+@n Write the code to **define a value** for the repeated expression.
 
 @fitb{}{@showsoln{(code '(define yellow-star (star 15 "solid" "yellow"))) }}
 
-@n Open the @starter-file{flags-china} and click "Run". +
+@n Open the @starter-file{flags-china}, *save a copy* and click "Run". **Simplify the code**, replacing the repeated expressions with the value you defined. Do you still get the same image when you click "Run"? If not, check your work.
 
-** Type `china` into the Interactions Area and hit *Enter*.
-** *Save a copy* of the file, and simplify the flag code using the value you defined.
-** Click "Run", and confirm that you still get the same image as the original.
-** Now change the color of all of the stars to black, in both files.
-** Then change the size of the stars.
+@n Change the color of all the stars to black, then change their size to 20. Would this have been easier with the original code? Why or why not? @fitb{}{@ifsoln{The original code would have been harder, because the change needed to be made in many places.}}
 
-@n Why is it helpful to define values for repeated images?
+@n Here is the same code shown above, but all crammed into one line.
 
-@fitb{}{@ifsoln{More efficient. Avoids mistakes. Easier to make changes. Easier to read the code.}}
+@show{(code '(define china
+  (put-image
+     (rotate 40 (star 15 "solid" "yellow"))
+     120 175
+     (put-image
+       (rotate 80 (star 15 "solid" "yellow"))
+       140 150
+       (put-image
+          (rotate 60 (star 15 "solid" "yellow"))
+          140 120
+          (put-image
+             (rotate 40 (star 15 "solid" "yellow"))
+             120 90
+             (put-image
+                (scale 3 (star 15 "solid" "yellow"))
+                60 140
+                (rectangle 300 200 "solid" "red"))))))))}
 
+@hspace{1em}Is it easier or harder to read, when everything is all on one line? @fitb{}{@ifsoln{Much harder!}}
+
+@n Professional programmers _indent_ their code, by breaking long lines into shorter, more readable lines of code. In the indented code at the top of the page, notice that each `put-image` is followed by several lines of code that all line up with each other, and that the lines under the _next_ `put-image` are shifted farther and farther to the right. What do you think is going on?
+
+@fitb{}{@ifsoln{The lines under each `put-image` are all inputs to that function.}} +
+@fitb{}{@ifsoln{Each new `put-image` happens _inside_ the one that comes before it, so the inputs shift farther and farther to the right}} +
+@ifnotsoln{
+@fitb{}{} +
 @fitb{}{}
+}
 
-@star This file uses a function we haven’t seen before! What is it? @fitb{20em}{@ifsoln{`put-image`}} Can you figure out its Contract? _Hint: Focus on the last instance of the function._
-
-@fitb{}{@showsoln{"_put-image {two-colons} Image, Number, Number, Image -> Image_" }}
+@star This file uses a function we haven’t seen before! What is its name? @fitb{11em}{@ifsoln{`put-image`}}_Hint: Focus on the last instance of the function._  +
+How many inputs are in its domain? @fitb{4em}{@ifsoln{4}}. What are the types of those inputs? @fitb{}{@ifsoln{Image, Number, Number, Image}}

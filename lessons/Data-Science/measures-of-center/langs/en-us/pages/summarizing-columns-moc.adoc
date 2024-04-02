@@ -1,0 +1,73 @@
+= Summarizing Columns with Measures of Center
+
+++++
+<style>
+tbody td { height: 6ex; }
+h2, h2 .fitb { padding-top: 0.5rem; line-height: 1.5em; }
+
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+== Summarizing the `Pounds` Column
+
+Find the measures of center to summarize the @fitb{20ex}{pounds} column of the @starter-file{animals}.
+
+@pathway-only{_If you're using a printed workbook, be sure to add examples to your Contracts pages in the back as you work._}
+
+@n The three measures of center for this column are:
+
+[cols="^1a,^1a,^1a",options="header"]
+|===
+| Mean (Average) 		| Median 		| Mode(s)
+
+| `mean(animals-table, "pounds")`
+| `median(animals-table, "pounds")`
+| `modes(animals-table, "pounds")`
+
+| @ifsoln{approx. 39.7} | @ifsoln{11.3} | @ifsoln{[list: 0.1, 6.5]}
+|===
+
+@n To take the average of a column, we add all the numbers in that column and divide by the number of rows. Will that work for every column?
+
+@fitb{}{@ifsoln{No! We can only find the average of @vocab{quantitative} data.For example, the mean of a list of Presidents doesn’t make sense.}}
+
+@fitb{}{@ifsoln{Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.}}
+
+@n The mean is @fitbruby{25ex}{@ifsoln{higher than}}{higher than/lower than/about equal to} the median, which suggests the shape is @fitbruby{45ex}{@ifsoln{skewed right}}{skewed right (high outliers) / skewed left (low outliers) / symmetric}.
+
+@n Which do you think is the most useful measure for this column of data? Why? @fitb{}{@ifsoln{The median is}}
+
+@fitb{}{@ifsoln{because there are likely high outliers pulling the mean to be higher than what's typical}}
+
+@star For which column(s) in the animals table do you think the modes might be a good measure of center? Why? 
+
+@fitb{}{@ifsoln{Legs! Because there aren't very many values to choose from.}}
+
+== Summarizing the @fitb{20ex}{} Column
+
+Find the measures of center to summarize the @fitbruby{20ex}{}{a column of your choosing!} column of the @starter-file{animals}.
+
+The three measures of center for this column are:
+
+[cols="^1a,^1a,^1a",options="header"]
+|===
+| Mean (Average) 		| Median 		 | Mode(s)
+| 						| 				 | 
+|===
+
+The mean is @fitbruby{25ex}{}{higher than/lower than/about equal to} the median, which suggests the shape is @fitbruby{45ex}{}{skewed right (high outliers) / skewed left (low outliers) / symmetric}.
+
+@star Four animals weighing 5, 5, 10, and 100 pounds will have an average mean of 30 pounds. +
+@hspace{3em}(_because_ @math{5 + 5 + 10 + 100 = 120} _and_ @math{120 \div 4 = 30}) 
+
+@vspace{1ex}
+
+Can you think of another set of four animals that would have the same average? How many sets can you come up with?
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}

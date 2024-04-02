@@ -29,7 +29,8 @@
 | Student-facing Lesson Goals
 |
 
-* Let's explore what random sampling has to do with seeing trends
+* Let's explore the connection between probability and inference.
+* Let's consider how sampling techniques impact the inferences we can draw.
 
 | Materials
 |[.materials-links]
@@ -44,21 +45,20 @@
 == How to Spot a Scam @duration{20 minutes}
 
 === Overview
-Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about whether a coin is fair or not?"
+Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about the fairness of a coin?"
 
 === Launch
 
-@right{@image{images/heads.png, 110}} A croupier (a casino dealer) invites you to play a game of chance. They’ll flip a coin repeatedly. On each flip, they'll give you a dollar if it comes up tails. But, if it comes up heads, you'll have to pay them a dollar.
+@right{@image{images/tails.png, 110}}@right{@image{images/heads.png, 110}} A casino dealer (croupier) invites you to play a game of chance. They’ll flip a coin repeatedly. On each flip, the croupier gives you a dollar if it comes up tails. If it comes up heads, you pay them a dollar.
 
 "It's a pure game of chance", they tell you, "we each have equal odds of winning".
 
-@lesson-instruction{
-If you decide to play the game, how could you then decide if the croupier’s coin is fair, or if the croupier is scamming you?
-
-- For a fair coin, what are the chances of it landing heads? Tails?
-** _A fair coin has a 50% chance of landing heads and a 50% chance of landing tails._
-- How do you know if a coin is fair or not?
-** _Flip it! The more flips you make, the more accurately you can assess if it is fair or not._
+@QandA{
+@Q{If you decide to play the game, how could you then decide if the croupier’s coin is fair, or if the croupier is scamming you?}
+@Q{For a fair coin, what are the chances of it landing heads? Tails?}
+@A{A fair coin has a 50% chance of landing heads and a 50% chance of landing tails.}
+@Q{How do you know if a coin is fair or not?}
+@A{Flip it! The more flips you make, the more accurately you can assess if it is fair or not.}
 }
 
 === Investigate
@@ -70,45 +70,63 @@ In general, we assume that in the long run, an ordinary coin will land on "heads
 _So how do we test the @vocab{null hypothesis}?_
 
 @lesson-instruction{
-Open @starter-file{fair-coins}, and complete @printable-exercise{fair-coins.adoc}
+- Turn to @printable-exercise{fair-coins.adoc}
+- Complete the first question with your partner using @starter-file{fair-coins}.
+- Be ready to discuss your answers with the class!
 }
 
-@ifproglang{codap}{The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any to complete the lesson. They will simply hit "Run" several times.}
+@ifproglang{codap}{
+@teacher{
+The above starter file is in Pyret, a coding platform that will be unfamiliar to students. Students do *not* need to know any coding to complete the lesson. They will simply hit "Run" several times.
+}
+}
 
+@teacher{Have students share back their sample results and their predictions after 5 samples.}
 
-@teacher{Have students share back their sample results, and their predictions after 5 samples and then 20 samples.}
+@slidebreak
 
-Do any samples seem to undermine the null hypothesis?
+@lesson-instruction{Complete the rest of @printable-exercise{fair-coins.adoc}.}
+
+@QandA{
+@Q{Did the percent heads for any of the coins change significantly?}
+@Q{Do any samples seem to contradict the null hypothesis?}
+@Q{Could a coin come up "heads" twice in a row, and still be a fair coin? Why or why not? What about 10 times in a row? 20?}
+@A{The coin could be fair in all of these instances! A coin landing on heads 20 times in a row is extremely unlikely, however.}
+}
 
 In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _produce enough evidence to reject the null hypothesis, or fail to do so_. If the null hypothesis is actually false, larger samples give us a better chance of producing evidence to reject it.
 
+@slidebreak
+
 The chances of getting "heads" from a fair coin three times in a row aren't too small: 1-in-8! Maybe it was just the luck of the draw, and the coin is still fair.
 
-Should we suspect a scam if the croupier’s coin flipped heads 10 times in a row? The probability of a fair coin getting no tails in 10 flips is @math{{\frac{1}{2}}^{10}}, or roughly 0.001. So here’s what we’d have to say about our hypothesis test:
+Should we suspect a scam if the croupier’s coin flipped heads 10 times in a row?
 
-"If the coin was fair, the probability of getting so few (zero) tails in 10 flips is just 0.001."
+@slidebreak
 
-Statisticians would say it slightly differently:
+The probability of a fair coin getting all heads for 10 flips in a row is @math{{\frac{1}{2}}^{10}}, or roughly 0.001.
+
+Statisticians would explain this as follows:
 "If the null hypothesis were true, then the probability of getting sample results at least as extreme as the ones observed is 0.001."
 
-@strategy{
-@span{.title}{Going Deeper: p-value}
+But of course, there *_is_* a way. It's just..._incredibly unlikely_.
 
-Describing what the number 0.001 is talking about in the example above is a mouthful, because we’re have to express it as an "If...then..." outcome.
+@strategy{Going Deeper: p-value}{
+
+
+Describing what the number 0.001 is talking about in the example above is a mouthful, because we have to express it as an "If...then..." outcome.
 
 Statisticians use formal language to express the probability of obtaining sample results at least as extreme as the ones observed, under the assumption that the null hypothesis is true for the population. They call this probability a "p-value", and typically report it as a decimal.
 
 [options="header"]
-!===
-! Most of us say...						! Statisticians say...
-! "There's a 1-in-10 chance of this"	! "The p-value is 0.1"
-! "There's a 1-in-100 chance of this"   ! "The p-value is 0.01"
-! "There's a 2-in-100 chance of this"   ! "The p-value is 0.02"
-! "There's a one-in-a million chance"	! "The p-value is 0.000001"
-!===
+|===
+| Most of us say...						| Statisticians say...
+| "There's a 1-in-10 chance of this"	| "The p-value is 0.1"
+| "There's a 1-in-100 chance of this"   | "The p-value is 0.01"
+| "There's a 2-in-100 chance of this"   | "The p-value is 0.02"
+| "There's a one-in-a million chance"	| "The p-value is 0.000001"
+|===
 }
-
-But of course, there *is* a way. It's just..._incredibly unlikely_.
 
 === Common Misconceptions
 Students may think that _any_ sample from a fair coin should have an equal number of heads and tails outcomes. That's not true at all! A fair coin _might_ land on "tails" three times in a row! The fact that this is possible doesn't mean it's _likely_. Landing on "tails" five times in a row? Still possible, but much less likely.
@@ -117,12 +135,12 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 
 === Synthesize
 
-- Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?
-** _We could record how many times the die landed on each number after rolling many times. If the die is fair, we should see that it lands on each number approximately equally._
-- Could a coin come up "heads" twice in a row, and still be a fair coin? Why or why not? What about 10 times in a row? 20?
-** _The coin could be fair in all of these instances! Heads 20 times in a row, however, is extremely unlikely._
-- What is the relationship between how weighted a coin is, and the number of flips you need to become suspicious that it's weighted?
-** _A fair coin should land on heads about 50% of the time._ If a coin has been designed to land on heads _100%_ of the time, it wouldn't take long to figure out that something was up! A trick coin designed to come up heads _60%_ of the time, however, would go undetected much longer. The smaller the bias, the more flips we'll need to see it. A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!
+@QandA{
+@Q{What is the relationship between how weighted a coin is and the number of flips you need to suspect that it’s weighted?}
+@A{A fair coin should land on heads about 50% of the time._ If a coin has been designed to land on heads _100%_ of the time, it wouldn't take long to figure out that something was up! A trick coin designed to come up heads _60%_ of the time, however, would need a much larger sample to be detected. The smaller the bias, the larger the sample we need to see it. A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!}
+@Q{Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?}
+@A{We could record how many times the die landed on each number after rolling many times. If the die is fair, we should see that it lands on each number approximately equally.}
+}
 
 == Probability v. Inference @duration{35 minutes}
 
@@ -137,42 +155,60 @@ Because we know that the chance of coming up heads each time for a "population" 
 
 "Based on what we know is true in the population, what’s the chance of this or that happening in a sample?" __This is the kind of reasoning involved in probability.__
 
+@slidebreak
+
 *Inference reasons backwards.*
 
 In the coin-flip activity, we took samples of coin flips and used our knowledge about _chance_ and _probability_ to make @vocab{inferences} about whether the coin was fair or weighted.
 
-In other words, we looked at sample results and used them to decide what to believe about the population of all flips of that coin: __was the overall chance of heads really 0.5? __
+In other words, we looked at sample results and used them to decide what to believe about the population of all flips of that coin: __was the overall chance of heads really 0.5?__
 
-"Based on what we saw in our sample, what do we believe is true about the underlying population?" __This is the kind of reasoning involved in inference.__
+"Based on what we saw in our sample, what do we believe is true about the population the sample came from?" __This is the kind of reasoning involved in inference.__
 
-@vocab{Statistical inference} is used to gain information in practically every field of study you can imagine: medicine, business, politics, history; even art!
+@slidebreak
 
+@vocab{Statistical inference} uses information from a sample to draw conclusions about the larger population from which the sample was taken. It is used in practically every field of study you can imagine: medicine, business, politics, history... even art!
+
+@slidebreak
 Suppose we want to estimate what percentage of all Americans plan to vote for a certain candidate.  We don't have time to ask every single person who they’re voting for, so pollsters instead take a _sample_ of Americans, and _infer_ how all Americans feel based on the sample.
 
+@slidebreak
 Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to convince us that one candidate is in the lead. _But if we survey enough people_ we can be fairly confident in inferring something about the whole population.
 
-@lesson-point{
-Sample size matters!
+@slidebreak
+
+@lesson-point{Sample size matters!}
+
+Suppose we were able to make a million phone calls to use voters...
+@QandA{
+@Q{Would it be problematic to only call voters who are registered Democrats? }
+@Q{To only call voters under 25?}
+@Q{To only call regular churchgoers?}
+@Q{Why or why not?}
+@A{Calling only certain segments of the population will not reveal the way an entire population will vote.}
 }
 
-@lesson-instruction{
-* We're taking a survey of religions in our neighborhood. There's a Baptist church right down the street, so we could get a nice big sample by asking everyone there...right?
-** _Sampling this population would reveal to us that everyone in the neighborhood is Baptist, which might not be the case!_
-* Taking a sample of whoever is nearby is called a _convenience sample_. Why is a convenience sample a problem in this example?
-** _Everyone at the church is Baptist, but the entire neighborhood might not be._
-* Would it be problematic to only call voters who are registered Democrats? To only call voters under 25? To only call regular churchgoers? Why or why not?
-** _Calling only certain segments of the population will not reveal the way an entire population will vote._
+@slidebreak
+
+@QandA{
+@Q{We're taking a survey of religions in our neighborhood.}
+@Q{There's a Baptist church right down the street.}
+@Q{Would it be problematic to get a nice big sample by asking everyone there?}
+@A{Collecting our sample at the church would bias the data. Everyone at the church is Baptist, but the entire neighborhood might not be! }
+@A{Taking a sample of whoever is nearby is called a @vocab{convenience sample}.}
 }
 
 *Bad samples can be an accident - or malice!*
 
 When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! _But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people._
 
+@slidebreak
+
 * A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"
 * A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!
 * A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!
 
-Can you think of other examples where biased sampling has been used - or could be used - to harm people?
+Can you think of other examples where biased sampling could result in intentionally or unintentionally misleading results?
 
 === Investigate
 
@@ -182,17 +218,18 @@ A useful step along the way is to practice with situations where we happen to _k
 
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter.
 
+@slidebreak
 @ifproglang{pyret}{
 How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
 Let’s see what happens if we switch from smaller to larger sample sizes.
 
-Divide the class into groups of 3-5 students.
+@teacher{Divide the class into groups of 3-5 students.}
 
 @lesson-instruction{
 - Open the @starter-file{expanded-animals}, save a copy and click "Run".
-- Complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
-- @optional complete @opt-printable-exercise{pages/predictions-from-samples.adoc}
+- Complete @printable-exercise{sampling-and-inference.adoc}, sharing their results and discussing with the group.
+- @opt{Complete @opt-printable-exercise{predictions-from-samples.adoc}}
 }
 }
 
@@ -203,15 +240,21 @@ We're going to analyze which is better at guessing the truth about an entire pop
 Select `Sampler` from the Plugins dropdown menu.
 }
 
-@center{@image{images/sampler-plugin-default.PNG,250}}
+@slidebreak
 
-The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+@right{@image{images/sampler-plugin-default.PNG,250}} The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
+
+@clear
 
 @lesson-instruction{
 What do you _notice_ about the `Sampler`? What do you _wonder_?
 }
 
-(Possible wonderings include: __How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?__)
+@teacher{
+Possible wonderings include: __How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?__
+}
+
+@slidebreak
 
 *With or without "replacement"?*
 
@@ -219,30 +262,36 @@ If we pick cards from a deck, each sample _changes the outcomes_ of the ones tha
 
 That's the difference between sampling with or without replacement. If it's like rolling dice or flipping a coin, it's sampling _with_ replacement. If it's like drawing cards from a deck, it's sampling _without_ replacement.
 
+@slidebreak
+
 @lesson-instruction{
 - Can you think of other examples for each?
 - Select the `Options` tab of the `Sampler`.
 - Which makes the most sense for our dataset: collecting cases _with replacement_ or _without replacement_?
 }
 
-Discuss with the class, making sure everyone understands which one this is!
+@teacher{Discuss with the class, making sure everyone understands which one this is!}
+
+@slidebreak
 
 @lesson-instruction{
-- Designate the number of items to select and the number of samples to collect.
+- Designate the number of items to collect in each sample, and the number of samplings to take.
 - What would it mean to select three samples of five items each? (These are CODAP's default settings.)
 - Enter the correct specifications for 1 collection of 10 items.
 -  Click `Start` to observe the sampling simulation.
 - When it's complete, the sample will be shown as a new table called itled `experiment/samples/items`. Rename it (by clicking on its title) to `small-sample`.
 }
 
-Ensure that students understand all the components of the new table they’ve created!
+@teacher{
+Ensure that students understand all the components of the new table they’ve created! Now that students are comfortable using the `Sampler`, it's time to dig into the data.
+}
 
-Now that students are comfortable using the `Sampler`, it's time to dig into the data.
+@slidebreak
 
 @lesson-instruction{
 - We want `large-sample` (on the worksheet) to be its own unique table! To produce a new table using `Sampler`, reopen the plugin rather than simply modifying the number of items.
-- Complete @printable-exercise{pages/sampling-and-inference.adoc}, sharing their results and discussing with the group.
-- @optional Complete @opt-printable-exercise{pages/predictions-from-samples.adoc}.
+- Complete @printable-exercise{sampling-and-inference.adoc}, sharing their results and discussing with the group.
+- @opt{Complete @opt-printable-exercise{predictions-from-samples.adoc}.}
 }
 }
 
@@ -253,8 +302,7 @@ Random samples help avoid bias, and larger samples get closer estimates of what�
 === Common Misconceptions
 Many people mistakenly believe that larger populations need to be represented by larger samples. In fact, the formulas that Data Scientists use to assess how good a job the sample does is only based on the _sample size_, not the population size.
 
-@strategy{
-@span{.title}{Extension}
+@strategy{Extension}{
 
 In a statistics-focused class, or if appropriate for your learning goals, this is a great place to include more rigorous statistics content on @link{https://www.khanacademy.org/math/ap-statistics/estimating-confidence-ap/one-sample-z-interval-proportion/v/determining-sample-size-based-on-confidence-and-margin-of-error, sample size}, @link{https://www.youtube.com/watch?v=SRwMfEmKx3A, sampling bias}, etc.
 }
@@ -264,11 +312,9 @@ In a statistics-focused class, or if appropriate for your learning goals, this i
 * Were larger samples always better for guessing the truth about the whole population? If so, how much better?
 * Why is taking a @vocab{random sample} important for avoiding bias in our analyses?
 
-@strategy{
-@span{.title}{Project Options: Food Habits / Time Use}
-
+@strategy{Project Options: Food Habits / Time Use}{
 
 @opt-project{food-habits-project.adoc, rubric-food-habits.adoc} and @opt-project{time-use-project.adoc, rubric-time-use.adoc} are both projects in which students gather data about their own lives and use what they've learned in the class so far to analyze it. These projects can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. Both projects also require that students break down tasks and follow a timeline - either individually or in groups. Rubrics for assessing the projects are linked in the materials section at the top of the lesson.
 
-@span{.center}{__(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})__}
+@center{__(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})__}
 }

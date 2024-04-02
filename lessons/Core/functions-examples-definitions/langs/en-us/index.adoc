@@ -12,14 +12,14 @@
 | Lesson Goals
 | Students will be able to:
 
-* identify patterns where a function would be useful
-* define their own function
-* match examples, contracts, and definitions for the same function
+- identify patterns where a function would be useful
+- define their own function
+- match examples, contracts, and definitions for the same function
 
 | Student-Facing Lesson Goals
 |
 
-* Let's define our own functions, by writing contracts and examples to help us identify patterns.
+- Let's define our own functions, by writing contracts and examples to help us identify patterns.
 
 | Materials
 |[.materials-links]
@@ -30,7 +30,13 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-* @lesson-link{project-function}
+- @lesson-link{project-function}
+
+|Preparation
+| 
+@preparation{
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
 
 |===
 
@@ -46,39 +52,70 @@ Students will practice describing functions using all 3 representations (in prog
 - What do you Notice? What do you wonder?
 }
 
+@slidebreak
+
 We know that...
 
 @n Every @vocab{function} has a @vocab{Contract}.
 
-[.indentedpara]
-@show{(contract "gt" '("Number" ) "Image")}
+@indented{@show{(contract "gt" '("Number" ) "Image")}}
 
 @n We can write @vocab{examples} illustrating how a @vocab{function} should work to help us identify the pattern.
 
-[.indentedpara]
-@image{images/examples.png, 400}
+@indented{@image{images/examples.png, 400}}
 
 @n @vocab{Function definitions} replace whatever changes in the @vocab{examples} with a @vocab{variable} describing what changes.
 
-[.indentedpara]
-@image{images/gt-fun.png}
+@indented{@image{images/gt-fun.png}}
+
+@slidebreak
 
 @lesson-instruction{
 If we use the correct syntax, we can include all three of these function representations in our @proglang files. Let's take a look!
 
-* Click "Run". @ifproglang{pyret}{ What message do you get back?
-** _Looks shipshape, all 5 tests passed, mate!_
-* What do you think that message means?
-** _The editor has checked to see whether the 5 examples work with the function definition and they do!_
-}
-* Change
-@ifproglang{pyret}{`gt(10) is triangle(10, "solid", "green")` to `gt(15) is triangle(15, "solid", "green")`}
-@ifproglang{wescheme}{`(EXAMPLE (gt 10) (triangle 10 "solid" "green"))` to `(EXAMPLE (gt 10) (triangle 15 "solid" "green"))`}
-* Click "Run". What happens?
-** _The editor lets us know that the function doesn't match the examples so that we can fix our mistake!_
+Click "Run".
 }
 
+@QandA{
+
+@ifproglang{pyret}{ 
+@Q{What message do you get back?}
+@A{Looks shipshape, all 5 tests passed, mate!}
+@Q{What do you think that message means?}
+@A{The editor has checked to see whether the 5 examples work with the function definition and they do!}
+}
+
+@Q{Change +
+@show{(code '(EXAMPLE (gt 10) (triangle 10 "solid" "green")))} +
+to +
+@show{(code '(EXAMPLE (gt 10) (triangle 15 "solid" "green")))}
+}
+@Q{Then click "Run" again.} 
+@Q{What happens?}
+@A{The editor lets us know that it has checked what the function would return for each expression against what the examples say it should and they don't match - it's letting us know so that we can fix our mistake!}
+}
+
+@lesson-point{
 Examples not only help us to identify the pattern to define a function, they also let us double check that the functions we define do what we intend for them to do!
+}
+
+@strategy{The Road to Word Problems}{
+_Modeling_ is the essence of word problems in Algebra: given a particular story, students are asked to (1) identify the underlying functional relationship at work and (2) use that function with the right input, to produce the right output. For students who are comfortable with basic arithmetic, the second step is relatively easy. _Setting up the equation in the first place_, however, is where many students struggle!
+
+Functions can be thought of in multiple representations. In a typical K12 math class, students confront functions in the form of:
+
+- A mapping between Domain and Range
+- A ordered pairs of inputs and outputs
+- A symbolic formula
+- A line on a graph
+
+At this point in the lesson, Bootstrap students will have seen the first three (framed as @vocab{contracts}, @vocab{examples}, and @vocab{definition}).
+
+In the lessons that follow (@lesson-link{functions-dr, Solving Word Problems} in particular), students will learn how to create these representations from scratch, and how to __combine__  into a powerful modeling tool for solving word problems, called the *Design Recipe*. This will require them to understand the connections between representations, and how one can be used as a scaffold or assessment of the others.
+
+For now, however, the goal is simply about understanding _what these representations are_ at a high level, and get comfortable matching them.
+
+}
 
 === Investigate
 
@@ -88,16 +125,9 @@ Think about these three representations of functions by completing:
 - @printable-exercise{match-examples-contracts.adoc}
 - @printable-exercise{match-examples-definitions.adoc}
 - @printable-exercise{create-contracts-examples.adoc}
-
-For more practice, complete these Desmos card sort activities:
-
-- @ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/60aa50b7012000080d4136a0, Matching Examples & Contracts}}
-@ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc9328d18307e2e492ca0d8, Matching Examples & Contracts}}
-- @ifproglang{pyret}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc536c0e2f06d0cd3992c68, Matching Examples & Function Definitions}}
-@ifproglang{wescheme}{@opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/607b618988b17d447fe159e8?collections=5fece3d3e755260caa22904c, Matching Examples & Function Definitions}}
 }
 
-_There are many more materials for students to work with in the Additional Practice section at the end of the lesson!_
+@teacher{There are many more materials for students to work with in the Additional Practice section at the end of the lesson, including a Desmos card sort!}
 
 === Synthesize
 
@@ -112,28 +142,36 @@ Using `gt` as an example, students will write the @vocab{Contract}, @vocab{examp
 === Launch
 
 @lesson-instruction{
-- Turn to @printable-exercise{pages/contracts-examples-definitions.adoc}
+- Turn to @printable-exercise{contracts-examples-definitions.adoc}
 - On the top half of the page, you will see the Contract, examples, and function definition for `gt`.
 - Circle what is changing and label it with the word `size`.
 - Using `gt` as a model, complete the Contract, examples and function definition for `bc`.
+- When you're done, type the Contract, Examples and Definition into the Definitions Area, click “Run”, and make sure all of the examples pass!
 }
 
-When students have completed the above steps, direct them to type the Contract, Examples and Definition into the Definitions Area. They will then click “Run”, and make sure all of the examples pass!
+@teacher{
+Check-in with students to gauge their confidence level. (Thumbs up? Thumbs to the side? Thumbs down?) How confident do students feel about writing 
 
-Check-in with students to gauge their confidence level. (Thumbs up? Thumbs to the side? Thumbs down?) How confident do students feel in writing the @vocab{Contract}, @vocab{examples} and @vocab{function definition} on their own if they were given a word problem about another shape function?
+- the @vocab{Contract}
+- @vocab{examples} 
+- the @vocab{function definition} 
+
+on their own if they were given a word problem about another shape function?
+}
 
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{pages/contracts-examples-definitions-stars.adoc}.
-- Complete @printable-exercise{pages/contracts-examples-definitions-name.adoc}.
+- Complete @printable-exercise{contracts-examples-definitions-stars.adoc}.
+- Complete @printable-exercise{contracts-examples-definitions-name.adoc}.
 }
 
+@teacher{
 As students work, walk around the room and make sure that they are circling what changes in the @vocab{examples} and labeling it with a @vocab{variable} name that reflects what it represents.
+}
 
-@strategy{
-@span{.title}{Optional Project: Create Your Own Function}
-
-In this lesson, students defined functions given a specific set of parameters. In @lesson-link{project-function}, students get additional practice thinking about functions before developing and defining a function of their own.}
+@strategy{Optional Project: Create Your Own Function}{
+In this lesson, students defined functions given a specific set of parameters. In @lesson-link{project-function}, students get additional practice thinking about functions before developing and defining a function of their own.
+}
 
 === Synthesize
 
@@ -142,9 +180,10 @@ In this lesson, students defined functions given a specific set of parameters. I
 
 == Additional Exercises
 
-- @opt-printable-exercise{pages/examples-same-contracts1.adoc}
-- @opt-printable-exercise{pages/examples-same-contracts2.adoc}
-- @opt-printable-exercise{pages/match-contracts-examples1.adoc}
-- @opt-printable-exercise{pages/match-contracts-examples2.adoc}
+- @opt-starter-file{contractsDesmos}
+- @opt-printable-exercise{examples-same-contracts1.adoc}
+- @opt-printable-exercise{examples-same-contracts2.adoc}
+- @opt-printable-exercise{match-examples-contracts2.adoc}
+- @opt-printable-exercise{match-examples-contracts3.adoc}
 
 

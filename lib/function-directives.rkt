@@ -235,6 +235,13 @@
                                               (if indent (make-string (+ indent 2) #\space) "")
                                               lhs-s " is "
                                               rhs-s))))))]
+                           [(eq? a 'list)
+                            (string-append "[list: "
+                              (string-join
+                                (map (lambda (e1)
+                                       (wescheme->pyret e1 #:parens parens)) (rest e))
+                                ", ")
+                              "]")]
                            [else (format "~a{zwsp}({zwsp}~a{zwsp})"
                                          (wescheme->pyret a #:parens parens)
                                          (string-join
@@ -1136,7 +1143,7 @@
     (set! *show-new-question?* #t))
 
   (string-append
-    "[.data-cycle, cols=\"^.^3, .^17, .^3\", stripes=\"none\"]\n"
+    "[.data-cycle, cols=\"^.^3, .^17, ^.^3\", stripes=\"none\"]\n"
     "|===\n"
     "| "
     "image:" dist-root-dir "lib/images/AskQuestions.png[Ask Questions icon]"

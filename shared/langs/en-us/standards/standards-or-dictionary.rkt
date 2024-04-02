@@ -24,7 +24,7 @@
      )
     ("5.OA.B.3"
      "Generate two numerical patterns using two given rules. Identify and analyze relationships between corresponding terms. Form ordered pairs consisting of corresponding terms from the two patterns, and graph the ordered pairs on a coordinate plane."
-    "flags" 
+    "transform-compose-images" 
     )
     ("5.NBT.A"
      "Understand the place value system."
@@ -82,11 +82,11 @@
      )
     ("5.GM.A"
     "Graph points on the coordinate plane to solve real-world and mathematical problems."
-     "flags"
+     "transform-compose-images"
      )
     ("5.GM.A.1"
     "Graph and name coordinate points in the first quadrant using the standard (x, y) notation. Understand the coordinate points values represent the distance traveled along the horizontal x-axis and vertical y-axis."
-     "flags"
+     "transform-compose-images"
      )
     ("5.GM.A.2"	
      "Represent authentic contexts and mathematical problems by graphing points in the first quadrant of the coordinate plane. Interpret the meaning of the coordinate values based on the context of a given situation."
@@ -135,11 +135,11 @@
     ("6.RP.A"
      "Understand ratio concepts and use ratio reasoning to solve problems."
      "bar-and-pie-charts"
-     "flags"
+     "transform-compose-images"
      )
     ("6.RP.A.1"
      "Understand the concept of a ratio and use ratio language to describe a ratio relationship between two quantities."
-     "flags"
+     "transform-compose-images"
      )
     ("6.RP.A.2"
      "Understand the concept of a unit rate in authentic contexts and use rate language in the context of a ratio relationship."
@@ -219,7 +219,7 @@
      "functions-for-character-animation"
      "function-definition-linear"
      "function-composition"
-     "distance-formula"
+     "distance"
      "piecewise-functions-conditionals"
      "defining-values"
      "functions-dr"
@@ -317,12 +317,12 @@
     ; Grade 7
     ("7.RP.A"
      "Analyze proportional relationships and use them to solve real-world and mathematical problems."
-     "flags"
+     "transform-compose-images"
      "making-game-images"
      )
     ("7.RP.A.1"
      "Solve problems in authentic contexts involving unit rates associated with ratios of fractions."
-     "flags"
+     "transform-compose-images"
      )
     ("7.RP.A.2"
      "Recognize and represent proportional relationships between quantities in tables, graphs, equations, diagrams, and verbal descriptions of proportional relationships. Identify the constant of proportionality (unit rate) within various representations."
@@ -376,7 +376,7 @@
      "problem-decomposition"
      "player-animation"
      "inequalities3-sam"
-     "distance-formula"
+     "distance"
      "piecewise-functions-conditionals"
      "functions-dr"
      )
@@ -564,18 +564,18 @@
      )
     ("8.GM.B"
      "Understand and apply the Pythagorean Theorem."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.B.6"
      "Distinguish between applications of the Pythagorean Theorem and its Converse in authentic contexts."
      )
     ("8.GM.B.7"
      "Apply the Pythagorean Theorem in authentic contexts to determine unknown side lengths in right triangles."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.B.8"
      "Apply the Pythagorean Theorem to find the distance between two points in a coordinate system."
-     "distance-formula"
+     "distance"
      )
     ("8.GM.C"
      "Solve real-world and mathematical problems involving volume of cylinders, cones, and spheres."
@@ -697,7 +697,7 @@
      "function-notation"
      "functions-for-character-animation"
      "defining-table-functions"
-     "flags"
+     "transform-compose-images"
      "contracts"
      )
     ("HS.AFN.A.3"
@@ -758,7 +758,7 @@
      )
     ("HS.NQ.B"
      "Attend to units of measurement needed to solve problems through quantitative reasoning and mathematical modeling."
-     "flags"
+     "transform-compose-images"
      )
     ("HS.NQ.B.3"	
      "Use reasoning to choose and interpret measurement units consistently in formulas, graphs, and data displays, as a way to understand problems and to guide the solution of multi-step problems."
@@ -824,7 +824,7 @@
      )
     ("HS.GM.D.14"
      "Use the coordinate plane to determine parallel and perpendicular relationships, and the distance between points."
-     "distance-formula"
+     "distance"
      )
     ; High School Standards Data Reasoning
     ("HS.DR.A"	

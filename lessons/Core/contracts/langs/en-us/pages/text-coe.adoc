@@ -1,0 +1,72 @@
+= Composing with Circles of Evaluation 
+
+++++
+<style>
+table .autonum::after { content: ')' !important; }
+
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+== Notice and Wonder
+
+@do{
+(define exp1 '(rotate 90 (text 150 "Diego" "yellow")))
+(define exp2 '(rotate 45 (text 90 "Shriram" "purple")))
+
+}
+
+_Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Let's use Circles of Evaluation to look at the structure:_
+
+@vspace{1ex}
+
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+|===
+
+|We can start by generating the Diego image.
+|
+|And then use the `rotate` function to rotate it 90 degrees.
+
+| @show{(coe '(text "Diego" 150 "yellow"))}  | &rarr; 	| @show{(coe exp1)}
+
+| @show{(code '(text "Diego" 150 "yellow"))} | 			| @show{(code exp1)}
+
+|===
+
+
+@n What do you Notice? @fitb{}{}
+
+@fitb{}{}
+
+@n What do you Wonder?@fitb{}{}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+== Let's Rotate an Image of Your Name!
+
+_Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal..._
+
+@vspace{1ex}
+
+[cols=".<1a, .<1a", stripes="none"]
+|===
+
+| @n Draw the circle of evaluation to generate the image of your name in your favorite color.
+
+| @n Draw the circle of evaluation to `rotate` it so that it's diagonal.
+
+^| @showsoln{(coe '(text "Shriram" 45 "purple"))}  	^| @showsoln{(coe exp2)}
+@ifnotsoln{@vspace{35ex}}
+
+| @n Convert the Circle of Evaluation to code.		 | @n Convert the Circle of Evaluation to code.
+
+| @showsoln{(code '(text "Shriram" 45 "purple"))} 	 | @showsoln{(code exp2)}
+ @ifnotsoln{@vspace{3ex}}
+|===
+
+
+
+

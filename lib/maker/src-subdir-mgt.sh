@@ -81,6 +81,7 @@ function set_up_lesson_dir() {
   local firstproglang=$3
   cd "$lessonNamePl"
   mkdir -p .cached
+  rm -f .cached/.page.starterfiles
   touch .cached/.proglang-$pl
   echo $pl > .cached/.record-proglang
   echo $superdir > .cached/.record-superdir

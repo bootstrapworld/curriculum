@@ -315,9 +315,11 @@ build:
   alphanumeric string. Some mnemonic values are `yes`, `y`, `true`, `t`,
   `1`.
 
+- `TPC=n` -- We use puppeteer-cluster to generate the thousands of PDF files use in the student workbooks. By default, the cluster runs 2 tabs per core (TPC). This can be set to a higher number via this commandline argument, gaining speed at the cost of possible race-conditions.
+
 [CAUTION]
 --
-`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, and `DEBUGADOC` are _makefile_
+`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, `DEBUGADOC`, and `TPC` are _makefile_
 variables, *not* shell environment variables! You cannot set them as
 environment variables and expect `make` to pick them up. To set,
 `NATLANG`, say, to `es-mx`, use
@@ -619,8 +621,12 @@ On systems with `apt` (Ubuntu, WSL), the easiest way to install the
 latest
 Racket is:
 +
-  sudo apt-add-repository ppa:/plt/racket
+  sudo apt-add-repository ppa:plt/racket
   sudo apt install racket
++
+or
++
+  sudo snap install racket
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
@@ -636,9 +642,9 @@ Racket is:
     https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
     to install the Node Version Manager. (Use the `curl` as you've
     already installed `curl`.)
-  - Do `nvm install 16` followed by `nvm use 16` to use version 16,
+  - Do `nvm install 19` followed by `nvm use 19` to use version 19,
     which is OK for now.
-  - Note: the node `canvas` package is extremely finicky with versions of node. If you are getting installation errors about `canvas` or `node-gyp`, use node v16!
+  - Note: the node `canvas` package is extremely finicky with versions of node. If you are getting installation errors about `canvas` or `node-gyp`, use node v19!
 
 * Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
@@ -829,10 +835,9 @@ directive: `@keywords{PEMDAS, GEMDAS}`. Multiple keywords are comma-separated.
 Use
 
 ----
-@strategy{
-  @span{.title}{Title}
+@strategy{This is the title}{
 
-  Some _body_ text.
+  This is some _body_ text.
 
 }
 ----
@@ -1061,6 +1066,17 @@ that content should not be part of the slide:
 To specify that it should show up only in the slide:
 
   @ifslide{This content is slide-specific}
+
+The slide converter will use the content of the lesson text to infer
+the slide layout to use. While these heuristics may vary slightly over 
+time, the general rules are:
+
+- The slide layout will be partially determined by whether the text occurs within a Launch, Investigate, or Synthesize section
+- @teacher{...} and "Common Misconceptions" will be auto converted into slide notes
+- If the text has a right-aligned image, one of the "R" templates will be used
+- If the text has a center-aligned image, one of the "C" templates will be used
+- If the text has no image, one of the standard full-text templates will be used 
+
 
 ===== Student- vs solution mode
 
