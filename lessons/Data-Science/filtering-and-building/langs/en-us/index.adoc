@@ -119,19 +119,19 @@ Confirm that students understand the following key ideas:
 - `build-column` consumes a Table, the name of a new column, and a __function that consumes Rows__. It produces a new tble with that new column, and fills in the values by applying the function to every Row.
 
 @lesson-instruction{
-- How would you filter and build using the Animals Dataset? 
-- For practice, complete @printable-exercise{what-table-do-we-get.adoc}.
+- Let's think about what filtering and building would look like with Animals at the shelter. Match the code on @printable-exercise{what-table-do-we-get.adoc} with the descriptions of the tables they would produce.
 }
 
-@teacher{@opt{Give students some practice filtering and building using the @starter-file{animals}!
+@teacher{@opt{Give students some practice filtering and building using the @starter-file{putting-it-all-together}! +
+Here are some options:
 
-- Start by adding these helper functions @opt-printable-exercise{design-recipe-1.adoc} to the Definitions Area.
-- Then follow the directions at the bottom of the page to define new tables called `cats` and `kilos`.
-- Then complete @opt-printable-exercise{design-recipe-1.adoc}, defining your own helper functions for the relevant tables.
+- Practice using the Design Recipe to write new helper functions on @opt-printable-exercise{design-recipe-1.adoc} and @opt-printable-exercise{design-recipe-2.adoc}.
+- Practice using @opt-printable-exercise{coe-table-old-cats.adoc}, @opt-printable-exercise{coe-box-plot-young-dog-kilos.adoc, a Box Plot}, or @opt-printable-exercise{coe-scatterplot-old-dogs.adoc, a Scatter Plot}.
+- @opt-printable-exercise{putting-it-all-together.adoc, A collection of prompts} with less scaffolding to practice defining new tables, defining new helper functions, and building displays.
 }}
 
 === Common Misconceptions
-- Students often think that these functions __change__ the table! In Pyret, all table functions produce a __brand new table__. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
+- Students often think that these functions __change__ the table! In Pyret, all table functions produce a __brand new table__. If we want to save that table and use it later, we need to define it. For example: `dogs = filter(animals-table, is-dog)`.
 - Students might mistakenly think we need the `species` column to answer the question, "Which cat is the heaviest?". While we do look at the species column to filter the table, we're not thinking about columns until __after__ we've built a new table of just the cat rows, at which point `species` would be "cat" for all of the rows that we're working with!
 - Questions like "Who is the oldest?" or "What is the most?" require looking at __every row__ in the table.
 
