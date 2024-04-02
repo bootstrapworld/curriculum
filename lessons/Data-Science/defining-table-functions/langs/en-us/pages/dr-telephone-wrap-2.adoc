@@ -3,35 +3,38 @@
 @n Record the 3 definitions from your group's Design Recipe Telephone set here:
 
 @ifnotsoln{
-@indented{
+```
 fun is-old(r): @fitb{45em}{} end
 fun is-cat(r): @fitb{45em}{} end
 fun kilos(r): @fitb{45em}{} end
-}
+```
 }
 
 @ifsoln{
-fun is-old(r): r["age"] > 10 end +
-fun is-cat(r): r["species"] == "cat" end +
+```
+fun is-old(r): r["age"] > 10 end
+fun is-cat(r): r["species"] == "cat" end
 fun kilos(r): 2.2 * r["pounds"] end
+```
 }
 
 @n Draw the Circles of Evaluation for how you would combine the functions above to:
 
-@indented{**Make a new table of just the old cats at the shelter.**
+@indented{
+**Make a new table of just the old cats at the shelter.**
 }
 
 @do{
 (define exp1 '(build-column (filter (filter animals-table is-cat) is-old) "kilos" kilos))
 }
 
-@showsoln{(coe exp1)}}
+@showsoln{(coe exp1)}
 
 @ifnotsoln{@vspace{70ex}}
 
 @n Translate the Circles of Evaluation above into the code you'll type into @proglang.
 
-@fitb{}{@showsoln{(code exp1)}}}
+@fitb{}{@showsoln{(code exp1)}}
 
 @fitb{}{}
 
