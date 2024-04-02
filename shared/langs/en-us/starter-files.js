@@ -326,7 +326,7 @@ const DSBasics = {
     }
   },
   "putting-it-all-together": {
-    "title": "Animals Dataset with Helper Functions",
+    "title": "Animals with Helper Functions Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU&v=0c33ff0"
     }
@@ -341,7 +341,7 @@ const DSBasics = {
       }
     },
   "food-sheet": {
-    "title": "Global Food Supply & Production Spreadsheet",
+    "title": "Global Food Supply & Production Dataset",
     "pyret": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
     },
