@@ -179,6 +179,7 @@
         '())))
 
 (define *starter-files-used* '())
+(define *opt-starter-files-used* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -1321,6 +1322,7 @@
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
   (set! *starter-files-used* '())
+  (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
@@ -1866,7 +1868,7 @@
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
                                               [else
-                                                (let* ([newly-added? (add-starter-file lbl)]
+                                                (let* ([newly-added? (add-starter-file lbl #:opt? opt?)]
                                                        [starter-file-title
                                                          (regexp-replace* #rx","
                                                            (or (and p (hash-ref p 'title #f))
@@ -2291,16 +2293,28 @@
           #:exists 'replace)
         )
 
-      (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
-        (let ([sf-file (if *lesson-plan*
-                           (build-path *containing-directory* ".cached" ".index.starterfiles")
-                           (format "distribution/~a/lessons/~a/.cached/.page.starterfiles"
-                                   *natlang* *lesson*))])
-          (call-with-output-file sf-file
-            (lambda (o)
-              (for ([sf (reverse *starter-files-used*)])
-                (display sf o) (newline o)))
-            #:exists (if *lesson-plan* 'replace 'append))))
+      (when (or *lesson-plan* *lesson*)
+        (when (pair? *starter-files-used*)
+          (let ([sf-file (if *lesson-plan*
+                             (build-path *containing-directory* ".cached" ".index.starterfiles")
+                             (format "distribution/~a/lessons/~a/.cached/.page.starterfiles"
+                                     *natlang* *lesson*))])
+            (call-with-output-file sf-file
+              (lambda (o)
+                (for ([sf (reverse *starter-files-used*)])
+                  (display sf o) (newline o)))
+              #:exists (if *lesson-plan* 'replace 'append))))
+
+        (when (pair? *opt-starter-files-used*)
+          (let ([sf-file (if *lesson-plan*
+                             (build-path *containing-directory* ".cached" ".index.optstarterfiles")
+                             (format "distribution/~a/lessons/~a/.cached/.page.optstarterfiles"
+                                     *natlang* *lesson*))])
+            (call-with-output-file sf-file
+              (lambda (o)
+                (for ([sf (reverse *opt-starter-files-used*)])
+                  (display sf o) (newline o)))
+              #:exists (if *lesson-plan* 'replace 'append)))))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
@@ -2693,9 +2707,17 @@
   ; (printf "doing add-prereq/check ~s\n\n" sym)
   (add-prereq sym #:check? check-in-langtable?))
 
-(define (add-starter-file sf)
+(define (add-starter-file sf #:opt? [opt? #f])
+  ((if opt? add-opt-starter-file add-reqd-starter-file) sf))
+
+(define (add-reqd-starter-file sf)
   (cond [(member sf *starter-files-used*) #f]
         [else (set! *starter-files-used* (cons sf *starter-files-used*))
+              #t]))
+
+(define (add-opt-starter-file sf)
+  (cond [(member sf *opt-starter-files-used*) #f]
+        [else (set! *opt-starter-files-used* (cons sf *opt-starter-files-used*))
               #t]))
 
 (define holes-to-underscores
