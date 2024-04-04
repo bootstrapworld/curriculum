@@ -1029,6 +1029,12 @@ const Reactive = {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
   },
+  "bicycle": {
+    "title": "Bicycle Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Kem9gB3o8_DyEvZrPHmuGJSCBRSUH7He"
+    }
+  }
 }
 
   
