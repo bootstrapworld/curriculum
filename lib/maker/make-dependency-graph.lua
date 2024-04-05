@@ -208,6 +208,8 @@ for _,lesson in ipairs(lessons) do
     if slidesURL then
       o:write('    slides: "' .. slidesURL .. '",\n')
     end
+  else
+    o:write('    slides: false,\n')
   end
   copy_file_to_port(standards_file, o)
   o:write(' },\n')
