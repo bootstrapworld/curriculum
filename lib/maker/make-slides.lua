@@ -20,6 +20,7 @@ local terror = make_error_function(errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
+
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
@@ -33,6 +34,12 @@ local function nicer_case(s)
 end
 
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
+
+local slides_id_file = 'slides-' .. proglang .. '.id'
+
+if not file_exists_p(slides_id_file) then
+  print('WARNING: Lesson ' .. os.getenv('PWD') .. ' missing ' .. slides_id_file)
+end
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
