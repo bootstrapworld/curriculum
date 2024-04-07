@@ -39,7 +39,7 @@ Students learn how to create a @vocab{Testing Table}, which is small enough to r
 === Launch
 One of the main purposes of Data Science is to take a representative sample from a larger population, and use information from the sample to infer what’s true about the whole population.
 
-Data scientists usually think in terms of samples that best serve the purpose of __performing inference__. +
+Data scientists usually think in terms of samples that best serve the purpose of _performing inference_. +
 Samples should be:
 
 - representative of the entire population
@@ -73,7 +73,7 @@ and more.
 But programmers are only human, and everyone makes mistakes! 
 }
 
-With so-called "A.I. Code Generators" out there writing more and more code for us, we need better and better ways of __verifying__ that code does exactly what it claims to do!
+With so-called "A.I. Code Generators" out there writing more and more code for us, we need better and better ways of _verifying_ that code does exactly what it claims to do!
 
 How can we trust that our code is correct?
 
@@ -82,13 +82,13 @@ How can we trust that our code is correct?
 Programmers need to think in terms of @vocab{Testing Tables} that best serve the purpose of verifying that their code does what it’s supposed to: The Tables should be designed to call attention to any imperfections in the code’s instructions.
 
 @lesson-point{
-A good @vocab{Testing Table} should be __representative__ of the population, and __relevant__ to what’s being analyzed. }
+A good @vocab{Testing Table} should be _representative_ of the population, and _relevant_ to what’s being analyzed. }
 
 @slidebreak
 
 A good @vocab{Testing Table} should have...
 
-- __At least__ the columns that matter -- whether we’ll be ordering or filtering by those columns.
+- _At least_ the columns that matter -- whether we’ll be ordering or filtering by those columns.
 - Enough rows to include different circumstances that are relevant to the task at hand. For instance, if our code is supposed to extract certain cats from the animals table, our Testing Table should include at least one animal that’s not a cat.
 - Rows that aren’t already sorted, if our analysis is supposed to sort for us.
 
@@ -97,15 +97,15 @@ A good @vocab{Testing Table} should have...
 @QandA{
 Consider the following scenario: +
 An AI writes code that claims to filter out any shelter data to show only the cats.
-@Q{Could we test it using a Table that __already__ contains only cats?}
-@A{No! The AI's code might do nothing at all and just return the Table it was given. It would give __the right answer for the wrong reason__! We need to find out if it actually removes non-cat Rows.}
+@Q{Could we test it using a Table that _already_ contains only cats?}
+@A{No! The AI's code might do nothing at all and just return the Table it was given. It would give _the right answer for the wrong reason_! We need to find out if it actually removes non-cat Rows.}
 @Q{Could we test it using a Table that has no cats at all?}
-@A{No! The AI's code might always return a table with no rows (regardless of species!), so giving it a Table without cats will give __the right answer for the wrong reason__! We need to find out if it actually keeps rows for cats.}
+@A{No! The AI's code might always return a table with no rows (regardless of species!), so giving it a Table without cats will give _the right answer for the wrong reason_! We need to find out if it actually keeps rows for cats.}
 @Q{Could we test it using a Table that has only cats and dogs?}
 @A{No! Maybe the AI's code just removes dogs. We need to see if it removes other species as well.}
 }
 
-Verifying that code does what it is designed to do is an important part of checking our work! That's why writing examples is so valuable: it's a chance to think about how the program __should__ work, without worrying as much about __how__ it works.
+Verifying that code does what it is designed to do is an important part of checking our work! That's why writing examples is so valuable: it's a chance to think about how the program _should_ work, without worrying as much about _how_ it works.
 
 @lesson-instruction{
 An AI writes a function called `fixed-cats` and _claims_ that, given a table of animals, it produces a table with only fixed cats.
