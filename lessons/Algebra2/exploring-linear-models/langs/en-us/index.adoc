@@ -116,7 +116,7 @@ We suspect that age affects the adoption time, so we'll use `age` as our @vocab{
 
 @strategy{Why not Independent/Dependent?}{
 
-Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are __dependent__ or they are __independent__. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are **causally connected**: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
+Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are __dependent__ or they are __independent__. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are *causally connected*: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
 }
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
@@ -176,7 +176,7 @@ Students identify and make use of @vocab{correlations} in scatter plots. They le
 
 Scatter plots let us visualize the relationship between two quantitative columns. If no relationship exists, the points in the scatter plot just appear as a shapeless cloud. But if there __is__ a relationship, the points will form some kind of pattern. When we build scatter plots, we are searching for patterns between two quantitative variables.
 
-These patterns can be described by three terms: **form**, **direction**, and **strength**.
+These patterns can be described by three terms: *form*, *direction*, and *strength*.
 
 @slidebreak
 
@@ -187,8 +187,8 @@ These patterns can be described by three terms: **form**, **direction**, and **s
 | @image{images/B.gif, 250}
 
 | Some patterns are *linear*, and cluster around a straight line sloping up or down.
-| Some patterns are **nonlinear**, and may look like some kind of curve.
-| And sometimes there is **no relationship** or pattern at all!
+| Some patterns are *nonlinear*, and may look like some kind of curve.
+| And sometimes there is *no relationship* or pattern at all!
 |===
 
 @lesson-point{
@@ -203,11 +203,11 @@ These patterns can be described by three terms: **form**, **direction**, and **s
 
 If the relationship clusters around a straight line, we can talk about __direction.__
 
-@right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
+@right{@image{images/C.gif, 200 }}*Positive*: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
 
 @clear
 
-@right{@image{images/A.gif, 200}}**Negative**: The line slopes __down__ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
+@right{@image{images/A.gif, 200}}*Negative*: The line slopes __down__ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
 @slidebreak
 
@@ -223,11 +223,11 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 @vocab{Strength} indicates how closely the two variables are related.
 }
 
-@right{@image{images/A.gif, 200}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+@right{@image{images/A.gif, 200}}*A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
-@right{@image{images/1a.gif, 200}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very __loosely__ around the line.
+@right{@image{images/1a.gif, 200}}*A relationship is weak if x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very __loosely__ around the line.
 
 === Investigate
 
@@ -290,7 +290,7 @@ We'd expect students to be able to surface much of the following:
 }
 
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
-**If the rate of change is constant, the relationship is linear.**
+*If the rate of change is constant, the relationship is linear.*
 
 @QandA{
 @Q{Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
@@ -380,7 +380,7 @@ Armed with their linear models, students confront the notion of "model fitness".
 
 The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are __patterns__, which we can describe with __models__. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But which is the best model?
 
-**How do we even measure how good a model is in the first place?**
+*How do we even measure how good a model is in the first place?*
 
 @slidebreak
 
@@ -391,7 +391,7 @@ The real world is noisy and chaotic! But sometimes, somewhere in that noise and 
 
 Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{__If you're working with a printed workbook, the contracts pages are included in the back.__} Like `scatter-plot`, it consumes columns for our __labels__, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
 
-@teacher{Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to **scientific notation**. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
+@teacher{Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to *scientific notation*. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
 
 @slidebreak
 
@@ -461,10 +461,10 @@ If you'd like to have students dig deeper into linear regression, there's an @le
 
 @slidebreak
 
-When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a **$5613** increase in median household income.__
+When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a *$5613* increase in median household income.__
 
 @lesson-instruction{
-- The @math{S} value is **$36,300**. Does that mean the model fits well?
+- The @math{S} value is *$36,300*. Does that mean the model fits well?
 - As a class or in groups, discuss and be ready to share back.
 }
 
@@ -482,7 +482,7 @@ Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,3
 These models are useless if we can't make sense of them!
 
 - For practice building other relationships in the data, complete @printable-exercise{interpreting-linear-models.adoc}.
-- @opt{For more practice, build linear models for **other** relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. }
+- @opt{For more practice, build linear models for *other* relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}, and write up your findings in the extra space on @printable-exercise{interpreting-linear-models.adoc}. }
 }
 
 === Synthesize
@@ -500,7 +500,7 @@ Students are reminded of the three forms of linear models available to us, discu
 
 When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
 
-So far, we've focused on models using the **Slope-Intercept** form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment.
+So far, we've focused on models using the *Slope-Intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment.
 
 But depending on the information we have available to us - or who we're writing this model for - we might want to use __other__ forms of linear models. Fortunately, we can always translate any model into another!
 
@@ -527,9 +527,9 @@ You may already be familiar with the different forms of linear models available 
 
 @slidebreak
 
-(1) **Slope-Intercept Form** makes it really easy to read the slope and y-intercept.
-(2) **Point-Slope Form** makes it easy to find the equation of the line given a single point and slope.
-(3) **Standard Form** makes it easy to find the x- and y-intercepts of the line.
+(1) *Slope-Intercept Form* makes it really easy to read the slope and y-intercept.
+(2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope.
+(3) *Standard Form* makes it easy to find the x- and y-intercepts of the line.
 
 @teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
 
