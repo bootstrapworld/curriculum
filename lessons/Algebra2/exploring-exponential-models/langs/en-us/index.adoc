@@ -77,14 +77,14 @@ A college is looking at enrollment and housing data for a sample of students who
 
 It __looks__ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
 
-But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, __and__ they generally have not picked a major. **We need to take the __year__ into account.**
+But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, __and__ they generally have not picked a major. *We need to take the __year__ into account.*
 
 [cols="^1a,^1a", strips="none", grid="none", frame="none"]
 |===
 |
 [cols="^1a,^1a,^1a,^2a", options="header"]
 !===
-! **Freshmen**     ! # On Campus     ! # Off Campus  ! % On Campus
+! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
 ! Undecided      ! 100             ! 20            ! 100/120 = 83%
 ! Decided        !  50             ! 10            !  50/60  = 83%
 !===
@@ -92,7 +92,7 @@ But there's a third variable hiding in the background: freshmen college students
 |
 [cols="^1a,^1a,^1a,^2a", options="header"]
 !===
-! **Non-Freshmen** ! # On Campus     ! # Off Campus  ! % On Campus
+! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
 ! Undecided      !  20             ! 60            !  20/80 = 25%
 ! Decided        !  30             ! 90            !  30/120 = 25%
 !===
@@ -100,7 +100,7 @@ But there's a third variable hiding in the background: freshmen college students
 
 @slidebreak
 
-Because **year at school** is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is __no correlation__ between between deciding on a major and living on- or off-campus.
+Because *year at school* is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is __no correlation__ between between deciding on a major and living on- or off-campus.
 
 How is this possible? When a third variable is lurking in the data, it can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
 
@@ -175,7 +175,7 @@ Working in pairs or small groups, complete @printable-exercise{filtering-by-stat
 
 @slidebreak
 
-The `filter` function consumes a Table and **a helper function!** The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
+The `filter` function consumes a Table and *a helper function!* The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
 
 @teacher{
 @opt{While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
@@ -241,7 +241,7 @@ Are linear models a good fit for this data? Why or why not?
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty small @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the __best-possible fit__ with them.  **It's growing too fast to be fit with a linear model that grows at a constant rate!**
+@right{@image{images/MA-covid-linear.png, 300}} If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty small @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the __best-possible fit__ with them.  *It's growing too fast to be fit with a linear model that grows at a constant rate!*
 
 @teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide so that students are looking at the correct screen.}
 
@@ -282,13 +282,13 @@ Having identified that the Covid scatter plot is neither linear nor quadratic, s
 Let's review what we know about the behavior of the models we've seen so far:
 
 @right{@image{images/difference-table-linear.png}}Remember that linear functions grow by __fixed intervals,__ so the rate of change is __constant__. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
-**If the "growth" is constant, the relationship is linear.**
+*If the "growth" is constant, the relationship is linear.*
 
 @clear
 @slidebreak
 
 @right{@image{images/difference-table-quadratic.png}}Quadratic functions grow by intervals that __increase by fixed amounts!__ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning __the function is definitely not linear!__ However, if we take a look at the __difference between those differences__(shown in red), we're back to constant growth! +
-**If the "growth of the growth" is constant, the relationship is quadratic.**
+*If the "growth of the growth" is constant, the relationship is quadratic.*
 
 @clear
 
@@ -310,7 +310,7 @@ Exponential functions grow so rapidly that looking for "what is __added__ to y?"
 {empty} +
 The only way to talk about their growth is to start noticing "what is y being __multiplied__ by?" +
 {empty} +
-**In this case, we can see that the y-values are doubling each time!**
+*In this case, we can see that the y-values are doubling each time!*
 
 @clear
 @slidebreak
@@ -336,7 +336,7 @@ Review students answers, and then debrief via class discussion. Invite students 
 
 @slidebreak
 
-**The base of an exponential function (@math{b})** must **always be positive**, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
+*The base of an exponential function (@math{b})* must *always be positive*, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
 
 [cols="^3a,^3a,^3a", stripes="none", options="header"]
 |===
@@ -349,13 +349,13 @@ Review students answers, and then debrief via class discussion. Invite students 
 | @image{images/decay.png, 150}
 
 | @math{b > 1} +
-When the base is **larger** than 1, the function starts flat and then grows by the "percentage greater than 1". A base of 1.25 - @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{growth factor}, since it determines how quickly the function grows.
+When the base is *larger* than 1, the function starts flat and then grows by the "percentage greater than 1". A base of 1.25 - @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{growth factor}, since it determines how quickly the function grows.
 
 | @math{b = 1} +
-When the base is **equal** to 1, the function stays flat without any growth of all (raising 1 to __any__ power will always produce 1!).
+When the base is *equal* to 1, the function stays flat without any growth of all (raising 1 to __any__ power will always produce 1!).
 
 | @math{0 < b < 1} +
-When the base is **smaller** than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{decay factor}, since it determines how quickly the function shrinks.
+When the base is *smaller* than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{decay factor}, since it determines how quickly the function shrinks.
 |===
 
 @slidebreak
@@ -368,7 +368,7 @@ An exponential function with a @vocab{growth factor} will always start close to 
 
 @slidebreak
 
-**Adjusting @math{k} shifts the asymptote up and down**, along with the rest of the exponential curve that approaches it.
+*Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
 
 @lesson-instruction{
 Use the third slide of @starter-file{alg2-covid-desmos} to complete the last section ("initial value") of @printable-exercise{graphing-models.adoc}.
@@ -376,11 +376,11 @@ Use the third slide of @starter-file{alg2-covid-desmos} to complete the last sec
 
 @slidebreak
 
-**The y-intercept appears __differently__ in exponential function definitions than in linear and quadratic definitions:**
+*The y-intercept appears __differently__ in exponential function definitions than in linear and quadratic definitions:*
 
 - In both linear and quadratic functions, we could cross out the linear or quadratic term when @math{x = 0} (because anything multiplied by zero is zero) and the constant term being added or subtracted in the equation was our y-intercept. 
 - But, because any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, part of the exponential term __remains__, for example: @hspace{2em} @math{4(2^0) = 4(1) = 4}. 
-- As a result, **the y-intercept of an exponential function is @math{a + k}**.
+- As a result, *the y-intercept of an exponential function is @math{a + k}*.
 - When there is no @math{k}-term being added or subtracted, the coefficient @math{a} is the initial value where @math{x = 0}. 
 - And, if @math{a} is "missing", the value of the coefficient is @math{1}. @hspace{2em}__After all,__ @math{2^x = 1(2^x)} +
 That means that if we don't see @math{a} or @math{k} in an exponential equation, the y-intercept of the function is 1.
