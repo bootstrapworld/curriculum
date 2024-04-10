@@ -49,7 +49,7 @@ Think about those three scenarios: recommending videos, classifying loan request
 
 A *decision tree* is a type of machine learning that categorizes and makes predictions based on how a __previous__ set of questions was answered. Decision trees are a form of __supervised__ machine learning because the computer is trained on data that contains the desired categorizations.
 
-Decision trees pop up everywhere because they are flexible and easy to interpret--and they are flexible and easy to interpret because they function similarly to human thinking and decision-making.
+Decision trees pop up everywhere because they are flexible and easy to interpret—and they are flexible and easy to interpret because they function similarly to human thinking and decision-making.
 
 As a class, we are going to play a __simplified__ version of 20 Questions to help us understand the sort of thinking that decision trees imitate.
 
@@ -73,9 +73,11 @@ Here's how our game works:
 }
 
 @teacher{
-@right{@image{images/tree1.png, 70}}
 
-The focus of this activity is to show students the process of building a *decision tree*. The sample decision tree - whose growth is shown in the subsequent diagrams - begins with the secret word "knife". If you want your tree to look similar to the sample, consider choosing "knife" and "helping" students to notice that there are three utensils on the list of items.  There is no need for your class' decision tree to be an exact copy of the sample provided.
+The focus of this activity is to show students the process of building a *decision tree*. The diagram on the right models a 20 questions game with the secret word "knife". It is *not* a complete decision tree, just a portion. The remainder of the tree grows over the course of the lesson. If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items.  There is no need for your class diagrams to be exact copies of the samples provided.
+
+@right{@image{images/tree1.png, 200}}
+
 
 The first round of this game will produce a diagram similar to the one on the right. Your diagram will probably have two or three arrows, depending on the questions your students pose.
 
@@ -83,7 +85,7 @@ Important decision tree conventions:
 
 - Be sure to label arrows with "yes" or "no".
 
-- "Yes" arrows point to the left, and "no" arrows point to the right.
+- "Yes" arrows point to the left, and "no" arrows point to the right. (The chain of arrows in the diagram is pointing 45 degrees to the left because both questions were answered "yes".)
 
 }
 
@@ -98,9 +100,11 @@ Let's play _another_ round of the game - but this time, you will try to guess on
 
 @teacher{
 
-@right{@image{images/tree2.png, 200}}
+@right{@image{images/tree2.png, 300}}
 
-As students ask questions, add to your diagram. Round 2 of this game will produce a diagram similar to the one on the right. Notice that the topmost question - "is it a utensil?" - splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
+As students ask questions, add to your diagram.
+
+Round 2 of this game will produce a diagram similar to the one on the right. Notice that the topmost question—"is it a utensil?"—splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
 
 Be sure to always label arrows, as this is standard convention and improves readability.
 
@@ -130,11 +134,13 @@ Let's identify the root, branches, nodes, and leaves on our tree so far.
 
 @teacher{
 
-@right{@image{images/tree3.png, 300}}
+@right{@image{images/tree3.png, 350}}
 
-One possible completed tree is on the right. To create a different tree, students can start with any of the questions from levels 2 or 3 - or they can generate an entirely different starting question.
+One possible completed tree is on the right.
 
-As students finish, invite them to draw their trees on the board.
+To create a different tree, students can start with any of the questions from levels 2 or 3, or they can generate an entirely different starting question.
+
+As students finish, invite them to draw their trees on the board. Ideally, you will have a wide assortment of trees! If students are not developing interesting trees, urge them to think of *entirely* different questions than those posed in the sample tree.
 
 }
 
@@ -147,7 +153,7 @@ As students finish, invite them to draw their trees on the board.
 
 You might be wondering: Would it be possible to make this tree any more efficient? If so, why not?!
 
-Let's think about - and then test - two possible trees: the one on the left is more efficient, and the one on the right is less efficient.
+Let's think about and test two possible trees: the one on the left is more efficient, and the one on the right is less efficient.
 
 
 @QandA{
@@ -164,7 +170,7 @@ As we increase the tree's efficiency, we can lose accuracy. Conversely, if we fo
 @A{The tree will label a knife as a knife; it will not know what to do with a chopstick... maybe it's a mug?; and it will call a spork a fork!}
 }
 
-Decision trees can accurately label and categorize the inputs that they are trained to label and categorize! This tree - which was 100% accurate on the trained dataset - falters when we offer it inputs that are either *unknown*, like the chopstick, or *ambiguous*, like the spork. In both instances, the tree offers up its best guess at a label. __The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!__
+Decision trees can accurately label and categorize the inputs that they are trained to label and categorize! This tree—which was 100% accurate on the trained dataset—falters when we offer it inputs that are either *unknown*, like the chopstick, or *ambiguous*, like the spork. In both instances, the tree offers up its best guess at a label. __The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!__
 
 
 === Synthesize
@@ -172,30 +178,37 @@ Decision trees can accurately label and categorize the inputs that they are trai
 
 As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. If you were asked to create a decision tree to identify common animals or foods, you could probably do that without much difficulty.
 
-Computers, however, build decision trees using only the data we provide it.
+Computers, however, build decision trees using only the data we provide... and that data can sometimes be messy. As a result, we may end up with models that are not 100% accurate.
 
-One of the oldest datasets studied by machine learning researchers is a dataset all about irises. It includes measurements of the different parts of 150 iris plants. The dataset provides on each iris' species (setosa, versicolor, and virginica), sepal length, sepal width, petal length, and petal width. It would probably be a lot more challenging to build a decision tree from this data!
+Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the measurements of 150 different plants' sepal length, sepal width, petal length, and petal width. It would be far more challenging to build this tree than the one we just made that classifies common tableware.
 
-@image{images/iris-data.png}
+@center{@image{images/iris-data.png}}
 
-(British statistician and biologist Ronald Fisher first published his findings about this dataset in 1936.)
+(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. Today, this dataset is considered a go-to example dataset useful for illustrating a wide range of problems in data science and machine learning.)
 
 
 == Decision Trees from Training Datasets
 
 === Launch
 
-We have already built some extremely simple decision trees. We have a sense of heirarchical structure, flexibility, and versatility of decision trees. We know that decision trees sometimes fail when provided with ambiguous or unknown data. We understand the risk of overfitting our data, or building a tree that can only succeed with a narrow dataset.
+We have already built some extremely simple decision trees. We have a sense of the heirarchical structure, flexibility, and versatility of decision trees. We know that decision trees sometimes fail when provided with ambiguous or unknown data. We understand the risk of overfitting our data (building a model that can only succeed on narrow set of data).
 
 We have *not* yet considered how useful, powerful decision trees built from large datasets can make relatively accurate predictions, recommendations, and diagnoses.
 
-The key to building an effective decision tree is to decide - at every level and every node - which attributes are the most informative ones to ask questions about.
+The key to building an effective decision tree is to decide—at every level and every node—which attributes are the most informative ones to ask questions about.
 
-...but how do we make such decisions?! Nowadays, there is a variety of tree-building software; the algorithm used by this software, however, is relatively straightforward.
+...but how do we make such decisions?!
+
+It turns out, there's an algorithm for that, and it's relatively straightforward.
+
 
 === Investigate
 
-We're going to create a decision tree that recommends different apps to people based on their age and sex.
+Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, advertisements for sneakers are lurking in every single corner of the internet that you visit?
+
+Is it a coincidence? No.
+
+We're going to create a decision tree that predicts whether or not different customers at an online store will purchase a video game or not.
 
 To do so, we will train the computer using the dataset below (also available on @handout{decision-tree-data.adoc}), which tells us which app (tiktok, youtube, and facebook) six different individuals prefer.
 
