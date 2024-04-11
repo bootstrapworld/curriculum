@@ -139,7 +139,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(handoutPages_file) then
     i = io.open(handoutPages_file)
     for line in i:lines() do
-      pages_txt = pages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
+      handoutPages_txt = handoutPages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
