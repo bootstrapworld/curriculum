@@ -46,12 +46,9 @@
 Students are introduced to the notion of _spread_ in a dataset. They learn about quartiles, box plots, and how to use them to talk about spread.
 
 === Launch
-When we explored measures of center, we tried to answer a question about "typical" values.  
+When we explored measures of center, we tried to determine the "typical" weight of animals at the shelter.  
 
-@indented{_The Animal Shelter Bureau says the average pet weighs almost 40 pounds_.}
-
-@slidebreak
-
+@indented{_We determined that the average pet weighs almost 40 pounds_.}
 
 But, how useful is this fact, really? Maybe all the pets weigh between 35 and 45 pounds, with every pet close to the mean. But maybe all the pets are super small or huge, and none are anywhere _near_ the mean!
 
@@ -62,45 +59,73 @@ We'd expect some deviation - or @vocab{spread} - in any population!
 
 @slidebreak
 
-**How do we measure the spread of a population?**
+*How do we measure the spread of a population?*
 
-* We can start by lining up all the animals' weights from smallest to largest.
-* We can compute the @vocab{range of a dataset}, by finding the distance between @vocab{minimum} and @vocab{maximum} values. 
+- We can start by lining up all the animals' weights from smallest to largest.
+- We can compute the @vocab{range of a dataset}, by finding the distance between @vocab{minimum} and @vocab{maximum} values. 
 
 @indented{_Note: the term “Range” means something different in statistics than it does in algebra and programming!_}
 
 @slidebreak
 
-**To learn more about how evenly distributed the data is**
+*To learn more about how evenly distributed the data is we can:*
 
-* We can find the @vocab{median} by splitting the data in half.
-* We can split the population into four equal-sized quarters by splitting each of these halves in half.
-* The boundary points between these equal quarters are called @vocab{quartiles}.
+- Find the @vocab{median} by splitting the data in half.
+- Split the population into four equal-sized quarters (by splitting each of these halves in half) and identify the @vocab{quartiles} (boundary points between these equal quarters).
 
 @slidebreak 
 
-* Combined with the minimum and the maximum, the quartiles give us the **5 Number Summary** of a dataset: 
+- Combine the quartiles with the minimum and the maximum to get a **5 Number Summary** of the dataset: 
 
 @indented{
-* @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
-* Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
-* Q2: @vocab{Median}: _the middle value (median) in a dataset_
-* Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
-* @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
+- @vocab{Minimum}: _the smallest value in a dataset - it starts the first quarter_
+- Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
+- Q2: @vocab{Median}: _the middle value (median) in a dataset_
+- Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
+- @vocab{Maximum}: _the largest value in a dataset - it ends the fourth quarter of the data_
 }
 
 @slidebreak
 
-* We can also use the @vocab{quartiles} to calculate a new value:
-@indented{
-* @vocab{IQR} (@vocab{Interquartile Range}) = Q3 - Q1 : _the distance spanned by the middle half of the data_
-}
+- Use the @vocab{quartiles} to calculate @vocab{IQR} (@vocab{Interquartile Range}), _the distance spanned by the middle half of the data_. @vocab{IQR} = Q3 - Q1
 
-=== Investigate
 
-To visualize the 5 number summary, the Range, and the Interquartile Range we can use @vocab{box plots}.
+=== Investigate 
+
+To visualize the 5 number summary, the Range, and the Interquartile Range we can use @vocab{box plots}, which show how the four equal quarters of data are spread out along the number line.
 
 @center{@image{images/box-n-whisker-plot.png, 500}} 
+
+When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. They contain exactly as many points as the wider sections, but have less room for them to spread out!
+
+@QandA{
+@Q{Which quarter of data is packed the densest in this box plot?}
+@A{The third one}
+@Q{Which quarter of the data is the most dispersed in this box plot?}
+@A{The fourth one}
+}
+
+@slidebreak
+
+When the points are evenly distributed, the four sections of the box plot will be equal in size, like this:
+
+@centered-image{images/even.png, 400}
+
+@slidebreak
+
+Left and right skew are easy to identify from a quick glance at a box plot, with longer whiskers trailing off toward potential outliers.
+
+[cols="^1a,^1a", grid="none", frame="none", stripes="none"]
+|===
+|@image{images/left.png}
+|@image{images/right.png} 
+|===
+
+@slidebreak
+
+Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are shorter than average might mirror that of newborns who are shorter than average. We call this kind of spread symmetric. 
+
+@centered-image{images/symmetric.png, 400}
 
 @slidebreak
 
@@ -128,8 +153,10 @@ Let's see what we can learn about the spread of the data in the `pounds` column 
 - Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run". If you don't have the file, you can open a @starter-file{animals, "new one"}.
 - Turn to @printable-exercise{summarizing-columns-mos.adoc} and follow the directions to complete the *Summarizing the Pounds Column* section.}
 
+@ifproglang{pyret}{
 @teacher{
 Students will type `box-plot(animals-table, "pounds")` into the Interactions Area and use the resulting box plot to fill in the five-number summary for the `pounds` column, and sketch the box plot.
+}
 }
 
 @ifproglang{codap}{
@@ -139,7 +166,7 @@ Create a box plot in CODAP that displays the spread of `Pounds`.
 @slidebreak
 
 @ifproglang{pyret}{
-@center{@image{images/box-plot-pounds.png,  400}}
+@center{@image{images/box-plot-pounds.png,  500}}
 }
 
 @ifproglang{codap}{
@@ -173,7 +200,6 @@ Create a box plot in CODAP that displays the spread of `Pounds`.
 Choose another quantitative column to summarize and complete the second half of @printable-exercise{summarizing-columns-mos.adoc}
 }
 
-
 === Common Misconceptions
 It is extremely common for students to forget that the quartiles divide the data into quarters, each of which includes 25% of the dataset. This will need to be heavily reinforced.
 
@@ -181,16 +207,16 @@ It is extremely common for students to forget that the quartiles divide the data
 
 @QandA{
 
-@Q{What percentage of points fall in the first quartile?}
+@Q{What percentage of points fall in the first quarter?}
 @A{25%}
 
-@Q{What percentage of points fall in the second quartile?}
+@Q{What percentage of points fall in the second quarter?}
 @A{25%}
 
-@A{What percentage of points fall in the third quartile?}
+@Q{What percentage of points fall in the third quarter?}
 @A{25%}
 
-@Q{What percentage of points fall in the fourth quartile?}
+@Q{What percentage of points fall in the fourth quarter?}
 @A{25%}
 
 @Q{What percentage of points fall in the **Interquartile Range** (IQR)?}
@@ -203,7 +229,7 @@ It is extremely common for students to forget that the quartiles divide the data
 == Interpreting Box Plots @duration{30 minutes}
 
 === Overview
-Students learn how to read a box plot, and consider spread and variability. They connect this visualization of spread to what they learned about histograms.
+Students learn how to read a box plot, connecting this visualization of spread to what they know about histograms.
 
 === Launch
 
@@ -223,9 +249,7 @@ In histograms, skewness shows up as a long tail of shorter bars to one side.
 In a box plot skewness is seen as a longer "whisker" or more spread in one part of the box. 
 
 
-
 @strategy{Kinesthetic Activity}{
-
 
 Divide the class into groups, and give each group a ruler and a ball of playdough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four __equally-sized cylinders__. The playdough represents a @vocab{sample}, with values divided into four quarters.
 
