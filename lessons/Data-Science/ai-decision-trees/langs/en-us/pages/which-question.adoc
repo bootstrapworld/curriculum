@@ -1,53 +1,60 @@
-= Which Question Should We Ask First?
+= Decision Tree: Level 2
 
-In order to create the best possible decision tree for @handout{decision-tree-data.adoc, "the training data"}, we need to figure out where to start! Respond to the questions below to determine if "sex" or "age" will be our root node.
+== Shopping History as the Decision Node
 
-== Is "sex" the best decision attribute for the root node?
+@n Using information from the "age" column and the "shopping history" column, fill in the blanks below.
 
-@n Using information from the "sex" column and the "app" column, fill in the blanks below.
+@indented{a) The training data indicates that *frequent customers in their teens* @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
 
-- The training data indicates that females are most likely to use @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook}.
+b) The training data indicates that *new customers in their teens* probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
 
-- The training data indicates that males are most likely to use @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook}.
+@vspace{1ex}
 
-Here’s our rule: __Recommend @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook} to females and recommend @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook} to males.__
+c) The training data on *infrequent customers in their teens* does provide any information on the likelihood of game purchase. Explain.
 
-@n Will a computer following this rule provide the correct app for all six individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
+@fitb{}{}
 
-@n According to our training data, this rule is correct in @fitb{5em}{@ifsoln{four}} instances out of six.
+@fitb{}{}
 
-@n Here is one way to represent the decision tree for "sex". We call this a "decision stump" because it has just one level. Place checkmarks below all correctly predicted values in the "male" leaf node.
-
-@center{@image{../images/sex-stump.png, 150}}
-
-@n Are either of the leaf nodes for "sex" pure? (__Pure__ means that the leaf contains exclusively one single value.) @fitb{5em}{@ifsoln{No}}
+}
 
 
+@n Rule: *Predict that frequent teenager shoppers @fitbruby{5em}{@ifsoln{will}}{will / will not} buy the game and that new teenage customers @fitbruby{5em}{@ifsoln{will}}{will / will not} buy the game.*
 
-== Is "age" the best decision attribute for the root node?
+@n Will a computer following this rule make the correct prediction every time? @fitb{5em}{@ifsoln{No.}}
 
-@n Using information from the "age" column and the "app" column, fill in the blanks below.
+@n According to our training data, this rule is correct in @fitb{5m}{@ifsoln{three}} instances out of five.
 
-- The training data indicates that youth are most likely to use @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook}.
-
-- The training data indicates that males are most likely to use @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook}.
-
-Here’s our rule: __Recommend @fitbruby{15em}{@ifsoln{tiktok}}{tiktok / youtube / facebook} to youth and recommend @fitbruby{15em}{@ifsoln{youtube}}{tiktok / youtube / facebook} to adults.__
-
-@n Will a computer following this rule provide the correct app for all six individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
-
-@n According to our training data, this rule is correct in @fitb{5m}{@ifsoln{five}} instances out of six.
-
-@n Create a decision stump for "age". Place checkmarks below all correctly predicted values in the "age" leaf node.
+@n Create a decision stump for "shopping history" with a root node of "teens". Place checkmarks below all correctly predicted values in the leaf node.
 
 @ifnotsoln{@vspace{15ex}}
 
 @ifsoln{@center{@image{../images/age-stump.png, 150}}}
 
-@n Are either of the leaf nodes for "age" pure? @fitb{5em}{@ifsoln{Yes}}
 
-== What should be our decision attribute at the root node?
+== Interest in Game as the Decision Node
 
-@n Age or sex? Explain your response. @fitb{}{}
+@n Using information from the "age" column and the "interest in game" column, fill in the blanks below.
+
+@indented{
+
+a) The training data indicates that *interested teens*  @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+
+b) The training data indicates *uninterested teens* probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+}
+
+@n Rule: *Predict that interested teenager shoppers @fitbruby{5em}{@ifsoln{will}}{will / will not} buy the game and uninterested teenagers shoppers @fitbruby{5em}{@ifsoln{will}}{will / will not}.*
+
+@n Will a computer following this rule make the correct prediction every time? @fitb{5em}{@ifsoln{Yes!}}
+
+@n Create a decision stump for teenagers' interest in the game.Place checkmarks below all correctly predicted values in the leaf node.
+
+@ifnotsoln{@vspace{15ex}}
+
+@ifsoln{@center{@image{../images/interest-stump.png, 150}}}
+
+== What decision attribute should we use at the root node?
+
+@n Shopping history or interest? Explain your response. @fitb{}{@ifsoln{interest in game}}
 
 @fitb{}{}

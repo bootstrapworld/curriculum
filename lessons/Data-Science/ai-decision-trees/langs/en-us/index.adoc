@@ -44,14 +44,15 @@ On the surface, these situations may not seem to have a lot in common. If you di
 Think about those three scenarios: recommending videos, classifying loan requests, and predicting election outcomes. What sort of data do you think was used in each?
 }
 
+A @vocab{decision tree} is a type of machine learning that categorizes and makes predictions based on how a previous set of questions was answered. The scenarios above all use decision trees to arrive at their recommendations. Decision trees are a form of _supervised_ machine learning because the computer is trained on data that contains the desired categorizations.
+
+
 
 === Investigate
 
-A *decision tree* is a type of machine learning that categorizes and makes predictions based on how a __previous__ set of questions was answered. Decision trees are a form of __supervised__ machine learning because the computer is trained on data that contains the desired categorizations.
-
 Decision trees pop up everywhere because they are flexible and easy to interpret—and they are flexible and easy to interpret because they function similarly to human thinking and decision-making.
 
-As a class, we are going to play a __simplified__ version of 20 Questions to help us understand the sort of thinking that decision trees imitate.
+As a class, we are going to play a _simplified_ version of 20 Questions to help us understand the sort of thinking that decision trees imitate.
 
 @QandA{
 @Q{Show of hands: Have you ever played 20 Questions?}
@@ -74,7 +75,9 @@ Here's how our game works:
 
 @teacher{
 
-The focus of this activity is to show students the process of building a *decision tree*. The diagram on the right models a 20 questions game with the secret word "knife". It is *not* a complete decision tree, just a portion. The remainder of the tree grows over the course of the lesson. If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items.  There is no need for your class diagrams to be exact copies of the samples provided.
+The focus of this activity is to show students the process of building a *decision tree*. The diagram on the right models a 20 questions game with the secret word "knife". Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree grows over the course of the lesson.
+
+If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items.  There is no need for your class diagram to be an exact copy of the sample provided.
 
 @right{@image{images/tree1.png, 200}}
 
@@ -104,9 +107,9 @@ Let's play _another_ round of the game - but this time, you will try to guess on
 
 As students ask questions, add to your diagram.
 
-Round 2 of this game will produce a diagram similar to the one on the right. Notice that the topmost question—"is it a utensil?"—splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
+Round 2 of this game will produce a diagram similar to the one on the right. Notice that the topmost question—"is it a utensil?"—now splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
 
-Be sure to always label arrows, as this is standard convention and improves readability.
+Be sure to always label arrows, as this is a standard convention and improves readability.
 
 }
 
@@ -118,14 +121,14 @@ Put another way: __There are two branches that split from the tree's root. Each 
 Let's identify the root, branches, nodes, and leaves on our tree so far.
 }
 
-@right{@image{images/tree-structure-stolen.png, 200}}
+@teacher{Annotate your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
 
-- The root node is he very top node that represents the entire population or sample.
-- A branch is
-- Decision nodes are sub-nodes that split from the root node, or from other nodes.
-- A leaf node (or terminal node) is
+@right{@image{images/tree-structure-stolen.png, 300}}
 
-
+- The root node is the very top node that represents the entire population or sample.
+- Splitting is the process of dividing a node into sub-nodes with branches.
+- Sub-nodes (or decision nodes) split from the root node, or from other nodes.
+- A leaf node (or terminal node) is a node that does not split.
 
 @lesson-instruction{
 - With a partner, complete the decision tree on a piece of paper so that all six items are categorized.
@@ -176,15 +179,15 @@ Decision trees can accurately label and categorize the inputs that they are trai
 === Synthesize
 
 
-As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. If you were asked to create a decision tree to identify common animals or foods, you could probably do that without much difficulty.
+As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. If you were asked to create a decision tree to identify common animals or foods, you could probably do that without much difficulty as well.
 
 Computers, however, build decision trees using only the data we provide... and that data can sometimes be messy. As a result, we may end up with models that are not 100% accurate.
 
-Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the measurements of 150 different plants' sepal length, sepal width, petal length, and petal width. It would be far more challenging to build this tree than the one we just made that classifies common tableware.
+Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than the one we just made that classifies common tableware!
 
 @center{@image{images/iris-data.png}}
 
-(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. Today, this dataset is considered a go-to example dataset useful for illustrating a wide range of problems in data science and machine learning.)
+(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. The dataset includes 150 different plants' sepal length, sepal width, petal length, and petal width. Today, this dataset is considered a go-to example dataset useful for illustrating a wide range of problems in data science and machine learning.)
 
 
 == Decision Trees from Training Datasets
@@ -204,44 +207,33 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 
 === Investigate
 
-Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, advertisements for sneakers are lurking in every single corner of the internet that you visit?
+Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-Is it a coincidence? No.
+Is it a coincidence? No. Computer cookies are small data files stored locally on your device. Tracking cookies allow marketers to examine your individual browsing habits... and use them to target you based on your interests.
 
-We're going to create a decision tree that predicts whether or not different customers at an online store will purchase a video game or not.
+We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not.
 
-To do so, we will train the computer using the dataset below (also available on @handout{decision-tree-data.adoc}), which tells us which app (tiktok, youtube, and facebook) six different individuals prefer.
+To do so, we will train the computer using a dataset (below) that characterizes 14 different shoppers using a number of attributes, and then indicates whether each purchased a video game. (This dataset is also available on @handout{decision-tree-data.adoc}).
 
 @QandA{
-@Q{What do you Notice about the dataset below? What do you wonder?}
+@Q{What do you Notice about the @handout{decision-tree-data.adoc}? What do you wonder?}
 @Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
 @A{Responses will vary.}
 }
 
-[cols="1,5,5,5", stripes="none", options="header"]
-|===
+One problem with this dataset is that _age is continuous_. That won’t work! We need to break these ages down into two different groups - which will become two different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers; twenties; and thirties.*
 
-| 	| sex		| age	| app
-| 1 | female 	| 16 	| tiktok
-| 2 | female 	| 24	| youtube
-| 3 | male		| 33	| facebook
-| 4 | female 	| 35	| youtube
-| 5 | male 		| 12 	| tiktok
-| 6 | male	 	| 13 	| tiktok
+There are a few possible questions we could use at the root of our decision tree :
 
-|===
-
-One problem with this dataset is that __age is continuous__. That won’t work! We need to break these ages down into two different groups - which will become two different __branches__ that grow out of a __decision node__. *For now, let’s agree that anyone below 20 is young and anyone 20 or above is an adult.*
-
-There are two possible questions we could use at the root of our decision tree are:
-
-- Is this individual male or female?
-- Is this individual young or an adult?
+- Is the individual in their teens, twenties, or thirties?
+- Is the individual a frequent customer, an infrequent customer, or a new customer?
+- Is the individual a gamer?
+- Has the individual expressed interest in a particular video game?
 
 It’s our job to figure out which question we should ask first. But how?
 
 @lesson-instruction{
-- As you complete @printable-exercise{which-question.adoc} you will create two different __decision stumps__.
+- As you complete @printable-exercise{which-question.adoc} you will create different __decision stumps__.
 - When you are finished with @printable-exercise{which-question.adoc}, you will be ready to build the most efficient and accurate decision tree possible!
 - Be prepared to share with the class which decision attribute belongs at the root of the tree.
 }

@@ -1,38 +1,36 @@
 = Building and Testing a Decision Tree
 
-On @printable-exercise{which-question.adoc}, we decided to use *age* as the root node of our app-prediction tree. Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
+On @printable-exercise{which-question.adoc}, we decided that the decision mode at the end of the "teens" branch should be "interest in game". Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
 
 == Build and Understand the Tree
+
+Fill in the remainder of the tree using the algorithm you have learned (left) before filling in the blanks (right).
 
 [cols="1,1", stripes="none"]
 |===
 
 |
-@ifnotsoln{@center{@image{../images/app-tree-blanks.png, 350}}}
+@ifnotsoln{@center{@image{../images/incomplete-tree.png, 350}}}
 
-@ifsoln{@center{@image{../images/app-tree-solns.png, 350}}}
+@ifsoln{@center{@image{../images/final-tree, 350}}}
 
 |
 
-@n The root node of this tree is @fitb{5em}{@ifsoln{age}}.
+@n The root node of this tree is @fitb{10em}{@ifsoln{age}}.
+
+
+@n The first set of branches includes @fitb{10em}{@ifsoln{teens}}, @fitb{10em}{@ifsoln{twenties}}, and @fitb{10em}{@ifsoln{thirties}}.
 
 @vspace{1ex}
 
-@n The first set of branches includes @fitb{5em}{@ifsoln{young}} and @fitb{5em}{@ifsoln{old}}.
+@n Write some rules: @ifsoln{Answers will vary.}
 
-@vspace{1ex}
 
-@n What are the three leaves of this decision tree? @fitb{8em}{@ifsoln{tiktok}}, @fitb{8em}{@ifsoln{youtube}}, and @fitb{8em}{@ifsoln{facebook}}.
+a) Predict that @fitb{10em}{@ifsoln{interested teens}} will buy the game.
 
-@vspace{1ex}
+b) Predict that all individuals in their twenties @fitb{10em}{@ifsoln{will buy the game}.
 
-@n Write some rules:
-
-- Recommend @fitb{10em}{@ifsoln{tiktok}} for youth.
-
-- Recommend facebook for @fitb{12em}{@ifsoln{adult males}}.
-
-- Recommend @fitb{10em}{@ifsoln{youtube}} for adult females.
+c) Predict that @fitb{10em}{@ifsoln{new customers in their thirties}} will not buy the game.
 
 |===
 
@@ -41,29 +39,26 @@ On @printable-exercise{which-question.adoc}, we decided to use *age* as the root
 
 Let's see how well our decision tree recommends apps for three additional individuals, who were _not_ a part of the training dataset.
 
-[cols="1,5,5,5", stripes="none", options="header"]
+[cols="2,2,3,2,2", stripes="none", options="header"]
 |===
 
-|   | sex		| age	| app
-| 1 | male		| 52	| facebook
-| 2 | female 	| 15	| youtube
-| 3 | male 		| 12 	| youtube
+| name 		| age 		| shopping history 	| interest in game 	| buys game
+| Kat 		| teen 		| new customer		| yes 				| yes
+| Billy		| twenties	| new customer		| no 				| no
+| Chen	    | twenties 	| previous customer | no  				| no
 
 |===
 
-@n What app will the decision tree recommend for person 1? @fitb{5em}{@ifsoln{facebook}} Person 2? @fitb{5em}{@ifsoln{tiktok}} Person 3? @fitb{5em}{@ifsoln{tiktok}}
+@n What prediction will the decision tree make for Kat? @fitb{10em}{@ifsoln{will buy}} Billy? @fitb{10em}{@ifsoln{will buy}} Chen? @fitb{10em}{@ifsoln{will buy}}
 
 @n Compare the test data with the decision tree recommendations. How often was the computer correct? @fitb{10em}{@ifsoln{1 out of 3 times}}
 
 
-@n Based on this new test data, which rule (Q4, above) needs to change? Why? @fitb{}{@ifsoln{We need to change the rule about recommending}}
+@n Based on this new test data, which rule (Q4, above) needs to change? Why? @fitb{}{@ifsoln{We need to change Rule b, that all individuals in their 20s will buy the game.}}
 
-@fitb{}{@ifsoln{tiktok to all youth. The new test data indicates that some young people prefer youtube.}}
+@fitb{}{@ifsoln{The new test data indicates that some individuals in their twenties will buy the game.}}
 
-== Practice: Which Decision Attribute is Best?
+== Reflect
 
-// Emmanuel - I think an activity like the one very poorly illustrated below could be useful. Gotta find a way to make it more easily interpreted by kids. Basically, I want to offer more practice without creating more datasets...  //
-
-@image{../images/delete-this.png}
-
+@n The decision tree we built was correct 100% of the time with our training dataset, but correct only 33% of with our test dataset. Why
 

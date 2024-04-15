@@ -1,0 +1,50 @@
+= Decision Tree: Level 1
+
+[.linkInstructions]#Using @handout{decision-tree-data.adoc, "the training data"} to respond to the prompts below.# Let's investigate what happens when we begin our tree with "age" as the root.
+
+== Investigating "age"
+
+@n Using information from the "age" column and the "buys game" column, fill in the blanks below.
+
+- The training data indicates that individuals in their thirties probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+
+- The training data indicates that individuals in their twenties probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+
+- The training data indicates that teens @fitbruby{10em}{@ifsoln{will not}}{will / will not} buy the game.
+
+
+Here’s our rule: *Predict that individuals in their @fitbruby{15em}{@ifsoln{twenties}}{teens / twenties / thirties} and in their @fitbruby{15em}{@ifsoln{thirties}}{teens / twenties / thirties} will buy the game. Predict that individuals in their @fitbruby{15em}{@ifsoln{teens}}{teens / twenties / thirties} will not.*
+
+@n Will a computer following this rule make correct predictions for all 14 individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
+
+@n According to our training data, this rule is correct in @fitb{5em}{@ifsoln{10}} instances out of 14.
+
+@n Here is one way to represent the decision tree for "age". We call this a "decision stump" because it has just one level. Place checkmarks below all correctly predicted values in the "twenties" and "thirties" leaf nodes.
+
+@center{@image{../images/sex-stump.png, 150}}
+
+@n Are any of the leaf nodes for "age" pure? (_Pure_ means that the leaf contains exclusively one single value.) @fitb{5em}{@ifsoln{Yes; "twenties".}}
+
+@n If we used the decision tree stump above to make predictions:
+
+- the likelihood of a correct prediction for a teenage shopper is @fitb{5em}{@ifsoln{60}}%
+
+- the likelihood of a correct prediction for a shopper in their twenties is @fitb{5em}{@ifsoln{100} }%
+
+- the likelihood of a correct prediction for a shopper in their thirties? @fitb{5em}{@ifsoln{60} }%
+
+@vspace{1ex}
+
+== Branching beyond "age"
+
+@n After creating the first level of his decision tree, Ernie removed Maribel, Rasula, Kate, and Taikhoom from the training set. As Bert watched Ernie grab a pencil and cross out those rows, he said, "I don't think that's a good idea! Why would we alter our dataset just because we're starting the second level of the tree?" Help Bert out. Why does it make sense to remove those four individuals from the dataset? Explain Ernie's decision to Bert.
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n For each decision node we have created ("teens" and "thirties"), we need to decide whether it makes more sense to branch to @fitbruby{15em}{@ifsoln{interest in game}}{[column]} or @fitbruby{15em}{@ifsoln{shopping history}}{[column]}. We do not need to branch from "twenties" because @fitb{}{}
+
+@fitb{}{}
