@@ -1,6 +1,6 @@
 = Decision Trees
 
-@description{Students }
+@description{Students play a modified version of the game "20 Questions" to explore how decision trees work, before building their own decision trees from training datasets.}
 
 @ifproglang{pyret}{
 @lesson-prereqs{ds-intro}
@@ -13,11 +13,14 @@
 | Lesson Goals
 | Students will be able to...
 
+- Create a decision tree from a training dataset.
+- Explain contexts in which they might encounter decision tree AI.
 
 
 | Student-facing Lesson Goals
 |
 
+Let's make and explore decision trees!
 
 | Materials
 |[.materials-links]
@@ -26,9 +29,11 @@
 
 |===
 
-== What is a Decision Tree? @duration{10 minutes}
+== What is a Decision Tree? @duration{25 minutes}
 
 === Overview
+
+Students explore scenarios in which decision trees are used, and then play a modified game of 20 Questions to consider the mechanics of decision trees.
 
 === Launch
 
@@ -75,12 +80,11 @@ Here's how our game works:
 
 @teacher{
 
-The focus of this activity is to show students the process of building a *decision tree*. The diagram on the right models a 20 questions game with the secret word "knife". Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree grows over the course of the lesson.
+This activity focuses on showing students the process of building a *decision tree*. The diagram on the right models a game with the secret word "knife". Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
 
-If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items.  There is no need for your class diagram to be an exact copy of the sample provided.
+If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items. That said, there is no need for your class diagram to be an exact copy of the sample provided.
 
-@right{@image{images/tree1.png, 200}}
-
+@right{@image{images/tree1.png, 150}}
 
 The first round of this game will produce a diagram similar to the one on the right. Your diagram will probably have two or three arrows, depending on the questions your students pose.
 
@@ -95,15 +99,15 @@ Important decision tree conventions:
 @QandA{
 @Q{How many questions did we ask in order to determine the correct object?}
 @Q{How did we decide which questions to ask?}
-@Q{Which items did our very first question eliminate from the list of possibilities?}
+@Q{Which items from our original list (spoon, knife, cup, plate, fork, and mug) did our very first question eliminate from the list of possibilities?}
 @A{Responses will vary. If students asked, "Is it a utensil?", then the eliminated items would include: plate, bowl, and mug.}
 }
 
-Let's play _another_ round of the game - but this time, you will try to guess one of the items that we eliminated by asking our original question. As you ask questions, I will add to our previous diagram.
+Let's play _another_ round of the game—but this time, you will try to guess one of the items that we eliminated by asking our original question. As you ask questions, I will add to our previous diagram.
 
 @teacher{
 
-@right{@image{images/tree2.png, 300}}
+@right{@image{images/tree2.png, 250}}
 
 As students ask questions, add to your diagram.
 
@@ -121,14 +125,16 @@ Put another way: __There are two branches that split from the tree's root. Each 
 Let's identify the root, branches, nodes, and leaves on our tree so far.
 }
 
-@teacher{Annotate your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
+@teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
 
-@right{@image{images/tree-structure-stolen.png, 300}}
+@right{@image{images/terminology-tree.png, 175}}
 
 - The root node is the very top node that represents the entire population or sample.
 - Splitting is the process of dividing a node into sub-nodes with branches.
 - Sub-nodes (or decision nodes) split from the root node, or from other nodes.
 - A leaf node (or terminal node) is a node that does not split.
+
+@vspace{1ex}
 
 @lesson-instruction{
 - With a partner, complete the decision tree on a piece of paper so that all six items are categorized.
@@ -137,7 +143,7 @@ Let's identify the root, branches, nodes, and leaves on our tree so far.
 
 @teacher{
 
-@right{@image{images/tree3.png, 350}}
+@right{@image{images/tree3.png, 250}}
 
 One possible completed tree is on the right.
 
@@ -156,22 +162,11 @@ As students finish, invite them to draw their trees on the board. Ideally, you w
 
 You might be wondering: Would it be possible to make this tree any more efficient? If so, why not?!
 
-Let's think about and test two possible trees: the one on the left is more efficient, and the one on the right is less efficient.
-
-
-@QandA{
-@Q{What do you Notice and Wonder about these decision trees?}
-@A{Possible response: They are different because the "not flat" branch ends on the efficient tree terminates with "mug or cup".}
-@Q{Are the two trees equally accurate? Explain.}
-@A{The tree with four nodes cannot label the six listed items with 100% accuracy. It cannot distinguish between "cup" and "mug".}
+@lesson-instruction{
+- With a partner, complete @printable-exercise{comparing-trees.adoc}.
 }
 
-As we increase the tree's efficiency, we can lose accuracy. Conversely, if we focus *too* much on accuracy - making our decision trees bigger and more complex - we risk __overfitting__. Overfitting happens when we teach a model the specific quirks of one particular dataset, preventing it from making reliable predictions about new data.
-
-@QandA{
-@Q{How will the decision tree on the right label the following items: (a) knife, (b) chopstick, and (c) spork?}
-@A{The tree will label a knife as a knife; it will not know what to do with a chopstick... maybe it's a mug?; and it will call a spork a fork!}
-}
+As we increase a tree's efficiency, we can lose accuracy. Conversely, if we focus *too* much on accuracy - making our decision trees bigger and more complex - we risk __overfitting__. Overfitting happens when we teach a model the specific quirks of one particular dataset, preventing it from making reliable predictions about new data.
 
 Decision trees can accurately label and categorize the inputs that they are trained to label and categorize! This tree—which was 100% accurate on the trained dataset—falters when we offer it inputs that are either *unknown*, like the chopstick, or *ambiguous*, like the spork. In both instances, the tree offers up its best guess at a label. __The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!__
 
@@ -183,14 +178,19 @@ As we built our decision trees, we were able to draw on everything we know about
 
 Computers, however, build decision trees using only the data we provide... and that data can sometimes be messy. As a result, we may end up with models that are not 100% accurate.
 
+@right{@image{images/iris-data.png, 300}}
+
+
 Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than the one we just made that classifies common tableware!
 
-@center{@image{images/iris-data.png}}
-
-(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. The dataset includes 150 different plants' sepal length, sepal width, petal length, and petal width. Today, this dataset is considered a go-to example dataset useful for illustrating a wide range of problems in data science and machine learning.)
+(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. The dataset includes 150 different plants' sepal length, sepal width, petal length, and petal width. Today, this dataset is considered a go-to dataset useful for illustrating a wide range of problems in data science and machine learning.)
 
 
-== Decision Trees from Training Datasets
+== Decision Trees from Training Datasets @duration{25 minutes}
+
+=== Overview
+
+Students build a decision tree that predicts whether different individuals will purchase a video game or not.
 
 === Launch
 
@@ -209,11 +209,9 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 
 Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-Is it a coincidence? No. Computer cookies are small data files stored locally on your device. Tracking cookies allow marketers to examine your individual browsing habits... and use them to target you based on your interests.
+Is it a coincidence? No. Computer cookies are small data files stored locally on your device. One particular kind of cookie, the tracking cookie, allows marketing AI tooks to use your individual browsing habits to decide which ads will be most effective on you.
 
-We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not.
-
-To do so, we will train the computer using a dataset (below) that characterizes 14 different shoppers using a number of attributes, and then indicates whether each purchased a video game. (This dataset is also available on @handout{decision-tree-data.adoc}).
+We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will do so using a @handout{decision-tree-data.adoc, "training dataset"} that characterizes 14 different shoppers and then indicates whether each purchased a video game or not.
 
 @QandA{
 @Q{What do you Notice about the @handout{decision-tree-data.adoc}? What do you wonder?}
@@ -223,31 +221,35 @@ To do so, we will train the computer using a dataset (below) that characterizes 
 
 One problem with this dataset is that _age is continuous_. That won’t work! We need to break these ages down into two different groups - which will become two different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers; twenties; and thirties.*
 
-There are a few possible questions we could use at the root of our decision tree :
+@lesson-instruction{
+- We will complete @printable-exercise{level-1.adoc} together, starting with "age" as the root node.
+- As we create the first level of our tree, you will discover a tool that we use to complete all the levels of our model: the decision stump.
+}
 
-- Is the individual in their teens, twenties, or thirties?
+As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions!
+
+There are three possible questions we could use at the next level of our decision tree :
+
 - Is the individual a frequent customer, an infrequent customer, or a new customer?
-- Is the individual a gamer?
 - Has the individual expressed interest in a particular video game?
-
-It’s our job to figure out which question we should ask first. But how?
+- Is the individual a gamer?
 
 @lesson-instruction{
-- As you complete @printable-exercise{which-question.adoc} you will create different __decision stumps__.
-- When you are finished with @printable-exercise{which-question.adoc}, you will be ready to build the most efficient and accurate decision tree possible!
-- Be prepared to share with the class which decision attribute belongs at the root of the tree.
+- As you complete @printable-exercise{level-2.adoc} you will create and compare different __decision stumps__.
+- These "stumps" will help you determine which question will produce the biggest information gain.
+- Be ready to share which attributes you plan to add to the second level of your tree.
 }
 
-@teacher{
-Once students have finished, invite them to share which attribute they selected for the tree's root node. Have a few students defend their decision.
-}
+Some of you may have noticed that we never created a decision stump for the "gamer" column! It turns out, that omission was intentional: the "gamer" column actually offers us *no new information*.
 
-Great! We know how to *begin* our tree. Let's build the rest, then test it to see if our tree makes accurate and useful predictions.
+@QandA{
+@Q{Why is the "gamer" column unhelpful in this tree? _Stuck? Create and consider the "gamer" stump._}
+@A{Among individuals who identify as gamers, 50% bought the game and 50% did not. Among individuals who do *not* identify as gamers, we saw the same results. No information is gained from this data.}
+}
 
 @lesson-instruction{
 - Complete the first section @printable-exercise{build-and-test.adoc}, then let's share the rules we developed.
 - "Test the Tree" by completing the second section of @printable-exercise{build-and-test.adoc}.
-- Get some additional practice with decision stumps on the third section of the page.
 }
 
 === Synthesize
