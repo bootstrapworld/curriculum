@@ -38,7 +38,7 @@
 | Preparation
 | 
 @preparation{
-- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. __If you're a first-time Desmos user, fear not!__@dist-link{pages/desmos-instructions.adoc, __Here_'s what you need to do.__}
 }
 
 |===
@@ -46,7 +46,7 @@
 == Introducing Compound Inequalities
 
 === Overview
-Students consider the need to _compose_ inequalities, and think about how to write them.
+Students consider the need to __compose__ inequalities, and think about how to write them.
 
 === Launch
 
@@ -62,26 +62,74 @@ What other examples can you come up with?
 
 @slidebreak
 
-Many times we need to _combine_ inequalities:
+Many times we need to __combine__ inequalities to answer our questions:
 
-- Should I go to the beach? (@math{temperature \gt 80°} and @math{weather = "sunny"})
-- Was this burrito worth the price? (@math{taste = "delicious"} and @math{price \leq $15})
+- We use `and` when we need **both** inequalities to be `true`.
+- We use `or` when we need **at least one** of the inequalities to be `true`.
+
+@slidebreak
+
+For Example:
+
+- Could it snow? 
+  * @math{temperature \le 32°F} and @math{temperature \ge 10°F}
+- Is the baby too big for an infant car seat?
+  * @math{height \ge 30"} or @math{weight \ge 30 pounds}
+- Should I go swimming outside? 
+  * @math{temperature \gt 75°F} and @math{weather <> "lightning"}
 
 @lesson-instruction{
 Can you think of examples of when we might want to combine inequalities?
 }
 
-@teacher{
-Guide students through other examples of `and` and `or` with various statements, such as:
+@slidebreak
+
+@QandA{
+We know that it could snow if @math{temperature \le 32°F} and @math{temperature \ge 10°F}.
+
+@Q{Would this expression be true if the temperature was 30°F? How do you know?}
+@A{Yes. 30 is both below 32 and higher than 10.}
+
+@Q{Would this expression be true if the temperature was 5°F? How do you know?}
+@A{No. While 5 is less than 30, it's not greater than 10. 5°F is too cold to snow.}
+}
+
+@slidebreak
+
+@QandA{
+We know that the baby is too big for an infant seat if @math{height \ge 30"} or @math{weight \ge 30 pounds}
+
+For each baby below, decide whether the baby needs a bigger car seat and explain how you know.
+@Q{Baby 1 -   Height: 32", Weight: 35 pounds}
+@A{Yes. They are too tall and too heavy an infant car seat.}
+
+@Q{Baby 2 -   Height: 33", Weight: 22 pounds}
+@A{Yes. They are too tall for an infant car seat.}
+
+@Q{Baby 3 -   Height: 20", Weight: 15 pounds}
+@A{No. They are short enough and light enough for an infant car seat.}
+
+@Q{Baby 4 -   Height: 29", Weight: 35 pounds}
+@A{Yes. They are too heavy for an infant car seat.}
+}
+
+@strategy{Stand if it's True for you!}{
+Practicing whether compound inequalities will be true or false makes for a great sit-down, stand-up activity, where students take turns saying compound Boolean statements and everyone stands if that statement is true for them.
 
 - "I'm wearing a red shirt AND I'm a math teacher, true or false?"
 - "I'm an NBA basketball star OR I'm having pizza for lunch, true or false?"
 
-This can make for a good sit-down, stand-up activity, where students take turns saying compound Boolean statements and everyone stands if that statement is true for them.
+}
+
+@slidebreak
+
+@lesson-point{
+Expressions using `and` only produce `true` if both of their sub-expressions are `true`. +
+Expressions using `or` produce `true` if **either** of their sub-expressions are `true`.
 }
 
 === Investigate
-Both mathematics and programming have ways of combining - or _composing_ - inequalities.
+Both mathematics and programming have ways of combining - or __composing__ - inequalities.
 
 @lesson-instruction{
 @ifnotslide{
@@ -95,15 +143,17 @@ Complete:
 }
 
 === Synthesize
-Be really careful to check for understanding here.
 
-- Expressions using `and` only produce `true` if both of their sub-expressions are `true`.
-- Expressions using `or` produce `true` if *either* of their sub-expressions are `true`.
+@teacher{Be careful to check for understanding here.}
+
+@QandA{
+@Q{What is the difference between combining inequalities using `and` and `or`?}
+@A{Expressions using `and` only produce `true` if both of their sub-expressions are `true`.}
+@A{Expressions using `or` produce `true` if **either** of their sub-expressions are `true`.}
+}
 
 @strategy{Strategies for English Language Learners}{
-
-
-When describing compound inequalities, be careful not to use "English shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker _and_ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
+When describing compound inequalities, be careful not to use "English shortcuts". For example, we might say "I am holding a marker _and_ an eraser" instead of "I am holding a marker __and__ I am holding an eraser." These sentences mean the same thing, but the first one obscures the fact that "and" joins two complete phrases. For ELL/ESL students, this is unecessarily adds to cognitive load!
 }
 
 == Solutions and Non-Solutions of Compound Inequalities
@@ -113,7 +163,6 @@ When describing compound inequalities, be careful not to use "English shortcuts"
 @lesson-instruction{
 Complete @printable-exercise{compound-warmup.adoc}.
 }
-
 
 === Investigate
 
@@ -134,10 +183,12 @@ When students click "Run", four graphs will appear. The top two are the simple i
 
 @slidebreak
 
+@centered-image{images/intersection1.png}
+
 @QandA{
-@Q{Why is the circle on 5 red and the circle on 15 green?}
-@A{The circle on 5 is red because 5 is not part of the solution - it _is not_ bigger than itself.}
-@A{The circle on 15 is green because 15 is part of the solution - it _is_ less than or equal to 15.}
+@Q{What does it mean that initial circle on 5 is red and the circle on 15 is green?}
+@A{The circle on 5 is red because 5 is not part of the solution - it __is not__ bigger than itself.}
+@A{The circle on 15 is green because 15 is part of the solution - it __is__ less than or equal to 15.}
 }
 
 @slidebreak
@@ -163,7 +214,7 @@ In order to make an `or` statement true, a value only has to make one of the ine
 
 Sometimes unions are represented by two separate arrows pointing in opposite directions with a gap between their starting points.
 
-@centered-image{images/lt1orlt3.png, 450}
+@centered-image{images/lt5orlte15.png, 450}
 
 Sometimes unions overlap and appear as a single arrow pointing in one direction.
 
@@ -198,7 +249,7 @@ Instead of defining two functions as simple inequalities, we can produce an ineq
 @QandA{
 
 @Q{What do you Notice about how the code works?}
-@A{_Answers will vary. Facilitate a conversation to draw out all of the things students will need to understand in order to write definitions for the remaining examples!_}
+@A{__Answers will vary. Facilitate a conversation to draw out all of the things students will need to understand in order to write definitions for the remaining examples!__}
 @A{We see that the left end of the shaded region is at 0 and the dot on zero is red so it's not part of the solution set. +
 This tells us that the first inequality is @math{x > 0}.}
 @A{We see that the right end of the shaded region is at 8.1 and the dot on zero is green so it is part of the solution set. +
@@ -208,8 +259,9 @@ This tells us that the second inequlality is @math{x \le 8.1}.}
 @A{The definition starts with @ifproglang{wescheme}{define.}@ifproglang{pyret}{`fun` and ends with `end`}}
 
 @Q{What do you Wonder?}
-@A{_Answers will vary, but make space for questions._}
+@A{__Answers will vary, but make space for questions.__}
 }
+
 @lesson-instruction{
 - With your partner, define compound inequality functions for the remaining graphs on the page.
 }
@@ -219,7 +271,11 @@ This tells us that the second inequlality is @math{x \le 8.1}.}
 
 === Synthesize
 
-How did the graphs of intersections and unions differ?
+@QandA{
+@Q{How did the graphs of intersections and unions differ?}
+@A{Intersections were where the two inequalities overlapped. Sometimes they are finite sections of the number line (represented by a segment with dots at both ends) and sometimes they are infinite (represented by an arrow)}
+@A{Unions include everything that was part of either inequality. They can look like a segment, a single arrow, or two arrows.}
+}
 
 == Additional Exercises
 

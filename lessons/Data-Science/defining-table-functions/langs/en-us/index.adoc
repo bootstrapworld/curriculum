@@ -11,9 +11,9 @@
 | Lesson Goals
 | Students will be able to...
 
-- write functions that consume a Row and perform a _lookup_ to produce a column
-- write functions that consume a Row and _compute_ to produce an Image
-- write functions that consume a Row and _compute_ to produce a Boolean
+- write functions that consume a Row and perform a __lookup__ to produce a column
+- write functions that consume a Row and __compute__ to produce an Image
+- write functions that consume a Row and __compute__ to produce a Boolean
 
 | Student-facing Lesson Goals
 |
@@ -42,15 +42,15 @@ To do the Design Recipe Telephone activity, you will need to decide on groups of
 == Reviewing Function Definition @duration{15 minutes}
 
 === Overview
-Students use different representations of functions to define functions that consume _Rows_, discover _functions that consume other functions_, and compose a scatter plot function with a function they've defined.
+Students use different representations of functions to define functions that consume __Rows__, discover __functions that consume other functions__, and compose a scatter plot function with a function they've defined.
 
 === Launch
 
 By now you've had a chance to explore functions on your own, thinking of them in terms of several different representations:
 
-- A mapping between _Domain_ and _Range_
-- A list of discrete _input values_ and _output values_
-- A symbolic _definition_
+- A mapping between __Domain__ and __Range__
+- A list of discrete __input values__ and __output values__
+- A symbolic __definition__
 
 Now it's time to use those representations to help us work with Tables!
 
@@ -71,11 +71,11 @@ You've already had a chance to work with the Design Recipe.
 
 Each step in the Design Recipe helps us write the next one.
 
-- If we can't write our Contract and Purpose, it means we haven't thought through the problem enough. Better to find this out _before_ we write the rest of our function!
+- If we can't write our Contract and Purpose, it means we haven't thought through the problem enough. Better to find this out __before__ we write the rest of our function!
 - If we're having trouble writing our Examples, **we can check our Contract and Purpose for hints**.
 - If we're having trouble writing the Definition, **we can check our Examples to see the pattern.**
 
-These steps also help us _check our work_. If any two representations don't match, it means there's likely a bug somewhere.
+These steps also help us __check our work__. If any two representations don't match, it means there's likely a bug somewhere.
 
 Let's look at an example to see how this works with table-functions!
 
@@ -85,40 +85,21 @@ Complete the `weeks-dot` section of @printable-exercise{making-connections.adoc}
 
 @slidebreak
 
-@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".}
-
-
-```
-# weeks-dot :: Row -> Image
-# consumes an animal, and draws a solid purple circle whose
-# radius is 5x the number of weeks it took to be adopted
-examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
-
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
-  weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
-end
-```
-
-@slidebreak
-
-@ifslide{
+@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".
+@ifslide{_Note: Discussion continues on the next slide._}}
 
 ```
 # weeks-dot :: Row -> Image
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * 3,                  "solid", "green")
+  weeks-dot(young-row) is circle(5 * 1,                  "solid", "green")
 
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"],   "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
 ```
-
-}
 
 These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Sasha" and "Wade", based on their `weeks` to adoption. 
 
@@ -129,6 +110,11 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 
 @slidebreak
 
+Both pairs of examples are __correct__!
+
+- In the first pair, we see the values `3` and `1` , but no explanation of where they are coming from
+- The last two examples show how those values are looked up from the example rows.
+
 @ifslide{
 
 ```
@@ -136,21 +122,17 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 # consumes an animal, and draws a solid purple circle whose
 # radius is 5x the number of weeks it took to be adopted
 examples:
-  weeks-dot(cat-row)   is circle(5 *          3,         "solid", "green")
-  weeks-dot(young-row) is circle(5 *          1,         "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * 3,                  "solid", "green")
+  weeks-dot(young-row) is circle(5 * 1,                  "solid", "green")
 
-  weeks-dot(cat-row)   is circle(5 *   cat-row["weeks"], "solid", "green")
+  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"],   "solid", "green")
   weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
 end
 ```
 
 }
 
-Both pairs of examples are _correct_!
-
-- In the first pair, we see the values `3` and `1` , but no explanation of where they are coming from
-- The last two examples show how those values are looked up from the example rows.
-
+@slidebreak
 
 @lesson-point{
 If you're stuck on the examples step, here's a useful trick to get you started. Complete the following sentence: +
@@ -177,13 +159,21 @@ Why might it be beneficial to include both kinds of examples?
 Students work in teams to collaboratively define multiple Table Functions. When these functions are composed in different ways, they can be used to do much more sophisticated analysis!
 
 === Launch
+
+Why would it be challenging to make the following displays?
+
+- a box plot showing the distribution of kilograms across old cats at the shelter
+- a scatter plot showing the relationship between kilograms of young dogs at the shelter, and how many days it took to be adopted
+
+There would be a lot of steps involved!
+
 Most computer programs are written by huge teams! It is critical that each team member records their thinking with enough detail for other team members to be able to pick up where they left off.
 
 We're going to practice collaborative programming and try writing some other Table Functions using the Design Recipe, through an activity called Design Recipe Telephone.
 
 === Investigate
 
-@ifnotslide{
+@teacher{
 
 1. Divide the class into groups of three.
 
@@ -202,18 +192,18 @@ We're going to practice collaborative programming and try writing some other Tab
 @handout{is-young.adoc, is-young}
 
 |
-@opt-printable-exercise{is-old.adoc, is-old}
+@handout{is-old.adoc, is-old}
 
-@opt-printable-exercise{kilos.adoc, kilos}
+@handout{kilos.adoc, kilos}
 
-@opt-printable-exercise{is-cat.adoc, is-cat}
+@handout{is-cat.adoc, is-cat}
 |===
 
 }
 
 @lesson-instruction{
 
-- In this activity, each person in your group will start with a different word problem. You will each be doing _one step of each Design Recipe problem_. After you complete your step, you will fold your paper to hide the part that you were looking at so that only _your work and the rest of the recipe_ are visible. Then you will pass your work to the person to your right.
+- In this activity, each person in your group will start with a different word problem. You will each be doing __one step of each Design Recipe problem__. After you complete your step, you will fold your paper to hide the part that you were looking at so that only __your work and the rest of the recipe__ are visible. Then you will pass your work to the person to your right.
 
 - The person who has received your paper will review your work and complete the next step based solely on what you wrote down for them. If they don't have the information they need, they will give the paper back to you for revision.
 
@@ -222,90 +212,70 @@ We're going to practice collaborative programming and try writing some other Tab
 
 @slidebreak
 
-@ifnotslide{
-
-@vspace{1ex}
-
-[.indentedpara]
---
-[cols="1a", options="header"]
-|===
-|Who's Doing What During Each Round of Design Recipe Telephone?
-|*Round 1 - Writing Contract and Purpose Statements from the Word Problem*
-
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem A  ! Student 2 - Problem B! Student 3 - Problem C
-!===
-
-|@center{_everyone folds over the previous section, and passes their paper to the right_}
-
-| *Round 2 - Writing Examples _based solely on the Contract and Purpose Statement_*
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem C  ! Student 2 - Problem A! Student 3 - Problem B
-!===
-
-|@center{_everyone folds over the previous section, and passes their paper to the right_}
-
-|  *Round 3 - Writing Function Definitions _based solely on the Examples_*
-[cols="1a,1a,1a"]
-!===
-! Student 1 - Problem B  ! Student 2 - Problem C! Student 3 - Problem A
-!===
-|===
---
-
-}
-
-@ifslide{
-
 **Round 1:**
+@lesson-instruction{
 You should have a page with a Word Problem.
 
 - Write the Contract and Purpose Statement.
 - Fold your paper to hide the Word Problem.
 
+}
+
+@ifslide{
 @teacher{
 Choose which set of word problems you are going to start with and give each student within each group a different word problem.
 
 - Set 1: @handout{is-dog.adoc, is-dog}, @handout{days.adoc, days}, @handout{is-young.adoc, is-young}
-- Set 2: @opt-printable-exercise{is-old.adoc, is-old}, @opt-printable-exercise{kilos.adoc, kilos}, @opt-printable-exercise{is-cat.adoc, is-cat}
+- Set 2: @handout{is-old.adoc, is-old}, @handout{kilos.adoc, kilos}, @handout{is-cat.adoc, is-cat}
 
 }
 }
 
 @slidebreak
 
-@ifslide{
-Make sure you’ve folded your paper over so that only the Contract and Purpose are visible.
-Pass your paper to the person to your right.
 
-@vspace{1ex}
+@ifslide{__Make sure you’ve folded your paper over so that only the Contract and Purpose are visible.__}
+Pass your paper to the person to your right.
 
 **Round 2:**
 
-- Write Examples from the Contract and Purpose Statement you just received.
-- Circle the Variables.
-- Fold your paper so that only the Examples are visible.
+@lesson-instruction{
+You should have just received a new page, that has been folded to hide the Word Problem.
 
+- Write Examples from the Contract and Purpose Statement.
+- Circle the Variables.
+- Then fold your paper to hide the Contract and Purpose Statement.
 }
 
 @slidebreak
 
-@ifslide{
-Make sure you’ve folded your paper over so that only the Examples are visible.
-Pass your paper to the person to your right.
+@ifslide{__Make sure you’ve folded the top of your paper over so that only the Examples are visible.__}
 
-@vspace{1ex}
+Pass your paper to the person to your right.
 
 **Round 3:**
 
-- Write a Definition from the Examples you just received.
+@lesson-instruction{
+You should have just received a new page that has been folded so that the Examples are at the top.
 
+- Write a Definition from the Examples you just received.
+- When you're done, pass your paper to your right to return it to the person it started with.
 }
 
-@ifnotslide{
+@slidebreak
+
+**Round 4:**
+
+@lesson-instruction{
+You should now be holding the page you started with.
+
+- Unfold the page and type the full Design Recipe into the Definitons Area of the @starter-file{animals}.
+- If your function is a Boolean-producing function, make sure that at least one of the exampes should produce true and at least one should produce false. If not, add an additional example.
+- Click run and confirm that all test pass.
+- If not, collaborate with your team to identify which steps of the Design Recipe need to be reworked.
+}
+
+@teacher{
 This activity can be repeated several times, or done as a timed competition between teams. The goal is to emphasize that each step - if done correctly - makes the following step incredibly simple.}
 
 === Synthesize
@@ -319,9 +289,5 @@ The Design Recipe is a way of slowing down and thinking through each step of a p
 @A{So we can check our work}
 @Q{Why is it helpful to use each of these steps in the Design Recipe?}
 @Q{What step do you find the most challenging right now? The easiest?}
-@Q{What are some functions you might want to define for your _own_ analysis?}
+@Q{What are some functions you might want to define for your __own__ analysis?}
 }
-
-== Additional Exercises
-
-- For students using a printed workbook, you'll find a page with @opt-printable-exercise{2-blank-recipes.adoc, two blank Design Recipes} at the back of the book.

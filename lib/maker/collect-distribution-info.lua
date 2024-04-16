@@ -155,6 +155,7 @@ function collect_exercise_info(lesson_dir, proglang)
   local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
   local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
   local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
+  local handout_exercise_asp_list_file = lesson_cache .. '.handout-exercise-pages.lua'
   --
   local workbook_pages = {}
   if file_exists_p(workbook_page_list_file) then
@@ -193,6 +194,17 @@ function collect_exercise_info(lesson_dir, proglang)
     o:write(' },\n')
   end
   o:write('}\n')
+  --
+  i = io.open(handout_exercise_list_file)
+  o = io.open(handout_exercise_asp_list_file, 'w+')
+  o:write('return {\n')
+  for x in i:lines() do
+    o:write('  { "', x, '"')
+    add_aspect(lesson_dir .. '/pages/' .. x, o)
+    o:write(' },\n')
+  end
+  o:write('}\n')
+  --
 end
 
 ----------------------------------------------------------------------------

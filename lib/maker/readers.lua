@@ -23,7 +23,7 @@ function buffered_input_port_metatable.__index:close()
   if self.port then self.port:close() end
 end
 
-function buffered_input_port_metatable.__index:read(arg)
+function buffered_input_port_metatable.__index:read_char()
   -- :read(1) works on buffered input ports
   -- arg is assumed to be 1. We don't need anything else
   local buf = self.buffer
@@ -50,6 +50,17 @@ function buffered_input_port_metatable.__index:read_line()
     return nil
   else
     return s
+  end
+end
+
+function buffered_input_port_metatable.__index:read(arg)
+  if not arg then
+    return self:read_line()
+  elseif arg == 1 then
+    return self:read_char()
+  else
+    print('Buffered input port .read: ' .. errmsg_file_context() .. ': Bad argument ' .. arg)
+    error 'crash and burn'; return
   end
 end
 
@@ -172,7 +183,7 @@ function make_read_group(code, errmsg_file_context)
         end
         table_insert_string(r, gp)
         in_space_p = false
-      elseif c == '"' then
+      elseif scheme_p and c == '"' then
         -- print('starting string')
         table.insert(r, c)
         in_space_p = false
@@ -256,6 +267,6 @@ function first_line(f)
   local i = io.open(f)
   if not i then return false end
   local x = i:read()
-  if not x then return false end
+  i:close()
   return x
 end
