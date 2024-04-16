@@ -834,7 +834,7 @@ const Projects = {
   "functions": {
     "title": "Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
+      "url": "https://code.pyret.org/editor#share=1F8_Pn48lmH8rmrnxK7ArcUDMI53tWsm8"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
