@@ -843,7 +843,7 @@ const Projects = {
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
+      "url": "https://code.pyret.org/editor#share=1imHHu2-uAXrjQ1I1gGAEjTYfifQ6P65c"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
