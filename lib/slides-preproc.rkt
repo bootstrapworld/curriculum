@@ -114,7 +114,7 @@
             (string-append
               (format "![~a](~a)~a" text img
                       (if (string=? width "") "" (format "{width=~a}" width)))
-              (if caption
+              (if (and caption #f)
                   (format " _~a_" caption)
                   ""))])))
 
