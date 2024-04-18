@@ -20,6 +20,7 @@ local terror = make_error_function(errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
+
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
@@ -33,6 +34,12 @@ local function nicer_case(s)
 end
 
 local proglang = first_line('.cached/.record-proglang') or 'pyret'
+
+local slides_id_file = 'slides-' .. proglang .. '.id'
+
+if not file_exists_p(slides_id_file) then
+  print('WARNING: Lesson ' .. os.getenv('PWD') .. ' missing ' .. slides_id_file)
+end
 
 local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
@@ -122,6 +129,7 @@ local function get_slides(lsn_plan_adoc_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
+  local imgIdx = 0
   local curr_slide
 
   local function set_current_slide()
@@ -166,6 +174,15 @@ local function get_slides(lsn_plan_adoc_file)
             if not inside_table_p then
               curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
             end
+          end
+        elseif directive == 'image' or directive == 'centered-image' then
+          local arg = read_group(i, directive)
+          imgIdx = imgIdx + 1
+          if not inside_table_p then
+            if (not dont_count_image_p) and directive == 'image' then
+              curr_slide.numimages = curr_slide.numimages + 1
+            end
+            curr_slide.text = curr_slide.text .. '@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}'
           end
         elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
@@ -252,6 +269,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
         else
           if directive == 'image' then
+            -- dead?
             if not inside_table_p and not dont_count_image_p then
               curr_slide.numimages = curr_slide.numimages + 1
             end

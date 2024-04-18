@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- print('doing collect-primitives.lua')
+-- print('doing collect-specials.lua')
 
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 

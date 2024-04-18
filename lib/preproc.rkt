@@ -1637,11 +1637,6 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
-                           [(string=? directive "remotely")
-                            (unless *narrative*
-                              (error 'ERROR
-                                     "adoc-preproc: @remotely valid only in pathway narrative"))
-                            (print-teach-remotely o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
                               (error 'ERROR
@@ -2124,7 +2119,6 @@
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
                 (print-workbook-info *target-pathway* o)
-                (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-other-resources *target-pathway* *proglang* o))
 
@@ -2337,7 +2331,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-(define (display-exercise-collation o)
+#;(define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))

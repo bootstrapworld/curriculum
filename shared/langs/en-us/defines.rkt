@@ -10,10 +10,10 @@
   print-pathway-logo
   print-course-banner
   print-other-resources-intro
-  print-teach-remotely
   print-workbook-info
   print-other-resources
   natlang:also-available-in
+  ; print-teach-remotely
   ; print-standards-js
   ; print-textbooks-js
   ; print-menubar
@@ -45,6 +45,7 @@
       "We also provide a link:../../lib/bilingual-glossary.html[bilingual glossary],\n"
       "which defines all vocabulary words across our lessons in English and Spanish.") o))
 
+#|
 (define (print-teach-remotely o)
   (display
     (string-append
@@ -53,7 +54,7 @@
       "If you're teaching remotely, we've assembed an link:../../ImplementationNotes.shtml[Implementation Notes] page that makes\n"
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
-
+|#
 (define (print-course-title-and-logo course make-image o)
   ; (printf "doing print-course-title-and-logo ~s\n" course)
   (let* ([c (assoc course *course-names*)]
@@ -102,8 +103,7 @@
           "That's why we provide a free PDF of the link:./workbook/workbook.pdf[core workbook],"
           " as well as a link to link:./workbook/workbook-long.pdf[the book with every optional exercise included].\n"
         "\n"
-        "Of course, we understand that printing them yourself can be expensive!\n"
-        "\n"
+        "Of course, we understand that printing them yourself can be expensive! "
          "link:"
           (if c (second c) "missing-link")
           "[Click here to purchase beautifully-bound copies of the student workbook from Lulu.com].\n"
