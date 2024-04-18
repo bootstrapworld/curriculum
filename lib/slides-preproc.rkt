@@ -87,6 +87,7 @@
                        (lambda (x base y)
                          (string->symbol (path->string base))))]
          [image-attribs (and (hash? *images-hash*) (hash-ref *images-hash* image-file #f))]
+         [caption (if (hash? image-attribs) (hash-ref image-attribs 'caption "") "")]
          [text (if (hash? image-attribs) (hash-ref image-attribs 'description "") "")])
 
     ; (printf "image-attribs = ~s\n" image-attribs)
@@ -110,8 +111,12 @@
                     (if (string=? width "") ""
                         (format " width=\"~a\"" width)))]
           [else
-            (format "![~a](~a)~a" text img
-                    (if (string=? width "") "" (format "{width=~a}" width)))])))
+            (string-append
+              (format "![~a](~a)~a" text img
+                      (if (string=? width "") "" (format "{width=~a}" width)))
+              (if (and caption #f)
+                  (format " _~a_" caption)
+                  ""))])))
 
 (define (variable-or-number? s)
   (let ([result #t])

@@ -85,7 +85,9 @@ function set_up_lesson_dir() {
   touch .cached/.proglang-$pl
   echo $pl > .cached/.record-proglang
   echo $superdir > .cached/.record-superdir
-  ${TOPDIR}/${MAKE_DIR}make-slides.lua
+  if test "$superdir" != Projects; then
+    ${TOPDIR}/${MAKE_DIR}make-slides.lua
+  fi
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
   test -d pages || mkdir pages
