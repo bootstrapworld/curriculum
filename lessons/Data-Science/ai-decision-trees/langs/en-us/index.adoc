@@ -55,36 +55,41 @@ A @vocab{decision tree} is a type of machine learning that categorizes and makes
 
 Decision trees pop up everywhere because they are flexible and easy to interpret—and they are flexible and easy to interpret because they function similarly to human thinking and decision-making.
 
-As a class, we are going to play a _simplified_ version of 20 Questions to help us understand the sort of thinking that decision trees imitate.
+As a class, we are going to play a game to help us understand the sort of thinking that decision trees imitate.
 
+@teacher{The game we are going to play is a simplified version of 20 questions. If students are familiar with 20 questions, discussing the strategies they use when playing the game will help them to make connections.}
 @QandA{
 @Q{Show of hands: Have you ever played 20 Questions?}
+@A{*If the majority of your students haven't played 20 Questions, the discussion questions below are irrelevant - skip straight to the instructions about how our game will work*}
 @Q{What are the rules?}
-@A{Choose 1 player to be “it,” and have them think of a secret person, place or thing. The other players attempt to guess the secret person, place, or thing, but they only get 20 questions to do so.}
-@Q{Have you ever won 20 Questions? What do you think is the secret to success?}
-@A{Possible responses: Ask questions with responses that can definitely be responded to with "yes" or "no". Ask questions that are likely to eliminate many objects... but be careful! A question that is too narrow could end up resulting in very little information gained. Start with questions that will quickly limit possibilities.}
+@A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 questions to help them guess the secret person, place, or thing.}
+@Q{What strategies do you use when choosing the questions you will ask?}
+@A{Possible responses:}
+@A{Ask questions with responses that can definitely be responded to with "yes" or "no".}
+@A{Ask questions that are likely to eliminate many objects... but be careful! A question that is too narrow could end up resulting in very little information gained.}
+@A{Start with questions that will quickly limit possibilities.}q
 }
 
 @lesson-instruction{
 
-Here's how our game works:
+Our game is a modified version of that game. Here's how it works:
 
-- I will secretly write down on a piece of paper one of the six items on this list: *spoon, knife, cup, plate, fork, and mug*.
+- In our game there are six possible items: *spoon, knife, cup, plate, fork, and mug*.
+
+- I will write one of them down on a piece of paper.
 
 - You will ask me yes/no questions (however many you need!) until you figure out the object that I chose.
 
-- As you ask questions, I will record them on the whiteboard connected by arrows.
+- As you ask questions, I will record them on the board, connecting the questions, answers, and followup questions and answers with arrows.
 }
 
 @teacher{
 
-This activity focuses on showing students the process of building a *decision tree*. The diagram on the right models a game with the secret word "knife". Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
+This activity focuses on showing students the process of building a *decision tree*. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "knife".  Depending on the questions your students pose, your diagram will probably have two or three arrows. 
 
-If you want your tree to look similar to the sample, choose "knife" as the first secret word, then help students to notice that there are three utensils on the list of items. That said, there is no need for your class diagram to be an exact copy of the sample provided.
+@right{@image{images/tree1.png, 275}}
 
-@right{@image{images/tree1.png, 150}}
-
-The first round of this game will produce a diagram similar to the one on the right. Your diagram will probably have two or three arrows, depending on the questions your students pose.
+Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
 
 Important decision tree conventions:
 
@@ -92,20 +97,21 @@ Important decision tree conventions:
 
 - "Yes" arrows point to the left, and "no" arrows point to the right. (The chain of arrows in the diagram is pointing 45 degrees to the left because both questions were answered "yes".)
 
+As students ask questions, support them in noticing how effective their questions are in sorting the items on the list. "Utensil?" is a great example of a first question, because there are three utensils and three non-utensils on the list of items. "Used to chop?"" would not be a great first question, because you might get lucky and have your answer, but otherwise you still have five items to decide between!
 }
 
 @QandA{
 @Q{How many questions did we ask in order to determine the correct object?}
 @Q{How did we decide which questions to ask?}
 @Q{Which items from our original list (spoon, knife, cup, plate, fork, and mug) did our very first question eliminate from the list of possibilities?}
-@A{Responses will vary. If students asked, "Is it a utensil?", then the eliminated items would include: plate, bowl, and mug.}
+@Q{Can anyone think of a different question that would have eliminated more items right off the bat?}
 }
 
-Let's play _another_ round of the game—but this time, you will try to guess one of the items that we eliminated by asking our original question. As you ask questions, I will add to our previous diagram.
+Let's play _another_ round of the game with a new item. We will start with the same first question. As you ask questions, I will add to our previous diagram.
 
 @teacher{
 
-@right{@image{images/tree2.png, 250}}
+@right{@image{images/tree2.png, 400}}
 
 As students ask questions, add to your diagram.
 
@@ -125,7 +131,7 @@ Let's identify the root, branches, nodes, and leaves on our tree so far.
 
 @teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
 
-@right{@image{images/terminology-tree.png, 175}}
+@right{@image{images/terminology-tree.png, 300}}
 
 - The root node is the very top node that represents the entire population or sample.
 - Splitting is the process of dividing a node into sub-nodes with branches.
@@ -141,7 +147,7 @@ Let's identify the root, branches, nodes, and leaves on our tree so far.
 
 @teacher{
 
-@right{@image{images/tree3.png, 250}}
+@right{@image{images/tree3.png, 400}}
 
 One possible completed tree is on the right.
 
@@ -172,11 +178,9 @@ As we built our decision trees, we were able to draw on everything we know about
 
 Computers, however, build decision trees using only the data we provide... and that data can sometimes be messy. As a result, we may end up with models that are not 100% accurate.
 
-@right{@image{images/iris-data.png, 300}}
-
 Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than the one we just made that classifies common tableware!
 
-(British statistician and biologist Ronald Fisher first published his findings about the Iris Dataset in 1936. The dataset includes 150 different plants' sepal length, sepal width, petal length, and petal width. Today, this dataset is considered a go-to dataset useful for illustrating a wide range of problems in data science and machine learning.)
+@centered-image{images/iris-data.png}
 
 === Synthesize
 
@@ -199,9 +203,9 @@ Students build a decision tree that predicts whether different individuals will 
 
 === Launch
 
-We have already built some extremely simple decision trees. We have a sense of the heirarchical structure, flexibility, and versatility of decision trees. We know that decision trees sometimes fail when provided with ambiguous or unknown data. We understand the risk of overfitting our data (building a model that can only succeed on narrow set of data).
+We have already built some extremely simple decision trees. We have a sense of the hierarchical structure, flexibility, and versatility of decision trees. We know that decision trees sometimes fail when provided with ambiguous or unknown data. We understand the risk of overfitting our data (building a model that can only succeed on narrow set of data).
 
-We have *not* yet considered how useful, powerful decision trees built from large datasets can make relatively accurate predictions, recommendations, and diagnoses.
+We have *not* yet learned about how decision trees built from large datasets make relatively accurate predictions, recommendations, and diagnoses.
 
 The key to building an effective decision tree is to decide—at every level and every node—which attributes are the most informative ones to ask questions about.
 
@@ -216,16 +220,18 @@ Have you ever done some online shopping—say, for a new pair of sneakers—only
 
 Is it a coincidence? No. Computer cookies are small data files stored locally on your device. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
 
-We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will do so using a @handout{decision-tree-data.adoc, "training dataset"} that characterizes 14 different shoppers and then indicates whether each one purchased a video game or not.
+We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether each one purchased a video game or not.
 
 @QandA{
-@Q{What do you Notice about the @handout{decision-tree-data.adoc}? What do you wonder?}
-@A{Possible responses: Individuals in their twenties always buy the video game. There are only three new customers; two out of three times, new customers buy the video game.}
+@Q{With your partner, look over the @handout{decision-tree-data.adoc, Training Dataset}. What do you Notice? What do you wonder?}
+@A{Possible responses:}
+@A{Individuals in their twenties always buy the video game.} 
+@A{There are only three new customers; two out of three times, new customers buy the video game.}
 @Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
 @A{Responses will vary.}
 }
 
-One problem with this dataset is that _age is continuous_. That won’t work! We need to break these ages down into two different groups - which will become two different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers; twenties; and thirties.*
+One problem with this dataset is that _age is continuous_. That won’t work! We need to break these ages down into different groups - which will become different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers; twenties; and thirties.*
 
 @lesson-instruction{
 - We will complete @printable-exercise{level-1.adoc} together, starting with "age" as the root node.
