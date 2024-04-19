@@ -14,13 +14,13 @@
 | Lesson Goals
 | Students will be able to...
 
-* filter tables according to different criteria, using helper functions
-* add a column to a table using helper functions
+- filter tables according to different criteria, using helper functions
+- add a column to a table using helper functions
 
 | Student-facing Lesson Goals
 |
 
-* Let’s learn how transform one table into another.
+- Let’s learn how transform one table into another.
 
 | Materials
 |[.materials-links]
@@ -103,7 +103,7 @@ Here’s how that might look if `filter` chose a function card `has-glasses`.
 }
 
 @teacher{
-Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a _different_ card to a _different_ helper, and repeat the exercise.
+Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a __different__ card to a __different__ helper, and repeat the exercise.
 }
 
 === Investigate
@@ -115,23 +115,37 @@ Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 Confirm that students understand the following key ideas:
 
-* `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
-* `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
+- `filter` consumes a Table and a __function that consumes Rows and produces Booleans__. It produces a new table containing only rows for which the function returns `true`.
+- `build-column` consumes a Table, the name of a new column, and a __function that consumes Rows__. It produces a new tble with that new column, and fills in the values by applying the function to every Row.
 
 @lesson-instruction{
-* How would you filter and build using the Animals Dataset? 
-* For practice, complete @printable-exercise{what-table-do-we-get.adoc}.
-* @opt{Complete @opt-printable-exercise{design-recipe-1.adoc} and @opt-printable-exercise{design-recipe-2.adoc} to practice using the Design Recipe to write filter functions for the @starter-file{animals}.}
+- Let's think about what filtering and building would look like with Animals at the shelter. Match the code on @printable-exercise{what-table-do-we-get.adoc} with the descriptions of the tables they would produce.
+}
+
+@teacher{@opt{Give students some scaffolded practice filtering and building with the Animals! +
+
+- Practice using the Design Recipe to write new helper functions:   
+  * @opt-printable-exercise{design-recipe-1.adoc}
+  * @opt-printable-exercise{design-recipe-2.adoc}.
+- Practice using Circles of Evaluation with Filtering and Building to make:
+  * @opt-printable-exercise{coe-table-old-cats.adoc, a Table of Old Cats} 
+  * @opt-printable-exercise{coe-box-plot-young-dog-kilos.adoc, a Box Plot showing the Distribution of the weight (in kilos) of Young Dogs}
+  * @opt-printable-exercise{coe-scatterplot-old-dogs.adoc, a Scatter Plot showing the Relationship between Kilograms and Weeks to adoption for Old Dogs}
+}}
+
+@lesson-instruction{Then turn to @printable-exercise{putting-it-all-together.adoc} to practice defining new tables, defining new helper fuections, and building displays in the @starter-file{putting-it-all-together}.
 }
 
 === Common Misconceptions
-*Students often think that these functions _change_ the table!* In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `cats = filter(animals-table, is-cat)`.
+- Students often think that these functions __change__ the table! In Pyret, all table functions produce a __brand new table__. If we want to save that table and use it later, we need to define it. For example: `dogs = filter(animals-table, is-dog)`.
+- Students might mistakenly think we need the `species` column to answer the question, "Which cat is the heaviest?". While we do look at the species column to filter the table, we're not thinking about columns until __after__ we've built a new table of just the cat rows, at which point `species` would be "cat" for all of the rows that we're working with!
+- Questions like "Who is the oldest?" or "What is the most?" require looking at __every row__ in the table.
 
 === Synthesize
-Using Table Functions is a _huge_ upgrade in our ability to analyze data!
+Using Table Functions is a __huge__ upgrade in our ability to analyze data!
 
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see _what percentage of games_ those teams won.
+- A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see __what percentage of games__ those teams won.
 - What columns might you want to add to your dataset?
 - What filters might be interesting to apply to your dataset?

@@ -113,10 +113,25 @@ Complete @printable-exercise{creating-scatterplot.adoc} to get a feel for making
 As an alternative to plotting the small table, assign a handful of rows from the _full table_ to each student and have them plot those animals on the board. This can be done collaboratively, resulting in a whole-class scatter plot!
 }
 
+Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
+
+Here's an example of a point cloud in a scatter plot from a different data set. We could describe these points as clustering around a line that slopes from the bottom left to the top right.
+
+@centered-image{images/animal-p-v-cal-pc.png, 450}
+
+@slidebreak
+
+@QandA{
+@Q{What pattern do you see in __your__ scatter plot?}
+@Q{Are there any points that seem unusual? Why?}
+@Q{Suppose we plotted the age and adoption time of four random animals, and found that they all fell in a line. Is this enough to determine that there's a relationship between the variables?}
+@A{No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.}
+}
+
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
 
 @ifproglang{pyret}{
-The `scatter-plot` function works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
+Pyret has a `scatter-plot` function that works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
 @show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
 
@@ -153,21 +168,9 @@ There is an important difference, however, in that **line graphs are used when c
 }
 
 === Synthesize
-@teacher{Have students report back on their findings from the starter file and on @printable-exercise{creating-scatterplot.adoc}.}
 
-@right{@image{images/no-relationship.png, 250}}
+How do patterns or trends show up in a scatter plot?
 
-Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
-
-@slidebreak
-
-@QandA{
-@Q{What pattern do you see in __your__ scatter plot?}
-@Q{Are there any points that seem unusual? Why?}
-@A{Suppose we plotted the age and adoption ime of four random animals, and found that they all fell in a line.}
-@Q{Is this enough to determine that there's a relationship between the variables?}
-@A{No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.}
-}
 
 == Does Size Affect Adoption Time? @duration{15 minutes}
 
@@ -246,10 +249,8 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 
 @strategy{Teaching Tip}{
 
-
 Project the scatter plot at the front of the room, and have students come up to the plot to point out their patterns.
 }
-
 
 @slidebreak
 
@@ -291,7 +292,7 @@ Look at both numbers and displays before drawing conclusions
 
 Each of these scatter plots and accompanying set of numbers corresponds to a dataset. The patterns in the scatter plots vary wildly, but the numbers that summarize the datasets barely change at all!
 
-@center{@image{images/CloudToCircle.gif, "An animation, showing random point clouds shifting into circular patterns, all with means and standard deviations that are identical to the second decimal"}}
+@center{@image{images/CloudToCircle.gif}}
 
 @teacher{
 This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore more of autodesks' @opt-online-exercise{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Same Stats, Different Graphs} visualizations!
@@ -304,39 +305,41 @@ For practice, complete @printable-exercise{exploring-columns.adoc}.
 }
 
 @teacher{
-All of the questions on this page are phrased as "how is the @vocab{explanatory variable} related to the @vocab{response variable}?"
-}
+All of the questions on this page are phrased as "how is the @vocab{explanatory variable} related to the @vocab{response variable}?""
 
-=== Synthesize
-
-@teacher{
 Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
 }
 
-It might be tempting to go straight into making a scatter plot to explore how weeks to adoption may be affected by age. But different animals have very different lifespans!
+It is important to note that making a scatter plot will not always give us the information we're looking for.
 
-Why does that matter?
+If we wanted to know how weeks to adoption may be affected by age, for example, it would be important to consider the fact that different species have very different lifespans! 
+
+@indented{_A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown._} 
+
+With differences like this, it doesn’t make sense to put them all on the same scatter plot because we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
 
 @slidebreak
 
-A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown. With differences like this, it doesn’t make sense to put them all on the same scatter plot. By mixing them together, we may be __hiding__ a real relationship, or creating the illusion of a relationship that isn’t really there!
+@ifproglang{codap}{
+CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
 
-@slidebreak
-
-@ifproglang{codap}{CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
-
-Remember the impact of considering a third attribute before drawing conclusions about your data.}
+Remember the impact of considering a third attribute before drawing conclusions about your data.
+}
 
 @ifproglang{pyret}{
-**It would be nice if the dots in our scatter plot were different colors or shapes, depending on the species.** That would give us a much better picture of what's really going on in the data. **But making a special image for every single row in the table would take a very long time!** If only there was a function with a Contract like:
-
-`species-dot {two-colons} (r {two-colons} Row) -> Image`
-
-This function could take in a row from the animals table, and draw a special dot depending on the species. Unfortunately, no such function exists...yet!
-
 @teacher{
-There are ways to @lesson-link{functions-examples-definitions, define functions of your own}, and extend Pyret to deepen your analysis, @lesson-link{advanced-displays, create more useful and engaging charts}, and dig further into our data.
-}}
+There are ways to @lesson-link{functions-examples-definitions, define functions of your own} and extend Pyret to deepen your analysis. Our lesson on @lesson-link{advanced-displays} supports students in creating more useful and engaging charts that allow them to dig further into their data.
+}
+}
+
+=== Synthesize
+@QandA{
+@Q{Imagine a scatter plot of height v. age for K12 students. What would you expect it look like, and why?}
+@A{Because children grow taller from age 5 to 18, we would expect to see a point cloud sloping upward to the right, with younger students tending to be shorter, and older students tending to be taller.}
+@Q{Imagine a scatter plot comparing the number of Marvel movies produced each year to the number of car accidents each year. What would you expect it to look like?}
+@A{There is no relationship between Marvel movies and car accidents, so we wouldn't expect the points to be clustered around a line.}
+}
+
 == Data Exploration Project (Scatter Plots) @duration{flexible}
 
 === Overview

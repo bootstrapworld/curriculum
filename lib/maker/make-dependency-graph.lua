@@ -38,6 +38,11 @@ local function read_slidesURL(slidesId_file)
   return 'https://docs.google.com/presentation/d/' .. id
 end
 
+
+
+    
+
+
 local o = io.open(graph_file, 'w+')
 
 o:write('var graph = {\n')
@@ -57,6 +62,7 @@ for _,lesson in ipairs(lessons) do
   local notesFiles_txt = ''
   local primitives_txt = ''
   local starterFiles_txt = ''
+  local optStarterFiles_txt = ''
   local prerequisites_txt = ''
   --
   local proglang_file = lessoncache .. '.record-proglang'
@@ -66,6 +72,15 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  local function page_title(page_adoc_file)
+    local title_file = lessonpagecache .. '.' .. page_adoc_file:gsub('%.adoc', '') .. '.titletxt'
+    local title = page_adoc_file
+    if file_exists_p(title_file) then
+      local title2 = first_line(title_file)
+      if title2 then title = title2 end
+    end
+    return title
+  end
   --
   local title_file = lessoncache .. '.index.titletxt'
   local description_file = lessoncache .. '.index-desc.txt.kp'
@@ -75,7 +90,8 @@ for _,lesson in ipairs(lessons) do
   local handoutPages_file = lessonpagecache .. '.handout-exercise-pages-ls.txt.kp'
   local notesFiles_file = lessonpagecache .. '.workbook-notes-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
-  local starterFiles_file = lessoncache .. '.index-starterfiles.txt.kp'
+  local starterFiles_file = lessoncache .. '.index.starterfiles'
+  local optStarterFiles_file = lessoncache .. '.index.optstarterfiles'
   local keywords_file = lessoncache .. '.lesson-keywords.json'
   local glossary_json_file = lessoncache .. '.index-glossary.json'
   local prereqs_file = lessoncache .. '.lesson-prereq.txt.kp'
@@ -107,7 +123,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(pages_file) then
     i = io.open(pages_file)
     for line in i:lines() do
-      pages_txt = pages_txt .. '\"' .. line .. '\", '
+      pages_txt = pages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -115,7 +131,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(exercisePages_file) then
     i = io.open(exercisePages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '\"' .. line .. '\", '
+      exercisePages_txt = exercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -123,7 +139,7 @@ for _,lesson in ipairs(lessons) do
   if file_exists_p(handoutPages_file) then
     i = io.open(handoutPages_file)
     for line in i:lines() do
-      handoutPages_txt = handoutPages_txt .. '\"' .. line .. '\", '
+      handoutPages_txt = handoutPages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -148,6 +164,14 @@ for _,lesson in ipairs(lessons) do
     i = io.open(starterFiles_file)
     for line in i:lines() do
       starterFiles_txt = starterFiles_txt .. '\"' .. line .. '\", '
+    end
+    i:close()
+  end
+  --
+  if file_exists_p(optStarterFiles_file) then
+    i = io.open(optStarterFiles_file)
+    for line in i:lines() do
+      optStarterFiles_txt = optStarterFiles_txt .. '\"' .. line .. '\", '
     end
     i:close()
   end
@@ -178,11 +202,14 @@ for _,lesson in ipairs(lessons) do
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
+  o:write('    optStarterFiles: [' .. optStarterFiles_txt .. '],\n')
   if file_exists_p(slidesId_file) then
     local slidesURL = read_slidesURL(slidesId_file)
     if slidesURL then
       o:write('    slides: "' .. slidesURL .. '",\n')
     end
+  else
+    o:write('    slides: false,\n')
   end
   copy_file_to_port(standards_file, o)
   o:write(' },\n')

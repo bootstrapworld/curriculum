@@ -1,0 +1,103 @@
+[.landscape]
+= Label the Arrows
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td .autonum::after { content: ')' !important; }
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+/*
+- Make the arrows relative, so we can position answers around them
+- Make the answers 20px above the top of the arrow, centered
+*/
+tr span.arrow { position: relative; }
+tr span.arrow::before {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+</style>
+++++
+
+Each arrow represents a transformation from an expression to an equivalent expression. Label each arrow with the type of transformation that you observe: Identity Property ("IP"), Associative Property ("AP"), Commutative Property ("CP"), or Computation ("Comp").
+
+[.FillVerticalSpace, cols="^.^1a,^.^35a",stripes="none", options="header"]
+|===
+| 	 | Circles of Evaluation
+
+| @n
+| @show{(coe '(* 2 (- (* 3 9) 0) ))} @span{.arrow}{⟶}
+@show{(coe '(* 2 (* 3 9)))} @span{.arrow}{⟶}
+@show{(coe '(* (* 2 3) 9))} @span{.arrow}{⟶}
+@show{(coe '(* 6 9))}
+
+| @n
+| @show{(coe '(* (* 5 g) (+ 5 -4)))} @span{.arrow}{⟶}
+@show{(coe '(* (* 5 g) 1))} @span{.arrow}{⟶}
+@show{(coe '(* 5 g))} @span{.arrow}{⟶}
+@show{(coe '(* g 5))}
+
+| @n
+| @show{(coe '(+ (+ (+ 3 w) 0) 16))} @span{.arrow}{⟶}
+@show{(coe '(+ (+ (+ w 3) 0) 16))} @span{.arrow}{⟶}
+@show{(coe '(+ (+ w 3) 16))} @span{.arrow}{⟶}
+@show{(coe '(+ w 19))}
+
+| @n
+| @show{(coe '(* (* (* 8 g) h) 1))} @span{.arrow}{⟶}
+@show{(coe '(* (* 8 g) h))} @span{.arrow}{⟶}
+@show{(coe '(* 8 (* g h)))} @span{.arrow}{⟶}
+@show{(coe '(* 8 (* h g)))}
+
+| @n
+| @show{(coe '(/ (+ 14 (+ 6 7)) 1))} @span{.arrow}{⟶}
+@show{(coe '(+ 14 (+ 6 7)))} @span{.arrow}{⟶}
+@show{(coe '(+ (+ 14 6) 7))} @span{.arrow}{⟶}
+@show{(coe '(+ 20 7))}
+
+
+|===
+
+
+
+
+@ifsoln{
+++++
+<style>
+/*
+- use tr:nth-of-type(A) to determine which NUMBER
+- use span.arrow:nth-of-type(B) to determine which STEP
+*/
+tr:nth-of-type(1) span.arrow:nth-of-type(1)::before { content: 'IP' }
+tr:nth-of-type(1) span.arrow:nth-of-type(2)::before { content: 'AP' }
+tr:nth-of-type(1) span.arrow:nth-of-type(3)::before { content: 'Comp' }
+
+tr:nth-of-type(2) span.arrow:nth-of-type(1)::before { content: 'Comp' }
+tr:nth-of-type(2) span.arrow:nth-of-type(2)::before { content: 'IP' }
+tr:nth-of-type(2) span.arrow:nth-of-type(3)::before { content: 'CP' }
+
+tr:nth-of-type(3) span.arrow:nth-of-type(1)::before { content: 'CP' }
+tr:nth-of-type(3) span.arrow:nth-of-type(2)::before { content: 'IP' }
+tr:nth-of-type(3) span.arrow:nth-of-type(3)::before { content: 'Comp' }
+
+tr:nth-of-type(4) span.arrow:nth-of-type(1)::before { content: 'IP' }
+tr:nth-of-type(4) span.arrow:nth-of-type(2)::before { content: 'AP' }
+tr:nth-of-type(4) span.arrow:nth-of-type(3)::before { content: 'CP' }
+
+tr:nth-of-type(5) span.arrow:nth-of-type(1)::before { content: 'IP' }
+tr:nth-of-type(5) span.arrow:nth-of-type(2)::before { content: 'AP' }
+tr:nth-of-type(5) span.arrow:nth-of-type(3)::before { content: 'Comp' }
+</style>
+++++
+}
+
