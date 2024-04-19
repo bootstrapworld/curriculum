@@ -2331,7 +2331,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-(define (display-exercise-collation o)
+#;(define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
