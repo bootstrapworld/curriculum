@@ -21,12 +21,11 @@
   </style>
 
   <script type="text/javascript">
-    let {pathway, lessons, lesson} = getParams();
-    lessons = lessons || Object.keys(graph);
-    console.log('lessons are', lessons)
-    const glossary = computeTransitiveData(false,false,lessons).glossary;
-
     function populateGlossary() {
+      let {pathway, lessons, lesson} = getParams();
+      lessons = lessons || Object.keys(graph);
+      console.log('lessons are', lessons)
+      const glossary = computeTransitiveData(false,false,lessons).glossary;
       const parentDOM = document.getElementById('glossary');
 
       // sort words alphabetically, then add the appropriate DOM
@@ -40,7 +39,6 @@
         dd.innerHTML = "<p>" + glossary.get(key) + "</p>";
         parentDOM.appendChild(dd);
       });
-
     }
 
     var searchTimeout;
