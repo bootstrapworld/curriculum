@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# create .git/hooks/pre-commit if not already there
+
+hookfile=.git/hooks/pre-commit
+
+test -f $hookfile && exit
+
+cp -p lib/maker/git-pre-commit-hook.sh $hookfile
+chmod +x $hookfile

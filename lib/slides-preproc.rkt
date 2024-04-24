@@ -325,20 +325,21 @@
 
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
-         [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
-        [prefix (cond [(string=? *proglang* "pyret") "# "]
-                      [(string=? *proglang* "wescheme") "; "]
-                      [(string=? *proglang* "codap") ""])]
-        [s (string-append
-             prefix
-             funname-str
-             " :: "
-             (contract-types-to-commaed-string domain-list)
-             " -> "
-             (htmlize range))]
-        [s2 (and purpose
-                 (string-append
-                   prefix purpose))])
+         [funname-str (if (string? funname) funname (format "~a" funname))]
+         [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname-str)]
+         [prefix (cond [(string=? *proglang* "pyret") "# "]
+                       [(string=? *proglang* "wescheme") "; "]
+                       [(string=? *proglang* "codap") ""])]
+         [s (string-append
+              prefix
+              funname-str
+              " :: "
+              (contract-types-to-commaed-string domain-list)
+              " -> "
+              (htmlize range))]
+         [s2 (and purpose
+                  (string-append
+                    prefix purpose))])
     (if purpose
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
