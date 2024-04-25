@@ -13,6 +13,7 @@ fi
 regenid=
 export OLDFORMAT
 export PROGLANG
+nomake=
 lsn=
 
 if test $# -eq 0; then
@@ -28,6 +29,8 @@ else
       echo WARNING: Obsolete option $1; regenid=1; shift
     elif test "$1" = --proglang; then
       shift; PROGLANG="$1"; shift
+    elif test "$1" = --nomake; then
+      nomake=1; shift
     else
       lsn="$1"; shift
     fi
@@ -64,7 +67,9 @@ parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 # CSS file for this
 cssPath=$TOPDIR/distribution/en-us/lib/shared.css
 
-make
+if test -z "$nomake"; then
+  make
+fi
 
 if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
