@@ -3,7 +3,7 @@
 == Authentication
 
 1. Create a directory `.md2googleslides` in your home directory
-
++
 ----
   cd ~/
   mkdir .md2googleslides
@@ -15,42 +15,23 @@ the `client_id.json` file through a secure channel. Put this file
 inside the `~/.md2googleslides` folder.
 
 3. In your terminal window, _manually_ run md2gslides on a simple, dummy file.
-
++
 ----
   node node_modules/md2googleslides/bin/md2gslides lib/dummy-slides.md -n -t TITLE --use-fileio
 ----
-
++
 This will generate some terminal output. The *first line* of the output looks something like
-
++
 `Authorize this app by visiting this url:
 https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&scope=...`
 
-2. Copy the _entire URL_ (it's quite long!) into a new browser window. This
+4. Copy the _entire URL_ (it's quite long!) into a new browser window. This
 will ask you to grant permission for `md2gslides` to construct google
 slides for you, which requires two different permissions. Check both boxes
 and continue. Eventually you will reach a web page that contains a code.
 
-3. Copy that code, and paste it back into your terminal. This closes the loop
+5. Copy that code, and paste it back into your terminal. This closes the loop
 between md2gslides and Google, authenticating your computer. You're ready to rock!
-
-== Subsequent uses
-
-The script `build-slide` should be called after building a pathway (i.e.,
-with a `distribution` directory populated with the built pathways
-of your choice). This will build all the slides.md files in the
-built lessons.
-
-(The standard location for slides.md is in the lesson directory,
-alongside its lesson plan adoc. It's ok if a lesson doesn't have
-a slides.md.)
-
-If a slides.md is being pushed to Google Slides for the first
-time, a small file containing its Google presentation id is
-created in your view of the repo (not just the `distribution`).
-You will be encouraged to add it to your repo and push it so this
-presentation id is used in perpetuity.  (If someone else has
-already done it, you won't need to do it. You'll will just reuse
-this presentation id.)
 
 == build-slide
 
@@ -60,7 +41,7 @@ individual lesson, whose name is supplied as its argument, e.g.,
   build-slide function-composition
 
 This assumes that the lesson `function-composition` has been
-copied to the `distribution/` directory by a previous (any)
+created in the `distribution/**/lessons` directory by a previous (any)
 `make` call.
 
 `build-slide` converts the lessons's `slides.md` to a
@@ -73,23 +54,30 @@ used and stored in the `slides-pyret.id`, and you are advised to
 commit it to the repo, so that it can be reliably reused during
 future calls to `build-slide`.
 
-If `slides-pyret.id` is already present, then you are warned that
-the current `build-slide` call could replace an exising
-presentation on the web. Answer `y` to the prompt if that's what
-you really want to do. If not, answer `n` to exit: You are
-advised to use the `-f` option to create a new id that will not
-dislodge the existing presentation. Using the `-f` option is a
-good way to simply check that your modified slides convert
-correctly without committing them to the web yet.
+You can use some options to guide `build-slide`. The position of
+these options on the `build-slide` argument line doesn't matter.
 
-===  `--proglang` option
+=== `-f` option
+
+If `slides-pyret.id` is already present, then you are warned that
+the current `build-slide` call could replace an existing
+presentation on the web. Answer `y` to the prompt if that's what
+you really want to do. If not, answer `n` to exit: You will then
+be advised to use the `-f` option to create a new id that will
+not dislodge the existing presentation.
+
+Using the `-f` option is a good way to simply check that your
+modified slides convert correctly without committing them to the
+web yet.
+
+=== `--proglang` option
 
 The `build-slide` script takes as argument the name of a lesson
 as it is in the `distribution` directory. For the default
 proglang of `pyret`, this name is
 the same as the name of the lesson in the repo. For other
 proglangs, e.g., `wescheme`, the lesson directory inside
-`distribution` sports the suffix `-wescheme`.  `build-slide` called
+`distribution` sports the suffix `-wescheme`. `build-slide` called
 with the suffixed lesson name will do the right thing, and will
 copy the resultant `slides-wescheme.id` (not the suffix!) to the
 correct lesson directory in the repo:
@@ -108,4 +96,18 @@ occurs in `distribution`:
 
   build-slide function-composition-wescheme --proglang wescheme
 
-// last modified 2023-11-07
+=== `--nomake` option
+
+By default, `build-slide` calls `make` to ensure a proper
+`distribution` folder before attempting to build slides for its
+argument lesson.
+
+However, if you're calling `build-slide` multiple times in quick
+succession (perhaps within a shell loop), the `make` is redundant
+except for the first time, and even a `make` that doesn't need to
+update the `distribution` consumes valuable time. In such cases,
+use the `--nomake` option to skip the `make`.
+
+  build-slide --nomake function-composition
+
+// last modified 2024-04-25
