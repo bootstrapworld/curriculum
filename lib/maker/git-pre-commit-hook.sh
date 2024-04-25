@@ -8,12 +8,12 @@ minlines=10
 
 for f in $(git diff --name-only --staged); do
   fb=$(basename $f)
-  if test ${fb#*.} != adoc; then continue; fi
+  test ${fb#*.} = adoc || continue
   d=$(dirname $f)
   proglangfile=$d/proglang.txt
-  if test -f $proglangfile -a $(grep -c . $proglangfile) -gt 1; then
-    if test $(git diff --staged -- $f|grep -c '^+') -gt $minlines -a $(git diff --staged -- $f|grep '^+'|grep -c @ipfproglang) -eq 0; then
-      echo WARNING: $f did not have any @ifproglang\'s
-    fi
-  fi
+  test -f $proglangfile || continue
+  test $(grep -c . $proglangfile) -gt 1 || continue
+  test $(git diff --staged -- $f|grep -c '^+') -ge $minlines || continue
+  (git diff --staged -- $f|grep '^+'|grep -q @ifproglang) && continue
+  echo WARNING: $f did not have any @ifproglang\'s
 done
