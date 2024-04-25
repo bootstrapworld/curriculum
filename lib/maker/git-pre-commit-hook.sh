@@ -15,6 +15,5 @@ for f in $(git diff --name-only --staged); do
   test $(grep -c . $proglangfile) -gt 1 || continue
   test $(git diff --staged -- $f|grep -c '^+') -ge $minlines || continue
   (git diff --staged -- $f|grep '^+'|grep -q @ifproglang) && continue
-  test $(git diff --staged -- $f|grep '^+'|grep -c @ifproglang) -eq 0 || continue
   echo WARNING: $f did not have any @ifproglang\'s
 done
