@@ -38,6 +38,7 @@ else
 fi
 
 lsn=${lsn%/}
+lsn=${lsn##*/}
 
 if test "$PROGLANG" = wescheme; then
   lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
