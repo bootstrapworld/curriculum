@@ -11,6 +11,7 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
+rebuild=
 export OLDFORMAT
 export PROGLANG
 nomake=
@@ -31,6 +32,8 @@ else
       shift; PROGLANG="$1"; shift
     elif test "$1" = --nomake; then
       nomake=1; shift
+    elif test "$1" = --rebuild; then
+      rebuild=y; shift
     else
       lsn="$1"; shift
     fi
@@ -89,10 +92,10 @@ for NATLANG in *; do
   test -d $NATLANG || continue
   export PROGDIR=$TOPDIR/distribution/.prog-$NATLANG
   if test ! -d $NATLANG/lessons; then
-    echo Missing lessons diry in distribution -- did you call build-pathway\?
+    echo Missing lessons directory in distribution/$NATLANG -- did you call make\?
     continue
   fi
-  if test ! -d  $NATLANG/lessons/$lsn; then
+  if test ! -d $NATLANG/lessons/$lsn; then
     echo Lesson $NATLANG/lessons/$lsn not found in distribution
     continue
   fi
@@ -122,12 +125,12 @@ for NATLANG in *; do
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title"
 
-      # warn if used without -f
+      # warn if used without -f and --rebuild
       if test -z "$regenid"; then
         if test -f "$idfile"; then
-          read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
-          if test "$goahead" != y; then
-            exit
+          if test -z "$rebuild"; then
+            read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
+            test "$goahead" != y && break
           fi
         fi
       fi
