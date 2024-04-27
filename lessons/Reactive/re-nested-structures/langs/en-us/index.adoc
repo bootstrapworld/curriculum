@@ -49,7 +49,6 @@ data PinwheelState:
       p3a :: Number,
       p4a :: Number)
 end
-
 STARTING-PINWHEELS = pinwheel(60, 3, 25, 70)
 ```
 
@@ -92,7 +91,6 @@ This time, the `PinwheelState` data structure contains four _structures_, instea
 data Pinwheel:
   | pw(angle :: Number)
 end
-
 # A PinwheelState is 4 Pinwheels
 data PinwheelState:
   | pinwheels(
@@ -101,7 +99,6 @@ data PinwheelState:
       p3 :: Pinwheel,
       p4 :: Pinwheel)
 end
-
 STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 ```
 
@@ -238,50 +235,40 @@ The `next-state-tick` function doesn't need to change _at all_. This offers you 
 
 @slidebreak
 
-You’ve seen how nested structures work inside a simple animation, but what about a more complex video game? Here’s the original data block and some sample instances from a videogame in which a player tries to catch the target, and avoid a danger:
+How do nested structures work in a complex video game? Here’s the original data block and some sample instances from a videogame in which a player tries to catch the target, and avoid a danger:
 
 ```
 # A GameState is a Player's x and y-coordinate, danger's x and y
 # coordinate and speed, and target's x and y coordinate and speed
 data GameState:
     game(
-      playerx :: Number,
-      playery :: Number,
-      dangerx :: Number,
-      dangery :: Number,
+      playerx :: Number, playery :: Number,
+      dangerx :: Number, dangery :: Number,
       dangerspeed :: Number,
-      targetx :: Number,
-      targety :: Number,
+      targetx :: Number, targety :: Number,
       targetspeed :: Number,
       score :: Number)
 end
-
 # Some sample GameStates
 START = game(320, 100, 600, 75, 5, 1500, 250, 10, 0)
 PLAY  = game(320, 100, 600, 75, 5, 300, 250, 20, 0)
 ```
 @slidebreak
 
-And here’s the same game made with nested structures. To clean up the `GameState` structure, make it easier to read, and allow more flexibility in our code, we defined a new structure to represent a `Character`, which contains a single set of x and y-coordinates:
+To clean up the `GameState` structure and allow more flexibility in our code, we defined a new structure to represent a `Character`, which contains a single set of x and y-coordinates:
 
 ```
 # A Character is an x and y-coordinate
 data Character:
-    char(
-      x :: Number,
-      y :: Number)
+    char(x :: Number, y :: Number)
 end
-
 data GameState:
     game(
       player :: Character,
-      danger :: Character,
-      dangerspeed :: Number,
-      target :: Character,
-      targetspeed :: Number,
+      danger :: Character, dangerspeed :: Number,
+      target :: Character, targetspeed :: Number,
       score :: Number)
 end
-
 # Some sample GameStates
 START = game(char(320, 100), char(600, 75), 5, char(1500, 250), 10, 0)
 PLAY  = game(char(320, 100), char(600, 75), 5, char(300, 250), 20, 0)
