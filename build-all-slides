@@ -1,0 +1,41 @@
+#!/bin/bash
+
+course=
+nomake=
+
+otheropts="--nomake"
+
+while test $# -ne 0; do
+  opt="$1"
+  if test "$opt" = --nomake; then
+    nomake=1; shift
+  elif test "$opt" == --rebuild -o "$opt" == -f; then
+    otheropts="$otheropts $opt"; shift
+  else
+    course="$opt"; shift
+    course=${course%/}
+    course=${course##*/}
+  fi
+done
+
+if test -z "nomake"; then
+  make
+fi
+
+function build_slide() {
+  local lesson=$1
+  echo calling build-slide $otheropts $lesson
+  ./build-slide $otheropts $lesson
+}
+
+if test -z "$course"; then
+  for lesson in distribution/en-us/lessons/*; do
+    build_slide $lesson
+  done
+else
+  courselessonlist=distribution/en-us/courses/$course/.cached/.workbook-lessons.txt.kp
+  for lesson in $(cat $courselessonlist); do
+    build_slide $lesson
+  done
+fi
+
