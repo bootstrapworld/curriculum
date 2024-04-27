@@ -359,6 +359,8 @@
          (set! f "./index.adoc")]
         [(regexp-match "/$" f)
          (set! f (string-append f "index.adoc"))]
+        [(regexp-match "html$" f)
+         (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
