@@ -115,4 +115,29 @@ use the `--nomake` option to skip the `make`.
 
   build-slide --nomake function-composition
 
-// last modified 2024-04-27
+== build-all-slides
+
+`build-slide` builds the deck for a single argument lesson. To
+build the slides for all lessons, use
+
+  build-all-slides
+
+To build the slides for all the lessons in a particular course,
+e.g., algebra-pyret, use
+
+  build-all-slides algebra-pyret
+
+`build-all-slides` accepts the same options as `build-slide`:
+
+- `-f` to make the slides without updating the currently public
+  Google deck
+
+- `--rebuild` to approve updating the currently public Google
+  deck
+
+- `--nomake` to avoid a sanity-check `make`. (Note however that
+  if this option isn't given, `build-all-slides` will call
+  `make`, but only once -- not once for each of the lessons that
+  it processes. So failing to mention this option is not so
+  terrible.)
+
