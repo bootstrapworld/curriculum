@@ -45,11 +45,11 @@ People often think that computers can't make mistakes, because they are "just ma
 
 @slidebreak
 
-@right{@image{images/hopper.jpg, 200}} In the 1940s, computers weren't made from tiny microprocessors. They were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
+@right{@image{images/hopper.jpg, 200}}In the 1940s, computers weren't made from tiny microprocessors. They were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
 
 @slidebreak
 
-@right{@image{images/bug.jpg, 200}} She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*
+@right{@image{images/bug.jpg, 200}}She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*
 
 @slidebreak
 
@@ -69,10 +69,8 @@ In this lesson, we'll be talking about different kinds of mistakes, which can ha
   * These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
 
 (2) @vocab{Contract Errors} - Code that produces a value that breaks a function's Contract, preventing the computer from _running_ the program any further. 
-  * @ifproglang{pyret}{`circle("hello", "solid", "red"))`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors. 
-  * But look at the contract `circle :: Number, String, String -> Image`
-  * The `circle` function is expecting a Number for its first argument and "hello" is a String!  
-  * Like syntax errors, contract errors will also result in an error message.
+  * @ifproglang{pyret}{`circle("hello", "solid", "red")`} @ifproglang{wescheme}{`(circle "hello" "solid" "red")`} has no syntax errors.
+  * But the `circle` function is expecting a Number for its first argument and "hello" is a String!
 
 (3) @vocab{Logic Errors} - Logic errors are often the hardest ones to find, because there is no error message! 
   * When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
