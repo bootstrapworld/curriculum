@@ -32,6 +32,10 @@ if test ! -f $d/index.adoc; then
   fi
 fi
 
+if test ! -d $d/images; then
+  mkdir -p $d/images
+fi
+
 lessonName=$(basename $d)
 
 cd $d/..

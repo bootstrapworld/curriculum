@@ -13,24 +13,34 @@ lesson:
 
 - its title
 - its description
+- its programming language (i.e., pyret/wecheme/codap)
+- the section headers in its lesson plan
 - the pages it contains
-- its exercise pages
+- its optional (i.e., exercise) pages
+- its handouts
+- its notes pages
 - the primitives needed for it
 - its key words
+- its glossary
+- its notes
 - its prerequisite lessons
+- its starter files
+- its optional starter files
+- its slides file
 
-The primitives are generated for each lesson as
-`.cached/.index-primitives.txt.kp` by the program
-`collect-primitives.lua`.
+The primitives and starter files are generated for each lesson as
+`.cached/.index-primitives.txt.kp` and
+`.cached/.index.starterfiles` respectively by the program
+`collect-specials.lua`.
 
-Note that the JS file represent the collected information as a JSON
+Note that the JS file represents the collected information as a JSON
 object set to a variable. The file itself isn't JSON. This also holds
 for the next two JS files described below.
 
 === Images list
 
 A glossary of image information, `images.js`, is compiled from the
-`images/lesson-imags.json` file in each lesson.
+`images/lesson-images.json` file in each lesson.
 
 === Pathway ToCs
 
@@ -41,5 +51,5 @@ generated in `pathway-tocs.js`.
 
 In addition to these JS files, a bilingual glossary
 `bilingual-glossary.html` is created in `distribution/en-us/lib`.
-This is a browsable version of the file `glossary-terms.rkt` in the
+This is a browsable version of the file `glossary-terms.json` in the
 repo.

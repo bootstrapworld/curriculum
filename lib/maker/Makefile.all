@@ -56,6 +56,10 @@ export LINKCHECK :=
 
 export SCRATCHFILE := $(TOPDIR)/distribution/.scratch
 
+export DEBUGADOC :=
+
+export TPC :=
+
 # "other" directories that shd be only minimally processed (no HTML/PDF)
 
 export OTHERDIRS := /\(fragments\|xtra\|xtras\)/
@@ -104,6 +108,12 @@ quick-deploy:
 
 ###############################################################################
 
+csv:
+	$(MAKE)
+	$(TOPDIR)/lib/make-wp-csv.rkt
+
+###############################################################################
+
 dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
 
 alignment-dictionaries := $(wildcard \
@@ -148,3 +158,4 @@ help:
 	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
 	@echo "  make deploy       -- deploys existing distribution/ to webhost"
 	@echo "  make help         -- displays (this) help"
+	@echo "  make csv          -- make CSV files for WordPress"

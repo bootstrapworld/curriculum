@@ -19,6 +19,8 @@
 
 (define *book* (truthy-getenv "BOOK"))
 
+(define *only-some-courses* (truthy-getenv "COURSE"))
+
 ; (define *math-unicode?* (truthy-getenv "MATHUNICODE"))
 
 (define *math-unicode?* #t)
@@ -177,6 +179,7 @@
         '())))
 
 (define *starter-files-used* '())
+(define *opt-starter-files-used* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -838,8 +841,9 @@
             [(path-has-extension? f ".pdf")
              (when (file-exists? (build-path dist-natlang-dir f)) (set! existent-file? #t))])
       (unless existent-file?
-        (check-link f)
-        (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f))
+        (check-link f) ;move inside next unless?
+        (unless (and *only-some-courses* (regexp-match "courses/" f))
+          (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f)))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"
@@ -1318,6 +1322,7 @@
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
   (set! *starter-files-used* '())
+  (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
   (set! *natlang* (string->symbol (getenv "NATLANG")))
@@ -1449,6 +1454,8 @@
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@image{" text)
+                                        (regexp-match "@centered-image{" text)
                                         (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
@@ -1498,7 +1505,7 @@
                            [(string=? directive "empty")
                             (read-group i directive)]
                            [(string=? directive "n")
-                            (fprintf o "[.autonum]##~a##" *autonumber-index*)
+                            (fprintf o "{empty}[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
                            [(string=? directive "nfrom")
                             (let* ([arg (read-group i directive)]
@@ -1584,20 +1591,18 @@
                               (error 'ERROR
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
-                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-mat.asc[]\n\n"
-                                     *containing-directory*)
+                            (fprintf o "\n[#material-links]\n&nbsp;\n")
                             ; The line below can be deleted, once langTable links are generated via their own directive
                             #;(when (member *proglang* '("pyret" "wescheme"))
-                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))]
+                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))
+                            ]
                            [(string=? directive "opt-material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
                                      "WARNING: @opt-material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (set! *supplemental-materials-needed?* #t)
-                            (fprintf o "\ninclude::~a/{cachedir}.index-extra-opt-mat.asc[]\n\n"
-                                     *containing-directory*)
-                             ]
+                            (fprintf o "\n[#opt-material-links]\n&nbsp;\n")]
                            [(string=? directive "language-table")
                             (let ([link-text (string-trim (read-group i directive))])
                               (unless *lesson-plan*
@@ -1634,11 +1639,6 @@
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
                             (print-workbook-info *target-pathway* o)]
-                           [(string=? directive "remotely")
-                            (unless *narrative*
-                              (error 'ERROR
-                                     "adoc-preproc: @remotely valid only in pathway narrative"))
-                            (print-teach-remotely o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
                               (error 'ERROR
@@ -1654,24 +1654,19 @@
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
-                            (display-exercise-collation o)]
+                            (fprintf o "\n[#exercises_and_solutions]\n&nbsp;\n")]
                            [(string=? directive "all-projects")
                             ; (printf "doing all-projects ~a\n" (errmessage-context))
                             (unless *teacher-resources*
                               (error 'ERROR
-                                     "adoc-preproc: @all-exercises valid only in teacher resources"))
+                                     "adoc-preproc: @all-projects valid only in teacher resources"))
                             (link-to-opt-projects o)]
-                           [(string=? directive "all-lesson-notes")
-                            (unless *teacher-resources*
-                              (error 'ERROR
-                                     "adoc-preproc: @all-lesson-notes valid only in teacher resources"))
-                            (link-to-notes-pages o)]
                            [(string=? directive "lesson-info")
                             (unless *teacher-resources*
                               (error 'ERROR
                                      "adoc-predoc: @lesson-info valid only in teacher resources"))
                             (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
-                            (newline)]
+                            (newline o)]
                            [(string=? directive "solutions-workbook")
                             ;TODO: don't need this anymore -- link is autogen'd
                             (unless *teacher-resources*
@@ -1819,12 +1814,6 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
-                            (when *enclosing-directive*
-                              (printf "WARNING: ~a: @slidebreak inside ~a\n\n"
-                                      (errmessage-file-context)
-                                      (if (string? *enclosing-directive*)
-                                          (string-append "@" *enclosing-directive*)
-                                          "another directive")))
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
@@ -1876,7 +1865,7 @@
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
                                               [else
-                                                (let* ([newly-added? (add-starter-file lbl)]
+                                                (let* ([newly-added? (add-starter-file lbl #:opt? opt?)]
                                                        [starter-file-title
                                                          (regexp-replace* #rx","
                                                            (or (and p (hash-ref p 'title #f))
@@ -2132,7 +2121,6 @@
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
                 (print-workbook-info *target-pathway* o)
-                (print-teach-remotely o)
                 (print-other-resources-intro o)
                 (print-other-resources *target-pathway* *proglang* o))
 
@@ -2204,7 +2192,7 @@
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
             ; REQUIRED PRINTABLE PAGES
-            (unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
+            #;(unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
               (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
               (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
               (for ([x (reverse *handout-exercise-links*)])
@@ -2227,7 +2215,7 @@
               (fprintf o "\n* ~a\n\n" x))
             ; ONLINE EXERCISES --- to be removed onces all required online exercises
             ; have been turned into starter files
-            (for ([x (map cdr (reverse *online-exercise-links*))])
+            #;(for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
@@ -2301,17 +2289,28 @@
           #:exists 'replace)
         )
 
-      (when (and (or *lesson-plan* *lesson*) (pair? *starter-files-used*))
-        (let ([sf-file (if *lesson-plan*
-                           (build-path *containing-directory* ".cached" ".index.starterfiles")
-                           (make-temporary-file ".page-~a.starterfiles" #f
-                                                (format "distribution/~a/lessons/~a/.cached"
-                                                        *natlang* *lesson*)))])
-          (call-with-output-file sf-file
-            (lambda (o)
-              (for ([sf *starter-files-used*])
-                (display sf o) (newline o)))
-            #:exists 'replace)))
+      (when (or *lesson-plan* *lesson*)
+        (when (pair? *starter-files-used*)
+          (let ([sf-file (if *lesson-plan*
+                             (build-path *containing-directory* ".cached" ".index.starterfiles")
+                             (format "distribution/~a/lessons/~a/.cached/.page.starterfiles"
+                                     *natlang* *lesson*))])
+            (call-with-output-file sf-file
+              (lambda (o)
+                (for ([sf (reverse *starter-files-used*)])
+                  (display sf o) (newline o)))
+              #:exists (if *lesson-plan* 'replace 'append))))
+
+        (when (pair? *opt-starter-files-used*)
+          (let ([sf-file (if *lesson-plan*
+                             (build-path *containing-directory* ".cached" ".index.optstarterfiles")
+                             (format "distribution/~a/lessons/~a/.cached/.page.optstarterfiles"
+                                     *natlang* *lesson*))])
+            (call-with-output-file sf-file
+              (lambda (o)
+                (for ([sf (reverse *opt-starter-files-used*)])
+                  (display sf o) (newline o)))
+              #:exists (if *lesson-plan* 'replace 'append)))))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
@@ -2334,7 +2333,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-(define (display-exercise-collation o)
+#;(define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
@@ -2417,7 +2416,7 @@
 
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
-  (print-menubar (string-append file "-comment.txt"))
+  ; (print-menubar (string-append file "-comment.txt"))
   (unless (empty? *glossary-items*)
     (set! *glossary-items*
       (sort *glossary-items* #:key first string-ci<=?))
@@ -2704,9 +2703,17 @@
   ; (printf "doing add-prereq/check ~s\n\n" sym)
   (add-prereq sym #:check? check-in-langtable?))
 
-(define (add-starter-file sf)
+(define (add-starter-file sf #:opt? [opt? #f])
+  ((if opt? add-opt-starter-file add-reqd-starter-file) sf))
+
+(define (add-reqd-starter-file sf)
   (cond [(member sf *starter-files-used*) #f]
         [else (set! *starter-files-used* (cons sf *starter-files-used*))
+              #t]))
+
+(define (add-opt-starter-file sf)
+  (cond [(member sf *opt-starter-files-used*) #f]
+        [else (set! *opt-starter-files-used* (cons sf *opt-starter-files-used*))
               #t]))
 
 (define holes-to-underscores
