@@ -203,11 +203,14 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif directive == 'ifnotslide' then
           local txt = read_group(i, directive)
-          local _, n = txt:gsub('|===', 'z')
-          n = math.floor(n / 2)
+          local txt2, n = txt:gsub('|===.-|===', 'z')
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
           coeIdx = coeIdx + n
+          txt2, n = txt2:gsub('@image{', 'z')
+          imgIdx = imgIdx + n
+          txt2, n = txt2:gsub('@centered-image{', 'z')
+          imgIdx = imgIdx + n
         elseif directive == 'ifproglang' then
           local pls = read_group(i, directive)
           if not pls:match(proglang) then
