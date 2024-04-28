@@ -22,11 +22,9 @@
   </style>
 
   <script type="text/javascript">
-    let {lesson} = getParams();
-    configureGraph(graph);
-    lessons = lesson? [lesson] : [...Object.keys(graph)];
-
     function populateGlossary() {
+      let {lesson} = getParams();
+      lessons = lesson? [lesson] : [...Object.keys(graph)];
       // if just one lesson, add it to the title
       if(lessons.length == 1) {
         document.getElementsByTagName("h1")[0]

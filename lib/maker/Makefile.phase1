@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
 
 ###############################################################################
 
@@ -40,6 +40,9 @@ initialization:
 
 node_modules:
 	npm install
+
+.git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
+	cp -p $< $@
 
 ###############################################################################
 

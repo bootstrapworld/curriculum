@@ -129,6 +129,7 @@ local function get_slides(lsn_plan_adoc_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
+  local imgIdx = 0
   local curr_slide
 
   local function set_current_slide()
@@ -173,6 +174,15 @@ local function get_slides(lsn_plan_adoc_file)
             if not inside_table_p then
               curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
             end
+          end
+        elseif directive == 'image' or directive == 'centered-image' then
+          local arg = read_group(i, directive)
+          imgIdx = imgIdx + 1
+          if not inside_table_p then
+            if (not dont_count_image_p) and directive == 'image' then
+              curr_slide.numimages = curr_slide.numimages + 1
+            end
+            curr_slide.text = curr_slide.text .. '@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}'
           end
         elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
@@ -256,9 +266,12 @@ local function get_slides(lsn_plan_adoc_file)
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{' .. arg2 .. '}'
+          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
+          scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
+          curr_slide.text = curr_slide.text .. '}'
         else
           if directive == 'image' then
+            -- dead?
             if not inside_table_p and not dont_count_image_p then
               curr_slide.numimages = curr_slide.numimages + 1
             end

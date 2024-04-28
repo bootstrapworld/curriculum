@@ -90,7 +90,7 @@ fun draw-state(a-char):
   if a-char.timer <= 100:
     instructions
   else:
-    put-image(sam, a-char.x, a-char.y, rectangle(640, 480, "solid", "white"))
+    put-image(sam, a-char.x, a-char.y, rectangle(640,480,"solid","white"))
   end
 end
 ```
@@ -176,7 +176,7 @@ Most importantly for our purposes, the second argument to `radial-star` represen
 @lesson-instruction{
 Change the `draw-state` function to make it piecewise: when the mallet’s y-coordinate is 140 or less, draw the following image of the radial star at the watermelon’s current coordinates:
 
-`(radial-star(20, a-smash.timer, 25, "solid", "deep-pink"))`
+`radial-star(20, a-smash.timer, 25, "solid", "deep-pink"))`
 
 In all other cases, produce the current body of `draw-state`.
 }
@@ -191,7 +191,9 @@ The updated `draw-state` function should look similar to:
 # mallet's y-coordinate reaches 140, draw the explosion
 fun draw-state(a-smash):
   if (a-smash.mallety <= 140):
-    put-image(radial-star(20, a-smash.timer, 25, "solid", "deep-pink"), 200, 75,
+    put-image(
+      radial-star(20,a-smash.timer,25,"solid","deep-pink"),
+       200, 75,
        BACKGROUND)
   else:
     put-image(MALLET, 275, a-smash.mallety,
