@@ -437,7 +437,8 @@
            [q (qualify-proglang first-compt 'up *proglang*)])
       (unless (string=? q first-compt)
         (set! dir
-          (string-join (cons q (rest dir-compts)) "/"))))
+          (string-join (cons q (rest dir-compts)) "/"))
+        (set! f (string-append dir "/" snippet))))
 
     (set! local-dir (build-path 'up dir))
     (set! local-f (build-path local-dir snippet))
