@@ -123,7 +123,7 @@ for NATLANG in *; do
     $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
-      title="AUTO-GEN:$title"
+      title="AUTO-GEN:$title - $PROGLANG"
 
       # warn if used without -f and --rebuild
       if test -z "$regenid"; then
