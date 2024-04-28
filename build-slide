@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export SEMESTER=fall
-export YEAR=2024-beta
+export YEAR=2024
 
 bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 SED=sed
@@ -11,8 +11,10 @@ if which gsed|grep -q .; then
 fi
 
 regenid=
+rebuild=
 export OLDFORMAT
 export PROGLANG
+nomake=
 lsn=
 
 if test $# -eq 0; then
@@ -28,6 +30,10 @@ else
       echo WARNING: Obsolete option $1; regenid=1; shift
     elif test "$1" = --proglang; then
       shift; PROGLANG="$1"; shift
+    elif test "$1" = --nomake; then
+      nomake=1; shift
+    elif test "$1" = --rebuild; then
+      rebuild=y; shift
     else
       lsn="$1"; shift
     fi
@@ -35,6 +41,7 @@ else
 fi
 
 lsn=${lsn%/}
+lsn=${lsn##*/}
 
 if test "$PROGLANG" = wescheme; then
   lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
@@ -64,7 +71,9 @@ parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
 # CSS file for this
 cssPath=$TOPDIR/distribution/en-us/lib/shared.css
 
-make
+if test -z "$nomake"; then
+  make
+fi
 
 if test ! -d distribution; then
   echo WARNING: Did not find any built pathways
@@ -83,10 +92,10 @@ for NATLANG in *; do
   test -d $NATLANG || continue
   export PROGDIR=$TOPDIR/distribution/.prog-$NATLANG
   if test ! -d $NATLANG/lessons; then
-    echo Missing lessons diry in distribution -- did you call build-pathway\?
+    echo Missing lessons directory in distribution/$NATLANG -- did you call make\?
     continue
   fi
-  if test ! -d  $NATLANG/lessons/$lsn; then
+  if test ! -d $NATLANG/lessons/$lsn; then
     echo Lesson $NATLANG/lessons/$lsn not found in distribution
     continue
   fi
@@ -114,14 +123,14 @@ for NATLANG in *; do
     $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
-      title="AUTO-GEN:$title"
+      title="AUTO-GEN:$title - $PROGLANG"
 
-      # warn if used without -f
+      # warn if used without -f and --rebuild
       if test -z "$regenid"; then
         if test -f "$idfile"; then
-          read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
-          if test "$goahead" != y; then
-            exit
+          if test -z "$rebuild"; then
+            read -p "This will REPLACE A PUBLIC FILE! Are you *sure* you want to rebuild slides for $lsn? (If not, use build-slide -f to make a new file id.) [yn] " goahead
+            test "$goahead" != y && break
           fi
         fi
       fi

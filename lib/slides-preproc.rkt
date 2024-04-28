@@ -325,20 +325,21 @@
 
 (define (contract funname domain-list range [purpose #f])
   (let* ([funname-sym (if (symbol? funname) funname (string->symbol funname))]
-         [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname)]
-        [prefix (cond [(string=? *proglang* "pyret") "# "]
-                      [(string=? *proglang* "wescheme") "; "]
-                      [(string=? *proglang* "codap") ""])]
-        [s (string-append
-             prefix
-             funname-str
-             " :: "
-             (contract-types-to-commaed-string domain-list)
-             " -> "
-             (htmlize range))]
-        [s2 (and purpose
-                 (string-append
-                   prefix purpose))])
+         [funname-str (if (string? funname) funname (format "~a" funname))]
+         [funname-str (if (string=? *proglang* "pyret") (wescheme->pyret funname-sym) funname-str)]
+         [prefix (cond [(string=? *proglang* "pyret") "# "]
+                       [(string=? *proglang* "wescheme") "; "]
+                       [(string=? *proglang* "codap") ""])]
+         [s (string-append
+              prefix
+              funname-str
+              " :: "
+              (contract-types-to-commaed-string domain-list)
+              " -> "
+              (htmlize range))]
+         [s2 (and purpose
+                  (string-append
+                    prefix purpose))])
     (if purpose
         (format "<code>~a</code>\n\n<code>~a</code>" s s2)
         (format "<code>~a</code>" s))))
@@ -358,6 +359,8 @@
          (set! f "./index.adoc")]
         [(regexp-match "/$" f)
          (set! f (string-append f "index.adoc"))]
+        [(regexp-match "html$" f)
+         (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
@@ -434,7 +437,8 @@
            [q (qualify-proglang first-compt 'up *proglang*)])
       (unless (string=? q first-compt)
         (set! dir
-          (string-join (cons q (rest dir-compts)) "/"))))
+          (string-join (cons q (rest dir-compts)) "/"))
+        (set! f (string-append dir "/" snippet))))
 
     (set! local-dir (build-path 'up dir))
     (set! local-f (build-path local-dir snippet))

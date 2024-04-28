@@ -1454,6 +1454,8 @@
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@image{" text)
+                                        (regexp-match "@centered-image{" text)
                                         (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
@@ -2331,7 +2333,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-(define (display-exercise-collation o)
+#;(define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))
