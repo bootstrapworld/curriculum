@@ -102,21 +102,13 @@ Experiment with this function!
 - Click "Run" to compile your program, then close the animation window.
 - In the Interactions Area, evaluate `location(START)`. What does it return (hopefully `"air"`)?
 - Evaluate `draw-state(START)`. Does it look like the box is in the air?
-- Do the same for an instance of a DeliveryState where the box is in the road, on the house, and in the delivery zone.
+- Do the same for an instance of a `DeliveryState` where the box is in the road, on the house, and in the delivery zone.
 }
+
+Turn to @printable-exercise{bug-hunting.adoc}. In the left column, we’ve given you broken or buggy Pyret code. On the right, we’ve given you space to either write out the correct code, or write an explanation of the problems with the provided code. Work through this page, then check with your partner to confirm you’ve found all the bugs!
 
 === Synthesize
 These experiments show an important connection between functions that work with instances of a data structure, and the way we draw those instances. In our design for the animation, we have an understanding of what different regions of the screen mean. Here, we see that the draw-state and location functions both share this understanding to give consistent information about the animation.
-
-== Piecewise Bug Hunting @duration{15 minutes}
-
-=== Overview
-Students flex their conditional-function muscles, by looking at buggy conditions and figuring out what went wrong.
-
-=== Launch
-
-=== Investigate
-Turn to @printable-exercise{bug-hunting.adoc}. In the left column, we’ve given you broken or buggy Pyret code. On the right, we’ve given you space to either write out the correct code, or write an explanation of the problems with the provided code. Work through this page, then check with your partner to confirm you’ve found all the bugs!
 
 == Colorful Sun @duration{30 minutes}
 
@@ -161,21 +153,21 @@ If we have decided not to add fields, you should have marked that the `draw-stat
 
 @slidebreak
 
-How do we change `draw-state`? Our first instinct may be to turn it into a piecewise function, and draw something different when the `SunsetState`’s y-coordinate gets below 225 or below 150. This would yield code along the lines of:
+How do we change `draw-state`? We can turn it into a piecewise function, and draw something different when the `SunsetState`’s y-coordinate gets below 225 or 150:
 
 ```
 fun draw-state(a-sunset):
   if a-sunset.y < 150:
     put-image(
-    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-              200, 50,
-              put-image(circle(25, "solid", "yellow"),
-                        a-sunset.x, a-sunset.y,
-     rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
+      rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+        200, 50,
+        put-image(circle(25, "solid", "yellow"),
+          a-sunset.x, a-sunset.y,
+          rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
   else if a.sunset.y < 225:
-    # same code with "orange" as sun color
+    # same as above with "orange" as sun color
   else:
-    # same code with "red" as sun color
+    # same as above with "red" as sun color
  end
 end
 ```
@@ -191,10 +183,10 @@ Assume for the moment that we had written a helper function called `draw-sun` th
 ```
 fun draw-state(a-sunset):
   put-image(
-  rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-            200, 50,
-            put-image(draw-sun(a-sunset),
-                      a-sunset.x, a-sunset.y,
+    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+      200, 50,
+      put-image(draw-sun(a-sunset),
+        a-sunset.x, a-sunset.y,
         rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
 end
 ```
