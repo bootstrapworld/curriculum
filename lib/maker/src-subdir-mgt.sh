@@ -75,11 +75,20 @@ function make_solution_pages() {
   test -d solution-pages/.cached || mkdir -p solution-pages/.cached
 }
 
+function check_slide_id() {
+  local slideidfile=$1
+  local ascfile=.cached/.index.asc
+  local depgraphfile=$TOPDIR/distribution/$NATLANG/dependency-graph.js
+  test ! -f $ascfile && return
+  test ! -f $slideidfile && return
+  test $ascfile -nt $slideidfile && return
+  rm -f $ascfile
+  test -f $depgraphfile && rm -f $depgraphfile
+}
+
 function set_up_lesson_dir() {
-  local lessonNamePl=$1
-  local pl=$2
-  local firstproglang=$3
-  cd "$lessonNamePl"
+  local pl=$1
+  local firstproglang=$2
   mkdir -p .cached
   rm -f .cached/.page.starterfiles
   touch .cached/.proglang-$pl
@@ -100,5 +109,4 @@ function set_up_lesson_dir() {
 
   # echo calling collect-work-pages.lua in $(pwd)
   $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
-  cd ..
 }

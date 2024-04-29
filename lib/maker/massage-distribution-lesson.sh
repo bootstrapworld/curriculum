@@ -65,8 +65,11 @@ for pl in $proglangs; do
   fi
   echo $src > $lessonNamePl/.repodir.txt.kp
   #
-  set_up_lesson_dir "$lessonNamePl" "$pl" "$firstproglang"
+  (cd $lessonNamePl; set_up_lesson_dir "$pl" "$firstproglang")
   # echo "$lessonNamePl" >> $RELEVANT_LESSONS_INPUT
+  if test -n "$updatingexistinglesson"; then
+    (cd $lessonNamePl; check_slide_id slides-$pl.id)
+  fi
 done
 
 scrubproglangsubdirs $lessonName
