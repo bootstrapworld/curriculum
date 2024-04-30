@@ -1,6 +1,6 @@
 = Decision Trees
 
-@description{Students play a modified version of the game "20 Questions" to explore how decision trees work, before building their own decision trees from training datasets.}
+@description{Students play a game to explore how decision trees work, before building their own decision trees from training datasets.}
 
 @ifproglang{pyret}{
 @lesson-prereqs{ds-intro}
@@ -33,7 +33,7 @@ Let's create, use, and understand decision trees!
 
 === Overview
 
-Students explore scenarios in which decision trees are used, and then play a modified game of 20 Questions to consider the mechanics of decision trees.
+Students are introduced to scenarios in which decision trees are used, and then play a game to help them build a frame of reference.
 
 === Launch
 
@@ -62,12 +62,11 @@ As a class, we are going to play a game to help us understand the sort of thinki
 @Q{Show of hands: Have you ever played 20 Questions?}
 @A{*If the majority of your students haven't played 20 Questions, the discussion questions below are irrelevant - skip straight to the instructions about how our game will work*}
 @Q{What are the rules?}
-@A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 questions to help them guess the secret person, place, or thing.}
+@A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 yes or no questions to help them guess the secret person, place, or thing.}
 @Q{What strategies do you use when choosing the questions you will ask?}
 @A{Possible responses:}
-@A{Ask questions with responses that can definitely be responded to with "yes" or "no".}
 @A{Ask questions that are likely to eliminate many objects... but be careful! A question that is too narrow could end up resulting in very little information gained.}
-@A{Start with questions that will quickly limit possibilities.}q
+@A{Start with questions that will quickly limit possibilities.}
 }
 
 @lesson-instruction{
@@ -80,14 +79,14 @@ Our game is a modified version of that game. Here's how it works:
 
 - You will ask me yes/no questions (however many you need!) until you figure out the object that I chose.
 
-- As you ask questions, I will record them on the board, connecting the questions, answers, and followup questions and answers with arrows.
+- As you ask questions, I will record them on the board, connecting the questions, answers, followup questions, and their answers with arrows.
 }
 
 @teacher{
 
-This activity focuses on showing students the process of building a *decision tree*. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "knife".  Depending on the questions your students pose, your diagram will probably have two or three arrows. 
+This activity focuses on showing students the process of building a *decision tree*. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "spoon".  The number of questions required to "guess" the object - most likely between two and four - will depend on what your students ask.
 
-@right{@image{images/tree1.png, 275}}
+@right{@image{images/tree-mockup.jpeg, 275}}
 
 Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
 
@@ -95,9 +94,9 @@ Important decision tree conventions:
 
 - Be sure to label arrows with "yes" or "no".
 
-- "Yes" arrows point to the left, and "no" arrows point to the right. (The chain of arrows in the diagram is pointing 45 degrees to the left because both questions were answered "yes".)
+- "Yes" arrows point to the left, and "no" arrows point to the right. 
 
-As students ask questions, support them in noticing how effective their questions are in sorting the items on the list. "Utensil?" is a great example of a first question, because there are three utensils and three non-utensils on the list of items. "Used to chop?"" would not be a great first question, because you might get lucky and have your answer, but otherwise you still have five items to decide between!
+As students ask questions, support them in noticing how effective their questions are in sorting the items on the list. "Does it have a handle?" split the list between 2 options that didn't have handles and 4 that did. Other questions could have guaranteed eliminating 3 choices right off the bat.
 }
 
 @QandA{
@@ -107,21 +106,28 @@ As students ask questions, support them in noticing how effective their question
 @Q{Can anyone think of a different question that would have eliminated more items right off the bat?}
 }
 
-Let's play _another_ round of the game with a new item. We will start with the same first question. As you ask questions, I will add to our previous diagram.
+Let's play _another_ round of the game with a new item. 
 
-@teacher{
-
-@right{@image{images/tree2.png, 400}}
-
-As students ask questions, add to your diagram.
-
-Round 2 of this game will produce a diagram similar to the one on the right. Notice that the topmost question—"is it a utensil?"—now splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
-
-Be sure to always label arrows, as this is a standard convention and improves readability.
-
+@QandA{
+@Q{How many questions did we ask in order to determine the correct object this time?}
+@Q{How did we decide which questions to ask?}
+@Q{Which items from our original list (spoon, knife, cup, plate, fork, and mug) did our very first question eliminate from the list of possibilities?}
+@Q{How are the diagrams we drew similar and how are they different?}
 }
 
-So far, our diagram offers two unique pathways from the top of the tree to two unique items.
+[cols="1a,1a", grid="none", frame="none"]
+|===
+|Let's imagine that our first round had started with the question, "Is it a utensil?" and had led us to "knife".  After the first round, our tree might have looked like this. 
+@image{images/tree1.png, 200}
+
+|
+If the second round started with the same question, we could have just added to the original diagram... and we might have ended up with something like this. 
+@image{images/tree2.png, 400}
+|===
+
+Notice that the topmost question—"is it a utensil?"—now splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
+
+Our diagram begins with two unique pathways from the top of the tree to two unique items.
 
 Put another way: __There are two branches that split from the tree's root. Each branch leads to a decision node, which eventually leads to a terminal node (or "leaf").__
 
@@ -141,8 +147,8 @@ Let's identify the root, branches, nodes, and leaves on our tree so far.
 @vspace{1ex}
 
 @lesson-instruction{
-- With a partner, complete the decision tree on a piece of paper so that all six items are categorized.
-- Now, draw an entirely different decision tree - one which has a __different__ question at its root.
+- With a partner, turn to @printable-exercise{decision-tree.adoc} and complete the decision tree so that all six items are categorized.
+- Then, draw an entirely different decision tree - one which has a __different__ question at its root.
 }
 
 @teacher{
