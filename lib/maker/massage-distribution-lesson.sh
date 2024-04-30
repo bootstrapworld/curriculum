@@ -36,6 +36,18 @@ if test ! -d $d/images; then
   mkdir -p $d/images
 fi
 
+if test -z "$updatingexistinglesson"; then
+  if test ! -d $d/pages; then
+    mkdir -p $d/pages
+  fi
+  if test ! -d $d/pages/.cached; then
+    mkdir -p $d/pages/.cached
+  fi
+  if test ! -f $d/pages/workbook-pages.txt; then
+    touch $d/pages/workbook-pages.txt
+  fi
+fi
+
 lessonName=$(basename $d)
 
 cd $d/..
@@ -47,6 +59,7 @@ if test -f $lessonName/proglang.txt; then
   proglangs=$(cat $lessonName/proglang.txt)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
+
 
 lessonNamePl=
 for pl in $proglangs; do

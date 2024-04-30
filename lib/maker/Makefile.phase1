@@ -13,11 +13,14 @@ initialization:
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
 	@mkdir -p distribution/$(NATLANG)/lib/images
+	@mkdir -p distribution/$(NATLANG)/lib/.cached
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
 	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
+	@mkdir -p distribution/$(NATLANG)/pages/.cached
+	@mkdir -p distribution/$(NATLANG)/textbooks/.cached
 	@$(CP) -p lib/*.html $(PROGDIR)
 	@$(CP) -p lib/*.rkt $(PROGDIR)
 	@$(CP) -p lib/*.json $(PROGDIR)

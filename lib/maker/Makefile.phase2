@@ -47,7 +47,6 @@ define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
 	@#echo build-pathway-independent: creating $$@ from $$<
 	@echo $$< >> $(SETUP_PATHWAY_INDEPENDENT)
-	@mkdir -p $(shell dirname $1)/.cached
 	@touch $$@
 
 endef
@@ -112,7 +111,6 @@ define make-build-workbook-page-rule
 $(call asc-file,$1): $1
 	@#echo building workbook-page-asc: $$@ from $$<
 	@echo $$< >> $(SETUP_WORKBOOK_PAGE)
-	@mkdir -p $(shell dirname $1)/.cached
 	@touch $$@
 
 endef
@@ -157,7 +155,6 @@ define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
 	@#echo build-lesson-plan-asc: creating $$@ from $$<
 	@echo $$< >> $(SETUP_LESSON_PLAN)
-	@mkdir -p $(shell dirname $1)/.cached
 	@touch $$@
 
 endef
@@ -221,7 +218,6 @@ define make-build-resource-rule
 $(call asc-file,$1): $1
 	@#echo build-resource-asc: creating $$@ from $$<
 	@echo $$< >> $(SETUP_PATHWAY_RESOURCE)
-	@mkdir -p $(shell dirname $1)/.cached
 	@touch $$@
 
 endef
@@ -251,7 +247,6 @@ define make-build-narrative-rule
 $(call asc-file,$1): $1
 	@#echo build-narrative: creating $$@ from $$<
 	@echo $$< >> $(SETUP_PATHWAY_NARRATIVE)
-	@mkdir -p $(shell dirname $1)/.cached
 	@touch $$@
 
 endef

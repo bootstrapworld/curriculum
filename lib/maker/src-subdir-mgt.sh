@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function adjustproglangsubdirs() {
+  # echo adjustproglangsubdirs "$@" in $(pwd)
   local d=$1
   local pl=$2
 
@@ -17,6 +18,17 @@ function adjustproglangsubdirs() {
   for subdir in "$d"/*; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
+
+  local create_cached=
+  if echo $d/|grep -q $OTHERDIRS; then create_cached=1
+  elif ! echo $d|grep -q /; then
+    if ! echo $d|grep -q pages; then
+      create_cached=1
+    fi
+  fi
+
+  if test -n "$create_cached"; then mkdir -p $d/.cached; fi
+
 }
 
 function scrubproglangsubdirs() {
@@ -87,6 +99,7 @@ function check_slide_id() {
 }
 
 function set_up_lesson_dir() {
+  # echo set_up_lesson_dir "$@" in $(pwd)
   local pl=$1
   local firstproglang=$2
   mkdir -p .cached
@@ -99,7 +112,6 @@ function set_up_lesson_dir() {
   fi
   touch .cached/.redo
   test "$firstproglang" = $pl && touch .cached/.primarylesson
-  test -d pages || mkdir pages
 
   for subdir in *; do
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
