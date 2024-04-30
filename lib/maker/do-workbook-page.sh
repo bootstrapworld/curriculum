@@ -24,13 +24,13 @@ htmlfile=${ascfile%.asc}.html
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q $OTHERDIRS); then
+if echo $adocfile|grep -q $OTHERDIRS; then
   otherdirarg="#t"
 fi
 
 solutionsmodearg="#f"
 
-if $(echo $adocfile|grep -q '/solution-pages/'); then
+if echo $adocfile|grep -q '/solution-pages/'; then
   solutionsmodearg="#t"
 fi
 

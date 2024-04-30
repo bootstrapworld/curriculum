@@ -26,6 +26,7 @@ initialization:
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
+	@rm -f $(SETUP_PATHWAY_INDEPENDENT) $(SETUP_WORKBOOK_PAGE) $(SETUP_LESSON_PLAN) $(SETUP_PATHWAY_RESOURCE) $(SETUP_PATHWAY_NARRATIVE)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
 	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
 	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)

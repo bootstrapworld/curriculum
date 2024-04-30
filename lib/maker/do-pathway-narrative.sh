@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-30
+# last modified 2024-04-29
 
 # echo do-pathway-narrative $1
 
@@ -18,7 +18,7 @@ htmlfile=${ascfile%.asc}.html
 
 solutionsmodearg="#f"
 
-if $(echo $adocfile|grep -q '/solution-pages/'); then
+if echo $adocfile|grep -q '/solution-pages/'; then
   solutionsmodearg="#t"
 fi
 

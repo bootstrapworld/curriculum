@@ -23,7 +23,7 @@ htmlfile=${ascfile%.asc}.html
 
 solutionsmodearg="#f"
 
-if $(echo $adocfile|grep -q '/solution-pages/'); then
+if echo $adocfile|grep -q '/solution-pages/'; then
   solutionsmodearg="#t"
 fi
 

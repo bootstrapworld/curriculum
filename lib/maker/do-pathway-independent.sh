@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# last modified 2023-03-07
+# last modified 2024-04-29
 
 # echo doing do-pathway-independent $1
 
@@ -24,7 +24,7 @@ pdffile=${ascfile%.asc}.pdf
 
 solutionsmodearg="#f"
 
-if $(echo $adocfile|grep -q '/solution-pages/'); then
+if echo $adocfile|grep -q '/solution-pages/'; then
   solutionsmodearg="#t"
 fi
 

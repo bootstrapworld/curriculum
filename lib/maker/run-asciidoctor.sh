@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo starting run-asciidoctor.sh
+
 errfile=$TOPDIR/distribution/.make.error.log
 
 rm -f $errfile

@@ -8,13 +8,13 @@ adocbasename=$(basename $adocfile)
 
 resourcesarg="#f"
 
-if $(echo $adocfile|grep -q '/resources/'); then
+if echo $adocfile|grep -q '/resources/'; then
   resourcesarg="#t"
 fi
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q $OTHERDIRS); then
+if echo $adocfile|grep -q $OTHERDIRS; then
   otherdirarg="#t"
 fi
 
@@ -22,7 +22,7 @@ whtmlfile=${adocfile%.adoc}.html
 
 if test $otherdirarg = "#f" ; then
 
-  if $(echo $adocfile|grep -q '/resources/index.adoc$'); then
+  if echo $adocfile|grep -q '/resources/index.adoc$'; then
     whtmlfile=${adocfile%.adoc}.shtml
   fi
 

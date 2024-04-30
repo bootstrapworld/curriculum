@@ -20,7 +20,7 @@ fi
 
 otherdirarg="#f"
 
-if $(echo $adocfile|grep -q $OTHERDIRS); then
+if echo $adocfile|grep -q $OTHERDIRS; then
   otherdirarg="#t"
 fi
 
