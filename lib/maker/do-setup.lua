@@ -2,6 +2,8 @@
 
 dofile(os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR' .. 'utils.lua')
 
+local natlang = os.getenv'NATLANG'
+
 local otherdirs = { 'fragments', 'xtra', 'xtras' }
 local all_proglangs = { 'codap', 'none', 'pyret', 'spreadsheets', 'wescheme' }
 
@@ -18,8 +20,6 @@ local adoc_postproc_workbookpage_input_o = io.open(os.getenv 'ADOC_POSTPROC_WORK
 local adoc_postproc_lessonplan_input_o = io.open(os.getenv 'ADOC_POSTPROC_LESSONPLAN_INPUT', 'w')
 local adoc_postproc_pathwayresource_input_o = io.open(os.getenv 'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT', 'w')
 local adoc_postproc_pathwaynarrative_input_o = io.open(os.getenv 'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT', 'w')
-
-adocables_input_o:write('(\n')
 
 adoc_postproc_pathwayindependent_input_o:write('return {\n')
 adoc_postproc_workbookpage_input_o:write('return {\n')
@@ -99,12 +99,13 @@ for _,adocfile in ipairs(workbookpage_adocs) do
   ::continue::
 end
 
+local distrootdir = "../../"
+
 for _,adocfile in ipairs(lessonplan_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
   if file_exists_p(containingdirectory .. '/.proglang-ignore') then
     goto continue
   end
-  local distrootdir = "../../"
   local adocbasename = adocfile:gsub('^.*/', '')
   local ascfile = containingdirectory .. '/.cached/.' .. adocbasename:gsub('%.adoc$', '.asc')
 
@@ -177,7 +178,7 @@ for _,adocfile in ipairs(pathwayresource_adocs) do
 
   local proglangarg = 'pyret'
   for _,proglang in ipairs(all_proglangs) do
-    local f = 'distribution/' .. os.getenv'NATLANG' .. '/courses/' .. targetpathway .. '/.cached/.proglang-' .. proglang
+    local f = 'distribution/' .. natlang .. '/courses/' .. targetpathway .. '/.cached/.proglang-' .. proglang
     if file_exists_p(f) then
       proglangarg = proglang; break
     end
@@ -198,9 +199,10 @@ for _,adocfile in ipairs(pathwayresource_adocs) do
   ::continue::
 end
 
+distrootdir = '../../'
+
 for _,adocfile in ipairs(pathwaynarrative_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
-  local distrootdir = '../../'
   local adocbasename = adocfile:gsub('^.*/', '')
   local ascfile = containingdirectory .. '/.cached/.' .. adocbasename:gsub('%.adoc$', '.asc')
 
@@ -215,7 +217,7 @@ for _,adocfile in ipairs(pathwaynarrative_adocs) do
 
   local proglangarg = 'pyret'
   for _,proglang in ipairs(all_proglangs) do
-    local f = 'distribution/' .. os.getenv'NATLANG' .. '/courses/' .. targetpathway .. '/.cached/.proglang-' .. proglang
+    local f = 'distribution/' .. natlang .. '/courses/' .. targetpathway .. '/.cached/.proglang-' .. proglang
     if file_exists_p(f) then
       proglangarg = proglang; break
     end
@@ -253,8 +255,11 @@ if book_p then
   local workbookpage_adocs_4pdf = dofile(os.getenv 'SETUP_WORKBOOKPAGE_PDF')
   local lessonplan_adocs_4pdf = dofile(os.getenv 'SETUP_LESSONPLAN_PDF')
   local pathwayresource_adocs_4pdf = dofile(os.getenv 'SETUP_PATHWAYRESOURCE_PDF')
+  local contracts_pdfs = dofile(os.getenv 'SETUP_CONTRACTS_PDF')
 
-  local puppeteer_input_o = io.open(os.getenv 'PUPPETEER_INPUT', 'a')
+  local puppeteer_input_o = io.open(os.getenv 'PUPPETEER_INPUT', 'w')
+
+  puppeteer_input_o:write('{ "htmlFileSpecs": [ "ignoreElement"\n')
 
   for _,adocfile in ipairs(pathwayindependent_adocs_4pdf) do
     local whtmlfile = adocfile:gsub('%.adoc$', '.html')
@@ -326,13 +331,29 @@ if book_p then
 
   end
 
+  for _,pdffile in ipairs(contracts_pdfs) do
+    local targetpathway = pdffile:gsub('/resources/pages/Contracts%.pdf', ''):gsub('.*/courses/', '')
+
+    local inputfile = 'distribution/' .. natlang .. '/Contracts.shtml?pathway=' .. targetpathway
+    local outputfile = 'distribution/' .. natlang .. '/courses/' .. targetpathway .. '/resources/pages/Contracts.pdf'
+
+    puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
+
+    --solution
+
+    inputfile = inputfile .. '&solns=true'
+    outputfile = outputfile:gsub('/pages/Contracts%.pdf$', '/solution-pages/Contracts.pdf')
+
+    puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
+  end
+
+  puppeteer_input_o:write('] }\n')
   puppeteer_input_o:close()
 
 end
 
 adoc_input_o:close()
 
-adocables_input_o:write(')\n')
 adocables_input_o:close()
 
 adoc_postproc_pathwayindependent_input_o:write('}\n')

@@ -180,7 +180,7 @@ endif
 
 define make-build-contracts-pdf-rule
 $1: distribution/$(NATLANG)/Contracts.shtml
-	@$(MAKE_DIR)make-contracts-pdf.sh $$@
+	@echo \"$$@\", >> $(SETUP_CONTRACTS_PDF)
 
 endef
 
@@ -277,9 +277,10 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(SETUP_WORKBOOKPAGE_PDF)
 	@echo } >> $(SETUP_LESSONPLAN_PDF)
 	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
+	@echo } >> $(SETUP_CONTRACTS_PDF)
 	$(MAKE_DIR)do-setup.lua
-	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
-	$(MAKE_DIR)run-asciidoctor.sh
+	@if test -s $(ADOCABLES_INPUT); then echo Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
+	@if test -s "$(ADOC_INPUT)"; then echo Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
 
 # specials = primitives + starter-files
 
