@@ -104,7 +104,7 @@ for _,adocfile in ipairs(lessonplan_adocs) do
   if file_exists_p(containingdirectory .. '/.proglang-ignore') then
     goto continue
   end
-  local distrootdir = get_distrootdir(adocfile)
+  local distrootdir = "../../"
   local adocbasename = adocfile:gsub('^.*/', '')
   local ascfile = containingdirectory .. '/.cached/.' .. adocbasename:gsub('%.adoc$', '.asc')
 
@@ -200,7 +200,7 @@ end
 
 for _,adocfile in ipairs(pathwaynarrative_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
-  local distrootdir = get_distrootdir(adocfile)
+  local distrootdir = '../../'
   local adocbasename = adocfile:gsub('^.*/', '')
   local ascfile = containingdirectory .. '/.cached/.' .. adocbasename:gsub('%.adoc$', '.asc')
 
