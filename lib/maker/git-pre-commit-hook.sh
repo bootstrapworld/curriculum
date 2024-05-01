@@ -13,7 +13,7 @@ for f in $(git diff --name-only --staged); do
   proglangfile=$d/proglang.txt
   test -f $proglangfile || continue
   test $(grep -c . $proglangfile) -gt 1 || continue
-  test $(git diff --tool=vimdiff --staged -- $f|grep '^+'|wc -c) -lt $minchars && continue
+  test $(git -c diff.tool=vimdiff diff --staged -- $f|grep '^+'|wc -c) -lt $minchars && continue
   git diff --staged -- $f|grep '^+'|grep -q @ifproglang && continue
   echo WARNING: $f did not have any @ifproglang\'s
 done
