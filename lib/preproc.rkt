@@ -1449,7 +1449,7 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(string=? directive "scrub")
+                           [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
