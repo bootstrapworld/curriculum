@@ -6,12 +6,12 @@ dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
 
 dir_prefix = ''
 
-pwyindep_batchf =  os.getenv('ADOC_POSTPROC_PWYINDEP_INPUT')
+pathwayindependent_batchf =  os.getenv('ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT')
 workbookpage_batchf =  os.getenv('ADOC_POSTPROC_WORKBOOKPAGE_INPUT')
 lessonplan_batchf =  os.getenv('ADOC_POSTPROC_LESSONPLAN_INPUT')
-narrative_batchf =  os.getenv('ADOC_POSTPROC_NARRATIVE_INPUT')
-narrativeaux_batchf =  os.getenv('ADOC_POSTPROC_NARRATIVEAUX_INPUT')
-resources_batchf =  os.getenv('ADOC_POSTPROC_RESOURCES_INPUT')
+pathwaynarrative_batchf =  os.getenv('ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT')
+pathwaynarrativeaux_batchf =  os.getenv('ADOC_POSTPROC_PATHWAYNARRATIVEAUX_INPUT')
+pathwayresource_batchf =  os.getenv('ADOC_POSTPROC_PATHWAYRESOURCE_INPUT')
 
 analytics_file = os.getenv('TOPDIR') .. '/lib/analytics.txt'
 
@@ -34,7 +34,7 @@ function postproc(fhtml_cached, tipe)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+  if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwaynarrativeaux', 'pathwayresource'}) then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -68,23 +68,23 @@ function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwaynarrativeaux', 'pathwayresource'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'narrative'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
         add_analytics_p = true
       end
       --
-      if tipe == 'resources' then -- TEACHERRESOURCEPAGE
+      if tipe == 'pathwayresource' then -- TEACHERRESOURCEPAGE
         x = x:gsub('^<body class="', '%0TeacherResources ')
       end
       --
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
         x = x:gsub('<body class="', '%0workbookpage ')
-      elseif tipe == 'pwyindep' then
+      elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
           x = x:gsub('<body class="', '%0workbookpage ')
         else
@@ -101,7 +101,7 @@ function postproc(fhtml_cached, tipe)
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
-      if tipe ~= 'narrativeaux' then
+      if tipe ~= 'pathwaynarrativeaux' then
         x = x:gsub('^<body ', '%1 " ')
       end
       --
@@ -115,7 +115,7 @@ function postproc(fhtml_cached, tipe)
     if x:find('^<link.*curriculum%.css') then
       x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css')
       add_bootstrap_lesson_p = true
-      if file_exists_p(f_codemirror_file) or tipe == 'narrative' then
+      if file_exists_p(f_codemirror_file) or tipe == 'pathwaynarrative' then
         add_codemirror_p = true
       end
       if file_exists_p(f_mathjax_file) then
@@ -167,7 +167,7 @@ function postproc(fhtml_cached, tipe)
       delete_line_p = true
     end
     --
-    if tipe ~= 'narrativeaux' then
+    if tipe ~= 'pathwaynarrativeaux' then
       if x:find('</head>') then
         local page_title = ''
         local adoc_file = dir_prefix .. fhtml:gsub('%.s?html', '.adoc')
@@ -209,7 +209,7 @@ function postproc(fhtml_cached, tipe)
       end
     end
     --
-    if memberp(tipe, {'lessonplan', 'resources'}) then
+    if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
@@ -313,9 +313,9 @@ function run_postproc(batchf, tipe)
   end
 end
 
-run_postproc(pwyindep_batchf, 'pwyindep')
+run_postproc(pathwayindependent_batchf, 'pathwayindependent')
 run_postproc(workbookpage_batchf, 'workbookpage')
 run_postproc(lessonplan_batchf, 'lessonplan')
-run_postproc(narrative_batchf, 'narrative')
-run_postproc(narrativeaux_batchf, 'narrativeaux')
-run_postproc(resources_batchf, 'resources')
+run_postproc(pathwaynarrative_batchf, 'pathwaynarrative')
+run_postproc(pathwaynarrativeaux_batchf, 'pathwaynarrativeaux')
+run_postproc(pathwayresource_batchf, 'pathwayresource')

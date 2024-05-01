@@ -29,15 +29,19 @@ initialization:
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
-	@rm -f $(SETUP_PATHWAY_INDEPENDENT) $(SETUP_WORKBOOK_PAGE) $(SETUP_LESSON_PLAN) $(SETUP_PATHWAY_RESOURCE) $(SETUP_PATHWAY_NARRATIVE)
 	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_RESOURCES_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_PWYINDEP_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
+	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
+	@echo 'return {' > $(SETUP_WORKBOOKPAGE)
+	@echo 'return {' > $(SETUP_LESSONPLAN)
+	@echo 'return {' > $(SETUP_PATHWAYRESOURCE)
+	@echo 'return {' > $(SETUP_PATHWAYNARRATIVE)
 	@echo '(' > $(ADOCABLES_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_PATHWAYNARRATIVEAUX_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_PATHWAYRESOURCE_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT)
+	@echo 'return {' > $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
 # but I don't think it buys us much

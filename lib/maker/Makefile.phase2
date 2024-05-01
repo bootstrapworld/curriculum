@@ -46,7 +46,7 @@ build-pathway-independent: $(pathway-independent-files)
 define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
 	@#echo build-pathway-independent: creating $$@ from $$<
-	@echo $$< >> $(SETUP_PATHWAY_INDEPENDENT)
+	@echo \"$$<\" , >> $(SETUP_PATHWAYINDEPENDENT)
 	@touch $$@
 
 endef
@@ -110,7 +110,7 @@ build-workbook-pages: $(workbook-pages)
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
 	@#echo building workbook-page-asc: $$@ from $$<
-	@echo $$< >> $(SETUP_WORKBOOK_PAGE)
+	@echo \"$$<\" , >> $(SETUP_WORKBOOKPAGE)
 	@touch $$@
 
 endef
@@ -154,7 +154,7 @@ build-lesson-plans: $(lesson-plan-files)
 define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
 	@#echo build-lesson-plan-asc: creating $$@ from $$<
-	@echo $$< >> $(SETUP_LESSON_PLAN)
+	@echo \"$$<\" , >> $(SETUP_LESSONPLAN)
 	@touch $$@
 
 endef
@@ -217,7 +217,7 @@ build-pathway-resources: $(resource-files)
 define make-build-resource-rule
 $(call asc-file,$1): $1
 	@#echo build-resource-asc: creating $$@ from $$<
-	@echo $$< >> $(SETUP_PATHWAY_RESOURCE)
+	@echo \"$$<\" , >> $(SETUP_PATHWAYRESOURCE)
 	@touch $$@
 
 endef
@@ -246,7 +246,7 @@ build-pathway-narratives: $(narrative-asc-files)
 define make-build-narrative-rule
 $(call asc-file,$1): $1
 	@#echo build-narrative: creating $$@ from $$<
-	@echo $$< >> $(SETUP_PATHWAY_NARRATIVE)
+	@echo \"$$<\" , >> $(SETUP_PATHWAYNARRATIVE)
 	@touch $$@
 
 endef
@@ -273,13 +273,18 @@ distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 ##########################################################################
 
 preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives build-contracts-pdfs
-	$(MAKE_DIR)do-setup.sh
+	@echo } >> $(SETUP_PATHWAYINDEPENDENT)
+	@echo } >> $(SETUP_WORKBOOKPAGE)
+	@echo } >> $(SETUP_LESSONPLAN)
+	@echo } >> $(SETUP_PATHWAYRESOURCE)
+	@echo } >> $(SETUP_PATHWAYNARRATIVE)
+	$(MAKE_DIR)do-setup.lua
 	@echo ")" >> $(ADOCABLES_INPUT)
 	@echo } >> $(ADOC_POSTPROC_LESSONPLAN_INPUT)
-	@echo } >> $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
-	@echo } >> $(ADOC_POSTPROC_NARRATIVE_INPUT)
-	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
-	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PATHWAYNARRATIVEAUX_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PATHWAYRESOURCE_INPUT)
+	@echo } >> $(ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT)
 	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
 	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
 	$(MAKE_DIR)run-asciidoctor.sh
