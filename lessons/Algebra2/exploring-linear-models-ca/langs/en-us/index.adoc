@@ -228,7 +228,7 @@ Return to @printable-exercise{ca-looking-for-patterns.adoc}, and complete Part 2
 
 === Synthesize
 
-- What relationships did you explore in the states dataset?
+- What relationships did you explore in the CA Housing dataset?
 - Which appeared to have strong correlations? Were they positive or negative?
 - Were any of these relationships a surprise? Why or why not?
 
@@ -279,7 +279,7 @@ Knowing the y-intercept and the "size of the growth", we can tell that the equat
 }
 }
 
-@opt{Students are about to be asked to write the Slope-Intercept form of the line, given two points in our states dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.}
+@opt{Students are about to be asked to write the Slope-Intercept form of the line, given two points in our housing dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.}
 
 === Investigate
 
@@ -443,113 +443,3 @@ For this dataset, an @vocab{S} value of $10.90 is pretty terrible. _This model s
 - How could we use scatter plots and linear models to find out if taller NBA players tend to make more three-pointers?
 - How could we use scatter plots and linear models to find out if wealthier people live longer?
 - How could we use scatter plots and linear models to find answers to _other_ questions?
-
-== (Optional) Other Forms of Linear Models @duration{45 minutes}
-
-=== Overview
-Students are reminded of the three forms of linear models available to us, discuss when and why we might choose one form over another, and practice translating between them.
-
-=== Launch
-
-When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
-
-So far, we've focused on models using the *Slope-Intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment.
-
-But depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
-
-@slidebreak
-
-You may already be familiar with the different forms of linear models available to us:
-
-[cols="^5a,^6a,^5a", options="header"]
-|===
-| Slope-Intercept		| Point-Slope				| Standard
-| @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
-<| 
-- m: slope
-- b: y-intercept
-<|
-- m: slope
-- @math{y_1}: y-coordinate of a point
-- @math{x_1}: x-coordinate of the same point
-<|
-- x-int: @math{\frac{C}{A}}
-- y-int: @math{\frac{C}{B}}
-- slope: @math{- \frac{A}{B}}
-|===
-
-@slidebreak
-
-(1) *Slope-Intercept Form* makes it really easy to read the slope and y-intercept. +
-(2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope. +
-(3) *Standard Form* makes it easy to find the x- and y-intercepts of the line.
-
-@teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
-
-Why we might choose to use one form over another?
-
-@QandA{
-@Q{Suppose our scatterplot has a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?}
-@A{Standard Form}
-@Q{Suppose we only know the slope of a model, but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?}
-@A{Point-Slope Form}
-@Q{Which form makes it easiest to define our model in Pyret?}
-@A{Slope-Intercept Form}
-}
-
-=== Investigate
-
-While it's easier to write one linear form or the other based on the information available to us, and might be easier for someone else to extract the information they're looking for based on the model we supply them with, we can easily translate back and forth between linear forms!
-
-@lesson-instruction{
-- Let's practice writing linear functions in each of the forms and translating them into Pyret function definitions.
-- Turn to @printable-exercise{which-form.adoc}
-- When you're done, add your function definitions to your @starter-file{alg2-states} and test them out with `fit-model`.
-}
-
-=== Synthesize
-If you needed to draw the graph of a linear model, which form would you like to start from? Why?
-
-@scrub{
-== Investigating Horizontal and Vertical Shifts @duration{optional}
-
-=== Overview
-
-In preparation for work with quadratic, exponential and logarithmic functions, students explore the relationship between horizontal and vertical shifts of linear functions. Written exercises accompany an interactive Desmos slider activity we've created.
-
-=== Launch
-
-Lines can be shifted up, down, left and right by adding and subtracting to their definitions. Let's see if we can decode the pattern! 
-
-=== Investigate
-
-@lesson-instruction{
-* Turn to @opt-printable-exercise{horizontal-shift.adoc}, which will guide you through the Desmos activity: @opt-online-exercise{https://www.desmos.com/calculator/hong7gv82k, Exploring Horizontal and Linear Shifts in Linear Functions} step by step.
-* As you work through the activities, pay careful attention to directions telling you know which graphs to turn "on" and "off" for each section.
-}
-
-@teacher{There are 3 folders in this Desmos activity. Students will be opening them one at a time by clicking on the triangles and then turning the lines defined within them on and off as directed using the circles in front of the folders.}
-
-@opt{These two paper and pencil exercises guide students through thinking about how horizontal and vertical shifts are related, depending on whether a line has a positive or negative slope:
-
-* @opt-printable-exercise{hor-vert-shift-positive.adoc}
-* @opt-printable-exercise{hor-vert-shift-negative.adoc}
-}
-
-=== Synthesize
-
-What did you discover about recognizing horizontal and vertical shifts from linear equations?
-
-}
-== Additional Exercises
-
-To practice reading linear models and connecting them to graphs:
-
-* @opt-printable-exercise{match-graph-ps.adoc}
-* @opt-printable-exercise{match-graph-sf.adoc}
-* @opt-printable-exercise{match-graph-si.adoc}.
-* @opt-printable-exercise{match-graph-def.adoc}.
-
-For practice translating the models we've written today into other forms:
-
-* @opt-printable-exercise{other-forms-linear-models.adoc}.
