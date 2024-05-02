@@ -257,6 +257,8 @@ local function get_slides(lsn_plan_adoc_file)
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
           end
+        elseif directive == 'slidestyle' then
+          curr_slide.style = read_group(i, directive)
         elseif directive == 'A' then
           if not nested_in or nested_in ~= 'QandA' then
             terror('@A outside @QandA')
