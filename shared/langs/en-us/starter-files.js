@@ -831,13 +831,13 @@ const EarlyMath = {
 }
 
 const Projects = {
-  "functions": {
-    "title": "Functions Starter File",
+  "functions-study": {
+    "title": "Functions Study Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1F8_Pn48lmH8rmrnxK7ArcUDMI53tWsm8"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
+      "url": "https://www.wescheme.org/view?publicId=44k3iR5urE"
     }
   },
   "my-function": {
