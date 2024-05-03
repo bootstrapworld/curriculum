@@ -39,9 +39,9 @@ Students are introduced to scenarios in which decision trees are used, and then 
 
 Consider each of three situations described below:
 
-- You just finished watching a youtube video. Another video appears... and it is exactly the video you never knew you wanted to watch.
-- Two individuals who work for the same company and earn the same salary apply for a loan from the same bank. One of them is granted a loan, the other is not.
-- A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using census data.
+- You just finished watching a youtube video. Another video appears... and it is exactly the kind of video you would want to watch.
+- Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, the other is not.
+- A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
 
 On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that machine learning is at work in all three. In each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
 
@@ -71,7 +71,7 @@ As a class, we are going to play a game to help us understand the sort of thinki
 
 @lesson-instruction{
 
-Our game is a modified version of that game. Here's how it works:
+We're going to play a modified version of that game. Here's how it works:
 
 - In our game there are six possible items: *spoon, knife, cup, plate, fork, and mug*.
 
@@ -247,7 +247,7 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 
 Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-Is it a coincidence? No. Computer cookies are small data files stored locally on your device. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+Is it a coincidence? No. On a computer, 'cookies' are small data files that a website can store on your device. These can be used to remember where you were the last time you visited a site, or a setting that you changed and want to keep the next time you visit a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
 
 We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether each one purchased a video game or not.
 
@@ -272,7 +272,7 @@ As we move down the tree, our job is to figure out _which questions_ we should a
 @strategy{Why Start the Tree with "Age"?}{
 Students will likely notice that we seemingly arbitrarily started the tree with "age" as the root node. _Extremely perceptive_ students may notice that for both "age" and "interest", the likelihood of a correct prediction is 10/14. In other words, starting with "interest in game" produces the same information gain as starting with "age" as the root... *so how do we decide?*
 
-It turns out there is no *one* correct way to build a decision tree. In general, however, we want to avoid tall, skinny trees that pose one useless question after the other. Rather, it is beneficial to start with an attribute that will result in a _wider_ tree.
+It turns out there's more than one correct way to build a decision tree! In general, however, we want to avoid tall, skinny trees that pose one useless question after the other. Rather, it is beneficial to start with an attribute that will result in a _wider_ tree.
 
 Because the "age" node splits _three_ ways and the "interest in game" node splits _two_ ways, we opt to start the tree with "age".
 }
