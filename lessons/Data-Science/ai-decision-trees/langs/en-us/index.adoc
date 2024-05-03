@@ -163,7 +163,7 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 
 @teacher{
 
-@right{@image{images/tree3.png, 400}}
+@right{@image{images/tree4.png, 400}}
 
 One possible completed tree is on the right.
 
@@ -176,19 +176,43 @@ As students finish, invite them to draw their trees on the board. Ideally, you w
 @QandA{
 @Q{After looking at the decision trees of your classmates: What do these trees all have in common? How are they different?}
 @A{Answers will vary. Each tree will have twice as many branches as nodes. Many trees will have the same number of nodes, although probably not all. Many questions asked will likely be the same, but not every question.}
-@Q{Are all of the trees equally efficient?}
-@A{The trees are probably similarly efficient, requiring either five or six nodes, including the root. Five nodes is more efficient than six.}
 }
 
-You might be wondering: Would it be possible to make this tree any more efficient? If so, why not?!
+Let's take a step back and see how well some of our decision trees will perform.
 
 @lesson-instruction{
-- With a partner, complete @printable-exercise{comparing-trees.adoc}.
+Complete Q1 on @printable-exercise{comparing-trees.adoc}.
 }
 
-As we increase a tree's efficiency, we can lose accuracy. Conversely, if we focus *too* much on accuracy - making our decision trees bigger and more complex - we risk __overfitting__. Overfitting happens when we teach a model the specific quirks of one particular dataset, preventing it from making reliable predictions about new data.
+@teacher{
+Invite students to share and explain their responses before emphasizing the main ideas, below.
+}
 
-Decision trees can accurately label and categorize the inputs that they are trained to label and categorize! This tree—which was 100% accurate on the trained dataset—falters when we offer it inputs that are either *unknown*, like the chopstick, or *ambiguous*, like the spork. In both instances, the tree offers up its best guess at a label. __The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!__
+You just observed how a decision tree can accurately label and categorize the inputs _that it has been trained to label and categorize_. However, the tree we tested—which was 100% accurate on the training dataset—faltered when we offered it inputs that were either *unknown*, like the chopstick, or *ambiguous*, like the spork.
+
+The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!
+
+
+@lesson-instruction{
+Complete the remainder of @printable-exercise{comparing-trees.adoc}.
+}
+
+@QandA{
+@Q{Why is it advantageous for AI to be efficient?}
+@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
+@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
+A{Responses will vary, but studentes will likely observe that an increase in efficiency leads to a decrease in accuracy.}
+}
+
+In AI, efficiency and accuracy are often in conflict:
+
+- AI is *efficient* when the computer performs a task with minimal time, memory, energy or data.
+
+- AI is *accurate* when the computer performs its task with correct, relevant, and consistent results.
+
+Striking the perfect balance is an ongoing challenge for computer scientists, and it is a challenge with a far-reaching implications.
+
+=== Synthesize
 
 As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. If you were asked to create a decision tree to identify common animals or foods, you could probably do that without much difficulty as well.
 
@@ -197,17 +221,6 @@ Computers, however, build decision trees using only the data we provide... and t
 Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than the one we just made that classifies common tableware!
 
 @centered-image{images/iris-data.png}
-
-=== Synthesize
-
-@QandA{
-
-@Q{How is playing 20 questions to figure out a mystery item _similar_ to the predicting and recommending that a decision tree enables?}
-@A{Decision trees, like 20 Questions participants, need to avoid questions that don't provide information. Decision trees, like 20 Questions participants, sometimes fail to identify an object correctly. Familiarity with the dataset improves the accuracy of both a decision tree and a 20 Questions participant.}
-
-@Q{How is it different?}
-@A{When we play 20 Questions, we are trying to identify a single object. Decision trees are useful for categorizing a variety of objects, or predicting outcomes in a variety of different scenarios.}
-}
 
 
 
