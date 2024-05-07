@@ -55,8 +55,9 @@ for pl in $proglangs; do
   for dd in front-matter back-matter resources; do
     if test -d $dd; then
       cd $dd
+      mkdir -p .cached
       if test -d pages; then
-        mkdir -p .cached
+        # mkdir -p .cached
         make_solution_pages
         $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua
       fi
