@@ -13,11 +13,14 @@ initialization:
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
 	@mkdir -p distribution/$(NATLANG)/lib/images
+	@mkdir -p distribution/$(NATLANG)/lib/.cached
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
 	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
+	@mkdir -p distribution/$(NATLANG)/pages/.cached
+	@mkdir -p distribution/$(NATLANG)/textbooks/.cached
 	@$(CP) -p lib/*.html $(PROGDIR)
 	@$(CP) -p lib/*.rkt $(PROGDIR)
 	@$(CP) -p lib/*.json $(PROGDIR)
@@ -25,15 +28,17 @@ initialization:
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
-	@rm -f $(ADOC_INPUT) $(PUPPETEER_INPUT)
-	@if test -n "$(BOOK)"; then echo "{\"htmlFileSpecs\": [ \"ignoreElement\"" > $(PUPPETEER_INPUT); fi
-	@echo 'return {' > $(ADOC_POSTPROC_LESSONPLAN_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_NARRATIVE_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_RESOURCES_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_PWYINDEP_INPUT)
-	@echo 'return {' > $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
-	@echo '(' > $(ADOCABLES_INPUT)
+	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
+	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
+	@echo 'return {' > $(SETUP_WORKBOOKPAGE)
+	@echo 'return {' > $(SETUP_LESSONPLAN)
+	@echo 'return {' > $(SETUP_PATHWAYRESOURCE)
+	@echo 'return {' > $(SETUP_PATHWAYNARRATIVE)
+	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT_PDF)
+	@echo 'return {' > $(SETUP_WORKBOOKPAGE_PDF)
+	@echo 'return {' > $(SETUP_LESSONPLAN_PDF)
+	@echo 'return {' > $(SETUP_PATHWAYRESOURCE_PDF)
+	@echo 'return {' > $(SETUP_CONTRACTS_PDF)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
 # but I don't think it buys us much
@@ -60,7 +65,7 @@ the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
 curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
 copy-lessons: $(the-distribution-lessons)
-	@echo distribution/$(NATLANG)/lessons updated
+	@echo "  " • Updated distribution/$(NATLANG)/lessons 
 
 define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1): $1
@@ -85,7 +90,7 @@ the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                         $(the-pathways))))
 
 copy-pathways: $(the-courses)
-	@echo distribution/$(NATLANG)/courses updated
+	@echo "  " • Updated distribution/$(NATLANG)/courses 
 
 define make-copy-pathway-rule
 distribution/$(NATLANG)/courses/$(call curr-bare-name,$1): $1
@@ -108,7 +113,8 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
 distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
-	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
+	@echo ➤ Build $@
+	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
 
@@ -122,10 +128,12 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 starter-files: distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
-	node $< $@
+	@echo ➤ Build $@
+	@node $< $@
 
 ###############################################################################
 
 courses-and-lessons: copy-lessons copy-pathways
 	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
-	$(MAKE_DIR)collect-distribution-info.lua
+	@echo ➤ Collect exercises information
+	@$(MAKE_DIR)collect-distribution-info.lua

@@ -906,6 +906,12 @@ const Alg2 = {
       "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
     }
   },
+  "alg2-ca-rent" : {
+    "title": "CA Minimum Wage and Rent Starter File",
+    "pyret" : {
+      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
+    }
+  },
   "alg2-exploring-quadratics-desmos": {
     "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
