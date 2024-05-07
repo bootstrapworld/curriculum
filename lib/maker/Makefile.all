@@ -97,8 +97,10 @@ phases:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@mkdir -p distribution/$(NATLANG)/lib
-	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase1
-	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
+	@echo ➤ Update distribution directory
+	@$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase1
+	@echo ➤ Find the files that need updating
+	@$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
 
 ###############################################################################
 
@@ -113,7 +115,8 @@ linkcheck:
 ###############################################################################
 
 clean:
-	rm -fr $(TOPDIR)/distribution
+	@echo ➤ Clean distribution directory
+	@rm -fr $(TOPDIR)/distribution
 
 ###############################################################################
 
@@ -147,7 +150,8 @@ alignment-dictionaries := $(wildcard \
 	shared/langs/en-us/practices/*.rkt)
 
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
-	$(MAKE_DIR)make-json-dict.lua $@
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-json-dict.lua $@
 
 ###############################################################################
 

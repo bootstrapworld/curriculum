@@ -1437,6 +1437,11 @@
                             (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
+                           [(string=? directive "link-instructions")
+                            (let ([prose (read-group i directive #:multiline? #t)])
+                              (display
+                                (enclose-span ".linkInstructions"
+                                  (expand-directives:string->string prose)) o))]
                            [(string=? directive "define")
                             (let* ([id (read-group i directive)]
                                    [prose (read-group i directive #:multiline? #t)])

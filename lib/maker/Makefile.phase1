@@ -65,7 +65,7 @@ the-distribution-lessons := $(patsubst %,distribution/$(NATLANG)/lessons/%, \
 curr-bare-name = $(notdir $(patsubst %/langs/$(NATLANG),%,$1))
 
 copy-lessons: $(the-distribution-lessons)
-	@echo distribution/$(NATLANG)/lessons updated
+	@echo "  " • Updated distribution/$(NATLANG)/lessons 
 
 define make-copy-lesson-rule
 distribution/$(NATLANG)/lessons/$(call curr-bare-name,$1): $1
@@ -90,7 +90,7 @@ the-courses := $(patsubst %,distribution/$(NATLANG)/courses/%, \
                         $(the-pathways))))
 
 copy-pathways: $(the-courses)
-	@echo distribution/$(NATLANG)/courses updated
+	@echo "  " • Updated distribution/$(NATLANG)/courses 
 
 define make-copy-pathway-rule
 distribution/$(NATLANG)/courses/$(call curr-bare-name,$1): $1
@@ -113,7 +113,8 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
 distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
-	$(MAKE_DIR)make-bilingual-glossary.lua $< $@
+	@echo ➤ Build $@
+	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
 
@@ -127,10 +128,12 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 starter-files: distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
-	node $< $@
+	@echo ➤ Build $@
+	@node $< $@
 
 ###############################################################################
 
 courses-and-lessons: copy-lessons copy-pathways
 	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
-	$(MAKE_DIR)collect-distribution-info.lua
+	@echo ➤ Collect exercises information
+	@$(MAKE_DIR)collect-distribution-info.lua

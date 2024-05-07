@@ -12,7 +12,8 @@ css-from-less: $(css-from-less-files)
 
 define make-css-from-less-rule
 $(patsubst %.less,distribution/$(NATLANG)/%.css, $1): $1
-	node_modules/less/bin/lessc $$< $$@
+	@node_modules/less/bin/lessc $$< $$@
+	@echo "  " • Updated $$@
 
 endef
 
@@ -242,7 +243,7 @@ build-pathway-narratives: $(narrative-asc-files)
 define make-build-narrative-rule
 $(call asc-file,$1): $1
 	@#echo build-narrative: creating $$@ from $$<
-	@echo \"$$<\" , >> $(SETUP_PATHWAYNARRATIVE)
+	@echo \"$$<\", >> $(SETUP_PATHWAYNARRATIVE)
 
 endef
 
@@ -255,15 +256,18 @@ lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/
 images: distribution/$(NATLANG)/images.js
 
 distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
-	$(MAKE_DIR)make-images-js.lua $@
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-images-js.lua $@
 
 ##########################################################################
 
 dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
-	$(MAKE_DIR)make-dependency-graph.lua $@
-	$(MAKE_DIR)check-graph.sh
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-dependency-graph.lua $@
+	@echo ➤ Check $@
+	@$(MAKE_DIR)check-graph.sh
 
 ##########################################################################
 
@@ -278,20 +282,24 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(SETUP_LESSONPLAN_PDF)
 	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
 	@echo } >> $(SETUP_CONTRACTS_PDF)
-	$(MAKE_DIR)do-setup.lua
-	@if test -s $(ADOCABLES_INPUT); then echo Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
-	@if test -s "$(ADOC_INPUT)"; then echo Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
+	@echo ➤ Setting up batch files
+	@$(MAKE_DIR)do-setup.lua
+	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
+	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
 
 # specials = primitives + starter-files
 
 specials: preproc
-	$(MAKE_DIR)collect-specials.lua
+	@echo ➤ Collect lesson info
+	@$(MAKE_DIR)collect-specials.lua
 
 postproc: preproc
-	$(MAKE_DIR)do-postproc.lua
+	@echo ➤ Postproc
+	@$(MAKE_DIR)do-postproc.lua
 
 tocs: preproc
-	$(MAKE_DIR)make-pathway-tocs.lua
+	@echo ➤ Make pathway ToCs
+	@$(MAKE_DIR)make-pathway-tocs.lua
 
 ifeq "$(BOOK)" ""
 pdfs: postproc dependency-graph tocs
