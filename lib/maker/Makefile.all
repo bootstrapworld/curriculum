@@ -4,6 +4,8 @@ export TOPDIR := $(realpath .)
 
 export PROGDIR := $(TOPDIR)/distribution/.prog-$(NATLANG)
 
+export MAKE_ERR_LOG := $(TOPDIR)/distribution/.make.error.log
+
 export ALL_PROGLANGS := wescheme pyret codap spreadsheets none
 
 # batch input for (Racket) preprocessor (.adoc -> .asc)
@@ -18,19 +20,42 @@ export ADOC_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-asciidoctor
 
 export ADOC_POSTPROC_LESSONPLAN_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-lessonplan.lua
 
-export ADOC_POSTPROC_NARRATIVEAUX_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-narrativeaux.lua
+export ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-pathwaynarrative.lua
 
-export ADOC_POSTPROC_NARRATIVE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-narrative.lua
+export ADOC_POSTPROC_PATHWAYRESOURCE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-pathwayresource.lua
 
-export ADOC_POSTPROC_RESOURCES_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-resources.lua
-
-export ADOC_POSTPROC_PWYINDEP_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-pwyindep.lua
+export ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-pathwayindependent.lua
 
 export ADOC_POSTPROC_WORKBOOKPAGE_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-adoc-postproc-workbookpage.lua
 
 # input for html2pdf.js
 
 export PUPPETEER_INPUT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.do-puppeteer.json
+
+#
+
+export SETUP_PATHWAYINDEPENDENT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwayindependent.lua
+
+export SETUP_WORKBOOKPAGE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-workbookpage.lua
+
+export SETUP_LESSONPLAN := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-lessonplan.lua
+
+export SETUP_PATHWAYRESOURCE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwayresource.lua
+
+export SETUP_PATHWAYNARRATIVE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwaynarrative.lua
+
+
+#
+
+export SETUP_PATHWAYINDEPENDENT_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwayindependent-pdf.lua
+
+export SETUP_WORKBOOKPAGE_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-workbookpage-pdf.lua
+
+export SETUP_LESSONPLAN_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-lessonplan-pdf.lua
+
+export SETUP_PATHWAYRESOURCE_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwayresource-pdf.lua
+
+export SETUP_CONTRACTS_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-contracts-pdf.lua
 
 #
 
@@ -72,8 +97,10 @@ phases:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@mkdir -p distribution/$(NATLANG)/lib
-	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase1
-	$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
+	@echo ➤ Update distribution directory
+	@$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase1
+	@echo ➤ Find the files that need updating
+	@$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
 
 ###############################################################################
 
@@ -88,7 +115,8 @@ linkcheck:
 ###############################################################################
 
 clean:
-	rm -fr $(TOPDIR)/distribution
+	@echo ➤ Clean distribution directory
+	@rm -fr $(TOPDIR)/distribution
 
 ###############################################################################
 
@@ -122,7 +150,8 @@ alignment-dictionaries := $(wildcard \
 	shared/langs/en-us/practices/*.rkt)
 
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
-	$(MAKE_DIR)make-json-dict.lua $@
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-json-dict.lua $@
 
 ###############################################################################
 
