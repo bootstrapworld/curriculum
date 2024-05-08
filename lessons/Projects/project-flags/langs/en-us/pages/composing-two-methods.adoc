@@ -1,0 +1,86 @@
+= Two Methods for Composing Images
+
+A class was asked to write code to build an image of the Puerto Rican flag. Two students started by defining the following values:
+
+```
+background = rectangle(300, 200, "outline", "black")
+rrectangle = rectangle(300, 200/5, "solid", "red")
+btriangle = rotate(30, triangle(200, "solid", "blue"))
+wstar = star(45, "solid", "white")
+```
+
+They then two very different strategies to define `puerto-rico` to compose an image of the flag. And both work!
+
+[cols="1a,1a", grid="none", stripes="none", frame="none", header="none"]
+|===
+| Mia's Method:
+
+```
+puerto-rico =
+  put-image(wstar, 65, 100,
+    put-image(btriangle, 85, 100,
+      put-image(rrectangle, 150, 20,
+        put-image(rrectangle, 150, 100,
+          put-image(rrectangle, 150, 180,                                                         
+            background)))))
+```
+
+| Savannah's Method:
+
+```
+step1 = put-image(rrectangle, 
+  150, 20, 
+  background)
+
+step2 = put-image(rrectangle, 
+  150, 100, 
+  step1)
+
+step3 = put-image(rrectangle, 
+  150, 180, 
+  step2)
+
+step4 = put-image(btriangle, 
+  85, 100, 
+  step3)
+
+step5 = put-image(wstar, 
+  65, 100, 
+  step4)
+
+puerto-rico = step5
+```
+|===
+
+
+@n How is their code similar? @fitb{}{@ifsoln{Answers will vary.}}
+
+@fitb{}{@ifsoln{They both put `wstar` at (65, 100). They both have the background on the bottom and `wstar` on top}}
+
+@fitb{}{}
+
+@n How is their code different? @fitb{}{@ifsoln{Answers will vary.}}
+
+@fitb{}{@ifsoln{Mia's code starts with the top layer. Savannah's code starts with the bottom layer.}}
+
+@fitb{}{}
+
+@n What else do you Notice? @fitb{}{}
+
+@fitb{}{}
+
+@n What do you Wonder? @fitb{}{}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+@link-instructions{Open the @starter-file{compose-2} and click "Run".}
+
+@n Type `step1` and hit Enter. Do the same thing with `step2`, `step3`, `step4`... What happens? @fitb{}{}
+
+@fitb{}{@ifsoln{We see what each step along the way looks like.}}
+
+@n Which strategy do you prefer? Why? @fitb{}{}
+
+
