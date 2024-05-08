@@ -2,20 +2,20 @@
 
 @description{Students develop and define a function of their own. The function must take in an image and manipulate it using at least three transformations. _This project supports the learning goals of @lesson-link{functions-examples-definitions}._}
 
-@lesson-prereqs{functions-examples-definitions}
+@lesson-prereqs{functions-examples-definitions, function-composition}
 
 [@lesson-intro-table]
 |===
 | Lesson Goals
 | Students will be able to...
 
-* represent function composition with Circles of Evaluation
-* use image-producing functions and functions that transform to define a function
+- represent function composition with Circles of Evaluation
+- use image-producing functions and functions that transform to define a function
 
 | Student-facing Lesson Goals
 |
 
-* Let's make our own functions in @proglang!
+- Let's make our own functions in @proglang!
 
 | Materials
 |[.materials-links]
@@ -24,73 +24,101 @@
 | Preparation
 |
 @preparation{
-* Before launching this project, ensure that students are comfortable using image-producing functions and function composition.
-* Note that for this project, students must submit four items: (1) Sample Function Study, (2) Designing Your Function, (3) _two_ Coding Your Function pages, and (4) a published @proglang program link
-
-* This project is designed to span multiple days.
+- Before launching this project, ensure that students are comfortable using image-producing functions and function composition.
+- Teachers are welcome and encouraged to edit and adapt the student-facing @handout{function-rubric.adoc} for their unique classroom context and distribute it to help students understand the scope of the project - and your expectations - at the outset.
+- Decide how you will have your students submit their program links. Specify how you would like students to do this. Email, a form, or any SMS (ie, Google Classroom or Schoolology) will work!
 }
 
+| Key Points for the Facilitator
+|
+- This project is designed to span multiple days.
+- Note that, in addition to a published @proglang program link, students should submit their Sample Function Study, Designing Your Function and both Coding Your Function pages.
+
 |===
+
+== Functions Refresher @duration{15 minutes}
+
+=== Overview
+
+Students explore two example functions. One is a basic function that will serve as a review of how Contracts, Examples and Definitions should work together and what we an learn from error messages. The other is a composed image function that should pique their curiosity in preparation for designing their own function.
+
+=== Launch
+
+@QandA{
+@Q{What functions have we defined so far and what did they do?}
+@A{Answers will vary, but may include:}
+@A{`gt` made green equilateral triangles of any size.}
+@A{`bc` made blue circles of any size.}
+@A{`sticker` made a solid 50px star of a given color}
+@A{`gold-star` made a gold star of any size}
+@A{`name-color` made an image of your name at size 50 in whatever color is given}
+@A{`name-size` made an image of your name in your specified favorite color in the given size...}
+}
+
+=== Investigate
+
+Let's take a look at the definition for a new function.
+
+@lesson-instruction{
+Complete the first section of the @handout{function-study.adoc} using the @starter-file{functions-study}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What did you have to fix to address the warnings for `maroon-square`?}
+@A{We had to change the color in the definition from "orange" to "maroon".}
+}
+
+Your are going to be defining a function of your own design that takes in an _image_, and transforms that image at least three times. Let's look at a function like that!
+
+@lesson-instruction{
+Complete the second section of the @handout{function-study.adoc} using the @starter-file{functions-study}, 
+}
+
+@QandA{
+@Q{What does the function `mystery` do?}
+@A{It consumes an image, which will be scaled, rotated, and overlayed on a purple rectangle that is overlayed on a green star.}
+
+@Q{How are the `maroon-square` and `mystery` functions alike? How are they different?}
+@A{Both functions produce images, but `maroon-square` consumes a number, while `mystery` consumes an image.}
+@A{The function `mystery` is more complex: it uses a variety of composed functions, while `maroon-square` uses only one function.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{When writing an example, how does a programmer decide what number to use as the input?}
+@A{We can use any number, unless we're trying to test for a special use-case.}
+
+@Q{When writing an example, how does a programmer decide what the output should be?}
+@A{We can think about "what our actor would need to say".}
+@A{We can look at the directions.}
+
+@Q{When writing a function definition, how does a programmer decide what the variable(s) should be?}
+@A{We would look to see what changes.}
+
+@Q{What is the process for writing our function definition?}
+@A{We look at the examples, write down everything that remained the same, and we replace the part that changes from one example to the next with a descriptive variable.}
+}
+
+@teacher{
+Before moving onto the next phase of the project, some teachers have students submit their work now, and evaluate it using the first row of the @handout{function-rubric.adoc, "rubric"}. Intermittently receiving feedback is useful for many students.}
 
 == Create Your Own Function @duration{flexible}
 
 === Overview
 
-Students explore two sample functions, then design a function of their own and represent it with a Circle of Evaluation and code. Finally, they publish and share their program.
+Students will design a function of their own and represent it with a Circle of Evaluation and code. Finally, they will publish and share their program.
 
 === Launch
 
-@teacher{To launch this project, you'll facilitate a conversation to review with students some of the functions that they have already created.}
-
+It's time to design your own image-transforming functions! 
 @lesson-instruction{
-Use the @starter-file{functions} to complete the first section of the @handout{sample-function-study.adoc}.
+Turn to @handout{design-your-function.adoc}. The questions on this page will help you plan out what you want to your image-transforming function to do, before we dig into writing the code to make it happen.
 }
 
-@teacher{After this refresher on how to use a defined function (`maroon-square`, invite students to find a partner. In each partner group, one student will pose the questions below and the other will answer them. If you prefer, you can pose these questions to the class and call on individual students.}
-
-@QandA{
-Turn and talk to a partner. One student will ask questions, and the other will answer. The student who is asking the questions should point to the line of code in the @starter-file{functions} that the the question refers to.
-
-@Q{In the first example, how did we decide what number to use as the input for `maroon-square`?}
-@A{We randomly chose the number! We can use any number.}
-
-@Q{How did we decide on the output for `maroon-square`?}
-@A{We thought about "what our actor would need to say" or looked at the directions.}
-
-@Q{How would we decide what to circle in the examples?}
-@A{We would look to see what changes.}
-
-@Q{How did we decide on our function definition?}
-@A{We looked at the examples. We wrote down everything that remained the same, and we used what we circled as our variable.}
-}
-
-@slidebreak
-
-For this project, we're going to create a function that takes in an _image_, and transforms that image at least three times. Let's look at a function like that!
-
-@lesson-instruction{
-Using the @starter-file{functions}, complete the second section of the @handout{sample-function-study.adoc}.
-}
-
-@QandA{
-@Q{What does the function `sample` do?}
-@A{It consumes an image, which will be scaled, rotated, and overlayed on a purple rectangle that is overlayed on a green star.}
-
-@Q{How are the `maroon-square` and `sample` alike? How are they different?}
-@A{Both functions produce images, but `maroon-square` consumes a number, while `sample` consumes an image. The function `sample` is more complex: it uses a variety of composed functions, while `maroon-square` uses only one function.}
-}
-
-@teacher{We recommend printing and distributing the student-facing @handout{function-rubric.adoc} to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.
-
-Before moving onto the next phase of the project, some teachers have students submit their work now, and evaluate it using the first row of the @handout{function-rubric.adoc, "rubric"}. Intermittently receiving feedback is useful for many students.}
-
-@slidebreak
-
-@lesson-instruction{
-Turn to @handout{design-your-function.adoc}, where you will thinking about which functions you'd like __your function__ to use.
-}
-
-@teacher{If students get stuck, you can refer them to @handout{sample-function-study.adoc}.
+@teacher{If students get stuck, you can refer them back to the `mystery` function in the @starter-file{functions-study}.
 
 Note that if you are collecting student work intermittently, now is a good time to do so. This phase of the project can be evaluated according to the second row of the @handout{function-rubric.adoc, "rubric"}.
 }
@@ -99,27 +127,44 @@ Note that if you are collecting student work intermittently, now is a good time 
 
 @teacher{In this phase of the project, students begin to think more deeply about how they will write the code needed to produce their function. They also code and test their function in @proglang, before publishing and submitting.}
 
-@lesson-instruction{
-- Turn to @handout{code-your-function.adoc}.
-- Draw a Circle of Evaluation to represent the function you planned on @handout{design-your-function.adoc}.
-- For your variable, you can just write "img".
-- When you are finished, swap papers with a partner and complete the Peer Review on the bottom half of @handout{code-your-function.adoc}.
-}
-
-@teacher{Students who are able to conceptualize their function by drawing an accurate Circle of Evaluation will be able to progress through the remainder of the project much more confidently. It is vital to ensure that students have done adequate planning before they begin coding in @proglang. If you'd like, this is another good opportunity to assess student work using the third row of the @handout{function-rubric.adoc, "rubric"}.}
 
 @lesson-instruction{
-Open @starter-file{my-function}, which you will use to complete @handout{code-your-function-2.adoc}.
+- If we were to draw a Circle of Evaluation for what the mystery function does with a `shape` it takes in, it would look like this:
+
+@do{
+(define f1 '(overlay (overlay (scale 0.5 (rotate 45 shape)) (rectangle 90 75 "solid" "purple")) (star 200 "solid" "teal")))
 }
 
-@teacher{@handout{code-your-function-2.adoc} asks students to define a value, add examples, and define their functions. They also complete a second round of peer review. When students are struggling, encourage them to read error messages carefully and refer to any relevant contracts.
+@show{(coe f1)}
 
-Finally, students publish and submit their program links. Specify how you would like students to do this. Email, a form, or any SMS (ie, Google Classroom or Schoolology) will work!}
+- Find `shape` in the diagram. What do you Notice? What do you Wonder?
+- With your partner discuss how the Circle of Evaluation shows us what the function is doing with `shape` and then translate the Circle of Evaluation into code.
+}
+
+@teacher{Code: 
+@show{(code f1)}}
+
+@lesson-instruction{
+- Now turn to @handout{function-coe.adoc} and draw a Circle of Evaluation to represent the function you've designed!
+- When you are finished, swap papers with a partner and complete the Peer Review on the bottom half of the page.
+- When you get your peer review back, make any necessary changes to your Circle of Evaluation.
+}
+
+@teacher{Students who are able to conceptualize their function by drawing an accurate Circle of Evaluation will be able to progress through the remainder of the project much more confidently. It is vital to ensure that students have done adequate planning before they begin coding in @proglang. If you'd like, this is another good opportunity to assess student work using the third row of the @handout{function-rubric.adoc, "rubric"}.
+
+@handout{code-your-function.adoc} asks students to define a value, add examples, and define their functions. They also complete a second round of peer review. When students are struggling, encourage them to read error messages carefully and refer to any relevant contracts.}
+
+@lesson-instruction{
+- Turn to @handout{code-your-function.adoc} and translate your polished Circle of Evaluation into Code.
+- Then open the @starter-file{my-function} and complete the second section of @handout{code-your-function.adoc}.
+- When you finish, trade papers with your partner and complete the Peer Review section.
+- After you've polished your file, it's time to submit it!
+}
 
 === Synthesize
 
 - Think about the process of creating your own function. What was the most rewarding part? What was the most challenging part?
-- What advice would you offer to someone who was trying to build a function, like you just did?
+- What advice would you offer to someone who was trying to design an image-transforming function, like you just did?
 
 @teacher{
 Encourage students to self-assess and revise their work. Peer review is a powerful tool if time allows! The @handout{function-rubric.adoc, "rubric"} is a useful resource for facilitating both self and peer review.

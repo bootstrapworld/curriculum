@@ -591,10 +591,28 @@ const Flags = {
   "flags-panama": {
     "title": "Flag of Panama Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=A3N1Kcg7iy"
+    }
+  },
+   "compose-1":{
+    "title": "Composing in a Single Definition Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=1TAaRdb5a4EpG7ccdjuDFyqOPRZzXUtTw"
+    },
+    "wescheme":{
+      "url":""
+    }
+  },
+  "compose-2":{
+    "title": "Composing 1 Step at a Time Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=15kdZ_CENWdN-LuBmHkFk0CpqObtCJQyh"
+    },
+    "wescheme":{
+      "url":""
     }
   },
   "flags-desmos": {
@@ -831,19 +849,19 @@ const EarlyMath = {
 }
 
 const Projects = {
-  "functions": {
-    "title": "Functions Starter File",
+  "functions-study": {
+    "title": "Functions Study Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
+      "url": "https://code.pyret.org/editor#share=1F8_Pn48lmH8rmrnxK7ArcUDMI53tWsm8"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
+      "url": "https://www.wescheme.org/view?publicId=44k3iR5urE"
     }
   },
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
+      "url": "https://code.pyret.org/editor#share=1imHHu2-uAXrjQ1I1gGAEjTYfifQ6P65c"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=apgRM24Q82"
