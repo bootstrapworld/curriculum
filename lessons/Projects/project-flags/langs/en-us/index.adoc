@@ -97,12 +97,30 @@ Referring to an image of your chosen flag, complete @printable-exercise{decompos
 - Confirm that all students have accurately decomposed the flag before inviting students to work in @proglang.
 }
 
+@strategy{Two Methods for Composing Functions to Build Images}{
+
+- Functional Programming defines composition all at once.
+- Imperative Programming defines composition one step at a time.
+
+In our @lesson-link{transform-compose-images} lesson we modeled defining images of flags all at once.
+
+If you work with students in the earlier grades and / or you are _not_ concerned with teaching @vocab{function composition}, then you might want to model breaking a composition down using the @starter-file{compose-2}.
+
+If you want to engage your students with considering both methods, have them take a few minutes to complete @handout{composing-two-methods.adoc}. 
+
+You know what is best for your students!
+}
+
 @slidebreak
 
 @lesson-instruction{
-Open and save a new @proglang file to write your code in. Define source-flag to link to the target image so you have something to compare the image your code generates to.}
-
-This will involve defining flag parts, then stacking those parts on top of the bottom image using the coordinates we found.
+- Open and save a new @proglang file to work in. 
+- Define `source-flag` as a link to the target image so you have something to compare the image your code generates to. 
+  * To insert a link: choose @ifproglang{pyret}{INSERT} @ifproglang{wescheme}{Images} from the menu.
+- Define values for each of the shapes you identified on @printable-exercise{decomposing-my-flag.adoc}. 
+  * Be sure your value names don't have any spaces in them.
+- Then think through how to compose the flag image using those values.
+}
 
 @slidebreak
 
@@ -110,9 +128,9 @@ Some suggestions for elegant and accurate code:
 
 - Don't cram everything into one line! If you break code up into new lines (for example, hitting "Return" before the x-coordinate and after the y-coordinate), you'll notice that the code forms a "staircase" pattern.
 
-- Consider defining `WIDTH` and `HEIGHT` of their flags as values - and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
-
 - Be sure to compare the image you get with the target image!
+
+@star Have students define the `WIDTH` and `HEIGHT` of their flags as values - and then __replace the numbers in each flag__ with expressions relative to width and height. For example, if the `dot` in the Japanese flag is at (150, 100), those numbers would be replaced with @show{(code '(/ WIDTH 2))} and @show{(code '(/ HEIGHT 2))}.
 
 
 === Synthesize

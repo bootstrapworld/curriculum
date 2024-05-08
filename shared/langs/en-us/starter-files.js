@@ -591,10 +591,28 @@ const Flags = {
   "flags-panama": {
     "title": "Flag of Panama Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=A3N1Kcg7iy"
+    }
+  },
+   "compose-1":{
+    "title": "Composing in a Single Definition Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=1TAaRdb5a4EpG7ccdjuDFyqOPRZzXUtTw"
+    },
+    "wescheme":{
+      "url":""
+    }
+  },
+  "compose-2":{
+    "title": "Composing 1 Step at a Time Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=15kdZ_CENWdN-LuBmHkFk0CpqObtCJQyh"
+    },
+    "wescheme":{
+      "url":""
     }
   },
   "flags-desmos": {
