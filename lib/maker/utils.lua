@@ -10,9 +10,8 @@ end
 function file_exists_p(f)
   local h = io.open(f)
   -- open'ing a nonexistent file returns nil
-  if h then h:close(); return true
-  else return false
-  end
+  if h then h:close(); return true end
+  return false
 end
 
 function touch(f)
@@ -92,4 +91,11 @@ function read_file_lines(f)
   end
   i:close()
   return result
+end
+
+function make_error_function(errmsg_file_context)
+  -- return an error function that adds context info
+  return function (s)
+    error('ERROR in ' .. errmsg_file_context() .. ':\n' .. s)
+  end
 end

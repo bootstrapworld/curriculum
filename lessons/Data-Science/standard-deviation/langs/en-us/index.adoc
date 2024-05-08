@@ -39,7 +39,7 @@ Students review the notion of @vocab{spread} itself, and build up to the formula
 **The Animal Shelter Bureau reports that the @vocab{mean} age of shelter cats is 3 years.**
 
 @QandA{
-Take a look at the the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front).
+Take a look at the @starter-file{animals}. (You can also look on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} - or if you are using a printed workbook, you'll find it at the front).
 @Q{Does a mean age of 3 years translate to all of the cats being close to 3 years old? Why or why not?}
 @A{No, we cannot assume all cats are close to 3 years old. There are some outliers in the dataset.}
 }
@@ -55,9 +55,9 @@ Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
 @QandA{
 @Q{What did you get for the mean? Does it match what the Animal Shelter Bureau says?}
 @A{The mean is 3; yes, it matches what the Animal Shelter Bureau says.}
-@Q{Can you think of four ages, such that the mean age for all of them is 3?}
+@Q{Can you think of four ages, such that their mean is 3 years old?}
 @A{Some possibilities include: {3,3,3,3}, {1,2,4,5}, {1,1,4,6}... any four ages that add up to 12 will work!}
-@Q{Can you think of a __different__ spread of four ages that would have the same mean?}
+@Q{Can you think of a _different_ spread of four ages that would have the same mean?}
 @A{See above.}
 @Q{How many different sets of four ages can you think of, which all have a mean of 3?}
 @A{See above.}
@@ -69,9 +69,11 @@ Without a measure of @vocab{spread}, just knowing the mean doesn't tell us enoug
 
 When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box-plot.
 
-Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across __all__ the points.
+Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
 
-Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on __the "typical" distance from the mean__. In other words, we want to know what kind of deviation is "standard" for all the points.
+@slidebreak
+
+Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
 @lesson-point{
 @vocab{Standard deviation} is the most useful way to summarize @vocab{spread} of a quantitative column.
@@ -97,7 +99,7 @@ Complete numbers 4 to 6 of @printable-exercise{computing-stdev.adoc}.
 @strategy{Mean Average Deviation?}{
 In this section of the worksheet, students will need to stretch their visual imaginations a bit! In problem number 6, they are asked to summarize all 10 distances from the mean into a single number. The goal here is for students to make an educated guess about standard deviation (SD) _before_ learning the algorithm for computing it. Invite and encourage discussion about students' different approaches for guessing at the best summary number _before_ sharing the key idea about standard deviation!
 
-Students are likely to hone in on the __Mean Average Deviation__, or MAD. Both SD and MAD measure variability or "spread" by computing individual deviations from the mean, but MAD averages these deviations and SD transforms them via square/square-root.
+Students are likely to hone in on the _Mean Average Deviation_, or MAD. Both SD and MAD measure variability or "spread" by computing individual deviations from the mean, but MAD averages these deviations and SD transforms them via square/square-root.
 }
 
 @slidebreak
@@ -221,7 +223,7 @@ Treating each point independantly allows each deviation to contribute to the mea
 
 Extreme values affect both the mean and standard deviation of a dataset.
 
- - Unusually low values __decrease__ the mean, while unusually high values __increase__ it. 
+ - Unusually low values _decrease_ the mean, while unusually high values _increase_ it.
  - Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
 
 === Synthesize

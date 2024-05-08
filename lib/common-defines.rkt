@@ -52,7 +52,7 @@
       "</script>\n"
       "++++\n\n") o))
 
-(define (print-standards-js o #:sidebar [sidebar #f])
+(define (print-standards-js o)
   (display
     (string-append
       "\n++++\n"

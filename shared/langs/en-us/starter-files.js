@@ -235,7 +235,7 @@ const GameBasics = {
       "url": "https://code.pyret.org/editor#share=1DcsQ280Po_GjlPXHsI4f7k_o2aNKwT1U"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=HA2U428Ykk"
+      "url": "https://www.wescheme.org/openEditor?publicId=HA2U428Ykk"
     }
   },
   "sample-game-no-collision": {
@@ -325,10 +325,25 @@ const DSBasics = {
       "url": "https://docs.google.com/spreadsheets/d/1wLPE6i4P7TMWxpcOnOHGMWBNYopwHf7GpdZMnbgosqA/edit?usp=sharing"
     }
   },
-  "food": {
+  "putting-it-all-together": {
+    "title": "Animals with Helper Functions Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU&v=0c33ff0"
+    }
+  },
+   "food": {
     "title": "Global Food Supply & Production Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=10I31-q9-iMtVOHjXmwUDS0jbMsY8iK2T"
+    },
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2Fr49Wrb5M6Mf2y9UtA80d%2Ffile.json"
+      }
+    },
+  "food-sheet": {
+    "title": "Global Food Supply & Production Dataset",
+    "pyret": {
+      "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
     },
     "codap": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
@@ -579,7 +594,7 @@ const Flags = {
       "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=A3N1Kcg7iy"
+      "url": "https://www.wescheme.org/openEditor?publicId=A3N1Kcg7iy"
     }
   },
   "flags-desmos": {
@@ -681,7 +696,7 @@ const MoreAlg = {
       "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
   },
    "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=AXvgZkqnNi"
+      "url": "https://www.wescheme.org/openEditor?publicId=AXvgZkqnNi"
     }
   },
   "method-2": {
@@ -711,7 +726,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=12ooLtE98eEC7ltBP4ZXL7z3drKy2rhCk"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=1H24a8bR9a"
+      "url": "https://www.wescheme.org/openEditor?publicId=1H24a8bR9a"
     }
   },
   "additive-inverse": {
@@ -720,7 +735,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1zJaFf9rs8naK5WMX58mcB_xaENU21ca2"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=DEBQ2t7wVe"
+      "url": "https://www.wescheme.org/openEditor?publicId=DEBQ2t7wVe"
     }
   },
   "multiplicative-inverse": {
@@ -729,7 +744,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=18ZN58O-wPdflPU4xgzcwNf7-dzgTqCz4"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=ijCV5DmxU3"
+      "url": "https://www.wescheme.org/openEditor?publicId=ijCV5DmxU3"
     }
   },
   "multiplicative-inverse-2": {
@@ -738,7 +753,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1FTPo4M8OjIS_WULUoRgbgBKHxDLwnRf7"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=m5gYzSk64C"
+      "url": "https://www.wescheme.org/openEditor?publicId=m5gYzSk64C"
     }
   },
   "identity-prop":{
@@ -756,7 +771,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
+      "url": "https://www.wescheme.org/openEditor?publicId=iEDXtNyn4k"
     }
   },
   "negation-2":{
@@ -765,7 +780,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=TVUznVqHyA"
+      "url": "https://www.wescheme.org/openEditor?publicId=mu8jTQrApa"
     }
   },
   "distributive-prop": {
@@ -774,7 +789,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1KtQjzlz1fraVS5qBYmbJqTWYcbesXzG9"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=FEEAcTPDyq"
+      "url": "https://www.wescheme.org/openEditor?publicId=FEEAcTPDyq"
     }
   },
   "exponents": {
@@ -783,7 +798,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H&v=0c33ff0"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=gadP2T1dKH"
+      "url": "https://www.wescheme.org/openEditor?publicId=gadP2T1dKH"
     }
   },
   "is-it-16": {
@@ -792,7 +807,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL&v=0c33ff0"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=j0ExQBqaqm"
+      "url": "https://www.wescheme.org/openEditor?publicId=j0ExQBqaqm"
     }
   },
   "variables-code": {
@@ -801,7 +816,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
     },
     "wescheme": {
-     "url": "https://www.wescheme.org/view?publicId=iP1f3ZH2ki"
+     "url": "https://www.wescheme.org/openEditor?publicId=iP1f3ZH2ki"
     }
   },
   "variables-code2": {
@@ -810,7 +825,7 @@ const EarlyMath = {
       "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=S1vWZ2AHlv"
+      "url": "https://www.wescheme.org/openEditor?publicId=S1vWZ2AHlv"
     }
   }
 }
@@ -831,7 +846,7 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=apgRM24Q82"
+      "url": "https://www.wescheme.org/openEditor?publicId=apgRM24Q82"
     }
   },
   "logos": {
@@ -840,7 +855,7 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1S3W4BmngMw-RJco2RejWuZe5uabHuXnS"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=pYymiz1Vby"
+      "url": "https://www.wescheme.org/openEditor?publicId=pYymiz1Vby"
     } 
   },
   "threats": {
@@ -891,6 +906,12 @@ const Alg2 = {
       "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
     }
   },
+  "alg2-ca-rent" : {
+    "title": "CA Minimum Wage and Rent Starter File",
+    "pyret" : {
+      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
+    }
+  },
   "alg2-exploring-quadratics-desmos": {
     "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
@@ -903,22 +924,10 @@ const Alg2 = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
-  "alg2-exploring-logarithms-desmos" : {
-    "title" : "Exploring Logarithmic Functions (Desmos)",
+  "alg2-log-desmos" : {
+    "title" : "Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65035a85708fbb40f916c2d6"
-    }
-  },
-  "alg2-wealth-v-health-desmos": {
-    "title": "Fitting Wealth-v-Health (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/646f99970cc6898a9d87ef95"
-    }
-  },
-  "alg2-wealth-v-health-2-desmos": {
-    "title": "Fitting Wealth-v-Health, Part 2 (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65035be9ff3903f63870acae"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/66057c8e8aec42ab256cc304"
     }
   },
   "alg2-exploring-periodic-desmos" : {
@@ -1026,6 +1035,12 @@ const Reactive = {
       "url": "https://code.pyret.org/editor#share=18SQ698Iy8ktJ4LC4dWiz3h_i98C8gsAW"
     }
   },
+  "bicycle": {
+    "title": "Bicycle Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Kem9gB3o8_DyEvZrPHmuGJSCBRSUH7He"
+    }
+  }
 }
 
   

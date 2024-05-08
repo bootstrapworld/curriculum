@@ -36,7 +36,12 @@ Students learn how to _transform columns_ using the `Transform Attribute` Transf
 
 We've already explored the `Filter` Transformer, which walks through a dataset, applying the @vocab{Boolean} expression that we give it to each row - and then creating a modified copy of our original dataset.
 
-Suppose we want to _transform_ our table in a different way! Let's say we want to convert `Pounds` to `Kilograms` or `Weeks` to `Days`. Maybe we want to transform the `Pounds` column into a `Heavy` column, which produces `true` or `false` depending on if the animal is heavy. The `Transform Attribute` Transformer makes that possible!
+Suppose we want to _transform_ our table in a different way!
+
+- Maybe we want to convert `Pounds` to `Kilograms` or `Weeks` to `Days`.
+- Maybe we want to transform the `Pounds` column into a `Heavy` column, which produces `true` or `false` depending on if the animal is heavy.
+
+The `Transform Attribute` Transformer makes that possible!
 
 === Investigate
 
@@ -57,10 +62,11 @@ Complete @printable-exercise{codap-transform.adoc} in the @starter-file{animals}
 
 === Synthesize
 
-Can you think of any situations where you would want to use this Transformer?
-
-- A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we use `Transform Attribute` to convert to imperial units (inches, pounds, etc).
-- A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `Transform Attribute` to compute that for every row in the table.
+@QandA{
+@Q{What are some situations where you would want to the `Transform Attribute` Transformer?}
+@A{A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we use `Transform Attribute` to convert to imperial units (inches, pounds, etc).}
+@A{A dataset about schools might include columns for how many students are in the school and how many of those students identify as multi-racial. But when comparing schools of different sizes, what we really want is a column showing what _percentage_ of students identify as multi-racial. We could use `Transform Attribute` to compute that for every row in the table.}
+}
 
 == Building Columns @duration{10 minutes}
 
@@ -84,7 +90,7 @@ Complete @printable-exercise{codap-build.adoc} in the @starter-file{animals}.
 === Synthesize
 
 @QandA{
-@Q{Can you think of any other situations where you would want to use these Transformers?}
+@Q{Can you think of any other situations where you would want to the `Build Attribute` Transformer?}
 @Q{How is `Build Attribute` similar to `Transform Attribute`? How are they different?}
 @A{`Build Attribute` creates an additional column, using the expression that we provide. `Transform Attribute` converts an existing column, using the expression that we provide.}
 @Q{When might it make more sense to _build_ an attribute, rather than to _transform_ it?}

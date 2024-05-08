@@ -45,7 +45,7 @@ When looking at a scatter plot of animals, it looks like the amount an animal we
 
 @slidebreak
 
-But if we label the dots by animal, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
+But if we label the dots by species, we notice _every data point_ after 25 pounds belongs to a dog from the shelter! The cats are all clumped together in the lower weight range, making it hard to see how weeks to adoption may relate to a cat's weight.
 
 @center{@image{images/image-scatter-plot.png,550}}
 
@@ -149,31 +149,31 @@ Making grouped and random samples is a powerful skill, which allows us to dig de
 
 Let's start with question: __what's the ratio of fixed to unfixed *cats* at the shelter?__ Let's use the Data Cycle to get an answer, using our knowledge of grouped samples.
 
-@left{@image{images/AskQuestions.png, 100}} This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
+@left{@image{images/AskQuestions.png, 100}}This is an Arithmetic Question. We know it's not a lookup question because there's no ratio written somewhere in the table for us to read. Instead, we'll have to count all the fixed cats and the unfixed cats, then compare the totals.
 
 @slidebreak
 
 @vspace{1ex}
 
-@left{@image{images/ConsiderData.png, 100}} We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
+@left{@image{images/ConsiderData.png, 100}}We know that we'll need to count *only the cats!*, and can ignore everything else. And once we've picked the rows for cats, the only column we want is the `fixed` column. This is a huge hint that *we'll need to filter the dataset!*
 
 @slidebreak
 
 @vspace{1ex}
 
-@left{@image{images/AnalyzeData.png, 100}} @ifproglang{pyret}{We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the @vocab{ratio} ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice.}@ifproglang{codap}{Given our options, a bar chart seems most appropriate for this scenario.} We've decided what to make and we know which rows and columns we're plotting, so the next step is to @ifproglang{pyret}{_write the code!_}@ifproglang{codap}{determine the configuration!}
+@left{@image{images/AnalyzeData.png, 100}}@ifproglang{pyret}{We could use a bar-chart or a pie-chart to do this analysis, but since we care more about the @vocab{ratio} ("2x as many fixed as unfixed") than the count ("20 fixed vs. 10 fixed"), a pie chart is a better choice.}@ifproglang{codap}{Given our options, a bar chart seems most appropriate for this scenario.} We've decided what to make and we know which rows and columns we're plotting, so the next step is to @ifproglang{pyret}{_write the code!_}@ifproglang{codap}{determine the configuration!}
 
 
 @vspace{1ex}
 
 @slidebreak
 
-@left{@image{images/InterpretData.png, 100}} What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
+@left{@image{images/InterpretData.png, 100}}What did our displays tell us? In this case, we got a clear answer to our question. But perhaps that's not the end of the story! We might have _new_ questions about whether a higher percentage of dogs are spayed and neutered than cats, or whether it's even possible to "fix" a tarantula. _All of this belongs in our data story!_
 
 === Investigate
 @lesson-instruction{
-- Complete @printable-exercise{data-displays2.adoc}, using what you've learned about samples to make more sophisticated data displays.
-- Complete @printable-exercise{analyzing-categorical-data2.adoc}.
+- Use the @starter-file{animals} to complete @printable-exercise{data-displays2.adoc}. Apply what you've learned about samples to make more sophisticated data displays.
+- Complete @printable-exercise{data-cycle-categorical.adoc}.
 }
 
 @ifproglang{pyret}{

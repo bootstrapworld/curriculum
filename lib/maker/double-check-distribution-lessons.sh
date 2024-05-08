@@ -24,6 +24,6 @@ for lessonName in *; do
     mkdir -p "$lessonNamePl"
     $CP -upr "$lessonName"/* "$lessonNamePl"
     $CP -p "$lessonName"/.repodir.txt.kp "$lessonNamePl"
-    set_up_lesson_dir "$lessonNamePl" "$pl" "$firstproglang"
+    (cd $lessonNamePl; set_up_lesson_dir "$pl" "$firstproglang")
   done
 done

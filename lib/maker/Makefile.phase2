@@ -12,7 +12,8 @@ css-from-less: $(css-from-less-files)
 
 define make-css-from-less-rule
 $(patsubst %.less,distribution/$(NATLANG)/%.css, $1): $1
-	node_modules/less/bin/lessc $$< $$@
+	@node_modules/less/bin/lessc $$< $$@
+	@echo "  " • Updated $$@
 
 endef
 
@@ -46,7 +47,7 @@ build-pathway-independent: $(pathway-independent-files)
 define make-build-pathway-independent-rule
 $(call asc-file,$1): $1
 	@#echo build-pathway-independent: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-independent.sh $$<
+	@echo \"$$<\", >> $(SETUP_PATHWAYINDEPENDENT)
 
 endef
 
@@ -55,7 +56,7 @@ $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathw
 define make-build-pathway-independent-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
 	@#echo build-pathway-independent-pdf: creating $$@ from $$<
-	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-pathway-independent-pdf.sh $$<; fi
+	@echo \"$$<\", >> $(SETUP_PATHWAYINDEPENDENT_PDF)
 
 endef
 
@@ -109,7 +110,7 @@ build-workbook-pages: $(workbook-pages)
 define make-build-workbook-page-rule
 $(call asc-file,$1): $1
 	@#echo building workbook-page-asc: $$@ from $$<
-	@$(MAKE_DIR)do-workbook-page.sh $$<
+	@echo \"$$<\", >> $(SETUP_WORKBOOKPAGE)
 
 endef
 
@@ -118,7 +119,7 @@ $(eval $(foreach adocf,$(all-adoc-files),$(call make-build-workbook-page-rule,$(
 define make-build-workbook-page-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
 	@#echo building workbook-page-pdf: $$@ from $$<
-	@$(MAKE_DIR)do-workbook-page-pdf.sh $$<
+	@echo \"$$<\", >> $(SETUP_WORKBOOKPAGE_PDF)
 
 endef
 
@@ -152,7 +153,7 @@ build-lesson-plans: $(lesson-plan-files)
 define make-build-lesson-plan-rule
 $(call asc-file,$1): $1
 	@#echo build-lesson-plan-asc: creating $$@ from $$<
-	@$(MAKE_DIR)do-lesson-plan.sh $$<
+	@echo \"$$<\", >> $(SETUP_LESSONPLAN)
 
 endef
 
@@ -161,7 +162,7 @@ $(eval $(foreach adocf,$(all-lesson-plan-adoc-files),$(call make-build-lesson-pl
 define make-build-lesson-plan-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
 	@#echo build-lesson-plan-pdf: creating $$@ from $$<
-	@if test -n "$(BOOK)"; then $(MAKE_DIR)do-lesson-plan-pdf.sh $$<; fi
+	@echo \"$$<\", >> $(SETUP_LESSONPLAN_PDF)
 
 endef
 
@@ -180,7 +181,7 @@ endif
 
 define make-build-contracts-pdf-rule
 $1: distribution/$(NATLANG)/Contracts.shtml
-	@$(MAKE_DIR)make-contracts-pdf.sh $$@
+	@echo \"$$@\", >> $(SETUP_CONTRACTS_PDF)
 
 endef
 
@@ -214,7 +215,7 @@ build-pathway-resources: $(resource-files)
 define make-build-resource-rule
 $(call asc-file,$1): $1
 	@#echo build-resource-asc: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-resource.sh $$<
+	@echo \"$$<\", >> $(SETUP_PATHWAYRESOURCE)
 
 endef
 
@@ -223,7 +224,7 @@ $(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(
 define make-build-resource-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
 	@#echo build-resource-pdf: creating $$@ from $$<
-	@$(MAKE_DIR)do-pathway-resource-pdf.sh $$<
+	@echo \"$$<\", >> $(SETUP_PATHWAYRESOURCE_PDF)
 
 endef
 
@@ -241,7 +242,8 @@ build-pathway-narratives: $(narrative-asc-files)
 
 define make-build-narrative-rule
 $(call asc-file,$1): $1
-	@$(MAKE_DIR)do-pathway-narrative.sh $$<
+	@#echo build-narrative: creating $$@ from $$<
+	@echo \"$$<\", >> $(SETUP_PATHWAYNARRATIVE)
 
 endef
 
@@ -254,39 +256,50 @@ lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/
 images: distribution/$(NATLANG)/images.js
 
 distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
-	$(MAKE_DIR)make-images-js.lua $@
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-images-js.lua $@
 
 ##########################################################################
 
 dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
-	$(MAKE_DIR)make-dependency-graph.lua $@
-	$(MAKE_DIR)check-graph.sh
+	@echo ➤ Make $@
+	@$(MAKE_DIR)make-dependency-graph.lua $@
+	@echo ➤ Check $@
+	@$(MAKE_DIR)check-graph.sh
 
 ##########################################################################
 
 preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives build-contracts-pdfs
-	@echo ")" >> $(ADOCABLES_INPUT)
-	@echo } >> $(ADOC_POSTPROC_LESSONPLAN_INPUT)
-	@echo } >> $(ADOC_POSTPROC_NARRATIVEAUX_INPUT)
-	@echo } >> $(ADOC_POSTPROC_NARRATIVE_INPUT)
-	@echo } >> $(ADOC_POSTPROC_RESOURCES_INPUT)
-	@echo } >> $(ADOC_POSTPROC_PWYINDEP_INPUT)
-	@echo } >> $(ADOC_POSTPROC_WORKBOOKPAGE_INPUT)
-	@if test -n "$(BOOK)"; then echo "] }" >> $(PUPPETEER_INPUT); fi
-	$(MAKE_DIR)run-asciidoctor.sh
+	@echo } >> $(SETUP_PATHWAYINDEPENDENT)
+	@echo } >> $(SETUP_WORKBOOKPAGE)
+	@echo } >> $(SETUP_LESSONPLAN)
+	@echo } >> $(SETUP_PATHWAYRESOURCE)
+	@echo } >> $(SETUP_PATHWAYNARRATIVE)
+	@echo } >> $(SETUP_PATHWAYINDEPENDENT_PDF)
+	@echo } >> $(SETUP_WORKBOOKPAGE_PDF)
+	@echo } >> $(SETUP_LESSONPLAN_PDF)
+	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
+	@echo } >> $(SETUP_CONTRACTS_PDF)
+	@echo ➤ Setting up batch files
+	@$(MAKE_DIR)do-setup.lua
+	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
+	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
 
 # specials = primitives + starter-files
 
 specials: preproc
-	$(MAKE_DIR)collect-specials.lua
+	@echo ➤ Collect lesson info
+	@$(MAKE_DIR)collect-specials.lua
 
 postproc: preproc
-	$(MAKE_DIR)do-postproc.lua
+	@echo ➤ Postproc
+	@$(MAKE_DIR)do-postproc.lua
 
 tocs: preproc
-	$(MAKE_DIR)make-pathway-tocs.lua
+	@echo ➤ Make pathway ToCs
+	@$(MAKE_DIR)make-pathway-tocs.lua
 
 ifeq "$(BOOK)" ""
 pdfs: postproc dependency-graph tocs
