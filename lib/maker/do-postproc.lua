@@ -1,21 +1,16 @@
 #! /usr/bin/env lua
 
-dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
--- dir_prefix = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
+local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
+local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
+local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
+local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
+local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
-dir_prefix = ''
+local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
 
-pwyindep_batchf =  os.getenv('ADOC_POSTPROC_PWYINDEP_INPUT')
-workbookpage_batchf =  os.getenv('ADOC_POSTPROC_WORKBOOKPAGE_INPUT')
-lessonplan_batchf =  os.getenv('ADOC_POSTPROC_LESSONPLAN_INPUT')
-narrative_batchf =  os.getenv('ADOC_POSTPROC_NARRATIVE_INPUT')
-narrativeaux_batchf =  os.getenv('ADOC_POSTPROC_NARRATIVEAUX_INPUT')
-resources_batchf =  os.getenv('ADOC_POSTPROC_RESOURCES_INPUT')
-
-analytics_file = os.getenv('TOPDIR') .. '/lib/analytics.txt'
-
-function calculate_dist_root_dir(fhtml_cached)
+local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
   f = f:gsub('[^/]', '')
@@ -25,16 +20,15 @@ function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
-function postproc(fhtml_cached, tipe)
+local function postproc(fhtml_cached, tipe)
   -- print('doing postproc', fhtml_cached, tipe)
-  -- if not file_exists_p(dir_prefix .. '/' .. fhtml_cached) then return end
   if not file_exists_p(fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
   -- print('local_dist_root_dir is', local_dist_root_dir)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+  if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -44,12 +38,12 @@ function postproc(fhtml_cached, tipe)
   if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
     code_lang = 'wescheme'
   end
-  local f_comment_file = dir_prefix .. fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
-  local f_mathjax_file = dir_prefix .. fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
-  local f_codemirror_file = dir_prefix .. fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
+  local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
+  local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
+  local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
-  local i = io.open(dir_prefix .. fhtml_cached, 'r')
-  local o = io.open(dir_prefix .. fhtml, 'w')
+  local i = io.open(fhtml_cached, 'r')
+  local o = io.open(fhtml, 'w')
   --
   local add_analytics_p = false
   local add_bootstrap_lesson_p = false
@@ -68,23 +62,23 @@ function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'narrative', 'narrativeaux', 'resources'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'narrative'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
         add_analytics_p = true
       end
       --
-      if tipe == 'resources' then -- TEACHERRESOURCEPAGE
+      if tipe == 'pathwayresource' then -- TEACHERRESOURCEPAGE
         x = x:gsub('^<body class="', '%0TeacherResources ')
       end
       --
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
         x = x:gsub('<body class="', '%0workbookpage ')
-      elseif tipe == 'pwyindep' then
+      elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
           x = x:gsub('<body class="', '%0workbookpage ')
         else
@@ -101,9 +95,7 @@ function postproc(fhtml_cached, tipe)
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
-      if tipe ~= 'narrativeaux' then
-        x = x:gsub('^<body ', '%1 " ')
-      end
+      x = x:gsub('^<body ', '%1 " ')
       --
     end
     --
@@ -115,7 +107,7 @@ function postproc(fhtml_cached, tipe)
     if x:find('^<link.*curriculum%.css') then
       x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css')
       add_bootstrap_lesson_p = true
-      if file_exists_p(f_codemirror_file) or tipe == 'narrative' then
+      if file_exists_p(f_codemirror_file) or tipe == 'pathwaynarrative' then
         add_codemirror_p = true
       end
       if file_exists_p(f_mathjax_file) then
@@ -167,49 +159,47 @@ function postproc(fhtml_cached, tipe)
       delete_line_p = true
     end
     --
-    if tipe ~= 'narrativeaux' then
-      if x:find('</head>') then
-        local page_title = ''
-        local adoc_file = dir_prefix .. fhtml:gsub('%.s?html', '.adoc')
-        -- print('adoc_file is', adoc_file)
-        if file_exists_p(adoc_file) then
-          -- print('adoc_file exists')
-          local i2 = io.open(adoc_file, 'r')
-          page_title = i2:read('*line') or ''
-          -- print('page_title is', page_title)
-          page_title = page_title:gsub('^= *', '')
-          page_title = page_title:gsub(' *$', '')
-          i2:close()
-        end
-        if page_title == '' then
-          page_title = fbase:gsub('%.s?html', '')
-        end
-        page_title = page_title:gsub('[“”]', '"')
-        --
-        local y = x:gsub('(.*)</head>.*', '%1')
-        o:write(y)
-        local z = x:gsub('.*(</head>.*)', '%1')
-        o:write([[
-        <script>
-        window.status = window.status || 'ready_to_print';
-        window.___gcfg = {
-          parsetags: 'explicit'
-        };
-        </script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        ]])
-        o:write(z, '\n')
-        delete_line_p = true
+    if x:find('</head>') then
+      local page_title = ''
+      local adoc_file = fhtml:gsub('%.s?html', '.adoc')
+      -- print('adoc_file is', adoc_file)
+      if file_exists_p(adoc_file) then
+        -- print('adoc_file exists')
+        local i2 = io.open(adoc_file, 'r')
+        page_title = i2:read('*line') or ''
+        -- print('page_title is', page_title)
+        page_title = page_title:gsub('^= *', '')
+        page_title = page_title:gsub(' *$', '')
+        i2:close()
       end
-      if x:find('</h1>') then
-        x = x:gsub('</h1>.*', '%0\n')
+      if page_title == '' then
+        page_title = fbase:gsub('%.s?html', '')
       end
-      if x:find('^<div id="body"') then
-        x = x:gsub('id="body"', '%1 "')
-      end
+      page_title = page_title:gsub('[“”]', '"')
+      --
+      local y = x:gsub('(.*)</head>.*', '%1')
+      o:write(y)
+      local z = x:gsub('.*(</head>.*)', '%1')
+      o:write([[
+      <script>
+      window.status = window.status || 'ready_to_print';
+      window.___gcfg = {
+        parsetags: 'explicit'
+      };
+      </script>
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      ]])
+      o:write(z, '\n')
+      delete_line_p = true
+    end
+    if x:find('</h1>') then
+      x = x:gsub('</h1>.*', '%0\n')
+    end
+    if x:find('^<div id="body"') then
+      x = x:gsub('id="body"', '%1 "')
     end
     --
-    if memberp(tipe, {'lessonplan', 'resources'}) then
+    if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
@@ -305,7 +295,7 @@ function postproc(fhtml_cached, tipe)
 
 end
 
-function run_postproc(batchf, tipe)
+local function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
   local files = dofile(batchf)
   for _,f in ipairs(files) do
@@ -313,9 +303,8 @@ function run_postproc(batchf, tipe)
   end
 end
 
-run_postproc(pwyindep_batchf, 'pwyindep')
+run_postproc(pathwayindependent_batchf, 'pathwayindependent')
 run_postproc(workbookpage_batchf, 'workbookpage')
 run_postproc(lessonplan_batchf, 'lessonplan')
-run_postproc(narrative_batchf, 'narrative')
-run_postproc(narrativeaux_batchf, 'narrativeaux')
-run_postproc(resources_batchf, 'resources')
+run_postproc(pathwaynarrative_batchf, 'pathwaynarrative')
+run_postproc(pathwayresource_batchf, 'pathwayresource')

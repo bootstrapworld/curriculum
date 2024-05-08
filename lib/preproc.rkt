@@ -1437,6 +1437,11 @@
                             (display-begin-span ".big" o)]
                            [(string=? directive "clear")
                             (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)]
+                           [(string=? directive "link-instructions")
+                            (let ([prose (read-group i directive #:multiline? #t)])
+                              (display
+                                (enclose-span ".linkInstructions"
+                                  (expand-directives:string->string prose)) o))]
                            [(string=? directive "define")
                             (let* ([id (read-group i directive)]
                                    [prose (read-group i directive #:multiline? #t)])
@@ -1449,11 +1454,13 @@
                                   ; (display-comment prose o)
                                   (display-header-comment prose o)
                                   ))]
-                           [(string=? directive "scrub")
+                           [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
+                                        (regexp-match "@image{" text)
+                                        (regexp-match "@centered-image{" text)
                                         (regexp-match "@show{ *\\(coe" text))
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
@@ -2331,7 +2338,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-(define (display-exercise-collation o)
+#;(define (display-exercise-collation o)
   ; (printf "doing display-exercise-collation\n" )
   ; (printf "pwrd = ~s\n" *pathway-root-dir*)
   ; (printf "cwd is ~s\n" (current-directory))

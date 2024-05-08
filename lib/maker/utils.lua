@@ -10,9 +10,8 @@ end
 function file_exists_p(f)
   local h = io.open(f)
   -- open'ing a nonexistent file returns nil
-  if h then h:close(); return true
-  else return false
-  end
+  if h then h:close(); return true end
+  return false
 end
 
 function touch(f)

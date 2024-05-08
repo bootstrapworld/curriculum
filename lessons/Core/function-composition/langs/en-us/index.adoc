@@ -76,6 +76,8 @@ We can also _compose_ functions, meaning that the output of one is immediately p
 @vocab{Function composition} is the act of connecting two or more functions so that they work together to produce an outcome. The output ("range") of one function is used as the input ("domain") of the next.
 }
 
+@slidebreak
+
 For example, let's say we are going to compose two different functions: `add1` and `double`. Passing `4` into the `add1` function produces `5`. Passing that output into `double` produces an output of `10`:
 
 [.embedded, cols="<.^3,^.^1,<.^3,^.^1,^.^1", grid="none", stripes="none" frame="none"]
@@ -94,6 +96,8 @@ For example, let's say we are going to compose two different functions: `add1` a
 | @math{10}
 
 |===
+
+@slidebreak
 
 What if, starting with `4`, we composed `add1`,`double` _and_ `half`?
 
@@ -133,11 +137,38 @@ Give students time to experiment with this!
 To make the activity more challenging, ask students to find the shortest path from the starting number to the ending numer, using the smallest number of compositions. You can also show students a starting number and an ending number and: ask them to give a card back; ask them which cards are the most valuable; give them a blank card and let them come up with a new function.
 }
 
+@slidebreak
+
 There are two ways of thinking about the activity you just completed.
 
 - *Option 1*: Each function produces a result. *The result is saved,* and then used as the input for the next function.
 
 - *Option 2*: Each function passes its result directly into the next function.
+
+@ifslide{
+@indented{
+[cols="^.^6a,.<1,^.^3a", frame="none", stripes="none"]
+|===
+| *Three Steps*
+|
+| *Three Circles*
+
+|
+[cols="2a,3a", grid="none", frame="none", stripes="none"]
+!===
+!`step1 = add1(4)`      ! _(Start with `4`, and now we have `5`)_
+!`step2 = double(step1)`! _(now we have `10`)_
+!`step3 = half(step2)`  ! _(now we're back to `5`)_
+!===
+| *...or...*
+|
+@show{(coe '(half (double (add1 4))))}
+
+_half( double( add1(4) ) )_
+|===
+}}
+
+@slidebreak
 
 @indented{
 [cols="^.^6a,.<1,^.^3a", frame="none", stripes="none"]
@@ -166,8 +197,6 @@ _half( double( add1(4) ) )_
 @Q{Which representation (above) corresponds with Option 1? How do you know?}
 @A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
 
-@Q{Which representation (above) corresponds with Option 1? How do you know?}
-@A{The table. The steps occur one by one, in sequence. Each step is defined with a name (step1, step2, etc). We compute several intermediate outcomes before arriving at the final outcome.}
 @Q{Which representation corresponds with Option 2?}
 @A{The Circle of Evaluation. All of the nested circles form a single unit.}
 }
@@ -210,7 +239,7 @@ When students are finished, check their work, and ask them to change the color o
 Now, turn to @printable-exercise{function-composition-your-name.adoc} in which you will create a text @vocab{image} of your name and experiment with other functions.
 }
 
-@strategy{Strategies for Facilitation}{
+@strategy{Facilitation Note}{
 
 While students are exploring, be available for support but encourage student discussion to solve problems. Many student questions can be addressed with these responses: _Did you try drawing the Circle of Evaluation first? Did you check the @dist-link{Contracts.shtml, contract}? Have you pressed the "Run" button to save your Definitions changes?_
 

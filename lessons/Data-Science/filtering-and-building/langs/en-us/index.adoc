@@ -89,8 +89,9 @@ Sometimes we want to *filter the rows* of a table by some criteria. In our anima
 - The helper will answer with whatever the function on the card would produce for that student: `true` or `false`
 - If the helper replies "true", `filter` asks that student to take a step forward
 - If the helper says "false", `filter` asks them to take a step back.
+}
 
-
+@teacher{
 Here’s how that might look if `filter` chose a function card `has-glasses`.
 
 - `filter` stands in front of Student 1. “Keep ‘em?”
@@ -100,9 +101,6 @@ Here’s how that might look if `filter` chose a function card `has-glasses`.
 - The helper checks if they are wearing glasses, and says “false”
 - `filter` to Student 2 (who does not wear glasses): Step back. (Student 2 steps back.)
 
-}
-
-@teacher{
 Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a _different_ card to a _different_ helper, and repeat the exercise.
 }
 
@@ -113,13 +111,19 @@ Pyret Tables have their own functions for filtering tables - and more! Let's exp
 Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 }
 
-Confirm that students understand the following key ideas:
+@slidebreak
+
+Key ideas from the activity are as follows:
 
 - `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
-- `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new tble with that new column, and fills in the values by applying the function to every Row.
+- `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
+
+@slidebreak
+
+Let's think about what filtering and building would look like with Animals at the shelter.
 
 @lesson-instruction{
-- Let's think about what filtering and building would look like with Animals at the shelter. Match the code on @printable-exercise{what-table-do-we-get.adoc} with the descriptions of the tables they would produce.
+- Match the code on @printable-exercise{what-table-do-we-get.adoc} with the descriptions of the tables they would produce.
 }
 
 @teacher{@opt{Give students some scaffolded practice filtering and building with the Animals! +
@@ -133,7 +137,8 @@ Confirm that students understand the following key ideas:
   * @opt-printable-exercise{coe-scatterplot-old-dogs.adoc, a Scatter Plot showing the Relationship between Kilograms and Weeks to adoption for Old Dogs}
 }}
 
-@lesson-instruction{Then turn to @printable-exercise{putting-it-all-together.adoc} to practice defining new tables, defining new helper fuections, and building displays in the @starter-file{putting-it-all-together}.
+@lesson-instruction{
+- Then turn to @printable-exercise{putting-it-all-together.adoc} to practice defining new tables, defining new helper functions, and building displays in the @starter-file{putting-it-all-together}.
 }
 
 === Common Misconceptions

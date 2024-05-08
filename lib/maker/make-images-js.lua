@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
-print('doing make-images-js.lua')
+-- print('doing make-images-js.lua')
 
 local image_js_file = ...
 
@@ -44,7 +44,7 @@ local o = io.open(image_js_file, 'w+')
 
 o:write('var images = {\n')
 
-function report_missing_images(logf, image_json_file)
+local function report_missing_images(logf, image_json_file)
   if not file_exists_p(logf) then return end
   local files = read_file_lines(logf)
   local already_read = {}
