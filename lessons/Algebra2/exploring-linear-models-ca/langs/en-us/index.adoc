@@ -143,7 +143,7 @@ Students identify and make use of @vocab{correlations} in scatter plots. They le
 
 Scatter plots let us visualize the relationship between two quantitative columns. If no relationship exists, the points in the scatter plot just appear as a shapeless cloud. But if there _is_ a relationship, the points will form some kind of pattern. When we build scatter plots, we are searching for patterns between two quantitative variables.
 
-These patterns can be described by three terms: **form**, **direction**, and **strength**.
+These patterns can be described by three terms: *form*, *direction*, and *strength*.
 
 @slidebreak
 
@@ -154,8 +154,8 @@ These patterns can be described by three terms: **form**, **direction**, and **s
 | @image{images/B.gif, 250}
 
 | Some patterns are *linear*, and cluster around a straight line sloping up or down.
-| Some patterns are **nonlinear**, and may look like some kind of curve.
-| And sometimes there is **no relationship** or pattern at all!
+| Some patterns are *nonlinear*, and may look like some kind of curve.
+| And sometimes there is *no relationship* or pattern at all!
 |===
 
 @lesson-point{
@@ -170,11 +170,11 @@ These patterns can be described by three terms: **form**, **direction**, and **s
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
-@right{@image{images/C.gif, 200 }}**Positive**: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
+@right{@image{images/C.gif, 200 }}*Positive*: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
 
 @clear
 
-@right{@image{images/A.gif, 200}}**Negative**: The line slopes _down_ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
+@right{@image{images/A.gif, 200}}*Negative*: The line slopes _down_ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
 
 @slidebreak
 
@@ -190,11 +190,11 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 @vocab{Strength} indicates how closely the two variables are related.
 }
 
-@right{@image{images/A.gif, 200}}**A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be** (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+@right{@image{images/A.gif, 200}}*A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
-@right{@image{images/1a.gif, 200}}**A relationship is weak if x tells us little about y** (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+@right{@image{images/1a.gif, 200}}*A relationship is weak if x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 === Investigate
 
@@ -260,7 +260,7 @@ Depending on your students, you may need to teach or review some of this materia
 }
 
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
-**If the rate of change is constant, the relationship is linear.**
+*If the rate of change is constant, the relationship is linear.*
 
 @QandA{
 @Q{Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
@@ -307,7 +307,7 @@ This scatter plot appears to show a positive, linear relationship: as we move fr
 
 @slidebreak
 
-When we see patterns in data, we can use those patterns to __make predictions__ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
+When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
 
 These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the squared distances between the line and all the points on the plot. For relationships that look linear, the "predictor function" is a linear model of the form @math{f(x) = mx + b}. For historical reasons, this @vocab{line of best fit} is sometimes called the @vocab{regression line}.
 
@@ -351,7 +351,7 @@ The real world is noisy and chaotic! But sometimes, somewhere in that noise and 
 
 @slidebreak
 
-Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it __also consumes a function!__ It produces a scatter plot, with the function graphed on top of it.
+Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it _also consumes a function!_ It produces a scatter plot, with the function graphed on top of it.
 
 @show{(contract 'fit-model '((t Table) (label String) (xs String) (ys String) (model Number->Number)) "Number")}
 
@@ -410,7 +410,7 @@ Pyret has a function that will compute @vocab{S} without drawing the graph. This
 
 @slidebreak
 
-But how do we find the __best possible model?__ In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
+But how do we find the _best possible model?_ In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Pyret has a function that will do just that, called `lr-plot`.
 
 @lesson-instruction{
 - Complete the last section ("Build a Model Computationally") in @printable-exercise{model-wage-v-year-3.adoc}.
@@ -425,10 +425,10 @@ If you'd like to have students dig deeper into linear regression, there's an @le
 
 @slidebreak
 
-When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, __a model built from 1940 and 1950 predicts that each year the adjusted minimum wage will be **$0.152** less than the year before!__
+When we interpret a model, we try to make sense of the slope, the axes, the @math{S} value, and the real data behind them. In this example, _a model built from 1940 and 1950 predicts that each year the adjusted minimum wage will be *$0.152* less than the year before!_
 
 @lesson-instruction{
-- The @math{S} value is roughly **10.90**. Does that mean the model fits well?
+- The @math{S} value is roughly *10.90*. Does that mean the model fits well?
 - As a class or in groups, discuss and be ready to share back.
 }
 
