@@ -2,19 +2,29 @@
 
 A class was asked to write code to build an image of the Puerto Rican flag. Two students started by defining the following values:
 
+@ifproglang{pyret}{
 ```
 background = rectangle(300, 200, "outline", "black")
 rrectangle = rectangle(300, 200/5, "solid", "red")
 btriangle = rotate(30, triangle(200, "solid", "blue"))
 wstar = star(45, "solid", "white")
 ```
+}
 
+@ifproglang{wescheme}{
+```
+(define background (rectangle 300  200  "outline"  "black"))
+(define rrectangle (rectangle 300 200/5  "solid" "red"))
+(define btriangle (rotate 30 (triangle 200 "solid" "blue")))
+(define wstar (star 40 "solid" "white"))
+```  
+}
 They then two very different strategies to define `puerto-rico` to compose an image of the flag. And both work!
 
 [cols="1a,1a", grid="none", stripes="none", frame="none", header="none"]
 |===
 | Mia's Method:
-
+@ifproglang{pyret}{
 ```
 puerto-rico =
   put-image(wstar, 65, 100,
@@ -24,9 +34,20 @@ puerto-rico =
           put-image(rrectangle, 150, 180,                                                         
             background)))))
 ```
+}
+@ifproglang{wescheme}{
+```
+(define puerto-rico 
+  (put-image wstar 65 100
+    (put-image btriangle 85 100
+      (put-image rrectangle 150 20
+        (put-image rrectangle 150 100
+          (put-image rrectangle 150 180                                                          background))))))
+```
+}
 
 | Savannah's Method:
-
+@ifproglang{pyret}{
 ```
 step1 = put-image(rrectangle, 
   150, 20, 
@@ -50,6 +71,32 @@ step5 = put-image(wstar,
 
 puerto-rico = step5
 ```
+}
+@ifproglang{wescheme}{
+```
+(define step1 (put-image rrectangle 
+  150 20
+  background))
+
+(define step2 (put-image rrectangle 
+  150 100 
+  step1))
+
+(define step3 (put-image rrectangle 
+  150 180 
+  step2))
+
+(define step4 (put-image btriangle 
+  85 100 
+  step3))
+
+(define step5 (put-image wstar 
+  65 100 
+  step4))
+
+(define puerto-rico-2 step5)
+```  
+}
 |===
 
 

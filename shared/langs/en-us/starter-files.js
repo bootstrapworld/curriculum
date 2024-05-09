@@ -603,7 +603,7 @@ const Flags = {
       "url":"https://code.pyret.org/editor#share=1TAaRdb5a4EpG7ccdjuDFyqOPRZzXUtTw"
     },
     "wescheme":{
-      "url":""
+      "url":"https://www.wescheme.org/view?publicId=QsSytQCuzf"
     }
   },
   "compose-2":{
@@ -612,7 +612,7 @@ const Flags = {
       "url":"https://code.pyret.org/editor#share=15kdZ_CENWdN-LuBmHkFk0CpqObtCJQyh"
     },
     "wescheme":{
-      "url":""
+      "url":"https://www.wescheme.org/view?publicId=pJucnXFenl"
     }
   },
   "flags-desmos": {
