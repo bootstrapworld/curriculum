@@ -1,0 +1,128 @@
+= AI & Data-Driven Algorithms
+
+@description{Students }
+
+@ifproglang{pyret}{
+@lesson-prereqs{ds-intro}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{ds-intro}
+}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+
+| Student-facing Lesson Goals
+|
+
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+== Spell Checkers as AI @duration{20 minutes}
+
+=== Overview
+
+
+=== Launch
+
+
+@teacher{
+To launch the lesson, read aloud @handout{ode-to-a-spell-checker-original.adoc} by Jerrold H Zar. Do not display or share the poem until students have _listened_ to you read it aloud. You may use the @handout{ode-to-a-spell-checker-revised.adoc, "corrected version"} if you (understandably!) struggle with the original.
+}
+
+Let’s take a look at the poem I just shared with you, @handout{ode-to-a-spell-checker-original.adoc}.
+
+
+@teacher{
+Either pass out printed copies of the poem or project the poem for the class to view together.}
+
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@Q{This poem was written in 1992, before you were alive. Even though you didn't interact with the spell checkers of the day, how do you think a spell checker in 1992 would respond to the poem?}
+@Q{How do you predict a spell checker today would respond to the poem?}
+@A{Responses will vary. Some students may think the spell checker will correct every error, others may guess that it will not catch any errors.}
+}
+
+
+Let's see how a spell checker today will respond to the poem!
+
+
+@teacher{
+Project for the class a google document, where students can see how google’s spell checker responds to the poem. Let students see what happens when you click on an underlined word, making sure to review all possible options: (1) the suggested word(s), (2) the option to ignore, and (3) the option to provide feedback).
+}
+
+
+@QandA{
+@Q{Was the spell checker more or less successful than you predicted it would be?}
+@Q{Google’s spell checker was fooled by this poem: it completely missed the vast majority of the mistakes, and it offered incorrect suggestions for the errors that it did catch. Why do you suspect that was the case?}
+}
+
+
+=== Investigate
+
+Spell checkers are AI, and AI attempts to mimic human intelligence. So let’s think about how we (humans!) go about locating and correcting spelling errors.
+
+@lesson-instruction{
+- Complete Part 1 of @printable-exercise{human-v-computer.adoc}.
+- Be prepared to summarize the algorithm that you identified. How do you locate misspelled words? How do you correct misspelled words?
+}
+
+@teacher{Invite students to share their process for (1) locating a misspelled word, and (2) correcting the misspelled word. Students will likely struggle to articulate the process, because for most, it happens quickly and almost imperceptibly.}
+
+@lesson-instruction{
+- Complete Part 2 of @printable-exercise{humans-v-computers.adoc}, where you will write a step-by-step algorithm that a computer could follow to spell check a provided misspelled word (input) "wello".
+- Your spell checker will *not* have mastery of the English language, although it can be provided a dictionary.
+- Think creatively! Here are some prompts to get you going:
+** How will your spell checker "think" of possible alternative offerings to the misspelled word?
+** How will your spell checker "know" which of the options to present to the user?
+}
+
+@teacher{
+Invite students to share their responses, probing to find out the mechanisms students designed for the spell checker to develop alternative offerings for the misspelled word.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{How do spell checkers succeed at mimicking human intelligence?}
+@Q{How do they fall short?}
+}
+
+
+== Spell Checking in Pyret @duration{10 minutes}
+
+=== Overview
+
+=== Launch
+
+The very first spell checker was developed in 1961 at Stanford University’s Artificial Intelligence Laboratory. It did not have mastery of the English language. Instead, its creator provided it with a 10,000-word dictionary and coded it with a precise algorithm that would help it locate misspelled words and then offer possible alternatives. Here is what the algorithm entailed:
+
+[.indentedpara]
+--
+@n Locate the misspelled word by checking to see if each word is in the dictionary or not.
+
+@n Each word that is _not_ in the dictionary becomes an input for the spell checker.
+
+@n Develop alternative candidates for the misspelled word (input) by making just *one* of the following adjustments:
+
+** Replace a single letter with a different one
+** Swap the positions of two adjacent letters
+
+@n Search the provided dictionary to see which alternatives (developed in step 3) are valid options.
+
+@n Produce a list of valid correctly spelled words for the user to choose from.
+--
+
+
+
