@@ -930,6 +930,12 @@ const Alg2 = {
       "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
     }
   },
+  "alg2-ca-rent-desmos" : {
+    "title": "Exploring Exponential Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
+    }
+  },
   "alg2-exploring-quadratics-desmos": {
     "title": "Exploring Quadratic Functions (Desmos)",
     "pyret": {
