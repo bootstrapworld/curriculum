@@ -33,85 +33,34 @@
 
 === Overview
 
-Students think about spell checkers, considering how their programmed behavior is both simila to and different from human intelligence.
+Students think about spell checkers, considering how their programmed behavior is both similar to and different from the behavior of humans.
 
 
 === Launch
 
+Over the past few years, you've probably heard some buzz about Artificial Intelligence (AI), the technology that enables computers to perform tasks that were once thought to be for _humans only_.
 
-@teacher{
-To launch the lesson, read aloud @handout{ode-to-a-spell-checker-original.adoc}. Do not display or share handouts of the poem until students have *listened* to you read it aloud. You may read from the @handout{ode-to-a-spell-checker-read-aloud.adoc, "corrected version"} if you (understandably!) struggle to read aloud the original.
-}
+Ever since the word processing packages started to regularly include spell checking programs, the task of searching out and correcting spelling errors has largely been considered a thing of the past.
 
-Now that we have listened to me read the poem aloud, let’s take a look at @handout{ode-to-a-spell-checker-original.adoc}.
-
-
-@teacher{
-Either pass out printed copies of the poem or project the poem for the class to view together.}
-
-@QandA{
-@Q{What do you Notice? What do you Wonder?}
-@Q{This poem was written in 1992, before you were alive. Even though you didn't interact with the spell checkers of the day, how do you think a spell checker in 1992 would have respond to the poem?}
-@Q{How do you predict a spell checker today would respond to the poem?}
-@A{Responses will vary. Some students may think the spell checker will correct every error, others may guess that it will not catch any errors.}
-}
-
-
-Let's see how a spell checker today will respond to the poem!
-
-
-@teacher{
-Project for the class a google document, where students can see how google’s spell checker responds to the poem. Let students see what happens when you click on an underlined word, making sure to review all possible options: (1) the suggested word(s), (2) the option to ignore, and (3) the option to provide feedback).
-}
-
-
-@QandA{
-@Q{Was the spell checker more or less successful than you predicted it would be?}
-@Q{Google’s spell checker was fooled by this poem: it completely missed the vast majority of the mistakes, and it offered incorrect suggestions for the errors that it did catch. Why do you suspect that was the case?}
-@Q{Why do you think google's spell checker offers an option for the user to provide feedback?}
-}
-
-
-=== Investigate
-
-Spell checkers are AI, and AI attempts to mimic human intelligence. To better understand the AI, let’s think about how we (humans!) locate and correct spelling errors.
+But when it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies?
 
 @lesson-instruction{
-- Complete Part 1 of @printable-exercise{human-v-computer.adoc}.
-- Be prepared to summarize the algorithm that you identified:
+- Complete Part 1 of @printable-exercise{human-spell-checking.adoc}.
+- Be prepared to summarize the method that you used for spell checking:
 ** How do you locate misspelled words?
 ** How do you correct misspelled words?
 }
 
-@teacher{Invite students to share their process for (1) locating a misspelled word, and (2) correcting the misspelled word. Students will likely struggle to articulate the process because for most, it happens quickly and almost imperceptibly.}
+You probably noticed that is was difficult to articulate how exactly you were able to locate and correct spelling mistakes. Why?
 
-@lesson-instruction{
-- Complete Part 2 of @printable-exercise{human-v-computer.adoc}, where you will write a step-by-step algorithm that a computer could follow to spell check a provided misspelled word (input) "wello".
-- Your spell checker will *not* have mastery of the English language, although it can be provided a dictionary.
-- Think creatively! Here are some prompts to get you going:
-** How will your spell checker generate possible alternatives to the misspelled word?
-** How will your spell checker limit the amount of options that are presented to the user?
-}
+We are not computers! We rely on context clues and intuition. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes. Other students relied on context clues or prior knowledge to locate and fix errors. Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled, perhaps a multi-syllabic and complex technical word, you might have relied on a different spell checking strategy.
 
-@teacher{
-Invite students to share their responses, probing to find out the mechanisms students designed for the spell checker to develop alternative offerings for the misspelled word.
-}
-
-=== Synthesize
-
-@QandA{
-@Q{In what ways do spell checkers succeed at mimicking human intelligence?}
-@Q{In what ways do they fall short?}
-}
+How can a computer possibly navigate such a nuanced and complex process?
 
 
-== Spell Checking in Pyret @duration{25 minutes}
+=== Investigate
 
-=== Overview
-
-=== Launch
-
-The very first spell checker was developed in 1961 at Stanford University’s Artificial Intelligence Laboratory. It did not have mastery of the English language. Instead, its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. Here is what the algorithm entailed:
+The very first spell checker was developed in 1961 at Stanford University's Artificial Intelligence Laboratory. It did not have mastery of the English language. Instead, its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. Here is what the algorithm entailed:
 
 [.indentedpara]
 --
@@ -122,26 +71,54 @@ The very first spell checker was developed in 1961 at Stanford University’s Ar
 - *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
 --
 
-Unsurprisingly, spell checkers have evolved a lot since 1961 - but exploring this particular algorithm can afford us some interesting insights about one of the earliest forms of AI.
+Unsurprisingly, spell checkers have evolved a lot since 1961 - but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI.
 
 @lesson-instruction{
-- In Part 1 of @printable-exercise{first-spell-checker.adoc}, __you__ will be the computer, following the spell checking algorithm developed at Stanford University’s Artificial Intelligence Laboratory in 1961.
+- In Part 1 of @printable-exercise{first-spell-checker.adoc}, __you__ will be the computer, following the spell checking algorithm developed at Stanford University's Artificial Intelligence Laboratory in 1961.
 - Once you've completed Part 1, move on to Part 2, where you will reflect on the activity.
 }
 
 @teacher{
-After students have completed the activity, invite them to share their responses to the three reflection questions.
+After students have completed the activity, invite them to share their responses to the four reflection questions (below) in small groups.
 }
 
-=== Investigate
+@QandA{
+@Q{What do you think are some limitations of the first spell checker's algorithm?}
+@Q{What are some of the advantages of this algorithm?}
+@Q{How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing?}
+@Q{How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing?}
+}
+
+As you discovered during @printable-activity{human-spell-checking.adoc}, when *you* spell check, you rely on intuition, instinct, and context clues. When AI spell checks, on the other hand, it relies on computational brute force: even the most primitive spell checking program will repeatedly edit the misspelled word, generating dozens of different letter combinations to verify in the dictionary. The computer works quickly - but the work that it completes would be time-consuming and laborious for a human.
+
+
+=== Synthesize
+
+@QandA{
+@Q{In what ways do spell checkers succeed at mimicking humans?}
+@Q{In what ways do they fall short?}
+}
+
+
+== Spell Checking in Pyret @duration{25 minutes}
+
+=== Overview
+
+=== Launch
 
 By now, we have a decent sense of the extensive work that is happening behind the scenes when we spell check our writing. We have *not*, however, discussed an essential truth about spell checkers and in fact *all Artificial Intelligence*: it is "data driven".
 
 @QandA{
 @Q{Where have you encountered the term "data driven" before, if at all?}
-@Q{Have you ever met anyone who is "data driven"? (Teaches? Coaches? Parents?)}
+@Q{Have you ever met anyone who is "data driven"? (Teachers? Coaches? Parents?)}
 @Q{What do you think it means to be "data driven"?}
 }
+
+
+
+
+=== Investigate
+
 
 @lesson-instruction{
 - Complete @printable-exercise{pyret-spell-checker.adoc} using the @starter-file{spell-checker}.
@@ -157,7 +134,7 @@ Data is at the heart of data science, and _data-driven_ algorithms are at the he
 - Read the brief story and respond to the question, providing as much detail as you can.
 }
 
-@teacher{Invite students to shaer their responses, emphasizing that data-driven algorithms produce a higher quality output when we provide more data. Changing the code is not needed. When change to the code _does_ happen, it is done by humans.}
+@teacher{Invite students to share their responses, emphasizing that data-driven algorithms produce a higher quality output when we provide more data. Changing the code is not needed. When change to the code _does_ happen, it is done by humans.}
 
 === Synthesize
 
