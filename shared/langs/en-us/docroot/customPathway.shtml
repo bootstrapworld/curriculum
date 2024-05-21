@@ -62,6 +62,8 @@
 
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
+        #content { position: relative; }
+        #accessible { right: 0; position: absolute; }
         #accessible * { font-size: 14px; }
         #accessible h2 { font-size:16px; font-weight:bold; }
         #accessible button {display: none; }
@@ -93,7 +95,7 @@
     let {days} = Object.fromEntries([...url.searchParams.entries()]);
     lessons = lessons || [];
     days = days && days.split(",").map(Number) || [];
-    days = lessons.map((_, idx) => days[idx] || 1);
+    days = lessons.map((_, idx) => days[idx] || 2);
     if(pathwayTocs[pathway]) { pathway = pathway.split("-").map(w => w[0].toUpperCase() + w.substring(1)).join(' ');}
     if(!lessons) lessons = [];
     if(!pathway) pathway = "Click here to name this pathway";
@@ -113,7 +115,7 @@
         const lesson = graph[l];
         const sectionsHTML = graph[l].sections.map(sec => 
             `<li>${sec}</li>`).join('\n');
-        const numDays = (useDays && days && days[idx])? days[idx] : 1;
+        const numDays = (useDays && days && days[idx])? days[idx] : 2;
         const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
         const html = `
           <div class="list-group-item" data-lesson-title=${l}>
@@ -259,6 +261,7 @@
             .map(t => document.querySelector('[data-lesson-title='+t+'] input'))
             .map(inpt => Number(inpt.value));
         console.log(pathway, lessons, days)
+        url.searchParams.set("pathway", pathway);
         url.searchParams.set("lessons", lessons.join(','));
         url.searchParams.set("days", days.join(','));
         history.pushState({}, "", url);
