@@ -1,5 +1,7 @@
 #! /usr/bin/env lua
 
+-- print('doing make-workbook-jsons.lua')
+
 local courses_list_file = ...
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
@@ -120,6 +122,9 @@ function make_workbook_json_1(course_dir, tgt)
   local workbook_input = course_dir .. '/.cached/.filelist'
   local workbook_index_file
 
+  local missing_workbook_pages = {}
+  local missing_workbook_pages_file = course_dir .. '/.cached/.missing-workbook-pages'
+
   if memberp(tgt, { 'workbook', 'workbook-sols' }) then
     workbook_index_file = course_dir .. '/.cached/.workbook-page-index.lua'
   elseif memberp(tgt, { 'opt-exercises', 'opt-exercises-sols' }) then
@@ -217,10 +222,14 @@ function make_workbook_json_1(course_dir, tgt)
         o:write(localpdffile)
       else
         o:write(notfoundpdf)
+        -- print('could not find', docfile)
+        table.insert(missing_workbook_pages, docfile)
       end
 
     elseif not file_exists_p(docfile) then
       o:write(notfoundpdf)
+      -- print('could not find²', docfile)
+      table.insert(missing_workbook_pages, docfile)
 
     else
       o:write(docfile)
@@ -232,6 +241,14 @@ function make_workbook_json_1(course_dir, tgt)
   o:write('] }\n')
   o:close()
 
+  if #missing_workbook_pages > 0 then
+    -- print('missing workbook pages in', course_dir)
+    local o = io.open(missing_workbook_pages_file, 'w')
+    for _,f in ipairs(missing_workbook_pages) do
+      o:write(f, '\n')
+    end
+    o:close()
+  end
 end
 
 do
@@ -243,8 +260,12 @@ do
   --
   for _,course in ipairs(all_courses) do
     local course_dir = distr_courses .. course
+    local missing_workbook_pages_file = course_dir .. '/.cached/.missing-workbook-pages'
+    os.remove(missing_workbook_pages_file)
     for _,wbf in ipairs(workbook_inputs) do
-      make_workbook_json_1(course_dir, wbf)
+      if not file_exists_p(missing_workbook_pages_file) then
+        make_workbook_json_1(course_dir, wbf)
+      end
     end
   end
 end
