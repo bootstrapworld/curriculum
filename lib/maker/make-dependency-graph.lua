@@ -57,7 +57,7 @@ for _,lesson in ipairs(lessons) do
   local proglang_txt = 'pyret'
   local sections_txt = ''
   local pages_txt = ''
-  local exercisePages_txt = ''
+  local optExercisePages_txt = ''
   local handoutPages_txt = ''
   local notesFiles_txt = ''
   local primitives_txt = ''
@@ -86,7 +86,7 @@ for _,lesson in ipairs(lessons) do
   local description_file = lessoncache .. '.index-desc.txt.kp'
   local sections_file = lessoncache .. '.lesson-sections.txt.kp'
   local pages_file = lessonpagecache .. '.workbook-pages-ls.txt.kp'
-  local exercisePages_file = lessonpagecache .. '.exercise-pages-ls.txt.kp'
+  local optExercisePages_file = lessonpagecache .. '.opt-exercise-pages-ls.txt.kp'
   local handoutPages_file = lessonpagecache .. '.handout-exercise-pages-ls.txt.kp'
   local notesFiles_file = lessonpagecache .. '.workbook-notes-pages-ls.txt.kp'
   local primitives_file = lessoncache .. '.index-primitives.txt.kp'
@@ -128,10 +128,10 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
-  if file_exists_p(exercisePages_file) then
-    i = io.open(exercisePages_file)
+  if file_exists_p(optExercisePages_file) then
+    i = io.open(optExercisePages_file)
     for line in i:lines() do
-      exercisePages_txt = exercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
+      optExercisePages_txt = optExercisePages_txt .. '{fileName: \"' .. line .. '\", title:\"' .. page_title(line) .. '\"}, '
     end
     i:close()
   end
@@ -190,7 +190,7 @@ for _,lesson in ipairs(lessons) do
   o:write('    proglang: \"' .. proglang_txt .. '\",\n')
   o:write('    sections: [' .. sections_txt .. '],\n')
   o:write('    pages: [' .. pages_txt .. '],\n')
-  o:write('    optPages: [' .. exercisePages_txt .. '],\n')
+  o:write('    optPages: [' .. optExercisePages_txt .. '],\n')
   o:write('    handouts: [' .. handoutPages_txt .. '],\n')
   o:write('    notes: [' .. notesFiles_txt .. '],\n')
   o:write('    primitives: [' .. primitives_txt .. '],\n')

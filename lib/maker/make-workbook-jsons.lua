@@ -41,12 +41,12 @@ function write_pages_info(lesson_dir, o, ol, oe, skip_pageno)
     i:close()
   end
   --
-  local exercise_pages_file = lesson_dir .. '/pages/.cached/.exercise-pages.lua'
-  -- print('exercise_pages_file is ', exercise_pages_file, file_exists_p(exercise_pages_file))
-  if file_exists_p(exercise_pages_file) then
-    -- print('ex pg file', exercise_pages_file, 'exists!')
-    local exercise_pages = dofile(exercise_pages_file)
-    for _,page in ipairs(exercise_pages) do
+  local opt_exercise_pages_file = lesson_dir .. '/pages/.cached/.opt-exercise-pages.lua'
+  -- print('opt_exercise_pages_file is ', opt_exercise_pages_file, file_exists_p(opt_exercise_pages_file))
+  if file_exists_p(opt_exercise_pages_file) then
+    -- print('ex pg file', opt_exercise_pages_file, 'exists!')
+    local opt_exercise_pages = dofile(opt_exercise_pages_file)
+    for _,page in ipairs(opt_exercise_pages) do
       local file = page[1]
       local aspect = page[2] or 'portrait'
       local this_pageno = false
