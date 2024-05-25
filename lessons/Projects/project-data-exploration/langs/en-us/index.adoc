@@ -1,6 +1,6 @@
 = Project: Dataset Exploration
 
-@description{Students choose a real world dataset that is interesting to them and are supported in exploring it by creating and interpreting a range of displays. _This project spans up to eight of our Data Science lessons, each of which includes an optional section with project-specific directions. We have built a @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, Library of Datasets} to support this project._ }
+@description{Students choose a real world dataset that is interesting to them and are supported in exploring it by creating and interpreting a range of displays. _This project spans up to nine of our Data Science lessons, each of which includes an optional section with project-specific directions. We have built a @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, Library of Datasets} to support this project._ }
 
 @lesson-prereqs{choosing-your-dataset}
 
@@ -11,7 +11,7 @@
 | Students will be able to...
 
 - create a variety of displays about a dataset of their choosing
-- compute a the measures of center and spread about a dataset of their choosing
+- compute the measures of center and spread about a dataset of their choosing
 
 | Student-facing Lesson Goals
 |
@@ -26,7 +26,15 @@
 | Preparation
 |
 @preparation{
-* This project spans multiple lessons in the data science curriculum. Decide whether you intend to have your students engage with all or some of those lessons and modify the @starter-file{exploration-project} accordingly.
+- This project spans multiple lessons in the data science curriculum. Decide whether you intend to have your students engage with all or some of those lessons and modify the @starter-file{exploration-project} accordingly.
+- Decide how much choice you're ready to offer your students about what dataset they focus on before you begin. Research shows that choice increases student engagement! But focusing the whole class on a single dataset is also an option.
+  * Would focusing all of your students on a single dataset make this doable for you? Because you teach younger students who might need more scaffolding? Or because you are new to teaching data science and managing fewer moving parts would increase your confidence? We recommend the @opt-starter-file{food, Global Food Supply and Production} dataset.
+  * Are you ready to jump straight into supporting your students in working on a wide range of topics of their choosing? We have a full @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "Library of Datasets"}!
+  @ifproglang{pyret}{
+  * Want students to find their own data, clean it and import it into Pyret? They can watch this @opt-starter-file{blank-ds-tutorial, Tutorial Video} on how to import a spreadsheet into a copy of this @opt-starter-file{blank-ds, Pyret Dataset Starter File template}.}
+  * Want to give students choice from a shorter curated list...to shorten the decision-making process, focus on topics related to curricular goals, or just to have fewer options to manage during class?  We've assembled @lesson-link{choosing-your-dataset/about-datasets/for-teachers-about-datasets.html, descriptions of individual datasets here}. For those looking for a pre-curated shorter list, we've starred a few of the datasets in our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, library} for you.
+  * *If you have time*, you may want to complete all of the lessons with everyone getting extra practice analyzing the @opt-starter-file{food, Global Food Supply & Production} dataset and then have your students choose a dataset to analyze for their culminating research papers!
+- Teachers are welcome and encouraged to edit and adapt @handout{exploration-paper-rubric.adoc, "page 1"} and @handout{exploration-paper-rubric-2.adoc, "page 2"} of the student-facing rubrics for their unique classroom context and distribute them to help students understand the scope of the project - and your expectations - at the outset.
 }
 
 |===
@@ -35,46 +43,61 @@
 
 === Overview
 
-In this multi-lesson project, students explore and interpret a dataset of their choosing from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "Library of Datasets"}, which is introduced in the @lesson-link{choosing-your-dataset} lesson. At the end of up to 8 of our Data Science lessons, students will be supported in applying what they learn to their dataset by creating and interpreting a range of categorical and quantitative displays, as well as computing and analyzing various measures of spread and center. This work culminates in students developing a research question for possible further study through our @lesson-link{project-research-paper}.
+This is a multi-lesson project focused on exploring and interpreting a dataset.  
+
+Eight of our Data Science lessons have a section at the end that support students in applying what they learn by creating and interpreting a range of categorical and quantitative displays, as well as computing and analyzing various measures of spread and center. _(The scope of the project can be easily modified if you do not intend to teach all 8 of those lessons.)_
+
+The Dataset Exploration Project culminates in students developing a research question for possible further study through our @lesson-link{project-research-paper}.
+
+There are several options for which dataset students focus this project on:
+
+- _Standard Option:_ Students choose from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "Library of Datasets"}, which is introduced in the @lesson-link{choosing-your-dataset} lesson.
+- _Simpler Option:_ Focus your class on the @opt-starter-file{food, Global Food Supply & Production} dataset.
+@ifproglang{pyret}{
+- _Students can also find/collect, clean, and import their own data!_}
+
+@teacher{See the preparation section for more guidance on identifying which option makes the most sense for your class!}
 
 === Launch
 
-The official launch of this project occurs during @lesson-link{choosing-your-dataset}. There are four project-related items to accomplish during this lesson:
+The official launch of this project occurs during the @lesson-link{choosing-your-dataset} lesson. 
 
-- Students select a dataset of interest from the Bootstrap @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"}.
-
-- Students copy, save, and explore the @starter-file{exploration-project}. _Invite them to peruse the slide deck and familiarize themselves it; they'll be revisiting and adding to it often._
+- Students copy, save, and explore the @starter-file{exploration-project}. +
+__Invite them to peruse the slide deck and familiarize themselves with it; they'll be revisiting and adding to it often.__
 
 - Students complete the "About My Dataset" section of the slide deck, reflecting on the dataset's source, structure, and relevance.
 
-- Students add a bar chart and @ifproglang{pyret}{a pie chart}@ifproglang{codap}{a dot plot} to the "Making Displays" section of the slide deck, and then interpret them.
-
-_Note: Students add their bar and pie charts during @lesson-link{choosing-your-dataset} rather than during the @ifproglang{pyret}{@lesson-link{bar-and-pie-charts}}@ifproglang{codap}{@lesson-link{codap-dot-plots-bar-charts}}, which comes before they'll have chosen a dataset. For all other displays, students will add to their slide deck during the relevant lesson._
-
-We recommend printing and distributing both @handout{exploration-paper-rubric.adoc, "page 1"} and @handout{exploration-paper-rubric-2.adoc, "page 2"} of the student-facing rubric to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context. For instance, some teachers will assess the entire project at its close, while some will offer intermittent checkpoints.
-
 === Investigate
 
-The remainder of the project is completed at the conclusion of each of *eight* different Bootstrap:Data Science lessons: 
+As students learn about each type of display, they will experiment with building them using the columns in their dataset.
 
-- @lesson-link{histograms} 
-- @lesson-link{visualizing-the-shape-of-data} 
-- @lesson-link{measures-of-center} 
-- @lesson-link{box-plots} 
-- @lesson-link{standard-deviation}
-- @lesson-link{scatter-plots} 
-- @lesson-link{correlations} 
-- @lesson-link{linear-regression}
+- The first displays will be added during the @lesson-link{choosing-your-dataset} lesson, since bar @ifproglang{pyret}{and pie} charts @ifproglang{codap}{and dot plots} are introduced in @ifproglang{pyret}{@lesson-link{bar-and-pie-charts}}@ifproglang{codap}{@lesson-link{codap-dot-plots-bar-charts}}, which comes before they'll have a dataset to focus on.  
+  * Some displays will reveal interesting information, allowing students to make sense of their dataset and develop thoughtful questions.
+  * Some displays will be useless.
+  * Students should add all of the displays they make to the "Making Displays" section of their slide decks with discussion about how they informed the students' thinking. This project is designed as a way for students to show their exploration process, much like they might "show their work" when solving a word problem.
 
-For these _Data Exploration Project_ lesson sections, students will always need on hand: 
+@lesson-point{
+Recognizing whether or not a display is useful or interesting is an important step in becoming data literate!
+}
 
-1. Their copy of the@ifproglang{pyret}{ starter file for the} dataset they chose from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "Library of Datasets"}
+- The remainder of the project is completed at the conclusion of each of these Bootstrap:Data Science lessons: 
+  * @lesson-link{histograms} 
+  * @lesson-link{visualizing-the-shape-of-data} 
+  * @lesson-link{measures-of-center} 
+  * @lesson-link{box-plots} 
+  * @lesson-link{standard-deviation}
+  * @lesson-link{scatter-plots} 
+  * @lesson-link{correlations} 
+  * @lesson-link{linear-regression}
 
-2. Their copy of the @starter-file{exploration-project}
+When working on these _Data Exploration Project_ lesson sections, students will always need: 
 
-_When working on their Data Exploration Project, encourage students to create *multiple* displays._
+- Their copy of @ifproglang{pyret}{the starter file for }their dataset
+- Their copy of the @starter-file{exploration-project}
 
-This project - as its name suggests - is all about _exploration_. 
+@teacher{
+Encourage students to create **multiple** displays of each kind. This project - as its name suggests - is all about _exploration_.
+} 
 
 === Synthesize
 
@@ -84,4 +107,4 @@ This project - as its name suggests - is all about _exploration_.
 
 - Finally, celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
 
-- @opt{For teachers who have additional time available or students who are interested, the @lesson-link{project-research-paper} is a challenging extension, where students investigate the questions they've developed through their Data Exploration Project and use their data to tell a story.}
+@teacher{@opt{Once students have completed this preliminary exploration of their dataset, the @lesson-link{project-research-paper} is an opportunity to investigate the questions they've developed and use their data to tell a story.}}
