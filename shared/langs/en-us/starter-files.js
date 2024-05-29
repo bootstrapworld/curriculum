@@ -283,10 +283,10 @@ const DSBasics = {
   "research-project": {
     "title": "Research Project Slide Deck Template",
     "pyret": {
-      "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
+      "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1uVNO3gRvBxjmE4NRCyiKBhq181dit1wmB17ifQxjTTY/copy"
+      "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
     }
   },
   "animals-spreadsheet": {
