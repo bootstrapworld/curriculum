@@ -707,7 +707,7 @@
                               (expand-directives:string->port text *teacher-notes*)
                               (newline *teacher-notes*)
                               (exit-teacher-notes))]
-                           [(string=? directive "pd-slide")
+                           [(string=? directive "pd-slide-i")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *pd?*
                                 (expand-directives:string->port text o)))]
