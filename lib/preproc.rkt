@@ -1456,7 +1456,7 @@
                                   ))]
                            [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
-                           [(string=? directive "ifslide")
+                           [(member directive '("ifslide" "pd-slide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
                                         (regexp-match "@image{" text)

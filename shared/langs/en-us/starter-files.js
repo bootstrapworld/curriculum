@@ -400,7 +400,7 @@ const MoreDS = {
   "trust-but-verify": {
     "title": "Trust but Verify Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ELldH6tPGvrBXE-p474U3Iqvz9sOWiPc"
+      "url": "https://code.pyret.org/editor#share=1WOJLVp8HolSuesuckXhkBEUCu0b2Q-VZ"
     },
   },
   "bad-survey": {

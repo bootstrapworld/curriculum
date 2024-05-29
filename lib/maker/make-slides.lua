@@ -67,6 +67,7 @@ end
 
 local allowed_slide_layouts = {
   "Core Title Slide",
+  "Core Title and Body",
   "Math Title Slide",
   "Math Title and Body",
   "DS Title Slide",
@@ -134,10 +135,12 @@ local function get_slides(lsn_plan_adoc_file)
 
   local function set_current_slide()
     local n = #slides
-    if curr_slide.text == '' or
+    local txt = curr_slide.text
+    if txt == '' or
       (n == 0 and curr_slide.header == '') then
       return
     end
+    if not txt:match('%S') then return end
     set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
   end
@@ -246,7 +249,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and nested_in ~= 'ifproglang' then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide') then
             terror('@slidebreak inside @' .. nested_in)
           end
           set_current_slide()
@@ -257,6 +260,13 @@ local function get_slides(lsn_plan_adoc_file)
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
           end
+        elseif directive == 'pd-slide' then
+          if nested_in and nested_in ~= 'ifproglang' then
+            terror('@pd-slide inside @' .. nested_in)
+          end
+          local arg = read_group(i, directive, not 'scheme', 'multiline')
+          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. arg .. '}\n@slidebreak\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
         elseif directive == 'A' then
@@ -274,6 +284,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
+
         else
           if directive == 'image' then
             -- dead?
