@@ -113,12 +113,13 @@ for NATLANG in *; do
   slidesmd=zlides.md
 
   if test -z "$PD"; then
-    idfile=slides-$PROGLANG.id
-    slidesmkd=slides.mkd
+    slidesprefix='slides'
   else
-    idfile=slides-pd-$PROGLANG.id
-    slidesmkd=slides-pd.mkd
+    slidesprefix='slides-pd'
   fi
+
+  slidesmkd=$slidesprefix.mkd
+  idfile=$slidesprefix-$PROGLANG.id
 
   if test -n "$OLDFORMAT"; then
     slidesmd=slides.md
@@ -174,11 +175,11 @@ for NATLANG in *; do
       if test -f "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         slideurl="https:\/\/docs.google.com\/presentation\/d\/$id"
-        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > slides-$PROGLANG.html
-        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> slides-$PROGLANG.html
+        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > $slidesprefix-$PROGLANG.html
+        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> $slidesprefix-$PROGLANG.html
         timestamp=$(date +%c)
-        $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
-        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" slides-$PROGLANG.html
+        $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" $slidesprefix-$PROGLANG.html
+        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" $slidesprefix-$PROGLANG.html
       fi
     else
       echo WARNING: $slidesmd failed preprocessing

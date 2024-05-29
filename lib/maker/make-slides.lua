@@ -135,10 +135,12 @@ local function get_slides(lsn_plan_adoc_file)
 
   local function set_current_slide()
     local n = #slides
-    if curr_slide.text == '' or
+    local txt = curr_slide.text
+    if txt == '' or
       (n == 0 and curr_slide.header == '') then
       return
     end
+    if not txt:match('%S') then return end
     set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
   end
@@ -263,10 +265,7 @@ local function get_slides(lsn_plan_adoc_file)
             terror('@pd-slide inside @' .. nested_in)
           end
           local arg = read_group(i, directive, not 'scheme', 'multiline')
-          if arg:match('@slidebreak') then
-            terror('@pd-slide arg should not contain @slidebreak')
-          end
-          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. arg .. '}'
+          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. arg .. '}\n@slidebreak\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
