@@ -2,7 +2,7 @@
 
 @description{This project can be used as a capstone for Bootstrap: Data Science. It is designed to give students a deep dive into a dataset and use everything they've learned throughout the course, not only about making and interpreting displays, but about the practice of refining our questions through the Data Cycle and deciding which displays are most useful in telling the data's story.  _This project is an extension of the @lesson-link{project-data-exploration}._ }
 
-@lesson-prereqs{linear-regression}
+@lesson-prereqs{linear-regression, project-data-exploration}
 
 [@lesson-intro-table]
 |===
@@ -28,7 +28,6 @@
 | Preparation
 |
 @preparation{
-- Prior to embarking on this project, students should complete @lesson-link{project-data-exploration}, where they gain familiarity with a dataset and develop questions to investigate.
 - Prior to launching this project, you'll want to consider your project timeline. _This capstone project is designed to span several days or weeks!_
 - Consider checkpoints to make sure students are on track, and to identify bottlenecks or problems early:
   * Will you check progress intermittently?
@@ -41,7 +40,7 @@
 
 | Key Points for the Facilitator
 |
-- This project builds on our @lesson-link{project-data-exploration}, in which students practice making displays from a real world dataset, but is much more rigorous, pushing students to decide which of the displays they are able to make actually tell interesting stories and which grouped samples need to be made in order to dig into answering their most interesting questions.
+- This project builds on our @lesson-link{project-data-exploration} (in which students practice making displays from a real world dataset, develop familiarity with that dataset and generate a list of questions about the dataset), but is much more rigorous, pushing students to decide which of the displays they are able to make actually tell interesting stories and which grouped samples need to be made in order to dig into answering their most interesting questions.
 - This project can be framed to address _domain-specific learning goals_ that are appropriate for your classroom. For example, students in a Physics class might write their paper about data they collected from an experiment.
 
 |===
@@ -50,7 +49,7 @@
 
 === Overview
 
-In this capstone project, students use the data cycle to ask questions, consider, analyze, and interpret their dataset.
+In this capstone project, students use the data cycle to ask questions, consider, analyze, and interpret their dataset.  Building on preliminary work for @lesson-link{project-data-exploration}, students dig deeper into their questions, selecting relevant displays and making more to craft a compelling data story.
 
 @strategy{What's the Finished Product?}{
 
@@ -66,29 +65,34 @@ Choosing a *good research question* is the first step toward a successful resear
 Your question should produce new insights and rich discussion - that means it can't be too vague, too broad, or too specific!
 
 @lesson-instruction{
-- Take a minute to look at the questions you developed in your @lesson-link{project-data-exploration} and identify a few that you think could be answered using your dataset and might be interesting to pursue further.
+- Take a minute to look at the questions you developed in your @lesson-link{project-data-exploration} and identify a few that you think could be answered using your dataset and might be interesting to pursue further. 
+  * Perhaps you have a broad question that could be clarified through a list of subquestions? 
+  * Or perhaps you notice that you have several questions that could support exploration of an overarching question?
 - Share and discuss your questions with your partner or small group.
   * Which of your questions do they find most compelling?
   * What subquestions would you want to explore for each of your questions?
   * Can all of your questions actually be answered using the data available in your dataset?
-
 - It's ok to improve upon one of your questions or develop a new question about your dataset that wasn't on the original list!
 }
 
 @teacher{
 Some students will likely be confident in their question(s), while others will need to revise and rethink their question(s). This discussion is intended to be an open conversation, allowing students the opportunity to pick the best question for them.
 
-For students who need more scaffolding, it may be helpful to focus on identifying an overarching question that can be explored through a collection of sub-questions.  Students may even benefit from comparing the data exploration their about to embark on to the structure of a 5-paragraph essay, with an introduction and conclusion sandwiching three supporting paragraphs, each of which has its own topic sentence. 
+Students who need more scaffolding may benefit from comparing the data work they are about to embark on to the structure of a 5-paragraph essay, with an introduction and conclusion sandwiching three supporting paragraphs, each of which has its own topic sentence.
 
-Applied to Data Science, this might look like something like the following: 
+Applied to Data Science, they will want an overarching question that can be explored through a collection of sub-questions, which might look like something like the following: 
 
-- Overarching Question: How many weeks are animals likely to spend at the shelter?
+- Overarching Question: What factors best predict the number of weeks animals spend at the shelter?
 - Subquestions:
   * How does an animal's species effect adoption time?
   * How does an animal's weight effect adoption time?
   * How does an animal's sex effect adoption time?
   * How does an animal's age effect adoption time?
-- Conclusion: In general animals spend between @fitb{3em} and @fitb{3em} weeks at the shelter before being adopted. @fitb{3em} doesn't appear to have any impact on adoption time, while @fitb{3em} seems to dramatically lengthen/shorten the number of weeks to adoption. 
+- Conclusion: In general animals spend between @fitb{1em}{} and @fitb{1em}{} weeks at the shelter before being adopted. @fitb{1em}{} doesn't appear to have any impact on adoption time, while @fitb{1em}{} seems to dramatically lengthen/shorten the number of weeks to adoption. Animals who are @fitb{1em}{} and @fitb{1em}{} are most likely to be adopted quickly. And animals who are @fitb{1em}{} and @fitb{1em}{} seem to be adopted slowly.
+
+Another example of an overarching question we could ask about the animals might be: 
+
+- "Does gender bias impact which animals are fixed?"
 }
 
 
@@ -97,7 +101,7 @@ Applied to Data Science, this might look like something like the following:
 Let's make sure the research task is clear before we dig in.
 
 @teacher{
-If you are also requiring students to submit a written research report, we recommend introducing this component _after_ students have completed and submitted their slide decks. When introducing the @starter-file{research-project}, you can share with students @starter-file{research-paper}, so they know what to expect when it's time to write up their findings.
+If you are also requiring students to submit a written research report, we recommend introducing this component _after_ students have completed and submitted their slide decks. When introducing the @starter-file{research-project}, you can share the @starter-file{research-paper} with students, so they know what to expect when it's time to write up their findings.
 }
 
 @lesson-instruction{
@@ -105,7 +109,7 @@ If you are also requiring students to submit a written research report, we recom
   * (1) About this Dataset - you can reuse what you wrote for your @lesson-link{project-data-exploration} and improve upon it, if necessary.
   * (2) Research Questions - you just came up with these!
   * (3) Analysis - This is where the bulk of your work will happen. In telling your data story, you can reuse displays from the exploration project... but some will likely not be worth including! And you will likely need to make more displays in order to tell the best story you can.  Plan to include a wide array of charts and displays to tell your story, although there is no requirement to include each type of display.
-  * (4) Discussion
+  * (4) Discussion - This is where you'll summarize your findings, address threats to validity and ethical implications, and identify questions for future study.
 - You will be assessed on your work using this rubric: @handout{research-project-rubric.adoc, page 1} and @handout{research-project-rubric-displays.adoc, page 2}
 - Take a few minutes to read through the slide deck and the rubrics in parallel and identify any questions you may have about what you're being asked to do.  You may want to use a highlighter to identify anything that seems especially important on the rubric.
 }
@@ -115,11 +119,20 @@ If you are also requiring students to submit a written research report, we recom
 Pacing of this project will vary from classroom to classroom. Some students will need more structure and deadlines from you, while others will thrive with individual freedom. Do what works best for your students - but have a clear idea of how much time will be needed for your students to meet your expectations. Share any pertinent deadlines, for check-ins, status updates, submission dates for drafts, slides, papers and/or presentations, etc.
 }
 
+@lesson-instruction{
+- Whereas the focus of the @lesson-link{project-data-exploration} was to keep a record of your explorations, the goal of this project is to produce a polished final product that tells a compelling data story.  
+- Just as with any polished paper, you should expect it to take several drafts to arrive at the final product. 
+- When you are finished with your first draft, use the rubrics to self-assess and revise your work. 
+  * This will likely involve editing, deleting and adding to what you've written to come up with a more polished product. 
+  * Some of your edits may focus on the text you've written.
+  * Some of your edits may focus on refining the displays, by editing titles or making additional displays for the purpose of comparison.
+- You are also welcome to customize your slides, add graphics, and beautify the slide deck template!
+}
+
 === Synthesize
 
-- Invite students to customize their slides, add graphics, and beautify their slide decks.
-- Encourage students to self-assess and revise their work. Peer review is a powerful tool if time allows.
-- Finally, celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
+- Peer review is a powerful tool if time allows, and, ideally, it would be followed by a round of revisions.
+- Celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
 
 
 

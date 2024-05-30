@@ -286,7 +286,7 @@ const DSBasics = {
       "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
+      "url": "https://docs.google.com/presentation/d/1a1AQPj27PSMoARklNLDPxa5F2iQJTSqerAsYseWU7Cg/copy"
     }
   },
   "animals-spreadsheet": {
