@@ -266,7 +266,6 @@ dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NAT
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	@echo ➤ Make $@
 	@$(MAKE_DIR)make-dependency-graph.lua $@
-	@echo ➤ Check $@
 	@$(MAKE_DIR)check-graph.sh
 
 ##########################################################################
@@ -282,7 +281,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(SETUP_LESSONPLAN_PDF)
 	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
 	@echo } >> $(SETUP_CONTRACTS_PDF)
-	@echo ➤ Setting up batch files
+	@echo ➤ Set up batch files
 	@$(MAKE_DIR)do-setup.lua
 	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
 	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
@@ -298,7 +297,7 @@ postproc: preproc
 	@$(MAKE_DIR)do-postproc.lua
 
 tocs: preproc
-	@echo ➤ Make pathway ToCs
+	@echo ➤ Make pathway-tocs.js
 	@$(MAKE_DIR)make-pathway-tocs.lua
 
 ifeq "$(BOOK)" ""
@@ -306,7 +305,8 @@ pdfs: postproc dependency-graph tocs
 
 else
 pdfs: postproc dependency-graph tocs
-	$(MAKE_DIR)make-pdf.sh
+	@echo ➤ Make PDFs
+	@$(MAKE_DIR)make-pdf.sh
 
 endif
 
@@ -324,7 +324,9 @@ books: pdfs
 
 else
 books: pdfs
+	@echo ➤ Make workbooks
 	$(MAKE_DIR)make-workbook-jsons.lua $(COURSES_LIST_FILE)
+	@echo "  " • Created workbook JSON files
 	$(MAKE_DIR)make-books.sh
 
 endif

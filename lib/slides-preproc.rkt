@@ -30,6 +30,8 @@
 
 (define *natlang* (or (getenv "NATLANG") "en-us"))
 
+(define *pd?* (getenv "PD"))
+
 (define *starter-files*
   (let ([starter-files-file (format "~a/distribution/~a/starter-files.js"
                                     *topdir* *natlang*)])
@@ -705,6 +707,10 @@
                               (expand-directives:string->port text *teacher-notes*)
                               (newline *teacher-notes*)
                               (exit-teacher-notes))]
+                           [(string=? directive "pd-slide-i")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when *pd?*
+                                (expand-directives:string->port text o)))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)
