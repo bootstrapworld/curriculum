@@ -283,10 +283,10 @@ const DSBasics = {
   "research-project": {
     "title": "Research Project Slide Deck Template",
     "pyret": {
-      "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
+      "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1uVNO3gRvBxjmE4NRCyiKBhq181dit1wmB17ifQxjTTY/copy"
+      "url": "https://docs.google.com/presentation/d/1a1AQPj27PSMoARklNLDPxa5F2iQJTSqerAsYseWU7Cg/copy"
     }
   },
   "animals-spreadsheet": {
@@ -400,7 +400,7 @@ const MoreDS = {
   "trust-but-verify": {
     "title": "Trust but Verify Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ELldH6tPGvrBXE-p474U3Iqvz9sOWiPc"
+      "url": "https://code.pyret.org/editor#share=1WOJLVp8HolSuesuckXhkBEUCu0b2Q-VZ"
     },
   },
   "bad-survey": {
@@ -591,10 +591,28 @@ const Flags = {
   "flags-panama": {
     "title": "Flag of Panama Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=A3N1Kcg7iy"
+    }
+  },
+   "compose-1":{
+    "title": "Composing in a Single Definition Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=1TAaRdb5a4EpG7ccdjuDFyqOPRZzXUtTw"
+    },
+    "wescheme":{
+      "url":"https://www.wescheme.org/view?publicId=QsSytQCuzf"
+    }
+  },
+  "compose-2":{
+    "title": "Composing 1 Step at a Time Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=15kdZ_CENWdN-LuBmHkFk0CpqObtCJQyh"
+    },
+    "wescheme":{
+      "url":"https://www.wescheme.org/view?publicId=pJucnXFenl"
     }
   },
   "flags-desmos": {
@@ -831,19 +849,19 @@ const EarlyMath = {
 }
 
 const Projects = {
-  "functions": {
-    "title": "Functions Starter File",
+  "functions-study": {
+    "title": "Functions Study Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
+      "url": "https://code.pyret.org/editor#share=1F8_Pn48lmH8rmrnxK7ArcUDMI53tWsm8"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
+      "url": "https://www.wescheme.org/view?publicId=44k3iR5urE"
     }
   },
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
+      "url": "https://code.pyret.org/editor#share=1imHHu2-uAXrjQ1I1gGAEjTYfifQ6P65c"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=apgRM24Q82"
@@ -910,6 +928,12 @@ const Alg2 = {
     "title": "CA Minimum Wage and Rent Starter File",
     "pyret" : {
       "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
+    }
+  },
+  "alg2-ca-rent-desmos" : {
+    "title": "Exploring Exponential Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
     }
   },
   "alg2-exploring-quadratics-desmos": {

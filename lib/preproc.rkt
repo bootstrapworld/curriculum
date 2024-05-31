@@ -1360,7 +1360,7 @@
 
   (when (and *lesson* (not *lesson-plan*) (not *other-dir*))
     (let* ([exercise-pages-ls-file
-            (format "distribution/~a/lessons/~a/pages/.cached/.exercise-pages-ls.txt.kp"
+            (format "distribution/~a/lessons/~a/pages/.cached/.opt-exercise-pages-ls.txt.kp"
                     *natlang* *lesson*)]
            [exercise-pages (read-data-file exercise-pages-ls-file)]
            [handout-pages-ls-file
@@ -1456,7 +1456,7 @@
                                   ))]
                            [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
-                           [(string=? directive "ifslide")
+                           [(member directive '("ifslide" "pd-slide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
                                         (regexp-match "@image{" text)
@@ -2269,7 +2269,7 @@
                        (empty? *opt-printable-exercise-links*)
                        (empty? *opt-starter-file-links*)
                        (empty? *opt-online-exercise-links*))
-              (printf "WARNING: ~a has no supplemental materials yet!\n\n" (errmessage-context))
+              (printf "WARNING: ~a has no supplemental materials yet!\n" (errmessage-context))
               ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
               )
 

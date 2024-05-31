@@ -49,6 +49,7 @@ do
   local o = io.open(workbook_pages_file, 'w+')
   local ol = io.open(workbook_pages_ls_file, 'w+')
   local on = io.open(notes_pages_ls_file, 'w+')
+  local pwd = os.getenv('PWD')
   --
   for f in i:lines() do
     if f:find('^ *;') or f:find('^ *//') or f:find('^ *$') then
@@ -57,19 +58,18 @@ do
     f = f:gsub('%s+$', '') -- remove any non-Unix \r
     local g = f
     if f:find('landscape') or f:find('portrait') then
-      o:write(f, '\n')
       g = f:gsub('^ *([^ ]+).*', '%1')
-      ol:write(g, '\n')
-    elseif (not f:find('%.adoc$')) or (not file_exists_p(f)) then
-      o:write(f, '\n')
-      ol:write(g, '\n')
-    elseif head(f, 5, '^ *%[%.landscape%] *$') or head(f, 60, 'body.*landscape') then
-      o:write(f .. ' landscape\n')
-      ol:write(g, '\n')
-    else
-      o:write(f, '\n')
-      ol:write(g, '\n')
     end
+    local actual_g = pwd .. '/pages/' .. g
+    if not g:find('%.adoc$') then
+      ;
+    elseif not file_exists_p(actual_g) then
+      print('WARNING: ' .. pwd .. '/' .. workbook_pages_og_file .. ' mentions non-existent file ' .. f)
+    elseif f == g and (head(actual_g, 5, '^ *%[%.landscape%] *$') or head(actual_g, 60, 'body.*landscape')) then
+      f = f .. ' landscape'
+    end
+    o:write(f, '\n')
+    ol:write(g, '\n')
     if g:find('^notes%-') then
       on:write(g, '\n')
     end

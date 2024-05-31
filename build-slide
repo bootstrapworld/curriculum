@@ -14,6 +14,7 @@ regenid=
 rebuild=
 export OLDFORMAT
 export PROGLANG
+export PD
 nomake=
 lsn=
 
@@ -32,6 +33,8 @@ else
       shift; PROGLANG="$1"; shift
     elif test "$1" = --nomake; then
       nomake=1; shift
+    elif test "$1" = --pd; then
+      PD=1; shift
     elif test "$1" = --rebuild; then
       rebuild=y; shift
     else
@@ -107,10 +110,16 @@ for NATLANG in *; do
 
   # echo repoLESSON is $repoLESSON
 
-  idfile=slides-$PROGLANG.id
-
   slidesmd=zlides.md
-  slidesmkd=slides.mkd
+
+  if test -z "$PD"; then
+    slidesprefix='slides'
+  else
+    slidesprefix='slides-pd'
+  fi
+
+  slidesmkd=$slidesprefix.mkd
+  idfile=$slidesprefix-$PROGLANG.id
 
   if test -n "$OLDFORMAT"; then
     slidesmd=slides.md
@@ -166,11 +175,11 @@ for NATLANG in *; do
       if test -f "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         slideurl="https:\/\/docs.google.com\/presentation\/d\/$id"
-        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > slides-$PROGLANG.html
-        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> slides-$PROGLANG.html
+        echo '<meta http-equiv="refresh" content="0;INSERTSLIDEURL">' > $slidesprefix-$PROGLANG.html
+        echo '<a target="_blank" href="INSERTSLIDEURL">Google Slides generated INSERTTIMESTAMP<\/a>' >> $slidesprefix-$PROGLANG.html
         timestamp=$(date +%c)
-        $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" slides-$PROGLANG.html
-        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" slides-$PROGLANG.html
+        $SED -i -e "s/INSERTTIMESTAMP/$timestamp/" $slidesprefix-$PROGLANG.html
+        $SED -i -e "s/INSERTSLIDEURL/https:\/\/docs.google.com\/presentation\/d\/$id/" $slidesprefix-$PROGLANG.html
       fi
     else
       echo WARNING: $slidesmd failed preprocessing
