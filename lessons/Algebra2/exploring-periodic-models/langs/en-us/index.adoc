@@ -6,7 +6,7 @@ table.rideData tr * { padding: 0 !important; margin: 2px !important; }
 table.rideData { width: 70%; margin: auto; }
 </style>
 ++++
-@description{Students investigate periodic relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect sinusoidal behavior and then by looking data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
 @lesson-prereqs{exploring-quadratic-models}
 
@@ -38,18 +38,24 @@ table.rideData { width: 70%; margin: auto; }
 
 |===
 
-== Around and Around We Go @duration{45 minutes}
+== Looking for Patterns @duration{45 minutes}
 
 === Overview
 Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
 
 === Launch
 
+@lesson-instruction{
+Working in pairs or groups, complete questions 1-4 in @printable-exercise{exploring-periodic.adoc}
+}
+
+@slidebreak
+
 @right{@image{images/state-fair.png, 200}} Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Rollercoaster? Bumper cars? Merry-Go-Round? Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch:
 
 [.rideData, cols="^1a,^1a", options="header"]
 |===
-| `time` (minutes)  | `height` (feet)
+| `time` (minutes)  | `altitude` (feet)
 |  0				|   5.0
 |  5				|  55.0
 | 10				| 154.9
@@ -65,54 +71,84 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 | 60				|   5.0
 |===
 
-What ride do you think they were on?
-
-@lesson-instruction{
-Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}
-}
+=== Synthesize
 
 @QandA{
 @Q{What are some of your Noticings, and what did they make you Wonder?}
 @A{(Solicit a range of student responses)}
+@Q{What kind of ride do you think they were on?}
+@A{Answers will vary. Write them all down on the board!}
+@Q{What about this data supports your theory?}
 @Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
 @A{Yes - it was difficult to see the pattern until we added the line!}
-@Q{Is there a relationship between `time` and `height`? Why or why not?}
+@Q{Is there a relationship between `time` and `altitude`? Why or why not?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
 @A{A ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down}
 }
 
-This worksheet had you create a different type of data display, called a @vocab{line graph}.
+@slidebreak
 
-@lesson-point{Line graphs are often used instead of scatterplots when the explanatory variable is _time_.}
+This worksheet had you create a *new type of data display*, called a @vocab{line graph}.
+
+@lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_.}
+
+[cols="^1a, ^1a"]
+|===
+| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
+|===
+
+@slidebreak
 
 In this example, we know the ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
+
+@ifslide{
+[cols="^1a, ^1a"]
+|===
+| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
+|===
+}
 
 @QandA{
 @Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
 @A{(Let students discuss)}
 }
 
-The relationship we're looking at is an example of a @vocab{periodic relationship}.
+== Periodic Functions
+
+@slidebreak
+
+@right{@image{images/ferris-wheel.png, 300}}The relationship we're looking at is an example of a @vocab{periodic relationship}.
 
 - The y-value (`height`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
 
-*None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing or decreasing. We've studied relationships that grow one way until they a maxima or minima, before growing in the other direction. But we don't have any functions that keep repeating, going up and down over time.
+*None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing or decreasing. We've studied relationships that grow one way until they a maxima or minima, before growing in the other direction.
 
-That's a problem for us as data scientists, because so many things in nature are _cyclical:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
+But we don't have any functions that keep repeating, going up and down over time.
 
-In this lesson we'll explore these periodic relationships, and a new class of functions - _@vocab{periodic functions}_ - that we can use to model them.
+@slidebreak
+
+That's a problem for us as data scientists, because so many things in nature comes in _cycles:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
+
+In this lesson we'll explore these periodic relationships, and a new class of functions - _@vocab{periodic functions}_ - that we can use to model cyclical relationships like these.
+
+@strategy{A note on Vocabulary}{
+
+You've probably heard of related terms _sinusoidal functions_ or _trigonometric functions_. We've chosen @vocab{periodic functions} because the term shows up often in both K-12 math _and_ science and engineering classes, in an attempt to balance the two. Note that "periodic" is also a broader term, as there are periodic functions that are _not_ sinusoidal/trigonometric. Science teachers may be quick to point out that periodic functions can be used to model relationships that _cycle_ (smooth ups-and-downs) and those that oscillate (any kind of up-and-down!).
+
+As always, we advise you to use the term that works best for your classroom context!
+}
 
 === Investigate
 
-When graphed, periodic functions look like waves that rise to a certain height above a midline, then drop the same distance below it, then rise again and repeat the pattern:
+When graphed, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise again to complete the cycle. This cycle then repeats over and over.
 
 @center{@image{images/wave-labeled-terms.png, 75%}}
 
 - @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
 - @vocab{Troughs} - the lowest points on the wave
-- @vocab{Period} - the distance from peak to peak, or trough to trough
+- @vocab{Period} - the length of a complete cycle, from peak-to-peak or trough-to-trough
 - @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 - @vocab{Amplitude} - the distance from a peak or trough to the midline
 
@@ -121,7 +157,8 @@ When graphed, periodic functions look like waves that rise to a certain height a
 @ifslide{
 @center{@image{images/wave-labeled-terms.png, 650}}
 }
-Starting at some initial value at @math{x=0}, a periodic function will rise or fall as @math{x} increases until it reaches some maximum (@vocab{peak}) or minimum value (@vocab{trough}), before returning to its initial value. As @math{x} continues to increase, it will repeat this pattern over and over, fluctuating between its maximum and minimum value over regular intervals (@vocab{periods}).
+
+Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
 
 You may already be familiar with two of the best-known periodic functions, @math{sin} and @math{cos}. Here are their contracts:
 
@@ -132,20 +169,22 @@ You may already be familiar with two of the best-known periodic functions, @math
 )}
 }
 
-*Note*: There are other periodic functions that do _not_ look like waves! But for our first exploration, we're going to limit ourselves to @math{sin} and @math{cos}, since those are by far the most common ones.
+*Note*: There are other periodic functions that do _not_ look like waves! For this exploration, we're going to limit ourselves to @math{sin} and @math{cos}.
 
 @slidebreak
 
 Periodic models with @math{sin} have the form @math{f(x) = a \sin(b(x - d)) + c}
 
 @QandA{
-@Q{You've all seen the coefficient @math{c} before. What affect do you think it has on the model?}
+@Q{You've seen the coefficient @math{c} before. What affect do you think it has on the model?}
 @A{It's the vertical shift - it moves the midline of the graph up and down the y-axis.}
-@Q{What affect do you think each of the _other_ coefficients has on the model?}
+@Q{What effect do you think each of the _other_ coefficients has on the model?}
 @A{Some may recognize @math{d} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
 }
 
-Both @math{sin} and @math{cos} are closely-related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
+Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
+
+@slidebreak
 
 @lesson-instruction{
 Let's explore the coefficients of periodic models!
@@ -154,17 +193,38 @@ Let's explore the coefficients of periodic models!
 - With your partner, complete @printable-exercise{graphing-models.adoc} using the first slide of the Desmos activity.
 }
 
-@teacher{Review student answers to the worksheet, giving ample time for them to hear one another's answers. Concepts like amplitude and frequence can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
+@teacher{Review student answers to the worksheet, giving ample time for them to hear one another's answers. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
+
+@slidebreak
+
+The period is the distance between one @vocab{trough} and the next in a cycle. The frequency is _how many cycles_ occur over an interval.
+
+@lesson-point{The @vocab{frequency} is the _inverse_ of the @vocab{period}}
+
+- If the @vocab{period} is @math{2pi}, then the frequency is @math{1}.
+- If the @vocab{period} doubles to @math{4pi}, the @vocab{frequency} _halves_ to  @math{pi/2}
+- If the @vocab{period} is cut in half, the @vocab{frequence} _doubles_ to @math{2}
+
+@slidebreak
+
+Let's review our coefficients:
+
+- @vocab{Amplitude} (@math{a}): the distance from a peak or trough to the midline
+- @vocab{Frequency} (@math{b}): the number of cycles in a given interval
+- @vocab{Vertical Shift} (@math{c}: the amount the graph is shifted up (@math{c} > 0) or down (@math{c} < 0)
+- @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} > 0) or left (@math{c} < 0)
+
+@slidebreak
 
 @lesson-instruction{
-- Now that you have a sense for what terms like @vocab{amplitude} and @vocab{midline} mean, complete @printable-exercise{matching-periodic-descriptions.adoc} by matching the graphs of periodic functions to their written descriptions.
+- Now that you have a sense for what terms like @vocab{amplitude}, @vocab{frequency}, and @vocab{midline} mean, complete @printable-exercise{matching-periodic-descriptions.adoc} by matching the graphs of periodic functions to their written descriptions.
 - What strategies did you use to match the graphs to the descriptions?
 }
 
 Let's return to the Ferris Wheel data, and see if we can use our knowledge of periodic functions to fit a model to it.
 
 @lesson-instruction{
-- With your partner, complete @printable-exercise{fitting-ferris-wheel.adoc} using the last slide of the Desmos activity.
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last slide of the Desmos activity.
 }
 
 

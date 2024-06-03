@@ -1819,6 +1819,7 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
+                            (display (enclose-span "" "" #:attribs "style=\"clear: both;display: block\"") o)
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
