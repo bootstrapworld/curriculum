@@ -36,10 +36,12 @@
 
 | Key Points For The Facilitator
 |
-This lesson focuses on _linear relationships_, and the math content of the lesson is primarily a review of those concepts from Algebra 1 (the third section includes topics that may be new to some students). That being said, the bulk of the new learning serves two objectives:
-
-- This lesson establishes a structure for exploring relationships in data: (1) build a model from samples, (2) fit a model, and (3) better modeling. Students will repeat this process in subsequent explorations.
-- The lesson also includes some programming content, allowing students to learn necessary programming skills while practicing the math they already know.
+- The math content of this lesson is primarily a review from Algebra 1.
+- This lesson introduces necessary programming skills while students practice exploring _linear relationships_. 
+- This lesson establishes a structure for exploring relationships in data that students will make use of in subsequent explorations: 
+  	* build a model from samples
+  	* fit a model
+  	* improve upon the model
 |===
 
 == Looking for Patterns @duration{45 minutes}
@@ -66,7 +68,13 @@ We're going to search for relationships within a dataset about all the states in
 @A{`y = row-n(states-table, 1)` for the second row. Change the `1` to a `2` for the third.}
 }
 
-In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. Any time we use @math{x} after that, we can substitute in the value of @math{4}. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
+In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. 
+
+@indented{Any time we see @math{x} after that, we can substitute in the value of @math{4}.}
+
+This works in Pyret, too. But in Pyret, values can be more than just numbers! 
+
+@indented{In this file, the variables `alabama` and `alaska` are defined as rows from the table.}
 
 @teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
 }
@@ -82,12 +90,13 @@ In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. 
 
 === Investigate
 
-Before we dig deeper into @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
+Before we dig deeper into the @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
 @QandA{
 @Q{Think back to the dataset we explored about animals at the shelter.}
 @Q{Would you imagine that younger animals get adopted faster than older animals? Why or why not?}
-@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely.}
+@A{(For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
 @Q{What kind of data does the `age` variable represent? What about `weeks`?}
 @A{Both `age` and `weeks` are quantitative variables.}
 @Q{What kind of display would help us analyze the relationship between age and adoption time?}
@@ -96,7 +105,9 @@ Before we dig deeper into @starter-file{alg2-states}, let's think back to the an
 
 @slidebreak
 
-Pie and bar charts help us see the _frequency_ of values in a single _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
+Pie and bar charts help us see the _frequency_ of values in a single _categorical_ column. 
+
+There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
 
 But what we really want is a display that will help us search for _a relationship between two quantitative columns_, and that's exactly what scatter plots do!
 
@@ -123,12 +134,14 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 
 @slidebreak
 
-We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+@lesson-instruction{
+- It's time to return to the @starter-file{alg2-states}!
+- We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+}
 
 @teacher{Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!}
 
 @lesson-instruction{
-- It's time to return to the @starter-file{alg2-states}!
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
 - Do not go on to Part 2! We'll return to that later in the lesson.
 }
@@ -139,7 +152,8 @@ We are going to be focusing some of our thinking on our state and its neighbors.
 
 The @starter-file{alg2-states} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
 
-Making sense: can students predict these relationships, and explain their thinking? (If so, probably not worth having them spend time on more than one of them!)
+Making sense: can students predict these relationships, and explain their thinking? +
+(If so, probably not worth having them spend time on more than one of them!)
 
 - `pop-2010` vs. `pop-2020`.
 - `pop-2020` vs. `num-households`
@@ -161,7 +175,7 @@ Surprises in the District of Columbia: DC often shows up as an outlier or extrem
 
 === Synthesize
 
-- Share your scatter plots with one another (copying and pasting `scatter-plot` displays into a shared document, for example, and then labeling those displays). 
+- Share your scatter plots with one another (Perhaps by copying and pasting `scatter-plot` displays into a shared document and then labeling those displays?). 
 - What possible relationships did you find?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
 
@@ -176,7 +190,9 @@ Students identify and make use of @vocab{correlations} in scatter plots. They le
 
 Scatter plots let us visualize the relationship between two quantitative columns. If no relationship exists, the points in the scatter plot just appear as a shapeless cloud. But if there _is_ a relationship, the points will form some kind of pattern. When we build scatter plots, we are searching for patterns between two quantitative variables.
 
-These patterns can be described by three terms: *form*, *direction*, and *strength*.
+These patterns can be described by three terms: form, direction and strength.
+
+==== Form
 
 @slidebreak
 
@@ -191,15 +207,21 @@ These patterns can be described by three terms: *form*, *direction*, and *streng
 | And sometimes there is *no relationship* or pattern at all!
 |===
 
+@vspace{1ex}
+
 @lesson-point{
 @vocab{Form} indicates whether a relationship is linear, nonlinear or undefined.
 }
+
+@vspace{1ex}
 
 @teacher{
 @opt{Have students turn to @opt-printable-exercise{linear-nonlinear-bust.adoc} and decide whether each of the scatter plots could be modeled by a linear relationship, a nonlinear relationship, or that there doesn't appear to be a pattern.}
 }
 
 @slidebreak
+
+==== Direction
 
 If the relationship clusters around a straight line, we can talk about _direction._
 
@@ -219,15 +241,18 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 
 @slidebreak
 
-@lesson-point{
-@vocab{Strength} indicates how closely the two variables are related.
-}
 
+
+==== Strength
 @right{@image{images/A.gif, 200}}*A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
 @right{@image{images/1a.gif, 200}}*A relationship is weak if x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+
+@lesson-point{
+@vocab{Strength} indicates how closely the two variables are related.
+}
 
 === Investigate
 
