@@ -959,6 +959,18 @@ const Alg2 = {
     "pyret" : {
       "url" : "https://teacher.desmos.com/activitybuilder/custom/665ddc01715890e39bd1f4b7"
     }
+  },
+  "alg2-ferris-wheel" : {
+    "title" : "Ferris Wheel Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1OhkCl-a5TTCJ0ZtXca977TqxhOlniZLU"
+    }
+  },
+  "alg2-co2" : {
+    "title" : "Carbon Dioxide Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt&v=3ddb1dd"
+    }
   }
 }
 
