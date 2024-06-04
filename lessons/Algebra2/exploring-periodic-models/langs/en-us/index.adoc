@@ -44,7 +44,6 @@ table.rideData { width: 70%; margin: auto; }
 Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
 
 === Launch
-
 @right{@image{images/state-fair.png, 200}} Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Rollercoaster? Bumper cars? Merry-Go-Round? Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch:
 
 [.rideData, cols="^1a,^1a", options="header"]
@@ -66,7 +65,6 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 |===
 
 === Investigate
-
 @lesson-instruction{
 Working in pairs or groups, complete questions 1-4 on @printable-exercise{exploring-periodic.adoc}.
 }
@@ -84,7 +82,6 @@ Complete the remaining questions on @printable-exercise{exploring-periodic.adoc}
 }
 
 === Synthesize
-
 This worksheet had you create a *new type of data display*, called a @vocab{line graph}.
 
 @lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_.}
@@ -96,7 +93,7 @@ This worksheet had you create a *new type of data display*, called a @vocab{line
 
 @slidebreak
 
-In this example, we know the ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
+In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
 
 @ifslide{
 [cols="^1a, ^1a"]
@@ -111,7 +108,7 @@ In this example, we know the ferris wheel keeps turning, generating data "in bet
 @Q{Is there a relationship between `time` and `altitude`? Why or why not?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
-@A{A ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
+@A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
 @Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
 @A{(Let students discuss)}
 }
@@ -119,12 +116,10 @@ In this example, we know the ferris wheel keeps turning, generating data "in bet
 == Periodic Functions
 
 === Overview
-
 Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
 
 === Launch
-
-@right{@image{images/ferris-wheel.png, 300}}The relationship we're looking at is an example of a @vocab{periodic relationship}.
+@right{@image{images/Ferris-wheel.png, 300}}The relationship we're looking at is an example of a @vocab{periodic relationship}.
 
 - The y-value (`height`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
@@ -176,7 +171,6 @@ You may already be familiar with two of the best-known periodic functions, @math
 *Note*: There are other periodic functions that do _not_ look like waves! For this exploration, we're going to limit ourselves to @math{sin} and @math{cos}.
 
 === Investigate
-
 Periodic models with @math{sin} have the form @math{f(x) = a \sin(b(x - d)) + c}
 
 @QandA{
@@ -225,12 +219,11 @@ Let's review our coefficients:
 
 @lesson-instruction{
 - Open @link{https://www.tidetime.org/, TideTime.org}, and find a coastal city for which tidal data is available. Can you find the @vocab{amplitude}, @vocab{midline}, and @vocab{vertical shift} of the data?
-- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last two slides of the Desmos activity.
-- @opt{Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How do they fit?}
+- With your partner, complete @printable-exercise{modeling-Ferris-wheel.adoc} using the last two slides of the Desmos activity.
+- @opt{Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-Ferris-wheel.adoc}. How do they fit?}
 }
 
 === Synthesize
-
 Periodic relationships involve repeating cycles. Like our Ferris wheel, they rise and fall along regular intervals. Can you come up with some examples of periodic relationships?
 
 For each one:
@@ -250,22 +243,145 @@ You'll likely need to support students in thinking through what these terms mean
 == Modeling Periodic Relationships	@duration{45 minutes}
 
 === Overview
-
 Students explore the @math{\mbox{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
+@define{COtwo}{@math{\mbox{CO}_2}}
+
 === Launch
+Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
+
+Now that we've had some practice, let's take a look at a dataset that has more variability!
+
+@slidebreak
+
+Carbon Dioxide (@COtwo) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+
+@slidebreak
+
+Scientists are concerned about how much @COtwo is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @COtwo in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @COtwo in any one location!
+
+- Temperature and air pressure
+- Proximity to @COtwo -producing or @COtwo -consuming sources
+- Global trends like the burning of fossil fuels
+
+Because of these and other factors, the amount of @COtwo at any one location goes up and down throughout the year. But is there a pattern?
+
+@slidebreak
 
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, and complete @printable-exercise{exploring-co2.adoc}.
-- What kind of model do you think would fit this best?
+- Open the @starter-file{alg2-co2}, save a copy, and click "Run".
+- What is the name of the table here?
+- What are the names of the columns?
+- Type `co2-table` into the Interactions Area, and look at the table.
+- What do the `year`, `month`, and `co2` columns mean?
+- What do you think the `date` column could mean?
 }
 
+@slidebreak
 
+The `date` column is the *decimal year*, in which the __n__th day of the year is divided by 365:
+
+- January first is day zero, so 1/1/2023 would be 2023.0
+- The 100th day of the year would be 100/365, which is roughly 0.27. So April 10th, 2023 would be 2023.27
+
+@lesson-instruction{
+- What do you *Notice* about this dataset?
+- What do you *Wonder*?
+}
+
+@slidebreak
+
+Look farther down in the Definitions Area, until you find the function `is-recent`.
+
+@QandA{
+@Q{What does it do?}
+@A{It takes in a row, and checks to see if the decimal date is between 2022.083 and 2023.7917.}
+@Q{What is defined on the following line of code?}
+@A{A table, which contains only the rows for which the filter function produces `true`: just the rows between those dates.}
+}
+
+@slidebreak
+
+The `recent` table includes just the rows from trough-to-trough for the years 2022-2023.
+
+@QandA{
+@Q{How many periods are represented here?}
+@A{One}
+@Q{Why?}
+@A{Because the distance between any adjacent troughs or peaks define one period.}
+}
 
 === Investigate
-
 @lesson-instruction{
-Complete .
+- Open the @starter-file{alg2-co2}, and complete Questions 1-5 of @printable-exercise{exploring-co2.adoc}.
+- Be ready to share your answers!
 }
 
+@slidebreak
 
+@QandA{
+@Q{What was the highest @COtwo value in the table? The lowest?}
+@A{424 and 415.74 parts per million.}
+@Q{What did you get for @math{a}?}
+@A{4.13, because the distance between the high and low readings is 8.26.}
+@Q{What did you get for @math{c}?}
+@A{Adding the amplitude (4.13) to the lowest value (415.74) gives us 419.87.}
+@Q{What did you estimate for the @vocab{phase shift} (@math{d})?}
+@A{Answers will vary, but should be close to 2023.1}
+@Q{A periodic function completes one cycle every @math{2\pi}. How long is one period in _years?_}
+@A{One year (this makes sense, since the seasonal cycle repeats every year!)}
+@Q{What did you get for @math{b}?}
+@A{@math{2\pi}, because @math{{2\pi \over 1.0} = 2\pi}.}
+}
+
+=== Synthesize
+
+- TODO
+
+
+== Polynomial Models
+
+=== Overview
+Students discover that their periodic model for `recent` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
+
+=== Launch
+The resulting model fits the `recent` data pretty well, with an S-value of about 1.2ppm and an R^2 value of 0.822. But how well does it fit if we try it with _all_ of the data?
+
+@lesson-instruction{
+- Fit your model with the entire `co2-table`.
+- What @math{S} and @math{R^2} do you get?
+- What do you think is going on?
+}
+
+@slidebreak
+
+@center{@image{images/historical-bad-fit.png}}
+
+Apparently there's been a lot of change over the years!
+
+=== Investigate
+Let's just look at the historical data by itself, without worrying about models.
+
+@center{@image{images/historical-scatter-plot.png}}
+
+@QandA{
+@Q{Do you see a pattern in the larger, historical data?}
+@A{Very much so!}
+@Q{If so, what @vocab{form} of relationship do you see? Is it linear? Quadratic? Exponential? Logarithmic? Periodic?}
+@A{Strong linear correlation.}
+}
+
+@slidebreak
+
+@ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there's two different things going on here: the amount of @COtwo in the air is rising linearly over time, forming a straight line with seasonal variations fluctuating up and down across that line.
+
+@lesson-instruction{
+- Do you think it's possible for a model to be both linear _and_ periodic?
+- What would that even look like?
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Complete @printable-exercise{modeling-historical-co2.adoc}
+}
