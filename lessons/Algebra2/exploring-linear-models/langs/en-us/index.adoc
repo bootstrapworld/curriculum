@@ -391,6 +391,8 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 
 === Synthesize
 
+@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate how well `f(x)` predicts states' median income given the percentage of the population with at least a college degree.}
+
 @QandA{
 
 @Q{Why wasn't the Alaska-Alabama model a good fit for the rest of the data?}
@@ -403,48 +405,82 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 == Fitting Linear Models @duration{45 minutes}
 
 === Overview
-Armed with their linear models, students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best?
+Students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best? First they'll consider two models for a simple dataset and brainstorm how we could measure which fits better. Then they'll test out their linear models using a new pyret function called `fit-model`, which computes residuals, @math{S}, and @math{R^2}.
 
 === Launch
 
-@lesson-instruction{
-- How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
-- How can we measure "how well a model fits"?
-}
-
-@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
-
-The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are _patterns_, which we can describe with _models_. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But which is the best model?
+In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But how do we know which is the best model?
 
 *How do we even measure how good a model is in the first place?*
 
 @slidebreak
 
 @lesson-instruction{
-- TODO(Emmanuel): workbook page with simple points and two functions. Kids have to come up with a measurement
-- Share back
+- With your partner, complete @printable-exercise{how-could-we-measure-good-fit.adoc}
 }
 
-Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it _also consumes a function!_ It produces a scatter plot, with the function graphed on top of it.
+@QandA{
+@Q{What criteria did you come up with for how to assess whether or not a model is a good fit for the data?}
+@A{Answers will vary. Ideas might include:}
+@A{The points should be evenly distributed around the line.
+- We could see how the number of points above the line and below the line compare.
+- We could measure the distance between the points and line and try to make sure it's balanced.}
+
+@Q{How could we measure the distance between the points and the line?}
+@A{Answers will vary. Ideas might include:}
+@A{By drawing vertical lines.}
+@A{By drawing horizontal lines.}
+@A{By drawing diagonal lines.}
+}
+
+Pyret includes a function called `fit-model`. 
+
+Like `scatter-plot`, it consumes columns our __labels__, our @math{x}s, our @math{y}s... and, in addition... it __consumes a function.__ `fit-model` produces a scatter plot, with the function graphed on top of it!
+
+@lesson-instruction{
+- Open the @starter-file{alg2-cheerios} and click "Run".
+- What do you Notice? What do you Wonder?
+}
+
+Models try to predict what @math{y} will be based on @math{x}. 
+
+@right{@image{images/residual.png, 200}} When you graph your model in Pyret, you can see that:
+
+- some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y})
+- some points are quite far away ("real" @math{y} is far from "predicted" @math{y})
+
+The distance between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data.
+
+@QandA{
+@Q{There are three terms in the legend. What do they refer to?}
+@A{The blue line is the model.}
+@A{The red dots are the data from the data set.}
+@A{Residuals refer to the vertical black lines connecting the data points to the model. They vary in length depending on how far above or below the model the data is situated.}
+
+@Q{Compare the `fit-model` display for `f` to the `fit-model` display for `g`. How are they similar? How are they different?}
+@A{The x-axis goes from 0 to 10 for both of them.}
+@A{The y-axis for `g` stops at 9. It goes up to 20 for `f`.}
+@A{Both `f` and `g` have a blue line and red dots, but `f` has more red dots below the blue line.}
+
+@Q{There are @math{S} and @math{R^2} values listed in the top left corner. How do they compare for the two models?}
+@A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `g` than they are for `f`.}
+}
 
 @teacher{Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to *scientific notation*. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
 
 @slidebreak
-
+ 
 @lesson-instruction{
 - Complete @printable-exercise{model-college-v-income-2.adoc}.
 - Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?
 }
 
-@right{@image{images/residual.png, 200}}Each datapoint has an @math{(x,y)} value, and your model tries to predict what @math{y} will be based on @math{x}. When you graph your model in Pyret, you can see that some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y}). But some points are quite far away ("real" @math{y} is far to "predicted" @math{y})!
-
-The distance between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data.
-
 @slidebreak
 @ifslide{@right{@image{images/residual.png, 200}}}The statistical term @vocab{S} refers to the @vocab{Standard Deviation of the Residuals}, which is a measure of how far away _all_ of data points are from the models you built. The closer they are to the model, the smaller the residuals are. Smaller residuals mean a smaller @vocab{S}, and a better model!
 
 @slidebreak
-@ifslide{@right{@image{images/residual.png, 200}}} There are many different tools to calculate the fitness of a model. @ifnotslide{You may even have heard of @math{R}, @math{R^2}, etc...}
+@ifslide{@right{@image{images/residual.png, 200}}} 
+There are many different tools to calculate the fitness of a model. @ifnotslide{You may even have heard of @math{R}, @math{R^2}, etc...}
 
 Statisticians and Data Scientists are careful to use the right tool for the job. In this case, the tool we're going to use is called the @vocab{Standard Deviation of the Residuals}, or @vocab{S}.
 

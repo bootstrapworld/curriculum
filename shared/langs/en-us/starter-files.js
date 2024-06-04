@@ -163,7 +163,7 @@ const Piecewise = {
   "collaboration-solution": {
     "title": "Collaboration Starter File - Solution",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1MPaX9lO--t2JI-pJvLthfXWJPuIdq3eN&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1MPaX9lO--t2JI-pJvLthfXWJPuIdq3eN"
     }
   },
   "mood-generator": {
@@ -328,7 +328,7 @@ const DSBasics = {
   "putting-it-all-together": {
     "title": "Animals with Helper Functions Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU"
     }
   },
    "food": {
@@ -711,7 +711,7 @@ const MoreAlg = {
   "method-1": {
     "title": "Method 1: Composing Functions",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy"
   },
    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=AXvgZkqnNi"
@@ -720,7 +720,7 @@ const MoreAlg = {
   "method-2": {
     "title": "Method 2: Defining Layers",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym"
   },
    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
@@ -786,7 +786,7 @@ const EarlyMath = {
   "negation":{
     "title": "Negation Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=iEDXtNyn4k"
@@ -795,7 +795,7 @@ const EarlyMath = {
   "negation-2":{
     "title": "Negation Starter File (2)",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=mu8jTQrApa"
@@ -813,7 +813,7 @@ const EarlyMath = {
   "exponents": {
     "title": "Exponents Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=gadP2T1dKH"
@@ -822,7 +822,7 @@ const EarlyMath = {
   "is-it-16": {
     "title": "Is it 16? Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=j0ExQBqaqm"
@@ -831,7 +831,7 @@ const EarlyMath = {
   "variables-code": {
     "title": "Variables & the Commutative Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x"
     },
     "wescheme": {
      "url": "https://www.wescheme.org/openEditor?publicId=iP1f3ZH2ki"
@@ -840,7 +840,7 @@ const EarlyMath = {
   "variables-code2": {
     "title": "Variables & the Associative Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=S1vWZ2AHlv"
@@ -969,7 +969,19 @@ const Alg2 = {
   "alg2-co2" : {
     "title" : "Carbon Dioxide Starter File",
     "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt&v=3ddb1dd"
+      "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt"
+    }
+  },
+  "alg2-cheerios" : {
+    "title" : "Cheerios Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1-hFDUHjQqhNEHrwkVMj6gZvOtvYWiNlP"
+    }
+  },
+  "alg2-state-demographics" : {
+    "title" : "State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
     }
   }
 }
