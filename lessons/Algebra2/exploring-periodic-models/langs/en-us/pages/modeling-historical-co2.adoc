@@ -1,0 +1,32 @@
+= Modeling Historical Carbon Dioxide Levels
+++++
+<style>
+td { padding: 0 !important; }
+td .autonum::after { content: ')' !important; }
+table table td { color: inherit !important; padding: 3px 0 !important; }
+body .center { padding: 0; }
+.directions p { line-height: 1.75 !important; }
+.fitb { min-width: 2em; }
+.studentAnswerMedium { min-width: 83pt !important; }
+</style>
+++++
+
+@define{COtwo}{@math{\mbox{CO}_2}}
+
+@link-instructions{
+The data below was generated from the @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+}
+
+@vspace{1ex}
+@image{../images/historical-scatter-plot.png}
+
+
+@n What @vocab{form} do you see here? @fitb{}{@ifsoln{Linear}}
+
+@n Use Pyret's `lr-plot` to find the optimal linear model, and write it below (using Pyret or Function Notation):
+
+@fitb{}{@ifsoln{f(x) = 1.8345x - 3296 or `fun f(x): (1.8345 * x) - 3296 end`}}
+
+@n What is the @math{S}-value of the model? @fitnb{10em}{@ifsoln{3.4245}} The R^2^ value? @fitb{10em}{@ifsoln{0.9916}}
+
+@n

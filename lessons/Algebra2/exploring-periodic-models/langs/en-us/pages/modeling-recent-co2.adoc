@@ -1,0 +1,97 @@
+= Modeling Recent Carbon Dioxide Levels
+++++
+<style>
+td { padding: 0 !important; }
+td .autonum::after { content: ')' !important; }
+table table td { color: inherit !important; padding: 3px 0 !important; }
+body .center { padding: 0; }
+.directions p { line-height: 1.75 !important; }
+.fitb { min-width: 2em; }
+.studentAnswerMedium { min-width: 83pt !important; }
+</style>
+++++
+
+@define{COtwo}{@math{\mbox{CO}_2}}
+
+@link-instructions{
+The data below was generated from the @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+}
+
+@vspace{1ex}
+
+[cols="<.<1a,>.^3a", grid="none", frame="none"]
+|===
+|
+[cols="^1a,^1a", options="header"]
+!===
+! `date`  	! `co2` (ppm)
+! 2022.792	! 415.74
+! 2022.875	! 417.47
+! 2022.958	! 418.99
+! 2023.042	! 419.48
+! 2023.125	! 420.30
+! 2023.208	! 420.98
+! 2023.292	! 423.36
+! 2023.375	! 424.00
+! 2023.458	! 423.68
+! 2023.542	! 421.83
+! 2023.625	! 419.68
+! 2023.708	! 418.51
+!===
+
+@do{
+(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
+(define p (abs (- lo-dateA lo-dateB)))
+(define a 4.13)
+(define b 6.28)
+(define c 419.87)
+(define d 2023.1)
+}
+
+@define{hi}{@show{hi}}
+@define{lo}{@show{lo}}
+@define{lo-dateA}{@show{lo-dateA}}
+@define{lo-dateB}{@show{lo-dateB}}
+@define{p}{@show{p}}
+@define{a}{@show{a}}
+@define{b}{@show{b}}
+@define{c}{@show{c}}
+@define{d}{@show{d}}
+
+|
+@image{../images/recent-co2-scatter.png}
+|===
+
+@n **Connect the dots on the scatter plot to form a line-graph.**
+
+@n The distance between the lowest @vocab{trough} and highest @vocab{peak} is @fitbruby{11em}{@ifsoln{@hi - @lo = @show{(* 2 a)}}}{parts per million}, so the @vocab{amplitude} (@math{a}) is @fitbruby{10.5em}{@ifsoln{@a}}{parts per million}
+
+@n Use the @vocab{amplitude} and @vocab{trough} data to compute the @vocab{vertical shift} (@math{c}) or "@vocab{midline}" of the data: @fitbruby{}{@ifsoln{@lo + @a = @c}}{parts per million}
+
+@n Estimate the @vocab{phase shift} by estimating the _decimal year_ when the data crosses the @vocab{midline} (@math{d}). @fitbruby{}{@ifsoln{~@d}}{years}
+
+@n Calculate the @vocab{period} between the @vocab{troughs} by subtracting the `dates` for the two lowest values: @fitbruby{}{@ifsoln{@lo-dateB - @lo-dateA = @p}}{years}
+
+@n Use the @vocab{period} with the formula @math{\mbox{period} = {2\pi \over \mbox{frequency}}}, to compute the @vocab{frequency} (@math{b}): @fitb{}{@ifsoln{@math{2\pi \over 1.0} = @b}}
+
+@n Using your computed values for @math{a}, @math{b}, @math{c}, and @math{d}, define your periodic function below in both Function and Pyret notation.
+
+@vspace{1ex}
+
+[cols="1a, ^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+
+@math{f(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{sin}(
+ @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{h-shift})
+) + @fitbruby{70pt}{@ifsoln{@c}}{v-shift}
+
+| *Pyret Notation*
+|
+@show{(code `(define (f x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
+|===
+
+
+@n Define this model in Pyret, and fit it to the `recent` data. What S-value do you get? @fitb{}{@ifsoln{Answers will vary, but should be close to 0.33}}
