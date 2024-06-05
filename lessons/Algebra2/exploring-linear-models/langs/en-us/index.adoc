@@ -175,7 +175,7 @@ Surprises in the District of Columbia: DC often shows up as an outlier or extrem
 
 === Synthesize
 
-- Share your scatter plots with one another (Perhaps by copying and pasting `scatter-plot` displays into a shared document and then labeling those displays?). 
+- Share your scatter plots with one another. _(Perhaps by copying and pasting `scatter-plot` displays into a shared document and then labeling those displays?)_
 - What possible relationships did you find?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
 
@@ -240,11 +240,11 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 
 
 ==== Strength
-@right{@image{images/A.gif, 200}}*A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+@right{@image{images/A.gif, 200}}A relationship is *strong* if knowing a data point's *x-value gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
-@right{@image{images/1a.gif, 200}}*A relationship is weak if x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+@right{@image{images/1a.gif, 200}}A relationship is *weak* if *x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
 
 @lesson-point{
 @vocab{Strength} indicates how closely the two variables are related.
@@ -257,21 +257,16 @@ Now that you've dug into the role that form, direction and strength play in asse
 @lesson-instruction{
 - We need to train our eyes to look for form so that we know whether we're justified in fitting a line to the scatter plot and reporting a correlation, neither of which would be appropriate if the form is non-linear.
 - Let's start by practicing matching scatter plots to their descriptions on @opt-printable-exercise{identifying-form-matching.adoc}.
+- Then turn to @opt-printable-exercise{identifying-form.adoc} and work with your partner or group to describe each scatter plot.
 }
 
-@teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
-
-@slidebreak
-
-
-@lesson-instruction{
-Work with your partner or group to describe each scatter plot on @opt-printable-exercise{identifying-form.adoc}.
-}
-
-@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
+@teacher{
+- You may want to review the matching answers before having students complete the second page.  
+- For students who are struggling, hearing what their peers are looking for is especially helpful at this stage, so be sure to have students _explain their thinking_ for these activities.
+- Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
 
 @lesson-instruction{
-Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
+Return to @printable-exercise{looking-for-patterns.adoc}, and apply what you've learned about Form, Direction and Strength to complete Part 2.
 }
 
 
@@ -311,10 +306,14 @@ We'd expect students to be able to surface much of the following:
 }
 
 @right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
-*If the rate of change is constant, the relationship is linear.*
+
+@lesson-point{
+If the rate of change is constant, the relationship is linear.
+}
 
 @QandA{
-@Q{Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
+@Q{Try comparing intervals of 2, instead of intervals of 1.}
+@Q{Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
 @A{Yes. When x increases by 2, y increases by 4.}
 }
 
@@ -335,8 +334,8 @@ Knowing the y-intercept and the "size of the growth", we can tell that the equat
 === Investigate
 
 @lesson-instruction{
-Return to Pyret and the @starter-file{alg2-states}.
-Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
+- Return to Pyret and the @starter-file{alg2-states}.
+- Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
 }
 
 @slidebreak
@@ -370,13 +369,13 @@ Suppose the United States were to add a new state. _Based on the data for the ex
 
 @slidebreak
 
-When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
+When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to @vocab{model} that relationship using math.
 
 These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the squared distances between the line and all the points on the plot. For relationships that look linear, the "predictor function" is a linear model of the form @math{f(x) = mx + b}. For historical reasons, this @vocab{line of best fit} is sometimes called the @vocab{regression line}.
 
 @slidebreak
 
-When we make a model, we want it to be the closest possible approximation of all the points. If we used another line instead of the "line of best fit," it wouldn't be as close to all the points as a group, and wouldn't do as good a job at predicting y-values from x-values.
+When we make a linear @vocab{model}, we want it to be the closest possible approximation of all the points. If we used another line instead of the "line of best fit," it wouldn't be as close to all the points as a group, and wouldn't do as good a job at predicting y-values from x-values.
 
 Let's find the best fit we can make for this dataset!
 
