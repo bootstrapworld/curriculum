@@ -1,0 +1,96 @@
+= Graphing Periodic Models
+++++
+<style>
+.autonum { font-weight: bold; padding-top: 0.3rem !important; }
+.autonum:after { content: ')' !important; }
+.sect1 {padding-bottom: 0.25em !important; }
+.fitb { padding-top: 1rem; }
+.FillVerticalSpace { grid-gap: 20px; margin-top: 5px; }
+
+td {
+  background-color: rgba(#fff, .5);
+  background-image:
+    linear-gradient(lightblue 2px, transparent 2px),
+    linear-gradient(270deg, lightblue 2px, transparent 2px),
+    linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
+    linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -3px 74px;
+  min-height: 1.6in;
+  max-height: 1.6in;
+  max-width: 2in;
+}
+
+td p.tableblock { position: absolute; }
+
+/* Add labels for axes */
+td::before, td::after { display: flex; font-style: italic; }
+td::before {
+  content: 'y';
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5em;
+  margin-top: -2em;
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform:rotate(270deg);
+    transform: rotate(270deg);
+}
+td::after {
+  content: 'x';
+  align-items: start;
+  justify-content: right;
+  margin-top: 2em;
+  margin-right: -0.5em;
+}
+</style>
+++++
+
+
+Periodic models with @math{sin} have the form *@math{f(x) = a \sin(b(x - d)) + c}*. To complete this page, you'll need to open @starter-file{alg2-exploring-periodic-desmos}. You will find this function on your screen in Desmos, along with four sliders for @math{a}, @math{b}, @math{c}, and @math{d}.
+
+== Amplitude @math{a}
+@n Setting *@math{b=1}, @math{c=0}, and @math{d=0}*, change @math{a} to 0, -10, and 10, graphing each curve below. **For each curve, label the coordinates at x=1, @math{-\pi}, and @math{\pi}.**
+
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{a=0} | @math{a=-10}  | @math{a=10}
+|===
+
+@n What does @math{a} tell us about a periodic function? @fitb{}{@ifsoln{How high and low the function will go. When @math{a} is zero the function is a horizontal line}} +
+@fitb{}{}
+
+@n Making sure that *@math{b=1}*, how far apart are the @vocab{peaks} ("highest points")? @fitb{4em}{@ifsoln{@math{2pi}}} The @vocab{troughs}? @fitb{4em}{@ifsoln{@math{2pi}}} Does @math{a} change this distance? @fitb{}{@ifsoln{No}}
+
+@vspace{1ex}
+
+*The distance between the highest or lowest points is called the @vocab{period} of the function: the interval over which the pattern repeats itself.*
+
+== Frequency @math{b}
+@n Setting *@math{a=1}, @math{c=0}, and @math{d=0}*, change @math{b} to 2, 0.5, and 1, graphing each curve below. **For each curve, label the two highest points to the RIGHT of the origin.**
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{b=0} | @math{b=0.5}  | @math{b=1}
+|===
+
+@n What is the @vocab{period} (see the definition after #3 on this page)
+             when *@math{b=2}*?   @fitb{5em}{@ifsoln{@math{pi}}}
+@hspace{1em} When *@math{b=1}*?   @fitb{5em}{@ifsoln{@math{2pi}}}
+@hspace{1em} When *@math{b=0.5}*? @fitb{}{@ifsoln{@math{4pi}}}
+
+@n As the @vocab{frequency} (@math{b}) goes UP, the @vocab{period} @fitb{11em}{@ifsoln{decreases / goes down}}. @hspace{1em} As the @vocab{frequency} (@math{b}) goes DOWN, the @vocab{period} @fitb{}{@ifsoln{increases / goes up}}
+
+== Horizontal Shift @math{d}
+@n Setting *@math{a=1}, @math{b=1}, and @math{c=0}*, change the value of @math{d} to @math{-\pi}, @math{\pi}, and @math{\pi/2} (roughly 1.57), graphing each curve in the squares below. **For each curve, label the two coordinates where the function crosses the x-axis closest to the origin**
+
+
+[.FillVerticalSpace, cols="1,1,1", frame="none"]
+|===
+| @math{d=-\pi} | @math{d=\pi}  | @math{d=\pi/2}
+|===
+
+@n What does @math{d} tell us about a periodic function? @fitb{}{@ifsoln{The horizontal shift}}
+
