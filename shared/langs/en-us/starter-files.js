@@ -444,7 +444,13 @@ const MoreDS = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb"
     }
-  }
+  },
+  "spell-checker": {
+    "title": "Spell Checker Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+    }
+  },  
 }
 
 const DSadvanceDisplays = {
