@@ -3,6 +3,7 @@
 <style>
 td { padding: 0 !important; }
 td .autonum::after { content: ')' !important; }
+td .codetwo { color: black; background: none; }
 table table td { color: inherit !important; padding: 3px 0 !important; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
@@ -18,15 +19,39 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 }
 
 @vspace{1ex}
-@image{../images/historical-scatter-plot.png}
+
+@center{@image{../images/historical-scatter-plot.png, 650}}
 
 
 @n What @vocab{form} do you see here? @fitb{}{@ifsoln{Linear}}
 
 @n Use Pyret's `lr-plot` to find the optimal linear model, and write it below (using Pyret or Function Notation):
 
-@fitb{}{@ifsoln{f(x) = 1.8345x - 3296 or `fun f(x): (1.8345 * x) - 3296 end`}}
+@vspace{1ex}
 
-@n What is the @math{S}-value of the model? @fitnb{10em}{@ifsoln{3.4245}} The R^2^ value? @fitb{10em}{@ifsoln{0.9916}}
+[cols="1a, ^.^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
 
-@n
+@math{f(x) =} @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code '(define (f x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
+|===
+
+@vspace{1ex}
+
+@n Define this function in Pyret, and use `fit-model` to compute the @math{S}-value of the model: @fitbruby{10em}{@ifsoln{3.425}}{parts per million}
+
+@n Could this linear model be improved, by combining it with your periodic model? Why or why not? @fitb{}{} +
+@fitb{}{} +
+@fitb{}{} +
+
+@vspace{1ex}
+
+@star Try to define a NEW function `p` in Pyret, which combines your periodic model with the one computed through linear regression. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
+
+@fitb{}{@ifsoln{fun p(x): (4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end
+@hspace{2em} **OR** @hspace{2em} @math{p(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}  }}

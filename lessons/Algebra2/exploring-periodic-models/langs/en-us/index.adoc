@@ -219,8 +219,8 @@ Let's review our coefficients:
 
 @lesson-instruction{
 - Open @link{https://www.tidetime.org/, TideTime.org}, and find a coastal city for which tidal data is available. Can you find the @vocab{amplitude}, @vocab{midline}, and @vocab{vertical shift} of the data?
-- With your partner, complete @printable-exercise{modeling-Ferris-wheel.adoc} using the last two slides of the Desmos activity.
-- @opt{Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-Ferris-wheel.adoc}. How do they fit?}
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last two slides of the Desmos activity.
+- @opt{Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How do they fit?}
 }
 
 === Synthesize
@@ -241,11 +241,10 @@ You'll likely need to support students in thinking through what these terms mean
 }
 
 == Modeling Periodic Relationships	@duration{45 minutes}
+@define{COtwo}{@math{\mbox{CO}_2}}
 
 === Overview
-Students explore the @math{\mbox{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
-
-@define{COtwo}{@math{\mbox{CO}_2}}
+Students explore the @COtwo dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
 === Launch
 Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
@@ -313,7 +312,7 @@ The `recent` table includes just the rows from trough-to-trough for the years 20
 
 === Investigate
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, and complete Questions 1-5 of @printable-exercise{exploring-co2.adoc}.
+- Open the @starter-file{alg2-co2}, and complete Questions 1-5 of @printable-exercise{modeling-recent-co2.adoc}.
 - Be ready to share your answers!
 }
 
@@ -339,7 +338,7 @@ The `recent` table includes just the rows from trough-to-trough for the years 20
 - TODO
 
 
-== Polynomial Models
+== More Complex Models
 
 === Overview
 Students discover that their periodic model for `recent` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
@@ -377,7 +376,6 @@ Let's just look at the historical data by itself, without worrying about models.
 
 @lesson-instruction{
 - Do you think it's possible for a model to be both linear _and_ periodic?
-- What would that even look like?
 }
 
 @slidebreak
@@ -385,3 +383,20 @@ Let's just look at the historical data by itself, without worrying about models.
 @lesson-instruction{
 - Complete @printable-exercise{modeling-historical-co2.adoc}
 }
+
+Our periodic model had two terms:
+
+- The vertical shift @math{419.87}, which described the midline
+- The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the midline
+
+But when we zoomed out to see the historical @COtwo data, we saw that the midline isn't horizontal at all!
+
+@lesson-point{The midline is our linear model!}
+
+By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @COtwo.
+
+@strategy{Going Deeper}{
+Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+}
+
+=== Synthesize
