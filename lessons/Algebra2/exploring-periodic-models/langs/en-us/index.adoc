@@ -2,8 +2,8 @@
 = Exploring Periodic Models
 ++++
 <style>
-table.rideData tr * { padding: 0 !important; margin: 2px !important; }
-table.rideData { width: 70%; margin: auto; }
+table tr * { padding: 0 !important; margin: 2px !important; }
+table { width: 70%; margin: auto; }
 </style>
 ++++
 @description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect sinusoidal behavior and then by looking data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
@@ -38,7 +38,7 @@ table.rideData { width: 70%; margin: auto; }
 
 |===
 
-== Looking for Patterns @duration{45 minutes}
+== Looking for Patterns
 
 === Overview
 Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
@@ -119,7 +119,7 @@ In this example, we know the Ferris wheel keeps turning, generating data "in bet
 Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
 
 === Launch
-@right{@image{images/Ferris-wheel.png, 300}}The relationship we're looking at is an example of a @vocab{periodic relationship}.
+@right{@image{images/ferris-wheel.png, 300}}We're looking at example of what's called a @vocab{periodic relationship}.
 
 - The y-value (`height`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
@@ -141,17 +141,45 @@ You've probably heard of related terms _sinusoidal functions_ or _trigonometric 
 As always, we advise you to use the term that works best for your classroom context!
 }
 
-When graphed, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise again to complete the cycle. This cycle then repeats over and over.
+@slidebreak
+
+Your teacher's seat on the Ferris Wheel can be thought of as a point on the edge of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! But how can we compute the y-coordinate, based on the rotation of the circle?
+
+@right{@image{images/unit-circle.png}}Angles can be measured in degrees or radians.
+
+A circle's angle of rotation doesn't rely on the size of the circle: no matter how large a wheel is, turning it halfway (180 degrees, or @math{pi} radians) will move the seat from one side of the circle to the other. How do we compute the y-coordinate of a point for _all_ angles?
+
+For any angle of rotation, we can draw a right triangle that crosses through both the point on the edge and the center of the circle. We can talk about angles using degrees or radians, but radians tend to be the easiest to reason about because they use multiples of @math{\pi}. **For this lesson we'll be working in radians.**
+
+@slidebreak
+
+@ifslide{@right{@right{@image{images/unit-circle.png}}}}Each leg of the triangle tells us the x- and y-coordinates of the point!
+
+[cols="^1a,^1a,^1a,^1a"]
+|===
+| Degrees 			| Radians		| Horizontal Leg (x)		| Vertical Leg (y)
+
+|  0° ("3 o'clock")	| 0 			| 1 @math{\times} radius	| 0
+| 90° ("12 o'clock")| @math{\pi/2}	| 0 						| 1 @math{\times} radius
+|180° ("9 o'clock")	| @math{\pi} 	| 1 @math{\times} radius	| 0
+|270° ("6 o'clock")	| @math{2/3\pi}	| 0 						| 1 @math{\times} radius
+|360° ("3 o'clock")	| @math{2\pi} 	| 1 @math{\times} radius	| 0
+|===
+
+As you can see, the length of the each leg is directly related to the angle of rotation. The length of the vertical leg (our y-coordinate!) is described by the _sine_ function: @math{\sin(θ)} The length of the horizontal leg is described by the _cosine_ function: @math{\cos(θ)}. **One full turn of the wheel (@math{2\pi} radians) returns the point to the original position.**
+
+@slidebreak
+
+When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
 @center{@image{images/wave-labeled-terms.png, 75%}}
 
 - @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
 - @vocab{Troughs} - the lowest points on the wave
-- @vocab{Period} - the length of a complete cycle, from peak-to-peak or trough-to-trough
+- @vocab{Period} - the length of a complete cycle, from peak-to-peak or trough-to-trough (in radians, this will always be @math{2\pi}).
 - @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 - @vocab{Amplitude} - the distance from a peak or trough to the midline
 
-@slidebreak
 
 @ifslide{
 @center{@image{images/wave-labeled-terms.png, 650}}
@@ -159,7 +187,7 @@ When graphed, periodic functions rise to a certain height above a @vocab{Midline
 
 Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
 
-You may already be familiar with two of the best-known periodic functions, @math{sin} and @math{cos}. Here are their contracts:
+Of course, Pyret has @math{sin} and @math{cos} built-in! Here are their contracts:
 
 @center{
 @show{(contracts
@@ -168,10 +196,10 @@ You may already be familiar with two of the best-known periodic functions, @math
 )}
 }
 
-*Note*: There are other periodic functions that do _not_ look like waves! For this exploration, we're going to limit ourselves to @math{sin} and @math{cos}.
+Both functions consume the number of radians, and produce the x- or y-coordinate of the point on the edge of a circle of radius 1. For larger radii, we can multiply the length by the radius. (There are other periodic functions that do _not_ look like waves, but for this exploration we're going to limit ourselves to @math{sin} and @math{cos}.)
 
 === Investigate
-Periodic models with @math{sin} have the form @math{f(x) = a \sin(b(x - d)) + c}
+Periodic models have the basic form @math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{f(x) = a \cos(b(x - d)) + c}
 
 @QandA{
 @Q{You've seen the coefficient @math{c} before. What affect do you think it has on the model?}
@@ -197,18 +225,18 @@ The period is the distance between one @vocab{trough} and the next in a cycle. T
 
 @lesson-point{@center{@math{\mbox{period} = {2\pi \over \mbox{frequency}}}}}
 
-- If the @vocab{period} is @math{2pi}, then the frequency is @math{1}.
-- If the @vocab{period} doubles to @math{4pi}, the @vocab{frequency} _halves_ to  @math{pi/2}
-- If the @vocab{period} is cut in half, the @vocab{frequency} _doubles_ to @math{2}
+- If the @vocab{period} is @math{2}, then the frequency is @math{\pi}.
+- If the @vocab{period} is cut in half to @math{1}, the @vocab{frequency} _doubles_ to @math{2\pi}
+- If the @vocab{period} doubles to @math{4}, the @vocab{frequency} _halves_ to  @math{pi/2}
 
 @slidebreak
 
 Let's review our coefficients:
 
-- @vocab{Amplitude} (@math{a}): the distance from a peak/trough to the midline (can be used with the @vocab{vertical shift} to produce the @vocab{midline})
-- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (can be used to compute the @vocab{period})
+- @vocab{Amplitude} (@math{a}): the distance from a peak/trough to the midline (can be added to the @vocab{trough} to produce the @vocab{midline})
+- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (can be divided by @math{2\pi} to compute the @vocab{period})
 - @vocab{Vertical Shift} (@math{c}): the amount the graph is shifted up (@math{c} > 0) or down (@math{c} < 0)
-- @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} > 0) or left (@math{c} < 0)
+- @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} < 0) or left (@math{c} > 0). Also called the @vocab{Phase Shift}.
 
 @slidebreak
 
@@ -218,9 +246,18 @@ Let's review our coefficients:
 }
 
 @lesson-instruction{
-- Open @link{https://www.tidetime.org/, TideTime.org}, and find a coastal city for which tidal data is available. Can you find the @vocab{amplitude}, @vocab{midline}, and @vocab{vertical shift} of the data?
 - With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last two slides of the Desmos activity.
-- @opt{Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How do they fit?}
+- Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
+}
+
+@teacher{
+*NOTE:* The altitude column of the Ferris wheel dataset has been rounded to make it easier for students to use. This rounding will result in _some_ error in the model.
+}
+
+Suppose you needed to compute the model for a _different_ Ferris Wheel. Would you know how to use the radius and speed of the wheel to compute the model?
+
+@lesson-instruction{
+- Complete @printable-exercise{make-a-wheel.adoc} with your partner.
 }
 
 === Synthesize
@@ -240,7 +277,7 @@ You'll likely need to support students in thinking through what these terms mean
 - The midline and the vertical shift are at 60° F (25 + 35 = 60).
 }
 
-== Modeling Periodic Relationships	@duration{45 minutes}
+== Modeling Periodic Relationships
 @define{COtwo}{@math{\mbox{CO}_2}}
 
 === Overview
@@ -321,16 +358,16 @@ The `recent` table includes just the rows from trough-to-trough for the years 20
 @QandA{
 @Q{What was the highest @COtwo value in the table? The lowest?}
 @A{424 and 415.74 parts per million.}
-@Q{What did you get for @math{a}?}
+@Q{What did you get for @vocab{amplitude} @math{a}?}
 @A{4.13, because the distance between the high and low readings is 8.26.}
-@Q{What did you get for @math{c}?}
+@Q{What did you get for the @vocab{vertical shift} @math{c}?}
 @A{Adding the amplitude (4.13) to the lowest value (415.74) gives us 419.87.}
-@Q{What did you estimate for the @vocab{phase shift} (@math{d})?}
+@Q{What did you estimate for the @vocab{phase shift} @math{d}?}
 @A{Answers will vary, but should be close to 2023.1}
-@Q{A periodic function completes one cycle every @math{2\pi}. How long is one period in _years?_}
+@Q{How many years make up one @vocab{period}?}
 @A{One year (this makes sense, since the seasonal cycle repeats every year!)}
-@Q{What did you get for @math{b}?}
-@A{@math{2\pi}, because @math{{2\pi \over 1.0} = 2\pi}.}
+@Q{What did you get for @vocab{frequency} @math{b}?}
+@A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
 }
 
 === Synthesize
@@ -400,3 +437,7 @@ Have your students refer back to @lesson-link{exploring-exponential-models}. As 
 }
 
 === Synthesize
+
+- Are there any other relationships you can think of, which might require a _combination of models_ like we did here?
+- If so, what are they?
+- Are there any relationships you can think of, which _cannot_ be modeled using any of the functions we've discussed so far?
