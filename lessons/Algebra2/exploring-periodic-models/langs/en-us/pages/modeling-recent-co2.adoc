@@ -3,6 +3,7 @@
 <style>
 td { padding: 0 !important; }
 td .autonum::after { content: ')' !important; }
+td .codetwo { color: black; background: none; }
 table table td { color: inherit !important; padding: 3px 0 !important; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
@@ -70,15 +71,15 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 
 @n Estimate the @vocab{phase shift} by estimating the _decimal year_ when the data crosses the @vocab{midline} (@math{d}). @fitbruby{}{@ifsoln{~@d}}{years}
 
-@n Calculate the @vocab{period} between the @vocab{troughs} by subtracting the `dates` for the two lowest values: @fitbruby{}{@ifsoln{@lo-dateB - @lo-dateA = @p}}{years}
+@n Calculate the @vocab{period} between the @vocab{troughs} by subtracting the `dates` for the lowest value in 2022 and 2023: @fitbruby{}{@ifsoln{@lo-dateB - @lo-dateA = @p}}{years}
 
-@n Use the @vocab{period} with the formula @math{\mbox{period} = {2\pi \over \mbox{frequency}}}, to compute the @vocab{frequency} (@math{b}): @fitb{}{@ifsoln{@math{2\pi \over 1.0} = @b}}
+@n If @math{\mbox{period} = {2\pi \over \mbox{frequency}}}, what is the @vocab{frequency}? @fitb{}{@ifsoln{@math{2\pi} or @b}}
 
 @n Using your computed values for @math{a}, @math{b}, @math{c}, and @math{d}, define your periodic function below in both Function and Pyret notation.
 
 @vspace{1ex}
 
-[cols="1a, ^12a", frame="none", stripes="none"]
+[cols="1a, ^.^12a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 |
@@ -88,7 +89,8 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
  @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{h-shift})
 ) + @fitbruby{70pt}{@ifsoln{@c}}{v-shift}
 
-| *Pyret Notation*
+| @vspace{1ex} +
+*Pyret Notation*
 |
 @show{(code `(define (f x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
 |===
