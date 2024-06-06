@@ -1,0 +1,66 @@
+= Multi Bar & Stacked Bar Charts - Notice and Wonder
+
+////
+The refugee charts below are drawn from the Refugee Starter File:
+https://code.pyret.org/editor#share=1rettr-BwPIJ5sSLRJFM8S8J4nyiHCtaZ&v=78aeaeb
+
+The code used to filter the tables and generate them is:
+t = refugees-table.filter(lam(r): string-contains(r["region"], "America") end)
+stacked-bar-chart(t, "region", "democracy")
+multi-bar-chart(t, "region", "democracy")
+
+The animals charts are drawn from the expanded animals starter file:
+https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0&v=4d870d2
+
+The code used to filter the tables and generate them is:
+t = more-animals.filter(lam(r): string-contains(r["species"], "r" )end)
+stacked-bar-chart(t, "species", "sex")
+multi-bar-chart(t,  "species", "sex")
+////
+
+++++
+<style>
+.tooltip, td, th { padding: 0 !important; }
+img { max-height: 225px; }
+table.stripes-odd tr:nth-of-type(odd) td { background: lightgray; }
+</style>
+++++
+
+[cols="^.^1a,^.^1a", stripes=none, grid=none, frame =none]
+|===
+|The displays on the left are called *multi bar charts*. |The displays on the right are called *stacked barcharts*.
+|===
+
+@vspace{1ex}
+
+[cols="^.^1a,^.^1a", stripes=odd]
+|===
+2+| *Political Structure of Countries in the Americas*
+|@image{../images/politics-multi.png, width}
+|@image{../images/politics-stacked.png, width} 
+
+2+| *Distribution of sexes across Cats, Dogs and Rabbits*
+|@image{../images/multi-species-sex2.png, width}
+|@image{../images/stacked-species-sex2.png, width}
+|===
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols="^1a,^1a",options="header"]
+|===
+| What do you Notice? 	| What do you Wonder?
+|						|
+|===
+
+ 
+@n Is it possible that the same data was used for the multi bar charts as for the stacked bar charts? How do you know?
+
+@fitb{}{@ifsoln{yes. The proportions are consistent.}}
+
+@n Write a question that it would be easiest to answer by looking at one of the multi bar charts.
+
+@fitb{}{@ifsoln{Sample response: How many more rabbits are male than female?}}
+
+@n Write a question that it would be easiest to answer by looking at one of the stacked bar charts.
+
+@fitb{}{@ifsoln{Sample response: Which region had the highest proportion of full democracies?}}

@@ -25,30 +25,53 @@ This page is designed to be used with the @starter-file{expanded-animals}.
 
 == Part B
 
-Sometimes we want to compare _sub-groups across groups_. In this example, we want to compare the distribution of sexes across each species.
+Sometimes we want to compare _sub-groups across groups_. In this example, we want to compare the distribution of sexes across each species. Fortunately, CODAP allows us to build a variety of displays where we specify both a group and a subgroup.
 
 @vspace{1ex}
 
-Fortunately, Pyret has two functions that let us specify both a group and a subgroup:
+[cols="1a,1a", stripes="none"]
+|===
 
-@vspace{1ex}
+|
+To create a *stacked bar chart*...
 
-[.indentedpara]
---
-@show{(contract 'stacked-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
+|
 
-@show{(contract 'multi-bar-chart '((table-name Table) (group String) (subgroup String)) "Image")}
---
+To make a *multi bar chart*...
 
-@n Make a `stacked-bar-chart` showing the distribution of sexes across species in our shelter.
+|
 
-@n Make a `multi-bar-chart` showing the distribution of sexes across species in our shelter.
+- create a graph of randomly distributed points
+
+- drag the _group_ to an axis
+
+- drag the _sub-group_ to the center of the display
+
+- from the Configuration menu, select "Fuse Dots into Bars"
+
+
+|
+- create a graph of randomly distributed points
+
+- drag the _sub-group_ to an axis
+
+- drag the _group_ to the `+` in the upper left-hand corner of the graph
+
+- from the Configuration menu, select "Fuse Dots into Bars"
+
+- to the right of the graph, locate and click the "Rescale Display" button (it looks like four arrows pointing in different directions) until you can see all of the data.
+
+|===
+
+@n Make a stacked bar chart showing the distribution of sexes across species in our shelter.
+
+@n Make a multi bar chart showing the distribution of sexes across species in our shelter.
 
 @n What do you notice? @fitb{}{@ifsoln{Students may notice: The snails and clownfish are all hermaphrodites.}}
 
 @fitb{}{@ifsoln{For the other species there are about as many males as females.}}
 
-@fitb{}{@ifsoln{From the `stacked-bar-chart` we have no idea that there are way more dogs than snails.}}
+@fitb{}{}
 
 @n What do you wonder? @fitb{}{}
 
@@ -68,10 +91,6 @@ Fortunately, Pyret has two functions that let us specify both a group and a subg
 
 Which display would be most efficient for answering your question? @fitb{20em}{} Make the display.
 
-What did you learn? @fitb{}{}
-
 @n Write a different question that would be more efficient to answer with the other kind of display. @fitb{}{}
 
 @fitb{}{}
-
-What did you learn from making this display? @fitb{}{}
