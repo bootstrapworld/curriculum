@@ -1,13 +1,13 @@
 = Fit a Model: College Degrees v. Income
 
 [.linkInstructions]
-This page will require you to work with your copy of the @starter-file{alg2-states} in which you should have already defined `f(x)` based on your work on @printable-exercise{model-college-v-income-1.adoc}.
+Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
 
-@vspace{1ex}
+== `al-ak`
 
-_Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" f))} in the Interactions Area._
+_Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" al-ak))} in the Interactions Area._
 
-@n Find the points for AL and AK along the predictor line. _Hint: Their coordinates will help you know where to look!_
+@n Find the points for AL and AK along the predictor line. _Hint: You know their coordinates and they will help you know where to look!_
 
 @n What do you Notice?
 
@@ -25,15 +25,38 @@ _Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "medi
 
 @fitb{}{}
 
-@n In the upper left corner, you'll see that it says "S", followed by a number. What is that number? @fitb{}{@ifsoln{~9930.59}}
+@n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{~9930.59}}
 
-@n Change the definition of `f` so that the slope is _less steep_ and click "Run". What is the @math{S} value now? @fitb{}{}
+== Other Models
 
-@n Change the definition of `f` so that the slope is _negative_ and click "Run". What is the @math{S} value now? @fitb{}{}
+In the definitions area, find the section titled _Define some other models by modifying al-ak_. +
 
-@n Change the definition of `f` so that it draws a horizontal line and click "Run". What is the @math{S} value? @fitb{}{}
+- For now, all three definitions in this section are exactly the same as `al-ak`.
+- You will be changing them according to the directions below.
 
-@n Change the y-intercept so that the horizontal line passes through more of the points. What is the @math{S} value? @fitb{}{}
+@n If you wanted the model to be _less steep_, what slope could you use? @fitb{}{}
+
+- Change the definition for `less-steep` to use the slope you wrote above.  
+
+  * Click "Run" to load your new definition. In the Interactions Area type: @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))} 
+  * What is the @math{S} value of `less-steep`? @fitb{}{}
+
+- Identify a y-intercept that would make the model fit the data better: @fitb{}{}  
+
+  * Adjust the definition to use the new y-intercept and click "Run". 
+  * Hit the up arrow in the Interactions Area and click return/Enter to fit the model again. 
+  * What is the @math{S} value of `less-steep` now? @fitb{}{}
+
+@n Change the definition of `negative` so that it models the data with a slope that is _negative_. 
+
+  * Click "Run" and type the code to fit this model to the data. 
+  * What slope did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
+
+@n Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model. What is the @math{S} value? @fitb{}{}
+
+@n Change the y-intercept so that the horizontal line passes through more of the points. Click "Run" and fit this model. 
+
+  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
 
 @n What do you think @math{S} tells us? @fitb{}{@ifsoln{It measures how well the model fits the data}}
 
