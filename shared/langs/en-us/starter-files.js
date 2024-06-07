@@ -918,12 +918,6 @@ const Alg2 = {
       "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
     }
   },
-   "alg2-states": {
-    "title": "State Demographics Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
-    }
-  },
   "alg2-ca-rent" : {
     "title": "CA Minimum Wage and Rent Starter File",
     "pyret" : {
@@ -978,11 +972,17 @@ const Alg2 = {
       "url" : "https://code.pyret.org/editor#share=1-hFDUHjQqhNEHrwkVMj6gZvOtvYWiNlP"
     }
   },
-  "alg2-state-demographics" : {
-    "title" : "State Demographics Starter File",
+  "alg2-states-intro" : {
+    "title" : "Preview: State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1ZhMIricSR89-NZq1pgZWP_memefAJw65"
+    }
+  },
+  "alg2-states-fit-model" : {
+    "title" : "Fitting a Model: State Demographics Starter File",
     "pyret" : {
       "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
-    }
+    },
   }
 }
 
