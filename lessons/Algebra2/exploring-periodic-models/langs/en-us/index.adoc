@@ -130,7 +130,7 @@ But we don't have any functions that keep repeating, going up and down over time
 
 @slidebreak
 
-That's a problem for us as data scientists, because so many things in nature comes in _cycles:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
+That's a problem for us as data scientists, because so many things in nature come in _cycles:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
 
 In this lesson we'll explore these periodic relationships, and a new class of functions - _@vocab{periodic functions}_ - that we can use to model cyclical relationships like these.
 
@@ -143,13 +143,13 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @slidebreak
 
-Your teacher's seat on the Ferris Wheel can be thought of as a point on the edge of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! But how can we compute the y-coordinate, based on the rotation of the circle?
+Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! But how can we compute the y-coordinate, based on the rotation of the circle?
 
 @right{@image{images/unit-circle.png}}Angles can be measured in degrees or radians.
 
 A circle's angle of rotation doesn't rely on the size of the circle: no matter how large a wheel is, turning it halfway (180 degrees, or @math{pi} radians) will move the seat from one side of the circle to the other. How do we compute the y-coordinate of a point for _all_ angles?
 
-For any angle of rotation, we can draw a right triangle that crosses through both the point on the edge and the center of the circle. We can talk about angles using degrees or radians, but radians tend to be the easiest to reason about because they use multiples of @math{\pi}. **For this lesson we'll be working in radians.**
+For any angle of rotation, we can draw a right triangle that crosses through both the point on the circumference and the center of the circle. We can talk about angles using degrees or radians, but radians tend to be the easiest to reason about because they use multiples of @math{\pi}. **For this lesson we'll be working in radians.**
 
 @slidebreak
 
@@ -180,12 +180,15 @@ When graphed from 0-@math{2\pi}, periodic functions rise to a certain height abo
 - @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 - @vocab{Amplitude} - the distance from a peak or trough to the midline
 
+@slidebreak
 
 @ifslide{
 @center{@image{images/wave-labeled-terms.png, 650}}
 }
 
 Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
+
+@slidebreak
 
 Of course, Pyret has @math{sin} and @math{cos} built-in! Here are their contracts:
 
@@ -196,7 +199,14 @@ Of course, Pyret has @math{sin} and @math{cos} built-in! Here are their contract
 )}
 }
 
-Both functions consume the number of radians, and produce the x- or y-coordinate of the point on the edge of a circle of radius 1. For larger radii, we can multiply the length by the radius. (There are other periodic functions that do _not_ look like waves, but for this exploration we're going to limit ourselves to @math{sin} and @math{cos}.)
+Both functions consume the number of radians, and produce the x- or y-coordinate of the point on the circumference of a circle of radius 1. For larger radii, we can multiply the length by the radius. (There are other periodic functions that do _not_ look like waves, but for this exploration we're going to limit ourselves to @math{sin} and @math{cos}.)
+
+Pyret knows about @math{\pi}, too!
+
+@lesson-instruction{
+- In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
+- How would you evaluate @math{\pi \over 2}? @math{3\pi}?
+}
 
 === Investigate
 Periodic models have the basic form @math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{f(x) = a \cos(b(x - d)) + c}
@@ -234,7 +244,7 @@ The period is the distance between one @vocab{trough} and the next in a cycle. T
 Let's review our coefficients:
 
 - @vocab{Amplitude} (@math{a}): the distance from a peak/trough to the midline (can be added to the @vocab{trough} to produce the @vocab{midline})
-- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (can be divided by @math{2\pi} to compute the @vocab{period})
+- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (divided @math{2\pi} by @math{b} to compute the @vocab{period})
 - @vocab{Vertical Shift} (@math{c}): the amount the graph is shifted up (@math{c} > 0) or down (@math{c} < 0)
 - @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} < 0) or left (@math{c} > 0). Also called the @vocab{Phase Shift}.
 

@@ -31,7 +31,7 @@ table tr td { padding: .3em .625em; }
 
 == Modeling with @math{sin}
 
-For this section, you'll need to load @starter-file{alg2-exploring-periodic-desmos} opened to the __second__ slide ("Modeling the Ferris Wheel Dataset").
+For this section, you'll need to load @starter-file{alg2-exploring-periodic-desmos} opened to the __second__ slide ("Modeling the Ferris Wheel Dataset (sin)").
 
 You'll find the data from the Ferris Wheel plotted in red, along with a basic periodic model of the form @math{f(x) = a \sin(b(x - d)) + c}.
 
@@ -41,7 +41,7 @@ You'll find the data from the Ferris Wheel plotted in red, along with a basic pe
 
 @n The @vocab{period} of the data is @fitbruby{10em}{@ifsoln{30}}{minutes}. @hspace{3em} If @math{\mbox{period} = {2\pi \over \mbox{frequency}}}, what is the @vocab{frequency}? @fitbruby{10em}{@ifsoln{0.209}}{cycles per minute}
 
-@n Write your model below in both Function and Pyret notation. Express the horizontal shift in terms of @math{pi}.
+@n Adjust the slider for horizontal shift to find the best fit, then write your model below in Function and Pyret notation. **Express @math{d} in terms of @math{pi}.**
 
 [cols="1a, .>10a", frame="none", stripes="none"]
 |===
@@ -50,20 +50,18 @@ You'll find the data from the Ferris Wheel plotted in red, along with a basic pe
 @hspace{2em}
 @math{f(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
 @math{sin}(
- @fitbruby{70pt}{@ifsoln{0.21}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{2.5pi}}}{h-shift})
+ @fitbruby{70pt}{@ifsoln{0.209}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{2.375pi}}}{h-shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{v-shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (?ANS 0.21) (- x (?ANS (* 2.5 PI)))))) (?ANS 105))))}
+@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (?ANS 0.21) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
 |===
 
 == Translating from @math{sin} to @math{cos}
 
 For this section, you'll need to switch to the _third_ slide ("Translating from sin to cos"). You'll see a function f(x) defined here graphed in red, which uses @math{cos} instead of @math{sin}.
-
-*Open the "sin function" folder, by clicking the triangle ([.desmosbutton]#{caret}#), and turn on the blue graph of g(x) by clicking the "points" circle ([.desmosbutton]#{points}#).*
 
 @n Adjust the sliders so that the function @math{g} perfectly overlaps the function @math{f}. What is the value of @math{a}? @fitb{5em}{@ifsoln{10}} @math{b}? @fitb{5em}{@ifsoln{1}} @math{c}? @fitb{}{@ifsoln{2}}
 
@@ -82,6 +80,8 @@ For this section, you'll need to switch to the _third_ slide ("Translating from 
 @fitb{}{}
 
 == Modeling with @math{cos}
+To see how this applies to the Ferris Wheel, switch to the _fourth_ slide ("Modeling the Ferris Wheel Dataset (cos)").
+
 
 @n Translate your @math{sin}-based model to a @math{cos}-based one. Express the horizontal shift in terms of @math{pi}.
 
@@ -91,7 +91,7 @@ For this section, you'll need to switch to the _third_ slide ("Translating from 
 |
 @hspace{2em}
 @math{g(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
-@math{sin}(
+@math{cos}(
  @fitbruby{70pt}{@ifsoln{0.21}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{4.75pi}}}{h-shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{v-shift}
 

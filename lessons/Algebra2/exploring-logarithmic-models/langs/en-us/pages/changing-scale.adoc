@@ -4,6 +4,7 @@
 <style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
+body.workbookpage .studentAnswerShort { min-width: 50pt; }
 </style>
 ++++
 
@@ -56,7 +57,11 @@ _Look at the numbers along the x-axis, which increase as they go from left to ri
 |===
 |
 @math{f(x) = }@fitbruby{10em}{}{log coefficient (a)}@math{\log_{10}(x) + }@fitbruby{10em}{}{vertical shift (c)}
+@hspace{6em}
+@show{(code '(define (f x) (+ (* (?ANS "") (log x)) (?ANS ""))))}
 |===
+
+
 
 @n In Pyret, modify `f(x)` to define this model, and fit it using the `fit-model` function. What is your @math{S}? @fitb{}{}
 
@@ -82,6 +87,8 @@ _Look at the numbers along the x-axis, which increase as they go from left to ri
 |===
 |
 @math{f(x) = }@fitbruby{10em}{@ifsoln{~12 to ~16}}{log coefficient (b)}@math{\log_{10}(x) + }@fitbruby{10em}{@ifsoln{~8 to ~25}}{vertical shift (c)}
+@hspace{6em}
+@show{(code '(define (f x) (+ (* (?ANS "") (log x)) (?ANS ""))))}
 |===
 
 @n In Pyret, modify `f(x)` to define this model, and fit it using the `fit-model` function. What is your @math{S}? @fitb{}{}
