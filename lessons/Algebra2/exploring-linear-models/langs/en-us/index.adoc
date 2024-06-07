@@ -36,10 +36,16 @@
 
 | Key Points For The Facilitator
 |
-This lesson focuses on _linear relationships_, and the math content of the lesson is primarily a review of those concepts from Algebra 1 (the third section includes topics that may be new to some students). That being said, the bulk of the new learning serves two objectives:
+- The math content of this lesson is primarily a review from Algebra 1.
+- This lesson introduces necessary programming skills while students practice exploring _linear relationships_. 
+- This lesson establishes a structure for exploring relationships in data that students will make use of in subsequent explorations: 
+  	* build a model from samples
+  	* fit a model
+  	* improve upon the model
+- Two of the starter files referenced in this file pull data from the same spreadsheet. 
+  * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file. 
+  * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
 
-- This lesson establishes a structure for exploring relationships in data: (1) build a model from samples, (2) fit a model, and (3) better modeling. Students will repeat this process in subsequent explorations.
-- The lesson also includes some programming content, allowing students to learn necessary programming skills while practicing the math they already know.
 |===
 
 == Looking for Patterns @duration{45 minutes}
@@ -51,8 +57,7 @@ This lesson focuses on _linear relationships_, and the math content of the lesso
 We're going to search for relationships within a dataset about all the states in the US. But first, let's take a moment to (1) develop confidence in our ability to use functions for working with tables and making displays, and (2) build familiarity with a new dataset that we are going to spend a lot of time with.
 
 @lesson-instruction{
-- Open the @starter-file{alg2-states}.
-- From the File menu, select "Save a Copy", and click "Run".
+- Open the @starter-file{alg2-states-intro}, click "Run", and save a copy of the file.
 - Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
 }
 
@@ -66,7 +71,13 @@ We're going to search for relationships within a dataset about all the states in
 @A{`y = row-n(states-table, 1)` for the second row. Change the `1` to a `2` for the third.}
 }
 
-In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. Any time we use @math{x} after that, we can substitute in the value of @math{4}. This works in Pyret, too. But in Pyret, values can be more than just numbers! In this file, the variables `alabama` and `alaska` are defined as rows from the table.
+In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. 
+
+@indented{Any time we see @math{x} after that, we can substitute in the value of @math{4}.}
+
+This works in Pyret, too. But in Pyret, values can be more than just numbers! 
+
+@indented{In this file, the variables `alabama` and `alaska` are defined as rows from the table.}
 
 @teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
 }
@@ -82,12 +93,13 @@ In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}. 
 
 === Investigate
 
-Before we dig deeper into @starter-file{alg2-states}, let's think back to the animals at the shelter in order to introduce some new data science concepts.
+Before we dig deeper into the State Demographics data, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
 @QandA{
 @Q{Think back to the dataset we explored about animals at the shelter.}
 @Q{Would you imagine that younger animals get adopted faster than older animals? Why or why not?}
-@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely.}
+@A{(For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
 @Q{What kind of data does the `age` variable represent? What about `weeks`?}
 @A{Both `age` and `weeks` are quantitative variables.}
 @Q{What kind of display would help us analyze the relationship between age and adoption time?}
@@ -96,7 +108,9 @@ Before we dig deeper into @starter-file{alg2-states}, let's think back to the an
 
 @slidebreak
 
-Pie and bar charts help us see the _frequency_ of values in a single _categorical_ column. There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
+Pie and bar charts help us see the _frequency_ of values in a single _categorical_ column. 
+
+There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
 
 But what we really want is a display that will help us search for _a relationship between two quantitative columns_, and that's exactly what scatter plots do!
 
@@ -123,13 +137,15 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 
 @slidebreak
 
-We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+@lesson-instruction{
+- It's time to dig back into the State Demographics data.
+- We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+}
 
 @teacher{Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!}
 
 @lesson-instruction{
-- It's time to return to the @starter-file{alg2-states}!
-- Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc}.
+- Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc} using @starter-file{alg2-states-intro}.
 - Do not go on to Part 2! We'll return to that later in the lesson.
 }
 
@@ -137,9 +153,10 @@ We are going to be focusing some of our thinking on our state and its neighbors.
 
 @strategy{Exploring the States Dataset}{
 
-The @starter-file{alg2-states} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
+The @starter-file{alg2-states-intro} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related. 
 
-Making sense: can students predict these relationships, and explain their thinking? (If so, probably not worth having them spend time on more than one of them!)
+Making sense: can students predict these relationships, and explain their thinking? +
+(If so, probably not worth having them spend time on more than one of them!)
 
 - `pop-2010` vs. `pop-2020`.
 - `pop-2020` vs. `num-households`
@@ -158,10 +175,9 @@ Surprises in the District of Columbia: DC often shows up as an outlier or extrem
 
 }
 
-
 === Synthesize
 
-- Share your scatter plots with one another (copying and pasting `scatter-plot` displays into a shared document, for example, and then labeling those displays). 
+- Share your scatter plots with one another. _(Perhaps by copying and pasting `scatter-plot` displays into a shared document and then labeling those displays?)_
 - What possible relationships did you find?
 - Did you and your classmates commonly use any words to describe the relationships you observed?
 
@@ -176,7 +192,9 @@ Students identify and make use of @vocab{correlations} in scatter plots. They le
 
 Scatter plots let us visualize the relationship between two quantitative columns. If no relationship exists, the points in the scatter plot just appear as a shapeless cloud. But if there _is_ a relationship, the points will form some kind of pattern. When we build scatter plots, we are searching for patterns between two quantitative variables.
 
-These patterns can be described by three terms: *form*, *direction*, and *strength*.
+These patterns can be described by three terms: form, direction and strength.
+
+==== Form
 
 @slidebreak
 
@@ -201,6 +219,8 @@ These patterns can be described by three terms: *form*, *direction*, and *streng
 
 @slidebreak
 
+==== Direction
+
 If the relationship clusters around a straight line, we can talk about _direction._
 
 @right{@image{images/C.gif, 200 }}*Positive*: The line slopes up as we look from left-to-right. Positive relationships are by far the most common because of natural tendencies for variables to increase in tandem. For example, “the older the animal, the more it tends to weigh”.
@@ -219,15 +239,18 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 
 @slidebreak
 
-@lesson-point{
-@vocab{Strength} indicates how closely the two variables are related.
-}
 
-@right{@image{images/A.gif, 200}}*A relationship is strong if knowing the x-value of a data point gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
+
+==== Strength
+@right{@image{images/A.gif, 200}}A relationship is *strong* if knowing a data point's *x-value gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
-@right{@image{images/1a.gif, 200}}*A relationship is weak if x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+@right{@image{images/1a.gif, 200}}A relationship is *weak* if *x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
+
+@lesson-point{
+@vocab{Strength} indicates how closely the two variables are related.
+}
 
 === Investigate
 
@@ -235,22 +258,17 @@ Now that you've dug into the role that form, direction and strength play in asse
 
 @lesson-instruction{
 - We need to train our eyes to look for form so that we know whether we're justified in fitting a line to the scatter plot and reporting a correlation, neither of which would be appropriate if the form is non-linear.
-- Let's start by practicing matching the scatter plots to their descriptions on @opt-printable-exercise{identifying-form-matching.adoc}.
+- Let's start by practicing matching scatter plots to their descriptions on @opt-printable-exercise{identifying-form-matching.adoc}.
+- Then turn to @opt-printable-exercise{identifying-form.adoc} and work with your partner or group to describe each scatter plot.
 }
 
-@teacher{Review student answers, and have students _explain their thinking_ for this activity. For students who are struggling, hearing what their peers are looking for is especially helpful at this stage.}
-
-@slidebreak
-
-
-@lesson-instruction{
-In pairs or small groups, complete @opt-printable-exercise{identifying-form.adoc}
-}
-
-@teacher{Review student answers. Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
+@teacher{
+- You may want to review the matching answers before having students complete the second page.  
+- For students who are struggling, hearing what their peers are looking for is especially helpful at this stage, so be sure to have students _explain their thinking_ for these activities.
+- Some of the answers are not so clear-cut, and students may disagree about what constitutes a "strong" vs. "weak" correlation. We've tried to choose scatter plots that clearly fall into one category or the other, but without diving into the algorithm for linear regression students may find this exercise somewhat subjective... and that's ok!}
 
 @lesson-instruction{
-Return to @printable-exercise{looking-for-patterns.adoc}, and complete Part 2.
+Return to @printable-exercise{looking-for-patterns.adoc}, and apply what you've learned about Form, Direction and Strength to complete Part 2.
 }
 
 
@@ -282,19 +300,23 @@ We'd expect students to be able to surface much of the following:
 - Vertical lines are not functions, because their slope is undefined as a result of their horizontal change being zero.
 - The steepness of a line can be described by its @vocab{slope} (or _constant_ @vocab{rate of change}).
 - The @vocab{slope} can be calculated from any two points.
-- Students may remember the @vocab{slope} as @math{\frac{change \; in \; y}{change \; in \; x}} or @math{\frac{rise}{run}} or @math{\frac{y_2 - y_1}{x_2 - x_1}}. 
+- Students may remember the @vocab{slope} as @math{\frac{change \; in \; y}{change \; in \; x}} or @math{{rise}\over{run}} or @math{\frac{y_2 - y_1}{x_2 - x_1}}. 
 - The point where the line crosses the y-axis is called the @vocab{y-intercept}.
 - The x-coordinate of the @vocab{y-intercept} always starts with zero, e.g. @math{(0, y)}.
 - Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
 - Horizontal lines have a constant rate of change of zero.
 }
 
-@right{@image{images/difference-table-linear.png, 200}} Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
-*If the rate of change is constant, the relationship is linear.*
+@right{@image{images/difference-table-linear.png, 200}}Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
+
+@lesson-point{
+If the rate of change is constant, the relationship is linear.
+}
 
 @QandA{
-@Q{Try comparing intervals of 2, instead of intervals of 1. Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
-@A{Yes.}
+@Q{Try comparing intervals of 2, instead of intervals of 1.}
+@Q{Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
+@A{Yes. When x increases by 2, y increases by 4.}
 }
 
 
@@ -314,41 +336,55 @@ Knowing the y-intercept and the "size of the growth", we can tell that the equat
 === Investigate
 
 @lesson-instruction{
-Return to Pyret and the @starter-file{alg2-states}.
-Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
+- Return to Pyret and the @starter-file{alg2-states-intro}.
+- Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
+@ifslide{
+- What do you notice about the @vocab{Form} of this scatter plot? What pattern do you see?}
 }
 
 @slidebreak
 
-@center{@image{images/college-v-income.png}}
-
-This scatter plot appears to show a positive, linear relationship: states with higher percentages of college graduates tend to have higher median household incomes.
+@ifslide{@right{@image{images/college-v-income.png}}
+This scatter plot appears to show a positive, linear relationship: +
+_States with higher percentages of college graduates tend to have higher median household incomes._
+}
+@ifnotslide{@center{@image{images/college-v-income.png}}
 
 @slidebreak
-@ifslide{@right{@image{images/college-v-income.png}}}
-@lesson-instruction{
-Suppose the United States were to add a new state. _Based on the data for the existing 50 states (plus DC!)..._
 
-- What median household income would you predict, if exactly 30% of the new state's citizens had attended college?
-- What would you predict if 20% had attended college? 
-- If 40% had attended college?
+@QandA{
+@Q{What do you notice about the @vocab{Form} of this scatter plot? What pattern do you see?}
+@A{This scatter plot appears to show a positive, linear relationship: +
+_States with higher percentages of college graduates tend to have higher median household incomes._}
+}
+}
+
+@QandA{
+Suppose the United States were to add a new state. +
+_Based on the data for the existing 50 states (plus DC!)..._
+
+@Q{What median household income would you predict, if exactly 30% of the new state's citizens had attended college?}
+@A{Answers will vary. But should be above 50,000 and below 60,000}
+
+@Q{What would you predict if 20% had attended college?}
+@A{Answers will vary. But should be around 40,000}
+
+@Q{If 40% had attended college?}
+@A{Answers will vary. But should be upwards of 65,000}
 }
 
 @teacher{
-@right{@image{images/pyret-window.png, 150}} Let students discuss, and explain their thinking. If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatterplot and clicking "Redraw".
+@right{@image{images/pyret-window.png, 150}}Let students discuss, and explain their thinking.
+
+- If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line. 
+- Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our display, which we can do by typing in the cells on the right side of the scatter plot and clicking "Redraw".
 }
 
 @slidebreak
 
-When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to model that relationship using math.
+When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to @vocab{model} that relationship using math.
 
-These models are just functions being graphed on top of the scatter plot, with the goal of minimizing the squared distances between the line and all the points on the plot. For relationships that look linear, the "predictor function" is a linear model of the form @math{f(x) = mx + b}. For historical reasons, this @vocab{line of best fit} is sometimes called the @vocab{regression line}.
-
-@slidebreak
-
-When we make a model, we want it to be the closest possible approximation of all the points. If we used another line instead of the "line of best fit," it wouldn't be as close to all the points as a group, and wouldn't do as good a job at predicting y-values from x-values.
-
-Let's find the best fit we can make for this dataset!
+Let's find a line to model the relationship between the percent of the population with college degrees and median income.
 
 @lesson-instruction{
 Complete @printable-exercise{model-college-v-income-1.adoc}.
@@ -361,58 +397,141 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 
 === Synthesize
 
-- Why wasn't the Alaska-Alabama model a good fit for the rest of the data?
-- If we had chosen two other points from which to build our model, could we have done better? Which points would you choose, and why?
+@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and test how well `f(x)` predicted several states' median income given the percentage of the population with at least a college degree.}
+
+@QandA{
+
+@Q{Why wasn't the Alaska-Alabama model a good fit for the rest of the data?}
+@A{Because Alaska is an outlier that falls pretty far above the line of best fit.}
+
+@Q{If we had chosen two other points from which to build our model, could we have done better? Which points would you choose, and why?}
+@A{Answers will vary. But West Virginia and Massachusetts could be a good option.}
+}
 
 == Fitting Linear Models @duration{45 minutes}
 
 === Overview
-Armed with their linear models, students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best?
+Students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best? First they'll consider two models for a simple dataset and brainstorm how we could measure which fits better. Then they'll test out their linear models using a new pyret function called `fit-model`, which computes residuals, @math{S}, and @math{R^2}.
 
 === Launch
 
-@lesson-instruction{
-- How well did your model work for Alabama and Alaska? Why didn't it work as well for other states?
-- How can we measure "how well a model fits"?
-}
+In the previous section, we came up with a linear model for the relationship between `pct-college-or-higher` and `median-income`, but it definitely wasn't the best model.
 
-@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and evaluate the predictive value of `f(x)`.}
-
-The real world is noisy and chaotic! But sometimes, somewhere in that noise and chaos there are _patterns_, which we can describe with _models_. Finding those models may not help us predict the future, but they can at least help us reason about it! In the previous section, we came up with a number of different linear models for the relationship between `pct-college-or-higher` and `median-income`. But which is the best model?
-
-*How do we even measure how good a model is in the first place?*
+*How do we even measure how good a model is?*
 
 @slidebreak
 
 @lesson-instruction{
-- TODO(Emmanuel): workbook page with simple points and two functions. Kids have to come up with a measurement
-- Share back
+- With your partner, complete @printable-exercise{how-could-we-measure-good-fit.adoc}
 }
 
-Pyret includes a function called `fit-model`. Find its Contract on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s and our @math{y}s. However, it _also consumes a function!_ It produces a scatter plot, with the function graphed on top of it.
+@slidebreak
 
-@teacher{Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to *scientific notation*. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
+@QandA{
+@Q{What criteria did you come up with for how to assess whether or not a model is a good fit for the data?}
+@A{Answers will vary. Ideas might include:}
+@A{The points should be as evenly distributed around the model as possible.
+- We could see how the number of points above the line and below the line compare.
+- We could measure the distance between the points and the line and try to make sure the average distance above is balanced with the average distance below.}
+
+@Q{How could we measure the distance between the data points and the linear model?}
+@A{Answers will vary. Ideas might include:}
+@A{By drawing vertical lines connecting each data points to the linear model.}
+@A{By drawing horizontal lines connecting each data points to the linear model.}
+@A{By drawing diagonal lines connecting each data points to the linear model. +
+Push students to recognize that in order for this measurement to be useful they would have to be perpendicular to the linear model!}
+@A{By drawing squares with one corner on the data point and the opposite corner on the linear model.}
+}
+
+@slidebreak
+
+Pyret has a special function called `fit-model` that graphs whatever function we give it on top of a scatter plot of the dataset!
+
+@QandA{
+@Q{Take a look at the contract for `fit-model` in your contracts page. +
+What is its Domain?}
+@A{Like `scatter-plot`, it consumes columns for our __labels__, our @math{x}s, our @math{y}s... +
+It also __consumes a function.__}
+}
 
 @slidebreak
 
 @lesson-instruction{
+- Open the @starter-file{alg2-cheerios} and click "Run" to test out `fit-model` with the dataset and functions you were just looking at.
+- What do you Notice? What do you Wonder?
+}
+
+@ifnotslide{
+[cols="1a,1a", frame="none", grid="none"]
+|===
+| `fit-model(cheerios-table, "id", "day", "cheerios-on-the-floor", f)`
+| `fit-model(cheerios-table, "id", "day", "cheerios-on-the-floor", g)`
+
+| @centered-image{images/cheerios-f.png} 
+| @centered-image{images/cheerios-g.png}
+|===
+}
+
+@slidebreak
+
+@right{@image{images/residual.png, 200}}When you graph your model in Pyret, you can see that:
+
+- some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y})
+- some points are quite far away ("real" @math{y} is far from "predicted" @math{y})
+
+The difference between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data.
+
+@slidebreak
+
+@QandA{
+@Q{There are three terms in the legend at the bottom. What do they refer to?}
+@A{The blue line is the model.}
+@A{The red dots are the data from the data set.}
+@A{Residuals refer to the vertical black lines connecting the data points to the model. They vary in length depending on how far above or below the model the data is situated.}
+
+@Q{Compare the `fit-model` display for `f` to the `fit-model` display for `g`. How are they similar? How are they different?}
+@A{The x-axis goes from 0 to 10 for both of them.}
+@A{The y-axis for `g` stops at 9. It goes up to 20 for `f`.}
+@A{Both `f` and `g` have a blue line and red dots.}
+@A{`f` has significantly more red dots below the blue line than above it.}
+@A{The data points for `g` more or less fill the vertical space of the display, whereas for `f` there are only data points in the bottom half of the display.}
+
+@Q{There are @math{S} and @math{R^2} values listed in the top left corner. How do they compare for the two models?}
+@A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `g` than they are for `f`.}
+}
+
+@slidebreak
+ 
+@teacher{While the remainder of the lesson could be done using the @starter-file{alg2-states-intro}, you will see us refer to @starter-file{alg2-states-fit-model} from here on out. This file contains the same data, but the Definitions Area is set up to save you time. `al-ak` has been predefined and the other @vocab{models} students will be asked to define during the remainder of the lesson have been started for them.
+
+Now is the time to make sure students save a copy of the file.}
+
+@lesson-instruction{
+- Open @starter-file{alg2-states-fit-model} and save a copy that's just for you.
 - Complete @printable-exercise{model-college-v-income-2.adoc}.
 - Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?
 }
 
-@right{@image{images/residual.png, 200}}Each datapoint has an @math{(x,y)} value, and your model tries to predict what @math{y} will be based on @math{x}. When you graph your model in Pyret, you can see that some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y}). But some points are quite far away ("real" @math{y} is far to "predicted" @math{y})!
-
-The distance between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data.
+@teacher{Heads up: Sometimes a value has too many digits to be displayed clearly. When this happens, Pyret will convert it to *scientific notation*. While students in an Algebra 2 class will likely have encountered scientific notation before, they may not recognize @math{8.23e5} as @math{8.23 \times 10^5}. You should make sure they understand how to interpret this notation.}
 
 @slidebreak
-@ifslide{@right{@image{images/residual.png, 200}}}The statistical term @vocab{S} refers to the @vocab{Standard Deviation of the Residuals}, which is a measure of how far away _all_ of data points are from the models you built. The closer they are to the model, the smaller the residuals are. Smaller residuals mean a smaller @vocab{S}, and a better model!
+@ifslide{@right{@image{images/residual.png, 200}}}The statistical term @vocab{S} refers to the @vocab{Standard Deviation of the Residuals}, which is a measure of how far away _all_ of data points are from the models you built. 
+
+- The closer the data points are to the model, the smaller the residuals are. 
+- Smaller residuals mean a smaller @vocab{S}, and a better model!
 
 @slidebreak
-@ifslide{@right{@image{images/residual.png, 200}}} There are many different tools to calculate the fitness of a model. @ifnotslide{You may even have heard of @math{R}, @math{R^2}, etc...}
+@ifslide{@right{@image{images/residual.png, 200}}} 
+There are many different tools to calculate the fitness of a model. 
 
-Statisticians and Data Scientists are careful to use the right tool for the job. In this case, the tool we're going to use is called the @vocab{Standard Deviation of the Residuals}, or @vocab{S}.
+@ifnotslide{
+- You may have heard of @math{R}, @math{R^2}, etc...}
+- Statisticians and Data Scientists are careful to use the right tool for the job.
 
-A Statistics class would spend some time talking about what a @vocab{residual} is, and how to compute @vocab{Standard Deviation}. But for our purposes, we can just use the value of @vocab{S} to tell us how well or poorly our model fits.
+For our purposes, we'll use the value of @vocab{S} to tell us how well or poorly our model fits. 
+
+@teacher{A Statistics class would spend some time talking about what a @vocab{residual} is, and how to compute @vocab{Standard Deviation}. There is an optional @lesson-link{standard-deviation, Bootstrap lesson about Standard Deviation} as well!
+}
 
 @slidebreak
 @ifslide{@right{@image{images/residual.png, 200}}}
@@ -538,7 +657,7 @@ You may already be familiar with the different forms of linear models available 
 Why we might choose to use one form over another?
 
 @QandA{
-@Q{Suppose our scatterplot has a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?}
+@Q{Suppose our scatter plot has a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?}
 @A{Standard Form}
 @Q{Suppose we only know the slope of a model, but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?}
 @A{Point-Slope Form}
@@ -553,7 +672,7 @@ While it's easier to write one linear form or the other based on the information
 @lesson-instruction{
 - Let's practice writing linear functions in each of the forms and translating them into Pyret function definitions.
 - Turn to @printable-exercise{which-form.adoc}
-- When you're done, add your function definitions to your @starter-file{alg2-states} and test them out with `fit-model`.
+- When you're done, add your function definitions to your @starter-file{alg2-states-fit-model} and test them out with `fit-model`.
 }
 
 === Synthesize

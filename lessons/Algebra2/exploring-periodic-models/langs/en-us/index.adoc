@@ -1,0 +1,443 @@
+[.beta]
+= Exploring Periodic Models
+++++
+<style>
+table tr * { padding: 0 !important; margin: 2px !important; }
+table { width: 70%; margin: auto; }
+</style>
+++++
+@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect sinusoidal behavior and then by looking data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+
+@lesson-prereqs{exploring-quadratic-models}
+
+@keywords{periodic, period, amplitude, frequency}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+* Read and interpret real-world data, presented in a scatter plot
+* Recognize periodic behavior in tables and graphs
+* Model periodic relationships using functions
+
+
+| Student-facing Lesson Goals
+|
+
+* Let's use Pyret to model periodic relationships in data
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+|===
+
+== Looking for Patterns
+
+=== Overview
+Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
+
+=== Launch
+@right{@image{images/state-fair.png, 200}} Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Rollercoaster? Bumper cars? Merry-Go-Round? Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch:
+
+[.rideData, cols="^1a,^1a", options="header"]
+|===
+| `time` (minutes)  | `altitude` (feet)
+|  0				|   5.0
+|  5				|  55.0
+| 10				| 154.9
+| 15				| 205.0
+| 20				| 155.2
+| 25				|  55.2
+| 30				|   5.0
+| 35				|  54.7
+| 40				| 154.6
+| 45				| 205.0
+| 50				| 155.5
+| 55				|  55.5
+| 60				|   5.0
+|===
+
+=== Investigate
+@lesson-instruction{
+Working in pairs or groups, complete questions 1-4 on @printable-exercise{exploring-periodic.adoc}.
+}
+
+@QandA{
+@Q{What are some of your Noticings, and what did they make you Wonder?}
+@A{(Solicit a range of student responses)}
+@Q{What kind of ride do you think they were on?}
+@A{Answers will vary. Write them all down on the board!}
+@Q{What about this data supports your theory?}
+}
+
+@lesson-instruction{
+Complete the remaining questions on @printable-exercise{exploring-periodic.adoc}.
+}
+
+=== Synthesize
+This worksheet had you create a *new type of data display*, called a @vocab{line graph}.
+
+@lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_.}
+
+[cols="^1a, ^1a"]
+|===
+| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
+|===
+
+@slidebreak
+
+In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
+
+@ifslide{
+[cols="^1a, ^1a"]
+|===
+| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
+|===
+}
+
+@QandA{
+@Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
+@A{Yes - it was difficult to see the pattern until we added the line!}
+@Q{Is there a relationship between `time` and `altitude`? Why or why not?}
+@A{(Solicit a range of student responses, guiding the class to there being a relationship)}
+@Q{What kind of ride do you think this teacher was on, and why?}
+@A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
+@Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
+@A{(Let students discuss)}
+}
+
+== Periodic Functions
+
+=== Overview
+Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
+
+=== Launch
+@right{@image{images/ferris-wheel.png, 300}}We're looking at example of what's called a @vocab{periodic relationship}.
+
+- The y-value (`height`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
+- This pattern of y-values repeats at regular intervals (every 30m)
+
+*None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing or decreasing. We've studied relationships that grow one way until they reach a maxima or minima _once_, before growing in the other direction.
+
+But we don't have any functions that keep repeating, going up and down over time.
+
+@slidebreak
+
+That's a problem for us as data scientists, because so many things in nature comes in _cycles:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
+
+In this lesson we'll explore these periodic relationships, and a new class of functions - _@vocab{periodic functions}_ - that we can use to model cyclical relationships like these.
+
+@strategy{A note on Vocabulary}{
+
+You've probably heard of related terms _sinusoidal functions_ or _trigonometric functions_. We've chosen @vocab{periodic functions} because the term shows up often in both K-12 math _and_ science and engineering classes, in an attempt to balance the two. Note that "periodic" is also a broader term, as there are periodic functions that are _not_ sinusoidal/trigonometric. Science teachers may be quick to point out that periodic functions can be used to model relationships that _cycle_ (smooth ups-and-downs) and those that oscillate (any kind of up-and-down!).
+
+As always, we advise you to use the term that works best for your classroom context!
+}
+
+@slidebreak
+
+Your teacher's seat on the Ferris Wheel can be thought of as a point on the edge of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! But how can we compute the y-coordinate, based on the rotation of the circle?
+
+@right{@image{images/unit-circle.png}}Angles can be measured in degrees or radians.
+
+A circle's angle of rotation doesn't rely on the size of the circle: no matter how large a wheel is, turning it halfway (180 degrees, or @math{pi} radians) will move the seat from one side of the circle to the other. How do we compute the y-coordinate of a point for _all_ angles?
+
+For any angle of rotation, we can draw a right triangle that crosses through both the point on the edge and the center of the circle. We can talk about angles using degrees or radians, but radians tend to be the easiest to reason about because they use multiples of @math{\pi}. **For this lesson we'll be working in radians.**
+
+@slidebreak
+
+@ifslide{@right{@right{@image{images/unit-circle.png}}}}Each leg of the triangle tells us the x- and y-coordinates of the point!
+
+[cols="^1a,^1a,^1a,^1a"]
+|===
+| Degrees 			| Radians		| Horizontal Leg (x)		| Vertical Leg (y)
+
+|  0° ("3 o'clock")	| 0 			| 1 @math{\times} radius	| 0
+| 90° ("12 o'clock")| @math{\pi/2}	| 0 						| 1 @math{\times} radius
+|180° ("9 o'clock")	| @math{\pi} 	| 1 @math{\times} radius	| 0
+|270° ("6 o'clock")	| @math{2/3\pi}	| 0 						| 1 @math{\times} radius
+|360° ("3 o'clock")	| @math{2\pi} 	| 1 @math{\times} radius	| 0
+|===
+
+As you can see, the length of the each leg is directly related to the angle of rotation. The length of the vertical leg (our y-coordinate!) is described by the _sine_ function: @math{\sin(θ)} The length of the horizontal leg is described by the _cosine_ function: @math{\cos(θ)}. **One full turn of the wheel (@math{2\pi} radians) returns the point to the original position.**
+
+@slidebreak
+
+When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
+
+@center{@image{images/wave-labeled-terms.png, 75%}}
+
+- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
+- @vocab{Troughs} - the lowest points on the wave
+- @vocab{Period} - the length of a complete cycle, from peak-to-peak or trough-to-trough (in radians, this will always be @math{2\pi}).
+- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
+- @vocab{Amplitude} - the distance from a peak or trough to the midline
+
+
+@ifslide{
+@center{@image{images/wave-labeled-terms.png, 650}}
+}
+
+Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
+
+Of course, Pyret has @math{sin} and @math{cos} built-in! Here are their contracts:
+
+@center{
+@show{(contracts
+'("sin" ("Number") "Number")
+'("cos" ("Number") "Number")
+)}
+}
+
+Both functions consume the number of radians, and produce the x- or y-coordinate of the point on the edge of a circle of radius 1. For larger radii, we can multiply the length by the radius. (There are other periodic functions that do _not_ look like waves, but for this exploration we're going to limit ourselves to @math{sin} and @math{cos}.)
+
+=== Investigate
+Periodic models have the basic form @math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{f(x) = a \cos(b(x - d)) + c}
+
+@QandA{
+@Q{You've seen the coefficient @math{c} before. What affect do you think it has on the model?}
+@A{It's the vertical shift - it moves the midline of the graph up and down the y-axis.}
+@Q{What effect do you think each of the _other_ coefficients has on the model?}
+@A{Some may recognize @math{d} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
+}
+
+Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
+
+@lesson-instruction{
+Let's explore the coefficients of periodic models!
+
+- Open @starter-file{alg2-exploring-periodic-desmos}.
+- With your partner, complete @printable-exercise{graphing-models.adoc} using the first slide of the Desmos activity.
+}
+
+@teacher{Review student answers to the worksheet, giving ample time for them to hear one another's answers. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
+
+@slidebreak
+
+The period is the distance between one @vocab{trough} and the next in a cycle. The frequency is _how many cycles_ occur over an interval.
+
+@lesson-point{@center{@math{\mbox{period} = {2\pi \over \mbox{frequency}}}}}
+
+- If the @vocab{period} is @math{2}, then the frequency is @math{\pi}.
+- If the @vocab{period} is cut in half to @math{1}, the @vocab{frequency} _doubles_ to @math{2\pi}
+- If the @vocab{period} doubles to @math{4}, the @vocab{frequency} _halves_ to  @math{pi/2}
+
+@slidebreak
+
+Let's review our coefficients:
+
+- @vocab{Amplitude} (@math{a}): the distance from a peak/trough to the midline (can be added to the @vocab{trough} to produce the @vocab{midline})
+- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (can be divided by @math{2\pi} to compute the @vocab{period})
+- @vocab{Vertical Shift} (@math{c}): the amount the graph is shifted up (@math{c} > 0) or down (@math{c} < 0)
+- @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} < 0) or left (@math{c} > 0). Also called the @vocab{Phase Shift}.
+
+@slidebreak
+
+@lesson-instruction{
+- Now that you have a sense for what terms like @vocab{amplitude}, @vocab{frequency}, and @vocab{midline} mean, complete @printable-exercise{matching-periodic-descriptions.adoc} by matching the graphs of periodic functions to their written descriptions.
+- What strategies did you use to match the graphs to the descriptions?
+}
+
+@lesson-instruction{
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last two slides of the Desmos activity.
+- Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
+}
+
+@teacher{
+*NOTE:* The altitude column of the Ferris wheel dataset has been rounded to make it easier for students to use. This rounding will result in _some_ error in the model.
+}
+
+Suppose you needed to compute the model for a _different_ Ferris Wheel. Would you know how to use the radius and speed of the wheel to compute the model?
+
+@lesson-instruction{
+- Complete @printable-exercise{make-a-wheel.adoc} with your partner.
+}
+
+=== Synthesize
+Periodic relationships involve repeating cycles. Like our Ferris wheel, they rise and fall along regular intervals. Can you come up with some examples of periodic relationships?
+
+For each one:
+
+- Can you estimate the _period_ of the relationship?
+- Can you estimate the _amplitude?_
+- Can you estimate the _midline_ and _vertical shift?_
+
+@teacher{
+You'll likely need to support students in thinking through what these terms mean in the context of their first example, to get the class started. Suppose a student volunteers "the temperature, because it gets cold in the winter and warm in the summer":
+
+- The seasons change over the course of one year, so the period would be 365 days.
+- The temperature in your area might fluctuate between 95° in the summer and 25° F in the winter. That's a range of 70° F, for an amplitude of 35° F.
+- The midline and the vertical shift are at 60° F (25 + 35 = 60).
+}
+
+== Modeling Periodic Relationships
+@define{COtwo}{@math{\mbox{CO}_2}}
+
+=== Overview
+Students explore the @COtwo dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+
+=== Launch
+Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
+
+Now that we've had some practice, let's take a look at a dataset that has more variability!
+
+@slidebreak
+
+Carbon Dioxide (@COtwo) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+
+@slidebreak
+
+Scientists are concerned about how much @COtwo is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @COtwo in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @COtwo in any one location!
+
+- Temperature and air pressure
+- Proximity to @COtwo -producing or @COtwo -consuming sources
+- Global trends like the burning of fossil fuels
+
+Because of these and other factors, the amount of @COtwo at any one location goes up and down throughout the year. But is there a pattern?
+
+@slidebreak
+
+@lesson-instruction{
+- Open the @starter-file{alg2-co2}, save a copy, and click "Run".
+- What is the name of the table here?
+- What are the names of the columns?
+- Type `co2-table` into the Interactions Area, and look at the table.
+- What do the `year`, `month`, and `co2` columns mean?
+- What do you think the `date` column could mean?
+}
+
+@slidebreak
+
+The `date` column is the *decimal year*, in which the __n__th day of the year is divided by 365:
+
+- January first is day zero, so 1/1/2023 would be 2023.0
+- The 100th day of the year would be 100/365, which is roughly 0.27. So April 10th, 2023 would be 2023.27
+
+@lesson-instruction{
+- What do you *Notice* about this dataset?
+- What do you *Wonder*?
+}
+
+@slidebreak
+
+Look farther down in the Definitions Area, until you find the function `is-recent`.
+
+@QandA{
+@Q{What does it do?}
+@A{It takes in a row, and checks to see if the decimal date is between 2022.083 and 2023.7917.}
+@Q{What is defined on the following line of code?}
+@A{A table, which contains only the rows for which the filter function produces `true`: just the rows between those dates.}
+}
+
+@slidebreak
+
+The `recent` table includes just the rows from trough-to-trough for the years 2022-2023.
+
+@QandA{
+@Q{How many periods are represented here?}
+@A{One}
+@Q{Why?}
+@A{Because the distance between any adjacent troughs or peaks define one period.}
+}
+
+=== Investigate
+@lesson-instruction{
+- Open the @starter-file{alg2-co2}, and complete Questions 1-5 of @printable-exercise{modeling-recent-co2.adoc}.
+- Be ready to share your answers!
+}
+
+@slidebreak
+
+@QandA{
+@Q{What was the highest @COtwo value in the table? The lowest?}
+@A{424 and 415.74 parts per million.}
+@Q{What did you get for @vocab{amplitude} @math{a}?}
+@A{4.13, because the distance between the high and low readings is 8.26.}
+@Q{What did you get for the @vocab{vertical shift} @math{c}?}
+@A{Adding the amplitude (4.13) to the lowest value (415.74) gives us 419.87.}
+@Q{What did you estimate for the @vocab{phase shift} @math{d}?}
+@A{Answers will vary, but should be close to 2023.1}
+@Q{How many years make up one @vocab{period}?}
+@A{One year (this makes sense, since the seasonal cycle repeats every year!)}
+@Q{What did you get for @vocab{frequency} @math{b}?}
+@A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
+}
+
+=== Synthesize
+
+- TODO
+
+
+== More Complex Models
+
+=== Overview
+Students discover that their periodic model for `recent` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
+
+=== Launch
+The resulting model fits the `recent` data pretty well, with an S-value of about 1.2ppm and an R^2 value of 0.822. But how well does it fit if we try it with _all_ of the data?
+
+@lesson-instruction{
+- Fit your model with the entire `co2-table`.
+- What @math{S} and @math{R^2} do you get?
+- What do you think is going on?
+}
+
+@slidebreak
+
+@center{@image{images/historical-bad-fit.png}}
+
+Apparently there's been a lot of change over the years!
+
+=== Investigate
+Let's just look at the historical data by itself, without worrying about models.
+
+@center{@image{images/historical-scatter-plot.png}}
+
+@QandA{
+@Q{Do you see a pattern in the larger, historical data?}
+@A{Very much so!}
+@Q{If so, what @vocab{form} of relationship do you see? Is it linear? Quadratic? Exponential? Logarithmic? Periodic?}
+@A{Strong linear correlation.}
+}
+
+@slidebreak
+
+@ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there's two different things going on here: the amount of @COtwo in the air is rising linearly over time, forming a straight line with seasonal variations fluctuating up and down across that line.
+
+@lesson-instruction{
+- Do you think it's possible for a model to be both linear _and_ periodic?
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Complete @printable-exercise{modeling-historical-co2.adoc}
+}
+
+Our periodic model had two terms:
+
+- The vertical shift @math{419.87}, which described the midline
+- The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the midline
+
+But when we zoomed out to see the historical @COtwo data, we saw that the midline isn't horizontal at all!
+
+@lesson-point{The midline is our linear model!}
+
+By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @COtwo.
+
+@strategy{Going Deeper}{
+Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+}
+
+=== Synthesize
+
+- Are there any other relationships you can think of, which might require a _combination of models_ like we did here?
+- If so, what are they?
+- Are there any relationships you can think of, which _cannot_ be modeled using any of the functions we've discussed so far?
