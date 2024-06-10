@@ -51,7 +51,7 @@ Students discuss an example of Simpson's Paradox, which motivates splitting a da
 
 === Launch
 
-A college is looking at enrollment and housing data for a sample of students who've decided what their major will be, vs. those who are undecided:
+A college is looking at housing data for a sample of students and comparing choices among those students who've decided what their major will be to choices made by students who are undecided about their major:
 
 [cols="2a,^1a,^1a,^1a", options="header", width="80%"]
 |===
@@ -70,14 +70,17 @@ A college is looking at enrollment and housing data for a sample of students who
 }
 
 @teacher{
-@opt{If your students need printed copies of this table and the accompanying questions, you can use @opt-printable-exercise{simpsons-data.adoc}.}
+@opt{If you'd like to distribute printed copies of this table and the accompanying questions, they are available @opt-printable-exercise{simpsons-data.adoc, here}.}
 }
 
 @slidebreak
 
 It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
 
-But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, _and_ they generally have not picked a major. *We need to take the _year_ into account.*
+But there's a third variable hiding in the background: freshmen college students are far more likely to live on campus, _and_ they generally have not picked a major. 
+
+When we filter by this important third variable, it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+
 
 [cols="^1a,^1a", strips="none", grid="none", frame="none"]
 |===
@@ -100,22 +103,16 @@ But there's a third variable hiding in the background: freshmen college students
 
 @slidebreak
 
-Because *year at school* is an important 3rd variable, we should first filter by that variable. And it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
-
-How is this possible? When a third variable is lurking in the data, it can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
-
-@slidebreak
+@right{@image{images/Simpsons_animation.gif, 300}}
+A third variable lurking in the data can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists! Normally we think that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances the correlations in our sub-groups cancel each other out when we put the groups together. This is called @link{https://en.Wikipedia.org/wiki/Simpson%27s_paradox, Simpson's Paradox.}
 
 @lesson-point{
 Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
 }
 
-@right{@image{images/Simpsons_animation.gif, 300}}Normally we think that "more data means more power!", and that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances - like in our Covid dataset - the correlations in our sub-groups cancel each other out when we put the groups together. This is called Simpson's Paradox. (Learn more about Simpson's Paradox at @link{https://en.Wikipedia.org/wiki/Simpson%27s_paradox, Wikipedia}.)
-
-@clear
 @slidebreak
 
-"More data" isn't always better. Simpson's Paradox shows us that being able to filter the data into subsets is sometimes the only way to see what's really going on. In this lesson, we'll explore some real data that's better analyzed _in pieces..._
+Sometimes filtering the data into subsets is the only way to see what's really going on. In this lesson, we'll explore some real data that's better analyzed _in pieces..._
 
 === Investigate
 
@@ -139,15 +136,11 @@ Even in 2020, very few people could have predicted the impact Covid would have o
 @ifslide{@right{@image{images/multiple-models.png}}}
 @ifnotslide{@center{@image{images/multiple-models.png}}}
 @lesson-instruction{
-Discuss in groups or pairs, and prepare to share out to the class:
-
-- Based on the look of the scatter plot you just made, do you think there's a strong relationship here?
-- If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
+- Discuss in groups or pairs, and prepare to share out to the class:
+  * Based on the look of the scatter plot you just made, do you think there's a strong relationship here?
+  * If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
+- Turn to @printable-exercise{fitting-linear-model.adoc} and complete part 1 (lr-plot).
 }
-
-@slidebreak
-
-The scatter plot you made doesn't look much like a scatter plot all! It looks like someone took a marker and drew in five different curvy lines. While it's clear that there are strong patterns in the data, these patterns are so distinct from one another that there isn't really one, single model that fits them all. Each relationship appears very strong, almost as if there is _more than one model_ here.
 
 @teacher{Review student answers to confirm that students have made a number of observations:
 
@@ -157,9 +150,10 @@ The scatter plot you made doesn't look much like a scatter plot all! It looks li
 
 @slidebreak
 
-With all these clear, tight curves, we might think this would be a dataset with a very strong relationship. Unfortunately, that's not what we see when we group all the data together!
-
 Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
+
+In fact, the scatter plot doesn't look much like a scatter plot all! It looks like someone took a marker and drew in five different curvy lines. These patterns are so distinct from one another that we're going to need to make _more than one model_.
+
 
 @slidebreak
 
@@ -170,7 +164,7 @@ Datasets like these are very difficult to model all at once, because there will 
 }
 
 @lesson-instruction{
-Working in pairs or small groups, complete @printable-exercise{filtering-by-state.adoc}.
+Working in pairs or small groups, complete @printable-exercise{fitting-linear-model.adoc}.
 }
 
 @slidebreak

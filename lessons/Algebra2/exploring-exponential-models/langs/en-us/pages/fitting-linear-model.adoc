@@ -1,4 +1,4 @@
-= Filtering by State
+= Fitting a Linear Model
 ++++
 <style>
 body.workbookpage td .autonum::after { content: ')' !important; }
@@ -10,15 +10,19 @@ body .center { padding: 0; }
 [.linkInstructions]
 For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
 
+== lr-plot
+
 @n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `covid-table`.
 
 @hspace{3em}+a.+ What do you notice about the line? @fitb{}{} 
 
 @hspace{3em}@fitb{}{}
 
-@hspace{3em}+b.+ What is the @math{S}-value? @fitb{10em}{@ifsoln{5.80e4}} and what does it tell us about the model? @hspace{3em}@fitb{}{@ifsoln{this model is not a good fit for the data}}
+@hspace{3em}+b.+ What is the @math{S}-value? @fitb{10em}{@ifsoln{5.80e4 = 58000}} and what does it tell us about the model? @hspace{3em}@fitb{}{@ifsoln{this model is not a great fit for the data. An error of 58000 is significant for data ranging from 0 to 350000.}}
 
 @hspace{3em}@fitb{}{}
+
+== Filtering by State
 
 @n Find the function called `is-MA` _in the Definitions Area under "Define some helper functions"_. Read the comments carefully!
 
@@ -41,18 +45,11 @@ For this page, you'll need to have the @starter-file{alg2-covid} open on your co
 
 @n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `MA-table`.
 
-@hspace{3em}+a.+ What is the @math{S}-value? @fitb{10em}{@ifsoln{3.18e4}} +
-@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{this model fits pretty well for MA!}}
+@hspace{3em}+a.+ What is the @math{S}-value? @fitb{20em}{@ifsoln{3.18e4 = 31800 positive cases.}} +
+@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{It's a better fit than the model for the full `covid-table`. But an error of 31,000 cases is not insignificant for data ranging from about 100,000 to 350,000}}
 
 @n Using the code for `is-MA` and `MA-table` as a model, *define a new function* `is-VT` and *create a grouped sample* called `VT-table`. +
 @hspace{3em}Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `VT-table`.
 
-
-@hspace{3em}+a.+ What is the @math{S}-value? @fitb{10em}{@ifsoln{~825.96}} +
-@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{this model fits pretty well for VT!}}
-
-@n Why do these state-specific models fit so well, when model for all of New England fits so poorly?
-
-@fitb{}{@ifsoln{The data for each state behaves so differently from the others that no model fits all the points well}}
-
-@fitb{}{}
+@hspace{3em}+a.+ What is the @math{S}-value? @fitb{20em}{@ifsoln{~825.96 positive cases}} +
+@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{It's not as good as the model for the `MA-table`. An error of 826 cases is significant for data ranging from about 1000 to 7000.}}
