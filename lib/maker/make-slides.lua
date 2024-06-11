@@ -138,11 +138,12 @@ local function get_slides(lsn_plan_adoc_file)
     local txt = curr_slide.text
     if txt == '' or
       (n == 0 and curr_slide.header == '') then
-      return
+      return false
     end
-    if not txt:match('%S') then return end
+    if not txt:match('%S') then return false end
     set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
+    return true
   end
 
   local function scan_directives (i, nested_in, dont_count_image_p)
@@ -252,11 +253,12 @@ local function get_slides(lsn_plan_adoc_file)
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide') then
             terror('@slidebreak inside @' .. nested_in)
           end
+          local old_header = curr_slide.header
           set_current_slide()
           local c2 = buf_peek_char(i)
           curr_slide = newslide()
           curr_slide.section = 'Repeat'
-          curr_slide.header = 'SLIDE BREAK'
+          curr_slide.header = old_header
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
           end
@@ -326,6 +328,9 @@ local function get_slides(lsn_plan_adoc_file)
             end
             new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
             new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
+            -- print('new_level', new_level)
+            -- print('new_header', new_header)
+            -- print('curr_slide.level', curr_slide.level)
             if ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
@@ -335,16 +340,24 @@ local function get_slides(lsn_plan_adoc_file)
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
             else
-              set_current_slide()
+              local old_header = curr_slide.header
+              local old_slide_substantial_p = set_current_slide()
               curr_slide = newslide()
               curr_slide.level = new_level
-              curr_slide.header = new_header
 
-              -- print('curr slide header = ' .. curr_slide.header)
               curr_slide.section = ((curr_slide.level == 2) and
-              ((curr_slide.header:match('Launch') and 'Launch') or
-              (curr_slide.header:match('Investigate') and 'Investigate') or
-              (curr_slide.header:match('Synthesize') and 'Synthesize')))
+              ((new_header:match('Launch') and 'Launch') or
+              (new_header:match('Investigate') and 'Investigate') or
+              (new_header:match('Synthesize') and 'Synthesize')))
+
+              if new_header == 'Overview' and not old_slide_substantial_p then
+                -- print('reusing old header', old_header)
+                new_header = old_header
+              elseif new_level > 1 then
+                new_header = old_header
+              end
+              curr_slide.header = new_header
+              -- print('curr slide header = ' .. curr_slide.header)
             end
           end
         elseif c == '[' then
@@ -394,7 +407,7 @@ local function make_slides_file(lplan_file, slides_file)
   --print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides
   local curr_header = 'notsetyet'
-  local curr_section = 'notsetyet'
+  local curr_section = 'notsetyetI'
   local o = io.open(slides_file, 'w')
 
   for k,slide in ipairs(slides) do
@@ -414,10 +427,11 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('-->\n')
       end
     else
+      -- print('outputting slide', slide.section, slide.level, slide.header)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
-      if slide.level <= 1 then curr_header = slide.header
-      elseif (slide.level == 2 and slide.section) then
+      curr_header = slide.header
+      if (slide.level == 2 and slide.section) then
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
           if slide.numimages == 2 then slide.suffix = '2' end
