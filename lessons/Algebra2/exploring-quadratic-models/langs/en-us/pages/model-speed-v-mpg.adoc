@@ -7,26 +7,24 @@
 ++++
 
 [.linkInstructions]
-Open your copy of the @starter-file{alg2-fuel-efficiency} and click "Run". +
+Open your copy of the @starter-file{alg2-fuel-efficiency} and click "Run". 
+
+== num-sqr
+
 Before we try to model our fuel-efficiency data, we need to learn a new Pyret function! 
 
-@n Can you predict what the output of the following expressions will be? Enter them into the Interactions Area, and record the result.
-
-[cols="^1a, ^1a", stripes="none", frame="none", grid="none"]
-|===
-| @show{(code '(sqr 4))} @fitb{10em}{@ifsoln{16}}
-| @show{(code '(sqr (- 6 2)))} @fitb{10em}{@ifsoln{16}}
-|===
+@n Can you predict what the output of the `num-sqr` expressions below will be? +
+@hspace{1em} _Test them out in the Interactions Area, and record the results._ @hspace{3em} @show{(code '(sqr 4))} @fitb{7em}{@ifsoln{16}} @show{(code '(sqr (- 6 2)))} @fitb{}{@ifsoln{16}}
 
 @n What is the Contract for `num-sqr`? @fitb{}{}
 
-@n What does `num-sqr` _do_? @fitb{}{}
+@n What does `num-sqr` do? @fitb{}{}
 
 == Interpreting a Quadratic Model
 
 In the Definitions Area of your @starter-file{alg2-fuel-efficiency}, you'll find the definition of a quadratic model `quad1`.
 
-@n In `quad1`, the value of @math{a} is @fitb{10em}{@ifsoln{1}}, the value of @math{h} is @fitb{10em}{@ifsoln{0}}, and the value of @math{k} is @fitb{10em}{@ifsoln{0}}
+@n In `quad1`, the value of @math{a} is @fitb{10em}{@ifsoln{-0.005}}, the value of @math{h} is @fitb{10em}{@ifsoln{10}}, and the value of @math{k} is @fitb{10em}{@ifsoln{30}}
 
 @n Fit this model to your dataset, using `fit-model`. What @math{S}-value did you get? @fitb{}{@ifsoln{~9.95787}}
 
@@ -34,8 +32,8 @@ In the Definitions Area of your @starter-file{alg2-fuel-efficiency}, you'll find
 _Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, contracts pages}!_
 
 @n In your own words, describe what needs to change about this model to fit the data. @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
+@fitb{}{@ifsoln{Answers will vary.}} +
+@fitb{}{@ifsoln{Sample response: It needs to shift right and up and curve less gradually.}}
 
 == Modeling Fuel Efficiency
 
@@ -48,30 +46,29 @@ _Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{
 - @math{k}: y-coordinate of the vertex (in quadratic models, this is also the vertical shift!)
 |===
 
-@n We've determined that peak fuel efficiency is around 45 mph. What variable in the equation should we replace with 45? @fitb{}{}
+@n We've determined that peak fuel efficiency is around 45 mph. What variable in the equation should we replace with 45? @fitb{}{@ifsoln{h}}
 
 [.indentedpara]
 Update the definition of `quad1`, click "Run" and re-fit the model. What @math{S}-value did you get? @fitb{}{@ifsoln{~2.154}}
 
-@n What y-coordinate of the vertex would best match the shape of the curve? @fitb{5em}{@ifsoln{~32}} 
+@n What y-coordinate of the vertex would best match the shape of the curve? @fitb{5em}{@ifsoln{~33}} 
 
 [.indentedpara]
-Update the definition of `quad1`, click "Run" and re-fit the model. What @math{S}-value did you get? @fitb{}{@ifsoln{~1.9166}}
+Update the definition of `quad1`, click "Run" and re-fit the model. What @math{S}-value did you get? @fitb{}{@ifsoln{If k=32, S~1.9166 @hspace{1em} If k=33, S~2.4974}}
 
-@n What value of @math{a} best matches the shape of the curve? @fitb{5em}{@ifsoln{~0.01}} 
+@n What value of @math{a} best matches the shape of the curve? @fitb{5em}{@ifsoln{~ -0.01}} 
 [.indentedpara]
-Update the definition of `quad1`, click "Run" and re-fit the model. What @math{S}-value did you get? @fitb{}{@ifsoln{~1.8505}}
+Update the definition of `quad1`, click "Run" and re-fit the model. What @math{S}-value did you get? @fitb{}{@ifsoln{If k=32, S~1.8505 @hspace{1em} If k=33, S~1.5598}}
 
 @n See any small changes you'd like to make to the definition, trying to get @math{S} as low as you can. Write your final definition below.
 
 `fun f(x) :` @fitb{30em}{} `end` @hspace{5em} @math{S}: @fitb{}{}
 
-@vspace{1ex}
+ 
+== What does this model actually mean?
 
-@star *What does this model actually mean? Try completing the sentence below:*
-
-After experimenting, I came up with a quadratic model showing that _speed_ is correlated (S=@fitb{5em}{}) with _gas mileage_ for cars in this dataset. The vertex of the parabola drawn by this model is @fitbruby{8em}{@ifsoln{about 45}}{(x, y)}, which means that @fitb{}{}
-
-@fitb{}{@ifsoln{It's most efficient to drive at about 45pmh, at which speed cars seem to get about 32 miles per gallon.}}
-
-@star How does the fact that the value of @math{a} is negative impact this parabola? @fitb{}{}
+After experimenting, I came up with a @fitbruby{8em}{@ifsoln{quadratic}}{form} model for this dataset showing that @fitbruby{5em}{@ifsoln{speed}}{x-variable} is correlated to @fitbruby{}{@ifsoln{gas mileage}}{y-variable}. +
+@ifsoln{Note: Numerical responses will vary!} +
+The error in the model is described by an s-value of about @fitbruby{5em}{@ifsoln{1.6}}{S}@fitbruby{8em}{@ifsoln{miles per gallon}}{units}. +
+The vertex of the parabola drawn by this model is a @fitbruby{10em}{@ifsoln{maxima}}{minima or maxima?} at about @fitbruby{8em}{@ifsoln{(45, 33)}}{(x, y)}, which means that @fitb{}{}
+@fitb{}{@ifsoln{It's most efficient to drive at about 45mph, at which speed cars seem to get about 33 miles per gallon.}}
