@@ -143,30 +143,60 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @slidebreak
 
-Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! But how can we compute the y-coordinate, based on the rotation of the circle?
+Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! *But how can we compute the y-coordinate, based on the rotation of the circle?*
 
-@right{@image{images/unit-circle.png}}Angles can be measured in degrees or radians.
+==== Unit Circles
 
-A circle's angle of rotation doesn't rely on the size of the circle: no matter how large a wheel is, turning it halfway (180 degrees, or @math{pi} radians) will move the seat from one side of the circle to the other. How do we compute the y-coordinate of a point for _all_ angles?
+@right{@image{images/unit-circle.png}}Let's think about a simpler case, of a circle of radius 1 that is centered around the origin (mathematicians often call this "unit circle"). +
+ +
+The circumference of the circle crosses the x-axis at @math{x=1} and @math{x=1}, and the y-axis at @math{y=1} and @math{y=-1}. +
+ +
+We can draw a radius at any angle @math{θ}, hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides A and B, shown here in green and red.
 
-For any angle of rotation, we can draw a right triangle that crosses through both the point on the circumference and the center of the circle. We can talk about angles using degrees or radians, but radians tend to be the easiest to reason about because they use multiples of @math{\pi}. **For this lesson we'll be working in radians.**
+@QandA{
+@Q{What is the relationship between @math{(x,y)} and the values of A and B?}
+@A{If we know the value of A, we know the value of @math{x}. If we know the value of B, we know the value of @math{y}.}
+@Q{Where does the equation @math{A^2 + B^2 = 1} come from?}
+@A{We know that every possible (x,y) coordinate forms a right triangle, and the hypotenuse is always the radius of 1.}
+}
 
 @slidebreak
 
-@ifslide{@right{@right{@image{images/unit-circle.png}}}}Each leg of the triangle tells us the x- and y-coordinates of the point!
+@lesson-instruction{
+- With a partner, complete questions 1-6 of @printable-exercise{unit-circle.adoc}.
+}
 
-[cols="^1a,^1a,^1a,^1a"]
-|===
-| Degrees 			| Radians		| Horizontal Leg (x)		| Vertical Leg (y)
+@teacher{Review student answers, *especially* their answers for 6!}
 
-|  0° ("3 o'clock")	| 0 			| 1 @math{\times} radius	| 0
-| 90° ("12 o'clock")| @math{\pi/2}	| 0 						| 1 @math{\times} radius
-|180° ("9 o'clock")	| @math{\pi} 	| 1 @math{\times} radius	| 0
-|270° ("6 o'clock")	| @math{2/3\pi}	| 0 						| 1 @math{\times} radius
-|360° ("3 o'clock")	| @math{2\pi} 	| 1 @math{\times} radius	| 0
-|===
+@slidebreak
 
-As you can see, the length of the each leg is directly related to the angle of rotation. The length of the vertical leg (our y-coordinate!) is described by the _sine_ function: @math{\sin(θ)} The length of the horizontal leg is described by the _cosine_ function: @math{\cos(θ)}. **One full turn of the wheel (@math{2\pi} radians) returns the point to the original position.**
+- At 12 o’clock, (A, B) is at the coordinates (0, 1). A is 0 and the length of B is 1.
+- At 3 o'clock (A, B) is at the coordinates (1, 0). A is 1 and the length of B is 0.
+- At 6 o’clock, (A, B) is at the coordinates (0, -1). A is 0 and the length of B is -1.
+- At 9 o'clock (A, B) is at the coordinates (-1, 0). A is -1 and the length of B is 0.
+
+Are there times where A=B?
+
+@lesson-instruction{
+- With a partner, complete the remainder of @printable-exercise{unit-circle.adoc}.
+- When you're finished, open @starter-file{alg2-exploring-periodic-desmos} and check your answers using the *first slide*.
+}
+
+@teacher{Review student answers. At this point in the lesson, we're shifting entirely to radians - if your students aren't yet comfortable with them, you may want to consider the activity below!}
+
+@strategy{From Degrees to Radians}{
+If your students are uncomfortable with radians, here's an activity to get them going:
+
+- Divide the class into groups of 3-5
+- Cut out paper or cardboard circles of varying sizes, and distribute one to each group along with a scissor and a length of string that's at least as long as the radius of their circle.
+- Have students cut the string, to measure a length that is exactly the radius of the circle
+- Have the group measure how many radii (lengths of that string) it takes to form a full loop around the circumference of the circle.
+- Have the group draw a "pizza slice" using the string, such that the curved "crust" of the pizza is one radius in length, and the sides of the slice are radii. A radian _is the angle formed at the tip of the slice._
+
+Every group will find that it takes roughly ~6.3 lengths of string...@math{2\pi}! Explain that radii are easier to work with than degrees, because it's easy to think in terms of "fractions of rotation". For example, "half a rotation" is @math{pi}, so "a quarter of a rotation" is @math{\pi \over 2}.
+
+You may also want to check out @link{https://www.YouTube.com/watch?v=HACNCy0clO0, this fantastic video by MrNystrom}, which illustrates the same thing without manipulatives.
+}
 
 @slidebreak
 
@@ -209,7 +239,11 @@ Pyret knows about @math{\pi}, too!
 }
 
 === Investigate
-Periodic models have the basic form @math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{f(x) = a \cos(b(x - d)) + c}
+Periodic models have the basic form:
+
+@center{@math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{f(x) = a \cos(b(x - d)) + c}}
+
+Since the cosine function behaves identically to sine function (just shifted horizontally by @math{\pi \over 2}), one model is just as good as the other.
 
 @QandA{
 @Q{You've seen the coefficient @math{c} before. What affect do you think it has on the model?}
@@ -224,7 +258,7 @@ Both @math{sin} and @math{cos} are closely related to one another, and each one 
 Let's explore the coefficients of periodic models!
 
 - Open @starter-file{alg2-exploring-periodic-desmos}.
-- With your partner, complete @printable-exercise{graphing-models.adoc} using the first slide of the Desmos activity.
+- With your partner, complete @printable-exercise{graphing-models.adoc} using the *second slide* of the Desmos activity.
 }
 
 @teacher{Review student answers to the worksheet, giving ample time for them to hear one another's answers. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
@@ -256,7 +290,7 @@ Let's review our coefficients:
 }
 
 @lesson-instruction{
-- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using the last two slides of the Desmos activity.
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc} using slides 4 and 5 of the Desmos activity.
 - Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
 }
 
