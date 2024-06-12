@@ -458,6 +458,9 @@ const MoreDS = {
     "title": "Matching Modes (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
+    },
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
     }
   }
 }
@@ -657,8 +660,8 @@ const MoreAlg = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/652e12aa5a1270ab0566fd3c"
     }
   },
-  "function-notation-match (Desmos)": {
-    "title":"Matching Examples & Function Definitions (Math)",
+  "function-notation-match": {
+    "title":"Matching Examples & Function Definitions - Math (Desmos)",
     "pyret": {
       "url":"https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38"
     },
@@ -669,6 +672,9 @@ const MoreAlg = {
   "linear-functions2": {
     "title": "Matching Tables to Graphs (Desmos)",
     "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
+    },
+    "wescheme": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
     }
   },
