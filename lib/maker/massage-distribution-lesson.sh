@@ -88,6 +88,10 @@ done
 scrubproglangsubdirs $lessonName
 
 if test ! -f $lessonName/.cached/.proglang-pyret -a ! -f $lessonName/.cached/.proglang-none; then
-  mkdir -p $lessonName/.cached
-  touch $lessonName/.proglang-ignore
+  if test "$USER" = flannery; then
+    rm -r $lessonName
+  else
+    mkdir -p $lessonName/.cached
+    touch $lessonName/.proglang-ignore
+  fi
 fi
