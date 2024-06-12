@@ -76,6 +76,15 @@ const Core = {
       "url": "https://www.wescheme.org/openEditor?publicId=4FgZs4PZp4"
     }
   },
+  "match-code-images": {
+    "title": "Matching Code to Images using overlay & put-image (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0"
+    },
+    "wescheme": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc"
+    }
+  },
   "strings-n-numbers": {
     "title": "Strings and Numbers Starter File",
     "codap": {
@@ -444,6 +453,15 @@ const MoreDS = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb"
     }
+  },
+  "matching-modes": {
+    "title": "Matching Modes (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
+    },
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
+    }
   }
 }
 
@@ -627,6 +645,39 @@ const Flags = {
 }
 
 const MoreAlg = {
+  "coe-desmos": {
+    "title": "Matching Circles of Evaluation to Expressions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5dcad0b2ef54cc0c830fd4df"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5feced272d0eff0ca8381baa"
+    }
+  },
+  "linear-functions": {
+    "title": "Card Sort Activities focused on Linear Functions: Tables, Graphs, and Definitions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/652e12aa5a1270ab0566fd3c"
+    }
+  },
+  "function-notation-match": {
+    "title":"Matching Examples & Function Definitions - Math (Desmos)",
+    "pyret": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38"
+    },
+    "wescheme": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38"
+    }
+  },
+  "linear-functions2": {
+    "title": "Matching Tables to Graphs (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
+    }
+  },
   "right-trianglesDesmos": {
     "title": "Exploring Proofs without Words (Desmos)",
     "pyret": {
@@ -661,6 +712,12 @@ const MoreAlg = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
+    }
+  },
+  "inequalities-compound-match": {
+    "title": "Match Compound Inequality Functions with Plots of their Solution Sets",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85"
     }
   },
   "inequalities-sam": {
