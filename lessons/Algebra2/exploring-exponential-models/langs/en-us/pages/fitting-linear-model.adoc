@@ -4,6 +4,9 @@
 body.workbookpage td .autonum::after { content: ')' !important; }
 td:last-child { padding-top: 0; padding-bottom: 0; }
 body .center { padding: 0; }
+
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
 </style>
 ++++
 
@@ -12,44 +15,59 @@ For this page, you'll need to have the @starter-file{alg2-covid} open on your co
 
 == lr-plot
 
-@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `covid-table`.
+Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `covid-table`.
 
-@hspace{3em}+a.+ What do you notice about the line? @fitb{}{} 
+@n What do you notice about the line? @fitb{}{} 
 
-@hspace{3em}@fitb{}{}
+@fitb{}{}
 
-@hspace{3em}+b.+ What is the @math{S}-value? @fitb{10em}{@ifsoln{5.80e4 = 58000}} and what does it tell us about the model? @hspace{3em}@fitb{}{@ifsoln{this model is not a great fit for the data. An error of 58000 is significant for data ranging from 0 to 350000.}}
+@n The optimized linear model for this dataset shows an @fitbruby{12em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{}{@ifsoln{299 case per day.}}{slope} 
 
-@hspace{3em}@fitb{}{}
+@indented{
+The @vocab{S-value} is about @fitbruby{9em}{@ifsoln{5.80e4 = 58000}}{S} and @fitbruby{9em}{@ifsoln{positive cases}}{units} in this dataset range from @fitbruby{7em}{@ifsoln{3}}{lowest y-value} to @fitbruby{8em}{@ifsoln{341925}}{highest y-value}, so there is @fitbruby{17em}{@ifsoln{significant}}{insignificant / reasonable / significant / extreme} error in predictions made using this model.
+}
 
 == Filtering by State
 
-@n Find the function called `is-MA` _in the Definitions Area under "Define some helper functions"_. Read the comments carefully!
+@n Find the function called `is-MA` in the Definitions Area under "Define some helper functions" and read the comments carefully!
 
-@hspace{3em}+a.+ What is the *Domain* of `is-MA`? @fitb{20em}{@ifsoln{Row}} Its *Range*? @fitb{}{@ifsoln{Boolean}}
+@indented{
++a.+ What is the Domain of `is-MA`? @fitb{20em}{@ifsoln{Row}} What is its Range? @fitb{}{@ifsoln{Boolean}}
 
-@hspace{3em}+b.+ What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{}{@ifsoln{false}}
++b.+ What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{}{@ifsoln{false}}
+}
 
-@vspace{3ex}
+@vspace{1ex}
 
-@hspace{3em}_Try typing each of these helper functions into the Interactions Area on the right and confirm you were correct._
+_Try typing each of these helper functions into the Interactions Area on the right and confirm you were correct._
 
-@vspace{3ex}
+@n Find `MA-table` in the Definitions Area under "Define some grouped and/or random samples". 
 
-@n Find `MA-table` _in the Definitions Area under "Define some grouped and/or random samples"_. 
+@indented{
++a.+ What is that code doing? @fitb{}{} 
+@fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
 
-@hspace{3em}+a.+ What is that code doing? @fitb{}{} 
-@hspace{3em}@fitb{}{@ifsoln{Defining a new table called `MA-table`, which is all the rows from our original table where state is "MA"}}
-
-@hspace{3em}+b.+ Type `MA-table` into the Interactions Area. What does it evaluate to? @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
++b.+ Type `MA-table` into the Interactions Area. What does it evaluate to? @fitb{}{@ifsoln{A Table just for data from Massachusetts}}
+}
 
 @n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `MA-table`.
 
-@hspace{3em}+a.+ What is the @math{S}-value? @fitb{20em}{@ifsoln{3.18e4 = 31800 positive cases.}} +
-@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{It's a better fit than the model for the full `covid-table`. But an error of 31,000 cases is not insignificant for data ranging from about 100,000 to 350,000}}
+@indented{
+The optimized linear model for this dataset shows an @fitbruby{12em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{}{@ifsoln{846 case per day.}}{slope} 
 
-@n Using the code for `is-MA` and `MA-table` as a model, *define a new function* `is-VT` and *create a grouped sample* called `VT-table`. +
-@hspace{3em}Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `VT-table`.
+The @vocab{S-value} is about @fitbruby{9em}{@ifsoln{3.18e4 = 31800}}{S} and @fitbruby{9em}{@ifsoln{positive cases}}{units} in this dataset range from @fitbruby{7em}{@ifsoln{104,667}}{lowest y-value} to @fitbruby{8em}{@ifsoln{341925}}{highest y-value}, so there is @fitbruby{17em}{@ifsoln{significant}}{insignificant / reasonable / significant / extreme} error in predictions made using this model.
 
-@hspace{3em}+a.+ What is the @math{S}-value? @fitb{20em}{@ifsoln{~825.96 positive cases}} +
-@hspace{3em}+b.+ What does it tell us about the model? @fitb{}{@ifsoln{It's not as good as the model for the `MA-table`. An error of 826 cases is significant for data ranging from about 1000 to 7000.}}
+How does it compare to the model you made for the full `covid-table`? @fitb{}{@ifsoln{It's a little better, but not much.}}
+}
+
+@n *Define a new function* `is-VT` and *create a grouped sample* called `VT-table`, using the code for `is-MA` and `MA-table` as a model. +
+
+@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `VT-table`.
+
+@indented{
+The optimized linear model for this dataset shows an @fitbruby{12em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{}{@ifsoln{21 case per day.}}{slope}
+
+The @vocab{S-value} is about @fitbruby{9em}{@ifsoln{826}}{S} and @fitbruby{9em}{@ifsoln{positive cases}}{units} in this dataset range from @fitbruby{7em}{@ifsoln{1092}}{lowest y-value} to @fitbruby{8em}{@ifsoln{6781}}{highest y-value}, so there is @fitbruby{17em}{@ifsoln{significant}}{insignificant / reasonable / significant / extreme} error in predictions made using this model.
+
+How does it compare to the other models you just made? @fitb{}{@ifsoln{It's not as good as the model for MA.}}
+}

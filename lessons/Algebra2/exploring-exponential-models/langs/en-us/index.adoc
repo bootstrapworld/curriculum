@@ -150,10 +150,13 @@ Even in 2020, very few people could have predicted the impact Covid would have o
 @slidebreak
 
 @lesson-instruction{
-- Pyret makes it pretty easy for us to confirm our suspicion that a linear model won't do a great job of modeling this dataset.
+Pyret makes it pretty easy for us to confirm our suspicion that a linear model won't do a great job of modeling this dataset.
 - Turn to @printable-exercise{fitting-linear-model.adoc} and complete part 1 (lr-plot).
 }
-
+@QandA{
+@Q{What does the @vocab{S-value} tell us about the model?}
+@A{This model is not a great fit for the data. The @vocab{S-value} indicates58000 cases is a significant amount of error for data ranging from 0 to 350000.}
+}
 Datasets like these are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships._
 
 In fact, the scatter plot doesn't look much like a scatter plot all! It looks like someone took a marker and drew in five different curvy lines. These patterns are so distinct from one another that we're going to need to make _more than one model_.
@@ -255,7 +258,7 @@ Are linear models a good fit for this data? Why or why not?
 
 Quadratic models capture _parabolic relationships_, where one quantity varies based on the square of another. In quadratic models, we expect the response variable to grow by differing amounts over equal intervals in the explanatory variable.
 
-@right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty low @math{S}-value! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
+@right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a pretty low @vocab{S-value}! But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
 === Synthesize
 
