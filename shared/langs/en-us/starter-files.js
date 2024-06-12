@@ -960,7 +960,7 @@ const Alg2 = {
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+      "url": "https://code.pyret.org/editor#share=1qXYu57_noEwzYOL3M4YxqzW6mIcas88x"
     }
   },
     "alg2-covid": {
