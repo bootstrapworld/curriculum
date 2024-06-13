@@ -129,7 +129,7 @@ force:
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
-	@$(MAKE_DIR)get-screenshots.sh
+	node lib/maker/screenshot-elts.js distribution
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 quick-deploy:
