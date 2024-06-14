@@ -300,6 +300,13 @@
     (#\± "±")
     ))
 
+(define *mathjax-chars-that-need-flanking-space*
+  '(
+    #\+
+    #\-
+    #\=
+    ))
+
 (define *standard-mathjax-ctl-seqs*
   '(
     ("Delta" "Δ")
@@ -401,6 +408,9 @@
                                  (math-subscript (read-mathjax-token i)
                                                  #:use-unicode? #f
                                                  #:asciidoc? asciidoc?)]
+                                [(member c *mathjax-chars-that-need-flanking-space*)
+                                 (read-char i)
+                                 (string #\space c #\space)]
                                 [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
