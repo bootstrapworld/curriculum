@@ -957,22 +957,46 @@ const Projects = {
 }
 
 const Alg2 = {
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+  "alg2-cheerios" : {
+    "title" : "Cheerios Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1-hFDUHjQqhNEHrwkVMj6gZvOtvYWiNlP"
     }
   },
-    "alg2-covid": {
-    "title": "Covid Spread Starter File",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/666c4dbf08e1286b11f2507a"
+  "alg2-states-intro" : {
+    "title" : "Preview: State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1ZhMIricSR89-NZq1pgZWP_memefAJw65"
     }
+  },
+  "alg2-states-fit-model" : {
+    "title" : "Fitting a Model: State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
+    },
   },
    "alg2-fuel-efficiency": {
     "title": "Fuel Efficiency Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
+    }
+  },
+  "alg2-exploring-quadratics-desmos": {
+    "title": "Exploring Quadratic Functions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
+    }
+  },
+  "alg2-covid": {
+    "title": "Covid Spread Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Gj8C7JWGAmHqPPnSY9auAcuivHH6rvEA"
+    }
+  },
+  "alg2-covid-desmos" : {
+    "title" : "Modeling Covid Spread (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
   "alg2-ca-rent" : {
@@ -985,18 +1009,6 @@ const Alg2 = {
     "title": "Exploring Exponential Functions (Desmos)",
     "pyret" : {
       "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
-    }
-  },
-  "alg2-exploring-quadratics-desmos": {
-    "title": "Exploring Quadratic Functions (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
-    }
-  },
-  "alg2-covid-desmos" : {
-    "title" : "Modeling Covid Spread (Desmos)",
-    "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
   "alg2-log-desmos" : {
@@ -1017,29 +1029,17 @@ const Alg2 = {
       "url" : "https://code.pyret.org/editor#share=1OhkCl-a5TTCJ0ZtXca977TqxhOlniZLU"
     }
   },
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+    }
+  },
   "alg2-co2" : {
     "title" : "Carbon Dioxide Starter File",
     "pyret" : {
       "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt"
     }
-  },
-  "alg2-cheerios" : {
-    "title" : "Cheerios Starter File",
-    "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1-hFDUHjQqhNEHrwkVMj6gZvOtvYWiNlP"
-    }
-  },
-  "alg2-states-intro" : {
-    "title" : "Preview: State Demographics Starter File",
-    "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1ZhMIricSR89-NZq1pgZWP_memefAJw65"
-    }
-  },
-  "alg2-states-fit-model" : {
-    "title" : "Fitting a Model: State Demographics Starter File",
-    "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
-    },
   }
 }
 
