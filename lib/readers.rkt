@@ -328,7 +328,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "^")]
+            (string-append "^" ss "{nbsp}^")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
