@@ -300,6 +300,13 @@
     (#\± "±")
     ))
 
+(define *mathjax-chars-that-need-flanking-space*
+  '(
+    #\+
+    #\-
+    #\=
+    ))
+
 (define *standard-mathjax-ctl-seqs*
   '(
     ("Delta" "Δ")
@@ -321,7 +328,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "^")]
+            (string-append "^" ss "{sp}^")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -401,6 +408,9 @@
                                  (math-subscript (read-mathjax-token i)
                                                  #:use-unicode? #f
                                                  #:asciidoc? asciidoc?)]
+                                [(member c *mathjax-chars-that-need-flanking-space*)
+                                 (read-char i)
+                                 (string #\space c #\space)]
                                 [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
