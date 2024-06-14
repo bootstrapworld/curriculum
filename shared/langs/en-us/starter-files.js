@@ -966,7 +966,7 @@ const Alg2 = {
     "alg2-covid": {
     "title": "Covid Spread Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Gj8C7JWGAmHqPPnSY9auAcuivHH6rvEA"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/666c4dbf08e1286b11f2507a"
     }
   },
    "alg2-fuel-efficiency": {
