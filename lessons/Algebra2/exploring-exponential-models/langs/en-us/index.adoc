@@ -213,103 +213,114 @@ In order to talk about the growth of an exponential function we need to identify
 Exponential Functions are generally written in the following form: @math{f(x) = ab^x + k}. +
 Let's explore what each coefficient means!
 
-@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("Exploring Exponential Functions") so that students are looking at the correct screen.}
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("Exploring Exponential Functions") so that students are looking at the correct screen. 
+
+Decide whether you want to debrief this activity with your class after each section or at the end.}
 
 @lesson-instruction{
 - Let's return to the *Modeling Covid Spread Desmos file*.
 - You should now be on the second slide ("Exploring Exponential Functions").
-- Use it to complete the first section ("base") of @printable-exercise{graphing-models.adoc}.
+- Use it to complete @printable-exercise{graphing-models.adoc}.
 }
 
 @teacher{
-Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
-
-@slidebreak
-
-*The base of an exponential function (@math{b})* must *always be positive*, because exponential functions grow and decay uniformly. A negative @math{b} would bounce from one side of the y-axis to another. When raised to a fractional power, negative values of @math{b} might also lead to things like @math{\sqrt{-2}}!
-
-[cols="^3a,^3a,^3a", stripes="none", options="header"]
-|===
-| Exponential Growth
-| Flat
-| Exponential Decay
-
-| @image{images/growth.png, 150}
-| @image{images/flat.png, 150}
-| @image{images/decay.png, 150}
-
-| @math{b > 1} +
-When the base is *larger* than 1, the function starts flat and then grows by the "percentage greater than 1". A base of 1.25 - @math{(1 + 0.25)} - will grow by 25% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{growth factor}, since it determines how quickly the function grows.
-
-| @math{b = 1} +
-When the base is *equal* to 1, the function stays flat without any growth at all (raising 1 to _any_ power will always produce 1!).
-
-| @math{0 < b < 1} +
-When the base is *smaller* than 1, the function shrinks by the "amount less than 1". A base of 0.25 - or @math{(1 - 0.75)} - will shrink by 75% each time @math{x} grows by 1. In this instance, the base is also called the @vocab{decay factor}, since it determines how quickly the function shrinks.
-|===
-
-@slidebreak
-
-@lesson-instruction{
-Use the same slide ("Exploring Exponential Functions") to complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc}.
+Invite students to consider what new information they have gained by looking at graphical representations rather than tables.
 }
 
-An exponential function with a @vocab{growth factor} will always start close to a horizontal line, then gradually shoot up to ever-increasing values. An exponential function with a @vocab{decay factor} will drop quickly, then level out close to a horizontal line. This horizontal line is called an @vocab{asymptote}, and the equation of the line will always be @math{y = k}. 
+@slidebreak
+
+==== Base @math{b}
+
+*The base of an exponential function (@math{b})* must *always be positive*, because exponential functions grow and decay uniformly. 
+
+@indented{_A negative @math{b} would bounce from one side of the y-axis to another. +
+And, when raised to a fractional power, negative values of @math{b} might also lead to things like_ @math{\sqrt{-2}}!}
+
+[cols="3a,3a,3a", stripes="none", options="header"]
+|===
+^| Exponential Growth
+^| Flat
+^| Exponential Decay
+
+^| @image{images/growth.png, 150}
+^| @image{images/flat.png, 150}
+^| @image{images/decay.png, 150}
+
+| @center{@math{b > 1}} 
+
+- When the base is *larger* than 1, it's called the @vocab{growth factor}, since it determines how quickly the function grows.  
+- The function will start flat and then grow by the "percentage greater than 1". 
+- A base of 1.25 (or @math{1 + 0.25}) will grow by 25% each time @math{x} grows by 1. 
+
+| @center{@math{b = 1}} 
+
+- If the base were *equal* to 1, the function would stay flat without any growth at all (raising 1 to _any_ power will always produce 1!).
+
+| @center{@math{0 < b < 1}} 
+
+- When the base is *smaller* than 1, it's called the @vocab{decay factor}, since it determines how quickly the function shrinks.
+- The function will drop quickly by the "amount less than 1" and then level out close to a horizontal line.
+- A base of 0.25 (or @math{1 - 0.75}) will shrink by 75% each time @math{x} grows by 1. 
+|===
+
+@slidebreak
+
+==== Vertical Shift...and Horizontal Asymptote @math{k}
+The equation of the horizontal that an exponential function starts or ends close to will always be @math{y = k}. This horizontal line is called an @vocab{asymptote}.
 
 @slidebreak
 
 *Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
 
-@lesson-instruction{
-Using the same slide ("Exploring Exponential Functions") to complete the last section ("initial value") of @printable-exercise{graphing-models.adoc}.
-}
+@slidebreak
+
+==== Initial Value @math{a}
+*In exponential function definitions the y-intercept is not represented by a single value (as it would be for linear and quadratic functions).*
+
+- Since any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, part of the exponential term _remains_, so we can't just cross out the other terms and look at the constant term. 
+  * For example, the y-intercept for the function below will not be 3 (as you might have expected it to be).
+  * @math{f(x) = 4(2^x) + 3}
+  * @math{f(0) = 4(2^0) + 3} +
+@hspace{2em} @math{= 4(1) + 3 } +
+@hspace{2em} @math{= 4 + 3} +
+@hspace{2em} @math{= 7} +
+- *The y-intercept of an exponential function is @math{a + k}*!
+  * If @math{k} is "missing", the coefficient @math{a} is the initial value where @math{x = 0}. 
+  * If @math{a} is "missing", the value of the coefficient is @math{1}. 
+  * If we don't see @math{a} or @math{k} in an exponential equation, the y-intercept of the function is 1.
 
 @slidebreak
 
-*The y-intercept appears _differently_ in exponential function definitions than in linear and quadratic definitions:*
-
-- In both linear and quadratic functions, we could cross out the linear or quadratic term when @math{x = 0} (because anything multiplied by zero is zero) and the constant term being added or subtracted in the equation was our y-intercept. 
-- But since any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, part of the exponential term _remains_, for example: @hspace{2em} @math{4(2^0) = 4(1) = 4}.
-- As a result, *the y-intercept of an exponential function is @math{a + k}*.
-- When there is no @math{k}-term being added or subtracted, the coefficient @math{a} is the initial value where @math{x = 0}. 
-- And, if @math{a} is "missing", the value of the coefficient is @math{1}. @hspace{2em}_After all,_ @math{2^x = 1(2^x)} +
-That means that if we don't see @math{a} or @math{k} in an exponential equation, the y-intercept of the function is 1.
-
-@slidebreak
-
-How well can you identify linear, quadratic, and exponential plots?
-
-@lesson-instruction{
-- Complete @printable-exercise{classifying-plots.adoc}.
-}
-
-@slidebreak
-
-@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
+==== @vocab{Exponential growth} and @vocab{exponential decay} show up all the time!
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, which will become 8, then 16, and so on.
 - Unstable particles degrade into stable particles over time, emitting radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
 - Money in a savings account grows by a certain percentage each year. 3% growth on $100 would turn into $103. The next year that would become $106.09. And the next year $109.27. Every year there's a little more money to grow. If you start saving early, the account will grow into quite a lot more money down the road.
 
-@teacher{In the following two activities, students will decide whether various scenarios and definitions represent quadratic, linear, or exponential functions. They will also have opportunities to think about and apply their knowledge of growth, decay, initial value, and growth factor.}
-
 @slidebreak
 
+@teacher{In the following activities, students will:
+
+- identify whether various plots, scenarios, and definitions represent linear, quadratic, or exponential functions
+- think about and apply their knowledge of growth, decay, initial value, and growth factor
+
+Decide whether you'd like to pull your class back together to discuss after each activity or once they've completed all three.}
+
+
 @lesson-instruction{
-- Complete @printable-exercise{classifying-descriptions.adoc}.
+- Let's practice identifying linear, quadratic, and exponential growth. With your partner, complete:
+  * @printable-exercise{classifying-descriptions.adoc}
+  * @printable-exercise{classifying-defs.adoc}
+  * @printable-exercise{classifying-plots.adoc}
+}
+
+@QandA{
 - What strategies did you use to decide if a function was linear, quadratic, or exponential?
+- When a function was exponential, how did you recognize whether it was growing or decaying?
 - What new insights did you gain about exponential functions by thinking about them in real-world scenarios?
 }
 
 @teacher{Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before? }
-
-@slidebreak
-
-How well can you identify linear, quadratic, and exponential definitions?
-
-@lesson-instruction{
-- Complete @printable-exercise{classifying-defs.adoc}.
-}
 
 === Synthesize
 
