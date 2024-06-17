@@ -72,7 +72,8 @@ Be attentive to sense-making: If a wealthy country is suffering heavy casualties
 @teacher{Make sure you have created a link or code for your class to @starter-file{alg2-log-desmos} and paced the class so they have access to only slides 2 and 3 (or to only the first 3 slides if you want them to also be able to play with a slider for a linear model).}
 
 @lesson-instruction{
-- Working in pairs or small groups, complete @printable-exercise{fitting-models.adoc} using the *Desmos* link I've shared with you to a file called *Fitting Wealth-v-Health and Exploring Logarithmic Models*.}
+- Open the *Desmos* link I've shared with you. The file should be called *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+- Working in pairs or small groups, complete @printable-exercise{fitting-models.adoc}.}
 
 @teacher{
 This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to discover that a new kind of model is necessary, not to find a perfect fit with linear, quadratic, or exponential models!
@@ -139,21 +140,23 @@ For example, it might take 10 steps to go from @math{1} to @math{2}, but then a 
 
 === Investigate
 
-@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. Decide whether you want to debrief as a class after they complete each section of @printable-exercise{graphing-models.adoc} or will wait to debrief at the end.}
 
 Logarithmic models have the form @math{f(x) = a \log_b(x) + c}
 
 @lesson-instruction{
 - Let's return to the *Desmos* file and explore how the constants in a logarithmic function definition impact the shape of its graph. 
 - You should now be on a new slide: *Slide 4: Exploring Logarithmic Functions* 
-- Use it to complete the first section ("base") of @printable-exercise{graphing-models.adoc}
+- Use it to complete @printable-exercise{graphing-models.adoc}
 }
 
 @teacher{Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
 
 @slidebreak
 
-Note: *The base @math{b} of the logarithm* is similar to the base in an exponential expression.
+==== Base @math{b}
+
+*The base @math{b} of the logarithm* is similar to the base in an exponential expression.
 
 [cols="^1a,^1a", stripes="none", options="header"]
 |===
@@ -176,11 +179,7 @@ And, since anything to the power of zero is always 1, the log of 1 will always b
 
 @slidebreak
 
-@lesson-instruction{
-Complete the second section ("vertical shift") of @printable-exercise{graphing-models.adoc} using *Slide 4: Exploring Logarithmic Functions* of the *Desmos* file.
-}
-
-@slidebreak
+==== Vertical Shift @math{c}
 
 *The term @math{c} is the vertical shift* of the function, which moves the curve up or down. +
 (_We've seen vertical shifts in other kinds of functions given different names, like @math{k} for quadratics and @math{b} for linear function._) 
@@ -192,34 +191,41 @@ Because @math{\log_{\mbox{anything}}(1) = 0}
 
 @slidebreak
 
-@lesson-instruction{
-Complete the last section ("logarithmic coefficient") of @printable-exercise{graphing-models.adoc} using *Slide 4: Exploring Logarithmic Functions* of the *Desmos* file.
-}
-
-@slidebreak
+==== Logarithmic Coefficient @math{a}
 
 *The term @math{a} is called the logarithmic coefficient*, which - like @math{b} - determines how quickly the function grows.
 
-@teacher{Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
+Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly.
 
-Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly. In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
+@teacher{In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
 
-@slidebreak
-
-We observed a logarithmic relationship between wealth and lifespan in our Countries of the World dataset. *There are lots of relationships like this, where the function grows or decays very quickly at first, but then moves at a glacial pace the farther out it goes.*
-
-We _perceive_ loudness on a base-10 logarithmic scale. We can hear a pin drop, but we can also process sounds as loud as a fog horn without getting hurt. A fire alarm is _thousands of times louder_ than a dog barking, but our brains don't process that difference. For us to perceive a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
+Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
 
 @slidebreak
 
-@right{@image{images/decibels-table.png, 350}}The table to the right shows different sounds as measured by _intensity_ (@math{watts/meter^2}, known as "flux") and in _decibels_.
+==== Logarithmic Relationships allow us to compare things of very different sizes!
+
+We observed a logarithmic relationship between wealth and lifespan in our Countries of the World dataset. 
+
+There are lots of relationships like this, *where the function grows or decays very quickly at first, but then moves at a glacial pace the farther out it goes.*
+
+- We _perceive_ loudness on a base-10 logarithmic scale. We can hear a pin drop, but we can also process sounds as loud as a fog horn without getting hurt. A fire alarm is _thousands of times louder_ than a dog barking, but our brains don't process that difference. For us to perceive a sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
+
+@slidebreak
+
+@indented{@right{@image{images/decibels-table.png, 350}}The table to the right shows different sounds as measured by _intensity_ (@math{watts/meter^2}, known as "flux") and in _decibels_.
 
 _Flux_ is something objective and measurable: louder sounds are generated from higher flux.
 
 But as humans with logarithmic _perceptions_ of loudness, we instead measure "loudness" on a scale that matches our _perception._
+}
 
 @clear
 @slidebreak
+
+- Scientists use logarithms to be able to fit things of very divergent magnitudes onto the same scale. For example:
+  * pH measures acidity such that pH of 6 is ten times as acidic as pH of 7. By using a logarithmic scale, we can put orange juice (pH=3) and milk (pH=6.8) on the same scale, even though the OJ is nearly 10000 as acidic. _How many times more acidic is acid rain on Venus (pH=1) than Van Lake in Turkey (pH=9.8), the world's largest soda lake?_ 
+  * The Richter Scale measures the magnitude of earthquakes. By using a logarithmic scale when can put the 2011 earthquake in Japan (9.0) on the same scale as an earthquake caused by a stick of dynamite (1.2) even though one was nearly 100 million times bigger than the other!
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
@@ -248,13 +254,17 @@ To fit our logarithmic model, we need to find @math{a} and @math{c}, such that t
 @teacher{Sync or pace students to __Slide 5: Wealth-v-Health (Logarithmic)__ of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{changing-scale.adoc} ("Fitting a Logarithmic Model"), using __Slide 5: Wealth-v-Health (Logarithmic)__ of the *Desmos* file.
-- What values did you come up with for @math{a} and @math{c} in your best-guess logarithmic model?
-- How does @math{a} and @math{c} compare with other students'? Are they very similar or very different?
-- What were the @math{S} values?
+- Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on the slide 5: "Wealth-v-Health (Logarithmic)".
+- Use it to complete the first section of @printable-exercise{changing-scale.adoc}.
 }
 
-@teacher{Record different students' responses for @math{a} and @math{c} on the board.}
+@QandA{
+@Q{What values did you come up with for @math{a} and @math{c} in your best-guess logarithmic model?}
+@A{Record different students' responses for @math{a} and @math{c} on the board.}
+@Q{How does @math{a} and @math{c} compare with other students'? Are they very similar or very different?}
+@Q{What were the @math{S} values for these models?}
+}
 
 @slidebreak
 
@@ -263,12 +273,11 @@ Trial-and-error only gets us so far, and it's not clear that we would ever stumb
 If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
 
 === Investigate
-Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want. Data Scientists often use transformations to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done.
-
-
+Data Scientists often use transformations to stretch their data into shapes that are easier to use, and then reverse the transformation when they are done. 
 
 @lesson-instruction{
-Complete the last section of @printable-exercise{changing-scale.adoc}, using @starter-file{alg2-log-desmos}.
+- Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want... 
+- With that image in mind, let's complete the last section of @printable-exercise{changing-scale.adoc}.
 }
 
 @slidebreak
@@ -311,13 +320,17 @@ We tried changing the scale on the x-axis from linear to exponential, which canc
 @teacher{Sync or pace students to __Slide 6: Wealth-v-Health (Transformed)__ of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
-- Complete @printable-exercise{transforming-data.adoc}, using __Slide 6: Wealth-v-Health (Transformed)__ of the *Desmos* file.
-- What values did you come up with for our coefficients @math{m} and @math{b} in your best-guess linear model.
-- Were those values very similar or very different?
-- How close were the values from our best-guess logarithmic model?
+- Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on the slide 6: "Wealth-v-Health (Transformed)".
+- Use it to complete @printable-exercise{transforming-data.adoc}.
 }
 
-@teacher{Record different students' responses for @math{m} and @math{b} on the board. These numbers should be somewhat close to their earlier responses for @math{a} and @math{c}!}
+@QandA{
+@Q{What values did you come up with for our coefficients @math{m} and @math{b} in your best-guess linear model?}
+@A{Record different students' responses for @math{m} and @math{b} on the board. These numbers should be somewhat close to their earlier responses for @math{a} and @math{c}!}
+@Q{Were those values very similar or very different?}
+@Q{How close were the values from our best-guess logarithmic model?}
+}
 
 @slidebreak
 
