@@ -72,21 +72,22 @@ Be attentive to sense-making: If a wealthy country is suffering heavy casualties
 @teacher{Make sure you have created a link or code for your class to @starter-file{alg2-log-desmos} and paced the class so they have access to only slides 2 and 3 (or to only the first 3 slides if you want them to also be able to play with a slider for a linear model).}
 
 @lesson-instruction{
-- Open the *Desmos* link I've shared with you. The file should be called *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+- Open the *Desmos* link I've shared with you. (The file should be called *Fitting Wealth-v-Health and Exploring Logarithmic Models*.)
 - Working in pairs or small groups, complete @printable-exercise{fitting-models.adoc}.}
 
 @teacher{
-This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. The goal is to discover that a new kind of model is necessary, not to find a perfect fit with linear, quadratic, or exponential models!
+This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. +
+The goal is to discover that a new kind of model is necessary, not to find a perfect fit with linear, quadratic, or exponential models!
 }
 === Synthesize
 
-@teacher{Direct students to look at the scatter plot they created in Pyret of `median-lifespan` versus `pc-gdp`.}
+@teacher{Direct students to look at the scatter plot they created in Pyret of `median-lifespan` versus `pc-gdp-in-thousands`.}
 
 @QandA{
 @Q{What's the best model you came up with?}
 @Q{What kinds of lines or curves did you draw?}
-@Q{How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp`?}
-@A{It starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.}
+@Q{How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp-in-thousands`?}
+@A{It starts out rising fast on the left, before tapering off as `pc-gdp-in-thousands` increases to the right.}
 @Q{How well did our linear, quadratic, and exponential models fit this data?}
 @A{None of the kinds of functions we've seen so far exhibit the behavior we see here! In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off.}
 }
@@ -148,7 +149,7 @@ Logarithmic models have the form @math{f(x) = a \log_b(x) + c}
 
 @lesson-instruction{
 - Let's return to the *Desmos* file and explore how the constants in a logarithmic function definition impact the shape of its graph. 
-- You should now be on a new slide: *Slide 4: Exploring Logarithmic Functions* 
+- You should now be on *Slide 4: Exploring Logarithmic Functions* 
 - Use it to complete @printable-exercise{graphing-models.adoc}
 }
 
@@ -264,7 +265,7 @@ To fit our logarithmic model, we need to find @math{a} and @math{c}, such that t
 @QandA{
 @Q{What values did you come up with for @math{a} and @math{c} in your best-guess logarithmic model?}
 @A{Record different students' responses for @math{a} and @math{c} on the board.}
-@Q{How does @math{a} and @math{c} compare with other students'? Are they very similar or very different?}
+@Q{How do your @math{a} and @math{c} values compare with those of other students'? Are they very similar or very different?}
 @Q{What were the @math{S} values for these models?}
 }
 
@@ -279,12 +280,12 @@ Data Scientists often use transformations to stretch their data into shapes that
 
 @lesson-instruction{
 - Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want... 
-- With that image in mind, let's complete the last section of @printable-exercise{changing-scale.adoc}.
+- With that image in mind, follow the direction in the last section of @printable-exercise{changing-scale.adoc}.
 }
 
 @slidebreak
 
-By _transforming the x-axis_ to grow exponentially, we are "squashing" the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
+By _transforming the x-axis_ to grow exponentially, we are "squashing" the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp-in-thousands` as the one before it. This balances out the logarithmic growth in `median-lifespan`, makes the curved relationship appear linear, and warps our logarithmic model so it looks like a straight line-of-best-fit.
 
 @QandA{
 @Q{A person running on a treadmill doesn't change location. Why not?}
@@ -315,7 +316,7 @@ Having discovered that changing the scale of a graph does not allow them to use 
 
 === Launch
 
-We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by "shrinking the axis". Another strategy is to "shrink the data", by _transforming the x-coordinates themselves_. Instead of plotting `pc-gdp` on a *logarithmic* x-axis, we could plot `log(gdp)` on a *linear* x-axis.
+We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by "shrinking the axis". Another strategy is to "shrink the data", by _transforming the x-coordinates themselves_. Instead of plotting `pc-gdp-in-thousands` on a *logarithmic* x-axis, we could plot `log(gdp)` on a *linear* x-axis.
 
 @slidebreak
 
@@ -342,9 +343,9 @@ This transformation changed the _kind of growth_ from logarithmic to linear: the
 
 === Investigate
 
-We transformed the `pc-gdp` column in three steps:
+We transformed the `pc-gdp-in-thousands` column in three steps:
 
-1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp` column).
+1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp-in-thousands` column).
 2. We defined a new column to use as our x-values, populating it by applying the transformation to each of our original x-values.
 3. We displayed these transformed datapoints as a scatter plot.
 
@@ -379,7 +380,7 @@ Use this knowledge to complete Part 2 of @printable-exercise{logarithmic-models.
 
 @slidebreak
 
-@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `11.9011` and a y-intercept of `24.2636`. Our @math{S} has dropped to 4.49, showing a vastly better correlation than before.
+@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp-in-thousands` column with a log function produces a scatter plot showing a linear pattern in the data! Pyret's `lr-plot` tool computes the best possible linear model for our transformed data, determining it to have a slope of `11.9011` and a y-intercept of `24.2636`. Our @math{S} has dropped to 4.49, showing a vastly better correlation than before.
 
 @slidebreak
 
