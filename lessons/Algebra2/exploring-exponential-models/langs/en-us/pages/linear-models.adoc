@@ -1,102 +1,53 @@
 = Linear Models for MA-table
 ++++
 <style>
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
-
-.autonum { font-weight: bold; }
+.autonum { font-weight: bold; margin-top: 2.5ex; }
 .autonum:after { content: ')' !important; }
-
-.FillVerticalSpace { grid-gap: 20px; margin-top: 5px; }
-
-h2 .MathJax { float: right;  padding-right: 1em; }
-
-/* Use table cells to host scatter plot image */
-td {
-    padding: 0 !important;
-    background-image: url(../images/f99f615fabddc961.png);
-    background-size: 2in 1.75in;
-    max-height: 1.75in;
-    min-height: 1.75in;
-    background-position-x: 0.2in;
-    background-repeat: no-repeat;
-}
-
-td .fitb { padding-top: 0 !important; }
-td .MathJax { min-width: 30px !important; display: inline-block; }
+img { width: 600px; }
 </style>
 ++++
 
-== Fitting the Model Visually @math{f(x) = mx + b}
-
 [.linkInstructions]
-For this section, you'll need to have *Slide 1: Linear Models* of *Modeling Covid Spread (Desmos)* open on your computer.
+For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
 
-@n Try changing the value of @math{m} and @math{b} to find three promising linear models, graphing each one and labeling your values in the grids below.
+@vspace{1ex}
 
-[.FillVerticalSpace, cols="1,1,1", frame="none"]
+**This starter file defines a table _just for MA data_, called `MA-table`: @show{(code '(define MA-table (filter covid-table is-MA)))}**
+
+@vspace{1ex}
+
+[cols="^.^2a, ^.^3a", frame="none"]
 |===
-| @math{m=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{}
-
-| @math{m=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{}
-
-| @math{m=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{}
-
+| @n Make a scatter plot from `MA-table` showing the relationship between `day` and `positive`, using `state` as the labels. Sketch the plot on the right.
+|
+@ifnotsoln{@image{../images/MA-covid-blank.png}}
+@ifsoln{   @image{../images/MA-covid.png}      }
 |===
 
-== Fitting the Model Programmatically @math{f(x) = mx + b}
+As we've seen, it's easy to fit a linear model to any dataset in Pyret, so let's start by testing how well a linear function could model this data.
 
-[.linkInstructions]
-For this section, you'll need to have @starter-file{alg2-covid} open on your computer.
+@n Use `lr-plot` to obtain the best-possible *linear model* for the MA Covid dataset, and write it below:
 
-@n In the Definitions Area, define the three models you fit in Desmos, calling them `linear1`, `linear2` and `linear3` to .
+@hspace{3em}f(x) = @fitb{25em}{@ifsoln{@math{845.617x + 6.94e4} @hspace{2em} or @hspace{2em} @math{845.617x + 69400}}} @hspace{3em} @math{S =} @fitb{20em}{@ifsoln{3.18e4  @hspace{2em} or  @hspace{2em} 31800}}
 
-@ifsoln{@vspace{1ex}}
+@vspace{1ex}
 
-@ifsoln{Answers will vary.}
+_Note: Pyret uses `e` for scientific notation. For example:_ @math{2.46e3 = 2.46 \times 10^3 = 2460}
 
-@ifsoln{If @math{m=1200} and @math{b=70000} for your first model, you would type the following in your definitions area}
+@n The optimized linear model for this dataset predicts an @fitbruby{8em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{5em}{@ifsoln{846}}{slope} @fitbruby{9em}{@ifsoln{positive cases}}{y-variable} per @fitbruby{7em}{@ifsoln{day}}{x-variable}. +
+@indented{The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{31800}}{S}@fitbruby{8em}{@ifsoln{positive cases}}{units}, which is @fitbruby{16em}{@ifsoln{significant}}{insignificant, moderate, significant, extreme} considering that @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} in this dataset range from @fitbruby{8em}{@ifsoln{104156}}{lowest y-value} to @fitbruby{8em}{@ifsoln{341925}}{highest y-value}.}
 
-@ifsoln{ `fun linear1(x) : (1200 * x) + 70000 end`}
+@n Change the definition of the `linear` function in the @starter-file{alg2-covid} to match the model produced by `lr-plot` and "Save".
 
-@n Use `fit-model` to determine the @math{S}-value value of each of your models for the `MA-table`.
+@n Do you think a linear function is a good model for this dataset? Why or why not? @fitb{}{} +
 
-@ifsoln{@vspace{1ex}}
+@fitb{}{@ifsoln{}}
 
-@ifsoln{For the first one use: `fit-model(MA-table, "state", "day", "positive", linear1)`}
+@fitb{}{@ifsoln{}}
 
-@ifsoln{@vspace{1ex}}
+@fitb{}{@ifsoln{}}
 
-@ifsoln{@math{S} values will vary. For the example above it would be: 52,222.85}
-
-@hspace{2em} @math{S} for `linear1`: @fitb{10em}{} @hspace{3em} @math{S} for `linear2`: @fitb{10em}{} @hspace{3em} @math{S} for `linear3`: @fitb{10em}{}
-
-@n Use `lr-plot` to obtain the best-possible *linear model* for the MA Covid dataset. 
-
-@ifsoln{@vspace{1ex}}
-
-@ifsoln{Code: `lr-plot(MA-table, "state", "day", "positive")`}
-
-- y = @fitb{}{@ifsoln{@math{845.617x + 6.94e4}}}
-- @math{S =} @fitb{}{@ifsoln{3.18e4}}
-
-@n Look at the equation `lr-plot` generated. Do you see an `e`? What does it mean? @fitb{}{}
-
-@fitb{}{@ifsoln{The y-intercept value is @math{6.94e4}. It's another way of writing @math{6.94 \times 10^4}, which is scientific notation for @math{69,400}.}}
-
-@n How does the model generated by `lr-plot` compare to the ones you fit visually in Desmos? @fitb{}{@ifsoln{Answers will vary. But students may note that the @math{S}-value from the `lr-plot` is much smaller, that the y-intercepts are pretty different, etc.}}
+@star What do you think the code that defines `MA-table` is actually doing? @fitb{}{}
 
 @fitb{}{}
 
-== Are Linear Models a Good Fit for This Data?
-
-@n Would you feel good about making predictions based on these models? Why or why not? @fitb{}{} +
-
-@fitb{}{@ifsoln{}}
-
-@fitb{}{@ifsoln{}}
-
-@fitb{}{@ifsoln{}}

@@ -933,6 +933,15 @@ const Projects = {
       "url": "https://www.wescheme.org/openEditor?publicId=pYymiz1Vby"
     } 
   },
+  "logos-warmup": {
+    "title": "Logos Warm Up",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1nuz6eBw9W4Fv8NspmucXam3W_w9dSOs_&v=e8968a4"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=Fdr3Qzegfr"
+    } 
+  },
   "threats": {
     "title": "Threats to Validity Project Template",
     "pyret": {
@@ -990,7 +999,7 @@ const Alg2 = {
   "alg2-covid": {
     "title": "Covid Spread Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
+      "url": "https://code.pyret.org/editor#share=1Gj8C7JWGAmHqPPnSY9auAcuivHH6rvEA"
     }
   },
   "alg2-covid-desmos" : {
@@ -1040,6 +1049,7 @@ const Alg2 = {
     "pyret" : {
       "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
     }
+
   }
 }
 

@@ -4,7 +4,7 @@
 <style>
 /*
 use tables for positioning, so don't let them add
-any space of change autonum formatting
+any space or change autonum formatting
 */
 body.workbookpage td { padding: 0; }
 body.workbookpage td .autonum { font-weight: bold; }
@@ -22,55 +22,155 @@ Decide whether each situation is best described by a linear, quadratic, or expon
 
 @vspace{2ex}
 
-[.FillVerticalSpace, cols="10a", frame="none", stripes="none"]
+[.FillVerticalSpace, cols="10a", frame="none", stripes="none", grid="none"]
 |===
-| *@n The resale value of a car drops by a fixed percentage each year. A particular kind of car sells for $32,000, and its value drops by 12.5% each year*
+| *@n A particular kind of car sells for $32,000, and its resale value drops by 12.5% each year.*
 
-@hspace{6em} +a.+ When the car is brand-new (x=0), how much is it worth? @right{@fitb{8em}{$32,000}}
+@hspace{6em} +a.+ When the car is brand-new (x=0), how much is it worth? @fitb{8em}{@ifsoln{$32,000}}
 
-@hspace{6em} +b.+ How much is it worth after 1 year (x=1)? @right{@fitb{8em}{@ifsoln{$28,000}}}
+@hspace{6em} +b.+ How much is it worth after... 
 
-@hspace{6em} +c.+ After two years (x=2)? @fitb{8em}{@ifsoln{$24,500}} After three years (x=3)? @fitb{8em}{@ifsoln{$21,437.50}} Four (x=4)? @right{@fitb{8em}{@ifsoln{$18,757.81}}}
+@indented{
+[cols="^1a,^1a,^1a,^1a"]
+!=== 
+!1 year? +
+x=1 	
+! 2 years? +
+x=2	
+.>! 3 years? +
+x=3		
+.>! x =4
 
-@hspace{6em} +d.+ What is the *form* of this function (linear, quadratic, or exponential)? @right{@fitb{8em}{@ifsoln{Exponential}}}
+! @ifsoln{$28,000}	
+! @ifsoln{$24,500} 	
+! @ifsoln{$21,437.50} 	
+! @ifsoln{$18,757.81} @ifnotsoln{@vspace{2ex}}
+!===
+}
 
-@hspace{6em} +e.+ *If it's exponential*, what is the initial value? @fitb{4em}{@ifsoln{$32,000}} The base? @fitb{4em}{@ifsoln{1/8}} Is it growth or decay? @right{@fitb{8em}{@ifsoln{decay}}}
+@hspace{6em} +c.+ What is the *form* of this function?  @hspace{3em} 
+linear &#9744; @hspace{3em} 
+quadratic &#9744; @hspace{3em}  
+@ifsoln-choice{exponential}@ifnotsoln{&#9744;} +
 
+@hspace{7em} *If it's exponential*, +
+@hspace{7em} Identify the 
+_initial value_: @fitb{4em}{@ifsoln{$32,000}} @hspace{1em} 
+_base_: @fitb{4em}{@ifsoln{1/8}} +
 
-| *@n Sally is selling lemonade, for $1.25 a glass. She starts with $20 in cash, and hopes that by selling lemonade she will finally be able to get the power drill she's been wanting.*
+@hspace{7em} Is it 
+_growth_? &#9744;  @hspace{1em} or @hspace{1em} 
+@ifsoln-choice{_decay_?} @ifnotsoln{&#9744;} 
 
-@hspace{6em} +a.+ When Sally starts the day (x=0), how many dollars does she have? @right{@fitb{8em}{$20}}
+| *@n Sally is selling lemonade, for $1.25 a glass in hopes of finally be able to get the power drill she's been wanting. She starts with $20 cash.*
 
-@hspace{6em} +b.+ How many dollars will she have after the first sale (x=1)? @right{@fitb{8em}{@ifsoln{20 + 1.25 = $21.25}}}
+@hspace{6em} +a.+ When Sally starts the day (x=0), how many dollars does she have? @fitb{8em}{@ifsoln{$20}}
 
-@hspace{6em} +c.+ After the sale (x=2)? @fitb{8em}{@ifsoln{$22.50}} The third (x=3)? @fitb{8em}{@ifsoln{$23.75}} The fourth (x=4)? @right{@fitb{8em}{@ifsoln{$25.00}}}
+@hspace{6em} +b.+ How many dollars will she have after...
+@indented{
+[cols="^1a,^1a,^1a,^1a"]
+!=== 
+! the first sale? +
+x=1 	
+! second sale? +
+x=2	
+.>! x =3		
+.>! x = 4
 
-@hspace{6em} +d.+ What is the *form* of this function (linear, quadratic, or exponential)? @right{@fitb{8em}{@ifsoln{Linear}}}
+! @ifsoln{20 + 1.25 = $21.25}	
+! @ifsoln{$22.50} 	
+! @ifsoln{$23.75} 	
+! @ifsoln{$25.00} 				@ifnotsoln{@vspace{2ex}}
+!===
+}
 
-@hspace{6em} +e.+ *If it's exponential*, what is the initial value? @fitb{4em}{@ifsoln{N/A}} The base? @fitb{4em}{@ifsoln{N/A}} Is it growth or decay? @right{@fitb{8em}{@ifsoln{N/A}}}
+@hspace{6em} +c.+ What is the *form* of this function?  @hspace{3em} 
+@ifnotsoln{&#9744;} @ifsoln-choice{linear} @hspace{3em} 
+&#9744;quadratic  @hspace{3em} 
+&#9744; exponential +
 
-| *@n Mrs. Bidwell's club rules are that every student should high-five every other student. She starts out her year with only two students, but a new one joins the club every day.*
+@hspace{7em} *If it's exponential*, +
+@hspace{7em} Identify the 
+_initial value_: @fitb{4em}{} @hspace{1em} 
+_base_: @fitb{4em}{} +
 
-@hspace{6em} +a.+ How many high-fives happen at the start (x=0), with 2 students? @right{@fitb{8em}{1}}
+@hspace{7em} Is it 
+_growth_? &#9744;   @hspace{1em} or @hspace{1em} 
+_decay_? &#9744; 
 
-@hspace{6em} +b.+ How many high-fives happen the next day (x=1), with 3 students? @right{@fitb{8em}{@ifsoln{3}}}
+| *@n Two students started a club. At every meeting, students in attendance must high-five each of the other students. Club membership has been growing steadily by one student each meeting.*
 
-@hspace{6em} +c.+ With a fourth? (x=2)? @fitb{8em}{@ifsoln{6}} A fifth (x=3)? @fitb{8em}{@ifsoln{10}} A sixth (x=4)? @right{@fitb{8em}{@ifsoln{15}}}
+@hspace{6em} +a.+ When the 2 students started the club (x=0), how many high-fives happened? @fitb{8em}{@ifsoln{1}} +
+@hspace{6em} +b.+ How many high-fives happen at the subsequent meetings...
 
-@hspace{6em} +d.+ What is the *form* of this function (linear, quadratic, or exponential)? @right{@fitb{8em}{@ifsoln{Quadratic}}}
+@indented{
+[cols="^1a,^1a,^1a,^1a"]
+!=== 
+! with 3 students? +
+x=1 	
+! with 4 students? +
+x=2	
+! with 5 students? +
+x=3		
+.>! x=4
 
-@hspace{6em} +e.+ *If it's exponential*, what is the initial value? @fitb{4em}{@ifsoln{N/A}} The base? @fitb{4em}{@ifsoln{N/A}} Is it growth or decay? @right{@fitb{8em}{@ifsoln{N/A}}}
+! @ifsoln{3}	
+! @ifsoln{6} 	
+! @ifsoln{10} 	
+! @ifsoln{15} 				@ifnotsoln{@vspace{2ex}}
+!===
+}
 
-| *@n A meme goes viral on the internet, starting with one person posting an animation of a puppy doing a backflip into a pile of laundry. Every person that sees the meme falls in love with it, sharing it with 25 new friends.*
+@hspace{6em} +d.+ What is the *form* of this function?  @hspace{3em} 
+linear &#9744; @hspace{3em} 
+@ifsoln-choice{quadratic} @ifnotsoln{&#9744;} @hspace{3em}  
+exponential &#9744; +
 
-@hspace{6em} +a.+ When the person posts it (x=0), how many total times has it been shared? @right{@fitb{8em}{1}}
+@hspace{7em} *If it's exponential*, +
+@hspace{7em} Identify the 
+_initial value_: @fitb{4em}{}  @hspace{1em} 
+_base_: @fitb{4em}{} +
 
-@hspace{6em} +b.+ How many times will it have been shared after those friends share it (x=1)? @right{@fitb{8em}{@ifsoln{10 + 1 = 11}}}
+@hspace{7em} Is it 
+_growth_? &#9744;   @hspace{1em} or @hspace{1em} 
+_decay_? &#9744; 
 
-@hspace{6em} +c.+ When x=2? @fitb{8em}{@ifsoln{111}} When x=3? @fitb{8em}{@ifsoln{1111}} When x=4? @right{@fitb{8em}{@ifsoln{11111}}}
+| *@n A student posted their animation of a puppy doing a back flip into a pile of laundry and the meme went viral! Every person that sees the meme falls in love with it and shares it with 10 new friends.*
 
-@hspace{6em} +d.+ What is the *form* of this function (linear, quadratic, or exponential)? @right{@fitb{8em}{@ifsoln{Exponential}}}
+@hspace{6em} +a.+ When the student posts it (x=0), how many total times has it been shared? @fitb{8em}{@ifsoln{1}}
 
-@hspace{6em} +e.+ *If it's exponential*, what is the initial value? @fitb{4em}{@ifsoln{1}} The base? @fitb{4em}{@ifsoln{10}} Is it growth or decay? @right{@fitb{8em}{@ifsoln{growth}}}
+@hspace{6em} +b.+ How many times will it have been shared after...
 
+@indented{
+[cols="^1a,^1a,^1a,^1a"]
+!=== 
+! the next person shares it? +
+x=1 	
+! their friends share it? +
+x=2	
+.>! x=3				
+.>! x =4
+
+! @ifsoln{@math{10 + 1 =} + 
+11}				
+! @ifsoln{@math{11 \times 10 + 11 =} +
+121}
+.>! @ifsoln{1331} 	
+.>! @ifsoln{14641} 			@ifnotsoln{@vspace{2ex}}
+!===
+}
+
+@hspace{6em} +c.+ What is the *form* of this function?  @hspace{3em} 
+linear &#9744; @hspace{3em} 
+quadratic &#9744; @hspace{3em}  
+@ifsoln-choice{exponential}@ifnotsoln{&#9744;} +
+
+@hspace{7em}  *If it's exponential*, +
+@hspace{7em} Identify the 
+_initial value_: @fitb{4em}{@ifsoln{1}} @hspace{1em} 
+_base_: @fitb{4em}{@ifsoln{11}} +
+
+@hspace{7em} Is it 
+@ifsoln-choice{_growth_?}@ifnotsoln{&#9744;}  @hspace{1em} or @hspace{1em}  
+_decay_? &#9744; 
 |===
