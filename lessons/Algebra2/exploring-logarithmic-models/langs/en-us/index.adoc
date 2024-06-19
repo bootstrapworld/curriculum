@@ -252,16 +252,18 @@ This section builds the foundation for _linearization_, transforming the points 
 
 @teacher{Sync or pace students to __Slide 5: Wealth-v-Health (Logarithmic)__ of @starter-file{alg2-log-desmos}.}
 
-Remember that logarithmic models have the form @math{f(x) = a \log_b(x) + c}
-
-To fit our logarithmic model, we need to find @math{a} and @math{c}, such that the model fits the data as closely as possible. +
-_(In this case, and, unless otherwise specified, @math{b=10})_
-
-
 @lesson-instruction{
 - Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
 - You should now be on the slide 5: "Wealth-v-Health (Logarithmic)".
 - Use it to complete the first section of @printable-exercise{changing-scale.adoc}.
+}
+
+@strategy{@math{\log = \log_{10}}}{
+While logarithms can technically have any base, it is implied that the @math{b=10} for any instance when @math{log} appears without @math{b}.
+
+The Bootstrap pyret function `log` always uses base 10. If you want to work with another base in pyret, you can look up the `log-base` function in the @dist-link{Contracts.shtml, contracts pages}.
+
+Most math books, desmos, and calculators only offer @math{\log_{10}} and @math{ln}, which is equivalent to @math{\log_e} - the natural log.
 }
 
 @QandA{
@@ -273,7 +275,12 @@ _(In this case, and, unless otherwise specified, @math{b=10})_
 
 @slidebreak
 
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. *We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.* Unfortunately, `lr-plot` only finds linear models!
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. 
+
+@lesson-point{
+We need something like Pyret's `lr-plot` function, which uses computational methods to find the best possible model.} 
+
+Unfortunately, `lr-plot` only finds linear models!
 
 If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal logarithmic model!
 
