@@ -73,7 +73,7 @@ const Core = {
       "url": "https://code.pyret.org/editor#share=18Y3sCev196YEbzSSzWj5XPrS_M_cVkza"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=4FgZs4PZp4"
+      "url": "https://www.wescheme.org/openEditor?publicId=knne7AcviQ"
     }
   },
   "match-code-images": {
