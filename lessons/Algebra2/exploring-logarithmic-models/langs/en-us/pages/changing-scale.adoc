@@ -38,29 +38,26 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 
 == Fitting a Logarithmic Model @hspace{2em} __f(x) = a log~b~ x + c__
 
-*Open the `Data Table` folder by clicking on the triangle ([.desmosbutton]#{caret}#)*
+@ifnotsoln{@vspace{1ex}} 
 
-@vspace{1ex}
+*Open the `Data Table` folder by clicking on the triangle ([.desmosbutton]#{caret}#)*
 
 - @math{x_1} is the per-capita income for each country in thousands of $US, and @math{y_1} is the median lifespan.
 - Next to @math{y_1} you'll see a dark circle with spots ([.desmosbutton]#{points}#) inside. If the circle is dark, that means that those points are visible on our graph. Click the circle to "turn off" those dots, then click it again to turn them back on.
 - Move the graph by clicking and dragging the background.
 - Notice that a magnifying glass ([.desmosbutton]#{magnifying}#) appears to the bottom left of the table. (You may have to scroll down to see the bottom of the table!) Clicking on the magnifying glass resizes/rescales the graph to fit all the points in the table.
 
-@vspace{1ex}
+@n Look at the numbers along the x-axis, which increase as they go from left to right. +
+@hspace{1em}What would the next number be, if you were to add one at the far right? @fitb{}{@ifsoln{If students clicked the [.desmosbutton]#{magnifying}#, they'll likely say *250*}}
 
-_Look at the numbers along the x-axis, which increase as they go from left to right._
+@n _Describe_ the pattern you used to find the next number: @fitb{}{@ifsoln{the numbers increase, *adding* a constant factor @hspace{3em}(students will likely say they added 50)}}
 
-@n What would the next number be, if you were to add one at the far right? @fitb{}{@ifsoln{If students clicked the [.desmosbutton]#{magnifying}#, they'll likely say *250*}}
-
-@n _Describe_ the pattern you used to find it: @fitb{}{@ifsoln{the numbers increase, *adding* a constant factor @hspace{3em}(students will likely say they added 50)}}
-
-@fitb{}{}
+@ifnotsoln{@fitb{}{}}
 
 @n Move the sliders for @math{a} and @math{c} to create the best-fitting logarithmic model you can find, and write it below.
 
 @hspace{1em} _Note: The Bootstrap Pyret function `log` always uses @math{b = 10}._
-@teacher{Answers will vary as students will be fitting the curve by eye! Numbers below are provided as a reference.}
+
 
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
@@ -72,6 +69,7 @@ _Look at the numbers along the x-axis, which increase as they go from left to ri
 @show{(code '(define (logarithmic x) (+ (* (?ANS 9) (log x)) (?ANS 65))))}
 |===
 
+@indented{@teacher{Definitions will vary as students will be fitting the curve by eye! Numbers below are provided as a reference.}}
 
 
 @n Modify `logarithmic(x)` in @starter-file{alg2-countries} to define this model, and fit it using `fit-model`. 
@@ -107,7 +105,8 @@ quadratic &#9744;   @hspace{3em}
 exponential &#9744; @hspace{3em}
 something else &#9744; 
 
-@n Adjust the sliders for @math{a} and @math{c} to create the best-fitting model you can find, and write it below.
+@n Adjust the sliders for @math{a} and @math{c} to improve the model. _Toggle back and forth between `logarithmic` and `linear` x-axis scales as you work._ + 
+@ifnotsoln{@hspace{1em}When you are satisfied with your model, record both forms of the definition below.}
 
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
@@ -119,7 +118,7 @@ something else &#9744;
 @show{(code '(define (logarithmic2 x) (+ (* (?ANS 11.7 ) (log x)) (?ANS 60))))}
 |===
 
-@n In Pyret, modify `logarithmic2(x)` to define this model, and fit it using the `fit-model` function. What is your @math{S}? @fitb{}{@ifsoln{less than 5 }}
+@n Return to Pyret and modify `logarithmic2(x)` to define this model. Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
 @n Why do you think transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary. The data is growing logarithmically}} +
 @fitb{}{@ifsoln{and by transforming the x-axis logarithmically, it can keep up with the growth.We're inverting the data. We're warping the plot so the dots looks straight.}}  +
