@@ -1029,7 +1029,7 @@ const Alg2 = {
   "alg2-exploring-periodic-desmos" : {
     "title" : "Exploring Periodic Functions (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/665ddc01715890e39bd1f4b7"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6674fb05501f6b739037a941"
     }
   },
   "alg2-ferris-wheel" : {

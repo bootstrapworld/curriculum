@@ -119,7 +119,7 @@ Students are introduced to periodic functions, and they become familiar with the
 === Launch
 @right{@image{images/ferris-wheel.png, 300}}We're looking at example of what's called a @vocab{periodic relationship}.
 
-- The y-value (`height`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
+- The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
 
 *None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing or decreasing. We've studied relationships that grow one way until they reach a maxima or minima _once_, before growing in the other direction.
@@ -143,58 +143,58 @@ As always, we advise you to use the term that works best for your classroom cont
 
 Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! *But how can we compute the y-coordinate, based on the rotation of the circle?*
 
-==== Unit Circles
+==== Unit Clocks
 
-@right{@image{images/unit-circle.png}}Let's think about a simpler case, of a circle of radius 1 that is centered around the origin (mathematicians often call this "unit circle"). +
+@right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
-The circumference of the circle crosses the x-axis at @math{x=1} and @math{x=1}, and the y-axis at @math{y=1} and @math{y=-1}. +
+The circumference of the clock crosses the x-axis at @math{1} and @math{1}, and the y-axis at @math{1} and @math{-1}. +
  +
-We can draw a radius at any angle @math{θ}, hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides A and B, shown here in green and red.
-
-@QandA{
-@Q{What is the relationship between @math{(x,y)} and the values of A and B?}
-@A{If we know the value of A, we know the value of @math{x}. If we know the value of B, we know the value of @math{y}.}
-@Q{Where does the equation @math{A^2 + B^2 = 1} come from?}
-@A{We know that every possible (x,y) coordinate forms a right triangle, and the hypotenuse is always the radius of 1.}
-}
+We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{x}, shown here in green and red.
 
 @slidebreak
 
 @lesson-instruction{
-- With a partner, complete questions 1-6 of @printable-exercise{unit-circle.adoc}.
+- With a partner, complete questions 1-5 of @printable-exercise{unit-clock.adoc}.
 }
-
-@teacher{Review student answers, *especially* their answers for 6!}
 
 @slidebreak
 
-- At 12 o’clock, (A, B) is at the coordinates (0, 1). A is 0 and the length of B is 1.
-- At 3 o'clock (A, B) is at the coordinates (1, 0). A is 1 and the length of B is 0.
-- At 6 o’clock, (A, B) is at the coordinates (0, -1). A is 0 and the length of B is -1.
-- At 9 o'clock (A, B) is at the coordinates (-1, 0). A is -1 and the length of B is 0.
+- At 12 o’clock, (x, y) is at the coordinates (0, 1)
+- At 3 o'clock (x, y) is at the coordinates (1, 0)
+- At 6 o’clock, (x, y) is at the coordinates (0, -1)
+- At 9 o'clock (x, y) is at the coordinates (-1, 0)
 
-Are there times where A=B?
+Are there times where x=y?
 
 @lesson-instruction{
-- With a partner, complete the remainder of @printable-exercise{unit-circle.adoc}.
+- With a partner, complete the remainder of @printable-exercise{unit-clock.adoc}.
 - When you're finished, open @starter-file{alg2-exploring-periodic-desmos} and check your answers using the *first slide*.
 }
 
-@teacher{Review student answers. At this point in the lesson, we're shifting entirely to radians - if your students aren't yet comfortable with them, you may want to consider the activity below!}
+@teacher{Review student answers.}
 
-@strategy{From Degrees to Radians}{
-If your students are uncomfortable with radians, here's an activity to get them going:
+@slidebreak
 
-- Divide the class into groups of 3-5
-- Cut out paper or cardboard circles of varying sizes, and distribute one to each group along with a scissor and a length of string that's at least as long as the radius of their circle.
-- Have students cut the string, to measure a length that is exactly the radius of the circle
-- Have the group measure how many radii (lengths of that string) it takes to form a full loop around the circumference of the circle.
-- Have the group draw a "pizza slice" using the string, such that the curved "crust" of the pizza is one radius in length, and the sides of the slice are radii. A radian _is the angle formed at the tip of the slice._
+@lesson-point{The functions x(time) and y(time) go by other names: _cosine_ and _sine_.}
 
-Every group will find that it takes roughly ~6.3 lengths of string...@math{2\pi}! Explain that radii are easier to work with than degrees, because it's easy to think in terms of "fractions of rotation". For example, "half a rotation" is @math{pi}, so "a quarter of a rotation" is @math{\pi \over 2}.
-
-You may also want to check out @link{https://www.YouTube.com/watch?v=HACNCy0clO0, this fantastic video by MrNystrom}, which illustrates the same thing without manipulatives.
+@QandA{
+But of course, there are other ways besides 12 slices of "hours" to measure the angle (x,y) makes as it travels around a circle!
+@Q{Can you think of another measure that divides a circle up differently?}
+@A{_Degrees_, divide a circle up into 360 slices instead of 12. }
+@Q{If we switched the x-axis in our graph from 12 hours to 360 degrees, would the graph look different?}
+@A{No -- all the intervals remain constant, so the only change is the labels on the x-axis.}
 }
+
+@slidebreak
+
+But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the radius of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
+
+In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
+
+@slidebreak
+
+@lesson-point{Radians: a measurement of circumference that's _expressed in terms of radius_}
+
 
 @slidebreak
 
