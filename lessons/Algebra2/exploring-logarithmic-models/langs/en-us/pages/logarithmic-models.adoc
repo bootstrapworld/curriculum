@@ -3,7 +3,7 @@
 [.linkInstructions]
 Open your copy of the @starter-file{alg2-countries} and click "Run".
 
-== Part 1
+== Transforming: From Logarithmic _Plots_ to Linear Ones
 
 @n Find the definition of `g(r)`. What does this function do? @fitb{}{}
 
@@ -12,7 +12,7 @@ Open your copy of the @starter-file{alg2-countries} and click "Run".
 @n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}.
 
 [.indentedpara]
-What is its Range? @fitb{20em}{@ifsoln{Table}} What is its Domain? @fitb{20em}{@ifsoln{Table, String, Function}}
+What is its *Range*? @fitb{10em}{@ifsoln{Table}} What is its *Domain*? @fitb{}{@ifsoln{Table, String, *Function*}}
 
 @n At the end of the program, you'll find this code:
 
@@ -26,36 +26,49 @@ What do you think it does? @fitb{}{}
 
 @fitb{}{@ifsoln{It defines a new table called `countries-transformed`, which is the result of building our new column,"log(pc-gdp-in-thousands)".}}
 
+@fitb{}{}
+
 --
 
 @n Click "Run", and evaluate `countries-transformed` in the Interactions Area on the right to test it out!
 
 @hspace{3em}+a.+ What did you get back? @fitb{}{@ifsoln{A Table}}
 
-@hspace{3em}+b.+ What is different about this Table? _Hint: Use the scroll bar to see the hidden columns!_@fitb{}{@ifsoln{It has an extra column called `log(pc-gdp-in-thousands`).}}
+@hspace{3em}+b.+ What is different about this Table? _Hint: Scroll to the right to see all the columns!_@fitb{}{@ifsoln{It has an extra column called `log(pc-gdp-in-thousands`).}}
 
 @hspace{3em}+c.+ Where did the column on the right come from? @fitb{}{@ifsoln{It was created by `build-column`, which named it `log(pc-gdp-in-thousands)` and filled it using the function `g`.}}
 
-@n Use this new table to make an `lr-plot` comparing `log(pc-gdp-in-thousands)` and `median-lifespan` with `country` as the label.
+@n Use this new table to make an `lr-plot` comparing `log(pc-gdp-in-thousands)` and `median-lifespan`, with `country` as the label. Record the regression line and @math{S} value below:
 
-@n Record the regression line here: @math{y = } @fitbruby{10em}{@ifsoln{11.9011}}{slope} @math{x + } @fitbruby{10em}{@ifsoln{59.967}}{vertical shift} @hspace{5em} @math{S:}@fitb{10em}{@ifsoln{4.4904}}
+@center{
+@math{y = } @fitbruby{10em}{@ifsoln{11.9011}}{slope} @math{x + } @fitbruby{10em}{@ifsoln{59.967}}{vertical shift} @hspace{15em} @math{S:}@fitb{10em}{@ifsoln{4.4904}}
+}
 
-== Part 2
+== Inverting: From Linear _Models_ to Logarithmic Ones
 
-@n Use the values produced by `lr-plot` to complete the model: @math{logarithmic3(x) =} @fitbruby{7em}{@ifsoln{11.901}}{log coefficient} @math{log_{10}(x) +} @fitbruby{7em}{@ifsoln{59.967}}{vertical shift}
+@n Use the coefficients of the _linear_ model you just made to complete the _logarithmic_ one below: +
+
+@center{
+@math{logarithmic3(x) =} @fitbruby{7em}{@ifsoln{11.901}}{log coefficient} @math{log_{10}(x) +} @fitbruby{7em}{@ifsoln{59.967}}{vertical shift}
+}
 
 @n Let's interpret this model:
 
-@hspace{3em} A _10x_ increase in `per-capita-gdp-in-thousands` is associated with `median-lifespan` increasing by @fitb{10em}{@ifsoln{11.9 years}}.
+@hspace{3em} __A country where the @fitbruby{25em}{@ifsoln{pc-gdp-in-thousands}}{x-axis} is @fitbruby{3em}{@ifsoln{10}}{base} times higher than another is also__ +
+@hspace{3em} __predicted to have a @fitbruby{20em}{@ifsoln{median-lifespan}}{y-axis} that is @fitbruby{8em}{@ifsoln{11.9}}{log coefficient @math{a}} @fitbruby{10em}{@ifsoln{years}}{y-axis units} longer.__
 
-@n Rewrite your model as a pyret definition: @ifnotsoln{`fun logarithmic(x):`@fitb{25em}{} `end`}  @showsoln{(code '(define (logarithmic3 x) (+ (* 11.901 (log x)) 59.967)))}
+@n Rewrite your model as a Pyret definition: @ifnotsoln{`fun logarithmic3(x):`@fitb{26em}{} `end`}  @showsoln{(code '(define (logarithmic3 x) (+ (* 11.901 (log x)) 59.967)))}
 
-@n Add the definition to your starter file and click "Run" to load it.
+@n Add the definition of `logarithmic3` to your starter file, and use it with `fit-model` to calculate the value of @math{S}: @fitb{8em}{@ifsoln{4.4904}}
 
-@n Use `fit-model` to calculate the value of @math{S}: @fitb{8em}{@ifsoln{4.4904}}
+@n Complete the table below, copying your @math{S} values from the previous models:
 
-@n Let's interpert this @math{S} value:
+[cols="^1a,^1a,^1a,^1a"]
+|===
+| Linear		|	Quadratic	| Exponential	| Logarithmic
 
-@hspace{3em} Roughly @fitb{3em}{@ifsoln{66}} percent of the variation in @fitb{12em}{@ifsoln{median lifespan}} is explained by the variation in @fitb{12em}{@ifsoln{per-capita gdp in thousands}}.
+| @vspace{1ex}	|				|				|
+|===
 
-@star Are there other relationships you can think of, which might be logarithmic?
+@n Comparing the two smallest @math{S} values. _How much better_ is the logarithmic model? @fitb{}{} +
+@fitb{}{}

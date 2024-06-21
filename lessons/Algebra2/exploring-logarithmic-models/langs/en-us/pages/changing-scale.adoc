@@ -47,12 +47,10 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 - Move the graph by clicking and dragging the background.
 - Notice that a magnifying glass ([.desmosbutton]#{magnifying}#) appears to the bottom left of the table. (You may have to scroll down to see the bottom of the table!) Clicking on the magnifying glass resizes/rescales the graph to fit all the points in the table.
 
-@n Look at the numbers along the x-axis, which increase as they go from left to right. +
-@hspace{1em}What would the next number be, if you were to add one at the far right? @fitb{}{@ifsoln{If students clicked the [.desmosbutton]#{magnifying}#, they'll likely say *250*}}
+@n Write the numbers you see along the x-axis, from left to right: @fitb{}{@ifsoln{This will vary depending on zoom level}} +
+@hspace{1em}Continue this pattern - what would the next three numbers be? @fitb{}{@ifsoln{This will vary depending on zoom level}}
 
-@n _Describe_ the pattern you used to find the next number: @fitb{}{@ifsoln{the numbers increase, *adding* a constant factor @hspace{3em}(students will likely say they added 50)}}
-
-@ifnotsoln{@fitb{}{}}
+@n Circle the type of function that describes this pattern: @hspace{6em} @ifsoln-choice{Linear} @hspace{6em} Quadratic @hspace{6em} Exponential
 
 @n Move the sliders for @math{a} and @math{c} to create the best-fitting logarithmic model you can find, and write it below.
 
@@ -94,16 +92,12 @@ The error in the model is described by an @math{S-value} of about
 
 @vspace{1ex}
 
-_Look at the numbers along the x-axis, which increase as they go from left to right._
+@n What is the shape of the point cloud _now,_ after changing the scale?  @hspace{1em} @ifsoln-choice{Linear} @hspace{6em} Quadratic @hspace{6em} Exponential
 
-@n What would the next number be, if you were to add one at the far right? @fitb{}{@ifsoln{students will likely say *1000* or *10000*}}
+@n Write the numbers you see along the x-axis, from left to right: @fitb{}{@ifsoln{This will vary depending on zoom level}} +
+@hspace{1em}Continue this pattern - what would the next three numbers be? @fitb{}{@ifsoln{This will vary depending on zoom level}}
 
-@n _Describe_ the pattern you used to find it: @fitb{}{@ifsoln{the numbers increase, *multiplying* by a constant factor of 10}}
-
-@n What is the shape of the point cloud _now?_   @hspace{3em} @ifsoln-choice{linear}@ifnotsoln{&#9744;}  @hspace{3em} 
-quadratic &#9744;   @hspace{3em} 
-exponential &#9744; @hspace{3em}
-something else &#9744; 
+@n Circle the type of function that describes this pattern: @hspace{6.5em} Linear @hspace{6em} Quadratic @hspace{6em} @ifsoln-choice{Exponential}
 
 @n Adjust the sliders for @math{a} and @math{c} to improve the model. _Toggle back and forth between `logarithmic` and `linear` x-axis scales as you work._ + 
 @ifnotsoln{@hspace{1em}When you are satisfied with your model, record both forms of the definition below.}
@@ -118,7 +112,7 @@ something else &#9744;
 @show{(code '(define (logarithmic2 x) (+ (* (?ANS 11.7 ) (log x)) (?ANS 60))))}
 |===
 
-@n Return to Pyret and modify `logarithmic2(x)` to define this model. Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
+@n Modify the definition of `logarithmic2(x)` in Pyret to match this model. Use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
-@n Why do you think transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary. The data is growing logarithmically}} +
-@fitb{}{@ifsoln{and by transforming the x-axis logarithmically, it can keep up with the growth.We're inverting the data. We're warping the plot so the dots looks straight.}}  +
+@n Why do you think transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary: The data is growing logarithmically}} +
+@fitb{}{@ifsoln{and by transforming the x-axis exponentially, it can keep up with the growth. We're inverting the data. We're warping the plot so the dots looks straight.}}  +
