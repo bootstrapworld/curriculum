@@ -939,7 +939,7 @@ const Projects = {
       "url": "https://code.pyret.org/editor#share=1nuz6eBw9W4Fv8NspmucXam3W_w9dSOs_&v=e8968a4"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/view?publicId=Fdr3Qzegfr"
+      "url": "https://www.wescheme.org/view?publicId=u7o6U8dMKW"
     } 
   },
   "threats": {

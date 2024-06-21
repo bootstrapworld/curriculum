@@ -43,6 +43,25 @@ Students will replicate a provided logo, then look at code for 3 logos designed 
 === Launch
 
 @lesson-instruction{
+- Draw a Circle of Evaluation for the expression @math{2 + 3 + 6}.
+- Draw 2 additional (different) Circles of Evaluation for @math{2 + 3 + 6}. You may change the order or groupings of the numbers, the Circle must evaluate to the same result.
+}
+
+@slidebreak
+
+Here are some possible Circles of Evaluation:
+
+[cols="^.^3,^.^3, ^.^3", grid="none"]
+|===
+|@show{(coe '(+ (+ 2 6) 3))} | @show{(coe  '(+ 2 (+ 3 6)))} | @show{(coe '(+ 3 (+ 2 6)))}
+
+|===
+
+@slidebreak
+
+When we want to add three numbers, there are a variety of ways to do so. Circles of Evaluation help us to visualize each possibility! The same goes when we use `overlay` to layer three or more images in @proglang.
+
+@lesson-instruction{
 - Open the @starter-file{logos-warmup}.
 - Complete the instructions to write the code for a common logo.
 - Compare your code with a partner's.
@@ -115,16 +134,16 @@ Circulate as students work to understand any obstacles that students are facing.
 
 @do{
 (define logoc '(overlay
-(beside
+(beside 
 (above
-(star... )
-(triangle...))
+(star (?ANS ...))
+(triangle (?ANS ...))
 (overlay
 (overlay
 (rotate 45 (text "LOGO" ...))
-(square...))
-(circle...)))
-(ellipse...)))
+(square (?ANS ...))))
+(circle (?ANS ...))))
+(ellipse(?ANS ...) )))
 }
 
 @show{(coe logoc)}
