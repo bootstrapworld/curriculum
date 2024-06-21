@@ -984,7 +984,7 @@ const Alg2 = {
       "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
     },
   },
-   "alg2-fuel-efficiency": {
+  "alg2-fuel-efficiency": {
     "title": "Fuel Efficiency Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
@@ -1008,22 +1008,16 @@ const Alg2 = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
     }
   },
-  "alg2-ca-rent" : {
-    "title": "CA Minimum Wage and Rent Starter File",
-    "pyret" : {
-      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
-    }
-  },
-  "alg2-ca-rent-desmos" : {
-    "title": "Exploring Exponential Functions (Desmos)",
-    "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1x5tmPRBPnP8Ysi8n75HStOHmh6fukX6v"
     }
   },
   "alg2-log-desmos" : {
     "title" : "Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/66057c8e8aec42ab256cc304"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/666b05753ceb10c0827de525"
     }
   },
   "alg2-exploring-periodic-desmos" : {
@@ -1038,17 +1032,24 @@ const Alg2 = {
       "url" : "https://code.pyret.org/editor#share=1OhkCl-a5TTCJ0ZtXca977TqxhOlniZLU"
     }
   },
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
-    }
-  },
   "alg2-co2" : {
     "title" : "Carbon Dioxide Starter File",
     "pyret" : {
       "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt"
     }
+  },
+  "alg2-ca-rent" : {
+    "title": "CA Minimum Wage and Rent Starter File",
+    "pyret" : {
+      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
+    }
+  },
+  "alg2-ca-rent-desmos" : {
+    "title": "Exploring Exponential Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
+    }
+
   }
 }
 
