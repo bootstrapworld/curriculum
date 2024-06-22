@@ -1029,7 +1029,7 @@ const Alg2 = {
   "alg2-ferris-wheel" : {
     "title" : "Ferris Wheel Starter File",
     "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1OhkCl-a5TTCJ0ZtXca977TqxhOlniZLU"
+      "url" : "https://code.pyret.org/editor#share=1iUScID35SP-evxaW3w2WLF7QHtDIMNhI"
     }
   },
   "alg2-co2" : {
