@@ -4,11 +4,12 @@
 td { padding: 0 !important; }
 td .autonum::after { content: ')' !important; }
 td .codetwo { color: black; background: none; }
-table table td { color: inherit !important; padding: 3px 0 !important; }
+table table td { color: inherit !important; padding: 4px 0 !important; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
-.fitb { min-width: 2em; }
-.studentAnswerMedium { min-width: 83pt !important; }
+.fitb, .fitbruby { min-width: 2em; }
+.fitbruby { padding-top: 0.9rem; }
+.studentAnswerMedium { min-width: 80pt !important; }
 </style>
 ++++
 
@@ -60,7 +61,7 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 @define{d}{@show{d}}
 
 |
-@image{../images/recent-co2-scatter.png}
+@image{../images/recent-co2-scatter.png, 500}
 |===
 
 @n **Connect the dots on the scatter plot to form a line-graph.**
@@ -69,9 +70,9 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 
 @n Use the @vocab{amplitude} and @vocab{trough} data to compute the @vocab{vertical shift} (@math{c}) or "@vocab{midline}" of the data: @fitbruby{}{@ifsoln{@lo + @a = @c}}{parts per million}
 
-@n Estimate the @vocab{phase shift} by estimating the _decimal year_ when the data crosses the @vocab{midline} (@math{d}). @fitbruby{}{@ifsoln{~@d}}{years}
+@n Estimate the @vocab{phase shift} by estimating the _decimal year_ when the data crosses the @vocab{midline} (@math{d}): @fitb{10em}{@ifsoln{~@d}} years
 
-@n Calculate the @vocab{period} between the @vocab{troughs} by subtracting the `dates` for the lowest value in 2022 and 2023: @fitbruby{}{@ifsoln{@lo-dateB - @lo-dateA = @p}}{years}
+@n Calculate the @vocab{period} between the @vocab{troughs} by subtracting the `dates` for the lowest values in 2022 and 2023: @fitbruby{13em}{@ifsoln{@lo-dateB - @lo-dateA = @p}}{years}
 
 @n If @math{\mbox{period} = {2\pi \over \mbox{frequency}}}, what is the @vocab{frequency}? @fitb{}{@ifsoln{@math{2\pi} or @b}}
 
@@ -84,7 +85,7 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 | *Function Notation*
 |
 
-@math{f(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
 @math{sin}(
  @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{h-shift})
 ) + @fitbruby{70pt}{@ifsoln{@c}}{v-shift}
@@ -92,8 +93,16 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (f x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
+@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
 |===
 
 
 @n Define this model in Pyret, and fit it to the `recent` data. What S-value do you get? @fitb{}{@ifsoln{Answers will vary, but should be close to 0.33}}
+
+@n *What does this model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
+
+@vspace{1ex}
+
+@indented{
+_Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{3em}{@ifsoln{415.74}}{lowest} and @fitbruby{3em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{3em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{3em}{@ifsoln{419.87}}{midline}. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{3em}{@ifsoln{@math{2pi}}}{frequency}._
+}

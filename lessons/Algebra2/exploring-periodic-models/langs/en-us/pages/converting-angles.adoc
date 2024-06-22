@@ -1,0 +1,37 @@
+= Converting Between Angles
+
+@right{@image{../images/pizza-clock.png, 200}} +
+*The table below lists different angles within a circle.*
+{empty} +
+@n Fill in the rows for 12, 6, and 9 o'clock, converting between hours, degrees, and radians. +
+{empty} +
+@n Fill in the rows for 1:30, 7:30, 10:30, and 4:30, converting between hours, degrees, and radians. +
+{empty} +
+*Remember:* degrees and radians both start with zero at "3 o'clock", and increase in the opposite direction of the hours! +
+{empty} +
+_We've filled in the first row of the table for you, as well as the length columns._
+
+@define{leg}{@math{\sqrt{2} \over 2}}
+
+[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a"]
+|===
+| Time 	| @math{θ} Degrees	| @math{θ} Radians						|   x			|   y
+
+|  3:00	| 0°   				| @math{0pi}							|  1     		|  0
+|  1:30	| @ifsoln{ 45°}		| @ifsoln{@math{{1 \over 4} \times pi}}	| @leg			| @leg
+| 12:00	| @ifsoln{ 90°}		| @ifsoln{@math{{2 \over 2} \times pi}} |  0 			|  1
+| 10:30	| @ifsoln{135°}		| @ifsoln{@math{{3 \over 4} \times pi}}	| -@leg			| @leg
+|  9:00	| @ifsoln{180°} 	| @ifsoln{@math{pi}}					| -1 			|  0
+|  7:30	| @ifsoln{225°} 	| @ifsoln{@math{{5 \over 4} \times pi}}	| -@leg			| -@leg
+|  6:00	| @ifsoln{270°} 	| @ifsoln{@math{{3 \over 2} \times pi}}	|  0 			| -1
+|  4:30	| @ifsoln{315°} 	| @ifsoln{@math{{7 \over 4} \times pi}} | @leg			| -@leg
+|  3:00	| 360° 				| @math{2pi} 							|  1 			| 0
+|===
+
+@n In Pyret, experiment the functions `sin` and `cos`, passing in different *radian values* from the table above.
+
+@indented{
++a.+ Which function computes @math{x(θ)}? @fitb{5em}{@ifsoln{cos}}
+
++b.+ Which function computes @math{y(θ)}? @fitb{5em}{@ifsoln{sin}}
+}

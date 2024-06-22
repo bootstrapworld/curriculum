@@ -1023,19 +1023,19 @@ const Alg2 = {
   "alg2-exploring-periodic-desmos" : {
     "title" : "Exploring Periodic Functions (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/665ddc01715890e39bd1f4b7"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6674fb05501f6b739037a941"
     }
   },
   "alg2-ferris-wheel" : {
     "title" : "Ferris Wheel Starter File",
     "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1OhkCl-a5TTCJ0ZtXca977TqxhOlniZLU"
+      "url" : "https://code.pyret.org/editor#share=1iUScID35SP-evxaW3w2WLF7QHtDIMNhI"
     }
   },
   "alg2-co2" : {
     "title" : "Carbon Dioxide Starter File",
     "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt"
+      "url" : "https://code.pyret.org/editor#share=1y2J-z-kK0b8UOh5r60womQI2UPQEV5DL"
     }
   },
   "alg2-ca-rent" : {
