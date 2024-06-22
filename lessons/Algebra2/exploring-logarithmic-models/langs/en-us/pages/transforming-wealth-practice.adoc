@@ -8,40 +8,39 @@ table td:first-of-type p { font-weight: bold; }
 [.linkInstructions]
 For this page, you'll need the @starter-file{alg2-countries} open on your computer. _If you haven't already_, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
 
-@n Read the function definition carefully: `fun no-universal(r): not(r["has-univ-healthcare"]) end`
+@n Add `fun no-universal(r): not(r["has-univ-healthcare"]) end` at the bottom of the Definitions Area. +
 
-@hspace{3em} What do you think this function does? @fitb{}{@ifsoln{it looks up the value of the `has-univ-healthcare`}}
+@indented{
+Read the function definition carefully. What do you think it does? @fitb{}{@ifsoln{looks up the value of the `has-univ-healthcare`}} +
+@fitb{}{@ifsoln{column in whatever row it was passed and produces the opposite.}}
+}
 
-@hspace{3em}@fitb{}{@ifsoln{column in whatever row it was passed and produces the opposite.}}
+@n Click "Run" and evaluate @show{(code '(no-universal albania))} in the Interactions Area. What does Pyret return? @fitb{}{@ifsoln{`true`}}
 
+@n What does that mean? @fitb{}{@ifsoln{Albania does not have univeral healthcare.}}
 
-@n Add `fun no-universal(r): not(r["has-univ-healthcare"]) end` at the bottom of the Definitions Area. 
+@n Add `countries-wo-univ = filter(countries-transformed, no-universal)` to the Definitions Area and click "Run".
 
-@hspace{2em} Click "Run" and evaluate @show{(code '(no-universal albania))} in the Interactions Area. What does Pyret return? @fitb{}{@ifsoln{`true`}}
-
-
-@n Add `countries-wo-univ = filter(countries-transformed, no-universal)` to the bottom of the Definitions Area, then click "Run".
-
-
-@hspace{3em}What does evaluating `countries-wo-univ` in the Interactions Area produce? @fitb{}{}
-
-@hspace{3em} @fitb{}{@ifsoln{A table of all the countries without universal healthcare}}
+@indented{
+What does evaluating `countries-wo-univ` in the Interactions Area produce? @fitb{}{} +
+@fitb{}{@ifsoln{A table of all the countries without universal healthcare}}
+}
 
 @n Using the two definitions you just added as models:
 
-[.indentedpara]
+@indented{
 - *Define a new function* called `yes-universal`, which returns the value in the `has-univ-healthcare` column.
 - *Define a new table* called `countries-w-univ`, which shows all the countries with universal healthcare.
 - Click "Run" to load these new definitions once you have them both typed into the Definitions Area.
+}
 
 @n Fill in the table below by:
 
-[.indentedpara]
+@indented{
 - Building an `lr-plot` for each of these tables with the transformed-column `log(pc-gdp)`.
 - Using what you learn from `lr-plot` to write logarithmic models for each table.
 - Using `fit-model` to find @math{S} for each of your logarithmic models and their corresponding un-transformed `countries-w-univ` and `countries-wo-univ` tables.
-
-@vspace{1ex}
+}
 
 [cols="^.^1a,^10a,^10a", options="header"]
 |===
@@ -58,16 +57,19 @@ For this page, you'll need the @starter-file{alg2-countries} open on your comput
 | @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{11.2079}}}{log coefficient} @math{\log_{10}(x) +} @fitbruby{8em}{@ifsoln{26.5875}}{y-intercept}
 
 | @math{S}
-| @fitb{10em}{@ifsoln{3.151}}
-| @fitb{10em}{@ifsoln{4.943}}
+| @fitb{10em}{@ifsoln{3.151}}years
+| @fitb{10em}{@ifsoln{4.943}}years
+
+3+| What does each model predict the increase in `median-lifespan` to be for each 10x increase in `pc-gdp`?
+
+| predicted increase
+| @fitb{10em}{@ifsoln{11.8617}}years
+| @fitb{10em}{@ifsoln{11.2079}}years
+
 |===
 
 @n Was the relationship stronger for `countries-w-univ` or `countries-wo-univ`? @fitb{}{@ifsoln{Countries without universal healthcare}}
 
-@n In `countries-w-univ`, what increase in `median-lifespan` did the model predict for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.8617}}
-
-@n In `countries-wo-univ`, what increase in `median-lifespan` did the model predict for each 10x increase in `pc-gdp`? @fitb{}{@ifsoln{11.2079}}
-
-@n For which table does an increase in `pc-gdp` have a bigger expected impact on `median-lifespan`? @fitb{}{@ifsoln{Countries with universal healthcare}}
+@n For which table is `pc-gdp` expected to have a bigger impact on `median-lifespan`? @fitb{}{@ifsoln{`countries-w-univ`}}
 
 @n Does the strength of the relationship determine how large of an impact `pc-gdp` has on `median-lifespan`? @fitb{}{@ifsoln{No! It determines how well the model predicts the data, not the increase in the variables in relationship to each other}}
