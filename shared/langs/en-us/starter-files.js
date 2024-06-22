@@ -1035,7 +1035,7 @@ const Alg2 = {
   "alg2-co2" : {
     "title" : "Carbon Dioxide Starter File",
     "pyret" : {
-      "url" : "https://code.pyret.org/editor#share=1PtON3SY7DbmCTKRURbIkrxK-wuEof3gt"
+      "url" : "https://code.pyret.org/editor#share=1y2J-z-kK0b8UOh5r60womQI2UPQEV5DL"
     }
   },
   "alg2-ca-rent" : {
