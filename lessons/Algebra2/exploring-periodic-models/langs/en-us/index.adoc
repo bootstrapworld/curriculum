@@ -183,31 +183,101 @@ Are there times where x=y?
 
 @slidebreak
 
-@lesson-point{The functions x(time) and y(time) go by other names: _cosine_ and _sine_.}
+@right{@image{images/pizza-slice.svg, 200}}As the point (x,y) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled. In our clock example, we divide the circle into two "slices", each representing one hour.
 
 @QandA{
-But of course, there are other ways besides 12 slices of "hours" to measure the angle (x,y) makes as it travels around a circle!
+But of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
 @A{_Degrees_, divide a circle up into 360 slices instead of 12. }
 @Q{If we switched the x-axis in our graph from 12 hours to 360 degrees, would the shape of the curve change?}
-@A{No -- all the intervals remain constant, so the only change is the labels on the x-axis.}
+@A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
 }
 
 @slidebreak
 
-But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the radius of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
+@ifslide{@right{@image{images/pizza-slice.svg, 200}}}_Degrees_ divide our the circle into 360 "slices", where the tip of the slice is 1/360th of the circle. Switching our unit-clock graph from hours to degrees just changes the tick marks on the x-axis.
+
+This doesn't change the graph at all, any more than changing a ruler from inches to centimeters would change the drawings on a blueprint!
+
+@slidebreak
+
+@ifslide{@right{@image{images/pizza-slice.svg, 200}}}But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the _radius_ of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
 
 In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
 
 @slidebreak
 
-@lesson-point{Radians: a measurement of circumference that's _expressed in terms of radius_}
+@right{@image{images/pizza-6.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? +
+{empty} +
+We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. +
+{empty} +
+This would give us exactly six slices, with the tip of each slice having a 60° angle...but our pizza wouldn't be round anymore!
 
-////
-...Emmanuel TODO...
+@QandA{
+@Q{What shape would we get instead?}
+@A{A hexagon!}
+}
 
-Need a wbpage for converting between "descriptions", "clock time", "degrees", and "radians"?
-////
+@slidebreak
+
+@ifslide{@right{@image{images/pizza-6.png, 200}}}To make it a circle, those outer edges of each slice need to curve! But they can't change length, since they *have* to be equal to the length of the radius. Stretching them out from straight lines into curves will make the angle a little smaller, _just slightly less than 60°._ +
+{empty} +
+With @math{θ} of each slice being less than 60°, we can fit just slightly more than 6 of these slices in our pie. In fact, we can fit *exactly @math{2pi}* of these "radius slices"!
+
+@lesson-point{Radian: the angle formed carving out a radius's worth of the circumference}
+
+@slidebreak
+
+@QandA{
+@Q{If there are @math{2pi} radians in the whole circle, how many radians are in the _semi-circle_ between 3pm and 9pm on our clock?}
+@A{@math{1pi}}
+@Q{How many radians are there in the _quarter-circle_ between 12pm and 3pm?}
+@A{@math{pi \over 2}}
+@Q{How many radians are there in a single "hour" of the clock?}
+@A{@math{pi \over 6}}
+}
+
+@slidebreak
+
+Pyret knows about @math{\pi}, too!
+
+@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`}
+
+@lesson-instruction{
+- In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
+- Try computing the value of @math{3\pi}.
+- Try computing the value of @math{\pi \over 2}.
+- Why do we need spaces around the multiplication and division signs?
+}
+
+@slidebreak
+
+As with degrees, switching our unit-clock graph from hours to radians doesn't change the graph at all. It just changes the tick marks on the x-axis.
+
+One other difference between "hours" and degrees or radians is that we generally think of clocks starting at 12:00, with the hands moving clockwise. Degrees and radians are generally thought of as starting at 3:00, and moving __counter__-clockwise. *Both of these are conventions* - we could easily write the numbers backwards on a clock and have the hand move the other way, or write the degrees and radians backwards and have them count clockwise.
+
+@lesson-instruction{
+Complete questions 1-2 on @printable-exercise{converting-angles.adoc} with your partner, to fill in the table.
+}
+
+@slidebreak
+
+Rather than measuring the "slice" of the circumference carved out by hours, these measure the slice carved out in radians.
+
+We began by graphing the functions @math{x(time)} and @math{y(time)}, which showed us the relationship between the legs of a right triangle and the angle formed based on the time on a clock. But what do these functions look like when the input is @vocab{radians}, instead of hours?
+
+In trigonometry, we have two functions called @math{sin} and @math{cos}. Pyret has them, too:
+
+@center{
+@show{(contracts
+'("sin" ("Number") "Number")
+'("cos" ("Number") "Number")
+)}
+}
+
+@lesson-instruction{
+But which of these functions computes the x values, and which computes the y-values? Find out by experimenting in Pyret, and finish @printable-exercise{converting-angles.adoc} with your partner.
+}
 
 @slidebreak
 
@@ -215,7 +285,7 @@ When graphed from 0-@math{2\pi}, periodic functions rise to a certain height abo
 
 @center{@image{images/wave-labeled-terms.png, 75%}}
 
-@lesson-instruction{With your partner, turn to @printable-exercise{vocab-from-diagram.adoc} and 
+@lesson-instruction{With your partner, turn to @printable-exercise{vocab-from-diagram.adoc} and
 see if you can come up with explanations for what each of the terms on this diagram refer to.}
 
 @slidebreak
@@ -233,43 +303,6 @@ see if you can come up with explanations for what each of the terms on this diag
 }
 
 Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
-
-@slidebreak
-
-Of course, Pyret has @math{sin} and @math{cos} built-in! Here are their contracts:
-
-@center{
-@show{(contracts
-'("sin" ("Number") "Number")
-'("cos" ("Number") "Number")
-)}
-}
-
-@slidebreak
-
-@ifslide{
-@center{
-@show{(contracts
-'("sin" ("Number") "Number")
-'("cos" ("Number") "Number")
-)}
-}
-}
-
-Both functions consume the number of radians, and produce the x- or y-coordinate of the point on the circumference of a circle of radius 1. For larger radii, we can multiply the length by the radius. (There are other periodic functions that do _not_ look like waves, but for this exploration we're going to limit ourselves to @math{sin} and @math{cos}.)
-
-@slidebreak
-
-Pyret knows about @math{\pi}, too!
-
-@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`}
-
-@lesson-instruction{
-- In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
-- Try computing the value of @math{3\pi}.
-- Try computing the value of @math{\pi \over 2}.
-- Why do we need spaces around the multiplication and division signs?
-}
 
 === Investigate
 Periodic models have the basic form:
@@ -454,6 +487,12 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 @A{One year (this makes sense, since the seasonal cycle repeats every year!)}
 @Q{What did you get for @vocab{frequency} @math{b}?}
 @A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete @printable-exercise{modeling-recent-co2.adoc}, and enter your periodic model into Pyret. How well does it fit the data?
 }
 
 === Synthesize
