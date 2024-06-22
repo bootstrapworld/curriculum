@@ -81,13 +81,13 @@ The goal is to discover that a new kind of model is necessary, not to find a per
 }
 === Synthesize
 
-@teacher{Direct students to look at the scatter plot they created in Pyret of `median-lifespan` versus `pc-gdp-in-thousands`.}
+@teacher{Direct students to look at the scatter plot they created in Pyret of `median-lifespan` versus `pc-gdp`.}
 
 @QandA{
 @Q{What's the best model you came up with?}
 @Q{What kinds of lines or curves did you draw?}
-@Q{How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp-in-thousands`?}
-@A{It starts out rising fast on the left, before tapering off as `pc-gdp-in-thousands` increases to the right.}
+@Q{How would you describe the shape of the scatter plot for `median-lifespan` versus `pc-gdp`?}
+@A{It starts out rising fast on the left, before tapering off as `pc-gdp` increases to the right.}
 @Q{How well did our linear, quadratic, and exponential models fit this data?}
 @A{None of the kinds of functions we've seen so far exhibit the behavior we see here! In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off.}
 }
@@ -302,7 +302,7 @@ Data Scientists often use transformations to stretch their data into shapes that
 @A{We are speeding up the growth intervals on the x-axis to "keep up with" the speed of growth in the data so that we can see the pattern better.}
 }
 
-When we changed Desmos's view from "Linear" to "Logarithmic", we made the x-axis grow faster and "squish" the dots so they appear linear. By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp-in-thousands` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
+When we changed Desmos's view from "Linear" to "Logarithmic", we made the x-axis grow faster and "squish" the dots so they appear linear. By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
 
 
 @strategy{Going Deeper: Connecting to Inverse Functions}{
@@ -325,7 +325,7 @@ Having discovered that changing the scale of a graph allows us to _see_ logarith
 
 === Launch
 
-We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow by 10x appear to grow linearly. Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp-in-thousands` on a logarithmic x-axis, we could plot `log(pc-gdp-in-thousands)` on a _linear_ one.
+We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow by 10x appear to grow linearly. Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp` on a logarithmic x-axis, we could plot `log(pc-gdp)` on a _linear_ one.
 
 @slidebreak
 
@@ -362,9 +362,9 @@ The term went from @math{a \log_{10}(x)} to @math{ax}, turning our logarithmic c
 
 === Investigate
 
-We transformed the `pc-gdp-in-thousands` column in three steps:
+We transformed the `pc-gdp` column in three steps:
 
-1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp-in-thousands` column).
+1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp` column).
 2. We defined a new column to use as our x-values, populating it by applying the transformation to each of our original x-values.
 3. We displayed these transformed datapoints as a scatter plot.
 
@@ -401,7 +401,7 @@ Use this knowledge to complete the second part ("Inverting: From Linear Models t
 
 @slidebreak
 
-@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp-in-thousands` column with a log function produces a scatter plot showing a linear pattern in the data! +
+@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! +
 @vspace{1ex} +
 Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: +
 @indented{@math{y = 11.9011x + ~59.967}} 
