@@ -1011,7 +1011,7 @@ const Alg2 = {
   "alg2-countries": {
     "title": "Countries of the World Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1x5tmPRBPnP8Ysi8n75HStOHmh6fukX6v"
+      "url": "https://code.pyret.org/editor#share=1qXYu57_noEwzYOL3M4YxqzW6mIcas88x"
     }
   },
   "alg2-log-desmos" : {
