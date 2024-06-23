@@ -44,7 +44,8 @@ You will want to:
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
  * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}|===
+}
+|===
 
 == Looking for Patterns
 
@@ -52,7 +53,10 @@ You will want to:
 Students are introduced to the notion of @vocab{periodic relationships}: related variables where the response variable repeats the same pattern over and over as the explanatory variable increases.
 
 === Launch
-@right{@image{images/state-fair.png, 200}} Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Roller coaster? Bumper cars? Merry-Go-Round? Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch:
+
+@right{@image{images/state-fair.png, 200}}Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Roller coaster? Bumper cars? Merry-Go-Round?
+
+Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch.
 
 [.rideData, cols="^1a,^1a", options="header"]
 |===
@@ -153,41 +157,39 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @slidebreak
 
-Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! *But how can we compute the y-coordinate, based on the rotation of the circle?*
+@ifslide{@right{@image{images/ferris-wheel.png, 300}}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! *But how can we compute the y-coordinate, based on the rotation of the circle?*
+
+@slidebreak
 
 ==== Unit Clocks
 
 @right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
-The circumference of the clock crosses the x-axis at @math{1} and @math{1}, and the y-axis at @math{1} and @math{-1}. +
+The circumference of the clock crosses the x-axis at @math{1} and @math{-1}, and the y-axis at @math{1} and @math{-1}. +
  +
 We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{x}, shown here in green and red.
+
+@lesson-instruction{
+- With a partner, complete questions 1-6 of @printable-exercise{unit-clock.adoc}.
+}
+
+@slidebreak
+
+@ifslide{@right{@image{images/unit-circle-clock.png}}}
+
+At 12 o’clock, (x, y) is at the coordinates (0, 1)
+At 3 o'clock (x, y) is at the coordinates (1, 0)
+At 6 o’clock, (x, y) is at the coordinates (0, -1)
+At 9 o'clock (x, y) is at the coordinates (-1, 0)
 
 @QandA{
 @Q{If we knew that @math{x} and @math{y} were equal, how could we calculate them from this right triangle?}
 @A{We could use the Pythagorean Theorem}
 }
 
-@slidebreak
-
-@lesson-instruction{
-- With a partner, complete questions 1-5 of @printable-exercise{unit-clock.adoc}.
-}
-
-@slidebreak
-
-////
-Replace these bullets with an image!
-////
-
-- At 12 o’clock, (x, y) is at the coordinates (0, 1)
-- At 3 o'clock (x, y) is at the coordinates (1, 0)
-- At 6 o’clock, (x, y) is at the coordinates (0, -1)
-- At 9 o'clock (x, y) is at the coordinates (-1, 0)
-
 @teacher{
 - Make sure you have created a link or code for your class to @starter-file{alg2-exploring-periodic-desmos} and paced the class so they only have access to Slide 1: Unit Clocks. Students will be using this slide to check their work on @printable-exercise{unit-clock.adoc}
-- Decide whether you'd like to remind your students about using the Pythagorean Theorem and/or Trig Ratios for finding the lengths of legs of a right triangle before asking them to identify x and y for 45 degrees.}
+}
 
 @lesson-instruction{
 - With a partner, complete the remainder of @printable-exercise{unit-clock.adoc}.
@@ -213,13 +215,13 @@ This doesn't change the graph at all, any more than changing a ruler from inches
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-slice.svg, 200}}}But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the _radius_ of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
+@ifslide{@right{@image{images/pizza-slice.svg, 200}}}But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the *radius* of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
 
 In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
 
 @slidebreak
 
-@right{@image{images/pizza-6.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? +
+@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? +
 {empty} +
 We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. +
 {empty} +
@@ -258,7 +260,7 @@ Pyret knows about @math{\pi}, too!
 @lesson-instruction{
 - In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
 - Try computing the value of @math{3\pi}.
-- Try computing the value of @math{\pi \over 2}.
+- Try computing the value of @math{\pi / 2}.
 - Why do we need spaces around the multiplication and division signs?
 }
 
@@ -330,6 +332,8 @@ Since the cosine function behaves identically to sine function (just shifted hor
 @A{Some may recognize @math{d} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
 }
 
+@slidebreak
+
 Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
 
 @teacher{Sync or pace students to __Slide 2: Graphing Periodic Models__ of @starter-file{alg2-exploring-periodic-desmos}.}
@@ -368,12 +372,19 @@ Let's review our coefficients:
 - What strategies did you use to match the graphs to the descriptions?
 }
 
+@slidebreak
+
 @teacher{Sync or pace students to __Slides 3 through 5 of @starter-file{alg2-exploring-periodic-desmos}__.}
 
 @lesson-instruction{
 - Let's return to the *Exploring Periodic Models Desmos file*.
 - You should now be on *Slide 3: Modeling the Ferris Wheel Dataset (sin)*.
 - With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc}.
+}
+
+@slidebreak
+
+@lesson-instruction{
 - Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
 }
 
@@ -417,7 +428,7 @@ Now that we've had some practice, let's take a look at a dataset that has more v
 
 @slidebreak
 
-Carbon Dioxide (@COtwo) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+Carbon Dioxide (@math{CO_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
 
 @slidebreak
 
@@ -485,7 +496,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 
 === Investigate
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, and complete Questions 1-5 of @printable-exercise{modeling-recent-co2.adoc}.
+- Open the @starter-file{alg2-co2}, and complete Questions 1-6 of @printable-exercise{modeling-recent-co2.adoc}.
 - Be ready to share your answers!
 }
 

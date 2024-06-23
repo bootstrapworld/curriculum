@@ -182,14 +182,17 @@ And, since anything to the power of zero is always 1, the log of 1 will always b
 
 @slidebreak
 
-Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_. Pyret's `log` function works the same way!
+Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_. Pyret's `log` function works the same way:
+
+@center{`log(1000) # returns 3, because log base 10 of 1000 is 3 `}
 
 If you want to work with a different base, you can look up Pyret's `log-base` function in the @dist-link{Contracts.shtml, contracts pages}.
 
+@slidebreak
 
 ==== Vertical Shift @math{c}
 
-*The term @math{c} is the vertical shift* of the function, which moves the curve up or down. +
+The term @math{c} is the vertical shift of the function, which moves the curve up or down. +
 (_We've seen vertical shifts in other kinds of functions given different names, like @math{k} for quadratics and @math{b} for linear function._) 
 
 Because @math{\log_{\mbox{anything}}(1) = 0}
@@ -201,7 +204,7 @@ Because @math{\log_{\mbox{anything}}(1) = 0}
 
 ==== Logarithmic Coefficient @math{a}
 
-*The term @math{a} is called the logarithmic coefficient*, which - like @math{b} - determines how quickly the function grows.
+The term @math{a} is called the logarithmic coefficient, which - like @math{b} - determines how quickly the function grows.
 
 Logarithmic models have a *vertical @vocab{asymptote}* where the function increases or decreases boundlessly.
 
@@ -211,7 +214,7 @@ Extremely observant students may notice that there's a relationship between @mat
 
 @slidebreak
 
-==== Logarithmic Relationships allow us to compare things of very different sizes!
+*Logarithmic Relationships allow us to compare things of very different sizes!*
 
 We observed a logarithmic relationship between wealth and lifespan in our Countries of the World dataset. 
 
@@ -231,9 +234,12 @@ But as humans with logarithmic _perceptions_ of loudness, we instead measure "lo
 @clear
 @slidebreak
 
-- Scientists use logarithms to be able to fit things of very divergent magnitudes onto the same scale. For example:
-  * pH measures acidity such that pH of 6 is ten times as acidic as pH of 7. By using a logarithmic scale, we can put orange juice (pH=3) and milk (pH=6.8) on the same scale, even though the OJ is nearly 10000 as acidic. _How many times more acidic is acid rain on Venus (pH=1) than Van Lake in Turkey (pH=9.8), the world's largest soda lake?_ 
-  * The Richter Scale measures the magnitude of earthquakes. By using a logarithmic scale when can put the 2011 earthquake in Japan (9.0) on the same scale as an earthquake caused by a stick of dynamite (1.2) even though one was nearly 100 million times bigger than the other!
+Scientists use logarithms to be able to fit things of very divergent magnitudes onto the same scale. For example:
+
+- `pH` measures acidity such that `pH` of 6 is ten times as acidic as `pH` of 7. By using a logarithmic scale, we can put orange juice (`pH`=3) and milk (`pH`=6.8) on the same scale, even though the OJ is nearly 10000 as acidic. _How many times more acidic is acid rain on Venus (`pH`=1) than Van Lake in Turkey (`pH`=9.8), the world's largest soda lake?_
+- The Richter Scale measures the magnitude of earthquakes. By using a logarithmic scale when can put the 2011 earthquake in Japan (9.0) on the same scale as an earthquake caused by a stick of dynamite (1.2) even though one was nearly 100 million times bigger than the other!
+
+@slidebreak
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
@@ -275,8 +281,7 @@ This section builds the foundation for _linearization_, transforming the points 
 
 Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. 
 
-@lesson-point{
-We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.}
+*We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.*
 
 Unfortunately, `lr-plot` only finds _linear_ models in data with _linear_ relationships.
 
@@ -325,7 +330,7 @@ Having discovered that changing the scale of a graph allows us to _see_ logarith
 
 === Launch
 
-We tried changing the scale on the x-axis from linear to logarithmic, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow exponentially. Exponentially-bigger intervals on the x-axis appear to cancel out the logarithmic growth on the y-axis, by squishing the points to appear linear.
+We tried changing the scale on the x-axis from linear to logarithmic, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow exponentially. Exponentially-bigger intervals on the x-axis cancel out the logarithmic growth on the y-axis, by squishing the points to appear linear.
 
 @slidebreak
 
