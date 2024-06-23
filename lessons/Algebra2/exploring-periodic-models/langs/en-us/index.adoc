@@ -163,6 +163,11 @@ The circumference of the clock crosses the x-axis at @math{1} and @math{1}, and 
  +
 We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{x}, shown here in green and red.
 
+@QandA{
+@Q{If we knew that @math{x} and @math{y} were equal, how could we calculate them from this right triangle?}
+@A{We could use the Pythagorean Theorem}
+}
+
 @slidebreak
 
 @lesson-instruction{
@@ -509,16 +514,19 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 
 === Synthesize
 
-- TODO
+- Could you rewrite this model to use cosine instead of sine?
+- If so, how?
+- What are some problems you see with this model?
+- Where does it fit the data best? Where does it fit the worst?
 
 
-== More Complex Models
+== Hybrid Models
 
 === Overview
 Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
 
 === Launch
-The resulting model fits the `recent-table` data pretty well, with an S-value of about 1.2ppm and an R^2 value of 0.822. But how well does it fit if we try it with data from more than just the one year?
+The resulting model fits the `recent-table` data pretty well, with an S-value of about 1.2ppm. But how well does it fit, if we try it with data from more than just the one year?
 
 The starter file includes another table, called `modern-table`, which is all the data from 2010 and beyond.
 
@@ -548,44 +556,89 @@ Let's just look at the historical data by itself, without worrying about models.
 
 @center{@image{images/historical-scatter-plot.png}}
 
-@QandA{
-@Q{Do you see a pattern in the larger, historical data?}
-@A{Very much so!}
-@Q{If so, what @vocab{form} of relationship do you see? Is it linear? Quadratic? Exponential? Logarithmic? Periodic?}
-@A{Strong linear correlation.}
+@lesson-instruction{
+- In small groups, discuss what you Notice and Wonder about this plot.
+- Be prepared to share back with the class!
 }
 
 @slidebreak
 
-@ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there's two different things going on here: the amount of @COtwo in the air is rising linearly over time, forming a straight line with seasonal variations fluctuating up and down across that line.
+@lesson-instruction{
+- Complete questions 1 and 2 on @printable-exercise{modeling-historical-co2.adoc}
+}
+
+@slidebreak
+
+@ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there are two different things going on here:
+
+1. The amount of @COtwo in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
+2. But at the same time, there are seasonal, periodic variations that cause it to fluctuate up and down across that line.
 
 @lesson-instruction{
 - Do you think it's possible for a model to be both linear _and_ periodic?
+- In small groups, see if you can come up with an idea for a function that combined the best of both models.
+}
+
+@teacher{Have students share their models and/or discuss their thinking.}
+
+@slidebreak{InvestigateR-DN}
+
+@lesson-instruction{
+@ifslide{@right{@image{images/historical-scatter-plot.png}}}
+- Complete as much of @printable-exercise{modeling-historical-co2.adoc} as you can.
 }
 
 @slidebreak
 
-@lesson-instruction{
-- Complete @printable-exercise{modeling-historical-co2.adoc}
-}
-
 Our periodic model had two terms:
 
-- The vertical shift @math{419.87}, which described the midline
-- The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the midline
+- The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the horizontal midline
+- The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
 
 But when we zoomed out to see the historical @COtwo data, we saw that the midline isn't horizontal at all!
 
-@lesson-point{The midline is our linear model!}
+@slidebreak
+
+*The midline _is_ our linear model!*
 
 By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @COtwo.
 
-@strategy{Going Deeper}{
-Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+++++
+<style>
+/* Add custom CSS to make the math bold, and add coloring to nested circles */
+.hybridmath .mathunicode { font-weight: bold !important; }
+.hybridCOE .expression { background: white !important; }
+.hybridCOE .expression .expression { background: aquamarine !important; }
+.hybridCOE .expression .expression .expression { background: lightskyblue !important; }
+.hybridCOE .expression .expression .expression .expression {
+	background: lightyellow !important;
+}
+.hybridCOE .expression .expression .expression .expression .expression {
+	background: lightpink !important;
+}
+</style>
+++++
+[.hybridmath]
+@center{*@math{f(x) = 4.13 \times sin(2\pi(x - 2023.1)) + 1.8345x + -3296}*}
+
+@slidebreak
+
+We can visualize the body of the function using the Circles of Evaluation:
+
+[.hybridCOE]
+@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) (+ (* 1.8345 x) -3296) ))}
+
+@lesson-instruction{
+- If you haven't already defined your hybrid model, define it in the Definitions Area and finish @printable-exercise{modeling-historical-co2.adoc}.
+- How much better is the @math{S} value of the hybrid model, compared to the purely-linear one?
 }
 
 === Synthesize
 
-- Are there any other relationships you can think of, which might require a _combination of models_ like we did here?
-- If so, what are they?
+- Are there any other relationships you can think of, which might require a _hybrid model_ like this one?
+- Just for fun - can you come up with a function that combines _all_ of the models we've discussed? What does the graph of this model look like?
 - Are there any relationships you can think of, which _cannot_ be modeled using any of the functions we've discussed so far?
+
+@strategy{Going Deeper}{
+Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+}

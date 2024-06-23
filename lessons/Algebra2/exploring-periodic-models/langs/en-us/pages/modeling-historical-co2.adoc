@@ -18,7 +18,7 @@ body .center { padding: 0; }
 The data below was generated from the @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
 }
 
-@vspace{1ex}
+== Looking for Patterns
 
 @center{@image{../images/historical-scatter-plot.png, 450}}
 
@@ -41,7 +41,7 @@ _hybrid(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 @show{(code '(define (hybrid x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
 |===
 
-@vspace{1ex}
+== Creating Hybrid Models
 
 @n Could this linear model be improved by _combining_ it with your periodic model? Why or why not? @fitb{}{} +
 @fitb{}{} +
@@ -55,8 +55,8 @@ _hybrid(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 _Between 1974 and 2023, the amount of @math{CO_2} in the air can be modeled using a hybrid model. Within each year, the was a consistent periodic fluctuation, with an amplitude of @fitbruby{3em}{@ifsoln{4.13}}{amplitude}ppm rising and falling around a @vocab{midline} that rises at @fitbruby{2em}{@ifsoln{1.8345}}{slope}ppm. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{3em}{@ifsoln{@math{2pi}}}{frequency}._
 }
 
-@star Try to define a NEW function `p` in Pyret, which combines your periodic model with the one computed through linear regression. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
+@star Try to define a NEW function `hybrid` in Pyret, which combines your periodic model with the one computed through linear regression. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
 
-@fitb{}{@ifsoln{fun p(x): (4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end
-@hspace{2em} **OR** @hspace{2em} @math{p(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}  }}
+@fitb{}{@ifsoln{fun hybrid(x): (4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end
+@hspace{2em} **OR** @hspace{2em} @math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}  }}
 

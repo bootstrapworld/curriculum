@@ -325,7 +325,27 @@ Having discovered that changing the scale of a graph allows us to _see_ logarith
 
 === Launch
 
-We tried changing the scale on the x-axis from linear to exponential, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow by 10x appear to grow linearly. Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp` on a logarithmic x-axis, we could plot `log(pc-gdp)` on a _linear_ one.
+We tried changing the scale on the x-axis from linear to logarithmic, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow exponentially. Exponentially-bigger intervals on the x-axis appear to cancel out the logarithmic growth on the y-axis, by squishing the points to appear linear.
+
+@slidebreak
+
+Unfortunately, this transformation is only skin-deep: the underlying data is still logarithmic, which makes it impossible for us to use linear regression to obtain an optimal model.
+
+Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp` on a logarithmic x-axis, we could plot `log(pc-gdp)` on a _linear_ one.
+
+++++
+<style>
+.transformTable td:first-child { background: #eee; }
+.transformTable td:first-child * { background: #eee; font-weight: bold; }
+</style>
+++++
+[.transformTable, cols=">.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+|===
+|                       | x-Axis Markers        | y-Coordinates of the Data   | use lr-plot?
+
+| Changing the scale    | Grows logarithmically | Grows logarithmically       | No
+| Transforming the data | Grows linearly        | Grows linearly              | Yes
+|===
 
 @slidebreak
 
