@@ -131,18 +131,29 @@ In this example, we know the Ferris wheel keeps turning, generating data "in bet
 Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
 
 === Launch
-@right{@image{images/ferris-wheel.png, 300}}We're looking at example of what's called a @vocab{periodic relationship}.
+
+@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. 
 
 - The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
 
-*None of the tools in our modeling toolkit work here!* We've studied relationships that keep increasing and relationships that keep decreasing. We've studied relationships that grow one way until they reach a maxima or minima _once_, before growing in the other direction.
+If we can compute the y-coordinate of that point, we'll know the altitude of the seat! +
+But how can we compute the y-coordinate, based on the rotation of the circle?
 
-But we don't have any functions that keep repeating, going up and down over time.
+Let's consider the models we've studied:
 
-@slidebreak
+- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever. 
+- quadratic relationships grow one way until they reach a maxima or minima _once_, before growing in the other direction.
 
-That's a problem for us as data scientists, because so many things in nature come in _cycles:_ for most of the world, the sun rises each morning and sets each night, the moon waxes and wanes, and the tides come in and out. You may even have noticed that certain plants always seem to bloom in the Spring, or that more people tend to get sick in the winter. Being able to model these phenomenon is incredibly important, for everyone from farmers to fishermen to healthcare providers!
+*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*  
+
+Being able to model cyclical relationships is incredibly important, for everyone from farmers to fishermen to healthcare providers! So many things in nature come in cycles:
+
+- the sun rises each morning and sets each night (for most of the world)
+- the moon waxes and wanes
+- the tides come in and out
+- certain plants always seem to bloom in the Spring
+- people tend to get sick in the winter
 
 In this lesson we'll explore a new class of functions - _@vocab{periodic functions}_ - that we can use to model cyclical relationships like these.
 
@@ -157,17 +168,15 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @slidebreak
 
-@ifslide{@right{@image{images/ferris-wheel.png, 300}}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. If we can compute the y-coordinate of that point, we'll know the altitude of the seat! *But how can we compute the y-coordinate, based on the rotation of the circle?*
-
-@slidebreak
-
 ==== Unit Clocks
 
 @right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
-The circumference of the clock crosses the x-axis at @math{1} and @math{-1}, and the y-axis at @math{1} and @math{-1}. +
- +
-We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y). That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{x}, shown here in green and red.
+We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y).
+
+_For example, when it's 12 o'clock, the radius lands at @math{(0,1)}._
+
+That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and red.
 
 @lesson-instruction{
 - With a partner, complete questions 1-6 of @printable-exercise{unit-clock.adoc}.
@@ -177,18 +186,20 @@ We can draw a radius at any "time", on the clock hitting the circumference at so
 
 @ifslide{@right{@image{images/unit-circle-clock.png}}}
 
-At 12 o’clock, (x, y) is at the coordinates (0, 1)
-At 3 o'clock (x, y) is at the coordinates (1, 0)
-At 6 o’clock, (x, y) is at the coordinates (0, -1)
-At 9 o'clock (x, y) is at the coordinates (-1, 0)
-
 @QandA{
+@Q{At what time does the radius lands on the point (0,-1)?}
+@A{6pm?}
+@Q{At what time(s) does the radius land on the x-axis?}
+@A{3pm lands on (1,0)}
+@A{9pm lands on (-1,0)}
+@Q{At which time(s) does x = y?}
+@A{1:30 and 7:30}
 @Q{If we knew that @math{x} and @math{y} were equal, how could we calculate them from this right triangle?}
-@A{We could use the Pythagorean Theorem}
+@A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
 }
 
 @teacher{
-- Make sure you have created a link or code for your class to @starter-file{alg2-exploring-periodic-desmos} and paced the class so they only have access to Slide 1: Unit Clocks. Students will be using this slide to check their work on @printable-exercise{unit-clock.adoc}
+Make sure you have created a link or code for your class to @starter-file{alg2-exploring-periodic-desmos} and paced the class so they only have access to Slide 1: Unit Clocks. Students will be using this slide to check their work on @printable-exercise{unit-clock.adoc}
 }
 
 @lesson-instruction{
@@ -197,48 +208,44 @@ At 9 o'clock (x, y) is at the coordinates (-1, 0)
 
 @slidebreak
 
-@right{@image{images/pizza-slice.svg, 200}}As the point (x,y) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled. In our clock example, we divide the circle into two "slices", each representing one hour.
+@right{@image{images/pizza-slice2.png, 100}}As the point (x,y) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled. 
 
 @QandA{
-But of course, there are other ways besides 12 slices of "hours" to measure this angle!
+In our clock example, we divide the circle into twelve "slices", each representing one hour. But of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
 @A{_Degrees_, divide a circle up into 360 slices instead of 12. }
-@Q{If we switched the x-axis in our graph from 12 hours to 360 degrees, would the shape of the curve change?}
+@Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
+@A{_Degrees_ divide our circle into 360 "slices", where the tip of the slice is 1/360th of the circle. Switching our unit-clock graph from hours to degrees just changes the tick marks on the x-axis.This doesn't change the graph at all, any more than changing a ruler from inches to centimeters would change the drawings on a blueprint!}
 }
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-slice.svg, 200}}}_Degrees_ divide our circle into 360 "slices", where the tip of the slice is 1/360th of the circle. Switching our unit-clock graph from hours to degrees just changes the tick marks on the x-axis.
-
-This doesn't change the graph at all, any more than changing a ruler from inches to centimeters would change the drawings on a blueprint!
-
-@slidebreak
-
-@ifslide{@right{@image{images/pizza-slice.svg, 200}}}But degrees aren't the only way to divide up a circle. In fact, in many cases _they're not even the best way!_ We often want to use the *radius* of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude.
-
-In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
+==== Radians
+@ifslide{@right{@image{images/pizza-slice2.png, 200}}}Degrees aren't always the best way to divide up a circle.  We often want to use the *radius* of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude. In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
 
 @slidebreak
 
-@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? +
-{empty} +
-We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. +
-{empty} +
-This would give us exactly six slices, with the tip of each slice having a 60° angle...but our pizza wouldn't be round anymore!
+@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? 
 
+- We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. 
+- This would give us exactly six slices, with the tip of each slice having a 60° angle...
 @QandA{
+@Q{If each of our six slices were an equilateral triangle, our pizza wouldn't be round anymore.}
 @Q{What shape would we get instead?}
 @A{A hexagon!}
 }
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-6.png, 200}}}To make it a circle, those outer edges of each slice need to curve! But they can't change length, since they *have* to be equal to the length of the radius. Stretching them out from straight lines into curves will make the angle a little smaller, _just slightly less than 60°._ +
-{empty} +
-With @math{θ} of each slice being less than 60°, we can fit just slightly more than 6 of these slices in our pie. In fact, we can fit *exactly @math{2pi}* of these "radius slices"!
+@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_. 
 
-@lesson-point{Radian: the angle formed carving out a radius's worth of the circumference}
+@lesson-point{Radian: the measure of the angle formed by carving out a radius's worth of the circumference}
+
+If @math{θ} of each "radian" slice is less than 60°, we can fit just slightly more than 6 of these slices in our pie. In fact, we can fit *exactly @math{2pi}* of these "radius slices"!
+
+@lesson-point{@math{360° = 2pi}}
+
 
 @slidebreak
 
@@ -255,86 +262,80 @@ With @math{θ} of each slice being less than 60°, we can fit just slightly more
 
 Pyret knows about @math{\pi}, too!
 
-@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`}
-
 @lesson-instruction{
+- Open @starter-file{editor}
 - In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
 - Try computing the value of @math{3\pi}.
 - Try computing the value of @math{\pi / 2}.
 - Why do we need spaces around the multiplication and division signs?
 }
 
+@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`}
+
 @slidebreak
 
-As with degrees, switching our unit-clock graph from hours to radians doesn't change the graph at all. It just changes the tick marks on the x-axis.
+As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
 
-One other difference between "hours" and degrees or radians is that we generally think of clocks starting at 12:00, with the hands moving clockwise. Degrees and radians are generally thought of as starting at 3:00, and moving __counter__-clockwise. *Both of these are conventions* - we could easily write the numbers backwards on a clock and have the hand move the other way, or write the degrees and radians backwards and have them count clockwise.
+*Note:* The conventions for labelling a clock are different from the conventions for labelling circles with Radians or Degrees.
+[cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
+|===
+ 
+| hours on a clock
+| vs
+| radians and degrees on a circle
+
+| start from the top +
+ (where 12 o'clock is)
+|
+| start from zero on the right +
+(where 3 o'clock would be)
+
+| increase clockwise
+|
+| increase counter-clockwise 
+|===
+
+
+_These are conventions that people have agreed upon over time to make it easy to collaborate. If somebody wanted to make a clock with the numbers written backwards and have the hands move the other way, it would be possible to learn how to tell time using their clock... but it likely would be more confusing than helpful for most people if we hung a clock like that in our school._
 
 @lesson-instruction{
-Complete questions 1-2 on @printable-exercise{converting-angles.adoc} with your partner, to fill in the table.
+Complete the table on @printable-exercise{converting-angles.adoc} with your partner, following the prompts in #1 and #2.
 }
 
 @slidebreak
 
-Rather than measuring the "slice" of the circumference carved out by hours, these measure the slice carved out in radians.
+We began by graphing the relationship between the legs of a right triangle and the angle formed based on the time on a clock using the functions @math{x(time)} and @math{y(time)}.
 
-We began by graphing the functions @math{x(time)} and @math{y(time)}, which showed us the relationship between the legs of a right triangle and the angle formed based on the time on a clock. But what do these functions look like when the input is @vocab{radians}, instead of hours?
+Top plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} function. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
 
-In trigonometry, we have two functions called @math{sin} and @math{cos}. Pyret has them, too:
-
+@lesson-instruction{
+- One of these functions computes the "x values" from our unit circle. And the other computes the y-values. 
+- Figure out which one is which by completing @printable-exercise{converting-angles.adoc} with your partner.
+- You will be using the radian values from your table with the `sin` and `cos` functions in Pyret. 
+- The contracts for these functions are: +
 @center{
 @show{(contracts
 '("sin" ("Number") "Number")
 '("cos" ("Number") "Number")
 )}
 }
-
-@lesson-instruction{
-But which of these functions computes the x values, and which computes the y-values? Find out by using the radian values from your table with the `sin` and `cos` functions in Pyret, and finish @printable-exercise{converting-angles.adoc} with your partner.
 }
-
-@slidebreak
-
-When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
-
-@center{@image{images/wave-labeled-terms.png, 75%}}
-
-@lesson-instruction{With your partner, turn to @printable-exercise{vocab-from-diagram.adoc} and
-see if you can come up with explanations for what each of the terms on this diagram refer to.}
-
-@slidebreak
-
-- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
-- @vocab{Troughs} - the lowest points on the wave
-- @vocab{Period} - the length of a complete cycle, from peak-to-peak or trough-to-trough (in radians, this will always be @math{2\pi}).
-- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
-- @vocab{Amplitude} - the distance from a peak or trough to the midline
-
-@slidebreak
-
-@ifslide{
-@center{@image{images/wave-labeled-terms.png, 650}}
-}
-
-Starting at @math{x=0} with some initial value, a periodic function will rise to a maximum value (@vocab{peak}) or fall to a minimum value (@vocab{trough}), before returning to its initial value. As @math{x} increases, it will repeat this pattern over and over, fluctuating between its @vocab{peaks} and @vocab{troughs} over regular intervals, called @vocab{periods}.
 
 === Investigate
 Periodic models have the basic form:
 
-@center{@math{f(x) = a \sin(b(x - d)) + c} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - d)) + c}}
+@center{@math{f(x) = A \sin(B(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = A \cos(B(x - h)) + k}}
 
-Since the cosine function behaves identically to sine function (just shifted horizontally by @math{\pi \over 2}), one model is just as good as the other.
+Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
 
 @QandA{
-@Q{You've seen the coefficient @math{c} used to define other models. What affect do you think it has on the model?}
+@Q{Many of the models we've studied had a coefficient added at the end of the definition. Thinking back to what you learned, what effect do you think @math{k} has on a periodic model?}
 @A{It's the vertical shift - it moves the midline of the graph up and down the y-axis.}
 @Q{What effect do you think each of the _other_ coefficients has on the model?}
-@A{Some may recognize @math{d} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
+@A{Some may recognize @math{h} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
 }
 
 @slidebreak
-
-Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
 
 @teacher{Sync or pace students to __Slide 2: Graphing Periodic Models__ of @starter-file{alg2-exploring-periodic-desmos}.}
 
@@ -342,28 +343,66 @@ Both @math{sin} and @math{cos} are closely related to one another, and each one 
 - Let's return to the *Exploring Periodic Models Desmos file* to experiment with the coefficients of periodic models!
 - You should now be on *Slide 2: Graphing Periodic Models*.
 - Use it to complete @printable-exercise{graphing-models.adoc} with your partner.
+- Then turn to @printable-exercise{vocab-from-diagram.adoc} and
+see if you can come up with explanations for what each of the terms on this diagram refer to.
 }
 
-@teacher{As you debrief, give ample time for students to hear each another's thinking. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
+@slidebreak
+
+@teacher{As you debrief, give ample time for students to hear each other's thinking. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
+
+@centered-image{images/wave-labeled-terms.png, 450}
 
 @slidebreak
 
-The period is the distance between one @vocab{trough} and the next in a cycle. The frequency is _how many cycles_ occur over an interval.
+==== Peaks, Troughs and Midline
 
-@lesson-point{@center{@math{\mbox{period} = {2\pi \over \mbox{frequency}}}}}
+When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
-- If the @vocab{period} is @math{2}, then the frequency is @math{\pi}.
-- If the @vocab{period} is cut in half to @math{1}, the @vocab{frequency} _doubles_ to @math{2\pi}
-- If the @vocab{period} doubles to @math{4}, the @vocab{frequency} _halves_ to  @math{pi/2}
+- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests}) 
+  * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
+- @vocab{Troughs} - the lowest points on the wave 
+  * _Since periodic functions rise and fall repeatedly, there isn't a minima, but math books sometimes refer to each trough as a local minima_
+- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 
 @slidebreak
 
-Let's review our coefficients:
+==== Amplitude @math{A}
 
-- @vocab{Amplitude} (@math{a}): the distance from a peak/trough to the midline (can be added to the @vocab{trough} to produce the @vocab{midline})
-- @vocab{Frequency} (@math{b}): the number of cycles in a given interval (divided @math{2\pi} by @math{b} to compute the @vocab{period})
-- @vocab{Vertical Shift} (@math{c}): the amount the graph is shifted up (@math{c} > 0) or down (@math{c} < 0)
-- @vocab{Horizontal Shift} (@math{d}): the amount the graph is shifted right (@math{c} < 0) or left (@math{c} > 0). Also called the @vocab{Phase Shift}.
+The distance from a peak or trough to the @vocab{midline}.  
+
+@slidebreak
+
+==== Period @math{=} @math{2\pi \over \mbox{frequency}}
+
+The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave). 
+- It can be measured from peak to peak or from trough to trough.
+- The @vocab{frequency} (@math{B}) is _how many cycles_ occur over a @math{2\pi} interval.
+[.rideData, cols="^4a,^1a, ^1a", options="header", stripes="none"]
+|===
+|																			| Period 		| Frequency 	
+| When @math{B = 1}															|@math{2\pi} 	| 1	
+| When the @vocab{period} is cut in half, the @vocab{frequency} _doubles_	|@math{\pi} 	| 2
+| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}	
+|===
+
+@slidebreak
+
+==== Horizontal Shift (@math{h}) 
+
+The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
+
+- When @math{h} < 0, it shifts the graph to the left.
+- When @math{h} > 0, it shifts the graph to the right. 
+
+_Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when d is positive it looks like it's being subtracted._
+
+==== Vertical shift (@math{k})
+
+The vertical shift is the amount the function is shifted up or down
+- When @math{k} < 0, the graph is shifted down.
+- When @math{k} > 0, the graph is shifted up. 
+
 
 @slidebreak
 
@@ -385,7 +424,7 @@ Let's review our coefficients:
 @slidebreak
 
 @lesson-instruction{
-- Open the @starter-file{alg2-ferris-wheel}, and change the definition of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
+- Open the @starter-file{alg2-ferris-wheel}, and change the definitions of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
 }
 
 @teacher{
@@ -507,7 +546,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 @A{424 and 415.74 parts per million.}
 @Q{What did you get for @vocab{amplitude} @math{a}?}
 @A{4.13, because the distance between the high and low readings is 8.26.}
-@Q{What did you get for the @vocab{vertical shift} @math{c}?}
+@Q{What did you get for the @vocab{vertical shift} @math{k}?}
 @A{Adding the amplitude (4.13) to the lowest value (415.74) gives us 419.87.}
 @Q{What did you estimate for the @vocab{phase shift} @math{d}?}
 @A{Answers will vary, but should be close to 2023.1}
