@@ -382,7 +382,8 @@
                          (build-path local-dir ".cached" snippet)
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
-                            (call-with-input-file f.titletxt read-line))]
+                            (adoc-to-md
+                              (call-with-input-file f.titletxt read-line)))]
            [existent-file? #f])
       (cond [(or (path-has-extension? snippet ".adoc")
                  (path-has-extension? snippet ".html")
@@ -419,6 +420,11 @@
               (format "[~a](~a)" link-text (build-path *bootstrap-prefix* f))])
         link-output))))
 
+(define (adoc-to-md x)
+  (set! x (regexp-replace* #rx"\\^(.*?)\\^" x "<sup>\\1</sup>"))
+  (set! x (regexp-replace* #rx"~(.*?)~" x "<sub>\\1</sub>"))
+  x)
+
 (define (make-lesson-link f link-text)
 
   (cond [(regexp-match "^ *$" f)
@@ -449,7 +455,8 @@
                          (build-path local-dir ".cached" (string-append "." snippet))
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
-                            (call-with-input-file f.titletxt read-line))]
+                            (adoc-to-md
+                              (call-with-input-file f.titletxt read-line)))]
            [existent-file? #f])
       (cond [(or (path-has-extension? snippet ".adoc")
                  (path-has-extension? snippet ".html")
@@ -524,7 +531,8 @@
         ; (printf "title file is ~s\n" local-title-file)
         (set! link-text
           (cond [(file-exists? local-title-file)
-                 (call-with-input-file local-title-file read-line)]
+                 (adoc-to-md
+                   (call-with-input-file local-title-file read-line))]
                 [(file-exists? local-dir-file) local-dir-file]
                 [else (format "<broken link: ~a>" local-dir-file)]))))
     (when (path-has-extension? local-file ".adoc")
