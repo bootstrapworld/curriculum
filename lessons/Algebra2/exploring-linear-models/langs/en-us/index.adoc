@@ -138,10 +138,14 @@ It's customary to use the horizontal axis for our explanatory variable and the v
 
 @lesson-instruction{
 - It's time to dig back into the State Demographics data.
-- We are going to be focusing some of our thinking on our state and its neighbors. Which states should we focus on?
+- Which states do you want to focus on? (Pick our state, a neighboring state, and/or a state you've always wanted to visit!)
 }
 
-@teacher{Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!}
+@teacher{
+If students aren't familiar with neighboring states, @link{https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#/media/File:Map_of_USA_with_state_and_territory_names_2.png, here's a useful map!}
+
+Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!
+}
 
 @lesson-instruction{
 - Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc} using @starter-file{alg2-states-intro}.
@@ -178,7 +182,8 @@ Surprises in the District of Columbia: DC often shows up as an outlier or extrem
 
 - Share your scatter plots with one another. _(Perhaps by copying and pasting `scatter-plot` displays into a shared document and then labeling those displays?)_
 - What possible relationships did you find?
-- Did you and your classmates use similar words to describe the relationships you observed? If so, what were they?
+- What did you learn about the state(s) you decided to focus on?
+- Did you and your classmates use similar words to describe the scatter plots you came up with? If so, what were they?
 
 @teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength._}
 
@@ -400,21 +405,24 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 
 === Synthesize
 
-@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `f(x)` in Pyret, and test how well `f(x)` predicted several states' median income given the percentage of the population with at least a college degree.}
+@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `al-ak(x)` in Pyret, and test how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.}
 
 @QandA{
 
 @Q{Why wasn't the Alaska-Alabama model a good fit for the rest of the data?}
 @A{Because Alaska is an outlier that falls pretty far above the line of best fit.}
-
-@Q{If we had chosen two other points from which to build our model, could we have done better? Which points would you choose, and why?}
+@Q{If we had chosen two other points from which to build our model, could we have done better? Which points did you choose, and why?}
 @A{Answers will vary. But West Virginia and Massachusetts could be a good option.}
+}
+
+@lesson-instruction{
+Write those two states somewhere on @printable-exercise{model-college-v-income-1.adoc}. You'll want to remember them for later!
 }
 
 == Fitting Linear Models @duration{45 minutes}
 
 === Overview
-Students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best? First they'll consider two models for a simple dataset and brainstorm how we could measure which fits better. Then they'll test out their linear models using a new pyret function called `fit-model`, which computes residuals, @math{S}, and @math{R^2}.
+Students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best? First they'll consider two models for a simple dataset and brainstorm how we could measure which fits better. Then they'll test out their linear models using a new pyret function called `fit-model`, which draws the residuals and computes the Standard Deviation of the Residuals (@math{S}).
 
 === Launch
 
@@ -498,7 +506,9 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @A{`f` has significantly more red dots below the blue line than above it.}
 @A{The data points for `g` more or less fill the vertical space of the display, whereas for `f` there are only data points in the bottom half of the display.}
 
-@Q{There are @math{S} and @math{R^2} values listed in the top left corner. How do they compare for the two models?}
+There are @math{S} and @math{R^2} values listed in the top left corner. You probably haven't seen these terms before, but let's see if we can figure out what they mean.
+
+@Q{How do @math{S} and @math{R^2} compare for the two models?}
 @A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `g` than they are for `f`.}
 }
 
