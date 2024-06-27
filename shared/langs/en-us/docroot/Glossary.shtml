@@ -22,9 +22,13 @@
   </style>
 
   <script type="text/javascript">
+    configureGraph(graph);
+    window.status = "not_ready_to_print";
+    // narrow the primitives by url params
+    let {pathway, lessons, lesson, solns} = getParams();
+    lessons = lessons || Object.keys(graph);
+
     function populateGlossary() {
-      let {lesson} = getParams();
-      lessons = lesson? [lesson] : [...Object.keys(graph)];
       // if just one lesson, add it to the title
       if(lessons.length == 1) {
         document.getElementsByTagName("h1")[0]
