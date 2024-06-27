@@ -26,7 +26,7 @@
     window.status = "not_ready_to_print";
     // narrow the primitives by url params
     let {pathway, lessons, lesson, solns} = getParams();
-    lessons = lessons || Object.keys(graph);
+    lessons = lesson? [lesson] : lessons || Object.keys(graph);
 
     function populateGlossary() {
       // if just one lesson, add it to the title
