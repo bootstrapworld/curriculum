@@ -7,7 +7,7 @@
 
 @keywords{logarithm, base}
 
-@add-to-lang{log-base}
+@add-to-lang{log-base, build-column}
 
 [@lesson-intro-table]
 |===
@@ -110,12 +110,14 @@ Exponential growth started really _slowly_, and then suddenly shot up like a roc
 @right{@image{images/covid-graph.png, 375}}Let's think back to the graph of our model for Covid spread, from @lesson-link{exploring-exponential-models}.
 
 - Our model answers the question "how many positive cases do we predict after @math{x} days?"
-- The graph is showing us the relationship of days → cases, x → y, or Domain → Range.
+- The graph is showing us the relationship from +
+_days → cases_, _x → y_, or _Domain → Range_.
 
 But what if we want to answer the _opposite_ question: "how many days will it take to reach @math{y} cases?"
 
-- Now we want to flip the relationship around, asking for cases → days, y → x, or Range → Domain.
-- _What would this graph look like?_
+- Now we want to *flip the relationship around*, asking for +
+_cases → days_, _y → x_, or _Range → Domain_.
+- What would *this* graph look like?
 
 @slidebreak
 
@@ -171,6 +173,22 @@ This kind of growth is called _logarithmic growth_. Logarithmic functions are cl
 
 @slidebreak
 
+*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*
+
+By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
+
+- The inputs and outputs are reversed
+- The Domain and Range are swapped
+- The curve is reflected over @math{y=x}
+
+@lesson-instruction{
+To practice spotting logarithmic curves and their connection to exponentials, complete @printable-exercise{classifying-plots.adoc}.
+}
+
+@slidebreak
+
+@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
+
 [cols="^1a,^1a", stripes="none", options="header"]
 |===
 | Exponential Function
@@ -187,27 +205,29 @@ This kind of growth is called _logarithmic growth_. Logarithmic functions are cl
 
 @slidebreak
 
-_"A logarithmic relationship looks exponential, if your x's and y's trade places!"_
+@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
 
-Reflecting the Domain and Range on a graph makes a logarithmic _curve_ look exponential, and swapping the columns of a table will make a logarithmic _sequence_ look exponential.
+Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x,y) columns of a table makes a logarithmic _sequence_ look exponential.
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-tables.adoc} and decide whether you think each table is best modeled by a quadratic, exponential or logarithmic function.
 - If the table shows an exponential *or* logarithmic relationship, identify the base.
 }
 
-@teacher{Have students share their answers. For logarithmic functions, it's especially important to have students talk about the @vocab{base}: how much @math{x} needs to increase just to get a fixed increase in @math{y}!}
+@slidebreak
 
 @QandA{
 - What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?
 - Was it especially difficult (or simple) to recognize any these function types? Why?
 }
 
+@lesson-instruction{
+For practice translating logarithmic expressions into words and evaluating them turn to @printable-exercise{evaluate-log.adoc}.
+}
+
 @slidebreak
 
-@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
-
-@right{@image{images/decibels-table.png, 350}}
+@right{@image{images/decibels-table.png, 350}}@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
 
 - We _perceive_ loudness on a logarithmic scale. We can hear a pin drop, but we can also process sounds as loud as a fog horn without getting hurt. A fire alarm is _thousands of times louder_ than a dog barking, but our brains don't process that difference.
 - For us to perceive one sound as being twice as loud as another, it actually has to be _a hundred times as loud_.
@@ -215,16 +235,14 @@ Reflecting the Domain and Range on a graph makes a logarithmic _curve_ look expo
 We don't *hear* the world as it really is. We hear a logarithmically compressed version of it!
 
 @slidebreak
-@right{@image{images/view-from-airplane.jpg, 350}}
-@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
+@right{@image{images/view-from-airplane.jpg, 350}}@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
 }
 
 - When looking out airplane window, _our eyes take in hundreds of miles' worth of visual data all at once!_
 - A fraction of our field of view shows us just a few feet of the airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
 
 @slidebreak
-@right{@image{images/railroad-tracks.jpg, 350}}
-@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*}
+@right{@image{images/railroad-tracks.jpg, 350}}@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*}
 
 - We know that parallel lines never intersect.
 - But when looking at a railroad track this compression makes the rails grow closer and closer in the distance, until it looks like they might touch.
@@ -268,11 +286,6 @@ The base of the logarithm is similar to the base (or @vocab{growth factor}) in a
 | Evaluates to 2
 |===
 
-
-@lesson-instruction{
-For practice translating logarithmic expressions into words and evaluating them turn to @printable-exercise{evaluate-log.adoc}.
-}
-
 @slidebreak
 
 @QandA{
@@ -289,6 +302,8 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
+*No matter the base, @math{log(1)} will always be zero!*
+
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
 - What clues did you use to help you identify which relationships were which?
@@ -300,7 +315,7 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_. Pyret's `log` function works the same way:
 
-@center{`log(1000) # returns 3, because log base 10 of 1000 is 3 `}
+@center{`log(1000) # returns 3, because 10^3 = 1000`}
 
 If you want to work with a different base, you can look up Pyret's `log-base` function in the @dist-link{Contracts.shtml, contracts pages}.
 
@@ -308,7 +323,10 @@ If you want to work with a different base, you can look up Pyret's `log-base` fu
 
 *Vertical Shift @math{c}*
 
-The term @math{c} is the vertical shift of the function, which moves the curve up or down. +
+The term @math{c} is the vertical shift of the function, which moves the curve up or down.
+
+Since @math{log_{anything}(1) = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + c}.
+
 (_We've seen vertical shifts in other kinds of functions given different names, like @math{k} for quadratics and @math{b} for linear functions._)
 
 @slidebreak
@@ -417,20 +435,6 @@ We tried changing the scale on the x-axis from linear to logarithmic, which canc
 Unfortunately, this transformation is only skin-deep: the underlying data is still logarithmic, which makes it impossible for us to use linear regression to obtain an optimal model.
 
 Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp` on a logarithmic x-axis, we could plot `log(pc-gdp)` on a _linear_ one.
-
-++++
-<style>
-.transformTable td:first-child { background: #eee; }
-.transformTable td:first-child * { background: #eee; font-weight: bold; }
-</style>
-++++
-[.transformTable, cols=">.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
-|===
-|                       | x-Axis Markers        | y-Coordinates of the Data   | use lr-plot?
-
-| Changing the scale    | Grows logarithmically | Grows logarithmically       | No
-| Transforming the data | Grows linearly        | Grows linearly              | Yes
-|===
 
 @slidebreak
 
