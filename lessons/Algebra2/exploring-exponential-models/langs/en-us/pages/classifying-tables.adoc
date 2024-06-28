@@ -3,12 +3,12 @@
 ++++
 <style>
 #content img {width: 75%; height: 75%;}
-body.workbookpage td .autonum:after { content: ')'; }
+td .autonum:after { content: ')' !important; }
 </style>
 ++++
 
 Decide whether each table is best described by a linear, quadratic, or exponential model. +
-*If the model is exponential:* How is it growing? Doubling (factor of 2)? Tripling (factor of 3)? Factor of 5? 10?
+*If the model is exponential:* What is the growth factor? Doubling (factor of 2)? Tripling (factor of 3)? Factor of 5? 10?
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
 |===
@@ -123,21 +123,21 @@ Decide whether each table is best described by a linear, quadratic, or exponenti
 [.pyret-table,cols="1,1",options="header"]
 !===
 !  x ! y
-! -5 !      1
-! -4 !      6
-! -3 !     36
+! -5 ! 466656
+! -4 !   7776
+! -3 !   1296
 ! -2 !    216
-! -1 !   1296
-!  0 !   7776
-!  1 ! 466656
+! -1 !     36
+!  0 !      6
+!  1 !      1
 !===
 
 [cols="^.^1a,^.^6a,^.^6a,^.^12a",stripes="none",frame="none",grid="none"]
 !===
-! *@n*
+! *@star*
 ! Linear
 ! Quadratic
-! @ifsoln-choice{Exponential} @fitbruby{2em}{@ifsoln{6}}{factor}
+! @ifsoln-choice{Exponential} @fitbruby{2em}{@ifsoln{1/6}}{factor}
 
 // need empty line here so the closing table block isn't swallowed
 !===

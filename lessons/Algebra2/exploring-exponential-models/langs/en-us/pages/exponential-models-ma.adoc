@@ -70,8 +70,6 @@ _Two Notes on this function definition:_
 * `(~1 * x)` _at first it may appear that @math{x} is being multiplied by negative 1, but it is actually being multiplied by `*~1*` (literally the value "roughly 1"). This tells Pyret to round off the calculation, prioritizing *speed* over *precision* to get a result that is "roughly accurate". We've added this to the function definition so that you won't have to wait for several minutes for Pyret to run `fit-model` to get an answer for question 4._
 }
 
-@vspace{1ex}
-
 @n Update the definition for `exponential` in the Definitions Area and click "Run" to reload it. +
 @hspace{1em}Then use `fit-model` to determine how closely `exponential` fits the `MA-table` and fill in the blanks below to interpret the model. +
 @ifsoln{*Answers will vary. Numbers below are provided for reference only!*} @ifnotsoln{@hspace{1em}}_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, contracts pages}!_
@@ -89,14 +87,10 @@ According to this exponential model, on @fitbruby{6em}{June 9, 2020}{day zero} t
 @fitb{}{@ifsoln{}}
 @fitb{}{@ifsoln{}}
 
-@vspace{1ex}
-
 @star Rewrite the model to make Pyret do these calculations with extreme precision. @hspace{1em} (Remove the part where it multiplies by `~1` .) +
 _WARNING: Be sure to save your work first, as there's a good chance this will lock up your browser and require force-quitting!_ 
 
 How did the calculations change? @fitb{}{}
-
-@vspace{1ex}
 
 Data scientists perform calculations to do things like send satellites to far-away planets, or analyze large populations of a billion or more. +
 You know that the pros of using `~1` involve speed. *What are the potential downsides of using `~1` to speed up a calculation?*
@@ -111,3 +105,7 @@ You know that the pros of using `~1` involve speed. *What are the potential down
 - When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 - For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
 }
+
+@n How many positive cases does your model predict after 400 days? @fitb{10em}{@ifsoln{~3008686461}} After 900 days? @fitb{}{@ifsoln{~28294406820368170000}}
+
+@n Roughly much bigger is 1731 than 2? @fitb{10em}{} Is it harder to compare the two huge numbers above? @fitb{}{@ifsoln{YES}}

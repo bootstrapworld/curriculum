@@ -1,6 +1,10 @@
 [.beta]
 = Exploring Exponential Models
-
+++++
+<style>
+.big { font-size: xx-large; }
+</style>
+++++
 @description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
 
 @lesson-prereqs{exploring-quadratic-models, lookups}
@@ -317,6 +321,16 @@ For example, the y-intercept for the function below will not be 3 (as you might 
 
 @slidebreak
 
+If you've ever heard of something called "interest rate", then you know that sometimes we want to think in terms of percentages instead of factors. When your savings account has a 3% interest rate, it means your money is _growing by 3%_ - a @vocab{growth factor} of 1.03.
+
+Converting between *growth rate* and growth factor is easy:
+
+@center{@big{@math{b = 1 + r}}}
+
+If a $50,000 car loses 20% of its value each year, the growth rate is @math{-20%}. Modeling this with an exponential function would mean a growth rate @math{b} of @math{1 - .20 = .80}, for a function @math{\mbox{value}(\mbox{years}) = $50,000 * (1 + -.20)^{years} = $50,000(.80)^{years}}.
+
+@slidebreak
+
 @teacher{
 In the following activities, students will:
 
@@ -331,6 +345,7 @@ Decide whether you'd like to pull your class back together to discuss after each
 - Let's practice identifying linear, quadratic, and exponential growth. With your partner, complete:
   * @printable-exercise{classifying-defs.adoc}
   * @printable-exercise{classifying-descriptions.adoc}
+- @opt{For more practice, complete @opt-printable-exercise{classifying-descriptions-2.adoc}}
 }
 
 @QandA{
@@ -390,27 +405,47 @@ Now that you're familiar with exponential functions, let's use them to model thi
 - Is an exponential model a good fit for this data? Why or why not?
 }
 
-@strategy{Precision v. Efficiency in Computation}{
+@slidebreak
 
-On @printable-exercise{exponential-models-ma.adoc} you'll see a note about the use of `&#126;1` to tell Pyret to prioritize speed over precision. Unlike most calculators that students will engage with, Pyret usually prioritizes precision.
+On @printable-exercise{exponential-models-ma.adoc} you'll see a note about the use of `&#126;1` to tell Pyret to prioritize _speed_ over precision. Unlike most calculators, Pyret usually prioritizes precision.
 
 In a math classroom, this is the difference between @math{\frac{2}{3}} rendering as @math{ 0.\overline{666}} or being rounded to 0.666666667.
 
-In data processing, opting to round for speed over preserving precision can have ethical or technical consequences. For example:
+In data processing, *choosing speed over precision can have ethical or technical consequences!*
 
-1) When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
+For example:
 
-2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
-}
+1) When calculating a path over an extremely long distance, being off by just a billionth of a degree could result in a Mars-bound rocket missing its destination.
+
+2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire group of people!
+
 
 === Synthesize
 
 - What makes exponential models different from the linear and quadratic models you've seen before?
-- How would you describe the shape of the three models you've seen so far (Linear, Quadratic, and Exponential)?
 - Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
+- In the last question, why was it so much harder to compare the huge numbers?
+
+@slidebreak
+
+*Why is it so much harder to compare huge numbers?*
+
+We are creatures of nature, so our brains are designed to be really good at working with things we see all the time. It's normal to see groups of 2, 5, or even 10 or 100, and we have a pretty good intuition for comparing group sizes as long as they're small.
+
+But when numbers get really, really, _really_ huge...we get lost! Our brains lose track of differences when the two numbers get really enormous. _Mathematically,_ the number line is composed of equal intervals forever.
+
+@link{https://www.scientificamerican.com/article/a-natural-log/, *But we don't actually process it that way at all.*}
+
+@slidebreak
+
+*Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
+
+This may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
+
+Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. _(Stay tuned!)_
 
 
-== Why Just One State at a Time? @duration{45 minutes}
+== (Optional) Why Just One State at a Time?
 
 === Overview
 Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then discover another motivation for filtering: scatter plots like our covid dataset show _multiple_ correlations, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the Covid dataset into samples grouped by state.
