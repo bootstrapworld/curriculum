@@ -2291,7 +2291,7 @@
         (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-sections.txt.kp")
           (lambda (o)
             (for ([s (reverse *first-level-section-titles*)])
-              (set! s (regexp-replace #rx" *\\([0-9]* +minutes\\)$" s ""))
+              (set! s (regexp-replace* #rx" *\\([0-9]* +minutes\\)" s ""))
               (write s o) (newline o)))
           #:exists 'replace)
         )
