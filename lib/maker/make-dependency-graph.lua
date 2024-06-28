@@ -78,6 +78,9 @@ for _,lesson in ipairs(lessons) do
     if file_exists_p(title_file) then
       local title2 = first_line(title_file)
       if title2 then title = title2 end
+      title = title:gsub('__(.-)__', '<em>%1</em>')
+      title = title:gsub('%^(.-)%^', '<sup>%1</sup>')
+      title = title:gsub('~(.-)~', '<sub>%1</sub>')
     end
     return title
   end
