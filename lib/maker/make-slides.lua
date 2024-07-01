@@ -112,6 +112,8 @@ local function newslide()
   }
 end
 
+-- Note: we're counting levels using the AsciiDoc convention. It's one less than the number of ='s
+
 local function set_imageorientation(slide)
   slide.imageorientation = ((slide.numimages == 2) and '') or 
     ((slide.containscenter and 'C') or 
@@ -144,6 +146,15 @@ local function get_slides(lsn_plan_adoc_file)
     set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
     return true
+  end
+
+  local function insert_slide_break()
+    local old_header = curr_slide.header
+    set_current_slide()
+    curr_slide = newslide()
+    curr_slide.section = 'Repeat'
+    curr_slide.header = old_header
+    return curr_slide
   end
 
   local function scan_directives (i, nested_in, dont_count_image_p)
@@ -253,12 +264,8 @@ local function get_slides(lsn_plan_adoc_file)
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide') then
             terror('@slidebreak inside @' .. nested_in)
           end
-          local old_header = curr_slide.header
-          set_current_slide()
+          local curr_slide = insert_slide_break()
           local c2 = buf_peek_char(i)
-          curr_slide = newslide()
-          curr_slide.section = 'Repeat'
-          curr_slide.header = old_header
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
           end
@@ -326,12 +333,14 @@ local function get_slides(lsn_plan_adoc_file)
             if nested_in and nested_in ~= 'ifproglang' then
               terror('\"=' .. L .. '\" inside @' .. nested_in)
             end
-            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or (L:match('^== ') and 2) or 3)
             new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
             -- print('new_level', new_level)
             -- print('new_header', new_header)
             -- print('curr_slide.level', curr_slide.level)
-            if ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
+            if (new_level == 3) then
+              insert_slide_break()
+            elseif ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
                 curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
