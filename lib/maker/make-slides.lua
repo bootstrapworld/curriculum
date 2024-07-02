@@ -267,7 +267,10 @@ local function get_slides(lsn_plan_adoc_file)
           local curr_slide = insert_slide_break()
           local c2 = buf_peek_char(i)
           if c2 == '{' then
-            curr_slide.style = read_group(i, directive)
+            local slidebreak_arg = read_group(i, directive)
+            if slidebreak_arg ~= 'noclear' then
+              curr_slide.style = slidebreak_arg
+            end
           end
         elseif directive == 'pd-slide' then
           if nested_in and nested_in ~= 'ifproglang' then

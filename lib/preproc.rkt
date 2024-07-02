@@ -1819,10 +1819,14 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
-                            ;(display (enclose-span ".slidebreak" "") o)
-                            (let ([c (peek-char i)])
+                            (let ([c (peek-char i)]
+                                  [no-clear? #f])
                               (when (and (char? c) (char=? c #\{))
-                                (read-group i directive)))]
+                                (let ([x (read-group i directive)])
+                                  (when (string=? x "noclear")
+                                    (set! no-clear? #t))))
+                              (unless no-clear?
+                                (display (enclose-span ".slidebreak" "") o)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
