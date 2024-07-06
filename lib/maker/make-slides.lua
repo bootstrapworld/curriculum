@@ -45,10 +45,10 @@ local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
 local course_string = 'Core'
 
-if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
+if lesson_superdir == 'Data-Science' then
   course_string = 'DS'
-elseif lesson_superdir == 'Algebra' then
-  course_string = 'A'
+elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Early Math' then
+  course_string = 'Math'
 elseif lesson_superdir == 'Reactive' then
   course_string = 'R'
 end
