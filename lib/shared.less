@@ -507,10 +507,11 @@ lines on some browsers */
    * (used so that @slidebreak works, while maintaining
    * the appearance of an uninterrupted block in the lesson)
    */
-  .paragraph:has(.slidebreak) { clear: both; }
-  .lesson-instruction+.lesson-instruction,
-  .lesson-roleplay+.lesson-roleplay,
-  .q-and-a+.q-and-a { 
+  .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
+  .paragraph:has(.slidebreak) p { margin: 0 !important; }
+  .lesson-instruction+.paragraph:has(.slidebreak)+.lesson-instruction,
+  .lesson-roleplay+.paragraph:has(.slidebreak)+.lesson-roleplay,
+  .q-and-a+.paragraph:has(.slidebreak)+.q-and-a { 
     margin: 0;
     > *:first-child::before { display: none; } 
   }
