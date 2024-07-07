@@ -14,6 +14,8 @@ table.rideData { width: 70%; margin: auto; }
 
 @keywords{periodic, period, amplitude, frequency}
 
+@define{COtwo}{@math{\mbox{CO}_2}}
+
 [@lesson-intro-table]
 |===
 
@@ -172,7 +174,7 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @slidebreak
 
-*Unit Clocks*
+==== Unit Clocks
 
 @right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
@@ -225,7 +227,7 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @slidebreak
 
-*Radians*
+==== Radians
 
 @ifslide{@right{@image{images/pizza-slice2.png, 200}}}Degrees aren't always the best way to divide up a circle.  We often want to use the *radius* of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude. In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
 
@@ -281,7 +283,7 @@ Pyret knows about @math{\pi}, too!
 
 As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
 
-*Note:* The conventions for labelling a clock are different from the conventions for labelling circles with Radians or Degrees.
+*Note:* The conventions for labeling a clock are different from the conventions for labelling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
 |===
  
@@ -372,13 +374,13 @@ When graphed from 0-@math{2\pi}, periodic functions rise to a certain height abo
 
 @slidebreak
 
-*Amplitude @math{A}*
+==== Amplitude @math{A}
 
 The distance from a peak or trough to the @vocab{midline}.  
 
 @slidebreak
 
-*Period @math{=} @math{2\pi \over \mbox{frequency}}*
+==== Period @math{=} @math{2\pi \over \mbox{frequency}}
 
 The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave). 
 - It can be measured from peak to peak or from trough to trough.
@@ -393,7 +395,7 @@ The period is the horizontal distance over which the curve travels before it beg
 
 @slidebreak
 
-*Horizontal Shift (@math{h}) *
+==== Horizontal Shift (@math{h})
 
 The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
 
@@ -402,7 +404,7 @@ The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
 
 _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when d is positive it looks like it's being subtracted._
 
-*Vertical shift (@math{k})*
+==== Vertical shift (@math{k})
 
 The vertical shift is the amount the function is shifted up or down
 - When @math{k} < 0, the graph is shifted down.
@@ -464,7 +466,7 @@ You'll likely need to support students in thinking through what these terms mean
 
 - The seasons change over the course of one year, so the period would be 365 days.
 - The temperature in your area might fluctuate between 95° in the summer and 25° F in the winter. That's a range of 70° F, for an amplitude of 35° F.
-- The midline and the vertical shift are at 60° F (25 + 35 = 60).
+- The @vocab{midline} and the vertical shift are at 60° F (25 + 35 = 60).
 }
 
 == Modeling Periodic Relationships
@@ -473,7 +475,6 @@ You'll likely need to support students in thinking through what these terms mean
 Students explore the @COtwo dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
 === Launch
-@define{COtwo}{@math{\mbox{CO}_2}}
 Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
 
 Now that we've had some practice, let's take a look at a dataset that has more variability!
@@ -573,6 +574,17 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 
 @lesson-instruction{
 - With your partner, complete @printable-exercise{modeling-recent-co2.adoc}, and enter your `periodic` model into Pyret. How well does it fit the data?
+}
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with a periodic, real-world scenario, then have them write down a periodic function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their periodic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title display to describe their real-world scenario (e.g. - "Water depth at a beach vs. Time of Day").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
 }
 
 === Synthesize
