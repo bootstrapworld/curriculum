@@ -335,7 +335,7 @@ const DSBasics = {
     }
   },
   "putting-it-all-together": {
-    "title": "Animals with Helper Functions Starter File",
+    "title": "Putting it All Together Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU"
     }
