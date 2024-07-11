@@ -56,11 +56,12 @@ Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
 @Q{What did you get for the mean? Does it match what the Animal Shelter Bureau says?}
 @A{The mean is 3; yes, it matches what the Animal Shelter Bureau says.}
 @Q{Can you think of four ages, such that their mean is 3 years old?}
-@A{Some possibilities include: {3,3,3,3}, {1,2,4,5}, {1,1,4,6}... any four ages that add up to 12 will work!}
+@A{Any four ages that add up to 12 will work!}
+@A{Possibilities include: {1,1,1,9}, {1,1,2,8}, {1,1,3,7}, {1,1,4,6}, {1,1,5,5}, {1,2,2,7}, {1,2,3,6}, {1,2,4,5}, {1,3,3,5}, {1,3,4,4}, {2,2,2,6}, {2,2,3,5}, {2,2,4,4}, {2,3,3,4}, {3,3,3,3}} 
 @Q{Can you think of a _different_ spread of four ages that would have the same mean?}
 @A{See above.}
 @Q{How many different sets of four ages can you think of, which all have a mean of 3?}
-@A{See above.}
+@A{15. See above.}
 }
 
 @slidebreak
@@ -205,18 +206,18 @@ Turn to @printable-exercise{data-cycle-analysis-stdev-animals.adoc} to get some 
 @Q{The standard deviation?}
 }
 
-@strategy{Mean Average v. Standard Deviation}{
-MAD and SD are both measures of a certain kind of _distance_, literally asking "how far from the mean are all the points in the dataset?". With each point being independent from the other, we can imagine a dataset with two points as a right triangle with two legs: how far apart are these points?
+@strategy{Mean Absolute Deviation (MAD) v. Standard Deviation (SD)}{
+MAD and SD are both measures of "how far from the mean all the points in the dataset are". We can imagine a dataset with two points as describing a right triangle with horizontal and vertical legs. How far apart are these two data points?
 
-Before learning the distance formula, students might guess at a number of ways to compute the hypotenuse. They can quickly rule out the sum of the legs, and the difference between them. At some point they might suggest _averaging_ the lengths of the legs. Mean Average Deviation (MAD) does exactly that, by flattening each points' deviation into a single "dimension".
+- Mean Absolute Deviation (MAD) flattens each points' deviation into a single "dimension", averaging the length of the legs of the triangle we imagined.
 
-Of course, these legs exist on separate axes - so we need a formula for distances in more than one dimension. Computing the SD involves the _square root of a sum of squares_. That should sound suspiciously like the distance formula! Indeed, computing the SD for a dataset with two points is basically finding the (normalized) length of the hypotenuse!
+- Computing the Standard Deviation (SD) involves finding the _square root of a sum of squares_. That should sound suspiciously like the distance formula! Indeed, computing the SD for a dataset with two points is basically finding the (normalized) length of the hypotenuse!
 
-The Pythagorean distance works in 3-dimensions as well (right pyramids!) - or for any number of dimensions - as does the formula for standard deviation. By treating each point as a separate dimension, DS allows each deviation to be considered independently.
+Why use one measure of spread instead of the other? 
 
-Why use one measure of spread instead the other? The answer is closely related to the difference between two measures of _center_! `Mean` incorporates data from every point, while `median` does not. However, `mean` is sensitive to the effect of extreme outliers or @vocab{skew}. In those cases, `median` is considered to be the better measure of center.
+The answer is closely related to the difference between two measures of _center_! `Mean` incorporates data from every point, while `median` does not. However, `mean` is sensitive to the effect of extreme outliers or @vocab{skew}. In those cases, `median` is considered to be the better measure of center.  Treating each point independently allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. 
 
-Treating each point independently allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. This is why SD is used most often, but like `mean` it is sensitive to extreme outliers or skew. In those cases, the MAD is considered a better measure of spread.
+Standard Deviation is used most often, but like `mean` it is sensitive to extreme outliers or skew. When there are extreme outliers, the Mean Absolute Deviation is considered a better measure of spread.
 }
 
 @slidebreak
