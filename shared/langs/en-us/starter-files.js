@@ -715,7 +715,7 @@ const MoreAlg = {
     }
   },
   "inequalities-compound-match": {
-    "title": "Match Compound Inequality Functions with Plots of their Solution Sets",
+    "title": "Match Compound Inequality Functions with Plots of their Solution Sets (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85"
     }

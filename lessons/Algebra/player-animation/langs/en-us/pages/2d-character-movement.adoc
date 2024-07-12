@@ -1,10 +1,24 @@
 = Challenge: Character Movement in Two Dimensions
 
-@strategy{You have all the tools you need to begin this challenge if:}{
+++++
+<style>
+/* add a dotted border around specialized directions */
+.myCustomClass { 
+  border: dotted 1px black; 
+  p {margin-left: .25em !important; }
+}
+</style>
+++++
+
+[.myCustomClass]
+--
+You have all the tools you need to begin this challenge if:
+
 - your game is working
 - both the `Danger` and `Target` return to the screen
 - your `Player` moves up and down with the arrow keys
-}
+
+--
 
 @vspace{1ex}
 
@@ -27,7 +41,8 @@ The `update-danger` function only moves our `DANGER` left or right.
 
 @vspace{1ex}
 
-@indented{
+[.myCustomClass]
+--
 _Since an (x, y) coordinate has two Numbers, one idea might be to write the Contract this way:_
 
 @vspace{1ex}
@@ -41,14 +56,18 @@ _Since an (x, y) coordinate has two Numbers, one idea might be to write the Cont
 
 _...But that Contract breaks an important rule about functions: Given an input, all functions must produce one output!_
 
-}
+@vspace{1ex}
 
-@vspace{3ex}
+_We need some way to package two Numbers together into a single value..._
 
-We need some way to package two Numbers together into a single value.  Fortunately, @proglang has another data type, called a Posn. + 
+--
+
+@vspace{1ex}
+
+Fortunately, @proglang has another data type, called a *__Posn__*. + 
 The Posn datatype utilizes two Numbers to describe a _single_ "position"!
 
-@vspace{3ex}
+@vspace{1ex}
 
 We can make a Posn to represent the position (100, 200) with the following code: 
 
