@@ -104,8 +104,6 @@ Complete @printable-exercise{creating-scatterplot.adoc} to get a feel for making
 @slidebreak
 
 @strategy{Teaching Tip}{
-
-
 As an alternative to plotting the small table, assign a handful of rows from the _full table_ to each student and have them plot those animals on the board. This can be done collaboratively, resulting in a whole-class scatter plot!
 }
 
@@ -131,8 +129,9 @@ Pyret has a `scatter-plot` function that works exactly the same way: it starts w
 
 [cols="^1a", frame="none", stripes="none"]
 |===
-|@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+|@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 |===
+}
 
 @ifproglang{codap}{
 To create a scatter plot in CODAP, place a quantitative attribute on each axis. The labels that appear will correspond with the left-hand column on the table.}
@@ -145,7 +144,8 @@ To create a scatter plot in CODAP, place a quantitative attribute on each axis. 
 }
 
 @ifproglang{pyret}{
-@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}}
+@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}
+}
 
 @QandA{
 @Q{Are there any patterns or trends that you see here?}
@@ -154,16 +154,19 @@ To create a scatter plot in CODAP, place a quantitative attribute on each axis. 
 
 @strategy{What about Line Graphs?}{
 
-
 Line graphs and scatter plots have a lot in common! They both visualize the relationship between two columns, and both columns must be quantitative.
 
 There is an important difference, however, in that *line graphs are used when change is @vocab{continuous}*. Only in this situation can it be appropriate to "connect the dots", because they represent the _rise_ and _fall_ of a measure over time. For example, if we know that the temperature was 80 degrees at 5pm and 70 degrees at 7pm, we can be sure that it was 73 degrees somewhere in between there. In contrast, if we made a plot about the worth of nickels, we'd have a point connecting 3 nickels and 15 cents and another connecting 5 nickels and 25 cents, but it would not make sense to declare the worth of 3.5 nickels (since it's not possible to have half a nickle... unless you broke the law and sawed one in half, in which case it wouldn't be worth anything.)
 
-@ifproglang{pyret}{For students who want to use line graphs, the Contract is:
+@ifproglang{pyret}{
+For students who want to use line graphs, the Contract is:
+@show{(contract `line-graph `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+}
 
-@show{(contract `line-graph `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+@ifproglang{codap}{
+For students who want to use line graphs, create a scatter plot, then open the `Measure` menu and select Connecting Lines.
+}
 
-@ifproglang{codap}{For students who want to use line graphs, create a scatter plot, then open the `Measure` menu and select Connecting Lines.}
 }
 
 === Synthesize
@@ -281,6 +284,7 @@ Unusual observations are _always_ worth thinking about!
 - Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
 === Investigate
+
 Data Scientists and Statisticians use their eyes all the time. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. Until we really look at the _shape_ of the data, we aren't seeing the whole picture.
 
 @slidebreak
