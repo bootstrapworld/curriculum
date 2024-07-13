@@ -411,7 +411,7 @@
                                 [(member c *mathjax-chars-that-need-flanking-space*)
                                  (read-char i)
                                  (string #\space c #\space)]
-                                [(assoc c *mathjax-special-chars*)
+                                #;[(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
                                       (second x))]
