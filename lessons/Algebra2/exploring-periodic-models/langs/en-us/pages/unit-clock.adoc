@@ -1,51 +1,33 @@
 = Reasoning about Unit Clocks
 ++++
 <style>
-body.workbookpage td .autonum::after { content: ')' !important; }
 td { padding: 0 !important; height: 20pt; }
-table { cell-spacing: 10px; }
-body .center { padding: 0; }
-.directions p { line-height: 1.75 !important; }
+th .mathunicode { font-weight: bold; }
+
+table { margin-top: 1ex; }
+
 .fitb { min-width: 2em; }
 .autonum { padding-top: 0.75rem !important; }
 
 /* the .fitb's on this page that contain MathJax inside their solutions need their top-padding clipped */
 .fitb:has(.solution .MathJax) { padding-top: 0; }
-
 </style>
 ++++
 
-The questions on this page deal with a _unit clock_ (shown below, on the right). A point (A, B) sits on the circumference of the clock. A radius @math{r} of length 1, extending from the center to (A, B), forms an angle @math{θ} with the x-axis. As time passes, the point (A, B) rotates around the circle.
-
-[cols="<.<9a,1,>.4a", grid="none", frame="none"]
-|===
-|
-@n What are the coordinates of the *center* of the clock? @fitb{}{@ifsoln{(0, 0)}}
-
-@n How long is the *hypotenuse* of the right-triangle formed by A, B, and @math{r}? @fitb{}{@ifsoln{1}}
-
-@n Identify the x and y-coordinates for (A, B) at 3, 6 and 9 o'clock and add them to the table below. (The coordinates for 12 o'clock have been done for you!)
-
-@n On the graph below, draw a *dot* for each value in the A column, using the _time_ as the x-coordinate and the value of A as the y-coordinate. Use a *pencil* to connect these dots.
-
-@n On the graph below, draw a *star* for each value in the B column, using the _time_ as the x-coordinate and the value of B as the y-coordinate. Use a *pencil* to connect these stars.
-
-@n On the clock to the right, what time is the hand pointing to at (A,B)? @fitb{4em}{@ifsoln{1:30}}. +
-At this time, @math{A = B}. In the space below, compute the value of @math{A} and @math{B}.
-
-|
-| @image{../images/unit-circle-clock.png}
-|===
-
 @define{leg}{@math{\sqrt{2}/2}}
 
-[cols="^1a,^2a"]
+The point (A, B) sits on the circumference of a _unit clock_ (below, right). A radius @math{r} of length 1, extending from the center to (A, B). As time passes, the point (A, B) rotates around the circle.
+
+@n The coordinates of the *center* of the clock are @fitb{5em}{@ifsoln{(0, 0)}}, and the *hypotenuse* of the right-triangle formed by A, B, and @math{r} is @fitb{4em}{@ifsoln{1}}.
+
+@n The table below shows the values of A and B at 12 o'clock. Complete the rows for 3, 6 and 9 o'clock.
+
+[cols="<.<12a,1,>.10a", grid="none", frame="none"]
 |===
 |
-|
-[cols="^.^1a, ^.^1a, ^.^1a", options="header"]
+[.times,cols="^.^2a, ^.^1a, ^.^1a", options="header"]
 !===
-! "Time"	! @math{A} (x-distance)! @math{B} (y-distance)
+! Time		! @math{A}			! @math{B}
 ! 12:00		!       0     		!      1
 ! 1:30 (halfway between 1-2) 	! @ifsoln{ @leg}	! @ifsoln{ @leg}
 ! 3:00 		! @ifsoln{  1  }   	! @ifsoln{  0  }
@@ -56,13 +38,22 @@ At this time, @math{A = B}. In the space below, compute the value of @math{A} an
 ! 10:30		! @ifsoln{-@leg}	! @ifsoln{ @leg}
 ! 12:00		!       0     		!      1
 !===
+|
+| @image{../images/unit-circle-clock.png}
 |===
 
-@n Use the values you computed at 1:30 to fill in in the values of @math{A} and @math{B} at 4:30, 7:30, and 10:30.
+@n What time is the clock hand pointing to at (A,B)? @fitb{6em}{@ifsoln{1:30}}. At this time, @math{A = B}. In the space below, compute the value of @math{A} and @math{B}.
 
-@n Mark the new coordinates for @math{A} with *dots* in the graph below, then adjust your A-line so it passes through them.
+[.FillVerticalSpace, frame="none", stripes="none"]
+|===
+|
+|===
 
-@n Mark the new coordinates for @math{B} with *stars* in the graph below, then adjust your B-line so it passes through them.
+@n Use the values you computed at 1:30 to fill in the rest of the table with values of @math{A} and @math{B} at 4:30, 7:30, and 10:30.
+
+@n In the graph below, draw a *dot* for the coordinates (@math{A}, _time_) in each row of the table. Connect them from left-to-right, to form a curve.
+
+@n In the graph below, draw a *star* for the coordinates (_time_, @math{B}) in each row of the table. Connect them from left-to-right, to form a curve.
 
 @vspace{1ex}
 

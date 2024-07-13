@@ -4,15 +4,23 @@
 td { padding: 0 !important; }
 td .autonum::after { content: ')' !important; }
 td .codetwo { color: black; background: none; }
-table table td { color: inherit !important; padding: 3px 0 !important; }
+table { margin-left: 2em; margin-top: 1ex; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
 .fitb { min-width: 2em; }
-.studentAnswerMedium { min-width: 83pt !important; }
+.studentAnswerMedium { min-width: 75pt !important; }
 </style>
 ++++
 
 @define{COtwo}{@math{\mbox{CO}_2}}
+@do{
+(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
+(define p (abs (- lo-dateA lo-dateB)))
+(define a 4.13)
+(define b 6.28)
+(define c 419.87)
+(define d 2023.1)
+}
 
 @link-instructions{
 The data below was generated from the @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
@@ -22,18 +30,14 @@ The data below was generated from the @starter-file{alg2-co2}, showing the amoun
 
 @center{@image{../images/historical-scatter-plot.png, 450}}
 
+@n Use `lr-plot` to find the best linear model. What is its @math{S}-value? @fitbruby{6em}{@ifsoln{3.425}}{parts per million}
 
-@n Describe the @vocab{form}, @vocab{direction}, and @vocab{strength} of the relationship you see here @fitb{}{@ifsoln{Linear, Positive, and Strong...with some periodic variation}}
-
-@n Use `lr-plot` to find the best linear model. What is its @math{S}-value? @fitbruby{6em}{@ifsoln{3.425}}{parts per million} Write the function below (in Pyret and Function Notation):
-
-@vspace{1ex}
+@n Write the function below (in Pyret and Function Notation):
 
 [cols="1a, ^.^12a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 |
-
 _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
 | @vspace{1ex} +
 *Pyret Notation*
@@ -41,21 +45,35 @@ _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 @show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
 |===
 
+@n Copy your periodic model from @printable-exercise{modeling-recent-co2.adoc} below:
+
+[cols="1a, ^.^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{sin}(
+ @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{h-shift})
+) + @fitbruby{70pt}{@ifsoln{@c}}{v-shift}
+
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
+|===
+
 == Creating Hybrid Models
+*We can think of the standard form @math{f(x) = A \sin(B(x - h)) + k} as being the sum of two functions: @math{p(x) = A \sin(B(x - h))} and @math{q(x) = k}.*
 
-@n Could this linear model be improved by _combining_ it with your periodic model? Why or why not? @fitb{}{} +
-@fitb{}{} +
-@fitb{}{} +
+@n Which function defines the "up and down" wave (@math{p} or @math{q})? @fitb{4em}{@ifsoln{@math{p}}} Which function defines the line the wave "wraps around"? @fitb{}{@ifsoln{q}}
 
-@n *What would a combined model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
+@n What do you think would happen if @math{q} were changed so that @math{k} is a _higher_ number? @fitb{}{@ifsoln{The wave is shifted up}}
 
-@vspace{1ex}
+@n What do you think would happen if @math{q} were changed so that @math{k} is a _lower_ number? @fitb{}{@ifsoln{The wave is shifted down}}
 
-@indented{
-_Between 1974 and 2023, the amount of @math{CO_2} in the air can be modeled using a hybrid model. Within each year, the was a consistent periodic fluctuation, with an amplitude of @fitbruby{3em}{@ifsoln{4.13}}{amplitude}ppm rising and falling around a @vocab{midline} that rises at @fitbruby{2em}{@ifsoln{1.8345}}{slope}ppm. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{3em}{@ifsoln{@math{2pi}}}{frequency}._
-}
+@n What do you think would happen if @math{q} were changed to @math{q(x) = 2x + -3000} @fitb{}{@ifsoln{The wave would wrap around a sloping line}}
 
-@star Try to define a NEW function `hybrid` in Pyret, which combines your periodic model with the one computed through linear regression. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
+@star Define a NEW function `hybrid` in Pyret, which combines your periodic model with the optimal linear one. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
 
 @ifnotsoln{
 
