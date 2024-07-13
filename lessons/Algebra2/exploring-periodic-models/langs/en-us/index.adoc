@@ -153,7 +153,7 @@ Let's consider the models we've studied:
 
 @slidebreak
 
-Being able to model cyclical relationships is _incredibly important_, for everyone from farmers to fishermen to healthcare providers! So many things in nature come in cycles:
+This is a problem, because modeling cyclical relationships is _incredibly important_, for everyone from farmers to fishermen to healthcare providers! So many things in nature come in cycles:
 
 - the sun rises each morning and sets each night (for most of the world)
 - the moon waxes and wanes
@@ -219,10 +219,13 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 @QandA{
 In our clock example, we divide the circle into twelve "slices", each representing one hour. But of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
-@A{_Degrees_, divide a circle up into 360 slices instead of 12. }
+@A{
+- _Minutes_, which divide our circle up into 720 slices instead of 12.
+- _Degrees_, divide a circle up into 360 slices instead of 12.
+- _Compass Directions_ like N, NE, E, SE, etc., which divide our circle up into 8 slices instead of 12.
+}
 @Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
-@A{_Degrees_ divide our circle into 360 "slices", where the tip of the slice is 1/360th of the circle. Switching our unit-clock graph from hours to degrees just changes the tick marks on the x-axis.This doesn't change the graph at all, any more than changing a ruler from inches to centimeters would change the drawings on a blueprint!}
 }
 
 @slidebreak
@@ -311,12 +314,12 @@ Complete the table on @printable-exercise{converting-angles.adoc} with your part
 
 @slidebreak
 
-We began by graphing the relationship between the legs of a right triangle and the angle formed based on the time on a clock using the functions @math{x(time)} and @math{y(time)}.
+We began by graphing the relationship between the legs of a right triangle and the angle formed based on the time on a clock using the functions @math{A(time)} and @math{B(time)}.
 
-Top plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} function. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
+To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
 
 @lesson-instruction{
-- One of these functions computes the "x values" from our unit circle. And the other computes the y-values. 
+- One of these functions computes the "x values" from our unit circle, corresponding to @math{A} on the unit clock. The other computes the y-values, corresponding to @math{B}.
 - Figure out which one is which by completing @printable-exercise{converting-angles.adoc} with your partner.
 - You will be using the radian values from your table with the `sin` and `cos` functions in Pyret. 
 - The contracts for these functions are: +
@@ -349,7 +352,7 @@ Both @math{sin} and @math{cos} are closely related to one another, and each one 
 @lesson-instruction{
 - Let's return to the *Exploring Periodic Models Desmos file* to experiment with the coefficients of periodic models!
 - You should now be on *Slide 2: Graphing Periodic Models*.
-- Use it to complete @printable-exercise{graphing-models.adoc} with your partner.
+- Use it to complete @printable-exercise{graphing-models-a.adoc}, @printable-exercise{graphing-models-b.adoc}, and @printable-exercise{graphing-models-h.adoc} with your partner.
 - Then turn to @printable-exercise{vocab-from-diagram.adoc} and
 see if you can come up with explanations for what each of the terms on this diagram refer to.
 }
@@ -402,7 +405,7 @@ The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
 - When @math{h} < 0, it shifts the graph to the left.
 - When @math{h} > 0, it shifts the graph to the right. 
 
-_Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when d is positive it looks like it's being subtracted._
+_Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is positive it looks like it's being subtracted._
 
 ==== Vertical shift (@math{k})
 
@@ -710,9 +713,9 @@ We can visualize the body of the function using the Circles of Evaluation:
 
 === Synthesize
 
-- Are there any other relationships you can think of, which might require a _hybrid model_ like this one?
-- Just for fun - can you come up with a function that combines _all_ of the models we've discussed? What does the graph of this model look like?
-- Are there any relationships you can think of, which _cannot_ be modeled using any of the functions we've discussed so far?
+- Why did our hybrid model fit better than the periodic or linear models alone?
+- Look closely at where the hybrid model fits the data. When does the data _under_ or _over_ predict? What could this mean?
+- What would a model look like for a disease like Covid, but with seasonal variations that cause minor peaks and troughs?
 
 @strategy{Going Deeper}{
 Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
