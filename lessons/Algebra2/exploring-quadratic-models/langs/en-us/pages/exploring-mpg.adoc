@@ -2,7 +2,8 @@
 ++++
 <style>
 body.workbookpage td .autonum::after { content: ')' !important; }
-
+/* Allow fitb to be even smaller than the normal minimum */
+.fitb{min-width: 3em;}
 /* Use table cells as graph paper */
 table div.graph:first-of-type {
     background-color: rgba(#fff, .5);
@@ -41,8 +42,6 @@ If it appears to be linear, what is the *direction*? If it does _not_ appear to 
 
 @fitb{}{@ifsoln{There seems to be a moderate/strong, nonlinear correlation. It looks like a parabola that opens down, with a dimple at the top.}}
 
-@fitb{}{@ifsoln{}}
-
 @fitb{}{}
 
 @n Use @show{(code '(lr-plot mpg-table "model" "speed" "mpg"))} to find the optimal *linear* model. What is @math{S} for this model? @fitb{}{@ifsoln{~2.93}}
@@ -53,42 +52,42 @@ Write the model below, in both math and Pyret notation.
  @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
 }
 
-@vspace{1ex}
-
-@n Is the best-possible linear model a good fit? @fitb{5em}{@ifsoln{No}}. Why or why not?
-
-@fitb{}{}
+@n Is the best-possible linear model a good fit? @fitb{5em}{@ifsoln{No}}. Why or why not? @fitb{}{}
 
 @fitb{}{@ifsoln{No - the S-value is off by almost 3 mpg, and the model does not follow the shape of the data}}
 
+@fitb{}{}
+
 == Fitting Curves
 
-[.FillVerticalSpace, cols="1a,1a", options="frame"]
+[.FillVerticalSpace, cols="2a,1a", options="frame"]
 |===
 |
 @n Sketch your lr-plot in the space below, showing the relationship between `speed` and `mpg`. Be sure to label your axes, and draw the linear model!
 
-@ifnotsoln{@center{@image{../images/fuel-efficiency-quadratic.png, 300}}}
+@ifnotsoln{@center{@image{../images/fuel-efficiency-quadratic.png, 425}}}
 
-@ifsoln{@center{@image{../images/fuel-efficiency-scatter.png, 300}}}
+@ifsoln{@center{@image{../images/fuel-efficiency-scatter.png, 425}}}
 
 |
 @n What do you *Notice?* @fitb{}{} +
 @fitb{}{} +
-@fitb{}{}
-
-@n What do you *Wonder?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
 
+@vspace{1ex}
+
+@n What do you *Wonder?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@vspace{1ex}
+
 @n Do you think a *curve* would fit better? @fitb{}{@ifsoln{yes}}
 
-@vspace{1ex}
-
-@n Draw a *curve* on your scatter-plot, which shows the overall shape in the data.
-
-@vspace{1ex}
-
-@n At what speed does your curve "peak"? @fitb{}{@ifsoln{45-55mpg}}
-
 |===
+
+@n Draw a *curve* on your scatter-plot, which shows the overall shape in the data. At what speed is the "peak"? @fitb{}{@ifsoln{45-55mpg}}
+
+@n Based on your best-guess curve, what do you predict `mpg` would be for a new test run at 25mph @fitb{2em}{}? 60mph @fitb{2em}{}? 90mph @fitb{2em}{}?
