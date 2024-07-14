@@ -545,7 +545,7 @@ const Flags = {
     }
   },
   "flags-ak": {
-    "title": "Alaskan Flag Starter File",
+    "title": "Flag of Alaska Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1HVC8BOD1C-Dny0jpHU0vBlP7Q5Axfcsf"},
     "wescheme": {
@@ -553,7 +553,7 @@ const Flags = {
     }
   },
   "flags-china": {
-    "title": "Chinese Flag Starter File",
+    "title": "Flag of China Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE"
     },
@@ -715,7 +715,7 @@ const MoreAlg = {
     }
   },
   "inequalities-compound-match": {
-    "title": "Match Compound Inequality Functions with Plots of their Solution Sets",
+    "title": "Match Compound Inequality Functions with Plots of their Solution Sets (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85"
     }

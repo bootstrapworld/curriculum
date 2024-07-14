@@ -84,7 +84,7 @@ The first one makes sense, and reflects our suspicion that age plays a role in a
 
 @slidebreak
 
-It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `age` for x and `weeks` for y.
+It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `pounds` for x and `weeks` for y.
 
 @strategy{Why not Independent/Dependent?}{
 
@@ -104,8 +104,6 @@ Complete @printable-exercise{creating-scatterplot.adoc} to get a feel for making
 @slidebreak
 
 @strategy{Teaching Tip}{
-
-
 As an alternative to plotting the small table, assign a handful of rows from the _full table_ to each student and have them plot those animals on the board. This can be done collaboratively, resulting in a whole-class scatter plot!
 }
 
@@ -129,7 +127,11 @@ When you created the scatter plot by hand, you started with a Table. Then you pl
 @ifproglang{pyret}{
 Pyret has a `scatter-plot` function that works exactly the same way: it starts with a table, and then needs to know which columns to use for labels , x-coordinates (xs), and y-coordinates (ys). Here's the Contract:
 
-@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+[cols="^1a", frame="none", stripes="none"]
+|===
+|@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+|===
+}
 
 @ifproglang{codap}{
 To create a scatter plot in CODAP, place a quantitative attribute on each axis. The labels that appear will correspond with the left-hand column on the table.}
@@ -142,7 +144,8 @@ To create a scatter plot in CODAP, place a quantitative attribute on each axis. 
 }
 
 @ifproglang{pyret}{
-@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}}
+@teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}
+}
 
 @QandA{
 @Q{Are there any patterns or trends that you see here?}
@@ -151,16 +154,19 @@ To create a scatter plot in CODAP, place a quantitative attribute on each axis. 
 
 @strategy{What about Line Graphs?}{
 
-
 Line graphs and scatter plots have a lot in common! They both visualize the relationship between two columns, and both columns must be quantitative.
 
 There is an important difference, however, in that *line graphs are used when change is @vocab{continuous}*. Only in this situation can it be appropriate to "connect the dots", because they represent the _rise_ and _fall_ of a measure over time. For example, if we know that the temperature was 80 degrees at 5pm and 70 degrees at 7pm, we can be sure that it was 73 degrees somewhere in between there. In contrast, if we made a plot about the worth of nickels, we'd have a point connecting 3 nickels and 15 cents and another connecting 5 nickels and 25 cents, but it would not make sense to declare the worth of 3.5 nickels (since it's not possible to have half a nickle... unless you broke the law and sawed one in half, in which case it wouldn't be worth anything.)
 
-@ifproglang{pyret}{For students who want to use line graphs, the Contract is:
+@ifproglang{pyret}{
+For students who want to use line graphs, the Contract is:
+@show{(contract `line-graph `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+}
 
-@show{(contract "line-graph" '("Table" "String" "String") "Image")}}
+@ifproglang{codap}{
+For students who want to use line graphs, create a scatter plot, then open the `Measure` menu and select Connecting Lines.
+}
 
-@ifproglang{codap}{For students who want to use line graphs, create a scatter plot, then open the `Measure` menu and select Connecting Lines.}
 }
 
 === Synthesize
@@ -245,7 +251,7 @@ Shown below is a scatter plot of the relationships between the animals' `pounds`
 
 @strategy{Teaching Tip}{
 
-Project the scatter plot at the front of the room, and have students come up to the plot to point out their patterns.
+Project the scatter plot at the front of the room, and have students come up to point out their patterns.
 }
 
 @slidebreak
@@ -278,12 +284,13 @@ Unusual observations are _always_ worth thinking about!
 - Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
 === Investigate
+
 Data Scientists and Statisticians use their eyes all the time. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. Until we really look at the _shape_ of the data, we aren't seeing the whole picture.
 
 @slidebreak
 
 @lesson-point{
-Look at both numbers and displays before drawing conclusions
+Look at both numbers and displays before drawing conclusions.
 }
 
 Each of these scatter plots and accompanying set of numbers corresponds to a dataset. The patterns in the scatter plots vary wildly, but the numbers that summarize the datasets barely change at all!
@@ -339,7 +346,10 @@ Remember the impact of considering a third attribute before drawing conclusions 
 
 === Overview
 
-Students apply what they have learned about scatter plots to their chosen dataset. They will add two items to their @starter-file{exploration-project}: (1) at least two scatter plots and (2) any interesting questions that emerge. To learn more about the sequence and scope of the Exploration Project, visit @lesson-link{project-data-exploration}. For teachers with time and interest, @lesson-link{project-research-paper} is an extension of the Dataset Exploration, where students select a single question to investigate via data analysis.
+Students apply what they have learned about scatter plots to their chosen dataset. They will add two items to their @starter-file{exploration-project}: (1) at least two scatter plots and (2) any interesting questions that emerge. 
+
+@teacher{Visit @lesson-link{project-data-exploration} to learn more about the sequence and scope. Teachers with time and interest can build on the exploration by inviting students to take a deep dive into the questions they develop with our @lesson-link{project-research-paper}.
+}
 
 === Launch
 
@@ -398,10 +408,7 @@ You may need to help students locate the “Scatter plot” slide in the "Making
 
 @teacher{Have students share their findings.}
 
-- Were the relationships you investigated stronger or weaker than they expected?
-
+- Were the relationships you investigated stronger or weaker than you expected?
 - What questions did the scatter plots raise about your dataset?
-
 - What, if any, outliers did you discover when making scatter plots?
-
 - Were there any surprises when you compared your findings with other students? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
