@@ -24,46 +24,15 @@
 .autonum { font-weight: bold; padding-top: 0.3rem !important; }
 .autonum:after { content: ')' !important; }
 .fitb { padding-top: 1rem; }
-.FillVerticalSpace { grid-gap: 20px; margin-top: 5px; }
 
-/* Use table cells as graph paper */
-td {
-  background-color: rgba(#fff, .5);
-  background-image:
-    linear-gradient(lightblue 2px, transparent 2px),
-    linear-gradient(270deg, lightblue 2px, transparent 2px),
-    linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
-    linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-  background-size: 100px 200px, 200px 100px, 20px 20px, 20px 20px;
-  background-position: 25px -75px;
-  min-height: 1.5in;
-  max-height: 1.5in;
-  max-width: 2in;
+.graph td {
+  background-size: 100px 200px, 200px 100px, 20px 20px, 20px 20px !important;
+  background-position: 25px -75px !important;
+  height: 1.5in !important;
+  width: 2in !important;
 }
-
-td p.tableblock { position: absolute; }
-
-/* Add labels for axes */
-td::before, td::after { display: flex; font-style: italic; }
-td::before {
-  content: 'y';
-  justify-content: center;
-  align-items: center;
-  margin-right: 10.5em;
-  margin-top: 0;
-    -webkit-transform:rotate(270deg);
-    -moz-transform:rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform:rotate(270deg);
-    transform: rotate(270deg);
-}
-td::after {
-  content: 'x';
-  align-items: start;
-  justify-content: right;
-  margin-top: 4em;
-  margin-right: -0.5em;
-}
+.graph td::before { top: 1em !important; left: 5% !important; }
+.graph td::after { top: 90% !important; }
 </style>
 ++++
 
@@ -80,7 +49,7 @@ Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth
 @n Sketch each graph and *label the coordinates where @math{x = 1}, @math{y = 1}, @math{y = 2} and @math{y = 3}*.
 
 
-[.FillVerticalSpace, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
 | @math{b = 3} | @math{b = 5}  | @math{b = 10}
 |===
@@ -95,7 +64,7 @@ Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth
 
 @n Sketch each graph and *label the coordinate where @math{x = 1}*.
 
-[.FillVerticalSpace, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
 | @math{c = -10} | @math{c = 0}  | @math{c = 10}
 |===
@@ -112,7 +81,7 @@ Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth
 
 @n In each graph, *label the coordinates where @math{x = 10} and @math{x = 100} and @math{x = 1000}.*
 
-[.FillVerticalSpace, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
 | @math{a = -2} | @math{a = 0}  | @math{a = 2}
 |===
