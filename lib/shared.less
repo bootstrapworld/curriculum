@@ -88,7 +88,12 @@ body {
   }
 
   #content { margin: 0; }
+  /* 
+    When used in a header, exponents should be medium 
+    and there's no need for a bottom border 
+  */
   #header>h1:only-child { border-bottom: none; }
+  #header sup { font-size: medium; }
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
@@ -631,6 +636,46 @@ body.workbookpage {
     } 
   }
 
+  /* 
+    "Graph" tables use CSS for everything. Each page will likely
+    need to provide its own rules for background position, width,
+    height, and axes -- but sensible defaults are provided here.
+  */
+  table.graph {
+    grid-gap: 20px; 
+    td p.tableblock { position: absolute; }
+    td {
+      border: none !important;
+      background-image:
+        linear-gradient(lightblue 2px, transparent 2px),
+        linear-gradient(270deg, lightblue 2px, transparent 2px),
+        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
+        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+      background-size: 300px 300px, 300px 300px, 50px 50px, 50px 50px;
+      background-position: -150px 135px;
+      width: 3in;
+      height: 3in;
+    }
+    /* Add labels for axes */
+    td::before, td::after { position: absolute; font-style: italic; }
+
+    td::before {
+      content: 'y';
+      top:   0%;
+      left: 40%;
+      transform: rotate(270deg);
+        -webkit-transform:rotate(270deg);
+        -moz-transform:rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform:rotate(270deg);
+    }
+    td::after {
+      content: 'x';
+      top:  50%;
+      right: 3%;
+    }
+  }
+
   /* Make code match text size/layout */
   p .editbox, pre .editbox { font-size: 9pt !important; }
 
@@ -672,6 +717,9 @@ body.workbookpage {
   }
 }
 
+/************************************************************************************
+* CONTRACTS & MISC
+*/
 /* Back-of-the-book contracts table */
 table.contracts-table {
   border-collapse: collapse;
