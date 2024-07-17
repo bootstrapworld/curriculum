@@ -411,6 +411,9 @@
                                 [(member c *mathjax-chars-that-need-flanking-space*)
                                  (read-char i)
                                  (string #\space c #\space)]
+                                [(char-alphabetic? c)
+                                 (read-char i)
+                                 (enclose-tag "i" "" (string c))]
                                 [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
