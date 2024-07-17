@@ -92,7 +92,7 @@ Hovering over an orange dot reveals the `name` of that particular animal. Select
 
 @slidebreak
 
-When we select a table row (or multiple table rows), the corresponding dots change color. When we set aside selected and / or unselected cases (by using the "eye" icon), we can temporarily alter the amount of pets in the dataset (with the option to restore to the original dataset).
+When we select a table row (or multiple table rows), the corresponding dots change color. When we set aside selected and / or un-selected cases (by using the "eye" icon), we can temporarily alter the amount of pets in the dataset (with the option to restore to the original dataset).
 
 We can also resize the window by dragging its borders.
 
@@ -159,42 +159,104 @@ Pie charts display categorical data, too, but CODAP doesn't offer them largely b
 @Q{Which display do you find easier to interpret? Why?}
 }
 
-@strategy{Mini Project: Making Infographics}{
-
-Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @lesson-link{project-infographic} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper. There's also an @lesson-link{project-infographic/pages/rubric-infographic.html, Infographics Rubric} to highlight for you and your students what an excellent infographic includes.
-}
 
 
-== Groups and Subgroups
+== Groups and Subgroups @duration{20 minutes}
 
 === Overview
-Students learn how to create groups within groups, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
-
+Students learn how to create _groups within groups_, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
 
 === Launch
 
-
-@lesson-instruction{
-Turn to @printable-exercise{intro-stacked-multi.adoc} and complete Part A now.
+@lesson-instruction{Turn to @printable-exercise{intro-stacked-multi.adoc} and complete Part A now using @starter-file{expanded-animals}.
 }
 
 @slidebreak
 
-Comparing groups is great, but sometimes we want to compare __sub-groups across groups__. In this example, we want to compare the distribution of sexes across each species.
+Comparing groups is great, but sometimes we want to compare _sub-groups across groups_. In this example, we want to compare the distribution of sexes across each species.
 
+@lesson-instruction{
+- Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make it easier to answer questions like these by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
+- What do you Notice? What do you Wonder?
+}
+
+@teacher{
+You and your students may notice that the images of the stacked and multi bar charts on @printable-exercise{stacked-and-multi-notice.adoc} look different from the ones created in CODAP. We've used these alternative displays because we feel they are easier for students to interpret, leading to more fruitful discussion of the data.
+}
 
 === Investigate
 
-CODAP allows us to make _stacked_ bar charts, which let us specify both a group and a subgroup.
-
-To create a stacked bar chart:
-
-- Create a graph of randomly distributed points.
-- Drag a column to the x-axis.
-- From the `Configuration` menu, select "Fuse Dots into Bars".
-- Now, drag a different column name onto the display area (*not* onto the y-axis).
+CODAP allows us to build a variety of displays where we specify both a group and a subgroup.
 
 
+
+[cols="1a,1a", stripes="none"]
+|===
+
+|
+To create a *stacked bar chart*...
+
+|
+
+To make a *multi bar chart*...
+
+|
+
+- create a graph of randomly distributed points
+
+- drag the _group_ to an axis
+
+- drag the _sub-group_ to the center of the display
+
+- from the Configuration menu, select "Fuse Dots into Bars"
+
+- from the Configuration menu, select "Percent" as the scale.
+
+
+
+|
+- create a graph of randomly distributed points
+
+- drag the _sub-group_ to an axis
+
+- drag the _group_ to the `+` in the upper left-hand corner of the graph
+
+- from the Configuration menu, select "Fuse Dots into Bars"
+
+- to the right of the graph, locate and click the "Rescale Display" button (it looks like four arrows pointing in different directions) until you can see all of the data.
+
+|===
+
+@lesson-instruction{
+Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
+}
+
+@slidebreak
+
+[cols="1a,1a", frame="none", stripes="none"]
+|===
+^| Stacked Bar Chart
+^| Multi Bar Chart
+^| @image{images/stacked-bar-species-sex.png, 250}
+^| @image{images/multi-bar-species-sex.png, 300}
+| Stacked Bar Charts put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom.
+| Multi Bar Charts put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
+|===
+
+
+=== Synthesize
+All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
+
+- What are some of the questions you asked about the animals dataset using these displays? And what did you learn?
+- What kinds of questions need stacked or multi bar charts, rather than pie or bar charts
+- What kinds of questions are better answered by stacked bar charts?
+- What kinds of questions are better answered by multi bar charts?
+
+@strategy{Optional Project: Making Infographics}{
+
+
+Infographics are a powerful tool for communicating information, especially when made by people who actually understand how to connect visuals to data in meaningful ways. @lesson-link{project-infographic} is an opportunity for students to become more flexible math thinkers while tapping into their creativity. This project can be made on the computer or with pencil and paper.
+}
 
 == Exploring Other Displays @duration{30 minutes}
 
@@ -211,7 +273,7 @@ There are _lots_ of different kinds of charts and plots that we can build in COD
 - Tip: Some menu icons only appear under specific conditions! For instance, clicking on the `cases` display brings up a menu of options.
 }
 
-@teacher{If students need a bit of encouraging, you might prod them to make scatterplots and histograms.
+@teacher{If students need a bit of encouraging, you might prod them to make scatter plots and histograms.
 
 When time is up, invite students to share.
 }
@@ -222,7 +284,7 @@ When time is up, invite students to share.
 @Q{When did the `configuration` menu appear (the one that looks like a stacked bar chart)?}
 @A{When there is another possible configuration of the data. For instance, when dots can be fused into bars, we see this menu.}
 @Q{When did the `measure` menu appear (the one that looks like a ruler)?}
-@A{This menu appears when there is an opportunity to change what is shown *along with* the points - for instance, connecting lines or calculating the count. Histograms and boxplots appear alongside an existing display, so they appear on the `measure` menu.}
+@A{This menu appears when there is an opportunity to change what is shown *along with* the points - for instance, connecting lines or calculating the count. Histograms and box plots appear alongside an existing display, so they appear on the `measure` menu.}
 }
 
 === Investigate
@@ -236,11 +298,11 @@ Let's try a more methodical approach to creating displays.
 @QandA{
 We're going to complete @printable-exercise{plot-practice.adoc} together. To make a dot plot showing the sex of animals from the shelter, I'll ask myself three important questions:
 
-@Q{Which **Column / Attributes** on which axes?}
+@Q{Which *Column / Attributes* on which axes?}
 @A{Sex belongs on the either axis.}
-@Q{What **Type of Data**?}
+@Q{What *Type of Data*?}
 @A{Male, female, and hermaphrodite are all categories. The chart will display categorical data.}
-@Q{What **Configuration**?}
+@Q{What *Configuration*?}
 @A{CODAP initially creates a dot plot of the data, so no special configuration is needed.}
 }
 
@@ -258,7 +320,7 @@ Focus on supporting students in learning how to pose productive questions when l
 @teacher{Students will want to take thorough notes on @printable-exercise{data-displays-organizer.adoc}, as they can use it as a resource and reference in future lessons.}
 
 === Common Misconceptions
-There are _many_ possible misconceptions about displays that students may encounter here. *But that's ok!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal at this stage is to have them build familiarity and confidence with the CODAP tool and how it makes data displays.
+There are _many_ possible misconceptions about displays that students may encounter here. *But that's OK!* Understanding all those other plots is _not_ a learning goal for this lesson. Rather, the goal at this stage is to have them build familiarity and confidence with the CODAP tool and how it makes data displays.
 
 === Synthesize
 @QandA{
@@ -269,8 +331,14 @@ There are _many_ possible misconceptions about displays that students may encoun
 @Q{What displays did you find that work with categorical data?}
 @A{dot plots and bar charts}
 @Q{What displays did you find that work with quantitative data?}
-@A{histograms, box plots, scatterplots, and lr-plots}
+@A{histograms, box plots, scatter plots, and lr-plots}
 }
 
-Today you’ve added more data displays to your toolbox. You can create dot plots and bar charts to visually display categorical data, and you've developed a general approach to guide you as you create other displays.
+Today you've added more data displays to your toolbox. You can create dot plots and bar charts to visually display categorical data, and you've developed a general approach to guide you as you create other displays.
+
+
+== Additional Exercises
+
+- For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.
+
 

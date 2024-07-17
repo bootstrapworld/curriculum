@@ -1,0 +1,70 @@
+= Modeling Historical Carbon Dioxide Levels
+++++
+<style>
+td { padding: 0 !important; }
+td .autonum::after { content: ')' !important; }
+td .codetwo { color: black; background: none; }
+table table td { color: inherit !important; padding: 3px 0 !important; }
+body .center { padding: 0; }
+.directions p { line-height: 1.75 !important; }
+.fitb { min-width: 2em; }
+.studentAnswerMedium { min-width: 83pt !important; }
+</style>
+++++
+
+@define{COtwo}{@math{\mbox{CO}_2}}
+
+@link-instructions{
+The data below was generated from the @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+}
+
+== Looking for Patterns
+
+@center{@image{../images/historical-scatter-plot.png, 450}}
+
+
+@n Describe the @vocab{form}, @vocab{direction}, and @vocab{strength} of the relationship you see here @fitb{}{@ifsoln{Linear, Positive, and Strong...with some periodic variation}}
+
+@n Use `lr-plot` to find the best linear model. What is its @math{S}-value? @fitbruby{6em}{@ifsoln{3.425}}{parts per million} Write the function below (in Pyret and Function Notation):
+
+@vspace{1ex}
+
+[cols="1a, ^.^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+
+_linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
+|===
+
+== Creating Hybrid Models
+
+@n Could this linear model be improved by _combining_ it with your periodic model? Why or why not? @fitb{}{} +
+@fitb{}{} +
+@fitb{}{} +
+
+@n *What would a combined model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
+
+@vspace{1ex}
+
+@indented{
+_Between 1974 and 2023, the amount of @math{CO_2} in the air can be modeled using a hybrid model. Within each year, the was a consistent periodic fluctuation, with an amplitude of @fitbruby{3em}{@ifsoln{4.13}}{amplitude}ppm rising and falling around a @vocab{midline} that rises at @fitbruby{2em}{@ifsoln{1.8345}}{slope}ppm. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{3em}{@ifsoln{@math{2pi}}}{frequency}._
+}
+
+@star Try to define a NEW function `hybrid` in Pyret, which combines your periodic model with the one computed through linear regression. What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} Write your new model below, in Function or Pyret notation:
+
+@ifnotsoln{
+
+`fun hybrid(x):` @fitb{}{} +
+`end`
+}
+
+@ifsoln{
+f(4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end
+@hspace{2em} **OR** @hspace{2em} @math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}
+}
+

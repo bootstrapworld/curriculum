@@ -586,13 +586,13 @@
                     *dist-root-dir* g link-text
                     (if (or *lesson-plan*
                             (member link-type '("printable-exercise" "opt-printable-exercise")))
-                        ", window=\"_blank\"" ""))]
+                        ", window=\"&#x5f;blank\"" ""))]
           [materials-link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g (or page-title link-text)
                     (if (or *lesson-plan*
                             (member link-type '("printable-exercise" "opt-printable-exercise")))
-                        ", window=\"_blank\"" ""))])
+                        ", window=\"&#x5f;blank\"" ""))])
       (when *lesson-plan*
         (cond [(or (equal? link-type "opt-printable-exercise")
                    (and (equal? link-type "printable-exercise") *optional-flag?*))
@@ -604,7 +604,7 @@
 
               [(equal? link-type "printable-exercise")
                (let* ([styled-link-output
-                        (let ([tack-on ", window=\"_blank\""])
+                        (let ([tack-on ", window=\"&#x5f;blank\""])
                           (format "[.PrintableExercise]##link:~alessons/pass:[~a][~a~a] ##"
                                   *dist-root-dir* g (or page-title link-text) tack-on))]
                      ; [styled-link-output
@@ -848,7 +848,7 @@
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"
                                  *dist-root-dir* f link-text
-                                 (if *lesson-plan* ", window=\"_blank\"" ""))])
+                                 (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))])
         link-output))))
 
 (define (make-lesson-link f link-text)
@@ -925,7 +925,7 @@
                       "{fromlangroot}"
                       (regexp-replace "distribution/[^/]+/" f "")
                       link-text
-                      (if *lesson-plan* ", window=\"_blank\"" ""))
+                      (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))
 
               ])
         ;(printf "outputting link-output= ~s\n\n" link-output)
@@ -1000,7 +1000,7 @@
            (let ([link-output
                    (cond [(or *lesson-plan* *teacher-resources*
                               (member link-type '("online-exercise" "opt-online-exercise")))
-                          (format "link:pass:[~a][~s, window=\"_blank\"]" g link-text)]
+                          (format "link:pass:[~a][~s, window=\"&#x5f;blank\"]" g link-text)]
                          [else (format "link:pass:[~a][~a]" g link-text)])])
 
              (when (and *lesson-plan* external-link?)
@@ -1360,7 +1360,7 @@
 
   (when (and *lesson* (not *lesson-plan*) (not *other-dir*))
     (let* ([exercise-pages-ls-file
-            (format "distribution/~a/lessons/~a/pages/.cached/.exercise-pages-ls.txt.kp"
+            (format "distribution/~a/lessons/~a/pages/.cached/.opt-exercise-pages-ls.txt.kp"
                     *natlang* *lesson*)]
            [exercise-pages (read-data-file exercise-pages-ls-file)]
            [handout-pages-ls-file
@@ -1456,7 +1456,7 @@
                                   ))]
                            [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
-                           [(string=? directive "ifslide")
+                           [(member directive '("ifslide" "pd-slide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
                                         (regexp-match "@image{" text)
@@ -1819,6 +1819,7 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
+                            (display (enclose-span ".slidebreak" "") o)
                             (let ([c (peek-char i)])
                               (when (and (char? c) (char=? c #\{))
                                 (read-group i directive)))]
@@ -1890,7 +1891,7 @@
                                                            "link:pass:[~a][~a~a]"
                                                            url
                                                            title
-                                                           ", window=\"_blank\""
+                                                           ", window=\"&#x5f;blank\""
                                                            )])
                                                   (when (and newly-added?
                                                              (hash-ref c 'autoinclude #t))
@@ -1899,7 +1900,7 @@
                                                                "link:pass:[~a][~a~a]"
                                                                url
                                                                starter-file-title
-                                                               ", window=\"_blank\""
+                                                               ", window=\"&#x5f;blank\""
                                                                )]
                                                            [styled-link-output
                                                              (format "[StarterFile~a]##~a##"
@@ -2139,7 +2140,7 @@
                 (fprintf o "[.acknowledgment]\n")
                 (fprintf o "--\n")
                 (fprintf o (hash-ref *common-text* 'acknowledgment))
-                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/images/CCbadge.png[], window=\"_blank\"]\n" *dist-root-dir*)
+                (fprintf o "link:https://www.creativecommons.org/licenses/by-nc-nd/4.0/[image:~alib/images/CCbadge.png[], window=\"&#x5f;blank\"]\n" *dist-root-dir*)
                 (fprintf o "~a " *copyright-name*)
                 (fprintf o (hash-ref *common-text* 'copyright))
                 (fprintf o "\n--\n")
@@ -2269,7 +2270,7 @@
                        (empty? *opt-printable-exercise-links*)
                        (empty? *opt-starter-file-links*)
                        (empty? *opt-online-exercise-links*))
-              (printf "WARNING: ~a has no supplemental materials yet!\n\n" (errmessage-context))
+              (printf "WARNING: ~a has no supplemental materials yet!\n" (errmessage-context))
               ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
               )
 
@@ -2290,6 +2291,7 @@
         (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-sections.txt.kp")
           (lambda (o)
             (for ([s (reverse *first-level-section-titles*)])
+              (set! s (regexp-replace* #rx" *\\([0-9]* +minutes\\)" s ""))
               (write s o) (newline o)))
           #:exists 'replace)
         )
@@ -2333,7 +2335,7 @@
            (let* ([id (call-with-input-file id-file read-line)]
                   [pres-uri (format "https://docs.google.com/presentation/d/~a/" id)])
              (check-link pres-uri #:external? #t)
-             (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"_blank\"]\n\n" pres-uri))]
+             (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"&#x5f;blank\"]\n\n" pres-uri))]
           [else
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))

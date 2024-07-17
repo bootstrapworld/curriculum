@@ -4,11 +4,14 @@
 <style>
 #content img {width: 75%; height: 75%;}
 body.workbookpage td .autonum:after { content: ')'; }
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{ padding-top: 0; min-width: 2em; }
 </style>
 ++++
 
 Decide whether each representation is best described by a quadratic, exponential, or logarithmic function. +
-**If the function is logarithmic:** How much does `x` need to increase (2x? 10x?) just to get a single increase in `y`?
+*If the function is exponential, find the @vocab{base} (also called the @vocab{growth factor}):* How much does `y` increase (2x? 10x?) for a single increase in `x`? +
+*If the function is logarithmic, find the @vocab{base}:* How much does `x` need to increase (2x? 10x?) just to get a single increase in `y`?
 
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
@@ -25,15 +28,15 @@ Decide whether each representation is best described by a quadratic, exponential
 ! 100000  ! 5
 ! 1000000 ! 6
 !===
-
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+ 
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Quadratic
-! Exponential
-! @ifsoln-choice{Logarithmic}
+! Exponential @fitbruby{2em}{}{base}
+! @ifsoln-choice{Logarithmic} @fitbruby{2em}{@ifsoln{10}}{base}
 !===
-@ifsoln{@right{@math{x \times 10}}}
+
 |
 [.pyret-table,cols="1,1",options="header"]
 !===
@@ -47,12 +50,12 @@ Decide whether each representation is best described by a quadratic, exponential
 ! 6 ! 1000000
 !===
 
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Quadratic
-! @ifsoln-choice{Exponential}
-! Logarithmic
+! @ifsoln-choice{Exponential} @fitbruby{2em}{@ifsoln{TODO}}{base}
+! Logarithmic @fitbruby{2em}{@ifsoln{}}{base}
 
 // need empty line here so the closing table block isn't swallowed
 !===
@@ -61,8 +64,8 @@ Decide whether each representation is best described by a quadratic, exponential
 [.pyret-table,cols="1,1",options="header"]
 !===
 ! x ! y
-! 70 ! -210
-! 71 ! -169
+! 70 ! -169
+! 71 ! -126
 ! 72 !  -81
 ! 73 !  -34
 ! 74 !   15
@@ -70,36 +73,35 @@ Decide whether each representation is best described by a quadratic, exponential
 ! 76 !  119
 !===
 
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! @ifsoln-choice{Quadratic}
-! Exponential
-! Logarithmic
+! Exponential @fitbruby{2em}{}{base}
+! Logarithmic @fitbruby{2em}{@ifsoln{}}{base}
 !===
 
 |
 [.pyret-table,cols="1,1",options="header"]
 !===
-! x ! y
-!  2 ! 1
-!  4 ! 2
-!  8 ! 3
-! 16 ! 4
-! 32 ! 5
-! 64 ! 6
-!128 ! 7
+! x  ! y
+! 5  ! 1
+! 10 ! 2
+! 20 ! 3
+! 40 ! 4
+! 80 ! 5
+! 160! 6
+! 320! 7
 !===
 
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Quadratic
-! Exponential
-! @ifsoln-choice{Logarithmic}
+! Exponential @fitbruby{2em}{}{base}
+! @ifsoln-choice{Logarithmic} @fitbruby{2em}{@ifsoln{2}}{base}
 !===
 
-@ifsoln{@right{@math{x \times 2}}}
 |
 [.pyret-table,cols="1,1",options="header"]
 !===
@@ -113,12 +115,12 @@ Decide whether each representation is best described by a quadratic, exponential
 !  3 ! 36
 !===
 
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! @ifsoln-choice{Quadratic}
-! Exponential
-! Logarithmic
+! Exponential @fitbruby{2em}{}{base}
+! Logarithmic @fitbruby{2em}{@ifsoln{}}{base}
 !===
 
 |
@@ -134,14 +136,12 @@ Decide whether each representation is best described by a quadratic, exponential
 ! 466656 ! 6
 !===
 
-[cols="1a,6a,6a,6a",stripes="none",frame="none",grid="none"]
+[cols="^.<1a,^.<6a,^.<12a,^.<12a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
 ! Quadratic
-! Exponential
-! @ifsoln-choice{Logarithmic}
-
-@ifsoln{@right{@math{x \times 6}}}
+! Exponential @fitbruby{2em}{}{base}
+! @ifsoln-choice{Logarithmic} @fitbruby{2em}{@ifsoln{6}}{base}
 
 // need empty line here so the closing table block isn't swallowed
 !===

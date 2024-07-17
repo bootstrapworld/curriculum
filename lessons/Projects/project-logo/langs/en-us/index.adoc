@@ -10,13 +10,13 @@
 | Lesson Goals
 | Students will be able to...
 
-* represent function composition with Circles of Evaluation
-* use functions that produce and transform images to create their own personal logo
+- represent function composition with Circles of Evaluation
+- use functions that produce and transform images to create their own personal logo
 
 | Student-facing Lesson Goals
 |
 
-* Let's make a logo in @proglang!
+- Let's make a logo in @proglang!
 
 | Materials
 |[.materials-links]
@@ -25,64 +25,146 @@
 | Preparation
 |
 @preparation{
-* Before launching this project, ensure that students are comfortable using image-producing functions and function composition.
-* Note that for this project, students must submit four different components: (1) Sample Logo Study, (2) Designing Your Logo, (3) Coding Your Logo, and (4) the link to their published @proglang program. It is up to you whether you collect student work all at once (at the end of the project) or intermittently, after each worksheet has been completed.
-* This project is designed to span multiple days.
+- Before launching this project, ensure that students are comfortable using image-producing functions and function composition.
+- Note that for this project, students must submit four different components: (1) Sample Logo Study, (2) Designing Your Logo, (3) Coding Your Logo, and (4) the link to their published @proglang program. It is up to you whether you collect student work all at once (at the end of the project) or intermittently, after each worksheet has been completed.
+- Decide how you want students to submit the link to their program and share it with you (email, a web form, Google Classroom, Schoology, etc.)
+- This project is designed to span multiple days.
+- Teachers are welcome and encouraged to edit and adapt the student-facing @handout{logo-rubric.adoc} for their unique classroom context and distribute it to help students understand the scope of the project - and your expectations - at the outset.
 }
 
 |===
 
-== Create Your Own Logo @duration{flexible}
+== Logo Study @duration{15 minutes}
 
 === Overview
 
-Students design their logo and consider which functions they will need to compose in order to build it. Then, they represent their logo first with a Circle of Evaluation, next with code. Finally, they publish and share their logo.
+Students will replicate a provided logo, then look at code for 3 logos designed by students in California, identifying important elements.
 
 === Launch
 
-@teacher{To launch this project, begin with a conversation about students' favorite logos. Then, invite students to study some example logos (and the corresponding code that produced them!). Finally, students begin sketching their own logo design.
+@lesson-instruction{
+- Draw a Circle of Evaluation for the expression @math{2 + 3 + 6}.
+- Draw 2 additional (different) Circles of Evaluation for @math{2 + 3 + 6}. You may change the order or groupings of the numbers, but the Circle must evaluate to the same result.
+}
 
-Before you dive in, we recommend printing and distributing the student-facing @handout{logo-rubric.adoc} to help students understand the scope of the project and your expectations at the outset. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.}
+@slidebreak
+
+Here are some possible Circles of Evaluation:
+
+[cols="^.^3,^.^3, ^.^3", grid="none"]
+|===
+|@show{(coe '(+ (+ 2 6) 3))} | @show{(coe  '(+ 2 (+ 3 6)))} | @show{(coe '(+ 3 (+ 2 6)))}
+
+|===
+
+@slidebreak
+
+When we want to add three numbers, there are a variety of ways to do so. Circles of Evaluation help us to visualize each possibility! The same goes when we use `overlay` to layer three or more images in @proglang.
+
+@lesson-instruction{
+- Open the @starter-file{logos-warmup}.
+- Complete the instructions to write the code for a common logo.
+- Compare your code with a partner's.
+}
+
+@QandA{
+- Did you and your partner write the same code?
+- Is it possible to write _different_ code that would produce the same image?
+}
+
+
+=== Investigate
+
+@teacher{
+Facilitate a conversation about students' favorite logos. Then, invite students to study some example logos (and the corresponding code that produced them!).
+}
 
 @QandA{
 @Q{If I ask you to think of a logo (any logo!), what are some of the first that come to mind?}
 @Q{What makes those particular logos memorable or unique?}
 @A{Possible responses: They include bright colors. They include simple shapes. The logo tells some sort of story.}
-@Q{Open the @starter-file{logos}. What do you Notice? What do you Wonder?}
-@A{Possible Noticing: The programmer has formatted their code with lots of indentations! Possible Wondering: Why are there so many indentations?}
-@Q{Why do you think the programmer added so many indentations to their code?}
-@A{The code becomes easier to interpret! There is a new line everytime a new function appears.}}
-
+@Q{Open the @starter-file{logos} and, before playing around with it, take a moment to focus on the code. What do you Notice? What do you Wonder?}
+@A{Possible Noticings:}
+@A{There are 3 logos defined.}
+@A{The programmers are using more specific colors than standard red, blue, green}
+@A{The code for sample-logo-1 slopes diagonally.}
+@Q{The code in this file is very organized. It's been thoughtfully formatted with line breaks and indentations to make it readable. What guidelines do the programmers seem to be following?} 
+@A{There is a new line every time a new function appears.}
+@A{There is a new line for every new layer.}
+}
 
 @slidebreak
 
 @lesson-instruction{
-Using the @starter-file{logos}, complete @handout{sample-logo-study.adoc}.
+- Turn to @handout{logo-study.adoc} and complete it using the @starter-file{logos}.
+}
+
+=== Synthesize
+
+- How would you describe to a friend how the function `overlay` works?
+- How can you use `overlay` to stack _more_ than two images?
+
+@teacher{
+Debrief with students as a class to discuss any difficulties they encountered. If you'd like, you can collect the @handout{logo-study.adoc} and assess students using the first row of the @handout{logo-rubric.adoc}. Some students may benefit from receiving feedback along the way, rather than only at the end of the project.
 }
 
 
-@teacher{Debrief with students as a class to discuss any difficulties they encountered. If you'd like, you can collect the @handout{sample-logo-study.adoc} and assess students on the first rubric row of the @handout{logo-rubric.adoc}. Some students may benefit from receiving feedback along the way, rather than only at the end of the project.}
+== Create Your Own Logo @duration{flexible}
 
+=== Overview
+
+Students design their logo and consider which functions they will need to compose in order to build it. They represent their logo first with a simplified Circle of Evaluation, next with code. Finally, they publish and share their logo.
+
+=== Launch
+
+@lesson-instruction{
+- Turn to @handout{design-your-logo.adoc} and complete the first two sections. If you need more room for your sketch, you can work or on a separate sheet of paper.
+- When you're ready, swap papers with a partner and complete the Peer Review on the bottom section of the page.
+}
+
+@teacher{
+Circulate as students work to understand any obstacles that students are facing. Discuss with students any common struggles and how to solve them. If you like, you may choose to have students submit their work again to receive teacher feedback on the second rubric row.
+}
 
 === Investigate
 
-@lesson-instruction{
-- On @handout{design-your-logo.adoc} (or on a separate sheet of paper) sketch your logo. Choose @link{https://pyret.org/docs/latest/color.html, "appropriate colors"}} for each region of your logo.
-- When you're finished, go on to the next section of the worksheet, where you will think about what shape and transformation functions your logo requires.
-- Finally, swap papers with a partner and complete the Peer Review on the bottom section of the page.
-}
-
-@teacher{Circulate as students work to understand any obstacles that students are facing. Discuss with students any common struggles and how to solve them. If you like, you may choose to have students submit their work again to receive teacher feedback on the second rubric row.}
-
-@slidebreak
 
 @lesson-instruction{
-- It's time to code your logo! On @handout{code-your-logo.adoc}, draw a Circle of Evaluation that will produce the logo you've sketched.
-- Swap papers with a partner to give and receive feedback on your Circle of Evaluation.
-- Complete the rest of @handout{code-your-logo.adoc}, which walks you through __defining__ your logo, then saving and submitting to your teacher.
+- You're going to be drawing a simplified Circle of Evaluation that will help you think through how to produce the logo you've sketched. Let's take a quick look at an example. What do you Notice? What do you Wonder?
+
+@do{
+(define logoc '(overlay
+(beside 
+(above
+(star (?ANS ...))
+(triangle (?ANS ...))
+(overlay
+(overlay
+(rotate 45 (text "LOGO" ...))
+(square (?ANS ...))))
+(circle (?ANS ...))))
+(ellipse(?ANS ...) )))
 }
 
-@teacher{At the end of the page, students are asked to publish the link to their program and share it with their teacher. You may use a variety of methods for link submission including (but not limited to!) email, a web form, or your favorite LMS (Google Classroom, Schoology, etc).}
+@show{(coe logoc)}
+}
+
+@teacher{
+Make sure students notice that:
+
+- We aren't giving all details about size and color in the diagram.
+- Every function is named, whether it's a shape or a transformation.
+- Rotations include the number of degrees.
+- Even without all of the details, we will know where our parentheses open and close.
+}
+
+
+@lesson-instruction{
+- It's time to draw a Circle of Evaluation for your logo. You can work on the top of  @handout{code-your-logo.adoc} or on a separate piece of paper.
+- When your Circle of Evaluation is complete, swap papers with a partner to give and receive feedback on your Circle of Evaluation.
+- Then complete the rest of @handout{code-your-logo.adoc}, which walks you through _defining_ your logo.
+- When you're done, publish your link and share it with me.
+}
 
 === Synthesize
 
@@ -94,3 +176,5 @@ Using the @starter-file{logos}, complete @handout{sample-logo-study.adoc}.
 
 - Finally, celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
 }
+
+

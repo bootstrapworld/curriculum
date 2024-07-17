@@ -10,43 +10,43 @@ body .center { padding: 0; }
 ++++
 
 [.linkInstructions]
-For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you.
+For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
 
-@n Click "Run", and evaluate `covid-table` in the Interactions Area. 
+@n Take a look at the Definitions Area and find the "Notes on Columns". What is the start date for the data in this table? @fitb{}{@ifsoln{June 9, 2020}}
 
-@n Take a look at the Definitions Area and find the "notes on columns". What is the start date for the data in this table? @fitb{}{@ifsoln{June 20, 2020}}
+@n Click "Run", and evaluate `covid-table` in the Interactions Area. What do you notice? @fitb{}{}
 
-@n In the Definitions Area we see rows defined for Connecticut (`CT1`), Massachusetts (`MA1`) and Maine (`ME1`). +
-@hspace{3em}What happens when you evaluate `MA1` in the Interactions Area? @fitb{}{@ifsoln{A single row of the table}}
+@fitb{}{@ifsoln{There is data for the number of positive COVID cases each day for 6 states (CT, MA, ME, NH, NY, RI)}}
 
-@n Evaluate `CT1`. What information do you learn? @fitb{}{@ifsoln{1 day after 6/20/20, the state of}}
+@n Evaluate `MA1` in the Interactions Area. What does it return? @fitb{}{@ifsoln{A single row of the table.}}
 
-@fitb{}{@ifsoln{Connecticut had 44347 total positive covid cases.}}
+@n Evaluate `CT1`. What information do you learn? @fitb{}{@ifsoln{1 day after 6/10/20, the state of Connecticut had 44347 total positive covid cases.}}
 
-@n Define three new Rows called `VT1`, `NH1` and `RI1` for Vermont, New Hampshire and Rhode Island. Click "Run" and test them out.
+@n Evaluate `NH1`. Why is it "unbound" and how could we make it work? @fitb{}{@ifsoln{There are only definitions for `MA1`, `CT1` and `ME1`}}
 
-@hspace{3em}+a.+ How many people in **Vermont** tested positive on June 21st, 2020? @fitb{}{@ifsoln{1092}} +
-@hspace{3em}+b.+ How many people in **New Hampshire** tested positive on June 21st, 2020? @fitb{}{@ifsoln{5178}} +
-@hspace{3em}+c.+ How many people in **Rhode Island** tested positive on June 21st, 2020? @fitb{}{@ifsoln{15855}}
+@n Define three new Rows called `NH1`, `RI1` and `VT1`, for New Hampshire, Rhode Island and Vermont. Click "Run" and test them out.
+
+@hspace{3em}+a.+ How many people in *Vermont* tested positive on June 10st, 2020? @fitb{}{@ifsoln{1092}} +
+@hspace{3em}+b.+ How many people in *New Hampshire* tested positive on June 10st, 2020? @fitb{}{@ifsoln{5178}} +
+@hspace{3em}+c.+ How many people in *Rhode Island* tested positive on June 10st, 2020? @fitb{}{@ifsoln{15855}}
 
 @n In Pyret, make a scatter plot showing the relationship between `day` and `positive`, using `state` as your labels, then sketch the resulting scatter plot below.
-[.FillVerticalSpace, cols="2a,.^1a", options="grid",stripes="none",frame="none"]
+[.FillVerticalSpace, cols="^.^2a,.^1a", options="grid",stripes="none",frame="none"]
 |===
 |
-@center{
-    @ifnotsoln{@image{../images/covid-grid.png, 400}}
-    @ifsoln{@image{../images/covid-scatterplot.png, 350}}
-}
+
+@ifnotsoln{@image{../images/covid-grid.png, 400}}
+@ifsoln{@image{../images/positive-v-day.png}} 
 
 |
 --
-@n In which state did the number of cases grow __fastest__?
+@n In which state did the number of cases grow _fastest_?
 
 @fitb{}{@ifsoln{MA}}
 
 @vspace{5ex}
 
-@n In which state did the number of cases grow __slowest__?
+@n In which state did the number of cases grow _slowest_?
 
 @fitb{}{@ifsoln{VT}}
 
@@ -58,10 +58,10 @@ For this page, you'll need to have the @starter-file{alg2-covid} open on your co
 --
 |===
 
-@n What do you **Notice?** @fitb{}{} +
+@n What do you *Notice?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
 
-@n What do you **Wonder?** @fitb{}{} +
+@n What do you *Wonder?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}

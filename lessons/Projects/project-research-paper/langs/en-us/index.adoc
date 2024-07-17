@@ -1,24 +1,24 @@
 = Project: Research Capstone
 
-@description{This project can be used as a capstone for Bootstrap: Data Science. It is designed to give students a a deep dive into a dataset and use everything they've learned throughout the course, not only about making and interpreting displays, but about the practice of refining our questions through the Data Cycle and deciding which displays are most useful in telling the data's story.  __This project is an extension of the @lesson-link{project-data-exploration}.__ }
+@description{This project can be used as a capstone for Bootstrap: Data Science. It is designed to give students a deep dive into a dataset and use everything they've learned throughout the course, not only about making and interpreting displays, but about the practice of refining our questions through the Data Cycle and deciding which displays are most useful in telling the data's story.  _This project is an extension of the @lesson-link{project-data-exploration}._ }
 
-@lesson-prereqs{linear-regression}
+@lesson-prereqs{linear-regression, project-data-exploration}
 
 [@lesson-intro-table]
 |===
 | Lesson Goals
 | Students will be able to...
 
-* develop a research question about a real-world dataset
-* use the Data Cycle _repeatedly_ when answering their research question, with each set of findings leading to new questions
-* articulate the series of steps they took with the Data Cycle
-* identify and explore grouped samples from within their dataset
-* identify threats to validity.
+- develop a research question about a real-world dataset
+- use the Data Cycle _repeatedly_ when answering their research question, with each set of findings leading to new questions
+- articulate the series of steps they took with the Data Cycle
+- identify and explore grouped samples from within their dataset
+- identify threats to validity.
 
 | Student-facing Lesson Goals
 |
 
-* Let's use data to answer a question.
+- Let's investigate our questions to tell the story of our dataset using all of the tools we've learned in Bootstrap:Data Science.
 
 | Materials
 |[.materials-links]
@@ -34,14 +34,14 @@
   * Will students submit a rough draft before they submit a final draft?
   * If you're having students do both the slides _and_ a written paper, do they have separate deadlines?
   * Will students present their projects to the class on a certain date?
-- We encourage you to modify the @starter-file{research-paper} to meet your students' needs.
+- Teachers are welcome and encouraged to edit and adapt the @starter-file{research-paper} and @starter-file{research-project}, as well as the student-facing @handout{research-project-rubric.adoc, Project Overview Rubric} and @handout{research-project-rubric-displays.adoc, Displays Rubric}, for their unique classroom context. 
+- We recommend distributing rubrics at the outset to help students understand the scope of the project - and your expectations - at the outset.
 }
 
 | Key Points for the Facilitator
 |
-* This project an extension of @lesson-link{project-data-exploration}, where students gain familiarity with a dataset and brainstorm interesting questions to study. In this project, students respond to one question (or possibly 2-3) by analyzing statistics and displays.
-* This project can also address _domain-specific learning goals_ that are appropriate for your classroom. For example, students in a Physics class might write their paper about data they collected from an experiment.
-
+- This project builds on our @lesson-link{project-data-exploration} (in which students practice making displays from a real world dataset, develop familiarity with that dataset and generate a list of questions about the dataset), but is much more rigorous, pushing students to decide which of the displays they are able to make actually tell interesting stories and which grouped samples need to be made in order to dig into answering their most interesting questions.
+- This project can be framed to address _domain-specific learning goals_ that are appropriate for your classroom. For example, students in a Physics class might write their paper about data they collected from an experiment.
 
 |===
 
@@ -49,12 +49,9 @@
 
 === Overview
 
-In this capstone project, students investigate a dataset to answer to a chosen question about that dataset. They use the data cycle to ask questions, consider, analyze, and interpret their data.
-
-Prior to embarking on this project, students should complete @lesson-link{project-data-exploration}, where they gain familiarity with a dataset and consider worthwhile questions to investigate.
+In this capstone project, students use the data cycle to ask questions, consider, analyze, and interpret their dataset.  Building on preliminary work for @lesson-link{project-data-exploration}, students dig deeper into their questions, selecting relevant displays and making more to craft a compelling data story.
 
 @strategy{What's the Finished Product?}{
-
 
 Students can create a formal research paper, a slide deck or both! We've created a @starter-file{research-project, "slide template"} and a @starter-file{research-paper, "paper template"} to help scaffold these products.
 
@@ -63,54 +60,79 @@ Note: Many teachers have students create the slide deck first, as it offers more
 
 === Launch
 
-Data Science is the process of learning from data. Any learning that _you_ do from _your_ data needs to be motivated by a *good question* - one that will produce new insights and rich discussion. That means it can't be too vague, too broad, or too specific!
+Choosing a *good research question* is the first step toward a successful research project! 
 
-While working on your Data Exploration, you honed in on a few questions worth further investigation. Let's think about which of those questions would be the best for further study.
+Your question should produce new insights and rich discussion - that means it can't be too vague, too broad, or too specific!
 
 @lesson-instruction{
-In small groups, share and discuss the questions that you found most interesting. Let your peers share their gut reactions to your questions, then discuss the advantages and disadvantages of pursuing each question.
+- Take a minute to look at the questions you developed in your @lesson-link{project-data-exploration} and identify a few that you think could be answered using your dataset and might be interesting to pursue further. 
+  * Perhaps you have a broad question that could be clarified through a list of subquestions? 
+  * Or perhaps you notice that you have several questions that could support exploration of an overarching question?
+- Share and discuss your questions with your partner or small group.
+  * Which of your questions do they find most compelling?
+  * What subquestions would you want to explore for each of your questions?
+  * Can all of your questions actually be answered using the data available in your dataset?
+- It's ok to improve upon one of your questions or develop a new question about your dataset that wasn't on the original list!
 }
 
-@teacher{Choosing an appropriate question is the first step toward a successful research project! Some students will likely be confident in their question(s), while others will need to revise and rethink their question(s). This discussion is intended to be an open conversation, allowing students the opportunity to pick the best question for them.}
+@teacher{
+Some students will likely be confident in their question(s), while others will need to revise and rethink their question(s). This discussion is intended to be an open conversation, allowing students the opportunity to pick the best question for them.
+
+Students who need more scaffolding may benefit from comparing the data work they are about to embark on to the structure of a 5-paragraph essay, with an introduction and conclusion sandwiching three supporting paragraphs, each of which has its own topic sentence.
+
+Applied to Data Science, they will want an overarching question that can be explored through a collection of sub-questions, which might look like something like the following: 
+
+- Overarching Question: What factors best predict the number of weeks animals spend at the shelter?
+- Subquestions:
+  * How does an animal's species effect adoption time?
+  * How does an animal's weight effect adoption time?
+  * How does an animal's sex effect adoption time?
+  * How does an animal's age effect adoption time?
+- Conclusion: In general animals spend between @fitb{1em}{} and @fitb{1em}{} weeks at the shelter before being adopted. @fitb{1em}{} doesn't appear to have any impact on adoption time, while @fitb{1em}{} seems to dramatically lengthen/shorten the number of weeks to adoption. Animals who are @fitb{1em}{} and @fitb{1em}{} are most likely to be adopted quickly. And animals who are @fitb{1em}{} and @fitb{1em}{} seem to be adopted slowly.
+
+Another example of an overarching question we could ask about the animals might be: 
+
+- "Does gender bias impact which animals are fixed?"
+}
+
 
 === Investigate
 
-We are going to spend a lot of class time working on our research projects.
+Let's make sure the research task is clear before we dig in.
 
 @teacher{
-Teachers: It is up to you how much work students do at home versus in class. Providing work time during class is beneficial because it encourages students to ask questions and collaborate with peers.
-
-Share any pertinent deadlines, for check-ins, status updates, submission dates for drafts, slides, papers and/or presentations, etc.
-
-Pacing of this project will vary from classroom to classroom. Some students will need more structure and deadlines from you, while others will thrive with individual freedom. Do what works best for your students - but have a clear idea of how much time will be needed for your students to meet your expectations.
-
-We recommend printing and distributing the @handout{research-project-rubric.adoc, "first"} and @handout{research-project-rubric.adoc, "second"} page of the student-facing rubric to help students understand the scope of the project and your expectations at the outset. A full-class walk-through of the slide deck template with interwoven discussion the relevant rubric rows is useful, also. Teachers are welcome and encouraged to edit and adapt the rubric for their unique classroom context.
+If you are also requiring students to submit a written research report, we recommend introducing this component _after_ students have completed and submitted their slide decks. When introducing the @starter-file{research-project}, you can share the @starter-file{research-paper} with students, so they know what to expect when it's time to write up their findings.
 }
 
 @lesson-instruction{
-- Let's preview the @starter-file{research-project} to give you a sense of *what* you will be creating.
-- But first, take out @handout{research-project-rubric.adoc, "both"} @handout{research-project-rubric-2.adoc, "pages"} of your rubric.
-- As we move through the template, ask questions about the rubric descriptors if they are unclear or confusing to you. Use a highlighter to indicate if anything seems especially important on the rubric.
-- There are *four* sections of the project: (1) About this Dataset, (2) Research Questions, (3) Analysis, and (4) Discussion.
-- Let's talk through the first two sections together.
+- There are *four* sections of the @starter-file{research-project}: 
+  * (1) About this Dataset - you can reuse what you wrote for your @lesson-link{project-data-exploration} and improve upon it, if necessary.
+  * (2) Research Questions - you just came up with these!
+  * (3) Analysis - This is where the bulk of your work will happen. In telling your data story, you can reuse displays from the exploration project... but some will likely not be worth including! And you will likely need to make more displays in order to tell the best story you can.  Plan to include a wide array of charts and displays to tell your story, although there is no requirement to include each type of display.
+  * (4) Discussion - This is where you'll summarize your findings, address threats to validity and ethical implications, and identify questions for future study.
+- You will be assessed on your work using this rubric: @handout{research-project-rubric.adoc, page 1} and @handout{research-project-rubric-displays.adoc, page 2}
+- Take a few minutes to read through the slide deck and the rubrics in parallel and identify any questions you may have about what you're being asked to do.  You may want to use a highlighter to identify anything that seems especially important on the rubric.
 }
 
-@teacher{Walk students through sections 1 and 2 of the @starter-file{research-project}, inviting questions and conversation along the way. We've offered some talking points for Sections 3 and 4, as the bulk of student work takes place there.
+@teacher{Teachers: It is up to you how much work students do at home versus in class. Providing work time during class is beneficial because it encourages students to ask questions and collaborate with peers.
 
+Pacing of this project will vary from classroom to classroom. Some students will need more structure and deadlines from you, while others will thrive with individual freedom. Do what works best for your students - but have a clear idea of how much time will be needed for your students to meet your expectations. Share any pertinent deadlines, for check-ins, status updates, submission dates for drafts, slides, papers and/or presentations, etc.
+}
 
-Explain to students that the bulk of their analysis will happen in the third section of the template - which is where they tell their data stories. In telling their data story, students can use displays from the exploration paper... but some will likely not be worth including! Most students will likely need to make more displays in order to tell the best story that they can.
-
-The @starter-file{research-project} includes every single type of graph that students made during the Data Exploration. They should only use the displays that are relevant to answering their research question. Students should plan to include a wide array of charts and displays to tell their story, although there is no requirement to include each type of display.
-
-If you are also requiring students to submit a written research report, we recommend introducing this component _after_ students have completed and submitted their slide decks. When introducing the @starter-file{research-project}, you can share with students @starter-file{research-paper}, so they know what to expect when it's time to write up their findings.}
+@lesson-instruction{
+- Whereas the focus of the @lesson-link{project-data-exploration} was to keep a record of your explorations, the goal of this project is to produce a polished final product that tells a compelling data story.  
+- Just as with any polished paper, you should expect it to take several drafts to arrive at the final product. 
+- When you are finished with your first draft, use the rubrics to self-assess and revise your work. 
+  * This will likely involve editing, deleting and adding to what you've written to come up with a more polished product. 
+  * Some of your edits may focus on the text you've written.
+  * Some of your edits may focus on refining the displays, by editing titles or making additional displays for the purpose of comparison.
+- You are also welcome to customize your slides, add graphics, and beautify the slide deck template!
+}
 
 === Synthesize
 
-* Invite students to customize their slides, add graphics, and beautify their slide decks.
-
-* Encourage students to self-assess and revise their work. Peer review is a powerful tool if time allows.
-
-* Finally, celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
+- Peer review is a powerful tool if time allows, and, ideally, it would be followed by a round of revisions.
+- Celebrate students' work! In many instances, students will want to share their project, given how much time they have invested. Class or public presentations can instill a sense of pride.
 
 
 

@@ -277,7 +277,7 @@
     (#\e "𝑒")
     (#\f "𝑓")
     (#\g "𝑔")
-    (#\h "ℎ")
+    (#\h "𝒽")
     (#\i "𝑖")
     (#\j "𝑗")
     (#\k "𝑘")
@@ -298,6 +298,13 @@
     (#\z "𝑧")
     (#\- "−")
     (#\± "±")
+    ))
+
+(define *mathjax-chars-that-need-flanking-space*
+  '(
+    #\+
+    #\-
+    #\=
     ))
 
 (define *standard-mathjax-ctl-seqs*
@@ -321,7 +328,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "^")]
+            (string-append "^" ss "{sp}^")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -401,6 +408,9 @@
                                  (math-subscript (read-mathjax-token i)
                                                  #:use-unicode? #f
                                                  #:asciidoc? asciidoc?)]
+                                [(member c *mathjax-chars-that-need-flanking-space*)
+                                 (read-char i)
+                                 (string #\space c #\space)]
                                 [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)

@@ -30,6 +30,8 @@
 
 (define *natlang* (or (getenv "NATLANG") "en-us"))
 
+(define *pd?* (getenv "PD"))
+
 (define *starter-files*
   (let ([starter-files-file (format "~a/distribution/~a/starter-files.js"
                                     *topdir* *natlang*)])
@@ -380,7 +382,8 @@
                          (build-path local-dir ".cached" snippet)
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
-                            (call-with-input-file f.titletxt read-line))]
+                            (adoc-to-md
+                              (call-with-input-file f.titletxt read-line)))]
            [existent-file? #f])
       (cond [(or (path-has-extension? snippet ".adoc")
                  (path-has-extension? snippet ".html")
@@ -417,6 +420,11 @@
               (format "[~a](~a)" link-text (build-path *bootstrap-prefix* f))])
         link-output))))
 
+(define (adoc-to-md x)
+  (set! x (regexp-replace* #rx"\\^(.*?)\\^" x "<sup>\\1</sup>"))
+  (set! x (regexp-replace* #rx"~(.*?)~" x "<sub>\\1</sub>"))
+  x)
+
 (define (make-lesson-link f link-text)
 
   (cond [(regexp-match "^ *$" f)
@@ -447,7 +455,8 @@
                          (build-path local-dir ".cached" (string-append "." snippet))
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
-                            (call-with-input-file f.titletxt read-line))]
+                            (adoc-to-md
+                              (call-with-input-file f.titletxt read-line)))]
            [existent-file? #f])
       (cond [(or (path-has-extension? snippet ".adoc")
                  (path-has-extension? snippet ".html")
@@ -522,7 +531,8 @@
         ; (printf "title file is ~s\n" local-title-file)
         (set! link-text
           (cond [(file-exists? local-title-file)
-                 (call-with-input-file local-title-file read-line)]
+                 (adoc-to-md
+                   (call-with-input-file local-title-file read-line))]
                 [(file-exists? local-dir-file) local-dir-file]
                 [else (format "<broken link: ~a>" local-dir-file)]))))
     (when (path-has-extension? local-file ".adoc")
@@ -636,7 +646,8 @@
                             (let* ([text (read-group i directive)] [img (read-group i directive)])
                               (cond [(not *slurping-up-teacher-notes*)
                                      (fprintf o "![~a](~a)" text img)]
-                                    [else (fprintf o "[[click here for image]](~a)" img)]))]
+                                    [else (fprintf o "[[click here for image]](~a)"
+                                                   (fully-qualify-image img))]))]
                            [(member directive '("printable-exercise" "opt-printable-exercise" "handout"))
                             (let ([args (read-commaed-group i directive read-group)])
                               (display (fully-qualify-link args directive) o))]
@@ -705,6 +716,10 @@
                               (expand-directives:string->port text *teacher-notes*)
                               (newline *teacher-notes*)
                               (exit-teacher-notes))]
+                           [(string=? directive "pd-slide-i")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (when *pd?*
+                                (expand-directives:string->port text o)))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o)

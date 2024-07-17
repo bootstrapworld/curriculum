@@ -68,6 +68,7 @@ body {
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; font-size: inherit !important; 
+    font-weight: normal !important;
     .overbar {
       border-top: 1px solid;
       display: inline-block;
@@ -124,9 +125,10 @@ body {
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
   #outOfDate a {color: lightblue;}
 
+  /* images and floated images */
   .left  { text-align: left  !important; }
   .right { text-align: right !important; }
-  .right img { margin-left: 15px; }
+  .right img { margin-left: 1em; margin-bottom: 1em; }
   .center, .centered-image {
     display:          block;
     margin-left:      auto;
@@ -268,7 +270,7 @@ lines on some browsers */
 
 .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 
-.materials-links p {
+#material-links p, #opt-material-links p {
   .showPageLinks a { 
     text-decoration: none; 
     &::after { content: ' ▼ '; }
@@ -279,7 +281,7 @@ lines on some browsers */
     .pageNum { float: right; margin-right: 10%; }
   }
 }
-.materials-links p.open {
+#material-links p.open, #opt-material-links p.open {
   .showPageLinks a::after { content: ' ▲ '; }
   &+.ulist { transition: 1s ease-in; max-height: 1000px; }
 }
@@ -453,7 +455,8 @@ lines on some browsers */
   }
 
   /* Lesson sections are comprised of content blocks, each separated by the same amount of space */
-  .lesson-section-2 > * { margin-top: @lesson-block-vertical-space; }
+  .lesson-section-2 > *,
+  .lesson-section-3 > * { margin-top: @lesson-block-vertical-space; }
 
   /* Direct link to a section of a lesson */
   .section-link a {
@@ -467,6 +470,7 @@ lines on some browsers */
   }
   /* class for styling duration info in headers */
   .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
+  .duration { display: none; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
@@ -503,9 +507,11 @@ lines on some browsers */
    * (used so that @slidebreak works, while maintaining
    * the appearance of an uninterrupted block in the lesson)
    */
-  .lesson-instruction+.lesson-instruction,
-  .lesson-roleplay+.lesson-roleplay,
-  .q-and-a+.q-and-a { 
+  .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
+  .paragraph:has(.slidebreak) p { margin: 0 !important; }
+  .lesson-instruction+.paragraph:has(.slidebreak)+.lesson-instruction,
+  .lesson-roleplay+.paragraph:has(.slidebreak)+.lesson-roleplay,
+  .q-and-a+.paragraph:has(.slidebreak)+.q-and-a { 
     margin: 0;
     > *:first-child::before { display: none; } 
   }

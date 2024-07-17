@@ -27,10 +27,11 @@
 
 (define *course-workbook-links*
   '(
-    ("algebra-wescheme" "https://www.lulu.com/shop/rachel-tabak-and-flannery-denny-and-ben-lerner-and-joe-politz/bootstrapalgebra-wescheme/paperback/product-92zw5z.html")
-    ("algebra-pyret" "https://www.lulu.com/shop/rachel-tabak-and-flannery-denny-and-ben-lerner-and-joe-politz/bootstrapalgebra-pyret/paperback/product-4zk8wp.html")
-    ("data-science" "https://www.lulu.com/shop/dorai-sitaram-and-ben-lerner-and-joe-politz-and-rachel-tabak/bootstrapdata-science-workbook/paperback/product-9j9ede.html")
+    ("algebra-wescheme" "https://www.lulu.com/shop/ben-lerner-and-joe-politz-and-dorai-sitaram-and-rachel-tabak/bootstrap-algebra-wescheme-2024/paperback/product-gjgvqy9.html")
+    ("algebra-pyret" "https://www.lulu.com/shop/ben-lerner-and-joe-politz-and-dorai-sitaram-and-rachel-tabak/bootstrapalgebra-pyret-2024/paperback/product-45mn9qg.html")
+    ("data-science" "https://www.lulu.com/shop/nancy-pfenning-and-ben-lerner-and-joe-politz-and-dorai-sitaram/bootstrapdata-science-pyret-2024/paperback/product-dymngdr.html")
     ("data-science-codap" "#")
+    ("reactive" "https://www.lulu.com/shop/ben-lerner-and-joe-politz-and-dorai-sitaram-and-rachel-tabak/bootstrap-reactive-pyret-2024/paperback/product-p6k2eme.html")
     ))
 
 (define *course-banners*

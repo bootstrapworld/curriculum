@@ -1,20 +1,24 @@
 = Better Modeling: College Degrees v. Income
 ++++
 <style>
-.studentAnswerMedium { min-width: 8em !important; }
+.studentAnswerMedium { min-width: 7em !important; }
 td { padding: 0 !important; }
 body.workbookpage .fitbruby { padding-top: 1.1rem; }
 .center { padding: 0; }
+
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
 </style>
 ++++
 
 [.linkInstructions]
-Open your copy of the @starter-file{alg2-states}.
+Open your copy of the @starter-file{alg2-states-fit-model}.
+
+@vspace{1ex}
 
 == Build a Model through Trial {amp} Error
-In the `# Define some rows` section, look closely at the definitions for `alaska` and `alabama`. 
-
-Add two new definitions for `MA` (row 21) and `NV` (row 28).
+Find `# Define some rows` in the Definitions Area. +
+Add two new definitions for `MA` (row 21) and `NV` (row 28), using the definitions for `alaska` and `alabama` as a model.
 
 @n Record the `college-or-higher` and `median-income` values for `MA` and `NV`, as @math{(x,y)} pairs below:
 
@@ -27,14 +31,14 @@ Add two new definitions for `MA` (row 21) and `NV` (row 28).
 @vspace{13ex}
 
 @center{
- @math{g(x) =} @fitbruby{8em}{@ifsoln{827.41}}{slope}x + @fitbruby{8em}{@ifsoln{34266.05}}{y-intercept} @hspace{3em} @show{(code '(define (g x) (+ (* (?ANS 827.41) x) (?ANS 34266.05))))} @hspace{3em} @math{S}: @fitb{}{@ifsoln{~7,504.54}}
+ @math{ma-nv(x) =} @fitbruby{8em}{@ifsoln{827.41}}{slope}x + @fitbruby{8em}{@ifsoln{34266.05}}{y-intercept} @hspace{2em} @show{(code '(define (ma-nv x) (+ (* (?ANS 827.41) x) (?ANS 34266.05))))} @hspace{2em} @math{S}: @fitb{5em}{@ifsoln{~7,504.54}}
 }
 
 @vspace{1ex}
 
 @n Identify two other states that you think would make a better model: @fitb{13em}{} and @fitb{13em}{}.
 
-- _Add two new definitions for these states to your @starter-file{alg2-states}._
+- _Add two new definitions for these states to your @starter-file{alg2-states-fit-model}._
 
 @n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
 
@@ -47,24 +51,13 @@ Add two new definitions for `MA` (row 21) and `NV` (row 28).
 @vspace{13ex}
 
 @center{
- @math{h(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{3em} @show{(code '(define (h x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{3em} @math{S}:@fitb{}{}
+ @math{other(x) =} @fitbruby{8em}{}{slope}x + @fitbruby{8em}{}{y-intercept} @hspace{2em} @show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
 }
 
-@n Adjust the slope and y-intercept of your model to get the **smallest @math{S} possible.** Write the best model (and @math{S}) below:
+@n Adjust the slope and y-intercept of your model to get the *smallest @math{S} possible.* Write the best model you find (and corresponding @math{S}) below:
 
 @center{
- @math{best(x) =} @fitbruby{7em}{}{slope}x + @fitbruby{7em}{}{y-intercept} @hspace{3em} @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{3em} @math{S}: @fitb{}{}
+ @math{best(x) =} @fitbruby{7em}{}{slope}x + @fitbruby{7em}{}{y-intercept} @hspace{2em} @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
 }
 
-== Build a Model Computationally
-
-`lr-plot` computes the __optimal linear model__ using all of the data points.
-
-@n Evaluate @show{(code '(lr-plot states-table "state" "college-or-higher" "median-income"))}. What is @math{S}? @fitb{5em}{@ifsoln{}}
-
-@n On the line below, write the optimal linear model that was computed through linear regression:
-
-@center{
- @math{optimal(x) =} @fitbruby{8em}{@ifsoln{@math{1142}}}{slope}x + @fitbruby{8em}{@ifsoln{20868.14}}{y-intercept} @hspace{5em} @show{(code '(define (optimal x) (+ (* (?ANS 1142) x) (?ANS 20868.14))))}
-}
 

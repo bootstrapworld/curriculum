@@ -603,11 +603,12 @@ The following is needed to construct documents from this repo:
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
   - If you're on MacOS, your environment is close but missing some unix tools. You'll want to install https://brew.sh/[Homebrew] first, then run the following command to add them:
 +
-  brew install gnu-sed curl make coreutils gnu-tar
+  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor
 
   - Mac users will also need to add these unix tools to their path. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
 +
   # add every gnu tool we have as a prefix to the path
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   if type brew &>/dev/null; then
     HOMEBREW_PREFIX=$(brew --prefix)
     for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
@@ -633,11 +634,11 @@ or
 
 * Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
   - on Linux/WSL: `sudo apt-get install asciidoctor`
-  - on macOS: `brew install asciidoctor`
+  - on macOS: (already installed from the list of `brew` packages above)
 
 * Lua, used for postprocessing.
   - on Linux/WSL: `sudo apt-get install lua5.4`
-  - on macOS: `brew install lua`
+  - on macOS: (already installed from the list of `brew` packages above)
 
 * Node. The standard Node offered view your OS's package manager may not
   be right: To get finer control on the Node version:
@@ -645,11 +646,10 @@ or
     https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
     to install the Node Version Manager. (Use the `curl` as you've
     already installed `curl`.)
-  - Do `nvm install 19` followed by `nvm use 19` to use version 19,
-    which is OK for now.
-  - Note: the node `canvas` package is extremely finicky with versions of node. If you are getting installation errors about `canvas` or `node-gyp`, use node v19!
+  - Do `nvm install 21` followed by `nvm use 21` to use version 21 - the most current version that we've confirmed works.
+  - Note: the node `canvas` package is extremely finicky with versions of node. If you are getting installation errors about `canvas` or `node-gyp`, call Emmanuel!
 
-* Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v14 or above!)
+* Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v21 or above!)
   - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
   - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
   - `pdf-lib`, which handles collecting all the PDFs and adding page numbers

@@ -12,6 +12,7 @@
   <script src="lib/bootstraplesson.js"></script>
   <script src="lib/langtable.js"></script>
   <style>
+
     /* override some asciidoctor and shared.less defaults */
     *:not(pre)>code { background-color: transparent !important; }
     .contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
@@ -39,6 +40,23 @@
     tbody tr:last-child { font-style: italic; }
 
     @media print {
+      /* 
+        We add "extra rows" to the bottom of the last printed page by
+        (1) adding a repeating background image that _looks_ like rows
+        (2) positioning it to line up precisely with the real table
+        (3) making sure the table and anything above it cover the BG image
+       */
+      * { -webkit-print-color-adjust: exact !important;}
+      #header, #content { background: white; }
+      body {
+        background: url(lib/images/contract-rows.png) !important;
+        background-repeat: repeat-y !important;
+        background-position-y: 15px !important;
+        background-size: 7.5in !important;
+        -webkit-print-color-adjust: exact !important;
+      }
+
+      #body { padding: 0 !important; }
       #search { display: none; }
       tbody { 
         break-inside: avoid !important; 
