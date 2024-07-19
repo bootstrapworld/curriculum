@@ -2,51 +2,21 @@
 
 ++++
 <style>
-.FillVerticalSpace { grid-gap: 30px; margin: 25px 0; }
-
-td {
-  border: none !important;
-  background-image:
-    linear-gradient(lightblue 2px, transparent 2px),
-    linear-gradient(270deg, lightblue 2px, transparent 2px),
-    linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
-    linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-  background-size: 300px 300px, 300px 300px, 50px 50px, 50px 50px;
-  background-position: -150px 135px;
-  max-height: 3.2in;
-  max-width: 3.2in;
+.graph td {
+  width: 3.2in;
+  height: 3in;
 }
 
-td p.tableblock { position: absolute; }
-
-/* Add labels for axes */
-td::before, td::after { display: flex; font-style: italic; }
-td::before {
-  content: 'y';
-  justify-content: center;
-  align-items: center;
-  margin-right: 2em;
-  margin-top: -10em;
-    -webkit-transform:rotate(270deg);
-    -moz-transform:rotate(270deg);
-    -o-transform: rotate(270deg);
-    -ms-transform:rotate(270deg);
-    transform: rotate(270deg);
-}
-td::after {
-  content: 'x';
-  align-items: start;
-  justify-content: right;
-  margin-top: 2em;
-  margin-right: -0.5em;
-}
+.graph td::before { left: 47% !important; }
+.graph td::after { top: 47% !important; }
 </style>
 ++++
+
 The standard form of a periodic model is @math{f(x) = a sin(b⋅(x - h)) + k}. On this page, we'll explore the role of @vocab{amplitude} @math{a} in periodic functions. @link-instructions{Open the Desmos File *Exploring Periodic Functions*. You should be on *Slide 2: Graphing Periodic Models* and see four sliders for @math{a}, @math{b}, @math{h}, and @math{k}.}
 
 @n Setting *@math{b=1}, @math{h=0}, and @math{k=0}*, change @math{a} to 0, -10, 5, and 10, graphing each curve below. **For each curve, label the coordinates at x=1, @math{-\pi}, and @math{\pi}.**
 
-[.FillVerticalSpace, cols="1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1", frame="none"]
 |===
 | @math{a=0}  | @math{a=-10}
 | @math{a=5}  | @math{a=10}
