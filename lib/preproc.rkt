@@ -1753,9 +1753,9 @@
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (display "\n[.actually-openblock.indentedpara]\n=====\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n====\n" o))]
+                              (display "\n=====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
