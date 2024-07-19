@@ -510,8 +510,17 @@ const DSdesmos = {
     "codap":{
       "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
     }
-  }
-}
+  },
+   "histograms":{
+    "title": "Exploring Bin Size (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6698345382e60ebed421ade9"
+    },
+    "codap":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6698345382e60ebed421ade9"
+    }
+  },
+ }
 
 const Desmos = {
   "images-code":{
