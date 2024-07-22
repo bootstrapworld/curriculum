@@ -1643,6 +1643,8 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
+                            (check-link (build-path *containing-directory* "workbook" "workbook.pdf"))
+                            (check-link (build-path *containing-directory* "workbook" "workbook-long.pdf"))
                             (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
@@ -2126,6 +2128,8 @@
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
+                (check-link (build-path *containing-directory* "workbook" "workbook.pdf"))
+                (check-link (build-path *containing-directory* "workbook" "workbook-long.pdf"))
                 (print-workbook-info *target-pathway* o)
                 (print-other-resources-intro o)
                 (print-other-resources *target-pathway* *proglang* o))
