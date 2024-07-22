@@ -348,7 +348,7 @@
 
 (define (math-italic s #:asciidoc? [asciidoc? #t])
   (if asciidoc?
-      (enclose-tag "i" "" s)
+      (enclose-tag "i" ".usemathjaxfont" s)
       (string-append "<i>" s "</i>")))
 
 (define (math-unicode-if-possible text #:asciidoc? [asciidoc? #t])
