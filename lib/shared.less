@@ -4,7 +4,7 @@
 
 /************************************************************************************
  * IMPORT FONTS
- */
+
 
 @font-face {
   font-family: 'MJXTEX';
@@ -20,7 +20,7 @@
   font-family: 'MJXTEX-B';
   src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
 }
-
+ */
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
@@ -85,10 +85,10 @@ body {
   .quad { display: inline-block; }
   
   /* Make .mathunicode and MathJax look similar */
-  .MathJax, .mathunicode { 
-    font-family: MJXZERO, 'MJXTEX'; font-size: inherit !important; 
+  .MathJax, .mathunicode {
+    display: inline-block;
     font-weight: normal !important;
-    i { font-family: 'MJXTEX-I' }
+
     .overbar {
       border-top: 1px solid;
       display: inline-block;
@@ -96,8 +96,13 @@ body {
       margin-left: 2px;
     }
     sub { font-size: 65% !important; }
-  }  
-
+  }
+  .MathJax { 
+      font-family: MJXZERO, 'MJXTEX'; 
+      font-size: inherit !important;
+  }
+  .mathunicode i { font-family: 'MJXTEX-I' }
+  
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
@@ -266,6 +271,7 @@ lines on some browsers */
 }
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
+  display:            inline-block;
   bottom:             -11px;
   left:               0;
   font-size:          9.5px;
@@ -277,7 +283,12 @@ lines on some browsers */
   white-space:        nowrap;
   user-select:        none;
 }
+/* Rubies are sensitive to line-height, so force
+  the same font and special superscript behavior 
+*/
+.ruby * { font-family: @text-font !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
+
 .fitb.stretch, .fitbruby.stretch { 
   margin-left:        5px; 
   vertical-align:     baseline; 
@@ -664,7 +675,7 @@ body.workbookpage {
   table.graph {
     grid-gap: 20px; 
     margin-top: 5px;
-    td p.tableblock { position: absolute; background: rgba(255,255,255,0.7); }
+    td p.tableblock { position: absolute; background: white; }
     td {
       border: none !important;
       background-image:
