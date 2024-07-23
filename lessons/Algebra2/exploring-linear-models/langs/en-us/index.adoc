@@ -36,12 +36,11 @@
 
 | Key Points For The Facilitator
 |
-- The math content of this lesson is primarily a review from Algebra 1.
-- This lesson introduces necessary programming skills while students practice exploring _linear relationships_.
 - This lesson establishes a structure for exploring relationships in data that students will make use of in subsequent explorations:
   	* build a model from samples
   	* fit a model
   	* improve upon the model
+- This lesson introduces necessary programming skills while students practice exploring _linear relationships_, the math content of which is primarily a review from Algebra 1.
 - Two of the starter files referenced in this file pull data from the same spreadsheet.
   * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file.
   * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
@@ -651,8 +650,6 @@ Models are only useful if know how to use them!
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
 }
 
-
-
 === Synthesize
 
 @QandA{
@@ -673,9 +670,29 @@ Students are reminded of the three forms of linear models available to us, discu
 
 When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
 
-So far, we've focused on models using the *Slope-Intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment.
+So far we have only discussed vertical shifts, but it is also possible to shift a line or curve horizontally. 
 
-But depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
+The *Slope-Intercept* form of the line we've been using tells us about the slope (@math{m}) and the vertical shift. It is also possible to shift a line or curve horizontally, and for some of the non-linear models we will be exploring in this course, identifying the horizontal shift will be important. To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
+
+@lesson-point{
+Using the form @math{f(x) = m(x-h) + k}@hspace{1em} allows us to change both the horizontal shift (@math{h}) and the vertical shift (@math{k}).
+}
+
+_Note: When the horizontal shift is zero, we can safely remove (@math{h}) from the equation. That's exactly what we've been doing with our Slope-Intercept form._
+
+@lesson-instruction{
+- Let's take a moment to explore how horizontal shifts work with linear functions.
+- Complete @opt-starter-file{alg2-horizontal}.
+}
+
+@QandA{
+@Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
+@A{No. Because lines go on forever without changing direction, horizontal shifts can always be accounted for with vertical shifts. We can prove this to ourselves algebraically because if we distribute the @math{m} in the equation @math{f(x) = m(x-h) + k}, we get @math{f(x) = mx - mh + k} and since @math{mh} and @math{k} will always be numbers, we can just add them together to get the y-intercept.} 
+}
+
+We will mostly be using *Slope-Intercept* form of the line in this course, because it's the simplest form that is defined in terms of the response variable, making it most compatible with the programming environment
+
+But, depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
 
 @slidebreak
 
