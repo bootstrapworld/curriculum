@@ -22,6 +22,11 @@
   src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
 }
 
+@font-face {
+  font-family: 'MJXTEX-BI';
+  src: url("./fonts/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
@@ -98,11 +103,15 @@ body {
     }
     sub { font-size: 65% !important; }
   }
+  /* Use MJX fonts in MathJax, or within .usemathjaxfont. Special-case for italic+bold */
   .MathJax { 
       font-family: MJXZERO, 'MJXTEX'; 
       font-size: inherit !important;
   }
-  .mathunicode .usemathjaxfont { font-family: 'MJXTEX-I' }
+  .mathunicode .usemathjaxfont { font-family: 'MJXTEX'; }
+  .mathunicode i.usemathjaxfont { font-family: 'MJXTEX-I'; }
+  b .mathunicode .usemathjaxfont, b .MathJax { font-family: 'MJXTEX-B'; }
+  b .mathunicode i.usemathjaxfont { font-family: 'MJXTEX-BI'; }
   
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
