@@ -328,7 +328,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "{sp}^")]
+            (enclose-tag "sup" "" (string-append ss "{sp}"))]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -339,7 +339,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "~" ss "~")]
+            (enclose-tag "sub" "" ss)]
           [else (string-append "<sub>" ss "</sub>")])))
 
 (define (math-sqrt x)
@@ -348,7 +348,7 @@
 
 (define (math-italic s #:asciidoc? [asciidoc? #t])
   (if asciidoc?
-      (enclose-tag "i" ".usemathjaxfont" s)
+      (enclose-tag "i" "" s)
       (string-append "<i>" s "</i>")))
 
 (define (math-unicode-if-possible text #:asciidoc? [asciidoc? #t])
@@ -415,7 +415,8 @@
                                                  #:asciidoc? asciidoc?)]
                                 [(member c *mathjax-chars-that-need-flanking-space*)
                                  (read-char i)
-                                 (string #\space c #\space)]
+                                 (if (char=? c #\-) " − "
+                                     (string #\space c #\space))]
                                 [(char-alphabetic? c)
                                  (read-char i)
                                  (math-italic (string c) #:asciidoc? asciidoc?)]
