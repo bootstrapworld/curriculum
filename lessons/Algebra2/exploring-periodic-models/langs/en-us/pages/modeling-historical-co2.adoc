@@ -8,7 +8,7 @@ table { margin-left: 2em; margin-top: 1ex; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
 .fitb { min-width: 2em; }
-.studentAnswerMedium { min-width: 75pt !important; }
+.studentAnswerMedium { min-width: 70pt !important; }
 </style>
 ++++
 
@@ -51,10 +51,10 @@ _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 |===
 | *Function Notation*
 |
-@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{4.13}}{amplitude} @math{\times}
 @math{sin}(
- @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{@c}}{vertical shift}
+ @fitbruby{70pt}{@ifsoln{6.28}}{frequency} (x - @fitbruby{70pt}{@ifsoln{2023.1}}{horizontal shift})
+) + @fitbruby{70pt}{@ifsoln{419.87}}{vertical shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
@@ -63,7 +63,7 @@ _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 |===
 
 == Creating Hybrid Models
-*We can think of the standard form @math{f(x) = A \sin(B(x - h)) + k} as being the sum of two functions: @math{p(x) = A \sin(B(x - h))} and @math{q(x) = k}.*
+*We can think of @math{f(x) = A \sin(B(x - h)) + k} as being the sum of _two_ functions: @math{p(x) = A \sin(B(x - h))} and @math{q(x) = k}.*
 
 @n Which function defines the "up and down" wave (@math{p} or @math{q})? @fitb{4em}{@ifsoln{@math{p}}} Which function defines the line the wave "wraps around"? @fitb{}{@ifsoln{q}}
 
@@ -74,16 +74,15 @@ _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 @n What do you think would happen if @math{q} were changed to @math{q(x) = 2x + -3000} @fitb{}{@ifsoln{The wave would wrap around a sloping line}}
 
 @star Define a NEW function `hybrid` in Pyret, which combines your periodic model with the optimal linear one. Write your new model below, in Function or Pyret notation:
-
-@ifnotsoln{
-
-`fun hybrid(x):` @fitb{}{} +
-`end`
-}
-
+[.FillVerticalSpace, cols="^1a", frame="none"]
+|===
+|
 @ifsoln{
-f(4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end
-@hspace{2em} **OR** @hspace{2em} @math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}
-}
+`fun hybrid(4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end`
 
+**OR**
+
+@math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}
+}
+|===
 What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} 

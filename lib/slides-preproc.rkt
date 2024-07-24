@@ -694,7 +694,7 @@
                               (set! *autonumber-index* n))]
                            [(string=? directive "star")
                             (display "★" o)]
-                           [(string=? directive "strategy")
+                           [(string=? directive "strategy-i")
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)])
                               (ensure-teacher-notes)

@@ -261,7 +261,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide') then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide' and nested_in ~= 'strategy') then
             terror('@slidebreak inside @' .. nested_in)
           end
           local curr_slide = insert_slide_break()
@@ -276,6 +276,15 @@ local function get_slides(lsn_plan_adoc_file)
           local arg = read_group(i, directive, not 'scheme', 'multiline')
           arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. arg .. '}\n@slidebreak\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
+        elseif directive == 'strategy' then
+          if nested_in and nested_in ~= 'ifproglang' then
+            terror('@strategy inside @' .. nested_in)
+          end
+          local arg1 = read_group(i, directive)
+          ignore_spaces(i)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
+          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. '@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n@slidebreak\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
         elseif directive == 'A' then
@@ -286,14 +295,12 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg), directive, 'dont count images')
           curr_slide.text = curr_slide.text .. '}'
-        elseif directive == 'strategy' then
+        elseif directive == 'strategy-i' then
           local arg1 = read_group(i, directive)
-          ignore_spaces(i)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
-
         else
           if directive == 'image' then
             -- dead?
