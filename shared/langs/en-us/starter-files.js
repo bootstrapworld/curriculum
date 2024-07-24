@@ -975,6 +975,12 @@ const Projects = {
 }
 
 const Alg2 = {
+  "alg2-horizontal" : {
+    "title" : "Exploring Horizontal Shift in Linear Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/669eaa60c1c9bca9920e72ea"
+    }
+  },
   "alg2-cheerios" : {
     "title" : "Cheerios Starter File",
     "pyret" : {
@@ -1014,7 +1020,7 @@ const Alg2 = {
   "alg2-covid-desmos" : {
     "title" : "Modeling Covid Spread (Desmos)",
     "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/666c4dbf08e1286b11f2507a"
     }
   },
   "alg2-countries": {
