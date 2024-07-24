@@ -77,7 +77,7 @@ body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: xx-small; top: -0.65em; left: 1px; }
+  sup     { font-size: xx-small; top: -0.8em; left: 1px; }
   sub     { font-size: xx-small; bottom: -0.35em; }
   code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
   mark    { background: none; color: inherit; }
@@ -90,26 +90,28 @@ body {
   .ulist p  { margin: 5px 0px; }
   .quad { display: inline-block; }
   
-  /* Make .mathunicode and MathJax look similar */
+  /**************************************************
+   *  Math rendering 
+   */
   .MathJax, .mathunicode {
     display: inline-block;
     font-weight: normal !important;
+    font-family: MJXZERO, 'MJXTEX';
+    line-height: 0; 
 
     .overbar {
       border-top: 1px solid;
       display: inline-block;
-      line-height: 1.2;
+      line-height: 1.6;
       margin-left: 2px;
     }
     sub { font-size: 65% !important; }
   }
-  /* Use MJX fonts in MathJax. Special-case for italic+bold */
-  .MathJax { 
-      font-family: MJXZERO, 'MJXTEX'; 
-      font-size: inherit !important;
+  .mathunicode { 
+    letter-spacing: -0.02em;
+    /*font-size: calc(100% - 1px);*/
+    i { font-family: 'MJXTEX-I'; }
   }
-  .mathunicode { font-family: 'MJXTEX'; }
-  .mathunicode i { font-family: 'MJXTEX-I'; }
   b, strong {
     .mathunicode, .MathJax, .MJX-TEX { font-family: 'MJXTEX-B'; }
     .mathunicode i { font-family: 'MJXTEX-BI'; }
