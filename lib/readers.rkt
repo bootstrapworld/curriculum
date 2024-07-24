@@ -303,7 +303,7 @@
 (define *mathjax-chars-that-need-flanking-space*
   '(
     #\+
-    #\-
+    ;#\-
     #\=
     ))
 
@@ -415,8 +415,10 @@
                                                  #:asciidoc? asciidoc?)]
                                 [(member c *mathjax-chars-that-need-flanking-space*)
                                  (read-char i)
-                                 (if (char=? c #\-) " − "
-                                     (string #\space c #\space))]
+                                 (string #\space c #\space)]
+                                [(char=? c #\-)
+                                 (read-char i)
+                                 "−"]
                                 [(char-alphabetic? c)
                                  (read-char i)
                                  (math-italic (string c) #:asciidoc? asciidoc?)]
