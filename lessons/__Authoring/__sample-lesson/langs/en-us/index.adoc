@@ -97,6 +97,26 @@ Use `lesson-point` to callout a short-but-important points.
 Use the `lesson-instruction` class for prose aimed directly at telling students what to do
 }
 
+@math{2^{(x - h)}}
+=== Math Notation
+
+The build system uses MathJax (a powerful and complex JS library for rendering math), but _only when it needs to_. For the simpler stuff, it uses its own system that relies on standard Unicode font glyphs. *All of this happens transparently*:
+
+[cols="^1a,^1a"]
+|===
+| Style
+| Examples
+
+| Regular
+| @math{f(x) = 1 \times 2}, @math{height(x) = 2\pi + 4x^(x-h)}, @math{\mbox{permute-wo-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}
+| Bold
+| **@math{f(x) = 1 \times 2}, @math{height(x) = 2\pi + 4x^(x-h)}, @math{\mbox{permute-wo-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}**
+| Italic
+| __@math{f(x) = 1 \times 2}, @math{height(x) = 2\pi + 4x^(x-h)}, @math{\mbox{permute-wo-replace}(\mbox{items}, \mbox{choose}) = \frac{\mbox{items}!}{(\mbox{items} - \mbox{choose})!}}__
+|===
+
+
+
 === Common Misconceptions
 
 What are the most likely places kids will get stuck? Why? How do we help them?
