@@ -696,16 +696,18 @@
                             (display "★" o)]
                            [(string=? directive "strategy-i")
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
-                                   [text (read-group i directive #:multiline? #t)])
-                              (ensure-teacher-notes)
-                              (newline *teacher-notes*)
-                              (newline *teacher-notes*)
-                              (display "**" *teacher-notes*)
-                              (expand-directives:string->port title *teacher-notes*)
-                              (display "**\n" *teacher-notes*)
-                              (expand-directives:string->port text *teacher-notes*)
-                              (newline *teacher-notes*)
-                              (exit-teacher-notes))]
+                                   [text (read-group i directive #:multiline? #t)]
+                                   [o o])
+                              (unless *pd?* (ensure-teacher-notes)
+                                (set! o *teacher-notes*))
+                              (newline o)
+                              (newline o)
+                              (display "**" o)
+                              (expand-directives:string->port title o)
+                              (display "**\n" o)
+                              (expand-directives:string->port text o)
+                              (newline o)
+                              (unless *pd?* (exit-teacher-notes)))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (string=? directive "opt")
