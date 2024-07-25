@@ -355,7 +355,7 @@ lines on some browsers */
 * LESSON PAGE STYLES
 */
 .LessonPlan {
-  font-size: 12pt;
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
   /* The summary table at the top of each lesson */
   .preamble {
@@ -1178,6 +1178,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     transform: scale(1.25); 
   }
 
+  /* Lesson plans need to be scaled higher to match the 12pt font used elsewhere on the site */
+  body.LessonPlan #content {
+    transform-origin: left top; 
+    transform: scale(calc(12 / 9));     
+  }
   /********************************************************************
    *  Collapsing Headers 
    */
