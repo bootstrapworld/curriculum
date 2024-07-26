@@ -274,7 +274,7 @@ local function get_slides(lsn_plan_adoc_file)
             terror('@pd-slide inside @' .. nested_in)
           end
           local arg = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. arg .. '}\n@slidebreak\n'
+          arg = '@pd-slide-i{@slidebreak{' .. course_string .. ' Title and Body}\n' .. arg .. '}\n@slidebreak\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'strategy' then
           if nested_in and nested_in ~= 'ifproglang' then
@@ -283,7 +283,7 @@ local function get_slides(lsn_plan_adoc_file)
           local arg1 = read_group(i, directive)
           ignore_spaces(i)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@pd-slide-i{@slidebreak{Core Title and Body}\n' .. '@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n@slidebreak\n'
+          arg = '@pd-slide-i{@slidebreak{' .. course_string .. ' Title and Body}\n' .. '@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n@slidebreak\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)

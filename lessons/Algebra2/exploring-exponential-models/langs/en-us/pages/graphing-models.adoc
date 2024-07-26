@@ -1,9 +1,12 @@
 = Graphing Exponential Models: __f(x) = ab^x^ + k__
 ++++
 <style>
+/* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; padding-top: 2px !important; }
 .autonum:after { content: ')' !important; }
-.fitb, .fitb.stretch::after, .fitbruby.stretch::after { padding-top: 0.9rem; }
+
+/* Shrink some vertical space - this page is packed! */
+.fitb, .fitb.stretch::after, .fitbruby.stretch::after { padding-top: 0.8rem; }
 
 /* Cut the padding under each section */
 .sect1 { padding: 0 !important; }
@@ -19,8 +22,7 @@
 
 [.linkInstructions]
 For this page, you'll need to have *Slide 3: Exploring Exponential Models* of *Modeling Covid Spread (Desmos)* open on your computer. +
-The curve you'll see is the graph of @math{h(x) = 2^x}. Another curve @math{f(x)} is hiding behind it. +
-For starters, the values of the coefficients of @math{f(x)} have been set to make it equivalent to @math{h(x)} so @math{k=0}, @math{b=2} and @math{a=1}
+The curve you'll see is the graph of @math{h(x) = 2^x}. Another curve @math{f(x)} is hiding behind it with identical coefficients: @math{k=0}, @math{b=2} and @math{a=1}.
 
 == Base @math{b}
 @n Make sure @math{k = 0} and @math{a=1}. Experiment with @math{b}. *For what values of @math{b} is the function _undefined_*, with the line disappearing? @fitb{}{@ifsoln{negative}}
@@ -30,7 +32,9 @@ For starters, the values of the coefficients of @math{f(x)} have been set to mak
 
 [.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
-| @math{b=0.5} | @math{b=1}  | @math{b=2}
+| @ifnotsoln{@math{b=0.5}} @ifsoln{@image{../images/b.5.png, 170}}
+| @ifnotsoln{@math{b=1}}   @ifsoln{@image{../images/b1.png,  170}}
+| @ifnotsoln{@math{b=2}}   @ifsoln{@image{../images/b2.png,  170}}
 |===
 
 @n What does @math{b} tell us about an exponential function, when @math{b > 1}? @fitb{}{@ifsoln{How quickly the function grows - }} +
@@ -47,7 +51,9 @@ For starters, the values of the coefficients of @math{f(x)} have been set to mak
 
 [.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
-| @math{k=-10} | @math{k=0}  | @math{k=10}
+| @ifnotsoln{@math{k=-10}} @ifsoln{@image{../images/k-10.png, 170}}
+| @ifnotsoln{@math{k=0}}   @ifsoln{@image{../images/k0.png,   170}}
+| @ifnotsoln{@math{k=10}}  @ifsoln{@image{../images/k10.png,  170}}
 |===
 
 @n What does @math{k} tell us about an exponential function? @fitb{}{@ifsoln{How far the parabola is shifted up (positive k) or down (negative k),}} +
@@ -60,7 +66,9 @@ For starters, the values of the coefficients of @math{f(x)} have been set to mak
 
 [.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
-| @math{a=10} | @math{a=2}  | @math{a=-5}
+| @ifnotsoln{@math{a=10}}  @ifsoln{@image{../images/a10.png,  170}}
+| @ifnotsoln{@math{a=2}}   @ifsoln{@image{../images/a2.png,   170}}
+| @ifnotsoln{@math{a=-5}}  @ifsoln{@image{../images/a-5.png,  170}}
 |===
 
 @n What does @math{a} tell us about an exponential function? @fitb{}{@ifsoln{The initial value of the function, when x=0}}
