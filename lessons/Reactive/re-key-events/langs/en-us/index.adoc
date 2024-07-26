@@ -25,9 +25,9 @@ Students learn about _events_, and add key-event handling to their games.
 === Launch 
 We’ve already seen one kind of interactivity in our programs: getting the next state from the current state on a tick-event. This is perfect for animations that happen on their own, without any user intervention. In a game, that might be clouds moving across the sky or a ball bouncing on its own.
 
-An important kind of behavior in _interactive_ programs is to respond user input, such as keypresses. A keypress - like the tick of a clock - is a kind of @vocab{event}, and we’ll re-use the idea of an event handler like `on-tick` and a function like `next-state-tick`.
+An important kind of behavior in _interactive_ programs is to respond user input, such as key-presses. A key-press - like the tick of a clock - is a kind of @vocab{event}, and we’ll re-use the idea of an event handler like `on-tick` and a function like `next-state-tick`.
 
-For key-events, the event @vocab{handler} is called `on-key`, and our function `next-state-key` will compute the next state from the current one after a key event. We’re going to use this idea to build up a @vocab{reactor} with a character moving in two dimensions, where the movement is triggered by keypresses.
+For key-events, the event @vocab{handler} is called `on-key`, and our function `next-state-key` will compute the next state from the current one after a key event. We’re going to use this idea to build up a @vocab{reactor} with a character moving in two dimensions, where the movement is triggered by key-presses.
 
 @slidebreak
 
@@ -124,13 +124,13 @@ draw-state(
 
 @slidebreak
 
-As with tick-events, we can manually pass keypress strings into this function, see what the next state would be, and even draw that state to see what it looks like.
+As with tick-events, we can manually pass key-press strings into this function, see what the next state would be, and even draw that state to see what it looks like.
 
-We still want to hook this function up to a reactor, so that it actually _handles keypresses_ from a running game. To do this, we use the `on-key` option to specify that our `next-state-key` function should be called when the user presses a key.
+We still want to hook this function up to a reactor, so that it actually _handles key-presses_ from a running game. To do this, we use the `on-key` option to specify that our `next-state-key` function should be called when the user presses a key.
 
 @slidebreak
 
-We don’t need to specify an `on-tick` handler, since for now the only movement in our program comes from keypresses). Our reactor with a `to-draw` and `on-key` handler looks like this:
+We don’t need to specify an `on-tick` handler, since for now the only movement in our program comes from key-presses). Our reactor with a `to-draw` and `on-key` handler looks like this:
  
 ```
 char-react = reactor:
@@ -190,7 +190,7 @@ Optional: implement boundaries to keep character onscreen, using the same ideas 
 Optional: use `num-to-string` and `text` to display the position at the top of the window.
 }
 
-== Combining Ticks and Keypresses @duration{45 minutes}
+== Combining Ticks and Key-presses @duration{45 minutes}
 
 === Overview
 This activity introduces students to Reactor programs that use key-events _and_ tick events. Students create a "digital pet", which responds to key commands but also changes state on its own.
@@ -207,7 +207,7 @@ Open the @starter-file{virtual-pet}. Run it. You will see a frame come up, showi
 Notice that not much is happening! To make this game more interesting, we want to add three behaviors to it:
 
 - as time passes, the hunger and sleep values should decrease
-- a human player should be able to increase hunger and sleep through keypresses
+- a human player should be able to increase hunger and sleep through key-presses
 - the image of the cat should change when hunger and sleep both reach 0 (and the player loses the game)
 
 === Investigate
@@ -249,7 +249,7 @@ The worksheet identifies that both hunger and sleep are changing in new ways. Si
 
 Now we need to identify the parts that we need to write or update. We don’t need to change the data definition at all, because no new fields were added!
 
-We _may_ need to update the `draw-state` function, since the size of the bars changes, and we will definitely need to write the `next-state-tick` function so things happen over time. We do not need to address anything about keypresses with this feature, so `next-state-key` is untouched.
+We _may_ need to update the `draw-state` function, since the size of the bars changes, and we will definitely need to write the `next-state-tick` function so things happen over time. We do not need to address anything about key-presses with this feature, so `next-state-key` is untouched.
 
 Since `next-state-tick` has been added for this feature, *we need to add a `on-tick` handler to the reactor.*
 
@@ -312,7 +312,7 @@ Next, we’ll add key events to the game so the player can increase them so they
 @lesson-instruction{
 - Turn to @printable-exercise{animation-worksheet.adoc} and @printable-exercise{animation-worksheet-samples.adoc, Animation Worksheet 2} in your workbook.
 - Fill in the first page to plan out the following extension:
-  * On a keypress, if the user pressed "`f`" (for "`feed`"), `hunger` should increase by 10.
+  * On a key-press, if the user pressed "`f`" (for "`feed`"), `hunger` should increase by 10.
   * If the user pressed "`s`" (for "`sleep`"), `sleep` should increase by 5.
   * If the user presses any other keys, nothing should change.
 }
@@ -362,5 +362,5 @@ You can work through them all if you like, or come up with an idea for your own 
 == Additional Exercises
 
 - Find your own images to create a different virtual pet Stop the bars from overflowing some maximum (produce something like this completed game). 
-- Add an `x-coord` to the `PetState` so the pet moves around, either on keypress or based on clock ticks. 
+- Add an `x-coord` to the `PetState` so the pet moves around, either on key-press or based on clock ticks.
 - Add a `costume` to the `PetState`, then change the draw-pet function so that it changes the costume based on the pet’s mood (`if a-pet.hunger <= 50`, show a picture of the pet looking hungry)

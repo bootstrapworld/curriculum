@@ -2,14 +2,18 @@
 
 ++++
 <style>
+/* Shrink Images */
 #content img {width: 75%; height: 75%;}
+
+/* Make autonums inside tables look consistent with those outside */
 body.workbookpage td .autonum:after { content: ')'; }
+
 table table td { height: 4ex; }
 .fitbruby{ padding-top: 1.5em !important; }
 </style>
 ++++
 
-Decide whether each representation describes a **linear** function, a **quadratic** function, or neither. If the function is quadratic, identify whether the *form* used is Vertex, Standard, or Factored.
+Decide whether each representation describes a *linear* function, a *quadratic* function, or neither. If the function is quadratic, identify whether the *form* used is Vertex, Standard, or Factored.
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
 |===
@@ -23,7 +27,8 @@ Decide whether each representation describes a **linear** function, a **quadrati
 ! Neither
 !===
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Standard}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{The parabola opens down}}{_If Quadratic,_ what does the form tell you?}
 
 | @math{g(x) = 2(x − 11)(x − 243)}
 
@@ -37,7 +42,8 @@ Decide whether each representation describes a **linear** function, a **quadrati
 // need empty line here so the closing table block isn't swallowed
 !===
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{The roots are 11 and 243}}{_If Quadratic,_ what does the form tell you?}
 
 | @math{h(y) = 100 - 4y}
 
@@ -52,6 +58,7 @@ Decide whether each representation describes a **linear** function, a **quadrati
 !===
 
 @fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
 
 | @math{z(x) = \frac{3}{5}x + 7}
 
@@ -65,6 +72,7 @@ Decide whether each representation describes a **linear** function, a **quadrati
 !===
 
 @fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
 
 | @show{(code `(define (graph x) (* 12 x)))}
 
@@ -79,33 +87,9 @@ Decide whether each representation describes a **linear** function, a **quadrati
 !===
 
 @fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
 
-| @show{(code `(define (m p) (* 2 (* (- x 5) (- x 16)))))}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-
-!===
-
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-
-| @math{r(s) = 42^2 - 3s}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-!===
-
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-
-| @show{(code `(define (f x) (* 2 (sqr x) + 15)))}
+| @show{(code `(define (m p) (* 2 (* (- p 5) (- p 16)))))}
 
 [cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
 !===
@@ -116,20 +100,33 @@ Decide whether each representation describes a **linear** function, a **quadrati
 
 !===
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{The roots are 5 and 16}}{_If Quadratic,_ what does the form tell you?}
 
-| @show{(code `(define (f x) (+ (* 14 x) 22)))}
+| @math{r(s) = 42(s - 10)^2 - 3}
 
 [cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
+! Linear
+! @ifsoln-choice{Quadratic}
 ! Neither
-
-// need empty line here so the closing table block isn't swallowed
 !===
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{The vertex is at (10, -3)}}{_If Quadratic,_ what does the form tell you?}
+
+| @show{(code `(define (f x) (+ (* 2 (sqr (- x 1))) 15)))}
+
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! @ifsoln-choice{Quadratic}
+! Neither
+!===
+
+@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
+@fitbruby{80%}{@ifsoln{The vertex is at (-1, 15)}}{_If Quadratic,_ what does the form tell you?}
 
 |===

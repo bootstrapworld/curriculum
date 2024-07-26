@@ -83,7 +83,7 @@ for _,adocfile in ipairs(workbookpage_adocs) do
 
   local proglangarg = 'pyret'
   for _,proglang in ipairs(all_proglangs) do
-    local f = lessondirectory .. '.cached/.proglang-' .. proglang
+    local f = lessondirectory .. '/.cached/.proglang-' .. proglang
     if file_exists_p(f) then
       proglangarg = proglang; break
     end

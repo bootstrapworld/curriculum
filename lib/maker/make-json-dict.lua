@@ -2,11 +2,9 @@
 
 local dict_js_file = ...
 
-if not dict_js_file then
-  dict_js_file = 'dictionaries.js'
-end
+local make_dir = 'lib/maker/'
 
-dofile('lib/maker/read-alignments.lua')
+dofile(make_dir .. 'read-alignments.lua')
 
 local o = io.open(dict_js_file, 'w+')
 
