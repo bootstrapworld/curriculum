@@ -1,0 +1,78 @@
+= Make Your Own Ferris Wheel!
+++++
+<style>
+/* Shorten fill in the blanks */
+.studentAnswerMedium { min-width: 70pt !important; }
+.studentAnswerShort { min-width: 55pt !important; }
+
+/* Make code have no background */
+.codetwo { background: none; }
+
+/* Tweak tables*/
+table { margin-top: 5px; }
+table tr td { padding: .3em .625em; }
+.matching td { height: 100px; }
+</style>
+++++
+
+== Matching Terms
+@n The Ferris Wheel is being upgraded! Match the upgrade on the left to the property that it will change on the right. *NOTE:* some upgrades might change more than one property!
+
+[.matching, cols=">.^7a,^.^2a,4,^.^1a,.^8a",stripes="none",grid="none",frame="none"]
+|===
+| The wheel is being raised _higher_
+| *1* @ifsoln{A & B}
+|| *A*
+| @vocab{midline}
+
+|
+|
+|| *B*
+| @vocab{vertical shift}
+
+| The wheel is being made to spin _faster_
+| *2* @ifsoln{C & E}
+|| *C*
+| @vocab{frequency}
+
+|
+|
+|| *D*
+| @vocab{amplitude}
+
+| The wheel is being made _larger_
+| *3* @ifsoln{D}
+||*E*
+| @vocab{period}
+|===
+
+== Design a New Wheel
+
+@n _Design your own Ferris Wheel!_ Fill in the table below, then **trade papers with someone else**.
+
+[cols="^1a,^1a,^1a"]
+|===
+| Radius 		| Altitude of Center 	| Speed
+
+| @vspace{10ex}	|					|
+|===
+
+@n Based on the table above, what function will model the height of the wheel over time?
+
+@vspace{1ex}
+
+[cols="1a, ^.>10a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+@hspace{2em}
+@math{f(x) =} @fitbruby{10em}{}{amplitude} @math{\times}
+@math{sin}(
+ @fitbruby{10em}{}{frequency} (x - @fitbruby{10em}{}{horizontal shift})
+) + @fitbruby{10em}{}{vertical shift}
+
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code '(define (f x) (+ (* (?ANS "") (sin (* (?ANS "") (- x (?ANS (* "" PI)))))) (?ANS ""))))}
+|===

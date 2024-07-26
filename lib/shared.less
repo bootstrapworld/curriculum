@@ -3,6 +3,25 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
+ * IMPORT FONTS
+
+
+@font-face {
+  font-family: 'MJXTEX';
+  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'MJXTEX-I';
+  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'MJXTEX-B';
+  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
+}
+ */
+/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -66,8 +85,10 @@ body {
   .quad { display: inline-block; }
   
   /* Make .mathunicode and MathJax look similar */
-  .MathJax, .mathunicode { 
-    font-family: MJXZERO, 'MJXTEX'; font-size: inherit !important; 
+  .MathJax, .mathunicode {
+    display: inline-block;
+    font-weight: normal !important;
+
     .overbar {
       border-top: 1px solid;
       display: inline-block;
@@ -75,8 +96,13 @@ body {
       margin-left: 2px;
     }
     sub { font-size: 65% !important; }
-  }  
-
+  }
+  .MathJax { 
+      font-family: MJXZERO, 'MJXTEX'; 
+      font-size: inherit !important;
+  }
+  .mathunicode i { font-family: 'MJXTEX-I' }
+  
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
@@ -87,7 +113,12 @@ body {
   }
 
   #content { margin: 0; }
+  /* 
+    When used in a header, exponents should be medium 
+    and there's no need for a bottom border 
+  */
   #header>h1:only-child { border-bottom: none; }
+  #header sup { font-size: medium; }
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
@@ -124,9 +155,10 @@ body {
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
   #outOfDate a {color: lightblue;}
 
+  /* images and floated images */
   .left  { text-align: left  !important; }
   .right { text-align: right !important; }
-  .right img { margin-left: 15px; }
+  .right img { margin-left: 1em; margin-bottom: 1em; }
   .center, .centered-image {
     display:          block;
     margin-left:      auto;
@@ -239,6 +271,7 @@ lines on some browsers */
 }
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
+  display:            inline-block;
   bottom:             -11px;
   left:               0;
   font-size:          9.5px;
@@ -250,7 +283,12 @@ lines on some browsers */
   white-space:        nowrap;
   user-select:        none;
 }
+/* Rubies are sensitive to line-height, so force
+  the same font and special superscript behavior 
+*/
+.ruby * { font-family: @text-font !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
+
 .fitb.stretch, .fitbruby.stretch { 
   margin-left:        5px; 
   vertical-align:     baseline; 
@@ -268,7 +306,7 @@ lines on some browsers */
 
 .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 
-.materials-links p {
+#material-links p, #opt-material-links p {
   .showPageLinks a { 
     text-decoration: none; 
     &::after { content: ' ▼ '; }
@@ -279,7 +317,7 @@ lines on some browsers */
     .pageNum { float: right; margin-right: 10%; }
   }
 }
-.materials-links p.open {
+#material-links p.open, #opt-material-links p.open {
   .showPageLinks a::after { content: ' ▲ '; }
   &+.ulist { transition: 1s ease-in; max-height: 1000px; }
 }
@@ -453,7 +491,8 @@ lines on some browsers */
   }
 
   /* Lesson sections are comprised of content blocks, each separated by the same amount of space */
-  .lesson-section-2 > * { margin-top: @lesson-block-vertical-space; }
+  .lesson-section-2 > *,
+  .lesson-section-3 > * { margin-top: @lesson-block-vertical-space; }
 
   /* Direct link to a section of a lesson */
   .section-link a {
@@ -467,6 +506,7 @@ lines on some browsers */
   }
   /* class for styling duration info in headers */
   .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
+  .duration { display: none; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
@@ -503,9 +543,11 @@ lines on some browsers */
    * (used so that @slidebreak works, while maintaining
    * the appearance of an uninterrupted block in the lesson)
    */
-  .lesson-instruction+.lesson-instruction,
-  .lesson-roleplay+.lesson-roleplay,
-  .q-and-a+.q-and-a { 
+  .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
+  .paragraph:has(.slidebreak) p { margin: 0 !important; }
+  .lesson-instruction+.paragraph:has(.slidebreak)+.lesson-instruction,
+  .lesson-roleplay+.paragraph:has(.slidebreak)+.lesson-roleplay,
+  .q-and-a+.paragraph:has(.slidebreak)+.q-and-a { 
     margin: 0;
     > *:first-child::before { display: none; } 
   }
@@ -625,6 +667,47 @@ body.workbookpage {
     } 
   }
 
+  /* 
+    "Graph" tables use CSS for everything. Each page will likely
+    need to provide its own rules for background position, width,
+    height, and axes -- but sensible defaults are provided here.
+  */
+  table.graph {
+    grid-gap: 20px; 
+    margin-top: 5px;
+    td p.tableblock { position: absolute; background: white; }
+    td {
+      border: none !important;
+      background-image:
+        linear-gradient(lightblue 2px, transparent 2px),
+        linear-gradient(270deg, lightblue 2px, transparent 2px),
+        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
+        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+      background-size: 300px 300px, 300px 300px, 50px 50px, 50px 50px;
+      background-position: -150px 135px;
+      width: 3in;
+      height: 3in;
+    }
+    /* Add labels for axes */
+    td::before, td::after { position: absolute; font-style: italic; }
+
+    td::before {
+      content: 'y';
+      top:   0%;
+      left: 40%;
+      transform: rotate(270deg);
+        -webkit-transform:rotate(270deg);
+        -moz-transform:rotate(270deg);
+        -o-transform: rotate(270deg);
+        -ms-transform:rotate(270deg);
+    }
+    td::after {
+      content: 'x';
+      top:  50%;
+      right: 3%;
+    }
+  }
+
   /* Make code match text size/layout */
   p .editbox, pre .editbox { font-size: 9pt !important; }
 
@@ -666,6 +749,9 @@ body.workbookpage {
   }
 }
 
+/************************************************************************************
+* CONTRACTS & MISC
+*/
 /* Back-of-the-book contracts table */
 table.contracts-table {
   border-collapse: collapse;

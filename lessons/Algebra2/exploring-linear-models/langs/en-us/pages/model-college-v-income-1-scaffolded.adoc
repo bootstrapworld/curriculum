@@ -1,14 +1,13 @@
 = Build a Model from Samples: College Degrees v. Income (Scaffolded)
 ++++
 <style>
+/* Shrink fill in the blanks */
 .studentAnswerMedium { min-width: 8em !important; }
 </style>
 ++++
 
 [.linkInstructions]
-Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save a Copy** now.
-
-@vspace{1ex}
+Open the @starter-file{alg2-states-intro}.
 
 @n Record the `pct-college-or-higher` and `median-income` values for the `alabama` and `alaska` rows, as @math{(x,y)} pairs below:
 
@@ -32,45 +31,39 @@ _Based solely on data from Alabama and Alaska, we are seeing that a @fitbruby{10
 
 --
 
-@n Now, let's use the slope intercept form of the line to calculate the y-intercept of the line passing through `AK` and `AL`.
+@n Now, let's use the slope-intercept form of the line to calculate the y-intercept / vertical shift of the line passing through `AK` and `AL`.
+
+[.indentedpara]
+--
+@fitbruby{10em}{@ifsoln{70760}}{y} @math{=} @fitbruby{10em}{@ifsoln{5613.67}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{27.5}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
+
+@vspace{11ex}
+
+- Find the @math{x} and @math{y} values from the `AK` row: (@fitbruby{12em}{@ifsoln{27.5}}{ *x* {two-colons} AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{ *y* {two-colons} AK median-income})
+- Now, replace @math{y}, @math{m}, and @math{x} in the equation above with values from the `AK` row and the slope we just calculated in question 2.
+- Then solve the equation above for @math{b =} @fitb{8em}{@ifsoln{-83616.02}}
+
+--
+
+@n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
+
+@indented{
+@math{al-ak(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope (m)}x + @fitbruby{11em}{@ifsoln{-83616.02}}{y-intercept / vertical shift} @hspace{3em} @show{(code '(define (al-ak x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
+}
 
 @vspace{1ex}
 
-[.indentedpara]
---
+Return to your copy of the starter file and add the code you just wrote to the Definitions Area. Then Click "Run". 
 
-A) Replace @math{m} with the slope we just calculated.
-
-B) Replace @math{x} and @math{y} with the relevant values from the `AK` row: (@fitbruby{12em}{@ifsoln{27.5}}{ *x* {two-colons} AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{ *y* {two-colons} AK median-income})
-
-C) Solve for @math{b}. @fitbruby{10em}{@ifsoln{70760}}{y} @math{=} @fitbruby{10em}{@ifsoln{5613.67}}{m} @math{\times} @fitbruby{10em}{@ifsoln{27.5}}{x} @math{+} @hspace{2em} @math{b}
-
-@vspace{10ex}
-
-@math{b =} @fitb{8em}{@ifsoln{-83616.02}}
-
---
-
-@n Write the complete model below (in both Function and Pyret notation):
-
-@center{
- @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
-}
+@n In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `al-ak(22.6)`. 
 
 [.indentedpara]
 --
-- Type your function into the Definitions Area on the left, modifying the existing function `f(x)`. 
-
-- Then click "Run", and make sure you fix any errors or warnings. 
-
-- In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `f(22.6)` 
+- How well does it predict the correct median income for Alabama? @fitb{}{@ifsoln{close! 43252.922}} 
+- What expression would predict median income for Alaska? @fitb{}{@ifsoln{`al-ak(27.5)`}}.
+- How well does it predict the correct median income for Alaska? @fitb{}{@ifsoln{close! 70759.905}} 
 
 --
-
-@n How well does it predict the correct median income for Alabama? @fitb{10em}{@ifsoln{close! 43252.922}} What about Alaska? @fitb{}{@ifsoln{close! 70759.905}}
-
-[.indentedpara]
-_Consider: If it doesn't predict it perfectly, why might that be?_
 
 @vspace{1ex}
 

@@ -7,7 +7,7 @@
 ++++
 
 [.linkInstructions]
-Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save a Copy** now.
+Open the @starter-file{alg2-states-intro}. 
 
 @vspace{1ex}
 
@@ -17,7 +17,7 @@ Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save
  (@fitbruby{10em}{@ifsoln{22.6}}{AL pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AL median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AK median-income})
 }
 
-@n Using the space below, compute the equation of the line passing between these two points. **This line will be your linear model** (also known as the "predictor function", or "line of best fit"), which predicts `median-income` as a function of `pct-college-or-higher`.
+@n Using the space below, compute the equation of the line passing between these two points. *This line will be your linear model* (also known as the "predictor function", or "line of best fit"), which predicts `median-income` as a function of `pct-college-or-higher`.
 
 [.FillVerticalSpace, cols="1", frame="none", grid="none"]
 |===
@@ -27,23 +27,24 @@ Open your copy of the @starter-file{alg2-states}. If you haven't already, **Save
 @n Write the complete model below (in both Function and Pyret notation):
 
 @center{
- @math{f(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope}x + @fitbruby{8em}{@ifsoln{-83616.02}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
+ @math{\mbox{al-ak}(x) =} @fitbruby{8em}{@ifsoln{5613.67}}{slope(m)}x + @fitbruby{11em}{@ifsoln{-83616.02}}{y-intercept / vertical shift} @hspace{5em} @show{(code '(define (al-ak x) (+ (* (?ANS 5613.67) x) (?ANS -83616.02))))}
 }
 
-[.indentedpara]
---
-- Type your function into the Definitions Area on the left, modifying the existing function `f(x)`. 
+@vspace{2ex}
 
-- Then click "Run", and make sure you fix any errors or warnings. 
+Return to your copy of the starter file and add the code you just wrote to the Definitions Area. Then Click "Run". +
+_(If there are any errors or warnings, fix them and click "Run" again.)_ 
 
-- In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `f(22.6)` 
-
---
-
-@n How well does it predict the correct median income for Alabama? @fitb{10em}{@ifsoln{close! 43252.922}} What about Alaska? @fitb{}{@ifsoln{close! 70759.905}}
+@n In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `al-ak(22.6)`. 
 
 [.indentedpara]
+--
+- How well does it predict the correct median income for Alabama? @fitb{}{@ifsoln{close! 43252.922}} 
+- What expression would predict median income for Alaska? @fitb{}{@ifsoln{`al-ak(27.5)`}}.
+- How well does it predict the correct median income for Alaska? @fitb{}{@ifsoln{close! 70759.905}} +
 _Consider: If it doesn't predict it perfectly, why might that be?_
+
+--
 
 @vspace{1ex}
 

@@ -45,7 +45,7 @@ Students practice carefully reading the contents of a starter file to review and
 - Load the @starter-file{table-functions}, go to the File menu, and click "Save a Copy".
 - Hit "Run," then type `shapes-table` in the Interactions Area.
 - The way this file defines a table is different from what we've encountered before. How is it different?
-  * Pyret also allows us to define Tables __in code__, rather than using a spreadsheet. This file defines the `shapes-table` one row at a time.
+  * Pyret also allows us to define Tables _in code_, rather than using a spreadsheet. This file defines the `shapes-table` one row at a time.
 }
 
 === Investigate
@@ -78,16 +78,16 @@ Challenge students to use terminology like "looks up the value in the X column" 
 Students learn to filter the rows and add new columns to a table, using functions they can define themselves.
 
 === Launch
-Select 6-8 students, each of whom will represent a unique Row of a dataset called “Students.”  Arrange them in a line at the front of the room.
+We need 6-8 students to line up shoulder-to-shoulder at the front of the room. Each will represent a “row” in a table of students.
 
 Sometimes we want to *filter the rows* of a table by some criteria. In our animals dataset, for example, we might want to filter the table to show only the rows for dogs, or only the rows for cats older than 5. What are some ways to filter our table of students?
 
 @lesson-roleplay{
-- I need one volunteer who will play the role of `filter`, and another who will be their trusty helper function.
-- The helper chooses one @handout{pages/function-cards.adoc, Function Card}. They’ll read it carefully, making sure they understand what it will do for each "Row" (student!), but **keeping it a secret**. @teacher{(Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)}
-- `filter` walks from one student to the next, pointing to each one and asking “keep ‘em?”.
-- The helper will answer with whatever the function on the card would produce for that student: `true` or `false`
-- If the helper replies "true", `filter` asks that student to take a step forward
+- We need one volunteer to be `filter`, and another to be their helper function.
+- The helper chooses one @handout{pages/function-cards.adoc, Function Card}. They’ll read it carefully, making sure they understand what it will do for each "Row" (student!), but *keeping it a secret*. @teacher{(Choose your students and cards carefully! Some cards only work if you have at least one student with glasses, red hair, etc.)}
+- `filter` walks from student to student, pointing at each and asking “keep ‘em?”.
+- The helper will answer with whatever the function on the card would produce for that student: `true` or `false`.
+- If the helper replies "true", `filter` asks that student to take a step forward.
 - If the helper says "false", `filter` asks them to take a step back.
 }
 
@@ -101,7 +101,7 @@ Here’s how that might look if `filter` chose a function card `has-glasses`.
 - The helper checks if they are wearing glasses, and says “false”
 - `filter` to Student 2 (who does not wear glasses): Step back. (Student 2 steps back.)
 
-Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a __different__ card to a __different__ helper, and repeat the exercise.
+Have your helper function and `filter` work together to act out one round of this. Ask the `filter` if they can guess what's on the helper function's card, then ask the rest of the class. Give a _different_ card to a _different_ helper, and repeat the exercise.
 }
 
 === Investigate
@@ -115,8 +115,8 @@ Take 10 minutes to complete @printable-exercise{exploring-functions.adoc}
 
 Key ideas from the activity are as follows:
 
-- `filter` consumes a Table and a __function that consumes Rows and produces Booleans__. It produces a new table containing only rows for which the function returns `true`.
-- `build-column` consumes a Table, the name of a new column, and a __function that consumes Rows__. It produces a new table with that new column, and fills in the values by applying the function to every Row.
+- `filter` consumes a Table and a _function that consumes Rows and produces Booleans_. It produces a new table containing only rows for which the function returns `true`.
+- `build-column` consumes a Table, the name of a new column, and a _function that consumes Rows_. It produces a new table with that new column, and fills in the values by applying the function to every Row.
 
 @slidebreak
 
@@ -142,15 +142,21 @@ Let's think about what filtering and building would look like with Animals at th
 }
 
 === Common Misconceptions
-- Students often think that these functions __change__ the table! In Pyret, all table functions produce a __brand new table__. If we want to save that table and use it later, we need to define it. For example: `dogs = filter(animals-table, is-dog)`.
-- Students might mistakenly think we need the `species` column to answer the question, "Which cat is the heaviest?". While we do look at the species column to filter the table, we're not thinking about columns until __after__ we've built a new table of just the cat rows, at which point `species` would be "cat" for all of the rows that we're working with!
-- Questions like "Who is the oldest?" or "What is the most?" require looking at __every row__ in the table.
+- Students often think that these functions _change_ the table! In Pyret, all table functions produce a _brand new table_. If we want to save that table and use it later, we need to define it. For example: `dogs = filter(animals-table, is-dog)`.
+- Students might mistakenly think we need the `species` column to answer the question, "Which cat is the heaviest?". While we do look at the species column to filter the table, we're not thinking about columns until _after_ we've built a new table of just the cat rows, at which point `species` would be "cat" for all of the rows that we're working with!
+- Questions like "Who is the oldest?" or "What is the most?" require looking at _every row_ in the table.
 
 === Synthesize
-Using Table Functions is a __huge__ upgrade in our ability to analyze data!
+Using Table Functions is a _huge_ upgrade in our ability to analyze data!
 
 - If the shelter is purchasing food for older cats, what filter would we write to determine how many cats to buy for?
 - A dataset from Europe might list everything in metric (centimeters, kilograms, etc), so we could build a column to convert that to imperial units (inches, pounds, etc).
-- A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see __what percentage of games__ those teams won.
+- A dataset about sports teams might include columns for how many games each team won and how many they lost, but it's more useful to build a column to see _what percentage of games_ those teams won.
 - What columns might you want to add to your dataset?
 - What filters might be interesting to apply to your dataset?
+
+@ifproglang{pyret}{
+@strategy{Project Option: Stress or Chill?}{
+
+Students can gather data about their own lives, and use what they've learned in the class so far to analyze it. @opt-project{stress-project.html, rubric-stress-or-chill.adoc} can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science.
+}}

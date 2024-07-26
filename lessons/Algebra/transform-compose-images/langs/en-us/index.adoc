@@ -53,7 +53,7 @@
 Students learn about the `put-image` function, which uses coordinates to position one image on top of the other. Students think through what coordinates will place a solid red circle on top of a rectangular background, in a variety of different locations.
 
 === Launch
-As you've already seen, `overlay` sticks two images together, so that the __center__ of the first image is placed exactly on top of the __center__ of the second image. But what if we want to put the dot somewhere besides the center?
+As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
 
 Instead of centering the top image on the bottom image, the `put-image` function specifies where on the bottom image to place the center of the top image.
 
@@ -82,10 +82,10 @@ The numbers in `put-image` specify the point on the paper where the center of th
 === Investigate
 Let's apply what we just learned about `put-image` to getting the Japanese flag building correctly. 
 
-We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.  Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of __their own thinking__ for when they come back to their code another day.
+We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.  Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of _their own thinking_ for when they come back to their code another day.
 
 @lesson-point{
-Professional programmers use comments __all the time!__
+Professional programmers use comments _all the time!_
 }
 
 Most professional programmers work with teams who need to be able to follow each other's thinking in order to collaborate efficiently. And many programs are written and maintained by a series of people, who come and go over the years, and need to able to follow each other's thinking even if they never meet each other!
@@ -108,7 +108,7 @@ Could we completely replace `overlay` with `put-image`? Why or why not?
 == Transforming Shapes for Composition @duration{30 minutes}
 
 === Overview
-Students will use proportional reasoning to determine what sizes various flag components should be and where to position them. The first starterfile builds reasoning with classic three-stripe flag designs. The second starterfile focuses on the Puerto Rican flag and will support students in understanding much more complex designs.
+Students will use proportional reasoning to determine what sizes various flag components should be and where to position them. The first starter file builds reasoning with classic three-stripe flag designs. The second starter file focuses on the Puerto Rican flag and will support students in understanding much more complex designs.
 
 === Launch
 
@@ -126,7 +126,7 @@ Students will use proportional reasoning to determine what sizes various flag co
 Now that we've mastered the most basic flag forms, we're ready to tackle a more complex design.
 
 @lesson-instruction{
-- We're going to transform a pile of misdefined shapes into the flag of Puerto Rico by fixing the code.
+- We're going to transform a pile of mis-defined shapes into the flag of Puerto Rico by fixing the code.
 - Open the @starter-file{flags-pr} and click "Run".
 - With your partner, follow the "Do Now" directions in the commented code.
 }
@@ -139,6 +139,71 @@ Now that we've mastered the most basic flag forms, we're ready to tackle a more 
 === Synthesize
 
 Why is it useful to define each part of the flag first, before stitching the images together?
+
+== Decomposing Flags @duration{optional}
+
+=== Overview
+
+Students practice decomposing flags into the pieces they are made of and determining the size and coordinates of those pieces.
+
+@teacher{If you are doing @lesson-link{project-flags}, decide whether you want this to come before or after students write the code to make their own flags. If it comes before, it will require more scaffolding. If it comes after, we would expect students to have developed understanding with which to engage with these materials more independently.}
+
+=== Launch
+
+@teacher{
+For this activity, you will want to project the color version of @opt-printable-exercise{decomposing-flags.adoc}. Otherwise, students with black-and-white photocopies will be unable to identify the colors on the the flags.
+}
+
+@lesson-instruction{
+- Turn to @opt-printable-exercise{decomposing-flags.adoc}. What do you Notice? What do you Wonder?
+- We are going to talk through how to fill in the table for the Cameroon flag. But, take a few minutes and see how much of this page you can complete on your own first. 
+}
+
+=== Investigate
+
+@QandA{
+@Q{How big is the Cameroon flag?}
+@A{450 x 300}
+
+@Q{Let's complete the first row of the table focusing on the green rectangle.}
+@Q{How could we determine the width of the green rectangle?}
+@A{It's 1/3 the width of the whole flag so we need to divide 450 by 3 to get 150.}
+@A{Note: 150 is a pretty friendly number, but sometimes division results in long or repeating decimals, and it's a place where we humans might make mistakes. When we're writing code, we don't have to actually do the division. We can just code the division problem @show{(code '(/ 450 3))} and leave it for the computer to evaluate!} 
+
+@Q{How could we determine the height of the green rectangle?}
+@A{It's the same as the height of the flag, which is 300.}
+
+@Q{How could we determine the x and y-coordinates that will place the center point of the green rectangle correctly on the flag?}
+@A{Since the bottom left corner of the flag is (0,0) and the bottom left corner of this particular rectangle is also at (0,0) we just need to find the middle of its width (150) and height (300).}
+@A{The coordinates for locating the center point of the green rectangle on the flag should be (75,150).}
+
+@Q{The shape, color, width and height for the red rectangle will be the same as for the green rectangle.}
+@Q{How could we determine the x and y-coordinates that will place the center point of the red rectangle correctly on the flag?}
+@A{Its center should go on the middle of the flag. Since the bottom left corner of the flag is (0,0) we just need to find the middle of its width (450) and height (300).}
+@A{The coordinates for locating the center point of the red rectangle on the flag should be (250,150).}
+
+@Q{The shape, color, width and height for the yellow rectangle will also be the same as for the green rectangle.}
+@Q{How could we determine the x and y-coordinates that will place the center point of the yellow rectangle correctly on the flag?}
+@A{The y-coordinate will be the same as the others, but finding the x-coordinate for placing this rectangle correctly is much trickier than it was for the others!}
+@A{One way to think about it is to imagine that if all 3 vertical stripes were split in half, the middle of the yellow rectangle would be located at @math{\frac{5}{6}} the width of the flag @show{(code '(* 5(/ 450 6)))}.}
+@A{Another way to think about it is that if the center of the green rectangle was 75 pixels from the left edge, the yellow rectangle will be located 75 pixels from the right edge. @math{450 - 75 = 375}}
+@A{The coordinates for locating the center point of the red rectangle on the flag should be (250,150).}
+}
+
+=== Synthesize
+
+- What strategies did you use for finding the length and width of the flag components?
+- What strategies did we use for determining the x and y coordinates where flag components should be placed?
+
+@pd-slide{
+*Connect to the Classroom: Rich Tasks*
+
+In the math ed literature, there's a lot of research that has been done on what are called rich tasks. One of the hallmarks of a rich task in a math class is that it should be easy to check if you got the answer right... but it should *not* be easy to actually get the answer.
+
+Flags are a great rich task because it's easy to see right away if an adjustment to the code was correct. If a student did something wrong, the flag doesn't look right!
+
+Kids can instantly see if their ratios and proportions were correct... but actually knowing what will make them correct is not so simple.
+}
 
 == Additional Exercises
 
@@ -158,11 +223,10 @@ Why is it useful to define each part of the flag first, before stitching the ima
 @strategy{Why is it so Hard to Center a `star`?}{
 
 
-We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's __center__. The same is true for squares, rectangles, and many other shapes.
+We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's _center_. The same is true for squares, rectangles, and many other shapes.
 
-But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by their centers. Instead, they are "grabbed" by the center of their __bounding box__. A bounding box is the tightest possible rectangle that can be drawn around an image. 
+But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by their centers. Instead, they are "grabbed" by the center of their _bounding box_. A bounding box is the tightest possible rectangle that can be drawn around an image.
 
 Try drawing a star on a piece of paper with a dot at its center. Then, draw a rectangle whose edges touch its top, bottom, left-most, and right-most points. You'll find that the center of the bounding box is not the same as the center of the star!
 }
 }
-

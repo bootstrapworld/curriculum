@@ -73,7 +73,16 @@ const Core = {
       "url": "https://code.pyret.org/editor#share=18Y3sCev196YEbzSSzWj5XPrS_M_cVkza"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=4FgZs4PZp4"
+      "url": "https://www.wescheme.org/openEditor?publicId=knne7AcviQ"
+    }
+  },
+  "match-code-images": {
+    "title": "Matching Code to Images using overlay & put-image (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0"
+    },
+    "wescheme": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc"
     }
   },
   "strings-n-numbers": {
@@ -163,7 +172,7 @@ const Piecewise = {
   "collaboration-solution": {
     "title": "Collaboration Starter File - Solution",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1MPaX9lO--t2JI-pJvLthfXWJPuIdq3eN&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1MPaX9lO--t2JI-pJvLthfXWJPuIdq3eN"
     }
   },
   "mood-generator": {
@@ -283,10 +292,10 @@ const DSBasics = {
   "research-project": {
     "title": "Research Project Slide Deck Template",
     "pyret": {
-      "url": "https://docs.google.com/presentation/d/1qNV1mIyfOsp0mpxG0KAVlTISB8asQzxGJtQKrsndzUE/copy"
+      "url": "https://docs.google.com/presentation/d/1Sqx41hIVXnGFrjfJU9_srCrDTMkowaj23fEGAwWFaZw/copy"
     },
     "codap": {
-      "url": "https://docs.google.com/presentation/d/1uVNO3gRvBxjmE4NRCyiKBhq181dit1wmB17ifQxjTTY/copy"
+      "url": "https://docs.google.com/presentation/d/1a1AQPj27PSMoARklNLDPxa5F2iQJTSqerAsYseWU7Cg/copy"
     }
   },
   "animals-spreadsheet": {
@@ -313,7 +322,7 @@ const DSBasics = {
       "url": "https://code.pyret.org/editor#share=1VflQhYwr_R3FIarKx1fvaAA50IDTXVp0"
     },
     "codap": {
-      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FcB4wG0wo1lWCI77dtj9C%2Ffile.json"
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FqJ6Xzk3kLDWpkOVjAkU6%2Ffile.json"
     }
   },
   "new-animals": {
@@ -326,9 +335,9 @@ const DSBasics = {
     }
   },
   "putting-it-all-together": {
-    "title": "Animals with Helper Functions Starter File",
+    "title": "Putting it All Together Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1lSmVBXGOr_AHkJaSBmW2wH5RPegFHehU"
     }
   },
    "food": {
@@ -347,9 +356,18 @@ const DSBasics = {
     },
     "codap": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
-      }
     }
   }
+}
+
+const AI = {
+  "spell-checker": {
+    "title": "Spell Checker Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+    }
+  }
+}
 
 const MoreDS = {
   "fair-coins": {
@@ -400,7 +418,7 @@ const MoreDS = {
   "trust-but-verify": {
     "title": "Trust but Verify Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ELldH6tPGvrBXE-p474U3Iqvz9sOWiPc"
+      "url": "https://code.pyret.org/editor#share=1WOJLVp8HolSuesuckXhkBEUCu0b2Q-VZ"
     },
   },
   "bad-survey": {
@@ -445,12 +463,15 @@ const MoreDS = {
       "url": "https://code.pyret.org/editor#share=1rdPYXc64IkvSROcCWliYua7o81YBb0rb"
     }
   },
-  "spell-checker": {
-    "title": "Spell Checker Starter File",
+  "matching-modes": {
+    "title": "Matching Modes (Desmos)",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
+    },
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fca8f6a3d4e1f382a33f56e"
     }
-  },  
+  }
 }
 
 const DSadvanceDisplays = {
@@ -498,8 +519,17 @@ const DSdesmos = {
     "codap":{
       "url": "https://teacher.desmos.com/activitybuilder/custom/659c54f2910124eeb4c5f212"
     }
-  }
-}
+  },
+   "histograms":{
+    "title": "Exploring Bin Size (Desmos)",
+    "pyret":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6698345382e60ebed421ade9"
+    },
+    "codap":{
+      "url": "https://teacher.desmos.com/activitybuilder/custom/6698345382e60ebed421ade9"
+    }
+  },
+ }
 
 const Desmos = {
   "images-code":{
@@ -533,7 +563,7 @@ const Flags = {
     }
   },
   "flags-ak": {
-    "title": "Alaskan Flag Starter File",
+    "title": "Flag of Alaska Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1HVC8BOD1C-Dny0jpHU0vBlP7Q5Axfcsf"},
     "wescheme": {
@@ -541,7 +571,7 @@ const Flags = {
     }
   },
   "flags-china": {
-    "title": "Chinese Flag Starter File",
+    "title": "Flag of China Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1BWLopFBsC5eMLjHsMxtg28mvU-Sfr2aE"
     },
@@ -597,10 +627,28 @@ const Flags = {
   "flags-panama": {
     "title": "Flag of Panama Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1V1rdwYSawmLLyjmkGSgE3pbpWioKdxnH"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=A3N1Kcg7iy"
+    }
+  },
+   "compose-1":{
+    "title": "Composing in a Single Definition Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=1TAaRdb5a4EpG7ccdjuDFyqOPRZzXUtTw"
+    },
+    "wescheme":{
+      "url":"https://www.wescheme.org/view?publicId=QsSytQCuzf"
+    }
+  },
+  "compose-2":{
+    "title": "Composing 1 Step at a Time Starter File",
+    "pyret": {
+      "url":"https://code.pyret.org/editor#share=15kdZ_CENWdN-LuBmHkFk0CpqObtCJQyh"
+    },
+    "wescheme":{
+      "url":"https://www.wescheme.org/view?publicId=pJucnXFenl"
     }
   },
   "flags-desmos": {
@@ -615,6 +663,39 @@ const Flags = {
 }
 
 const MoreAlg = {
+  "coe-desmos": {
+    "title": "Matching Circles of Evaluation to Expressions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5dcad0b2ef54cc0c830fd4df"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5feced272d0eff0ca8381baa"
+    }
+  },
+  "linear-functions": {
+    "title": "Card Sort Activities focused on Linear Functions: Tables, Graphs, and Definitions (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/652e12aa5a1270ab0566fd3c"
+    }
+  },
+  "function-notation-match": {
+    "title":"Matching Examples & Function Definitions - Math (Desmos)",
+    "pyret": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38"
+    },
+    "wescheme": {
+      "url":"https://teacher.desmos.com/activitybuilder/custom/60aa5c452505ed0802bfff38"
+    }
+  },
+  "linear-functions2": {
+    "title": "Matching Tables to Graphs (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
+    },
+    "wescheme": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fc25d458dcfcf0b92021b13"
+    }
+  },
   "right-trianglesDesmos": {
     "title": "Exploring Proofs without Words (Desmos)",
     "pyret": {
@@ -649,6 +730,12 @@ const MoreAlg = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=8RStWgMhm4"
+    }
+  },
+  "inequalities-compound-match": {
+    "title": "Match Compound Inequality Functions with Plots of their Solution Sets (Desmos)",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/5fdf8618945cb549d457fb85"
     }
   },
   "inequalities-sam": {
@@ -699,7 +786,7 @@ const MoreAlg = {
   "method-1": {
     "title": "Method 1: Composing Functions",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1R0MRHtV-WTvruvrDH3Y4e9mTq21jMuNy"
   },
    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=AXvgZkqnNi"
@@ -708,7 +795,7 @@ const MoreAlg = {
   "method-2": {
     "title": "Method 2: Defining Layers",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1tihfLS9d7jaXPdCtlXK_Jdl0X_Wwiqym"
   },
    "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=vc8K8Xmlin"
@@ -774,7 +861,7 @@ const EarlyMath = {
   "negation":{
     "title": "Negation Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1wx5GeCHoysnqsc9G9x3Eb5IAYRK5eoMJ"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=iEDXtNyn4k"
@@ -783,7 +870,7 @@ const EarlyMath = {
   "negation-2":{
     "title": "Negation Starter File (2)",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1JJcf8ixS0H3xLWYAd-dSbZDk8bs-IQvy"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=mu8jTQrApa"
@@ -801,7 +888,7 @@ const EarlyMath = {
   "exponents": {
     "title": "Exponents Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=13LjF0N8djwf2Q7AUrbQOTrO6hIHczY0H"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=gadP2T1dKH"
@@ -810,7 +897,7 @@ const EarlyMath = {
   "is-it-16": {
     "title": "Is it 16? Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL&v=0c33ff0"
+      "url": "https://code.pyret.org/editor#share=1eSy5jCFujEYUCbRI_7QgVDX0Vv6QcBvL"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=j0ExQBqaqm"
@@ -819,7 +906,7 @@ const EarlyMath = {
   "variables-code": {
     "title": "Variables & the Commutative Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=1MIcjkuUzSOAtPXHWov3q9O3GTXFk3E5x"
     },
     "wescheme": {
      "url": "https://www.wescheme.org/openEditor?publicId=iP1f3ZH2ki"
@@ -828,7 +915,7 @@ const EarlyMath = {
   "variables-code2": {
     "title": "Variables & the Associative Property Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby&v=78aeaeb"
+      "url": "https://code.pyret.org/editor#share=11jznOypljbxMh9XbpROfQe1azmq_0kby"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=S1vWZ2AHlv"
@@ -837,19 +924,19 @@ const EarlyMath = {
 }
 
 const Projects = {
-  "functions": {
-    "title": "Functions Starter File",
+  "functions-study": {
+    "title": "Functions Study Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1k4YfpOonF9KDaRxsrmSqskZtVqXp5Aix"
+      "url": "https://code.pyret.org/editor#share=1F8_Pn48lmH8rmrnxK7ArcUDMI53tWsm8"
     },
     "wescheme": {
-      "url": "https://www.wescheme.org/openEditor?publicId=0n6TyoDsdu"
+      "url": "https://www.wescheme.org/view?publicId=44k3iR5urE"
     }
   },
   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1imACYs8zqPKCZi1goeGI8dlSftF6Uubq"
+      "url": "https://code.pyret.org/editor#share=1imHHu2-uAXrjQ1I1gGAEjTYfifQ6P65c"
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=apgRM24Q82"
@@ -862,6 +949,15 @@ const Projects = {
     },
     "wescheme": {
       "url": "https://www.wescheme.org/openEditor?publicId=pYymiz1Vby"
+    } 
+  },
+  "logos-warmup": {
+    "title": "Logos Warm Up",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1nuz6eBw9W4Fv8NspmucXam3W_w9dSOs_&v=e8968a4"
+    },
+    "wescheme": {
+      "url": "https://www.wescheme.org/view?publicId=u7o6U8dMKW"
     } 
   },
   "threats": {
@@ -888,34 +984,34 @@ const Projects = {
 }
 
 const Alg2 = {
-  "alg2-countries": {
-    "title": "Countries of the World Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1SGzPWywGy63-DaqOVTy39-497lcWaF4B"
+  "alg2-horizontal" : {
+    "title" : "Exploring Horizontal Shift in Linear Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/669eaa60c1c9bca9920e72ea"
     }
   },
-    "alg2-covid": {
-    "title": "Covid Spread Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1ueyf5-0ByVYmeJKQ03i9msb9u1C5y50o"
+  "alg2-cheerios" : {
+    "title" : "Cheerios Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1-hFDUHjQqhNEHrwkVMj6gZvOtvYWiNlP"
     }
   },
-   "alg2-fuel-efficiency": {
+  "alg2-states-intro" : {
+    "title" : "Preview: State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1ZhMIricSR89-NZq1pgZWP_memefAJw65"
+    }
+  },
+  "alg2-states-fit-model" : {
+    "title" : "Fitting a Model: State Demographics Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1wlnbSglNxo-CQp3uVc8RdHw89Dt4jQhx"
+    },
+  },
+  "alg2-fuel-efficiency": {
     "title": "Fuel Efficiency Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1RESEiKCepBRV3_AbthDydHaq5b9BN2zy"
-    }
-  },
-   "alg2-states": {
-    "title": "State Demographics Starter File",
-    "pyret": {
-      "url": "https://code.pyret.org/editor#share=1khphiuSTg49DlgZVS_GSpqcfP-CEqeLV"
-    }
-  },
-  "alg2-ca-rent" : {
-    "title": "CA Minimum Wage and Rent Starter File",
-    "pyret" : {
-      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
     }
   },
   "alg2-exploring-quadratics-desmos": {
@@ -924,10 +1020,22 @@ const Alg2 = {
       "url": "https://teacher.desmos.com/activitybuilder/custom/65033e718ca55cd9fec96faf"
     }
   },
+  "alg2-covid": {
+    "title": "Covid Spread Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1Gj8C7JWGAmHqPPnSY9auAcuivHH6rvEA"
+    }
+  },
   "alg2-covid-desmos" : {
     "title" : "Modeling Covid Spread (Desmos)",
     "pyret": {
-      "url": "https://teacher.desmos.com/activitybuilder/custom/648caf89aee877a6fa168ce1"
+      "url": "https://teacher.desmos.com/activitybuilder/custom/666c4dbf08e1286b11f2507a"
+    }
+  },
+  "alg2-countries": {
+    "title": "Countries of the World Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1qXYu57_noEwzYOL3M4YxqzW6mIcas88x"
     }
   },
   "alg2-log-desmos" : {
@@ -939,8 +1047,33 @@ const Alg2 = {
   "alg2-exploring-periodic-desmos" : {
     "title" : "Exploring Periodic Functions (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/65cfad5a183d2d4096470654"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6674fb05501f6b739037a941"
     }
+  },
+  "alg2-ferris-wheel" : {
+    "title" : "Ferris Wheel Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1iUScID35SP-evxaW3w2WLF7QHtDIMNhI"
+    }
+  },
+  "alg2-co2" : {
+    "title" : "Carbon Dioxide Starter File",
+    "pyret" : {
+      "url" : "https://code.pyret.org/editor#share=1y2J-z-kK0b8UOh5r60womQI2UPQEV5DL"
+    }
+  },
+  "alg2-ca-rent" : {
+    "title": "CA Minimum Wage and Rent Starter File",
+    "pyret" : {
+      "url": "https://code.pyret.org/editor#share=1qatRcY10rCzPIrmCJ9NfXzr8F2b9PJsp"
+    }
+  },
+  "alg2-ca-rent-desmos" : {
+    "title": "Exploring Exponential Functions (Desmos)",
+    "pyret" : {
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/6643b153f51b0165b4d1fb32"
+    }
+
   }
 }
 

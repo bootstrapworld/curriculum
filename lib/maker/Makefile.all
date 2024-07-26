@@ -122,13 +122,14 @@ clean:
 
 force:
 	rm -fr $(TOPDIR)/distribution
-	$(MAKE)
+	@$(MAKE)
 
 ###############################################################################
 
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
+	NATLANG=en-us node lib/maker/screenshot-elts.js
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 quick-deploy:

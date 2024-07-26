@@ -1,0 +1,69 @@
+= Reasoning about Unit Clocks
+++++
+<style>
+td { padding: 0 !important; height: 20pt; }
+th .mathunicode { font-weight: bold; }
+
+table { margin-top: 1ex; }
+
+.fitb { min-width: 2em; }
+.autonum { padding-top: 0.75rem !important; }
+
+/* the .fitb's on this page that contain MathJax inside their solutions need their top-padding clipped */
+.fitb:has(.solution .MathJax) { padding-top: 0; }
+</style>
+++++
+
+@define{leg}{@math{\sqrt{2}/2}}
+
+The point (A, B) sits on the circumference of a _unit clock_ (below, right). A radius @math{r} of length 1, extending from the center to (A, B). As time passes, the point (A, B) rotates around the circle.
+
+@n The coordinates of the *center* of the clock are @fitb{5em}{@ifsoln{(0, 0)}}, and the *hypotenuse* of the right-triangle formed by A, B, and @math{r} is @fitb{4em}{@ifsoln{1}}.
+
+@n The table below shows the values of A and B at 12 o'clock. Complete the rows for 3, 6 and 9 o'clock.
+
+[cols="<.<12a,1,>.10a", grid="none", frame="none"]
+|===
+|
+[.times,cols="^.^2a, ^.^1a, ^.^1a", options="header"]
+!===
+! Time		! @math{A}			! @math{B}
+! 12:00		!       0     		!      1
+! 1:30 (halfway between 1-2) 	! @ifsoln{ @leg}	! @ifsoln{ @leg}
+! 3:00 		! @ifsoln{  1  }   	! @ifsoln{  0  }
+! 4:30 (halfway between 4-5)	! @ifsoln{ @leg}	! @ifsoln{-@leg}
+! 6:00		! @ifsoln{  0  }   	! @ifsoln{ -1  }
+! 7:30		! @ifsoln{-@leg}	! @ifsoln{-@leg}
+! 9:00		! @ifsoln{ -1  } 	! @ifsoln{  0  }
+! 10:30		! @ifsoln{-@leg}	! @ifsoln{ @leg}
+! 12:00		!       0     		!      1
+!===
+|
+| @image{../images/unit-circle-clock.png}
+|===
+
+@n In the diagram above, the hand is pointing to (A,B) at *1:30*. At this time, @math{A = B}. In the space below, (a) draw and label the right triangle, then (2) compute the values of both @math{A} and @math{B}.
+
+[.FillVerticalSpace, frame="none", stripes="none"]
+|===
+|
+|===
+
+@n Use the values you computed at 1:30 to fill in the rest of the table with values of @math{A} and @math{B} at 4:30, 7:30, and 10:30.
+
+@n In the graph below, draw a *dot* for the coordinates (@math{A}, _time_) in each row of the table. Connect them from left-to-right, to form a curve.
+
+@n In the graph below, draw a *star* for the coordinates (_time_, @math{B}) in each row of the table. Connect them from left-to-right, to form a curve.
+
+@vspace{1ex}
+
+@ifnotsoln{@image{../images/clock-graph.png}}
+@ifsoln{@image{../images/clock-graph-soln.png}}
+
+@vspace{1ex}
+
+@link-instructions{Open the Desmos File *Exploring Periodic Functions*. You should be on *Slide 1: Unit Clocks*.}
+
+@n "Turn on" the `x(time)` folder, and compare the graph to your own graph of `A`. Do they match?
+
+@n Turn off that first folder, and turn on the one for `y(time)`. Compare the graph to your own graph of `B`. Do they match?

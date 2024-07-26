@@ -1,54 +1,64 @@
 = Exploring the Countries Dataset
+
 ++++
 <style>
-body.workbookpage td .autonum::after { content: ')' !important; }
-.columnInfo tr td { padding: 0 !important; }
-table .paragraph:first-child .fitb:nth-child(3) {
-	padding-top: 0px !important;
-}
+/* Make autonums inside tables look consistent with those outside */
+td .autonum::after { content: ')' !important; }
 </style>
 ++++
 
 [.linkInstructions]
-For this section, you'll need the  @starter-file{alg2-countries} open on your computer. If you haven't already, select **Save a Copy** from the "File" menu to make a copy of the file that's just for you. The columns in this dataset are described below:
+For this section, you'll need the  @starter-file{alg2-countries} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. The columns in this dataset are described below:
 
-[.columnInfo, cols="5a,6a", grid=none, frame=none, stripes=none]
+[cols="5a,6a", grid=none, frame=none, stripes=none]
 |===
 |
-- **country** - name of the country
-- **gdp** - total gross domestic product of the country
-- **population** - number of people in the country
+@vspace{1ex}
+
+- *country* - name of the country
+- *gdp* - total Gross Domestic Product of the country. GDP is often used to measure the economic health of a country.
+- *population* - number of people in the country
 |
-- **pc-gdp** - "per-capita gdp": the average GDP _per-person_
-- **has-univ-healthcare** - indicates if the country has universal healthcare
-- **median-lifespan** - the median life expectancy of people in the country
+@vspace{1ex}
+
+- *pc-gdp* - the average GDP _per-person, in thousands_ of $US
+- *has-univ-healthcare* - indicates if the country has universal healthcare
+- *median-lifespan* - the median life expectancy of people in the country
 |===
 
 @vspace{1ex}
 
-[.FillVerticalSpace, cols="1a,1a", frame=none, stripes=none]
+[cols="19,21", frame=none, stripes=none]
 !===
-| @n Make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`. Sketch the shape of the plot below.
-@center{@image{../images/scatter-grid.png, 250}}
+| @n Make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, and sketch its plot below.
+
+@vspace{1ex}
+
+@center{@image{../images/scatter-grid.png,250}}
+
 |
---
-@n What do you **Notice?** @fitb{}{} +
+
+
+@n What do you *Notice?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
 
-@n What do you **Wonder?** @fitb{}{} +
+@n What do you *Wonder?* @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
 
 @vspace{1ex}
 
 @n Are there any countries that stand out? Why or why not? @fitb{}{} +
+@fitb{}{} +
 @fitb{}{}
 
 @vspace{1ex}
 
-@n Suppose a wealthy country is suffering heavy causalties in a war. Draw a star on the plot, showing where you might expect it to be.
---
+@n Suppose a wealthy country is suffering heavy casualties in a war. Draw a star on the plot, showing where you might expect it to be.
+
+@vspace{1ex}
+
 !===
 
 @n Do you think you see a relationship? If so, describe it. Is it linear or nonlinear? Strong or weak?
@@ -57,45 +67,4 @@ For this section, you'll need the  @starter-file{alg2-countries} open on your co
 
 @fitb{}{}
 
-@center{**Stop here! We'll continue after some discussion.**}
-
-== Fitting Models
-
-[.linkInstructions]
-For this section, you'll need to have **Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)** open on your computer.
-
-For each question below: (1) explore in Desmos (2) define and fit your model in Pyret (the starter file already contains sample functions for you to change, called `linear1`, `quadratic1`, and `exponential1`!). Then write the model and the @math{S}.
-
-@n Find the best **linear model** you can, using the first slide in the Desmos activity or `lr-plot` in the @starter-file{alg2-countries}.
-
-[cols="5a,1a", grid="none", frame="none", stripes="none"]
-|===
-|
-@hspace{3em}@math{f(x) =} @fitbruby{10em}{@ifsoln{@math{0.00021}}}{slope (m)}x + @fitbruby{10em}{@ifsoln{68.0125}}{y-intercept (b)}
-|
-@fitbruby{10em}{@ifsoln{5.93}}{S-value}
-|===
-
-@n Find the best **quadratic model** you can, using the second slide __(Wealth-v-Health Quadratic)__ in the Desmos activity.
-
-[cols="5a,1a", grid="none", frame="none", stripes="none"]
-|===
-|
-@hspace{3em}@math{f(x) = }@fitbruby{10em}{}{quadratic coefficient (a)}@math{(x −}@fitbruby{10em}{}{vertex (h)}@math{)^2 +}@fitbruby{10em}{}{vertical shift (k)}
-|
-@fitbruby{10em}{}{S-value}
-|===
-
-@n Find the best **exponential model** you can, using the third slide __(Wealth-v-Health Exponential)__ in the Desmos activity.
-
-[cols="5a,1a", grid="none", frame="none", stripes="none"]
-|===
-|
-@hspace{3em}@math{f(x) = }@fitbruby{10em}{}{initial value (a)}@math{(}@fitbruby{10em}{}{growth factor (b)}@math{^x) + } @fitbruby{10em}{}{vertical shift (k)}
-|
-@fitbruby{10em}{}{S-value}
-|===
-
-@n Are any of these models a good fit for this data? Why or why not?
-
-@fitb{}{}
+@fitb{}{}  
