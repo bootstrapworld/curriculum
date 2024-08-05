@@ -483,6 +483,7 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('^%+$', '\n')
           l1 = l1:gsub('{two%-colons}', '::')
           l1 = l1:gsub('{empty}', '')
+          l1 = l1:gsub('{plus}', '+')
           o:write(l1, '\n')
         end
       end
