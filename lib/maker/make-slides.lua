@@ -134,6 +134,7 @@ local function get_slides(lsn_plan_adoc_file)
   local coeIdx = 0
   local imgIdx = 0
   local curr_slide
+  local text_before_pd_slide = false
 
   local function set_current_slide()
     local n = #slides
@@ -152,6 +153,10 @@ local function get_slides(lsn_plan_adoc_file)
     local old_header = curr_slide.header
     set_current_slide()
     curr_slide = newslide()
+    if text_before_pd_slide then
+      curr_slide.text = '@pd-slide-i{'
+      text_before_pd_slide = false
+    end
     curr_slide.section = 'Repeat'
     curr_slide.header = old_header
     return curr_slide
@@ -159,6 +164,7 @@ local function get_slides(lsn_plan_adoc_file)
 
   local function scan_directives (i, nested_in, dont_count_image_p)
     if not nested_in then curr_slide = newslide() end
+    local curr_text_before_pd_slide = false
     while true do
       local c = i:read(1)
       if not c then
@@ -264,7 +270,7 @@ local function get_slides(lsn_plan_adoc_file)
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide' and nested_in ~= 'strategy') then
             terror('@slidebreak inside @' .. nested_in)
           end
-          local curr_slide = insert_slide_break()
+          insert_slide_break()
           local c2 = buf_peek_char(i)
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
@@ -300,6 +306,11 @@ local function get_slides(lsn_plan_adoc_file)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
+          curr_slide.text = curr_slide.text .. '}'
+        elseif directive == 'pd-slide-i' then
+          text_before_pd_slide = true
+          local arg = read_group(i, directive, not 'scheme', 'multiline')
+          scan_directives(io.open_buffered(false, arg), not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. '}'
         else
           if directive == 'image' then
