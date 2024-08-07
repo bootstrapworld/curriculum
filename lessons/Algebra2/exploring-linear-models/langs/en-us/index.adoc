@@ -36,12 +36,11 @@
 
 | Key Points For The Facilitator
 |
-- The math content of this lesson is primarily a review from Algebra 1.
-- This lesson introduces necessary programming skills while students practice exploring _linear relationships_.
 - This lesson establishes a structure for exploring relationships in data that students will make use of in subsequent explorations:
   	* build a model from samples
   	* fit a model
   	* improve upon the model
+- This lesson introduces necessary programming skills while students practice exploring _linear relationships_, the math content of which is primarily a review from Algebra 1.
 - Two of the starter files referenced in this file pull data from the same spreadsheet.
   * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file.
   * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
@@ -107,14 +106,6 @@ Before we dig deeper into the State Demographics data, let's think back to the a
 
 @slidebreak
 
-Pie and bar charts help us see the _frequency_ of values in a single _categorical_ column.
-
-There are other displays, like histograms and box plots, that help us explore the _distribution_ of values in a single _quantitative_ column.
-
-But what we really want is a display that will help us search for _a relationship between two quantitative columns_, and that's exactly what scatter plots do!
-
-@slidebreak
-
 @lesson-point{
 @vocab{Scatter plots} reveal the relationship between two columns by plotting one on the x-axis and the other on the y-axis.
 }
@@ -129,7 +120,10 @@ We suspect that age affects the adoption time, so we'll use `age` as our @vocab{
 
 @strategy{Why not Independent/Dependent?}{
 
-Data Science relies on concepts in Probability. When discussing events in Probability, we may say two events are _dependent_ or they are _independent_. For instance, we might say having a job and having a college education are dependent because one affects the probability of the other occurring. When discussing relationships in Data Science, we want to go further than just saying two things are connected: We want to consider if they are *causally connected*: one of them affects the other, but not vice versa. Therefore, we think of one variable as being explanatory and the other as the response variable. For instance, having a college education would be our explanatory variable, and having a job would be the response.
+
+When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are _never_ fully dependent on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
+
+Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in _explaining_ another when searching for a relationship.
 }
 
 It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be represented by a point on the scatter plot with `age` for @math{x} and `weeks` for @math{y}.
@@ -246,19 +240,16 @@ Not every shape has a direction! For example, a curve can start out sloping upwa
 
 
 ==== Strength
+
+@lesson-point{
+@vocab{Strength} indicates how closely the two variables are related.
+}
+
 @right{@image{images/A.gif, 200}}A relationship is *strong* if knowing a data point's *x-value gives us a very good idea of what its y-value will be* (knowing a student's age gives us a very good idea of what grade they're in). A strong linear relationship means that the points in the scatter plot are all clustered _tightly_ around an invisible line.
 
 @clear
 
 @right{@image{images/1a.gif, 200}}A relationship is *weak* if *x tells us little about y* (a student's age doesn't tell us much about their number of siblings). A weak linear relationship means that the cloud of points is scattered very _loosely_ around the line.
-
-@lesson-point{
-@vocab{Strength} indicates how closely the two variables are related.
-}
-
-@lesson-point{
-@vocab{Strength} indicates how closely the two variables are related.
-}
 
 === Investigate
 
@@ -309,7 +300,7 @@ We'd expect students to be able to surface much of the following:
 - The steepness of a line can be described by its @vocab{slope} (or _constant_ @vocab{rate of change}).
 - The @vocab{slope} can be calculated from any two points.
 - Students may remember the @vocab{slope} as @math{\frac{change \; in \; y}{change \; in \; x}} or @math{{rise}\over{run}} or @math{\frac{y_2 - y_1}{x_2 - x_1}}.
-- The point where the line crosses the y-axis is called the @vocab{y-intercept}.
+- The point where the line crosses the y-axis is called the @vocab{y-intercept} or vertical shift.
 - The x-coordinate of the @vocab{y-intercept} always starts with zero, e.g. @math{(0, y)}.
 - Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
 - Horizontal lines have a constant rate of change of zero.
@@ -404,10 +395,11 @@ Complete @printable-exercise{model-college-v-income-1.adoc}.
 
 === Synthesize
 
-@teacher{Confirm that students were able to successfully compute slope and y-intercept, define and test `al-ak(x)` in Pyret, and test how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.}
+@teacher{
+Confirm that students were able to successfully compute slope and y-intercept, define and test `al-ak(x)` in Pyret, and test how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.
+}
 
 @QandA{
-
 @Q{Why wasn't the Alaska-Alabama model a good fit for the rest of the data?}
 @A{Because Alaska is an outlier that falls pretty far above the line of best fit.}
 @Q{If we had chosen two other points from which to build our model, could we have done better? Which points did you choose, and why?}
@@ -662,8 +654,6 @@ Models are only useful if know how to use them!
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
 }
 
-
-
 === Synthesize
 
 @QandA{
@@ -675,6 +665,14 @@ Models are only useful if know how to use them!
 - How could we use scatter plots and linear models to find out if wealthier people live longer?
 - How could we use scatter plots and linear models to find answers to _other_ questions?
 
+@slidebreak
+
+Our model is built from data about all the existing states, which have college attendance rates between 18.3% (West Virginia) and 52.4% (Washington, DC). Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate.
+
+Is our model more reliable for one of these states than another? Why or why not?
+
+@teacher{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}
+
 == (Optional) Other Forms of Linear Models @duration{45 minutes}
 
 === Overview
@@ -684,9 +682,29 @@ Students are reminded of the three forms of linear models available to us, discu
 
 When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
 
-So far, we've focused on models using the *Slope-Intercept* form of the line. That's because it's the form that is defined in terms of the response variable, making it most compatible with the programming environment.
+So far we have only discussed vertical shifts, but it is also possible to shift a line or curve horizontally. 
 
-But depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
+The *Slope-Intercept* form of the line we've been using tells us about the slope (@math{m}) and the vertical shift. It is also possible to shift a line or curve horizontally, and for some of the non-linear models we will be exploring in this course, identifying the horizontal shift will be important. To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
+
+@lesson-point{
+Using the form @math{f(x) = m(x-h) + k}@hspace{1em} allows us to change both the horizontal shift (@math{h}) and the vertical shift (@math{k}).
+}
+
+_Note: When the horizontal shift is zero, we can safely remove (@math{h}) from the equation. That's exactly what we've been doing with our Slope-Intercept form._
+
+@lesson-instruction{
+- Let's take a moment to explore how horizontal shifts work with linear functions.
+- Complete @opt-starter-file{alg2-horizontal}.
+}
+
+@QandA{
+@Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
+@A{No. Because lines go on forever without changing direction, horizontal shifts can always be accounted for with vertical shifts. We can prove this to ourselves algebraically because if we distribute the @math{m} in the equation @math{f(x) = m(x-h) + k}, we get @math{f(x) = mx - mh + k} and since @math{mh} and @math{k} will always be numbers, we can just add them together to get the y-intercept.} 
+}
+
+We will mostly be using *Slope-Intercept* form of the line in this course, because it's the simplest form that is defined in terms of the response variable, making it most compatible with the programming environment
+
+But, depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
 
 @slidebreak
 
@@ -698,7 +716,7 @@ You may already be familiar with the different forms of linear models available 
 | @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
 <| 
 - m: slope
-- b: y-intercept
+- b: y-intercept / vertical shift
 <|
 - m: slope
 - @math{y_1}: y-coordinate of a point
@@ -716,6 +734,25 @@ You may already be familiar with the different forms of linear models available 
 (2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope.
 
 (3) *Standard Form* makes it easy to find the x- and y-intercepts of the line.
+
+@strategy{Why do we use these letters as stand-ins for the constants?}{
+The letters used in these forms of the line are just conventions people have agreed upon over time! 
+
+Standardized conventions have their benefits, but sometimes they also have downsides.
+
+For example, some students might be confused by the fact that:
+
+- @math{b} in the slope-intercept form and @math{B} in standard form represent different things
+- @math{b} represents the vertical shift in linear models while it represents the base in exponential models
+
+As we've thought through what would best support students with learning to model data, we've learned that people are in less agreement about how to name constants for non-linear models. 
+
+We believe that what would best support students is to use letters that highlight the similarities between the various models they will be seeing.  Our nonlinear modeling materials will consistently use @math{k} for the vertical shift.
+
+Applying this to the point-slope form, we'd get: @hspace{1em} @math{y=mx+ k}
+
+You can foreshadow this for your students by discussing the fact that while the letters used are conventions, they are stand-ins for patterns and that, having identified the pattern of the point-slope form, we could just as easily have written it with other letters.
+}
 
 @teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
 

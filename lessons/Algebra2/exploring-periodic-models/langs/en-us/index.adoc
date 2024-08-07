@@ -214,15 +214,14 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (x,y) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled. 
+@right{@image{images/pizza-slice2.png, 100}}As the point (A,B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled.
 
 @QandA{
 In our clock example, we divide the circle into twelve "slices", each representing one hour. But of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
-@A{
-- _Minutes_, which divide our circle up into 720 slices instead of 12.
-- _Degrees_, divide a circle up into 360 slices instead of 12.
-- _Compass Directions_ like N, NE, E, SE, etc., which divide our circle up into 8 slices instead of 12.
+@A{_Minutes_, which divide our circle up into 720 slices instead of 12.
+** _Degrees_, divide a circle up into 360 slices instead of 12.
+** _Compass Directions_ like N, NE, E, SE, etc., which divide our circle up into 8 slices instead of 12.
 }
 @Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
@@ -305,8 +304,31 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 | increase counter-clockwise 
 |===
 
+@slidebreak
+
+@ifslide{
+[cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
+|===
+
+| hours on a clock
+| vs
+| radians and degrees on a circle
+
+| start from the top +
+ (where 12 o'clock is)
+|
+| start from zero on the right +
+(where 3 o'clock would be)
+
+| increase clockwise
+|
+| increase counter-clockwise
+|===
+}
 
 _These are conventions that people have agreed upon over time to make it easy to collaborate. If somebody wanted to make a clock with the numbers written backwards and have the hands move the other way, it would be possible to learn how to tell time using their clock... but it likely would be more confusing than helpful for most people if we hung a clock like that in our school._
+
+@slidebreak
 
 @lesson-instruction{
 Complete the table on @printable-exercise{converting-angles.adoc} with your partner, following the prompts in #1 and #2.
@@ -334,7 +356,7 @@ To plot these relationships when the input is @vocab{radians}, instead of hours,
 === Investigate
 Periodic models have the basic form:
 
-@center{@math{f(x) = A \sin(B(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = A \cos(B(x - h)) + k}}
+@center{@math{f(x) = a \sin(b(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - h)) + k}}
 
 Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
 
@@ -347,12 +369,13 @@ Both @math{sin} and @math{cos} are closely related to one another, and each one 
 
 @slidebreak
 
-@teacher{Sync or pace students to __Slide 2: Graphing Periodic Models__ of @starter-file{alg2-exploring-periodic-desmos}.}
+@teacher{Sync or pace students to __Slide 2: Modeling the Ferris Wheel Dataset (sin)__ of @starter-file{alg2-exploring-periodic-desmos}.}
 
 @lesson-instruction{
 - Let's return to the *Exploring Periodic Models Desmos file* to experiment with the coefficients of periodic models!
-- You should now be on *Slide 2: Graphing Periodic Models*.
-- Use it to complete @printable-exercise{graphing-models-a.adoc}, @printable-exercise{graphing-models-b.adoc}, and @printable-exercise{graphing-models-h.adoc} with your partner.
+- You should now be on *Slide 2: Modeling the Ferris Wheel Dataset (sin)*.
+- Adjust the sliders to fit this data. How close can you get?
+- With your partner or group, complete @printable-exercise{graphing-models-a.adoc}, @printable-exercise{graphing-models-b.adoc}, and @printable-exercise{graphing-models-h.adoc}.
 - Then turn to @printable-exercise{vocab-from-diagram.adoc} and
 see if you can come up with explanations for what each of the terms on this diagram refer to.
 }
@@ -423,12 +446,12 @@ The vertical shift is the amount the function is shifted up or down
 
 @slidebreak
 
-@teacher{Sync or pace students to __Slides 3 through 5 of @starter-file{alg2-exploring-periodic-desmos}__.}
+@teacher{Sync or pace students to __Slides 2 through 4 of @starter-file{alg2-exploring-periodic-desmos}__.}
 
 @lesson-instruction{
 - Let's return to the *Exploring Periodic Models Desmos file*.
-- You should now be on *Slide 3: Modeling the Ferris Wheel Dataset (sin)*.
-- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc}.
+- You should still be on *Slide 2: Modeling the Ferris Wheel Dataset (sin)*.
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc}, advancing to *Slide 3: Translating from sin to cos* and *Slide 4: Modeling the Ferris Wheel Dataset (cos)*.
 }
 
 @slidebreak
@@ -628,12 +651,15 @@ It gets even worse!
 
 @center{@image{images/historical-bad-fit.png}}
 
+@QandA{
+@Q{If our model is so bad at fitting historical data, why was it so good at fitting just the one year?}
+@A{Models are only reliable within the span of the data they fit. The fact that the model fit `recent-table` well means it's a good model _for that year_, but we can't make any assumptions about dates outside of the range of the training data.}
+}
 
 === Investigate
 Let's just look at the historical data by itself, without worrying about models.
 
 @center{@image{images/historical-scatter-plot.png}}
-
 @lesson-instruction{
 - In small groups, discuss what you Notice and Wonder about this plot.
 - Be prepared to share back with the class!

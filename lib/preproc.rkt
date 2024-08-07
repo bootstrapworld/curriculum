@@ -1456,7 +1456,7 @@
                                   ))]
                            [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
-                           [(member directive '("ifslide" "pd-slide"))
+                           [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
                                         (regexp-match "@image{" text)
@@ -1643,6 +1643,8 @@
                             (unless *narrative*
                               (error 'ERROR
                                      "adoc-preproc: @workbooks valid only in pathway narrative"))
+                            (check-link (build-path *containing-directory* "workbook" "workbook.pdf"))
+                            (check-link (build-path *containing-directory* "workbook" "workbook-long.pdf"))
                             (print-workbook-info *target-pathway* o)]
                            [(string=? directive "other-resources")
                             (unless *narrative*
@@ -1753,9 +1755,9 @@
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.actually-openblock.indentedpara]\n====\n" o)
+                              (display "\n[.actually-openblock.indentedpara]\n=====\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n====\n" o))]
+                              (display "\n=====\n" o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -1957,7 +1959,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
                               (expand-directives:string->port text o #:enclosing-directive directive))]
-                           [(string=? directive "strategy")
+                           [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (display "\n[.strategy-box]\n--\n" o)
@@ -2126,6 +2128,8 @@
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
+                (check-link (build-path *containing-directory* "workbook" "workbook.pdf"))
+                (check-link (build-path *containing-directory* "workbook" "workbook-long.pdf"))
                 (print-workbook-info *target-pathway* o)
                 (print-other-resources-intro o)
                 (print-other-resources *target-pathway* *proglang* o))

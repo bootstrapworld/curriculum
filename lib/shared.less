@@ -3,6 +3,25 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
+ * IMPORT FONTS
+
+
+@font-face {
+  font-family: 'MJXTEX';
+  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'MJXTEX-I';
+  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'MJXTEX-B';
+  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
+}
+ */
+/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -66,9 +85,10 @@ body {
   .quad { display: inline-block; }
   
   /* Make .mathunicode and MathJax look similar */
-  .MathJax, .mathunicode { 
-    font-family: MJXZERO, MJXTEX-I; font-size: inherit !important; 
+  .MathJax, .mathunicode {
+    display: inline-block;
     font-weight: normal !important;
+
     .overbar {
       border-top: 1px solid;
       display: inline-block;
@@ -76,8 +96,13 @@ body {
       margin-left: 2px;
     }
     sub { font-size: 65% !important; }
-  }  
-
+  }
+  .MathJax { 
+      font-family: MJXZERO, 'MJXTEX'; 
+      font-size: inherit !important;
+  }
+  .mathunicode i { font-family: 'MJXTEX-I' }
+  
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
@@ -88,7 +113,12 @@ body {
   }
 
   #content { margin: 0; }
+  /* 
+    When used in a header, exponents should be medium 
+    and there's no need for a bottom border 
+  */
   #header>h1:only-child { border-bottom: none; }
+  #header sup { font-size: medium; }
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
@@ -241,6 +271,7 @@ lines on some browsers */
 }
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
+  display:            inline-block;
   bottom:             -11px;
   left:               0;
   font-size:          9.5px;
@@ -252,7 +283,12 @@ lines on some browsers */
   white-space:        nowrap;
   user-select:        none;
 }
+/* Rubies are sensitive to line-height, so force
+  the same font and special superscript behavior 
+*/
+.ruby * { font-family: @text-font !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
+
 .fitb.stretch, .fitbruby.stretch { 
   margin-left:        5px; 
   vertical-align:     baseline; 
@@ -637,7 +673,8 @@ body.workbookpage {
   */
   table.graph {
     grid-gap: 20px; 
-    td p.tableblock { position: absolute; }
+    margin-top: 5px;
+    td p.tableblock { position: absolute; background: white; }
     td {
       border: none !important;
       background-image:

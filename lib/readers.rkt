@@ -346,8 +346,13 @@
   (string-append "√"
     (enclose-span ".overbar" x)))
 
+(define (math-italic s #:asciidoc? [asciidoc? #t])
+  (if asciidoc?
+      (enclose-tag "i" "" s)
+      (string-append "<i>" s "</i>")))
+
 (define (math-unicode-if-possible text #:asciidoc? [asciidoc? #t])
-  ; (printf "doing math-unicode-if-possible ~s\n" text)
+  ;(printf "doing math-unicode-if-possible ~s ~s\n" text asciidoc?)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
              (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
@@ -355,6 +360,7 @@
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
              (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
+             (and (not asciidoc?) (regexp-match "\\\\overline" text))
              ; (and (regexp-match "\\\\div" text) (regexp-match "=" text))
              )
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)
@@ -411,7 +417,10 @@
                                 [(member c *mathjax-chars-that-need-flanking-space*)
                                  (read-char i)
                                  (string #\space c #\space)]
-                                #;[(assoc c *mathjax-special-chars*)
+                                [(char-alphabetic? c)
+                                 (read-char i)
+                                 (math-italic (string c) #:asciidoc? asciidoc?)]
+                                [(assoc c *mathjax-special-chars*)
                                  => (lambda (x)
                                       (read-char i)
                                       (second x))]

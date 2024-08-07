@@ -1,28 +1,11 @@
 = Exploring the Fuel Efficiency Dataset
 ++++
 <style>
+/* Make autonums inside tables look consistent with those outside */
 body.workbookpage td .autonum::after { content: ')' !important; }
+
 /* Allow fitb to be even smaller than the normal minimum */
 .fitb{min-width: 3em;}
-/* Use table cells as graph paper */
-table div.graph:first-of-type {
-    background-color: rgba(#fff, .5);
-    background-image:
-        linear-gradient(lightblue 2px, transparent 2px),
-        linear-gradient(270deg, lightblue 2px, transparent 2px),
-        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 1px),
-        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position: 80px -10px;
-}
-
-table td:first-child,
-table td:first-child .content,
-table td:first-child .notsolution,
-table td:first-child .graph {
-    display: flex; flex-direction: column; flex-grow: 1;
-}
-
 </style>
 ++++
 
@@ -49,7 +32,7 @@ If it appears to be linear, what is the *direction*? If it does _not_ appear to 
 Write the model below, in both math and Pyret notation.
 
 @center{
- @math{f(x) =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept} @hspace{5em} @show{(code '(define (f x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
+ @math{y =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept / vertical shift} @hspace{5em} @show{(code '(define (y x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
 }
 
 @n Is the best-possible linear model a good fit? @fitb{5em}{@ifsoln{No}}. Why or why not? @fitb{}{}
