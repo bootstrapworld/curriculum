@@ -1456,7 +1456,7 @@
                                   ))]
                            [(member directive '("scrub" "slidestyle"))
                             (read-group i directive)]
-                           [(member directive '("ifslide" "pd-slide"))
+                           [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
                                         (regexp-match "@image{" text)
@@ -1959,7 +1959,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n** " o)
                               (expand-directives:string->port text o #:enclosing-directive directive))]
-                           [(string=? directive "strategy")
+                           [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
                               (display "\n[.strategy-box]\n--\n" o)
