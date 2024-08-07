@@ -360,6 +360,7 @@
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
              (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
+             (and (not asciidoc?) (regexp-match "\\\\overline" text))
              ; (and (regexp-match "\\\\div" text) (regexp-match "=" text))
              )
          ; (printf "WARNING: @math{~a} needs MathJax\n\n" text)

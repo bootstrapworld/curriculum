@@ -31,6 +31,7 @@
     ("algebra-pyret" "https://www.lulu.com/shop/ben-lerner-and-joe-politz-and-dorai-sitaram-and-rachel-tabak/bootstrapalgebra-pyret-2024/paperback/product-45mn9qg.html")
     ("data-science" "https://www.lulu.com/shop/nancy-pfenning-and-ben-lerner-and-joe-politz-and-dorai-sitaram/bootstrapdata-science-pyret-2024/paperback/product-dymngdr.html")
     ("data-science-codap" "#")
+    ("algebra-2" "https://www.lulu.com/shop/shriram-krishnamurthi-and-kathi-fisler-and-ben-lerner-and-joe-politz/bootstrap-algebra-2/paperback/product-45mwgrw.html")
     ("reactive" "https://www.lulu.com/shop/ben-lerner-and-joe-politz-and-dorai-sitaram-and-rachel-tabak/bootstrap-reactive-pyret-2024/paperback/product-p6k2eme.html")
     ))
 
