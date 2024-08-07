@@ -134,7 +134,6 @@ local function get_slides(lsn_plan_adoc_file)
   local coeIdx = 0
   local imgIdx = 0
   local curr_slide
-  local text_before_pd_slide = false
 
   local function set_current_slide()
     local n = #slides
@@ -153,10 +152,6 @@ local function get_slides(lsn_plan_adoc_file)
     local old_header = curr_slide.header
     set_current_slide()
     curr_slide = newslide()
-    if text_before_pd_slide then
-      curr_slide.text = '@pd-slide-i{'
-      text_before_pd_slide = false
-    end
     curr_slide.section = 'Repeat'
     curr_slide.header = old_header
     return curr_slide
@@ -267,30 +262,16 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'pd-slide' and nested_in ~= 'strategy') then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide') then
             terror('@slidebreak inside @' .. nested_in)
           end
           insert_slide_break()
           local c2 = buf_peek_char(i)
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
+          elseif nested_in == 'ifpdslide' then
+            curr_slide.style = course_string .. ' Title and Body'
           end
-        elseif directive == 'pd-slide' then
-          if nested_in and nested_in ~= 'ifproglang' then
-            terror('@pd-slide inside @' .. nested_in)
-          end
-          local arg = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@pd-slide-i{@slidebreak{' .. course_string .. ' Title and Body}\n' .. arg .. '}\n@slidebreak\n'
-          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
-        elseif directive == 'strategy' then
-          if nested_in and nested_in ~= 'ifproglang' then
-            terror('@strategy inside @' .. nested_in)
-          end
-          local arg1 = read_group(i, directive)
-          ignore_spaces(i)
-          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@pd-slide-i{@slidebreak{' .. course_string .. ' Title and Body}\n' .. '@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n@slidebreak\n'
-          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
         elseif directive == 'A' then
@@ -301,17 +282,29 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg), directive, 'dont count images')
           curr_slide.text = curr_slide.text .. '}'
+        elseif directive == 'ifpdslide' then
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
+          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
+          curr_slide.text = curr_slide.text .. '}'
         elseif directive == 'strategy-i' then
+          if nested_in ~= 'ifpdslide' then
+            terror('@strategy outside @ifpdslide')
+          end
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
-        elseif directive == 'pd-slide-i' then
-          text_before_pd_slide = true
+        elseif directive == 'pd-slide' then
           local arg = read_group(i, directive, not 'scheme', 'multiline')
-          scan_directives(io.open_buffered(false, arg), not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. '}'
+          arg = '@ifpdslide{@slidebreak\n' .. arg .. '}\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
+        elseif directive == 'strategy' then
+          local arg1 = read_group(i, directive)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
+          arg = '@ifpdslide{@slidebreak\n@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'image' then
             -- dead?
