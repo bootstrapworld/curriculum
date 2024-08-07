@@ -115,6 +115,13 @@ use the `--nomake` option to skip the `make`.
 
   build-slide --nomake function-composition
 
+=== `--pd` option
+
+The `--pd` option makes a `pd-slides.mkd` that has additional
+material suited for a PD. The additional material is marked with
+special directives that are ignored for regular HTML and non-PD
+slides. (See below for the directives.)
+
 == build-all-slides
 
 `build-slide` builds the deck for a single argument lesson. To
@@ -140,4 +147,33 @@ e.g., algebra-pyret, use
   `make`, but only once -- not once for each of the lessons that
   it processes. So failing to mention this option is not so
   terrible.)
+
+== Slide-specific directives
+
+The lesson-plan adoc files are typically split into slides at the 2-level
+sections, with the lower-level sections being ignored. An author
+can insert their own slide-break with the directive
+`@slidebreak`, which is a no-op as far as the regular HTML
+generation is concerned.
+
+A final 1-level section, if it is named `Addtional Exercises`, is
+also converted to a slide.
+
+PD slides are marked with `@pd-slide{...}` or
+`@strategy{...}{...}` where the material is
+inserted as a new slide, but only if the `--pd` option is used.
+
+Note that introducing these in a final 1-level section
+`Additional Exercise` implies this is no longer the final slide.
+If you want to include a `@strategy` in such a slide, it's best
+to use the primitives
+
+  @ifpdslide{
+    @strategy-basic{...}{...}
+  }
+
+as these don't introduce a tacit slidebreak. (The less verbose
+directives `@pd-slide` and `@strategy` are built on top of
+`@ifpdslide` and `@strategy-basic`.)
+include
 
