@@ -287,7 +287,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
-        elseif directive == 'strategy-i' then
+        elseif directive == 'strategy-basic' then
           if nested_in ~= 'ifpdslide' then
             terror('@strategy outside @ifpdslide')
           end
@@ -303,7 +303,7 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@ifpdslide{@slidebreak\n@strategy-i{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'image' then
