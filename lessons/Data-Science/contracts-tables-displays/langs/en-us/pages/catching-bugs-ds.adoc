@@ -26,17 +26,17 @@
 
 == Finding Mistakes with Error Messages
 
-__The code below is BUGGY! Read the code and the error messages, and see if you can catch the mistake WITHOUT typing the code into @proglang.__
+_The code below is BUGGY! Read the code and the error messages, and see if you can catch the mistake WITHOUT typing the code into @proglang._
 
 @n `sort(animals-table, name , true)`
 
 [.indentedpara.error]
 --
-The name @span{.underline}{**name**} is unbound:
+The name @span{.underline}{*name*} is unbound:
 
-sort(animals-table, **name** , true)
+sort(animals-table, *name* , true)
 
-It is @span{.underline}{**used**} but not previously defined.
+It is @span{.underline}{*used*} but not previously defined.
 
 --				
 
@@ -47,8 +47,8 @@ It is @span{.underline}{**used**} but not previously defined.
 
 [.indentedpara.error]
 --
-The @span{.underline}{**Boolean annotation**}: +
-fun sort(t :: Table, col :: String, asc :: **Boolean**) +
+The @span{.underline}{*Boolean annotation*}: +
+fun sort(t :: Table, col :: String, asc :: *Boolean*) +
 was not satisfied by the value +
 @indented{"true"}
 
@@ -64,9 +64,9 @@ was not satisfied by the value +
 --
 Pyret didn't understand your program around:
 
-sort(animals-table **"name"** true)
+sort(animals-table *"name"* true)
 
-You may need to add or remove some text to fix your program. Look carefully before @span{.underline}{**the highlighted text**}. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
+You may need to add or remove some text to fix your program. Look carefully before @span{.underline}{*the highlighted text*}. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
 --
 
 @hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{the commas that should be separating the arguments are missing.}}
@@ -94,9 +94,9 @@ You may be missing an "end", or closing punctuation like ")" or "]" somewhere in
 --
 Pyret thinks this code is probably a function call:
 
-**sort** __(animals-table, "name", true)__
+*sort* _(animals-table, "name", true)_
 
-Function calls must not have space between the @span{.underline}{**function expression**} and the @span{.underline}{__arguments__}.
+Function calls must not have space between the @span{.underline}{*function expression*} and the @span{.underline}{_arguments_}.
 --
 
 @hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{there shouldn't be a space between sort and the parentheses.}}

@@ -1,35 +1,37 @@
 = Putting it All Together 
 
 [linkInstructions]
-Open the @starter-file{putting-it-all-together} and take a look at the helper functions in the Definitions Area.
+Open the @starter-file{putting-it-all-together} and *take a look at the helper functions* in the Definitions Area.
+
+Write the names of those functions here: @fitb{}{}
 
 == Filter and Building with our Helper Functions
 
 @vspace{1ex}
 
-__Example: Make a table of only dogs (define it as `dogs`)__ 
+_Example: Make a table of only dogs (define it as `dogs`)_ 
 
 @fitb{}{`dogs = filter(animals-table, is-dog)`}
 
 
 @n Make a table of only fixed animals (define it as `fixed`)
 
-@fitb{}{@ifsoln{`fixed = filter(animals-table, is-fixed)`}}
+@fitb{}{`fixed =`  @ifsoln{`filter(animals-table, is-fixed)`}}
 
 
-@n Make a table with a column called "sticker", containing a label for every animal (define it as `stickers`)
+@n Make a table with a column called "sticker", containing a label for every animal
 
-@fitb{}{@ifsoln{`stickers = build-column(animals-table, "sticker", label)`}}
+@fitb{}{`stickers =` @ifsoln{build-column(animals-table, "sticker", label)`}}
 
 
 @n Make a table of only fixed dogs (define it as `fixed-dogs`)
 
-@fitb{}{@ifsoln{`fixed-dogs = filter(fixed, is-dog)`}}
+@fitb{}{`fixed-dogs =` @ifsoln{`filter(fixed, is-dog)`}}
 
 
 @star Make a table of old, fixed dogs... with a "sticker" column! (define it as `sticker-table`)
 
-@fitb{}{@ifsoln{`sticker-table = build-column(filter(fixed-dogs, is-old), "sticker", sticker)`}}
+@fitb{}{`sticker-table =` @ifsoln{`build-column(filter(fixed-dogs, is-old), "sticker", label)`}}
 
 
 == Define Additional Helper Functions
@@ -44,21 +46,21 @@ __Example: Make a table of only dogs (define it as `dogs`)__
 @fitb{}{@ifsoln{`fun months(r): r["weeks"] / 4.435 end`}}
 
 
-@star Make a table with a "months" column (define it as `months`)
+@star Make a table with a "months" column (define it as `months-table`)
 
-@fitb{}{@ifsoln{`months = build-column(animals-table, "months", months)`}}
+@fitb{}{@ifsoln{`months-table = build-column(animals-table, "months", months)`}}
 
 
 == Make Displays Using Your New Tables
 
 @n Make a pie chart showing the sex of only fixed dogs.
 
-@fitb{}{@ifsoln{`pie-chart(filter(animals-table, is-fixed), "sex")`}}
+@fitb{}{@ifsoln{`pie-chart(fixed-dogs, "sex")`}}
 
 
 @n Make a box plot showing the distribution of months to adoption.
 
-@fitb{}{@ifsoln{`box-plot(sticker-table, "months")`}}
+@fitb{}{@ifsoln{`box-plot(months-table, "months")`}}
 
 
 @star Make a scatter plot of old, fixed dogs, comparing age to pounds using the "sticker" as the label!

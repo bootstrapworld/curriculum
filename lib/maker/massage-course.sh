@@ -66,7 +66,6 @@ for pl in $proglangs; do
   done
 
   if test ! -f lesson-order.txt; then
-    echo
     echo WARNING: No lesson-order.txt in pathway $targetpathway
     touch lesson-order.txt
     touch .cached/.workbook-lessons.txt.kp

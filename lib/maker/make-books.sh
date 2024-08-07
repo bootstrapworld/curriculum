@@ -17,6 +17,14 @@ else
   #
   for p in distribution/$NATLANG/courses/*; do
     test -d $p || continue
+    mp=$p/.cached/.missing-workbook-pages
+    if test -f $mp; then
+      echo Not making workbooks for $p as it\'s missing the following workbook pages:
+      for f in $(cat $mp); do
+        echo - $f
+      done
+      continue
+    fi
     COURSE_DIR=$p node lib/makeWorkbook.js &
     # COURSE_DIR=$p node lib/makeWorkbook.js
   done

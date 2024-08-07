@@ -97,7 +97,7 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 @slidebreak
 
 @lesson-point{
-Contracts are the __instruction manual__ for functions.
+Contracts are the _instruction manual_ for functions.
 }
 
 The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
@@ -112,7 +112,7 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 @Q{How did `sort` work with quantitative columns?}
 @A{true sorted the values from least to greatest. false sorted the values from biggest to smallest.}
 
-@Q{What new questions did you think of that could be answered using `sort`?}
+@Q{What new questions did you think of, which could be answered using `sort`?}
 }
 
 @slidebreak
@@ -125,7 +125,7 @@ Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
 
 === Common Misconceptions
 
-Students are likely to think that `sort` __changes the table__, when instead it __produces a new, sorted table.__ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
 
 === Synthesize
 
@@ -161,7 +161,7 @@ What if we wanted to see the ten youngest animals?
 
 One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. 
 
-**The rules for Circles of Evaluation are simple:**
+*The rules for Circles of Evaluation are simple:*
 
 (1) Every Circle of Evaluation must have a single function, written at the top.
 
@@ -183,11 +183,11 @@ If we want to see the first ten animals, our diagram would look like this.
 
 @slidebreak{InvestigateC}
 
-@ifslide{**Circles can contain other circles!**
+@ifslide{*Circles can contain other circles!*
 
 }
 @indented{
-If we want to see the ten youngest animals, our diagram would look like this.
+If we want to see the ten _youngest_ animals, our diagram would look like this.
 
 @do{
 (define exp1 '(first-n-rows (sort animals-table "age" true) 10))
@@ -208,11 +208,11 @@ If we wanted to get extra fancy and see the species count for the youngest ten a
 @show{(coe exp2)}
 }
 
-__Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle.__
+_Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle._
 
 @slidebreak{InvestigateC}
 
-**To convert a Circle of Evaluation into code:**
+*To convert a Circle of Evaluation into code:*
 
 - We start at the outside and work our way in. 
 - After each function we open a pair of parentheses, and then convert each argument inside the Circle. 
@@ -250,10 +250,43 @@ __Note: Values like Numbers, Strings, and Booleans are still written by themselv
 - What did you Notice?
 - What did you wonder?
 
+
+@pd-slide{
+
+*Connect to the Classroom: Contracts are a major pedagogical technique.*
+
+Contracts are the second major pedagogical technique in Bootstrap. Circles of Evaluation are the first one, and contracts are the second.
+
+Contracts are really important because just about every single mistake kids make can be solved by looking at their contracts. The answer is always, “Check your contract.”
+
+And that is important, because it reminds students the value of writing stuff down.
+}
+
+@pd-slide{
+
+*Connect to the Classroom: Contracts help students understand domain and range.*
+
+Contracts give students a concrete understanding of a math concept that is pretty abstract.
+
+When everything is a number, it's hard to understand domain and range. Kids wonder why they need to learn them, why they matter.
+
+Domain and range is topic that we often squeeze in the week before finals. But once we have rich data types - like strings, Booleans, and images - domain and range become more concrete.
+}
+
+@slidebreak{DS Title and Body}
+
+@pd-slide{
+
+We're building toward an understanding of three different representations for functions and we've already encountered the first one - contracts.
+
+The goal is to get fluent in each representation. Eventually, we're going to talk about how each representation is essentially a tool you can use for solving word problems. If you know how to fit them together, you get a nice road map for attacking virtually any word problem you'll encounter.
+}
+
+
 == Bug Hunting @duration{10 minutes}
 
 === Overview
-This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are __specially-designed__ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
+This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
 
 === Launch
 
@@ -322,9 +355,9 @@ Making images is a highly motivating context for reading error messages and writ
 @strategy{Supporting Diverse Learners}{
 
 
-Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for __everyone to have the opportunity to explore.__
+Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for _everyone to have the opportunity to explore._
 
-Students do **not** need to find all of the contracts on this page in order to complete the lesson or the following pages.
+Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages.
 }
 
 @ifnotslide{
@@ -361,7 +394,7 @@ Make sure students at least find the contracts for `star`, `rectangle` and `text
 
 Students will be introduced to functions for making one-variable displays in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
 
-The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce displays. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's ok! 
+The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce displays. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's OK!
 
 @teacher{Once students know how to use Contracts to write expressions to make these displays, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms}, @lesson-link{visualizing-the-shape-of-data}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-displays}, etc.}
 
@@ -383,7 +416,8 @@ Turn to @printable-exercise{exploring-displays.adoc}. Let's look at the first fu
 
 @Q{What is the Range of the function?}
 @A{Image}
-- Take a minute and see if you and your partner can write an expression that will generate a `bar-chart`.
+
+@Q{Take a minute and see if you and your partner can write an expression that will generate a `bar-chart`.}
 
 @Q{Did `bar-chart` consume a categorical or quantitative column of data?}
 @A{categorical}
@@ -424,7 +458,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 @lesson-instruction{
 - Complete @printable-exercise{coe-displays.adoc}.
 - Then consider what display it might be interesting to compare each of the displays on this page with.
-  * __Displays are often most informative when compared with other displays.__ 
+  * _Displays are often most informative when compared with other displays._ 
   * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
 } 
 
@@ -434,7 +468,7 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 
 @QandA{
 @Q{Which displays worked with categorical data?}
-@A{`pie-chart` __and__ `bar-chart`}
+@A{`pie-chart` _and_ `bar-chart`}
 
 @Q{Why might you choose a bar chart over a pie chart or vice versa?}
 @A{`pie-chart` only makes sense when you have the full picture, since it's representing the proportion of the whole}

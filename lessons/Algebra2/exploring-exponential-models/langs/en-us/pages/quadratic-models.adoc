@@ -4,6 +4,7 @@
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
 
+/* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; }
 .autonum:after { content: ')' !important; }
 
@@ -30,7 +31,7 @@ td .MathJax { min-width: 30px !important; display: inline-block; }
 == Fitting the Model Visually @math{f(x) = a(x-h)^2 + k}
 
 [.linkInstructions]
-For this section, you'll need to have **Slide 2: Quadratic Models** of **Modeling Covid Spread (Desmos)** open on your computer.
+For this section, you'll need to have *Slide 1: Quadratic Model for MA* of *Modeling Covid Spread (Desmos)* open on your computer.
 
 @n Try changing the values of @math{a}, @math{h} and @math{k} to find three promising quadratic models, graphing each one and labeling your values in the grids below.
 
@@ -50,40 +51,45 @@ For this section, you'll need to have **Slide 2: Quadratic Models** of **Modelin
 
 |===
 
+@n Do your quadratic models open up or down? @fitb{5em}{@ifsoln{Up}}. What does that tell us about @math{a}? @fitb{}{@ifsoln{It's positive}}.
+
+@n Describe one of your models: Where is the vertex? (@fitbruby{2em}{}{x}, @fitbruby{2em}{}{y}) What is the horizontal shift? @fitbruby{3em}{}{@math{h}} The vertical shift? @fitbruby{3em}{}{@math{k}}
+
+@n Which quadratic form would be the easiest to fit to this data? @hspace{3em} standard &#9744; @hspace{3em}
+factored &#9744; @hspace{3em}  @ifsoln-choice{vertex}@ifnotsoln{&#9744;}
+
 == Fitting the Model Programmatically @math{f(x) = a(x-h)^2 + k}
 _For this section, open your copy of the @starter-file{alg2-covid}._
 
 @n In the space below, define `quadratic1` to be the first model you fit in Desmos.
 
-@ifsoln{@vspace{1ex}}
-
-@ifsoln{Answers will vary.}
-
-@ifsoln{If @math{a=14}, @math{h=70} and @math{k=88000}, you would get the following:}
+@ifsoln{Answers for eye-balled, best-guess models will vary. One of many options might be @math{a=14}, @math{h=70} and @math{k=88000}, which you would get the following:}
 
 `fun quadratic1(x): (` @fitbruby{10em}{@ifsoln{14}}{a} `* (num-sqr( x -` @fitbruby{10em}{@ifsoln{70}}{h} `))) +` @fitbruby{10em}{@ifsoln{88000}}{k} `end`
 
-@n In the Definitions Area, define `quadratic1`, `quadratic2` and `quadratic3` to describe the three models you fit in Desmos.
+@n Return to @starter-file{alg2-covid} and update the definitions for `quadratic1`, `quadratic2`, and `quadratic3`. +
+Then click "Run" to load your updated definition.
 
-@n Use `fit-model` to determine the @math{S}-value of each of your models for the `MA-table`.
+@n Use `fit-model` to determine the @math{S}-value of each model using the `MA-table`. 
+[.indentedpara]
+_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, contracts pages}!_
 
-@ifsoln{@vspace{1ex}}
+@hspace{1em} @math{S} for `quadratic1`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic2`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic3`: @fitb{}{@ifsoln{varies}}
 
-@ifsoln{For the first one use: `fit-model(MA-table, "state", "day", "positive", quadratic1)`}
+== What does this model actually mean?
 
-@ifsoln{@vspace{1ex}}
+@teacher{Numerical values below will vary!}
 
-@ifsoln{@math{S} values will vary. For the example above, @math{S} would be: 22,109.45}
-
-
-@hspace{1em} @math{S} for `quadratic1`: @fitb{9em}{} @hspace{2em} @math{S} for `quadratic2`: @fitb{9em}{} @hspace{2em} @math{S} for `quadratic3`: @fitb{10em}{}
+After experimenting, the best quadratic model I came up with for this dataset shows that @fitbruby{5em}{@ifsoln{days}}{x-variable} are correlated to @fitbruby{}{@ifsoln{positive COVID cases}}{y-variable}. +
+The vertex of the parabola drawn by this model is a @fitbruby{10em}{@ifsoln{minima}}{minima or maxima?} at about @fitbruby{8em}{@ifsoln{(70, 88000)}}{(x, y)}, which predicts that @fitb{}{}
+@fitb{}{@ifsoln{the lowest number of cases would be 88,000 at day 70}}. +
+The error in the model is described by an @vocab{S-value} of about @fitbruby{3em}{@ifsoln{22,109}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}, which is a @fitbruby{}{@ifsoln{significant}}{bad, ok, good} +
+fit considering that @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} in this dataset range from @fitbruby{8em}{@ifsoln{104156}}{lowest y-value} to @fitbruby{8em}{@ifsoln{341925}}{highest y-value}.
 
 == Are Quadratic Models a Good Fit for This Data?
 
 @n Would you feel good about making predictions based on these models? Why or why not? @fitb{}{} +
 
-@fitb{}{@ifsoln{}}
+@fitb{}{@ifsoln{Answers will vary.}}
 
-@fitb{}{@ifsoln{}}
-
-@fitb{}{@ifsoln{}}
+@fitb{}{@ifsoln{Sample Response: I don't love the idea that this model dips to have a minima 70 days in...what I'm observing is that it just keeps growing.}}

@@ -1,10 +1,10 @@
 #! /usr/bin/env lua
 
--- last modified 2023-03-13
-
 local coverage_report_file = ...
 
-dofile('lib/maker/read-alignments.lua')
+local make_dir = 'lib/maker/'
+
+dofile(make_dir .. 'read-alignments.lua')
 
 local o = io.open(coverage_report_file, 'w+')
 

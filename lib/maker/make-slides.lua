@@ -45,10 +45,10 @@ local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
 
 local course_string = 'Core'
 
-if lesson_superdir == 'Data-Science' or lesson_superdir == 'Algebra2' then
+if lesson_superdir == 'Data-Science' then
   course_string = 'DS'
-elseif lesson_superdir == 'Algebra' then
-  course_string = 'A'
+elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Early Math' then
+  course_string = 'Math'
 elseif lesson_superdir == 'Reactive' then
   course_string = 'R'
 end
@@ -67,6 +67,7 @@ end
 
 local allowed_slide_layouts = {
   "Core Title Slide",
+  "Core Title and Body",
   "Math Title Slide",
   "Math Title and Body",
   "DS Title Slide",
@@ -111,6 +112,8 @@ local function newslide()
   }
 end
 
+-- Note: we're counting levels using the AsciiDoc convention. It's one less than the number of ='s
+
 local function set_imageorientation(slide)
   slide.imageorientation = ((slide.numimages == 2) and '') or 
     ((slide.containscenter and 'C') or 
@@ -134,16 +137,29 @@ local function get_slides(lsn_plan_adoc_file)
 
   local function set_current_slide()
     local n = #slides
-    if curr_slide.text == '' or
+    local txt = curr_slide.text
+    if txt == '' or
       (n == 0 and curr_slide.header == '') then
-      return
+      return false
     end
+    if not txt:match('%S') then return false end
     set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
+    return true
+  end
+
+  local function insert_slide_break()
+    local old_header = curr_slide.header
+    set_current_slide()
+    curr_slide = newslide()
+    curr_slide.section = 'Repeat'
+    curr_slide.header = old_header
+    return curr_slide
   end
 
   local function scan_directives (i, nested_in, dont_count_image_p)
     if not nested_in then curr_slide = newslide() end
+    local curr_text_before_pd_slide = false
     while true do
       local c = i:read(1)
       if not c then
@@ -246,16 +262,15 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and nested_in ~= 'ifproglang' then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide') then
             terror('@slidebreak inside @' .. nested_in)
           end
-          set_current_slide()
+          insert_slide_break()
           local c2 = buf_peek_char(i)
-          curr_slide = newslide()
-          curr_slide.section = 'Repeat'
-          curr_slide.header = 'SLIDE BREAK'
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
+          elseif nested_in == 'ifpdslide' then
+            curr_slide.style = course_string .. ' Title and Body'
           end
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
@@ -267,13 +282,29 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. c .. directive .. '{'
           scan_directives(io.open_buffered(false, arg), directive, 'dont count images')
           curr_slide.text = curr_slide.text .. '}'
-        elseif directive == 'strategy' then
+        elseif directive == 'ifpdslide' then
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
+          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
+          curr_slide.text = curr_slide.text .. '}'
+        elseif directive == 'strategy-basic' then
+          if nested_in ~= 'ifpdslide' then
+            terror('@strategy outside @ifpdslide')
+          end
           local arg1 = read_group(i, directive)
-          ignore_spaces(i)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           curr_slide.text = curr_slide.text .. '}'
+        elseif directive == 'pd-slide' then
+          local arg = read_group(i, directive, not 'scheme', 'multiline')
+          arg = '@ifpdslide{@slidebreak\n' .. arg .. '}\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
+        elseif directive == 'strategy' then
+          local arg1 = read_group(i, directive)
+          local arg2 = read_group(i, directive, not 'scheme', 'multiline')
+          arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'image' then
             -- dead?
@@ -313,9 +344,14 @@ local function get_slides(lsn_plan_adoc_file)
             if nested_in and nested_in ~= 'ifproglang' then
               terror('\"=' .. L .. '\" inside @' .. nested_in)
             end
-            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or 2)
+            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or (L:match('^== ') and 2) or 3)
             new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-            if ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
+            -- print('new_level', new_level)
+            -- print('new_header', new_header)
+            -- print('curr_slide.level', curr_slide.level)
+            if (new_level == 3) then
+              insert_slide_break()
+            elseif ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
                 curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
@@ -324,16 +360,24 @@ local function get_slides(lsn_plan_adoc_file)
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
             else
-              set_current_slide()
+              local old_header = curr_slide.header
+              local old_slide_substantial_p = set_current_slide()
               curr_slide = newslide()
               curr_slide.level = new_level
-              curr_slide.header = new_header
 
-              -- print('curr slide header = ' .. curr_slide.header)
               curr_slide.section = ((curr_slide.level == 2) and
-              ((curr_slide.header:match('Launch') and 'Launch') or
-              (curr_slide.header:match('Investigate') and 'Investigate') or
-              (curr_slide.header:match('Synthesize') and 'Synthesize')))
+              ((new_header:match('Launch') and 'Launch') or
+              (new_header:match('Investigate') and 'Investigate') or
+              (new_header:match('Synthesize') and 'Synthesize')))
+
+              if new_header == 'Overview' and not old_slide_substantial_p then
+                -- print('reusing old header', old_header)
+                new_header = old_header
+              elseif new_level > 1 then
+                new_header = old_header
+              end
+              curr_slide.header = new_header
+              -- print('curr slide header = ' .. curr_slide.header)
             end
           end
         elseif c == '[' then
@@ -383,7 +427,7 @@ local function make_slides_file(lplan_file, slides_file)
   --print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides
   local curr_header = 'notsetyet'
-  local curr_section = 'notsetyet'
+  local curr_section = 'notsetyetI'
   local o = io.open(slides_file, 'w')
 
   for k,slide in ipairs(slides) do
@@ -403,10 +447,11 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('-->\n')
       end
     else
+      -- print('outputting slide', slide.section, slide.level, slide.header)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
-      if slide.level <= 1 then curr_header = slide.header
-      elseif (slide.level == 2 and slide.section) then
+      curr_header = slide.header
+      if (slide.level == 2 and slide.section) then
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
           if slide.numimages == 2 then slide.suffix = '2' end
@@ -442,6 +487,7 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('^%+$', '\n')
           l1 = l1:gsub('{two%-colons}', '::')
           l1 = l1:gsub('{empty}', '')
+          l1 = l1:gsub('{plus}', '+')
           o:write(l1, '\n')
         end
       end

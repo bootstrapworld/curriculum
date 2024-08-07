@@ -121,7 +121,7 @@ function scan_exercise_directives(i, proglang, workbook_pages, lesson_dir)
             end
           end
         end
-      elseif directive == 'scrub' then
+      elseif directive == 'comment' or directive == 'scrub' then
         read_group(i, directive)
       elseif directive == 'ifproglang' then
         local proglang1 = read_group(i, directive)
@@ -151,8 +151,8 @@ function collect_exercise_info(lesson_dir, proglang)
   --
   local lesson_cache = lesson_dir .. '/pages/.cached/'
   local workbook_page_list_file = lesson_cache .. '.workbook-pages-ls.txt.kp'
-  local opt_exercise_list_file = lesson_cache .. '.exercise-pages-ls.txt.kp'
-  local opt_exercise_asp_list_file = lesson_cache .. '.exercise-pages.lua'
+  local opt_exercise_list_file = lesson_cache .. '.opt-exercise-pages-ls.txt.kp'
+  local opt_exercise_asp_list_file = lesson_cache .. '.opt-exercise-pages.lua'
   local workbook_exercise_list_file = lesson_cache .. '.workbook-exercise-pages-ls.txt.kp'
   local handout_exercise_list_file = lesson_cache .. '.handout-exercise-pages-ls.txt.kp'
   local handout_exercise_asp_list_file = lesson_cache .. '.handout-exercise-pages.lua'
