@@ -356,9 +356,18 @@ const DSBasics = {
     },
     "codap": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
-      }
     }
   }
+}
+
+const AI = {
+  "spell-checker": {
+    "title": "Spell Checker Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+    }
+  }
+}
 
 const MoreDS = {
   "fair-coins": {
