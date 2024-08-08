@@ -1,0 +1,144 @@
+= Statistical Language Modeling
+
+@description{Students }
+
+@ifproglang{pyret}{
+@lesson-prereqs{ds-intro}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{ds-intro}
+}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+- Define and apply statistical language modeling.
+- Explain how predictive text AI relies on probability.
+
+| Student-facing Lesson Goals
+|
+
+- Let's explore how probability influences the output of generative AI models.
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+
+
+== Statistical Language Models
+
+=== Overview
+
+Students explore how text prediction relies on statistical language modeling.
+
+=== Launch
+
+While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is a now-common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
+
+@lesson-instruction{
+- Consider this phrase: "What are you"
+- On a piece of paper, write down the first "next word" that pops into your mind.
+- Write down two additional "next word" choices.
+- As a class, let's generate a list of all of the words we developed.
+}
+
+@teacher{
+Record students' first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. If time allows, you might even compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
+}
+
+@QandA{
+- How did you choose your next words?
+- What sort of data do you think predictive text AI is trained on?
+- How do you think AI "chooses" its next word?
+- Do you think a text messaging app with a predictive text feature would produce the same results as our class?
+** Share the image below to see the word options provided by one text messaging app.
+}
+
+@right{@image{images/texting-app.png, 200}}
+
+Behind the scenes, the statistical language model takes in a vast corpus of actual text messages. A @vocab{corpus} in AI is the collection of data that serves as training material.
+
+During training, the computer extracts each use of the phrase "What are you" from the training data, along with the subsequent word. It then determines the probability of each possible "next word". In this particular training set, "up", "doing", and "guys" were most likely to appear after "What are you". As a result, those words are suggested for users to choose from.
+
+
+=== Investigate
+
+The best way to make sense of statistical language modeling is to try it yourself!
+
+For our corpus, we will use the folk song "There Was an Old Lady Who Swallowed a Fly", which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
+
+Statistical language modeling assumes that the probability of the next word in a sequence depends on a fixed size window of previous words. We refer to that fixed size window of words as an @vocab{n-gram}.
+
+We can decompose the title of our corpus, "There Was an Old Lady Who Swallowed a Fly" in a variety of different ways:
+
+[cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
+|===
+
+| n-gram | Quantity			| Decomposition
+
+| 1-gram (unigram)
+| 9
+| (There) (Was) (an) (Old) (Lady) (Who) (Swallowed) (a) (Fly)
+
+| 2-gram (bigram)
+| 8
+| (There Was) (Was an) (an Old) (Old Lady) (Lady Who) (Who Swallowed) (Swallowed a) (a Fly)
+
+| 3-gram (trigram)
+| 7
+| (There Was an) (Was an Old) (an Old Lady) (Old Lady Who) (Lady Who Swallowed) (Who Swallowed a) (Swallowed a Fly)
+
+|===
+
+
+
+@teacher{
+To share the song lyrics with students, choose whatever modality works best for you: you can read the lyrics aloud, have students @handout{old-lady-lyrics.adoc, "read them independently"}, or even listen to a recorded version of the song. There are many to choose from on youtube!
+}
+
+The song begins with the phrase "There was an old lady who swallowed a..." That phrase is repeated many times! Let's zoom in on one unigram from that phrase: “There”.
+
+@QandA{
+@Q{Referring to the @handout{old-lady-lyrics.adoc, "lyrics"}: how many times does the word "There" appear in the song?}
+@A{4}
+@Q{In this corpus, what is the likelihood that the word "There" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
+@A{4/4, or 100% probability}
+}
+
+
+@lesson-instruction{
+Complete @printable-exercise{stat-lang-model-intro.adoc}
+}
+
+
+In the previous activity, all of our work relied on the assumption that the probability of the next word in a sequence depends only on the word (or words) preceding it. In its most basic form, predictive text AI is a matter of probability!
+
+It is, of course, not exactly that simple. Behind the scenes, the programmer must choose if the generated text will be determined by chance or predicted with certainty. Thoughtfully coding @vocab{temperature} - the level of randomness a generative AI model incorporates - is critical, and can have serious implications.
+
+- Low temperature models are hardcoded to select the most statistically likely n-grams; that is, n-grams with a high n and also a high frequency in the training set. These models typically output correct text that is boring and predictable.
+- High temperature models are hardcoded to be more random. These models typically produce creative and adventurous text that can be error-prone and nonsensical.
+
+Perhaps you have heard of AI hallucinations. When AI "hallucinates", it generates responses containing false or misleading information that is presented as fact. High temperature is one of a multitude of causes for hallucination.
+
+@QandA{
+@Q{What other factors do you think cause AI hallucinations?}
+}
+
+@teacher{
+Are you and your students interested in exploring probability in more depth? Check out @lesson-link{probability-inference} to dig deeper.
+}
+
+
+
+=== Synthesize
+
+- Which will produce more grammatically correct responses: a 5-gram model or a 2-gram model? Which will produce a more creative response? Explain.
+- A student argues that AI is a reliably correct and credible source of information. How would you convince them that they cannot always rely on AI for accurate information?
