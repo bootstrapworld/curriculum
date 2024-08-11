@@ -1,0 +1,133 @@
+= Training Artificial Intelligence
+
+@description{Students }
+
+@ifproglang{pyret}{
+@lesson-prereqs{ds-intro}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{ds-intro}
+}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+
+| Student-facing Lesson Goals
+|
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+== Plagiarism Detection
+
+=== Overview
+
+=== Launch
+
+Plagiarism is a cause for concern at schools and universities everywhere. Plagiarism hinders learning, undermines academic integrity, and destroys credibility. Still - it runs rampant, which quickly led to the development of plagiarism detection software.
+
+To understand the workings of plagiarism detection - a form of AI - we'll start by looking at a plagiarism detector that does not work very well. This plagiarism detector starts by consuming a huge corpus of documents from all over the internet. We then provide it with a student-submitted document, which it compares against its corpus of documents to determine if there is an exact match.
+
+Let's try out a primitive plagiarism detector in Pyret. To keep things simple, this plagiarism detector will train on a single document rather than a large corpus.
+
+@lesson-instruction{
+- Open the Primitive Plagiarism Detector starter file.
+- With a partner, complete A Primitive Plagiarism Detector.
+}
+
+If the detector finds a perfect match, we can be certain that plagiarism has occurred. If it does not find a match... we can't actually draw any conclusions, as you discovered during the activity. Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text or delete a sentence here and there.
+
+We need a plagiarism detector with more sophistication!
+
+=== Investigate
+
+Detecting identicality is not good enough. We need a different approach. We need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then assess closeness.
+
+One standard way for AI to summarize a document is by creating a "bag of words." A bag of words is an unordered collection that disregards word order, syntax, and grammar, but captures *word frequency*.
+
+Consider these two strings: _"failure is the greatest teacher"_ and _"the greatest teacher, failure is"._
+
+The bag-of-words summary for the original string looks like this:
+
+@math{"failure": 1, "is": 1, "the": 1, "greatest": 1, "teacher":1}
+
+The bag-of-words summary for the alternative version is exactly the same! When a plagiarism detector takes stock of word frequency and ignores literally everything else, then the above documents are a perfect match.
+
+What's going on here, mathematically? The plagiarism detector is actually comparing two vectors, with each word representing one axis of the vector.
+
+A = {1, 1, 1, 1, 1}
+
+B = {1, 1, 1, 1, 1}
+
+If we imagine plotting a dot in a five-dimensional space, the point representing Document A will have the same position as the point representing Document B.
+
+@strategy{A Five-Dimensional Space!?}{
+
+@right{@image{images/5-cube.png, 150}}
+
+Imagining higher dimensions is not easy! If you or your students are not able, that is okay. (After all, we are stuck in a three-dimensional world.) For AI, five dimensions - or even a thousand! - is no big deal. What's important for students to grasp is that a sequence of @math{N} numbers represents a location in an @math{N}-dimensional space.
+
+The image to the right is a 2D representation of a 5-cube, which has 32 vertices, 80 edges, and 80 square faces.
+
+}
+
+@lesson-instruction{
+- Open the Bag of Words Plagiarism Detector starter file.
+- With a partner, complete the first section of A More Sophisticated Plagiarism Detector.
+}
+
+As you discovered, the new representation of the documents is considerably smaller than the actual documents themselves. Loss of data is a common and often necessary effect of training AI! In this case, the training process has isolated a single feature of the data. That feature - word frequency - is the only feature we care about for the task at hand.
+
+Our work is not yet complete, though. We also need to normalize the data, or organize it so that each vector has the same number of axes. This normalization will allow us to consider the closeness of each of the documents.
+
+@lesson-instruction{
+Complete the second section of A More Sophisticated Plagiarism Detector.
+}
+
+Our training phase is now complete. What does that mean?
+
+Imagine a corpus of 60 documents. All together, these documents include 1000 unique words. In this scenario, the output of the training is 1000-dimensional space with a collection of 60 unique points. Each axis represents one unique word, and each point represents a single document.
+
+When we execute the program, the plagiarism detector computes the student's vector (the input!) and compares it against the other vectors.
+
+We are about to play with a Bag of Words Plagiarism Detector. The program, built in Pyret, trains on just one text. It plots a point for that text, and another text.
+
+
+@QandA{
+@Q{If two points are plotted in exactly the same position, what is their distance from one another?}
+@Q{What does it mean when two points are plotted in the same position?}
+}
+
+When two texts are exactly the same, the plagiarism detector produces an output of 1 - indicating that the vectors are 100% identical. If the vectors are entirely different, the plagiarism detector will produce an output of zero.
+
+
+@strategy{How long does it take to train AI?}{
+The plagiarism detector we will use, built in Pyret, trains on just a single text. Consequently, the training happens almost instantaneously.
+
+Plagiarism detector with bells and whistles, however, train on hundreds of thousands of texts collected from the internet. Like the training of ChatGPT (which took months!), this is a much more costly and time-intensive process.
+
+In fact, AI really took off around 2010 because, at this time, more resources became available to train AI. Some, but not all, of these resources included: the increase of available data on the internet and the increased availability of graphics processing units (GPUs).
+}
+
+
+
+@lesson-instruction{
+- Open the Bag of Words Plagiarism Detector starter file.
+- Complete the final section of A More Sophisticated Plagiarism Detector.
+}
+
+
+=== Synthesize
+
+
+

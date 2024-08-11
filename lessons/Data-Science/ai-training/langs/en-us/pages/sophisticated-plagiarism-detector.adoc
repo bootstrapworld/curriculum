@@ -1,0 +1,53 @@
+= A More Sophisticated Plagiarism Detector.
+
+Refer to Documents A and B (below) to respond to the prompts.
+
+*Document A:* The high school students love computer science. The middle school students love computer science, too.
+
+*Document B:* The middle school students also love math.
+
+@vspace{1ex}
+
+== Create Bags of Words
+
+@n *Document A*:
+"The": @fitb{1ex}{},  "high": @fitb{1ex}{}, "school": @fitb{1ex}{}, "students": @fitb{1ex}{}, "love": @fitb{1ex}{}, "computer": @fitb{1ex}{}, "science": @fitb{1ex}{}, "middle": @fitb{1ex}{}, "too": @fitb{1ex}{}
+
+
+@n *Document B*: "The": @fitb{1ex}{},  "middle": @fitb{1ex}{}, "school": @fitb{1ex}{}, "students": @fitb{1ex}{}, "also": @fitb{1ex}{}, "love": @fitb{1ex}{}, "math": @fitb{1ex}{}
+
+== Normalize
+
+@n Look at the table below. The second column indicates the frequency of each word in Document A. Why do you think "also" and "math" are included? @fitb{}{}
+
+@fitb{}{}
+
+@n Fill in the third column with the appropriate frequencies.
+
+[cols="1,1,1", options="header", stripes="none"]
+|===
+
+| Unique Words
+| Document A Frequencies
+| Document B Frequencies
+
+| The | 2 | 1
+| high | 1 | 0
+| school | 2 | 1
+| students | 2 | 0
+| love | 2 | 1
+| computer | 2 | 0
+| science | 2 | 0
+| too |2 | 0
+| middle | 1 | 1
+| also | 0 | 1
+| math | 0 | 1
+|===
+
+
+== Query
+
+@n Open the More Sophisticated Plagiarism Detector. Line X indicates that the program will compare Document A with Document B. Delete the hash tag at the start of the line and click "Run". What number appears? @fitb{2ex}{} Are the points representing these documents: _very close / pretty close / pretty far / very far?_
+
+@n Add the hash tag back to line 74, and delete the hash tag in line 76. This code in line 76 indicates that the program is going to compare the Wikipedia article on "Elephants in Thailand" with the student-submitted essay on "Elephants in Thailand."  What number appears? @fitb{2ex}{} Are the points representing these documents: _very close / pretty close / pretty far / very far?_
+
