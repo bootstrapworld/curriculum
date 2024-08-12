@@ -66,26 +66,32 @@ To learn about how evenly distributed the data is we can start by ordering the d
 
 ==== Range
 
-The @vocab{Range of a Dataset}, is the simplest measure of variation we can compute. It is the distance between the @vocab{minimum} (lowest value) and @vocab{maximum} (highest value). _(Note: the term “Range” means something different in statistics than it does in algebra and programming!)_
+The @vocab{Range of a Dataset}, is the simplest measure of variation we can compute. It is the distance between the @vocab{Minimum} (lowest value) and @vocab{Maximum} (highest value). @ifslide{ +
+}_(Note: the term “Range” means something different in statistics than it does in algebra and programming!)_
 
 
-@indented{@math{Range = maximum - minimum}}
+@indented{@math{Range = Maximum - Minimum}}
 
-It is important that we consider the range in context. _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old.  But 10 years would be a narrow age range for Cypress trees growing in Louisiana swamps, some of which are 1500 years old._
+It is important that we consider the @vocab{Range of a Dataset} in context. 
+
+- _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old.  
+- _But 10 years would be a narrow age range for Cypress trees growing in Louisiana swamps, some of which are 1500 years old._
 
 @slidebreak
 
 ==== Quartiles
 
-As we know, the @vocab{median} is the value that splits the data in half. If it diverges significantly from the mean, the data is skewed.
+As we know from our work with @lesson-link{measures-of-center}, the @vocab{median} is the value that splits the data in half. If it diverges significantly from the mean, the data is skewed.
 
 We can learn more about the distribution by splitting each of the halves of data in half so that we have four equal-sized quarters of data.  The boundary points between the equal quarters of data are called @vocab{quartiles}. 
+
+If the first quartile does not fall in the middle between the minimum and the median, we know that the data is not evenly distributed. The same is true if the third quartile does not fall in the middle between the maximum and the median.
 
 @slidebreak
 
 ==== Interquartile Range (IQR)
 
-Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.
+Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge".
 
 @indented{@math{IQR = Q3 - Q1}}
 
@@ -105,6 +111,20 @@ If the data is evenly distributed these 5 numbers will be spaced at consistent i
 
 === Investigate 
 
+@lesson-instruction{
+- We are going to be looking at the data from 2 family gatherings.
+  * The average age at the *Watson Family* gathering was *70.4 year old*.
+  * The average age at the *Ledet Family* gathering was *44.3 years old*.
+}  
+@QandA{
+@Q{What images do these statistics conjure in your mind? What do you imagine to be true about the ages of the people in attendance at each of the gatherings?}
+@A{Answers will vary.}
+@A{Some students will likely imagine that all of the people at both of the gatherings are adults.}
+@A{Some students will likely expect that all of the people at the Watson Family Gathering were much older.}
+}
+
+@slidebreak
+
 @teacher{
 We are going to find the 5-number summary, range and IQR for 2 datasets. Future reflection will rely upon students having worked through both datasets. If your students tend to need more support, you may want to work with the first dataset as a class and then have students work with the second dataset independently.
 
@@ -112,22 +132,21 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 }
 }
 
-Before we learn how to use @proglang to explore the spread and variability of a dataset, let's apply what we've learned so far about 5-number summaries to two small datasets. 
-
 @lesson-instruction{
-- Let's take a look at the age distribution of this data from the Smith Family Reunion: +
+- Let's see what we can learn by looking at a dataset of the ages from the *Ledet Family Reunion*: +
 1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
   * Rewrite the data on your paper in order from least to greatest.
   * Record your five-number summary (Minimum, Q1, Median, Q3, Maximum).
   * Then calculate the IQR and Range.
-- When you're done with the Smith Family data. Repeat the process for this age data from the Young Family First-Cousin Gathering.
+- When you're done, repeat the process with the *Watson Family Gathering* age data: +
+70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
 }
 
 @QandA{
 @Q{What do you notice and wonder about these datasets and the summary values you've just computed?}
 @A{Students may notice that the maximum values are pretty close to each other, but the minimum values are very different from each other!}
 @A{Students may notice that Q3 for both datasets is 72.}
-@A{Students may notice that the median value for the Smith family data is a number that isn't in the dataset, whereas the median value for the Young family data is a number that's in the dataset.}
+@A{Students may notice that the median value for the Watson family data is a number that isn't in the dataset, whereas the median value for the Ledet family data is a number that's in the dataset.}
 @A{Students may have questions about how to calculate the median and/or quartiles.}
 }
  
@@ -157,6 +176,10 @@ To visualize the 5-number summary, the Range, and the Interquartile Range we can
 - Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
 - Make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data. 
 
+@ifslide{@center{@image{images/box-n-whisker-plot.png, 500}} }
+
+@slidebreak
+
 Box plots display how the four equal quarters of data are spread out along the number line.
 
 @center{@image{images/box-n-whisker-plot.png, 500}} 
@@ -164,6 +187,10 @@ Box plots display how the four equal quarters of data are spread out along the n
 @lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.} 
 
 When the points are evenly distributed, the four sections of the box plot will be equal in size, but _we will rarely see a box plot with four equal sections_!  When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. 
+
+@slidebreak
+
+@ifslide{@center{@image{images/box-n-whisker-plot.png, 500}} }
 
 @QandA{
 @Q{Which quarter of data is packed the densest in this box plot?}
@@ -178,9 +205,11 @@ When the points are evenly distributed, the four sections of the box plot will b
 - Let's practice plotting 5-number summaries on a number line and connecting them to form the shape of a box plot. 
 - Complete @opt-printable-exercise{distribution-by-hand.adoc}.}
 
+@slidebreak
+
 @QandA{
 @Q{For which family gathering was the median age more typical?}
-@A{The median age is more typical of the Young family gathering because the data is more closely clustered around the median.}
+@A{The median age is more typical of the Watson family gathering because the data is more closely clustered around the median.}
 
 @Q{How did making the box plots help you to understand the data?}
 @Q{What else do you notice and wonder?}
@@ -209,7 +238,8 @@ Students learn to identify skewed and symmetric data from a box plot before expl
 
 We know that when the points are evenly distributed, the four sections of the box plot will be equal in size, like this:
 
-@centered-image{images/even.png, 400}
+@ifnotslide{@centered-image{images/even.png, 400}}
+@ifslide{@right{@image{images/even.png, 400}}}
 
 But how do we describe the other shapes box plots come in?
 
@@ -217,7 +247,8 @@ But how do we describe the other shapes box plots come in?
 
 Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are smaller than average might mirror that of newborns who are bigger than average. We call this kind of spread symmetric. _(Note: Even Distribution can also be correctly described as Symmetric! But, students should be encouraged to use more specific language for describing things when it's available to them.)_
 
-@centered-image{images/symmetric.png, 400}
+@ifnotslide{@centered-image{images/symmetric.png, 400}}
+@ifslide{@right{images/symmetric.png, 400}}
 
 @slidebreak
 
