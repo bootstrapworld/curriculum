@@ -74,7 +74,7 @@ The @vocab{Range of a Dataset}, is the simplest measure of variation we can comp
 
 It is important that we consider the @vocab{Range of a Dataset} in context. 
 
-- _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old.  
+- _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old._  
 - _But 10 years would be a narrow age range for Cypress trees growing in Louisiana swamps, some of which are 1500 years old._
 
 @slidebreak
@@ -128,18 +128,18 @@ If the data is evenly distributed these 5 numbers will be spaced at consistent i
 @teacher{
 We are going to find the 5-number summary, range and IQR for 2 datasets. Future reflection will rely upon students having worked through both datasets. If your students tend to need more support, you may want to work with the first dataset as a class and then have students work with the second dataset independently.
 
-@opt{Instead of giving the directions below, you can distribute printed copies of @opt-printable-exercise{distribution-by-hand.adoc} and have students complete the first two sections now. The remaining sections of the page will be completed in another section of this lesson.
+@opt{Instead of giving the directions below, you can distribute printed copies of @opt-printable-exercise{distribution-by-hand.adoc} and have students complete the first two sections now. The remaining sections of the page will be completed in another section of this lesson and include number lines for making box plots.
 }
 }
 
 @lesson-instruction{
-- Let's see what we can learn by looking at a dataset of the ages from the *Ledet Family Reunion*: +
-1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
+- Let's see what we can learn about how typical those averages were by looking at the datasets.
+- *Ledet Family Reunion* Age Data: 1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
   * Rewrite the data on your paper in order from least to greatest.
   * Record your five-number summary (Minimum, Q1, Median, Q3, Maximum).
   * Then calculate the IQR and Range.
-- When you're done, repeat the process with the *Watson Family Gathering* age data: +
-70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
+- *Watson Family Gathering* Age Data: 70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
+  * Compute the 5-number summary, IQR, and Range.
 }
 
 @QandA{
@@ -176,13 +176,14 @@ To visualize the 5-number summary, the Range, and the Interquartile Range we can
 - Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
 - Make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data. 
 
-@ifslide{@center{@image{images/box-n-whisker-plot.png, 500}} }
+@ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
-@slidebreak
+@slidebreak{LaunchR}
 
 Box plots display how the four equal quarters of data are spread out along the number line.
 
-@center{@image{images/box-n-whisker-plot.png, 500}} 
+@ifnotslide{@center{@image{images/box-n-whisker-plot.png, 500}}} 
+@ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
 @lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.} 
 
@@ -190,7 +191,7 @@ When the points are evenly distributed, the four sections of the box plot will b
 
 @slidebreak
 
-@ifslide{@center{@image{images/box-n-whisker-plot.png, 500}} }
+@ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
 @QandA{
 @Q{Which quarter of data is packed the densest in this box plot?}
@@ -201,15 +202,33 @@ When the points are evenly distributed, the four sections of the box plot will b
 
 === Investigate
 
+@teacher{@opt{If you printed and distributed copies of @opt-printable-exercise{distribution-by-hand.adoc}, direct students to complete the page now.
+}}
+
 @lesson-instruction{
-- Let's practice plotting 5-number summaries on a number line and connecting them to form the shape of a box plot. 
-- Complete @opt-printable-exercise{distribution-by-hand.adoc}.}
+- Let's practice making box plots with the data from the family gatherings.
+- Find the page where you recorded the 5-number summaries.
+- Make a number line from 0 to 80, with labeled intervals every 10 years.
+- Plot each of the values from the *Ledet Family* 5-number summary on the number line.
+- Draw a box around the IQR (connecting Q1 to Q3 with a line for Q2 splitting the box into 2 sections)
+- Draw whiskers connecting the box to the minimum and the maximum.
+- Make a second number line from 0 to 80, with labeled intervals every 10 years.
+- Use the *Watson Family* 5-number summary to make a box plot.
+}
+
+@teacher{
+The box plots should look like this: +
+Ledet: @hspace{1em} @image{images/ledet.png, 600} +
+Watson: @image{images/watson.png, 600}
+} 
 
 @slidebreak
 
 @QandA{
-@Q{For which family gathering was the median age more typical?}
-@A{The median age is more typical of the Watson family gathering because the data is more closely clustered around the median.}
+@Q{The average age at the *Watson Family* gathering was *70.4 year old*.} 
+@Q{The average age at the *Ledet Family* gathering was *44.3 years old*.}
+@Q{For which family was the average age more typical?}
+@A{For the Watson family gathering because the data is more closely clustered, the Range and IQR are significantly smaller, and the mean and median are much more similar.}
 
 @Q{How did making the box plots help you to understand the data?}
 @Q{What else do you notice and wonder?}
@@ -236,19 +255,21 @@ Students learn to identify skewed and symmetric data from a box plot before expl
 
 === Launch
 
-We know that when the points are evenly distributed, the four sections of the box plot will be equal in size, like this:
+We know that when the points are evenly distributed, the four sections of the box plot will be equal in size@ifnotslide{, like this}:
 
 @ifnotslide{@centered-image{images/even.png, 400}}
-@ifslide{@right{@image{images/even.png, 400}}}
+@ifslide{@image{images/even.png, 400}}
 
 But how do we describe the other shapes box plots come in?
 
 @slidebreak
 
-Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are smaller than average might mirror that of newborns who are bigger than average. We call this kind of spread symmetric. _(Note: Even Distribution can also be correctly described as Symmetric! But, students should be encouraged to use more specific language for describing things when it's available to them.)_
+Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are smaller than average might mirror that of newborns who are bigger than average. We call this kind of spread symmetric. 
+
+@teacher{Note: While even Distribution can also be correctly described as Symmetric, students should be encouraged to use more specific language for describing things when it's available to them.}
 
 @ifnotslide{@centered-image{images/symmetric.png, 400}}
-@ifslide{@right{images/symmetric.png, 400}}
+@ifslide{@image{images/symmetric.png, 400}}
 
 @slidebreak
 
@@ -280,6 +301,8 @@ box-plot :: (t::Table, col::String) -> Image
 
 @ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot. *If this information is not on your Data Displays Organizer, add it now!*}
 
+@slidebreak
+
 @lesson-instruction{
 - Log into @starter-file{program-list}, open your saved "Animals Starter File" and click "Run". If you don't have the file, you can open a @starter-file{animals, "new one"}.
 - Turn to @printable-exercise{summarizing-columns-mos.adoc} and follow the directions to complete the *Summarizing the Pounds Column* section.
@@ -297,13 +320,9 @@ Create a box plot in CODAP that displays the spread of `Pounds`.
 
 @slidebreak
 
-@ifproglang{pyret}{
-@center{@image{images/box-plot-pounds.png,  500}}
-}
+@ifproglang{pyret}{@image{images/box-plot-pounds.png,  500}}
 
-@ifproglang{codap}{
-@center{@image{images/codap-box-plot.png, 300}}
-}
+@ifproglang{codap}{@image{images/codap-box-plot.png, 300}}
 
 @QandA{
 
@@ -376,9 +395,11 @@ Students learn how to connect this visualization of spread to what they know abo
 
 Box plots and histograms give us two different views of the shape of quantitative data.
 
-[cols="1a,1a"]
+@slidebreak
+
+[cols="^.^1a,^.^1a", frame="none", grid="none"]
 |===
-| @image{images/box-plot-pounds.png}
+| @image{images/box-plot-pounds-cropped.png}
 | @image{images/histogram-pounds.png}
 |===
 
@@ -387,17 +408,28 @@ Box plots and histograms give us two different views of the shape of quantitativ
 - How would you explain the differences in how the data gets displayed? 
 }
 
-[cols="1,^1,^4", options="header"]
-|===
-|               | Intervals 			| Data points per Interval
-| *Box Plots* 	| Variable 		    | Fixed - 25% of the data in each Interval
-| *Histograms*	| Fixed Bins      | Variable - Points “pile up in bins”, so we can see how many are in each.
-|===
-
 @slidebreak
 
-In histograms, skewness shows up as a long tail of shorter bars to one side.
-In a box plot skewness is seen as a longer "whisker" or more spread in one half of the box.
+[cols="1,^1,^3, ^3", options="header"]
+|===
+|               
+| Intervals 			
+| Data points per Interval
+| Skew presents as
+
+| *Box Plots* 	
+| Variable 		    
+| Fixed - 25% of the data in each Interval
+| A longer "whisker" or +
+more spread in one half of the box
+
+| *Histograms*	
+| Fixed Bins      
+| Variable - Points “pile up in bins”, +
+so we can see how many are in each.
+| A long tail of +
+shorter bars to one side
+|===
 
 
 @strategy{Kinesthetic Activity}{
@@ -434,6 +466,7 @@ Modified box plots are also available in Bootstrap:Data Science, using the follo
 }
 
 @clear
+@slidebreak
 
 @lesson-instruction{
 Now that you have the skills to interpret box plots, complete @printable-exercise{data-cycle-box-plots-animals.adoc}.
