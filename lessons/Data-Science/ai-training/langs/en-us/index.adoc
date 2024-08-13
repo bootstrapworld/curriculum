@@ -36,13 +36,13 @@
 
 Plagiarism is a cause for concern at schools and universities everywhere. Plagiarism hinders learning, undermines academic integrity, and destroys credibility. Still - it runs rampant, which quickly led to the development of plagiarism detection software.
 
-To understand the workings of plagiarism detection - a form of AI - we'll start by looking at a plagiarism detector that does not work very well. This plagiarism detector starts by consuming a huge corpus of documents from all over the internet. We then provide it with a student-submitted document, which it compares against its corpus of documents to determine if there is an exact match.
+To understand the workings of plagiarism detection - a form of AI - we'll start by looking at a plagiarism detector that _does not work very well_. This plagiarism detector would start by consuming a huge corpus of documents from all over the internet. We then provide it with a student-submitted document, which it compares against its corpus of documents to determine if there is an *exact match*.
 
 Let's try out a primitive plagiarism detector in Pyret. To keep things simple, this plagiarism detector will train on a single document rather than a large corpus.
 
 @lesson-instruction{
 - Open the Primitive Plagiarism Detector starter file.
-- With a partner, complete A Primitive Plagiarism Detector.
+- With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
 If the detector finds a perfect match, we can be certain that plagiarism has occurred. If it does not find a match... we can't actually draw any conclusions, as you discovered during the activity. Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text or delete a sentence here and there.
@@ -83,7 +83,7 @@ The image to the right is a 2D representation of a 5-cube, which has 32 vertices
 
 @lesson-instruction{
 - Open the Bag of Words Plagiarism Detector starter file.
-- With a partner, complete the first section of A More Sophisticated Plagiarism Detector.
+- With a partner, complete the first section of @printable-exercise{sophisticated-plagiarism-detector.adoc}.
 }
 
 As you discovered, the new representation of the documents is considerably smaller than the actual documents themselves. Loss of data is a common and often necessary effect of training AI! In this case, the training process has isolated a single feature of the data. That feature - word frequency - is the only feature we care about for the task at hand.
@@ -91,7 +91,7 @@ As you discovered, the new representation of the documents is considerably small
 Our work is not yet complete, though. We also need to normalize the data, or organize it so that each vector has the same number of axes. This normalization will allow us to consider the closeness of each of the documents.
 
 @lesson-instruction{
-Complete the second section of A More Sophisticated Plagiarism Detector.
+Complete the second section of  @printable-exercise{sophisticated-plagiarism-detector.adoc}.
 }
 
 Our training phase is now complete. What does that mean?
@@ -100,12 +100,12 @@ Imagine a corpus of 60 documents. All together, these documents include 1000 uni
 
 When we execute the program, the plagiarism detector computes the student's vector (the input!) and compares it against the other vectors.
 
-We are about to play with a Bag of Words Plagiarism Detector. The program, built in Pyret, trains on just one text. It plots a point for that text, and another text.
+We are about to play with a Bag of Words Plagiarism Detector. The program, built in Pyret, trains on just one text. It plots a point for that text and for one other text.
 
 
 @QandA{
 @Q{If two points are plotted in exactly the same position, what is their distance from one another?}
-@Q{What does it mean when two points are plotted in the same position?}
+@Q{What does it _mean_ when two points are plotted in the same position? Did plagiarism occur}
 }
 
 When two texts are exactly the same, the plagiarism detector produces an output of 1 - indicating that the vectors are 100% identical. If the vectors are entirely different, the plagiarism detector will produce an output of zero.
@@ -114,20 +114,19 @@ When two texts are exactly the same, the plagiarism detector produces an output 
 @strategy{How long does it take to train AI?}{
 The plagiarism detector we will use, built in Pyret, trains on just a single text. Consequently, the training happens almost instantaneously.
 
-Plagiarism detector with bells and whistles, however, train on hundreds of thousands of texts collected from the internet. Like the training of ChatGPT (which took months!), this is a much more costly and time-intensive process.
+Plagiarism detectors with bells and whistles, however, train on hundreds of thousands of texts collected from the internet. Like the training of ChatGPT (which took months!), this is a much more costly and time-intensive process.
 
-In fact, AI really took off around 2010 because, at this time, more resources became available to train AI. Some, but not all, of these resources included: the increase of available data on the internet and the increased availability of graphics processing units (GPUs).
+AI really took off around 2010 because, at this time, more resources became available to train AI. Some, but not all, of these resources included: the increase of available data on the internet and the increased availability of graphics processing units (GPUs) to enable more efficient training.
 }
 
 
 
 @lesson-instruction{
 - Open the Bag of Words Plagiarism Detector starter file.
-- Complete the final section of A More Sophisticated Plagiarism Detector.
+- Complete the final section of @printable-exercise{sophisticated-plagiarism-detector.adoc}.
 }
 
 
 === Synthesize
-
 
 
