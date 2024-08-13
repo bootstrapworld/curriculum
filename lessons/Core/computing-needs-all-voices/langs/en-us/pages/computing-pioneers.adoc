@@ -38,15 +38,18 @@ The pioneers pictured below are featured in our Computing Needs All Voices lesso
 <script>
 	var list = document.createElement('ul');
 	list.className = "thumbnailList";
-
-	pioneers.forEach((p) => {
+	pioneers.forEach( ({name, accessible}) => {
 		var li = document.createElement('li');
-		var altText = p.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
-		li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png" alt="${altText}"></a>`;
+		if(accessible) { li.classList.add('accessible'); }
+		var altText = name.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
+		li.innerHTML = `<a href="../pages/${name}.pdf">
+			<img src="../pioneer-thumbs/${name}.png" alt="${altText}">
+		</a>`;
 		list.appendChild(li);
 	});
 	document.getElementById('thumbnails').appendChild(list);
 </script>
+Note: Pioneers marked with ☁️ are especially accessible for young learners
 <span id="PrintInstructions">
 We are in the process of expanding our collection of pioneers. If there's someone else whose work inspires you, please let us know at <a href="https://bit.ly/pioneer-suggestion">https://bit.ly/pioneer-suggestion</a>.
 </span>
