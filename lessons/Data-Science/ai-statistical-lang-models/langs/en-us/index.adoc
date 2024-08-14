@@ -56,8 +56,6 @@ Record students' first choice responses on the board. If a word is repeated, kee
 
 @QandA{
 - How did you choose your next words?
-- What sort of data do you think predictive text AI is trained on?
-- How do you think AI "chooses" its next word?
 - Do you think a text messaging app with a predictive text feature would produce the same results as our class?
 ** Share the image below to see the word options provided by one text messaging app.
 }
@@ -66,18 +64,16 @@ Record students' first choice responses on the board. If a word is repeated, kee
 
 Behind the scenes, the statistical language model takes in a vast corpus of actual text messages. A @vocab{corpus} in AI is the collection of data that serves as training material.
 
-During training, the computer extracts each use of the phrase "What are you" from the training data, along with the subsequent word. It then determines the probability of each possible "next word". In this particular training set, "up", "doing", and "guys" were most likely to appear after "What are you". As a result, those words are suggested for users to choose from.
+During training, the computer extracts each use of the phrase "What are you" from the training data, along with the subsequent word. It then determines the probability of each possible "next word". In this particular corpus, "up", "doing", and "guys" were most likely to appear after "What are you". As a result, those words are suggested for users to choose from.
 
 
 === Investigate
 
 The best way to make sense of statistical language modeling is to try it yourself!
 
-For our corpus, we will use the folk song "There Was an Old Lady Who Swallowed a Fly", which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
+For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
 
-Statistical language modeling assumes that the probability of the next word in a sequence depends on a fixed size window of previous words. We refer to that fixed size window of words as an @vocab{n-gram}.
-
-We can decompose the title of our corpus, "There Was an Old Lady Who Swallowed a Fly" in a variety of different ways:
+First, we will decompose the title of our corpus into differently sized chunks:
 
 [cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
 |===
@@ -98,47 +94,97 @@ We can decompose the title of our corpus, "There Was an Old Lady Who Swallowed a
 
 |===
 
+During statistical language modeling, the computer breaks a text into chunks and then assesses how likely it is that any _single_ word in the text will _follow_ that chunk. We call these chunks @vocab{n-grams}, where @math{n} represents the number of words in the chunk.
 
+Let's dig a little deeper...
 
 @teacher{
 To share the song lyrics with students, choose whatever modality works best for you: you can read the lyrics aloud, have students @handout{old-lady-lyrics.adoc, "read them independently"}, or even listen to a recorded version of the song. There are many to choose from on youtube!
 }
 
-The song begins with the phrase "There was an old lady who swallowed a..." That phrase is repeated many times! Let's zoom in on one unigram from that phrase: “There”.
+
+The phrase "there was an old lady who swallowed a..." is repeated many times! Let's zoom in on one unigram from that phrase: “there”.
 
 @QandA{
-@Q{Referring to the @handout{old-lady-lyrics.adoc, "lyrics"}: how many times does the word "There" appear in the song?}
+@Q{Referring to the @handout{old-lady-lyrics.adoc, "lyrics"}: how many times does the word "there" appear in the song?}
 @A{4}
-@Q{In this corpus, what is the likelihood that the word "There" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
+@Q{In this corpus, what is the likelihood that the word "there" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
 @A{4/4, or 100% probability}
+@Q{In this corpus, what is the likelihood that the word "there" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
 }
 
+
+In the example you just worked through, you computed the probability that "was" appears after the unigram "there". We can represent the computation you just completed with a special notation:
+
+@math{p(there | was) =}
+@math{\frac
+	{\mbox{count(there was)}}
+	{\mbox{count(there...)}}
+= {\frac{4}{4}}}
+
+@vspace{1ex}
+
+Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was") by 4 (how many times we see "there...")
+
+@QandA{
+@Q{Can you predict any problems with text generation uses a _unigram_ statistical language model, rather than, say, a trigram model?}
+@A{The text produced by a unigram model is more likely to be unpredictable.}
+}
+
+During the launch, you decided what word would likely follow "What are you". If your class is like other classes, you probably predicted many of the same words, with "doing" at the top of the list. A big reason that you and your peers came up with similar word lists is because we used a _trigram_ rather than a _unigram_.
+
+If asked what word should come after "you", you and your classmates would likely have a much broader range of suggestions. That's because "you" is a unigram.
 
 @lesson-instruction{
 Complete @printable-exercise{stat-lang-model-intro.adoc}
 }
 
-
-In the previous activity, all of our work relied on the assumption that the probability of the next word in a sequence depends only on the word (or words) preceding it. In its most basic form, predictive text AI is a matter of probability!
-
-It is, of course, not exactly that simple. Behind the scenes, the programmer must choose if the generated text will be determined by chance or predicted with certainty. Thoughtfully coding @vocab{temperature} - the level of randomness a generative AI model incorporates - is critical, and can have serious implications.
-
-- Low temperature models are hardcoded to select the most statistically likely n-grams; that is, n-grams with a high n and also a high frequency in the training set. These models typically output correct text that is boring and predictable.
-- High temperature models are hardcoded to be more random. These models typically produce creative and adventurous text that can be error-prone and nonsensical.
-
-Perhaps you have heard of AI hallucinations. When AI "hallucinates", it generates responses containing false or misleading information that is presented as fact. High temperature is one of a multitude of causes for hallucination.
-
-@QandA{
-@Q{What other factors do you think cause AI hallucinations?}
-}
+In the previous activity, the likelihood of one word appearing in a sequence depended only on the word (or words) preceding it. In its most basic form, predictive text AI is a matter of probability!
 
 @teacher{
 Are you and your students interested in exploring probability in more depth? Check out @lesson-link{probability-inference} to dig deeper.
 }
 
-
-
 === Synthesize
 
 - Which will produce more grammatically correct responses: a 5-gram model or a 2-gram model? Which will produce a more creative response? Explain.
-- A student argues that AI is a reliably correct and credible source of information. How would you convince them that they cannot always rely on AI for accurate information?
+- A student argues that AI is a reliably correct and credible source of information. How would you respond?
+
+
+== Soekia
+
+=== Overview
+
+=== Launch
+
+You've used a paper, pencil, and probability to apply the principals of statistical language modeling. It's time to peek behind the curtain and see how a computer can put this model to use! To make that happen, we're going to explore Soekia, a simplified text generation tool designed for student learning.
+
+@lesson-instruction{
+- Go to @link{http://Soekia.ch/GPT/?lang=en}
+- Complete the first section of @printable-exercise{soekia-intro.adoc}.
+- When you're done, let's do a quick survey: Raise your hand if your story was largely inspired by "Felicia and the Pot of Pinks".
+}
+
+@teacher{
+The vast majority of students will have a story that is primarily sourced from "Felicia and the Pot of Pinks". On the next section of the worksheet, students will discover exactly _why_ this is the case. Feel free to use this mystery as incentive to move on to the next section of the page!
+}
+
+@lesson-instruction{
+- Complete the second section of @printable-exercise{soekia-intro.adoc}.
+}
+
+@QandA{
+@Q{Why were so many of our initial stories all about Felicia and the Pot of Pinks?}
+@A{The green bar indicates how closely the document matches the prompt. The story "Felicia and the Pot of Pinks" includes the word "tale" once, "fairy" four times, and the word "me" more than a dozen times. With these frequencies, it is a much closer match to the prompt than any of the other fairy tales.}
+}
+
+@lesson-instruction{
+- Turn to @printable-exercise{soekia-closer-look.adoc}.
+- Complete the first section.
+}
+
+DISCUSSION
+
+@lesson-instruction{
+- Turn to @printable-exercise{soekia-temperature.adoc}.
+}
