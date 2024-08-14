@@ -225,7 +225,7 @@ local function get_slides(lsn_plan_adoc_file)
           coeIdx = coeIdx + n
           txt2, n = txt2:gsub('@image{', 'z')
           imgIdx = imgIdx + n
-          txt2, n = txt2:gsub('@centered-image{', 'z')
+          txt2, n = txt2:gsub('@centered%-image{', 'z')
           imgIdx = imgIdx + n
         elseif directive == 'ifproglang' then
           local pls = read_group(i, directive)
