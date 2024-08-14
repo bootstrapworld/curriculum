@@ -1,5 +1,7 @@
 = Introduction to Statistical Language Modeling
 
+Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*
+
 == Did she swallow a fly?
 
 @n Let's say we want to know the likelihood that the old lady "swallowed a fly". We need a ratio!
@@ -11,48 +13,13 @@
 @math{\frac
 	{\mbox{count(swallowed a fly)}}
 	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
+= {\frac{}{10}}}
 
 @vspace{1ex}
 
-Put another way: To compute the probability that "fly" follows "swallowed a", we divide 4 (how many times we see "swallowed a fly") by 12 (how many times we see "swallowed a...")
+The likelihood that the old lady "swallowed a fly" in the excerpt is @fitb{5em}{@ifsoln{60%}}.
 
-@vspace{1ex}
-
-The likelihood that the old lady "swallowed a fly" in the excerpt is 33%.
-
-== Did she swallow a... ?
-
-@vspace{1ex}
-
-@math{p(spider | swallowed a) =}
-@math{\frac
-	{\mbox{count(swallowed a spider)}}
-	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
-
-@vspace{1ex}
-
-@math{p(bird | swallowed a) =}
-@math{\frac
-	{\mbox{count(swallowed a bird)}}
-	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
-
-@vspace{1ex}
-
-@math{p(cat | swallowed a) =}
-@math{\frac
-	{\mbox{count(swallowed a cat)}}
-	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
-
-@vspace{1ex}
-
-The lady most likely swallowed a @fitb{5em}{}. The second most likely option is that she swallowed a @fitb{5em}{}. There is an equal probability that she swallowed a @fitb{5em}{} or a @fitb{5em}{}.
-
-== To catch the... ?
-
+@n What about the other animals?
 
 @vspace{1ex}
 
@@ -60,7 +27,7 @@ The lady most likely swallowed a @fitb{5em}{}. The second most likely option is 
 @math{\frac
 	{\mbox{count(swallowed a spider)}}
 	{\mbox{c(swallowed a...)}}
-= {\frac{}{12}}}
+= {\frac{}{10}}}
 
 @vspace{1ex}
 
@@ -68,7 +35,7 @@ The lady most likely swallowed a @fitb{5em}{}. The second most likely option is 
 @math{\frac
 	{\mbox{count(swallowed a bird)}}
 	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
+= {\frac{}{10}}}
 
 @vspace{1ex}
 
@@ -76,8 +43,56 @@ The lady most likely swallowed a @fitb{5em}{}. The second most likely option is 
 @math{\frac
 	{\mbox{count(swallowed a cat)}}
 	{\mbox{count(swallowed a...)}}
-= {\frac{}{12}}}
+= {\frac{}{10}}}
 
 @vspace{1ex}
 
-The lady most likely swallowed a @fitb{5em}{}. The second most likely option is that she swallowed a @fitb{5em}{}. There is an equal probability that she swallowed a @fitb{5em}{} or a @fitb{5em}{}.
+The lady _most likely_ swallowed a fly. The second most likely option is that she swallowed a @fitb{10em}{@ifsoln{cat}}. There is an equal probability that she swallowed a @fitb{10em}{@ifsoln{spider}} or a @fitb{10em}{@ifsoln{bird}}.
+
+
+== To catch the... ?
+
+@vspace{1ex}
+
+@n
+@math{p(fly | to catch the) =}
+@math{\frac
+	{\mbox{count(to catch the fly)}}
+	{\mbox{count(to catch the...)}}
+= {\frac{}{6}}}
+
+@vspace{1ex}
+
+@n
+@math{p(spider | to catch the) =}
+@math{\frac
+	{\mbox{count(to catch the spider)}}
+	{\mbox{count(to catch the...)}}
+= {\frac{}{6}}}
+
+@vspace{1ex}
+
+@n
+@math{p(bird | to catch the) =}
+@math{\frac
+	{\mbox{count(to catch the bird)}}
+	{\mbox{count(to catch the...)}}
+= {\frac{}{6}}}
+
+@vspace{1ex}
+
+The lady was most likely trying to catch the @fitb{10em}{@ifsoln{fly}}. It is the least likely that she was trying to catch the @fitb{10em}{@ifsoln{bird}}.
+
+== Try it on your own and reflect
+
+@n What is likelihood that each of the following words follows *"the"*? "fly": @fitb{1em}{}, "spider": @fitb{1em}{}, "bird": @fitb{1em}{}, "cat": @fitb{1em}{}.
+
+_If needed, use a separate paper to show your work._
+
+@ifsoln{
+fly = @math{\frac{3}{12}}, spider = @math{\frac{5}{12}}, bird = @math{\frac{3}{12}}, cat = @math{\frac{1}{12}}
+}
+
+@n How many unique animals followed the trigram "to catch the"? @fitb{2em}{3}. How many unique animals followed the unigram "the"? @fitb{2em}{4}.
+
+@n When we use N-grams with _higher_ N values, the generated text: _**becomes more predictable / becomes less predictable / does not change**_.
