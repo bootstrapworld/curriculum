@@ -178,7 +178,7 @@ To visualize the 5-number summary, the Range, and the Interquartile Range we can
 
 @ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
-@slidebreak{LaunchR}
+@slidebreak
 
 Box plots display how the four equal quarters of data are spread out along the number line.
 
@@ -187,9 +187,15 @@ Box plots display how the four equal quarters of data are spread out along the n
 
 @lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.} 
 
-When the points are evenly distributed, the four sections of the box plot will be equal in size, but _we will rarely see a box plot with four equal sections_!  When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. 
+@slidebreak{LaunchC}
+
+When the points are evenly distributed, the four sections of the box plot will be equal in size, but _we will rarely see a box plot with four equal sections_!  
+
+@ifslide{@image{images/even.png, 400}}
 
 @slidebreak
+
+When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. 
 
 @ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
@@ -255,21 +261,23 @@ Students learn to identify skewed and symmetric data from a box plot before expl
 
 === Launch
 
+@slidebreak{InvestigateC}
+
 We know that when the points are evenly distributed, the four sections of the box plot will be equal in size@ifnotslide{, like this}:
 
 @ifnotslide{@centered-image{images/even.png, 400}}
-@ifslide{@image{images/even.png, 400}}
+@ifslide{@image{images/even.png, 600}}
 
 But how do we describe the other shapes box plots come in?
 
-@slidebreak
+@slidebreak{LaunchC}
 
 Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are smaller than average might mirror that of newborns who are bigger than average. We call this kind of spread symmetric. 
 
 @teacher{Note: While even Distribution can also be correctly described as Symmetric, students should be encouraged to use more specific language for describing things when it's available to them.}
 
 @ifnotslide{@centered-image{images/symmetric.png, 400}}
-@ifslide{@image{images/symmetric.png, 400}}
+@ifslide{@image{images/symmetric.png, 800}}
 
 @slidebreak
 
@@ -318,28 +326,45 @@ Students will type `box-plot(animals-table, "pounds")` into the Interactions Are
 Create a box plot in CODAP that displays the spread of `Pounds`.
 }
 
-@slidebreak
+@slidebreak{InvestigateC}
 
-@ifproglang{pyret}{@image{images/box-plot-pounds.png,  500}}
+@ifproglang{pyret}{
+@ifnotslide{@centered-image{images/box-plot-pounds.png, 500}}
+@ifslide{@image{images/box-plot-pounds.png, 800}}
+}
 
-@ifproglang{codap}{@image{images/codap-box-plot.png, 300}}
+@ifproglang{codap}{
+ifnotslide{@centered-image{images/codap-box-plot.png, 300}}
+@ifslide{@image{images/codap-box-plot.png, 300}}
+}
 
 @QandA{
 
 @Q{What conclusions can you draw about the distribution of values in this column?}
 @A{While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier.}
+}
 
-@Q{If Q1 is the value for which 25% of the animals weighed that amount or less, what does Q3 represent?}
-@A{The third quartile is the value for which 75% of the animals weighed that amount or less. Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more.}
+@slidebreak{InvestigateC}
 
+@ifslide{
+@ifproglang{pyret}{@image{images/box-plot-pounds.png, 800}}
+@ifproglang{codap}{@image{images/codap-box-plot.png, 300}}
+}
+
+@QandA{
 @Q{Now that we've explored the spread of the dataset, do you think the mean is the best measure of center for the animals' weights?}
 @A{No. Most of the animals weigh far less than the average weight (of nearly 40 pounds)!}
+}
 
-@Q{Could we make a box plot for every column in the data set?}
-@A{No. We can only make box plots for @vocab{quantitative} columns.}
+@slidebreak
 
+@QandA{
+@Q{If Q1 is the value for which 25% of the animals weighed that amount or less, what does Q3 represent?}
+@A{The third quartile is the value for which 75% of the animals weighed that amount or less. Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more.}
 @Q{Why do you think this display is sometimes called a "box and whisker plot"?}
 @A{The distance between Min/Q1 and Q3/Max is drawn like whiskers!}
+@Q{Could we make a box plot for every column in the data set?}
+@A{No. We can only make box plots for @vocab{quantitative} columns.}
 }
 
 @teacher{If students are struggling to write conclusions, go over the following five number summary from the box plot they made.
