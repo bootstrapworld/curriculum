@@ -34,54 +34,84 @@
 
 === Launch
 
-Plagiarism is a cause for concern at schools and universities everywhere. Plagiarism hinders learning, undermines academic integrity, and destroys credibility. Still - it runs rampant, which quickly led to the development of plagiarism detection software.
+As a student, you probably know what it feels like to be under surveillance.
 
-To understand the workings of plagiarism detection, we'll start by looking at a plagiarism detector that _does not work very well_. First, we must first a @vocab{corpus}. A corpus is a large collection of data that the computer consumes; it contains the information that allows the AI to become “intelligent” at whatever it has been designed to do. Then, we provide it with a student-submitted document, which it compares against its corpus of documents to determine if there is an exact match.
+- When you enter your school, adults are stationed around the building and in the hallways - in fact, there might even be cameras in place - to check that students are dressed and behaving a certain way.
+- When you take a test, your teacher likely paces around the classroom, ensuring that your eyes are on your paper.
+- When you use the internet at your school or on a school-issued computer, software monitors your web use and blocks you from visiting a multitude of sites.
+- When you submit an essay to your English teacher, you can expect that they will run it through a plagiarism detector to be certain that all words and thoughts are your own.
 
-Let's try out a primitive plagiarism detector in Pyret. To keep things simple, this plagiarism detector will train on a single document rather than a large corpus.
+Sure, these surveillance tactics have their purposes... but being constantly watched is exhausting! Let's turn the tables and take a closer look at one method of surveillance: the plagiarism detector.
+
+To ground our conversation, let's think about a very important question: Is it possible to _fool_ a plagiarism detector?
+
+@QandA{
+- Your teacher announces that they will be running all student writing through a plagiarism detector.
+- You are a student who wants to plagiarize.
+- Exercise some creativity: What are your strategies for evading detection?
+}
+
+@teacher{Thinking like a plagiarizer?!}{
+Go easy on your students! As students share their plagiarism strategies, you may feel judgmental. We urge you to keep those feelings at bay. _Adversarial Thinking_ - put simply, thinking like a hacker - is a strategy taught in cybersecurity courses at the university level. Data protection requires adversarial thinking. Instead of concluding that students who excel at thinking in this way are ethically compromised, consider commending their creativity and reasoning. After all, plagiarism is common. There is a strong likelihood that many of the students in your class have plagiarized in some way in the past, whether intentionally or not.
+}
+
+To understand the workings of plagiarism detection, we'll start by looking at a simple detector that _does not work very well_. First, it consumes documents from the internet. Next, we feed it a student student-submitted document. It compares the student document against the others to determine if there is a match.
 
 @lesson-instruction{
 - Open the Primitive Plagiarism Detector starter file.
 - With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
-If the detector finds a perfect match, we can be certain that plagiarism has occurred. If it does not find a match... we can't actually draw any conclusions! Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
+If the detector finds a match, we can be certain that an identical document exists. If the detector does not find a match, we know that there are no identical documents.
 
-We need a plagiarism detector with more sophistication!
+Either way, we can't draw any conclusions about whether plagiarism happened! As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there. *We need a plagiarism detector with more sophistication!*
 
 === Investigate
 
 Detecting identicality is not good enough. We need a different approach. We need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then assess closeness.
 
-One standard way for AI to summarize a document is by creating a "bag of words" model. Let's look at an example first. Consider these two strings:
+One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables. Consider these two strings:
 
-- Document A: "failure is the greatest teacher"
-- Document B: "the greatest teacher, failure is"
+- Document a: "doo be doo be doo"
+- Document b: "doo doo be doo be"
 
-The bag-of-words summary for the original string looks like this:
+The bag-of-words summary for Document A looks like this:
 
-@math{"failure": 1, "is": 1, "the": 1, "greatest": 1, "teacher":1}
+@math{"doo": 3, "be": 2}
 
-As you can see, we've taken the original sentence and disregarded word order, syntax, and grammar, creating an unordered collection that focuses solely on *word frequency*.
+As you can see, we've taken the original sentence and disregarded word order, creating an unordered collection that focuses solely on *word frequency*.
 
 @lesson-point{
 A bag-of-words model represents text as an unordered collection ("bag") of words.
 }
 
+With our bag of words, we have actually created a vector where each word represents one axis of the vector. Using vector notation, we can represent document A like this:
+
+*NEED vector notation in mathjax?*
+
+If we were to plot a point for the vector on the coordinate plane, it would produce this:
+
+@center{@image{images/3-2.png, 200}}
+
 @QandA{
-@Q{What is the bag-of-words summary for Document B?}
+@Q{What is the bag-of-words summary for Document b?}
 @A{Because order does not matter, it is the same!}
+@Q{How would you represent the vector for Document b on the coordinate plane?}
+@A{It would be a point in the exact same position as the point for Document A.}
 }
 
-The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, then the two documents are a perfect match.
+The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, the two documents are a perfect match - each one resulting in a point on the coordinate plane at @math{(3,2)}.
 
-What's going on here, mathematically? The plagiarism detector is comparing two vectors, with each word representing one axis of the vector.
+Let's look at two slightly more complicated documents:
 
-- Document A = {1, 1, 1, 1, 1}
+Document c: "doo be doo be doo bop bop"
+Document d: "doo bop bop bop doo be doo be bop"
 
-- Document B = {1, 1, 1, 1, 1}
+bag of words -
+vector notation -
+3d plotting -
 
-If we imagine plotting a dot in a five-dimensional space, the point representing Document A will have the same position as the point representing Document B.
+If we imagine plotting a dot in a three-dimensional space, the point representing Document c will have the same position as the point representing Document d.
 
 @strategy{A Five-Dimensional Space!?}{
 
