@@ -95,7 +95,6 @@ local function postproc(fhtml_cached, tipe)
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
-      x = x:gsub('^<body ', '%1 " ')
       --
     end
     --
