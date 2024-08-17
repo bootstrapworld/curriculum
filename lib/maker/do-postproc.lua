@@ -53,8 +53,22 @@ local function postproc(fhtml_cached, tipe)
   local add_body_id_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
+  local read_end_sidebar_p = false
+  local num_of_lines_past_end_sidebar = 0
   --
   for x in i:lines() do
+    if read_end_sidebar_p then
+      if num_of_lines_past_end_sidebar == 3 then
+        read_end_sidebar_p = false
+      else
+        num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
+        goto continue
+      end
+    elseif x:find('%%ENDSIDEBARCONTENT%%') then
+      read_end_sidebar_p = true
+      num_of_lines_past_end_sidebar = 0
+      goto continue
+    end
     --
     if x:find('^<body') then
       if file_exists_p(f_comment_file) then
@@ -120,7 +134,7 @@ local function postproc(fhtml_cached, tipe)
     --
     x = x:gsub('class="exampleblock actually%-openblock ', 'class="openblock ')
     x = x:gsub('class="openblock sidebar', 'class="sidebar')
-    x = x:gsub('<div class="sidebar">', '%0<div id="toggle"></div>')
+    x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
@@ -269,6 +283,7 @@ local function postproc(fhtml_cached, tipe)
       o:write('<script>var pathway;</script>\n')
     end
     --
+    ::continue::
   end
   --
   i:close()

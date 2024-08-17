@@ -2145,6 +2145,7 @@
                     (display "\n[.actually-openblock.sidebar]\n=====\n" o)
                     (display-prereqs-bar o)
                     (display-standards-bar o)
+                    (display "%ENDSIDEBARCONTENT%" o)
                     (display "\n=====\n" o)
                     )
                   #:exists 'replace)
