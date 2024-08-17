@@ -191,7 +191,7 @@ local function postproc(fhtml_cached, tipe)
         x = x:gsub('begincurriculumspan', '')
         x = x:gsub('endcurriculumspan', '')
         x = x:gsub('curriculumspan_class', '')
-        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1" title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
       end
     end
 
