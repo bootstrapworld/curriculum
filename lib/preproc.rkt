@@ -2770,7 +2770,9 @@
          => (lambda (mu)
               (enclose-span ".mathunicode" mu))]
         [else
+          (set! text (regexp-replace* "\\\\over([a-z])" text "\\\\SAVEDOVER\\1"))
           (set! text (regexp-replace* "\\\\over" text "\\\\over\\\\displaystyle"))
+          (set! text (regexp-replace* "\\\\SAVEDOVER" text "\\\\over"))
           (math->mathjax-string text)]))
 
 (define (sexp->code e #:parens [parens #f] #:multiline? [multiline? #f])
