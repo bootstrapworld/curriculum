@@ -41,17 +41,17 @@ Students explore how text prediction relies on statistical language modeling.
 
 === Launch
 
-While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is a now-common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
+While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
 
 @lesson-instruction{
-- Consider this phrase: "What are you"
+- Consider this start of a phrase: "What are you..."
 - On a piece of paper, write down the first "next word" that pops into your mind.
 - Write down two additional "next word" choices.
 - As a class, let's generate a list of all of the words we developed.
 }
 
 @teacher{
-Record students' first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. Compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
+Students will think of phrases like "doing", "looking at", "listening to", "watching"... @hspace{1em} Record their first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. If time allows, you might even compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
 }
 
 @QandA{
@@ -73,7 +73,7 @@ The best way to make sense of statistical language modeling is to try it yoursel
 
 For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
 
-First, we will decompose the title of our corpus into differently sized chunks:
+First, we will decompose the title of our corpus into differently sized chunks (one word at a time, two words at a time, etc.):
 
 [cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
 |===
@@ -108,8 +108,10 @@ The phrase "there was an old lady who swallowed a..." is repeated  in our corpus
 @QandA{
 @Q{Referring to the @handout{old-lady-lyrics.adoc, "lyrics"}: how many times does the word "there" appear in the song?}
 @A{4}
-@Q{In this corpus, what is the likelihood that the word "there" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
-@A{4/4, or 100% probability}
+@Q{In this corpus, how many times was the word "there" followed by the word "was"?}
+@A{4}
+@Q{what is the probability that the word "there" is followed by the word "was"?}
+@A{4/4 or 100%}
 }
 
 
@@ -121,7 +123,7 @@ In the example you just worked through, you computed the probability that "was" 
 	{\mbox{count(there...)}}
 = {\frac{4}{4}}}
 
-Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "there was") by 4 (how many times we see "there" followed by anything).
+Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything.)
 
 
 @lesson-instruction{
