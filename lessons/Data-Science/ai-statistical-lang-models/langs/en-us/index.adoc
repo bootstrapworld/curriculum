@@ -51,7 +51,7 @@ While texting, emailing, or even conducting a web search, you've probably notice
 }
 
 @teacher{
-Record students' first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. If time allows, you might even compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
+Record students' first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. Compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
 }
 
 @QandA{
@@ -62,7 +62,7 @@ Record students' first choice responses on the board. If a word is repeated, kee
 
 @right{@image{images/texting-app.png, 200}}
 
-Behind the scenes, the statistical language model takes in a vast corpus of actual text messages. A @vocab{corpus} in AI is the collection of data that serves as training material.
+Behind the scenes, the statistical language model takes in a vast corpus of actual text messages. We have already talked about how AI is trained; XXXX
 
 During training, the computer extracts each use of the phrase "What are you" from the training data, along with the subsequent word. It then determines the probability of each possible "next word". In this particular corpus, "up", "doing", and "guys" were most likely to appear after "What are you". As a result, those words are suggested for users to choose from.
 
@@ -99,7 +99,7 @@ During statistical language modeling, the computer breaks a text into chunks and
 Let's dig a little deeper...
 
 @teacher{
-To share the song lyrics with students, choose whatever modality works best for you: you can read the lyrics aloud, have students @handout{old-lady-lyrics.adoc, "read them independently"}, or even listen to a recorded version of the song. There are many to choose from on youtube!
+To share the song lyrics with students,  have students @handout{old-lady-lyrics.adoc, "read them independently"}, or even listen to a recorded version of the song.
 }
 
 
@@ -110,19 +110,18 @@ The phrase "there was an old lady who swallowed a..." is repeated  in our corpus
 @A{4}
 @Q{In this corpus, what is the likelihood that the word "there" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
 @A{4/4, or 100% probability}
-@Q{In this corpus, what is the likelihood that the word "there" is followed by the word "was"?: 1/4, 2/4, 3/4, 4/4}
 }
 
 
 In the example you just worked through, you computed the probability that "was" appears after the unigram "there". We can represent the computation you just completed with a special notation:
 
-@math{p(there | was) =}
+@math{p(was | there) =}
 @math{\frac
 	{\mbox{count(there was)}}
 	{\mbox{count(there...)}}
 = {\frac{4}{4}}}
 
-Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was") by 4 (how many times we see "there...")
+Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "there was") by 4 (how many times we see "there" followed by anything).
 
 
 @lesson-instruction{
@@ -158,7 +157,7 @@ Are you and your students interested in exploring probability in more depth? Che
 
 === Launch
 
-You've used a paper, pencil, and probability to apply the principals of statistical language modeling. It's time to peek behind the curtain and see how a computer can put this model to use! To make that happen, we're going to explore Soekia, a simplified text generation tool designed for student learning.
+You've used a paper, pencil, and probability to apply the principles of statistical language modeling. It's time to peek behind the curtain and see how a computer can put this model to use! To make that happen, we're going to explore Soekia, a simplified text generation tool designed for student learning.
 
 @lesson-instruction{
 - Go to @link{http://Soekia.ch/GPT/?lang=en}
