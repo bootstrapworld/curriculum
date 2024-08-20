@@ -52,10 +52,23 @@ local function postproc(fhtml_cached, tipe)
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_end_body_id_p = false
-  local inside_sidebar_section_p = false
   local delete_line_p = false
+  local read_end_sidebar_p = false
+  local num_of_lines_past_end_sidebar = 0
   --
   for x in i:lines() do
+    if read_end_sidebar_p then
+      if num_of_lines_past_end_sidebar == 3 then
+        read_end_sidebar_p = false
+      else
+        num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
+        goto continue
+      end
+    elseif x:find('%%ENDSIDEBARCONTENT%%') then
+      read_end_sidebar_p = true
+      num_of_lines_past_end_sidebar = 0
+      goto continue
+    end
     --
     if x:find('^<body') then
       if file_exists_p(f_comment_file) then
@@ -95,7 +108,6 @@ local function postproc(fhtml_cached, tipe)
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
-      x = x:gsub('^<body ', '%1 " ')
       --
     end
     --
@@ -119,12 +131,10 @@ local function postproc(fhtml_cached, tipe)
     x = x:gsub('</pre>', '</code></pre>')
     x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
     x = x:gsub('<p> </p>', '<p></p>')
-    x = x:gsub('<p>(%%CURRICULUMCOMMENT%%)', '%1')
-    x = x:gsub('(%%ENDCURRICULUMCOMMENT%%)<.p>', '%1')
-    x = x:gsub('%%CURRICULUMCOMMENT%%', '<!-- ')
-    x = x:gsub('%%ENDCURRICULUMCOMMENT%%', '\n-->')
     --
     x = x:gsub('class="exampleblock actually%-openblock ', 'class="openblock ')
+    x = x:gsub('class="openblock sidebar', 'class="sidebar')
+    x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
@@ -139,21 +149,6 @@ local function postproc(fhtml_cached, tipe)
     --
     x = x:gsub('<span class="([^"]+)">(<figure class="image")', '%2 style="text-align: %1"')
     x = x:gsub('(</figure>)</span>', '%1')
-    --
-    if not inside_sidebar_section_p and x:find('%%SIDEBARSECTION%%') then
-      inside_sidebar_section_p = true
-      x = x:gsub('%%SIDEBARSECTION%%', '--></div><div class="sidebar"><div id="toggle"></div><div class="paragraph"><!--')
-    end
-    --
-    if inside_sidebar_section_p then
-      x = x:gsub('(</div>)</p>', '%1')
-      x = x:gsub('<p>(<div>)', '%1')
-      --
-      if x:find('%%ENDSIDEBARSECTION%%') then
-        x = x:gsub('%%ENDSIDEBARSECTION%%', '--></div><!--')
-        inside_sidebar_section_p = false
-      end
-    end
     --
     if x:find('BOGUSACKNOWLEDGMENTSECTIONHEADER') then
       delete_line_p = true
@@ -210,7 +205,7 @@ local function postproc(fhtml_cached, tipe)
         x = x:gsub('begincurriculumspan', '')
         x = x:gsub('endcurriculumspan', '')
         x = x:gsub('curriculumspan_class', '')
-        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1" title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
       end
     end
 
@@ -288,6 +283,7 @@ local function postproc(fhtml_cached, tipe)
       o:write('<script>var pathway;</script>\n')
     end
     --
+    ::continue::
   end
   --
   i:close()
