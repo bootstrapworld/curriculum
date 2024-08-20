@@ -65,14 +65,12 @@ Either way, we can't draw any conclusions about whether plagiarism happened! As 
 
 Detecting identicality is not good enough. We need a different approach. We need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then assess closeness.
 
-One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables. Consider these two strings:
+One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables. Consider the two strings, below.
 
 - Document a: "doo be doo be doo"
 - Document b: "doo doo be doo be"
 
-The bag-of-words summary for Document A looks like this:
-
-@math{"doo": 3, "be": 2}
+The bag-of-words summary for Document A looks like this: `"doo": 3, "be": 2`
 
 As you can see, we've taken the original sentence and disregarded word order, creating an unordered collection that focuses solely on *word frequency*.
 
@@ -80,9 +78,9 @@ As you can see, we've taken the original sentence and disregarded word order, cr
 A bag-of-words model represents text as an unordered collection of words with frequencies.
 }
 
-With our bag of words, we have actually created a vector where each word represents one axis of the vector. Using vector notation, we can represent document A like this:
+With our bag of words, we have actually created a vector where each word represents one axis. Using vector notation, we can represent document A like this:
 
-*NEED vector notation in mathjax?*
+@math{\overrightarrow{a} = (3, 2)}
 
 If we were to plot a point for the vector on the coordinate plane, it would produce this:
 
@@ -97,6 +95,75 @@ If we were to plot a point for the vector on the coordinate plane, it would prod
 
 The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, the two documents are a perfect match - each one resulting in a point on the coordinate plane at @math{(3,2)}.
 
+Let's compare the output of our primitive plagiarism detector with one programmed to use a bag-of-words model.
+
+@lesson-instruction{
+- Open @starter-file{plagiarism} and click "Run".
+- Use the `simple-similarity` function to compare `doc-a` and `doc-b`.
+- Use the `cosine-similarity` function, which uses the bag-of-words model, to compare `doc-a` and `doc-b`.
+}
+
+When we ask the program if Document a matches Document b, it tells us no. When we ask the program if the bag-of-words _summary_ for Document a is _close_ to the summary for Document b, it tells us yes! The summaries are identical.
+
+=== Synthesize
+
+@QandA{
+@Q{An effective plagiarism detection program must use a bag-of-words summary rather than the actual text, with syntax and order preserved. Explain why.}
+@Q{Provide the bag-of-words summary and describe the vector for this document: "doo bop bop bop doo bop bop doo doo doo"}
+}
+
+
+
+== Normalizing Data and Considering Dimensionality
+
+=== Overview
+
+=== Launch
+
+
+Documents a and b were relatively simple: because we used a total of two nonsense syllables were used, we plotted our vectors in two dimensions on the coordinate plane. Each different nonsense syllable represented one axis (x and y).
+
+Let's look at some slightly more complicated documents:
+
+*Document c: "doo be doo be doo doo doo"*
+
+- bag-of-words summary: `"doo": 5, "be": 2`
+
+- vector: @math{\overrightarrow{c} = (5, 2)}
+
+
+
+*Document d: "be bop bop bop be bop bop"*
+
+- bag-of-words summary: `"bop": 5, "be": 2`
+
+- vector: @math{\overrightarrow{d} = (5, 2)}
+
+@QandA{
+- At the moment, the bag-of-words summary for document a is identical to the bag-or-words summary for document b... but the documents are *not* identical! What's going on?
+}
+
+
+To account for every nonsense syllable in the two documents, we can use a Venn diagram.
+
+@lesson-instruction{
+
+@image{images/blank-venn-diagram.png, 150}
+
+Complete the venn diagram:
+
+- In the left-most section, write any words that appear in Document c, but not Document d
+
+- In the middle section, write any words that appear in *both* documents
+
+- In the right-most section, write any words that appear in Document d, but not Document c
+}
+
+
+
+If we imagine plotting a dot in a three-dimensional space, the point representing Document c will have the same position as the point representing Document d.
+
+
 
 === Synthesize
 
@@ -110,20 +177,6 @@ The bag-of-words summary for both documents is exactly the same! When the progra
 
 === Launch
 
-
-
-
-
-Let's look at two slightly more complicated documents:
-
-- Document c: "doo be doo be doo bop bop"
-- Document d: "doo bop bop bop doo be doo be bop"
-
-bag of words -
-vector notation -
-3d plotting -
-
-If we imagine plotting a dot in a three-dimensional space, the point representing Document c will have the same position as the point representing Document d.
 
 
 @lesson-instruction{
