@@ -6,10 +6,6 @@
 @lesson-prereqs{ds-intro}
 }
 
-@ifproglang{codap}{
-@lesson-prereqs{ds-intro}
-}
-
 @keywords{}
 
 [@lesson-intro-table]
@@ -28,7 +24,7 @@
 
 |===
 
-== Plagiarism Detection
+== A Bag of Words
 
 === Overview
 
@@ -57,7 +53,7 @@ To ground our conversation, let's think about a very important question: Is it p
 To understand the workings of plagiarism detection, we'll start by looking at a simple detector that _does not work very well_. First, it consumes documents from the internet. Next, we feed it a student student-submitted document. It compares the student document against the others to determine if there is a match.
 
 @lesson-instruction{
-- Open the Primitive Plagiarism Detector starter file.
+- Open the @starter-file{plagiarism}.
 - With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
@@ -81,7 +77,7 @@ The bag-of-words summary for Document A looks like this:
 As you can see, we've taken the original sentence and disregarded word order, creating an unordered collection that focuses solely on *word frequency*.
 
 @lesson-point{
-A bag-of-words model represents text as an unordered collection ("bag") of words.
+A bag-of-words model represents text as an unordered collection of words with frequencies.
 }
 
 With our bag of words, we have actually created a vector where each word represents one axis of the vector. Using vector notation, we can represent document A like this:
@@ -101,6 +97,23 @@ If we were to plot a point for the vector on the coordinate plane, it would prod
 
 The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, the two documents are a perfect match - each one resulting in a point on the coordinate plane at @math{(3,2)}.
 
+
+=== Synthesize
+
+
+
+
+
+== Computing Closeness
+
+=== Overview
+
+=== Launch
+
+
+
+
+
 Let's look at two slightly more complicated documents:
 
 - Document c: "doo be doo be doo bop bop"
@@ -112,15 +125,6 @@ vector notation -
 
 If we imagine plotting a dot in a three-dimensional space, the point representing Document c will have the same position as the point representing Document d.
 
-@strategy{A Five-Dimensional Space!?}{
-
-@right{@image{images/5-cube.png, 150}}
-
-Imagining higher dimensions is not easy! If you or your students are not able, that is okay. (After all, we are stuck in a three-dimensional world.) For AI, five dimensions - or even a thousand! - is no big deal. What's important for students to grasp is that a sequence of @math{N} numbers represents a location in an @math{N}-dimensional space.
-
-The image to the right is a 2D representation of a 5-cube, which has 32 vertices, 80 edges, and 80 square faces.
-
-}
 
 @lesson-instruction{
 - Open the Bag of Words Plagiarism Detector starter file.++
@@ -172,8 +176,3 @@ AI really took off around 2010 because, at this time, more resources became avai
 - Open the Bag of Words Plagiarism Detector starter file.
 - Complete the final section of @printable-exercise{sophisticated-plagiarism-detector.adoc}.
 }
-
-
-=== Synthesize
-
-
