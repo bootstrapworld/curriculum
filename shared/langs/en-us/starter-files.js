@@ -365,6 +365,12 @@ const AI = {
     "title": "Spell Checker Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+      }
+    },
+  "plagiarism": {
+    "title": "Plagiarism Detection Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1vjBqzZ3tREFts_I_j7t90LKJ0D3Cg-Xi&v=e8968a4"
     }
   }
 }
