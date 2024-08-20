@@ -1198,7 +1198,8 @@ const allStarterFiles = {
   ...EarlyMath,
   ...Projects, 
   ...Alg2, 
-  ...Reactive
+  ...Reactive,
+  ...AI,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
