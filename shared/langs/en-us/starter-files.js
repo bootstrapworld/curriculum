@@ -370,7 +370,7 @@ const AI = {
   "plagiarism": {
     "title": "Plagiarism Detection Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1vjBqzZ3tREFts_I_j7t90LKJ0D3Cg-Xi&v=e8968a4"
+      "url": "https://code.pyret.org/editor#share=1gEdijEF5e6PEUIOpoY8zIpM4Ovgj5VCP&v=e8968a4"
     }
   }
 }
