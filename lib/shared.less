@@ -544,14 +544,19 @@ lines on some browsers */
    * CONTENT BOXES: lesson-instruction, lesson-roleplay, teacherNote, q-and-a, lesson-point...
    *
    * back-to-back twins should have no space between them
-   * (used so that @slidebreak works, while maintaining
+   * (used so that @slidebreak and .hiddenblock work, while maintaining
    * the appearance of an uninterrupted block in the lesson)
+   *
+   * By matching an arbitrary combination of div>p>.slidebreaks OR .hiddenblocks,
+   * we can enforce that the second content box appears as part of the first one
    */
   .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
   .paragraph:has(.slidebreak) p { margin: 0 !important; }
-  .lesson-instruction+.paragraph:has(.slidebreak)+.lesson-instruction,
-  .lesson-roleplay+.paragraph:has(.slidebreak)+.lesson-roleplay,
-  .q-and-a+.paragraph:has(.slidebreak)+.q-and-a { 
+
+  .lesson-instruction ~ :is(div p .slidebreak, .hiddenblock) ~ .lesson-instruction,
+  .lesson-roleplay    ~ :is(div p .slidebreak, .hiddenblock) ~ .lesson-roleplay,
+  .teacherNote        ~ :is(div p .slidebreak, .hiddenblock) ~ .teacherNote,
+  .q-and-a            ~ :is(div p .slidebreak, .hiddenblock) ~ .q-and-a { 
     margin: 0;
     > *:first-child::before { display: none; } 
   }
