@@ -72,9 +72,9 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
-  local function page_title(page_adoc_file)
-    local title_file = lessonpagecache .. '.' .. page_adoc_file:gsub('%.adoc', '') .. '.titletxt'
-    local title = page_adoc_file
+  local function page_title(page_file)
+    local title_file = lessonpagecache .. '.' .. page_file:gsub('%.%w+$', '') .. '.titletxt'
+    local title = page_file
     if file_exists_p(title_file) then
       local title2 = first_line(title_file)
       if title2 then title = title2 end
