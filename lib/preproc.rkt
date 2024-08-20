@@ -585,13 +585,13 @@
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g link-text
                     (if (or *lesson-plan*
-                            (member link-type '("printable-exercise" "opt-printable-exercise")))
+                            (member link-type '("printable-exercise" "opt-printable-exercise" "handout")))
                         ", window=\"&#x5f;blank\"" ""))]
           [materials-link-output
             (format "link:~alessons/pass:[~a][~a~a]"
                     *dist-root-dir* g (or page-title link-text)
                     (if (or *lesson-plan*
-                            (member link-type '("printable-exercise" "opt-printable-exercise")))
+                            (member link-type '("printable-exercise" "opt-printable-exercise" "handout")))
                         ", window=\"&#x5f;blank\"" ""))])
       (when *lesson-plan*
         (cond [(or (equal? link-type "opt-printable-exercise")
