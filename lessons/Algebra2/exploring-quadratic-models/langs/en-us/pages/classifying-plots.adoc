@@ -2,8 +2,19 @@
 
 ++++
 <style>
-/* Shrink Images */
-#content img { width: 70%; }
+/* Make Images Resize to Fit Rows:
+ * 1) Limit the contents of a cell to the size of the cell
+ * 2) make the .content of that cell take up all the space
+ * 3) divide the .content into .paragraph (90%) & table (10%)
+ * 4) Stretch the image to the maximum height of its container
+*/
+td { contain: size; }
+td .content { position: absolute; width: 100%;  padding: .5em; }
+td .content .paragraph { height: 90%; }
+td table { height: 10%; }
+td .content, td .content .paragraph p, .image-figure, img {
+	height: 100%;
+}
 
 /* Make autonums inside tables look consistent with those outside */
 body.workbookpage td .autonum:after { content: ')'; }
