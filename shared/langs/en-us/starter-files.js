@@ -373,7 +373,7 @@ const MoreDS = {
   "grouped-samples": {
     "title": "Grouped Samples Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1Tv81bTmc0-kGr-bXUdjaVayPW66F-1AA"
+      "url": "https://code.pyret.org/editor#share=1D3LV0-jteHwK1s4whmucnkmfvbX1mFoW"
     },
     "codap": {
       "url": "TBD"
