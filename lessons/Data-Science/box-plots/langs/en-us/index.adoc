@@ -6,7 +6,7 @@
 
 @keywords{range, box plot, box and whisker plot, five number summary, first quartile, interquartile range}
 
-@add-to-lang{box-plot, modified-box-plot}
+@add-to-lang{box-plot, modified-box-plot, box-plot-scaled, modified-box-plot-scaled, vert-box-plot, modified-vert-box-plot, modified-vert-box-plot-scaled}
 
 [@lesson-intro-table]
 |===
@@ -135,7 +135,7 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 @lesson-instruction{
 - Let's see what we can learn about how typical those averages were by looking at the datasets.
 - *Ledet Family Reunion* Age Data: 1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
-  * Rewrite the data on your paper in order from least to greatest.
+  * Rewrite the data in order from least to greatest.
   * Record your five-number summary (Minimum, Q1, Median, Q3, Maximum).
   * Then calculate the IQR and Range.
 - *Watson Family Gathering* Age Data: 70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
@@ -261,33 +261,50 @@ Students learn to identify skewed and symmetric data from a box plot before expl
 
 === Launch
 
-@slidebreak{InvestigateC}
-
-We know that when the points are evenly distributed, the four sections of the box plot will be equal in size@ifnotslide{, like this}:
-
-@ifnotslide{@centered-image{images/even.png, 400}}
-@ifslide{@image{images/even.png, 600}}
-
-But how do we describe the other shapes box plots come in?
-
 @slidebreak{LaunchC}
 
-Sometimes there is roughly the same amount of variation on the low end as on the high end. For example, the distribution of newborns who are smaller than average might mirror that of newborns who are bigger than average. We call this kind of spread symmetric. 
+@ifslide{@image{images/even.png, 600}}
 
-@teacher{Note: While even Distribution can also be correctly described as Symmetric, students should be encouraged to use more specific language for describing things when it's available to them.}
-
-@ifnotslide{@centered-image{images/symmetric.png, 400}}
-@ifslide{@image{images/symmetric.png, 800}}
+We know that when the points are evenly distributed across the range, the four sections of the box plot will be equal in size. But, it's very rare for the distribution of real world datasets to be uniform like this! _(And, even when we see a box plot with four equally wide quarters, we cannot assume that the points are evenly distributed within each of the quarters.)_ 
 
 @slidebreak
 
-Left and right skew are easy to identify from a quick glance at a box plot, with longer whiskers trailing off toward potential outliers.
+*What shapes are box plots likely to come in and how do we describe them?*
+
+@slidebreak
+
+==== Symmetric 
+
+The spread of any dataset with roughly the same amount of variation on the low end as on the high end can de described as symmetric. 
+
+[cols="13a,13a,12a", grid="none", frame="none"]
+|===
+| @image{images/even.png}
+| @image{images/symmetriclong.png}
+| @image{images/symmetricshort.png}
+|===
+
+An example of this might be the weights of newborn babies: the distribution for those who are smaller than average might mirror those who are bigger than average.
+
+@slidebreak
+
+==== Skew
+Left and right skew are easy to identify from a quick glance at a box plot, by their longer whiskers trailing off toward the left or right, respectively. Longer whiskers indicate the potential of outliers.
 
 [cols="^1a,^1a", grid="none", frame="none", stripes="none"]
 |===
 |@image{images/left.png}
 |@image{images/right.png} 
 |===
+
+An example of left skew could be:
+
+- the weights of the cousins in a family, with the newborn as an outlier. _(Did you know that babies are supposed to triple their weight in the first year of their lives?!)_
+
+Examples of right skew could include:
+
+- the distribution of maximum heights reached during gymnastics floor routines, with Simone Biles as an outlier, reaching over 9 feet in the air!
+- the distribution of time it takes to get from the subway to the street, with people using strollers and wheel chairs as long outliers, because they have to wait for elevators while everyone else can use the stairs and escalators.
 
 @slidebreak
 
@@ -302,9 +319,7 @@ Let's see what we can learn about the spread of the data in the `pounds` column 
 
 @ifproglang{pyret}{Below is the Contract for `box-plot`.
 
-```
-box-plot :: (t::Table, col::String) -> Image
-```
+@show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
 }
 
 @ifproglang{codap}{To create a box plot in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Box Plot. *If this information is not on your Data Displays Organizer, add it now!*}
@@ -381,6 +396,36 @@ ifnotslide{@centered-image{images/codap-box-plot.png, 300}}
 @lesson-instruction{
 Choose another quantitative column to summarize and complete the second half of @printable-exercise{summarizing-columns-mos.adoc}
 }
+
+@ifproglang{pyret}{
+@strategy{Other Box Plots}{
+
+If you're trying to compare two box plots, you might like them both to appear on number lines using the same scale.  Pyret has a function for the that:
+
+@show{(contract 'box-plot-scaled '((table-name Table) (column String) (low-end Number) (high-end Number)) "Image")}
+
+More Statistics-based or Math-oriented classes will also be familiar with _modified box plots_ (@link{https://www.YouTube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot. In Pyret, we can make them using the following contracts:
+
+@show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
+@show{(contract 'modified-box-plot-scaled '((table-name Table) (column String) (low-end Number) (high-end Number)) "Image")}
+
+Finally, if you'd prefer to use vertical box plots, Pyret as the following contracts:
+
+@show{(contract 'vert-box-plot '((table-name Table) (column String)) "Image")}
+@show{(contract 'modified-vert-box-plot '((table-name Table) (column String)) "Image")}
+@show{(contract 'modified-vert-box-plot-scaled '((table-name Table) (column String) (low-end Number) (high-end Number)) "Image")}
+
+}
+}
+
+@ifproglang{CODAP}{
+@strategy{Modified Box Plots}{
+More Statistics-based or Math-oriented classes will also be familiar with _modified box plots_ (@link{https://www.YouTube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot.
+
+In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.
+}
+}
+
 
 === Common Misconceptions
 It is extremely common for students to forget that the quartiles divide the data into quarters, each of which includes 25% of the dataset. This will need to be heavily reinforced.
@@ -473,21 +518,6 @@ Students should notice that the play-dough is _taller for shorter intervals_ and
 - With a partner, complete the @printable-exercise{boxplot-vocab-map.pdf, Box Plot Vocab Concept Map} and see if you can draw connections between these concepts!
 - @opt{Complete @opt-printable-exercise{reading-boxplots.adoc} to practice matching box plots to a written description of a distribution.}
 - @opt{Complete @opt-printable-exercise{matching-boxplots-to-histograms-2.adoc} and/or the Matching Box Plots to Histograms slide of @opt-starter-file{boxplots}}
-}
-
-@clear
-
-
-@strategy{Modified Box Plots}{
-More Statistics-based or Math-oriented classes will also be familiar with _modified box plots_ (@link{https://www.YouTube.com/watch?v=Cm_852R8JPw, video explanation}), which remove outliers from the box-and-whisker and draw them as asterisks outside of the plot.
-
-@ifproglang{pyret}{
-Modified box plots are also available in Bootstrap:Data Science, using the following Contract:
-
-@show{(contract 'modified-box-plot '((table-name Table) (column String)) "Image")}
-}
-
-@ifproglang{codap}{In CODAP, you can create a modified Box Plot by selecting both Box Plot and Show Outliers from the `Measure` menu.}
 }
 
 @clear
