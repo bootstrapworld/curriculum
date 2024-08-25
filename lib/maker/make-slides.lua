@@ -479,8 +479,8 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
           l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
           l1 = l1:gsub('%*(%S)%*', '__%1__')
-          l1 = l1:gsub(' %+$', '\n')
-          l1 = l1:gsub('^%+$', '\n')
+          l1 = l1:gsub(' %+$', '') -- would <br> work here?
+          l1 = l1:gsub('^%+$', '') -- ditto
           l1 = l1:gsub('{two%-colons}', '::')
           l1 = l1:gsub('{empty}', '')
           l1 = l1:gsub('{plus}', '+')

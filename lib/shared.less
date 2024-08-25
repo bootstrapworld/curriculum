@@ -71,8 +71,8 @@ body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: xx-small; top: -0.65em; left: 1px; }
-  sub     { font-size: xx-small; bottom: -0.35em; }
+  sup     { font-size: x-small; top: -0.65em; left: 1px; }
+  sub     { font-size: x-small; bottom: -0.35em; }
   code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
@@ -100,6 +100,10 @@ body {
   .MathJax { 
       font-family: MJXZERO, 'MJXTEX'; 
       font-size: inherit !important;
+  }
+  .mathunicode { 
+    font-family: MJXZERO, 'MJXTEX'; 
+    font-size: inherit !important;
   }
   .mathunicode i { font-family: 'MJXTEX-I' }
   
@@ -540,14 +544,19 @@ lines on some browsers */
    * CONTENT BOXES: lesson-instruction, lesson-roleplay, teacherNote, q-and-a, lesson-point...
    *
    * back-to-back twins should have no space between them
-   * (used so that @slidebreak works, while maintaining
+   * (used so that @slidebreak and .hiddenblock work, while maintaining
    * the appearance of an uninterrupted block in the lesson)
+   *
+   * By matching an arbitrary combination of div>p>.slidebreaks OR .hiddenblocks,
+   * we can enforce that the second content box appears as part of the first one
    */
   .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
   .paragraph:has(.slidebreak) p { margin: 0 !important; }
-  .lesson-instruction+.paragraph:has(.slidebreak)+.lesson-instruction,
-  .lesson-roleplay+.paragraph:has(.slidebreak)+.lesson-roleplay,
-  .q-and-a+.paragraph:has(.slidebreak)+.q-and-a { 
+
+  .lesson-instruction ~ :is(div p .slidebreak, .hiddenblock) ~ .lesson-instruction,
+  .lesson-roleplay    ~ :is(div p .slidebreak, .hiddenblock) ~ .lesson-roleplay,
+  .teacherNote        ~ :is(div p .slidebreak, .hiddenblock) ~ .teacherNote,
+  .q-and-a            ~ :is(div p .slidebreak, .hiddenblock) ~ .q-and-a { 
     margin: 0;
     > *:first-child::before { display: none; } 
   }
