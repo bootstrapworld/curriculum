@@ -1,4 +1,4 @@
-= Introduction to Statistical Language Modeling
+= Constructing a Language Model
 
 Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*
 
@@ -15,39 +15,36 @@ Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that th
 	{\mbox{count(swallowed a...)}}
 = {\frac{}{10}}}
 
+
+@n The likelihood that the old lady "swallowed a fly" in the excerpt is @fitb{5em}{@ifsoln{60%}}.
+
+== What about the other animals?
+
 @vspace{1ex}
 
-The likelihood that the old lady "swallowed a fly" in the excerpt is @fitb{5em}{@ifsoln{60%}}.
-
-@n What about the other animals?
-
-@vspace{1ex}
-
+@n
 @math{\mbox{p(spider | swallowed a) =}}
 @math{\frac
 	{\mbox{count(swallowed a spider)}}
 	{\mbox{c(swallowed a...)}}
 = {\frac{}{10}}}
 
-@vspace{1ex}
-
+@n
 @math{p(bird | swallowed a) =}
 @math{\frac
 	{\mbox{count(swallowed a bird)}}
 	{\mbox{count(swallowed a...)}}
 = {\frac{}{10}}}
 
-@vspace{1ex}
-
+@n
 @math{p(cat | swallowed a) =}
 @math{\frac
 	{\mbox{count(swallowed a cat)}}
 	{\mbox{count(swallowed a...)}}
 = {\frac{}{10}}}
 
-@vspace{1ex}
 
-Across the entire poem, the lady _most likely_ swallowed a fly. The second most likely option is that she swallowed a @fitb{10em}{@ifsoln{cat}}. There is an equal probability that she swallowed a @fitb{10em}{@ifsoln{spider}} or a @fitb{10em}{@ifsoln{bird}}.
+@n Across the entire poem, the lady _most likely_ swallowed a @fitb{10em}{@ifsoln{fly}}. The second most likely option is that she swallowed a @fitb{10em}{@ifsoln{cat}}. There is an equal probability that she swallowed a @fitb{10em}{@ifsoln{spider}} or a @fitb{10em}{@ifsoln{bird}}.
 
 
 == To catch the... ?
@@ -92,5 +89,3 @@ _If needed, use a separate paper to show your work._
 @ifsoln{
 fly = @math{\frac{3}{12}}, spider = @math{\frac{5}{12}}, bird = @math{\frac{3}{12}}, cat = @math{\frac{1}{12}}
 }
-
-@n How many different animals followed the trigram "to catch the"? @fitb{2em}{@ifsoln{3}}. How many unique animals followed the unigram "the"? @fitb{2em}{@ifsoln{4}.

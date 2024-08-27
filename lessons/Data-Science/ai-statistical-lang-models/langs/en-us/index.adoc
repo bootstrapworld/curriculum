@@ -33,7 +33,7 @@
 
 
 
-== Statistical Language Models
+== Introduction to Statistical Language Models
 
 === Overview
 
@@ -44,32 +44,63 @@ Students explore how text prediction relies on statistical language modeling.
 While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
 
 @lesson-instruction{
-- Consider this start of a phrase: "What are you..."
-- On a piece of paper, write down the first "next word" that pops into your mind.
-- Write down two additional "next word" choices.
+- Consider this start of a phrase: "She is on the..."
+- On a piece of paper, write down the next word that pops into your mind.
+- Write down two additional next-word choices.
 - As a class, let's generate a list of all of the words we developed.
 }
 
 @teacher{
-Students will think of phrases like "doing", "looking at", "listening to", "watching"... @hspace{1em} Record their first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. If time allows, you might even compute the probability of each word choice as a class. So, if there are 25 students in your class, and 8 students chose “doing”, the probability of a student choosing that word is 8/25.
+Students will think of words like "phone", "way", "porch", and "fence"... @hspace{1em} Record their first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. Then, as a class, compute the probability of choosing each choice.
 }
 
 @QandA{
-- How did you choose your next words?
-- Do you think a text messaging app with a predictive text feature would produce the same results as our class?
-** Share the image below to see the word options provided by one text messaging app.
+@Q{What is the probability of choosing each of our generated words?}
+@A{For example: if there are 25 students in your class, and 8 students chose “phone”, the probability of a student choosing that word is 8/25.}
+
+@Q{What word choices were the most probable? How about the least probable?}
+@A{Responses will vary depending on the words your students offered.}
+
+@Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class?}
+@A{Share the image below to see the word options provided by one text messaging app.}
 }
 
 @right{@image{images/texting-app.png, 200}}
 
-Behind the scenes, the statistical language model takes in a vast corpus of actual text messages. We have already talked about how AI is trained; XXXX
 
-During training, the computer extracts each use of the phrase "What are you" from the training data, along with the subsequent word. It then determines the probability of each possible "next word". In this particular corpus, "up", "doing", and "guys" were most likely to appear after "What are you". As a result, those words are suggested for users to choose from.
+We've already discussed how AI systems are trained. Similarly, your predictive text feature is trained on a large amount of text.
 
+The image of one particular texting app proposing "porch", "way", and "phone" raises an interesting question: Will all users be recommended the _same_ completion?
+
+The answer is no, for a few reasons:
+
+- There might be multiple words with equal probability.
+
+- Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
+
+- A text messaging app also includes a model of what _the actual user_ writes, and can therefore offer a degree of personalization based on what you have chosen in the past.
+
+- The predictive text feature can take into account the message that you are composing. If you type the first letter of an unusual word that you have already used in the message, that word often appears in the list of completions.
+
+During training, the computer extracts each use of the phrase "She is on the" from the training data, along with the subsequent word. It then determines the probability of each possible next word. In this particular corpus, as per one user's phone, "phone", "porch", and "way" were most likely to appear after "She is on the". As a result, those words are suggested for users to choose from.
+
+@QandA{
+@Q{Do you think your texting app would propose the same completions for "She is on the " as it would for "The "?}
 
 === Investigate
 
-The best way to make sense of statistical language modeling is to try it yourself!
+
+AI as tic tac toe opponent
+
+
+=== Synthesize
+
+
+== Constructing a Statistical Language Model
+
+=== Launch
+
+The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
 For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
 
@@ -96,6 +127,29 @@ First, we will decompose the title of our corpus into differently sized chunks (
 
 During statistical language modeling, the computer breaks a text into chunks and then assesses how likely it is that any _single_ word in the text will _follow_ that chunk. We call these chunks @vocab{n-grams}, where @math{n} represents the number of words in the chunk.
 
+
+[cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
+|===
+
+| n-gram | Quantity			| Decomposition
+
+| 1-gram
+| 9
+| (There) (Was) (an) (Old) (Lady) (Who) (Swallowed) (a) (Fly)
+
+| 2-gram
+| 8
+| (There Was) (Was an) (an Old) (Old Lady) (Lady Who) (Who Swallowed) (Swallowed a) (a Fly)
+
+| 3-gram
+| 7
+| (There Was an) (Was an Old) (an Old Lady) (Old Lady Who) (Lady Who Swallowed) (Who Swallowed a) (Swallowed a Fly)
+
+|===
+
+
+=== Investigate
+
 Let's dig a little deeper...
 
 @teacher{
@@ -103,7 +157,7 @@ To share the song lyrics with students,  have students @handout{old-lady-lyrics.
 }
 
 
-The phrase "there was an old lady who swallowed a..." is repeated  in our corpus! Let's zoom in on one unigram from that phrase: “there”.
+The phrase "there was an old lady who swallowed a..." is repeated in our corpus! Let's zoom in on one unigram from that phrase: “there”.
 
 @QandA{
 @Q{Referring to the @handout{old-lady-lyrics.adoc, "lyrics"}: how many times does the word "there" appear in the song?}
@@ -123,21 +177,27 @@ In the example you just worked through, you computed the probability that "was" 
 	{\mbox{count(there...)}}
 = {\frac{4}{4}}}
 
-Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything.)
+Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything).
 
 
 @lesson-instruction{
 - Complete @printable-exercise{stat-lang-model-intro.adoc}.
-- Be prepared to share and defend your response to the last question on the page.
 }
 
+
+=== Synthesize
+
+
+== Generating Text with a Statistical Language Model
+
+=== Launch
 
 @QandA{
 @Q{How will text generated by a _unigram_ statistical language model differ from text generated by a 5-gram model?}
 @A{Text produced by a unigram model will be less predictable than text generated by a 5-gram model. It is also more likely to be nonsensical.}
 }
 
-During the launch, you decided what word would likely follow "What are you". If your class is like other classes, you probably predicted many of the same words, with "doing" at the top of the list. A big reason that you and your peers came up with similar word lists is because we used a _trigram_.
+During the launch, you decided what word would likely follow "She is on the". If your class is like other classes, you probably predicted many of the same words, with "doing" at the top of the list. A big reason that you and your peers came up with similar word lists is because we used a _trigram_.
 
 If asked what word should come after "you", you and your classmates would likely have a much broader range of suggestions. That's because "you" is a unigram.
 
