@@ -192,30 +192,26 @@ The training phase is now complete. Let's review what has happened so far.
 
 *1. We created bag-of-words models of our documents.*
 
-In doing so, we compressed the data by isolating the single feature that we care about: word frequency. That made the data more useful to us. As a result, the _new_ representation of the data became considerably smaller than the actual corpus.
+In doing so, we compressed the data by isolating the single feature that we care about: word frequency. As a result, the _new_ representation of the data became considerably smaller than the actual corpus.
 
 @lesson-point{
 Loss of data is a common and often necessary effect of training AI!
 }
 
-When we discussed @lesson-link{ai-data-driven-algorithms}, we learned that we get a higher quality output when we provide the computer with _more_ data. It is no surprise, then, that _compressing data_ is often a critical element of training AI.
-
-@strategy{How long does it take to train AI?}{
-The plagiarism detector we will use, built in Pyret, trains on just a single text. Consequently, the training happens almost instantaneously.
-
-Plagiarism detectors with bells and whistles, however, train on hundreds of thousands of texts collected from the internet. Like the training of ChatGPT (which took months!), this is a much more costly and time-intensive process.
-
-AI really took off around 2010 because, at this time, more resources became available to train AI. Some, but not all, of these resources included: the increase of available data on the internet and the increased availability of graphics processing units (GPUs) to enable more efficient training.
-}
-
-
 *2. We normalized our data.*
 
-Comparisons are most useful when we are comparing items that are alike. When building bags of words for the documents of corpus, each model *must* have the same number of words (dimensions!) regardless of how many words are in a given document. Defaulting to a cliche: we need an "apples-to-apples" comparison, rather than an "apples-to-oranges" comparison. This is why include in some models words that were not encountered in a given document.
+Comparisons are most useful when we are comparing items that are alike. When building bags of words for the documents in the corpus, each model *must* have the same number of words (dimensions!) regardless of how many words are in a given document. Defaulting to a cliche: we need an "apples-to-apples" comparison, rather than an "apples-to-oranges" comparison. This is why include in some models words that were not encountered in a given document.
 
 
 
 === Investigate
+
+When we get a new point in our multi-dimensional space, we want to compare it to the _other_ points in that space.
+
+We need a program that will:
+
+@n Generate a bag-of-words model for the document
+
 
 When we execute the program, the plagiarism detector computes the student's vector (the input!) and compares it against the other vectors. To do this, it uses the `cosine-similarity` function.
 
