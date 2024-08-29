@@ -1173,6 +1173,42 @@ const Reactive = {
   }
 }
 
+
+
+
+const Assessments = {
+  "histograms-check1-desmos": {
+    "title": "Histograms Checkpoint 1",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/66ce050ba9f23c274275848e"
+    },
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/66ce050ba9f23c274275848e"
+    }
+  },
+  "histograms-check2-desmos": {
+    "title": "Histograms Checkpoint 2",
+    "pyret": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/66ce056726b7affb843177cc"
+    }, 
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/66ce056726b7affb843177cc"
+    } 
+  },
+    "histograms-cumulative-desmos": {
+    "title": "Histograms Cumulative Assessment",
+    "pyret": {
+     "url": "https://teacher.desmos.com/activitybuilder/custom/66be6b56035a26d01fc17889"
+      },
+    "codap": {
+      "url": "https://teacher.desmos.com/activitybuilder/custom/66be6b56035a26d01fc17889"
+    } 
+   }
+  }
+
+
+
+
   
 const allStarterFiles = {
   ...Editors, 
@@ -1189,7 +1225,8 @@ const allStarterFiles = {
   ...EarlyMath,
   ...Projects, 
   ...Alg2, 
-  ...Reactive
+  ...Reactive,
+  ...Assessments 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
