@@ -26,6 +26,24 @@ function make_titletxt_file(f)
   i:close()
 end
 
+function make_titletxt_pdf_file(f)
+  -- print('doing make_titletxt_pdf_file', f)
+  local dir = ''
+  local base = f
+  if f:find('/') then
+    dir = f:gsub('(.*/).*', '%1')
+    base = f:gsub('.*/(.*)', '%1')
+  end
+  base = base:gsub('%..*', '')
+  local titletxt_file = dir .. '.cached/.' .. base .. '.titletxt'
+  local title = base:gsub('%-', ' ')
+  title = string_titlecase(title)
+  local o = io.open(titletxt_file, 'w+')
+  o:write(title)
+  o:write('\n')
+  o:close()
+end
+
 index_file = 'index.adoc'
 
 make_titletxt_file(index_file)
@@ -87,6 +105,14 @@ function make_workbook_page_titletxt_files(dir)
   for f in ls_output:lines() do
     if f:find('%.adoc$') then
       make_titletxt_file(dir .. '/' .. f)
+    elseif f:find('%.pdf$') then
+      -- print('found a pdf file', f)
+      local f_adoc = dir .. '/' .. f:gsub('(.*)%.pdf', '%1.adoc')
+      -- print('f_adoc is', f_adoc)
+      if not file_exists_p(f_adoc) then
+        -- print('f_adoc', f, 'doesnt exist')
+        make_titletxt_pdf_file(dir .. '/' .. f)
+      end
     end
   end
   ls_output:close()
