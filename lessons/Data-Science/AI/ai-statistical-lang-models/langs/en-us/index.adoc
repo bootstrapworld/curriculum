@@ -153,7 +153,7 @@ During statistical language modeling, the computer breaks a text into chunks and
 [cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
 |===
 
-| n-gram | Quantity			| Decomposition
+| @math{n}-gram | Quantity			| Decomposition
 
 | 1-gram
 | 9
@@ -186,7 +186,7 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 @A{4}
 @Q{In this corpus, how many times was the word "there" followed by the word "was"?}
 @A{4}
-@Q{what is the probability that the word "there" is followed by the word "was"?}
+@Q{What is the probability that the word "there" is followed by the word "was"?}
 @A{4/4 or 100%}
 }
 
@@ -195,8 +195,8 @@ In the example you just worked through, you computed the probability that "was" 
 
 @math{p(was | there) =}
 @math{\frac
-	{\text{count(there was)}}
-	{\text{count(there...)}}
+	{\textit{count(there was)}}
+	{\textit{count(there...)}}
 = {\frac{4}{4}}}
 
 Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything).
@@ -209,7 +209,13 @@ Put another way: To compute the probability that "was" follows "there", we divid
 
 === Synthesize
 
+@QandA{
+In our corpus, there were _three_ possible completions for the 3-gram "to catch the." There were _four_ possible completions for the unigram "the."
 
+Based on these observations, we can conclude that _in this corpus_, as the value of @math{n}_increases_, the number of completion options _decreases_.
+
+@Q{Do you think the above statement is true of other corpuses?}
+}
 
 
 
@@ -239,9 +245,6 @@ Complete @printable-exercise{sampling.adoc}.
 }
 
 
-
-
-
 @teacher{
 Are you and your students interested in exploring probability in more depth? Check out @lesson-link{probability-inference} to dig deeper.
 }
@@ -250,6 +253,10 @@ Are you and your students interested in exploring probability in more depth? Che
 
 - Which will produce more grammatically correct responses: a 5-gram model or a 2-gram model? Explain.
 - Which will produce a more creative response: a 5-gram model or a 2-gram model? Explain.
+
+
+
+
 
 
 
