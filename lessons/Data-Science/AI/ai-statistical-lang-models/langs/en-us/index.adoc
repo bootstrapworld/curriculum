@@ -44,25 +44,35 @@ Students explore how text prediction relies on statistical language modeling.
 While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
 
 @lesson-instruction{
-- Consider this start of a phrase: "She is on the..."
-- On a piece of paper, write down the next word that pops into your mind.
-- Write down two additional next-word choices.
-- As a class, let's generate a list of all of the words we developed.
+- Consider this start of a phrase: "I don't..."
+- On a piece of paper, finish the sentence.
+- Write down two additional possible sentences.
+- As a class, we will generate a list of all of the words that came immediately after the word "is".
 }
 
 @teacher{
-Students will think of words like "phone", "way", "porch", and "fence"... @hspace{1em} Record their first choice responses on the board. If a word is repeated, keep a tally of how many students suggest each particular word. Highlight the top three choices for the class. Then, as a class, compute the probability of choosing each choice.
+Students will think of phrases like ""... @hspace{1em} On the board, record only the words that _immediately_ follow "fish". (That is, record "eating" rather than "eating the blackberries".) If a word is repeated, keep a tally of how many students suggest each particular word.
 }
 
+=== Investigate
+
+Let's look a little more closely at the words we generated.
+
 @QandA{
-@Q{What is the probability of choosing each of our generated words?}
-@A{For example: if there are 25 students in your class, and 8 students chose “phone”, the probability of a student choosing that word is 8/25.}
+@Q{Which words had the _most_ tally marks?}
+@Q{Which words had the _least_ tally marks?}
+@Q{Are you surprised by the most and least common words? Why or why not?}
+@Q{What was our class probability of proposing each of our top three words?}
+@A{For example: If there are 25 students in your class, and 8 students chose “hungry”, the probability of a student choosing that word is 8/25.}
+}
 
-@Q{What word choices were the most probable? How about the least probable?}
-@A{Responses will vary depending on the words your students offered.}
+@teacher{If your students are comfortable computing the probability of choosing each word, they may do so in pairs or individually. If not, this can be a teacher-led task. Laying a solid foundation is worth the time: students will compute probability throughout the lesson.
+}
 
+
+@QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class?}
-@A{Share the image below to see the word options provided by one text messaging app.}
+@A{Invite conversation, and then share the image below to see the word options provided by one text messaging app.}
 }
 
 @right{@image{images/texting-app.png, 200}}
@@ -70,35 +80,41 @@ Students will think of words like "phone", "way", "porch", and "fence"... @hspac
 
 We've already discussed how AI systems are trained. Similarly, your predictive text feature is trained on a large amount of text.
 
-The image of one particular texting app proposing "porch", "way", and "phone" raises an interesting question: Will all users be recommended the _same_ completion?
+During training, the computer extracts each use of the phrase "She is on the" from the training data, along with the subsequent word. It then determines the probability of each possible next word. In this particular corpus, for this particular user, "phone", "porch", and "way"  most commonly appeared after "she is on the". As a result, those words are suggested for that user to choose from.
 
-The answer is *no*, for a few reasons:
+The image of one particular texting app proposing "porch", "way", and "phone" to one particular user raises an interesting question: Are all users recommended the _same_ completions?
 
-- There might be multiple words with equal probability, in which case, the system must use some method of random selection.
+@QandA{
+@Q{What do you think? Will your phone suggest the same words as your classmates' phones? Why or why not?}
+@A{Refer to the in-depth student-facing explanation, below.}
+}
+
+@teacher{
+Before revealing the answer, invite student dialogue. This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{ai-training, "plagiarism detection"}.
+}
+
+Not all phones will propose the same completions for a variety of reasons:
+
+- There might be multiple words with equal probability, in which case the system must use some method of random selection.
 
 - Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
 
-- A messaging app also includes a model of the text that _the actual user_ composes. The app can therefore offer a degree of personalization based on what the user has chosen in the past.
+- A messaging app also includes a model of the text that _the actual user_ composes. The app therefore offers a degree of personalization based on what the user has chosen in the past. Similarly, the app can take into account the word suggestions that you have previously accepted.
 
 - Some predictive text features even take into account the specific message that you are composing! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
-During training, the computer extracts each use of the phrase "She is on the" from the training data, along with the subsequent word. It then determines the probability of each possible next word. In this particular corpus, for this particular user, "phone", "porch", and "way"  most commonly appeared after "she is on the". As a result, those words are suggested for that user to choose from.
+You have just considered the workings of one @vocab{statistical language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows *probability*, which it uses in ways that are often very impressive (but sometimes not!).
 
-=== Investigate
-
-Here's another worthwhile question: *Will your texting app would propose the same completions for "She is on the " as it would for "The "?*
-
-
-AI as tic tac toe opponent
-
+@teacher{
+Throughout the lesson, we'll explore the very important "sometimes not" parenthetical, above.}
 
 === Synthesize
 
-
-
-
-
-
+@QandA{
+@Q{In your own words: How does probability drive statistical language modeling?}
+@Q{Can statistical language modeling work for _any_ language?}
+@A{The goal of this question is to get students thinking and to build intrigue. The answer is that _yes_, we can train the AI on a corpus in any language and the model will remain effective. We will visit this concept in greater depth later in the lesson.}
+}
 
 
 
