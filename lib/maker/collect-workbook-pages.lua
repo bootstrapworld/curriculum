@@ -17,7 +17,7 @@ function make_titletxt_file(f)
   for L in i:lines() do
     if L:find('^=%s') then
       local o = io.open(titletxt_file, 'w+')
-      o:write(L:gsub('^=%s+', ''):gsub(',', '&#x2c;'))
+      o:write((L:gsub('^=%s+', ''):gsub(',', '&#x2c;')))
       o:write('\n')
       o:close()
       break
