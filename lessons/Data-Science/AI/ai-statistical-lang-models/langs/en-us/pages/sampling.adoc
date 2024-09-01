@@ -1,34 +1,68 @@
 = Sampling from the Language Model
 
-Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*
-
+@link-instructions{Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*}
 
 
 == Text Generation Exercise #1
 
-@n This time, let's
+@n This time, let's start our text generation with the phrase "She ". Determine which word is most likely to follow "She ": @fitb{8em}{@ifsoln{swallowed}}
 
+@n What word most likely follows the word you wrote in the second blank? @fitb{8em}{@ifsoln{a}}
+
+@n Use statistical language modeling to determine the fourth word: @fitb{8em}{@ifsoln{fly}}
+
+@n Record your text generation in the spaces below:
+
+*Text Generation 1*: @fitb{10em}{@ifsoln{She}} @hspace{1em} @fitb{10em}{@ifsoln{swallowed}} @hspace{1em} @fitb{10em}{@ifsoln{a}} @hspace{1em} @fitb{10em}{@ifsoln{fly}}
+
+@n Everyone in your class should have generated the *same* text. Why do you think that was the outcome?
+
+@fitb{}{@ifsoln{The corpus included a lot of repetition. Every single time we saw the word "She", it was followed by "swallowed".}}
+
+@fitb{}{@ifsoln{There were no instances when two different words had the same likelihood of following a given word.}}
+
+@fitb{}{}
 
 
 == Text Generation Exercise #2
 
-@n Let's choose our first word. Below is a list of the most common unigrams in the corpus. We'll start by choosing the *most* common word. Write that word on the line below.
-
+@n Below is a list of the most common unigrams in the corpus. We'll start by choosing the *most* common word: @fitb{8em}{@ifsoln{The}}
 
 - "the": 15 times
 - "a": 13 times
 - "she": 11 times
 
+@n What word most likely follows the word you just chose? @fitb{8em}{@ifsoln{spider}}
 
-@n What word most likely follows “the”? _Refer to Q10 on @printable-exercise{constructing-model.adoc} to find out._ Enter that word on the second blank space, below.
+@n How many times does "That" follow "spider"? @fitb{5em}{@ifsoln{3}} How many times does "to" follow "spider"? @fitb{5em}{@ifsoln{3}}
 
-@n How many times does "That" follow "spider"? @fitb{5em}{} How many times does "to" follow "spider"? @fitb{5em}{}
+@n There is an equal probability of choosing "to" and "that"! Flip a coin to decide between them. What did you pick? @fitb{8em}{@ifsoln{to / that}}
 
-@n There is an equal probability of choosing "to" and "that"! Flip a coin or use some other method of random selection to decide between them. Write your chosen word on the third line, below.
+@n Use statistical language modeling to determine the fourth word: @fitb{8em}{@ifsoln{catch / wriggled}}
 
-@n Use statistical language modeling to determine the fourth word in the phrase; record it on the final blank.
+@n Transfer your responses above onto the blank spaces in *Text Generation 2a*. @teacher{Some students will have the 2a response in the 2b blanks, and vice versa— which is fine!}
 
-@fitb{10em}{@ifsoln{The}} @hspace{1em} @fitb{10em}{@ifsoln{spider}} @hspace{1em} @fitb{10em}{@ifsoln{to / that}} @hspace{1em} @fitb{10em}{@ifsoln{catch / wriggled}}
+
+*Text Generation 2a*: @fitb{10em}{@ifsoln{The}} @hspace{1em} @fitb{10em}{@ifsoln{spider}} @hspace{1em} @fitb{10em}{@ifsoln{to}} @hspace{1em} @fitb{10em}{@ifsoln{catch}}
+
+
+@n Some of your classmates probably generated a different four-word phrase than you did! Use statistical language modeling to determine the _other_ four-word phrase. Write it in the blanks of *Text Generation 2b*, below.
+
+
+*Text Generation 2b*: @fitb{10em}{@ifsoln{The}} @hspace{1em} @fitb{10em}{@ifsoln{spider}} @hspace{1em} @fitb{10em}{@ifsoln{that}} @hspace{1em} @fitb{10em}{@ifsoln{wriggled}}
+
+
+@n Why do you think *Text Generation Exercise 1* _always_ produced the same result, but *Text Generation Exercise 2* resulted in more than one possible outcome?
+
+@fitb{}{@ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", whereas *Text Generation Exercise 1*}}
+
+@fitb{}{@ifsoln{was completely deterministic.}}
+
+@fitb{}{}
+
+@star What is another starting word that would result in only one possible four-word phrase? @fitb{}{@ifsoln{was, an, old, lady, who}}
+
+@star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat}}
 
 
 

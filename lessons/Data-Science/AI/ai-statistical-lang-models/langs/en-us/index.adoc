@@ -1,13 +1,9 @@
 = Statistical Language Modeling
 
-@description{Students }
+@description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
 
 @ifproglang{pyret}{
-@lesson-prereqs{ds-intro}
-}
-
-@ifproglang{codap}{
-@lesson-prereqs{ds-intro}
+@lesson-prereqs{training-ai}
 }
 
 @keywords{}
@@ -33,7 +29,7 @@
 
 
 
-== Statistical Language Models Overview
+== Introduction to Statistical Language Modeling
 
 === Overview
 
@@ -193,7 +189,7 @@ Put another way: To compute the probability that "was" follows "there", we divid
 
 
 @lesson-instruction{
-- Complete @printable-exercise{construct-model.adoc}.
+- Complete @printable-exercise{constructing-model.adoc}.
 }
 
 @teacher{
@@ -238,16 +234,17 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 @lesson-instruction{
 
 - Using @handout{old-lady-lyrics.adoc}, complete the first section of @printable-exercise{sampling.adoc}.
-- Tip: You will be able to work more efficiently if you open the handout on a computer and use "Control-F" on a PC or "Command-F" on a Mac to help you locate and count words.
-
+- Tip: You will be able to work more efficiently if you open the PDF of the handout on a computer and use "Control-F" on a PC or "Command-F" on a Mac to help you locate and count words.
 }
+
+@teacher{The two questions below are on students' worksheets, but merit class discussion.}
 
 @QandA{
 @Q{What four-word phrase did you generate?}
 @A{"She swallowed a fly"}
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
-@A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable.}
+@A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, an no ties.}
 
 }
 
@@ -257,24 +254,58 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @QandA{
 @Q{What four-word phrase did you generate?}
-@{The class should be split between "The spider that catch"}
+@{The class should be split between "The spider to catch" and "The spider that wriggled"}
 
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
+
+@A{No. Students arrived at different four-word phrases because we were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
 }
 
+Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text.
 
+@lesson-point{
+Temperature is the parameter that controls the randomness of the model's output as it generates text.
+}
+
+Even _without_ the ability to lower the temperature, we encountered randomness and variability in our generated texts. With a large enough corpus and a low enough temperature, a statistical language model will produce a new and unique output every single time!
 
 === Synthesize
 
-- Which will produce more grammatically correct responses: a 5-gram model or a 2-gram model? Explain.
-- Which will produce a more creative response: a 5-gram model or a 2-gram model? Explain.
+@QandA{
+
+Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
+
+@Q{This form of AI often has trouble with _facts_. Put another way, ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
+
+@A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
 
+@Q{Others complain that ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
+
+@A{If there are biases in the corpus, there will likely be biases in the output.}
+
+}
 
 
+== What is the Role of Language?
+
+=== Overview
 
 
+=== Launch
+
+Let's look at a tool that shows us how statistical language modeling works.
+
+@lesson-instruction{
+- Go to @link{http://Soekia.ch/GPT/?lang=en}
+-
+}
+
+
+== Investigate
+
+Let's imagine a tic-tac-toe game.
 
 
 == Deep Dive: Soekia
@@ -344,7 +375,7 @@ After they complete the "Closer Look" worksheet, invite students to share out on
 
 === Investigate
 
-Modern statistical language models like ChatGPT often invite users to adjust the "temperature" of the generated text. For instance, ChatGPT users are encouraged to use a _low_ temperature for tasks that are more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks. But why? What does "temperature" actually represent?
+Modern statistical language models often invite users to adjust the "temperature" of the generated text. For instance, ChatGPT users are encouraged to use a _low_ temperature for tasks that are more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks. But why? What does "temperature" actually represent?
 
 @lesson-instruction{
 - Turn to @printable-exercise{soekia-temperature.adoc}.
