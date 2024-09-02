@@ -6,10 +6,6 @@
 @lesson-prereqs{ds-intro}
 }
 
-@ifproglang{codap}{
-@lesson-prereqs{ds-intro}
-}
-
 @keywords{}
 
 [@lesson-intro-table]
@@ -29,7 +25,7 @@
 
 |===
 
-== Spell Checkers as AI @duration{25 minutes}
+== What do you know about AI? @duration{25 minutes}
 
 === Overview
 
@@ -38,12 +34,9 @@ Students think about spell checkers, considering how their programmed behavior i
 
 === Launch
 
+You've probably heard some buzz about Artificial Intelligence (AI), the technology that enables computers to perform tasks that typically require human intelligence. Artificial Intelligence is behind ChatGPT, which appears able to develop video games, perform strongly on the SAT, even write a novel... and its capabilities are growing everyday.
 
-Over the past few years, you've probably heard some buzz about Artificial Intelligence (AI), the technology that enables computers to perform tasks that typically require human intelligence. Artificial Intelligence is behind ChatGPT, which appears able to develop video games, perform strongly on the SAT, even write a novel... and its capabilities are growing everyday.
-
-Let's be real... the "buzz" about AI could probably more accurately be described as a non-stop deluge of information and misinformation. The conversation around AI is sometimes full of optimism and possibility, while at other times it is full of fear and dread.
-
-Before we start learning about AI (How does it actually work? What's the connection to data science?), let's consider what sort of AI information we've absorbed just by consuming books, movies, TV, and video games.
+Let's be real: the "buzz" about AI could probably more accurately be described as a non-stop deluge of information and misinformation. Before we start learning about AI (How does it actually work? What's the connection to data science?), let's consider what sort of AI information we've absorbed just by consuming books, movies, TV, and video games.
 
 @QandA{
 @Q{What are some books, movies, TV shows, or video games you know of that feature AI?}
@@ -53,22 +46,33 @@ Before we start learning about AI (How does it actually work? What's the connect
 }
 
 @teacher{
-As students discuss different representations of AI, pay attention to see if any themes emerge. Create a list on the board as the conversation evolves. Some possible themes are: robot turns on its creator; AI rebellion; robots usurp control; AI-controlled society; and simulated reality!
+As students discuss different representations of AI, pay attention to see if any themes emerge. Create a running list on the board. Some possible themes are: robot turns on its creator; AI rebellion; robots usurp control; AI-controlled society; and simulated reality!
 }
 
-As it turns out, characterizations of AI featuring robot rebellion and the like envision technology that *does not currently exist*.  That said, there is plenty of AI that we interact with each and every day—and the futuristic dystopian AI imagined in movies, video games, and books can sometimes interfere with the way that we understand the AI of the present.
+Many characterizations of AI envision technology that *does not currently exist*.  That said, there is plenty of AI that we interact with everyday. The futuristic dystopian AI imagined in movies, video games, and books can sometimes interfere with the way that we understand the AI of the present.
+
+=== Investigate
 
 The AI that we interact with—in fact the only type of AI that we have achieved—focuses on a single narrow task and has a limited range of abilities. Virtual assistants (Google Assistant, Siri, and Alexa, to name a few) are one example. These apps respond to voice commands in order to perform simple tasks (setting alarms, making phone calls, and answering questions). Can you think of any others?
 
+@QandA{
+@Q{What forms of AI appear in your life on a day-to-day basis?}
+@A{Possible responses: TikTok’s algorithm, GPS, text prediction, chess playing computers, grammar correcting apps.}
+@Q{What is the most impressive AI you have encountered in your daily life?}
+@A{Allow students to share. }
+}
 
-Artificial Intelligence (AI) is a term used to describe the technology that enables computers to perform tasks that were once thought to be for _humans only_.
+@strategy{Are Search Engines AI?}{
 
-There are a wide variety of tasks that fall in this domain - but for the sake of today's lesson, we will focus on a single and commonplace example: spell checking. Copy editing a document without the help of a spell checker would be laborious and error-prone. In fact, we are so used to receiving spell checking help that sometimes we don't even notice or acknowledge the way in which it happens automatically, without our acknowledgment.
+Although some search engines (especially as of 2024) incorporate AI-generated summaries of content, we generally do *not* think of the search engine as a form of AI. A standard search engine combs the web and organizes the information into an index of links. No text, images, code, or content is being generated.
+}
 
-But when it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies?
+There are a wide variety of tasks that fall in this domain. For the sake of today's lesson, we will focus on a single and commonplace example: spell checking. Copy editing a document without the help of a spell checker would be laborious and error-prone. We are so used to receiving spell checking help that sometimes we don't even notice or acknowledge the way in which it happens automatically.
+
+When it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies?
 
 @lesson-instruction{
-- Complete Part 1 of @printable-exercise{human-spell-checking.adoc}.
+- Complete @printable-exercise{human-spell-checking.adoc}.
 - Be prepared to summarize the method that you used for spell checking:
 ** How do you locate misspelled words?
 ** How do you correct misspelled words?
@@ -78,10 +82,26 @@ You probably noticed that is was difficult to articulate how exactly you were ab
 
 We are not computers! We rely on context clues and intuition. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes. Other students relied on context clues or prior knowledge to locate and fix errors. Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled, perhaps a multi-syllabic and complex technical word, you might have relied on a different spell checking strategy.
 
-How can a computer possibly navigate such a nuanced and complex process?
+How can a computer possibly navigate such a nuanced and complex process? Stay tuned... you're about to find out!
+
+=== Synthesize
+
+@QandA{
+@Q{What are some questions that you have about AI? What are you hoping to learn?}
+@Q{What _confuses_ you about AI?}
+}
+
+@teacher{Consider writing down students' questions and possible misconceptions about AI. You can revisit these questions as  answers emerge in subsequent lessons.}
 
 
-=== Investigate
+
+
+
+
+== The First Spell Checker @duration{25 minutes}
+
+
+=== Launch
 
 The very first spell checker was developed in 1961 at Stanford University's Artificial Intelligence Laboratory. It did not have mastery of the English language. Instead, its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. Here is what the algorithm entailed:
 
@@ -93,6 +113,10 @@ The very first spell checker was developed in 1961 at Stanford University's Arti
 
 - *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
 --
+
+
+=== Investigate
+
 
 Unsurprisingly, spell checkers have evolved a lot since 1961 - but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI.
 
@@ -113,7 +137,6 @@ After students have completed the activity, invite them to share their responses
 }
 
 As you discovered during @printable-exercise{human-spell-checking.adoc}, when *you* spell check, you rely on intuition, instinct, and context clues. When AI spell checks, on the other hand, it relies on computational brute force: even the most primitive spell checking program will repeatedly edit the misspelled word, generating dozens of different letter combinations to verify in the dictionary. The computer works quickly - but the work that it completes would be time-consuming and laborious for a human.
-
 
 === Synthesize
 
@@ -138,19 +161,46 @@ By now, we have a decent sense of the extensive work that is happening behind th
 }
 
 
-
-
 === Investigate
 
 
 @lesson-instruction{
-- Complete @printable-exercise{pyret-spell-checker.adoc} using the @starter-file{spell-checker}.
-- If you finish early, try the two challenge problems at the bottom of the page!
+- Complete the first section of @printable-exercise{pyret-spell-checker.adoc} using the @starter-file{spell-checker}.
+}
+
+As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a Wordle dictionary!
+
+@teacher{Are you familiar with Wordle? If not, you can play it @link{https://www.nytimes.com/games/wordle/index.html, "here"}. Via a show of hands, check for students' familiarity with the game. If your students have not played Wordle before, play one round as a class.}
+
+@left{@image{images/wordle.png, 200}}
+
+
+Let's consider a partially-played Wordle game (left).
+
+
+The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". We now know that _a_, _m_, and _e_ belong in the 2nd, 3rd, and 4th positions, respectively. We know that the 1st and 5th positions are _not_ occupied by _w_, _o_, _r_, _t_, _h_, _d_, _i_, _g_, and _s_.
+
+The player has just three turns left!
+
+@QandA{
+@Q{What word would _you_ try next?}
+@A{Responses will vary; keep a list of student proposals.}
+
+@Q{Each of the words you proposed was probably 2 edits away from "GAMES", the user's third guess. Why?}
+@A{Three of the letters are correct; we just need to substitute in different letters for _g_ and _s_.}
+}
+
+
+@lesson-instruction{
+- Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
+- If you finish early, try the two challenges at the bottom of the page.
 }
 
 When we offered _more data_ to our rudimentary Pyret spell checker, we got better results _without changing the code_.
 
 Data is at the heart of data science, and _data-driven_ algorithms are at the heart of AI. This statement is true not just of spell checkers, but of all artificial intelligence.
+
+The type of data that we use to train artificial intelligence varies by situation, of course.
 
 @lesson-instruction{
 - Consider a different scenario, @printable-exercise{case-study-michelle.adoc}.
@@ -165,62 +215,4 @@ Data is at the heart of data science, and _data-driven_ algorithms are at the he
 
 
 
-
-
-Over the past few years, you've probably heard some buzz about Artificial Intelligence (AI), the technology that enables computers to perform tasks that typically require human intelligence. Artificial Intelligence is behind ChatGPT, which appears able to develop video games, perform strongly on the SAT, even write a novel... and its capabilities are growing everyday.
-
-Let's be real... the "buzz" about AI could probably more accurately be described as a non-stop deluge of information and misinformation. The conversation around AI is sometimes full of optimism and possibility, while at other times it is full of fear and dread.
-
-Before we start learning about AI (How does it actually work? What's the connection to data science?), let's consider what sort of information we've absorbed about AI just by consuming books, movies, TV, and video games.
-
-@QandA{
-@Q{What are some books, movies, TV shows, or video games you know of that feature AI?}
-@A{Some possible responses include 2001: A Space Odyssey, Star Trek, the Matrix, Star Wars, Terminator, Wall-E, Iron Man, Big Hero 6, The Mitchells versus the Machines, Blade Runner, I Robot}
-@Q{How do those books, movies, TV shows, and video games characterize AI?}
-@Q{In your experience, is AI usually portrayed in a positive or negative light?}
-}
-
-@teacher{
-As students discuss different representations of AI, pay attention to see if any themes emerge. Create a list on the board as the conversation evolves. Some possible themes are: robot turns on its creator; AI rebellion; robots usurp control; AI-controlled society; and simulated reality!
-}
-
-As it turns out, characterizations of AI featuring robot rebellion and the like envision technology that *does not currently exist*.  That said, there is plenty of AI that we interact with each and every day—and the futuristic dystopian AI imagined in movies, video games, and books can sometimes interfere with the way that we understand the AI of the present.
-
-The AI that we interact with—in fact the only type of AI that we have achieved—focuses on a single narrow task and has a limited range of abilities. Virtual assistants (Google Assistant, Siri, and Alexa, to name a few) are one example. These apps respond to voice commands in order to perform simple tasks (setting alarms, making phone calls, and answering questions). Can you think of any others?
-
-@QandA{
-@Q{What forms of AI appear in your life on a day-to-day basis?}
-@A{Possible responses: TikTok’s algorithm, GPS, text prediction, chess playing computers, grammar correcting apps.}
-@Q{What is the most impressive AI you have encountered in your daily life?}
-@A{Allow students to share. }
-}
-
-=== Investigate
-
-@scrub{NOTING THAT STUDENTS HAVE ALREADY SEEN THE EXAMPLE BELOW IN AI DATA DRIVEN ALGORITHMS' CASE STUDY MICHELLE}
-
-To consider one example, let's discuss song and video recommendation by apps such as YouTube and Spotify.
-
-@QandA{
-
-@Q{Has Spotify or YouTube ever recommended you a new song or video that you enjoyed? Has it ever recommended you something that you _didn't_ enjoy? Elaborate.}
-@A{Answers will vary. Allow students to share their personal experiences.}
-
-@Q{How and why do you think recommendation algorithms seem to "know" what content you will like?}
-@A{Allow students to share their responses. Some possible responses include: it reviews my viewing / listening history; it has access to the content I have skipped; it sees which videos and songs I return to over and over.}
-
-@Q{Why do you think the songs and videos recommended are sometimes _not_ what you were hoping to discover?}
-@A{Our tastes are not always entirely predictable. Just because a listener enjoys _some_ upbeat pop music with a female vocalist does not indicate that they will enjoy _all_ upbeat pop music with a female vocalist.}
-
-}
-
-Hopefully, our conversation about automatic song and video recommendation got you thinking about how computers need to be _trained_ on data for machine learning to happen.
-
-In the case of song and video recommendation, Spotify and YouTube's algorithms process all the available data about your listening/viewing preferences. Let's say, however, that you have a history of listening to folk music... but a desire to branch out and explore some hip hop. Spotify cannot read your mind, nor will it guess that maybe today is the day you try some new music that is out of your comfort zone; it can only process the data you've provided it, and build a predictive model based on that data. While there's a small chance that Spotify will recommended hip hop music that is _influenced_ by folk music (especially if it features a female vocalist!). If you *really* want to branch out, ask a friend for a recommendation... and listen to it. If you spend enough time listening to hip hop, Spotify will eventually start generating hip hop recommendations.
-
-@lesson-point{
-Machine learning is driven by data. More data results in more accurate task completion.
-}
-
-The type of data that we use to train artificial intelligence varies by situation.
 

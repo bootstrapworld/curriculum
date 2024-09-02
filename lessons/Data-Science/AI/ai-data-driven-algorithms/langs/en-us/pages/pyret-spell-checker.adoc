@@ -1,58 +1,48 @@
-= A Pyret Spell Checker
+= A Pyret Spell Checker: The Algorithm
 
 @link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
 
-== The Algorithm
+@n In the @starter-file{spell-checker}, the function `go` consumes a string and a dictionary... but what does it produce? Test `go("pyret", WORDS-ALL)` in the Interactions Area. Record your results below.
 
-@n In the SPELL CHECKER, the function `go` consumes a string and a dictionary... but what does it produce? Test `go("pyret", WORDS-ALL)` in the Interactions Area. Record your results below.
+@fitb{10em}{@ifsoln{beret}} @hspace{2em} @fitb{10em}{@ifsoln{egret}} @hspace{2em} @fitb{10em}{@ifsoln{parer}} @hspace{2em} @fitb{10em}{@ifsoln{puree}} @hspace{2em} @fitb{10em}{@ifsoln{purer}}
 
-@fitb{10em}{} @hspace{2em} @fitb{10em}{} @hspace{2em} @fitb{10em}{} @hspace{2em} @fitb{10em}{} @hspace{2em} @fitb{10em}{}
+@n Review the provided alternatives for "pyret". How many edits to the string ("pyret") does this algorithm make? (A single edit could entail replacing one letter with a different one, for instance.) Use an example to explain. @fitb{}{@ifsoln{The algorithm makes up to two edits. }}
 
-@n Review the provided alternatives for "pyret". How many edits to the string ("pyret") does this algorithm make? (A single edit could entail replacing one letter with a different one, for instance.) Explain. @fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
-
-@n Test `go("cloaks", WORDS-ALL)` in the Interactions Area. Notice that "cloaks" has six letters, but all the suggested words have just five letters. What else can you conclude about the spell checker's algorithm? @fitb{}{}
+@fitb{}{@ifsoln{For example, when "beret" is proposed as a match for "pyret", "py" becomes "be", but "ret" remains the same.}}
 
 @fitb{}{}
 
 @fitb{}{}
+
+@n Test `go("cloaks", WORDS-ALL)` in the Interactions Area. Notice that "cloaks" has six letters, but all the suggested words have just five letters. What else can you conclude about the spell checker's algorithm? @fitb{}{@ifsoln{One of the edits can be the deletion of a letter.}}
+
+@fitb{}{@ifsoln{The spell checker only proposes five-letter words.}}
+
+@fitb{}{}
+
+- To get from "cloaks" to "croak", delete @fitb{2em}{@ifsoln{s}} and change @fitb{2em}{@ifsoln{l}} to @fitb{2em}{@ifsoln{r}}.
+
+- To get from "cloaks" to "lass", delete @fitb{2em}{@ifsoln{o}} and change @fitb{2em}{@ifsoln{k}} to @fitb{2em}{@ifsoln{s}}.
+
+- The spell checker makes just _one_ edit when it proposes @fitb{5em}{@ifsoln{"cloak"}} as a match for "cloak".
 
 @n What is the maximum length string that this spell checker will accept? Why doesn't spell checker accept longer strings? @fitb{}{}
 
-@fitb{}{}
-
-@n Does this spell check program use the same algorithm as the @printable-exercise{first-spell-checker.adoc}? If not, what is different and how do you know? Which spell checker do you think is more effective? @fitb{}{}
+@fitb{}{@ifsoln{A 7-letter word would require two deletions, using both of the available edits.}}
 
 @fitb{}{}
 
 @fitb{}{}
 
+@n Does this spell check program use the same algorithm as the @printable-exercise{first-spell-checker.adoc}? If not, what is different and how do you know? Which spell checker do you think is more effective? @fitb{}{@ifsoln{No. The first spell checker would only propose one adjustment, whereas the Pyret}}
 
-== The Dictionaries
+@fitb{}{@ifsoln{spell checker proposes two. Pyret can delete letters, while the first spell checker could not. Pyret also only proposes 5-letter words,}}
 
-@n In Q1 above, we used the function `go` to search a dictionary of _all_ valid Wordle words. The Pyret spell checker, however, actually has multiple dictionaries on hand!  Those dictionaries live at @link{https://docs.google.com/spreadsheets/d/1XD726tuYLW_WQqbEdhKo22Xt3gJumQ6vfJ1PVMkwmYA/edit?usp=sharing, "this spreadsheet"}. Click on each of the spreadsheet's tabs, then discuss with a partner: *What do you Notice? What do you Wonder? Can you predict how using these different dictionaries will influence our results?*
-
-@n Let's see what happens when we tell Pyret to run spell check on the same string, in different dictionaries. Test the code below, then record how many matches are produced in the second row of the table.
-
-[cols="2,^3,^3,^3", stripes="none"]
-|===
-
-|| `go("wello", WORDS-100)` 	|	`go("wello", WORDS-1000)` | `go("wello", WORDS-ALL)`
-| # matches found | | |
-|===
-
-@n The code didn't change... so why did the results? @fitb{}{}
+@fitb{}{@ifsoln{while the first spell checker did not have letter limit.}}
 
 @fitb{}{}
 
 @fitb{}{}
 
-
-@star Can you produce an input that matches more than one word in the @link{https://docs.google.com/spreadsheets/d/1XD726tuYLW_WQqbEdhKo22Xt3gJumQ6vfJ1PVMkwmYA/edit?usp=sharing, "third (100-word) dictionary"}? If so, what is it? @fitb{}{}
-
-@star "W1" and "W2" represent two different five-letter words. If `go("W1", WORDS-ALL)` produces a list that includes "W2", will `go("W2", WORDS-ALL)` produce a list that includes "W1"?
-
+@fitb{}{}
 
