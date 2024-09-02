@@ -3,7 +3,7 @@
 @description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
 
 @ifproglang{pyret}{
-@lesson-prereqs{training-ai}
+@lesson-prereqs{ai-training}
 }
 
 @keywords{}
@@ -20,6 +20,7 @@
 |
 
 - Let's explore how probability influences the output of generative AI models.
+
 
 | Materials
 |[.materials-links]
@@ -237,7 +238,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 - Tip: You will be able to work more efficiently if you open the PDF of the handout on a computer and use "Control-F" on a PC or "Command-F" on a Mac to help you locate and count words.
 }
 
-@teacher{The two questions below are on students' worksheets, but merit class discussion.}
+@teacher{The two questions below are on students' worksheets, but merit follow-up and discussion.}
 
 @QandA{
 @Q{What four-word phrase did you generate?}
@@ -254,7 +255,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @QandA{
 @Q{What four-word phrase did you generate?}
-@{The class should be split between "The spider to catch" and "The spider that wriggled"}
+@A{The class should be split between "The spider to catch" and "The spider that wriggled".}
 
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
@@ -262,13 +263,27 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 @A{No. Students arrived at different four-word phrases because we were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
 }
 
-Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text.
+Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text, which influences the level of randomness. For instance, ChatGPT users are encouraged to use a _low_ temperature for more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks.
 
 @lesson-point{
 Temperature is the parameter that controls the randomness of the model's output as it generates text.
 }
 
-Even _without_ the ability to lower the temperature, we encountered randomness and variability in our generated texts. With a large enough corpus and a low enough temperature, a statistical language model will produce a new and unique output every single time!
+Even _without_ the ability to raise the temperature, we encountered randomness and variability in our generated texts. With a large enough corpus and a high enough temperature, a statistical language model will produce a new and unique output every single time!
+
+
+@strategy{AI "Hallucinations"}{
+
+As generative AI produces text, it often generates incorrect or misleading information. This is commonly known as an AI "hallucination".
+
+Some experts dislike this term and are encouraging an end to its use. These experts argue that _all_ output is "hallucinatory". Some of it happens to match reality... and some does not.
+
+The very same process that generates "hallucinatory" text _also_ generates the "non-hallucinatory" text. This truth helps us to understand _why_ it is so difficult to *fix* the "hallucination" problem.
+
+This term also attributes intent and consciousness to the AI, giving it human qualities when it is merely executing a program exactly as it is intended to do.
+}
+
+
 
 === Synthesize
 
@@ -284,8 +299,10 @@ Critics of ChatGPT and other language models raise a variety of concerns. Consid
 @Q{Others complain that ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
 
 @A{If there are biases in the corpus, there will likely be biases in the output.}
-
 }
+
+
+
 
 
 == What is the Role of Language?
@@ -303,7 +320,7 @@ Let's look at a tool that shows us how statistical language modeling works.
 }
 
 
-== Investigate
+=== Investigate
 
 Let's imagine a tic-tac-toe game.
 
@@ -389,18 +406,6 @@ As you discovered, @vocab{temperature} is the parameter that controls the random
 }
 
 
-@strategy{AI "Hallucinations"}{
-
-As generative AI generates text, it often generates incorrect or misleading information.
-
-Some experts dislike this term, and are encouraging an end to its use. These experts argue that _all_ output is "hallucinatory". Some of it happens to match reality... and some does not.
-
-The very same process generated the "hallucinatory" and "non-hallucinatory" text. This truth helps us to understand _why_ it is so difficult to *fix* the "hallucination" problem.
-
-This term also attributes intent and consciousness to the AI, giving it human qualities when it is merely executing a program exactly as it is intended to do.
-
-As students have discovered through their interaction with Soekia, all generated output - each and every word, sentence, and paragraph - is nothing more than a hallucination!
-}
 
 
 
