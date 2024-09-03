@@ -39,7 +39,7 @@ As a student, you probably know what it feels like to be under surveillance.
 
 Sure, these surveillance tactics have their purposes... but being constantly watched is exhausting! Let's turn the tables and see if we can _beat_ one method of surveillance: the plagiarism detector.
 
-To ground our conversation, let's think about a very important question: Is it possible to _fool_ a plagiarism detector?
+To ground our conversation, we will consider a very important question: Is it possible to _fool_ a plagiarism detector?
 
 @QandA{
 - Your teacher announces that they will be running all student writing through a plagiarism detector.
@@ -96,15 +96,13 @@ If we were to plot a point for the vector on the coordinate plane, it would prod
 A bag-of-words model represents text as an unordered collection of words with frequencies.
 }
 
-
 The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, the two models are a perfect match: each one results in a point on the coordinate plane at @math{(3,2)}.
-
 
 === Synthesize
 
 @QandA{
 
-The bag-of-words model is better at detecting plagiarism than the primitive plagiarism detector - but it's not perfect.
+The bag-of-words model is better at detecting plagiarism than the primitive plagiarism detector—but it's not perfect.
 
 @Q{What kind of plagiarism _can_ we catch using this model?}
 @A{We can catch a plagiarizer who reorders the words a document.}
@@ -124,7 +122,7 @@ The bag-of-words model is better at detecting plagiarism than the primitive plag
 === Launch
 
 
-Documents a and b were relatively simple. Because we used a total of two words, we needed only two axes to plot our vectors - the "be" axis and the "doo" axis.
+Documents a and b were relatively simple. Because we used a total of two words, we needed only two axes to plot our vectors—the "be" axis and the "doo" axis.
 
 Let's look at some slightly more complicated documents:
 
@@ -168,7 +166,7 @@ The new bag-of-words summary for Document c is `"doo": 5, "be": 2, "bop": 0`, wh
 
 The new bag-of-words summary for Document d is `"doo":0, "be": 2, "bop": 5`, and we can represent it as @math{\overrightarrow{d} = (0, 2, 5)}.
 
-It is a bit trickier to envision plotting these vectors - but not impossible!
+It is a bit trickier to envision plotting these vectors, but not impossible!
 
 USE DIAGRAMS INSTEAD
 
@@ -209,11 +207,6 @@ What now?
 
 When we get a new point in our multi-dimensional space, we want to compare it to the _other_ points in that space.
 
-We need a program that will:
-
-@n Generate a bag-of-words model for the document
-
-
 When we execute the program, the plagiarism detector computes the student's vector (the input!) and compares it against the other vectors. To do this, it uses the `cosine-similarity` function.
 
 @strategy{That Cosine?!}{
@@ -221,9 +214,7 @@ When we execute the program, the plagiarism detector computes the student's vect
 You might be wondering: are we actually using *that* cosine—the one students learn about when studying trigonometry? The answer is YES!
 
 The `cosine-similarity` function computes the cosine of the angle between two vectors. While it is not necessary for students to understand the mathematics happening behind the scenes, the function is a vital part of the program... and a lovely answer to the often-asked question, "Where are we ever going to use this?"
-
 }
-
 
 To allow for a pleasant user experience, a modern plagiarism detector does not actually provide a representation of a multi-dimensional space with varying points. That would be too complicated! Although different plagiarism detectors provide different outputs for their users, here's how the one in Pyret works.
 
@@ -237,6 +228,10 @@ To allow for a pleasant user experience, a modern plagiarism detector does not a
 }
 
 
-
 === Synthesize
 
+@QandA{
+
+@Q{AI can be impressive... but human judgment is still critical. Why? _Feel free to discuss what you learned about plagiarism detector, but other relevant examples are welcome, too!}
+
+}
