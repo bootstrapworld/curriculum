@@ -202,13 +202,13 @@ These patterns can be described by three terms: form, direction and strength.
 | @image{images/2NL.gif, 250}
 | @image{images/B.gif, 250}
 
-| Some patterns are *linear*, and cluster around a straight line sloping up or down.
-| Some patterns are *nonlinear*, and may look like some kind of curve.
-| And sometimes there is *no relationship* or pattern at all!
+| Some patterns appear *linear*, and cluster around a straight line sloping up or down.
+| Some patterns appear *nonlinear*, and may look like some kind of curve.
+| And sometimes there doesn't appear to be *any relationship* or pattern at all!
 |===
 
 @lesson-point{
-@vocab{Form} indicates whether a relationship is linear, nonlinear or undefined.
+@vocab{Form} suggests whether a relationship is linear, nonlinear or undefined.
 }
 
 @teacher{
@@ -225,7 +225,7 @@ If the relationship clusters around a straight line, we can talk about _directio
 
 @clear
 
-@right{@image{images/A.gif, 200}}*Negative*: The line slopes _down_ as we look from left-to-right. For example, “the older a child gets, the fewer new words he or she learns each day.”
+@right{@image{images/A.gif, 200}}*Negative*: The line slopes _down_ as we look from left-to-right. For example, “the older a child gets, the fewer new words they learn each day.”
 
 @slidebreak
 
@@ -527,24 +527,22 @@ Now is the time to make sure students *Save a Copy* of the file.}
 
 @slidebreak
 @ifslide{@right{@image{images/residual.png, 200}}}
-There are many different tools to calculate the fitness of a model.
+There are many different tools to calculate the fitness of a model. You may have heard of @math{R}, @math{R^2}, etc...
 
-@ifnotslide{
-- You may have heard of @math{R}, @math{R^2}, etc...
-}
-- Statisticians and Data Scientists are careful to use the right tool for the job.
+Statisticians and Data Scientists are careful to use the right tool for the job!
 
-For our purposes, we'll use the value of @vocab{S} to tell us how well or poorly our model fits.
+- We want a measure of _error_, so the measure should be zero for a perfect model with no residuals.
+- We want a measure that's easy to understand, so in our case it should measure _how many income-dollars of error_ a model has.
+- We want a measure that takes the residuals from _every_ data point into account.
 
 @slidebreak
 
-@ifslide{@right{@image{images/residual.png, 200}}
-}The statistical term @vocab{S} refers to the @vocab{Standard Deviation of the Residuals}, which is a measure of how far away _all_ of data points are from a model.
+@ifslide{ @right{@image{images/residual.png, 200}} }@vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
 
-- The closer the data points are to the model, the smaller the residuals are. If a data point falls directly on the model, the residual is zero!
+- The closer the data points are to the model, the smaller the residuals are.
 - Smaller residuals mean a smaller @vocab{S}, and a better model!
 - We know that if a model fits the data perfectly, the @vocab{S} value would be 0. 
-- Unlike other statistical measures, there is no maximum value of @vocab{S}, so an @vocab{S} value of 300 tells us something different about how well our model fits the data depending on the range of the data.
+- Unlike other measures of fitness, @vocab{S} is expressed in terms of _units of the y-axis_. An @vocab{S} of `2500` in this dataset means _the standard deviation of the residuals is $2500_ - making it much easier to understand.
 
 @slidebreak
 
@@ -599,11 +597,11 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 @Q{What does it mean if @math{S} is zero?}
 @A{The model fits the data perfectly.}
 
-@Q{What does it mean if @math{S} is 300?}
-@A{We have no way of knowing out of context! @math{S}-values only make sense when considered in the context of the range of the dataset!}
+@Q{Is an @math{S}-value of 1000 bad?}
+@A{We have no way of knowing out of context! @math{S}-values only make sense when considered in the context of the range of the dataset! In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
 }
 
-== Making Sense of our Best Linear Models
+== Finding the Best Linear Model
 
 === Overview
 
@@ -613,9 +611,11 @@ Students are introduced to a new pyret function called `lr-plot`, which uses lin
 
 We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values, but how do we find the _best possible linear model?_ 
 
-In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. 
+In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Linear regression consumes a dataset and produces a _function_ representing the best linear model.
 
-Pyret has a function called `lr-plot` that will do just that.
+We could keep guessing and picking two points over and over, and never know if we found the best linear model. Linear regression automatically finds the best-possible model, _for any dataset_. This is pretty amazing!
+
+Pyret's `lr-plot` function finds the best model, and graphs it on top of a scatter plot, and tells us the slope and y-intercept.
 
 @strategy{More `lr-plot` material}{
 
