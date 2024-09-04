@@ -1178,7 +1178,7 @@ const Reactive = {
 
 const Assessments = {
   "histograms-check1-desmos": {
-    "title": "Histograms Checkpoint 1",
+    "title": "Histograms Checkpoint 1 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66ce050ba9f23c274275848e"
     },
@@ -1187,7 +1187,7 @@ const Assessments = {
     }
   },
   "histograms-check2-desmos": {
-    "title": "Histograms Checkpoint 2",
+    "title": "Histograms Checkpoint 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66ce056726b7affb843177cc"
     }, 
@@ -1196,7 +1196,7 @@ const Assessments = {
     } 
   },
   "histograms-cumulative-desmos": {
-    "title": "Histograms Cumulative Assessment",
+    "title": "Histograms Cumulative Assessment (Desmos)",
     "pyret": {
      "url": "https://teacher.desmos.com/activitybuilder/custom/66be6b56035a26d01fc17889"
       },
@@ -1207,7 +1207,7 @@ const Assessments = {
 
 
   "box-plots-check1-desmos": {
-    "title": "Box Plots Checkpoint 1",
+    "title": "Box Plots Checkpoint 1 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d8824e41c31300b3694980?collections=66d8678a5c04bcca1cb0544c"
     },
@@ -1216,7 +1216,7 @@ const Assessments = {
     }
   },
   "box-plots-check2-desmos": {
-    "title": "Box Plots Checkpoint 2",
+    "title": "Box Plots Checkpoint 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66ce056726b7affb843177cc?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1225,7 +1225,7 @@ const Assessments = {
     } 
   },
   "box-plots-check3-desmos": {
-    "title": "Box Plots Checkpoint 3",
+    "title": "Box Plots Checkpoint 3 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d884a3a534014eab9119a2?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1234,7 +1234,7 @@ const Assessments = {
     } 
   },
   "box-plots-check4-desmos": {
-    "title": "Box Plots Checkpoint 4",
+    "title": "Box Plots Checkpoint 4 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d884a3a534014eab9119a2?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1243,7 +1243,7 @@ const Assessments = {
     } 
   },
   "box-plots-cumulative-desmos": {
-    "title": "Box Plots Cumulative Assessment",
+    "title": "Box Plots Cumulative Assessment (Desmos)",
     "pyret": {
      "url": "https://teacher.desmos.com/activitybuilder/custom/668d7be8fd7c6212638763d6"
       },
@@ -1254,7 +1254,7 @@ const Assessments = {
 
 
   "threats-check1-desmos": {
-    "title": "Threats to Validity Checkpoint 1",
+    "title": "Threats to Validity Checkpoint 1 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d8861de5ce65e9b5a3aee4?collections=66d8678a5c04bcca1cb0544c"
     },
@@ -1263,7 +1263,7 @@ const Assessments = {
     }
   },
   "threats-check2-desmos": {
-    "title": "Threats to Validity Checkpoint 2",
+    "title": "Threats to Validity Checkpoint 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d886a04d47159bafea0cbe?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1272,7 +1272,7 @@ const Assessments = {
     } 
   },
   "threats-cumulative-desmos": {
-    "title": "Threats to Validity Cumulative Assessment",
+    "title": "Threats to Validity Cumulative Assessment (Desmos)",
     "pyret": {
      "url": "https://teacher.desmos.com/activitybuilder/custom/66c391955b3af1281567a903?collections=66d8678a5c04bcca1cb0544c"
       },
@@ -1283,7 +1283,7 @@ const Assessments = {
 
 
   "lr-check1-desmos": {
-    "title": "Linear Regression Checkpoint 1",
+    "title": "Linear Regression Checkpoint 1 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d888092a3c501a98ec8cec?collections=66d8678a5c04bcca1cb0544c"
     },
@@ -1292,7 +1292,7 @@ const Assessments = {
     }
   },
   "lr-check2-desmos": {
-    "title": "Linear Regression Checkpoint 2",
+    "title": "Linear Regression Checkpoint 2 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d887df053dbfe57052c35a?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1301,7 +1301,7 @@ const Assessments = {
     } 
   },
   "lr-check3-desmos": {
-    "title": "Linear Regression Checkpoint 3",
+    "title": "Linear Regression Checkpoint 3 (Desmos)",
     "pyret": {
       "url": "https://teacher.desmos.com/activitybuilder/custom/66d88780fb3c8cbd6ddcac33?collections=66d8678a5c04bcca1cb0544c"
     }, 
@@ -1310,7 +1310,7 @@ const Assessments = {
     } 
   },
     "lr-cumulative-desmos": {
-    "title": "Linear Regression Cumulative Assessment",
+    "title": "Linear Regression Cumulative Assessment (Desmos)",
     "pyret": {
      "url": "https://teacher.desmos.com/activitybuilder/custom/66bf6a408a890dd0d0ea2654?collections=66d8678a5c04bcca1cb0544c"
       },
