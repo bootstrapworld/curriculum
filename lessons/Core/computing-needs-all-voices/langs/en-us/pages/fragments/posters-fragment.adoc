@@ -15,7 +15,7 @@
 	top: 0px;
     left: 0px;
     position: absolute;
-    font-size: 32px;
+    font-size: 24px;
 }
 .thumbnailList li img:hover {
 	box-shadow: black 2px 2px 4px;
@@ -38,12 +38,11 @@
 }
 #text, #statusbar { position: absolute; top: 0; left: 0; }
 #statusbar { width: 0%; height: 100%; background: #75328A55; z-index: -1; }
-#PrintInstructions { display: none; }
 
 @media print {
-	#PrintInstructions { display: inline; }
-	#OnscreenInstructions { display: none; }
 	.thumbnailList li img { max-width: 125px; }
+	.thumbnailList li:nth-last-child(1) { display: none; }
+	.thumbnailList li:nth-last-child(2) { display: none; }
 }
 
 </style>
@@ -91,7 +90,8 @@ var pioneers = [
 	{"name":"kakani-katija"},
 	{"name":"fei-fei-li"},
 
-	// end of workbook page
+	// end of workbook page - everything after this should NOT
+	// be visible (see CSS rules for @print, above)
 	{"name":"al-khwarizmi"},
 	{"name":"ada-lovelace"},
 	//"cristina-amon",
