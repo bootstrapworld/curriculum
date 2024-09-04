@@ -8,7 +8,15 @@
 ////
 @include{fragments/posters-fragment.adoc}
 ++++
+<style>
+#PrintInstructions { display: none; }
 
+@media print {
+	#PrintInstructions { display: inline; }
+	#OnscreenInstructions { display: none; }
+}
+
+</style>
 <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
 <script src="https://unpkg.com/downloadjs@1.4.7"></script>
 
