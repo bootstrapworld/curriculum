@@ -383,6 +383,8 @@ lines on some browsers */
 .LessonPlan {
   font-size: 12pt;
 
+  #content { font-size: 9pt; }
+
   /* The summary table at the top of each lesson */
   .preamble {
     color: black;
@@ -1184,9 +1186,9 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
 
   /* on WB pages zoom the page 1.25x for a big screen */
-  body.workbookpage {
+  body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
-    transform: scale(1.25); 
+    transform: scale(calc(12 / 9)); 
   }
 
   /********************************************************************
@@ -1211,7 +1213,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           content: '▼';
           width: 16px;
           font-size: 16px;
-          line-height: 32px;
+          line-height: 30px;
           color: white;
           font-weight: bold;
           float: left;
