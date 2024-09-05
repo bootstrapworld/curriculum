@@ -45,10 +45,12 @@ ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 
 
 As with all machine learning, ALVINN required training. The goal of that training? Learning how to steer. Here's what ALVINN's training entailed:
 
-- A person drives the vehicle (known as the Navlab - short for navigation lab) as ALVINN watches the road through a front-facing video camera.
+- A person drives the vehicle as a front-facing video camera records the road.
 - Every two seconds, ALVINN digitizes an image of the road ahead and records the chosen steering direction.
 - Training images are reduced in resolution to 30x32 pixels and provided as inputs. The corresponding outputs are the "correct" steering angles.
 
+
+ALVINN ends up with a dataset that looks roughly like the table below
 
 [cols="^.^1,^.^1", stripes="none", options="header"]
 |===
@@ -60,14 +62,25 @@ As with all machine learning, ALVINN required training. The goal of that trainin
 
 |===
 
+Note - these images were
 
 Now what?
 
-ALVINN's training data - which we can represent with a table, as above - is processed. ALVINN uses the continuous set of inputs and outputs to create a @vocab{function}:
+ALVINN's training data - which we can represent with a table, as above - is processed. ALVINN uses the set of inputs and outputs to create a @vocab{function}:
 
-@center{@big{@math{f(road image) = steering angle}}}
+@center{@big{@math{steer(road image) = steering angle}}}
+
+USE CONTRACT NOTATION
 
 This @vocab{predictor function} reduces the complexity of the data, allowing ALVINN to predict the value of the response variable as though it is completely dependent on the explanatory variable. In other words, with this function, ALVINN can select the "correct" steering angle (as modeled by the human driver) when given a new input (a particular view of the road).
+
+
+What might be a weakness of this function?
+- It's not taking any history into account.
+- We don't just make an instantaneous decision when we drive.
+If a road is curving, we know it is going to curve for a little bit. If it will curve more, there is a sign to warn us that the curving is happening. ALVINN will ignore the sign. ALVINN has no memory!
+- We also have MAPS.
+- We have other cars in front of us to give us contextual clues.
 
 === Investigate
 
