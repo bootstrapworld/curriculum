@@ -92,7 +92,7 @@ body {
     .overbar {
       border-top: 1px solid;
       display: inline-block;
-      line-height: 1.2;
+      line-height: 1.6;
       margin-left: 2px;
     }
     sub { font-size: 65% !important; }
@@ -104,6 +104,7 @@ body {
   .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; 
     font-size: inherit !important;
+    line-height: 0;
   }
   .mathunicode i { font-family: 'MJXTEX-I' }
   
@@ -219,6 +220,27 @@ body {
   div.hiddenblock {
     display: none;
   }
+  
+  .strategy-box {
+    background:         #efefef;
+    border:             solid #1a73b5 5px !important;
+    width:              75%;
+    margin-left:        auto;
+    margin-right:       auto;
+    padding:            0 15px;
+    display:            block;
+    clear:              both;
+    position:           relative;
+    td { width: 8in; }
+    a { color: blue; text-decoration: underline; }
+    .title, .title p {
+      width:              100%;
+      display:            block;
+      text-align:         center;
+      font-weight:        bold;
+      font-size:          1.5rem;
+    }
+  }
 }
 
 body:not(.LessonPlan, .narrativepage) p {
@@ -317,7 +339,7 @@ lines on some browsers */
   }
   &+.ulist { 
     transition: 1s ease-in; max-height: 0; overflow: hidden; 
-    padding-left: 5px; margin: 0; font-style: italic; font-size: 10pt;
+    padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
     .pageNum { float: right; margin-right: 10%; }
   }
 }
@@ -360,6 +382,8 @@ lines on some browsers */
 */
 .LessonPlan {
   font-size: 12pt;
+
+  #content { font-size: 9pt; }
 
   /* The summary table at the top of each lesson */
   .preamble {
@@ -574,26 +598,6 @@ lines on some browsers */
     border-width:       2px 0px;
     clear:              both;
     p { margin: 0ex 1ex; }
-  }
-  .strategy-box {
-    background:         #efefef;
-    border:             solid #1a73b5 5px !important;
-    width:              75%;
-    margin-left:        auto;
-    margin-right:       auto;
-    padding:            0 15px;
-    display:            block;
-    clear:              both;
-    position:           relative;
-    td { width: 8in; }
-    a { color: blue; text-decoration: underline; }
-    .title, .title p {
-      width:              100%;
-      display:            block;
-      text-align:         center;
-      font-weight:        bold;
-      font-size:          1.5rem;
-    }
   }
   .teacherNote { 
     display:            inline-block;
@@ -1182,9 +1186,9 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
 
   /* on WB pages zoom the page 1.25x for a big screen */
-  body.workbookpage {
+  body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
-    transform: scale(1.25); 
+    transform: scale(calc(12 / 9)); 
   }
 
   /********************************************************************
@@ -1209,7 +1213,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           content: '▼';
           width: 16px;
           font-size: 16px;
-          line-height: 32px;
+          line-height: 30px;
           color: white;
           font-weight: bold;
           float: left;
@@ -1262,6 +1266,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+  .noprint { display: none; }
   body.LessonPlan { 
     width: 7.5in; 
     .preamble tr td:last-child > * { background: white !important; }

@@ -381,7 +381,7 @@
                                  (read-char i)
                                  (let ([ctl-seq (read-mathjax-word i)])
                                    (case ctl-seq
-                                     [("mbox") (let ([x (local-read-group i "math mbox")])
+                                     [("mbox" "text") (let ([x (local-read-group i "math mbox")])
                                                  x)]
                                      [("sqrt") (let ([x (local-read-group i "math sqrt")])
                                                  (math-sqrt (math-unicode-if-possible
