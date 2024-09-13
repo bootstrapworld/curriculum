@@ -1,0 +1,52 @@
+[.landscape]
+= Are They Identical? (Additive Inverse)
+
+Are the images produced by the two lines of code identical - or will they look different? With your partner, make a prediction, referring to your contracts as needed. Test the code in @starter-file{editor}.
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+[.FillVerticalSpace,cols="^.^1a,^.^20a,^.^2a, ^.^2a, stripes="none", options="header"]
+|===
+|  | Circles of Evaluation | Predict | Result
+
+| @n
+| @show{(coe '(circle (+ 90 -30) "outline" "purple"))}
+@math{=}
+@show{(coe '(circle (+ -30 90) "outline" "purple"))}
+|| @ifsoln{yes}
+
+
+| @n
+| @show{(coe '(text "Rasula" (+ 100 -45) "dark-orange"))}
+@math{=}
+@show{(coe '(text "Rasula" (- 100 45) "dark-orange"))}
+|| @ifsoln{yes}
+
+
+| @n
+| @show{(coe '(rotate (+ -20 100) (text "hi" (+ -20 30) "red")))}
+@math{=}
+@show{(coe '(rotate (- 100 -20) (text "hi" (- 30 20) "red")))}
+|| @ifsoln{no}
+
+
+| @n
+| @show{(coe '(scale (- 2 -1) (circle(+ 50 5) "outline" "blue")))}
+@math{=}
+@show{(coe '(scale (+ 2 1) (circle(+ 50 -5) "outline" "blue")))}
+|| @ifsoln{no}
+
+
+| @n
+| @show{(coe '(rectangle (- 62 2) (+ 32 8) "solid" "aqua"))}
+@math{=}
+@show{(coe '(rectangle(+ -2 62) (- 32 -8) "solid" "aqua"))}
+|| @ifsoln{yes}
+
+|===
+

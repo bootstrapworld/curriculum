@@ -1,0 +1,92 @@
+= True or False? Negate
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+</style>
+++++
+
+Is the equation represented by the two Circles of Evaluation true or false? Evaluate each side of the equation to confirm your response. The first one is done for you.
+
+[.FillVerticalSpace,cols="^.^1a,^.^8a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles of Evaluation																	   |
+True or False? Justify
+
+
+| @n
+| @show{(coe '(negate 6))}
+@math{=}
+@show{(coe '(negate -6))}
+| False.
+
+@math{-6 +≠+ 6}
+
+
+| @n
+| @show{(coe '(negate -3))}
+@math{=}
+@math{-3}
+| @ifsoln{False.
+
+@math{3 +≠+ -3}}
+
+
+| @n
+| @show{(coe '(negate (+ 5 2)))}
+@math{=}
+@show{(coe '(negate 7))}
+| @ifsoln{True.
+
+@math{-7 = -7}}
+
+| @n
+| @show{(coe '(negate (* 5 20)))}
+@math{=}
+@show{(coe '(negate (* 20 5)))}
+| @ifsoln{True. The Commutative Property is being applied.
+
+@math{-100 = -100}}
+
+| @n
+| @show{(coe '(+ (negate -20) 0))}
+@math{=}
+@show{(coe '(* 1 (negate -20)))}
+| @ifsoln{True. The Identity Property is being applied.
+
+@math{20 = 20}}
+
+| @n
+| @show{(coe '(negate (negate 8)))}
+@math{=}
+@math{ -8}
+| @ifsoln{False.
+
+@math{8 +≠+ -8}}
+
+| @n
+| @show{(coe '(negate(negate -16)))}
+@math{=}
+@math{-16}
+| @ifsoln{True.
+
+@math{-16 = -16}}
+
+| @n
+| @show{(coe '(negate 12))}
+@math{=}
+the opposite of 12
+| @ifsoln{True.
+
+@math{-12 = -12}}
+
+| @n
+| @show{(coe '(negate b))}
+@math{=}
+@show{(coe '(* -b 1))}
+| @ifsoln{True. The Identity Property is being applied.
+
+@math{-b = -b}}
+
+
+|===

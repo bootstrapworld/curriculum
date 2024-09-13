@@ -1,0 +1,86 @@
+= True or False? Exponents and Negatives
+
+++++
+<style>
+  /*
+    the grid-auto-rows rule here has a separate value for
+    each row. The first row is as small as is needed for
+    the content, and all the subsequent rows are an equal
+    fraction of the remaining space.
+
+    NOTE: if the number of rows is changed, this rule will
+    have to change, too!!
+  */
+  body.workbookpage table.FillVerticalSpace {
+    grid-template-rows: unset !important;
+    grid-auto-rows: min-content 1fr 1fr 1fr 1fr 1fr;
+  }
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+Draw two Circles of Evaluation to represent the equation. Then, use your Circles of Evaluation to determine if the equation is true or false. The first one is done for you.
+
+[.FillVerticalSpace, cols="^.^1a,^.10a,^.4a", stripes="none", options="header"]
+|===
+|	 | Equation & Circles of Evaluation  | True or False?
+
+| @n
+| @math{-2^2 = (-2)^2}
+
+@show{(coe '(negate (expt 2 2)))}
+@math{=}
+@show{(coe '(expt (negate 2) 2))}
+| False: @math{-4 +≠+ 4}
+
+
+| @n
+| @math{-2^3 = (-2)^3}
+
+@showsoln{(coe '(negate (expt 2 3)))}
+@ifsoln{@math{=}}
+@showsoln{(coe '(expt (negate 2) 3))}
+| @ifsoln{True: @math{-8 = -8}}
+
+
+
+| @n
+| @math{-2^4 = (-2)^4}
+
+@showsoln{(coe '(negate (expt 2 4)))}
+@ifsoln{@math{=}}
+@showsoln{(coe '(expt (negate 2) 4))}
+| @ifsoln{False: @math{-16 +≠+ 16}}
+
+| @n
+| @math{-2^5 = (-2)^5}
+
+@showsoln{(coe '(negate (expt 2 5)))}
+@ifsoln{@math{=}}
+@showsoln{(coe '(expt (negate 2) 5))}
+| @ifsoln{True: @math{-32 = -32}}
+
+| @n
+| @math{-2^6 = (-2)^6}
+
+@showsoln{(coe '(negate (expt 2 6)))}
+@ifsoln{@math{=}}
+@showsoln{(coe '(expt (negate 2) 6))}
+| @ifsoln{False: @math{-64 +≠+ 64}}
+
+
+|===
+
+@n What do you notice about the Circles of Evaluation on the _left_? @fitb{}{@ifsoln{On the left, the _outer_ circle is always negating an otherwise positive value - so these expressions were always negative}}
+
+@fitb{}{@ifsoln{result.}}
+
+@n What do you notice about the Circles of Evaluation on the _right_? @fitb{}{@ifsoln{On the right, the outcome was positive whenever the exponent was even, but negative}}
+
+@fitb{}{@ifsoln{when the exponent was odd.}}
+
+@n What do you notice about the _true_ equations? @fitb{}{@ifsoln{The equations were true whenever both sides were negative - when the exponent was odd.}}
+
+@fitb{}{}
+

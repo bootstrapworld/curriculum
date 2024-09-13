@@ -1,0 +1,63 @@
+= Matching Circles and Expressions
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+td .solution::before { content: ' → '; }
+.mathunicode { line-height: 0.5; }
+</style>
+++++
+
+Assume @math{m} is a non-zero integer. Draw a line from the expression on the left to the Circle of Evaluation on the right. +
+_Note: Some expressions have more than one correct Circle of Evaluation!_
+
+[cols="^.^10a,^.^3a,10a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| Words
+|||
+| Circle of Evaluation
+
+| @math{\|-m\|}
+|*@n* @ifsoln{A, G}||*A*
+| @show{(coe '(abs (negate m)))}
+
+| @math{-\|m\|}
+|*@n* @ifsoln{B}||*B*
+| @show{(coe '(negate (abs m)))}
+
+| @math{- (-m)}
+|*@n* @ifsoln{C, F}||*C*
+| @show{(coe '(negate (negate m)))}
+
+| @math{-m}
+|*@n* @ifsoln{E}||*D*
+| @show{(coe '(negate (abs -m)))}
+
+| @math{- \| -m \|}
+|*@n* @ifsoln{D}	||*E*
+| @show{(coe '(negate m))}
+
+|
+| ||*F*
+| @show{(coe '(negate -m))}
+
+|
+| ||*G*
+| @show{(coe '(abs -m))}
+
+|===
+
+
+---
+
+
+@n Look at the expressions in the matching activity above. Are any of them _always_ positive, no matter what we substitute in for @math{m}? @fitb{}{@ifsoln{ Yes, @math{|-m|} is always positive.}}
+
+@n Are any of the above expressions _always_ negative? @fitb{}{@ifsoln{Both @math{-|m|} and @math{- | -m|} are always negative.}}
+
+@fitb{}
+
+@n Are there any expressions that were neither _always positive_ nor _always negative_? Why? Explain. @fitb{}{@ifsoln{ @math{- (-m)} evaluates to a }}
+
+@fitb{}{@ifsoln{ negative number if you start with a negative number, but it evaluates to a positive number if you start with a positive value. The opposite}}
+
+@fitb{}{@ifsoln{is true for @math{-m}.}}

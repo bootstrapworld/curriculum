@@ -1,0 +1,69 @@
+[.landscape]
+= Which One Doesn't Belong? Identity Property
+
+Cross out the Circle of Evaluation that does NOT belong with the others, and then explain your choice.
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^15a,^.^9a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain
+
+| @n
+|
+@show{(coe '(* (+ 7 8) 1))}
+@show{(coe '(+ 0 (+ 8 7)))}
+@ifsoln-choice{@show{(coe '(- (+ 8 7) 1))}}
+@show{(coe '(/ (+ 7 8) 1))}
+| @ifsoln{The 3rd Circle of Evaluation subtracts one, which results in a value of 14, rather than 15.}
+
+| @n
+|
+@show{(coe '(/ (* 12 7) 1))}
+@ifsoln-choice{@show{(coe '(/ 1 (* 12 7)))}}
+@show{(coe '(* 1 (* 7 12)))}
+@show{(coe '(* 1 (* 12 7)))}
+| @ifsoln{The 2nd Circle of Evaluation starts with 1 and divides it by 84, resulting in @math{\frac{1}{84}}, rather than 84.}
+
+| @n
+|
+@show{(coe '(+ (* (+ 3 2) 4) 0))}
+@show{(coe '(+ 0 (* 4 (+ 2 3))))}
+@ifsoln-choice{@show{(coe '(- 0 (* (+ 3 2) 4)))}}
+@show{(coe '(- (* ( + 3 2) 4) 0))}
+| @ifsoln{The 3rd Circle of Evaluation subtracts 20 from zero, resulting in -20, rather than 20.}
+
+
+| @n
+|
+@show{(coe '(* 45 (+ 1/2 1/2)))}
+@ifsoln-choice{@show{(coe '(* 45 0))}}
+@show{(coe '(* (+ 1/2 1/2) 45))}
+@show{(coe '(+ 45 0))}
+| @ifsoln{The 2nd Circle of Evaluation results in 0, rather than 45.}
+
+
+| @n
+|
+@show{(coe '(* 1 (/ 50 10)))}
+@show{(coe '(* 5 (/ 23 23)))}
+@show{(coe '(* (* 1.25 4) (- 23 (+ 19 3))))}
+@ifsoln-choice{@show{(coe '(* 5 (- 23 (+ 19 4))))}}
+| @ifsoln{The 4th Circle of Evaluation results in 0, rather than 5.}
+
+
+|===

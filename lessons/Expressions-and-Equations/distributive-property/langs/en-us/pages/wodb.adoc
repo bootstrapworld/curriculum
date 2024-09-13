@@ -1,0 +1,74 @@
+= Which One Doesn't Belong? Distributive Property
+
+Cross out the Circle of Evaluation that does NOT belong with the others, and then explain your choice.
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^20a,^.^6a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain
+
+| @n
+|
+@show{(coe '(* 5 (+ 2 4)))}
+@ifsoln-choice{@show{(coe '(+ (* 5 2) 4))}}
+@show{(coe '(+ (* 5 2) (* 5 4)))}
+@show{(coe '(* 5 6))}
+| @ifsoln{The second circle evaluates to 40, while the rest evaluate to 30}
+
+| @n
+|
+@ifsoln-choice{@show{(coe '(* (+ 3 99) (+ 3 1)))}}
+@show{(coe '(* 3 (+ 99 1)))}
+@show{(coe '(+ 297 3))}
+@show{(coe '(+ (* 3 99) (* 3 1)))}
+| @ifsoln{The first circle evaluates to 408, while the rest evaluate to 300}
+
+| @n
+|
+@show{(coe '(* 7 (+ m 3)))}
+@show{(coe '(+ (* 7 m) (* 7 3)))}
+@ifsoln-choice{@show{(coe '(* (* 7 m) 3))}}
+@show{(coe '(+ (* 7 3) (* 7 m)))}
+| @ifsoln{The third circle is neither a sum of products or a product of sums}
+
+| @n
+|
+@show{(coe '(* g (+ 5 600)))}
+@show{(coe '(* 605 g))}
+@show{(coe '(+ (* 5 g) (* 600 g)))}
+@ifsoln-choice{@show{(coe '(+ (* 5 g) 600))}}
+| @ifsoln{In the fourth circle, `g` is multiplid by 5 but not 600}
+
+| @n
+|
+@show{(coe '(* a (+ b c)))}
+@show{(coe '(* (+ b c) a))}
+@show{(coe '(* (+ c b) a))}
+@ifsoln-choice{@show{(coe '(* (* a b) (* a c)))}}
+| @ifsoln{The fourth circle shows a _product_ of products instead of a _sum_ of products}
+
+| @n
+|
+@show{(coe '(* 3 (- h 45)))}
+@show{(coe '(- (* 3 h) (* 3 45)))}
+@show{(coe '(- (* 3 45) (* 3 h)))}
+@ifsoln-choice{@show{(coe '(* 3 (- 45 h)))}}
+| @ifsoln{The fourth circle swaps 45 and `h`, but those are not commutative}
+
+|===
+

@@ -1,0 +1,75 @@
+= Which One Doesn't Belong? Absolute Value & Negate
+
+For each row, cross out any Circles of Evaluation that do NOT meet the condition stated on the left. *NOTE:* Some rows might not need anything crossed out!
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^3a,^.^10a",stripes="none", options="header"]
+|===
+| 	 | Value | Place a check mark by the equivalent Circles of Evaluation
+
+| @n
+| Which Circles evaluate to @math{6}?
+|
+@ifsoln-choice{@show{(coe '(negate 6))}}
+@show{(coe '(negate -6))}
+@show{(coe '(abs 6))}
+@show{(coe '(abs -6))}
+
+
+| @n
+| Which Circles evaluate to @math{-4}?
+|
+@show{(coe '(negate (+ 2 2)))}
+@show{(coe '(negate 4))}
+@ifsoln-choice{@show{(coe '(abs 4))}}
+@ifsoln-choice{@show{(coe '(abs -4))}}
+
+| @n
+| Which Circles evaluate to @math{3}?
+|
+@show{(coe '(abs 3))}
+@show{(coe '(abs -3))}
+@show{(coe '(negate (negate 3)))}
+@show{(coe '(negate -3))}
+
+| @n
+| If @math{m = -3}, which Circles evaluate to @math{3}?
+|
+@show{(coe '(negate m))}
+@ifsoln-choice{@show{(coe '(negate -m))}}
+@show{(coe '(abs m))}
+@show{(coe '(abs -m))}
+
+| @n
+| If @math{h = 20}, which Circles evaluate to @math{20}?
+|
+@ifsoln-choice{@show{(coe '(negate h))}}
+@show{(coe '(negate -h))}
+@show{(coe '(abs h))}
+@show{(coe '(abs -h))}
+
+| @n
+| If @math{x = 7}, which Circles evaluate to @math{0}?
+|
+@show{(coe '(+ x (negate x)))}
+@ifsoln-choice{@show{(coe '(+ x (abs x)))}}
+@show{(coe '(- x x))}
+@show{(coe '(+ (negate x) (abs x)))}
+
+|===
+

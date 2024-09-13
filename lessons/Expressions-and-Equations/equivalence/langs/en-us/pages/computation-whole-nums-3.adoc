@@ -1,0 +1,57 @@
+= Computation (Whole Numbers) (3)
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+
+@do{
+  (define coe1a '(- (+ 14 1) (+ 3 2)))
+  (define coe1b '(- (?ANS 15) (?ANS 5)))
+
+  (define coe2a '(/ (* 9 5) (?ANS 15)))
+  (define coe2b '(/ (?ANS 45) 15))
+
+  (define coe3a '((?ANS /) (+ (?ANS 4) 16) ((?ANS +) 3 2)))
+  (define coe3b '(/ 20 (?ANS 5)))
+
+  (define coe4a '((?ANS *) ((?ANS +) 10 (- 6 (?ANS 2))) (?ANS 2)))
+  (define coe4b '(* (+ (?ANS 10) 4) 2))
+  (define coe4c '((?ANS *) (?ANS 14) (?ANS 2)))
+
+  (define coe5a '((?ANS -) (* 12 3) (/ (+ (?ANS 47) 3) 10)))
+  (define coe5b '((?ANS -) (?ANS 36) (/ 50 10)))
+  (define coe5c '(- (?ANS 36) (?ANS 5)))
+
+  (define coe6a '((?ANS *) ((?ANS +) ((?ANS -) (?ANS 11) 8) (?ANS 3)) (+ 14 (/ (?ANS 7) 7))))
+  (define coe6b '((?ANS *) (+ 3 3) ((?ANS +) 14 1)))
+  (define coe6c '((?ANS *) 6 (?ANS 15)))
+}
+
+
+The Circles of Evaluation below represent a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators! Fill in those numbers and operators so that each sequence of circles will end with the answer shown on the right.
+
+[.FillVerticalSpace, cols="^.^1a,.^14a,stripes="none", options="header"]
+|===
+|    | Circle Solving Diagram
+| @n | @show{(coe coe1a)} &rarr; @show{(coe coe1b)} &rarr; @math{10}
+| @n | @show{(coe coe2a)} &rarr; @show{(coe coe2b)} &rarr; @math{3}
+| @n | @show{(coe coe3a)} &rarr; @show{(coe coe3b)} &rarr; @math{4}
+| @n | @show{(coe coe4a)} &rarr; @show{(coe coe4b)} &rarr; @show{(coe coe4c)} &rarr; @math{28}
+| @n | @show{(coe coe5a)} &rarr; @show{(coe coe5b)} &rarr; @show{(coe coe5c)} &rarr; @math{31}
+| @n | @show{(coe coe6a)} &rarr; @show{(coe coe6b)} &rarr; @show{(coe coe6c)} &rarr; @math{90}
+|===
+
+
+

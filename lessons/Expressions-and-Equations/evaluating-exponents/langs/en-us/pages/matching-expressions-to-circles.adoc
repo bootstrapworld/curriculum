@@ -1,0 +1,64 @@
+= Matching Expressions to Circles of Evaluation
+
+
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+</style>
+++++
+
+
+Draw a line from the expression on the left to the equivalent Circle of Evaluation on the right.
+
+[cols="^.^10a,^.^3a,5a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| Words
+|||
+| Circle of Evaluation
+
+| @math{3 \times 3 \times 3 \times 3}
+|*@n*@ifsoln{B}||*A*
+| @show{(coe '(expt 4 4))}
+
+| @math{3 \times 3^4}
+|*@n*@ifsoln{D}||*B*
+| @show{(coe '(expt 3 4))}
+
+
+| @math{(3 \times 3)^4}
+|*@n*@ifsoln{E}||*C*
+| @show{(coe '(expt 4 3))}
+
+
+| @math{3 \times 4^3}
+|*@n*@ifsoln{I}||*D*
+| @show{(coe '(* 3 (expt 3 4)))}
+
+
+| @math{(3 \times 4)^3}
+|*@n*@ifsoln{G}||*E*
+| @show{(coe '(expt (* 3 3) 4))}
+
+
+| @math{4^3}
+|*@n*@ifsoln{C}||*F*
+| @show{(coe '(expt (+ 4 4) 3))}
+
+
+| @math{4 \times 4 \times 4 \times 4}
+|*@n*@ifsoln{A}||*G*
+| @show{(coe '(expt (* 3 4) 3))}
+
+
+| @math{4^3 + 4}
+|*@n*@ifsoln{H}||*H*
+| @show{(coe '(+ (expt 4 3) 4))}
+
+| @math{(4 + 4)^3}
+|*@n*@ifsoln{F}||*I*
+| @show{(coe '(* 3 (expt 4 3)))}
+
+
+
+|===
+

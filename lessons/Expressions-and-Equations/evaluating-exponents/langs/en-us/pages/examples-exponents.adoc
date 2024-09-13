@@ -1,0 +1,126 @@
+= Programming with Exponents
+
+++++
+<style>
+#content td {padding: 0rem 0px !important}
+#content table .autonum::after { content: ')'; }
+#content th { text-align: center !important; }
+</style>
+++++
+
+== Examples and Exponents
+
+@n Below, place a checkmark next to each of the equations that you *predict* will pass when you click "Run".
+
+@ifproglang{pyret}{
+
+@hspace{2em} @fitb{2em}{} @hspace{1em}  `num-expt(5, 2)` *is* `(2 * (2 * (2 * (2 * 2))))`
+
+@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(4, 6)` *is* `(((((4 * 4) * 4) * 4) * 4) * 4)`
+
+@hspace{2em}  @fitb{2em}{} @hspace{1em} `num-expt(2, 3)` *is* `(3 * 3)`
+
+@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(8, 3)` *is* `(8 * (8 * 8))`
+
+@hspace{2em} @fitb{2em}{} @hspace{1em} `num-expt(3, 5)` *is* `(3 + (3 + (3 + (3 + 3))))`
+
+@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(1, 4)` *is* `(((1 * 1) * 1) * 1)`
+
+}
+
+@ifproglang{wescheme}{
+
+@hspace{2em}  @fitb{1em}{} `(EXAMPLE (expt 5 2) (* 2 (* 2 (* 2 (* 2 (* 2))))))`
+
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 4 6) (* 4 (* 4 (* 4 (* 4 (* 4 (* 4)))))))`
+
+
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 2 3) (* 3 3))`
+
+@hspace{2em}  @fitb{2em}{} `(EXAMPLE (expt 8 3) (* 8 (* 8 (* 8))))`
+
+@hspace{2em}  @fitb{2em}{@ifsoln{x}} `(EXAMPLE (expt 3 5)(+ 3 (+ 3 (+ 3 (+ 3 (+ 3))))))`
+
+@hspace{2em} @fitb{2em}{} `(EXAMPLE (expt 1 4) (* 1 (* 1 (* 1 (* 1)))))`
+
+}
+
+@n Open the @starter-file{exponents} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{1}} failed because the left side was @fitb{3em}{@ifsoln{25}} and the right side was @fitb{3em}{@ifsoln{32}}.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{3}} failed because the left side was @fitb{3em}{@ifsoln{8}} and the right side was @fitb{3em}{@ifsoln{9}}.
+
+@hspace{2em} Test # @fitb{3em}{@ifsoln{5}} failed because the left side was @fitb{3em}{@ifsoln{243}} and the right side was @fitb{3em}{@ifsoln{15}}.
+
+@n Edit each of the *failing* examples so that _all examples pass_ when you click "Run". Be sure to change *only* the @ifproglang{wescheme}{second part of the example} @ifproglang{pyret}{part of the example after the `is`}! Describe one of the changes you had to make. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@vspace{1ex}
+
+== Does it equal 16?
+
+@n A teacher asked her students to make up expressions with exponents that evaluate to 16. She typed their expressions into @proglang as examples to test if they evaluate to 16. Below, place a checkmark next to each of the examples that you *predict* will pass when you click "Run".
+
+@ifproglang{pyret}{
+
+[.table1, cols="1,12,12", frame="none", grid="none", stripes="none"]
+|===
+
+|| @fitb{1em}{} @hspace{1em} `num-expt(2, 4)` *is* `16`
+
+| @fitb{2em}{@ifsoln{x}} @hspace{1em} `2 * 2 * num-expt(2, 2)`  *is* `16`
+
+
+|| @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(2, 3) + 10` *is* `16`
+
+| @fitb{2em}{} @hspace{1em} `num-expt(4, 2) * 2`  *is* `16`
+
+|| @fitb{2em}{} @hspace{1em} `4 * num-expt(1, 4)`  *is* `16`
+
+| @fitb{2em}{} @hspace{1em}  `num-expt(4, 3) / 2 / 2`  *is* `16`
+
+|| @fitb{2em}{} @hspace{1em}  `2 * num-expt(2, 3)` *is* `16`
+
+| @fitb{2em}{@ifsoln{x}} @hspace{1em} `num-expt(4, 3) / 2 / 2`  *is* `16`
+|===
+
+}
+
+@ifproglang{wescheme}{
+
+[.table1, cols="1,12,12", frame="none", grid="none", stripes="none"]
+|===
+
+|| @fitb{1em}{} `(EXAMPLE (expt 2 4) 16)`
+
+| @fitb{2em}{@ifsoln{x}} `(EXAMPLE (* 2 (* 2 (* (expt 2 2)))) 16)`
+
+|| @fitb{2em}{@ifsoln{x}} `(EXAMPLE (+ (expt 2 3) 10) 16)`
+
+| @fitb{2em}{} `(EXAMPLE (* (expt 4 2) 2) 16)`
+
+|| @fitb{2em}{} `(EXAMPLE (* 4 (expt 1 4)) 16)`
+
+| @fitb{2em}{} `(EXAMPLE(/ (/ (expt 4 3) 2) 2) 16)`
+
+|| @fitb{2em}{}  `(EXAMPLE (* 2 (expt 2 3)) 16)`
+
+| @fitb{2em}{@ifsoln{x}}  `(EXAMPLE (/ (/ (expt 4 3) 2) 2) 16)`
+|===
+}
+
+@n Open the @starter-file{is-it-16} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Which tests failed? @fitb{}{@ifsoln{2, 3, and 6.}}
+
+@n The three failing examples are all wrong for the same reason. That's because the students who wrote them doesn't understand something about how exponents work! What do they not understand?? @fitb{}{@ifsoln{Rather than multiplying the base times itself as many times as the exponent indicates,}}
+
+@fitb{}{@ifsoln{they multiplied the base times the exponent.}}
+
+@fitb{}{}
+
+@n Come up with a unique exponent expression of your own that evaluates to 25, using any numbers and operators. (We've included one example for you in Section 2 of the starter file.) Write it in mathematical notation (not code) on the line: @fitb{}{}
+
+@n Translate your expression to code and add it to the second examples block. Does your example pass? If not, revise it until it does.

@@ -1,0 +1,67 @@
+[.landscape]
+= Which One Doesn't Belong?
+
+Cross out the Circle of Evaluation that does NOT belong with the others, and then explain your choice.
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+div.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^10a,^.^3a",stripes="none", options="header"]
+|===
+| 	 | Which one doesn't belong?  |Explain
+
+| @n
+|
+@show{(coe '(+ (* 2 8) (/ 8 4)))}
+@show{(coe '(+ (* 8 2) (/ 8 4)))}
+@ifsoln-choice{@show{(coe '(+ (* 2 8) (/ 4 8)))}}
+@show{(coe '(+ (/ 8 4) (* 8 2)))}
+| @ifsoln{The third Circle does not belong. The Commutative Property does not hold for division; @math{8 \div 4} produces a different result than @math{4 \div 8}.}
+
+| @n
+|
+@show{(coe '(+ 10 (* 3 2)))}
+@show{(coe '(+ (* 3 2) 10))}
+@ifsoln-choice{@show{(coe '(+ (* 10 3) 2))}}
+@show{(coe '(+ (* 2 3) 10))}
+| @ifsoln{The third Circle does not belong. Applying computation reveals that this Circle is 32, whereas the others are 16. We cannot change the groupings in an expression with multiplication and addition.}
+
+| @n
+|
+@show{(coe '(+ ( + (* 3 7) 5) 6))}
+@ifsoln-choice{@show{(coe '(+ (+ (* 3 5) 7) 6))}}
+@show{(coe '(+ (+ 5 (* 7 3)) 6))}
+@show{(coe '(+ 5 (+ (* 3 7) 6)))}
+| @ifsoln{The second Circle does not belong. All other Circles involve multiplying 3 and 7, then adding 6 and 7. This Circle starts with multiplying 3 by 5.}
+
+| @n
+|
+@show{(coe '(/ (+ 6 4) (+ 3 2)))}
+@show{(coe '(/ (+ 4 6) (+ 3 2)))}
+@ifsoln-choice{@show{(coe '(/ (+ 3 2) (+ 4 6)))}}
+@show{(coe '(/ (+ 6 4) (+ 2 3)))}
+| @ifsoln{The third Circle is the only Circle that does not show 10 being divided by 5. The Commutative Property does not hold for division.}
+
+| @n
+|
+@show{(coe '(- ( + (* 8 10) 6) 5))}
+@show{(coe '(- (+ 6 (* 8 10)) 5))}
+@show{(coe '(- (+ (* 10 8) 6) 5))}
+@ifsoln-choice{@show{(coe '(- 5 (+ (* 8 10) 6)))}}
+| @ifsoln{The fourth Circle does not belong. It shows @math{5 - 86} rather than @math{86 -5}. The Commutative Property does not hold for subtraction.}
+
+|===
+

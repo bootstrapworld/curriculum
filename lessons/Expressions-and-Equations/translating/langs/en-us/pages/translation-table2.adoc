@@ -1,0 +1,22 @@
+= Translation Table (2)
+
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+</style>
+++++
+
+
+For each provided arithmetic expression, draw an equivalent Circle of Evaluation and write a translation in words.
+
+[.FillVerticalSpace, cols="^.^1a,^.^4a,^.^4a,^.^4a", stripes="none", options="header"]
+|===
+| 	 | Math 	| Circle of Evaluation	| Verbal Expression
+| @n | @math{24 -6}						| @showsoln{(coe '(- 24 6))}						| @ifsoln{Find the difference between 24 and 6.}
+| @n | @math{24 - (6 \div 3)}			| @showsoln{(coe '(- 24 (/ 6 3)))}					| @ifsoln{Subtract the quotient of 6 and 3 from 24.}
+| @n | @math{(24 - 6) \div 3}			| @showsoln{(coe '(/ (- 24 6) 3))}					| @ifsoln{Find one-third of the difference of 24 and 6.}
+| @n | @math{\frac {1}{2} \times 100}	| @showsoln{(coe '(* 1/2 100))} 			| @ifsoln{Find half of 100.}
+| @n | @math{(\frac {1}{2} \times 100) + 10} |@showsoln{(coe '(+ (* 1/2 100) 10))}	| @ifsoln{Find the sum of 10 and half of 100.}
+| @n | @math{\frac {1}{2} \times (100 + 10)}	|@showsoln{(coe '(* 1/2 (+ 100 10)))} | @ifsoln{Find half the sum of 100 and 10.}
+|===
+

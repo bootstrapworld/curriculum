@@ -1,0 +1,51 @@
+= Translating (Absolute Value & Opposite)
+
+++++
+<style>
+table {grid-auto-rows: 1fr;}
+</style>
+++++
+
+
+Each row represents a single arithmetic expression, written in three different forms. Fill in the empty spaces so that all three forms represent the same expression.
+
+[.FillVerticalSpace, cols="^.^1a,^.^4a,^.^4a,^.^4a", stripes="none", options="header"]
+|===
+| 	 | Circle of Evaluation	| Words | Math
+
+
+| @n
+| @show{(coe '(negate 20))}
+| the opposite of @math{20}
+| @ifsoln{@math{-20}}
+
+| @n
+| @showsoln{(coe '(abs 20))}
+| @ifsoln{the absolute value of @math{20}}
+| @math{ \| 20 \|}
+
+| @n
+| @show{(coe '(abs (negate 20)))}
+| @ifsoln{the absolute value of the opposite of @math{20}}
+| @ifsoln{@math{ \| -20 \|}}
+
+| @n
+| @showsoln{(coe '(negate (negate 20)))}
+| @ifsoln{the opposite of the opposite of @math{20}}
+| @math{- (-20)}
+
+| @n
+| @showsoln{(coe '(negate (abs 20)))}
+| the opposite of the absolute value of @math{20}
+| @ifsoln{@math{ - \| 20 \|}}
+
+
+| @n
+| @show{(coe '(negate (abs -20)))}
+| @ifsoln{the opposite of the absolute value of @math{-20}}
+| @ifsoln{@math{-\|- 20 \|}}
+
+
+|===
+
+
