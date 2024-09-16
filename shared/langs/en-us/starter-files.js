@@ -356,9 +356,24 @@ const DSBasics = {
     },
     "codap": {
       "url": "https://docs.google.com/spreadsheets/d/1DYVHT7SSjnoDp4MQ80Z1qZSqFdEIlR8Gd20eMx9f1JA"
-      }
     }
   }
+}
+
+const AI = {
+  "spell-checker": {
+    "title": "Spell Checker Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1U8b-lTUhZ9xyrlNsMmRNZwffnwDsbhi3&v=3ddb1dd"
+      }
+    },
+  "plagiarism": {
+    "title": "Plagiarism Detection Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=1gEdijEF5e6PEUIOpoY8zIpM4Ovgj5VCP&v=e8968a4"
+    }
+  }
+}
 
 const MoreDS = {
   "fair-coins": {
@@ -1340,6 +1355,7 @@ const allStarterFiles = {
   ...Projects, 
   ...Alg2, 
   ...Reactive,
+  ...AI,
   ...Assessments 
 }
 
