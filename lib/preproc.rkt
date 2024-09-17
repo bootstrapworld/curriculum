@@ -178,6 +178,12 @@
             (read-json i)))
         '())))
 
+(define *assessments*
+  (let ([assessments-file (format "distribution/~a/learning-objectives-dict.js" *natlang*)])
+    (if (file-exists? assessments-file)
+        (call-with-input-file assessments-file read-json)
+        '())))
+
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
 
@@ -1910,6 +1916,12 @@
                                                                   (cons styled-link-output
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
+                          [(string=? directive "assessment")
+                            (let* ([lbl (string->symbol (read-group i directive))]
+                                   [c (hash-ref *assessments* lbl #f)])
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                    [else (display lbl o)]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]

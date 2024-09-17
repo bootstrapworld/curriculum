@@ -17,6 +17,7 @@ initialization:
 	@mkdir -p distribution/$(NATLANG)/lib/.cached
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
 	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
+	@$(CP) -upr $(PROGDIR)/learning*.js distribution/$(NATLANG)
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
