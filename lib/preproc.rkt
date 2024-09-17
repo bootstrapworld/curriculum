@@ -179,9 +179,15 @@
         '())))
 
 (define *assessments*
-  (let ([assessments-file (format "distribution/~a/learning-objectives-dict.js" *natlang*)])
+  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
         (call-with-input-file assessments-file read-json)
+        '())))
+
+(define *learning-objectives*
+  (let ([learning-objectives-file (format "distribution/~a/learning-objectives.js" *natlang*)])
+    (if (file-exists? learning-objectives-file)
+        (call-with-input-file learning-objectives-file read-json)
         '())))
 
 (define *starter-files-used* '())
@@ -1919,6 +1925,12 @@
                           [(string=? directive "assessment")
                             (let* ([lbl (string->symbol (read-group i directive))]
                                    [c (hash-ref *assessments* lbl #f)])
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                    [else (display lbl o)]))]
+                          [(string=? directive "learning-objective")
+                            (let* ([lbl (string->symbol (read-group i directive))]
+                                   [c (hash-ref *learning-objectives* lbl #f)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
                                     [else (display lbl o)]))]
