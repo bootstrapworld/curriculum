@@ -181,7 +181,10 @@
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
-        (call-with-input-file assessments-file read-json)
+        (call-with-input-file assessments-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
         '())))
 
 (define *learning-objectives*
@@ -1923,11 +1926,19 @@
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessment")
-                            (let* ([lbl (string->symbol (read-group i directive))]
-                                   [c (hash-ref *assessments* lbl #f)])
-                              (cond [(not c)
-                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                    [else (display lbl o)]))]
+                           (let* ([lbl (string->symbol (read-group i directive))]
+                                  [c (hash-ref *assessments* lbl #f)])
+                             (cond [(not c)
+                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [else
+                                     (let* ([urls (hash-ref c 'urls #f)]
+                                            [p (and urls (hash-ref urls *proglang-sym* #f))])
+                                       (cond [(not p)
+                                              (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                                      (errmessage-context) directive
+                                                      lbl *proglang*)]
+                                             [else
+                                               (display p o)]))]))]
                           [(string=? directive "learning-objective")
                             (let* ([lbl (string->symbol (read-group i directive))]
                                    [c (hash-ref *learning-objectives* lbl #f)])
