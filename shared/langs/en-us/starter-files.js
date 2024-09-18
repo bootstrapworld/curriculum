@@ -915,6 +915,15 @@ const EarlyMath = {
 }
 
 const Projects = {
+  "snack": {
+    "title": "Snack Data Starter File Template",
+    "pyret": {
+      "url": " https://code.pyret.org/editor#share=1ICsiClgSNswiYkvD4f0dNu4A1PU_ot6r&v=3e602e3"
+    },
+    "codap": {
+      "url": "https://codap.concord.org/app/static/dg/en/cert/index.html"
+    }
+  },
   "functions-study": {
     "title": "Functions Study Starter File",
     "pyret": {
@@ -924,7 +933,7 @@ const Projects = {
       "url": "https://www.wescheme.org/view?publicId=44k3iR5urE"
     }
   },
-  "my-function": {
+   "my-function": {
     "title": "My Function Starter File",
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1imHHu2-uAXrjQ1I1gGAEjTYfifQ6P65c"
