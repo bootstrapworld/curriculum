@@ -11,7 +11,7 @@ const DataScience = {
       "...key from the learningObjective dictionary"...,
       "...key from the learningObjective dictionary"...,
       "...key from the learningObjective dictionary"...,
-      ]
+      ],
     "urls" : {
       "pyret" : "...some url...",
       "wescheme" : "...some url...",
