@@ -52,14 +52,14 @@ Students explore the covid dataset, focusing on the growth in positive test case
 
 === Launch
 
-Starting in 2019, Covid spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
+Starting in 2019, COVID-19 spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
 
 Even in 2020, very few people could have predicted the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
 
 @slidebreak
 
 @lesson-instruction{
-- We're going to look at the data for Rhode Island, Maine, Vermont, New Hampshire, Massachusetts, and Connecticut - all the states formed out of what the English called "New England".
+- We're going to look at the daily total of confirmed, positive cases for Rhode Island, Maine, Vermont, New Hampshire, Massachusetts, and Connecticut - all the states formed out of what the English called "New England".
 - Open the @starter-file{alg2-covid}, which imports data from a spreadsheet that looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
 - From the File menu, select "Save a Copy", and click "Run."
 - Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
@@ -71,9 +71,11 @@ This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4A
 
 And even within New England, we've _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
 
-For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. This is _polynomial_ behavior, where a linear term dominates when the exponential term is small.
+For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. A purely exponential function will under-predict the growth during this time period by that it adds enormous friction to the modeling goal of this unit!
 
-Based on the strength of your students, we encourage you to choose the data that best fits your learning goals. You may also wish to return to full dataset later on, once students are comfortable with polynomial functions.
+(The functions necessary to model this kind of growth have multiple terms showing different kinds of growth, and are just out of reach for students right now. Students can _return_ to this unit once they've learned about @lesson-link{exploring-periodic-models/#_hybrid_models, hybrid models} in later lessons.)
+
+Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
 
 To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`
 }
@@ -108,7 +110,7 @@ Complete @printable-exercise{linear-models.adoc}.
 @slidebreak
 
 @QandA{
-@Q{Did you see a correlation in this dataset?}
+@Q{Did you see a correlation between date and the total number of confirmed, positive cases in this dataset?}
 @A{Yes}
 @Q{Describe its @vocab{form}, @vocab{direction}, and @vocab{strength}.}
 @A{Sample response: It's definitely strong and appears to be non-linear. Non-linear functions don't usually have direction, so not sure about that one.}
@@ -125,7 +127,7 @@ Linear models capture _straight-line relationships_, where one quantity varies p
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/MA-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve, almost all of the points bulge out below our line of best fit. If we make the line hit the bottom of the curve, all the points fall above it. Splitting the difference (orange line) is better than both of those options, and we might even get a pretty small @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  *It's growing too fast to be fit with a linear model that grows at a constant rate!*
+@right{@image{images/MA-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our line of best fit. If we make the line hit the _bottom_ of the curve, all the points fall above it (bottom line). Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them.  *The number of positive cases is growing too fast to be fit with a linear model that grows at a constant rate!*
 
 @slidebreak
 
@@ -196,7 +198,7 @@ Let's review what we know about the behavior of the models we've seen so far:
 
 @right{@image{images/difference-table-exponential-1.png}}When we calculate the growth between the y-values, we can immediately tell it's not linear. When we try to calculate the "growth of the growth", we see that it's not quadratic either. +
 {empty} +
-If we calculate the "growth of the _growth of the growth_" (shown in green)... we still haven't found a constant... but we should notice that each of these "growths" just repeats the original pattern of y-values! +
+If we calculate the "growth of the _growth of the growth_" (shown in green)... we still haven't found a constant... but we should notice that each of these "growths" just repeats the original pattern of y-values! We could calculate the third difference, fourth difference, and so on - and never reach a stopping point. +
 {empty} +
 Exponential functions grow so rapidly that looking for "what is _added_ to y?" isn't helpful at all. +
 {empty} +
@@ -220,12 +222,12 @@ In order to talk about the growth of an exponential function we need to identify
 
 === Investigate
 
-Exponential Functions can be written in the form: @math{f(x) = ab^(x-h) + k}
+Exponential Functions can be written in the form: @math{f(x) = ab^{(x-h)} + k}
 
 Most textbooks only present exponential functions with a horizontal shift of zero. When h=0, we can safely remove it and use this simplified form of the equation: @math{f(x) = ab^x + k}.
 
 @teacher{
-@opt{Advance your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("How does horizontal shift transform exponential functions?") and give students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to exponential functions.
+@opt{Advance your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("How does horizontal shift transform exponential functions?") and give students a chance to reinforce their understanding of @math{h}-values from other models by connecting it to exponential functions.
 }}
 
 Let's explore what each coefficient of @math{f(x) = ab^x + k} means!
@@ -267,9 +269,9 @@ _And, when raised to a fractional power, negative values of @math{b} might also 
 
 | @center{@math{b > 1}} 
 
-- When the base is *larger* than 1, it's called the @vocab{growth factor}, since it determines how quickly the function grows.  
+- When the base is *larger* than 1, it's called the @vocab{growth factor}, since it determines how quickly the output of function grows.
 - The function will start flat and then grow by the "percentage greater than 1". 
-- A base of 1.25 (or @math{1 + 0.25}) will grow by 25% each time @math{x} grows by 1. 
+- A base of @math{1.25} (or @math{1 + 0.25}) will grow by @math{25%} each time @math{x} grows by 1.
 
 | @center{@math{b = 1}} 
 
@@ -277,16 +279,16 @@ _And, when raised to a fractional power, negative values of @math{b} might also 
 
 | @center{@math{0 < b < 1}} 
 
-- When the base is *smaller* than 1, it's called the @vocab{decay factor}, since it determines how quickly the function shrinks.
+- When the base is *smaller* than 1, it's called the @vocab{decay factor}, since it determines how quickly the output of the function drops.
 - The function will drop quickly by the "amount less than 1" and then level out close to a horizontal line.
-- A base of 0.25 (or @math{1 - 0.75}) will shrink by 75% each time @math{x} grows by 1. 
+- A base of @math{0.25} (or @math{1 - 0.75}) will shrink by @math{75%} each time @math{x} grows by 1.
 |===
 
 @slidebreak
 
 ==== Vertical Shift...and Horizontal Asymptote @math{k}
 
-The equation of the horizontal that an exponential function starts or ends close to will always be @math{y = k}. This horizontal line is called an @vocab{asymptote}.
+The equation of the horizontal line that an exponential function approaches will always be @math{y = k}. This horizontal line is called an @vocab{asymptote}.
 
 *Adjusting @math{k} shifts the asymptote up and down*, along with the rest of the exponential curve that approaches it.
 
@@ -321,9 +323,26 @@ For example, the y-intercept for the function below will not be 3 (as you might 
 
 *@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*
 
-- Most cells (e.g. bacteria, the cells in a growing fetus, etc) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, which will become 8, then 16, and so on.
-- Unstable particles degrade into stable particles over time, emitting radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the particles in a sample to become stable, leaving behind the other half as radiation-emitting material.
-- Money in a savings account grows by a certain percentage each year. 3% growth on $100 would turn into $103. The next year that would become $106.09. And the next year $109.27. Every year there's a little more money to grow. If you start saving early, the account will grow into quite a lot more money down the road.
+@QandA{
+Suppose you deposit $100 in a savings account, earning 3% interest each year.
+@Q{How much money would be there after 1 year?}
+@A{$103, because 3% of $100 is $3}
+@Q{How much is there after 2 years?}
+@A{$106.90, because 3% of $103 is $3.90}
+@Q{After 3 years?}
+@A{$109.27}
+}
+
+Every year there's a little more money to grow, and the total grows faster than the year before. If you start saving early, that $100 will grow into a lot more money down the road!
+
+@slidebreak
+
+@ifslide{*@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*}
+
+- Most cells (e.g. bacteria, the cells in a growing fetus, etc.) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, which will become 8, then 16, and so on. +
+
+- Unstable atomic nucleus decay into stable nuclei over time, emitting ionizing radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the atomic nuclei in a radioactive sample to decay.
+
 
 @slidebreak
 
