@@ -12,11 +12,15 @@ const DataScience = {
       "...key from the learningObjective dictionary...",
       "...key from the learningObjective dictionary...",
       ],
-    "urls" : {
-      "pyret" : "...some url...",
-      "wescheme" : "...some url...",
-      "codap" : "...some url...",      
-    }
+    "pyret" : {
+      "url": "...some url...",
+    },
+    "wescheme" : {
+      "url": "...some url...",
+    },
+    "codap" : {
+      "url": "...some url...",
+    },
   },
 };
  
@@ -28,11 +32,15 @@ const Algebra = {
       "...key from the learningObjective dictionary...",
       "...key from the learningObjective dictionary...",
       ],
-    "urls" : {
-      "pyret" : "...some url...",
-      "wescheme" : "...some url...",
-      "codap" : "...some url...",      
-    }
+    "pyret" : {
+      "url": "...some url...",
+    },
+    "wescheme" : {
+      "url": "...some url...",
+    },
+    "codap" : {
+      "url": "...some url...",
+    },
   },
 };
 

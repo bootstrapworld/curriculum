@@ -1927,18 +1927,24 @@
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessment")
                            (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *assessments* lbl #f)])
+                                  [c (hash-ref *assessments* lbl #f)]
+                                  [title (and c (hash-ref c 'title #f))]
+                                  [url (and c (hash-ref c 'url #f))]
+                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
+                             (when pl-specific
+                               (let ([x (hash-ref pl-specific 'title #f)])
+                                 (when x (set! title x)))
+                               (let ([x (hash-ref pl-specific 'url #f)])
+                                 (when x (set! url x))))
                              (cond [(not c)
                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
                                    [else
-                                     (let* ([urls (hash-ref c 'urls #f)]
-                                            [p (and urls (hash-ref urls *proglang-sym* #f))])
-                                       (cond [(not p)
-                                              (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                                      (errmessage-context) directive
-                                                      lbl *proglang*)]
-                                             [else
-                                               (display p o)]))]))]
+                                     (cond [(not url)
+                                            (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                                    (errmessage-context) directive
+                                                    lbl *proglang*)]
+                                           [else
+                                             (display url o)])]))]
                           [(string=? directive "learning-objective")
                             (let* ([lbl (string->symbol (read-group i directive))]
                                    [c (hash-ref *learning-objectives* lbl #f)])
