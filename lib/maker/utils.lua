@@ -82,6 +82,10 @@ function string_to_table(s)
   return t
 end
 
+function string_titlecase(s)
+  return s:gsub('(%w)(%w+)', function(a, b) return string.upper(a) .. b end)
+end
+
 function read_file_lines(f)
   -- return a table whose elements are the lines in the file
   local i = io.open(f)

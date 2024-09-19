@@ -1,27 +1,52 @@
 = authoring requirements
 
-When a new Pioneer is added, please also add their birthday to our Social Media Calendar so that we have an annual date for sharing their poster.
+== IMAGES:
 
-Make sure to include both last names for Hispanic pioneers. We got feedback about that on twitter.
+- Pioneer Thumbs need to be 250 x 250 
+- Main Images work best somewhere around 1570 x 1280
 
-Pioneer Thumbs are 250x250
 
-Names need to be changed:
+=== credits:
 
-- in the title of the adoc
-- inside the adoc (both in the title and the image name)
-- in the `pioneer-thumbs` file
-- in the `images` file
-- in `pages/comuting-pioneers.adoc`
+- Should be listed on the poster. There is a section for them in each name-of-pioneer.adoc file
+- Include source and licenses that allows for use whenever possible.
+- Suggested text when not provided by image copyright holder "Photo courtesy of xyz cartoonized using vanceai.com"
 
-Images were processed using: 
+
+=== were processed using: 
 
 - vanceai.com ("photo enhancer tools")
 - use "toongineer cartoonizer", cartoon mode
 - backgrounds removed using picwish.com
 
-Credits:
 
-- Should be listed on the poster. There is a section for them in each name-of-pioneer.adoc file
-- Include source and licenses that allows for use whenever possible.
-- Suggested text when not provided by image copyright holder "Photo courtesy of xyz cartoonized using vanceai.com"
+
+== NAMES 
+
+Make sure to include both last names for Hispanic pioneers. We got feedback about that on twitter.
+
+
+=== Need to be changed:
+
+- in the title of the adoc
+- inside the adoc (both in the title and the image name)
+- in the `pioneer-thumbs` file
+- in the `images` file
+
+
+=== Need to be added:
+
+- in `pages/fragments/posters-fragment.adoc`
+- **Note: Only the first 30 images will appear on the page in the printed workbook, so::**
+   * Regardless of whether or not it is important for the pioneer you are adding to end up on the workbook page, you need to add another row to this section of the file so that the workbook page doesn't overflow
+		  @media print {
+			.thumbnailList li img { max-width: 125px; }
+			.thumbnailList li:nth-last-child(1) { display: none; }
+			.thumbnailList li:nth-last-child(2) { display: none; }
+		}
+	* If you add a pioneer and you definitely want it to appear on the workbook page, you need to move another pioneer to the bottom of the list.
+
+
+
+
+
