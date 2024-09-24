@@ -188,9 +188,12 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learning-objectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/learning-objectives-dict.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
-        (call-with-input-file learning-objectives-file read-json)
+        (call-with-input-file learning-objectives-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
         '())))
 
 (define *starter-files-used* '())

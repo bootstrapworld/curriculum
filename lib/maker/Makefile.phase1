@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files assessments
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files assessments learning-objectives
 
 ###############################################################################
 
@@ -142,6 +142,13 @@ assessments: distribution/$(NATLANG)/assessments.js
 distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js
 	@echo ➤ Build $@
 	@node $< $@
+
+###############################################################################
+
+learning-objectives: distribution/$(NATLANG)/learning-objectives-dict.js
+
+distribution/$(NATLANG)/learning-objectives-dict.js: $(PROGDIR)/learning-objectives-dict.js
+	@cp -p $< $@
 
 ###############################################################################
 
