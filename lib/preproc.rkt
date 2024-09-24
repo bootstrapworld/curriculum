@@ -178,6 +178,24 @@
             (read-json i)))
         '())))
 
+(define *assessments*
+  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+    (if (file-exists? assessments-file)
+        (call-with-input-file assessments-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
+(define *learning-objectives*
+  (let ([learning-objectives-file (format "distribution/~a/learning-objectives-dict.js" *natlang*)])
+    (if (file-exists? learning-objectives-file)
+        (call-with-input-file learning-objectives-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
 
@@ -1910,6 +1928,32 @@
                                                                   (cons styled-link-output
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
+                          [(string=? directive "assessment")
+                           (let* ([lbl (string->symbol (read-group i directive))]
+                                  [c (hash-ref *assessments* lbl #f)]
+                                  [title (and c (hash-ref c 'title #f))]
+                                  [url (and c (hash-ref c 'url #f))]
+                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
+                             (when pl-specific
+                               (let ([x (hash-ref pl-specific 'title #f)])
+                                 (when x (set! title x)))
+                               (let ([x (hash-ref pl-specific 'url #f)])
+                                 (when x (set! url x))))
+                             (cond [(not c)
+                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [else
+                                     (cond [(not url)
+                                            (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                                    (errmessage-context) directive
+                                                    lbl *proglang*)]
+                                           [else
+                                             (display url o)])]))]
+                          [(string=? directive "learning-objective")
+                            (let* ([lbl (string->symbol (read-group i directive))]
+                                   [c (hash-ref *learning-objectives* lbl #f)])
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                    [else (display lbl o)]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]

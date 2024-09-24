@@ -8,15 +8,19 @@ const DataScience = {
   "histograms": {
     "title": "Making and Interpreting Histograms",
     "learningObjectives" : [
-      "...key from the learningObjective dictionary"...,
-      "...key from the learningObjective dictionary"...,
-      "...key from the learningObjective dictionary"...,
-      ]
-    "urls" : {
-      "pyret" : "...some url...",
-      "wescheme" : "...some url...",
-      "codap" : "...some url...",      
-    }
+      "...key from the learningObjective dictionary...",
+      "...key from the learningObjective dictionary...",
+      "...key from the learningObjective dictionary...",
+      ],
+    "pyret" : {
+      "url": "...some url...",
+    },
+    "wescheme" : {
+      "url": "...some url...",
+    },
+    "codap" : {
+      "url": "...some url...",
+    },
   },
 };
  
@@ -24,15 +28,19 @@ const Algebra = {
   "writing-examples": {
     "title": "Writing Examples from Word Problems",
     "learningObjectives" : [
-      "...key from the learningObjective dictionary"...,
-      "...key from the learningObjective dictionary"...,
-      "...key from the learningObjective dictionary"...,
-      ]
-    "urls" : {
-      "pyret" : "...some url...",
-      "wescheme" : "...some url...",
-      "codap" : "...some url...",      
-    }
+      "...key from the learningObjective dictionary...",
+      "...key from the learningObjective dictionary...",
+      "...key from the learningObjective dictionary...",
+      ],
+    "pyret" : {
+      "url": "...some url...",
+    },
+    "wescheme" : {
+      "url": "...some url...",
+    },
+    "codap" : {
+      "url": "...some url...",
+    },
   },
 };
 
