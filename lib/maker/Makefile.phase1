@@ -131,10 +131,9 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 starter-files: distribution/$(NATLANG)/starter-files.js
 
-distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files
 	@echo ➤ Build $@
-	@node $< $@
-
+	@node $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files distribution/$(NATLANG)/starter-files.js
 ###############################################################################
 
 assessments: distribution/$(NATLANG)/assessments.js
@@ -142,7 +141,6 @@ assessments: distribution/$(NATLANG)/assessments.js
 distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js
 	@echo ➤ Build $@
 	@node $< $@
-
 ###############################################################################
 
 learning-objectives: distribution/$(NATLANG)/learning-objectives-dict.js
