@@ -265,8 +265,11 @@ var learningObjectives = {
   "Read and generate dot plots and bar charts from the Animals Dataset.": {
     "text":"Read and generate dot plots and bar charts from the Animals Dataset."
   },
-  "Recognize that we create data visualizations based on the _type_ of data we're working with - categorical or numeric, one variable or two.* Identify examples of two data types, Numbers and Strings": {
-    "text":"Recognize that we create data visualizations based on the _type_ of data we're working with - categorical or numeric, one variable or two.* Identify examples of two data types, Numbers and Strings"
+  "Recognize that we create data visualizations based on the _type_ of data we're working with - categorical or numeric, one variable or two.": {
+    "text":"Recognize that we create data visualizations based on the _type_ of data we're working with - categorical or numeric, one variable or two."
+  },
+  "Identify examples of two data types, Numbers and Strings": {
+    "text" : "Identify examples of two data types, Numbers and Strings"
   },
   "Practice writing Numbers and Strings": {
     "text":"Practice writing Numbers and Strings"
@@ -514,26 +517,38 @@ var learningObjectives = {
   "Use distribution to efficiently complete mental computations.- Develop equivalent arithmetic expressions.": {
     "text":"Use distribution to efficiently complete mental computations.- Develop equivalent arithmetic expressions."
   },
-  "Simplify complex arithmetic expressions to a single value.* Translate between words, mathematical expressions, and Circles of Evaluation.": {
-    "text":"Simplify complex arithmetic expressions to a single value.* Translate between words, mathematical expressions, and Circles of Evaluation."
+  "Simplify complex arithmetic expressions to a single value.": {
+    "text":"Simplify complex arithmetic expressions to a single value."
+  },
+  "Translate between words, mathematical expressions, and Circles of Evaluation.": {
+    "text": "Translate between words, mathematical expressions, and Circles of Evaluation."
   },
   "Evaluate expressions involving exponents and one other operation.": {
     "text":"Evaluate expressions involving exponents and one other operation."
   },
-  "Evaluate expressions involving exponents and negatives.* Determine the order in which we negate and apply exponents in expressions both with and without grouping symbols.": {
-    "text":"Evaluate expressions involving exponents and negatives.* Determine the order in which we negate and apply exponents in expressions both with and without grouping symbols."
+  "Evaluate expressions involving exponents and negatives.": {
+    "text":"Evaluate expressions involving exponents and negatives."
+  },
+  "Determine the order in which we negate and apply exponents in expressions both with and without grouping symbols.": {
+    "text": "Determine the order in which we negate and apply exponents in expressions both with and without grouping symbols."
   },
   "Evaluate expressions involving exponents and negative values.": {
     "text":"Evaluate expressions involving exponents and negative values."
   },
-  "Evaluate exponent expressions with negatives and variables.* Recognize that multiplying and dividing by one does not affect the value of an expression.": {
-    "text":"Evaluate exponent expressions with negatives and variables.* Recognize that multiplying and dividing by one does not affect the value of an expression."
+  "Evaluate exponent expressions with negatives and variables.": {
+    "text":"Evaluate exponent expressions with negatives and variables."
+  },
+  "Recognize that multiplying and dividing by one does not affect the value of an expression.": {
+    "text": "Recognize that multiplying and dividing by one does not affect the value of an expression."
   },
   "Recognize that adding or subtracting zero does not affect the value of an expression.": {
     "text":"Recognize that adding or subtracting zero does not affect the value of an expression."
   },
-  "Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words.* Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}.": {
-    "text":"Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words.* Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}."
+  "Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words.": {
+    "text":"Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words."
+  },
+  "Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}." : {
+    "text":"Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}."
   },
   "Acknowledge _flexibility_ in the Order of Operations.": {
     "text":"Acknowledge _flexibility_ in the Order of Operations."
@@ -544,8 +559,11 @@ var learningObjectives = {
   "Translate between verbal expressions, Circles of Evaluation, and mathematical expressions.": {
     "text":"Translate between verbal expressions, Circles of Evaluation, and mathematical expressions."
   },
-  "Recognize when expressions in words are ambiguous.* Determine if numerical expressions are equivalent.": {
-    "text":"Recognize when expressions in words are ambiguous.* Determine if numerical expressions are equivalent."
+  "Recognize when expressions in words are ambiguous.": {
+    "text":"Recognize when expressions in words are ambiguous."
+  },
+  "Determine if numerical expressions are equivalent.": {
+    "text": "Determine if numerical expressions are equivalent."
   },
   "Determine if algebraic expressions are equivalent.": {
     "text":"Determine if algebraic expressions are equivalent."
