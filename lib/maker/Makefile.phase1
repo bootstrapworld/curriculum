@@ -134,6 +134,7 @@ starter-files: distribution/$(NATLANG)/starter-files.js
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files
 	@echo ➤ Build $@
 	@node $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files distribution/$(NATLANG)/starter-files.js
+
 ###############################################################################
 
 assessments: distribution/$(NATLANG)/assessments.js
@@ -143,10 +144,11 @@ distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js
 	@node $< $@
 ###############################################################################
 
-learning-objectives: distribution/$(NATLANG)/learning-objectives-dict.js
+learning-objectives: distribution/$(NATLANG)/learning-objectives.js
 
-distribution/$(NATLANG)/learning-objectives-dict.js: $(PROGDIR)/learning-objectives-dict.js
-	@cp -p $< $@
+distribution/$(NATLANG)/learning-objectives.js: $(PROGDIR)/learning-objectives.js $(PROGDIR)/learning-objectives
+	@echo ➤ Build $@
+	@node $(PROGDIR)/learning-objectives.js $(PROGDIR)/learning-objectives distribution/$(NATLANG)/learning-objectives.js
 
 ###############################################################################
 
