@@ -1953,7 +1953,9 @@
                                    [c (hash-ref *learning-objectives* lbl #f)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                    [else (display lbl o)]))]
+                                    [else 
+                                      (display "- " o)
+                                      (display lbl o)]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]

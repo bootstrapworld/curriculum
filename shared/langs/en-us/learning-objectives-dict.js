@@ -283,8 +283,14 @@ var learningObjectives = {
   "Identify examples of Booleans and recognize what makes them unique": {
     "text":"Identify examples of Booleans and recognize what makes them unique"
   },
-  "Write Purpose Statements and expressions to be used in Transformers- define functions that consume rows and produce meaningful images": {
-    "text":"Write Purpose Statements and expressions to be used in Transformers- define functions that consume rows and produce meaningful images"
+  "Teams benefit from diversity.": {
+    "text":"Teams benefit from diversity."
+  },
+  "There are lots of programming jobs, but not enough programmers to fill them.": {
+    "text":"There are lots of programming jobs, but not enough programmers to fill them."
+  },
+  "Write Purpose Statements and expressions to be used in Transformers": {
+    "text":"Write Purpose Statements and expressions to be used in Transformers"
   },
   "use helper functions to define custom pie and bar-charts, histograms, and scatter plots": {
     "text":"use helper functions to define custom pie and bar-charts, histograms, and scatter plots"
@@ -433,6 +439,18 @@ var learningObjectives = {
   "Take random samples from a population": {
     "text":"Take random samples from a population"
   },
+  "Let's use patterns to write some functions.": {
+    "text": "Let's use patterns to write some functions."
+  },
+  "Let's learn how conditionals work in programming.": {
+    "text": "Let's learn how conditionals work in programming."
+  },
+  "Let's learn how piecewise functions work in math.": {
+    "text": "Let's learn how piecewise functions work in math."
+  },
+  "Let's learn how functions get defined!": {
+    "text": "Let's learn how functions get defined!"
+  },
   "consider explanatory and response roles of variables": {
     "text":"consider explanatory and response roles of variables"
   },
@@ -484,6 +502,9 @@ var learningObjectives = {
   "Define absolute value as a number's distance from zero on the number line.": {
     "text":"Define absolute value as a number's distance from zero on the number line."
   },
+  "define functions that consume rows and produce meaningful images":{
+    "text":"define functions that consume rows and produce meaningful images"
+  },
   "Recognize that two numbers are referred to as 'opposites' if they are the same distance from zero.": {
     "text":"Recognize that two numbers are referred to as 'opposites' if they are the same distance from zero."
   },
@@ -514,8 +535,11 @@ var learningObjectives = {
   "Apply the Distributive Property to expressions with numbers and variables.": {
     "text":"Apply the Distributive Property to expressions with numbers and variables."
   },
-  "Use distribution to efficiently complete mental computations.- Develop equivalent arithmetic expressions.": {
-    "text":"Use distribution to efficiently complete mental computations.- Develop equivalent arithmetic expressions."
+  "Use distribution to efficiently complete mental computations.": {
+    "text":"Use distribution to efficiently complete mental computations."
+  },
+  "Develop equivalent arithmetic expressions.": {
+    "text": "Develop equivalent arithmetic expressions."
   },
   "Simplify complex arithmetic expressions to a single value.": {
     "text":"Simplify complex arithmetic expressions to a single value."
@@ -547,8 +571,8 @@ var learningObjectives = {
   "Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words.": {
     "text":"Demonstrate their understanding of the Identity Property with and without variables via Circles of Evaluation, numeric expressions, and words."
   },
-  "Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}." : {
-    "text":"Recognize that dividing by @math{x} is the same as multiplying by @math{\frac{1}{x}}."
+  "Recognize that dividing by @math{x} is the same as multiplying by @math{\\frac{1}{x}}." : {
+    "text":"Recognize that dividing by @math{x} is the same as multiplying by @math{\\frac{1}{x}}."
   },
   "Acknowledge _flexibility_ in the Order of Operations.": {
     "text":"Acknowledge _flexibility_ in the Order of Operations."
@@ -642,5 +666,20 @@ var learningObjectives = {
   },
   "share their completed video game with friends and family to play.": {
     "text":"share their completed video game with friends and family to play."
+  },
+  "Let's learn how to test the trustworthiness of a data analysis.": {
+    "text":"Let's learn how to test the trustworthiness of a data analysis."
+  },
+  "There are programmers of wide-ranging racial, ethnic, gender and sexual identities.": {
+    "text":"There are programmers of wide-ranging racial, ethnic, gender and sexual identities."
+  },
+  "Programming is creative and collaborative.": {
+    "text":"Programming is creative and collaborative."
+  },
+  "Programming is useful in a wide range of fields.": {
+    "text":"Programming is useful in a wide range of fields."
+  },
+  "People who wrote the sophisticated programs we use every day started out writing simple programs.":{
+    "text":"People who wrote the sophisticated programs we use every day started out writing simple programs."
   }
 }
