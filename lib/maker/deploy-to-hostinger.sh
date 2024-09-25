@@ -68,6 +68,7 @@ DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
 rm -fr \$DEPLOY_DIR
 mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
 rm \$DEPLOY_DIR/deploy-to-public_html.sh
+#chmod 755 \$HOME/public_html/materials/$SEMESTER_YEAR/\*/lessons/hoc-winter-parley/repartee
 EOF
 
 # exit
