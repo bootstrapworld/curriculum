@@ -15,10 +15,10 @@ if (fs.existsSync(jsDir)) {
   for (let i = 0; i < ff.length; i++) {
     let f = jsDir + '/' + ff[i];
     // console.log('f is', f);
-    if (!f.match(/\.js$/)) { continue; }
+    if (!f.match(/\.json$/)) { continue; }
     if (!fs.existsSync(f)) { continue; }
     // console.log('I');
-    f = f.replace(/\.js$/, '');
+    // f = f.replace(/\.js$/, '');
     // console.log('f now is', f);
     // console.log('II');
     let j = require(f);
