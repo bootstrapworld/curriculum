@@ -8,12 +8,20 @@
 ////
 @include{fragments/posters-fragment.adoc}
 ++++
+<style>
+#PrintInstructions { display: none; }
 
+@media print {
+	#PrintInstructions { display: inline; }
+	#OnscreenInstructions { display: none; }
+}
+
+</style>
 <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
 <script src="https://unpkg.com/downloadjs@1.4.7"></script>
 
 <span id="OnscreenInstructions">
-<strong>Click on any thumbnail below</strong> to read about the contributions of that pioneer and download a full-page, printable version of their poster! You can also:
+<strong>Click on any thumbnail below</strong> to read about the contributions of that pioneer and download a full-page, printable version of their poster! <i>Note: Pioneers marked with 🔰 are especially accessible for young learners.</i> You can also:
 
 <ul>
 <li>Download <a href="javascript:printPioneers('../')">all of our Posters</a> as a single PDF.</li>
@@ -38,15 +46,18 @@ The pioneers pictured below are featured in our Computing Needs All Voices lesso
 <script>
 	var list = document.createElement('ul');
 	list.className = "thumbnailList";
-
-	pioneers.forEach((p) => {
+	pioneers.forEach( ({name, accessible}) => {
 		var li = document.createElement('li');
-		var altText = p.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
-		li.innerHTML = `<a href="../pages/${p}.pdf"><img src="../pioneer-thumbs/${p}.png" alt="${altText}"></a>`;
+		if(accessible) { li.classList.add('accessible'); }
+		var altText = name.split('-').map(w => w[0].toUpperCase() + w.substring(1)).join(' ');
+		li.innerHTML = `<a href="../pages/${name}.pdf">
+			<img src="../pioneer-thumbs/${name}.png" alt="${altText}">
+		</a>`;
 		list.appendChild(li);
 	});
 	document.getElementById('thumbnails').appendChild(list);
 </script>
+
 <span id="PrintInstructions">
 We are in the process of expanding our collection of pioneers. If there's someone else whose work inspires you, please let us know at <a href="https://bit.ly/pioneer-suggestion">https://bit.ly/pioneer-suggestion</a>.
 </span>

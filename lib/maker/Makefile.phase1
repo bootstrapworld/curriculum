@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives
 
 ###############################################################################
 
@@ -128,11 +128,27 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-starter-files: distribution/$(NATLANG)/starter-files.js
+starterFiles: distribution/$(NATLANG)/starterFiles.js
 
-distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
+distribution/$(NATLANG)/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
 	@echo ➤ Build $@
-	@node $< $@
+	@node $+ $@
+
+###############################################################################
+
+assessments: distribution/$(NATLANG)/assessments.js
+
+distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+	@echo ➤ Build $@
+	@node $+ $@
+
+###############################################################################
+
+learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+
+distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+	@echo ➤ Build $@
+	@node $+ $@
 
 ###############################################################################
 

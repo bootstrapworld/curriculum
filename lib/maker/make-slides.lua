@@ -47,7 +47,7 @@ local course_string = 'Core'
 
 if lesson_superdir == 'Data-Science' then
   course_string = 'DS'
-elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Early Math' then
+elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Expressions-and-Equations' then
   course_string = 'Math'
 elseif lesson_superdir == 'Reactive' then
   course_string = 'R'
@@ -195,8 +195,11 @@ local function get_slides(lsn_plan_adoc_file)
           local arg = read_group(i, directive)
           imgIdx = imgIdx + 1
           if not inside_table_p then
-            if (not dont_count_image_p) and directive == 'image' then
+            if (not dont_count_image_p) then
               curr_slide.numimages = curr_slide.numimages + 1
+            end
+            if directive == 'centered-image' then
+              curr_slide.containscenter = true
             end
             curr_slide.text = curr_slide.text .. '@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}'
           end
@@ -225,7 +228,7 @@ local function get_slides(lsn_plan_adoc_file)
           coeIdx = coeIdx + n
           txt2, n = txt2:gsub('@image{', 'z')
           imgIdx = imgIdx + n
-          txt2, n = txt2:gsub('@centered-image{', 'z')
+          txt2, n = txt2:gsub('@centered%-image{', 'z')
           imgIdx = imgIdx + n
         elseif directive == 'ifproglang' then
           local pls = read_group(i, directive)
@@ -306,15 +309,8 @@ local function get_slides(lsn_plan_adoc_file)
           arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
-          if directive == 'image' then
-            -- dead?
-            if not inside_table_p and not dont_count_image_p then
-              curr_slide.numimages = curr_slide.numimages + 1
-            end
-          elseif directive == 'center' then
-            if not inside_table_p then
-              curr_slide.containscenter = true
-            end
+          if directive == 'center' then
+            curr_slide.containscenter = true
           end
           curr_slide.text = curr_slide.text .. c .. directive
         end
@@ -350,7 +346,8 @@ local function get_slides(lsn_plan_adoc_file)
             -- print('new_header', new_header)
             -- print('curr_slide.level', curr_slide.level)
             if (new_level == 3) then
-              insert_slide_break()
+              curr_slide.text = curr_slide.text .. '\n\n**' .. new_header .. '**\n\n'
+              -- insert_slide_break()
             elseif ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
@@ -483,8 +480,8 @@ local function make_slides_file(lplan_file, slides_file)
           l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
           l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
           l1 = l1:gsub('%*(%S)%*', '__%1__')
-          l1 = l1:gsub(' %+$', '\n')
-          l1 = l1:gsub('^%+$', '\n')
+          l1 = l1:gsub(' %+$', '') -- would <br> work here?
+          l1 = l1:gsub('^%+$', '') -- ditto
           l1 = l1:gsub('{two%-colons}', '::')
           l1 = l1:gsub('{empty}', '')
           l1 = l1:gsub('{plus}', '+')

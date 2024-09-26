@@ -5,10 +5,20 @@
 	list-style: none;
 	display: inline-block;
 	margin: 2px;
+	position: relative;
 }
 .thumbnailList li img {
 	max-width: 200px;
 }
+
+.thumbnailList li.accessible::after {
+	content: '🔰';
+	top: 0px;
+    left: 0px;
+    position: absolute;
+    font-size: 24px;
+}
+
 .thumbnailList li img:hover {
 	box-shadow: black 2px 2px 4px;
 }
@@ -30,58 +40,62 @@
 }
 #text, #statusbar { position: absolute; top: 0; left: 0; }
 #statusbar { width: 0%; height: 100%; background: #75328A55; z-index: -1; }
-#PrintInstructions { display: none; }
 
 @media print {
-	#PrintInstructions { display: inline; }
-	#OnscreenInstructions { display: none; }
 	.thumbnailList li img { max-width: 125px; }
+	.thumbnailList li:nth-last-child(1) { display: none; }
+	.thumbnailList li:nth-last-child(2) { display: none; }
 }
 
 </style>
 <script>
 var pioneers = [
 	// on web these display 3 to a row. in workbook they display 5 to a row.
-	"guillermo-camarena",
-	"vicki-hanson",
-	"mark-dean",
-	"farida-bedwei",
-	"ajay-bhatt",
+	{"name":"guillermo-camarena"},
+	{"name":"vicki-hanson"},
+	{"name":"mark-dean", accessible: true},
+	{"name":"farida-bedwei"},
+	{"name":"ajay-bhatt", accessible: true},
 
 	// row break in workbook
-	"thomas-david-petite",
-	"timnit-gebru",
-	"ellen-ochoa",
-	"alan-turing",
-	"ruchi-sanghvi",
+	{"name":"thomas-david-petite"},
+	{"name":"timnit-gebru"},
+	{"name":"ellen-ochoa", accessible: true},
+	{"name":"alan-turing"},
+	{"name":"ruchi-sanghvi"},
 
 	// row break in workbook
-	"joy-buolamwini",
-	"audrey-tang",
-	"robert-moses",
-	"chieko-asakawa",
-	"lisa-gelobter",
+	{"name":"joy-buolamwini"},
+	{"name":"audrey-tang"},
+	{"name":"robert-moses", accessible: true},
+	{"name":"chieko-asakawa", accessible: true},
+	{"name":"lisa-gelobter"},
 
 	// row break in workbook
-	"taher-elgamal",
-	"evelyn-granville",
-	"katherine-johnson",
-	"margaret-hamilton",
-	"grace-hopper",
+	{"name":"taher-elgamal"},
+	{"name":"evelyn-granville", accessible: true},
+	{"name":"katherine-johnson", accessible: true},
+	{"name":"margaret-hamilton"},
+	{"name":"grace-hopper"},
 
 	// row break in workbook
-	"jerry-lawson",
-	"lynn-conway",
-	"clarence-ellis",
-	"shaffi-goldwasser",
-	"luis-von-ahn",
+	{"name":"jerry-lawson", accessible: true},
+	{"name":"lynn-conway"},
+	{"name":"clarence-ellis"},
+	{"name":"kakani-katija"},
+	{"name":"shaffi-goldwasser"},
 
 	// row break in workbook
-	"mary-golda-ross",
-	"jon-maddog-hall",
-	"tim-cook",
-	"al-khwarizmi",
-	"ada-lovelace"
+	{"name":"luis-von-ahn"},
+	{"name":"fei-fei-li"},
+	{"name":"mary-golda-ross"},
+	{"name":"jon-maddog-hall"},
+	{"name":"tim-cook"},
+
+	// end of workbook page - everything after this should NOT
+	// be visible (see CSS rules for @print, above)
+	{"name":"al-khwarizmi"},
+	{"name":"ada-lovelace"},
 	//"cristina-amon",
 	//"kimberly-bryant",
 	//"laura-gomez",
@@ -99,7 +113,7 @@ async function printPioneers(pathPrefix = "") {
 	msg.style.display = "block";
 
   	const pdfDoc = await PDFDocument.create();
-	urls = pioneers.map(p => `${pathPrefix}pages/${p}.pdf`);
+	urls = pioneers.map(({name, accessible}) => `${pathPrefix}pages/${name}.pdf`);
 	urls.unshift("../pages/pioneers-cover.pdf"); // add cover page to beginning
 	console.log('printing pages from:',urls)
     for (const [i, url] of urls.entries()) {

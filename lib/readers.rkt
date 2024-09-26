@@ -328,7 +328,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "{sp}^")]
+            (enclose-tag "sup" "" ss)]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -339,7 +339,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "~" ss "~")]
+            (enclose-tag "sub" "" ss)]
           [else (string-append "<sub>" ss "</sub>")])))
 
 (define (math-sqrt x)
@@ -368,7 +368,7 @@
         [else
           (set! text (regexp-replace* "\\( +" text "("))
           (set! text (regexp-replace* " +\\)" text ")"))
-          (set! text (regexp-replace* "\\pi" text "π"))
+          (set! text (regexp-replace* "\\\\pi" text "π"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text
@@ -381,7 +381,7 @@
                                  (read-char i)
                                  (let ([ctl-seq (read-mathjax-word i)])
                                    (case ctl-seq
-                                     [("mbox") (let ([x (local-read-group i "math mbox")])
+                                     [("mbox" "text") (let ([x (local-read-group i "math mbox")])
                                                  x)]
                                      [("sqrt") (let ([x (local-read-group i "math sqrt")])
                                                  (math-sqrt (math-unicode-if-possible

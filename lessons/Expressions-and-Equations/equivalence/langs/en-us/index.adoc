@@ -1,0 +1,341 @@
+= Equivalence
+
+@description{Students explore _computation_ as a way to generate equivalent expressions.}
+
+@lesson-prereqs{translating, simple-data-types, contracts}
+
+@keywords{computation, equivalent, arithmetic expression, equation}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+@learning-objective{Develop equivalent arithmetic expressions.}
+@learning-objective{Simplify complex arithmetic expressions to a single value.}
+
+
+| Student-facing Lesson Goals
+|
+
+- Let's simplify expressions using computation.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+| Preparation
+|
+@preparation{
+* The activity in the first section is most impactful if students can stand up and draw their individual Circles of Evaluation on the whiteboard. Having a handful of markers for student use is encouraged.
+* The last section of the lesson invites students to explore equivalence in code, and requires student computers.
+}
+
+| Key Points For The Facilitator
+|
+* Computation is the first tool students will employ to analyze equivalence.
+* This lesson foreshadows and exposes students to additional laws of arithmetic that will be covered later. Keep a running list of the properties that students spot to refer to down the road.
+|===
+
+== Computation and Equivalence @duration{20 minutes}
+
+=== Overview
+
+Students explore a simple @vocab{arithmetic expression} to create as many equivalent Circles of Evaluation as they can. They then categorize the Circles of Evaluation they've generated to consider some of the different ways in which expressions can be equivalent.
+
+
+=== Launch
+
+Let's look at this @vocab{Circle of Evaluation}:
+
+@show{(coe '(+ 10 6))}
+
+@slidebreak
+
+To create a Circle of Evaluation of the same value, we could write this:
+
+@show{(coe '(+ (+ 8 2) 6))}
+
+Because we knew that @math{8 + 2} produces 10, we could use it _in place of 10_.
+
+In fact, we could replace 10 with a variety of different expressions to produce an @vocab{equivalent} Circle of Evaluation - one which simplifies to the same value.
+
+We could also simply write @math{16}!
+
+@slidebreak
+
+In this last example, the Circle of Evaluation has been simplified down to just one number; since every Circle of Evaluation must have an operator or function, the Circle disappears.
+
+@lesson-point{
+Numeric expressions are @vocab{equivalent} when they simplify to the same value.
+}
+
+@slidebreak
+
+@QandA{
+@Q{Can you think of other Circles of Evaluation equivalent to @math{16}?}
+@A{Possible responses: @math{4  \times 4}; @math{15 + 1}; @math{4 * 8 \div 2}}
+}
+
+@lesson-instruction{
+- On a piece of paper, you and your partner are going to create as many equivalent Circles of Evaluation for @math{16} as you can!
+- You may use any numbers and any operators, and as many of them as you like.
+- Compute the value of each Circle of Evaluation to confirm equivalence.
+- Need a challenge?
+ * Create a Circle with as many nested Circles as you possibly can.
+ * Create a Circle with only odd numbers.
+ * Create a Circle that includes the number 1000.
+ * Create a Circle that includes the fraction @math{\frac{1}{2}}
+- You have 5 minutes.
+}
+
+@teacher{
+This activity offers students an opportunity to practice constructing Circles of Evaluation as they explore the notion of equivalence.}
+
+@slidebreak
+
+Circles of Evaluation help us to see the underlying structure of mathematics. They visually highlight the way in which expressions with the same value can have a variety of unique mathematical structures.
+
+=== Investigate
+
+@lesson-instruction{
+- Let's draw our contributions on the board.
+- The goal is to include as many unique Circles of Evaluation as possible! (@math{10 + 6}, for instance, is not exactly the same as @math{6 + 10} - even though they both produce 16.)
+- Once we have a wide variety of Circles of Evaluation on the board, let's take a look.
+}
+
+@QandA{
+@Q{What do you Notice?}
+@Q{What do you Wonder?}
+}
+
+@clear
+
+@strategy{Pedagogy Note: Notice and Wonder!}{
+
+
+This pedagogy is a @link{https://sadlerscience.com/notice-and-wonder/, widely-used best practice in Math-Ed}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.NYtimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Both of these phases should be done in groups or as a whole class, with adequate time given to each.
+}
+
+@clear
+
+@slidebreak
+
+@teacher{After students have shared, explain the next element of the activity.}
+
+@lesson-instruction{
+- Let’s sort some of these Circles of Evaluation into groups (of any size!).
+- There is no right or wrong way to sort; in fact, you may choose to put one Circle of Evaluation into multiple groups, and you may leave some Circles of Evaluation ungrouped.
+- You and your partner will record your groupings on a piece of paper. Come up with a name for each group so that someone else could identify what you think makes that group unique.
+- Who sees a category for sorting Circles of Evaluation?
+}
+
+@teacher{
+Work with students to identify one or two groupings as a class. If students are struggling to sort the Circles of Evaluation, you might offer one or more examples.}
+
+@slidebreak
+
+Some example groupings:
+
+- I'm putting @math{10 + 6} and @math{6 + 10} into a group called "10 and 6" because they both include 10 and 6.
+
+- I’m going to put @math{10 + 6}, @math{6 + 10}, and @math{7 - 4} into a group called "Single Circles" because they are both examples of expressions with exactly one Circle (no nesting).
+
+- I'm putting @math{10 + 6} and @math{20 - 4} into a group called "Sixteens" because they both evaluate to 16.
+
+@teacher{
+Subsequent lessons in this series introduce students to the Associative Property, the Commutative Property, the Identity Property, and the Distributive Property. Although students they may not know these properties by name, some will likely arise organically throughout the activity. There is no need to name properties today; instead, highlight students’ contributions and probe.
+
+For instance, if a student observes that @math{2 \times 8} is the same as @math{8 \times 2}, you might inquire whether the equivalence holds if we use division rather than multiplication.
+
+In short: there are no wrong answers here! The goal is to help students develop a deep yet flexible understanding of the language of mathematics.}
+
+=== Synthesize
+
+@lesson-instruction{
+Let's share out the category names we developed to make a class list.}
+
+@teacher{Have pairs share out their category names. There is no need to evaluate categories’ names or qualify students’ observations; rather, challenge students to identify and articulate patterns they have observed to lay a foundation upon which to formalize the laws of arithmetic.}
+
+@slidebreak
+
+- Are there any groupings of expressions that are mirror-images of one another?
+- Are there any groupings that all compute the same answer?
+- Are there any groupings that have the same numbers and operations, but shuffled into different orders?
+
+== Simplifying Arithmetic Expressions @duration{20 minutes}
+
+=== Overview
+Students use Circles of Evaluation to simplify arithmetic expressions to a single value.
+
+=== Launch
+
+@teacher{Because Circles of Evaluation help students visualize the structure of the math, they are a terrific solving tool. They create structure for students while simultaneously offering more flexibility than adhering to a strict sequential solving algorithm.}
+
+[.embedded, cols="^.^2,^.^3,^.^1,^.^3,^.^1,^.^3,^.^2", grid="none", stripes="none", frame="none"]
+|===
+|| @show{(coe '(+ 3 (- 14 5)))} | &rarr; | @show{(coe '(+ 3 9))} | &rarr; | @math{12} |
+|===
+
+@QandA{
+@Q{Why is the first Circle of Evaluation (above) equivalent to the second Circle of Evaluation? Why is the second Circle of Evaluation equivalent to the final result?}
+@A{To get from the the first Circle of Evaluation to the next: @math{5} less than @math{14} becomes 9. To get to the final result, @math{3} increased by @math{9} becomes @math{12}.}}
+
+
+
+
+@slidebreak
+
+
+[.embedded, cols="^.^2,^.^4,^.^1,^.^3,^.^1,^.^3,^.^2", grid="none", stripes="none", frame="none"]
+|===
+|| @show{(coe '(+ (- 10 8) (* 3 6)))} | &rarr; | @show{(coe '(+ 2 18))} | &rarr; | @math{20}|
+|===
+
+@QandA{
+@Q{Does the order in which we evaluate the two inner Circles (above) matter?  Why or why not?}
+@A{No, the order does not matter! We could evaluate the Circle on the left first, or the Circle on the right first because the Circles are independent of one another. However, we have to evaluate both of the circles before we can find their sum!}
+}
+
+@clear
+
+@strategy{Pedagogy Note: A Flexible Order of Operations?}{
+
+
+_Think for a moment about a commonly heard statement in teaching the order of operations: “You work from left to right.” At another point in the curriculum, when working on properties of the operations, we say, “You can add numbers in any order” (commutative property). How can both of these statements be true? Preparing students to *do mathematics* means that they have an integrated understanding of rules and properties in mathematics._
+
+@indented{From @link{https://thinking101canada.files.wordpress.com/2016/10/order-of-operations-the-myth-and-the-math.pdf, "Order of Operations: The Myth and the Math"}}
+
+To recap: *yes*, we are advocating for a flexible order of operations that relies on students' abilities to make sense of the underlying structure of math!
+
+}
+
+
+=== Investigate
+
+@lesson-instruction{
+- Each row on @printable-exercise{computation-whole-nums.adoc} represents a step-by-step computation, which results in an answer. Some of the steps are missing numbers and operators!
+- Fill in those numbers and operators so that each sequence of Circles will end with the answer shown on the right.
+- When you're done, complete @printable-exercise{computation-frac-dec.adoc}, a version of the activity with more challenging numbers.
+- Did you fill in blanks in the Circles of Evaluation from left to right or right to left? Why?
+}
+
+@teacher{
+For additional practice with this skill, you might have your students attempt @opt-printable-exercise{computation-whole-nums-2.adoc} (with simpler numbers and computations) or @opt-printable-exercise{computation-whole-nums-3.adoc}.}
+
+
+=== Synthesize
+
+How can you determine whether two Circles of Evaluation are equivalent or not?
+
+== Are They Equivalent? @duration{20 minutes}
+
+=== Overview
+
+Students explore computation and equivalence through two different activities - "True or False?" and "Which One Doesn't Belong?"
+
+=== Launch
+
+@teacher{
+Explain to students that they are about to learn to play two different games, which they will revisit periodically throughout this course. The first is "True or False?"}
+
+@clear
+
+@strategy{Pedagogy Note: Viewing the Equal Sign as Relational}{
+
+These activities are designed to help students develop a _relational view_ of the equal sign. Students often interpret the equal sign _operationally_, or they think of it as an instruction that means "now get the answer." Students with an operational view of the equal sign often solve solve 8 + 4 = ? + 5 incorrectly, as either 12 or 17.
+
+Conversely, students who have a relational view of the equal sign recognize that a relationship exists between the numbers or expressions on either side of the equal sign. Decades of @link{https://link.springer.com/content/pdf/10.1007/BF02655897.pdf, "research"} suggest that students who interpret the equal sign to mean "the same as" are better positioned to think algebraically down the road.
+}
+
+@clear
+
+@lesson-instruction{
+- Let's play a round of @printable-exercise{true-or-false.adoc}!
+- Look at the first pair of Circles of Evaluation on the page.
+- Use computation (or any other strategy) to determine if the statement of equivalence is true or false.
+- Now complete the rest of @printable-exercise{true-or-false.adoc}
+}
+
+@teacher{
+The Circles of Evaluation in this activity were designed to support students in practicing various mental math strategies. If students can recognize structure and avoid computation, that's fine too!}
+
+=== Investigate
+
+@teacher{The second game, "Which One Doesn't Belong," has students analyze four different Circles of Evaluation to determine which one is not equivalent. Model your thought process before inviting students to work.}
+
+@lesson-instruction{
+Complete @printable-exercise{wodb.adoc}, looking closely at each Circle of Evaluation to determine the one that is not equivalent.
+}
+
+@clear
+
+@strategy{Pedagogy Note: Which One Doesn't Belong?}{
+
+
+There are numerous benefits to inviting students to search out similarities and difference in a group of items (in this case, Circles of Evaluation). In articulating the differences that they notice between Circles, students will likely tune into to details that they might have otherwise overlooked.
+
+If your students are getting stuck, start a conversation! What do students notice, at first glance? What makes the Circles of Evaluation alike, and what makes them different? Have students share their reasoning to create opportunities for peer learning.
+}
+
+=== Synthesize
+
+- What strategies did you use to determine whether or not Circles of Evaluation were equivalent?
+- Did you find that some strategies were more efficient than others? Why?
+
+== Programming Exploration: Are They Equivalent? @duration{20 minutes}
+
+=== Overview
+
+Extending concepts explored earlier in the lesson, students consider what makes one line of code equivalent to another.
+
+=== Launch
+
+In the first section of this lesson, you explored different ways of creating Circles of Evaluation that are equivalent to 16. Computation was a valuable tool for determining equivalence... but considering _structure_ helped us recognize equivalence, too!
+
+What if a programmer wants to determine whether two lines of code will produce the same result? They have two options. They can test the code and see what happens. More experienced programmers, however, study the structure of the code. They think about the functions being used... and then come to a conclusion. These programmers are more strategic and efficient when they write their own code.
+
+=== Investigate
+When we learned about _equivalence_, we considered varying @vocab{arithmetic expressions} and thought about whether they would evaluate to the same result or not.
+
+We are now ready to think about whether _lines of code_ are equivalent! To do so, we will consider whether two lines of image-producing code produce perfectly identical images. If so, those lines of code are equivalent.
+
+
+@lesson-instruction{
+- Turn to @printable-exercise{are-they-identical.adoc}.
+- Discuss each line of code with your partner before predicting whether the images produced will be identical or not.
+- Test your code in @starter-file{editor}, then explain why the images are identical or not.
+}
+
+@teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.}
+
+@slidebreak
+
+@QandA{
+
+@Q{What were some of the strategies you used to predict if the lines of code were equivalent?}
+@A{We used computation; we paid attention to the order of arguments; we referred to contracts to understand the effect of each input. Responses will vary.}
+
+@Q{How was this activity similar to the activities you completed earlier in this lesson? How was it different?}
+@A{*Similar:* We used computation. We wanted to see if the outcomes would be the same or not. *Different:* We were looking at images, not numbers; We relied on contracts to help us predict the output, not our understanding of mathematical operations. Responses will vary.}
+}
+
+@teacher{Ensuring comprehension of @printable-exercise{are-they-identical.adoc} will lead to a smoother experience on @printable-exercise{writing-equivalent-code.adoc}. In the second activity, just _one_ line of code is provided - and students develop the second on their own. Students will exercise a different cognitive muscle here: rather than making a prediction about code, they must write their own!}
+
+@slidebreak
+
+@lesson-instruction{
+- On @printable-exercise{writing-equivalent-code.adoc}, test the provided line of code in @starter-file{editor}.
+- With your partner, write a _different_ but equivalent line of code. (It must produce an identical image!)
+- If you get stuck, refer to your contracts and draw Circles of Evaluation!}
+
+=== Synthesize
+
+- What were some strategies you used to determine if two different lines of code will produce identical images?
+- How were the programming activities in this lesson similar to the paper-and-pencil activities? How were they different?
