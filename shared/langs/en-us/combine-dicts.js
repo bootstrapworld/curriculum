@@ -26,6 +26,6 @@ if (fs.existsSync(jsDir)) {
     allStarterFiles = { ...allStarterFiles, ...j };
   }
   let jsonString = JSON.stringify(allStarterFiles);
-  fs.writeFileSync(finalJsFile, 'var learningObjectives = ' +
+  fs.writeFileSync(finalJsFile, 'var combinedJSON = ' +
     jsonString + ';\n');
 }

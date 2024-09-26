@@ -130,25 +130,25 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 starter-files: distribution/$(NATLANG)/starter-files.js
 
-distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files
+distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starter-files
 	@echo ➤ Build $@
-	@node $(PROGDIR)/starter-files.js $(PROGDIR)/starter-files distribution/$(NATLANG)/starter-files.js
+	@node $+ $@
 
 ###############################################################################
 
 assessments: distribution/$(NATLANG)/assessments.js
 
-distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js $(PROGDIR)/assessments
+distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
 	@echo ➤ Build $@
-	@node $(PROGDIR)/assessments.js $(PROGDIR)/assessments distribution/$(NATLANG)/assessments.js
+	@node $+ $@
 
 ###############################################################################
 
 learning-objectives: distribution/$(NATLANG)/learning-objectives.js
 
-distribution/$(NATLANG)/learning-objectives.js: $(PROGDIR)/learning-objectives.js $(PROGDIR)/learning-objectives
+distribution/$(NATLANG)/learning-objectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learning-objectives
 	@echo ➤ Build $@
-	@node $(PROGDIR)/learning-objectives.js $(PROGDIR)/learning-objectives distribution/$(NATLANG)/learning-objectives.js
+	@node $+ $@
 
 ###############################################################################
 
