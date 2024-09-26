@@ -1,68 +1,31 @@
-// Define various individual assessments here that will be combined by the
-// build into a JSON file. Comments are allowed, as this file is not JSON itself.
-
-// Assessments should be named according to the material they assess
-// Desmos file titles should end with (Desmos)
-
-const DataScience = { 
-  "histograms": {
-    "title": "Making and Interpreting Histograms",
-    "learningObjectives" : [
-      "...key from the learningObjective dictionary...",
-      "...key from the learningObjective dictionary...",
-      "...key from the learningObjective dictionary...",
-      ],
-    "pyret" : {
-      "url": "...some url...",
-    },
-    "wescheme" : {
-      "url": "...some url...",
-    },
-    "codap" : {
-      "url": "...some url...",
-    },
-  },
-};
- 
-const Algebra = { 
-  "writing-examples": {
-    "title": "Writing Examples from Word Problems",
-    "learningObjectives" : [
-      "...key from the learningObjective dictionary...",
-      "...key from the learningObjective dictionary...",
-      "...key from the learningObjective dictionary...",
-      ],
-    "pyret" : {
-      "url": "...some url...",
-    },
-    "wescheme" : {
-      "url": "...some url...",
-    },
-    "codap" : {
-      "url": "...some url...",
-    },
-  },
-};
-
-const allAssessments = {
-  ...DataScience, 
-  ...Algebra
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//
-// Don't edit below this!
-//
-////////////////////////////////////////////////////////////////////////////////
-
 const fs = require('fs');
 
-const jsFile = process.argv[2];
+const jsDir = process.argv[2];
+const finalJsFile = process.argv[3];
 
-if (fs.existsSync(jsFile)) {
-  fs.unlinkSync(jsFile);
+if (fs.existsSync(finalJsFile)) {
+  fs.unlinkSync(finalJsFile);
 }
 
-const jsonString = JSON.stringify(allAssessments);
-
-fs.writeFileSync(jsFile, 'var assessments = ' + jsonString + ';\n');
+if (fs.existsSync(jsDir)) {
+  // console.log('jsDir', jsDir, 'exists');
+  let ff = fs.readdirSync(jsDir);
+  // console.log('ff len is', ff.length);
+  let allStarterFiles = {};
+  for (let i = 0; i < ff.length; i++) {
+    let f = jsDir + '/' + ff[i];
+    // console.log('f is', f);
+    if (!f.match(/\.js$/)) { continue; }
+    if (!fs.existsSync(f)) { continue; }
+    // console.log('I');
+    f = f.replace(/\.js$/, '');
+    // console.log('f now is', f);
+    // console.log('II');
+    let j = require(f);
+    // console.log('file', f, 'returns', JSON.stringify(j));
+    allStarterFiles = { ...allStarterFiles, ...j };
+  }
+  let jsonString = JSON.stringify(allStarterFiles);
+  fs.writeFileSync(finalJsFile, 'var assessments = ' +
+    jsonString + ';\n');
+}

@@ -17,7 +17,6 @@ initialization:
 	@mkdir -p distribution/$(NATLANG)/lib/.cached
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
 	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
-	@$(CP) -upr $(PROGDIR)/learning*.js distribution/$(NATLANG)
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
@@ -139,9 +138,10 @@ distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js $(PROGDIR)
 
 assessments: distribution/$(NATLANG)/assessments.js
 
-distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js
+distribution/$(NATLANG)/assessments.js: $(PROGDIR)/assessments.js $(PROGDIR)/assessments
 	@echo ➤ Build $@
-	@node $< $@
+	@node $(PROGDIR)/assessments.js $(PROGDIR)/assessments distribution/$(NATLANG)/assessments.js
+
 ###############################################################################
 
 learning-objectives: distribution/$(NATLANG)/learning-objectives.js
