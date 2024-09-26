@@ -1949,13 +1949,19 @@
                                            [else
                                              (display url o)])]))]
                           [(string=? directive "learning-objective")
-                            (let* ([lbl (string->symbol (read-group i directive))]
-                                   [c (hash-ref *learning-objectives* lbl #f)])
-                              (cond [(not c)
-                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                    [else 
-                                      (display "- " o)
-                                      (display (or (hash-ref c 'text #f) lbl) o)]))]
+                           (let* ([lbl (string->symbol (read-group i directive))]
+                                  [c (hash-ref *learning-objectives* lbl #f)]
+                                  [x #f])
+                             (when c (set! x (hash-ref c 'text #f)))
+                             (cond [(not c)
+                                    (set! x lbl)
+                                    (printf "WARNING: ~a: Undefined @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [(not x)
+                                    (set! x lbl)
+                                    (printf "WARNING: ~a: Ill-defined @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [else
+                                     (display "- " o)
+                                     (display x o)]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]
