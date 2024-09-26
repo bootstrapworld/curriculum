@@ -1,0 +1,139 @@
+= Exploring the Fuel Efficiency Dataset
+++++
+<style>
+.lesson-instruction table .autonum { font-weight: bold; }
+</style>
+++++
+@description{Students investigate quadratic relationships in data about Fuel Efficiency.}
+
+@lesson-prereqs{linear3-fitting-models}
+
+@keywords{quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+- Read and interpret real-world data, presented in a scatter plot
+- Model quadratic relationships using functions
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to model quadratic relationships in data.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
+You will want to:
+ * Open @starter-file{alg2-exploring-quadratics-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Key Points For The Facilitator
+|
+- Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of _three_ factors.
+- Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
+|===
+
+== Looking for Patterns @duration{45 minutes}
+
+=== Overview
+Students explore the @starter-file{alg2-fuel-efficiency}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
+
+=== Launch
+
+@teacher{These questions are intended to spark student interest in _fuel efficiency_, which students will explore in this lesson.}
+
+@QandA{
+Since 1992, there have been laws about what information must be printed onto the labels of cars for sale. What do you think consumers should know about cars they are considering buying?
+@Q{Have you heard the term "fuel efficiency" before? What do you know about fuel efficiency?}
+@A{Fuel efficiency is the number of miles that a car can travel per gallon. Since 2013, labels on cars for sale must include: fuel efficiency, energy use, fuel cost, and environmental impact.}
+@Q{What factors influence fuel efficiency?}
+@A{Possible responses:}
+@A{Efficient driving (e.g., gradual acceleration and braking, using cruise control)}
+@A{car maintenance}
+@A{planning / combining trips}
+@A{choosing a more fuel efficient vehicle}
+@A{avoiding carrying excess weight in a vehicle}
+@Q{Do you think the speed at which you drive influences fuel efficiency? Why or why not?}
+@Q{At what speeds do you predict that fuel efficiency is the best? The worst?}
+@A{"Zero" is a clever attempt (no gas used!), but remember that miles-per-gallon also includes the distance traveled (@math{0 / 0})!}
+@A{Make sure that student guesses make sense, as well: a car rolling downhill in neutral shouldn't be counted, cars can't travel 10,000mph, etc}
+}
+
+@slidebreak
+
+In this lesson, we'll learn more about the relationship between fuel efficiency and the speed a car is traveling.
+
+First, we'll explore a dataset and see if this relationship appears linear.
+
+@teacher{
+*NOTE:* While this dataset is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI, the dataset}.
+}
+
+
+@lesson-instruction{
+- Open the @starter-file{alg2-fuel-efficiency}
+- From the File menu, select "Save a Copy", and click "Run".
+- Working in pairs or small groups, complete the first section of @printable-exercise{exploring-mpg.adoc}.
+}
+
+=== Investigate
+
+There definitely appears to be a relationship here...
+@center{@image{images/fuel-efficiency-quadratic.png}}
+
+@slidebreak
+
+But linear models don't seem to fit very well!
+
+[cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
+|===
+| We could build linear models that fit the increasing half of the data...
+| We could build linear models that fit the decreasing half of the data...
+| We could build linear models that try to split the difference...
+
+| @image{images/fuel-efficiency-linear1.png}
+| @image{images/fuel-efficiency-linear2.png}
+| @image{images/fuel-efficiency-linear3.png}
+|===
+
+All of them are far away from so many points, and will make poor predictions for a large subset of x-values.
+
+@slidebreak
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{exploring-mpg.adoc}. Be ready to share back and describe the curve you drew.
+- When you're driving, what speed will save you the most money on gas?
+}
+
+@slidebreak
+
+Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency generally _decreases!_
+
+@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
+
+Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it).
+}
+
+=== Synthesize
+
+- Why don't linear models work to model the relationship between fuel efficiency and speed?
+- What kinds of curves did you draw that fit better?
+- Are there any mathematical functions that look like those curves?
+
