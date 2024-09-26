@@ -1,0 +1,272 @@
+= Fitting Exponential Models
+++++
+<style>
+.big { font-size: xx-large; }
+</style>
+++++
+@description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
+
+@lesson-prereqs{exponential2-building-models}
+
+@keywords{exponential, quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+You will want to:
+ * Open @starter-file{alg2-covid-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Fitting Exponential Models 	@duration{30 minutes}
+
+=== Overview
+
+Students extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
+
+=== Launch
+
+Now that you're familiar with exponential functions, let's use them to model this Covid data!
+
+@lesson-instruction{
+- Make a scatter plot showing the change in positive Covid cases for `MA-table`.
+- What can you tell about the @vocab{base} @math{b} from this plot?
+- What about the initial value @math{a}?
+- What about @math{k}?
+}
+
+@slidebreak
+
+@teacher{Have students respond to the discussion questions below in pairs or small groups.}
+
+@QandA{
+@Q{Does your scatter plot show exponential growth or exponential decay?}
+@A{The scatter plot shows growth. The "hockey stick" is pointing up, meaning that positive cases are increasing.}
+@Q{Can we make any conclusions about the value of @math{b}? Explain.}
+@A{Because we see exponential growth, we know that @math{b} must be greater than one.}
+@Q{Can we make any conclusions about the value of @math{k}?}
+@Q{Can we make any conclusions about the value of @math{a}? Explain.}
+@A{@math{a} must be positive, because the curve is consistently above @math{k}.}
+}
+
+=== Investigate
+
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the fourth slide ("Exponential Model for MA") so that students are looking at the correct screen. In the next activity, students use Desmos to find promising exponential models, and then fit the model programmatically in Pyret!}
+
+@lesson-instruction{
+- Let's return to the *Modeling Covid Spread Desmos file*.
+- You should now be on the fourth slide ("Exponential Model for MA").
+- Use it to complete the first section of @printable-exercise{exponential-models-ma.adoc}.
+- Then use @starter-file{alg2-covid} to complete the rest of the page.
+- Is an exponential model a good fit for this data? Why or why not?
+}
+
+@slidebreak
+
+On @printable-exercise{exponential-models-ma.adoc} you'll see a note about the use of ``~1`` to tell Pyret to prioritize _speed_ over precision. Unlike most calculators, Pyret usually prioritizes precision.
+
+In a math classroom, this is the difference between @math{\frac{2}{3}} rendering as @math{ 0.\overline{3}} or being rounded to 0.666666667.
+
+In data processing, *choosing speed over precision can have ethical or technical consequences!*
+
+For example:
+
+1) When calculating a path over an extremely long distance, being off by just a billionth of a degree could result in a Mars-bound rocket missing its destination.
+
+2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire group of people!
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with an exponential, real-world scenario, then have them write down an exponential function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their exponential function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title display to describe their real-world scenario (e.g. - "money in a savings account vs. years").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+}
+
+=== Synthesize
+
+- What makes exponential models different from the linear and quadratic models you've seen before?
+- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
+
+@slidebreak
+
+@teacher{Have students share their predictions for each of the time-spans in question 5.}
+
+@QandA{
+@Q{How accurate were your "guesstimates" for your models' predictions after 50 days? (Very accurate? Not accurate at all?)}
+@Q{How accurate were your "guesstimates" after 250 days?}
+@Q{How accurate were your "guesstimates" after 450 days?}
+@Q{How accurate were your "guesstimates" after 550 days?}
+}
+
+Chances are, your guesses got less accurate as the number of days increased!
+
+@slidebreak
+
+*Why was it so much guesstimate the farther out we got, when the number of days was always increasing by a fixed amount?*
+
+We are creatures of nature, so our brains are designed to be really good at working with things we see all the time. It's normal to see groups of 2, 5, or even 10 or 100, and we have a pretty good intuition for comparing group sizes as long as they're small.
+
+But when numbers grow really, really, _really_ fast...we get lost! Our brains lose track of differences when two numbers get really enormous.
+
+_Mathematically,_ the number line is composed of equal intervals forever. @link{https://www.scientificamerican.com/article/a-natural-log/, *But we don't actually process it that way at all.*}
+
+@slidebreak
+
+*Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
+
+This may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
+
+Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. _(Stay tuned!)_
+
+
+== Why Just One State at a Time?
+
+=== Overview
+Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then discover another motivation for filtering: scatter plots like our covid dataset show _multiple_ correlations, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the Covid dataset into samples grouped by state.
+
+=== Launch
+
+A college is looking at housing data for a sample of students and comparing choices among those students who've decided what their major will be to choices made by students who are undecided about their major:
+
+[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
+|===
+|             | # On Campus   | # Off Campus  | % On Campus
+| Undecided   | 120           |  80           |  120/200 = 60%
+| Decided     |  80           | 100           |   80/180 = 44%
+|===
+
+@QandA{
+@Q{According to the table, how many Undecided Majors live _off_-campus?}
+@A{80}
+@Q{How many Decided Majors live _on_-campus?}
+@A{80}
+@Q{*Who is more likely to live on campus: Decided or Undecided Majors?*}
+@A{(Give students time to talk about this, and explain their thinking!  )}
+}
+
+@teacher{
+@opt{If you'd like to distribute printed copies of this table and the accompanying questions, they are available @opt-printable-exercise{simpsons-data.adoc, here}.}
+}
+
+@slidebreak
+
+It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
+
+But there's a *third variable hiding in the background*: freshmen college students are far less likely to have picked a major than seniors, _and_ they are much more likely to live on campus.
+
+@slidebreak
+
+When we filter by this important third variable, it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+
+[cols="^1a,^1a", strips="none", grid="none", frame="none"]
+|===
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      ! 100             ! 20            ! 100/120 = 83%
+! Decided        !  50             ! 10            !  50/60  = 83%
+!===
+
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      !  20             ! 60            !  20/80 = 25%
+! Decided        !  30             ! 90            !  30/120 = 25%
+!===
+|===
+
+What _looks_ like a correlation between having-a-major and living-on-campus is actually a correlation between _age_ and living-on-campus.
+
+@slidebreak
+
+@right{@image{images/Simpsons_animation.gif, 300}}
+A third variable lurking in the data can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists! Normally we think that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances the correlations in our sub-groups cancel each other out when we put the groups together. This is called @link{https://en.Wikipedia.org/wiki/Simpson%27s_paradox, Simpson's Paradox.}
+
+@lesson-point{
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+}
+
+@slidebreak
+
+Sometimes filtering the data into subsets is the only way to see what's really going on. That's exactly what this starter file does, by filtering the data for _Massachusetts only._
+
+=== Investigate
+
+Datasets like the one used in our @starter-file{alg2-covid} are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships,_ and another variable lurking in the background.
+
+In fact, the scatter plot for all our New England states didn't look much like a scatter plot all! It looks like someone took a marker and drew in five different curvy lines.
+
+@QandA{
+@Q{What do you think might be the variable lurking in the background, which accounts for these separate lines?}
+@A{Give students time to discuss!}
+}
+
+@slidebreak
+
+*Diseases spread more rapidly in densely-populated areas, since it's easier for the infection to jump from one person to another.* Unfortunately, we can't _see_ the density data in our table, so that dimension is missing from our dataset! This is exactly what happened in our college example: we couldn't see the age of the students, which skewed our interpretation of the scatter plot.
+
+
+These patterns are so distinct from one another that we're going to need to make _more than one model_.
+
+@slidebreak
+
+@QandA{
+@Q{We needed to break the Covid data up into _grouped samples_, so that all of the data for Massachusetts is in one table. We would then do the same for Maine, Rhode Island, etc.}
+@Q{How is a grouped sample different from a random sample?}
+@A{A grouped sample is a non-random subset chosen from a larger set. Grouped samples are non-random by design!}
+}
+
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the fifth slide ("Exponential Model for VT") so that students will be looking at the correct screen when they are directed to return to Desmos part way through @printable-exercise{modeling-other-states.adoc}}
+
+@lesson-instruction{
+- Working in pairs or small groups, complete @printable-exercise{modeling-other-states.adoc}.
+- You will be working with both @starter-file{alg2-covid} and the fifth slide of *Modeling Covid Spread Desmos file*.
+}
+
+@slidebreak
+
+The `filter` function consumes a Table and *a helper function!* The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
+
+@teacher{
+@opt{While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
+}
+
+=== Common Misconceptions
+It's extremely common for students to think that filtering a table _changes the original table_. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
+
+=== Synthesize
+
+@QandA{
+@Q{In what other situations would it be useful to filter a dataset?}
+@Q{Can you think of other examples where Simpson's Paradox might arise?}
+@A{When comparing one country's schools to another's, a researcher finds that students living in poverty in country A outperform students living in poverty in country B. They also find that the wealthy students in A outperform their wealthy peers in B. In fact, for every income level, country A outperforms country B! But if country B has less child poverty overall, it will still outperform A.}
+@A{Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}.}
+}
