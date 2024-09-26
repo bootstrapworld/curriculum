@@ -170,7 +170,7 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starter-files.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
@@ -188,7 +188,7 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learning-objectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
         (call-with-input-file learning-objectives-file
           (lambda (i)

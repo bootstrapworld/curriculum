@@ -7,6 +7,8 @@ if (fs.existsSync(finalJsFile)) {
   fs.unlinkSync(finalJsFile);
 }
 
+const varName = jsDir.replace(/^.*\//, '');
+
 if (fs.existsSync(jsDir)) {
   // console.log('jsDir', jsDir, 'exists');
   let ff = fs.readdirSync(jsDir);
@@ -26,6 +28,6 @@ if (fs.existsSync(jsDir)) {
     everything = { ...everything, ...j };
   }
   let jsonString = JSON.stringify(everything);
-  fs.writeFileSync(finalJsFile, 'var combinedJSON = ' +
+  fs.writeFileSync(finalJsFile, 'var ' + varName + ' = ' +
     jsonString + ';\n');
 }
