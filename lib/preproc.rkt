@@ -1955,7 +1955,7 @@
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
                                     [else 
                                       (display "- " o)
-                                      (display lbl o)]))]
+                                      (display (or (hash-ref c 'text #f) lbl) o)]))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]
