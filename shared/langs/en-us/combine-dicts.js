@@ -11,7 +11,7 @@ if (fs.existsSync(jsDir)) {
   // console.log('jsDir', jsDir, 'exists');
   let ff = fs.readdirSync(jsDir);
   // console.log('ff len is', ff.length);
-  let allStarterFiles = {};
+  let everything = {};
   for (let i = 0; i < ff.length; i++) {
     let f = jsDir + '/' + ff[i];
     // console.log('f is', f);
@@ -23,9 +23,9 @@ if (fs.existsSync(jsDir)) {
     // console.log('II');
     let j = require(f);
     // console.log('file', f, 'returns', JSON.stringify(j));
-    allStarterFiles = { ...allStarterFiles, ...j };
+    everything = { ...everything, ...j };
   }
-  let jsonString = JSON.stringify(allStarterFiles);
+  let jsonString = JSON.stringify(everything);
   fs.writeFileSync(finalJsFile, 'var combinedJSON = ' +
     jsonString + ';\n');
 }
