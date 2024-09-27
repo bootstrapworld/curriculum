@@ -197,6 +197,7 @@
         '())))
 
 (define *objectives-met* '())
+(define *assessments-met* '())
 
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
@@ -1331,6 +1332,7 @@
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
   (set! *objectives-met* '())
+  (set! *assessments-met* '())
   (set! *starter-files-used* '())
   (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
@@ -1931,6 +1933,8 @@
                                                                   (cons styled-link-output
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
+                          [(string=? directive "assessments")
+                           (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([lbl (string->symbol (read-group i directive))]
                                   [c (hash-ref *assessments* lbl #f)]
@@ -1942,15 +1946,19 @@
                                  (when x (set! title x)))
                                (let ([x (hash-ref pl-specific 'url #f)])
                                  (when x (set! url x))))
+                             (unless title (set! title url))
                              (cond [(not c)
                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [(not url)
+                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                            (errmessage-context) directive
+                                            lbl *proglang*)]
                                    [else
-                                     (cond [(not url)
-                                            (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                                    (errmessage-context) directive
-                                                    lbl *proglang*)]
-                                           [else
-                                             (display url o)])]))]
+                                     (unless (assoc url *assessments-met*)
+                                       (set! *assessments-met*
+                                         (cons (cons url title)
+                                               *assessments-met*)))
+                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
                           [(string=? directive "objective")
@@ -2187,6 +2195,7 @@
                 )
 
               (when *lesson-plan*
+                (store-assessments)
                 (store-objectives)
 
                 (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
@@ -2483,6 +2492,16 @@
       #:exists 'replace))
 
   )
+
+(define (store-assessments)
+  (call-with-output-file
+    (build-path *containing-directory* ".cached" ".index-assessments.asc")
+    (lambda (o)
+      (unless (null? *assessments-met*)
+        (for ([asst *assessments-met*])
+          (fprintf o "- link:pass:[~a][~a]\n"
+                   (car asst) (cdr asst)))))
+    #:exists 'replace))
 
 (define (store-objectives)
   (call-with-output-file
