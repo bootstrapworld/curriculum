@@ -196,6 +196,8 @@
             (read-json i)))
         '())))
 
+(define *objectives-met* '())
+
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
 
@@ -1328,6 +1330,7 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
+  (set! *objectives-met* '())
   (set! *starter-files-used* '())
   (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
@@ -1948,20 +1951,14 @@
                                                     lbl *proglang*)]
                                            [else
                                              (display url o)])]))]
+                          [(string=? directive "objectives")
+                           (display "\ninclude::.index-objectives.asc[]\n" o)]
                           [(string=? directive "objective")
-                           (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *learning-objectives* lbl #f)]
-                                  [x #f])
-                             (when c (set! x (hash-ref c 'text #f)))
-                             (cond [(not c)
-                                    (set! x lbl)
-                                    (printf "WARNING: ~a: Undefined @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [(not x)
-                                    (set! x lbl)
-                                    (printf "WARNING: ~a: Ill-defined @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [else
-                                     (display "- " o)
-                                     (display x o)]))]
+                           (let ([lbl (string->symbol (read-group i directive))])
+                             (printf "doing @objective ~a\n" lbl)
+                             (unless (member lbl *objectives-met*)
+                               (set! *objectives-met*
+                                 (cons lbl *objectives-met*))))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]
@@ -2191,6 +2188,8 @@
                 )
 
               (when *lesson-plan*
+                (store-objectives)
+
                 (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
@@ -2485,6 +2484,26 @@
       #:exists 'replace))
 
   )
+
+(define (store-objectives)
+  (call-with-output-file
+    (build-path *containing-directory* ".cached" ".index-objectives.asc")
+    (lambda (o)
+      (unless (null? *objectives-met*)
+        (for ([lbl *objectives-met*])
+          (let* ([c (hash-ref *learning-objectives* lbl #f)]
+                 [x #f])
+            (when c (set! x (hash-ref c 'text #f)))
+            (cond [(not c)
+                   (set! x lbl)
+                   (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
+                  [(not x)
+                   (set! x lbl)
+                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)])
+            (display "- " o)
+            (display x o)
+            (newline o)))))
+    #:exists 'replace))
 
 (define (display-standards-selection o *narrative*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
