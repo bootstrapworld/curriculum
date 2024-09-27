@@ -1952,10 +1952,9 @@
                                            [else
                                              (display url o)])]))]
                           [(string=? directive "objectives")
-                           (display "\ninclude::.index-objectives.asc[]\n" o)]
+                           (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
                           [(string=? directive "objective")
                            (let ([lbl (string->symbol (read-group i directive))])
-                             (printf "doing @objective ~a\n" lbl)
                              (unless (member lbl *objectives-met*)
                                (set! *objectives-met*
                                  (cons lbl *objectives-met*))))]
