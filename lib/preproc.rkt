@@ -1948,7 +1948,7 @@
                                                     lbl *proglang*)]
                                            [else
                                              (display url o)])]))]
-                          [(string=? directive "learning-objective")
+                          [(string=? directive "objective")
                            (let* ([lbl (string->symbol (read-group i directive))]
                                   [c (hash-ref *learning-objectives* lbl #f)]
                                   [x #f])
