@@ -9,7 +9,7 @@ table.rideData { width: 70%; margin: auto; }
 
 @description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
-@lesson-prereqs{logarithmic3-fitting-models}
+@lesson-prereqs{exploring-logarithmic-models}
 
 @keywords{periodic, period, amplitude, frequency}
 
@@ -106,7 +106,7 @@ This worksheet had you create a *new type of data display*, called a @vocab{line
 
 @slidebreak
 
-In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
+In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
 
 @ifslide{
 [cols="^1a, ^1a"]
@@ -118,7 +118,9 @@ In this example, we know the Ferris wheel keeps turning, generating data "in bet
 @QandA{
 @Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
 @A{Yes - it was difficult to see the pattern until we added the line!}
-@Q{Is there a relationship between `time` and `altitude`? Why or why not?}
+@Q{Using straight lines to connect these dots is an *approximation*. Why might this approximation not be accurate?}
+@A{We don't know for sure what the data looks like between those points, and we certainly don't know if it's linear!}
+@Q{DO you think there's a relationship between `time` and `altitude`? Why or why not?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
 @A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
@@ -138,8 +140,7 @@ Students are introduced to periodic functions, and they become familiar with the
 - The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
 
-If we can compute the y-coordinate of that point, we'll know the altitude of the seat! +
-But how can we compute the y-coordinate, based on the rotation of the circle?
+How do we figure out how far off the ground (y-coordinate) the seat is after some length of time?
 
 @slidebreak
 
@@ -181,7 +182,7 @@ We can draw a radius at any "time", on the clock hitting the circumference at so
 
 _For example, when it's 12 o'clock, the radius lands at @math{(0,1)}._
 
-That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and red.
+That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
 
 @lesson-instruction{
 - With a partner, complete questions 1-6 of @printable-exercise{unit-clock.adoc}.
@@ -213,14 +214,14 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (A,B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled.
+@right{@image{images/pizza-slice2.png, 100}}As the point (A,B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
 
 @QandA{
-In our clock example, we divide the circle into twelve "slices", each representing one hour. But of course, there are other ways besides 12 slices of "hours" to measure this angle!
+In our clock example, we divide the circle into twelve "slices", each representing one hour (Can you picture a "15m slice"? A "45m" slice?). Of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
-@A{_Minutes_, which divide our circle up into 720 slices instead of 12.
-** _Degrees_, divide a circle up into 360 slices instead of 12.
-** _Compass Directions_ like N, NE, E, SE, etc., which divide our circle up into 8 slices instead of 12.
+@A{_Minutes_, which divide our circle up into 720 slices instead of 12. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.
+** _Degrees_, divide a circle up into 360 slices instead of 12. What kind of slice would 90 degrees look like? 45 degrees?
+** _Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12. Can you picture the distance between North and Southeast?
 }
 @Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
@@ -284,7 +285,7 @@ Pyret knows about @math{\pi}, too!
 
 As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
 
-*Note:* The conventions for labeling a clock are different from the conventions for labelling circles with Radians or Degrees.
+*Note:* The conventions for labeling a clock are different from the conventions for labeling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
 |===
  
@@ -352,8 +353,10 @@ To plot these relationships when the input is @vocab{radians}, instead of hours,
 }
 }
 
+*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians!}_
+
 === Investigate
-Periodic models have the basic form:
+Periodic models for sin and cos relationships have the basic form:
 
 @center{@math{f(x) = a \sin(b(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - h)) + k}}
 
