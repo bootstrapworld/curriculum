@@ -178,9 +178,9 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
-We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y).
+We can draw a radius at any "time", on the clock hitting the circumference at some point (A, B).
 
-_For example, when it's 12 o'clock, the radius lands at @math{(0,1)}._
+_For example, when it's 12 o'clock, the radius lands at @math{(A = 0, B = 1)}._
 
 That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
 
@@ -193,14 +193,15 @@ That radius also forms the @vocab{hypotenuse} of a right triangle with sides @ma
 @ifslide{@right{@image{images/unit-circle-clock.png}}}
 
 @QandA{
-@Q{At what time does the radius lands on the point (0,-1)?}
+@math{A} and @math{B} both vary as a function of @math{time}, giving us functions @math{A(time)} and @math{B(time)}.
+@Q{At what time does the radius land on the point (0,-1)?}
 @A{6pm?}
-@Q{At what time(s) does the radius land on the x-axis?}
+@Q{When does @math{B(time) = 0}, where the radius sits along the x-axis?}
 @A{3pm lands on (1,0)}
 @A{9pm lands on (-1,0)}
-@Q{At which time(s) does x = y?}
+@Q{At which time(s) does @math{A(time) = B(time)}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
-@Q{If we knew that @math{x} and @math{y} were equal, how could we calculate them from this right triangle?}
+@Q{When @math{A(time) = B(time)}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
 @A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
 }
 
@@ -214,7 +215,7 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (A,B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
+@right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
 
 @QandA{
 In our clock example, we divide the circle into twelve "slices", each representing one hour (Can you picture a "15m slice"? A "45m" slice?). Of course, there are other ways besides 12 slices of "hours" to measure this angle!
@@ -353,7 +354,7 @@ To plot these relationships when the input is @vocab{radians}, instead of hours,
 }
 }
 
-*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians!}_
+*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
 
 === Investigate
 Periodic models for sin and cos relationships have the basic form:
