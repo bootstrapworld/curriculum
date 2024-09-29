@@ -1,12 +1,4 @@
-[.beta]
 = Exploring Periodic Models
-
-++++
-<style>
-table.rideData tr * { padding: 0 !important; margin: 2px !important; }
-table.rideData { width: 70%; margin: auto; }
-</style>
-++++
 
 @description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
@@ -37,9 +29,9 @@ table.rideData { width: 70%; margin: auto; }
 @material-links
 
 | Preparation
-| 
+|
 @preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
 You will want to:
  * Open @starter-file{alg2-exploring-periodic-desmos}.
  * Make a link or code to share with your students.
@@ -60,6 +52,12 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 
 Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch.
 
+++++
+<style>
+table.rideData tr * { padding: 0 !important; margin: 2px !important; }
+table.rideData { width: 70%; margin: auto; }
+</style>
+++++
 [.rideData, cols="^1a,^1a", options="header"]
 |===
 | `time` (minutes)  | `altitude` (feet)
@@ -107,7 +105,7 @@ This worksheet had you create a *new type of data display*, called a @vocab{line
 
 @slidebreak
 
-In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an approximation of what data is missing between those times, and helps us see the shape of the relationship.
+In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
 
 @ifslide{
 [cols="^1a, ^1a"]
@@ -119,7 +117,9 @@ In this example, we know the Ferris wheel keeps turning, generating data "in bet
 @QandA{
 @Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
 @A{Yes - it was difficult to see the pattern until we added the line!}
-@Q{Is there a relationship between `time` and `altitude`? Why or why not?}
+@Q{Using straight lines to connect these dots is an *approximation*. Why might this approximation not be accurate?}
+@A{We don't know for sure what the data looks like between those points, and we certainly don't know if it's linear!}
+@Q{DO you think there's a relationship between `time` and `altitude`? Why or why not?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
 @A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
@@ -134,22 +134,21 @@ Students are introduced to periodic functions, and they become familiar with the
 
 === Launch
 
-@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. 
+@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle.
 
 - The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
 
-If we can compute the y-coordinate of that point, we'll know the altitude of the seat! +
-But how can we compute the y-coordinate, based on the rotation of the circle?
+How do we figure out how far off the ground (y-coordinate) the seat is after some length of time?
 
 @slidebreak
 
 Let's consider the models we've studied:
 
-- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever. 
+- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever.
 - quadratic relationships grow one way until they reach a maxima or minima _once_, before growing in the other direction.
 
-*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*  
+*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*
 
 @slidebreak
 
@@ -178,11 +177,11 @@ As always, we advise you to use the term that works best for your classroom cont
 
 @right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
  +
-We can draw a radius at any "time", on the clock hitting the circumference at some point (x, y).
+We can draw a radius at any "time", on the clock hitting the circumference at some point (A, B).
 
-_For example, when it's 12 o'clock, the radius lands at @math{(0,1)}._
+_For example, when it's 12 o'clock, the radius lands at @math{(A = 0, B = 1)}._
 
-That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and red.
+That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
 
 @lesson-instruction{
 - With a partner, complete questions 1-6 of @printable-exercise{unit-clock.adoc}.
@@ -193,14 +192,15 @@ That radius also forms the @vocab{hypotenuse} of a right triangle with sides @ma
 @ifslide{@right{@image{images/unit-circle-clock.png}}}
 
 @QandA{
-@Q{At what time does the radius lands on the point (0,-1)?}
+@math{A} and @math{B} both vary as a function of @math{time}, giving us functions @math{A(time)} and @math{B(time)}.
+@Q{At what time does the radius land on the point (0,-1)?}
 @A{6pm?}
-@Q{At what time(s) does the radius land on the x-axis?}
+@Q{When does @math{B(time) = 0}, where the radius sits along the x-axis?}
 @A{3pm lands on (1,0)}
 @A{9pm lands on (-1,0)}
-@Q{At which time(s) does x = y?}
+@Q{At which time(s) does @math{A(time) = B(time)}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
-@Q{If we knew that @math{x} and @math{y} were equal, how could we calculate them from this right triangle?}
+@Q{When @math{A(time) = B(time)}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
 @A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
 }
 
@@ -214,14 +214,16 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (A,B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference (x,y) has traveled.
+@right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
 
 @QandA{
-In our clock example, we divide the circle into twelve "slices", each representing one hour. But of course, there are other ways besides 12 slices of "hours" to measure this angle!
+In our clock example, we divide the circle into twelve "slices", each representing one hour. How many slices would represent 15 minutes? An hour and a half? slice?
+
+Of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
-@A{_Minutes_, which divide our circle up into 720 slices instead of 12.
-** _Degrees_, divide a circle up into 360 slices instead of 12.
-** _Compass Directions_ like N, NE, E, SE, etc., which divide our circle up into 8 slices instead of 12.
+@A{_Minutes_, which divide our circle up into 720 slices instead of 12. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.
+** _Degrees_, divide a circle up into 360 slices instead of 12. How many minutes are represented by 1 degree? 2.5 degrees?
+** _Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12. How many slices represent the angle between North and South? West and Southwest?
 }
 @Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
@@ -235,9 +237,9 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @slidebreak
 
-@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? 
+@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie?
 
-- We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. 
+- We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
 - This would give us exactly six slices, with the tip of each slice having a 60° angle...
 @QandA{
 @Q{If each of our six slices were an equilateral triangle, our pizza wouldn't be round anymore.}
@@ -247,7 +249,7 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_. 
+@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_.
 
 @lesson-point{Radian: the measure of the angle formed by carving out a radius's worth of the circumference}
 
@@ -285,10 +287,10 @@ Pyret knows about @math{\pi}, too!
 
 As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
 
-*Note:* The conventions for labeling a clock are different from the conventions for labelling circles with Radians or Degrees.
+*Note:* The conventions for labeling a clock are different from the conventions for labeling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
 |===
- 
+
 | hours on a clock
 | vs
 | radians and degrees on a circle
@@ -301,7 +303,7 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 
 | increase clockwise
 |
-| increase counter-clockwise 
+| increase counter-clockwise
 |===
 
 @slidebreak
@@ -343,7 +345,7 @@ To plot these relationships when the input is @vocab{radians}, instead of hours,
 @lesson-instruction{
 - One of these functions computes the "x values" from our unit circle, corresponding to @math{A} on the unit clock. The other computes the y-values, corresponding to @math{B}.
 - Figure out which one is which by completing @printable-exercise{converting-angles.adoc} with your partner.
-- You will be using the radian values from your table with the `sin` and `cos` functions in Pyret. 
+- You will be using the radian values from your table with the `sin` and `cos` functions in Pyret.
 - The contracts for these functions are: +
 @center{
 @show{(contracts
@@ -353,8 +355,10 @@ To plot these relationships when the input is @vocab{radians}, instead of hours,
 }
 }
 
+*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
+
 === Investigate
-Periodic models have the basic form:
+Periodic models for sin and cos relationships have the basic form:
 
 @center{@math{f(x) = a \sin(b(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - h)) + k}}
 
@@ -392,9 +396,9 @@ see if you can come up with explanations for what each of the terms on this diag
 
 When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
-- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests}) 
+- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
   * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
-- @vocab{Troughs} - the lowest points on the wave 
+- @vocab{Troughs} - the lowest points on the wave
   * _Since periodic functions rise and fall repeatedly, there isn't a minima, but math books sometimes refer to each trough as a local minima_
 - @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 
@@ -402,21 +406,21 @@ When graphed from 0-@math{2\pi}, periodic functions rise to a certain height abo
 
 ==== Amplitude @math{A}
 
-The distance from a peak or trough to the @vocab{midline}.  
+The distance from a peak or trough to the @vocab{midline}.
 
 @slidebreak
 
 ==== Period @math{=} @math{2\pi \over \text{frequency}}
 
-The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave). 
+The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave).
 - It can be measured from peak to peak or from trough to trough.
 - The @vocab{frequency} (@math{B}) is _how many cycles_ occur over a @math{2\pi} interval.
 [.rideData, cols="^4a,^1a, ^1a", options="header", stripes="none"]
 |===
-|																			| Period 		| Frequency 	
-| When @math{B = 1}															|@math{2\pi} 	| 1	
+|																			| Period 		| Frequency
+| When @math{B = 1}															|@math{2\pi} 	| 1
 | When the @vocab{period} is cut in half, the @vocab{frequency} _doubles_	|@math{\pi} 	| 2
-| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}	
+| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}
 |===
 
 @slidebreak
@@ -426,7 +430,7 @@ The period is the horizontal distance over which the curve travels before it beg
 The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
 
 - When @math{h} < 0, it shifts the graph to the left.
-- When @math{h} > 0, it shifts the graph to the right. 
+- When @math{h} > 0, it shifts the graph to the right.
 
 _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is positive it looks like it's being subtracted._
 
@@ -434,7 +438,7 @@ _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is 
 
 The vertical shift is the amount the function is shifted up or down
 - When @math{k} < 0, the graph is shifted down.
-- When @math{k} > 0, the graph is shifted up. 
+- When @math{k} > 0, the graph is shifted up.
 
 
 @slidebreak
@@ -744,5 +748,5 @@ We can visualize the body of the function using the Circles of Evaluation:
 - What would a model look like for a disease like Covid, but with seasonal variations that cause minor peaks and troughs?
 
 @strategy{Going Deeper}{
-Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
 }
