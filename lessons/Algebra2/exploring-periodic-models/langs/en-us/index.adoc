@@ -1,19 +1,10 @@
 = Exploring Periodic Models
 
-++++
-<style>
-table.rideData tr * { padding: 0 !important; margin: 2px !important; }
-table.rideData { width: 70%; margin: auto; }
-</style>
-++++
-
 @description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
 @lesson-prereqs{exploring-logarithmic-models}
 
 @keywords{periodic, period, amplitude, frequency}
-
-@define{COtwo}{@math{\text{CO}_2}}
 
 [@lesson-intro-table]
 |===
@@ -36,9 +27,9 @@ table.rideData { width: 70%; margin: auto; }
 @material-links
 
 | Preparation
-| 
+|
 @preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
 You will want to:
  * Open @starter-file{alg2-exploring-periodic-desmos}.
  * Make a link or code to share with your students.
@@ -59,6 +50,12 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 
 Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch.
 
+++++
+<style>
+table.rideData tr * { padding: 0 !important; margin: 2px !important; }
+table.rideData { width: 70%; margin: auto; }
+</style>
+++++
 [.rideData, cols="^1a,^1a", options="header"]
 |===
 | `time` (minutes)  | `altitude` (feet)
@@ -109,23 +106,20 @@ This worksheet had you create a *new type of data display*, called a @vocab{line
 In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
 
 @ifslide{
-[cols="^1a, ^1a"]
-|===
-| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
-|===
+@right{@image{images/rides-combined-plot.png}}
 }
 
 @QandA{
-@Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
+@Q{Was it helpful to connect the dots to form a line graph?}
 @A{Yes - it was difficult to see the pattern until we added the line!}
-@Q{Using straight lines to connect these dots is an *approximation*. Why might this approximation not be accurate?}
 @A{We don't know for sure what the data looks like between those points, and we certainly don't know if it's linear!}
-@Q{DO you think there's a relationship between `time` and `altitude`? Why or why not?}
+@Q{Do `time` and `altitude` appear to be related?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
 @A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
 @Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
 @A{(Let students discuss)}
+@Q{Why might using straight lines to connect these dots be a problem?}
 }
 
 == Periodic Functions
@@ -135,7 +129,7 @@ Students are introduced to periodic functions, and they become familiar with the
 
 === Launch
 
-@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle. 
+@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle.
 
 - The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
 - This pattern of y-values repeats at regular intervals (every 30m)
@@ -146,10 +140,10 @@ How do we figure out how far off the ground (y-coordinate) the seat is after som
 
 Let's consider the models we've studied:
 
-- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever. 
+- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever.
 - quadratic relationships grow one way until they reach a maxima or minima _once_, before growing in the other direction.
 
-*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*  
+*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*
 
 @slidebreak
 
@@ -196,10 +190,10 @@ That radius also forms the @vocab{hypotenuse} of a right triangle with sides @ma
 @math{A} and @math{B} both vary as a function of @math{time}, giving us functions @math{A(time)} and @math{B(time)}.
 @Q{At what time does the radius land on the point (0,-1)?}
 @A{6pm?}
-@Q{When does @math{B(time) = 0}, where the radius sits along the x-axis?}
+@Q{When does @math{B(time)=0}, where the radius sits along the x-axis?}
 @A{3pm lands on (1,0)}
 @A{9pm lands on (-1,0)}
-@Q{At which time(s) does @math{A(time) = B(time)}, where the legs @math{x} and @math{y} are equal?}
+@Q{At which time(s) does @math{A(time)=B(time)}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
 @Q{When @math{A(time) = B(time)}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
 @A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
@@ -210,7 +204,7 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 }
 
 @lesson-instruction{
-- With a partner, complete the remainder of @printable-exercise{unit-clock.adoc}.
+- With a partner, finish @printable-exercise{unit-clock.adoc}.
 - The end of the page will direct you to use the the link I shared to the Desmos File *Exploring Periodic Functions*.}
 
 @slidebreak
@@ -218,11 +212,13 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 @right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
 
 @QandA{
-In our clock example, we divide the circle into twelve "slices", each representing one hour (Can you picture a "15m slice"? A "45m" slice?). Of course, there are other ways besides 12 slices of "hours" to measure this angle!
+In our clock example, we divide the circle into twelve "slices", each representing one hour. How many slices would represent 15 minutes? An hour and a half? slice?
+
+Of course, there are other ways besides 12 slices of "hours" to measure this angle!
 @Q{Can you think of another measure that divides a circle up differently?}
 @A{_Minutes_, which divide our circle up into 720 slices instead of 12. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.
-** _Degrees_, divide a circle up into 360 slices instead of 12. What kind of slice would 90 degrees look like? 45 degrees?
-** _Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12. Can you picture the distance between North and Southeast?
+** _Degrees_, divide a circle up into 360 slices instead of 12. How many minutes are represented by 1 degree? 2.5 degrees?
+** _Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12. How many slices represent the angle between North and South? West and Southwest?
 }
 @Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
 @A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
@@ -236,9 +232,9 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @slidebreak
 
-@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie? 
+@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie?
 
-- We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius. 
+- We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
 - This would give us exactly six slices, with the tip of each slice having a 60° angle...
 @QandA{
 @Q{If each of our six slices were an equilateral triangle, our pizza wouldn't be round anymore.}
@@ -248,7 +244,7 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_. 
+@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_.
 
 @lesson-point{Radian: the measure of the angle formed by carving out a radius's worth of the circumference}
 
@@ -289,7 +285,7 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 *Note:* The conventions for labeling a clock are different from the conventions for labeling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
 |===
- 
+
 | hours on a clock
 | vs
 | radians and degrees on a circle
@@ -302,7 +298,7 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 
 | increase clockwise
 |
-| increase counter-clockwise 
+| increase counter-clockwise
 |===
 
 @slidebreak
@@ -342,16 +338,14 @@ We began by graphing the relationship between the legs of a right triangle and t
 To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
 
 @lesson-instruction{
-- One of these functions computes the "x values" from our unit circle, corresponding to @math{A} on the unit clock. The other computes the y-values, corresponding to @math{B}.
-- Figure out which one is which by completing @printable-exercise{converting-angles.adoc} with your partner.
-- You will be using the radian values from your table with the `sin` and `cos` functions in Pyret. 
+- One of these functions computes the "x values" from our unit circle (@math{A} on the unit clock). The other computes the y-values (@math{B} on the clock).
+- Complete @printable-exercise{converting-angles.adoc} to determine which is which!
 - The contracts for these functions are: +
-@center{
+@hspace{4em}
 @show{(contracts
 '("sin" ("Number") "Number")
 '("cos" ("Number") "Number")
 )}
-}
 }
 
 *Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
@@ -393,11 +387,11 @@ see if you can come up with explanations for what each of the terms on this diag
 
 *Peaks, Troughs and Midline*
 
-When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
+When graphed from 0 to @math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
-- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests}) 
+- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
   * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
-- @vocab{Troughs} - the lowest points on the wave 
+- @vocab{Troughs} - the lowest points on the wave
   * _Since periodic functions rise and fall repeatedly, there isn't a minima, but math books sometimes refer to each trough as a local minima_
 - @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
 
@@ -405,21 +399,21 @@ When graphed from 0-@math{2\pi}, periodic functions rise to a certain height abo
 
 ==== Amplitude @math{A}
 
-The distance from a peak or trough to the @vocab{midline}.  
+The distance from a peak or trough to the @vocab{midline}.
 
 @slidebreak
 
-==== Period @math{=} @math{2\pi \over \text{frequency}}
+==== @math{\text{Period} = 2\pi \over \text{frequency}}
 
-The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave). 
+The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave).
 - It can be measured from peak to peak or from trough to trough.
 - The @vocab{frequency} (@math{B}) is _how many cycles_ occur over a @math{2\pi} interval.
 [.rideData, cols="^4a,^1a, ^1a", options="header", stripes="none"]
 |===
-|																			| Period 		| Frequency 	
-| When @math{B = 1}															|@math{2\pi} 	| 1	
+|																			| Period 		| Frequency
+| When @math{B = 1}															|@math{2\pi} 	| 1
 | When the @vocab{period} is cut in half, the @vocab{frequency} _doubles_	|@math{\pi} 	| 2
-| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}	
+| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}
 |===
 
 @slidebreak
@@ -429,7 +423,7 @@ The period is the horizontal distance over which the curve travels before it beg
 The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
 
 - When @math{h} < 0, it shifts the graph to the left.
-- When @math{h} > 0, it shifts the graph to the right. 
+- When @math{h} > 0, it shifts the graph to the right.
 
 _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is positive it looks like it's being subtracted._
 
@@ -437,7 +431,7 @@ _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is 
 
 The vertical shift is the amount the function is shifted up or down
 - When @math{k} < 0, the graph is shifted down.
-- When @math{k} > 0, the graph is shifted up. 
+- When @math{k} > 0, the graph is shifted up.
 
 
 @slidebreak
@@ -501,7 +495,7 @@ You'll likely need to support students in thinking through what these terms mean
 == Modeling Periodic Relationships
 
 === Overview
-Students explore the @COtwo dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
 === Launch
 Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
@@ -510,17 +504,17 @@ Now that we've had some practice, let's take a look at a dataset that has more v
 
 @slidebreak
 
-Carbon Dioxide (@math{CO_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+Carbon Dioxide (@math{\text{CO}_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
 
 @slidebreak
 
-Scientists are concerned about how much @COtwo is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @COtwo in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @COtwo in any one location!
+Scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @math{\text{CO}_2} in any one location!
 
 - Temperature and air pressure
-- Proximity to @COtwo -producing or @COtwo -consuming sources
+- Proximity to @math{\text{CO}_2} -producing or @math{\text{CO}_2} -consuming sources
 - Global trends like the burning of fossil fuels
 
-Because of these and other factors, the amount of @COtwo at any one location goes up and down throughout the year. But is there a pattern?
+Because of these and other factors, the amount of @math{\text{CO}_2} at any one location goes up and down throughout the year. But is there a pattern?
 
 @slidebreak
 
@@ -585,7 +579,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 @slidebreak
 
 @QandA{
-@Q{What was the highest @COtwo value in the table? The lowest?}
+@Q{What was the highest @math{\text{CO}_2} value in the table? The lowest?}
 @A{424 and 415.74 parts per million.}
 @Q{What did you get for @vocab{amplitude} @math{a}?}
 @A{4.13, because the distance between the high and low readings is 8.26.}
@@ -627,7 +621,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 == Hybrid Models
 
 === Overview
-Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
+Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @math{\text{CO}_2} over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
 
 === Launch
 The resulting model fits the `recent-table` data pretty well, with an S-value of about 1.2ppm. But how well does it fit, if we try it with data from more than just the one year?
@@ -678,7 +672,7 @@ Let's just look at the historical data by itself, without worrying about models.
 
 @ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there are two different things going on here:
 
-1. The amount of @COtwo in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
+1. The amount of @math{\text{CO}_2} in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
 2. But at the same time, there are seasonal, periodic variations that cause it to fluctuate up and down across that line.
 
 @lesson-instruction{
@@ -702,13 +696,13 @@ Our periodic model had two terms:
 - The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the horizontal midline
 - The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
 
-But when we zoomed out to see the historical @COtwo data, we saw that the midline isn't horizontal at all!
+But when we zoomed out to see the historical @math{\text{CO}_2} data, we saw that the midline isn't horizontal at all!
 
 @slidebreak
 
 *The midline _is_ our linear model!*
 
-By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @COtwo.
+By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @math{\text{CO}_2}.
 
 ++++
 <style>
