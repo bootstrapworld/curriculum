@@ -95,7 +95,7 @@ This works in Pyret, too. But in Pyret, values can be more than just numbers!
 Before we dig deeper into the State Demographics data, let's think back to the animals at the shelter in order to introduce some new data science concepts.
 
 @QandA{
-@Q{Would you imagine that younger animals get adopted faster than older animals? Why or why not?}
+@Q{Does an animal's age play a role in how long it takes to be adopted? Why or why not?}
 @A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely.}
 @A{(For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
 @Q{What kind of data does the `age` variable represent? What about `weeks`?}
@@ -116,7 +116,7 @@ In this case, which do we suspect is the cause and which is the effect: age or t
 
 @slidebreak
 
-We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}.
+We suspect that age affects the adoption time, so we'll use `age` as our @vocab{explanatory variable} and `weeks` as our @vocab{response variable}. Now our question can be phrased algebraically: is there a function @math{\text{weeks}(\text{age})} that fits the data?
 
 @strategy{Why not Independent/Dependent?}{
 
@@ -381,9 +381,11 @@ _Based on the data for the existing 50 states (plus DC!)..._
 
 @slidebreak
 
-When we see patterns in data, we can use those patterns to _make predictions_ based on that data. We can even draw a line to show all the possible predictions at once! These predictions represent our "best guess" at the underlying relationship in the data, as we try to @vocab{model} that relationship using math.
+When we see patterns in data, we can use those patterns to _make predictions_. We can even draw a line to show all the possible predictions at once! This line is our model of what we think is the underlying relationship.
 
-Let's find a line to model the relationship between the percent of the population with college degrees and median income.
+Now our question can be phrased algebraically! We're looking for a function that will model the relationship between college enrollment and income, so we want to know if there are values of @math{m} and @math{b} that will let this function fit the data well:
+
+@center{@math{\text{median-income}(\text{pct-college}) = m \times \text{pct-college} + b}}
 
 @lesson-instruction{
 Complete @printable-exercise{model-college-v-income-1.adoc}.
