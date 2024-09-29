@@ -50,40 +50,10 @@ You will want to:
 - Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
 |===
 
-== Quadratic Functions @duration{45 minutes}
+== Quadratic Sequences
 
 === Overview
-Students are introduced to quadratic functions. They become familiar with scenarios involving quadratics and terminology to describe parabolas. They also learn how to identify quadratic sequences, and then explore each of the coefficients in Vertex Form.
-
-=== Launch
-Linear models work well for fitting simple relationships, but many relationships in the real world are more complex! _Linear models are often too primitive_.
-
-The relationship we observe between speed and fuel efficiency appears to best be described by a _curve_, where fuel-efficiency increases up to a certain speed, and then decreases again.
-
-@slidebreak
-
-Today, we will learn about one kind of curved model called a @vocab{quadratic relationship}.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
-
-There are lots of relationships that change direction like this! For example, when an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength.
-
-In some quadratic relationships, the curve goes the other way - decreasing, bottoming out, and then rising again. For example, the graph of an accelerating car's position over time will look like the right-half of a downward-facing parabola, with the car covering more distance each second than last.
-
-@slidebreak
-
-@QandA{
-@Q{Can you think of any other real-world relationships that appear to be quadratic?}
-@A{A ball dropped from a tall building will get faster and faster as it falls, so a graph of @math{\text{distance}(\text{time})} will be quadratic.}
-@A{Many nutrients are good for you, and the more you take the healthier you are...up to a point. After that, too much of a mineral or vitamin can cause problems. A graph of @math{\text{health}(\text{dose})} will be quadratic.}
-@A{A ball thrown in the air will rise quickly, slow down, peak, and then begin to fall. A graph of @math{\text{height}(\text{time})} will be quadratic.}
-@A{The temperature of a puddle will warm and then cool over the course of the day. A graph of @math{\text{temp}(\text{time})} will be quadratic.}
-@A{The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets. A graph of @math{\text{length}(\text{time})} will be quadratic.}
-}
-
-@slidebreak
-
-@lesson-instruction{
-Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear or quadratic relationships.
-}
+Students formalize their understanding of quadratic relationships, learning how to identify them arithmetically.
 
 === Investigate
 Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part.
@@ -146,6 +116,23 @@ Turn to @printable-exercise{classifying-tables.adoc}, and look at the first two 
 
 @teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, because the points won't fit the function perfectly!}
 
+=== Synthesize
+
+- TODO
+
+== Graphing Quadratic Functions
+
+=== Overview
+Students shift from numbers to graphs, as students learn the vocabulary for describing parabolas.
+
+=== Launch
+
+@lesson-instruction{
+- Open @starter-file{alg2-fuel-efficiency}.
+- Make a scatter plot using the `model` as the label, `speed` as the x-axis, and `mpg` as the y-axis.
+- How would you describe the shape you see here?
+}
+
 When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. +
 *Let's define the parts of a parabola together.*
 
@@ -189,6 +176,71 @@ For parabolas representing @math{y} as a quadratic function of @math{x}, we can 
 @lesson-instruction{
 Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sketching and labeling some graphs.
 }
+
+
+=== Investigate
+
+One form of a quadratic model looks like this: @math{f(x) = a(x − h)^2 + k}
+
+Let's find out what each of these coefficients mean!
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.}
+
+@lesson-instruction{
+- Open *Exploring Quadratic Functions (Desmos)*.
+- Use *Slide 1: Transforming Parabolas* to complete @printable-exercise{graphing-models.adoc}
+- @opt{When you're done, continue your exploration with *Slide 2: Do horizontal shifts correspond to vertical shifts for quadratic functions?*}}
+
+@slidebreak
+
+==== Quadratic Coefficient (@math{a})
+
+@QandA{
+@Q{How do you make a parabola "narrower"?}
+@A{Increase the value of @math{a}}
+@Q{How do you make a parabola "wider"?}
+@A{Decrease the value of @math{a}}
+@Q{How do you know whether to parabola opens up or down?}
+@A{If @math{a} is negative, it will open down. If @math{a} is positive, it will open up.}
+@Q{What value of @math{a} will result in a _linear_ model?}
+@A{Zero}
+}
+
+@slidebreak
+
+The quadratic coefficient @math{a} tells us whether the parabola opens up or down, and how tightly it hugs the axis of symmetry.
+
+@slidebreak
+
+==== Horizontal Shift (@math{h})
+
+@QandA{
+@Q{How do you translate a parabola to the left?}
+@A{Increase the value of @math{h}.}
+@Q{How do you translate a parabola to the right?}
+@A{Decrease the value of @math{h}.}
+@Q{What does an @math{h} of zero tell us about the axis of symmetry?}
+@A{It's the y-axis.}
+}
+
+@slidebreak
+
+The horizontal shift @math{h} tells us where the axis of symmetry hits the x-axis, which means it also tells us the x-coordinate of the vertex.
+
+==== Vertical Shift (@math{k})
+
+@QandA{
+@Q{How do you translate a parabola up and down?}
+@A{Change the value of @math{k}}
+@Q{How can you find the coordinates of the parabola's vertex, just by looking at the equation?}
+@A{@math{h} tells us the x-coordinate, and @math{k} tells us the y-coordinate.}
+@Q{We know that for linear functions it's possible to achieve any transformation that we can do with a horizontal shift with a vertical shift. Is this also true for quadratic functions? Why or Why not?}
+@A{No. That phenomenon worked for linear functions because they extend indefinitely without changing direction. Because quadratic functions curve, horizontal shifts and vertical shifts don't translate to each other.}
+}
+
+@slidebreak
+
+Like the y-intercept of a linear model, the @vocab{vertical shift} translates the parabola up and down.
 
 === Synthesize
 
