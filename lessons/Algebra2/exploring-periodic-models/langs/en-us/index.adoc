@@ -6,8 +6,6 @@
 
 @keywords{periodic, period, amplitude, frequency}
 
-@define{COtwo}{@math{\text{CO}_2}}
-
 [@lesson-intro-table]
 |===
 
@@ -108,23 +106,20 @@ This worksheet had you create a *new type of data display*, called a @vocab{line
 In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
 
 @ifslide{
-[cols="^1a, ^1a"]
-|===
-| @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
-|===
+@right{@image{images/rides-combined-plot.png}}
 }
 
 @QandA{
-@Q{Was it helpful to switch from a scatter plot to a line graph? Why or why not?}
+@Q{Was it helpful to connect the dots to form a line graph?}
 @A{Yes - it was difficult to see the pattern until we added the line!}
-@Q{Using straight lines to connect these dots is an *approximation*. Why might this approximation not be accurate?}
 @A{We don't know for sure what the data looks like between those points, and we certainly don't know if it's linear!}
-@Q{DO you think there's a relationship between `time` and `altitude`? Why or why not?}
+@Q{Do `time` and `altitude` appear to be related?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
 @Q{What kind of ride do you think this teacher was on, and why?}
 @A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
 @Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
 @A{(Let students discuss)}
+@Q{Why might using straight lines to connect these dots be a problem?}
 }
 
 == Periodic Functions
@@ -195,10 +190,10 @@ That radius also forms the @vocab{hypotenuse} of a right triangle with sides @ma
 @math{A} and @math{B} both vary as a function of @math{time}, giving us functions @math{A(time)} and @math{B(time)}.
 @Q{At what time does the radius land on the point (0,-1)?}
 @A{6pm?}
-@Q{When does @math{B(time) = 0}, where the radius sits along the x-axis?}
+@Q{When does @math{B(time)=0}, where the radius sits along the x-axis?}
 @A{3pm lands on (1,0)}
 @A{9pm lands on (-1,0)}
-@Q{At which time(s) does @math{A(time) = B(time)}, where the legs @math{x} and @math{y} are equal?}
+@Q{At which time(s) does @math{A(time)=B(time)}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
 @Q{When @math{A(time) = B(time)}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
 @A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
@@ -209,7 +204,7 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 }
 
 @lesson-instruction{
-- With a partner, complete the remainder of @printable-exercise{unit-clock.adoc}.
+- With a partner, finish @printable-exercise{unit-clock.adoc}.
 - The end of the page will direct you to use the the link I shared to the Desmos File *Exploring Periodic Functions*.}
 
 @slidebreak
@@ -343,16 +338,14 @@ We began by graphing the relationship between the legs of a right triangle and t
 To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
 
 @lesson-instruction{
-- One of these functions computes the "x values" from our unit circle, corresponding to @math{A} on the unit clock. The other computes the y-values, corresponding to @math{B}.
-- Figure out which one is which by completing @printable-exercise{converting-angles.adoc} with your partner.
-- You will be using the radian values from your table with the `sin` and `cos` functions in Pyret.
+- One of these functions computes the "x values" from our unit circle (@math{A} on the unit clock). The other computes the y-values (@math{B} on the clock).
+- Complete @printable-exercise{converting-angles.adoc} to determine which is which!
 - The contracts for these functions are: +
-@center{
+@hspace{4em}
 @show{(contracts
 '("sin" ("Number") "Number")
 '("cos" ("Number") "Number")
 )}
-}
 }
 
 *Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
@@ -394,7 +387,7 @@ see if you can come up with explanations for what each of the terms on this diag
 
 *Peaks, Troughs and Midline*
 
-When graphed from 0-@math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
+When graphed from 0 to @math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
 - @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
   * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
@@ -410,7 +403,7 @@ The distance from a peak or trough to the @vocab{midline}.
 
 @slidebreak
 
-==== Period @math{=} @math{2\pi \over \text{frequency}}
+==== @math{\text{Period} = 2\pi \over \text{frequency}}
 
 The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave).
 - It can be measured from peak to peak or from trough to trough.
@@ -502,7 +495,7 @@ You'll likely need to support students in thinking through what these terms mean
 == Modeling Periodic Relationships
 
 === Overview
-Students explore the @COtwo dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
 
 === Launch
 Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
@@ -511,17 +504,17 @@ Now that we've had some practice, let's take a look at a dataset that has more v
 
 @slidebreak
 
-Carbon Dioxide (@math{CO_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+Carbon Dioxide (@math{\text{CO}_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
 
 @slidebreak
 
-Scientists are concerned about how much @COtwo is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @COtwo in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @COtwo in any one location!
+Scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @math{\text{CO}_2} in any one location!
 
 - Temperature and air pressure
-- Proximity to @COtwo -producing or @COtwo -consuming sources
+- Proximity to @math{\text{CO}_2} -producing or @math{\text{CO}_2} -consuming sources
 - Global trends like the burning of fossil fuels
 
-Because of these and other factors, the amount of @COtwo at any one location goes up and down throughout the year. But is there a pattern?
+Because of these and other factors, the amount of @math{\text{CO}_2} at any one location goes up and down throughout the year. But is there a pattern?
 
 @slidebreak
 
@@ -586,7 +579,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 @slidebreak
 
 @QandA{
-@Q{What was the highest @COtwo value in the table? The lowest?}
+@Q{What was the highest @math{\text{CO}_2} value in the table? The lowest?}
 @A{424 and 415.74 parts per million.}
 @Q{What did you get for @vocab{amplitude} @math{a}?}
 @A{4.13, because the distance between the high and low readings is 8.26.}
@@ -628,7 +621,7 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 == Hybrid Models
 
 === Overview
-Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @COtwo over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
+Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @math{\text{CO}_2} over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
 
 === Launch
 The resulting model fits the `recent-table` data pretty well, with an S-value of about 1.2ppm. But how well does it fit, if we try it with data from more than just the one year?
@@ -679,7 +672,7 @@ Let's just look at the historical data by itself, without worrying about models.
 
 @ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there are two different things going on here:
 
-1. The amount of @COtwo in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
+1. The amount of @math{\text{CO}_2} in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
 2. But at the same time, there are seasonal, periodic variations that cause it to fluctuate up and down across that line.
 
 @lesson-instruction{
@@ -703,13 +696,13 @@ Our periodic model had two terms:
 - The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the horizontal midline
 - The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
 
-But when we zoomed out to see the historical @COtwo data, we saw that the midline isn't horizontal at all!
+But when we zoomed out to see the historical @math{\text{CO}_2} data, we saw that the midline isn't horizontal at all!
 
 @slidebreak
 
 *The midline _is_ our linear model!*
 
-By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @COtwo.
+By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @math{\text{CO}_2}.
 
 ++++
 <style>
@@ -748,5 +741,5 @@ We can visualize the body of the function using the Circles of Evaluation:
 - What would a model look like for a disease like Covid, but with seasonal variations that cause minor peaks and troughs?
 
 @strategy{Going Deeper}{
-Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+Have your students refer back to @lesson-link{exploring-exponential-models}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
 }
