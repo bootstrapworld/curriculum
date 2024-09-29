@@ -449,14 +449,30 @@ Data Scientists often use transformations to stretch their data into shapes that
 @A{We are speeding up the growth intervals on the x-axis to "keep up with" the speed of growth in the data so that we can see the pattern better.}
 }
 
-When we changed Desmos's view from "Linear" to "Logarithmic", we made the x-axis grow faster and "squish" the dots so they appear linear. By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
+When we changed Desmos's view from "Linear" to "Logarithmic", we made the x-axis grow faster and "squish" the dots so they appear linear. By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks linear.
 
+++++
+<style>
+/* squish the list items inside the shortListItems box */
+.shortListItems ol p { margin: 0 }
+</style>
+++++
+[.shortListItems]
+@strategy{Undoing a Log by taking the...Log?}{
 
-@strategy{Going Deeper: Connecting to Inverse Functions}{
+Relationships in our scatter plot represent a _ratio of growth_ between two quantities. Consider a simple ratio like 1:3. This means the first quantity grows by one third _with respect to the other_. It can by turned into 1:1 in two ways:
 
-While this metaphor doesn't cover inverses in any real depth, the treadmill analogy opens the door to discussing how one kind of change can "cancel out" or "undo" another. 
+1. Transform the *first* quantity (_multiply_ by 3)
+2. Transform the *second* quantity (_divide_ by 3)
 
-We are working to add additional material on inverse functions to our Algebra 2 materials, and hope to release them in the coming year!
+In our scatter plot, the ratio is the growth in `median-lifespan` v. the growth in `pc-gdp`. The growth of one is logarithmic _with respect to the growth of the other_. This means there are two ways to linearize the data:
+
+1. Transform the *x-axis* to match the *y* (take the _log_)
+2. Transform the *y-axis* to match the *x* (raise to an _exponent_)
+
+We've chosen the first option because _Desmos doesn't offer an exponential transformation of the axes_. There's no way to even let kids experiment, without jumping straight to Pyret! Another reason is that the range of the `median-lifespan` data is so small (52-85 years) relative to the range of `pc-gdp` (600-144,000 dollars) that the transformation has less of an effect on the y-axis than it does on the x-axis!
+
+While the treadmill/ratio analogy doesn't cover inverses in any real depth, the treadmill analogy opens the door to discussing how one kind of change can "cancel out" or "undo" another. We are working to add additional material on inverse functions to our Algebra 2 materials, and hope to release them in the coming year!
 }
 
 === Synthesize
