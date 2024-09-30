@@ -36,11 +36,11 @@ You will want to:
 }
 |===
 
-== Fitting Exponential Models 	@duration{30 minutes}
+== Modeling in Desmos
 
 === Overview
 
-Students extend their sampling techniques to exponential relationships. Students continue experimenting in Desmos, but eventually switch back to Pyret to formalize their understanding.
+Students extend their sampling techniques to exponential relationships, experimenting in Desmos to come up with plausible models
 
 === Launch
 
@@ -74,42 +74,22 @@ Now that you're familiar with exponential functions, let's use them to model thi
 @lesson-instruction{
 - Let's return to the *Modeling Covid Spread Desmos file*.
 - You should now be on the fourth slide ("Exponential Model for MA").
-- Use it to complete the first section of @printable-exercise{exponential-models-ma.adoc}.
-- Then use @starter-file{alg2-covid} to complete the rest of the page.
-- Is an exponential model a good fit for this data? Why or why not?
+- Use it to complete @printable-exercise{exponential-models-ma.adoc}.
 }
 
-@slidebreak
+@teacher{Crowdsource the various values for each coefficient.}
 
-On @printable-exercise{exponential-models-ma.adoc} you'll see a note about the use of ``~1`` to tell Pyret to prioritize _speed_ over precision. Unlike most calculators, Pyret usually prioritizes precision.
+- Look at all the values we came up with for @math{a}, @math{b}, and @math{k}.
+- What do you notice? Are they clustered around a particular value, or completely spread out?  Are there any values that are really far from the others?
 
-In a math classroom, this is the difference between @math{\frac{2}{3}} rendering as @math{ 0.\overline{3}} or being rounded to 0.666666667.
+Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just using mental arithmetic to do a quick calculation! But what if the model itself is hard to use?
 
-In data processing, *choosing speed over precision can have ethical or technical consequences!*
-
-For example:
-
-1) When calculating a path over an extremely long distance, being off by just a billionth of a degree could result in a Mars-bound rocket missing its destination.
-
-2) For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire group of people!
-
-@strategy{Optional Activity: Guess the Model!}{
-
-1. Divide students into teams of 2-4, and have each team come up with an exponential, real-world scenario, then have them write down an exponential function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their exponential function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title display to describe their real-world scenario (e.g. - "money in a savings account vs. years").
-3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
-4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
-
-- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
-- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+@lesson-instruction{
+Use your model to make predictions on @printable-exercise{predicting-exponential-growth.adoc}.
 }
 
 === Synthesize
-
-- What makes exponential models different from the linear and quadratic models you've seen before?
-- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
-
-@slidebreak
+- Is an exponential model a good fit for this data?
 
 @teacher{Have students share their predictions for each of the time-spans in question 5.}
 
@@ -138,4 +118,60 @@ _Mathematically,_ the number line is composed of equal intervals forever. @link{
 
 This may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
 
-Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. _(Stay tuned!)_
+Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. It's called a _logarithm_, and we'll be exploring it soon!
+
+== Modeling in Pyret
+
+=== Overview
+Students take their Desmos-derived coefficients back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
+
+=== Launch
+
+Pyret's function `num-expt` is the function that we use for exponents. It takes in 2 numbers: the base and the power. `num-expt(2, 3)`, for example will produce @math{2^3}.
+
+@lesson-instruction{
+- Use @starter-file{alg2-covid} to complete the first section of @printable-exercise{computational-limits.adoc}.
+- Be prepared to discuss what you observed.
+}
+
+=== Investigate
+
+Sometimes, data scientists perform calculations that result in very large or very small numbers. They send satellites to far-away planets, or reason about the mass of electrons and neutrinos.
+
+In math, numbers can be infinitely large or small. They can have any number of digits or decimal places! But computers are *finite*, and some numbers get too big to fit in their memory. So what do we do?
+
+@slidebreak
+
+One option is to make the really big or small numbers _approximations_ of the real numbers, in the same way a model approximates real data. We can shrink a number with 100 digits down to just 3 digits, as long as we remember "there's 97 zeros after it!" This way, numbers like a "four trillion and one" get approximated as "four trillion".
+
+In a math classroom, this is the difference between @math{\frac{2}{3}} rendering as @math{ 0.\overline{3}} or being rounded to 0.666666667.
+
+@slidebreak
+
+Virtually every programming language does this when numbers get large enough, chopping off those last digits in order to stay fast. This is especially important for time-sensitive computations like weather modeling, where knowing where a hurricane will make landfall before it hits is worth _much_ more than pinpointing where it hits down to the kilometer.
+
+Are there times when we *don't* want to chop off digits like this?
+
+@slidebreak
+
+Pyret has a special kind of Number, called a _RoughNum_, which chops off digits for faster calculation. But unlike other languages, Pyret wants to put the programmer in control. It will never drop digits _unless you tell it to!_
+
+To turn a number into a RoughNum, we use the approximation symbol `~`. `~3`, for example, is "roughly three." This tells Pyret to round off the calculation, prioritizing *speed* over *precision* to get a result that is "roughly accurate".
+
+@QandA{
+@Q{Why do you think Pyret won't let us compare two RoughNums?}
+@A{Because it knows that two different Numbers can both round to the same RoughNum, which means comparisons are not reliable!}
+}
+
+@slidebreak
+
+Exponential growth and decay can create enormously large and enormously small numbers, which can slow down computation.
+
+@lesson-instruction{
+- Complete @printable-exercise{computational-limits.adoc}.
+}
+
+=== Synthesize
+
+- What makes exponential models different from the linear and quadratic models you've seen before?
+- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
