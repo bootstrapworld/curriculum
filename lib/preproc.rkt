@@ -2498,7 +2498,7 @@
     (build-path *containing-directory* ".cached" ".index-assessments.asc")
     (lambda (o)
       (unless (null? *assessments-met*)
-        (for ([asst *assessments-met*])
+        (for ([asst (reverse *assessments-met*)])
           (fprintf o "- link:pass:[~a][~a]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
@@ -2508,7 +2508,7 @@
     (build-path *containing-directory* ".cached" ".index-objectives.asc")
     (lambda (o)
       (unless (null? *objectives-met*)
-        (for ([lbl *objectives-met*])
+        (for ([lbl (reverse *objectives-met*)])
           (let* ([c (hash-ref *learning-objectives* lbl #f)]
                  [x #f])
             (when c (set! x (hash-ref c 'text #f)))

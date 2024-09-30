@@ -328,7 +328,8 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (enclose-tag "sup" "" ss)]
+            (string-append
+              (enclose-tag "sup" "" ss) "&#x2009;")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
