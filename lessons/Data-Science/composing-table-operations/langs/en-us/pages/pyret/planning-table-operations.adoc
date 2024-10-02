@@ -3,10 +3,13 @@
 <style>
 .literalblock pre { font-size: inherit; }
 table:first-of-type td {padding: .25em .5em !important; }
+
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
+
 div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
 .data th:last-of-type, .data td:last-of-type * {
   font-style: italic !important; text-align: center;
-}
 </style>
 ++++
 
@@ -40,7 +43,7 @@ fun is-fixed(r):  r["fixed"]           end
 
 For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
 
-[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", grid="none", options="header"]
 |===
 |
 | Prompt
