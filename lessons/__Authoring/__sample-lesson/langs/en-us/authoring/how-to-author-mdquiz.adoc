@@ -1,0 +1,50 @@
+= mdquiz
+
+== Authoring Quizzes
+
+Edits get made in .toml files saved in the `sample-quiz/src` folder
+	
+	`__Authoring/sample-lesson/langs/en-us/sample-quiz/src/file-name.toml`
+
+== Building Quizzes
+
+After we save, go to the terminal
+
+- cd into the folder that contains the quiz using the following command:
+
+	`cd __Authoring/sample-lesson/langs/en-us/sample-quiz`
+
+
+- build the distribution folder using the following command line in the terminal
+
+	`npm exec vite build` 
+
+
+- cd into the newly created dist folder using 
+
+	`cd dist`
+
+
+- launch a web server by running
+
+	`python3 -m http.server` 
+
+
+- open a new browser window in Chrome / Brave etc.
+
+- Type `localhost:8000 into the navbar
+
+
+== After making edits and saving a file go back to the terminal
+
+- kill the browser from the terminal with the command control c
+
+- cd back to the sample-quiz folder using `cd ../`
+
+- run `npm exec vite build` in the terminal
+
+- cd into the newly created dist folder using `cd dist`
+
+- run `python3 -m http.server` to launch a new tiny web server
+
+- launch a browser and to go localhost:8000
