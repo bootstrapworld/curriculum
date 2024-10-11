@@ -108,6 +108,7 @@ local function postproc(fhtml_cached, tipe)
           x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
+      x = x:gsub('^<body ', '%0 onload="renderSaveToDrive()" ')
       --
     end
     --
@@ -183,15 +184,35 @@ local function postproc(fhtml_cached, tipe)
       };
       </script>
       <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <script>function renderSaveToDrive() {
+          var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+          gapi.savetodrive.render('savetodrive-div', {
+            src:]] ..
+            "(window.location.href.match(/\\/$/)?(window.location.href+'index.pdf'):(window.location.href.replace(/([^\\/]+)\\.([^.\\/]+)$/, '$1.pdf')))," ..
+            [[
+            filename:
+            ]] .. '"' .. page_title .. '",' ..
+            [[
+            sitename:"Bootstrap, Brown University"
+          });
+          if(isSafari){
+            var warning = document.createElement("div");
+            warning.id = "safariWarning";
+            warning.innerHTML = "You appear to be using Safari, which interferes with Google's Save-to-Drive button. You can fix it by going to Preferences, clicking 'Privacy', and making sure that 'Prevent cross-site tracking' is <b>not</b> checked."
+            var button = document.getElementById("savetodrive-div");
+            button.parentNode.insertBefore(warning, warning.nextSibling);
+          }
+        }
+        </script>
       ]])
       o:write(z, '\n')
       delete_line_p = true
     end
     if x:find('</h1>') then
-      x = x:gsub('</h1>.*', '%0\n')
+      x = x:gsub('</h1>.*', '%0\n<div id="savetodrive-div"></div>')
     end
     if x:find('^<div id="body"') then
-      x = x:gsub('id="body"', '%1 "')
+      x = x:gsub('id="body"', '%0 onload="renderSaveToDrive()"')
     end
     --
     if memberp(tipe, {'lessonplan', 'pathwayresource'}) then

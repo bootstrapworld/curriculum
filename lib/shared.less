@@ -157,6 +157,22 @@ body {
   /* But not if it's an extra-long page */
   &.canBeLongerThanAPage #footer { display: none; }
 
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       @translucent-bg-color;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
+
   /* outOfDate warning */
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
   #outOfDate a {color: lightblue;}
@@ -1201,6 +1217,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
     transform: scale(calc(12 / 9)); 
+    #savetodrive-div { transform: scale(0.8); }
   }
 
   /********************************************************************
@@ -1286,7 +1303,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
-  .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
