@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files dictionaries
 
 ###############################################################################
 
@@ -132,7 +132,40 @@ starter-files: distribution/$(NATLANG)/starter-files.js
 
 distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
 	@echo ➤ Build $@
+<<<<<<< HEAD
 	@node $< $@
+=======
+	@node $+ $@
+
+###############################################################################
+
+assessments: distribution/$(NATLANG)/assessments.js
+
+distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+	@echo ➤ Build $@
+	@node $+ $@
+
+###############################################################################
+
+dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
+
+alignment-dictionaries := $(wildcard \
+	shared/langs/en-us/standards/*.json \
+	shared/langs/en-us/textbooks/*.json \
+	shared/langs/en-us/practices/*.json)
+
+distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
+	@echo ➤ Build $@
+	@$(MAKE_DIR)make-json-dict.lua $@
+
+###############################################################################
+
+learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+
+distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+	@echo ➤ Build $@
+	@node $+ $@
+>>>>>>> 59cbe7482 (make: dictionaries.js shd be created before bookmaking)
 
 ###############################################################################
 
