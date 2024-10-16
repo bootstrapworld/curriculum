@@ -6,14 +6,25 @@
 
 minchars=200
 
+JQ=$(which jq)
+
 for f in $(git diff --name-only --staged); do
   fb=$(basename $f)
-  test ${fb#*.} = adoc || continue
-  d=$(dirname $f)
-  proglangfile=$d/proglang.txt
-  test -f $proglangfile || continue
-  test $(grep -c . $proglangfile) -gt 1 || continue
-  test $(git -c diff.tool=vimdiff diff --staged -- $f|grep '^+'|wc -c) -lt $minchars && continue
-  git diff --staged -- $f|grep '^+'|grep -q @ifproglang && continue
-  echo WARNING: $f did not have any @ifproglang\'s
+  if test ${fb#*.} = adoc; then
+    d=$(dirname $f)
+    proglangfile=$d/proglang.txt
+    test -f $proglangfile || continue
+    test $(grep -c . $proglangfile) -gt 1 || continue
+    test $(git -c diff.tool=vimdiff diff --staged -- $f|grep '^+'|wc -c) -lt $minchars && continue
+    git diff --staged -- $f|grep '^+'|grep -q @ifproglang && continue
+    echo WARNING: $f did not have any @ifproglang\'s
+
+  elif test ${fb#*.} = json; then
+    test -z "$JQ" && continue
+    cat $f|$JQ -e >/dev/null 2>&1 && continue
+    echo ERROR: $f is invalid JSON
+    exit 1
+
+  else continue
+  fi
 done
