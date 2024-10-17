@@ -281,6 +281,7 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(SETUP_LESSONPLAN_PDF)
 	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
 	@echo } >> $(SETUP_CONTRACTS_PDF)
+	@echo } >> $(IGNORABLE_DIRECTORIES)
 	@echo ➤ Set up batch files
 	@$(MAKE_DIR)do-setup.lua
 	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
