@@ -5,26 +5,29 @@
 .autonum { font-weight: bold; padding-top: 2px !important; }
 .autonum:after { content: ')' !important; }
 
-/* Custom graph settings and axis labels */
-.graph td {
-	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px !important;
-	background-position: -3px 66px !important;
-	height: 1.5in !important;
-	width: 2in !important;
-	background-image:
-		linear-gradient(270deg, lightblue 2px, transparent 2px),
-		linear-gradient(lightblue 2px, transparent 2px)
-		!important;
-			}
-.graphs td {
-	background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px !important;
-	background-position: -30px 74px !important;
-	height: 1.5in !important;
-	width: 1.5in !important;
-	background-image:
-		linear-gradient(270deg, lightblue 2px, transparent 2px),
-		linear-gradient(lightblue 2px, transparent 2px)
-		!important;		
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+      --x_label defaults to 'x'
+      --y_label defaults to 'y'
+*/
+.magnitude.graph {
+	--width:   2.0in;
+	--height:  1.5in;
+}
+
+.translation.graph {
+	--min-gap: 5px;
+	--minors:  5.9;
+	--width:   1.75in;
+	--height:  1.50in;
 }
 </style>
 ++++
@@ -41,7 +44,7 @@ This second parabola is written in Vertex Form: @math{f(x) = a(x - h)^2 + k}. Ea
 @n Make a sketch of the original graph you see (@math{a = 1}, @math{h = 0}, @math{k = 0}). Then try changing the value of @math{a} to 10, 0.1, 0, -10 and -2, graphing each parabola in the squares below. *Label the vertex "V" and any roots with "R"!*
 
 
-[.FillVerticalSpace.graph, cols="1,1,1", frame="none",grid="none"]
+[.FillVerticalSpace.magnitude.graph, cols="1,1,1", frame="none",grid="none"]
 |===
 | @math{a = 1}	| @math{a = 10}	 | @math{a = 0.1}
 | @math{a = 0}	| @math{a = -10} | @math{a = -2}
@@ -61,7 +64,7 @@ This second parabola is written in Vertex Form: @math{f(x) = a(x - h)^2 + k}. Ea
 | Set @math{h} back to 0. Change the value of @math{k} to -5 and 5, graphing each parabola in the squares below. 
 |===
 
-[.FillVerticalSpace.graphs,cols="1a,1a,1a,1a", frame="none", stripes="none", grid="none"]
+[.FillVerticalSpace.translation.graph,cols="1a,1a,1a,1a", frame="none", stripes="none", grid="none"]
 |===
 |@math{h=-5}	| @math{h=5} 	|@math{k=-5}	| @math{k=5} 	
 |===

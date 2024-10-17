@@ -31,14 +31,26 @@ body:not(.LessonPlan, .narrativepage) p { line-height: 1; }
 /* Cut the padding under each section */
 .sect1 { padding: 0 !important; }
 
-.graph td {
-  background-size: 100px 200px, 200px 100px, 20px 20px, 20px 20px !important;
-  background-position: 25px -100px !important;
-  height: 1.4in !important;
-  width: 2in !important;
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph {
+  --width:    2.0in;
+  --height:   1.4in;
+  --left_pct: 0.10;
+  --top_pct:  0.85;
+  --minors:   8.0;
 }
-.graph td::before { top: 1em !important; left: 5% !important; }
-.graph td::after { top: 75% !important; }
 </style>
 ++++
 
