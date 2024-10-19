@@ -71,6 +71,9 @@ Correlation does NOT imply causation.
 
 * For make graphs using pure css
 
+++++
+<style>
+/*
   "Graph" tables provide a pure-CSS solution for all coordinate planes.
 
   They rely on a set up CSS variables, with reasonable defaults:
@@ -80,20 +83,16 @@ Correlation does NOT imply causation.
     --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
     --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
 
-      --x_label defaults to 'x'
-      --y_label defaults to 'y'
-++++
-<style>
-.magnitude.graph {
-  --width:   2.0in;
-  --height:  1.5in;
-}
-
-.translation.graph {
-  --min-gap: 5px;
-  --minors:  5.9;
-  --width:   1.75in;
-  --height:  1.50in;
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph td {
+  --width:    3.2in;
+  --height:   3.0in;
+  --left_pct: 0.08;
+  --top_pct:  0.92;
+  --x_label: 'altitude';
+  --y_label: 'time';
 }
 </style>
 ++++
