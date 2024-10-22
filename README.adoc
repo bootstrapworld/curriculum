@@ -601,7 +601,7 @@ The following is needed to construct documents from this repo:
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on MacOS, your environment is close but missing some unix tools. You'll want to install https://brew.sh/[Homebrew] first, then run the following command to add them:
+  - If you're on MacOS, your environment is close but missing some Unix tools. You'll want to install https://brew.sh/[Homebrew] first, then run the following command to add them:
 +
   brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman
 
@@ -616,7 +616,11 @@ The following is needed to construct documents from this repo:
 
 * Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
 
-* Racket, to do preprocessing and other bookkeeping. Any version should
+* `jq`, used for checking correctness of JSON files
++
+Linux, macOS, and WSL users should already have this installed. If not, it can be installed via `sudo apt install jq`
+
+* Racket, to do pre-processing and other bookkeeping. Any version should
 do. We're not using any bleeding-edge features of Racket. You'll want to
 https://download.racket-lang.org/[download and install DrRacket]
 and make sure the `racket` binary is in your `$PATH`.
