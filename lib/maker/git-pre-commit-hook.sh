@@ -7,7 +7,7 @@
 minchars=200
 
 JQ=$(which jq)
-SPELL_FOUND=$(which aspell)
+SPELL_FOUND=$(which hunspell)
 
 for f in $(git diff --name-only --staged); do
   fb=$(basename $f)
@@ -24,7 +24,7 @@ for f in $(git diff --name-only --staged); do
 
     for doit in justonce; do
       test -z "$SPELL_FOUND" && continue
-      git diff --staged -- $f|aspell list|grep -q . || continue
+      git diff --staged -- $f|grep '^+'|grep -v '^+++'|hunspell -l|grep -q . || continue
       echo WARNING: $f may have spelling errors
     done
 
