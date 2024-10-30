@@ -26,8 +26,8 @@ table+.paragraph .autonum {padding-top: 0; }
 (define p (abs (- lo-dateA lo-dateB)))
 (define a 4.13)
 (define b 6.28)
-(define c 419.87)
-(define d 2023.1)
+(define k 419.87)
+(define h 2023.1)
 }
 
 @define{hi}{@show{hi}}
@@ -37,8 +37,8 @@ table+.paragraph .autonum {padding-top: 0; }
 @define{p}{@show{(round p)}}
 @define{a}{@show{a}}
 @define{b}{@show{b}}
-@define{c}{@show{c}}
-@define{d}{@show{d}}
+@define{k}{@show{k}}
+@define{h}{@show{h}}
 
 @n Using your computed values for @math{a}, @math{b}, @math{h}, and @math{k}, define your periodic function below in both Function and Pyret notation.
 
@@ -51,13 +51,13 @@ table+.paragraph .autonum {padding-top: 0; }
 
 @math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
 @math{sin}(
- @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@d}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{@c}}{vertical shift}
+ @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift})
+) + @fitbruby{70pt}{@ifsoln{@k}}{vertical shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
+@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,k))))) (?ANS ,h))))}
 |===
 
 
