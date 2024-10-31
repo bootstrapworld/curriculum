@@ -25,37 +25,45 @@
       0 15) 16))
 
 (define (escape-html s #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
-  (when kill-newlines?
-    (set! s (regexp-replace* #rx"\n" s " ")))
-  (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
-            (format "href=\"~aindex.pdf\"" static-prefix)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
-            (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
+  (let ([lib-prefix #f])
+    (when static-prefix
+      (set! lib-prefix (regexp-replace #rx"/lessons/[^/]*?/" static-prefix "/")))
+    (when kill-newlines?
+      (set! s (regexp-replace* #rx"\n" s " ")))
+    (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
+              (format "href=\"~aindex.pdf\"" static-prefix)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
+              (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
 
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-            (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
 
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
-            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/([^/]*?\\.js)\"" s
-            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+    (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+    (set! s (regexp-replace* #rx"src=\"[.][^\"]*?/([^/]*?\\.js)\"" s
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
 
-  (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
-            (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/css/\\1\"" *season-year*)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/css/\\1\"" *season-year*)))
 
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
-            (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
+    (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
 
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
+    (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
 
-  (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
-            "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
-  (set! s (regexp-replace* #rx"\"" s "\"\""))
-  s)
+    (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
+              "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
+
+    (set! s (regexp-replace #rx"src=\"[^\"]*?/images/CCbadge.png\"" s
+                            (format "src=\"~aimages/CCbadge.png\"" lib-prefix)))
+
+    ;double double-quotes
+    (set! s (regexp-replace* #rx"\"" s "\"\""))
+    s))
 
 (define (escaped-file-content f #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
   (escape-html (file->string f) #:kill-newlines? kill-newlines? #:static-prefix static-prefix))
