@@ -3,25 +3,6 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
- * IMPORT FONTS
-
-
-@font-face {
-  font-family: 'MJXTEX';
-  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-I';
-  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-B';
-  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
-}
- */
-/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -315,9 +296,10 @@ lines on some browsers */
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
   display:            inline-block;
-  bottom:             -12px;
+  bottom:             -11.5px;
   left:               0;
   font-size:          9.5px;
+  line-height:        14px;
   font-weight:        normal;
   width:              100%;
   text-align:         center;
@@ -329,7 +311,7 @@ lines on some browsers */
 /* Rubies are sensitive to line-height, so force
   the same font and special superscript behavior 
 */
-.ruby * { font-family: @text-font !important; }
+.ruby * { font-family: @text-font !important; background: none !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
 
 .fitb.stretch, .fitbruby.stretch { 
@@ -935,6 +917,11 @@ table.recipe_title    {
 
 /* Proglang-specific adaptations */
 .pyret {
+
+  .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for Pyret. ";
+  }
+
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
@@ -987,7 +974,10 @@ table.recipe_title    {
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
 }
 
-.wescheme {
+.wescheme {  
+  .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for WeScheme. ";
+  }
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
@@ -1027,6 +1017,9 @@ table.recipe_title    {
 }
 
 .codap {
+ .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for CODAP. ";
+  }
   .data-cycle-expression { font-family: inherit; }
 
   .cm-keyword { font-weight: normal !important; }
