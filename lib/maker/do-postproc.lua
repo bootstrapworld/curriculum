@@ -261,34 +261,6 @@ local function postproc(fhtml_cached, tipe)
 
     end
     --
-    if add_mathjax_p then
-      -- print('adding mathjax')
-      add_mathjax_p = false
-      o:write(
-[=[<script>
-  MathJax = {
-    options: { enableMenu: false, },
-    tex:     {
-      inlineMath: [['$$', '$$'], ['\\(', '\\)']],
-      displayMath: [],
-    },
-    svg:     { fontCache: 'global' },
-    startup: {
-      ready: () => {
-            MathJax.startup.defaultReady();
-            MathJax.startup.promise.then(() => {
-              window.status="MathJax Complete!"
-            });
-          }
-    }
-  };
-  </script>
-]=]);
-      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
-      -- o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js' .. '"></script>\n')
-      o:write('<script>window.status = "not_ready_to_print";</script>\n')
-    end
-    --
     if add_bootstrap_lesson_p then
       add_bootstrap_lesson_p = false
       o:write('<!-- Load PDF and Download modules -->\n')
@@ -302,6 +274,14 @@ local function postproc(fhtml_cached, tipe)
       o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'starterFiles.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
+    end
+    --
+    if add_mathjax_p then
+      -- print('adding mathjax')
+      add_mathjax_p = false
+      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      -- o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js' .. '"></script>\n')
+      o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
     ::continue::

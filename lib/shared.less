@@ -3,25 +3,6 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
- * IMPORT FONTS
-
-
-@font-face {
-  font-family: 'MJXTEX';
-  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-I';
-  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-B';
-  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
-}
- */
-/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -99,8 +80,9 @@ body {
     sub { font-size: 65% !important; }
   }
   .MathJax { 
-      font-family: MJXZERO, 'MJXTEX'; 
-      font-size: inherit !important;
+    margin: 0 !important;
+    font-family: MJXZERO, 'MJXTEX'; 
+    font-size: inherit !important;
   }
   .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; 
@@ -764,7 +746,7 @@ body.workbookpage {
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
-  td .autonum {
+  th .autonum, td .autonum {
     padding-top: 0;
     &::after { content: none;}
   }
@@ -917,6 +899,11 @@ table.recipe_title    {
 
 /* Proglang-specific adaptations */
 .pyret {
+
+  .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for Pyret. ";
+  }
+
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
@@ -969,7 +956,10 @@ table.recipe_title    {
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
 }
 
-.wescheme {
+.wescheme {  
+  .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for WeScheme. ";
+  }
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
@@ -1009,6 +999,9 @@ table.recipe_title    {
 }
 
 .codap {
+ .other-proglang::before {
+    content: "Bootstrap materials are written for multiple programming environments. This version is for CODAP. ";
+  }
   .data-cycle-expression { font-family: inherit; }
 
   .cm-keyword { font-weight: normal !important; }
