@@ -5,50 +5,44 @@
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
 
-/* Make every single MathJax instance inside .boldHeader bold */
-.boldHeader td .MathJax {
+/* Make every single math instance inside .boldHeader bold */
+.boldHeader th .MathJax, .boldHeader th .mathunicode {
 	font-weight: bold !important; font-style: italic;
 }
 
-/* Make every MathJax instance that follows another NOT-bold
-   This has the effect of "undoing" the previous rule, such that
-   only the first instance is bold */
-.boldHeader td .MathJax ~ .MathJax {
-	font-weight: normal !important;
- }
-
+td .autonum:after, th .autonum:after { content: ") " !important; }
 </style>
 ++++
 
 == Part 1
 
-Complete the table below, by substituting the given value into the expression and evaluating.
+Complete each *row* of the table below, substituting the given value into the expression and evaluating.
 
 @vspace{1ex}
 
-[cols=".^2a,.^1a,.^2a,.^1a", options="header"]
+[cols="^1a, ^8a, ^4a, ^8a, ^4a", options="header"]
 |===
-| Function Definition	  	| Expression 		| Substitution 					| Evaluates to	
-| @math{f(x) = x + 2} 		| @math{f(3)} 		| @math{3 + 2}						| @math{5}
-| @math{g(x) = x - 1} 		| @math{g(6)} 		| @ifsoln{@math{6 - 1}}			| @ifsoln{@math{5}}
-| @math{h(x) = 3x}			| @math{h(4)} 		| @ifsoln{@math{3(4)}}			| @ifsoln{@math{12}}
-| @math{k(x) = 2x - 1}		| @math{k(5)} 		| @ifsoln{@math{2(5) - 1}}		| @ifsoln{@math{9}}
+|  | Function Definition	  	| Expression 		| Substitution 					| Evaluates to
+|@n| @math{f(x) = x + 2} 		| @math{f(3)} 		| @math{3 + 2}						| @math{5}
+|@n| @math{g(x) = x - 1} 		| @math{g(6)} 		| @ifsoln{@math{6 - 1}}			| @ifsoln{@math{5}}
+|@n| @math{h(x) = 3x}			| @math{h(4)} 		| @ifsoln{@math{3(4)}}			| @ifsoln{@math{12}}
+|@n| @math{k(x) = 2x - 1}		| @math{k(5)} 		| @ifsoln{@math{2(5) - 1}}		| @ifsoln{@math{9}}
 |===
 
 @vspace{1ex}
 
-== Part2
+== Part 2
 
-The table below includes four different functions. Beneath each of them are a collection of different expressions for you to evaluate.
+Each *column* below includes four different functions. Beneath each of them are a collection of different expressions for you to evaluate.
 
 @vspace{1ex}
 
 [.boldHeader, cols="1a,1a,1a,1a", options="header"]
 |===
-| @math{m(x) = -2x + 3}
-| @math{n(x) = -x + 7}
-| @math{v(x) = 10x - 8}
-| @math{w(x) = x^2}
+| @n @math{m(x) = -2x + 3}
+| @n @math{n(x) = -x + 7}
+| @n @math{v(x) = 10x - 8}
+| @n @math{w(x) = x^2}
 
 | @math{m(3) =}   @math{-2(3) + 3}
 | @math{n(5) =}   @ifsoln{@math{-5 + 7}}
