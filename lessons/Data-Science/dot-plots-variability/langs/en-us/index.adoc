@@ -1,6 +1,6 @@
-= Histograms and Variability
+= Dot Plots
 
-@description{Students are introduced to Histograms by comparing them to bar charts, learning to construct them by hand and in the programming environment.}
+@description{First, students create and interpret dot plots, considering the distribution, typicality, and variability of the data. Then, they consider the relationship between dot plots and histograms, extending the understandings developed in the first half of the lesson. }
 
 @ifproglang{pyret}{
 @lesson-prereqs{contracts-tables-visualizations, ds-intro}
@@ -20,13 +20,13 @@
 | Students will be able to...
 
 @objectives
-@objective{histograms-pyret}
-@objective{Make charts displaying frequency in Pyret and interpret them.}
+@objective{}
+@objective{}
 
 | Student-facing Lesson Goals
 |
 
-- Let's create histograms for datasets and learn how to interpret them.
+- Let's create dot plots and learn how to interpret them.
 
 | Materials
 |[.materials-links]
@@ -43,21 +43,133 @@
 - There is an optional kinesthetic activity in this lesson that requires a ball of play-dough for each group of 3.
 }
 
-| Assessments
-| @assessments
 
 |===
 
 
-== Introduction to Dot Plots
+== Dot Plots' Distribution and Typicality
 
 === Overview
 
+Students create and interpret dot plots, formalizing their vocabulary to accurate describe a dataset's distribution and typicality.
+
 === Launch
+
+@teacher{Before class, draw a number line on a piece of chart paper or on the board. Your number line should start at zero and go up to about 15 by ones. Your ending value should match the number of letters in the longest student name in your class.}
+
+@lesson-instruction{
+- Count how many letters are in your first name.
+- Once you have counted, line up at the board to draw a dot above the number of letters in your first name. Keep dots evenly spaced.
+- Once you return to your desk, copy the class dot plot onto the top section of @printable-exercise{dot-plots-typicality.adoc}
+}
+
+@QandA{
+@Q{What do you Notice about this data? What do you Wonder about this data?}
+@A{Students will likely use informal language to describe the distribution of data. During the lesson, students will learn and practice using formal vocabulary for describing distributions. }
+}
+
+@strategy{Dot Plots?!}{
+If you teach students who are older than 10 or 11 years old, you may be asking yourself: Why dot plots? Aren't those a little elementary?
+
+Students are generally successful interpreting dot plots (compared to, say, box plots and histograms) because on a dot plot, _individual cases are visible_. Educational research tells us that interpreting box plots and histograms is often difficult for students because they tend to view data as individual cases. Box plots and histograms only provide an _aggregate_ view.
+
+To combat this challenge, Bakker, Biehler, and Konold (2005) recommend  building a strong foundation with data visualizations where individual cases are visible. In short: don't gloss over dot plots! When introducing dot plots and histograms, the authors urge teachers to support students by pairing the less-familiar aggregate data visualizations with their corresponding (familiar) dot plots.
+}
+
+=== Investigate
+
+
+@lesson-instruction{
+- On @printable-exercise{dot-plots-typicality.adoc}, we will think more about what's happening in this dot plot, and then explore some new ways of describing the data.
+- Respond to the questions on the second section of the page, Reading a Dot Plot. Be prepared to discuss your answers.
+}
+
+@teacher{Review students' responses as a class.}
+
+Now that we are comfortable creating dot plots, we need a common vocabulary to discuss the data that they display. To describe the distribution of data--the way that it is spread out on a number line--it is helpful to locate any outliers, clusters, peaks, and gaps.
+
+- A *cluster* is a group of data points that are close together.
+- A *gap* is an interval where there are no data points.
+- An *outlier* occurs when one data point is much larger or smaller than the other data points.
+- A *peak* is the value(s) with the most data.
+
+@lesson-instruction{
+
+@image{images/number-line.png}
+
+- Let's label the clusters, gaps, outliers, and peaks in the dot plot in question 4 on @printable-exercise{dot-plots-typicality.adoc}
+- With your partner, describe the distribution of our name length data in as much detail as possible, using the vocabulary you have just learned. Be prepared to share your response.
+}
+
+Another way of describing data on a dot plot is to think about its typicality.
+
+@QandA{
+@Q{Let's think about the word "typical". Describe a "typical" morning for you.}
+@A{Invite students' to share. Emphasize that "typical" is "the usual", or "what's expected", but it is not always a perfect predictor. It may be "typical" to eat breakfast at 7am, but there are probably days where you eat a little bit earlier or a little bit later - or even much earlier or much later!}
+
+@Q{What does the word "typical" mean to you?}
+}
+
+
+@lesson-instruction{
+
+Complete the final section of @printable-exercise{dot-plots-typicality.adoc}.
+}
+
+@teacher{Review students' responses, emphasizing that there are multiple ways to decide what is typical in a dataset.}
+
+
+=== Synthesize
+
+@QandA{
+
+@Q{What were some of the different strategies you used to choose a typical value in the dataset?}
+@A{This question is designed to prime students to recognize that what's typical generally exists at the center of the data. Students will likely identify the values that (approximately) represent the mean, median, and mode. It is fine if students are not yet able to recognize these measures of center, which they will explore during @lesson-link{measures-of-center}.}
+
+@Q{When determining what value is typical, was it helpful to consider peaks, clusters, gaps, and outliers in the dataset?}
+}
+
+== Dot Plot Variability
+
+=== Overview
+
+Students define variability as how alike or different data points are, and then apply that understanding to describe the variability of data in a dot plot.
+
+
+=== Launch
+
+We've discussed the distribution and the typicality of our name length dataset. Let's consider another way to describe data.
+
+@teacher{
+Direct students to look either at the dot plot they drew on @printable-exercise{dot-plots-typicality.adoc} or the dot plot on the board.}
+
+
+@QandA{
+Someone says, "In general, these students all have the same number of letters in their first names."
+
+@Q{Do you agree or disagree? Explain your reasoning.}
+@A{Sample response: I disagree. When we look at our data visualization, we can see the data spreads out from 3 letters to 14 letters. If all students had the same number of letters in their names, most or all of the dots would be above one single value on the number line.}
+}
+
+We can also characterize a dataset by thinking about its @vocab{variability}, how different or alike the data points are. Even categorical data!
+
+@QandA{
+
+@Q{Here are dot plots created by two different groups of students representing the number of letters in students' first names. Which one has greater variability?}
+
+@Q{How did you decide which dataset had greater variability?}
+@A{Greater variability usually results in a wider spread, while decreased variability results in a more narrow spread. Datasets with low variability generally have a lot of repetition, whereas datasets with high variability have little repetition.}
+
+@Q{How would you describe the variability of your class' name length dataset - high or low?}
+}
+
 
 === Investigate
 
 === Synthesize
+
+
+
 
 
 == From Dot Plots to Histograms
