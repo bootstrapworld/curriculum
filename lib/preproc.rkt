@@ -2517,7 +2517,8 @@
                    (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
                   [(not x)
                    (set! x lbl)
-                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)])
+                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                  [else (set! x (expand-directives:string->string x))])
             (display "- " o)
             (display x o)
             (newline o)))))
