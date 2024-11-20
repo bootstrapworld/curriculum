@@ -1981,9 +1981,8 @@
                                         (second args)))]
                                    [in-text
                                      (set! in-text
-                                       (format "(~a)" 
-                                               (expand-directives:string->string in-text)))]
-                                   [else (format "(~a)" lbl)])
+                                       (expand-directives:string->string in-text))]
+                                   [else lbl])
                              (unless apa (set! apa lbl))
                              (cond [(not c)
                                     (printf "WARNING: ~a: Undefined @~a ~a\n\n"
