@@ -1974,7 +1974,8 @@
                                   [in-text (and c (hash-ref c 'in-text #f))]
                                   [apa (and c (hash-ref c 'apa #f))])
                              (when in-text
-                               (set! in-text (expand-directives:string->string in-text)))
+                               (set! in-text 
+                                (string-append "(" (expand-directives:string->string in-text) ")" )))
                              (unless apa (set! apa lbl))
                              (cond [(not c)
                                     (printf "WARNING: ~a: Undefined @~a ~a\n\n"
