@@ -1991,8 +1991,8 @@
                                     (printf "WARNING: ~a: @~a ~a missing\n\n"
                                             (errmessage-context) directive lbl)]
                                    [else (display
-                                           (enclose-span ".citation" in-text
-                                             #:attribs (format "title=\"~a\"" apa))
+                                           (enclose-span ".citation" 
+                                            (string-append in-text (enclose-span ".apa-citation" apa)))
                                            o)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]

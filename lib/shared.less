@@ -65,9 +65,23 @@ body {
   .ulist p  { margin: 5px 0px; }
   .quad { display: inline-block; }
   .citation {
-    &:hover { cursor: help; }
-    // &:before { content: '('; }
-    // &:after { content: ')'; }
+    position: relative;
+    .apa-citation { display: none; }
+    &:hover { 
+      .apa-citation { 
+        display: inline-block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background: lightyellow;
+        font-size: 6pt;
+        line-height: initial;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+    }
+
   }
   
   /* Make .mathunicode and MathJax look similar */
