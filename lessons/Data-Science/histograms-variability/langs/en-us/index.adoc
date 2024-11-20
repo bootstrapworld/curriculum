@@ -20,8 +20,6 @@
 | Students will be able to...
 
 @objectives
-@objective{histograms-pyret}
-@objective{Make charts displaying frequency in Pyret and interpret them.}
 
 | Student-facing Lesson Goals
 |
@@ -51,6 +49,9 @@
 
 == Identifying Center and Spread on Histograms
 
+@objective{make-histograms}
+@objective{histogram-center-spread}
+
 === Overview
 
 === Launch
@@ -62,6 +63,8 @@
 
 == Histograms and Variability
 
+@objective{histogram-variability}
+
 === Overview
 
 === Launch
@@ -72,3 +75,91 @@
 
 === Synthesize
 
+
+== Choosing the Right Bin Size @duration{30 minutes}
+
+@objective{choosing-bin-size}
+
+=== Overview
+Students learn to make histograms from the animals-dataset in @proglang and explore the importance of choosing the right bin size in order for a histogram to show us the shape of the data.
+
+=== Launch
+Bins that are too small will hide the shape of the data by breaking it into too many short bars. Bins that are too large will hide the shape by squeezing the data into just a few tall bars. So far, the bins were provided for you. But how do you choose a good bin-size?
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{histograms}.}
+
+@lesson-instruction{
+- Open the *Desmos* link I've shared with you. (The file should be called *Histogram Bin Size Exploration*.)
+- Use the Bin Size slider to explore how changing the bin size impacts the shape of the histogram and what we can learn about the distribution of the data.
+- Record your notices and wonders in the space provided on Slide 1.
+- Before moving on to Slide 2, be sure to click the "New Dataset" button and see if you notice and wonder anything new.
+- When you're done exploring Slide 1, move on to Slide 2 and answer the questions.
+}
+
+=== Investigate
+Suppose we want to know how long it takes for animals from the shelter to be adopted.
+
+@lesson-instruction{
+- Log into @starter-file{program-list}, open your saved Animals Starter File, and click "Run".
+- Complete @printable-exercise{choosing-bin-size.adoc}.
+}
+
+@teacher{Students who haven't saved this file yet can @starter-file{animals, make a new copy}.}
+
+@slidebreak
+
+@QandA{
+@Q{What did you Notice?}
+@A{We see most of the histogram’s area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less.}
+@A{We see a small amount of the histogram’s area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.}
+@A{More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks.}
+
+@Q{What was a typical adoption time?}
+@A{Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!}
+@A{Be sure to draw attention to the fact that it would have been hard to give this summary by reading through the table, but the histogram makes it easy to see!}
+
+@Q{What bin sizes worked best for analyzing `adoption`?}
+@A{Have students talk about the bin sizes they tried. Encourage open discussion as much as possible here, so that students can make their own meaning about bin sizes before moving on to the next point.}
+}
+
+@slidebreak
+
+@lesson-point{
+Rule of thumb: a histogram should have between 5–10 bins.
+}
+
+Histograms are a powerful way to display a dataset and assess its @vocab{shape}. Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column.
+
+@teacher{
+But how do we talk about or describe that shape, and what does the shape actually tell us?
+
+Our @lesson-link{visualizing-the-shape-of-data} lesson addresses these questions... and our @lesson-link{measures-of-center} lesson explores the effect of the shape of a histogram on the mean (average).
+}
+
+@slidebreak
+
+@lesson-instruction{
+Apply what you've learned by completing THE DATA CYCLE ???
+}
+
+=== Synthesize
+- What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?
+- What would the histogram look like if every animal was adopted in roughly the same length of time?
+
+
+@teacher{
+
+Want to check student mastery of the content you've just taught? Administer @assessment{histograms-check2-desmos} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
+
+Alternatively, we offer a compilation of both Checkpoints in @assessment{histograms-cumulative-desmos}.
+}
+
+
+
+@pd-slide{
+Shape is Critical!
+
+The axes are not labeled intentionally! We want you to get good  at identifying shape without leaning on numbers, because numbers can be very misleading in statistics.
+
+K-12 mathematics doesn't talk about shape enough... and when we do talk about shape, we often give kids the misconception that all datasets should have a normal distribution - a hump in the middle of a bell curve. A robust focus on _shape_ helps address this misconception, while also helping to develop students' visual sense for statistics and distribution.
+}

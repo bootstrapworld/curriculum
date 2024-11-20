@@ -12,8 +12,6 @@
 | Students will be able to...
 
 @objectives
-@objective{histograms-pyret}
-@objective{Describe the distribution of quantitative columns of the Animals Dataset, using proper terminology.}
 
 | Student-facing Lesson Goals
 |
@@ -29,6 +27,10 @@
 
 
 == Describing Shape @duration{30 minutes}
+
+@objective{peaks-clusters-gaps}
+@objective{skew-or-symmetric}
+@objective{bar-chart-v-histogram}
 
 === Overview
 This activity focuses on _describing shape_ based on a @vocab{histogram}. Students learn about "left skewed", "right skewed", and "symmetric" data, and what those descriptions tell us about a dataset.
@@ -47,67 +49,73 @@ This activity focuses on _describing shape_ based on a @vocab{histogram}. Studen
 
 
 
-=== Interpreting Shape
+== Interpreting Shape
 
-@right{@image{images/skew-right.png, 200}}
+@objective{histogram-shape}
 
-_The height of a histogram bar tells us how much data falls within that interval._ Taller stacks have more data points than short ones.
+=== Overview
 
-Look at the image on the right: most of the data is clustered on the left side, and there are a few unusually high values way off to the right. *But how do we describe this shape, and what does it mean?*
+=== Launch
 
-@slidebreak
+=== Investigate
 
-Let's look at some real-world examples of the most common shapes:
-
-*1. Skewed right, or high outliers*
-
-@right{@image{images/right-w-foot.png, 300}}Most points are clumped around what’s typical, but they trail off to the right with a few unusually high values (or outliers). We see this shape often in the real world.
-
-- The average US woman gives birth around age 26, but some do even after 45! No one is giving birth at age 7 to balance this out, so the outliers are all on the right.
-- Personal income almost always shows right skewness or high outliers. There are usually a few billionaires that are far above average, and aren't balanced out by any earners that are equally far below average.
-
-A skew-right distribution looks like the toes on your right foot!
-
-@slidebreak
-
-*2. Skewed left, or low outliers*
-
-@right{@image{images/left-w-foot.png, 300}}Values are clumped around what’s typical, but they trail off to the left with a few unusually low values (or outliers).
-
-- Most adults have close to a full set of 32 teeth, but a few hockey players might have a very small number of teeth. Since no one has _10 extra teeth_ to balance this out, the only outliers are on the left.
-- A school cafeteria mostly buys canned goods in huge sizes, but might have a few ingredients in smaller sizes. If we looked at the ounces per can we’d see a shape that has left skewness and/or low outliers.
-
-A skew-left distribution will look like the toes on your left foot!
-
-@slidebreak
-
-*3. Symmetric: values are balanced on either side of the middle.*
-
-@right{@image{images/symmetric.png, 300}}In a @vocab{symmetric} distribution, it’s just as likely for the variable to take a value a certain distance below the middle as it is to take a value that same distance above the middle. Examples:
-
-- It’s just as likely for a newborn baby to be a certain number of ounces below @vocab{average} weight as it is to be that number of ounces above average weight.
-- At many restaurants, the busiest dinner time is around 7pm. But there are always a few people who want to eat earlier or later.
-
-@teacher{For those in an AP Stats class or full-year Data Science class, you may wish to include a discussion of other kinds of distributions (e.g. - normal/gaussian, unimodal, bimodal, etc..)}
+=== Synthesize
 
 
 
-
-
-@strategy{What Shape Makes Sense?}{
-If time allows, here's a great way to get students walking around and thinking more deeply about distributions!
-
-Using flip-chart paper or whiteboard space, designate poster-sized regions around the classroom titled "Symmetric", "Skew Left", and "Skew Right". You may want to have 2-3 of each, depending on the number of students and size of the classroom. Divide the class into teams, such that each group takes a region of the room.
-
-Each team looks at the region they're in front of, and must (a) draw a histogram with that shape and (b) _brainstorm a sample that would likely result in that distribution_. Once each team has completed the task, the teams rotate to the next poster and brainstorm another sample. They complete this until every team has come up with at least one unique example for @vocab{symmetric}, @vocab{skew left}, and @vocab{skew right} distributions.
-}
 
 
 == Histograms and Measures of Center
 
-//// MOVE EVERYTHING FROM MEASURES OF CENTER LESSON ///
+@objective{histograms-and-measures-of-center}
 
-== Choosing the Right Bin Size
+=== Overview
+
+Students combine apply their knowledge histograms, measures of center, and shape.
+
+=== Launch
+
+Can you compute and interpret different measures of center from a histogram? Let's try it.
+
+@QandA{
+The histogram below shows the number of children per home in Broadmoore neighborhood.
+
+@image{images/number-children.png, 350}
+
+@Q{What is the median number of children per home?}
+@A{1. Students may mistakenly attempt to find the midpoint of the values on the horizontal axis, indicating that they connect median with “middle”, but misunderstand _what_ middle value to find. In this case, all of the raw data is available in the histogram.
+}
+
+@Q{What is the mean number of children per home?}
+@A{Approximately 2.04. Note that students may attempt to use the “add up and divide” algorithm with inappropriate data values from the display. Students may mistakenly compute the mean height of the bars, or the mean of values on the horizontal axis.}
+}
+
+@teacher{Students often cannot compute measures of center from histograms because they _lack attention to the context of the data_. Cooper and Shore (2008) suggest that when students are confused, simply ask "What are the data?" to help reorient and redirect students. Similarly, urge students to discuss and defend their responses.}
+
+
+=== Investigate
+
+@lesson-instruction{
+- Work with a partner to complete @printable-exercise{histograms-moc.adoc}.
+- Which problem was the most challenging? Why did you find it challenging?
+}
+
+@teacher{
+Discuss solutions with students. Highlight for students the misconceptions revealed by common incorrect responses. For instance, choosing "the modes are roughly the same" for the the first problem suggests that students understand the concept of mode, but looked at bar height (indicating frequency) instead of considering the value on the x-axis.
+}
+
+
+
+=== Synthesize
+
+@QandA{
+@Q{How was interpreting mean, median, and mode from a histogram different than computing it from a raw dataset?}
+@A{Responses will vary. Students should explain that they needed to understand the meaning of the bar height and the values on the x-axis in order to arrive at correct measures of center.}
+
+@Q{Describe how the relationship between mean and median can help you draw a conclusion about the skewness of a histogram?}
+@A{When the mean is greater than the median, outliers on the right cause the display to be skewed right. When the mean is less than the median, outliers on the left cause the histogram to be skewed left. }
+}
+
 
 
 == Data Exploration Project (Visualizing Shape) @duration{flexible}
