@@ -1969,12 +1969,21 @@
                                                *assessments-met*)))
                                      (fprintf o "link:pass:[~a][~a]" url title)]))]
                           [(string=? directive "citation")
-                           (let* ([lbl (string->symbol (read-group i directive))]
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [args-len (length args)]
+                                  [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
                                   [in-text (and c (hash-ref c 'in-text #f))]
                                   [apa (and c (hash-ref c 'apa #f))])
-                             (when in-text
-                               (set! in-text (expand-directives:string->string in-text)))
+                             (cond [(> (length args) 1)
+                                    (set! in-text
+                                      (expand-directives:string->string
+                                        (second args)))]
+                                   [in-text
+                                     (set! in-text
+                                       (format "(~a)" 
+                                               (expand-directives:string->string in-text)))]
+                                   [else (format "(~a)" lbl)])
                              (unless apa (set! apa lbl))
                              (cond [(not c)
                                     (printf "WARNING: ~a: Undefined @~a ~a\n\n"
@@ -1984,7 +1993,8 @@
                                             (errmessage-context) directive lbl)]
                                    [else (display
                                            (enclose-span ".citation" in-text
-                                             #:attribs (format "title=\"~a\"" apa)) o)]))]
+                                             #:attribs (format "title=\"~a\"" apa))
+                                           o)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
                           [(string=? directive "objective")
