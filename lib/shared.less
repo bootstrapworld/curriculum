@@ -64,7 +64,11 @@ body {
   .ulist ul { margin-bottom: 0px; }
   .ulist p  { margin: 5px 0px; }
   .quad { display: inline-block; }
-  .citation:hover { cursor: help; }
+  .citation {
+    &:hover { cursor: help; }
+    &:before { content: '('; }
+    &:after { content: ')'; }
+  }
   
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode {
