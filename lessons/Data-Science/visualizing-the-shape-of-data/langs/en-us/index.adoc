@@ -35,18 +35,21 @@ This activity focuses on _describing shape_ based on a @vocab{histogram}. Studen
 
 === Launch
 
-@vocab{Shape} is one way to quickly describe what values are more or less common in a dataset. Some might occur very frequently, while others are rare. That information can be gathered from a _distribution_ of data: any representation of the data that shows the frequency of each value (like a table, list, or chart!).
+@vocab{Shape} is one way to quickly describe what values are more or less common in a dataset. If you don't look at shape - where are the peaks, clusters, gaps, and outliers - you lose a lot of insight into your dataset!
 
-Distributions can show where data points are clustered together or spread thin. Data Scientists spend a _lot_ of time looking at data visualizations to examine their shape, because the numbers don't tell the whole story!
 
-In fact, you lose a lot of insight into your dataset if you don't look at the shape. @link{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, The Datasaurus Dozen} are a wonderful collection of dissimilar graphics whose summary statistics are identical.
-@slidebreak
-
-@lesson-point{
-Histograms create _fixed-size_ bins, which contain varying numbers of data points.
+@teacher{
+@link{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, The Datasaurus Dozen} are a wonderful collection of dissimilar graphics whose summary statistics are identical.
 }
 
-@right{@image{images/skew-right.png,  300}}We can think of the data being "stacked" in these fixed bins, like jeans in a store separated by size: one stack for Small, another for Medium, and so on.
+@slidebreak
+
+
+
+
+=== Interpreting Shape
+
+@right{@image{images/skew-right.png, 200}}
 
 _The height of a histogram bar tells us how much data falls within that interval._ Taller stacks have more data points than short ones.
 
@@ -87,69 +90,9 @@ A skew-left distribution will look like the toes on your left foot!
 
 @teacher{For those in an AP Stats class or full-year Data Science class, you may wish to include a discussion of other kinds of distributions (e.g. - normal/gaussian, unimodal, bimodal, etc..)}
 
-=== Investigate
 
-@QandA{
-@Q{Make a histogram for the pounds column in the animals table, sorting the animals into 20-pound bins.}
 
-@ifproglang{pyret}{
-@A{Students should enter the code: @show{(code '(histogram animals-table "name" "pounds" 20))}}
 
-@ifproglang{codap}{
-@A{Students should select the "Graph" button on the upper left. Drag `Pounds` to the x-axis. From the Configuration menu, select "Group into Bins" and "Fuse Dots into Bars." From the same menu, confirm that the bin width is 20.}}
-
-@Q{Would you describe the shape of your histogram as being @vocab{skewed left}, @vocab{skewed right}, or @vocab{symmetric}?}}
-@A{The histogram is skewed left.}
-
-@Q{Which one of these statements is justified by the histogram’s shape: (1) A few of the animals were unusually light, (2) A few of the animals were unusually heavy, or (3) It was just as likely for an animal to be a certain amount below or above average weight.
-}
-@A{The 2nd statement "a few of the animals were unusually heavy" is the only one that applies, given the histogram's shape.}
-
-@Q{Try bins of 1-pound intervals, then 100-pound intervals. Which of these three histograms best satisfies our rule of thumb?}
-@A{Our rule of thumb is that a histogram should have between 5–10 bins. The first histogram we made - with 20-pound bins - had a total of ten bins, so it best satisfies our rule.}
-}
-
-@slidebreak
-
-@lesson-instruction{
-- On @printable-exercise{identifying-shape-histograms.adoc}, describe the shape of the histograms you see there.
-- On @printable-exercise{data-cycle-animals-shape.adoc}, describe the pounds histogram and another one you make yourself. When writing down what you notice, try to use the language Data Scientists use, discussing both skew and outliers.
-}
-
-@slidebreak
-
-@lesson-point{
-Outliers... do they stay or do they go?
-}
-
-@right{@image{images/height-outlier.png, 300}}Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in.
-
-@QandA{
-@Q{Is there really a 12 year old who is 6 inches tall?}
-@A{Probably not! This could very well be a typo (maybe someone meant to type "60" instead of "6"?).}
-}
-
-"Junk" data is harmful, because it can drastically change your results!
-
-@slidebreak
-
-@right{@image{images/stadium-outlier.png, 300}}Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes.
-
-@QandA{
-@Q{Did it really take someone 35 minutes to find their seat?}
-@A{It's very possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!}
-}
-
-An outlier can also could be a _really important_ part of your analysis!
-
-@slidebreak
-
-As a data scientist, *an outlier is always a reason to look closer*. And whether you decide to keep or remove it from your dataset, make sure you *explain your reasons* in your write-up!
-
-@lesson-instruction{
-With your partner, complete @printable-exercise{outliers-discussion.adoc}.}
-
-@clear
 
 @strategy{What Shape Makes Sense?}{
 If time allows, here's a great way to get students walking around and thinking more deeply about distributions!
@@ -159,13 +102,13 @@ Using flip-chart paper or whiteboard space, designate poster-sized regions aroun
 Each team looks at the region they're in front of, and must (a) draw a histogram with that shape and (b) _brainstorm a sample that would likely result in that distribution_. Once each team has completed the task, the teams rotate to the next poster and brainstorm another sample. They complete this until every team has come up with at least one unique example for @vocab{symmetric}, @vocab{skew left}, and @vocab{skew right} distributions.
 }
 
-=== Synthesize
-- For which distributions was it easiest to come up with an example?
-- For which distributions was it hardest to come up with an example?
 
-@slidebreak
+== Histograms and Measures of Center
 
-Histograms are a powerful way to visualize a dataset and see its @vocab{shape}. But shape is just one of three key aspects that tell us what’s going on with a @vocab{quantitative} column of a dataset. We will also want to learn about center and spread!
+//// MOVE EVERYTHING FROM MEASURES OF CENTER LESSON ///
+
+== Choosing the Right Bin Size
+
 
 == Data Exploration Project (Visualizing Shape) @duration{flexible}
 
