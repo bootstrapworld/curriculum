@@ -16,6 +16,7 @@
 | Student-facing Lesson Goals
 |
 
+- Let's learn about different histogram distributions.
 - Let's investigate what the shape of a histogram can tell us about the data.
 
 | Materials
@@ -33,21 +34,105 @@
 @objective{bar-chart-v-histogram}
 
 === Overview
-This activity focuses on _describing shape_ based on a @vocab{histogram}. Students learn about "left skewed", "right skewed", and "symmetric" data, and what those descriptions tell us about a dataset.
+
+This activity focuses on _describing shape_ from a @vocab{histogram}. Students explore shape by considering symmetry, peaks, clusters, and skew.
 
 === Launch
 
-@vocab{Shape} is one way to quickly describe what values are more or less common in a dataset. If you don't look at shape - where are the peaks, clusters, gaps, and outliers - you lose a lot of insight into your dataset!
+@QandA{
+Your teacher will give you and your partner an envelope containing lettered histogram cards. Lay out the cards in front of you.
 
+@Q{What do you Notice about the histograms? You can describe something you notice about the group, a sub-group, or even one histogram in particular.}
 
-@teacher{
-@link{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, The Datasaurus Dozen} are a wonderful collection of dissimilar graphics whose summary statistics are identical.
+@Q{What do you Wonder about the histograms?}
 }
 
-@slidebreak
+Let's sort some histograms!
+
+@lesson-instruction{
+- With your partner, use the histogram cards to sort the cards into two piles: histograms that are roughly symmetrical, and histograms that are not roughly symmetrical.
+- Be prepared to share your groupings with the class.
+}
+
+@teacher{
+If students are not familiar with the concept of "symmetry", spend some time briefly explaining that it exists when the halves of the histogram are symmetrical. Ensure that students agree on which histograms are symmetrical and which ones are not.
+}
+
+
+=== Investigate
+
+@lesson-instruction{
+- With your partner, use the histogram cards to complete @printable-exercise{sorting-histograms.adoc}.
+- We will pause for discussion after you complete the first section.
+}
+
+@teacher{
+As you circulate: (1) make note of the different grouping strategies used by different students to foster group discussion, and (2) encourage students to use appropriate vocabulary (i.e., peak, cluster, gap).
+}
+
+Let's debrief.
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Responses will vary. Students may have grouped their histograms by the number of peaks, the number of gaps, or the location of the center. There are no wrong answers here.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+}
+
+@lesson-instruction{
+- With your partner, complete the second section of @printable-exercise{sorting-histograms.adoc}.
+}
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Possible groupings: no peaks, 1 peak, 2 peaks; 1 gap, no gaps; and center at X, center at Y.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+@A{The center of a symmetrical histogram is the line of symmetry. A common misconception is arguing that the center of the axis is the center of the histogram; students must also consider the range of the histogram.}
+}
+
+You probably noticed that some histograms trail off to the left, and others trail off to the right. Statisticians refer to this trailing as "skew". Lets compare the skew-left, skew-right, and symmetric histograms.
 
 
 
+[cols="^.^1a,^.^1a,^.^1a", options="header"]
+|===
+
+| Symmetric | Skew-left 							| Skew-right
+
+| @image{images/symmetric.png, 150 }| @image{images/left-w-foot.png, 150}  | @image{images/right-w-foot.png, 150}
+
+| Values are balanced on either side of the center.
+
+| Values are clumped around what's typical, but trail off to the right.
+
+| Values are clumped around what's typical, but trail off to the left.
+
+|===
+
+Skew-left distributions look like the toes on your left foot, and skew-right distributions look like the toes on your right foot!
+
+@vocab{Shape} is useful because it enables us to quickly identify and describe trends in data. *Shape is also one of a few key features that sets histograms apart from bar charts!* Let's explore this concept further.
+
+@lesson-instruction{
+Complete @printable-exercise{bar-chart-v-histogram.adoc}.
+}
+
+@teacher{
+@printable-exercise{bar-chart-v-histogram.adoc} surfaces two common student misconceptions about bar graphs that @citation{whittaker-jacobbe-2017, "Whittaker and Jacobbe (2017)" } cite in their research. First, students commonly fail to understand that skew is associated with *distributions of quantitative variables*. This is why a bar graph with its bars arranged in increasing or decreasing order does not display a skewed distribution. Students also commonly believe that the category with the greatest value represents a majority of the responses. In this dataset, that is not the case: the bar representing the college of science does not represent more than half of the students.
+}
+
+Because a bar chart displays categorical data, we can order the bars anyway that we wish. That is not the case with histograms: since quantitative data must follow a natural order, a histogram's bars cannot be re-ordered.
+
+
+=== Synthesize
+
+@QandA{
+
+@Q{Envision a skew-left histogram. Where do you think its outliers are? Explain how you know.}
+
+@Q{Why do histograms have shape but bar graphs do not?}
+}
 
 == Interpreting Shape
 
@@ -55,13 +140,86 @@ This activity focuses on _describing shape_ based on a @vocab{histogram}. Studen
 
 === Overview
 
+Students consider what different distributions tell us about a dataset, connecting different scenarios with different data visualizations.
+
 === Launch
+
+We now have the terminology needed to describe histogram shape. But what can we actually conclude about a dataset based on a histogram's shape?
+
+@lesson-instruction{
+
+Let's consider two different scenarios:
+
+- The average US woman gives birth around age 26, but some do even after 45! Children do not give birth.
+
+- Most adults have close to a full set of 32 teeth, but a few hockey players might have a very small number of teeth. No one has more than 32 teeth.
+
+*Let's draw a rough sketch of what we think the histogram for each of these scenarios might look like.*}
+
+@teacher{
+Invite a student to the board to draw a rough sketch of each scenario. Invite the students to describe how they decided where to draw the clusters, peaks, and outliers.}
+
+@QandA{
+@Q{Which of the above scenarios describes a left skew? Explain.}
+@A{The scenario about women's ages describes a left skew. Most of the data is clustered around 26, but there is also data further on the right, all the way up to 45. There is no data around, say, age 7.}
+
+@Q{Which of the above scenarios describes a right skew? Explain.}
+@A{The scenario about teeth describes a right skew. Most of the data is clustered around 32 with a few outliers further to the left.}
+}
+
+@lesson-instruction{
+- With a partner, complete @printable-exercise{use-shape-to-interpret.adoc}.
+- Just like we did during the warm up, you will sketch rough histograms, make a decision their shape, and then interpret the data.
+}
 
 === Investigate
 
+@teacher{
+
+There is some setup required for the interactive activity that follows.
+
+- You will need flip chart paper, tape, and markers.
+- Divide your class into teams of three. All around your classroom, tape flip chart paper to the wall--one poster per team of three students.
+- On each piece of flip chart paper, write "Skew Left", "Skew Right", or "Symmetric", and then draw lines to divide the paper horizontally into three equal sections.
+}
+
+@lesson-instruction{
+- Your teacher has instructed you and your group to stand in front of a blank poster that says "Symmetric", "Skew Left", or "Skew Right" at the top.
+- With your group, draw a histogram that matches the shape assigned to you in the top section of the poster.
+}
+
+@teacher{Once all students have drawn their histograms, direct them to rotate to the next poster of a different shape.}
+
+@lesson-instruction{
+- You are now standing in front of a poster that identifies a shape and also includes a histogram of that shape.
+- In the second horizontal section of the poster, write a scenario or describe a dataset that would result in that distribution.
+- Leave the third section of the poster blank. We will use it another day!
+- Take a few minutes to walk around the classroom and read the scenarios your peers developed. Return to your seat when you have had a chance to see all of the posters.
+}
+
+@teacher{
+Spend some time debriefing with students, using the prompts below. Responses will vary for each group of students.
+}
+
+@QandA{
+@Q{Did all of the scenarios your classmates developed correctly represent the given shape?}
+
+@Q{Did you notice any especially creative scenarios? Any surprising scenarios?}
+
+@Q{Were there any scenarios that were represented more than once? Why do you think those scenarios were popular?}
+}
+
+@teacher{
+The third section of the posters will remain blank today. Students will complete this section in the future when they learn about @lesson-link{box-plots}.
+}
+
 === Synthesize
 
-
+@QandA{
+@Q{What strategies did your group use in brainstorming scenarios to match histogram shape?}
+@Q{For which distributions was it easiest to come up with an example?}
+@Q{For which distributions was it hardest to come up with an example?}
+}
 
 
 
@@ -78,7 +236,7 @@ Students combine apply their knowledge histograms, measures of center, and shape
 Can you compute and interpret different measures of center from a histogram? Let's try it.
 
 @QandA{
-The histogram below shows the number of children per home in Broadmoore neighborhood.
+The histogram below shows the number of children per home in the Broadmoor neighborhood.
 
 @image{images/number-children.png, 350}
 
