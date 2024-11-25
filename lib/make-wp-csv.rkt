@@ -22,7 +22,7 @@
     (substring
       (bytes->hex-string
         (call-with-input-string s sha1-bytes))
-      0 15) 16))
+      0 13) 16))
 
 (define (escape-html s #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
   (let ([lib-prefix #f])
