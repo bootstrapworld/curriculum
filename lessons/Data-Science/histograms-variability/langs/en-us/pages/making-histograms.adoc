@@ -1,30 +1,73 @@
 = Making Histograms
 
-Suppose we have a dataset for a group of 50 adults, showing the number of teeth each person has:
+== By Hand
 
+[cols="<.^4a,3a", frame="none", grid="none"]
+
+|===
+
+| _Suppose we have a dataset for a group of 50 adults, showing the number of teeth each person has..._
+
+@vspace{1ex}
+
+@big{
 0, 0, 0, 0, 0, 22, 26, 27, 28, 28, 28, 28, 29, 29, 29, 30, 30, 30, 30, 30, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32
+}
 
-[cols="^3a,^2a",options="header"]
+@vspace{1ex}
+
+@n) Fill in the frequency table to the right. One row has been completed for you.
+
+@vspace{1ex}
+
+@n) When you're finished, use the frequency table to draw a histogram by filling in each bar so that its height is equal to the frequency for that interval.
+
+@vspace{1ex}
+
+@n) After creating the histogram by hand, follow the directions to create a tooth data histogram in Pyret.
+
+
+| *Frequency Table*
+
+!===
+! number of teeth ! frequency
+! 0-4 	!
+! 5-9 	!
+! 10-14 	!
+! 15-19 	!
+! 20-24 	!
+! 25-29 	!
+! 30-34 	! 35
+!===
+
+
 |===
-| Number of teeth 	| Count
-|  0 				| 5
-| 22 				| 1
-| 26 				| 1
-| 27 				| 1
-| 28 				| 4
-| 29 				| 3
-| 30 				| 5
-| 31 				| 3
-| 32 				| 27
 
-|===
 
-@vspace{2ex}
+@ifnotsoln{ @center{@image{../images/teeth-histogram.png, 500}}}
+@ifsoln{ @center{@image{../images/teeth-histogram-soln.png, 500}}}
 
-*Draw a histogram for the table in the space below.* For each row, find which interval
-(or “bin”) on the x-axis represents the right number of teeth. Then fill in the box so that
-its height is equal to the _sum of the counts_ that fit into that interval. One of
-the intervals has been completed for you.
+== In @proglang
 
-@ifnotsoln{ @centered-image{../images/teeth-histogram.png, 800} }
-@ifsoln{ @centered-image{../images/teeth-histogram-soln.png, 800} }
+[.linkInstructions]
+Open the @starter-file{tooth-data} copy@ifproglang{pyret}{, and click "Run".}
+
+@n What bin sized was used (above) for the Tooth Data frequency table and the histogram? @fitb{5em}{@ifsoln{5}}
+
+@n @ifproglang{pyret}{Build `tooth-table`.}@ifproglang{codap}{Review the tooth table.} Does this data appear to be the same or different from the tooth data that appeared in the first section? @fitb{5em}{@ifsoln{Same.}}
+
+
+@n @ifproglang{pyret}{Use the contract below to build a histogram in Pyret.
+
+@show{(contract 'histogram '((table-name Table) (labels String) (column-name String) (bin-size Number)) "Image")}
+}
+
+@ifproglang{codap}{Drag `Num Teeth` to the x-axis and select Group into Bins from the Configuration menu. Fuse dots into bars, then enter the desired bin width.}
+
+@n How does the histogram you created in @proglang look _similar_ to the one that you drew? Are there any ways in which the histogram you created in @proglang is _different_ than the one you created by hand? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}

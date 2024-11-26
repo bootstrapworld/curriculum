@@ -1,4 +1,4 @@
-= Histograms: Center, Spread, and Variability
+= Visualizing the "Shape" of the Data
 
 @description{Students are introduced to Histograms by comparing them to bar charts, learning to construct them by hand and in the programming environment.}
 
@@ -24,7 +24,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's create histograms for datasets and learn how to interpret them.
+- Let's create histograms for datasets and learn how describe their shape.
 
 | Materials
 |[.materials-links]
@@ -47,7 +47,7 @@
 |===
 
 
-== Identifying Center and Spread on Histograms
+== Creating Histograms Manually and in @proglang
 
 @objective{make-histograms}
 @objective{histogram-center-spread}
@@ -56,7 +56,12 @@
 
 === Launch
 
+First, let's practice making histograms by hand and in @proglang.
 
+@lesson-instruction{
+- First, use the data provided on @printable-exercise{making-histograms.adoc} to complete the frequency table and corresponding data visualization.
+- Then, open the @starter-file{tooth-data} to build a histogram @ifproglang{pyret}{by using the provided contract.}@ifproglang{codap}{by following the given instructions.}
+}
 
 
 === Investigate
@@ -65,19 +70,112 @@
 
 
 
-== Histograms and Variability
+== Describing Shape @duration{30 minutes}
 
-@objective{histogram-variability}
+@objective{peaks-clusters-gaps}
+@objective{skew-or-symmetric}
+@objective{bar-chart-v-histogram}
 
 === Overview
 
+This activity focuses on _describing shape_ from a @vocab{histogram}. Students explore shape by considering symmetry, peaks, clusters, and skew.
+
 === Launch
+
+@QandA{
+Your teacher will give you and your partner an envelope containing lettered histogram cards. Lay out the cards in front of you.
+
+@Q{What do you Notice about the histograms? You can describe something you notice about the group, a sub-group, or even one histogram in particular.}
+
+@Q{What do you Wonder about the histograms?}
+}
+
+Let's sort some histograms!
+
+@lesson-instruction{
+- With your partner, use the histogram cards to sort the cards into two piles: histograms that are roughly symmetrical, and histograms that are not roughly symmetrical.
+- Be prepared to share your groupings with the class.
+}
+
+@teacher{
+If students are not familiar with the concept of "symmetry", spend some time briefly explaining that it exists when the halves of the histogram are symmetrical. Ensure that students agree on which histograms are symmetrical and which ones are not.
+}
 
 
 === Investigate
 
+@lesson-instruction{
+- With your partner, use the histogram cards to complete @printable-exercise{sorting-histograms.adoc}.
+- We will pause for discussion after you complete the first section.
+}
+
+@teacher{
+As you circulate: (1) make note of the different grouping strategies used by different students to foster group discussion, and (2) encourage students to use appropriate vocabulary (i.e., peak, cluster, gap).
+}
+
+Let's debrief.
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Responses will vary. Students may have grouped their histograms by the number of peaks, the number of gaps, or the location of the center. There are no wrong answers here.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+}
+
+@lesson-instruction{
+- With your partner, complete the second section of @printable-exercise{sorting-histograms.adoc}.
+}
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Possible groupings: no peaks, 1 peak, 2 peaks; 1 gap, no gaps; and center at X, center at Y.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+@A{The center of a symmetrical histogram is the line of symmetry. A common misconception is arguing that the center of the axis is the center of the histogram; students must also consider the range of the histogram.}
+}
+
+You probably noticed that some histograms trail off to the left, and others trail off to the right. Statisticians refer to this trailing as "skew". Lets compare the skew-left, skew-right, and symmetric histograms.
+
+
+
+[cols="^.^1a,^.^1a,^.^1a", options="header"]
+|===
+
+| Symmetric | Skew-left               | Skew-right
+
+| @image{images/symmetric.png, 150 }| @image{images/left-w-foot.png, 150}  | @image{images/right-w-foot.png, 150}
+
+| Values are balanced on either side of the center.
+
+| Values are clumped around what's typical, but trail off to the right.
+
+| Values are clumped around what's typical, but trail off to the left.
+
+|===
+
+Skew-left distributions look like the toes on your left foot, and skew-right distributions look like the toes on your right foot!
+
+@vocab{Shape} is useful because it enables us to quickly identify and describe trends in data. *Shape is also one of a few key features that sets histograms apart from bar charts!* Let's explore this concept further.
+
+@lesson-instruction{
+Complete @printable-exercise{bar-chart-v-histogram.adoc}.
+}
+
+@teacher{
+@printable-exercise{bar-chart-v-histogram.adoc} surfaces two common student misconceptions about bar graphs that @citation{whittaker-jacobbe-2017, "Whittaker and Jacobbe (2017)" } cite in their research. First, students commonly fail to understand that skew is associated with *distributions of quantitative variables*. This is why a bar graph with its bars arranged in increasing or decreasing order does not display a skewed distribution. Students also commonly believe that the category with the greatest value represents a majority of the responses. In this dataset, that is not the case: the bar representing the college of science does not represent more than half of the students.
+}
+
+Because a bar chart displays categorical data, we can order the bars anyway that we wish. That is not the case with histograms: since quantitative data must follow a natural order, a histogram's bars cannot be re-ordered.
+
 
 === Synthesize
+
+@QandA{
+
+@Q{Envision a skew-left histogram. Where do you think its outliers are? Explain how you know.}
+
+@Q{Why do histograms have shape but bar graphs do not?}
+}
 
 
 == Choosing the Right Bin Size @duration{30 minutes}
