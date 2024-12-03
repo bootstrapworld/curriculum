@@ -84,8 +84,8 @@
     (let ([lesson-plan-file (path->string (build-path *lessons-dir* lesson-dir "index.shtml"))]
           [title-file (path->string (build-path *lessons-dir* lesson-dir ".cached/.index.titletxt"))])
       (when (and (file-exists? lesson-plan-file) (file-exists? title-file))
-        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
-        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status
+        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a\n"
                  (string->uniqid lesson-dir) ;id
                  (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
                  lesson-dir
@@ -94,6 +94,7 @@
                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
                  "" ; child categories
                  (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
+                 "public"
                  )))))
 
 (define (convert-workbook-pages o #:pages [pages "pages"])
@@ -121,8 +122,8 @@
                 ; (printf "page-title-file is ~a\n" page-title-file)
                 (when (file-exists? page-title-file)
                   ; (printf "going ahead with ~a\n" p)
-                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
-                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status
+                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a\n"
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            p-prime
@@ -131,6 +132,7 @@
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
                            (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
+                           (if (string=? pages "solution-pages") "private" "public")
                            ))))))))))
 
 (let* ([cla (current-command-line-arguments)]
@@ -146,7 +148,7 @@
 
 (call-with-output-file *csv-file*
   (lambda (o)
-    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
+    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code,Post Status\n")
     (convert-lessons o)
     (convert-workbook-pages o)
     (convert-workbook-pages o #:pages "solution-pages"))
