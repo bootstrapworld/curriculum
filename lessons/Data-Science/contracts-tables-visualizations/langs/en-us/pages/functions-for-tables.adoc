@@ -7,70 +7,67 @@
 ++++
 
 [.linkInstructions]
-Open the @starter-file{animals} and click "Run". +
-In the Interactions Window on the right, type `animals-table` and hit "Enter" to see the default view of the table.
+Open the @starter-file{animals} and click "Run". In the Interactions Window on the right, type `animals-table` and hit "Enter" to see the default view of the table.
 
-== sort
+== Sorting by a Column
 
-*Suppose we wanted to see the names of the animals in alphabetical order...*
+@n Dacks wants to sort this table by `age`, showing all the animals in _ascending order_ (youngest-to-oldest). Lion wants to sort the table by `pounds`, but in _descending order_ (heaviest-to-lightest). How else can you sort the table? Be sure to specify "ascending" or "descending":
 
-The `sort` function takes in three pieces of information:
+@hspace{4em} a. @fitb{}
 
-1. A table
-2. A column we want to sort the table by (declared using a String)
-3. The order in which we want the column sorted (declared using a Boolean)
+@hspace{4em} b. @fitb{}
 
-Test out these two expressions in the Interactions Area and record what you learn about ordering below:
+@center{*Pyret has a function called `sort` that will produce sorted Tables!*}
 
-* @show{(code '(sort animals-table "species" true))}
-* @show{(code '(sort animals-table "species" false))}
+@n The Domain of `sort` has three inputs. One of them is the table itself. Can you complete the other two?
 
-
-@n `true` sorts the table... @fitb{}{@ifsoln{from A-Z ... or from least to greatest - see question 4}}
-
-@n `false` sorts the table... @fitb{}{@ifsoln{from Z-A ... or from greatest to least - see question 4}}
+@indented{
+@ifnotsoln{@show{(contract 'sort '((table-name Table) (column-name "                   ") (order "                   ")) "Table")}}
+@ifsoln{@show{(contract 'sort '((table-name Table) (column-name "String") (order "Boolean")) "Table")}}
+}
 
 @vspace{1ex}
 
-*Suppose we wanted to sort the `animals-table` by the `weeks` column to determine which animals were
-adopted quickest...*
+Test out @show{(code '(sort animals-table "age" true))} in the Interactions Area, then try using `false` instead of `true`:
 
-@n Would you use `true` or `false`? Explain. @fitb{}{}
 
-@n Test it out, and write your thinking about @vocab{quantitative} columns at the end of your explanations of `true` and `false` above.
+@n `true` sorts the table... @fitb{}{@ifsoln{from A-Z ... or from least to greatest}}
 
-@n Which animal(s) were adopted the quickest? @fitb{}{@ifsoln{Snuggles, Nori, Toggle, Wade and Mittens}}
+@n `false` sorts the table... @fitb{}{@ifsoln{from Z-A ... or from greatest to least}}
 
-@n Some functions produce Numbers, some produce Strings, some produce Booleans. What did the `sort` function produce? @fitb{}{@ifsoln{a new table!}}
+@n What code will sort the animals by alphabetical order of their _names_? @fitb{}{@ifsoln{@show{(code '(sort animals-table "name" true))}}}
 
-@vspace{1ex}
+@n Did you use `true` or `false`? Explain why. @fitb{}{}
 
-There are many other functions available to us in Pyret. We can describe them using contracts. The Contract for `sort` is:
+== Summarizing by a Column
+Let's explore the contract for another table function:
 
-@indented{@show{(contract "sort" '("Table" "String" "Boolean") "Table")}}
-
-- Each Contract begins with the function name: @fitb{10em}{_in this case_ `sort`}
-- Lists the data types required to satisfy its Domain: @fitb{20em}{_in this case_ Table, String, Boolean}
-- And then declares the data type of the Range it will return. @fitb{10em}{_in this case_ Table}
-- Contracts can also be written with more detail, by adding _variable names_ in the Domain:
-
-@indented{@show{(contract 'sort '((table-name Table) (column-name String) (order Boolean)) "Table")}}
+@show{(contract "count" '("Table" "String") "Table")}
 
 @vspace{1ex}
 
-*Suppose we wanted to sort the `animals-table` by the `legs` column to determine which animals had the most legs...*
+*Suppose we wanted to know how many animals had 4 legs...*
 
-@n Fill in the blanks below with the code you'd use (We've put pieces of the Contract below each line to help you!):
+Type @show{(code '(count animals-table "legs"))} into the Interactions Area and click "Enter"
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{@ifsoln{"legs"}}{column-name {two-colons} String}, @fitbruby{10em}{@ifsoln{true}}{order {two-colons} Boolean})
+@n What did the expression produce? @fitb{}{@ifsoln{a new table showing the counts for the number of animals with 0 legs, 3 legs, 4 legs and 8 legs}}
 
-@n Which animal(s) had the most legs? @fitb{}{@ifsoln{Snuggles the tarantula}}
+@n How many animals had 4 legs? @fitb{}{@ifsoln{29}}
 
-@n Think of another question you might answer quickly by sorting the table.
+@n Think of another question you might be able to answer with the `count` function.
 
-@fitb{}{@ifsoln{Possible response: Which animal is the heaviest?}}
+@fitb{}{@ifsoln{Possible response: How many animals are cats?}}
 
-@n What code would you write to answer your question?
+@n Fill in the blanks with the code you'd write.
 
-@fitbruby{10em}{@ifsoln{sort}}{function-name} ( @fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table},  @fitbruby{15em}{}{column-name {two-colons} String}, @fitbruby{10em}{}{order {two-colons} Boolean})
+@fitbruby{10em}{@ifsoln{count}}{function-name} (@fitbruby{20em}{@ifsoln{animals-table}}{table-name {two-colons} Table}, @fitbruby{15em}{@ifsoln{Answers will vary!}}{column-name {two-colons} String})
 
+@n Tables that summarize data with a count are commonly used in the real world. Write an example of where you've seen them before: +
+@fitb{}{@ifsoln{Answers will vary! Election Results, Survey Results, Fundraiser Results, etc. }}
+
+@n Newspapers often incorporate data into their reporting. How else might they display this information, besides using a table?
+
+@fitb{}{@ifsoln{bar charts, pictographs, infographics}}
+
+@n Try using the `count` function to summarize the `pounds` column. Is the resulting summary useful? Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{No - nearly every animal has a unique weight, so the resulting table is almost as long as the original!}} +

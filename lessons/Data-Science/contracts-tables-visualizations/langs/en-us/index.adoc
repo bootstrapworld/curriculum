@@ -10,11 +10,11 @@
 ++++
 @description{Students learn about functions for sorting and counting data in tables, then are introduced to one-variable visualizations.}
 
-@lesson-prereqs{simple-data-types}
+@lesson-prereqs{contracts}
 
 @keywords{pie chart, bar chart, histogram, box plot, data visualizations, count, sort, contract, function}
 
-@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph, overlay, put-image, above, rotate, scale}
+@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
 
 
 [@lesson-intro-table]
@@ -31,7 +31,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's learn some functions for counting and sorting data.
+- Let's learn some functions for manipulating tables of data, such as sorting, summarizing, and more.
 - Let's learn how to make data visualizations in Pyret!
 
 | Materials
@@ -45,11 +45,11 @@
 
 |===
 
-== Functions for Working with Tables @duration{20 minutes}
+== Functions for Tables @duration{20 minutes}
 
 === Overview
 
-Students will be introduced to functions for working with tables, including: @show{(code 'sort)},  @show{(code 'count)} and @show{(code 'first-n-rows)}. In the process they will review simple @vocab{data types} and be introduced to @vocab{contracts} for describing the @vocab{Domain} and @vocab{Range} of any function.
+Building on their understanding of @lesson-link{contracts, Contracts}, students will be introduced to functions for working with _tables_, including: @show{(code 'sort)},  @show{(code 'count)} and @show{(code 'first-n-rows)}.
 
 === Launch
 
@@ -59,6 +59,7 @@ Students will be introduced to functions for working with tables, including: @sh
 @Q{What do you Notice?}
 @A{Sample response: We only see the first 10 rows of the table and would have to click to see the remaining 22 rows.}
 @A{The animals aren't listed in any particular order.}
+
 @Q{What do you Wonder?}
 @A{Sample response: Is it possible to alphabetize the list, or sort it in other ways?}
 }
@@ -76,25 +77,14 @@ Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
 
 @QandA{
 @Q{What did these `sort` expressions do?}
-@A{They took in the `animals-table`, the "Name" column, and true or false... producing a new table, sorted alphabetically (A-Z for true and Z-A for false)}
-
-@Q{Just below question 6, we see the Contract for `sort`}
-@Q{What does it mean that the Domain of `sort` is Table, String, Boolean?}
-@A{The functions needs a Table, a String (describing a column), and a Boolean (an order to sort the column by) in order to do its job.}
+@A{They took in the `animals-table`, the `name` column, and true or false... producing a new table, sorted alphabetically (A-Z for `true` and Z-A for `false`)}
 
 @Q{What does it mean that the Range of `sort` is Table?}
 @A{The function produces a new table.}
+
+@Q{Type `animals-table` and hit "Enter". Did sorting our animals change the value of the table?}
+@A{No. It made a new one.}
 }
-
-@slidebreak
-
-As you can imagine, there are many other functions that work with tables, each with a different set of inputs. For each of these functions, we need to keep track of three things:
-
-1. *Name* -- the name of the function, which we type in whenever we want to use it
-2. *Domain* -- the type(s) of data we give to the function
-3. *Range* -- the type of data the function produces
-
-The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Contract}.
 
 @slidebreak
 
@@ -102,28 +92,35 @@ The @vocab{Name}, @vocab{Domain} and @vocab{Range} are used to write a @vocab{Co
 Contracts are the _instruction manual_ for functions.
 }
 
-The Domain in the Contract for `sort` tells us exactly what kind of inputs it needs, and in what order. The Range tells us exactly what we'll get back.
+Let's review what we know about Contracts. Every Contract has three parts:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+@slidebreak
+
+Let's explore the Contract for another function that works with Tables.
 
 @lesson-instruction{
-Complete question 7-10 on @printable-exercise{functions-for-tables.adoc}.
+Complete @printable-exercise{functions-for-tables.adoc}.
 }
 
 @slidebreak
 
 @QandA{
-@Q{How did `sort` work with quantitative columns?}
-@A{true sorted the values from least to greatest. false sorted the values from biggest to smallest.}
+@Q{How did the `count` function summarize a column?}
+@A{It made a new table, with rows for all the unique values in that column and a count of how many times each value appeared.}
 
-@Q{What new questions did you think of, which could be answered using `sort`?}
+@Q{Is the summary produced by the `count` function useful when summarizing the `pounds` column? Why or why not?}
+@A{Since almost every animal has a unique weight, the summary is almost as long as the original table!}
 }
 
 @slidebreak
 
 @lesson-instruction{
-- Once you know how to read Contracts, you can easily use all the tools in our programming language. 
-- Let's explore the `count` and `first-n-rows` functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+- Let's explore some more table functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
 }
-
 
 === Common Misconceptions
 
@@ -335,60 +332,6 @@ Mistakes happen, especially if we're just figuring things out! Diagnosing and fi
 - What kinds of @vocab{syntax errors} did you find?
 - What kinds of @vocab{contract errors} did you find?
 
-== Exploring Image Functions @duration{10 minutes}
- 
-=== Overview
-
-Making images is a highly motivating context for reading error messages and writing contracts.
-
-@teacher{
-- If you have time and interest in digging deeper we have a @lesson-link{contracts, whole lesson focused on contracts for image-producing functions}, with many scaffolded pages of additional practice.
-- If you have already completed our @lesson-link{contracts} lesson with your class, skip to the next section of this lesson.}
-
-=== Launch
-
-@lesson-instruction{
-- Turn to @printable-exercise{image-contracts-ds.adoc} and find `triangle`.
-- You'll see that both the contract and a working expression have been recorded for you.
-- Take the next 10 minutes to experiment with trying to build other shapes using the functions listed.
-- As you figure out these functions, record the contracts and the code!
-}
-
-@strategy{Supporting Diverse Learners}{
-
-
-Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for _everyone to have the opportunity to explore._
-
-Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages.
-}
-
-@ifnotslide{
-In order to make sure that all students both remain engaged and are prepared to engage in productive class discussion, when you become aware that the first student in your class has successfully used the `text` function, give your students directions about which functions to prioritize with the remaining time.
-}
-
-@teacher{
-Make sure students at least find the contracts for `star`, `rectangle` and `text` before moving ahead.
-}
-
-=== Investigate
-
-@QandA{
-@Q{Does having the same Domain and Range mean that two functions do the same things?}
-@A{No! For instance, `square`, `star`, `triangle` and `circle` all have the same Domain and Range, yet they make very different images because they have different function Names, and each of those functions are defined to do something very different with the inputs!}
-
-@Q{What error messages did you see?}
-@A{Error messages include: too few / too many arguments given, missing parentheses, etc.}
-
-@Q{How did you figure out what to do after seeing an error message?}
-@A{Reading the error message and thinking about what the computer is trying to tell us can inform next steps.}
-}
-
-
-=== Synthesize
-
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
-- Was it harder to find contracts for some of the functions than others? Why?
-- How was it different to code expressions for the shape functions when you started with a Contract?
 
 == Functions for Making Data Visualizations @duration{20 minutes}
 
