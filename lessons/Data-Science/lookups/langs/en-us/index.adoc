@@ -1,10 +1,8 @@
 = Row and Column Lookups
 
-@add-to-lang{row-n}
+@description{Students review how to extract individual Rows from a table, then learn how to answer lookup questions by extracting a single value from a Row.}
 
-@description{Students learn how to extract individual rows from a table, and columns from a row.}
-
-@lesson-prereqs{contracts-tables-visualizations}
+@lesson-prereqs{contracts-tables-visualizations, functions-examples-definitions}
 
 @keywords{}
 
@@ -32,7 +30,7 @@
 == Row Lookups @duration{30 minutes}
 
 === Overview
-Students learn how to define values in Pyret, and practice by defining Numbers, Strings, and Images. They also learn how to define an individual row from a table in Pyret.
+Students review value definitions in Pyret, and are reminded of how `row-n` works with Row indices.
 
 === Launch
 
@@ -67,7 +65,7 @@ Make sure students understand we only need one row!
 @right{@image{images/AskQuestions.png, 100}}
 *What code can we write, to let us define a single row?* 
 
-- Tables have special functions associated with them, which allow us to do all sorts of things. 
+- You already know a function that extracts an individual row!
 - For example, we can get the first @vocab{data row} in a table by using the @show{(code 'row-n)} function: 
   * `row-n(animals-table, 0)`
 
@@ -77,13 +75,17 @@ Remember: Data rows start at index _zero_!
 
 @lesson-instruction{
 - Open your saved Animals Starter File (or make a new @starter-file{animals} copy), and click “Run”.
-- In the Interactions Area, use the `row-n` function to get the second and third data rows.
+- In the Interactions Area, use the `row-n` function to get the third and fourth data rows.
 - Find `row-n` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
 }
 
 @QandA{
-@Q{What is its Domain? Its Range?}
-@A{Its domain is Number. Its range is Row.}
+@Q{What Row index did you use to get the third data Row?}
+@A{`2`}
+@Q{What Row index did you use to get the fourth data Row?}
+@A{`3`}
+@Q{What is Contract for `row-n`?}
+@A{@show{(contract 'row-n '(Table, Number) "Row")}}
 }
 
 @slidebreak
@@ -141,12 +143,44 @@ cat-row["fixed"]
 === Investigate
 
 @lesson-instruction{
-- Complete the exercises on @printable-exercise{lookup-questions-matching.adoc}.
+- Complete @printable-exercise{lookup-questions-matching.adoc}.
 - Complete @printable-exercise{more-practice-w-lookups.adoc}
 }
 
+
+@slidebreak
+
+Sometimes we want to ask questions about a specific Row, or do some computations with that Row:
+
+- Is the age of our `lizard-row` animal more than 3?
+- How many _kilograms_ does our `rabbit-row` weigh?
+- Is the species of our `fixed-row` animal a `"dog"`?
+- Could we use the `age` of our `male-row` as the size of a solid, green triangle?
+
+@lesson-instruction{
+We can use our knowledge of lookups, operators and functions to do just that!
+
+- With a partner, complete @printable-exercise{lookup-expressions.adoc}
+}
+
+@teacher{
+Have students share their most creative uses of lookups. Did anyone use three or more columns from a Row? Did anyone use more than one Row in the same expression?
+}
+
 === Synthesize
-Why is it important to be able to define individual rows?
+Once we know how to perform computations with a _single_ Row, we can use our knowledge of functions to generalize that computation to work with _every_ Row in a Table. This allows us to write some pretty powerful table functions that...
+
+- Filter a table to show only animals older than 3
+- Filter a table to show only animals whose species is `"dog"`
+- Build a column that shows all the animals' weights in kilograms
+- Build a column that represents the age of each animal as a solid, green triangle
+
+@slidebreak
+
+@QandA{
+@Q{Why would defining individual Rows be important, if our goal is to write table functions?}
+@A{Writing examples requires sample values, and table functions need sample Rows}
+}
 
 @pd-slide{
 Tables have tons of data - of all different types! - arranged into Rows and Columns. They feel like a monolith.

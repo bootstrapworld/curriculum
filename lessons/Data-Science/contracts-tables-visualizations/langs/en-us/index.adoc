@@ -14,7 +14,7 @@
 
 @keywords{pie chart, bar chart, histogram, box plot, data visualizations, count, sort, contract, function}
 
-@add-to-lang{sort, first-n-rows, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
+@add-to-lang{sort, first-n-rows, row-n, count, bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
 
 
 [@lesson-intro-table]
@@ -122,9 +122,42 @@ Complete @printable-exercise{functions-for-tables.adoc}.
 - Let's explore some more table functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
 }
 
+
+@slidebreak
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
+
+```
+name = "Denny"
+age = 16
+logo = star(50, "solid", "red")
+```
+
+@QandA{
+@Q{What are the names given in each of these definitions?}
+@A{name, age, and logo}
+@Q{What are the values given to each of these names?}
+@A{The String "Denny", the Number 16, and an Image of a solid red star.}
+}
+
+@slidebreak
+
+As you've seen from @printable-exercise{functions-for-tables-cont.adoc}, Pyret also lets us define `Row` values. The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
+
+If we want the _second_ Row in the table, Pyret needs to count one Row down from the beginning of the table. That's why the index for the second Row is `1`.
+
+If we want the _first_ Row in the table, we can use _zero_ as our index because Pyret is already there!
+
+@QandA{
+@Q{What is the index of the _fifth_ Row in the table?}
+@A{The index of the fifth row is `4`}
+}
+
 === Common Misconceptions
 
 Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+
+Students often struggle to remember that Row indices start at _zero!_ You'll want to practice this a few times.
 
 === Synthesize
 
