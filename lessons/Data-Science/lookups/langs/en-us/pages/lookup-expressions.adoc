@@ -1,20 +1,29 @@
 = Lookup Expressions
 ++++
 <style>
-
+/* For the example prompt, keep the lines tight and centered */
+.tightAndCentered * { padding: 0 !important; text-align: center; }
 </style>
 ++++
 
 Make sure you've opened your *saved copy* of the @starter-file{animals}, in which you've defined the sample Rows from @printable-exercise{defining-rows.adoc}, such as `lizard-row`, `old-row`, etc.
 
-@vspace{1ex}
-
-@center{The code below asks if the age of `lizard-row` is greater than 3:}
-@center{`lizard-row["age"] > 3`}
+[.tightAndCentered]
+The code below draws a solid, green triangle, using 5x the age of `old-row` as the size: +
+`triangle(old-row["age"], "solid", "green")`
 
 @vspace{3ex}
 
-*Using the above code as a guide, write the code that will answer each of the following questions:*
+*For each of the prompts below _write the code_ on the blank lines that will produce the desired result*
+
+@n An animal is "old" if it is greater than 10 years old. Is `lizard-row` old? +
+@fitb{}{@ifsoln{`lizard-row["age"] > 10`}}
+
+@n An animal is "young" if it is less than 1 year old. Is `female-row` young? +
+@fitb{}{@ifsoln{`female-row["age"] < 1`}}
+
+@n If every week is 7 days, how many _days_ did it take for our `rabbit-row` to be adopted? +
+@fitb{}{@ifsoln{`rabbit-row["weeks"] * 7`}}
 
 @n If every 2.2 pounds is 1 kilogram, how many _kilograms_ does our `rabbit-row` weigh? +
 @fitb{}{@ifsoln{`rabbit-row["pounds"] / 2.2`}}
@@ -22,14 +31,11 @@ Make sure you've opened your *saved copy* of the @starter-file{animals}, in whic
 @n Is the species of our `fixed-row` animal a `"dog"`? +
 @fitb{}{@ifsoln{`fixed-row["species"] == "dog"`}}
 
+@n Is the species of our `young-row` animal a `"cat"`? +
+@fitb{}{@ifsoln{`young-row["species"] == "cat"`}}
+
 @n Make a solid, green triangle using the `age` of `male-row`. +
 @fitb{}{@ifsoln{`triangle(male-row["age"], "solid", "green")`}}
-
-@n Is "Nibblet" the name of `female-row`? +
-@fitb{}{@ifsoln{`female-row["name"] == "Nibblet"`}}
-
-@n Draw the name of `hermaphrodite-row` in purple letters, using 60 as the font size. +
-@fitb{}{@ifsoln{`text(hermaphrodite-row["name"], 60, "purple")`}}
 
 @n Is `lizard-row` fixed? +
 @fitb{}{@ifsoln{`lizard-row["fixed"] == true` (or just `lizard-row["fixed"]`!)}}
@@ -37,16 +43,17 @@ Make sure you've opened your *saved copy* of the @starter-file{animals}, in whic
 @n Did `unfixed-row` take less than 5 weeks to be adopted? +
 @fitb{}{@ifsoln{`unfixed-row["weeks"] < 5`}}
 
-@n Does `young-row` have 3 legs? +
-@fitb{}{@ifsoln{`unfixed-row["legs"] == 3`}}
-
 @n Is `old-row` a cat or a dog? +
 @fitb{}{@ifsoln{`(old-row["species"] == "cat") or old-row["species"] == "dog"`}}
 
 @n Using any Row you like, draw the `name` of the animal in red letters and use the `pounds` of the animal for the font size. +
 @fitb{}{@ifsoln{`text(cat-row["name"], cat-row["pounds"], "red")`}}
 
+@n Draw the name of `hermaphrodite-row` in purple letters, using 60 as the font size. +
+@fitb{}{@ifsoln{`text(hermaphrodite-row["name"], 60, "purple")`}}
+
 @star Draw a solid pink star, using the age of `dog-row` as the radius. Rotate it by the number of pounds it weighs. +
 @fitb{}{@ifsoln{`rotate(dog-row["pounds"], star(dog-row["age"], "solid", "pink"))`}}
 
-@star @star Using any function(s) you wish, how many ways can you use different columns from a single, defined Row?
+@star @star Using any function(s) you wish, how many ways can you use different columns from a single, defined Row? +
+@fitb{}{}
