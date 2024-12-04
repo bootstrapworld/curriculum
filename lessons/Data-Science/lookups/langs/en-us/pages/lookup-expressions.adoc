@@ -16,6 +16,10 @@ The code below draws a solid, green triangle, using 5x the age of `old-row` as t
 
 *For each of the prompts below _write the code_ on the blank lines that will produce the desired result*
 
+
+@n Using `hermaphrodite-row`, draw a solid, blue circle where the radius is the `age` of the row. +
+@fitb{}{@ifsoln{`circle(hermaphrodite-row["age"], "solid", "blue")`}}
+
 @n An animal is "old" if it is greater than 10 years old. Is `lizard-row` old? +
 @fitb{}{@ifsoln{`lizard-row["age"] > 10`}}
 
@@ -34,8 +38,8 @@ The code below draws a solid, green triangle, using 5x the age of `old-row` as t
 @n Is the species of our `young-row` animal a `"cat"`? +
 @fitb{}{@ifsoln{`young-row["species"] == "cat"`}}
 
-@n Make a solid, green triangle using the `age` of `male-row`. +
-@fitb{}{@ifsoln{`triangle(male-row["age"], "solid", "green")`}}
+@n Using `male-row`, draw the species of the animal in red, 15px letters. +
+@fitb{}{@ifsoln{`text(male-row["species"], 15, "red")`}}
 
 @n Is `lizard-row` fixed? +
 @fitb{}{@ifsoln{`lizard-row["fixed"] == true` (or just `lizard-row["fixed"]`!)}}
@@ -48,9 +52,6 @@ The code below draws a solid, green triangle, using 5x the age of `old-row` as t
 
 @n Using any Row you like, draw the `name` of the animal in red letters and use the `pounds` of the animal for the font size. +
 @fitb{}{@ifsoln{`text(cat-row["name"], cat-row["pounds"], "red")`}}
-
-@n Draw the name of `hermaphrodite-row` in purple letters, using 60 as the font size. +
-@fitb{}{@ifsoln{`text(hermaphrodite-row["name"], 60, "purple")`}}
 
 @star Draw a solid pink star, using the age of `dog-row` as the radius. Rotate it by the number of pounds it weighs. +
 @fitb{}{@ifsoln{`rotate(dog-row["pounds"], star(dog-row["age"], "solid", "pink"))`}}
