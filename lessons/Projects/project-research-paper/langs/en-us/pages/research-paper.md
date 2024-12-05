@@ -51,7 +51,7 @@ What are some different subsets that made sense for your dataset?
 
 <span style="color:blue"> 
 EXAMPLE:
-We needed to create grouped samples for just the dogs, just the rabbits, and just the cats, as well as the young animals and the old ones. Since the median age is 3, we decided that number would be the cutoff point between young and old animals.
+We needed to create grouped samples for just the dogs, just the rabbits, and just the cats, as well as the young animals and the old ones. Since most animals reach maturity after one year, we decided that any animal under the age of 1 is "young".
 
 We defined the following functions: is-dog, is-cat, is-rabbit, is-old, and is-young
 
