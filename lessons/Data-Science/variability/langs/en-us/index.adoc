@@ -1,6 +1,6 @@
 = Variability
 
-@description{Variability }
+@description{Students define variability multiple ways, and then describe different levels of variability on dot plots.}
 
 @ifproglang{pyret}{
 @lesson-prereqs{contracts-tables-visualizations, ds-intro, dot-plots}
@@ -50,9 +50,9 @@ Students define variability two ways, and then apply that understanding to descr
 
 === Launch
 
-So far, we have a few tools that we can use to describe a dataset. We can characterize the distribution of the data (outliers, clusters, peaks, and gaps). We can also characterize a dataset by thinking about its typicality, or what is expected. A third way to describe a dataset is by considering its @vocab{variability}. There are lots of different ways to think about variability!
+When we learned about @lesson-link{dot-plots}, we acquired some useful vocabulary that we can use to describe a dataset. We can identify outliers, clusters, peaks, and gaps to characterize a dataset's distribution. We can also estimate what's typical--or what is expected in the data. A third way to describe a dataset is discussing its @vocab{variability}. *There are lots of different ways to think about variability!*
 
-In fact, if you spent any time learning about different question types (like during our lesson on @lesson-link{data-cycle}, you know that a @vocab{statistical question} is one that anticipates variability.
+If you have already learned about different _question types_ (perhaps during our lesson on @lesson-link{data-cycle}), you should be familiar with the concept of variability: a @vocab{statistical question} is a question that anticipates @vocab{variability}.
 
 @QandA{
 
@@ -61,7 +61,7 @@ In fact, if you spent any time learning about different question types (like dur
 @A{Question A anticipates variability, but Question B does not. The answer Question A will always be 60. The answer to the Question B, however, will vary based on who you ask, road conditions, traffic, etc.}
 }
 
-@strategy{There are Many Ways to Assess Variability!}{
+@strategy{There are Many Ways to Think about Variability!}{
 
 Research indicates that students often have an oversimplified and underdeveloped view of variability (@citation{cooper-2018}; @citation{cooper-shore-2008}).
 
@@ -74,8 +74,11 @@ In this lesson, we intentionally begin our conversation by developing intuitive 
 
 This last recommendation is an important one: research indicates that "unlikeability" of a categorical dataset is a more natural concept than "variation about the mean" (@citation{kade-perry-2007}), therefore can act as a natural starting point.
 
-That said, we urge you to explicitly emphasize that unlikeability is just one of many ways to think about variability. Fixating on this definition of variability can result in students developing the misconception that levelness of bars indicates little variability (@citation{cooper-shore-2008}).
+That said, we urge you to explicitly emphasize that unlikeability is just one of many ways to think about variability. Fixating on this definition of variability can result in students developing the common misconception that levelness of histogram bars indicates low variability (@citation{cooper-shore-2008}).
 }
+
+
+=== Investigate
 
 In a categorical dataset, we can judge variability based on how different or alike the data points are. In other words, high variability comes from high "unlikeability" of data points.
 
@@ -93,9 +96,6 @@ The following questions are printed on @printable-exercise{variability-two-ways.
 
 @A{Sample response: Given that the students you are sampling are in sixth grade, there will not be any variability in their responses to statement A. Everyone will choose "true". For statement B, however, it is likely that some students will be wearing blue and some will not; we can conclude that the resulting responses will have some "unlikeability".}
 }
-
-=== Investigate
-
 
 @QandA{
 
@@ -143,21 +143,6 @@ Students often believe that variability can be judged based solely on the *range
 
 === Launch
 
-To create a dot plot in @proglang, we @ifproglang{pyret}{use this contract:
-
-
-@show{(contract 'dot-plot '((table-name Table) (labels String) (column-name String)) "Image")}
-}
-
-Using the expanded animals dataset, create three dot plots for three different mystery animals by typing in the code provided on WORKSHEET.
-
-
-
-Rabbits generally weigh less than cats. Dogs’ weights vary more than cats’ weights. Label the three histograms below to correspond with cats, dogs, and rabbits.
-
-
-=== Investigate
-
 FINISH THE WORKSHEET
 
 
@@ -168,6 +153,29 @@ Weights of cats in a shelter / weights of dogs in a shelter
 Distances of students from school A: 10 mi, 10 mi, 10 mi, 10.7 mi, 10.5 mi, 10.3 mi, 10.8 mi // Distances of students from school B: 5 mi, 3 mi, 1 mi, 8 mi, 4 mi, 9 mi, 3 mi
 # of minutes that it takes to get ready for school / # of minutes that it takes to brush your teeth
 Students hours on the phone per week or students hours spent on homework each week
+
+
+
+
+
+=== Investigate
+
+Let's return to our beloved animal shelter...
+
+To create a dot plot in @proglang, we @ifproglang{pyret}{use this contract:
+
+@show{(contract 'dot-plot '((table-name Table) (labels String) (column-name String)) "Image")}
+}
+
+Let's build some dot plots
+Using the expanded animals dataset, create three dot plots for three different mystery animals by typing in the code provided on WORKSHEET.
+
+
+
+Rabbits generally weigh less than cats. Dogs’ weights vary more than cats’ weights. Label the three histograms below to correspond with cats, dogs, and rabbits.
+
+
+
 
 
 
