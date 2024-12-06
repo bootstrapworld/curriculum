@@ -136,7 +136,7 @@
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
                            (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
                            (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
-                           (if (string=? pages "solution-pages") "private" "public")
+                           (if (string=? pages "solution-pages") "private" "publish")
                            *official-date*
                            ))))))))))
 
