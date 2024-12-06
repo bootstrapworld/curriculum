@@ -1,5 +1,7 @@
 = Lookups in a Nutshell
 
+*Let's Review...*
+
 We can define names for values in Pyret, the same way we do in math:
 
 ```
@@ -21,6 +23,7 @@ When we define these rows, it's more useful to name them based on their _propert
 cat-row = row-n(animals-table,  0) # Sasha is a cat
 dog-row = row-n(animals-table, 10) # Toggle is a dog
 ```
+*What's New?*
 
 When *looking up a column* from a Row, programmers use square brackets and the name of the column they want.
 
@@ -30,4 +33,24 @@ For example:
 row-n(animals-table, 0)["age"] # look up Sasha's age (in row 0)
 cat-row["species"]             # look up Sasha's age (using the defined name)
 dog-row["age"]				   # look up Toggle's age (using the defined name)
+```
+
+Values produced from lookups can be used alongside regular Pyret expressions:
+
+```
+# Number expressions
+dog-row["age"] + 2
+cat-row["age"] > 10
+
+# String expressions
+string-contains(dog-row["name"], "Kujo")
+cat-row["name"] == "Sasha"
+
+
+# Boolean expressions
+dog-row["fixed"] and (dog-row["age"] < 5)
+
+# Image expressions
+triangle(dog-row["pounds"], "solid", "green")
+scale(cat-row["age"], triangle(20, "solid", "green"))
 ```
