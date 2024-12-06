@@ -2,44 +2,36 @@
 
 ++++
 <style>
-	img { width: 400px !important; }
+	img { max-width: 300px !important; }
 	table { height: 98%; }
+	td:nth-child(1) * { font-weight: bold; }
+	td:nth-child(2) * { font-style: italic; }
+	th { text-align: center !important; }
 </style>
 ++++
 
 There are six separate, _unrelated_ claims below, and ALL OF THEM ARE WRONG! Your job is to figure out why by looking at the data.
 
-[.fakenews-table,cols=".^1a,10a,10a,10a",options="header"]
+[.fakenews-table,cols="^.^1a,20a,20a",options="header"]
 |===
 |
-| Data
-| Claim
-| What's Wrong
+| The News Says...
+| Why it's Fake
 
-| *@n*
-| The average player on a basketball team is 6′1″.
-| _“Most of the players are taller than 6′.”_
-| @ifsoln{*Wrong measure of center!* Average (mean) is highly sensitive to outliers. Most players could be under 6 feet tall, with one 6-foot-10 player throwing off the mean. }
-
-| *@n*
-| Linear regression found a positive correlation (r=0.42) between people’s height and salary.
-| _“Taller people are more qualified for their jobs.”_
-| @ifsoln{ *Using a correlation to imply causation!* Also, there may be _biases_ at work relating height to salary which have nothing to do with how qualified a person is! }
-
-| *@n*
-| @centered-image{../images/fake-news-3.png}
-| _“According to the predictor function indicated here, the value on the x-axis will predict the value on the y-axis 63.6% of the time.”_
+| @n
+| @centered-image{../images/fake-news-lr.png, 200} “According to the predictor function indicated here, the value on the x-axis will predict the value on the y-axis 63.6% of the time.”
 | @ifsoln{*Incorrectly explaining the r-value!* R-Values tell us how much of the _variability_ in the response is explained by the predictor, *not how accurate it is!*}
 
-| *@n*
-| @centered-image{../images/wrong-use-of-chart.png}
-| _"Despite El Paso High School being near the Mexican border, researchers were surprised to find that Haitian Creole was the most-commonly spoken language (after English). The data came from the principal, who said she took a sample of 67 students, to find what languages they spoke at home."_
+| @n
+| The average player on the Cranston East basketball team is 6′1″, so we know that most of the players are taller than 6′!
+| @ifsoln{*Wrong measure of center!* Average (mean) is highly sensitive to outliers. Most players could be under 6 feet tall, with one 6-foot-10 player throwing off the mean. }
+
+| @n
+| Linear regression found a positive correlation (r=0.42) between people’s height and salary, so businesses are recognizing that taller people are more qualified.
+| @ifsoln{ *Using a correlation to imply causation!* Also, there may be _biases_ at work relating height to salary which have nothing to do with how qualified a person is! }
+
+| @star
+| @centered-image{../images/wrong-use-of-chart.png} "Despite El Paso High School being near the Mexican border, a sample of 67 students found that Haitian Creole was the most-commonly spoken language at home (after English)."
 | @ifsoln{*Wrong use of chart!* Despite six languages being in the legend, there are only five pie slices! That means *zero* students in the sample spoke Spanish, which suggests that this was not a representative sample. A bar chart would have made this really obvious!}
-
-| *@n*
-| @centered-image{../images/wrong-scale.png, 400}
-| _"Stocks fell off a cliff today, plummeting sharply. Some fear the economic unrest will lead to rioting and looting!"_
-| @ifsoln{*Wrong scale!* The y-axis goes starts at 33840, not zero! That makes it look like the drop is huge, but it's only -0.78%!}
-
 
 |===
