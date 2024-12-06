@@ -139,38 +139,58 @@ Students often believe that variability can be judged based solely on the *range
 
 === Overview
 
+Students connect dot plots to different scenarios based on the variability. They learn how to create dot plots in @ifproglang to investigate the distribution of data in dot plots.
 
 
 === Launch
 
-Let's investigate how variability shows up on dot plots.
+Let's investigate how different levels of variability appear on dot plots.
 
 @lesson-instruction{
 - With a partner, complete @printable-exercise{variability-dot-plots-2.adoc}.
-- For each row of the table, fill in the blank with either "A" (for dot plot A) or "B" (for dot plot B), depending on which data visualization makes the most sense for the given scenario. Explain your choice.
+- The person who created the dot plots below forgot to label them. Fill in the blanks in the first column with either "A" (if the description matches dot plot A) or "B" (if the description matches dot plot B). Explain your choice.
 }
 
+@QandA{
 
+@Q{What strategies did you use to match labels with dot plots?}
+@A{Possible responses: I considered the range of the data; I asked myself which scenario would produce data with greater variability; I envisioned in my head what the dot plot would look like, etc.}
+
+@Q{Can you think of any similar pairs of datasets that would produce dot plots with differing levels of variability?}
+@A{Possible responses: minutes 9 year-olds spend talking on the phone versus minutes 18 year-olds spend talking on the phone; time to run a mile for professional athletes versus a group of high school students; etc.}
+}
 
 
 === Investigate
 
-Let's return to our beloved animal shelter...
+The folks at the animal shelter want to approximate the amount of food they need to purchase for the coming month. They know there is a relationship between an animal's weight and how much it eats, so they are discussing the distribution of animals' weights.
 
-To create a dot plot in @proglang, we @ifproglang{pyret}{use this contract:
+@lesson-instruction{
+- With a partner, complete questions 1-6 on @printable-exercise{variability-dot-plots-1.adoc}.
+}
+
+@teacher{
+Review students' responses, first ensuring that students are able to estimate what's typical in a dataset (question 1).}
+
+@QandA{
+@Q{How did you decide what species has the greatest and least variability?}
+@A{Responses will vary. Ideally, students are thinking about the possible weight range for each animal, recognizing that there are some extremely large breeds of dogs, but that most tarantulas are generally the same size.}
+
+@Q{How did you describe the distribution of dogs' weights?}
+@A{Responses will vary. Students should acknowledge that a peak exists at approximately 55 pounds, and that there is a gap between the cluster of light- to mid-weight dogs and the few very heavy outliers.}
+}
+
+It's time to make dot plots in @proglang!
+
+@ifproglang{pyret}{
+Here is the contract for creating a dot plot in Pyret:
 
 @show{(contract 'dot-plot '((table-name Table) (labels String) (column-name String)) "Image")}
 }
 
-Let's build some dot plots
-Using the expanded animals dataset, create three dot plots for three different mystery animals by typing in the code provided on WORKSHEET.
 
 
-
-Rabbits generally weigh less than cats. Dogs’ weights vary more than cats’ weights. Label the three histograms below to correspond with cats, dogs, and rabbits.
-
-
-
+For question 7, you'll need to use the @starter-file{expanded-animals-sub-pops}.
 
 
 
