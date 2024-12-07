@@ -10,13 +10,19 @@
 # - Multiple Choice (which can be restricted to True or False)
 type = "MultipleChoice"
 
-# 3) Write the question prompt.
+# 3) Write the question prompt. You can use markdown formatting!
+# Images can be included as well, using markdown
 prompt.prompt = """
-How much wood would a woodchuck chuck, if a woodchuck could chuck wood?
+![](woodchuck.jpg)How much wood would a woodchuck chuck, *if* a woodchuck could chuck wood?
 """
 
 # 4) Write the answer.
+# If `answerIndex` is set, the distractors will show in the order 
+#   they are written, wit the answer inserted at the appropriate index
+# If `answerIndex` is not set, the distractors and answer will 
+#   appear in random order.
 answer.answer = "not enough information is available to answer this question, because no data about wood chucks chucking wood exists."
+prompt.answerIndex = 3
 
 # 5) If it's multiple choice, also write the non answers, called "prompt.distractors".
 # - The order of the multiple choice answers

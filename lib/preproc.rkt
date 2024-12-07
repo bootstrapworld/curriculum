@@ -861,7 +861,8 @@
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"
-                                 *dist-root-dir* f link-text
+                                 "{fromlangroot}"
+                                 f link-text
                                  (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))])
         link-output))))
 
@@ -870,17 +871,25 @@
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
          (set! f "./index.adoc")]
+        [(regexp-match "(.*)/#([^/]+)$" f)
+         => (lambda (m)
+              (let ([dir (second m)] [sec (third m)])
+                (set! f (format "~a/index.adoc#~a" dir sec))))]
         [(regexp-match "/$" f)
          (set! f (string-append f "index.adoc"))]
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
-  ; (printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
+  ;(printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
 
-  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+  (let* ([m (regexp-match "^(.*)/([^/#]*)(#?[^/]*)$" f)]
          [dir (second m)]
-         [snippet (third m)]
+         [fyle (third m)]
+         [sec (fourth m)]
          [dir-compts (regexp-split #rx"/" dir)])
+
+    (unless (string=? sec "")
+      (set! f (string-append dir "/" fyle)))
 
     (let* ([first-compt (first dir-compts)]
            [q (qualify-proglang first-compt (format "distribution/~a/lessons" *natlang*)
@@ -889,13 +898,13 @@
         (set! dir
           (string-join
             (cons q (rest dir-compts)) "/"))
-        (set! f (string-append dir "/" snippet))))
+        (set! f (string-append dir "/" fyle))))
 
     (set! f (format "distribution/~a/lessons/~a" *natlang* f))
     (set! dir (format "distribution/~a/lessons/~a" *natlang* dir))
 
     (let* ([f.titletxt (path-replace-extension
-                         (string-append dir "/.cached/." snippet)
+                         (string-append dir "/.cached/." fyle)
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
@@ -935,9 +944,9 @@
       (when (path? f) (set! f (path->string f)))
       (let ([link-output
 
-              (format "link:~apass:[~a][~a~a]"
-                      "{fromlangroot}"
+              (format "link:{fromlangroot}pass:[~a~a][~a~a]"
                       (regexp-replace "distribution/[^/]+/" f "")
+                      sec
                       link-text
                       (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))
 
@@ -1112,7 +1121,6 @@
     (display title o)
     (newline o)
     (newline o)
-    (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
@@ -2164,6 +2172,7 @@
                     [*narrative* (display "[.narrative]\n" o)]
                     [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
+              (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
 
@@ -2517,7 +2526,12 @@
                    (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
                   [(not x)
                    (set! x lbl)
+<<<<<<< HEAD
                    (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)])
+=======
+                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                  [else (set! x (expand-directives:string->string x))])
+>>>>>>> master
             (display "- " o)
             (display x o)
             (newline o)))))

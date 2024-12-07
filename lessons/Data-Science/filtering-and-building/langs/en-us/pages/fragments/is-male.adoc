@@ -1,22 +1,22 @@
 @design-recipe-exercise{ "is-male"
-  "Define a function called `is-male`, which consumes a Row of the animals table and returns true if the animal is male. HINT: use predefined rows like `male-row` to make your examples easier!"
+  "Define a function called `is-male`, which consumes a `Row` of the animals table and _computes_ whether the sex of the animal is male. HINT: use predefined rows like `male-row` to make your examples easier!"
 #:assess-design-recipe #f
 #:headless? #t
-#:show-funname-contract? #f
+#:show-funname-contract? #t
 #:domain-list '(Row)
-#:show-domains? #f
+#:show-domains? #t
 #:range "Boolean"
-#:show-range? #f
-#:purpose "Consumes an animal, and computes whether it's male"
-#:show-purpose? #f
+#:show-range? #t
+#:purpose "Consumes an animal, and checks whether the sex == \"male\""
+#:show-purpose? #t
 #:num-examples 2
-#:example-list '((male-row "male-row[\"sex\"] == \"male\"")
-				 (female-row "female-row[\"sex\"] == \"male\""))
-#:show-examples #f
+#:example-list '((cat-row    "male-row[\"sex\"]   == \"male\"")
+				 				 (rabbit-row "female-row[\"sex\"] == \"male\""))
+#:show-examples '((#t #t #t) (#t #t #t))
 #:param-list (list "r")
-#:show-funname-defn? #f
-#:show-params? #f
+#:show-funname-defn? #t
+#:show-params? #t
 #:body "r[\"sex\"] == \"male\""
-#:show-body? #f
+#:show-body? #t
 #:grid-lines? #t
 }
