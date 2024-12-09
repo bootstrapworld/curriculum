@@ -762,7 +762,7 @@ const MoreAlg = {
   "exploring-linearity-in-tables": {
     "title": "Exploring Linearity in Tables Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#share=1vWRYmn2Nr5e_7wrzA97H1colBQ3BCjNP"
+      "url": "https://code.pyret.org/editor#share=1eelb-3bcUy6loIJ0oHAk9NJjKgtiRVmn"
     }
   },
   "sallys-lemonade": {
