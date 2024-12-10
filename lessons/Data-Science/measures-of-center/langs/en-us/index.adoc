@@ -44,7 +44,7 @@
 
 |===
 
-== Introduction to Measures of Center @duration{15 minutes}
+== Mean, Median, and Modes @duration{15 minutes}
 
 === Overview
 
@@ -111,7 +111,7 @@ Divide the class into groups of three. Supply each group with a marker, a ruler,
 
 @strategy{Strategy: Building a Conceptual Understanding of Mean}{
 
-Very commonly, students develop a computational understanding of mean, but not a conceptual one (@citation{bakker-et-al-2004}, @citation{pollatsek-et-al-1981}). Without a strong conceptual understanding of mean, students will struggle to determine _which_ measure of center is most appropriate in a given situation. We use activities recommended in the research (such as the kinesthetic one described above) to combat this misconception.
+Very commonly, students develop a computational understanding of mean, but not a conceptual one (@citation{bakker-et-al-2005}, @citation{pollatsek-et-al-1981}). Without a strong conceptual understanding of mean, students will struggle to determine _which_ measure of center is most appropriate in a given situation. We use activities recommended in the research (such as the kinesthetic one described above) to combat this misconception.
 
 Interpreting the mean as "fair share" can also help students think conceptually about mean. In other words: what amount will each member of a group would get if everything is distributed equally? Sometimes, a thought experiment is most appropriate for conveying the "fair share" interpretation, e.g. if there are five dogs of differing weights, how would we redistribute the weight so that each of the five dogs is an equal weight? If you have students who struggle to think about mean as a balancing point, you might consider sharing this alternative interpretation.
 }
@@ -175,8 +175,8 @@ The third measure of center is called the @vocab{mode(s)} of a dataset. The @voc
 
 Median and mean always produce one number and many datasets are what we call “unimodal”, having just one mode. But sometimes there are exceptions!
 
-- If two or more values are equally common, there can be more than one mode.
 - If all values are equally common, then there is no mode at all!
+- If two or more values are equally common, there can be more than one mode.
 
 @slidebreak
 
@@ -216,14 +216,14 @@ red, green, red, yellow, blue, red, purple, purple
 
 @QandA{
 
-@Q{If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?}
+@Q{If you heard that the mean age of students in a kindergarten class was 8, would you be surprised? Why or why not?}
 @A{Sample response: yes, that would be surprising. Usually students in kindergarten are 4 or 5 years old!}
 
 @Q{Is the median always one of the values in the dataset? If not, when is it not?}
 @A{No, the median is not always one of the values in the dataset. Sometimes, when there are an even number of datapoints, we need to average the two middle values to find the median.}
 
 @Q{How come we can find the mode of a categorical dataset, but not the median or the mean?}
-{Finding the mode does not require us to perform any arithmetic computations. Computing the median or the mean does require us to perform some arithmetic, therefore we can only use quantitative data.}
+@A{Finding the mode does not require us to perform any arithmetic computations. Computing the median or the mean does require us to perform some arithmetic, therefore we can only use quantitative data.}
 
 }
 
@@ -267,6 +267,13 @@ Pyret has functions that will compute mean, median, and mode.
 @hspace{2em} @show{ (contract "modes" '("Table" "String") "List" )}
 
 Note: `List` is a new data type!
+
+
+@QandA{
+@Q{Why do you think `modes` returns a List?}
+@A{If `modes` only returned a Number, there would be no way to indicate if there are multiple modes.}
+}
+
 }
 
 
@@ -277,8 +284,8 @@ To compute the mean and median in CODAP, create a graph of randomly distributed 
 
 @lesson-instruction{
 - Open the @starter-file{animals} in @proglang.
-- Complete @printable-exercise{summarizing-columns-moc.adoc}, using @proglang to compute and record all three measures of center for the `pounds` column.
-- Once you have completed the table, respond to the remaining questions using the information you have recorded on the table.
+- Complete @printable-exercise{summarizing-columns-moc.adoc}, using @proglang to compute and record all three measures of center for the `pounds` column. Write your responses on the table in question 1.
+- Respond to the remaining questions using the information you have recorded on the table.
 }
 
 @teacher{Question 3 requires students to _apply_ their knowledge of mean *and* median, which can be quite difficult. Commonly, students' understanding of center does not extend beyond algorithms. Invite students to think back to what they know about histograms and histogram shape. Challenge them to think deeply about how a histogram's shape relates to its measures of center. We will continue to consider this topic in the next lesson section.}
