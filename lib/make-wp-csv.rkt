@@ -10,6 +10,9 @@
 (define *season* "spring")
 (define *year* (number->string (date-year (current-date))))
 
+(define *official-date*
+  (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01")))
+
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
@@ -22,7 +25,7 @@
     (substring
       (bytes->hex-string
         (call-with-input-string s sha1-bytes))
-      0 15) 16))
+      0 13) 16))
 
 (define (escape-html s #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
   (let ([lib-prefix #f])
@@ -79,13 +82,13 @@
   (when (path? f) (set! f (path->string f)))
   (format "/wp-content/themes/pro-child/static-resources/~a/lib/lessons/~a/" *season-year* f))
 
-(define (convert-lessons o)
-  (for ([lesson-dir (directory-list *lessons-dir*)])
-    (let ([lesson-plan-file (path->string (build-path *lessons-dir* lesson-dir "index.shtml"))]
-          [title-file (path->string (build-path *lessons-dir* lesson-dir ".cached/.index.titletxt"))])
+(define (convert-top-pages o #:umbrella-dir [umbrella-dir #f])
+  (for ([lesson-dir (directory-list umbrella-dir)])
+    (let ([lesson-plan-file (path->string (build-path umbrella-dir lesson-dir "index.shtml"))]
+          [title-file (path->string (build-path umbrella-dir lesson-dir ".cached/.index.titletxt"))])
       (when (and (file-exists? lesson-plan-file) (file-exists? title-file))
-        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
-        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status, date
+        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a,~a\n"
                  (string->uniqid lesson-dir) ;id
                  (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
                  lesson-dir
@@ -94,14 +97,18 @@
                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
                  "" ; child categories
                  (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
+                 "public"
+                 *official-date*
                  )))))
 
-(define (convert-workbook-pages o #:pages [pages "pages"])
-  ; (printf "doing convert-workbook-pages ~a\n" pages)
-  (for ([lesson-dir (directory-list *lessons-dir*)])
+(define (convert-sub-pages o #:umbrella-dir [umbrella-dir #f] #:pages [pages #f])
+  ; (printf "doing convert-sub-pages ~a\n" pages)
+  (let ([solutions? (regexp-match "solution-pages" pages)]
+        [protected? (regexp-match "protected" pages)])
+  (for ([lesson-dir (directory-list umbrella-dir)])
     (let* ([lesson-id (string->uniqid lesson-dir)]
            [static-prefix (make-lesson-static-url lesson-dir)]
-           [lesson-dir-path (build-path *lessons-dir* lesson-dir)]
+           [lesson-dir-path (build-path umbrella-dir lesson-dir)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
       (let ([pages-dir-path (build-path lesson-dir-path pages)])
         (when (directory-exists? pages-dir-path)
@@ -112,7 +119,7 @@
               ;id, title, permalink, lesson-parent, unit-raw-code
               (let* ([p-base (regexp-replace #rx"\\.html" p "")]
                      [p-prime (format "~a~a" p-base
-                                (if (string=? pages "pages") "" "-solution"))]
+                                (if (not solutions?) "" "-solution"))]
                      [lesson/p (format "~a/~a" lesson-dir p-prime)]
                      [page-file (path->string (build-path pages-dir-path p))]
                      [page-title-file (path->string (build-path pages-dir-path ".cached"
@@ -121,17 +128,19 @@
                 ; (printf "page-title-file is ~a\n" page-title-file)
                 (when (file-exists? page-title-file)
                   ; (printf "going ahead with ~a\n" p)
-                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code
-                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\"\n"
+                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status, date
+                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a,~a\n"
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            p-prime
                            ;(make-lesson-permalink lesson/p) ; permalink
                            lesson-id ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
-                           (if (string=? pages "pages") "Xyz" "Xyz Solution") ; child categ
+                           (if (not solutions?) "Xyz" "Xyz Solution") ; child categ
                            (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
-                           ))))))))))
+                           (if solutions? "private" "publish")
+                           *official-date*
+                           )))))))))))
 
 (let* ([cla (current-command-line-arguments)]
        [n (vector-length cla)])
@@ -146,8 +155,20 @@
 
 (call-with-output-file *csv-file*
   (lambda (o)
-    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code\n")
-    (convert-lessons o)
-    (convert-workbook-pages o)
-    (convert-workbook-pages o #:pages "solution-pages"))
+    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code,Post Status,Date\n")
+    (convert-top-pages o #:umbrella-dir *lessons-dir*)
+    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "pages")
+    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "solution-pages")
+    (convert-top-pages o #:umbrella-dir *courses-dir*)
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/solution-pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "back-matter/solution-pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/solution-pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected/pages")
+    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected/solution-pages")
+    )
   #:exists 'replace)
