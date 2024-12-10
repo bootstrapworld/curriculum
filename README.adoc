@@ -638,16 +638,16 @@ The subsections that follow will walk you through installing the following tools
 +
   brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
 
-* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open \~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
+* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
 +
   # add every gnu tool we have as a prefix to the path
   eval "$(/opt/homebrew/bin/brew shellenv)"
   if type brew &>/dev/null; then
     HOMEBREW_PREFIX=$(brew --prefix)
-    for d in ${HOMEBREW_PREFIX}/opt/\*/libexec/gnubin; do export PATH=$d:$PATH; done
+    for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
   fi
 
-=== In Unix or WSL
+=== In Unix or WSL...
 
 * Most packages can be installed via `sudo apt-get install`, with the following terminal command:
 +
@@ -665,7 +665,7 @@ The subsections that follow will walk you through installing the following tools
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 +
 
-=== Last step (for everyone!)
+=== _Everyone_
 
 * Download the version of Node we need (v20) via `nvm install 20`, followed by `nvm use 20`.
 
