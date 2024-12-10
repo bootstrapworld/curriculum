@@ -610,6 +610,7 @@ make sure there are no “modified” files in your directory.
 == Setting up your environment
 
 You will need a Unix-like environment to construct documents from this repo:
+
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
@@ -631,10 +632,9 @@ The subsections that follow will walk you through installing the following tools
   - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
   - `mathjax`, which generates beautifully formatted math output
 
-=== In macOS
+=== In macOS...
 
-* Install packages
-  - Most packages can be installed via `brew`, with the following terminal command:
+* Most packages can be installed via `brew`, with the following terminal command:
 +
   brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
 
@@ -649,23 +649,24 @@ The subsections that follow will walk you through installing the following tools
 
 === In Unix or WSL
 
-* `jq` - you _should_ already have this installed. Type `jq` at the command line and hit Enter. If you get `command not found`, WSL/Unix users can install via `sudo apt install jq`.
+* Most packages can be installed via `sudo apt-get install`, with the following terminal command:
++
+  sudo apt-get install jq asciidoctor lua5.4 curl
 
-* Racket:
+* To install Racket:
 +
   sudo apt-add-repository ppa:plt/racket
   sudo apt install racket
 +
 
-* Asciidoctor: `sudo apt-get install asciidoctor`
 
-* Lua: `sudo apt-get install lua5.4`
-
-* NVM: follow the instructions on https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-    to install the Node Version Manager. (Use the `curl` as you've
-    already installed `curl`.)
+* To install NVM:
++
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
++
 
 === Last step (for everyone!)
+
 * Download the version of Node we need (v20) via `nvm install 20`, followed by `nvm use 20`.
 
 * Making sure that you are in the curriculum directory, install the Node packages via `npm install`
