@@ -2,7 +2,6 @@
 ++++
 <style>
 .circle2 .expression .expression { background: lightskyblue !important; }
-
 .circle3 .expression { background: aquamarine !important; }
 .circle3 .expression .expression { background: white !important; }
 .circle3 .expression .expression .expression { background: lightskyblue !important; }
@@ -49,7 +48,7 @@
 
 === Overview
 
-Building on their understanding of @lesson-link{contracts, Contracts}, students will be introduced to functions for working with _tables_, including: @show{(code 'sort)},  @show{(code 'count)} and @show{(code 'first-n-rows)}.
+Building on their understanding of @lesson-link{contracts, Contracts}, students will be introduced to functions for working with _tables_, including: @show{(code 'sort)},  @show{(code 'count)}, @show{(code 'first-n-rows)} and @show{(code 'row-n)}.
 
 === Launch
 
@@ -70,7 +69,7 @@ Building on their understanding of @lesson-link{contracts, Contracts}, students 
 === Investigate
 
 @lesson-instruction{
-Turn to @printable-exercise{functions-for-tables.adoc} and complete numbers 1-6.
+Turn to @printable-exercise{functions-for-tables.adoc} and complete the first section: *Sorting by a Column*.
 }
 
 @slidebreak
@@ -100,10 +99,10 @@ Let's review what we know about Contracts. Every Contract has three parts:
 
 @slidebreak
 
-Let's explore the Contract for another function that works with Tables.
+Let's explore the Contract for another function that works with Tables: `count`
 
 @lesson-instruction{
-Complete @printable-exercise{functions-for-tables.adoc}.
+Complete the second section of @printable-exercise{functions-for-tables.adoc}.
 }
 
 @slidebreak
@@ -118,32 +117,37 @@ Complete @printable-exercise{functions-for-tables.adoc}.
 
 @slidebreak
 
-@lesson-instruction{
-- Let's explore some more table functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
-}
-
 The `count` function produces a @vocab{frequency table}. These @vocab{frequency tables} summarize data by showing how often - how _frequently_ specific values appear in a dataset. @vocab{Frequency tables} are a common tool in statistics that helps identify patterns and distributions.
 
 @slidebreak
 
-Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
+@lesson-instruction{
+- Let's explore some more table functions, by completing @printable-exercise{functions-for-tables-cont.adoc}.
+}
+
+
+
+@slidebreak
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number, an Image and a Row.
 
 ```
 name = "Denny"
 age = 16
 logo = star(50, "solid", "red")
+pet = row-n(animals-table, 3)
 ```
 
 @QandA{
 @Q{What are the names given in each of these definitions?}
 @A{name, age, and logo}
 @Q{What are the values given to each of these names?}
-@A{The String "Denny", the Number 16, and an Image of a solid red star.}
+@A{The String "Denny", the Number 16, an Image of a solid red star, the 4th Row of the Animals Table.}
 }
 
 @slidebreak
 
-As you've seen from @printable-exercise{functions-for-tables-cont.adoc}, Pyret also lets us define `Row` values. The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
+The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
 
 If we want the _second_ Row in the table, Pyret needs to count one Row down from the beginning of the table. That's why the index for the second Row is `1`.
 
