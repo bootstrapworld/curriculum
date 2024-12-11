@@ -900,11 +900,6 @@ table.recipe_title    {
 /* Proglang-specific adaptations */
 .pyret {
 
-  .other-proglang::before {
-    content: "This lesson plan has students programming in Pyret. ";
-    font-style: italic;
-  }
-
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
@@ -958,10 +953,6 @@ table.recipe_title    {
 }
 
 .wescheme {  
-  .other-proglang::before {
-    content: "This lesson plan has students programming in WeScheme. ";
-    font-style: italic;
-  }
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
@@ -1001,10 +992,6 @@ table.recipe_title    {
 }
 
 .codap {
- .other-proglang::before {
-    content: "This lesson plan has students use CODAP. ";
-    font-style: italic;
-  }
   .data-cycle-expression { font-family: inherit; }
 
   .cm-keyword { font-weight: normal !important; }
@@ -1315,6 +1302,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
+    .other-proglang::before { font-style: italic; }
+
     .lessonSummary {
       break-after:  page !important;
       page-break-after:  always !important;
