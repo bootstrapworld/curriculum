@@ -7,11 +7,11 @@
 ++++
 
 [.linkInstructions]
-Open the @starter-file{animals} and click "Run". In the Interactions Window on the right, type `animals-table` and hit "Enter" to see the default view of the table.
+Open the @starter-file{animals} and click "Run". In the Interactions Area (right), type `animals-table`. Hit "Enter" to see the default view of the table.
 
 == Sorting by a Column
 
-@n Bear wants to sort this table by `age` (youngest-to-oldest). Lion wants to sort the table by `pounds`(heaviest-to-lightest). How else might someone want to sort the table?
+@n Mabel Lee wants to sort this table by `age` (youngest-to-oldest). Juan Carlos wants to sort the table by `pounds`(heaviest-to-lightest). How else might someone want to sort the table?
 
 @hspace{4em} a. @fitb{}
 
@@ -19,7 +19,8 @@ Open the @starter-file{animals} and click "Run". In the Interactions Window on t
 
 @center{*Pyret has a function called `sort` that will produce sorted Tables!*}
 
-@n Test out @show{(code '(sort animals-table "age" true))} in the Interactions Area. Try using `false` instead of `true`.  Then complete the sentences below by circling the behavior you observed for each boolean.
+@n Test out @show{(code '(sort animals-table "age" true))} in the Interactions Area. Try using `false` instead of `true`. +
+*Complete the sentences below by circling* the behavior you observed for each Boolean.
 
 @indented{
 [cols="1a, ^1a, ^1a", frame="none", grid="none", stripes="none"]
@@ -51,10 +52,8 @@ _(from largest to smallest)_
 
 @n Did you use `true` or `false`? Explain why. @fitb{}{}
 
-== Summarizing a Column
-Let's explore the contract for another table function:
-
-@show{(contract "count" '("Table" "String") "Table")}
+== Summarizing a Column using `count`
+Let's explore another table function, beginning with its contract: @hspace{2em} @show{(contract "count" '("Table" "String") "Table")}
 
 @n What do you expect the code  @show{(code '(count animals-table "legs"))} to produce?
 
