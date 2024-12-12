@@ -7,6 +7,7 @@
 minchars=200
 
 for f in $(git diff --name-only --staged); do
+  if test ! -f $f; then continue; fi
   fb=$(basename $f)
   test ${fb#*.} = adoc || continue
   d=$(dirname $f)
