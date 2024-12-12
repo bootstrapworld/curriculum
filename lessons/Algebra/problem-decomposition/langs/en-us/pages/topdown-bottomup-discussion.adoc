@@ -2,11 +2,15 @@
 
 ++++
 <style>
-.MathJax { display: inline-block; }
 td.tableblock .paragraph { margin-bottom: 3ex; }
 td.tableblock .paragraph:last-child { margin-bottom: 0; }
 .strategy-box { border: solid 2px black !important; }
-.strategy-box .MathJax { margin-bottom: 0; }
+.strategy-box .paragraph { margin: 5px 0; }
+.strategy-box .MathJax {
+	margin-bottom: 0;
+	display: inline-block !important;
+	margin: 0 !important;
+}
 </style>
 ++++
 
@@ -18,7 +22,7 @@ Aside from time waiting for the plane or bus, how long is Jamal in transit?
 
 [cols="2a, 2a" options="header", stripes="none"]
 |===
-| *Bear's Strategy:*	| *Lion's Strategy:*
+^| *Bear's Strategy:*	^| *Lion's Strategy:*
 |
 @math{\text{Drive Time} = \mbox{20 miles} \times \frac{\mbox{1 hour}}{\mbox{40 miles}} = \mbox{0.5 hours}}
 
@@ -64,7 +68,11 @@ Aside from time waiting for the plane or bus, how long is Jamal in transit?
 
 When calculating Jamal's drive time, we multiplied distance by speed. More specifically, we multiplied the starting value (@math{\mbox{20 miles}}) by @math{\frac{\mbox{1 hour}}{\mbox{40 miles}}}. Why? Why not reverse it, to use @math{\frac{\mbox{40 miles}}{\mbox{1 hour}}}, as stated in the problem?
 
+@vspace{1ex}
+
 @math{\text{Time}} is the desired outcome. Looking at the units, we can see that speed must have @math{\text{miles}} as its denominator to _cancel out_ the @math{\text{miles}} in the starting value.
+
+@vspace{1ex}
 
 [.center]
 @math{\frac{\mbox{20 miles}}{1} \times \frac{\mbox{1 hour}}{\mbox{40 miles}} = \frac{20\require{enclose} \enclose{horizontalstrike}{\text{miles}} \times \mbox{1 hour}}{40 \require{enclose} \enclose{horizontalstrike}{\text{miles}}} = \frac{20}{40} \text{hour} = \frac{1}{2} \text{hour}}

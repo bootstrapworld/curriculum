@@ -154,4 +154,4 @@
   (print-link-to-forum o))
 
 (define (natlang:also-available-in s)
-  (string-append "(Also available in " s ")"))
+  (string-append "_(Using another tool? Please select it now: " s ".)_"))

@@ -3,25 +3,6 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
- * IMPORT FONTS
-
-
-@font-face {
-  font-family: 'MJXTEX';
-  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-I';
-  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-B';
-  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
-}
- */
-/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -95,18 +76,20 @@ body {
       line-height: 1.6;
       margin-left: 2px;
     }
+    sup { font-size: 65% !important; }
     sub { font-size: 65% !important; }
   }
   .MathJax { 
-      font-family: MJXZERO, 'MJXTEX'; 
-      font-size: inherit !important;
+    margin: 0 !important;
+    font-family: MJXZERO, 'MJXTEX'; 
+    font-size: inherit !important;
   }
   .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; 
     font-size: inherit !important;
     line-height: 0;
   }
-  .mathunicode i { font-family: 'MJXTEX-I' }
+  .mathunicode i { font-family: 'MJXTEX-I'; margin-right: 1px;}
   
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
@@ -155,6 +138,22 @@ body {
   }
   /* But not if it's an extra-long page */
   &.canBeLongerThanAPage #footer { display: none; }
+
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       @translucent-bg-color;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
 
   /* outOfDate warning */
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
@@ -356,7 +355,7 @@ lines on some browsers */
 .narrativepage {
   font-size: 12pt;
   .logo     { float: right; }
-  .logo img { width: 400px; }
+  .logo img { max-width: 375px; }
   #lesson-list {
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
@@ -747,7 +746,7 @@ body.workbookpage {
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
-  td .autonum {
+  th .autonum, td .autonum {
     padding-top: 0;
     &::after { content: none;}
   }
@@ -900,6 +899,7 @@ table.recipe_title    {
 
 /* Proglang-specific adaptations */
 .pyret {
+
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
@@ -952,7 +952,7 @@ table.recipe_title    {
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
 }
 
-.wescheme {
+.wescheme {  
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
@@ -1188,6 +1188,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @media screen {
   html { height: 100%; display: flex; padding-left: 3em;}
 
+  div#body { max-width: 700px; }
+
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
@@ -1198,6 +1200,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
     transform: scale(calc(12 / 9)); 
+    #savetodrive-div { transform: scale(0.8); }
   }
 
   /********************************************************************
@@ -1283,7 +1286,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
-  .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
@@ -1299,6 +1302,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
+    .other-proglang::before { font-style: italic; }
+
     .lessonSummary {
       break-after:  page !important;
       page-break-after:  always !important;

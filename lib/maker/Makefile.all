@@ -67,6 +67,8 @@ export LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.lessons.t
 
 export RELEVANT_LESSONS_LIST_FILE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.relevant-lessons.txt.kp
 
+export IGNORABLE_DIRECTORIES := $(TOPDIR)/distribution/$(NATLANG)/.cached/.ignorable-directories.txt.kp
+
 # export SED := $(shell if which ls|grep -q .; then echo gsed; else echo sed; fi)
 
 export SED := sed
@@ -91,7 +93,7 @@ export OTHERDIRS := /\(fragments\|xtra\|xtras\)/
 
 export NUMCORES := $(shell getconf _NPROCESSORS_ONLN)
 
-all: phases dictionaries coverage
+all: phases coverage
 
 phases:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
@@ -140,19 +142,6 @@ quick-deploy:
 csv:
 	$(MAKE)
 	$(TOPDIR)/lib/make-wp-csv.rkt
-
-###############################################################################
-
-dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
-
-alignment-dictionaries := $(wildcard \
-	shared/langs/en-us/standards/*.rkt \
-	shared/langs/en-us/textbooks/*.rkt \
-	shared/langs/en-us/practices/*.rkt)
-
-distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
-	@echo ➤ Make $@
-	@$(MAKE_DIR)make-json-dict.lua $@
 
 ###############################################################################
 

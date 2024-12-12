@@ -328,7 +328,8 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "^" ss "{sp}^")]
+            (string-append
+              (enclose-tag "sup" "" ss) "&#x2009;")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -339,7 +340,7 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *subscriptables*))) ss-list))]
           [asciidoc?
-            (string-append "~" ss "~")]
+            (enclose-tag "sub" "" ss)]
           [else (string-append "<sub>" ss "</sub>")])))
 
 (define (math-sqrt x)
