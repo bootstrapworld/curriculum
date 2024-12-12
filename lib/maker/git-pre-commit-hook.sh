@@ -9,6 +9,7 @@ minchars=200
 JQ=$(which jq)
 
 for f in $(git diff --name-only --staged); do
+  if test ! -f $f; then continue; fi
   fb=$(basename $f)
   if test ${fb#*.} = adoc; then
     for doit in justonce; do
