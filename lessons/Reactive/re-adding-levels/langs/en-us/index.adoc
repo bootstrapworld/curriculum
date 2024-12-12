@@ -62,18 +62,18 @@ Now that we have our helper function, we can use it to draw of that one part of 
 
 ```
 fun draw-state(g):
-  put-image(text(
+  translate(text(
   string-append("NinjaCat! Score: ", num-to-string(g.score)),
             20, "white"),
       310, 470,
-      put-image(
+      translate(
       text("Use arrow keys to move. Jump on the dog & catch the ruby!",
             12, "white"),
         320, 450,
-        put-image(PLAYER-IMG, g.playerx, g.playery,
-          put-image(CLOUD-IMG, 150, 350,
-            put-image(RUBY-IMG, g.targetx, g.targety,
-              put-image(DOG-IMG, g.dangerx, g.dangery,
+        translate(PLAYER-IMG, g.playerx, g.playery,
+          translate(CLOUD-IMG, 150, 350,
+            translate(RUBY-IMG, g.targetx, g.targety,
+              translate(DOG-IMG, g.dangerx, g.dangery,
                 draw-bg(g.score)))))))
   ...
 ```
