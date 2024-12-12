@@ -356,6 +356,7 @@
   ;(printf "doing math-unicode-if-possible ~s ~s\n" text asciidoc?)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
+             (regexp-match "\\\\qquad" text)
              (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
