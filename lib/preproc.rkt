@@ -1736,9 +1736,6 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "fitb")
                             (let ([width (read-group i directive)])
-                              (unless (char=? (ignorespaces-peek-char i) #\{)
-                                (printf "WARNING: ~a: @fitb{~a} requires second arg\n\n"
-                                       (errmessage-context) width))
                               (if (string=? width "")
                                 (display-begin-span
                                   ".fitb.stretch" o)
