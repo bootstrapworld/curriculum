@@ -86,11 +86,15 @@
   (for ([lesson-dir (directory-list umbrella-dir)])
     (let ([lesson-plan-file (path->string (build-path umbrella-dir lesson-dir "index.shtml"))]
           [title-file (path->string (build-path umbrella-dir lesson-dir ".cached/.index.titletxt"))])
-      (when (and (file-exists? lesson-plan-file) (file-exists? title-file))
+      (when (file-exists? lesson-plan-file)
         ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status, date
         (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a,~a\n"
                  (string->uniqid lesson-dir) ;id
-                 (string-trim (escaped-file-content title-file #:kill-newlines? #t)) ;title
+                 (string-trim
+                   (if (file-exists? title-file)
+                       (escaped-file-content title-file #:kill-newlines? #t)
+                       (path->string lesson-dir)
+                       )) ;title
                  lesson-dir
                  ;(make-lesson-permalink lesson-dir) ;permalink
                  "" ; parent
