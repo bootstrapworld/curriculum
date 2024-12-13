@@ -1,6 +1,6 @@
 = Fitting Models
 
-@description{Students learn about model "fitness" through the _S_ value (Standard Deviation of Residuals).}
+@description{Students learn how to fit a linear model to a scatter plot, using the _S_-value (Standard Deviation of Residuals) of model fitness.}
 
 @lesson-prereqs{correlations}
 
@@ -43,10 +43,9 @@
 == Line of "Good" Fit?
 
 === Overview
-Students confront the notion of "model fitness". How do we measure how well a model fits? How do we determine which of two models is best? They consider two models for a simple dataset and brainstorm how we could measure which fits better.
+Students confront the notion of "model fitness" (e.g - how might we measure how well a model fits a dataset?). They consider two models for a simple dataset and brainstorm how we could measure which fits better.
 
 === Launch
-
 Let's return to the animals dataset, and see if there's a correlation between an animal's `age` and the `weeks` to adoption.
 
 @lesson-instruction{
@@ -61,15 +60,13 @@ Let's return to the animals dataset, and see if there's a correlation between an
 @QandA{
 @Q{Does there appear to be a relationship here? If so, how would you describe it?}
 @A{The goal is to draw out student-generated notions, that may or may not include formal language, e.g.
-*** It looks like weeks to adoption decreases as the lizards get heavier.
-*** I see a shape in the points the looks like this (motions with arms).
-*** The points seem to be clustering around a diagonal line with a negative slope.
+*** "It looks like weeks to adoption decreases as the lizards get heavier."
+*** "I see a shape in the points the looks like this (motions with arms)."
+*** "The points seem to be clustering around a diagonal line with a negative slope."
 }
 @Q{If a new lizard appeared that weighed 2 pounds, how long would you predict it would take to be adopted?}
-@A{Answers will vary.}
 @A{I'm not 100% sure, but I would expect it would probably take between 8 and 10 weeks, and it would certainly be surprising if it took less than 6 weeks to be adopted.}
 @Q{How did you make your prediction?}
-@A{Answers will vary.}
 @A{I pictured a line.}
 @A{I pictured a wide paint brush going backwards through the points starting from the right until I got to 2.}
 @A{I thought about what point might come between (1,6) and (3,8)... which was (2,7) and then decided that based on the other points on the graph that point would probably be a little higher.}
@@ -82,17 +79,23 @@ Project the scatter plot at the front of the room, and have students come up to 
 
 @slidebreak
 
+We can summarize the distribution of one quantitative column of data with one number. (For example, the @vocab{mean}. Can you name any others?) Similarly, can summarize _the relationship between *two* quantitative columns of data_ with *two* numbers: the slope and y-intercept of the line that is closest to all the coordinates on the scatter plot.
+
+@slidebreak
+@ifslide{ @right{@image{images/scatter-plot-lizard-sample-weeks-v-pounds.png, 400}} }
+
+The line that is closest to all the other points is known as the @vocab{line of best fit}.
+
 @lesson-instruction{
-- One way to summarize the relationship we see in a scatter plot is to draw the @vocab{line of best fit}. 
-- In your mind's eye, consider where you might draw a line on this scatter plot to summarize the trend you see in the data.
+- In your mind's eye, picture where you might draw a line on this scatter plot to summarize the trend you see in the data.
 }
 
 === Investigate
 
-If two people both think there's a linear relationship hiding in this data, they might each see a _different_ linear relationship. 
+While most of the class might have pictured similar lines, it's likely that different people see slightly _different_ linear relationships. But how do we know which one is best?
 
 @lesson-instruction{
-- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straight edge to draw a line that you think would fit the data well on the scatter plot.
+- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straight edge to draw a line that you think would best fit the data on the scatter plot.
 - Then, complete the questions on the page with your partner.
 }
 
@@ -118,11 +121,11 @@ Push students to recognize that in order for this measurement to be useful they 
 
 === Overview
 
-Students test out their linear models using a Pyret function called `fit-model`, which draws the residuals and computes the Standard Deviation of the Residuals (@math{S}).
+Students test out their linear models using a Pyret function called `fit-model`, which draws the residuals and computes a measure of fitness called the Standard Deviation of the Residuals (@math{S}).
 
 === Launch
 
-Pyret has a special function called `fit-model` that takes in a function and graphs it on top of a scatter plot.
+Pyret has a function called `fit-model`, that takes in a function and graphs it on top of a scatter plot.
 
 @QandA{
 @Q{Take a look at the contract for `fit-model` in your @dist-link{Contracts.shtml, contracts page}. What is its Domain?}
@@ -176,14 +179,22 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @A{The blue line is the model.}
 @A{The red dots are the data from the data set.}
 @A{Residuals refer to the vertical black lines connecting the data points to the model, representing the distance between the data and the value the model predicts. They vary in length depending on how far above or below the model the data is situated.}
+}
 
+@slidebreak
+
+@QandA{
 @Q{Compare the `fit-model` display for `f` to the `fit-model` display for `g`. How are they similar? How are they different?}
 @A{The x-axis goes from 0 to 8 for both of them.}
 @A{The y-axis for `f` is numbered 0 to 20. It goes from 3 to 9 for `g`.}
 @A{Both `f` and `g` have a blue line and red dots.}
 @A{`g` has more red dots below the blue line than above it.}
 @A{The data points for `g` more or less fill the vertical space of the display, whereas for `f` there are only data points in the bottom half of the display.}
+}
 
+@slidebreak
+
+@QandA{
 @Q{How do @math{S} and @math{r-sqr} compare for the two models?}
 @A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `g` than they are for `f`.}
 
@@ -193,22 +204,23 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 
 @slidebreak
 @ifslide{@right{@image{images/residual.png, 200}}}
-There are many different tools to calculate the fitness of a model, including @math{S} and @math{r-sqr}, which you just saw when fitting the models in @proglang.
+Just as there are different tools for finding the center or spread of a dataset, there are many different tools to calculate the fitness of a model, including @math{S} and @math{R^2}, which you just saw when fitting the models in @proglang.
 
 Statisticians and Data Scientists are careful to use the right tool for the job!
 
-- We want a measure of _error_, so the measure should be zero for a perfect model with no residuals.
-- We want a measure that's easy to understand, so in our case it should measure _how many weeks of error_ a model has.
-- We want a measure that takes the residuals from _every_ data point into account.
+- We want a measure that takes the values from _every_ data point into account.
+- We want a measure of _error_, so the measure should be zero for a perfect model fits every point (i.e. - has no residuals).
+- We want a measure that's concrete, and easy to understand.
 
 @slidebreak
 
-@ifslide{ @right{@image{images/residual.png, 200}} }@vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
+@ifslide{ @right{@image{images/residual.png, 200}} }
+@vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
 
 - The closer the data points are to the model, the smaller the residuals are.
 - Smaller residuals mean a smaller @vocab{S}, and a better model!
 - We know that if a model fits the data perfectly, the @vocab{S} value would be 0.
-- Unlike other measures of fitness, @vocab{S} is expressed in terms of _units of the y-axis_. An @vocab{S} of `5` in this dataset means _the standard deviation of the residuals is 5 weeks_ - making it much easier to understand.
+- @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis). When fitting this a model to this dataset, an @vocab{S} of `5` means _the standard deviation of the residuals is "5 weeks to adoption"_ - making it much easier to understand.
 
 @slidebreak
 
