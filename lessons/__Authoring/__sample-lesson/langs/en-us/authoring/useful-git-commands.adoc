@@ -1,5 +1,11 @@
 = Git Command Notes for Authors
 
+
+== To revert to the last pull
+
+`git checkout -- \*``
+removes all local changes at the level I'm working at on my computer and reverts to the last pull.
+
 == Commits
 
 @n `git add lessons/.../langs/en-us/.../...`
@@ -15,6 +21,16 @@
 	* You can unstage multiple commits by repeating `git reset HEAD~1` or using `git reset HEAD~2` or `git reset HEAD~3`
 	* `git revert e4faa6b555b9f0b4b3d2eaf055f9495cd80f5f72` (that long string of text is the full commit ID number) allows you to go back and edit a commit _after_ pushing.
 
+== To rename a commit
+
+`git commit --amend -m "new commit description" `
+
+== When you have to stash a commit
+
+  	* git stash   
+  	* git pull   
+  	* git apply
+
 == Renaming or moving files
 
 	* `git mv lessons/contracts/langs/en-us/pages/graphs.adoc lessons/flags/langs/en-us/tables.adoc`
@@ -27,7 +43,11 @@
 
 	* `cp lessons/contracts/langs/en-us/pages/graphs.adoc lessons/flags/langs/en-us/tables.adoc`
 	* This is useful when you want to make a new page with formatting similar to a page from another lesson.
-	* To copy an entire lesson, use `cp -r` instead of just `cp`
+	* To copy an ENTIRE FOLDER, use `cp -r` instead of just `cp`
+
+== Cherrypicking a commit to another branch
+
+    * `git cherry-pick <the commit hash>`
 
 == Building Pathways
 
@@ -35,7 +55,7 @@
 	* You can get `./build-pathway` to appear by typing `./bu` and `tab`
 	* To specify pathways use:
  		- `./build-pathway data-science`
- 		- `./build-pathway --proglang codap data-science-codap`
+ 		- `./build-pathway --proglang codap data-literacy-codap`
  		- `./build-pathway algebra`
  		- `./build-pathway algebra --proglang wescheme`
  		- `./build-pathway algebra --proglang pyret`
@@ -69,3 +89,8 @@
 
 	* To make a new branch, you’d do `git checkout -b NewBranch`
 	* For anyone else to be able to see it, you'll need to `git push`. The first time you try to push, git Will tell you that you need to specify an upstream equivalent of that branch. _It will literally tell you what to type._ Type that in and hit enter.
+
+== To cleanup branches on your computer
+
+	* `git branch -v`  will list all branches
+	* `git branch -D BRANCHNAME` will remove it from my machine only

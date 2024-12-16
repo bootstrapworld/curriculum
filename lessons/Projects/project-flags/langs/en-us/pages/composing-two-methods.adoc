@@ -27,45 +27,45 @@ They then two very different strategies to define `puerto-rico` to compose an im
 @ifproglang{pyret}{
 ```
 puerto-rico =
-  put-image(wstar, 65, 100,
-    put-image(btriangle, 85, 100,
-      put-image(rrectangle, 150, 20,
-        put-image(rrectangle, 150, 100,
-          put-image(rrectangle, 150, 180,                                                         
+  translate(wstar, 65, 100,
+    translate(btriangle, 85, 100,
+      translate(rrectangle, 150, 20,
+        translate(rrectangle, 150, 100,
+          translate(rrectangle, 150, 180,
             background)))))
 ```
 }
 @ifproglang{wescheme}{
 ```
 (define puerto-rico 
-  (put-image wstar 65 100
-    (put-image btriangle 85 100
-      (put-image rrectangle 150 20
-        (put-image rrectangle 150 100
-          (put-image rrectangle 150 180                                                          background))))))
+  (translate wstar 65 100
+    (translate btriangle 85 100
+      (translate rrectangle 150 20
+        (translate rrectangle 150 100
+          (translate rrectangle 150 180                                                          background))))))
 ```
 }
 
 | Savannah's Method:
 @ifproglang{pyret}{
 ```
-step1 = put-image(rrectangle, 
+step1 = translate(rrectangle,
   150, 20, 
   background)
 
-step2 = put-image(rrectangle, 
+step2 = translate(rrectangle,
   150, 100, 
   step1)
 
-step3 = put-image(rrectangle, 
+step3 = translate(rrectangle,
   150, 180, 
   step2)
 
-step4 = put-image(btriangle, 
+step4 = translate(btriangle,
   85, 100, 
   step3)
 
-step5 = put-image(wstar, 
+step5 = translate(wstar,
   65, 100, 
   step4)
 
@@ -74,23 +74,23 @@ puerto-rico = step5
 }
 @ifproglang{wescheme}{
 ```
-(define step1 (put-image rrectangle 
+(define step1 (translate rrectangle
   150 20
   background))
 
-(define step2 (put-image rrectangle 
+(define step2 (translate rrectangle
   150 100 
   step1))
 
-(define step3 (put-image rrectangle 
+(define step3 (translate rrectangle
   150 180 
   step2))
 
-(define step4 (put-image btriangle 
+(define step4 (translate btriangle
   85 100 
   step3))
 
-(define step5 (put-image wstar 
+(define step5 (translate wstar
   65 100 
   step4))
 

@@ -1,0 +1,46 @@
+= Graphing Periodic Models: Horizontal/Phase Shift (𝘩)
+
+++++
+<style>
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph td {
+  --width:    3.2in;
+  --height:   3.0in;
+  --left_pct: 0.08;
+  --top_pct:  0.92;
+  --x_label: 'altitude';
+  --y_label: 'time';
+}
+</style>
+++++
+
+The standard form of a periodic model is @math{f(x) = a sin(b⋅(x - h)) + k}. On this page, we'll explore the role of @vocab{amplitude} @math{a} in periodic functions. @link-instructions{Open the Desmos File *Exploring Periodic Functions*. You should be on *Slide 2: Modeling the Ferris Wheel Dataset (sin)* and see four sliders for @math{a}, @math{b}, @math{h}, and @math{k}.}
+
+@n Adjust the sliders to fit the data as best you can, and fill in the coefficients: @fitbruby{6em}{@ifsoln{100}}{@math{a}}, @fitbruby{6em}{@ifsoln{0.209}}{@math{b}}, @fitbruby{6em}{@ifsoln{0}}{@math{h}} and @fitbruby{}{@ifsoln{105}}{@math{k}}
+
+@n Change *ONLY* the slider for @math{h}, experimenting with values at @math{-58\pi \over 8}, @math{-19\pi \over 8}, @math{19\pi \over 8}, and @math{58\pi \over 8}, graphing each curve below. **For each curve, label the coordinates at time=15, @math{30}, and @math{45}.**
+
+[.FillVerticalSpace.graph, cols="1,1", frame="none"]
+|===
+| @math{h={-58\pi \over 8}}  | @math{h={-19\pi \over 8}}
+| @math{h={19\pi \over 8}}   | @math{h={58\pi \over 8}}
+|===
+
+@n Describe the change in the graph when @math{h} _increases_: @fitb{}{@ifsoln{the graph shifts right}}
+
+@n Describe the change in the graph when @math{h} _decreases_: @fitb{}{@ifsoln{the graph shifts left}}
+
+@n The model fits as long as @math{h} changes by increments of @fitb{10em}{@math{77\pi \over 8}}, because @fitb{}{@ifsoln{that's the period of the function.}} +
+@fitb{}{@ifsoln{Moving by this amount just moves the peaks of the model to next peak of the data}}
