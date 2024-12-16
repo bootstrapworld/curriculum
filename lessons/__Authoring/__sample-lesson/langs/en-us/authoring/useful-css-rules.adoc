@@ -1,5 +1,7 @@
 = Useful css rules
 
+Emmanuel suggests: “Google for CSS+Whatever+I+Am+Trying+To+Do”
+
 * For autonumbering inside a table
 ++++
 <style>
@@ -57,3 +59,40 @@ body.LessonNotes li {
 @lesson-point{
 Correlation does NOT imply causation.
 }
+
+* To define special formatting for a paragraph
+++++
+<style>
+.freeResponse .paragraph { height: 0.33in; }
+</style>
+++++
+
+[.freeResponse]
+
+* For make graphs using pure css
+
+++++
+<style>
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph td {
+  --width:    3.2in;
+  --height:   3.0in;
+  --left_pct: 0.08;
+  --top_pct:  0.92;
+  --x_label: 'altitude';
+  --y_label: 'time';
+}
+</style>
+++++
