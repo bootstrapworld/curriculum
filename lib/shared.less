@@ -658,6 +658,14 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+  /* In some cases, AsiiDoc will put an empty preamble containing
+     only a grandchild for custom styles. In this situation, no display
+     is needed
+   */
+  #preamble_disabled:has(>.sectionbody>style:only-child) { 
+    display: none; 
+  }
+
 
   .teacherNote { 
     font-style: italic; display: inline;
@@ -682,12 +690,23 @@ body.workbookpage {
       display: contents;
       > tr { 
         display: contents; 
+        /* Try to mimic AsciiDoc's TD formatting classes */
         > td { 
-          display: grid; position: relative; 
-          &.valign-middle { align-items: center; }
-        }
+          > .content { display: contents; }
+          display: grid; position: relative;
+          &.valign-top    {     align-items: start;  } 
+          &.valign-middle {     align-items: center; } 
+          &.valign-bottom {     align-items: end;    } 
+          &.halign-left   { justify-content: left;   }
+          &.halign-center { justify-content: center; }
+          &.halign-right  { justify-content: right;  }         }
       }
+      > tr:nth-of-type(even) td { background: #f8f8f7; }
     } 
+  }
+  /* Override AsciiDoc table defaults based on asciidoc classnames */
+  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) td { 
+    background: none ; 
   }
 
   /* 
