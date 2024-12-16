@@ -1,0 +1,174 @@
+= Fitting Linear Models
+
+@description{Students learn about model "fitness" through the _S_ value (Standard Deviation of Residuals). They build and fit a variety of linear models to a dataset, first by trial-and-error and then using linear regression.}
+
+@lesson-prereqs{linear2-building-models, fitting-models}
+
+@keywords{linear, slope, intercept, slope-intercept, S, Sres, error}
+
+@add-to-lang{fit-model, S}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+- Read and interpret real-world data, presented in a scatter plot
+- Describe correlations as Strong, Moderate, or Weak
+- Model linear relationships using linear functions
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to make predictions with linear models
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+
+| Key Points For The Facilitator
+|
+-
+- Two of the starter files referenced in this file pull data from the same spreadsheet.
+  * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file.
+  * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
+
+|===
+
+== Fitting the Alaska-Alabama Model
+@objective{model-interpret-residuals}
+@objective{model-predictions}
+@objective{model-fit-function}
+
+=== Overview
+
+Students apply what they've learned to the Alaska-Alabama model.
+
+@teacher{
+While the remainder of the lesson could be done using the @starter-file{alg2-states-intro}, you will see us refer to @starter-file{alg2-states-fit-model} from here on out. This file contains the same data, but the Definitions Area is set up to save you time. `al-ak` has been predefined and the other @vocab{models} students will be asked to define during the remainder of the lesson have been started for them.
+
+Now is the time to make sure students *Save a Copy* of the file.
+}
+
+=== Investigate
+
+@lesson-instruction{
+- Open @starter-file{alg2-states-fit-model} and save a copy that's just for you.
+- Complete @printable-exercise{model-college-v-income-2.adoc}.
+}
+
+A model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a $5613.67 increase in median household income.
+
+- The lowest median incomes are found in Mississippi ($39.031), Arkansas ($40,768), and West Virginia ($41,043).
+- The highest median income is found in Maryland ($73,538).
+
+With an S-value of 36165, we know that there’s enough error in the model to predict median incomes that are off by $36,165! That’s enough to double the median income of a state or cut it in half!
+
+@slidebreak
+
+*Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. __This model should not be trusted!__*
+
+Can we do better?
+
+@lesson-instruction{
+- Complete @printable-exercise{model-college-v-income-3.adoc}.
+- @opt{Complete @opt-printable-exercise{graphing-models.adoc} for a side by side visual comparison of three of your models.}
+- What was the best model (lowest @vocab{S}!) you could come up with?
+}
+
+@strategy{Going Deeper}{
+
+For a discussion of why the standard error of the regression @math{S} may provide more useful information than @math{R^2}, we recommend visiting @link{https://www.statology.org/standard-error-regression/, this link}.
+Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for older students, or in an AP Statistics class. We also have an entire Bootstrap:Data Science lesson on @lesson-link{standard-deviation}.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{What does it mean if @math{S} is zero?}
+@A{The model fits the data perfectly.}
+
+@Q{Is an @math{S}-value of 1000 bad?}
+@A{We have no way of knowing out of context! @math{S}-values only make sense when considered in the context of the range of the dataset! In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
+}
+
+== Finding the Best Linear Model
+@objective{model-interpret-residuals}
+@objective{linear-regression}
+
+=== Overview
+
+Students are introduced to a the `lr-plot` function in Pyret, which uses linear regression to fit the best possible linear model to the data.
+
+=== Launch
+
+We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values, but how do we find the _best possible linear model?_ 
+
+In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Linear regression consumes a dataset and produces a _function_ representing the best linear model.
+
+We could keep guessing and picking two points over and over, and never know if we found the best linear model. Linear regression automatically finds the best-possible model, _for any dataset_. This is pretty amazing!
+
+Pyret's `lr-plot` function finds the best model, and graphs it on top of a scatter plot, and tells us the slope and y-intercept.
+
+@strategy{More `lr-plot` material}{
+
+If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. This lesson also includes a discussion of @math{R^2}, a different measure of model fitness.
+}
+=== Investigate
+
+@lesson-instruction{
+- Turn to @printable-exercise{interpreting-linear-models.adoc} and complete the first section ("Build a Model Computationally").
+- Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-3.adoc}
+}
+
+@QandA{
+@Q{How close did your models come to the optimal model?}
+@Q{Did anything about the optimal model surprise you?}
+}
+
+@slidebreak
+
+@lesson-instruction{
+Models are only useful if know how to use them!
+
+- Turn to the second section of @printable-exercise{interpreting-linear-models.adoc}.
+- Using the interpretation of the `al-ak` model you'll find there as a guide, write up your interpretation of the optimal model you just found for this dataset. Then answer the questions that follow.
+- @opt{For more practice, build linear models for *other* relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}.}
+}
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The slope and y-intercepts can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+}
+
+=== Synthesize
+
+@QandA{
+@Q{When does it make sense to make an `lr-plot`?}
+@A{When we've identified that the form of the data is linear}
+}
+
+- How could we use scatter plots and linear models to find out if taller NBA players tend to make more three-pointers?
+- How could we use scatter plots and linear models to find out if wealthier people live longer?
+- How could we use scatter plots and linear models to find answers to _other_ questions?
+
+@slidebreak
+
+Our model is built from data about all the existing states, which have college attendance rates between 18.3% (West Virginia) and 52.4% (Washington, DC). Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate.
+
+Is our model more reliable for one of these states than another? Why or why not?
+
+@teacher{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}

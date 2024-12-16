@@ -1,0 +1,184 @@
+= Building Linear Models
+
+@description{Students use linear models to investigate the relationship between college enrollment and median income in demographic data about US states.}
+
+@lesson-prereqs{linear1-exploring-states}
+
+@keywords{linear, slope, intercept, slope-intercept}
+
+@add-to-lang{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to make predictions with linear models
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+
+| Key Points For The Facilitator
+|
+-
+
+|===
+
+== Two Points and a Line
+@objective{slope-from-points}
+
+=== Overview
+
+Students build on what they already know about linear functions, and review the process of finding the equation of a line when given two points.
+
+=== Launch
+
+Before we learn to fit linear models to scatter plots, let's review. *What do you remember about linear functions?*
+
+@teacher{
+We'd expect students to be able to surface much of the following:
+
+- Linear functions look like straight lines.
+- Vertical lines are not functions, because their slope is undefined as a result of their horizontal change being zero.
+- The steepness of a line can be described by its @vocab{slope} (or _constant_ @vocab{rate of change}).
+- The @vocab{slope} can be calculated from any two points.
+- Students may remember the @vocab{slope} as @math{\frac{change \; in \; y}{change \; in \; x}} or @math{{rise}\over{run}} or @math{\frac{y_2 - y_1}{x_2 - x_1}}.
+- The point where the line crosses the y-axis is called the @vocab{y-intercept} or vertical shift.
+- The x-coordinate of the @vocab{y-intercept} always starts with zero, e.g. @math{(0, y)}.
+- Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
+- Horizontal lines have a constant rate of change of zero.
+}
+
+@right{@image{images/difference-table-linear.png, 200}}Linear relationships grow by fixed amounts, meaning that the difference between two y-values will always be the same over identical horizontal intervals. In the table shown to the right, you can see arrows pointing out the "jumps" between y-values for intervals of 1. Each jump is the same size.
+
+@lesson-point{
+If the rate of change is constant, the relationship is linear.
+}
+
+@QandA{
+@Q{Try comparing intervals of 2, instead of intervals of 1.}
+@Q{Is the difference between y-values from @math{x=1} to @math{x=3} the same as the difference between y-values from @math{x=2} to @math{x=4}?}
+@A{Yes. When x increases by 2, y increases by 4.}
+}
+
+=== Investigate
+
+@QandA{
+@Q{What is the y-value when x=0?}
+@A{By following the pattern of the blue arrows backwards, we can subtract 2 and arrive at y=3}
+@Q{What is the slope of the line?}
+@A{2, because the arrows show that y increases by 2}
+
+Knowing the y-intercept and the "size of the growth", we can tell that the equation of this line is @math{f(x) = 2x + 3}.
+}
+
+@opt{
+Students are about to be asked to write the Slope-Intercept form of the line, given two points in our states dataset. If your students haven't done much work with calculating slope and y-intercept from pairs of points recently, we recommend prepping them for success by having them complete @opt-printable-exercise{def-2-points.adoc}.
+}
+
+=== Synthesize
+
+- TBD
+
+== The Alaska-Alabama Model
+@objective{model-interpret-residuals}
+@objective{model-predictions}
+
+=== Overview
+
+Building on prior knowledge of linear functions, students learn to find the line of best fit to model the relationship in a scatter plot that looks linear.
+
+=== Launch
+
+@lesson-instruction{
+- Return to Pyret and the @starter-file{alg2-states-intro}.
+- Make a scatter plot showing the relationship between `pct-college-or-higher` and `median-income`, using `state` for the labels.
+@ifslide{
+- What do you notice about the @vocab{Form} of this scatter plot? What pattern do you see?}
+}
+
+@slidebreak
+
+@ifslide{@right{@image{images/college-v-income.png}}
+This scatter plot appears to show a positive, linear relationship: +
+_States with higher percentages of college graduates tend to have higher median household incomes._
+}
+@ifnotslide{@center{@image{images/college-v-income.png}}
+
+@slidebreak
+
+@QandA{
+@Q{What do you notice about the @vocab{Form} of this scatter plot? What pattern do you see?}
+@A{This scatter plot appears to show a positive, linear relationship: +
+_States with higher percentages of college graduates tend to have higher median household incomes._}
+}
+}
+
+@QandA{
+Suppose the United States were to add a new state. +
+_Based on the data for the existing 50 states (plus DC!)..._
+
+@Q{What median household income would you predict, if exactly 30% of the new state's citizens had attended college?}
+@A{Answers will vary. But should be above 50,000 and below 60,000}
+
+@Q{What would you predict if 20% had attended college?}
+@A{Answers will vary. But should be around 40,000}
+
+@Q{If 40% had attended college?}
+@A{Answers will vary. But should be upwards of 65,000}
+}
+
+@teacher{
+@right{@image{images/pyret-window.png, 150}}Let students discuss, and explain their thinking.
+
+- If possible, mark off a single point for each of the hypothetical percentages, then connect those points to show a straight line.
+- Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our scatter plot, which we can do by typing in the cells on the right side of the scatter plot and clicking "Redraw".
+}
+
+=== Investigate
+
+When we see patterns in data, we can use those patterns to _make predictions_. We can even draw a line to show all the possible predictions at once! This line is our model of what we think is the underlying relationship.
+
+We're looking for a predictor function that will model the relationship between college enrollment and income.
+
+@slidebreak
+
+Now our exploration can be phrased algebraically! We want to know if there are values of @math{m} and @math{b} that will let this function fit the data well:
+@center{@math{\text{median-income}(\text{pct-college}) = m \times \text{pct-college} + b}}
+
+@lesson-instruction{
+Complete @printable-exercise{model-college-v-income-1.adoc}.
+}
+
+@teacher{
+@opt{If your students could use more support for finding the equation of the line between two points, direct them to the scaffolded version of @opt-printable-exercise{model-college-v-income-1-scaffolded.adoc} instead.}
+}
+
+=== Synthesize
+
+@teacher{
+Confirm that students were able to successfully compute slope and y-intercept, define and test `al-ak(x)` in Pyret, and test how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.
+}
+
+@QandA{
+@Q{Why wasn't the Alaska-Alabama model a good fit for the rest of the data?}
+@A{Because Alaska is an outlier that falls pretty far above the line of best fit.}
+@Q{If we had chosen two other points from which to build our model, could we have done better? Which points did you choose, and why?}
+@A{Answers will vary. But West Virginia and Massachusetts could be a good option.}
+}
+
+@lesson-instruction{
+Write those two states somewhere on @printable-exercise{model-college-v-income-1.adoc}. You'll want to remember them for later!
+}
