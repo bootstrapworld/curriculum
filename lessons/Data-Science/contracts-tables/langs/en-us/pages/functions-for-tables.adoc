@@ -1,4 +1,4 @@
-= Functions for Tables
+= Sorting and Summarizing Tables
 ++++
 <style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
@@ -9,9 +9,9 @@
 [.linkInstructions]
 Open the @starter-file{animals} and click "Run". In the Interactions Area (right), type `animals-table`. Hit "Enter" to see the default view of the table.
 
-== Sorting by a Column
+== Ordering a Table with `sort`
 
-@n Mabel Lee wants to sort this table by `age` (youngest-to-oldest). Juan Carlos wants to sort the table by `pounds`(heaviest-to-lightest). How else might someone want to sort the table?
+@n Mabel Lee wants to sort this table by `age` (youngest-to-oldest). Juan Carlos wants to sort the table by `pounds`(heaviest-to-lightest). What are some other ways we could sort the table?
 
 @hspace{4em} a. @fitb{}{}
 
@@ -20,24 +20,18 @@ Open the @starter-file{animals} and click "Run". In the Interactions Area (right
 @center{*Pyret has a function called `sort` that will produce sorted Tables!*}
 
 @n Test out @show{(code '(sort animals-table "age" true))} in the Interactions Area. Try using `false` instead of `true`. +
-*Complete the sentences below by circling* the behavior you observed for each Boolean.
+Complete the sentences below by *circling* the behavior you observed for each Boolean.
 
-@indented{
-[cols="1a, ^1a, ^1a", frame="none", grid="none", stripes="none"]
+[cols="2a, ^3a, ^3a", frame="none", grid="none", stripes="none"]
 |===
-|`true` sorts the table...
-| in *ascending order* +
-_(from least to greatest)_
-| in *descending order* +
-_(from largest to smallest)_
+|(a) `true` sorts the table...
+| in *ascending order* _(least to greatest)_
+| in *descending order* _(from largest to smallest)_
 
-|`false` sorts the table...
-| in *ascending order* +
-_(from least to greatest)_
-| in *descending order* +
-_(from largest to smallest)_
+|(b) `false` sorts the table...
+| in *ascending order* _(from least to greatest)_
+| in *descending order* _(from largest to smallest)_
 |===
-}
 
 @n The Domain of `sort` has three inputs. One of them is the table itself. Can you identify the dataypes of the other two?
 
@@ -52,8 +46,10 @@ _(from largest to smallest)_
 
 @n Did you use `true` or `false`? Explain why. @fitb{}{}
 
-== Summarizing a Column using `count`
-Let's explore another table function, beginning with its contract: @hspace{2em} @show{(contract "count" '("Table" "String") "Table")}
+== Summarizing a Column with `count`
+Let's explore another table function, beginning with its contract:
+
+@show{(contract "count" '("Table" "String") "Table")}
 
 @n What do you expect the code  @show{(code '(count animals-table "legs"))} to produce?
 
