@@ -657,6 +657,10 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+  /* Pages with 1 or more non-acknowledgement sect1s don't use the preamble */
+  #preamble_disabled:has(>.sectionbody>style:only-child) { 
+    display: none; 
+  }
 
   .teacherNote { 
     font-style: italic; display: inline;
@@ -680,10 +684,16 @@ body.workbookpage {
     > tbody, > thead {
       display: contents;
       > tr { 
-        display: contents; 
+        display: contents;
         > td { 
-          display: grid; position: relative; 
-          &.valign-middle { align-items: center; }
+          > .content { display: contents; }
+          display: grid; position: relative;
+          &.valign-top    {     align-items: start;  } 
+          &.valign-middle {     align-items: center; } 
+          &.valign-bottom {     align-items: end;    } 
+          &.halign-left   { justify-content: left;   }
+          &.halign-center { justify-content: center; }
+          &.halign-right  { justify-content: right;  } 
         }
       }
     } 
