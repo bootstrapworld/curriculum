@@ -55,7 +55,7 @@ Let's return to the animals dataset, and see if there's a correlation between an
 
 @slidebreak
 
-@center{@image{images/scatter-plot-lizard-sample-weeks-v-pounds.png, 400}}
+@center{@image{images/sp2.png, 400}}
 
 @QandA{
 @Q{Does there appear to be a relationship here? If so, how would you describe it?}
@@ -82,7 +82,7 @@ Project the scatter plot at the front of the room, and have students come up to 
 We can summarize the distribution of one quantitative column of data with one number. (For example, the @vocab{mean}. Can you name any others?) Similarly, can summarize _the relationship between *two* quantitative columns of data_ with *two* numbers: the slope and y-intercept of the line that is closest to all the coordinates on the scatter plot.
 
 @slidebreak
-@ifslide{ @right{@image{images/scatter-plot-lizard-sample-weeks-v-pounds.png, 400}} }
+@ifslide{ @right{@image{images/sp2.png, 400}} }
 
 The line that is closest to all the other points is known as the @vocab{line of best fit}.
 
@@ -135,37 +135,45 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 @slidebreak
 
 @lesson-instruction{
-- Open the @starter-file{fitting-animals}.
-  ** Notice that the functions you were just looking at are defined on lines 15 and 16 of the Definitions Area.
-  ** Following this you will see `fitf` and `fitg` defined as `fit-model` expressions that take in `f` and `g`.
-  ** Finally, on line 23 there's a line of code that places the outputs of the two `fit-model` expressions beside each other.
-- Click "Run" to test out how well the models fit the dataset.
-}
-
-@teacher{
-When students click "Run", the Interactive charts will open in the same order they are defined in the file. The first data visualization that pops open when we click "Run" will use `f`. Students will need to close this window in order to see the data visualization that uses `g`. And once they close that, they will see a thumbnail image in the Interactions Area of the two charts printed side by side.
-}
-
-@lesson-instruction{
-- Close the two interactive charts that pop up and then click on the thumbnail image in the Interactions Area to see it full-size.
+- Turn to @printable-exercise{intro-fit-model.adoc}.
 - What do you Notice?
 - What do you Wonder?
 }
 
-@ifnotslide{
 [cols="1a,1a", frame="none", grid="none"]
 |===
-| `fit-model(lizard-sample, "name", "pounds", "weeks", f)`
-| `fit-model(lizard-sample, "name", "pounds", "weeks", g)`
+| `fit-model(lizard-sample, "name", "pounds", "weeks", cy)`
+| `fit-model(lizard-sample, "name", "pounds", "weeks", jo)`
 
-| @centered-image{images/fit-f.png}
-| @centered-image{images/fit-g.png}
+| @centered-image{images/fit-cy-crop.png}
+| @centered-image{images/fit-jo-crop.png}
 |===
+
+@slidebreak
+
+@ifslide{
+[cols="1a,1a", frame="none", grid="none"]
+|===
+| `fit-model(lizard-sample, "name", "pounds", "weeks", cy)`
+| `fit-model(lizard-sample, "name", "pounds", "weeks", jo)`
+
+| @centered-image{images/fit-cy-crop.png}
+| @centered-image{images/fit-jo-crop.png}
+|===
+}
+
+@QandA{
+@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. How are they similar? How are they different?}
+@A{Both models have a blue line and red dots.}
+@A{The x-axis goes from 0 to 8 for both of them.}
+@A{The y-axis for `cy` is numbered 0 to 20. It goes from 3 to 9 for `jo`.}
+@A{`jo` has more red dots below the blue line than above it.}
+@A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
 }
 
 @slidebreak
 
-@right{@image{images/residual.png, 200}}When you graph your model in Pyret, you can see that:
+@right{@image{images/residual.png, 200}}When we graph a model in Pyret, we can see that:
 
 - some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y})
 - some points are quite far away ("real" @math{y} is far from "predicted" @math{y})
@@ -184,19 +192,8 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @slidebreak
 
 @QandA{
-@Q{Compare the `fit-model` display for `f` to the `fit-model` display for `g`. How are they similar? How are they different?}
-@A{The x-axis goes from 0 to 8 for both of them.}
-@A{The y-axis for `f` is numbered 0 to 20. It goes from 3 to 9 for `g`.}
-@A{Both `f` and `g` have a blue line and red dots.}
-@A{`g` has more red dots below the blue line than above it.}
-@A{The data points for `g` more or less fill the vertical space of the display, whereas for `f` there are only data points in the bottom half of the display.}
-}
-
-@slidebreak
-
-@QandA{
 @Q{How do @math{S} and @math{r-sqr} compare for the two models?}
-@A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `g` than they are for `f`.}
+@A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `jo` than they are for `cy`.}
 
 @Q{Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?}
 @A{Answers will vary, but students should have some sense of the idea that if one model has a lower @vocab{S} value than another model of the same data it indicates a better fit.}
@@ -228,7 +225,6 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 The @math{S}-value always has to be considered in the context of the range of values that the model is predicting!
 }
 
-
 @lesson-instruction{
 - Turn to @printable-exercise{s-tells-us.adoc}.
 - Consider the @math{S}-value of each model in the context of the range of the data described.
@@ -245,6 +241,37 @@ The @math{S}-value always has to be considered in the context of the range of va
 @A{Because the @math{S}-value was big in comparison to the range.}
 @A{For the first scenario the @math{S}-value was 300, which was the majority of the range between 0 and 400.}
 @A{For the sixth scenario, even though the @math{S}-value was only 1, it was much bigger than any of the numbers in the range, which maxed out at two hundredths.}
+}
+
+@slidebreak
+
+Now that we have a basic sense of what `fit-model` does, let's see it work live in Pyret!
+
+@lesson-instruction{
+- Return to the @starter-file{fitting-animals}.
+  ** Notice that the functions you were just looking at are defined on lines 16 and 17 of the Definitions Area.
+  ** Following this you will see two `fit-model` expressions: one takes in the function for `cy` and the other takes in the function for `jo`.
+- Uncomment the last two lines of code and click "Run".
+}
+
+@QandA{
+@Q{How do we know that the first Interactive Chart that pops up is fitting Cy's model to the data?}
+@A{Because the first expression in the Definitions Area takes in `cy`.}
+
+@Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
+@A{The x and y coordinates of any point in the model.}
+
+@Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
+@A{The x and y coordinates of each point in the data set, and the animal they are associated with.}
+
+@Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near the vertical residuals lines. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
+@A{"Residuals" tell us the x and y coordinates of a data point, compared with the predicted y-value (`y'`) for the x-value.}
+
+@Q{We've been looking at how well `cy` 's model fit the data. What do we need to do if we want to see how well `jo` 's model fits the data.}
+@A{Close the window and another interactive chart will pop up.}
+
+@Q{What happens once we close the second interactive chart?}
+@A{We see clickable thumbnail images of both charts in the Interactions Area.}
 }
 
 
