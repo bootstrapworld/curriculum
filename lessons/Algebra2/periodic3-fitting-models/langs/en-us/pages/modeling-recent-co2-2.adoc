@@ -1,0 +1,72 @@
+= Modeling Recent Carbon Dioxide Levels (continued)
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+td .autonum::after { content: ')' !important; }
+
+/* Tweak table display */
+td { padding: 0 !important; }
+td .codetwo { color: black; background: none; }
+table table td { color: inherit !important; padding: 3px 0 !important; }
+body .center { padding: 0; }
+.directions p { line-height: 1.75 !important; }
+table+.paragraph .autonum {padding-top: 0; }
+
+/* Shorten fill in the blanks */
+.fitb, .fitbruby { min-width: 2em; }
+.indentedpara .fitbruby { padding-top: 0.8rem; }
+.studentAnswerMedium { min-width: 80pt !important; }
+</style>
+++++
+
+
+@define{COtwo}{@math{\text{CO}_2}}
+@do{
+(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
+(define p (abs (- lo-dateA lo-dateB)))
+(define a 4.13)
+(define b 6.28)
+(define k 419.87)
+(define h 2023.1)
+}
+
+@define{hi}{@show{hi}}
+@define{lo}{@show{lo}}
+@define{lo-dateA}{@show{lo-dateA}}
+@define{lo-dateB}{@show{lo-dateB}}
+@define{p}{@show{(round p)}}
+@define{a}{@show{a}}
+@define{b}{@show{b}}
+@define{k}{@show{k}}
+@define{h}{@show{h}}
+
+@n Using your computed values for @math{a}, @math{b}, @math{h}, and @math{k}, define your periodic function below in both Function and Pyret notation.
+
+@vspace{1ex}
+
+[cols="1a, ^.^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+
+@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{sin}(
+ @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift})
+) + @fitbruby{70pt}{@ifsoln{@k}}{vertical shift}
+
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,k))))) (?ANS ,h))))}
+|===
+
+
+@n Define this model in Pyret, and fit it to the `recent` data. What S-value do you get? @fitb{}{@ifsoln{Answers will vary, but should be close to 1.2}}
+
+@n *What does this model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
+
+@vspace{1ex}
+
+@indented{
+_Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{5em}{@ifsoln{@math{2pi}}}{frequency}._
+}

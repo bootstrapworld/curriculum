@@ -1,0 +1,177 @@
+= Fitting Periodic Models
+
+@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+
+@lesson-prereqs{periodic2-building-models}
+
+@keywords{periodic, period, amplitude, frequency}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+- Read and interpret real-world data, presented in a scatter plot
+- Recognize periodic behavior in tables and graphs
+- Model periodic relationships using functions
+
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to model periodic relationships in data
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
+You will want to:
+ * Open @starter-file{alg2-exploring-periodic-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Modeling Periodic Relationships
+@objective{model-explore}
+
+=== Overview
+Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+
+=== Launch
+Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
+
+Now that we've had some practice, let's take a look at a dataset that has more variability!
+
+@slidebreak
+
+Carbon Dioxide (@math{\text{CO}_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+
+@slidebreak
+
+Scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @math{\text{CO}_2} in any one location!
+
+- Temperature and air pressure
+- Proximity to @math{\text{CO}_2} -producing or @math{\text{CO}_2} -consuming sources
+- Global trends like the burning of fossil fuels
+
+Because of these and other factors, the amount of @math{\text{CO}_2} at any one location goes up and down throughout the year. But is there a pattern?
+
+@slidebreak
+
+@lesson-instruction{
+- Open the @starter-file{alg2-co2}, save a copy, and click "Run".
+- What is the name of the table here?
+- What are the names of the columns?
+- Type `co2-table` into the Interactions Area, and look at the table.
+- What do the `year`, `month`, and `co2` columns mean?
+- What do you think the `date` column could mean?
+}
+
+@slidebreak
+
+The `date` column is the *decimal year*, in which the __n__th day of the year is divided by 365:
+
+@QandA{
+The first date is `1974.375`, meaning the sample was taken `0.375` of the way through 1974.
+@Q{How could we compute which day of the year that is?}
+@A{There are 365 days in the year, so we could multiply 365 by `0.375` to see the number of days into the calendar.}
+@Q{What is @math{365 \times 0.375}?}
+@A{136.875, or roughly day 137}
+@Q{What month does that fall in, and what "month-number" is that?}
+@A{May, the 5th month}
+@Q{What is written in the `month` column for the first row?}
+@A{5, which is May}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- What do you *Notice* about this dataset?
+- What do you *Wonder*?
+}
+
+Look farther down in the Definitions Area, until you find the function `is-recent`.
+
+@QandA{
+@Q{What does it do?}
+@A{It takes in a row, and checks to see if the decimal date is between 2022.083 and 2023.7917.}
+@Q{What is defined on the following line of code?}
+@A{A table, which contains only the rows for which the filter function produces `true`: just the rows between those dates.}
+}
+
+@slidebreak
+
+The `recent-table` includes just the rows from trough-to-trough for the years 2022-2023.
+
+@QandA{
+@Q{How many periods are represented here?}
+@A{One}
+@Q{Why?}
+@A{Because the distance between any adjacent troughs or peaks define one period.}
+}
+
+=== Investigate
+@lesson-instruction{
+- Open the @starter-file{alg2-co2}, and complete Questions 1-6 of @printable-exercise{modeling-recent-co2.adoc}.
+- Be ready to share your answers!
+}
+
+@slidebreak
+
+@QandA{
+@Q{What was the highest @math{\text{CO}_2} value in the table? The lowest?}
+@A{424 and 415.74 parts per million.}
+@Q{What did you get for @vocab{amplitude} @math{a}?}
+@A{4.13, because the distance between the high and low readings is 8.26.}
+@Q{What did you get for the @vocab{vertical shift} @math{k}?}
+@A{Adding the amplitude (4.13) to the lowest value (415.74) gives us 419.87.}
+@Q{What did you estimate for the @vocab{phase shift} @math{d}?}
+@A{Answers will vary, but should be close to 2023.1}
+@Q{How many years make up one @vocab{period}?}
+@A{One year (this makes sense, since the seasonal cycle repeats every year!)}
+@Q{What did you get for @vocab{frequency} @math{b}?}
+@A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete @printable-exercise{modeling-recent-co2.adoc}, and enter your `periodic` model into Pyret. How well does it fit the data?
+}
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with a periodic, real-world scenario, then have them write down a periodic function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their periodic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "Water depth at a beach vs. Time of Day").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+}
+
+=== Synthesize
+
+- Could you rewrite this model to use cosine instead of sine?
+- If so, how?
+- What are some problems you see with this model?
+- Where does it fit the data best? Where does it fit the worst?
+
+@slidebreak
+
+Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
+
+@QandA{
+@Q{In this project, do we know whether or not our model is the _best?_}
+@A{We don't know!}
+@Q{How do you know?}
+@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+}

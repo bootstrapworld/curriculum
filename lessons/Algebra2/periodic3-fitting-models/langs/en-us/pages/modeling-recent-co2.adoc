@@ -1,0 +1,102 @@
+= Modeling Recent Carbon Dioxide Levels
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+td .autonum::after { content: ')' !important; }
+
+/* Tweak table display */
+td { padding: 0 !important; }
+td .codetwo { color: black; background: none; }
+table table td { color: inherit !important; padding: 3px 0 !important; }
+body .center { padding: 0; }
+.directions p { line-height: 1.75 !important; }
+table+.paragraph .autonum {padding-top: 0; }
+
+/* Shorten fill in the blanks */
+.fitb, .fitbruby { min-width: 2em; }
+.indentedpara .fitbruby { padding-top: 0.8rem; }
+.studentAnswerMedium { min-width: 80pt !important; }
+</style>
+++++
+
+@define{COtwo}{@math{\text{CO}_2}}
+
+@link-instructions{
+The data below was generated from the @starter-file{alg2-co2}. The dark dots show the amount of @COtwo in the atmosphere (in parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+}
+
+@vspace{1ex}
+
+[cols="<.<1a,>.^3a", grid="none", frame="none"]
+|===
+|
+[cols="^1a,^1a", options="header"]
+!===
+! `date`  	! `co2` (ppm)
+! 2022.708	! 415.91
+! 2022.792	! 415.74
+! 2022.875	! 417.47
+! 2022.958	! 418.99
+! 2023.042	! 419.48
+! 2023.125	! 420.30
+! 2023.208	! 420.98
+! 2023.292	! 423.36
+! 2023.375	! 424.00
+! 2023.458	! 423.68
+! 2023.542	! 421.83
+! 2023.625	! 419.68
+! 2023.708	! 418.51
+!===
+
+@do{
+(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
+(define p (abs (- lo-dateA lo-dateB)))
+(define a 4.13)
+(define b 6.28)
+(define k 419.87)
+(define h 2023.1)
+}
+
+@define{hi}{@show{hi}}
+@define{lo}{@show{lo}}
+@define{lo-dateA}{@show{lo-dateA}}
+@define{lo-dateB}{@show{lo-dateB}}
+@define{p}{@show{(round p)}}
+@define{a}{@show{a}}
+@define{b}{@show{b}}
+@define{k}{@show{k}}
+@define{h}{@show{h}}
+
+|
+@image{../images/recent-co2-scatter-updated.png, 490}
+|===
+
+**Connect the dots on the scatter plot from left to right to form a line-graph.**
+
+@n Find the vertical distance between @fitbruby{7em}{@ifsoln{@lo}}{the lowest @vocab{trough}} and @fitbruby{7em}{@ifsoln{@hi}}{the highest @vocab{peak}}: @fitbruby{}{@ifsoln{@hi - @lo = @show{(* 2 a)} = @a}}{@COtwo in the atmosphere in parts per million}
+
+@n Find the @vocab{amplitude}(@math{a}) by cutting the vertical distance you calculated in half: @fitbruby{}{@ifsoln{@show{a}}}{@COtwo in the atmosphere in parts per million}
+
+@n Draw the @vocab{midline} on the graph. _(It should be a horizontal line passing in the middle between the lowest @vocab{trough} and the highest @vocab{peak}.)_ +
+
+@indented{
+The midline makes the vertical shift (@math{k}) visible. 
+What is the @vocab{vertical shift} (@math{k}) of the model? 
+@fitbruby{}{@ifsoln{@lo + @a = @k}}{@COtwo in the atmosphere in parts per million}}
+
+@indented{
+_HINT: The vertical shift can also be calculated by adding the amplitude(@math{a}) to the trough._}
+
+@n Estimate the decimal year when the data *first* crosses the midline. This is called the @vocab{phase shift} (@math{h}). @fitbruby{}{@ifsoln{~@h}}{years}
+
+@n Calculate the @vocab{period} between the troughs: 
+@fitbruby{15em}{2023.708}{`date` for the lowest values in 2023} - @fitbruby{15em}{2022.708}{`date` for the lowest values in 2022} =
+@fitbruby{}{@ifsoln{1}}{years}
+
+@n Justify the following statement: &#8193; _If_  &#8193; @math{\text{period} = {2\pi \over \text{frequency}}} &#8193; _then_ &#8193; @math{\text{frequency} = {2\pi \over \text{period}}}. 
+
+@fitb{}{@ifsoln{To solve the first equation for @math{\text{frequency}} we would multiply both sides by @math{\text{frequency}} to get @math{\text{period} \times \text{frequency} = {2\pi}}.}}
+
+@fitb{}{@ifsoln{The last step would be to divide by @math{\text{period}}.}}
+
+@n What is the @vocab{frequency} (@math{b})? @fitb{}{@ifsoln{@math{2\pi} or @b}}
