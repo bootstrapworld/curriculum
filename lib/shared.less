@@ -692,8 +692,11 @@ body.workbookpage {
         display: contents; 
         /* Try to mimic AsciiDoc's TD formatting classes */
         > td { 
-          > .content { display: contents; }
-          display: flex; position: relative;
+          display: flex; flex-wrap: wrap; position: relative;
+          > .content { 
+            display: contents; 
+            > * { width: 100%; }
+          }
           &.valign-top    {     align-items: start;  } 
           &.valign-middle {     align-items: center; } 
           &.valign-bottom {     align-items: end;    } 
@@ -1196,7 +1199,7 @@ table.sideways-pyret-table {
   tr { background: none; text-align: right; }
   td:first-child {
     display: table-cell;
-    background: @table-header;
+    background: @table-header !important;
     text-align: center;
     width: 50px;
   }
