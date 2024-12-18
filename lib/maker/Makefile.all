@@ -122,6 +122,11 @@ clean:
 
 ###############################################################################
 
+debug:
+	@$(MAKE) force DEBUGADOC=yes
+
+###############################################################################
+
 force:
 	rm -fr $(TOPDIR)/distribution
 	@$(MAKE)
@@ -158,8 +163,11 @@ help:
 	@echo "  make              -- updates distribution/, HTML only"
 	@echo "  make book         -- updates PDFs and workbooks too"
 	@echo "  make linkcheck    -- additionally verifies all links"
-	@echo "  make force [book] -- builds from scratch"
+	@echo "  make force [book] -- builds from scratch;"
 	@echo "                       equivalent to:    make clean; make [book]"
+	@echo "  make debug        -- builds from scratch, running Asciidoctor"
+	@echo "                       individually on each file to help catch errors;"
+	@echo "                       equivalent to:    make clean; make DEBUGADOC=yes"
 	@echo "  make book COURSE=algebra-pyret"
 	@echo "                    -- makes PDFs only for algebra-pyret and its lessons"
 	@echo "  make book COURSE=algebra-pyret,data-science"
