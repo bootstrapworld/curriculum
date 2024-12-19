@@ -28,34 +28,19 @@
 
 _The code below is BUGGY! Read the code and the error messages, and see if you can catch the mistake WITHOUT typing the code into @proglang._
 
-@n `sort(animals-table, name , true)`
+@n `sort(animals-table, "name", true`
 
 [.indentedpara.error]
 --
-The name @span{.underline}{*name*} is unbound:
+Pyret didn't expect your program to @span{.underline}{end} as soon as it did:
 
-sort(animals-table, *name* , true)
+sort(animals-table, "name", true
 
-It is @span{.underline}{*used*} but not previously defined.
-
---				
-
-@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{the string is missing quotes.}}
-
-
-@n `sort(animals-table, "name" , "true")`
-
-[.indentedpara.error]
---
-The @span{.underline}{*Boolean annotation*}: +
-fun sort(t :: Table, col :: String, asc :: *Boolean*) +
-was not satisfied by the value +
-@indented{"true"}
+You may be missing an "end", or closing punctuation like ")" or "]" somewhere in your program.
 
 --
 
-@hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{true should not be a String.}}
-
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{the closing parenthesis is missing.}}
 
 
 @n `sort(animals-table "name" true)`
@@ -73,19 +58,35 @@ You may need to add or remove some text to fix your program. Look carefully befo
 
 
 
-@n `sort(animals-table, "name", true`
+@n `sort(animals-table, "name" , "true")`
 
 [.indentedpara.error]
 --
-Pyret didn't expect your program to @span{.underline}{end} as soon as it did:
-
-sort(animals-table, "name", true
-
-You may be missing an "end", or closing punctuation like ")" or "]" somewhere in your program.
+The @span{.underline}{*Boolean annotation*}: +
+fun sort(t :: Table, col :: String, asc :: *Boolean*) +
+was not satisfied by the value +
+@indented{"true"}
 
 --
 
-@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{the closing parenthesis is missing.}}
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{true should not be a String.}}
+
+
+
+@n `sort(animals-table, name , true)`
+
+[.indentedpara.error]
+--
+The name @span{.underline}{*name*} is unbound:
+
+sort(animals-table, *name* , true)
+
+It is @span{.underline}{*used*} but not previously defined.
+
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{the string is missing quotes.}}
+
 
 
 @n `sort (animals-table, "name", true)`
