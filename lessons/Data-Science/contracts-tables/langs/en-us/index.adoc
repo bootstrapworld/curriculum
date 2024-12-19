@@ -1,0 +1,343 @@
+= Contracts for Tables and Rows
+++++
+<style>
+.circle2 .expression .expression { background: lightskyblue !important; }
+.circle3 .expression { background: aquamarine !important; }
+.circle3 .expression .expression { background: white !important; }
+.circle3 .expression .expression .expression { background: lightskyblue !important; }
+</style>
+++++
+@description{Students learn about functions for sorting and counting data in tables, as well as extracting rows.}
+
+@lesson-prereqs{contracts}
+
+@keywords{count, sort, contract, function}
+
+@add-to-lang{sort, first-n-rows, row-n, count}
+
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+@objective{sort-count-proglang}
+@objective{use-contracts}
+@objective{read-contracts}
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn how to manipulate tables by sorting, summarizing, and more.
+- Let's learn how to extract individual rows - or groups of rows - from a table.
+
+| Materials
+|[.materials-links]
+@material-links
+
+- @dist-link{Contracts.shtml, Contracts Pages} (a complete list of all the contracts)
+
+|===
+
+== Functions for Tables @duration{20 minutes}
+
+=== Overview
+
+Building on their understanding of @lesson-link{contracts, Contracts}, students will be introduced to functions for working with _tables_, including: @show{(code 'sort)},  @show{(code 'count)}, @show{(code 'first-n-rows)} and @show{(code 'row-n)}.
+
+=== Launch
+
+@QandA{
+- Open the @starter-file{animals} and click "Run".
+- In the Interactions Window on the right type `animals-table` and hit "Enter" to see the the table.
+@Q{What do you Notice?}
+@A{Sample response: We only see the first 10 rows of the table and would have to click to see the remaining 22 rows.}
+@A{The animals aren't listed in any particular order.}
+
+@Q{What do you Wonder?}
+@A{Sample response: Is it possible to alphabetize the list, or sort it in other ways?}
+}
+
+@teacher{If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge lines 7-10 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.}
+
+
+=== Investigate
+
+@lesson-instruction{
+Turn to @printable-exercise{functions-for-tables.adoc} and complete the first section: *Ordering a Table with `sort`*.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What did these `sort` expressions do?}
+@A{They took in the `animals-table`, the `name` column, and true or false... producing a new table, sorted alphabetically (A-Z for `true` and Z-A for `false`)}
+
+@Q{What does it mean that the Range of `sort` is Table?}
+@A{The function produces a new table.}
+
+@Q{Type `animals-table` and hit "Enter". Did sorting our animals change the value of the table?}
+@A{No. It made a new one.}
+}
+
+@slidebreak
+
+Let's review what we know about Contracts. Every Contract has three parts:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+@lesson-point{
+Contracts are the _instruction manual_ for functions.
+}
+
+@slidebreak
+
+Let's explore the Contract for another function that works with Tables: `count`
+
+@lesson-instruction{
+Complete the second section of @printable-exercise{functions-for-tables.adoc}: *Summarizing a Column with `count`*.
+}
+
+@slidebreak
+
+
+@QandA{
+@Q{How did the `count` function summarize a column?}
+@A{It made a new table, with rows for all the unique values in that column and a count of how many times each value appeared.}
+
+@Q{Is the summary produced by the `count` function useful when summarizing the `pounds` column? Why or why not?}
+@A{Since almost every animal has a unique weight, the summary is almost as long as the original table!}
+}
+
+@slidebreak
+
+@right{@image{images/frequency-table.png, 110}}The `count` function produces a @vocab{frequency table}, which summarizes the data by showing how often - how _frequently_ - specific values appear in a dataset.
+
+@vocab{Frequency tables} are a commonly used tool in statistics because they give us a quick sense of the distribution and can help us to identify patterns.
+
+@slidebreak
+
+@lesson-instruction{
+Complete the first two sections of @printable-exercise{functions-for-tables-cont.adoc} to explore some new table functions: `row-n` and `first-n-rows`.
+}
+
+@slidebreak
+
+The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
+
+If we want the _second_ Row in the table, Pyret needs to count one Row down from the beginning of the table. That's why the index for the second Row is `1`.
+
+@QandA{
+@Q{What index number do we need to give `row-n` for Pyret to return the first row of the Table?}
+@A{0. Because Pyret is already at the beginning of the table and doesn't need to count down any rows!}
+
+@Q{What is the index of the _fifth_ Row in the table?}
+@A{The index of the fifth row is `4`}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Complete the last section of @printable-exercise{functions-for-tables-cont.adoc}.
+- If time allows see if you can put everything we've learned today together to solve the challenge problems!
+}
+
+@slidebreak
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number, an Image and a Row.
+
+```
+name = "Denny"
+age = 16
+logo = star(50, "solid", "red")
+pet = row-n(animals-table, 3)
+```
+
+@QandA{
+@Q{What are the names given in each of these definitions?}
+@A{name, age, logo amd pet}
+@Q{What are the values given to each of these names?}
+@A{The String "Denny", the Number 16, an Image of a solid red star, and the 4th Row of the Animals Table.}
+@Q{Take a moment to look at the first challenge problem and think. How you would describe the table that `first-n-rows` is taking in?}
+@A{It's taking in a table of the animals that has been sorted from lightest to heaviest.}
+}
+
+
+=== Common Misconceptions
+
+Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+
+Students often struggle to remember that Row indices start at _zero!_ You'll want to practice this a few times.
+
+=== Synthesize
+
+@QandA{
+@Q{How is the function of `count` different from `sort`?}
+@A{`sort` made a new table that was reordered.}
+@A{`count` made a new table that summarized the data from a column of the original table!}
+
+@Q{How does the function `first-n-rows` work?}
+@A{It makes a new smaller table with the number of rows you type into the expression.}
+
+@Q{What is important to remember when using the `row-n` function?}
+@A{We need to give the function a number that is one less than the row we want.}
+
+@Q{Do you have any questions about the functions or expressions you've worked with today?}
+
+@Q{Where have you seen tables summarizing counts in the real world?}
+
+@Q{How else do journalists and newscasters visualize summaries of data besides in tables?}
+@A{Ideally someone will say bar charts!}
+}
+
+== Composing with Circles of Evaluation @duration{15 minutes}
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+
+What if we wanted to see the ten youngest animals? 
+
+- How could the `first-n-rows` and `sort` functions work together? 
+- What order should we use the functions in?
+
+=== Investigate
+
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. 
+
+*The rules for Circles of Evaluation are simple:*
+
+(1) Every Circle of Evaluation must have a single function, written at the top.
+
+(2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+@indented{
+If we want to see the first ten animals, our diagram would look like this.
+
+@do{
+(define expB '(first-n-rows animals-table 10))
+}
+
+@show{(coe expB)}
+
+Which translates to the following code:
+@show{(code expB)}
+}
+
+(3) Circles can contain other Circles!
+
+@ifslide{@teacher{This list of rules continues with a diagram for the third point on the next slide.}}
+
+@slidebreak{InvestigateC}
+
+@ifslide{*Circles can contain other circles!*
+
+}
+@indented{
+If we want to see the ten _youngest_ animals, our diagram would look like this.
+
+@do{
+(define exp1 '(first-n-rows (sort animals-table "age" true) 10))
+}
+[.circle2]
+@show{(coe exp1)}
+}
+
+@slidebreak{InvestigateC}
+
+@indented{
+If we wanted to get extra fancy and see the species count for the youngest ten animals, we could add another layer to our Circle of Evaluation.
+
+@do{
+(define exp2 '(count (first-n-rows (sort animals-table "age" true) 10) "species"))
+}
+[.circle3]
+@show{(coe exp2)}
+}
+
+_Note: Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to use a function that we need to draw a Circle._
+
+@slidebreak{InvestigateC}
+
+*To convert a Circle of Evaluation into code:*
+
+- We start at the outside and work our way in. 
+- After each function we open a pair of parentheses, and then convert each argument inside the Circle. 
+- We close each pair of parentheses as we finish with the arguments in its Circle of Evaluation.
+
+@indented{This diagram would translate to the code that follows. 
+[.circle2]
+@show{(coe exp1)} 
+
+@ifnotslide{@image{images/exp1.png, 450}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 14pt;">first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true)</span>, 10)</span>}
+}
+
+@slidebreak{InvestigateC}
+
+@indented{And this diagram would translate to the code that follows.
+
+[.circle3]
+@show{(coe exp2)}
+
+@ifnotslide{@image{images/exp2.png, 600}}
+@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">count(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">"species")</span> </span>}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Turn to @printable-exercise{matching-coe-count-sort-first-n.adoc}
+- Match each scenario to the corresponding Circle of Evaluation.
+- When you're done, practice translating the Circles of Evaluation into code.
+}
+
+@teacher{Confirm that students have correctly identified the matching Circles of Evaluation and have each correctly translated at least one Circle of Evaluation into code. (Note: There is one extra Circle of Evaluation.)}
+
+@lesson-instruction{
+- Now turn to @printable-exercise{coe-sort-count.adoc} and practice drawing the Circles of Evaluation yourself.
+- Before moving on to the second question, be sure you've translated your Circle of Evaluation into code and tested it out in @starter-file{animals}.
+}
+
+=== Synthesize
+
+- What did you Notice?
+- What did you wonder?
+
+
+@pd-slide{
+
+*Connect to the Classroom: Contracts are a major pedagogical technique.*
+
+Contracts are the second major pedagogical technique in Bootstrap. Circles of Evaluation are the first one, and contracts are the second.
+
+Contracts are really important because just about every single mistake kids make can be solved by looking at their contracts. The answer is always, “Check your contract.”
+
+And that is important, because it reminds students the value of writing stuff down.
+}
+
+@pd-slide{
+
+*Connect to the Classroom: Contracts help students understand domain and range.*
+
+Contracts give students a concrete understanding of a math concept that is pretty abstract.
+
+When everything is a number, it's hard to understand domain and range. Kids wonder why they need to learn them, why they matter.
+
+Domain and range is topic that we often squeeze in the week before finals. But once we have rich data types - like strings, Booleans, and images - domain and range become more concrete.
+}
+
+@slidebreak{DS Title and Body}
+
+@pd-slide{
+
+We're building toward an understanding of three different representations for functions and we've already encountered the first one - contracts.
+
+The goal is to get fluent in each representation. Eventually, we're going to talk about how each representation is essentially a tool you can use for solving word problems. If you know how to fit them together, you get a nice road map for attacking virtually any word problem you'll encounter.
+}
