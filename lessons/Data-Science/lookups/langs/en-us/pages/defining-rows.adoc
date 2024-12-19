@@ -1,11 +1,10 @@
 = Defining Rows
 ++++
 <style>
-table .autonum::after{ content: ')'; }
-table { font-size: 1rem !important; }
-table td { padding: 0.1 !important; }
-table td .fitb { padding-top: 0 !important; }
+.autonum { padding-top: 3em !important; }
 .listingblock pre { padding: 0 1em !important; }
+.editbox { background: none !important; }
+.autonum+.editbox { width: 1.5in; }
 </style>
 ++++
 
@@ -18,51 +17,28 @@ cat-row = row-n(animals-table,  0)  # Sasha is a cat
 dog-row = row-n(animals-table, 10)  # Toggle is a dog
 ```
 
-@n Use the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} to identify the index of a row containing...
+Fill in the code below to define rows for various animals. The first one has been done for you. _HINT: Look at the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} to the find the row-index!_
 
-[cols="1, 3a, 3a, 8", stripes="none", shading="none", grid="none", frame="none"]
-|===
-|| a lizard 					| @fitb{}{@ifsoln{21 or 22}}					|
-|| a rabbit 					| @fitb{}{@ifsoln{1 or 24}}						|
-|| a fixed animal 				| @fitb{}{@ifsoln{many options, including 1}}	|
-|| a male animal 				| @fitb{}{@ifsoln{many options, including 4}}	|
-|| a female animal  	 		| @fitb{}{@ifsoln{many options, including 0}}	|
-|| a hermaphroditic animal 		| @fitb{}{@ifsoln{6}}							|	
-|| an unfixed animal 			| @fitb{}{@ifsoln{many options, including 0}}	|
-|| a young animal (<2 years) 	| @fitb{}{@ifsoln{many options, including 0}}	|
-|| an old animal (>10 years) 	| @fitb{}{@ifsoln{many options, including 4}}	|
-|===
+@n `lizard-row` `= row-n(animals-table,` @fitb{5em}{21} `)`
 
-@n What code would you write to define `lizard-row`?
+@n `rabbit-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{1}} `)`
 
-@fitb{}{@ifsoln{possible solution: @show{(code '(define lizard-row (row-n animals-table 21)))}}}
+@n `fixed-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `)`
 
-@n What code would you write to define `rabbit-row`?
+@n `unfixed-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `)`
 
-@fitb{}{@ifsoln{possible solution: @show{(code '(define rabbit-row (row-n animals-table 1)))}}}
+@n `male-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `)`
 
-@n What code would you write to define `fixed-row`?
+@n `female-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `)`
 
-@fitb{}{@ifsoln{answers will vary}}
+@n `hermaphrodite-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{6}} `)`
 
-@n What code would you write to define `male-row`?
+@n `young-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `) # "young" means < 1 year old`
 
-@fitb{}{@ifsoln{answers will vary}}
+@n `old-row` `= row-n(animals-table,` @fitb{5em}{@ifsoln{many options}} `) # "old" means > 10 years old`
 
-@n What code would you write to define `female-row`?
+@vspace{10ex}
 
-@fitb{}{@ifsoln{answers will vary}}
+@center{*Add these definitions to the Definitions Area of your Animals Starter File.*}
 
-@n What code would you write to define `hermaphrodite-row`?
-
-@fitb{}{@ifsoln{answers will vary}}
-
-@n What code would you write to define `young-row`?
-
-@fitb{}{@ifsoln{answers will vary}}
-
-@n What code would you write to define `old-row`?
-
-@fitb{}{@ifsoln{answers will vary}}
-
-@center{*Add this code to your Animals Starter File!* You'll want these rows for later!}
+@center{You'll use them rows later!}
