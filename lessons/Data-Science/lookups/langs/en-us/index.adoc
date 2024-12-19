@@ -27,25 +27,25 @@
 
 |===
 
-== Row Lookups
+== Row and Column Lookups
 
 === Overview
-Students review value definitions in Pyret, and practice extracting individual rows for later use.
+Students review value definitions in Pyret, and practice extracting individual Rows for later use. They are also introduced to _column lookups_, which allow them to extract a specific value from a Row.
 
 === Launch
 
-Sometimes it's helpful to define a row that has a property that we care about so that we can test whether or not our code is handling a subset of the population correctly.
+You've learned how to write functions that work with Numbers, Strings, and Images. But as Data Scientists, we want to write functions that work with _Rows_. To do that, we'll need to take Rows apart and use the values stored in their columns.
 
-There are already a few rows defined in the @starter-file{animals}. Let's have a look!
-
-@teacher{
-We'd suggest projecting the starter file for this part of the lesson to keep everyone together, but if it works better for you, you could also have them open their own at this point.
+@lesson-instruction{
+- Open the @starter-file{row-functions} and click "Run".
+- What Rows do you see defined here? Evaluate a few of them in the Interactions Area.
 }
+
+@slidebreak
 
 @QandA{
 @Q{What are the names of the sample rows you see defined?}
-@A{cat-row}
-@A{dog-row}
+@A{`cat-row`, `dog-row`, etc.}
 
 @Q{What function is used to extract a row from the table?}
 @A{`row-n`}
@@ -53,6 +53,8 @@ We'd suggest projecting the starter file for this part of the lesson to keep eve
 @Q{What row would `row-n(animals-table, 1)` return?}
 @A{The second row.}
 }
+
+@slidebreak
 
 Notice that we could have defined the first row from the animals table using:
 
@@ -63,33 +65,17 @@ But, it's often more useful to name our Row definitions according to the _proper
 `cat-row = row-n(animals-table, 0)`
 
 
-@lesson-instruction{
-- There are many other subsets that we might want to analyze besides dogs and cats. Trends for old animals might be worth investigating separately, for example.
-- With your partner, turn to the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} and see how many different useful subsets you can brainstorm!
-}
+@slidebreak
 
-=== Investigate
+If we were analyzing a subset of lizards, it would make sense to add a definition for `lizard-row` to the Animals Dataset.
 
 @lesson-instruction{
-- If we were analyizing a subset of lizards, it would make sense to add a definition for `lizard-row` to the Animals Dataset.
-- With your partner, find the index of the first lizard that appears on the @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, Animals Table} and use it to define `lizard-row` beneath `cat-row` in your @starter-file{animals}.
-- Then click "Run" and type `lizard-row` into the Interactions Area to see what it returns.
-- Complete @printable-exercise{defining-rows.adoc}.
-- Add the rows you just defined to your starter file. _We will be using them!_
+- If you were to adopt an animal from the shelter, who would be your favorite?
+- Define a new Row called `myPet`, to be your favorite animal at the shelter.
 }
 
-@teacher{If you do a lot of differentiating in your classroom, you might want to make a starter file that has these rows predefined for some of your students.}
+@slidebreak
 
-=== Synthesize
-- What other properties of the Animals Data set might be interesting to analyze, besides the list from @printable-exercise{defining-rows.adoc}?
-- What are some properties of *your dataset* that you might want to define rows for?
-
-== Column Lookups
-
-=== Overview
-Students learn how to access a particular column from a row.
-
-=== Launch
 We can access _specific columns_ of a Row, by using a *Row Accessor*.
 
 - start with a row value:
@@ -145,13 +131,11 @@ We can use our knowledge of lookups, operators and functions to do just that!
 
 Now that we know how to lookup a value for a specific column of a row, let's practice some of the things we might be able to do with that information!
 
-@teacher{Students will need to have all of the values from @printable-exercise{defining-rows} defined in the Definitions Area in order to work through this next set of exercises.}
-
 @lesson-instruction{
-- Open your copy of the @starter-file{animals} and make sure the Definitions Area includes defintions for all of the rows from @printable-exercise{defining-rows}.
-- Turn to @printable-exercise{lookup-expressions.adoc} and notice that the code at the top uses the "age" of `old-row` to determine the size of the triangle.
+- Return to the @starter-file{row-functions}, and turn to @printable-exercise{lookup-expressions.adoc}
+- Notice that the code at the top uses the "age" of `old-row` to determine the size of the triangle.
 - Type the code into the Interactions Area and test it out.
-- With a partner, work through @printable-exercise{lookup-expressions.adoc}
+- With a partner, work through @printable-exercise{lookup-expressions.adoc}. After you've written the expressions on paper, try them out in Pyret!
 }
 
 @teacher{
@@ -159,26 +143,118 @@ Have students share their most creative uses of lookups. Did anyone use three or
 }
 
 === Synthesize
-Once we know how to perform computations with a _single_ Row, we can use our knowledge of functions to generalize that computation to work with _every_ Row in a Table. This allows us to write some pretty powerful table functions that...
 
-- Filter a table to show only animals older than 3
-- Filter a table to show only animals whose species is `"dog"`
-- Build a column that shows all the animals' weights in kilograms
-- Build a column that represents the age of each animal as a solid, green triangle
+@QandA{
+@Q{Why is it helpful to be able to lookup values from a Row?}
+@A{Once we have the values, we can use them with any Pyret expression we want!}
+@A{We can perform computation on those values, make images, etc.}
+}
+
+== Writing Functions with Lookups
+
+=== Overview
+Students practice using the Design Recipe to write familiar functions, but this time those functions use Row values and column lookups as part of their expressions.
+
+=== Launch
+Could we use use column lookups in some of the functions we've written? Let's try it out!
+
+@lesson-roleplay{
+We're going to need another actor...
+
+This time, the role is "nametag". It takes in a name and draws that text in size 20 with blue letters.
+
+When someone says @show{(code '(nametag "Jamal"))}, they reply with @show{(code '(text "Jamal" 20 "blue"))}
+}
+
+@teacher{Have students practice calling out colors, with the actor responding.}
+
+@slidebreak
+
+This rehearsing gives us our examples!
+
+```
+examples:
+  nametag("Baily") is text("Baily", 20 "blue")
+  nametag("Shay")  is text("Shay",  20 "blue")
+end
+```
+
+Circling and labeling the parts that change helps us define the function:
+
+@show{(code '(define (nametag name) (code '(text name 20 "blue"))))}
 
 @slidebreak
 
 @QandA{
-@Q{Why would defining individual Rows be important, if our goal is to write table functions?}
-@A{Writing examples requires sample values, and table functions need sample Rows}
+@Q{If we wanted to make the letters smaller, what would need to change?}
+@A{We'd have to replace the `20` with something smaller}
+@Q{What if we wanted to that number to come from the age of `dog-row`?}
+@A{We'd have to replace the `20` with a lookup}
 }
 
-@pd-slide{
-Tables have tons of data - of all different types! - arranged into Rows and Columns. They feel like a monolith.
+@slidebreak
 
-With lookups, we've given kids surgical precision to hone in on _an individual row_, and to hone in on an _individual value_ from that row. That might be kind of important if we want to do something like... *filter a table* showing only the individual rows where species equals dog.
+```
+fun nametage(name): text("name", dog-row["age"], "blue") end
+```
 
-Now we can use definitions to make our lives easier! If we find that we're writing the same thing over and over and over, we could just define `cat-row` instead of needing to retype all the lookup code every time.
+=== Investigate
+
+@lesson-instruction{
+- With your partner, complete the *first* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
 }
 
+@slidebreak
 
+In @lesson-link{functions-make-life-easier}, you defined a function called `sticker`. It took in a color and produces a solid circle of radius 100, of whatever color was passed in:
+
+@center{`fun bigc(color): circle(100, "solid", color) end`}
+
+@QandA{
+@Q{What needed to change about this function, to use the age of `old-row` as the size?}
+@A{The 100 needed to be replaced with a lookup, extracting `"age"` from `old-row`}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete the *second* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
+}
+
+@slidebreak
+
+You've already compared a string to a Row lookup. For example, we checked to see if the species of a row was `"cat"`:
+
+@center{`young-row["species"] == "cat"`}
+
+This is _another_ Row lookup, only this time we're comparing the string to the `"name"` column.
+
+@teacher{If necessary, review the solution for this function.}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete the *last* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
+}
+
+@slidebreak
+
+This challenge was *very* different from the other two!
+
+@QandA{
+@Q{What are some ways this was different?}
+@A{The function consumed a row instead of a Number or String.}
+@A{The lookup happened on the input argument, instead of on the same row that never changes}
+}
+
+=== Synthesize
+
+We started programming by writing simple expressions over Numbers, Strings, and Images. Then we learned how to generalize those expressions into _functions._ Now that we know how to look up values from a Row, we can start generalizing expressions with Rows into _functions with Rows._
+
+- Now we can write functions that check if the species of a Row is a cat. This makes it easy to filter a table to show only the cats!
+- Now we can write functions that check if the age of a Row is greater than 10. This makes it easy to filter a table to show only the old animals!
+
+What are some other functions we can write, and how might we use them?
