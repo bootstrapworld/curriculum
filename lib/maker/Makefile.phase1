@@ -5,6 +5,7 @@ phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons pa
 ###############################################################################
 
 initialization:
+	@. ${HOME}/.nvm/nvm.sh && nvm use 20
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -47,6 +48,7 @@ initialization:
 # but I don't think it buys us much
 
 node_modules:
+	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
