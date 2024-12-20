@@ -1,0 +1,189 @@
+= Contracts for Data Visualization
+++++
+<style>
+.circle3 .expression { background: aquamarine !important; }
+.circle3 .expression .expression { background: white !important; }
+.circle3 .expression .expression .expression { background: lightskyblue !important; }
+</style>
+++++
+@description{Students learn about functions that create data visualizations.}
+
+@lesson-prereqs{contracts-tables}
+
+@keywords{pie chart, bar chart, histogram, box plot, data visualizations, contract, function}
+
+@add-to-lang{bar-chart, pie-chart, histogram, box-plot, scatter-plot, lr-plot, line-graph}
+
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+@objective{use-contracts}
+@objective{read-contracts}
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn how to make data visualizations in Pyret!
+
+| Materials
+|[.materials-links]
+@material-links
+
+- @dist-link{Contracts.shtml, Contracts Pages} (a complete list of all the contracts)
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+|===
+
+
+== Bug Hunting @duration{10 minutes}
+
+=== Overview
+This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
+
+=== Launch
+
+Before we explore some new functions in Pyret, let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
+
+@lesson-instruction{
+- Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{animals}.
+- Start by typing `sort` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
+}
+
+@QandA{
+@Q{What do you get back?}
+@A{`<function:sort>`}
+@A{This means that the computer knows about a function called `sort`.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- We know that all functions will need an open parentheses and at least one input!
+- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
+- Type @show{(code '(sort animals-table))} in the Interactions Area and read the error message.
+}
+
+@QandA{
+@Q{What _hint_ does the error message give us about how to use this function?}
+@A{@image{images/sort-error.png, 650}}
+@A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
+}
+
+=== Investigate
+
+@ifnotslide{
+Mistakes happen, especially if we're just figuring things out! Diagnosing and fixing errors are skills that we will continue developing throughout this course.
+}
+
+@lesson-instruction{
+- Turn to the second section of @printable-exercise{catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
+- Then turn to the third section of @printable-exercise{catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
+}
+
+=== Synthesize
+
+- What kinds of @vocab{syntax errors} did you find?
+- What kinds of @vocab{contract errors} did you find?
+
+
+== Functions for Making Data Visualizations @duration{20 minutes}
+
+=== Overview
+
+Students will be introduced to functions for making one-variable visualizations in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
+
+The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce visualizations. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's OK!
+
+@teacher{Once students know how to use Contracts to write expressions to make these visualizations, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms-visualize}, @lesson-link{histograms-interpret}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-visualizations}, etc.}
+
+=== Launch
+
+The `count` function summarized the data for a single variable in a new table. 
+
+The same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make visualizations for us!
+
+=== Investigate
+
+@QandA{
+Turn to @printable-exercise{exploring-visualizations.adoc}. Let's look at the first function together.
+@Q{What is the name of the function?}
+@A{bar-chart}
+
+@Q{What is the Domain of the function?}
+@A{Table, String}
+
+@Q{What is the Range of the function?}
+@A{Image}
+
+@Q{Take a minute and see if you and your partner can write an expression that will generate a `bar-chart`.}
+
+@Q{Did `bar-chart` consume a categorical or quantitative column of data?}
+@A{categorical}
+
+@Q{What does the resulting visualization tell us?}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Make a sketch of the visualization you just built in Pyret.
+- Then work to complete @printable-exercise{exploring-visualizations.adoc}, generating each of the other 3 visualizations. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
+}
+
+@teacher{
+If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-visualizations-2.adoc}.
+}
+
+@slidebreak{InvestigateC}
+
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific visualizations. Consider this:
+
+[.circle3]
+@show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+
+@QandA{
+@Q{What expression would this Circle of Evaluation generate?}
+@A{@ifnotslide{@image{images/pie-code.png, 600}}@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">pie-chart(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10) <span style="color:mediumseagreen;">)</span> </span>}}
+
+@Q{What would be the resulting visualization?}
+@A{a pie chart showing the species of the 10 youngest animals}
+}
+
+@lesson-instruction{
+- Practice what you've learned on @printable-exercise{matching-coe-to-descriptions.adoc}.
+- Be ready to discuss your answers with the class!
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Complete @printable-exercise{coe-visualizations.adoc}.
+- Then consider what visualization it might be interesting to compare each of the visualizations on this page with.
+  * _Visualizations are often most informative when compared with other visualizations._
+  * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
+} 
+
+@opt{For more practice making tables and visualizations by composing functions, have students complete @opt-printable-exercise{coe-visualizations-2.adoc}}
+
+=== Synthesize
+
+@QandA{
+@Q{Which visualizations worked with categorical data?}
+@A{`pie-chart` _and_ `bar-chart`}
+
+@Q{Why might you choose a bar chart over a pie chart or vice versa?}
+@A{`pie-chart` only makes sense when you have the full picture, since it's representing the _proportion of the whole_}
+@A{`bar-chart` shows the absolute amount in each bar, but it's harder to see any one bar as a _proportion of the whole_.}
+
+@Q{How are bar charts and histograms different?}
+@A{`bar-chart` summarizes @vocab{categorical} data. Each bar represents the count of a specific category.}
+@A{`histogram` displays the distribution of @vocab{quantitative} data across the range.}
+}

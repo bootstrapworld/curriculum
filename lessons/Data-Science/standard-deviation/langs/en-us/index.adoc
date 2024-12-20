@@ -12,8 +12,9 @@
 | Lesson Goals
 | Students will be able to...
 
-- apply one approach to measuring and displaying spread of a dataset
-- compare and contrast information displayed in a box plot and a histogram
+@objectives
+@objective{stdev-calc}
+@objective{stdev-understand}
 
 | Student-facing Lesson Goals
 |
@@ -30,7 +31,7 @@
 
 |===
 
-== Measuring "Deviance" @duration{30 minutes}
+== Measuring "Deviance"
 
 === Overview
 Students review the notion of @vocab{spread} itself, and build up to the formula by annotating @vocab{histograms}.
@@ -84,7 +85,6 @@ Instead of focusing on the handful of data points used in our Five Number Summar
 
 @ifslide{@centered-image{images/histogram-w-mean.png, 450}}
 @ifnotslide{@right{@image{images/histogram-w-mean.png, 450}}}We could imagine a shelter where every cat is between 2 and 4, so *each cat only deviates from the mean by 1 year*! But we could also imagine a shelter with only kittens and very old cats, where *cats deviate by as much as 10 years from the mean!*
-
 
 How far away is each data point from 3?
 
@@ -150,7 +150,7 @@ To compute standard deviation in CODAP, create a graph with only one quantitativ
 @A{A standard deviation of zero means that every number in the sample is exactly the same.}
 }
 
-== Comparing Standard Deviations @duration{20 minutes}
+== Comparing Standard Deviations
 
 === Overview
 Students compare centers and (more importantly) spreads - of two quantitative datasets by comparing their histograms. Both @vocab{mean} and @vocab{standard deviation} can be affected by @vocab{outliers} and/or @vocab{skewness}.
@@ -206,7 +206,7 @@ Turn to @printable-exercise{data-cycle-analysis-stdev-animals.adoc} to get some 
 @Q{The standard deviation?}
 }
 
-@strategy{Mean Absolute Deviation (MAD) v. Standard Deviation (SD)}{
+@strategy{Comparing Mean Absolute Deviation (MAD) to Standard Deviation (SD)}{
 MAD and SD are both measures of "how far from the mean all the points in the dataset are".
 
 - Mean Absolute Deviation (MAD) flattens each points' deviation into a single "dimension", taking the vertical (@math{y}) distance from each point to the mean of all the y-values.
@@ -229,9 +229,45 @@ Extreme values affect both the mean and standard deviation of a dataset.
 
 === Synthesize
 
-Why is it useful to know the standard deviation of a dataset?
+@QandA{
+@Q{Why is it useful to know the standard deviation of a dataset?}
+@A{Measures of central tendency - knowing which value is "typical" - aren't that helpful on their own, without also knowing how tightly the data is clustered.}
+}
 
-== Data Exploration Project (Standard Deviation) @duration{flexible}
+@slidebreak
+
+@lesson-point{Numbers Don't Tell the Whole Story!}
+
+By now, you've been introduced to quite a few summary statistics, which use one or more _numbers_ to measure  center or spread:
+
+- Mean
+- Median
+- Modes
+- Standard Deviation
+
+@slidebreak
+
+But numbers alone aren't enough to see the big pictures! Data Scientists and Statisticians use their eyes _all the time_. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. Until we really look at the _shape_ of the data, we aren't seeing the whole picture.
+
+@slidebreak
+
+This animation scrolls through a collection of datasets. While the patterns in the scatter plots vary wildly, notice that the corresponding summary statistics the datasets barely change at all!
+
+@center{@image{images/CloudToCircle.gif}}
+
+@teacher{
+This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore more of Autodesks' @link{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Same Stats, Different Graphs} visualizations!
+}
+
+@slidebreak
+@ifslide{@right{@image{images/CloudToCircle.gif}}}
+That's why it's important for Data Scientists to look beyond just the numbers. Those summary statistics are really important, as they help us quantify and compare datasets easily and precisely. But Data Science is about more than just computing values - it's also about looking for patterns and trends in the real world. A good Data Science uses both summary statistics _and_ visualizations in their toolbelt!
+
+=== Explore
+
+=== Synthesize
+
+== Data Exploration Project (Standard Deviation)
 
 === Overview
 

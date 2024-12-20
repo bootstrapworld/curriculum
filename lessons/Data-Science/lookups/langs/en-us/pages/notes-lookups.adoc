@@ -1,33 +1,62 @@
-= Looking up Rows and Columns
+= Lookups in a Nutshell
+
+*Let's Review...*
 
 We can define names for values in Pyret, the same way we do in math:
 
 ```
+x = 7
 name = "Shanti"
 age = 16
 logo = star(50, "solid", "red")
+snuffles   = row-n(animals-table, 1)
 ```
 
-When *looking up a data Row* from a Table, programmers use the `row-n` function. This function takes a Table and a Number as its inputs. The numbers tell the computer which Row we want from the Table. _Note: Rows are numbered starting at zero!_
+When *looking up a data Row* from a Table, programmers use the `row-n` function. This function takes a Table and a Number as its inputs. +
+The numbers tell the computer which Row we want from the Table. _Note: Rows are numbered starting at zero!_
 
 For example:
 ```
-sasha   = row-n(animals-table, 0)  # define Sasha to be the first row
-mittens = row-n(animals-table, 2)  # define Mittens to be the third row
+row-n(animals-table, 0)  				#  the first row
+row-n(animals-table, 2)  				#  the third row
 ```
 
-When we define these rows, it's more useful to name them based on their _properties_, rather than their identifiers:
+When we define these rows, it's most useful to name them based on their _properties_ (rather than their identifiers, e.g. snuffles):
 ```
-cat-row = row-n(animals-table,  0) # Sasha is a cat
-dog-row = row-n(animals-table, 10) # Toggle is a dog
+rabbit-row = row-n(animals-table, 1) 	# Snuffles is a rabbit
+cat-row = row-n(animals-table,  0) 		# Sasha is a cat
+dog-row = row-n(animals-table, 10) 		# Toggle is a dog
 ```
+
+*What's New?*
 
 When *looking up a column* from a Row, programmers use square brackets and the name of the column they want.
 
 For example:
 ```
-# these two lines do the same thing! We can use the defined name to simplify our code
-row-n(animals-table, 0)["age"] # look up Sasha's age (in row 0)
-cat-row["species"]             # look up Sasha's age (using the defined name)
-dog-row["age"]				   # look up Toggle's age (using the defined name)
+row-n(animals-table, 0)["age"]     		# look up Sasha's age (in row 0)
+cat-row["species"]                 		# look up Sasha's age (using the defined name)
+
+# Note: Both of these examples produce the same thing!
+# Using defined expressions allows us to simplify our code.
+
+```
+
+Values produced from lookups can be used as part of Pyret expressions:
+
+```
+# Number expressions
+dog-row["age"] + 2
+cat-row["age"] > 10
+
+# String expressions
+string-contains(dog-row["name"], "Kujo")
+cat-row["name"] == "Sasha"
+
+# Boolean expressions
+dog-row["fixed"] and (dog-row["age"] < 5)
+
+# Image expressions
+triangle(dog-row["pounds"], "solid", "green")
+scale(cat-row["age"], triangle(20, "solid", "green"))
 ```

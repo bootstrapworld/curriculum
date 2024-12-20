@@ -37,38 +37,38 @@ that you see the repeated expression for that image. +
 ----
 @ifproglang{pyret}{
 china =
-  put-image(
+  translate(
     rotate(40,star(15,"solid","yellow")),
     120, 175,
-    put-image(
+    translate(
       rotate(80,star(15,"solid","yellow")),
       140, 150,
-      put-image(
+      translate(
         rotate(60,star(15,"solid","yellow")),
         140, 120,
-        put-image(
+        translate(
           rotate(40,star(15,"solid","yellow")),
           120, 90,
-          put-image(scale(3,star(15,"solid","yellow")),
+          translate(scale(3,star(15,"solid","yellow")),
             60, 140,
             rectangle(300, 200, "solid", "red"))))))
 }
 
 @ifproglang{wescheme}{
 (define china
-  (put-image
+  (translate
      (rotate 40 (star 15 "solid" "yellow"))
      120 175
-     (put-image
+     (translate
        (rotate 80 (star 15 "solid" "yellow"))
        140 150
-       (put-image
+       (translate
           (rotate 60 (star 15 "solid" "yellow"))
           140 120
-          (put-image
+          (translate
              (rotate 40 (star 15 "solid" "yellow"))
              120 90
-             (put-image
+             (translate
                 (scale 3 (star 15 "solid" "yellow"))
                 60 140
                 (rectangle 300 200 "solid" "red")))))))
@@ -88,33 +88,30 @@ china =
 @n Here is the same code shown above, but all crammed into one line.
 
 @show{(code '(define china
-  (put-image
+  (translate
      (rotate 40 (star 15 "solid" "yellow"))
      120 175
-     (put-image
+     (translate
        (rotate 80 (star 15 "solid" "yellow"))
        140 150
-       (put-image
+       (translate
           (rotate 60 (star 15 "solid" "yellow"))
           140 120
-          (put-image
+          (translate
              (rotate 40 (star 15 "solid" "yellow"))
              120 90
-             (put-image
+             (translate
                 (scale 3 (star 15 "solid" "yellow"))
                 60 140
                 (rectangle 300 200 "solid" "red"))))))))}
 
 @hspace{1em}Is it easier or harder to read, when everything is all on one line? @fitb{}{@ifsoln{Much harder!}}
 
-@n Professional programmers _indent_ their code, by breaking long lines into shorter, more readable lines of code. In the indented code at the top of the page, notice that each `put-image` is followed by several lines of code that all line up with each other, and that the lines under the _next_ `put-image` are shifted farther and farther to the right. What do you think is going on?
+@n Professional programmers _indent_ their code, by breaking long lines into shorter, more readable lines of code. In the indented code at the top of the page, notice that each `translate` is followed by several lines of code that all line up with each other, and that the lines under the _next_ `translate` are shifted farther and farther to the right. What do you think is going on?
 
-@fitb{}{@ifsoln{The lines under each `put-image` are all inputs to that function.}} +
-@fitb{}{@ifsoln{Each new `put-image` happens _inside_ the one that comes before it, so the inputs shift farther and farther to the right}} +
-@ifnotsoln{
-@fitb{}{} +
+@fitb{}{@ifsoln{The lines under each `translate` are all inputs to that function.}} +
+@fitb{}{@ifsoln{Each new `translate` happens _inside_ the one that comes before it, so the inputs shift farther and farther to the right}} +
 @fitb{}{}
-}
 
-@star This file uses a function we haven’t seen before! What is its name? @fitb{11em}{@ifsoln{`put-image`}}_Hint: Focus on the last instance of the function._  +
+@star This file uses a function we haven’t seen before! _Hint: Focus on the last instance of the function._ What is its name? @fitb{}{@ifsoln{`translate`}}. +
 How many inputs are in its domain? @fitb{4em}{@ifsoln{4}}. What are the types of those inputs? @fitb{}{@ifsoln{Image, Number, Number, Image}}

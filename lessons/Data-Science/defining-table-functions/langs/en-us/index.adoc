@@ -11,9 +11,10 @@
 | Lesson Goals
 | Students will be able to...
 
-- write functions that consume a Row and perform a _lookup_ to produce a column
-- write functions that consume a Row and _compute_ to produce an Image
-- write functions that consume a Row and _compute_ to produce a Boolean
+@objectives
+@objective{write functions that consume a Row and perform a _lookup_ to produce a column}
+@objective{write functions that consume a Row and _compute_ to produce an Image}
+@objective{write functions that consume a Row and _compute_ to produce a Boolean}
 
 | Student-facing Lesson Goals
 |
@@ -35,7 +36,7 @@ To do the Design Recipe Telephone activity, you will need to decide on groups of
 
 |===
 
-== Reviewing Function Definition @duration{15 minutes}
+== Reviewing Function Definition
 
 === Overview
 Students use different representations of functions to define functions that consume _Rows_, discover _functions that consume other functions_, and compose a scatter plot function with a function they've defined.
@@ -58,7 +59,7 @@ Now it's time to use those representations to help us work with Tables!
 - What species is the animal?
 - What is its name?
 - How old is it?
-- Complete the first section of @printable-exercise{making-connections.adoc} (questions 1-4).
+- Complete the first section of @printable-exercise{making-connections.adoc} (questions 1-5).
 }
 
 === Investigate
@@ -76,28 +77,32 @@ These steps also help us _check our work_. If any two representations don't matc
 Let's look at an example to see how this works with table-functions!
 
 @lesson-instruction{
-Complete the `weeks-dot` section of @printable-exercise{making-connections.adoc}.
+Complete the `age-gt` section of @printable-exercise{making-connections.adoc}.
 }
 
 @slidebreak
 
-@teacher{Review student answers from the `weeks-dot` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".
+@teacher{Review student answers from the `age-gt` section of @printable-exercise{making-connections.adoc}, paying particular attention to the connections between "Contract and Purpose" and "Examples".
 @ifslide{_Note: Discussion continues on the next slide._}}
 
 ```
-# weeks-dot :: Row -> Image
-# consumes an animal, and draws a solid purple circle whose
-# radius is 5x the number of weeks it took to be adopted
-examples:
-  weeks-dot(cat-row)   is circle(5      *      3        , "solid", "green")
-  weeks-dot(young-row) is circle(5      *      1        , "solid", "green")
+# CONTRACT:
+# age-gt :: Row -> Image
+# consumes an animal, and draws a solid green triangle whose
+# size is 5x the number age of the animal as the size
 
-  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"]   , "solid", "green")
-  weeks-dot(young-row) is circle(5 * young-row["weeks"] , "solid", "green")
+examples:
+  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
+  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
+
+  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
+  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
 end
+
+fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
 ```
 
-These examples show us exactly what should be produced for `cat-row` and `young-row` - the two Rows representing "Sasha" and "Wade", based on their `weeks` to adoption. 
+These examples show us exactly what should be produced for `cat-row` and `dog-row` - the two Rows representing "Sasha" and "Toggle", based on their `age`.
 
 @lesson-instruction{
 - Take a closer look at the examples.
@@ -108,21 +113,25 @@ These examples show us exactly what should be produced for `cat-row` and `young-
 
 Both pairs of examples are _correct_!
 
-In the first pair, we see the values 3 and 1 , but no explanation of where they are coming from. The last pair shows how those values are looked up from the example rows.
+In the first pair, we see the values 1 and 3 , but no explanation of where they are coming from. The last pair shows how those values are _looked up_ from the example rows.
 
 @ifslide{
 
 ```
-# weeks-dot :: Row -> Image
-# consumes an animal, and draws a solid purple circle whose
-# radius is 5x the number of weeks it took to be adopted
-examples:
-  weeks-dot(cat-row)   is circle(5 * 3,                  "solid", "green")
-  weeks-dot(young-row) is circle(5 * 1,                  "solid", "green")
+# CONTRACT:
+# age-gt :: Row -> Image
+# consumes an animal, and draws a solid green triangle whose
+# size is 5x the number age of the animal as the size
 
-  weeks-dot(cat-row)   is circle(5 * cat-row["weeks"],   "solid", "green")
-  weeks-dot(young-row) is circle(5 * young-row["weeks"], "solid", "green")
+examples:
+  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
+  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
+
+  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
+  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
 end
+
+fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
 ```
 
 }
@@ -148,14 +157,14 @@ Programmers often use a mix of the two.
 
 Why might it be beneficial to include both kinds of examples?
 
-== Design Recipe Telephone @duration{40 minutes}
+== Design Recipe Telephone
 
 === Overview
 Students work in teams to collaboratively define multiple Table Functions. When these functions are composed in different ways, they can be used to do much more sophisticated analysis!
 
 === Launch
 
-Why would it be challenging to make the following displays?
+Why would it be challenging to make the following visualizations?
 
 - a box plot showing the distribution of kilograms across old cats at the shelter
 - a scatter plot showing the relationship between kilograms of young dogs at the shelter, and how many days it took to be adopted
@@ -194,6 +203,8 @@ We're going to practice collaborative programming and try writing some other Tab
 @handout{is-cat.adoc, is-cat}
 |===
 
+Note that each of these word problems is the function-version of the code students have already written in @lesson-link{lookups/pages/lookup-expressions.adoc}!
+
 }
 
 @lesson-instruction{
@@ -203,6 +214,8 @@ We're going to practice collaborative programming and try writing some other Tab
 - The person who has received your paper will review your work and complete the next step based solely on what you wrote down for them. If they don't have the information they need, they will give the paper back to you for revision.
 
 - Meanwhile, you will receive a different problem from the person to your left. If at any point your realize that the person before you didn't provide enough information, you may hand the paper back to them for revision.
+
+- HINT: All of the word problems here will use code that looks a _lot_ like the code you wrote in @lesson-link{lookups/pages/lookup-expressions.adoc}! If you get stuck, refer back to your answers on that page!
 }
 
 @slidebreak

@@ -3,10 +3,13 @@
 <style>
 .literalblock pre { font-size: inherit; }
 table:first-of-type td {padding: .25em .5em !important; }
+
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
+
 div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
-.data th:last-of-type, .data td:last-of-type * {
+.t th:last-of-type, .t td:last-of-type * {
   font-style: italic !important; text-align: center;
-}
 </style>
 ++++
 
@@ -23,24 +26,24 @@ Consider the table below, and the function definitions that follow:
 
 _The table `t` below represents four animals from the shelter:_
 
-[.data, cols='5', options="header"]
+[.t, cols='5',options="header"]
 |===
 | name        | sex       | age   | fixed   | pounds
-| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Susie Q"` | `"female"`| `0.6` | `true`  | `54`
 | `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
 | `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
-| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
+| `"Rebel"`   | `"female"`| `0.3` | `false` | `4`
 |===
 
 ```
 fun is-female(r): r["sex"] == "female" end
-fun is-young(r):  r["age"] < 4         end
+fun is-young(r):  r["age"] < 1         end
 fun is-fixed(r):  r["fixed"]           end
 ```
 
 For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
 
-[.FillVerticalSpace, cols=".^1a,^.^10a,^.^30a",stripes="none",frame="none", options="header"]
+[.FillVerticalSpace, cols=".^2a,^.^10a,^.^30a",stripes="none",frame="none", grid="none", options="header"]
 |===
 |
 | Prompt

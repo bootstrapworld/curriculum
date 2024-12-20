@@ -261,7 +261,7 @@ distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
 
 ##########################################################################
 
-dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starter-files.js
+dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starterFiles.js
 
 distribution/$(NATLANG)/dependency-graph.js: $(lesson-plan-adoc-files)
 	@echo ➤ Make $@
@@ -281,12 +281,13 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@echo } >> $(SETUP_LESSONPLAN_PDF)
 	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
 	@echo } >> $(SETUP_CONTRACTS_PDF)
+	@echo } >> $(IGNORABLE_DIRECTORIES)
 	@echo ➤ Set up batch files
 	@$(MAKE_DIR)do-setup.lua
 	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
 	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
 
-# specials = primitives + starter-files
+# specials = primitives + starterFiles
 
 specials: preproc
 	@echo ➤ Collect lesson info

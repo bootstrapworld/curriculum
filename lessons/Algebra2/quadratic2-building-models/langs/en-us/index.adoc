@@ -1,0 +1,253 @@
+= Building Quadratic Models
+++++
+<style>
+.lesson-instruction table .autonum { font-weight: bold; }
+</style>
+++++
+@description{Students investigate quadratic relationships in data about Fuel Efficiency, using an inquiry-based model, involving hypothesizing, experimental and computational modeling, and sense-making.}
+
+@lesson-prereqs{quadratic1-exploring-mpg}
+
+@keywords{quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+- Read and interpret real-world data, presented in a scatter plot
+- Model quadratic relationships using functions
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to model quadratic relationships in data.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
+You will want to:
+ * Open @starter-file{alg2-exploring-quadratics-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Key Points For The Facilitator
+|
+- Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of _three_ factors.
+- Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
+|===
+
+== Quadratic Sequences
+@overview{quadratics-growth}
+
+=== Overview
+Students formalize their understanding of quadratic relationships, learning how to identify them arithmetically.
+
+=== Investigate
+Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part.
+
+But what if our list of x-y pairs, doesn't show a rise-and-fall. How do we know if we're looking at _just the rise_ or a parabola, or _just the fall_, or something that _isn't a parabola at all?_ In other words:+
+*How can we identify quadratic relationships from a sequence of numbers?*
+
+@slidebreak
+
+@right{@image{images/difference-table-linear.png}}Remember that linear functions grow by _fixed intervals,_ so the rate of change is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
+@vspace{1ex} +
+*If the rate of growth is constant, the relationship is linear.*
+
+@clear
+@slidebreak
+
+@right{@image{images/difference-table-quadratic.png}}Quadratic functions grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals time, meaning _the function is definitely not linear!_ However, if we take a look at the _difference between those differences_(shown in red), we're back to constant growth! +
+@vspace{1ex} +
+*If the "growth of the growth" is constant, the relationship is quadratic.*
+
+@clear
+@slidebreak
+
+@lesson-instruction{
+Turn to @printable-exercise{classifying-tables.adoc}, and look at the first two tables on the page (shown below). One of them shows a linear progression, while the other shows a quadratic progression.
+
+
+[cols="^.^1a,^.^15a", frame="none", stripes="none"]
+|===
+| *1*
+|
+[.sideways-pyret-table]
+!===
+! x !  0 ! 1 ! 2  !  3 !  4 ! 5  ! 6
+! y !  5 ! 6 ! 9  ! 14 ! 21 ! 30 ! 41
+!===
+
+| *2*
+|
+[.sideways-pyret-table]
+!===
+! x !  0 ! 1 ! 2  ! 3 !  4 ! 5  ! 6
+! y !  0 ! 3 ! 6  ! 9 ! 12 ! 15 ! 18
+!===
+|===
+}
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@Q{Which one is linear, and how do you know?}
+@A{The second table is linear, because the y values growth is constant relative to x.}
+@Q{Which one is quadratic, and how do you know?}
+@A{The first table is quadratic, because the y values "growth of the growth" is constant relative to x.}
+}
+
+@slidebreak
+@lesson-instruction{
+- Identify whether each of the remaining tables on @printable-exercise{classifying-tables.adoc} is quadratic, linear or neither.
+- Use the space to the right of the table to show your work.
+}
+
+@teacher{Debrief with students and allow them to share the different strategies that they used. Note: When looking at real-world datasets that can be modeled by linear or quadratic functions, these patterns will not be evident in the tables, because the points won't fit the function perfectly!}
+
+=== Synthesize
+
+- TODO
+
+== Graphing Quadratic Functions
+@objective{quadratics-graph}
+
+=== Overview
+Students shift from numbers to graphs, as students learn the vocabulary for describing parabolas.
+
+=== Launch
+
+@lesson-instruction{
+- Open @starter-file{alg2-fuel-efficiency}.
+- Make a scatter plot using the `model` as the label, `speed` as the x-axis, and `mpg` as the y-axis.
+- How would you describe the shape you see here?
+}
+
+When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. +
+*Let's define the parts of a parabola together.*
+
+@slidebreak
+
+@QandA{
+@Q{Linear relationships can be described with terms like "slope" and "y-intercept". But what about quadratic relationships? Do parabolas have slope?}
+@A{No. They curve because they *do not* have a constant rate of change.}
+@Q{Do all parabolas have x-intercepts?}
+@A{No. Some do and some don't!}
+@Q{Can you point out or describe other important parts of a parabola?}
+@A{Even without knowing the names for these things, students might point to the vertex, the axis of symmetry, etc.}
+}
+
+@slidebreak
+
+[cols="^.^3a,^.^3a,^.^3a", options="header", stripes="none"]
+|===
+| vertex
+| y-intercept
+| x-intercept
+
+| @image{images/opens.png, 250}
+| @image{images/y-intercept.png, 200}
+| @image{images/roots.png, 250}
+
+| The point at which a parabola "changes direction" and goes from climbing to sinking (or vice versa).
+| Like linear models, parabolas always cross the y-axis once when @math{x=0}.
+| Also known as @vocab{roots} or @vocab{zeros}. A quadratic function can cross the x-axis once, twice, or not at all.
+|===
+
+There are two more specific terms that we can use to describe a parabola's @vocab{vertex}:
+
+- The @vocab{maximum} is the vertex of a parabola that "opens up."
+- The @vocab{minimum} is the vertex of a parabola that "opens down."
+
+For parabolas representing @math{y} as a quadratic function of @math{x}, we can imagine a vertical line through the @vocab{vertex} that splits the curve into two congruent parts that mirror each other. This line is the @vocab{axis of symmetry}, which for quadratics always passes through the vertex (these axes exist in other shapes and functions, as well!).
+
+@slidebreak
+
+@lesson-instruction{
+Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sketching and labeling some graphs.
+}
+
+
+=== Investigate
+
+One form of a quadratic model looks like this: @math{f(x) = a(x − h)^2 + k}
+
+Let's find out what each of these coefficients mean!
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.}
+
+@lesson-instruction{
+- Open *Exploring Quadratic Functions (Desmos)*.
+- Use *Slide 1: Transforming Parabolas* to complete @printable-exercise{graphing-models.adoc}
+- @opt{When you're done, continue your exploration with *Slide 2: Do horizontal shifts correspond to vertical shifts for quadratic functions?*}}
+
+@slidebreak
+
+==== Quadratic Coefficient (@math{a})
+
+@QandA{
+@Q{How do you make a parabola "narrower"?}
+@A{Increase the value of @math{a}}
+@Q{How do you make a parabola "wider"?}
+@A{Decrease the value of @math{a}}
+@Q{How do you know whether to parabola opens up or down?}
+@A{If @math{a} is negative, it will open down. If @math{a} is positive, it will open up.}
+@Q{What value of @math{a} will result in a _linear_ model?}
+@A{Zero}
+}
+
+@slidebreak
+
+The quadratic coefficient @math{a} tells us whether the parabola opens up or down, and how tightly it hugs the axis of symmetry.
+
+@slidebreak
+
+==== Horizontal Shift (@math{h})
+
+@QandA{
+@Q{How do you translate a parabola to the left?}
+@A{Increase the value of @math{h}.}
+@Q{How do you translate a parabola to the right?}
+@A{Decrease the value of @math{h}.}
+@Q{What does an @math{h} of zero tell us about the axis of symmetry?}
+@A{It's the y-axis.}
+}
+
+@slidebreak
+
+The horizontal shift @math{h} tells us where the axis of symmetry hits the x-axis, which means it also tells us the x-coordinate of the vertex.
+
+==== Vertical Shift (@math{k})
+
+@QandA{
+@Q{How do you translate a parabola up and down?}
+@A{Change the value of @math{k}}
+@Q{How can you find the coordinates of the parabola's vertex, just by looking at the equation?}
+@A{@math{h} tells us the x-coordinate, and @math{k} tells us the y-coordinate.}
+@Q{We know that for linear functions it's possible to achieve any transformation that we can do with a horizontal shift with a vertical shift. Is this also true for quadratic functions? Why or Why not?}
+@A{No. That phenomenon worked for linear functions because they extend indefinitely without changing direction. Because quadratic functions curve, horizontal shifts and vertical shifts don't translate to each other.}
+}
+
+@slidebreak
+
+Like the y-intercept of a linear model, the @vocab{vertical shift} translates the parabola up and down.
+
+=== Synthesize
+
+@QandA{
+@Q{What key characteristics of a scatter plot would provide the clue that we should look for a quadratic model rather than a linear model?}
+@Q{Why do some parabolas have roots and others don't?}
+@A{If the minimum is negative, it will fall below the x-axis and the parabola will cross the x-axis twice as it opens up so there will be two roots. Similarly, there will be two roots if the maximum is positive.}
+@A{If the minimum or maximum is zero it will fall directly on the x-axis and there will be one root}
+@A{If the minimum is greater than zero or the maximum is less than zero, the parabola won't cross the x-axis and there won't be any roots.}
+@Q{What is the difference between a minimum and a maximum?}
+@A{A minimum is the vertex of a parabola that opens up, while a maximum is the vertex of a parabola that opens down.}
+}

@@ -1,10 +1,12 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starter-files
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries citations
 
 ###############################################################################
 
 initialization:
+	@. ${HOME}/.nvm/nvm.sh && nvm use 20
+	@touch pathways/__sample/langs/en-us/lesson-order.txt
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -41,11 +43,13 @@ initialization:
 	@echo 'return {' > $(SETUP_LESSONPLAN_PDF)
 	@echo 'return {' > $(SETUP_PATHWAYRESOURCE_PDF)
 	@echo 'return {' > $(SETUP_CONTRACTS_PDF)
+	@echo 'return {' > $(IGNORABLE_DIRECTORIES)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
 # but I don't think it buys us much
 
 node_modules:
+	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
@@ -128,11 +132,49 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-starter-files: distribution/$(NATLANG)/starter-files.js
+starterFiles: distribution/$(NATLANG)/starterFiles.js
 
-distribution/$(NATLANG)/starter-files.js: $(PROGDIR)/starter-files.js
+distribution/$(NATLANG)/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
 	@echo ➤ Build $@
-	@node $< $@
+	@node $+ $@
+
+###############################################################################
+
+assessments: distribution/$(NATLANG)/assessments.js
+
+distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+	@echo ➤ Build $@
+	@node $+ $@
+
+###############################################################################
+
+dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
+
+alignment-dictionaries := $(wildcard \
+	shared/langs/en-us/standards/*.json \
+	shared/langs/en-us/textbooks/*.json \
+	shared/langs/en-us/practices/*.json)
+
+distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
+	@echo ➤ Build $@
+	@$(MAKE_DIR)make-json-dict.lua $@
+
+###############################################################################
+
+learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+
+distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+	@echo ➤ Build $@
+	@node $+ $@
+
+
+###############################################################################
+
+citations: distribution/$(NATLANG)/citations.js
+
+distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
+	@echo ➤ Build $@
+	@node $+ $@
 
 ###############################################################################
 
@@ -140,3 +182,4 @@ courses-and-lessons: copy-lessons copy-pathways
 	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
 	@echo ➤ Collect exercises information
 	@$(MAKE_DIR)collect-distribution-info.lua
+	@find . -name \.proglang-ignore | $(SED) -e 's/\/\.proglang-ignore.*//' | sed -e 's/^\.\/\(.*\)/"\1",/' >> $(IGNORABLE_DIRECTORIES)

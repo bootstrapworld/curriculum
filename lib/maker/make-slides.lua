@@ -346,7 +346,8 @@ local function get_slides(lsn_plan_adoc_file)
             -- print('new_header', new_header)
             -- print('curr_slide.level', curr_slide.level)
             if (new_level == 3) then
-              insert_slide_break()
+              curr_slide.text = curr_slide.text .. '\n\n**' .. new_header .. '**\n\n'
+              -- insert_slide_break()
             elseif ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
@@ -434,13 +435,14 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
+        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...')
+        o:write('\n\nTo learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en')
         if slide.preparation then
-          o:write('\nPreparation:\n')
+          o:write('\n\nPreparation:\n')
           o:write(slide.preparation)
           o:write('\n')
         end
-        o:write('To learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en\n')
-        o:write('-->\n')
+        o:write('\n\n-->\n')
       end
     else
       -- print('outputting slide', slide.section, slide.level, slide.header)

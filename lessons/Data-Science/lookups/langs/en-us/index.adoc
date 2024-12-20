@@ -1,10 +1,8 @@
 = Row and Column Lookups
 
-@add-to-lang{row-n}
+@description{Students review how to extract individual Rows from a table, then learn how to answer lookup questions by extracting a single value from a Row.}
 
-@description{Students learn how to extract individual rows from a table, and columns from a row.}
-
-@lesson-prereqs{contracts-tables-displays}
+@lesson-prereqs{contracts-visualizations, functions-examples-definitions}
 
 @keywords{}
 
@@ -14,14 +12,14 @@
 | Lesson Goals
 | Students will be able to...
 
-- Given a human-language request for a data display involving the entire Animals Dataset, break it down into parts and generate the display.
-- Given a Table, use the `row-n` function to extract any Row from that table
-- Given a Row, use the column lookups to extract the value of any column in the Row
+@objectives
+@objective{Extract any Row from a table in Pyret.}
+@objective{Extract the value of any column in a given Row in Pyret.}
 
 | Student-facing Lesson Goals
 |
 
-- Let's practice making data displays to answer our questions about the data and retrieving information from tables.
+- Let's practice making data visualizations to answer our questions about the data and retrieving information from tables.
 
 | Materials
 |[.materials-links]
@@ -29,100 +27,71 @@
 
 |===
 
-== Row Lookups @duration{30 minutes}
+== Row and Column Lookups
 
 === Overview
-Students learn how to define values in Pyret, and practice by defining Numbers, Strings, and Images. They also learn how to define an individual row from a table in Pyret.
+Students review value definitions in Pyret, and practice extracting individual Rows for later use. They are also introduced to _column lookups_, which allow them to extract a specific value from a Row.
 
 === Launch
 
-Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number and an Image.
-
-```
-name = "Denny"
-age = 16
-logo = star(50, "solid", "red")
-```
-
-@QandA{
-@Q{What are the names given in each of these definitions?}
-@A{name, age, and logo}
-@Q{What are the values given to each of these names?}
-@A{The String "Denny", the Number 16, and an Image of a solid red star.}
-}
-
-=== Investigate
-
-Examples of lookup questions include, “How many legs does Felix have?” or "What species is Sheba?"
-
-@QandA{
-@Q{How many rows do we need to answer a Lookup question?}
-@A{Just one! Lookups can be answered just by finding the right row!}
-}
-
-@teacher{
-Make sure students understand we only need one row!
-}
-
-@right{@image{images/AskQuestions.png, 100}}
-*What code can we write, to let us define a single row?* 
-
-- Tables have special functions associated with them, which allow us to do all sorts of things. 
-- For example, we can get the first @vocab{data row} in a table by using the @show{(code 'row-n)} function: 
-  * `row-n(animals-table, 0)`
-
-Remember: Data rows start at index _zero_!
-
-@slidebreak
+You've learned how to write functions that work with Numbers, Strings, and Images. But as Data Scientists, we want to write functions that work with _Rows_. To do that, we'll need to take Rows apart and use the values stored in their columns.
 
 @lesson-instruction{
-- Open your saved Animals Starter File (or make a new @starter-file{animals} copy), and click “Run”.
-- In the Interactions Area, use the `row-n` function to get the second and third data rows.
-- Find `row-n` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
-}
-
-@QandA{
-@Q{What is its Domain? Its Range?}
-@A{Its domain is Number. Its range is Row.}
+- Open the @starter-file{row-functions} and click "Run".
+- What Rows do you see defined here? Evaluate a few of them in the Interactions Area.
 }
 
 @slidebreak
 
-The code below will define the first row from the animals table:
+@QandA{
+@Q{What are the names of the sample rows you see defined?}
+@A{`cat-row`, `dog-row`, etc.}
+
+@Q{What function is used to extract a row from the table?}
+@A{`row-n`}
+
+@Q{What row would `row-n(animals-table, 1)` return?}
+@A{The second row.}
+}
+
+@slidebreak
+
+Notice that we could have defined the first row from the animals table using:
 
 `sasha = row-n(animals-table, 0)`
 
-It's often better to name our Row definitions according to the _property we care about_. In this case, the fact that this row is a cat is _much_ more interesting than the fact that her name is Sasha:
+But, it's often more useful to name our Row definitions according to the _property we care about_. In this case, the fact that this row is a cat is _much_ more interesting than the fact that her name is Sasha, so the starter file uses:
 
 `cat-row = row-n(animals-table, 0)`
 
-@QandA{
-@Q{How would you get the _second_ row out of the animals table? The third?}
-@A{`row-n(animals-table, 1)` will get the second row}
-@A{`row-n(animals-table, 2)` will get the third row}
+
+@slidebreak
+
+If we were analyzing a subset of lizards, it would make sense to add a definition for `lizard-row` to the Animals Dataset.
+
+@lesson-instruction{
+- If you were to adopt an animal from the shelter, who would be your favorite?
+- Define a new Row called `myPet`, to be your favorite animal at the shelter.
 }
 
 @slidebreak
 
-@lesson-instruction{
-- In the Animals Dataset, there are subsets that we might want to analyze: dogs, cats, lizards, old animals, young animals, fixed animals, etc.
-- Complete @printable-exercise{defining-rows.adoc}.
-- When you're done, open your saved Animals Starter File (or make a new @starter-file{animals} copy) and add these definitions after the definitions for `dog-row` and `cat-row`.
-- The rows you added will be used later!
-}
+We can access _specific columns_ of a Row, by using a *Row Accessor*.
 
+- start with a row value:
+  ** a `row-n` expression just like the ones we've been working with
+  ** the name of a row that we have already defined
+- end with square brackets `[ ]` containing the name of the column where the value can be found.
 
-=== Synthesize
-- We named rows by a lot of different properties (e.g. - their species, sex, etc). What are some other properties of rows in this dataset that we could use?
-- What are some properties of *your dataset* that you might want to define rows for?
+Here are three examples that use row accessors to get at different columns from the first row in the animals-table.
 
-== Column Lookups @duration{25 minutes}
+@indented{
+[cols="1a,1a", options="header"]
+|===
+| Without Predefined Rows
+| Using Predefined Rows
 
-=== Overview
-Students learn how to access a particular column from a row.
-
-=== Launch
-We can also access _columns_ of a Row, by using a *Row Accessor*. Row accessors start with a Row value, followed by square brackets, and the name of the column where the value can be found. Here are three examples that use row accessors to get at different columns from the first row in the animals-table:
+|
 
 ```
 row-n(animals-table, 0)["name"]
@@ -130,7 +99,7 @@ row-n(animals-table, 0)["age"]
 row-n(animals-table, 0)["fixed"]
 ```
 
-And of course, we can use our defined name, substituting it in place of all the redundant code:
+|
 
 ```
 cat-row["name"]
@@ -138,20 +107,156 @@ cat-row["age"]
 cat-row["fixed"]
 ```
 
+|===
+}
+
 === Investigate
 
+Sometimes we want to ask questions about a specific Row, or do some computations with that Row:
+
+- Is the age of our `lizard-row` animal more than 3?
+- How many _kilograms_ does our `rabbit-row` weigh?
+- Is the species of our `fixed-row` animal a `"dog"`?
+- Could we use the `age` of our `male-row` as the size of a solid, green triangle?
+
+We can use our knowledge of lookups, operators and functions to do just that!
+
 @lesson-instruction{
-- Complete the exercises on @printable-exercise{lookup-questions.adoc}.
-- Complete @printable-exercise{more-practice-w-lookups.adoc}
+- Turn to @printable-exercise{lookup-questions-matching.adoc}.
+- Notice the `pet-table` at the top of the page. All of the questions on this page will refer back to that table.
+- Complete the page, discussing your thinking with a partner.
+}
+
+@teacher{Confirm that students have correctly complete the page before moving on. If they need more matching practice before moving on have them complete @opt-printable-exercise{more-practice-w-lookups.adoc}.}
+
+Now that we know how to lookup a value for a specific column of a row, let's practice some of the things we might be able to do with that information!
+
+@lesson-instruction{
+- Return to the @starter-file{row-functions}, and turn to @printable-exercise{lookup-expressions.adoc}
+- Notice that the code at the top uses the "age" of `old-row` to determine the size of the triangle.
+- Type the code into the Interactions Area and test it out.
+- With a partner, work through @printable-exercise{lookup-expressions.adoc}. After you've written the expressions on paper, try them out in Pyret!
+}
+
+@teacher{
+Have students share their most creative uses of lookups. Did anyone use three or more columns from a Row? Did anyone use more than one Row in the same expression?
 }
 
 === Synthesize
-Why is it important to be able to define individual rows?
 
-@pd-slide{
-Tables have tons of data - of all different types! - arranged into Rows and Columns. They feel like a monolith.
-
-With lookups, we've given kids surgical precision to hone in on _an individual row_, and to hone in on an _individual value_ from that row. That might be kind of important if we want to do something like... *filter a table* showing only the individual rows where species equals dog.
-
-Now we can use definitions to make our lives easier! If we find that we're writing the same thing over and over and over, we could just define `cat-row` instead of needing to retype all the lookup code every time.
+@QandA{
+@Q{Why is it helpful to be able to lookup values from a Row?}
+@A{Once we have the values, we can use them with any Pyret expression we want!}
+@A{We can perform computation on those values, make images, etc.}
 }
+
+== Writing Functions with Lookups
+
+=== Overview
+Students practice using the Design Recipe to write familiar functions, but this time those functions use Row values and column lookups as part of their expressions.
+
+=== Launch
+Could we use use column lookups in some of the functions we've written? Let's try it out!
+
+@lesson-roleplay{
+We're going to need another actor...
+
+This time, the role is "nametag". It takes in a name and draws that text in size 20 with blue letters.
+
+When someone says @show{(code '(nametag "Jamal"))}, they reply with @show{(code '(text "Jamal" 20 "blue"))}
+}
+
+@teacher{Have students practice calling out colors, with the actor responding.}
+
+@slidebreak
+
+This rehearsing gives us our examples!
+
+```
+examples:
+  nametag("Baily") is text("Baily", 20 "blue")
+  nametag("Shay")  is text("Shay",  20 "blue")
+end
+```
+
+Circling and labeling the parts that change helps us define the function:
+
+@show{(code '(define (nametag name) (text name 20 "blue")))}
+
+@slidebreak
+
+@QandA{
+@Q{If we wanted to make the letters smaller, what would need to change?}
+@A{We'd have to replace the `20` with something smaller}
+@Q{What if we wanted to that number to come from the age of `dog-row`?}
+@A{We'd have to replace the `20` with a lookup}
+}
+
+@slidebreak
+
+Rewriting the definition to lookup the value of `dog-row`'s age gives us the final code:
+
+```
+fun nametag(name): text("name", dog-row["age"], "blue") end
+```
+
+=== Investigate
+
+@lesson-instruction{
+- With your partner, complete the *first* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
+}
+
+@slidebreak
+
+In @lesson-link{functions-make-life-easier}, you defined a function called that took in a color and produced a solid circle of radius 100, of whatever color was passed in:
+
+@center{`fun bigc(color): circle(100, "solid", color) end`}
+
+@QandA{
+@Q{What needed to change about this function, to use the age of `old-row` as the size?}
+@A{The 100 needed to be replaced with a lookup, extracting `"age"` from `old-row`}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete the *second* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
+}
+
+@slidebreak
+
+You've already compared a string to a Row lookup. For example, we checked to see if the species of a row was `"cat"`:
+
+@center{`young-row["species"] == "cat"`}
+
+This is _another_ Row lookup, only this time we're comparing the string to the `"name"` column.
+
+@teacher{If necessary, review the solution for this function.}
+
+@slidebreak
+
+@lesson-instruction{
+- With your partner, complete the *last* challenge on @printable-exercise{functions-w-lookups.adoc}
+- When you're done, type it into your @starter-file{row-functions} and test it out!
+}
+
+@slidebreak
+
+This challenge was *very* different from the other two!
+
+@QandA{
+@Q{What are some ways this was different?}
+@A{The function consumed a row instead of a Number or String.}
+@A{The lookup happened on the input argument, instead of on the same row that never changes}
+}
+
+=== Synthesize
+
+We started programming by writing simple expressions over Numbers, Strings, and Images. Then we learned how to generalize those expressions into _functions._ Now that we know how to look up values from a Row, we can start generalizing expressions with Rows into _functions with Rows._
+
+- Now we can write functions that check if the species of a Row is a cat. This makes it easy to filter a table to show only the cats!
+- Now we can write functions that check if the age of a Row is greater than 10. This makes it easy to filter a table to show only the old animals!
+
+What are some other functions we can write, and how might we use them?

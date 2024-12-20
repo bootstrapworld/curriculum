@@ -13,7 +13,7 @@
 
 @keywords{ratio, proportion, coordinate plane, proportional, scaling}
 
-@add-to-lang{put-image}
+@add-to-lang{translate}
 
 [@lesson-intro-table]
 |===
@@ -21,9 +21,9 @@
 | Lesson Goals
 | Students will be able to:
 
-- Put one image on top of another, using the `put-image` function.
-- Decompose complex images into parts.
-- Combine and manipulate images to create more complex images.
+* Put one image on top of another, using the `translate` function.
+* Decompose complex images into parts.
+* Combine and manipulate images to create more complex images.
 
 | Student-facing Goals
 |
@@ -47,20 +47,20 @@
 
 |===
 
-== Putting Images Together @duration{20 minutes}
+== Putting Images Together
 
 === Overview
-Students learn about the `put-image` function, which uses coordinates to position one image on top of the other. Students think through what coordinates will place a solid red circle on top of a rectangular background, in a variety of different locations.
+Students learn about the `translate` function, which uses coordinates to position one image on top of the other. Students think through what coordinates will place a solid red circle on top of a rectangular background, in a variety of different locations.
 
 === Launch
 As you've already seen, `overlay` sticks two images together, so that the _center_ of the first image is placed exactly on top of the _center_ of the second image. But what if we want to put the dot somewhere besides the center?
 
-Instead of centering the top image on the bottom image, the `put-image` function specifies where on the bottom image to place the center of the top image.
+Instead of centering the top image on the bottom image, the `translate` function specifies where on the bottom image to place the center of the top image.
 
 @lesson-point{
 Think of the background image as a sheet of graph paper with the @vocab{origin} (0,0) in the bottom left corner.
 
-The numbers in `put-image` specify the point on the paper where the center of the top image should be placed.
+The numbers in `translate` specify the point on the paper where the center of the top image should be placed.
 }
 
 @slidebreak
@@ -80,7 +80,7 @@ The numbers in `put-image` specify the point on the paper where the center of th
 }
 
 === Investigate
-Let's apply what we just learned about `put-image` to getting the Japanese flag building correctly. 
+Let's apply what we just learned about `translate` to getting the Japanese flag building correctly.
 
 We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.  Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of _their own thinking_ for when they come back to their code another day.
 
@@ -94,7 +94,7 @@ Most professional programmers work with teams who need to be able to follow each
 
 @lesson-instruction{
 - Open the @starter-file{flags} and click "Run".
-- Turn to @printable-exercise{put-image-investigate.adoc} and complete the first section (titled Japan).
+- Turn to @printable-exercise{translate-investigate.adoc} and complete the first section (titled Japan).
 }
 
 @teacher{
@@ -103,9 +103,9 @@ For students who finish early, there is an optional extension activity in this s
 
 === Synthesize
 
-Could we completely replace `overlay` with `put-image`? Why or why not?
+Could we completely replace `overlay` with `translate`? Why or why not?
 
-== Transforming Shapes for Composition @duration{30 minutes}
+== Transforming Shapes for Composition
 
 === Overview
 Students will use proportional reasoning to determine what sizes various flag components should be and where to position them. The first starter file builds reasoning with classic three-stripe flag designs. The second starter file focuses on the Puerto Rican flag and will support students in understanding much more complex designs.
@@ -113,12 +113,12 @@ Students will use proportional reasoning to determine what sizes various flag co
 === Launch
 
 @lesson-instruction{
-- Open the @starter-file{flags-2} and click "Run".
-- Complete the second section of @printable-exercise{put-image-investigate.adoc}, titled The Netherlands.
+- Open the @starter-file{flags-NL-FR-MA} and click "Run".
+- Complete the second section of @printable-exercise{translate-investigate.adoc}, titled The Netherlands.
 - When you've answered all of the questions, continue working through the starter file.
 }
 
-@teacher{The primary goal of this file is for students to practice thinking about the dimensions of flag stripes as fractions of the full dimensions of the flag. There are many sections of this starter file, and some students will make it through the challenges. Some students may only complete one flag. All of them will be using their proportional reasoning, and synthesizing how to apply put-image to locate images on the coordinate grid.
+@teacher{The primary goal of this file is for students to practice thinking about the dimensions of flag stripes as fractions of the full dimensions of the flag. There are many sections of this starter file, and some students will make it through the challenges. Some students may only complete one flag. All of them will be using their proportional reasoning, and synthesizing how to apply `translate` to locate images on the coordinate grid.
 }
 
 === Investigate
@@ -140,7 +140,7 @@ Now that we've mastered the most basic flag forms, we're ready to tackle a more 
 
 Why is it useful to define each part of the flag first, before stitching the images together?
 
-== Decomposing Flags @duration{optional}
+== Decomposing Flags
 
 === Overview
 
@@ -156,7 +156,7 @@ For this activity, you will want to project the color version of @opt-printable-
 
 @lesson-instruction{
 - Turn to @opt-printable-exercise{decomposing-flags.adoc}. What do you Notice? What do you Wonder?
-- We are going to talk through how to fill in the table for the Cameroon flag. But, take a few minutes and see how much of this page you can complete on your own first. 
+- We are going to talk through how to fill in the table for the Cameroon flag. But, take a few minutes and see how much of this page you can complete on your own first.
 }
 
 === Investigate
@@ -168,7 +168,7 @@ For this activity, you will want to project the color version of @opt-printable-
 @Q{Let's complete the first row of the table focusing on the green rectangle.}
 @Q{How could we determine the width of the green rectangle?}
 @A{It's 1/3 the width of the whole flag so we need to divide 450 by 3 to get 150.}
-@A{Note: 150 is a pretty friendly number, but sometimes division results in long or repeating decimals, and it's a place where we humans might make mistakes. When we're writing code, we don't have to actually do the division. We can just code the division problem @show{(code '(/ 450 3))} and leave it for the computer to evaluate!} 
+@A{Note: 150 is a pretty friendly number, but sometimes division results in long or repeating decimals, and it's a place where we humans might make mistakes. When we're writing code, we don't have to actually do the division. We can just code the division problem @show{(code '(/ 450 3))} and leave it for the computer to evaluate!}
 
 @Q{How could we determine the height of the green rectangle?}
 @A{It's the same as the height of the flag, which is 300.}
@@ -207,9 +207,9 @@ Kids can instantly see if their ratios and proportions were correct... but actua
 
 == Additional Exercises
 
-- @opt-starter-file{flags-desmos} - Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `put-image`. 
+- @opt-starter-file{flags-desmos} - Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `translate`.
 
-- @opt-printable-exercise{alaska-flag.adoc} - This page engages students with the @opt-starter-file{flags-ak} for a quick dive into why it’s more efficient to @vocab{define} shapes before building the image. 
+- @opt-printable-exercise{alaska-flag.adoc} - This page engages students with the @opt-starter-file{flags-ak} for a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
 - @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics
 
@@ -223,7 +223,7 @@ Kids can instantly see if their ratios and proportions were correct... but actua
 @strategy{Why is it so Hard to Center a `star`?}{
 
 
-We can think about using `put-image` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's _center_. The same is true for squares, rectangles, and many other shapes.
+We can think about using `translate` the same way we think about making a collage: we "grab" an image by holding it at a specific point, then place it atop another image. For the red circle on @printable-exercise{japan-estimating-coordinates.adoc}, we are picking up the image by it's __center__. The same is true for squares, rectangles, and many other shapes.
 
 But not all shapes are so intuitive! Stars and triangles, for example, are not "grabbed" by their centers. Instead, they are "grabbed" by the center of their _bounding box_. A bounding box is the tightest possible rectangle that can be drawn around an image.
 

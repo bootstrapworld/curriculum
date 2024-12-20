@@ -440,10 +440,15 @@ always succeed in regenerating it. It's best to stick to deleting whole
 lessons or pathways.
 
 === Deployment
-
 (This section is relevant only to administrators.)
 
-After making the distribution, it may be deployed to the web host
+* You'll want sshpass in your environment to smooth the deployment process
+
+  - on Linux/WSL: `sudo apt-get install sshpass`
+  - on macOS: <Emmanuel, write this when someone needs it!>
+
+
+* After `make`-ing the distribution, it may be deployed to the web host
 using the `make` target `deploy`:
 
     make deploy
@@ -549,6 +554,33 @@ become. For now, we need a placeholder.)
 
 == Git basics
 
+=== Cloning the repo
+(This only works if you have been given access!)
+
+Clone the repo directly, then `cd` into the folder:
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+
+=== Creating your private branch in the original repo
+
+Alternatively -- and this will work only for greenlisted members
+-- clone the repo directly and add your own branch, e.g.,
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+  git checkout -b my-sandbox
+
+You can pull and merge from `master` as needed:
+
+  git checkout master
+  git pull
+  git checkout my-sandbox
+  git merge master
+
+If conflicts arise, you will be given a way to resolve them.
+
+=== Making a fork of the repo
 Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
 obvious buttons on the GitHub page.)
 
@@ -575,37 +607,38 @@ care about, before you attempt a merge. For changes you aren’t
 ready to check in, save the concerned files somewhere else, and
 make sure there are no “modified” files in your directory.
 
-=== Creating your private branch in the original repo
+== Setting up your environment
 
-Alternatively -- and this will work only for greenlisted members
--- clone the repo directly and add your own branch, e.g.,
+You will need a Unix-like environment to construct documents from this repo:
 
-  git clone https://github.com/bootstrapworld/curriculum
-  cd curriculum
-  git checkout -b my-sandbox
-
-You can pull and merge from `master` as needed:
-
-  git checkout master
-  git pull
-  git checkout my-sandbox
-  git merge master
-
-If conflicts arise, you will be given a way to resolve them.
-
-== Prerequisites
-
-The following is needed to construct documents from this repo:
-
-* A Unix-like environment.
   - If you're already on some flavor of unix, you're there! ✅
   - If you're on Windows, you'll want to install
     https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on MacOS, your environment is close but missing some unix tools. You'll want to install https://brew.sh/[Homebrew] first, then run the following command to add them:
-+
-  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman
+  - If you're on MacOS, your environment is close but missing some Unix tools. You'll want to install https://brew.sh/[Homebrew] first, * then follow the "Next Steps" directions Homebrew suggests.
 
-  - Mac users will also need to add these unix tools to their path. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
+The subsections that follow will walk you through installing the following tools:
+
+* Bash, which keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
+* `jq`, used for checking correctness of JSON files
+* Racket, to do pre-processing and other bookkeeping.
+* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
+* Lua, used for postprocessing.
+* Node, A javascript runtime used by the packages below.
+* NVM, or the "Node Version Manager". Allows us to use a specific version of Node.
+* Several Node packages:
+  - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
+  - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
+  - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
+  - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
+  - `mathjax`, which generates beautifully formatted math output
+
+=== In macOS...
+
+* Most packages can be installed via `brew`, with the following terminal command:
++
+  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
+
+* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
 +
   # add every gnu tool we have as a prefix to the path
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -614,51 +647,22 @@ The following is needed to construct documents from this repo:
     for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
   fi
 
-* Bash. Keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
+=== In Unix or WSL...
 
-* Racket, to do preprocessing and other bookkeeping. Any version should
-do. We're not using any bleeding-edge features of Racket. You'll want to
-https://download.racket-lang.org/[download and install DrRacket]
-and make sure the `racket` binary is in your `$PATH`.
+* Most packages can be installed via `sudo apt-get install`, with the following terminal command:
 +
-On systems with `apt` (Ubuntu, WSL), the easiest way to install the
-latest
-Racket is:
+  sudo apt-get install jq asciidoctor lua5.4 curl
++
+
+* To install Racket:
 +
   sudo apt-add-repository ppa:plt/racket
   sudo apt install racket
 +
-or
+
+* To install NVM:
 +
-  sudo snap install racket
-
-* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
-  - on Linux/WSL: `sudo apt-get install asciidoctor`
-  - on macOS: (already installed from the list of `brew` packages above)
-
-* Lua, used for postprocessing.
-  - on Linux/WSL: `sudo apt-get install lua5.4`
-  - on macOS: (already installed from the list of `brew` packages above)
-
-* Node. The standard Node offered view your OS's package manager may not
-  be right: To get finer control on the Node version:
-  - Install `nvm`, the Node Version Manager, by follow the instructions on
-    https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-    to install the Node Version Manager. (Use the `curl` as you've
-    already installed `curl`.)
-  - Do `nvm install 21` followed by `nvm use 21` to use version 21 - the most current version that we've confirmed works.
-  - Note: the node `canvas` package is extremely finicky with versions of node. If you are getting installation errors about `canvas` or `node-gyp`, call Emmanuel!
-
-* Several node packages *all of which are automatically installed by running `npm install`*. (Note: you will need to be running Node v21 or above!)
-  - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
-  - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
-  - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
-  - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
-  - `mathjax`, which generates beautifully formatted math output
-
-* sshpass (for deployment only)
-  - on Linux/WSL: `sudo apt-get install sshpass`
-  - on macOS: <insert>
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 == Authoring guidelines
 

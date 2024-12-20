@@ -1,0 +1,351 @@
+= Advanced Data Visualizations
+++++
+<style>
+.strategy-box { width: 100%; }
+
+.comparison * { font-size: 0.75rem !important; }
+.comparison td { background: #f7f7f8; padding: 0 !important; }
+.comparison .highlight { padding: 0 !important; }
+
+#content .forceShading { background-color: #f7f7f8; }
+</style>
+++++
+
+@description{Defining functions allows data scientists to create advanced data visualizations, which expose deeper insight into a dataset. This motivates students to define their own functions and deepen their analysis.}
+
+@lesson-prereqs{contracts-visualizations, functions-examples-definitions}
+
+@keywords{piecewise, piece-wise, scatter plot, histogram, bar chart, pie chart, bubble chart, scatter chart}
+
+@add-to-lang{image-scatter-plot, image-bar-chart, image-pie-chart, image-histogram}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+@objective{define functions that consume rows and produce meaningful images}
+@objective{Define custom pie and bar-charts, histograms, and scatter plots in Pyret.}
+
+| Student-facing Lesson Goals
+|
+- Let's explore new Pyret functions that let us make more interesting visualizations
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+- @lesson-link{project-beautiful-data}
+
+
+| Relevant Resources
+| - For those with time to spare, this  @link{https://www.YouTube.com/watch?v=yh5c3duQQ1w, 23-minute video from Stand-up Maths analyzes 4,678,387 NBA shots} to see what they can learn about 3-point shots over time. You'll see a wide range of advanced visualizations, including 3-dimensional graphs overlayed on the basketball court! (Note: The visualizations presented in this video are beyond what is possible in Pyret.)
+
+|===
+
+== Processing Rows with Functions
+
+=== Overview
+
+This section motivates the combination of function definition and column lookups, applying algebraic thinking to Data Science. Students review the concepts of column lookups and function definition by writing functions that consume rows and use the value of one column to create an image.
+
+=== Launch
+
+
+@center{@image{images/age-v-weeks-species-dot.png}}
+
+This is a scatter plot of the animals dataset, showing the age on the x-axis and the weeks spent at the shelter on the y-axis.
+
+@QandA{
+@Q{What is different about this visualization, from ones you've seen before?}
+@A{Sample responses: More colorful, prettier, pictures of animals, etc.}
+}
+
+@slidebreak
+
+@ifslide{@center{@image{images/age-v-weeks-species-dot.png}}
+}
+
+@QandA{
+This scatter plot isn't just _prettier_ - it's also more useful! Scatter plots typically only show two variables from each Row in the Table (the x and y), but this visualization is showing us _three_.
+@Q{What is the third column being visualized here?}
+@A{`species`}
+}
+
+@slidebreak
+
+To dig deeper into your data, sometimes you need to see more than 2 variables at once! By processing each Row separately, we can make use of all the columns we want to draw beautiful, creative, and insightful data visualizations. In this lesson, you'll learn how to do just that.
+
+But how do we process each Row separately? 
+
+- You've learned how to take a complex value like a Row, and lookup a column. We could write a line of code that does that for every Row in the table... but that would take a long time and would result in a LOT of code! 
+- You've also seen how to define functions that consume simple values, and _do all the repetitive work for us_. 
+
+Let's put those two concepts together, and define functions that consume Rows!
+
+=== Investigate
+
+@lesson-instruction{
+- Turn to @printable-exercise{age-bc.adoc}, and complete the top half of the page (questions 1 and 2).
+- Compare your answers to some other students'. If you each wrote down different answers, talk about what's different and what's the same.
+}
+
+@teacher{
+Note that the code for `age-bc` is just the function-version of the code students have already written in @lesson-link{lookups/pages/lookup-expressions.adoc}!
+
+Review student answers. Every student should have the same code for this part!
+}
+
+@slidebreak
+
+@lesson-instruction{
+- You could imagine doing this for every animal in the shelter, but that would be a lot of very repetitive work. This is exactly what functions are made for!
+- Open your saved Animals Starter File (or @starter-file{animals, "start a new one"}), and type the Contract, Examples, and Definition for `age-bc` into the Definitions Area.
+- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `cat-row`.
+}
+
+@teacher{Review the Contract, Examples and Definition with students, making sure to point out the connections between each representation!}
+
+@slidebreak
+
+@lesson-instruction{
+- Turn to @printable-exercise{species-tag.adoc}, and complete the top half of the page (questions 1 and 2).
+- When you are confident with the code you have written - check with your teacher or a partner - complete the rest of the page to define a function `species-tag`.
+- In your Animals Starter File, type the Contract, Examples, and Definition for `species-tag` into the Definitions Area.
+- Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `dog-row` and `cat-row`.
+}
+
+@teacher{
+Note that the code for `species-tag` is just the function-version of the code students have already written in @lesson-link{lookups/pages/lookup-expressions.adoc}!
+}
+
+=== Synthesize
+@QandA{
+@Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
+@A{What a function consumes is not the same as the _work the function does_. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.}
+@Q{How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?}
+@A{It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.}
+}
+
+
+== Image Scatter Plots
+
+=== Overview
+
+Students are introduced to @show{(code 'image-scatter-plot)}, which consumes a function and uses it to draw custom images in place of dots. Image scatter plots offer deeper insight into subgroups within a population, motivating students to define their own functions and deepen their analysis.
+
+*CS or Programming teachers take note:* `image-scatter-plot` is an example of a _higher order function_, or a function that consumes another function as its input. Curiosity and creativity combine to motivate more advanced programming.
+
+=== Launch
+
+@QandA{
+@Q{Do you think an animal's weight affects how long it stays at the shelter? Why or why not?}
+@A{Many apartment buildings have limits on how heavy a pet can be, which could make bigger animals harder to adopt.}
+}
+
+@slidebreak
+
+@lesson-instruction{If we're looking for a relationship between two variables, we know that we need a scatter plot! +
+Let's start out by making a scatter plot to look for a relationship between Pounds and Weeks.}
+
+@slidebreak
+
+@center{@image{images/pounds-v-weeks.png, 450}}
+
+@QandA{
+There seems to be a positive relationship, but it's not very strong.
+@Q{What other factors might influence how quickly an animal is adopted?}
+@A{Invite students to share their ideas and explain their rationale. Possible responses: Maybe fixed animals are adopted more quickly. Maybe some species are adopted more quickly. Maybe age plays a role...}
+}
+
+@slidebreak
+
+Let's say we want to consider the influence of *age* on how how quickly an animal is adopted - while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... _custom scatter plots!_
+
+=== Investigate
+
+@lesson-instruction{
+- Open the @starter-file{custom-scatter-plot}.
+- With a partner or in small groups, complete Numbers 1-7 on @printable-exercise{image-scatter-explore.adoc}.
+- Based on the work that you just completed, what is the Contract for `image-scatter-plot`?
+}
+
+@teacher{_Discuss as a class, or in small groups. See explanation, below, of the `image-scatter-plot` Contract._}
+
+@slidebreak
+
+The Contract for `image-scatter-plot` looks pretty different from other @dist-link{Contracts.shtml, Contracts} we've seen.
+
+@show{(contract 'image-scatter-plot '((t Table) (xs String) (ys String) (f "(Row -> Image)")) "Image")}
+
+This Domain is interesting: Table, String, String and...*a Function that consumes a Row and produces an Image!*
+
+@lesson-instruction{What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-bc.adoc}.}
+
+@slidebreak
+
+@lesson-instruction{
+Complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.}
+
+@teacher{Students will see the image below:}
+
+@ifnotslide{
+@center{@image{images/age-bc.png, 450}}
+}
+
+@lesson-instruction{Complete the bottom section of the page on *Understanding Custom Visualizations*.}
+
+@slidebreak
+
+@QandA{
+@Q{How did having the dots labeled with the _species_ change your understanding of the data?}
+@A{The `species-tag` @vocab{scatter plot} (below) makes it clear that we may want to analyze each species separately, rather than grouping them all together. (In the Grouped Samples lesson, students will learn how to do just that!)}
+}
+
+@center{@image{images/species-tag.png, 450}}
+
+@strategy{Custom Colors!}{
+
+
+We've created a special function called `make-color`, which allows students to mix their own colors!
+
+@show{(contract 'make-color '(("red" "Number") ("green" "Number") ("blue" "Number") ("opacity" "Number")) "Color")} 
+
+* Use Numbers between 0 and 255 to specify how much red, green, and blue to mix  
+* Use Numbers between 0-1 to specify percent opacity (0 for invisible, 1 for full color)
+
+For example, `star(50, "solid", make-color(100, 200, 0, 0.5))` +
+will generate a pale green star that's 50% transparent.
+
+By using row accessors to extract these values from their dataset, students can make custom scatter plots where each data point is represented by a shape whose color indicates something about the data!
+
+We could, for example, represent the Animals using the following code:
+`star(50, "solid", make-color(100, 0, r["pounds"], 0.5))` +
+
+
+- Which representation would be used for the heaviest animal: a red star, a purple star or a blue star?
+  * _Lightest would be red and heaviest would be blue, with purple landing in between!_
+}
+
+=== Synthesize
+@QandA{
+@Q{What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?}
+@A{Use legs and age to determine width and height of a rectangle}
+@A{Use different colors or shapes based on species, sex, or fixed-status}
+@Q{How are the charts produced by `image-scatter-plot` different from those produced by `scatter-plot`? Why do these differences exist? (Think about their Contracts!)}
+@A{`image-scatter-plot` consumes a function that can draw different dots depending on each Row in the dataset, along with information about which columns contain the x- and y-coordinates. In contrast, `scatter-plot` because it only consumes information about _where_ the dots are drawn, and not _how_ they are drawn.}
+@Q{How might image-scatter-plot be useful to your own analysis?}
+}
+
+== Piecewise/Conditional Functions
+
+=== Overview
+
+Students discover how to use @vocab{conditionals} - @vocab{piecewise functions} in math - to create more complex scatter plots, and also custom bar charts, pie charts, and histograms. Experimentation becomes the motivation for more practice with Row-consuming functions.
+
+*NOTE:* Math teachers may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not specifically a Data Science lesson, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics, with greater emphasis on the math connections.
+
+=== Launch
+So far, we've seen that...
+
+* the `scatter-plot` function makes uniform blue dots
+* the `image-scatter-plot` function can label each point with a custom image, computed by a helper function that consumes a Row and produces an Image
+
+How could we use _different color dots_ for each species? Or perhaps draw different shapes depending on whether an animal was fixed or not?
+
+This requires a more powerful kind of function, known in math as a @vocab{piecewise function} because it has more than one "piece". In programming, these are often called "conditional" functions, because each piece is used depending on which condition is met.
+
+=== Investigate
+
+@lesson-instruction{
+* Open the @starter-file{piecewise-visualizations}, save a copy, and click "Run".
+* Complete @printable-exercise{piecewise-explore.adoc}.
+* Can you come up with another piecewise function?
+}
+
+@slidebreak
+
+@QandA{
+@Q{What did the function produce for a dog Row?}
+@A{A black square}
+@Q{What did the function produce for a cat Row?}
+@A{An orange square}
+@Q{What happened when you took away the condition for snails?}
+@A{An error}
+}
+
+@ifnotslide{
+Piecewise functions are extremely powerful, allowing us to specify different rules for different inputs. But with great power comes great responsibility: if an input has no rule, the function will be undefined for that input! You've seen undefined behavior before, where division fails if the second input is zero. Removing the condition for snails, for example, created undefined behavior for all rows where the species is `"snail"`.
+}
+
+@teacher{
+CS/Programming teachers may find this to be a useful place to teach about `else:`, which is a catch-all rule for "any input that we don't already have a condition for". But beware! _Teaching kids to use `else:` without considering the input is a really bad programming habit!_
+
+Error messages tell us when something goes wrong. In the case of the animals starter file, we have a fixed, predefined number of species. Adding an `else` clause will prevent us from seeing any errors if there's a typo in one of the conditions, if an unexpected animal gets added to the dataset, etc. In situations like this, good programming practice demands a condition for each species, and no `else` clause.
+}
+
+@strategy{ Optional: When your conditional is _already_ a Boolean }{
+
+If you have time or students who are ready for a challenge, you can also have them make a scatter plot with dots distinguishing whether the animal is fixed or not using @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column!
+
+The following two functions _do the same thing_. Notice how much cleaner the second example is!
+
+[.comparison, cols="<1a", options="header"]
+|===
+| Checking the Boolean
+|
+
+```
+fun fixed-dot(r):
+  if      (r["fixed"] == true) : circle(5, "solid", "green")
+  else if (r["fixed"] == false): circle(5, "solid", "black")
+  end
+end
+```
+|===
+[.comparison, cols="<1a", options="header"]
+|===
+| Using the Boolean Directly
+|
+```
+fun fixed-dot(r):
+  if r["fixed"]: circle(5, "solid", "green")
+  else:          circle(5, "solid", "black")
+  end
+end
+```
+|===
+
+*For students who are really into graphics:* To take their data visualizations to the next level, have them check out @opt-starter-file{piecewise-animal-images} and @opt-printable-exercise{animal-image-explore.adoc}.
+
+*For students who are really ready for a programming challenge:* have them open @opt-starter-file{custom-scatter-plot-w-range} and complete @opt-printable-exercise{value-range-dot-explore.adoc}.
+
+}
+
+@slidebreak
+
+Pyret allows us to create advanced versions of several types of data visualizations!
+
+@show{(contracts
+  '("image-scatter-plot" ("Table" "String" "String" "(Row -> Image)") "Image")
+  '("image-histogram" ("Table" "String" "Number" "(Row -> Image)") "Image")
+  '("image-bar-chart" ("Table" "String" "(Row -> Image)") "Image")
+  '("image-pie-chart" ("Table" "String" "(Row -> Image)") "Image")
+)}
+
+@strategy{Optional Project: Beautiful Data}{
+
+
+Data Visualization is a growing and fascinating field. It's about more than making charts look cool - it's about connecting artistic expression to data in ways that are relevant and meaningful. @lesson-link{project-beautiful-data} gives students a chance to advance their programming skills by using code to add their own flair and style to data that matters to them.
+}
+
+
+=== Synthesize
+- How do piecewise functions expand what is possible for displaying data?
+- How could you see this power being used to help express complex relationships?

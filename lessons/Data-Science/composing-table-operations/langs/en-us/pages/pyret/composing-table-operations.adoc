@@ -28,15 +28,15 @@ _The table `t` below represents four animals from the shelter:_
 [.t, cols='5',options="header"]
 |===
 | name        | sex       | age   | fixed   | pounds
-| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`
+| `"Susie Q"` | `"female"`| `0.6` | `true`  | `54`
 | `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
 | `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
-| `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`
+| `"Rebel"`   | `"female"`| `0.3` | `false` | `4`
 |===
 
 ```
 fun is-fixed(r): r["fixed"]                 end
-fun is-young(r): r["age"] < 4               end
+fun is-young(r): r["age"] < 1               end
 fun nametag(r):  text(r["name"], 20, "red") end
 ```
 
@@ -45,7 +45,7 @@ Match each table description on the left, to the Circle of Evaluation that will 
 [.m, cols=">.^8a,^.^2a,4,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
 |===
 
-| A table containing only Toggle and Sasha
+| A table containing only Susie Q and Rebel
 |*@n*@ifsoln{D} ||*A*
 | @show{(coe exp1)}
 
@@ -61,11 +61,11 @@ Match each table description on the left, to the Circle of Evaluation that will 
 |*@n*@ifsoln{C} ||*D*
 | @show{(coe exp4)}
 
-| Produces a table containing Toggle and Sasha, in that order
+| Produces a table containing Susie Q and Rebel, in that order
 |*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
-| Produces a table containing Toggle, Fritz, and Nori
+| Produces a table containing Susie Q, Fritz, and Nori
 |*@n*@ifsoln{B} ||*F*
 | @show{(coe exp6)}
 

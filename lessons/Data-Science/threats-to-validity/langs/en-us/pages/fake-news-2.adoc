@@ -1,0 +1,33 @@
+= Fake News (2)
+
+++++
+<style>
+	img { max-width: 300px !important; }
+	table { height: 98%; }
+	td:nth-child(1) * { font-weight: bold; }
+	td:nth-child(2) * { font-style: italic; }
+	th { text-align: center !important; }
+</style>
+++++
+
+There are six separate, _unrelated_ claims below, and ALL OF THEM ARE WRONG! Your job is to figure out why by looking at the data.
+
+[.fakenews-table,cols="^.^1a,20a,20a",options="header"]
+|===
+|
+| The News Says...
+| Why it's Fake
+
+| @n
+| @centered-image{../images/wrong-scale.png} "Stocks fell off a cliff today, plummeting sharply. Some fear the economic unrest will lead to rioting and looting!"
+| @ifsoln{*Wrong scale!* The y-axis goes starts at 33840, not zero! That makes it look like the drop is huge, but it's only -0.78%!}
+
+| @n
+| @centered-image{../images/fake-news-bar.png} “According to this bar chart, Felix makes up a little more than 15% of the total ages of all the animals in the dataset.”
+| @ifsoln{*Incorrect Interpretation!* Bar charts show the absolute quantity for some category (in this case, the number of years for each animal). That means that Felix is *15 years old*, not that his age makes up 15% of the total ages!}
+
+| @n
+| @centered-image{../images/fake-news-hist.png} “According to this histogram, most animals weigh between 40 and 60 pounds.”
+| @ifsoln{*Incorrect Interpretation!* The 40-60 pound bin has more animals than any other bin, but it makes up only a small fraction of the whole.}
+
+|===

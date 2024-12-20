@@ -16,7 +16,7 @@ Students learn conditional expressions by writing a simple function
 
 |===
 
-== What to Wear @duration{20 minutes}
+== What to Wear
 
 === Overview
 Students are introduced to Pyret's `if-then-else` construct.
@@ -68,7 +68,7 @@ Another way to recognize a piecewise function when looking at your examples is t
 
 @teacher{This is an important point to review. Conditionals, or Piecewise functions, are a big moment in Bootstrap:Algebra, and the extension of the Design Recipe is key for students to design their own piecewise functions later on. In the next exercise, make sure they use the Recipe steps to remind them of the mechanics of this type of function.}
 
-== Where’s my Order? @duration{35 minutes}
+== Where’s my Order?
 
 === Overview
 Students connect conditional functions with behaviors in games, and write one from scratch.
@@ -110,7 +110,7 @@ Turn to @printable-exercise{bug-hunting.adoc}. In the left column, we’ve given
 === Synthesize
 These experiments show an important connection between functions that work with instances of a data structure, and the way we draw those instances. In our design for the animation, we have an understanding of what different regions of the screen mean. Here, we see that the draw-state and location functions both share this understanding to give consistent information about the animation.
 
-== Colorful Sun @duration{30 minutes}
+== Colorful Sun
 
 === Overview
 Students return to an animation they've created before, and enhance it by using conditionals.
@@ -158,12 +158,12 @@ How do we change `draw-state`? We can turn it into a piecewise function, and dra
 ```
 fun draw-state(a-sunset):
   if a-sunset.y < 150:
-    put-image(
-      rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-        200, 50,
-        put-image(circle(25, "solid", "yellow"),
-          a-sunset.x, a-sunset.y,
-          rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
+    translate(
+    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+              200, 50,
+              translate(circle(25, "solid", "yellow"),
+                        a-sunset.x, a-sunset.y,
+     rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
   else if a.sunset.y < 225:
     # same as above with "orange" as sun color
   else:
@@ -174,7 +174,7 @@ end
 
 @slidebreak
 
-Notice that this version contains three very similar calls to `put-image`. The _only_ thing that is different about these three calls is the color we use to draw the sun. Whenever you find yourself writing nearly-identical expressions multiple times, you should create another function that computes the piece that is different. You can then write the overall expression just once, calling the new function to handle the different part. Functions that handle one part of an overall computation are called @vocab{helper functions}.
+Notice that this version contains three very similar calls to `translate`. The _only_ thing that is different about these three calls is the color we use to draw the sun. Whenever you find yourself writing nearly-identical expressions multiple times, you should create another function that computes the piece that is different. You can then write the overall expression just once, calling the new function to handle the different part. Functions that handle one part of an overall computation are called @vocab{helper functions}.
 
 @slidebreak
 
@@ -182,11 +182,11 @@ Assume for the moment that we had written a helper function called `draw-sun` th
 
 ```
 fun draw-state(a-sunset):
-  put-image(
-    rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
-      200, 50,
-      put-image(draw-sun(a-sunset),
-        a-sunset.x, a-sunset.y,
+  translate(
+  rectangle(WIDTH, HORIZON-HEIGHT, "solid", "brown"),
+            200, 50,
+            translate(draw-sun(a-sunset),
+                      a-sunset.x, a-sunset.y,
         rectangle(WIDTH, HEIGHT, "solid", "light-blue")))
 end
 ```

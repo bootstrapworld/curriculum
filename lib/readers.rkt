@@ -8,6 +8,7 @@
   *make-read-group
   read-commaed-group
   ignorespaces
+  ignorespaces-peek-char
   process-as-many-pluses-as-possible
   process-passthrough-lines
   math-unicode-if-possible
@@ -159,6 +160,13 @@
       (when (char-whitespace? c)
         (read-char i)
         (loop)))))
+
+(define (ignorespaces-peek-char i)
+  (let loop ()
+    (let ([c (peek-char i)])
+      (cond [(eof-object? c) #\space]
+            [(char-whitespace? c) (read-char i) (loop)]
+            [else c]))))
 
 (define (process-as-many-pluses-as-possible i o)
   (display #\+ o)
@@ -328,7 +336,8 @@
            (apply string-append
              (map (lambda (c) (second (assoc c *superscriptables*))) ss-list))]
           [asciidoc?
-            (enclose-tag "sup" "" ss)]
+            (string-append
+              (enclose-tag "sup" "" ss) "&#x2009;")]
           [else
             (string-append "<sup>" ss "</sup>")])))
 
@@ -355,6 +364,9 @@
   ;(printf "doing math-unicode-if-possible ~s ~s\n" text asciidoc?)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
+             (regexp-match "\\\\textit" text)
+             (regexp-match "\\\\textbf" text)
+             (regexp-match "\\\\qquad" text)
              (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)

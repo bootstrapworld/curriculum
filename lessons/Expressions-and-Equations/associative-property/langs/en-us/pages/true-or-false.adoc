@@ -4,6 +4,10 @@
 <style>
 div.circleevalsexp { width: auto; }
 td > .content > .paragraph > * { vertical-align: middle; }
+
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
+
 </style>
 ++++
 
@@ -15,14 +19,19 @@ Is the equation represented by the two Circles of Evaluation true or false? Expl
 True or False? Explain
 | @n |@show{(coe '(* (* 8 9) 10))}	@math{=} @show{(coe '(* 8 (* 9 10)))}
 | @ifsoln{True. The groupings have changed in an expression with only multiplication.}
+
 | @n |@show{(coe '(- 5 (- 7 8)))}	@math{=} @show{(coe '(- (- 5 7) 8))}
 |@ifsoln{False. The Associative Property does not apply for subtraction.}
+
 | @n |@show{(coe '(* (* (* 78 15) 10) 6))}	@math{=} @show{(coe '(* (* 78 15) (* 10 6)))}
 | @ifsoln{True. The groupings have changed in an expression with only multiplication.}
+
 | @n |@show{(coe '(- 41 (* 32 63)))} @math{=} @show{(coe '(- (* 41 32) 63))}
 | @ifsoln{False. The expression includes subtraction and multiplication, so the Associative Property does not apply.}
+
 | @n |@show{(coe '(/ (* (* 8 9) 10) 6))}	@math{=} @show{(coe '(/ (* 8 (* 9 10)) 6 ))}
 | @ifsoln{True. Both expressions are being divided by 6. The Associative Property holds for expressions involving only multiplication.}
+
 | @n |@show{(coe '(- (+ (+ 4 19) 30) 2))}	@math{=} @show{(coe '(+ (+ 4 19) (- 30 2)))}
 | @ifsoln{False. The Associative Property does not apply to expressions with subtraction.}
 |===

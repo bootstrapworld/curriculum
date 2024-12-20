@@ -1,0 +1,218 @@
+= Variability
+
+@description{Students define variability multiple ways, and then describe different levels of variability on dot plots.}
+
+@ifproglang{pyret}{
+@lesson-prereqs{contracts-tables, contracts-visualizations, ds-intro, dot-plots}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-dot-plots-bar-charts}
+}
+
+@keywords{variability}
+
+@add-to-lang{histogram}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+
+| Student-facing Lesson Goals
+|
+
+- Let's think about variability of categorical and quantitative data.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+
+
+|===
+
+
+
+== Variability Two Ways
+
+@objective{variability-define}
+
+=== Overview
+
+Students define variability two ways, and then apply that understanding to describe the variability of categorical and quantitative data.
+
+=== Launch
+
+In our discussion of @lesson-link{dot-plots}, we learned to describe the distribution of a dataset in terms of outliers, clusters, peaks, and gaps. We also considered what's typical -- or expected -- in the data. This lesson focuses on another way to describe a dataset, its @vocab{variability}.
+
+@vocab{Statistical questions} are questions that anticipate @vocab{variability}.
+
+@teacher{Students should already be familiar with statistical questions from @lesson-link{data-cycle}.}
+
+@QandA{
+
+@Q{Which question anticipates variability: _How many minutes are in an hour?_ or _How many minutes does it take to get to school?_ Explain your response.}
+@A{Question B anticipates variability. The time it takes to drive to school will vary based on who you ask, where they live, mode of transportation, time of day, road conditions, traffic, etc.}
+
+@A{The answer to Question A will always be 60.}
+}
+
+@strategy{There are Many Ways to Think about Variability!}{
+
+Research indicates that students often have an oversimplified and underdeveloped view of variability (@citation{cooper-2018}; @citation{cooper-shore-2008}).
+
+In this lesson, we intentionally begin our conversation by developing intuitive ideas about variability, for instance:
+
+- Variability requires us to consider the data as an entity, rather than as individual points.
+- We can try to understand why things vary and try to identify reasons for variability.
+- Some things vary a little, and some vary a lot.
+- We see variability in both quantitative and categorical datasets.
+
+This last recommendation is an important one: research indicates that it is more natural to understand how like or unlike categorical data is than it is to understand variation about the mean (@citation{kade-perry-2007}), therefore reasoning about variability in categorical datasets can act as a natural starting point.
+
+That said, we urge you to explicitly emphasize that how alike or different the data points are is just one of many ways to think about variability. Fixating on this definition of variability can result in students developing the common misconception that levelness of histogram bars indicates low variability (@citation{cooper-shore-2008}).
+}
+
+
+=== Investigate
+
+In a categorical dataset, we can judge variability based on how different or alike the data points are.
+Let's think about the variability of some categorical datasets.
+
+@QandA{
+
+Complete the first section of questions on @printable-exercise{variability-two-ways.adoc}. Then we'll pause to discuss them as a class.
+
+@Q{In Sana's grocery bag, she has 12 apples and 1 banana.
+In Juliette's grocery bag, she has 4 peaches, 4 kiwis, 4 oranges, and 1 limes.
+Which dataset - Sana's groceries or Juliette's groceries - has greater variability?
+}
+
+@A{Sample response: Juliette's grocery bag has greater variability, as the items in her bag are more different from one another than the items in Sana's bag. If students are inclined to consider the amount of each item, remind them that this is a categorical dataset.
+}
+
+@Q{You ask a group of sixth grade students to respond to two different statements with either "true" or "false." Statement A is _I am in sixth grade_, and statement B is _I am wearing blue today._ Which statement do you predict will produce greater variability?
+}
+
+@A{Sample response: Given that the students you are sampling are in sixth grade, there will not be any variability in their responses to statement A. Everyone will choose "true". For statement B, however, we expect variability, because it is likely that some students will be wearing blue and some will not".
+}
+}
+
+@slidebreak
+
+@lesson-instruction{
+Complete @printable-exercise{variability-two-ways.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+
+@Q{Do you agree or disagree that students in our class generally have the same number of letters in our first name?
+}
+@A{Sample response: I disagree. The data spreads out from 3 letters to 14 letters. If all students had the generally same number of letters in their names, most or all of name lengths would be equivalent.
+}
+
+@Q{Which dataset do you predict will have greater variability for a group of ninth graders who attend the same school - Wake-up times on Wednesday or Saturday?
+}
+@A{Sample response: Saturday wake-up times probably has greater variability. On a school day, everyone needs to wake up in time to get to school, but on Saturday, some students may choose to sleep in later.
+}
+}
+
+@teacher{
+
+Students often believe that variability can be judged based solely on the *range* of a dataset (@citation{cooper-shore-2008}). Although we will focus on range for the remainder of this lesson, acknowledge to students that there are *many* other ways to quantify variability. The dialogue about variability that begins in this lesson will continue (and gain nuance) during our lessons on @lesson-link{histograms-visualize}, @lesson-link{box-plots}, and  @lesson-link{standard-deviation}.
+}
+
+=== Synthesize
+
+@teacher{Before facilitating a whole class discussion, you might want to have students exchange the datasets they made on the third section of @printable-exercise{variability-two-ways.adoc} with a partner and discuss their strategies for determining the variability of each dataset.}
+
+@QandA{
+
+@Q{How did your strategies for assessing variability change, if at all, when you looked at a categorical dataset versus a quantitative dataset?}
+
+@Q{If two datasets have the same range, how can we decide which one has greater variability?}
+@A{Although students will probably *not* be able to answer this question concretely (e.g. use interquartile range, mean absolute deviation, or standard deviation), it is a good opportunity to see if they are developing intuition about variability as deviation from the center. You can invite students to share, and then reveal that they will uncover the answers to this question later!}
+
+}
+
+== Visualizing Variability with Dot Plots
+
+@objective{variability-describe}
+
+
+=== Overview
+
+Students connect dot plots to different scenarios based on the variability. They learn how to create dot plots in @proglang to investigate the distribution of data in dot plots.
+
+
+=== Launch
+
+Let's investigate how different levels of variability appear on dot plots.
+
+@lesson-instruction{
+- The person who created the dot plots on @printable-exercise{variability-of-dot-plots.adoc} forgot to label them.
+- To complete the page: Fill in the blanks in the first column with either "A" (if the description matches dot plot A) or "B" (if the description matches dot plot B), then explain your choice in the last column.
+}
+
+@QandA{
+
+@Q{What strategies did you use to match labels with dot plots?}
+@A{Possible responses: I considered the range of the data; I asked myself which scenario would produce data with greater variability; I envisioned in my head what the dot plot would look like, etc.}
+
+@Q{Can you think of any similar pairs of datasets that would produce dot plots with differing levels of variability?}
+@A{Possible responses: minutes 9 year-olds spend talking on the phone versus minutes 18 year-olds spend talking on the phone; time to run a mile for professional athletes versus a group of high school students; etc.}
+}
+
+
+=== Investigate
+
+The folks at the animal shelter want to approximate the amount of food they need to purchase for the coming month. They know there is a relationship between an animal's weight and how much it eats, so they are discussing the distribution of animals' weights.
+
+@lesson-instruction{
+- With a partner, complete the first section of @printable-exercise{animal-weight-variability.adoc}.
+}
+
+@teacher{
+Review students' responses, first ensuring that students are able to estimate what's typical in a dataset (question 1).}
+
+@QandA{
+@Q{How did you decide what species has the greatest and least variability?}
+@A{Responses will vary. Ideally, students are thinking about the possible weight range for each animal, recognizing that there are some extremely large breeds of dogs, but that most tarantulas are generally the same size.}
+
+@Q{How did you describe the distribution of dogs' weights?}
+@A{Responses will vary. Students should acknowledge that a peak exists at approximately 55 pounds, and that there is a gap between the cluster of light- to mid-weight dogs and the few very heavy outliers.}
+}
+
+It's time to make dot plots in @proglang!
+
+@ifproglang{pyret}{
+Here is the contract for creating a dot plot in Pyret:
+
+@show{(contract 'dot-plot '((table-name Table) (labels String) (column-name String)) "Image")}
+}
+
+
+@lesson-instruction{
+- Open the @starter-file{expanded-animals-sub-pops} and click "Run".
+- Use it to complete the second section of @printable-exercise{animal-weight-variability.adoc}, making dot plots for each species in @proglang and responding to the prompts on the table.
+}
+
+@teacher{
+We've defined some helper functions in rows 15-18 of the @starter-file{expanded-animals-sub-pops}. Interested students can learn more about helper functions during @lesson-link{filtering-and-building}. Students need not develop a strong understanding of helper functions to complete the activities in this lesson.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{You've been asked to estimate what's typical of a dataset several times. How do you think the variability of a dataset affects typicality?}
+
+@A{When a dataset is highly variable, the spread is wide and there is a greater likelihood that there are outliers; both of these affect typicality. For instance, a high outlier on the right increases what's typical. If there is low variability, it is generally easier to predict what is typical. If there is *no* variability, we know what is typical because the dataset contains only a single value.}
+
+}

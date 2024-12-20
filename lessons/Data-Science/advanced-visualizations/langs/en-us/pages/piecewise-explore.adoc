@@ -1,0 +1,51 @@
+= Exploring Conditional / Piecewise Functions
+
+Here's an example of a piecewise function with 3 "pieces" (or "conditions"):
+```
+# species-dot :: (Row) -> Image
+fun species-dot(r):
+  if      (r["species"] == "dog"):       square(5, "solid", "black")
+  else if (r["species"] == "cat"):       square(5, "solid", "orange")
+  else if (r["species"] == "lizard"):    square(5, "solid", "green")
+  end
+end
+```
+
+[.FillVerticalSpace, cols="^1,^1", options="header"]
+|===
+| *What do you Notice about this code?* | What do you Wonder?
+|                                       |
+|===
+
+
+@n What will this function produce for a dog? @fitb{}{@ifsoln{a solid, 5px, black square}}
+
+@n What will this function produce for a cat? @fitb{}{@ifsoln{a solid, 5px, orange square}}
+
+@vspace{1ex}
+
+*Open the @starter-file{piecewise-visualizations}, and click "Run".*
+
+@n Compare the regular scatter plot with the image scatter plot. What can you see now that you couldn't see before?
+
+@fitb{}{@ifsoln{Weight is VERY skewed based on species. The dogs are overwhelmingly the heaviest!}}
+
+@fitb{}{}
+
+@n Compare the regular histogram with the image histogram. What can you see now that you couldn't see before?
+
+@fitb{}{@ifsoln{Many of the animals weighing between 0 and 10 pounds are cats. }}
+
+@fitb{}{}
+
+@n What do you think will happen if we run the function on a species that it has no condition for? @fitb{}{@ifsoln{An error}}
+
+@n *On line 45, add a comment (`#`) to "turn off" the condition for snails.* Click Run and test your prediction. In your own words, describe how piecewise / conditional functions work.
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@star @opt{Make a *new function* (don't delete `species-dot`!), which uses piecewise functions to draw something different! For example, have it draw different shapes depending on whether an animal is younger than 3 years old or not.}

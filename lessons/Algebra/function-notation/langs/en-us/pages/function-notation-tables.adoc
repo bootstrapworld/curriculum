@@ -1,8 +1,13 @@
 = Function Notation - Tables
 ++++
 <style>
-td, th { padding: 4px !important; }
+.pyret-table td, th { padding: 4px !important; }
 table table { margin: 3ex auto !important; max-width: 140px !important; }
+td .autonum:after { content: ")  " !important; white-space: pre; }
+
+/* Add a horizontal padding to all the cells...except the 3n+1s */
+table tr td { padding: 0px 15px !important; }
+tr:nth-child(3n+1) td { padding: unset; }
 </style>
 ++++
 
@@ -10,7 +15,7 @@ Find the values described by the expressions below each table.
 
 _Note: not all of the relationships here are actually functions! - if you see a non-function, just put a big X through it!_
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a", grid="none", frame="none", stripes="none"]
+[.FillVerticalSpace, cols=".^1a,.^1a,.^1a,.^1a", grid="none", frame="none", stripes="none"]
 |===
 |
 [.pyret-table,cols="^1,^1",options="header"]
@@ -52,15 +57,15 @@ _Note: not all of the relationships here are actually functions! - if you see a 
 ! 1 ! 3
 ! 1 ! 4
 !===
-| @math{f(3) =} @fitb{10em}{6}
-| @math{g(1) =} @fitb{10em}{@ifsoln{@math{4}}}
-| @math{h(0) =} @fitb{10em}{@ifsoln{@math{2}}}
-| @math{y(1) =} @fitb{10em}{@ifsoln{0? 1? 2? 3?}}
+| @n @math{f(3) =} @fitb{}{6} +
+  @n @math{f(4) =} @fitb{}{@ifsoln{X}}
+| @n @math{g(1) =} @fitb{}{@ifsoln{@math{4}}} +
+  @n @math{g(3) =} @fitb{}{@ifsoln{X}}
+| @n @math{h(0) =} @fitb{}{@ifsoln{@math{2}}} +
+  @n @math{h(3) =} @fitb{}{@ifsoln{X}}
+| @n @math{y(1) =} @fitb{}{@ifsoln{0? 1? 2? 3?}} +
+  @n @math{y(8) =} @fitb{}{@ifsoln{X}}
 
-| @math{f(4) =} @fitb{10em}{@ifsoln{X}}
-| @math{g(3) =} @fitb{10em}{@ifsoln{X}}
-| @math{h(3) =} @fitb{10em}{@ifsoln{X}}
-| @math{y(8) =} @fitb{10em}{@ifsoln{X}}
 
 |
 [.pyret-table,cols="^1,^1",options="header"]
@@ -102,15 +107,14 @@ _Note: not all of the relationships here are actually functions! - if you see a 
 ! 3 ! 6
 ! 4 ! 8
 !===
-|@math{b(-1) =} @fitb{10em}{@ifsoln{@math{1}}}
-| @math{d(2) =} @fitb{10em}{@ifsoln{@math{5}}}
-| @math{m(0) =} @fitb{10em}{@ifsoln{@math{0}}}
-| @math{p(1) =} @fitb{10em}{@ifsoln{@math{2}}}
-
-|@math{b(0) =} @fitb{10em}{@ifsoln{@math{2}}}
-| @math{d(4) =} @fitb{10em}{@ifsoln{@math{5}}}
-| @math{m(-3) =} @fitb{10em}{@ifsoln{@math{-3}}}
-| @math{p(2) =} @fitb{10em}{@ifsoln{@math{4}}}
+| @n @math{b(-1) =} @fitb{}{@ifsoln{@math{1}}} +
+  @n @math{b(0) =} @fitb{}{@ifsoln{@math{2}}}
+| @n @math{d(2) =} @fitb{}{@ifsoln{@math{5}}} +
+  @n @math{d(4) =} @fitb{}{@ifsoln{@math{5}}}
+| @n @math{m(0) =} @fitb{}{@ifsoln{@math{0}}} +
+  @n @math{m(-3) =} @fitb{}{@ifsoln{@math{-3}}}
+| @n @math{p(1) =} @fitb{}{@ifsoln{@math{2}}} +
+  @n @math{p(2) =} @fitb{}{@ifsoln{@math{4}}}
 
 |
 [.pyret-table,cols="^1,^1",options="header"]
@@ -152,13 +156,12 @@ _Note: not all of the relationships here are actually functions! - if you see a 
 ! 17 ! 16
 ! 5  ! 5
 !===
-|@math{r(-1) =} @fitb{10em}{@ifsoln{@math{2}}}
-| @math{v(11) =} @fitb{10em}{@ifsoln{@math{25}}}
-| @math{z(6) =} @fitb{10em}{@ifsoln{@math{5}}}
-| @math{l(10) =} @fitb{10em}{@ifsoln{@math{9}}}
-
-|@math{r(8) =} @fitb{10em}{@ifsoln{@math{6}}}
-| @math{v(14) =} @fitb{10em}{@ifsoln{@math{85}}}
-| @math{z(2) =} @fitb{10em}{@ifsoln{@math{undefined}}}
-| @math{l(3) =} @fitb{10em}{@ifsoln{@math{2}}}
+| @n @math{r(-1) =} @fitb{}{@ifsoln{@math{2}}} +
+  @n @math{r(8) =} @fitb{}{@ifsoln{@math{6}}}
+| @n @math{v(11) =} @fitb{}{@ifsoln{@math{25}}} +
+  @n @math{v(14) =} @fitb{}{@ifsoln{@math{85}}}
+| @n @math{z(6) =} @fitb{}{@ifsoln{@math{5}}} +
+  @n @math{z(2) =} @fitb{}{@ifsoln{@math{undefined}}}
+| @n @math{l(10) =} @fitb{}{@ifsoln{@math{9}}} +
+  @n @math{l(3) =} @fitb{}{@ifsoln{@math{2}}}
 |===

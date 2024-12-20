@@ -1,4 +1,4 @@
-= Summarizing Columns with Measures of Center
+= Choosing the Best Measure of Center
 
 ++++
 <style>
@@ -10,9 +10,7 @@ h2, h2 .fitb { padding-top: 0.5rem; line-height: 1.5em; }
 </style>
 ++++
 
-== Summarizing the `Pounds` Column
-
-Find the measures of center to summarize the @fitb{20ex}{pounds} column of the @starter-file{animals}.
+@link-instructions{Find the measures of center to summarize the `pounds` column of the @starter-file{animals}, then respond to the prompts.}
 
 @n The three measures of center for this column are:
 
@@ -29,45 +27,45 @@ Find the measures of center to summarize the @fitb{20ex}{pounds} column of the @
 | @ifsoln{approx. 39.7} | @ifsoln{11.3} | @ifsoln{[list: 0.1, 6.5]}
 |===
 
+
+@n If we scan the dataset, we can quickly see that *most* of the animals weigh less than the mean weight. Why is the average so high? @fitb{}{@ifsoln{Kujo and Mr. Peanutbutter! Their weights skew the average.}}
+
+@fitb{}{}
+
+@n Referring to the pounds column of the Animals dataset, fill in the blanks:
+
+- Outliers on the right pull the mean the right, causing the mean to be @fitbruby{25ex}{@ifsoln{greater than}}{greater than / less than} the median. When the mean is greater than the median, the shape of the data is @fitbruby{25ex}{@ifsoln{skewed right}}{skewed right / skewed left }.
+
+- Outliers on the left pull the mean to the left, causing the mean to be @fitbruby{25ex}{@ifsoln{less than}}{greater than / less than} the median. When the mean is less than the median, the shape of the data is @fitbruby{25ex}{@ifsoln{skewed left}}{skewed right / skewed left }.
+
+
+
+@n In the dot plot below, identify which line is the median and which is the mode. (You can refer to the table at the top of the page.) Label the lines.
+
+@center{@image{../images/num-line-pounds2.png, 400}}
+
+- Which has more data clustered quite close to it, the median or the mean? @fitb{}{@ifsoln{median}}
+- Which do you think better represents the data, the median or the mean? Why? @fitb{}{@ifsoln{The median is more appropriate;}}
+
+@fitb{}{@ifsoln{high outliers are pulling the mean to be higher than what is typical.}}
+
+@n What did you learn from calculating the mode? @fitb{}{@ifsoln{The most common animal weights are 0.1 and 6.5!}}
+
+@fitb{}{@ifsoln{That's well below our mean and even our median, which is further evidence of outliers or skewness.}}
+
+@ifproglang{pyret}{
+@n In the Interactions area of the @starter-file{animals}, type `modes(animals-table, "species")`. What does Pyret return? @fitb{}{@ifsoln{[list: "dog"]}}
+}
+
+@n Are there any measures of center that we can use for categorical data? @fitb{}{@ifsoln{Yes, mode!}}
+
+@n For which quantitative column(s) in the animals table do you think the modes might be a good measure of center? Why? @fitb{}{}
+
+@fitb{}{@ifsoln{Legs, because there aren't very many values to choose from. We can also find the mode of categorical columns, such as species.}}
+
+
 @n To take the average of a column, we add all the numbers in that column and divide by the number of rows. Will that work for every column?
 
-@fitb{}{@ifsoln{No! We can only find the average of @vocab{quantitative} data.For example, the mean of a list of Presidents doesn’t make sense.}}
+@fitb{}{@ifsoln{No! We can only find the average of @vocab{quantitative} data. For example, the mean of a list of Presidents doesn't make sense.}}
 
-@fitb{}{@ifsoln{Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn’t correspond to some “center” zip code.}}
-
-@n The mean is @fitbruby{25ex}{@ifsoln{higher than}}{higher than/lower than/about equal to} the median, which suggests the shape is @fitbruby{45ex}{@ifsoln{skewed right}}{skewed right (high outliers) / skewed left (low outliers) / symmetric}.
-
-@n Which do you think is the most useful measure for this column of data? Why? @fitb{}{@ifsoln{The median is}}
-
-@fitb{}{@ifsoln{because there are likely high outliers pulling the mean to be higher than what's typical}}
-
-@star For which column(s) in the animals table do you think the modes might be a good measure of center? Why? 
-
-@fitb{}{@ifsoln{Legs! Because there aren't very many values to choose from.}}
-
-== Summarizing the @fitb{20ex}{} Column
-
-Find the measures of center to summarize the @fitbruby{20ex}{}{a column of your choosing!} column of the @starter-file{animals}.
-
-The three measures of center for this column are:
-
-[cols="^1a,^1a,^1a",options="header"]
-|===
-| Mean (Average) 		| Median 		 | Mode(s)
-| 						| 				 | 
-|===
-
-The mean is @fitbruby{25ex}{}{higher than/lower than/about equal to} the median, which suggests the shape is @fitbruby{45ex}{}{skewed right (high outliers) / skewed left (low outliers) / symmetric}.
-
-@star Four animals weighing 5, 5, 10, and 100 pounds will have an average mean of 30 pounds. +
-@hspace{3em}(_because_ @math{5 + 5 + 10 + 100 = 120} _and_ @math{120 \div 4 = 30}) 
-
-@vspace{1ex}
-
-Can you think of another set of four animals that would have the same average? How many sets can you come up with?
-
-@fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
+@fitb{}{@ifsoln{Same thing for a list of zip codes: even though we can divide a sum of zip codes, the output doesn't correspond to some “center” zip code.}}

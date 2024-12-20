@@ -1,0 +1,64 @@
+= age-bc
+
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+@include{fragments/baby-dr-styling.adoc}
+
+@n Write the code to lookup the value of the `age` column for each of the rows listed (the first one has been completed for you).
+
+[cols="1a,4a", options="header"]
+|===
+| row           | code to lookup the value of the `age` column
+| `dog-row`     | `dog-row["age"]`
+| `old-row`     | @ifsoln{`old-row["age"]`}
+| `young-row`   | @ifsoln{`young-row["age"]`}
+|===
+
+@n Write the code that uses the `circle` function to draw a solid, blue circle whose radius is the _age of the animal_ for each of the rows listed (the first one has been completed for you).
+
+[cols="1a,4a", options="header"]
+|===
+| row           | code to draw a circle using the "age" of the row as the radius
+| `dog-row`     | `circle(dog-row["age"], "solid", "blue")`
+| `old-row`     | @ifsoln{`circle(old-row["age"], "solid", "blue")`}
+| `young-row`   | @ifsoln{`circle(young-row["age"], "solid", "blue")`}
+|===
+
+@n Check with your partner or another student to confirm that your code matches.
+
+@vspace{2ex}
+
+[.big]
+@center{_Instead of writing repetitive code like this over and over for each animal, let's define a function to do it for us!_}
+
+@vspace{1ex}
+
+== Defining the Function
+
+@design-recipe-exercise{ "age-bc"
+"Define a function called @funname, which takes in a row from the Animals Table and draws a solid, blue circle whose radius is the age of the animal. _HINT: Use the rows from above in your examples!_"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #t
+#:range "Image"
+#:show-range? #t
+#:purpose "Consumes an animal Row, and draws a solid blue circle using the age as the radius."
+#:show-purpose? #f
+#:num-examples 2
+#:example-list '((dog-row "circle(dog-row[\"age\"], \"solid\", \"blue\")")
+                 (old-row "circle(old-row[\"age\"], \"solid\", \"blue\")"))
+#:show-examples '(#f #f)
+#:param-list '(r)
+#:show-funname-defn? #t
+#:show-params? #f
+#:body "circle(r[\"age\"], \"solid\", \"blue\")"
+#:show-body? #f
+#:grid-lines? #f
+}

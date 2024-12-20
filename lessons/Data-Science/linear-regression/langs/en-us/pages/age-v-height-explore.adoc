@@ -2,8 +2,9 @@
 
 ++++
 <style>
-td { padding: 2ex !important; }
+td { padding: 1.75ex !important; }
 td p { margin: 0; }
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after { padding-top: 1.1rem; }
 </style>
 ++++
 
@@ -34,13 +35,13 @@ Open the @opt-starter-file{height} and click "Run" to interact with data from an
 
 [cols="^.^1,^.^1,^.^1,^.^1", options="header"]
 |===
-| Sample 	| rate of change 		| y-intercept			| R value
+| Sample 	| Rate of change 		| y-intercept			| R value
 | All		| @ifsoln{3.097}		| @ifsoln{26.189} 		| @ifsoln{+0.916}
 | Females	| @ifsoln{3.642}		| @ifsoln{22.250} 		| @ifsoln{+0.948}
 | Males		| @ifsoln{2.687}		| @ifsoln{29.230} 		| @ifsoln{+0.919}
 |=== 
 
-@n What makes it difficult to compare these plots visually?
+@n What makes it difficult to compare these visualizations?
 
 @fitb{}{ @ifsoln{The axes are labelled differently} }
 
@@ -56,14 +57,14 @@ Rebuild @show{(code '(lr-plot (filter h-table is-f) "gender-id" "age" "height"))
 |===
 Then, do the same for @show{(code '(lr-plot (filter h-table is-m) "gender-id" "age" "height"))}.
 
-@n How do the plots compare now that their windows match?
+@n How do these visualizations compare now that their windows match?
 
 @fitb{}{@ifsoln{Answers will vary. The girls seem to be growing faster.}}
 
-@fitb{}{@ifsoln{The dots stray farther from the predictor line on the plot that includes all students.}}
+@fitb{}{@ifsoln{The dots stray farther from the predictor line on the `lr-plot` that includes all students.}}
 
 @n What happens if you compare the students' height in inches to their height in centimeters by plotting @show{(code '(lr-plot h-table "gender-id" "height-cm" "height"))}?
 
 @fitb{}{@ifsoln{All of the dots fall on the predictor line and the r-value is 1!}}
 
-@fitb{}{@ifsoln{(This is because someone's height in inches correspods exactly to their height in centimeters.)}}
+@fitb{}{@ifsoln{(This is because someone's height in inches corresponds exactly to their height in centimeters.)}}

@@ -1,0 +1,82 @@
+= From Lines to Functions
+
+== Defining a Function from Two Points
+
+@n The scatter plot displays the relationship between clownfish age and adoption time in weeks. Identify the coordinates of the data points.
+
+[cols="5a,1,5a", grid="none", frame="none", stripes="none"]
+|===
+^|@image{../images/clownfish-age-weeks.png,250}
+|
+.^|
+1st point: (@fitbruby{2em}{@ifsoln{4}}{x~1~}, @fitbruby{2em}{@ifsoln{1}}{y~1~})
+@hspace{5em}
+
+@vspace{1ex}
+
+2nd point: (@fitbruby{2em}{@ifsoln{5}}{x~2~}, @fitbruby{2em}{@ifsoln{4}}{y~2~})
+
+|===
+
+@n We want to understand how change (@math{\Delta}) in the @fitbruby{4em}{`age`}{x-value} of the clownfish relates to the change (@math{\Delta}) in their @fitbruby{13em}{adoption time in `weeks`}{y-value}. 
+
+[.indentedpara]
+--
+Compute the @vocab{slope} (rate of change) between the points: @math{\frac{\Delta \mbox{y}}{\Delta \mbox{x}} =} @math{\frac{y&#8322; - y&#8321;}{x&#8322; - x&#8321;} =} @ifnotsoln{@math{\frac{\qquad}{\qquad} } } @ifsoln{@math{\frac{3}{1} = 3}} +
+_Based solely on data from these two clownfish, an increase in age of @fitbruby{3em}{@ifsoln{1}}{&#916; year(s)} predicts an increase of @fitbruby{3em}{@ifsoln{3}}{&#916; weeks} in adoption time._
+
+--
+
+@n Now, use @vocab{slope-intercept form} (@math{y = mx + b}) to calculate the @vocab{y-intercept} (vertical shift) of the line passing through the two points.
+
+@vspace{1ex}
+
+[.indentedpara]
+--
+_Hint: Fill in the blanks for @math{y} and @math{x} below with the coordinates of the first point. Then use the slope we just calculate for @math{m}. Finally, solve for @math{b}._
+
+@fitbruby{10em}{@ifsoln{1}}{y} @math{=} @fitbruby{10em}{@ifsoln{3}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{4}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
+
+--
+@vspace{4ex}
+
+@n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
+
+@indented{
+@math{\textit{clownfish}(x) =} @fitbruby{4em}{@ifsoln{3}}{slope (m)}x + @fitbruby{11em}{@ifsoln{-11}}{y-intercept / vertical shift} @hspace{3em} @show{(code '(define (clownfish x) (+ (* (?ANS 3) x) (?ANS -11))))}
+}
+
+@vspace{1ex}
+
+== Define a Function for Your Lizard Line
+
+@n Refer to the line you drew on @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} to show the relationship you saw between the lizards' weight in `pounds` and adoption time in `weeks`. Identify two points that could be used to define the line (the points do not have to be dots from the scatter plot itself).
+
+@indented{
+First point: (@fitbruby{2em}{}{x~1~}, @fitbruby{2em}{}{y~1~}) 
+@hspace{5em} 
+Second point: (@fitbruby{2em}{}{x~2~}, @fitbruby{2em}{}{y~2~})
+}
+
+@n Compute the @vocab{slope} (rate of change) between the points: @math{\frac{\Delta \mbox{y}}{\Delta \mbox{x}} =} @math{\frac{y&#8322; - y&#8321;}{x&#8322; - x&#8321;} =} @ifnotsoln{@math{\frac{\qquad}{\qquad} } }
+
+@indented{
+_Based solely on these 2 data points, increasing a lizard's_ @fitbruby{5em}{@ifsoln{weight}}{x-variable} _by 1, predicts a(n)_ @fitbruby{8em}{@ifsoln{decrease}}{increase or decrease?} _of_ @fitbruby{1em}{}{amount} @fitbruby{8em}{@ifsoln{weeks in adoption time}}{units and y-variable}.
+}
+
+@n Now, use @vocab{slope-intercept form} (@math{y = mx + b}) to calculate the @vocab{y-intercept} (vertical shift) of the line passing through the two points.
+
+[.indentedpara]
+--
+@fitbruby{10em}{@ifsoln{1}}{y} @math{=} @fitbruby{10em}{@ifsoln{3}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{4}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
+
+--
+@ifnotsoln{@vspace{4ex}}
+@ifsoln{@vspace{1ex}}
+
+@n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
+
+@indented{
+@math{lizard(x) =} @fitbruby{4em}{@ifsoln{3}}{slope (m)}x + @fitbruby{11em}{@ifsoln{-11}}{y-intercept / vertical shift} @hspace{3em} @show{(code '(define (lizard x) (+ (* (?ANS 3) x) (?ANS -11))))}
+}
+

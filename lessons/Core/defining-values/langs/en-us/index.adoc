@@ -11,9 +11,10 @@
 | Lesson Goals
 | Students will be able to:
 
-- Define @vocab{values} of various types
-- Simplify a complex expression by replacing repeated parts with defined names,
-- Explain why @vocab{variable}s are useful in math and programming
+@objectives
+@objective{Define values of various types}
+@objective{Simplify a complex expression by replacing repeated parts with defined names,}
+@objective{Explain why variables are useful in math and programming}
 
 | Student-facing Goals
 |
@@ -30,7 +31,7 @@
 @opt-material-links
 
 | Preparation
-| 
+|
 @preparation{
 - There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
@@ -41,7 +42,7 @@
 - Check frequently for understanding of @vocab{data types} and @vocab{Contract}s during this lesson and throughout subsequent lessons.
 |===
 
-== What's in Common? @duration{30 minutes}
+== What's in Common?
 
 === Overview
 This activity introduces the problem with duplicate code, leveraging *Mathematical Practice 7 - Identify and Make Use of Structure*. Students identify a common structure in a series of expressions, and discover how to bind that expression to a name that can be reused.
@@ -147,7 +148,7 @@ at: line 1, column 0, in <interactions0>
 ```
 The name x is unbound:
 It is used but not previously defined.
-```  
+```
 }
 @Q{What do you think this error message means?}
 @A{Answers will vary... but it's telling us that the definition is missing, and that means we need to click "Run"!}
@@ -216,7 +217,7 @@ Have students share their answers about why the code for the Chinese Flag is bro
 
 @slidebreak
 
-In this exercise, you saw a really long definition that is broken up into many lines. In this example, all of the inputs to each `put-image` followed a pattern:
+In this exercise, you saw a really long definition that is broken up into many lines. In this example, all of the inputs to each `translate` followed a pattern:
 
 - The first line contains the image being put on top
 - The second line contains the x- and y-coordinates that position that image on the bottom image
@@ -250,4 +251,9 @@ This makes the code a _lot_ easier to read! Programmers break up their code in s
 }
 == Additional Exercises
 
-- @opt-starter-file{match-code-images}
+@ifproglang{wescheme}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5ff46882e3b4660c751f707e?collections=5fbecc2b40d7aa0d844956f0, Matching Code to Images using overlay & translate}
+}
+@ifproglang{pyret}{
+* @opt-online-exercise{https://teacher.desmos.com/activitybuilder/custom/5fc90f1289c78e0d2a5bccfc, Matching Code to Images using overlay & translate}
+}

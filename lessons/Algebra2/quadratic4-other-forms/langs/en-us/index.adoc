@@ -1,0 +1,106 @@
+= Other Forms of Quadratic Models
+++++
+<style>
+.lesson-instruction table .autonum { font-weight: bold; }
+</style>
+++++
+@description{}
+
+@lesson-prereqs{quadratic3-fitting-models}
+
+@keywords{quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to model quadratic relationships in data.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
+You will want to:
+ * Open @starter-file{alg2-exploring-quadratics-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Key Points For The Facilitator
+|
+-
+|===
+
+
+== Other Forms of Quadratic Models
+@objective{quadratics-forms}
+
+=== Overview
+Students are introduce to Factored Form and Standard Form, and why they each have a role to play in modeling.
+
+=== Launch
+++++
+<style>
+.clippedImage img {clip-path: inset(50px 0px 0px 0px); margin-top: -50px; }
+</style>
+++++
+[.clippedImage]
+@right{@image{images/p3.png, 300}}We used *Vertex Form* to fit this data, because the scatter plot made it easy for us to pick out the vertex of the quadratic relationship between `speed` and `mpg`. But when looking at a scatter plot of quadratic data, it's not always easy to see that vertex!
+
+As with Linear Models, mathematicians and data scientists use different forms of Quadratic Models to make model-fitting and calculations easier.
+
+=== Investigate
+
+The *Factored Form* for quadratic functions looks like this: @math{f(x) = a(x - r_1)(x - r_2)}
+
+Factored form makes it really easy to see where the _roots_ of the function, where the parabola crosses the x-axis. If @math{x = r_1} or @math{x = r_2}, one of the parenthetical terms will be zero and make the whole equation zero.
+
+In our fuel efficiency dataset, we can see the vertex but not the roots. Factored form is especially useful in the _opposite_ situation, where a scatter plot shows the roots but not the vertex!
+
+@slidebreak
+
+The *Standard Form* for quadratic functions looks like this: @math{f(x) = Ax^2 + Bx + C}
+
+Standard form requires that any polynomial be written with their terms from highest to lowest degree. The standard form for quadratics puts the quadratic (squared) term first, followed by the linear term, followed by the constant term for vertical shift. Knowing that an equation is in standard form makes it easy for someone to know exactly what kind of equation it is just by looking at the first term.
+
+@teacher{This is a great time to include your textbook's traditional content on standard form!}
+
+The coefficients in standard form can also be computed by the _quadratic formula_, which is useful when simple factoring isn't enough.
+
+@lesson-instruction{
+- Complete @printable-exercise{classifying-defs.adoc} to get comfortable identifying the different forms of quadratic functions.
+- For practice connecting these forms to graphs, complete @printable-exercise{match-graph-v.adoc}, @printable-exercise{match-graph-f.adoc}, and @printable-exercise{match-graph-s.adoc}.
+}
+
+@lesson-instruction{
+Let's try to use standard form to build a model from _samples_.
+
+- With your partner, open @starter-file{alg2-fuel-efficiency}.
+- Complete @printable-exercise{build-from-samples.adoc}.
+}
+
+
+=== Synthesize
+
+- How close did your sampled model get to the one you created visually in Desmos?
+- Which method did you like better?
+
+== Additional Exercises
+
+@strategy{Coming Soon!}{
+
+We are working on collecting more datasets that can be modeled with quadratic functions so that we can offer students more practice with building quadratic models and engage them in thinking about which form is most efficient to start with depending on the available data.  
+}

@@ -12,6 +12,7 @@ local workbookpage_adocs = dofile(os.getenv 'SETUP_WORKBOOKPAGE')
 local lessonplan_adocs = dofile(os.getenv 'SETUP_LESSONPLAN')
 local pathwayresource_adocs = dofile(os.getenv 'SETUP_PATHWAYRESOURCE')
 local pathwaynarrative_adocs = dofile(os.getenv 'SETUP_PATHWAYNARRATIVE')
+local ignorable_directories = dofile(os.getenv 'IGNORABLE_DIRECTORIES')
 
 local adocables_input_o = io.open(os.getenv 'ADOCABLES_INPUT', 'w')
 local adoc_input_o = io.open(os.getenv 'ADOC_INPUT', 'w')
@@ -62,7 +63,7 @@ end
 for _,adocfile in ipairs(workbookpage_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
   local lessondirectory = containingdirectory:gsub('(.*/lessons/.-)/.*', '%1')
-  if file_exists_p(lessondirectory .. '/.proglang-ignore') then
+  if memberp(lessondirectory, ignorable_directories) then
     goto continue
   end
   local distrootdir = get_distrootdir(adocfile)
@@ -103,7 +104,7 @@ local distrootdir = "../../"
 
 for _,adocfile in ipairs(lessonplan_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
-  if file_exists_p(containingdirectory .. '/.proglang-ignore') then
+  if memberp(containingdirectory, ignorable_directories) then
     goto continue
   end
   local adocbasename = adocfile:gsub('^.*/', '')
@@ -267,9 +268,11 @@ if book_p then
   end
 
   for _,adocfile in ipairs(workbookpage_adocs_4pdf) do
+    -- print('trying', adocfile)
     local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
     local lessondirectory = containingdirectory:gsub('(.*/lessons/.-)/.*', '%1')
-    if file_exists_p(lessondirectory .. '/.proglang-ignore') then
+    if memberp(lessondirectory, ignorable_directories) then
+      -- print('skipping', adocfile)
       goto continue
     end
     local whtmlfile = adocfile:gsub('%.adoc$', '.html')
@@ -293,7 +296,7 @@ if book_p then
 
   for _,adocfile in ipairs(lessonplan_adocs_4pdf) do
     local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
-    if file_exists_p(containingdirectory .. '/.proglang-ignore') then
+    if memberp(containingdirectory, ignorable_directories) then
       goto continue
     end
     local whtmlfile = adocfile:gsub('%.adoc$', '.shtml')

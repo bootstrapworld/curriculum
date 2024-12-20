@@ -1,0 +1,175 @@
+= Exploring the Fuel Efficiency Dataset
+++++
+<style>
+.lesson-instruction table .autonum { font-weight: bold; }
+</style>
+++++
+@description{Students investigate quadratic relationships in data about Fuel Efficiency.}
+
+@lesson-prereqs{fitting-models}
+
+@keywords{quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+- Read and interpret real-world data, presented in a scatter plot
+- Model quadratic relationships using functions
+
+| Student-facing Lesson Goals
+|
+
+- Let's use Pyret to model quadratic relationships in data.
+
+
+| Materials
+|[.materials-links]
+
+| Preparation
+|
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
+You will want to:
+ * Open @starter-file{alg2-exploring-quadratics-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Key Points For The Facilitator
+|
+- Unlike linear functions, which are governed by slope and y-intercept, quadratic functions are governed by the behavior of _three_ factors.
+- Students should gain an intuition for these factors by playing with them first in Desmos, then use them to fit a model in Pyret.
+|===
+
+== Exploring the Data
+@objective{model-explore}
+
+=== Overview
+Students explore the @starter-file{alg2-fuel-efficiency}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
+
+=== Launch
+
+@teacher{These questions are intended to spark student interest in _fuel efficiency_, which students will explore in this lesson.}
+
+@QandA{
+Since 1992, there have been laws about what information must be printed onto the labels of cars for sale. What do you think consumers should know about cars they are considering buying?
+@Q{Have you heard the term "fuel efficiency" before? What do you know about fuel efficiency?}
+@A{Fuel efficiency is the number of miles that a car can travel per gallon. Since 2013, labels on cars for sale must include: fuel efficiency, energy use, fuel cost, and environmental impact.}
+@Q{What factors influence fuel efficiency?}
+@A{Possible responses:}
+@A{Efficient driving (e.g., gradual acceleration and braking, using cruise control)}
+@A{car maintenance}
+@A{planning / combining trips}
+@A{choosing a more fuel efficient vehicle}
+@A{avoiding carrying excess weight in a vehicle}
+@Q{Do you think the speed at which you drive influences fuel efficiency? Why or why not?}
+@Q{At what speeds do you predict that fuel efficiency is the best? The worst?}
+@A{"Zero" is a clever attempt (no gas used!), but remember that miles-per-gallon also includes the distance traveled (@math{0 / 0})!}
+@A{Make sure that student guesses make sense, as well: a car rolling downhill in neutral shouldn't be counted, cars can't travel 10,000mph, etc}
+}
+
+@slidebreak
+
+In this lesson, we'll learn more about the relationship between fuel efficiency and the speed a car is traveling.
+
+First, we'll explore a dataset and see if this relationship appears linear.
+
+@teacher{
+*NOTE:* While this dataset is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI, the dataset}.
+}
+
+
+@lesson-instruction{
+- Open the @starter-file{alg2-fuel-efficiency}
+- From the File menu, select "Save a Copy", and click "Run".
+- Working in pairs or small groups, complete the first section of @printable-exercise{exploring-mpg.adoc}.
+}
+
+=== Investigate
+
+There definitely appears to be a relationship here...
+@center{@image{images/fuel-efficiency-quadratic.png}}
+
+@slidebreak
+
+But linear models don't seem to fit very well!
+
+[cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
+|===
+| We could build linear models that fit the increasing half of the data...
+| We could build linear models that fit the decreasing half of the data...
+| We could build linear models that try to split the difference...
+
+| @image{images/fuel-efficiency-linear1.png}
+| @image{images/fuel-efficiency-linear2.png}
+| @image{images/fuel-efficiency-linear3.png}
+|===
+
+All of them are far away from so many points, and will make poor predictions for a large subset of x-values.
+
+@slidebreak
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{exploring-mpg.adoc}. Be ready to share back and describe the curve you drew.
+- Is there a function @math{\text{mpg}(\text{speed})}, that describes the pattern you see here?
+}
+
+@slidebreak
+
+Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency generally _decreases!_
+
+@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
+
+Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it).
+}
+
+=== Synthesize
+
+- Why don't linear models work to model the relationship between fuel efficiency and speed?
+- What kinds of curves did you draw that fit better?
+- Are there any mathematical functions that look like those curves?
+
+
+== Quadratic Relationships
+@objective{quadratic-situations}
+
+=== Overview
+Students are introduced to quadratic functions. They become familiar with scenarios involving quadratics learn how to identify quadratic sequences.
+
+=== Launch
+Linear models work well for fitting simple relationships, but many relationships in the real world are more complex! _Linear models are often too primitive_.
+
+The relationship we observe between speed and fuel efficiency appears to best be described by a _curve_, where fuel-efficiency increases up to a certain speed, and then decreases again.
+
+@slidebreak
+
+Today, we will learn about one kind of curved model called a @vocab{quadratic relationship}.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
+
+There are lots of relationships that change direction like this! For example, when an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength.
+
+In some quadratic relationships, the curve goes the other way - decreasing, bottoming out, and then rising again. For example, the graph of an accelerating car's position over time will look like the right-half of a downward-facing parabola, with the car covering more distance each second than last.
+
+=== Investigate
+
+@QandA{
+@Q{Can you think of any other real-world relationships that appear to be quadratic?}
+@A{A ball dropped from a tall building will get faster and faster as it falls, so a graph of @math{\text{distance}(\text{time})} will be quadratic.}
+@A{Many nutrients are good for you, and the more you take the healthier you are...up to a point. After that, too much of a mineral or vitamin can cause problems. A graph of @math{\text{health}(\text{dose})} will be quadratic.}
+@A{A ball thrown in the air will rise quickly, slow down, peak, and then begin to fall. A graph of @math{\text{height}(\text{time})} will be quadratic.}
+@A{The temperature of a puddle will warm and then cool over the course of the day. A graph of @math{\text{temp}(\text{time})} will be quadratic.}
+@A{The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets. A graph of @math{\text{length}(\text{time})} will be quadratic.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear or quadratic relationships.
+}
+
+=== Synthesize
+
+- TBD

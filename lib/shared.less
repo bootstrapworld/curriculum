@@ -3,25 +3,6 @@
 @import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
 
 /************************************************************************************
- * IMPORT FONTS
-
-
-@font-face {
-  font-family: 'MJXTEX';
-  src: url("./fonts/MathJax_Main-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-I';
-  src: url("./fonts/MathJax_Main-Italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: 'MJXTEX-B';
-  src: url("./fonts/MathJax_Main-Bold.woff") format("woff");
-}
- */
-/************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
@@ -71,8 +52,8 @@ body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: x-small; top: -0.65em; left: 1px; }
-  sub     { font-size: x-small; bottom: -0.35em; }
+  sup     { font-size: smaller; top: -0.65em; left: 1px; }
+  sub     { font-size: smaller; bottom: -0.35em; }
   code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
@@ -83,6 +64,25 @@ body {
   .ulist ul { margin-bottom: 0px; }
   .ulist p  { margin: 5px 0px; }
   .quad { display: inline-block; }
+  .citation {
+    position: relative;
+    .apa-citation { display: none; }
+    &:hover { 
+      .apa-citation { 
+        display: inline-block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background: lightyellow;
+        font-size: 6pt;
+        line-height: initial;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+    }
+
+  }
   
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode {
@@ -99,15 +99,16 @@ body {
     sub { font-size: 65% !important; }
   }
   .MathJax { 
-      font-family: MJXZERO, 'MJXTEX'; 
-      font-size: inherit !important;
+    margin: 0 !important;
+    font-family: MJXZERO, 'MJXTEX'; 
+    font-size: inherit !important;
   }
   .mathunicode { 
     font-family: MJXZERO, 'MJXTEX'; 
     font-size: inherit !important;
     line-height: 0;
   }
-  .mathunicode i { font-family: 'MJXTEX-I' }
+  .mathunicode i { font-family: 'MJXTEX-I'; margin-right: 1px;}
   
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
@@ -156,6 +157,22 @@ body {
   }
   /* But not if it's an extra-long page */
   &.canBeLongerThanAPage #footer { display: none; }
+
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       @translucent-bg-color;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
 
   /* outOfDate warning */
   #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
@@ -299,9 +316,10 @@ lines on some browsers */
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
   display:            inline-block;
-  bottom:             -11px;
+  bottom:             -11.85px;
   left:               0;
   font-size:          9.5px;
+  line-height:        14px;
   font-weight:        normal;
   width:              100%;
   text-align:         center;
@@ -313,7 +331,7 @@ lines on some browsers */
 /* Rubies are sensitive to line-height, so force
   the same font and special superscript behavior 
 */
-.ruby * { font-family: @text-font !important; }
+.ruby * { font-family: @text-font !important; background: none !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
 
 .fitb.stretch, .fitbruby.stretch { 
@@ -357,7 +375,7 @@ lines on some browsers */
 .narrativepage {
   font-size: 12pt;
   .logo     { float: right; }
-  .logo img { width: 400px; }
+  .logo img { max-width: 375px; }
   #lesson-list {
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
@@ -385,6 +403,7 @@ lines on some browsers */
   font-size: 12pt;
 
   #content { font-size: 9pt; }
+  .other-proglang::before { font-style: italic; }
 
   /* The summary table at the top of each lesson */
   .preamble {
@@ -658,6 +677,14 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+  /* In some cases, AsiiDoc will put an empty preamble containing
+     only a grandchild for custom styles. In this situation, no display
+     is needed
+   */
+  #preamble_disabled:has(>.sectionbody>style:only-child) { 
+    display: none; 
+  }
+
 
   .teacherNote { 
     font-style: italic; display: inline;
@@ -682,23 +709,53 @@ body.workbookpage {
       display: contents;
       > tr { 
         display: contents; 
+        /* Try to mimic AsciiDoc's TD formatting classes */
         > td { 
-          display: grid; position: relative; 
-          &.valign-middle { align-items: center; }
-        }
+          display: flex; flex-wrap: wrap; position: relative;
+          > .content { 
+            display: contents; 
+            > * { width: 100%; }
+          }
+          &.valign-top    {     align-items: start;  } 
+          &.valign-middle {     align-items: center; } 
+          &.valign-bottom {     align-items: end;    } 
+          &.halign-left   { justify-content: left;   }
+          &.halign-center { justify-content: center; }
+          &.halign-right  { justify-content: right;  }         }
       }
+      > tr:nth-of-type(even) td { background: #f8f8f7; }
     } 
+  }
+  /* Override AsciiDoc table defaults based on asciidoc classnames */
+  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) td { 
+    background: none ; 
   }
 
   /* 
-    "Graph" tables use CSS for everything. Each page will likely
-    need to provide its own rules for background position, width,
-    height, and axes -- but sensible defaults are provided here.
+    "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+    They rely on a set up CSS variables, with reasonable defaults:
+      --width and --height determine the size of plane. Defaults to 3in x 3x.
+      --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+      --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+      --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+      --x_label defaults to 'x'
+      --y_label defaults to 'y'
   */
   table.graph {
-    grid-gap: 20px; 
+    grid-gap: var(--min-gap, 20px); 
     margin-top: 5px;
-    td p.tableblock { position: absolute; background: white; }
+
+    /* Location and style of the coefficient value */
+    td p.tableblock { 
+      top:        3px;
+      right:      3px;
+      position:   absolute; 
+      background: white; 
+    }
+
     td {
       border: none !important;
       background-image:
@@ -706,28 +763,30 @@ body.workbookpage {
         linear-gradient(270deg, lightblue 2px, transparent 2px),
         linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
         linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-      background-size: 300px 300px, 300px 300px, 50px 50px, 50px 50px;
-      background-position: -150px 135px;
-      width: 3in;
-      height: 3in;
+      background-size: 
+        var(--width, 3in) var(--width, 3in), 
+        var(--width, 3in) var(--width, 3in), 
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7)),
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7));
+      background-position: 
+        calc(var(--width , 3in) * var(--left_pct, .50)) 
+        calc(var(--height, 3in) * var(--top_pct , .50));
+      width:  var(--width,  3in);
+      height: var(--height, 3in);
     }
     /* Add labels for axes */
     td::before, td::after { position: absolute; font-style: italic; }
 
-    td::before {
-      content: 'y';
-      top:   0%;
-      left: 40%;
-      transform: rotate(270deg);
-        -webkit-transform:rotate(270deg);
-        -moz-transform:rotate(270deg);
-        -o-transform: rotate(270deg);
-        -ms-transform:rotate(270deg);
-    }
     td::after {
-      content: 'x';
-      top:  50%;
-      right: 3%;
+      content: var(--x_label, 'x\0000A0\0000A0');
+      right:   1%;
+      top:     calc(var(--height , 3in) * var(--top_pct, .50));
+    }
+    td::before {
+      content: var(--y_label, '\0000A0\0000A0y');
+      left:    calc(var(--width , 3in) * (var(--left_pct, .50) - .08));
+      top:     2%;
+      transform: rotate(270deg);
     }
   }
 
@@ -748,7 +807,7 @@ body.workbookpage {
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
-  td .autonum {
+  th .autonum, td .autonum {
     padding-top: 0;
     &::after { content: none;}
   }
@@ -901,6 +960,7 @@ table.recipe_title    {
 
 /* Proglang-specific adaptations */
 .pyret {
+
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: '#'; }
   }
@@ -953,7 +1013,7 @@ table.recipe_title    {
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
 }
 
-.wescheme {
+.wescheme {  
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
@@ -1158,7 +1218,7 @@ table.sideways-pyret-table {
   tr { background: none; text-align: right; }
   td:first-child {
     display: table-cell;
-    background: @table-header;
+    background: @table-header !important;
     text-align: center;
     width: 50px;
   }
@@ -1201,6 +1261,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
     transform: scale(calc(12 / 9)); 
+    #savetodrive-div { transform: scale(0.8); }
   }
 
   /********************************************************************
@@ -1286,7 +1347,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
-  .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
    display: none !important; visibility: hidden; float: none;
   }
@@ -1302,6 +1363,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
+
     .lessonSummary {
       break-after:  page !important;
       page-break-after:  always !important;

@@ -1,0 +1,187 @@
+= Exploring Exponential Models
+
+@description{Students investigate exponential relationships in data about Covid spread.}
+
+@lesson-prereqs{fitting-models, lookups}
+
+@keywords{exponential, quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+You will want to:
+ * Open @starter-file{alg2-covid-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Exploring the Data
+@objective{model-explore}
+
+=== Overview
+
+Students explore the covid dataset, focusing on the growth in positive test cases for the state of Massachusetts.
+
+=== Launch
+
+In late in 2019, COVID-19 began to spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
+
+Even in 2020, very few people could have predicted the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
+
+=== Investigate
+
+@lesson-instruction{
+- We're going to look at the daily total of confirmed, positive cases for Rhode Island, Maine, Vermont, New Hampshire, Massachusetts, and Connecticut - all the states formed out of what the English called "New England".
+- Open the @starter-file{alg2-covid}, which imports data from a spreadsheet that looks at the Covid infection rates for New England states from summer 2020 until the end of the year.
+- From the File menu, select "Save a Copy", and click "Run."
+- Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
+}
+
+@strategy{Why just New England, starting from June 9th?!?}{
+
+This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England.
+
+And even within New England, we've _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
+
+For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. A purely exponential function will under-predict the growth during this time period by that it adds enormous friction to the modeling goal of this unit!
+
+(The functions necessary to model this kind of growth have multiple terms showing different kinds of growth, and are just out of reach for students right now. Students can _return_ to this unit once they've learned about @lesson-link{periodic4-hybrid-models, hybrid models} in later lessons.)
+
+Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
+
+To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`
+}
+
+=== Synthesize
+
+@ifslide{@right{@image{images/multiple-models.png}}}
+@ifnotslide{@center{@image{images/multiple-models.png}}}
+@lesson-instruction{
+Discuss in groups or pairs, and prepare to share out to the class:
+- Based on the look of the scatter plot you just made, do you think there's a strong relationship here?
+- If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
+}
+
+@teacher{
+Review student answers to confirm that students have made a number of observations:
+
+- There appears to be _more than one_ relationship in this dataset
+- Every relationship appears to be extremely strong
+- Most/all of these relationships appear nonlinear
+}
+
+== Fitting Linear Models
+@objective{model-fit-function}
+
+=== Overview
+Students try to fit a linear model to this data. This section makes heavy use of interactive slider activities we've built in Desmos to support open-ended experimentation.
+
+=== Launch
+Let's start out by looking at _just one state_. We'll use Massachusetts for this investigation, but you can do your own investigation about any state you like after finishing this one!
+
+The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MA"`.
+
+=== Investigate
+
+@lesson-instruction{
+Complete @printable-exercise{linear-models.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{Did you see a correlation between date and the total number of confirmed, positive cases in this dataset?}
+@A{Yes}
+@Q{Describe its @vocab{form}, @vocab{direction}, and @vocab{strength}.}
+@A{Sample response: It's definitely strong and appears to be non-linear. Non-linear functions don't usually have direction, so not sure about that one.}
+}
+
+@slidebreak
+
+Linear models capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the response variable to grow by equal amounts over equal intervals in the explanatory variable.
+
+@QandA{
+@Q{Are linear models a good fit for this data?}
+@Q{Why or why not?}
+}
+
+@slidebreak{InvestigateR}
+
+@right{@image{images/MA-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our line of best fit. +
+If we make the line hit the _bottom_ of the curve, all the points fall above it (bottom line).
+
+@slidebreak{InvestigateR}
+
+@ifslide{@right{@image{images/MA-covid-linear.png, 300}}}Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! +
+But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them. +
+*The number of positive cases is growing too fast to be fit with a linear model that grows at a constant rate!*
+
+=== Synthesize
+- Would a linear model fit just the first few months of the data?
+- If we _only_ knew about first few weeks, would it be ok to use a linear model? Why or why not?
+
+
+== Fitting Quadratic Models
+@objective{model-fit-function}
+
+=== Overview
+Students try to fit a quadratic model to this data. This section makes heavy use of interactive slider activities we've built in Desmos to support open-ended experimentation. The ultimate goal is that students discover the need for models beyond linear and quadratic functions.
+
+=== Launch
+
+Maybe linear isn't the way to go, here!
+
+@teacher{
+Make sure you've:
+
+- Clicked on "pacing" and set your teacher dashboard of @starter-file{alg2-covid-desmos} to the first slide so that students are looking at the "Quadratic Models" screen
+- Generated your own link in Desmos for sharing the file with your students
+}
+
+@lesson-instruction{
+- Open the *Desmos* link I shared with you to the *Modeling Covid Spread* file. 
+- You should be on Slide 1 (Quadratic Models).
+- Using the file, complete @printable-exercise{quadratic-models.adoc}
+}
+
+@teacher{Have students share their resulting models. Which one fits best?}
+
+@slidebreak
+
+In quadratic models, one quantity varies based on the _square_ of another. Unlike linear models that grow evenly, we expect the response variable to grow by different amounts over equal intervals in the explanatory variable.
+
+@QandA{
+@Q{Are quadratic models a good fit for this data?}
+@Q{Why or why not?}
+}
+
+@slidebreak
+
+@right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a lower @vocab{S-value} than our linear model! +
+But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
+
+=== Synthesize
+
+- This data grows very slowly in the beginning and then grows very quickly. Can you think of any other situations in real life that act like this?
+- Can you think of any graphs that might act like this?

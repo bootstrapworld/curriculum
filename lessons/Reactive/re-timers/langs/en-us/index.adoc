@@ -17,7 +17,7 @@
 
 |===
 
-== Adding a Splash Screen @duration{30 minutes}
+== Adding a Splash Screen
 
 === Overview
 One of the simplest uses for a timer is a _splash screen_: something that is shown for a few seconds when you first run a game. Students implement a splash screen for their games, as a way of getting comfortable with the idea of passing a timer into their Reactor.
@@ -90,7 +90,7 @@ fun draw-state(a-char):
   if a-char.timer <= 100:
     instructions
   else:
-    put-image(sam, a-char.x, a-char.y, rectangle(640,480,"solid","white"))
+    translate(sam, a-char.x, a-char.y, rectangle(640, 480, "solid", "white"))
   end
 end
 ```
@@ -106,7 +106,7 @@ We only want the splash screen to appear at the very start of the game, when the
 Following these steps, students should end up with something similar to this completed Moving Character file.
 }
 
-== Timer-Based Animations @duration{45 minutes}
+== Timer-Based Animations
 
 === Overview
 Students implement a timer-based animation, to create a temporary effect when a collision occurs.
@@ -134,8 +134,8 @@ To start, let’s look at the `draw-state` function.
 # draw-state :: SmashState -> Image
 # draws the image of the watermelon and mallet on the screen.
 fun draw-state(a-smash):
-  put-image(MALLET, 275, a-smash.mallety,
-    put-image(WATERMELON, 200, 75, BACKGROUND))
+  translate(MALLET, 275, a-smash.mallety,
+    translate(WATERMELON, 200, 75, BACKGROUND))
 end
 ```
 
@@ -191,13 +191,11 @@ The updated `draw-state` function should look similar to:
 # mallet's y-coordinate reaches 140, draw the explosion
 fun draw-state(a-smash):
   if (a-smash.mallety <= 140):
-    put-image(
-      radial-star(20,a-smash.timer,25,"solid","deep-pink"),
-       200, 75,
+    translate(radial-star(20, a-smash.timer, 25, "solid", "deep-pink"), 200, 75,
        BACKGROUND)
   else:
-    put-image(MALLET, 275, a-smash.mallety,
-    put-image(WATERMELON, 200, 75, BACKGROUND))
+    translate(MALLET, 275, a-smash.mallety,
+    translate(WATERMELON, 200, 75, BACKGROUND))
   end
 end
 ```

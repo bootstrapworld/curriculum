@@ -17,13 +17,14 @@
 @material-links
 
 | Preparation
+|
 @preparation{
 - Student Games or the https://code.pyret.org/editor#share=0B9rKDmABYlJVVkpkTmEyd1ZTaE0[Pyret Ninja Cat] file preloaded on students’ machines
 }
 
 |===
 
-== Adding a Scoring System @duration{45 minutes}
+== Adding a Scoring System
 
 === Overview
 Students add a score to their game.
@@ -161,7 +162,7 @@ Which function handles how the game state is drawn?
 
 @slidebreak
 
-In the `draw-state` function, images are placed onto the background using `put-image` to draw the game. But the score is represented by a Number: we need a way to represent it as an Image. Thankfully, Pyret has some built-in functions that can help with this: the function `num-to-string` takes in a Number for its domain and returns a String representation of that number. This string can then be passed to the text function to return an Image that can be used in `draw-state`.
+In the `draw-state` function, images are placed onto the background using `translate` to draw the game. But the score is represented by a Number: we need a way to represent it as an Image. Thankfully, Pyret has some built-in functions that can help with this: the function `num-to-string` takes in a Number for its domain and returns a String representation of that number. This string can then be passed to the text function to return an Image that can be used in `draw-state`.
 
 @QandA{
 @Q{How would you use the `num-to-string` and `text` functions together to draw the score into the game?}
@@ -174,7 +175,7 @@ In the `draw-state` function, images are placed onto the background using `put-i
 The expression:  
 
 ```
-put-image(
+translate(
   text(num-to-string(g.score), 20, "white"),
   320, 240,
   BACKGROUND-IMG)

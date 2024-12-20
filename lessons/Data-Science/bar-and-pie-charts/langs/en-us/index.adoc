@@ -1,8 +1,8 @@
 = Bar and Pie Charts
 
-@description{Students use data displays like bar and pie charts to create 1- and 2-level groupings to visualize the distribution of categorical data.}
+@description{Students use data visualizations like bar and pie charts to create 1- and 2-level groupings to visualize the distribution of categorical data.}
 
-@lesson-prereqs{ds-intro, contracts-tables-displays}
+@lesson-prereqs{ds-intro, contracts-visualizations}
 
 @keywords{bar chart, pie chart, stacked bar chart, multi bar chart, categorical, visualization, display}
 
@@ -14,10 +14,7 @@
 | Lesson Goals
 | Students will be able to:
 
-- Read and create pie and bar charts
-- Explain the difference between pie and bar charts
-- Read and create stacked and multi bar charts
-- Explain the difference between pie and bar charts
+@objectives
 
 | Student-facing Lesson Goals
 |
@@ -40,7 +37,11 @@
 
 |===
 
-== Grouping by Value @duration{25 minutes}
+== Grouping by Value
+@objective{categorical-visualizations-proglang}
+@objective{interpret-bar}
+@objective{interpret-pie}
+@objective{pros-cons-bar-pie}
 
 === Overview
 Students learn one way of grouping data, showing the @vocab{frequency} of values in a dataset using bar and pie charts.
@@ -54,10 +55,10 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 
 @slidebreak
 @QandA{
-@Q{How do the count table and bar chart you just made compare?}
-@A{The height of each bar matches the count of each species.}
+@Q{How do the frequency table and bar chart you just made compare?}
+@A{The height of each bar matches the frequency with which each species occurs at the shelter.}
 @Q{How does this pie chart compare to the bar chart you just made?}
-@A{The wedges show percentages, whereas the bar chart was labeled with the count. We could figure out how many animals were in the sample from the bar chart. With the pie chart we see how the categories compare to each other, but we have no way of knowing how many animals each wedge represents.}
+@A{The wedges show the frequency as a _percentage_, whereas the bar chart shows the frequency as a count of each value. It's easy to compare one bar to another, but harder to compare the frequency of any one bar against the whole sample. The pie chart is the opposite: it's easy to see how a single wedge compares to the whole pie, but more difficult to see how one wedge compares to another.}
 }
 
 === Investigate
@@ -66,27 +67,27 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 }
 
 @lesson-instruction{
-Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the displays. Then compare your Notices and Wonders with your partner.
+Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the visualizations. Then compare your Notices and Wonders with your partner.
 }
  
 @slidebreak
 
 @image{images/count-more-species.png, 160} @image{images/bar-more-species.png, 385}
 
-Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" for each unique value and counting the number of rows in each bucket, one uses a picture and one uses a table.
+Both `bar-chart` and `count` *group the data in one column by value*, creating "buckets" showing the frequency of each unique value. One uses a picture, and one uses a table.
 
-@define{about-interactive-displays}{When you first build a bar chart or pie chart in pyret, they are interactive displays. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.}
+@define{about-interactive-visualizations}{When you first build a bar chart or pie chart in pyret, they are interactive visualizations of the data. That means that you can mouse over a bar to reveal the label, as well as the number of animals in that species. We can also resize the window by dragging its borders. This allows us to experiment with the data before closing the window and generating the final, non-interactive image.}
 
-@ifnotslide{@about-interactive-displays}
-@ifslide{@teacher{@about-interactive-displays}}
+@ifnotslide{@about-interactive-visualizations}
+@ifslide{@teacher{@about-interactive-visualizations}}
 
 @lesson-point{
-@vocab{Bar charts} group data _by value_ to show frequency as a count.
+@vocab{Bar charts} group data _by value_ to show frequency.
 }
 
 @slidebreak
 
-@right{@image{images/pie-more-species.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the count and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
+@right{@image{images/pie-more-species.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the frequency and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
 
 @lesson-point{
 Pie charts group data _by value_ to show frequency as a percentage.
@@ -140,8 +141,8 @@ Grouping by value works well when lots of different data points can be sorted in
 
 - How is `pie-chart` similar to `bar-chart`? How is it different?
 - When would you want to use one chart instead of another?
-- Which displays do you find it easier to interpret? Why?
-- What questions about the dataset are you curious to investigate using these displays?
+- Which visualizations do you find it easier to interpret? Why?
+- What questions about the dataset are you curious to investigate using these visualizations?
 
 @strategy{Optional Extension}{
 
@@ -167,8 +168,10 @@ Open the @opt-starter-file{hair} to try them out!
 }
 
 
-== Groups and Subgroups @duration{20 minutes}
-
+== Groups and Subgroups
+@objective{compound-categorical-visualizations-proglang}
+@objective{interpret-multi-bar}
+@objective{interpret-stacked-bar}
 === Overview
 Students learn how to create _groups within groups_, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
 
@@ -182,7 +185,7 @@ Students learn how to create _groups within groups_, showing the relative freque
 Comparing groups is great, but sometimes we want to compare _sub-groups across groups_. In this example, we want to compare the distribution of sexes across each species.
 
 @lesson-instruction{
-- Let's step away from the Animals Dataset for a moment to learn about some new kinds of displays that would make it easier to answer questions like these by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
+- Let's step away from the Animals Dataset for a moment to learn about some new kinds of data visualizations that would make it easier to answer questions like these by revealing the subgroups in a column. Turn to @printable-exercise{stacked-and-multi-notice.adoc}.
 - What do you Notice? What do you Wonder?
 }
 
@@ -204,8 +207,8 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 |===
 ^| Stacked Bar Chart
 ^| Multi Bar Chart
-^| @image{images/stacked-bar-species-sex.png, 300}
-^| @image{images/multi-bar-species-sex.png, 300}
+^| @image{images/stacked-species-sex2.png, 300}
+^| @image{images/multi-species-sex2.png, 300}
 | Stacked Bar Charts put the _groups_ side by side, so it's easy to answer which species is the "most female". But it's more difficult to see whether there are more female dogs than male cats, because the bars don't all start from the bottom and they're in percentages rather than raw quantities.
 | Multi Bar Charts put the _subgroups_ side by side, so it's easy to answer whether there are more female dogs than male cats in the shelter. But it's a little more difficult to see which species is the "most female", because we have to estimate the relative lengths of each bar.
 |===
@@ -214,7 +217,7 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 === Synthesize
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
-- What are some of the questions you asked about the animals dataset using these displays? And what did you learn?
+- What are some of the questions you asked about the animals dataset using these visualizations? And what did you learn?
 - What kinds of questions need stacked or multi bar charts, rather than pie or bar charts
 - What kinds of questions are better answered by stacked bar charts?
 - What kinds of questions are better answered by multi bar charts?
@@ -227,5 +230,5 @@ Infographics are a powerful tool for communicating information, especially when 
 
 == Additional Exercises  
 
-- For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students create additional displays using @opt-starter-file{food}.
+- For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students create additional visualizations using @opt-starter-file{food}.
 - For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.

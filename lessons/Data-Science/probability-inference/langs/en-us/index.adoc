@@ -21,10 +21,11 @@
 | Lesson Goals
 | Students will be able to...
 
-- Understand the connection between probability and inference
-- Understand the need for random samples
-- Understand the role of @vocab{sample size}
-- Take random samples from a population
+@objectives
+@objective{stat-inference}
+@objective{sample-size}
+@objective{random-sample-bias}
+@objective{random-sample-pyret}
 
 | Student-facing Lesson Goals
 |
@@ -42,10 +43,10 @@
 @opt-material-links
 |===
 
-== How to Spot a Scam @duration{20 minutes}
+== How to Spot a Scam
 
 === Overview
-Students consider a classic randomness scenario: the probability that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about the fairness of a coin?"
+Students consider a classic randomness scenario: the @vocab{probability} that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about the fairness of a coin?"
 
 === Launch
 
@@ -104,7 +105,7 @@ Should we suspect a scam if the croupier’s coin flipped heads 10 times in a ro
 
 @slidebreak
 
-The probability of a fair coin getting all heads for 10 flips in a row is @math{{\frac{1}{2}}^{10}}, or roughly 0.001.
+The probability of a fair coin getting all heads for 10 flips in a row is @math{({\frac{1}{2}})^{10}}, or roughly 0.001.
 
 Statisticians would explain this as follows:
 "If the null hypothesis were true, then the probability of getting sample results at least as extreme as the ones observed is 0.001."
@@ -143,9 +144,10 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 @A{A small bias might be enough to guarantee that a casino turn a profit, and be virtually undetectable without a massive sample!}
 @Q{Suppose we are rolling a 6-sided die. How could we tell if it's weighted or not?}
 @A{We could record how many times the die landed on each number after rolling many times. If the die is fair, we should see that it lands on each number approximately equally.}
+@Q{Would we need more samples with the 6-sides die than with the 2-sided coin? Less? The same? Why?}
 }
 
-== Probability v. Inference @duration{35 minutes}
+== Probability v. Inference
 
 === Overview
 Statistical inference involves looking at a sample and trying to _infer something you don’t know_ about a larger population. This requires a sort of backwards reasoning, kind of like making a guess about a _cause_, based on the _effect_ that we see.
@@ -231,7 +233,7 @@ Let’s see what happens if we switch from smaller to larger sample sizes.
 
 @lesson-instruction{
 - Open the @starter-file{expanded-animals}, save a copy and click "Run".
-- Complete @printable-exercise{sampling-and-inference.adoc}, sharing their results and discussing with the group.
+- Complete @printable-exercise{sampling-and-inference.adoc}, sharing your results and discussing with the group.
 - @opt{Complete @opt-printable-exercise{predictions-from-samples.adoc}}
 }
 }

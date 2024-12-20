@@ -1,0 +1,336 @@
+= Visualizing the "Shape" of the Data
+
+@description{Students learn to create histograms by hand and in @proglang. They practice reading and describing histograms, using new vocabulary to describe histogram shape.}
+
+@ifproglang{pyret}{
+@lesson-prereqs{contracts-tables, contracts-visualizations, dot-plots}
+}
+
+@ifproglang{codap}{
+@lesson-prereqs{codap-dot-plots-bar-charts}
+}
+
+@keywords{histogram, bin, interval}
+
+@add-to-lang{histogram}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's create histograms for datasets and learn how describe their shape.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Preparation
+|
+@preparation{
+- For the @handout{histogram-cards.adoc} activity in this lesson you will need to print and cut one set of cards for each pair of students in your class. We recommend storing the cards in envelopes.
+- There is an optional kinesthetic activity in this lesson that requires a ball of play-dough for each group of 3.
+- There is an @starter-file{histograms, interactive Desmos activity} in the lesson, as well as Desmos formative assessments.
+  * Open the Desmos activity you plan to use and make a code or link to share with students.
+  * If you are using our Google Slides, add the appropriate link to the slide deck. 
+  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Assessments
+| @assessments
+
+|===
+
+
+== Creating and Reading Histograms
+
+@objective{make-histograms}
+@objective{histogram-center-spread}
+
+=== Overview
+
+Students create histograms by hand and in Pyret, and then use the histograms to respond to questions about the data.
+
+=== Launch
+
+We have already discussed how histograms are similar to and different from dot plots: both display the frequency and distribution of quantitative data--but histograms give us a collective overview of the data, while dot plots allow us to see individual points.
+
+During this lesson, we will get comfortable making histograms by hand and in @proglang.
+
+@lesson-instruction{
+- Turn to the first section of @printable-exercise{making-histograms.adoc} and use the data provided to complete the frequency table and corresponding data visualization.
+- When you're done, open @starter-file{tooth-data} and complete the second section of the page using @proglang.
+}
+
+
+=== Investigate
+
+Let's practice reading histograms.
+
+@teacher{If your students are new to histograms, you may want review the first section before having students move on to the second. Some misconceptions that commonly emerge are highlighted @ifnotslide{below}@ifslide{on the next slide}.}
+
+
+@lesson-instruction{
+- Complete @printable-exercise{reading-histograms.adoc}
+}
+
+=== Common Misconceptions
+
+- The tallest bar on a histogram does *not* necessarily represent the majority. A majority requires more than half of the data points. We need to ask ourselves: Is more than half of the data represented by the tallest bar?
+
+-  Pay attention to what each axis measures! A tall histogram bar does not indicate a heavier dog. The height of the bar indicates frequency (how many dogs fall into a given 20-pound weight interval).
+
+-  Unlike dot plots, histograms display *aggregate* data, meaning that it is impossible to identify single data points. The first histogram does *not* show us that one dog weighs exactly 140 pounds. There might be a dog with that weight, but we can't know for sure unless we look at the dataset (or use our mouse to interact with the display in Pyret).
+
+@teacher{
+The common misconceptions cited above are from work by @citation{kaplan-et-al-2014, "Kaplan et al"} (2014), @citation{cooper-shore-2008, "Cooper and Shore"} (2008), and @citation{bakker-et-al-2005, "Bakker et al"} (2005).
+}
+
+=== Synthesize
+
+@QandA{
+@Q{What does the height of a histogram bar indicate?}
+@A{Histogram bar height tells us about the frequency of that data falling in a given bin.}
+
+@Q{Can we use a histogram to determine the exact range of a dataset?}
+@A{No: A histogram's bars provide an aggregate view of the data.}
+@A{We cannot identify single data points, so we can neither identify the minimum n
+or maximum.}
+@A{The lowest data point could fall toward the low or high end of the first bin, or anywhere in between. And the highest data point could fall anywhere in the last bin.}
+
+@Q{Can we identify how *many* data points are in a dataset from a histogram?}
+@A{Yes. Assuming that the y-axis is clearly labeled, we can add the bar heights to determine how many data points are in a dataset. This of course becomes more complicated when we have larger datasets.}
+
+}
+
+
+== Describing Shape
+
+@objective{peaks-clusters-gaps}
+@objective{histogram-skew-or-symmetric}
+@objective{bar-chart-v-histogram}
+
+=== Overview
+
+This activity focuses on _describing shape_ from a @vocab{histogram}. Students explore shape by considering symmetry, peaks, clusters, and skew.
+
+=== Launch
+
+When we have a large dataset and we want a more collective overview of the data, histograms shine and dot plots become impractical. Histograms are valuable because they help us to see shape.
+
+@teacher{
+The @handout{histogram-cards.adoc} activity students are about to complete requires some teacher preparation. Make sure you've printed and cut out a set of cards for each pair of students before proceeding.
+
+If that preparation is unrealistic for you, project the images for students to refer to as they work through this section and modify the directions accordingly. (Viewing all of the images at once, rather than as individual cards, requires a higher cognitive load for students, so we don't recommend it.)
+}
+
+
+@QandA{
+Your teacher will give you and your partner an envelope containing lettered histogram cards. Lay out the cards in front of you.
+
+@Q{What do you Notice about the histograms?}
+
+@Q{What do you Wonder about the histograms?}
+}
+
+Let's sort some histograms!
+
+@lesson-instruction{
+- With your partner, use the histogram cards to sort the cards into two piles: histograms that are roughly symmetrical, and histograms that are not roughly symmetrical.
+- Be prepared to share your groupings with the class.
+}
+
+@teacher{
+If students are not familiar with the concept of "symmetry", spend some time briefly explaining that it exists the right and left side of the data visualization are mirror images. Ensure that students agree on which histograms are symmetrical and which ones are not before proceeding with the activity.
+}
+
+
+=== Investigate
+
+@lesson-instruction{
+- With your partner, use the histogram cards to complete @printable-exercise{sorting-histograms.adoc}.
+- We will pause for discussion after you complete the first section.
+}
+
+@teacher{
+As you circulate, make note of the different groupings that students use; this will help with facilitation of class discussion and debrief. Encourage students to use appropriate vocabulary (i.e., peak, cluster, gap).
+}
+
+Let's debrief.
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Responses will vary. Students may have grouped their histograms by the number of peaks, the number of gaps, or the location of the center. There are no wrong answers here.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+}
+
+@lesson-instruction{
+- With your partner, complete the second section of @printable-exercise{sorting-histograms.adoc}.
+}
+
+@QandA{
+@Q{How did you group your symmetrical histograms?}
+@A{Possible groupings: no peaks, 1 peak, 2 peaks; 1 gap, no gaps; and center at X, center at Y.}
+
+@Q{How can you determine what's typical of a symmetrical histogram?}
+@A{The center of a symmetrical histogram is the line of symmetry. A common misconception is arguing that the center of the axis is the center of the histogram; students must also consider the range of the histogram.}
+}
+
+You probably noticed that some histograms trail off to the left, and others trail off to the right. Statisticians refer to this trailing as "skew". Let's compare skew-left, skew-right, and symmetric histogram shapes.
+
+
+
+[cols="^.^1a,^.^1a,^.^1a", options="header"]
+|===
+
+| Symmetric | Skew-left               | Skew-right
+
+| @image{images/symmetric.png, 150 }| @image{images/left-w-foot.png, 150}  | @image{images/right-w-foot.png, 150}
+
+| Values are balanced on either side of the center.
+
+| Values are clumped around what's typical, but trail off to the right.
+
+| Values are clumped around what's typical, but trail off to the left.
+
+|===
+
+Skew-left distributions look like the toes on your left foot, and skew-right distributions look like the toes on your right foot!
+
+@vocab{Shape} is useful because it enables us to quickly identify and describe trends in data. When we recognize a particular shape, we can immediately draw conclusions about a dataset! We'll dig deeper into that idea in our lesson on @lesson-link{histograms-interpret}.)
+
+*Shape is one of a few key features that sets histograms apart from bar charts!*
+
+@lesson-instruction{
+Complete @printable-exercise{bar-chart-v-histogram.adoc}.
+}
+
+@teacher{
+@printable-exercise{bar-chart-v-histogram.adoc} surfaces two common student misconceptions about bar graphs that @citation{whittaker-jacobbe-2017, "Whittaker and Jacobbe (2017)"} cite in their research.
+
+@centered-image{images/majors-bar-chart.png, 350}
+
+- First, students commonly fail to understand that skew is associated with *distributions of quantitative variables*. This is why a bar graph with its bars arranged in increasing or decreasing order does not display a skewed distribution.
+- Students also commonly believe that the category with the greatest value represents a majority of the responses. In this dataset, that is not the case: the bar representing the college of science does not represent more than half of the students.
+}
+
+Because a bar chart displays categorical data, we can order the bars anyway that we wish. That is not the case with histograms: since quantitative data must follow a natural order, a histogram's bars cannot be re-ordered.
+
+@QandA{
+@Q{What are some ways that bar charts and histograms are alike?}
+@A{Both bar charts and histograms display frequency. Both displays have bars!}
+
+@Q{What are some ways that bar charts and histograms are different?}
+@A{Bar charts display categorical data, while histograms display quantitative data. A histogram's bars touch, and a bar chart's bars do not. Histograms have shape, so their bars cannot be reordered. Bar chart bars can be reordered.}
+}
+
+=== Synthesize
+
+@QandA{
+
+@Q{Envision a skew-left histogram. Where do you think its outliers are? Explain how you know.}
+@A{A skew-left histogram trails off to the right. The histogram trails because there are very few data points (the outliers) to the right, rather than many (causing tall bars).}
+
+@Q{Why do histograms have shape but bar charts do not?}
+@A{Because histograms are quantitative, their bars must appear in numerical order. Bar charts show categorical data, meaning that the bars can be arranged in any way.}
+
+}
+
+@teacher{
+
+Want to check student mastery of the content you've just taught? Administer @assessment{histograms-check1-desmos} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
+
+Alternatively, we offer a compilation of both Checkpoints in @assessment{histograms-cumulative-desmos}.
+}
+
+
+== Choosing the Right Bin Size
+
+@objective{choosing-bin-size}
+
+=== Overview
+Students learn to make histograms from the animals-dataset in @proglang and explore the importance of choosing the right bin size in order for a histogram to show us the shape of the data.
+
+=== Launch
+
+@QandA{
+@Q{What is a bin on a histogram? And what do we already know about them?}
+@A{The goal here is to hear what students have internalized so far. This is not the moment to teach about bins as we are about to delve into a deep exploration.}
+@A{We would expect that students have some sense that bins are the intervals that data gets grouped into.}
+}
+
+Bins that are too small will hide the shape of the data by breaking it into too many short bars. Bins that are too large will hide the shape by squeezing the data into just a few tall bars. So far, the bins were provided for you. But how do you choose a good bin-size?
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{histograms}.}
+
+@lesson-instruction{
+- Open the *Desmos* link I've shared with you. (The file should be called *Histogram Bin Size Exploration*.)
+- Use the Bin Size slider to explore how changing the bin size impacts the shape of the histogram and what we can learn about the distribution of the data.
+- Record your notices and wonders in the space provided on Slide 1.
+- Before moving on to Slide 2, be sure to click the "New Dataset" button and see if you notice and wonder anything new.
+- When you're done exploring Slide 1, move on to Slide 2 and answer the questions.
+}
+
+=== Investigate
+Suppose we want to know how long it takes for animals from the shelter to be adopted.
+
+@lesson-instruction{
+- Log into @starter-file{program-list}, open your saved Animals Starter File (or @starter-file{animals, make a new copy}), and click "Run".
+- Complete @printable-exercise{choosing-bin-size.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What did you Notice?}
+@A{We see most of the histogram's area under the two bars between 0 and 10 weeks, so we can say it was most common for an animal to be adopted in 10 weeks or less.}
+@A{We see a small amount of the histogram's area trailing out to unusually high values, so we can say that a couple of animals took an unusually long time to be adopted: one took even more than 30 weeks.}
+@A{More than half of the animals (17 out of 31) took just 5 weeks or less to be adopted. But the few unusually long adoption times pulled the average up to 5.8 weeks.}
+
+@Q{What was a typical adoption time?}
+@A{Almost all of the animals were adopted in 10 weeks or less, but a couple of animals took an unusually long time to be adopted -- even more than 20 or 30 weeks!}
+@A{Be sure to draw attention to the fact that it would have been hard to give this summary by reading through the table, but the histogram makes it easy to see!}
+
+@Q{What bin sizes worked best for analyzing `adoption`?}
+@A{Have students talk about the bin sizes they tried. Encourage open discussion as much as possible here, so that students can make their own meaning about bin sizes before moving on to the next point.}
+}
+
+@slidebreak
+
+@lesson-point{
+Rule of thumb: a histogram should have between 5–10 bins.
+}
+
+Histograms are a powerful way to display a dataset and assess its @vocab{shape}. Choosing the right bin size for a column has a lot to do with how data is distributed between the smallest and largest values in that column! With the right bin size, we can see the _shape_ of a quantitative column.
+
+@teacher{
+But how do we talk about or describe that shape, and what does the shape actually tell us?
+
+Our @lesson-link{histograms-interpret} lesson addresses these questions and explores how histogram shape affects the mean (average).
+}
+
+=== Synthesize
+
+@QandA{
+
+@Q{What would the histogram look like if most of the animals took more than 20 weeks to be adopted, but a couple of them were adopted in fewer than 5 weeks?}
+@A{The histogram would be skewed left, with a peak on the right.}
+
+
+@Q{What would the histogram look like if every animal was adopted in roughly the same length of time?}
+@A{All of the animals would be stacked into one very tall bar.}
+}
+
+@teacher{
+
+Want to check student mastery of the content you've just taught? Administer @assessment{histograms-check2-desmos} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
+
+Alternatively, we offer a compilation of both Checkpoints in @assessment{histograms-cumulative-desmos}.
+}

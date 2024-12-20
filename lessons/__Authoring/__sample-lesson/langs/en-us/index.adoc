@@ -14,40 +14,67 @@ deadlift. @math{3a   =   2h   +  1i} or  @math{3=2+1}
 
 @keywords{larry, curly, moe}
 
+This is a common misconception (@citation{groth-bergner-2006}).
+
 [@lesson-intro-table]
 |===
 
 | Lesson Goals
 | Students will be able to:
-
-* Goal #1
-* Goal #2
+@objectives
 
 | Student-Facing Goals
 |
-* I can...
-* I can...
-* I can...
+ I can...
+- I can...
+- I can...
 
 | Materials
 |[.materials-links]
 @material-links
 
+| Assessments
+|[.assessment-links]
+@assessments
+
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
 
-
-* Make @hspace{6em} sure all materials have been gathered
-* Decide how students will be grouped in pairs
-
 | Supplemental Resources
 | 
+
+| Preparation
+| @preparation{
+- Decide how much choice you're ready to offer your students before you begin. Research shows that choice increases student engagement! But focusing the whole class on a single dataset is also an option.
+  * Would focusing your students on a single dataset make this doable for you? Because you teach younger students who might need more scaffolding? Or because you are new to teaching data science and managing fewer moving parts would increase your confidence? @ifproglang{pyret}{We recommend focusing on @opt-starter-file{food}.}
+}
+
+| Key Points for the Facilitator
+| *Authors: Lesson section titles should mean something to teachers who haven't worked with previous Bootstrap lessons*
 
 |===
 
 
-== Graphing logarithmic models __f(x) = a log~b~ x + c__
+== Graphing logarithmic models __f(x) = a log~b~ x + c__ 
+
+@objective{expressions-exponents}
+@objective{develop-statistical-question}
+Each section should declare its objectives. These will automatically be compiled in the order they appear in lesson plan the materials table. The objectives get defined in various files found in the `shared/langs/en-us/learningObjectives`. 
+
+Norms we have agreed upon for these objectives include the following:
+- learning objective is the right size for us to imagine the assessment that would let us know that a student has met the objective
+- learning objective should stand on its own if taken out of the context of the lesson plan
+- Always capitalize the first letter
+- Always end with a period
+- Explain, Understand, Define, describe how __ works together", should explicitly include the enduring understanding we expect students to articulate.
+- Never use "Animals Dataset" or "their chosen dataset" in Learning Objective
+- Bootstrap-specific terminology should be used only when necessary
+- Add "in ATifproglang{}" to objectives about visualizations
+- Dependent clauses should go at the end
+- bold "and" when it's critical for all components to be used a
+- "or" should be used when any of the modalities would meet the objective
+- "Diagram with Circles of Evaluation" not Model with
 
 === Overview
 One sentence here, describing the section
@@ -80,9 +107,9 @@ Use `lesson-point` to callout a short-but-important points.
 
 3-4 sentences of prose describing task.
 
-/// images are added with the following args: source, description, width, height, and source
+/// images are added. width arg is optional. other properties including source/license (required) and caption (optional) must be defined in the lesson-images.json file
 
-@image{images/tbdek.jpg, "This is an image caption", 400, 100, From Dorai's personal stash}
+@image{images/tbdek.jpg, 400}
 
 @printable-exercise{pageA1.adoc} _These pages will be included in the workbook if the lesson is part of a pathway. Because our lessons are mix and match, we do not talk about them as workbook pages. And we also generally try to avoid use of the word worksheet._
 
@@ -94,16 +121,29 @@ Use `lesson-point` to callout a short-but-important points.
 Use the `lesson-instruction` class for prose aimed directly at telling students what to do
 }
 
+@QandA{
+@Q{Use this to scaffold classroom conversations.}
+@Q{questions - will appear in slides and lesson plans}
+@A{answers - will appear in lesson plans, but only be visible in speaker notes on slides}
+
+@Q{Do you think age is the only factor that determines how long it takes for an animal to get adopted?}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. For example: 
+*** No! People like animals that are cute and friendly. 
+*** Some dog breeds are probably more popular than others. 
+*** Animals that are healthy might get adopted faster.
+}
+}
+
 === Common Misconceptions
 
 What are the most likely places kids will get stuck? Why? How do we help them?
 
 === Synthesize
 
-* Guiding questions with responses here.
-* And here.
-* And here.
-* etc.
+- Guiding questions with responses here.
+- And here.
+-  And here.
+- etc.
 
 @strategy{Strategies for English Language Learners}{
 
@@ -114,6 +154,7 @@ precision in the words being used to reinforce the meanings
 behind some of the programming-specific language.
 }
 
+@ifproglang{pyret}{@assessment{histograms-check2-desmos}}
 
 == Additional Exercises
 

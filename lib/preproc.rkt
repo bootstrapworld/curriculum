@@ -170,13 +170,43 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starter-files.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
             (read i) (read i) (read i)
             (read-json i)))
         '())))
+
+(define *assessments*
+  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+    (if (file-exists? assessments-file)
+        (call-with-input-file assessments-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
+(define *learning-objectives*
+  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
+    (if (file-exists? learning-objectives-file)
+        (call-with-input-file learning-objectives-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
+(define *citations*
+  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+    (if (file-exists? citations-file)
+        (call-with-input-file citations-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
+(define *objectives-met* '())
+(define *assessments-met* '())
 
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
@@ -840,7 +870,8 @@
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"
-                                 *dist-root-dir* f link-text
+                                 "{fromlangroot}"
+                                 f link-text
                                  (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))])
         link-output))))
 
@@ -849,17 +880,25 @@
   (cond [(regexp-match "^ *$" f)
          ;just to avoid error
          (set! f "./index.adoc")]
+        [(regexp-match "(.*)/#([^/]+)$" f)
+         => (lambda (m)
+              (let ([dir (second m)] [sec (third m)])
+                (set! f (format "~a/index.adoc#~a" dir sec))))]
         [(regexp-match "/$" f)
          (set! f (string-append f "index.adoc"))]
         [(regexp-match "^[^/]+$" f)
          (set! f (string-append f "/index.adoc"))])
 
-  ; (printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
+  ;(printf "doing make-lesson-link ii ~s ~s\n\n" f link-text)
 
-  (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
+  (let* ([m (regexp-match "^(.*)/([^/#]*)(#?[^/]*)$" f)]
          [dir (second m)]
-         [snippet (third m)]
+         [fyle (third m)]
+         [sec (fourth m)]
          [dir-compts (regexp-split #rx"/" dir)])
+
+    (unless (string=? sec "")
+      (set! f (string-append dir "/" fyle)))
 
     (let* ([first-compt (first dir-compts)]
            [q (qualify-proglang first-compt (format "distribution/~a/lessons" *natlang*)
@@ -868,13 +907,13 @@
         (set! dir
           (string-join
             (cons q (rest dir-compts)) "/"))
-        (set! f (string-append dir "/" snippet))))
+        (set! f (string-append dir "/" fyle))))
 
     (set! f (format "distribution/~a/lessons/~a" *natlang* f))
     (set! dir (format "distribution/~a/lessons/~a" *natlang* dir))
 
     (let* ([f.titletxt (path-replace-extension
-                         (string-append dir "/.cached/." snippet)
+                         (string-append dir "/.cached/." fyle)
                          ".titletxt")]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
@@ -914,9 +953,9 @@
       (when (path? f) (set! f (path->string f)))
       (let ([link-output
 
-              (format "link:~apass:[~a][~a~a]"
-                      "{fromlangroot}"
+              (format "link:{fromlangroot}pass:[~a~a][~a~a]"
                       (regexp-replace "distribution/[^/]+/" f "")
+                      sec
                       link-text
                       (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))
 
@@ -1091,7 +1130,6 @@
     (display title o)
     (newline o)
     (newline o)
-    (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
     (when (and *lesson-subdir* (not *lesson-plan*) (not *narrative*))
       (let ([lesson-title-file
@@ -1310,6 +1348,8 @@
   (set! *opt-starter-file-links* '())
   (set! *opt-project-links* '())
   (set! *exercises-done* '())
+  (set! *objectives-met* '())
+  (set! *assessments-met* '())
   (set! *starter-files-used* '())
   (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
@@ -1705,6 +1745,9 @@
                                   (create-end-tag "span")) o))]
                            [(string=? directive "fitb")
                             (let ([width (read-group i directive)])
+                              (unless (char=? (ignorespaces-peek-char i) #\{)
+                                (printf "WARNING: ~a: @fitb{~a} requires second arg\n\n"
+                                       (errmessage-context) width))
                               (if (string=? width "")
                                 (display-begin-span
                                   ".fitb.stretch" o)
@@ -1910,6 +1953,65 @@
                                                                   (cons styled-link-output
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
+                          [(string=? directive "assessments")
+                           (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
+                          [(string=? directive "assessment")
+                           (let* ([lbl (string->symbol (read-group i directive))]
+                                  [c (hash-ref *assessments* lbl #f)]
+                                  [title (and c (hash-ref c 'title #f))]
+                                  [url (and c (hash-ref c 'url #f))]
+                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
+                             (when pl-specific
+                               (let ([x (hash-ref pl-specific 'title #f)])
+                                 (when x (set! title x)))
+                               (let ([x (hash-ref pl-specific 'url #f)])
+                                 (when x (set! url x))))
+                             (unless title (set! title url))
+                             (cond [(not c)
+                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
+                                   [(not url)
+                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                            (errmessage-context) directive
+                                            lbl *proglang*)]
+                                   [else
+                                     (unless (assoc url *assessments-met*)
+                                       (set! *assessments-met*
+                                         (cons (cons url title)
+                                               *assessments-met*)))
+                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
+                          [(string=? directive "citation")
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [args-len (length args)]
+                                  [lbl (string->symbol (first args))]
+                                  [c (hash-ref *citations* lbl #f)]
+                                  [in-text (and c (hash-ref c 'in-text #f))]
+                                  [apa (and c (hash-ref c 'apa #f))])
+                             (cond [(> (length args) 1)
+                                    (set! in-text
+                                      (expand-directives:string->string
+                                        (second args)))]
+                                   [in-text
+                                     (set! in-text
+                                       (expand-directives:string->string in-text))]
+                                   [else lbl])
+                             (unless apa (set! apa lbl))
+                             (cond [(not c)
+                                    (printf "WARNING: ~a: Undefined @~a ~a\n\n"
+                                            (errmessage-context) directive lbl)]
+                                   [(not in-text)
+                                    (printf "WARNING: ~a: @~a ~a missing\n\n"
+                                            (errmessage-context) directive lbl)]
+                                   [else (display
+                                           (enclose-span ".citation" 
+                                            (string-append in-text (enclose-span ".apa-citation" apa)))
+                                           o)]))]
+                          [(string=? directive "objectives")
+                           (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
+                          [(string=? directive "objective")
+                           (let ([lbl (string->symbol (read-group i directive))])
+                             (unless (member lbl *objectives-met*)
+                               (set! *objectives-met*
+                                 (cons lbl *objectives-met*))))]
                            [(string=? directive "opt-project")
                             (let* ([arg1 (read-commaed-group i directive read-group)]
                                    [project-file (first arg1)]
@@ -2108,6 +2210,7 @@
                     [*narrative* (display "[.narrative]\n" o)]
                     [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
+              (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
 
@@ -2139,6 +2242,9 @@
                 )
 
               (when *lesson-plan*
+                (store-assessments)
+                (store-objectives)
+
                 (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
@@ -2433,6 +2539,37 @@
       #:exists 'replace))
 
   )
+
+(define (store-assessments)
+  (call-with-output-file
+    (build-path *containing-directory* ".cached" ".index-assessments.asc")
+    (lambda (o)
+      (unless (null? *assessments-met*)
+        (for ([asst (reverse *assessments-met*)])
+          (fprintf o "- link:pass:[~a][~a]\n"
+                   (car asst) (cdr asst)))))
+    #:exists 'replace))
+
+(define (store-objectives)
+  (call-with-output-file
+    (build-path *containing-directory* ".cached" ".index-objectives.asc")
+    (lambda (o)
+      (unless (null? *objectives-met*)
+        (for ([lbl (reverse *objectives-met*)])
+          (let* ([c (hash-ref *learning-objectives* lbl #f)]
+                 [x #f])
+            (when c (set! x (hash-ref c 'text #f)))
+            (cond [(not c)
+                   (set! x lbl)
+                   (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
+                  [(not x)
+                   (set! x lbl)
+                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                  [else (set! x (expand-directives:string->string x))])
+            (display "- " o)
+            (display x o)
+            (newline o)))))
+    #:exists 'replace))
 
 (define (display-standards-selection o *narrative*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)

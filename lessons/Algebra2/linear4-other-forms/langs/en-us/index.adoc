@@ -1,0 +1,191 @@
+= Other Forms of Linear Models
+
+@description{Students explore slope-intercept, point-slope, and standard forms of linear models. They consider situations in these forms make fitting a model easier or more challenging, and practice converting between forms.}
+
+@lesson-prereqs{contracts-visualizations}
+
+@keywords{linear, slope, intercept, slope-intercept, general normal form, point-slope}
+
+@add-to-lang{fit-model, S}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+
+| Student-facing Lesson Goals
+|
+
+-
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+
+| Key Points For The Facilitator
+|
+-
+
+|===
+
+== Other Forms of Linear Models
+@objective{linear-forms}
+
+=== Overview
+Students are reminded of the three forms of linear models available to us, discuss when and why we might choose one form over another, and practice translating between them.
+
+=== Launch
+
+When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
+
+So far we have only discussed vertical shifts, but it is also possible to shift a line or curve horizontally. 
+
+The *Slope-Intercept* form of the line we've been using tells us about the slope (@math{m}) and the vertical shift. It is also possible to shift a line or curve horizontally, and for some of the non-linear models we will be exploring in this course, identifying the horizontal shift will be important. To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
+
+@lesson-point{
+Using the form @math{f(x) = m(x-h) + k}@hspace{1em} allows us to change both the horizontal shift (@math{h}) and the vertical shift (@math{k}).
+}
+
+_Note: When the horizontal shift is zero, we can safely remove (@math{h}) from the equation. That's exactly what we've been doing with our Slope-Intercept form._
+
+@lesson-instruction{
+- Let's take a moment to explore how horizontal shifts work with linear functions.
+- Complete @opt-starter-file{alg2-horizontal}.
+}
+
+@QandA{
+@Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
+@A{No. Because lines go on forever without changing direction, horizontal shifts can always be accounted for with vertical shifts. We can prove this to ourselves algebraically because if we distribute the @math{m} in the equation @math{f(x) = m(x-h) + k}, we get @math{f(x) = mx - mh + k} and since @math{mh} and @math{k} will always be numbers, we can just add them together to get the y-intercept.} 
+}
+
+We will mostly be using *Slope-Intercept* form of the line in this course, because it's the simplest form that is defined in terms of the response variable, making it most compatible with the programming environment
+
+But, depending on the information we have available to us - or who we're writing this model for - we might want to use _other_ forms of linear models. Fortunately, we can always translate any model into another!
+
+@slidebreak
+
+You may already be familiar with the different forms of linear models available to us:
+
+[cols="^5a,^6a,^5a", options="header"]
+|===
+| Slope-Intercept		| Point-Slope				| Standard
+| @math{y = mx+b}		| @math{y-y_1 = m(x-x_1)}	| @math{Ax+By = C}
+<| 
+- m: slope
+- b: y-intercept / vertical shift
+<|
+- m: slope
+- @math{y_1}: y-coordinate of a point
+- @math{x_1}: x-coordinate of the same point
+<|
+- x-int: @math{\frac{C}{A}}
+- y-int: @math{\frac{C}{B}}
+- slope: @math{- \frac{A}{B}}
+|===
+
+@slidebreak
+
+(1) *Slope-Intercept Form* makes it really easy to read the slope and y-intercept.
+
+(2) *Point-Slope Form* makes it easy to find the equation of the line given a single point and slope.
+
+(3) *Standard Form* makes it easy to find the x- and y-intercepts of the line.
+
+@strategy{Why do we use these letters as stand-ins for the constants?}{
+The letters used in these forms of the line are just conventions people have agreed upon over time! 
+
+Standardized conventions have their benefits, but sometimes they also have downsides.
+
+For example, some students might be confused by the fact that:
+
+- @math{b} in the slope-intercept form and @math{B} in standard form represent different things
+- @math{b} represents the vertical shift in linear models while it represents the base in exponential models
+
+As we've thought through what would best support students with learning to model data, we've learned that people are in less agreement about how to name constants for non-linear models. 
+
+We believe that what would best support students is to use letters that highlight the similarities between the various models they will be seeing.  Our nonlinear modeling materials will consistently use @math{k} for the vertical shift.
+
+Applying this to the point-slope form, we'd get: @hspace{1em} @math{y=mx+ k}
+
+You can foreshadow this for your students by discussing the fact that while the letters used are conventions, they are stand-ins for patterns and that, having identified the pattern of the point-slope form, we could just as easily have written it with other letters.
+}
+
+@teacher{Pose the questions below to assess student understanding of when and why we might choose one form over another.}
+
+Why we might choose to use one form over another?
+
+@QandA{
+@Q{Suppose our scatter plot has a state with 0% college enrollment, and another with 0% median income. Which linear model form would be easiest to build?}
+@A{Standard Form}
+@Q{Suppose we only know the slope of a model, but we know the college graduation rate _and_ median income for Rhode Island. Which form would make it easy to figure out the rest of the model?}
+@A{Point-Slope Form}
+@Q{Which form makes it easiest to define our model in Pyret?}
+@A{Slope-Intercept Form}
+}
+
+=== Investigate
+
+While it's easier to write one linear form or the other based on the information available to us, and might be easier for someone else to extract the information they're looking for based on the model we supply them with, we can easily translate back and forth between linear forms!
+
+@lesson-instruction{
+- Let's practice writing linear functions in each of the forms and translating them into Pyret function definitions.
+- Turn to @printable-exercise{which-form.adoc}
+- When you're done, add your function definitions to your @starter-file{alg2-states-fit-model} and test them out with `fit-model`.
+}
+
+=== Synthesize
+If you needed to draw the graph of a linear model, which form would you like to start from? Why?
+
+@scrub{
+== Investigating Horizontal and Vertical Shifts
+
+=== Overview
+
+In preparation for work with quadratic, exponential and logarithmic functions, students explore the relationship between horizontal and vertical shifts of linear functions. Written exercises accompany an interactive Desmos slider activity we've created.
+
+=== Launch
+
+Lines can be shifted up, down, left and right by adding and subtracting to their definitions. Let's see if we can decode the pattern! 
+
+=== Investigate
+
+@lesson-instruction{
+- Turn to @opt-printable-exercise{horizontal-shift.adoc}, which will guide you through the Desmos activity: @link{https://www.desmos.com/calculator/hong7gv82k, Exploring Horizontal and Linear Shifts in Linear Functions} step by step.
+- As you work through the activities, pay careful attention to directions telling you know which graphs to turn "on" and "off" for each section.
+}
+
+@teacher{There are 3 folders in this Desmos activity. Students will be opening them one at a time by clicking on the triangles and then turning the lines defined within them on and off as directed using the circles in front of the folders.}
+
+@opt{These two paper and pencil exercises guide students through thinking about how horizontal and vertical shifts are related, depending on whether a line has a positive or negative slope:
+
+- @opt-printable-exercise{hor-vert-shift-positive.adoc}
+- @opt-printable-exercise{hor-vert-shift-negative.adoc}
+}
+
+=== Synthesize
+
+What did you discover about recognizing horizontal and vertical shifts from linear equations?
+
+}
+
+== Additional Exercises
+
+To practice reading linear models and connecting them to graphs:
+
+- @opt-printable-exercise{match-graph-ps.adoc}
+- @opt-printable-exercise{match-graph-sf.adoc}
+- @opt-printable-exercise{match-graph-si.adoc}.
+- @opt-printable-exercise{match-graph-def.adoc}.
+
+For practice translating the models we've written today into other forms:
+
+- @opt-printable-exercise{other-forms-linear-models.adoc}.
