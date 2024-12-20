@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries citations
 
 ###############################################################################
 
@@ -163,6 +163,15 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 learningObjectives: distribution/$(NATLANG)/learningObjectives.js
 
 distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+	@echo ➤ Build $@
+	@node $+ $@
+
+
+###############################################################################
+
+citations: distribution/$(NATLANG)/citations.js
+
+distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
 	@node $+ $@
 

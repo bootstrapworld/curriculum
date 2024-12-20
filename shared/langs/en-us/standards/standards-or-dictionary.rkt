@@ -262,7 +262,7 @@
      "data-cycle"
      "measures-of-center"
      "histograms"
-     "visualizing-the-shape-of-data"
+     "histograms-interpret"
      "box-plots"
      )
     ("6.DR.A.1"
@@ -280,7 +280,7 @@
      "Collect and record data with technology to identify and describe the characteristics of numerical data sets using quantitative measures of center and variability."
      "measures-of-center"
      "histograms"
-     "visualizing-the-shape-of-data"
+     "histograms-interpret"
      "box-plots"
      "standard-deviation"
      )
@@ -301,7 +301,7 @@
     ("6.DR.D"
      "Interpret data and answer investigative questions."
      "measures-of-center"
-     "visualizing-the-shape-of-data"
+     "histograms-interpret"
      "box-plots"
      "project-data-exploration"
      "project-research-paper"
@@ -873,7 +873,7 @@
      "Identify appropriate ways to summarize and then represent the distribution of univariate and bivariate data multiple ways with graphs and/or tables. Use technology to present data that supports interpretation of tabular and graphical representations."
      "standard-deviation"
      "box-plots"
-     "visualizing-the-shape-of-data"
+     "histograms-interpret"
      "histograms"
      )
     ("HS.DR.C.9"	
@@ -888,7 +888,7 @@
      "standard-deviation"
      "box-plots"
      "measures-of-center"
-     "visualizing-the-shape-of-data"
+     "histograms-interpret"
      "histograms"
      )
     ("HS.DR.D"	

@@ -196,6 +196,15 @@
             (read-json i)))
         '())))
 
+(define *citations*
+  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+    (if (file-exists? citations-file)
+        (call-with-input-file citations-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
 (define *objectives-met* '())
 (define *assessments-met* '())
 
@@ -1970,6 +1979,32 @@
                                          (cons (cons url title)
                                                *assessments-met*)))
                                      (fprintf o "link:pass:[~a][~a]" url title)]))]
+                          [(string=? directive "citation")
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [args-len (length args)]
+                                  [lbl (string->symbol (first args))]
+                                  [c (hash-ref *citations* lbl #f)]
+                                  [in-text (and c (hash-ref c 'in-text #f))]
+                                  [apa (and c (hash-ref c 'apa #f))])
+                             (cond [(> (length args) 1)
+                                    (set! in-text
+                                      (expand-directives:string->string
+                                        (second args)))]
+                                   [in-text
+                                     (set! in-text
+                                       (expand-directives:string->string in-text))]
+                                   [else lbl])
+                             (unless apa (set! apa lbl))
+                             (cond [(not c)
+                                    (printf "WARNING: ~a: Undefined @~a ~a\n\n"
+                                            (errmessage-context) directive lbl)]
+                                   [(not in-text)
+                                    (printf "WARNING: ~a: @~a ~a missing\n\n"
+                                            (errmessage-context) directive lbl)]
+                                   [else (display
+                                           (enclose-span ".citation" 
+                                            (string-append in-text (enclose-span ".apa-citation" apa)))
+                                           o)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
                           [(string=? directive "objective")
