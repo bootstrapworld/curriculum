@@ -1,0 +1,45 @@
+[.landscape]
+= Matching Data Science Problems and Purpose Statements
+
+++++
+<style>
+/* Format matching answers to render with an arrow */
+.solution::before { content: ' → '; }
+</style>
+++++
+
+Match each data science problem below to its corresponding purpose statement.
+
+[.FillVerticalSpace, cols=".^10a, .^2, .^1, ^.^1, >.^10a", grid="none", frame="none", options="header"]
+|===
+| Data Science Problem
+|
+|
+|
+| Purpose Statement
+
+| Steve wants a function that will look at an animal from the `animals-table`, and return true if it's older than six.
+| *@n* @ifsoln{C}
+| 
+| *A*
+| Consume a Row, and check if `species == "cat"` and `age < 1`
+
+| Mandolin wants a function that will draw a red star for each animal in the shelter. The size of the star should be a measure of how many pounds the animal weighs.
+| *@n* @ifsoln{B}
+| 
+| *B*
+| Consume a Row, and produce a solid red star using `pounds` as the radius.
+
+| Tara wants to see a table of ONLY cats, rabbits, and tarantulas. She needs a function that will check if an animal is one of those species.
+| *@n* @ifsoln{D}
+| 
+| *C*
+| Consume a Row, and check if `age > 6`
+
+| Bharti is looking for kittens, so she wants a function that only returns true if the animal is a cat AND is less than 1 year old.
+| *@n* @ifsoln{A}
+| 
+| *D*
+| Consume a Row, and check if `species == "cat"`, `species == "rabbit"`, or `species == "tarantula"`
+
+|===
