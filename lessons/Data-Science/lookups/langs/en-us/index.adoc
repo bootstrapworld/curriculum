@@ -181,7 +181,7 @@ end
 
 Circling and labeling the parts that change helps us define the function:
 
-@show{(code '(define (nametag name) (code '(text name 20 "blue"))))}
+@show{(code '(define (nametag name) (text name 20 "blue")))}
 
 @slidebreak
 
@@ -194,8 +194,10 @@ Circling and labeling the parts that change helps us define the function:
 
 @slidebreak
 
+Rewriting the definition to lookup the value of `dog-row`'s age gives us the final code:
+
 ```
-fun nametage(name): text("name", dog-row["age"], "blue") end
+fun nametag(name): text("name", dog-row["age"], "blue") end
 ```
 
 === Investigate
@@ -207,7 +209,7 @@ fun nametage(name): text("name", dog-row["age"], "blue") end
 
 @slidebreak
 
-In @lesson-link{functions-make-life-easier}, you defined a function called `sticker`. It took in a color and produced a solid circle of radius 100, of whatever color was passed in:
+In @lesson-link{functions-make-life-easier}, you defined a function called that took in a color and produced a solid circle of radius 100, of whatever color was passed in:
 
 @center{`fun bigc(color): circle(100, "solid", color) end`}
 
