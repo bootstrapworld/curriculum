@@ -16,7 +16,7 @@
 @objectives
 @objective{contract-parts}
 @objective{contract-use}
-@objective{Demonstrate understanding of Domain and Range and how they relate to Functions}
+@objective{functions-domain-range}
 
 | Student-facing Lesson Goals
 |
@@ -27,8 +27,8 @@
 
 | Materials
 |[.materials-links]
-@material-links
-@include{pages/contract-links.adoc}
+
+- @dist-link{Contracts.shtml, Contracts Pages} (a complete list of all the contracts)
 
 | Supplemental Materials
 |[.materials-links]
@@ -46,7 +46,7 @@
 
 |===
 
-== Applying Functions - Reading Contracts @duration{15 minutes}
+== Applying Functions - Reading Contracts
 
 === Overview
 Students learn how to apply functions in @proglang, and are introduced to the notion of @vocab{Contracts}: a simple notation for keeping track of all possible input and output sets for a function.
@@ -206,7 +206,7 @@ We're building toward an understanding of three different representations for fu
 The goal is to get fluent in each representation. Eventually, we're going to talk about how each representation is essentially a tool you can use for solving word problems. If you know how to fit them together, you get a nice road map for attacking virtually any word problem you'll encounter.
 }
 
-== Bug Hunting @duration{10 minutes}
+== Bug Hunting
 
 === Overview
 This activity focuses on what we can learn from error messages when a Contract is broken. The error messages in this environment are _specially-designed_ to be as student-friendly as possible.
@@ -259,7 +259,7 @@ This means that the computer knows about a function called `triangle`.
 
 @QandA{
 @Q{What is the Contract for `triangle`?}
-@A{@show{(contract `triangle `(Number String String) "Image")}}
+@A{@show{(contract 'triangle '(Number String String) "Image")} }
 }
 
 === Investigate
@@ -290,7 +290,7 @@ Turn to the second section of @printable-exercise{catching-bugs.adoc} with your 
 - What kinds of @vocab{syntax errors} did you find?
 - What kinds of @vocab{contract errors} did you find?
 
-== Exploring Image Functions @duration{20 minutes}
+== Exploring Image Functions
 
 === Overview
 
@@ -310,7 +310,7 @@ Students explore image functions to take ownership of the concept and create an 
 
 Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for _everyone to have the opportunity to explore._
 
-Later in this lesson students will be guided through more scaffolded and in-depth reflection on `isosceles-triangle`, `right-triangle`, `ellipse`, `rhombus`, `regular-polygon` and `radial-star`. There are also optional pages for digging deeper into `star-polygon`, `triangle-asa` and `triangle-sas`.
+Later in this lesson students will be guided through more scaffolded and in-depth reflection on `isosceles-triangle`, `right-triangle`, `ellipse`, `rhombus`, `regular-polygon` and more. There are also optional pages for digging deeper into `radial-star`, `star-polygon`, `triangle-asa` and `triangle-sas`.
 
 Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages.
 }
@@ -342,7 +342,8 @@ It can be empowering for students to develop expertise on a topic and get to sha
 
 @lesson-instruction{
 - Let's do some more experimenting with some of the more complex image functions from the list we just saw! This time around we'll start with their contracts.
-- Complete @printable-exercise{triangle-contracts.adoc}, @printable-exercise{using-contracts.adoc} and @printable-exercise{radial-star.adoc} with your partner.
+- Complete @printable-exercise{triangle-contracts.adoc}, @printable-exercise{using-contracts.adoc} with your partner.
+- @opt{If time allows, complete @opt-printable-exercise{radial-star.adoc} with your partner.}
 }
 
 @opt{If your students are ready to dig into more complex triangles, @opt-printable-exercise{triangle-contracts-cont.adoc} will be a good challenge. Another option for further investigation is @opt-printable-exercise{star-polygon.adoc}.}
@@ -365,7 +366,7 @@ It can be empowering for students to develop expertise on a topic and get to sha
 - Was it harder to find contracts for some of the functions than others? Why?
 - How was it different to code expressions for the shape functions when you started with a Contract?
 
-== Composing with Circles of Evaluation @duration{10 minutes}
+== Composing with Circles of Evaluation
 
 === Overview
 
@@ -414,7 +415,7 @@ The rules are simple:
 
 @slidebreak
 
-_Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Circles of Evaluation let us see the structure._
+_Circles of Evaluation let us see the structure._
 
 [cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===
@@ -451,7 +452,8 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 @slidebreak
 
 @lesson-instruction{
-Turn to the *Let's Rotate an image of your name!* section of @printable-exercise{text-coe.adoc} and practice converting the Circle of Evaluation you draw into code.
+- Complete @printable-exercise{coe-to-code-scaffolded.adoc}.
+- Then turn to the *Let's Rotate an image of your name!* section of @printable-exercise{text-coe.adoc} and practice converting the Circle of Evaluation you draw into code.
 }
 
 === Synthesize

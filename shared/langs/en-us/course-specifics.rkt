@@ -10,7 +10,7 @@
     ("algebra-wescheme" "Bootstrap: Algebra")
     ("algebra-pyret" "Bootstrap: Algebra")
     ("data-science" "Bootstrap:Data Science")
-    ("data-literacy-codap" "Bootstrap:Data Literacy (in CODAP)")
+    ("data-literacy-codap" "Bootstrap:Data Literacy (CODAP)")
     ("history-social-studies" "Bootstrap:Social Studies")
     ("hour-of-code" "Hour of Code")
     ("expressions-and-equations" "Bootstrap:Expressions and Equations")
