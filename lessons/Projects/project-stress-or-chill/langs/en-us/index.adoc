@@ -1,76 +1,205 @@
-[.canBeLongerThanAPage]
-= Stress or Chill?
+= Project: Stress or Chill
 
-== The Issue
+@description{Students will collect and analyze a sample of data related to their class' stress levels, applying what they've learned about filtering and building to make advanced displays to answer statistical questions. The final product will be a written report, including two facts they found in the research about teens and stress that connect to their class data.}
 
-People report being more and more stressed every day - and that the amount of work they are expected to complete in a day is increasing. This trend extends beyond adults, with children and teenagers also reporting increased stress levels.
+@ifproglang{pyret}{
+@lesson-prereqs{filtering-and-building}
+}
+@ifproglang{codap}{
+@lesson-prereqs{codap-filtering}
+}
 
-== Phases of the Project
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
 
-=== 1. Ask questions
+- Apply what they've learned about filtering data, building columns, asking statistical questions and making advanced displays to answer their own questions about a collectively generated dataset.
 
-We will investigate questions about ourselves:
+| Student-facing Lesson Goals
+|
 
-- What factors affect my stress level?
-- What is my typical stress level?
+- Let's use what we've learned so far in Bootstrap:Data Science to see what we can learn about our stress levels and how they compare to teen stress levels in general!
 
-@vspace{1ex}
+| Materials
+|[.materials-links]
+@material-links
 
-We will investigate questions about our class:
+| Preparation
+|
+@preparation{
+- Make a copy of the @starter-file{stress-or-chill} and share a link with your students so that all of their responses will end up in the class' collective spreadsheet.
+- None of the handouts for this project are in the workbook, so be sure to print copies of whatever you'll be distributing.
+- Teachers are welcome and encouraged to edit and adapt the @handout{rubric-stress-or-chill.adoc, student facing rubric} for their unique classroom context and distribute it to help students understand the scope of the project - and your expectations - at the outset.
+}
 
-- What factors affect our class stress level?
-- What is the typical stress level of our class?
+| Facilitation Note
+|
+- This project involves 5 days of data collection before students can do any analysis in @proglang. It is most efficient to introduce the project midweek so that two of the data collection days fall on the weekend!
+@ifproglang{pyret}{
+- If you get your students started with the data collection phase of this project and then teach @lesson-link{advanced-displays} while they're building the dataset, they will have a lot more tools for analyzing the data.
+}
+- This project scratches the surface of what it means to clean data. If you find yourself wanting to dig deeper into that now, we offer an entire Bootstrap lesson on @lesson-link{data-collection} that could be taught during this project.
+- Some veteran Bootstrap teachers opt to have their students push beyond the scope of this project by building visualizations for their own personal data from a filtered table made
+  @ifproglang{codap}{with teacher support.}
+  @ifproglang{pyret}{with a teacher-provided filter function.}
 
-@vspace{1ex}
 
-We will do some comparing:
+| Project Origins
+|
 
-- How does my stress level compare to that of my class?
+- This project builds on pieces of the *What Stresses Us?* project from @link{http://introdatascience.org/, mobilizing IDS}.
 
-@vspace{1ex}
+|===
 
-And finally, we will examine the relationship between stress level and personality type:
+== Building a Dataset: Our Stress Levels & Context
 
-- Do differences in personality type result in different stress levels for people?
-- Do personalilty assessments tell us useful things about a person's personality?
+=== Overview
 
-=== 2. Consider Data
+In order to generate a collective dataset about our stress levels and possible factors, students will complete a Google form about their stress levels at randomly assigned times, twice a day for five days.
 
-Given that we are analyzing two different types of data - stress data and personality data - there are *two* phases of data collection.
+=== Launch
 
-@vspace{1ex}
+For the next 5 days (including a weekend) each student in our class will record two entries per day on our class stress survey.
 
-First, you will complete the @link{https://my-personality-test.com/true-colours, Personality Colors Assessment}. This should take 5-10 minutes. After answering a series of multiple choice questions, your "personality color" will be revealed to you - blue, green, orange, or gold. Take a moment to read about your personality type, and then learn about the other personality types. Which personalitly type do you think will experience the most stress? Make a note of your result.
+@lesson-instruction{
+- Turn to @handout{stress-or-chill-data.adoc} and take a look at the kinds of questions you will be answering.
+- What do you Notice? What do you Wonder?
+- With your partner complete the third column of the table by deciding what data type each variable will be.
+}
 
-@vspace{1ex}
+@teacher{
 
-Next, we will develop a plan to collect data on stress in our lives:
+Confirm that students have correctly identified the data types.
 
-- First, @link{https://docs.google.com/forms/u/0/d/1OrUCCL8kdhpTf78vzDUO6iBhw0jDLRK9kpqHRTvj6YE/copy, take a look at the "Stress or Chill? Daily Survey"}. In this project, we want to examine _classwide_ data. *You MUST use the designated class survey link that your teacher provides.* If you use the wrong survey link, your data will not be included in our class dataset.
+}
 
-- For the next 5 days (including a weekend) each student in our class will record three entries per day on our class stress survey - ideally once in the morning, once in the afternoon, and once in the evening.
+=== Investigate
 
-- If you are unable to access the stress survey during a designated time, jot down any observations on paper or make a mental note. (See the survey, above, to understand what you'll be looking for.) As soon as you are able, submit the survey.
 
-- When possible, take a photo of what you are doing at each time slot. Save any photographic evidence for possible inclusion in your final report.
+@teacher{
+Be sure you've made a copy of the @starter-file{stress-or-chill} for your class and shared a link with your students.
 
-=== 3. Analyze the Data
+Note: Each school has a different philosophy on whether phones can be used as a tool during the school day. Be prepared to modify the directions below about setting alarms based on how it would work best for your students.
+}
 
-- After five days of data collection, your teacher will share with you a file of class data. (Some teachers may share Pyret files, while other teachers may share spreadsheets for students to upload to Pyret.)
-- Explore the data! What displays can help us to answer our questions?
-- Save interesting displays for inclusion in your final report.
-- Don't forget to consider numerical methods of analysis (mean, median, etc).
+@lesson-instruction{
+- I've shared a link to our google form. Please save it somewhere that will be easy for you to find each time you need to make a data entry.
+- To increase the quality of the data we collect, you will each be collecting data at specific times that are assigned to you using a random number generator.
+  * The random number generator we'll be using is currently set to give a number between 6 and 22. _(6 would translate to 6am and 22 would translate to 10pm.)_
+  * If you get a time at which you know you will be asleep, please do not write it down. +
+  Instead, let the random number generator assign you a different time.
+- Use the @link{https://numbergenerator.org/randomnumbergenerator/1-24#!numbers=1&low=6&high=22&unique=true&csv=&oddeven=&oddqty=0&sorted=false&addfilters=, random number generator} to complete the `time` column of your copy of @handout{stress-or-chill-data.adoc} now.
+- The quality of our class dataset will be dependent on all of you actually remembering to complete the form for each time that you've been assigned.
+  * Make a mental note of when you will be collecting data for the first time. Perhaps you can already predict where you will be and that will help you remember to check in and note the details you'll need to record?
+  * When you get a chance, it might help to:
+  *** Take a picture of this page, so you have a record in case you lose it.
+  *** Set alarms for the 10 times you'll be collecting data on your watch or phone (or for the first time after each random time when it wouldn't be disruptive for the alarm to go off).
+  * If you are unable to access the stress survey during a designated time, jot down any observations on @handout{stress-or-chill-data.adoc} or a piece of paper or make a mental note. Submit the form as soon as you are able to.
+}
 
-=== 4. Interpret the Data
+@teacher{
+Some teachers also have their students take photos of what they are doing for possible inclusion in their final report.
+}
 
-Write a report to address the research questions listed above. In your report, be sure to:
+=== Synthesize
 
-- Provide the plot(s) and numerical summary (or summaries).
-- Describe what the plot shows.
-- Explain why you chose to make that particular plot.
-- Explain how the plot and numerical summary answer your statistical questions.
-- Explain conclusions you made from your analysis.
+- What do you expect to be challenging about collecting this data?
+- What strategies might help you to overcome those challenges?
 
-@vspace{1ex}
 
-(Based on the What Stresses Us? project from @link{https://www.introdatascience.org/, IDS at UCLA})
+== What have Researchers learned about Teen Stress?
+
+=== Overview
+
+Students do a little bit of internet research  about teen stress to prepare for analyzing the class data.
+
+=== Launch
+
+We aren't the only ones who've researched teen stress levels. Let's find out what data has been collected at a larger scale.
+
+=== Investigate
+
+We'll mostly be focusing our analysis on what we can learn from our class dataset, but it would be interesting to be able to compare our data to some of the findings from bigger research studies.
+
+@lesson-instruction{
+- Search the internet for reliable research on teens and stress.
+  * As you read, keep a document open for recording what you find. Be sure to save:
+  *** all reliable sources!
+  *** interesting facts
+  *** copies of interesting data visualizations
+- Complete the *Research* section of @handout{pages/check-in-stress.adoc} with the following information.
+  * two interesting facts in the research that relate to the data we are collecting as a class
+  * one other interesting fact that we could have collected relevant data for
+  * make sure you have recorded the sources!
+}
+
+=== Synthesize
+
+- What interesting facts did you find that relate to variables in our class data?
+- What interesting facts did you find that have nothing to do with our class dataset?
+- What survey questions might you have proposed adding to our data collection form if we'd started with this internet research?
+
+== What Story does the Data tell?
+
+=== Overview
+
+Students choose research questions to investigate in the class data using @proglang and consider how the class data compares to research about teen stress.
+
+=== Launch
+
+@lesson-instruction{
+- Take a moment to complete the *Data Collection Reflection* section of @handout{pages/check-in-stress.adoc}.}
+Now that we've gathered data, it's time to consider what we want to learn from it.
+
+@lesson-instruction{
+
+- Choose two questions to investigate. At least one should be from the list below. _(If you have another idea, run it by your teacher first.)_
+  * What is the typical stress level of the class across this project?
+  * What is my typical stress level and how does it compare to the whole class?
+  * Do the stress levels vary by weekday or weekend?
+  * Do the stress levels vary by who we are with?
+  * Under which conditions am I more likely to be stressed and how does that compare to the class data?
+- Complete @handout{pages/check-in-stress.adoc}.
+}
+
+=== Investigate
+
+@lesson-instruction{
+@ifproglang{pyret}{
+- Use Pyret to produce data visualizations and compute values (mean, median, etc.) that will help you to answer your questions.
+  * Create subsets using filter functions similar to `is-cat`.
+  * As you work, save the code for all of the data visualizations you make in the Definitions Area.
+  	 *** Note: You will be publishing and submitting your Pyret file.
+}
+@ifproglang{codap}{
+- Use CODAP to produce tables and data visualizations that will help you to answer your questions.
+  * Create filtered tables to explore subsets.
+}
+- Write a report that explains how the data visualizations, summaries and research answer your statistical questions.
+  * Make sure you have 2 pages of written conclusions and supporting explanations in addition to the data visualizations.
+  * Include the data visualizations and numerical summaries where they are discussed in the text.
+	 *** Include the code used to generate each visualization.
+	 *** Explain why you chose to make each plot.
+	 *** Describe what the visualizations tell us.
+  * Include a title page with your name, course, date, and the published @proglang file link.
+  * Cite the sources used to tie your research to your question at the end of the paper.
+}
+
+@teacher{
+- Once finished, encourage students to self-assess using @handout{pages/rubric-stress-or-chill.adoc} and revise their work.
+- Decide what form of sharing their projects works best for you.
+  * Class presentations can instill a sense of pride.
+  * Presenting in small groups can take less time.
+  * You may also want to have them print some part of their presentation to display on a bulletin board.
+}
+
+=== Synthesize
+
+- What were the pros and cons of working with data generated by you and your classmates?
+- What other data do you wish had been part of our collective data set?
+- What other questions would you suggest adding to the form for future classes?
+
+@teacher{
+- Did your students have brilliant suggestions for how we could improve the form for future classes? Please share your ideas with @link{mailto:contact@bootstrapworld.org}!
+}

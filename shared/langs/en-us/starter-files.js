@@ -980,6 +980,15 @@ const Projects = {
     "codap": {
       "url": "https://codap.concord.org/app/static/dg/en/cert/index.html#shared=https%3A%2F%2Fcfm-shared.concord.org%2FljvkUDposhfT1VZ1PBGu%2Ffile.json"
     }
+  },
+  "stress-or-chill": {
+    "title": "Stress or Chill? Daily Survey (Google Form)",
+     "pyret": {
+      "url": "https://docs.google.com/forms/d/1GUvw0Czg9Uz65Darz0N_So0kw5gYnUd3WHAT8wegwgY/copy"
+    },
+    "codap": {
+      "url": "https://docs.google.com/forms/d/1GUvw0Czg9Uz65Darz0N_So0kw5gYnUd3WHAT8wegwgY/copy"
+    }
   }
 }
 
