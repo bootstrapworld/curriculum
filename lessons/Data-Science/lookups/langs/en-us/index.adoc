@@ -84,9 +84,14 @@ We can access _specific columns_ of a Row, by using a *Row Accessor*.
 - end with square brackets `[ ]` containing the name of the column where the value can be found.
 
 Here are three examples that use row accessors to get at different columns from the first row in the animals-table.
-
+++++
+<style>
+.comparisonTable th { text-align: center; }
+.comparisonTable .highlight { background: #f7f7f8 !important; }
+</style>
+++++
 @indented{
-[cols="1a,1a", options="header"]
+[.comparisonTable, cols="^1a,^1a", options="header", frame="none"]
 |===
 | Without Predefined Rows
 | Using Predefined Rows
@@ -102,6 +107,8 @@ row-n(animals-table, 0)["fixed"]
 |
 
 ```
+cat-row = row-n(animals-table, 0)
+
 cat-row["name"]
 cat-row["age"]
 cat-row["fixed"]
@@ -150,7 +157,7 @@ Have students share their most creative uses of lookups. Did anyone use three or
 @A{We can perform computation on those values, make images, etc.}
 }
 
-== Writing Functions with Lookups
+== Writing Examples and Definitions with Lookups
 
 === Overview
 Students practice using the Design Recipe to write familiar functions, but this time those functions use Row values and column lookups as part of their expressions.
@@ -235,22 +242,6 @@ This is _another_ Row lookup, only this time we're comparing the string to the `
 
 @teacher{If necessary, review the solution for this function.}
 
-@slidebreak
-
-@lesson-instruction{
-- With your partner, complete the *last* challenge on @printable-exercise{functions-w-lookups.adoc}
-- When you're done, type it into your @starter-file{row-functions} and test it out!
-}
-
-@slidebreak
-
-This challenge was *very* different from the other two!
-
-@QandA{
-@Q{What are some ways this was different?}
-@A{The function consumed a row instead of a Number or String.}
-@A{The lookup happened on the input argument, instead of on the same row that never changes}
-}
 
 === Synthesize
 

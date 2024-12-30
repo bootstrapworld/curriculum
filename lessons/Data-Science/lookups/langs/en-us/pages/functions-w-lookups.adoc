@@ -1,77 +1,11 @@
-= Functions that use Lookups
-++++
-<style>
-/*********************************
- * Additional CSS fixes for https://github.com/bootstrapworld/curriculum/issues/920
- * May need to be moved to shared.css, and tested
- */
-.studentAnswerLong { min-width: 67% !important; }
-.studentAnswerShort{ min-width: 4em; }
-.studentAnswerMedium{ min-width: 7em; }
-.autonum { display: inline-block; margin-top: 1ex; }
-</style>
-++++
+= Contracts, Examples & Definitions with Lookups
 
-@n Define a function `smallc` to generate big solid circles in whatever color we give them, *using the age of `old-row` for the radius*
-
-If I say @show{(code '(smallc "orange"))}, what would our actor need to say?
-
-@fitb{}{@ifsoln{`circle(old-row["age"], "solid", "orange")`}}
+@include{fragments/baby-dr-styling.adoc}
 
 @vspace{1ex}
 
-Write examples for two other possible inputs:
+@include{fragments/smallc.adoc}
 
-@vspace{1ex}
+@span{.sectionbreak}{}
 
-@show{(code '(smallc (?ANS "blue")))} &rarr; @fitb{60%}{@ifsoln{`circle(old-row["age"], "solid", "blue")`}} `end`
-
-@show{(code '(smallc (?ANS "red")))} &rarr; @fitb{60%}{@ifsoln{`circle(old-row["age"], "solid", "red")`}} `end`
-
-@show{(code '(smallc (?ANS "green")))} &rarr; @fitb{60%}{@ifsoln{`circle(old-row["age"], "solid", "green")`}} `end`
-
-What changes in these examples? Name your variable(s): @fitb{}{@ifsoln{color}}
-
-Let's define our function using the variable:
-
-`fun smallc(` @fitb{5em}{@ifsoln{`color`}} `):` @fitb{60%}{@ifsoln{`circle(old-row["age"], "solid", "green")`}} `end`
-
-@n Define a function `is-myPet`, which takes in the name of a pet and checks to see if it's the same as *the `name` column of your favorite pet.*
-
-If I say @show{(code '(is-myPet "sasha"))}, what would our actor need to say?
-
-@fitb{}{@ifsoln{`"sasha" == myPet["age"]`}}
-
-@vspace{1ex}
-
-Write examples for two other possible inputs:
-
-@show{(code '(is-myPet "Shriram"))} &rarr; @fitb{60%}{@ifsoln{`"sasha" == myPet["age"]`}} `end`
-
-@show{(code '(is-myPet "Kathi"))} &rarr; @fitb{60%}{@ifsoln{`"sasha" == myPet["age"]`}} `end`
-
-What changes in these examples? Name your variable(s): @fitb{}{@ifsoln{name}}
-
-Let's define our function using the variable:
-
-`fun is-myPet(` @fitb{5em}{@ifsoln{`name`}} `):` @fitb{60%}{@ifsoln{`"sasha" == myPet["age"]`}} `end`
-
-@n Define a function `is-sasha`, which *takes in a ROW* and checks to see if it's name is `"Sasha"`.
-
-If I say @show{(code '(is-sasha dog-row))}, what would our actor need to say?
-
-@fitb{}{@ifsoln{`dog-row["name"] == "sasha"`}}
-
-@vspace{1ex}
-
-Write examples for two other possible inputs:
-
-@show{(code '(is-sasha cat-row))} &rarr; @fitb{60%}{@ifsoln{`cat-row["name"] == "sasha"`}} `end`
-
-@show{(code '(is-sasha old-row))} &rarr; @fitb{60%}{@ifsoln{`old-row["name"] == "sasha"`}} `end`
-
-What changes in these examples? Name your variable(s): @fitb{}{@ifsoln{r}}
-
-Let's define our function using the variable:
-
-`fun is-sasha(` @fitb{5em}{@ifsoln{`r`}} `):` @fitb{60%}{@ifsoln{`r["name"] == "sasha"`}} `end`
+@include{fragments/is-myPet.adoc}
