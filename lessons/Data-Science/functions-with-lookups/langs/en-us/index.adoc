@@ -1,4 +1,4 @@
-= Row and Column Lookups
+= Functions with Lookups
 
 @description{Students review how to extract individual Rows from a table, then learn how to answer lookup questions by extracting a single value from a Row.}
 
@@ -157,97 +157,114 @@ Have students share their most creative uses of lookups. Did anyone use three or
 @A{We can perform computation on those values, make images, etc.}
 }
 
-== Writing Examples and Definitions with Lookups
+== Defining Functions
 
 === Overview
-Students practice using the Design Recipe to write familiar functions, but this time those functions use Row values and column lookups as part of their expressions.
+Students use different representations of functions to define functions that consume _Rows_, discover _functions that consume other functions_, and compose a scatter plot function with a function they've defined.
 
 === Launch
-Could we use use column lookups in some of the functions we've written? Let's try it out!
 
-@lesson-roleplay{
-We're going to need another actor...
+By now you've had a chance to explore functions on your own, thinking of them in terms of several different representations:
 
-This time, the role is "nametag". It takes in a name and draws that text in size 20 with blue letters.
+- A mapping between _Domain_ and _Range_
+- A list of discrete _input values_ and _output values_
+- A symbolic _definition_
 
-When someone says @show{(code '(nametag "Jamal"))}, they reply with @show{(code '(text "Jamal" 20 "blue"))}
+Now it's time to use those representations to help us work with Rows!
+
+@slidebreak
+
+@lesson-instruction{
+- Open the @starter-file{row-functions}, save a copy, and click "Run".
+- Scroll until you see the definition for `cat-row`. What will you get back if you evaluate `cat-row` in the Interactions Area?
+- What species is the animal?
+- What is its name?
+- How old is it?
+- Complete the first section of @printable-exercise{functions-with-lookups.adoc} (questions 1-5).
 }
-
-@teacher{Have students practice calling out colors, with the actor responding.}
-
-@slidebreak
-
-This rehearsing gives us our examples!
-
-```
-examples:
-  nametag("Baily") is text("Baily", 20 "blue")
-  nametag("Shay")  is text("Shay",  20 "blue")
-end
-```
-
-Circling and labeling the parts that change helps us define the function:
-
-@show{(code '(define (nametag name) (text name 20 "blue")))}
-
-@slidebreak
-
-@QandA{
-@Q{If we wanted to make the letters smaller, what would need to change?}
-@A{We'd have to replace the `20` with something smaller}
-@Q{What if we wanted to that number to come from the age of `dog-row`?}
-@A{We'd have to replace the `20` with a lookup}
-}
-
-@slidebreak
-
-Rewriting the definition to lookup the value of `dog-row`'s age gives us the final code:
-
-```
-fun nametag(name): text("name", dog-row["age"], "blue") end
-```
 
 === Investigate
 
-@lesson-instruction{
-- With your partner, complete the *first* challenge on @printable-exercise{functions-w-lookups.adoc}
-- When you're done, type it into your @starter-file{row-functions} and test it out!
-}
 
-@slidebreak
-
-In @lesson-link{functions-make-life-easier}, you defined a function called that took in a color and produced a solid circle of radius 100, of whatever color was passed in:
-
-@center{`fun bigc(color): circle(100, "solid", color) end`}
-
-@QandA{
-@Q{What needed to change about this function, to use the age of `old-row` as the size?}
-@A{The 100 needed to be replaced with a lookup, extracting `"age"` from `old-row`}
-}
-
-@slidebreak
+Let's look at an example to see how lookups can work hand-in-hand with function definitions!
 
 @lesson-instruction{
-- With your partner, complete the *second* challenge on @printable-exercise{functions-w-lookups.adoc}
-- When you're done, type it into your @starter-file{row-functions} and test it out!
+Complete the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
 }
 
 @slidebreak
 
-You've already compared a string to a Row lookup. For example, we checked to see if the species of a row was `"cat"`:
+@teacher{Review student answers from the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
+@ifslide{_Note: Discussion continues on the next slide._}}
 
-@center{`young-row["species"] == "cat"`}
+```
+# CONTRACT:
+# age-gt :: Row -> Image
+# consumes an animal, and draws a solid green triangle whose
+# size is 5x the number age of the animal as the size
 
-This is _another_ Row lookup, only this time we're comparing the string to the `"name"` column.
+examples:
+  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
+  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
 
-@teacher{If necessary, review the solution for this function.}
+  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
+  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
+end
 
+fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
+```
+
+These examples show us exactly what should be produced for `cat-row` and `dog-row` - the two Rows representing "Sasha" and "Toggle", based on their `age`.
+
+@lesson-instruction{
+- Take a closer look at the examples.
+- Think about how the first pair of examples relates to the second.
+}
+
+@slidebreak
+
+Both pairs of examples are _correct_!
+
+In the first pair, we see the values 1 and 3 , but no explanation of where they are coming from. The last pair shows how those values are _looked up_ from the example rows.
+
+@ifslide{
+
+```
+# CONTRACT:
+# age-gt :: Row -> Image
+# consumes an animal, and draws a solid green triangle whose
+# size is 5x the number age of the animal as the size
+
+examples:
+  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
+  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
+
+  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
+  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
+end
+
+fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
+```
+
+}
+
+@slidebreak
+
+@lesson-point{
+If you're stuck on the examples step, here's a useful trick to get you started. Complete the following sentence: +
+"_For this Row, I..._" +
+Whatever you answer is the precise description of what to do for your example!
+}
+
+@slidebreak
+
+*You can use both kinds of examples in your code!*
+
+- Sometimes we want to use real, concrete numbers to make sure our work is correct.
+- And sometimes we need to show all of our work, to make sure we are defining the function correctly!
+
+Programmers often use a mix of the two.
 
 === Synthesize
 
-We started programming by writing simple expressions over Numbers, Strings, and Images. Then we learned how to generalize those expressions into _functions._ Now that we know how to look up values from a Row, we can start generalizing expressions with Rows into _functions with Rows._
-
-- Now we can write functions that check if the species of a Row is a cat. This makes it easy to filter a table to show only the cats!
-- Now we can write functions that check if the age of a Row is greater than 10. This makes it easy to filter a table to show only the old animals!
-
-What are some other functions we can write, and how might we use them?
+Why might it be beneficial to include both kinds of examples?
