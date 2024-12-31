@@ -43,11 +43,11 @@ The code below draws a solid, green triangle, using 5x the age of `old-row` as t
 @n Is `lizard-row` fixed? +
 @fitb{}{@ifsoln{`lizard-row["fixed"] == true` (or just `lizard-row["fixed"]`!)}}
 
-@n Did `unfixed-row` take less than 5 weeks to be adopted? +
-@fitb{}{@ifsoln{`unfixed-row["weeks"] < 5`}}
+@n If a year has 52 weeks, how many _years_ did it take `unfixed-row` to be adopted? +
+@fitb{}{@ifsoln{`unfixed-row["weeks"] / 52`}}
 
-@n Is `old-row` a cat or a dog? +
-@fitb{}{@ifsoln{`(old-row["species"] == "cat") or old-row["species"] == "dog"`}}
+@n Does `old-row` have an "s" in its name? +
+@fitb{}{@ifsoln{`string-contains(old-row["name"], "s")`}}
 
 @n Using any Row you like, draw the `name` of the animal in red letters and use the `pounds` of the animal for the font size. +
 @fitb{}{@ifsoln{`text(cat-row["name"], cat-row["pounds"], "red")`}}
