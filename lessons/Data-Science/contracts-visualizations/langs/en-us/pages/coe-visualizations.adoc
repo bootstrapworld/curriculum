@@ -23,7 +23,7 @@ Using the Contracts below as a reference, draw the Circle of Evaluation for each
 
 @show{(contract "bar-chart" '("Table" "String") "Image")}
 
-@show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
+@show{(contract "dot-plot" '("Table" "String") "Image")}
 
 |
 @show{(contract "box-plot" '("Table" "String") "Image")}
@@ -37,43 +37,50 @@ Using the Contracts below as a reference, draw the Circle of Evaluation for each
 
 
 (define exp1 '(bar-chart (first-n-rows (sort animals-table "pounds" true) 16) "sex"))
-(define exp2 '(histogram (first-n-rows (sort animals-table "pounds" false) 20) "species" "weeks" 5))
+(define exp2 '(dot-plot (first-n-rows (sort animals-table "pounds" false) 20) "weeks" 5))
 (define exp3 '(box-plot(first-n-rows(sort animals-table "weeks" false) 11) "age"))
 (define exp4 '(pie-chart(first-n-rows(sort animals-table "weeks" true) 18) "species"))
 (define exp5 '(box-plot(first-n-rows(sort animals-table "age" true) 12) "pounds"))
 (define exp6 '(pie-chart(first-n-rows(sort animals-table "age" false) 10) "legs"))
 }
 
-<<<<<<< HEAD:lessons/Data-Science/contracts-visualizations/langs/en-us/pages/coe-visualizations.adoc
-@scrub{**NOTE: THE SOLUTION VERSION OF THIS PAGE IS IN THE SOLUTION PAGES FOLDER - IT HAS AN EXTRA COLUMN IN THE TABLE**}
-
-[.exercises.FillVerticalSpace, cols="1a", stripes="none]
+[.exercises.FillVerticalSpace, cols="1a,1a" ]
 |===
 |
 @n Make a bar-chart of the lightest 16 animals by `sex`.
 
-
 @star What other bar chart might you want to compare this to? @fitb{}{}
+|
+@showsoln{(coe exp1)}
 
-| 
-@n Take the heaviest 20 animals and make a histogram of `weeks` to adoption (use `"species"` for your labels).
+@showsoln{(code exp1)}
 
 
+|
+@n Take the heaviest 20 animals and make a dot plot of `weeks` to adoption.
 
 @star What other histogram might you want to compare this to? @fitb{}{}
+|
+@showsoln{(coe exp2)}
 
-| 
+@showsoln{(code exp2)}
+
+|
 @n Make a box-plot of `age` for the 11 animals who spent the most `weeks` in the shelter.
 
-
-
 @star What other box plot might you want to compare this to? @fitb{}{}
+|
+@showsoln{(coe exp3)}
 
-| 
+@showsoln{(code exp3)}
+
+|
 @n Make a pie-chart of `species` for the 18 animals who spent the fewest `weeks` in the shelter.
 
-
-
 @star What other pie chart might you want to compare this to? @fitb{}{}
+|
+@showsoln{(coe exp4)}
+
+@showsoln{(code exp4)}
 
 |===
