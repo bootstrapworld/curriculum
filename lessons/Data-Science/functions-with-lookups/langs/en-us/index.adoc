@@ -38,7 +38,7 @@ You've learned how to write functions that work with Numbers, Strings, and Image
 
 @lesson-instruction{
 - Open the @starter-file{row-functions} and click "Run".
-- What Rows do you see defined here? Evaluate a few of them in the Interactions Area.
+- In the Interactions Area, evaluate a few of the sample rows you see defined in the file.
 }
 
 @slidebreak
@@ -78,10 +78,10 @@ If we were analyzing a subset of lizards, it would make sense to add a definitio
 
 We can access _specific columns_ of a Row, by using a *Row Accessor*.
 
-- start with a row value:
-  ** a `row-n` expression just like the ones we've been working with
-  ** the name of a row that we have already defined
-- end with square brackets `[ ]` containing the name of the column where the value can be found.
+- Row accessors start with a row value:
+  ** either a `row-n` expression just like the ones we've been working with
+  ** or the name of a row that we have already defined
+- Row accessors end with square brackets `[ ]` containing the name of the column where the value can be found.
 
 Here are three examples that use row accessors to get at different columns from the first row in the animals-table.
 ++++
@@ -129,18 +129,17 @@ Sometimes we want to ask questions about a specific Row, or do some computations
 We can use our knowledge of lookups, operators and functions to do just that!
 
 @lesson-instruction{
-- Turn to @printable-exercise{lookup-questions-matching.adoc}.
-- Notice the `pet-table` at the top of the page. All of the questions on this page will refer back to that table.
+- Turn to @printable-exercise{lookup-questions-matching.adoc} and find the `pets-table` at the top of the page. All of the questions on this page will refer back to that table.
 - Complete the page, discussing your thinking with a partner.
 }
 
-@teacher{Confirm that students have correctly complete the page before moving on. If they need more matching practice before moving on have them complete @opt-printable-exercise{more-practice-w-lookups.adoc}.}
+@teacher{Confirm that students have correctly complete the page before moving on. If they need more matching practice before moving on have them complete @opt-printable-exercise{more-practice-w-lookups.adoc}, which focuses on the `shapes-table`.}
 
 Now that we know how to lookup a value for a specific column of a row, let's practice some of the things we might be able to do with that information!
 
 @lesson-instruction{
-- Return to the @starter-file{row-functions}, and turn to @printable-exercise{lookup-expressions.adoc}
-- Notice that the code at the top uses the "age" of `old-row` to determine the size of the triangle.
+- Return to the @starter-file{row-functions}, and turn to @printable-exercise{lookup-expressions.adoc}.
+- Notice that the code at the top of the page uses the "age" of `old-row` to determine the size of the triangle.
 - Type the code into the Interactions Area and test it out.
 - With a partner, work through @printable-exercise{lookup-expressions.adoc}. After you've written the expressions on paper, try them out in Pyret!
 }
@@ -180,11 +179,10 @@ Now it's time to use those representations to help us work with Rows!
 - What species is the animal?
 - What is its name?
 - How old is it?
-- Complete the first section of @printable-exercise{functions-with-lookups.adoc} (questions 1-5).
+- Complete the top half of @printable-exercise{functions-with-lookups.adoc}.
 }
 
 === Investigate
-
 
 Let's look at an example to see how lookups can work hand-in-hand with function definitions!
 
@@ -192,10 +190,14 @@ Let's look at an example to see how lookups can work hand-in-hand with function 
 Complete the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
 }
 
-@slidebreak
+@teacher{
+If students are stuck on the examples step, here's a useful trick to get them started. +
+Complete the following sentence: +
+"_For this Row, I..._" +
+Whatever you answer is the precise description of what to do for your example!
+}
 
-@teacher{Review student answers from the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
-@ifslide{_Note: Discussion continues on the next slide._}}
+@slidebreak
 
 ```
 # CONTRACT:
@@ -212,20 +214,17 @@ examples:
 end
 
 fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
+
 ```
 
-These examples show us exactly what should be produced for `cat-row` and `dog-row` - the two Rows representing "Sasha" and "Toggle", based on their `age`.
-
-@lesson-instruction{
-- Take a closer look at the examples.
-- Think about how the first pair of examples relates to the second.
-}
-
-@slidebreak
+@teacher{Review student answers from the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.}
 
 Both pairs of examples are _correct_!
 
-In the first pair, we see the values 1 and 3 , but no explanation of where they are coming from. The last pair shows how those values are _looked up_ from the example rows.
+- In the first pair, we see the values 1 and 3, which makes it easy for us picture the two triangles... but there's no explanation of where the values are coming from.
+- The last pair shows how those values are _looked up_ from the example rows, which makes it easier to write a definition that the computer can use for any row!
+
+@slidebreak
 
 @ifslide{
 
@@ -244,27 +243,20 @@ examples:
 end
 
 fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
+
 ```
-
 }
 
-@slidebreak
-
-@lesson-point{
-If you're stuck on the examples step, here's a useful trick to get you started. Complete the following sentence: +
-"_For this Row, I..._" +
-Whatever you answer is the precise description of what to do for your example!
-}
-
-@slidebreak
-
-*You can use both kinds of examples in your code!*
+*You can use both kinds of examples in your code! Programmers often use a mix of the two.*
 
 - Sometimes we want to use real, concrete numbers to make sure our work is correct.
 - And sometimes we need to show all of our work, to make sure we are defining the function correctly!
 
-Programmers often use a mix of the two.
-
 === Synthesize
 
-Why might it be beneficial to include both kinds of examples?
+@QandA{
+@Q{Why might it be beneficial to include both kinds of examples?}
+@A{They serve different purposes.}
+@A{The concrete examples make our code more readable for humans and might help us to establish and verify our line of thinking.}
+@A{And showing all the work in examples makes the pattern evident for defining the function.}
+}

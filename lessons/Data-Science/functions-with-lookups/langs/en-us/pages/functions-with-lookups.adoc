@@ -31,36 +31,41 @@ Open the @starter-file{row-functions} on your computer, save a copy, and *Click 
 
 @vspace{1ex}
 
-== age-dot
+== age-gt
 
 [.linkInstructions]
-Scroll down in the @starter-file{row-functions} until you find the Contract, Examples and Definition for `age-dot`.
+Scroll down in the @starter-file{row-functions} until you find the Contract, Examples and Definition for `age-gt`.
 
-@n What is the Domain of this function? @fitb{6em}{@ifsoln{Row}} The Range? @fitb{6em}{@ifsoln{Image}} How many examples does this function have? @fitb{}{@ifsoln{4}}
+@n What is the Domain of `age-gt`? @fitb{6em}{@ifsoln{Row}} The Range? @fitb{6em}{@ifsoln{Image}} How many examples are provided? @fitb{}{@ifsoln{4}}
 
-@n According to the *comment* below the Contract, what should this function should do, when given a Row? @fitb{}{}
+@n According to the *comment* below the Contract, what should this function do, when given a Row? @fitb{}{}
 
-@n Look at the first two examples. How do they satisfy the Contract?
-
-@fitb{}{@ifsoln{Both examples show the function consuming one argument, and the Domain has one thing in it}}
+@fitb{}{@ifsoln{consume an animal, and draw a solid green triangle whose size is 5x the age of the animal}}
 
 @vspace{1ex}
 
-_These examples show us exactly what should be produced for `cat-row` and `dog-row` - the two Rows representing "Sasha" and "Toggle", based on their `age` (`1` and `3`). But they don't show us how the computer should look up the `age` from from the row!_
+_Notice: The first two examples use `cat-row` and `dog-row`. And so do the third and fourth examples!_
 
-@n The last two examples do the same thing as the first two examples, but the numbers `3` and `1` have been replaced! + 
-Where do they get the numbers from?
+@n Which pair of examples does the definition look more like? @fitb{}{@ifsoln{The last two examples.}}
 
-@fitb{}{@ifsoln{The numbers have been replaced by Row Lookups}}
+@n Why is it helpful to include the first two examples? @fitb{}{@ifsoln{They show us exactly what should be produced for `cat-row` and `dog-row` - }}
 
-@vspace{1ex}
+@fitb{}{@ifsoln{the two Rows representing "Sasha" and "Toggle", based on their `age` (`1` and `3`).}}
 
-@n How is the definition for the `age-dot` function connected to our examples?
+@n Why can't we write our definition using only the first two examples? @fitb{}{}
 
-@fitb{}{@ifsoln{The definition follows the pattern of the examples.}}
+@fitb{}{@ifsoln{They don't show us how the computer should look up the `age` from the row!}}
 
-@fitb{}{}
+@n In the last two examples the numbers `3` and `1` have been replaced! Where do these examples get the numbers from?
 
-@n Add an example for `old-row` to match first pair of examples (using the actual number of age). Then add an example for the second pair (using a lookup).
+@fitb{}{@ifsoln{Row Lookups!}}
 
-@star Choose one more row that's defined at the top of the file, and add examples for that as well.
+@n Add an example for `old-row` to match the first pair of examples (using the actual number of age).
+
+@ifsoln{@hspace{3em} `age-gt(old-row) is triangle(5 * 16, "solid", "green")`}
+
+@n Then add an example `old-row` to match the second pair of examples (using a lookup).
+
+@ifsoln{@hspace{3em} `age-gt(old-row) is triangle(5 * old-row["age"], "solid", "green")`}
+
+@star Add another pair of examples using a row of your choosing from the definitions at the top of the file.
