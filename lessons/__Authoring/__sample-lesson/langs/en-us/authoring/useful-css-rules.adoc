@@ -49,6 +49,18 @@ body.LessonNotes li {
 </style>
 ++++
 
+* To rotate column headers
+
+++++
+<style>
+/* set all table headers to be vertical right-to-left text, flip them horizontally, and adjust spacing */
+thead tr th.tableblock { writing-mode: vertical-rl; scale: -1; line-height: 1.1; padding: 0.5em; }
+
+/* undo those rules, but only for the 2nd and 3rd header */
+thead th.tableblock:nth-child(2), th.tableblock:nth-child(3) { writing-mode: unset; scale: unset; }
+</style>
+++++
+
 * To make a lesson point less than the full width of the page
 ++++
 <style>
