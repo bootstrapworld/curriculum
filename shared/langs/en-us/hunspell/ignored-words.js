@@ -90,5 +90,7 @@ exports.ignored_words = [
   "grade7",
   "grade6",
   "grade5",
-  "ok"
+  "ok",
+  "xs",
+  "ys"
 ];
