@@ -1,4 +1,4 @@
-= Exploring Exponential Models
+= Exploring the Spread of Disease
 
 @description{Students investigate exponential relationships in data about Covid spread.}
 
@@ -41,7 +41,7 @@ You will want to:
 
 === Overview
 
-Students explore the covid dataset, focusing on the growth in positive test cases for the state of Massachusetts.
+Students explore the Covid dataset, focusing on the growth in positive test cases for the state of Massachusetts (they will eventually explore other states later on).
 
 === Launch
 
@@ -64,7 +64,7 @@ This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4A
 
 And even within New England, we've _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
 
-For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. A purely exponential function will under-predict the growth during this time period by that it adds enormous friction to the modeling goal of this unit!
+For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. A purely exponential function will under-predict the growth during this time period, adding significant friction to the exponential modeling goal of this unit!
 
 (The functions necessary to model this kind of growth have multiple terms showing different kinds of growth, and are just out of reach for students right now. Students can _return_ to this unit once they've learned about @lesson-link{periodic4-hybrid-models, hybrid models} in later lessons.)
 
@@ -75,10 +75,10 @@ To use all available data, open the @starter-file{alg2-covid} and change the sou
 
 === Synthesize
 
-@ifslide{@right{@image{images/multiple-models.png}}}
-@ifnotslide{@center{@image{images/multiple-models.png}}}
 @lesson-instruction{
+@right{@image{images/multiple-models.png, 350}}
 Discuss in groups or pairs, and prepare to share out to the class:
+
 - Based on the look of the scatter plot you just made, do you think there's a strong relationship here?
 - If we fit a curve or straight line to this data, do you think it would fit the scatter plot well?
 }
@@ -100,13 +100,13 @@ Students try to fit a linear model to this data. This section makes heavy use of
 === Launch
 Let's start out by looking at _just one state_. We'll use Massachusetts for this investigation, but you can do your own investigation about any state you like after finishing this one!
 
-The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MA"`.
-
 === Investigate
 
 @lesson-instruction{
-Complete @printable-exercise{linear-models.adoc}.
+- Complete @printable-exercise{linear-models.adoc}.
 }
+
+The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MA"`. We could create other helper functions like `is-MA`, and use them with the `filter` function to get datasets for any state we want!
 
 @slidebreak
 

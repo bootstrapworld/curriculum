@@ -1,64 +1,84 @@
-= Fitting Models in Desmos
+= Exponential Models of Covid in Massachusetts
 ++++
 <style>
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
+/* Keep the preamble from growing to fill up space */
+#preamble_disabled { flex-grow: 0 !important; }
 
 /* Make sure autonums that appear inside tables have the closing paren */
-.autonum { font-weight: bold; }
+.autonum { padding-top: 0.8em !important; }
 .autonum:after { content: ')' !important; }
 
-h2 .MathJax { float: right;  padding-right: 1em; }
-
-/* Save vertical space by squishing tds, fitbs and indentedparas */
-td { padding: 0 !important; }
-.fitbruby, .fitb, .fitb::after { padding-top: 0.9em; }
-body .indentedpara { margin-left: 1.5em; }
-
-/* Use graph table cells to host scatter plot image */
-.graphs td {
-    background-image: url(../images/f99f615fabddc961.png);
-    background-size: 2in 1.75in;
-    max-height: 1.75in;
-    min-height: 1.75in;
-    background-position-x: 0.2in;
-    background-repeat: no-repeat;
-}
-/* Position mathjax in table cells at the top */
-.graphs td .fitb { padding-top: 0 !important; }
-.graphs td .MathJax { min-width: 30px !important; display: inline-block; }
-
-/* Define grid gaps */
-.graphs { grid-gap: 20px; margin-top: 5px; }
-
-/* Predictions Table: center-bottom align contents, and add separator bars */
-table.predictions td, table.predictions th {
-  vertical-align: bottom; text-align: center;
-}
-
-.mathunicode { line-height: 0.5; }
+/* Position mathjax and scatterplot image in table cells at the top */
+td:first-child p { position: absolute; top: 0.2in; left: 0.2in; background: rgba(255,255,255,0.55); }
+td:first-child .mathunicode { min-width: 25px !important; font-weight: bold !important; }
 </style>
 ++++
 
 [.linkInstructions]
 You'll need to have *Slide 4: Exponential Model for MA* of *Modeling Covid Spread (Desmos)* open on your computer.
 
-@n Try changing the value of @math{k}, then @math{a}, then @math{b} to find three promising exponential models, graphing each one and labeling your values on the grids below.
-
-
-[.FillVerticalSpace.graphs, cols="1,1,1", frame="none"]
-|===
-| @math{a=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{} +
-  @math{k=}@fitb{1em}{}
-
-| @math{a=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{} +
-  @math{k=}@fitb{1em}{}
-
-| @math{a=}@fitb{1em}{} +
-  @math{b=}@fitb{1em}{} +
-  @math{k=}@fitb{1em}{}
-|===
-
 @vspace{1ex}
+
+Try changing the value of @math{k}, then @math{a}, then @math{b} to find three promising exponential models, graphing each one and labeling your values on the graphs below. Remember: @vocab{growth rate} (@math{r}) can be calculated from the base: @math{\textit{base} = (1 + \textit{rate})}
+
+== Exponential Model 1
+
+[.FillVerticalSpace, cols="2a,<.^5a", frame="none", stripes="none", grid="none"]
+|===
+| @image{../images/covid-scatterplot.png}
+
+@math{a=}@fitb{1em}{} +
+@math{b=}@fitb{1em}{} +
+@math{k=}@fitb{1em}{}
+
+|
+@n What is the initial value (# infections as of June 9th) of this model? @fitb{}{} +
+@n What is the @vocab{growth rate} of this model? @fitb{}{} +
+@n What is the y-intercept (and horizontal asymptote) of this model? @fitb{}{} +
+@n For what range of dates is this model _most_ accurate? @fitb{}{} +
+@n For what range of dates is this model _least_ accurate? @fitb{}{} +
+|===
+
+== Exponential Model 2
+
+[.FillVerticalSpace, cols="2a,<.^5a", frame="none", stripes="none", grid="none"]
+|===
+| @image{../images/covid-scatterplot.png}
+
+@math{a=}@fitb{1em}{} +
+@math{b=}@fitb{1em}{} +
+@math{k=}@fitb{1em}{}
+
+|
+@n What is the initial value (# infections as of June 9th) of this model? @fitb{}{} +
+@n What is the @vocab{growth rate} of this model? @fitb{}{} +
+@n What is the y-intercept (and horizontal asymptote) of this model? @fitb{}{} +
+@n For what range of dates is this model _most_ accurate? @fitb{}{} +
+@n For what range of dates is this model _least_ accurate? @fitb{}{} +
+|===
+
+== Exponential Model 3
+
+[.FillVerticalSpace, cols="2a,<.^5a", frame="none", stripes="none", grid="none"]
+|===
+| @image{../images/covid-scatterplot.png}
+
+@math{a=}@fitb{1em}{} +
+@math{b=}@fitb{1em}{} +
+@math{k=}@fitb{1em}{}
+
+|
+@n What is the initial value (# infections as of June 9th) of this model? @fitb{}{} +
+@n What is the @vocab{growth rate} of this model? @fitb{}{} +
+@n What is the y-intercept (and horizontal asymptote) of this model? @fitb{}{} +
+@n For what range of dates is this model _most_ accurate? @fitb{}{} +
+@n For what range of dates is this model _least_ accurate? @fitb{}{} +
+|===
+
+
+== Selecting a Model
+
+@n Choose the model that you think best fits the data, and write it in function notation below:
+
+@center{@math{\text{exponential}(x) = } @fitb{20em}{}}
+

@@ -1,26 +1,64 @@
 = Limits of Computational Modeling
+++++
+<style>
+/* Add some horizontal spacing between cells, and a bottom border to columns 2, 3, 6, and 7 */
+table {border-spacing: 5px 0; }
+td:nth-child(2), td:nth-child(3), td:nth-child(6), td:nth-child(7) {
+	border-bottom: solid 1px black; vertical-align: bottom !important;
+}
+td { height: 25px; padding: 0 !important; }
 
+/* No border on the first row, and make the text bold */
+tr:nth-child(1) td { border-bottom: none; }
+tr:nth-child(1) td p { font-weight: bold; }
+
+td .autonum::after { content: ')' !important; }
+</style>
+++++
 [.linkInstructions]
 Make sure you are working in your copy of the @starter-file{alg2-covid}.
 
-== Exponentiation and RoughNums in Pyret
+== Exponentiation and "RoughNums" in Pyret
 
-@n In Pyret, evaluate the following exponents:
+@n *Write each of the expressions below in Pyret, then evaluate them and write down the answer.* _The first one has been started for you!_
 
-@hspace{4em} a. @math{10^2} +
-@hspace{4em} b. @math{10^{1/2}} +
-@hspace{4em} c. @math{10^{200}}
+[cols=".^1a, 20a, 20a, 4, .^1a, 20a, 20a", stripes="none", frame="none", grid="none"]
+|===
+| 	 				| 	Pyret Code 							| 	Evaluates to...
+||	 	 			| 	Pyret Code 							| 	Evaluates to...
 
-@n In Pyret, evaluate the following expressions:
+|  @math{10^2}		| @show{(code '(expt 10 2))}			| `100`
+|| @math{1/3}		| @ifsoln{@show{(code '(/ 1 3))}}		| @ifsoln{@math{\overline{3}}}
 
-@hspace{4em} a. @show{(code '(= 1 1))} +
-@hspace{4em} b. @show{(code '(= ~1 ~1))}
+|  @math{2^{1/2}}	| @ifsoln{@show{(code '(expt  2 1/2))}}	| @ifsoln{`~1.4142135623730951`}
+|| @math{3^{3}}		| @ifsoln{@show{(code '(expt  3  3))}}	| @ifsoln{`27`}
 
-@n Read the error message carefully. What do you think is going on?
+|  @math{27^{1/3}}	| @ifsoln{@show{(code '(expt 27 1/3))}} | @ifsoln{`3`}
+|| @math{3^{1/3}}	| @ifsoln{@show{(code '(expt  3 1/3))}}	| @ifsoln{`~1.4422495703074083`}
+|===
+
+@n When do you think Pyret switches to RoughNums, instead of Numbers? @fitb{}{} +
+@fitb{}{@ifsoln{Any expression that results in an irrational number}} +
+@fitb{}{}
+
+@n In Pyret, evaluate the following expressions: @hspace{2em} @show{(code '(= 1 1))}, @hspace{2em} @show{(code '(= ~1 ~1))} +
+_Why do you think Pyret gives an error when comparing identical RoughNums?_
+
+@ifnotsoln{
+@fitb{}{} +
+@fitb{}{} +
+@fitb{}{} +
+}
+
+@ifsoln{
+RoughNums always represent a _range_ of values on the number line, because two different Numbers might both round to the same RoughNum. As a result, there is no guarantee that "roughly one" represents the exact same value as "roughly one".
+}
+
+@center{*Stop here to discuss with the class, before moving on to the next section*}
 
 == Fitting Exponential Models in Pyret
 
-@n In the space below, define `exponential` for one of the models you fit in Desmos.
+@n In the space below, define `exponential` for the best model from @printable-exercise{exponential-models-ma.adoc}.
 
 @ifsoln{@vspace{1ex}}
 
@@ -28,8 +66,7 @@ Make sure you are working in your copy of the @starter-file{alg2-covid}.
 
 `fun exponential(x): (` @fitbruby{8em}{@ifsoln{31.6}}{a} `* num-expt(` @fitbruby{10em}{@ifsoln{1.047}}{b} `, (~1 * x))) +` @fitbruby{10em}{@ifsoln{119000}}{k} `end`
 
-@n Update the definition for `exponential` in the Definitions Area and click "Run" to reload it. +
-@hspace{1em}Then use `fit-model` to determine how closely `exponential` fits the `MA-table` and fill in the blanks below to interpret the model. +
+@n Update the definition for `exponential` in the Definitions Area and click "Run" to reload it. Use `fit-model` to determine how closely `exponential` fits the `MA-table`, and fill in the blanks below to interpret the model. +
 @ifsoln{*Answers will vary. Numbers below are provided for reference only!*} @ifnotsoln{@hspace{1em}}_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, Contracts Pages}!_
 
 @indented{
@@ -47,6 +84,7 @@ You know that the pros of using `~1` involve speed. *What are the potential down
 
 @ifnotsoln{
 @fitb{}{} +
+@fitb{}{} +
 @fitb{}{}
 }
 
@@ -54,4 +92,3 @@ You know that the pros of using `~1` involve speed. *What are the potential down
 - When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 - For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
 }
-

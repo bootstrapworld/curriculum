@@ -96,5 +96,7 @@ exports.ignored_words = [
   "param",
   "num", 
   "funname",
-  "sectionbreak"
+  "sectionbreak",
+  "xs",
+  "ys"
 ];
