@@ -1,6 +1,6 @@
 = Visualizing the "Shape" of the Data
 
-@description{Students compare and contrast dot plots and histograms. Students learn to create histograms by hand and in @proglang. They practice reading and describing histograms, using new vocabulary to describe histogram shape.}
+@description{Students practice reading and describing histograms, using new vocabulary to describe histogram shape.}
 
 @ifproglang{pyret}{
 @lesson-prereqs{contracts-tables, contracts-visualizations, dot-plots}
@@ -24,7 +24,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's create histograms for datasets and learn how describe their shape.
+- Let's learn how to describe histogram shape.
 
 | Materials
 |[.materials-links]
@@ -45,177 +45,6 @@
 | @assessments
 
 |===
-
-
-
-== From Dot Plots to Histograms
-
-@objective{dot-plot-v-histogram}
-
-=== Overview
-
-Students learn about histograms, considering how they are both similar to and different from dot plots.
-
-
-=== Launch
-
-A histogram, like a dot plot, is data visualization that displays quantitative data. Let's explore the ways that histograms are similar to and different from dot plots.
-
-@lesson-instruction{
-- Turn to @printable-exercise{compare-dot-plots-histograms.adoc}.
-- Complete the first section. Be prepared to share your responses.
-}
-
-@QandA{
-@Q{What do you Notice about the dot plot (left) and the histogram (right), which both display distribution of weeks?}
-@A{Possible responses: the histogram has bars that are touching; I can see that the gaps and peaks are in the same place; I can't see individual data points.}
-
-@Q{What do you Wonder about the dot plot and histogram?}
-@A{Possible responses: Why do we need two displays that are so similar? How do I read and interpret a histogram? What are histograms useful for?}
-
-[cols="^.>8a,1,^.>8a", frame="none", grid="none"]
-|===
-| @image{images/dot-plot-weeks.png, 400}
-|
-| @image{images/weeks.png, 350}
-|===
-
-}
-
-
-=== Investigate
-
-Now, let's think more deeply about the sort of information that dot plots and histograms provide us.
-
-
-@lesson-instruction{
-- Use *only the dot plot* to answer the questions on the second section of @printable-exercise{compare-dot-plots-histograms.adoc}.
-- Record your responses in the *dot plot* column of the table. If there is a question that you *cannot* answer, put an X.
-}
-
-
-Next, we'll use a histogram to answer the same questions.
-
-@lesson-instruction{
-- Return to @printable-exercise{compare-dot-plots-histograms.adoc}.
-- Use *only the histogram* to answer the same set of questions. Record your responses in the *histogram* column of the table. If there is a question that you cannot answer, put an X.
-}
-
-@QandA{
-@Q{Given that this is your first time interpreting a histogram: What questions do you have about reading a histogram?}
-
-@A{Possible questions include:
-- *How is this different from a bar chart?* Histograms show the distribution of quantitative data, not categorical. Histograms' bars cannot be reordered, as they allow us to see the shape of a dataset. We can reorder bars in a bar chart.
-- *Are the values on the tick marks included in the bar?* On a histogram, each bar _includes_ the left-end value but not the right-end value.}
-- *How was the size of the intervals (bins) determined?* This is a great question! But it's too big to tackle today. Bin size varies depending on the data being displayed. We will explore this and other questions about histograms in @lesson-link{histograms-visualize}.
-}
-
-@lesson-instruction{
-- Respond to the questions in the Reflection section of @printable-exercise{compare-dot-plots-histograms.adoc}.
-}
-
-
-@teacher{Invite students to share their responses, emphasizing the important idea that histograms display aggregate information rather than individual cases.}
-
-@strategy{Histograms Don't Display Individual Data Points!}{
-
-Dot plots and histograms have a lot in common... so why is interpreting histograms a challenge for many students?
-
-According to research conducted by @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"}, students are inclined to view data as _individual cases_. Histograms, however, display _aggregate information_.
-
-How do we prevent this misconception? The authors have two recommendations:
-
-- Spend ample time learning about data visualizations _where individual cases are visible_ to establish a solid foundation.
-- When aggregate plots *are* introduced, pair them with representations that allow students to see individual cases.
-
-}
-
-Lets think more deeply about dot plots and histograms, two data visualizations of both the frequency and distribution of quantitative data.
-
-@lesson-instruction{
-- Complete @printable-exercise{match-dot-plots-histograms.adoc}.
-- What was your strategy for matching dot plots and histograms?
-}
-
-
-
-=== Synthesize
-
-
-@QandA{
-
-@Q{How are the two displays alike?}
-@A{They both display the frequency and distribution of quantitative data. They both show the total number of values.}
-
-@Q{How are the two displays different?}
-@A{We can see individual points on the dot plot, but on the histogram, we just get a collective overview of the data. There is no way to single out one particular animal's weight on the histogram.}
-
-@Q{When might a histogram be more useful than a dot plot? When might a dot plot be more useful than a histogram?}
-@A{If we have a large dataset and we want to get a collective overview of the data, a histogram would be more useful. If we need to look at individual data points in a smaller dataset, we should use a dot plot.}
-
-}
-
-
-== Creating and Reading Histograms
-
-@objective{make-histograms}
-@objective{histogram-center-spread}
-
-=== Overview
-
-Students create histograms by hand and in Pyret, and then use the histograms to respond to questions about the data.
-
-=== Launch
-
-We have already discussed how histograms are similar to and different from dot plots: both display the frequency and distribution of quantitative data--but histograms give us a collective overview of the data, while dot plots allow us to see individual points.
-
-During this lesson, we will get comfortable making histograms by hand and in @proglang.
-
-@lesson-instruction{
-- Turn to the first section of @printable-exercise{making-histograms.adoc} and use the data provided to complete the frequency table and corresponding data visualization.
-- When you're done, open @starter-file{tooth-data} and complete the second section of the page using @proglang.
-}
-
-
-=== Investigate
-
-Let's practice reading histograms.
-
-@teacher{If your students are new to histograms, you may want review the first section before having students move on to the second. Some misconceptions that commonly emerge are highlighted @ifnotslide{below}@ifslide{on the next slide}.}
-
-
-@lesson-instruction{
-- Complete @printable-exercise{reading-histograms.adoc}
-}
-
-=== Common Misconceptions
-
-- The tallest bar on a histogram does *not* necessarily represent the majority. A majority requires more than half of the data points. We need to ask ourselves: Is more than half of the data represented by the tallest bar?
-
--  Pay attention to what each axis measures! A tall histogram bar does not indicate a heavier dog. The height of the bar indicates frequency (how many dogs fall into a given 20-pound weight interval).
-
--  Unlike dot plots, histograms display *aggregate* data, meaning that it is impossible to identify single data points. The first histogram does *not* show us that one dog weighs exactly 140 pounds. There might be a dog with that weight, but we can't know for sure unless we look at the dataset (or use our mouse to interact with the display in Pyret).
-
-@teacher{
-The common misconceptions cited above are from work by @citation{kaplan-et-al-2014, "Kaplan et al"} (2014), @citation{cooper-shore-2008, "Cooper and Shore"} (2008), and @citation{bakker-et-al-2005, "Bakker et al"} (2005).
-}
-
-=== Synthesize
-
-@QandA{
-@Q{What does the height of a histogram bar indicate?}
-@A{Histogram bar height tells us about the frequency of that data falling in a given bin.}
-
-@Q{Can we use a histogram to determine the exact range of a dataset?}
-@A{No: A histogram's bars provide an aggregate view of the data.}
-@A{We cannot identify single data points, so we can neither identify the minimum n
-or maximum.}
-@A{The lowest data point could fall toward the low or high end of the first bin, or anywhere in between. And the highest data point could fall anywhere in the last bin.}
-
-@Q{Can we identify how *many* data points are in a dataset from a histogram?}
-@A{Yes. Assuming that the y-axis is clearly labeled, we can add the bar heights to determine how many data points are in a dataset. This of course becomes more complicated when we have larger datasets.}
-
-}
 
 
 == Describing Shape
