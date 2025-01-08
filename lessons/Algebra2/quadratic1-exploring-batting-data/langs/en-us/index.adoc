@@ -1,10 +1,10 @@
-= Exploring the Fuel Efficiency Dataset
+= Exploring Batting Data from Baseball Player Aaron Judge
 ++++
 <style>
 .lesson-instruction table .autonum { font-weight: bold; }
 </style>
 ++++
-@description{Students investigate quadratic relationships in data about Fuel Efficiency.}
+@description{Students investigate quadratic relationships in Major League Baseball data from Aaron Judge's hits in 2016 and 2017.}
 
 @lesson-prereqs{fitting-models}
 
@@ -49,54 +49,53 @@ You will want to:
 @objective{model-explore}
 
 === Overview
-Students explore the @starter-file{alg2-fuel-efficiency}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
+Students explore the @starter-file{alg2-aaron-judge}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
 
 === Launch
 
-@teacher{These questions are intended to spark student interest in _fuel efficiency_, which students will explore in this lesson.}
+@teacher{These questions are intended to spark student interest in the dataset they are about to explore.}
 
 @QandA{
-Since 1992, there have been laws about what information must be printed onto the labels of cars for sale. What do you think consumers should know about cars they are considering buying?
-@Q{Have you heard the term "fuel efficiency" before? What do you know about fuel efficiency?}
-@A{Fuel efficiency is the number of miles that a car can travel per gallon. Since 2013, labels on cars for sale must include: fuel efficiency, energy use, fuel cost, and environmental impact.}
-@Q{What factors influence fuel efficiency?}
+@right{@image{images/aaron-judge.jpeg, 200}}Aaron Judge is an American professional baseball outfielder for the New York Yankees. In 2022 he hit 62 home runs, setting the  American League record for most home runs in a season.
+@Q{What is a home run?}
+@A{When a batter makes it around all of the bases and back to home plate before the other team is able to gain control of the ball and stop them.}
+@Q{What factors might influence how many home runs a player hits in a season?}
 @A{Possible responses:}
-@A{Efficient driving (e.g., gradual acceleration and braking, using cruise control)}
-@A{car maintenance}
-@A{planning / combining trips}
-@A{choosing a more fuel efficient vehicle}
-@A{avoiding carrying excess weight in a vehicle}
-@Q{Do you think the speed at which you drive influences fuel efficiency? Why or why not?}
-@Q{At what speeds do you predict that fuel efficiency is the best? The worst?}
-@A{"Zero" is a clever attempt (no gas used!), but remember that miles-per-gallon also includes the distance traveled (@math{0 / 0})!}
-@A{Make sure that student guesses make sense, as well: a car rolling downhill in neutral shouldn't be counted, cars can't travel 10,000mph, etc}
+@A{How fast the batter runs.}
+@A{The speed and angle at which the batter swings the bat.}
+@A{How calm and focused the player is when they are at bat, perhaps influenced by personality, sleep, diet, stretching, meditation, etc.}
+@A{How many hits make it into the bleachers, so they are inaccessible to the outfielders.}
+@A{How fans and teammates support the batter.}
 }
-
 @slidebreak
 
-In this lesson, we'll learn more about the relationship between fuel efficiency and the speed a car is traveling.
+In this lesson, we'll explore possible relationships between pitch (type and speed), bat angle, and hit (distance, speed and ball type).
 
-First, we'll explore a dataset and see if this relationship appears linear.
-
-@teacher{
-*NOTE:* While this dataset is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI, the dataset}.
-}
-
+First, we'll explore a data set of Aaron Judge's hits in 2016 and 2017 and see if any of the relationships between quantitative columns appear to be linear.
 
 @lesson-instruction{
-- Open the @starter-file{alg2-fuel-efficiency}
+- Open the @starter-file{alg2-aaron-judge}.
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete the first section of @printable-exercise{exploring-mpg.adoc}.
+- Working in pairs or small groups, complete the first section of @printable-exercise{exploring-judge-data.adoc}.
+}
+
+@QandA{
+@Q{Which quantitative columns appear to have the strongest relationship?}
+@A{bat-angle and hit-distance}
+@Q{Would you describe it as a linear relationship?}
+@A{No.}
 }
 
 === Investigate
 
 There definitely appears to be a relationship here...
-@center{@image{images/fuel-efficiency-quadratic.png}}
+@center{@image{images/curve-angle-distance.png,400}}
 
 @slidebreak
 
 But linear models don't seem to fit very well!
+
+@scrub{MAKE NEW IMAGES ONCE PYRET ISN'T DEFAULTING TO SCINOT}
 
 [cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
 |===
@@ -104,32 +103,32 @@ But linear models don't seem to fit very well!
 | We could build linear models that fit the decreasing half of the data...
 | We could build linear models that try to split the difference...
 
-| @image{images/fuel-efficiency-linear1.png}
-| @image{images/fuel-efficiency-linear2.png}
-| @image{images/fuel-efficiency-linear3.png}
+| @image{images/curve-angle-distance-linear1.png}
+| @image{images/curve-angle-distance-linear2.png}
+| @image{images/curve-angle-distance-linear3.png}
 |===
 
-All of them are far away from so many points, and will make poor predictions for a large subset of x-values.
+But all of them are far away from so many points, and will make poor predictions for a large subset of x-values.
 
 @slidebreak
 
 @lesson-instruction{
-- Complete the rest of @printable-exercise{exploring-mpg.adoc}. Be ready to share back and describe the curve you drew.
-- Is there a function @math{\text{mpg}(\text{speed})}, that describes the pattern you see here?
+- Complete the rest of @printable-exercise{exploring-judge-data.adoc}. Be ready to share back and describe the curve you drew.
+- Is there a function @math{\text{bat-angle}(\text{hit-distance})}, that describes the pattern you see here?
 }
 
 @slidebreak
 
-Even though some cars are more efficient than others, fuel efficiency generally increases from 15mph to around 40-55mph. After that, fuel efficiency generally _decreases!_
+Even though some hits go farther than others, Aaron Judge's hit distance generally increases as his bat angle increases from 0 to 30 degrees. As the angle increases after that, his hit distance generally _decreases!_
 
-@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with efficiency peaking _roughly_ at 45mpg.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
+@teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with hit distance peaking at a bat angle of _roughly_ 30 degrees.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
 
 Have students share their curves, encouraging them to identify where they "peak" and where they cross the x-axis. These locations will be important anchor concepts on which to build in the next section. (One option for facilitating sharing is to project the scatter plot on a whiteboard and have students come up and draw all of their curves on it).
 }
 
 === Synthesize
 
-- Why don't linear models work to model the relationship between fuel efficiency and speed?
+- Why don't linear models work to model the relationship between bat angle and hit distance?
 - What kinds of curves did you draw that fit better?
 - Are there any mathematical functions that look like those curves?
 
@@ -143,7 +142,7 @@ Students are introduced to quadratic functions. They become familiar with scenar
 === Launch
 Linear models work well for fitting simple relationships, but many relationships in the real world are more complex! _Linear models are often too primitive_.
 
-The relationship we observe between speed and fuel efficiency appears to best be described by a _curve_, where fuel-efficiency increases up to a certain speed, and then decreases again.
+The relationship we observe between bat angle and hit distance appears to best be described by a _curve_, where hit distance increases up to a certain bat angle, and then decreases again.
 
 @slidebreak
 
@@ -167,9 +166,15 @@ In some quadratic relationships, the curve goes the other way - decreasing, bott
 @slidebreak
 
 @lesson-instruction{
-Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear or quadratic relationships.
+Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are likely best modeled by linear or quadratic relationships.
 }
 
 === Synthesize
 
-- TBD
+@QandA{
+@Q{What characteristics did you look for to identify whether a scenario was likely best-modeled by a linear or quadratic relationship?}
+@A{When there's either a steady increase or a steady decrease, a linear model will likely fit.}
+@A{When there's a high point or a low point at which the change changes direction, a quadratic model will likely be a good fit.}
+}
+
+
