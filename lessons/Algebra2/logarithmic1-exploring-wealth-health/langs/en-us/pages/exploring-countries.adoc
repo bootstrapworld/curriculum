@@ -4,67 +4,55 @@
 <style>
 /* Make autonums inside tables look consistent with those outside */
 td .autonum::after { content: ')' !important; }
+td li { margin-bottom: 10px; }
 </style>
 ++++
 
 [.linkInstructions]
-For this section, you'll need the  @starter-file{alg2-countries} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. The columns in this dataset are described below:
+For this section, you'll need the  @starter-file{alg2-countries} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. The columns in this dataset are described in the left column below:
 
-[cols="5a,6a", grid=none, frame=none, stripes=none]
-|===
-|
 @vspace{1ex}
 
+[cols="1a,2a", frame=none, stripes=none]
+|===
+|
 - *country* - name of the country
 - *gdp* - total Gross Domestic Product of the country. GDP is often used to measure the economic health of a country.
 - *population* - number of people in the country
-|
-@vspace{1ex}
-
 - *pc-gdp* - the average GDP _per-person, in thousands_ of $US
 - *has-univ-healthcare* - indicates if the country has universal healthcare
 - *median-lifespan* - the median life expectancy of people in the country
+
+| *In Pyret, make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, and sketch it below.*
+
+@vspace{1ex}
+
+@center{@image{../images/blank-graph.png, 350}}
 |===
 
 @vspace{1ex}
 
-[cols="19,21", frame=none, stripes=none]
-!===
-| @n Make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, and sketch its scatter plot below.
+@n How close was your hypothesis to the actual data? @fitb{}{}
 
-@vspace{1ex}
+@n What do you *Notice* about the point cloud? @fitb{}{} +
+@fitb{}{} +
 
-@center{@image{../images/scatter-grid.png,250}}
+@n What do you *Wonder* about the point cloud? @fitb{}{} +
+@fitb{}{} +
 
-|
+@n Do you see a relationship? If so, describe it (e.g. - linear or nonlinear? Strong or weak?)
 
+@fitb{}{@ifsoln{There seems to be a somewhat strong, nonlinear relationship}} +
+@fitb{}{}
 
-@n What do you *Notice?* @fitb{}{} +
+@n Find the point for Equatorial Guinea, an outlier with `pc-gdp` = 38 and `median-life-expectancy` = 65. Why might this point be so far from the rest?
+
+@fitb{}{@ifsoln{Answers will vary - perhaps a war or disease is causing people to die young?}} +
 @fitb{}{} +
 @fitb{}{}
 
-@n What do you *Wonder?* @fitb{}{} +
+@n Find the point for Japan, another outlier with `pc-gdp` = 43 and `median-life-expectancy` = 85.5. Why might this point be so far from the rest?
+
+@fitb{}{@ifsoln{Answers will vary - maybe Japanese people have healthier diets?}} +
 @fitb{}{} +
 @fitb{}{}
-
-@vspace{1ex}
-
-@n Are there any countries that stand out? Why or why not? @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
-
-@vspace{1ex}
-
-@n Suppose a wealthy country is suffering heavy casualties in a war. Draw a star on the scatter plot, showing where you might expect it to be.
-
-@vspace{1ex}
-
-!===
-
-@n Do you think you see a relationship? If so, describe it. Is it linear or nonlinear? Strong or weak?
-
-@fitb{}{@ifsoln{There seems to be a somewhat strong, nonlinear relationship}}
-
-@fitb{}{}
-
-@fitb{}{}  
