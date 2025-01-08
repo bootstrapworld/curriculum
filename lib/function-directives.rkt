@@ -431,7 +431,10 @@
 
   (cond [(string? body)
          (cond [(regexp-match "^ *$" body) #f]
-               [(or (regexp-match "\n" body) (regexp-match " .* " body)) #f]
+               [(or (regexp-match "\n" body)
+                    (regexp-match " .* " body)
+                    (regexp-match "[^ ][(\\[]" body)
+                    ) #f]
                [else (set! body (wescheme->pyret body))])]
         [(null? body) (set! body "")]
         [else (set! body (wescheme->pyret body))])
