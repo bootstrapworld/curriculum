@@ -1,8 +1,9 @@
 = Exploring the Aaron Judge Dataset
+
 ++++
+<style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 
-<style>
 #content { display: block !important; }
 </style>
 ++++
@@ -11,6 +12,8 @@
 For this page, you'll need to open the @starter-file{alg2-aaron-judge} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. *Read the comments at the top of the file*, which describe what each column in the dataset means.
 
 @n What is the name of the table being loaded in this file? @fitb{}{@ifsoln{`judge-table`}}
+
+@vspace{1ex}
 
 == Looking for Possible Relationships
 
@@ -26,9 +29,7 @@ We can look for potential relationships between quantitative columns by building
 
 @fitb{}{}
 
-- Based on the scatter plot, for a ball pitched at a speed of 95mph, what speed would you predict it to be hit at?
-
-@fitb{7em}{@ifsoln{65 - 120 mph}}
+- Based on the scatter plot, what hit speed would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{65 - 120 mph}}
 
 Why? @fitb{}{@ifsoln{most of Judge's hits are between 65 and 120 mph}}
 }
@@ -39,13 +40,11 @@ Why? @fitb{}{@ifsoln{most of Judge's hits are between 65 and 120 mph}}
 @fitbruby{15em}{hit distance}{response variable}.
 
 @indented{
-- Does there appear to be a relationship between `pitch-speed` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
+- Does there appear to be a relationship between `pitch-speed` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{No.}}
 
 @fitb{}{}
 
-- Based on the scatter plot, for a ball pitched at a speed of 95mph, what speed would you predict it to be hit at?
-
-@fitb{7em}{@ifsoln{50 - 450 feet}}
+- Based on the scatter plot, what hit distance would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{50 - 450 feet}}
 
 Why? @fitb{}{@ifsoln{Most of Judge's hits are between 50 and 450 feet.}}
 }
@@ -56,17 +55,13 @@ Why? @fitb{}{@ifsoln{Most of Judge's hits are between 50 and 450 feet.}}
 @fitbruby{15em}{hit distance}{response variable}.
 
 @indented{
-- Does there appear to be a relationship between `bat-angle` and `hit-distance`? If so, describe it.
+- Does there appear to be a relationship between `bat-angle` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{Yes. There seems to be}}
 
-@fitb{}{@ifsoln{Yes. There seems to be an optimum bat angle.}}
+@fitb{}{@ifsoln{an optimum bat angle. The hit distances increase as the angle increases up to a point. Above about 30 degrees the hit distances decrease.}}
 
-@fitb{}{@ifsoln{The hit distamce seems to increase as the angle increases up to a point. After that it decreases as the angle increases.}
+- Based on the scatter plot, what distance would you predict for a ball hit at an angle of 60 degrees? @fitb{7em}{@ifsoln{about 175 feet}}
 
-- Based on the scatter plot, what distance would you predict for a ball hit at an angle of 60 degrees?
-
-@fitb{7em}{@ifsoln{about 175 feet}}
-
-Why? @fitb{}{@ifsoln{the other balls batted at 60 degrees traveled 150 to 200 ft.}}
+Why? @fitb{}{@ifsoln{as the bat angle increases to 60 degrees, the hit distance drops to between 150 and 200 ft.}}
 }
 
 
@@ -75,15 +70,15 @@ Why? @fitb{}{@ifsoln{the other balls batted at 60 degrees traveled 150 to 200 ft
 @fitbruby{15em}{hit speed}{response variable}.
 
 @indented{
-- Does there appear to be a relationship between `bat-angle` and `hit-speed`? If so, describe it.
-
-@fitb{}{@ifsoln{No.}}
+- Does there appear to be a relationship between `bat-angle` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
 
 @fitb{}{@ifsoln{}}
 
-- Based on the scatter plot, what speed would you predict for a ball hit at an angle of 20 degrees?
-
-@fitb{7em}{@ifsoln{70 - 120mph}}
+- Based on the scatter plot, what speed would you predict for a ball hit at an angle of 20 degrees? @fitb{7em}{@ifsoln{70 - 120mph}}
 
 Why? @fitb{}{@ifsoln{Judge's hit speed seems to be fairly evenly distributed in that range.}}
 }
+
+@n What is happening on lines 21 - 36 of the starter file? @fitb{}{}
+
+@fitb{}{@ifsoln{4 filtered tables are being defined, focused on data from specific pitch types.}}
