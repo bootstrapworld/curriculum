@@ -79,47 +79,75 @@ First, we'll explore a data set of Aaron Judge's hits in 2016 and 2017 and see i
 - Working in pairs or small groups, complete the first section of @printable-exercise{exploring-judge-data.adoc}.
 }
 
+@slidebreak
+
 @QandA{
 @Q{Which quantitative columns appear to have the strongest relationship?}
 @A{bat-angle and hit-distance}
-@Q{Would you describe it as a linear relationship?}
-@A{No.}
+@Q{Would you describe the relationship as a linear? Why?}
+@A{No. Because it's u-shaped, rather than a straight line.}
+}
+
+@teacher{
+@image{images/judge-pitchspeed-v-distance.png, 150}
+@image{images/judge-pitchspeed-v-speed.png, 150}
+@image{images/judge-angle-v-distance.png, 150}
+@image{images/judge-angle-v-speed.png, 150}
+}
+
+@QandA{
+@Q{What is happening on lines 21-36 of the Definitions Area?}
+@A{Four filtered tables are being defined, focused on subsets of the data for specific hit types}
+@Q{How would we make a scatter plot comparing `bat-angle` and `hit-distance` for just the curve balls?}
+@A{Exactly like the scatter plots we just made, except we'd use `curve-table` instead of `judge-table`}
+@A{`scatter-plot(curve-table, "id", "bat-angle", "hist-distance")`}
+@Q{Take a moment to make scatter plots comparing `bat-angle` and `hit-distance` for each of the filtered tables defined in the starter file. How do they compare?
+}
+@A{They all more or less make an upside down U shape, but they look slightly different and have a different numbers of points.}
 }
 
 === Investigate
 
-There definitely appears to be a relationship here...
+Let's focus on just the curve balls for now.  There definitely appears to be a relationship here...
 @center{@image{images/curve-angle-distance.png,400}}
 
 @slidebreak
 
-But linear models don't seem to fit very well!
+@lesson-instruction{
+Turn to @printable-exercise{curve-data.adoc} and complete the first section to find the optimal linear model.
+}
 
-@scrub{MAKE NEW IMAGES ONCE PYRET ISN'T DEFAULTING TO SCINOT}
+@QandA{
+@Q{Is the best-possible linear model a good fit? Why or why not?}
+@A{No}
+@A{The S-value predicts an error of almost 104 feet for hit distances that only range between 50 and 400 feet!}
+@A{The model does not follow the shape of the data!}
+}
+
+Linear models don't seem to fit very well! No matter which direction we draw the line, many of the points are far away - and they will make poor predictions for a large subset of x-values.
 
 [cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
 |===
-| We could build linear models that fit the increasing half of the data...
-| We could build linear models that fit the decreasing half of the data...
-| We could build linear models that try to split the difference...
+| When we build a linear model to fit the increasing half of the data, it doesn't do the decreasing half justice...
+| When we build a linear model to fit the decreasing half of the data, it doesn't do the decreasing half justice...
+| And trying to split the difference, is even worse...
 
 | @image{images/curve-angle-distance-linear1.png}
 | @image{images/curve-angle-distance-linear2.png}
 | @image{images/curve-angle-distance-linear3.png}
 |===
 
-But all of them are far away from so many points, and will make poor predictions for a large subset of x-values.
-
 @slidebreak
 
 @lesson-instruction{
-- Complete the rest of @printable-exercise{exploring-judge-data.adoc}. Be ready to share back and describe the curve you drew.
-- Is there a function @math{\text{bat-angle}(\text{hit-distance})}, that describes the pattern you see here?
+Complete @printable-exercise{curve-data.adoc} with your partner, drawing and describe the pattern you actually see.
 }
 
 @slidebreak
-
-Even though some hits go farther than others, Aaron Judge's hit distance generally increases as his bat angle increases from 0 to 30 degrees. As the angle increases after that, his hit distance generally _decreases!_
+@QandA{
+@Q{How would you describe the pattern you see here?}
+@A{Aaron Judge's hit distance generally increases as his bat angle increases from 0 to 30 degrees. As the angle increases after that, his hit distance generally _decreases!_}
+}
 
 @teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with hit distance peaking at a bat angle of _roughly_ 30 degrees.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
 
@@ -130,8 +158,6 @@ Have students share their curves, encouraging them to identify where they "peak"
 
 - Why don't linear models work to model the relationship between bat angle and hit distance?
 - What kinds of curves did you draw that fit better?
-- Are there any mathematical functions that look like those curves?
-
 
 == Quadratic Relationships
 @objective{quadratic-situations}
@@ -142,39 +168,54 @@ Students are introduced to quadratic functions. They become familiar with scenar
 === Launch
 Linear models work well for fitting simple relationships, but many relationships in the real world are more complex! _Linear models are often too primitive_.
 
-The relationship we observe between bat angle and hit distance appears to best be described by a _curve_, where hit distance increases up to a certain bat angle, and then decreases again.
+The relationship we observe between bat angle and hit distance appears to best be described by a _curve_, where hit distance increases up to a certain bat angle, and then decreases again. There are many kinds of curved models. The first one we'll learn about is called a @vocab{quadratic relationship}.
 
 @slidebreak
 
-Today, we will learn about one kind of curved model called a @vocab{quadratic relationship}.  Graphs of quadratic relationships are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}.
+Graphs of @vocab{quadratic relationships} are often described as "u-shaped" or "looking like an arch". More formally, mathematicians and data scientists call these kinds of curves @vocab{parabolas}. There are lots of relationships that change direction like this!
 
-There are lots of relationships that change direction like this! For example, when an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength.
+@slidebreak
 
-In some quadratic relationships, the curve goes the other way - decreasing, bottoming out, and then rising again. For example, the graph of an accelerating car's position over time will look like the right-half of a downward-facing parabola, with the car covering more distance each second than last.
+[cols="1a,1a", options="header", stripes="none"]
+|===
+^| Some quadratic curves peak
+^| Other quadratic curves bottom out
+
+| For example, a ball thrown in the air will rise quickly, slow down, peak, and then begin to fall.
+| For example, the length of a shadow is long in the morning, shortens as the sun rises, and lengthens as the sun sets.
+
+^.^| @image{images/parabola-ball-throw.png, }
+^.^| @image{images/shadow-length-curve.png, 200} +
+@image{images/boy-shadow.png, 200}
+
+|===
+
 
 === Investigate
 
-@QandA{
-@Q{Can you think of any other real-world relationships that appear to be quadratic?}
-@A{A ball dropped from a tall building will get faster and faster as it falls, so a graph of @math{\text{distance}(\text{time})} will be quadratic.}
-@A{Many nutrients are good for you, and the more you take the healthier you are...up to a point. After that, too much of a mineral or vitamin can cause problems. A graph of @math{\text{health}(\text{dose})} will be quadratic.}
-@A{A ball thrown in the air will rise quickly, slow down, peak, and then begin to fall. A graph of @math{\text{height}(\text{time})} will be quadratic.}
-@A{The temperature of a puddle will warm and then cool over the course of the day. A graph of @math{\text{temp}(\text{time})} will be quadratic.}
-@A{The length of a shadow is long in the morning and shortens til the sun is overhead, after which it slowly lengthens til the sun sets. A graph of @math{\text{length}(\text{time})} will be quadratic.}
+@lesson-instruction{
+Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying which scenarios are likely best modeled by linear relationships and which are likely best modeled by quadratic relationships.
 }
 
 @slidebreak
-
-@lesson-instruction{
-Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are likely best modeled by linear or quadratic relationships.
-}
-
-=== Synthesize
 
 @QandA{
 @Q{What characteristics did you look for to identify whether a scenario was likely best-modeled by a linear or quadratic relationship?}
 @A{When there's either a steady increase or a steady decrease, a linear model will likely fit.}
 @A{When there's a high point or a low point at which the change changes direction, a quadratic model will likely be a good fit.}
 }
+
+
+=== Synthesize
+
+@QandA{
+@Q{Brainstorm some other real-world relationships that could likely be modeled by a quadratic function.}
+@A{Answers will vary.}
+@A{Many nutrients are good for you, and the more you take the healthier you are...up to a point. After that, too much of a mineral or vitamin can cause problems. A graph of @math{\text{health}(\text{dose})} will be quadratic.}
+@A{When an athlete is young, they improve as they get stronger and more skilled. But as they age, they begin to lose their speed and strength.A graph of @math{\text{height}(\text{time})} will be quadratic.}
+@A{The temperature of a puddle will warm and then cool over the course of the day. A graph of @math{\text{temp}(\text{time})} will be quadratic.}
+@A{A ball dropped from a tall building will get faster and faster as it falls, so a graph of @math{\text{distance}(\text{time})} will be quadratic.}
+}
+
 
 
