@@ -4,10 +4,62 @@
 <style>
 /* Make autonums bold for matching pages */
 td .autonum { font-weight: bold; }
+
+/* Make all the rows evenly-spaced */
+.FillVerticalSpace { grid-auto-rows: 1fr; }
+
+/* Save some vertical space by shrinking top padding on fitbs */
+.fitb, .autonum { padding-top: 0.5rem !important; }
 </style>
 ++++
 
-[.FillVerticalSpace, cols="^.^1a, ^.^4a,^.^16a,^.^4a", options="header"]
+== Phrasing 1
+
+Fill in the empty cells of the table below.
+
+[.FillVerticalSpace, cols="<.^1a, ^.^4a,^.^16a,^.^4a", options="header", frame="none"]
+|===
+|
+| Expressions
+| Translation
+| Evaluates to:
+
+| @n
+| @math{\log_2(8)}
+| "2 raised to what power gives us 8?"
+| 3
+
+| @n
+| @math{\log_2(1)}
+| "2 raised to what power gives us 1?"
+| 0
+
+| @n
+| @math{\log_5(25)}
+| "@fitb{2em}{@ifsoln{5}} raised to what power gives us @fitb{2em}{@ifsoln{25}}?"
+| @ifsoln{2}
+
+| @n
+| @math{\log_5(1)}
+| "@fitb{2em}{@ifsoln{5}} raised to what power gives us @fitb{2em}{@ifsoln{1}}?"
+| @ifsoln{0}
+
+| @n
+| @ifsoln{@math{\log_3(81)}}
+| "3 raised to what power gives us 81?"
+| @ifsoln{4}
+
+| @n
+| @math{\log_4(1)}
+| @ifsoln{"4 raised to what power gives us 1?"}
+| @ifsoln{0}
+|===
+
+
+== Phrasing 2
+Fill in the empty cells of the table below.
+
+[.FillVerticalSpace, cols="<.^1a, ^.^4a,^.^16a,^.^4a", options="header", frame="none"]
 |===
 |
 | Expressions
@@ -20,18 +72,8 @@ td .autonum { font-weight: bold; }
 | 3
 
 | @n
-| @math{\log_2(1)}
-| "The power you raise 2 to get 1"
-| 0
-
-| @n
-| @math{\log_5(25)}
-| "The power you raise @fitb{2em}{@ifsoln{5}} to get @fitb{2em}{@ifsoln{25}}"
-| @ifsoln{2}
-
-| @n
-| @math{\log_5(1)}
-| "The power you raise @fitb{2em}{@ifsoln{5}} to get @fitb{2em}{@ifsoln{1}}"
+| @math{\log_3(1)}
+| "The power you raise @fitb{2em}{@ifsoln{3}} to get @fitb{2em}{@ifsoln{1}}"
 | @ifsoln{0}
 
 | @n
@@ -40,24 +82,9 @@ td .autonum { font-weight: bold; }
 | @ifsoln{4}
 
 | @n
-| @math{\log_3(1)}
-| "The power you raise @fitb{2em}{@ifsoln{3}} to get @fitb{2em}{@ifsoln{1}}"
-| @ifsoln{0}
-
-| @n
-| @math{\log_2(16)}
-| @ifsoln{"The power you raise 2 to get 16"}
+| @ifsoln{@math{\log_4(64)}}
+| "The power you raise 4 to get 64"
 | @ifsoln{4}
-
-| @n
-| @math{\log_2(32)}
-| @ifsoln{"The power you raise 2 to get 32"}
-| @ifsoln{5}
-
-| @n
-| @math{\log_{10}(1000)}
-| @ifsoln{""The power you raise 10 to get 1000"}
-| @ifsoln{3}
 
 | @n
 | @ifsoln{@math{\log_{0.1}(0.01)}}
@@ -65,12 +92,44 @@ td .autonum { font-weight: bold; }
 | @ifsoln{2}
 
 | @n
-| @ifsoln{@math{\log_4(64)}}
-| "The power you raise 4 to get 64"
+| @math{\log_2(16)}
+| @ifsoln{"The power you raise 2 to get 16"}
 | @ifsoln{4}
 
+|===
+
+== Create Your Own
+Come up with your own logarithmic expressions! _Use the phrasing you like best_ to translate them, then solve them. The first one has been completed for you, with both phrasing provided.
+
+[.FillVerticalSpace, cols="<.^1a, ^.^4a,^.^16a,^.^4a", options="header", frame="none"]
+|===
+|
+| Expressions
+| Translation
+| Evaluates to:
+
 | @n
-| @ifsoln{@math{\log_4(1)}}
-| "The power you raise 4 to get 1"
-| @ifsoln{0}
+| @math{\log_4(2)}
+| "The power you raise 4 to get 2" @hspace{1em} *or* @hspace{1em} "4 raised to what power gives us 2?"
+| 1/2
+
+| @n
+|
+|
+|
+
+| @n
+|
+|
+|
+
+| @n
+|
+|
+|
+
+| @n
+|
+|
+|
 |===

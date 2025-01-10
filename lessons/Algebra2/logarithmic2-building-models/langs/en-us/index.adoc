@@ -53,7 +53,7 @@ You will want to:
 @objective{logarithms-exponents}
 
 === Overview
-Having identified that the wealth-v-lifespan scatter plot is neither linear, nor quadratic, nor exponential, students are asked to make connections to exponential functions.
+Having identified that the wealth-v-lifespan scatter plot is neither linear, quadratic, or exponential, students are asked to make connections to exponential functions.
 
 === Launch
 
@@ -61,21 +61,26 @@ Having identified that the wealth-v-lifespan scatter plot is neither linear, nor
 - Open @starter-file{alg2-countries}, and make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, using the name of the `country` as the label.
 }
 
-All of the models we just found for this dataset made predictions with too much error. Even though this shape might look _familiar_, it's just not any kind of growth we've seen before.
+All of the models we just found for this dataset made predictions with too much error. This shape just isn't any kind of growth we've seen before, although this shape might look _familiar_...
 
 @slidebreak
 
-Exponential growth started really _slowly_, and then suddenly shot up like a rocket to numbers so large we can't even reason about them. This kind of growth feels like the exact opposite, growing really _quickly_ but then leveling off to something very slow.
+@lesson-instruction{
+- Complete the first section of @printable-exercise{from-expt-to-log.adoc}
+- What do you notice about the first two scatter plots?
+}
+
+Exponential growth starts _slowly_, and then explodes to enormous numbers so quickly that we have trouble predicting what the next value will be. But our Life Expectancy v. Income growth feels like the exact opposite, growing really _quickly_ but then leveling off to something very slow.
 
 @slidebreak
 
-@right{@image{images/covid-graph.png, 375}}Let's think back to the graph of our model for Covid spread, from @lesson-link{exponential1-exploring-covid}.
+@right{@image{images/MA-covid.png, 275}}Consider the growth of Covid Infections from Massachusetts (from @lesson-link{exponential1-exploring-covid}).
 
-- Our model answers the question "how many positive cases do we predict after @math{x} days?"
+- The model for this data answers the question "how many positive cases do we predict after @math{x} days?"
 - The graph is showing us the relationship from +
 _days → cases_, _x → y_, or _Domain → Range_.
 
-But what if we want to answer the _opposite_ question: "how many days will it take to reach @math{y} cases?"
+The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!
 
 - Now we want to *flip the relationship around*, asking for +
 _cases → days_, _y → x_, or _Range → Domain_.
@@ -83,26 +88,62 @@ _cases → days_, _y → x_, or _Range → Domain_.
 
 @slidebreak
 
-@ifslide{@right{@image{images/covid-graph.png, 350}}}
+++++
+<style>
+/* position the second image right on top of the first */
+.right { position: relative; }
+.image-figure + .image-figure {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 
-Swapping the x's and y's is like reflecting the graph across the diagonal, making the axes trade places and swapping the x- and y-values for point on the line. Let's do that with our Covid model...
+/* Fade-away Animation*/
+@keyframes fade {
+	0%   { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+/* Both images should use the fade animation */
+.image-figure + .image-figure, .image-figure:has(+.image-figure) {
+	animation-name: fade;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-duration: 2s;
+	animation-direction: alternate;
+}
+/* But the second image should do it in reverse */
+.image-figure + .image-figure{
+	animation-direction: alternate-reverse;
+}
+
+</style>
+++++
+
+@ifnotslide{
+@right{
+@image{images/MA-covid.png, 350}
+@image{images/MA-covid-flipped.png, 320}
+}
+}
+By swapping the axes, we've reflected the curve over @math{y = x}.
+
+It's the same data, *just mirrored across the diagonal!*
+
+Now our graph answers the _opposite_ question: "how many days do we predict it will take to pass @math{y} cases?"
 
 @slidebreak
-
-@right{@image{images/inverse-covid-graph.png, 350}}Swapping the x- and y-axes makes the graph _start_ with rapid growth, and then flatten out. Now we can answer those inverted questions!
+@right{@image{images/MA-covid-flipped.png, 320}}
+Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid growth, and then flattens out.
 
 - During the pandemic, our initial value was roughly 120,000 cases.
 - By 150,000 cases, it was 75 days later.
 - By 300,000 cases, it was 112 days later.
 - By 400,000 cases, it was 122 days after.
 
-@clear
-
-This kind of growth is much easier to understand, and *much more alarming!* By switching the axes, we've given our brains a much better chance of understanding what was really happening.
-
 @slidebreak
 
-@ifslide{@right{@image{images/inverse-covid-graph.png, 375}}}But our inverted model isn't exponential at all. In fact, it looks a lot more like our Wealth-v-Lifespan data!
+This kind of growth is much easier to understand, and *much more alarming!* By switching the axes, we've given our brains a much better chance of understanding what was really happening.
 
 == Logarithmic Growth
 @objective{logarithms-growth}
@@ -112,7 +153,26 @@ This kind of growth is much easier to understand, and *much more alarming!* By s
 Students learn about characteristics of logarithmic functions in graphical, tabular, and function notation form.
 
 === Launch
-This kind of growth is called _logarithmic growth_. Logarithmic functions are closely related to exponential functions!
+When an exponential relationship is "inverted" like this, the new shape is called a _logarithmic relationship._ As you've seen, logarithmic functions look like "backwards exponential functions", where the x and y axes have been reflected over @math{y = x}.
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{from-expt-to-log.adoc}.
+}
+
+@teacher{Review student answers. Try to draw out student explanations for how they could tell whether a graph or plot was logarithmic instead of exponential. Their own reasoning is critical for building intuition, so you may even want to write down key phrases as students share them!}
+
+@slidebreak
+
+*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*
+
+By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
+
+- The inputs and outputs are reversed
+- The Domain and Range are swapped
+- The curve is reflected over @math{y=x}
+
+
+In fact, we can use this inverse relationship to do calculations:
 
 [cols="^1a, ^1a", stripes="none" options="header"]
 |===
@@ -136,21 +196,27 @@ This kind of growth is called _logarithmic growth_. Logarithmic functions are cl
 @A{@math{g(27) = log_3(27) = 3}}
 }
 
-@slidebreak
-
-*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*
-
-By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
-
-- The inputs and outputs are reversed
-- The Domain and Range are swapped
-- The curve is reflected over @math{y=x}
-
-
 === Investigate
 
 @lesson-instruction{
-To practice spotting logarithmic curves and their connection to exponentials, complete @printable-exercise{classifying-plots.adoc}.
+- Complete @printable-exercise{evaluate-log.adoc}.
+- Be sure to discuss your answers with at least one other student!
+}
+
+@slidebreak
+
+Consider these two translations of @math{log_2(128)}.
+
+- "2 raised to what power gives us 128?"
+- "The power you raise 2 to get 128"
+
+@QandA{
+@Q{Which translation do you prefer, and why?}
+@A{The first one, because it sets up a math problem and makes it clear what I need to do.}
+@A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
+}
+
+@slidebreak{
 }
 
 @slidebreak
@@ -189,13 +255,6 @@ Just as swapping the Domain and Range makes a logarithmic _curve_ look exponenti
 - Was it especially difficult (or simple) to recognize any these function types? Why?
 }
 
-@lesson-instruction{
-- For practice translating logarithmic expressions into words and evaluating them turn to @printable-exercise{evaluate-log.adoc}.
-}
-
-@teacher{
-The "Evaluating Logarithmic Expressions" page uses a phrasing that helps students read a logarithmic expression from left-to-right, emphasizing readability. Many teachers prefer a different phrasing, which emphasizes _the connection to exponential expressions_. An @opt-printable-exercise{evaluate-log-alt.adoc, identical version of this worksheet} is available, which uses the exponential phrasing.
-}
 
 @slidebreak
 
