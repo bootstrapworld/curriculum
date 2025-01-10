@@ -37,6 +37,7 @@ You will want to:
  * Open @starter-file{alg2-exploring-quadratics-desmos}.
  * Make a link or code to share with your students.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are only able to interact with the first two slides.
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
 
@@ -47,16 +48,28 @@ You will want to:
 |===
 
 == Quadratic Sequences
-@overview{quadratics-growth}
+
+@objective{quadratics-growth}
 
 === Overview
 Students formalize their understanding of quadratic relationships, learning how to identify them arithmetically.
 
-=== Investigate
-Although the examples we just discussed include the characteristic rising and falling or falling and rising of the parabola, we might encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part.
+=== Launch
 
-But what if our list of x-y pairs, doesn't show a rise-and-fall. How do we know if we're looking at _just the rise_ or a parabola, or _just the fall_, or something that _isn't a parabola at all?_ In other words:+
-*How can we identify quadratic relationships from a sequence of numbers?*
+@QandA{
+@Q{What do we know about Quadratic Relationships?}
+@A{Answers will vary.}
+@A{Their graphs are u-shaped, either rising, slowing, peaking, and falling or falling, slowing, bottoming out, and then rising again.
+}
+}
+
+@opt{Have students complete @opt-printable-exercise{classifying-plots.adoc}.
+}
+
+=== Investigate
+We've seen quadratic relationships that _rise-and-fall_ or _fall-and-rise_. But sometimes we'll encounter datasets that include only the _rising_ part of the parabola or only the _falling_ part, so we need to know how to recognize whether a sequence of x-y pairs is part of a parabola without looking for a change in direction.
+
+=== Identifying Quadratic Relationships from a Sequence of numbers
 
 @slidebreak
 
@@ -115,7 +128,12 @@ Turn to @printable-exercise{classifying-tables.adoc}, and look at the first two 
 
 === Synthesize
 
-- TODO
+@QandA{
+@Q{What strategies did you use to decide which tables were quadratic?}
+@A{Answers will vary. But it's important to make sure that students' thinking goes beyond identifying that a sequence is nonlinear and delves into confirming that the growth of the growth is constant.}
+@Q{What strategies did you use to decide between whether a table showed a relationship that was neither linear nor quadratic vs a table that showed no relationship?}
+@A{Answers will vary. But if we can predict the next y-value, we know there is a relationship.}
+}
 
 == Graphing Quadratic Functions
 @objective{quadratics-graph}
@@ -125,14 +143,7 @@ Students shift from numbers to graphs, as students learn the vocabulary for desc
 
 === Launch
 
-@lesson-instruction{
-- Open @starter-file{alg2-fuel-efficiency}.
-- Make a scatter plot using the `model` as the label, `speed` as the x-axis, and `mpg` as the y-axis.
-- How would you describe the shape you see here?
-}
-
-When we graph these points on a plane, they draw our @vocab{parabola}. As we work with parabolas - and eventually fit them to our Fuel Efficiency dataset - we need to know how to talk about and describe them. +
-*Let's define the parts of a parabola together.*
+As we work with parabolas - and eventually fit them to Aaron Judge's Baseball Batting Data - we need to know how to talk about and describe them.
 
 @slidebreak
 
@@ -146,6 +157,8 @@ When we graph these points on a plane, they draw our @vocab{parabola}. As we wor
 }
 
 @slidebreak
+
+==== Terminology for Talking about Parabolas
 
 [cols="^.^3a,^.^3a,^.^3a", options="header", stripes="none"]
 |===
@@ -178,7 +191,7 @@ Turn to @printable-exercise{parabolas.adoc} to apply our new terminology by sket
 
 === Investigate
 
-One form of a quadratic model looks like this: @math{f(x) = a(x − h)^2 + k}
+One form of a quadratic model looks like this: @hspace{1em} @big{@math{f(x) = a(x − h)^2 + k}}
 
 Let's find out what each of these coefficients mean!
 
@@ -198,7 +211,7 @@ Let's find out what each of these coefficients mean!
 @A{Increase the value of @math{a}}
 @Q{How do you make a parabola "wider"?}
 @A{Decrease the value of @math{a}}
-@Q{How do you know whether to parabola opens up or down?}
+@Q{How do we know from the equation whether a parabola opens up or down?}
 @A{If @math{a} is negative, it will open down. If @math{a} is positive, it will open up.}
 @Q{What value of @math{a} will result in a _linear_ model?}
 @A{Zero}
@@ -206,7 +219,9 @@ Let's find out what each of these coefficients mean!
 
 @slidebreak
 
+@lesson-point{
 The quadratic coefficient @math{a} tells us whether the parabola opens up or down, and how tightly it hugs the axis of symmetry.
+}
 
 @slidebreak
 
@@ -223,7 +238,9 @@ The quadratic coefficient @math{a} tells us whether the parabola opens up or dow
 
 @slidebreak
 
+@lesson-point{
 The horizontal shift @math{h} tells us where the axis of symmetry hits the x-axis, which means it also tells us the x-coordinate of the vertex.
+}
 
 ==== Vertical Shift (@math{k})
 
@@ -238,7 +255,9 @@ The horizontal shift @math{h} tells us where the axis of symmetry hits the x-axi
 
 @slidebreak
 
-Like the y-intercept of a linear model, the @vocab{vertical shift} translates the parabola up and down.
+@lesson-point{
+Like the y-intercept of a linear model, the vertical shift @math{k} translates the parabola up and down.
+}
 
 === Synthesize
 
@@ -251,3 +270,7 @@ Like the y-intercept of a linear model, the @vocab{vertical shift} translates th
 @Q{What is the difference between a minimum and a maximum?}
 @A{A minimum is the vertex of a parabola that opens up, while a maximum is the vertex of a parabola that opens down.}
 }
+
+== Additional Practice
+
+- @opt-printable-exercise{classifying-descriptions.adoc}

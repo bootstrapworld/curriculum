@@ -1,0 +1,59 @@
+= Build a Model from Samples - Fuel Efficiency
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+td .autonum::after { content: ')' !important; }
+
+/* Adjust spacing on the top table */
+.topTable {margin: 1em 0;}
+.topTable td { margin: 0; padding: 0; }
+
+/* Shorten fill in the blanks */
+.studentAnswerShort { width: 5em !important; }
+</style>
+++++
+
+[.linkInstructions]
+For this page, you'll need to open the @opt-starter-file{alg2-fuel-efficiency} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. *Read the comments at the top of the file*, which describe what each column in the dataset means.
+
+@vspace{1ex
+}
+@center{The *standard form* of a quadratic equation is @math{y = Ax^2 + Bx + C}}
+
+[.topTable, cols="12a, 1a, 10a", frame="none", grid="none"]
+|===
+| @center{@image{../images/fuel-efficiency-quadratic.png, 400}}
+|
+|
+@n Choose a point from the *left-most column* of dots, and fill in the *standard form* equation below: +
+@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+
+@vspace{5ex}
+
+@n Choose a point from the *center-most column* of dots, and fill in the *standard form* equation below: +
+@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+
+@vspace{5ex}
+
+@n Choose a point from the *right-most column* of dots, and fill in the *standard form* equation below: +
+@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+|===
+
+
+@n In the space below - or on another sheet of paper - solve this series of equations for A, B, and C:
+[.FillVerticalSpace, frame="none", grid="none"]
+|===
+|
+|===
+
+
+@n Write your finished model in function and Pyret notation below, then define the function `f` in Pyret and try it out using `fit-model`!
+
+[cols="^3a,^4a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+| *Pyret Notation*
+
+| @math{f(x) = A}(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C
+| @show{(code '(define (f x) (+ (+ (* (?ANS 1) sqr(x)) (* (?ANS 2) x)) (?ANS 3)) ))}
+|===

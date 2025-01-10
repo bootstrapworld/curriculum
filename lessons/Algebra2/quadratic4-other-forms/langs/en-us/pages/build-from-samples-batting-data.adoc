@@ -1,4 +1,4 @@
-= Build a Model from Samples
+= Build a Model from Samples - Batting Data
 ++++
 <style>
 /* Make autonums inside tables look consistent with those outside */
@@ -14,7 +14,16 @@ td .autonum::after { content: ')' !important; }
 ++++
 
 [.linkInstructions]
-For this page, you'll need to open the @starter-file{alg2-fuel-efficiency} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. *Read the comments at the top of the file*, which describe what each column in the dataset means.
+For this page, you'll need to open the @starter-file{alg2-aaron-judge} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. 
+
+We're going to compute a quadratic function from 3 points. While it would be most accurate to keep track of decimal values, for today we are going to simplify our calculations by doing some rounding.
+
+- Start by choosing 3 representative whole-coordinate points from the scatter plot.
+  * a best guess at the where a curve summarizing the cluster would cross the y-axis
+  * a point from the middle of the curve
+  * a representative point toward the right side of the point cloud
+- As we solve the system of equations, we'll likely get some very long decimal values. You can round these values to the ten thousandths place as we work.
+}
 
 @vspace{1ex
 }
@@ -22,7 +31,8 @@ For this page, you'll need to open the @starter-file{alg2-fuel-efficiency} on yo
 
 [.topTable, cols="12a, 1a, 10a", frame="none", grid="none"]
 |===
-| @center{@image{../images/fuel-efficiency-quadratic.png, 400}}
+| `bat-angle` v. `hit-distance`
+@center{@image{../images/curve-angle-distance.png, 400}}
 |
 |
 @n Choose a point from the *left-most column* of dots, and fill in the *standard form* equation below: +
