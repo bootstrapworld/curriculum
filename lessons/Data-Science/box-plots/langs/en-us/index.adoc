@@ -47,79 +47,53 @@
 
 |===
 
-== How Typical is the Average?
+== The Five-Number Summary
 
 === Overview
-Students are introduced to the notion of _spread_ in a dataset. They learn about how to use range, quartiles, and interquartile range to talk about variation.
+
+Students learn about how to use range, quartiles, and interquartile range to talk about variability.
 
 === Launch
-When we explored measures of center, _we determined that the average pet weighs almost 40 pounds_.
 
-Once we've calculated our summary value, it's important to ask: _How typical is the average?_ +
-We'd expect points to deviate from the mean in any sample!
+The three dot plots shown below are differently sized samples drawn from the *same dataset*. _Each of the three samples has a median of 60._
+
+[cols="^.^1a,^.^1a"]
+|===
+
+| @image{images/dot-plot-1.png}
+| @image{images/dot-plots-2-3.png}
+
+|===
 
 @QandA{
-@Q{Does the average tell us the "typical" weight of animals at the shelter?}
-@A{Maybe!
-- Perhaps all of the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
-- But perhaps all of the pets are super small or huge, and none are anywhere _near_ the mean!
+
+@Q{What do the three dot plots have in common?}
+@A{They have the same median. They represent the same dataset.}
+
+@Q{How are the three dot plots different?}
+@A{Each dot plot has a different spread and a different shape. There are different peaks, gaps, and outliers.}
 }
-}
 
 @slidebreak
 
-To learn about how evenly distributed the data is we can start by ordering the data from least to greatest. From there we can identify and compute a number of values that will give us more information.
+Yes, each of these plots has a median of 60... but the samples are quite different in nature--something we can plainly see with our eyes.
+
+Statisticians sometimes characterize the distribution of data using what is known as a *five-number summary*. To compute a five-number summary, we must first arrange the data values from least to greatest. Then, we decompose a dataset into four equal parts, separated by @vocab{quartiles}. This process can offer us a more nuanced idea of how the data is spread out.
+
+Here are the ingredients for a *5-number Summary*:
+
+- @vocab{Minimum}: the smallest value in a dataset - it starts the first quarter
+- Q1 (lower @vocab{quartile}): the number that separates the first quarter of the data from the second quarter of the data
+- Q2 (@vocab{Median}): the middle value in a dataset
+- Q3 (upper @vocab{quartile}): the value that separates the third quarter of the data from the last
+- @vocab{Maximum}: the largest value in a dataset - it ends the fourth quarter of the data
+
+
+Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge". Mathematically, @math{IQR = Q3 - Q1}.
 
 @slidebreak
 
-==== Range
 
-The @vocab{Range of a Dataset}, is the simplest measure of variation we can compute. It is the distance between the @vocab{Minimum} (lowest value) and @vocab{Maximum} (highest value). @ifslide{ +
-}_(Note: the term “Range” means something different in statistics than it does in algebra and programming!)_
-
-
-@indented{@math{Range = Maximum - Minimum}}
-
-@slidebreak
-
-It is important that we consider the @vocab{Range of a Dataset} in context. 
-
-- _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old._  
-- _But 10 years would be a narrow age range for Cypress trees growing in Louisiana swamps, some of which are 1500 years old._
-
-@slidebreak
-
-==== Quartiles
-
-As we know from our work with @lesson-link{measures-of-center}, the @vocab{median} is the value that splits the data in half. If it diverges significantly from the mean, the data is skewed.
-
-@slidebreak
-
-We can learn more about the distribution by splitting each of the halves of data in half so that we have four equal-sized quarters of data.  The boundary points between the equal quarters of data are called @vocab{quartiles}. 
-
-If the first quartile does not fall in the middle between the minimum and the median, we know that the data is not evenly distributed. The same is true if the third quartile does not fall in the middle between the maximum and the median.
-
-@slidebreak
-
-==== Interquartile Range (IQR)
-
-Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge".
-
-@indented{@math{IQR = Q3 - Q1}}
-
-@slidebreak 
-
-==== Five-Number Summary
-
-The *5-number Summary* combines the @vocab{quartiles} with the @vocab{minimum} and the @vocab{maximum}: 
-
-- Minimum: _the smallest value in a dataset - it starts the first quarter_
-- Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
-- Q2 (Median): _the middle value (median) in a dataset_ 
-- Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
-- Maximum: _the largest value in a dataset - it ends the fourth quarter of the data_
-
-If the data is evenly distributed these 5 numbers will be spaced at consistent intervals, but if the data is clustered, we will see some of these numbers be closer together than others.
 
 === Investigate 
 
@@ -139,20 +113,27 @@ If the data is evenly distributed these 5 numbers will be spaced at consistent i
 
 @teacher{
 We are going to find the 5-number summary, range and IQR for 2 datasets. Future reflection will rely upon students having worked through both datasets. If your students tend to need more support, you may want to work with the first dataset as a class and then have students work with the second dataset independently.
-
-@opt{Instead of giving the directions below, you can distribute printed copies of @opt-printable-exercise{distribution-by-hand.adoc} and have students complete the first two sections now. The remaining sections of the page will be completed in another section of this lesson and include number lines for making box plots.
-}
 }
 
 @lesson-instruction{
-- Let's see what we can learn about how typical those averages were by looking at the datasets.
-- *Ledet Family Reunion* Age Data: 1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
-  * Rewrite the data in order from least to greatest.
-  * Record your five-number summary (Minimum, Q1, Median, Q3, Maximum).
-  * Then calculate the IQR and Range.
-- *Watson Family Gathering* Age Data: +
-70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
-  * Compute the 5-number summary, IQR, and Range.
+- Let's see what we can learn about how typical those averages were by looking at the datasets in the first section of @printable-exercise{distribution-by-hand.adoc}.
+- Order the ages and compute the five-number summaries for both the *Ledet Family Reunion* and the *Watson Family Gathering*.
+}
+
+
+@teacher{
+The partitioning of the data into four parts can be a challenge! Research by @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} suggests that students do *not* tend to conceive of distribution in four parts, but three. (Their brains naturally view: the majority in the middle; lower values on the left; and higher values on the right!)
+
+Annotating the list of ordered values can help students visualize the four groups. Emphasize that the median does *not* get included in the bottom or upper half of the data.
+
+Ledet:
+
+@center{@image{images/ledet-five-num.png, 400}}
+
+Watson:
+
+@center{@image{images/watson-five-num.png, 400}}
+
 }
 
 @QandA{
@@ -163,6 +144,12 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 @A{Students may have questions about how to calculate the median and/or quartiles.}
 }
  
+
+@lesson-instruction{
+- Practice computing five-number summaries from small datasets visualized as dot plots on @printable-exercise{match-dot-plots-summaries.adoc}.
+
+}
+
 === Synthesize
 
 @QandA{
@@ -170,7 +157,7 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 @Q{What is a quartile?}
 @A{One of the three boundary points that splits our dataset into four equal quarters.}
 
-@Q{Why is the IQR a more robust measure of variation than the range?}
+@Q{Why is the IQR a more robust measure of variability than the range?}
 @A{Because it focuses on the middle half of the data, so is less susceptible to outliers.}
 }
 
@@ -184,7 +171,7 @@ If you'd prefer to wait until your students have completed the __entire__ lesson
 }
 
 
-== Box Plots - Visualizing our Five-Number Summary
+== Plotting our Five-Number Summary
 
 === Overview
 
@@ -194,61 +181,56 @@ Students plot five-number summaries as box plots before learning to make box plo
 
 To visualize the 5-number summary, the Range, and the Interquartile Range we can plot the five numbers on a number line and connect them to make a @vocab{box plot}. 
 
-- First, make a vertical line on the number line for each of the 5 points.
-- Then make a box connecting Q1 to Q3. This box contains the middle half of the data (IQR). 
-- Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
-- Make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data. 
-
 @ifslide{@image{images/box-n-whisker-plot.png, 500}}
 
-@slidebreak
 
-Box plots display how the four equal quarters of data are spread out along the number line.
+@lesson-instruction{
 
-@ifnotslide{@center{@image{images/box-n-whisker-plot.png, 500}}} 
-@ifslide{@image{images/box-n-whisker-plot.png, 500}}
+- Let's try it together on Q1 of @printable-exercise{create-bp-from-dp.adoc}.
 
-@lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.} 
+** First, make a vertical line on the number line for each of the 5 values of the five-number summary.
+** Then make a box connecting Q1 to Q3. This box contains the middle half of the data (IQR).
+** Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
+** Make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data.
 
-@slidebreak{LaunchC}
+}
 
-When the points are evenly distributed, the four sections of the box plot will be equal in size, but _we will rarely see a box plot with four equal sections_!  
 
-@ifslide{@image{images/even.png, 400}}
+@teacher{
 
-@slidebreak{LaunchC}
+Verify that students have correctly plotted the first box plot on the page. Their solution should look like this:
 
-When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. 
+@center{@image{images/dp-bp1-soln.png, 300}}
 
-@ifslide{@image{images/box-n-whisker-plot.png, 500}}
+}
 
 @QandA{
-@Q{Which quarter of data is packed the densest in this box plot?}
-@A{The third one}
-@Q{Which quarter of the data is the most dispersed in this box plot?}
-@A{The fourth one}
+@Q{Which quarter of the data is packed densest? How do you know?}
+@A{In the first box plot, the data is packed the densest in Q1. The first quarter is just 2 units long, but includes one fourth of the data.}
+
+@Q{Which quarter of the data is the most dispersed? How do you know?}
+@A{The data is the most dispersed in Q4. That quarter spans 11 units, and includes the same amount of data points as Q1.}
+
 }
+
+@lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.}
+
+@lesson-instruction{
+Complete @printable-exercise{create-bp-from-dp.adoc}.
+}
+
 
 === Investigate
 
-@teacher{@opt{If you printed and distributed copies of @opt-printable-exercise{distribution-by-hand.adoc}, direct students to complete the page now.
-}}
-
 @lesson-instruction{
 - Let's practice making box plots with the data from the family gatherings.
-- Find the page where you recorded the 5-number summaries.
-- Make a number line from 0 to 80, with labeled intervals every 10 years.
-  * Plot each of the values from the *Ledet Family* 5-number summary on the number line.
-  * Draw a box around the IQR (connecting Q1 to Q3 with a line for Q2 splitting the box into 2 sections)
-  * Draw whiskers connecting the box to the minimum and the maximum.
-- Make a second number line from 0 to 80, with labeled intervals every 10 years.
-  * Use the *Watson Family* 5-number summary to make a box plot.
+- Complete the second section of @printable-exercise{distribution-by-hand.adoc}.
 }
 
 @teacher{
 The box plots should look like this: +
-Ledet: @hspace{1em} @image{images/ledet.png, 600} +
-Watson: @image{images/watson.png, 600}
+Ledet: @hspace{1em} @image{images/ledet.png, 500} +
+Watson: @image{images/watson.png, 500}
 } 
 
 @slidebreak
@@ -260,7 +242,7 @@ Watson: @image{images/watson.png, 600}
 @A{For the Watson family gathering because the data is more closely clustered, the Range and IQR are significantly smaller, and the mean and median are much more similar.}
 
 @Q{How did making the box plots help you to understand the data?}
-@Q{What else do you notice and wonder?}
+@Q{What else do you Notice and Wonder?}
 }
 
 === Synthesize
@@ -384,7 +366,7 @@ Create a box plot in CODAP that visualizes the spread of `Pounds`.
 @slidebreak{InvestigateC}
 
 @ifproglang{pyret}{
-@ifnotslide{@centered-image{images/box-plot-pounds.png, 500}}
+@ifnotslide{@centered-image{images/box-plot-pounds.png, 300}}
 @ifslide{@image{images/box-plot-pounds.png, 800}}
 }
 
