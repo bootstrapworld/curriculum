@@ -19,7 +19,7 @@ local distr_courses = 'distribution/' .. natlang .. '/courses/'
 local all_courses = dofile(courses_list_file)
 
 function write_end_matter(course_dir, end_matter, o)
-  print('doing write_end_matter', course_dir, end_matter)
+  -- print('doing write_end_matter', course_dir, end_matter)
   local end_matter_dir = course_dir .. '/' .. end_matter
   local end_matter_workbook_pages_file = end_matter_dir .. '/pages/.cached/.workbook-pages.txt.kp'
 
@@ -38,9 +38,7 @@ function write_end_matter(course_dir, end_matter, o)
       else
         o:write('  ,') 
       end
-      o:write('  { "path" : "', end_matter_dir, 'pages/', file, '",\n')
-      o:write('  ', '    "landscape" : ', tostring(landscape))
-      o:write('  }\n')
+      o:write('  "', end_matter_dir, '/pages/', file, '"\n')
     end
     o:write('  ],\n')
   else
@@ -74,9 +72,6 @@ do
       o:write(' "', lsn, '"\n')
     end
     o:write('  ],\n')
-
-    o:write('  "longWorkbook" : false,\n')
-    o:write('  "optExercises" : false,\n')
 
     write_end_matter(course_dir, 'back-matter', o)
 
