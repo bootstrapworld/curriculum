@@ -2842,7 +2842,12 @@
   (add-prereq sym #:check? check-in-langtable?))
 
 (define (add-starter-file sf #:opt? [opt? #f])
-  ((if opt? add-opt-starter-file add-reqd-starter-file) sf))
+  (when (or *lesson-plan*
+            (and *lesson*
+                 (or
+                   (regexp-match "/pages$" *containing-directory*)
+                   (regexp-match "/solution-pages$" *containing-directory*))))
+    ((if opt? add-opt-starter-file add-reqd-starter-file) sf)))
 
 (define (add-reqd-starter-file sf)
   (cond [(member sf *starter-files-used*) #f]
