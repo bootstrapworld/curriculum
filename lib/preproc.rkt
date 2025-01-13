@@ -1223,28 +1223,56 @@
             (fprintf o "\n** link:../../../lessons/~a/pages/~a.html[~a]\n" lesson page link-text)))))))
 
 
+(define (link-to-project-lessons-short-form header project-lessons o)
+  ; (printf "doing link-to-project-lessons-short-form\n")
+  (when (pair? project-lessons)
+    (fprintf o "\n\n*Projects Available for this ~a:*" header)
+    (let ([firstp #t])
+      (for ([project-lesson project-lessons])
+        (let* ([link-title-file (format
+                                  "distribution/~a/lessons/~a/.cached/.index.titletxt"
+                                  *natlang* project-lesson)]
+               [link-text (if (file-exists? link-title-file)
+                              (call-with-input-file link-title-file port->string)
+                              project-lesson)])
+          (set! link-text (regexp-replace "Project: " link-text ""))
+          (if firstp (set! firstp #f)
+              (display "," o))
+          (fprintf o " link:~apass:[lessons/~a/index.shtml][~a]"
+                   "{fromlangroot}"
+                   project-lesson link-text))))
+    (display "\n\n" o)))
+
+(define (link-to-project-lessons-long-form header project-lessons o)
+  (when (pair? project-lessons)
+    (fprintf o "\n\n*Projects Available for this ~a*:\n" header)
+    (for ([project-lesson project-lessons])
+      (let* ([link-title-file (format
+                                "distribution/~a/lessons/~a/.cached/.index.titletxt"
+                                *natlang* project-lesson)]
+             [link-desc-file (format
+                               "distribution/~a/lessons/~a/.cached/.index-desc.txt.kp"
+                               *natlang* project-lesson)]
+             [link-text (if (file-exists? link-title-file)
+                            (call-with-input-file link-title-file port->string)
+                            project-lesson)]
+             [link-desc (if (file-exists? link-desc-file)
+                            (call-with-input-file link-desc-file port->string)
+                            project-lesson)])
+        (set! link-text (regexp-replace "Project: " link-text ""))
+        (fprintf o "\n* link:~apass:[~a][~a]: ~a"
+                 "{fromlangroot}"
+                 project-lesson link-text link-desc)))
+    (display "\n\n" o)))
+
+
 (define (link-to-project-lessons-in-lesson-plan o)
   ; (printf "doing link-to-project-lessons-in-lesson-plan\n")
   (let ([project-lessons (reverse *project-lessons*)])
-    (when (pair? project-lessons)
-      (fprintf o "\n\n*Projects Available for this Lesson:*")
-      (let ([firstp #t])
-        (for ([project-lesson project-lessons])
-          (let* ([link-title-file (format
-                                    "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                                    *natlang* project-lesson)]
-                 [link-text (if (file-exists? link-title-file)
-                                (call-with-input-file link-title-file port->string)
-                                project-lesson)])
-            (if firstp (set! firstp #f)
-                (display "," o))
-            (fprintf o " link:~apass:[~a][~a]"
-                     "{fromlangroot}"
-                     project-lesson link-text))))
-      (display "\n\n" o))))
+    (link-to-project-lessons-short-form "Lesson" project-lessons o)))
 
 (define (link-to-project-lessons-in-pathway o)
-  (printf "doing link-to-project-lessons-in-pathway\n")
+  ; (printf "doing link-to-project-lessons-in-pathway\n")
   (let ([lessons (read-data-file
                    (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
                            *natlang* *target-pathway*))]
@@ -1257,25 +1285,11 @@
             (set! project-lessons
               (append project-lessons lesson-project-lessons))))))
     (set! project-lessons (remove-duplicates project-lessons))
-    (when (pair? project-lessons)
-      (display "\n\n*Projects Available for this Course*:\n" o)
-      (for ([project-lesson project-lessons])
-        (let* ([link-title-file (format
-                                  "distribution/~a/~a/.cached/.index.titletxt"
-                                  *natlang* project-lesson)]
-               [link-desc-file (format
-                                 "distribution/~a/~a/.cached/.index-desc.txt.kp"
-                                 *natlang* project-lesson)]
-               [link-text (if (file-exists? link-title-file)
-                               (call-with-input-file link-title-file port->string)
-                               project-lesson)]
-               [link-desc (if (file-exists? link-desc-file)
-                              (call-with-input-file link-desc-file port->string)
-                              project-lesson)])
-          (fprintf o "\n* link:~apass:[~a][~a]: ~a"
-                   "{fromlangroot}"
-                   project-lesson link-text link-desc)))
-      (display "\n\n" o))))
+    ((if *teacher-resources*
+         link-to-project-lessons-long-form
+         link-to-project-lessons-short-form)
+      "Course" project-lessons o)
+    ))
 
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
@@ -1644,7 +1658,7 @@
                            [(string=? directive "project-list")
                             (cond [*lesson-plan*
                                     (link-to-project-lessons-in-lesson-plan o)]
-                                  [*narrative*
+                                  [(or *narrative* *teacher-resources*)
                                     (link-to-project-lessons-in-pathway o)])]
                            [(or (string=? directive "printable-exercise")
                                 (string=? directive "opt-printable-exercise")
