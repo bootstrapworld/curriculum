@@ -26,28 +26,24 @@ function write_enclosing_matter(course_dir, enclosing_matter, o)
   local enclosing_matter_dir = course_dir .. '/' .. enclosing_matter
   local enclosing_matter_workbook_pages_file = enclosing_matter_dir .. '/pages/.cached/.workbook-pages.txt.kp'
 
-  if file_exists_p(enclosing_matter_workbook_pages_file) then
-    local i = io.open(enclosing_matter_workbook_pages_file)
-    local first_p = true
-    o:write('  "', enclosing_matter, '": [\n')
-    for line in i:lines() do
-      local file = line:gsub('^ *([^ ]*).*', '%1')
-      local aspect = line:match('^ *[^ ]+ +([^ ]+).*') or 'portrait'
-      local landscape = false
-      if aspect == 'landscape' then landscape = true end
-      if first_p then 
-        first_p = false
-        o:write('   ')
-      else
-        o:write('  ,') 
-      end
-      o:write('  "', enclosing_matter_dir, '/pages/', file, '"\n')
+  local i = io.open(enclosing_matter_workbook_pages_file)
+  local first_p = true
+  for line in i:lines() do
+    local file = line:gsub('^ *([^ ]*).*', '%1')
+    -- what are we doing with aspect info?
+    -- local aspect = line:match('^ *[^ ]+ +([^ ]+).*') or 'portrait'
+    -- local landscape = false
+    -- if aspect == 'landscape' then landscape = true end
+    if first_p then
+      first_p = false
+      o:write('   ')
+    else
+      o:write('  ,')
     end
-    i:close()
-    o:write('  ],\n')
-  else
-    print(enclosing_matter_workbook_pages_file, 'not found')
+    o:write('  "', enclosing_matter_dir, '/pages/', file, '"\n')
   end
+  i:close()
+  return not first_p
 end
 
 do
@@ -71,25 +67,58 @@ do
     o:write('  "courseName": "', course_title, '",\n')
     o:write('  "courseFolder": "courses/', course, '",\n')
 
-    write_enclosing_matter(course_dir, 'front-matter', o)
+    local front_matter_workbook_pages_file = course_dir .. '/front-matter/pages/.cached/.workbook-pages.txt.kp'
+    if file_exists_p(front_matter_workbook_pages_file) then
+      o:write('  "front-matter": [\n')
+      write_enclosing_matter(course_dir, 'front-matter', o)
+      o:write('  ],\n')
+    else
+      print(course, 'front-matter not found')
+    end
 
     o:write('  "lessons": [\n')
     local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
     local w = io.open(workbook_lessons_file)
     local first_p = true
     for lsn in w:lines() do
-      if first_p then 
+      if first_p then
         first_p = false
         o:write('    ')
       else
-        o:write('  , ') 
+        o:write('  , ')
       end
       o:write(' "', lsn, '"\n')
     end
     w:close()
     o:write('  ],\n')
 
-    write_enclosing_matter(course_dir, 'back-matter', o)
+    local back_matter_workbook_pages_file = course_dir .. '/back-matter/pages/.cached/.workbook-pages.txt.kp'
+    local contracts_pdf_file = course_dir .. '/resources/pages/Contracts.pdf'
+    local back_cover_file = course_dir .. '/back-matter/pages/back-cover.adoc'
+    if file_exists_p(back_matter_workbook_pages_file) or file_exists_p(contracts_pdf_file) or file_exists_p(back_cover_file) then
+      o:write('  "back-matter": [\n')
+      local prev_matter_p = false
+      if file_exists_p(back_matter_workbook_pages_file) then
+        prev_matter_p = write_enclosing_matter(course_dir, 'back-matter', o)
+      end
+      if file_exists_p(contracts_pdf_file) then
+        if prev_matter_p then o:write('  ,  ')
+        else                  o:write('     ')
+          prev_matter_p = true
+        end
+        o:write('"', contracts_pdf_file, '"\n')
+      end
+      if file_exists_p(back_cover_file) then
+        if prev_matter_p then o:write('  ,  ')
+        else                  o:write('     ')
+          prev_matter_p = true
+        end
+        o:write('"', back_cover_file, '"\n')
+      end
+      o:write('  ],\n')
+    else
+      print(course, 'back-matter not found')
+    end
 
     o:write('  "outputPath" : "', course_dir, '/workbook/"\n')
     o:write('}\n')
