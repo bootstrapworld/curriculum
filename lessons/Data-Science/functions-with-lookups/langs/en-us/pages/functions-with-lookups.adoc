@@ -1,0 +1,71 @@
+= Functions with Lookups
+
+[.linkInstructions]
+Open the @starter-file{row-functions} on your computer, save a copy, and *Click "Run"*!
+
+@n Write the code to lookup the value of the `age` column for each of the rows listed (the first one has been completed for you).
+
+[cols="1a,4a", options="header"]
+|===
+| row           | code to lookup the value of the `age` column
+| `cat-row`     | `cat-row["age"]`
+| `dog-row`   	| @ifsoln{`dog-row["age"]`}
+| `old-row`     | @ifsoln{`old-row["age"]`}
+|===
+
+@n Write the code that uses the `triangle` function to draw a solid, green triangle whose size is 5 times the _age_ of the animal (the first one has been completed for you).
+
+[cols="1a,4a", options="header"]
+|===
+| row           | code to draw a triangle using 5 times the "age" of the row as the radius
+| `cat-row`     | `triangle(5 * cat-row["age"], "solid", "green")`
+| `dog-row`   	| @ifsoln{`triangle(5 * dog-row["age"], "solid", "green")`}
+| `old-row`     | @ifsoln{`triangle(5 * old-row["age"], "solid", "green")`}
+|===
+
+@n Check with your partner or another student to confirm that your code matches.
+
+@n What is the name of the animal defined in `old-row`? @fitb{6em}{@ifsoln{Felix}} How many years old are they? @fitb{}{@ifsoln{16}}
+
+@n How large would you expect their triangle to be? @fitb{}{@ifsoln{80}}
+
+@vspace{1ex}
+
+== age-gt
+
+[.linkInstructions]
+Scroll down in the @starter-file{row-functions} until you find the Contract, Examples and Definition for `age-gt`.
+
+@n What is the Domain of `age-gt`? @fitb{6em}{@ifsoln{Row}} The Range? @fitb{6em}{@ifsoln{Image}} How many examples are provided? @fitb{}{@ifsoln{4}}
+
+@n According to the *comment* below the Contract, what should this function do, when given a Row? @fitb{}{}
+
+@fitb{}{@ifsoln{consume an animal, and draw a solid green triangle whose size is 5x the age of the animal}}
+
+@vspace{1ex}
+
+_Notice: The first two examples use `cat-row` and `dog-row`. And so do the third and fourth examples!_
+
+@n Which pair of examples does the definition look more like? @fitb{}{@ifsoln{The last two examples.}}
+
+@n Why is it helpful to include the first two examples? @fitb{}{@ifsoln{They show us exactly what should be produced for `cat-row` and `dog-row` - }}
+
+@fitb{}{@ifsoln{the two Rows representing "Sasha" and "Toggle", based on their `age` (`1` and `3`).}}
+
+@n Why can't we write our definition using only the first two examples? @fitb{}{}
+
+@fitb{}{@ifsoln{They don't show us how the computer should look up the `age` from the row!}}
+
+@n In the last two examples the numbers `3` and `1` have been replaced! Where do these examples get the numbers from?
+
+@fitb{}{@ifsoln{Row Lookups!}}
+
+@n Add an example for `old-row` to match the first pair of examples (using the actual number of age).
+
+@ifsoln{@hspace{3em} `age-gt(old-row) is triangle(5 * 16, "solid", "green")`}
+
+@n Then add an example `old-row` to match the second pair of examples (using a lookup).
+
+@ifsoln{@hspace{3em} `age-gt(old-row) is triangle(5 * old-row["age"], "solid", "green")`}
+
+@star Add another pair of examples using a row of your choosing from the definitions at the top of the file.
