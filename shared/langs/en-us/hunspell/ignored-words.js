@@ -98,5 +98,27 @@ exports.ignored_words = [
   "funname",
   "sectionbreak",
   "xs",
-  "ys"
+  "ys",
+  "alg2",
+  "RoughNum",
+  "mathjax",
+  "exp8",
+  "exp7",
+  "exp6"
+  "exp5",
+  "exp4",
+  "exp3",
+  "exp2",
+  "exp1",
+  "expt",
+  "nametag",
+  "Lookups",
+  "shapeA", 
+  "shapeC", 
+  "shapeB",
+  "comparisonTable",
+  "tightAndCentered",
+  "rgba",
+  "noPadding"
+
 ];
