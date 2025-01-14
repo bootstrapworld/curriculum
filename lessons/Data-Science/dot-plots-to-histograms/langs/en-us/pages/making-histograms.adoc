@@ -1,0 +1,60 @@
+= Making Histograms
+
+== By Hand
+
+Suppose we have a dataset for a group of 50 adults, showing the number of teeth each person has...
+
+@vspace{1ex}
+
+@indented{
+@big{
+0, 0, 0, 0, 0, 22, 26, 27, 28, 28, 28, 28, 29, 29, 29, 30, 30, 30, 30, 30, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32
+}
+}
+
+@n Use the data to complete the frequency table below. (One cell has been completed for you.)
+
+@vspace{1ex}
+
+[cols="2a,^1a,^1a,^1a,^1a,^1a,^1a,^1a", options= "header", stripes ="none"]
+|===
+| number of teeth 	| 0-4 		| 5-9 		| 10-14 	| 15-19 	| 20-24		| 25-29  	|30-34
+| frequency			| @ifsoln{4}| @ifsoln{0}| @ifsoln{0}| @ifsoln{0}| @ifsoln{1}| @ifsoln{9}| 35
+|===
+
+@n Use the frequency table to draw a histogram below, filling in each interval so that its height is equal to the frequency.
+
+@vspace{1ex}
+
+@ifnotsoln{ @center{@image{../images/teeth-histogram.png, 400}}}
+@ifsoln{ @center{@image{../images/teeth-histogram-soln.png, 400}}}
+
+== In @proglang
+
+[.linkInstructions]
+Open the @starter-file{tooth-data} copy@ifproglang{pyret}{, and click "Run".}
+
+@n Type `tooth-table` in the Interactions window. Press enter. What do you see? @fitb{}{@ifsoln{The tooth data from above, with names!}}
+
+@n Type `count(tooth-table, "num-teeth")` in the Interactions window and press enter. How is the frequency table created in Pyret different from the one that you created, above? @fitb{}{@ifsoln{Different intervals were used.}}
+
+@fitb{}{}
+
+@n What bin sized was used (above) for the Tooth Data frequency table and the histogram? @fitb{5em}{@ifsoln{5}}
+
+@n @ifproglang{pyret}{Build `tooth-table`.}@ifproglang{codap}{Review the tooth table.} Does this data appear to be the same or different from the tooth data that appeared in the first section? @fitb{5em}{@ifsoln{Same.}}
+
+
+@n @ifproglang{pyret}{Use the contract below to build a histogram of the distribution of teeth in @proglang.
+
+@show{(contract 'histogram '((table-name Table) (labels String) (column-name String) (bin-size Number)) "Image")}
+}
+
+@ifproglang{codap}{Drag `Num Teeth` to the x-axis and select Group into Bins from the Configuration menu. Fuse dots into bars, then enter the desired bin width.}
+
+@n How does the histogram you created in @proglang look _similar_ to the one that you drew? Are there any ways in which the histogram you created in @proglang is _different_ than the one you created by hand? @fitb{}{@ifsoln{On the histogram I created, intervals are labeled with the minimum and maximum value.}}
+
+@fitb{}{@ifsoln{In @proglang, there are tick marks on the x-axis every 5 units.}}
+
+@fitb{}{}
+

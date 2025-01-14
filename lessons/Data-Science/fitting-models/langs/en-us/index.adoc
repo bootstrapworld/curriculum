@@ -2,7 +2,7 @@
 
 @description{Students learn how to fit a linear model to a scatter plot, using the _S_-value (Standard Deviation of Residuals) of model fitness.}
 
-@lesson-prereqs{correlations}
+@lesson-prereqs{contracts-tables}
 
 @keywords{linear, slope, intercept, slope-intercept, S, Sres, error}
 
@@ -46,7 +46,26 @@
 Students confront the notion of "model fitness" (e.g - how might we measure how well a model fits a dataset?). They consider two models for a simple dataset and brainstorm how we could measure which fits better.
 
 === Launch
-Let's return to the animals dataset, and see if there's a correlation between an animal's `age` and the `weeks` to adoption.
+
+Pyret has a function for making scatter plots, which has _four_ things in its Domain: I
+
+1. The *table* containing all the data
+2. The name of the column to use for labels
+3. The name of the column to use for the x-coordinates (xs)
+4. The name of the column to use for the y-coordinates (ys).
+
+Here's the Contract:
+
+[cols="^1a", frame="none", stripes="none"]
+|===
+| @show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+|===
+
+@slidebreak
+
+@ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+
+Let's see if there's a correlation between an animal's `age` and the `weeks` it takes to be adopted.
 
 @lesson-instruction{
 - Open the @starter-file{fitting-animals}.
@@ -142,8 +161,24 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 
 [cols="1a,1a", frame="none", grid="none"]
 |===
-| `fit-model(lizard-sample, "name", "pounds", "weeks", cy)`
-| `fit-model(lizard-sample, "name", "pounds", "weeks", jo)`
+|[subs="quotes"]
+----
+fit-model(
+  lizard-sample,
+  "name",
+  "pounds",
+  "weeks",
+  *cy*) # fit the cy model
+----
+|[subs="quotes"]
+----
+fit-model(
+  lizard-sample,
+  "name",
+  "pounds",
+  "weeks",
+  *jo*) # fit the jo model
+----
 
 | @centered-image{images/fit-cy-crop.png}
 | @centered-image{images/fit-jo-crop.png}

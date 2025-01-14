@@ -1,12 +1,10 @@
 = Composing Table Operations
 
-
 @description{Students learn how to compose functions that operate on tables.}
 
 @lesson-prereqs{functions-dr, filtering-and-building}
 
-
-@keywords{}
+@keywords{composition}
 
 [@lesson-intro-table]
 |===
@@ -36,47 +34,16 @@
 
 |===
 
-== Design Recipe Practice
 
-=== Overview
-Students apply the Design Recipe to make table functions that operate on rows of the Animals Dataset. These become the basis of the composition activity that follows.
-
-
-=== Launch
-When filtering rows or building columns, we need to write functions. _This should be done carefully!_ We want our results to be rock solid and accurate, especially if they're going to be used in ways that affect the world around us.
-
-The Design Recipe is a sequence of steps that helps us document, test out, and write functions that let us dig deeper into our data, and analyze it more carefully. It's important for this to be like second nature, so let's get some practice using it.
-
-=== Investigate
-
-@lesson-instruction{
-- Open your saved @starter-file{animals}.
-- Define the function @printable-exercise{design-recipe-1.adoc} and @printable-exercise{design-recipe-2.adoc}.
-}
-
-@strategy{Optional: Combining Booleans}{
-
-Suppose we want to build a table of Animals that are fixed _and_ old, or a table of animals that are cats _or_ dogs?
-
-By using the `and` and `or` operators, we can _combine_ Boolean tests, as in: `(1 > 2) and ("a" == "b")`. This is handy for more complex programs! For example, we might want to ask if a character in a video game has run out of health points _and_ if they have any more lives. We might want to know if someone’s ZIP Code puts them in Texas or New Mexico. When you go out to eat at a restaurant, you might ask what items on the menu have meat and cheese.
-
-For many of the situations where you might use `and`, there's actually a much more powerful mechanism you can use, called _Composition_!
-}
-
-
-=== Synthesize
-- Did you find yourselves getting faster at using the Design Recipe?
-- What patterns or shortcuts are you noticing, when you use the Design Recipe?
-
-
-
-== Composing
+== Composing Table Operations
 
 === Overview
 Students learn to diagram expressions using the Circles of Evaluation. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
 
 === Launch
-We already know how to filter, sort, and build columns - but what if we want to do _multiple things, all at once?_ Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
+By now, you're familiar with a number of table operations: visualizing (as a bar chart, histogram, etc.), filtering, sorting, and building - but what if we want to perform _multiple operations, all at once?_ Visualizing, Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
+
+@slidebreak
 
 A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *more than 9 kilograms* (they don't use "pounds" in Britain!).
 
@@ -98,9 +65,7 @@ Order matters: Build, Filter, Sort.
 
 @slidebreak
 
-If we use our functions in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results!
-
-One way to organize our thoughts is to diagram what we want to do, using the @vocab{Circles of Evaluation}. The rules are simple:
+If we use our functions in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results! We need a way to think about our table operations that lets us plan out what we want to do. Fortunately, you already know a tool that does exactly this: the @vocab{Circles of Evaluation}!
 
 *_1) Every Circle must have one - and only one! - function, written at the top._*
 
@@ -129,7 +94,7 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 @lesson-instruction{
 - Complete @printable-exercise{composing-table-operations.adoc}.
-- @opt{For more of a challenge, tackle @opt-printable-exercise{composing-table-operations-order-matters.adoc}}
+- When you've checked your answers with the rest of the class, complete @printable-exercise{composing-table-operations-order-matters.adoc}
 }
 
 @slidebreak
@@ -139,7 +104,7 @@ To convert a Circle of Evaluation into code, *we start at the outside and work o
 @lesson-instruction{
 - Type this into Pyret and see what you get!
 - Now draw the Circle of Evaluation showing how to make a _bar chart_ showing the species in the shelter, _but only for old animals_. Then convert it to code and type it into Pyret.
-- For practice converting Circles of Evaluation into code, complete @printable-exercise{building-from-circles-1.adoc}.
+- For practice converting Circles of Evaluation into code, complete @printable-exercise{coe-to-code-1.adoc}.
 }
 
 
@@ -160,4 +125,4 @@ Was it helpful to think about the Circles, without worrying about @proglang? Why
 
 == Additional Exercises
 
-@opt-printable-exercise{building-from-circles-2.adoc}
+@opt-printable-exercise{coe-to-code-2.adoc}

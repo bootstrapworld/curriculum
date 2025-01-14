@@ -1,0 +1,104 @@
+= From Circles to Code (2)
+++++
+<style>
+.literalblock pre { 0.10em 0 !important; }
+td { padding: 0 !important; }
+div.circleevalsexp .value { margin: 0.65rem 0.2rem; }
+
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
+
+/*
+For the only FillVerticalSpace table on this page:
+ - give the 2nd TD 10px of padding
+ - put any code at the bottom of the TD
+*/
+.FillVerticalSpace td:last-child { padding: 10px !important; }
+.FillVerticalSpace .obeyspaces {
+	position: 	absolute;
+    bottom: 	10px;
+    left: 		0;
+    right: 		0;
+}
+</style>
+++++
+
+@do{
+
+(define exp1 '(sort (build-column t "kg" kilograms) "name" true))
+(define exp2 '(sort (filter t is-fixed) "name" true))
+(define exp3 '(build-column (filter t is-female) "kg" kilograms))
+(define exp4 '(filter (sort t "name" true) is-female))
+(define exp5 '(filter (filter t is-female) is-fixed))
+
+}
+
+*The table `t` below represents four animals from the shelter:*
+
+[cols='6',options="header"]
+|===
+| name        | sex       | age   | fixed   | species | pounds
+| `"Toggle"`  | `"female"`| `12`  | `true`  | `"dog"` | `48`
+| `"Fritz"`   | `"male"`  |  `4`  | `false` | `"dog"` | `92`
+| `"Nori"`    | `"female"`|  `6`  | `true`  | `"dog"` | `35.3`
+|`"Sunflower"`|`"female"` |  `2`  | `false` | `"cat"` | `51.6`
+|===
+
+@vspace{1ex}
+
+*Define the functions specified below by filling in the blanks.* _The first one has been done for you._
+
+@vspace{1ex}
+
+[cols="^.>1a,<.>11a,^.>20a", frame="none", grid="none", stripes="none"]
+|===
+| @n
+| `is-fixed{nbsp}`: is the animal fixed?
+| `fun is-fixed(r):{nbsp}` @fitb{23em}{`r["fixed"]`} `end`
+
+| @n
+| `kilograms`: divides pounds by 2.2.
+| `fun kilograms(r):` @fitb{23em}{@ifsoln{`r["pounds"] / 2.2`}} `end`
+
+| @n
+| `is-female`: is the animal female?
+| `fun is-female(r):` @fitb{23em}{@ifsoln{`r["sex"] == "female"`}} `end`
+|===
+
+@vspace{1ex}
+
+*Convert each Circle of Evaluation below into Pyret code. What do you think the resulting table will be?* _The first one has been done for you._
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols=".^1a,^.^12a,^.<20a",stripes="none",frame="none", options="header"]
+|===
+|
+| Circle of Evaluation
+| Pyret code
+
+| @n
+| @show{(coe exp1)}
+| _A table with all four animals sorted alphabetically by name, and an extra column `"kg"` showing their weight in kilograms: Fritz, Nori, Sunflower, Toggle_
+  @show{(code exp1)}
+
+| @n
+| @show{(coe exp2)}
+| @ifsoln{A table of only fixed animals, sorted alphabetically by name: Nori and Toggle }
+  @showsoln{(code exp2)}
+
+| @n
+| @show{(coe exp3)}
+| @ifsoln{A table of female animals (Toggle, Nori, Sunflower), and an extra `"kg"` column showing weight in kilograms}
+  @showsoln{(code exp3)}
+
+| @n
+| @show{(coe exp4)}
+| @ifsoln{All the female animals, sorted by name alphabetically (Nori, Sunflower, Toggle)}
+  @showsoln{(code exp4)}
+
+| @n
+| @show{(coe exp5)}
+| @ifsoln{A table of fixed, female animals (Toggle and Nori)}
+  @showsoln{(code exp5)}
+|===

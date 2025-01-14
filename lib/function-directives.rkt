@@ -211,6 +211,12 @@
                                     (if rhs-s-nl? "\n" " ")
                                     "end")
                                   (string-append lhs-s " = " rhs-s)))]
+                           [(eq? a 'table-ref)
+                            (let* ([lhs (second e)]
+                                   [rhs (third e)]
+                                   [lhs-s (wescheme->pyret lhs #:parens parens)]
+                                   [rhs-s (wescheme->pyret rhs #:parens parens)])
+                              (string-append lhs-s "[" rhs-s "]"))]
                            [(eq? a 'BEGIN)
                             (string-join
                               (map (lambda (e) (wescheme->pyret e #:parens parens)) (rest e))
@@ -431,7 +437,10 @@
 
   (cond [(string? body)
          (cond [(regexp-match "^ *$" body) #f]
-               [(or (regexp-match "\n" body) (regexp-match " .* " body)) #f]
+               [(or (regexp-match "\n" body)
+                    (regexp-match " .* " body)
+                    (regexp-match "[^ ][(\\[]" body)
+                    ) #f]
                [else (set! body (wescheme->pyret body))])]
         [(null? body) (set! body "")]
         [else (set! body (wescheme->pyret body))])
