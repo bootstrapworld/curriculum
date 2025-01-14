@@ -26,6 +26,10 @@
 |[.materials-links]
 @material-links
 
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
 | Preparation
 |
 @preparation{
@@ -36,7 +40,12 @@
  *** Open @starter-file{alg2-exploring-quadratics-desmos}.
  *** Make a link or code to share with your students.
 
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the following optional pages to scaffold that work:
+ * @opt-printable-exercise{model-2seam.adoc}
+ * @opt-printable-exercise{model-sliders.adoc}
+ * @opt-printable-exercise{model-4seam.adoc}
+ * @opt-printable-exercise{model-judge.adoc}
 }
 
 |===
@@ -45,7 +54,7 @@
 @objective{model-fit-function}
 
 === Overview
-Students work with the vertex form to fit a quadratic model for the Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the @math{f(x) = a(x − h)^2 + k} form of quadratic models using a custom Desmos slider activity.
+Students work with the vertex form to fit a quadratic model for Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the @math{f(x) = a(x − h)^2 + k} form of quadratic models using a custom Desmos slider activity.
 
 === Launch
 
@@ -57,7 +66,7 @@ Let's return to our dataset to dig into that messiness.
 
 @lesson-instruction{
 - Open the @starter-file{alg2-aaron-judge} and click "Run".
-- Then build a scatter plot using `bat-angle` as the explanatory variable on the x-axis and `hit-distance` as the response variable on the y-axis.
+- Then build a scatter plot using `bat-angle` as the @vocab{explanatory variable} (on the x-axis) and `hit-distance` as the @vocab{response variable} (on the y-axis).
 }
 
 @QandA{
@@ -73,36 +82,42 @@ Let's return to our dataset to dig into that messiness.
 
 === Investigate
 
-Now that we know how @math{a}, @math{h}, and @math{k} shape a parabola, *let's try to build the best possible quadratic model we can for our Aaron Judge Batting Data.*
-
-teacher{Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.}
+*Let's try to build the best possible quadratic model we can for our Aaron Judge Batting Data*, using what we know about how @math{a}, @math{h}, and @math{k} influence the shape of a parabola.
 
 @lesson-instruction{
-- Open *Exploring Quadratic Functions (Desmos)*.
-- Use *Slide 3: Fitting Models* to complete @printable-exercise{model-batangle-v-hitdistance.adoc} and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
-- @opt{When you're done, use the slides that follow to fit models for the datasets of each of the other pitch types.}}
-
-=== Synthesize
+- Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}.
+using the scatter plot you just made in Pyret and what we know about the coefficiencts in the Vertex form of a Quadratic Model.
+- Then complete the section to explore a new Pyret function: `num-sqr`.
+}
 
 @QandA{
-@Q{What did you figure out about how adjusting @math{a} changed the shape of the parabola?}
-@A{The _sign_ of @math{a} determines whether the parabola: 
-- opens up (@math{a > 0})
-- opens down (@math{a < 0})
-- or exists as a straight line (@math{a = 0})
+@Q{What does `num-sqr` do an why will we need it in order to build quadratic models in Pyret?}
+@A{It squares the input.}
+@A{The highest power in all quadratic functions is 2.}
+@Q{From looking at our scatter plot, what do we know about the coefficients in the vertex form of our quadratic model?}
+@A{@math{a} should be negative because the curve opens down.}
+@A{@math{h} should be around 30, because it seems to be the optimum bat angle.}
+@A{@math{k} should be about 450, because the y-value of the vertex is around there.}
 }
-@A{The _magnitude_ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.}
+
+Let's build on what we already know about the data and experiment with Desmos sliders to visually fit the best model we can.
+
+@teacher{
+Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.
+
+If you printed additional pages to support students with modeling and interpreting other datasets, now would be a good time to make them available.}
+
+@lesson-instruction{
+- Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
+- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc}  and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
+- When you're done, return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
+- The write a `fit-model` expression to see how well your model predicts hit distance from bat angle and complete the page.
+- @opt{When you're done, fit models for the datasets of the other pitch types provided on Slides 4-7 and update the last four functions defined in this file.}
 }
 
-@slidebreak
 
-Our model is built from data about these 6 vehicles, evaluated at 15-75mph. What does your best model predict for the fuel efficiency of a vehicle that is _turned off_, moving at 0mph? What about a racecar moving at 200mph?
 
-It's impossible for a car that's _turned off_ to burn gas. A racecar with a negative mpg rating would _generate_ fuel as it drives, which is also nonsense! If our model's prediction for these two extreme values is so bad, does that mean we shouldn't use the model at all?
-
-@teacher{No - a model is only as good as the data it was based on. With lots of data between 15-75mph, the model could be very reliable between these speeds and totally _unreliable_ for speeds outside that range!}
-
-@slidebreak
+=== Synthesize
 
 Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
 
