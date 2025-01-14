@@ -29,6 +29,9 @@
 
 === Overview
 
+Students engage in adversarial thinking to determine basic requirements of a successful plagiarism detection program.
+
+
 === Launch
 
 As a student, you probably know what it feels like to be under surveillance.
@@ -70,7 +73,7 @@ As we discussed, plagiarizers usually alter at least a few words of the original
 
 Detecting identicality is not good enough. We need a different approach. We need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then compute the distance between the summaries.
 
-One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables. Consider the two strings, below.
+One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
 
 - Document a: "doo be doo be doo"
 - Document b: "doo doo be doo be"
@@ -79,7 +82,18 @@ The bag-of-words summary for Document A looks like this: `"doo": 3, "be": 2`
 
 As you can see, we've taken the original sentence and disregarded word order, creating a collection that focuses solely on *word frequency*.
 
-With our bag of words, we have actually created a vector where each word represents one axis. Using vector notation, we can represent Document a like this: @math{\overrightarrow{a} = (3, 2)}
+With our bag of words, we have actually created a @vocab{vector} where each word represents one axis.
+
+
+@lesson-point{
+A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
+}
+
+Using vector notation, we can represent Document a like this: @math{\overrightarrow{a} = (3, 2)}
+
+@teacher{
+Some students may conclude that @math{\overrightarrow{a} = (3, 2)}, while others may argue that @math{\overrightarrow{a} = (2, 3)}. Order does not matter in a Bag of Words... but we do need to _choose_ an order that we will use for all of the vectors in the space.
+}
 
 If we were to plot a point for the vector on the coordinate plane, it would produce this:
 
@@ -87,7 +101,8 @@ If we were to plot a point for the vector on the coordinate plane, it would prod
 
 @QandA{
 @Q{What is the bag-of-words summary for Document b?}
-@A{Some students may conclude that @math{\overrightarrow{a} = (3, 2)}, while others may argue that @math{\overrightarrow{a} = (2, 3)}. Order does not matter in a Bag of Words... but we do need to _choose_ an order that we will use for all of the vectors in the space.}
+@A{The bag-of-words summary for Document A looks like this: `"doo": 3, "be": 2`}
+
 @Q{How would you represent the vector for Document b on the coordinate plane?}
 @A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each Bag of Words. Because we decided on "doo" then "be" for document a, we must use "doo" then "be" for document b also.}
 }
@@ -118,6 +133,8 @@ The bag-of-words model is better at detecting plagiarism than the primitive plag
 == Normalize Data and Consider Dimensionality
 
 === Overview
+
+Students explore the importance of normalizing data, removing unneeded characteristics and eliminating redundancy.
 
 === Launch
 
@@ -150,32 +167,46 @@ Let's look at some slightly more complicated documents:
 
 *We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their vectors are. _What went wrong here?_
 
+@teacher{
+Something definitely went wrong! The table above demonstrates the student error of *forgetting to normalize data and consider dimensionality*. Students discover what these entail during the lesson.
+}
+
 === Investigate
 
 To solve this problem, let's start by taking a closer look at our data.
 
 First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize our corpus:
 
-@center{@image{images/scat-venn-diagram.png, 250}}
+@center{@image{images/scat-venn-diagram.png, 150}}
 
 We must revise our bag-of-words summaries and our vectors!
 
-@teacher{Including ZERO is necessary.... explain.}
+@teacher{Normalizing data and considering dimensionality requires that--when a word occurs zero times--we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
 
 The new bag-of-words summary for Document c is `"doo": 5, "be": 2, "bop": 0`, which we can represent as  @math{\overrightarrow{c} = (5, 2, 0)}.
 
 The new bag-of-words summary for Document d is `"doo":0, "be": 2, "bop": 5`, and we can represent it as @math{\overrightarrow{d} = (0, 2, 5)}.
 
-It is a bit trickier to envision plotting these vectors, but not impossible!
+@right{@image{images/2pts.png, 200}}
 
-USE DIAGRAMS INSTEAD
+It is a bit trickier to envision plotting these vectors, but not impossible!
 
 For @math{\overrightarrow{c}}, envision a sheet of paper resting on a table. Plot @math{(5, 2)} on that sheet of paper: move 5 units to the right of the origin and then 2 units up. Because the z-coordinate is 0, the piece of paper *stays on the table.*
 
 For @math{\overrightarrow{d}}, again envision a sheet of paper resting on a table. Plot @math{(0, 2)} on that sheet of paper by moving 2 units along the y-axis above the origin. Because the z-coordinate is 5, we imagine lifting the sheet of paper off the table and increasing its height (z) by 5-units.
 
+@lesson-point{
+Training is the act of transforming *data* into a *model*.
+}
+
+We started out with two documents.
+
+Now that our training is complete, we have two points that exist at specific locations in a multi-dimensional space.
+
+We are ready to put our model to use!
 
 === Synthesize
+
 
 
 
@@ -184,6 +215,8 @@ For @math{\overrightarrow{d}}, again envision a sheet of paper resting on a tabl
 == Compute Closeness and Exercise Human Judgment
 
 === Overview
+
+
 
 === Launch
 
@@ -205,9 +238,11 @@ What now?
 
 === Investigate
 
-When we get a new point in our multi-dimensional space, we want to compare it to the _other_ points in that space.
+Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
 
-When we execute the program, the plagiarism detector computes the student's vector (the input!) and compares it against the other vectors. To do this, it uses the `cosine-similarity` function.
+A _more_ effective plagiarism detector will compute the student's vector (a point in a multi-dimensional space), and then compare it to the _other_ points in that space.
+
+To do this, we can use the `cosine-similarity` function.
 
 @strategy{That Cosine?!}{
 
@@ -224,14 +259,18 @@ To allow for a pleasant user experience, a modern plagiarism detector does not a
 - The plagiarism detector produces a value between zero and 1 for all other comparisons, reflecting the level of similarity of two bags of words.
 
 @lesson-instruction{
-- Complete @printable-exercise{human-judgment.adoc}.
+- Complete the first section of @printable-exercise{human-judgment.adoc}, where you will evaluate the closeness of the student essay and the wikipedia article using the cosine-similarity function.
+- Complete the remaining two sections of @printable-exercise{human-judgment.adoc}, where you will consider four possible outputs of a plagiarism detector that utilizes the cosine similarity function.
 }
+
 
 
 === Synthesize
 
 @QandA{
 
-@Q{AI can be impressive... but human judgment is still critical. Why? _Feel free to discuss what you learned about plagiarism detector, but other relevant examples are welcome, too!}
+@Q{AI can be impressive... but human judgment is still critical. Why?}
+
+@A{The cosine-similarity function produces a number - and that is all! It is still up to the teacher to decide how to make sense of that number. Over-reliance on programs can result in unfair outcomes.}
 
 }

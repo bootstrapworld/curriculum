@@ -1,19 +1,27 @@
 = The Importance of Human Judgment
 
+Open the @starter-file{plagiarism}, click "Run", and then respond to the questions below.
+
+== Determine Closeness
+
+@n Use `cosine-similarity` to compare the student-submitted essay with the wikipedia article. Click "Run". What does the program tell you about the comparison? @fitb{}{@ifsoln{`cosine-similarity(student-essay, wiki-article)` produces an output of ~0.97087...,}}
+
+@fitb{}{@ifsoln{ indicating that the texts are extremely close.}}
+
+@n Did you know that "pachyderm" is a synonym for "elephant"? In the student essay, replace all instances of "elephant" with "pachyderm". Try running the program again, to compare `student-essay` and `wiki-article`. What does the program tell you about the comparison?
+
+@fitb{}{@ifsoln{`cosine-similarity(student-essay, wiki-article)` produces an output of ~0.7961..., meaning that the texts are still}}
+
+@fitb{}{@ifsoln{close enough to raise suspicion.}}
+
+
+== A Different Scenario
+
 A teacher asks students to write an essay on one of three topics: modern art, soccer, or zebras. The teacher feeds the essays to a plagiarism detector to compare the essays to one another. It plots 32 points in a 1023-dimensional space.
-
-@vspace{1ex}
-
-== The Basics
 
 @n What does the number 32 tell us? @fitb{}{@ifsoln{The teacher has provided the plagiarism detector with 32 student essays.}}
 
-@fitb{}{}
-
-
 @n What does the number 1023 tell us? @fitb{}{@ifsoln{In sum, the essays include 1023 different words.}}
-
-@fitb{}{}
 
 
 == Assessing the Output
@@ -30,9 +38,6 @@ Consider each of the four outputs, below. What do you think is happening in each
 
 @fitb{}{}
 
-@fitb{}{}
-
-@fitb{}{}
 
 @n The points are scattered seemingly randomly, but there are two points plotted extremely close together.
 
@@ -44,7 +49,6 @@ Consider each of the four outputs, below. What do you think is happening in each
 
 @fitb{}{@ifsoln{is probably a coincidence.}}
 
-@fitb{}{}
 
 @n There appear to be three large, loose clusters of randomly plotted points.
 
@@ -64,7 +68,5 @@ Consider each of the four outputs, below. What do you think is happening in each
 
 @fitb{}{@ifsoln{The teacher should have no need to worry.}}
 
-@fitb{}{}
 
-@fitb{}{}
 
