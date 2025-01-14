@@ -213,7 +213,8 @@ Verify that students have correctly plotted the first box plot on the page. Thei
 @lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.}
 
 @lesson-instruction{
-Complete @printable-exercise{create-bp-from-dp.adoc}.
+- Complete @printable-exercise{create-bp-from-dp.adoc}.
+- Complete @printable-exercise{match-dot-plots-box-plots.adoc}.
 }
 
 
@@ -265,97 +266,12 @@ If you'd prefer to wait until your students have completed the __entire__ lesson
 
 }
 
-== Describing Shape
+
+== Making Box Plots in @proglang
 
 === Overview
 
-This activity focuses on describing the shape of a box plot.
-
 === Launch
-
-You probably noticed that some box plots have long whiskers to the left, and while others have long whiskers to the right.
-
-Box plots, like histograms, can be characterized as "skew". Let’s compare skew-left, skew-right, and symmetric histogram shapes.
-
-
-[cols="^.^1a,^.^1a,^.^1a", options="header"]
-|===
-
-| Symmetric
-| Skew-left
-| Skew-right
-
-| @image{images/symmetric.png, 150 }
-| @image{images/left-w-foot.png, 150}
-| @image{images/right-w-foot.png, 150}
-
-| Values are balanced on either side of the center.
-
-| Values are clumped around what's typical, but trail off to the right.
-
-| Values are clumped around what's typical, but trail off to the left.
-
-|===
-
-
-@slidebreak{LaunchC}
-
-@ifslide{@image{images/even.png, 600}}
-
-We know that when the points are evenly distributed across the range, the four sections of the box plot will be equal in size. But, it's very rare for the distribution of real world datasets to be uniform like this! _(And, even when we see a box plot with four equally wide quarters, we cannot assume that the points are evenly distributed within each of the quarters.)_ 
-
-@slidebreak{LaunchC}
-
-*What shapes are box plots likely to come in and how do we describe them?*
-
-@slidebreak{LaunchC}
-
-==== Symmetric 
-
-The spread of any dataset with roughly the same amount of variation on the low end as on the high end can be described as symmetric. 
-
-[cols="13a,13a,12a", grid="none", frame="none"]
-|===
-| @image{images/even.png}
-| @image{images/symmetriclong.png}
-| @image{images/symmetricshort.png}
-|===
-
-@slidebreak{LaunchC}
-
-An example of symmetric variation might be the weights of newborn babies: the distribution for those who are smaller than average might mirror those who are bigger than average.
-
-@slidebreak{LaunchC}
-
-==== Skew
-Left and right skew are easy to identify from a quick glance at a box plot, by their longer whiskers trailing off toward the left or right, respectively. Longer whiskers indicate the potential of outliers.
-
-[cols="^1a,^1a", grid="none", frame="none", stripes="none"]
-|===
-|@image{images/left.png}
-|@image{images/right.png} 
-|===
-
-@slidebreak{LaunchC}
-
-An example of left skew could be:
-
-- the weights of the cousins in a family, with the newborn as an outlier. +
-_(Did you know that babies are supposed to triple their weight in the first year of their lives?!)_
-
-Examples of right skew could include:
-
-- the distribution of maximum heights reached during gymnastics floor routines, with Simone Biles as an outlier, reaching over 9 feet in the air!
-- the distribution of time it takes to get from the subway to the street, with people using strollers and wheelchairs as outliers, because they have to wait for elevators while everyone else can use the stairs and escalators.
-
-@slidebreak{LaunchC}
-
-@lesson-instruction{
-- Let's practice identifying the shape of data from box plots! 
-- Turn to @printable-exercise{identifying-shape-boxplots.adoc}.
-}
-
-=== Investigate
 
 Let's see what we can learn about the spread of the data in the `pounds` column by making a `box-plot`!
 
@@ -396,6 +312,8 @@ Create a box plot in CODAP that visualizes the spread of `Pounds`.
 ifnotslide{@centered-image{images/codap-box-plot.png, 300}}
 @ifslide{@image{images/codap-box-plot.png, 300}}
 }
+
+=== Investigate
 
 @QandA{
 
@@ -507,222 +425,5 @@ If you'd prefer to wait until your students have completed the _entire_ lesson t
 
 }
 
-== Connecting Box Plots and Histograms
 
-=== Overview
-Students learn how to connect this visualization of spread to what they know about histograms.
 
-=== Launch
-
-Box plots and histograms give us two different views of the shape of quantitative data.
-
-@slidebreak
-
-
-@QandA{
-@Q{One of these box plots represents the same data as the histogram. Which one is it? How do you know?}
-@A{The first box plot represents the same data as the histogram.}
-@A{Sample response: The right whisker of the first box plot is longer, suggesting that there are outliers on the right causing the data to skew right.}
-
-@center{@image{images/histogram-launch.png,175}}
-
-[cols="^.^1a,^.^1a"]
-|===
-| @image{images/boxplot2-launch.png, 125}
-| @image{images/boxplot1-launch.png, 125}
-|===
-
-}
-
-@teacher{Students may notice that the left part of the box is larger on the box plot B. Although that observation is correct, the box's larger area does *not* indicate that *more* data points are clustered there. Remind students that an equal number of data points are clustered in each quadrant of the box plot. You can emphasize this core idea as you discuss the table comparing box plots and histograms@ifnotslide{,below.}@ifslide{ on the next slide.}}
-
-@slidebreak
-
-[cols="1,^1,^3, ^3", options="header"]
-|===
-|               
-| Intervals 			
-| Data points per Interval
-| Skew presents as
-
-| *Box Plots* 	
-| Variable 		    
-| Fixed - 25% of the data in each Interval
-| A longer "whisker" or +
-more spread in one half of the box
-
-| *Histograms*	
-| Fixed Bins      
-| Variable - Points “pile up in bins”, +
-so we can see how many are in each.
-| A long tail of +
-shorter bars to one side
-|===
-
-
-@slidebreak
-
-@QandA{
-@Q{Match the box plots below with the corresponding histograms. How did you make your matches?}
-@A{Box plot A represents the same data as histogram C. Box plot B represents the same data as histogram D. Students may suspect that the short whiskers of histogram B match with the short bars on the edges of histogram C. Because box plots represent density and not frequency, this reasoning is incorrect. }
-
-++++
-<style>
-/* Add letters to the top left corner, relative to each table cell */
-.lettering td { position: relative; }
-.lettering .paragraph:first-child p { position: absolute; top: 0; font-weight: bold; }
-</style>
-++++
-
-[.lettering, cols="^.^1a,^.^1a", header="none", stripes="none"]
-|===
-| A
-
-@image{images/launch-boxplot-a.png, 125}
-| B
-
-@image{images/launch-boxplot-b.png, 125}
-| C
-
-@image{images/launch-histo-c.png, 125}
-| D
-
-@image{images/launch-histo-d.png, 125}
-
-|===
-
-
-}
-
-@teacher{The matching activities in this launch section were drawn from research conducted by @citation{lem-et-al-2011, "Lev et al (2011)"}.}
-
-
-
-@strategy{Kinesthetic Activity}{
-
-Divide the class into groups, and give each group a ruler and a ball of play-dough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four _equally-sized cylinders_. The play-dough represents a @vocab{sample}, with values divided into four quarters.
-
-Box plots stretch and squeeze these equal quarters of the data across a number line, so that they fit into their respective intervals. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students shape their cylinders into rectangles that fill each of these intervals, and are all about 1 inch thick.
-
-Students should notice that the play-dough is _taller for shorter intervals_ and thinner for longer intervals. Even though a box plot doesn't show us the thickness of the data points, we know that a small interval has the same amount of data "squeezed" into it as a large interval has spread across it.
-
-}
-
-=== Investigate
-@lesson-instruction{
-- Use what you've learned about how box plots and histograms display data differently to complete @printable-exercise{matching-boxplots-to-histograms.adoc}.
-- With a partner, complete the @printable-exercise{boxplot-vocab-map.pdf, Box Plot Vocab Concept Map} and see if you can draw connections between these concepts!
-- @opt{Complete @opt-printable-exercise{reading-boxplots.adoc} to practice matching box plots to a written description of a distribution.}
-- @opt{Complete @opt-printable-exercise{matching-boxplots-to-histograms-2.adoc} and/or the Matching Box Plots to Histograms slide of @opt-starter-file{boxplots}}
-}
-
-@clear
-@slidebreak
-
-@lesson-instruction{
-Now that you have the skills to interpret box plots, complete @printable-exercise{data-cycle-box-plots-animals.adoc}.
-}
-
-@pd-slide{
-*Matching Debrief: Think about shape, don't rely on numbers!*
-
-There are teachers and students who complain about this page. They say that this page is unfair because we didn't label the axes. The stats teachers are always shocked at their colleagues. They say, "It doesn't matter! We're talking about shape. Skew right is skew right, no matter where it falls on the x axis.""
-
-So many kids have sort of a statistical lazy eye. How do you fix that? You wear a patch over the strong eye. By removing the numbers, it forces people to think about the shape. If the numbers are there, you get high achieving algebra students who never learn shape because they keep using the numbers.
-}
-
-@pd-slide{
-*Chart Paper Activity (Continued): What Shape Makes Sense?*
-
-We've already added histograms to our chart papers around the room.
-
-This time, we are going to complete another round of the same activity, but your group will (1) add a *box plot* of the specified shape, (2) brainstorm a sample that will result in the given distribution.
-
-Once all teams have completed the task, teams will rotate to the next poster and brainstorm another sample.
-}
-
-=== Synthesize
-
-- How are histograms and box plots similar?
-- How are they different?
-- What can we learn from box plots that we can't learn from a histogram?
-
-
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check4-desmos} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
-
-Alternatively, we offer a compilation of all four Checkpoints in @assessment{box-plots-cumulative-desmos}.
-}
-
-
-
-== Data Exploration Project (Box Plots)
-
-=== Overview
-Students apply what they have learned about box plots to their chosen dataset. They will add three items to their @starter-file{exploration-project}: (1) at least two box plots, (2) the corresponding five-number summaries, and (3) any interesting questions they develop. 
-
-@teacher{To learn more about the sequence and scope of the Exploration Project, visit @lesson-link{project-data-exploration}. For teachers with time and interest, @lesson-link{project-research-paper} is an extension of the Dataset Exploration, where students select a single question to investigate via data analysis.}
-
-=== Launch
-
-Let’s review what we have learned about making and interpreting box plots.
-
-@QandA{
-@Q{Does a box plot display categorical or quantitative data? How many columns of data does a box plot display?}
-@A{Box plots display a single column of quantitative data.}
-
-@Q{How are box plots similar to histograms? How are they different?}
-@A{Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variable numbers of data points in each one. Box plots have variable intervals ("quartiles") with a fixed number of data points in each one.}
-
-@Q{A box plot lets us visualize the five-number summary. What does the five-number summary tell us about the column of data?}
-@A{The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points.}
-}
-
-=== Investigate
-
-Let’s connect what we know about box plots to your chosen dataset.
-
-@teacher{Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson.
-}
-
-@lesson-instruction{
-- Open your chosen dataset starter file in @proglang.
-- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.}
-
-@QandA{
-@Q{What question does your visualization answer?}
-@A{Possible responses: How is the data for a certain column distributed? Are the values close together or really spread out? Are there any outliers?}
-}
-
-@slidebreak
-
-@lesson-instruction{
-- Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for the other column you explored before (and any others you are curious about).
-}
-
-@teacher{If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Exploration Project and calculate the mean, median and modes for the new columns.
-
-Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
-}
-
-@slidebreak
-
-@lesson-instruction{
-- *It’s time to add to your @starter-file{exploration-project}.*
-- Find the box plot slide in the "Making Visualization" section and copy/paste your first box plot here. Duplicate the slide to add your other box plots.
-- Add the five-number summaries from these plots to the corresponding "Measures of Center and Spread" slides. 
-- Be sure to also add any interesting questions that you developed while making and thinking about box plots to the "My Questions" slide at the end of the deck.
-}
-
-=== Synthesize
-
-- What @vocab{shape} did you notice in your box plots?
-
-- Did you discover anything surprising or interesting about your dataset?
-
-- What, if any, outliers did you discover when making box plots?
-
-- When you compared your findings with others, did you make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
