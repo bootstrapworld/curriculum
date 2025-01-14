@@ -2215,7 +2215,7 @@
               (expand-directives i o)
 
               (when (and *narrative* (not *title-reached?*))
-                (print-course-title-and-logo *target-pathway* make-image o)
+                (print-course-title-and-logo *target-pathway* make-image store-title o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)
