@@ -75,9 +75,8 @@ Let's return to our dataset to dig into that messiness.
 @A{It's not perfectly symmetrical.}
 @A{The band of points is pretty wide.}
 @Q{Why does it make sense to use a quadratic model for this data?}
+@A{While no curve will include all of these data points, there is a clear trend in which the hit distance rises, peaks, and then falls as the bat angle increases.}
 @A{*Models are - by definition - approximations of the real world*.}
-@A{While no curve will include all of these data points, there is a clear trend in which the hit distance rises, peaks, and then falls as the bat angle increases.
-}
 }
 
 === Investigate
@@ -87,11 +86,11 @@ Let's return to our dataset to dig into that messiness.
 @lesson-instruction{
 - Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}.
 using the scatter plot you just made in Pyret and what we know about the coefficiencts in the Vertex form of a Quadratic Model.
-- Then complete the section to explore a new Pyret function: `num-sqr`.
+- Then complete the second section, which explores a new Pyret function: `num-sqr`.
 }
 
 @QandA{
-@Q{What does `num-sqr` do an why will we need it in order to build quadratic models in Pyret?}
+@Q{What does `num-sqr` do and why will we need it in order to build quadratic models in Pyret?}
 @A{It squares the input.}
 @A{The highest power in all quadratic functions is 2.}
 @Q{From looking at our scatter plot, what do we know about the coefficients in the vertex form of our quadratic model?}
@@ -100,7 +99,7 @@ using the scatter plot you just made in Pyret and what we know about the coeffic
 @A{@math{k} should be about 450, because the y-value of the vertex is around there.}
 }
 
-Let's build on what we already know about the data and experiment with Desmos sliders to visually fit the best model we can.
+Build on what we already know about the data, let's experiment with Desmos sliders to visually fit the best model we can.
 
 @teacher{
 Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.
@@ -110,22 +109,34 @@ If you printed additional pages to support students with modeling and interpreti
 @lesson-instruction{
 - Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
 - Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc}  and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
-- When you're done, return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
-- The write a `fit-model` expression to see how well your model predicts hit distance from bat angle and complete the page.
-- @opt{When you're done, fit models for the datasets of the other pitch types provided on Slides 4-7 and update the last four functions defined in this file.}
+- Then, return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
+- When you're done, test how well your model predicts hit distance from bat angle using `fit-model` and complete the page to interpret the results.
+- @opt{Slides 4-7 of the Desmos file each focus on other subsets of Aaron Judge's batting data.
+ * Visually fit models for these datasets in Desmos.
+ * Update the last four functions defined in the Pyret file.
+ * Write `fit-model` expressions and interpret the @ test them out.}
 }
 
-
+@QandA{
+@Q{According to the @vocab{S-values}, does your quadratic model do a better job of predicting hit distances from bat angle?}
+@A{Yes. Hopefully students have come up with a model whose predictions are expected to be at least 30 feet more accurate than the optimal linear model.}
+@Q{Linear regression allows us to find the *computationally optimal model*. Do we know whether or not the quadratic models we just built are the _best?_}
+@A{We don't know!}
+@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+@Q{Slides 3-6 in the Desmos file display data for specific pitch types. Slide 7 shows the full dataset. Which of the subsets is most visually similar to the full dataset and what does the tell us?}
+@A{The four-seam fastball dataset looks almost identical to the full dataset. That is an indicator that the majority of the dataset is likely composed of four-seam fastballs.}
+@A{`count(judge-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
+}
 
 === Synthesize
 
-Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
-
 @QandA{
-@Q{In this project, do we know whether or not our model is the _best?_}
-@A{We don't know!}
-@Q{How do you know?}
-@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+@Q{How did your quadratic model compare to the optimal linear model for this data?}
+@A{Unlike the linear models, our quadratic models, roughly followed the shape of the data.}
+@A{The @math{S-values} for our quadratic models showed significantly less error in predictions than the optimal linear model did.}
+@Q{Once you approximated the vertex of a dataset, how much trial and error was involved in defining a quadratic model in vertex form that visually fit the dataset?}
+@A{@math{h} and @math{k} didn't need to change much!}
+@A{We knew whether @math{a} would be negative or positive, but it took some playing to find a number that matched the width of the curve to the points.}
 }
 
 == Additional Practice
