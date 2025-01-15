@@ -87,8 +87,8 @@
     (let ([lesson-plan-file (path->string (build-path umbrella-dir lesson-dir "index.shtml"))]
           [title-file (path->string (build-path umbrella-dir lesson-dir ".cached/.index.titletxt"))])
       (when (file-exists? lesson-plan-file)
-        ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status, date
-        (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a,~a\n"
+        ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date
+        (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a\n"
                  (string->uniqid lesson-dir) ;id
                  (string-trim
                    (if (file-exists? title-file)
@@ -98,7 +98,9 @@
                  lesson-dir
                  ;(make-lesson-permalink lesson-dir) ;permalink
                  "" ; parent
+                 *archive* ; archive
                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
+                 *type* ; type
                  "" ; child categories
                  (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
                  "public"
@@ -132,14 +134,16 @@
                 ; (printf "page-title-file is ~a\n" page-title-file)
                 (when (file-exists? page-title-file)
                   ; (printf "going ahead with ~a\n" p)
-                  ;id, title, permalink, parent, seasons, child-categories, curriculum-materials-raw-code, post status, date
-                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,\"~a\",~a,~a\n"
+                  ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date
+                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a\n"
                            (string->uniqid lesson/p) ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            p-prime
                            ;(make-lesson-permalink lesson/p) ; permalink
+                           *archive* ; archive
                            lesson-id ; parent
                            (format "~a ~a" (string-titlecase *season*) *year*) ;season
+                           *type* ; type
                            (if (not solutions?) "Xyz" "Xyz Solution") ; child categ
                            (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
                            (if solutions? "private" "publish")
@@ -157,13 +161,21 @@
 
 (define *season-year* (format "~a-~a" *season* *year*))
 
+(define *archive* "FALSE")
+(define *type* #f)
+
 (call-with-output-file *csv-file*
   (lambda (o)
-    (fprintf o "ID,Title,Slug,Parent,Seasons,Child Categories,Curriculum Materials Raw Code,Post Status,Date\n")
+    (fprintf o "ID,Title,Slug,Archive,Parent,Seasons,Type,Child Categories,Curriculum Materials Raw Code,Post Status,Date\n")
+    (set! *type* "lesson")
     (convert-top-pages o #:umbrella-dir *lessons-dir*)
-    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "pages")
-    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "solution-pages")
+    (set! *type* "course")
     (convert-top-pages o #:umbrella-dir *courses-dir*)
+    (set! *type* "workbook-page")
+    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "pages")
+    (set! *type* "solution-page")
+    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "solution-pages")
+    (set! *type* "resource")
     (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/pages")
     (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/solution-pages")
     (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
