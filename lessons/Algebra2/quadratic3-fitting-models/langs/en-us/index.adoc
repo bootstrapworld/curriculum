@@ -41,11 +41,10 @@
  *** Make a link or code to share with your students.
 
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the following optional pages to scaffold that work:
- * @opt-printable-exercise{model-2seam.adoc}
- * @opt-printable-exercise{model-sliders.adoc}
- * @opt-printable-exercise{model-4seam.adoc}
- * @opt-printable-exercise{model-judge.adoc}
+- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the optional page for each dataset (@opt-printable-exercise{model-2seam.adoc, 2-seam},
+@opt-printable-exercise{model-sliders.adoc, sliders},
+@opt-printable-exercise{model-4seam.adoc, 4-seam},
+@opt-printable-exercise{model-judge.adoc, full}) to scaffold that work.
 }
 
 |===
@@ -103,8 +102,7 @@ Build on what we already know about the data, let's experiment with Desmos slide
 
 @teacher{
 Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.
-
-If you printed additional pages to support students with modeling and interpreting other datasets, now would be a good time to make them available.}
+}
 
 @lesson-instruction{
 - Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
@@ -114,7 +112,12 @@ If you printed additional pages to support students with modeling and interpreti
 - @opt{Slides 4-7 of the Desmos file each focus on other subsets of Aaron Judge's batting data.
  * Visually fit models for these datasets in Desmos.
  * Update the last four functions defined in the Pyret file.
- * Write `fit-model` expressions and interpret the @ test them out.}
+ * Write `fit-model` expressions to test them out and interpret the @vocab{S-value}.
+ * Your teacher may have printed pages to support you with modeling and interpreting these other datasets (@opt-printable-exercise{model-2seam.adoc, 2-seam},
+@opt-printable-exercise{model-sliders.adoc, sliders},
+@opt-printable-exercise{model-4seam.adoc, 4-seam},
+@opt-printable-exercise{model-judge.adoc, full}).}
+}
 }
 
 @QandA{
@@ -139,28 +142,26 @@ If you printed additional pages to support students with modeling and interpreti
 @A{We knew whether @math{a} would be negative or positive, but it took some playing to find a number that matched the width of the curve to the points.}
 }
 
-
-== Additional Practice
-
-- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with the @opt-starter-file{alg2-fuel-efficiency}
-
-@indented{
-@teacher{
-- A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph. The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. _There's no such thing as a perfect model!_
-- Students may wonder why fuel efficiency is a function of the _square_ of the speed, rather than the speed itself! Physicists have determined that the biggest factor affecting fuel efficiency is _drag:_ the effect of air slowing it down. Physicists have calculated that drag increases based on squared velocity. Additionally, a car's transmission uses more efficient gears for higher speeds (the engine can turn more slowly at higher gears), but rarely does a car have a gear optimized for speeds above 65mph. As a result efficiency falls sharply once the "highest" gear is reached, as higher speeds require the engine to run faster.
-- *NOTE*: While the fuel efficiency dataset used in the optional materials we'll be offering throughout our quadratics lessons is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI/edit?gid=0#gid=0, the dataset}.
-}
-}
-
-@vspace{1ex}
-
 @strategy{Optional Activity: Guess the Model!}{
 
 1. Divide students into teams of 2-4, and have each team come up with a *secret*, quadratic, real-world scenario, then have them write down a quadratic function that fits this scenario on a sticky note. Make sure these functions are private within each team! (Note: students may be tempted to just make up a scenario where something rises and falls, or vice versa. Challenge them to think through why the change in the output is quadratic with respect to the change of the change in the input!)
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their quadratic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, have students title their scatter plot to describe their real-world scenario (e.g., "percentage of people wearing diapers vs. age").
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for their quadratic function. They should only draw the point cloud - _not the function itself!_ Finally, have students title their scatter plot to describe their real-world scenario (e.g., "percentage of people wearing diapers vs. age").
 3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 
 - The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+}
+
+== Additional Practice
+
+- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} in Pyret, using what they know about the coefficients in the vertex form from the shape of the data.
+
+@indented{
+@teacher{
+- *NOTE*: While the fuel efficiency dataset used in the optional materials we'll be offering throughout our quadratics lessons is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI/edit?gid=0#gid=0, the dataset}.
+- A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph. The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. This is a great opportunity to remind students that _there's no such thing as a perfect model!_
+- Students may wonder why fuel efficiency is a function of the _square_ of the speed, rather than the speed itself! Physicists have determined that the biggest factor affecting fuel efficiency is _drag:_ the effect of air slowing it down. Physicists have calculated that drag increases based on squared velocity. Additionally, a car's transmission uses more efficient gears for higher speeds (the engine can turn more slowly at higher gears), but rarely does a car have a gear optimized for speeds above 65mph. As a result efficiency falls sharply once the "highest" gear is reached, as higher speeds require the engine to run faster.
+
+}
 }

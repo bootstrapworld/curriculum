@@ -14,56 +14,56 @@ td .autonum::after { content: ')' !important; }
 ++++
 
 [.linkInstructions]
-For this page, you'll need to open the @starter-file{alg2-aaron-judge} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. 
+We're going to compute a quadratic function from 3 representative points in the `curve-table` we've been working with. While our model would be most accurate if we kept track of all of the decimal values, for today we are going to simplify our calculations by doing some rounding.
 
-We're going to compute a quadratic function from 3 points. While it would be most accurate to keep track of decimal values, for today we are going to simplify our calculations by doing some rounding.
-
-- Start by choosing 3 representative whole-coordinate points from the scatter plot.
-  * a best guess at the where a curve summarizing the cluster would cross the y-axis
-  * a point from the middle of the curve
-  * a representative point toward the right side of the point cloud
-- As we solve the system of equations, we'll likely get some very long decimal values. You can round these values to the ten thousandths place as we work.
-}
-
-@vspace{1ex
-}
-@center{The *standard form* of a quadratic equation is @math{y = Ax^2 + Bx + C}}
-
-[.topTable, cols="12a, 1a, 10a", frame="none", grid="none"]
+[.topTable, cols="12a,1,12a", frame="none", grid="none"]
 |===
-| `bat-angle` v. `hit-distance`
-@center{@image{../images/curve-angle-distance.png, 400}}
+|
+@vspace{1ex}
+@image{../images/curve-angle-distance.png, 400}
 |
 |
-@n Choose a point from the *left-most column* of dots, and fill in the *standard form* equation below: +
-@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+@n Identify three *whole-number* coordinate pairs we can use to summarize a curve that would model the point cloud:
 
-@vspace{5ex}
+  * a best guess for where the curve *crosses the y-axis* @fitb{}{}
 
-@n Choose a point from the *center-most column* of dots, and fill in the *standard form* equation below: +
-@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+  * a point *from the middle* of the curve @fitb{}{}
 
-@vspace{5ex}
+  * a point *from the right side* of the curve @fitb{}{}
 
-@n Choose a point from the *right-most column* of dots, and fill in the *standard form* equation below: +
-@center{@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C}
+@vspace{1ex}
+
+@n Fill in the x and y-values in the *standard form* models below using the three points you found:
+
+@indented{
+@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C
+
+@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C
+
+@fitbruby{6em}{}{y (mpg)} = A(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C
+}
 |===
 
+@n In the space below - or on another sheet of paper - solve this series of equations for A, B, and C. +
+_As we solve the series, we'll likely get some very long decimal values. You can round these values to the ten thousandths place as we work._
 
-@n In the space below - or on another sheet of paper - solve this series of equations for A, B, and C:
 [.FillVerticalSpace, frame="none", grid="none"]
 |===
 |
 |===
 
 
-@n Write your finished model in function and Pyret notation below, then define the function `f` in Pyret and try it out using `fit-model`!
+@n Write your finished model in function and Pyret notation below.
 
 [cols="^3a,^4a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 | *Pyret Notation*
 
-| @math{f(x) = A}(@fitbruby{6em}{}{x (speed)})^2^ + B(@fitbruby{6em}{}{x (speed)}) + C
-| @show{(code '(define (f x) (+ (+ (* (?ANS 1) sqr(x)) (* (?ANS 2) x)) (?ANS 3)) ))}
+| @math{f(x) =} @fitbruby{3em}{}{A} @math{x^2 +} @fitbruby{3em}{}{B} @math{x +} @fitbruby{3em}{}{C}
+
+| @show{(code '(define (f x) (+ (+ (* (?ANS 1) sqr(x)) (* (?ANS 2) x)) (?ANS 3))))}
+
 |===
+
+@n Update the function definition for `f` on line 57 of the @starter-file{alg2-aaron-judge} and test it out using `fit-model`!
