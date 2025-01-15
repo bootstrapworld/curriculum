@@ -136,5 +136,5 @@ exports.added_words = [
   "autonum",
   "Piecewise",
   "middle",
-  "interquartile",
+  "interquartile"
 ];
