@@ -137,13 +137,13 @@ Now our graph answers the _opposite_ question: "how many days do we predict it w
 Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid growth, and then flattens out.
 
 - During the pandemic, our initial value was roughly 120,000 cases.
-- By 150,000 cases, it was 75 days later.
-- By 300,000 cases, it was 112 days later.
-- By 400,000 cases, it was 122 days after.
+- To reach 150,000 cases, it took 75 days
+- To reach 300,000 cases, it took 112 days (37 additional days)
+- To reach 400,000 cases, it took 122 days (20 additional days)
 
 @slidebreak
 
-This kind of growth is much easier to understand, and *much more alarming!* By switching the axes, we've given our brains a much better chance of understanding what was really happening.
+This kind of growth is much easier to understand, and *understanding it makes it that much more alarming!* By switching the axes, we've given our brains a much better chance of understanding just how fast infections were growing.
 
 == Logarithmic Growth
 @objective{logarithms-growth}
@@ -163,7 +163,7 @@ When an exponential relationship is "inverted" like this, the new shape is calle
 
 @slidebreak
 
-*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*
+@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
 
 By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
 
@@ -207,7 +207,7 @@ In fact, we can use this inverse relationship to do calculations:
 
 Consider these two translations of @math{log_2(128)}.
 
-- "2 raised to what power gives us 128?"
+- "To get 128, I raise 2 to what power?"
 - "The power you raise 2 to get 128"
 
 @QandA{
@@ -216,21 +216,22 @@ Consider these two translations of @math{log_2(128)}.
 @A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
 }
 
-@slidebreak{
-}
-
 @slidebreak
 
-@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
+@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
 
 [cols="^1a,^1a", stripes="none", options="header"]
 |===
-| Exponential Function
-| Logarithmic Function
+| Exponential Functions
+| Logarithmic Functions
 
 
-| We know that exponential functions grow by _equal factors over the same interval_. We can describe their growth by calculating the @vocab{growth factor}: "what @math{y} is multiplied by" in order to produce the next value over a constant interval.
-| Instead of multiplying @math{y} by a constant to find the next value, we need to _multiply the size of our x-interval_ by a constant (called the @vocab{base}) in order to get a constant growth in @math{y}!
+| @math{y} grows exponentially over constant intervals of @math{x} +
+{empty} +
+A constant increase in @math{x}, requires multiplying @math{y} by the @vocab{growth factor}.
+| @math{x} grows exponentially over constant intervals of @math{y} +
+{empty} +
+A constant increase in @math{y}, requires multiply @math{x} by a value called the @vocab{base}. In other words, @math{y} is _the power we'd need to raise our base_ to get each value of @math{x}.
 
 |@image{images/difference-table-exponential-2.png}
 |@image{images/difference-table-logarithmic.png}
@@ -239,7 +240,7 @@ Consider these two translations of @math{log_2(128)}.
 
 @slidebreak
 
-@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
+@ifslide{@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}}
 
 Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x,y) columns of a table makes a logarithmic _sequence_ look exponential.
 
@@ -273,30 +274,6 @@ We don't *hear* the world as it really is. We hear a logarithmically compressed 
 
 @slidebreak
 
-@ifnotslide{
-We don't *see* the world as it really is. We see a logarithmically compressed version of it!
-
-- @right{@image{images/visual-distance.jpg, 120}}A fraction of our field of view shows us just a few feet of an airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
-- Railroad tracks stretching off towards the horizon, they appear to grow closer and closer until it looks like those parallel lines might touch.
-- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_, so @math{\text{perception}(\text{distance})} is a logarithmic function.
-}
-
-@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
-
-We don't *see* the world as it really is. We see a logarithmically compressed version of it!
-
-- @right{@image{images/visual-distance.jpg, 350}}When looking out airplane window, _our eyes take in hundreds of miles' worth of visual data all at once!_
-- A fraction of our field of view shows us just a few feet of the airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
-- We know that parallel lines never intersect.
-- But when looking at a railroad track this compression makes the rails grow closer and closer in the distance, until it looks like they might touch.
-- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_. Once again, @math{\text{perception}(\text{distance})} is a logarithmic function.
-}
-
-@teacher{
-Students can check out @link{images/xkcd.png, this wonderful visualization} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to draw the entire known universe. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
-}
-
-@slidebreak
 @ifslide{
 @right{@image{images/chili.png, 200}}@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
 }
@@ -311,6 +288,22 @@ We don't *taste* spiciness as it really is. We taste a logarithmically compresse
 - Each unit on the scale means there is an _exponentially greater amount of capsaicin_, so a pepper that measures a 4.0 actually contains _ten times the capsaicin_ of a 3.0.
 - In other words, an _exponentially-increasing amount of capsaicin_ is perceived as a _constantly increasing spiciness_, so @math{\text{spicyness}(\text{capsaicin})} is a logarithmic function.
 
+@slidebreak
+
+--
+@right{@image{images/visual-distance.jpg, 120}}
+We don't *see* the world as it really is. We see a logarithmically compressed version of it!
+
+- A fraction of our field of view shows us just a few feet of an airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
+- Railroad tracks stretching off towards the horizon, they appear to grow closer and closer until it looks like those parallel lines might touch.
+- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_, so @math{\text{perception}(\text{distance})} is a logarithmic function.
+
+--
+
+@teacher{
+Students can check out @link{images/xkcd.png, this wonderful visualization} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to draw the entire known universe. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
+}
+
 == Logarithmic Functions
 @objective{logarithms-situations}
 
@@ -320,17 +313,19 @@ Students are introduced to the parent function for logs, and explore the role th
 === Launch
 *Logarithmic models have the form @math{f(x) = a \log_b(x-h) + k}*
 
-Most textbooks only present logarithmic functions with a horizontal shift of zero. When h=0, we can safely remove it and use this simplified form of the equation:
-
-@center{@math{f(x) = a \log_b(x) + k}}
-
 @teacher{
 @opt{Advance your teacher dashboard of @starter-file{alg2-log-desmos} to *Slide 3: How does h transform logarithmic functions?* and give your students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to logarithmic functions.
 }}
 
-@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. 
+Most textbooks only present logarithmic functions with a horizontal shift of zero. When @math{h = 0}, we can safely remove it and use this simplified form of the equation:
 
-Decide whether you want to debrief this activity with your students after they complete each section or wait until they have finished completing @printable-exercise{graphing-models.adoc}.}
+@center{@math{f(x) = a \log_b(x) + k}}
+
+@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
+
+@hspace{2em} (1) Debrief with your students after they complete _each section_ of @printable-exercise{graphing-models.adoc} +
+@hspace{2em} (2) Wait until they have completed the entire page
+}
 
 === Investigate
 @lesson-instruction{

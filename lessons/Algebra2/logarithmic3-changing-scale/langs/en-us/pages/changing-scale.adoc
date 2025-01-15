@@ -9,6 +9,9 @@ body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium 
 /* Shrink vertical spacing on fitbruby */
 .fitbruby{padding-top: 1.1rem;}
 
+/* Add more space between questions */
+.autonum{padding-top: 2.5rem !important; }
+
 </style>
 ++++
 
@@ -38,8 +41,6 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 
 == Fitting a Logarithmic Model @hspace{2em} __f(x) = a log~b~ x + k__
 
-@ifnotsoln{@vspace{1ex}} 
-
 *Open the `Data Table` folder by clicking on the triangle ([.desmosbutton]#{caret}#)*
 
 - @math{x_1} is the per-capita income for each country in thousands of $US, and @math{y_1} is the median lifespan.
@@ -47,10 +48,7 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 - Move the graph by clicking and dragging the background.
 - Notice that a magnifying glass ([.desmosbutton]#{magnifying}#) appears to the bottom left of the table. (You may have to scroll down to see the bottom of the table!) Clicking on the magnifying glass resizes/rescales the graph to fit all the points in the table.
 
-@n Write the numbers you see along the x-axis, from left to right: @fitb{}{@ifsoln{This will vary depending on zoom level}} +
-@hspace{1em}Continue this pattern - what would the next three numbers be? @fitb{}{@ifsoln{This will vary depending on zoom level}}
-
-@n Circle the type of function that describes this pattern: @hspace{6em} @ifsoln-choice{Linear} @hspace{6em} Quadratic @hspace{6em} Exponential
+@n The intervals on the x-axis are increasing: @hspace{6em} @ifsoln-choice{Linearly} @hspace{6em} Quadratically @hspace{6em} Exponentially
 
 @n Move the sliders for @math{a} and @math{c} to create the best-fitting logarithmic model you can find, and write it below.
 
@@ -60,7 +58,7 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
 |
-@math{logarithmic(x) = }
+@math{\text{logarithmic}(x) = }
 @fitbruby{7em}{@ifsoln{9}}{log coefficient (a)}@math{\log_{10}(x) + }
 @fitbruby{7em}{@ifsoln{65}}{vertical shift (k)}
 @hspace{3em}
@@ -88,16 +86,11 @@ The error in the model is described by an @math{S-value} of about
 - Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *Open the "Graph Settings" window.*
 - *Expand the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
 - *Change the x-axis scale* from `Linear` to `Logarithmic`.
-- Adjust the view by zooming and dragging the graph to get all of the points in view on the screen and filling most of it.
-
-@vspace{1ex}
+- Click on the magnifying glass ([.desmosbutton]#{magnifying}#) to get all the points visible on the graph.
 
 @n What is the shape of the point cloud _now,_ after changing the scale?  @hspace{1em} @ifsoln-choice{Linear} @hspace{6em} Quadratic @hspace{6em} Exponential
 
-@n Write the numbers you see along the x-axis, from left to right: @fitb{}{@ifsoln{This will vary depending on zoom level}} +
-@hspace{1em}Continue this pattern - what would the next three numbers be? @fitb{}{@ifsoln{This will vary depending on zoom level}}
-
-@n Circle the type of function that describes this pattern: @hspace{6.5em} Linear @hspace{6em} Quadratic @hspace{6em} @ifsoln-choice{Exponential}
+@n After scaling, the intervals on the x-axis are increasing: @hspace{5.5em} @ifsoln-choice{Linearly} @hspace{5.5em} Quadratically @hspace{5.5em} Exponentially
 
 @n Adjust the sliders for @math{a} and @math{c} to improve the model. _Toggle back and forth between `logarithmic` and `linear` x-axis scales as you work._ + 
 @ifnotsoln{@hspace{1em}When you are satisfied with your model, record both forms of the definition below.}
@@ -105,7 +98,7 @@ The error in the model is described by an @math{S-value} of about
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
 |
-@math{logarithmic2(x) = }
+@math{\text{logarithmic2}(x) = }
 @fitbruby{7em}{@ifsoln{~12 to ~16}}{log coefficient (b)}@math{\log_{10}(x) + }
 @fitbruby{7em}{@ifsoln{~50 to ~60}}{vertical shift (k)}
 @hspace{1em} @ifsoln{MAYBE @hspace{1em}}
@@ -114,5 +107,6 @@ The error in the model is described by an @math{S-value} of about
 
 @n Modify the definition of `logarithmic2(x)` in Pyret to match this model. Use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
-@n Why do you think transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary: The data is growing logarithmically}} +
+@n Why does transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary: The data is growing logarithmically}} +
 @fitb{}{@ifsoln{and by transforming the x-axis exponentially, it can keep up with the growth. We're inverting the data. We're warping the scatter plot so the dots looks straight.}}  +
+@fitb{}{}

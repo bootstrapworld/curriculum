@@ -46,7 +46,7 @@ You will want to:
 |===
 
 
-== Plotting and Transforming Logarithmic Sequences
+== Changing the Scale (Sequences and Curves)
 @objective{logarithms-growth}
 @objective{logarithms-exponents}
 
@@ -54,35 +54,123 @@ You will want to:
 Students plot a logarithmic sequence as points on a number line, and explore how changing the intervals to grow exponentially appears to "linearize" the points.
 
 === Launch
+@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
 
+Consider an exponential sequence, with a growth factor of 2: @math{1, 2, 4, 8, 16}...
+
+@QandA{
+@Q{What are the next 3 numbers in the sequence?}
+@A{32, 64, 128...}
+
+@Q{What is the @vocab{growth factor} of this sequence?}
+@A{The growth factor is 2, since the values double each time}
+
+@Q{Why is the first number 1, when everything else is even?}
+@A{Because the number in the "zero position" is @math{2^0}, which is 1}
+
+@Q{What would this sequence look like, if graphed on the x-axis? The y-axis?}
+@A{Points bunched together near the origin, then rapidly spreading out as we move farther and father away}
+}
+
+@slidebreak
+
+[cols="^.^8,^.^1", frame="none", options="header"]
+|===
+| x-axis						| y-axis
+| @image{images/num-line-h.png} | @image{images/num-line-v.png}
+|===
+
+
+Let's explore the inverse relationship between exponents and logs in Desmos...
 
 === Investigate
 
 
+@teacher{Sync or pace students to *Slide 5: Changing Scale (Number Line)* of @starter-file{alg2-log-desmos}.}
+
+@lesson-instruction{
+- Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on the Slide 5: "Changing Scale".
+- Use it to complete the first section of @printable-exercise{changing-scale-points.adoc}.
+}
+
+@slidebreak
+
+When we changed the scale of the y-axis from `Linear` to `Logarithmic`, our intervals went from growing linearly to growing exponentially. This is like stretching and squishing our number line, so that each interval represents 10x the length of the interval before it.
+
+Our y-values are still growing exponentially! But now that the intervals are _also_ growing exponentially, this growth is cancelled out.
+
+@slidebreak
+
+@lesson-instruction{
+- Complete the second section of @printable-exercise{changing-scale-points.adoc}.
+- Challenge: what happens to the linear function @math{g(x)} if you make the *x-axis* logarithmic? What if you make *both axes* logarithmic?
+- Talk with your partner and/or other students nearby, to come up with an explanation of what is going on.
+}
+
 === Synthesize
+@QandA{
+@Q{Why did changing the y-axis to `Logarithmic` make our exponential curve look linear?}
+@A{We squished/stretched the y-axis, but kept the x-axis linear. Since the y-values of the curve were growing exponentially, making the y-_intervals_ grow exponentially cancelled out that growth relative to the x-values.}
 
+@Q{Why did changing the *y*-axis to `Logarithmic` make our linear curve look logarithmic?}
+@A{The y-values are still growing linearly, but with the y-_intervals_ growing exponentially it appears to go "up" more slowly than it goes "right".}
+}
 
-== Fitting by Changing Scale
+@slidebreak
+
+Hide everything but the linear function @math{g(x)}, and change the x-axis to `Logarithmic` (keep the y-axis `Linear`).
+
+@QandA{
+@Q{What happens?}
+@A{The linear graph looks exponential!}
+
+@Q{What do you think is happening here?}
+@A{The x-values are still growing linearly, but with the x-_intervals_ growing exponentially it appears to go "right" more slowly than it goes "up".}
+}
+
+@slidebreak
+
+Hide everything but the linear function @math{g(x)}, and change _both_ the x- and y-axes to `Logarithmic`.
+
+@QandA{
+@Q{What happens?}
+@A{The line still appears linear!}
+
+@Q{What do you think is happening here?}
+@A{Since the intervals are growing at identical rates, the "squish" and the "stretch" cancel each other out.}
+}
+
+@slidebreak
+
+@QandA{
+@Q{We changed the y-axis to be logarithmic, to make our exponential curve look linear. Is there a _different_ way we could have linearized that curve, by changing the _x_-axis?}
+@A{If we changed the x-axis to grow _exponentially_, it would have cancelled out the growth in the same way! Unfortunately, this is impossible in Desmos. (But not in Pyret!)}
+}
+
+== Changing Scale to Fit a Model
 @objective{model-fit-function}
 @objective{logarithms-exponents}
 
 === Overview
-Students take what they've learned about changing the scale in one dimension, and apply it to their scatter plots of income v. lifespan.
+Students take what they've learned about changing the scale, and apply it to their scatter plots of income v. lifespan.
 
 === Launch
 
-@teacher{Sync or pace students to *Slide 5: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 6: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
 - Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*, and open @starter-file{alg2-countries}.
-- You should now be on the Slide 5: "Wealth-v-Health (Logarithmic)".
+- You should now be on the Slide 6: "Wealth-v-Health (Logarithmic)".
 - Use it to complete the first section of @printable-exercise{changing-scale.adoc}.
 }
 
 @QandA{
 @Q{What values did you come up with for @math{a} and @math{c} in your best-guess logarithmic model?}
 @A{Record different students' responses for @math{a} and @math{c} on the board.}
+
 @Q{How do your @math{a} and @math{c} values compare with those of other students'? Are they very similar or very different?}
+
 @Q{What were the @math{S} values for these models?}
 }
 
@@ -99,8 +187,8 @@ Data Scientists often use transformations to stretch their data into shapes that
 === Investigate
 
 @lesson-instruction{
-- Imagine that the scatter plot is printed on a sheet of rubber, and can be stretched or squashed in any way we want... 
-- With that image in mind, follow the directions on the last section of @printable-exercise{changing-scale.adoc}.
+- Complete the last section of @printable-exercise{changing-scale.adoc}.
+- Be ready to share your logarithmic model, and your answer to the last question!
 }
 
 @teacher{
@@ -112,13 +200,15 @@ Students will be switching the x-axis of their graph from linear to logarithmic 
 @QandA{
 @Q{A person running on a treadmill doesn't change location. Why not?}
 @A{Their forward movement is balanced by the backwards movement of the treadmill.}
+
 @Q{If they run faster and faster, what needs to happen to the treadmill to keep them in the same place?}
 @A{The treadmill needs to go faster as well. As long as the treadmill speed increases at the same rate as the runner, they will balance one another's growth.}
+
 @Q{How is the treadmill example comparable to what we've done with our x-axis transformation?}
 @A{We are speeding up the growth intervals on the x-axis to "keep up with" the speed of growth in the data so that we can see the pattern better.}
 }
 
-When we changed Desmos's view from "Linear" to "Logarithmic", we made the x-axis grow faster and "squish" the dots so they appear linear. By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
+We made the x-axis grow faster and "squish" the dots so the function appears to grow more slowly "to the right" than it grows "up". By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
 
 ++++
 <style>
@@ -156,6 +246,7 @@ Linear regression allows us to find the *computationally optimal model*, not jus
 @QandA{
 @Q{In this project, do we know whether or not our model is the _best?_}
 @A{We _do_ know!}
+
 @Q{How do you know?}
 @A{By linearizing the data and applying linear regression, we were able to find the optimal model for the transformed dataset. When the transformation is reversed, the optimal linear model becomes the optimal logarithmic one.}
 }

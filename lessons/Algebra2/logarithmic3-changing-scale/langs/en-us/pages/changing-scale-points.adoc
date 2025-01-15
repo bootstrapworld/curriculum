@@ -1,0 +1,88 @@
+= Changing the Scale
+
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium { min-width: 30pt !important;}
+
+/* Shrink vertical spacing on fitbs */
+.fitb, .fitbruby{padding-top: 1rem;}
+</style>
+++++
+
+////
+- Import Desmos Styles
+-
+- This includes some inline CSS which loads the Desmos font,
+- which includes special glyphs used for icons on Desmos.com
+-
+- It also defines the classname '.desmosbutton', which is used
+- to style all demos glyphs
+-
+- Finally, it defines AsciiDoc variables for glyphs we use:
+- {points}
+- {caret}
+- {magnifying}
+- {wrench}
+-
+- Here's an example of using these:
+- This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+
+[.linkInstructions]
+Make sure you're on *Slide 5: Changing Scale* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
+
+== On a Number Line
+@n Find @math{a} on the left-hand side. The list @math{a} is an exponential sequence from @math{1} to @math{1,048,576}. What is the @vocab{growth factor} of this sequence? @fitb{}{@ifsoln{2}}
+
+@n The "tick marks" showing intervals on the y-axis are shown as black numbers. List the tick marks on your screen, from smallest-to-largest, +
+@hspace{2em}then _continue the pattern_ for three more numbers. @fitb{}{@ifsoln{0, 5, 10, 15, 20, 25, 30}}
+
+@n The y-axis intervals are (circle one): @hspace{2em} @ifsoln-choice{linear} @hspace{2em} quadratic @hspace{2em} exponential?
+
+@vspace{1ex}
+
+- *Adjust your zoom settings* until you can see all of the red dots from @math{a}, filling the screen from top-to-bottom.
+
+@n What happens to the dots representing smaller values as you zoom out? Why? @fitb{}{@ifsoln{they get squished together,}} +
+@fitb{}{@ifsoln{because the space between each value is exponentially larger}}
+
+@vspace{1ex}
+
+- Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *Open the "Graph Settings" window.*
+- *Expand the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
+- *Change the y-axis scale* from `Linear` to `Logarithmic`, and close the settings window by clicking on the graph.
+- *Adjust your zoom settings* until you can see all of the red dots from @math{a}, filling the screen from top-to-bottom.
+
+@n As you did in question 2, list all of the black "tick marks" visible on your screen, from smallest-to-largest, +
+@hspace{2em} then continue the pattern for three more numbers. @fitb{}{@ifsoln{1, 10, 100, 1000, @math{10^4}, @math{10^6}}}
+
+@n The y-axis intervals have changed! Now they are (circle one): @hspace{2em} linear @hspace{2em} quadratic @hspace{2em} @ifsoln-choice{exponential}
+
+@n What happened to the red dots, showing our exponential sequence? @fitb{}{@ifsoln{They look regularly spaced out}}
+
+@n With linear intervals, our dots were spaced exponentially. But with _exponential_ intervals, the dots are spaced @fitbruby{}{@ifsoln{linearly}}{linear/quadratically/exponentially}
+
+@n Explain what you think is happening here. @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+== On a Coordinate Plane
+- *Change the y-axis back to `Linear`*
+- *Click the circle next to the "Exponential Relationship" folder*, to show the values of @math{a} plotted along the function @math{f(x)=x^2}
+
+@n *Change the y-axis back to `Logarithmic`*. What happens to the black dots, and the graph of the function? @fitb{}{@ifsoln{they turn linear!}}
+
+@n Explain what you think is happening here. @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+- *Turn off the Exponential Relationships folder*, by clicking the circular icon on the left
+- *Turn on the Linear Relationships folder*
+
+@n To linear function @math{f(x)=x} is shown in blue. Try changing the y-axis back and forth between `Linear` and `Logarithmic`. Explain what you think is happening here. @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
