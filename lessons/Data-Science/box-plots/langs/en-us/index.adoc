@@ -15,7 +15,6 @@
 
 @objectives
 @objective{boxplot-create}
-@objective{spread-transfer}
 
 | Student-facing Lesson Goals
 |
@@ -33,17 +32,7 @@
 
 | Preparation
 |
-@preparation{
-- There is an optional kinesthetic activity in this lesson that requires a ball of play-dough for each group of 3.
-- There are Desmos formative assessments at the end of each lesson section.
-  * Open the assessment you plan to administer (@assessment{box-plots-check1-desmos}, @assessment{box-plots-check2-desmos}, etc) and make a code or link to share with students.
-  * If you are using our Google Slides, add the appropriate link to the slide deck.
-  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
-}
 
-| Assessments
-| [.assessment-links]
-@assessments
 
 |===
 
@@ -119,7 +108,7 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 
 
 @teacher{
-The partitioning of the data into four parts can be a challenge! Research by @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} suggests that students do *not* tend to conceive of distribution in four parts, but three. (Their brains naturally view: the majority in the middle; lower values on the left; and higher values on the right!)
+The partitioning of the data into four parts can be a challenge! Research by @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} suggests that students do *not* tend to conceive of distribution in four parts, but three. (Their brains naturally view: the majority in the middle; lower values on the left; and higher values on the right.)
 
 Annotating the list of ordered values can help students visualize the four groups. Emphasize that the median does *not* get included in the bottom or upper half of the data.
 
@@ -140,11 +129,26 @@ Watson:
 @A{Students may notice that the median value for the Watson family data is a number that isn't in the dataset, whereas the median value for the Ledet family data is a number that's in the dataset.}
 @A{Students may have questions about how to calculate the median and/or quartiles.}
 }
- 
+
+Now that we know how to compute a five-number summary, let's practice!
 
 @lesson-instruction{
-- Practice computing five-number summaries from small datasets visualized as dot plots on @printable-exercise{match-dot-plots-summaries.adoc}.
+- Practice computing five-number summaries from small datasets (either 7 or 8 values) visualized as dot plots on @printable-exercise{match-dot-plots-summaries.adoc}.
+- Be prepared to describe your strategy for matching dot plots with five-number summaries.
+}
 
+@QandA{
+@Q{What strategies did you use to match dot plots to five-number summaries?}
+@A{Responses will vary. Students will likely identify the median first to narrow in on a smaller pool of possible five-number summaries, and then compute the quartiles.}
+
+@Q{Dot plots 7 and 8 included 8 points, rather than 7. Did you need to change your strategy to complete these problems? If so, how?}
+A{The median was no longer the 4th datapoint in sequence. Instead, the median was the average of the 4th and 5th datapoints.}
+
+@Q{Which five-number summary on @printable-exercise{match-dot-plots-summaries.adoc} has the greatest IQR?}
+@A{Option C, which corresponds with dot plot 1.}
+
+@Q{Which five-number summary on @printable-exercise{match-dot-plots-summaries.adoc} has the smallest IQR?}
+@A{Option E, which corresponds with dot plot 6.}
 }
 
 === Synthesize
@@ -154,18 +158,14 @@ Watson:
 @Q{What is a quartile?}
 @A{One of the three boundary points that splits our dataset into four equal quarters.}
 
+@Q{A quartile is _sometimes_ / _always_ / _never_ one of the values in the dataset.}
+@A{Sometimes.}
+
 @Q{Why is the IQR a more robust measure of variability than the range?}
 @A{Because it focuses on the middle half of the data, so is less susceptible to outliers.}
 }
 
 
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check1-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, the last section of the lesson.
-
-}
 
 
 == Plotting our Five-Number Summary
@@ -213,7 +213,7 @@ To visualize the 5-number summary, the Range, and the Interquartile Range we can
 
 @lesson-instruction{
 - Let's practice making box plots with the data from the family gatherings.
-- Complete the second section of @printable-exercise{distribution-by-hand.adoc}.
+- Complete the second and third sections of @printable-exercise{distribution-by-hand.adoc}.
 }
 
 @teacher{
@@ -237,8 +237,8 @@ Watson: @image{images/watson.png, 500}
 === Synthesize
 
 @QandA{
-@Q{Box plots have four sections. What has to be true about all of those sections?}
-@A{They each have to contain exactly one quarter of the data, no matter how different the sections look on the number line.}
+@Q{Box plots have four sections. What must be true about all of those sections?}
+@A{They each contain exactly one quarter of the data, no matter how different the sections look on the number line.}
 
 @Q{Why isn't the median always in the middle of the box?}
 @A{Because the median has to split the data itself in half and the quarter of the data to the left of the median isn't necessarily clustered as tightly as the quarter of the data to the right of the median.}
@@ -248,19 +248,11 @@ Watson: @image{images/watson.png, 500}
 }
 
 
-
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check2-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, the last section of the lesson.
-
-}
-
-
 == Making Box Plots in @proglang
 
 === Overview
+
+Students create box plots and five-number summaries from the animals dataset in @proglang.
 
 === Launch
 
@@ -284,7 +276,7 @@ To create a box plot in CODAP, create a graph of randomly distributed points, th
 
 @ifproglang{pyret}{
 @teacher{
-Students will type `box-plot(animals-table, "pounds")` into the Interactions Area and use the resulting box plot to fill in the five-number summary for the `pounds` column, and sketch the box plot.
+Students will type `box-plot(animals-table, "pounds")` into the Interactions Area. They will use the resulting box plot to fill in the five-number summary for the `pounds` column, and then sketch the box plot.
 }
 }
 
