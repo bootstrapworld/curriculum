@@ -120,5 +120,4 @@ exports.ignored_words = [
   "tightAndCentered",
   "rgba",
   "noPadding"
-
 ];
