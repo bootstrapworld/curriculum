@@ -104,7 +104,7 @@ exports.ignored_words = [
   "mathjax",
   "exp8",
   "exp7",
-  "exp6"
+  "exp6",
   "exp5",
   "exp4",
   "exp3",
