@@ -28,6 +28,12 @@ exports.added_words = [
   "Flannery", 
   "Tabak", 
   "Pfenning",
+  "Kaplan",
+  "Konold",
+  "Biehler",
+  "Sammi",
+  "Shanti",
+
   // Animals
   "Heathcliff", 
   "Miaulis", 
@@ -129,5 +135,6 @@ exports.added_words = [
   "unclosed",
   "autonum",
   "Piecewise",
-  "middle"
+  "middle",
+  "interquartile"
 ];
