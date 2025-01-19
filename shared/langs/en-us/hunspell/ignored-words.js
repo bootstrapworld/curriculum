@@ -43,6 +43,7 @@ exports.ignored_words = [
   "js",
   "lang",
   "listingblock",
+  "li",
   "lua",
   "mathunicode",
   "mbox",
@@ -61,6 +62,9 @@ exports.ignored_words = [
   "slidestyle",
   "smath",
   "soln",
+  "sqr",
+  "sqrt"
+  "abs",
   "td",
   "url",
   "usp",
