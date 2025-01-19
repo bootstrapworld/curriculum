@@ -5,20 +5,45 @@
 /* Shrink Images */
 #content img {width: 75%; height: 75%;}
 
-/* Make autonums inside tables look consistent with those outside */
+/* Make autonums inside tables look consistent with those outside,
+ * and position them in the top-left of every table cell
+ */
+td .autonum {
+	padding-top: 0;
+    position: 	absolute;
+    top: 		10px;
+    left: 		5px;
+}
 body.workbookpage td .autonum:after { content: ')'; }
 
-table table td { height: 4ex; }
-.fitbruby{ padding-top: 1.5em !important; }
+/* Make paragraphs and fitbrubies take up less vertical space,
+ * and position rubies some reasonable distance from the left
+ */
+p { line-height: 1 !important; }
+.fitbruby { padding-top: 0.5rem !important; }
+.fitbruby .ruby { left: 7em; }
+
+/* Any math- or code-containing element should take up the whole line,
+ * with text centered on that line
+ */
+.obeyspaces, mjx-container, .mathunicode {
+	display: 	inline-block;
+	width: 		100%;
+	text-align: center;
+}
+
+/* mathunicodes inside lists should have a normal width, and some right-padding*/
+li .mathunicode { width: unset; margin-right: 5px; }
 </style>
 ++++
 
-Decide whether each representation describes a *linear* function, a *quadratic* function, or neither. If the function is quadratic, identify whether the *form* used is Vertex, Standard, or Factored.
+Circle whether each representation below describes a *linear* or *quadratic* function, or neither. If the function is quadratic fill in all the information that you can _easily read from the form_, without any calculation!
 
-[.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
+[.FillVerticalSpace, cols="<.^15a,<.^15a", frame="none", stripes="none"]
 |===
-| @math{f(x) = 3x^2 + 22}
 
+|
+@math{f(x) = 3x^2 + 22}
 [cols="1a,^6a,^6a, ^6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -27,84 +52,18 @@ Decide whether each representation describes a *linear* function, a *quadratic* 
 ! Neither
 !===
 
-@fitbruby{80%}{@ifsoln{Standard}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The parabola opens down}}{_If Quadratic,_ what does the form tell you?}
+_If it's Quadratic_...
 
-| @math{g(x) = 2(x − 11)(x − 243)}
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{Standard}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{up}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{}{[x-coord]}
+- The axis of symmetry is at 			@fitbruby{}{@ifsoln{not easy to tell}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{not easy to tell}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{}{[write both coords]}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
 
-// need empty line here so the closing table block isn't swallowed
-!===
-
-@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The roots are 11 and 243}}{_If Quadratic,_ what does the form tell you?}
-
-| @math{h(y) = 100 - 4y}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
-
-// need empty line here so the closing table block isn't swallowed
-!===
-
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
-
-| @math{z(x) = \frac{3}{5}x + 7}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
-
-!===
-
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
-
-| @show{(code `(define (graph x) (* 12 x)))}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
-
-// need empty line here so the closing table block isn't swallowed
-!===
-
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
-
-| @show{(code `(define (m p) (* 2 (* (- p 5) (- p 16)))))}
-
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-
-!===
-
-@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The roots are 5 and 16}}{_If Quadratic,_ what does the form tell you?}
-
-| @math{r(s) = 42(s - 10)^2 - 3}
-
+|
+@math{g(x) = 2(x − 11)(x − 243)}
 [cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -113,8 +72,109 @@ Decide whether each representation describes a *linear* function, a *quadratic* 
 ! Neither
 !===
 
-@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The vertex is at (10, -3)}}{_If Quadratic,_ what does the form tell you?}
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{Factored}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{up}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@ifsoln{not easy to tell}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{not easy to tell}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{(11, 0) and (243, 0)}}{[write both coords]}
+
+
+|
+@math{h(y) = 100 - 4y}
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Linear}
+! Quadratic
+! Neither
+!===
+
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{n/a}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{n/a}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@ifsoln{n/a}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{n/a}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{n/a}}{[write both coords]}
+
+
+|
+@math{z(x) = \frac{3}{5}x + 7}
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Linear}
+! Quadratic
+! Neither
+!===
+
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{n/a}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{n/a}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@math{x = }@ifsoln{n/a}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{n/a}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{n/a}}{[write both coords]}
+
+
+|
+@show{(code `(define (graph x) (* 12 x)))}
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! @ifsoln-choice{Linear}
+! Quadratic
+! Neither
+!===
+
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{n/a}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{n/a}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@math{x = }@ifsoln{n/a}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{n/a}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{n/a}}{[write both coords]}
+
+
+|
+@show{(code `(define (m p) (* 2 (* (- p 5) (- p 16)))))}
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! @ifsoln-choice{Quadratic}
+! Neither
+
+!===
+
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{Factored}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{up}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@math{x = }@ifsoln{not easy to tell}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{not easy to tell}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{(5,0) and (16, 0)}}{[write both coords]}
+
+
+|
+@math{r(s) = 42(s - 10)^2 - 3}
+[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
+!===
+! *@n*
+! Linear
+! @ifsoln-choice{Quadratic}
+! Neither
+!===
+
+_If it's Quadratic_...
+
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{Vertex}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{up}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@math{x = }@ifsoln{10}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{(10, -3)}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{(5,0) and (16, 0)}}{[write both (x, y) coordinates]}
 
 | @show{(code `(define (f x) (+ (* 2 (sqr (- x 1))) 15)))}
 
@@ -126,7 +186,9 @@ Decide whether each representation describes a *linear* function, a *quadratic* 
 ! Neither
 !===
 
-@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The vertex is at (-1, 15)}}{_If Quadratic,_ what does the form tell you?}
-
+- Is it Vertex, Standard, or Factored? 	@fitbruby{}{@ifsoln{Vertex}}{}
+- The parabola opens 					@fitbruby{}{@ifsoln{up}}{[up/down]}
+- The axis of symmetry is at 			@fitbruby{}{@math{x = }@ifsoln{-1}}{[x-coord]}
+- The vertex is at 						@fitbruby{}{@ifsoln{(-1, 15)}}{[(x, y) coordinate]}
+- The roots are at 						@fitbruby{}{@ifsoln{(5,0) and (16, 0)}}{[write both (x, y) coordinates]}
 |===

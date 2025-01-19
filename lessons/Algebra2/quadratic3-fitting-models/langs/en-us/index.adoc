@@ -53,12 +53,12 @@
 @objective{model-fit-function}
 
 === Overview
-Students work with the vertex form to fit a quadratic model for Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the @math{f(x) = a(x − h)^2 + k} form of quadratic models using a custom Desmos slider activity.
+Students work with the vertex form to fit a quadratic model for Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the vertex form ( @math{f(x) = a(x − h)^2 + k}) of quadratic models using a custom Desmos slider activity.
 
 === Launch
 
 @ifnotslide{
-We've been talking about coefficients and vocabulary for quadratic functions that look a lot like the ones you might see in a textbook: clean and predictable. But, real-world data is messy!
+We've been talking about coefficients and vocabulary for quadratic functions that look a lot like the ones you might see in a textbook: clean and predictable. But real-world data is _messy!_
 
 Let's return to our dataset to dig into that messiness.
 }
@@ -83,15 +83,14 @@ Let's return to our dataset to dig into that messiness.
 *Let's try to build the best possible quadratic model we can for our Aaron Judge Batting Data*, using what we know about how @math{a}, @math{h}, and @math{k} influence the shape of a parabola.
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}.
-using the scatter plot you just made in Pyret and what we know about the coefficiencts in the Vertex form of a Quadratic Model.
-- Then complete the second section, which explores a new Pyret function: `num-sqr`.
+- Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}, using the scatter plot you just made in Pyret and what we know about the coefficients in the Vertex form of a Quadratic Model.
+- Then complete the second section, which explores a new Pyret function: @show{(code 'sqr)}.
 }
 
 @QandA{
-@Q{What does `num-sqr` do and why will we need it in order to build quadratic models in Pyret?}
+@Q{What does @show{(code 'sqr)} do and why will we need it in order to build quadratic models in Pyret?}
 @A{It squares the input.}
-@A{The highest power in all quadratic functions is 2.}
+@A{All quadratic functions square some expression using the input.}
 @Q{From looking at our scatter plot, what do we know about the coefficients in the vertex form of our quadratic model?}
 @A{@math{a} should be negative because the curve opens down.}
 @A{@math{h} should be around 30, because it seems to be the optimum bat angle.}
@@ -118,7 +117,6 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 @opt-printable-exercise{model-4seam.adoc, 4-seam},
 @opt-printable-exercise{model-judge.adoc, full}).}
 }
-}
 
 @QandA{
 @Q{According to the @vocab{S-values}, does your quadratic model do a better job of predicting hit distances from bat angle?}
@@ -130,6 +128,8 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 @A{The four-seam fastball dataset looks almost identical to the full dataset. That is an indicator that the majority of the dataset is likely composed of four-seam fastballs.}
 @A{`count(judge-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
 }
+
+Quadratic models written in Vertex Form make it incredibly easy to find the vertex @math{(h, k)}, the axis of symmetry @math{h}, and whether the parabola opens up or down (@math{a}). But finding the @vocab{roots} or @vocab{y-intercept} is a lot harder! There are other forms of quadratic models, however, that make those much easier to find. You may learn about them later, in @lesson-link{quadratic4-other-forms}.
 
 === Synthesize
 
