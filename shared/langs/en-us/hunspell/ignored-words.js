@@ -63,7 +63,7 @@ exports.ignored_words = [
   "smath",
   "soln",
   "sqr",
-  "sqrt"
+  "sqrt",
   "abs",
   "td",
   "url",
