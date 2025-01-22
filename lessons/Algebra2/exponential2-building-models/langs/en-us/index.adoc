@@ -111,11 +111,11 @@ Students learn about characteristics of exponential functions in both graphical 
 Exponential Functions can be written in the form: @hspace{1em} @big{@math{f(x) = ab^{(x-h)} + k}}
 
 @teacher{
-Advance your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("How does horizontal shift transform exponential functions?").
+Advance your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("How does h transform exponential functions?").
 }
 
 @lesson-instruction{
-- You should now be on the second slide ("How does @math{h} transform exponential functions?") in the Desmos activity.
+- You should now be on the second slide: *How does @math{h} transform exponential functions?* in the Desmos activity.
 - With your partner, take a minute to experiment with changing the slider for @math{h}. What does this do to the graph of the function?
 }
 
@@ -134,7 +134,7 @@ This is the form we'll be using, but don't forget that sneaky @math{h}! Someday 
 
 === Investigate
 
-Let's explore what each coefficient of @hspace{1em} @big{@math{f(x) = ab^{(x-h)} + k}} @hspace{1em} does!
+Let's explore what each coefficient of @hspace{1em} @big{@math{f(x) = ab^x + k}} @hspace{1em} does!
 
 @teacher{
 Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the third slide ("Exploring Exponential Functions") so that students are looking at the correct screen.
@@ -144,7 +144,7 @@ Decide whether you want to debrief this activity with your class after each sect
 
 @lesson-instruction{
 - Let's return to the *Modeling Covid Spread Desmos file*.
-- You should now be on the third slide ("Exploring Exponential Functions").
+- You should now be on the third slide: *Exploring Exponential Functions*.
 - Use it to complete @printable-exercise{graphing-models.adoc}.
 }
 
@@ -254,7 +254,7 @@ But, since any value raised to the power of zero is 1, when @math{x = 0} in expo
 @objective{exponential-situations}
 
 === Overview
-Having explored the behavior of exponential functions as @printable-exercise{classifying-tables.adoc, sequences of numbers} and @printable-exercise{classifying-plots.adoc, lines on a graph}, students move on to sense-making. They explore the behavior of @math{b} as the expression @math{1 - r}, learning how to think about exponential growth and decay. Finally, they apply this knowledge to identifying exponential growth and decay in function definitions and word problems.
+Having explored the behavior of exponential functions as @printable-exercise{classifying-tables.adoc, sequences of numbers} and @printable-exercise{classifying-plots.adoc, point clusters on a graph}, students move on to sense-making. They explore the relationship between growth/decay rates and growth/decay factors. Finally, they apply this knowledge to identifying exponential growth and decay in function definitions and word problems.
 
 === Launch
 
@@ -268,45 +268,57 @@ Suppose you deposit $100 in a savings account, earning 3% interest each year.
 @A{3% of $106.90 gives us $3.18, which we add to the previous total of $106.09 to get $109.27.}
 }
 
-Every year there's a little more money to grow, and the total grows faster than the year before. And once you hit the sharp part of the exponential curve in a few years, that $100 will turn into a _lot_ of money down the road!
+==== Exponential Growth
+
+If we earn 3% interest every year, there's a little more money to grow every year, and the total grows faster than the year before. Once you hit the sharp part of the exponential curve, that $100 will turn into a _lot_ of money down the road!
 
 @slidebreak
 
-What exponential function will model this savings account?
+*Let's write a function to model this growth so that we can calculate the value for and year without calculating the value for every year in between!*
+
+Since the growth rate is _positive_, the function can be said to exhibit @vocab{exponential growth}.
 
 - We know the initial value @math{a} is $100
 - We know that the horizontal asymptote @math{k} isn't adding or subtracting anything, since at "year zero" there was exactly $100 in the account.
-- We know that the base @math{b} must be greater than one, since the account is growing. But what is the actual value of @math{b}?
+- We know that the base @math{b} must be greater than one, since the account is growing. But what is the actual @vocab{growth factor}?
 
 @slidebreak
-
-One way to do these calculations is to first multiply the balance each year by 0.03 (3%) and then add the profit to the balance:
-
-@indented{@math{($100 \times 0.03) + $100}}
-
-But we can simplify this expression by factoring out the $100, reducing it to a single multiplication:
 
 @indented{
-@hspace{1em}@math{$100 \times (0.03 + 1)} +
-@math{= $100 \times 1.03}
+Let's take another look at our first calculations: @hspace{1em}@math{$100 + ($100 \times 0.03)}
+
+If we factor out the $100 we get: @hspace{1em}@math{$100 \times (1 + 0.03)} @hspace{1em} or @hspace{1em}@math{$100 \times (1.03)}
+
+a growth rate of 3% translates to a growth factor of 1.03
 }
 
+- So our function is @hspace{1em} @big{@math{f(x) = 100 \times 1.03^{\text{years}}}}
+
+@lesson-point{
+To find the @vocab{growth factor} (@math{b}) from the @vocab{growth rate}: @hspace{1em} @big{@math{b = 1 + r}}
+}
+
+@vspace{1ex}
+
+==== Exponential Decay
+
+A $50,000 car loses 20% of its value each year.
+
+*Let's write a function to model this decay.*
+
 @slidebreak
 
-When your savings account has a 3% interest rate, it means your money is _growing by 3%_ - a @vocab{growth factor} @math{b} of 1.03: @math{f(x) = 100 \times 1.03^{\text{years}}}
+Since the growth rate is _negative_, the function can be said to exhibit @vocab{exponential decay}.
 
-Converting between *growth rate* and growth factor is easy:
+- Growth rate: @hspace{1em}@big{@math{-20%}} @hspace{1em} or @hspace{1em}@big{@math{-0.2}}
 
-@center{@big{@math{b = 1 + r}}}
+- Growth factor (also sometimes called the decay factor): @hspace{1em}@big{@math{1 +  -.20 = .80}}
 
-If a $50,000 car loses 20% of its value each year, the growth rate is @math{-20%}. Modeling this with an exponential function would mean a growth rate @math{b} of @math{1 - .20 = .80}, for a function @math{\text{value}(\text{years}) = $50,000 * (1 + -.20)^{\text{years}} = $50,000(.80)^{\text{years}}}.
+@big{@math{\text{value}(\text{years}) = $50,000(.80)^{\text{years}}}}
 
 @slidebreak
 
-- If the growth rate is _positive_, the function can be said to exhibit @vocab{exponential growth}.
-- If the growth rate is _negative_, the function can be said to exhibit @vocab{exponential decay}.
--
-@slidebreak
+@vspace{1ex}
 
 *@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*
 

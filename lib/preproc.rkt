@@ -2071,6 +2071,7 @@
                                   [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
                                   [in-text (and c (hash-ref c 'in-text #f))]
+                                  [link (string-append "link:" (hash-ref c 'public-url) "[" in-text "]")]
                                   [apa (and c (hash-ref c 'apa #f))])
                              (cond [(> (length args) 1)
                                     (set! in-text
@@ -2089,7 +2090,7 @@
                                             (errmessage-context) directive lbl)]
                                    [else (display
                                            (enclose-span ".citation"
-                                            (string-append in-text (enclose-span ".apa-citation" apa)))
+                                            (string-append link (enclose-span ".apa-citation" apa)))
                                            o)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
