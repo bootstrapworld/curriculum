@@ -9,14 +9,14 @@
 /* Allow fitb's to get shorter than usual */
 .fitb{ min-width: 3em !important; }
 
-/* Some dirty hacking of pyret code, to force example blocks onto one line:
- * Treat multiple whitespaces as a single whitespace
- * Hide line breaks completely
- * add some padding to the left of the `end` keyword
+/* Some dirty hacking of code display, to force example blocks onto one line:
+ * - Treat multiple whitespaces as a single whitespace
+ * - Hide line breaks completely
+ * - In Pyret, add some padding to the left of the `end` keyword
  */
-body.pyret .editbox { white-space: normal; }
-body.pyret .editbox br { display: none; }
-.cm-keyword:last-child { margin-left: 1ex; }
+.editbox { white-space: normal; }
+.editbox br { display: none; }
+body.pyret .cm-keyword:last-child { margin-left: 1ex; }
 </style>
 ++++
 
@@ -45,13 +45,11 @@ body.pyret .editbox br { display: none; }
 
 @hspace{2em} Test # @fitb{3em}{@ifsoln{5}} failed because the left side was @fitb{3em}{@ifsoln{243}} and the right side was @fitb{3em}{@ifsoln{15}}.
 
-@n Edit each of the *failing* examples so that _all examples pass_. Be sure to change *only* the @ifproglang{wescheme}{second part of the example} @ifproglang{pyret}{part of the example after the `is`}! Describe one of the changes you had to make. @fitb{}{}
+@n Changing *only* the @ifproglang{wescheme}{second part of the example} @ifproglang{pyret}{part of the example after the `is`}, fix the *failing* examples so that _all of them pass_.  Describe one of the changes. @fitb{}{}
 
 @fitb{}{}
 
 @fitb{}{}
-
-@vspace{1ex}
 
 == Does it equal 16?
 
