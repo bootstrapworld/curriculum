@@ -113,6 +113,9 @@ for _,lesson in ipairs(lessons) do
     i = io.open(description_file)
     description_txt = i:read():gsub('"', '\\"')
     i:close()
+    if description_txt == '' then
+      print('WARNING: Missing description for lesson ' .. lesson)
+    end
   end
   --
   if file_exists_p(sections_file) then
