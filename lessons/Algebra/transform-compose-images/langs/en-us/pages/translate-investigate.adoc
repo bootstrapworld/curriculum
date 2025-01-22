@@ -7,7 +7,7 @@ For this section of the page, you will refer to the @starter-file{flags}.
 
 @n Each language has its own symbol for commenting code so that programmers can leave notes that won't be read by the computer. @ifproglang{wescheme}{In WeScheme, we use the semicolon (`;`).}
 @ifproglang{pyret}{In Pyret, we use the hash mark (`#`).}
-What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purple}@ifproglang{pyret}{Red/orange}}}
+What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purple}@ifproglang{pyret}{Orange-Brown}}}
 
 @n Type `japan-flag` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{We see Japan's flag - a white background with}}
 
@@ -21,10 +21,10 @@ What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purp
 
 @n `japan` is composed using `dot` and `background`. Type each of those variables into the Interactions Area. What do you get back?
 
-- dot: @fitb{}{@ifsoln{We see a 100-pixel solid red circle}}
-- background: @fitb{}{@ifsoln{We see a black-outlined rectangle that is 300 pixels by 200 pixels}}
+- `dot`: @fitb{}{@ifsoln{We see a 100-pixel solid red circle}}
+- `background`: @fitb{}{@ifsoln{We see a black-outlined rectangle that is 300 pixels by 200 pixels}}
 
-@n These images are combined using the `translate` function. What is its contract? @fitb{}{@showsoln{(contract 'translate '((top-image Image) (x-coordinate Number) (y-coordinate Number)(background Image)) "Image")}
+@n These images are combined using the `translate` function. What is its contract? @fitb{}{@showsoln{(contract 'translate '(Image Number Number Image) "Image")}
 
 @n Fix the `japan` code so that it matches the `japan-flag` image. What did you need to change? @fitb{}{}
 
@@ -33,8 +33,6 @@ What color are comments in @proglang? @fitb{}{@ifsoln{@ifproglang{wescheme}{Purp
 @n How can you prove that you have placed the `dot` in exactly the right location? @fitb{}{}
 
 @fitb{}{@ifsoln{The x-coordinate is 150 (half of 300) and the y-coordinate is 100 (half of 200)}}
-
-@n What is the Contract for `translate`? @fitb{}{}
 
 == The Netherlands
 

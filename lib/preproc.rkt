@@ -1226,7 +1226,7 @@
 (define (link-to-project-lessons-short-form header project-lessons o)
   ; (printf "doing link-to-project-lessons-short-form\n")
   (when (pair? project-lessons)
-    (fprintf o "\n\n*Projects Available for this ~a:*" header)
+    (fprintf o "\n\n== Projects Available for this ~a\n\n" header)
     (let ([firstp #t])
       (for ([project-lesson project-lessons])
         (let* ([link-title-file (format
@@ -1237,15 +1237,15 @@
                               project-lesson)])
           (set! link-text (regexp-replace "Project: " link-text ""))
           (if firstp (set! firstp #f)
-              (display "," o))
-          (fprintf o " link:~apass:[lessons/~a/index.shtml][~a]"
+              (display ", " o))
+          (fprintf o "link:~apass:[lessons/~a/index.shtml][~a]"
                    "{fromlangroot}"
                    project-lesson link-text))))
     (display "\n\n" o)))
 
 (define (link-to-project-lessons-long-form header project-lessons o)
   (when (pair? project-lessons)
-    (fprintf o "\n\n*Projects Available for this ~a*:\n" header)
+    (newline o)
     (for ([project-lesson project-lessons])
       (let* ([link-title-file (format
                                 "distribution/~a/lessons/~a/.cached/.index.titletxt"
@@ -2071,6 +2071,7 @@
                                   [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
                                   [in-text (and c (hash-ref c 'in-text #f))]
+                                  [link (string-append "link:" (hash-ref c 'public-url) "[" in-text "]")]
                                   [apa (and c (hash-ref c 'apa #f))])
                              (cond [(> (length args) 1)
                                     (set! in-text
@@ -2089,7 +2090,7 @@
                                             (errmessage-context) directive lbl)]
                                    [else (display
                                            (enclose-span ".citation"
-                                            (string-append in-text (enclose-span ".apa-citation" apa)))
+                                            (string-append link (enclose-span ".apa-citation" apa)))
                                            o)]))]
                           [(string=? directive "objectives")
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
