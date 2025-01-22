@@ -11,46 +11,53 @@ body { height: 9.7in !important;}
 Open your copy of the @starter-file{table-functions} and click "Run".
 
 == Filtering Rows
-@n What does @show{(code '(filter shapes-table is-red))} evaluate to? Describe the value you get back below.
+@n Evaluate @show{(code '(filter shapes-table is-red))} in the Interactions Area. Describe the value you get back below.
 
 @fitb{}{@ifsoln{A table with only the red shapes}}
 
-@n What does @show{(code '(filter shapes-table is-polygon))} evaluate to? Describe the value you get back below.
+@n Evaluate @show{(code '(filter shapes-table is-polygon))} in the Interactions Area. Describe the value you get back below.
 
 @fitb{}{@ifsoln{A table without rows for circle or ellipse}}
 
 @n Write the code to generate a table of only triangles. @fitb{}{@showsoln{(code '(filter shapes-table is-triangle))}}
 
-@n At the _bottom_ of the Definitions Area, define `triangles` by writing @show{(code '(define triangles (filter shapes-table is-triangle)))}. Click "Run" and evaluate `triangles` in the Interactions Area.
+@vspace{1ex}
 
-@n Define `reds` to be a table of only red shapes. @fitb{}{@showsoln{(code '(define reds (filter shapes-table is-red)))}}
+@indented{
+Add your code to the _bottom_ of the Definitions Area. +
+Click "Run" and evaluate `triangles` in the Interactions Area to confirm that it does what it's supposed to do before you continue.
+}
 
-@n What do the contracts for `is-red`, `is-polygon`, and `is-triangle` have in common?
+@n Record the code to define `reds` to be a table of only red shapes. @fitb{}{@showsoln{(code '(define reds (filter shapes-table is-red)))}}
+
+@n What do the contracts for `is-red`, `is-polygon`, and `is-triangle` have in common? @fitb{}{}
 
 @fitb{}{@ifsoln{They all produce Booleans}}
 
-@n *Find the Contract for `filter` on the @dist-link{Contracts.shtml, Contracts Page}.* @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._} Explain how `filter` uses the two inputs specified in the Domain.
+@n *Find the Contract for `filter` on the @dist-link{Contracts.shtml, Contracts Page}.* Explain how `filter` uses the two inputs specified in the Domain. +
+@pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
 
 @fitb{}{@ifsoln{`filter` needs a Table, and the name of a function. It makes a new copy ofthe table, leaving out rows for which the helper function produces false}}
 
 @fitb{}{}
 
-@n What happens if you evaluate @show{(code '(filter shapes-table lookup-name))}? Why?
+@n What happens if you evaluate @show{(code '(filter shapes-table lookup-name))}? Why? @fitb{}{}
 
-@fitb{}{@ifsoln{Error, because filter needs a function that produces a Boolean}}
+@fitb{}{@ifsoln{Error, because filter needs a function that produces a Boolean.}}
 
 == Building Columns
-@n What does @show{(code '(build-column shapes-table "red" is-red))} evaluate to?
+@n What does @show{(code '(build-column shapes-table "red" is-red))} evaluate to? @fitb{}{}
 
 @fitb{}{@ifsoln{A table with a new column called "red", filled with values from `is-red`}}
 
-@n What does @show{(code '(build-column shapes-table "img" draw-shape))} evaluate to?
+@n What does @show{(code '(build-column shapes-table "img" draw-shape))} evaluate to? @fitb{}{}
 
 @fitb{}{@ifsoln{A table with a new column called "img", filled with values from `draw-shape`}}
 
-@n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}. @pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}Explain how `build-column` uses the three inputs specified in the Domain.
+@n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}. Explain how `build-column` uses the three inputs in the Domain. +
+@pathway-only{_If you're working with a printed workbook, the contracts pages are included in the back._}
 
-@fitb{}{@ifsoln{`build-column` needs a Table, the name of a column to add, and the name of a helper function}}
+@fitb{}{@ifsoln{`build-column` needs a Table, the name of a column to add, and the name of a helper function.}}
 
 @fitb{}{@ifsoln{It makes a new copy of the table, adding the column, and filling it by applying the helper function to each row}}
 

@@ -1,0 +1,74 @@
+= Writing Examples from Purpose Statements (2)
+
+We've provided contracts and purpose statements to describe two different functions. Write examples for each of those functions.
+
+++++
+<style>
+#content .recipe_word_problem { display: none; }
+#content .recipe_title:nth-of-type(3n+1) { padding-top: 5px; }
+#content .recipe_title:nth-of-type(3n),
+#content .recipe_title:nth-of-type(3n) + *,
+#content .recipe_title:nth-of-type(3n) + * + *,
+#content .recipe_title:nth-of-type(3n) + * + * + *,
+#content .recipe_title:nth-of-type(3n) + * + * + * + .keyword_only{
+  display: none
+}
+
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+@vspace{2ex}
+
+@design-recipe-exercise{ "age-dot"
+"age-dot"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #t
+#:range "Image"
+#:show-range? #t
+#:purpose "Consumes a Row draws a solid green circle using age for the radius."
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  (dog-row "circle(dog-row[\"age\"], \"solid\", \"green\")")
+  (cat-row "circle(cat-row[\"age\"], \"solid\", \"green\")"))
+#:show-examples #f
+#:param-list '(r)
+#:show-funname-defn? #f
+#:show-params? #f
+#:body "circle(r[\"age\"], \"solid\", \"green\")"
+#:show-body? #f
+#:grid-lines? #f
+}
+
+@vspace{6ex}
+@span{.sectionbreak}{}
+@vspace{2ex}
+
+@design-recipe-exercise{ "kilos"
+"kilos"
+#:assess-design-recipe #f
+#:headless? #t
+#:show-funname-contract? #t
+#:domain-list '(Row)
+#:show-domains? #t
+#:range "Boolean"
+#:show-range? #t
+#:purpose "Consumes a Row, and divides pounds by 2.2 to produce the weight in kg"
+#:show-purpose? #t
+#:num-examples 2
+#:example-list '(
+  (lizard-row "lizard-row[\"pounds\"] / 2.2")
+  (dog-row       "dog-row[\"pounds\"] / 2.2"))
+#:show-examples #f
+#:param-list '("r")
+#:show-funname-defn? #f
+#:show-params? #f
+#:body "r[\"pounds\"]    / 2.2"
+#:show-body? #f
+#:grid-lines? #f
+}

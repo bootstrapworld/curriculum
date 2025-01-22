@@ -1,10 +1,12 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries citations
 
 ###############################################################################
 
 initialization:
+	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
+	@touch pathways/__sample/langs/en-us/lesson-order.txt
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
@@ -47,6 +49,7 @@ initialization:
 # but I don't think it buys us much
 
 node_modules:
+	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
@@ -161,6 +164,15 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 learningObjectives: distribution/$(NATLANG)/learningObjectives.js
 
 distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+	@echo ➤ Build $@
+	@node $+ $@
+
+
+###############################################################################
+
+citations: distribution/$(NATLANG)/citations.js
+
+distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
 	@node $+ $@
 

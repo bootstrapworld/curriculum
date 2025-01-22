@@ -52,8 +52,8 @@ body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  #2156a5 !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: x-small; top: -0.65em; left: 1px; }
-  sub     { font-size: x-small; bottom: -0.35em; }
+  sup     { font-size: smaller; top: -0.65em; left: 1px; }
+  sub     { font-size: smaller; bottom: -0.35em; }
   code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
@@ -64,6 +64,25 @@ body {
   .ulist ul { margin-bottom: 0px; }
   .ulist p  { margin: 5px 0px; }
   .quad { display: inline-block; }
+  .citation {
+    position: relative;
+    .apa-citation { display: none; }
+    &:hover { 
+      .apa-citation { 
+        display: inline-block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background: lightyellow;
+        font-size: 6pt;
+        line-height: initial;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+    }
+
+  }
   
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode {
@@ -297,9 +316,10 @@ lines on some browsers */
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;
   display:            inline-block;
-  bottom:             -11px;
+  bottom:             -11.85px;
   left:               0;
   font-size:          9.5px;
+  line-height:        14px;
   font-weight:        normal;
   width:              100%;
   text-align:         center;
@@ -311,7 +331,7 @@ lines on some browsers */
 /* Rubies are sensitive to line-height, so force
   the same font and special superscript behavior 
 */
-.ruby * { font-family: @text-font !important; }
+.ruby * { font-family: @text-font !important; background: none !important; }
 .ruby  sup { top: -0.3em; font-size: 7px; }
 
 .fitb.stretch, .fitbruby.stretch { 
@@ -657,7 +677,11 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
-  /* Pages with 1 or more non-acknowledgement sect1s don't use the preamble */
+
+  /* In some cases, AsiiDoc will put an empty preamble containing
+     only a grandchild for custom styles. In this situation, no display
+     is needed
+   */
   #preamble_disabled:has(>.sectionbody>style:only-child) { 
     display: none; 
   }
@@ -684,30 +708,54 @@ body.workbookpage {
     > tbody, > thead {
       display: contents;
       > tr { 
-        display: contents;
+        display: contents; 
+        /* Try to mimic AsciiDoc's TD formatting classes */
         > td { 
-          > .content { display: contents; }
-          display: grid; position: relative;
+          display: flex; flex-wrap: wrap; position: relative;
+          > .content { 
+            display: contents; 
+            > * { width: 100%; }
+          }
           &.valign-top    {     align-items: start;  } 
           &.valign-middle {     align-items: center; } 
           &.valign-bottom {     align-items: end;    } 
           &.halign-left   { justify-content: left;   }
           &.halign-center { justify-content: center; }
-          &.halign-right  { justify-content: right;  } 
-        }
+          &.halign-right  { justify-content: right;  }         }
       }
+      > tr:nth-of-type(even) > td { background: #f8f8f7; }
     } 
+  }
+  /* Override AsciiDoc table defaults based on asciidoc classnames */
+  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) > td { 
+    background: none ; 
   }
 
   /* 
-    "Graph" tables use CSS for everything. Each page will likely
-    need to provide its own rules for background position, width,
-    height, and axes -- but sensible defaults are provided here.
+    "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+    They rely on a set up CSS variables, with reasonable defaults:
+      --width and --height determine the size of plane. Defaults to 3in x 3x.
+      --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+      --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+      --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+      --x_label defaults to 'x'
+      --y_label defaults to 'y'
   */
   table.graph {
-    grid-gap: 20px; 
+    grid-gap: var(--min-gap, 20px); 
     margin-top: 5px;
-    td p.tableblock { position: absolute; background: white; }
+
+    /* Location and style of the coefficient value */
+    td p.tableblock { 
+      top:        3px;
+      right:      3px;
+      position:   absolute; 
+      background: white; 
+    }
+
     td {
       border: none !important;
       background-image:
@@ -715,28 +763,30 @@ body.workbookpage {
         linear-gradient(270deg, lightblue 2px, transparent 2px),
         linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
         linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-      background-size: 300px 300px, 300px 300px, 50px 50px, 50px 50px;
-      background-position: -150px 135px;
-      width: 3in;
-      height: 3in;
+      background-size: 
+        var(--width, 3in) var(--width, 3in), 
+        var(--width, 3in) var(--width, 3in), 
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7)),
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7));
+      background-position: 
+        calc(var(--width , 3in) * var(--left_pct, .50)) 
+        calc(var(--height, 3in) * var(--top_pct , .50));
+      width:  var(--width,  3in);
+      height: var(--height, 3in);
     }
     /* Add labels for axes */
     td::before, td::after { position: absolute; font-style: italic; }
 
-    td::before {
-      content: 'y';
-      top:   0%;
-      left: 40%;
-      transform: rotate(270deg);
-        -webkit-transform:rotate(270deg);
-        -moz-transform:rotate(270deg);
-        -o-transform: rotate(270deg);
-        -ms-transform:rotate(270deg);
-    }
     td::after {
-      content: 'x';
-      top:  50%;
-      right: 3%;
+      content: var(--x_label, 'x\0000A0\0000A0');
+      right:   1%;
+      top:     calc(var(--height , 3in) * var(--top_pct, .50));
+    }
+    td::before {
+      content: var(--y_label, '\0000A0\0000A0y');
+      left:    calc(var(--width , 3in) * (var(--left_pct, .50) - .08));
+      top:     2%;
+      transform: rotate(270deg);
     }
   }
 
@@ -1168,7 +1218,7 @@ table.sideways-pyret-table {
   tr { background: none; text-align: right; }
   td:first-child {
     display: table-cell;
-    background: @table-header;
+    background: @table-header !important;
     text-align: center;
     width: 50px;
   }

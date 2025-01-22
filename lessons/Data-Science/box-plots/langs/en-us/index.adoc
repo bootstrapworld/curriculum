@@ -47,7 +47,7 @@
 
 |===
 
-== How Typical is the Average? @duration{30 minutes}
+== How Typical is the Average?
 
 === Overview
 Students are introduced to the notion of _spread_ in a dataset. They learn about how to use range, quartiles, and interquartile range to talk about variation.
@@ -418,7 +418,7 @@ ifnotslide{@centered-image{images/codap-box-plot.png, 300}}
 @A{The third quartile is the value for which 75% of the animals weighed that amount or less. Another way of saying that would be that it is the value for which 25% of the animals weigh that amount or more.}
 @Q{Why do you think this visualization is sometimes called a "box and whisker plot"?}
 @A{The distance between Min/Q1 and Q3/Max is drawn like whiskers!}
-@Q{Could we make a box plot for every column in the data set?}
+@Q{Could we make a box plot for every column in the dataset?}
 @A{No. We can only make box plots for @vocab{quantitative} columns.}
 }
 
@@ -499,11 +499,11 @@ It is extremely common for students to forget that the quartiles divide the data
 
 Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check3-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
 
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, below.
+If you'd prefer to wait until your students have completed the _entire_ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, below.
 
 }
 
-== Connecting Box Plots and Histograms @duration{30 minutes}
+== Connecting Box Plots and Histograms
 
 === Overview
 Students learn how to connect this visualization of spread to what they know about histograms.
@@ -514,16 +514,23 @@ Box plots and histograms give us two different views of the shape of quantitativ
 
 @slidebreak
 
-[cols="^.^1a,^.^1a", frame="none", grid="none"]
+
+@QandA{
+@Q{One of these box plots represents the same data as the histogram. Which one is it? How do you know?}
+@A{The first box plot represents the same data as the histogram.}
+@A{Sample response: The right whisker of the first box plot is longer, suggesting that there are outliers on the right causing the data to skew right.}
+
+@center{@image{images/histogram-launch.png,175}}
+
+[cols="^.^1a,^.^1a"]
 |===
-| @image{images/box-plot-pounds-cropped.png}
-| @image{images/histogram-pounds.png}
+| @image{images/boxplot2-launch.png, 125}
+| @image{images/boxplot1-launch.png, 125}
 |===
 
-@lesson-instruction{
-- Take a minute to look at these two visualizations we've made for the "pounds" column and try to connect them in your mind.
-- How would you explain the differences in how the data gets displayed?
 }
+
+@teacher{Students may notice that the left part of the box is larger on the box plot B. Although that observation is correct, the box's larger area does *not* indicate that *more* data points are clustered there. Remind students that an equal number of data points are clustered in each quadrant of the box plot. You can emphasize this core idea as you discuss the table comparing box plots and histograms@ifnotslide{,below.}@ifslide{ on the next slide.}}
 
 @slidebreak
 
@@ -547,6 +554,44 @@ so we can see how many are in each.
 | A long tail of +
 shorter bars to one side
 |===
+
+
+@slidebreak
+
+@QandA{
+@Q{Match the box plots below with the corresponding histograms. How did you make your matches?}
+@A{Box plot A represents the same data as histogram C. Box plot B represents the same data as histogram D. Students may suspect that the short whiskers of histogram B match with the short bars on the edges of histogram C. Because box plots represent density and not frequency, this reasoning is incorrect. }
+
+++++
+<style>
+/* Add letters to the top left corner, relative to each table cell */
+.lettering td { position: relative; }
+.lettering .paragraph:first-child p { position: absolute; top: 0; font-weight: bold; }
+</style>
+++++
+
+[.lettering, cols="^.^1a,^.^1a", header="none", stripes="none"]
+|===
+| A
+
+@image{images/launch-boxplot-a.png, 125}
+| B
+
+@image{images/launch-boxplot-b.png, 125}
+| C
+
+@image{images/launch-histo-c.png, 125}
+| D
+
+@image{images/launch-histo-d.png, 125}
+
+|===
+
+
+}
+
+@teacher{The matching activities in this launch section were drawn from research conducted by @citation{lem-et-al-2011, "Lev et al (2011)"}.}
+
 
 
 @strategy{Kinesthetic Activity}{
@@ -608,7 +653,7 @@ Alternatively, we offer a compilation of all four Checkpoints in @assessment{box
 
 
 
-== Data Exploration Project (Box Plots) @duration{flexible}
+== Data Exploration Project (Box Plots)
 
 === Overview
 Students apply what they have learned about box plots to their chosen dataset. They will add three items to their @starter-file{exploration-project}: (1) at least two box plots, (2) the corresponding five-number summaries, and (3) any interesting questions they develop. 

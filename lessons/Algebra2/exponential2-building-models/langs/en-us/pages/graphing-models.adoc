@@ -1,0 +1,86 @@
+= Graphing Exponential Models: __f(x) = ab^x^ + k__
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+.autonum { font-weight: bold; padding-top: 2px !important; }
+.autonum:after { content: ')' !important; }
+
+/* Shrink some vertical space - this page is packed! */
+.fitb, .fitb.stretch::after, .fitbruby.stretch::after { padding-top: 0.8rem; }
+
+/* Cut the padding under each section */
+.sect1 { padding: 0 !important; }
+
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph {
+  --width:   2.0in;
+  --height:  1.5in;
+}
+</style>
+++++
+
+[.linkInstructions]
+For this page, you'll need to have *Slide 3: Exploring Exponential Models* of *Modeling Covid Spread (Desmos)* open on your computer. +
+The curve you'll see is the graph of @math{h(x) = 2^x}. Another curve @math{f(x)} is hiding behind it with identical coefficients: @math{k=0}, @math{b=2} and @math{a=1}.
+
+== Base @math{b}
+@n Make sure @math{k = 0} and @math{a=1}. Experiment with @math{b}. *For what values of @math{b} is the function _undefined_*, with the line disappearing? @fitb{}{@ifsoln{negative}}
+
+@n Keeping @math{a=1} and @math{k=0}, change @math{b} to 0.5, 1, and 2, graphing each curve below. For each curve, *label the coordinates at x=1, 2, and 3.*
+
+
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+|===
+| @ifnotsoln{@math{b=0.5}} @ifsoln{@image{../images/b.5.png, 170}}
+| @ifnotsoln{@math{b=1}}   @ifsoln{@image{../images/b1.png,  170}}
+| @ifnotsoln{@math{b=2}}   @ifsoln{@image{../images/b2.png,  170}}
+|===
+
+@n What does @math{b} tell us about an exponential function, when @math{b > 1}? @fitb{}{@ifsoln{How quickly the function grows - }} +
+
+@fitb{}{@ifsoln{literally the multiplier that says how quickly the growth intervals change}}
+
+@n What does @math{b} tell us about an exponential function, when @math{0 < b < 1}? @fitb{}{@ifsoln{How quickly the function decays - }} +
+
+@fitb{}{@ifsoln{literally the multiplier that says how quickly the decay intervals change}}
+
+== Vertical Shift...and Horizontal Asymptote @math{k}
+@n Keeping @math{a=1} and @math{b=2}, try changing the value of @math{k} to -10, 0, and 10, graphing each curve in the squares below. For each curve, find and label the y-value where the curve is "most horizontal", then *draw a horizontal line at that y-value*.
+
+
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+|===
+| @ifnotsoln{@math{k=-10}} @ifsoln{@image{../images/k-10.png, 170}}
+| @ifnotsoln{@math{k=0}}   @ifsoln{@image{../images/k0.png,   170}}
+| @ifnotsoln{@math{k=10}}  @ifsoln{@image{../images/k10.png,  170}}
+|===
+
+@n What does @math{k} tell us about an exponential function? @fitb{}{@ifsoln{How far the parabola is shifted up (positive k) or down (negative k),}} +
+@fitb{}{@ifsoln{and where the curve levels out}}
+
+== Initial Value @math{a}
+@n Set @math{k=0} and @math{b=2}. Change the value of @math{a} to 10, 2, and -5, graphing each curve in the squares below. +
+*For each curve, label the y-intercept (x=0).*
+
+
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+|===
+| @ifnotsoln{@math{a=10}}  @ifsoln{@image{../images/a10.png,  170}}
+| @ifnotsoln{@math{a=2}}   @ifsoln{@image{../images/a2.png,   170}}
+| @ifnotsoln{@math{a=-5}}  @ifsoln{@image{../images/a-5.png,  170}}
+|===
+
+@n What does @math{a} tell us about an exponential function? @fitb{}{@ifsoln{The initial value of the function, when x=0}}
+

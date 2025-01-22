@@ -1,0 +1,176 @@
+= Exploring the States Dataset
+
+@description{Students use linear models to investigate relationships in demographic data about US states using an inquiry-based approach, involving hypothesizing, experimental and computational modeling, and sense-making.}
+
+@lesson-prereqs{fitting-models}
+
+@keywords{}
+
+@add-to-lang{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+-
+
+| Student-facing Lesson Goals
+|
+
+-
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+
+| Key Points For The Facilitator
+|
+- This is the first lesson in the linear models unit, which establishes a structure for exploring relationships in data:
+    * identify possible relationships in a dataset
+  	* build a model from samples
+  	* fit a model
+  	* improve upon the model
+- This sequence will be revisited in future units
+- Two of the starter files referenced in this file pull data from the same spreadsheet.
+  * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file.
+  * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
+
+|===
+
+== Exploring the Data
+
+=== Overview
+Students explore the State Demographics dataset and, building on a discussion of the data visualizations they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns.
+
+=== Launch
+We're going to search for relationships within a dataset about all the states in the US.
+
+@lesson-instruction{
+- Open the @starter-file{alg2-states-intro}, click "Run", and save a copy of the file.
+- Working in pairs or small groups, complete @printable-exercise{exploring-states.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What did you Notice and Wonder?}
+@Q{What did you learn about defining rows in Pyret?}
+@A{Example: `x = row-n(states-table, 0)` will make the name `x` have the value of the first row in the table (the index starts at zero!).}
+@Q{How would define a name `y` to be the value of the _second_ row in the table? The third?}
+@A{`y = row-n(states-table, 1)` for the second row. Change the `1` to a `2` for the third.}
+}
+
+In math, @math{x = 4} will define a variable @math{x} to be the value @math{4}.
+
+@indented{Any time we see @math{x} after that, we can substitute in the value of @math{4}.}
+
+This works in Pyret, too. But in Pyret, values can be more than just numbers!
+
+@indented{In this file, the variables `alabama` and `alaska` are defined as rows from the table.}
+
+@teacher{Debrief the rest of the page with students. Then, initiate a conversation about the various column names, ensuring that students understand all of the terminology. Later in the lesson, students will examine relationships between income and education. We recommend posing the questions below to ensure that they are ready to do so.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What columns in this dataset have to do with wealth?}
+@A{`pct-in-poverty`, `poverty-rate`, `median-income`, `per-capita-income`}
+@Q{What columns are about education levels?}
+@A{`college-or-higher`, `hs-or-higher`}
+}
+
+=== Investigate
+
+Before we dig deeper into the State Demographics data, let's think back to our @lesson-link{fitting-models} lesson...
+
+@QandA{
+@Q{Does a lizard's weight play a role in how long it takes to be adopted? Why or why not?}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely.}
+@A{(For example: Yes, little baby lizards get adopted quickly because they're so cute! No, baby lizards require too much work when they are young.)}
+
+@Q{What kind of data does the `age` variable represent? What about `pounds`?}
+@A{Both `age` and `pounds` are quantitative variables.}
+
+@Q{What kind of data visualization would helped us analyze the relationship between weight and adoption time?}
+@A{A @vocab{scatter plot}, because it shows the relationship between two quantitative variables}
+
+@Q{When we fit a model to the scatter plot, what measure did we use to determine how well it fit the lizard data?}
+@A{We used @math{S} - the Standard Deviation of the Residuals - to measure fitness. The smaller the @math{S}, the better the fit.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- It's time to dig back into the State Demographics data.
+- Which states do you want to focus on? (Pick our state, a neighboring state, and/or a state you've always wanted to visit!)
+}
+
+@teacher{
+If students aren't familiar with neighboring states, @link{https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#/media/File:Map_of_USA_with_state_and_territory_names_2.png, here's a useful map!}
+
+Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!
+}
+
+=== Synthesize
+
+- TBD
+
+
+
+== Looking for Patterns
+@objective{model-explore}
+@objective{interpret-real-world-scatter-plot}
+@objective{linear-situations}
+
+
+=== Overview
+
+- TBD
+
+=== Launch
+
+@lesson-instruction{
+- Working in pairs or small groups, complete Part 1 of @printable-exercise{looking-for-patterns.adoc} using @starter-file{alg2-states-intro}.
+- Do not go on to Part 2! We'll return to that later in the lesson.
+}
+
+@teacher{Encourage students to first _think about which columns might be related_, and then create the scatter plot to search for this relationship, rather than making scatter plots for random pairs of columns. The dataset is designed so that students will quickly begin searching for relationships between varying levels of education and income, and there are linear relationships in each of these.}
+
+@strategy{Exploring the States Dataset}{
+
+The @starter-file{alg2-states-intro} has a lot of interesting data, and endless possible combinations of columns to explore. But randomly smashing columns together in a scatter plot is not the habit we want students to cultivate! Instead, make sure students are actually talking with their partners about why two columns may or may not be related.
+
+Making sense: can students predict these relationships, and explain their thinking? +
+(If so, probably not worth having them spend time on more than one of them!)
+
+- `pop-2010` vs. `pop-2020`.
+- `pop-2020` vs. `num-households`
+- `num-housing-units` vs. `num-households`
+- `num-households` vs. `num-veterans`
+
+Surprises in the District of Columbia: DC often shows up as an outlier or extreme value. But why? Here are a few relationships to spark students' interest.
+
+- `pct-college-or-higher` vs. `pct-in-poverty`
+- `median-income` vs. `pct-college-or-higher`
+- `median-income` vs. `pct-home-owners`
+- `pct-college-or-higher` vs. `pct-home-owners`
+- `pct-college-or-higher` vs. `pct-home-owners`
+- `pct-home-owners`, `num-housing-units`
+- `median-income` vs. `per-capita-income`
+
+}
+
+=== Synthesize
+
+- Share your scatter plots with one another. _(Perhaps by copying and pasting scatter-plots into a shared document and then labeling them?)_
+- What possible relationships did you find?
+- What did you learn about the state(s) you decided to focus on?
+- Did you and your classmates use similar words to describe the scatter plots you came up with? If so, what were they?
+
+@teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength._}
+

@@ -1,0 +1,179 @@
+= Simpson's Paradox
+
+@description{}
+
+@lesson-prereqs{exponential3-fitting-models}
+
+@keywords{exponential, quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+@objectives
+
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
+You will want to:
+ * Open @starter-file{alg2-covid-desmos}.
+ * Make a link or code to share with your students.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Why Just One State at a Time?
+@objective{model-simpsons}
+
+=== Overview
+Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then discover another motivation for filtering: scatter plots like our covid dataset show _multiple_ @vocab{correlations}, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the Covid dataset into samples grouped by state.
+
+=== Launch
+
+A college is looking at housing data for a sample of students and comparing choices among those students who've decided what their major will be to choices made by students who are undecided about their major:
+
+[cols="2a,^1a,^1a,^1a", options="header", width="80%"]
+|===
+|             | # On Campus   | # Off Campus  | % On Campus
+| Undecided   | 120           |  80           |  120/200 = 60%
+| Decided     |  80           | 100           |   80/180 = 44%
+|===
+
+@QandA{
+@Q{According to the table, how many Undecided Majors live _off_-campus?}
+@A{80}
+@Q{How many Decided Majors live _on_-campus?}
+@A{80}
+@Q{*Who is more likely to live on campus: Decided or Undecided Majors?*}
+@A{(Give students time to talk about this, and explain their thinking!  )}
+}
+
+@teacher{
+@opt{If you'd like to distribute printed copies of this table and the accompanying questions, they are available @printable-exercise{simpsons-data.adoc, here}.}
+}
+
+@slidebreak
+
+It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
+
+But there's a *third variable hiding in the background*: freshmen college students are far less likely to have picked a major than seniors, _and_ they are much more likely to live on campus.
+
+@slidebreak
+
+When we filter by this important third variable, it turns out that for both Freshmen and Non-Freshmen, there is _no correlation_ between between deciding on a major and living on- or off-campus.
+
+[cols="^1a,^1a", strips="none", grid="none", frame="none"]
+|===
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Freshmen*     ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      ! 100             ! 20            ! 100/120 = 83%
+! Decided        !  50             ! 10            !  50/60  = 83%
+!===
+
+|
+[cols="^1a,^1a,^1a,^2a", options="header"]
+!===
+! *Non-Freshmen* ! # On Campus     ! # Off Campus  ! % On Campus
+! Undecided      !  20             ! 60            !  20/80 = 25%
+! Decided        !  30             ! 90            !  30/120 = 25%
+!===
+|===
+
+What _looks_ like a correlation between having-a-major and living-on-campus is actually a correlation between _age_ and living-on-campus.
+
+@slidebreak
+
+@right{@image{images/Simpsons_animation.gif, 300}}
+A third variable lurking in the data can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists! Normally we think that the more data we include in our sample the more clearly we'll see any potential relationships. But in certain circumstances the correlations in our sub-groups cancel each other out when we put the groups together. This is called @link{https://en.Wikipedia.org/wiki/Simpson%27s_paradox, Simpson's Paradox.}
+
+@lesson-point{
+Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ when the groups are combined.
+}
+
+@slidebreak
+
+Sometimes filtering the data into subsets is the only way to see what's really going on. That's exactly what this starter file does, by filtering the data for _Massachusetts only._
+
+=== Investigate
+
+Datasets like the one used in our @starter-file{alg2-covid} are very difficult to model all at once, because there will always be lots of points that are far from any single function. But it's not that there's _no relationship_ between the x- and y-variables. Instead, we have several sub-groups each with their own _very strong relationships,_ and another variable lurking in the background.
+
+In fact, the scatter plot for all our New England states didn't look much like a scatter plot all! It looks like someone took a marker and drew in five different curvy lines.
+
+@QandA{
+@Q{What do you think might be the variable lurking in the background, which accounts for these separate lines?}
+@A{Give students time to discuss!}
+}
+
+@slidebreak
+
+*Diseases spread more rapidly in densely-populated areas, since it's easier for the infection to jump from one person to another.* Unfortunately, we can't _see_ the density data in our table, so that dimension is missing from our dataset! This is exactly what happened in our college example: we couldn't see the age of the students, which skewed our interpretation of the scatter plot.
+
+
+These patterns are so distinct from one another that we're going to need to make _more than one model_.
+
+@slidebreak
+
+@QandA{
+@Q{We needed to break the Covid data up into _grouped samples_, so that all of the data for Massachusetts is in one table. We would then do the same for Maine, Rhode Island, etc.}
+@Q{How is a grouped sample different from a random sample?}
+@A{A grouped sample is a non-random subset chosen from a larger set. Grouped samples are non-random by design!}
+}
+
+@teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the fifth slide ("Exponential Model for VT") so that students will be looking at the correct screen when they are directed to return to Desmos part way through @printable-exercise{modeling-other-states.adoc}}
+
+@lesson-instruction{
+- Working in pairs or small groups, complete @printable-exercise{modeling-other-states.adoc}.
+- You will be working with both @starter-file{alg2-covid} and the fifth slide of *Modeling Covid Spread Desmos file*.
+}
+
+@slidebreak
+
+The `filter` function consumes a Table and *a helper function!* The helper function is used on every Row of the Table, producing true or false. The `filter` function takes all the Rows for which the helper produced true, and combines them all into a new table.
+
+@teacher{
+@opt{While filtering is introduced in this lesson, the primary goal is for students to explore exponential functions. If your students need more practice with filtering - or wish to filter their own datasets - we recommend checking out the @lesson-link{filtering-and-building} lesson.}
+}
+
+=== Common Misconceptions
+It's extremely common for students to think that filtering a table _changes the original table_. This is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
+
+=== Synthesize
+
+@QandA{
+@Q{In what other situations would it be useful to filter a dataset?}
+@Q{Can you think of other examples where Simpson's Paradox might arise?}
+@A{When comparing one country's schools to another's, a researcher finds that students living in poverty in country A outperform students living in poverty in country B. They also find that the wealthy students in A outperform their wealthy peers in B. In fact, for every income level, country A outperforms country B! But if country B has less child poverty overall, it will still outperform A.}
+@A{Another, thoroughly-explained example involving soft drinks can be found @link{https://towardsdatascience.com/simpsons-paradox-and-interpreting-data-6a0443516765, on this web page}.}
+}
+
+
+== Modeling Other States (Optional)
+
+=== Overview
+Students filter the covid dataset by one or more other states, sharpening their modeling skils in the process.
+
+=== Launch
+
+
+=== Investigate
+
+
+=== Synthesize
+

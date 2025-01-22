@@ -1,0 +1,233 @@
+= Fitting Exponential Models
+
+@description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
+
+@lesson-prereqs{exponential2-building-models}
+
+@keywords{exponential, quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we introduced in @lesson-link{exponential1-exploring-covid}.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * If you don't already have a code, or you want to share a new one, you will first want to:
+ *** Open @starter-file{alg2-covid-desmos}.
+ *** Make a link or code to share with your students.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Modeling in Desmos
+@objective{model-fit-function}
+
+=== Overview
+
+Students extend their sampling techniques to exponential relationships, experimenting in Desmos to come up with plausible models
+
+=== Launch
+
+Now that you're familiar with exponential functions, let's use them to model this Covid data!
+
+@lesson-instruction{
+- Open @starter-file{program-list}, find your saved copy of the @starter-file{alg2-covid} and click "Run".
+- Make a scatter plot showing the change in `positive` Covid cases over time (`day`) for `MA-table`.
+- With your partner, discuss what you can learn from the scatter plot about the exponential function that will model the data.
+}
+
+@teacher{Project the following questions to guide small group discussion.}
+
+@slidebreak
+
+@QandA{
+@Q{Does your scatter plot show exponential growth or exponential decay?}
+@A{The scatter plot shows @vocab{exponential growth}. The "hockey stick" is pointing up, meaning that positive cases are increasing.}
+
+@Q{Can we make any conclusions about the value of @math{b}? Explain.}
+@A{Because we see exponential _growth_, we know that @math{b} must be greater than one.}
+
+@Q{Can we make any conclusions about the value of @math{k}?}
+@A{Responses will vary. The horizontal asymptote appears to be at around roughly 90,000 positive cases.}
+
+@Q{Can we make any conclusions about the value of @math{a}? Explain.}
+@A{@math{a} must be positive, because the curve is consistently above @math{k}.}
+}
+
+=== Investigate
+
+@teacher{Make sure your students have a link to  @starter-file{alg2-covid-desmos} and you've advanced your teacher dashboard of to the fourth slide ("Exponential Model for MA") so that students are looking at the correct screen.
+
+In the next activity, students will use our custom slider activity to find promising exponential models, which they will later fit programmatically in Pyret!}
+
+@lesson-instruction{
+- Let's return to the *Modeling Covid Spread Desmos file*.
+- You should now be on the fourth slide ("Exponential Model for MA").
+- Use it to complete @printable-exercise{exponential-models-ma.adoc}.
+}
+
+@teacher{Crowdsource the various values for each coefficient, writing 4-5 examples of each on the board.}
+
+- Look at all the lists of values we came up with for @math{a}, @math{b}, and @math{k}.
+- What do you notice? Are they clustered around a particular value, or completely spread out?  Are there any values that are really far from the others?
+
+=== Synthesize
+
+- Is an exponential model a good fit for this data?
+
+== Modeling in Pyret
+@objective{model-fit-function}
+
+=== Overview
+Students take their Desmos-derived coefficients back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
+
+=== Launch
+
+Sometimes, data scientists perform calculations that result in very large or very small numbers. They send satellites to far-away planets, or reason about the mass of electrons and neutrinos. These numbers are also rarely integers: numerical constants for gravity, friction, etc. are most often rational or irrational numbers.
+
+In math, this isn't a problem: numbers can be infinitely large or small, and have any number of digits or decimal places! But computers are _finite_, and some numbers get too big to fit in their memory. So what do we do?
+
+@slidebreak
+
+One option is to make the really big or small numbers _approximations_ of the real numbers, in the same way a model approximates real data. We can shrink a number with 100 digits down to just 3 digits, as long as we remember "there's 97 zeros after it!" This way, numbers like a "4 and one trillionth" get approximated as "roughly four".
+
+If you've ever asked a calculator to compute @math{1 \div 3}, you've probably seen it displayed as @math{0.333333}  instead of @math{ 0.\overline{3}}. This is a problem if you need to do any calculation with the result! @math{0.333333 \times 3 = 0.999999}, instead of 1!
+
+@slidebreak
+
+Virtually every programming language does this when numbers get large enough, chopping off digits and giving up accuracy in exchange for speed. This is especially important for time-sensitive computations like weather modeling, where knowing _roughly_ where a tornado will land before it hits is much more important than knowing precisely where it will land after it's too late.
+
+But there are times when we'd rather be precise than fast...
+
+@slidebreak
+
+- A satellite headed for Neptune needs to travel at an extremely precise trajectory. After 2.8 billion miles, starting off by with even a thousandth of a degree rounding error could cause it to miss the planet entirely!
+- When searching for neutrinos, the relative masses involved are so small that chopping off the 100th decimal place might mean losing the neutrino entirely!
+
+=== Investigate
+
+Pyret's function @show{(code 'expt)} is the function that we use for exponents. It takes in two numbers: the base and the power. @show{(code '(expt 10 2))}, for example will produce @math{10^2}.
+
+@lesson-instruction{
+- As you know, exponents get big quickly! Try computing a large number like @show{(code '(expt 10 100))}.
+- In the @starter-file{alg2-covid}, use @show{(code 'expt)} to calculate three different exponents.
+- Be prepared to discuss what you observed.
+}
+
+@slidebreak
+
+Pyret has a special kind of Number, called a _RoughNum_, which chops off digits for faster calculation. But unlike other languages, Pyret wants to put the programmer in control. It will never drop digits _unless you tell it to!_
+
+@lesson-instruction{
+- Use @starter-file{alg2-covid} to complete the *first section* of @printable-exercise{computational-limits.adoc}.
+- Be prepared to discuss what you observed.
+}
+
+@slidebreak
+
+@QandA{
+@Q{Why do you think Pyret won't let us compare two RoughNums?}
+@A{Because it knows that two different Numbers can both round to the same RoughNum, which means comparisons are not reliable!}
+@A{A Number takes up exactly one point on the number line. A RoughNum, on the other hand, takes up a _range_ of points on the number line (in this case, all the ones that are "roughly 3"). That makes precise equality tests impossible!}
+}
+
+@slidebreak
+
+To turn a number into a RoughNum, we use the approximation symbol `~`. For example, the RoughNum `~3`, is "roughly three." This tells Pyret to round off the calculation, prioritizing *speed* over *accuracy* to get a result that is "roughly accurate". Any computations performed on a RoughNum will also produce RoughNums.
+
+@QandA{
+@Q{In Pyret, try multiplying `~2 * 2`. What do you get?}
+@A{`~4`, or "Roughly four"}
+
+@Q{Why did Pyret turn the answer into a RoughNum?}
+@A{Pyret is trying to show us that the result was based on an estimate, and therefore is also an estimate.}
+}
+
+@slidebreak
+
+Exponential growth and decay can create enormously large and enormously small numbers, which can slow down computation. When we try to fit our exponential models to the data, it could take a VERY long time to compute!
+
+@lesson-instruction{
+- In @starter-file{alg2-covid}, find the definition of a function called `exponential`. Why does this definition multiply `x` by `~1`?
+- Return to @printable-exercise{computational-limits.adoc} and complete the last section: *Fitting Exponential Models in Pyret*.
+}
+
+=== Synthesize
+
+- What makes exponential models different from the linear and quadratic models you've seen before?
+- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
+
+@slidebreak
+
+Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
+
+@QandA{
+@Q{Do we know whether or not our exponential model is the _best?_}
+@A{We don't know!}
+@Q{How do you know?}
+@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+}
+
+== Reasoning about Exponential Growth
+
+=== Overview
+Students apply mental math to their models, and discover that it's very hard to reason about exponential growth.
+
+=== Launch
+Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the pandemic would spread. Why?
+
+@teacher{Invite students to share their ideas. Some answers are likely to be political, and you will need to steer the conversation back to focusing on the math: even those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
+
+=== Investigate
+Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just use mental arithmetic to do a quick calculation! So why did mental arithmetic fail for exponential models like ours?
+
+@lesson-instruction{
+Use your model to make predictions on @printable-exercise{predicting-exponential-growth.adoc}.
+}
+
+=== Synthesize
+
+@teacher{Have students share their predictions for each of the time-spans in question 5.}
+
+@QandA{
+@Q{How accurate were your "guesstimates" for your models' predictions after 50 days? (Very accurate? Not accurate at all?)}
+@Q{How accurate were your "guesstimates" after 250 days?}
+@Q{How accurate were your "guesstimates" after 450 days?}
+@Q{How accurate were your "guesstimates" after 550 days?}
+}
+
+Chances are, your guesses got less accurate as the number of days increased!
+
+@slidebreak
+
+*Why was it so much harder to guesstimate the farther out we got, when the number of days was always increasing by a fixed amount?*
+
+We are creatures of nature, so our brains are designed to be really good at working with things we see all the time. It's normal to see groups of 2, 5, or even 10 or 100, and we have a pretty good intuition for comparing group sizes as long as they're small.
+
+But when numbers grow really, really, _really_ fast...we get lost! Our brains lose track of differences when two numbers get really enormous.
+
+_Mathematically,_ the number line is composed of equal intervals forever. @link{https://www.scientificamerican.com/article/a-natural-log/, *But we don't actually process it that way at all.*}
+
+@slidebreak
+
+*Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
+
+This may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
+
+Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. It's called a _logarithm_!

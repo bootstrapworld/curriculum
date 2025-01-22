@@ -1,0 +1,68 @@
+= Planning Table Operations
+++++
+<style>
+.literalblock pre { font-size: inherit; }
+table:first-of-type td {padding: .25em .5em !important; }
+
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
+
+div.circleevalsexp .value { font-size: 0.7rem; margin: 0.65rem 0.2rem; }
+.t th:last-of-type, .t td:last-of-type * {
+  font-style: italic !important; text-align: center;
+</style>
+++++
+
+@do{
+
+(define exp1 '(filter (filter t is-young) is-fixed))
+(define exp2 '(sort (filter (filter t is-female) is-fixed) "age" true))
+(define exp3 '(box-plot (filter (filter t is-female) is-fixed) "age"))
+(define exp4 '(pie-chart (filter (filter t is-young) is-fixed) "sex"))
+}
+
+
+Consider the table below, and the function definitions that follow:
+
+_The table `t` below represents four animals from the shelter:_
+
+[.t, cols='5',options="header"]
+|===
+| name        | sex       | age   | fixed   | pounds
+| `"Susie Q"` | `"female"`| `0.6` | `true`  | `54`
+| `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`
+| `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`
+| `"Rebel"`   | `"female"`| `0.3` | `false` | `4`
+|===
+
+```
+fun is-female(r): r["sex"] == "female" end
+fun is-young(r):  r["age"] < 1         end
+fun is-fixed(r):  r["fixed"]           end
+```
+
+For each prompt on the left, draw the Circle of Evaluation that will produce the desired table or display.
+
+[.FillVerticalSpace, cols=".^2a,^.^10a,^.^30a",stripes="none",frame="none", grid="none", options="header"]
+|===
+|
+| Prompt
+| Circle of Evaluation
+
+| @n
+| Produce a Table containing all young, fixed animals
+| @show{(coe exp1)}
+
+| @n
+| Produce a Table showing all fixed female animals, sorted by age
+| @showsoln{(coe exp2)}
+
+| @n
+| Produce a box-plot for all fixed female animals, showing the distribution of `age`
+| @showsoln{(coe exp3)}
+
+| @n
+| Produce a pie-chart for all young, fixed animals, showing the distribution of `sex`
+| @showsoln{(coe exp4)}
+
+|===

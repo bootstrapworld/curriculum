@@ -53,7 +53,7 @@ _*This lesson is unplugged* and does not require a computer._
 
 |===
 
-== Threats to Validity @duration{20 minutes}
+== Threats to Validity
 
 === Overview
 Students are introduced to the concept of @vocab{validity}, and a number of possible threats that might make an analysis invalid.
@@ -147,7 +147,7 @@ If you'd prefer to wait until your students have completed the __entire__ lesson
 
 
 
-== Fake News! @duration{20 minutes}
+== Fake News!
 
 === Overview
 Students are asked to consider the ways in which statistics are misused in popular culture, and become critical consumers of some statistical claims. Finally, they are given the opportunity to misuse their _own_ statistics, to better understand how someone might distort data for their own ends.
@@ -205,7 +205,85 @@ Want to check student mastery of the content you've just taught? Administer @ass
 Alternatively, we offer a compilation of all four Checkpoints in @assessment{threats-cumulative-desmos}.
 }
 
+== Dealing with Outliers
 
+=== Overview
+Students are confronted with the concept of _outliers:_ data points that stray far from the rest of the data and appear to confound observed patterns and groupings. Data Scientists take the decision of whether or not to keep outliers very seriously, as there can be profound implications for validity.
+
+=== Launch
+@right{@image{images/height-outlier.png, 300}}Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in.
+
+@QandA{
+@Q{Is there really a 12 year old who is 6 inches tall?}
+@A{Probably not! This is almost certainly junk data from a typo (maybe someone meant to type "60" instead of "6"?).}
+}
+
+@slidebreak
+@ifslide{@right{@image{images/height-outlier.png, 300}}}
+This typo could throw off our analysis completely! This one data point will destroy the mean, forcing us to use a different measure of center even if the rest of the data is symmetric.
+
+"Junk" data is harmful, because it can drastically change our results! If we blindly keep every outlier, it can become a serious threat to the validity of our analysis!
+
+@slidebreak
+
+@right{@image{images/stadium-outlier.png, 300}}Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes.
+
+@QandA{
+@Q{Did it really take someone 35 minutes to find their seat?}
+@A{It's very possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!}
+}
+
+@slidebreak
+@ifslide{@right{@image{images/stadium-outlier.png, 300}}}
+If we blindly _remove_ every outlier, it can become a serious threat to the validity of our analysis!
+
+An outlier can also could be a really important part of your analysis!
+
+=== Investigate
+@lesson-point{Outliers... do they stay or do they go?}
+
+As a data scientist, an outlier is _always a reason to look closer_. And whether you decide to keep or remove it from your dataset, make sure you explain your reasons in your write-up!
+
+@lesson-instruction{
+With your partner, complete @printable-exercise{outliers-discussion.adoc}.
+}
+
+These points are called _unusual observations_. Unusual observations in a scatter plot are like outliers in a histogram or dot plot, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
+
+@slidebreak
+
+@lesson-point{Unusual observations are _always_ worth thinking about!}
+
+Sometimes unusual observations are _just random_. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
+@slidebreak
+
+Sometimes unusual observations can give you a _deeper insight_ into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
+
+@slidebreak
+
+Sometimes unusual observations _are the points we are looking for!_ What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are unusually good for the price. An observation way below the cloud would be a really bad deal.
+
+=== Synthesize
+
+@QandA{
+The school cafeteria surveyed 100 students about their favorite foods, and most chose things like pizza, spaghetti, Caesar salad, etc. But two students chose foods that no one else heard of!
+@Q{What are some reasons why these outliers should _stay?_}
+@A{These students might have important dietary restrictions that need to be taken into consideration!}
+@Q{What are some reasons why these outliers should _go?_}
+@A{What if those foods aren't real, and the two students were just messing around?}
+}
+
+@slidebreak
+
+@QandA{
+@Q{If Data Scientists are the ones deciding whether an outlier is important or irrelevant, why does it matter _who_ those Data Scientists are?}
+@A{A Data Scientist might be biased for or against a specific group or idea, and be more likely discard outliers they _don't_ or keep those they _do_ like.}
+@A{A Data Scientist might simply be unfamiliar with the domain of the data they're analyzing, and not realize whether an outlier is important and needs to be kept!}
+}
+
+@teacher{
+This is a great opportunity to remind students that @lesson-link{computing-needs-all-voices}!
+}
 
 == Additional Exercises
 

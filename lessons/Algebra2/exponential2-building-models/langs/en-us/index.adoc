@@ -1,0 +1,376 @@
+= Building Exponential Models
+
+@description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
+
+@lesson-prereqs{exponential1-exploring-covid}
+
+@keywords{exponential, quadratic, square, coefficient}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| 
+@preparation{
+- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we introduced in @lesson-link{exponential1-exploring-covid}.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
+ * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
+ * If you don't already have a code, or you want to share a new one, you will first want to:
+ *** Open @starter-file{alg2-covid-desmos}.
+ *** Make a link or code to share with your students.
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+}
+|===
+
+== Exponential Sequences
+@objective{exponentials-growth}
+
+=== Overview
+Having identified that the Covid scatter plot appears neither linear nor quadratic, students learn about characteristics of exponential functions in tabular form.
+
+=== Launch
+
+++++
+<style>
+.growth td { padding: 0; }
+</style>
+++++
+
+Let's review what we know about the behavior of the models we've seen so far:
+
+@right{@image{images/difference-table-linear.png}}Remember that *linear functions* grow by _fixed intervals,_ so the growth is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
+{empty} +
+*If the growth is constant, the relationship is linear.*
+
+@clear
+@slidebreak
+
+@right{@image{images/difference-table-quadratic.png}}*Quadratic functions* grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning _the function is definitely not linear!_ However, if we take a look at the _difference between those differences_(shown in red), we're back to constant growth! +
+{empty} +
+*If the "growth of the growth" is constant, the relationship is quadratic.*
+
+@clear
+
+@slidebreak
+
+@right{@image{images/difference-table-exponential-1.png}}When we calculate the growth between the y-values, we can immediately tell it's not linear. When we try to calculate the "growth of the growth", we see that it's not quadratic either. +
+{empty} +
+@vocab{Exponential functions} grow even faster than quadratics! +
+{empty} +
+If we calculate the "growth of the _growth of the growth_" (shown in green)... we still haven't found a constant... but we should notice that each of these "growths" just repeats the original pattern of y-values! We could calculate the third difference, fourth difference, and so on..._and never reach a stopping point_. +
+
+Exponential functions grow so rapidly that asking "what is being added to y?" isn't helpful at all.
+
+=== Investigate
+
+@right{@image{images/difference-table-exponential-2.png}} +
+In order to talk about the growth of an exponential function we need to identify the @vocab{growth factor} by asking ourselves "what is being _multiplied_ by y?" +
+{empty} +
+*In this case, we can see that the y-values are doubling each time*, so the @vocab{growth factor} is 2!
+
+@slidebreak
+
+@lesson-instruction{
+- Turn to @printable-exercise{classifying-tables.adoc}, and decide what kind of pattern is represented in each table.
+- For each table that is growing exponentially, identify the @vocab{growth factor}.
+}
+
+=== Synthesize
+@QandA{
+@right{@image{images/difference-table-exponential-2.png}}
+
+@Q{What strategies did you use to decide which tables showed exponential growth v. linear or quadratic?}
+@A{Answers will vary - but encourage students who struggled to draw the first and second differences. Everyone has at least one strategy!}
+
+@Q{Which table was the easiest to identify?}
+@A{Probably table 2 - whose y-values clearly grow by a factor of 10 each time}
+}
+
+== Exponential Graphs
+@objective{exponentials-graph}
+
+=== Overview
+Students learn about characteristics of exponential functions in both graphical and function notation form.
+
+
+=== Launch
+
+Exponential Functions can be written in the form: @hspace{1em} @big{@math{f(x) = ab^{(x-h)} + k}}
+
+@teacher{
+Advance your teacher dashboard of @starter-file{alg2-covid-desmos} to the second slide ("How does h transform exponential functions?").
+}
+
+@lesson-instruction{
+- You should now be on the second slide: *How does @math{h} transform exponential functions?* in the Desmos activity.
+- With your partner, take a minute to experiment with changing the slider for @math{h}. What does this do to the graph of the function?
+}
+
+@QandA{
+@Q{What did _positive_ values of @math{h} do to the graph?}
+@A{Shifted it to the right.}
+@Q{What did _negative_ values of @math{h} do to the graph?}
+@A{Shifted it to the left.}
+}
+
+Most textbooks only present exponential functions with a horizontal shift of zero.
+
+When @math{h=0} we can use this simplified form for Exponential Functions: @hspace{1em} @big{@math{f(x) = ab^x + k}
+
+This is the form we'll be using, but don't forget that sneaky @math{h}! Someday it might not be zero...
+
+=== Investigate
+
+Let's explore what each coefficient of @hspace{1em} @big{@math{f(x) = ab^x + k}} @hspace{1em} does!
+
+@teacher{
+Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the third slide ("Exploring Exponential Functions") so that students are looking at the correct screen.
+
+Decide whether you want to debrief this activity with your class after each section or at the end.
+}
+
+@lesson-instruction{
+- Let's return to the *Modeling Covid Spread Desmos file*.
+- You should now be on the third slide: *Exploring Exponential Functions*.
+- Use it to complete @printable-exercise{graphing-models.adoc}.
+}
+
+@QandA{
+
+@Q{Was it easy to guess what any of the coefficients did, before you graphed them?}
+@A{Answers will vary, but the vertical shift of @math{k} was likely the easiest one.}
+
+@Q{Did the behavior of any of the coefficients surprise you?}
+@A{Answers will vary, but @math{b} is likely to stand out to students.}
+}
+
+@slidebreak
+
+==== Base @math{b}
+
+*The base of an exponential function (@math{b})* must *always be positive*, because exponential functions grow and decay uniformly. 
+
+@indented{_A negative @math{b} would bounce from one side of the y-axis to another._ +
+_More importantly, when raised to a fractional exponent like @math{1/2} negative values of @math{b} might also lead to things like_ @math{\sqrt{-2}}!}
+
+[cols="3a,2a,3a", stripes="none", options="header"]
+|===
+^| Exponential Growth
+^| Flat
+^| Exponential Decay
+
+^| @image{images/growth.png, 150}
+^| @image{images/flat.png, 150}
+^| @image{images/decay.png, 150}
+
+| @center{@math{b > 1}} 
+
+- When the base is *larger* than 1, it's called the @vocab{growth factor}, since it determines how quickly the output of function grows.
+- The function will start flat and then grow by the "percentage greater than 1". 
+- A base of @math{1.25} (or @math{1 + 0.25}) will grow by @math{25%} each time @math{x} grows by 1.
+
+| @center{@math{b = 1}} 
+
+- Raising 1 to _any_ power will always produce 1
+- When the base is *equal* to 1, the function turns into @math{f(x) = a + k}
+- This is a linear function with a slope of zero, and a y-intercept of @math{a + k}
+
+| @center{@math{0 < b < 1}} 
+
+- When the base is *smaller* than 1, it's called the @vocab{decay factor}, since it determines how quickly the output of the function drops.
+- The function will drop quickly by the "amount less than 1" and then level out close to a horizontal line.
+- A base of @math{0.25} (or @math{1 - 0.75}) will shrink by @math{75%} each time @math{x} grows by 1.
+|===
+
+@slidebreak
+==== Vertical Shift...and Horizontal Asymptote @math{k}
+
+The equation of the horizontal line that an exponential function approaches will always be @math{y = k}. This horizontal line is called an @vocab{asymptote}.
+
+*Adjusting @math{k} shifts the asymptote up and down*, dragging with the rest of the exponential curve that approaches it.
+
+@slidebreak
+==== Initial Value @math{a}
+
+What do you think the y-intercept for the exponential function below will be?
+
+[.big]
+@center{@math{f(x) = 4(2^x) + 3}}
+
+@slidebreak
+
+If exponential functions worked like linear functions, we would expect the y-intercept to be the the constant term: 3.
+
+But, since any value raised to the power of zero is 1, when @math{x = 0} in exponential equations, the @math{a} part of the exponential term _remains_, so we can't just look at the constant term.
+
+@indented{
+@math{f(0) = 4(2^0) + 3} +
+@hspace{2em} @math{= 4(1) + 3 } +
+@hspace{2em} @math{= 7}
+}
+
+@QandA{
+@Q{So what _is_ the y-intercept of an exponential function?}
+@A{Give students time to discuss...}
+}
+
+@slidebreak
+
+*The y-intercept of an exponential function is @hspace{1em} @big{@math{a + k}}*
+
+- If @math{k} is "missing", the coefficient @math{a} is the initial value where @math{x = 0}.
+- If @math{a} is "missing", the value of the coefficient is @math{1}.
+- If we don't see @math{a} or @math{k} in an exponential equation, the y-intercept of the function is 1.
+
+@lesson-instruction{
+- Turn to @printable-exercise{classifying-plots.adoc}, and decide whether the shape of the scatter plot suggests a linear, quadratic, or exponential relationship.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{How does finding the y-intercept for exponential functions differ from finding it for the linear and quadratic functions you've seen before?}
+@A{When @math{x} is zero for linear and quadratic functions, we can ignore everything except the constant term. In exponential functions, the constant term isn't enough to give us the y-intercept!}
+
+@Q{What new information have you gained by looking at graphical representations, rather than tables?}
+@A{In the graph you can easily see the asymptote - where the function "levels out" - which is harder to see staring at number in a table.}
+}
+
+== Exponential Growth and Decay
+@objective{model-fit-function}
+@objective{exponential-situations}
+
+=== Overview
+Having explored the behavior of exponential functions as @printable-exercise{classifying-tables.adoc, sequences of numbers} and @printable-exercise{classifying-plots.adoc, point clusters on a graph}, students move on to sense-making. They explore the relationship between growth/decay rates and growth/decay factors. Finally, they apply this knowledge to identifying exponential growth and decay in function definitions and word problems.
+
+=== Launch
+
+@QandA{
+Suppose you deposit $100 in a savings account, earning 3% interest each year.
+@Q{How can we calculate the amount of money in the account after *1 year*?}
+@A{3% of $100 is $3, which we add to $100 to get $103.}
+@Q{How can we calculate the amount of money in the account after *2 years*?}
+@A{3% of $103 gives us $3.09, which we add to the previous total of $103 to get $106.09}.
+@Q{How can we calculate the amount of money in the account after *3 years*?}
+@A{3% of $106.90 gives us $3.18, which we add to the previous total of $106.09 to get $109.27.}
+}
+
+==== Exponential Growth
+
+If we earn 3% interest every year, there's a little more money to grow every year, and the total grows faster than the year before. Once you hit the sharp part of the exponential curve, that $100 will turn into a _lot_ of money down the road!
+
+@slidebreak
+
+*Let's write a function to model this growth so that we can calculate the value for and year without calculating the value for every year in between!*
+
+Since the growth rate is _positive_, the function can be said to exhibit @vocab{exponential growth}.
+
+- We know the initial value @math{a} is $100
+- We know that the horizontal asymptote @math{k} isn't adding or subtracting anything, since at "year zero" there was exactly $100 in the account.
+- We know that the base @math{b} must be greater than one, since the account is growing. But what is the actual @vocab{growth factor}?
+
+@slidebreak
+
+@indented{
+Let's take another look at our first calculations: @hspace{1em}@math{$100 + ($100 \times 0.03)}
+
+If we factor out the $100 we get: @hspace{1em}@math{$100 \times (1 + 0.03)} @hspace{1em} or @hspace{1em}@math{$100 \times (1.03)}
+
+a growth rate of 3% translates to a growth factor of 1.03
+}
+
+- So our function is @hspace{1em} @big{@math{f(x) = 100 \times 1.03^{\text{years}}}}
+
+@lesson-point{
+To find the @vocab{growth factor} (@math{b}) from the @vocab{growth rate}: @hspace{1em} @big{@math{b = 1 + r}}
+}
+
+@vspace{1ex}
+
+==== Exponential Decay
+
+A $50,000 car loses 20% of its value each year.
+
+*Let's write a function to model this decay.*
+
+@slidebreak
+
+Since the growth rate is _negative_, the function can be said to exhibit @vocab{exponential decay}.
+
+- Growth rate: @hspace{1em}@big{@math{-20%}} @hspace{1em} or @hspace{1em}@big{@math{-0.2}}
+
+- Growth factor (also sometimes called the decay factor): @hspace{1em}@big{@math{1 +  -.20 = .80}}
+
+@big{@math{\text{value}(\text{years}) = $50,000(.80)^{\text{years}}}}
+
+@slidebreak
+
+@vspace{1ex}
+
+*@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*
+
+- Most cells (e.g. bacteria, the cells in a growing fetus, etc.) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, then 8, then 16, etc: the function @math{\text{cells}(\text{hours})} grows exponentially. +
+
+- Unstable atomic nucleus decay into stable nuclei over time, emitting ionizing radiation as a byproduct. We use the term _half-life_ to refer to the length of time it takes for 50% of the atomic nuclei in a radioactive sample to decay: the function @math{\text{unstable-atoms}(\text{half-lives})} decays exponentially.
+
+- Car loans, savings accounts, mortgages, and credit card debt all use exponential growth (if you're saving) and decay (if you're borrowing). Many adults don't really understand exponential behavior well, and don't realize how sharply these functions rise or fall once they hit the sharp part of the curve!
+
+@teacher{
+In the following activities, students will:
+
+- identify whether various plots, scenarios, and definitions represent linear, quadratic, or exponential functions
+- think about and apply their knowledge of growth, decay, initial value, and growth factor
+
+Decide whether you'd like to pull your class back together to discuss after each activity or once they've completed all three.
+}
+
+=== Investigate
+@ifslide{*@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*}
+
+@lesson-instruction{
+- Let's practice identifying linear, quadratic, and exponential growth. With your partner, complete:
+  * @printable-exercise{classifying-defs.adoc}
+  * @printable-exercise{classifying-descriptions.adoc}
+- @opt{For more practice, complete @opt-printable-exercise{classifying-descriptions-2.adoc}}
+}
+
+@QandA{
+- What strategies did you use to decide if a function was linear, quadratic, or exponential?
+- When a function was exponential, how did you recognize whether it was growing or decaying?
+- What new insights did you gain about exponential functions by thinking about them in real-world scenarios?
+}
+
+@teacher{
+Have students share their answers, asking them to notice and wonder about the sequences for the exponential examples. How are these sequences growing or decaying? How is that growth or decay different from what they've seen before?
+}
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with an exponential, real-world scenario, then have them write down an exponential function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their exponential function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "money in a savings account vs. years").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
+}
+
+=== Synthesize
+
+- You looked at several different representations of exponential functions: tables, graphs, descriptions, and equations.
+- Which representation was the _most_ useful for you? Why?
+- Which representation was the _least_ useful for you? Why?
+

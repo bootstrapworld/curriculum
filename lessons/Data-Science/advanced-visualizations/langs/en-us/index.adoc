@@ -14,7 +14,7 @@
 
 @description{Defining functions allows data scientists to create advanced data visualizations, which expose deeper insight into a dataset. This motivates students to define their own functions and deepen their analysis.}
 
-@lesson-prereqs{contracts-tables-visualizations, functions-examples-definitions}
+@lesson-prereqs{contracts-visualizations, functions-examples-definitions}
 
 @keywords{piecewise, piece-wise, scatter plot, histogram, bar chart, pie chart, bubble chart, scatter chart}
 
@@ -50,7 +50,7 @@
 
 |===
 
-== Processing Rows with Functions @duration{20 minutes}
+== Processing Rows with Functions
 
 === Overview
 
@@ -93,17 +93,21 @@ Let's put those two concepts together, and define functions that consume Rows!
 === Investigate
 
 @lesson-instruction{
-- Turn to @printable-exercise{age-dot.adoc}, and complete the top half of the page (questions 1 and 2).
+- Turn to @printable-exercise{age-bc.adoc}, and complete the top half of the page (questions 1 and 2).
 - Compare your answers to some other students'. If you each wrote down different answers, talk about what's different and what's the same.
 }
 
-@teacher{Review student answers. Every student should have the same code for this part!}
+@teacher{
+Note that the code for `age-bc` is just the function-version of the code students have already written in @lesson-link{functions-with-lookups/pages/lookup-expressions.adoc}!
+
+Review student answers. Every student should have the same code for this part!
+}
 
 @slidebreak
 
 @lesson-instruction{
 - You could imagine doing this for every animal in the shelter, but that would be a lot of very repetitive work. This is exactly what functions are made for!
-- Open your saved Animals Starter File (or @starter-file{animals, "start a new one"}), and type the Contract, Examples, and Definition for `age-dot` into the Definitions Area.
+- Open your saved Animals Starter File (or @starter-file{animals, "start a new one"}), and type the Contract, Examples, and Definition for `age-bc` into the Definitions Area.
 - Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `lizard-row` and `cat-row`.
 }
 
@@ -118,6 +122,10 @@ Let's put those two concepts together, and define functions that consume Rows!
 - Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `dog-row` and `cat-row`.
 }
 
+@teacher{
+Note that the code for `species-tag` is just the function-version of the code students have already written in @lesson-link{functions-with-lookups/pages/lookup-expressions.adoc}!
+}
+
 === Synthesize
 @QandA{
 @Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
@@ -127,7 +135,7 @@ Let's put those two concepts together, and define functions that consume Rows!
 }
 
 
-== Image Scatter Plots @duration{15 minutes}
+== Image Scatter Plots
 
 === Overview
 
@@ -179,7 +187,7 @@ The Contract for `image-scatter-plot` looks pretty different from other @dist-li
 
 This Domain is interesting: Table, String, String and...*a Function that consumes a Row and produces an Image!*
 
-@lesson-instruction{What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-dot.adoc}.}
+@lesson-instruction{What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-bc.adoc}.}
 
 @slidebreak
 
@@ -189,7 +197,7 @@ Complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.ado
 @teacher{Students will see the image below:}
 
 @ifnotslide{
-@center{@image{images/age-dot.png, 450}}
+@center{@image{images/age-bc.png, 450}}
 }
 
 @lesson-instruction{Complete the bottom section of the page on *Understanding Custom Visualizations*.}
@@ -236,7 +244,7 @@ We could, for example, represent the Animals using the following code:
 @Q{How might image-scatter-plot be useful to your own analysis?}
 }
 
-== Piecewise/Conditional Functions @duration{15 minutes}
+== Piecewise/Conditional Functions
 
 === Overview
 

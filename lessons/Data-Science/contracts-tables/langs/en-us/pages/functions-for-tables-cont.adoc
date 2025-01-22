@@ -1,0 +1,67 @@
+= Functions for Tables (continued)
+
+== Grabbing a Single Row
+
+@ifnotsoln{@vspace{1ex}}
+
+*In addition to Numbers, Strings, Booleans, Images and Tables, Pyret has a datatype for an individual `Row`.*
+
+@vspace{1ex}
+
+[.linkInstructions]
+Open the @starter-file{animals} and click "Run". In the Interactions Area (right), type `animals-table`. Hit "Enter" to see the default view of the table. +
+Then type @show{(code '(row-n animals-table 2))} and compare the result to the table.
+
+@n Write the code that generates the first row of the table. @fitb{}{@showsoln{(code '(row-n animals-table 0))}}
+
+@n Explain what the second input to `row-n` means, in as much detail as possible. @fitb{}{@ifsoln{It tells the computer the row number...}} +
+@fitb{}{@ifsoln{but since the index starts at zero we have to use a number that is one less than the Row we want.}}
+
+== Grabbing Multiple Rows
+
+@n Type @show{(code '(first-n-rows animals-table 5))}. What happens? @fitb{}{@ifsoln{It returns a new table with the first 5 rows from the `animals-table`}}
+
+@n If we wanted a table of the first 3 rows of the `animals-table`, what code would we write? @fitb{}{@ifsoln{@show{(code '(first-n-rows animals-table 3))}}}
+
+@n What is the Contract for `first-n-rows`? @fitb{}{@ifsoln{`first-n-rows {two-colons} Table,  Number -> Table`}}
+
+== Defining Values
+
+*Pyret lets us _define_ values that we want to use later. We can define any kind of values we like!*
+
+@n If we tell Pyret that @show{(code '(define x (* 4 2)))}, what would you expect to get back when you type @show{(code '(+ x 1))}? @fitb{}{@ifsoln{9}}
+
+@indented{
+Test it out by typing @show{(code '(define x (* 4 2)))} into the Interactions Area, hitting "Enter" and then typing @show{(code '(+ x 1))}.
+}
+
+@n Try typing @show{(code '(define gt (triangle 50 "solid" "green")))} and hitting "Enter". +
+@indented{
+What happens? @fitb{}{@ifsoln{nothing! all we've done is define `gt`.}} +
+Now type @show{(code 'gt)}. What do you get back? @fitb{}{@ifsoln{A solid green triangle}}
+}
+
+@n Explain what is happening on Line 14 of the @starter-file{animals}. @fitb{}{@ifsoln{We are defining `cat-row` to be the first Row in the table.}} +
+@fitb{}{}
+
+@n On line 16 of the Definitions Area, add a new definition called `my-pet`, which is defined to be your favorite animal. +
+@indented{code: @fitb{}{@showsoln{(code '(define my-pet (row-n animals-table number-will-vary)))}}}
+
+@n Add a new line at the bottom of the Definitions Area, define `first-3` to be a subset of the first 3 rows of the animals-table. +
+@indented{code: @fitb{}{@showsoln{(code '(define first-3 (first-n-rows animals-table 3)))}}}
+
+@vspace{1ex}
+
+@star What happens when you type @show{(code '(first-n-rows (sort animals-table "pounds" true) 5))}?
+
+@fitb{}{@ifsoln{It returns a new table with 5 rows of data for the lightest 5 animals in the `animals-table`.}}
+
+@vspace{1ex}
+
+@indented{_Note: In this case, the output of `sort(animals-table, "pounds", true)` is the Table `first-n-rows` is taking in!_}
+
+@ifnotsoln{@vspace{1ex}}
+
+@star &#9733; See if you can figure out how to compose the code that would generate a table of the 10 oldest animals!
+
+@fitbruby{13em}{@ifsoln{first-n-rows}}{function-name} (@fitbruby{35em}{@ifsoln{sort(animals-table, "age", false)}}{Table}, @fitbruby{7em}{@ifsoln{10}}{Number})

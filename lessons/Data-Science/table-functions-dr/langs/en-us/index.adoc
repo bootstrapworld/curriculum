@@ -1,0 +1,341 @@
+= Writing Functions with the Design Recipe
+
+@description{Students use the Design Recipe to define @ifproglang{pyret}{functions that consume rows}@ifproglang{codap}{Transformers}, developing a structured approach to answering questions by transforming tables.}
+
+@lesson-prereqs{filtering-and-building}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+@objective{write functions that consume a Row and perform a _lookup_ to produce a column}
+@objective{write functions that consume a Row and _compute_ to produce an Image}
+@objective{write functions that consume a Row and _compute_ to produce a Boolean}
+
+| Student-facing Lesson Goals
+|
+
+- Let's define functions that look up values from a Row.
+- Let's define functions that produce Images from a Row.
+- Let's define functions that compute a Boolean from a Row.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+| Preparation
+| 
+@preparation{
+- To do the Design Recipe Telephone activity, you will need to decide on groups of 3 and print copies of the word problems that you will be using. (A class of 30 will only need 10 copies of each Design Recipe problem.)
+}
+
+| Key Points for the Facilitator
+|
+- Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores - they are for human eyes only!
+- The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code - something the computer doesn't read.
+- Remind students that the @vocab{Domain} and @vocab{Range} of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like Integers, Rationals, etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
+- If students struggle with creating the examples, use "Where'd You Get That" to help students build up their understanding around the concept.
+
+|===
+
+
+== The Design Recipe
+
+=== Overview
+In this lesson students build on what they already know about multiple representations of functions (contracts, examples and definitions) to write purpose statements and gain fluency with the Design Recipe.
+
+=== Launch
+We might want to define functions to help us filter rows, build columns, or represent data with images. We can _say_ what we want the function to do pretty easily, but it can be surprisingly hard to see the computation behind those words.
+
+@slidebreak
+
+_The struggle is real._
+
+Anyone who has dealt with a word problem knows this challenge! It's easy to read a word problem and get what it's asking, but it can be surprisingly hard to see the computation behind those words.
+
+We are going to learn a strategy for breaking down word problems, called the *Design Recipe*.
+
+@slidebreak
+
+Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
+
+In the *Design Recipe* we call this first step *Writing a Purpose Statement*.
+
+@slidebreak
+
+We write @vocab{Purpose Statements}, because Contracts don't provide enough details to generate examples and write a @vocab{function definition}.
+
+For example, the Contract for `bar-chart` says it needs a Table and a String, but that's not the whole story!
+
+- The Table has to have at least one data row.
+- The String has to be the name of a column in the table.
+- The data in that column has to be categorical.
+
+_The @vocab{Purpose Statement} includes all the stuff we need that's missing from the Contract._
+
+@slidebreak
+
+@lesson-instruction{
+- On @printable-exercise{matching-wp-purpose.adoc}, we see four data science problems and four @vocab{purpose statements}.
+- Take 2 minutes to read them and identify pairs that describe the same thing and should be matched to each other.
+- What pairs did you come up with?
+- What do you Notice about those purpose statements? Do they have anything in common?
+}
+
+@slidebreak
+
+@lesson-point{
+Purpose statements should have enough details to allow us to write examples _without_ looking at the word problem!
+}
+
+=== Investigate
+
+@lesson-instruction{
+- Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
+- When you're finished, see if you can write the function definition!
+- @opt{For more practice, complete @printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.}
+}
+
+@slidebreak
+
+A good @vocab{Purpose Statement} must have three things:
+
+@indented{
+1. A description of what the function _consumes_
+
+2. A description of what the function _produces_
+
+3. All the _relevant information_ about how to produce that output
+}
+
+@slidebreak
+
+But what does _"relevant information"_ really mean?
+
+@QandA{
+@Q{What information do we need, in order to write our examples?}
+@A{The name of the function}
+@A{The name of the row we're using in the example}
+@A{The name of the column(s) we use in the example}
+@A{What we do with the information contained in that row}
+}
+
+@slidebreak
+@lesson-instruction{
+@right{@image{images/confused-robot.png, 150}}
+
+- Turn to @printable-exercise{fixing-purpose.adoc}.
+- An AI chatbot (like ChatGPT) has produced a purpose statement for each word problem... but ran into some difficulties.
+- Fix the chatbot's purpose statements, and then identify:
+  * What important information was missing from each purpose statement that you would need to solve the problem?
+  * What extra information was included, that wasn't needed to solve the problem?
+}
+
+
+=== Synthesize
+What are the important elements of purpose statements?
+Why are purpose statements useful?
+
+@strategy{The Design Recipe in your Classroom}{
+
+
+The three steps of the Design Recipe are designed to mirror best practices that you may _already be using in your classroom_. It's merely a collection of those practices, assembled in a structured way with great care taken to connecting each practice with the others.
+
+*Writing the Contract and Purpose Statement is where students _understand_ the word problem.* If you have your students restate the problem in their own words, draw pictures, or underline the inputs and outputs in the word problem, _you're already using this practice!_
+
+*Writing examples and circling-and-labeling what changes is where students _apply_ their understanding* to concrete inputs. If you have your students work through some concrete examples before jumping straight to variables and formulas, and ask them "what's the rule?" or "what's the pattern?", _you're already using this practice!_.
+
+*Writing the definition is where students _formalize and abstract_ this understanding* to work with _any input_. This is where they identify the structure of the rule or pattern, independently of any specific inputs.
+
+The order of the recipe is a recommendation based on 20+ years of research about what works for most students, but that doesn't mean this order works best for _every_ student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
+}
+
+@pd-slide{
+
+*Connect to the Classroom: Using the Design Recipe to Help a Student*
+
+- Hey teacher! I'm trying to write these examples. I don't know what the function name is!
+- Hey, Teacher! What do I have to give it? It's a number a string, right? Now, wait... two strings? I give it two strings?
+- Teacher, I'm stuck again. I don't know what to put for "function produces!"
+- I need to write my second example. Wait, I forgot the name of my function!
+- I forgot how many inputs it takes. Help!
+- Am I ready to define my function? Am I ready to move on? Or is there something I need to do before I move on?
+- Wait, what should I name my variables?
+}
+
+@pd-slide{
+
+*Connect to the Classroom: Using the Design Recipe to Help a Student*
+
+It is natural to go a couple of steps forward and then realize that there was something missing and to go back and get it. It's important that students know that they can do that!
+
+We are turning children into word problem compilers. They are seeing this big messy word problem. Each step in the recipe forces them to make it a little more formal.
+}
+
+@pd-slide{
+
+*Connect to the Classroom: The Design Recipe's Value*
+
+The takeaway here is that if a student has a good contract and purpose, they actually can't fail.
+
+No matter how many questions they ask, we can say: check your contract, check your domain, check your range, look at your purpose statement, what did you circle?
+
+This is cool because all they have to do is restate the problem and know what the domain and range are and everything else is just grunt work. All the thinking happens here; everything else is just formalizing that thinking!
+}
+
+
+@pd-slide{
+
+Let's connect this back to the best practices in math that many of you probably already do.
+
+- If you tell kids to show their work, you're already asking them to write examples.
+- If you tell kids to start concrete and get abstract, or to connect multiple representations, then the Design Recipe should feel familiar.
+- If you're spending time in your classroom having kids explain their thinking, that is time that can be spent working on the Design Recipe.
+- Whatever time you're spending helping kids figure out where to start... you get all that time back. Because now they will always know where to begin – with the contract!
+}
+
+== Design Recipe Telephone
+
+=== Overview
+Students work in teams to collaboratively define multiple Table Functions. When these functions are composed in different ways, they can be used to do much more sophisticated analysis!
+
+=== Launch
+@right{@image{images/DR-Telephone.png, 200}}
+
+Why would it be challenging to make the following visualizations?
+
+- a dot plot showing the distribution of kilograms across old cats at the shelter
+- a scatter plot showing the relationship between kilograms of young dogs at the shelter, and how many days it took to be adopted
+
+There would be a lot of steps involved!
+
+Most computer programs are written by huge teams! It is critical that each team member records their thinking with enough detail for other team members to be able to pick up where they left off.
+
+We're going to practice collaborative programming and try writing some other Table Functions using the Design Recipe, through an activity called Design Recipe Telephone.
+
+=== Investigate
+@ifnotslide{
+@teacher{
+
+1. Divide the class into groups of three.
+
+2. Choose which set of word problems you are going to start with and give each student within each group a different word problem from the set.
+
+[cols="1a,1a", options="header"]
+|===
+| Word Problem Set 1:
+| Word Problem Set 2:
+
+| @handout{days-and-years.adoc} +
+  @handout{few-and-many-legs.adoc} +
+  @handout{name-and-name-has-s.adoc}
+
+| @handout{male-and-female.adoc} +
+  @handout{rabbits-and-lizards.adoc} +
+  @handout{ounces-and-grams.adoc}
+|===
+
+Note that many of these word problems are the "function-version" of the expressions students wrote in @lesson-link{functions-with-lookups/pages/lookup-expressions.adoc}!
+
+}
+}
+
+@lesson-instruction{
+- In this activity, each person in your group will start with a different word problem. You will each be doing _one step of each Design Recipe problem_. After you complete your step, you will fold your paper to hide the part that you were looking at so that only _your work and the rest of the recipe_ are visible. Then you will pass your work to the person to your right.
+
+- The person who has received your paper will review your work and complete the next step based solely on what you wrote down for them. If they don't have the information they need, they will give the paper back to you for revision.
+
+- Meanwhile, you will receive a different problem from the person to your left. If at any point your realize that the person before you didn't provide enough information, you may hand the paper back to them for revision.
+
+- HINT: All of the word problems here will use code that looks a _lot_ like the code you wrote in @lesson-link{functions-with-lookups/pages/lookup-expressions.adoc}! If you get stuck, refer back to your answers on that page!
+}
+
+@slidebreak
+@ifslide{@right{@image{images/DR-Telephone.png, 200}}}
+*Round 1:*
+@lesson-instruction{
+You should have a page with a Word Problem.
+
+- Write the Contract and Purpose Statement.
+- Fold your paper to hide the Word Problem.
+- Pass your paper to the person to your right.
+
+}
+
+@ifslide{
+@teacher{
+Choose which set of word problems you are going to start with and give each student within each group a different word problem.
+
+- Set 1: @handout{days-and-years.adoc},  @handout{few-and-many-legs.adoc},   @handout{name-and-name-has-s.adoc}
+- Set 2: @handout{male-and-female.adoc}, @handout{rabbits-and-lizards.adoc}, @handout{ounces-and-grams.adoc}
+
+}
+}
+
+@slidebreak
+@ifslide{
+@right{@image{images/DR-Telephone.png, 200}}
+_Make sure you’ve folded your paper over so that only the Contract and Purpose are visible._
+}
+
+*Round 2:*
+
+@lesson-instruction{
+You should have just received a new page, that has been folded to hide the Word Problem.
+
+- Write Examples from the Contract and Purpose Statement.
+- Circle the Variables.
+- Then fold your paper to hide the Contract and Purpose Statement.
+- Pass your paper to the person to your right.
+}
+
+@slidebreak
+
+@ifslide{
+@right{@image{images/DR-Telephone.png, 200}}
+_Make sure you’ve folded the top of your paper over so that only the Examples are visible._
+}
+
+*Round 3:*
+
+@lesson-instruction{
+You should have just received a new page that has been folded so that the Examples are at the top.
+
+- Write a Definition from the Examples you just received.
+- When you're done, pass your paper to your right to return it to the person it started with.
+}
+
+@slidebreak
+@ifslide{@right{@image{images/DR-Telephone.png, 200}}}
+
+*Round 4:*
+@lesson-instruction{
+You should now be holding the page you started with.
+
+- Unfold the page and type the full Design Recipe into the Definitions Area of the @starter-file{animals}.
+- If your function is a Boolean-producing function, make sure that at least one of the examples should produce true and at least one should produce false. If not, add an additional example.
+- Click "Run" and confirm that all tests pass.
+- If not, collaborate with your team to identify which steps of the Design Recipe need to be reworked.
+}
+
+@teacher{
+This activity can be repeated several times, or done as a timed competition between teams. The goal is to emphasize that each step - if done correctly - makes the following step incredibly simple.}
+
+=== Synthesize
+@QandA{
+The Design Recipe is a way of slowing down and thinking through each step of a problem.
+
+@Q{If we already know how to get the answer, why would it ever be important to know how to do each step the slow way?}
+@A{Someday we won't be able to get the answer, and knowing the steps will help}
+@A{So we can help someone else who is stuck}
+@A{So we can work with someone else and share our thinking}
+@A{So we can check our work}
+@Q{Why is it helpful to use each of these steps in the Design Recipe?}
+@Q{What step do you find the most challenging right now? The easiest?}
+@Q{What are some functions you might want to define for your _own_ analysis?}
+}

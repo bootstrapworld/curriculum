@@ -1,0 +1,339 @@
+= Fitting Models
+
+@description{Students learn how to fit a linear model to a scatter plot, using the _S_-value (Standard Deviation of Residuals) of model fitness.}
+
+@lesson-prereqs{contracts-tables}
+
+@keywords{linear, slope, intercept, slope-intercept, S, Sres, error}
+
+@add-to-lang{fit-model, S}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+@objective{models-compare-fit}
+@objective{models-interpret-s}
+
+| Student-facing Lesson Goals
+|
+
+- Let's summarize datasets using linear models.
+- Let's explore how we could know how well a model fits the data.
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+
+| Preparation
+|
+- Students will need a straight edge for drawing lines of best fit. This will be particularly important if you plan to have your students define functions for their own linear models.
+
+
+|===
+
+== Line of "Good" Fit?
+
+=== Overview
+Students confront the notion of "model fitness" (e.g - how might we measure how well a model fits a dataset?). They consider two models for a simple dataset and brainstorm how we could measure which fits better.
+
+=== Launch
+
+Pyret has a function for making scatter plots, which has _four_ things in its Domain: I
+
+1. The *table* containing all the data
+2. The name of the column to use for labels
+3. The name of the column to use for the x-coordinates (xs)
+4. The name of the column to use for the y-coordinates (ys).
+
+Here's the Contract:
+
+[cols="^1a", frame="none", stripes="none"]
+|===
+| @show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+|===
+
+@slidebreak
+
+@ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
+
+Let's see if there's a correlation between an animal's `age` and the `weeks` it takes to be adopted.
+
+@lesson-instruction{
+- Open the @starter-file{fitting-animals}.
+- Make a scatter plot, using the animals' `name` as the labels, their weight in `pounds` as the @vocab{explanatory variable} on the x-axis, and the `weeks` it took to be adopted as the @vocab{response variable} on the y-axis.
+}
+
+@slidebreak
+
+@center{@image{images/sp2.png, 400}}
+
+@QandA{
+@Q{Does there appear to be a relationship here? If so, how would you describe it?}
+@A{The goal is to draw out student-generated notions, that may or may not include formal language, e.g.
+*** "It looks like weeks to adoption decreases as the lizards get heavier."
+*** "I see a shape in the points the looks like this (motions with arms)."
+*** "The points seem to be clustering around a diagonal line with a negative slope."
+}
+@Q{If a new lizard appeared that weighed 2 pounds, how long would you predict it would take to be adopted?}
+@A{I'm not 100% sure, but I would expect it would probably take between 8 and 10 weeks, and it would certainly be surprising if it took less than 6 weeks to be adopted.}
+@Q{How did you make your prediction?}
+@A{I pictured a line.}
+@A{I pictured a wide paint brush going backwards through the points starting from the right until I got to 2.}
+@A{I thought about what point might come between (1,6) and (3,8)... which was (2,7) and then decided that based on the other points on the graph that point would probably be a little higher.}
+}
+
+@strategy{Teaching Tip}{
+
+Project the scatter plot at the front of the room, and have students come up to point out their patterns.
+}
+
+@slidebreak
+
+We can summarize the distribution of one quantitative column of data with one number. (For example, the @vocab{mean}. Can you name any others?) Similarly, can summarize _the relationship between *two* quantitative columns of data_ with *two* numbers: the slope and y-intercept of the line that is closest to all the coordinates on the scatter plot.
+
+@slidebreak
+@ifslide{ @right{@image{images/sp2.png, 400}} }
+
+The line that is closest to all the other points is known as the @vocab{line of best fit}.
+
+@lesson-instruction{
+- In your mind's eye, picture where you might draw a line on this scatter plot to summarize the trend you see in the data.
+}
+
+=== Investigate
+
+While most of the class might have pictured similar lines, it's likely that different people see slightly _different_ linear relationships. But how do we know which one is best?
+
+@lesson-instruction{
+- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straight edge to draw a line that you think would best fit the data on the scatter plot.
+- Then, complete the questions on the page with your partner.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{What criteria did you come up with for how to assess whether or not a model is a good fit for the data?}
+@A{Answers will vary. Ideas might include:}
+@A{The points should be as evenly distributed around the model as possible.
+- We could see how the number of points above the line and below the line compare.
+- We could measure the distance between the points and the line and try to make sure the average distance above is balanced with the average distance below.}
+
+@Q{How could we measure the distance between the data points and the linear model?}
+@A{Answers will vary. Ideas might include:}
+@A{By drawing vertical lines connecting each data points to the linear model.}
+@A{By drawing horizontal lines connecting each data points to the linear model.}
+@A{By drawing diagonal lines connecting each data points to the linear model. +
+Push students to recognize that in order for this measurement to be useful they would have to be perpendicular to the linear model!}
+@A{By drawing squares with one corner on the data point and the opposite corner on the linear model.}
+}
+
+== Introducing @math{S}
+
+=== Overview
+
+Students test out their linear models using a Pyret function called `fit-model`, which draws the residuals and computes a measure of fitness called the Standard Deviation of the Residuals (@math{S}).
+
+=== Launch
+
+Pyret has a function called `fit-model`, that takes in a function and graphs it on top of a scatter plot.
+
+@QandA{
+@Q{Take a look at the contract for `fit-model` in your @dist-link{Contracts.shtml, contracts page}. What is its Domain?}
+@A{Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s, our @math{y}s... *additionally, it _consumes a function_*.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Turn to @printable-exercise{intro-fit-model.adoc}.
+- What do you Notice?
+- What do you Wonder?
+}
+
+[cols="1a,1a", frame="none", grid="none"]
+|===
+|[subs="quotes"]
+----
+fit-model(
+  lizard-sample,
+  "name",
+  "pounds",
+  "weeks",
+  *cy*) # fit the cy model
+----
+|[subs="quotes"]
+----
+fit-model(
+  lizard-sample,
+  "name",
+  "pounds",
+  "weeks",
+  *jo*) # fit the jo model
+----
+
+| @centered-image{images/fit-cy-crop.png}
+| @centered-image{images/fit-jo-crop.png}
+|===
+
+@slidebreak
+
+@ifslide{
+[cols="1a,1a", frame="none", grid="none"]
+|===
+| `fit-model(lizard-sample, "name", "pounds", "weeks", cy)`
+| `fit-model(lizard-sample, "name", "pounds", "weeks", jo)`
+
+| @centered-image{images/fit-cy-crop.png}
+| @centered-image{images/fit-jo-crop.png}
+|===
+}
+
+@QandA{
+@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. How are they similar? How are they different?}
+@A{Both models have a blue line and red dots.}
+@A{The x-axis goes from 0 to 8 for both of them.}
+@A{The y-axis for `cy` is numbered 0 to 20. It goes from 3 to 9 for `jo`.}
+@A{`jo` has more red dots below the blue line than above it.}
+@A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
+}
+
+@slidebreak
+
+@right{@image{images/residual.png, 200}}When we graph a model in Pyret, we can see that:
+
+- some of the points are close to the line ("real" @math{y} is close to "predicted" @math{y})
+- some points are quite far away ("real" @math{y} is far from "predicted" @math{y})
+
+The difference between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data. The smaller the residuals, the better a model fits!
+
+@slidebreak
+
+@QandA{
+@Q{There are three terms in the legend at the bottom. What do they refer to?}
+@A{The blue line is the model.}
+@A{The red dots are the data from the data set.}
+@A{Residuals refer to the vertical black lines connecting the data points to the model, representing the distance between the data and the value the model predicts. They vary in length depending on how far above or below the model the data is situated.}
+}
+
+@slidebreak
+
+@QandA{
+@Q{How do @math{S} and @math{r-sqr} compare for the two models?}
+@A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `jo` than they are for `cy`.}
+
+@Q{Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?}
+@A{Answers will vary, but students should have some sense of the idea that if one model has a lower @vocab{S} value than another model of the same data it indicates a better fit.}
+}
+
+@slidebreak
+@ifslide{@right{@image{images/residual.png, 200}}}
+Just as there are different tools for finding the center or spread of a dataset, there are many different tools to calculate the fitness of a model, including @math{S} and @math{R^2}, which you just saw when fitting the models in @proglang.
+
+Statisticians and Data Scientists are careful to use the right tool for the job!
+
+- We want a measure that takes the values from _every_ data point into account.
+- We want a measure of _error_, so the measure should be zero for a perfect model fits every point (i.e. - has no residuals).
+- We want a measure that's concrete, and easy to understand.
+
+@slidebreak
+
+@ifslide{ @right{@image{images/residual.png, 200}} }
+@vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
+
+- The closer the data points are to the model, the smaller the residuals are.
+- Smaller residuals mean a smaller @vocab{S}, and a better model!
+- We know that if a model fits the data perfectly, the @vocab{S} value would be 0.
+- @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis). When fitting a model to this dataset, an @vocab{S} of `5` means _the standard deviation of the residuals is "5 weeks to adoption"_ - making it much easier to understand.
+
+@slidebreak
+
+@lesson-point{
+The @math{S}-value always has to be considered in the context of the range of values that the model is predicting!
+}
+
+@lesson-instruction{
+- Turn to @printable-exercise{s-tells-us.adoc}.
+- Consider the @math{S}-value of each model in the context of the range of the data described.
+- Decide how well the model is likely to predict values.
+}
+
+@QandA{
+@Q{Were any of the models described terrific? How do you know?}
+@A{Both 2 and 8}
+@A{Because the numbers in the range were huge and the @math{S} value was really small.}
+
+@Q{Were any of the models described terrible? How do you know?}
+@A{Both 1 and 6}
+@A{Because the @math{S}-value was big in comparison to the range.}
+@A{For the first scenario the @math{S}-value was 300, which was the majority of the range between 0 and 400.}
+@A{For the sixth scenario, even though the @math{S}-value was only 1, it was much bigger than any of the numbers in the range, which maxed out at two hundredths.}
+}
+
+@slidebreak
+
+Now that we have a basic sense of what `fit-model` does, let's see it work live in Pyret!
+
+@lesson-instruction{
+- Return to the @starter-file{fitting-animals}.
+  ** Notice that the functions you were just looking at are defined on lines 16 and 17 of the Definitions Area.
+  ** Following this you will see two `fit-model` expressions: one takes in the function for `cy` and the other takes in the function for `jo`.
+- Uncomment the last two lines of code and click "Run".
+}
+
+@QandA{
+@Q{How do we know that the first Interactive Chart that pops up is fitting Cy's model to the data?}
+@A{Because the first expression in the Definitions Area takes in `cy`.}
+
+@Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
+@A{The x and y coordinates of any point in the model.}
+
+@Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
+@A{The x and y coordinates of each point in the data set, and the animal they are associated with.}
+
+@Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near the vertical residuals lines. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
+@A{"Residuals" tell us the x and y coordinates of a data point, compared with the predicted y-value (`y'`) for the x-value.}
+
+@Q{We've been looking at how well `cy` 's model fit the data. What do we need to do if we want to see how well `jo` 's model fits the data.}
+@A{Close the window and another interactive chart will pop up.}
+
+@Q{What happens once we close the second interactive chart?}
+@A{We see clickable thumbnail images of both charts in the Interactions Area.}
+}
+
+
+@strategy{Optional: Which Model is Best?}{
+If students know how to compute the equation of a line that crosses between two points, use @opt-printable-exercise{lines-to-functions.adoc} to have them define their models for `age` v. `weeks` in Pyret and use `fit-model` to see which one is best.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{Why do we need to know the Range of the dataset in order to interpret an @vocab{S-value}?}
+@A{Because @vocab{S-values} tell us the expected error in _units of the variable on the y-axis_. An error of $1000 could be huge or miniscule depending on the context.}
+@Q{Besides looking at the @vocab{S-value}, what might you look for to determine whether a linear model is a good fit for the data?}
+@A{That the average distance of the points above the line appears to be about the same as the average distance of the points below the line.}
+}
+
+== Additional Practice
+
+For more practice deciding and articulating which model is better, have your students complete @opt-printable-exercise{how-could-we-measure-good-fit-cheerios.adoc}. They can then practice fitting the models to test their work using the @opt-starter-file{alg2-cheerios}.
+
+@ifnotslide{
+[cols="1a,1a", frame="none", grid="none"]
+|===
+| `fit-model(cheerios-table, "id", "day", "cheerios-on-the-floor", f)`
+| `fit-model(cheerios-table, "id", "day", "cheerios-on-the-floor", g)`
+
+| @centered-image{images/cheerios-f.png}
+| @centered-image{images/cheerios-g.png}
+|===
+}

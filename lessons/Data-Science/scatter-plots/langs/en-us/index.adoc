@@ -3,7 +3,7 @@
 @description{Students investigate scatter plots as a method of visualizing the relationship between two quantitative variables. In the programming environment, points on the scatter plot can be labelled with a third variable!}
 
 @ifproglang{pyret}{
-@lesson-prereqs{contracts-tables-visualizations}
+@lesson-prereqs{contracts-visualizations}
 }
 
 @ifproglang{codap}{
@@ -21,10 +21,9 @@
 @objectives
 @objective{explanatory-response}
 @objective{scatter-plots-by-hand}
-@objective{scatter-plots-pyret}
+@objective{scatter-plots-proglang}
 @objective{trends-in-scatter-plots}
-@objective{unusual-observations}
-
+@objective{when-subsets-make-sense}
 
 | Student-facing Lesson Goals
 |
@@ -48,83 +47,115 @@
 - Emphasize the importance of students using their eyes - it's not just about the numbers.
 |===
 
-== Does Age Affect Adoption Time? @duration{20 minutes}
+== Introducing Scatter Plots
 
 === Overview
-Students create @vocab{scatter plots}, which are visualizations that show the relationship between two @vocab{quantitative} variables. They learn how to construct scatter plots by hand, and in @proglang.
+Students are introduced to @vocab{scatter plots}, visualizations that show the relationship between two @vocab{quantitative} variables and learn how to construct them by hand.
 
 === Launch
 
 @QandA{
 @Q{Do you think that younger animals get adopted faster? Why or why not?}
 @A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. (For example: Yes, baby animals get adopted quickly because they're so cute! No, animals require too much work when they are young.)}
-@Q{What kind of data is `age`? What kind of data is `weeks`?}
+@Q{What kind of data is `age`? What kind of data is `weeks` to adoption?}
 @A{Both `age` and `weeks` are quantitative.}
 @Q{What kind of display would help us analyze the relationship between age and adoption time?}
 @A{Again, solicit students ideas and discuss why each display type would or would not work.}
+@A{@ifproglang{pyret}{Pie and }Bar charts won't work, because they show the _frequency_ of values in a _categorical_ column.}
+@A{Histograms and box plots won't work, because they help us explore the _distribution_ of values in a _quantitative_ column.}
+@A{Dot plots won't work because they show the _frequency_ of values in a single column of data.}
+@A{Most data visualizations only display one column of data.}
+@A{We want a display that will help us search for *a relationship between two quantitative columns*.}
 }
 
 @slidebreak
-
-@ifproglang{pyret}{Pie}@ifproglang{codap}{Dot plots} and Bar charts help us see the _frequency_ of values in a _categorical_ column. There are other visualizations, like histograms and box plots, that help us explore the _distribution_ of values in a _quantitative_ column.
-
-What we really want is a display that will help us search for *a relationship between two quantitative columns*, and that's exactly what scatter plots do.
 
 @lesson-point{
-Scatter plots reveal the potential relationship between two columns by plotting one on the x-axis and the other on the y-axis.
+Scatter plots are special because they help us visualize the potential relationship between two columns of data.
+}
+
+=== Investigate
+
+When modeling a possible relationship between an input and an output, we are curious about how a change in the input might "explain" the output.
+
+@slidebreak
+
+@QandA{
+@Q{Making any scatter plot begins with an important decision: _Which variable is @vocab{explanatory} and which variable is the @vocab{response}?_ In this case... +
+Do we suspect that an animal’s age can explain how long it takes to be adopted? +
+Do we suspect that how long it takes to be adopted can explain how old an animal is?}
+@A{The first one makes sense, and reflects our suspicion that age plays a role in adoption time, +
+so we'll put `age` on the x-axis and `weeks` on the y-axis.}
 }
 
 @slidebreak
 
-Before we can draw a @vocab{scatter plot}, we have to make an important decision: which variable is @vocab{explanatory} and which is the @vocab{response}?
-
-Which of the following makes the most sense?
-
-- _We suspect that an animal’s `age` helps determine how many `weeks` it takes to be adopted._
-- _We suspect that an animal's `weeks` to adoption helps determine how old it is._
-
-@teacher{
-The first one makes sense, and reflects our suspicion that age plays a role in adoption time.
+@lesson-point{
+It's customary to put the @vocab{explanatory variable} on the horizontal axis and the @vocab{response variable} on the vertical axis. +
+If there's a relationship between the columns, we'll see clumps and clouds of points in the graph.
 }
-
-@slidebreak
-
-It's customary to use the horizontal axis for our explanatory variable and the vertical axis for the response variable. Each row in the dataset will be a point on the scatter plot with `age` for x and `weeks` for y.
 
 @strategy{Why not Independent/Dependent?}{
-
 
 When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are _never_ fully dependent on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
 
 Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in _explaining_ another when searching for a relationship.
 }
 
-=== Investigate
-We will produce our scatter plot by graphing each animal as a point, using `age` for x and `weeks` for y.
-
-@lesson-instruction{
-Complete @printable-exercise{creating-scatterplot.adoc} to get a feel for making scatter plots by hand.
-}
-
 @slidebreak
 
-@strategy{Teaching Tip}{
-As an alternative to plotting the small table, assign a handful of rows from the _full table_ to each student and have them plot those animals on the board. This can be done collaboratively, resulting in a whole-class scatter plot!
-}
-
-Scatter plots show us a collection of points, arranged along two axes. If there's a relationship between these axes, we'll see clumps and clouds of points in the graph.
-
-Here's an example of a point cloud in a scatter plot from a different data set. We could describe these points as clustering around a line that slopes from the bottom left to the top right.
+Here's an example of a scatter plot.
 
 @centered-image{images/animal-p-v-cal-pc.png, 450}
 
+@QandA{
+@Q{Do you see the point cloud? How would you describe it?}
+@A{We could describe this point cloud as sloping upward diagonally from the bottom left to the top right.}
+@A{We could imagine the points clustering around a diagonal line with a positive slope.}
+}
+
+Before we turn to @proglang, let's learn how to make a scatter plot by hand.
+
+@lesson-instruction{
+- Turn to @printable-exercise{creating-scatterplot.adoc}.
+- Use each row in the dataset to make a point on the scatter plot with `age` for x and `weeks` for y.
+}
+
 @slidebreak
 
+@image{images/scatterplot-soln.png}
+
 @QandA{
-@Q{What pattern do you see in _your_ scatter plot?}
+@Q{What pattern do you see in the scatter plot you made?}
+@A{The point cloud seems to be sloping diagonally up and to the right.}
+@A{In general, older animals seem to take longer to be adopted.}
 @Q{Are there any points that seem unusual? Why?}
+@A{The lizard named Diver at (1,20) and the dog named Bob at (17,2) both fall pretty far from the other points.}
+}
+
+Unusual observations in a scatter plot are more complicated than outliers in a histogram or box plot, because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
+
+@QandA{
 @Q{Suppose we plotted the age and adoption time of four random animals, and found that they all fell in a line. Is this enough to determine that there's a relationship between the variables?}
 @A{No! Just as four flips of a fair coin might come up tails, four points chosen from a scatter plot with no pattern might still fall on a line! As our sample size increases, the chance of us seeing a pattern by random chance gets smaller and smaller.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{How do patterns or trends show up in a scatter plot?}
+@A{As point clouds}
+}
+
+== Scatter Plots in @proglang
+
+=== Overview
+Students use @proglang to apply what they've learned about scatter plots to the Data Cycle, using it to answer questions about relationships in the animals dataset.
+
+=== Launch
+
+@lesson-instruction{
+Let's see how the tiny sample you plotted by hand compares to the data in the animals table we've been working with.
 }
 
 When you created the scatter plot by hand, you started with a Table. Then you plotted a series of dots, using one column for your x's, one column for your y's, and the `name` column to provide a label for each dot.
@@ -152,9 +183,13 @@ To create a scatter plot in CODAP, place a quantitative attribute on each axis. 
 @teacher{To do this, students will need to type in: `scatter-plot(animals-table,"name", "age", "weeks")`}
 }
 
+@slidebreak
+
+@center{@image{images/age-v-weeks.png, 400}}
+
 @QandA{
-@Q{Are there any patterns or trends that you see here?}
-@A{It appears that younger animals get adopted more quickly.}
+@Q{Are there any patterns or trends that you see here? How do they compare to the scatter plot you made by hand?}
+@A{Most of the animals that are less than 5 years old are adopted in 5 weeks or less. More of the older animals take longer to be adopted. So I'd say that adoption time tends to increase with age, but the relationship isn't nearly as strong as it was in the smaller sample.}
 }
 
 @strategy{What about Line Graphs?}{
@@ -174,73 +209,123 @@ For students who want to use line graphs, create a scatter plot, then open the `
 
 }
 
-=== Synthesize
-
-How do patterns or trends show up in a scatter plot?
-
-
-== Does Size Affect Adoption Time? @duration{15 minutes}
-
-=== Overview
-Students apply what they've learned about scatter plots to the Data Cycle, using it to answer questions about relationships in the animals dataset.
-
-=== Launch
-@lesson-instruction{
-Is age the only factor that determines how long it takes for an animal to get adopted?
-}
-
-@teacher{Have students discuss.}
-
-@slidebreak
-
-Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a tenant's dog can be. Bigger dogs are not welcome in many apartments.
-
-_Perhaps the *weight* of an animal influences the adoption time!_
-
-@slidebreak
-
-@lesson-instruction{
-Take a look at the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front). Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
-}
-
-Do you think there's a relationship between `pounds` and `weeks` in this table? Why or why not?
 
 === Investigate
-@lesson-instruction{
-Complete the first Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}.
+
+@QandA{
+@Q{Do you think age is the only factor that determines how long it takes for an animal to get adopted?}
+@A{The goal here is to have an open discussion and draw students in. Allow students to share their opinions freely. For example:
+*** No! People like animals that are cute and friendly.
+*** Some dog breeds are probably more popular than others.
+*** Animals that are healthy might get adopted faster.
 }
+}
+
+Many apartment buildings do not allow large breeds of dogs, and have a limit on how heavy a resident's dog can be. +
+_Perhaps the *weight* of an animal influences the adoption time!_
+
+@lesson-instruction{
+- Take a look at the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front) and consider whether there's any evidence of a relationship between `pounds` and `weeks`.
+- Then complete the first Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, making a scatter plot to get a better visual sense of a possible relationship between `pounds` and `weeks`.
+}
+
+@ifnotslide{@center{@image{images/pounds-v-weeks.png, 350}}}
 
 @slidebreak
 
-Discuss as a class:
+@QandA{
+@Q{What did you find when you looked at the scatter-plot?}
+@A{The animals weights ranged up to 172 pounds, but most of them weighed less than 10 pounds. Similarly, some animals took up to 30 weeks to be adopted, but most seemed to be adopted in under 10 weeks.}
 
-- What did you find when you looked at the scatter-plot?
-- Does there appear to be a pattern or trend?
-- What might be problematic about including every species in the same scatter plot of weight?
-- What follow-up questions do you have?
+@Q{Does there appear to be a pattern or trend?}
+@A{There might be a slight trend toward heavier animals taking longer to adopt, but the bigger story seems to be that most of the animals weigh under 10 pounds and are adopted in under 10 weeks.}
+
+@Q{What might be problematic about including every species in the same scatter plot of weight?}
+@A{Some animal species are much smaller than others! So it could turn out that the differences in adoption times by weight are actually differences in adoption times by species.}
+
+@Q{What follow-up questions do you have?}
+}
 
 @lesson-instruction{
-Write your follow-up question in the second Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
+Choose a follow-up question to add to the second Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, and complete the Data Cycle for your new question.
+@Q{What did you learn through your Data Cycle?}
+@Q{What new questions did it lead you to ask?}
 }
 
 === Synthesize
 
 @QandA{
-There are many ways to visualize or reason about single columns of data. 
 @Q{What is special about scatter plots?}
-@A{They let us see relationships between _two_ columns!}
-
-@Q{What did you learn through your Data Cycle?}
-@Q{What new questions did it lead you to ask?}
+@A{They let us see relationships between _two_ columns! Most of the other data visualizations available us only support reasoning about a single columns of data.}
 }
 
-== Looking for Trends @duration{20 minutes}
+== Visualizing Trends
 
 === Overview
-Students are asked to identify patterns in their scatter plots. This activity builds towards the idea of _linear associations_, but does not go into depth (as as a later lesson on correlations does).
+Students practice picturing relationships between two columns of data in their minds eye and then look for trends in @proglang scatter plots. We're building towards the idea of _linear associations_, which is the focus of our lesson on @lesson-link{correlations}.
 
 === Launch
 
+@QandA{
+@Q{Imagine a scatter plot of height v. age for K-12 students. What would you expect it to look like, and why?}
+@A{Because children grow taller from age 5 to 18, we would expect to see a point cloud sloping upward to the right, with younger students tending to be shorter, and older students tending to be taller.}
+@Q{Imagine a scatter plot comparing the number of Marvel movies produced each year to the number of car accidents each year. What would you expect it to look like?}
+@A{There is no relationship between Marvel movies and car accidents, so we wouldn't expect the points to be clustered in any particular way.}
+}
+
+=== Investigate
+
+Let's get some more practice with building scatter plots in @proglang and looking for trends.
+
+@lesson-instruction{
+- Turn to @printable-exercise{exploring-columns.adoc}. With your partner discuss what you expect the relationship for each pair of variables to look like.
+- Then build the relevant plots in @proglang to complete the page.
+}
+
+@teacher{
+Debrief, showing the plots on the board. Make sure students also see the plots for which there is no relationship!
+}
+
+==== When does it make sense to look for a relationship between two columns?
+
+We have seen that scatter plots give us the power to explore relationships between two columns of data.  But, it is important to note that sometimes comparing two full columns of data doesn't actually make sense!
+
+For example, different species have very different lifespans!
+
+@indented{_A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown._}
+
+With differences like this, plotting `weeks` to adoption and `age` for all of the species with identical blue dots on the same scatter plot could:
+
+- _hide_ a real relationship
+- _create the illusion_ of a relationship that isn’t really there!
+
+@QandA{
+@Q{For what other variables in the Animals Dataset might it make more sense to zoom in on species-level data when looking for relationships between columns? Why?}
+@A{Animal weights also vary widely by species - a snail is a lot lighter than a dog!}
+}
+
+@ifproglang{pyret}{
+@teacher{
+Pyret is not limited to basic scatter plots! There are ways to @lesson-link{functions-examples-definitions, define functions of your own} and extend Pyret to deepen your analysis. Our lesson on @lesson-link{advanced-visualizations} supports students in creating more useful and engaging charts that allow them to dig further into their data.
+}
+}
+
+@ifproglang{codap}{
+CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
+
+Remember the impact of considering a third attribute before drawing conclusions about your data.
+}
+
+=== Synthesize
+
+@QandA{
+@Q{What kinds of relationships have we seen in scatter plots?}
+@A{linear, strong, weak, no relationship}
+@Q{When doesn't it make sense to compare all of the data in two columns using a scatter plot?}
+@A{When there is a lot of variability in a column of data between subsets.}
+}
+
+@scrub{
 Shown below is a scatter plot of the relationships between the animals' `pounds` and the number of `weeks` it takes to be adopted.
 
 @center{@image{images/pounds-v-weeks.png, 350}}
@@ -288,66 +373,9 @@ Unusual observations are _always_ worth thinking about!
 
 - Sometimes unusual observations are _the points we are looking for_! What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are _unusually good_ for the price. An observation way below the cloud would be a really bad deal.
 
-=== Investigate
-
-Data Scientists and Statisticians use their eyes all the time. Sometimes there's a pattern hiding in the data, which can't be seen just by focusing on numbers and measures. Until we really look at the _shape_ of the data, we aren't seeing the whole picture.
-
-@slidebreak
-
-@lesson-point{
-Look at both numbers and visualizations before drawing conclusions.
 }
 
-Each of these scatter plots and accompanying set of numbers corresponds to a dataset. The patterns in the scatter plots vary wildly, but the numbers that summarize the datasets barely change at all!
-
-@center{@image{images/CloudToCircle.gif}}
-
-@teacher{
-This animation is from Autodesk, which has an amazing page showing off how similar numbers can be generated from radically different scatter plots. If time allows, have students explore more of Autodesks' @link{https://www.research.autodesk.com/publications/same-stats-different-graphs-generating-datasets-with-varied-appearance-and-identical-statistics-through-simulated-annealing/, Same Stats, Different Graphs} visualizations!
-}
-
-@slidebreak
-
-@lesson-instruction{
-For practice, complete @printable-exercise{exploring-columns.adoc}.
-}
-
-@teacher{
-All of the questions on this page are phrased as "how is the @vocab{explanatory variable} related to the @vocab{response variable}?""
-
-Debrief, showing the plots on the board. Make sure students see plots for which there is no relationship!
-}
-
-It is important to note that making a scatter plot will not always give us the information we're looking for.
-
-If we wanted to know how weeks to adoption may be affected by age, for example, it would be important to consider the fact that different species have very different lifespans! 
-
-@indented{_A 5-year-old tarantula is still really young, while a 5-year-old rabbit is fully grown._} 
-
-With differences like this, it doesn’t make sense to put them all on the same scatter plot because we may be _hiding_ a real relationship, or creating the illusion of a relationship that isn’t really there!
-
-@ifproglang{pyret}{
-@teacher{
-There are ways to @lesson-link{functions-examples-definitions, define functions of your own} and extend Pyret to deepen your analysis. Our lesson on @lesson-link{advanced-visualizations} supports students in creating more useful and engaging charts that allow them to dig further into their data.
-}
-}
-
-@ifproglang{codap}{
-CODAP can easily show differently colored points depending on the species! Simply drag a different column name onto the center of the scatter plot and CODAP will color-code the display and build a legend to help you interpret.
-
-Remember the impact of considering a third attribute before drawing conclusions about your data.
-}
-
-
-=== Synthesize
-@QandA{
-@Q{Imagine a scatter plot of height v. age for K-12 students. What would you expect it look like, and why?}
-@A{Because children grow taller from age 5 to 18, we would expect to see a point cloud sloping upward to the right, with younger students tending to be shorter, and older students tending to be taller.}
-@Q{Imagine a scatter plot comparing the number of Marvel movies produced each year to the number of car accidents each year. What would you expect it to look like?}
-@A{There is no relationship between Marvel movies and car accidents, so we wouldn't expect the points to be clustered around a line.}
-}
-
-== Data Exploration Project (Scatter Plots) @duration{flexible}
+== Data Exploration Project (Scatter Plots)
 
 === Overview
 

@@ -111,13 +111,14 @@ If you're using @link{} you need to use the file ending .html instead of .adoc
 
 === Bullet points
 
-- can be written like this using hyphens
-- and it's important to leave a space after the dash
-- and a blank line before the first line of the list
+- First level bullets can be written using hyphens.
+- It's important to leave a space after the dash and a blank line before the first line of the list
+  * Second level bullets can be written using an asterisk with 2 spaces before it
+  	 *** third level bullets
+     *** more third level bullets
+  * the list continues
+- however we need it to.
 
-* They can also be
-* written using
-* asterisks
 
 @n we have a special autonumbering command that will
 
@@ -143,6 +144,13 @@ Checkboxes can be written as follows:
 }
 - [ ] There do not appear to be any potential outliers.
 
+Code for including an arrow
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+| @show{(coe '(+ 1 (* 2 3)))}
+| __?__ &rarr;
+| @show{(coe '(+ 2 (* 1 3)))}
+|===
 
 === Tables
 
@@ -162,7 +170,7 @@ The other formatting defines where in the cell the words end up being placed (se
 ==== Aligning text within the table
 
 - without a dot, we mean horizontal alignment.
-- With a dot, it's vertical alignment.
+- With a dot before it, we mean vertical alignment.
 - < means to the left (horizontally) or top (vertically).
 - ^ is center (horizontally or vertically)
 - > pushes to the right (horizontally) or bottom (vertically).
