@@ -1,0 +1,97 @@
+= What Shape of model would Fit the Data?
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+body.workbookpage td .autonum::after { content: ')' !important; }
+
+/* Allow fitb to be even smaller than the normal minimum */
+.fitb{ min-width: 3em; }
+
+td li { margin-left: 3em; }
+</style>
+++++
+
+[.linkInstructions]
+For this page, you'll need to open the @starter-file{alg2-aaron-judge} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
+
+@vspace{1ex}
+
+*Note: For this page we will be focusing on just the curve balls, so make sure you are writing code using `curve-table`*
+
+== Fitting Linear Models
+
+@n Use @show{(code '(lr-plot curve-table "id" "bat-angle" "hit-distance"))} to find the optimal *linear* model. +
+What is @math{S} for this model? @fitb{}{@ifsoln{~2.93}}
+
+Write the model below, in both math and Pyret notation.
+
+@center{
+ @math{y =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept / vertical shift} @hspace{5em} @show{(code '(define (y x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
+}
+
+[.FillVerticalSpace, cols="1a,1a", options="frame"]
+|===
+|
+@n Sketch the linear model from your `lr-plot` below!
+
+@ifnotsoln{@center{@image{../images/curve-angle-distance.png, 425}}}
+
+@scrub{REPLACE THIS ONCE LR PLOT ISN'T USING SCI NOTATION}
+@ifsoln{@center{@image{../images/curve-angle-distance.png, 425}}}
+
+|
+@n What do you *Notice?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+@vspace{1ex}
+
+@n What do you *Wonder?* @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+@vspace{1ex}
+
+@n Is the best-possible linear model a good fit? Why or why not?
+
+@fitb{}{@ifsoln{No. The S-value predicts an error of ~104 feet (a lot for a range of 50}}
+
+@fitb{}{@ifsoln{ to 400 feet) and the model does not follow the shape of the data}}
+
+|===
+
+
+
+== Fitting Curves
+
+[.FillVerticalSpace, cols="1a,1a", options="frame"]
+|===
+|
+@n Draw a *curve* on the scatter-plot, which shows the overall shape in the data.
+
+@ifnotsoln{@center{@image{../images/curve-angle-distance.png, 425}}}
+
+@scrub{REPLACE THIS ONCE LR PLOT ISN'T USING SCI NOTATION}
+@ifsoln{@center{@image{../images/curve-angle-distance.png, 425}}}
+
+|
+@n How would you describe the pattern? @fitb{}{} +
+@fitb{}{@ifsoln{hit distance generally increases}} +
+@fitb{}{@ifsoln{as his bat angle increases from 0 to 30 degrees.}}
+@fitb{}{@ifsoln{As the angle increases after that,}} +
+@fitb{}{@ifsoln{his hit distance generally _decreases!}}
+
+@vspace{1ex}
+
+@n At what `bat-angle` is the curve's "peak"? @fitb{}{@ifsoln{about 30 degrees}}
+
+@vspace{1ex}
+
+@n Based on your best-guess curve, predict the `hit-distance` for new hits at each `bat-angle` below.
+
+- 15 degrees: @fitb{5em}{}
+- 35 degrees: @fitb{5em}{}
+- 50 degrees: @fitb{5em}{}
+
+|===
+
+

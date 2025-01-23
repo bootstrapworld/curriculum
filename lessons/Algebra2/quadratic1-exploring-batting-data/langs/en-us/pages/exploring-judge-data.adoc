@@ -1,0 +1,85 @@
+= Exploring the Aaron Judge Dataset
+
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+
+#content { display: block !important; }
+</style>
+++++
+
+[.linkInstructions]
+For this page, you'll need to open the @starter-file{alg2-aaron-judge} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. *Read the comments at the top of the file*, which describe what each column in the dataset means.
+
+@n What is the name of the table being loaded in this file? @fitb{}{@ifsoln{`judge-table`}}
+
+@vspace{1ex}
+
+== Looking for Possible Relationships
+
+We can look for potential relationships between quantitative columns by building scatter plots. Let's see what they reveal.
+
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{pitch speed}{explanatory variable} and
+@fitbruby{15em}{hit speed}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `pitch-speed` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{}
+
+- Based on the scatter plot, what hit speed would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{65 - 120 mph}}
+  * Why? @fitb{}{@ifsoln{most of Judge's hits are between 65 and 120 mph}}
+- How confident are you in your prediction? @hspace{1em} _NOT AT ALL_ @hspace{1em} 1 @hspace{1em} 2 @hspace{1em} 3 @hspace{1em} 4 @hspace{1em} 5 @hspace{1em} 6 @hspace{1em} 7 @hspace{1em} 8 @hspace{1em} 9 @hspace{1em} 10 @hspace{1em} _VERY_
+}
+
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{pitch speed}{explanatory variable} and
+@fitbruby{15em}{hit distance}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `pitch-speed` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{}
+
+- Based on the scatter plot, what hit distance would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{50 - 450 feet}}
+  * Why? @fitb{}{@ifsoln{Most of Judge's hits are between 50 and 450 feet.}}
+- How confident are you in your prediction? @hspace{1em} _NOT AT ALL_ @hspace{1em} 1 @hspace{1em} 2 @hspace{1em} 3 @hspace{1em} 4 @hspace{1em} 5 @hspace{1em} 6 @hspace{1em} 7 @hspace{1em} 8 @hspace{1em} 9 @hspace{1em} 10 @hspace{1em} _VERY_
+}
+
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{bat angle}{explanatory variable} and
+@fitbruby{15em}{hit distance}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `bat-angle` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{Yes. There seems to be}}
+
+@fitb{}{@ifsoln{an optimum bat angle. The hit distances increase as the angle increases up to a point. Above about 30 degrees the hit distances decrease.}}
+
+- Based on the scatter plot, what distance would you predict for a ball hit at an angle of 60 degrees? @fitb{7em}{@ifsoln{about 175 feet}}
+
+  * Why? @fitb{}{@ifsoln{as the bat angle increases to 60 degrees, the hit distance drops to between 150 and 200 ft.}}
+- How confident are you in your prediction? @hspace{1em} _NOT AT ALL_ @hspace{1em} 1 @hspace{1em} 2 @hspace{1em} 3 @hspace{1em} 4 @hspace{1em} 5 @hspace{1em} 6 @hspace{1em} 7 @hspace{1em} 8 @hspace{1em} 9 @hspace{1em} 10 @hspace{1em} _VERY_
+}
+
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{bat angle}{explanatory variable} and
+@fitbruby{15em}{hit speed}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `bat-angle` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{@ifsoln{}}
+
+- Based on the scatter plot, what speed would you predict for a ball hit at an angle of 20 degrees? @fitb{7em}{@ifsoln{70 - 120mph}}
+  * Why? @fitb{}{@ifsoln{Judge's hit speed seems to be fairly evenly distributed in that range.}}
+- How confident are you in your prediction? @hspace{1em} _NOT AT ALL_ @hspace{1em} 1 @hspace{1em} 2 @hspace{1em} 3 @hspace{1em} 4 @hspace{1em} 5 @hspace{1em} 6 @hspace{1em} 7 @hspace{1em} 8 @hspace{1em} 9 @hspace{1em} 10 @hspace{1em} _VERY_
+}
+
+@n What is happening on lines 21 - 36 of the starter file? @fitb{}{}
+
+@fitb{}{@ifsoln{4 filtered tables are being defined, focused on data from specific pitch types.}}

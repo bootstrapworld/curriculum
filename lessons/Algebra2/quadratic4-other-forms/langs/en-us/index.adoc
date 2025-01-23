@@ -16,8 +16,6 @@
 | Lesson Goals
 | Students will be able to...
 
--
-
 | Student-facing Lesson Goals
 |
 
@@ -28,20 +26,10 @@
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-quadratics-desmos}.
- * Make a link or code to share with your students.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
-}
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
 
-| Key Points For The Facilitator
-|
--
 |===
 
 
@@ -49,7 +37,7 @@ You will want to:
 @objective{quadratics-forms}
 
 === Overview
-Students are introduce to Factored Form and Standard Form, and why they each have a role to play in modeling.
+Students are introduce to Factored Form: @math{f(x) = a(x - r_1)(x - r_2)} and Standard Form: @math{f(x) = ax^2 + bx + c}, and why they each have a role to play in modeling.
 
 === Launch
 ++++
@@ -58,49 +46,78 @@ Students are introduce to Factored Form and Standard Form, and why they each hav
 </style>
 ++++
 [.clippedImage]
-@right{@image{images/p3.png, 300}}We used *Vertex Form* to fit this data, because the scatter plot made it easy for us to pick out the vertex of the quadratic relationship between `speed` and `mpg`. But when looking at a scatter plot of quadratic data, it's not always easy to see that vertex!
+@right{@image{images/p3.png, 150}} We've learned how to derive our model from a scatter plot using *Vertex Form*, which works beautifully when the vertex is visible in the data. But what if the vertex _isn't_ visible? Does that make it impossible to find a model for data with a quadratic relationship?
 
-As with Linear Models, mathematicians and data scientists use different forms of Quadratic Models to make model-fitting and calculations easier.
+As with Linear Models, mathematicians and data scientists use different forms of Quadratic Models to make model-fitting and calculations easier depending on what information they have on hand.
 
-=== Investigate
+==== Factored Form: @hspace{1em} @math{f(x) = a(x - r_1)(x - r_2)}
 
-The *Factored Form* for quadratic functions looks like this: @math{f(x) = a(x - r_1)(x - r_2)}
+As is the case with vertex form, the sign of @math{a} tells us whether the parabola opens up or down.
 
-Factored form makes it really easy to see where the _roots_ of the function, where the parabola crosses the x-axis. If @math{x = r_1} or @math{x = r_2}, one of the parenthetical terms will be zero and make the whole equation zero.
+Factored form makes it really easy to identify where the parabola crosses the x-axis, otherwise known as the @vocab{roots} of the function.
 
-In our fuel efficiency dataset, we can see the vertex but not the roots. Factored form is especially useful in the _opposite_ situation, where a scatter plot shows the roots but not the vertex!
+Since these points lie on the x-axis, we know the y-coordinate of any @vocab{roots} is always zero. And @math{y} will equal zero if @math{x = r_1} or @math{x = r_2}, because that will make one of the parenthetical terms be zero, and anything times zero is zero.
+
+Factored form is _especially_ useful if you don't know the vertex, but you can easily find the roots (from looking at the scatter plot or having only those two datapoints)!
+
+@teacher{
+This is a _great_ place to include factoring activities!
+
+- Take an existing worksheet where students have to derive the factored form when given two roots, and frame it as "a dataset shows us the roots, but nothing else - can you come up with a model that fits?"
+- To go even deeper, ask students if they can come up with _more than one quadratic model_ that fits those roots, and have students observe that the only difference between any two such models is @math{a}.
+}
 
 @slidebreak
 
-The *Standard Form* for quadratic functions looks like this: @math{f(x) = Ax^2 + Bx + C}
+==== Standard Form: @hspace{1em} @math{f(x) = ax^2 + bx + c}
 
-Standard form requires that any polynomial be written with their terms from highest to lowest degree. The standard form for quadratics puts the quadratic (squared) term first, followed by the linear term, followed by the constant term for vertical shift. Knowing that an equation is in standard form makes it easy for someone to know exactly what kind of equation it is just by looking at the first term.
+The Standard form of any polynomial is written with terms from highest to lowest degree. The standard form for quadratic models puts the quadratic (squared) term first, followed by the linear term, followed by the constant term for vertical shift. As was the case with vertex and factored form, @math{a} tells us whether the parabola will open up or down.
+
+Standard form offers two benefits:
+
+1. Knowing that an equation is in standard form makes it easy for someone to know exactly what kind of equation it is just by looking at the first term.
+2. If you need to find the roots but don't have easy access via Factored form, the coefficients in standard form can always be computed using the @link{https://en.wikipedia.org/wiki/Quadratic_formula, quadratic formula}, no matter what they are.
 
 @teacher{This is a great time to include your textbook's traditional content on standard form!}
 
-The coefficients in standard form can also be computed by the _quadratic formula_, which is useful when simple factoring isn't enough.
-
 @lesson-instruction{
-- Complete @printable-exercise{classifying-defs.adoc} to get comfortable identifying the different forms of quadratic functions.
-- For practice connecting these forms to graphs, complete @printable-exercise{match-graph-v.adoc}, @printable-exercise{match-graph-f.adoc}, and @printable-exercise{match-graph-s.adoc}.
+- Complete @printable-exercise{what-can-we-learn-from-each-form.adoc}.
+- Then complete @printable-exercise{classifying-defs.adoc}.
 }
+
+
+=== Investigate
 
 @lesson-instruction{
 Let's try to use standard form to build a model from _samples_.
 
-- With your partner, open @starter-file{alg2-fuel-efficiency}.
-- Complete @printable-exercise{build-from-samples.adoc}.
+- Open your copy of the @starter-file{alg2-aaron-judge}.
+- With your partner, complete @printable-exercise{build-from-samples-batting-data.adoc}.
 }
 
 
 === Synthesize
 
-- How close did your sampled model get to the one you created visually in Desmos?
+- How close did the model you built from samples get to the one you created visually using Desmos sliders?
 - Which method did you like better?
 
 == Additional Exercises
+- @opt-printable-exercise{match-graph-v.adoc}
+- @opt-printable-exercise{match-graph-f.adoc}
+- @opt-printable-exercise{match-graph-s.adoc}
+- @opt-printable-exercise{build-from-samples-fuel-efficiency.adoc} engages students with the @opt-starter-file{alg2-fuel-efficiency}.
+
+@indented{
+@teacher{
+*NOTE*: While the fuel efficiency dataset used in the optional materials we'll be offering throughout our quadratics lessons is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI/edit?gid=0#gid=0, the dataset}.
+}
+}
+
+@scrub{
+@vspace{1ex}
 
 @strategy{Coming Soon!}{
 
-We are working on collecting more datasets that can be modeled with quadratic functions so that we can offer students more practice with building quadratic models and engage them in thinking about which form is most efficient to start with depending on the available data.  
+We are working on collecting more datasets that can be modeled with quadratic functions so that we can offer students more practice with building quadratic models and engage them in thinking about which form is most efficient to start with depending on the available data.
+}
 }

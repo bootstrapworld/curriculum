@@ -16,74 +16,136 @@
 | Lesson Goals
 | Students will be able to...
 
--
 
 | Student-facing Lesson Goals
 |
 
 - Let's use Pyret to model quadratic relationships in data.
 
-
 | Materials
 |[.materials-links]
 @material-links
 
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
 | Preparation
 |
 @preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-quadratics-desmos}.
- * Make a link or code to share with your students.
+- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we used in @lesson-link{quadratic2-building-models}. +
+ * Set the pacing so that students are able to interact with the slides 3-7.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+ * If you don't already have a code, or you want to share a new one, you will first want to:
+ *** Open @starter-file{alg2-exploring-quadratics-desmos}.
+ *** Make a link or code to share with your students.
+
+- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the optional page for each dataset (@opt-printable-exercise{model-2seam.adoc, 2-seam},
+@opt-printable-exercise{model-sliders.adoc, sliders},
+@opt-printable-exercise{model-4seam.adoc, 4-seam},
+@opt-printable-exercise{model-judge.adoc, full}) to scaffold that work.
 }
 
-| Key Points For The Facilitator
-|
--
 |===
 
 == Fitting Quadratic Models
 @objective{model-fit-function}
 
 === Overview
-Students work with the vertex form to fit a quadratic model for the Fuel Efficiency dataset. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the @math{f(x) = a(x − h)^2 + k} form of quadratic models using a custom Desmos slider activity.
+Students work with the vertex form to fit a quadratic model for Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the vertex form ( @math{f(x) = a(x − h)^2 + k}) of quadratic models using a custom Desmos slider activity.
 
 === Launch
 
-*Let's try to build the best possible quadratic model we can for our Fuel Efficiency dataset.*
+@ifnotslide{
+We've been talking about coefficients and vocabulary for quadratic functions that look a lot like the ones you might see in a textbook: clean and predictable. But real-world data is _messy!_
 
-We've been talking about coefficients and vocabulary for quadratic functions that look a lot like the ones you might in a textbook: clean and predictable. Real-world data, however, is messy! Let's return to our @starter-file{alg2-fuel-efficiency} to dig into that messiness.
-
-@slidebreak
-
-@lesson-instruction{
-- A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph.
-- Does that mean we shouldn't use a quadratic model for the relationship between speed and fuel efficiency? Why or why not?
-  * _Have students discuss and share back with the class._
-  * _If necessary, remind students that *models are - by definition - approximations of the real world*._
+Let's return to our dataset to dig into that messiness.
 }
 
-The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. _There's no such thing as a perfect model!_
+@lesson-instruction{
+- Open the @starter-file{alg2-aaron-judge} and click "Run".
+- Then build a scatter plot using `bat-angle` as the @vocab{explanatory variable} (on the x-axis) and `hit-distance` as the @vocab{response variable} (on the y-axis).
+}
 
-@slidebreak
-Now that we know how @math{a}, @math{h}, and @math{k} shape a parabola, let's work on modelling our data!
+@QandA{
+@Q{What about this scatter plot might make someone wonder whether a parabola is really a good model?}
+@A{Answers will vary.}
+@A{It's not perfectly symmetrical.}
+@A{The band of points is pretty wide.}
+@Q{Why does it make sense to use a quadratic model for this data?}
+@A{While no curve will include all of these data points, there is a clear trend in which the hit distance rises, peaks, and then falls as the bat angle increases.}
+@A{*Models are - by definition - approximations of the real world*.}
+}
+
+=== Investigate
+
+*Let's try to build the best possible quadratic model we can for our Aaron Judge Batting Data*, using what we know about how @math{a}, @math{h}, and @math{k} influence the shape of a parabola.
 
 @lesson-instruction{
-Return to the @starter-file{alg2-fuel-efficiency} and work through @printable-exercise{model-speed-v-mpg.adoc}.
+- Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}, using the scatter plot you just made in Pyret and what we know about the coefficients in the Vertex form of a Quadratic Model.
+- Then complete the second section, which explores a new Pyret function: @show{(code 'sqr)}.
 }
+
+@QandA{
+@Q{What does @show{(code 'sqr)} do and why will we need it in order to build quadratic models in Pyret?}
+@A{It squares the input.}
+@A{All quadratic functions square some expression using the input.}
+@Q{From looking at our scatter plot, what do we know about the coefficients in the vertex form of our quadratic model?}
+@A{@math{a} should be negative because the curve opens down.}
+@A{@math{h} should be around 30, because it seems to be the optimum bat angle.}
+@A{@math{k} should be about 450, because the y-value of the vertex is around there.}
+}
+
+Build on what we already know about the data, let's experiment with Desmos sliders to visually fit the best model we can.
 
 @teacher{
-Students may wonder why fuel efficiency is a function of the _square_ of the speed, rather than the speed itself!
+Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.
+}
 
-Physicists have determined that the biggest factor affecting fuel efficiency is _drag:_ the effect of air slowing it down. Physicists have calculated that drag increases based on squared velocity. Additionally, a car's transmission uses more efficient gears for higher speeds (the engine can turn more slowly at higher gears), but rarely does a car have a gear optimized for speeds above 65mph. As a result efficiency falls sharply once the "highest" gear is reached, as higher speeds require the engine to run faster.
+@lesson-instruction{
+- Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
+- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc}  and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
+- Then, return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
+- When you're done, test how well your model predicts hit distance from bat angle using `fit-model` and complete the page to interpret the results.
+- @opt{Slides 4-7 of the Desmos file each focus on other subsets of Aaron Judge's batting data.
+ * Visually fit models for these datasets in Desmos.
+ * Update the last four functions defined in the Pyret file.
+ * Write `fit-model` expressions to test them out and interpret the @vocab{S-value}.
+ * Your teacher may have printed pages to support you with modeling and interpreting these other datasets (@opt-printable-exercise{model-2seam.adoc, 2-seam},
+@opt-printable-exercise{model-sliders.adoc, sliders},
+@opt-printable-exercise{model-4seam.adoc, 4-seam},
+@opt-printable-exercise{model-judge.adoc, full}).}
+}
+
+@QandA{
+@Q{According to the @vocab{S-values}, does your quadratic model do a better job of predicting hit distances from bat angle?}
+@A{Yes. Hopefully students have come up with a model whose predictions are expected to be at least 30 feet more accurate than the optimal linear model.}
+@Q{Linear regression allows us to find the *computationally optimal model*. Do we know whether or not the quadratic models we just built are the _best?_}
+@A{We don't know!}
+@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+@Q{Slides 3-6 in the Desmos file display data for specific pitch types. Slide 7 shows the full dataset. Which of the subsets is most visually similar to the full dataset and what does the tell us?}
+@A{The four-seam fastball dataset looks almost identical to the full dataset. That is an indicator that the majority of the dataset is likely composed of four-seam fastballs.}
+@A{`count(judge-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
+}
+
+Quadratic models written in Vertex Form make it incredibly easy to find the vertex @math{(h, k)}, the axis of symmetry @math{h}, and whether the parabola opens up or down (@math{a}). But finding the @vocab{roots} or @vocab{y-intercept} is a lot harder! There are other forms of quadratic models, however, that make those much easier to find. You may learn about them later, in @lesson-link{quadratic4-other-forms}.
+
+=== Synthesize
+
+@QandA{
+@Q{How did your quadratic model compare to the optimal linear model for this data?}
+@A{Unlike the linear models, our quadratic models, roughly followed the shape of the data.}
+@A{The @math{S-values} for our quadratic models showed significantly less error in predictions than the optimal linear model did.}
+@Q{Once you approximated the vertex of a dataset, how much trial and error was involved in defining a quadratic model in vertex form that visually fit the dataset?}
+@A{@math{h} and @math{k} didn't need to change much!}
+@A{We knew whether @math{a} would be negative or positive, but it took some playing to find a number that matched the width of the curve to the points.}
 }
 
 @strategy{Optional Activity: Guess the Model!}{
 
-1. Divide students into teams of 2-4, and have each team come up with a *secret*, quadratic, real-world scenario, then have them write down a quadratic function that fits this scenario on a sticky note. Make sure these functions are key private within each team! (Note: students may be tempted to just make up a scenario where something rises and falls, or vice versa. Challenge them to think through why the change in the output is quadratic with respect to the change of the change in the input!)
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their quadratic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, have students title their scatter plot to describe their real-world scenario (e.g., "percentage of people wearing diapers vs. age").
+1. Divide students into teams of 2-4, and have each team come up with a *secret*, quadratic, real-world scenario, then have them write down a quadratic function that fits this scenario on a sticky note. Make sure these functions are private within each team! (Note: students may be tempted to just make up a scenario where something rises and falls, or vice versa. Challenge them to think through why the change in the output is quadratic with respect to the change of the change in the input!)
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for their quadratic function. They should only draw the point cloud - _not the function itself!_ Finally, have students title their scatter plot to describe their real-world scenario (e.g., "percentage of people wearing diapers vs. age").
 3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 
@@ -91,33 +153,15 @@ Physicists have determined that the biggest factor affecting fuel efficiency is 
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
 }
 
-=== Synthesize
+== Additional Practice
 
-@QandA{
-@Q{What did you figure out about how adjusting @math{a} changed the shape of the parabola?}
-@A{The _sign_ of @math{a} determines whether the parabola: 
-- opens up (@math{a > 0})
-- opens down (@math{a < 0})
-- or exists as a straight line (@math{a = 0})
+- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} in Pyret, using what they know about the coefficients in the vertex form from the shape of the data.
+
+@indented{
+@teacher{
+- *NOTE*: While the fuel efficiency dataset used in the optional materials we'll be offering throughout our quadratics lessons is based on real data obtained from the @link{https://tedb.ornl.gov/, Transportation Energy Book}, *it has been augmented with fictional data* in order to provide a sufficiently-rich dataset for student modeling. You can find out more about this augmentation in the README tab of @link{https://docs.google.com/spreadsheets/d/1SLm1hDkVgAYxgh12dTD2Z3GXCUO9PrbwIZdqu9FiCGI/edit?gid=0#gid=0, the dataset}.
+- A scatter plot of the fuel efficiency data has the familiar "rise and fall" pattern of a parabola... but there appears to be a "dip" around 40mph. The existence of a "dip" like this is normal in real data, but it doesn't mean that the overall shape of this relationship isn't quadratic. This is a great opportunity to remind students that _there's no such thing as a perfect model!_
+- Students may wonder why fuel efficiency is a function of the _square_ of the speed, rather than the speed itself! Physicists have determined that the biggest factor affecting fuel efficiency is _drag:_ the effect of air slowing it down. Physicists have calculated that drag increases based on squared velocity. Additionally, a car's transmission uses more efficient gears for higher speeds (the engine can turn more slowly at higher gears), but rarely does a car have a gear optimized for speeds above 65mph. As a result efficiency falls sharply once the "highest" gear is reached, as higher speeds require the engine to run faster.
+
 }
-@A{The _magnitude_ of @math{a} determines how "tight" or "steep" the parabola is, with larger magnitudes creating tighter parabolas and values closer to zero creating wider ones.}
-}
-
-@slidebreak
-
-Our model is built from data about these 6 vehicles, evaluated at 15-75mph. What does your best model predict for the fuel efficiency of a vehicle that is _turned off_, moving at 0mph? What about a racecar moving at 200mph?
-
-It's impossible for a car that's _turned off_ to burn gas. A racecar with a negative mpg rating would _generate_ fuel as it drives, which is also nonsense! If our model's prediction for these two extreme values is so bad, does that mean we shouldn't use the model at all?
-
-@teacher{No - a model is only as good as the data it was based on. With lots of data between 15-75mph, the model could be very reliable between these speeds and totally _unreliable_ for speeds outside that range!}
-
-@slidebreak
-
-Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
-
-@QandA{
-@Q{In this project, do we know whether or not our model is the _best?_}
-@A{We don't know!}
-@Q{How do you know?}
-@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
 }
