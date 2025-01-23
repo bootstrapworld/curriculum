@@ -128,11 +128,11 @@
 (define (wescheme-symbol->pyret e)
   (cond [(eq? e '<=) "\\<="]
         [(eq? e '=) "=="]
-        [(eq? e 'abs) "num-abs"]
         [(eq? e 'frac) "/"]
         [(eq? e 'image=?) "images-equal"]
         [(eq? e 'make-posn) "posn"]
-        [(eq? e 'pi) "num-pi"]
+        [(eq? e 'pi) "PI"]
+        [(eq? e 'e) "E"]
         [(eq? e 'string-contains?) "string-contains"]
         [(eq? e 'string<=?) "\\<="]
         [(eq? e 'string<>?) "<>"]
