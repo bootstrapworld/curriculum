@@ -16,7 +16,8 @@
 | Student-facing Lesson Goals
 |
 
--
+- Let's explore what exponential growth means, how to describe it using an equation
+- Let's identify exponential relationships in tables, graphs, and in real-world contexts
 
 | Materials
 |[.materials-links]
@@ -258,68 +259,58 @@ Having explored the behavior of exponential functions as @printable-exercise{cla
 
 === Launch
 
+@lesson-instruction{
+- Turn to @printable-exercise{classifying-descriptions.adoc}
+- Complete questions 1-4, using Pyret, Desmos, or a calculator.
+}
+
 @QandA{
-Suppose you deposit $100 in a savings account, earning 3% interest each year.
-@Q{How can we calculate the amount of money in the account after *1 year*?}
-@A{3% of $100 is $3, which we add to $100 to get $103.}
-@Q{How can we calculate the amount of money in the account after *2 years*?}
-@A{3% of $103 gives us $3.09, which we add to the previous total of $103 to get $106.09}.
-@Q{How can we calculate the amount of money in the account after *3 years*?}
-@A{3% of $106.90 gives us $3.18, which we add to the previous total of $106.09 to get $109.27.}
+If a new car sells for $32,000, and the resale value drops by one-eighth (12.5%) each year.
+@Q{How much is the car worth after *1 year*?}
+@A{$28,000}
+@Q{How much is the car worth after *2 years*?}
+@A{$24,500}
+@Q{How much is the car worth after *3 years*?}
+@A{$21,437.50}
 }
-
-==== Exponential Growth
-
-If we earn 3% interest every year, there's a little more money to grow every year, and the total grows faster than the year before. Once you hit the sharp part of the exponential curve, that $100 will turn into a _lot_ of money down the road!
 
 @slidebreak
 
-*Let's write a function to model this growth so that we can calculate the value for and year without calculating the value for every year in between!*
+The more the car costs, the more an eighth of it costs. The car's highest value is in the first year, so the biggest price drop happens that year as well. As the years go by and the car's value drops, price will drop more and more slowly.
 
-Since the growth rate is _positive_, the function can be said to exhibit @vocab{exponential growth}.
-
-- We know the initial value @math{a} is $100
-- We know that the horizontal asymptote @math{k} isn't adding or subtracting anything, since at "year zero" there was exactly $100 in the account.
-- We know that the base @math{b} must be greater than one, since the account is growing. But what is the actual @vocab{growth factor}?
+In fact, no matter how many years go by, the cost will never actually _reach_ zero! It will just keep getting closer by smaller and smaller amounts.
 
 @slidebreak
 
-@indented{
-Let's take another look at our first calculations: @hspace{1em}@math{$100 + ($100 \times 0.03)}
+*Let's write a function to model this change, so that we can calculate the car's value for each year without having to calculate the value for every year in between!*
 
-If we factor out the $100 we get: @hspace{1em}@math{$100 \times (1 + 0.03)} @hspace{1em} or @hspace{1em}@math{$100 \times (1.03)}
+- We know the initial value @math{a} is $32,000
+- We also know that the base @math{b} must be less than one, since the value is dropping. But how do we compute it exactly?
 
-a growth rate of 3% translates to a growth factor of 1.03
+@slidebreak
+
+Let's look at the math we used to find the value after one year: @math{$32,000 - ($32,000 \times 0.125)}
+
+- Factoring out $32,000 we get: @hspace{1em}@math{$32,000 \times (1 - 0.125)} @hspace{1em} or @hspace{1em}@math{$32,000 \times (0.875)}
+- With the value dropping by 12.5%, we have a growth factor of 87.5% (0.875).
 }
 
-- So our function is @hspace{1em} @big{@math{f(x) = 100 \times 1.03^{\text{years}}}}
+- So our function is @hspace{1em} @big{@math{f(x) = 32,000 \times 0.875^{x}}}
 
 @lesson-point{
-To find the @vocab{growth factor} (@math{b}) from the @vocab{growth rate}: @hspace{1em} @big{@math{b = 1 + r}}
+The @vocab{growth factor} (@math{b}) will always be: @hspace{1em} @big{@math{b = 1 + r}}
 }
 
-@vspace{1ex}
-
-==== Exponential Decay
-
-A $50,000 car loses 20% of its value each year.
-
-*Let's write a function to model this decay.*
-
 @slidebreak
 
-Since the growth rate is _negative_, the function can be said to exhibit @vocab{exponential decay}.
+With the car's value _dropping_, this function describes @vocab{exponential decay}. If it were rising, the function would describe @vocab{exponential growth}.
 
-- Growth rate: @hspace{1em}@big{@math{-20%}} @hspace{1em} or @hspace{1em}@big{@math{-0.2}}
+Consider a savings account that starts at $100 and grows by 3% (0.03) each year:
 
-- Growth factor (also sometimes called the decay factor): @hspace{1em}@big{@math{1 +  -.20 = .80}}
+- The initial value @math{a} is @math{100}, and @math{r} is 0.03
+- If @math{b = 1 + r}, then our function is @math{f(x) = 100 \times 1.03^{x}}
 
-@big{@math{\text{value}(\text{years}) = $50,000(.80)^{\text{years}}}}
-
-@slidebreak
-
-@vspace{1ex}
-
+=== Investigate
 *@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*
 
 - Most cells (e.g. bacteria, the cells in a growing fetus, etc.) divide every few hours, doubling the number of cells each time. A single cell will split into 2, those 2 cells will split to become 4, then 8, then 16, etc: the function @math{\text{cells}(\text{hours})} grows exponentially. +
@@ -337,15 +328,14 @@ In the following activities, students will:
 Decide whether you'd like to pull your class back together to discuss after each activity or once they've completed all three.
 }
 
-=== Investigate
-@ifslide{*@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*}
-
 @lesson-instruction{
-- Let's practice identifying linear, quadratic, and exponential growth. With your partner, complete:
-  * @printable-exercise{classifying-defs.adoc}
-  * @printable-exercise{classifying-descriptions.adoc}
-- @opt{For more practice, complete @opt-printable-exercise{classifying-descriptions-2.adoc}}
+Let's practice identifying linear, quadratic, and exponential growth.
+
+- With your partner, complete @printable-exercise{classifying-descriptions.adoc} and @printable-exercise{classifying-descriptions-2.adoc}.
+- When you're done, complete @printable-exercise{classifying-defs.adoc}
 }
+
+@slidebreak
 
 @QandA{
 - What strategies did you use to decide if a function was linear, quadratic, or exponential?
