@@ -34,12 +34,12 @@
 | Preparation
 | 
 @preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
-You will want to:
- * Open @starter-file{alg2-log-desmos}.
- * Make a link or code to share with your students.
+- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we introduced in @lesson-link{logarithmic1-exploring-wealth-health}.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first two slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
+ * If you don't already have a code, or you want to share a new one, you will first want to:
+ *** Open @starter-file{alg2-log-desmos}.
+ *** Make a link or code to share with your students.
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
 
@@ -61,22 +61,34 @@ Having identified that the wealth-v-lifespan scatter plot is neither linear, qua
 - Open @starter-file{alg2-countries}, and make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, using the name of the `country` as the label.
 }
 
-All of the models we just found for this dataset made predictions with too much error. This shape just isn't any kind of growth we've seen before, although this shape might look _familiar_...
+The linear, quadratic and exponential models we've found for this dataset all made predictions with too much error to be useful.
 
 @slidebreak
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{from-expt-to-log.adoc}
-- What do you notice about the first two scatter plots?
+- Complete the first section of @printable-exercise{from-expt-to-log.adoc}.
+- What do you Notice? What do you Wonder?
 }
-
-Exponential growth starts _slowly_, and then explodes to enormous numbers so quickly that we have trouble predicting what the next value will be. But our Life Expectancy v. Income growth feels like the exact opposite, growing really _quickly_ but then leveling off to something very slow.
 
 @slidebreak
 
-@right{@image{images/MA-covid.png, 275}}Consider the growth of Covid Infections from Massachusetts (from @lesson-link{exponential1-exploring-covid}).
+=== What does Reflecting the Data across the Diagonal @math{y=x} accomplish?
 
-- The model for this data answers the question "how many positive cases do we predict after @math{x} days?"
+By switching the axes, the model answers the opposite question!  And our brains have a much better chance of understanding the speed of growth. Consider the growth of Covid Infections from Massachusetts (from @lesson-link{exponential1-exploring-covid}).
+
+[cols="^6a,1a,^6a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| How many positive cases do we predict after @math{x} days?
+|
+| How many days do we predict until we pass @math{y} cases?
+
+|@image{images/MA-covid.png}
+|
+|@image{images/MA-covid-flipped.png}
+
+|===
+
+@scrub{
 - The graph is showing us the relationship from +
 _days → cases_, _x → y_, or _Domain → Range_.
 
@@ -85,6 +97,9 @@ The kind of growth we're seeing in the Countries dataset looks a lot like the Co
 - Now we want to *flip the relationship around*, asking for +
 _cases → days_, _y → x_, or _Range → Domain_.
 - What would *this* graph look like?
+
+Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid growth, and then flattens out.
+}
 
 @slidebreak
 
@@ -109,7 +124,7 @@ _cases → days_, _y → x_, or _Range → Domain_.
 	animation-name: fade;
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
-	animation-duration: 2s;
+	animation-duration: 5s;
 	animation-direction: alternate;
 }
 /* But the second image should do it in reverse */
@@ -124,26 +139,16 @@ _cases → days_, _y → x_, or _Range → Domain_.
 @right{
 @image{images/MA-covid.png, 350}
 @image{images/MA-covid-flipped.png, 320}
-}
-}
-By swapping the axes, we've reflected the curve over @math{y = x}.
-
-It's the same data, *just mirrored across the diagonal!*
-
-Now our graph answers the _opposite_ question: "how many days do we predict it will take to pass @math{y} cases?"
-
-@slidebreak
-@right{@image{images/MA-covid-flipped.png, 320}}
-Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid growth, and then flattens out.
+} We see that:
 
 - During the pandemic, our initial value was roughly 120,000 cases.
 - To reach 150,000 cases, it took 75 days
 - To reach 300,000 cases, it took 112 days (37 additional days)
 - To reach 400,000 cases, it took 122 days (20 additional days)
 
-@slidebreak
+And we understand just how fast the infections were growing.
+}
 
-This kind of growth is much easier to understand, and *understanding it makes it that much more alarming!* By switching the axes, we've given our brains a much better chance of understanding just how fast infections were growing.
 
 == Logarithmic Growth
 @objective{logarithms-growth}
