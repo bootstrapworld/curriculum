@@ -53,7 +53,7 @@
 @objective{logarithms-exponents}
 
 === Overview
-Having identified that the wealth-v-lifespan scatter plot is neither linear, quadratic, or exponential, students are asked to make connections to exponential functions.
+Having identified that the wealth-v-lifespan scatter plot is neither linear, quadratic, nor exponential, students are asked to consider the graphs of logarithmic functions as the reflection of an exponential function across the diagonal line @math{y=x}.
 
 === Launch
 
@@ -149,19 +149,13 @@ Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid gr
 And we understand just how fast the infections were growing.
 }
 
+=== Investigate
 
-== Logarithmic Growth
-@objective{logarithms-growth}
-@objective{logarithms-exponents}
-
-=== Overview
-Students learn about characteristics of logarithmic functions in graphical, tabular, and function notation form.
-
-=== Launch
-When an exponential relationship is "inverted" like this, the new shape is called a _logarithmic relationship._ As you've seen, logarithmic functions look like "backwards exponential functions", where the x and y axes have been reflected over @math{y = x}.
+When an exponential relationship is "inverted" like this, the new shape is called a _logarithmic relationship._
 
 @lesson-instruction{
-- Complete the rest of @printable-exercise{from-expt-to-log.adoc}.
+- Using what you've just learned, turn to the second part of @printable-exercise{from-expt-to-log.adoc} and identify the form of each curve.
+- For each display you identify as exponential or logarithmic, draw the diagonal line @math{y = x} and sketch the reflection of the curve.
 }
 
 @teacher{Review student answers. Try to draw out student explanations for how they could tell whether a graph or plot was logarithmic instead of exponential. Their own reasoning is critical for building intuition, so you may even want to write down key phrases as students share them!}
@@ -170,14 +164,29 @@ When an exponential relationship is "inverted" like this, the new shape is calle
 
 @lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
 
+=== Synthesize
+
+TBD
+
+
+== Logarithmic Growth
+@objective{logarithms-growth}
+@objective{logarithms-exponents}
+
+=== Overview
+Students learn to think about logarithms as the inverse of an exponent. They learn to evaluate log expressions and to recognize logarithmic growth in tables.
+
+=== Launch
+
 By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
 
 - The inputs and outputs are reversed
 - The Domain and Range are swapped
-- The curve is reflected over @math{y=x}
+- The curve is reflected over the diagonal line @math{y=x}
 
+@slidebreak
 
-In fact, we can use this inverse relationship to do calculations:
+We can use this inverse relationship to do calculations:
 
 [cols="^1a, ^1a", stripes="none" options="header"]
 |===
@@ -187,25 +196,20 @@ In fact, we can use this inverse relationship to do calculations:
 | @math{f(x) = 3^x}
 | @math{g(x) = log_3(x)}
 
-| Tells us "what 3 to the power of 'the input' is"
-| Tells us "what power 3 needs to be raised to reach 'the input'"
+| What is 3 to the power of "the input"?
+| What power does 3 need to be raised to reach "the input"?
 
 | @math{f(2) = 3^2 = 9}
 | @math{g(9) = log_3(9) = 2}
 |===
 
+@slidebreak
+
 @QandA{
-@Q{What will @math{f(4)} evaluate to?}
-@A{@math{f(4) = 3^3 = 27}}
+@Q{What will @math{f(3)} evaluate to?}
+@A{@math{f(3) = 3^3 = 27}}
 @Q{What will @math{g(27)} evaluate to?}
 @A{@math{g(27) = log_3(27) = 3}}
-}
-
-=== Investigate
-
-@lesson-instruction{
-- Complete @printable-exercise{evaluate-log.adoc}.
-- Be sure to discuss your answers with at least one other student!
 }
 
 @slidebreak
@@ -223,7 +227,12 @@ Consider these two translations of @math{log_2(128)}.
 
 @slidebreak
 
-@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
+@lesson-instruction{
+- Complete @printable-exercise{evaluate-log.adoc} to get some practice translating and evaluating log expressions.
+- Be sure to discuss your answers with at least one other student!
+}
+
+=== Investigate
 
 [cols="^1a,^1a", stripes="none", options="header"]
 |===
@@ -236,18 +245,18 @@ Consider these two translations of @math{log_2(128)}.
 A constant increase in @math{x}, requires multiplying @math{y} by the @vocab{growth factor}.
 | @math{x} grows exponentially over constant intervals of @math{y} +
 {empty} +
-A constant increase in @math{y}, requires multiply @math{x} by a value called the @vocab{base}. In other words, @math{y} is _the power we'd need to raise our base_ to get each value of @math{x}.
+A constant increase in @math{y}, requires multiplying @math{x} by a value called the @vocab{base}. In other words, @math{y} is _the power we'd need to raise our base_ to get each value of @math{x}.
 
 |@image{images/difference-table-exponential-2.png}
 |@image{images/difference-table-logarithmic.png}
 
 |===
 
-@slidebreak
-
-@ifslide{@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}}
-
+@lesson-point{
 Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x,y) columns of a table makes a logarithmic _sequence_ look exponential.
+}
+
+@slidebreak
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-tables.adoc} and decide whether you think each table is best modeled by a quadratic, exponential or logarithmic function.
@@ -316,15 +325,16 @@ Students can check out @link{images/xkcd.png, this wonderful visualization} from
 Students are introduced to the parent function for logs, and explore the role the coefficients play.
 
 === Launch
-*Logarithmic models have the form @math{f(x) = a \log_b(x-h) + k}*
 
 @teacher{
 @opt{Advance your teacher dashboard of @starter-file{alg2-log-desmos} to *Slide 3: How does h transform logarithmic functions?* and give your students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to logarithmic functions.
 }}
 
-Most textbooks only present logarithmic functions with a horizontal shift of zero. When @math{h = 0}, we can safely remove it and use this simplified form of the equation:
+*Logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}*
 
-@center{@math{f(x) = a \log_b(x) + k}}
+Most textbooks only present logarithmic functions with a horizontal shift of zero.
+
+When @math{h = 0}, we can safely remove it and use this simplified form of the equation: @hspace{1em} @big{@math{f(x) = a \log_b(x) + k}}
 
 @teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
 
