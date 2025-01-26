@@ -15,6 +15,15 @@
 </style>
 ++++
 
+@do{
+
+(define sol1 '(bar-chart (filter (filter animals-table is-dog) is-young) "fixed"))
+(define sol2 '(pie-chart (filter (filter animals-table is-dog) is-heavy) "fixed"))
+(define sol3 '(histogram (random-rows animals-table 20) "name" "weeks" 2))
+(define sol4 '(box-plot (filter (filter animals-table is-cat) is-young) "pounds"))
+(define sol5 '(scatter-plot (random-rows animals-table 35) "species" "age" "weeks"))
+}
+
 Fill in the tables below, then use @proglang to make the following visualizations. @ifproglang{pyret}{Record the code you used in the line below.}
 
 The first table has been filled in for you.
@@ -27,51 +36,51 @@ The first table has been filled in for you.
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{@show{(code '(bar-chart (filter (filter animals-table is-dog) is-young) "fixed"))}}
+*code:* @fitb{}{@show{(code sol1)}}
 }
 
-@n A `pie-chart` showing how many heavy dogs are fixed or not.
+@n A @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{`box-plot`} showing how many heavy dogs are fixed or not.
 [.FillVerticalSpace, cols="^.^1,^.^1,^.^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?			| What will you Create?
-|						| 							|
+| @ifsoln{heavy dogs}	| @ifsoln{fixed}			| @ifsoln{bar-chart}
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{}
+*code:* @fitb{}{@showsoln{(code sol2)}}
 }
 
-@n A `histogram` of the number of `weeks` it takes for a random sample of animals to be adopted.
+@n A `dot-plot` of the number of `weeks` it takes for a random sample of animals to be adopted.
 [.FillVerticalSpace, cols="^.^1,^.^1,^.^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?			| What will you Create?
-|						| 							|
+|@ifsoln{20 random rows}| @ifsoln{weeks}			| @ifsoln{dot-plot}
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{}
+*code:* @fitb{}{@showsoln{(code sol3)}}
 }
 
 @n A `box-plot` of the number of `pounds` that kittens (young cats) weigh.
 [.FillVerticalSpace, cols="^.^1,^.^1,^.^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?			| What will you Create?
-|						| 							|
+| @ifsoln{kittens}		| @ifsoln{pounds}			| @ifsoln{box-plot}
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{}
+*code:* @fitb{}{@showsoln{(code sol4)}}
 }
 
-@n A `scatter-plot` of a random sample using `species` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
+@n A `scatter-plot` of a 35 random animals using `species` as the labels, `age` as the x-axis, and `weeks` as the y-axis.
 [.FillVerticalSpace, cols="^.^1,^.^1,^.^1",options="header"]
 |===
 | What Rows?			| Which Column(s)?			| What will you Create?
-|						| 							|
+|@ifsoln{35 random rows}| @ifsoln{species, age, weeks}| @ifsoln{scatter-plot}
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{}
+*code:* @fitb{}{@showsoln{(code sol5)}}
 }
 
 @n Describe *your own grouped sample* here, and fill in the table below.
@@ -85,5 +94,5 @@ The first table has been filled in for you.
 |===
 
 @ifproglang{pyret}{
-*code:* @fitb{}{}
+*code:* @fitb{}{@ifsoln{answers will vary}}
 }
