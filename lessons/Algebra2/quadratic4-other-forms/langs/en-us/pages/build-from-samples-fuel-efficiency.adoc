@@ -1,0 +1,68 @@
+= Build a Model from Samples - Fuel Efficiency
+++++
+<style>
+/* Make autonums inside tables look consistent with those outside */
+td .autonum::after { content: ')' !important; }
+
+/* Adjust spacing on the top table */
+.topTable {margin: 1em 0;}
+.topTable td { margin: 0; padding: 0; }
+
+/* Shorten fill in the blanks */
+.studentAnswerShort { width: 5em !important; }
+</style>
+++++
+
+[.linkInstructions]
+We're going to compute a quadratic function from 3 representative points in the `mpg-table` we've been working with.
+
+[.topTable, cols="12a,1,12a", frame="none", grid="none"]
+|===
+|
+@vspace{1ex}
+@image{../images/fuel-efficiency-quadratic.png, 400}
+|
+|
+
+@n Identify three *whole-number* coordinate pairs we can use to summarize a curve that would model the point cloud:
+
+  * a best guess for where the curve *crosses the y-axis* @fitb{}{}
+
+  * a point *from the middle* of the curve @fitb{}{}
+
+  * a point *from the right side* of the curve @fitb{}{}
+
+@vspace{1ex}
+
+@n Fill in the x and y-values in the *standard form* models below using the three points you found:
+
+@indented{
+@fitbruby{6em}{}{y (mpg)} = a(@fitbruby{6em}{}{x (speed)})^2^ + b(@fitbruby{6em}{}{x (speed)}) + c
+
+@fitbruby{6em}{}{y (mpg)} = a(@fitbruby{6em}{}{x (speed)})^2^ + b(@fitbruby{6em}{}{x (speed)}) + c
+
+@fitbruby{6em}{}{y (mpg)} = a(@fitbruby{6em}{}{x (speed)})^2^ + b(@fitbruby{6em}{}{x (speed)}) + c
+}
+|===
+
+
+@n In the space below - or on another sheet of paper - solve this series of equations for @math{a}, @math{b}, and @math{c}.
+[.FillVerticalSpace, frame="none", grid="none"]
+|===
+|
+|===
+
+
+@n Write your finished model in function and Pyret notation below, then define the function `f` in Pyret and try it out using `fit-model`!
+
+[cols="^3a,^4a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+| *Pyret Notation*
+
+| @math{quad2(x) =} @fitbruby{3em}{}{a} @math{x^2 +} @fitbruby{3em}{}{b} @math{x +} @fitbruby{3em}{}{c}
+
+| @show{(code '(define (quad2 x) (+ (+ (* (?ANS 1) (sqr x)) (* (?ANS 2) x)) (?ANS 3))))}
+|===
+
+@n Open the @opt-starter-file{alg2-fuel-efficiency}. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. Add your function definition for `quad2` on line 30 and test it out using `fit-model`.
