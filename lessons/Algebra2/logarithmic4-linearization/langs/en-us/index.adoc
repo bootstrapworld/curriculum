@@ -43,10 +43,6 @@
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
 
-| Key Points For The Facilitator
-|
-- This lesson assumes that students have been introduced to logarithms before, and are familiar with computation involving logarithmic functions.
-- The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
 |===
 
 
@@ -61,56 +57,48 @@ Note: this also opens the door for teaching inverse functions!
 
 === Launch
 
-We tried changing the scale on the x-axis from linear to logarithmic, which cancels out the logarithmic behavior by _shrinking the x-axis_ to make intervals that grow exponentially. Exponentially-bigger intervals on the x-axis cancel out the logarithmic growth on the y-axis, by squishing the points to appear linear.
+We've seen that changing the scale on the x-axis from linear to logarithmic cancels out the logarithmic behavior by _shrinking the x-axis_ to have intervals that grow exponentially and squishing the points to appear linear.
 
 @slidebreak
 
-Unfortunately, this transformation is only skin-deep: the underlying data is still logarithmic, which makes it impossible for us to use linear regression to obtain an optimal model.
-
-Another strategy is to *shrink the data*, by *transforming the x-coordinates themselves*. Instead of plotting `pc-gdp` on a logarithmic x-axis, we could plot `log(pc-gdp)` on a _linear_ one.
+Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the x-coordinates themselves* and plot `log(pc-gdp)` on a _linear_ x-axis.  This would allow us to be able to use linear regression to obtain an optimal linear model!
 
 @slidebreak
 
-@teacher{Sync or pace students to *Slide 6: Wealth-v-Health (Transformed)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 7: Wealth-v-Health (Transformed)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
 - Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
-- You should now be on Slide 6: "Wealth-v-Health (Transformed)".
+- You should now be on Slide 7: "Wealth-v-Health (Transformed)".
 - Use it to complete @printable-exercise{transforming-data.adoc}.
 }
 
+@slidebreak
+
 @QandA{
-@Q{What values did you come up with for our coefficients @math{m} and @math{b} in your best-guess linear model?}
+@Q{What values did you come up with for the coefficients @math{m} and @math{b} in your best-guess linear model?}
 @A{Record different students' responses for @math{m} and @math{b} on the board.}
 @A{These numbers should be somewhat close to their earlier responses for @math{a} and @math{k}!}
-@Q{Were those values very similar or very different?}
-@Q{How close were the values from our best-guess logarithmic model?}
-}
-@slidebreak
-@QandA{
+@Q{Were those values very similar to or very different from our best-guess logarithmic model?}
 @Q{How was transforming the data similar to changing the scale on the x-axis?}
 @A{Transforming the data and changing the scale both made the logarithmic relationship look linear.}
 @Q{How was it different?}
-@A{Changing the scale just made things *look* linear, but the data wasn't any different so we still couldn't use linear regression on it.}
+@A{Changing the scale just made things *look* linear, but the data wasn't any different.}
 }
 
 @slidebreak
 
-Transforming the points instead of the axis has the same visual effect: the dots appear to fall in a straight line. But now we can plot them on a linear-scale axis, and use linear regression to find the best-possible model!
+@lesson-point{
 
-This transformation changed the _kind of growth_ from logarithmic to linear: instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by @math{a}.
+- the *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
 
-The term went from @math{a \log_{10}(x)} to @math{ax}, turning our logarithmic coefficient into..._*slope*_.
+- the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
+}
 
 === Investigate
 
-We transformed the `pc-gdp` column in three steps:
 
-1. We defined a transformation function, @math{g(x)}, which produces the log of whatever it's given (the `pc-gdp` column).
-2. We defined a new column to use as our x-values, populating it by applying the transformation to each of our original x-values.
-3. We displayed these transformed datapoints as a scatter plot.
-
-If we can do this in Pyret, *we could run linear regression on the transformed data*, and then use what we know about the coefficients to *turn our optimal linear model into an optimal _logarithmic_ one!*
+Now that we know how the coefficients in our linear model of transformed data relate to the coefficients in our logarithmic model, let's return to Pyret to run linear regression on the transformed data, find the *best possible linear model*, and use the coefficients to define our *optimal _logarithmic_ model!*
 
 @slidebreak
 
@@ -119,26 +107,24 @@ If we can do this in Pyret, *we could run linear regression on the transformed d
 - Complete the first part ("Transforming: From Logarithmic Plots to Linear Ones"), then pause for class discussion.
 }
 
+We transformed the data in three steps:
+
+1. Define the transformation function @math{g(r)} to produce the log of the `pc-gdp` column.
+2. Build a new column `log(pc-gdp)` that gets populated by applying @math{g(r)} to transform each of our original x-values.
+3. Use the new column as the @vocab{explanatory variable} on the x-axis for our scatter plot.
+
 @teacher{Address any student questions about `build-column`, the Pyret function they've just discovered. Verify that students have recorded the slope and vertical shift for their regression line. Then, emphasize the key ideas below.}
 
 @slidebreak
 
 - At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp in thousands_.
-
 - We want @math{x} to represent the *original, un-transformed* value, simply using _per-capita gdp in thousands_ as-is...
 
 @slidebreak
 
-@lesson-point{
-We've learned that:
-
-- the *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
-
-- the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
-}
-
 @lesson-instruction{
-Use this knowledge to complete the second part ("Inverting: From Linear Models to Logarithmic Ones") of @printable-exercise{logarithmic-models.adoc}.
+- Now let's find our optimized logarithmic model.
+- Complete the second part ("Inverting: From Linear Models to Logarithmic Ones") of @printable-exercise{logarithmic-models.adoc}.
 }
 
 @slidebreak
