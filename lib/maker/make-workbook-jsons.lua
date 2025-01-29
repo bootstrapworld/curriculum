@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- print('doing make-workbook-jsons-2.lua')
+-- print('doing make-workbook-jsons.lua')
 
 local courses_list_file = ...
 
