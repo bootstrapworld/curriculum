@@ -13,10 +13,9 @@ dofile(make_dir .. 'readers.lua')
 
 local natlang = os.getenv('NATLANG')
 
--- local natlang = 'en-us'
-
 local distr_courses = 'distribution/' .. natlang .. '/courses/'
 
+local makemasterPDFs = os.getenv('MASTERWORKBOOK')
 ---------------------------------------------------------------------------
 
 local all_courses = dofile(courses_list_file)
