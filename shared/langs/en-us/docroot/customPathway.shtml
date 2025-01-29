@@ -77,12 +77,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 
     <!-- Load PDF and Download modules -->
-    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
-    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    <script defer src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>
+    <script defer src="https://unpkg.com/downloadjs@1.4.7"></script>
 
-    <script src="lib/bootstraplesson.js"></script>
+
     <script src="dependency-graph.js"></script>
     <script src="pathway-tocs.js"></script>
+    <script src="lib/bootstraplesson2.js"></script>
+    <script src="lib/makeWorkbook2.js"></script>
+
     <script>
     let url = new URL(location);
     
@@ -99,7 +103,7 @@
     if(!lessons) lessons = [];
     if(!pathway) pathway = "Click here to name this pathway";
 
-    // sorting configuraton
+    // sorting configuration
     const sortingOptions = {
         animation: 150,
         group: 'lessons',
@@ -302,7 +306,7 @@
 
         <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
-            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeBook(pathway, lessons)">Student Workbook</a>. 
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>. 
             <p/>
             <span id="status">
                 <label for="file">Assembling Workbook:</label>

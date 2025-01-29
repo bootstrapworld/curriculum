@@ -16,6 +16,7 @@ initialization:
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
 	@mkdir -p distribution/$(NATLANG)/lib/images
 	@mkdir -p distribution/$(NATLANG)/lib/.cached
+	@mkdir -p distribution/$(NATLANG)/lib/fonts
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
 	@$(CP) -upr $(PROGDIR)/images/* distribution/$(NATLANG)/lib/images
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
@@ -29,6 +30,7 @@ initialization:
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
+	@$(CP) -p lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
