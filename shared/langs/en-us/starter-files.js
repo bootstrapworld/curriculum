@@ -372,6 +372,18 @@ const AI = {
     "pyret": {
       "url": "https://code.pyret.org/editor#share=1gEdijEF5e6PEUIOpoY8zIpM4Ovgj5VCP&v=e8968a4"
     }
+  },
+  "premiums": {
+    "title": "Car Insurance Premium Starter File",
+    "pyret": {
+      "url": "https://code.pyret.org/editor#share=11NRXsrTsIuTQFmaXXTFMGdX6y35nYZac&v=8710c6a"
+    }
+  },
+  "premiums-2": {
+    "title": "Car Insurance Premium Starter File 2",
+    "pyret": {
+      "url": "https://pyret-horizon.herokuapp.com/editor#share=1129nimRB_HHCpcF5fZz5SFFNzx4ZPjWo"
+    }
   }
 }
 
