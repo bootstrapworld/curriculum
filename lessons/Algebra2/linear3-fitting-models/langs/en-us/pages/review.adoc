@@ -1,0 +1,76 @@
+= Review: What can we learn from Residuals and S-values?
+
+@n Below we see the model @hspace{1em} `lizard-adopt-time(pounds) = (-0.5 * pounds) + 9` @hspace{1em} fit to the lizard sample.
+
+@center{@image{../images/lizard-fit.png, 400}}
+
+*This model predicts* that lizards weighing 0 pounds will be adopted in
+@fitbruby{5em}{@ifsoln{9}}{y-intercept}
+@fitbruby{10em}{@ifsoln{weeks}}{y-units}, and that, +
+for every additional
+@fitbruby{15em}{@ifsoln{pound a lizard weighs}}{x-variable units},
+@fitbruby{12em}{@ifsoln{weeks to adoption}}{x-variable} will
+@fitbruby{8em}{@ifsoln{decrease}}{increase/decrease} by
+@fitbruby{5em}{@ifsoln{0.5}}{rate of change}
+@fitbruby{6em}{@ifsoln{weeks}}{x-units}.
+
+@vspace{1ex}
+
+*The error in the model* is described by an @vocab{S-value} of about
+@fitbruby{5em}{@ifsoln{~1.6}}{S}
+@fitbruby{8em}{@ifsoln{weeks}}{units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{10em}{@ifsoln{weeks}}{y-variable units} in this dataset range from
+@fitbruby{7em}{@ifsoln{2}}{lowest y-value} to
+@fitbruby{7em}{@ifsoln{8}}{highest y-value}.
+
+@n When we mouse over a `fit-model` visualization, one of the popup boxes we'll see is titled "Residuals".
+
+@indented{
+[cols="2a, 1, 19a", stripes="none", grid="none", frame="none"]
+|===
+3+|
+|
+[cols="1", options="header"]
+!===
+! Residuals:
+! x: 34.5
+! y: 25000
+! y&#8321;: 45000
+!===
+
+|
+| What can we learn from this set of values?
+@ifnotsoln{
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+}
+@ifsoln{
+@vspace{1ex}
+- The actual and predicted values of y for when x is 34.5...
+  * The data point is at @math{(34.5, 25000)}
+  * The model passes through a predicted point at @math{(34.5, 45000)}
+}
+|===
+}
+
+@n A government office reported that the error in a model they made is described by an @vocab{S-value} of 3000. Is the model a good or bad fit? Explain.
+
+@fitb{}{@ifsoln{*We don't have enough information!* 3000 what? (The units would be helpful: dollars? years? @math{CO_2} in parts per million?) We would need to know}}
+
+@fitb{}{@ifsoln{the range of the dataset in order to know whether 3000 is a big or small amount of error. $3000 is very small in the context of the US military budget,}}
+
+@fitb{}{@ifsoln{but if the model were predicting Federal Pell Grants (ranging from $650 to $7395 in 2024), being off by $3000 would not be a good fit.}}
+
+
+@n In order to interpet an @vocab{S-value} we need to know:
+
+@indented{
+- @fitb{}{@ifsoln{the range of the dataset}} +
+- @fitb{}{@ifsoln{the units of the y-variable}}
+}
+
+
