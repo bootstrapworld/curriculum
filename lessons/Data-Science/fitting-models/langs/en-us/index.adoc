@@ -332,11 +332,19 @@ Let's put everything we've learned together and interpret the models we've built
 - Complete @printable-exercise{interpret-models.adoc}. Heads up: You will be using percent change to make sense of how the expected errors in these models compare.
 }
 
+@strategy{How can @math{r^2} be less than zero?}{
+Sharp-eyed students might wonder how it's possible for an @math{r^2} to be less than zero. Anyone's worked with linear regression before knows that's supposed to be impossible, right?
+
+And actually, it is: the algorithm is literally designed to find a line of _best_ fit, and _the line of best fit can only be *so bad*!_. For example, it can't ever produce a line where all of the points are above or below. That doesn't mean those lines don't exist - just that linear regression will never return something so objectively bad.
+
+When students are coming up with models on their own, they aren't bound by the algorithm for linear regression. If they want, they can come up with truly awful, nonsensical lines whose fit is worse than `lr-plot` could ever be! For students with a strong math background, this discussion is useful because it illuminates a detail about the behavior of the linear regression algorithm that is often overlooked. The restriction on @math{r^2} is actually about the way the algorithm works, not about the data.
+}
+
 === Synthesize
 
 @QandA{
 @Q{Why do we need to know the Range of the dataset in order to interpret an @vocab{S-value}?}
-@A{Because @vocab{S-values} tell us the expected error in _units of the variable on the y-axis_. An error of $1000 could be huge or miniscule depending on the context.}
+@A{Because @vocab{S-values} tell us the expected error in _units of the variable on the y-axis_. An error of $1000 could be huge or minuscule depending on the context.}
 @Q{Besides looking at the @vocab{S-value}, what might you look for to determine whether a linear model is a good fit for the data?}
 @A{That the average distance of the points above the line appears to be about the same as the average distance of the points below the line.}
 }
