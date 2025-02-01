@@ -55,7 +55,7 @@
       "specific recommendations for in-person v. remote instruction.\n"
       "\n") o))
 |#
-(define (print-course-title-and-logo course make-image o)
+(define (print-course-title-and-logo course make-image store-title o)
   ; (printf "doing print-course-title-and-logo ~s\n" course)
   (let* ([c (assoc course *course-names*)]
          [course-name (if c (second c) "Bootstrap")])
@@ -63,6 +63,7 @@
       (string-append
         "= "
         course-name "\n") o)
+    (store-title course-name)
     (print-pathway-logo course make-image o #:course-name course-name)))
 
 (define (print-pathway-logo course make-image o #:course-name [course-name #f])
