@@ -194,8 +194,8 @@ To wrap our heads around periodic functions, let's think about something simpler
 @A{9pm lands on (-1,0)}
 @Q{At which time(s) does @math{A(\textit{time})=B(\textit{time})}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
-@Q{When @math{A(\textit{time}) = B(\textit{time})}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
-@A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
+@Q{When @math{A(\textit{time}) = B(\textit{time})}, how could we calculate the length of @math{A} and @math{B} from this right triangle?}
+@A{We could use the Pythagorean Theorem, with @math{x = y}: @hspace{1em} @math{x^2 + x^2 = 1^2}}
 }
 
 @lesson-instruction{
@@ -235,6 +235,7 @@ In our clock animation we have 12 "slices", and drawing 4 evenly-spaced labels a
 @QandA{
 @Q{Does changing the number of slices effect the way the curves are drawn? Why or why not?}
 @A{Let students discuss}
+@A{The height of the curves depends only on the radius of the circle. Changing the number of circle-slices or names of the labels doesn't change the radius, nor will it change the curves. }
 }
 
 == From Hours to Radians
@@ -260,7 +261,7 @@ Calculations involving circumference all involve the *radius* of the circle. Is 
 @slidebreak
 
 --
-@right{@image{images/clock-6-equilateral.png, 200}}
+@right{@image{images/clock-6-equilateral.png, 100}@image{images/clock-6-hexagon.png, 100}}
 If the hand of our clock was made of rubber, how many "clock hands" would it take to wrap all the way around the clock?
 
 - We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
@@ -352,13 +353,39 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 
 _These are conventions that people have agreed upon over time to make it easy to collaborate. If somebody wanted to make a clock with the numbers written backwards and have the hands move the other way, it would be possible to learn how to tell time using their clock... but it likely would be more confusing than helpful for most people if we hung a clock like that in our school._
 
+@lesson-instruction{
+- Complete the first question on @printable-exercise{converting-angles.adoc}
+}
+
+@slidebreak
+
+To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
+
+The contracts for these functions are: +
+@hspace{4em}
+@show{(contracts
+'("sin" ("Number") "Number")
+'("cos" ("Number") "Number")
+)}
+
 @slidebreak
 
 @lesson-instruction{
-Complete the table on @printable-exercise{converting-angles.adoc} with your partner, following the prompts in #1 and #2.
+- One of these two functions computes the "x values" from our unit circle (@math{A} on the unit clock). The other computes the y-values (@math{B} on the clock).
+- Use these functions in Pyret to complete @printable-exercise{converting-angles.adoc}, and figure out which is which.
 }
+
+*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
+
 
 === Synthesize
 
-TBD
+@QandA{
+@Q{Which function computes the horizontal leg @math{A}?}
+@A{`sin`}
+@Q{Which function computes the vertical leg @math{B}?}
+@A{`cos`}
+@Q{If `sin` and `cos` consumed and produced _degrees_ instead of _radians_, would the shape of the curve change? Why or why not?}
+@A{No. This would be exactly the same as changing the slices and labels around the circle: same graph, same curves, different markings.}
+}
 
