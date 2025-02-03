@@ -1,6 +1,6 @@
 = Exploring the States Dataset
 
-@description{Students use linear models to investigate relationships in demographic data about US states using an inquiry-based approach, involving hypothesizing, experimental and computational modeling, and sense-making.}
+@description{Students look for linear relationships in demographic data about US states using scatter plots in Pyret. Emphasis is placed on testing our hypotheses by making scatter plots, rather than making plots before really thinking about them.}
 
 @lesson-prereqs{fitting-models}
 
@@ -28,12 +28,11 @@
 
 | Key Points For The Facilitator
 |
-- This is the first lesson in the linear models unit, which establishes a structure for exploring relationships in data:
+- This lesson is the first of four in the linear models sequence, which establishes a structure we will revisit for exploring relationships in data:
     * identify possible relationships in a dataset
   	* build a model from samples
   	* fit a model
   	* improve upon the model
-- This sequence will be revisited in future units.
 - There is no need to have students save the @starter-file{alg2-states-intro} used in this lesson. When we're ready for students to start saving things in a future lesson, we'll refer them to a different starter file that pulls data from the same spreadsheet and has more details in the Definitions Area to save you time.
 
 |===
@@ -44,7 +43,7 @@
 @objective{linear-situations}
 
 === Overview
-Students explore the State Demographics dataset and, building on a discussion of the data visualizations they previously made using the animals dataset, recognize the unique opportunity scatter plots offer for exploring relationships between columns.
+Students explore relationships between columns in the State Demographics dataset and practice defining rows in Pyret.
 
 === Launch
 
@@ -88,12 +87,15 @@ OPTIONAL: Let's think back to our @lesson-link{fitting-models} lesson...
 @slidebreak
 
 @QandA{
-@Q{We're going to be working with a dataset about the states in the US. Let's pick a few states to keep an eye out for as we work. We'll certainly want to look for our own. What other states?}
+@Q{We're going to be working with a dataset about the states in the US. Let's pick a few states to keep an eye out for as we work. What states should we focus on besides our own?}
 @A{Our neighbors? A state you've always wanted to visit? Other ideas?}
+@Q{The dataset we are going to be working with locates each state within a region of the United States. Cartographers aren't in total agreement about how best to describe the regions of the U.S. What would you call the region we live in? What other states do you associate it with?}
 }
 
 @teacher{
-Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!  If students aren't familiar with neighboring states, @link{https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#/media/File:Map_of_USA_with_state_and_territory_names_2.png, here's a useful map!}
+Come to a consensus about which states your students will explore. When more students are looking into the same data, you'll find much richer class discussions!  If students aren't familiar with neighboring states, @link{https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States#/media/File:Map_of_USA_with_state_and_territory_names_2.png, here's a useful map!
+
+If your students have strong feelings about what region your state is a part of and disagree with the way the dataset has categorized it, @link{mailto:contact@bootstrapworld.org, please let us know}!}
 }
 
 @slidebreak
@@ -172,8 +174,7 @@ The dataset is designed so that students will quickly begin searching for relati
 - `median-income` vs. `pct-college-or-higher`
 - `median-income` vs. `pct-home-owners`
 - `pct-college-or-higher` vs. `pct-home-owners`
-- `pct-college-or-higher` vs. `pct-home-owners`
-- `pct-home-owners`, `num-housing-units`
+- `pct-home-owners` vs. `num-housing-units`
 - `median-income` vs. `per-capita-income`
 
 }
@@ -190,6 +191,7 @@ The dataset is designed so that students will quickly begin searching for relati
 
 @lesson-instruction{
 - Complete @printable-exercise{looking-for-patterns.adoc}
+- As you work, keep an eye out for what you can learn about the states we decided to focus on.
 }
 
 @slidebreak
@@ -197,15 +199,30 @@ The dataset is designed so that students will quickly begin searching for relati
 @QandA{
 @Q{How did your predictions compare to the scatter plots you made in Pyret?}
 @Q{Which columns appear to have the strongest relationships?}
-@A{}
+@A{Answers will vary. Some contenders include:}
+@A{positive relationship: `pct-college-or-higher` and `per-capita-income` }
+@A{negative relationship: `pct-in-poverty` and `median-income`}
+@A{strong, but not particulary interesting:
+  *** `pop-2010` and `pop-2020`
+  *** `per-capita-income` and `median-income`
+  }
+@Q{What did you learn about the states we decided to keep an eye out for?}
 }
 
 === Synthesize
 
-- Share your scatter plots with one another. _(Perhaps by copying and pasting scatter-plots into a shared document and then labeling them?)_
-- What possible relationships did you find?
-- What did you learn about the state(s) you decided to focus on?
-- Did you and your classmates use similar words to describe the scatter plots you came up with? If so, what were they?
+@QandA{
+@Q{Why did we use scatter plots for our exploration of this dataset?}
+@A{Because we were looking for relationships between columns}
+@Q{Share your scatter plots with one another. _(Perhaps by copying and pasting scatter-plots into a shared document and then labeling them?)_}
+@Q{Did you and your classmates use similar words to describe the scatter plots you came up with? If so, what were they?}
+@Q{What are some of the things we practiced doing in Pyret?}
+@A{Building a filtered table}
+@A{Making a table to display the count of each category in a categorical column}
+@A{Sorting a column}
+@A{Defining a row}
+@A{}
+}
 
-@teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in the next section of this lesson, which is all about identifying form, direction, and strength._}
+@teacher{_Note: Students will acquire the formal vocabulary that data scientists use to assess relationships in @lesson-link{linear2-building-models}, which is all about identifying form, direction, and strength._}
 

@@ -10,7 +10,6 @@ table .autonum::after { content: ')' !important; }
 ++++
 
 * To place letters in the top left corner in table cells
-
 ++++
 <style>
 /* Add letters to the top left corner, relative to each table cell */
@@ -27,7 +26,6 @@ table .autonum::after { content: ')' !important; }
 ++++
 
 * For pages with lots of empty space at the top.
-
 ++++
 <style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
@@ -36,7 +34,6 @@ table .autonum::after { content: ')' !important; }
 ++++
 
 * To reduce bullet spacing
-
 ++++
 <style>
 body.LessonNotes li {
@@ -46,7 +43,6 @@ body.LessonNotes li {
 ++++
 
 * To add a dotted box around text on a workbook page
-
 ++++
 <style>
 /* add a dotted border around specialized directions */
@@ -58,7 +54,6 @@ body.LessonNotes li {
 ++++
 
 * To rotate column headers
-
 ++++
 <style>
 /* set all table headers to be vertical right-to-left text, flip them horizontally, and adjust spacing */
@@ -92,7 +87,6 @@ Correlation does NOT imply causation.
 [.freeResponse]
 
 * For make graphs using pure css
-
 ++++
 <style>
 /*
@@ -116,5 +110,17 @@ Correlation does NOT imply causation.
   --x_label: 'altitude';
   --y_label: 'time';
 }
+</style>
+++++
+
+* If fillvertical space isn't working, this might address the issue
+++++
+<style>
+/* This page has an unusual configuration, where there's only one
+   2nd level section but it doesn't start at the beginning.
+   Stop that section from auto-growing, thereby freeing up vertical
+   space for the first section in order to maximize the table height
+ */
+#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
 </style>
 ++++
