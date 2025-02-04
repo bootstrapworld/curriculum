@@ -333,11 +333,11 @@ Let's put everything we've learned together and interpret the models we've built
 }
 
 @strategy{How can @math{r^2} be less than zero?}{
-Sharp-eyed students might wonder how it's possible for an @math{r^2} to be less than zero. Anyone's worked with linear regression before knows that's supposed to be impossible, right?
+Sharp-eyed students might wonder how it's possible for an @math{r^2} to be less than zero. That's supposed to be impossible, right?
 
-And actually, it is: the algorithm is literally designed to find a line of _best_ fit, and _the line of best fit can only be *so bad*!_. For example, it can't ever produce a line where all of the points are above or below. That doesn't mean those lines don't exist - just that linear regression will never return something so objectively bad.
+It turn out that @link{https://stats.stackexchange.com/questions/12900/when-is-r-squared-negative, *r&sup2;* isn't computed by squaring *r*} and only actually equals @math{r \times r} when @math{r} is calculated using linear regression.
 
-When students are coming up with models on their own, they aren't bound by the algorithm for linear regression. If they want, they can come up with truly awful, nonsensical lines whose fit is worse than `lr-plot` could ever be! For students with a strong math background, this discussion is useful because it illuminates a detail about the behavior of the linear regression algorithm that is often overlooked. The restriction on @math{r^2} is actually about the way the algorithm works, not about the data.
+When students are coming up with models on their own, they aren't bound by the algorithm for linear regression and will come up with lines whose fit is worse than `lr-plot` could ever be!
 }
 
 === Synthesize
