@@ -10,45 +10,47 @@ The very first spell checker would use misspelled words as inputs.
 
 == Part 1: Follow the Algorithm ("wello")
 
-@n Generate alternative candidates for the misspelled word by replacing *one* letter with a different one. We’ve provided a first option to get you started. (Hint: these candidates don’t need to be real words!)
+@n Generate alternative candidates for the misspelled word by completing two steps.
 
-@fitb{8em}{cello} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{}
+- First, replace *one* letter with a different one. We’ve provided a first option to get you started. (Hint: these candidates don’t need to be real words!)
 
+@hspace{3em} @fitb{8em}{cello} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{}
 
+@vspace{1ex}
 
-@n Generate alternative candidates for the misspelled word by swapping the positions of two *adjacent* letters. Again, we've provided a first option to get you started.
+- Next, swap the positions of two *adjacent* letters. Again, we've provided a first option to get you started.
 
-@fitb{8em}{ewllo} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{}
+@hspace{3em} @fitb{8em}{ewllo} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em} @fitb{8em}{} @hspace{3em}
 
 @n Are any of the candidates you listed above _actual_ words? If so, circle them. How many _plausible_ candidates did you find? @fitb{8em}{}
 
-@n In question 1 above, there were only four blanks for you to fill in. About how many more *additional* candidates could you generate by replacing one letter? @fitb{}{}
+@n In question 1 above, there were only five blanks for you to fill in. About how many more *additional* candidates could you generate by replacing one letter? @fitb{}{@ifsoln{A computer would generate 125 options. It would replace each of the letters in the word with all possible other letters}}
 
-@fitb{}{@ifsoln{A computer would generate over one hundred options. It would replace each of the letters in the word with all possible other}}
+@fitb{}{@ifsoln{from the alphabet.}}
 
-@fitb{}{@ifsoln{letters from the alphabet.}}
+@fitb{}{}
 
 
 
 == Part 2: Reflect
 
-@n What do you think are some limitations of this algorithm? @fitb{}{@ifsoln{The algorithm would produce an extremely long list of possible candidates,}}
+@n What do you think are some limitations of this algorithm? @fitb{}{@ifsoln{There is an extremely limited number of ways in which a word can be misspelled.}}
 
-@fitb{}{@ifsoln{and many of the candidates would not be actual words. The human would need to spend lots of time sifting through options }
+@fitb{}{@ifsoln{For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}}
 
-@fitb{}{@ifsoln{before making a decision. If more than one letter in a word is incorrect, the spell checker has no chance of proposing the correct word!}}
+@n How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing? @fitb{}{@ifsoln{We can't}}
 
-@n How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing? @fitb{}{@ifsoln{The spell checker will }}
+@fitb{}{@ifsoln{think of any similarities! Maybe your students will have ideas, though.}}
 
-@fitb{}{@ifsoln{produce lots of words that rhyme and sound similar, which humans will likely naturally do. Humans may also deliberate between multiple}}
-
-@fitb{}{@ifsoln{possible spellings, which this spell checker invites us to do.}}
+@fitb{}{}
 
 @n How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing? @fitb{}{}
 
-@fitb{}{@ifsoln{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling.}}
+@fitb{}{@ifsoln{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling. The first spell checker }}
 
-@fitb{}{@ifsoln{The first spell checker did not use any of these tools that humans use.}}
+@fitb{}{@ifsoln{did not use any of these tools that humans use. The spell checker has the ability to enumerate thousands of words;}}
+
+@fitb{}{@ifsoln{no human would even think to approach a spelling error in this way. A human wouldn't have the time or ability to list so many words.}}
 
 
 

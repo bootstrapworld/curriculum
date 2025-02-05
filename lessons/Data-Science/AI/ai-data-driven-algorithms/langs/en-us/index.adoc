@@ -13,8 +13,7 @@
 | Lesson Goals
 | Students will be able to...
 
-- Understand that machines and people often use starkly different processes to complete identical tasks, based on the strengths and limitations of computers and human brains.
-- Define data-driven algorithms as the instructions that tell a computer how to perform a task, which produce better results when given more data.
+@objectives
 
 | Student-facing Lesson Goals
 |
@@ -28,6 +27,8 @@
 |===
 
 == The First Spell Checker: Intelligent or Not? @duration{15 minutes}
+
+@objective{machines-v-people}
 
 === Overview
 
@@ -79,15 +80,13 @@ After students have completed the activity, invite them to share their responses
 
 @QandA{
 @Q{What do you think are some limitations of the first spell checker's algorithm?}
-@A{The algorithm would produce an extremely long list of possible candidates, and many of the candidates would not be actual words. The human would need to spend lots of time sifting through options before making a decision. If _more_ than one letter in a word is incorrect, the spell checker has no chance of proposing the correct word.}
+@A{There is an extremely limited number of ways in which a word can be misspelled. For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}
 
 @Q{How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing?}
-@A{The spell checker will produce lots of words that rhyme and sound similar, which humans will likely naturally do. Humans may also deliberate between multiple spellings, which this spell checker invites us to do.}
-
+@A{We can't think of any similarities! See what your students propose, and discuss.}
 
 @Q{How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing?}
-@A{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling. The first spell checker did not use any of these tools that humans use.}
-
+@A{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling. The first spell checker did not use any of these tools that humans use. The spell checker has the ability to enumerate thousands of words; no human would even think to approach a spelling error in this way. A human wouldn't have the time or ability to list so many words.}
 }
 
 
@@ -105,6 +104,8 @@ After students have completed the activity, invite them to share their responses
 
 
 == Spell Checking in Pyret @duration{25 minutes}
+
+@objective{data-driven-algos}
 
 === Overview
 
@@ -153,6 +154,8 @@ The player has just three turns left!
 @A{Three of the letters are correct; we just need to substitute in different letters for _g_ and _s_.}
 }
 
+The player of this partially-completed Wordle game (above) wants some Pyret "assistance". Let's explore how directing Pyret to access differently sized datasets influences the quality of assistance that the program provides.
+
 @lesson-instruction{
 - Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
 - If you finish early, try the two challenges at the bottom of the page.
@@ -160,24 +163,8 @@ The player has just three turns left!
 
 When we offered _more data_ to our rudimentary Pyret spell checker, we got better results _without changing the code_.
 
-Data is at the heart of data science, and @vocab{data-driven algorithms} are at the heart of AI. This statement is true not just of spell checkers, but of all artificial intelligence.
-
-The type of data that we use to train artificial intelligence varies by situation, of course.
-
-@lesson-instruction{
-- Consider a different scenario, @printable-exercise{case-study-michelle.adoc}.
-- Read the brief story and respond to the question, providing as much detail as you can.
-}
-
-@teacher{Invite students to share their responses, emphasizing that data-driven algorithms produce a higher quality output when we provide more data. Changing the code is not necessarily needed. When change to the code _does_ happen, it is done by humans.}
-
 === Synthesize
 
-@QandA{
-@Q{Why do you think AI and ML considered sub-disciplines of data science?}
-
-@A{Data science, AI and ML all rely on *data*! Data science is the process of learning from data. AI and ML involve building predictive models _based on data_.}
-}
 
 
 
