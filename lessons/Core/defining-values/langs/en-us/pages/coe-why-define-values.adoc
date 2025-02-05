@@ -3,6 +3,13 @@
 ++++
 <style>
 .autonum { padding-top: 0 !important; }
+.circleevalsexp { font-size: 8pt; }
+table { margin: 0 !important; }
+td { padding: 0 10px; !important; }
+
+/* Add a "header stripe" every 3rd row, with bold text */
+tr:nth-child(3n + 1) td { background: #ccc !important; }
+tr:nth-child(3n + 1) td * { font-weight: bold !important; }
 </style>
 ++++
 
@@ -12,9 +19,7 @@ Take a close look at the Original Circle of Evaluation & Code and how it got sim
 
 @n Complete the table using the first row as an example.
 
-@vspace{1ex}
-
-[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="<.^19a,^.^1a,<.^11a", stripes="none"]
 |===
 | Original Circle of Evaluation & Code
 |
@@ -27,10 +32,7 @@ Take a close look at the Original Circle of Evaluation & Code and how it got sim
 | @show{(code '(scale 3 (radial-star 30 20 50 "solid" "yellow")))}
 |&rarr;
 | Code: @show{(code '(scale 3 sunny))}
-|===
 
-[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
-|===
 | Second Circle of Evaluation & Code
 |
 | Use the _defined value_ @show{(code 'sunny)} to simplify!
@@ -44,10 +46,6 @@ Take a close look at the Original Circle of Evaluation & Code and how it got sim
 |&rarr;
 | Code: @showsoln{(code '(frame sunny)) }
 
-|===
-
-[.FillVerticalSpace, cols="19a,^.^1a,11a", stripes="none", options="header"]
-|===
 | Third Circle of Evaluation & Code
 |
 | Use the _defined value_ @show{(code 'sunny)} to simplify!

@@ -1,16 +1,29 @@
 = Introduction to Examples (Additive Inverse)
+++++
+<style>
+td .fitb{
+	padding-top: 0.2rem !important;
+	min-width: 1em;
+	border-bottom-color: lightgray;
+}
 
+/* In Pyret contained in tables, force each example to one
+ * line, hide the 'examples', the ':' that follows, and 'end'
+ */
+.pyret .obeyspaces .editbox br { display: none; }
+.pyret .obeyspaces .cm-keyword:first-child,
+.pyret .obeyspaces .cm-keyword:first-child+.cm-builtin,
+.pyret .obeyspaces .cm-keyword:last-child { display: none; }
+</style>
+++++
 Use the @starter-file{additive-inverse} to complete this page. *Do not click "Run" yet.*
 
 @n In the table below, record your Noticings and Wonderings about what you see in the Definitions Window (left side) of the @starter-file{additive-inverse}.
 
 [.FillVerticalSpace,cols="^1, ^1", stripes="none", options="header"]
 |===
-
-| Notice | Wonder
-|
-|
-
+| Notice 	| Wonder
+|			|
 |===
 
 @n Click "Run." At the top of the Interactions Area on the right side, a message appears that says, *"7 TESTS PASSED, 4 TESTS FAILED."* Summarize the remaining information that appears @ifproglang{pyret}{when we click "Show Details"} by filling in the blanks, below.
@@ -30,39 +43,24 @@ Use the @starter-file{additive-inverse} to complete this page. *Do not click "Ru
 
 @n Below, place a checkmark next to each of the examples that _passed_ from `examples-block-2`.
 
-
-@ifproglang{pyret}{
-
-[.table1, cols="1,8,8,8", frame="none", grid="none", stripes="none"]
+[cols="1,24", frame="none", grid="none", stripes="none"]
 |===
-
-|| @fitb{1em}{} @hspace{1em}  `30 - 5 *is* 30 + 5`
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `11 + -9 *is* 11 - 9`
-| @fitb{2em}{} @hspace{1em} `5 - 30 *is* 5 - -30`
-
-|| @fitb{2em}{} @hspace{1em}  `24 + -4 *is* 24 - -4`
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `60 - 55 *is* 60 + -55`
 |
+|
+@ifproglang{pyret}{`examples:`}
 
+@fitb{2em}{} 			@hspace{1em} @show{(code '(EXAMPLE (- 30 5) (+ 30 5)))}
+
+@fitb{2em}{@ifsoln{x}}  @hspace{1em} @show{(code '(EXAMPLE (+ 11 -9) (- 11 9)))}
+
+@fitb{2em}{@ifsoln{x}}  @hspace{1em} @show{(code '(EXAMPLE (- 5 30) (- 5 -30)))}
+
+@fitb{2em}{@ifsoln{x}}  @hspace{1em} @show{(code '(EXAMPLE (+ 24 -4) (- 24 -4)))}
+
+@fitb{2em}{} 			@hspace{1em} @show{(code '(EXAMPLE (- 60 55) (+ 60 -55)))}
+
+@ifproglang{pyret}{`end`}
 |===
-
-}
-
-@ifproglang{wescheme}{
-
-@hspace{1em} @fitb{1em}{} @show{(code '(EXAMPLE (- 30 5) (+ 30 5)))}
-
-@hspace{1em} @fitb{1em}{@ifsoln{x}} @show{(code '(EXAMPLE (+ 11 -9) (- 11 9)))}
-
-@hspace{1em} @fitb{1em}{@ifsoln{x}} @show{(code '(EXAMPLE (- 5 30) (- 5 -30)))}
-
-@hspace{1em} @fitb{1em}{@ifsoln{x}} @show{(code '(EXAMPLE (+ 24 -4) (- 24 -4)))}
-
-@hspace{1em} @fitb{1em}{} @show{(code '(EXAMPLE (- 60 55) (+ 60 -55)))}
-
-}
-
-
 
 @n Edit each of the *failing* examples on the left so that _all examples pass_ when you click "Run". Be sure to change *only* the part of the example after the `is`! Describe one of the changes you had to make. @fitb{}{}
 
