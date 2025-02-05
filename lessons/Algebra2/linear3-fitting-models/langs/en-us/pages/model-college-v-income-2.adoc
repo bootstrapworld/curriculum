@@ -1,4 +1,4 @@
-= Fitting the Alabama-Alaska Model: College Degrees v. Income
+= Fitting Models: College Degrees v. Income
 
 [.linkInstructions]
 Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
@@ -19,44 +19,42 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @vspace{1ex}
 
-== Trial and Error
-@link-instructions{
-In the Definitions Area, find the section titled *Define some other models by modifying al-ak*. +
-For now, all three definitions in this section are exactly the same as `al-ak`. You will be changing them according to the directions below.
+@n Given that the range of this dataset goes from @fitbruby{10em}{@ifsoln{$39,031}}{lowest median income} to @fitbruby{10em}{@ifsoln{$73538}}{highest median income}, what does it mean that the @math{S-value} of the `al-ak` model is @fitb{10em}{@ifsoln{~36164.683}} ?
+
+@fitb{}{@ifsoln{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}
+
+@fitb{}{@ifsoln{Considering the range of the data, the error in the model is enough to double the median income of a state or cut it in half!}}
+
+== A Model of Your Own
+
+@n Identify two other states that you think would make a better model: @fitb{13em}{} and @fitb{13em}{}.
+
+@vspace{1ex}
+
+- Add two new definitions for these states to your @starter-file{alg2-states-fit-model}.
+
+@n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
+
+@center{
+ (@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})
 }
 
-@n `less-steep`
+@n Derive your model and write it below (in both Function and Pyret notation), then fit the model and record the @math{S}-value:
 
-- If you wanted the model to be _less steep_, what slope could you use? @fitb{}{} +
-Change the definition for `less-steep` to use the slope you wrote above and click "Run" to load your new definition.
+[.FillVerticalSpace, cols="1a", frame="none"]
+|===
+|
+|===
 
-- Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))}
-  * What is the @math{S} value of `less-steep`? @fitb{}{}
+@math{other(x) =} @fitbruby{8em}{}{slope (m)}x + @fitbruby{10em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
 
-- Identify a y-intercept that would make the model fit the data better: @fitb{}{}
 
-  * Adjust the definition to use the new y-intercept, click "Run" and refit the model. +
-   _Hint: You can click in the Interactions Area and hit the up arrow to bring back the last line of code you used._
-  * What is the @math{S} value of `less-steep` now? @fitb{}{}
+@n Adjust the slope and y-intercept of your model to get the *smallest @math{S} possible.* Write the best model you find (and corresponding @math{S}) below:
 
-@n `negative`
+@center{
+ @math{best(x) =} @fitbruby{7em}{}{slope (m)}x + @fitbruby{11em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
+}
 
-- If wanted your model to have a _negative slope_, what slope could you use? @fitb{}{} +
-Change the definition of `negative` to use the slope you wrote above and click "Run" to load your new definition. Then fit the model.
+== Comparing Models
 
-- What is the @math{S} value of `negative`? @fitb{}{}
 
-@n `horizontal`
-
-- If you wanted your model to be horizontal, what would you have to change? @fitb{}{@ifsoln{Slope for horizontal lines should be zero, which means that the variable term can be removed.}} +
-Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model.
-
-  * What is the @math{S} value of `horizontal`? @fitb{}{}
-
-- Change the y-intercept so that the horizontal line passes through more of the data points. Click "Run" and fit this model.
-
-  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value of `horizontal` now? @fitb{}{}
-
-@n What did you notice? What did you wonder? @fitb{}{}
-
-@fitb{}{}
