@@ -7,6 +7,13 @@ local natlang = os.getenv'NATLANG'
 local otherdirs = { 'fragments', 'xtra', 'xtras' }
 local all_proglangs = { 'codap', 'none', 'pyret', 'spreadsheets', 'wescheme' }
 
+local pathways_to_ignore = {
+  '__sample',
+  '__sample-codap',
+  '__sample-wescheme',
+  -- 'zample'
+}
+
 local pathwayindependent_adocs = dofile(os.getenv 'SETUP_PATHWAYINDEPENDENT')
 local workbookpage_adocs = dofile(os.getenv 'SETUP_WORKBOOKPAGE')
 local lessonplan_adocs = dofile(os.getenv 'SETUP_LESSONPLAN')
@@ -337,17 +344,16 @@ if book_p then
   for _,pdffile in ipairs(contracts_pdfs) do
     local targetpathway = pdffile:gsub('/resources/pages/Contracts%.pdf', ''):gsub('.*/courses/', '')
 
-    local inputfile = 'distribution/' .. natlang .. '/Contracts.shtml?pathway=' .. targetpathway
-    local outputfile = 'distribution/' .. natlang .. '/courses/' .. targetpathway .. '/resources/pages/Contracts.pdf'
+    if not memberp(targetpathway, pathways_to_ignore) then
+      local inputfile = 'distribution/' .. natlang .. '/Contracts.shtml?pathway=' .. targetpathway
+      local outputfile = 'distribution/' .. natlang .. '/courses/' .. targetpathway .. '/resources/pages/Contracts.pdf'
+      puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
+      --solution
+      inputfile = inputfile .. '&solns=true'
+      outputfile = outputfile:gsub('/pages/Contracts%.pdf$', '/solution-pages/Contracts.pdf')
+      puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
+    end
 
-    puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
-
-    --solution
-
-    inputfile = inputfile .. '&solns=true'
-    outputfile = outputfile:gsub('/pages/Contracts%.pdf$', '/solution-pages/Contracts.pdf')
-
-    puppeteer_input_o:write(', { "input": "', inputfile, '", "output": "', outputfile, '" }\n')
   end
 
   puppeteer_input_o:write('] }\n')

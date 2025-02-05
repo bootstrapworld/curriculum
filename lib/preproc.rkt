@@ -824,6 +824,7 @@
                     "index.asciidoc"))))
 
 (define (make-dist-link f link-text)
+  ; (printf "doing make-dist-link ~s ~s\n" f link-text)
   (let ([url-has-query-string? #f])
     (cond [(regexp-match "\\?.*=" f) (set! url-has-query-string? #t)
                                      (unless (regexp-match "/" f) (set! f (string-append "./" f)))]
@@ -834,12 +835,13 @@
     (let* ([m (regexp-match "^(.*)/([^/]*)$" f)]
            [dir (second m)] [snippet (third m)]
            [dir-compts (regexp-split #rx"/" dir)]
-           [f.titletxt (path-replace-extension
-                         (build-path dir ".cached" snippet) ".titletxt")]
+           [dist-natlang-dir (format "distribution/~a" *natlang*)]
+           [f.titletxt (format "~a/~a/.cached/.~a"
+                               dist-natlang-dir dir
+                               (path-replace-extension snippet ".titletxt"))]
            [page-title (and (file-exists? f.titletxt)
                             (call-with-input-file f.titletxt read-line))]
            [existent-file? #f]
-           [dist-natlang-dir (format "distribution/~a" *natlang*)]
            [url-without-query-string #f])
       (cond [url-has-query-string?
               (set! url-without-query-string (regexp-replace "\\?.*" f ""))
@@ -2302,7 +2304,7 @@
               (expand-directives i o)
 
               (when (and *narrative* (not *title-reached?*))
-                (print-course-title-and-logo *target-pathway* make-image o)
+                (print-course-title-and-logo *target-pathway* make-image store-title o)
                 (display-alternative-proglang o)
                 (print-course-banner *target-pathway* o)
                 (link-to-lessons-in-pathway o)

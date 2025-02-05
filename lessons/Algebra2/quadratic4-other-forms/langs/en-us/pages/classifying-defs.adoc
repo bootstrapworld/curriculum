@@ -2,131 +2,176 @@
 
 ++++
 <style>
-/* Shrink Images */
-#content img {width: 75%; height: 75%;}
-
-/* Make autonums inside tables look consistent with those outside */
+/* Make autonums inside tables look consistent with those outside,
+ * and position them in the top-left of every table cell
+ */
+td .autonum {
+	padding-top: 0;
+    position: 	absolute;
+    top: 		10px;
+    left: 		5px;
+}
 body.workbookpage td .autonum:after { content: ')'; }
 
-table table td { height: 4ex; }
-.fitbruby{ padding-top: 1.5em !important; }
+/* Any math- or code-containing element should take up the whole line,
+ * with text centered on that line
+ */
+.obeyspaces, mjx-container, .mathunicode {
+	display: 	inline-block;
+	width: 		100%;
+	text-align: center;
+}
+
+td .paragraph:nth-child(3) { text-align: left; margin-top: 2ex; }
+.fitbruby { padding-top: 0rem !important; }
 </style>
 ++++
 
-Decide whether each representation describes a *linear* function, a *quadratic* function, or neither. If the function is quadratic, identify whether the *form* used is Vertex, Standard, or Factored.
+Circle whether each representation below describes a *linear* or *quadratic* function, or neither. +
+If the function is quadratic, fill in all the information that you can _easily read from the form_, without any calculation!
 
 [.FillVerticalSpace, cols="^.^15a,^.^15a", frame="none", stripes="none"]
 |===
-| @math{f(x) = 3x^2 + 22}
 
-[cols="1a,^6a,^6a, ^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-!===
+| *@n*
+@math{f(x) = 3x^2 + 22}
 
-@fitbruby{80%}{@ifsoln{Standard}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The parabola opens down}}{_If Quadratic,_ what does the form tell you?}
+Linear @hspace{4em}
+@ifsoln-choice{Quadratic} @hspace{4em}
+Neither
 
-| @math{g(x) = 2(x − 11)(x − 243)}
+_If it's Quadratic_...
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
+@fitbruby{40%}{@ifsoln{Standard}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{up}}{Parabola opens: up/down}
 
-// need empty line here so the closing table block isn't swallowed
-!===
+@fitbruby{40%}{@ifsoln{not easy to tell}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{not easy to tell}}{Vertex (x, y)]}
 
-@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The roots are 11 and 243}}{_If Quadratic,_ what does the form tell you?}
+@fitbruby{90%}{}{Roots (write both coords)}
 
-| @math{h(y) = 100 - 4y}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
+| *@n*
+@math{g(x) = 2(x − 11)(x − 243)}
 
-// need empty line here so the closing table block isn't swallowed
-!===
+Linear
+@hspace{4em} @ifsoln-choice{Quadratic}
+@hspace{4em} Neither
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
+_If it's Quadratic_...
 
-| @math{z(x) = \frac{3}{5}x + 7}
+@fitbruby{40%}{@ifsoln{Factored}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{up}}{Parabola opens: up/down}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
+@fitbruby{40%}{@ifsoln{not easy to tell}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{not easy to tell}}{Vertex (x, y)]}
 
-!===
+@fitbruby{90%}{@ifsoln{(11, 0) and (243, 0)}}{Roots (write both coords)}
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
 
-| @show{(code `(define (graph x) (* 12 x)))}
+| *@n*
+@math{h(y) = 100 - 4y}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! @ifsoln-choice{Linear}
-! Quadratic
-! Neither
+@ifsoln-choice{Linear}
+@hspace{4em} Quadratic
+@hspace{4em} Neither
 
-// need empty line here so the closing table block isn't swallowed
-!===
+_If it's Quadratic_...
 
-@fitbruby{80%}{@ifsoln{}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{Not quadratic}}{_If Quadratic,_ what does the form tell you?}
+@fitbruby{40%}{@ifsoln{n/a}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Parabola opens: up/down}
 
-| @show{(code `(define (m p) (* 2 (* (- p 5) (- p 16)))))}
+@fitbruby{40%}{@ifsoln{n/a}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Vertex (x, y)]}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
+@fitbruby{90%}{@ifsoln{n/a}}{Roots (write both coords)}
 
-!===
+| *@n*
+@math{z(x) = \frac{3}{5}x + 7}
 
-@fitbruby{80%}{@ifsoln{Factored}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The roots are 5 and 16}}{_If Quadratic,_ what does the form tell you?}
+@ifsoln-choice{Linear}
+@hspace{4em} Quadratic
+@hspace{4em} Neither
 
-| @math{r(s) = 42(s - 10)^2 - 3}
+_If it's Quadratic_...
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-!===
+@fitbruby{40%}{@ifsoln{n/a}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Parabola opens: up/down}
 
-@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The vertex is at (10, -3)}}{_If Quadratic,_ what does the form tell you?}
+@fitbruby{40%}{@ifsoln{n/a}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Vertex (x, y)]}
 
-| @show{(code `(define (f x) (+ (* 2 (sqr (- x 1))) 15)))}
+@fitbruby{90%}{@ifsoln{n/a}}{Roots (write both coords)}
 
-[cols="1a,^6a,^6a,^6a",stripes="none",frame="none",grid="none"]
-!===
-! *@n*
-! Linear
-! @ifsoln-choice{Quadratic}
-! Neither
-!===
 
-@fitbruby{80%}{@ifsoln{Vertex}}{_If Quadratic,_ is it Vertex, Standard, or Factored?}
-@fitbruby{80%}{@ifsoln{The vertex is at (-1, 15)}}{_If Quadratic,_ what does the form tell you?}
+| *@n*
+@show{(code `(define (graph x) (* 12 x)))}
+
+@ifsoln-choice{Linear}
+@hspace{4em} Quadratic
+@hspace{4em} Neither
+
+_If it's Quadratic_...
+
+@fitbruby{40%}{@ifsoln{n/a}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Parabola opens: up/down}
+
+@fitbruby{40%}{@ifsoln{n/a}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{n/a}}{Vertex (x, y)]}
+
+@fitbruby{90%}{@ifsoln{n/a}}{Roots (write both coords)}
+
+
+| *@n*
+@show{(code `(define (m p) (* 2 (* (- p 5) (- p 16)))))}
+
+Linear
+@hspace{4em} @ifsoln-choice{Quadratic}
+@hspace{4em} Neither
+
+_If it's Quadratic_...
+
+@fitbruby{40%}{@ifsoln{Factored}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{up}}{Parabola opens: up/down}
+
+@fitbruby{40%}{@ifsoln{not easy to tell}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{not easy to tell}}{Vertex (x, y)]}
+
+@fitbruby{90%}{@ifsoln{(5,0) and (16, 0)}}{Roots (write both coords)}
+
+
+| *@n*
+@math{r(s) = 42(s - 10)^2 - 3}
+
+Linear
+@hspace{4em} @ifsoln-choice{Quadratic}
+@hspace{4em} Neither
+
+_If it's Quadratic_...
+
+@fitbruby{40%}{@ifsoln{Vertex}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{up}}{Parabola opens: up/down}
+
+@fitbruby{40%}{@ifsoln{10}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{(10, -3)}}{Vertex (x, y)]}
+
+@fitbruby{90%}{@ifsoln{not easy to tell}}{Roots (write both coords)}
+
+| *@n*
+@show{(code `(define (f x) (+ (* 2 (sqr (- x 1))) 15)))}
+
+Linear
+@hspace{4em} @ifsoln-choice{Quadratic}
+@hspace{4em} Neither
+
+_If it's Quadratic_...
+
+@fitbruby{40%}{@ifsoln{Vertex}}{Form: Factored, Vertex, Standard}
+@hspace{10%} @fitbruby{40%}{@ifsoln{up}}{Parabola opens: up/down}
+
+@fitbruby{40%}{@ifsoln{-1}}{axis of symmetry (x=...)}
+@hspace{10%} @fitbruby{40%}{@ifsoln{(-1, 15)}}{Vertex (x, y)]}
+
+@fitbruby{90%}{@ifsoln{(5,0) and (16, 0)}}{Roots (write both coords)}
 
 |===
