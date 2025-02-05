@@ -1,4 +1,4 @@
-= Fit a Model: College Degrees v. Income
+= Fitting the Alabama-Alaska Model: College Degrees v. Income
 
 [.linkInstructions]
 Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
@@ -7,55 +7,56 @@ Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that
 
 Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" al-ak))} in the Interactions Area, then find the points for AL and AK along the predictor line. _Hint: You know their coordinates and they will help you know where to look!_
 
-@n What do you Notice?
-
-@fitb{}{@ifsoln{Answers will vary. AL and AK are both on the line, but they don't seem to be very representative of the group.}} 
+@n What do you Notice? @fitb{}{@ifsoln{Answers will vary. AL and AK are both on the line, but they don't seem to be very representative of the group.}}
 
 @fitb{}{@ifsoln{The line goes all the way up to $200,000 but median income doesn't seem to exceed $80000.}}
 
-@n What do you Wonder?
-
-@fitb{}{@ifsoln{Answers will vary. What states might have been more representative of the trend?}} 
+@n What do you Wonder? @fitb{}{@ifsoln{Answers will vary. What states might have been more representative of the trend?}}
 
 @fitb{}{}
 
 @n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{~36164.683}}
 
-== Other Models
+@vspace{1ex}
 
-In the definitions area, find the section titled _Define some other models by modifying al-ak_. +
+== Trial and Error
+@link-instructions{
+In the Definitions Area, find the section titled *Define some other models by modifying al-ak*. +
+For now, all three definitions in this section are exactly the same as `al-ak`. You will be changing them according to the directions below.
+}
 
-- For now, all three definitions in this section are exactly the same as `al-ak`.
-- You will be changing them according to the directions below.
+@n `less-steep`
 
-@n If you wanted the model to be _less steep_, what slope could you use? @fitb{}{}
+- If you wanted the model to be _less steep_, what slope could you use? @fitb{}{} +
+Change the definition for `less-steep` to use the slope you wrote above and click "Run" to load your new definition.
 
-- Change the definition for `less-steep` to use the slope you wrote above.
-
-  * Click "Run" to load your new definition. In the Interactions Area type: @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))}
+- Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))}
   * What is the @math{S} value of `less-steep`? @fitb{}{}
 
 - Identify a y-intercept that would make the model fit the data better: @fitb{}{}
 
-  * Adjust the definition to use the new y-intercept and click "Run".
-  * Hit the up arrow in the Interactions Area and click return/Enter to fit the model again.
+  * Adjust the definition to use the new y-intercept, click "Run" and refit the model. +
+   _Hint: You can click in the Interactions Area and hit the up arrow to bring back the last line of code you used._
   * What is the @math{S} value of `less-steep` now? @fitb{}{}
 
-@n Change the definition of `negative` so that it models the data with a slope that is _negative_.
+@n `negative`
 
-  * Click "Run" and type the code to fit this model to the data.
-  * What slope did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
+- If wanted your model to have a _negative slope_, what slope could you use? @fitb{}{} +
+Change the definition of `negative` to use the slope you wrote above and click "Run" to load your new definition. Then fit the model.
 
-@n Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model. What is the @math{S} value? @fitb{}{}
+- What is the @math{S} value of `negative`? @fitb{}{}
 
-@n Change the y-intercept so that the horizontal line passes through more of the points. Click "Run" and fit this model.
+@n `horizontal`
 
-  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
+- If you wanted your model to be horizontal, what would you have to change? @fitb{}{@ifsoln{Slope for horizontal lines should be zero, which means that the variable term can be removed.}} +
+Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model.
 
-@n What do you think @math{S} tells us? @fitb{}{@ifsoln{It measures how well the model fits the data}}
+  * What is the @math{S} value of `horizontal`? @fitb{}{}
 
-@fitb{}{}
+- Change the y-intercept so that the horizontal line passes through more of the data points. Click "Run" and fit this model.
 
-@fitb{}{}
+  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value of `horizontal` now? @fitb{}{}
+
+@n What did you notice? What did you wonder? @fitb{}{}
 
 @fitb{}{}
