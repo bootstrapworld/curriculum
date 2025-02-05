@@ -13,6 +13,8 @@
 (define *official-date*
   (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01")))
 
+(define *natlang* "en-us")
+
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
@@ -57,6 +59,10 @@
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
+
+    (set! s (regexp-replace*
+              #rx"src=\"([^\"]*?)/lib/([^\"]*?/images/[^/]*?\\.png)\"" s
+              (format "src=\"\\1/~a/\\2\"" *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
               "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))

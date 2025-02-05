@@ -15,8 +15,6 @@ table .autonum::after { content: ')' !important;}
 
 Are the images produced by the two lines of code identical - or will they look different? With your partner, make a prediction, referring to your contracts as needed. Test the code in @starter-file{editor}. Explain your response. We've partially completed the first one for you.
 
-@vspace{1ex}
-
 [.FillVerticalSpace,cols="^.^1, .^9, ^2, ^.^2, .^9", stripes="none", options="header"]
 |===
 
@@ -29,8 +27,7 @@ Are the images produced by the two lines of code identical - or will they look d
 
 | @n
 | @show{(code '(square 100 "solid" "red"))}
-
-@show{(code '(square (* 50 50) "solid" "red"))}
+  @show{(code '(square (* 50 50) "solid" "red"))}
 |
 | No
 | The shapes are not equivalent because 50 * 50 is not equal to 100.
@@ -38,24 +35,21 @@ Are the images produced by the two lines of code identical - or will they look d
 
 | @n
 | @show{(code '(square 40 "solid" "deeppink"))}
-
-@show{(code '(rectangle 40 40 "solid" "deeppink"))}
+  @show{(code '(rectangle 40 40 "solid" "deeppink"))}
 |
 | @ifsoln{Yes}
 | @ifsoln{The shapes produced will be equivalent. A rectangle with four 40-pixel sides is identical to a square with 40-pixel sides.}
 
 | @n
 | @show{(code '(radial-star 6 20 50 "solid" "red"))}
-
-@show{(code '(radial-star 20 6 50 "solid" "red"))}
+  @show{(code '(radial-star 20 6 50 "solid" "red"))}
 |
 | @ifsoln{No}
 | @ifsoln{The shapes produced will be different. The three Number arguments each represent different elements and cannot be reordered.}
 
 | @n
 | @show{(code '(radial-star 6 20 50 "solid" "red"))}
-
-@show{(code '(radial-star (+ 3 3) (* 4 5) 50 "solid" "red"))}
+  @show{(code '(radial-star (+ 3 3) (* 4 5) 50 "solid" "red"))}
 |
 | @ifsoln{Yes}
 | @ifsoln{The shapes produced will be equivalent because @math{3+3 = 6} and @math{4*5 = 20}.}
@@ -63,8 +57,7 @@ Are the images produced by the two lines of code identical - or will they look d
 
 | @n
 | @show{(code '(circle 60 "outline" "tomato"))}
-
-@show{(code '(ellipse 60 60 "outline" "tomato"))}
+  @show{(code '(ellipse 60 60 "outline" "tomato"))}
 |
 | @ifsoln{No}
 | @ifsoln{The circle's radius is 60, whereas the ellipse's length and width are 60.}
@@ -72,21 +65,17 @@ Are the images produced by the two lines of code identical - or will they look d
 
 | @n
 | @show{(code '(star 75 "outline" "pink"))}
-
-@show{(code '(star 75 "pink" "outline"))}
+  @show{(code '(star 75 "pink" "outline"))}
 |
 | @ifsoln{No}
 | @ifsoln{The second line of code produces an error message, not an image.}
 
 | @n
 | @show{(code '(circle 60 "solid" "lime"))}
-
-@show{(code '(ellipse 120 120 "solid" "lime"))}
+  @show{(code '(ellipse 120 120 "solid" "lime"))}
 |
 | @ifsoln{Yes}
 | @ifsoln{The shapes will be equivalent. A circle with a radius of 60 has a diameter of 120, just like the ellipse.}
-
-
 
 |===
 
