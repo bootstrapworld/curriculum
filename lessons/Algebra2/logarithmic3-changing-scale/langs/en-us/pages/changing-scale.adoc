@@ -4,11 +4,11 @@
 <style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
-body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium { min-width: 30pt !important;}
+body.workbookpage .studentAnswerShort { min-width: 30pt; }
+.studentAnswerMedium { min-width: 30pt !important;}
 
 /* Shrink vertical spacing on fitbruby */
-.fitbruby{padding-top: 1.1rem;}
-
+.autonum, .fitbruby{padding-top: 1rem !important; }
 </style>
 ++++
 
@@ -56,7 +56,6 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 
 @hspace{1em} _Note: The Bootstrap Pyret function `log` always uses @math{b = 10}._
 
-
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
 |
@@ -67,7 +66,7 @@ For this page, you'll need to have *Slide 5: Wealth-v-Health (Logarithmic)* of *
 @show{(code '(define (logarithmic x) (+ (* (?ANS 9) (log x)) (?ANS 65))))}
 |===
 
-@indented{@teacher{Definitions will vary as students will be fitting the curve by eye! Numbers below are provided as a reference.}}
+@indented{@ifsoln{Definitions will vary as students will be fitting the curve by eye! Numbers below are provided as a reference.}}
 
 
 @n Modify `logarithmic(x)` in @starter-file{alg2-countries} to define this model, and fit it using `fit-model`. 
