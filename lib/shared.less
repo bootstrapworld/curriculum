@@ -198,7 +198,6 @@ body {
   /* Sections */
   .lesson-section-1, .lesson-section-1+.lesson-section-1 {
     clear:              both;
-    border-top:         solid 2px black;
     display:            block;
   }
   .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
@@ -207,7 +206,7 @@ body {
     display:          block;
     width:            auto;
     border-bottom:    solid 3px black;
-    margin:           4px 0px;
+    margin:           3px 0px;
   }
 
   /* Images and Captions */
@@ -542,6 +541,10 @@ lines on some browsers */
   .lesson-section-2 > *,
   .lesson-section-3 > * { margin-top: @lesson-block-vertical-space; }
 
+  .lesson-section-1, .lesson-section-1+.lesson-section-1 {
+    border-top:         solid 2px black;
+  }
+
   /* Direct link to a section of a lesson */
   .section-link a {
     margin-left:        -1.75em;
@@ -687,6 +690,12 @@ body.workbookpage {
     display: none; 
   }
 
+  /* Top-level (non-nested) tables should have vertical margins 
+  * Make an exception for DR titles, Data Cycles, Graphs & Templates
+  */
+  .sectionbody > table:not(.data-cycle, .recipe_title, .graph, .template) { 
+    margin: 1ex 0; 
+  }
 
   .teacherNote { 
     font-style: italic; display: inline;
@@ -695,7 +704,8 @@ body.workbookpage {
     &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
   }
 
-  .lesson-section-1 { border: none; }
+  /* Given adjacent sections some padding */
+  .lesson-section-1+.lesson-section-1 { border: none; margin-top: 1ex; }
 
   .linkInstructions { font-style: italic; }
 
