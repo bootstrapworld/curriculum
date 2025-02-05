@@ -679,6 +679,9 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+  /* Some sections shouldn't grow at all, and should basically just be block-level elements */
+  #content > .sect1.no-flex-section { flex-grow: 0; }
+
   /* In some cases, AsiiDoc will put an empty preamble containing
      only a grandchild for custom styles. In this situation, no display
      is needed
