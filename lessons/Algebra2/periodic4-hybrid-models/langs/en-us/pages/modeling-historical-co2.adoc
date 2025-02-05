@@ -1,19 +1,20 @@
 = Modeling Historical Carbon Dioxide Levels
 ++++
 <style>
-/* Make autonums inside tables look consistent with those outside */
-td .autonum::after { content: ')' !important; }
+/* Tweak padding to save vertical height */
+td, .center { padding: 0 !important; }
 
-/* Tweak table sizing and vertical heights */
-td { padding: 0 !important; }
+/* Make code more visible */
 td .codetwo { color: black; background: none; }
-table { margin-left: 2em; margin-top: 1ex; }
-body .center { padding: 0; }
-.directions p { line-height: 1.75 !important; }
 
 /* Shorten fill in the blanks */
 .fitb { min-width: 2em; }
 .studentAnswerMedium { min-width: 70pt !important; }
+
+/* Force a height on the challenge table.
+   FillVerticalSpace fails for some reason!
+*/
+table.challenge { height: 60px; }
 </style>
 ++++
 
@@ -39,32 +40,28 @@ The data below was generated from @starter-file{alg2-co2}, showing the amount of
 
 @n Write the function below (in Pyret and Function Notation):
 
-[cols="1a, ^.^12a", frame="none", stripes="none"]
+[cols=".^1a, ^.^12a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 |
-_linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
-| @vspace{1ex} +
-*Pyret Notation*
-|
-@show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
+@math{\text{linear}(x) =} @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
+| *Pyret Notation*
+| @show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
 |===
 
 @n Copy your periodic model from @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc} below:
 
-[cols="1a, ^.^12a", frame="none", stripes="none"]
+[cols=".^1a, ^.^12a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 |
-@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{4.13}}{amplitude} @math{\times}
+@math{\text{periodic}(x) =} @fitbruby{70pt}{@ifsoln{4.13}}{amplitude} @math{\times}
 @math{sin}(
  @fitbruby{70pt}{@ifsoln{6.28}}{frequency} (x - @fitbruby{70pt}{@ifsoln{2023.1}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{419.87}}{vertical shift}
 
-| @vspace{1ex} +
-*Pyret Notation*
-|
-@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
+| *Pyret Notation*
+| @show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
 |===
 
 == Creating Hybrid Models
@@ -79,7 +76,8 @@ _linear(x) =_ @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln
 @n What do you think would happen if @math{q} were changed to @math{q(x) = 2x + -3000} @fitb{}{@ifsoln{The wave would wrap around a sloping line}}
 
 @star Define a NEW function `hybrid` in Pyret, which combines your periodic model with the optimal linear one. Write your new model below, in Function or Pyret notation:
-[.FillVerticalSpace, cols="^1a", frame="none"]
+
+[.challenge, cols="^1a", frame="none", options="noheader"]
 |===
 |
 @ifsoln{

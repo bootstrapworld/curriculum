@@ -1,11 +1,22 @@
 = Programming with the Multiplicative Inverse
-
-
 ++++
 <style>
-#content td {padding: 0rem 0px !important}
-#content table .autonum::after { content: ')'; }
-#content th { text-align: center !important; }
+/* Codeblocks in tables: remove vertical padding */
+td { padding: 0rem 0px !important }
+td .fitb{
+  padding-top: 0.2rem !important;
+  min-width: 1em;
+  border-bottom-color: lightgray;
+}
+
+
+/* In Pyret contained in tables, force each example to one
+ * line, hide the 'examples', the ':' that follows, and 'end'
+ */
+.pyret .obeyspaces .editbox br { display: none; }
+.pyret .obeyspaces .cm-keyword:first-child,
+.pyret .obeyspaces .cm-keyword:first-child+.cm-builtin,
+.pyret .obeyspaces .cm-keyword:last-child { display: none; }
 </style>
 ++++
 
@@ -13,49 +24,41 @@
 
 @n Below, place a checkmark next to each of the examples that you *predict* will pass when you click "Run".
 
-@ifproglang{pyret}{
-
-[.table1, cols="1,12,12", frame="none", grid="none", stripes="none"]
+[cols="1,12,12", frame="none", grid="none", stripes="none"]
 |===
+|
+| @ifproglang{pyret}{`examples:`}
+| @ifproglang{pyret}{`examples:`}
 
-|| @fitb{1em}{} @hspace{1em}  `30 * 1/3` *is* `10`
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `1/9 * (2 * 4)` *is* `8/9`
-
-|| @fitb{2em}{@ifsoln{x}} @hspace{1em} `25 * (1/5)` *is* `5`
-| @fitb{2em}{} @hspace{1em} `9/10` *is* `10/9`
-
-
-|| @fitb{2em}{} @hspace{1em} `1/3 * 2` *is* `2`
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `2/5` *is* `2 / (1/5)`
+|
+| @fitb{2em}{} @hspace{1em}
+  @show{(code '(EXAMPLE (* 30 1/3) 10))}
+| @fitb{2em}{@ifsoln{x}} @hspace{1em}
+  @show{(code '(EXAMPLE (* 1/9 (* 2 4)) 8/9))}
 
 
-|| @fitb{2em}{} @hspace{1em} `(2 * 2) * 1/7` *is* `4/7`
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} `27/20 * 20/27` *is* `20/20`
+|
+| @fitb{2em}{@ifsoln{x}} @hspace{1em}
+  @show{(code '(EXAMPLE (/ 25 1/5) 5))}
+| @fitb{2em}{} @hspace{1em}
+  @show{(code '(EXAMPLE (/ 9 10) 10/9))}
+
+|
+| @fitb{2em}{@ifsoln{x}} @hspace{1em}
+  @show{(code '(EXAMPLE (* 1/3 2) 2))}
+| @fitb{2em}{} @hspace{1em}
+  @show{(code '(EXAMPLE (/ 2 5) (/ 2 1/5)))}
+
+|
+| @fitb{2em}{@ifsoln{x}} @hspace{1em}
+  @show{(code '(EXAMPLE (* (* 2 2) 1/7) 4/7))}
+| @fitb{2em}{} @hspace{1em}
+  @show{(code '(EXAMPLE (* 27/20 20/27) (/ 20 20)))}
+
+|
+| @ifproglang{pyret}{`end`}
+| @ifproglang{pyret}{`end`}
 |===
-
-}
-
-@ifproglang{wescheme}{
-
-[.table1, cols="1,12,12", frame="none", grid="none", stripes="none"]
-|===
-
-|| @fitb{1em}{} @hspace{1em}  @show{(code '(EXAMPLE (* 30 1/3) 10))}
-| @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (* 1/9 (* 2 4)) 8/9))}
-
-
-|| @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (/ 25 1/5) 5))}
-| @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (/ 9 10) 10/9))}
-
-|| @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (* 1/3 2) 2))}
-| @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (/ 2 5) (/ 2 1/5)))}
-
-|| @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (* (* 2 2) 1/7) 4/7))}
-| @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (* 27/20 20/27) (/ 20 20)))}
-
-|===
-
-}
 
 @n Open the @starter-file{multiplicative-inverse} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
 
@@ -77,30 +80,29 @@
 
 @n Below, place a checkmark next to each of the examples that you *predict* will pass when you click "Run".
 
-@ifproglang{pyret}{
-@hspace{2em} @fitb{1em}{} @hspace{1em}  `+((40 * 12) / 2)+` *is* `+(40 * (12 / 2))+`
+[cols="1,24", frame="none", grid="none", stripes="none"]
+|===
+|
+|
+@ifproglang{pyret}{`examples:`}
 
-@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} `+((6 / 12) * 3)+` *is* `+(6 / (12 * 3))+`
+@fitb{2em}{} @hspace{1em}
+@show{(code '(EXAMPLE (/ (* 40 12) 2) (* 40 (/ 12 2))))}
 
-@hspace{2em} @fitb{2em}{} @hspace{1em} `+((5 * 9) / 15)+`  *is* `+(5 * (9 / 15))+`
+@fitb{2em}{@ifsoln{x}} @hspace{1em}
+@show{(code '(EXAMPLE (* (/ 6 12) 3) (/ 6 (* 12 3))))}
 
-@hspace{2em} @fitb{2em}{} @hspace{1em}  `+((8 / 4) * 25)+` *is* `+(8 / (4 * 25))+`
+@fitb{2em}{} @hspace{1em}
+@show{(code '(EXAMPLE (/ (* 5 9) 15) (* 5 (/ 9 15))))}
 
-@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} `+((90 * 1) / 2)+` *is* `+(90 * (1 / 2))+`
-}
+@fitb{2em}{} @hspace{1em}
+@show{(code '(EXAMPLE (* (/ 8 4) 25) (/ 8 (* 4 25))))}
 
-@ifproglang{wescheme}{
-@hspace{2em} @fitb{1em}{} @hspace{1em} @show{(code '(EXAMPLE (/ (* 40 12) 2) (* 40 (/ 12 2))))}
+@fitb{2em}{@ifsoln{x}} @hspace{1em}
+@show{(code '(EXAMPLE (/ (* 90 1) 2) (* 90 (/ 1 2))))}
 
-@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (* (/ 6 12) 3) (/ 6 (* 12 3))))}
-
-@hspace{2em} @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (/ (* 5 9) 15) (* 5 (/ 9 15))))}
-
-@hspace{2em} @fitb{2em}{} @hspace{1em} @show{(code '(EXAMPLE (* (/ 8 4) 25) (/ 8 (* 4 25))))}
-
-@hspace{2em} @fitb{2em}{@ifsoln{x}} @hspace{1em} @show{(code '(EXAMPLE (/ (* 90 1) 2) (* 90 (/ 1 2))))}
-}
-
+@ifproglang{pyret}{`end`}
+|===
 
 @n Open the @starter-file{multiplicative-inverse-2} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many blanks as needed below to describe the examples that failed.
 

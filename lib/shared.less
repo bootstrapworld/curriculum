@@ -207,7 +207,7 @@ body {
     display:          block;
     width:            auto;
     border-bottom:    solid 3px black;
-    margin:           4px 0px;
+    margin:           3px 0px;
   }
 
   /* Images and Captions */
@@ -687,6 +687,12 @@ body.workbookpage {
     display: none; 
   }
 
+  /* Top-level (non-nested) tables should have vertical margins 
+  * Make an exception for DR titles, Data Cycles, Graphs & Templates
+  */
+  .sectionbody > table:not(.data-cycle, .recipe_title, .graph, .template) { 
+    margin: 1ex 0; 
+  }
 
   .teacherNote { 
     font-style: italic; display: inline;
