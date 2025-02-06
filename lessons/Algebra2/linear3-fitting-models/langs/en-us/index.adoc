@@ -89,16 +89,46 @@ __This model should not be trusted!__
 Can we do better?
 
 @lesson-instruction{
-- Complete @printable-exercise{model-college-v-income-2.adoc} using the two states you identified as likely to produce a model with a better fit.
+- Complete the second section: *A Model of Your Own* on @printable-exercise{model-college-v-income-2.adoc} using the two states you identified as likely to produce a model with a better fit.
 }
 
 @slidebreak
+
+@QandA{
+@Q{We made a model using Alabama and Alaska. The @math{S-value} for this `al-ak` model is ~36164.683.}
+@Q{The `ma-nv` model was made using Massachusetts and New Mexico. The @math{S-value} for the `ma-nv` model is ~7504.54.}
+@Q{What comparisons can we make between these two models?}
+@A{We expect significantly less error in predictions made from the `ma-nv` model.}
+@A{The @math{S-value} of the `ma-nv` is 28660 dollars less!}
+@A{We expect predictions made with the `ma-nv` model to 79% less error than predictions made with the `al-ak` model.}
+}
+
+@teacher{
+Make sure your students know to how to calculate what percent less error we expect in predictions from the `ma-nv` model than the `al-ak` model. Students are about to calculate what percent more or less error we expect from predictions made with their models, which will all have different @math{S-values}. Right now everone is looking at the same @math{S-values} so supporting them will be much less work!
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{al-ak} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@math{\frac{28660}{36165} = .79 &#8192; &rarr; &#8192;  79 \%}
+}
+}
+
+@lesson-instruction{
+- Return to @printable-exercise{model-college-v-income-2.adoc} and complete the third section: *Comparing Models*.
+}
 
 @teacher{@opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
 }}
 
 @QandA{
-What was the best model (lowest @vocab{S}!) you could come up with?
+@Q{What was the best model (lowest @vocab{S}!) you could come up with?}
+@Q{How did your model compare to the `al-ak` model?}
+@Q{When we compared the @math{S-values} of the models, why did we divide by the @math{S-value} from the `al-ak` model?}
+@A{Because we were asking how much more or less error we expected in predictions made with our model than with the `al-ak` model - we were comparing to the `al-ak` model.}
+@A{If we had divide the `change in S` by the @math{S-value} of our model it would have answered a different question: "How much more or less error do we expect in predictions made with the `al-ak` model than with our model?"}
 }
 
 @strategy{Going Deeper}{
@@ -168,39 +198,57 @@ Let's use Pyret to find the best possible linear model for predicting median inc
 === Synthesize
 
 @QandA{
+@Q{Why is it advantageous to use linear regression to find a model?}
+@A{Instead of focusing on two points, linear regression considers all of the points!}
+@A{We know that we are working with the best possible linear model.}
 }
 
 == Using and Intepreting our Models
 
 === Overview
 
-=== Launch
-@lesson-instruction{
-Models are only useful if know how to use and interpret them!
+Students interpret their models, practice using them to make predictions, and consider what range of inputs will yield more reliable predictions.
 
-- Turn to the second section of @printable-exercise{interpreting-linear-models.adoc}.
-- Using the interpretation of the `al-ak` model you'll find there as a guide, write up your interpretation of the optimal model you just found for this dataset. Then answer the questions that follow.
-- @opt{For more practice, build linear models for *other* relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}.}
+=== Launch
+Models are only useful if we know how to use and interpret them!
+
+@lesson-instruction{
+- Find the second section of @printable-exercise{interpreting-linear-models.adoc}: *Interpreting the `al-ak` model*.
+- Read the model interpretation with your partner and identify where the information on each of the fill in the blanks comes from.
+- Then answer the question.
+}
+
+@QandA{
+@Q{How could we use the model to predict the median income for a state with a 30% college attendance rate.}
+@A{Compute `al-ak(30)` by substitute 30 into the equation for @math{x}.}
+@A{@math{5614 \times 30 + 83616 = ~252306}}
 }
 
 === Investigate
 
+
+@lesson-instruction{
+- Turn to the third section of @printable-exercise{interpreting-linear-models.adoc}.
+- Using the interpretation of the `al-ak` model as a guide, write up your interpretation of the optimal model you just found for this dataset. Then answer the questions that follow.
+}
+
+@teacher{
+@opt{For more practice, have students choose to other columns in the dataset to explore the relationship between and build linear models for using @opt-printable-exercise{building-more-linear-models.adoc}.}
+}
 
 === Synthesize
 
 @QandA{
 @Q{When does it make sense to make an `lr-plot`?}
 @A{When we've identified that the form of the data is linear}
+@Q{Our model is built from data about all of the existing states. College attendance rates range from 18.3% (West Virginia) to 52.4% (Washington, DC). +
+Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate. Is our model more reliable for one of these states than another? Why or why not?
+}
+@A{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}
+@Q{How could we use scatter plots and linear models to find answers to _other_ questions, for example:
+- Do taller NBA players tend to make more three-pointers?
+- Do wealthier people live longer?
+}
+@A{Find a dataset that contains the explanatory variable and response variable, import it into Pyret, and build an lr-plot!}
 }
 
-- How could we use scatter plots and linear models to find out if taller NBA players tend to make more three-pointers?
-- How could we use scatter plots and linear models to find out if wealthier people live longer?
-- How could we use scatter plots and linear models to find answers to _other_ questions?
-
-@slidebreak
-
-Our model is built from data about all the existing states, which have college attendance rates between 18.3% (West Virginia) and 52.4% (Washington, DC). Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate.
-
-Is our model more reliable for one of these states than another? Why or why not?
-
-@teacher{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}

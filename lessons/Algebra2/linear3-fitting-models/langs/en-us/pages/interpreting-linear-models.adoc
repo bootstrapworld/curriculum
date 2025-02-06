@@ -8,6 +8,8 @@ td { padding: 1 !important; }
 .example .fitbruby {
 	padding-top: 0.75rem !important;
 	border-color: lightgray !important;
+fitbruby {
+  padding-top: 9rem !important;
 }
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
@@ -18,8 +20,6 @@ td { padding: 1 !important; }
 Open your copy of the @starter-file{alg2-states-fit-model}.
 
 == Build a Model Computationally
-
-`lr-plot` computes the _optimal linear model_ using all of the data points.
 
 @n Evaluate @show{(code '(lr-plot states-table "state" "pct-college-or-higher" "median-income"))}. What is @math{S}? @fitb{}{@ifsoln{}}
 
@@ -34,56 +34,57 @@ Open your copy of the @starter-file{alg2-states-fit-model}.
 We started with a model based on Alabama and Alaska @show{(code '(define (al-ak x) (+ (* 5613.67 x) -83616.02)))} @hspace{1em} `S: ~36164.68` +
 which we can interpret as follows:
 
-@vspace{1ex}
+@ifnotsoln{@vspace{1ex}}
 
 [.example]
 --
 The @fitbruby{15em}{Alabama-Alaska}{sensible name} model predicts that a 1
 @fitbruby{10em}{percent}{x-axis units} increase in
 @fitbruby{15em}{percent college degrees}{explanatory variable (x)} is associated with a
-@fitbruby{15em}{5613 dollar}{rate of change in y-units}
+@fitbruby{15em}{~5614 dollar}{rate of change in y-units}
 @fitbruby{10em}{increase}{increase / decrease} in
 @fitbruby{20em}{median household income}{response variable (y)}. +
-With @fitbruby{20em}{median household income}{y-axis} ranging from
-@fitbruby{6em}{$39,031}{lowest y-value} to
-@fitbruby{6em}{$73,538}{highest y-value} and an @math{S-value} of
+With @fitbruby{20em}{median household income}{response variable (y)} ranging from
+@fitbruby{8em}{$39,031}{lowest y-value} to
+@fitbruby{8em}{$73,538}{highest y-value} and +
+an @math{S-value} of
 @fitbruby{10em}{~36,164.68}{S-value}
-@fitbruby{15em}{dollars}{y-axis units}, I
+@fitbruby{10em}{dollars}{y-axis units}, I
 @fitbruby{18em}{strongly disagree}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit.
 --
-
-== Interpreting the Optimal Model
-
-The @fitbruby{20em}{linear-regression}{sensible name} model predicts that a 1
-@fitbruby{10em}{@ifsoln{percent}}{x-axis units} increase in
-@fitbruby{20em}{@ifsoln{percent college degrees}}{explanatory variable (x)} is associated with a @fitbruby{15em}{@ifsoln{1142 dollar}}{slope, y-units}
-@fitbruby{10em}{@ifsoln{increase}}{increase / decrease} in
-@fitbruby{20em}{@ifsoln{median household income}}{response variable (y)}. With an @math{S}-value of
-@fitbruby{10em}{@ifsoln{~9,930.58}}{S-value}
-@fitbruby{15em}{dollars}{y-axis units} and
-@fitbruby{15em}{@ifsoln{median household income}}{y-axis} ranging from
-@fitbruby{6em}{@ifsoln{$39,031}}{lowest y-value} to
-@fitbruby{6em}{@ifsoln{$73,538}}{highest y-value}, I
-@fitbruby{18em}{@ifsoln{}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit.
-
 
 @n What does the *slope (m)* of this linear model tell us? @fitb{}{}
 
 @fitb{}{@ifsoln{The amount by which median income increases for each percentage of citizens who finished college}}
 
-@n What does the *y-intercept / vertical shift* of this linear model tell us? @fitb{}{}
+@n How would we use this model predict to predict the median income for a state where 30% of the population has attended college? @fitb{}{@ifsoln{@math{5614 \times 30 + 83616 = ~252306}}}
 
-@fitb{}{@ifsoln{The median income of a state with no college graduates}}
+== Interpreting the Optimal Model
 
-@n Suppose a state goes from 10% to 11% college graduation. According to this model, 
+The @fitbruby{15em}{linear-regression}{sensible name} model predicts that a 1
+@fitbruby{10em}{@ifsoln{percent}}{x-axis units} increase in
+@fitbruby{15em}{@ifsoln{percent college degrees}}{explanatory variable (x)} is associated with a @fitbruby{15em}{@ifsoln{1142 dollar}}{rate of change in y-units}
+@fitbruby{10em}{@ifsoln{increase}}{increase / decrease} in
+@fitbruby{20em}{@ifsoln{median household income}}{response variable (y)}. +
+With @fitbruby{15em}{@ifsoln{median household income}}{response variable (y)} ranging from
+@fitbruby{8em}{@ifsoln{$39,031}}{lowest y-value} to
+@fitbruby{8em}{@ifsoln{$73,538}}{highest y-value} and +
+an @math{S}-value of
+@fitbruby{10em}{@ifsoln{~5717}}{S-value}
+@fitbruby{10em}{@ifsoln{dollars}}{y-axis units}, I
+@fitbruby{18em}{@ifsoln{}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit.
 
-  * What kind of change would we expect to see in the median household income? @fitb{7em}{@ifsoln{$1142}} 
-  * What if it goes from 50% to 51%? @fitb{20em}{@ifsoln{$1142}}
-  * What if it goes from 90% to 91%? @fitb{20em}{@ifsoln{$1142}}
+@n What median income does this model predict when 30% of a state's population has attended college? @fitb{}{@ifsoln{@math{1142 \times 30 + 20868 = ~55128}}}
 
-@n Does this model predict the same increase in income for _every_ additional 1% `college-or-higher`? Why or why not? @fitb{}{}
+@n Why doesn't it make sense to use this model to predict median income for a state with no college attendees (0%)? @fitb{}{}
+
+@fitb{}{@ifsoln{The model is only designed to make predictions that fall within the domain of the dataset (between 18 and 52 percent). This model predicts a median income of -83616 dollars for zero pct-college-or-higher!}}
+
+@n According to this model, what change would we expect in median income when a state's college attendance rates increase from 10% to 11%? @fitb{7em}{@ifsoln{$1142}}
+
+- What if it goes from 50% to 51%? @fitb{20em}{@ifsoln{$1142}}
+- What if it goes from 90% to 91%? @fitb{20em}{@ifsoln{$1142}}
+- Does this model predict the same increase in income for _every_ additional 1% `college-or-higher`? Why or why not? @fitb{}{}
 
 @fitb{}{@ifsoln{Yes. Linear models increase by equal amounts over all equal intervals}}
-
-@fitb{}{}
 
