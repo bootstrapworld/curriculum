@@ -3,8 +3,12 @@
 ++++
 <style>
   div.circleevalsexp .value,
-  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  div.circleevalsexp .studentBlockAnswerFilled {
+    font-size: 8pt;
+    min-width:unset;
+  }
   .sect1 { padding-bottom: 0.5em !important; }
+
   .sect1 > h2:first-child { padding: 0 3px !important; }
   .sect1 > h2 { font-size: 10pt !important; }
   td, .autonum { padding: 0 !important; }
@@ -15,6 +19,7 @@
   .sect1 .example-table tr:first-child { height: 1in; }
   .fitb{ padding-top: 0.5rem; }
   td.tableblock code { line-height: 1.2 !important }
+  table { margin: 0 !important; }
   .contracts { margin-bottom: 10px; }
 </style>
 ++++
@@ -38,7 +43,6 @@ What image operations can be distributed? *Follow the example in the table below
 
 == Example: Does @show{(code 'flip-vertical)} distribute over @show{(code 'beside)}?
 
-
 [.example-table,cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
@@ -55,7 +59,6 @@ What image operations can be distributed? *Follow the example in the table below
 
 
 == @n Does @show{(code 'flip-horizontal)} distribute over @show{(code 'beside)}?
-
 
 [cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
@@ -88,7 +91,6 @@ What image operations can be distributed? *Follow the example in the table below
 |===
 
 
-
 == @n Does @show{(code 'flip-horizontal)} distribute over @show{(code 'above)}?
 
 [cols="^.^1,^.^4,^.^4", stripes="none"]
@@ -104,5 +106,3 @@ What image operations can be distributed? *Follow the example in the table below
 3+| Did both expressions produce _identical_ images in @proglang? @fitb{4em}{@ifsoln{Yes.}} @hspace{1em} Is `flip-horizontal` distributive over `above`? @fitb{}{@ifsoln{It is.}}
 
 |===
-
-

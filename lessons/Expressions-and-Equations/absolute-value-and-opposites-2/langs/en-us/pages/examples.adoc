@@ -1,6 +1,4 @@
 = Programming with Absolute Value and Opposite
-
-
 ++++
 <style>
 #content td {padding: 0.5rem 5px !important}
@@ -10,6 +8,9 @@
 /* Make autonums inside tables look consistent with those outside */
 table .autonum::after { content: ')' !important;}
 
+/* Hack Code Display to force each example to one line */
+.editbox br { display: none; }
+.cm-keyword:last-child { margin-left: 5px; }
 </style>
 ++++
 
@@ -19,48 +20,16 @@ table .autonum::after { content: ')' !important;}
 
 Which equations in the table below will be _true_ when @math{m=6}? What about when @math{m=12}? @math{m=o}? With your partner, put a check ✓ in the boxes when you predict the equations will be true. Note: an equation might be true for some values and false for others!
 
-@vspace{1ex}
-
-@ifproglang{pyret}{
-
-[.table1, cols="16,^.^4,^.^4,^.^4", stripes="none"]
-|===
-| Example | `m = 6` | `m = -12` | `m = 0`
-
-| @n @show{(code '(negate m))} *is* @show{(code '(abs m))} ||@ifsoln{✓}|
-
-| @n @show{(code '(negate m))} *is* @show{(code '(negate(abs m)))} |@ifsoln{✓}||
-
-| @n @show{(code '(negate m))} *is* @show{(code '(abs(negate m)))} ||@ifsoln{✓}|
-
-| @n @show{(code '(abs(negate m)))} *is* @show{(code '(negate(negate m)))} |@ifsoln{✓}||
-
-| @n @show{(code '(abs(negate m)))} *is* @show{(code '(negate(abs m)))} |||
-
-|===
-
-}
-
-@ifproglang{wescheme}{
-
 [.table1, cols="16,^.^4,^.^4,^.^4", stripes="none"]
 |===
 | Example | `m = 6` | `m = -12` | `m = 0`
 
 | @n @show{(code '(EXAMPLE (negate m) (abs m)))} ||@ifsoln{✓}|
-
 | @n @show{(code '(EXAMPLE (negate m) (negate(abs m))))} |@ifsoln{✓}||
-
 | @n @show{(code '(EXAMPLE (negate m) (abs(negate m))))} ||@ifsoln{✓}|
-
 | @n @show{(code '(EXAMPLE (abs(negate m)) (negate(negate m))))}  |@ifsoln{✓}||
-
 | @n @show{(code '(EXAMPLE (abs(negate m)) (negate(abs m))))} |||
-
 |===
-}
-
-@vspace{1ex}
 
 
 == Test
