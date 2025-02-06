@@ -65,6 +65,8 @@ Students fit the Alaska-Alabama model and then try to make some better models of
 
 @slidebreak
 
+@center{@image{images/al-ak.png, 450}}
+
 @QandA{
 @Q{What does it mean that the @math{S-value} for our `al-ak` model is 36165?}
 @A{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}
@@ -80,7 +82,7 @@ Students fit the Alaska-Alabama model and then try to make some better models of
 Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. +
 __This model should not be trusted!__
 
-@opt{@opt-printable-exercise{model-college-v-income-3.adoc} gives students the chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada.}
+@opt{Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.}
 
 === Investigate
 
@@ -123,26 +125,29 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 
 Students are introduced to the `lr-plot` function in Pyret, which uses linear regression to fit the best possible linear model to the data.
 
+@teacher{
+If you want to spend more time with students interpreting regression results, writing about findings, or digging into @math{R^2} (a different measure of model fitness), we have an @lesson-link{linear-regression, entire Bootstrap: Data Science lesson on Linear Regression}.
+}
+
 === Launch
 
-We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values, but how do we find the _best possible linear model?_ 
+We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values. We could keep guessing and picking two points over and over, and our models would likely improve, but we'd never know whether we had found the _best possible linear model_.
 
-In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Linear regression consumes a dataset and produces a _function_ representing the best linear model.
+Luckily statisticians have developed an algorithm called @vocab{linear regression}, which, given any dataset, considers every point and produces the _best possible linear model_.
 
-We could keep guessing and picking two points over and over, and never know if we found the best linear model. Linear regression automatically finds the best-possible model, _for any dataset_. This is pretty amazing!
+Pyret's `lr-plot` function uses linear regression to graph the best possible linear model on top of a scatter plot of the dataset, and tell us the slope, y-intercept and @vocab{S-value} of the model.
 
-Pyret's `lr-plot` function finds the best model, and graphs it on top of a scatter plot, and tells us the slope and y-intercept.
 
-@strategy{More `lr-plot` material}{
-
-If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. This lesson also includes a discussion of @math{R^2}, a different measure of model fitness.
-}
 === Investigate
+
+Let's use Pyret to find the best possible linear model for predicting median income of a state from the percent of the population that has attended college.
 
 @lesson-instruction{
 - Turn to @printable-exercise{interpreting-linear-models.adoc} and complete the first section ("Build a Model Computationally").
 - Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-2.adoc} (and, if you completed it, to the models you built on @opt{@opt-printable-exercise{model-college-v-income-3.adoc}}).
 }
+
+@center{@image{images/lr-plot-college-v-income.png, 450}}
 
 @QandA{
 @Q{How close did your models come to the optimal model?}

@@ -3,6 +3,7 @@
 [.linkInstructions]
 Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
 
+[.no-flex-section]
 == The `al-ak` Model
 
 Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" al-ak))} in the Interactions Area, then find the points for AL and AK along the predictor line. _Hint: You know their coordinates and they will help you know where to look!_
@@ -17,13 +18,14 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{~36164.683}}
 
-@vspace{1ex}
+@n With median income ranging from
+@fitbruby{9em}{@ifsoln{$39,031}}{lowest median income} to
+@fitbruby{9em}{@ifsoln{$73538}}{highest median income}, what does the @math{S-value} of the `al-ak` model tell us?
 
-@n Given that the range of this dataset goes from @fitbruby{10em}{@ifsoln{$39,031}}{lowest median income} to @fitbruby{10em}{@ifsoln{$73538}}{highest median income}, what does it mean that the @math{S-value} of the `al-ak` model is @fitb{10em}{@ifsoln{~36164.683}} ?
-
-@fitb{}{@ifsoln{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}
+@fitb{}{@ifsoln{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}}
 
 @fitb{}{@ifsoln{Considering the range of the data, the error in the model is enough to double the median income of a state or cut it in half!}}
+
 
 == A Model of Your Own
 
@@ -35,9 +37,7 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
 
-@center{
- (@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})
-}
+(@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})
 
 @n Derive your model and write it below (in both Function and Pyret notation), then fit the model and record the @math{S}-value:
 
@@ -46,15 +46,49 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 |
 |===
 
-@math{other(x) =} @fitbruby{8em}{}{slope (m)}x + @fitbruby{10em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
+@indented{
+@math{other(x) =} @fitbruby{8em}{}{slope (m)}x + @fitbruby{10em}{}{y-intercept / vertical shift}
 
+@show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
+}
 
 @n Adjust the slope and y-intercept of your model to get the *smallest @math{S} possible.* Write the best model you find (and corresponding @math{S}) below:
 
-@center{
- @math{best(x) =} @fitbruby{7em}{}{slope (m)}x + @fitbruby{11em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
+@indented{
+@math{best(x) =} @fitbruby{7em}{}{slope (m)}x + @fitbruby{11em}{}{y-intercept / vertical shift}
+
+@show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
 }
 
+[.no-flex-section]
 == Comparing Models
+
+@n Is your model better or worse than the `al-ak` model? @fitb{}{@ifsoln{better!}}
+
+@n How much
+@fitbruby{7em}{@ifsoln{more}}{more / less }
+error do we expect in predictions made with your model than predictions made with the `al-ak` model?
+
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- &#8192; is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{al-ak} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@math{\frac{\qquad}{\qquad}}
+}
+
+We expect predictions made with my model to have
+@fitb{4em}{} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than predictions made with the `al-ak` model!
 
 
