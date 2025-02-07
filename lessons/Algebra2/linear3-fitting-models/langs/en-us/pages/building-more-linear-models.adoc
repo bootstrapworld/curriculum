@@ -1,4 +1,4 @@
-= Building More Linear Models
+= Building Models for Another Relationship in the Data
 ++++
 <style>
 /* shorten fill in the blanks */
@@ -10,40 +10,40 @@ td { padding: 0 !important; }
 ++++
 
 [.linkInstructions]
-Open your copy of @starter-file{alg2-states-fit-model}. If you haven't already, *Save a Copy* now.
+Open your copy of @starter-file{alg2-states-fit-model}. If you haven't already, *Save a Copy* now. +
 We've already built models for `pct-college-or-higher` and `median-income`, but that's not the only relationship in this dataset!
 
 @n What other relationship are you curious about? +
-@fitbruby{20em}{}{x-axis} and @fitbruby{20em}{}{y-axis}.
+@center{@fitbruby{20em}{}{explanatory variable (x)} @hspace{1em} and @hspace{1em} @fitbruby{20em}{}{response variable (y)}}
 
 @n Fill in the code to make a scatter plot exploring the relationship between those columns:
 
 @show{(code '(scatter-plot states-table "state" (?ANS ______________________) (?ANS ______________________)))}
 
-@n Pick two states to use for your first model: @fitb{17em}{} and @fitb{17em}{}.
+@n Pick two states that you think would generate a good first model:
+@center{@fitb{17em}{} @hspace{1em} and @hspace{1em} @fitb{17em}{}}
 
-@n Based on these two points, define your model in Function and Pyret Notation:
+@n Calculate the slope and y-intercept for a line passing through these two point and use them to define your model. Then type this model into Pyret, and fit it to your data use `fit-model`.
 
-[cols="^1a, ^1a", options="header", frame="none"]
+[.FillVerticalSpace, cols="1", frame="none"]
 |===
-| Function Notation
-| Pyret Notation
-| @math{f(x) =} @fitb{12em}{}x + @fitb{12em}{}
-| @show{(code '(define (f x) (+ (* (?ANS ______) x) (?ANS ______))))}
+|
 |===
 
-@n Type this model into Pyret, and fit it to your data use `fit-model`. What @math{S} value did you get? @fitb{}{}
+@show{(code '(define (my-new x) (+ (* (?ANS ______) x) (?ANS ______))))} @hspace{2em} @math{S-value}  @fitb{}{}
 
-@n What's the best model you can build? In the table below, record your models and the @math{S} values you got for them, then draw a star next to the one with the best @math{S}-value.
+@n Use `lr-plot` to build the optimal linear model for this relationship.
 
-[.FillVerticalSpace, cols="^1a, ^1a", options="header"]
+@show{(code '(define (best-new x) (+ (* (?ANS ______) x) (?ANS ______))))} @hspace{2em} @math{S-value}  @fitb{}{}
+
+@n Based on these @math{S-values}, we would expect predictions made with this best possible model to have @fitb{5em}{} percent less error than predictions made with the linear model I generated from two points.
+
+[.FillVerticalSpace, cols="1", frame="none"]
 |===
-| Model (Function or Pyret Notation - whatever you prefer!)   | @math{S}
-|                                                             |
+|
 |===
 
-
-@star *What does this model actually mean? Try completing the sentences below:*
+@n *What does this model actually mean? Try completing the sentences below:*
 
 _This model predicts that a 1
 @fitbruby{10em}{percent}{x-axis units} increase in
