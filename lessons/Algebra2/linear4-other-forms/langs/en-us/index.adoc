@@ -36,6 +36,47 @@
 
 |===
 
+== Optional: Horizontal Shift in Linear Functions
+
+=== Overview
+This section lays the ground work for exploring horizontal shift in nonlinear models by giving students a chance to explore horizontal shift in linear models (likely more intuitive more familiar and intuitive for students) using our custom Desmos slider activity.
+
+=== Launch
+The *Slope-Intercept* form of the line we've been using tells us about the slope (@math{m}) and the vertical shift. It is also possible to shift a line or curve horizontally, and for some of the non-linear models we will be exploring in this course, identifying the horizontal shift will be important.
+
+To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
+
+@lesson-point{
+@math{f(x) = m(x-h) + k} is an expanded version of the slope-intercept form that allows us to change both the horizontal shift (@math{h}) and the vertical shift (@math{k}).
+}
+
+_Note: When the horizontal shift is zero, we can safely remove (@math{h}) from the equation. That's exactly what we've been doing with our Slope-Intercept form._
+
+@strategy{Why are we using @math{k} instead of @math{b}?}{
+Using @math{b} for the y-intercept in the point-slope form is a convention people have agreed upon over time... but the convention doesn't hold for non-linear models.
+
+We're introducing h and k here to help students make the connection between the exploration they will be doing with this linear form and the nonlinear forms they will be seeing in future lessons.
+}
+
+=== Investigate
+
+@lesson-instruction{
+- Let's take a moment to explore how horizontal shifts work with linear functions.
+- Open @opt-starter-file{alg2-horizontal-desmos} and complete @opt-printable-exercise{exploring-horizontal.adoc}.
+}
+
+@QandA{
+@Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
+@A{No. Because lines go on forever without changing direction, horizontal shifts can always be accounted for with vertical shifts. We can prove this to ourselves algebraically because if we distribute the @math{m} in the equation @math{f(x) = m(x-h) + k}, we get @math{f(x) = mx - mh + k} and since @math{mh} and @math{k} will always be numbers, we can just add them together to get the y-intercept.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{Why do math books generally not discuss horizontal shifts for linear models?}
+@A{Because they can all be achieved through a vertical shift instead}
+}
+
 == Other Forms of Linear Models
 @objective{linear-forms}
 
@@ -44,27 +85,7 @@ Students are reminded of the three forms of linear models available to us, discu
 
 === Launch
 
-When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well! 
-
-So far we have only discussed vertical shifts, but it is also possible to shift a line or curve horizontally. 
-
-The *Slope-Intercept* form of the line we've been using tells us about the slope (@math{m}) and the vertical shift. It is also possible to shift a line or curve horizontally, and for some of the non-linear models we will be exploring in this course, identifying the horizontal shift will be important. To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
-
-@lesson-point{
-Using the form @math{f(x) = m(x-h) + k}@hspace{1em} allows us to change both the horizontal shift (@math{h}) and the vertical shift (@math{k}).
-}
-
-_Note: When the horizontal shift is zero, we can safely remove (@math{h}) from the equation. That's exactly what we've been doing with our Slope-Intercept form._
-
-@lesson-instruction{
-- Let's take a moment to explore how horizontal shifts work with linear functions.
-- Complete @opt-starter-file{alg2-horizontal}.
-}
-
-@QandA{
-@Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
-@A{No. Because lines go on forever without changing direction, horizontal shifts can always be accounted for with vertical shifts. We can prove this to ourselves algebraically because if we distribute the @math{m} in the equation @math{f(x) = m(x-h) + k}, we get @math{f(x) = mx - mh + k} and since @math{mh} and @math{k} will always be numbers, we can just add them together to get the y-intercept.} 
-}
+When trying to fit a piece into a puzzle, sometimes we rotate the piece to see it from a different angle. When fitting a model to a dataset, we might prefer to look at the linear relationship from different angles as well!
 
 We will mostly be using *Slope-Intercept* form of the line in this course, because it's the simplest form that is defined in terms of the response variable, making it most compatible with the programming environment
 
@@ -136,13 +157,37 @@ Why we might choose to use one form over another?
 While it's easier to write one linear form or the other based on the information available to us, and might be easier for someone else to extract the information they're looking for based on the model we supply them with, we can easily translate back and forth between linear forms!
 
 @lesson-instruction{
-- Let's practice writing linear functions in each of the forms and translating them into Pyret function definitions.
+- Let's practice identifying which form of a linear model is easiest to write with the given information and then translating models from each of those forms into Pyret function definitions.
 - Turn to @printable-exercise{which-form.adoc}
-- When you're done, add your function definitions to your @starter-file{alg2-states-fit-model} and test them out with `fit-model`.
+- @opt{Practice translating some of the models we found for predicting `median-income` from a state's `pct-college-or-higher` into other forms on @opt-printable-exercise{other-forms-linear-models.adoc}.
+}
 }
 
+
 === Synthesize
-If you needed to draw the graph of a linear model, which form would you like to start from? Why?
+
+@QandA{
+@Q{If you needed to draw the graph of a linear model, which form would you like to start from? Why?}
+@A{Answers will vary.}
+@A{If we're making the graph in Pyret, though, point-slope is definitely easiest because it's already solved for y!}
+}
+
+
+== Additional Exercises
+
+To practice reading linear models and connecting them to graphs:
+
+- @opt-printable-exercise{match-graph-ps.adoc}
+- @opt-printable-exercise{match-graph-sf.adoc}
+- @opt-printable-exercise{match-graph-si.adoc}
+- @opt-printable-exercise{match-graph-def.adoc}
+
+
+
+
+
+
+
 
 @scrub{
 == Investigating Horizontal and Vertical Shifts
@@ -153,7 +198,7 @@ In preparation for work with quadratic, exponential and logarithmic functions, s
 
 === Launch
 
-Lines can be shifted up, down, left and right by adding and subtracting to their definitions. Let's see if we can decode the pattern! 
+Lines can be shifted up, down, left and right by adding and subtracting to their definitions. Let's see if we can decode the pattern!
 
 === Investigate
 
@@ -175,16 +220,3 @@ Lines can be shifted up, down, left and right by adding and subtracting to their
 What did you discover about recognizing horizontal and vertical shifts from linear equations?
 
 }
-
-== Additional Exercises
-
-To practice reading linear models and connecting them to graphs:
-
-- @opt-printable-exercise{match-graph-ps.adoc}
-- @opt-printable-exercise{match-graph-sf.adoc}
-- @opt-printable-exercise{match-graph-si.adoc}.
-- @opt-printable-exercise{match-graph-def.adoc}.
-
-For practice translating the models we've written today into other forms:
-
-- @opt-printable-exercise{other-forms-linear-models.adoc}.

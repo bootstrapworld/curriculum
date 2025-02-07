@@ -1,8 +1,6 @@
 = Which Form is Best?
 ++++
 <style>
-td:last-child { position: relative; }
-td:last-child .paragraph:last-child { position: absolute; bottom: 0; }
 table .autonum::after { content: ')' !important;}
 </style>
 ++++
@@ -17,21 +15,25 @@ For each set of data provided below,
 | @n
 | @image{../images/si.png,200}
 |
-Linear Model: @fitbruby{}{}{Your model slope-intercept, point-slope, or standard form - which ever is easiest!}
+Which Form is easiest? @fitbruby{}{@ifsoln{slope-intercept}}{slope-intercept, point-slope, or standard form?}
+
+Equation: @fitb{}{@ifsoln{@math{y = -0.5x - 10}}}
 
 `fun f(x) :  @fitb{28em}{@ifsoln{(-0.5 * x) - 10}} end`
-
 | @n
 | @image{../images/ps1.png,200}
 |
-Linear Model: @fitbruby{}{}{Your model slope-intercept, point-slope, or standard form - which ever is easiest!}
+Which Form is easiest? @fitbruby{}{@ifsoln{point-slope}}{slope-intercept, point-slope, or standard form?}
 
-`fun f(x) :  @fitb{28em}{} end`
+Equation: @fitb{}{@ifsoln{@math{y - 300 = 5(x - 42)}}}
 
+`fun f(x) :  @fitb{28em}{@ifsoln{ (5 * x) + 12600}} end`
 | @n
 | @image{../images/s.png,200}
 |
-Linear Model: @fitbruby{}{}{Your model slope-intercept, point-slope, or standard form - which ever is easiest!}
+Which Form is easiest? @fitbruby{}{@ifsoln{standard form or slope-intercept}}{slope-intercept, point-slope, or standard form?}
 
-`fun f(x) :  @fitb{28em}{} end`
+Equation: @fitb{}{@ifsoln{@math{950x + 130y = 123500}}}
+
+`fun f(x) :  @fitb{28em}{@ifsoln{((-95 / 13) * x) + 950}} end`
 |===
