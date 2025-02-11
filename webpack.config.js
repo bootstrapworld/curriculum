@@ -18,19 +18,29 @@ module.exports = {
            // './distribution/en-us/lib/html2pdf.js',
            // './distribution/en-us/lib/makeWorkbook.js',
            // './distribution/en-us/lib/spellcheck.js',
+           'webpack/hot/dev-server'
          ],
   mode: 'development',
   output: {
+    path: path.join(__dirname, 'distribution/en-us'),
     clean: true
   },
   devServer: {
-    static: './dist',
-    open: true
+    static: './distribution/en-us/',
+    open: true,
+    watchFiles: {
+      paths: ['distribution/**/*.shtml', 'distribution/**/*.js'],
+      options: {
+        usePolling: true,
+      }
+    }
   },
-  watch: true,
   watchOptions: {
     aggregateTimeout: 600,
     ignored: '**/node_modules',
-    poll: 1000
-  }
+    poll: 500
+  },
+  target: 'web',
 };
+
+
