@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: [ './distribution/en-us/lib/assessments.js',
@@ -18,16 +19,22 @@ module.exports = {
            // './distribution/en-us/lib/html2pdf.js',
            // './distribution/en-us/lib/makeWorkbook.js',
            // './distribution/en-us/lib/spellcheck.js',
-           'webpack/hot/dev-server'
+           'webpack/hot/dev-server',
          ],
   mode: 'development',
   output: {
-    path: path.join(__dirname, 'distribution/en-us'),
-    clean: true
+    path: path.join(__dirname, 'distribution/en-us/lib/'),
+    filename: 'bundle.js',
+    clean: false,
   },
   devServer: {
-    static: './distribution/en-us/',
-    open: true,
+    static: {
+      directory: path.join(__dirname, 'distribution/en-us/'),
+    },
+    open: ['./courses'],
+    hot: true,
+    port:8080,
+    liveReload: true,
     watchFiles: {
       paths: ['distribution/**/*.shtml', 'distribution/**/*.js'],
       options: {
@@ -38,9 +45,10 @@ module.exports = {
   watchOptions: {
     aggregateTimeout: 600,
     ignored: '**/node_modules',
-    poll: 500
+    poll: 1000
   },
-  target: 'web',
+  target: ["web"],
+  //plugins: [new HtmlWebpackPlugin()],
 };
 
 
