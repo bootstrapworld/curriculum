@@ -911,6 +911,8 @@ body.LessonNotes {
   .data-cycle-expression, .data-cycle-filter, .data-cycle-build { 
     font-family: @code-font;
   }
+  /* If there's a section break between data cycles, eat up all vertical space */
+  &+div.paragraph:not(.data-cycle) { margin: auto 0; }
 }
 
 /* We use tables (perhaps not the best idea) for our DR headings */
