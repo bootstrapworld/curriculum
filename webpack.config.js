@@ -1,54 +1,40 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+const WatchExternalFilesPlugin = require('webpack-watch-external-files-plugin');
 
 module.exports = {
-  entry: [ './distribution/en-us/lib/assessments.js',
-           './distribution/en-us/lib/bootstraplesson.js',
-           './distribution/en-us/lib/citations.js',
-           './distribution/en-us/lib/codemirror.js',
-           './distribution/en-us/lib/dependency-graph.js',
-           './distribution/en-us/lib/images.js',
-           './distribution/en-us/lib/langtable.js',
-           './distribution/en-us/lib/learningObjectives.js',
-           './distribution/en-us/lib/pathway-tocs.js',
-           './distribution/en-us/lib/pyret-mode.js',
-           './distribution/en-us/lib/runmode.js',
-           './distribution/en-us/lib/scheme2.js',
-           './distribution/en-us/lib/starterFiles.js',
-           // './distribution/en-us/lib/callAdoc.js',
-           // './distribution/en-us/lib/html2pdf.js',
-           // './distribution/en-us/lib/makeWorkbook.js',
-           // './distribution/en-us/lib/spellcheck.js',
-           'webpack/hot/dev-server',
-         ],
+  // The only file we should be worrying about is bootstraplesson.js
+  // It will need to be rewritten to use proper module syntax
+  entry: [ './distribution/en-us/lib/bootstraplesson.js'],
   mode: 'development',
+  // When compiled, the output should go to distribution/en-us/lib/
   output: {
     path: path.join(__dirname, 'distribution/en-us/lib/'),
     filename: 'bundle.js',
     clean: false,
   },
+  // Don't use webpack's default watcher
+  watch: false,
+
+  // Run the devServer on distribution/en-us/, and open the browser to the courses folder
   devServer: {
     static: {
-      directory: path.join(__dirname, 'distribution/en-us/'),
+      directory: path.join(__dirname, 'distribution/en-us'),
     },
     open: ['./courses'],
-    hot: true,
     port:8080,
-    liveReload: true,
-    watchFiles: {
-      paths: ['distribution/**/*.shtml', 'distribution/**/*.js'],
-      options: {
-        usePolling: true,
-      }
-    }
   },
-  watchOptions: {
-    aggregateTimeout: 600,
-    ignored: '**/node_modules',
-    poll: 1000
-  },
-  target: ["web"],
-  //plugins: [new HtmlWebpackPlugin()],
+  target: "web",
+
+  // Watch any of our src files for changes, and run make before webpack-ing
+  plugins: [
+    new WatchExternalFilesPlugin({
+      files: ['./lessons/**/*.adoc', './pathways/**/*.adoc', './lib/**/*.js', './shared/**/*.json'],
+    }),
+    new WebpackShellPluginNext({
+      onBeforeCompile: {scripts: ['make'], blocking: true },
+    }),
+  ],
 };
 
 
