@@ -14,7 +14,12 @@ module.exports = {
   mode: 'development',
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()], // Use TerserPlugin for minification
+    moduleIds: 'named',
+    minimizer: [
+      new TerserPlugin({
+        // TODO(consider options)
+      })
+    ],
   },
   // When compiled, the output should go to distribution/en-us/lib/
   output: {
