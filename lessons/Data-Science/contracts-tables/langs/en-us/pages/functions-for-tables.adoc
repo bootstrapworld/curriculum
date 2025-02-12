@@ -25,7 +25,7 @@ Complete the sentences below by *circling* the behavior you observed for each Bo
 [cols="2a, ^3a, ^3a", frame="none", grid="none", stripes="none"]
 |===
 |(a) `true` sorts the table...
-| in *ascending order* _(least to greatest)_
+| in *ascending order* _(from least to greatest)_
 | in *descending order* _(from largest to smallest)_
 
 |(b) `false` sorts the table...
@@ -33,7 +33,7 @@ Complete the sentences below by *circling* the behavior you observed for each Bo
 | in *descending order* _(from largest to smallest)_
 |===
 
-@n The Domain of `sort` has three inputs. One of them is the table itself. Can you identify the dataypes of the other two?
+@n The Domain of `sort` has three inputs. One of them is the table itself. Can you identify the datatypes of the other two?
 
 @indented{
 @ifnotsoln{@show{(contract 'sort '((table-name Table) (column-name "                   ") (order "                   ")) "Table")}}
@@ -51,11 +51,11 @@ Let's explore another table function, beginning with its contract:
 
 @show{(contract "count" '("Table" "String") "Table")}
 
-@n What do you expect the code  @show{(code '(count animals-table "legs"))} to produce?
+@n What do you expect the code  @show{(code '(count animals-table "legs"))} to produce? @fitb{}{}
 
 @fitb{}{@ifsoln{answers will vary, but students should be able to predict that they will get a new table!}}
 
-Type the code into the Interactions Area and click "Enter" to test it out.
+ Type the code into the Interactions Area and click "Enter" to test it out.
 
 @n How many animals had 4 legs? @fitb{}{@ifsoln{29}}
 
@@ -63,7 +63,7 @@ Type the code into the Interactions Area and click "Enter" to test it out.
 
 @fitb{}{@ifsoln{Possible response: How many animals are cats?}}
 
-Fill in the blanks with the code you'd write: @fitbruby{8em}{@ifsoln{count}}{function-name} (@fitbruby{18em}{@ifsoln{animals-table}}{table-name {two-colons} Table}, @fitbruby{14em}{@ifsoln{Answers will vary!}}{column-name {two-colons} String})
+@n Fill in the blanks with the code to make the table: @fitbruby{8em}{@ifsoln{count}}{function-name} (@fitbruby{15em}{@ifsoln{animals-table}}{table-name {two-colons} Table}, @fitbruby{13em}{@ifsoln{Answers will vary!}}{column-name {two-colons} String})
 
 @n Try using the `count` function to summarize the `pounds` column. Is the resulting summary useful? Why or why not? @fitb{}{} +
 @fitb{}{@ifsoln{No - nearly every animal has a unique weight, so the resulting table is almost as long as the original!}}
