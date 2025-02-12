@@ -28,6 +28,7 @@ if (fs.existsSync(jsDir)) {
     everything = { ...everything, ...j };
   }
   let jsonString = JSON.stringify(everything);
-  fs.writeFileSync(finalJsFile, 'var ' + varName + ' = ' +
-    jsonString + ';\n');
+  fs.writeFileSync(finalJsFile, 
+    `var ${varName} = ${jsonString};
+     export default ${varName}`);
 }

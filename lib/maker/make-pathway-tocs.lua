@@ -31,3 +31,5 @@ for _,course in ipairs(all_courses) do
 end
 
 o:write('}\n')
+
+o:write('export default pathwayTocs')

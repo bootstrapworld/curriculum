@@ -51,4 +51,5 @@ o:write('  }\n')
 
 o:write('};\n')
 
+o:write('export default dictionaries')
 o:close()
