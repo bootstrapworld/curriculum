@@ -7,28 +7,32 @@ You've seen that Pyret has special functions that we can use to manipulate Table
   * `filter` - consumes a _Boolean-producing function_, and produces a table containing only rows for which the function returns `true`
   * `build-column` - consumes the name of a new column, and a function that produces the values in that column for each Row
 
-You've also seen the "Order of Operations" for things like addition, subtraction, multiplication and division. *Is there an Order of Operations for manipulating tables?*
-
-@vspace{2ex}
-
-Suppose you have the following function defined:
+You've also seen the "Order of Operations" for things like addition, subtraction, multiplication and division.
 
 @vspace{1ex}
 
-`fun days-to-adopt(r): r["weeks"] * 7 end`
+*Is there an Order of Operations for manipulating tables?*
+
+@vspace{2ex}
+
+Suppose you want to build a table from the `animals-table` using the `days-to-adopt` function defined below. Consider the two Circles of Evaluation that follow.
 
 @vspace{1ex}
 
-One of the Circles of Evaluation below will sort the table by the number of days it took for each animal to be adopted. *One of them will produce an error!* Can you figure out which one?
+[cols="^1a", stripes="none", frame="none", grid="none"]
+|===
+|`fun days-to-adopt(r): r["weeks"] * 7 end`
+|@show{(coe '(sort (build-column animals-table "days" days-to-adopt) "days" true))}
+@vspace{1ex
+}
+|@show{(coe '(build-column (sort animals-table "days" true) days-to-adopt "days"))}
+|===
 
-@vspace{2ex}
+- One of the Circles of Evaluation will sort the table by the number of days it took for each animal to be adopted.
+- One of them will produce an error! Can you figure out which one?
 
-@show{(coe '(sort (build-column animals-table "days" days-to-adopt) "days" true))}
+@vspace{1ex}
 
-@vspace{2ex}
+**We can't `sort` by a column that doesn't exist yet! In fact, we can't `filter` by that column either.**
 
-@show{(coe '(build-column (sort animals-table "days" true) days-to-adopt "days"))}
 
-@vspace{2ex}
-
-_We can't `sort` by a column that doesn't exist yet!_ In fact, we can't `filter` by that column either. When filtering and building tables, it's important to keep the order of operations in mind!
