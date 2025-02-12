@@ -30,5 +30,5 @@ if (fs.existsSync(jsDir)) {
   let jsonString = JSON.stringify(everything);
   fs.writeFileSync(finalJsFile, 
     `var ${varName} = ${jsonString};
-     export default ${varName}`);
+     module.exports = { ${varName} : ${varName} }`);
 }

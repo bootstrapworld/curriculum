@@ -254,7 +254,7 @@ local function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/bundle.js"></script>\n')
+      -- TODO: split codemirror into a separate bundle
 
     end
     --
@@ -265,7 +265,8 @@ local function postproc(fhtml_cached, tipe)
       o:write('<script defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
       o:write('<script defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
 
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/main.bundle.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/printing.bundle.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --

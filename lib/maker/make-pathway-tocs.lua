@@ -32,4 +32,4 @@ end
 
 o:write('}\n')
 
-o:write('export default pathwayTocs')
+o:write('module.exports = { pathwayTocs: pathwayTocs} ')

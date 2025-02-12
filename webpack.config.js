@@ -6,7 +6,11 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   // The only file we should be worrying about is bootstraplesson.js
   // It will need to be rewritten to use proper module syntax
-  entry: [ './distribution/en-us/lib/bootstraplesson.js'],
+  entry: { 
+    main: './distribution/en-us/lib/bootstraplesson.js',
+    printing: './distribution/en-us/lib/makeWorkbook.js'
+  },
+
   mode: 'development',
   optimization: {
     minimize: true,
@@ -15,7 +19,7 @@ module.exports = {
   // When compiled, the output should go to distribution/en-us/lib/
   output: {
     path: path.join(__dirname, 'distribution/en-us/lib/'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     clean: false,
   },
 
@@ -35,7 +39,7 @@ module.exports = {
       files: ['./lessons/**/*.adoc', './pathways/**/*.adoc', './shared/**/*.json'],
     }),
     new WebpackShellPluginNext({
-      onBeforeCompile: {scripts: ['make'], blocking: true },
+      //onBeforeCompile: {scripts: ['make'], blocking: true },
     }),
   ],
 };

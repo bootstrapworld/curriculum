@@ -51,5 +51,5 @@ o:write('  }\n')
 
 o:write('};\n')
 
-o:write('export default dictionaries')
+o:write('module.exports = { dictionaries: dictionaries }')
 o:close()
