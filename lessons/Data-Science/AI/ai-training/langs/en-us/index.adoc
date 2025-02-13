@@ -1,6 +1,6 @@
 = Training Artificial Intelligence
 
-@description{Students consider what training is by interacting with a plagiarism detector. As a result of this exploration, they learn that training AI is both a resource-intensive and time-intensive process.
+@description{Students consider what training is by exploring two unique examples: song recommendation and plagiarism detection. As a result of this exploration, they learn that training, a resource-intensive and time-intensive process, is the act of transforming data into a model.
 }
 
 @ifproglang{pyret}{
@@ -14,10 +14,12 @@
 | Lesson Goals
 | Students will be able to...
 
+@objectives
 
 | Student-facing Lesson Goals
 |
 
+Let's think about training, the act of transforming data into a model.
 
 | Materials
 |[.materials-links]
@@ -31,6 +33,8 @@
 
 == Song Recommendation Systems
 
+@objective{training}
+
 === Overview
 
 Students explore song recommendation, another example of a data-driven algorithm. They consider how data aggregation is a key component of machine learning.
@@ -42,47 +46,50 @@ Data is at the heart of data science, and--as you learned during the previous le
 The type of data that must be processed varies by situation, of course. While it is true that providing _more_ data often produces better results, we also need to consider how other variables can influence the quality of output.
 
 @lesson-instruction{
-- Consider @printable-exercise{case-study-michelle.adoc}.
-- Read the brief story and respond to the questions, providing as much detail as you can.
+- Read the brief story on @printable-exercise{case-study-michelle.adoc} and respond to the questions, providing as much detail as you can.
 }
 
-@teacher{Invite students to share their responses, emphasizing that data-driven algorithms produce a higher quality output when we provide more data. Changing the code is not necessarily needed... although it is always a possibility! When change to the code _does_ happen, it is done by humans.}
+@teacher{Invite students to share their responses. Their responses will likely highlight that data-driven algorithms produce a higher quality output when we provide more data. If your students do *not* propose that the algorithm was *probably* updated (as we suggest in the answer key), that's okay! There's no need to reveal that possibility yet; instead, circle back to @printable-exercise{case-study-michelle.adoc} after your students complete and discuss @printable-exercise{song-recommending.adoc}.}
+
+For Michelle to get better results, changing the code is not necessarily needed... although it is always a possibility! Let's consider song recommendation in more depth, and explore the idea that sometimes, _there is a need for algorithms to change_.
 
 === Investigate
-
-When Michelle was a new user, she was underwhelmed by Spotify's recommendations because Spotify lacked information about her and her listening preferences. Eventually, Spotify acquired more data on Michelle's music preferences, resulting in better recommendations. Finally, Michelle provided Spotify with even *more* data to get different (but desired) recommendations outside of her usual listening preferences.
 
 Very broadly, a song recommendation system does two things:
 
 - it has some knowledge of what the listener already likes
 - given a new song, it determines whether or not to recommend that song
 
-In order for Spotify to do the predictive work that we expect (step 2, above), it must do more than keep a running list of the songs that Michelle listens to. Instead, it must _aggregate_ her listening history. What does that entail?
+In order for Spotify to do the predictive work that we expect it to do (step 2, above), it must do more than keep a running list of the songs that Michelle listens to. Instead, it must _aggregate_ her listening history: over time, Spotify builds a detailed profile of each user's musical tastes. But what does that entail?
 
 @lesson-instruction{
-Design your own song recommendation system! With a partner, complete @printable-exercise{song-recommending.adoc}.
+- Design your own song recommendation system!
+- With a partner, complete @printable-exercise{song-recommending.adoc}.
 }
 
+@vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to recommend. In the case of Spotify, the model is a summary of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
 
-
-
-
-
-
-The Pyret spell checker that we played with during @lesson-link{data-driven-algorithms} also processed differently sized datasets, iteratively producing better results (therefore more possible candidates for the misspelled word!) when the dataset was bigger in size.
+@teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Be sure to discuss all of the possibilities that we outline in the solutions: perhaps the model changed a little, or perhaps the model changed a lot... there's no way for us to know!}
 
 === Synthesize
 
+@QandA{
 
+@Q{In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers.
 
+Why do you think models are generally smaller than the training data?}
+
+@A{Generally, the model *summarizes* the data, eliminating all but its most essential features--the features that enable it to make predictions, generate text, etc.}
+}
 
 
 == Build a Bag of Words
 
+@objective{bag-of-words}
+
 === Overview
 
-Students engage in adversarial thinking to determine the basic requirements of a successful plagiarism detection program.
-
+Students engage in adversarial thinking to determine the basic requirements of a successful plagiarism detection program. They consider the "bag-of-words" model, which a user can query to better understand how similar or different two different documents are.
 
 === Launch
 
@@ -183,6 +190,8 @@ The bag-of-words model is better at detecting plagiarism than the primitive plag
 
 
 == Normalize Data and Consider Dimensionality
+
+@objective{data-normalization}
 
 === Overview
 
