@@ -1,6 +1,6 @@
-= Box Plots
+= Introduction to Box Plots
 
-@description{Students are introduced to box plots, learn to evaluate the spread of a quantitative column, and deepen their perspective on shape by matching box plots to histogram.}
+@description{Students compute five-number summaries from quantitative datasets, and then use those five-number summaries to create box plots.}
 
 @lesson-prereqs{measures-of-center}
 
@@ -15,111 +15,64 @@
 
 @objectives
 @objective{boxplot-create}
-@objective{spread-transfer}
 
 | Student-facing Lesson Goals
 |
 
-- Let's compare different uses for box plots and histograms when talking about data.
+- Let's compute and plot five-number summaries.
 
 | Materials
 |[.materials-links]
 
 @material-links
 
-| Supplemental Materials
-|[.materials-links]
-@opt-material-links
+|===
 
-| Preparation
-|
-@preparation{
-- There is an optional kinesthetic activity in this lesson that requires a ball of play-dough for each group of 3.
-- There are Desmos formative assessments at the end of each lesson section.
-  * Open the assessment you plan to administer (@assessment{box-plots-check1-desmos}, @assessment{box-plots-check2-desmos}, etc) and make a code or link to share with students.
-  * If you are using our Google Slides, add the appropriate link to the slide deck.
-  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
-}
+== The Five-Number Summary
 
-| Assessments
-| [.assessment-links]
-@assessments
+=== Overview
+
+Students learn about how to use range, quartiles, and interquartile range to talk about variability.
+
+=== Launch
+
+Each of the three dot plots shown below has a median of 60.
+
+[cols="^.>1a,^.>1a,^.>1a"]
+|===
+
+| @image{images/dot-plot-2e.png}
+| @image{images/dot-plot-1e.png}
+| @image{images/dot-plot-3e.png}
 
 |===
 
-== How Typical is the Average?
-
-=== Overview
-Students are introduced to the notion of _spread_ in a dataset. They learn about how to use range, quartiles, and interquartile range to talk about variation.
-
-=== Launch
-When we explored measures of center, _we determined that the average pet weighs almost 40 pounds_.
-
-Once we've calculated our summary value, it's important to ask: _How typical is the average?_ +
-We'd expect points to deviate from the mean in any sample!
-
 @QandA{
-@Q{Does the average tell us the "typical" weight of animals at the shelter?}
-@A{Maybe!
-- Perhaps all of the pets weigh between 35 and 45 pounds, with every pet close to the mean. 
-- But perhaps all of the pets are super small or huge, and none are anywhere _near_ the mean!
-}
+
+@Q{We know that these dot plots represent datasets that have the same median, but the data definitely isn't the same! In what ways are they _different_?}
+@A{Each dot plot has a different spread and a different shape. There are different peaks, gaps, and outliers.}
 }
 
 @slidebreak
 
-To learn about how evenly distributed the data is we can start by ordering the data from least to greatest. From there we can identify and compute a number of values that will give us more information.
+*How do statisticians articulate what makes each sample unique?*
+
+One way to characterize the distribution of data is a *five-number summary*. To compute a five-number summary, we arrange the data values from least to greatest. Then, we decompose a dataset into four equal parts, separated by @vocab{quartiles}. This process can offer us a more nuanced idea of how the data is spread out.
+
+Here are the specific ingredients for a *5-number Summary*:
+
+- @vocab{Minimum}: the smallest value in a dataset - it starts the first quarter
+- Q1 (lower @vocab{quartile}): the number that separates the first quarter of the data from the second quarter of the data
+- Q2 (@vocab{Median}): the middle value in a dataset
+- Q3 (upper @vocab{quartile}): the value that separates the third quarter of the data from the last
+- @vocab{Maximum}: the largest value in a dataset - it ends the fourth quarter of the data
+
+
+Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge". Mathematically, @math{IQR = Q3 - Q1}.
 
 @slidebreak
 
-==== Range
 
-The @vocab{Range of a Dataset}, is the simplest measure of variation we can compute. It is the distance between the @vocab{Minimum} (lowest value) and @vocab{Maximum} (highest value). @ifslide{ +
-}_(Note: the term “Range” means something different in statistics than it does in algebra and programming!)_
-
-
-@indented{@math{Range = Maximum - Minimum}}
-
-@slidebreak
-
-It is important that we consider the @vocab{Range of a Dataset} in context. 
-
-- _10 years would be a huge age range in an elementary school classroom where all of the students are typically born within the same calendar year and less than 13 years old._  
-- _But 10 years would be a narrow age range for Cypress trees growing in Louisiana swamps, some of which are 1500 years old._
-
-@slidebreak
-
-==== Quartiles
-
-As we know from our work with @lesson-link{measures-of-center}, the @vocab{median} is the value that splits the data in half. If it diverges significantly from the mean, the data is skewed.
-
-@slidebreak
-
-We can learn more about the distribution by splitting each of the halves of data in half so that we have four equal-sized quarters of data.  The boundary points between the equal quarters of data are called @vocab{quartiles}. 
-
-If the first quartile does not fall in the middle between the minimum and the median, we know that the data is not evenly distributed. The same is true if the third quartile does not fall in the middle between the maximum and the median.
-
-@slidebreak
-
-==== Interquartile Range (IQR)
-
-Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  It is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge".
-
-@indented{@math{IQR = Q3 - Q1}}
-
-@slidebreak 
-
-==== Five-Number Summary
-
-The *5-number Summary* combines the @vocab{quartiles} with the @vocab{minimum} and the @vocab{maximum}: 
-
-- Minimum: _the smallest value in a dataset - it starts the first quarter_
-- Q1 (lower quartile): _the number that separates the first quarter of the data from the second quarter of the data_
-- Q2 (Median): _the middle value (median) in a dataset_ 
-- Q3 (upper quartile): _the value that separates the third quarter of the data from the last_
-- Maximum: _the largest value in a dataset - it ends the fourth quarter of the data_
-
-If the data is evenly distributed these 5 numbers will be spaced at consistent intervals, but if the data is clustered, we will see some of these numbers be closer together than others.
 
 === Investigate 
 
@@ -139,30 +92,58 @@ If the data is evenly distributed these 5 numbers will be spaced at consistent i
 
 @teacher{
 We are going to find the 5-number summary, range and IQR for 2 datasets. Future reflection will rely upon students having worked through both datasets. If your students tend to need more support, you may want to work with the first dataset as a class and then have students work with the second dataset independently.
-
-@opt{Instead of giving the directions below, you can distribute printed copies of @opt-printable-exercise{distribution-by-hand.adoc} and have students complete the first two sections now. The remaining sections of the page will be completed in another section of this lesson and include number lines for making box plots.
-}
 }
 
 @lesson-instruction{
-- Let's see what we can learn about how typical those averages were by looking at the datasets.
-- *Ledet Family Reunion* Age Data: 1, 44, 3, 42, 46, 74, 75, 21, 74, 70, 40, 41, 45
-  * Rewrite the data in order from least to greatest.
-  * Record your five-number summary (Minimum, Q1, Median, Q3, Maximum).
-  * Then calculate the IQR and Range.
-- *Watson Family Gathering* Age Data: +
-70, 68, 69, 72, 65, 75, 65, 78, 70, 72, 71, 70
-  * Compute the 5-number summary, IQR, and Range.
+- Let's see what we can learn about how typical those averages were by looking at the datasets in the first section of @printable-exercise{distribution-by-hand.adoc}.
+- Order the ages and compute the five-number summaries for both the *Ledet Family Reunion* and the *Watson Family Gathering*.
+}
+
+
+@teacher{
+The partitioning of the data into four parts can be a challenge! Research by @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} suggests that students do *not* tend to conceive of distribution in four parts, but three. (Their brains naturally view: the majority in the middle; lower values on the left; and higher values on the right.)
+
+Annotating the list of ordered values can help students visualize the four groups. Emphasize that the median does *not* get included in the bottom or upper half of the data.
+
+Ledet:
+
+@center{@image{images/ledet-five-num.png, 400}}
+
+Watson:
+
+@center{@image{images/watson-five-num.png, 400}}
+
 }
 
 @QandA{
-@Q{What do you notice and wonder about these datasets and the summary values you've just computed?}
+@Q{What do you Notice and Wonder about these datasets and the summary values you've just computed?}
 @A{Students may notice that the maximum values are pretty close to each other, but the minimum values are very different from each other!}
 @A{Students may notice that Q3 for both datasets is 72.}
 @A{Students may notice that the median value for the Watson family data is a number that isn't in the dataset, whereas the median value for the Ledet family data is a number that's in the dataset.}
 @A{Students may have questions about how to calculate the median and/or quartiles.}
 }
- 
+
+Now that we know how to compute a five-number summary, let's practice!
+
+@lesson-instruction{
+- Practice computing five-number summaries from small datasets (either 7 or 8 values) visualized as dot plots on @printable-exercise{match-dot-plots-summaries.adoc}.
+- Be prepared to describe your strategy for matching dot plots with five-number summaries.
+}
+
+@QandA{
+@Q{What strategies did you use to match dot plots to five-number summaries?}
+@A{Responses will vary. Students will likely identify the median first to narrow in on a smaller pool of possible five-number summaries, and then compute the quartiles.}
+
+@Q{Dot plots 7 and 8 included 8 points, rather than 7. Did you need to change your strategy to complete these problems? If so, how?}
+@A{The median was no longer the 4th datapoint in sequence. Instead, the median was the average of the 4th and 5th datapoints.}
+
+@Q{Which five-number summary on @printable-exercise{match-dot-plots-summaries.adoc} has the greatest IQR?}
+@A{Option C, which corresponds with dot plot 1.}
+
+@Q{Which five-number summary on @printable-exercise{match-dot-plots-summaries.adoc} has the smallest IQR?}
+@A{Option E, which corresponds with dot plot 6.}
+}
+
 === Synthesize
 
 @QandA{
@@ -170,21 +151,17 @@ We are going to find the 5-number summary, range and IQR for 2 datasets. Future 
 @Q{What is a quartile?}
 @A{One of the three boundary points that splits our dataset into four equal quarters.}
 
-@Q{Why is the IQR a more robust measure of variation than the range?}
+@Q{A quartile is _sometimes_ / _always_ / _never_ one of the values in the dataset.}
+@A{Sometimes.}
+
+@Q{Why is the IQR a more robust measure of variability than the range?}
 @A{Because it focuses on the middle half of the data, so is less susceptible to outliers.}
 }
 
 
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check1-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, the last section of the lesson.
-
-}
 
 
-== Box Plots - Visualizing our Five-Number Summary
+== Plotting our Five-Number Summary
 
 === Overview
 
@@ -194,61 +171,66 @@ Students plot five-number summaries as box plots before learning to make box plo
 
 To visualize the 5-number summary, the Range, and the Interquartile Range we can plot the five numbers on a number line and connect them to make a @vocab{box plot}. 
 
-- First, make a vertical line on the number line for each of the 5 points.
-- Then make a box connecting Q1 to Q3. This box contains the middle half of the data (IQR). 
-- Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
-- Make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data. 
-
 @ifslide{@image{images/box-n-whisker-plot.png, 500}}
+
+
+@lesson-instruction{
+- Turn to @printable-exercise{create-bp-from-dp.adoc}.
+- Take a look at the example. What do you Notice? What do you Wonder?
+}
 
 @slidebreak
 
-Box plots display how the four equal quarters of data are spread out along the number line.
+*To draw a box plot from a 5-number summary:*
 
-@ifnotslide{@center{@image{images/box-n-whisker-plot.png, 500}}} 
-@ifslide{@image{images/box-n-whisker-plot.png, 500}}
+- First, make a vertical line on the number line for each of the 5 values of the five-number summary.
+- Next, make a box connecting Q1 to Q3. This box contains the middle half of the data (IQR).
+  * Make sure the line you drew for the median is tall enough to split the box into 2 parts (not necessarily equal!)
+- Finally, make a horizontal line (called a "whisker") connecting each end of the box to the minimum / maximum value. This helps us to visualize the full range of the data.
 
-@lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.} 
+@lesson-point{No matter what shape the box plot has, all four sections contain _exactly the same number of points_.}
 
-@slidebreak{LaunchC}
-
-When the points are evenly distributed, the four sections of the box plot will be equal in size, but _we will rarely see a box plot with four equal sections_!  
-
-@ifslide{@image{images/even.png, 400}}
-
-@slidebreak{LaunchC}
-
-When we see that some of the sections are narrow and others are wider, we know that the narrow sections are packed more densely. 
-
-@ifslide{@image{images/box-n-whisker-plot.png, 500}}
+@slidebreak
 
 @QandA{
-@Q{Which quarter of data is packed the densest in this box plot?}
-@A{The third one}
-@Q{Which quarter of the data is the most dispersed in this box plot?}
-@A{The fourth one}
+@Q{How do we know that the first quarter is the densest?}
+@A{It is the narrowest, spanning just 2 units. And since all of the quarters contain the same number of data points, that tells us that these points are the most tightly packed.}
+@A{We can see that the points on the dot plot are clustered more closely together in this section than they are in the others.}
+
+@Q{Which quarter of the data is the most dispersed? How do you know?}
+@A{The last quarter; it spans 11 units, and includes the same number of data points as each of the other quarters.}
+@A{We can see that there is lots of space between the points on the dot plot in this section.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Complete @printable-exercise{create-bp-from-dp.adoc}.
+- Then complete @printable-exercise{match-dot-plots-box-plots.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{What strategies did you use to match the dot plots to the box plots}
+@A{Answers will vary. Sample responses may include:
+ - I looked for the maximum and minimum values.
+ - I looked at the shape of the data, starting with whether or not it was symmetrical.
+ - I looked for tall clusters of points on the dot plot and matching narrow quarters on the box plot.
+}
 }
 
 === Investigate
 
-@teacher{@opt{If you printed and distributed copies of @opt-printable-exercise{distribution-by-hand.adoc}, direct students to complete the page now.
-}}
-
 @lesson-instruction{
 - Let's practice making box plots with the data from the family gatherings.
-- Find the page where you recorded the 5-number summaries.
-- Make a number line from 0 to 80, with labeled intervals every 10 years.
-  * Plot each of the values from the *Ledet Family* 5-number summary on the number line.
-  * Draw a box around the IQR (connecting Q1 to Q3 with a line for Q2 splitting the box into 2 sections)
-  * Draw whiskers connecting the box to the minimum and the maximum.
-- Make a second number line from 0 to 80, with labeled intervals every 10 years.
-  * Use the *Watson Family* 5-number summary to make a box plot.
+- Complete the second and third sections of @printable-exercise{distribution-by-hand.adoc}.
 }
 
 @teacher{
 The box plots should look like this: +
-Ledet: @hspace{1em} @image{images/ledet.png, 600} +
-Watson: @image{images/watson.png, 600}
+Ledet: @hspace{1em} @image{images/ledet.png, 500} +
+Watson: @image{images/watson.png, 500}
 } 
 
 @slidebreak
@@ -260,14 +242,14 @@ Watson: @image{images/watson.png, 600}
 @A{For the Watson family gathering because the data is more closely clustered, the Range and IQR are significantly smaller, and the mean and median are much more similar.}
 
 @Q{How did making the box plots help you to understand the data?}
-@Q{What else do you notice and wonder?}
+@Q{What else do you Notice and Wonder?}
 }
 
 === Synthesize
 
 @QandA{
-@Q{Box plots have four sections. What has to be true about all of those sections?}
-@A{They each have to contain exactly one quarter of the data, no matter how different the sections look on the number line.}
+@Q{Box plots have four sections. What must be true about all of those sections?}
+@A{They each contain exactly one quarter of the data, no matter how different the sections look on the number line.}
 
 @Q{Why isn't the median always in the middle of the box?}
 @A{Because the median has to split the data itself in half and the quarter of the data to the left of the median isn't necessarily clustered as tightly as the quarter of the data to the right of the median.}
@@ -277,81 +259,13 @@ Watson: @image{images/watson.png, 600}
 }
 
 
-
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check2-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, the last section of the lesson.
-
-}
-
-== Interpreting Box Plots - @proglang
+== Making Box Plots in @proglang
 
 === Overview
 
-Students learn to identify skewed and symmetric data from a box plot before exploring the spread of the "pounds" column in @proglang.
+Students create box plots and five-number summaries from the animals dataset in @proglang.
 
 === Launch
-
-@slidebreak{LaunchC}
-
-@ifslide{@image{images/even.png, 600}}
-
-We know that when the points are evenly distributed across the range, the four sections of the box plot will be equal in size. But, it's very rare for the distribution of real world datasets to be uniform like this! _(And, even when we see a box plot with four equally wide quarters, we cannot assume that the points are evenly distributed within each of the quarters.)_ 
-
-@slidebreak{LaunchC}
-
-*What shapes are box plots likely to come in and how do we describe them?*
-
-@slidebreak{LaunchC}
-
-==== Symmetric 
-
-The spread of any dataset with roughly the same amount of variation on the low end as on the high end can be described as symmetric. 
-
-[cols="13a,13a,12a", grid="none", frame="none"]
-|===
-| @image{images/even.png}
-| @image{images/symmetriclong.png}
-| @image{images/symmetricshort.png}
-|===
-
-@slidebreak{LaunchC}
-
-An example of symmetric variation might be the weights of newborn babies: the distribution for those who are smaller than average might mirror those who are bigger than average.
-
-@slidebreak{LaunchC}
-
-==== Skew
-Left and right skew are easy to identify from a quick glance at a box plot, by their longer whiskers trailing off toward the left or right, respectively. Longer whiskers indicate the potential of outliers.
-
-[cols="^1a,^1a", grid="none", frame="none", stripes="none"]
-|===
-|@image{images/left.png}
-|@image{images/right.png} 
-|===
-
-@slidebreak{LaunchC}
-
-An example of left skew could be:
-
-- the weights of the cousins in a family, with the newborn as an outlier. +
-_(Did you know that babies are supposed to triple their weight in the first year of their lives?!)_
-
-Examples of right skew could include:
-
-- the distribution of maximum heights reached during gymnastics floor routines, with Simone Biles as an outlier, reaching over 9 feet in the air!
-- the distribution of time it takes to get from the subway to the street, with people using strollers and wheelchairs as outliers, because they have to wait for elevators while everyone else can use the stairs and escalators.
-
-@slidebreak{LaunchC}
-
-@lesson-instruction{
-- Let's practice identifying the shape of data from box plots! 
-- Turn to @printable-exercise{identifying-shape-boxplots.adoc}.
-}
-
-=== Investigate
 
 Let's see what we can learn about the spread of the data in the `pounds` column by making a `box-plot`!
 
@@ -373,7 +287,7 @@ To create a box plot in CODAP, create a graph of randomly distributed points, th
 
 @ifproglang{pyret}{
 @teacher{
-Students will type `box-plot(animals-table, "pounds")` into the Interactions Area and use the resulting box plot to fill in the five-number summary for the `pounds` column, and sketch the box plot.
+Students will type `box-plot(animals-table, "pounds")` into the Interactions Area. They will use the resulting box plot to fill in the five-number summary for the `pounds` column, and then sketch the box plot.
 }
 }
 
@@ -384,7 +298,7 @@ Create a box plot in CODAP that visualizes the spread of `Pounds`.
 @slidebreak{InvestigateC}
 
 @ifproglang{pyret}{
-@ifnotslide{@centered-image{images/box-plot-pounds.png, 500}}
+@ifnotslide{@centered-image{images/box-plot-pounds.png, 300}}
 @ifslide{@image{images/box-plot-pounds.png, 800}}
 }
 
@@ -392,6 +306,8 @@ Create a box plot in CODAP that visualizes the spread of `Pounds`.
 ifnotslide{@centered-image{images/codap-box-plot.png, 300}}
 @ifslide{@image{images/codap-box-plot.png, 300}}
 }
+
+=== Investigate
 
 @QandA{
 
@@ -495,230 +411,6 @@ It is extremely common for students to forget that the quartiles divide the data
 @A{100%}
 }
 
-@teacher{
 
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check3-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
 
-If you'd prefer to wait until your students have completed the _entire_ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/box-plots/index.shtml?pathway=data-science#_interpreting_box_plots_pyret, "Connecting Box Plots and Histograms"}, below.
 
-}
-
-== Connecting Box Plots and Histograms
-
-=== Overview
-Students learn how to connect this visualization of spread to what they know about histograms.
-
-=== Launch
-
-Box plots and histograms give us two different views of the shape of quantitative data.
-
-@slidebreak
-
-
-@QandA{
-@Q{One of these box plots represents the same data as the histogram. Which one is it? How do you know?}
-@A{The first box plot represents the same data as the histogram.}
-@A{Sample response: The right whisker of the first box plot is longer, suggesting that there are outliers on the right causing the data to skew right.}
-
-@center{@image{images/histogram-launch.png,175}}
-
-[cols="^.^1a,^.^1a"]
-|===
-| @image{images/boxplot2-launch.png, 125}
-| @image{images/boxplot1-launch.png, 125}
-|===
-
-}
-
-@teacher{Students may notice that the left part of the box is larger on the box plot B. Although that observation is correct, the box's larger area does *not* indicate that *more* data points are clustered there. Remind students that an equal number of data points are clustered in each quadrant of the box plot. You can emphasize this core idea as you discuss the table comparing box plots and histograms@ifnotslide{,below.}@ifslide{ on the next slide.}}
-
-@slidebreak
-
-[cols="1,^1,^3, ^3", options="header"]
-|===
-|               
-| Intervals 			
-| Data points per Interval
-| Skew presents as
-
-| *Box Plots* 	
-| Variable 		    
-| Fixed - 25% of the data in each Interval
-| A longer "whisker" or +
-more spread in one half of the box
-
-| *Histograms*	
-| Fixed Bins      
-| Variable - Points “pile up in bins”, +
-so we can see how many are in each.
-| A long tail of +
-shorter bars to one side
-|===
-
-
-@slidebreak
-
-@QandA{
-@Q{Match the box plots below with the corresponding histograms. How did you make your matches?}
-@A{Box plot A represents the same data as histogram C. Box plot B represents the same data as histogram D. Students may suspect that the short whiskers of histogram B match with the short bars on the edges of histogram C. Because box plots represent density and not frequency, this reasoning is incorrect. }
-
-++++
-<style>
-/* Add letters to the top left corner, relative to each table cell */
-.lettering td { position: relative; }
-.lettering .paragraph:first-child p { position: absolute; top: 0; font-weight: bold; }
-</style>
-++++
-
-[.lettering, cols="^.^1a,^.^1a", header="none", stripes="none"]
-|===
-| A
-
-@image{images/launch-boxplot-a.png, 125}
-| B
-
-@image{images/launch-boxplot-b.png, 125}
-| C
-
-@image{images/launch-histo-c.png, 125}
-| D
-
-@image{images/launch-histo-d.png, 125}
-
-|===
-
-
-}
-
-@teacher{The matching activities in this launch section were drawn from research conducted by @citation{lem-et-al-2011, "Lev et al (2011)"}.}
-
-
-
-@strategy{Kinesthetic Activity}{
-
-Divide the class into groups, and give each group a ruler and a ball of play-dough. Have them draw a number line from 0-6 with the ruler, marking off the points at 0, 3, 4, 4.5 and 6 inches. Have the groups roll the dough into a thick cylinder, divide that cylinder in half, and then split each half to form four _equally-sized cylinders_. The play-dough represents a @vocab{sample}, with values divided into four quarters.
-
-Box plots stretch and squeeze these equal quarters of the data across a number line, so that they fit into their respective intervals. On their number line, students have intervals from 0-3, 3-4, 4-4.5, and 4.5-6. Have students shape their cylinders into rectangles that fill each of these intervals, and are all about 1 inch thick.
-
-Students should notice that the play-dough is _taller for shorter intervals_ and thinner for longer intervals. Even though a box plot doesn't show us the thickness of the data points, we know that a small interval has the same amount of data "squeezed" into it as a large interval has spread across it.
-
-}
-
-=== Investigate
-@lesson-instruction{
-- Use what you've learned about how box plots and histograms display data differently to complete @printable-exercise{matching-boxplots-to-histograms.adoc}.
-- With a partner, complete the @printable-exercise{boxplot-vocab-map.pdf, Box Plot Vocab Concept Map} and see if you can draw connections between these concepts!
-- @opt{Complete @opt-printable-exercise{reading-boxplots.adoc} to practice matching box plots to a written description of a distribution.}
-- @opt{Complete @opt-printable-exercise{matching-boxplots-to-histograms-2.adoc} and/or the Matching Box Plots to Histograms slide of @opt-starter-file{boxplots}}
-}
-
-@clear
-@slidebreak
-
-@lesson-instruction{
-Now that you have the skills to interpret box plots, complete @printable-exercise{data-cycle-box-plots-animals.adoc}.
-}
-
-@pd-slide{
-*Matching Debrief: Think about shape, don't rely on numbers!*
-
-There are teachers and students who complain about this page. They say that this page is unfair because we didn't label the axes. The stats teachers are always shocked at their colleagues. They say, "It doesn't matter! We're talking about shape. Skew right is skew right, no matter where it falls on the x axis.""
-
-So many kids have sort of a statistical lazy eye. How do you fix that? You wear a patch over the strong eye. By removing the numbers, it forces people to think about the shape. If the numbers are there, you get high achieving algebra students who never learn shape because they keep using the numbers.
-}
-
-@pd-slide{
-*Chart Paper Activity (Continued): What Shape Makes Sense?*
-
-We've already added histograms to our chart papers around the room.
-
-This time, we are going to complete another round of the same activity, but your group will (1) add a *box plot* of the specified shape, (2) brainstorm a sample that will result in the given distribution.
-
-Once all teams have completed the task, teams will rotate to the next poster and brainstorm another sample.
-}
-
-=== Synthesize
-
-- How are histograms and box plots similar?
-- How are they different?
-- What can we learn from box plots that we can't learn from a histogram?
-
-
-@teacher{
-
-Want to check student mastery of the content you've just taught? Administer @assessment{box-plots-check4-desmos} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
-
-Alternatively, we offer a compilation of all four Checkpoints in @assessment{box-plots-cumulative-desmos}.
-}
-
-
-
-== Data Exploration Project (Box Plots)
-
-=== Overview
-Students apply what they have learned about box plots to their chosen dataset. They will add three items to their @starter-file{exploration-project}: (1) at least two box plots, (2) the corresponding five-number summaries, and (3) any interesting questions they develop. 
-
-@teacher{To learn more about the sequence and scope of the Exploration Project, visit @lesson-link{project-data-exploration}. For teachers with time and interest, @lesson-link{project-research-paper} is an extension of the Dataset Exploration, where students select a single question to investigate via data analysis.}
-
-=== Launch
-
-Let’s review what we have learned about making and interpreting box plots.
-
-@QandA{
-@Q{Does a box plot display categorical or quantitative data? How many columns of data does a box plot display?}
-@A{Box plots display a single column of quantitative data.}
-
-@Q{How are box plots similar to histograms? How are they different?}
-@A{Box plots and histograms give us two different views on the concept of shape. Histograms have fixed intervals ("bins") with variable numbers of data points in each one. Box plots have variable intervals ("quartiles") with a fixed number of data points in each one.}
-
-@Q{A box plot lets us visualize the five-number summary. What does the five-number summary tell us about the column of data?}
-@A{The five-number summary includes the minimum, medium, and maximum. It also includes the median of the lower half of the values, and the median of the upper half of the data points.}
-}
-
-=== Investigate
-
-Let’s connect what we know about box plots to your chosen dataset.
-
-@teacher{Students have the opportunity to choose a dataset that interests them from our @lesson-link{choosing-your-dataset/pages/datasets-and-starter-files.adoc, "List of Datasets"} in the @lesson-link{choosing-your-dataset} lesson.
-}
-
-@lesson-instruction{
-- Open your chosen dataset starter file in @proglang.
-- Remind yourself which two columns you investigated in the @lesson-link{measures-of-center} lesson and make a box plot for one of them.}
-
-@QandA{
-@Q{What question does your visualization answer?}
-@A{Possible responses: How is the data for a certain column distributed? Are the values close together or really spread out? Are there any outliers?}
-}
-
-@slidebreak
-
-@lesson-instruction{
-- Now, write down that question in the top section of @printable-exercise{data-cycle-quantitative.adoc}
-- Then, complete the rest of the data cycle, recording how you considered, analyzed and interpreted the question.
-- Repeat this process for the other column you explored before (and any others you are curious about).
-}
-
-@teacher{If students want to investigate new columns from their dataset, they will need to copy/paste additional Measures of Center and Spread slides into their Exploration Project and calculate the mean, median and modes for the new columns.
-
-Confirm that all students have created and understand how to interpret their box plots. Once you are confident that all students have made adequate progress, invite them to access their @starter-file{exploration-project} from Google Drive.
-}
-
-@slidebreak
-
-@lesson-instruction{
-- *It’s time to add to your @starter-file{exploration-project}.*
-- Find the box plot slide in the "Making Visualization" section and copy/paste your first box plot here. Duplicate the slide to add your other box plots.
-- Add the five-number summaries from these plots to the corresponding "Measures of Center and Spread" slides. 
-- Be sure to also add any interesting questions that you developed while making and thinking about box plots to the "My Questions" slide at the end of the deck.
-}
-
-=== Synthesize
-
-- What @vocab{shape} did you notice in your box plots?
-
-- Did you discover anything surprising or interesting about your dataset?
-
-- What, if any, outliers did you discover when making box plots?
-
-- When you compared your findings with others, did you make any interesting discoveries? (For instance: Did everyone find outliers? Was there more or less similarity than expected?)
