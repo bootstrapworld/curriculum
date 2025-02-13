@@ -294,10 +294,10 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @A{Because the first expression in the Definitions Area takes in `cy`.}
 
 @Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
-@A{The x and y coordinates of any point in the model.}
+@A{The y coordinate of any point in the model.}
 
 @Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
-@A{The x and y coordinates of each point in the data set, and the animal they are associated with.}
+@A{The x and y coordinates of each point in the data set, and the animals they are associated with.}
 
 @Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near the vertical residuals lines. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
 @A{"Residuals" tell us the x and y coordinates of a data point, compared with the predicted y-value (`y'`) for the x-value.}
@@ -314,11 +314,37 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 If students know how to compute the equation of a line that crosses between two points, use @opt-printable-exercise{lines-to-functions.adoc} to have them define their models for `age` v. `weeks` in Pyret and use `fit-model` to see which one is best.
 }
 
+Let's put everything we've learned together and interpret the models we've built and the statistics we've gathered about them.
+
+
+
+@lesson-instruction{
+- Let's make sure we know what the models we've built and the statistics we've gathered about them mean.
+- Complete the first section of @printable-exercise{interpret-models.adoc} with your partner.
+}
+
+@teacher{
+- Confirm that your students are able to complete cy's model correctly.
+- If your students did not complete @opt-printable-exercise{lines-to-functions.adoc}, direct them to ignore the last section of the page they are about to complete.
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{interpret-models.adoc}. Heads up: You will be using percent change to make sense of how the expected errors in these models compare.
+}
+
+@strategy{How can @math{r^2} be less than zero?}{
+Sharp-eyed students might wonder how it's possible for an @math{r^2} to be less than zero. That's supposed to be impossible, right?
+
+It turn out that the @math{R^2} of a model @link{https://stats.stackexchange.com/questions/627589/definition-of-text-r2-text, is NOT computed by squaring @math{R}}, and only actually equals @math{R \times R} when the model is produced through linear regression. Remember: linear regression can only find the line of _best_ fit, so it will never produce something crazy like a negatively-sloping line for a dataset with a positive correlation!
+
+When students are coming up with models on their own, they aren't bound by the algorithm for linear regression and can come up with lines whose fit is worse than `lr-plot` could ever be!
+}
+
 === Synthesize
 
 @QandA{
 @Q{Why do we need to know the Range of the dataset in order to interpret an @vocab{S-value}?}
-@A{Because @vocab{S-values} tell us the expected error in _units of the variable on the y-axis_. An error of $1000 could be huge or miniscule depending on the context.}
+@A{Because @vocab{S-values} tell us the expected error in _units of the variable on the y-axis_. An error of $1000 could be huge or minuscule depending on the context.}
 @Q{Besides looking at the @vocab{S-value}, what might you look for to determine whether a linear model is a good fit for the data?}
 @A{That the average distance of the points above the line appears to be about the same as the average distance of the points below the line.}
 }

@@ -1,14 +1,19 @@
 = Composing Table Operations: Order Matters!
 ++++
 <style>
+/* More compact codeblocks, tables, and COEs */
 p.tableblock { margin: 0; }
 .literalblock pre { padding: 0em !important; }
-table:first-of-type td {padding: .1em .1em !important; }
-div.circleevalsexp .value { font-size: 0.6rem; margin: 0.5rem 0.5rem; }
+div.circleevalsexp .value { margin: 0.5rem 0.25rem; }
+.circleevalsexp .expression { margin: 2px 4px; }
+
+.matchingTable td { padding: 2px 8px !important; }
+
+/* Make the last Table Header (TH) italic and centered */
 .data th:last-of-type, .data td:last-of-type * {
   font-style: italic !important; text-align: center; padding: 0 5px !important;
 }
-.m td { padding: 2px 8px !important; }
+.data td {padding: .1em .1em !important; }
 
 /* Format matching answers to render with an arrow */
 .solution::before{ content: ' → '; }
@@ -45,7 +50,7 @@ Then consider the table and the 2 function definitions.
 Match each table description on the left, to the Circle of Evaluation that will produce it. 
 
  
-[.m, cols=">.^8a,^.^2a,1,^.^1a,.^11a",stripes="none",grid="none",frame="none"]
+[.matchingTable, cols=">.^7a,^.^2a,1,^.^1a,.^11a",stripes="none",grid="none",frame="none"]
 |===
 
 | Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
