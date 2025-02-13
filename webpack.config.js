@@ -4,14 +4,8 @@ const WatchExternalFilesPlugin = require('webpack-watch-external-files-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  // The only file we should be worrying about is bootstraplesson.js
-  // It will need to be rewritten to use proper module syntax
-  entry: { 
-    main: './distribution/en-us/lib/bootstraplesson.js',
-    printing: './distribution/en-us/lib/makeWorkbook.js'
-  },
-
   mode: 'development',
+  devtool: 'source-map',
   optimization: {
     minimize: true,
     moduleIds: 'named',
@@ -21,11 +15,21 @@ module.exports = {
       })
     ],
   },
+
+  // The only file we should be worrying about is bootstraplesson.js
+  // It will need to be rewritten to use proper module syntax
+  entry: { 
+    printing: './distribution/en-us/lib/makeWorkbook.js',
+    main: './distribution/en-us/lib/bootstraplesson.js',
+  },
+
   // When compiled, the output should go to distribution/en-us/lib/
   output: {
     path: path.join(__dirname, 'distribution/en-us/lib/'),
     filename: '[name].bundle.js',
     clean: false,
+    libraryTarget: 'var',
+    library: ['Bootstrap', '[name]']
   },
 
   // Run the devServer on distribution/en-us/, and open the browser to the courses folder

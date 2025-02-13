@@ -65,37 +65,45 @@
 
   <script>
     window.status = "not_ready_to_print";
-    // narrow the primitives by url params
-    const {pathway, lessons, lesson, solns} = getParams();
-    // if there's a pathway, extract the primitives
-    const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
 
-    // take note of whether we are in wescheme or not
-    const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
+    async function createContractList() {
 
-    // Swap in pyret names if we're in pyret
-    function processName(contract) {
-      return (proglang=="pyret" && contract["name-pyret"])? 
-        contract["name-pyret"] : contract["name"];
+      return contracts;
     }
-
-    function elideProgLangSpecificPrimitives(c) {
-      if(proglang == "wescheme") {
-        return c.name !== '<>' 
-      } else { 
-        return c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name);
-      }
-    }
-
-    // set the list of contracts, sorted alphabetically and filtered by proglang
-    const contracts = Array.prototype.concat(
-      ...Object.values(langTable).map(t => t.primitives))
-      .sort((a,b) => processName(a).toUpperCase() > processName(b).toUpperCase()? 1 : -1)
-      .filter(elideProgLangSpecificPrimitives);
 
     // for each contract, add a row to the table
-    // handle domains separately because they require more preprocessing
-    function buildTable() {
+    // handle domains separately because they require more pre-processing
+    async function buildTable() {
+      const { configureGraph, getParams, computeTransitiveData} = Bootstrap.main;
+      const graph =  configureGraph();
+      // narrow the primitives by url params
+      const {pathway, lessons, lesson, solns} = getParams();
+      // if there's a pathway, extract the primitives
+      const primitives = pathway? computeTransitiveData(false,false,lessons).primitives : false;
+
+      // take note of whether we are in wescheme or not
+      const proglang = (pathway && pathway.includes("wescheme"))? "wescheme" : "pyret";
+
+      // Swap in pyret names if we're in pyret
+      function processName(contract) {
+        return (proglang=="pyret" && contract["name-pyret"])? 
+          contract["name-pyret"] : contract["name"];
+      }
+
+      function elideProgLangSpecificPrimitives(c) {
+        if(proglang == "wescheme") {
+          return c.name !== '<>' 
+        } else { 
+          return c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name);
+        }
+      }
+
+      // set the list of contracts, sorted alphabetically and filtered by proglang
+      const contracts = Array.prototype.concat(
+        ...Object.values(langTable).map(t => t.primitives))
+        .sort((a,b) => processName(a).toUpperCase() > processName(b).toUpperCase()? 1 : -1)
+        .filter(elideProgLangSpecificPrimitives);
+
       if(pathway && pathway.includes("hour-of-code")) {
         delete window.status;
         throw "Pathway is 'hour-of-code', which has no contracts. Terminating.";
