@@ -1,23 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase2: css-from-less specials verifylinks images tocs books
-
-###############################################################################
-
-less-files := $(wildcard lib/*.less)
-
-css-from-less-files := $(foreach lessf,$(less-files), $(patsubst %.less,distribution/$(NATLANG)/%.css,$(lessf)))
-
-css-from-less: $(css-from-less-files)
-
-define make-css-from-less-rule
-$(patsubst %.less,distribution/$(NATLANG)/%.css, $1): $1
-	@node_modules/less/bin/lessc $$< $$@
-	@echo "  " • Updated $$@
-
-endef
-
-$(eval $(foreach lessf,$(less-files),$(call make-css-from-less-rule, $(lessf))))
+phase2: specials verifylinks images tocs books
 
 ##########################################################################
 
