@@ -1,7 +1,7 @@
 = Fitting Models: College Degrees v. Income
 
 [.linkInstructions]
-Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
+Open your copy of the @starter-file{alg2-states}.
 
 [.no-flex-section]
 == The `al-ak` Model
@@ -16,7 +16,7 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @fitb{}{}
 
-@n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{~36164.683}}
+@n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{\~36164.683}}
 
 @n With median income ranging from
 @fitbruby{9em}{@ifsoln{$39,031}}{lowest median income} to
@@ -26,6 +26,40 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @fitb{}{@ifsoln{Considering the range of the data, the error in the model is enough to double the median income of a state or cut it in half!}}
 
+[.no-flex-section]
+== Comparing Models
+
+@n Use `fit-model` to find the @math{S-value} for the `mi-ca` model. @fitb{}{@ifsoln{10779.923}}
+
+@n Is the `mi-ca` model better or worse than the `al-ak` model? @fitb{}{@ifsoln{better!}}
+
+@n How much
+@fitbruby{5em}{@ifsoln{more}}{more / less }
+error do we expect in predictions made with the `mi-ca` model than predictions made with the `al-ak` model?
+
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- &#8192; is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+
+@indented{
+
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{al-ak} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }@ifnotsoln{@math{\frac{\qquad}{\qquad}}}@ifsoln{@math{\frac{25384.76}{36164.683} = .70  &#8192; &rarr; &#8192;  70 \%}}
+
+`mi-ca` model predictions are expected to have
+@fitb{4em}{@ifsoln{}} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than `al-ak` model predictions!
+
+}
 
 == A Model of Your Own
 
@@ -33,7 +67,7 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 
 @vspace{1ex}
 
-*Add two new definitions for these states to your @starter-file{alg2-states-fit-model}.*
+*Add two new definitions for these states to your @starter-file{alg2-states}.*
 
 @n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
 
@@ -60,35 +94,6 @@ Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "media
 @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
 }
 
-[.no-flex-section]
-== Comparing Models
-
-@n Is your model better or worse than the `al-ak` model? @fitb{}{@ifsoln{better!}}
-
 @n How much
-@fitbruby{7em}{@ifsoln{more}}{more / less }
-error do we expect in predictions made with your model than predictions made with the `al-ak` model?
-
-@vspace{1ex}
-
-@scrub{
-A note for future authors:
-- &#8192; is used below to add horizontal space.
-- \mbox{} is used to make the words in the fraction use normal font.
-}
-
-@indented{
-Percent Change &#8192; = &#8192;
-@math{
-\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
-{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{al-ak} &#8192; \mbox{model}}
-\times 100 &#8192; = &#8192; }
-@math{\frac{\qquad}{\qquad}}
-}
-
-We expect predictions made with my model to have
-@fitb{4em}{} percent
-@fitbruby{7em}{@ifsoln{less}}{ more / less }
-error than predictions made with the `al-ak` model!
-
-
+@fitbruby{5em}{@ifsoln{more}}{more / less }
+error do we expect in predictions made with your model than predications made with the `mi-ca` model? @fitb{3em}{} @math{\%}
