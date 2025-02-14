@@ -40,31 +40,13 @@ You will want to:
 |===
 
 
-== Periodic Functions
+== Graphing Periodic Functions
 @objective{periodic-situations}
 
 === Overview
-Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
+Students are introduced to graphs of periodic functions, and they become familiar with the terminology to describe them.
 
 === Launch
-We began by graphing the relationship between the legs of a right triangle and the angle formed based on the time on a clock using the functions @math{A(time)} and @math{B(time)}.
-
-To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
-
-@lesson-instruction{
-- One of these functions computes the "x values" from our unit circle (@math{A} on the unit clock). The other computes the y-values (@math{B} on the clock).
-- Complete @printable-exercise{periodic1-exploring-rides/pages/converting-angles.adoc} to determine which is which!
-- The contracts for these functions are: +
-@hspace{4em}
-@show{(contracts
-'("sin" ("Number") "Number")
-'("cos" ("Number") "Number")
-)}
-}
-
-*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
-
-=== Investigate
 Periodic models for sin and cos relationships have the basic form:
 
 @center{@math{f(x) = a \sin(b(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - h)) + k}}
@@ -74,11 +56,12 @@ Both @math{sin} and @math{cos} are closely related to one another, and each one 
 @QandA{
 @Q{Many of the models we've studied had a coefficient added at the end of the definition. Thinking back to what you learned, what effect do you think @math{k} has on a periodic model?}
 @A{It's the vertical shift - it moves the midline of the graph up and down the y-axis.}
+
 @Q{What effect do you think each of the _other_ coefficients has on the model?}
-@A{Some may recognize @math{h} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
+@A{Some may recognize @math{h} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the valleys lower}
 }
 
-@slidebreak
+=== Investigate
 
 @teacher{Sync or pace students to __Slide 2: Modeling the Ferris Wheel Dataset (sin)__ of @starter-file{alg2-exploring-periodic-desmos}.}
 
@@ -99,28 +82,28 @@ see if you can come up with explanations for what each of the terms on this diag
 
 @slidebreak
 
-*Peaks, Troughs and Midline*
+*Peaks, Valleys and Midline*
 
 When graphed from 0 to @math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
 
 - @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
-  * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
-- @vocab{Troughs} - the lowest points on the wave
-  * _Since periodic functions rise and fall repeatedly, there isn't a minima, but math books sometimes refer to each trough as a local minima_
-- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
+- @vocab{Valleys} - the lowest points on the wave
+- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the valleys
+
+NOTE: _Since periodic functions rise and fall repeatedly, there isn't a single maxima or minima, but math books sometimes refer to each peak and valley as a "local maxima" or "local minima"_
 
 @slidebreak
 
 ==== Amplitude @math{a}
 
-The distance from a peak or trough to the @vocab{midline}.
+The distance from a peak or valley to the @vocab{midline}.
 
 @slidebreak
 
 ==== @math{\text{Period} = 2\pi \over \text{frequency}}
 
 The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave).
-- It can be measured from peak to peak or from trough to trough.
+- It can be measured from peak to peak or from valley to valley.
 - The @vocab{frequency} (@math{b}) is _how many cycles_ occur over a @math{2\pi} interval.
 [.rideData, cols="^4a,^1a, ^1a", options="header", stripes="none"]
 |===
