@@ -13,10 +13,13 @@
 
 | Lesson Goals
 | Students will be able to...
+@objectives
 
+@scrub{
 - Read and interpret real-world data, presented in a scatter plot
 - Describe correlations as Strong, Moderate, or Weak
 - Model linear relationships using linear functions
+}
 
 | Student-facing Lesson Goals
 |
@@ -32,55 +35,94 @@
 |[.materials-links]
 @opt-material-links
 
-
-| Key Points For The Facilitator
-|
--
-- Two of the starter files referenced in this file pull data from the same spreadsheet.
-  * @starter-file{alg2-states-intro} is used for initial data exploration and the first model. There is no need to have students save this starter file.
-  * When we're ready for students to start saving things, we'll refer them to the @starter-file{alg2-states-fit-model}, which has more details in the Definitions Area to save you time.
-
 |===
 
-== Fitting the Alaska-Alabama Model
+== Fitting the Michigan-California Model
 @objective{model-interpret-residuals}
 @objective{model-predictions}
 @objective{model-fit-function}
 
 === Overview
 
-Students apply what they've learned to the Alaska-Alabama model.
+Students fit the Michigan-California model and the Alabama-Alaska model. Then they try to make some better models of their own through trial and error.
+
+=== Launch
 
 @teacher{
-While the remainder of the lesson could be done using the @starter-file{alg2-states-intro}, you will see us refer to @starter-file{alg2-states-fit-model} from here on out. This file contains the same data, but the Definitions Area is set up to save you time. `al-ak` has been predefined and the other @vocab{models} students will be asked to define during the remainder of the lesson have been started for them.
-
-Now is the time to make sure students *Save a Copy* of the file.
+@opt{@opt-printable-exercise{review.adoc} circles back to what students in learned in @lesson-link{fitting-models} so their understanding of @math{S}-values and @math{residuals} is fresh.}
 }
-
-=== Investigate
 
 @lesson-instruction{
-- Open @starter-file{alg2-states-fit-model} and save a copy that's just for you.
-- Complete @printable-exercise{model-college-v-income-2.adoc}.
+- Open your copy of @starter-file{alg2-states} and click "Run".
+- Turn to @printable-exercise{model-college-v-income-2.adoc} and complete the first section.
 }
-
-A model built from Alaska and Alabama predicts that a 1 percent increase in college degrees is associated with a $5613.67 increase in median household income.
-
-- The lowest median incomes are found in Mississippi ($39.031), Arkansas ($40,768), and West Virginia ($41,043).
-- The highest median income is found in Maryland ($73,538).
-
-With an S-value of 36165, we know that there’s enough error in the model to predict median incomes that are off by $36,165! That’s enough to double the median income of a state or cut it in half!
 
 @slidebreak
 
-*Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. __This model should not be trusted!__*
+@center{@image{images/al-ak.png, 450}}
+
+@QandA{
+@Q{What does it mean that the @math{S}-value for our `al-ak` model is 36165?}
+@A{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}
+@A{We have to look at the range of the dataset to really know what the @math{S}-value means!}
+@A{Considering the range of the data, the error in the model is enough to double the median income of a state or cut it in half!
+ *** The lowest median incomes are found in Mississippi ($39.031), Arkansas ($40,768), and West Virginia ($41,043).
+ *** The highest median income is found in Maryland ($73,538).
+}
+}
+
+@slidebreak
+
+Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. +
+__This model should not be trusted!__
+
+@opt{Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.}
+
+=== Investigate
 
 Can we do better?
 
 @lesson-instruction{
-- Complete @printable-exercise{model-college-v-income-3.adoc}.
-- @opt{Complete @opt-printable-exercise{graphing-models.adoc} for a side by side visual comparison of three of your models.}
-- What was the best model (lowest @vocab{S}!) you could come up with?
+- Complete the second section: *A Model of Your Own* on @printable-exercise{model-college-v-income-2.adoc} using the two states you identified as likely to produce a model with a better fit.
+}
+
+@slidebreak
+
+@QandA{
+@Q{We made a model using Alabama and Alaska. The @math{S}-value for this `al-ak` model is ~36164.683.}
+@Q{The `ma-nv` model was made using Massachusetts and New Mexico. The @math{S}-value for the `ma-nv` model is ~7504.54.}
+@Q{What comparisons can we make between these two models?}
+@A{We expect significantly less error in predictions made from the `ma-nv` model.}
+@A{The @math{S}-value of the `ma-nv` is 28660 dollars less!}
+@A{We expect predictions made with the `ma-nv` model to 79% less error than predictions made with the `al-ak` model.}
+}
+
+@teacher{
+Make sure your students know to how to calculate what percent less error we expect in predictions from the `ma-nv` model than the `al-ak` model. Students are about to calculate what percent more or less error we expect from predictions made with their models, which will all have different @math{S}-values. Right now everyone is looking at the same @math{S}-values so supporting them will be much less work!
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \text{Difference} &#8192; \text{between} &#8192; \text{the} &#8192; \text{S-values}&#8192;}
+{\text{S-value} &#8192; \text{for} &#8192; \text{al-ak} &#8192; \text{model}}
+\times 100 &#8192; = &#8192; }
+@math{\frac{28660}{36165} = .79 &#8192; &rarr; &#8192;  79 \%}
+}
+}
+
+@lesson-instruction{
+- Return to @printable-exercise{model-college-v-income-2.adoc} and complete the third section: *Comparing Models*.
+}
+
+@teacher{@opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
+}}
+
+@QandA{
+@Q{What was the best model (lowest @vocab{S}!) you could come up with?}
+@Q{How did your model compare to the `al-ak` model?}
+@Q{When we compared the @math{S-values} of the models, why did we divide by the @math{S-value} from the `al-ak` model?}
+@A{Because we were asking how much more or less error we expected in predictions made with our model than with the `al-ak` model - we were comparing to the `al-ak` model.}
+@A{If we had divide the `change in S` by the @math{S-value} of our model it would have answered a different question: "How much more or less error do we expect in predictions made with the `al-ak` model than with our model?"}
 }
 
 @strategy{Going Deeper}{
@@ -105,42 +147,35 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 
 === Overview
 
-Students are introduced to a the `lr-plot` function in Pyret, which uses linear regression to fit the best possible linear model to the data.
+Students are introduced to the `lr-plot` function in Pyret, which uses linear regression to fit the best possible linear model to the data.
+
+@teacher{
+If you want to spend more time with students interpreting regression results, writing about findings, or digging into @math{R^2} (a different measure of model fitness), we have an @lesson-link{linear-regression, entire Bootstrap: Data Science lesson on Linear Regression}.
+}
 
 === Launch
 
-We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values, but how do we find the _best possible linear model?_ 
+We've learned how to measure how well linear models fit the data and to decide which linear model does a better job of predicting values. We could keep guessing and picking two points over and over, and our models would likely improve, but we'd never know whether we had found the _best possible linear model_.
 
-In Statistics, an algorithm called linear regression is used to derive the slope and y-intercept of the best possible model by taking every datapoint into account. Linear regression consumes a dataset and produces a _function_ representing the best linear model.
+Luckily statisticians have developed an algorithm called @vocab{linear regression}, which, given any dataset, considers every point and produces the _best possible linear model_.
 
-We could keep guessing and picking two points over and over, and never know if we found the best linear model. Linear regression automatically finds the best-possible model, _for any dataset_. This is pretty amazing!
+Pyret's `lr-plot` function uses linear regression to graph the best possible linear model on top of a scatter plot of the dataset, and tell us the slope, y-intercept and @vocab{S-value} of the model.
 
-Pyret's `lr-plot` function finds the best model, and graphs it on top of a scatter plot, and tells us the slope and y-intercept.
 
-@strategy{More `lr-plot` material}{
-
-If you'd like to have students dig deeper into linear regression, there's an @lesson-link{linear-regression, entire lesson} you can use that spends more time interpreting results and writing about findings. This lesson also includes a discussion of @math{R^2}, a different measure of model fitness.
-}
 === Investigate
+
+Let's use Pyret to find the best possible linear model for predicting median income of a state from the percent of the population that has attended college.
 
 @lesson-instruction{
 - Turn to @printable-exercise{interpreting-linear-models.adoc} and complete the first section ("Build a Model Computationally").
-- Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-3.adoc}
+- Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-2.adoc} (and, if you completed it, to the models you built on @opt{@opt-printable-exercise{model-college-v-income-3.adoc}}).
 }
+
+@center{@image{images/lr-plot-college-v-income.png, 450}}
 
 @QandA{
 @Q{How close did your models come to the optimal model?}
 @Q{Did anything about the optimal model surprise you?}
-}
-
-@slidebreak
-
-@lesson-instruction{
-Models are only useful if know how to use them!
-
-- Turn to the second section of @printable-exercise{interpreting-linear-models.adoc}.
-- Using the interpretation of the `al-ak` model you'll find there as a guide, write up your interpretation of the optimal model you just found for this dataset. Then answer the questions that follow.
-- @opt{For more practice, build linear models for *other* relationships in the data. You can use @opt-printable-exercise{building-more-linear-models.adoc}.}
 }
 
 @strategy{Optional Activity: Guess the Model!}{
@@ -157,18 +192,57 @@ Models are only useful if know how to use them!
 === Synthesize
 
 @QandA{
-@Q{When does it make sense to make an `lr-plot`?}
-@A{When we've identified that the form of the data is linear}
+@Q{Why is it advantageous to use linear regression to find a model?}
+@A{Instead of focusing on two points, linear regression considers *all* of the points!}
+@A{We know that we are working with the best possible linear model.}
 }
 
-- How could we use scatter plots and linear models to find out if taller NBA players tend to make more three-pointers?
-- How could we use scatter plots and linear models to find out if wealthier people live longer?
-- How could we use scatter plots and linear models to find answers to _other_ questions?
+== Using and Intepreting our Models
 
-@slidebreak
+=== Overview
 
-Our model is built from data about all the existing states, which have college attendance rates between 18.3% (West Virginia) and 52.4% (Washington, DC). Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate.
+Students interpret their models, practice using them to make predictions, and consider what range of inputs will yield more reliable predictions.
 
-Is our model more reliable for one of these states than another? Why or why not?
+=== Launch
+Models are only useful if we know how to use and interpret them!
 
-@teacher{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}
+@lesson-instruction{
+- Find the second section of @printable-exercise{interpreting-linear-models.adoc}: *Interpreting the `al-ak` model*.
+- Read the model interpretation with your partner and identify where the information on each of the fill in the blanks comes from.
+- Then answer the question.
+}
+
+@QandA{
+@Q{How could we use the model to predict the median income for a state with a 30% college attendance rate.}
+@A{Compute `al-ak(30)` by substituting 30 into the equation for @math{x}.}
+@A{@math{5614 \times 30 + 83616 = ~252306}}
+}
+
+=== Investigate
+
+
+@lesson-instruction{
+- Turn to the third section of @printable-exercise{interpreting-linear-models.adoc}.
+- Using the interpretation of the `al-ak` model as a guide, write up your interpretation of the optimal model you just found for this dataset. Then answer the questions that follow.
+}
+
+@teacher{
+@opt{For more practice, have students choose to other columns in the dataset to explore the relationship between and build linear models for using @opt-printable-exercise{building-more-linear-models.adoc}.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{When does it make sense to make an `lr-plot`?}
+@A{When we've identified that the form of the data is linear}
+@Q{Our model is built from data about all of the existing states. College attendance rates range from 18.3% (West Virginia) to 52.4% (Washington, DC). +
+Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate. Is our model more reliable for one of these states than another? Why or why not?
+}
+@A{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}
+@Q{How could we use scatter plots and linear models to find answers to _other_ questions, for example:
+- Do taller NBA players tend to make more three-pointers?
+- Do wealthier people live longer?
+}
+@A{Find a dataset that contains the explanatory variable and response variable, import it into Pyret, and build an lr-plot!}
+}
+

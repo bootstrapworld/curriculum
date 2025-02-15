@@ -1,4 +1,4 @@
-= Better Modeling: College Degrees v. Income
+= More Models: College Degrees v. Income
 
 ++++
 <style>
@@ -15,9 +15,49 @@ td { padding: 0 !important; }
 ++++
 
 [.linkInstructions]
-Open your copy of the @starter-file{alg2-states-fit-model}.
+Open your copy of the @starter-file{alg2-states}.
 
-== Build a Model through Trial {amp} Error
+== Adjusting Models through Trial and Error
+@link-instructions{
+In the Definitions Area, find the section titled *Define some other models by modifying mi-ca*. +
+For now, all three definitions in this section are exactly the same as `mi-ca`. You will be changing them according to the directions below.
+}
+
+@n `less-steep`
+
+- If you wanted the model to be _less steep_, what slope could you use? @fitb{}{} +
+Change the definition for `less-steep` to use the slope you wrote above and click "Run" to load your new definition.
+
+- Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))}
+  * What is the @math{S} value of `less-steep`? @fitb{}{}
+
+- Identify a y-intercept that would make the model fit the data better: @fitb{}{}
+
+  * Adjust the definition to use the new y-intercept, click "Run" and refit the model. +
+   _Hint: You can click in the Interactions Area and hit the up arrow to bring back the last line of code you used._
+  * What is the @math{S} value of `less-steep` now? @fitb{}{}
+
+@n `negative`
+
+- If wanted your model to have a _negative slope_, what slope could you use? @fitb{}{} +
+Change the definition of `negative` to use the slope you wrote above and click "Run" to load your new definition. Then fit the model.
+
+- What is the @math{S} value of `negative`? @fitb{}{}
+
+@n `horizontal`
+
+- If you wanted your model to be horizontal, what would you have to change? @fitb{}{@ifsoln{Slope for horizontal lines should be zero, which means that the variable term can be removed.}} +
+Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model.
+
+  * What is the @math{S} value of `horizontal`? @fitb{}{}
+
+- Change the y-intercept so that the horizontal line passes through more of the data points. Click "Run" and fit this model.
+
+  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value of `horizontal` now? @fitb{}{}
+
+
+== The `ma-nv` Model
+
 Find `# Define some rows` in the Definitions Area. +
 Add two new definitions for `MA` (row 21) and `NV` (row 28), using the definitions for `alaska` and `alabama` as a model.
 
@@ -29,37 +69,10 @@ Add two new definitions for `MA` (row 21) and `NV` (row 28), using the definitio
 
 @n Derive the `MA-NV model` (using the same steps you followed to derive the `AL-AK model` on @printable-exercise{model-college-v-income-2.adoc}) and write it below (in both Function and Pyret notation), then fit the model and record the @math{S}-value:
 
-@vspace{13ex}
-
+[.FillVerticalSpace, cols="1a", frame="none"]
+|===
+|
+|===
 
 @math{ma-nv(x) =} @fitbruby{7em}{@ifsoln{827.41}}{slope (m)}x + @fitbruby{10em}{@ifsoln{34266.05}}{y-intercept / vertical shift} @hspace{1em} @show{(code '(define (ma-nv x) (+ (* (?ANS 827.41) x) (?ANS 34266.05))))} @hspace{1em} @math{S}: @fitb{5em}{@ifsoln{~7,504.54}}
-
-@vspace{1ex}
-
-@n Identify two other states that you think would make a better model: @fitb{13em}{} and @fitb{13em}{}.
-
-@vspace{1ex}
-
-Add two new definitions for these states to your @starter-file{alg2-states-fit-model}.
-
-@n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
-
-@center{
- (@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})
-}
-
-@n Derive your model and write it below (in both Function and Pyret notation), then fit the model and record the @math{S}-value:
-
-@vspace{13ex}
-
-@center{
- @math{other(x) =} @fitbruby{8em}{}{slope (m)}x + @fitbruby{10em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
-}
-
-@n Adjust the slope and y-intercept of your model to get the *smallest @math{S} possible.* Write the best model you find (and corresponding @math{S}) below:
-
-@center{
- @math{best(x) =} @fitbruby{7em}{}{slope (m)}x + @fitbruby{11em}{}{y-intercept / vertical shift} @hspace{2em} @show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
-}
-
 
