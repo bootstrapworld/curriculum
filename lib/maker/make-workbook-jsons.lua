@@ -72,7 +72,7 @@ do
       write_enclosing_matter(course_dir, 'front-matter', o)
       o:write('  ],\n')
     else
-      print(course, 'front-matter not found')
+      --print(course, 'front-matter not found')
     end
 
     o:write('  "lessons": [\n')
