@@ -1,7 +1,20 @@
 = Scatter Plots in a Nutshell
 
-*@vocab{Scatter Plots} can be used to show a relationship between two quantitative columns.* +
-Each row in the dataset is represented by a point, with one column providing the x-value and the other providing the y-value . The resulting “point cloud” makes it possible to look for a relationship between those two columns. 
+++++
+<style>
+body.LessonNotes li {
+    margin-bottom: 1px;
+}
+</style>
+++++
+
+== Relationships Between two Quantitative Columns
+
+@vspace{1ex}
+
+Scatter plots can be used to look for relationships between columns. Each row in the dataset is represented by a point, with one column providing the x-value (@vocab{explanatory variable}) and the other providing the y-value (@vocab{response variable}). The resulting “point cloud” makes it possible to look for a relationship between those two columns.
+
+@vspace{1ex}
 
 - _Form_ 
 
@@ -11,9 +24,13 @@ Each row in the dataset is represented by a point, with one column providing the
 
 @vspace{1ex}
 
-[.underline]*Line of Best Fit*
+== Line of Best Fit
 
-We graphically summarize a relationship by drawing a straight line through the data cloud, so that the vertical distance between the line and all the points taken together is as small as possible. This allows us to predict y-values (the @vocab{response variable}) based on x-values (the @vocab{explanatory variable}).
+@vspace{1ex}
+
+@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud, so that the vertical distance between the line and all the points taken together is as small as possible. This allows us to predict y-values (the @vocab{response variable}) based on x-values (the @vocab{explanatory variable}). Points that do not fit the trend line in a scatter plot are called *unusual observations*.
+
+@vspace{1ex}
 
 - _Direction_
 
@@ -25,18 +42,19 @@ We graphically summarize a relationship by drawing a straight line through the d
   * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value. 
   * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
 
-Points that do not fit the trend line in a scatter plot are called *unusual observations*.
+*Linear Regression* is a way of computing the *line of best fit*. (Want details? It minimizes the _sum of the squares_ of the vertical distances from the points to the line. There's a reason we use computers to do this!)
 
 @vspace{1ex}
 
-[.underline]*@math{r}-value*
+== Summarizing Correlations with @math{r}-values
 
-We can summarize the @vocab{correlation} between two quantitative columns in a single number.
+@vspace{1ex}
 
-- The @math{r}-value will always fall between −1 and +1. 
+The @vocab{correlation} between two quantitative columns can be summarized in a single number, the @math{r}-value.
+
 - The sign tells us whether the correlation is positive or negative.  
 - Distance from 0 tells us the strength of the correlation.
-- Here is how we might interperet some specific r-values: 
+- Here is how we might interperet some specific r-values:
   * −1 is the strongest possible negative correlation.
   * +1 is the strongest possible positive correlation.
   * 0 means no correlation.
@@ -44,10 +62,9 @@ We can summarize the @vocab{correlation} between two quantitative columns in a s
   * ±0.35 to ±0.65 is typically considered “moderately correlated”.
   * Anything less than about ±0.25 or ±0.35 may be considered weak.
 
-@indented{_Note: These cutoffs are not an exact science!_ In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
-}
+_Note: These cutoffs are not an exact science!_ In some contexts an @math{r}-value of ±0.50 might be considered impressively strong! And sample size matters! We'd be more convinced of a positive relationship in general between cat age and time to adoption if a correlation of +0.57 were based on 50 cats instead of 5.
 
 @vspace{1ex}
 
 
-[.underline]#*Correlation is not causation!*# Correlation only suggests that two column variables are related, but does not tell us if one causes the other. For example, hot days are correlated with people running their air conditioners, but air conditioners do not cause hot days!
+[.underline]#*Correlation is not causation!*# Correlation only suggests that two variables are related. It does not tell us if one causes the other. For example, hot days are correlated with people running their air conditioners, but air conditioners do not cause hot days!
