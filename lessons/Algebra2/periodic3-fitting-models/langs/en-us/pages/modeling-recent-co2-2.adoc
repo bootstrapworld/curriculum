@@ -12,10 +12,12 @@ body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
 table+.paragraph .autonum {padding-top: 0; }
 
-/* Shorten fill in the blanks */
+/* Shorten fill in the blanks, and give fitbrubies more vertical space */
 .fitb, .fitbruby { min-width: 2em; }
 .indentedpara .fitbruby { padding-top: 0.8rem; }
 .studentAnswerMedium { min-width: 80pt !important; }
+.fitbruby{ margin-bottom: 1rem; }
+.ruby { bottom: -13px !important; }
 </style>
 ++++
 
@@ -28,6 +30,7 @@ table+.paragraph .autonum {padding-top: 0; }
 (define b 6.28)
 (define k 419.87)
 (define h 2023.1)
+(define h2 2023.1) ; TODO(Emmanuel): needs the solution here
 }
 
 @define{hi}{@show{hi}}
@@ -39,6 +42,12 @@ table+.paragraph .autonum {padding-top: 0; }
 @define{b}{@show{b}}
 @define{k}{@show{k}}
 @define{h}{@show{h}}
+
+@link-instructions{
+This page relies on the @starter-file{alg2-co2}. Make sure you have it open on your computer!
+}
+
+== Fitting Your Periodic Model
 
 @n Using your computed values for @math{a}, @math{b}, @math{h}, and @math{k}, define your periodic function below in both Function and Pyret notation.
 
@@ -58,7 +67,6 @@ table+.paragraph .autonum {padding-top: 0; }
 @show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,k))))) (?ANS ,h))))}
 |===
 
-
 @n Define this model in Pyret, and fit it to the `recent` data. What S-value do you get? @fitb{}{@ifsoln{Answers will vary, but should be close to 1.2}}
 
 @n *What does this model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
@@ -68,3 +76,33 @@ table+.paragraph .autonum {padding-top: 0; }
 @indented{
 _Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{5em}{@ifsoln{@math{2pi}}}{frequency}._
 }
+
+@star In the table below, re-write your model to use @math{\text{cosine}} instead of @math{\text{sine}}:
+
+[cols="1a, ^.^12a", frame="none", stripes="none"]
+|===
+| *Function Notation*
+|
+
+@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
+@math{cos}(
+ @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@h2}}{horizontal shift})
+) + @fitbruby{70pt}{@ifsoln{@k}}{vertical shift}
+
+| @vspace{1ex} +
+*Pyret Notation*
+|
+@show{(code `(define (periodic x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,k))))) (?ANS ,h2))))}
+|===
+
+== Just how Good _is_ this Model?
+
+Your model fits the `recent-table`, which covers the most recent full year of our dataset. But does it fit more than just that one year?
+
+@n In Pyret, fit your model to the `modern-table`, and draw your model on the scatter plot below. What @math{S}-value do you get? @fitb{}{}
+
+@center{@image{../images/modern-co2-scatter.png, 300}}
+
+@n What needs to happen for your model to fit better? @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
