@@ -51,20 +51,33 @@ What do you think it does? @fitb{}{}
 @n Let's interpret this model:
 
 @indented{
-__A country where the @fitbruby{25em}{@ifsoln{pc-gdp}}{x-axis} is @fitbruby{3em}{@ifsoln{10}}{base (b)} times higher than another is also__ +
-@hspace{em} __predicted to have a @fitbruby{20em}{@ifsoln{median-lifespan}}{y-axis} that is @fitbruby{8em}{@ifsoln{11.9}}{log coefficient (a)} @fitbruby{10em}{@ifsoln{years}}{y-axis units} longer.__
+__A country where the @fitbruby{25em}{@ifsoln{pc-gdp}}{explanatory variable (x)} is @fitbruby{3em}{@ifsoln{10}}{base (b)} times higher than another is also__ +
+@hspace{em} __predicted to have a @fitbruby{20em}{@ifsoln{median-lifespan}}{response variable (y)} that is @fitbruby{8em}{@ifsoln{11.9}}{log coefficient (a)} @fitbruby{10em}{@ifsoln{years}}{y-axis units} longer.__
 }
 
-@n Add the definition of `logarithmic3` to your starter file, and use `fit-model` to calculate the value of @math{S}: @fitb{15em}{@ifsoln{4.4904}}
+@n Add the definition of `logarithmic3` to your starter file. Use `fit-model` to calculate the @vocab{S-value} and complete the table below:
 
-@n Complete the table below, copying your @math{S} values from the previous models:
-
-[cols="^1a,^1a,^1a,^1a"]
+[cols="1a,^2a,^2a,^2a,^2a"]
 |===
-| Linear		|	Quadratic	| Exponential	| Logarithmic
+|				| Linear		|	Quadratic	| Exponential	| Logarithmic
 
-| @vspace{1ex}	|				|				|
+|@math{S-value}	| @vspace{1ex}	|				|				|@ifsoln{4.4904}
 |===
 
-@n Compare the two smallest @math{S} values using percent change. _How much better_ is the logarithmic model? @fitb{}{} +
-@fitb{}{}
+@n Compare the two smallest @math{S} values using percent change. @math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{second} &#8192; \mbox{best} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }@ifnotsoln{@math{\frac{\qquad}{\qquad}}} @scrub{@ifsoln{@math{\frac{25384.76}{36164.683} = .70  &#8192; &rarr; &#8192;  70 \%}}}
+
+@scrub{
+A note for future authors:
+- &#8192; is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@vspace{1ex}
+
+Predictions made with the logarithmic model are expected to have
+@fitb{2em}{@ifsoln{}} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than predictions made with the @fitb{10em}{} model!
