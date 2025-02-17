@@ -10,7 +10,8 @@ initialization:
 	@mkdir -p $(PROGDIR)
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
-	@$(CP) -upr shared/langs/en-us/*.css distribution/$(NATLANG)/lib
+	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css	
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
@@ -31,8 +32,7 @@ initialization:
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
-	@$(CP) -p lib/fonts/* distribution/$(NATLANG)/lib/fonts
-	@$(CP) -p shared/langs/en-us/*.css distribution/$(NATLANG)/lib
+	@$(CP) -pr lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
 	@echo 'return {' > $(SETUP_WORKBOOKPAGE)

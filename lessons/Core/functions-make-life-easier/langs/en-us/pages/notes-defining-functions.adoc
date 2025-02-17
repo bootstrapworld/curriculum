@@ -1,12 +1,24 @@
-= Defining Functions
+= Defining Functions in a Nutshell
 
-Functions can be viewed in _multiple representations_. You already know one of them: @vocab{Contracts}, which specify the Name, Domain, and Range of a function. Contracts are a way of thinking of functions as a _mapping_ between one set of data and another. For example, a mapping from Numbers to Strings:
+Functions can be viewed in _multiple representations_.
+
+@vspace{1ex}
+
+== Contract and Purpose
+
+You already know one of them: @vocab{Contracts}, which specify the Name, Domain, and Range of a function. Contracts are a way of thinking of functions as a _mapping_ between one set of data and another. For example, a mapping from Numbers to Strings:
+
+@vspace{1ex}
 
 @show{(contract 'f '("Number") "String")}
 
 @vspace{1ex}
 
-Another way to view functions is with @vocab{Examples}. Examples are essentially input-output tables, showing what the function would do for a specific input:
+== Examples
+
+The goal of the @vocab{Examples} step is to _find the pattern_ that represents what the function does.
+
+Examples are essentially input-output tables, showing what the functions does with a list of specific inputs:
 
 [cols="1,1", stripes="none", options="header"]
 |===
@@ -18,7 +30,7 @@ Another way to view functions is with @vocab{Examples}. Examples are essentially
 
 |===
 
-In our programming language, we focus on the last two columns and write them as code:
+In our programming language, we write these columns as code:
 
 @ifproglang{wescheme}{
 ```
@@ -39,20 +51,18 @@ end
 ```
 }
 
+== Definition
+The final step in the Design Recipe is to _generalize the pattern_ we see in our examples by writing a formal *function definition*. To do this we replace the inputs with @vocab{variables} that can work with any input.
+
+In the example below, the definition for the examples above is written in both math and code:
+
 @vspace{1ex}
 
-Finally, we write a formal *function definition* ourselves. The pattern in the Examples becomes _abstract_ (or "general"), replacing the inputs with @vocab{variables}. In the example below, the same definition is written in both math and code:
+@indented{@math{f(x) = x + 2} @hspace{3em} @show{ (code '(define (f x) (+ x 2)) )} }
 
 @vspace{1ex}
-[.indentedpara]
---
-@math{f(x) = x + 2}
 
-@show{ (code '(define (f x) (+ x 2)) ) }
---
-@vspace{1ex}
-
-Look for connections between these three representations!
+== Look for connections between these three representations!
 
 - The function name is always the same, whether looking at the Contract, Examples, or Definition.
 - The number of inputs in the Examples is always the same as the number of types in the Domain, which is always the same as the number of variables in the Definition.

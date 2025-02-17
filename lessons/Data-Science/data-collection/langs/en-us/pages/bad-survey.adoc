@@ -1,33 +1,52 @@
 = Bad Questions Make Dirty Data
 
-The *Height v Wingspan Survey* has _lots_ of problems, which can lead to many kinds of dirty data: Missing Data, Inconsistent Types, Inconsistent Units and Inconsistent Language! Using the link provided by your teacher to your class' copy of the survey, try filling it out with bad data. Record the problems and make some recommendations for how to improve the survey!
+The *Height v Wingspan Survey* has _lots_ of problems, which can lead to many kinds of dirty data: Missing Data, Inconsistent Types, Inconsistent Units and Inconsistent Language! Using the link provided by your teacher to your class' copy of the survey, try filling it out with bad data. Record the problems for each question and make some recommendations for how to improve the survey!
 
-[.FillVerticalSpace, cols="^.^1a,^.^10a,^.^11a", options="header"]
+[.FillVerticalSpace, cols="^.^3a,10a,10a", options="header"]
 |===
 |
 | What examples of bad data were you able to submit?
 | How could the survey be improved to avoid bad data?
 
-|*@n*
-| @ifsoln{*Inconsistent Types* I could enter 13 as an answer (a number), but I could also enter “teenager” (a string). This would mess up anyone who is trying to find the median age of the survey, for example.}
+|*A* +
+Age
+| @ifsoln{
+- *Inconsistent Types* I could enter 13 as an answer (a number), but I could also enter “teenager” (a string). This would mess up anyone who is trying to find the median age of the survey, for example.
+- *Inconsistent Units* I could also enter "13 years" or "4,745 days".
+}
 
-@ifsoln{*Inconsistent Units* I could also enter "13 years" or "4,745 days".}
+| @ifsoln{
+- Add input validation so only numbers within a certain range can be submitted
+}
 
-| @ifsoln{Add some kind of input validation so only valid answers can be submitted}
+|*B* +
+Grade
+| @ifsoln{
+- *Inconsistent Types*  I could select 5 or 6, but I can also select both grades. That means the resulting column might have lots of numbers….and then a few cells that look like “5, 6” (a string).
+}
+| @ifsoln{
+- Use a dropdown, or some other format that only allows single responses
+}
 
-|*@n*
-| @ifsoln{*Inconsistent Types*  I could select 5 or 6, but I can also select both grades. That means the resulting column might have lots of numbers….and then a few cells that look like “5, 6” (a string).}
-| @ifsoln{Use a dropdown, or some other format that only allows single responses}
+|*C* +
+Height
+| @ifsoln{
+- *Inconsistent Units* The question asks for inches, but people don't always read carefully. There's nothing to stop someone from submitting @math{5' 8"} or @math{173cm} instead of @math{68 inches}.
+}
+| @ifsoln{
+- Add validation so impossible values get rejected.
+}
 
-|*@n*
-| @ifsoln{*Inconsistent Units* The questions ask for inches, but people don't always read carefully. There's nothing to stop someone from submitting "1.5" (maybe they're thinking of meters?) or "2000" (millimeters?).}
-| @ifsoln{Add validation so impossible values get rejected}
+|*D* +
+Wingspan
+| @ifsoln{
+- *Inconsistent Types* There is nothing to stop someone from answering with Numbers, Strings, Booleans, etc.
+- *Inconsistent Units* Someone could easily answer with a number of inches, feet, meters, etc.
+- *Missing Data* Someone could submit the form without answering this question!}
 
-|*@n*
-| @ifsoln{*Inconsistent Types* There is nothing to stop someone from answering with numbers, strings, booleans, etc.}
-
-@ifsoln{*Inconsistent Units* Someone could easily answer with a number of inches, feet, meters, etc.}
-
-| @ifsoln{Add some kind of input validation so only valid answers can be submitted}
+| @ifsoln{
+- Make this question required.
+- Add some kind of input validation so only valid answers can be submitted
+}
 
 |===

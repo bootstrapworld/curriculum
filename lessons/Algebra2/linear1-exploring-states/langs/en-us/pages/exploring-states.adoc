@@ -1,7 +1,17 @@
 = Exploring the States Dataset
+++++
+<style>
+/* This page has an unusual configuration, where there's only one
+   2nd level section but it doesn't start at the beginning.
+   Stop that section from auto-growing, thereby freeing up vertical
+   space for the first section in order to maximize the table height
+ */
+#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
+</style>
+++++
 
 [.linkInstructions]
-Open the @starter-file{alg2-states-intro}.
+Open the @starter-file{alg2-states}.
 
 Then, click "Run" and type `states-table` into the Interactions Area on the right to see the dataset.
 
@@ -13,37 +23,45 @@ Then, click "Run" and type `states-table` into the Interactions Area on the righ
 |
 |===
 
-@n What code will produce a table showing the number of states in each region? @fitb{}{@ifsoln{@show{(code '(count states-table "region"))}}}
 
-@n Which states do you *think* have the most people? @fitb{}{}
+== Describing Income
 
-@n What code will produce a table containing the five states with the largest population in 2020? +
-@fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "pop-2020" false) 5))}}}
+@n Identify the two states with the lowest *median* income and complete the table below with their information.
+_Hint: You could make a table to help you answer this question! If you need a refresher on how to use `count`, `first-n-rows`, and `sort`, you'll find them in the @dist-link{Contracts.shtml, Contracts Pages}!_
 
-@n Which states do you *think* have the most poverty? @fitb{}{}
+@indented{
+[cols="1a,1a,1a", options="header"]
+|===
+|State                  | Median Household Income        | Per-capita Income
+| @ifsoln{Mississippi}  | @ifsoln{39031}                 | @ifsoln{20618} @ifnotsoln{@vspace{2ex}}
+| @ifsoln{Arkansas}     | @ifsoln{40768}                 | @ifsoln{22170} @ifnotsoln{@vspace{2ex}}
+|===
+}
 
-@n What code will produce a table containing the ten states with the highest % of people in poverty? +
-@fitb{}{@ifsoln{@show{(code '(first-n-rows (sort states-table "pct-poverty" false) 10))}}}
+@n Would a model built from two states with low `median-income` be likely to fit the data well? Why or Why not?
 
-@n What code will produce a table containing the states with the lowest *median* income? +
-@fitb{}{@ifsoln{@show{(code '(sort states-table "median-income" false))}}}
+@fitb{}{@ifsoln{No! This is a particular subset of the data with shared characteristics (also called a grouped sample)}}
 
-@n What code will produce a table containing the states with the lowest *per-capita* ("average" or "mean") income? +
-@fitb{}{@ifsoln{@show{(code '(sort states-table "per-capita-income" false))}}}
+@fitb{}{@ifsoln{and is unlikely to be representative of the pattern in the full dataset.}}
 
-@star What does it mean if a state has a higher `per-capita income` than `median-income`? @fitb{}{} +
-@fitb{}{@ifsoln{The state has a number of "high-earning outliers", which skew the average}}
 
-@vspace{1ex}
+@n Why do states typically have higher `median-income` than `per-capita income`? @fitb{}{} +
+
+@fitb{}{@ifsoln{Because per capita income divides the total earnings of the state by all of the people living in it, including children, retirees, and unemployed individuals. }}
+
+@fitb{}{@ifsoln{Median household income compares the money earned by household. Households can have anywhere from 1 person to many people living in them. }}
+
+@fitb{}{@ifsoln{There might not be anyone in a household who earns an income, or there could be multiple adults earning an income.}}
+
+[.no-flex-section]
+== Definitions in the Code
 
 _The two lines of code under `# Define some rows` extract rows 0 and 1 from the table, and define them as `alabama` and `alaska`._
 
 @n Type `alabama` into the Interactions Area. What do you get back? @fitb{}{@ifsoln{Just the Row for Alabama}}
 
-@n Underneath the definition of those rows, *add a new definition* for `california` and click "Run", so that Pyret reads your new definition.
+@n Underneath the definition of those rows, *add new definitions* for `california`, `michigan`, and one other state. Click "Run", so that Pyret reads your new definitions and test them out in the Interactions Area to make sure you defined them correctly!
 
-@n Add a definition for your own state, then *click "Run"* and test it out in the Interactions Area!
-
-@n Add any additional Notices or Wonderings you have about this dataset to the table at the top.
+@star Add any additional Notices or Wonderings you have about this dataset to the table at the top.
 
 

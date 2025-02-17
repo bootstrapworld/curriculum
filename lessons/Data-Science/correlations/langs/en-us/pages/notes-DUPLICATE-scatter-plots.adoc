@@ -1,27 +1,70 @@
-= Correlations in Scatter Plots
+= Scatter Plots in a Nutshell
 
-*Scatter Plots* can be used to show a relationship between two quantitative columns. Each row in the dataset is represented by a point, with one column providing the x-value and the other providing the y-value.
+++++
+<style>
+body.LessonNotes li {
+    margin-bottom: 1px;
+}
+</style>
+++++
 
-The resulting “point cloud” makes it possible to look for a relationship between those two columns.
+== Relationships Between two Quantitative Columns
 
-- If the points in a scatter plot appear to follow a straight line, it suggests that a linear relationship exists between those two columns. A number called a *correlation* can be used to summarize this relationship.
+@vspace{1ex}
 
-- @math{r} is the name of the *correlation statistic*. The @math{r}-value will always fall between −1 and +1. The sign tells us whether the correlation is positive or negative.  Distance from 0 tells us the strength of the correlation.
-** −1 is the strongest possible negative correlation.
-** +1 is the strongest possible positive correlation.
-** 0 means no correlation.
-** ±0.65 or ±0.70 or more is typically considered a "strong correlation".
-** ±0.35 and ±0.65 is typically considered “moderately correlated”.
-** Anything less than about ±0.25 or ±0.35 may be considered weak.
-** *However, these cutoffs are not an exact science!* In some contexts an @math{r}-value of ±0.50 might be considered impressively strong!
+Scatter plots can be used to look for relationships between columns. Each row in the dataset is represented by a point, with one column providing the x-value (@vocab{explanatory variable}) and the other providing the y-value (@vocab{response variable}). The resulting “point cloud” makes it possible to look for a relationship between those two columns.
+
+@vspace{1ex}
+
+- _Form_
+
+  * If the points in a scatter plot appear to follow a straight line, it suggests that a @vocab{linear relationship} exists between those two columns.
+  * Relationships may take other forms (u-shaped for example). If they aren't linear, it won't make sense to look for a correlation.
+  * Sometimes there will be no relationship at all between two variables.
+
+@vspace{1ex}
+
+== Line of Best Fit
+
+@vspace{1ex}
+
+@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud, so that the vertical distance between the line and all the points taken together is as small as possible. This allows us to predict y-values (the @vocab{response variable}) based on x-values (the @vocab{explanatory variable}). Points that do not fit the trend line in a scatter plot are called *unusual observations*.
+
+@vspace{1ex}
+
+- _Direction_
+
+  * The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values.
+  * The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
+
+- _Strength_
+
+  * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value.
+  * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
+
+*Linear Regression* is a way of computing the *line of best fit*. (Want details? It minimizes the _sum of the squares_ of the vertical distances from the points to the line. There's a reason we use computers to do this!)
+
+@vspace{1ex}
+
+== Summarizing Correlations with @math{r}-values
+
+@vspace{1ex}
+
+The @vocab{correlation} between two quantitative columns can be summarized in a single number, the @math{r}-value.
+
+- The sign tells us whether the correlation is positive or negative.
+- Distance from 0 tells us the strength of the correlation.
+- Here is how we might interperet some specific r-values:
+  * −1 is the strongest possible negative correlation.
+  * +1 is the strongest possible positive correlation.
+  * 0 means no correlation.
+  * ±0.65 or ±0.70 or more is typically considered a "strong correlation".
+  * ±0.35 to ±0.65 is typically considered “moderately correlated”.
+  * Anything less than about ±0.25 or ±0.35 may be considered weak.
+
+_Note: These cutoffs are not an exact science!_ In some contexts an @math{r}-value of ±0.50 might be considered impressively strong! And sample size matters! We'd be more convinced of a positive relationship in general between cat age and time to adoption if a correlation of +0.57 were based on 50 cats instead of 5.
+
+@vspace{1ex}
 
 
-- The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values. The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
-
-- It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value. It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
-
-- Points that do not fit the trend line in a scatter plot are called *unusual observations*.
-
-- We graphically summarize this relationship by drawing a straight line through the data cloud, so that the vertical distance between the line and all the points taken together is as small as possible. This line is called the *line of best fit* and allows us to predict y-values based on x-values.
-
-- [.underline]#*Correlation is not causation!*# Correlation only suggests that two column variables are related, but does not tell us if one causes the other. For example, hot days are correlated with people running their air conditioners, but air conditioners do not cause hot days!
+[.underline]#*Correlation is not causation!*# Correlation only suggests that two variables are related. It does not tell us if one causes the other. For example, hot days are correlated with people running their air conditioners, but air conditioners do not cause hot days!

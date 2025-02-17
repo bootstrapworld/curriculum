@@ -109,7 +109,7 @@
                  *type* ; type
                  "" ; child categories
                  (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
-                 "public"
+                 "publish"
                  *official-date*
                  )))))
 

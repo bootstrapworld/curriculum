@@ -3,47 +3,50 @@
 <style>
 /* Shrink fill in the blanks */
 .studentAnswerMedium { min-width: 8em !important; }
+.fitbruby {padding-top: 1rem !important;}
 </style>
 ++++
 
 [.linkInstructions]
-Open the @starter-file{alg2-states-intro}.
+Open the @starter-file{alg2-states}.
+
+[.no-flex-section]
+== The Alabama - Alaska Model
 
 @n Record the `pct-college-or-higher` and `median-income` values for the `alabama` and `alaska` rows, as @math{(x,y)} pairs below:
 
 @center{
- (@fitbruby{10em}{@ifsoln{22.6}}{AL pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AL median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AK median-income})
+(@fitbruby{10em}{@ifsoln{22.6}}{AL pct-college-or-higher}, @fitbruby{10em}{@ifsoln{43253}}{AL median-income}) @hspace{10em} (@fitbruby{10em}{@ifsoln{27.5}}{AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{AK median-income})
 }
 
 @n We want to understand how change (@math{\Delta}) in the percent of the population that attended college relates to change (@math{\Delta}) in the median income. 
 
-[.indentedpara]
---
+@indented{
 Compute @math{\Delta \mbox{median-income} =} @fitbruby{12em}{@ifsoln{70760}}{AK median-income} @math{-} @fitbruby{12em}{@ifsoln{43253}}{AL median-income} = @fitb{}{@ifsoln{27507}}
 
 Compute @math{\Delta \mbox{pct-college-or-higher} =} @fitbruby{12em}{@ifsoln{27.5}}{AK pct-college-or-higher} @math{-} @fitbruby{12em}{@ifsoln{22.6}}{AL pct-college-or-higher} = @fitb{}{@ifsoln{4.9}}
 
 @vspace{1ex}
 
-Compute the slope/rate of change between `AL` and `AK`: @math{\frac{\Delta \mbox{median-income}}{\Delta \mbox{pct-college-or-higher}} =} @ifnotsoln{@math{\frac{\qquad\qquad\qquad}{\qquad \qquad \qquad \qquad } =} } @ifsoln{@math{\frac{27507}{4.9} = }} @fitb{}{@ifsoln{5613.67}}
+Compute the slope/rate of change between `AL` and `AK`: @math{\frac{\Delta \mbox{median-income}}{\Delta \mbox{pct-college-or-higher}} =} @ifnotsoln{@math{\frac{\qquad\qquad\qquad}{\qquad \qquad \qquad \qquad } =} } @ifsoln{@math{\frac{27507}{4.9} = 5613.67}} +
 
 _Based solely on data from Alabama and Alaska, we are seeing that a @fitbruby{10em}{@ifsoln{4.9}}{&#916; pct-college-or-higher} percent increase in college graduates among the population translates to a @fitbruby{10em}{@ifsoln{27507}}{&#916; median-income} dollar increase in median income._
+}
 
---
+@n Let's use the slope-intercept form of the line to calculate the y-intercept / vertical shift of the line passing through `AK` and `AL`.
 
-@n Now, let's use the slope-intercept form of the line to calculate the y-intercept / vertical shift of the line passing through `AK` and `AL`.
-
-[.indentedpara]
---
+@indented{
 @fitbruby{10em}{@ifsoln{70760}}{y} @math{=} @fitbruby{10em}{@ifsoln{5613.67}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{27.5}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
 
-@vspace{11ex}
+[.FillVerticalSpace, cols="1a", frame="none"]
+|===
+|
+|===
 
 - Find the @math{x} and @math{y} values from the `AK` row: (@fitbruby{12em}{@ifsoln{27.5}}{ *x* {two-colons} AK pct-college-or-higher}, @fitbruby{12em}{@ifsoln{70760}}{ *y* {two-colons} AK median-income})
 - Now, replace @math{y}, @math{m}, and @math{x} in the equation above with values from the `AK` row and the slope we just calculated in question 2.
 - Then solve the equation above for @math{b =} @fitb{8em}{@ifsoln{-83616.02}}
-
---
+}
 
 @n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
 
@@ -53,24 +56,31 @@ _Based solely on data from Alabama and Alaska, we are seeing that a @fitbruby{10
 
 @vspace{1ex}
 
-Return to your copy of the starter file and add the code you just wrote to the Definitions Area. Then Click "Run". 
+Return to your copy of the starter file and add the code you just wrote to line 44 of the Definitions Area. Then Click "Run".
 
 @n In the Interactions Area, try plugging in the `pct-college-or-higher` value for Alabama by typing `al-ak(22.6)`. 
 
-[.indentedpara]
---
+@indented{
 - How well does it predict the correct median income for Alabama? @fitb{}{@ifsoln{close! 43252.922}} 
 - What expression would predict median income for Alaska? @fitb{}{@ifsoln{`al-ak(27.5)`}}.
 - How well does it predict the correct median income for Alaska? @fitb{}{@ifsoln{close! 70759.905}} 
-
---
+}
 
 @vspace{1ex}
 
-Try different `pct-college-or-higher` values from _other_ states, to see how well our Alabama-Alaska model fits the rest of the country. 
+*Try `pct-college-or-higher` values from other states, to see how well our Alabama-Alaska model fits the rest of the country.*
 
 @n Identify a state for which this model works well: @fitb{}{@ifsoln{Examples: Iowa, Indiana...}}
 
 @n Identify a state for which this model works poorly: @fitb{}{@ifsoln{Examples: Vermont, Massachusetts...}}
 
 @n What median income does this model expect a state with zero college graduates to earn? @fitb{}{@ifsoln{-$83616.02}}
+
+[.no-flex-section]
+== Another Model
+
+@n Look at the scatter plot. Imagine you were going to define another model. Identify two other states that would likely generate a better fit.
+
+@ifnotsoln{@indented{@fitb{25em}{} @hspace{1em} and @hspace{1em} @fitb{25em}{}}}
+
+@teacher{Answers will vary. But West Virginia and Massachusetts could be a good option.}

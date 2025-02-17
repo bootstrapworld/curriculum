@@ -263,18 +263,18 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_bootstrap_lesson_p then
       add_bootstrap_lesson_p = false
-      o:write('<!-- Load PDF and Download modules -->\n')
-      o:write('<script defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
-      o:write('<script defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
-      o:write('<script defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
-
-      --o:write('<script src="' .. local_dist_root_dir .. 'lib/langtable.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
+      if tipe ~= 'workbookpage' then
+        o:write('<!-- Load PDF and Download modules -->\n')
+        o:write('<script defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
+        o:write('<script defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
+        o:write('<script defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'starterFiles.js"></script>\n')
+      end
       o:write('<script src="' .. local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'starterFiles.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --
@@ -282,7 +282,6 @@ local function postproc(fhtml_cached, tipe)
       -- print('adding mathjax')
       add_mathjax_p = false
       o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
-      -- o:write('<script src="' .. local_dist_root_dir .. 'extlib/mathjax/tex-chtml-full-speech.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
