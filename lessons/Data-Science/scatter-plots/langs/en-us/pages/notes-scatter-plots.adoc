@@ -22,27 +22,31 @@ Scatter plots can be used to look for relationships between columns. Each row in
   * Relationships may take other forms (u-shaped for example). If they aren't linear, it won't make sense to look for a correlation.
   * Sometimes there will be no relationship at all between two variables.
 
+- _Direction_
+
+  * The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values.
+  * The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
+
+- _Strength_
+
+  * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value.
+  * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
+
 @vspace{1ex}
 
 == Line of Best Fit
 
 @vspace{1ex}
 
-@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud, so that the vertical distance between the line and all the points taken together is as small as possible. This allows us to predict y-values (the @vocab{response variable}) based on x-values (the @vocab{explanatory variable}). Points that do not fit the trend line in a scatter plot are called *unusual observations*.
+@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud. This allows us to make predictions about y-values from x-values. While we can draw a line that generalizes the pattern we see ourselves, it probably won't actually be the *best possible* linear model for the data.
 
 @vspace{1ex}
 
-- _Direction_
+*Linear Regression* is a way of computing the *line of best fit*.  It considers every single data point to generate the optimal linear model, with the smallest possible vertical distance between the line and all the points taken together. _(More specifically, the computer minimizes the sum of the squares of the vertical distances from all of the points to the line. There's a reason we use computers to do this!)_
 
-  * The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values. 
-  * The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
+@vspace{1ex}
 
-- _Strength_
-
-  * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value. 
-  * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
-
-*Linear Regression* is a way of computing the *line of best fit*. (Want details? It minimizes the _sum of the squares_ of the vertical distances from the points to the line. There's a reason we use computers to do this!)
+Points that do not fit the trend line in a scatter plot are called *unusual observations*.
 
 @vspace{1ex}
 
