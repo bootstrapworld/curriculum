@@ -364,7 +364,7 @@ const AI = {
   "spell-checker": {
     "title": "Spell Checker Starter File",
     "pyret": {
-      "url": "https://code.pyret.org/editor#program=1aOVV_etaxNQKnwL1qUzGoBqhX3F2i2K8"
+      "url": "https://code.pyret.org/editor#share=19_ZCcz7MjjYnBU8Dvnsh2LtAvqpga4IY&v=8710c6a"
       }
     },
   "plagiarism": {

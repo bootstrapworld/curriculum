@@ -28,46 +28,51 @@ Let's think about training, the act of transforming data into a model.
 |===
 
 
-
-
-
 == Song Recommendation Systems
 
 @objective{training}
 
 === Overview
 
-Students explore song recommendation, another example of a data-driven algorithm. They consider how data aggregation is a key component of machine learning.
+Students explore song recommendation, another example of data-driven algorithms at work. Students consider how data aggregation is a key component of machine learning.
 
 === Launch
 
 Data is at the heart of data science, and--as you learned during the previous lesson--@vocab{data-driven algorithms} are at the heart of AI. This statement is true of spell checkers, which we explored, along with many other types of programs that employ machine learning.
 
-The type of data that must be processed varies by situation, of course. While it is true that providing _more_ data often produces better results, we also need to consider how other variables can influence the quality of output.
+While it is true that providing _more_ data often produces better results, we must also consider how other variables can influence the quality of output.
 
 @lesson-instruction{
-- Read the brief story on @printable-exercise{case-study-michelle.adoc} and respond to the questions, providing as much detail as you can.
+- Read @printable-exercise{case-study-michelle.adoc} and respond to the questions, providing as much detail as you can.
 }
 
-@teacher{Invite students to share their responses. Their responses will likely highlight that data-driven algorithms produce a higher quality output when we provide more data. If your students do *not* propose that the algorithm was *probably* updated (as we suggest in the answer key), that's okay! There's no need to reveal that possibility yet; instead, circle back to @printable-exercise{case-study-michelle.adoc} after your students complete and discuss @printable-exercise{song-recommending.adoc}.}
+@teacher{Invite students to share their responses.
 
-For Michelle to get better results, changing the code is not necessarily needed... although it is always a possibility! Let's consider song recommendation in more depth, and explore the idea that sometimes, _there is a need for algorithms to change_.
+If their responses highlight that data-driven algorithms produce a higher quality output when we provide more data--great! Your students understood the key take-away from @lesson-link{data-driven-algorithms, "the previous lesson"}.
+
+You probably noticed that the solutions on @printable-exercise{case-study-michelle.adoc} bring new complexity to the conversation by acknowledging the possibility that *programmer interference* could be the cause of Michelle's increased satisfaction with her play list.
+
+If your students do *not* propose that the Spotify's algorithm was updated (as we suggest in the answer key), that's okay! *There's no need to reveal that possibility immediately.* We recommend moving on with the lesson. After completing @printable-exercise{song-recommending.adoc}, you can circle back to @printable-exercise{case-study-michelle.adoc}.
+}
 
 === Investigate
+
+For Michelle to get better results, changing the code is not necessarily needed... although it is always a possibility! Let's consider song recommendation in more depth, and explore the idea that sometimes, _there is a need for algorithms to change_.
 
 Very broadly, a song recommendation system does two things:
 
 - it has some knowledge of what the listener already likes
 - given a new song, it determines whether or not to recommend that song
 
-In order for Spotify to do the predictive work that we expect it to do (step 2, above), it must do more than keep a running list of the songs that Michelle listens to. Instead, it must _aggregate_ her listening history: over time, Spotify builds a detailed profile of each user's musical tastes. But what does that entail?
+In order for Spotify to do the predictive work that we expect (step 2, above), storing a list of Michelle's music is insufficient! Instead, the program must _aggregate_ her listening history: that is, over time, Spotify builds a detailed profile of each user's musical tastes. But what does that entail?
 
 @lesson-instruction{
-- Design your own song recommendation system!
 - With a partner, complete @printable-exercise{song-recommending.adoc}.
+- First, you will think about different metadata that can be collected and stored.
+- Then, you will (informally) design your own song recommendation system!
 }
 
-@vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to recommend. In the case of Spotify, the model is a summary of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
+@vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
 
 @teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Be sure to discuss all of the possibilities that we outline in the solutions: perhaps the model changed a little, or perhaps the model changed a lot... there's no way for us to know!}
 
@@ -75,9 +80,7 @@ In order for Spotify to do the predictive work that we expect it to do (step 2, 
 
 @QandA{
 
-@Q{In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers.
-
-Why do you think models are generally smaller than the training data?}
+@Q{In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers. *Why do you think models are generally smaller than the training data?*}
 
 @A{Generally, the model *summarizes* the data, eliminating all but its most essential features--the features that enable it to make predictions, generate text, etc.}
 }
@@ -160,7 +163,7 @@ If we were to plot a point for the vector on the coordinate plane, it would prod
 
 @QandA{
 @Q{What is the bag-of-words summary for Document b?}
-@A{The bag-of-words summary for Document A looks like this: `"doo": 3, "be": 2`}
+@A{The bag-of-words summary for Document b looks like this: `"doo": 3, "be": 2`. It should be identical to the bag-of-words summary for Document a; `"be": 2, "doo": 3` is also acceptable! Adhering to the same word order is required.}
 
 @Q{How would you represent the vector for Document b on the coordinate plane?}
 @A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each Bag of Words. Because we decided on "doo" then "be" for document a, we must use "doo" then "be" for document b also.}
@@ -246,7 +249,7 @@ We must revise our bag-of-words summaries and our vectors!
 
 The new bag-of-words summary for Document c is `"doo": 5, "be": 2, "bop": 0`, which we can represent as  @math{\overrightarrow{c} = (5, 2, 0)}.
 
-The new bag-of-words summary for Document d is `"doo":0, "be": 2, "bop": 5`, and we can represent it as @math{\overrightarrow{d} = (0, 2, 5)}.
+The new bag-of-words summary for Document d is `"doo": 0, "be": 2, "bop": 5`, and we can represent it as @math{\overrightarrow{d} = (0, 2, 5)}.
 
 @right{@image{images/2pts.png, 200}}
 
@@ -260,24 +263,29 @@ For @math{\overrightarrow{d}}, again envision a sheet of paper resting on a tabl
 Training is the act of transforming *data* into a *model*.
 }
 
-We started out with two documents.
-
-Now that our training is complete, we have two points that exist at specific locations in a multi-dimensional space.
+We started out with two documents. Now that our training is complete, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
 
 We are ready to put our model to use!
 
 === Synthesize
 
 
+@QandA{
+@Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
 
+@A{The bag of words model eliminates word order. It preserves word count.}
 
+@Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
+
+@A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omitting a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
+}
 
 
 == Compute Closeness and Exercise Human Judgment
 
 === Overview
 
-
+Students investigate the limitations of plagiarism detection, acknowledging the importance of exercising human judgment.
 
 === Launch
 
@@ -324,7 +332,8 @@ To allow for a pleasant user experience, a modern plagiarism detector does not a
 - Complete the remaining two sections of @printable-exercise{human-judgment.adoc}, where you will consider four possible outputs of a plagiarism detector that utilizes the cosine similarity function.
 }
 
-
+@teacher{
+Invite students to share their responses.}
 
 === Synthesize
 
@@ -334,4 +343,6 @@ To allow for a pleasant user experience, a modern plagiarism detector does not a
 
 @A{The cosine-similarity function produces a number - and that is all! It is still up to the teacher to decide how to make sense of that number. Over-reliance on programs can result in unfair outcomes.}
 
+
+@Q{Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?}
 }
