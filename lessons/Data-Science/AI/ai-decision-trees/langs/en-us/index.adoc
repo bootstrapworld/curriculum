@@ -282,8 +282,19 @@ One problem with this dataset is that _age is continuous_. That won’t work! We
 }
 
 @teacher{
+A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
 
+Students are introduced to the @vocab{decision stump} in question 4 on @printable-exercise{level-1.adoc}. Be prepared to guide students through building the decision stump. They will need to use (1) the rule that you wrote in question 1 and (2) the training dataset.
 
+- The stump has three branches because we are considering customers in their teens, twenties and thirties.
+- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
+** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
+** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
+** We illustrate the teens' decisions with the following shorthand: N N N Y Y
+- Finally, we place checkmarks below correctly predicted values to indicate how successful our rule was.
+** Our rule predicted that individuals in their teens would *not* purchase the game, so we place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct.
+** We leave the Ys *without* checkmarks; our rule was wrong for Danial and Ariella.
+- We complete the same process for customers in their twenties and in their thirties, representing each individual in the training dataset with a "Y" or "N", and then placing checkmarks to indicate when our rule was successful.
 }
 
 As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! Decision stumps will help us decide which questions produce a greater information gain.
