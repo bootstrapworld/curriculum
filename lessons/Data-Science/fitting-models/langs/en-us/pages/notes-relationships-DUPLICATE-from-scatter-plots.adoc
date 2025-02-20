@@ -1,0 +1,109 @@
+= Relationships Between two Quantitative Columns in a Nutshell
+
+++++
+<style>
+body.LessonNotes li {
+    margin-bottom: 1px;
+}
+</style>
+++++
+
+== Scatter Plots
+
+@vspace{1ex}
+
+Scatter plots can be used to look for relationships between columns. Each row in the dataset is represented by a point, with one column providing the x-value (@vocab{explanatory variable}) and the other providing the y-value (@vocab{response variable}). The resulting “point cloud” makes it possible to look for a relationship between those two columns.
+
+@vspace{1ex}
+
+- _Form_
+
+  * If the points in a scatter plot appear to follow a straight line, it suggests that a @vocab{linear relationship} exists between those two columns.
+  * Relationships may take other forms (u-shaped for example). If they aren't linear, it won't make sense to look for a correlation.
+  * Sometimes there will be no relationship at all between two variables.
+
+- _Direction_
+
+  * The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values.
+  * The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
+
+- _Strength_
+
+  * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value.
+  * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
+
+@vspace{1ex}
+
+== Line of Best Fit
+
+@vspace{1ex}
+
+@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud.  For most datasets, there is no line that will touch every dot, so _all of the possible models will have some error_, compared to the original data! But if the line is close enough to enough of the dots, the model can still help us reason and make predictions about y-values from x-values
+
+@center{@big{
+@math{\text{Data} = \text{Model} + \text{Error}}
+}}
+
+The line that is _closest_ to all the other points is known as the @vocab{line of best fit}, meaning it is the _best possible summary_ of the relationship and therefore the _best possible model_. While we can draw a line that generalizes the pattern we see ourselves, it probably won't actually be the *best possible* linear model for the data.
+
+@vspace{1ex}
+
+*Linear Regression* is a way of computing the *line of best fit*.  It considers every single data point to generate the optimal linear model, with the smallest possible vertical distance between the line and all the points taken together. _(More specifically, the computer minimizes the sum of the squares of the vertical distances from all of the points to the line. There's a reason we use computers to do this!)_
+
+@vspace{1ex}
+
+Points that do not fit the trend line in a scatter plot are called *unusual observations*.
+
+@vspace{1ex}
+
+@scrub{
+THE ENTIRE SECTION ON S DOES NOT BELONG IN DATA LITERACY and THE ENTIRE SECTION ON R DOES NOT BELONG IN ALGEBRA 2
+}
+
+@ifpathway{data-science, algebra-2}{
+
+== @math{S}: How well does the Model fit the Data?
+
+@vspace{1ex}
+
+The difference between the y-value of a data point and the y-value predicted by the model for that same x-value is called a @vocab{residual}.
+
+@vspace{1ex}
+
+@vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
+
+- @vocab{S} is expressed in terms of _units of the response variable_ (y) and tells us how much error we expect in predictions made from the model (eg. up to $8000, 5 years, 11 inches, etc. )
+- The closer the data points are to the model, the smaller the residuals are, and the smaller @vocab{S} will be!
+- When we compare two models for the same dataset, the one with the lower @vocab{S-value} fits better.
+- If the @vocab{S-value} for a model is zero, _it fits the data perfectly!_
+- We have no way of knowing whether or not other @math{S-values} represent a small or large amount of error until we consider them in relation to the range of the dataset! (eg. errors of $20,000 are huge in the context of median salary, but small in the context of national budgets.)
+
+}
+
+
+@ifpathway{data-literacy, data-science}{
+
+== Summarizing Correlations with @math{r}-values
+
+@vspace{1ex}
+
+The @vocab{correlation} between two quantitative columns can be summarized in a single number, the @math{r}-value.
+
+- The sign tells us whether the correlation is positive or negative.
+- Distance from 0 tells us the strength of the correlation.
+- Here is how we might interperet some specific r-values:
+  * −1 is the strongest possible negative correlation.
+  * +1 is the strongest possible positive correlation.
+  * 0 means no correlation.
+  * ±0.65 or ±0.70 or more is typically considered a "strong correlation".
+  * ±0.35 to ±0.65 is typically considered “moderately correlated”.
+  * Anything less than about ±0.25 or ±0.35 may be considered weak.
+
+_Note: These cutoffs are not an exact science!_ In some contexts an @math{r}-value of ±0.50 might be considered impressively strong! And sample size matters! We'd be more convinced of a positive relationship in general between cat age and time to adoption if a correlation of +0.57 were based on 50 cats instead of 5.
+
+@vspace{1ex}
+
+
+[.underline]#*Correlation is not causation!*# Correlation only suggests that two variables are related. It does not tell us if one causes the other. For example, hot days are correlated with people running their air conditioners, but air conditioners do not cause hot days!
+
+}
