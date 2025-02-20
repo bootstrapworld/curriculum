@@ -142,8 +142,6 @@
         [(eq? e 'string>?) ">"]
         [(eq? e 'triangle/sas) "triangle-sas"]
         [(eq? e 'triangle/asa) "triangle-asa"]
-        [(eq? e 'sqr) "num-sqr"]
-        [(eq? e 'sqrt) "num-sqrt"]
         [else
           (let ([es (format "~a" e)])
             (cond [(regexp-match #rx"\\?$" es)
