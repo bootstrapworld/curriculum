@@ -1,5 +1,9 @@
 = Fitting Models
-
+++++
+<style>
+.big { font-size: 2rem; }
+</style>
+++++
 @description{Students learn how to fit a linear model to a scatter plot, using the _S_-value (Standard Deviation of Residuals) of model fitness.}
 
 @lesson-prereqs{contracts-tables}
@@ -40,10 +44,10 @@
 
 |===
 
-== Line of "Good" Fit?
+== Seeing Patterns, Building Models
 
 === Overview
-Students confront the notion of "model fitness" (e.g - how might we measure how well a model fits a dataset?). They consider two models for a simple dataset and brainstorm how we could measure which fits better.
+Students learn that the patterns they intuitively see in a scatter plot represents a _relationship_ between the explanatory and response variables, called a @vocab{model}. They consider two different models for a simple dataset, and brainstorm how we could measure which fits better.
 
 === Launch
 
@@ -76,7 +80,7 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 @center{@image{images/sp2.png, 400}}
 
 @QandA{
-@Q{Does there appear to be a relationship here? If so, how would you describe it?}
+@Q{Do you see a pattern here, that relates `weeks` to `pounds`? If so, how would you describe it?}
 @A{The goal is to draw out student-generated notions, that may or may not include formal language, e.g.
 *** "It looks like weeks to adoption decreases as the lizards get heavier."
 *** "I see a shape in the points the looks like this (motions with arms)."
@@ -95,22 +99,29 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 Project the scatter plot at the front of the room, and have students come up to point out their patterns.
 }
 
-@slidebreak
-
-We can summarize the distribution of one quantitative column of data with one number. (For example, the @vocab{mean}. Can you name any others?) Similarly, can summarize _the relationship between *two* quantitative columns of data_ with *two* numbers: the slope and y-intercept of the line that is closest to all the coordinates on the scatter plot.
-
-@slidebreak
-@ifslide{ @right{@image{images/sp2.png, 400}} }
-
-The line that is closest to all the other points is known as the @vocab{line of best fit}.
 
 @lesson-instruction{
 - Where might we draw a line on this scatter plot, to summarize the trend you see in the data?
 }
 
+@slidebreak
+
+By drawing a line through our cloud of points, we are defining a @vocab{Model}: a summary of the relationship between two variables in a dataset. This model allows us to *make predictions* about how long a new animal will stay at the shelter.
+
+@center{@big{
+@math{\text{Data} = \text{Model} + \text{Error}}
+}}
+
+No line will touch every dot, so _every model will have some error_, compared to the original data! But if the line is close enough to enough of the dots, the model can still help us reason about adoption time.
+
+@slidebreak
+@ifslide{ @right{@image{images/sp2.png, 400}} }
+
+The line that is _closest_ to all the other points is known as the @vocab{line of best fit}, meaning it is the _best possible summary_ of the relationship and therefore the _best possible model_.
+
 === Investigate
 
-While most of the class might have pictured similar lines, it's likely that different people see slightly _different_ linear relationships. But how do we know which one is best?
+While most of us might have pictured similar lines (models!), it's likely that different people see slightly _different_ lines. But how do we know which model is best? _Whose @vocab{model} has the least error?_
 
 @lesson-instruction{
 - Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straight edge to draw a line that you think would best fit the data on the scatter plot.
