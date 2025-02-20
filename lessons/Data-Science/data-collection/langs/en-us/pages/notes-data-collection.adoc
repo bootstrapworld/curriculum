@@ -1,23 +1,76 @@
 = Data Collection in a Nutshell
 
-@vspace{1ex}
-
-@center{
-_"In a survey of three hundred thousand people, the average height was less than four feet tall"_
-}
+== With Great Power Comes Great Responsibility
 
 @vspace{1ex}
 
-Politicians pass laws, shoppers choose brands, and countries go to war based on studies that sounds reliable. But is everything that _seems_ reliable actually reliable? *Can we really trust these studies?*
+Politicians pass laws, shoppers choose brands, and countries go to war based on studies that sound reliable. But sometimes the data those decisions are made on is unreliable and misleading!
 
 @vspace{1ex}
 
-There are many ways for a study to be flawed. Some flaws sneak in by accident, and data scientists have an obligation to look for these flaws and minimize them.
-
-- A survey of people's favorite restaurants will be flawed, if it's only given to vegetarians.
-- Some people might not fill out a survey that requires them to share their religion. This might change the results of the survey!
-- A survey that lets people write whatever they want for "sex" might get some answers that are left blank, misspelled, or answers that aren't really about sex. Removing these responses from the dataset might change the results of the survey - especially if a certain group is more likely to leave it blank.
+There are many ways for a study and its analysis to be flawed, whether by accident, by incompetence or by intent.
 
 @vspace{1ex}
 
-Being an ethical data scientist means making sure that every element of your study is designed to minimize bias in the data and the analysis.
+Being an ethical data scientist means making sure that every element of your study is designed to minimize bias in the data and analysis.
+
+@vspace{1ex}
+
+It is also best practice to acknowledge any limitations of datasets we create by writing a Datasheet for the Dataset that describes how the data was collected, what efforts were made to avoid bias, and what data may have been left out, so that people who are trying to make sense of studies that use the dataset don't have to wonder about how reliable it is for the purposes they want to use it for.
+
+@vspace{1ex}
+
+== Data Cleaning
+
+@vspace{1ex}
+
+In order to process data, it needs to be clean. Four ways that data can be dirty include:
+
+@vspace{1ex}
+
+1) *Missing Data* - A column containing some cells with data, but some cells left blank.
+
+@vspace{1ex}
+
+2) *Inconsistent Types* - A column where some values have one data type and some cells have another. For example, a years column where almost every cell is a Number, but one cell contains the string "5 years old".
+
+@vspace{1ex}
+
+3) *Inconsistent Units* - A column where the data types are the same, but they represent different units. For example, a weight column where some entries are in pounds but others are in kilograms.
+
+@vspace{1ex}
+
+4) *Inconsistent Naming* - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
+
+@vspace{1ex}
+
+Once the data is dirty, we have to make careful choices about how to clean it. It’s never as simple as just deleting dirty rows! That might, for example, lead us to draw conclusions about the world in general based on a dataset the underrepresents the reality for developing countries.
+
+@vspace{1ex}
+
+== Survey Validation
+
+@vspace{1ex}
+
+We can design a survey to improve the odds of getting clean data. A few design features that improve results include:
+
+@vspace{1ex}
+
+1) *Required Questions* - By making a question "required", we can eliminate missing data and blank cells.
+
+@vspace{1ex}
+
+2) *Question Format* - When you have a fixed number of categories, a drop-down can ensure that everyone selects one - and only one! - category.
+
+@vspace{1ex}
+
+3) *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
+
+@vspace{1ex}
+
+4) *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96".
+
+
+
+
+
