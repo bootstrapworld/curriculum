@@ -160,11 +160,11 @@
                                         string=? string<? string<=? string>? string>=? string<>?
                                         frac
                                         ))
-                            (let* ([a (wescheme->pyret a)]
-                                   [lft (wescheme->pyret (list-ref e 1) #:parens parens #:wrap #t)]
-                                   [rt (wescheme->pyret (list-ref e 2) #:parens parens #:wrap #t)]
-                                   [x (format "~a ~a ~a" lft a rt)])
-                              (if (or parens wrap)
+                            (let* ([a-p (wescheme->pyret a)]
+                                   [lft (wescheme->pyret (list-ref e 1) #:parens parens #:wrap a)]
+                                   [rt (wescheme->pyret (list-ref e 2) #:parens parens #:wrap a)]
+                                   [x (format "~a ~a ~a" lft a-p rt)])
+                              (if (or parens (and wrap (not (and (memq a '(+ *)) (eq? wrap a)))))
                                   (format "({zwsp}~a{zwsp})" x)
                                   x))]
                            [(eq? a 'cond)
