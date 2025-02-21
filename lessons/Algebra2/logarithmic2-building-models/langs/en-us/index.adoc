@@ -166,7 +166,10 @@ When an exponential relationship is "inverted" like this, the new shape is calle
 
 === Synthesize
 
-TBD
+@QandA{
+@Q{How can we tell whether growth is exponential or logarithmic by looking at a graph?}
+@A{Exponential growth is slow at first and gets faster. Logarithmic growth is fast at first and gets slower.}
+}
 
 
 == Logarithmic Growth
@@ -266,10 +269,10 @@ Just as swapping the Domain and Range makes a logarithmic _curve_ look exponenti
 @slidebreak
 
 @QandA{
-- What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?
-- Was it especially difficult (or simple) to recognize any these function types? Why?
+@Q{What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?}
+@A{It is helpful for students to hear each other's thinking in their own words!}
+@Q{Was it especially difficult (or simple) to recognize any of these function types? Why?}
 }
-
 
 @slidebreak
 
@@ -315,8 +318,18 @@ We don't *see* the world as it really is. We see a logarithmically compressed ve
 --
 
 @teacher{
-Students can check out @link{images/xkcd.png, this wonderful visualization} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to draw the entire known universe. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
+Students can check out @link{images/xkcd.png, this wonderful drawing} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to fit *the entire known universe* into the image. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
 }
+
+=== Synthesize
+
+@QandA{
+@Q{What logarithmic equation could we write to complement the exponential equation @math{4^3 = 64}?}
+@A{@math{log_4 64 = 3}}
+@Q{What logarithmic equation could we write to complement the exponential equation @math{x^y = z}?}
+@A{@math{log_x z = y}}
+}
+
 
 == Logarithmic Functions
 @objective{logarithms-situations}
@@ -326,23 +339,29 @@ Students are introduced to the parent function for logs, and explore the role th
 
 === Launch
 
+
+Logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}
+
+But most textbooks only present logarithmic functions with a horizontal shift of zero.
+
+When @math{h = 0}, we can safely remove it and use this simplified form of the equation: +
+
+@center{@big{@math{f(x) = a \log_b(x) + k}}}
+
 @teacher{
 @opt{Advance your teacher dashboard of @starter-file{alg2-log-desmos} to *Slide 3: How does h transform logarithmic functions?* and give your students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to logarithmic functions.
-}}
+}
+}
 
-*Logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}*
+=== Investigate
 
-Most textbooks only present logarithmic functions with a horizontal shift of zero.
-
-When @math{h = 0}, we can safely remove it and use this simplified form of the equation: @hspace{1em} @big{@math{f(x) = a \log_b(x) + k}}
-
-@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
+@teacher{
+Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
 
 @hspace{2em} (1) Debrief with your students after they complete _each section_ of @printable-exercise{graphing-models.adoc} +
 @hspace{2em} (2) Wait until they have completed the entire page
 }
 
-=== Investigate
 @lesson-instruction{
 - Let's return to the *Desmos* file and explore how the constants in a logarithmic function definition impact the shape of its graph. 
 - You should now be on *Slide 4: Exploring Logarithmic Functions* 
@@ -357,7 +376,7 @@ When @math{h = 0}, we can safely remove it and use this simplified form of the e
 
 The base of the logarithm is similar to the base (or @vocab{growth factor}) in an exponential expression...it just answers the opposite question!
 
-[cols="^1a,^1a", stripes="none", options="header"]
+[.data-table, cols="^1a,^1a", stripes="none", options="header"]
 |===
 | Exponential Expression
 | Logarithmic Expression
@@ -399,11 +418,10 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
-Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_. Pyret's `log` function works the same way:
+Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_.
 
-@center{`log(1000) # returns 3, because 10^3 = 1000`}
-
-If you want to work with a different base, you can look up Pyret's `log-base` function in the @dist-link{Contracts.shtml, Contracts Pages}.
+- Pyret's `log` function uses base 10.
+- Pyret's `log-base` function is for working with other bases. You'll find it in the @dist-link{Contracts.shtml, Contracts Pages}.
 
 @slidebreak
 
