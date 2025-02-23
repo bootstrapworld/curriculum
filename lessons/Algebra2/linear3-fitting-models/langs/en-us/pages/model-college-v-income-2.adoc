@@ -1,61 +1,92 @@
-= Fit a Model: College Degrees v. Income
+= Fitting Models: College Degrees v. Income
 
 [.linkInstructions]
-Open the @starter-file{alg2-states-fit-model} and *Save a Copy* of the file that's just for you.
+Open your copy of the @starter-file{alg2-states}.
 
+[.no-flex-section]
 == The `al-ak` Model
 
 Type @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" al-ak))} in the Interactions Area, then find the points for AL and AK along the predictor line. _Hint: You know their coordinates and they will help you know where to look!_
 
-@n What do you Notice?
-
-@fitb{}{@ifsoln{Answers will vary. AL and AK are both on the line, but they don't seem to be very representative of the group.}} 
+@n What do you Notice? @fitb{}{@ifsoln{Answers will vary. AL and AK are both on the line, but they don't seem to be very representative of the group.}}
 
 @fitb{}{@ifsoln{The line goes all the way up to $200,000 but median income doesn't seem to exceed $80000.}}
 
-@n What do you Wonder?
-
-@fitb{}{@ifsoln{Answers will vary. What states might have been more representative of the trend?}} 
+@n What do you Wonder? @fitb{}{@ifsoln{Answers will vary. What states might have been more representative of the trend?}}
 
 @fitb{}{}
 
-@n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{~9930.59}}
+@n Find @math{S} in the upper left corner. What is the @math{S} value (the number after @math{S})? @fitb{}{@ifsoln{\~36164.683}}
 
-== Other Models
+@n With median income ranging from
+@fitbruby{9em}{@ifsoln{$39,031}}{lowest median income} to
+@fitbruby{9em}{@ifsoln{$73538}}{highest median income}, what does the @math{S}-value of the `al-ak` model tell us?
 
-In the definitions area, find the section titled _Define some other models by modifying al-ak_. +
+@fitb{}{@ifsoln{We know that there’s enough error in the model to predict median incomes that are off by $36,165!}}
 
-- For now, all three definitions in this section are exactly the same as `al-ak`.
-- You will be changing them according to the directions below.
+@fitb{}{@ifsoln{Considering the range of the data, the error in the model is enough to double the median income of a state or cut it in half!}}
 
-@n If you wanted the model to be _less steep_, what slope could you use? @fitb{}{}
+[.no-flex-section]
+== Comparing Models
 
-- Change the definition for `less-steep` to use the slope you wrote above.
+@n Use `fit-model` to find the @math{S-value} for the `mi-ca` model. @fitb{}{@ifsoln{10779.923}}
 
-  * Click "Run" to load your new definition. In the Interactions Area type: @show{(code '(fit-model states-table "state" "pct-college-or-higher" "median-income" less-steep))}
-  * What is the @math{S} value of `less-steep`? @fitb{}{}
+@n Is the `mi-ca` model better or worse than the `al-ak` model? @fitb{}{@ifsoln{better!}}
 
-- Identify a y-intercept that would make the model fit the data better: @fitb{}{}
+@n How much
+@fitbruby{5em}{@ifsoln{more}}{more / less }
+error do we expect in predictions made with the `mi-ca` model than predictions made with the `al-ak` model?
 
-  * Adjust the definition to use the new y-intercept and click "Run".
-  * Hit the up arrow in the Interactions Area and click return/Enter to fit the model again.
-  * What is the @math{S} value of `less-steep` now? @fitb{}{}
+@vspace{1ex}
 
-@n Change the definition of `negative` so that it models the data with a slope that is _negative_.
+@scrub{
+A note for future authors:
+- &#8192; is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
 
-  * Click "Run" and type the code to fit this model to the data.
-  * What slope did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
 
-@n Change the definition of `horizontal` so that it draws a horizontal model. Click "Run" and fit this model. What is the @math{S} value? @fitb{}{}
+@indented{
 
-@n Change the y-intercept so that the horizontal line passes through more of the points. Click "Run" and fit this model.
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{al-ak} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }@ifnotsoln{@math{\frac{\qquad}{\qquad}}}@ifsoln{@math{\frac{25384.76}{36164.683} = .70  &#8192; &rarr; &#8192;  70 \%}}
 
-  * What y-intercept did you use? @fitb{10em}{} What is the @math{S} value now? @fitb{}{}
+`mi-ca` model predictions are expected to have
+@fitb{4em}{@ifsoln{}} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than `al-ak` model predictions!
 
-@n What do you think @math{S} tells us? @fitb{}{@ifsoln{It measures how well the model fits the data}}
+}
 
-@fitb{}{}
+== A Model of Your Own
 
-@fitb{}{}
+@n Identify two other states that you think would make a better model: @fitb{13em}{} and @fitb{13em}{}.
 
-@fitb{}{}
+@vspace{1ex}
+
+*Add two new definitions for these states to your @starter-file{alg2-states}.*
+
+@n Record the `college-or-higher` and `median-income` values for these states, as (x,y) pairs below:
+
+@center{(@fitbruby{10em}{}{college-or-higher}, @fitbruby{10em}{}{median-income}) @hspace{10em} (@fitbruby{10em}{}{college-or-higher}, @fitbruby{12em}{}{median-income})}
+
+@n Derive your model and write it below (in both Function and Pyret notation), then fit the model and record the @math{S}-value:
+
+@indented{
+@math{\text{other}(x) =} @fitbruby{8em}{}{slope (m)}x + @fitbruby{10em}{}{y-intercept / vertical shift}
+
+@show{(code '(define (other x) (+ (* (?ANS "varies") x) (?ANS "varies"))))} @hspace{2em} @math{S}:@fitb{5em}{}
+}
+
+@n Adjust the slope and y-intercept of your model to get the *smallest @math{S} possible.* Write the best model you find (and corresponding @math{S}) below:
+
+@indented{
+@show{(code '(define (best x) (+ (* (?ANS "will vary") x) (?ANS "will vary"))))} @hspace{2em} @math{S}: @fitb{5em}{}
+}
+
+@n How much
+@fitbruby{4em}{@ifsoln{more}}{more / less }
+error do we expect in predictions made with your model than predictions made with the `mi-ca` model? @fitb{2em}{} @math{\%}

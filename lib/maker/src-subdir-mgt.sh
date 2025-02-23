@@ -5,7 +5,9 @@ function adjustproglangsubdirs() {
   local d=$1
   local pl=$2
 
-  test -d "$d"/"$pl" && $CP -p "$d"/"$pl"/* "$d"
+  if test -d "$d"/"$pl"; then
+    (find "$d"/"$pl" -maxdepth 0 -empty|grep -q .) || $CP -p "$d"/"$pl"/* "$d"
+  fi
 
   if test "$pl" != pyret -a "$pl" != none; then
     local lang

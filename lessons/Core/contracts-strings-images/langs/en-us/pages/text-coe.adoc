@@ -3,12 +3,10 @@
 ++++
 <style>
 table .autonum::after { content: ')' !important; }
-
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
 </style>
 ++++
 
+[.no-flex-section]
 == Notice and Wonder
 
 @do{
@@ -45,12 +43,14 @@ _Suppose we want to see the `text` "Diego" written vertically in yellow letters 
 
 _Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal..._
 
-[.FillVerticalSpace, cols=".<1a, .<1a", stripes="none"]
+[.FillVerticalSpace, cols=".<1a, .<1a", stripes="none", grid="none", frame="none"]
 |===
 
-| @n Draw the circle of evaluation to generate the image of your name in your favorite color.
+| @n Draw the circle of evaluation to: +
+ generate the image of your name in your favorite color
 
-| @n Draw the circle of evaluation to `rotate` it so that it's diagonal.
+| @n Draw the circle of evaluation to: +
+ `rotate` the image so that it's diagonal
 
 ^| @showsoln{(coe '(text "Shriram" 45 "purple"))}  	^| @showsoln{(coe exp2)}
 @ifnotsoln{@vspace{35ex}}

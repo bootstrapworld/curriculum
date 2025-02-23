@@ -1,6 +1,5 @@
-@import url("./asciidoctor.css");
-@import 'https://www.bootstrapworld.org/styles.css';
-@import 'https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css';
+@import (inline) url("./asciidoctor.css");
+@import (inline) 'https://www.bootstrapworld.org/styles.css';
 
 /************************************************************************************
 * SYSTEMWIDE STYLES
@@ -670,7 +669,7 @@ body.workbookpage {
   #header > h1:first-child { text-align: center; }
 
   /* Code that shows up in headers should not have the usual background */
-  h2 .editbox, h2 .editbox * { color: black; background: none; }
+  h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
   &:not(.landscape) { width: 7.5in; height: 9.8in; }
@@ -682,6 +681,8 @@ body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
+  /* Some sections shouldn't grow at all, and should basically just be block-level elements */
+  #content > .sect1.no-flex-section { flex-grow: 0; }
 
   /* In some cases, AsiiDoc will put an empty preamble containing
      only a grandchild for custom styles. In this situation, no display
@@ -1272,6 +1273,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5rem;
   }
 
+  #savetodrive-div { height: 30px !important; }
+
   /* on WB pages zoom the page 1.25x for a big screen */
   body.workbookpage, body.LessonPlan #content {
     transform-origin: left top; 
@@ -1332,7 +1335,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           height   : 10em;
         }
       }
-      .sect1:not(.acknowledgmentsect) h2:hover+.sectionbody:after { height: 4em; }
+      .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
       /* don't add the fade for summaries or active sections */
       .lessonSummary .sectionbody { max-height: unset; }
       .lessonSummary .sectionbody, h2.active+.sectionbody {
