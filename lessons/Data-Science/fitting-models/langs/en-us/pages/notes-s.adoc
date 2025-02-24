@@ -14,19 +14,18 @@ body.LessonNotes li {
 
 When viewing a cloud of points on a scatter plot, sometimes we can see a pattern in the data.
 
-- If that pattern can be shown with a straight line, it might mean there's a @vocab{linear relationship} between the x- and y-axis
-- The line can slope up or down, indicating a _positive_ or _negative_ relationship
+- If the points cluster around a straight line, it might mean there's a @vocab{linear relationship} between the @vocab{explanatory variable} (x) and @vocab{response variable} (y).
+- The line can slope up or down, indicating a _positive_ relationship (where the two variables increase together) or _negative_ relationship (where the response variable decreases as the explanatory variable increases).
 
 @vspace{1ex}
 
 These lines are known as @vocab{models} for the data. The straight-line function describing a linear relationship is called a _linear model_.
 
 - With a good model, the point cloud will hug the line tightly. A poor model will have lots of points that stray far from the line.
-- Since models _summarize_ the data, they will never be able to explain every detail of the dataset: there will always be data points that are not _exactly_ on the line!
-- For any given x-value, the difference between the model's predicted y-value and the actual y-value is part of the model's _error:_ +
-@hspace{5em} @big{@math{\text{Data} = \text{Model} + \text{Error}}}
+- Models _summarize_ the data. For most datasets that means there will be data points that are not _exactly_ on the line! And sometimes the line of best fit won't even pass through a single point in the dataset.
 - We can use *linear regression* (`lr-plot` in Pyret) to compute the _best possible linear model_ for a dataset, known as the *line of best fit*.
 
+@vspace{1ex}
 @vspace{1ex}
 
 == @math{S}: Measuring Error in a Model
@@ -34,15 +33,19 @@ These lines are known as @vocab{models} for the data. The straight-line function
 @vspace{1ex}
 --
 @right{@image{../images/residual.png, 150}}
-The difference between the y-value of a data point and the y-value predicted by the model for that same x-value is called a @vocab{residual}. +
+@vspace{1ex} +
+Differences between the predicted y-value and actual y-value for each x-value are called @vocab{residuals}. +
+A residual tells us "how wrong" the model was at that particular point. +
 {empty} +
-A residual measures the error of the model at a specific x-value, telling us "how wrong" the model was at that particular point. By summarizing the error for _all_ the points, we can get a measure of how much error the model has for a given dataset. +
+@hspace{1em} @big{@math{\text{Data} = \text{Model} + \text{Error}}} +
 {empty} +
-The @vocab{Standard Deviation of the Residuals} - known as @vocab{S} - does exactly this, and is a useful measures of the fitness of a given model.
+We can summarize the error for _all_ the points in a dataset using the @vocab{Standard Deviation of the Residuals} - known as @vocab{S} - to get a sense of how much to trust the predictions made by a model.  +
+{empty} +
 
-- @vocab{S} is expressed in terms of _units of the response variable_ (y) and tells us how much error we expect in predictions made from the model (eg. up to $8000, 5 years, 11 inches, etc. )
-- The closer the data points are to the model, the smaller the residuals are, and the smaller @vocab{S} will be!
+- @vocab{S} is expressed in terms of _units of the response variable_ (y) and tells us how much error we expect in predictions made from the model. +
+_(e.g. up to $8000, 5 years, 11 inches, etc. )_
+- The closer the data points are to the model, the smaller the residuals are, and the smaller @vocab{S} will be.
 - If the @vocab{S-value} for a model is zero, _it fits the data perfectly!_
 - When we compare two models for the same dataset, the one with the lower @vocab{S-value} fits better.
-- We have no way of knowing whether or not other @math{S-values} represent a small or large amount of error until we consider them in relation to the range of the dataset! (eg. errors of $20,000 are huge in the context of median salary, but small in the context of national budgets.)
+- We have no way of knowing whether or not @vocab{S-values} represent a small or large amount of error until we consider them in relation to the range of the dataset! _(e.g. errors of $20,000 are huge in the context of median salary, but small in the context of national budgets.)_
 --
