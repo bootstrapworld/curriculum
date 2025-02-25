@@ -40,7 +40,7 @@
  * If you don't already have a code, or you want to share a new one, you will first want to:
  *** Open @starter-file{alg2-log-desmos}.
  *** Make a link or code to share with your students.
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+ * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
 
 | Key Points For The Facilitator
@@ -49,59 +49,27 @@
 - The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
 |===
 
-== This Might Look Familiar...
+== From Exponents to Logarithms
 @objective{logarithms-exponents}
 
 === Overview
-Having identified that the wealth-v-lifespan scatter plot is neither linear, quadratic, nor exponential, students are asked to consider the graphs of logarithmic functions as the reflection of an exponential function across the diagonal line @math{y=x}.
+Students are asked to consider the graphs of logarithmic functions as the reflection of an exponential function across the diagonal line @math{y=x}.
 
 === Launch
 
-@lesson-instruction{
-- Open @starter-file{alg2-countries}, and make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, using the name of the `country` as the label.
-}
+@teacher{Heads up: This launch refers back to data from @lesson-link{exponential1-exploring-covid}.}
 
-The linear, quadratic and exponential models we've found for this dataset all made predictions with too much error to be useful.
-
-@slidebreak
+The linear, quadratic and exponential models we’ve found for the @starter-file{alg2-states} all made predictions with too much error to be useful. But what other kinds of models are there?
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{from-expt-to-log.adoc}.
+- Complete @printable-exercise{swapping-axes-n-w.adoc}.
 - What do you Notice? What do you Wonder?
 }
 
-@slidebreak
+*The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!*
 
-=== What does Reflecting the Data across the Diagonal @math{y=x} accomplish?
-
-By switching the axes, the model answers the opposite question!  And our brains have a much better chance of understanding the speed of growth. Consider the growth of Covid Infections from Massachusetts (from @lesson-link{exponential1-exploring-covid}).
-
-[cols="^6a,1a,^6a", options="header", stripes="none", grid="none", frame="none"]
-|===
-| How many positive cases do we predict after @math{x} days?
-|
-| How many days do we predict until we pass @math{y} cases?
-
-|@image{images/MA-covid.png}
-|
-|@image{images/MA-covid-flipped.png}
-
-|===
-
-@scrub{
-- The graph is showing us the relationship from +
-_days → cases_, _x → y_, or _Domain → Range_.
-
-The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!
-
-- Now we want to *flip the relationship around*, asking for +
-_cases → days_, _y → x_, or _Range → Domain_.
-- What would *this* graph look like?
-
-Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid growth, and then flattens out.
-}
-
-@slidebreak
+When we reflect the covid curve over @math{y=x},
+the graph _starts_ with rapid growth, and then flattens out.
 
 ++++
 <style>
@@ -146,33 +114,125 @@ Having reflected the curve over @math{y=x}, the graph now _starts_ with rapid gr
 - To reach 300,000 cases, it took 112 days (37 additional days)
 - To reach 400,000 cases, it took 122 days (20 additional days)
 
-And we understand just how fast the infections were growing.
+And we are much better able to understand just how quickly the infections were spreading.
+}
+
+@clear
+
+*When we swap the axes, the model answers the opposite question!*
+
+[cols="^6a,1a,^6a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| How many positive cases do we predict after @math{x} days?
+|
+| How many days do we predict until we pass @math{y} cases?
+
+|@image{images/MA-covid.png}
+|
+|@image{images/MA-covid-flipped.png}
+
+|===
+
+When an exponential relationship is "inverted" like this, the new shape is called a @vocab{logarithmic relationship}.
+
+@lesson-point{"An exponential relationship looks logarithmic...if your @math{x}'s and @math{y}'s trade places!"}
+
+Logarithmic functions and exponential functions serve as inverses of one another.
+
+@indented{
+- The Domain and Range are swapped.
+- The axes are swapped.
+- The curve is reflected over the diagonal line @math{y=x}.
 }
 
 === Investigate
 
-When an exponential relationship is "inverted" like this, the new shape is called a _logarithmic relationship._
-
 @lesson-instruction{
-- Using what you've just learned, turn to the second part of @printable-exercise{from-expt-to-log.adoc} and identify the form of each curve.
+- Turn to @printable-exercise{classifying-graphs.adoc} and identify the form of each curve.
 - For each display you identify as exponential or logarithmic, draw the diagonal line @math{y = x} and sketch the reflection of the curve.
 }
 
 @teacher{Review student answers. Try to draw out student explanations for how they could tell whether a graph or plot was logarithmic instead of exponential. Their own reasoning is critical for building intuition, so you may even want to write down key phrases as students share them!}
 
+==== Optional: Computations with Exponents and Logarithms
+
+We can use the inverse relationship between logarithms and exponents to do calculations.
+
+Just as there are fact families for multiplication and division (@math{2 \times 3 = 6}, @math{3 \times 2 = 6}, @math{6 \div 2 = 3}, @math{6 \div 3 = 2}), there are fact families for logarthims and exponents.
+
+The two equations below are different ways of expressing the same relationship between the numbers 3, 5 and 125.
+
+[cols="^1a, ^1a", options="header"]
+|===
+| Exponential Equation
+| Logarithmic Equation
+
+| @math{5^3 = 125}
+| @math{\log_5 125 = 3}
+|===
+
+@lesson-instruction{
+Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the first section.
+}
+
+@QandA{
+@Q{What logarithmic equation can we write from @math{x^y = z}?}
+@A{@math{\log_x z = y}}
+
+@Q{What exponential equation can we write from @math{\log_a b = c}?}
+@A{@math{a^c = b}}
+}
+
 @slidebreak
 
-@lesson-point{"A logarithmic relationship looks exponential...if your @math{x}'s and @math{y}'s trade places!"}
+When we want to evaluate log expressions, we need to think about those fact families.
+
+[.data-table, cols="^1a,^1a, ^3a, ^1a", stripes="none", options="header"]
+|===
+|				| Expression 		| What you need to do 					| Evaluates to
+| *Exponential* | @math{3^2}		| "Calculate 3 to the power of 2"		| 9
+| *Logarithmic* | @math{\log_3(9)}	| "Calculate what power 3 is raised to in order to reach 9" | 2
+|===
+
+
+@QandA{
+@Q{What question do we need to ask ourselves to evaluate @math{\log_3(81)}?}
+@A{What power do we need to raise 3 to in order to reach 81?}
+@Q{What will @math{\log_3(81)} evaluate to?}
+@A{@math{4}, because @math{3^4 = 81}}
+}
+
+@lesson-instruction{
+- Complete the rest of @opt-printable-exercise{evaluate-log.adoc} to get some practice translating and evaluating log expressions.
+- Be sure to discuss your answers with at least one other student!
+}
+
+@QandA{
+Consider these two translations of @math{\text{log}_2(128)}.
+
+- "To get 128, I raise 2 to what power?"
+- "The power you raise 2 to get 128"
+
+@Q{Which translation do you prefer, and why?}
+@A{The first one, because it sets up a math problem and makes it clear what I need to do.}
+@A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
+}
 
 === Synthesize
 
 @QandA{
 @Q{How can we tell whether growth is exponential or logarithmic by looking at a graph?}
 @A{Exponential growth is slow at first and gets faster. Logarithmic growth is fast at first and gets slower.}
+@Q{What do we mean when we say that logarithmic functions and exponential functions serve as inverses of one another?}
+@A{The axes are swapped.}
+@A{The Domain and Range are swapped.}
+@A{The models answer the opposite questions.}
+@A{The curve is reflected over the diagonal line @math{y=x}.}
 }
 
 
-== Logarithmic Growth
+
+== Logarithmic Sequences
 @objective{logarithms-growth}
 @objective{logarithms-exponents}
 
@@ -181,7 +241,7 @@ Students learn to recognize logarithmic growth in tables.
 
 === Launch
 
-
+We know that linear sequences can be recognized by their consistent growth. And exponential sequences can be recognized by identifying their growth factor. But how would we recognize a logarithmic sequence?
 
 === Investigate
 
@@ -273,9 +333,9 @@ Students can check out @link{images/xkcd.png, this wonderful drawing} from @link
 
 @QandA{
 @Q{What logarithmic equation could we write to complement the exponential equation @math{4^3 = 64}?}
-@A{@math{log_4 64 = 3}}
+@A{@math{	ext{log}_4 64 = 3}}
 @Q{What logarithmic equation could we write to complement the exponential equation @math{x^y = z}?}
-@A{@math{log_x z = y}}
+@A{@math{	ext{log}_x z = y}}
 }
 
 
@@ -324,28 +384,13 @@ Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-
 
 The base of the logarithm is similar to the base (or @vocab{growth factor}) in an exponential expression...it just answers the opposite question!
 
-[.data-table, cols="^1a,^1a", stripes="none", options="header"]
-|===
-| Exponential Expression
-| Logarithmic Expression
-
-|@math{3^2} 
-|@math{\log_3(9)} 
-
-| "calculate 3 to the power of 2"
-| "calculate what power 3 is raised to in order to reach 9"
-
-| Evaluates to 9
-| Evaluates to 2
-|===
-
 @slidebreak
 
 @QandA{
-The expression @math{log_2(1)} is asking "to what power must 2 be raised to reach 1?
+The expression @math{	ext{log}_2(1)} is asking "to what power must 2 be raised to reach 1?
 @Q{What power of 2 will evaluate to 1?}
 @A{Zero}
-@Q{What question is @math{log_5(1)} asking?}
+@Q{What question is @math{	ext{log}_5(1)} asking?}
 @A{"To what power must 5 be raised, to reach 1?"}
 @Q{What power of 5 will evaluate to 1?}
 @A{Zero}
@@ -355,7 +400,7 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
-@lesson-point{No matter the base, @math{log(1)} will always be zero!}
+@lesson-point{Since any number to the zero power is @math{1}, no matter the base, @math{log(1)} will always be zero!}
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
@@ -377,7 +422,7 @@ Most math books, Desmos, calculators, and programming languages offer a simple "
 
 The term @math{k} is the vertical shift of the function, which moves the curve up or down.
 
-Since @math{log_{anything}(1) = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
+Since @math{\log_{anything}(1) = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
 
 (_We've seen vertical shifts in other kinds of functions given different names, like @math{b} for linear functions._)
 
@@ -398,65 +443,7 @@ Functions with logarithmic growth have a *vertical asymptote* where the function
 
 Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
 
-
 === Synthesize
 - What _similarities_ do you see between exponential and logarithmic functions?
 - What _differences_ do you see between exponential and logarithmic functions?
 
-== Additional Practice
-
-think about logarithms as the inverse of an exponent. They learn to evaluate log expressions and to
-
-By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
-
-- The inputs and outputs are reversed
-- The Domain and Range are swapped
-- The curve is reflected over the diagonal line @math{y=x}
-
-@slidebreak
-
-We can use this inverse relationship to do calculations:
-
-[cols="^1a, ^1a", stripes="none" options="header"]
-|===
-| Exponential
-| Logarithmic
-
-| @math{f(x) = 3^x}
-| @math{g(x) = log_3(x)}
-
-| What is 3 to the power of "the input"?
-| What power does 3 need to be raised to reach "the input"?
-
-| @math{f(2) = 3^2 = 9}
-| @math{g(9) = log_3(9) = 2}
-|===
-
-@slidebreak
-
-@QandA{
-@Q{What will @math{f(3)} evaluate to?}
-@A{@math{f(3) = 3^3 = 27}}
-@Q{What will @math{g(27)} evaluate to?}
-@A{@math{g(27) = log_3(27) = 3}}
-}
-
-@slidebreak
-
-Consider these two translations of @math{log_2(128)}.
-
-- "To get 128, I raise 2 to what power?"
-- "The power you raise 2 to get 128"
-
-@QandA{
-@Q{Which translation do you prefer, and why?}
-@A{The first one, because it sets up a math problem and makes it clear what I need to do.}
-@A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
-}
-
-@slidebreak
-
-@lesson-instruction{
-- Complete @printable-exercise{evaluate-log.adoc} to get some practice translating and evaluating log expressions.
-- Be sure to discuss your answers with at least one other student!
-}
