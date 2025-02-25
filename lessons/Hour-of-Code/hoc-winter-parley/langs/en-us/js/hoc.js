@@ -49,7 +49,8 @@ function loadFromConfig(i = cardIndex) {
 
   const editorConfig= cards[i].getAttribute('editorCode'),
         imageConfig = cards[i].getAttribute('imageConfig')
-        videoConfig = cards[i].getAttribute('videoConfig');
+        videoConfig = cards[i].getAttribute('videoConfig')
+        pyretConfig = cards[i].getAttribute('pyretConfig');
 
   if(editorConfig) {
     clearTimeout(window.parleyTimeout);
@@ -82,6 +83,11 @@ function loadFromConfig(i = cardIndex) {
         video.play();
       }, 500);
     }
+  } else if (pyretConfig) {
+    var frame = document.createElement("div");
+    frame.id = pyretConfig;
+    righthand.appendChild(frame);
+    window[pyretConfig](frame);
   }
 }
 

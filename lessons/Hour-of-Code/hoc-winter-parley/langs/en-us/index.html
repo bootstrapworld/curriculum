@@ -4,6 +4,7 @@
       <title>Bootstrap :: Hour of Code</title>
       <link   type="text/css"        rel="stylesheet" href="css/hoc.css" title="default"/>
       <script type="text/javascript" src="js/hoc.js"></script>
+      <script type="text/javascript" src="js/api.js"></script>
       <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
       <link href="./repartee/static/css/main.chunk.css" rel="stylesheet">
       <script src="./repartee/static/js/bundle.js"></script>
@@ -283,7 +284,7 @@ translate(pupil, 10, 30, eye-white)
         
         IN THIS WINDOW WE WANT TO SEE THE CODE THAT THEY'VE ALREADY WRITTEN EMBEDDED IN THE DEFINITIONS AREA OF A PYRET STARTER FILE SO WE CAN TRANSITION THEM TO LOOKING AT PYRET PROGRAMS---->
         
-         <li videoConfig="videos/eye.mov">
+         <li pyretConfig="eyeEmbed">
           <h1>13. Full Pyret</h1>
           
             So far we have been working in the Parley version of Pyret. More complex programs get written with the same exact code, but in a different view.
@@ -297,9 +298,48 @@ translate(pupil, 10, 30, eye-white)
               </ul>  
               <p/>              
             
-            If you'd like to watch the video again, click on the screen.
+            You can interact with Pyret directly. If you'd like to reset interaction, <input type="button" id="replay-eye">click here</input>
 
 <p/>
+             <script>
+const start = `use context starter2024
+
+head = circle(42, "outline", "darkgrey")
+        
+torso = circle(50, "outline", "darkgrey")
+        
+base = circle(70, "outline", "darkgrey")
+        
+body = above(torso, base)
+        
+snowman = above(head, body)
+        
+eye-white = circle(30, "outline", "black")
+        
+pupil = circle(10, "solid", "black")
+        
+eye = overlay(pupil, eye-white)
+        
+googley-eye = put-image(pupil, 10, 30, eye-white)`;
+async function eyeEmbed(iframeContainer) {
+  const embed = await makeEmbed('eye', iframeContainer);
+  document.getElementById("eye").style.height = "100%";
+  document.getElementById("eye").height = "100%";
+
+  function reset() {
+    embed.sendReset({
+      definitionsAtLastRun: start,
+      interactionsSinceLastRun: ["eye", "googley-eye"],
+      editorContents: start,
+      replContents: ""
+    });
+  }
+  reset();
+  document.getElementById("replay-eye").addEventListener("click", reset);
+
+}
+
+             </script>
              <input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with this file in the classic Pyret editor.
         </li>
 
@@ -323,6 +363,56 @@ translate(pupil, 10, 30, eye-white)
           <p/>
          <input type="button" value="Click here to open the Winter Wonderland Puzzle" onclick="window.open('https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c', '_blank')"/>  in a new Pyret window and click "Run" to load the initial image.</a>
          </li> 
+
+        <li pyretConfig="rectangle">
+          <h1>15. Rectangle</h1>
+          <p/>
+          <ul>
+            <li>See on the right what the following code does</li>
+            <p/>
+            <tt>rectangle(100, 200, "solid", "orange")</tt>
+            <p/>
+            <li>Now change the size of the rectangle to be twice as tall without changing the width. <button>Click Here</button> to check your work</li>
+            <p/>
+            <li role="answer-check">(Answer not yet checked)</li>
+          </ul>
+
+          <script>
+const rectangleStarter = `use context starter2024
+
+r = rectangle(100, 200, "solid", "orange")
+`;
+async function rectangle(iframeContainer) {
+  const embed = await makeEmbed('rect', iframeContainer);
+  document.getElementById("rect").style.height = "100%"; // TODO push into embed API
+  document.getElementById("rect").height = "100%"; // TODO push into embed API
+
+  function reset() {
+    embed.sendReset({
+      definitionsAtLastRun: rectangleStarter,
+      interactionsSinceLastRun: ["r"],
+      editorContents: rectangleStarter,
+      replContents: ""
+    });
+  }
+  reset();
+
+  const button = document.querySelector("[pyretConfig='rectangle'] button");
+  button.addEventListener('click', async () => {
+    embed.setInteractions("image-height(r)\nimage-width(r)");
+    const result = await embed.runInteractionResult();
+    const resultDiv = document.querySelector("[pyretConfig='rectangle'] li[role='answer-check']");
+    if(result.indexOf("400") !== -1) {
+      resultDiv.innerText = `Success!  (Result was ${result})`;
+    }
+    else {
+      resultDiv.innerText = `Failure!  (Result was ${result})`;
+    }
+  });
+
+}
+</script>
+        </li>
 
         <!----   TEMPLATE PAGE
         <li editorCode='
