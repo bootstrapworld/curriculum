@@ -1,20 +1,9 @@
 = A Primitive Plagiarism Detector
 
-Open the @starter-file{plagiarism}, click "Run", and then respond to the questions below.
-
 == Review the Documents
-
-@n Type `wiki-article` in the interactions area. Click enter.
-
-@n Type `student-essay` in the interactions area. Click enter.
-
-@n Read through the two paragraphs that appear, which we've also included below:
-
-@vspace{1ex}
 
 [cols="1,1", options="header"]
 |===
-
 | Wikipedia article on "Elephants in Thailand"
 | Student-submitted essay on "Elephants in Thailand"
 
@@ -24,20 +13,6 @@ Open the @starter-file{plagiarism}, click "Run", and then respond to the questio
 
 |===
 
-== Detect Identicality
-
-The function `simple-similarity` takes in two Strings and produces a Number: 1 indicates that there is a match, 0 indicates that there is not.
-
-@n Use `simple-similarity` to compare the wikipedia article to itself. What does the program tell you about the comparison? @fitb{}{}
-
-@fitb{}{@ifsoln{`simple-similarity(wiki-article, wiki-article)` produces an output of 1, indicating that the texts are a match.}}
-
-@n Use `simple-similarity` to compare the student-submitted essay with the wikipedia article. Click "Run". What does the program tell you about the comparison? @fitb{}{@ifsoln{`simple-similarity(student-essay, wiki-article)` produces an output of 0, indicating that the texts}}
-
-@fitb{}{@ifsoln{are not a match.}}
-
-== Assess Program Effectiveness
-
 @n Do *you* think the student who submitted this essay on Elephants in Thailand committed plagiarism? Explain. @fitb{}{@ifsoln{These texts appear to}}
 
 @fitb{}{@ifsoln{be identical, except that the student-submitted essay replaces "has been" with "is". Given the proximity of these texts, plagiarism seems likely.}}
@@ -46,6 +21,27 @@ The function `simple-similarity` takes in two Strings and produces a Number: 1 i
 
 @fitb{}{}
 
+== Detect Identicality
+Open the @starter-file{plagiarism} and click "Run".
+
+- The two paragraphs above are defined in the starter file as `wiki-article` and `student-essay`, respectively.
+- The file also defines a function `simple-similarity`, which takes in two Strings and produces a Number:
+  * 1 indicates that there is a match.
+  * 0 indicates that there is not a match.
+
+@n What would you expect to happen when you compare the wikipedia article to itself? @fitb{}{@ifsoln{It should return `1`}}
+
+@n What code would you need to write to use `simple-similarity` to compare the wikipedia article to itself. @fitb{}{@ifsoln{`simple-similarity(wiki-article, wiki-article)`}}
+
+@n What happens when you test it out in the Interactions Area? @fitb{}{@ifsoln{It produces an output of 1, indicating that the texts are a match.}}
+
+== Assess Program Effectiveness
+
+@n What would you hope to happen when you compare the student essay to the wikipedia article? @fitb{}{@ifsoln{It should return `1`}}
+
+@n What code would you need to write to use `simple-similarity` to compare the `student-essay` with the `wiki-article`. @fitb{}{@ifsoln{`simple-similarity(student-essay, wiki-article)`}}
+
+@n What does the program tell you about the comparison? @fitb{}{@ifsoln{It produces an output of 0, indicating that the texts are not a match.}}
 
 @n What are some problems with this plagiarism detector? @fitb{}{@ifsoln{This plagiarism detector has absolutely no nuance! It simply looks for a perfect match.}}
 
@@ -54,8 +50,6 @@ The function `simple-similarity` takes in two Strings and produces a Number: 1 i
 @fitb{}{}
 
 @fitb{}{}
-
-
 
 @n Describe what a more effective plagiarism detector must do. (Think creatively! How could you catch even the sneakiest of plagiarizers?) @fitb{}{}
 
