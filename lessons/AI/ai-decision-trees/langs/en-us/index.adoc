@@ -20,7 +20,7 @@
 | Student-facing Lesson Goals
 |
 
-Let's create, use, and understand decision trees!
+- Let's create, use, and understand decision trees, the technology behind YouTube recommendations and election outcome predictions
 
 | Materials
 |[.materials-links]
@@ -43,18 +43,24 @@ Consider each of three situations described below:
 - Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, the other is not.
 - A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
 
-On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that machine learning and data-driven algorithms are at work in all three. In each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
+On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that, in each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
+
+@slidebreak
 
 @QandA{
-@Q{Think about those three scenarios: recommending videos, classifying loan requests, and predicting election outcomes. What sort of data do you think was used in each?}
-@A{Video recommendations: viewing history, search history, channel subscriptions, likes, dislikes, google activity, "not interested" feedback}
-@A{Loan request data: payment history, number of open accounts, delinquent accounts, income/revenue, expenses, overdrafts in the last 90 days}
-@A{Election outcome prediction: census data including voter race, gender, income level, party affiliation, age, etc.}
+@Q{What kind of data do you think is used for recommending videos?}
+@A{Viewing history, search history, channel subscriptions, likes, dislikes, google activity, "not interested" feedback}
+@Q{What kind of data do you think is used for classifying loan requests?}
+@A{Debt, assets, payment history, number of open accounts, delinquent accounts, income/revenue, expenses, overdrafts in the last 90 days}
+@Q{What kind of data do you think is used to predict election outcomes?}
+@A{Census data including voter race, gender, income level, party affiliation, age, etc.}
 }
 
-A @vocab{decision tree} a machine learning algorithm that uses a tree-like model to show decisions and their possible consequences. The scenarios above all use decision trees to arrive at their recommendations.
+@slidebreak
 
-Decision trees are a form of @vocab{supervised learning} because the computer is trained on data that already contains the desired categorizations. In other words, the computer trains on example data tagged by a human, and then learns a function that maps from input to output.
+A @vocab{decision tree} is a machine learning algorithm that uses a tree-like model to show decisions and their possible consequences. The scenarios above all use decision trees to arrive at their recommendations.
+
+Decision trees are a form of @vocab{supervised learning}, because the computer is trained on data that already contains the desired categorizations. In other words, the computer trains on example data tagged by a human, and then learns a function that maps from input to output.
 
 === Investigate
 
@@ -106,10 +112,12 @@ Debrief the activity by posing the questions below. Note that the provided answe
 @QandA{
 
 @Q{How many questions did we ask in order to determine the correct object?}
-@A{4}
+@A{This answer will depend on what your students ask!}
+@A{In the example sequence we've diagrammed above, there were 4 questions.}
 
 @Q{Which items from our original list (spoon, knife, cup, plate, fork, and mug) did our very first question eliminate from the list of possibilities?}
-@A{There are four items on the list with handles (spoon, knife, fork, and mug). That means our first question--"does it have a handle?" eliminated two items, cup and plate.}
+@A{This answer will depend on what your students ask!}
+@A{In the example sequence we've diagrammed above, there are four items on the list with handles (spoon, knife, fork, and mug). That means our first question--"does it have a handle?" eliminated two items, cup and plate.}
 
 @Q{Can anyone think of a different question that would have eliminated more items right off the bat?}
 @A{Responses will vary. "Is it a utensil?" would have split the list in half, given that three items (spoon, knife, and fork) are utensils.}
@@ -127,9 +135,10 @@ Let's play _another_ round of the game with a new item.
 @Q{How are the diagrams we drew similar and how are they different?}
 }
 
-Let's imagine that our first round had started with the question, "Is it a utensil?" and had led us to "knife".  After the first round, our tree might have looked the diagram on the left (below). If the second round started with the same question, we could have just added to the original diagram... and we might have ended up with something like what you see on the right.
 
-[cols="^.2a,<.^1a,3a", grid="none", frame="none", stripes="none"]
+Let's imagine that our first round had started with the question, "Is it a utensil?" and had led us to "knife".  After the first round, our tree might have looked like the diagram on the left (below). If the second round started with the same question, we could have just added to the original diagram... and we might have ended up with something like what you see on the right.
+
+[cols="^.3a,^2a,3a", grid="none", frame="none", stripes="none"]
 |===
 
 | @hspace{8em}**Round 1**
@@ -138,7 +147,7 @@ Let's imagine that our first round had started with the question, "Is it a utens
 
 | @hspace{8em}**Round 2**
 
-| @image{images/tree1.png, 200}
+| @image{images/tree1.png, 120}
 
 | @image{images/arrow.png, 50}
 
@@ -147,11 +156,12 @@ Let's imagine that our first round had started with the question, "Is it a utens
 |===
 
 
-Notice that the topmost question—"is it a utensil?"—now splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
+Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
 
 Our diagram begins with two unique pathways from the top of the tree to two unique items.
 
-Put another way: __There are two branches that split from the tree's root node. Each branch leads to a decision node, which eventually leads to a leaf node.__
+Put another way: +
+_There are two branches splitting from the tree's root node. Each branch leads to a decision node, which eventually leads to a leaf node._
 
 @lesson-instruction{
 Let's identify the root node, branches, decision nodes, and leaf nodes on our tree so far.
@@ -159,12 +169,14 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 
 @teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
 
+@vspace{1ex}
+
 @right{@image{images/terminology-tree.png, 300}}
 
-- The root node is the very top node that represents the entire population or sample.
-- @vocab{Splitting} is the process of dividing a node into sub-nodes with branches.
-- Decision nodes split from the root node, or from other nodes.
-- A leaf node is a node that does not split.
+- The *root node* is the very top node that represents the entire population or sample.
+- @vocab{Splitting} is the process of dividing a node into sub-nodes (decision and/or leaf nodes)with branches. These branches will not necessarily be equal in size, and can contain one or many ITEMS (WHAT WORD DO WE ACTUALLY WANT HERE?)
+- *Decision nodes* split from the root node, or from other nodes.
+- A *leaf node* is a node that does not split. Just like leaves on most trees, leaf nodes are found at the tip of a branch.
 
 @vspace{1ex}
 
@@ -177,9 +189,9 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 
 @right{@image{images/tree4.png, 400}}
 
-One possible completed tree is on the right.
+The completed tree for the first question looks like this.
 
-To create a different tree, students can start with any of the questions from levels 2 or 3, or they can generate an entirely different starting question.
+To create a different tree, students can either choose one of the questions from levels 2 or 3 as their root node, or they can generate an entirely different starting question.
 
 As students finish, invite them to draw their trees on the board. Ideally, you will have a wide assortment of trees! If students are not developing interesting trees, urge them to think of *entirely* different questions than those posed in the sample tree.
 
@@ -193,21 +205,19 @@ As students finish, invite them to draw their trees on the board. Ideally, you w
 Let's take a step back and see how well some of our decision trees will perform.
 
 @lesson-instruction{
-Complete Q1 on @printable-exercise{comparing-trees.adoc}.
+Complete @printable-exercise{comparing-trees.adoc}.
 }
 
 @teacher{
 Invite students to share and explain their responses before emphasizing the main ideas, below.
 }
 
-You just observed how a decision tree can accurately label and categorize the inputs _that it has been trained to label and categorize_. However, the tree we tested—which was 100% accurate on the training dataset—faltered when we offered it inputs that were either *unknown*, like the chopstick, or *ambiguous*, like the spork.
+You just observed that a decision tree
+
+- can accurately label and categorize the inputs _that it has been trained to label and categorize_
+- falters when offered inputs that are either *unknown* (like chopstick) or *ambiguous* (like spork)
 
 The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!
-
-
-@lesson-instruction{
-Complete the remainder of @printable-exercise{comparing-trees.adoc}.
-}
 
 @QandA{
 @Q{Why is it advantageous for AI to be efficient?}
@@ -215,6 +225,18 @@ Complete the remainder of @printable-exercise{comparing-trees.adoc}.
 @Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
 @A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
 }
+
+As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. Our decision trees were imperfect because they didn't know about the utensils we either forgot to include or didn't know about.
+
+If you were asked to create a decision tree to identify common animals or foods, you could probably draw on a wealth of knowledge to create a similarly good one without much difficulty.
+
+Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than it was to build the common tableware classification tree we just made because... !
+
+@centered-image{images/iris-data.png}
+
+When computers build decision trees, they don't have life experience to draw upon. They only use the data we provide... and that data can sometimes be limited or messy! As a result, we may end up with models that are not 100% accurate.
+
+=== Synthesize
 
 In AI, efficiency and accuracy are often in conflict:
 
@@ -224,17 +246,12 @@ In AI, efficiency and accuracy are often in conflict:
 
 Striking the perfect balance is an ongoing challenge for computer scientists, and it is a challenge with far-reaching implications.
 
-=== Synthesize
-
-As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. And our decision tree didn't know about the utensils we either didn't know about yet or forgot to include. If you were asked to create a decision tree to identify common animals or foods, you could probably do that without much difficulty as well. 
-
-Computers build decision trees using only the data we provide... and that data can sometimes be limited or messy. As a result, we may end up with models that are not 100% accurate.
-
-Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than it was to build the common tableware classification tree we just made because... !
-
-@centered-image{images/iris-data.png}
-
-
+@QandA{
+@Q{Why is it advantageous for AI to be efficient?}
+@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
+@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
+@A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
+}
 
 == Decision Trees from Training Datasets @duration{25 minutes}
 
@@ -244,13 +261,9 @@ Students build a decision tree that predicts whether different individuals will 
 
 === Launch
 
-We have already built some extremely simple decision trees. We have seen instances where these trees classify successfully, but we also know that decision trees can sometimes fail when we provide them with ambiguous or unknown data.
+We have already built some extremely simple decision trees. And we have seen instances where these trees classify successfully as well as instances where they fail.
 
-We have *not* yet learned about how decision trees built from large datasets often make relatively accurate predictions, recommendations, and diagnoses!
-
-The key to building an effective decision tree is to decide—at every level and every node—which attributes are the most informative ones to ask questions about.
-
-...but how do we make such decisions?!
+How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about so that they can make relatively accurate predictions, recommendations, and diagnoses?!
 
 It turns out, there's an algorithm for that, and it's relatively straightforward.
 
@@ -259,9 +272,11 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 
 Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-Is it a coincidence? No. On a computer, 'cookies' are small data files that a website can store on your device. These can be used to remember where you were the last time you visited a site, or a setting that you changed and want to keep the next time you visit a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+Is it a coincidence?
 
-We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether each one purchases a video game or not.
+No. Websites can store small data files on your device. These "cookies" can be used to remember where you were the last time you visited a site, or a setting that you changed and want to keep the next time you visit a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+
+We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether or not each one purchased a video game.
 
 @QandA{
 @Q{With your partner, look over the @handout{decision-tree-data.adoc, Training Dataset}. What do you Notice? What do you wonder?}
@@ -272,7 +287,12 @@ We're going to create a decision tree that predicts whether or not different cus
 @A{Responses will vary.}
 }
 
-One problem with this dataset is that _age is continuous_. That won’t work! We need to break these ages down into different groups - which will become different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers; twenties; and thirties.*
+One problem with this dataset is that _age is continuous_. That won’t work!
+
+We need to break these ages down into different groups - which will become different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers, twenties, and thirties.*
+
+We can use a different representation, called a @vocab{tree stump} for this than we did with the yes-no questions we saw in our previous decision trees.
+
 
 @lesson-instruction{
 - We will complete @printable-exercise{level-1.adoc} together, starting with "age" as the root node.
@@ -325,10 +345,13 @@ There are two possible questions we could use at the next level of our decision 
 
 @QandA{
 @Q{What are some reasons that a decision tree might produce an inaccurate prediction or recommendation?}
-@A{If the tree has been designed to prioritize efficiency over accuracy, it may produce wrong predictions and recommendations. If the training dataset does not accurately represent the broader population, predictions and recommendations will be incorrect.}
+@A{If the sample is inconsistent and the prediction represents closer to 50% of the sample population than 100% of the population.}
+@A{If the tree has been designed to prioritize efficiency over accuracy, it may produce wrong predictions and recommendations.}
+@A{If the training dataset does not accurately represent the broader population, predictions and recommendations will be incorrect.}
 
 @Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can create problems?}
-@A{Responses will vary. When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
+@A{Responses will vary.}
+@A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
 }
 
 

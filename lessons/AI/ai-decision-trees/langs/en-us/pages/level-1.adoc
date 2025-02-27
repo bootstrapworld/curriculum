@@ -2,52 +2,61 @@
 
 [.linkInstructions]#Use the @handout{decision-tree-data.adoc, "training data"} to respond to the prompts below.# Let's investigate what happens when we begin our tree with "age" as the root.
 
-== Investigating "age"
+== Predicting Shopping Behavior by "age"
 
-@n Using information from the "age" column and the "buys game" column, fill in the blanks below.
+@n Let's look at the "buys game" and "age" columns of the training dataset and see what we can learn about each age group's purchasing habits.
 
-- The training data indicates that individuals in their thirties probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+@indented{
+[cols=".^1a, .^10a", stripes="none", grid="none", frame="none"]
+|===
+|teens:
+| @fitbruby{7em}{@ifsoln{2}}{# who bought} out of @fitbruby{7em}{@ifsoln{5}}{# in age group} individuals buy the game.
+|twenties:
+| @fitbruby{7em}{@ifsoln{4}}{# who bought} out of @fitbruby{7em}{@ifsoln{4}}{# in age group} individuals buy the game.
+| thirties:
+| @fitbruby{7em}{@ifsoln{3}}{# who bought} out of @fitbruby{7em}{@ifsoln{5}}{# in age group} individuals buy the game.
+|===
+}
 
-- The training data indicates that individuals in their twenties probably @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
+@n Let's use what we've learned to write our rule. Predict that:
 
-- The training data indicates that teens @fitbruby{10em}{@ifsoln{will not}}{will / will not} buy the game.
+@indented{
+- individuals in their @fitbruby{15em}{@ifsoln{twenties}}{teens / twenties / thirties} and in their @fitbruby{15em}{@ifsoln{thirties}}{teens / twenties / thirties} will buy the game.
+- individuals in their @fitbruby{15em}{@ifsoln{teens}}{teens / twenties / thirties} will not buy the game.
+}
 
+== Decision Stumps
 
-Here’s our rule: 
+Below is a "decision stump" representing the distribution of all of the "age" data in the dataset. It's called a stump because it has just one level. You'll notice that it branches three ways (each with a yes/no) rather than the simple forks we've seen in previous decision trees.
 
-- *Predict that individuals in their @fitbruby{15em}{@ifsoln{twenties}}{teens / twenties / thirties} and in their @fitbruby{15em}{@ifsoln{thirties}}{teens / twenties / thirties} will buy the game.* 
-- *Predict that individuals in their @fitbruby{15em}{@ifsoln{teens}}{teens / twenties / thirties} will not.*
-
-@n Will a computer following this rule make correct predictions for all 14 individuals in the training dataset? @fitb{5em}{@ifsoln{No.}}
-
-@n According to our training data, this rule is correct in @fitb{5em}{@ifsoln{10}} instances out of 14.
-
-@n Here is one way to represent the decision tree for "age". We call this a "decision stump" because it has just one level. Place checkmarks below all correctly predicted values in the "twenties" and "thirties" leaf nodes.
+@n Place checkmarks below each of the values that the computer would predict correctly.
 
 @ifnotsoln{@center{@image{../images/stump.png, 200}}}
 
 @ifsoln{@center{@image{../images/age-stump-checks.png, 170}}}
 
-@n Are any of the leaf nodes for "age" pure? (_Pure_ means that the leaf contains exclusively one single value.) If so, which? @fitb{}{@ifsoln{Yes; "twenties".}}
+@n A computer following this rule for our training data would make @fitb{3em}{@ifsoln{10}} correct predictions out of 14 attempts (@fitb{3em}{@ifsoln{71}} % accuracy).
 
-@n If we used the decision tree stump above to make predictions:
+@n If we used the decision tree stump above to make predictions, find the likelihood of a correct prediction for each age group.
 
-- the likelihood of a correct prediction for a teenage shopper is @fitb{5em}{@ifsoln{60}}%
+@hspace{3em} teenage shopper: 	@fitb{5em}{@ifsoln{60}}%
+@hspace{3em} shopper in their twenties: @fitb{5em}{@ifsoln{100}}%
+@hspace{3em}shopper in their thirties:@fitb{5em}{@ifsoln{60}}%
 
-- the likelihood of a correct prediction for a shopper in their twenties is @fitb{5em}{@ifsoln{100} }%
+@n Which (if any) of the leaf nodes for "age" are pure? (_Pure_ means that the leaf contains exclusively one single value.) @fitb{}{@ifsoln{"twenties"}}
 
-- the likelihood of a correct prediction for a shopper in their thirties? @fitb{5em}{@ifsoln{60} }%
+== Branching Again
+
+@n Before moving on to the second level of his decision tree, Ernie removed all of the rows for people in their twenties. As Bert watched Ernie grab a pencil and cross out those rows, he said,
 
 @vspace{1ex}
 
-== Branching beyond "age"
+@indented{_"I don't think that's a good idea! Why would we alter our dataset just because we're starting the second level of the tree?"_}
 
-@n After creating the first level of his decision tree, Ernie removed Maribel, Rasula, Kate, and Taikhoom from the training set. As Bert watched Ernie grab a pencil and cross out those rows, he said, "I don't think that's a good idea! Why would we alter our dataset just because we're starting the second level of the tree?" Why does it make sense to remove those four individuals from the dataset? Explain Ernie's (correct) decision to Bert.
+Explain Ernie's (correct) decision to Bert. @fitb{}{@ifsoln{Since all customers in their twenties buy the game, it's a leaf node,}}
 
-@fitb{}{@ifsoln{Maribel, Rasula, Kate, and Taikhoom are customers in their twenties who buy the game.}}
+@fitb{}{@ifsoln{which means there won't be any branches for these rows to train the AI to make decisions for.}}
 
-@fitb{}{@ifsoln{They are represented by the Ys in the leaf node. It is a leaf node, so it will not split again.}}
+@n We need to decide which column it makes most sense to branch to after our "teens" and "thirties" decision nodes. What are our choices?
 
-@n For each decision node we have created ("teens" and "thirties"), we need to decide whether it makes more sense to branch to @fitbruby{15em}{@ifsoln{interest in game}}{[column]} or @fitbruby{15em}{@ifsoln{shopping history}}{[column]}. We do not need to branch from "twenties" because @fitb{}{}
-
-@fitb{}{@ifsoln{it resulted in a leaf node, which will not split again.}}
+@indented{@fitbruby{15em}{@ifsoln{interest in game}}{[column]} or @fitbruby{15em}{@ifsoln{shopping history}}{[column]}}

@@ -1,6 +1,13 @@
 = Building and Testing a Decision Tree
 
-On @printable-exercise{level-1.adoc}, we decided that the decision mode at the end of the "teens" branch should be "interest in game". Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
+++++
+<style>
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+</style>
+++++
+
+On @printable-exercise{level-2.adoc}, we decided that the decision mode at the end of the "teens" branch should be "interest in game". Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
 
 == Build and Understand the Tree
 
@@ -23,20 +30,18 @@ Fill in the remainder of the tree using the algorithm you have learned (left) be
 @n The root node of this tree is @fitb{10em}{@ifsoln{age}}.
 
 
-@n The first set of branches includes @fitb{10em}{@ifsoln{teens}}, @fitb{10em}{@ifsoln{twenties}}, and @fitb{10em}{@ifsoln{thirties}}.
+@n The first set of branches includes: +
+@fitb{8em}{@ifsoln{teens}}, @fitb{8em}{@ifsoln{twenties}}, and @fitb{8em}{@ifsoln{thirties}}.
 
 @vspace{1ex}
 
-@n Write the rules that this decision tree follows: @ifsoln{Answers will vary.}
+@n Write the rules that this decision tree follows. Predict that:
 
+a) @fitb{12em}{@ifsoln{interested}} teens will buy the game.
 
-a) Predict that @fitb{10em}{@ifsoln{interested teens}} will buy the game.
+b) @fitb{12em}{@ifsoln{everyone}} in their twenties will buy the game.
 
-@vspace{1ex}
-
-b) Predict that *all* individuals in their twenties @fitbruby{10em}{@ifsoln{will}}{will / will not} buy the game.
-
-c) Predict that @fitb{15em}{@ifsoln{new customers in their thirties}} will not buy the game.
+c) @fitb{12em}{@ifsoln{previous customers}} in their thirties will buy the game.
 
 |===
 
@@ -45,23 +50,19 @@ c) Predict that @fitb{15em}{@ifsoln{new customers in their thirties}} will not b
 
 @vspace{1ex}
 
-Let's see how well our decision tree predicts if Kat, Billy, or Chen will buy the game.
+@n Complete the table below based on whether our decision tree predicts if Kat, Billy, or Chen will buy the game.
 
 @vspace{1ex}
 
-[cols="2,2,3,2,2", stripes="none", options="header"]
+[cols="2,2,3,2,2,2", stripes="none", options="header"]
+|===
+| name 		| age 		| shopping history 	| interest in game 	| buys game | model predicts
+| Kat 		| teen 		| new customer		| yes 				| yes		| @ifsoln{will buy}
+| Billy		| twenties	| new customer		| no 				| none		| @ifsoln{will buy}
+| Chen	    | twenties 	| previous customer | no  				| none		| @ifsoln{will buy}
 |===
 
-| name 		| age 		| shopping history 	| interest in game 	| buys game
-| Kat 		| teen 		| new customer		| yes 				| yes
-| Billy		| twenties	| new customer		| no 				| no
-| Chen	    | twenties 	| previous customer | no  				| no
-
-|===
-
-@n What prediction will the decision tree make for Kat? @fitb{10em}{@ifsoln{will buy}} Billy? @fitb{10em}{@ifsoln{will buy}} Chen? @fitb{10em}{@ifsoln{will buy}}
-
-@n Compare the test data with the decision tree recommendations. How often was the computer correct? @fitb{}{@ifsoln{1 out of 3 times}}
+@n Compare the test data with the decision tree recommendations. For which customers was the computer correct?  @hspace{1em} @ifsoln-choice{Kat} @hspace{1em} Billy @hspace{1em} Chen
 
 @n Based on this new test data, which rule (see Q3, above) needs to change? Why? @fitb{}{@ifsoln{We need to change Rule b,}}
 
