@@ -44,12 +44,13 @@ While texting, emailing, or even conducting a web search, you've probably notice
 @lesson-instruction{
 - Consider this start of a phrase: "Close the..."
 - On a piece of paper, write down the next word that pops into your mind.
-- Write down two additional next words.
-- As a class, we will generate a list of all of the words we suggested.
+- Write down two other possible next words.
 }
 
 @teacher{
-Students will think of words like "door", "box", "microwave", "laptop"... On the board, record their word suggestions. If a word is repeated, keep a tally of how many students suggest each particular word.
+Record students word suggestions on the board. If a word is repeated, keep a tally of how many students suggest each particular word.
+
+Students will think of words like "door", "box", "microwave", "laptop"...
 }
 
 === Investigate
@@ -70,32 +71,38 @@ Let's look a little more closely at the words we generated.
 
 @QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
-@A{Invite conversation, and then share the image below to see the word options provided by one text messaging app.}
+@A{Answers will vary.}
+@A{An app probably not suggest all the same words.}
+@A{Our class is a pretty small sample, all from the same generation and geography and we are all currently at school so our minds are primed to respond differently than if we were somewhere else.}
 }
 
-@right{@image{images/texting-app.png, 200}}
+@teacher{
+@right{@image{images/texting-app.png, 200}}Invite conversation. Then share this image from a text messaging app.
+}
 
+Similar to other AI systems we've discussed, your predictive text feature is trained on a large amount of data, in this case, text.
 
-We've already discussed how AI systems are trained. Similarly, your predictive text feature is trained on a large amount of text.
+During training:
 
-During training, the computer extracts each use of the phrase "Close the" from the training data, along with the subsequent word. It then determines the probability of each possible next word. In this particular corpus, for this particular user, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested for that user to choose from.
+. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
+. It then determines the probability of each possible next word.
+. When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
+
+In this particular corpus, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
 
 But are all users recommended the _same_ completions?
 
 @QandA{
-@Q{What do you think? Will your phone suggest the same words as your classmates' phones? Why or why not?}
-@A{Refer to the in-depth student-facing explanation, below.}
-}
-
-@teacher{
-Before revealing the answer, invite student dialogue. This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{ai-training, "plagiarism detection"}.
+@Q{What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
+@A{Before we get into the in-depth student-facing explanation, below, invite discussion!}
+@A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{ai-training, "plagiarism detection"}.}
 }
 
 Not all phones will propose the same completions for a variety of reasons:
 
-- There might be multiple words with equal probability, in which case the system must use some method of random selection.
+- Even the same phone won't necessarily propose the same word every time. There might be multiple words with equal probability, in which case the system must use some method of random selection.
 
-- Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
+- Not all phones use the same system. Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
 
 - A messaging app also includes a model of the text that _the actual user_ composes. The app therefore offers a degree of personalization based on what the user has chosen in the past. Similarly, the app can take into account the word suggestions that you have previously accepted.
 
@@ -108,9 +115,9 @@ Not all phones will propose the same completions for a variety of reasons:
 @A{Phenomena 4 is almost anti-statistical! The AI consumes and uses data outside of the model for the corpus.}
 }
 
-Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
+Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
 
-You have just considered the workings and in-context use of a @vocab{statistical language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows *probability*, which it uses in ways that are often very impressive (but sometimes not!).
+You have just considered the workings and in-context use of a @vocab{statistical language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
 
 @teacher{
 Throughout the lesson, we'll explore the very important "sometimes not" parenthetical, above.}
@@ -119,11 +126,11 @@ Throughout the lesson, we'll explore the very important "sometimes not" parenthe
 
 @QandA{
 
-@Q{Can you imagine doing statistical language modeling for other spoken human languages? Which languages?}
-@A{Statistical language modeling will work for any language. The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
+@Q{Might statistical language modeling be possible for other spoken human languages? Which languages?}
+@A{Statistical language modeling will work for any language! The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
 
-@Q{Are there things that are _not_ human spoken languages that a similar approach might work on?}
-@A{Yes! With statistical language modeling, AI can compose music, play chess games, and more. The "text" need not be made up of words: any symbolic notation at all will do.}
+@Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
+@A{With statistical language modeling, AI can compose music, play chess games, and more. The "text" need not be made up of words: any symbolic notation at all will do.}
 }
 
 
@@ -140,7 +147,7 @@ Students construct a statistical language model by decomposing the text and comp
 
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
-For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follows.
+For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
 
 First, we will decompose the title of our corpus into differently sized chunks (one word at a time, two words at a time, etc.):
 
@@ -171,7 +178,7 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 Let's dig a little deeper...
 
 @teacher{
-To share the song lyrics with students,  have students @handout{old-lady-lyrics.adoc, "read them independently"}. If desired, you could also listen to a recorded version of the song.
+Share the @handout{old-lady-lyrics.adoc, song lyrics"} with students,  have students and have them read them independently". If desired, you could also listen to a recorded version of the song.
 }
 
 The phrase "there was an old lady who swallowed a..." is repeated in our corpus! Let's zoom in on one unigram from that phrase: “there”.
@@ -185,41 +192,35 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 @A{4/4 or 100%}
 }
 
-In the example you just worked through, you computed the probability that "was" appears after the unigram "there". We can represent the computation you just completed with a special notation:
+In the example you just worked through, you computed the probability that "was" appears after the unigram "there" by dividing 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything). +
 
+We can represent this computation with a special notation:
+
+@indented{
 @math{p(was | there) =}
 @math{\frac
 	{\textit{count(there was)}}
 	{\textit{count(there...)}}
 = {\frac{4}{4}}}
-
-Put another way: To compute the probability that "was" follows "there", we divide 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything).
-
+}
 
 @lesson-instruction{
 - Complete @printable-exercise{constructing-model.adoc}.
 }
 
 @teacher{
-Are you and your students interested in exploring probability in more depth? Check out @lesson-link{probability-inference} to dig deeper.
+Are you and your students interested in exploring probability in more depth? Check out our lesson on @lesson-link{probability-inference} to dig deeper.
 }
-
 
 === Synthesize
 
 @QandA{
-In our corpus, there were _three_ possible completions for the 3-gram "to catch the." There were _four_ possible completions for the unigram "the."
-
-Based on these observations, we can conclude that _in this corpus_, as the value of @math{n}_increases_, the number of completion options _decreases_.
+In our corpus, there were _four_ possible completions for the unigram "the", but there were only _three_ possible completions for the 3-gram "to catch the". +
+_In this corpus_, as the n-gram gets longer, the number of completion options decreases.
 
 @Q{Do you think the above statement is true of other corpuses?}
 @A{Yes, in general, this is a true statement: longer phrases have fewer possible completions than single words.}
-
 }
-
-
-
-
 
 == Sampling from the Model
 
@@ -230,9 +231,7 @@ Having built a language model, what can we do with it? We can use it in a genera
 How might we go about doing that?
 
 - We can start by choosing our first word. A common approach is to ask, "What's the most common @math{n}-gram in the corpus?" but we can also choose the starting word on our own, if we want.
-
 - Next, we ask: "Given the first @math{n}-gram, what is the most common successor?"
-
 - We repeat this second step forever! ...or, more realistically, until we decide to stop the program. A simple statistical language model, however, will generate text ad infinitum.
 
 === Investigate
@@ -241,7 +240,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @lesson-instruction{
 
-- Using @handout{old-lady-lyrics.adoc}, complete the first section of @printable-exercise{sampling.adoc}.
+- Complete the first section of @printable-exercise{sampling.adoc} using @handout{old-lady-lyrics.adoc}.
 - Tip: You will be able to work more efficiently if you open the PDF of the handout on a computer and use "Control-F" on a PC or "Command-F" on a Mac to help you locate and count words.
 }
 
@@ -253,7 +252,6 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
 @A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, an no ties.}
-
 }
 
 @lesson-instruction{
@@ -261,13 +259,11 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 }
 
 @QandA{
-@Q{What four-word phrase did you generate?}
-@A{The class should be split between "The spider to catch" and "The spider that wriggled".}
+@Q{What four-word phrase did you generate for *Text Generation 2a*?}
+@A{The class should be split between "the spider to catch" and "the spider that wriggled".}
 
-
-@Q{Did everyone in your class end up with same phrase? How and why did that happen?}
-
-@A{No. Students arrived at different four-word phrases because we were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
+@Q{Why didn't everyone end up with the same phrase?}
+@A{We were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
 }
 
 Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text, which influences the level of randomness. For instance, ChatGPT users are encouraged to use a _low_ temperature for more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks.
@@ -277,7 +273,6 @@ Temperature is the parameter that controls the randomness of the model's output 
 }
 
 Even _without_ the ability to raise the temperature, we encountered randomness and variability in our generated texts. With a large enough corpus and a high enough temperature, a statistical language model will produce a new and unique output every single time!
-
 
 @strategy{AI "Hallucinations"}{
 
@@ -290,26 +285,17 @@ The very same process that generates "hallucinatory" text _also_ generates the "
 This term also attributes intent and consciousness to the AI, giving it human qualities when it is merely executing a program exactly as it is intended to do.
 }
 
-
-
 === Synthesize
 
 @QandA{
-
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
 
 @Q{This form of AI often has trouble with _facts_. Put another way, ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
-
 @A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
-
 @Q{Others complain that ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
-
-@A{If there are biases in the corpus, there will likely be biases in the output.}
+@A{If there are biases in the corpus, there will likely be biases in the output!}
 }
-
-
-
 
 
 == What is the Role of Language?
@@ -320,40 +306,52 @@ Students consider whether statistical language modeling requires language.
 
 === Launch
 
+It's time to peek behind the curtain and see how a computer can put a statistical language model to use! Let's play a quick game to prepare ourselves for making sense of the tool we'll be working with.
 
 @lesson-instruction{
-- Play a game of tic-tac-toe with your neighbor.
-- Play the tic-tac-toe game spelled out (Document A, on the right) with your neighbor.
-@right{@image{images/docA.png, 100}}
-
-- Not sure how to proceed?
-** The tic-tac-toe board is a 3x3 coordinate plane.
-** Each row of the document contains two pieces of information: (1) the player (X or O), and (2) the ordered pair for the selected cell.
+- Draw a tic-tac-toe grid on your paper and play a game of tic-tac-toe with your neighbor. +
+_In case you need a refresher on the game:_
+  * The tic-tac-toe board is a 3x3 grid.
+  * One person will draw and *X* in one of the squares.
+  * The other person will draw and *O* in one of the squares.
+  * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
+  * The game ends when one of you gets three in a row or the grid is full.
 }
 
+@slidebreak
+
+@lesson-instruction{
+@right{@image{images/docA.png, 150}}
+
+- Now draw another tic-tac-toe grid on your paper on which to play the game described by Document A with your neighbor. +
+_This info might help you get started:_
+  * Think of the tic-tac-toe grid as a 3x3 coordinate plane.
+  * Each row of the document contains two pieces of information:
+  	*** the player whose turn it is (X or O)
+  	*** the ordered pair (x, y) for the location of the player's move on that turn
+}
 
 === Investigate
 
-You've used a paper, pencil, and probability to apply the principles of statistical language modeling. It's time to peek behind the curtain and see how a computer can put this model to use! To make that happen, we're going to explore Soekia, a simplified text generation tool designed for student learning. As we explore, we are going to consider: What is the role of _language_ in a statistical language model?
+We're going to explore Soekia, a simplified text generation tool designed for student learning. As we explore, we are going to consider: What is the role of _language_ in a statistical language model?
 
 @lesson-instruction{
-- Go to @link{http://bootstrapworld.org/SoekiaGPT/}
-- Click the "LOOK INSIDE" button at the top right of your screen.
+- Open a browser window and make sure it is filling the full width of your screen.
+- Go to @link{http://bootstrapworld.org/SoekiaGPT/} and click the "LOOK INSIDE" button at the top right of your screen.
 - Scroll to the right until the green, right-most panel ("Documents") is in view.
-- Click the "Collections" icon in the upper right corner.
-- From the drop-down menu that appears, select "tic-tac-toe".
+- Click the "Collections" icon (the middle of the three icons in the upper right corner).
+- From the drop-down menu that appears, select the "tic-tac-toe" icon (second from the bottom).
 - Complete @printable-exercise{tic-tac-toe.adoc}
 }
 
 @teacher{
-Invite students to share their discoveries. We encourage you to allow students the opportunity to play with Soekia. There are many possible discoveries awaiting your students!}
+Invite students to share their discoveries. We encourage you to allow students the opportunity to play with Soekia. There are many possible discoveries awaiting your students!
+}
 
 === Synthesize
 
 @QandA{
-
 @Q{Does a statistical language model require language? How do you know?}
-
 @A{No. It just needs some sort of corpus. Natural language is absolutely not needed. Chess games, musical compositions, and tic-tac-toe games are all adequate!}
 }
 
@@ -389,7 +387,7 @@ The vast majority of students will have a story that is primarily sourced from "
 
 Let's review what we have done so far:
 
-- We have interacted Soekia's text generation panel. With modern AI, the text generating interface is the only element that we are privy to. Unlike the AI we use daily, Soekia allowed us to glimpse which words and phrases came from which sources.
+- We have interacted with Soekia's text generation panel. With modern AI, the text generating interface is the only element that we are privy to. Unlike the AI we use daily, Soekia allowed us to glimpse which words and phrases came from which sources.
 
 - We have also peeked at Soekia's documents panel, or corpus. This is a critical feature of all text-generating AI, but ordinarily, it is hidden from us. Soekia also revealed to us the level of alignment between each document and what _we_ typed into the box on the "Generate Text" panel.
 
@@ -410,7 +408,6 @@ As students are working, you can share the three tips, below.
 Advance to the next slide for student-facing tips on navigating Soekia.
 }
 
-
 @slidebreak
 
 If you feel overwhelmed as you work, here are some tips:
@@ -422,7 +419,7 @@ If you feel overwhelmed as you work, here are some tips:
 - To slow down text generation and to allow time to observe changes as they occur, click the "Choose yourself" icon and use your mouse to select words. (You will be prompted to do this in the next activity.)
 
 @teacher{
-After they complete the "Closer Look" worksheet, invite students to share out on what they learned. In particular, have students share their predictions and whether they were correct or not. See if, as a class, you can develop an understanding of any unexpected outcomes.
+After they complete the "Closer Look" worksheet, invite students to share what they learned. In particular, have students share their predictions and whether they were correct or not. See if, as a class, you can develop an understanding of any unexpected outcomes.
 }
 
 === Investigate
@@ -438,15 +435,9 @@ As we have discussed @vocab{temperature} is the parameter that controls the rand
 @Q{AI sometimes generates false or misleading information. Do you think this is more likely to occur at a high temperature or a low temperature? Explain.}
 }
 
-
-
-
-
 === Synthesize
 
 @QandA{
-
 @Q{A student argues that AI is a reliably correct and credible source of information. How would you respond?}
-
 @A{The output that AI produces depends on the corpus on which it is trained, but also the language model used to generate the text. The very same process that generates so-called "hallucinatory" text _also_ generates the "non-hallucinatory" text. AI does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
- }
+}
