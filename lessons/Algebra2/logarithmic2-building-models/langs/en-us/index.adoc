@@ -68,46 +68,11 @@ The linear, quadratic and exponential models we’ve found for the @starter-file
 
 *The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!*
 
-When we reflect the covid curve over @math{y=x},
-the graph _starts_ with rapid growth, and then flattens out.
-
-++++
-<style>
-/* position the second image right on top of the first */
-.right { position: relative; }
-.image-figure + .image-figure {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-/* Fade-away Animation*/
-@keyframes fade {
-	0%   { opacity: 1; }
-	100% { opacity: 0; }
-}
-
-/* Both images should use the fade animation */
-.image-figure + .image-figure, .image-figure:has(+.image-figure) {
-	animation-name: fade;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-duration: 5s;
-	animation-direction: alternate;
-}
-/* But the second image should do it in reverse */
-.image-figure + .image-figure{
-	animation-direction: alternate-reverse;
-}
-
-</style>
-++++
+When we reflect the covid curve over @math{y=x}, the graph _starts_ with rapid growth, and then flattens out.
 
 @ifnotslide{
-@right{
-@image{images/MA-covid.png, 350}
-@image{images/MA-covid-flipped.png, 320}
-} We see that:
+@right{@image{images/crossfade.png, 350}}
+We see that:
 
 - During the pandemic, our initial value was roughly 120,000 cases.
 - To reach 150,000 cases, it took 75 days
