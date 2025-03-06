@@ -5,15 +5,20 @@
 
 == Text Generation Exercise #1
 
-@n Let's start our text generation with the phrase "She ". Determine which word is most likely to follow "She ": @fitb{8em}{@ifsoln{swallowed}}
+@n Let's start our text generation with the phrase "She ".
 
-@n What word most likely follows the word you wrote in the second blank? @fitb{8em}{@ifsoln{a}}
+@indented{*Text Generation 1*:
+@fitbruby{10em}{She}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{swallowed}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{a}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{fly}}{fourth word}
+}
 
-@n Use statistical language modeling to determine the fourth word: @fitb{8em}{@ifsoln{fly}}
+@n Determine which word is most likely to follow "She " and record it one the line for second word above.
 
-@n Record your text generation in the spaces below:
+@n Determine which word is most likely to follow the word you just wrote down and record it on the line for third word above.
 
-*Text Generation 1*: @fitb{10em}{@ifsoln{She}} @hspace{1em} @fitb{10em}{@ifsoln{swallowed}} @hspace{1em} @fitb{10em}{@ifsoln{a}} @hspace{1em} @fitb{10em}{@ifsoln{fly}}
+@n Use statistical language modeling to determine the fourth word.
 
 @n Everyone in your class should have generated the *same* text. Why do you think that was the outcome?
 
@@ -26,43 +31,52 @@
 
 == Text Generation Exercise #2
 
-@n Below is a list of the most common unigrams in the corpus. This time, let's start by choosing the *most* common word: @fitb{8em}{@ifsoln{The}}
+@vspace{1ex}
 
-- "the": 15 times
-- "a": 13 times
-- "she": 11 times
+Here is a list of the most common unigrams in the corpus: @hspace{2em} "a": 13 times  @hspace{2em} "she": 11 times @hspace{2em} "the": 15 times
 
-@n What word most likely follows the word you just chose? @fitb{8em}{@ifsoln{spider}}
+@n Let's start by choosing the *most* common word: @fitb{8em}{@ifsoln{the}}
 
-@n How many times does "That" follow "spider"? @fitb{5em}{@ifsoln{3}} How many times does "to" follow "spider"? @fitb{5em}{@ifsoln{3}}
+@n Determine which word is most likely to follow that word: @fitb{8em}{@ifsoln{spider}}
 
-@n There is an equal probability of choosing "to" and "that"! Flip a coin to decide between them. What did you pick? @fitb{8em}{@ifsoln{to / that}}
+@n There are two words that have an equal probability of appearing in the third spot! What are they? @fitb{7em}{@ifsoln{that}} and @fitb{}{@ifsoln{to}}
 
-@n Use statistical language modeling to determine the fourth word: @fitb{8em}{@ifsoln{catch / wriggled}}
+@n Flip a coin to determine which one you will use to complete *Text Generation 2a* and use statistical language modeling to determine the fourth word. Then repeat the process for *Text Generation 2b* using the other word that tied for the third spot.
 
-@n Transfer your responses above onto the blank spaces below. @teacher{Some students will have the 2a response in the 2b blanks, and vice versa— which is fine!}
+@vspace{1ex}
 
+@teacher{
+Some students will have the 2a response in the 2b blanks, and vice versa — which is fine!
 
-*Text Generation 2a*: @fitb{10em}{@ifsoln{The}} @hspace{1em} @fitb{10em}{@ifsoln{spider}} @hspace{1em} @fitb{10em}{@ifsoln{to}} @hspace{1em} @fitb{10em}{@ifsoln{catch}}
+@vspace{1ex}
+}
 
+@indented{*Text Generation 2a*:
+@fitbruby{10em}{the}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{that}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{wriggled}}{fourth word}
+}
 
-@n Some of your classmates probably generated a different four-word phrase than you did! Use statistical language modeling to determine the _other_ four-word phrase. Write it in the blanks spaces below.
+@vspace{1ex}
 
+@indented{*Text Generation 2b*:
+@fitbruby{10em}{the}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{to}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{catch}}{fourth word}
+}
 
-*Text Generation 2b*: @fitb{10em}{@ifsoln{The}} @hspace{1em} @fitb{10em}{@ifsoln{spider}} @hspace{1em} @fitb{10em}{@ifsoln{that}} @hspace{1em} @fitb{10em}{@ifsoln{wriggled}}
+@n Why was there only one result for *Text Generation Exercise 1*, while *Text Generation Exercise 2* had two possible results?
 
+@fitb{}{@ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", }}
 
-@n Why do you think *Text Generation Exercise 1* _always_ produced the same result, but *Text Generation Exercise 2* resulted in more than one possible outcome?
+@fitb{}{@ifsoln{whereas there was always a most likely word for *Text Generation Exercise 1*}}
 
-@fitb{}{@ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", whereas *Text Generation Exercise 1*}}
-
-@fitb{}{@ifsoln{was completely deterministic.}}
-
-@fitb{}{}
 
 @star What is another starting word that would result in only one possible four-word phrase? @fitb{}{@ifsoln{was, an, old, lady, who}}
 
-@star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat}}
+@star @star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat}}
 
 
 
