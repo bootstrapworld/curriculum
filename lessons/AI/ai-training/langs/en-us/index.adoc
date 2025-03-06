@@ -47,7 +47,7 @@ Data is at the heart of data science, and @vocab{data-driven algorithms} are at 
 @teacher{Invite students to share their responses.
 
 - If their responses highlight that data-driven algorithms produce a higher quality output when we provide more data--great! Your students understood the key take-away from our @lesson-link{ai-data-driven-algorithms} lesson.
-- Your students might bring new complexity to the conversation by acknowledging the possibility that *programmer interference* could be the cause of Michelle's increased satisfaction with her play list.
+- Your students might bring new complexity to the conversation by acknowledging the possibility that a programmer's changes to the algorithm could be the cause of Michelle's increased satisfaction with her play list.
 - If your students do *not* propose that the Spotify's algorithm was updated (as we suggest in the answer key), that's okay! *There's no need to reveal that possibility immediately.* We recommend moving on with the lesson. After completing @printable-exercise{song-recommending.adoc}, you can circle back to @printable-exercise{case-study-michelle.adoc}.
 }
 
@@ -57,7 +57,7 @@ For Michelle to get better results, changing the code is not necessarily needed.
 
 Very broadly, a song recommendation system does two things:
 
-- aggregate a users listening history to build a detailed profile of their musical tastes
+- aggregate a user's listening history to build a detailed profile of their musical tastes
 - given a new song, determine whether or not to recommend that song
 
 What does building the profile for a listener entail?
@@ -79,7 +79,9 @@ What does building the profile for a listener entail?
 
 @vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
 
-@teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Be sure to discuss the possibility that the model changed a little
+When it comes to song recommendation, sometimes, there is a need for the algorithm to change! When Michelle observed that Spotify must have updated its algorithms, she was *possibly* correct; we actually have no way of knowing what goes on behind the scenes at Spotify. Maybe, for example, the algorithm was altered to put more weight on _other_ listeners' behaviors, and less weight on the user's listening behaviors. Or maybe the algorithm was completely overhauled!
+
+@teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Be sure to discuss the possibility that the algorithm changed a little
 or a lot... and that there's no way for us to know!}
 
 === Synthesize
@@ -92,7 +94,7 @@ In machine learning, we generally start with a large chunk of data. A model is t
 }
 
 
-== Build a Bag of Words
+== Bags of Words
 
 @objective{bag-of-words}
 
@@ -139,53 +141,31 @@ As we discussed, plagiarizers usually alter at least a few words of the original
 
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then compute the distance between the summaries.
 
-One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). Each is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
+One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). (These two documents make up our @vocab{training corpus}, or a collection of data used to train AI/ML systems.) Each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
 
-- Document A: "doo be doo be doo"
-- Document B: "doo doo be doo be"
+- Document a: "doo be doo be doo"
+- Document b: "doo doo be doo be"
 
-The bag-of-words summary for Document A looks like this: `"be": 2, "doo": 3`
+The bag-of-words summary for Document a looks like this: `"be": 2, "doo": 3`
+
+@lesson-point{
+A bag-of-words model represents text as an unordered collection of words with frequencies.
+}
 
 As you can see, we've taken the original sentence and disregarded word order, creating a collection that focuses solely on *word frequency*.
 
 @QandA{
 @Q{What is the bag-of-words summary for Document b?}
 @A{The bag-of-words summary for Document b looks like this: `"be": 2, "doo": 3`.}
-@A{It should be identical to the bag-of-words summary for Document A.}
+@A{It should be identical to the bag-of-words summary for Document a.}
 @Q{How did you know what order to put the words in?}
-@A{I used the same order as the bag-of-words summary for Document A.}
+@A{I used the same order as the bag-of-words summary for Document a.}
 }
 
-Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one Document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order.
+Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order.
 
-==== Representing our bag of words as a vector
+The bag-of-words summary for both documents is exactly the same! We can construct a plagiarism detector that takes stock of word frequency and ignores literally everything else. In this instance, the plagiarism detector would discover that the two models are a perfect match.
 
-With our bag of words, we have actually created a @vocab{vector} where each word represents one axis.
-
-@lesson-point{
-A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
-}
-
-Using vector notation, we can represent Document A like this: @math{\overrightarrow{a} = (2, 3)}
-
-If we were to plot a point for the vector on the coordinate plane, it would produce this:
-
-@center{@image{images/3-2.png, 150}}
-
-@teacher{
-If we had instead defined these bag-of-words summaries as (3,2) our vector would have been @math{\overrightarrow{a} = (3, 2)}.
-}
-
-@QandA{
-@Q{How would you represent the vector for Document b on the coordinate plane?}
-@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each Bag of Words. Because we decided on "doo" then "be" for document a, we must use "doo" then "be" for document b also.}
-}
-
-@lesson-point{
-A bag-of-words model represents text as an unordered collection of words with frequencies.
-}
-
-The bag-of-words summary for both documents is exactly the same! When the program takes stock of word frequency and ignores literally everything else, the two models are a perfect match: each one results in the same point on the coordinate plane at @math{(2,3)}.
 
 === Synthesize
 
@@ -204,7 +184,7 @@ The bag-of-words model is better at detecting plagiarism than the primitive plag
 }
 
 
-== Normalize Data and Consider Dimensionality
+== Vectors, Data Normalization, and Dimensionality
 
 @objective{data-normalization}
 
@@ -214,10 +194,24 @@ Students explore the importance of normalizing data, removing unneeded character
 
 === Launch
 
+Documents a and b were relatively simple. We used a total of two words, and those words had the same frequency in both documents. As a result, their bags of words were identical. Checking if two bags are _equal_, however, is not terribly useful. We need a way to check if bags are _similar_. To do this, we will need to represent our bags as @vocab{vectors}.
 
-Documents a and b were relatively simple. Because we used a total of two words, we needed only two axes to plot our vectors—the "be" axis and the "doo" axis.
+A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
 
-Let's look at some slightly more complicated documents:
+Using vector notation, we can represent Document a like this: @math{\overrightarrow{a} = (2, 3)}
+
+If we were to plot a point for the vector on the coordinate plane, it would produce this:
+
+@center{@image{images/3-2.png, 150}}
+
+
+@QandA{
+@Q{How would you represent the vector for Document b on the coordinate plane?}
+@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each Bag of Words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
+}
+
+
+Let's look at some slightly more complicated documents to better understand exactly how we can put these @vocab{vectors} to use.
 
 - Document c: "doo be doo be doo doo doo"
 
@@ -259,7 +253,7 @@ Let's look at some slightly more complicated documents:
 
 To solve this problem, let's start by taking a closer look at our data.
 
-First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize our corpus:
+First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize the data:
 
 @center{@image{images/scat-venn-diagram.png, 150}}
 
@@ -308,7 +302,7 @@ We are ready to put our model to use!
 }
 
 
-== Compute Closeness and Exercise Human Judgment
+== Computing Closeness and Exercising Human Judgment
 
 === Overview
 
