@@ -93,8 +93,8 @@
     (cond [(member course '("algebra-pyret" "algebra-wescheme")) "algebra"]
           [(member course '("data-science" "data-literacy" "data-literacy-codap")) "data-science"]
           [(member course '("videogame" "reactive")) "game"]
-          [(member course '("expressions-and-equations" "expressions-and-equations-wescheme" "algebra-2" "physics" "hour-of-code")) "hour-of-code"]
-          [else ""])))
+          [(member course '("expressions-and-equations" "expressions-and-equations-wescheme")) "expressions-and-equations"]
+          [else course])))
 
 (define (convert-top-pages o #:umbrella-dir [umbrella-dir #f])
   (let ([coursep (regexp-match "courses$" umbrella-dir)])
