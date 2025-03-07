@@ -2181,6 +2181,9 @@
                   [(and beginning-of-line? (char=? c #\=))
                    ; (set! beginning-of-line? #f)
                    ; (set! possible-beginning-of-line? #f)
+                   (when (span-stack-present?)
+                     (printf "WARNING: ~a: Header can't be inside span\n\n"
+                             (errmessage-context)))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)

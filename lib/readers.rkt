@@ -352,8 +352,11 @@
           [else (string-append "<sub>" ss "</sub>")])))
 
 (define (math-sqrt x)
-  (string-append "√"
-    (enclose-span ".overbar" x)))
+  ; (printf "math-sqrt of ~s\n" x)
+  (let ([n (string-length x)])
+    (string-append "√"
+      (if (<= n 1) x
+          (enclose-span ".overbar" x)))))
 
 (define (math-italic s #:asciidoc? [asciidoc? #t])
   (if asciidoc?
@@ -361,7 +364,7 @@
       (string-append "<i>" s "</i>")))
 
 (define (math-unicode-if-possible text #:asciidoc? [asciidoc? #t])
-  ;(printf "doing math-unicode-if-possible ~s ~s\n" text asciidoc?)
+  ; (printf "doing math-unicode-if-possible ~s ~s\n" text asciidoc?)
   (cond [(or (regexp-match "\\\\over[^l]" text)
              (regexp-match "\\\\require" text)
              (regexp-match "\\\\textit" text)
@@ -370,6 +373,7 @@
              (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
+             (and (regexp-match "\\\\sqrt{.[^}]" text) asciidoc?)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
              (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
              (and (not asciidoc?) (regexp-match "\\\\overline" text))
@@ -396,6 +400,7 @@
                                      [("mbox" "text") (let ([x (local-read-group i "math mbox")])
                                                  x)]
                                      [("sqrt") (let ([x (local-read-group i "math sqrt")])
+                                                 ; (printf "sqrt of x = ~s\n" x)
                                                  (math-sqrt (math-unicode-if-possible
                                                               x #:asciidoc? asciidoc?)))]
                                      [("frac") (let* ([nu (read-mathjax-token i)]
