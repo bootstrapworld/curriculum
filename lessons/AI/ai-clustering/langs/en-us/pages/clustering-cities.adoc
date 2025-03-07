@@ -1,0 +1,57 @@
+= Clustering Cities
+
+== Alien Data
+
+One member of an advanced alien civilization has been tasked with listening to Earth through radio transmissions. The alien collects @handout{alien-cities-data.adoc, "some data"} about cities on Earth.
+
+@vspace{1ex}
+
+The alien has also made some observations while listening to the radio transmitter.
+
+- All of the city names begin with a "B" sound.
+- Cricket (a bat-and-ball game) is beautiful and important.
+- The major _cricket_ cities are Bengaluru, Bridgetown, Brisbane, and Bulawayo.
+
+@vspace{1ex}
+
+The alien wants to find some structure among the data, and wonders if Earthlings have socio-political structures organized by general proximity.
+
+@vspace{1ex}
+
+The alien makes an assumption -- that Earthlings must put their capitals near the major cricket cities -- and uses *an algorithm* to try to find what places are “close”, putting all cities in one of four groups arranged by proximity to see what regions emerge. _You will learn more about this algorithm today!_
+
+== The Alien's Algorithm
+
+@n Type `go([list: "Bridgetown", "Bengaluru", "Bulawayo", "Brisbane"])` into the Interactions area, then press enter.
+
+@n Each group is called a _cluster_. As Earthlings, we can see the sensible structure:
+
+- cities in the Americas are all *brown*
+- cities in Europe, western Asia, and Africa are all @fitb{5em}{@ifsoln{blue}}
+- cities in central to eastern Asia are @fitb{5em}{@ifsoln{red}}
+- the city in @fitb{5em}{@ifsoln{purple}} is on a continent of its own (Australia)
+
+@n The solid colored dots show the *centroid* of each cluster. What do you think a centroid is? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+
+@n What if we give three cities as starting points for our clustering? Type `go([list:  "Bridgetown", "Bengaluru", "Bloemfontein"])`. Describe how the cities are clustered. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n What if we start with just two cities, Beijing and Busan? Type `go([list:  "Beijing", "Busan"])`. Describe how the cities are clustered. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@star Can you find a partition such that Beijing and Busan end up in different clusters? @fitb{}{}
+
+@fitb{}{}
