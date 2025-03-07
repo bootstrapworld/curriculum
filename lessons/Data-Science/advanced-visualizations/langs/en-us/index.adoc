@@ -341,10 +341,21 @@ Pyret allows us to create advanced versions of several types of data visualizati
 
 @strategy{Optional Project: Beautiful Data}{
 
-
 Data Visualization is a growing and fascinating field. It's about more than making charts look cool - it's about connecting artistic expression to data in ways that are relevant and meaningful. @lesson-link{project-beautiful-data} gives students a chance to advance their programming skills by using code to add their own flair and style to data that matters to them.
 }
 
+@slidebreak
+
+We can *add a legend* to our visualizations by creating a "legend image" using the `text` function. This image can then be attached to their visualization using the `above` or `beside` function. For example:
+
+```
+# make the chart and legend images
+chart = image-scatter-plot(animals-table, "pounds", "weeks", age-dot)
+legend = text("The size of the dot indicates the age of the animal (larger = older)", 14, "black")
+
+# generate the image of the chart, above the legend
+above(chart, legend)
+```
 
 === Synthesize
 - How do piecewise functions expand what is possible for displaying data?
