@@ -47,8 +47,8 @@ Data is at the heart of data science, and @vocab{data-driven algorithms} are at 
 @teacher{Invite students to share their responses.
 
 - If their responses highlight that data-driven algorithms produce a higher quality output when we provide more data--great! Your students understood the key take-away from our @lesson-link{ai-data-driven-algorithms} lesson.
-- Your students might bring new complexity to the conversation by acknowledging the possibility that a programmer's changes to the algorithm could be the cause of Michelle's increased satisfaction with her play list.
-- If your students do *not* propose that the Spotify's algorithm was updated (as we suggest in the answer key), that's okay! *There's no need to reveal that possibility immediately.* We recommend moving on with the lesson. After completing @printable-exercise{song-recommending.adoc}, you can circle back to @printable-exercise{case-study-michelle.adoc}.
+- Your students might bring new complexity to the conversation by acknowledging the possibility that a programmer's changes to the algorithm could have caused Michelle's increased satisfaction with her play list.
+- If your students do *not* propose that Spotify's algorithm was updated (as we suggest in the answer key), that's okay! *There's no need to reveal that possibility immediately.* We recommend moving on with the lesson. After completing @printable-exercise{song-recommending.adoc}, you can circle back to @printable-exercise{case-study-michelle.adoc}.
 }
 
 === Investigate
@@ -133,7 +133,7 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 - With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
-The `simple-similarity` detector does not work very well!  If the plagiarism detector finds a match, we can be certain that an identical document exists. If the detector does not find a match, we know that there are no identical documents. _Either way, we can't draw any conclusions about whether plagiarism happened!_
+The `simple-similarity` detector does not work very well! If the plagiarism detector finds a match, we can be certain that an identical document exists. If the detector does not find a match, we know that there are no identical documents. _Either way, we can't draw any conclusions about whether plagiarism happened!_
 
 As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there. *We need a plagiarism detector with more sophistication!*
 
@@ -141,7 +141,7 @@ As we discussed, plagiarizers usually alter at least a few words of the original
 
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then compute the distance between the summaries.
 
-One standard way to summarize a document is by creating a "bag of words" model. Let's look at two documents (below). (These two documents make up our @vocab{training corpus}, or a collection of data used to train AI/ML systems.) Each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
+One standard way to summarize a document is by creating a "bag of words" model. Let's try it on two documents (below); each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
 
 - Document a: "doo be doo be doo"
 - Document b: "doo doo be doo be"
@@ -164,14 +164,28 @@ As you can see, we've taken the original sentence and disregarded word order, cr
 
 Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order.
 
-The bag-of-words summary for both documents is exactly the same! We can construct a plagiarism detector that takes stock of word frequency and ignores literally everything else. In this instance, the plagiarism detector would discover that the two models are a perfect match.
+The bag-of-words summary for both documents is exactly the same!
+
+A plagiarism detector that uses this model, taking stock of word frequency and ignoring literally everything else, would discover that the two models are a perfect match.
+
+@QandA{
+
+@Q{How is this plagiarism detector different from our primitive `simple-similarity` plagiarism detector?}
+@A{This plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}
+
+
+@Q{How is this plagiarism detector similar to our primitive `simple-similarity` plagiarism detector?}
+@A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
+}
+
+Checking if two bags of words are identical *is* an improvement from checking if two texts are identical. That said, this method of plagiarism detection is still pretty ineffective. In the next lesson, we'll consider a major upgrade to checking bags of words for identicality.
 
 
 === Synthesize
 
 @QandA{
 
-The bag-of-words model is better at detecting plagiarism than the primitive plagiarism detector—but it's not perfect.
+The bag-of-words model is better at detecting plagiarism than the primitive plagiarism detector—but it's far from perfect.
 
 @Q{What kind of plagiarism _can_ we catch using this model?}
 @A{We can catch a plagiarizer who reorders the words of a document.}
@@ -180,38 +194,42 @@ The bag-of-words model is better at detecting plagiarism than the primitive plag
 @A{We cannot catch a plagiarizer who _alters_ the words in a document by substituting in synonyms or changing word tense.}
 
 @Q{What might we _misidentify_ as plagiarism using this model? Put another way, what sort of _non-plagiarism_ might be labeled _plagiarism_?}
-@A{Someone might independently write a text with a Bag of Words that happens to be quite close to the Bag of Words for a different text. This coincidence is more likely with shorter documents. Returning to our Documents a and b: scatting jazz vocalists are not commonly accused of stealing one another's material.}
+@A{Someone might independently write a text with a bag of words that happens to be the same as the bag of words for a different text. This coincidence is more likely with shorter documents. Returning to our Documents a and b: scatting jazz vocalists are not commonly accused of stealing one another's material.}
 }
 
 
-== Vectors, Data Normalization, and Dimensionality
+== Vectors and Data Normalization
 
 @objective{data-normalization}
 
 === Overview
 
-Students explore the importance of normalizing data, removing unneeded characteristics and eliminating redundancy.
+Students explore the importance of normalizing data, organizing data to follow a norm.
 
 === Launch
 
-Documents a and b were relatively simple. We used a total of two words, and those words had the same frequency in both documents. As a result, their bags of words were identical. Checking if two bags are _equal_, however, is not terribly useful. We need a way to check if bags are _similar_. To do this, we will need to represent our bags as @vocab{vectors}.
+Here are some discoveries we have made so far:
 
-A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
+- Checking if two texts are identical is not an effective way of detecting plagiarism.
+- Summarizing documents as @vocab{bags of words}, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
 
-Using vector notation, we can represent Document a like this: @math{\overrightarrow{a} = (2, 3)}
+What we need is a way to check if bags are _similar_! To do this, we will represent our bags as @vocab{vectors}.
 
-If we were to plot a point for the vector on the coordinate plane, it would produce this:
+- A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
+- Using vector notation, we can represent Document a ("doo be doo be doo") like this: @math{\overrightarrow{a} = (2, 3)}
+- If we were to plot a point for the vector on the coordinate plane, it would produce this:
 
 @center{@image{images/3-2.png, 150}}
 
 
 @QandA{
-@Q{How would you represent the vector for Document b on the coordinate plane?}
-@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each Bag of Words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
+@Q{How would you represent the vector for Document b ("doo doo be doo be") on the coordinate plane?}
+@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
 }
 
+=== Investigate
 
-Let's look at some slightly more complicated documents to better understand exactly how we can put these @vocab{vectors} to use.
+Let's look at some slightly more complicated documents to learn how we can put these @vocab{vectors} to use.
 
 - Document c: "doo be doo be doo doo doo"
 
@@ -249,8 +267,6 @@ Let's look at some slightly more complicated documents to better understand exac
 *Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
 }
 
-=== Investigate
-
 To solve this problem, let's start by taking a closer look at our data.
 
 First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize the data:
@@ -273,18 +289,8 @@ It is a bit trickier to envision plotting these vectors, but not impossible!
 @Q{Which point on this plot represents @math{\overrightarrow{c}}? How do you know?}
 @A{The one on the bottom. It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
 }
-@scrub{
-FD DID NOT FIND THIS HELPFUL
-For @math{\overrightarrow{c}}, envision a sheet of paper resting on a table. Plot @math{(5, 2)} on that sheet of paper: move 5 units to the right of the origin and then 2 units up. Because the z-coordinate is 0, the piece of paper *stays on the table.*
 
-For @math{\overrightarrow{d}}, again envision a sheet of paper resting on a table. Plot @math{(0, 2)} on that sheet of paper by moving 2 units along the y-axis above the origin. Because the z-coordinate is 5, we imagine lifting the sheet of paper off the table and increasing its height (z) by 5-units.
-}
-
-We started out with two documents. Now that our training is complete, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
-
-@lesson-point{
-Training is the act of transforming *data* into a *model*.
-}
+We started out with two documents. Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
 
 We are ready to put our model to use!
 
@@ -294,12 +300,45 @@ We are ready to put our model to use!
 @QandA{
 @Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
 
-@A{The bag of words model eliminates word order. It preserves word count.}
+@A{The bag-of-words model eliminates word order. It preserves word count.}
 
 @Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
 
 @A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omitting a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
 }
+
+
+
+== The Dimensionality of Natural Language
+
+=== Overview
+
+=== Launch
+
+So far, we've looked at four documents.
+
+- Document a: "doo be doo be doo"
+- Document b: "doo doo be doo be"
+- Document c: "doo be doo be doo doo doo"
+- Document d: "be bop bop bop be bop bop"
+
+Although the documents contain 24 words in total, there are just _three_ unique words: doo, be, and bop. As a result, we were able to plot these documents as vectors in a three-dimensional space.
+
+Let's add a fifth document, Document e, to our collection.
+
+- Document e: "doo be bop ski bop bop"
+
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and ski. Plotting all of our documents would require the use of a _four-dimensional_ space.
+
+Having trouble visualizing a four-dimensional space? You're not alone! Our brains work in three dimensions each and every day, so visualizing a four-dimensional space is counter-intuitive, to say the least.
+
+The English language has roughly 171,000 words in current use, plus 47,000 obsolete words, according to the Oxford English Dictionary.
+
+=== Investigate
+
+=== Synthesize
+
+
 
 
 == Computing Closeness and Exercising Human Judgment
@@ -314,7 +353,7 @@ The training phase is now complete. Let's review what has happened so far.
 
 *1. We created bag-of-words models of our documents.*
 
-In doing so, we compressed the data by isolating the single feature that we care about: word frequency. As a result, the _new_ representation of the data became considerably smaller than the actual corpus.
+In doing so, we compressed the data by isolating the single feature that we care about: word frequency. As a result, the _new_ representation of the data became considerably smaller than the what we started with.
 
 @lesson-point{
 Loss of data is a common and often necessary effect of training AI!
