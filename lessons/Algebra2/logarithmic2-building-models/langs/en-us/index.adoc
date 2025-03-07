@@ -30,6 +30,9 @@
 |[.materials-links]
 @opt-material-links
 
+| Relevant Resources
+|
+- @link{images/xkcd.png, This wonderful drawing} from @link{https://www.xkcd.com, XKCD}, uses a logarithmic scale to fit *the entire known universe* into the image.
 
 | Preparation
 | 
@@ -66,23 +69,15 @@ The linear, quadratic and exponential models we’ve found for the @starter-file
 - What do you Notice? What do you Wonder?
 }
 
+@slidebreak
+
 *The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!*
 
 When we reflect the covid curve over @math{y=x}, the graph _starts_ with rapid growth, and then flattens out.
 
-@ifnotslide{
-@right{@image{images/crossfade.png, 350}}
-We see that:
+@ifnotslide{@center{@image{images/crossfade.png, 350}}}
 
-- During the pandemic, our initial value was roughly 120,000 cases.
-- To reach 150,000 cases, it took 75 days
-- To reach 300,000 cases, it took 112 days (37 additional days)
-- To reach 400,000 cases, it took 122 days (20 additional days)
-
-And we are much better able to understand just how quickly the infections were spreading.
-}
-
-@clear
+@slidebreak
 
 *When we swap the axes, the model answers the opposite question!*
 
@@ -98,9 +93,18 @@ And we are much better able to understand just how quickly the infections were s
 
 |===
 
-When an exponential relationship is "inverted" like this, the new shape is called a @vocab{logarithmic relationship}.
+We see that:
 
-@lesson-point{"An exponential relationship looks logarithmic...if your @math{x}'s and @math{y}'s trade places!"}
+- During the pandemic, our initial value was roughly 120,000 cases.
+- To reach 150,000 cases, it took 75 days
+- To reach 300,000 cases, it took 112 days (37 additional days)
+- To reach 400,000 cases, it took 122 days (20 additional days)
+
+And we are much better able to understand just how quickly the infections were spreading.
+
+@slidebreak
+
+When an exponential relationship is "inverted" like this, the new shape is called a @vocab{logarithmic relationship}.
 
 Logarithmic functions and exponential functions serve as inverses of one another.
 
@@ -109,6 +113,9 @@ Logarithmic functions and exponential functions serve as inverses of one another
 - The axes are swapped.
 - The curve is reflected over the diagonal line @math{y=x}.
 }
+
+@lesson-point{"An exponential relationship looks logarithmic...if your @math{x}'s and @math{y}'s trade places!"}
+
 
 === Investigate
 
@@ -136,8 +143,10 @@ The two equations below are different ways of expressing the same relationship b
 | @math{\log_5 125 = 3}
 |===
 
+*5* is our @vocab{base} in both of the equations above.
+
 @lesson-instruction{
-Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the first section.
+Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the first section by writing the related exponential or logarithmic equation for each row.
 }
 
 @QandA{
@@ -150,7 +159,7 @@ Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the
 
 @slidebreak
 
-When we want to evaluate log expressions, we need to think about those fact families.
+When we want to evaluate log expressions, it is helpful to think about these fact families.
 
 [.data-table, cols="^1a,^1a, ^3a, ^1a", stripes="none", options="header"]
 |===
@@ -159,10 +168,10 @@ When we want to evaluate log expressions, we need to think about those fact fami
 | *Logarithmic* | @math{\log_3(9)}	| "Calculate what power 3 is raised to in order to reach 9" | 2
 |===
 
-
 @QandA{
-@Q{What question do we need to ask ourselves to evaluate @math{\log_3(81)}?}
-@A{What power do we need to raise 3 to in order to reach 81?}
+@Q{What question do we ask ourselves to evaluate @math{\log_3(81)}?}
+@A{What power do we raise 3 to in order to reach 81?}
+@A{To get 81, what power do we raise 3 to?}
 @Q{What will @math{\log_3(81)} evaluate to?}
 @A{@math{4}, because @math{3^4 = 81}}
 }
@@ -173,11 +182,14 @@ When we want to evaluate log expressions, we need to think about those fact fami
 }
 
 @QandA{
-Consider these two translations of @math{\text{log}_2(128)}.
+@Q{Consider these two translations of @math{\log_2(128)}.
 
-- "To get 128, I raise 2 to what power?"
-- "The power you raise 2 to get 128"
+@indented{
+(a) "To get 128, I raise 2 to what power?"
 
+(b) "The power you raise 2 to get 128"
+}
+}
 @Q{Which translation do you prefer, and why?}
 @A{The first one, because it sets up a math problem and makes it clear what I need to do.}
 @A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
@@ -187,7 +199,8 @@ Consider these two translations of @math{\text{log}_2(128)}.
 
 @QandA{
 @Q{How can we tell whether growth is exponential or logarithmic by looking at a graph?}
-@A{Exponential growth is slow at first and gets faster. Logarithmic growth is fast at first and gets slower.}
+@A{Exponential growth is slow at first and gets faster.}
+@A{Logarithmic growth is fast at first and gets slower.}
 @Q{What do we mean when we say that logarithmic functions and exponential functions serve as inverses of one another?}
 @A{The axes are swapped.}
 @A{The Domain and Range are swapped.}
@@ -206,7 +219,12 @@ Students learn to recognize logarithmic growth in tables.
 
 === Launch
 
-We know that linear sequences can be recognized by their consistent growth. And exponential sequences can be recognized by identifying their growth factor. But how would we recognize a logarithmic sequence?
+We know that:
+
+- Linear sequences can be recognized by their consistent growth
+- Exponential sequences can be recognized by identifying their growth factor.
+
+But how would we recognize a logarithmic sequence?
 
 === Investigate
 
@@ -221,15 +239,17 @@ We know that linear sequences can be recognized by their consistent growth. And 
 A constant increase in @math{x}, requires multiplying @math{y} by the @vocab{growth factor}.
 | @math{x} grows exponentially over constant intervals of @math{y} +
 {empty} +
-A constant increase in @math{y}, requires multiplying @math{x} by a value called the @vocab{base}. In other words, @math{y} is _the power we'd need to raise our base_ to get each value of @math{x}.
+A constant increase in @math{y}, requires multiplying @math{x} by a value called the @vocab{base}.
 
+|@math{y = 2^x}
+|@math{y = \log_2 x}
 |@image{images/difference-table-exponential-2.png}
 |@image{images/difference-table-logarithmic.png}
 
 |===
 
 @lesson-point{
-Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x,y) columns of a table makes a logarithmic _sequence_ look exponential.
+Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x, y) columns of a table makes a logarithmic _sequence_ look exponential.
 }
 
 @slidebreak
@@ -297,10 +317,10 @@ Students can check out @link{images/xkcd.png, this wonderful drawing} from @link
 === Synthesize
 
 @QandA{
-@Q{What logarithmic equation could we write to complement the exponential equation @math{4^3 = 64}?}
-@A{@math{	ext{log}_4 64 = 3}}
-@Q{What logarithmic equation could we write to complement the exponential equation @math{x^y = z}?}
-@A{@math{	ext{log}_x z = y}}
+@Q{What do logarithmic relationships allow us to do that other functions we've encountered don't help us do well?}
+@A{Compare things of very different sizes!}
+@Q{What have you learned about logarithmic functions that surprises you, excites you or makes you curious?}
+@Q{Can you think of other relationships that might best be modeled using logarithms?}
 }
 
 
@@ -308,18 +328,16 @@ Students can check out @link{images/xkcd.png, this wonderful drawing} from @link
 @objective{logarithms-situations}
 
 === Overview
-Students are introduced to the parent function for logs, and explore the role the coefficients play.
+Students are introduced to the form of logarithimic models, and explore the role the coefficients play using a custom-built Desmos slider activity.
 
 === Launch
 
+Most textbooks teach that logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x) + k}}
 
-Logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}
+That's because most textbooks only present logarithmic functions with a horizontal shift of zero... and when @math{h = 0}, we can safely remove it and use the simplified form of the equation.
 
-But most textbooks only present logarithmic functions with a horizontal shift of zero.
-
-When @math{h = 0}, we can safely remove it and use this simplified form of the equation: +
-
-@center{@big{@math{f(x) = a \log_b(x) + k}}}
+But, just as with other models we have explored, logarithmic models can have horizontal shift. +
+The expanded form for logarithmic models includes @math{h} and looks like this: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}
 
 @teacher{
 @opt{Advance your teacher dashboard of @starter-file{alg2-log-desmos} to *Slide 3: How does h transform logarithmic functions?* and give your students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to logarithmic functions.
@@ -337,8 +355,8 @@ Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-
 
 @lesson-instruction{
 - Let's return to the *Desmos* file and explore how the constants in a logarithmic function definition impact the shape of its graph. 
-- You should now be on *Slide 4: Exploring Logarithmic Functions* 
-- Use it to complete @printable-exercise{graphing-models.adoc}
+- You should now be on *Slide 4: Exploring Logarithmic Functions*.
+- Use it to complete @printable-exercise{graphing-models.adoc}.
 }
 
 @teacher{Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
@@ -352,10 +370,10 @@ The base of the logarithm is similar to the base (or @vocab{growth factor}) in a
 @slidebreak
 
 @QandA{
-The expression @math{	ext{log}_2(1)} is asking "to what power must 2 be raised to reach 1?
+The expression @math{\log_2 1} is asking "to what power must 2 be raised to reach 1?
 @Q{What power of 2 will evaluate to 1?}
 @A{Zero}
-@Q{What question is @math{	ext{log}_5(1)} asking?}
+@Q{What question is @math{\log_5 1} asking?}
 @A{"To what power must 5 be raised, to reach 1?"}
 @Q{What power of 5 will evaluate to 1?}
 @A{Zero}
@@ -387,24 +405,48 @@ Most math books, Desmos, calculators, and programming languages offer a simple "
 
 The term @math{k} is the vertical shift of the function, which moves the curve up or down.
 
-Since @math{\log_{anything}(1) = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
+- Since @math{\log_{anything}1 = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
 
-(_We've seen vertical shifts in other kinds of functions given different names, like @math{b} for linear functions._)
+- _Note: We've seen vertical shifts in other kinds of functions given different names, like @math{b} for linear functions._
 
 @slidebreak
 
 ==== Logarithmic Coefficient @math{a}
 
-The term @math{a} is called the logarithmic coefficient, which - like @math{b} - helps determine how quickly the function grows.
+The term @math{a} is called the logarithmic coefficient, which - along with the base (@math{b}) - affects the vertical stretch or compression of the logarithmic function and helps us determine how quickly the function grows.
+
+@indented{
+[cols="2a, 7a", stripes="none", options="header"]
+|===
+2+| When comparing two logarithmic functions with the same base (@math{b})
+
+|If   @math{∣a∣ > 1}
+|The graph of the function is vertically stretched, meaning it becomes steeper.
+
+|If   @math{0 < ∣a∣ < 1}
+|The graph of the function is vertically compressed, meaning it becomes less steep.
+
+|If   @math{a < 0}
+|In addition to being stretched or compressed, the graph is reflected across the x-axis.
+|===
+}
+
+
+==== Asymptotes for logarithmic functions
+
+@vocab{Asymptotes} are lines that functions approach but never cross.
 
 @QandA{
 @Q{What do you remember about the asymptote of a function with exponential growth?}
-@A{It's horizontal at @math{k}, where @math{y} grows or shrinks by smaller and smaller amounts approaching zero}
+@A{It's horizontal!}
+@A{It's defined as @math{y = k}}
+@A{As @math{y} approaches the asymptote, it grows or shrinks by smaller and smaller amounts that approach zero}
+@Q{Given that logarithmic functions are the inverse of exponential functions, what kind of asymptote would you guess that functions with logarithmic growth have?}
 }
 
-Functions with logarithmic growth have a *vertical asymptote* where the function gets closer and closer, but never crosses the line.
+Functions with logarithmic growth have a *vertical asymptote*.
 
-@teacher{In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
+@teacher{In the data exploration students just completed, the @vocab{asymptote} is always located on the y-axis (@math{x = 0}).
 
 Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
 
