@@ -1,0 +1,55 @@
+= Relationships Between Quantitative Columns
+
+++++
+<style>
+body.LessonNotes li {
+    margin-bottom: 1px;
+}
+</style>
+++++
+
+== Scatter Plots
+
+@vspace{1ex}
+
+Scatter plots can be used to look for relationships between columns. Each row in the dataset is represented by a point, with one column providing the x-value (@vocab{explanatory variable}) and the other providing the y-value (@vocab{response variable}). The resulting “point cloud” makes it possible to look for a relationship between those two columns.
+
+@vspace{1ex}
+
+- _Form_
+
+  * If the points in a scatter plot appear to follow a straight line, it suggests that a @vocab{linear relationship} exists between those two columns.
+  * Relationships may take other forms (u-shaped for example). If they aren't linear, it won't make sense to look for a correlation.
+  * Sometimes there will be no relationship at all between two variables.
+
+- _Direction_
+
+  * The correlation is *positive* if the point cloud slopes up as it goes farther to the right. This means larger y-values tend to go with larger x-values.
+  * The correlation is *negative* if the point cloud slopes down as it goes farther to the right.
+
+- _Strength_
+
+  * It is a *strong* correlation if the points are tightly clustered around a line. In this case, knowing the x-value gives us a pretty good idea of the y-value.
+  * It is a *weak* correlation if the points are loosely scattered and the y-value doesn't depend much on the x-value.
+
+@vspace{1ex}
+
+== Line of Best Fit
+
+@vspace{1ex}
+
+@vocab{Linear Relationships} can be graphically summarized by drawing a straight line through the data cloud. This summary line is called a "model", as it attempts to provide a simple summary for trends in the dataset. For most datasets, there is no line that will touch every dot, so _all possible models will have some error!_ But if the line is close enough to enough of the dots, the model can still help us reason and make predictions about y-values from x-values
+
+@center{@big{
+@math{\text{Data} = \text{Model} + \text{Error}}
+}}
+
+The line that is _closest_ to all the other points is known as the @vocab{line of best fit}, meaning it is the _best possible summary_ of the relationship and therefore the _best possible model_.
+
+@vspace{1ex}
+
+*Linear Regression* is a way of computing the *line of best fit*.  It considers every single data point to generate the optimal linear model, with the smallest possible vertical distance between the line and all the points taken together. _(More specifically, the computer minimizes the sum of the squares of the vertical distances from all of the points to the line. There's a reason we use computers to do this!)_
+
+@vspace{1ex}
+
+Points that do not fit the trend line in a scatter plot are called *unusual observations*.
