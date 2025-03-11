@@ -1,0 +1,45 @@
+[[questions]]
+type = "MultipleChoice"
+# The prompt we want to use (can be a multi-line string!)
+prompt.prompt = """
+Choose the statement you most agree with about the scatterplot on the left.
+"""
+# The correct choice
+answer.answer = "There appears to be a positive correlation."
+
+# NOTE: By default, the answer and distractor list are shuffled
+# randomly! 
+# To enforce an order, uncomment the line below to specify where
+# the correct answer appears and to use the distractors in the
+# order they are written
+# prompt.answerIndex = 1
+prompt.distractors = [
+"There appears to be a strong negative correlation.",
+"There appears to be a perfect correlation.",
+"There appears to be a weak negative correlation."
+]
+# Specify the path to the image (normally in the same folder)
+# NOTE: doesn't work yet!
+# image = "question1.png"
+
+# This will add an extra string of text at the bottom of the question.
+# Some questions might need some extra explanation
+context = """
+"""
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A strong negative correlation would have an r-value that is closest to:
+"""
+answer.answer = "-1"
+prompt.distractors = [
+"-0.5",
+"0",
+"0.5",
+"1",
+]
+
+prompt.answerIndex = 0
+context = """
+"""
