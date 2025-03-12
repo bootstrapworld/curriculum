@@ -15,7 +15,7 @@ table+.paragraph .autonum {padding-top: 0; }
 /* Shorten fill in the blanks, and give fitbrubies more vertical space */
 .fitb, .fitbruby { min-width: 2em; }
 .indentedpara .fitbruby { padding-top: 0.8rem; }
-.studentAnswerMedium { min-width: 80pt !important; }
+.studentAnswerMedium { min-width: 70pt !important; }
 .fitbruby{ margin-bottom: 1rem; }
 .ruby { bottom: -13px !important; }
 </style>
@@ -49,27 +49,36 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 == Fitting Your Periodic Model
 
-@n Using the values you computed for @math{a}, @math{k}, @math{h} and @math{b} on @printable-exercise{modeling-recent-co2.adoc}, define your periodic function below in both Function and Pyret notation.
+@n Define a periodic model using the values you computed for @math{a}, @math{k}, @math{h} and @math{b} on @printable-exercise{modeling-recent-co2.adoc}.
 
-[cols="1a, ^.^12a", frame="none", stripes="none"]
+@teacher{Students horizontal shift estimates may vary slightly from this function definition.}
+
+@vspace{1ex}
+
+[cols="1a, .^12a", frame="none", stripes="none"]
 |===
 | *Function Notation*
 |
 
-@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
-@math{sin}(
- @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{@k}}{vertical shift}
+ @math{periodic(x) =}
+@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})}  @math{\times} @math{sin}(
+@fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}  
+@fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})}))  +  
+@fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,h) (- x (?ANS ,k))))) (?ANS ,b))))}
+ @show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,h))))) (?ANS ,k))))}
 |===
 
-@n Define this model in Pyret, and fit it to the `recent` data. What S-value do you get? @fitb{}{@ifsoln{Answers will vary, but should be close to 1.2}}
+@vspace{1ex}
 
-@n *What does this model actually mean?* Fill in the blanks below, and read the completed model aloud with your partner.
+Then update the `periodic` function definition in your starter file to match what you've just written.
+
+@n Use `fit-model` to fit your `periodic` model to the data in the `recent-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.   ~1.2 }}
+
+@n What does this model actually mean? Fill in the blanks below, and read the completed model aloud with your partner.
 
 @vspace{1ex}
 
@@ -77,32 +86,55 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 _Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{5em}{@ifsoln{@math{2pi}}}{frequency}._
 }
 
-@star In the table below, re-write your model to use @math{\text{cosine}} instead of @math{\text{sine}}:
+== How well does our model predict @math{CO_2} levels for other years?
 
-[cols="1a, ^.^12a", frame="none", stripes="none"]
+You built your model using the `recent-table`, which covers the most recent full year of our dataset.
+
+@n Let's see how well if fits the broader dataset. In Pyret, fit your model to the `modern-table`. What @math{S}-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.   ~17.8 }}
+
+@vspace{1ex}
+
+[cols="10a,1,10a", grid="none", frame="none"]
 |===
-| *Function Notation*
+| @n Sketch your model on the scatter plot below.
+
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png, 300}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png, 300}}}
+
+|
+| @n Describe what changes you could make to your model so that it would fit the data better.
+
+@fitb{}{@ifsoln{Answers will vary. We could change the y-intercept.}}
+
+@fitb{}{@ifsoln{It needs to be rotated so that the wave undulates around}}
+
+@fitb{}{@ifsoln{a diagonal line rather than a horizontal line.}}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+|===
+
+@star Try translating the definition you wrote for `periodic` so that it uses @math{\text{cosine}} instead of @math{\text{sine}}:
+
+@vspace{1ex}
+
+[cols="1a, .^12a", frame="none", stripes="none"]
+|===
+|*Function Notation*
 |
 
-@math{periodic(x) =} @fitbruby{70pt}{@ifsoln{@a}}{amplitude} @math{\times}
-@math{cos}(
- @fitbruby{70pt}{@ifsoln{@b}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@h2}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{@k}}{vertical shift}
+ @math{periodic(x) =}
+@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})}  @math{\times} @math{cos}(
+@fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}
+@fitbruby{70pt}{@ifsoln{@h2}}{horizontal shift (@math{h})}))  +  
+@fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,k))))) (?ANS ,h2))))}
+ @show{(code `(define (periodic x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h2))))) (?ANS ,k))))}
 |===
-
-== Just how Good _is_ this Model?
-
-Your model fits the `recent-table`, which covers the most recent full year of our dataset. But does it fit more than just that one year?
-
-@n In Pyret, fit your model to the `modern-table`, and draw your model on the scatter plot below. What @math{S}-value do you get? @fitb{}{}
-
-@center{@image{../images/modern-co2-scatter.png, 300}}
-
-@n What needs to happen for your model to fit better? @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
