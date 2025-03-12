@@ -113,9 +113,11 @@ As a student, you probably know what it feels like to be under surveillance.
 
 Good designers of these systems have to practice adversarial thinking and imagine all the ways that someone might try to _hack_ or _fool_ them.  Let's practice thinking like a designer.
 
-@lesson-instruction{
-- Imagine that your teacher announces that they will be running all student writing through a plagiarism detector and you are a student who wants to plagiarize.
-- Exercise some creativity: What are your strategies for evading detection?
+@QandA{
+
+@Q{Imagine that your teacher announces that they will be running all student writing through a plagiarism detector and you are a student who wants to plagiarize. Exercise some creativity: What are your strategies for evading detection?}
+
+@A{Responses will vary, but may include the following: replace common words with synonyms; change the ordering of sentences and paragraphs; plagiarize from an unlikely source (maybe a friend who took the class 5 years ago?); plagiarize from multiple sources; paraphrase text so that it has the correct "voice".}
 }
 
 @strategy{Adversarial Thinking}{
@@ -223,7 +225,9 @@ What we need is a way to check if bags are _similar_! To do this, we will repres
 
 
 @QandA{
+
 @Q{How would you represent the vector for Document b ("doo doo be doo be") on the coordinate plane?}
+
 @A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
 }
 
@@ -277,16 +281,17 @@ We must revise our bag-of-words summaries and our vectors!
 
 @teacher{Normalizing data and considering dimensionality requires that--when a word occurs zero times--we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
 
+@right{@image{images/2pts.png, 150}}
+
+
 The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as  @math{\overrightarrow{c} = (2, 0, 5)}.
 
 The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as @math{\overrightarrow{d} = (2, 5, 0)}.
 
-@right{@image{images/2pts.png, 200}}
-
 It is a bit trickier to envision plotting these vectors, but not impossible!
 
 @QandA{
-@Q{Which point on this plot represents @math{\overrightarrow{c}}? How do you know?}
+@Q{In the 3-dimensional space to the right, which point represents @math{\overrightarrow{c}}? How do you know?}
 @A{The one on the bottom. It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
 }
 
@@ -298,13 +303,14 @@ We are ready to put our model to use!
 
 
 @QandA{
+
 @Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
 
 @A{The bag-of-words model eliminates word order. It preserves word count.}
 
 @Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
 
-@A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omitting a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
+@A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
 }
 
 
@@ -322,19 +328,38 @@ So far, we've looked at four documents.
 - Document c: "doo be doo be doo doo doo"
 - Document d: "be bop bop bop be bop bop"
 
-Although the documents contain 24 words in total, there are just _three_ unique words: doo, be, and bop. As a result, we were able to plot these documents as vectors in a three-dimensional space.
+Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as vectors in a *_three_*-dimensional space.
 
 Let's add a fifth document, Document e, to our collection.
 
 - Document e: "doo be bop ski bop bop"
 
-Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and ski. Plotting all of our documents would require the use of a _four-dimensional_ space.
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space (!). Having trouble visualizing a four-dimensional space? You're not alone! Our brains work in three dimensions each and every day, so visualizing a four-dimensional space is counter-intuitive, to say the least. That's why we leave it to the computer!
 
-Having trouble visualizing a four-dimensional space? You're not alone! Our brains work in three dimensions each and every day, so visualizing a four-dimensional space is counter-intuitive, to say the least.
-
-The English language has roughly 171,000 words in current use, plus 47,000 obsolete words, according to the Oxford English Dictionary.
 
 === Investigate
+
+Computers, unlike humans, have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions. A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents, also known as a @vocab{training corpus}.
+
+Throughout this lesson--for instructional purposes--we've used Documents a, b, c, and d as our "training corpus."
+
+@QandA{
+
+@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations. Does this comparison seem logical or useful? Explain.}
+@A{Totally not useful! It seems very unlikely that a student, assigned to write an essay in academic language, would plagiarize jazz lyrics. Students tend to plagiarize from documents that are at least somewhat connected to the assigned essay topic.}
+
+@Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
+@A{The corpus would likely include: essays written and submitted by students currently in the class; essays written and submitted by students previously in the class; Wikipedia articles; articles on relevant topics that are available on the internet, etc.}
+
+@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the @vocab{training corpus}, allowing her to detect if, perhaps, two students submitted essay that were a little too similar. About how many dimensions will there be in the model?}
+
+@A{If students do not include any repeated words in their writing whatsoever, then the model would have 10,000 dimensions. Assuming that there is _some_ repetition of common words, we can confidently guess that there will be thousands of dimensions in the model.}
+}
+
+
+@lesson-instruction{
+Complete @printable-exercise{human-judgment.adoc} with your partner.}
+
 
 === Synthesize
 
@@ -368,6 +393,8 @@ What now?
 === Investigate
 
 Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
+
+Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
 
 A _more_ effective plagiarism detector will compute the student's vector (a point in a multi-dimensional space), and then compare it to the _other_ points in that space.
 
