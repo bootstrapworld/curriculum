@@ -43,84 +43,91 @@ You will want to:
 @objective{model-explore}
 
 === Overview
-Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from the Mauna Loa observatory in Hawaii beginning in 1974.
 
 === Launch
-Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
+The Ferris wheel dataset we looked had almost no variability: the wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model. This is pretty rare in the real world!
 
-Now that we've had some practice, let's take a look at a dataset that has more variability!
+Now that we've had some practice, let's take a look at a dataset that has more variability.
+
+Carbon Dioxide (@math{\text{CO}_2}) is:
+
+- the gas inside the bubbles in a can of soda
+- what we breathe out when we exhale
+- dry ice (in solid form)
+- known as a "greenhouse gas", because, when enough of it is in the atmosphere, it traps heat and contributes to global warming
 
 @slidebreak
 
-Carbon Dioxide (@math{\text{CO}_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+Because scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated as _ppm_. There are many things that can influence the amount of @math{\text{CO}_2} in any one location over the course of time. Some of these factors include:
 
-@slidebreak
+- temperature and air pressure
+- proximity to carbon-dioxide-producing sources or carbon-dioxide-consuming features
+- global trends like the burning of fossil fuels
 
-Scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @math{\text{CO}_2} in any one location!
-
-- Temperature and air pressure
-- Proximity to @math{\text{CO}_2} -producing or @math{\text{CO}_2} -consuming sources
-- Global trends like the burning of fossil fuels
-
-Because of these and other factors, the amount of @math{\text{CO}_2} at any one location goes up and down throughout the year. But is there a pattern?
+But is there a pattern?
 
 @slidebreak
 
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, save a copy, and click "Run".
-- What is the name of the table here?
-- What are the names of the columns?
-- Type `co2-table` into the Interactions Area, and look at the table.
-- What do the `year`, `month`, and `co2` columns mean?
-- What do you think the `date` column could mean?
+- Open the @starter-file{alg2-co2}.
+- Save a copy that's just for you, and click "Run".
+}
+
+@QandA{
+@Q{What is the name of the table here?}
+@A{co2-table}
+@Q{What are the names of the columns?}
+@A{year, month, data, co2}
+@Q{Type `co2-table` into the Interactions Area, and look at the table. +
+What do the `year`, `month`, and `co2` columns mean?}
+@A{`year` is pretty self-explanatory, e.g. 1974 in the first row indicates that the first measurement was recorded in the year 1974.}
+@A{`month` is a number from 1 to 12. The 5 in the first row corresponds to May.}
+@A{`co2` is the carbon dioxide level in parts per million as measured at the Mauna Loa Observatory in Hawaii. In May of 1974 they recorded 333.18 ppm of @math{\text{CO}_2}.}
+@Q{The numbers in the `date` column look pretty different from dates we are used to seeing. What do they tell us?}
+@A{See the *decimal year* explanation below. If you're using the slidedeck, advance to the next slide!}
 }
 
 @slidebreak
 
-The `date` column is the *decimal year*, in which the __n__th day of the year is divided by 365:
+The `date` column provides us with something known as the *decimal year*. When reading a *decimal year*, we see the year followed by the decimal that results when the __n__th day of the year is divided by 365.
+
+@teacher{For inquiring students, you may need to know that during a leap year, the decimal year is calculated by dividing by 366. (1974 was not a leap year. The next leap year was 1976.)}
 
 @QandA{
 The first date is `1974.375`, meaning the sample was taken `0.375` of the way through 1974.
 @Q{How could we compute which day of the year that is?}
 @A{There are 365 days in the year, so we could multiply 365 by `0.375` to see the number of days into the calendar.}
-@Q{What is @math{365 \times 0.375}?}
-@A{136.875, or roughly day 137}
-@Q{What month does that fall in, and what "month-number" is that?}
-@A{May, the 5th month}
-@Q{What is written in the `month` column for the first row?}
-@A{5, which is May}
+@A{@math{365 \times 0.375 = 136.875}, or roughly day 137}
+@Q{Does that day correspond to the "month-number" in the `month` column for the first row?}
+@A{Yes. The 137th day of the year is May 16th or 17th, depending on whether or not it is leap year and May is the 5th month.}
 }
+
 
 @slidebreak
 
 @lesson-instruction{
-- What do you *Notice* about this dataset?
+- Now that we know what each of the columns mean, take another look at the dataset.
+- What do you *Notice*?
 - What do you *Wonder*?
 }
 
-Look farther down in the Definitions Area, until you find the function `is-recent`.
+Let's turn our attention back to the Definitions Area. Find the function `is-recent`.
 
 @QandA{
-@Q{What does it do?}
+@Q{What does `is-recent` do?}
 @A{It takes in a row, and checks to see if the decimal date is between 2022.083 and 2023.7917.}
-@Q{What is defined on the following line of code?}
+@Q{What is defined on the line of code that follows?}
 @A{A table, which contains only the rows for which the filter function produces `true`: just the rows between those dates.}
 }
 
 @slidebreak
 
-The `recent-table` includes just the rows from valley-to-valley for the years 2022-2023.
-
-@QandA{
-@Q{How many periods are represented here?}
-@A{One}
-@Q{Why?}
-@A{Because the distance between any adjacent valleys or peaks define one period.}
-}
+The `recent-table` includes just the rows from valley-to-valley for the years 2022-2023. It defines a single period.
 
 === Investigate
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, and complete @printable-exercise{modeling-recent-co2.adoc}.
+- Complete @printable-exercise{modeling-recent-co2.adoc} using the @starter-file{alg2-co2}.
 - Be ready to share your answers!
 }
 
