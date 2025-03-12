@@ -151,14 +151,41 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 @slidebreak
 
 @lesson-instruction{
-- Let's use these values to construct our model, and fit it with Pyret!
+- Let's use these values to construct our `periodic` model, and fit it with Pyret!
 - With your partner, complete *the first section* on @printable-exercise{modeling-recent-co2-2.adoc}.
-- How well does it fit the data?
 }
 
 @slidebreak
 
-TODO: talk about the rest of the page, solicit students' thoughts about why their model doesn't fit the `recent-table`, and what would need to happen to fit it better!
+@QandA{
+@Q{How well does your `periodic` model fit the data in the `recent-table`?}
+@A{It fits fairly well. The shape looks more or less like what we are seeing in the scatter plot. We expect an error of about 1.2 ppm of @math{\text{CO}_2} and the data in the `recent-table` ranges from 415.91 to 424.}
+@Q{Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well." Do we know whether or not our model is the _best?_}
+@A{We don't know!}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Let's see how well our model fits our the larger dataset.
+- With your partner complete @printable-exercise{modeling-recent-co2-2.adoc}.
+}
+
+@QandA{
+@Q{How does the shape of our model compare to the shape of the data from the `modern-table`?}
+@A{Answers will vary. Sample responses may include:
+ - While they both have a wave, they look pretty different!
+ - The model undulates around a horizontal line and the data undulates around a diagonal line.
+ - The y-intercepts are in completely different places.
+}
+@Q{What do the S-values tell us about how the error we expect for predictions made from our `periodic` model for the data in the `modern-table` compares to the error we expect for predictions made for the data in the `recent-table`?}
+@A{It is much more significant!}
+@Q{What are some problems you see with this model?}
+@Q{Where does it fit the data best?}
+@A{Within the range of the dataset that it was built on.}
+@Q{Where does it fit the worst?}
+@A{The farther we get from the date range it was built on.}
+}
 
 @slidebreak
 
@@ -175,18 +202,5 @@ TODO: talk about the rest of the page, solicit students' thoughts about why thei
 
 === Synthesize
 
-- Could you rewrite this model to use cosine instead of sine?
-- If so, how?
-- What are some problems you see with this model?
-- Where does it fit the data best? Where does it fit the worst?
 
-@slidebreak
 
-Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
-
-@QandA{
-@Q{In this project, do we know whether or not our model is the _best?_}
-@A{We don't know!}
-@Q{How do you know?}
-@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
-}
