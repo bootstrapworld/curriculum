@@ -1,22 +1,102 @@
 [[questions]]
-type = ""
+type = "Poster"
 # The prompt we want to use (can be a multi-line string!)
 prompt.prompt = """
+Twenty-nine individuals are represented by the points in the chart below.
+The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.
+
+The questions on the next 3 slides will focus on this chart.
 """
 # The correct choice
-answer.answer = ""
+prompt.image = "salary-lr-plot.png"
+
+# This will add an extra string of text at the bottom of the question.
+# Some questions might need some extra explanation
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+# The prompt we want to use (can be a multi-line string!)
+prompt.prompt = """
+Individuals at this company should expect that their salaries will increase about ____ every 2 years.
+"""
+prompt.image = "salary-lr-plot.png"
 
 # NOTE: By default, the answer and distractor list are shuffled
 # randomly! 
-# To enforce an order, uncomment the line below to specify where
-# the correct answer appears and to use the distractors in the
-# order they are written
-# prompt.answerIndex = 1
 prompt.distractors = [
+"$20,000",
+"$30,000",
+"$40,000"
 ]
-# Specify the path to the image (normally in the same folder)
-# NOTE: doesn't work yet!
-# image = "question1.png"
+
+# We want the answers ordered, so set the answerIndex
+prompt.answerIndex = 0
+# The correct choice
+answer.answer = "$10,000"
+
+# This will add an extra string of text at the bottom of the question.
+# Some questions might need some extra explanation
+context = """
+"""
+
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+# The prompt we want to use (can be a multi-line string!)
+prompt.prompt = """
+Use the predictor function to calculate how much money you expect would an employee with 15 years of experience to earn.
+"""
+prompt.image = "salary-lr-plot.png"
+
+# NOTE: By default, the answer and distractor list are shuffled
+# randomly! 
+prompt.distractors = [
+"$142,000",
+"$194,000",
+"$372,000"
+]
+
+# We want the answers ordered, so set the answerIndex
+prompt.answerIndex = 1
+# The correct choice
+answer.answer = "$167,000"
+
+# This will add an extra string of text at the bottom of the question.
+# Some questions might need some extra explanation
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+# The prompt we want to use (can be a multi-line string!)
+prompt.prompt = """
+Use the predictor function to determine about how much money would you expect an employee with no experience to earn.
+"""
+prompt.image = "salary-lr-plot.png"
+
+# NOTE: By default, the answer and distractor list are shuffled
+# randomly! 
+prompt.distractors = [
+"$0",
+"$15,000",
+"$20,000"
+]
+
+# We want the answers ordered, so set the answerIndex
+prompt.answerIndex = 3
+# The correct choice
+answer.answer = "$25,000"
 
 # This will add an extra string of text at the bottom of the question.
 # Some questions might need some extra explanation
