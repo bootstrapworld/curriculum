@@ -1,6 +1,6 @@
 = Fitting Periodic Models
 
-@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{Having deciphered the patterns in a dataset with perfect periodic (sinusoidal) behavior, students build and work with a model for data about Carbon Dioxide that has more variability.}
 
 @lesson-prereqs{periodic2-building-models}
 
@@ -13,30 +13,17 @@
 | Students will be able to...
 
 - Read and interpret real-world data, presented in a scatter plot
-- Recognize periodic behavior in tables and graphs
 - Model periodic relationships using functions
-
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model periodic relationships in data
+- Let's use Pyret to model periodic relationships in data.
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-periodic-desmos}.
- * Make a link or code to share with your students.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}
 |===
 
 == Fitting Periodic Models
@@ -147,13 +134,13 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 @Q{What did you get for @vocab{frequency} @math{b}?}
 @A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
 @Q{What does this frequency tell us?}
-@A{}
+@A{TO DO}
 }
 
 @slidebreak
 
 @lesson-instruction{
-- Let's use these values to construct our `periodic` model, and fit it to our data in Pyret!
+- Let's use these values to construct our `periodic` model, and then fit our model to the data in Pyret!
 - With your partner, complete *the first section* on @printable-exercise{modeling-recent-co2-2.adoc}.
 }
 
@@ -165,7 +152,7 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 @Q{How does this model for the @math{\text{CO}_2} data compare to the model we saw for the ferris wheel data?}
 @A{All of the points for the ferris wheel data fell on the curve.}
 @A{Our @math{\text{CO}_2} data falls near the curve, but not on it.}
-@Q{According the @vocab{S-value}, how well does your `periodic` model fit the data in the `recent-table`?}
+@Q{According to the @vocab{S-value}, how well does your `periodic` model fit the data in the `recent-table`?}
 @A{We expect an error of about 1.2 ppm of @math{\text{CO}_2} and the data in the `recent-table` ranges from 415.91 to 424, which means the model is a fairly good fit.}
 @Q{Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well." Do we know whether or not our model is the _best?_}
 @A{We don't know!}
@@ -174,7 +161,7 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 @slidebreak
 
 @lesson-instruction{
-- Let's see how well our model fits our the larger dataset.
+- Let's see how well our model fits the @math{\text{CO}_2} data from other years.
 - With your partner complete @printable-exercise{modeling-recent-co2-2.adoc}.
 }
 
@@ -194,7 +181,20 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 @A{The farther we get from the date range it was built on.}
 }
 
-@slidebreak
+=== Synthesize
+
+We just built a model from a sample for predicting @math{\text{CO}_2} levels and then tried to use it to model a larger dataset.
+
+@QandA{
+@Q{Why might data scientists build a model from a sample?}
+@A{In the real world it is pretty rare to have access to every piece of data we can imagine wanting to work with, so sometimes all we have is a sample.}
+
+@Q{What limitations are there to building a model from a sample?}
+@A{The predictions a model will make will be most accurate for the range of data it is built on. Data beyond that range might exhibit other trends.}
+@A{The pattern we find in a sample could be unrepresentative of the patterns in the whole.}
+}
+
+== Additional Exercises
 
 @strategy{Optional Activity: Guess the Model!}{
 
@@ -206,8 +206,5 @@ The `recent-table` includes just the rows from valley-to-valley for the years 20
 - The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
 }
-
-=== Synthesize
-
 
 
