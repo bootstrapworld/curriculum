@@ -30,6 +30,7 @@
 
 == Song Recommendation Systems
 
+
 @objective{training}
 
 === Overview
@@ -79,9 +80,9 @@ What does building the profile for a listener entail?
 
 @vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
 
-When it comes to song recommendation, sometimes, there is a need for the algorithm to change! When Michelle observed that Spotify must have updated its algorithms, she was *possibly* correct; we actually have no way of knowing what goes on behind the scenes at Spotify. Maybe, for example, the algorithm was altered to put more weight on _other_ listeners' behaviors, and less weight on the user's listening behaviors. Or maybe the algorithm was completely overhauled!
+When it comes to song recommendation, sometimes, there is a need for the algorithm to change. When Michelle observed that Spotify must have updated its algorithms, she was *possibly* correct; we actually have no way of knowing what goes on behind the scenes at Spotify. Maybe the algorithm was altered to put more weight on _other_ listeners' behaviors, and less weight on the user's listening behaviors. Or maybe the algorithm was completely overhauled!
 
-@teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Be sure to discuss the possibility that the algorithm changed a little
+@teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Discuss the possibility that the algorithm changed a little
 or a lot... and that there's no way for us to know!}
 
 === Synthesize
@@ -100,7 +101,7 @@ In machine learning, we generally start with a large chunk of data. A model is t
 
 === Overview
 
-Students practice thinking like a hacker to determine the basic requirements of a successful plagiarism detection program. They consider the "bag-of-words" model, which a user can query to better understand how similar or different two different documents are.
+Students practice thinking like a hacker to determine the basic requirements of a successful plagiarism detection program. They consider the "bag-of-words" model, which a user can query to better understand how similar or different two documents are.
 
 === Launch
 
@@ -186,7 +187,7 @@ A plagiarism detector that uses this model, taking stock of word frequency and i
 @A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
 }
 
-Checking if two bags of words are identical *is* an improvement from checking if two texts are identical. That said, this method of plagiarism detection is still pretty ineffective. In the next lesson, we'll consider a major upgrade to checking bags of words for identicality.
+Checking if two bags of words are identical *is* an improvement from checking if two texts are identical. That said, this method of plagiarism detection is still pretty ineffective. In the next lesson, we'll consider a major upgrade to our plagiarism detection algorithm.
 
 
 === Synthesize
@@ -219,7 +220,7 @@ Students explore the importance of data normalization, when we organize data to 
 Here are some discoveries we have made so far:
 
 - Checking if two texts are identical is not an effective way of detecting plagiarism.
-- Summarizing documents as @vocab{bags of words}, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
+- Summarizing documents as bags of words, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
 
 What we need is a way to check if bags are _similar_! To do this, we will represent our bags as @vocab{vectors}.
 
@@ -303,8 +304,6 @@ It is a bit trickier to envision plotting these vectors, but not impossible!
 
 We started out with two documents. Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
 
-We are ready to put our model to use!
-
 === Synthesize
 
 
@@ -340,26 +339,31 @@ Let's add a fifth document, Document e, to our collection.
 
 - Document e: "doo be bop ski bop bop"
 
-Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space (!). Having trouble visualizing a four-dimensional space? You're not alone! Our brains work in three dimensions each and every day, so visualizing a four-dimensional space is counter-intuitive, to say the least. That's why we leave it to the computer!
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone
 
 
 === Investigate
 
-Computers, unlike humans, have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions. A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents, also known as a @vocab{training corpus}.
-
-Throughout this lesson--for instructional purposes--we've used Documents a, b, c, and d as our "training corpus."
+A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents. A training corpus is a collection of data used to train AI/ML models, enabling them to learn patterns and make prediction. Processing a large @vocab{training corpus} will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions.
 
 @QandA{
 
-@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations. Does this comparison seem logical or useful? Explain.}
+@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations (such as Documents a-e, that we have worked with in this lesson). Does this comparison seem logical or useful? Explain.}
 @A{Totally not useful! It seems very unlikely that a student, assigned to write an essay in academic language, would plagiarize jazz lyrics. Students tend to plagiarize from documents that are at least somewhat connected to the assigned essay topic.}
 
 @Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
 @A{The corpus would likely include: essays written and submitted by students currently in the class; essays written and submitted by students previously in the class; Wikipedia articles; articles on relevant topics that are available on the internet, etc.}
 
-@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the @vocab{training corpus}, allowing her to detect if, perhaps, two students submitted essay that were a little too similar. About how many dimensions will there be in the model?}
+@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
 
-@A{If students do not include any repeated words in their writing whatsoever, then the model would have 10,000 dimensions. Assuming that there is _some_ repetition of common words, we can confidently guess that there will be thousands of dimensions in the model.}
+@A{Students should provide a wide range of estimates.}
+@A{An estimate of 10,000 dimensions (20 essays multiplied by 500 words) is the largest possible estimate here--but it is not necessarily a good estimate. In English, we commonly repeat and reuse words like "the", "and", "a", and so on.}
+
+@A{Other considerations: Did all of the students write about the same topic? How sophisticated is the student writing? Did all students actually write 500 words?}
+
+@A{Taking all of the above into consideration, we can predict that there would probably be at least a few thousand dimensions in the model.}
+
+@Q{What happens if we train on the internet?}
 }
 
 
@@ -369,7 +373,11 @@ Complete @printable-exercise{human-judgment.adoc} with your partner.}
 
 === Synthesize
 
+@QandA{
 
+@Q{}
+
+}
 
 
 == Computing Closeness and Exercising Human Judgment
@@ -421,8 +429,7 @@ To allow for a pleasant user experience, a modern plagiarism detector does not a
 - The plagiarism detector produces a value between zero and 1 for all other comparisons, reflecting the level of similarity of two bags of words.
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{human-judgment.adoc}, where you will evaluate the closeness of the student essay and the wikipedia article using the cosine-similarity function.
-- Complete the remaining two sections of @printable-exercise{human-judgment.adoc}, where you will consider four possible outputs of a plagiarism detector that utilizes the cosine similarity function.
+- Complete the first section of @printable-exercise{cosine-similarity.adoc}.
 }
 
 @teacher{
