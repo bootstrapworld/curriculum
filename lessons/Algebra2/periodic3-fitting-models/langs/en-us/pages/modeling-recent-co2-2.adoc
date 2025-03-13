@@ -5,7 +5,7 @@
 td .autonum::after { content: ')' !important; }
 
 /* Tweak table display */
-td { padding: 0 !important; }
+td { padding: 0 6px !important; }
 td .codetwo { color: black; background: none; }
 table table td { color: inherit !important; padding: 3px 0 !important; }
 body .center { padding: 0; }
@@ -49,7 +49,7 @@ table+.paragraph .autonum {padding-top: 0; }
 This page relies on the @starter-file{alg2-co2}. Make sure you have it open on your computer!
 }
 
-== Fitting Your Periodic Model
+== Define Your Periodic Model
 
 @n Define a periodic model using the values you computed for @math{a}, @math{k}, @math{h} and @math{b} on @printable-exercise{modeling-recent-co2.adoc}.
 
@@ -63,9 +63,9 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 |
 
 @math{periodic(x) =}
-@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times}@math{sin}(
+@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} {nbsp} @math{\times} {nbsp} @math{sin}(
 @fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}
-@fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})})) +
+@fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})} )) {nbsp} @math{+} {nbsp}
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
@@ -76,49 +76,9 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @vspace{1ex}
 
-Then update the `periodic` function definition in your starter file to match what you've just written.
-
-@n Use `fit-model` to fit your `periodic` model to the data in the `recent-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~1.2 }}
-
-@n What does this model actually mean? Fill in the blanks below, and read the completed model aloud with your partner.
+@n Then update the `periodic` function definition in your starter file to match what you've just written.
 
 @vspace{1ex}
-
-@indented{
-_Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. With 1 year representing a full cycle, we expect this pattern to repeat each year for a frequency of @fitbruby{5em}{@ifsoln{@math{2pi}}}{frequency}._
-}
-
-== How well does our model predict @math{CO_2} levels for other years?
-
-You built your model using the `recent-table`, which covers the most recent full year of our dataset.
-
-@n Let's see how well if fits the broader dataset. In Pyret, fit your model to the `modern-table`. What @math{S}-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~17.8 }}
-
-@vspace{1ex}
-
-[cols="10a,1,10a", grid="none", frame="none"]
-|===
-| @n Sketch your model on the scatter plot below.
-
-@ifnotsoln{@center{@image{../images/modern-co2-scatter.png, 300}}}
-@ifsoln{@center{@image{../images/modern-co2-model-soln.png, 300}}}
-
-|
-| @n Describe what changes you could make to your model so that it would fit the data better.
-
-@fitb{}{@ifsoln{Answers will vary. We could change the y-intercept.}}
-
-@fitb{}{@ifsoln{It needs to be rotated so that the wave undulates around}}
-
-@fitb{}{@ifsoln{a diagonal line rather than a horizontal line.}}
-
-@fitb{}{}
-
-@fitb{}{}
-
-@fitb{}{}
-
-|===
 
 @star Try translating the definition you wrote for `periodic` so that it uses  @math{\text{cosine}}  instead of @math{\text{sine}}:
 
@@ -130,9 +90,9 @@ You built your model using the `recent-table`, which covers the most recent full
 |
 
 @math{periodic(x) =}
-@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times}@math{cos}(
+@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} {nbsp} @math{\times} {nbsp} @math{cos}(
 @fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}
-@fitbruby{70pt}{@ifsoln{@h-cos}}{horizontal shift (@math{h})})) +
+@fitbruby{70pt}{@ifsoln{@h-cos}}{horizontal shift (@math{h})})) {nbsp} @math{+} {nbsp}
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
@@ -140,3 +100,28 @@ You built your model using the `recent-table`, which covers the most recent full
 |
 @show{(code `(define (periodic x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
+
+@vspace{1ex}
+== Fit Your Periodic Model to the Data
+
+@n Use `fit-model` to fit your `periodic` model to the data in the `recent-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~1.2 }}
+
+@vspace{1ex}
+
+[cols="9a,1,10a", grid="none",frame="none"]
+|===
+| @n On the scatter plot below, make a sketch of what you see in pyret showing how the `periodic` model fits the data. +
+
+@vspace{1ex}
+
+@image{../images/recent-pyret-scatter.png}
+|
+| @n Then fill in the blanks below to tell us what the model means. +
+@vspace{1ex} +
+_Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{1.2}}{S}@fitbruby{8em}{@ifsoln{feet}}{y-units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree}
+that this model is a good fit considering that
+@fitbruby{8em}{@ifsoln{altitude}}{y-variable} in this dataset ranges from about
+@fitbruby{8em}{@ifsoln{416 feet}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 feet}}{highest y-value}._
+|===
+
