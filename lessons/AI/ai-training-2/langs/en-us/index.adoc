@@ -1,0 +1,270 @@
+= Training Artificial Intelligence
+
+@description{
+}
+
+@ifproglang{pyret}{
+@lesson-prereqs{ai-data-driven-algorithms}
+}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's think about training, the act of transforming data into a model.
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+
+
+== Vectors and Data Normalization
+
+@objective{data-normalization}
+
+=== Overview
+
+Students explore the importance of data normalization, when we organize data to follow a norm.
+
+=== Launch
+
+Here are some discoveries we have made so far:
+
+- Checking if two texts are identical is not an effective way of detecting plagiarism.
+- Summarizing documents as bags of words, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
+
+What we need is a way to check if bags are _similar_! To do this, we will represent our bags as @vocab{vectors}.
+
+- A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
+- Using vector notation, we can represent Document a ("doo be doo be doo") like this: @math{\overrightarrow{a} = (2, 3)}
+- If we were to plot a point for the vector on the coordinate plane, it would produce this:
+
+@center{@image{images/3-2.png, 150}}
+
+
+@QandA{
+
+@Q{How would you represent the vector for Document b ("doo doo be doo be") on the coordinate plane?}
+
+@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
+}
+
+=== Investigate
+
+Let's look at some slightly more complicated documents to learn how we can put these @vocab{vectors} to use.
+
+- Document c: "doo be doo be doo doo doo"
+
+- Document d: "be bop bop bop be bop bop"
+
+
+[cols="1,2,2", options="header", stripes="none"]
+|===
+
+| Document
+| Bag-of-words summary
+| Vector
+
+| c
+| `"be": 2, "doo": 5`
+| @math{\overrightarrow{c} = (2, 5)}
+
+| d
+| `"be": 2, "bop": 5`
+| @math{\overrightarrow{d} = (2, 5)}
+
+|===
+
+*We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their vectors are...
+
+@QandA{
+@Q{What went wrong here?}
+@A{The point is to draw out student thinking here rather than to get to any particular answer. The remainder of the lesson will dig into the details. Students might suggest:
+ - The vectors were written as if there were only two items in the list... but, in fact there are three different items!
+ - 5 represents "doo" in the first vector and "bop" in the second vector, but we've lost that information.}
+}
+
+
+@teacher{
+*Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
+}
+
+To solve this problem, let's start by taking a closer look at our data.
+
+First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize the data:
+
+@center{@image{images/scat-venn-diagram.png, 150}}
+
+We must revise our bag-of-words summaries and our vectors!
+
+@teacher{Normalizing data and considering dimensionality requires that--when a word occurs zero times--we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
+
+@right{@image{images/2pts.png, 150}}
+
+
+The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as  @math{\overrightarrow{c} = (2, 0, 5)}.
+
+The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as @math{\overrightarrow{d} = (2, 5, 0)}.
+
+It is a bit trickier to envision plotting these vectors, but not impossible!
+
+@QandA{
+@Q{In the 3-dimensional space to the right, which point represents @math{\overrightarrow{c}}? How do you know?}
+@A{The one on the bottom. It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
+}
+
+We started out with two documents. Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
+
+=== Synthesize
+
+
+@QandA{
+
+@Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
+
+@A{The bag-of-words model eliminates word order. It preserves word count.}
+
+@Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
+
+@A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
+}
+
+
+
+== The Dimensionality of Natural Language
+
+=== Overview
+
+=== Launch
+
+So far, we've looked at four documents.
+
+- Document a: "doo be doo be doo"
+- Document b: "doo doo be doo be"
+- Document c: "doo be doo be doo doo doo"
+- Document d: "be bop bop bop be bop bop"
+
+Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as vectors in a *_three_*-dimensional space.
+
+Let's add a fifth document, Document e, to our collection.
+
+- Document e: "doo be bop ski bop bop"
+
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone
+
+
+=== Investigate
+
+A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents. A training corpus is a collection of data used to train AI/ML models, enabling them to learn patterns and make prediction. Processing a large @vocab{training corpus} will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions.
+
+@QandA{
+
+@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations (such as Documents a-e, that we have worked with in this lesson). Does this comparison seem logical or useful? Explain.}
+@A{Totally not useful! It seems very unlikely that a student, assigned to write an essay in academic language, would plagiarize jazz lyrics. Students tend to plagiarize from documents that are at least somewhat connected to the assigned essay topic.}
+
+@Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
+@A{The corpus would likely include: essays written and submitted by students currently in the class; essays written and submitted by students previously in the class; Wikipedia articles; articles on relevant topics that are available on the internet, etc.}
+
+@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
+
+@A{Students should provide a wide range of estimates.}
+@A{An estimate of 10,000 dimensions (20 essays multiplied by 500 words) is the largest possible estimate here--but it is not necessarily a good estimate. In English, we commonly repeat and reuse words like "the", "and", "a", and so on.}
+
+@A{Other considerations: Did all of the students write about the same topic? How sophisticated is the student writing? Did all students actually write 500 words?}
+
+@A{Taking all of the above into consideration, we can predict that there would probably be at least a few thousand dimensions in the model.}
+
+@Q{What happens if we train on the internet?}
+}
+
+
+@lesson-instruction{
+Complete @printable-exercise{human-judgment.adoc} with your partner.}
+
+
+=== Synthesize
+
+@QandA{
+
+@Q{}
+
+}
+
+
+== Computing Closeness and Exercising Human Judgment
+
+=== Overview
+
+Students investigate the limitations of plagiarism detection, acknowledging the importance of exercising human judgment.
+
+=== Launch
+
+The training phase is now complete. Let's review what has happened so far.
+
+*1. We created bag-of-words models of our documents.*
+
+In doing so, we compressed the data by isolating the single feature that we care about: word frequency. As a result, the _new_ representation of the data became considerably smaller than the what we started with.
+
+@lesson-point{
+Loss of data is a common and often necessary effect of training AI!
+}
+
+*2. We normalized our data.*
+
+Comparisons are most useful when we are comparing items that are alike. When building bags of words for the documents in the corpus, each model *must* have the same number of words (dimensions!) regardless of how many words are in a given document. Defaulting to a cliché: we need an "apples-to-apples" comparison, rather than an "apples-to-oranges" comparison. This is why we sometimes need to include words that we did not encounter in a given document in our model.
+
+What now?
+
+=== Investigate
+
+Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
+
+Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
+
+A _more_ effective plagiarism detector will compute the student's vector (a point in a multi-dimensional space), and then compare it to the _other_ points in that space.
+
+To do this, we can use the `cosine-similarity` function.
+
+@strategy{Cosine?!}{
+
+You might be wondering: are we actually using *that* cosine — the one students learn about when studying trigonometry? The answer is YES!
+
+The `cosine-similarity` function computes the cosine of the angle between two vectors. While it is not necessary for students to understand the mathematics happening behind the scenes, the function is a vital part of the program... and a lovely answer to the often-asked question, "When are we ever going to use this?"
+}
+
+To allow for a pleasant user experience, a modern plagiarism detector does not actually provide a representation of a multi-dimensional space with varying points. That would be too complicated! Although different plagiarism detectors provide different outputs for their users, here's how the one in Pyret works.
+
+- The `cosine-similarity` function takes in two strings (documents).
+- The plagiarism detector produces an output of 1 when the vectors are identical.
+- The plagiarism detector produces an output of zero when the vectors are entirely different.
+- The plagiarism detector produces a value between zero and 1 for all other comparisons, reflecting the level of similarity of two bags of words.
+
+@lesson-instruction{
+- Complete the first section of @printable-exercise{cosine-similarity.adoc}.
+}
+
+@teacher{
+Invite students to share their responses.}
+
+=== Synthesize
+
+@QandA{
+
+@Q{AI can be impressive... but human judgment is still critical. Why?}
+
+@A{The cosine-similarity function produces a number - and that is all! It is still up to the teacher to decide how to make sense of that number. Over-reliance on programs can result in unfair outcomes.}
+
+
+@Q{Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?}
+}
