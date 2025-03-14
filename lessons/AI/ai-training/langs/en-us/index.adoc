@@ -1,6 +1,6 @@
 = Training Artificial Intelligence
 
-@description{Students consider what training is by exploring two unique examples: song recommendation and plagiarism detection. As a result of this exploration, they learn that training, a resource-intensive and time-intensive process, is the act of transforming data into a model.
+@description{Students consider what training is by exploring two unique examples: song recommendation and plagiarism detection. As a result of this exploration, they learn that training is the act of transforming data into a model, which is a resource-intensive and time-intensive process.
 }
 
 @ifproglang{pyret}{
@@ -30,7 +30,6 @@
 
 == Song Recommendation Systems
 
-
 @objective{training}
 
 === Overview
@@ -39,10 +38,11 @@ Students explore song recommendation, another example of data-driven algorithms 
 
 === Launch
 
-Data is at the heart of data science, and @vocab{data-driven algorithms} are at the heart of Machine Learning and AI. Providing _more_ data often produces better results, but we must also consider how other variables can influence the quality of output.
+Data is at the heart of @vocab{data science} and @vocab{data-driven algorithms} are at the heart of Machine Learning and AI.  When collecting, organizing, and drawing general conclusions from data with the help of computers, providing _more_ data often produces better results, but we must also consider how other variables can influence the quality of output.
 
 @lesson-instruction{
-- Read @printable-exercise{case-study-michelle.adoc} and respond to the questions, providing as much detail as you can.
+- Read @printable-exercise{case-study-michelle.adoc}.
+- Then respond to the questions, providing as much detail as you can.
 }
 
 @teacher{Invite students to share their responses.
@@ -54,7 +54,7 @@ Data is at the heart of data science, and @vocab{data-driven algorithms} are at 
 
 === Investigate
 
-For Michelle to get better results, changing the code is not necessarily needed... although it is always a possibility! Let's consider song recommendation in more depth, and explore the idea that sometimes, _there is a need for algorithms to change_.
+It's likely that Michelle could get better suggestions without Spotify making any changes to the code base. But it's also possible that changing the code would improve Michelle's experience!  Let's consider song recommendation in more depth and explore the idea that sometimes _there is a need for algorithms to change_.
 
 Very broadly, a song recommendation system does two things:
 
@@ -78,9 +78,9 @@ What does building the profile for a listener entail?
 
 @slidebreak
 
-@vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify can answer questions about new, unseen data (e.g., will Michelle like the latest Taylor Swift song... or not?).
+@vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify answers questions about new, unseen data (e.g. Do we expect Michelle to like the latest Taylor Swift song... or not?).
 
-When it comes to song recommendation, sometimes, there is a need for the algorithm to change. When Michelle observed that Spotify must have updated its algorithms, she was *possibly* correct; we actually have no way of knowing what goes on behind the scenes at Spotify. Maybe the algorithm was altered to put more weight on _other_ listeners' behaviors, and less weight on the user's listening behaviors. Or maybe the algorithm was completely overhauled!
+When Michelle observed that Spotify must have updated its algorithms, she was *possibly* correct; we actually have no way of knowing what goes on behind the scenes at Spotify. Maybe the algorithm was altered to put more weight on _other_ listeners' behaviors, and less weight on the user's listening behaviors. Or maybe the designer realized they'd left out an important factor in predicting people's musical tastes and the algorithm was completely overhauled!
 
 @teacher{If your students did not suggest that Spotify improved its algorithms on @printable-exercise{case-study-michelle.adoc}, now is an appropriate time to add some complexity and nuance to the conversation. Discuss the possibility that the algorithm changed a little
 or a lot... and that there's no way for us to know!}
@@ -92,8 +92,10 @@ In machine learning, we generally start with a large chunk of data. A model is t
 @Q{Why do you think models are generally smaller than the training data?}
 
 @A{Generally, the model *summarizes* the data, eliminating all but its most essential features--the features that enable it to make predictions, generate text, etc.}
-}
 
+@Q{What advantages might there be to the model being smaller than the training data?}
+@Q{What disadvantages might there be?}
+}
 
 == Bags of Words
 
@@ -112,22 +114,32 @@ As a student, you probably know what it feels like to be under surveillance.
 - When you submit an essay to your English or History teacher, you can expect that they will check for plagiarism - perhaps by running it through a plagiarism detector to be certain that all words and thoughts are your own.
 - You might even got to a school where adults are stationed around the building and in the hallways or use cameras to check that students are dressed and behaving a certain way.
 
+@slidebreak
+
 Good designers of these systems have to practice adversarial thinking and imagine all the ways that someone might try to _hack_ or _fool_ them.  Let's practice thinking like a designer.
 
 @QandA{
 
 @Q{Imagine that your teacher announces that they will be running all student writing through a plagiarism detector and you are a student who wants to plagiarize. Exercise some creativity: What are your strategies for evading detection?}
 
-@A{Responses will vary, but may include the following: replace common words with synonyms; change the ordering of sentences and paragraphs; plagiarize from an unlikely source (maybe a friend who took the class 5 years ago?); plagiarize from multiple sources; paraphrase text so that it has the correct "voice".}
+@A{Responses will vary, but may include the following:
+  - replace common words with synonyms
+  - change the ordering of sentences and paragraphs
+  - plagiarize from an unlikely source (maybe a friend who took the class 5 years ago?)
+  - plagiarize from multiple sources
+  - paraphrase text so that it has the correct "voice".
+  }
 }
 
 @strategy{Adversarial Thinking}{
 Go easy on your students! As students share their plagiarism strategies, you may feel judgmental. We urge you to keep those feelings at bay.
 
-In this exercise, we are trying to get students to engage in *Adversarial Thinking* (put simply, thinking like a hacker). This is a valuable strategy that is taught, for example, in cybersecurity courses at the university level focused on security, data protection, harms caused by AI—these, etc. Adversarial Thinking is a valuable skill for students to develop; the key is that they learn how to exercise it in an ethical way!
+In this exercise, we are trying to get students to engage in *Adversarial Thinking* (put simply, thinking like a hacker). This is a valuable strategy that is taught, for example, in cybersecurity courses at the university level focused on security, data protection, harms caused by AI, etc. Adversarial Thinking is a valuable skill for students to develop; the key is that they learn how to exercise it in an ethical way!
 
 Just because students excel at thinking in this way doesn't mean they are ethically compromised. Focus on and commend their creativity and reasoning instead of judging them.
 }
+
+@slidebreak
 
 To understand the workings of plagiarism detection, we'll start by looking at a simple detector.
 
@@ -136,20 +148,39 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 - With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
-The `simple-similarity` detector does not work very well! If the plagiarism detector finds a match, we can be certain that an identical document exists. If the detector does not find a match, we know that there are no identical documents. _Either way, we can't draw any conclusions about whether plagiarism happened!_
+@slidebreak
 
-As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there. *We need a plagiarism detector with more sophistication!*
+@teacher{Debrief the page with your class.}
 
-=== Investigate
+@QandA{
+@Q{What does the `simple-similarity` detector do?}
+@A{Takes in two documents and returns 1 if they match exactly and 0 if they don't match exactly.}
+@Q{How would you evaluate the effectiveness of the `simple-similarity` detector?}
+@A{It doesn't work very well! We have know way of knowing how similar the documents are unless they are an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
+@Q{What might a more effective plagiarims detector do differently?}
+@A{Answers will vary.}
+}
+
+@slidebreak
+
+As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
+
+- If the `simple-similarity` detector finds a match, we can be certain that an identical document exists.
+- If the detector does not find a match, we know that there are no identical documents.
+- _Either way, we can't draw any conclusions about whether plagiarism happened!_
+
+*We need a plagiarism detector with more sophistication!*
 
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then compute the distance between the summaries.
 
+=== Investigate
+
 One standard way to summarize a document is by creating a "bag of words" model. Let's try it on two documents (below); each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
 
-- Document a: "doo be doo be doo"
-- Document b: "doo doo be doo be"
+- *Document a*: "doo be doo be doo"
+- *Document b*: "doo doo be doo be"
 
-The bag-of-words summary for Document a looks like this: `"be": 2, "doo": 3`
+The bag-of-words summary for *Document a* looks like this: `"be": 2, "doo": 3`
 
 @lesson-point{
 A bag-of-words model represents text as an unordered collection of words with frequencies.
@@ -158,14 +189,14 @@ A bag-of-words model represents text as an unordered collection of words with fr
 As you can see, we've taken the original sentence and disregarded word order, creating a collection that focuses solely on *word frequency*.
 
 @QandA{
-@Q{What is the bag-of-words summary for Document b?}
+@Q{What is the bag-of-words summary for *Document b*?}
 @A{The bag-of-words summary for Document b looks like this: `"be": 2, "doo": 3`.}
 @A{It should be identical to the bag-of-words summary for Document a.}
 @Q{How did you know what order to put the words in?}
 @A{I used the same order as the bag-of-words summary for Document a.}
 }
 
-Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order.
+_Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order._
 
 The bag-of-words summary for both documents is exactly the same!
 
@@ -173,7 +204,7 @@ A plagiarism detector that uses this model, taking stock of word frequency and i
 
 
 @lesson-instruction{
-- Open @starter-file{plagiarism}.
+- Open the @starter-file{plagiarism}.
 - With a partner, complete @printable-exercise{slightly-less-primitive-detector.adoc}.
 }
 
@@ -187,21 +218,14 @@ A plagiarism detector that uses this model, taking stock of word frequency and i
 @A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
 }
 
-Checking if two bags of words are identical *is* an improvement from checking if two texts are identical. That said, this method of plagiarism detection is still pretty ineffective. In the next lesson, we'll consider a major upgrade to our plagiarism detection algorithm.
+Checking if two bags of words are identical *is* an improvement from checking if two texts are identical.
 
+@teacher{If your students are ready to think about vectors, you can continue on to @lesson-link{ai-training-2} to learn about a major upgrade to our plagiarism detection algorithm.}
 
 === Synthesize
 
 @QandA{
-
-The bag-of-words model is better at detecting plagiarism than the primitive plagiarism detector—but it's far from perfect.
-
-@Q{What kind of plagiarism _can_ we catch using this model?}
-@A{We can catch a plagiarizer who reorders the words of a document.}
-
-@Q{What sort of plagiarism are we still _unable_ to catch?}
-@A{We cannot catch a plagiarizer who _alters_ the words in a document by substituting in synonyms or changing word tense.}
-
-@Q{What might we _misidentify_ as plagiarism using this model? Put another way, what sort of _non-plagiarism_ might be labeled _plagiarism_?}
-@A{Someone might independently write a text with a bag of words that happens to be the same as the bag of words for a different text. This coincidence is more likely with shorter documents. Returning to our Documents a and b: scatting jazz vocalists are not commonly accused of stealing one another's material.}
+@Q{What similarities are there between a system that recommends songs and `bow-similarity` plagiarism detection?}
+@A{Both systems build summaries of the available data and then work with those summaries.}
 }
+
