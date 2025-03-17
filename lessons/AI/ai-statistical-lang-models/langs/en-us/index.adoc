@@ -23,6 +23,10 @@
 |[.materials-links]
 @material-links
 
+| Preparation
+| @preparation{
+- Make a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, Is it AI? Survey Google Form} so that you can examine your class's data. _If you are using our Google Slides, be sure to add the link to your copy of the form to the appropriate slide._}
+
 |===
 
 
@@ -39,14 +43,19 @@ Students explore how text prediction relies on statistical language modeling.
 
 While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
 
+@teacher{
+Make sure you've made a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, survey} and have created a link to share with students, so that you can look at your data as a class!
+}
+
+
 @lesson-instruction{
 - Consider this start of a phrase: "Close the..."
-- On a piece of paper, write down the next word that pops into your mind.
-- Write down two other possible next words.
+- Use the form to record the next word that pops into your mind.
+- Type in two other possible next words.
 }
 
 @teacher{
-Record students word suggestions on the board. If a word is repeated, keep a tally of how many students suggest each particular word.
+Display the survey results for the class to see. If a word is repeated, summarize the results by keeping a tally of how many students suggest each particular word.
 
 Students will think of words like "door", "box", "microwave", "laptop"...
 }
@@ -86,7 +95,7 @@ During training:
 . It then determines the probability of each possible next word.
 . When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
 
-In this particular corpus, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
+In this particular @vocab{training corpus}, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
 
 But are all users recommended the _same_ completions?
 
@@ -176,7 +185,7 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 Let's dig a little deeper...
 
 @teacher{
-Share the @handout{old-lady-lyrics.adoc, song lyrics"} with students,  have students and have them read them independently". If desired, you could also listen to a recorded version of the song.
+Share the @handout{old-lady-lyrics.adoc, song lyrics} with students to read independently. If desired, you could also listen to a recorded version of the song.
 }
 
 The phrase "there was an old lady who swallowed a..." is repeated in our corpus! Let's zoom in on one unigram from that phrase: “there”.
@@ -206,6 +215,17 @@ We can represent this computation with a special notation:
 - Complete @printable-exercise{constructing-model.adoc}.
 }
 
+
+@QandA{
+
+@Q{What @vocab{training corpus} did you use to construct a language model?}
+@A{The song lyrics, including the title of the song, were our corpus.}
+
+@Q{Make a prediction: How can we make use of the ratios we completed on @printable-exercise{constructing-model.adoc}?}
+@A{We can refer to our ratios to determine which word is the most likely to follow a given word.}
+
+}
+
 @teacher{
 Are you and your students interested in exploring probability in more depth? Check out our lesson on @lesson-link{probability-inference} to dig deeper.
 }
@@ -221,6 +241,10 @@ _In this corpus_, as the n-gram gets longer, the number of completion options de
 }
 
 == Sampling from the Model
+
+=== Overview
+
+Students use their statistical language model in a generative way, to produce output.
 
 === Launch
 
