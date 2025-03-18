@@ -1,4 +1,4 @@
-= How well does our model predict carbon dioxide levels from 2010 to 2023?
+= How well does our model predict CO&#8322; levels from 2010 to 2023?
 
 ++++
 <style>
@@ -8,32 +8,38 @@ table .autonum::after { content: ')' !important; }
 ++++
 
 @link-instructions{
-To complete this page you will need to open @starter-file{alg2-co2}.
+To complete this page you will need to open @starter-file{alg2-hybrid}.
 }
 
-You built your `periodic` model using the `recent-table`, which covers the most recent full year of our dataset. Let's see how well if fits the broader dataset.
-
-@n How would you describe the shape of your periodic model? @fitb{}{}
-
-@fitb{}{}
-
-@n How would you describe the shape of this scatter plot of the data in the `modern-table`? @fitb{}{}
-
-@fitb{}{}
-
-@n In Pyret, fit your `periodic` model to the `modern-table`.
-
-@vspace{1ex}
-
-[cols="10a,1,10a", grid="none", frame="none"]
+[cols="10a,.>10a", grid="none", frame="none"]
 |===
-| @n Sketch your model on the scatter plot below.
+| @teacher{Student version of the graph to the right only shows the points.}
+@n Looking at the scatter plot, how would you describe the shape of the data in the `modern-table`? @fitb{}{}
+
+@fitb{}{@ifsoln{_Answers will vary! Listen to students' language._}}
+
+@fitb{}{@ifsoln{_- diagonal & positive slope_}}
+
+@fitb{}{@ifsoln{_- wave / curve / squiggle_}}
+
+@n How does it compare to the shape of the data we worked with in the `recent-table`? @fitb{}{}
+
+@fitb{}{@ifsoln{That data didn't look diagonal at all.}}
+
+|
 
 @ifnotsoln{@center{@image{../images/modern-co2-scatter.png, 300}}}
 @ifsoln{@center{@image{../images/modern-co2-model-soln.png, 300}}}
 
-|
-| @n Describe what changes you could make to your model so that it would fit the data better.
+|===
+
+@n In Pyret, fit your `periodic` model to the `modern-table`. Then sketch it on the scatter plot above.
+
+@n How would you describe the shape of your periodic model? @fitb{}{}
+
+@fitb{}{@ifsoln{_Answers will vary. Perhaps: a wave the goes up and down between two horizontal lines_}}
+
+@n Describe what changes you could make to your model so that it would fit the data better.
 
 @fitb{}{@ifsoln{Answers will vary. We could change the y-intercept.}}
 
@@ -47,12 +53,13 @@ You built your `periodic` model using the `recent-table`, which covers the most 
 
 @fitb{}{}
 
-|===
 
 @n What @vocab{S-value} did you get when you fit your model? @fitb{}{@ifsoln{Answers will vary slightly.  ~17.8 }}
 
 @n Why doesn't it make sense to compare the @vocab{S-value} we got for the `periodic` model from the `recent-table` to the @vocab{S-value} we got from the `modern-table`? @fitb{}{}
 
-@fitb{}{@ifsoln{Because the @vocab{S-value} has to be considered within the range of the data and the ranges are very different! This dataset ranges from 387.03ppm to 424ppm.}}
+@fitb{}{@ifsoln{Because the @vocab{S-value} has to be considered within the range of the data and the ranges are very different! }}
 
-@fitb{}{}
+@fitb{}{@ifsoln{`modern-table` data ranges from 387.03ppm to 424ppm.}}
+
+@fitb{}{@ifsoln{`recent-table` data ranges from 415.74 to 424.}}

@@ -24,12 +24,10 @@ td .codetwo { color: black; background: none; }
 }
 
 @link-instructions{
-The data below was generated from @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from 1974 to 2023 (the `co2-table`). *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+For this page, we are going to work with the data in the `co2-table` of the @starter-file{alg2-hybrid}, which tracks the amount of @COtwo in the atmosphere (parts per million) from 1974 to 2023.
 }
 
-== Looking for Patterns
-
-@center{@image{../images/historical-scatter-plot.png, 450}}
+== Fitting a Linear Model
 
 @n Use `lr-plot` to find the best linear model for the `co2-table`. What is its @math{S}-value? @fitbruby{15em}{@ifsoln{3.425}}{parts per million}
 
@@ -44,43 +42,38 @@ The data below was generated from @starter-file{alg2-co2}, showing the amount of
 | @show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
 |===
 
-@n Copy your periodic model from @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc} below:
 
-[cols=".^1a, ^.^12a", frame="none", stripes="none"]
-|===
-| *Function Notation*
-|
-@math{\text{periodic}(x) =} @fitbruby{70pt}{@ifsoln{4.13}}{amplitude} @math{\times}
-@math{sin}(
- @fitbruby{70pt}{@ifsoln{6.28}}{frequency} (x - @fitbruby{70pt}{@ifsoln{2023.1}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{419.87}}{vertical shift}
+== Fitting your Periodic Model
+@link-instructions{Make sure the `periodic` model defined in @starter-file{alg2-hybrid} matches what you recorded on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}}.
 
-| *Pyret Notation*
-| @show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
-|===
+@n Use `fit-model` to find the @vocab{S-value} of your `periodic` model for the `co2-table`. @fitb{}{@ifsoln{~55.89 part per million}} 
 
-== Creating Hybrid Models
-*We can think of @math{f(x) = A \sin(B(x - h)) + k} as being the sum of _two_ functions: @math{p(x) = A \sin(B(x - h))} and @math{q(x) = k}.*
+== Comparing Models
 
-@n Which function defines the "up and down" wave (@math{p} or @math{q})? @fitb{4em}{@ifsoln{@math{p}}} Which function defines the line the wave "wraps around"? @fitb{}{@ifsoln{q}}
+@n Which model is better, the `linear` model or the `periodic` model? @fitb{}{@ifsoln{linear}}
+@n How much
+@fitbruby{7em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made with the `linear` model than predictions made with the `periodic` model?
 
-@n What do you think would happen if @math{q} were changed so that @math{k} is a _higher_ number? @fitb{}{@ifsoln{The wave is shifted up}}
+@vspace{1ex}
 
-@n What do you think would happen if @math{q} were changed so that @math{k} is a _lower_ number? @fitb{}{@ifsoln{The wave is shifted down}}
-
-@n What do you think would happen if @math{q} were changed to @math{q(x) = 2x + -3000} @fitb{}{@ifsoln{The wave would wrap around a sloping line}}
-
-@star Define a NEW function `hybrid` in Pyret, which combines your periodic model with the optimal linear one. Write your new model below, in Function or Pyret notation:
-
-[.FillVerticalSpace, cols="^1a", frame="none", options="noheader"]
-|===
-|
-@ifsoln{
-`fun hybrid(4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end`
-
-**OR**
-
-@math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
 }
-|===
-What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} 
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{52.465}{55.89} = 0.9387  &#8192; &rarr; &#8192;  ~94 \%}}
+}
+
+We expect predictions made with the ``linear` model to have
+@fitb{4em}{@ifsoln{~94}} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than predictions made with the `periodic` model!
