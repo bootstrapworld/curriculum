@@ -47,6 +47,7 @@ While texting, emailing, or even conducting a web search, you've probably notice
 Make sure you've made a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, survey} and have created a link to share with students, so that you can look at your data as a class!
 }
 
+@slidebreak
 
 @lesson-instruction{
 - Consider this start of a phrase: "Close the..."
@@ -75,6 +76,8 @@ Let's look a little more closely at the words we generated.
 @teacher{If your students are comfortable computing the probability of choosing each word, they may do so in pairs or individually. If not, this can be a teacher-led task. Laying a solid foundation is worth the time: students will compute probability throughout the lesson.
 }
 
+@slidebreak
+
 
 @QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
@@ -87,6 +90,11 @@ Let's look a little more closely at the words we generated.
 @right{@image{images/texting-app.png, 200}}Invite conversation. Then share this image from a text messaging app.
 }
 
+@ifslide{@image{images/texting-app.png, 200}}
+
+@slidebreak
+
+
 Similar to other AI systems we've discussed, your predictive text feature is trained on a large amount of data, in this case, text.
 
 During training:
@@ -97,6 +105,8 @@ During training:
 
 In this particular @vocab{training corpus}, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
 
+@slidebreak
+
 But are all users recommended the _same_ completions?
 
 @QandA{
@@ -104,6 +114,9 @@ But are all users recommended the _same_ completions?
 @A{Before we get into the in-depth student-facing explanation, below, invite discussion!}
 @A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{ai-training, "plagiarism detection"}.}
 }
+
+
+@slidebreak
 
 Not all phones will propose the same completions for a variety of reasons:
 
@@ -115,6 +128,10 @@ Not all phones will propose the same completions for a variety of reasons:
 
 - Some predictive text features even take into account the specific message that you are composing! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
+
+
+@slidebreak
+
 @QandA{
 @Q{We just considered four reasons why different phones sometimes propose different completions. Do each of these four reasons represent _statistical_ phenomena? Why or why not?}
 @A{Phenomena 1 and 2 are statistical, given that statistical language modeling always includes some element of randomness.}
@@ -123,6 +140,9 @@ Not all phones will propose the same completions for a variety of reasons:
 }
 
 Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
+
+
+@slidebreak
 
 You have just considered the workings and in-context use of a @vocab{statistical language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
 
@@ -155,6 +175,8 @@ Students construct a statistical language model by decomposing the text and comp
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
 For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
+
+@slidebreak
 
 First, we will decompose the title of our corpus into differently sized chunks (one word at a time, two words at a time, etc.):
 
@@ -199,6 +221,9 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 @A{4/4 or 100%}
 }
 
+
+@slidebreak
+
 In the example you just worked through, you computed the probability that "was" appears after the unigram "there" by dividing 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything). +
 
 We can represent this computation with a special notation:
@@ -215,6 +240,9 @@ We can represent this computation with a special notation:
 - Complete @printable-exercise{constructing-model.adoc}.
 }
 
+
+
+@slidebreak
 
 @QandA{
 
@@ -273,8 +301,11 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 @A{"She swallowed a fly"}
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
-@A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, an no ties.}
+@A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, and there were no ties.}
 }
+
+
+@slidebreak
 
 @lesson-instruction{
 - Complete the second section of @printable-exercise{sampling.adoc}.
@@ -287,6 +318,9 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 @Q{Why didn't everyone end up with the same phrase?}
 @A{We were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
 }
+
+
+@slidebreak
 
 Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text, which influences the level of randomness. For instance, ChatGPT users are encouraged to use a _low_ temperature for more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks.
 

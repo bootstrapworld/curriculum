@@ -43,6 +43,8 @@ Meet ALVINN (pictured to the right).
 
 ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch - but was able to safely drive at 70 miles per hour (albeit on a very closed course) by the early 1990s! How did it happen?
 
+@slidebreak
+
 As with all machine learning, ALVINN required training.
 
 The goal of that training? Learning how to steer.
@@ -52,6 +54,8 @@ Here's what ALVINN's training entailed:
 - A person drove the vehicle while a front-facing video camera recorded the road.
 - Every two seconds, ALVINN digitized an image of the road ahead and recorded the chosen steering direction.
 - Training images were reduced in resolution to 30x32 pixels and provided as inputs associated with the corresponding "correct" steering angles as their outputs.
+
+@slidebreak
 
 The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
 
@@ -72,9 +76,13 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 |===
 
 
+@slidebreak
+
 ALVINN then uses the set of inputs and outputs to create a @vocab{function}, which we can summarize with contract notation:
 
 @show{(contract 'steer '((road-image Image)) "Number")}
+
+@slidebreak
 
 @QandA{
 @Q{What information does ALVINN process before producing a steering angle?}
@@ -88,6 +96,8 @@ ALVINN then uses the set of inputs and outputs to create a @vocab{function}, whi
 @A{We can look at the cars in front of us to better understand how we should steer.}
 @A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
 }
+
+@slidebreak
 
 @lesson-point{
 ALVINN's function dramatically reduces the complexity of the data and predicts the value of the @vocab{response variable} as though it is completely dependent on the @vocab{explanatory variable}.
@@ -103,6 +113,8 @@ The process described above is an example of @vocab{regression}, a machine learn
 
 @vocab{Linear regression}, which you may already have heard of or worked with, is one of the most basic types of regression, because it involves the use of a **_linear_** @vocab{predictor function}. Machine learning incorporates other more complex nonlinear regression types, too (for example: quadratic, polynomial, etc).
 
+@slidebreak
+
 Let's apply what we know about machine learning to ALVINN and its training.
 
 @lesson-instruction{
@@ -110,6 +122,8 @@ With a partner, complete @printable-exercise{alvinn-training.adoc}.
 }
 
 @teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
+
+@slidebreak
 
 While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
 

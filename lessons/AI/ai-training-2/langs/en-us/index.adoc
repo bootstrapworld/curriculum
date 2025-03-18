@@ -42,6 +42,8 @@ Here are some discoveries we have made so far:
 - Checking if two texts are identical is not an effective way of detecting plagiarism.
 - Summarizing documents as bags of words, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
 
+@slidebreak
+
 What we need is a way to check if bags are _similar_! To do this, we will represent our bags as @vocab{vectors}.
 
 - A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
@@ -86,6 +88,8 @@ Let's look at some slightly more complicated documents to learn how we can put t
 
 *We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their vectors are...
 
+
+
 @QandA{
 @Q{What went wrong here?}
 @A{The point is to draw out student thinking here rather than to get to any particular answer. The remainder of the lesson will dig into the details. Students might suggest:
@@ -98,11 +102,15 @@ Let's look at some slightly more complicated documents to learn how we can put t
 *Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
 }
 
+@slidebreak
+
 To solve this problem, let's start by taking a closer look at our data.
 
 First we must recognize that between Documents c and d there are *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize the data:
 
 @center{@image{images/scat-venn-diagram.png, 150}}
+
+@slidebreak
 
 We must revise our bag-of-words summaries and our vectors!
 
@@ -155,6 +163,8 @@ So far, we've looked at four documents.
 
 Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as vectors in a *_three_*-dimensional space.
 
+@slidebreak
+
 Let's add a fifth document, Document e, to our collection.
 
 - Document e: "doo be bop ski bop bop"
@@ -165,6 +175,8 @@ Now we have thirty words total, made up of _four_ unique words: doo, be, bop, an
 === Investigate
 
 A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents. A training corpus is a collection of data used to train AI/ML models, enabling them to learn patterns and make prediction. Processing a large @vocab{training corpus} will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions.
+
+@slidebreak
 
 @QandA{
 
@@ -186,6 +198,7 @@ A teacher who wants to catch plagiarism will likely opt for a plagiarism detecto
 @Q{What happens if we train on the internet?}
 }
 
+@slidebreak
 
 @lesson-instruction{
 Complete @printable-exercise{human-judgment.adoc} with your partner using @starter-file{plagiarism}.}
@@ -217,6 +230,8 @@ In doing so, we compressed the data by isolating the single feature that we care
 Loss of data is a common and often necessary effect of training AI!
 }
 
+@slidebreak
+
 *2. We normalized our data.*
 
 Comparisons are most useful when we are comparing items that are alike. When building bags of words for the documents in the corpus, each model *must* have the same number of words (dimensions!) regardless of how many words are in a given document. Defaulting to a cliché: we need an "apples-to-apples" comparison, rather than an "apples-to-oranges" comparison. This is why we sometimes need to include words that we did not encounter in a given document in our model.
@@ -239,6 +254,8 @@ You might be wondering: are we actually using *that* cosine — the one students
 
 The `cosine-similarity` function computes the cosine of the angle between two vectors. While it is not necessary for students to understand the mathematics happening behind the scenes, the function is a vital part of the program... and a lovely answer to the often-asked question, "When are we ever going to use this?"
 }
+
+@slidebreak
 
 To allow for a pleasant user experience, a modern plagiarism detector does not actually provide a representation of a multi-dimensional space with varying points. That would be too complicated! Although different plagiarism detectors provide different outputs for their users, here's how the one in Pyret works.
 
