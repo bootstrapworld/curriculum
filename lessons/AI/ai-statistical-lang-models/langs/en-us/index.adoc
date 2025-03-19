@@ -99,9 +99,9 @@ Similar to other AI systems we've discussed, your predictive text feature is tra
 
 During training:
 
-. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
-. It then determines the probability of each possible next word.
-. When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
+1. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
+2. It then determines the probability of each possible next word.
+3. When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
 
 In this particular @vocab{training corpus}, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
 
@@ -226,14 +226,13 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 
 In the example you just worked through, you computed the probability that "was" appears after the unigram "there" by dividing 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything). +
 
-We can represent this computation with a special notation:
+We will now represent this computation with a special notation:
 
 @indented{
 @math{p(was | there) =}
 @math{\frac
 	{\textit{count(there was)}}
-	{\textit{count(there...)}}
-= {\frac{4}{4}}}
+	{\textit{count(there...)}} = {\frac{4}{4}}}
 }
 
 @lesson-instruction{
