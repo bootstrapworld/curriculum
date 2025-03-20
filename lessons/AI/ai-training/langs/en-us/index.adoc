@@ -155,9 +155,9 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 @teacher{Debrief the page with your class.}
 
 @QandA{
-@Q{What does the `simple-similarity` detector do?}
+@Q{What does the `simple-equality` detector do?}
 @A{Takes in two documents and returns 1 if they match exactly and 0 if they don't match exactly.}
-@Q{How would you evaluate the effectiveness of the `simple-similarity` detector?}
+@Q{How would you evaluate the effectiveness of the `simple-equality` detector?}
 @A{It doesn't work very well! We have know way of knowing how similar the documents are unless they are an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
 @Q{What might a more effective plagiarism detector do differently?}
 @A{Answers will vary.}
@@ -167,7 +167,7 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 
 As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
 
-- If the `simple-similarity` detector finds a match, we can be certain that an identical document exists.
+- If the `simple-equality` detector finds a match, we can be certain that an identical document exists.
 - If the detector does not find a match, we know that there are no identical documents.
 - _Either way, we can't draw any conclusions about whether plagiarism happened!_
 
@@ -218,11 +218,11 @@ A plagiarism detector that uses this model, taking stock of word frequency and i
 
 @QandA{
 
-@Q{How is the `bow-similarity` plagiarism detector different from our primitive `simple-similarity` plagiarism detector?}
-@A{The `bow-similarity` plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}
+@Q{How is the `bag-equality` plagiarism detector different from our primitive `simple-equality` plagiarism detector?}
+@A{The `bag-equality` plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}
 
 
-@Q{How is the `bow-similarity` plagiarism detector similar to our primitive `simple-similarity` plagiarism detector?}
+@Q{How is the `bag-equality` plagiarism detector similar to our primitive `simple-equality` plagiarism detector?}
 @A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
 }
 
@@ -233,7 +233,7 @@ Checking if two bags of words are identical *is* an improvement from checking if
 === Synthesize
 
 @QandA{
-@Q{What similarities are there between a system that recommends songs and `bow-similarity` plagiarism detection?}
+@Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}
 @A{Both systems build summaries of the available data and then work with those summaries.}
 }
 
