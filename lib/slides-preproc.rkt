@@ -157,10 +157,10 @@
 
 (define (make-mathjax-math text)
   (string-append
-    "\n$$$ math\n"
+    "\n$$\n"
     text
     "\n"
-    "$$$\n"))
+    "$$\n"))
 
 (define (read-math-rev-word s)
   (let loop ([s (rest s)] [r (list (first s))])
@@ -225,7 +225,7 @@
         (string-append "``" x "``"))))
 
 (define (iii-dollar-html x)
-  (string-append "\n\n$$$ html\n"
+  (string-append "\n\n@@@ html\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
@@ -236,7 +236,7 @@
     "<div id=\"DOMtoImage\" class=\"circleevalsexp\">\n"
     x
     "</div>\n"
-    "$$$\n"))
+    "@@@\n"))
 
 (define (make-html-table cells n #:head? [head? #f])
   ; (printf "doing make-html-table ~a ~a ~a\n" cells n head?)
