@@ -1,10 +1,10 @@
 = Exploring Health v. Wealth
 
-@description{Students investigate logarithmic relationships in demographic data about countries of the world, using an inquiry-based model, involving hypothesizing, experimental and computational modeling, and sense-making.}
+@description{Students investigating a dataset comparing wealth and median-life expectancy for countries of the world, and find the best linear, quadratic and exponential models they can to fit the data.}
 
-@lesson-prereqs{exponential3-fitting-models}
+@lesson-prereqs{fitting-models}
 
-@keywords{logarithm, base}
+@keywords{logarithm}
 
 @add-to-lang{}
 
@@ -14,12 +14,12 @@
 | Lesson Goals
 | Students will be able to...
 
-- Model logarithmic relationships using functions
+- Model relationships using functions
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model logarithmic relationships in data
+- Let's use Pyret to model relationships in data
 
 
 | Materials
@@ -37,11 +37,6 @@ You will want to:
  * Set the pacing so that students are only able to interact with the first two slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
-
-| Key Points For The Facilitator
-|
-- This lesson assumes that students have been introduced to logarithms before, and are familiar with computation involving logarithmic functions.
-- The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
 |===
 
 == Is Poverty Bad for Your Health?
@@ -51,11 +46,17 @@ You will want to:
 Students explore the @starter-file{alg2-countries}, and find a relationship between wealth and median life expectancy.
 
 === Launch
+--
+@right{@image{images/questions.png, 250}}
+
+- Countries measure their income in "Gross Domestic Product", which is often abbreviated "GDP". Many economists divide the total income for the country by the number of people living there, to estimate the average income of each person. This is called _Per-Capita GDP._
+- Countries estimate how long-lived their citizens are by recording how long everyone lives, then taking the median of all those ages. This is called _Median Life Expectancy._
+
+We want to know if there a positive relationship between Per-Capita GDP and Median Life Expectancy. In other words: *Do people in rich countries live longer?*
+--
 
 @lesson-instruction{
-- @right{@image{images/questions.png, 250}}Do you think people living in wealthier countries generally live longer?
-- On a sheet of paper, draw the x- and y-axis for the first quadrant. Label the x-axis "income" and the y-axis "lifespan".
-- In small groups draw what you think the relationship is between income and life-expectancy.
+- In small groups, discuss and complete @printable-exercise{hypothesis-graph.adoc}.
 - Be prepared to share your graphs, and why they look the way they do!
 }
 
@@ -63,11 +64,8 @@ Students explore the @starter-file{alg2-countries}, and find a relationship betw
 
 What graphs did you draw? Why do you think your graph accurately reflects the relationship between income and life-expectancy?
 
-@slidebreak
-
-For many of your graphs, the first $40,000 or so of income shows a huge improvement in life expectancy: this might be enough to afford a place to live, see a doctor every once in a while, etc. But will that same $40,000 makes a difference in the life-expectancy of a billionaire?
-
 === Investigate
+
 Let's take a look at some real data on income and life expectancy across the world.
 
 @lesson-instruction{
@@ -77,14 +75,28 @@ Let's take a look at some real data on income and life expectancy across the wor
 - Working in pairs or small groups, complete @printable-exercise{exploring-countries.adoc}.
 }
 
+@slidebreak
+
+@center{@image{images/scatter-plot-pcgdp-lifespan.png, 450}}
+
 @teacher{
 Discuss students' findings. Pay special attention to the @vocab{form} that students use to describe the pattern in the scatter plot. Is it linear, or something else? Is it strong or weak? If there's some disagreement among the students, that's a good thing!
 }
 
-
 === Synthesize
-- If a wealthy country is suffering heavy casualties in a war, where would we expect to see that country's datapoint?
-- What other conditions would cause a point to shift up, down, left or right?
+
+@QandA{
+@Q{Would you expect increasing median income by $20,000 to increase life expectancy by the same amount for all of the countries in the world? Why or why not?}
+@A{No. The first $20,000 or so of income shows a huge improvement in life expectancy: this might be enough to afford a place to live, see a doctor every once in a while, etc. But for wealthy countries with long life expectancies, more money is unlikely to raise their life expectancies by very much.}
+@Q{If a wealthy country is suffering heavy casualties in a war, where would we expect to see that country's datapoint?}
+@A{We would expect the dot to fall below the trend, because war is associated with deaths of young people.}
+@Q{What other conditions might cause a point to shift up or down?}
+@A{Answers will vary! Some may include:
+ - Life expectancy might drop as a result of extended drought, famine, pandemic, climate-related disasters, etc.
+ - There aren't very many scenarios that would rapidly increase the life expectancy of a country, other than reversal of the kind of crises described above.
+ - Life expectancy might fall above the trend lines for countries with guaranteed income and universal healthcare.
+}
+}
 
 == Linear? Quadratic? Exponential?
 @objective{model-fit-function}
@@ -107,9 +119,10 @@ How well do you think a linear model would fit this data? A quadratic one? Expon
 This activity involves lots of trial and error, as students try to come up with a good linear, quadratic, or exponential model. +
 The goal is to discover that a new kind of model is necessary, not to find a perfect fit with linear, quadratic, or exponential models!
 }
-=== Synthesize
 
-@teacher{Direct students to look at the scatter plot they created in Pyret of `median-lifespan` versus `pc-gdp`.}
+@slidebreak
+
+@ifslide{@image{images/scatter-plot-pcgdp-lifespan.png, 450}}
 
 @QandA{
 @Q{What's the best model you came up with?}
@@ -119,3 +132,7 @@ The goal is to discover that a new kind of model is necessary, not to find a per
 @Q{How well did our linear, quadratic, and exponential models fit this data?}
 @A{None of the kinds of functions we've seen so far exhibit the behavior we see here! In some ways, this behavior is the exact opposite of exponentials: instead of starting slow and taking off like a rocket, this curve explodes up the y-axis right away, before leveling off.}
 }
+
+=== Synthesize
+
+What ideas do you have about the math that might make a sequence grow quickly at the beginning and then grow more slowly for larger x-values?

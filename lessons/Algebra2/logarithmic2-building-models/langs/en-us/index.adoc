@@ -1,6 +1,6 @@
 = Building Logarithmic Models
 
-@description{Students investigate logarithmic relationships in demographic data about countries of the world, using an inquiry-based model, involving hypothesizing, experimental and computational modeling, and sense-making.}
+@description{Students learn to transform the explanatory data (by building a new column that finds its log), use it to perform linear regression to produce the optimal linear model, and then use it to generate the optimal logarithmic model for the original (untransformed) data.}
 
 @lesson-prereqs{logarithmic1-exploring-wealth-health}
 
@@ -30,17 +30,20 @@
 |[.materials-links]
 @opt-material-links
 
+| Relevant Resources
+|
+- @link{images/xkcd.png, This wonderful drawing} from @link{https://www.xkcd.com, XKCD}, uses a logarithmic scale to fit *the entire known universe* into the image.
 
 | Preparation
 | 
 @preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. + 
-You will want to:
- * Open @starter-file{alg2-log-desmos}.
- * Make a link or code to share with your students.
+- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we introduced in @lesson-link{logarithmic1-exploring-wealth-health}.
+ * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first two slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
+ * If you don't already have a code, or you want to share a new one, you will first want to:
+ *** Open @starter-file{alg2-log-desmos}.
+ *** Make a link or code to share with your students.
+ * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
 
 | Key Points For The Facilitator
@@ -49,133 +52,208 @@ You will want to:
 - The focus of this lesson is about _applications_ of log functions, and builds an intuition for logarithmic computation by motivating substantial trial and error.
 |===
 
-== This Might Look Familiar...
+== From Exponents to Logarithms
 @objective{logarithms-exponents}
 
 === Overview
-Having identified that the wealth-v-lifespan scatter plot is neither linear, nor quadratic, nor exponential, students are asked to make connections to exponential functions.
+Students are asked to consider the graphs of logarithmic functions as the reflection of an exponential function across the diagonal line @math{y=x}.
 
 === Launch
+
+@teacher{Heads up: This launch refers back to data from @lesson-link{exponential1-exploring-covid}.}
+
+The linear, quadratic and exponential models we’ve found for the @starter-file{alg2-states} all made predictions with too much error to be useful. But what other kinds of models are there?
 
 @lesson-instruction{
-- Open @starter-file{alg2-countries}, and make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, using the name of the `country` as the label.
-}
-
-All of the models we just found for this dataset made predictions with too much error. Even though this shape might look _familiar_, it's just not any kind of growth we've seen before.
-
-@slidebreak
-
-Exponential growth started really _slowly_, and then suddenly shot up like a rocket to numbers so large we can't even reason about them. This kind of growth feels like the exact opposite, growing really _quickly_ but then leveling off to something very slow.
-
-@slidebreak
-
-@right{@image{images/covid-graph.png, 375}}Let's think back to the graph of our model for Covid spread, from @lesson-link{exponential1-exploring-covid}.
-
-- Our model answers the question "how many positive cases do we predict after @math{x} days?"
-- The graph is showing us the relationship from +
-_days → cases_, _x → y_, or _Domain → Range_.
-
-But what if we want to answer the _opposite_ question: "how many days will it take to reach @math{y} cases?"
-
-- Now we want to *flip the relationship around*, asking for +
-_cases → days_, _y → x_, or _Range → Domain_.
-- What would *this* graph look like?
-
-@slidebreak
-
-@ifslide{@right{@image{images/covid-graph.png, 350}}}
-
-Swapping the x's and y's is like reflecting the graph across the diagonal, making the axes trade places and swapping the x- and y-values for point on the line. Let's do that with our Covid model...
-
-@slidebreak
-
-@right{@image{images/inverse-covid-graph.png, 350}}Swapping the x- and y-axes makes the graph _start_ with rapid growth, and then flatten out. Now we can answer those inverted questions!
-
-- During the pandemic, our initial value was roughly 120,000 cases.
-- By 150,000 cases, it was 75 days later.
-- By 300,000 cases, it was 112 days later.
-- By 400,000 cases, it was 122 days after.
-
-@clear
-
-This kind of growth is much easier to understand, and *much more alarming!* By switching the axes, we've given our brains a much better chance of understanding what was really happening.
-
-@slidebreak
-
-@ifslide{@right{@image{images/inverse-covid-graph.png, 375}}}But our inverted model isn't exponential at all. In fact, it looks a lot more like our Wealth-v-Lifespan data!
-
-== Logarithmic Growth
-@objective{logarithms-growth}
-@objective{logarithms-exponents}
-
-=== Overview
-Students learn about characteristics of logarithmic functions in graphical, tabular, and function notation form.
-
-=== Launch
-This kind of growth is called _logarithmic growth_. Logarithmic functions are closely related to exponential functions!
-
-[cols="^1a, ^1a", stripes="none" options="header"]
-|===
-| Exponential
-| Logarithmic
-
-| @math{f(x) = 3^x}
-| @math{g(x) = log_3(x)}
-
-| Tells us "what 3 to the power of 'the input' is"
-| Tells us "what power 3 needs to be raised to reach 'the input'"
-
-| @math{f(2) = 3^2 = 9}
-| @math{g(9) = log_3(9) = 2}
-|===
-
-@QandA{
-@Q{What will @math{f(4)} evaluate to?}
-@A{@math{f(4) = 3^3 = 27}}
-@Q{What will @math{g(27)} evaluate to?}
-@A{@math{g(27) = log_3(27) = 3}}
+- Complete @printable-exercise{swapping-axes-n-w.adoc}.
+- What do you Notice? What do you Wonder?
 }
 
 @slidebreak
 
-*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*
+*The kind of growth we're seeing in the Countries dataset looks a lot like the Covid graph with the axes swapped!*
 
-By "reversing the question", logarithmic functions and exponential functions serve as inverses of one another:
+When we reflect the covid curve over @math{y=x}, the graph _starts_ with rapid growth, and then flattens out.
 
-- The inputs and outputs are reversed
-- The Domain and Range are swapped
-- The curve is reflected over @math{y=x}
+@ifnotslide{@center{@image{images/crossfade.png, 350}}}
+
+@slidebreak
+
+*When we swap the axes, the model answers the opposite question!*
+
+[cols="^6a,1a,^6a", options="header", stripes="none", grid="none", frame="none"]
+|===
+| How many positive cases do we predict after @math{x} days?
+|
+| How many days do we predict until we pass @math{y} cases?
+
+|@image{images/MA-covid.png}
+|
+|@image{images/MA-covid-flipped.png}
+
+|===
+
+We see that:
+
+- We had ~104,000 cases in our initial value ("day 0")
+- To reach 116,000 cases, it took 50 days
+- To reach 126,000 cases, it took 100 days
+- To reach 167,000 cases, it took 150 days
+- To reach 350,000 cases, it took 200 days
+
+And we are much better able to understand just how quickly the infections were spreading.
+
+@slidebreak
+
+When an exponential relationship is "inverted" like this, the new shape is called a @vocab{logarithmic relationship}.
+
+Logarithmic functions and exponential functions serve as inverses of one another.
+
+@indented{
+- The Domain and Range are swapped.
+- The axes are swapped.
+- The curve is reflected over the diagonal line @math{y=x}.
+}
+
+@lesson-point{"An exponential relationship looks logarithmic...if your @math{x}'s and @math{y}'s trade places!"}
 
 
 === Investigate
 
 @lesson-instruction{
-To practice spotting logarithmic curves and their connection to exponentials, complete @printable-exercise{classifying-plots.adoc}.
+- Turn to @printable-exercise{classifying-graphs.adoc} and identify the form of each curve.
+- For each display you identify as exponential or logarithmic, draw the diagonal line @math{y = x} and sketch the reflection of the curve.
+}
+
+@teacher{Review student answers. Try to draw out student explanations for how they could tell whether a graph or plot was logarithmic instead of exponential. Their own reasoning is critical for building intuition, so you may even want to write down key phrases as students share them!}
+
+==== Optional: Computations with Exponents and Logarithms
+
+We can use the inverse relationship between logarithms and exponents to do calculations.
+
+Just as there are fact families for multiplication and division (@math{2 \times 3 = 6}, @math{3 \times 2 = 6}, @math{6 \div 2 = 3}, @math{6 \div 3 = 2}), there are fact families for logarithms and exponents.
+
+The two equations below are different ways of expressing the same relationship between the numbers 3, 5 and 125.
+
+[cols="^1a, ^1a", options="header"]
+|===
+| Exponential Equation
+| Logarithmic Equation
+
+| @math{5^3 = 125}
+| @math{\log_5 125 = 3}
+|===
+
+*5* is our @vocab{base} in both of the equations above.
+
+@lesson-instruction{
+Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the first section by writing the related exponential or logarithmic equation for each row.
+}
+
+@QandA{
+@Q{What logarithmic equation can we write from @math{x^y = z}?}
+@A{@math{\log_x z = y}}
+
+@Q{What exponential equation can we write from @math{\log_a b = c}?}
+@A{@math{a^c = b}}
 }
 
 @slidebreak
 
-@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
+When we want to evaluate log expressions, it is helpful to think about these fact families.
+
+[.data-table, cols="^1a,^1a, ^3a, ^1a", stripes="none", options="header"]
+|===
+|				| Expression 		| What you need to do 					| Evaluates to
+| *Exponential* | @math{3^2}		| "Calculate 3 to the power of 2"		| 9
+| *Logarithmic* | @math{\log_3(9)}	| "Calculate what power 3 is raised to in order to reach 9" | 2
+|===
+
+@QandA{
+@Q{What question do we ask ourselves to evaluate @math{\log_3(81)}?}
+@A{What power do we raise 3 to in order to reach 81?}
+@A{To get 81, what power do we raise 3 to?}
+@Q{What will @math{\log_3(81)} evaluate to?}
+@A{@math{4}, because @math{3^4 = 81}}
+}
+
+@lesson-instruction{
+- Complete the rest of @opt-printable-exercise{evaluate-log.adoc} to get some practice translating and evaluating log expressions.
+- Be sure to discuss your answers with at least one other student!
+}
+
+@QandA{
+@Q{Consider these two translations of @math{\log_2(128)}.
+
+@indented{
+(a) "To get 128, I raise 2 to what power?"
+
+(b) "The power you raise 2 to get 128"
+}
+}
+@Q{Which translation do you prefer, and why?}
+@A{The first one, because it sets up a math problem and makes it clear what I need to do.}
+@A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{How can we tell whether growth is exponential or logarithmic by looking at a graph?}
+@A{Exponential growth is slow at first and gets faster.}
+@A{Logarithmic growth is fast at first and gets slower.}
+@Q{What do we mean when we say that logarithmic functions and exponential functions serve as inverses of one another?}
+@A{The axes are swapped.}
+@A{The Domain and Range are swapped.}
+@A{The models answer the opposite questions.}
+@A{The curve is reflected over the diagonal line @math{y=x}.}
+}
+
+
+
+== Logarithmic Sequences
+@objective{logarithms-growth}
+@objective{logarithms-exponents}
+
+=== Overview
+Students learn to recognize logarithmic growth in tables.
+
+=== Launch
+
+We know that:
+
+- Linear sequences can be recognized by their consistent growth
+- Exponential sequences can be recognized by identifying their growth factor.
+
+But how would we recognize a logarithmic sequence?
+
+=== Investigate
 
 [cols="^1a,^1a", stripes="none", options="header"]
 |===
-| Exponential Function
-| Logarithmic Function
+| Exponential Functions
+| Logarithmic Functions
 
 
-| We know that exponential functions grow by _equal factors over the same interval_. We can describe their growth by calculating the @vocab{growth factor}: "what @math{y} is multiplied by" in order to produce the next value over a constant interval.
-| Instead of multiplying @math{y} by a constant to find the next value, we need to _multiply the size of our x-interval_ by a constant (called the @vocab{base}) in order to get a constant growth in @math{y}!
+| @math{y} grows exponentially over constant intervals of @math{x} +
+{empty} +
+A constant increase in @math{x}, requires multiplying @math{y} by the @vocab{growth factor}.
+| @math{x} grows exponentially over constant intervals of @math{y} +
+{empty} +
+A constant increase in @math{y}, requires multiplying @math{x} by a value called the @vocab{base}.
 
+|@math{y = 2^x}
+|@math{y = \log_2 x}
 |@image{images/difference-table-exponential-2.png}
 |@image{images/difference-table-logarithmic.png}
 
 |===
 
+@lesson-point{
+Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x, y) columns of a table makes a logarithmic _sequence_ look exponential.
+}
+
 @slidebreak
-
-@ifslide{*"A logarithmic relationship looks exponential, if your @math{x}'s and @math{y}'s trade places!"*}
-
-Just as swapping the Domain and Range makes a logarithmic _curve_ look exponential, swapping the (x,y) columns of a table makes a logarithmic _sequence_ look exponential.
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-tables.adoc} and decide whether you think each table is best modeled by a quadratic, exponential or logarithmic function.
@@ -185,16 +263,9 @@ Just as swapping the Domain and Range makes a logarithmic _curve_ look exponenti
 @slidebreak
 
 @QandA{
-- What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?
-- Was it especially difficult (or simple) to recognize any these function types? Why?
-}
-
-@lesson-instruction{
-- For practice translating logarithmic expressions into words and evaluating them turn to @printable-exercise{evaluate-log.adoc}.
-}
-
-@teacher{
-The "Evaluating Logarithmic Expressions" page uses a phrasing that helps students read a logarithmic expression from left-to-right, emphasizing readability. Many teachers prefer a different phrasing, which emphasizes _the connection to exponential expressions_. An @opt-printable-exercise{evaluate-log-alt.adoc, identical version of this worksheet} is available, which uses the exponential phrasing.
+@Q{What strategies did you use to decide if a table represented a quadratic, exponential, or logarithmic function?}
+@A{It is helpful for students to hear each other's thinking in their own words!}
+@Q{Was it especially difficult (or simple) to recognize any of these function types? Why?}
 }
 
 @slidebreak
@@ -214,30 +285,6 @@ We don't *hear* the world as it really is. We hear a logarithmically compressed 
 
 @slidebreak
 
-@ifnotslide{
-We don't *see* the world as it really is. We see a logarithmically compressed version of it!
-
-- @right{@image{images/visual-distance.jpg, 120}}A fraction of our field of view shows us just a few feet of an airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
-- Railroad tracks stretching off towards the horizon, they appear to grow closer and closer until it looks like those parallel lines might touch.
-- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_, so @math{\text{perception}(\text{distance})} is a logarithmic function.
-}
-
-@ifslide{@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
-
-We don't *see* the world as it really is. We see a logarithmically compressed version of it!
-
-- @right{@image{images/visual-distance.jpg, 350}}When looking out airplane window, _our eyes take in hundreds of miles' worth of visual data all at once!_
-- A fraction of our field of view shows us just a few feet of the airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
-- We know that parallel lines never intersect.
-- But when looking at a railroad track this compression makes the rails grow closer and closer in the distance, until it looks like they might touch.
-- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_. Once again, @math{\text{perception}(\text{distance})} is a logarithmic function.
-}
-
-@teacher{
-Students can check out @link{images/xkcd.png, this wonderful visualization} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to draw the entire known universe. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
-}
-
-@slidebreak
 @ifslide{
 @right{@image{images/chili.png, 200}}@vocab{Logarithmic relationships} *allow us to compare things of very different sizes!*
 }
@@ -252,32 +299,65 @@ We don't *taste* spiciness as it really is. We taste a logarithmically compresse
 - Each unit on the scale means there is an _exponentially greater amount of capsaicin_, so a pepper that measures a 4.0 actually contains _ten times the capsaicin_ of a 3.0.
 - In other words, an _exponentially-increasing amount of capsaicin_ is perceived as a _constantly increasing spiciness_, so @math{\text{spicyness}(\text{capsaicin})} is a logarithmic function.
 
+@slidebreak
+
+--
+@right{@image{images/visual-distance.jpg, 120}}
+We don't *see* the world as it really is. We see a logarithmically compressed version of it!
+
+- A fraction of our field of view shows us just a few feet of an airplane wing, but that same fraction shows us _hundreds of miles_ when looking at the ground far away.
+- Railroad tracks stretching off towards the horizon, they appear to grow closer and closer until it looks like those parallel lines might touch.
+- _Exponentially increasing distance_ is perceived as _constantly decreasing distance_, so @math{\text{perception}(\text{distance})} is a logarithmic function.
+
+--
+
+@teacher{
+Students can check out @link{images/xkcd.png, this wonderful drawing} from @link{https://www.xkcd.com, XKCD}, which uses a logarithmic scale to fit *the entire known universe* into the image. The constantly-increasing vertical distance in the picture represents an _exponentially-increasing_ distance, which is why the Eiffel Tower and Great Pyramid at the bottom appear "stretched out" at the bottom and "compressed" at the top!
+}
+
+=== Synthesize
+
+@QandA{
+@Q{What do logarithmic relationships allow us to do that other functions we've encountered don't help us do well?}
+@A{Compare things of very different sizes!}
+@Q{What have you learned about logarithmic functions that surprises you, excites you or makes you curious?}
+@Q{Can you think of other relationships that might best be modeled using logarithms?}
+}
+
+
 == Logarithmic Functions
 @objective{logarithms-situations}
 
 === Overview
-Students are introduced to the parent function for logs, and explore the role the coefficients play.
+Students are introduced to the form of logarithmic models, and explore the role the coefficients play using a custom-built Desmos slider activity.
 
 === Launch
-*Logarithmic models have the form @math{f(x) = a \log_b(x-h) + k}*
 
-Most textbooks only present logarithmic functions with a horizontal shift of zero. When h=0, we can safely remove it and use this simplified form of the equation:
+Most textbooks teach that logarithmic models have the form: @hspace{1em} @big{@math{f(x) = a \log_b(x) + k}}
 
-@center{@math{f(x) = a \log_b(x) + k}}
+That's because most textbooks only present logarithmic functions with a horizontal shift of zero... and when @math{h = 0}, we can safely remove it and use the simplified form of the equation.
+
+But, just as with other models we have explored, logarithmic models can have horizontal shift. +
+The expanded form for logarithmic models includes @math{h} and looks like this: @hspace{1em} @big{@math{f(x) = a \log_b(x-h) + k}}
 
 @teacher{
 @opt{Advance your teacher dashboard of @starter-file{alg2-log-desmos} to *Slide 3: How does h transform logarithmic functions?* and give your students a chance to reinforce their understanding of @math{h-values} from other models by connecting it to logarithmic functions.
-}}
-
-@teacher{Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. 
-
-Decide whether you want to debrief this activity with your students after they complete each section or wait until they have finished completing @printable-exercise{graphing-models.adoc}.}
+}
+}
 
 === Investigate
+
+@teacher{
+Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
+
+@hspace{2em} (1) Debrief with your students after they complete _each section_ of @printable-exercise{graphing-models.adoc} +
+@hspace{2em} (2) Wait until they have completed the entire page
+}
+
 @lesson-instruction{
 - Let's return to the *Desmos* file and explore how the constants in a logarithmic function definition impact the shape of its graph. 
-- You should now be on *Slide 4: Exploring Logarithmic Functions* 
-- Use it to complete @printable-exercise{graphing-models.adoc}
+- You should now be on *Slide 4: Exploring Logarithmic Functions*.
+- Use it to complete @printable-exercise{graphing-models.adoc}.
 }
 
 @teacher{Review students answers, and then debrief via class discussion. Invite students to consider what new information they have gained by looking at graphical representations rather than tables.}
@@ -288,28 +368,13 @@ Decide whether you want to debrief this activity with your students after they c
 
 The base of the logarithm is similar to the base (or @vocab{growth factor}) in an exponential expression...it just answers the opposite question!
 
-[cols="^1a,^1a", stripes="none", options="header"]
-|===
-| Exponential Expression
-| Logarithmic Expression
-
-|@math{3^2} 
-|@math{\log_3(9)} 
-
-| "calculate 3 to the power of 2"
-| "calculate what power 3 is raised to in order to reach 9"
-
-| Evaluates to 9
-| Evaluates to 2
-|===
-
 @slidebreak
 
 @QandA{
-The expression @math{log_2(1)} is asking "to what power must 2 be raised to reach 1?
+The expression @math{\log_2 1} is asking "to what power must 2 be raised to reach 1?
 @Q{What power of 2 will evaluate to 1?}
 @A{Zero}
-@Q{What question is @math{log_5(1)} asking?}
+@Q{What question is @math{\log_5 1} asking?}
 @A{"To what power must 5 be raised, to reach 1?"}
 @Q{What power of 5 will evaluate to 1?}
 @A{Zero}
@@ -319,7 +384,7 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
-@lesson-point{No matter the base, @math{log(1)} will always be zero!}
+@lesson-point{Since any number to the zero power is @math{1}, no matter the base, @math{log(1)} will always be zero!}
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
@@ -330,11 +395,10 @@ The expression @math{log_2(1)} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
-Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_. Pyret's `log` function works the same way:
+Most math books, Desmos, calculators, and programming languages offer a simple "log" function that doesn't specify a base. By convention, if the base isn't specified, _it's assumed to be base-10_.
 
-@center{`log(1000) # returns 3, because 10^3 = 1000`}
-
-If you want to work with a different base, you can look up Pyret's `log-base` function in the @dist-link{Contracts.shtml, Contracts Pages}.
+- Pyret's `log` function uses base 10.
+- Pyret's `log-base` function is for working with other bases. You'll find it in the @dist-link{Contracts.shtml, Contracts Pages}.
 
 @slidebreak
 
@@ -342,28 +406,52 @@ If you want to work with a different base, you can look up Pyret's `log-base` fu
 
 The term @math{k} is the vertical shift of the function, which moves the curve up or down.
 
-Since @math{log_{anything}(1) = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
+- Since @math{\log_{anything}1 = 0}, the value of a standard log model at @math{x=1} will always be @math{0 + k}.
 
-(_We've seen vertical shifts in other kinds of functions given different names, like @math{b} for linear functions._)
+- _Note: We've seen vertical shifts in other kinds of functions given different names, like @math{b} for linear functions._
 
 @slidebreak
 
 ==== Logarithmic Coefficient @math{a}
 
-The term @math{a} is called the logarithmic coefficient, which - like @math{b} - helps determine how quickly the function grows.
+The term @math{a} is called the logarithmic coefficient, which - along with the base (@math{b}) - affects the vertical stretch or compression of the logarithmic function and helps us determine how quickly the function grows.
+
+@indented{
+[cols="2a, 7a", stripes="none", options="header"]
+|===
+2+| When comparing two logarithmic functions with the same base (@math{b})
+
+|If   @math{∣a∣ > 1}
+|The graph of the function is vertically stretched, meaning it becomes steeper.
+
+|If   @math{0 < ∣a∣ < 1}
+|The graph of the function is vertically compressed, meaning it becomes less steep.
+
+|If   @math{a < 0}
+|In addition to being stretched or compressed, the graph is reflected across the x-axis.
+|===
+}
+
+
+==== Asymptotes for logarithmic functions
+
+@vocab{Asymptotes} are lines that functions approach but never cross.
 
 @QandA{
 @Q{What do you remember about the asymptote of a function with exponential growth?}
-@A{It's horizontal at @math{k}, where @math{y} grows or shrinks by smaller and smaller amounts approaching zero}
+@A{It's horizontal!}
+@A{It's defined as @math{y = k}}
+@A{As @math{y} approaches the asymptote, it grows or shrinks by smaller and smaller amounts that approach zero}
+@Q{Given that logarithmic functions are the inverse of exponential functions, what kind of asymptote would you guess that functions with logarithmic growth have?}
 }
 
-Functions with logarithmic growth have a *vertical asymptote* where the function gets closer and closer, but never crosses the line.
+Functions with logarithmic growth have a *vertical asymptote*.
 
-@teacher{In this data exploration, the @vocab{asymptote} will always be located on the y-axis (@math{x = 0}).
+@teacher{In the data exploration students just completed, the @vocab{asymptote} is always located on the y-axis (@math{x = 0}).
 
 Extremely observant students may notice that there's a relationship between @math{a} and @math{b}, where the value of @math{2 \log_{10}(10) = \log_{10}(10^2)}!}
-
 
 === Synthesize
 - What _similarities_ do you see between exponential and logarithmic functions?
 - What _differences_ do you see between exponential and logarithmic functions?
+

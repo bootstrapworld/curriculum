@@ -72,8 +72,10 @@ Here are the specific ingredients for a *5-Number Summary*:
 
 @slidebreak
 
+*Let's try this out for a dataset with an _even_ number of values*
+
 @QandA{
-Consider the dataset: `1, 2, 3, 5, 6, 7, 8, 9` (`4` is missing!)
+Consider the dataset: 1, 2, 3, 5, 6, 7, 8, 9 (4 is missing!)
 
 @Q{What is the @vocab{Minimum} of this dataset?}
 @A{1}
@@ -82,36 +84,38 @@ Consider the dataset: `1, 2, 3, 5, 6, 7, 8, 9` (`4` is missing!)
 @A{9}
 
 @Q{How can we calculate the @vocab{Median} (Q2) of this dataset?}
-@A{The median is always the "middle number". This dataset has 8 numbers, so there is no exact "middle". When this happens, we take the mean of the two middle numbers (`5` and `6`), which is `5.5`}
+@A{The median is always the "middle number". This dataset has 8 numbers, so there is no exact "middle". When this happens, we take the mean of the two middle numbers (5 and 6), which is 5.5}
 
 @Q{Which numbers are in the "lower half" of this dataset, and what is the median of that half (Q1)?}
-@A{All the numbers less than 5.5: `1, 2, 3, 5`}
-@A{The median is the middle number, but once again we need to take the mean of two middles (`2` and `3`): `2.5`}
+@A{All the numbers _less_ than 5.5: 1, 2, 3, 5}
+@A{The median is the middle number, but once again we need to take the mean of two middles (2 and 3): 2.5}
 
 @Q{Which numbers are in the "upper half" of this dataset, and what is the median of that half (Q3)?}
-@A{All the numbers less than 5.5: `6, 7, 8, 9`}
-@A{The median is the middle number, but once again we need to take the mean of two middles (`7` and `8`): `7.5`}
+@A{All the numbers _more_ than 5.5: 6, 7, 8, 9}
+@A{The median is the middle number, but once again we need to take the mean of two middles (7 and 8): 7.5}
+}
+
+
+@slidebreak
+*Let's try this out for a dataset with an _odd_ number of values*
+
+@QandA{
+Consider the dataset: 1, 2, 3, 4, 5, 6, 7, 8, 9 (We let 4 back in!)
+
+@Q{Are the @vocab{Minimum} and @vocab{Maximum} any different than they were without 4?}
+@A{No!}
+
+@Q{How can we calculate the @vocab{Median} (Q2) of this dataset?}
+@A{The median is always the "middle number". This dataset has _9_ numbers, so we can grab the one in the middle: 5}
+
+@Q{Which numbers are in the "lower half" of this dataset, and what is the median of that half (Q1)?}
+@A{All the numbers less than 5: 1, 2, 3, 4}
+
+@Q{Which numbers are in the "upper half" of this dataset, and what is the median of that half (Q3)?}
+@A{All the numbers more than 5: 6, 7, 8, 9}
 }
 
 @slidebreak
-
-@QandA{
-@ifslide{Consider the dataset: `1, 2, 3, 5, 6, 7, 8, 9` (`4` is missing!)}
-
-We know that the *5-Number Summary* is (Min) *1*, (Q1) *2.5*, (Q2 / Median) *5.5*, (Q3) *7.5*, (Max) *9*
-
-@Q{Which numbers are in the first @vocab{quartile}?}
-@A{The bottom 25%, which are less than Q1 (2.5): `1, 2`}
-
-@Q{Which numbers are in the second @vocab{quartile}?}
-@A{The second 25%, which are greater than Q1 (2.5) and less than Q2 (5.5): `3, 4, 5`}
-
-@Q{Which numbers are in the third @vocab{quartile}?}
-@A{The third 25%, which are greater than Q2 (5.5) and less than Q3 (7.5): `6, 7`}
-
-@Q{Which numbers are in the fourth @vocab{quartile}?}
-@A{The top 25%, which are greater than Q3 (7.5): `8, 9`}
-}
 
 Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) - _the distance spanned by the middle half of the data_.  The @vocab{IQR} is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge". Mathematically, @math{\text{IQR} = Q3 - Q1}.
 
