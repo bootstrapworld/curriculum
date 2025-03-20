@@ -1,0 +1,75 @@
+= More Models
+
+== Composing a `hybrid` model for the `co2-table`
+
+@n How well would you expect our `hybrid-modern` model to fit the data in the full `co2-table` with data covering a span of 50 years? @ifnotsoln{@fitb{}{}}
+
+@fitb{}{@ifsoln{Better than our periodic model did, but once we're out of the data range it was built on it will probably need some adjusting.}}
+
+@n Let's test it out. What @vocab{S-value} do you get? @fitb{}{@ifsoln{~12.379}}
+
+@n To build a new hybrid model for the data in the `co2-table` we first need to decide: Which line do we want the wave to wrap around? @fitb{}{@ifsoln{{nbsp}@math{y = 1.83453x - 3296.8}}}
+
+@fitb{}{@ifsoln{The line of best fit from our `lr-plot` for the `co2-table`.}}
+
+@n Update the definition for `linear-co2` in the starter file based on your answer above.
+
+@n Which two functions from our Definitions Area could we compose to make a hybrid model for the `co2-table` data where the sine wave wraps around the line you just identified?
+
+@fitb{}{@ifsoln{`wave` and `linear-co2`}}
+
+@n Update the definition for `hybrid-co2` in the Definitions Area of your starter file and click "Run".
+
+@n Use `fit-model` to fit `hybrid-co2` to the `co2-table`. What is the @vocab{S-value} of `hybrid-co2`? @fitb{}{@ifsoln{~2.937}}
+
+@n @n How much
+@fitbruby{5em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made using `hybrid-co2` than with the `hybrid-modern` model for our `co2-table` data?
+
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+_Percent Change_ &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{9.442}{12.379} = 0.76  &#8192; &rarr; &#8192;  ~76\%}}
+
+We expect 
+@fitb{4em}{@ifsoln{~76}} percent
+@fitbruby{5em}{@ifsoln{less}}{ more / less }
+error from predictions made with `hybrid-co2` than with `hybrid-modern` model for our `co2-table` data!
+}
+
+== Comparing @vocab{S-values} doesn't always make sense
+
+Throughout our work together, we have often compared @vocab{S-values} to get a sense for how much more or less error we expect from one model than another model. We just compared @vocab{S-values} for the `hybrid-co2` and `hybrid-modern` models, for example.
+
+But it doesn't always make sense to compare @vocab{S-values}.
+
+@indented{
+[cols="1a,1a,1a,1a", options="header"]
+|===
+|					| recent-table	| modern-table 	| co2-table
+| @vocab{S-value}	| 1.2 			| 17.76			| 55.89
+| lowest y-value	| 415.74 		| 387.03 		| 327.28
+| highest y-value	| 424			| 424			| 424
+|===
+}
+
+@n We built the `periodic` model using the data in the `recent-table` and we know that it was a good fit for that data.  We alsol know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But why wouldn't it make sense to compare the @math{S-values} in this table as a way to quantify how much more error we'd expect from the `periodic` model for the `co2-table`? @ifnotsoln{@fitb{}{}}
+
+@fitb{}{@ifsoln{@math{S-values} only mean something when we consider them within the context of the range of the data. 
+}}
+
+@fitb{}{@ifsoln{We can compare @math{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
+
+@teacher{Data Scientists have many tools in their toolboxes and @vocab{S-values} are just one of them. If your students are already familiar with @math{r^2}, now would be a good time to point out that when it doesn't make sense to compare @vocab{S-values} we can fall back on some of our other tools.}
